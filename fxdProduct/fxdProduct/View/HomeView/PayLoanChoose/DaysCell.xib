@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="90" id="KGk-i7-Jjw" customClass="DaysCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNM-Ml-lo2">
+                        <rect key="frame" x="18" y="21" width="80" height="47"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="520-RE-72v">
+                                <rect key="frame" x="11" y="8" width="58" height="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.66147750616073608" blue="0.94841676950454712" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="520-RE-72v" firstAttribute="top" secondItem="cNM-Ml-lo2" secondAttribute="top" constant="8" id="Gh1-qQ-HKy"/>
+                            <constraint firstAttribute="height" constant="47" id="HiT-He-HEA"/>
+                            <constraint firstAttribute="bottom" secondItem="520-RE-72v" secondAttribute="bottom" constant="8" id="c4e-ez-b2T"/>
+                            <constraint firstAttribute="trailing" secondItem="520-RE-72v" secondAttribute="trailing" constant="11" id="ir6-rh-13Y"/>
+                            <constraint firstItem="520-RE-72v" firstAttribute="leading" secondItem="cNM-Ml-lo2" secondAttribute="leading" constant="11" id="qHo-Op-0NQ"/>
+                            <constraint firstAttribute="width" constant="80" id="usi-2j-ZsW"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cNM-Ml-lo2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Obl-xQ-RsK"/>
+                    <constraint firstItem="cNM-Ml-lo2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="UOC-85-vJG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dayView" destination="cNM-Ml-lo2" id="oF2-lF-WOb"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="77"/>
+        </tableViewCell>
+    </objects>
+</document>

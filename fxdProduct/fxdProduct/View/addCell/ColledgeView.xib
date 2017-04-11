@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ColledgeView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ch6-et-gsV">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMS-uC-TTq">
+                            <rect key="frame" x="33" y="154" width="309" height="360"/>
+                            <subviews>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wli-zB-9hp">
+                                    <rect key="frame" x="0.0" y="0.0" width="309" height="360"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </tableView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="wli-zB-9hp" secondAttribute="trailing" id="1Lr-eh-kvg"/>
+                                <constraint firstAttribute="bottom" secondItem="wli-zB-9hp" secondAttribute="bottom" id="HGa-Db-6Ud"/>
+                                <constraint firstItem="wli-zB-9hp" firstAttribute="leading" secondItem="iMS-uC-TTq" secondAttribute="leading" id="NFf-Ih-sn5"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="287" id="ReB-oM-Zfy"/>
+                                <constraint firstAttribute="height" constant="250" id="ihD-Lf-aN8"/>
+                                <constraint firstAttribute="height" constant="360" id="znp-kf-TJS"/>
+                                <constraint firstItem="wli-zB-9hp" firstAttribute="top" secondItem="iMS-uC-TTq" secondAttribute="top" id="znw-8e-d1I"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="ReB-oM-Zfy"/>
+                                    <exclude reference="ihD-Lf-aN8"/>
+                                </mask>
+                            </variation>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="iMS-uC-TTq" secondAttribute="bottom" constant="182" id="3qY-cr-TUu"/>
+                        <constraint firstAttribute="trailing" secondItem="iMS-uC-TTq" secondAttribute="trailing" constant="33" id="4eC-Wj-1Lz"/>
+                        <constraint firstItem="iMS-uC-TTq" firstAttribute="centerX" secondItem="Ch6-et-gsV" secondAttribute="centerX" id="9f1-36-aHO"/>
+                        <constraint firstItem="iMS-uC-TTq" firstAttribute="top" secondItem="Ch6-et-gsV" secondAttribute="top" constant="198" id="DWq-B4-Sit"/>
+                        <constraint firstItem="iMS-uC-TTq" firstAttribute="centerY" secondItem="Ch6-et-gsV" secondAttribute="centerY" id="cSR-mL-Mk5"/>
+                        <constraint firstItem="iMS-uC-TTq" firstAttribute="leading" secondItem="Ch6-et-gsV" secondAttribute="leading" constant="33" id="wu0-4Z-K61"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="3qY-cr-TUu"/>
+                            <exclude reference="9f1-36-aHO"/>
+                            <exclude reference="DWq-B4-Sit"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Ch6-et-gsV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4ri-df-OnY"/>
+                <constraint firstAttribute="bottom" secondItem="Ch6-et-gsV" secondAttribute="bottom" id="OwN-1s-R18"/>
+                <constraint firstAttribute="trailing" secondItem="Ch6-et-gsV" secondAttribute="trailing" id="XUP-nn-CIw"/>
+                <constraint firstItem="Ch6-et-gsV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lNE-LH-z83"/>
+            </constraints>
+            <connections>
+                <outlet property="CollTableView" destination="wli-zB-9hp" id="XX8-Ml-iHs"/>
+                <outlet property="bgView" destination="Ch6-et-gsV" id="Zts-bX-M7C"/>
+                <outlet property="secondView" destination="iMS-uC-TTq" id="xhY-Hn-qoa"/>
+            </connections>
+            <point key="canvasLocation" x="304.5" y="371.5"/>
+        </view>
+    </objects>
+</document>

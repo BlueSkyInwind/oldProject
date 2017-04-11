@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageViewViewController">
+            <connections>
+                <outlet property="scrollView" destination="XcZ-ho-Bea" id="qCe-8j-yKN"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcZ-ho-Bea">
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="esB-Rv-hJt"/>
+                    </connections>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="XcZ-ho-Bea" secondAttribute="bottom" id="VMa-Bx-CSC"/>
+                <constraint firstAttribute="trailing" secondItem="XcZ-ho-Bea" secondAttribute="trailing" id="ivd-5C-RUi"/>
+                <constraint firstItem="XcZ-ho-Bea" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="qaM-dP-kaI"/>
+                <constraint firstItem="XcZ-ho-Bea" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rmv-Fu-TDd"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="467.5" y="366.5"/>
+        </view>
+    </objects>
+</document>

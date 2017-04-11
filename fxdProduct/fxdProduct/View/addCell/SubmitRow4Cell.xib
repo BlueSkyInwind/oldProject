@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="181" id="KGk-i7-Jjw" customClass="SubmitRow4Cell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="181"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Skq-op-la6">
+                        <rect key="frame" x="17" y="107" width="341" height="51"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Skq-op-la6" secondAttribute="height" multiplier="341:51" id="b1h-Db-sN2"/>
+                        </constraints>
+                        <state key="normal" image="flow-03-Confirm"/>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="getSuccessimage" translatesAutoresizingMaskIntoConstraints="NO" id="dub-3w-9tJ">
+                        <rect key="frame" x="16" y="18" width="27" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="27" id="1go-2l-h7E"/>
+                            <constraint firstAttribute="height" constant="27" id="EpM-J9-GuS"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我已阅读并认可发薪贷" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmE-Q8-C2N">
+                        <rect key="frame" x="51" y="19" width="159" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="159" id="URI-EA-RBn"/>
+                            <constraint firstAttribute="height" constant="26" id="xJV-nF-2r0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ra5-wg-q74">
+                        <rect key="frame" x="197" y="19" width="120" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="R42-y2-15w"/>
+                            <constraint firstAttribute="height" constant="26" id="g2L-s7-rzV"/>
+                        </constraints>
+                        <state key="normal" title="《三方借款协议》"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="RmE-Q8-C2N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="3MY-sB-kfK"/>
+                    <constraint firstItem="ra5-wg-q74" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="AvH-Kz-6Rt"/>
+                    <constraint firstItem="Skq-op-la6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="Juu-Zy-uhQ"/>
+                    <constraint firstItem="RmE-Q8-C2N" firstAttribute="leading" secondItem="dub-3w-9tJ" secondAttribute="trailing" constant="8" id="MFW-bA-zNg"/>
+                    <constraint firstAttribute="trailing" secondItem="Skq-op-la6" secondAttribute="trailing" constant="17" id="QTL-v6-d1w"/>
+                    <constraint firstItem="ra5-wg-q74" firstAttribute="leading" secondItem="dub-3w-9tJ" secondAttribute="trailing" constant="154" id="R02-gN-ws8"/>
+                    <constraint firstItem="dub-3w-9tJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="V4R-xy-Q8H"/>
+                    <constraint firstItem="dub-3w-9tJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="XEV-5v-CuZ"/>
+                    <constraint firstAttribute="bottom" secondItem="Skq-op-la6" secondAttribute="bottom" constant="22" id="XP2-x0-VeZ"/>
+                    <constraint firstItem="Skq-op-la6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="pnV-Lp-LSP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="btn" destination="Skq-op-la6" id="kkg-Es-qn1"/>
+                <outlet property="lableIdea" destination="ra5-wg-q74" id="gOa-F9-od0"/>
+            </connections>
+            <point key="canvasLocation" x="279.5" y="440.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="flow-03-Confirm" width="341" height="51"/>
+        <image name="getSuccessimage" width="63" height="63"/>
+    </resources>
+</document>

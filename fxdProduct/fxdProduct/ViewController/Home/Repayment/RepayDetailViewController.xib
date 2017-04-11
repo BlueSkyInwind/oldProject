@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RepayDetailViewController">
+            <connections>
+                <outlet property="PayDetailTB" destination="KIP-Rk-fCo" id="9di-Wy-MHF"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KIP-Rk-fCo">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="453"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="453" id="9Xt-Fu-jEr"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="TTd-yx-gye"/>
+                        <outlet property="delegate" destination="-1" id="0R9-0J-DLx"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jbV-q8-Ya4">
+                    <rect key="frame" x="15" y="586" width="345" height="61"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="jbV-q8-Ya4" secondAttribute="height" multiplier="345:61" id="NM2-GU-xkB"/>
+                    </constraints>
+                    <state key="normal" image="8_but_04"/>
+                    <connections>
+                        <action selector="btnSureClick:" destination="-1" eventType="touchUpInside" id="4Bf-uR-SGD"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="KIP-Rk-fCo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8ho-NH-wLC"/>
+                <constraint firstAttribute="trailing" secondItem="KIP-Rk-fCo" secondAttribute="trailing" id="Rqg-Ls-KJk"/>
+                <constraint firstItem="KIP-Rk-fCo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="X9T-xi-bj2"/>
+                <constraint firstAttribute="bottom" secondItem="jbV-q8-Ya4" secondAttribute="bottom" constant="20" id="XUe-KW-RcE"/>
+                <constraint firstAttribute="trailing" secondItem="jbV-q8-Ya4" secondAttribute="trailing" constant="15" id="d3l-dG-nZk"/>
+                <constraint firstItem="jbV-q8-Ya4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="z4L-Ke-QLc"/>
+            </constraints>
+            <point key="canvasLocation" x="439.5" y="341.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="8_but_04" width="341" height="51"/>
+    </resources>
+</document>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="TelSeperateCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单位固话" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2r-Qf-7ar">
+                        <rect key="frame" x="20" y="0.0" width="80" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="hfe-eI-S7A"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="区号" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YW1-JT-8fM">
+                        <rect key="frame" x="108" y="0.0" width="71" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="71" id="5UL-9U-jNx"/>
+                        </constraints>
+                        <color key="textColor" red="0.098972043620000005" green="0.51474265689999998" blue="0.93791429920000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="电话号码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iQV-T5-W5e">
+                        <rect key="frame" x="210" y="0.0" width="80" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="138" id="GF7-vf-JxD"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="Pss-5X-gA9"/>
+                        </constraints>
+                        <color key="textColor" red="0.098972043620000005" green="0.51474265689999998" blue="0.93791429920000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="GF7-vf-JxD"/>
+                            </mask>
+                        </variation>
+                    </textField>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flow-04-icon10" translatesAutoresizingMaskIntoConstraints="NO" id="15q-vb-aOh">
+                        <rect key="frame" x="187" y="23" width="16" height="2"/>
+                        <color key="backgroundColor" red="0.2184616778" green="0.6539732412" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="woJ-bx-cdb"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="15q-vb-aOh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="187" id="0PA-Kb-K8O"/>
+                    <constraint firstAttribute="bottom" secondItem="iQV-T5-W5e" secondAttribute="bottom" id="1JD-mz-yov"/>
+                    <constraint firstItem="YW1-JT-8fM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="B7f-LN-7Rx"/>
+                    <constraint firstItem="YW1-JT-8fM" firstAttribute="leading" secondItem="M2r-Qf-7ar" secondAttribute="trailing" constant="8" id="Ba2-GU-fZN"/>
+                    <constraint firstAttribute="bottom" secondItem="15q-vb-aOh" secondAttribute="bottom" constant="24" id="Inz-nC-qes"/>
+                    <constraint firstAttribute="bottom" secondItem="M2r-Qf-7ar" secondAttribute="bottom" id="KDh-gO-vS7"/>
+                    <constraint firstItem="M2r-Qf-7ar" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZIT-AK-lZE"/>
+                    <constraint firstItem="M2r-Qf-7ar" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="cqa-Hd-DGd"/>
+                    <constraint firstItem="iQV-T5-W5e" firstAttribute="leading" secondItem="YW1-JT-8fM" secondAttribute="trailing" constant="31" id="giI-Wl-JmV"/>
+                    <constraint firstAttribute="bottom" secondItem="YW1-JT-8fM" secondAttribute="bottom" id="t9M-VQ-30u"/>
+                    <constraint firstItem="15q-vb-aOh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="vkc-nr-ppq"/>
+                    <constraint firstItem="iQV-T5-W5e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wTC-H1-qhk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="backTelTextField" destination="iQV-T5-W5e" id="wWU-2X-dJS"/>
+                <outlet property="forgTelTextFiled" destination="YW1-JT-8fM" id="LPC-gM-9ZZ"/>
+            </connections>
+            <point key="canvasLocation" x="304.5" y="285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="flow-04-icon10" width="9" height="1"/>
+    </resources>
+</document>

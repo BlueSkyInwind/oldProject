@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoDetailViewController">
+            <connections>
+                <outlet property="scrollview" destination="tof-8Z-HTe" id="Stz-lQ-Cum"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tof-8Z-HTe">
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="fcB-9H-djA"/>
+                    </connections>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="tof-8Z-HTe" secondAttribute="trailing" id="1nb-Zh-jUa"/>
+                <constraint firstItem="tof-8Z-HTe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5e2-Lf-sGs"/>
+                <constraint firstItem="tof-8Z-HTe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="nCi-OZ-pv4"/>
+                <constraint firstAttribute="bottom" secondItem="tof-8Z-HTe" secondAttribute="bottom" id="ybK-PN-SLG"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+        </view>
+    </objects>
+</document>
