@@ -62,7 +62,6 @@
     if (!isInsert) {
         DLog(@"insert = %@",_db.lastErrorMessage);
     }
-
 }
 
 //查询
@@ -85,7 +84,7 @@
 
 -(void)deleteWithModel:(testModelFmdb*)msg :(NSString *)UserNum
 {
-     NSString *deleteSQL=[NSString stringWithFormat:@"delete from User%@ where msId =%@",UserNum,msg.msgId];
+    NSString *deleteSQL=[NSString stringWithFormat:@"delete from User%@ where msId =%@",UserNum,msg.msgId];
     BOOL isDelete=[_db executeUpdate:deleteSQL];
     if(!isDelete)
     {

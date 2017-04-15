@@ -23,7 +23,8 @@
 #import "FXDNetWorkManager.h"
 #import "HHAlertViewCust.h"
 #import "OpenUDID.h"
-#import <ReactiveCocoa/ReactiveCocoa.h>
+//#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveObjC/ReactiveObjC.h>
 #import "CheckUtils.h"
 #import "NSString+MD5Encrypt.h"
 #import "Utility.h"
