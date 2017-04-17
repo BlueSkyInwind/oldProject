@@ -19,5 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *moreInfoBtn;
 @property (weak, nonatomic) IBOutlet UIView *seeView;
 @property (weak, nonatomic) IBOutlet UIButton *seeBtn;
+@property (weak, nonatomic) IBOutlet UIView *jsdView;
+@property (weak, nonatomic) IBOutlet UIButton *applyImmediatelyBtn;
 
 @end

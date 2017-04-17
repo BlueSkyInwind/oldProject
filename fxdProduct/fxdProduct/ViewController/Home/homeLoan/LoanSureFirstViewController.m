@@ -26,6 +26,14 @@
     [self addBackItem];
     [self setUpProductCredit];
     [Tool setCorner:self.sureBtn borderColor:[UIColor clearColor]];
+    NSString *str = self.agreementLabel.text;
+    NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
+    [ssa addAttribute:NSForegroundColorAttributeName value:rgb(0, 170, 238) range:NSMakeRange(3,13)];
+    self.agreementLabel.attributedText = ssa;
+    self.agreementLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreement)];
+    [self.agreementLabel addGestureRecognizer:tap1];
+    
     if ([self.productId isEqualToString:@"P001002"]) {
         [self setUpProductCredit];
     }
@@ -264,6 +272,10 @@
 }
 
 
+//跳转到用户信息授权服务协议
+-(void)clickAgreement{
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

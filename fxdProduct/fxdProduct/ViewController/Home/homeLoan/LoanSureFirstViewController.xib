@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoanSureFirstViewController">
             <connections>
+                <outlet property="agreementLabel" destination="As6-KC-iDu" id="MbZ-pm-eDp"/>
                 <outlet property="amountLabel" destination="bPA-7C-mhy" id="Q1m-Jv-chi"/>
                 <outlet property="detailView" destination="XsU-JD-Fxl" id="EG2-GR-q0o"/>
                 <outlet property="productLogo" destination="YaL-be-XGG" id="oVp-fg-LyH"/>
@@ -125,13 +126,13 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OHY-CN-R43">
                             <rect key="frame" x="33" y="260" width="342" height="16"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现在申请，立即免费领取30万大病保障" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="As6-KC-iDu">
-                                    <rect key="frame" x="25" y="1" width="300" height="15"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我同意 《用户信息授权服务协议》" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="As6-KC-iDu">
+                                    <rect key="frame" x="25" y="2" width="300" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="F6T-9B-yjN"/>
                                         <constraint firstAttribute="width" constant="300" id="ITJ-YY-aQg"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.0" green="0.63157397510000002" blue="0.99708396200000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -141,16 +142,16 @@
                                         <constraint firstAttribute="width" constant="15" id="eOq-jD-713"/>
                                         <constraint firstAttribute="height" constant="15" id="iN1-5k-EQa"/>
                                     </constraints>
-                                    <state key="normal" title="Button" image="repay_circle_03"/>
+                                    <state key="normal" title="Button" image="Sign-in-icon06"/>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="PcL-3M-RkI" firstAttribute="top" secondItem="OHY-CN-R43" secondAttribute="top" constant="1" id="3JD-iV-Ack"/>
-                                <constraint firstAttribute="bottom" secondItem="As6-KC-iDu" secondAttribute="bottom" id="3Ky-N3-zsN"/>
+                                <constraint firstAttribute="bottom" secondItem="As6-KC-iDu" secondAttribute="bottom" constant="-1" id="3Ky-N3-zsN"/>
                                 <constraint firstAttribute="trailing" secondItem="As6-KC-iDu" secondAttribute="trailing" constant="17" id="Dq8-WZ-e2O"/>
                                 <constraint firstAttribute="bottom" secondItem="PcL-3M-RkI" secondAttribute="bottom" id="U6s-gP-Rxf"/>
-                                <constraint firstItem="As6-KC-iDu" firstAttribute="top" secondItem="OHY-CN-R43" secondAttribute="top" constant="1" id="VnR-Xf-psI"/>
+                                <constraint firstItem="As6-KC-iDu" firstAttribute="top" secondItem="OHY-CN-R43" secondAttribute="top" constant="2" id="VnR-Xf-psI"/>
                                 <constraint firstItem="As6-KC-iDu" firstAttribute="leading" secondItem="PcL-3M-RkI" secondAttribute="trailing" constant="7" id="adK-EZ-Ek6"/>
                                 <constraint firstAttribute="width" constant="342" id="eF1-y6-4qG"/>
                                 <constraint firstAttribute="height" constant="16" id="evr-PM-bca"/>
@@ -195,6 +196,6 @@
         </view>
     </objects>
     <resources>
-        <image name="repay_circle_03" width="24" height="24"/>
+        <image name="Sign-in-icon06" width="22" height="22"/>
     </resources>
 </document>

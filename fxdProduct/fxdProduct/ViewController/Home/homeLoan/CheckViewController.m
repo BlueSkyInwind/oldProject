@@ -40,6 +40,8 @@
 #import "DetailViewController.h"
 #import "IdeaBackViewController.h"
 #import "FXDWebViewController.h"
+#import "PayLoanChooseController.h"
+#import "RateModel.h"
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -185,12 +187,24 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoLabel.hidden = NO;
                 checkFalse.moreInfoBtn.hidden = NO;
                 checkFalse.promoteLabel.hidden = NO;
-//                checkFalse.seeView.hidden = YES;
+                checkFalse.seeView.hidden = YES;
+                checkFalse.jsdView.hidden = YES;
             }else {
                 checkFalse.moreInfoLabel.hidden = YES;
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
-//                checkFalse.seeView.hidden = NO;
+                if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+                    
+                    checkFalse.seeView.hidden = NO;
+                    checkFalse.jsdView.hidden = YES;
+                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                }else{
+                
+                    checkFalse.jsdView.hidden = NO;
+                    checkFalse.seeView.hidden = YES;
+                    [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediatelyBtn) forControlEvents:UIControlEventTouchUpInside];
+                }
+                
             }
             
             [self.view addSubview:checkFalse];
@@ -1095,5 +1109,39 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
 }
 
+
+-(void)clickSeeBtn{
+
+
+}
+
+
+-(void)clickApplyImmediatelyBtn{
+
+    [self fatchRate:^(RateModel *rate) {
+        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+        payLoanview.product_id = @"P001004";
+        payLoanview.userState = _userStateModel;
+        payLoanview.rateModel = rate;
+        [self.navigationController pushViewController:payLoanview animated:true];
+    }];
+    
+}
+
+- (void)fatchRate:(void(^)(RateModel *rate))finish
+{
+    NSDictionary *dic = @{@"priduct_id_":@"P001004"};
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
+        if ([rateParse.flag isEqualToString:@"0000"]) {
+            finish(rateParse);
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
 
 @end
