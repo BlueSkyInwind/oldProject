@@ -15,6 +15,8 @@
 #import "BankModel.h"
 #import "ContactList.h"
 #import "AuthorizationViewController.h"
+#import <MGBaseKit/MGBaseKit.h>
+#import <MGBankCard/MGBankCard.h>
 
 @interface EditCardsController ()<UITableViewDataSource,UITableViewDelegate,BankTableViewSelectDelegate,WTCameraDelegate,UITextFieldDelegate>
 {
@@ -240,6 +242,9 @@
     [self.navigationController pushViewController:bankType animated:YES];
 }
 
+/**
+ 扫描银行卡
+ */
 -(void)GetNum
 {
     [self startBankCamera];
@@ -341,6 +346,39 @@
     }
     return YES;
 }
+- (void)startBankCamera
+{
+//    WTCameraViewController *cameraVC = [[WTCameraViewController alloc]init];
+//    cameraVC.delegate = self;
+//    cameraVC.devcode = Devcode; //开发码
+//    self.navigationController.navigationBarHidden = YES;
+//    [self.navigationController pushViewController:cameraVC animated:YES];
+    
+    BOOL bankcard = [MGBankCardManager getLicense];
+    
+    if (!bankcard) {
+        [[[UIAlertView alloc] initWithTitle:@"提示" message:@"SDK授权失败，请检查" delegate:self cancelButtonTitle:@"完成" otherButtonTitles:nil, nil] show];
+        return;
+    }
+    
+    __unsafe_unretained EditCardsController * weakSelf = self;
+    MGBankCardManager *cardManager = [[MGBankCardManager alloc] init];
+    [cardManager setDebug:YES];
+    [cardManager CardStart:self finish:^(MGBankCardModel * _Nullable result) {
+        //        weakSelf.bankImageView.image = result.image;
+        //        weakSelf.bankNumView.text = result.bankCardNumber;
+        
+        weakSelf.cardNum = result.bankCardNumber;
+        weakSelf.cardNum = [self.cardNum stringByReplacingOccurrencesOfString:@" " withString:@""];
+        weakSelf.cardNum=[self changeStr:self.cardNum];
+        DLog(@"银行卡扫描可信度 -- %@",[NSString stringWithFormat:@"confidence:%.2f", result.bankCardconfidence]);
+        [weakSelf.tableView reloadData];
+
+    }];
+    
+}
+
+
 #pragma  mark Delegate
 //-(void)BankTableViewSelect:(NSString *)CurrentRow andBankInfoList:(NSString *)bankNum andSectionRow:(NSInteger)SectionRow
 //{
@@ -359,16 +397,7 @@
     DLog(@"%@ %@",self.cardName,self.cardCode);
     [self.tableView reloadData];
 }
-
-- (void)startBankCamera
-{
-    WTCameraViewController *cameraVC = [[WTCameraViewController alloc]init];
-    cameraVC.delegate = self;
-    cameraVC.devcode = Devcode; //开发码
-    self.navigationController.navigationBarHidden = YES;
-    
-    [self.navigationController pushViewController:cameraVC animated:YES];
-}
+/*
 #pragma mark - CamaraDelegate
 //银行卡识别核心初始化结果，判断核心是否初始化成功
 - (void)initBankCardRecWithResult:(int)nInit{
@@ -396,7 +425,6 @@
                 break;
             }
         }
-        
     }
     if(isExistFlag==0)
     {
@@ -406,6 +434,7 @@
     [self.navigationController popViewControllerAnimated:YES];
     [self.tableView reloadData];
 }
+
 
 //返回按钮被点击时回调此方法，返回相机视图控制器
 - (void)backWithCameraViewController:(WTCameraViewController *)cameraVC{
@@ -426,6 +455,7 @@
 {
     cameraVC.navigationController.navigationBarHidden = NO;
 }
+*/
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

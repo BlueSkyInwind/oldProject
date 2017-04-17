@@ -39,7 +39,7 @@
 //打开数据库
 -(void)dbOpen:(NSString *)UserNum
 {
-       BOOL isOpen = [_db open];
+    BOOL isOpen = [_db open];
     if(isOpen)
     {
          NSString *createTable=[NSString stringWithFormat:@"create table if not exists User%@ (msId integer primary key autoincrement ,titleStr varchar(256), dateStr varchar(256) ,contentStr varChar(256))",UserNum];

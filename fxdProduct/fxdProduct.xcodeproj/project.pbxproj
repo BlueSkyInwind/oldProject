@@ -679,6 +679,10 @@
 		22D2BF8D1E9CDCDF00B69360 /* GesturesPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */; };
 		22D2BF8E1E9CDCDF00B69360 /* HomePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636F11D77BA3000E93289 /* HomePopView.xib */; };
 		22D2BF8F1E9CDCDF00B69360 /* HomeBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E1ECDE1E1CD3D80079A2F8 /* HomeBottomCell.xib */; };
+		22D2BFB41EA4A97100B69360 /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */; };
+		22D2BFB61EA4B40A00B69360 /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */; };
+		22D2BFB81EA4BD9900B69360 /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D2BFB71EA4BD9900B69360 /* MGBankCard.framework */; };
+		22D2BFB91EA4BF2A00B69360 /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D2BFB71EA4BD9900B69360 /* MGBankCard.framework */; };
 		63001A231BA8113000E2850A /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 63001A1F1BA8113000E2850A /* GTMBase64.m */; };
 		6300CC031E4AAB870012B05A /* LoanProcessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6300CC021E4AAB870012B05A /* LoanProcessModel.m */; };
 		6300CC071E4AB1BC0012B05A /* LoanRecordParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6300CC061E4AB1BC0012B05A /* LoanRecordParse.m */; };
@@ -1349,6 +1353,8 @@
 		1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GesturesPasswordCell.m; sourceTree = "<group>"; };
 		1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GesturesPasswordCell.xib; sourceTree = "<group>"; };
 		22D2BF981E9CDCDF00B69360 /* fxdProductDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fxdProductDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGBankCardResource.bundle; sourceTree = "<group>"; };
+		22D2BFB71EA4BD9900B69360 /* MGBankCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBankCard.framework; sourceTree = "<group>"; };
 		3C2819F71AD8F8FCD65CAD98 /* Pods_fxdProduct.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxdProduct.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54096315F88D5447F84E0740 /* Pods-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxdProduct/Pods-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
 		63001A1E1BA8113000E2850A /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -2187,6 +2193,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D2BFB91EA4BF2A00B69360 /* MGBankCard.framework in Frameworks */,
 				22D2BEEA1E9CDCDF00B69360 /* UserNotifications.framework in Frameworks */,
 				22D2BEEB1E9CDCDF00B69360 /* CoreTelephony.framework in Frameworks */,
 				22D2BEEC1E9CDCDF00B69360 /* MobileCoreServices.framework in Frameworks */,
@@ -2241,6 +2248,7 @@
 			files = (
 				63BDF8AB1E768215008C4E10 /* UserNotifications.framework in Frameworks */,
 				032FA7E51BE1BB4D00CF2D21 /* CoreTelephony.framework in Frameworks */,
+				22D2BFB81EA4BD9900B69360 /* MGBankCard.framework in Frameworks */,
 				63BDF8AA1E762B0E008C4E10 /* MobileCoreServices.framework in Frameworks */,
 				032FA7E71BE1BB5300CF2D21 /* CoreLocation.framework in Frameworks */,
 				63F824B01BFB20D000550978 /* CoreMotion.framework in Frameworks */,
@@ -2809,6 +2817,8 @@
 		632C587B1E5A933F00490C14 /* MGKit */ = {
 			isa = PBXGroup;
 			children = (
+				22D2BFB71EA4BD9900B69360 /* MGBankCard.framework */,
+				22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */,
 				63553B1A1E5FD09D00B2C1FF /* MGLiveResource.bundle */,
 				63553B0D1E5EE73500B2C1FF /* MGIDCardResource.bundle */,
 				632C587C1E5A933F00490C14 /* MGBaseKit.framework */,
@@ -4731,13 +4741,13 @@
 				TargetAttributes = {
 					22D2BD531E9CDCDF00B69360 = {
 						DevelopmentTeam = TB378SW4WZ;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					636EE2FC1B662ABB00A1A3ED = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = TB378SW4WZ;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -4785,6 +4795,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D2BFB61EA4B40A00B69360 /* MGBankCardResource.bundle in Resources */,
 				22D2BF181E9CDCDF00B69360 /* CheckViewIng.xib in Resources */,
 				22D2BF191E9CDCDF00B69360 /* Images.xcassets in Resources */,
 				22D2BF1A1E9CDCDF00B69360 /* PhotoDetailViewController.xib in Resources */,
@@ -4982,6 +4993,7 @@
 				63811B621B8EFC67008F605B /* ChangePWViewController.xib in Resources */,
 				6391F7781D348B4E0097C943 /* bank_code_3@2x.png in Resources */,
 				6391F77A1D348B4E0097C943 /* bank_code_5@2x.png in Resources */,
+				22D2BFB41EA4A97100B69360 /* MGBankCardResource.bundle in Resources */,
 				630B16441C5601CE006D46CF /* BasicInfoViewController.xib in Resources */,
 				63ED33431B6B52D6008B6085 /* LoginViewController.xib in Resources */,
 				6391F7751D348B4E0097C943 /* bank_code_1@2x.png in Resources */,
@@ -6076,9 +6088,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TB378SW4WZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6171,8 +6183,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "439d8835-9a9b-4a78-bd15-3ef561badcdf";
+				PROVISIONING_PROFILE_SPECIFIER = Fxd_Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/ViewController/Home/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -6192,9 +6204,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TB378SW4WZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6207,7 +6219,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					"FXD_Environment_Mode=0",
+					"FXD_Environment_Mode=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6273,8 +6285,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "439d8835-9a9b-4a78-bd15-3ef561badcdf";
+				PROVISIONING_PROFILE_SPECIFIER = Fxd_Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/ViewController/Home/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6386,9 +6398,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TB378SW4WZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6481,8 +6493,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "439d8835-9a9b-4a78-bd15-3ef561badcdf";
+				PROVISIONING_PROFILE_SPECIFIER = Fxd_Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/ViewController/Home/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -6502,9 +6514,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TB378SW4WZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6583,8 +6595,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "439d8835-9a9b-4a78-bd15-3ef561badcdf";
+				PROVISIONING_PROFILE_SPECIFIER = Fxd_Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/ViewController/Home/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;
