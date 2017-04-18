@@ -346,6 +346,9 @@
     }
     return YES;
 }
+/**
+ 开始银行卡扫描  author wangyongxin  2017.4.17
+*/
 - (void)startBankCamera
 {
 //    WTCameraViewController *cameraVC = [[WTCameraViewController alloc]init];
