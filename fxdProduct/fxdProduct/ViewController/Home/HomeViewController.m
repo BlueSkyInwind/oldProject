@@ -246,7 +246,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section < 4) {
+    if (section < 3) {
         return 3.0f;
     }
     return 0.1f;
@@ -254,7 +254,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -275,7 +275,7 @@
     if (indexPath.section == 0) {
         return 30.f;
     } else {
-        return (_k_h-0.5*_k_w-155)/4;
+        return (_k_h-0.5*_k_w-155)/3;
     }
 }
 
@@ -344,27 +344,27 @@
         [cell.helpImage addGestureRecognizer:gest];
         return cell;
     }
+//    if (indexPath.section == 2) {
+//        cell.proLogoImage.image = [UIImage imageNamed:@"home_02"];
+//        //        cell.periodLabel.text = @"周期:1~2周";
+//        cell.periodLabel.text = @"500、800、1000元";
+//        cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
+//        NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:@"最高1000元"];
+//        [attributeStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 2)];
+//        [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 2)];
+//        [attributeStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(2, 5)];
+//        [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(2, 4)];
+//        //        cell.amountLabel.attributedText = attributeStr;
+//        cell.amountLabel.text = @"急速贷";
+//        cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
+//        cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
+//        UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
+//        cell.helpImage.userInteractionEnabled = true;
+//        [cell.helpImage addGestureRecognizer:gest];
+//        //        [cell.loanBtn addTarget:self action:@selector(lowLoan) forControlEvents:UIControlEventTouchUpInside];
+//        return cell;
+//    }
     if (indexPath.section == 2) {
-        cell.proLogoImage.image = [UIImage imageNamed:@"home_02"];
-        //        cell.periodLabel.text = @"周期:1~2周";
-        cell.periodLabel.text = @"500、800、1000元";
-        cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
-        NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:@"最高1000元"];
-        [attributeStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 2)];
-        [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 2)];
-        [attributeStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(2, 5)];
-        [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(2, 4)];
-        //        cell.amountLabel.attributedText = attributeStr;
-        cell.amountLabel.text = @"急速贷";
-        cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
-        cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
-        UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
-        cell.helpImage.userInteractionEnabled = true;
-        [cell.helpImage addGestureRecognizer:gest];
-        //        [cell.loanBtn addTarget:self action:@selector(lowLoan) forControlEvents:UIControlEventTouchUpInside];
-        return cell;
-    }
-    if (indexPath.section == 3) {
         cell.proLogoImage.image = [UIImage imageNamed:@"home10"];
         //        cell.periodLabel.text = @"周期:1~2周";
         cell.periodLabel.text = @"10000-30000元";
@@ -385,7 +385,7 @@
         return cell;
     }
     
-    if (indexPath.section == 4) {
+    if (indexPath.section == 3) {
         HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];
         UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
         cell.payView.userInteractionEnabled = true;
@@ -408,10 +408,10 @@
     if (indexPath.section == 1) {
         [self highLoanClick];
     }
+//    if (indexPath.section == 2) {
+//        [self lowLoan];
+//    }
     if (indexPath.section == 2) {
-        [self lowLoan];
-    }
-    if (indexPath.section == 3) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
     }
 }
