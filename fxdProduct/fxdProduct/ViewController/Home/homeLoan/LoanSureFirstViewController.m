@@ -11,7 +11,7 @@
 #import "HomeViewModel.h"
 #import "FMDeviceManager.h"
 #import "RateModel.h"
-
+#import "ExpressViewController.h"
 @interface LoanSureFirstViewController ()
 
 @property (nonatomic, strong) YYTextView *textView;
@@ -275,6 +275,11 @@
 //跳转到用户信息授权服务协议
 -(void)clickAgreement{
 
+    ExpressViewController *controller = [[ExpressViewController alloc]init];
+    controller.productId = @"agreement";
+    [self.navigationController pushViewController:controller animated:YES];
+    
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -34,8 +34,14 @@
         htmlStr = @"<html style='font-size:14px'><body><p style='color:rgb(0,150,238)'><b>借款费用</b></p>固定期限14天，提前收取费用在到账金额中扣除，曰总费率1%,包括两部分：<br> 1、利息，固定利率0.03%/天；<br/>2、服务费，固定费率0.97%/天。服务费包括:身份认证费、学历认证费、手机验证费、银行卡验证费、提现手续费、征信审核费等。 例如：借款1000元，借款周期14天，借款费用是140元【1000*1% *14(天)】<p style='color:rgb(0,150,238)'><b>逾期费用</b></p>发生逾期未还款是，将收取逾期费用，包括两个部分：<br /> 1、滞纳金：10元/笔；<br/> 2、逾期手续费:按日收取,按逾期本金的 2%/天收取;<br/>例如：借款1000元，借款周期14天，逾期2天，逾期费用50元【10+ 1000*2%*2】；<p style='color:rgb(0,150,238)'><b>平台运营费</b></p>按笔收取，每笔收取提款金额的6%。<br /> 例如：提款1000元，发薪贷收取1000*6%=60元平台运营费。</body></html>";
     }
     
-    if ([_productId isEqualToString:@"operInfo"]) {
-        self.navigationItem.title = @"运营商信息授权协议";
+    if ([_productId isEqualToString:@"operInfo"]||[_productId isEqualToString:@"agreement"]) {
+        if ([_productId isEqualToString:@"operInfo"]) {
+            self.navigationItem.title = @"运营商信息授权协议";
+        }else{
+        
+            self.navigationItem.title = @"用户信息授权服务协议";
+        }
+        
         __weak typeof(self)weakSelf = self;
         [self operatorsAgreementRquestContent:^(NSString *resultStr) {
             
@@ -43,6 +49,7 @@
 
         }];
     }
+    
     
     [self.webView loadHTMLString:htmlStr baseURL:nil];
 }
@@ -54,8 +61,18 @@
  */
 -(void)operatorsAgreementRquestContent:(void(^)(NSString *resultStr))content{
     
-    NSDictionary *paramDic = @{@"product_id_":@"operInfo",
-                               @"protocol_type_":@"4"};
+    
+    NSDictionary *paramDic;
+    if ([_productId isEqualToString:@"operInfo"]) {
+        
+        paramDic = @{@"product_id_":@"operInfo",
+                                   @"protocol_type_":@"4"};
+    }
+    if ([_productId isEqualToString:@"agreement"]) {
+        paramDic = @{@"product_id_":@"fxd_userpro",
+                     @"protocol_type_":@"5"};
+    }
+    
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             

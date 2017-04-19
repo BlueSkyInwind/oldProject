@@ -195,14 +195,15 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.promoteLabel.hidden = YES;
                 if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
                     
-                    checkFalse.seeView.hidden = NO;
-                    checkFalse.jsdView.hidden = YES;
-                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
-                }else{
-                
                     checkFalse.jsdView.hidden = NO;
                     checkFalse.seeView.hidden = YES;
                     [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediatelyBtn) forControlEvents:UIControlEventTouchUpInside];
+                }else{
+                
+                    checkFalse.seeView.hidden = NO;
+                    checkFalse.jsdView.hidden = YES;
+                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+
                 }
                 
             }

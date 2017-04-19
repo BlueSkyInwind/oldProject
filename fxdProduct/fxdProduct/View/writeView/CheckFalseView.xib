@@ -384,13 +384,12 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixB-ES-piM">
                             <rect key="frame" x="20" y="80" width="335" height="44"/>
-                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="335" id="V05-cy-4kH"/>
                                 <constraint firstAttribute="height" constant="44" id="c3x-KB-m2G"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                            <state key="normal" title="去看看">
+                            <state key="normal" title="去看看" backgroundImage="kuang_big">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
@@ -582,10 +581,6 @@
             </connections>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
-        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="tCG-vm-NeR">
-            <rect key="frame" x="0.0" y="0.0" width="150" height="2"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-        </progressView>
     </objects>
     <resources>
         <image name="2_home_yuan" width="204" height="204"/>
@@ -600,6 +595,7 @@
         <image name="home_02" width="38" height="38"/>
         <image name="home_05" width="63" height="21"/>
         <image name="kuang" width="361" height="198"/>
+        <image name="kuang_big" width="340" height="50"/>
         <image name="lan_anniu" width="229" height="40"/>
         <image name="xian" width="1" height="49"/>
     </resources>
