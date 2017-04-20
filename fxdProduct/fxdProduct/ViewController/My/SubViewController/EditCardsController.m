@@ -360,7 +360,9 @@
     BOOL bankcard = [MGBankCardManager getLicense];
     
     if (!bankcard) {
-        [[[UIAlertView alloc] initWithTitle:@"提示" message:@"SDK授权失败，请检查" delegate:self cancelButtonTitle:@"完成" otherButtonTitles:nil, nil] show];
+        
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"SDK授权失败，请检查"];
+
         return;
     }
     
