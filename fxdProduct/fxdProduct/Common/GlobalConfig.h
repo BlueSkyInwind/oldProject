@@ -135,8 +135,8 @@ UIKIT_EXTERN NSString * const       _fatchRate_url;                          //�
 UIKIT_EXTERN NSString * const       _topBanner_url;                          //Banner广告获取
 UIKIT_EXTERN NSString * const       _question_url;                           //常见问题
 UIKIT_EXTERN NSString * const       _getDicCode_url;                         //数据字典获取
-
-
+UIKIT_EXTERN NSString * const       _mobileAuthentication_url;               //手机认证
+UIKIT_EXTERN NSString * const       _selectPlatform_url;                     //审核被拒，去看看
 
 
 

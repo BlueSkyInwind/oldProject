@@ -26,8 +26,9 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 #elif FXD_Environment_Mode == 1
 NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
 NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
-NSString * const _H5_url    =   @"https://192.168.6.130:8892/fxd-h5/page/";
+NSString * const _H5_url    =   @"http://192.168.6.130:9090/fxd-h5/page/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
+
 #else
 #warning "未匹配环境"
 #endif
@@ -313,6 +314,11 @@ NSString * const    _question_url               =    @"more/question.html";
 //数据字典获取
 NSString * const    _getDicCode_url             =    @"getDictCode/getDictCodeList.jhtml";
 
+//手机认证
+NSString * const    _mobileAuthentication_url    =    @"case/case_main_phone.html";
+
+//审核被拒，去看看
+NSString * const    _selectPlatform_url    =    @"case/select_platform.html";
 
 
 

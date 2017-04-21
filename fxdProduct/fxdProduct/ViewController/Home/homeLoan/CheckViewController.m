@@ -243,20 +243,20 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoBtn.hidden = NO;
                 checkFalse.promoteLabel.hidden = NO;
                 checkFalse.seeView.hidden = YES;
-                checkFalse.jsdView.hidden = YES;
+//                checkFalse.jsdView.hidden = YES;
             }else {
                 checkFalse.moreInfoLabel.hidden = YES;
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
                 if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
                     
-                    checkFalse.jsdView.hidden = NO;
-                    checkFalse.seeView.hidden = YES;
+//                    checkFalse.jsdView.hidden = NO;
+                    checkFalse.seeView.hidden = NO;
                     [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediatelyBtn) forControlEvents:UIControlEventTouchUpInside];
                 }else{
                 
                     checkFalse.seeView.hidden = NO;
-                    checkFalse.jsdView.hidden = YES;
+//                    checkFalse.jsdView.hidden = YES;
                     [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
 
                 }
@@ -1230,7 +1230,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 -(void)clickSeeBtn{
 
     FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-    webView.urlStr = @"http://192.168.6.130:9090/fxd-h5/page/case/select_platform.html";
+    webView.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
     [self.navigationController pushViewController:webView animated:true];
 
 }
