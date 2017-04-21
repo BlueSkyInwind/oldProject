@@ -42,6 +42,7 @@
 #import "FXDWebViewController.h"
 #import "PayLoanChooseController.h"
 #import "RateModel.h"
+#import "FXDWebViewController.h"
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -62,6 +63,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     int sectionState[20];   //标志分区的状态
     //    int textFieldstring;
     NSNumber *_userSelectNum;
+    NSNumber *_purposeSelectNum;
     //    int datalist[60];
     NSMutableArray<NSNumber *> *_datalist;
     UserCardResult *_userCardModel;
@@ -79,6 +81,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, assign) NSInteger flag;
 @property (strong,nonatomic)MoxieSDK *moxieSDK;
+@property (nonatomic,strong)NSArray *dateArray;
+
 @end
 
 @implementation CheckViewController
@@ -109,18 +113,69 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
         }
     }
-    
+    _dateArray = @[@"资金周转",@"购物",@"旅游",@"医疗",@"教育",@"其他"];
     _userSelectNum = @0;
+    _purposeSelectNum = @0;
     //    [self createScroll];
     
     [self createUI];
-    
+//    [self create];
     _checking.ReceiveImmediatelyImage.userInteractionEnabled = true;
     UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap)];
     [_checking.ReceiveImmediatelyImage addGestureRecognizer:tapImage];
     
 }
 
+
+-(void)create{
+
+    [self PostGetCheckMoney];
+    checkSuccess =[[[NSBundle mainBundle] loadNibNamed:@"CheckSuccessView" owner:self options:nil] lastObject];
+    checkSuccess.frame = CGRectMake(0, 0,_k_w, _k_h);
+    checkSuccess.pickweek.hidden = YES;
+    checkSuccess.toolBar.hidden = YES;
+    checkSuccess.purposePicker.hidden = YES;
+    checkSuccess.pickweek.delegate = self;
+    checkSuccess.pickweek.dataSource = self;
+    checkSuccess.textFiledWeek.text = @"请选择借款周期";
+    [Tool setCorner:checkSuccess.bgView borderColor:rgb(0, 170, 238)];
+    [Tool setCorner:checkSuccess.purposeView borderColor:rgb(0, 170, 238)];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
+    [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
+    [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
+    checkSuccess.weekMoney.attributedText = attStr;
+    checkSuccess.allMoney.text = @"0元";
+    checkSuccess.textFiledWeek.delegate = self;
+    checkSuccess.toolCancleBtn.tag = 103;
+    checkSuccess.toolCancleBtn.action =@selector(shareBtn:);
+    checkSuccess.toolCancleBtn.target = self;
+    
+    checkSuccess.toolsureBtn.tag = 104;
+    checkSuccess.toolsureBtn.action =@selector(shareBtn:);
+    checkSuccess.toolsureBtn.target = self;
+    
+    checkSuccess.sureBtn.userInteractionEnabled = NO;
+    checkSuccess.sureBtn.tag = 101;
+    [checkSuccess.sureBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
+    checkSuccess.weekBtn.tag = 102;
+    [checkSuccess.weekBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    checkSuccess.loadMoney.text =[NSString stringWithFormat:@"¥%.0f元",_approvalModel.result.approval_amount];
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:checkSuccess.loadMoney.text];
+    [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:30] range:NSMakeRange(0, 1)];
+    [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange([checkSuccess.loadMoney.text length]-1, 1)];
+    checkSuccess.loadMoney.attributedText = att;
+    
+    
+    
+    [checkSuccess.promote addTarget:self action:@selector(promote) forControlEvents:UIControlEventTouchUpInside];
+    _promoteType = PromoteLimit;
+    [self.view addSubview:checkSuccess];
+    checkSuccess.purposeBtn.tag = 105;
+    [checkSuccess.purposeBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
+    checkSuccess.agreementLabel.text = @"用户协议";
+    
+}
 -(void)imageTap{
 
     FXDWebViewController *webView = [[FXDWebViewController alloc] init];
@@ -218,8 +273,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [self PostGetCheckMoney];
             checkSuccess =[[[NSBundle mainBundle] loadNibNamed:@"CheckSuccessView" owner:self options:nil] lastObject];
             checkSuccess.frame = CGRectMake(0, 0,_k_w, _k_h);
+            checkSuccess.purposePicker.delegate = self;
+            checkSuccess.purposePicker.dataSource = self;
+            checkSuccess.purposePicker.tag = 101;
             checkSuccess.pickweek.hidden = YES;
             checkSuccess.toolBar.hidden = YES;
+            checkSuccess.purposePicker.hidden = YES;
             checkSuccess.pickweek.delegate = self;
             checkSuccess.pickweek.dataSource = self;
             if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
@@ -245,14 +304,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkSuccess.weekMoney.attributedText = attStr;
             }else {
                 checkSuccess.textFiledWeek.text = @"请选择借款周期";
+                checkSuccess.purposeTextField.text = @"请选择借款用途";
                 [Tool setCorner:checkSuccess.bgView borderColor:rgb(0, 170, 238)];
-                
+                [Tool setCorner:checkSuccess.purposeView borderColor:rgb(0, 170, 238)];
                 NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
                 [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
                 [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
                 checkSuccess.weekMoney.attributedText = attStr;
                 checkSuccess.allMoney.text = @"0元";
                 checkSuccess.textFiledWeek.delegate = self;
+                checkSuccess.purposeTextField.delegate = self;
                 checkSuccess.toolCancleBtn.tag = 103;
                 checkSuccess.toolCancleBtn.action =@selector(shareBtn:);
                 checkSuccess.toolCancleBtn.target = self;
@@ -262,10 +323,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkSuccess.toolsureBtn.target = self;
             }
             //[NSString stringWithFormat:@"%d周",_datalist.firstObject.intValue];
+            checkSuccess.sureBtn.enabled = NO;
             checkSuccess.sureBtn.tag = 101;
             [checkSuccess.sureBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
             checkSuccess.weekBtn.tag = 102;
             [checkSuccess.weekBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
+            checkSuccess.purposeBtn.tag = 105;
+            [checkSuccess.purposeBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
             checkSuccess.loadMoney.text =[NSString stringWithFormat:@"¥%.0f元",_approvalModel.result.approval_amount];
             NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:checkSuccess.loadMoney.text];
             [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:30] range:NSMakeRange(0, 1)];
@@ -521,6 +585,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             DLog(@"选择周期")
             checkSuccess.pickweek.hidden = NO;
             checkSuccess.toolBar.hidden = NO;
+            checkSuccess.purposePicker.hidden = YES;
         }
             break;
         case 103:
@@ -528,12 +593,14 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             DLog(@"取消");
             checkSuccess.pickweek.hidden = YES;
             checkSuccess.toolBar.hidden = YES;
+            checkSuccess.purposePicker.hidden = YES;
         }
             break;
         case 104:
         {
             checkSuccess.pickweek.hidden = YES;
             checkSuccess.toolBar.hidden = YES;
+            checkSuccess.purposePicker.hidden = YES;
             DLog(@"%d",_userSelectNum.intValue);
             if (_userSelectNum.integerValue > 0) {
                 checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
@@ -557,6 +624,14 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             
         }
             break;
+        case 105:
+        {
+            DLog(@"选择借款用途");
+            checkSuccess.pickweek.hidden = YES;
+            checkSuccess.toolBar.hidden = NO;
+            checkSuccess.purposePicker.hidden = NO;
+            
+        }
         default:
             break;
     }
@@ -832,43 +907,84 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return _datalist.count+1;
+    if (pickerView.tag == 101) {
+        
+      return _dateArray.count;
+    }else{
+    
+        return _datalist.count+1;
+    }
+    
 }
+
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if (row == 0) {
-        return @"选择周期";
-    } else {
-        return [NSString stringWithFormat:@"%d周",[_datalist objectAtIndex:row-1].intValue];
+    if (pickerView.tag == 101) {
+        if (row == 0) {
+            return @"选择用途";
+        } else {
+            return _dateArray[row];
+//            return [NSString stringWithFormat:@"%d周",[_datalist objectAtIndex:row-1].intValue];
+        }
+    }else{
+    
+        if (row == 0) {
+            return @"选择周期";
+        } else {
+            return [NSString stringWithFormat:@"%d周",[_datalist objectAtIndex:row-1].intValue];
+        }
     }
+    
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     //    DLog(@"%@",datalist[row]);
-    if (row != 0) {
-        _userSelectNum = [_datalist objectAtIndex:row-1];
-        checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
-        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
-        [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-        NSString *amountStr = [NSString stringWithFormat:@"%.2f元",(_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate)/_userSelectNum.intValue];
-        [attStr yy_appendString:amountStr];
-        [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-amountStr.length, amountStr.length)];
-        checkSuccess.weekMoney.attributedText = attStr;
-        checkSuccess.allMoney.text =[NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate];
-    }
-    if (row == 0) {
-        _userSelectNum = @0;
-        checkSuccess.textFiledWeek.text = @"请选择周期";
-        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
-        [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-        [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
-        checkSuccess.weekMoney.attributedText = attStr;
-        checkSuccess.allMoney.text = @"0元";
+    if (pickerView.tag == 101) {
+        if (row !=0) {
+            checkSuccess.purposeTextField.text = _dateArray[row];
+            _purposeSelectNum = _dateArray[row];
+        }
+        if (row ==0) {
+            _purposeSelectNum = @0;
+            checkSuccess.purposeTextField.text = @"请选择用途";
+        }
+    }else{
+    
+        if (row != 0) {
+            _userSelectNum = [_datalist objectAtIndex:row-1];
+            checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
+            [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
+            NSString *amountStr = [NSString stringWithFormat:@"%.2f元",(_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate)/_userSelectNum.intValue];
+            [attStr yy_appendString:amountStr];
+            [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-amountStr.length, amountStr.length)];
+            checkSuccess.weekMoney.attributedText = attStr;
+            checkSuccess.allMoney.text =[NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate];
+        }
+        if (row == 0) {
+            _userSelectNum = @0;
+            checkSuccess.textFiledWeek.text = @"请选择周期";
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
+            [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
+            [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
+            checkSuccess.weekMoney.attributedText = attStr;
+            checkSuccess.allMoney.text = @"0元";
+        }
     }
     
     
+    if (![_userSelectNum isEqual:@0]&&![_purposeSelectNum isEqual:@0]) {
+        
+        checkSuccess.sureBtn.enabled = YES;
+        checkSuccess.sureBtn.backgroundColor = rgb(0, 127, 254);
+        
+    }else{
+    
+        checkSuccess.sureBtn.enabled = NO;
+        checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
+    }
     //    checkSuccess.pickweek.hidden = YES;
 }
 
@@ -1113,6 +1229,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 -(void)clickSeeBtn{
 
+    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+    webView.urlStr = @"http://192.168.6.130:9090/fxd-h5/page/case/select_platform.html";
+    [self.navigationController pushViewController:webView animated:true];
 
 }
 
