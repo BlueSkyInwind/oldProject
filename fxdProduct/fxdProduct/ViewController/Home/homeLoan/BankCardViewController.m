@@ -17,6 +17,8 @@
 #import "AuthorizationViewController.h"
 #import "UserStateModel.h"
 #import "DetailViewController.h"
+#import <MGBaseKit/MGBaseKit.h>
+#import <MGBankCard/MGBankCard.h>
 
 #define cyancColor rgb(0, 170, 238)
 #define redColor rgb(252, 0, 6)
@@ -329,15 +331,59 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     [dataColorAll3 replaceObjectAtIndex:0 withObject:cyancColor];
     [_tableView reloadData];
 }
-
+#pragma mark - 银行卡扫描
+/**
+ 扫描银行卡
+ */
 - (void)startBankCamera
 {
-    WTCameraViewController *cameraVC = [[WTCameraViewController alloc]init];
-    cameraVC.delegate = self;
-    cameraVC.devcode = Devcode; //开发码
-    self.navigationController.navigationBarHidden = YES;
-    [self.navigationController pushViewController:cameraVC animated:YES];
+//    WTCameraViewController *cameraVC = [[WTCameraViewController alloc]init];
+//    cameraVC.delegate = self;
+//    cameraVC.devcode = Devcode; //开发码
+//    self.navigationController.navigationBarHidden = YES;
+//    [self.navigationController pushViewController:cameraVC animated:YES];
+    
+    BOOL bankcard = [MGBankCardManager getLicense];
+    
+    if (!bankcard) {
+        
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"SDK授权失败，请检查"];
+        
+        return;
+    }
+    
+    __unsafe_unretained BankCardViewController * weakSelf = self;
+    MGBankCardManager *cardManager = [[MGBankCardManager alloc] init];
+    [cardManager setDebug:YES];
+    [cardManager CardStart:self finish:^(MGBankCardModel * _Nullable result) {
+        //        weakSelf.bankImageView.image = result.image;
+        //        weakSelf.bankNumView.text = result.bankCardNumber;
+        
+        _bankCodeNUm = result.bankCardNumber;
+        _bankCodeNUm = [_bankCodeNUm stringByReplacingOccurrencesOfString:@" " withString:@""];
+        _bankCodeNUm = [self changeStr:_bankCodeNUm];
+        DLog(@"银行卡扫描可信度 -- %@",[NSString stringWithFormat:@"confidence:%.2f", result.bankCardconfidence]);
+        [weakSelf.tableView reloadData];
+        
+    }];
 }
+
+//银行卡修改显示格式
+-(NSString*)changeStr:(NSString*)str
+{
+    NSString *newString=@"";
+    while (str.length > 0) {
+        NSString *subString = [str substringToIndex:MIN(str.length, 4)];
+        newString = [newString stringByAppendingString:subString];
+        if (subString.length == 4) {
+            newString = [newString stringByAppendingString:@" "];
+        }
+        str = [str substringFromIndex:MIN(str.length, 4)];
+    }
+    
+    return newString;
+}
+/*
 #pragma mark - CamaraDelegate
 //银行卡识别核心初始化结果，判断核心是否初始化成功
 - (void)initBankCardRecWithResult:(int)nInit{
@@ -403,7 +449,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 {
     cameraVC.navigationController.navigationBarHidden = NO;
 }
-
+*/
 
 -(void)senderBtn:(UIButton *)sender
 {
