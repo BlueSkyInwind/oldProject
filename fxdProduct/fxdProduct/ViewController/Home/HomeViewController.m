@@ -43,7 +43,7 @@
 #import "UserDataViewController.h"
 #import "HomeBannerModel.h"
 #import "RateModel.h"
-
+#import "HomeProductList.h"
 
 
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
@@ -57,7 +57,9 @@
     NSInteger _count;
     UserStateModel *_model;
     HomeBannerModel *_bannerParse;
+    HomeProductList *_homeProductList;
     SDCycleScrollView *_sdView;
+    NSMutableArray *_dataArray;
 }
 
 @end
@@ -73,12 +75,40 @@
     
     self.navigationItem.title = @"发薪贷";
     _count = 0;
+   _dataArray = [NSMutableArray array];
     //    self.view.backgroundColor = [UIColor colorWithHexColorString:@"#1faaff"];
-    
+//    [self getHomeProductList];
     [self setUpTableview];
     //    [self setMessageBtn];
     [self setNavQRRightBar];
     [self fatchAdv];
+    
+    
+}
+
+-(void)getHomeProductList{
+
+    
+    [_dataArray removeAllObjects];
+    NSDictionary *paramDic = @{@"juid":[Utility sharedUtility].userInfo.juid,
+                               @"token":[Utility sharedUtility].userInfo.tokenStr
+                               };
+    
+    [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_getLimitProductlist_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        
+        DLog(@"=========%@",object);
+        _homeProductList = [HomeProductList yy_modelWithJSON:object];
+      
+        for (HomeProductListProducts *product in _homeProductList.result.products) {
+            [_dataArray addObject:product];
+        }
+        
+        [_tableView reloadData];
+    } failure:^(EnumServerStatus status, id object) {
+        
+        DLog(@"%@",object);
+    }];
+
     
 }
 
@@ -246,7 +276,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section < 3) {
+    NSInteger i;
+    if (_dataArray.count>0) {
+        i=_dataArray.count+1;
+    }else{
+    
+        i=1;
+    }
+    if (section < i) {
         return 3.0f;
     }
     return 0.1f;
@@ -254,7 +291,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+//    return 4;
+    NSInteger i;
+    if (_dataArray.count>0) {
+        i=_dataArray.count+2;
+    }else{
+        
+        i=2;
+    }
+    return i;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -272,10 +317,18 @@
     //
     //        return 100.0f;
     //    }
+    
+    NSInteger i;
+    if (_dataArray.count>0) {
+        i=_dataArray.count+1;
+    }else{
+        
+        i=1;
+    }
     if (indexPath.section == 0) {
         return 30.f;
     } else {
-        return (_k_h-0.5*_k_w-155)/3;
+        return (_k_h-0.5*_k_w-155)/i;
     }
 }
 
@@ -286,7 +339,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+ 
     HomeProductCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeProductCell"];
     cell.helpImage.hidden = true;
     if (indexPath.section == 0) {
@@ -324,6 +377,46 @@
         
         return cell;
     }
+    
+    if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
+        
+        HomeProductListProducts *product = _dataArray[indexPath.section-1];
+        
+//        [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];
+        cell.periodLabel.text = product.ext_attr_.amt_desc_;
+        cell.amountLabel.text = product.name_;
+        
+        cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
+        cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
+        
+        cell.helpImage.userInteractionEnabled = true;
+        
+        if ([product.ext_attr_.tags[0] isEqualToString:@"灵活还款"]) {
+            cell.proLogoImage.image = [UIImage imageNamed:@"home_01"];
+            cell.specialtyImage.image = [UIImage imageNamed:@"home_04"];
+            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highSeeExpenses)];
+            [cell.helpImage addGestureRecognizer:gest];
+        }else if([product.ext_attr_.tags[0] isEqualToString:@"超低费用"]){
+        
+            cell.proLogoImage.image = [UIImage imageNamed:@"home10"];
+//            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
+//            [cell.helpImage addGestureRecognizer:gest];
+            cell.specialtyImage.image = [UIImage imageNamed:@"home11"];
+        }else{
+            
+            cell.proLogoImage.image = [UIImage imageNamed:@"home_02"];
+            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
+            [cell.helpImage addGestureRecognizer:gest];
+            cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
+        
+        }
+        
+        
+        return cell;
+    }
+    
+    /*
+    
     if (indexPath.section == 1) {
         cell.proLogoImage.image = [UIImage imageNamed:@"home_01"];
         //        cell.periodLabel.text = @"周期:5~50周";
@@ -384,8 +477,8 @@
         //        [cell.loanBtn addTarget:self action:@selector(lowLoan) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
-    
-    if (indexPath.section == 3) {
+   */ 
+    if (indexPath.section == _dataArray.count+1) {
         HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];
         UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
         cell.payView.userInteractionEnabled = true;
@@ -400,20 +493,33 @@
         [cell.repayRecordView addGestureRecognizer:gest];
         return cell;
     }
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
+    
+    
+    HomeProductListProducts *product = _dataArray[indexPath.section-1];
+    if ([product.ext_attr_.tags[0] isEqualToString:@"灵活还款"]) {
         [self highLoanClick];
     }
-//    if (indexPath.section == 2) {
-//        [self lowLoan];
-//    }
-    if (indexPath.section == 2) {
+    if ([product.ext_attr_.tags[0] isEqualToString:@"极速审核"]) {
+        [self lowLoan];
+    }
+    if ([product.ext_attr_.tags[0] isEqualToString:@"超低费用"]) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
     }
+//    if (indexPath.section == 1) {
+//        [self highLoanClick];
+//    }
+////    if (indexPath.section == 2) {
+////        [self lowLoan];
+////    }
+//    if (indexPath.section == 2) {
+//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
+//    }
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
@@ -518,8 +624,12 @@
 {
     [super viewDidAppear:animated];
     [UserDefaulInfo getUserInfoData];
+    
     [self fatchRecord];
     [self fatchBanner];
+    [self getHomeProductList];
+    
+    
     //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
 

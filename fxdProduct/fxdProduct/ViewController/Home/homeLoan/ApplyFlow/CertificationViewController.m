@@ -18,7 +18,7 @@
 #import "MGLiveViewController.h"
 #import "BaseNavigationViewController.h"
 #import "ExpressViewController.h"
-
+#import "FXDWebViewController.h"
 @interface CertificationViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,LiveDeteDelgate>
 {
     JXLParse *_jxlParse;
@@ -306,9 +306,13 @@
 
 - (void)showMobileHelp
 {
-    telphoneView *telview = [[[NSBundle mainBundle] loadNibNamed:@"telphoneView" owner:self options:nil] lastObject];
-    telview.frame = CGRectMake(0, 0, _k_w, _k_h);
-    [telview show];
+    
+    FXDWebViewController *controller = [[FXDWebViewController alloc]init];
+    controller.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_mobileAuthentication_url];
+    [self.navigationController pushViewController:controller animated:YES];
+//    telphoneView *telview = [[[NSBundle mainBundle] loadNibNamed:@"telphoneView" owner:self options:nil] lastObject];
+//    telview.frame = CGRectMake(0, 0, _k_w, _k_h);
+//    [telview show];
 }
 
 #pragma mark - UITextFieldDelegate

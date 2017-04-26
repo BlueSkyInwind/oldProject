@@ -127,6 +127,8 @@ UIKIT_EXTERN NSString * const       _customerAuthInfo_url;                   //�
 UIKIT_EXTERN NSString * const       _JXLGetToken_url;                        //聚信力TOKEN获取
 UIKIT_EXTERN NSString * const       _customerContact_url;                    //联系人信息上传
 UIKIT_EXTERN NSString * const       _saveIDInfo_url;
+UIKIT_EXTERN NSString * const       _getLimitProductlist_url;                //首页产品列表路径
+
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集
 UIKIT_EXTERN NSString * const       _detectInfo_url;                         //活体检测信息上传
@@ -135,8 +137,8 @@ UIKIT_EXTERN NSString * const       _fatchRate_url;                          //�
 UIKIT_EXTERN NSString * const       _topBanner_url;                          //Banner广告获取
 UIKIT_EXTERN NSString * const       _question_url;                           //常见问题
 UIKIT_EXTERN NSString * const       _getDicCode_url;                         //数据字典获取
-
-
+UIKIT_EXTERN NSString * const       _mobileAuthentication_url;               //手机认证
+UIKIT_EXTERN NSString * const       _selectPlatform_url;                     //审核被拒，去看看
 
 
 
