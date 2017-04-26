@@ -323,7 +323,7 @@
         i=_dataArray.count+1;
     }else{
         
-        i=1;
+        i=2;
     }
     if (indexPath.section == 0) {
         return 30.f;

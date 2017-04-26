@@ -21,6 +21,9 @@ fxdProduct.xcworkspace
 pods/
 /pods/
 .DS_Store
+/.DS_Store/
+/.DS_Store
+
 .swp
 # CocoaPods
 #
