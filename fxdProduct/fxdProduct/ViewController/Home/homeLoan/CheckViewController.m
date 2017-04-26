@@ -1193,9 +1193,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                         color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
                               backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
                                     tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
-                                        ExpressViewController *expressVC = [[ExpressViewController alloc] init];
-                                        expressVC.productId = _userStateModel.product_id;
-                                        [self.navigationController pushViewController:expressVC animated:YES];
+//                                        ExpressViewController *expressVC = [[ExpressViewController alloc] init];
+//                                        expressVC.productId = _userStateModel.product_id;
+//                                        [self.navigationController pushViewController:expressVC animated:YES];
+                                        DLog(@"费用说明");
+                                        FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+                                        webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_loanDetial_url];
+                                        [self.navigationController pushViewController:webVC animated:true];
                                     }];
                 checkSuccess.moneyLabel.attributedText = one;
                 checkSuccess.moneyLabel.textAlignment = NSTextAlignmentCenter;

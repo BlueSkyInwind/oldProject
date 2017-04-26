@@ -89,7 +89,7 @@
 -(void)getHomeProductList{
 
     
-    [_dataArray removeAllObjects];
+   
     NSDictionary *paramDic = @{@"juid":[Utility sharedUtility].userInfo.juid,
                                @"token":[Utility sharedUtility].userInfo.tokenStr
                                };
@@ -98,7 +98,7 @@
         
         DLog(@"=========%@",object);
         _homeProductList = [HomeProductList yy_modelWithJSON:object];
-      
+       [_dataArray removeAllObjects];
         for (HomeProductListProducts *product in _homeProductList.result.products) {
             [_dataArray addObject:product];
         }
