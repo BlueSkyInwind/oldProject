@@ -16,4 +16,6 @@
 
 @property (nonatomic, strong) NSDictionary * uploadP2PUserInfo;
 
+@property (nonatomic, assign) NSString *purposeSelect;
+
 @end

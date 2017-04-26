@@ -127,6 +127,8 @@ UIKIT_EXTERN NSString * const       _customerAuthInfo_url;                   //�
 UIKIT_EXTERN NSString * const       _JXLGetToken_url;                        //聚信力TOKEN获取
 UIKIT_EXTERN NSString * const       _customerContact_url;                    //联系人信息上传
 UIKIT_EXTERN NSString * const       _saveIDInfo_url;
+UIKIT_EXTERN NSString * const       _getLimitProductlist_url;                //首页产品列表路径
+
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集
 UIKIT_EXTERN NSString * const       _detectInfo_url;                         //活体检测信息上传

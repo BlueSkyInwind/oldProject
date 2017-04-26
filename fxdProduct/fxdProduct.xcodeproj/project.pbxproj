@@ -1146,6 +1146,8 @@
 		CC0DFB911EA5B1090024841A /* HomeBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E1ECDE1E1CD3D80079A2F8 /* HomeBottomCell.xib */; };
 		CCD565BE1E8A46D500B6665D /* PserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */; };
 		CCD565C01E8A46D500B6665D /* PserInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */; };
+		CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
+		CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2186,6 +2188,8 @@
 		CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PserInfoViewController.xib; sourceTree = "<group>"; };
 		CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PserInfoViewController.mm; sourceTree = "<group>"; };
 		CCD565BD1E8A46D500B6665D /* PserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PserInfoViewController.h; sourceTree = "<group>"; };
+		CCFA2DC81EB02FFE0071F46B /* HomeProductList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeProductList.h; sourceTree = "<group>"; };
+		CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeProductList.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -4167,6 +4171,7 @@
 		63E076541B67114800E269F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCFA2DC71EB02FC20071F46B /* HomeProductList */,
 				63E8F1AE1E6FDACD00FE4BDD /* DataDic */,
 				63C50E551E6938100035EE4F /* HomeBanner */,
 				63C50E511E6839010035EE4F /* RateModel */,
@@ -4658,6 +4663,15 @@
 				54096315F88D5447F84E0740 /* Pods-fxdProduct.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		CCFA2DC71EB02FC20071F46B /* HomeProductList */ = {
+			isa = PBXGroup;
+			children = (
+				CCFA2DC81EB02FFE0071F46B /* HomeProductList.h */,
+				CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */,
+			);
+			path = HomeProductList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -5363,6 +5377,7 @@
 				63001A231BA8113000E2850A /* GTMBase64.m in Sources */,
 				63553AED1E5D787800B2C1FF /* IdentityCell.m in Sources */,
 				637963A81CABD0F8002A5910 /* ApprovalAmountBaseClass.m in Sources */,
+				CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */,
 				637637031D7829BE00E93289 /* DetailRepayHeader.m in Sources */,
 				636AC4331D38EA7F00599590 /* PayMethodCell.m in Sources */,
 				1A686DB01C1E961C009227A9 /* NextViewCell.m in Sources */,
@@ -5565,6 +5580,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */,
 				CC0DF9571EA5B1090024841A /* RepaymentViewCell.m in Sources */,
 				CC0DF9581EA5B1090024841A /* DetailRepayViewController.m in Sources */,
 				CC0DF9591EA5B1090024841A /* ProductListResult.m in Sources */,

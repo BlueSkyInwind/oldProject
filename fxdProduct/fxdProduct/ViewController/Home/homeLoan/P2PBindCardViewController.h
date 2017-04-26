@@ -14,4 +14,6 @@
 
 @property (nonatomic, assign) NSNumber *userSelectNum;
 
+@property (nonatomic, assign) NSString *purposeSelect;
+
 @end

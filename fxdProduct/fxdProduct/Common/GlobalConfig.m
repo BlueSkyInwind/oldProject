@@ -320,6 +320,9 @@ NSString * const    _mobileAuthentication_url    =    @"case/case_main_phone.htm
 //审核被拒，去看看
 NSString * const    _selectPlatform_url    =    @"case/select_platform.html";
 
+////首页产品列表路径
+NSString * const    _getLimitProductlist_url    =    @"product/getLimitProductlistApi.jhtml";
+
 
 
 

@@ -43,6 +43,8 @@
 #import "PayLoanChooseController.h"
 #import "RateModel.h"
 #import "FXDWebViewController.h"
+#import "DataDicParse.h"
+
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -63,7 +65,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     int sectionState[20];   //标志分区的状态
     //    int textFieldstring;
     NSNumber *_userSelectNum;
-    NSNumber *_purposeSelectNum;
+    NSString *_purposeSelect;
     //    int datalist[60];
     NSMutableArray<NSNumber *> *_datalist;
     UserCardResult *_userCardModel;
@@ -76,6 +78,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSDictionary *_uploadP2PUserInfo;
     CustomerBaseInfoBaseClass *_customerBase;
     Approval *_approvalModel;
+    //借款用途
+    DataDicParse *_dataDicModel;
 }
 
 @property (nonatomic, weak) UIScrollView *scrollView;
@@ -113,9 +117,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
         }
     }
-    _dateArray = @[@"资金周转",@"购物",@"旅游",@"医疗",@"教育",@"其他"];
+    _dateArray = [NSArray array];
+//    _dateArray = @[@"资金周转",@"购物",@"旅游",@"医疗",@"教育",@"其他"];
     _userSelectNum = @0;
-    _purposeSelectNum = @0;
+    _purposeSelect = @"0";
     //    [self createScroll];
     
     [self createUI];
@@ -680,6 +685,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
                 p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
                 p2pVC.userSelectNum = _userSelectNum;
+                p2pVC.purposeSelect = _purposeSelect;
                 [self.navigationController pushViewController:p2pVC animated:YES];
             }
             //绑卡
@@ -687,6 +693,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 P2PBindCardViewController *p2pBindCardVC = [[P2PBindCardViewController alloc] init];
                 p2pBindCardVC.uploadP2PUserInfo = _uploadP2PUserInfo;
                 p2pBindCardVC.userSelectNum = _userSelectNum;
+                p2pBindCardVC.purposeSelect = _purposeSelect;
                 [self.navigationController pushViewController:p2pBindCardVC animated:YES];
             }
             //发标
@@ -721,6 +728,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                @"desc_":caseInfo.result.desc_,
                                @"amount_":caseInfo.result.amount_,
                                @"period_":_userSelectNum,
+                               @"loan_for_":_purposeSelect,
                                @"title_":caseInfo.result.title_,
                                @"from_":caseInfo.result.from_,
                                @"client_":caseInfo.result.client_,
@@ -869,6 +877,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSDictionary *paramDic;
     if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
         paramDic = @{@"periods_":@1,
+                     @"loan_for_":_purposeSelect,
                      @"drawing_amount_":@(_approvalModel.result.approval_amount),
                      @"account_card_id_":_selectCard.cardIdentifier
                      };
@@ -876,7 +885,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
         paramDic = @{@"periods_":[NSString stringWithFormat:@"%d",_userSelectNum.intValue],
                      @"drawing_amount_":@(_approvalModel.result.approval_amount),
-                     @"account_card_id_":_selectCard.cardIdentifier
+                     @"account_card_id_":_selectCard.cardIdentifier,
+                     @"loan_for_":_purposeSelect,
                      };
     }
     
@@ -924,7 +934,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         if (row == 0) {
             return @"选择用途";
         } else {
-            return _dateArray[row];
+            DataDicResult * dataDicResult =  _dateArray[row];
+            return  dataDicResult.desc_;
 //            return [NSString stringWithFormat:@"%d周",[_datalist objectAtIndex:row-1].intValue];
         }
     }else{
@@ -943,11 +954,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     //    DLog(@"%@",datalist[row]);
     if (pickerView.tag == 101) {
         if (row !=0) {
-            checkSuccess.purposeTextField.text = _dateArray[row];
-            _purposeSelectNum = _dateArray[row];
+            DataDicResult * dataDicResult =  _dateArray[row];
+            checkSuccess.purposeTextField.text = dataDicResult.desc_;
+            _purposeSelect = dataDicResult.code_;
         }
         if (row ==0) {
-            _purposeSelectNum = @0;
+            _purposeSelect = @"0";
             checkSuccess.purposeTextField.text = @"请选择用途";
         }
     }else{
@@ -975,7 +987,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
     
     
-    if (![_userSelectNum isEqual:@0]&&![_purposeSelectNum isEqual:@0]) {
+    if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]) {
         
         checkSuccess.sureBtn.enabled = YES;
         checkSuccess.sureBtn.backgroundColor = rgb(0, 127, 254);
@@ -1263,5 +1275,28 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
     }];
 }
+
+
+
+#pragma  mark - 获取借款用途接口
+
+- (void)getDataDic:(void(^)())finish
+{
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getDicCode_url] parameters:@{@"dict_type_":@"LOAN_FOR_"} finished:^(EnumServerStatus status, id object) {
+        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+            _dataDicModel = [DataDicParse yy_modelWithJSON:object];
+            _dateArray = [_dataDicModel.result copy];
+            [checkSuccess.purposePicker reloadAllComponents];
+            if (finish) {
+                finish();
+            }
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
+
 
 @end
