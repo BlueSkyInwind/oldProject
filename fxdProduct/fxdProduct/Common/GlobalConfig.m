@@ -24,7 +24,10 @@ NSString * const _ValidESB_url = @"https://h5.faxindai.com:8028/fxd-esb/";
 NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/"; //生产
 NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 #elif FXD_Environment_Mode == 1
-NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
+//NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
+NSString * const _main_url  =   @"http://192.168.9.2:8080/esb/";
+//饶明祥本地地址
+
 NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130:9090/fxd-h5/page/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
