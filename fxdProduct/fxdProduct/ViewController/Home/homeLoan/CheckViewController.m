@@ -42,6 +42,8 @@
 #import "FXDWebViewController.h"
 #import "PayLoanChooseController.h"
 #import "RateModel.h"
+#import "DataDicParse.h"
+
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -74,11 +76,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSDictionary *_uploadP2PUserInfo;
     CustomerBaseInfoBaseClass *_customerBase;
     Approval *_approvalModel;
+    //借款用途
+    DataDicParse *_dataDicModel;
+
 }
 
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, assign) NSInteger flag;
 @property (strong,nonatomic)MoxieSDK *moxieSDK;
+@property (nonatomic,strong)NSArray * dateArray;
+
 @end
 
 @implementation CheckViewController
@@ -922,7 +929,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 //查询状态
 -(void)checkState{
     
-    
     HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
     
     //    __weak CheckViewController *weakSelf = self;
@@ -1144,5 +1150,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
     }];
 }
+
+
+
+
 
 @end
