@@ -139,6 +139,7 @@
                                @"desc_":caseInfo.result.desc_,
                                @"amount_":caseInfo.result.amount_,
                                @"period_":_userSelectNum,
+                               @"loan_for_":_purposeSelect,
                                @"title_":caseInfo.result.title_,
                                @"from_":caseInfo.result.from_,
                                @"client_":caseInfo.result.client_,
