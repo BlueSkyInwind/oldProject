@@ -293,11 +293,15 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
                 checkSuccess.weekBtn.hidden = true;
                 checkSuccess.textFiledWeek.hidden = true;
+                checkSuccess.purposeTextField.hidden = true;
+                checkSuccess.purposeBtn.hidden = true;
+                checkSuccess.sureBtn.backgroundColor = rgb(0, 127, 254);
                 UILabel *daysLabel = [[UILabel alloc] init];
                 daysLabel.text = @"借款期限: 14天";
                 daysLabel.textAlignment = NSTextAlignmentCenter;
                 daysLabel.font = [UIFont systemFontOfSize:16.f];
                 daysLabel.textColor = [UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000];
+                
                 [checkSuccess.bgView addSubview:daysLabel];
                 [daysLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.left.equalTo(@0);
