@@ -94,6 +94,7 @@
                                @"token":[Utility sharedUtility].userInfo.tokenStr
                                };
     
+    DLog(@"%@",[Utility sharedUtility].userInfo.juid);
     [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_getLimitProductlist_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         DLog(@"=========%@",object);
@@ -323,7 +324,7 @@
         i=_dataArray.count+1;
     }else{
         
-        i=2;
+        i=1;
     }
     if (indexPath.section == 0) {
         return 30.f;
@@ -342,6 +343,8 @@
  
     HomeProductCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeProductCell"];
     cell.helpImage.hidden = true;
+    
+    
     if (indexPath.section == 0) {
         CycleTextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CycleTextCell"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_cycleICON"]];
@@ -380,6 +383,9 @@
     
     if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
         
+        [cell.loanBtn setTitle:@"我要借款" forState:UIControlStateNormal];
+        cell.rightImageView.image = [UIImage imageNamed:@"home_08"];
+        
         HomeProductListProducts *product = _dataArray[indexPath.section-1];
         
 //        [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];
@@ -391,12 +397,12 @@
         
         cell.helpImage.userInteractionEnabled = true;
         
-        if ([product.ext_attr_.tags[0] isEqualToString:@"灵活还款"]) {
+        if ([product.id_ isEqualToString:@"P001002"]) {
             cell.proLogoImage.image = [UIImage imageNamed:@"home_01"];
             cell.specialtyImage.image = [UIImage imageNamed:@"home_04"];
             UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highSeeExpenses)];
             [cell.helpImage addGestureRecognizer:gest];
-        }else if([product.ext_attr_.tags[0] isEqualToString:@"超低费用"]){
+        }else if([product.id_ isEqualToString:@"P001005"]){
         
             cell.proLogoImage.image = [UIImage imageNamed:@"home10"];
 //            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
@@ -478,7 +484,7 @@
         return cell;
     }
    */ 
-    if (indexPath.section == _dataArray.count+1) {
+    if (indexPath.section == _dataArray.count+1&&_dataArray.count>0) {
         HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];
         UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
         cell.payView.userInteractionEnabled = true;
@@ -502,13 +508,13 @@
     
     
     HomeProductListProducts *product = _dataArray[indexPath.section-1];
-    if ([product.ext_attr_.tags[0] isEqualToString:@"灵活还款"]) {
+    if ([product.id_ isEqualToString:@"P001002"]) {
         [self highLoanClick];
     }
-    if ([product.ext_attr_.tags[0] isEqualToString:@"极速审核"]) {
+    if ([product.id_ isEqualToString:@"P001004"]) {
         [self lowLoan];
     }
-    if ([product.ext_attr_.tags[0] isEqualToString:@"超低费用"]) {
+    if ([product.id_ isEqualToString:@"P001005"]) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
     }
 //    if (indexPath.section == 1) {

@@ -32,11 +32,11 @@
 + (NSDictionary *)modelContainerPropertyGenericClass {
     return @{@"ext_attr_":[HomeProductLisTextAttr class]};
 }
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key  {
-    if([key isEqualToString:@"id"])
-        self.ID = value;
++ (NSDictionary *)modelCustomPropertyMapper
+{
+    return @{@"id_":@"id"};
 }
+
 @end
 
 @implementation HomeProductLisTextAttr

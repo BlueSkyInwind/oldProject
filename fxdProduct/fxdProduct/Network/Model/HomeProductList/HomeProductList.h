@@ -33,7 +33,7 @@
 //相关产品描述参数
 @property (nonatomic , strong) HomeProductLisTextAttr     * ext_attr_;
 //产品id
-@property (nonatomic , copy) NSString              * ID;
+@property (nonatomic , copy) NSString              * id_;
 //产品名称
 @property (nonatomic , copy) NSString              * name_;
 //期数时长
