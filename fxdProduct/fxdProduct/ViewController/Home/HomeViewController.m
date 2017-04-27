@@ -94,7 +94,7 @@
                                @"token":[Utility sharedUtility].userInfo.tokenStr
                                };
     
-    DLog(@"%@",[Utility sharedUtility].userInfo.juid);
+    DLog(@"%@",_main_url);
     [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_getLimitProductlist_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         DLog(@"=========%@",object);

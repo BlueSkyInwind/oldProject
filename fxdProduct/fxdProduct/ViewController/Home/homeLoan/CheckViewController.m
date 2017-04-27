@@ -258,7 +258,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     
 //                    checkFalse.jsdView.hidden = NO;
                     checkFalse.seeView.hidden = NO;
-                    [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediatelyBtn) forControlEvents:UIControlEventTouchUpInside];
+                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
                 }else{
                 
                     checkFalse.seeView.hidden = NO;
