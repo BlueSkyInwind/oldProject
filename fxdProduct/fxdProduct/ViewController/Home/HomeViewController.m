@@ -110,7 +110,6 @@
         DLog(@"%@",object);
     }];
 
-    
 }
 
 - (void)setNavQRRightBar {
@@ -281,7 +280,6 @@
     if (_dataArray.count>0) {
         i=_dataArray.count+1;
     }else{
-    
         i=1;
     }
     if (section < i) {
@@ -416,7 +414,6 @@
             cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
         
         }
-        
         
         return cell;
     }
