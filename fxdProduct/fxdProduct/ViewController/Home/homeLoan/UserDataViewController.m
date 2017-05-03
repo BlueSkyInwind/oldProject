@@ -27,7 +27,8 @@
 #import "LoanSureSecondViewController.h"
 #import "RateModel.h"
 #import "DataWriteAndRead.h"
-
+#import "SesameCreditCell.h"
+#import "DisplayCell.h"
 
 
 
@@ -51,6 +52,8 @@
     NSString *_isMobileAuth;
     
     UserStateModel *_model;
+    BOOL _isDisplay;
+    
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -76,6 +79,7 @@
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     topView = [[UIView alloc] init];
     [self.view addSubview:topView];
+    _isDisplay = NO;
     
 }
 
@@ -123,6 +127,8 @@
 - (void)configTableview
 {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DataDisplayCell class]) bundle:nil] forCellReuseIdentifier:@"DataDisplayCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SesameCreditCell class]) bundle:nil] forCellReuseIdentifier:@"SesameCreditCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DisplayCell class]) bundle:nil] forCellReuseIdentifier:@"DisplayCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //    self.tableView.sectionFooterHeight = 35;
@@ -383,16 +389,69 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    if (_isDisplay) {
+        
+        return 7;
+    }else{
+    
+        return 6;
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return _k_w*0.13f;
-    } else {
-        return _k_w*0.218;
+//    if (_isDisplay) {
+//        
+//        if (indexPath.row == 0) {
+//            return _k_w*0.06f;
+//        } else if(indexPath.row == 5){
+//            return _k_w*0.21;
+//        }else if (indexPath.row == 6){
+//        
+//            return _k_w*0.1;
+//        }else{
+//        
+//            return _k_w*0.17;
+//        }
+//        
+//    }else{
+//    
+//        if (indexPath.row == 0) {
+//            return _k_w*0.06f;
+//        } else if(indexPath.row == 5){
+//            
+//            return _k_w*0.125;
+//        }else if(indexPath.row == 1){
+//            return _k_w*0.24;
+//        
+//            
+//        }else{
+//        return _k_w*0.21;
+//        }
+//    }
+//    return 0;
+    if (_isDisplay) {
+        if (indexPath.row == 6) {
+            return _k_w*0.125f;
+        }else if(indexPath.row == 0){
+        
+            return _k_w*0.12f;
+        }else{
+        return _k_w*0.21;
+        }
+    }else{
+    
+        if (indexPath.row == 5) {
+            return _k_w*0.125f;
+        }else if (indexPath.row == 0){
+        return _k_w*0.12f;
+        }else{
+        return _k_w*0.21;
+        }
     }
+        
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -406,8 +465,8 @@
             iconView.image = [UIImage imageNamed:@"topCellIcon"];
             [cell.contentView addSubview:iconView];
             [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(@10);
-                make.top.equalTo(@9);
+                make.left.equalTo(@8);
+                make.top.equalTo(@5);
                 make.width.equalTo(@22);
                 make.height.equalTo(@22);
                 //                make.bottom.equalTo(@5);
@@ -420,65 +479,106 @@
             label.font = [UIFont systemFontOfSize:13.f];
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(iconView.mas_right).offset(4);
-                make.top.equalTo(@5);
+                make.top.equalTo(@10);
                 //                make.bottom.equalTo(cell.contentView);
-                make.height.equalTo(@30);
+                make.height.equalTo(@15);
+                make.right.equalTo(cell.contentView);
+            }];
+            UILabel *tipLabel = [[UILabel alloc]init];
+            [cell.contentView addSubview:tipLabel];
+            tipLabel.text = @"基础认证必填 完成后可进行借款";
+            tipLabel.textColor = [UIColor colorWithRed:191/255.0 green:192/255.0 blue:193/255.0 alpha:1.0];
+            tipLabel.font = [UIFont systemFontOfSize:13.f];
+            [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(@17);
+                make.top.equalTo(@40);
+                //                make.bottom.equalTo(cell.contentView);
+                make.height.equalTo(@15);
                 make.right.equalTo(cell.contentView);
             }];
         }
         return cell;
     }else {
-        DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
-            cell.statusLabel.text = @"已完成";
-            cell.statusLabel.textColor = rgb(42, 155, 234);
-        } else {
-            cell.statusLabel.text = @"未完成";
-            cell.statusLabel.textColor = rgb(159, 160, 162);
-        }
-        //        return cell;
-        switch (indexPath.row) {
-            case 1:
-            {
-                cell.iconImage.image = [UIImage imageNamed:@"UserData1"];
-                cell.titleLable.text = @"个人信息";
-                cell.subTitleLabel.text = @"完善您的个人信息";
-                return cell;
-            }
-                break;
-            case 2:
-            {
-                cell.iconImage.image = [UIImage imageNamed:@"UserData2"];
-                cell.titleLable.text = @"联系人信息";
-                cell.subTitleLabel.text = @"完善您的联系人信息";
-                return cell;
-            }
-                break;
-            case 3:
-            {
-                cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
-                cell.titleLable.text = @"职业信息";
-                cell.subTitleLabel.text = @"完善您的职业信息";
-                return cell;
-            }
-                break;
-            case 4:
-            {
-                cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
-                cell.titleLable.text = @"第三方认证";
-                cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
-                if (UI_IS_IPHONE5) {
-                    cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
+        if (indexPath.row == 5||indexPath.row == 6) {
+            if (_isDisplay) {
+                if (indexPath.row == 5) {
+                    SesameCreditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SesameCreditCell"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    return cell;
                 }
-                cell.lineView.hidden = true;
+                if (indexPath.row == 6) {
+                    
+                    DisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DisplayCell"];
+                    cell.titleLabel.text = @"收起";
+                    cell.directionImageView.image = [UIImage imageNamed:@"jiantoushang"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                }
+            }else{
+                
+                DisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DisplayCell"];
+                cell.titleLabel.text = @"更多认证";
+                cell.directionImageView.image = [UIImage imageNamed:@"jiantouxia"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
             }
-                break;
-                
-            default:
-                break;
+        }else{
+        
+            DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
+                cell.statusLabel.text = @"已完成";
+                cell.statusLabel.textColor = rgb(42, 155, 234);
+            } else {
+                cell.statusLabel.text = @"未完成";
+                cell.statusLabel.textColor = rgb(159, 160, 162);
+            }
+            //        return cell;
+            switch (indexPath.row) {
+                case 1:
+                {
+                    
+                    cell.iconImage.image = [UIImage imageNamed:@"UserData1"];
+                    cell.titleLable.text = @"个人信息";
+                    cell.subTitleLabel.text = @"完善您的个人信息";
+                    
+                    return cell;
+                }
+                    break;
+                case 2:
+                {
+                    cell.iconImage.image = [UIImage imageNamed:@"UserData2"];
+                    cell.titleLable.text = @"联系人信息";
+                    cell.subTitleLabel.text = @"完善您的联系人信息";
+                    return cell;
+                }
+                    break;
+                case 3:
+                {
+                    cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
+                    cell.titleLable.text = @"职业信息";
+                    cell.subTitleLabel.text = @"完善您的职业信息";
+                    return cell;
+                }
+                    break;
+                case 4:
+                {
+                    cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
+                    cell.titleLable.text = @"第三方认证";
+                    cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
+                    if (UI_IS_IPHONE5) {
+                        cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
+                    }
+//                    cell.lineView.hidden = true;
+                    return cell;
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
         }
     }
     
@@ -487,17 +587,42 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DLog(@"%ld",_nextStep.integerValue);
-    if (_nextStep.integerValue > 0) {
-        if (![self checkUserAuth:indexPath.row]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_subTitleArr[_nextStep.integerValue-1]];
+    if (indexPath.row == 5||indexPath.row == 6) {
+        
+        if (_isDisplay) {
+            if (indexPath.row == 6) {
+                _isDisplay = !_isDisplay;
+                [_tableView reloadData];
+            }
+            if (indexPath.row == 5) {
+                
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"芝麻信用"];
+                return;
+            }
+        }else{
+            if (indexPath.row == 5) {
+                _isDisplay = !_isDisplay;
+                [_tableView reloadData];
+            }
+        }
+    }else{
+    
+        DLog(@"%ld",_nextStep.integerValue);
+        if (_nextStep.integerValue > 0) {
+            if (![self checkUserAuth:indexPath.row]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_subTitleArr[_nextStep.integerValue-1]];
+                return;
+            }
+        }
+        if (_nextStep.integerValue == -2) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
             return;
         }
+        
     }
-    if (_nextStep.integerValue == -2) {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
-        return;
-    }
+    
+    
+    
     
 //    if (_nextStep.integerValue == 4) {
 //        if (_isInfoEditable.integerValue == 0) {

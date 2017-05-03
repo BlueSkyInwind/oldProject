@@ -515,7 +515,8 @@
         [self lowLoan];
     }
     if ([product.id_ isEqualToString:@"P001005"]) {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
+//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
+        [self highLoanClick];
     }
 //    if (indexPath.section == 1) {
 //        [self highLoanClick];
