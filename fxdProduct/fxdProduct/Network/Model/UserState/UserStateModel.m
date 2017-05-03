@@ -29,7 +29,8 @@
              @"zfb_status":@"zfb_status_",
              @"if_add_documents":@"if_add_documents_",
              @"product_id":@"product_id_",
-             @"case_info_id":@"case_info_id_"
+             @"case_info_id":@"case_info_id_",
+             
             };
 }
 

@@ -209,6 +209,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
+    [self checkState];
 }
 
 -(void)createUI
@@ -256,14 +257,27 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.promoteLabel.hidden = YES;
                 if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
                     
+                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
+                        checkFalse.seeView.hidden = NO;
+                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                    }else{
+                    
+                        checkFalse.seeView.hidden = YES;
+                    }
 //                    checkFalse.jsdView.hidden = NO;
-                    checkFalse.seeView.hidden = NO;
-                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                    
                 }else{
                 
-                    checkFalse.seeView.hidden = NO;
-//                    checkFalse.jsdView.hidden = YES;
-                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
+                        
+                        checkFalse.seeView.hidden = NO;
+                        //                    checkFalse.jsdView.hidden = YES;
+                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                    }else{
+                    
+                        checkFalse.seeView.hidden = YES;
+                    }
+                   
 
                 }
                 
@@ -488,8 +502,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         }
     };
 }
-
-
 
 - (void)updateUserState
 {
@@ -864,7 +876,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 }];
             }
             
-            
             //            PayViewController *payVC = [[PayViewController alloc] init];
             //                payVC.payType = PayTypeGetMoneyToCard;
             //                payVC.makesureBlock = ^(PayType payType){
@@ -998,7 +1009,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             checkSuccess.allMoney.text = @"0元";
         }
     }
-    
     
     if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]) {
         

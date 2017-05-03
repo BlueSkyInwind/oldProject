@@ -362,6 +362,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         _bankCodeNUm = result.bankCardNumber;
         _bankCodeNUm = [_bankCodeNUm stringByReplacingOccurrencesOfString:@" " withString:@""];
         _bankCodeNUm = [self changeStr:_bankCodeNUm];
+        [dataListAll3 replaceObjectAtIndex:1 withObject:_bankCodeNUm];
         DLog(@"银行卡扫描可信度 -- %@",[NSString stringWithFormat:@"confidence:%.2f", result.bankCardconfidence]);
         [weakSelf.tableView reloadData];
         
