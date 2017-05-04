@@ -283,7 +283,7 @@
                               backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                                   DLog(@"三方协议");
                                   NSDictionary *paramDic;
-                                  if ([model.product_id isEqualToString:@"P001002"]) {
+                                  if ([model.product_id isEqualToString:@"P001002"]||[model.product_id isEqualToString:@"P001005"]) {
                                       paramDic = @{@"apply_id_":_userStateModel.applyID,
                                                    @"product_id_":_userStateModel.product_id,
                                                    @"protocol_type_":@"2",

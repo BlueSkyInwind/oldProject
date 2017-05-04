@@ -86,15 +86,14 @@
     
 }
 
--(void)getHomeProductList{
 
+#pragma mark - 获取首页产品列表
+-(void)getHomeProductList{
     
-   
     NSDictionary *paramDic = @{@"juid":[Utility sharedUtility].userInfo.juid,
                                @"token":[Utility sharedUtility].userInfo.tokenStr
                                };
     
-    DLog(@"%@",_main_url);
     [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_getLimitProductlist_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         DLog(@"=========%@",object);
@@ -386,7 +385,7 @@
         
         HomeProductListProducts *product = _dataArray[indexPath.section-1];
         
-//        [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];
+        [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];
         cell.periodLabel.text = product.ext_attr_.amt_desc_;
         cell.amountLabel.text = product.name_;
         
@@ -396,19 +395,20 @@
         cell.helpImage.userInteractionEnabled = true;
         
         if ([product.id_ isEqualToString:@"P001002"]) {
-            cell.proLogoImage.image = [UIImage imageNamed:@"home_01"];
+            
+//            cell.proLogoImage.image = [UIImage imageNamed:@"home_01"];
             cell.specialtyImage.image = [UIImage imageNamed:@"home_04"];
             UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highSeeExpenses)];
             [cell.helpImage addGestureRecognizer:gest];
         }else if([product.id_ isEqualToString:@"P001005"]){
         
-            cell.proLogoImage.image = [UIImage imageNamed:@"home10"];
+//            cell.proLogoImage.image = [UIImage imageNamed:@"home10"];
 //            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
 //            [cell.helpImage addGestureRecognizer:gest];
             cell.specialtyImage.image = [UIImage imageNamed:@"home11"];
         }else{
             
-            cell.proLogoImage.image = [UIImage imageNamed:@"home_02"];
+//            cell.proLogoImage.image = [UIImage imageNamed:@"home_02"];
             UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
             [cell.helpImage addGestureRecognizer:gest];
             cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
@@ -512,7 +512,10 @@
         [self lowLoan];
     }
     if ([product.id_ isEqualToString:@"P001005"]) {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
+        
+        [self whiteCollarLoanClick];
+//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
+        
     }
 //    if (indexPath.section == 1) {
 //        [self highLoanClick];
@@ -559,7 +562,17 @@
     }
 }
 
-
+#pragma mark ->白领贷借款... Action
+- (void)whiteCollarLoanClick
+{
+    DLog(@"白领贷借款");
+    if ([Utility sharedUtility].loginFlage) {
+        [Utility sharedUtility].userInfo.pruductId = @"P001005";
+        [self PostStatuesMyLoanAmount:@{@"product_id_":@"P001005"}];
+    } else {
+        [self presentLogin:self];
+    }
+}
 
 - (void)lowLoan
 {
@@ -707,6 +720,14 @@
                     userDataVC.product_id = @"P001002";
                     [self.navigationController pushViewController:userDataVC animated:true];
                 }
+                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001005"]) {
+                    //                    WriteInfoViewController *writeVC = [WriteInfoViewController new];
+                    //                    [self.navigationController pushViewController:writeVC animated:YES];
+                    UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+                    userDataVC.product_id = @"P001005";
+                    [self.navigationController pushViewController:userDataVC animated:true];
+                }
+                
             }else if ([model.applyFlag isEqualToString:@"0001"]){
                 UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                 userDataVC.product_id = [paramDic objectForKey:@"product_id_"];
@@ -802,6 +823,13 @@
 //                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
 //                            [self.navigationController pushViewController:writeVC animated:YES];
                         }
+                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001005"]) {
+                            UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+                            userDataVC.product_id = @"P001005";
+                            [self.navigationController pushViewController:userDataVC animated:true];
+                            //                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
+                            //                            [self.navigationController pushViewController:writeVC animated:YES];
+                        }
                     }
                         break;
                 }
@@ -816,6 +844,12 @@
                     }];
                 }
                 if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001002"]) {
+                    LoanSureSecondViewController *loanSecondVC = [[LoanSureSecondViewController alloc] init];
+                    loanSecondVC.model = model;
+                    loanSecondVC.productId = [paramDic objectForKey:@"product_id_"];
+                    [self.navigationController pushViewController:loanSecondVC animated:true];
+                }
+                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001005"]) {
                     LoanSureSecondViewController *loanSecondVC = [[LoanSureSecondViewController alloc] init];
                     loanSecondVC.model = model;
                     loanSecondVC.productId = [paramDic objectForKey:@"product_id_"];

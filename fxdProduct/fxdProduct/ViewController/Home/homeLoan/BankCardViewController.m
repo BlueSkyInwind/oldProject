@@ -575,7 +575,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                    @"verify_code_":dataListAll3[3],
                    @"drawing_amount_":_drawAmount};
     }
-    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+    if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
         paramDic = @{@"card_no_":bankNo,
                      @"card_bank_":_bankCodeNUm,
                      @"bank_reserve_phone_":[dataListAll3 objectAtIndex:2],

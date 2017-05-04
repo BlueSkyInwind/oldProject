@@ -249,7 +249,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_repayListInfo != nil) {
-        if ([_product_id isEqualToString:@"P001002"]) {
+        if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001005"]) {
             //红包和银行的cell
             if(indexPath.row==3){
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
@@ -555,7 +555,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([_product_id isEqualToString:@"P001002"]) {
+    if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001005"]) {
         if(indexPath.row==0){//红包
             if (_canUseReadPacket) {
                 DLog(@"红包");

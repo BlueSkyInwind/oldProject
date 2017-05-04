@@ -575,6 +575,14 @@
 		63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */; };
 		7E7BA4B7621689937A9231AC /* Pods_fxdProduct.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2819F71AD8F8FCD65CAD98 /* Pods_fxdProduct.framework */; };
 		C287C31E450B4423CC4B31FD /* Pods_fxdProduct.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2819F71AD8F8FCD65CAD98 /* Pods_fxdProduct.framework */; };
+		CC0559151EB988C000733C2E /* SesameCreditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0559131EB988C000733C2E /* SesameCreditCell.m */; };
+		CC0559161EB988C000733C2E /* SesameCreditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0559141EB988C000733C2E /* SesameCreditCell.xib */; };
+		CC05591F1EB9A36D00733C2E /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC05591D1EB9A36D00733C2E /* DisplayCell.m */; };
+		CC0559201EB9A36D00733C2E /* DisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC05591E1EB9A36D00733C2E /* DisplayCell.xib */; };
+		CC0559261EB9A58500733C2E /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC05591D1EB9A36D00733C2E /* DisplayCell.m */; };
+		CC0559271EB9A5CB00733C2E /* SesameCreditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0559141EB988C000733C2E /* SesameCreditCell.xib */; };
+		CC0559281EB9A96700733C2E /* SesameCreditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0559131EB988C000733C2E /* SesameCreditCell.m */; };
+		CC0559291EB9ABE600733C2E /* DisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC05591E1EB9A36D00733C2E /* DisplayCell.xib */; };
 		CC0DF9571EA5B1090024841A /* RepaymentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEDCF1D1C197F5000014A87 /* RepaymentViewCell.m */; };
 		CC0DF9581EA5B1090024841A /* DetailRepayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636FD1D78287D00E93289 /* DetailRepayViewController.m */; };
 		CC0DF9591EA5B1090024841A /* ProductListResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6379639C1CABAFE9002A5910 /* ProductListResult.m */; };
@@ -2184,6 +2192,12 @@
 		63FFFBEC1D86B285000E3C38 /* NSDictionary+NilSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NilSafe.h"; sourceTree = "<group>"; };
 		63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NilSafe.m"; sourceTree = "<group>"; };
 		6C3551716C1A8BBD2F5FA47A /* Pods-fxdProduct.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxdProduct.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fxdProduct/Pods-fxdProduct.debug.xcconfig"; sourceTree = "<group>"; };
+		CC0559121EB988C000733C2E /* SesameCreditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditCell.h; sourceTree = "<group>"; };
+		CC0559131EB988C000733C2E /* SesameCreditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditCell.m; sourceTree = "<group>"; };
+		CC0559141EB988C000733C2E /* SesameCreditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditCell.xib; sourceTree = "<group>"; };
+		CC05591C1EB9A36D00733C2E /* DisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayCell.h; sourceTree = "<group>"; };
+		CC05591D1EB9A36D00733C2E /* DisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayCell.m; sourceTree = "<group>"; };
+		CC05591E1EB9A36D00733C2E /* DisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisplayCell.xib; sourceTree = "<group>"; };
 		CC0DFB971EA5B1090024841A /* fxdProductDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fxdProductDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PserInfoViewController.xib; sourceTree = "<group>"; };
 		CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PserInfoViewController.mm; sourceTree = "<group>"; };
@@ -2910,6 +2924,12 @@
 				63553B031E5D9E1B00B2C1FF /* MobileCell.h */,
 				63553B041E5D9E1B00B2C1FF /* MobileCell.m */,
 				63553B051E5D9E1B00B2C1FF /* MobileCell.xib */,
+				CC0559121EB988C000733C2E /* SesameCreditCell.h */,
+				CC0559131EB988C000733C2E /* SesameCreditCell.m */,
+				CC0559141EB988C000733C2E /* SesameCreditCell.xib */,
+				CC05591C1EB9A36D00733C2E /* DisplayCell.h */,
+				CC05591D1EB9A36D00733C2E /* DisplayCell.m */,
+				CC05591E1EB9A36D00733C2E /* DisplayCell.xib */,
 			);
 			path = UserDataCell;
 			sourceTree = "<group>";
@@ -4803,6 +4823,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC0559201EB9A36D00733C2E /* DisplayCell.xib in Resources */,
 				0FFA91621C589D76008D91D2 /* CheckViewIng.xib in Resources */,
 				6313DC171BB3F07B00EB45DE /* Images.xcassets in Resources */,
 				633BA56A1DB4AB1E0092C782 /* PhotoDetailViewController.xib in Resources */,
@@ -4887,6 +4908,7 @@
 				637636F81D77FB1600E93289 /* repay_circle_un@2x.png in Resources */,
 				63553AEE1E5D787800B2C1FF /* IdentityCell.xib in Resources */,
 				1A6FD1171C8FC88F00383570 /* FirstRepayment.xib in Resources */,
+				CC0559161EB988C000733C2E /* SesameCreditCell.xib in Resources */,
 				638A170D1E517E8C00AB8AB6 /* vcTransition1.json in Resources */,
 				6391F77D1D348B4E0097C943 /* bank_code_8@2x.png in Resources */,
 				1AEDCF221C197F5000014A87 /* RepaymentViewCell.xib in Resources */,
@@ -4938,6 +4960,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC0559291EB9ABE600733C2E /* DisplayCell.xib in Resources */,
 				CC0DFB191EA5B1090024841A /* CheckViewIng.xib in Resources */,
 				CC0DFB1A1EA5B1090024841A /* Images.xcassets in Resources */,
 				CC0DFB1B1EA5B1090024841A /* PhotoDetailViewController.xib in Resources */,
@@ -5022,6 +5045,7 @@
 				CC0DFB6A1EA5B1090024841A /* repay_circle_un@2x.png in Resources */,
 				CC0DFB6B1EA5B1090024841A /* IdentityCell.xib in Resources */,
 				CC0DFB6C1EA5B1090024841A /* FirstRepayment.xib in Resources */,
+				CC0559271EB9A5CB00733C2E /* SesameCreditCell.xib in Resources */,
 				CC0DFB6D1EA5B1090024841A /* vcTransition1.json in Resources */,
 				CC0DFB6E1EA5B1090024841A /* bank_code_8@2x.png in Resources */,
 				CC0DFB6F1EA5B1090024841A /* RepaymentViewCell.xib in Resources */,
@@ -5250,6 +5274,7 @@
 				63F254731E499C8000852CF1 /* InvitationViewController.m in Sources */,
 				638A17001E517D9F00AB8AB6 /* LOTLayer.m in Sources */,
 				63F254881E49A45900852CF1 /* HMScannerMaskView.m in Sources */,
+				CC05591F1EB9A36D00733C2E /* DisplayCell.m in Sources */,
 				0FFA91791C59F641008D91D2 /* LoanMoneyViewController.m in Sources */,
 				636AC4381D38EA9500599590 /* PayMoneyCell.m in Sources */,
 				1A762F6F1C1FBE4700964719 /* RepayRecordController.m in Sources */,
@@ -5364,6 +5389,7 @@
 				630D46241BCF820F00874064 /* GetMoneyInfo.m in Sources */,
 				636B1B261C2000E900450358 /* UIColor+Extend.m in Sources */,
 				0FA7A9A01C1FAA4400B3F6CB /* SubmitImageCell.m in Sources */,
+				CC0559151EB988C000733C2E /* SesameCreditCell.m in Sources */,
 				1A6AEDDA1C72B5BE00D48C6A /* TicketDetailController.m in Sources */,
 				637636EC1D76A72A00E93289 /* UIViewController+LewPopupViewController.m in Sources */,
 				63B142A81D9A0D7300C43B3F /* FXDUserInfo.m in Sources */,
@@ -5580,6 +5606,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC0559281EB9A96700733C2E /* SesameCreditCell.m in Sources */,
 				CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */,
 				CC0DF9571EA5B1090024841A /* RepaymentViewCell.m in Sources */,
 				CC0DF9581EA5B1090024841A /* DetailRepayViewController.m in Sources */,
@@ -5878,6 +5905,7 @@
 				CC0DFA7D1EA5B1090024841A /* TicketExplainCell.m in Sources */,
 				CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */,
 				CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */,
+				CC0559261EB9A58500733C2E /* DisplayCell.m in Sources */,
 				CC0DFA801EA5B1090024841A /* CardListBaseClass.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchViewController.m in Sources */,
 				CC0DFA821EA5B1090024841A /* RepayListViewController.m in Sources */,

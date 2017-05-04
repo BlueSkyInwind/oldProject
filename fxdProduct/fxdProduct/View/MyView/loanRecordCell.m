@@ -70,7 +70,9 @@
             if ([result.product_id_ isEqualToString:@"P001002"]) {
                 lbl.text = @"工薪贷";
             }
-            
+            if ([result.product_id_ isEqualToString:@"P001005"]) {
+                lbl.text = @"白领贷";
+            }
         }else if(i==1)
         {
             lbl.text=[NSString stringWithFormat:@"%.2f元",result.principal_amount_];
