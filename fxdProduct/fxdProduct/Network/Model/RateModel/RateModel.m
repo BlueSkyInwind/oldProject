@@ -24,3 +24,11 @@
 }
 
 @end
+
+@implementation RateModelExtAttr
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"ext_attr_":[RateModelExtAttr class]};
+}
+
+@end

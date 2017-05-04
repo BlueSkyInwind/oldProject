@@ -113,6 +113,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
         }
     }
+    
+    if ([_userStateModel.product_id isEqualToString:@"P001005"]) {
+        for (int i = 0; i < 48; i++) {
+            [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
+        }
+    }
+    
     if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
         for (int i = 1; i < 2; i++) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
@@ -133,55 +140,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 }
 
 
--(void)create{
-
-    [self PostGetCheckMoney];
-    checkSuccess =[[[NSBundle mainBundle] loadNibNamed:@"CheckSuccessView" owner:self options:nil] lastObject];
-    checkSuccess.frame = CGRectMake(0, 0,_k_w, _k_h);
-    checkSuccess.pickweek.hidden = YES;
-    checkSuccess.toolBar.hidden = YES;
-    checkSuccess.purposePicker.hidden = YES;
-    checkSuccess.pickweek.delegate = self;
-    checkSuccess.pickweek.dataSource = self;
-    checkSuccess.textFiledWeek.text = @"请选择借款周期";
-    [Tool setCorner:checkSuccess.bgView borderColor:rgb(0, 170, 238)];
-    [Tool setCorner:checkSuccess.purposeView borderColor:rgb(0, 170, 238)];
-    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
-    [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-    [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
-    checkSuccess.weekMoney.attributedText = attStr;
-    checkSuccess.allMoney.text = @"0元";
-    checkSuccess.textFiledWeek.delegate = self;
-    checkSuccess.toolCancleBtn.tag = 103;
-    checkSuccess.toolCancleBtn.action =@selector(shareBtn:);
-    checkSuccess.toolCancleBtn.target = self;
-    
-    checkSuccess.toolsureBtn.tag = 104;
-    checkSuccess.toolsureBtn.action =@selector(shareBtn:);
-    checkSuccess.toolsureBtn.target = self;
-    
-    checkSuccess.sureBtn.userInteractionEnabled = NO;
-    checkSuccess.sureBtn.tag = 101;
-    [checkSuccess.sureBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
-    checkSuccess.weekBtn.tag = 102;
-    [checkSuccess.weekBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
-    
-    checkSuccess.loadMoney.text =[NSString stringWithFormat:@"¥%.0f元",_approvalModel.result.approval_amount];
-    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:checkSuccess.loadMoney.text];
-    [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:30] range:NSMakeRange(0, 1)];
-    [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange([checkSuccess.loadMoney.text length]-1, 1)];
-    checkSuccess.loadMoney.attributedText = att;
-    
-    
-    
-    [checkSuccess.promote addTarget:self action:@selector(promote) forControlEvents:UIControlEventTouchUpInside];
-    _promoteType = PromoteLimit;
-    [self.view addSubview:checkSuccess];
-    checkSuccess.purposeBtn.tag = 105;
-    [checkSuccess.purposeBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
-    checkSuccess.agreementLabel.text = @"用户协议";
-    
-}
 -(void)imageTap{
 
     FXDWebViewController *webView = [[FXDWebViewController alloc] init];
@@ -255,7 +213,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoLabel.hidden = YES;
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
-                if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+                if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
                     
                     if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
                         checkFalse.seeView.hidden = NO;
@@ -402,7 +360,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [self getUserInfoData:^{
                     if ([_userStateModel.platform_type isEqualToString:@"0"]) {
                         NSDictionary *paramDic;
-                        if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+                        if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
                             if (_userSelectNum.integerValue == 0) {
                                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择借款周期"];
                                 return;
@@ -586,7 +544,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         {
             DLog(@"提款")
             DLog(@"%d",_userSelectNum.intValue);
-            if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+            if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
                 if (_userSelectNum.integerValue == 0) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请选择借款周期"];
                     return;
@@ -915,7 +873,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"account_card_id_":_selectCard.cardIdentifier
                      };
     }
-    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+    if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
         paramDic = @{@"periods_":[NSString stringWithFormat:@"%d",_userSelectNum.intValue],
                      @"drawing_amount_":@(_approvalModel.result.approval_amount),
                      @"account_card_id_":_selectCard.cardIdentifier,
@@ -1018,7 +976,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             checkSuccess.allMoney.text = @"0元";
         }
     }
-    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+    if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
         if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]) {
             checkSuccess.sureBtn.backgroundColor = rgb(0, 127, 254);
         }else{

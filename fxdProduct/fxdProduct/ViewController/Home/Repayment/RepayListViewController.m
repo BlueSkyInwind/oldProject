@@ -329,7 +329,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         }
         
         
-        if ([_userStateParse.product_id isEqualToString:@"P001002"]) {
+        if ([_userStateParse.product_id isEqualToString:@"P001002"]||[_userStateParse.product_id isEqualToString:@"P001005"]) {
             NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
             NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
             [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(255, 134, 25) range:NSMakeRange(2, saveAmount.length)];
@@ -368,7 +368,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             }
         }
         
-        if ([_userStateParse.product_id isEqualToString:@"P001002"]) {
+        if ([_userStateParse.product_id isEqualToString:@"P001002"]||[_userStateParse.product_id isEqualToString:@"P001005"]) {
             self.saveUpLabel.hidden = YES;
             _payNumberTop.constant = 10;
             _payNumberBottom.constant = 10;
