@@ -572,6 +572,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                    @"card_bank_":_bankCodeNUm,
                    @"bank_reserve_phone_":[dataListAll3 objectAtIndex:2],
                    @"periods_":@2,
+                   @"loan_for_":_purposeSelect,
                    @"verify_code_":dataListAll3[3],
                    @"drawing_amount_":_drawAmount};
     }
@@ -580,6 +581,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                      @"card_bank_":_bankCodeNUm,
                      @"bank_reserve_phone_":[dataListAll3 objectAtIndex:2],
                      @"periods_":@(_periodSelect),
+                     @"loan_for_":_purposeSelect,
                      @"verify_code_":dataListAll3[3],
                      @"drawing_amount_":_drawAmount};
     }

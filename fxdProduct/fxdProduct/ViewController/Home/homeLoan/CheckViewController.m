@@ -831,6 +831,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                         BankCardViewController *bankVC = [BankCardViewController new];
                         bankVC.bankModel = bankModel;
                         bankVC.periodSelect = _userSelectNum.integerValue;
+                        bankVC.purposeSelect = _purposeSelect;
                         bankVC.userStateModel = _userStateModel;
                         //            bankVC.idString = _idString;
                         bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
@@ -1209,6 +1210,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     //4
                     if ([cardResult.card_bank_ integerValue] == 4) {
                         BankCardViewController *bankVC = [BankCardViewController new];
+                        bankVC.purposeSelect = _purposeSelect;
                         bankVC.periodSelect = _userSelectNum.intValue;
                         //            bankVC.idString = _idString;
                         bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
