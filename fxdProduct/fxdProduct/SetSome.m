@@ -64,7 +64,6 @@
             }
         }
         
-        
 //        [Tool saveUserDefaul:nil Key:Fxd_JUID];
 //        [Tool saveUserDefaul:nil Key:kLoginFlag];
 //        [Tool saveUserDefaul:nil Key:UserName];
