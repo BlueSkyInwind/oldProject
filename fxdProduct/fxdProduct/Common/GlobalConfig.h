@@ -40,6 +40,7 @@ UIKIT_EXTERN NSString * const _main_url;
 UIKIT_EXTERN NSString * const _ValidESB_url;
 UIKIT_EXTERN NSString * const _P2P_url;
 UIKIT_EXTERN NSString * const _H5_url;
+UIKIT_EXTERN NSString * const _ZMXY_url;
 
 UIKIT_EXTERN NSString * const       _getCode_url;                            //获取验证码
 UIKIT_EXTERN NSString * const       _regCode_url;                            //注册验证码
@@ -139,7 +140,7 @@ UIKIT_EXTERN NSString * const       _question_url;                           //�
 UIKIT_EXTERN NSString * const       _getDicCode_url;                         //数据字典获取
 UIKIT_EXTERN NSString * const       _mobileAuthentication_url;               //手机认证
 UIKIT_EXTERN NSString * const       _selectPlatform_url;                     //审核被拒，去看看
-
+UIKIT_EXTERN NSString * const       _findZhimaCredit_url;                     //芝麻信用授权
 
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码

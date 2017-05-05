@@ -29,7 +29,7 @@
 #import "DataWriteAndRead.h"
 #import "SesameCreditCell.h"
 #import "DisplayCell.h"
-
+#import "SesameCreditViewController.h"
 
 
 #define cyancColor rgb(0, 170, 238)
@@ -1026,9 +1026,14 @@
             [_tableView reloadData];
         }
         if (index == 5) {
+            
+//            SesameCreditViewController *controller = [[SesameCreditViewController alloc]init];
+//            [self.navigationController pushViewController:controller animated:YES];
             if (processFlot == 1) {
                 
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"芝麻信用"];
+                SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
+                [self.navigationController pushViewController:controller animated:YES];
+//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"芝麻信用"];
                 return;
             }else{
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完成必填项目"];
