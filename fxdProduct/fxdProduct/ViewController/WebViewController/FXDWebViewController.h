@@ -13,5 +13,6 @@
 @property (nonatomic, copy)NSString *urlStr;
 
 @property (nonatomic, copy) NSString *shareContent;
+@property (nonatomic,assign)BOOL isZhima;
 
 @end

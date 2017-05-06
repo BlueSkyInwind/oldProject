@@ -8,6 +8,9 @@
 
 #import "SesameCreditViewController.h"
 #import "FXDWebViewController.h"
+#import "SubmitZhimaCreditAuthModel.h"
+#import "UserDataViewController.h"
+#import "HomeViewController.h"
 @interface SesameCreditViewController ()
 
 @end
@@ -23,17 +26,66 @@
     self.userIDNumberTextField.text = [Utility sharedUtility].userInfo.userIDNumber;
     [self.immediateAuthorizationBtn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserProfileSuccess:) name:@"Notification_GetUserProfileSuccess" object:nil];
+    
+    
+    
 }
 
--(void)click{
 
-    FXDWebViewController *webview = [[FXDWebViewController alloc] init];
-    NSString *url = [NSString stringWithFormat:@"%@%@?user_name_=%@&id_code_=%@",_ZMXY_url,_findZhimaCredit_url,self.realNameTextField.text,self.userIDNumberTextField.text];
-    webview.urlStr = url;
-    [self.navigationController pushViewController:webview animated:true];
+- (void) getUserProfileSuccess: (NSNotification*) aNotification
+{
+    
+    
+    DLog(@"%@",self.navigationController.viewControllers);
+    
+    [self.navigationController popViewControllerAnimated:YES];
+//    for (UIViewController* vc in self.navigationController.viewControllers) {
+//
+//        if ([vc isKindOfClass:[UserDataViewController class]]) {
+//
+//            [self.navigationController popToViewController:vc animated:YES];
+//
+//        }
+//    }
+
+    
+}
+
+#pragma mark - 获取首页产品列表
+-(void)click{
+    
+    DLog(@"%@",self.navigationController.viewControllers);
+    
+        NSDictionary *paramDic = @{
+                                   @"juid":[Utility sharedUtility].userInfo.juid,
+                                   @"id_code_":self.userIDNumberTextField.text,
+                                   @"user_name_":self.realNameTextField.text
+                                   };
+        
+        [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_submitZhimaCredit_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+            
+            DLog(@"=======%@",object);
+        
+            SubmitZhimaCreditAuthModel *model = [SubmitZhimaCreditAuthModel yy_modelWithJSON:object];
+            FXDWebViewController *webview = [[FXDWebViewController alloc] init];
+            NSLog(@"%@",model.result.auth_url);
+            webview.urlStr = model.result.auth_url;
+            webview.isZhima = YES;
+            [self.navigationController pushViewController:webview animated:true];
+        } failure:^(EnumServerStatus status, id object) {
+            
+            DLog(@"%@",object);
+        }];
+    
+    
+//    FXDWebViewController *webview = [[FXDWebViewController alloc] init];
+//    NSString *url = [NSString stringWithFormat:@"%@%@",_ZMXY_url,_findZhimaCredit_url];
+//    [self.navigationController pushViewController:webview animated:true];
    
     
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

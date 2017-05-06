@@ -1156,6 +1156,10 @@
 		CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
+		CCB323431EBC5AA50001D9DE /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB323421EBC5AA50001D9DE /* SubmitZhimaCreditAuthModel.m */; };
+		CCB323441EBC5B8C0001D9DE /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB323421EBC5AA50001D9DE /* SubmitZhimaCreditAuthModel.m */; };
+		CCB323481EBC68A70001D9DE /* FindZhimaCreditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB323471EBC68A70001D9DE /* FindZhimaCreditModel.m */; };
+		CCB323491EBC68A70001D9DE /* FindZhimaCreditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB323471EBC68A70001D9DE /* FindZhimaCreditModel.m */; };
 		CCD565BE1E8A46D500B6665D /* PserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */; };
 		CCD565C01E8A46D500B6665D /* PserInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */; };
 		CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
@@ -2206,6 +2210,10 @@
 		CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
+		CCB323411EBC5AA50001D9DE /* SubmitZhimaCreditAuthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitZhimaCreditAuthModel.h; sourceTree = "<group>"; };
+		CCB323421EBC5AA50001D9DE /* SubmitZhimaCreditAuthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitZhimaCreditAuthModel.m; sourceTree = "<group>"; };
+		CCB323461EBC68A70001D9DE /* FindZhimaCreditModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindZhimaCreditModel.h; sourceTree = "<group>"; };
+		CCB323471EBC68A70001D9DE /* FindZhimaCreditModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindZhimaCreditModel.m; sourceTree = "<group>"; };
 		CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PserInfoViewController.xib; sourceTree = "<group>"; };
 		CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PserInfoViewController.mm; sourceTree = "<group>"; };
 		CCD565BD1E8A46D500B6665D /* PserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PserInfoViewController.h; sourceTree = "<group>"; };
@@ -4201,6 +4209,8 @@
 		63E076541B67114800E269F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCB323451EBC68880001D9DE /* FindZhimaCredit */,
+				CCB323401EBC5A7B0001D9DE /* SubmitZhimaCreditAuth */,
 				CCFA2DC71EB02FC20071F46B /* HomeProductList */,
 				63E8F1AE1E6FDACD00FE4BDD /* DataDic */,
 				63C50E551E6938100035EE4F /* HomeBanner */,
@@ -4693,6 +4703,24 @@
 				54096315F88D5447F84E0740 /* Pods-fxdProduct.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		CCB323401EBC5A7B0001D9DE /* SubmitZhimaCreditAuth */ = {
+			isa = PBXGroup;
+			children = (
+				CCB323411EBC5AA50001D9DE /* SubmitZhimaCreditAuthModel.h */,
+				CCB323421EBC5AA50001D9DE /* SubmitZhimaCreditAuthModel.m */,
+			);
+			path = SubmitZhimaCreditAuth;
+			sourceTree = "<group>";
+		};
+		CCB323451EBC68880001D9DE /* FindZhimaCredit */ = {
+			isa = PBXGroup;
+			children = (
+				CCB323461EBC68A70001D9DE /* FindZhimaCreditModel.h */,
+				CCB323471EBC68A70001D9DE /* FindZhimaCreditModel.m */,
+			);
+			path = FindZhimaCredit;
 			sourceTree = "<group>";
 		};
 		CCFA2DC71EB02FC20071F46B /* HomeProductList */ = {
@@ -5305,6 +5333,7 @@
 				63C50E481E666FF40035EE4F /* Custom_BaseInfoResult.m in Sources */,
 				63FC24FC1D98F7E9006F58F3 /* NSParagraphStyle+YYText.m in Sources */,
 				63FC24FB1D98F7E9006F58F3 /* NSAttributedString+YYText.m in Sources */,
+				CCB323431EBC5AA50001D9DE /* SubmitZhimaCreditAuthModel.m in Sources */,
 				6326CAAC1BF1CA5F00FD23A8 /* pinyin.c in Sources */,
 				63741E341D3CC10900C0E2F8 /* PayNavigationViewController.m in Sources */,
 				63C12DCB1E495CC9008119FB /* MoneyPlanCell.m in Sources */,
@@ -5508,6 +5537,7 @@
 				63C12DCF1E4978AF008119FB /* QRPopView.m in Sources */,
 				63145AB21CA2952400D04ED8 /* LoginMsgBaseClass.m in Sources */,
 				630B16431C5601CE006D46CF /* BasicInfoViewController.m in Sources */,
+				CCB323481EBC68A70001D9DE /* FindZhimaCreditModel.m in Sources */,
 				6326C9ED1BF0B15700FD23A8 /* GetMoneyProcessUserBean.m in Sources */,
 				63553AF21E5D8BA200B2C1FF /* ProfessionViewController.m in Sources */,
 				635B0BD41DF01706008EAFD1 /* MoneyIngView.m in Sources */,
@@ -5619,6 +5649,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCB323441EBC5B8C0001D9DE /* SubmitZhimaCreditAuthModel.m in Sources */,
 				CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */,
 				CC0559281EB9A96700733C2E /* SesameCreditCell.m in Sources */,
 				CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */,
@@ -5929,6 +5960,7 @@
 				CC0DFA861EA5B1090024841A /* QRPopView.m in Sources */,
 				CC0DFA871EA5B1090024841A /* LoginMsgBaseClass.m in Sources */,
 				CC0DFA881EA5B1090024841A /* BasicInfoViewController.m in Sources */,
+				CCB323491EBC68A70001D9DE /* FindZhimaCreditModel.m in Sources */,
 				CC0DFA891EA5B1090024841A /* GetMoneyProcessUserBean.m in Sources */,
 				CC0DFA8A1EA5B1090024841A /* ProfessionViewController.m in Sources */,
 				CC0DFA8B1EA5B1090024841A /* MoneyIngView.m in Sources */,

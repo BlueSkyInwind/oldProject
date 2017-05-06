@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -100,12 +100,22 @@
                                 <constraint firstAttribute="width" constant="240" id="OAT-Sy-Hhi"/>
                             </constraints>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgq-sV-53l">
+                            <rect key="frame" x="68" y="59" width="240" height="46"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="46" id="19G-F7-5H9"/>
+                                <constraint firstAttribute="width" constant="240" id="fhm-WY-ybl"/>
+                            </constraints>
+                            <state key="normal" image="homeLoan"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="Uuf-TD-drI" firstAttribute="top" secondItem="cvG-AG-GZm" secondAttribute="top" constant="35" id="02d-j0-msm"/>
+                        <constraint firstItem="bgq-sV-53l" firstAttribute="top" secondItem="Uuf-TD-drI" secondAttribute="bottom" constant="8" id="6zq-89-Ysu"/>
                         <constraint firstAttribute="bottom" secondItem="HYg-ho-YB8" secondAttribute="bottom" constant="38" id="9hX-j2-ZQA"/>
                         <constraint firstItem="G7M-gi-eyU" firstAttribute="leading" secondItem="Bov-7b-71v" secondAttribute="trailing" constant="3" id="CEr-te-pBh"/>
+                        <constraint firstItem="bgq-sV-53l" firstAttribute="centerX" secondItem="cvG-AG-GZm" secondAttribute="centerX" id="CmQ-CB-UFx"/>
                         <constraint firstItem="Bov-7b-71v" firstAttribute="leading" secondItem="9O9-vO-kFQ" secondAttribute="trailing" constant="21" id="DCi-1C-tUR"/>
                         <constraint firstItem="HYg-ho-YB8" firstAttribute="leading" secondItem="5nQ-s7-MC6" secondAttribute="trailing" constant="3" id="GTF-jT-LwL"/>
                         <constraint firstItem="Uuf-TD-drI" firstAttribute="leading" secondItem="cvG-AG-GZm" secondAttribute="leading" id="Hyi-iL-wbP"/>
@@ -363,6 +373,7 @@
             </variation>
             <connections>
                 <outlet property="ReceiveImmediatelyImage" destination="jFI-Ci-cl9" id="jcY-c7-Swq"/>
+                <outlet property="receiveImmediatelyBtn" destination="bgq-sV-53l" id="skY-7F-8bw"/>
             </connections>
             <point key="canvasLocation" x="354.5" y="364.5"/>
         </view>
