@@ -1070,7 +1070,9 @@
             
             if (_isZmxyAuth.integerValue == 2||processFlot ==1) {
                 
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+                SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
+                [self.navigationController pushViewController:controller animated:YES];
                 return;
             }else{
                 SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];

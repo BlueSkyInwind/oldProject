@@ -156,36 +156,25 @@
     if ([request.URL.absoluteString hasSuffix:@"main.html"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
         [self.navigationController popViewControllerAnimated:YES];
-    }else if([request.URL.absoluteString hasPrefix:[NSString stringWithFormat:@"%@%@",_ZhimaBack_url,_zhimaCreditCallBack_url]]){
-       
-        decisionHandler(WKNavigationActionPolicyCancel);
-        
-        NSLog(@"=========%@",self.navigationController.viewControllers);
-        
-        NSLog(@"=========%@",[UIApplication sharedApplication].windows);
-    
-        for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
-            
-            if ([vc isKindOfClass:[UserDataViewController class]]) {
-
-                [self.navigationController popToViewController:vc animated:YES];
-
-            }
-        }
-        
-//        [self.navigationController popViewControllerAnimated:YES];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserProfileSuccess" object:nil userInfo:nil];
         
     }else{
     
         decisionHandler(WKNavigationActionPolicyAllow);
+        
     }
-    
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
     self.navigationItem.title = @"加载中...";
+    
+    if([webView.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_ZhimaBack_url,_zhimaCreditCallBack_url]]){
+        for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+            if ([vc isKindOfClass:[UserDataViewController class]]) {
+                [self.navigationController popToViewController:vc animated:YES];
+            }
+        }
+    }
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
@@ -306,13 +295,13 @@
         
         [[NSFileManager defaultManager] removeItemAtPath:cookiesFolderPath error:&errors];
         
-        
-        
     }
     
 }
 
-
+-(void)viewDidAppear:(BOOL)animated{
+    [self deleteWebCache];
+}
 - (void)viewDidDisappear:(BOOL)animated
 {
     [progressView removeFromSuperview];

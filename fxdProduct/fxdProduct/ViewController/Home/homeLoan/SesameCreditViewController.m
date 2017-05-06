@@ -48,8 +48,6 @@
 //
 //        }
 //    }
-
-    
 }
 
 #pragma mark - 获取首页产品列表
@@ -76,6 +74,7 @@
         } failure:^(EnumServerStatus status, id object) {
             
             DLog(@"%@",object);
+            
         }];
     
     
