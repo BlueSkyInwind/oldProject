@@ -30,7 +30,7 @@
 #import "SesameCreditCell.h"
 #import "DisplayCell.h"
 #import "SesameCreditViewController.h"
-
+#import "FindZhimaCreditModel.h"
 
 #define cyancColor rgb(0, 170, 238)
 
@@ -50,7 +50,7 @@
     NSString *_resultCode;
     NSString *_rulesId;
     NSString *_isMobileAuth;
-    
+    NSString *_isZmxyAuth;
     UserStateModel *_model;
     BOOL _isDisplay;
     
@@ -123,6 +123,7 @@
     [super viewWillAppear:animated];
     [_tableView.mj_header beginRefreshing];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+//    [self findZhimaCredit];
 }
 
 //- (void)viewDidAppear:(BOOL)animated
@@ -514,6 +515,14 @@
                         SesameCreditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SesameCreditCell"];
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        if (_isZmxyAuth.integerValue == 2) {
+                            cell.stateLabel.text = @"已完成";
+                            cell.stateLabel.textColor = rgb(42, 155, 234);
+                        } else {
+                            cell.stateLabel.text = @"未完成";
+                            cell.stateLabel.textColor = rgb(159, 160, 162);
+                        }
+                        
                         return cell;
                     }
                     if (indexPath.row == 6) {
@@ -826,16 +835,22 @@
 #pragma mark -获取进度条的进度
 - (void)refreshInfoStep
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_customerAuthInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    
+    NSDictionary *paramDic = @{@"product_id_":_product_id,
+                               
+                               };
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_customerAuthInfo_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             _nextStep = [[object objectForKey:@"result"] objectForKey:@"nextStep"];
             _resultCode = [[object objectForKey:@"result"] objectForKey:@"resultcode"];
             _rulesId = [[object objectForKey:@"result"] objectForKey:@"rulesid"];
             _isMobileAuth = [[object objectForKey:@"result"] objectForKey:@"isMobileAuth"];
+            _isZmxyAuth = [[object objectForKey:@"result"] objectForKey:@"isZmxyAuth"];// 1 未认证    2 认证通过   3 认证未通过
             if (_nextStep.integerValue == 4) {
                 _isInfoEditable = [[object objectForKey:@"result"] objectForKey:@"isInfoEditable"];
             }
+        
             [self setProcess];
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
@@ -1030,11 +1045,20 @@
 //            SesameCreditViewController *controller = [[SesameCreditViewController alloc]init];
 //            [self.navigationController pushViewController:controller animated:YES];
             if (processFlot == 1) {
+                if (_isZmxyAuth.integerValue == 2) {
+//                    SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
+//                    [self.navigationController pushViewController:controller animated:YES];
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+                    return;
+                }else{
                 
-                SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
-                [self.navigationController pushViewController:controller animated:YES];
+                    SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
+                    [self.navigationController pushViewController:controller animated:YES];
+                    return;
+                }
+                
 //                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"芝麻信用"];
-                return;
+                
             }else{
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完成必填项目"];
                 return;
@@ -1044,14 +1068,17 @@
     }else{
         if ([_product_id isEqualToString:@"P001005"]) {
             
-            if (processFlot == 1) {
+            if (_isZmxyAuth.integerValue == 2||processFlot ==1) {
                 
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"芝麻信用"];
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                 return;
             }else{
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完成所有认证"];
+                SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
+                [self.navigationController pushViewController:controller animated:YES];
                 return;
             }
+            
+            
             
         }else{
             if (index == 5) {
@@ -1062,6 +1089,23 @@
         
     }
 }
+
+#pragma mark -芝麻信用认证返回
+-(void)findZhimaCredit{
+
+    NSDictionary *dic = @{@"juid":[Utility sharedUtility].userInfo.juid};
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ZMXY_url,_findZhimaCredit_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+        FindZhimaCreditModel *model = [FindZhimaCreditModel yy_modelWithJSON:object];
+        if ([model.authentic_status_ isEqualToString:@"2"]) {
+            _nextStep = @"-1";
+            [self setProcess];
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

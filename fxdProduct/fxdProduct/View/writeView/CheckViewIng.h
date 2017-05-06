@@ -12,4 +12,5 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *ReceiveImmediatelyImage;
 
+@property (weak, nonatomic) IBOutlet UIButton *receiveImmediatelyBtn;
 @end

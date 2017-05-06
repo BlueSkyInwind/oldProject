@@ -133,10 +133,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     [self createUI];
 //    [self create];
-    _checking.ReceiveImmediatelyImage.userInteractionEnabled = true;
-    UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap)];
-    [_checking.ReceiveImmediatelyImage addGestureRecognizer:tapImage];
+//    _checking.ReceiveImmediatelyImage.userInteractionEnabled = true;
+//    UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap)];
+//    [_checking.ReceiveImmediatelyImage addGestureRecognizer:tapImage];
     
+    [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
@@ -182,6 +183,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             _checking.layer.anchorPoint = CGPointMake(0.5, 1.0);
             _checking.frame =CGRectMake(0, 0,_k_w, _k_h);
             [_checking setContentMode:UIViewContentModeScaleAspectFit];
+            [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:_checking];
         }
             break;
