@@ -159,10 +159,10 @@
     }else if([request.URL.absoluteString hasPrefix:[NSString stringWithFormat:@"%@%@",_ZhimaBack_url,_zhimaCreditCallBack_url]]){
        
         decisionHandler(WKNavigationActionPolicyCancel);
-        
-        NSLog(@"=========%@",self.navigationController.viewControllers);
-        
-        NSLog(@"=========%@",[UIApplication sharedApplication].windows);
+//        
+//        NSLog(@"=========%@",self.navigationController.viewControllers);
+//        
+//        NSLog(@"=========%@",[UIApplication sharedApplication].windows);
     
         for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
             
@@ -173,8 +173,7 @@
             }
         }
         
-//        [self.navigationController popViewControllerAnimated:YES];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserProfileSuccess" object:nil userInfo:nil];
+
         
     }else{
     

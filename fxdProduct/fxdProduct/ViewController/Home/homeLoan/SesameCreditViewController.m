@@ -26,29 +26,8 @@
     self.userIDNumberTextField.text = [Utility sharedUtility].userInfo.userIDNumber;
     [self.immediateAuthorizationBtn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUserProfileSuccess:) name:@"Notification_GetUserProfileSuccess" object:nil];
     
     
-    
-}
-
-
-- (void) getUserProfileSuccess: (NSNotification*) aNotification
-{
-    
-    
-    DLog(@"%@",self.navigationController.viewControllers);
-    
-    [self.navigationController popViewControllerAnimated:YES];
-//    for (UIViewController* vc in self.navigationController.viewControllers) {
-//
-//        if ([vc isKindOfClass:[UserDataViewController class]]) {
-//
-//            [self.navigationController popToViewController:vc animated:YES];
-//
-//        }
-//    }
-
     
 }
 
