@@ -156,6 +156,7 @@
     if ([request.URL.absoluteString hasSuffix:@"main.html"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
         [self.navigationController popViewControllerAnimated:YES];
+
         
     }else{
     

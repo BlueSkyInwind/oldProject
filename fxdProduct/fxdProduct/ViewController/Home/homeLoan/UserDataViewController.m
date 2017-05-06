@@ -507,7 +507,7 @@
         return cell;
     }else {
         
-        if ([_product_id isEqualToString:@"P001002"]) {
+        if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001004"]) {
 
             if (indexPath.row == 5||indexPath.row == 6) {
                 if (_isDisplay) {
@@ -518,7 +518,11 @@
                         if (_isZmxyAuth.integerValue == 2) {
                             cell.stateLabel.text = @"已完成";
                             cell.stateLabel.textColor = rgb(42, 155, 234);
-                        } else {
+                        } else if(_isZmxyAuth.integerValue == 1){
+                            cell.stateLabel.text = @"认证中";
+                            cell.stateLabel.textColor = rgb(159, 160, 162);
+                        }else if(_isZmxyAuth.integerValue == 3){
+                        
                             cell.stateLabel.text = @"未完成";
                             cell.stateLabel.textColor = rgb(159, 160, 162);
                         }
@@ -546,6 +550,7 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
+                
                 cell.statusLabel.text = @"已完成";
                 cell.statusLabel.textColor = rgb(42, 155, 234);
             } else {
@@ -655,6 +660,17 @@
                         cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
                     }
                     cell.lineView.hidden = true;
+                    if (_isZmxyAuth.integerValue == 2) {
+                        cell.statusLabel.text = @"已完成";
+                        cell.statusLabel.textColor = rgb(42, 155, 234);
+                    } else if(_isZmxyAuth.integerValue == 1){
+                        cell.statusLabel.text = @"认证中";
+                        cell.statusLabel.textColor = rgb(159, 160, 162);
+                    }else if(_isZmxyAuth.integerValue == 3){
+                        
+                        cell.statusLabel.text = @"未完成";
+                        cell.statusLabel.textColor = rgb(159, 160, 162);
+                    }
                     return cell;
                 default:
                     break;
@@ -669,7 +685,13 @@
 {
     if (indexPath.row == 5||indexPath.row == 6) {
         
-        [self clickCell:indexPath.row];
+        if ([_product_id isEqualToString:@"P001005"]&&indexPath.row==5&&_nextStep.integerValue<5&&_nextStep.integerValue>0) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_subTitleArr[_nextStep.integerValue-1]];
+            return;
+        }else{
+        
+            [self clickCell:indexPath.row];
+        }
         
     }else{
     
@@ -1070,9 +1092,7 @@
             
             if (_isZmxyAuth.integerValue == 2||processFlot ==1) {
                 
-//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
-                SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
-                [self.navigationController pushViewController:controller animated:YES];
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                 return;
             }else{
                 SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
