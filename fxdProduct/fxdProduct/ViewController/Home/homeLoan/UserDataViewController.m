@@ -507,7 +507,7 @@
         return cell;
     }else {
         
-        if ([_product_id isEqualToString:@"P001002"]) {
+        if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001004"]) {
 
             if (indexPath.row == 5||indexPath.row == 6) {
                 if (_isDisplay) {
