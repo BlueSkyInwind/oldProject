@@ -11,6 +11,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDKUI.h>
 #import "UserDataViewController.h"
+#import "RTRootNavigationController.h"
 @interface FXDWebViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate>
 {
     UIProgressView *progressView;
@@ -163,27 +164,18 @@
         
         NSLog(@"=========%@",[UIApplication sharedApplication].windows);
     
-//        for (UIViewController* vc in self.navigationController.viewControllers) {
-//            
-//            if ([vc isKindOfClass:[UserDataViewController class]]) {
-//
-//                [self.navigationController popToViewController:vc animated:YES];
-//
-//            }
-//        }
-       
-//        [self.navigationController popToRootViewControllerAnimated:YES];
+        for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+            
+            if ([vc isKindOfClass:[UserDataViewController class]]) {
+
+                [self.navigationController popToViewController:vc animated:YES];
+
+            }
+        }
         
-        [self.navigationController popViewControllerAnimated:YES];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserProfileSuccess" object:nil userInfo:nil];
+//        [self.navigationController popViewControllerAnimated:YES];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserProfileSuccess" object:nil userInfo:nil];
         
-//        for (UIViewController *vc in self.navigationController.viewControllers) {
-//            if ([vc isKindOfClass:[UserDataViewController class]]) {
-//                
-//                [self.navigationController popToViewController:vc animated:YES];
-//
-//            }
-//        }
     }else{
     
         decisionHandler(WKNavigationActionPolicyAllow);
