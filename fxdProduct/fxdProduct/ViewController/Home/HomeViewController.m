@@ -82,10 +82,8 @@
     //    [self setMessageBtn];
     [self setNavQRRightBar];
     [self fatchAdv];
-    
-    
-}
 
+}
 
 #pragma mark - 获取首页产品列表
 -(void)getHomeProductList{

@@ -150,7 +150,6 @@
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
     
-    
     NSURLRequest *request = navigationAction.request;
     NSLog(@"=========%@",request.URL.absoluteString);
     if ([request.URL.absoluteString hasSuffix:@"main.html"]) {
@@ -176,6 +175,7 @@
             }
         }
     }
+    
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
