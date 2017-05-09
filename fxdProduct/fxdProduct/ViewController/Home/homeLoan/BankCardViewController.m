@@ -37,6 +37,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     ReturnMsgBaseClass *_codeParse;
     UserCardResult *_userCardModel;
     NSString *_bankCodeNUm;
+    NSString *_bankNum;
     NSInteger _cardFlag;
     NSInteger defaultBankIndex;
     BOOL _btnStatus;
@@ -51,6 +52,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     [self addBackItem];
     
     _bankCodeNUm = @"";
+    _bankNum = @"";
     defaultBankIndex = -1;
     self.navigationItem.title =@"银行卡";
     placeArray3 = @[@"接受到账的银行卡",@"卡号",@"预留手机号",@"验证码"];
@@ -359,10 +361,14 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         //        weakSelf.bankImageView.image = result.image;
         //        weakSelf.bankNumView.text = result.bankCardNumber;
         
-        _bankCodeNUm = result.bankCardNumber;
-        _bankCodeNUm = [_bankCodeNUm stringByReplacingOccurrencesOfString:@" " withString:@""];
-        _bankCodeNUm = [self changeStr:_bankCodeNUm];
-        [dataListAll3 replaceObjectAtIndex:1 withObject:_bankCodeNUm];
+//        _bankCodeNUm = result.bankCardNumber;
+//        _bankCodeNUm = [_bankCodeNUm stringByReplacingOccurrencesOfString:@" " withString:@""];
+//        _bankCodeNUm = [self changeStr:_bankCodeNUm];
+        
+        _bankNum = result.bankCardNumber;
+        _bankNum = [_bankNum stringByReplacingOccurrencesOfString:@" " withString:@""];
+        _bankNum = [self changeStr:_bankNum];
+        [dataListAll3 replaceObjectAtIndex:1 withObject:_bankNum];
         DLog(@"银行卡扫描可信度 -- %@",[NSString stringWithFormat:@"confidence:%.2f", result.bankCardconfidence]);
         [weakSelf.tableView reloadData];
         
@@ -458,6 +464,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         case 200:
         {
             DLog(@"%@",placeArray3[0]);
+            DLog(@"%@",_bankModel);
             HomeBankCardViewController *homebankVC = [HomeBankCardViewController new];
             homebankVC.bankModel = _bankModel;
             homebankVC.delegate = self;
@@ -480,7 +487,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             _backTimeBtn = sender;
             if ([dataListAll3[0] length] < 1) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择银行卡"];
-            }else if ([_bankCodeNUm length] < 1 || _bankCodeNUm == nil){
+            }else if ([_bankNum length] < 1 || _bankNum == nil){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请重新选择银行卡类型"];
             }else if ([dataListAll3[1] length]<16){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的卡号"];
@@ -537,7 +544,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 - (IBAction)sureBtn:(id)sender {
     if ([dataListAll3[0] length] < 1) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择银行卡"];
-    }else if ([_bankCodeNUm length] < 1 || _bankCodeNUm == nil){
+    }else if ([_bankNum length] < 1 || _bankNum == nil){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请重新选择银行卡类型"];
     }else if ([dataListAll3[1] length]<16){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的卡号"];
@@ -646,7 +653,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                                     //                                    cardInfo.cardIdentifier = cardResult.id_;
                                     //                                    _selectCard = cardInfo;
                                     [dataListAll3 replaceObjectAtIndex:1 withObject:cardResult.card_no_];
-                                    _bankCodeNUm = cardResult.card_bank_;
+                                    _bankNum = cardResult.card_bank_;
                                     [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",j]];
                                     [dataListAll3 replaceObjectAtIndex:0 withObject:banlist.desc];
                                     [dataListAll3 replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%@",cardResult.bank_reserve_phone_]];

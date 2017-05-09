@@ -546,59 +546,60 @@
                     return cell;
                 }
             }
-            DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
-                
-                cell.statusLabel.text = @"已完成";
-                cell.statusLabel.textColor = rgb(42, 155, 234);
-            } else {
-                cell.statusLabel.text = @"未完成";
-                cell.statusLabel.textColor = rgb(159, 160, 162);
-            }
-            switch (indexPath.row) {
-                case 1:
-                {
+            
+                DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
                     
-                    cell.iconImage.image = [UIImage imageNamed:@"UserData1"];
-                    cell.titleLable.text = @"个人信息";
-                    cell.subTitleLabel.text = @"完善您的个人信息";
-                    
-                    return cell;
+                    cell.statusLabel.text = @"已完成";
+                    cell.statusLabel.textColor = rgb(42, 155, 234);
+                } else {
+                    cell.statusLabel.text = @"未完成";
+                    cell.statusLabel.textColor = rgb(159, 160, 162);
                 }
-                    break;
-                case 2:
-                {
-                    cell.iconImage.image = [UIImage imageNamed:@"UserData2"];
-                    cell.titleLable.text = @"联系人信息";
-                    cell.subTitleLabel.text = @"完善您的联系人信息";
-                    return cell;
-                }
-                    break;
-                case 3:
-                {
-                    cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
-                    cell.titleLable.text = @"职业信息";
-                    cell.subTitleLabel.text = @"完善您的职业信息";
-                    return cell;
-                }
-                    break;
-                case 4:
-                {
-                    cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
-                    cell.titleLable.text = @"第三方认证";
-                    cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
-                    if (UI_IS_IPHONE5) {
-                        cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
+                switch (indexPath.row) {
+                    case 1:
+                    {
+                        
+                        cell.iconImage.image = [UIImage imageNamed:@"UserData1"];
+                        cell.titleLable.text = @"个人信息";
+                        cell.subTitleLabel.text = @"完善您的个人信息";
+                        
+                        return cell;
                     }
-                    //                    cell.lineView.hidden = true;
-                    return cell;
+                        break;
+                    case 2:
+                    {
+                        cell.iconImage.image = [UIImage imageNamed:@"UserData2"];
+                        cell.titleLable.text = @"联系人信息";
+                        cell.subTitleLabel.text = @"完善您的联系人信息";
+                        return cell;
+                    }
+                        break;
+                    case 3:
+                    {
+                        cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
+                        cell.titleLable.text = @"职业信息";
+                        cell.subTitleLabel.text = @"完善您的职业信息";
+                        return cell;
+                    }
+                        break;
+                    case 4:
+                    {
+                        cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
+                        cell.titleLable.text = @"第三方认证";
+                        cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
+                        if (UI_IS_IPHONE5) {
+                            cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
+                        }
+                        //                    cell.lineView.hidden = true;
+                        return cell;
+                    }
+                        break;
+                    default:
+                        break;
                 }
-                    break;
-                default:
-                    break;
-            }
             
         }else{
         
@@ -1072,11 +1073,17 @@
 //                    [self.navigationController pushViewController:controller animated:YES];
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                     return;
+                }else if(_isZmxyAuth.integerValue == 1){
+                
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您正在认证中，请勿重复认证!"];
+                    return;
+                    
                 }else{
                 
                     SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
                     [self.navigationController pushViewController:controller animated:YES];
                     return;
+                    
                 }
                 
 //                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"芝麻信用"];
@@ -1094,7 +1101,13 @@
                 
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                 return;
+            }else if(_isZmxyAuth.integerValue == 1){
+                
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您正在认证中，请勿重复认证!"];
+                return;
+                
             }else{
+            
                 SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
                 [self.navigationController pushViewController:controller animated:YES];
                 return;
@@ -1116,7 +1129,7 @@
 -(void)findZhimaCredit{
 
     NSDictionary *dic = @{@"juid":[Utility sharedUtility].userInfo.juid};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ZMXY_url,_findZhimaCredit_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ZhimaBack_url,_findZhimaCredit_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         FindZhimaCreditModel *model = [FindZhimaCreditModel yy_modelWithJSON:object];
         if ([model.authentic_status_ isEqualToString:@"2"]) {
             _nextStep = @"-1";
