@@ -651,9 +651,11 @@
         if (_selectRedPacket <= _repayListInfo.result.situations.firstObject.debt_service_fee) {
             _useredPacketAmount = _selectRedPacket;
             if (_repayListInfo.result.total_amount >= (_repayAmount - _selectRedPacket)) {
-                _useTotalAmount = fabs(_repayAmount - _selectRedPacket - _repayListInfo.result.total_amount);
+//                _useTotalAmount = fabs(_repayAmount - _selectRedPacket - _repayListInfo.result.total_amount);
+                _useTotalAmount = fabs(_repayAmount - _selectRedPacket);
                 _finalyRepayAmount = 0.0;
             } else {
+                
                 _useTotalAmount = _repayListInfo.result.total_amount;
                 _finalyRepayAmount = _repayAmount - _selectRedPacket - _repayListInfo.result.total_amount;
             }
