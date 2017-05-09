@@ -110,13 +110,12 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAC-u5-KvQ">
                     <rect key="frame" x="27" y="342" width="320" height="44"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="cbS-An-zZO"/>
                         <constraint firstAttribute="height" constant="44" id="riJ-rL-aVq"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                    <state key="normal" title="立即授权">
+                    <state key="normal" title="立即授权" backgroundImage="kuang_big">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
@@ -139,6 +138,7 @@
         </view>
     </objects>
     <resources>
+        <image name="kuang_big" width="340" height="50"/>
         <image name="zhimashouquan" width="375" height="103"/>
     </resources>
 </document>

@@ -36,15 +36,15 @@
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreement)];
     [self.agreementLabel addGestureRecognizer:tap1];
     
-    if ([self.productId isEqualToString:@"P001002"]) {
-        [self setUpProductCredit];
-    }
-    if ([self.productId isEqualToString:@"P001004"]) {
-        [self setUpProductQuickly];
-    }
-    if ([self.productId isEqualToString:@"P001005"]) {
-        [self setUpProductWhiteCollar];
-    }
+//    if ([self.productId isEqualToString:@"P001002"]) {
+//        [self setUpProductCredit];
+//    }
+//    if ([self.productId isEqualToString:@"P001004"]) {
+//        [self setUpProductQuickly];
+//    }
+//    if ([self.productId isEqualToString:@"P001005"]) {
+//        [self setUpProductWhiteCollar];
+//    }
     if ([_model.applyFlag isEqualToString:@"0002"] && [_model.applyAgain isEqualToString:@"1"]) {
         [self.sureBtn addTarget:self action:@selector(secondLoanMoney) forControlEvents:UIControlEventTouchUpInside];
     } else {
@@ -68,6 +68,15 @@
         
         if ([rateParse.flag isEqualToString:@"0000"]) {
             
+            if ([self.productId isEqualToString:@"P001002"]) {
+                [self setUpProductCredit];
+            }
+            if ([self.productId isEqualToString:@"P001004"]) {
+                [self setUpProductQuickly];
+            }
+            if ([self.productId isEqualToString:@"P001005"]) {
+                [self setUpProductWhiteCollar];
+            }
             
             if ([_productId isEqualToString:@"P001002"]) {
                 NSString *str = [NSString stringWithFormat:@"工薪贷产品：\n纯信用，无抵押借款，用户可提前结清不额外收费\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
@@ -134,8 +143,8 @@
 - (void)setUpProductCredit
 {
     self.productLogo.image = [UIImage imageNamed:@"icon_Product1"];
-    self.productTitle.text = @"工薪贷";
-//    self.productTitle.text = _rateModel.result.name_;
+//    self.productTitle.text = @"工薪贷";
+    self.productTitle.text = _rateModel.result.name_;
     if ([_model.applyFlag isEqualToString:@"0002"]) {
         NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"当前额度:"];
         NSString *amountStr = [NSString stringWithFormat:@"%@元",_model.pre_prove_amt_];
@@ -148,17 +157,27 @@
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
     }else {
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"额度:1000-5000元"];
+        
+        NSString *str = [NSString stringWithFormat:@"额度:%ld-%ld元",_rateModel.result.principal_bottom_,_rateModel.result.principal_top_];
+        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:str];
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, 9)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(3, 10)];
+        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, attriStr.length-4)];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(3, attriStr.length-4)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
+        
+//        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"额度:1000-5000元"];
+//        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
+//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
+//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, 9)];
+//        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(3, 10)];
+//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
+//        self.amountLabel.attributedText = attriStr;
     }
     
-//    self.timeLabel.text = [NSString stringWithFormat:@"期限:%@",_rateModel.result.ext_attr_.period_desc_];
-    self.timeLabel.text = @"期限:5-50周";
+    self.timeLabel.text = [NSString stringWithFormat:@"期限:%ld-%ld%@",_rateModel.result.staging_bottom_,_rateModel.result.staging_top_,_rateModel.result.remark_];
+//    self.timeLabel.text = @"期限:5-50周";
     self.specialLabel.text = @"用户在申请工薪贷产品后不得同时继续申请其他产品";
 }
 
@@ -167,8 +186,8 @@
 - (void)setUpProductWhiteCollar
 {
     self.productLogo.image = [UIImage imageNamed:@"home10"];
-    self.productTitle.text = @"白领贷";
-//    self.productTitle.text = _rateModel.result.name_;
+//    self.productTitle.text = @"白领贷";
+    self.productTitle.text = _rateModel.result.name_;
     if ([_model.applyFlag isEqualToString:@"0002"]) {
         NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"当前额度:"];
         NSString *amountStr = [NSString stringWithFormat:@"%@元",_model.pre_prove_amt_];
@@ -181,17 +200,26 @@
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
     }else {
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"额度:1000-5000元"];
+        
+        NSString *str = [NSString stringWithFormat:@"额度:%ld-%ld元",_rateModel.result.principal_bottom_,_rateModel.result.principal_top_];
+        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:str];
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, 9)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(3, 10)];
+        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, attriStr.length-4)];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(3, attriStr.length-4)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
+//        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"额度:1000-3000元"];
+//        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
+//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
+//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, 9)];
+//        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(3, 10)];
+//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
+//        self.amountLabel.attributedText = attriStr;
     }
     
-//    self.timeLabel.text = [NSString stringWithFormat:@"期限:%@",_rateModel.result.ext_attr_.period_desc_];
-    self.timeLabel.text = @"期限:5-52周";
+    self.timeLabel.text = [NSString stringWithFormat:@"期限:%ld-%ld%@",_rateModel.result.staging_bottom_,_rateModel.result.staging_top_,_rateModel.result.remark_];
+//    self.timeLabel.text = @"期限:5-52周";
     self.specialLabel.text = @"用户在申请白领贷产品后不得同时继续申请其他产品";
 }
 
