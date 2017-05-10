@@ -740,7 +740,7 @@
     if (_useredPacketAmount > 0) {
         paramDic = @{@"staging_ids_":staging_ids,
                      @"account_card_id_":_selectCard.cardIdentifier,
-                     @"total_amount_":@(_repayListInfo.result.total_amount),
+                     @"total_amount_":@(_useTotalAmount),
                      @"repay_amount_":@(_finalyRepayAmount),
                      @"repay_total_":@(_repayAmount),
                      @"save_amount_":@(_save_amount),
@@ -752,7 +752,7 @@
     }else {
         paramDic = @{@"staging_ids_":staging_ids,
                      @"account_card_id_":_selectCard.cardIdentifier,
-                     @"total_amount_":@(_repayListInfo.result.total_amount),
+                     @"total_amount_":@(_useTotalAmount),
                      @"repay_amount_":@(_finalyRepayAmount),
                      @"repay_total_":@(_repayAmount),
                      @"save_amount_":@(_save_amount),
@@ -760,6 +760,8 @@
                      @"request_type_":save_amountTemp,
                      };
     }
+    
+    DLog(@"========%@",paramDic);
     
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_RepayOrSettleWithPeriod_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object[@"msg"]);
