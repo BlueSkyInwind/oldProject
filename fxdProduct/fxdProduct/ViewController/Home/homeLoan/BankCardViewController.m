@@ -20,7 +20,6 @@
 #import <MGBaseKit/MGBaseKit.h>
 #import <MGBankCard/MGBankCard.h>
 
-#define cyancColor rgb(0, 170, 238)
 #define redColor rgb(252, 0, 6)
 
 @interface BankCardViewController ()<UITableViewDataSource,UITableViewDelegate,
@@ -63,7 +62,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     [self.agreeBtn setBackgroundImage:[UIImage imageNamed:@"trick"] forState:UIControlStateNormal];
     for (int i=0; i<10; i++) {
         [dataListAll3 addObject:@""];
-        [dataColorAll3 addObject:cyancColor];
+        [dataColorAll3 addObject:UI_MAIN_COLOR];
     }
     //    [_sureBtn setEnabled:NO];
     
@@ -284,7 +283,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             //                [dataColorAll3 replaceObjectAtIndex:0 withObject:redColor];
         }else{
             [dataListAll3 replaceObjectAtIndex:0 withObject:textField.text];
-            [dataColorAll3 replaceObjectAtIndex:0 withObject:cyancColor];
+            [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
         }
         
     }
@@ -296,7 +295,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             //                [dataColorAll3 replaceObjectAtIndex:1 withObject:redColor];
         }else{
             [dataListAll3 replaceObjectAtIndex:1 withObject:textField.text];
-            [dataColorAll3 replaceObjectAtIndex:1 withObject:cyancColor];
+            [dataColorAll3 replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
         }
         
     }
@@ -307,7 +306,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             //                [dataColorAll3 replaceObjectAtIndex:3 withObject:redColor];
         }else{
             [dataListAll3 replaceObjectAtIndex:3 withObject:textField.text];
-            [dataColorAll3 replaceObjectAtIndex:3 withObject:cyancColor];
+            [dataColorAll3 replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
         
     }
@@ -320,7 +319,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 //    //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
 //    _bankCodeNUm = bankNum;
 //    [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",(long)SectionRow]];
-//    [dataColorAll3 replaceObjectAtIndex:0 withObject:cyancColor];
+//    [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
 //    [_tableView reloadData];
 //}
 
@@ -330,7 +329,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
     _bankCodeNUm = bankInfo.code;
     [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",(long)sectionRow]];
-    [dataColorAll3 replaceObjectAtIndex:0 withObject:cyancColor];
+    [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
     [_tableView reloadData];
 }
 #pragma mark - 银行卡扫描
@@ -419,8 +418,8 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                 //                [dataListAll3 replaceObjectAtIndex:4 withObject:keyStr];
                 _bankCodeNUm = bankList.code;
                 //                [dataListAll3 replaceObjectAtIndex:0 withObject:bankStr];
-                [dataColorAll3 replaceObjectAtIndex:0 withObject:cyancColor];
-                [dataColorAll3 replaceObjectAtIndex:1 withObject:cyancColor];
+                [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
+                [dataColorAll3 replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
                 isBreak = true;
                 break;
             }

@@ -30,7 +30,7 @@
     [Tool setCorner:self.sureBtn borderColor:[UIColor clearColor]];
     NSString *str = self.agreementLabel.text;
     NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
-    [ssa addAttribute:NSForegroundColorAttributeName value:rgb(0, 170, 238) range:NSMakeRange(3,13)];
+    [ssa addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,13)];
     self.agreementLabel.attributedText = ssa;
     self.agreementLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreement)];
@@ -153,7 +153,7 @@
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 5)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(5, amountStr.length-1)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(5, amountStr.length)];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5, amountStr.length)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
     }else {
@@ -163,7 +163,7 @@
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, attriStr.length-4)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(3, attriStr.length-4)];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, attriStr.length-4)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
         
@@ -171,7 +171,7 @@
 //        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
 //        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
 //        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, 9)];
-//        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(3, 10)];
+//        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, 10)];
 //        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
 //        self.amountLabel.attributedText = attriStr;
     }
@@ -196,7 +196,7 @@
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 5)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(5, amountStr.length-1)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(5, amountStr.length)];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5, amountStr.length)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
     }else {
@@ -206,14 +206,14 @@
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, attriStr.length-4)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(3, attriStr.length-4)];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, attriStr.length-4)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
 //        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"额度:1000-3000元"];
 //        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
 //        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
 //        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, 9)];
-//        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(3, 10)];
+//        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, 10)];
 //        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
 //        self.amountLabel.attributedText = attriStr;
     }
@@ -234,7 +234,7 @@
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 5)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(5, amountStr.length-1)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(5, amountStr.length)];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5, amountStr.length)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
     }else {
@@ -244,7 +244,7 @@
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, amountStr.length - 1)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(18, 148, 255) range:NSMakeRange(3, amountStr.length)];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, amountStr.length)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
     }

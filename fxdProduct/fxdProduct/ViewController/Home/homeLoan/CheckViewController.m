@@ -277,7 +277,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkSuccess.weekBtn.hidden = true;
                 checkSuccess.textFiledWeek.hidden = true;
                 checkSuccess.purposeTextField.text = @"请选择借款用途";
-                [Tool setCorner:checkSuccess.purposeView borderColor:rgb(0, 170, 238)];
+                [Tool setCorner:checkSuccess.purposeView borderColor:UI_MAIN_COLOR];
                 checkSuccess.purposeTextField.delegate = self;
            
                 checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
@@ -303,11 +303,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             }else {
                 checkSuccess.textFiledWeek.text = @"请选择借款周期";
                 checkSuccess.purposeTextField.text = @"请选择借款用途";
-                [Tool setCorner:checkSuccess.bgView borderColor:rgb(0, 170, 238)];
-                [Tool setCorner:checkSuccess.purposeView borderColor:rgb(0, 170, 238)];
+                [Tool setCorner:checkSuccess.bgView borderColor:UI_MAIN_COLOR];
+                [Tool setCorner:checkSuccess.purposeView borderColor:UI_MAIN_COLOR];
                 NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
                 [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-                [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
+                [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-2, 2)];
                 checkSuccess.weekMoney.attributedText = attStr;
                 checkSuccess.allMoney.text = @"0元";
                 checkSuccess.textFiledWeek.delegate = self;
@@ -357,7 +357,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"产品类型错误"];
             }
             
-            [attributeStr yy_setTextHighlightRange:range color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000] backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+            [attributeStr yy_setTextHighlightRange:range color:UI_MAIN_COLOR backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                 
                 [self getUserInfoData:^{
                     if ([_userStateModel.platform_type isEqualToString:@"0"]) {
@@ -616,7 +616,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkSuccess.textFiledWeek.text = @"请选择周期";
                 NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
                 [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-                [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
+                [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-2, 2)];
                 checkSuccess.weekMoney.attributedText = attStr;
                 checkSuccess.allMoney.text = @"0元";
             }
@@ -965,7 +965,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
             NSString *amountStr = [NSString stringWithFormat:@"%.2f元",(_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate)/_userSelectNum.intValue];
             [attStr yy_appendString:amountStr];
-            [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-amountStr.length, amountStr.length)];
+            [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-amountStr.length, amountStr.length)];
             checkSuccess.weekMoney.attributedText = attStr;
             checkSuccess.allMoney.text =[NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate];
         }
@@ -974,20 +974,20 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             checkSuccess.textFiledWeek.text = @"请选择周期";
             NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
             [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-            [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
+            [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-2, 2)];
             checkSuccess.weekMoney.attributedText = attStr;
             checkSuccess.allMoney.text = @"0元";
         }
     }
     if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
         if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]) {
-            checkSuccess.sureBtn.backgroundColor = rgb(0, 127, 254);
+            checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
         }else{
             checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
         }
     }else if ([_userStateModel.product_id isEqualToString:@"P001004"]){
         if (![_purposeSelect isEqualToString:@"0"]) {
-            checkSuccess.sureBtn.backgroundColor = rgb(0, 127, 254);
+            checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
         }else{
             checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
         }
@@ -1150,12 +1150,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"到期还款:"];
                     [attStr yy_appendString:amountText];
                     [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-                    [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(4, amountText.length)];
+                    [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4, amountText.length)];
                     checkSuccess.weekMoney.attributedText = attStr;
                 }else {
                     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
                     [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-                    [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
+                    [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-2, 2)];
                     checkSuccess.weekMoney.attributedText = attStr;
                 }
                 
@@ -1173,9 +1173,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 NSString *attributeStr = [NSString stringWithFormat:@"实际到账%@元,详情见费用说明",factMoneyStr];
                 NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:attributeStr];
                 one.yy_font = [UIFont systemFontOfSize:16];
-                [one addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000] range:NSMakeRange(4,factMoneyStr.length)];
+                [one addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,factMoneyStr.length)];
                 [one yy_setTextHighlightRange:NSMakeRange(one.length-4, 4)
-                                        color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
+                                        color:UI_MAIN_COLOR
                               backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
                                     tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
 //                                        ExpressViewController *expressVC = [[ExpressViewController alloc] init];

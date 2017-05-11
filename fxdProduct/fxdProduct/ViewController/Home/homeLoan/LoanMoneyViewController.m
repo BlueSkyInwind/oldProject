@@ -254,7 +254,7 @@
                 NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"《银行自动转账授权书》、《三方借款协议》"];
                 one.yy_font = [UIFont systemFontOfSize:13];
                 [one yy_setTextHighlightRange:NSMakeRange(0, 11)
-                                        color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
+                                        color:UI_MAIN_COLOR
                               backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
                                     tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                                         DLog(@"授权书点击");
@@ -279,7 +279,7 @@
 //                                        [self.navigationController pushViewController:autoTransfer animated:true];
                                     }];
                 [one yy_setTextHighlightRange:NSMakeRange(12, 8)
-                                        color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
+                                        color:UI_MAIN_COLOR
                               backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                                   DLog(@"三方协议");
                                   NSDictionary *paramDic;
@@ -309,7 +309,7 @@
                                   }];
                               }];
                 moenyViewing.agreeMentLabel.attributedText = one;
-                moenyViewing.agreeMentLabel.textColor = [UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000];
+                moenyViewing.agreeMentLabel.textColor = UI_MAIN_COLOR;
                 moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentLeft;
             }
             

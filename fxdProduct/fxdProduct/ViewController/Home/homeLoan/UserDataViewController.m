@@ -32,7 +32,6 @@
 #import "SesameCreditViewController.h"
 #import "FindZhimaCreditModel.h"
 
-#define cyancColor rgb(0, 170, 238)
 
 @interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate>
 {
@@ -75,7 +74,7 @@
     [self addBackItem];
     
     [self configTableview];
-    self.navigationController.navigationBar.barTintColor = rgb(18, 152, 234);
+    self.navigationController.navigationBar.barTintColor = UI_MAIN_COLOR;
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     topView = [[UIView alloc] init];
     [self.view addSubview:topView];
@@ -99,11 +98,11 @@
     } else {
         if (_nextStep.integerValue == -1) {
             processFlot = 1;
-            [_applyBtn setBackgroundColor:rgb(16, 129, 249)];
+            [_applyBtn setBackgroundColor:UI_MAIN_COLOR];
             _applyBtn.enabled = true;
         } else {
             processFlot = 1;
-            [_applyBtn setBackgroundColor:rgb(16, 129, 249)];
+            [_applyBtn setBackgroundColor:UI_MAIN_COLOR];
             _applyBtn.enabled = true;
         }
         
@@ -150,7 +149,7 @@
     self.tableView.mj_header = header;
     
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.53)];
-    headView.backgroundColor = rgb(18, 152, 234);
+    headView.backgroundColor = UI_MAIN_COLOR;
     UIImageView *processBack = [[UIImageView alloc] init];
     [self setCornerWithoutRadius:processBack];
     processBack.image = [UIImage imageNamed:@"process"];
@@ -553,7 +552,7 @@
                 if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
                     
                     cell.statusLabel.text = @"已完成";
-                    cell.statusLabel.textColor = rgb(42, 155, 234);
+                    cell.statusLabel.textColor = UI_MAIN_COLOR;
                 } else {
                     cell.statusLabel.text = @"未完成";
                     cell.statusLabel.textColor = rgb(159, 160, 162);
@@ -783,7 +782,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    topView.backgroundColor = rgb(18, 152, 234);
+    topView.backgroundColor = UI_MAIN_COLOR;
     topView.frame = CGRectMake(0, 0, _k_w, -scrollView.contentOffset.y);
 }
 
@@ -891,7 +890,7 @@
     _alertView.lbltitle.text = @"\n是否愿意家人知晓";
     _alertView.lbltitle.textColor = rgb(95, 95, 95);
     [_alertView.DisSureBtn setTitleColor:rgb(142, 142, 142) forState:UIControlStateNormal];
-    [_alertView.sureBtn setTitleColor:cyancColor forState:UIControlStateNormal];
+    [_alertView.sureBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
     _alertView.DisSureBtn.tag = 11;
     _alertView.sureBtn.tag = 10;
     [_alertView.DisSureBtn setTitle:@"否" forState:UIControlStateNormal];
