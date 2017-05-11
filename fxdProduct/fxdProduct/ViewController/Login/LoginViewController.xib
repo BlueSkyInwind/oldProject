@@ -197,10 +197,11 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXS-0e-xoJ">
                     <rect key="frame" x="17" y="492" width="341" height="51"/>
+                    <color key="backgroundColor" red="0.0" green="0.53333333329999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="51" id="ukb-Gu-xvW"/>
                     </constraints>
-                    <state key="normal" image="Sign-Button01">
+                    <state key="normal" title="登录">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -266,7 +267,6 @@
         <image name="1_Signin_icon_01" width="24" height="24"/>
         <image name="1_Signin_icon_02" width="24" height="24"/>
         <image name="1_Signin_icon_03" width="24" height="24"/>
-        <image name="Sign-Button01" width="341" height="51"/>
         <image name="Sign-in-logo" width="115" height="115"/>
         <image name="login_line" width="1" height="25"/>
     </resources>

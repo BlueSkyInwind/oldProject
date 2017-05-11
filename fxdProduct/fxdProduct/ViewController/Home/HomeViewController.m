@@ -544,7 +544,6 @@
             webView.urlStr = files.link_url_;
             [self.navigationController pushViewController:webView animated:true];
         }
-        
     }
 }
 
@@ -710,7 +709,6 @@
                         [self.navigationController pushViewController:payLoanview animated:true];
                     }];
                 }
-                
                 if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001002"]) {
 //                    WriteInfoViewController *writeVC = [WriteInfoViewController new];
 //                    [self.navigationController pushViewController:writeVC animated:YES];

@@ -84,7 +84,8 @@
     [Tool setCorner:self.userIDView borderColor:UI_MAIN_COLOR];
     [Tool setCorner:self.passView borderColor:UI_MAIN_COLOR];
     [Tool setCorner:self.codeView borderColor:UI_MAIN_COLOR];
-    
+    [Tool setCorner:self.loginBtn borderColor:UI_MAIN_COLOR];
+
     self.moblielcon.image = [[UIImage imageNamed:@"1_Signin_icon_01"] imageWithTintColor:UI_MAIN_COLOR];
     self.passIcon.image = [[UIImage imageNamed:@"1_Signin_icon_03"] imageWithTintColor:UI_MAIN_COLOR];
     self.smsIcon.image = [[UIImage imageNamed:@"1_Signin_icon_02"] imageWithTintColor:UI_MAIN_COLOR];

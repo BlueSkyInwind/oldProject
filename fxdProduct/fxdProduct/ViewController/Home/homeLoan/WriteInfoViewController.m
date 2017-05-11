@@ -42,13 +42,11 @@
 #import "LoanSureFirstViewController.h"
 #import "CareerParse.h"
 
-
 #define FirstComponent 0
 #define SubComponent 1
 #define ThirdComponent 2
 #define UI_MAIN_COLOR rgb(0, 170, 238)
 #define redColor rgb(252, 0, 6)
-
 
 
 @interface WriteInfoViewController ()<UITableViewDataSource,UITableViewDelegate,
