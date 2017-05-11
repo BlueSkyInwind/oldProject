@@ -20,7 +20,6 @@
 #define FirstComponent 0
 #define SubComponent 1
 #define ThirdComponent 2
-#define CellBGColorNormal rgb(0, 170, 238)
 #define CellBGColorRed rgb(252, 0, 6)
 
 @interface ProfessionViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
@@ -83,7 +82,7 @@
     
     for (int i = 0; i < 6; i++) {
         [dataListAll addObject:@""];
-        [dataColor addObject:CellBGColorNormal];
+        [dataColor addObject:UI_MAIN_COLOR];
     }
     index = 0;
     _toolbarCancelDone.hidden = true;
@@ -504,7 +503,7 @@
         }
         //        [dataListAll replaceObjectAtIndex:7 withObject:loString];
         [dataListAll replaceObjectAtIndex:3 withObject:localString];
-        [dataColor replaceObjectAtIndex:3 withObject:CellBGColorNormal];
+        [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         //第一个省的所有区
         [_subPickerArray removeAllObjects];
         RegionSub *regisonSubModel = _reginBase.result[0];
@@ -526,7 +525,7 @@
         if ([dataListAll[2] isEqualToString:@""]) {
             [dataListAll replaceObjectAtIndex:2 withObject:_dataDicModel.result.firstObject.desc_];
         }
-        [dataColor replaceObjectAtIndex:2 withObject:CellBGColorNormal];
+        [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
     }
     
     [_tableView reloadData];
@@ -794,7 +793,7 @@
             [dataColor replaceObjectAtIndex:0 withObject:CellBGColorRed];
         }else{
             [dataListAll replaceObjectAtIndex:0 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:0 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 12) {
@@ -803,7 +802,7 @@
             [dataColor replaceObjectAtIndex:1 withObject:CellBGColorRed];
         }else{
             [dataListAll replaceObjectAtIndex:1 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:1 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 13) {
@@ -812,7 +811,7 @@
             [dataColor replaceObjectAtIndex:2 withObject:CellBGColorRed];
         }else{
             [dataListAll replaceObjectAtIndex:2 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:2 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 14) {
@@ -821,7 +820,7 @@
             [dataColor replaceObjectAtIndex:3 withObject:CellBGColorRed];
         }else{
             [dataListAll replaceObjectAtIndex:3 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:3 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 15) {
@@ -831,7 +830,7 @@
             [dataColor replaceObjectAtIndex:4 withObject:CellBGColorRed];
         }else{
             [dataListAll replaceObjectAtIndex:4 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:4 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 2) {
@@ -840,7 +839,7 @@
             [dataColor replaceObjectAtIndex:dataColor.count-1 withObject:CellBGColorRed];
         }else{
             [dataListAll replaceObjectAtIndex:dataColor.count-1 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:dataColor.count-1 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:dataColor.count-1 withObject:UI_MAIN_COLOR];
         }
     }
     [_tableView reloadData];

@@ -19,7 +19,7 @@
 #define FirstComponent 0
 #define SubComponent 1
 #define ThirdComponent 2
-#define cyancColor rgb(0, 170, 238)
+#define UI_MAIN_COLOR rgb(0, 170, 238)
 #define redColor rgb(252, 0, 6)
 
 @interface BasicInfoViewController () <UITableViewDataSource,UITableViewDelegate,ColledgeViewDelegate,
@@ -78,7 +78,7 @@ ContactViewControllerDelegate>
     for(int i=0 ; i<15 ; i++)
     {
         [dataListAll addObject:@""];
-        [dataColor addObject:cyancColor];
+        [dataColor addObject:UI_MAIN_COLOR];
     }
     [dataColor replaceObjectAtIndex:0 withObject:[UIColor grayColor]];
     [dataColor replaceObjectAtIndex:1 withObject:[UIColor grayColor]];
@@ -186,7 +186,7 @@ ContactViewControllerDelegate>
             [dataColor replaceObjectAtIndex:3 withObject:redColor];
         }else{
             [dataListAll replaceObjectAtIndex:3 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:3 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 104) {
@@ -197,7 +197,7 @@ ContactViewControllerDelegate>
             [dataColor replaceObjectAtIndex:4 withObject:redColor];
         }else{
             [dataListAll replaceObjectAtIndex:4 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:4 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 105) {
@@ -206,7 +206,7 @@ ContactViewControllerDelegate>
             [dataColor replaceObjectAtIndex:5 withObject:redColor];
         }else{
             [dataListAll replaceObjectAtIndex:5 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:5 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:5 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 106) {
@@ -217,7 +217,7 @@ ContactViewControllerDelegate>
             
         }else{
             [dataListAll replaceObjectAtIndex:6 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:6 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:6 withObject:UI_MAIN_COLOR];
             
         }
     }
@@ -229,7 +229,7 @@ ContactViewControllerDelegate>
             
         }else{
             [dataListAll replaceObjectAtIndex:7 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:7 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:7 withObject:UI_MAIN_COLOR];
             
         }
     }
@@ -239,7 +239,7 @@ ContactViewControllerDelegate>
             [dataColor replaceObjectAtIndex:8 withObject:redColor];
         }else{
             [dataListAll replaceObjectAtIndex:8 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:8 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:8 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 109) {
@@ -249,7 +249,7 @@ ContactViewControllerDelegate>
             
         }else{
             [dataListAll replaceObjectAtIndex:9 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:9 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:9 withObject:UI_MAIN_COLOR];
             
         }
     }
@@ -261,7 +261,7 @@ ContactViewControllerDelegate>
             
         }else{
             [dataListAll replaceObjectAtIndex:10 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:10 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:10 withObject:UI_MAIN_COLOR];
             
         }
     }
@@ -373,7 +373,7 @@ ContactViewControllerDelegate>
         
         for(int i=2 ; i<15 ; i++)
         {
-            [dataColor replaceObjectAtIndex:i withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:i withObject:UI_MAIN_COLOR];
         }
 
         
@@ -697,7 +697,7 @@ ContactViewControllerDelegate>
 -(void)ColledgeDelegateNString:(NSString *)CollString andIndex:(NSIndexPath *)indexPath
 {
     [dataListAll replaceObjectAtIndex:2 withObject:CollString];
-    //    [dataColor replaceObjectAtIndex:2 withObject:cyancColor];
+    //    [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
     [_myTable reloadData];
 }
 - (IBAction)cancleBtn:(id)sender {
@@ -738,7 +738,7 @@ ContactViewControllerDelegate>
         
         [dataListAll replaceObjectAtIndex:11 withObject:loString];
         [dataListAll replaceObjectAtIndex:3 withObject:localString];
-        [dataColor replaceObjectAtIndex:3 withObject:cyancColor];
+        [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         //第一个省的所有区
         [_subPickerArray removeAllObjects];
         RegionSub *regisonSubModel = _reginBase.result[0];
@@ -762,14 +762,14 @@ ContactViewControllerDelegate>
         {
             [dataListAll replaceObjectAtIndex:5 withObject:@"父母"];
         }
-        [dataColor replaceObjectAtIndex:5 withObject:cyancColor];
+        [dataColor replaceObjectAtIndex:5 withObject:UI_MAIN_COLOR];
     }
     if (_pickerTag == 108) {
         if([dataListAll[8] isEqualToString:@""])
         {
             [dataListAll replaceObjectAtIndex:8 withObject:@"同事"];
         }
-        [dataColor replaceObjectAtIndex:8 withObject:cyancColor];
+        [dataColor replaceObjectAtIndex:8 withObject:UI_MAIN_COLOR];
     }
     
     [_myTable reloadData];
@@ -1007,7 +1007,7 @@ ContactViewControllerDelegate>
         if (flagInteger == 207) {
             if([CheckUtils checkUserName:name]){
                 [dataListAll replaceObjectAtIndex:6 withObject:name];
-                [dataColor replaceObjectAtIndex:6 withObject:cyancColor];
+                [dataColor replaceObjectAtIndex:6 withObject:UI_MAIN_COLOR];
             }else{
                 NSString *na = @"";
                 if (name) {
@@ -1020,12 +1020,12 @@ ContactViewControllerDelegate>
             
             [dataListAll replaceObjectAtIndex:7 withObject:[self formatString:telph]];
             
-            [dataColor replaceObjectAtIndex:7 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:7 withObject:UI_MAIN_COLOR];
         }
         if (flagInteger == 210) {
             if ([CheckUtils checkUserName:name]) {
                 [dataListAll replaceObjectAtIndex:9 withObject:name];
-                [dataColor replaceObjectAtIndex:9 withObject:cyancColor];
+                [dataColor replaceObjectAtIndex:9 withObject:UI_MAIN_COLOR];
             }else{
                 NSString *na = @"";
                 if (name) {
@@ -1039,7 +1039,7 @@ ContactViewControllerDelegate>
             
             [dataListAll replaceObjectAtIndex:10 withObject:[self formatString:telph]];
             
-            [dataColor replaceObjectAtIndex:10 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:10 withObject:UI_MAIN_COLOR];
         }
         
     }else{

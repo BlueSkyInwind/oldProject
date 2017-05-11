@@ -33,7 +33,7 @@
     // Do any additional setup after loading the view from its nib.
     
     for (UIView *view in self.fieldView) {
-        [Tool setCorner:view borderColor:RGBColor(0, 170, 238, 1)];
+        [Tool setCorner:view borderColor:UI_MAIN_COLOR];
     }
     if (_telText) {
          _phoneNumField.text = _telText;

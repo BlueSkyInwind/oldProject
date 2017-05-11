@@ -13,8 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [Tool setCorner:self.passView borderColor:rgb(0, 170, 238)];
-    [Tool setCorner:self.smsCodeView borderColor:rgb(0, 170, 238)];
+    [Tool setCorner:self.passView borderColor:UI_MAIN_COLOR];
+    [Tool setCorner:self.smsCodeView borderColor:UI_MAIN_COLOR];
     
 }
 

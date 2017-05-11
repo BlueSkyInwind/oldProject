@@ -22,6 +22,7 @@
 #import "ReturnMsgBaseClass.h"
 #import "testView.h"
 #import "FXDWebViewController.h"
+#import "UIImage+Color.h"
 
 
 @interface MoreViewController () <UITableViewDataSource,UITableViewDelegate,MakeSureBtnDelegate,UIViewControllerTransitioningDelegate>
@@ -120,8 +121,7 @@
     NextViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (indexPath.section == 0) {
         
-        cell.imgView.image=[UIImage imageNamed:imgAry[indexPath.row]];
-        cell.lblTitle.text=titleAry[indexPath.row];
+        cell.imgView.image=[[UIImage imageNamed:imgAry[indexPath.row]] imageWithTintColor:UI_MAIN_COLOR];      cell.lblTitle.text=titleAry[indexPath.row];
         if (indexPath.row==imgAry.count-1) {
             cell.lineView.hidden=YES;
         }
@@ -241,7 +241,7 @@
         _alertView.delegat = self;
         _alertView.lbltitle.text = @"\n您确定要退出登录吗？";
         _alertView.lbltitle.textColor = [UIColor blackColor];
-        [_alertView.sureBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [_alertView.sureBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
         [_alertView show];
         
         

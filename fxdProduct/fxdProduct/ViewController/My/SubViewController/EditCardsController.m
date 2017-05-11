@@ -156,8 +156,8 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LabelCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    [Tool setCorner:cell.bgView borderColor:rgb(0, 170, 238)];
-    cell.textField.textColor=rgb(0, 170, 238);
+    [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
+    cell.textField.textColor=UI_MAIN_COLOR;
     if(indexPath.row==0)
     {
         cell.btnSecory.hidden=YES;

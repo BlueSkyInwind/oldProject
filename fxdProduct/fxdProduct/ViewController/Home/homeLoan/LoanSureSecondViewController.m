@@ -32,8 +32,8 @@
     self.navigationItem.title = @"借款确认";
     [self addBackItem];
     [Tool setCorner:self.sureBtn borderColor:[UIColor clearColor]];
-    [Tool setCorner:self.passView borderColor:RGBColor(0, 170, 238, 1)];
-    [Tool setCorner:self.smsCodeView borderColor:RGBColor(0, 170, 238, 1)];
+    [Tool setCorner:self.passView borderColor:UI_MAIN_COLOR];
+    [Tool setCorner:self.smsCodeView borderColor:UI_MAIN_COLOR];
     self.smsCodeView.hidden = YES;
     
     [self getOperator];

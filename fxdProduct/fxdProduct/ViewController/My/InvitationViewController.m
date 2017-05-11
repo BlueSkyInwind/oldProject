@@ -56,7 +56,7 @@
         make.right.equalTo(@0);
         make.height.equalTo(@60);
     }];
-    bannerView.backgroundColor = rgb(18, 152, 234);
+    bannerView.backgroundColor = UI_MAIN_COLOR;
     
     UILabel *label = [[UILabel alloc] init];
     label.text = @"推荐好友";
@@ -154,7 +154,7 @@
     [shareBtn setTitle:@"点击分享" forState:UIControlStateNormal];
     [shareBtn setTintColor:[UIColor whiteColor]];
     [shareBtn addTarget:self action:@selector(shareContent) forControlEvents:UIControlEventTouchUpInside];
-    shareBtn.backgroundColor = rgb(17, 141, 242);
+    shareBtn.backgroundColor = UI_MAIN_COLOR;
     shareBtn.titleLabel.font = [UIFont boldSystemFontOfSize:17.f];
     [self.scrollView addSubview:shareBtn];
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {

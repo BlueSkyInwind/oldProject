@@ -25,6 +25,7 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title=@"意见反馈";
+//    [Tool setCorner:self.submitBtn borderColor:UI_MAIN_COLOR];
     [self addBackItem];
 }
 
