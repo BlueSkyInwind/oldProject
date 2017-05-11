@@ -168,7 +168,7 @@
 {
     self.navigationItem.title = @"加载中...";
     
-    if([webView.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_ZhimaBack_url,_zhimaCreditCallBack_url]]){
+    if([webView.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_main_url,_zhimaCreditCallBack_url]]){
         for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
             if ([vc isKindOfClass:[UserDataViewController class]]) {
                 [self.navigationController popToViewController:vc animated:YES];
