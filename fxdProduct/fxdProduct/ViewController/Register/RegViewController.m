@@ -73,7 +73,7 @@
     for (UIView *view in self.fieldView) {
         [Tool setCorner:view borderColor:UI_MAIN_COLOR];
     }
-    
+    [Tool setCorner:self.regSubmitBtn borderColor:UI_MAIN_COLOR];
     _countdown = 60;
     self.navigationItem.title = @"注册";
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];

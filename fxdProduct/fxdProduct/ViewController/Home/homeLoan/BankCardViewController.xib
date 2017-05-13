@@ -90,12 +90,13 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJ1-fo-gm6">
                                     <rect key="frame" x="17" y="10" width="341" height="51"/>
+                                    <color key="backgroundColor" red="0.074509803921568626" green="0.59607843137254901" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="52" id="3zU-Id-qPU"/>
                                         <constraint firstAttribute="width" secondItem="eJ1-fo-gm6" secondAttribute="height" multiplier="345:52" id="Ijz-yn-YbL"/>
                                         <constraint firstAttribute="width" secondItem="eJ1-fo-gm6" secondAttribute="height" multiplier="345:52" id="znL-cW-Gi2"/>
                                     </constraints>
-                                    <state key="normal" image="8_but_04"/>
+                                    <state key="normal" title="确认"/>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="3zU-Id-qPU"/>
@@ -280,7 +281,7 @@
                             <rect key="frame" x="250" y="64" width="125" height="46"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通过到账" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fld-e6-gtg">
-                                    <rect key="frame" x="47" y="16" width="52" height="14.5"/>
+                                    <rect key="frame" x="47" y="16" width="52" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="52" id="vxl-PJ-GnQ"/>
                                     </constraints>
@@ -417,6 +418,5 @@
         <image name="3_lc_icon_05_03" width="15" height="15"/>
         <image name="5_shenhe_icon_01" width="20" height="20"/>
         <image name="5_shenhe_icon_02" width="20" height="20"/>
-        <image name="8_but_04" width="341" height="51"/>
     </resources>
 </document>

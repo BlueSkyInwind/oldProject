@@ -27,6 +27,7 @@ typedef enum {
 
 @property (strong, nonatomic) IBOutlet UIButton *sendCodeButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *updateBtn;
 @property (strong, nonatomic) NSString *phoneStr;
 
 @property (strong, nonatomic) NSString *passStr;

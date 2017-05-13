@@ -39,6 +39,9 @@
          _phoneNumField.text = _telText;
     }
     _countdown = 60;
+    
+    [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
+    
     [self setSome];
 }
 

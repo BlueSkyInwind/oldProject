@@ -49,7 +49,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self addBackItem];
-    
+    [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     _bankCodeNUm = @"";
     _bankNum = @"";
     defaultBankIndex = -1;
@@ -256,7 +256,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         //        NSMutableArray * array=[NSMutableArray arrayWithArray:[newString   componentsSeparatedByString:@" "]];
         //        NSLog(@"%@",array);
         //        NSString *ns=[array componentsJoinedByString:@""];
-        
         [dataListAll3 replaceObjectAtIndex:1 withObject:newString];
         [textField setText:newString];
         return NO;
@@ -327,6 +326,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 {
     [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.desc];//银行名字
     //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
+    _bankNum = bankInfo.code;
     _bankCodeNUm = bankInfo.code;
     [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",(long)sectionRow]];
     [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];

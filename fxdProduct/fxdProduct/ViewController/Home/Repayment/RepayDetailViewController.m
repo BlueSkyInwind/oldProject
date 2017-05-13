@@ -89,7 +89,7 @@
     titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式"];
     payLoanArry = @[@"使用红包",@"逾期费用",@"使用溢缴金额",@"实扣金额",@"支付方式"];
     self.PayDetailTB.bounces=NO;
-    
+    [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     [self createHeaderView];
     [self addBackItem];
     [self createNoneView];

@@ -33,10 +33,14 @@
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xv-eK-BBy">
                     <rect key="frame" x="17" y="596" width="341" height="51"/>
+                    <color key="backgroundColor" red="0.074509803921568626" green="0.59607843137254901" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="8xv-eK-BBy" secondAttribute="height" multiplier="341:51" id="z8a-ff-gsN"/>
                     </constraints>
-                    <state key="normal" backgroundImage="8_but_04"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="确认">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="btnSave:" destination="-1" eventType="touchUpInside" id="FAJ-vt-VnO"/>
                     </connections>
@@ -102,7 +106,4 @@
             <point key="canvasLocation" x="412.5" y="399.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="8_but_04" width="341" height="51"/>
-    </resources>
 </document>

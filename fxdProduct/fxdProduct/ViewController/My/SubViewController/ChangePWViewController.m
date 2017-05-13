@@ -36,7 +36,7 @@
     _countdown = 60;
     self.phoneNumField.text = [Utility sharedUtility].userInfo.userName;
     self.phoneNumField.enabled = NO;
-    
+    [Tool setCorner:self.changeBtn borderColor:UI_MAIN_COLOR];
     self.navigationItem.title = @"更改密码";
     [self addBackItem];
 }

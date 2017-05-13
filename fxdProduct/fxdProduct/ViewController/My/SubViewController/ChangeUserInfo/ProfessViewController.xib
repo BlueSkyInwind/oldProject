@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfessViewController">
@@ -23,18 +27,19 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="W9K-5e-c73">
                     <rect key="frame" x="0.0" y="75" width="375" height="444"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="yAj-4k-7hl"/>
                         <outlet property="delegate" destination="-1" id="fhY-aJ-gfP"/>
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZcN-S9-zvc">
-                    <rect key="frame" x="17" y="561" width="341" height="51"/>
+                    <rect key="frame" x="17" y="561" width="341" height="44"/>
+                    <color key="backgroundColor" red="0.074509803921568626" green="0.59607843137254901" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="ZcN-S9-zvc" secondAttribute="height" multiplier="341:51" id="QE6-Qf-KVH"/>
+                        <constraint firstAttribute="width" secondItem="ZcN-S9-zvc" secondAttribute="height" multiplier="341:51" constant="46.803921568627459" id="QE6-Qf-KVH"/>
                     </constraints>
-                    <state key="normal" image="8_but_06"/>
+                    <state key="normal" title="保存"/>
                 </button>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xvZ-4n-pJj">
                     <rect key="frame" x="0.0" y="448" width="375" height="44"/>
@@ -56,24 +61,20 @@
                     </items>
                 </toolbar>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="W9K-5e-c73" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3s6-Gc-qFc"/>
                 <constraint firstAttribute="trailing" secondItem="ZcN-S9-zvc" secondAttribute="trailing" constant="17" id="53W-8K-v77"/>
                 <constraint firstItem="ZcN-S9-zvc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="17" id="Cbc-N4-qbq"/>
                 <constraint firstAttribute="trailing" secondItem="xvZ-4n-pJj" secondAttribute="trailing" id="P04-yO-xEc"/>
-                <constraint firstAttribute="bottom" secondItem="ZcN-S9-zvc" secondAttribute="bottom" constant="55" id="Qq5-jW-H43"/>
+                <constraint firstAttribute="bottom" secondItem="ZcN-S9-zvc" secondAttribute="bottom" constant="62" id="Qq5-jW-H43"/>
                 <constraint firstItem="W9K-5e-c73" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="RKu-cD-s2w"/>
                 <constraint firstAttribute="trailing" secondItem="W9K-5e-c73" secondAttribute="trailing" id="b4Q-7K-3aX"/>
                 <constraint firstItem="xvZ-4n-pJj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dVb-vA-vmv"/>
                 <constraint firstAttribute="bottom" secondItem="xvZ-4n-pJj" secondAttribute="bottom" constant="175" id="fRp-VR-lUm"/>
                 <constraint firstItem="ZcN-S9-zvc" firstAttribute="top" secondItem="W9K-5e-c73" secondAttribute="bottom" constant="42" id="lw4-3k-atI"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="337.5" y="353.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="8_but_06" width="341" height="51"/>
-    </resources>
 </document>
