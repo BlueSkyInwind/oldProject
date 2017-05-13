@@ -143,7 +143,6 @@
     [self lew_presentPopupView:qrPopView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
         
     }];
-    
 }
 
 - (void)setMessageBtn

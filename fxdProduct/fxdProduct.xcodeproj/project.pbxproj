@@ -4831,7 +4831,7 @@
 						TestTargetID = 636EE2FC1B662ABB00A1A3ED;
 					};
 					CC0DF9531EA5B1090024841A = {
-						DevelopmentTeam = TB378SW4WZ;
+						DevelopmentTeam = 6W7BW6GZZR;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -6430,7 +6430,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = TB378SW4WZ;
+				DEVELOPMENT_TEAM = 6W7BW6GZZR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6546,7 +6546,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = TB378SW4WZ;
+				DEVELOPMENT_TEAM = 6W7BW6GZZR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
