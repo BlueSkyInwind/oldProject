@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,6 +15,7 @@
                 <outlet property="passView" destination="mja-4a-4hk" id="PPD-Tt-wyn"/>
                 <outlet property="phoneNumText" destination="D5f-K1-bJh" id="9Vf-do-pO6"/>
                 <outlet property="sendCodeButton" destination="gcy-wm-rTy" id="Q2S-SJ-wuj"/>
+                <outlet property="updateBtn" destination="l4r-V0-qSK" id="iJh-zC-Z9O"/>
                 <outlet property="userIDView" destination="WdX-pO-jRD" id="mgt-GU-tbf"/>
                 <outlet property="verCodeText" destination="Fa4-55-c1B" id="6Hl-xY-fSH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -132,10 +133,11 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4r-V0-qSK">
                     <rect key="frame" x="17" y="385" width="341" height="51"/>
+                    <color key="backgroundColor" red="0.074509803921568626" green="0.59607843137254901" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="l4r-V0-qSK" secondAttribute="height" multiplier="341:51" id="DoB-YX-bcJ"/>
                     </constraints>
-                    <state key="normal" image="Sign-Button04">
+                    <state key="normal" title="确认更改">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -172,7 +174,6 @@
     <resources>
         <image name="1_Signin_icon_01" width="24" height="24"/>
         <image name="1_Signin_icon_02" width="24" height="24"/>
-        <image name="Sign-Button04" width="341" height="51"/>
         <image name="login_line" width="1" height="25"/>
     </resources>
 </document>

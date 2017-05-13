@@ -34,11 +34,12 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtK-kp-hU3">
-                    <rect key="frame" x="15" y="137" width="345" height="61"/>
+                    <rect key="frame" x="15" y="137" width="345" height="44"/>
+                    <color key="backgroundColor" red="0.074509803921568626" green="0.59607843137254901" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="wtK-kp-hU3" secondAttribute="height" multiplier="345:61" id="v6f-JT-mPj"/>
+                        <constraint firstAttribute="width" secondItem="wtK-kp-hU3" secondAttribute="height" multiplier="345:61" constant="96.147540983606575" id="v6f-JT-mPj"/>
                     </constraints>
-                    <state key="normal" image="8_but_04"/>
+                    <state key="normal" title="确认"/>
                     <connections>
                         <action selector="sureBtnClick:" destination="-1" eventType="touchUpInside" id="GBq-5a-aUS"/>
                     </connections>
@@ -56,7 +57,4 @@
             <point key="canvasLocation" x="377.5" y="290.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="8_but_04" width="341" height="51"/>
-    </resources>
 </document>

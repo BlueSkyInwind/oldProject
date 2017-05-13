@@ -332,7 +332,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         if ([_userStateParse.product_id isEqualToString:@"P001002"]||[_userStateParse.product_id isEqualToString:@"P001005"]) {
             NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
             NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
-            [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(255, 134, 25) range:NSMakeRange(2, saveAmount.length)];
+            [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, saveAmount.length)];
             self.saveUpLabel.attributedText = attriStr;
             self.saveUpLabel.hidden = NO;
             _payNumberTop.constant = 5;
@@ -566,7 +566,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
 {
     NSString *repAmount = [NSString stringWithFormat:@"%.2f",_readyPayAmount];
     NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待支付%@元",repAmount]];
-    [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(255, 134, 25) range:NSMakeRange(3, repAmount.length)];
+    [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, repAmount.length)];
     _payNumberLabel.attributedText = attriStr;
 }
 

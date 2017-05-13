@@ -154,6 +154,7 @@
     
     btnSure=[UIButton buttonWithType:UIButtonTypeCustom];
     btnSure.frame=CGRectMake(17*_k_WSwitch, [self getViewH:warmingLbl]+50*_k_WSwitch, 341*_k_WSwitch, 51*_k_WSwitch);
+    
     [btnSure setBackgroundImage:[UIImage imageNamed:@"8_but_04"] forState:UIControlStateNormal];
     [btnSure addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [btnSure setEnabled:btnFlag];

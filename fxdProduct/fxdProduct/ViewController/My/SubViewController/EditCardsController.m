@@ -42,7 +42,7 @@
     
     [self addBackItem];
     _countdown = 60;
-    
+    [Tool setCorner:self.btnSaveInfo borderColor:UI_MAIN_COLOR];
     _currentCardNum=self.cardNum;
     self.cardNum=[self changeStr:self.cardNum];
     self.reservedTel=@"";

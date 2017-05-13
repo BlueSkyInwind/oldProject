@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangePWViewController">
             <connections>
+                <outlet property="changeBtn" destination="TJw-IX-izZ" id="fqz-bL-CPT"/>
                 <outlet property="codeField" destination="vSz-bs-hOx" id="1mO-Hj-35l"/>
                 <outlet property="passwordField" destination="OZF-wO-iJE" id="r5e-F9-fW4"/>
                 <outlet property="phoneNumField" destination="hSk-e0-Xji" id="0n3-lp-RCO"/>
@@ -97,8 +102,8 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="获取验证码" backgroundImage="signin_icon09">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="snsCodeCountdownBtnClick:" destination="-1" eventType="touchUpInside" id="lkW-xd-6e1"/>
@@ -116,7 +121,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="0sa-2b-IBW" firstAttribute="top" secondItem="zF7-bD-oy8" secondAttribute="bottom" constant="12" id="121-0b-f8B"/>
                         <constraint firstAttribute="bottom" secondItem="M2H-1p-UG5" secondAttribute="bottom" constant="8" id="3FR-JG-xtT"/>
@@ -163,20 +168,21 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJw-IX-izZ">
                     <rect key="frame" x="17" y="308" width="341" height="51"/>
+                    <color key="backgroundColor" red="0.074509803921568626" green="0.59607843137254901" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="341" id="bJB-FG-Ytz"/>
                         <constraint firstAttribute="height" constant="51" id="sF8-3F-1Pm"/>
                     </constraints>
-                    <state key="normal" image="Sign-Button04">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="确认更改">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="changeCommit:" destination="-1" eventType="touchUpInside" id="SG5-GG-099"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vob-6w-nGV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="4hX-HU-2su"/>
                 <constraint firstItem="TJw-IX-izZ" firstAttribute="top" secondItem="vob-6w-nGV" secondAttribute="bottom" constant="30" id="8wW-3u-rt0"/>
@@ -184,12 +190,10 @@
                 <constraint firstItem="vob-6w-nGV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IgD-Vl-Z4X"/>
                 <constraint firstItem="TJw-IX-izZ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YcU-Nv-OA7"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="339.5" y="388.5"/>
         </view>
     </objects>
     <resources>
-        <image name="Sign-Button04" width="341" height="51"/>
         <image name="Sign-in-icon01" width="22" height="27"/>
         <image name="Sign-in-icon02" width="22" height="22"/>
         <image name="Sign-in-icon03" width="22" height="22"/>
