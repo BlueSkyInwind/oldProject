@@ -42,5 +42,6 @@ typedef NS_ENUM(NSUInteger, RepayType) {
 @property (nonatomic, copy) NSString *product_id;
 
 @property (nonatomic, strong) UserStateModel *model;
+@property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 
 @end

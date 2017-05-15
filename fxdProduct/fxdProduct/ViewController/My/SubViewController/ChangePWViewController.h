@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *codeField;
 
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIButton *changeBtn;
 
 @end

@@ -32,8 +32,8 @@
     self.navigationItem.title = @"借款确认";
     [self addBackItem];
     [Tool setCorner:self.sureBtn borderColor:[UIColor clearColor]];
-    [Tool setCorner:self.passView borderColor:RGBColor(0, 170, 238, 1)];
-    [Tool setCorner:self.smsCodeView borderColor:RGBColor(0, 170, 238, 1)];
+    [Tool setCorner:self.passView borderColor:UI_MAIN_COLOR];
+    [Tool setCorner:self.smsCodeView borderColor:UI_MAIN_COLOR];
     self.smsCodeView.hidden = YES;
     
     [self getOperator];
@@ -46,7 +46,9 @@
     if ([self.productId isEqualToString:@"P001004"]) {
         [self setUpProductQuickly];
     }
-    
+    if ([self.productId isEqualToString:@"P001005"]) {
+        [self setUpProductWhiteCollar];
+    }
     if (UI_IS_IPHONE5) {
         self.TopViewBottom.constant = 30;
         self.productTitle.font = [UIFont systemFontOfSize:15.0];
@@ -286,6 +288,14 @@
 {
     self.productLogo.image = [UIImage imageNamed:@"icon_Product2"];
     self.productTitle.text = @"急速贷";
+}
+
+#pragma mark -> 白领贷页面显示
+- (void)setUpProductWhiteCollar
+{
+
+    self.productLogo.image = [UIImage imageNamed:@"icon_Product2"];
+    self.productTitle.text = @"白领贷";
 }
 
 - (void)didReceiveMemoryWarning {

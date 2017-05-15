@@ -18,7 +18,7 @@
 #import "MGLiveViewController.h"
 #import "BaseNavigationViewController.h"
 #import "ExpressViewController.h"
-
+#import "FXDWebViewController.h"
 @interface CertificationViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,LiveDeteDelgate>
 {
     JXLParse *_jxlParse;
@@ -66,7 +66,7 @@
     //    [saveBtn setTitle:@"点击认证" forState:UIControlStateNormal];
     //    [saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     //    [Tool setCorner:saveBtn borderColor:[UIColor clearColor]];
-    //    [saveBtn setBackgroundColor:rgb(16, 129, 249)];
+    //    [saveBtn setBackgroundColor:UI_MAIN_COLOR];
     //    [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
     //        make.left.equalTo(@20);
     //        make.right.equalTo(@(-20));
@@ -139,7 +139,7 @@
                     if ([_verifyStatus isEqualToString:@"1"]) {
                         [cell.detectionBtn setTitle:@"进入检测" forState:UIControlStateNormal];
                         cell.detectionBtn.enabled = true;
-                        [cell.detectionBtn setBackgroundColor:rgb(16, 129, 249)];
+                        [cell.detectionBtn setBackgroundColor:UI_MAIN_COLOR];
                         [cell.detectionBtn addTarget:self action:@selector(startDetection) forControlEvents:UIControlEventTouchUpInside];
                     } else {
                         cell.detectionBtn.enabled = false;
@@ -160,7 +160,7 @@
                 [cell.AgreementImage addGestureRecognizer:tap];
                 NSString *str = cell.AgreementLabel.text;
                 NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
-                [ssa addAttribute:NSForegroundColorAttributeName value:rgb(0, 170, 238) range:NSMakeRange(3,13)];
+                [ssa addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,13)];
                 cell.AgreementLabel.attributedText = ssa;
                 cell.AgreementLabel.userInteractionEnabled = YES;
                 UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreement)];
@@ -172,7 +172,7 @@
                 [Tool setCorner:cell.mobileBtn borderColor:[UIColor clearColor]];
                 if ([_isMobileAuth isEqualToString:@"0"]) {
                     if ([self isCanEnable]) {
-                        [cell.mobileBtn setBackgroundColor:rgb(16, 129, 249)];
+                        [cell.mobileBtn setBackgroundColor:UI_MAIN_COLOR];
                         cell.mobileBtn.enabled = true;
                         [cell.mobileBtn addTarget:self action:@selector(mobileCheck) forControlEvents:UIControlEventTouchUpInside];
                     }else {
@@ -236,7 +236,7 @@
             [Tool setCorner:cell.mobileBtn borderColor:[UIColor clearColor]];
             if ([_isMobileAuth isEqualToString:@"0"]) {
                 if ([self isCanEnable]) {
-                    [cell.mobileBtn setBackgroundColor:rgb(16, 129, 249)];
+                    [cell.mobileBtn setBackgroundColor:UI_MAIN_COLOR];
                     cell.mobileBtn.enabled = true;
                     [cell.mobileBtn addTarget:self action:@selector(mobileCheck) forControlEvents:UIControlEventTouchUpInside];
                 }else {
@@ -306,9 +306,13 @@
 
 - (void)showMobileHelp
 {
-    telphoneView *telview = [[[NSBundle mainBundle] loadNibNamed:@"telphoneView" owner:self options:nil] lastObject];
-    telview.frame = CGRectMake(0, 0, _k_w, _k_h);
-    [telview show];
+    
+    FXDWebViewController *controller = [[FXDWebViewController alloc]init];
+    controller.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_mobileAuthentication_url];
+    [self.navigationController pushViewController:controller animated:YES];
+//    telphoneView *telview = [[[NSBundle mainBundle] loadNibNamed:@"telphoneView" owner:self options:nil] lastObject];
+//    telview.frame = CGRectMake(0, 0, _k_w, _k_h);
+//    [telview show];
 }
 
 #pragma mark - UITextFieldDelegate

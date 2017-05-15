@@ -89,7 +89,7 @@
     titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式"];
     payLoanArry = @[@"使用红包",@"逾期费用",@"使用溢缴金额",@"实扣金额",@"支付方式"];
     self.PayDetailTB.bounces=NO;
-    
+    [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     [self createHeaderView];
     [self addBackItem];
     [self createNoneView];
@@ -249,7 +249,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_repayListInfo != nil) {
-        if ([_product_id isEqualToString:@"P001002"]) {
+        if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001005"]) {
             //红包和银行的cell
             if(indexPath.row==3){
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
@@ -555,7 +555,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([_product_id isEqualToString:@"P001002"]) {
+    if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001005"]) {
         if(indexPath.row==0){//红包
             if (_canUseReadPacket) {
                 DLog(@"红包");
@@ -651,9 +651,11 @@
         if (_selectRedPacket <= _repayListInfo.result.situations.firstObject.debt_service_fee) {
             _useredPacketAmount = _selectRedPacket;
             if (_repayListInfo.result.total_amount >= (_repayAmount - _selectRedPacket)) {
-                _useTotalAmount = fabs(_repayAmount - _selectRedPacket - _repayListInfo.result.total_amount);
+//                _useTotalAmount = fabs(_repayAmount - _selectRedPacket - _repayListInfo.result.total_amount);
+                _useTotalAmount = fabs(_repayAmount - _selectRedPacket);
                 _finalyRepayAmount = 0.0;
             } else {
+                
                 _useTotalAmount = _repayListInfo.result.total_amount;
                 _finalyRepayAmount = _repayAmount - _selectRedPacket - _repayListInfo.result.total_amount;
             }
@@ -738,7 +740,7 @@
     if (_useredPacketAmount > 0) {
         paramDic = @{@"staging_ids_":staging_ids,
                      @"account_card_id_":_selectCard.cardIdentifier,
-                     @"total_amount_":@(_repayListInfo.result.total_amount),
+                     @"total_amount_":@(_useTotalAmount),
                      @"repay_amount_":@(_finalyRepayAmount),
                      @"repay_total_":@(_repayAmount),
                      @"save_amount_":@(_save_amount),
@@ -750,7 +752,7 @@
     }else {
         paramDic = @{@"staging_ids_":staging_ids,
                      @"account_card_id_":_selectCard.cardIdentifier,
-                     @"total_amount_":@(_repayListInfo.result.total_amount),
+                     @"total_amount_":@(_useTotalAmount),
                      @"repay_amount_":@(_finalyRepayAmount),
                      @"repay_total_":@(_repayAmount),
                      @"save_amount_":@(_save_amount),
@@ -758,6 +760,8 @@
                      @"request_type_":save_amountTemp,
                      };
     }
+    
+    DLog(@"========%@",paramDic);
     
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_RepayOrSettleWithPeriod_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object[@"msg"]);

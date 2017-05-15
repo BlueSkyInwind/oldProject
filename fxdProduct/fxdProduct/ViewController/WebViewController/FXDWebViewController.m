@@ -10,7 +10,8 @@
 #import <WebKit/WebKit.h>
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDKUI.h>
-
+#import "UserDataViewController.h"
+#import "RTRootNavigationController.h"
 @interface FXDWebViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate>
 {
     UIProgressView *progressView;
@@ -49,8 +50,15 @@
     [self createProUI];
     [self addBackItem];
     
+    NSLog(@"%@",_urlStr);
     _webView.scrollView.showsVerticalScrollIndicator = false;
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+    if (_isZhima) {
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
+    }else{
+    
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+    }
+    
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
@@ -141,18 +149,33 @@
 #pragma mark -WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
+    
     NSURLRequest *request = navigationAction.request;
+    NSLog(@"=========%@",request.URL.absoluteString);
     if ([request.URL.absoluteString hasSuffix:@"main.html"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
         [self.navigationController popViewControllerAnimated:YES];
+
+        
     }else{
+    
         decisionHandler(WKNavigationActionPolicyAllow);
+        
     }
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
     self.navigationItem.title = @"加载中...";
+    
+    if([webView.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_main_url,_zhimaCreditCallBack_url]]){
+        for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+            if ([vc isKindOfClass:[UserDataViewController class]]) {
+                [self.navigationController popToViewController:vc animated:YES];
+            }
+        }
+    }
+    
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
@@ -273,13 +296,13 @@
         
         [[NSFileManager defaultManager] removeItemAtPath:cookiesFolderPath error:&errors];
         
-        
-        
     }
     
 }
 
-
+-(void)viewDidAppear:(BOOL)animated{
+    [self deleteWebCache];
+}
 - (void)viewDidDisappear:(BOOL)animated
 {
     [progressView removeFromSuperview];

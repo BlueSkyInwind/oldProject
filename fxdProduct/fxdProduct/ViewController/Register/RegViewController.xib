@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -14,14 +14,21 @@
             <connections>
                 <outlet property="agreeBtn" destination="iye-6w-fJn" id="kAP-ei-BJd"/>
                 <outlet property="agreeOnLabel" destination="BS9-cn-308" id="edR-jj-oPx"/>
+                <outlet property="invIcon" destination="Q1n-Zj-5X7" id="r5Z-PL-xqf"/>
                 <outlet property="invitationText" destination="Txu-V1-Rpp" id="4nd-eZ-lpT"/>
+                <outlet property="moblieIcon" destination="cGA-vz-guA" id="8SO-Va-zHn"/>
+                <outlet property="passIcon" destination="6gs-rg-IJU" id="A92-E5-yTa"/>
                 <outlet property="passText" destination="qev-tR-42s" id="9aM-6s-Z3A"/>
                 <outlet property="phoneNumText" destination="JUC-GB-R2m" id="mSy-el-JmT"/>
                 <outlet property="picCodeBtn" destination="vLB-oE-Utf" id="wsY-bK-FR8"/>
                 <outlet property="picCodeText" destination="Ajz-2r-ePP" id="coX-BL-cCJ"/>
+                <outlet property="picICodeIcon" destination="VUh-iE-M7e" id="nMY-uC-Uef"/>
+                <outlet property="regBtnHeightConstraint" destination="tcj-l0-ej2" id="0mt-Ev-Uzb"/>
+                <outlet property="regBtnTopConstraint" destination="nvm-Ih-9V8" id="MUf-Wd-7Wt"/>
                 <outlet property="regSecoryLabel" destination="9Ce-zr-0zI" id="Swn-fP-B7z"/>
                 <outlet property="regSubmitBtn" destination="3zF-gA-mNj" id="BfO-fq-E7h"/>
                 <outlet property="sendCodeButton" destination="U7A-3c-A2d" id="lI8-vw-G9c"/>
+                <outlet property="smsIcon" destination="v1n-Bk-aML" id="Opv-Pg-vAS"/>
                 <outlet property="verCodeText" destination="mED-Y3-8mQ" id="hui-QS-SWb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="fieldView" destination="kXc-Zs-sKI" id="fTs-iC-HjD"/>
@@ -29,6 +36,11 @@
                 <outletCollection property="fieldView" destination="9BT-HZ-8BS" id="RkC-rB-PCn"/>
                 <outletCollection property="fieldView" destination="MJ4-9e-jXw" id="WB6-fU-Zny"/>
                 <outletCollection property="fieldView" destination="PLG-Ap-9Xs" id="6yg-mh-H5Q"/>
+                <outletCollection property="lineView" destination="GIZ-8T-hGu" id="Ouw-5r-2Ee"/>
+                <outletCollection property="lineView" destination="BNG-er-EZz" id="eDM-9n-cm8"/>
+                <outletCollection property="lineView" destination="KgS-j3-Xcc" id="TF9-Fi-Fp8"/>
+                <outletCollection property="lineView" destination="pBV-uW-KPr" id="MQr-8z-CUE"/>
+                <outletCollection property="lineView" destination="QB8-Kd-BJn" id="94M-Jh-rVg"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -308,7 +320,11 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zF-gA-mNj">
                     <rect key="frame" x="17" y="442" width="341" height="51"/>
-                    <state key="normal" image="Sign-Button02">
+                    <color key="backgroundColor" red="0.074509803921568626" green="0.59607843137254901" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="tcj-l0-ej2"/>
+                    </constraints>
+                    <state key="normal" title="确认注册">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -407,7 +423,6 @@
         <image name="1_Signin_icon_03" width="24" height="24"/>
         <image name="1_Signin_icon_05" width="25" height="25"/>
         <image name="1_Signin_icon_07" width="24" height="24"/>
-        <image name="Sign-Button02" width="341" height="51"/>
         <image name="login_line" width="1" height="25"/>
     </resources>
 </document>

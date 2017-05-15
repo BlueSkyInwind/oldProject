@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,18 +15,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoj-t2-IgU">
                         <rect key="frame" x="17" y="21" width="37" height="37"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="home_04" translatesAutoresizingMaskIntoConstraints="NO" id="8fe-u0-TpH">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fe-u0-TpH">
                         <rect key="frame" x="158" y="15" width="63" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_08" translatesAutoresizingMaskIntoConstraints="NO" id="4gx-OC-ZZy">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4gx-OC-ZZy">
                         <rect key="frame" x="299" y="33" width="13" height="13"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="13" id="lda-OE-q4V"/>
@@ -40,7 +40,7 @@
                             <constraint firstAttribute="width" constant="46" id="vyf-PZ-csc"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <state key="normal" title="我要借款">
+                        <state key="normal">
                             <color key="titleColor" red="0.14808404445648193" green="0.69195103645324707" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
@@ -75,6 +75,7 @@
                 <outlet property="loanBtn" destination="gFL-8m-efV" id="8X6-k7-8bU"/>
                 <outlet property="periodLabel" destination="TYG-Ak-cbr" id="s5n-5A-YKZ"/>
                 <outlet property="proLogoImage" destination="hoj-t2-IgU" id="nls-SW-gqL"/>
+                <outlet property="rightImageView" destination="4gx-OC-ZZy" id="myk-Kf-hAA"/>
                 <outlet property="specialtyImage" destination="8fe-u0-TpH" id="Doe-HH-FjF"/>
             </connections>
             <point key="canvasLocation" x="34" y="72"/>
@@ -82,7 +83,5 @@
     </objects>
     <resources>
         <image name="home_03" width="17" height="17"/>
-        <image name="home_04" width="63" height="21"/>
-        <image name="home_08" width="13" height="13"/>
     </resources>
 </document>

@@ -178,6 +178,7 @@
                                @"desc_":caseInfo.result.desc_,
                                @"amount_":caseInfo.result.amount_,
                                @"period_":_userSelectNum,
+                               @"loan_for_":_purposeSelect,
                                @"title_":caseInfo.result.title_};
     NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_addBidInfo_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
     [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:paramDic finished:^(EnumServerStatus status, id object) {

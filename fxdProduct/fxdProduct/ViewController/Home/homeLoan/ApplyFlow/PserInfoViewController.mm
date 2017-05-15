@@ -27,7 +27,6 @@
 #define FirstComponent 0
 #define SubComponent 1
 #define ThirdComponent 2
-#define CellBGColorNormal rgb(0, 170, 238)
 #define CellBGColorRed rgb(252, 0, 6)
 
 @interface PserInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,ColledgeViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
@@ -97,7 +96,7 @@
                      @"大专":@"4",
                      @"高中":@"5"};
     for (int i = 0; i < 6; i++) {
-        [dataColor addObject:CellBGColorNormal];
+        [dataColor addObject:UI_MAIN_COLOR];
         [dataListArr addObject:@""];
     }
     _toolbarCancelDone.hidden = true;
@@ -347,7 +346,7 @@
             cell.identityBackBtn.enabled = true;
         }
         if (!cell.identityUpBtn.isEnabled && !cell.identityBackBtn.isEnabled) {
-            cell.identityLabel.textColor = CellBGColorNormal;
+            cell.identityLabel.textColor = UI_MAIN_COLOR;
         }
         
         [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
@@ -564,7 +563,7 @@
             [dataListArr replaceObjectAtIndex:1 withObject:@""];
         }else{
             [dataListArr replaceObjectAtIndex:1 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:1 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 103) {
@@ -574,7 +573,7 @@
             [dataListArr replaceObjectAtIndex:2 withObject:@""];
         }else{
             [dataListArr replaceObjectAtIndex:2 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:2 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 104) {
@@ -583,7 +582,7 @@
             [dataColor replaceObjectAtIndex:3 withObject:CellBGColorRed];
         }else{
             [dataListArr replaceObjectAtIndex:3 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:3 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 105) {
@@ -592,7 +591,7 @@
             [dataColor replaceObjectAtIndex:4 withObject:CellBGColorRed];
         }else{
             [dataListArr replaceObjectAtIndex:4 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:4 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 106) {
@@ -602,7 +601,7 @@
             [dataColor replaceObjectAtIndex:5 withObject:CellBGColorRed];
         }else{
             [dataListArr replaceObjectAtIndex:5 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:5 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:5 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag >= 102 && textField.tag <= 106)
@@ -621,7 +620,7 @@
     
     if ([CheckUtils checkUserNameHanzi:[dataListArr objectAtIndex:1]] && [CheckUtils checkUserIdCard:[dataListArr objectAtIndex:2]] && [[dataListArr objectAtIndex:3] length] >1 && [[dataListArr objectAtIndex:4] length] >1&&[[dataListArr objectAtIndex:5] length] > 1) {
         for (int i=1; i<5; i++) {
-            [dataColor replaceObjectAtIndex:i withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:i withObject:UI_MAIN_COLOR];
         }
         
         return YES;
@@ -826,7 +825,7 @@
 -(void)ColledgeDelegateNString:(NSString *)CollString andIndex:(NSIndexPath *)indexPath
 {
     [dataListArr replaceObjectAtIndex:3 withObject:CollString];
-    [dataColor replaceObjectAtIndex:3 withObject:CellBGColorNormal];
+    [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
     [_tableView reloadData];
 }
 
@@ -962,7 +961,7 @@
     }
     DLog(@"%@---%@",loString,localString);
     [dataListArr replaceObjectAtIndex:4 withObject:localString];
-    [dataColor replaceObjectAtIndex:4 withObject:CellBGColorNormal];
+    [dataColor replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
     //第一个省的所有区
     [_subPickerArray removeAllObjects];
     //    RegionSub *regisonSubModel = _reginBase.result[0];

@@ -42,13 +42,11 @@
 #import "LoanSureFirstViewController.h"
 #import "CareerParse.h"
 
-
 #define FirstComponent 0
 #define SubComponent 1
 #define ThirdComponent 2
-#define cyancColor rgb(0, 170, 238)
+#define UI_MAIN_COLOR rgb(0, 170, 238)
 #define redColor rgb(252, 0, 6)
-
 
 
 @interface WriteInfoViewController ()<UITableViewDataSource,UITableViewDelegate,
@@ -234,9 +232,9 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
         [dataListAll1 addObject:@""];
         [dataListAll2 addObject:@""];
         //        [dataListAll3 addObject:@""];
-        [dataColor addObject:cyancColor];
-        [datacolor1 addObject:cyancColor];
-        [datacolor3 addObject:cyancColor];
+        [dataColor addObject:UI_MAIN_COLOR];
+        [datacolor1 addObject:UI_MAIN_COLOR];
+        [datacolor3 addObject:UI_MAIN_COLOR];
     }
     
     index = 0;
@@ -280,7 +278,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
     [self createUIWith:_segment.selectedSegmentIndex];
     
     _toolbarCancelDone.hidden = YES;
-    _color = cyancColor;
+    _color = UI_MAIN_COLOR;
     
 }
 
@@ -1279,7 +1277,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
     [dataListAll3 replaceObjectAtIndex:0 withObject:CurrentRow];//银行中文名字
     [dataListAll3 replaceObjectAtIndex:2 withObject:bankNum];//编码
     [dataListAll3 replaceObjectAtIndex:3 withObject:[NSString stringWithFormat:@"%ld",SectionRow]];
-    [datacolor3 replaceObjectAtIndex:0 withObject:cyancColor];
+    [datacolor3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
     [_tableView3 reloadData];
 }
 
@@ -1480,7 +1478,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
         }
         [dataListAll1 replaceObjectAtIndex:6 withObject:loString];
         [dataListAll replaceObjectAtIndex:3 withObject:localString];
-        [dataColor replaceObjectAtIndex:3 withObject:cyancColor];
+        [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         //第一个省的所有区
         [_subPickerArray removeAllObjects];
         RegionSub *regisonSubModel = _reginBase.result[0];
@@ -1518,7 +1516,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
         }
         [dataListAll1 replaceObjectAtIndex:7 withObject:loString];
         [dataListAll1 replaceObjectAtIndex:3 withObject:localString];
-        [datacolor1 replaceObjectAtIndex:3 withObject:cyancColor];
+        [datacolor1 replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         //第一个省的所有区
         [_subPickerArray removeAllObjects];
         RegionSub *regisonSubModel = _reginBase.result[0];
@@ -1541,20 +1539,20 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
         {
             [dataListAll replaceObjectAtIndex:5 withObject:@"父母"];
         }
-        [dataColor replaceObjectAtIndex:5 withObject:cyancColor];
+        [dataColor replaceObjectAtIndex:5 withObject:UI_MAIN_COLOR];
     }
     if (_pickerTag == 208) {
         if([dataListAll[8] isEqualToString:@""])
         {
             [dataListAll replaceObjectAtIndex:8 withObject:@"同事"];
         }
-        [dataColor replaceObjectAtIndex:8 withObject:cyancColor];
+        [dataColor replaceObjectAtIndex:8 withObject:UI_MAIN_COLOR];
     }
     if (_pickerTag == 2002) {
         if ([dataListAll1[2] isEqualToString:@""]) {
             [dataListAll1 replaceObjectAtIndex:2 withObject:_professionArray[0]];
         }
-        [datacolor1 replaceObjectAtIndex:2 withObject:cyancColor];
+        [datacolor1 replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
     }
     if ([self iscanFlagBtn]) {
         flagPlace =2;
@@ -1826,7 +1824,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
     _alertView.lbltitle.text = @"\n是否愿意家人知晓";
     _alertView.lbltitle.textColor = rgb(95, 95, 95);
     [_alertView.DisSureBtn setTitleColor:rgb(142, 142, 142) forState:UIControlStateNormal];
-    [_alertView.sureBtn setTitleColor:cyancColor forState:UIControlStateNormal];
+    [_alertView.sureBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
     _alertView.DisSureBtn.tag = 2500;
     _alertView.sureBtn.tag = 2501;
     [_alertView.DisSureBtn setTitle:@"否" forState:UIControlStateNormal];
@@ -1840,7 +1838,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
 -(void)ColledgeDelegateNString:(NSString *)CollString andIndex:(NSIndexPath *)indexPath
 {
     [dataListAll replaceObjectAtIndex:2 withObject:CollString];
-    [dataColor replaceObjectAtIndex:2 withObject:cyancColor];
+    [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
     [_tableView0 reloadData];
 }
 
@@ -1852,7 +1850,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
         if (flagInteger == 207) {
             if ([CheckUtils checkUserName:name] ) {
                 [dataListAll replaceObjectAtIndex:6 withObject:name];
-                [dataColor replaceObjectAtIndex:6 withObject:cyancColor];
+                [dataColor replaceObjectAtIndex:6 withObject:UI_MAIN_COLOR];
             }else{
                 NSString *na = @"";
                 if (name) {
@@ -1864,11 +1862,11 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             }
             
             [dataListAll replaceObjectAtIndex:7 withObject:[self formatString:telph]];
-            [dataColor replaceObjectAtIndex:7 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:7 withObject:UI_MAIN_COLOR];
         }
         if (flagInteger == 210) {
             if ([CheckUtils checkUserName:name]) {
-                [dataColor replaceObjectAtIndex:9 withObject:cyancColor];
+                [dataColor replaceObjectAtIndex:9 withObject:UI_MAIN_COLOR];
                 [dataListAll replaceObjectAtIndex:9 withObject:name];
             }else{
                 NSString *na = @"";
@@ -1881,7 +1879,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             }
             
             [dataListAll replaceObjectAtIndex:10 withObject:[self formatString:telph]];
-            [dataColor replaceObjectAtIndex:10 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:10 withObject:UI_MAIN_COLOR];
         }
         [_tableView0 reloadData];
     }else{
@@ -2161,7 +2159,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             //            [dataListAll replaceObjectAtIndex:0 withObject:@""];
         }else{
             [dataListAll replaceObjectAtIndex:0 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:0 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 101) {
@@ -2171,7 +2169,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             //            [dataListAll replaceObjectAtIndex:1 withObject:@""];
         }else{
             [dataListAll replaceObjectAtIndex:1 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:1 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 102) {
@@ -2180,7 +2178,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [dataColor replaceObjectAtIndex:2 withObject:redColor];
         }else{
             [dataListAll replaceObjectAtIndex:2 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:2 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 103) {
@@ -2189,7 +2187,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [dataColor replaceObjectAtIndex:3 withObject:redColor];
         }else{
             [dataListAll replaceObjectAtIndex:3 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:3 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 104) {
@@ -2199,7 +2197,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [dataColor replaceObjectAtIndex:4 withObject:redColor];
         }else{
             [dataListAll replaceObjectAtIndex:4 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:4 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
             flagPlace = 2;
         }
     }
@@ -2209,7 +2207,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [dataColor replaceObjectAtIndex:5 withObject:redColor];
         }else{
             [dataListAll replaceObjectAtIndex:5 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:5 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:5 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 106) {
@@ -2222,7 +2220,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [dataColor replaceObjectAtIndex:6 withObject:redColor];
         }else{
             [dataListAll replaceObjectAtIndex:6 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:6 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:6 withObject:UI_MAIN_COLOR];
             
         }
     }
@@ -2237,7 +2235,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [dataColor replaceObjectAtIndex:7 withObject:redColor];
         } else{
             [dataListAll replaceObjectAtIndex:7 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:7 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:7 withObject:UI_MAIN_COLOR];
             
         }
     }
@@ -2247,7 +2245,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [dataColor replaceObjectAtIndex:8 withObject:redColor];
         }else{
             [dataListAll replaceObjectAtIndex:8 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:8 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:8 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 109) {
@@ -2263,7 +2261,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [dataColor replaceObjectAtIndex:9 withObject:redColor];
         }else{
             [dataListAll replaceObjectAtIndex:9 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:9 withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:9 withObject:UI_MAIN_COLOR];
             
         }
     }
@@ -2282,7 +2280,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
                 [dataColor replaceObjectAtIndex:10 withObject:redColor];
             }else{
                 [dataListAll replaceObjectAtIndex:10 withObject:textField.text];
-                [dataColor replaceObjectAtIndex:10 withObject:cyancColor];
+                [dataColor replaceObjectAtIndex:10 withObject:UI_MAIN_COLOR];
             }
         }
     }
@@ -2294,7 +2292,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [datacolor1 replaceObjectAtIndex:0 withObject:redColor];
         }else{
             [dataListAll1 replaceObjectAtIndex:0 withObject:textField.text];
-            [datacolor1 replaceObjectAtIndex:0 withObject:cyancColor];
+            [datacolor1 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 1001) {
@@ -2303,7 +2301,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [datacolor1 replaceObjectAtIndex:1 withObject:redColor];
         }else{
             [dataListAll1 replaceObjectAtIndex:1 withObject:textField.text];
-            [datacolor1 replaceObjectAtIndex:1 withObject:cyancColor];
+            [datacolor1 replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 1002) {
@@ -2312,7 +2310,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [datacolor1 replaceObjectAtIndex:2 withObject:redColor];
         }else{
             [dataListAll1 replaceObjectAtIndex:2 withObject:textField.text];
-            [datacolor1 replaceObjectAtIndex:2 withObject:cyancColor];
+            [datacolor1 replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 1003) {
@@ -2321,7 +2319,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [datacolor1 replaceObjectAtIndex:3 withObject:redColor];
         }else{
             [dataListAll1 replaceObjectAtIndex:3 withObject:textField.text];
-            [datacolor1 replaceObjectAtIndex:3 withObject:cyancColor];
+            [datacolor1 replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 1004) {
@@ -2331,7 +2329,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [datacolor1 replaceObjectAtIndex:4 withObject:redColor];
         }else{
             [dataListAll1 replaceObjectAtIndex:4 withObject:textField.text];
-            [datacolor1 replaceObjectAtIndex:4 withObject:cyancColor];
+            [datacolor1 replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 1005) {
@@ -2340,7 +2338,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
             [datacolor1 replaceObjectAtIndex:5 withObject:redColor];
         }else{
             [dataListAll1 replaceObjectAtIndex:5 withObject:textField.text];
-            [datacolor1 replaceObjectAtIndex:5 withObject:cyancColor];
+            [datacolor1 replaceObjectAtIndex:5 withObject:UI_MAIN_COLOR];
         }
     }
     //第三页部分
@@ -2435,7 +2433,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
     if ([CheckUtils checkUserNameHanzi:[dataListAll objectAtIndex:0]] && [CheckUtils checkUserIdCard:[dataListAll objectAtIndex:1]] && [[dataListAll objectAtIndex:2] length] >1 && [[dataListAll objectAtIndex:3] length] >1 && [[dataListAll objectAtIndex:4] length] >1 && [CheckUtils checkUserName:[dataListAll objectAtIndex:5]] && [[dataListAll objectAtIndex:6] length] >=1 && [CheckUtils checkTelNumber:tel1] && [CheckUtils checkUserName:[dataListAll objectAtIndex:8]] && [[dataListAll objectAtIndex:9] length] >=1 && [CheckUtils checkTelNumber:tel2] && ![dataListAll[0] isEqualToString:dataListAll[6]] && ![dataListAll[6] isEqualToString:dataListAll[9]] && ![dataListAll[7] isEqualToString:dataListAll[10]] && ![tel1 isEqualToString:_TelPhoneExt.mobilePhone]) {
         for (int i=0; i<15; i++) {
             
-            [dataColor replaceObjectAtIndex:i withObject:cyancColor];
+            [dataColor replaceObjectAtIndex:i withObject:UI_MAIN_COLOR];
             
         }
         

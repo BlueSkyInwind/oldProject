@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class RateModelResult;
+@class RateModelExtAttr;
 
 @interface RateModel : NSObject
 
@@ -39,5 +40,16 @@
 @property (nonatomic , copy) NSString              * modify_date_;
 @property (nonatomic , copy) NSString              * create_by_;
 @property (nonatomic , assign) NSInteger              service_fee_min_period_;
+@property (nonatomic , strong) RateModelExtAttr     * ext_attr_;
 
+
+
+@end
+
+@interface RateModelExtAttr : NSObject
+
+@property (nonatomic , copy) NSString              *amt_desc_;
+@property (nonatomic , copy) NSString              *period_desc_;
+@property (nonatomic , copy) NSString              *icon_;
+@property (nonatomic , copy) NSString              *charge_desc_;
 @end

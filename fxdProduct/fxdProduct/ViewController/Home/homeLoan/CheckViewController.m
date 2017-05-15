@@ -40,6 +40,11 @@
 #import "DetailViewController.h"
 #import "IdeaBackViewController.h"
 #import "FXDWebViewController.h"
+#import "PayLoanChooseController.h"
+#import "RateModel.h"
+#import "FXDWebViewController.h"
+#import "DataDicParse.h"
+
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -60,6 +65,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     int sectionState[20];   //标志分区的状态
     //    int textFieldstring;
     NSNumber *_userSelectNum;
+    NSString *_purposeSelect;
     //    int datalist[60];
     NSMutableArray<NSNumber *> *_datalist;
     UserCardResult *_userCardModel;
@@ -72,11 +78,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSDictionary *_uploadP2PUserInfo;
     CustomerBaseInfoBaseClass *_customerBase;
     Approval *_approvalModel;
+    //借款用途
+    DataDicParse *_dataDicModel;
+
 }
 
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, assign) NSInteger flag;
 @property (strong,nonatomic)MoxieSDK *moxieSDK;
+@property (nonatomic,strong)NSArray * dateArray;
+
 @end
 
 @implementation CheckViewController
@@ -102,22 +113,33 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
         }
     }
+    
+    if ([_userStateModel.product_id isEqualToString:@"P001005"]) {
+        for (int i = 0; i < 48; i++) {
+            [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
+        }
+    }
+    
     if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
         for (int i = 1; i < 2; i++) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
         }
     }
-    
+    _dateArray = [NSArray array];
+//    _dateArray = @[@"资金周转",@"购物",@"旅游",@"医疗",@"教育",@"其他"];
     _userSelectNum = @0;
+    _purposeSelect = @"0";
     //    [self createScroll];
     
     [self createUI];
+//    [self create];
+//    _checking.ReceiveImmediatelyImage.userInteractionEnabled = true;
+//    UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap)];
+//    [_checking.ReceiveImmediatelyImage addGestureRecognizer:tapImage];
     
-    _checking.ReceiveImmediatelyImage.userInteractionEnabled = true;
-    UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap)];
-    [_checking.ReceiveImmediatelyImage addGestureRecognizer:tapImage];
-    
+    [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 }
+
 
 -(void)imageTap{
 
@@ -146,6 +168,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
+    [self checkState];
 }
 
 -(void)createUI
@@ -160,6 +183,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             _checking.layer.anchorPoint = CGPointMake(0.5, 1.0);
             _checking.frame =CGRectMake(0, 0,_k_w, _k_h);
             [_checking setContentMode:UIViewContentModeScaleAspectFit];
+            [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:_checking];
         }
             break;
@@ -185,12 +209,38 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoLabel.hidden = NO;
                 checkFalse.moreInfoBtn.hidden = NO;
                 checkFalse.promoteLabel.hidden = NO;
-//                checkFalse.seeView.hidden = YES;
+                checkFalse.seeView.hidden = YES;
+//                checkFalse.jsdView.hidden = YES;
             }else {
                 checkFalse.moreInfoLabel.hidden = YES;
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
-//                checkFalse.seeView.hidden = NO;
+                if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
+                    
+                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
+                        checkFalse.seeView.hidden = NO;
+                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                    }else{
+                    
+                        checkFalse.seeView.hidden = YES;
+                    }
+//                    checkFalse.jsdView.hidden = NO;
+                    
+                }else{
+                
+                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
+                        
+                        checkFalse.seeView.hidden = NO;
+                        //                    checkFalse.jsdView.hidden = YES;
+                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                    }else{
+                    
+                        checkFalse.seeView.hidden = YES;
+                    }
+                   
+
+                }
+                
             }
             
             [self.view addSubview:checkFalse];
@@ -201,20 +251,42 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         case 15:// 人工审核通过
         {
             [self PostGetCheckMoney];
+            [self getDataDic:^{
+                
+            }];
             checkSuccess =[[[NSBundle mainBundle] loadNibNamed:@"CheckSuccessView" owner:self options:nil] lastObject];
             checkSuccess.frame = CGRectMake(0, 0,_k_w, _k_h);
+            checkSuccess.purposePicker.delegate = self;
+            checkSuccess.purposePicker.dataSource = self;
+            checkSuccess.purposePicker.tag = 101;
             checkSuccess.pickweek.hidden = YES;
             checkSuccess.toolBar.hidden = YES;
+            checkSuccess.purposePicker.hidden = YES;
             checkSuccess.pickweek.delegate = self;
             checkSuccess.pickweek.dataSource = self;
+            //选项框的确定取消按钮
+            checkSuccess.toolCancleBtn.tag = 103;
+            checkSuccess.toolCancleBtn.action =@selector(shareBtn:);
+            checkSuccess.toolCancleBtn.target = self;
+            
+            checkSuccess.toolsureBtn.tag = 104;
+            checkSuccess.toolsureBtn.action =@selector(shareBtn:);
+            checkSuccess.toolsureBtn.target = self;
+            
             if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
                 checkSuccess.weekBtn.hidden = true;
                 checkSuccess.textFiledWeek.hidden = true;
+                checkSuccess.purposeTextField.text = @"请选择借款用途";
+                [Tool setCorner:checkSuccess.purposeView borderColor:UI_MAIN_COLOR];
+                checkSuccess.purposeTextField.delegate = self;
+           
+                checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
                 UILabel *daysLabel = [[UILabel alloc] init];
                 daysLabel.text = @"借款期限: 14天";
                 daysLabel.textAlignment = NSTextAlignmentCenter;
                 daysLabel.font = [UIFont systemFontOfSize:16.f];
                 daysLabel.textColor = [UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000];
+                
                 [checkSuccess.bgView addSubview:daysLabel];
                 [daysLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.left.equalTo(@0);
@@ -230,34 +302,31 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkSuccess.weekMoney.attributedText = attStr;
             }else {
                 checkSuccess.textFiledWeek.text = @"请选择借款周期";
-                [Tool setCorner:checkSuccess.bgView borderColor:rgb(0, 170, 238)];
-                
+                checkSuccess.purposeTextField.text = @"请选择借款用途";
+                [Tool setCorner:checkSuccess.bgView borderColor:UI_MAIN_COLOR];
+                [Tool setCorner:checkSuccess.purposeView borderColor:UI_MAIN_COLOR];
                 NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
                 [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-                [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
+                [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-2, 2)];
                 checkSuccess.weekMoney.attributedText = attStr;
                 checkSuccess.allMoney.text = @"0元";
                 checkSuccess.textFiledWeek.delegate = self;
-                checkSuccess.toolCancleBtn.tag = 103;
-                checkSuccess.toolCancleBtn.action =@selector(shareBtn:);
-                checkSuccess.toolCancleBtn.target = self;
-                
-                checkSuccess.toolsureBtn.tag = 104;
-                checkSuccess.toolsureBtn.action =@selector(shareBtn:);
-                checkSuccess.toolsureBtn.target = self;
+                checkSuccess.purposeTextField.delegate = self;
+     
             }
             //[NSString stringWithFormat:@"%d周",_datalist.firstObject.intValue];
+//            checkSuccess.sureBtn.enabled = NO;
             checkSuccess.sureBtn.tag = 101;
             [checkSuccess.sureBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
             checkSuccess.weekBtn.tag = 102;
             [checkSuccess.weekBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
+            checkSuccess.purposeBtn.tag = 105;
+            [checkSuccess.purposeBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
             checkSuccess.loadMoney.text =[NSString stringWithFormat:@"¥%.0f元",_approvalModel.result.approval_amount];
             NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:checkSuccess.loadMoney.text];
             [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:30] range:NSMakeRange(0, 1)];
             [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange([checkSuccess.loadMoney.text length]-1, 1)];
             checkSuccess.loadMoney.attributedText = att;
-            
-            
             
             [checkSuccess.promote addTarget:self action:@selector(promote) forControlEvents:UIControlEventTouchUpInside];
             _promoteType = PromoteLimit;
@@ -288,12 +357,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"产品类型错误"];
             }
             
-            [attributeStr yy_setTextHighlightRange:range color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000] backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+            [attributeStr yy_setTextHighlightRange:range color:UI_MAIN_COLOR backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                 
                 [self getUserInfoData:^{
                     if ([_userStateModel.platform_type isEqualToString:@"0"]) {
                         NSDictionary *paramDic;
-                        if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+                        if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
                             if (_userSelectNum.integerValue == 0) {
                                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择借款周期"];
                                 return;
@@ -356,8 +425,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
 }
 
-
-
 - (void)refreshUI{
     [self updateUserState];
 }
@@ -396,8 +463,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         }
     };
 }
-
-
 
 - (void)updateUserState
 {
@@ -481,18 +546,28 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         {
             DLog(@"提款")
             DLog(@"%d",_userSelectNum.intValue);
-            if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+            if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
                 if (_userSelectNum.integerValue == 0) {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请选择周期"];
-                }else {
-                    if (checkSuccess.userCheckBtnState) {
-                        [self getMoney];
-                    } else {
-                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请勾选借款协议"];
-                    }
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请选择借款周期"];
+                    return;
                 }
+                if (_purposeSelect.integerValue == 0) {
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请选择借款用途"];
+                    return;
+                }
+                if (!checkSuccess.userCheckBtnState) {
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请勾选借款协议"];
+                    return;
+                }
+                
+                [self getMoney];
             }
             if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+                
+                if (_purposeSelect.integerValue == 0) {
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请选择借款用途"];
+                    return;
+                }
                 if (checkSuccess.userCheckBtnState) {
                     [self getMoney];
                 } else {
@@ -506,6 +581,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             DLog(@"选择周期")
             checkSuccess.pickweek.hidden = NO;
             checkSuccess.toolBar.hidden = NO;
+            checkSuccess.purposePicker.hidden = YES;
         }
             break;
         case 103:
@@ -513,13 +589,19 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             DLog(@"取消");
             checkSuccess.pickweek.hidden = YES;
             checkSuccess.toolBar.hidden = YES;
+            checkSuccess.purposePicker.hidden = YES;
         }
             break;
         case 104:
         {
             checkSuccess.pickweek.hidden = YES;
             checkSuccess.toolBar.hidden = YES;
+            checkSuccess.purposePicker.hidden = YES;
             DLog(@"%d",_userSelectNum.intValue);
+            //借款周期隐藏后面直接结束
+            if ( checkSuccess.textFiledWeek.hidden) {
+                return;
+            }
             if (_userSelectNum.integerValue > 0) {
                 checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
                 NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
@@ -529,19 +611,26 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-amountStr.length, amountStr.length)];
                 checkSuccess.weekMoney.attributedText = attStr;
                 checkSuccess.allMoney.text =[NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate];
+                
             }else {
                 checkSuccess.textFiledWeek.text = @"请选择周期";
                 NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
                 [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-                [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
+                [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-2, 2)];
                 checkSuccess.weekMoney.attributedText = attStr;
-                
                 checkSuccess.allMoney.text = @"0元";
             }
             DLog(@"确定");
-            
         }
             break;
+        case 105:
+        {
+            DLog(@"选择借款用途");
+            checkSuccess.pickweek.hidden = YES;
+            checkSuccess.toolBar.hidden = NO;
+            checkSuccess.purposePicker.hidden = NO;
+            
+        }
         default:
             break;
     }
@@ -590,6 +679,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
                 p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
                 p2pVC.userSelectNum = _userSelectNum;
+                p2pVC.purposeSelect = _purposeSelect;
                 [self.navigationController pushViewController:p2pVC animated:YES];
             }
             //绑卡
@@ -597,6 +687,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 P2PBindCardViewController *p2pBindCardVC = [[P2PBindCardViewController alloc] init];
                 p2pBindCardVC.uploadP2PUserInfo = _uploadP2PUserInfo;
                 p2pBindCardVC.userSelectNum = _userSelectNum;
+                p2pBindCardVC.purposeSelect = _purposeSelect;
                 [self.navigationController pushViewController:p2pBindCardVC animated:YES];
             }
             //发标
@@ -631,6 +722,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                @"desc_":caseInfo.result.desc_,
                                @"amount_":caseInfo.result.amount_,
                                @"period_":_userSelectNum,
+                               @"loan_for_":_purposeSelect,
                                @"title_":caseInfo.result.title_,
                                @"from_":caseInfo.result.from_,
                                @"client_":caseInfo.result.client_,
@@ -741,6 +833,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                         BankCardViewController *bankVC = [BankCardViewController new];
                         bankVC.bankModel = bankModel;
                         bankVC.periodSelect = _userSelectNum.integerValue;
+                        bankVC.purposeSelect = _purposeSelect;
                         bankVC.userStateModel = _userStateModel;
                         //            bankVC.idString = _idString;
                         bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
@@ -752,7 +845,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     DLog(@"%@",object);
                 }];
             }
-            
             
             //            PayViewController *payVC = [[PayViewController alloc] init];
             //                payVC.payType = PayTypeGetMoneyToCard;
@@ -779,14 +871,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSDictionary *paramDic;
     if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
         paramDic = @{@"periods_":@1,
+                     @"loan_for_":_purposeSelect,
                      @"drawing_amount_":@(_approvalModel.result.approval_amount),
                      @"account_card_id_":_selectCard.cardIdentifier
                      };
     }
-    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+    if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
         paramDic = @{@"periods_":[NSString stringWithFormat:@"%d",_userSelectNum.intValue],
                      @"drawing_amount_":@(_approvalModel.result.approval_amount),
-                     @"account_card_id_":_selectCard.cardIdentifier
+                     @"account_card_id_":_selectCard.cardIdentifier,
+                     @"loan_for_":_purposeSelect,
                      };
     }
     
@@ -817,44 +911,87 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return _datalist.count+1;
+    if (pickerView.tag == 101) {
+        
+      return _dateArray.count + 1;
+    }else{
+        return _datalist.count + 1;
+    }
+    
 }
+
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if (row == 0) {
-        return @"选择周期";
-    } else {
-        return [NSString stringWithFormat:@"%d周",[_datalist objectAtIndex:row-1].intValue];
+    if (pickerView.tag == 101) {
+        if (row == 0) {
+            return @"选择用途";
+        } else {
+            DataDicResult * dataDicResult =  _dateArray[row - 1];
+            return  dataDicResult.desc_;
+//         return [NSString stringWithFormat:@"%d周",[_datalist objectAtIndex:row-1].intValue];
+            
+        }
+    }else{
+    
+        if (row == 0) {
+            return @"选择周期";
+        } else {
+            return [NSString stringWithFormat:@"%d周",[_datalist objectAtIndex:row-1].intValue];
+        }
     }
+    
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     //    DLog(@"%@",datalist[row]);
-    if (row != 0) {
-        _userSelectNum = [_datalist objectAtIndex:row-1];
-        checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
-        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
-        [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-        NSString *amountStr = [NSString stringWithFormat:@"%.2f元",(_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate)/_userSelectNum.intValue];
-        [attStr yy_appendString:amountStr];
-        [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-amountStr.length, amountStr.length)];
-        checkSuccess.weekMoney.attributedText = attStr;
-        checkSuccess.allMoney.text =[NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate];
-    }
-    if (row == 0) {
-        _userSelectNum = @0;
-        checkSuccess.textFiledWeek.text = @"请选择周期";
-        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
-        [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-        [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
-        checkSuccess.weekMoney.attributedText = attStr;
-        checkSuccess.allMoney.text = @"0元";
-    }
+    if (pickerView.tag == 101) {
+        if (row !=0) {
+            DataDicResult * dataDicResult =  _dateArray[row - 1];
+            checkSuccess.purposeTextField.text = dataDicResult.desc_;
+            _purposeSelect = dataDicResult.code_;
+        }
+        if (row ==0) {
+            _purposeSelect = @"0";
+            checkSuccess.purposeTextField.text = @"请选择用途";
+        }
+    }else{
     
-    
-    //    checkSuccess.pickweek.hidden = YES;
+        if (row != 0) {
+            _userSelectNum = [_datalist objectAtIndex:row-1];
+            checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
+            [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
+            NSString *amountStr = [NSString stringWithFormat:@"%.2f元",(_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate)/_userSelectNum.intValue];
+            [attStr yy_appendString:amountStr];
+            [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-amountStr.length, amountStr.length)];
+            checkSuccess.weekMoney.attributedText = attStr;
+            checkSuccess.allMoney.text =[NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate];
+        }
+        if (row == 0) {
+            _userSelectNum = @0;
+            checkSuccess.textFiledWeek.text = @"请选择周期";
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
+            [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
+            [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-2, 2)];
+            checkSuccess.weekMoney.attributedText = attStr;
+            checkSuccess.allMoney.text = @"0元";
+        }
+    }
+    if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
+        if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]) {
+            checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
+        }else{
+            checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
+        }
+    }else if ([_userStateModel.product_id isEqualToString:@"P001004"]){
+        if (![_purposeSelect isEqualToString:@"0"]) {
+            checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
+        }else{
+            checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
+        }
+    }
 }
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
@@ -906,7 +1043,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 //查询状态
 -(void)checkState{
-    
     
     HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
     
@@ -1014,12 +1150,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"到期还款:"];
                     [attStr yy_appendString:amountText];
                     [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-                    [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(4, amountText.length)];
+                    [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4, amountText.length)];
                     checkSuccess.weekMoney.attributedText = attStr;
                 }else {
                     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
                     [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-                    [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-2, 2)];
+                    [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-2, 2)];
                     checkSuccess.weekMoney.attributedText = attStr;
                 }
                 
@@ -1034,17 +1170,21 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 CGFloat factMoney = _approvalModel.result.actual_loan_amount;
                 //                [[[object objectForKey:@"result"] objectForKey:@"actual_loan_amount_"] doubleValue] ;
                 NSString  *factMoneyStr = [NSString stringWithFormat:@"%.2f",factMoney];
-                NSString *attributeStr = [NSString stringWithFormat:@"实际到账%@元,详情见借款说明",factMoneyStr];
+                NSString *attributeStr = [NSString stringWithFormat:@"实际到账%@元,详情见费用说明",factMoneyStr];
                 NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:attributeStr];
                 one.yy_font = [UIFont systemFontOfSize:16];
-                [one addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000] range:NSMakeRange(4,factMoneyStr.length)];
+                [one addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,factMoneyStr.length)];
                 [one yy_setTextHighlightRange:NSMakeRange(one.length-4, 4)
-                                        color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
+                                        color:UI_MAIN_COLOR
                               backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
                                     tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
-                                        ExpressViewController *expressVC = [[ExpressViewController alloc] init];
-                                        expressVC.productId = _userStateModel.product_id;
-                                        [self.navigationController pushViewController:expressVC animated:YES];
+//                                        ExpressViewController *expressVC = [[ExpressViewController alloc] init];
+//                                        expressVC.productId = _userStateModel.product_id;
+//                                        [self.navigationController pushViewController:expressVC animated:YES];
+                                        DLog(@"费用说明");
+                                        FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+                                        webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_loanDetial_url];
+                                        [self.navigationController pushViewController:webVC animated:true];
                                     }];
                 checkSuccess.moneyLabel.attributedText = one;
                 checkSuccess.moneyLabel.textAlignment = NSTextAlignmentCenter;
@@ -1072,6 +1212,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     //4
                     if ([cardResult.card_bank_ integerValue] == 4) {
                         BankCardViewController *bankVC = [BankCardViewController new];
+                        bankVC.purposeSelect = _purposeSelect;
                         bankVC.periodSelect = _userSelectNum.intValue;
                         //            bankVC.idString = _idString;
                         bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
@@ -1089,6 +1230,65 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardModel.msg];
             }
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
+
+
+-(void)clickSeeBtn{
+
+    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+    webView.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
+    [self.navigationController pushViewController:webView animated:true];
+
+}
+
+
+-(void)clickApplyImmediatelyBtn{
+
+    [self fatchRate:^(RateModel *rate) {
+        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+        payLoanview.product_id = @"P001004";
+        payLoanview.userState = _userStateModel;
+        payLoanview.rateModel = rate;
+        [self.navigationController pushViewController:payLoanview animated:true];
+    }];
+    
+}
+
+- (void)fatchRate:(void(^)(RateModel *rate))finish
+{
+    NSDictionary *dic = @{@"priduct_id_":@"P001004"};
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
+        if ([rateParse.flag isEqualToString:@"0000"]) {
+            finish(rateParse);
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
+
+
+#pragma  mark - 获取借款用途接口
+
+- (void)getDataDic:(void(^)())finish
+{
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getDicCode_url] parameters:@{@"dict_type_":@"LOAN_FOR_"} finished:^(EnumServerStatus status, id object) {
+        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+            _dataDicModel = [DataDicParse yy_modelWithJSON:object];
+            _dateArray = [_dataDicModel.result copy];
+            [checkSuccess.purposePicker reloadAllComponents];
+            if (finish) {
+                finish();
+            }
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
         }
     } failure:^(EnumServerStatus status, id object) {
         

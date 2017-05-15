@@ -84,7 +84,7 @@
     UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
     [nextBtn addTarget:self action:@selector(nextBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [nextBtn setBackgroundColor:rgb(0, 134, 249)];
+    [nextBtn setBackgroundColor:UI_MAIN_COLOR];
     [Tool setCorner:nextBtn borderColor:[UIColor clearColor]];
     [nextBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [footView addSubview:nextBtn];
@@ -183,21 +183,21 @@
         cell.middleBtn.tag = 101;
         cell.heighBtn.tag = 102;
         if (cell.lowBtn.selected) {
-            [cell.lowBtn setBackgroundColor:rgb(0, 150, 238)];
+            [cell.lowBtn setBackgroundColor:UI_MAIN_COLOR];
             cell.lowBtn.layer.borderColor = [UIColor clearColor].CGColor;
         }else {
             [cell.lowBtn setBackgroundColor:[UIColor whiteColor]];
             cell.lowBtn.layer.borderColor = [UIColor blackColor].CGColor;
         }
         if (cell.middleBtn.selected) {
-            [cell.middleBtn setBackgroundColor:rgb(0, 150, 238)];
+            [cell.middleBtn setBackgroundColor:UI_MAIN_COLOR];
             cell.middleBtn.layer.borderColor = [UIColor clearColor].CGColor;
         }else {
             [cell.middleBtn setBackgroundColor:[UIColor whiteColor]];
             cell.middleBtn.layer.borderColor = [UIColor blackColor].CGColor;
         }
         if (cell.heighBtn.selected) {
-            [cell.heighBtn setBackgroundColor:rgb(0, 150, 238)];
+            [cell.heighBtn setBackgroundColor:UI_MAIN_COLOR];
             cell.heighBtn.layer.borderColor = [UIColor clearColor].CGColor;
         }else {
             [cell.heighBtn setBackgroundColor:[UIColor whiteColor]];

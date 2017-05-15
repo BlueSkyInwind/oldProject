@@ -27,10 +27,14 @@
 
 @property (weak, nonatomic) IBOutlet UIView *displayMoneyView;
 
+@property (weak, nonatomic) IBOutlet UIPickerView *purposePicker;
 
 @property (weak, nonatomic) IBOutlet UILabel *weekMoney;
 @property (weak, nonatomic) IBOutlet UILabel *allMoney;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
+@property (weak, nonatomic) IBOutlet UIView *purposeView;
+@property (weak, nonatomic) IBOutlet UIButton *purposeBtn;
+@property (weak, nonatomic) IBOutlet UITextField *purposeTextField;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *surBtnLeadRight;
 

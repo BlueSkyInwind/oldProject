@@ -41,7 +41,7 @@
     
     [Tool setCorner:self.userIDView borderColor:RGBColor(0, 170, 238, 1)];
     [Tool setCorner:self.passView borderColor:RGBColor(0, 170, 238, 1)];
-    
+    [Tool setCorner:self.updateBtn borderColor:UI_MAIN_COLOR];
     self.phoneNumText.text = self.phoneStr;
     self.phoneNumText.userInteractionEnabled=NO;
     _countdown = 60;

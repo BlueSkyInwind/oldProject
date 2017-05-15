@@ -79,7 +79,7 @@
             if ([_situation.status isEqualToString:@"4"]) {
                 _moneyLabel.textColor = rgb(253, 111, 0);
             }else {
-                _moneyLabel.textColor = rgb(61, 182, 243);
+                _moneyLabel.textColor = UI_MAIN_COLOR;
                 _overTime.textColor = rgb(137, 137, 137);
             }
         }
@@ -101,7 +101,7 @@
         }else {
             _detailStateLabel.text = [NSString stringWithFormat:@"%@ 待还",_situation.end_time];
             _detailStateLabel.textColor = [UIColor grayColor];
-            _moneyLabel.textColor = rgb(61, 182, 243);
+            _moneyLabel.textColor = UI_MAIN_COLOR;
         }
     }
 }
@@ -122,7 +122,7 @@
             if (_bill.status_ == 4) {
                 _moneyLabel.textColor = rgb(253, 111, 0);
             }else {
-                _moneyLabel.textColor = rgb(61, 182, 243);
+                _moneyLabel.textColor = UI_MAIN_COLOR;
                 _overTime.textColor = rgb(137, 137, 137);
             }
         }
@@ -144,7 +144,7 @@
         }else {
             _detailStateLabel.text = [NSString stringWithFormat:@"%@ 待还",[Tool dateToFormatString:_bill.bill_date_]];
             _detailStateLabel.textColor = [UIColor grayColor];
-            _moneyLabel.textColor = rgb(61, 182, 243);
+            _moneyLabel.textColor = UI_MAIN_COLOR;
         }
     }
 }

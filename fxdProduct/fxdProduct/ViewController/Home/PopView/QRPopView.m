@@ -31,7 +31,6 @@
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(53, 166, 255) range:NSMakeRange(attriStr.length-4,4)];
         _publicWXLabel.attributedText = attriStr;
     }
-    
     return self;
 }
 

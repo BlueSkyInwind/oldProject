@@ -19,6 +19,7 @@
 #import <SDWebImage/UIButton+WebCache.h>
 #import "FMDeviceManager.h"
 #import "FMDeviceManager.h"
+#import "UIImage+Color.h"
 
 
 @interface RegViewController ()<UITextFieldDelegate>
@@ -47,6 +48,17 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *regSubmitBtn;
 
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *lineView;
+@property (weak, nonatomic) IBOutlet UIImageView *moblieIcon;
+
+@property (weak, nonatomic) IBOutlet UIImageView *picICodeIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *smsIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *passIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *invIcon;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *regBtnTopConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *regBtnHeightConstraint;
+
 @end
 
 @implementation RegViewController
@@ -59,14 +71,23 @@
     [self setNav];
     [self addBackItem];
     for (UIView *view in self.fieldView) {
-        [Tool setCorner:view borderColor:RGBColor(0, 170, 238, 1)];
+        [Tool setCorner:view borderColor:UI_MAIN_COLOR];
     }
-    
+    [Tool setCorner:self.regSubmitBtn borderColor:UI_MAIN_COLOR];
     _countdown = 60;
     self.navigationItem.title = @"注册";
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
     [self.agreeBtn setBackgroundImage:[UIImage imageNamed:@"trick"] forState:UIControlStateNormal];
+    for (UIImageView *imageView in _lineView) {
+        imageView.image = [[UIImage imageNamed:@"login_line"] imageWithTintColor:UI_MAIN_COLOR];
+    }
+    self.moblieIcon.image = [[UIImage imageNamed:@"1_Signin_icon_01"] imageWithTintColor:UI_MAIN_COLOR];
+    self.picICodeIcon.image = [[UIImage imageNamed:@"1_Signin_icon_02"] imageWithTintColor:UI_MAIN_COLOR];
+    self.smsIcon.image = [[UIImage imageNamed:@"1_Signin_icon_02"] imageWithTintColor:UI_MAIN_COLOR];
+    self.passIcon.image = [[UIImage imageNamed:@"1_Signin_icon_03"] imageWithTintColor:UI_MAIN_COLOR];
+    self.invIcon.image = [[UIImage imageNamed:@"1_Signin_icon_07"] imageWithTintColor:UI_MAIN_COLOR];
     
+
     [self setPicCode];
     [self setLabel];
     [self setUISignal];
@@ -332,7 +353,6 @@
         }
     }
 }
-
 
 - (NSDictionary *)getRegParam
 {

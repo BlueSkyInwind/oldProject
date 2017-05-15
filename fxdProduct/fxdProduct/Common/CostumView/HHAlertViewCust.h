@@ -11,7 +11,11 @@
 
 typedef void (^ClickBlock)(NSInteger index);
 
-@interface HHAlertViewCust : NSObject
+@interface HHAlertViewCust : NSObject{
+    
+    
+    
+}
 
 + (HHAlertViewCust *)sharedHHAlertView;
 

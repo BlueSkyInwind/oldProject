@@ -15,6 +15,8 @@
 - (IBAction)sureBtn:(id)sender;
 
 @property (nonatomic, assign) NSInteger periodSelect;
+@property (nonatomic, assign)NSString  * purposeSelect;
+
 @property (nonatomic, strong) NSString *idString;
 @property (nonatomic, strong) NSString *drawAmount;
 @property (nonatomic, strong) NSString *flagString;

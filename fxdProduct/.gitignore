@@ -1,5 +1,7 @@
 # Xcode
 #
+.DS_Store
+*/.DS_Store
 build/
 /build/
 *.pbxuser
@@ -20,8 +22,8 @@ DerivedData
 fxdProduct.xcworkspace
 pods/
 /pods/
-.DS_Store
 .swp
+
 # CocoaPods
 #
 # We recommend against adding the Pods directory to your .gitignore. However

@@ -39,7 +39,7 @@
 //打开数据库
 -(void)dbOpen:(NSString *)UserNum
 {
-       BOOL isOpen = [_db open];
+    BOOL isOpen = [_db open];
     if(isOpen)
     {
          NSString *createTable=[NSString stringWithFormat:@"create table if not exists User%@ (msId integer primary key autoincrement ,titleStr varchar(256), dateStr varchar(256) ,contentStr varChar(256))",UserNum];
@@ -62,7 +62,6 @@
     if (!isInsert) {
         DLog(@"insert = %@",_db.lastErrorMessage);
     }
-
 }
 
 //查询
@@ -85,7 +84,7 @@
 
 -(void)deleteWithModel:(testModelFmdb*)msg :(NSString *)UserNum
 {
-     NSString *deleteSQL=[NSString stringWithFormat:@"delete from User%@ where msId =%@",UserNum,msg.msgId];
+    NSString *deleteSQL=[NSString stringWithFormat:@"delete from User%@ where msId =%@",UserNum,msg.msgId];
     BOOL isDelete=[_db executeUpdate:deleteSQL];
     if(!isDelete)
     {

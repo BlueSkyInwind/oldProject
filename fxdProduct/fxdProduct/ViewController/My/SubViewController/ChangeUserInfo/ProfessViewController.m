@@ -69,7 +69,7 @@
         [_dataListArray addObject:@""];
         [datacolor1 addObject:cyancColor];
     }
-    
+    [Tool setCorner:_saveBtn borderColor:UI_MAIN_COLOR];
     _placeHoldArr = @[@"工作单位",@"单位电话",@"工作行业",@"公司地址",@"详细地址"];
     _professionArray = @[@"生活/服务业",@"人力/行政/管理",@"销售/客服/采购/淘宝",
                          @"市场/媒介/广告/设计",@"生产/物流/质控/汽车",

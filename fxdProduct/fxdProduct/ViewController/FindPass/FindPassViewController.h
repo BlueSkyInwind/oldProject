@@ -19,5 +19,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *sendCodeButton;
 
 @property (strong, nonatomic) NSString *telText;
+@property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 
 @end

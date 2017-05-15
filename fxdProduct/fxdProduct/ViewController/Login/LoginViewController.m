@@ -22,6 +22,7 @@
 #import "DES3Util.h"
 #import "LunchViewController.h"
 #import "BSFingerSDK.h"
+#import "UIImage+Color.h"
 
 @interface LoginViewController ()<UITextFieldDelegate,HHAlertViewDelegate,BMKLocationServiceDelegate,RegDelegate,BSFingerCallBack>
 {
@@ -63,6 +64,12 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *sendCodeButton;
 
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *line;
+
+@property (weak, nonatomic) IBOutlet UIImageView *moblielcon;
+
+@property (weak, nonatomic) IBOutlet UIImageView *passIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *smsIcon;
 
 @end
 
@@ -74,9 +81,17 @@
     self.navigationItem.title = @"登录";
     _countdown = 60;
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
-    [Tool setCorner:self.userIDView borderColor:RGBColor(0, 170, 238, 1)];
-    [Tool setCorner:self.passView borderColor:RGBColor(0, 170, 238, 1)];
-    [Tool setCorner:self.codeView borderColor:RGBColor(0, 170, 238, 1)];
+    [Tool setCorner:self.userIDView borderColor:UI_MAIN_COLOR];
+    [Tool setCorner:self.passView borderColor:UI_MAIN_COLOR];
+    [Tool setCorner:self.codeView borderColor:UI_MAIN_COLOR];
+    [Tool setCorner:self.loginBtn borderColor:UI_MAIN_COLOR];
+
+    self.moblielcon.image = [[UIImage imageNamed:@"1_Signin_icon_01"] imageWithTintColor:UI_MAIN_COLOR];
+    self.passIcon.image = [[UIImage imageNamed:@"1_Signin_icon_03"] imageWithTintColor:UI_MAIN_COLOR];
+    self.smsIcon.image = [[UIImage imageNamed:@"1_Signin_icon_02"] imageWithTintColor:UI_MAIN_COLOR];
+    for (UIImageView *imageView in _line) {
+        imageView.image = [[UIImage imageNamed:@"login_line"] imageWithTintColor:UI_MAIN_COLOR];
+    }
     _locService = [[BMKLocationService alloc] init];
     _BSFIT_DEVICEID = @"";
     _locService.delegate = self;

@@ -63,6 +63,7 @@
     //合计综合lbl
     self.lblTotalMoney.textColor=RGBColor(242, 111, 0, 1);
     [Tool setCorner:self.lblTotalMoney borderColor:[UIColor grayColor]];
+    [Tool setCorner:self.btnRepayImmed borderColor:[UIColor grayColor]];
     // scroll
     self.MyScroll.userInteractionEnabled=YES;
     self.MyScroll.contentSize=CGSizeMake(0, 1000);
@@ -263,7 +264,8 @@
 {
     switch ([self.repayStateFlag intValue]) {
         case 0://初始
-            [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-04-Immediately"] forState:UIControlStateNormal];
+            [self.btnRepayImmed setBackgroundColor:UI_MAIN_COLOR];
+//            [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-04-Immediately"] forState:UIControlStateNormal];
             [self.btnReClean setTitleColor:RGBColor(74, 74, 74, 1) forState:UIControlStateNormal];
             self.btnRepayImmed.enabled=YES;
             self.btnReClean.enabled=YES;
@@ -277,7 +279,8 @@
             self.lblTip.hidden=YES;
             break;
         case 1://扣款中
-            [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-05-Immediately"] forState:UIControlStateNormal];
+            [self.btnRepayImmed setBackgroundColor:[UIColor grayColor]];
+//            [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-05-Immediately"] forState:UIControlStateNormal];
             [self.btnReClean setTitleColor:RGBColor(180, 180, 181, 1) forState:UIControlStateNormal];
             self.btnRepayImmed.enabled=NO;
             self.btnReClean.enabled=NO;
@@ -290,17 +293,20 @@
             self.lblTip.hidden=YES;
             break;
         case 2://还款失败
-            [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-04-Immediately"] forState:UIControlStateNormal];
+            [self.btnRepayImmed setBackgroundColor:UI_MAIN_COLOR];
+//            [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-04-Immediately"] forState:UIControlStateNormal];
             [self.btnReClean setTitleColor:RGBColor(74, 74, 74, 1) forState:UIControlStateNormal];
             if([_isSettlement isEqualToString:@"1"])
             {
-                [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-05-Immediately"] forState:UIControlStateNormal];
+                [self.btnRepayImmed setBackgroundColor:[UIColor grayColor]];
+//                [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-05-Immediately"] forState:UIControlStateNormal];
                 self.btnRepayImmed.enabled=NO;
                 self.btnReClean.enabled=YES;
             }
             else
             {
-                [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-04-Immediately"] forState:UIControlStateNormal];
+                [self.btnRepayImmed setBackgroundColor:UI_MAIN_COLOR];
+//                [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-04-Immediately"] forState:UIControlStateNormal];
                 self.btnRepayImmed.enabled=YES;
                 self.btnReClean.enabled=YES;
             }
@@ -314,7 +320,8 @@
             tempDate = [self.repayDate substringToIndex:10];
             break;
         case 3://成功
-            [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-05-Immediately"] forState:UIControlStateNormal];
+            [self.btnRepayImmed setBackgroundColor:[UIColor grayColor]];
+//            [self.btnRepayImmed setBackgroundImage:[UIImage imageNamed:@"flow-05-Immediately"] forState:UIControlStateNormal];
             [self.btnReClean setTitleColor:RGBColor(74, 74, 74, 1) forState:UIControlStateNormal];
             self.btnRepayImmed.enabled=NO;
             self.btnReClean.enabled=YES;

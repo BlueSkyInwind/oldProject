@@ -36,5 +36,6 @@
 @property (nonatomic, copy) NSString *resultCode;
 
 @property (nonatomic, copy) NSString *req_loan_amt;
+@property (weak, nonatomic) IBOutlet UILabel *agreementLabel;
 
 @end

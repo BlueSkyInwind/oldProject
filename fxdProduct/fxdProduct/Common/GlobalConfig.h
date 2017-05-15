@@ -36,10 +36,17 @@ typedef void(^FaileBlock)();
 #define UI_IS_IPHONE5           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0)
 #define UI_IS_IPHONE6P            (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 736.0)
 
+#define UI_MAIN_COLOR [UIColor colorWithRed:0/255.0 green:170/255.0 blue:238/255.0 alpha:1]
+
+
 UIKIT_EXTERN NSString * const _main_url;
 UIKIT_EXTERN NSString * const _ValidESB_url;
 UIKIT_EXTERN NSString * const _P2P_url;
 UIKIT_EXTERN NSString * const _H5_url;
+UIKIT_EXTERN NSString * const _ZMXY_url;
+UIKIT_EXTERN NSString * const _SETP_url;
+UIKIT_EXTERN NSString * const _ZhimaBack_url;
+
 
 UIKIT_EXTERN NSString * const       _getCode_url;                            //获取验证码
 UIKIT_EXTERN NSString * const       _regCode_url;                            //注册验证码
@@ -126,7 +133,10 @@ UIKIT_EXTERN NSString * const       _verifyLive_url;                         //F
 UIKIT_EXTERN NSString * const       _customerAuthInfo_url;                   //查询用户信息录入进度
 UIKIT_EXTERN NSString * const       _JXLGetToken_url;                        //聚信力TOKEN获取
 UIKIT_EXTERN NSString * const       _customerContact_url;                    //联系人信息上传
-UIKIT_EXTERN NSString * const       _saveIDInfo_url;                         //用户身份证图片上传
+UIKIT_EXTERN NSString * const       _saveIDInfo_url;
+UIKIT_EXTERN NSString * const       _getLimitProductlist_url;                //首页产品列表路径
+
+//用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集
 UIKIT_EXTERN NSString * const       _detectInfo_url;                         //活体检测信息上传
 UIKIT_EXTERN NSString * const       _GetRecomfrInfo_url;                     //推荐码规则
@@ -134,9 +144,11 @@ UIKIT_EXTERN NSString * const       _fatchRate_url;                          //�
 UIKIT_EXTERN NSString * const       _topBanner_url;                          //Banner广告获取
 UIKIT_EXTERN NSString * const       _question_url;                           //常见问题
 UIKIT_EXTERN NSString * const       _getDicCode_url;                         //数据字典获取
-
-
-
+UIKIT_EXTERN NSString * const       _mobileAuthentication_url;               //手机认证
+UIKIT_EXTERN NSString * const       _selectPlatform_url;                     //审核被拒，去看看
+UIKIT_EXTERN NSString * const       _findZhimaCredit_url;                     //芝麻信用授权查询
+UIKIT_EXTERN NSString * const       _submitZhimaCredit_url;                    //芝麻信用授权提交
+UIKIT_EXTERN NSString * const       _zhimaCreditCallBack_url;                    //芝麻信用回调地址
 
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码

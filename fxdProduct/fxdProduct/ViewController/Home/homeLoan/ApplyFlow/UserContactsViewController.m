@@ -20,7 +20,6 @@
 #import "ContactClass.h"
 #import "Custom_BaseInfo.h"
 
-#define CellBGColorNormal rgb(0, 170, 238)
 #define CellBGColorRed rgb(252, 0, 6)
 
 @interface UserContactsViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,CNContactPickerDelegate,ABPeoplePickerNavigationControllerDelegate>
@@ -68,7 +67,7 @@
     dataListAll = [NSMutableArray array];
     dataColor = [NSMutableArray array];
     for (int i = 0; i < 6; i++) {
-        [dataColor addObject:CellBGColorNormal];
+        [dataColor addObject:UI_MAIN_COLOR];
         [dataListAll addObject:@""];
     }
     
@@ -412,13 +411,13 @@
         {
             [dataListAll replaceObjectAtIndex:0 withObject:@"父母"];
         }
-        [dataColor replaceObjectAtIndex:0 withObject:CellBGColorNormal];
+        [dataColor replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
     }else {
         if([dataListAll[3] isEqualToString:@""])
         {
             [dataListAll replaceObjectAtIndex:3 withObject:@"同事"];
         }
-        [dataColor replaceObjectAtIndex:3 withObject:CellBGColorNormal];
+        [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
     }
     [_tableView reloadData];
     [UIView animateWithDuration:0.5
@@ -526,7 +525,7 @@
                 [dataColor replaceObjectAtIndex:1 withObject:CellBGColorRed];
             } else {
                 [dataListAll replaceObjectAtIndex:1 withObject:name];
-                [dataColor replaceObjectAtIndex:1 withObject:CellBGColorNormal];
+                [dataColor replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
             }
             
         } else {
@@ -547,7 +546,7 @@
             }
             else {
                 [dataListAll replaceObjectAtIndex:2 withObject:phoneNum];
-                [dataColor replaceObjectAtIndex:2 withObject:CellBGColorNormal];
+                [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
             }
             
         } else {
@@ -565,7 +564,7 @@
                 [dataColor replaceObjectAtIndex:4 withObject:CellBGColorRed];
             } else {
                 [dataListAll replaceObjectAtIndex:4 withObject:name];
-                [dataColor replaceObjectAtIndex:4 withObject:CellBGColorNormal];
+                [dataColor replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
             }
         } else {
             [dataListAll replaceObjectAtIndex:4 withObject:@""];
@@ -585,7 +584,7 @@
             }
             else {
                 [dataListAll replaceObjectAtIndex:5 withObject:phoneNum];
-                [dataColor replaceObjectAtIndex:5 withObject:CellBGColorNormal];
+                [dataColor replaceObjectAtIndex:5 withObject:UI_MAIN_COLOR];
             }
         } else {
             [dataListAll replaceObjectAtIndex:5 withObject:@""];
@@ -750,7 +749,7 @@
             [dataColor replaceObjectAtIndex:0 withObject:CellBGColorRed];
         }else{
             [dataListAll replaceObjectAtIndex:0 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:0 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 12) {
@@ -765,7 +764,7 @@
         }
         else{
             [dataListAll replaceObjectAtIndex:1 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:1 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
             
         }
     }
@@ -781,7 +780,7 @@
         }
         else{
             [dataListAll replaceObjectAtIndex:2 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:2 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
             
         }
     }
@@ -791,7 +790,7 @@
             [dataColor replaceObjectAtIndex:3 withObject:CellBGColorRed];
         }else{
             [dataListAll replaceObjectAtIndex:3 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:3 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag == 15) {
@@ -807,7 +806,7 @@
             [dataColor replaceObjectAtIndex:4 withObject:CellBGColorRed];
         }else{
             [dataListAll replaceObjectAtIndex:4 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:4 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
             
         }
     }
@@ -825,7 +824,7 @@
             [dataColor replaceObjectAtIndex:5 withObject:CellBGColorRed];
         }else{
             [dataListAll replaceObjectAtIndex:5 withObject:textField.text];
-            [dataColor replaceObjectAtIndex:5 withObject:CellBGColorNormal];
+            [dataColor replaceObjectAtIndex:5 withObject:UI_MAIN_COLOR];
         }
     }
     if (textField.tag < 17 && textField.tag > 10) {
