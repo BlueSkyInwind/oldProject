@@ -354,7 +354,6 @@
     }
 }
 
-
 - (NSDictionary *)getRegParam
 {
     FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
