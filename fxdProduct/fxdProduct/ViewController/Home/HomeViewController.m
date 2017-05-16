@@ -287,11 +287,10 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 //    return 4;
-    NSInteger i;
+    NSInteger i = 0;
     if (_dataArray.count>0) {
         i=_dataArray.count+2;
     }else{
-        
         i=2;
     }
     return i;
@@ -313,7 +312,7 @@
     //        return 100.0f;
     //    }
     
-    NSInteger i;
+    NSInteger i = 0;
     if (_dataArray.count>0) {
         i=_dataArray.count+1;
     }else{
