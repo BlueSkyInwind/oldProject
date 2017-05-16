@@ -38,7 +38,6 @@
                     [Utility sharedUtility].networkState = NO;
                     break;
                     
-                    
                 case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络
                 case AFNetworkReachabilityStatusReachableViaWiFi: // WIFI
                     DLog(@"手机自带网络 || WIFI");

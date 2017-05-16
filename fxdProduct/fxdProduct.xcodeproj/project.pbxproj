@@ -1174,6 +1174,13 @@
 			remoteGlobalIDString = 636EE2FC1B662ABB00A1A3ED;
 			remoteInfo = fxdProduct;
 		};
+		845EA1D31EC99849001F901E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 636EE2F51B662ABB00A1A3ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC0DF9531EA5B1090024841A;
+			remoteInfo = fxdProductDev;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -3831,7 +3838,8 @@
 				63A24C011BE063A90036E8EF /* CoreCategory */,
 				63A24C351BE063A90036E8EF /* CoreExtend */,
 			);
-			path = FrameWorks;
+			name = FrameWorks;
+			path = ../FrameWorks;
 			sourceTree = "<group>";
 		};
 		63A24BFB1BE063A90036E8EF /* CoreArchive */ = {
@@ -4163,6 +4171,7 @@
 		63DE56F91DE7CC4200747AE2 /* WebViewController */ = {
 			isa = PBXGroup;
 			children = (
+				63A24BFA1BE063A90036E8EF /* FrameWorks */,
 				63DE56FD1DE7CD2900747AE2 /* FXDWebViewController.h */,
 				63DE56FE1DE7CD2900747AE2 /* FXDWebViewController.m */,
 			);
@@ -4357,7 +4366,6 @@
 			children = (
 				63DE56F91DE7CC4200747AE2 /* WebViewController */,
 				63A24BEB1BE063A90036E8EF /* CoreNewFeatureVC */,
-				63A24BFA1BE063A90036E8EF /* FrameWorks */,
 				63112A6A1BDF148F002B372C /* Help */,
 				63ED33391B6B523E008B6085 /* FindPass */,
 				63ED333A1B6B523E008B6085 /* Home */,
@@ -4768,6 +4776,7 @@
 			);
 			dependencies = (
 				636EE3181B662ABB00A1A3ED /* PBXTargetDependency */,
+				845EA1D41EC99849001F901E /* PBXTargetDependency */,
 			);
 			name = fxdProductTests;
 			productName = fxdProductTests;
@@ -4828,7 +4837,7 @@
 					636EE3151B662ABB00A1A3ED = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = TB378SW4WZ;
-						TestTargetID = 636EE2FC1B662ABB00A1A3ED;
+						TestTargetID = CC0DF9531EA5B1090024841A;
 					};
 					CC0DF9531EA5B1090024841A = {
 						DevelopmentTeam = 6W7BW6GZZR;
@@ -6068,6 +6077,11 @@
 			target = 636EE2FC1B662ABB00A1A3ED /* fxdProduct */;
 			targetProxy = 636EE3171B662ABB00A1A3ED /* PBXContainerItemProxy */;
 		};
+		845EA1D41EC99849001F901E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC0DF9531EA5B1090024841A /* fxdProductDev */;
+			targetProxy = 845EA1D31EC99849001F901E /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -6397,7 +6411,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zyjr.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fxdProduct.app/fxdProduct";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fxdProductDev.app/fxdProductDev";
 			};
 			name = Debug;
 		};
@@ -6413,7 +6427,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zyjr.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fxdProduct.app/fxdProduct";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/fxdProductDev.app/fxdProductDev";
 			};
 			name = Release;
 		};
