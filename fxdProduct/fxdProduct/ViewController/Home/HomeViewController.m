@@ -499,20 +499,23 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    if (indexPath.section>0) {
+        
+        HomeProductListProducts *product = _dataArray[indexPath.section-1];
+        if ([product.id_ isEqualToString:@"P001002"]) {
+            [self highLoanClick];
+        }
+        if ([product.id_ isEqualToString:@"P001004"]) {
+            [self lowLoan];
+        }
+        if ([product.id_ isEqualToString:@"P001005"]) {
+            
+            [self whiteCollarLoanClick];
+            //        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
+            
+        }
+    }
     
-    HomeProductListProducts *product = _dataArray[indexPath.section-1];
-    if ([product.id_ isEqualToString:@"P001002"]) {
-        [self highLoanClick];
-    }
-    if ([product.id_ isEqualToString:@"P001004"]) {
-        [self lowLoan];
-    }
-    if ([product.id_ isEqualToString:@"P001005"]) {
-        
-        [self whiteCollarLoanClick];
-//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
-        
-    }
 //    if (indexPath.section == 1) {
 //        [self highLoanClick];
 //    }
