@@ -1128,7 +1128,7 @@
 -(void)findZhimaCredit{
 
     NSDictionary *dic = @{@"juid":[Utility sharedUtility].userInfo.juid};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ZhimaBack_url,_findZhimaCredit_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_findZhimaCredit_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         FindZhimaCreditModel *model = [FindZhimaCreditModel yy_modelWithJSON:object];
         if ([model.authentic_status_ isEqualToString:@"2"]) {
             _nextStep = @"-1";

@@ -272,7 +272,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    NSInteger i;
+    NSInteger i=0;
     if (_dataArray.count>0) {
         i=_dataArray.count+1;
     }else{
