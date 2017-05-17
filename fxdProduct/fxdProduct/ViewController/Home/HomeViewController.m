@@ -499,7 +499,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (indexPath.section>0) {
+    if (indexPath.section>0&&_dataArray.count+1 !=indexPath.section) {
         
         HomeProductListProducts *product = _dataArray[indexPath.section-1];
         if ([product.id_ isEqualToString:@"P001002"]) {
