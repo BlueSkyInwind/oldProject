@@ -294,7 +294,7 @@
 - (void)setUpProductWhiteCollar
 {
 
-    self.productLogo.image = [UIImage imageNamed:@"icon_Product2"];
+    self.productLogo.image = [UIImage imageNamed:@"home10"];
     self.productTitle.text = @"白领贷";
 }
 
