@@ -9,12 +9,15 @@
 #import "LoanProcessViewController.h"
 #import "LoanProcessCell.h"
 #import "LoanProcessModel.h"
+#import "RefuseView.h"
+#import "FXDWebViewController.h"
 
 @interface LoanProcessViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIView *_noneView;
     UIView *_toopLine;
     CGFloat _leadingSpacingOfLines;
+    BOOL isRefuse;
 }
 @end
 
@@ -26,7 +29,7 @@
     self.navigationItem.title = @"我的借款进度";
     self.automaticallyAdjustsScrollViewInsets = false;
     
-    
+    isRefuse = NO;
     _toopLine = [[UIView alloc] init];
     [self.view addSubview:_toopLine];
     [self addBackItem];
@@ -68,6 +71,12 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LoanProcessCell class]) bundle:nil] forCellReuseIdentifier:@"LoanProcessCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    
+    LoanProcessResult *loanProcess  =  _loanProcessParse.result.lastObject;
+    if ([loanProcess.apply_status_ isEqualToString:@"已拒绝"]) {
+        isRefuse = YES;
+    }
+    
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
@@ -81,6 +90,27 @@
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 100.f;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    
+    if (isRefuse) {
+        return 100;
+    }else{
+        return 0;
+    }
+}
+
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    RefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"RefuseView" owner:self options:nil]lastObject];
+    refuseView.frame = CGRectZero;
+    [Tool setCorner:refuseView.seeBtn borderColor:UI_MAIN_COLOR];
+    [refuseView.seeBtn addTarget:self action:@selector(refuseBtn) forControlEvents:UIControlEventTouchUpInside];
+    //    [self.view addSubview:_refuseView];
+    return refuseView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -128,6 +158,15 @@
     
     
 }
+
+#pragma mark ->去看看
+-(void)refuseBtn{
+    
+    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+    webView.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
+    [self.navigationController pushViewController:webView animated:true];
+}
+
 
 
 - (void)didReceiveMemoryWarning {

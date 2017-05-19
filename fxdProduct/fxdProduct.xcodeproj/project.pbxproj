@@ -1160,6 +1160,8 @@
 		CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
+		CCBBEC731ECED2C4003E374C /* RefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEC711ECED2C4003E374C /* RefuseView.m */; };
+		CCBBEC741ECED2C4003E374C /* RefuseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCBBEC721ECED2C4003E374C /* RefuseView.xib */; };
 		CCD565BE1E8A46D500B6665D /* PserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */; };
 		CCD565C01E8A46D500B6665D /* PserInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */; };
 		CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
@@ -2221,6 +2223,9 @@
 		CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
+		CCBBEC701ECED2C4003E374C /* RefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefuseView.h; sourceTree = "<group>"; };
+		CCBBEC711ECED2C4003E374C /* RefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefuseView.m; sourceTree = "<group>"; };
+		CCBBEC721ECED2C4003E374C /* RefuseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefuseView.xib; sourceTree = "<group>"; };
 		CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PserInfoViewController.xib; sourceTree = "<group>"; };
 		CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PserInfoViewController.mm; sourceTree = "<group>"; };
 		CCD565BD1E8A46D500B6665D /* PserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PserInfoViewController.h; sourceTree = "<group>"; };
@@ -2534,6 +2539,9 @@
 		0FEA58521BE08EE3007F8A6D /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				CCBBEC701ECED2C4003E374C /* RefuseView.h */,
+				CCBBEC711ECED2C4003E374C /* RefuseView.m */,
+				CCBBEC721ECED2C4003E374C /* RefuseView.xib */,
 				63FE3DE71E4877E1009E5B82 /* PayLoanChoose */,
 				63E1ECD61E1BA88F0079A2F8 /* HomeCell */,
 				1AEDCF181C197F5000014A87 /* RepaymentView */,
@@ -4913,6 +4921,7 @@
 				637636FB1D77FB1600E93289 /* repay_circle_selt@3x.png in Resources */,
 				0F099B991C1A97EB00D97BAE /* ColledgeView.xib in Resources */,
 				1AB0F5B41CF305F800F3DF06 /* repayClearView.xib in Resources */,
+				CCBBEC741ECED2C4003E374C /* RefuseView.xib in Resources */,
 				63F2548E1E49CD2C00852CF1 /* LoanProcessViewController.xib in Resources */,
 				63FE3DF11E48821B009E5B82 /* DaysCell.xib in Resources */,
 				6391F77E1D348B4E0097C943 /* bank_code_9@2x.png in Resources */,
@@ -5391,6 +5400,7 @@
 				1A45A3F01CAA7002001BC841 /* BankCardInfoModel.m in Sources */,
 				6326C9E31BF097D400FD23A8 /* ContactList.m in Sources */,
 				0F920C131BCE549900AA9A31 /* MyCardsViewController.m in Sources */,
+				CCBBEC731ECED2C4003E374C /* RefuseView.m in Sources */,
 				638A16F61E517D9F00AB8AB6 /* LOTAnimationCache.m in Sources */,
 				63145AA81CA294B800D04ED8 /* LoginBaseClass.m in Sources */,
 				638A16F81E517D9F00AB8AB6 /* CGGeometryAdditions.m in Sources */,
