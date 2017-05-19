@@ -21,5 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *seeBtn;
 @property (weak, nonatomic) IBOutlet UIView *jsdView;
 @property (weak, nonatomic) IBOutlet UIButton *applyImmediatelyBtn;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *quotaLabel;
+@property (weak, nonatomic) IBOutlet UILabel *termLabel;
 
 @end

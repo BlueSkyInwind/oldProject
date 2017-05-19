@@ -44,7 +44,7 @@
 #import "RateModel.h"
 #import "FXDWebViewController.h"
 #import "DataDicParse.h"
-
+#import "UserDataViewController.h"
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -108,17 +108,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     DLog(@"%@",_moxieSDK.mxSDKVersion);
     [self listenForResult];
     
-    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
-        for (int i = 0; i < 46; i++) {
-            [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
-        }
-    }
     
-    if ([_userStateModel.product_id isEqualToString:@"P001005"]) {
-        for (int i = 0; i < 48; i++) {
-            [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
-        }
-    }
     
     if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
         for (int i = 1; i < 2; i++) {
@@ -210,7 +200,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoBtn.hidden = NO;
                 checkFalse.promoteLabel.hidden = NO;
                 checkFalse.seeView.hidden = YES;
-//                checkFalse.jsdView.hidden = YES;
+                checkFalse.jsdView.hidden = YES;
             }else {
                 checkFalse.moreInfoLabel.hidden = YES;
                 checkFalse.moreInfoBtn.hidden = YES;
@@ -218,11 +208,20 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
                     
                     if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-                        checkFalse.seeView.hidden = NO;
-                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                        if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+                            checkFalse.seeView.hidden = NO;
+                            [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                        }else{
+                        
+                            [self getContent];
+                            checkFalse.jsdView.hidden = NO;
+                            [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
+                        }
+                        
                     }else{
                     
                         checkFalse.seeView.hidden = YES;
+                        checkFalse.jsdView.hidden = YES;
                     }
 //                    checkFalse.jsdView.hidden = NO;
                     
@@ -1131,6 +1130,46 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     completion();
 }
 
+
+#pragma mark 更改工薪贷和白领贷的周期
+-(void)getCycle:(CGFloat)money{
+
+    int j = 0;
+    int k = 0;
+    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+        
+        if (money>=1000&&money<=1999) {
+            j=11;
+            k=0;
+        }else if (money>=2000&&money<=2999){
+        
+            j=16;
+            k=0;
+        }else if (money>=3000&&money<=3999){
+        
+            j=21;
+            k=3;
+        }else if (money>=4000&&money<=5000){
+        
+            j=26;
+            k=5;
+        }
+        
+        for (int i = k; i < j; i++) {
+            [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
+        }
+    }
+    
+    if ([_userStateModel.product_id isEqualToString:@"P001005"]) {
+        
+        if (money>=5000&&money<=30000) {
+            j=46;
+        }
+        for (int i = 5; i < j; i++) {
+            [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
+        }
+    }
+}
 #pragma mark -> 2.22	审批金额查询接口
 
 -(void)PostGetCheckMoney
@@ -1142,6 +1181,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             
             if ([_approvalModel.flag isEqualToString:@"0000"])
             {
+                
+                
+                [self getCycle:_approvalModel.result.approval_amount];
+                
                 //                _loanMountMoney= [[[object objectForKey:@"result"] objectForKey:@"approval_amount_"] doubleValue];
                 checkSuccess.loadMoney.text =[NSString stringWithFormat:@"¥%.0f元",_approvalModel.result.approval_amount];
                 //[NSString stringWithFormat:@"%.2f元",(_loanMountMoney +_loanMountMoney*_userSelectNum.intValue*0.021)/_userSelectNum.intValue];
@@ -1237,6 +1280,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 }
 
 
+#pragma  mark - 工薪贷拒绝导流
 -(void)clickSeeBtn{
 
     FXDWebViewController *webView = [[FXDWebViewController alloc] init];
@@ -1245,6 +1289,37 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 }
 
+
+#pragma  mark - 白领贷拒绝导流
+-(void)clickApplyImmediate{
+
+    UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+    userDataVC.product_id = @"P001002";
+    [self.navigationController pushViewController:userDataVC animated:true];
+}
+
+#pragma  mark - 白领贷拒绝导流工薪贷的详情
+-(void)getContent{
+    
+     NSDictionary *dic = @{@"priduct_id_":@"P001002"};
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
+        
+        if ([rateParse.flag isEqualToString:@"0000"]) {
+            
+            checkFalse.nameLabel.text = rateParse.result.name_;
+            checkFalse.quotaLabel.text = [NSString stringWithFormat:@"额度:%ld-%ld元",rateParse.result.principal_bottom_,rateParse.result.principal_top_];
+            checkFalse.termLabel.text = [NSString stringWithFormat:@"期限:%ld-%ld%@",rateParse.result.staging_bottom_,rateParse.result.staging_top_,rateParse.result.remark_];
+            
+            
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
 
 -(void)clickApplyImmediatelyBtn{
 

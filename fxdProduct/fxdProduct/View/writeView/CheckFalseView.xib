@@ -416,7 +416,7 @@
                                 <constraint firstAttribute="width" constant="332" id="b1X-zX-xY8"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="0.074509803920000006" green="0.59607843140000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kuang" translatesAutoresizingMaskIntoConstraints="NO" id="vY1-Op-ohy">
@@ -426,21 +426,21 @@
                                 <constraint firstAttribute="width" constant="345" id="tcc-8P-g9t"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_02" translatesAutoresizingMaskIntoConstraints="NO" id="t55-EX-3Eo">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_01" translatesAutoresizingMaskIntoConstraints="NO" id="t55-EX-3Eo">
                             <rect key="frame" x="45" y="35" width="38" height="38"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="38" id="gSN-vi-SRO"/>
                                 <constraint firstAttribute="height" constant="38" id="oBU-bv-XvY"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_05" translatesAutoresizingMaskIntoConstraints="NO" id="WyB-b5-Rbq">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_04" translatesAutoresizingMaskIntoConstraints="NO" id="WyB-b5-Rbq">
                             <rect key="frame" x="165" y="45" width="63" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="F6k-dV-eTX"/>
                                 <constraint firstAttribute="width" constant="63" id="h7b-ad-YLj"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="急速贷" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WY-ub-x5z">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="工薪贷" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WY-ub-x5z">
                             <rect key="frame" x="95" y="45" width="66" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="66" id="RhJ-UB-NM3"/>
@@ -470,11 +470,11 @@
                             <color key="textColor" red="0.44313725490196076" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcU-E9-eM1">
-                            <rect key="frame" x="270" y="80" width="42" height="20"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5-50周" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcU-E9-eM1">
+                            <rect key="frame" x="249" y="80" width="66" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="DFG-LB-2wP"/>
-                                <constraint firstAttribute="width" constant="42" id="qko-Vi-8fx"/>
+                                <constraint firstAttribute="width" constant="66" id="qko-Vi-8fx"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.44313725490196076" green="0.4392156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -535,7 +535,7 @@
                         <constraint firstItem="WyB-b5-Rbq" firstAttribute="leading" secondItem="6WY-ub-x5z" secondAttribute="trailing" constant="4" id="pxO-eB-q4B"/>
                         <constraint firstItem="vY1-Op-ohy" firstAttribute="top" secondItem="tfN-DC-c7v" secondAttribute="top" constant="15" id="qgK-jM-3eF"/>
                         <constraint firstItem="uKw-aE-gbr" firstAttribute="top" secondItem="LcU-E9-eM1" secondAttribute="bottom" constant="5" id="xjz-M1-ckp"/>
-                        <constraint firstAttribute="trailing" secondItem="LcU-E9-eM1" secondAttribute="trailing" constant="63" id="zHg-A5-ES6"/>
+                        <constraint firstAttribute="trailing" secondItem="LcU-E9-eM1" secondAttribute="trailing" constant="60" id="zHg-A5-ES6"/>
                         <constraint firstItem="gzv-qi-0Uf" firstAttribute="leading" secondItem="tfN-DC-c7v" secondAttribute="leading" constant="65" id="zmY-r1-elC"/>
                     </constraints>
                 </view>
@@ -575,9 +575,12 @@
                 <outlet property="labelday" destination="CtF-8J-WzH" id="yQ1-Zx-tEM"/>
                 <outlet property="moreInfoBtn" destination="nEU-9c-sGl" id="ui3-rY-Ikn"/>
                 <outlet property="moreInfoLabel" destination="KU4-1Y-qdb" id="bPO-HX-F77"/>
+                <outlet property="nameLabel" destination="6WY-ub-x5z" id="BxH-w6-t4e"/>
                 <outlet property="promoteLabel" destination="f3A-2m-KGV" id="Uod-sr-WZz"/>
+                <outlet property="quotaLabel" destination="gzv-qi-0Uf" id="gUX-My-22K"/>
                 <outlet property="seeBtn" destination="ixB-ES-piM" id="iev-gl-2yh"/>
                 <outlet property="seeView" destination="Nyn-9Z-Nzo" id="aHL-uC-tQh"/>
+                <outlet property="termLabel" destination="LcU-E9-eM1" id="A8r-yM-ESg"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
@@ -592,8 +595,8 @@
         <image name="5_shenhe_icon_01" width="20" height="20"/>
         <image name="5_shenhe_icon_02" width="20" height="20"/>
         <image name="5_shenhe_icon_03" width="95" height="130"/>
-        <image name="home_02" width="38" height="38"/>
-        <image name="home_05" width="63" height="21"/>
+        <image name="home_01" width="38" height="38"/>
+        <image name="home_04" width="63" height="21"/>
         <image name="kuang" width="361" height="198"/>
         <image name="kuang_big" width="340" height="50"/>
         <image name="lan_anniu" width="229" height="40"/>
