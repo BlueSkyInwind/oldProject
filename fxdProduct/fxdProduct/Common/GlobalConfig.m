@@ -354,6 +354,20 @@ NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.
 //芝麻信用回调地址
 NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
 
+//发送短信接口
+NSString * const    _sendSms_url    =    @"http/do.jhtml?router=sendSmsSHService.send";
+
+//换绑银行卡
+NSString * const    _bankCards_url    =    @"http/do.jhtml?router=bankCardsSHService.quickChangeBindingCard";
+
+//用户开户接口
+NSString * const    _huifu_url    =    @"http/huifush/toRegister.jhtml";
+
+//银行卡查询接口
+NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsSHService.QueryCardInfo";
+
+//用户状态查询接口
+NSString * const    _accountHSService_url    =    @"http/do.jhtml?router=accountHSService.qryUserStatus";
 
 NSString * const  CODE_REG           =    @"MSG_REG_"; ///注册验证码
 NSString * const  CODE_FINDPASS      =    @"MSG_FIND_PASSWORD_"; ///密码找回验证码

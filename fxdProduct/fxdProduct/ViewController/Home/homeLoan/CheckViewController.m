@@ -45,6 +45,7 @@
 #import "FXDWebViewController.h"
 #import "DataDicParse.h"
 #import "UserDataViewController.h"
+#import "AccountHSServiceModel.h"
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -80,6 +81,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     Approval *_approvalModel;
     //借款用途
     DataDicParse *_dataDicModel;
+    NSString *_userFlag;
 
 }
 
@@ -131,11 +133,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 }
 
 
+#pragma mark 审核中，量子互助链接
 -(void)imageTap{
 
     FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-    webView.urlStr = @"http://www.liangzihuzhu.com.cn//xwh5/pages/hignway/faxindai.html";
-    [self.navigationController pushViewController:webView animated:true];
+//    webView.urlStr = @"http://www.liangzihuzhu.com.cn//xwh5/pages/hignway/faxindai.html";
+    webView.urlStr = @"http://www.liangzihuzhu.com.cn/xwh5/pages/hignway/faxindai.html?source=faxindai";
+        [self.navigationController pushViewController:webView animated:true];
 }
 
 - (void)loadView
@@ -673,7 +677,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         } else {
             //开户
             if ([drawServiceParse.data.flg isEqualToString:@"2"]) {
-                NSString *url = [NSString stringWithFormat:@"%@%@?from_user_id_=%@&from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&RetUrl=%@",_P2P_url,_register_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url];
+                NSString *url = [NSString stringWithFormat:@"%@%@?from_user_id_=%@&from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&RetUrl=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
                 p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
@@ -721,17 +725,18 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                @"desc_":caseInfo.result.desc_,
                                @"amount_":caseInfo.result.amount_,
                                @"period_":_userSelectNum,
-                               @"loan_for_":_purposeSelect,
+                               @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,
                                @"title_":caseInfo.result.title_,
                                @"from_":caseInfo.result.from_,
                                @"client_":caseInfo.result.client_,
-                               @"start_date_":caseInfo.result.start_date_,
+                               @"juid":caseInfo.result.start_date_,
                                @"from_case_id_":caseInfo.result.from_case_id_,
-                               @"user_id_":caseInfo.result.user_id_,
                                @"description_":caseInfo.result.description_,
                                @"invest_days_":caseInfo.result.invest_days_};
     
-    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_addBidInfo_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
+//    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_addBidInfo_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@",_P2P_url,_addBidInfo_url];
     [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DrawService *model = [DrawService yy_modelWithJSON:object];
         if ([model.appcode isEqualToString:@"1"]) {
@@ -1368,6 +1373,74 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     } failure:^(EnumServerStatus status, id object) {
         
     }];
+}
+
+
+#pragma  mark - 用户状态查询接口
+
+-(void)userStatusQuery{
+
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_accountHSService_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
+        
+//        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+            AccountHSServiceModel *model = [AccountHSServiceModel yy_modelWithJSON:object];
+        if ([model.flg isEqualToString:@"2"]||[model.flg isEqualToString:@"5"]) {  //2、未开户 3、待激活 4、冻结 5、销户 6、正常
+            //绑定银行卡
+            NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
+            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+                BankModel *bankModel = [BankModel yy_modelWithJSON:object];
+                if ([bankModel.flag isEqualToString:@"0000"]) {
+                    BankCardViewController *bankVC = [BankCardViewController new];
+                    bankVC.bankModel = bankModel;
+                    bankVC.periodSelect = _userSelectNum.integerValue;
+                    bankVC.purposeSelect = _purposeSelect;
+                    bankVC.userStateModel = _userStateModel;
+                    //            bankVC.idString = _idString;
+                    bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
+                    [self.navigationController pushViewController:bankVC animated:YES];
+                } else {
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
+                }
+            } failure:^(EnumServerStatus status, id object) {
+                DLog(@"%@",object);
+            }];
+            
+        }else if ([model.flg isEqualToString:@"3"]){
+        
+            //激活用户
+           
+        }else if ([model.flg isEqualToString:@"6"]){
+        
+            //发标
+            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+                DLog(@"%@",object);
+                GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
+                if ([caseInfo.flag isEqualToString:@"0000"]) {
+                    [self addBildInfo:caseInfo];
+                }
+                
+            } failure:^(EnumServerStatus status, id object) {
+                
+            }];
+            
+        }
+
+
+        
+//        } else {
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+//        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+    
+    
+}
+
+#pragma  mark - 合规提款
+-(void)submit{
+
+    [self userStatusQuery];
 }
 
 

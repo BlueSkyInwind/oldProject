@@ -149,6 +149,11 @@ UIKIT_EXTERN NSString * const       _selectPlatform_url;                     //�
 UIKIT_EXTERN NSString * const       _findZhimaCredit_url;                     //芝麻信用授权查询
 UIKIT_EXTERN NSString * const       _submitZhimaCredit_url;                    //芝麻信用授权提交
 UIKIT_EXTERN NSString * const       _zhimaCreditCallBack_url;                    //芝麻信用回调地址
+UIKIT_EXTERN NSString * const       _sendSms_url;                     //发送短信接口
+UIKIT_EXTERN NSString * const       _bankCards_url;                     //换绑银行卡
+UIKIT_EXTERN NSString * const       _huifu_url;                    //用户开户接口
+UIKIT_EXTERN NSString * const       _queryCardInfo_url;                    //银行卡查询接口
+UIKIT_EXTERN NSString * const       _accountHSService_url;                    //用户状态查询接口
 
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码

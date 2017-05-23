@@ -19,7 +19,8 @@
 #import "DetailViewController.h"
 #import <MGBaseKit/MGBaseKit.h>
 #import <MGBankCard/MGBankCard.h>
-
+#import "SendSmsModel.h"
+#import "P2PViewController.h"
 #define redColor rgb(252, 0, 6)
 
 @interface BankCardViewController ()<UITableViewDataSource,UITableViewDelegate,
@@ -40,6 +41,8 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     NSInteger _cardFlag;
     NSInteger defaultBankIndex;
     BOOL _btnStatus;
+    NSString *_sms_seq;
+    NSString *_sms_code_;
 }
 @end
 
@@ -499,21 +502,40 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                 [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
                 _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
                 NSDictionary *parDic = @{@"mobile_phone_":dataListAll3[2],
-                                         @"flag":CODE_DRAW
+                                         @"busi_type_":@"user_register",
+                                         @"card_number_":dataListAll3[1]
                                          };
                 if (parDic) {
                     
-                    SMSViewModel *smsViewModel = [[SMSViewModel alloc] init];
-                    [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-                        _codeParse = returnValue;
-                        [_sureBtn setEnabled:YES];
-                        [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
-                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-                        DLog(@"---%@",_codeParse.msg);
-                    } WithFaileBlock:^{
+                    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+                        SendSmsModel *sendSmsModel = [SendSmsModel yy_modelWithJSON:object];
+                        
+                        if ([sendSmsModel.appcode isEqualToString:@"1"]) {
+                            [_sureBtn setEnabled:YES];
+                            [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
+                            _sms_seq = sendSmsModel.sms_seq_;
+                            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+                            
+                        } else {
+                            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+                        }
+                        
+                    } failure:^(EnumServerStatus status, id object) {
+                        
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
                     }];
-                    [smsViewModel fatchRequestSMS:parDic];
+                    
+//                    SMSViewModel *smsViewModel = [[SMSViewModel alloc] init];
+//                    [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
+//                        _codeParse = returnValue;
+//                        [_sureBtn setEnabled:YES];
+//                        [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
+//                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+//                        DLog(@"---%@",_codeParse.msg);
+//                    } WithFaileBlock:^{
+//                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
+//                    }];
+//                    [smsViewModel fatchRequestSMS:parDic];
                 }
                 
             }
@@ -554,6 +576,8 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     }else if (!_btnStatus) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请同意授权书"];
     }else{
+        
+        [self openAccount];
         [self PostSubmitUrl];
         //        [self PostBankCardCheck];
         
@@ -699,5 +723,52 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 {
     [self.view endEditing:YES];
 }
+
+#pragma mark 开户
+-(void)openAccount{
+
+    NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,_bankCodeNUm,bankNo,dataListAll3[3],_sms_seq];
+    P2PViewController *p2pVC = [[P2PViewController alloc] init];
+    p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+//    p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
+//    p2pVC.userSelectNum = _userSelectNum;
+    p2pVC.purposeSelect = _purposeSelect;
+    [self.navigationController pushViewController:p2pVC animated:YES];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end
