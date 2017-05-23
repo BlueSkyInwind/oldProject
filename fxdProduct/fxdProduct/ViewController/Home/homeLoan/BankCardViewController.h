@@ -31,4 +31,6 @@
 
 @property (nonatomic, strong) UserStateModel *userStateModel;
 
+@property (nonatomic,assign)BOOL isP2P;
+
 @end

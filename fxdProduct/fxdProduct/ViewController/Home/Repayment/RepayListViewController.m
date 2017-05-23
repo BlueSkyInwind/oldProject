@@ -257,11 +257,14 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
  *  查询用户账单信息
  *  status: 1->已还   2->逾期   3->未来期   4->当期
  */
+
+#pragma mark 全部还款
 - (IBAction)checkAll:(UIButton *)sender {
     _selectAllBtn.selected = !_selectAllBtn.selected;
     _readyPayAmount = 0.0;
     _save_amount = 0.0;
     if (_selectAllBtn.selected) {
+        [self showAlert];
         for (int i = 0; i < _cellSelectArr.count; i++) {
             [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
             if ([_userStateParse.platform_type isEqualToString:@"0"]) {
@@ -616,7 +619,16 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
 }
 
 
+#pragma mark 弹框
+-(void)showAlert{
 
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提前结清费用" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -501,43 +501,14 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                 
                 [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
                 _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
-                NSDictionary *parDic = @{@"mobile_phone_":dataListAll3[2],
-                                         @"busi_type_":@"user_register",
-                                         @"card_number_":dataListAll3[1]
-                                         };
-                if (parDic) {
-                    
-                    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-                        SendSmsModel *sendSmsModel = [SendSmsModel yy_modelWithJSON:object];
-                        
-                        if ([sendSmsModel.appcode isEqualToString:@"1"]) {
-                            [_sureBtn setEnabled:YES];
-                            [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
-                            _sms_seq = sendSmsModel.sms_seq_;
-                            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-                            
-                        } else {
-                            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-                        }
-                        
-                    } failure:^(EnumServerStatus status, id object) {
-                        
-                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
-                    }];
-                    
-//                    SMSViewModel *smsViewModel = [[SMSViewModel alloc] init];
-//                    [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-//                        _codeParse = returnValue;
-//                        [_sureBtn setEnabled:YES];
-//                        [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
-//                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-//                        DLog(@"---%@",_codeParse.msg);
-//                    } WithFaileBlock:^{
-//                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
-//                    }];
-//                    [smsViewModel fatchRequestSMS:parDic];
-                }
                 
+                if (_isP2P) {
+                    
+                    [self p2p];
+                }else{
+                
+                    [self sms];
+                }
             }
         }
             break;
@@ -545,6 +516,60 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             break;
     }
     
+}
+
+
+#pragma mark P2P短信发送
+-(void)p2p{
+
+    NSDictionary *parDic = @{@"mobile_phone_":dataListAll3[2],
+                             @"busi_type_":@"user_register",
+                             @"card_number_":dataListAll3[1]
+                             };
+    if (parDic) {
+        
+        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+            SendSmsModel *sendSmsModel = [SendSmsModel yy_modelWithJSON:object];
+            
+            if ([sendSmsModel.appcode isEqualToString:@"1"]) {
+                [_sureBtn setEnabled:YES];
+                [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
+                _sms_seq = sendSmsModel.sms_seq_;
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+                
+            } else {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+            }
+            
+        } failure:^(EnumServerStatus status, id object) {
+            
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
+        }];
+    
+    }
+}
+
+#pragma mark 发薪贷的短信发送
+-(void)sms{
+
+    NSDictionary *parDic = @{@"mobile_phone_":dataListAll3[2],
+                             @"flag":CODE_DRAW,
+                             @"service_platform_type_":@"4"
+                             };
+    if (parDic) {
+        
+        SMSViewModel *smsViewModel = [[SMSViewModel alloc] init];
+        [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
+            _codeParse = returnValue;
+            [_sureBtn setEnabled:YES];
+            [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+            DLog(@"---%@",_codeParse.msg);
+        } WithFaileBlock:^{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
+        }];
+        [smsViewModel fatchRequestSMS:parDic];
+    }
 }
 
 -(void)closeGetVerifyButton
@@ -577,10 +602,13 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请同意授权书"];
     }else{
         
-        [self openAccount];
+        if(_isP2P){
+            
+         [self openAccount];
+        }else{
+            
         [self PostSubmitUrl];
-        //        [self PostBankCardCheck];
-        
+        }
     }
 }
 
@@ -731,6 +759,11 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,_bankCodeNUm,bankNo,dataListAll3[3],_sms_seq];
     P2PViewController *p2pVC = [[P2PViewController alloc] init];
     p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    p2pVC.bankCodeNUm = _bankCodeNUm;
+    p2pVC.drawAmount= _drawAmount;
+    p2pVC.product_id = _userStateModel.product_id;
+    p2pVC.periodSelect = _periodSelect;
+    p2pVC.dataArray = dataListAll3;
 //    p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
 //    p2pVC.userSelectNum = _userSelectNum;
     p2pVC.purposeSelect = _purposeSelect;

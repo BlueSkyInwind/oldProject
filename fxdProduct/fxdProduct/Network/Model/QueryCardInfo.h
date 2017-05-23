@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class QueryCardInfoUsrCardInfolist;
 @interface QueryCardInfo : NSObject
 
 //开户银行账号   取现银行的账户号（银行卡号）
@@ -21,10 +21,37 @@
 //应答描述    返回码的对应中文描述
 @property (nonatomic,copy)NSString *RespDesc;
 //用户银行卡信息列表   
-@property (nonatomic,copy)NSString *UsrCardInfolist;
+@property (nonatomic,copy)QueryCardInfoUsrCardInfolist *UsrCardInfolist;
 //用户客户号   由汇付生成，用户的唯一性标识
 @property (nonatomic,copy)NSString *UsrCustId;
 
 
+
+@end
+
+
+@interface QueryCardInfoUsrCardInfolist : NSObject
+
+@property (nonatomic,copy)NSString *MerCustId;
+
+@property (nonatomic,copy)NSString *UsrCustId;
+
+@property (nonatomic,copy)NSString *UsrName;
+
+@property (nonatomic,copy)NSString *CertId;
+
+@property (nonatomic,copy)NSString *BankId;
+
+@property (nonatomic,copy)NSString *CardId;
+
+@property (nonatomic,copy)NSString *RealFlag;
+
+@property (nonatomic,copy)NSString *UpdDateTime;
+
+@property (nonatomic,copy)NSString *ProvId;
+
+@property (nonatomic,copy)NSString *AreaId;
+
+@property (nonatomic,copy)NSString *IsDefault;
 
 @end

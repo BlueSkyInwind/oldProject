@@ -46,6 +46,8 @@
 #import "DataDicParse.h"
 #import "UserDataViewController.h"
 #import "AccountHSServiceModel.h"
+#import "QueryCardInfo.h"
+#import "ActivationViewController.h"
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -234,11 +236,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
                         
                         checkFalse.seeView.hidden = NO;
-                        //                    checkFalse.jsdView.hidden = YES;
+                        checkFalse.jsdView.hidden = YES;
                         [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
                     }else{
                     
                         checkFalse.seeView.hidden = YES;
+                        checkFalse.jsdView.hidden = YES;
                     }
                    
 
@@ -646,7 +649,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDUserInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
                 DLog(@"%@",object);
                 _uploadP2PUserInfo = object;
-                [self checkP2PUserState];
+                [self integrationP2PUserState];
+//                [self checkP2PUserState];
             } failure:^(EnumServerStatus status, id object) {
                 
             }];
@@ -659,6 +663,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
 }
 
+
+#pragma mark 旧的合规
 - (void)checkP2PUserState
 {
     NSDictionary *paramDic = @{@"user_info":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_info"]],
@@ -675,6 +681,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"参数缺失,请退出重新登陆"];
         } else {
+            //
+            
+            
             //开户
             if ([drawServiceParse.data.flg isEqualToString:@"2"]) {
                 NSString *url = [NSString stringWithFormat:@"%@%@?from_user_id_=%@&from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&RetUrl=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url];
@@ -717,7 +726,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
 }
 
+#pragma mark 新的合规
+-(void)integrationP2PUserState{
 
+    [self userStatusQuery];
+    
+}
 - (void)addBildInfo:(GetCaseInfo *)caseInfo
 {
     NSDictionary *paramDic = @{@"product_id_":caseInfo.result.product_id_,
@@ -839,6 +853,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                         bankVC.periodSelect = _userSelectNum.integerValue;
                         bankVC.purposeSelect = _purposeSelect;
                         bankVC.userStateModel = _userStateModel;
+                        bankVC.isP2P = NO;
                         //            bankVC.idString = _idString;
                         bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
                         [self.navigationController pushViewController:bankVC animated:YES];
@@ -1266,6 +1281,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                         bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
                         bankVC.flagString = @"1";
                         bankVC.bankMobile = cardResult.bank_reserve_phone_;
+                        bankVC.isP2P = NO;
                         [self.navigationController pushViewController:bankVC animated:YES];
                     }else{
                         EnterAgainController *again=[EnterAgainController new];
@@ -1395,6 +1411,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     bankVC.periodSelect = _userSelectNum.integerValue;
                     bankVC.purposeSelect = _purposeSelect;
                     bankVC.userStateModel = _userStateModel;
+                    bankVC.isP2P = YES;
+                    
                     //            bankVC.idString = _idString;
                     bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
                     [self.navigationController pushViewController:bankVC animated:YES];
@@ -1407,7 +1425,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             
         }else if ([model.flg isEqualToString:@"3"]){
         
+            
             //激活用户
+            [self bankCardQuery];
            
         }else if ([model.flg isEqualToString:@"6"]){
         
@@ -1437,10 +1457,23 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
 }
 
-#pragma  mark - 合规提款
--(void)submit{
 
-    [self userStatusQuery];
+
+#pragma mark 银行卡查询接口
+-(void)bankCardQuery{
+
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryCardInfo_url] parameters:@{@"UsrCustId":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
+    
+        QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:object];
+        if (model.UsrCardInfolist) {
+            //激活开户
+            ActivationViewController *controller = [[ActivationViewController alloc]initWithNibName:@"ActivationViewController" bundle:nil];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
 }
 
 

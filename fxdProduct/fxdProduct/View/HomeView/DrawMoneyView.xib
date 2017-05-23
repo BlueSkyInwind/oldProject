@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -22,11 +26,11 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQt-2I-31R">
                                     <rect key="frame" x="0.0" y="197" width="166" height="60"/>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                     <state key="normal" title="取消">
-                                        <color key="titleColor" red="0.60863668859999998" green="0.60863668859999998" blue="0.60863668859999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleColor" red="0.60863668859999998" green="0.60863668859999998" blue="0.60863668859999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="DissureBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="CNM-cq-Ina"/>
@@ -34,12 +38,12 @@
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="335" translatesAutoresizingMaskIntoConstraints="NO" id="rxZ-Sf-YCR">
                                     <rect key="frame" x="0.0" y="197" width="335" height="10"/>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="yHC-yt-pqF"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="借款金额:2000元" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="307" translatesAutoresizingMaskIntoConstraints="NO" id="G6d-DW-MlV">
@@ -48,7 +52,7 @@
                                         <constraint firstAttribute="height" constant="25" id="rAO-rC-z72"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <color key="textColor" red="0.078431372550000003" green="0.59607843140000005" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.078431372550000003" green="0.59607843140000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="借款周期:2000元" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="307" translatesAutoresizingMaskIntoConstraints="NO" id="tt6-RA-tna">
@@ -57,7 +61,7 @@
                                         <constraint firstAttribute="height" constant="25" id="6mI-qM-pZD"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <color key="textColor" red="0.078431372550000003" green="0.59607843140000005" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.078431372550000003" green="0.59607843140000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="每周还款:2000元" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="307" translatesAutoresizingMaskIntoConstraints="NO" id="H14-ly-unk">
@@ -66,7 +70,7 @@
                                         <constraint firstAttribute="height" constant="25" id="zye-W6-ChK"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <color key="textColor" red="0.078431372550000003" green="0.59607843140000005" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.078431372550000003" green="0.59607843140000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提款卡号: 123456789009876543" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="307" translatesAutoresizingMaskIntoConstraints="NO" id="wee-Gs-RhZ">
@@ -75,23 +79,23 @@
                                         <constraint firstAttribute="height" constant="25" id="BQI-hk-x1s"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <color key="textColor" red="0.078431372550000003" green="0.59607843140000005" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.078431372550000003" green="0.59607843140000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ctd-e9-rsl">
                                     <rect key="frame" x="169" y="197" width="166" height="60"/>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                     <state key="normal" title="确认">
-                                        <color key="titleColor" red="0.62996323529999998" green="0.62996323529999998" blue="0.62996323529999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleColor" red="0.62996323529999998" green="0.62996323529999998" blue="0.62996323529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="SureBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="Awf-r0-u7i"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="mQt-2I-31R" secondAttribute="bottom" id="0M6-eJ-Y2M"/>
                                 <constraint firstAttribute="trailing" secondItem="H14-ly-unk" secondAttribute="trailing" constant="5" id="0Mm-JZ-3ml"/>
@@ -124,11 +128,11 @@
                                 <constraint firstAttribute="height" constant="25" id="5Br-qM-76S"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <color key="textColor" red="0.078431372550000003" green="0.59607843140000005" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.078431372550000003" green="0.59607843140000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="G5Y-oP-CWq" firstAttribute="leading" secondItem="xQi-c6-E5V" secondAttribute="leading" id="1cJ-8G-yTW"/>
                         <constraint firstItem="G5Y-oP-CWq" firstAttribute="top" secondItem="xQi-c6-E5V" secondAttribute="top" id="4ma-Le-pId"/>
@@ -149,14 +153,13 @@
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="xQi-c6-E5V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8RR-VJ-NyQ"/>
                 <constraint firstItem="xQi-c6-E5V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GuI-JC-cvW"/>
                 <constraint firstAttribute="bottom" secondItem="xQi-c6-E5V" secondAttribute="bottom" id="rAf-4H-bka"/>
                 <constraint firstAttribute="trailing" secondItem="xQi-c6-E5V" secondAttribute="trailing" id="wij-zh-Bpt"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
                 <outlet property="alertView" destination="g9U-dR-kvc" id="8UQ-mH-gbt"/>
                 <outlet property="bgView" destination="xQi-c6-E5V" id="V2g-LQ-rjb"/>

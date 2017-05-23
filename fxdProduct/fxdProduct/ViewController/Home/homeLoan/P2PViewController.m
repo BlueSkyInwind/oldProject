@@ -11,7 +11,7 @@
 #import "GetCaseInfo.h"
 #import "DrawService.h"
 #import "P2PBindCardViewController.h"
-
+#import "LoanMoneyViewController.h"
 @interface P2PViewController ()<WKUIDelegate,WKNavigationDelegate>
 {
     UIProgressView *progressView;
@@ -205,6 +205,55 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark ->进件信息
+-(void)PostSubmitUrl
+{
+    //提款
+    NSDictionary *paramDic = [self getSubmitInfo];
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_drawApply_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (status == Enum_SUCCESS) {
+            if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
+                LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
+                [self.navigationController pushViewController:loanVC animated:YES];
+            } else {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+            }
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+    
+}
+
+-(NSDictionary *)getSubmitInfo
+{
+    NSString *bankNo =[_dataArray[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSDictionary *paramDic;
+    if ([self.product_id isEqualToString:@"P001004"]) {
+        paramDic = @{@"card_no_":bankNo,
+                     @"card_bank_":_dataArray[1],
+                     @"bank_reserve_phone_":[_dataArray objectAtIndex:2],
+                     @"periods_":@2,
+                     @"loan_for_":_purposeSelect,
+                     @"verify_code_":_dataArray[3],
+                     @"drawing_amount_":_drawAmount};
+    }
+    if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001005"]) {
+        paramDic = @{@"card_no_":bankNo,
+                     @"card_bank_":_bankCodeNUm,
+                     @"bank_reserve_phone_":[_dataArray objectAtIndex:2],
+                     @"periods_":@(_periodSelect),
+                     @"loan_for_":_purposeSelect,
+                     @"verify_code_":_dataArray[3],
+                     @"drawing_amount_":_drawAmount};
+    }
+    
+    return paramDic;
+}
+
 
 /*
 #pragma mark - Navigation
