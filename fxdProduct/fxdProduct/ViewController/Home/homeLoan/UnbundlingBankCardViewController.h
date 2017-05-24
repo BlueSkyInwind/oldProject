@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import <UIKit/UIKit.h>
 
 @interface UnbundlingBankCardViewController : BaseViewController
 

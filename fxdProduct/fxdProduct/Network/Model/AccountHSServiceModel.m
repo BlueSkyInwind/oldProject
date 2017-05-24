@@ -10,6 +10,14 @@
 
 @implementation AccountHSServiceModel
 
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"data":[AccountHSServiceDataModel class]};
+}
+
+@end
+
+@implementation AccountHSServiceDataModel
+
 
 
 @end

@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivationViewController">
             <connections>
+                <outlet property="codeBtn" destination="qfT-1p-FYU" id="1W8-H6-bB8"/>
+                <outlet property="mobileTextField" destination="gWF-kg-N4L" id="Scx-n3-Fc1"/>
+                <outlet property="passwordTextField" destination="HkA-st-01x" id="qrR-fQ-WJW"/>
+                <outlet property="sureBtn" destination="bFA-mm-6kJ" id="Qdm-b9-VWP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

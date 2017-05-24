@@ -32,6 +32,10 @@
     self.navigationItem.title = @"解绑银行卡";
     [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
      [self addBackItem];
+    _countdown = 60;
+    self.bankTable.delegate = self;
+    self.bankTable.dataSource = self;
+    self.bankTable.separatorStyle = NO;
     [self.sureBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -45,6 +49,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     
         LabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"abcef%ld",indexPath.row]];
         if (!cell) {
@@ -86,7 +91,7 @@
         [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
         cell.selectionStyle  = UITableViewCellSelectionStyleNone;
         return cell;
-    
+
     return nil;
 }
 
@@ -101,12 +106,12 @@
     _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
     
     NSDictionary *paramDic = [self getParamDic];
-    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
        
         SendSmsModel *model = [SendSmsModel yy_modelWithJSON:object];
         if ([model.appcode isEqualToString:@"1"]) {
             
-            _sms_seq = model.sms_seq_;
+            _sms_seq = model.data.sms_seq_;
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
         }else{
         
@@ -138,9 +143,11 @@
 #pragma mark 获取验证码参数
 -(NSDictionary *)getParamDic{
 
+    NSString *bankNo =[_bankNum stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSDictionary *paramDic;
+    
     paramDic = @{@"busi_type_":@"rebind",
-                     @"card_number_":_bankNum,
+                     @"card_number_":bankNo,
                      @"mobile_":_mobile,
                      @"sms_type_":@"O"
                      };
