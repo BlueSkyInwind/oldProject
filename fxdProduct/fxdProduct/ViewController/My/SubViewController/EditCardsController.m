@@ -261,10 +261,6 @@
         btn.alpha = 0.4;
         _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
         
-        
-        NSDictionary *parDic = [self getDicOfParam];
-        if (parDic) {
-            
             SMSViewModel *smsViewModel = [[SMSViewModel alloc]init];
             [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
                 _codeParse = returnValue;
@@ -275,10 +271,9 @@
             } WithFaileBlock:^{
                 
             }];
-            [smsViewModel fatchRequestSMS:parDic];
+            [smsViewModel fatchRequestSMSParamPhoneNumber:self.reservedTel flag:CODE_ADDCARD];
             
             DLog(@"发送验证码");
-        }
     }
     else
     {
@@ -286,13 +281,6 @@
     }
 }
 
-//获取验证码参数
-- (NSDictionary *)getDicOfParam
-{
-    return @{@"mobile_phone_":self.reservedTel,
-             @"flag":CODE_ADDCARD,
-             };
-}
 
 #pragma mark TextfileDelegate
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

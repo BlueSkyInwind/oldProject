@@ -46,6 +46,7 @@
 #import "EmptyUserData.h"
 #import "YYText.h"
 #import "UIDevice+YYAdd.h"
+#import <JSONModel/JSONModel.h>
 #endif
 
 #endif

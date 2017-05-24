@@ -19,6 +19,7 @@ PODS:
   - FMDB/standard (2.6.2)
   - HHAlertView (0.1.0)
   - IQKeyboardManager (4.0.8)
+  - JSONModel (1.7.0)
   - Masonry (1.0.2)
   - MBProgressHUD (0.9.2)
   - MJRefresh (3.1.12)
@@ -58,6 +59,7 @@ DEPENDENCIES:
   - FMDB (~> 2.6.2)
   - HHAlertView (~> 0.1.0)
   - IQKeyboardManager
+  - JSONModel
   - Masonry
   - MBProgressHUD (~> 0.9.2)
   - MJRefresh (~> 3.1.0)
@@ -83,6 +85,7 @@ SPEC CHECKSUMS:
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   HHAlertView: 043766460ca18236a1e2fbbbdb396318d304d43d
   IQKeyboardManager: 1a8189fa153bf09044355ee0ad36826f6767e7f7
+  JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
@@ -95,6 +98,6 @@ SPEC CHECKSUMS:
   UMengAnalytics: ef8d45f94c0e5771dc364cf6a5731d9d3b101da2
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 01089da788b36ba62b9949f1f00128b2b6256193
+PODFILE CHECKSUM: db1cf2b9e342015536c54cc83c1a6cab998cba83
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

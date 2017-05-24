@@ -7,9 +7,17 @@
 //
 
 #import "ViewModelClass.h"
+#import "LoginParamModel.h"
 
 @interface LoginViewModel : ViewModelClass
 
-- (void)fatchLogin:(NSDictionary *)paramDic;
-
+/**
+ 登录请求
+ 
+ @param number 手机号
+ @param password 密码
+ @param fingerPrint 设备指纹
+ @param verifycode 验证码
+ */
+- (void)fatchLoginMoblieNumber:(NSString *)number password:(NSString *)password  fingerPrint:(NSString*)fingerPrint  verifyCode:(NSString *)verifycode;
 @end

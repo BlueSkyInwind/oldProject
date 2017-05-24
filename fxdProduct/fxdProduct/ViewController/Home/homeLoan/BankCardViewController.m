@@ -568,7 +568,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         } WithFaileBlock:^{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
         }];
-        [smsViewModel fatchRequestSMS:parDic];
+        [smsViewModel fatchRequestSMSParamPhoneNumber:dataListAll3[2] flag:CODE_DRAW];
     }
 }
 
