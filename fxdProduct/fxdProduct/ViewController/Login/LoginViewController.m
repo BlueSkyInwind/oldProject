@@ -61,45 +61,21 @@
     self.navigationItem.title = @"登录";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
-    
+    //视图加载
     _loginView =  [[NSBundle mainBundle]loadNibNamed:@"LoginView" owner:self options:nil].lastObject;
     _loginView.delegate = self;
     [self.view addSubview:_loginView];
     [_loginView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
+    //定位
     [self openLocationService];
     DLog(@"%d",[LunchViewController canShowNewFeature]);
+    //设备指纹
     [[BSFingerSDK sharedInstance] getFingerPrint:self withKey:@"com.hfsj.fxd"];
     
     [self setNav];
 }
-/**
- 开启定位服务
- */
--(void)openLocationService{
-    
-    _locService = [[BMKLocationService alloc] init];
-    _BSFIT_DEVICEID = @"";
-    _locService.delegate = self;
-    [_locService startUserLocationService];
-}
-
-#pragma mark
-#pragma mark -- BSFinger
-- (void)generateOnSuccess:(NSString *)fingerPrint andTraceId:(NSString *)traceId
-{
-    DLog(@"success -> %@",fingerPrint);
-    DLog(@"TraceId -> %@",traceId);
-    _BSFIT_DEVICEID = fingerPrint;
-}
-
-- (void)generateOnFailed:(NSError *)error
-{
-    DLog(@"error -> %@",[error localizedDescription]);
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -122,69 +98,116 @@
     
     [_loginView initialLoginButtonState];
 }
-
-
-- (void)startLogin
-{
-  
-        LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
-        [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
-            _loginParse = returnValue;
-            if ([_loginParse.flag isEqualToString: @"0000"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_loginParse.msg];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self dismissViewControllerAnimated:YES completion:^{
-                        _vaildCodeFlag = @"";
-                        ((AppDelegate *)[UIApplication sharedApplication].delegate).btb.selectedIndex = 0;
-                        if ([CLLocationManager locationServicesEnabled] &&
-                            ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways
-                             || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)) {
-                                //定位功能可用，开始定位
-                                NSDictionary *paramDic = @{@"last_longitude_":[NSString stringWithFormat:@"%f",_longitude],
-                                                           @"last_latitude_":[NSString stringWithFormat:@"%f",_latitude]};
-                                [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_updateLoginLatitude_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                                    DLog(@"%@",object);
-                                } failure:^(EnumServerStatus status, id object) {
-                                    
-                                }];
-                            }
-                        [_locService stopUserLocationService];
-                    }];
-                });
-                
-            } else {
-                if ([_loginParse.flag isEqualToString:@"0004"]) {
-                    
-                    [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前尝试在新设备上登录,确定要继续?" cencelBtn:@"取消" otherBtn:@[@"确定"] Onview:self.view compleBlock:^(NSInteger index) {
-                        if (index == 1) {
-                            UpdateDevIDViewController *updateView = [UpdateDevIDViewController new];
-                            updateView.state = Push_Dis;
-                            updateView.phoneStr = _loginView.userNameField.text;
-                            updateView.passStr = _loginView.passField.text;
-                            //                                DLog(@"%@   %@",updateView.phoneStr,updateView.passStr);
-                            [self.navigationController pushViewController:updateView animated:YES];
-                        }
-                    }];
-                } else if ([_loginParse.flag isEqualToString:@"0005"]) {
-                    _vaildCodeFlag = _loginParse.flag;
-                    //                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您当前的版本太低,为了您的使用体验请升级版本后再来体验^_^"];
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginParse.msg]];
-                    _loginView.codeView.hidden = NO;
-                } else {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginParse.msg]];
-                }
-            }
-        } WithFaileBlock:^{
-            
-        }];
+/**
+ 开启定位服务
+ */
+-(void)openLocationService{
     
-    [self postLoginRequest:loginViewModel];
+    _locService = [[BMKLocationService alloc] init];
+    _BSFIT_DEVICEID = @"";
+    _locService.delegate = self;
+    [_locService startUserLocationService];
+}
+
+#pragma mark - BMKLocaltionServiceDelegate
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+{
+
+}
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    
+    //    DLog(@"didUpdateUserLocation lat %f,long%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    _latitude = userLocation.location.coordinate.latitude;
+    _longitude = userLocation.location.coordinate.longitude;
+    
+}
+/**
+ 上传用户的位置信息
+ */
+-(void)uploadUserLocationInfo{
+    
+    if ([CLLocationManager locationServicesEnabled] &&
+        ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways
+         || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)) {
+            //定位功能可用，开始定位
+            NSDictionary *paramDic = @{@"last_longitude_":[NSString stringWithFormat:@"%f",_longitude],
+                                       @"last_latitude_":[NSString stringWithFormat:@"%f",_latitude]};
+            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_updateLoginLatitude_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+                DLog(@"%@",object);
+            } failure:^(EnumServerStatus status, id object) {
+                
+            }];
+        }
+    [_locService stopUserLocationService];
     
 }
 
+#pragma mark
+#pragma mark -- BSFinger
+- (void)generateOnSuccess:(NSString *)fingerPrint andTraceId:(NSString *)traceId
+{
+    DLog(@"success -> %@",fingerPrint);
+    DLog(@"TraceId -> %@",traceId);
+    _BSFIT_DEVICEID = fingerPrint;
+}
 
-#pragma mark - 获取参数
+- (void)generateOnFailed:(NSError *)error
+{
+    DLog(@"error -> %@",[error localizedDescription]);
+}
 
+
+#pragma mark - 开始登录
+- (void)startLogin
+{
+    
+    LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
+    [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _loginParse = returnValue;
+        if ([_loginParse.flag isEqualToString: @"0000"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_loginParse.msg];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self dismissViewControllerAnimated:YES completion:^{
+                    _vaildCodeFlag = @"";
+                    ((AppDelegate *)[UIApplication sharedApplication].delegate).btb.selectedIndex = 0;
+                    [self uploadUserLocationInfo];
+                }];
+            });
+       } else {
+            if ([_loginParse.flag isEqualToString:@"0004"]) {
+                
+                [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前尝试在新设备上登录,确定要继续?" cencelBtn:@"取消" otherBtn:@[@"确定"] Onview:self.view compleBlock:^(NSInteger index) {
+                    if (index == 1) {
+                        UpdateDevIDViewController *updateView = [UpdateDevIDViewController new];
+                        updateView.state = Push_Dis;
+                        updateView.phoneStr = _loginView.userNameField.text;
+                        updateView.passStr = _loginView.passField.text;
+                        //                                DLog(@"%@   %@",updateView.phoneStr,updateView.passStr);
+                        [self.navigationController pushViewController:updateView animated:YES];
+                    }
+                }];
+            } else if ([_loginParse.flag isEqualToString:@"0005"]) {
+                _vaildCodeFlag = _loginParse.flag;
+                //                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您当前的版本太低,为了您的使用体验请升级版本后再来体验^_^"];
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginParse.msg]];
+                _loginView.codeView.hidden = NO;
+            } else {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginParse.msg]];
+            }
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    
+    [self postLoginRequest:loginViewModel];
+ }
+
+/**
+ 发起登录请求
+
+ @param loginViewModel 请求类
+ */
 - (void)postLoginRequest:(LoginViewModel*)loginViewModel
 {
     if (_loginParse) {
@@ -200,21 +223,9 @@
     }
 }
 
-#pragma mark - BMKLocaltionServiceDelegate
-- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
-{
-    
-    
-}
-- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
-{
-    //    DLog(@"didUpdateUserLocation lat %f,long%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
-    _latitude = userLocation.location.coordinate.latitude;
-    _longitude = userLocation.location.coordinate.longitude;
-}
 #pragma mark -  LoginViewDelegate
 -(void)loginCommitMoblieNumber:(NSString *)number screct:(NSString *)serect code:(NSString *)code{
-    
+    //登录信息取值
     mobliePhone = number;
     userPassword = serect;
     veriyCode = code;
@@ -228,7 +239,6 @@
     } else {
         [self startLogin];
     }
-    
 }
 
 -(void)snsCodeCountdownBtnClicMoblieNumber:(NSString *)number{

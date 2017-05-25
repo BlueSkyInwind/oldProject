@@ -24,3 +24,13 @@
 
 
 @end
+
+
+
+@interface LoginLocationParamModel : JSONModel
+
+@property (strong , nonatomic)NSString * last_longitude_;
+@property (strong , nonatomic)NSString * last_latitude_;
+
+
+@end

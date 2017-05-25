@@ -20,4 +20,6 @@
  @param verifycode 验证码
  */
 - (void)fatchLoginMoblieNumber:(NSString *)number password:(NSString *)password  fingerPrint:(NSString*)fingerPrint  verifyCode:(NSString *)verifycode;
+
+
 @end

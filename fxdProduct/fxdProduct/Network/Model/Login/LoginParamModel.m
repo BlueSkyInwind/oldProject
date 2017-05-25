@@ -14,3 +14,13 @@
 
 
 @end
+
+
+
+@implementation LoginLocationParamModel
+
+
+@synthesize last_latitude_,last_longitude_;
+
+
+@end

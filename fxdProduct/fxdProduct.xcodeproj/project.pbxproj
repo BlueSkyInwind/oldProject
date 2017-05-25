@@ -573,12 +573,12 @@
 		63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */; };
 		842C0B531ED5909E00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
 		842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
-		842C0B561ED5922600366D11 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B551ED5922600366D11 /* LoginView.xib */; };
-		842C0B571ED5922600366D11 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B551ED5922600366D11 /* LoginView.xib */; };
 		842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B581ED599DE00366D11 /* LoginViewController.xib */; };
 		842C0B5A1ED599DE00366D11 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B581ED599DE00366D11 /* LoginViewController.xib */; };
 		842C0B5D1ED59C7A00366D11 /* LoginParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */; };
 		842C0B5E1ED59C7A00366D11 /* LoginParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */; };
+		84420A611ED678E200DFBFE0 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
+		84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84420A601ED678E200DFBFE0 /* LoginView.xib */; };
 		8446ABFF1EBDCDEA009E3551 /* FindZhimaCreditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446ABFE1EBDCDEA009E3551 /* FindZhimaCreditModel.m */; };
 		8446AC001EBDCDEA009E3551 /* FindZhimaCreditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446ABFE1EBDCDEA009E3551 /* FindZhimaCreditModel.m */; };
 		8446AC031EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */; };
@@ -586,8 +586,6 @@
 		84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
-		84DD364C1ED584BB0057F19A /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36481ED584BB0057F19A /* LoginView.m */; };
-		84DD364D1ED584BB0057F19A /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36481ED584BB0057F19A /* LoginView.m */; };
 		CC0559151EB988C000733C2E /* SesameCreditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0559131EB988C000733C2E /* SesameCreditCell.m */; };
 		CC0559161EB988C000733C2E /* SesameCreditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0559141EB988C000733C2E /* SesameCreditCell.xib */; };
 		CC05591F1EB9A36D00733C2E /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC05591D1EB9A36D00733C2E /* DisplayCell.m */; };
@@ -2243,18 +2241,18 @@
 		73DF9837B064F86BCFFAA01B /* Pods-fxd-fxdProductDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProductDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev.release.xcconfig"; sourceTree = "<group>"; };
 		842C0B511ED5909E00366D11 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		842C0B521ED5909E00366D11 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		842C0B551ED5922600366D11 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		842C0B581ED599DE00366D11 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		842C0B5B1ED59C7A00366D11 /* LoginParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginParamModel.h; sourceTree = "<group>"; };
 		842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginParamModel.m; sourceTree = "<group>"; };
+		84420A5E1ED678E200DFBFE0 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		84420A5F1ED678E200DFBFE0 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		84420A601ED678E200DFBFE0 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		8446ABFD1EBDCDEA009E3551 /* FindZhimaCreditModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindZhimaCreditModel.h; sourceTree = "<group>"; };
 		8446ABFE1EBDCDEA009E3551 /* FindZhimaCreditModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindZhimaCreditModel.m; sourceTree = "<group>"; };
 		8446AC011EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitZhimaCreditAuthModel.h; sourceTree = "<group>"; };
 		8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitZhimaCreditAuthModel.m; sourceTree = "<group>"; };
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
-		84DD36471ED584BB0057F19A /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
-		84DD36481ED584BB0057F19A /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		A17757A7FA93AA125FBE16DC /* Pods-fxd-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
 		CC0559121EB988C000733C2E /* SesameCreditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditCell.h; sourceTree = "<group>"; };
 		CC0559131EB988C000733C2E /* SesameCreditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditCell.m; sourceTree = "<group>"; };
@@ -2580,6 +2578,7 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84420A5D1ED6788D00DFBFE0 /* LoginView */,
 				63553AD41E5D29FC00B2C1FF /* UserDataCell */,
 				0F047F431C507D0D002ED7C0 /* writeView */,
 				1A762F711C1FBFB800964719 /* MyView */,
@@ -4526,9 +4525,6 @@
 		63ED333B1B6B523E008B6085 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				84DD36471ED584BB0057F19A /* LoginView.h */,
-				84DD36481ED584BB0057F19A /* LoginView.m */,
-				842C0B551ED5922600366D11 /* LoginView.xib */,
 				842C0B511ED5909E00366D11 /* LoginViewController.h */,
 				842C0B521ED5909E00366D11 /* LoginViewController.m */,
 				842C0B581ED599DE00366D11 /* LoginViewController.xib */,
@@ -4811,6 +4807,16 @@
 				73DF9837B064F86BCFFAA01B /* Pods-fxd-fxdProductDev.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		84420A5D1ED6788D00DFBFE0 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				84420A5E1ED678E200DFBFE0 /* LoginView.h */,
+				84420A5F1ED678E200DFBFE0 /* LoginView.m */,
+				84420A601ED678E200DFBFE0 /* LoginView.xib */,
+			);
+			path = LoginView;
 			sourceTree = "<group>";
 		};
 		84DD36361ED57DEE0057F19A /* SMS */ = {
@@ -5143,7 +5149,7 @@
 				63B63E411DB9E10F00CAFE32 /* MoxieSDKResource.bundle in Resources */,
 				1A8988FD1BEC9EBE00F9E81E /* MsgViewCell.xib in Resources */,
 				632DFF631E48500500E414B2 /* CycleTextCell.xib in Resources */,
-				842C0B561ED5922600366D11 /* LoginView.xib in Resources */,
+				84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */,
 				63B65DF11D519D1600207231 /* main.js in Resources */,
 				636AC4341D38EA7F00599590 /* PayMethodCell.xib in Resources */,
 				6391F7721D348B4E0097C943 /* bank_code_14@2x.png in Resources */,
@@ -5202,7 +5208,6 @@
 				CC0DFB261EA5B1090024841A /* QRPopView.xib in Resources */,
 				CC0DFB271EA5B1090024841A /* sumitView.xib in Resources */,
 				CC0DFB281EA5B1090024841A /* HelpViewCell.xib in Resources */,
-				842C0B571ED5922600366D11 /* LoginView.xib in Resources */,
 				CC0DFB291EA5B1090024841A /* LabelCell.xib in Resources */,
 				CC0DFB2A1EA5B1090024841A /* MoneyIngView.xib in Resources */,
 				CC0DFB2B1EA5B1090024841A /* ProfessViewController.xib in Resources */,
@@ -5615,7 +5620,6 @@
 				637636E91D76A72A00E93289 /* LewPopupViewAnimationFade.m in Sources */,
 				63553B151E5EEF1C00B2C1FF /* FaceIDOCRFront.m in Sources */,
 				638C3F3C1CF564A4000446A7 /* SquareRepaymentResult.m in Sources */,
-				84DD364C1ED584BB0057F19A /* LoginView.m in Sources */,
 				63553B191E5F0AF900B2C1FF /* FaceIDOCRBack.m in Sources */,
 				0F0FDAC21BC771EC00F3CF10 /* AboutViewController.m in Sources */,
 				635AB7B41BE3540100C32919 /* AmountMsgResult.m in Sources */,
@@ -5629,6 +5633,7 @@
 				0FA7A9A01C1FAA4400B3F6CB /* SubmitImageCell.m in Sources */,
 				CCA056BC1EBB3ECB00CB5F29 /* SesameCreditViewController.m in Sources */,
 				CC0559151EB988C000733C2E /* SesameCreditCell.m in Sources */,
+				84420A611ED678E200DFBFE0 /* LoginView.m in Sources */,
 				1A6AEDDA1C72B5BE00D48C6A /* TicketDetailController.m in Sources */,
 				637636EC1D76A72A00E93289 /* UIViewController+LewPopupViewController.m in Sources */,
 				63B142A81D9A0D7300C43B3F /* FXDUserInfo.m in Sources */,
@@ -5942,7 +5947,6 @@
 				CC0DF9A51EA5B1090024841A /* PhotoDetailViewController.m in Sources */,
 				CC0DF9A61EA5B1090024841A /* LOTComposition.m in Sources */,
 				CC0DF9A71EA5B1090024841A /* SSKeychainQuery.m in Sources */,
-				84DD364D1ED584BB0057F19A /* LoginView.m in Sources */,
 				CC0DF9A81EA5B1090024841A /* FirstRepayment.m in Sources */,
 				CC0DF9A91EA5B1090024841A /* LoginResult.m in Sources */,
 				CC0DF9AA1EA5B1090024841A /* UserInfoObj.m in Sources */,
