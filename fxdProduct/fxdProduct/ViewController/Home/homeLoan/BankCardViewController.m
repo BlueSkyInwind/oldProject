@@ -171,6 +171,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             cell.btnSecory.tag = 203;
             [cell.btnSecory addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+            [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
         }else if (indexPath.row == 2){
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             cell.btnSecory.hidden = YES;
@@ -213,6 +214,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 
 -(void)changeTextField:(UITextField *)textField
 {
+    
     if ([textField.text length] ==11) {
         [self.view endEditing:YES];
         [dataListAll3 replaceObjectAtIndex:2 withObject:textField.text];
@@ -303,6 +305,8 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     }
     if (textField.tag == 103)
     {
+        
+        NSLog(@"===%@",textField.text);
         if ([textField.text length] !=6) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
             //                [dataColorAll3 replaceObjectAtIndex:3 withObject:redColor];
@@ -310,8 +314,8 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             [dataListAll3 replaceObjectAtIndex:3 withObject:textField.text];
             [dataColorAll3 replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
-        
     }
+    
 }
 
 #pragma mark ->BankTableViewSelectDelegate
@@ -522,23 +526,27 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 #pragma mark P2P短信发送
 -(void)p2p{
 
-    NSDictionary *parDic = @{@"mobile_phone_":dataListAll3[2],
+    NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSDictionary *parDic = @{@"mobile_":dataListAll3[2],
                              @"busi_type_":@"user_register",
-                             @"card_number_":dataListAll3[1]
+                             @"card_number_":bankNo
                              };
+    
+    NSLog(@"==============%@",parDic);
     if (parDic) {
         
-        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:parDic finished:^(EnumServerStatus status, id object) {
             SendSmsModel *sendSmsModel = [SendSmsModel yy_modelWithJSON:object];
             
             if ([sendSmsModel.appcode isEqualToString:@"1"]) {
                 [_sureBtn setEnabled:YES];
                 [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
-                _sms_seq = sendSmsModel.sms_seq_;
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+                _sms_seq = sendSmsModel.data.sms_seq_;
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
                 
             } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
             }
             
         } failure:^(EnumServerStatus status, id object) {
@@ -554,7 +562,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 
     NSDictionary *parDic = @{@"mobile_phone_":dataListAll3[2],
                              @"flag":CODE_DRAW,
-                             @"service_platform_type_":@"4"
+                             
                              };
     if (parDic) {
         
@@ -755,8 +763,15 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 #pragma mark 开户
 -(void)openAccount{
 
+
+    NSString *bankName = [self bankName:_bankCodeNUm];
+    NSString *code = @"666666";
+    NSString *sms_seq = @"AAAAAAAA";
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,_bankCodeNUm,bankNo,dataListAll3[3],_sms_seq];
+//    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,@"ABC",bankNo,dataListAll3[3],_sms_seq];
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,bankName,bankNo,code,sms_seq];
+    NSLog(@"%@",url);
     P2PViewController *p2pVC = [[P2PViewController alloc] init];
     p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     p2pVC.bankCodeNUm = _bankCodeNUm;
@@ -770,38 +785,47 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     [self.navigationController pushViewController:p2pVC animated:YES];
 }
 
+-(NSString *)bankName:(NSString *)bankCode{
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    NSString *name = @"";
+    NSInteger code = bankCode.integerValue;
+    switch (code) {
+        case 1:
+            name = @"BC";
+            return name;
+            break;
+        case 2:
+            name = @"ICBC";
+            return name;
+            break;
+        case 3:
+            name = @"CCB";
+            return name;
+            break;
+        case 4:
+            name = @"ABC";
+            return name;
+            break;
+        case 8:
+            name = @"CNCB";
+            return name;
+            break;
+        case 9:
+            name = @"CIB";
+            return name;
+            break;
+        case 10:
+            name = @"CEB";
+            return name;
+            break;
+        case 29:
+            name = @"PSBC";
+            return name;
+            break;
+        default:
+            break;
+    }
+    return name;
+}
 
 @end

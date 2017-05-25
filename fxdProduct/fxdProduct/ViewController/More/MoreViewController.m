@@ -24,7 +24,6 @@
 #import "FXDWebViewController.h"
 #import "UIImage+Color.h"
 
-
 @interface MoreViewController () <UITableViewDataSource,UITableViewDelegate,MakeSureBtnDelegate,UIViewControllerTransitioningDelegate>
 {
     NSArray *imgAry;
@@ -185,6 +184,7 @@
     if(indexPath.section==0)
     {
         if(indexPath.row==0){
+
             aboutUs=[[AboutMainViewController alloc]initWithNibName:@"AboutMainViewController" bundle:nil];
             [self.navigationController pushViewController:aboutUs animated:YES];
         }

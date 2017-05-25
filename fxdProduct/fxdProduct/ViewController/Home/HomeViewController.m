@@ -44,8 +44,10 @@
 #import "HomeBannerModel.h"
 #import "RateModel.h"
 #import "HomeProductList.h"
-
-
+#import "ActivationViewController.h"
+#import "UnbundlingBankCardViewController.h"
+#import "ChangeBankCardViewController.h"
+#import "BankCardViewController.h"
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
@@ -587,36 +589,46 @@
 #pragma mark ->我要还款
 - (void)payMoney
 {
-    if ([Utility sharedUtility].loginFlage) {
-        //        [self checkState:nil];
-        RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
-        repayRequest.targetVC = self;
-        [repayRequest repayRequest];
-    } else {
-        [self presentLogin:self];
-    }
+    
+    
+    ActivationViewController *controller = [[ActivationViewController alloc]initWithNibName:@"ActivationViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
+//    if ([Utility sharedUtility].loginFlage) {
+//        //        [self checkState:nil];
+//        RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+//        repayRequest.targetVC = self;
+//        [repayRequest repayRequest];
+//    } else {
+//        [self presentLogin:self];
+//    }
 }
 
 - (void)loanProcess
 {
+//    BankCardViewController *controller = [[BankCardViewController alloc]initWithNibName:@"BankCardViewController" bundle:nil];
+//    [self.navigationController pushViewController:controller animated:YES];
+    
+    UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
     DLog(@"借款进度");
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        LoanProcessModel *loanProcess = [LoanProcessModel yy_modelWithJSON:object];
-        if ([loanProcess.flag isEqualToString:@"0000"]) {
-            LoanProcessViewController *processVC = [[LoanProcessViewController alloc] init];
-            processVC.loanProcessParse = loanProcess;
-            [self.navigationController pushViewController:processVC animated:true];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:loanProcess.msg];
-        }
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
+//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+//        LoanProcessModel *loanProcess = [LoanProcessModel yy_modelWithJSON:object];
+//        if ([loanProcess.flag isEqualToString:@"0000"]) {
+//            LoanProcessViewController *processVC = [[LoanProcessViewController alloc] init];
+//            processVC.loanProcessParse = loanProcess;
+//            [self.navigationController pushViewController:processVC animated:true];
+//        } else {
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:loanProcess.msg];
+//        }
+//        
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
 }
 
 - (void)expense
 {
+    
     DLog(@"费用说明");
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
     webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_loanDetial_url];

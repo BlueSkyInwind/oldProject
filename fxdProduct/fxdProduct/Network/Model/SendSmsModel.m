@@ -10,4 +10,14 @@
 
 @implementation SendSmsModel
 
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"data":[SendSmsDataModel class]};
+}
+
+@end
+
+@implementation SendSmsDataModel
+
+
+
 @end

@@ -743,10 +743,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                @"title_":caseInfo.result.title_,
                                @"from_":caseInfo.result.from_,
                                @"client_":caseInfo.result.client_,
-                               @"juid":caseInfo.result.start_date_,
                                @"from_case_id_":caseInfo.result.from_case_id_,
                                @"description_":caseInfo.result.description_,
                                @"invest_days_":caseInfo.result.invest_days_};
+    
+    NSLog(@"=========%@",paramDic);
     
 //    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_addBidInfo_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
     
@@ -1189,6 +1190,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
         }
     }
+    
+    [checkSuccess.pickweek reloadAllComponents];
 }
 #pragma mark -> 2.22	审批金额查询接口
 
@@ -1395,65 +1398,80 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 #pragma  mark - 用户状态查询接口
 
 -(void)userStatusQuery{
-
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_accountHSService_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
-        
-//        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-            AccountHSServiceModel *model = [AccountHSServiceModel yy_modelWithJSON:object];
-        if ([model.flg isEqualToString:@"2"]||[model.flg isEqualToString:@"5"]) {  //2、未开户 3、待激活 4、冻结 5、销户 6、正常
-            //绑定银行卡
-            NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                BankModel *bankModel = [BankModel yy_modelWithJSON:object];
-                if ([bankModel.flag isEqualToString:@"0000"]) {
-                    BankCardViewController *bankVC = [BankCardViewController new];
-                    bankVC.bankModel = bankModel;
-                    bankVC.periodSelect = _userSelectNum.integerValue;
-                    bankVC.purposeSelect = _purposeSelect;
-                    bankVC.userStateModel = _userStateModel;
-                    bankVC.isP2P = YES;
-                    
-                    //            bankVC.idString = _idString;
-                    bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
-                    [self.navigationController pushViewController:bankVC animated:YES];
-                } else {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
-                }
-            } failure:^(EnumServerStatus status, id object) {
-                DLog(@"%@",object);
-            }];
-            
-        }else if ([model.flg isEqualToString:@"3"]){
-        
-            
-            //激活用户
-            [self bankCardQuery];
-           
-        }else if ([model.flg isEqualToString:@"6"]){
-        
-            //发标
-            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-                DLog(@"%@",object);
-                GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
-                if ([caseInfo.flag isEqualToString:@"0000"]) {
-                    [self addBildInfo:caseInfo];
-                }
-                
-            } failure:^(EnumServerStatus status, id object) {
-                
-            }];
-            
-        }
-
-
-        
-//        } else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-//        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
     
+    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"参数缺失,请退出重新登陆"];
+    } else {
+        NSDictionary *paramDic = @{@"client_":@"1",@"form_":@"2",@"form_user_id_":[Utility sharedUtility].userInfo.account_id,@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,@"id_number_":[Utility sharedUtility].userInfo.userIDNumber,@"user_contacter":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_contacter"]],@"user_info":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_info"]],@"user_type_":@"J"};
+        
+        [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_accountHSService_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+            
+    //        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+                AccountHSServiceModel *model = [AccountHSServiceModel yy_modelWithJSON:object];
+            if ([model.appcode isEqualToString:@"1"]) {
+                
+//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.data.appmsg];
+                
+                if ([model.data.flg isEqualToString:@"2"]||[model.data.flg isEqualToString:@"5"]) {  //2、未开户 3、待激活 4、冻结 5、销户 6、正常
+                    //绑定银行卡
+                    NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
+                    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+                        BankModel *bankModel = [BankModel yy_modelWithJSON:object];
+                        if ([bankModel.flag isEqualToString:@"0000"]) {
+                            BankCardViewController *bankVC = [BankCardViewController new];
+                            bankVC.bankModel = bankModel;
+                            bankVC.periodSelect = _userSelectNum.integerValue;
+                            bankVC.purposeSelect = _purposeSelect;
+                            bankVC.userStateModel = _userStateModel;
+                            bankVC.isP2P = YES;
+                            
+                            //            bankVC.idString = _idString;
+                            bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
+                            [self.navigationController pushViewController:bankVC animated:YES];
+                        } else {
+                            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
+                        }
+                    } failure:^(EnumServerStatus status, id object) {
+                        DLog(@"%@",object);
+                    }];
+                    
+                }else if ([model.data.flg isEqualToString:@"3"]){
+                    
+                    
+                    //激活用户
+                    [self bankCardQuery];
+                    
+                }else if ([model.data.flg isEqualToString:@"6"]){
+                    
+                    //发标
+                    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+                        DLog(@"%@",object);
+                        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
+                        if ([caseInfo.flag isEqualToString:@"0000"]) {
+                            [self addBildInfo:caseInfo];
+                        }
+                        
+                    } failure:^(EnumServerStatus status, id object) {
+                        
+                    }];
+                    
+                }
+            }else{
+                
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.data.appmsg];
+                
+            }
+            
+
+
+            
+    //        } else {
+    //            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+    //        }
+        } failure:^(EnumServerStatus status, id object) {
+            
+        }];
+    }
     
 }
 

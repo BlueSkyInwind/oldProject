@@ -11,8 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangeBankCardViewController">
             <connections>
-                <outlet property="changTab" destination="X6q-FT-e7m" id="2F9-mY-zac"/>
-                <outlet property="sureBtn" destination="hE8-E5-dtf" id="uh4-nW-wab"/>
+                <outlet property="changTab" destination="LDy-4p-tId" id="IGy-Rg-YJj"/>
+                <outlet property="sureBtn" destination="8Ew-dv-p2j" id="JQc-it-l5Z"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,42 +21,37 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X6q-FT-e7m">
-                    <rect key="frame" x="0.0" y="64" width="375" height="402"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LDy-4p-tId">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="375" id="cov-Ct-gXJ"/>
-                        <constraint firstAttribute="height" constant="402" id="uX0-Ok-l2p"/>
+                        <constraint firstAttribute="width" constant="375" id="KrB-1B-Xuh"/>
+                        <constraint firstAttribute="height" constant="400" id="o7m-JP-f2b"/>
                     </constraints>
-                    <connections>
-                        <outlet property="dataSource" destination="i5M-Pr-FkT" id="8Ux-zd-fUA"/>
-                        <outlet property="delegate" destination="i5M-Pr-FkT" id="N8Z-IQ-icR"/>
-                    </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hE8-E5-dtf">
-                    <rect key="frame" x="40" y="529" width="295" height="44"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ew-dv-p2j">
+                    <rect key="frame" x="40" y="459" width="295" height="44"/>
                     <color key="backgroundColor" red="0.0" green="0.53333333329999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="295" id="0F7-Dh-GzN"/>
-                        <constraint firstAttribute="height" constant="44" id="RSq-a3-Tsm"/>
+                        <constraint firstAttribute="height" constant="44" id="25o-Qy-i0a"/>
+                        <constraint firstAttribute="width" constant="295" id="y4G-at-x5i"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="确认">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="X6q-FT-e7m" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="0rk-5J-pGZ"/>
-                <constraint firstItem="X6q-FT-e7m" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="I2B-NG-zuC"/>
-                <constraint firstAttribute="bottom" secondItem="hE8-E5-dtf" secondAttribute="bottom" constant="94" id="KCc-SW-7BI"/>
-                <constraint firstAttribute="trailing" secondItem="X6q-FT-e7m" secondAttribute="trailing" id="MKz-uO-vN8"/>
-                <constraint firstAttribute="trailing" secondItem="hE8-E5-dtf" secondAttribute="trailing" constant="40" id="MkT-rN-bI9"/>
-                <constraint firstItem="hE8-E5-dtf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="tx2-Pg-OS3"/>
+                <constraint firstItem="LDy-4p-tId" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Bhs-4A-d6R"/>
+                <constraint firstAttribute="trailing" secondItem="LDy-4p-tId" secondAttribute="trailing" id="G7e-gl-iFW"/>
+                <constraint firstItem="8Ew-dv-p2j" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="cq0-2P-w2k"/>
+                <constraint firstItem="8Ew-dv-p2j" firstAttribute="top" secondItem="LDy-4p-tId" secondAttribute="bottom" constant="59" id="gXb-WS-ysb"/>
+                <constraint firstItem="LDy-4p-tId" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="quJ-A7-T5J"/>
+                <constraint firstAttribute="trailing" secondItem="8Ew-dv-p2j" secondAttribute="trailing" constant="40" id="teE-gJ-VDZ"/>
             </constraints>
-            <nil key="simulatedStatusBarMetrics"/>
-            <point key="canvasLocation" x="33.5" y="53.5"/>
+            <point key="canvasLocation" x="38.5" y="62.5"/>
         </view>
     </objects>
 </document>

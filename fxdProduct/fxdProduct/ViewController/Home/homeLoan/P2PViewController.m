@@ -12,6 +12,8 @@
 #import "DrawService.h"
 #import "P2PBindCardViewController.h"
 #import "LoanMoneyViewController.h"
+#import "RTRootNavigationController.h"
+#import "CheckViewController.h"
 @interface P2PViewController ()<WKUIDelegate,WKNavigationDelegate>
 {
     UIProgressView *progressView;
@@ -117,9 +119,18 @@
 {
     NSURLRequest *request = navigationAction.request;
     DLog(@"%@",request.URL.absoluteString);
+    
+    if([webView.URL.absoluteString containsString:_transition_url]){
+        for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+            if ([vc isKindOfClass:[CheckViewController class]]) {
+                [self.navigationController popToViewController:vc animated:YES];
+            }
+        }
+    }
+    
     if ([request.URL.absoluteString isEqualToString:_transition_url]) {
         decisionHandler(WKNavigationActionPolicyAllow);
-        [self checkP2PUserState];
+//        [self checkP2PUserState];
     }else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
