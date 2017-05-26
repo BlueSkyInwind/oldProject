@@ -60,8 +60,7 @@
             self.sendCodeButton.alpha = 0.4;
             [self.sendCodeButton setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
             _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
-            NSDictionary *parDic = [self getDicOfParam];
-            if (parDic) {
+
                 SMSViewModel *smsViewModel = [[SMSViewModel alloc] init];
                 [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
                     _codeParse = returnValue;
@@ -69,8 +68,7 @@
                 } WithFaileBlock:^{
                     
                 }];
-                [smsViewModel fatchRequestSMS:parDic];
-            }
+                [smsViewModel fatchRequestSMSParamPhoneNumber:self.phoneNumField.text flag:CODE_FINDPASS];
         }
     } else {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效的手机号码"];
@@ -134,14 +132,6 @@
              @"mobile_phone_":self.phoneNumField.text,
              @"verify_code_":self.codeField.text
              };
-}
-
-//获取验证码参数
-- (NSDictionary *)getDicOfParam
-{
-        return @{@"mobile_phone_":self.phoneNumField.text,
-                 @"flag":CODE_FINDPASS,
-                 };
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -37,7 +37,7 @@ abstract_target 'fxd' do
 
     pod 'Masonry'
     pod 'JSONModel'
-
+    
     target 'fxdProduct'
     target 'fxdProductDev'
 

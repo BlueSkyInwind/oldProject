@@ -8,9 +8,14 @@
 
 #import "ViewModelClass.h"
 #import "ReturnMsgBaseClass.h"
-
+#import "SMSModel.h"
 @interface SMSViewModel : ViewModelClass
 
-- (void)fatchRequestSMS:(NSDictionary *)paramDic;
-
+/**
+ 发送验证码请求
+ 
+ @param number 手机号
+ @param flag 验证码类型
+ */
+- (void)fatchRequestSMSParamPhoneNumber:(NSString *)number flag:(NSString *)flag;
 @end
