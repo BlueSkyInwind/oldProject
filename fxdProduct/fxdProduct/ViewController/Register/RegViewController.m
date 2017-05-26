@@ -399,10 +399,7 @@
 - (void)login
 {
     if ([Utility sharedUtility].networkState) {
-        NSDictionary *paramDic = [self getLoginParam];
-        
-        if (paramDic) {
-            
+
             LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
             [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
                 _loginParse = returnValue;
@@ -423,11 +420,10 @@
             } WithFaileBlock:^{
                 
             }];
-            [loginViewModel fatchLogin:paramDic];
+            [loginViewModel fatchLoginMoblieNumber:self.phoneNumText.text password:self.passText.text fingerPrint:nil verifyCode:nil];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"没有连接到网络"];
         }
-    } else {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"似乎没有连接到网络"];
-    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

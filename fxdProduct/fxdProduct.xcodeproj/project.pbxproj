@@ -114,7 +114,7 @@
 		1AFE7EB01C2A3CC30016CD02 /* GesturesPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */; };
 		22D2BFB41EA4A97100B69360 /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */; };
 		22D2BFB81EA4BD9900B69360 /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D2BFB71EA4BD9900B69360 /* MGBankCard.framework */; };
-		46766849560B604CBAA1195B /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */; };
+		3E2B09C36E24E9E9316FAC1B /* Pods_fxd_fxdProduct.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 556C177616476C4A424DFF82 /* Pods_fxd_fxdProduct.framework */; };
 		63001A231BA8113000E2850A /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 63001A1F1BA8113000E2850A /* GTMBase64.m */; };
 		6300CC031E4AAB870012B05A /* LoanProcessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6300CC021E4AAB870012B05A /* LoanProcessModel.m */; };
 		6300CC071E4AB1BC0012B05A /* LoanRecordParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6300CC061E4AB1BC0012B05A /* LoanRecordParse.m */; };
@@ -505,8 +505,6 @@
 		63EC5C871E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EC5C861E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m */; };
 		63ED33341B6B4570008B6085 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED33331B6B4570008B6085 /* BaseViewController.m */; };
 		63ED33371B6B4593008B6085 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED33361B6B4593008B6085 /* BaseNavigationViewController.m */; };
-		63ED33421B6B52D6008B6085 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED33401B6B52D6008B6085 /* LoginViewController.m */; };
-		63ED33431B6B52D6008B6085 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63ED33411B6B52D6008B6085 /* LoginViewController.xib */; };
 		63ED33471B6B5569008B6085 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED33451B6B5569008B6085 /* RegViewController.m */; };
 		63F0E1B71CE4166E001251A9 /* UIDevice+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F0E1B61CE4166E001251A9 /* UIDevice+YYAdd.m */; };
 		63F0E1BB1CE417FF001251A9 /* NSString+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F0E1BA1CE417FF001251A9 /* NSString+YYAdd.m */; };
@@ -574,12 +572,24 @@
 		63FF48541B6F06F7009E384C /* FindPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48521B6F06F7009E384C /* FindPassViewController.m */; };
 		63FF48581B6F15DB009E384C /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */; };
 		63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */; };
-		64914AF438C45737B1D9D62A /* Pods_fxd_fxdProduct.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 556C177616476C4A424DFF82 /* Pods_fxd_fxdProduct.framework */; };
-		84420A631ED67B0000DFBFE0 /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
+		81B4154D94C5352EFA4832C3 /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */; };
+		842C0B531ED5909E00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
+		842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
+		842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B581ED599DE00366D11 /* LoginViewController.xib */; };
+		842C0B5A1ED599DE00366D11 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B581ED599DE00366D11 /* LoginViewController.xib */; };
+		842C0B5D1ED59C7A00366D11 /* LoginParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */; };
+		842C0B5E1ED59C7A00366D11 /* LoginParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */; };
+		84420A611ED678E200DFBFE0 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
+		84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84420A601ED678E200DFBFE0 /* LoginView.xib */; };
 		8446ABFF1EBDCDEA009E3551 /* FindZhimaCreditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446ABFE1EBDCDEA009E3551 /* FindZhimaCreditModel.m */; };
 		8446AC001EBDCDEA009E3551 /* FindZhimaCreditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446ABFE1EBDCDEA009E3551 /* FindZhimaCreditModel.m */; };
 		8446AC031EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */; };
 		8446AC041EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */; };
+		845017311ED7CD88008055E4 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84420A601ED678E200DFBFE0 /* LoginView.xib */; };
+		845017321ED7D051008055E4 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
+		84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
+		84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
+		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
 		CC0559151EB988C000733C2E /* SesameCreditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0559131EB988C000733C2E /* SesameCreditCell.m */; };
 		CC0559161EB988C000733C2E /* SesameCreditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0559141EB988C000733C2E /* SesameCreditCell.xib */; };
 		CC05591F1EB9A36D00733C2E /* DisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC05591D1EB9A36D00733C2E /* DisplayCell.m */; };
@@ -617,7 +627,6 @@
 		CC0DF9711EA5B1090024841A /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48481B6F036F009E384C /* MyViewController.m */; };
 		CC0DF9721EA5B1090024841A /* GetUserIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FDD1C1519CD008E1CF9 /* GetUserIP.m */; };
 		CC0DF9731EA5B1090024841A /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63112A711BDF162F002B372C /* HelpViewController.m */; };
-		CC0DF9741EA5B1090024841A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED33401B6B52D6008B6085 /* LoginViewController.m */; };
 		CC0DF9751EA5B1090024841A /* LOTRectShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A169B1E517D9F00AB8AB6 /* LOTRectShapeLayer.m */; };
 		CC0DF9761EA5B1090024841A /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 636352171C51D005001C327A /* UserInfoCell.m */; };
 		CC0DF9771EA5B1090024841A /* IdeaBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E30D01BC8A70C0018A801 /* IdeaBackViewController.m */; };
@@ -1106,7 +1115,6 @@
 		CC0DFB5E1EA5B1090024841A /* bank_code_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76C1D348B4E0097C943 /* bank_code_5@2x.png */; };
 		CC0DFB5F1EA5B1090024841A /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */; };
 		CC0DFB601EA5B1090024841A /* BasicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 630B16421C5601CE006D46CF /* BasicInfoViewController.xib */; };
-		CC0DFB611EA5B1090024841A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63ED33411B6B52D6008B6085 /* LoginViewController.xib */; };
 		CC0DFB621EA5B1090024841A /* bank_code_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7671D348B4E0097C943 /* bank_code_1@2x.png */; };
 		CC0DFB631EA5B1090024841A /* LoanSureFirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F5AD921E23849C001BDF44 /* LoanSureFirstViewController.xib */; };
 		CC0DFB641EA5B1090024841A /* BankListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63741E371D3CD4A300C0E2F8 /* BankListCell.xib */; };
@@ -1194,6 +1202,8 @@
 		CCF8032A1ED4249A003B7975 /* UnbundlingBankCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF803261ED4249A003B7975 /* UnbundlingBankCardViewController.xib */; };
 		CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
 		CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
+		EF27DA27932A7C2AC840F7ED /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ECD9F837F823AC9D2C9344A /* Pods_fxd_fxdProductDev.framework */; };
+		FEC9E035CB1E3F9712B4E125 /* Pods_fxd_fxdProduct.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0224CD8C7698BC9AFEDB3968 /* Pods_fxd_fxdProduct.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1237,6 +1247,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0224CD8C7698BC9AFEDB3968 /* Pods_fxd_fxdProduct.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProduct.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		032FA7DA1BE1BB3300CF2D21 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		032FA7DC1BE1BB3A00CF2D21 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		032FA7DE1BE1BB3F00CF2D21 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1408,6 +1419,7 @@
 		1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GesturesPasswordCell.h; sourceTree = "<group>"; };
 		1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GesturesPasswordCell.m; sourceTree = "<group>"; };
 		1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GesturesPasswordCell.xib; sourceTree = "<group>"; };
+		1ECD9F837F823AC9D2C9344A /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGBankCardResource.bundle; sourceTree = "<group>"; };
 		22D2BFB71EA4BD9900B69360 /* MGBankCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBankCard.framework; sourceTree = "<group>"; };
 		3C2819F71AD8F8FCD65CAD98 /* Pods_fxdProduct.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxdProduct.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2110,9 +2122,6 @@
 		63ED33331B6B4570008B6085 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		63ED33351B6B4593008B6085 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
 		63ED33361B6B4593008B6085 /* BaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationViewController.m; sourceTree = "<group>"; };
-		63ED333F1B6B52D6008B6085 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		63ED33401B6B52D6008B6085 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		63ED33411B6B52D6008B6085 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		63ED33441B6B5569008B6085 /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		63ED33451B6B5569008B6085 /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		63F0E1B51CE4166E001251A9 /* UIDevice+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+YYAdd.h"; sourceTree = "<group>"; };
@@ -2237,11 +2246,20 @@
 		63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarViewController.m; sourceTree = "<group>"; };
 		63FFFBEC1D86B285000E3C38 /* NSDictionary+NilSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NilSafe.h"; sourceTree = "<group>"; };
 		63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NilSafe.m"; sourceTree = "<group>"; };
+		842C0B511ED5909E00366D11 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		842C0B521ED5909E00366D11 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		842C0B581ED599DE00366D11 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		842C0B5B1ED59C7A00366D11 /* LoginParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginParamModel.h; sourceTree = "<group>"; };
+		842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginParamModel.m; sourceTree = "<group>"; };
+		84420A5E1ED678E200DFBFE0 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		84420A5F1ED678E200DFBFE0 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		84420A601ED678E200DFBFE0 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		8446ABFD1EBDCDEA009E3551 /* FindZhimaCreditModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindZhimaCreditModel.h; sourceTree = "<group>"; };
 		8446ABFE1EBDCDEA009E3551 /* FindZhimaCreditModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindZhimaCreditModel.m; sourceTree = "<group>"; };
 		8446AC011EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitZhimaCreditAuthModel.h; sourceTree = "<group>"; };
 		8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitZhimaCreditAuthModel.m; sourceTree = "<group>"; };
-		97237A6050AF56E7EBBDC521 /* Pods-fxd-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
+		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
+		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
 		CC0559121EB988C000733C2E /* SesameCreditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditCell.h; sourceTree = "<group>"; };
 		CC0559131EB988C000733C2E /* SesameCreditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditCell.m; sourceTree = "<group>"; };
 		CC0559141EB988C000733C2E /* SesameCreditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditCell.xib; sourceTree = "<group>"; };
@@ -2289,6 +2307,7 @@
 		CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeProductList.m; sourceTree = "<group>"; };
 		DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64833171B0C1433C0C2116C /* Pods-fxd-fxdProductDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProductDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev.release.xcconfig"; sourceTree = "<group>"; };
+		EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
 		F70FEAC7BC7C9FD6A4BA8015 /* Pods-fxd-fxdProduct.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2341,7 +2360,8 @@
 				63F0E1C71CE57B80001251A9 /* libBSFingerSDK.a in Frameworks */,
 				6326C9CB1BF040A600FD23A8 /* AdSupport.framework in Frameworks */,
 				032FA7E31BE1BB4900CF2D21 /* CFNetwork.framework in Frameworks */,
-				64914AF438C45737B1D9D62A /* Pods_fxd_fxdProduct.framework in Frameworks */,
+				FEC9E035CB1E3F9712B4E125 /* Pods_fxd_fxdProduct.framework in Frameworks */,
+				3E2B09C36E24E9E9316FAC1B /* Pods_fxd_fxdProduct.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2400,7 +2420,8 @@
 				CC0DFB131EA5B1090024841A /* libBSFingerSDK.a in Frameworks */,
 				CC0DFB141EA5B1090024841A /* AdSupport.framework in Frameworks */,
 				CC0DFB151EA5B1090024841A /* CFNetwork.framework in Frameworks */,
-				46766849560B604CBAA1195B /* Pods_fxd_fxdProductDev.framework in Frameworks */,
+				EF27DA27932A7C2AC840F7ED /* Pods_fxd_fxdProductDev.framework in Frameworks */,
+				81B4154D94C5352EFA4832C3 /* Pods_fxd_fxdProductDev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2572,6 +2593,7 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84420A5D1ED6788D00DFBFE0 /* LoginView */,
 				63553AD41E5D29FC00B2C1FF /* UserDataCell */,
 				0F047F431C507D0D002ED7C0 /* writeView */,
 				1A762F711C1FBFB800964719 /* MyView */,
@@ -2826,6 +2848,8 @@
 				63145AA51CA294B800D04ED8 /* LoginBaseClass.m */,
 				63145AA61CA294B800D04ED8 /* LoginResult.h */,
 				63145AA71CA294B800D04ED8 /* LoginResult.m */,
+				842C0B5B1ED59C7A00366D11 /* LoginParamModel.h */,
+				842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -4294,6 +4318,7 @@
 			children = (
 				CCEEB4191ED6EA5700588B6A /* queryBidStatus */,
 				CCEEB4141ED6E9AF00588B6A /* BosAcctActivate */,
+				84DD36361ED57DEE0057F19A /* SMS */,
 				CC5D70291ED4403600A074AF /* PaymentService */,
 				CC5D70241ED43FE500A074AF /* Cash */,
 				CCF803191ED3D02E003B7975 /* AccountHSService */,
@@ -4517,9 +4542,9 @@
 		63ED333B1B6B523E008B6085 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				63ED333F1B6B52D6008B6085 /* LoginViewController.h */,
-				63ED33401B6B52D6008B6085 /* LoginViewController.m */,
-				63ED33411B6B52D6008B6085 /* LoginViewController.xib */,
+				842C0B511ED5909E00366D11 /* LoginViewController.h */,
+				842C0B521ED5909E00366D11 /* LoginViewController.m */,
+				842C0B581ED599DE00366D11 /* LoginViewController.xib */,
 				630D46141BCCD2FB00874064 /* UpdateDevIDViewController.h */,
 				630D46151BCCD2FB00874064 /* UpdateDevIDViewController.m */,
 				630D46161BCCD2FB00874064 /* UpdateDevIDViewController.xib */,
@@ -4793,11 +4818,30 @@
 			isa = PBXGroup;
 			children = (
 				F70FEAC7BC7C9FD6A4BA8015 /* Pods-fxd-fxdProduct.debug.xcconfig */,
-				97237A6050AF56E7EBBDC521 /* Pods-fxd-fxdProduct.release.xcconfig */,
 				10598D29CC76FAA5640B61D6 /* Pods-fxd-fxdProductDev.debug.xcconfig */,
 				E64833171B0C1433C0C2116C /* Pods-fxd-fxdProductDev.release.xcconfig */,
+				EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		84420A5D1ED6788D00DFBFE0 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				84420A5E1ED678E200DFBFE0 /* LoginView.h */,
+				84420A5F1ED678E200DFBFE0 /* LoginView.m */,
+				84420A601ED678E200DFBFE0 /* LoginView.xib */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		84DD36361ED57DEE0057F19A /* SMS */ = {
+			isa = PBXGroup;
+			children = (
+				84DD36371ED57DEE0057F19A /* SMSModel.h */,
+				84DD36381ED57DEE0057F19A /* SMSModel.m */,
+			);
+			path = SMS;
 			sourceTree = "<group>";
 		};
 		CC5D70241ED43FE500A074AF /* Cash */ = {
@@ -4915,8 +4959,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 636EE3201B662ABB00A1A3ED /* Build configuration list for PBXNativeTarget "fxdProduct" */;
 			buildPhases = (
-				48B72B9B7BA52C0F8DA2F781 /* [CP] Check Pods Manifest.lock */,
-				41E68E845172F0207C883EBF /* [CP] Check Pods Manifest.lock */,
+				E8FCF7F676FFE20AB65700AF /* [CP] Check Pods Manifest.lock */,
 				636EE2F91B662ABB00A1A3ED /* Sources */,
 				636EE2FA1B662ABB00A1A3ED /* Frameworks */,
 				636EE2FB1B662ABB00A1A3ED /* Resources */,
@@ -5113,10 +5156,10 @@
 				1AB0F5AB1CF2D20E00F3DF06 /* TicketCell.xib in Resources */,
 				63811B621B8EFC67008F605B /* ChangePWViewController.xib in Resources */,
 				6391F7781D348B4E0097C943 /* bank_code_3@2x.png in Resources */,
+				842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */,
 				6391F77A1D348B4E0097C943 /* bank_code_5@2x.png in Resources */,
 				22D2BFB41EA4A97100B69360 /* MGBankCardResource.bundle in Resources */,
 				630B16441C5601CE006D46CF /* BasicInfoViewController.xib in Resources */,
-				63ED33431B6B52D6008B6085 /* LoginViewController.xib in Resources */,
 				6391F7751D348B4E0097C943 /* bank_code_1@2x.png in Resources */,
 				63F5AD941E23849C001BDF44 /* LoanSureFirstViewController.xib in Resources */,
 				63741E391D3CD4A300C0E2F8 /* BankListCell.xib in Resources */,
@@ -5140,6 +5183,7 @@
 				63B63E411DB9E10F00CAFE32 /* MoxieSDKResource.bundle in Resources */,
 				1A8988FD1BEC9EBE00F9E81E /* MsgViewCell.xib in Resources */,
 				632DFF631E48500500E414B2 /* CycleTextCell.xib in Resources */,
+				84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */,
 				63B65DF11D519D1600207231 /* main.js in Resources */,
 				636AC4341D38EA7F00599590 /* PayMethodCell.xib in Resources */,
 				6391F7721D348B4E0097C943 /* bank_code_14@2x.png in Resources */,
@@ -5181,6 +5225,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				845017311ED7CD88008055E4 /* LoginView.xib in Resources */,
 				CC0559291EB9ABE600733C2E /* DisplayCell.xib in Resources */,
 				CC0DFB191EA5B1090024841A /* CheckViewIng.xib in Resources */,
 				CC0DFB1A1EA5B1090024841A /* Images.xcassets in Resources */,
@@ -5244,6 +5289,7 @@
 				CC0DFB541EA5B1090024841A /* ProfessionViewController.xib in Resources */,
 				CC0DFB551EA5B1090024841A /* DetailRepayViewController.xib in Resources */,
 				CC0DFB561EA5B1090024841A /* CheckFalseView.xib in Resources */,
+				842C0B5A1ED599DE00366D11 /* LoginViewController.xib in Resources */,
 				CC0DFB571EA5B1090024841A /* DataDisplayCell.xib in Resources */,
 				CCF803231ED420C1003B7975 /* ActivationViewController.xib in Resources */,
 				CC0DFB581EA5B1090024841A /* CheckSuccessView.xib in Resources */,
@@ -5255,7 +5301,6 @@
 				CC0DFB5E1EA5B1090024841A /* bank_code_5@2x.png in Resources */,
 				CC0DFB5F1EA5B1090024841A /* MGBankCardResource.bundle in Resources */,
 				CC0DFB601EA5B1090024841A /* BasicInfoViewController.xib in Resources */,
-				CC0DFB611EA5B1090024841A /* LoginViewController.xib in Resources */,
 				CC0DFB621EA5B1090024841A /* bank_code_1@2x.png in Resources */,
 				CC0DFB631EA5B1090024841A /* LoanSureFirstViewController.xib in Resources */,
 				CC0DFB641EA5B1090024841A /* BankListCell.xib in Resources */,
@@ -5329,36 +5374,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		41E68E845172F0207C883EBF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		48B72B9B7BA52C0F8DA2F781 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		5A6607F74FFA249EAA402F8E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -5402,6 +5417,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E8FCF7F676FFE20AB65700AF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F32DD3C6D7FE66AE524BDBA3 /* [CP] Copy Pods Resources */ = {
@@ -5456,7 +5486,6 @@
 				63FF484A1B6F036F009E384C /* MyViewController.m in Sources */,
 				63878FE31C1519CD008E1CF9 /* GetUserIP.m in Sources */,
 				63112A731BDF162F002B372C /* HelpViewController.m in Sources */,
-				63ED33421B6B52D6008B6085 /* LoginViewController.m in Sources */,
 				638A16ED1E517D9F00AB8AB6 /* LOTRectShapeLayer.m in Sources */,
 				636352181C51D005001C327A /* UserInfoCell.m in Sources */,
 				0F9E30D21BC8A70C0018A801 /* IdeaBackViewController.m in Sources */,
@@ -5464,6 +5493,7 @@
 				63FC24F41D98F7E9006F58F3 /* YYTextMagnifier.m in Sources */,
 				63ED33341B6B4570008B6085 /* BaseViewController.m in Sources */,
 				63A24C671BE063A90036E8EF /* UIImage+Cut.m in Sources */,
+				84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */,
 				63F5AD931E23849C001BDF44 /* LoanSureFirstViewController.m in Sources */,
 				63145AF31CA8DBBD00D04ED8 /* RegionResult.m in Sources */,
 				63E1ECD01E1B8FAA0079A2F8 /* TAAnimatedDotView.m in Sources */,
@@ -5534,6 +5564,7 @@
 				0FFA91661C589E25008D91D2 /* CheckViewController.m in Sources */,
 				63C50E481E666FF40035EE4F /* Custom_BaseInfoResult.m in Sources */,
 				63FC24FC1D98F7E9006F58F3 /* NSParagraphStyle+YYText.m in Sources */,
+				842C0B5D1ED59C7A00366D11 /* LoginParamModel.m in Sources */,
 				63FC24FB1D98F7E9006F58F3 /* NSAttributedString+YYText.m in Sources */,
 				6326CAAC1BF1CA5F00FD23A8 /* pinyin.c in Sources */,
 				63741E341D3CC10900C0E2F8 /* PayNavigationViewController.m in Sources */,
@@ -5638,6 +5669,7 @@
 				0FA7A9A01C1FAA4400B3F6CB /* SubmitImageCell.m in Sources */,
 				CCA056BC1EBB3ECB00CB5F29 /* SesameCreditViewController.m in Sources */,
 				CC0559151EB988C000733C2E /* SesameCreditCell.m in Sources */,
+				84420A611ED678E200DFBFE0 /* LoginView.m in Sources */,
 				1A6AEDDA1C72B5BE00D48C6A /* TicketDetailController.m in Sources */,
 				637636EC1D76A72A00E93289 /* UIViewController+LewPopupViewController.m in Sources */,
 				63B142A81D9A0D7300C43B3F /* FXDUserInfo.m in Sources */,
@@ -5730,6 +5762,7 @@
 				63F1A5021BD8CB1C00B83751 /* RepayHistoryCapitalFlowList.m in Sources */,
 				632C588C1E5ADE1A00490C14 /* AddressClass.m in Sources */,
 				635AB0411E07BD46008A760C /* P2PBillDetail.m in Sources */,
+				842C0B531ED5909E00366D11 /* LoginViewController.m in Sources */,
 				63D43EF71D41F76D0076AC7F /* YYDiskCache.m in Sources */,
 				638C3F2A1CF303D0000446A7 /* SelectTableViewController.m in Sources */,
 				63FC24EE1D98F7E9006F58F3 /* YYTextDebugOption.m in Sources */,
@@ -5862,7 +5895,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84420A631ED67B0000DFBFE0 /* AccountHSServiceModel.m in Sources */,
+				845017321ED7D051008055E4 /* LoginView.m in Sources */,
+				842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */,
+				84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */,
 				CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */,
 				CC0559281EB9A96700733C2E /* SesameCreditCell.m in Sources */,
 				CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */,
@@ -5896,7 +5931,6 @@
 				CC0DF9711EA5B1090024841A /* MyViewController.m in Sources */,
 				CC0DF9721EA5B1090024841A /* GetUserIP.m in Sources */,
 				CC0DF9731EA5B1090024841A /* HelpViewController.m in Sources */,
-				CC0DF9741EA5B1090024841A /* LoginViewController.m in Sources */,
 				CC0DF9751EA5B1090024841A /* LOTRectShapeLayer.m in Sources */,
 				CC0DF9761EA5B1090024841A /* UserInfoCell.m in Sources */,
 				CC0DF9771EA5B1090024841A /* IdeaBackViewController.m in Sources */,
@@ -5927,6 +5961,7 @@
 				CC0DF98E1EA5B1090024841A /* UIView+Extend.m in Sources */,
 				CC0DF98F1EA5B1090024841A /* SSKeychain.m in Sources */,
 				CCF803281ED4249A003B7975 /* UnbundlingBankCardViewController.m in Sources */,
+				842C0B5E1ED59C7A00366D11 /* LoginParamModel.m in Sources */,
 				CC0DF9901EA5B1090024841A /* SDCycleScrollView.m in Sources */,
 				CC0DF9911EA5B1090024841A /* LOTAnimatablePointValue.m in Sources */,
 				CC0DF9921EA5B1090024841A /* Utility.m in Sources */,
@@ -6034,6 +6069,7 @@
 				CC0DF9F51EA5B1090024841A /* GetMoneyStateBaseClass.m in Sources */,
 				CC0DF9F61EA5B1090024841A /* ChangePWViewController.m in Sources */,
 				CC0DF9F71EA5B1090024841A /* UIView+SDExtension.m in Sources */,
+				84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */,
 				CC0DF9F81EA5B1090024841A /* UIViewController+KNSemiModal.m in Sources */,
 				CC0DF9F91EA5B1090024841A /* ContactClass.m in Sources */,
 				CC0DF9FA1EA5B1090024841A /* HomeDailViewController.m in Sources */,
@@ -6512,7 +6548,7 @@
 		};
 		636EE3221B662ABB00A1A3ED /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 97237A6050AF56E7EBBDC521 /* Pods-fxd-fxdProduct.release.xcconfig */;
+			baseConfigurationReference = EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

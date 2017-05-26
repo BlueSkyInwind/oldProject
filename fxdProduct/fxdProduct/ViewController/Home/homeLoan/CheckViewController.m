@@ -1207,7 +1207,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             if ([_approvalModel.flag isEqualToString:@"0000"])
             {
                 
-                
                 [self getCycle:_approvalModel.result.approval_amount];
                 
                 //                _loanMountMoney= [[[object objectForKey:@"result"] objectForKey:@"approval_amount_"] doubleValue];
@@ -1462,6 +1461,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
     
 }
+
 
 
 #pragma mark 银行卡查询接口

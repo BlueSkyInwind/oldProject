@@ -88,8 +88,7 @@
             self.sendCodeButton.alpha = 0.4;
             [self.sendCodeButton setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
             _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
-            NSDictionary *parDic = [self getDicOfParam];
-            if (parDic) {
+
                 SMSViewModel *smsViewModel = [[SMSViewModel alloc] init];
                 [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
                     _codeParse = returnValue;
@@ -98,8 +97,7 @@
                 } WithFaileBlock:^{
                     
                 }];
-                [smsViewModel fatchRequestSMS:parDic];
-            }
+                [smsViewModel fatchRequestSMSParamPhoneNumber:self.phoneNumText.text flag:CODE_CHANGEDEVID];
         } else {
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"似乎没有连接到网络"];
         }
@@ -168,9 +166,6 @@
 - (void)login
 {
     if ([Utility sharedUtility].networkState) {
-        NSDictionary *paramDic = [self getLoginParam];
-        
-        if (paramDic) {
             
             LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
             [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -191,10 +186,9 @@
             } WithFaileBlock:^{
                 
             }];
-            [loginViewModel fatchLogin:paramDic];
-        }
-    } else {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"似乎没有连接到网络"];
+             [loginViewModel fatchLoginMoblieNumber:self.phoneNumText.text password:self.passStr fingerPrint:nil verifyCode:nil];
+    }else{
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"没有连接到网络"];
     }
 }
 
@@ -205,7 +199,6 @@
              @"verify_code_":self.verCodeText.text,
              @"last_login_device_":[Utility sharedUtility].userInfo.uuidStr};
 }
-
 
 
 //获取验证码参数
