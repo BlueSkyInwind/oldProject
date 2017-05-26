@@ -62,4 +62,6 @@
 
 @property (nonatomic,copy)NSString *IsDefault;
 
+@property (nonatomic,copy)NSString *BindMobile;
+
 @end

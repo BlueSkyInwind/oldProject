@@ -28,8 +28,8 @@
 #import "RepayDetailViewController.h"
 #import "RepayRequestManage.h"
 #import "IdeaBackViewController.h"
-
-
+#import "QueryBidStatusModel.h"
+#import "GetCaseInfo.h"
 @interface LoanMoneyViewController ()
 {
     MoneyIngView *moenyViewing;
@@ -382,6 +382,8 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    
+//    [self addBid];
 }
 
 #pragma mark -> 2.22	审批金额查询接口
@@ -435,5 +437,44 @@
     }];
     
 }
+#pragma mark 发标前查询进件
 
+-(void)addBid{
+
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
+        if ([caseInfo.flag isEqualToString:@"0000"]) {
+            
+            //                            NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&cash_serv_fee_=%@&trans_amt_=%@ret_url_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[NSString stringWithFormat:@"%.2f",_approvalModel.result.week_service_fee_rate],caseInfo.result.amount_,_toCash_url];
+            //                            NSLog(@"%@",url);
+            //                            P2PViewController *p2pVC = [[P2PViewController alloc] init];
+            //                            p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            //                            p2pVC.userSelectNum = _userSelectNum;
+            //                            [self.navigationController pushViewController:p2pVC animated:YES];
+            
+            [self queryBidStatus:caseInfo];
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
+
+
+
+#pragma mark  标的状态查询接口
+
+-(void)queryBidStatus:(GetCaseInfo *)caseInfo{
+
+    NSDictionary *paramDic = @{@"from_":caseInfo.result.from_,@"from_case_id_":caseInfo.result.from_case_id_};
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryBidStatus_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        
+        QueryBidStatusModel *model = [QueryBidStatusModel yy_modelWithJSON:object];
+        
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
 @end

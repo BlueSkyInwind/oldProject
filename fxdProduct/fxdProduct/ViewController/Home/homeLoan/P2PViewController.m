@@ -121,6 +121,8 @@
     NSURLRequest *request = navigationAction.request;
     DLog(@"%@",request.URL.absoluteString);
     
+    DLog(@"=======%@",webView.URL.absoluteString);
+    
 //    if([request.URL.absoluteString containsString:_transition_url]){
 //         decisionHandler(WKNavigationActionPolicyAllow);
 //        for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
@@ -141,18 +143,14 @@
     }else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
+    
+    if ([request.URL.absoluteString isEqualToString:_bosAcctActivateRet_url]) {
+        
+    }
 }
 
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
-
-//    if([webView.URL.absoluteString containsString:_transition_url]){
-//        for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
-//            if ([vc isKindOfClass:[CheckViewController class]]) {
-//                [self.navigationController popToViewController:vc animated:YES];
-//            }
-//        }
-//    }
     
     
 }
@@ -188,34 +186,9 @@
             
             //                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.data.appmsg];
             
-            if ([model.data.flg isEqualToString:@"2"]||[model.data.flg isEqualToString:@"5"]) {  //2、未开户 3、待激活 4、冻结 5、销户 6、正常
-//                //绑定银行卡
-//                NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-//                [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//                    BankModel *bankModel = [BankModel yy_modelWithJSON:object];
-//                    if ([bankModel.flag isEqualToString:@"0000"]) {
-//                        BankCardViewController *bankVC = [BankCardViewController new];
-//                        bankVC.bankModel = bankModel;
-//                        bankVC.periodSelect = _userSelectNum.integerValue;
-//                        bankVC.purposeSelect = _purposeSelect;
-//                        bankVC.userStateModel = _userStateModel;
-//                        bankVC.isP2P = YES;
-//                        
-//                        //            bankVC.idString = _idString;
-//                        bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
-//                        [self.navigationController pushViewController:bankVC animated:YES];
-//                    } else {
-//                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
-//                    }
-//                } failure:^(EnumServerStatus status, id object) {
-//                    DLog(@"%@",object);
-//                }];
+            if ([model.data.flg isEqualToString:@"2"]||[model.data.flg isEqualToString:@"5"]) {  //2、未开户 3、待激活 4、冻
                 
             }else if ([model.data.flg isEqualToString:@"3"]){
-                
-                
-                //激活用户
-//                [self bankCardQuery];
                 
             }else if ([model.data.flg isEqualToString:@"6"]){
                 
@@ -225,26 +198,6 @@
                         }
                     }
                 
-                
-//                [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-//                    DLog(@"%@",object);
-//                    GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
-//                    if ([caseInfo.flag isEqualToString:@"0000"]) {
-//                        
-//                        NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&cash_serv_fee_=%@&trans_amt_=%@ret_url_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[NSString stringWithFormat:@"%.2f",_approvalModel.result.week_service_fee_rate],caseInfo.result.amount_,_transition_url];
-//                        NSLog(@"%@",url);
-//                        P2PViewController *p2pVC = [[P2PViewController alloc] init];
-//                        p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-//                        
-//                        [self.navigationController pushViewController:p2pVC animated:YES];
-//                        
-//                        //                            [self addBildInfo:caseInfo];
-//                    }
-//                    
-//                } failure:^(EnumServerStatus status, id object) {
-//                    
-//                }];
-                
             }
         }else{
             
@@ -252,12 +205,6 @@
             
         }
         
-        
-        
-        
-        //        } else {
-        //            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-        //        }
     } failure:^(EnumServerStatus status, id object) {
         
     }];

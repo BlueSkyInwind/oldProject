@@ -130,7 +130,7 @@
                         <constraint firstAttribute="width" constant="341" id="OHh-If-3wL"/>
                         <constraint firstAttribute="height" constant="44" id="OhS-Bo-AC1"/>
                     </constraints>
-                    <state key="normal" title="确认找回">
+                    <state key="normal" title="确认激活">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>

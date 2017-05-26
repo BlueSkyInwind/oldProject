@@ -8,13 +8,14 @@
 
 #import "ActivationViewController.h"
 #import "SendSmsModel.h"
-#import "BoAcctActivateModel.h"
+#import "P2PViewController.h"
 @interface ActivationViewController ()<UITextFieldDelegate>
 {
 
     UIButton *_backTimeBtn;
     NSInteger _countdown;
     NSTimer * _countdownTimer;
+
 }
 @end
 
@@ -43,6 +44,7 @@
     
     [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
     _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
+    [self sendSms];
 }
 
 #pragma mark 发送短信网络请求
@@ -87,16 +89,13 @@
         textField.text = [textField.text substringToIndex:11];
     }
 }
-#pragma mark 确认找回按钮
+#pragma mark 确认激活按钮
 -(void)clickBtn{
 
-    NSDictionary *paramDic = @{@"mer_id_":@"",@"page_type":@"2",@"ret_url":_queryBidStatusRet_url,@"user_id_":@""};
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_bosAcctActivate_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
+    NSString *url = [NSString stringWithFormat:@"%@%@?mer_id_=%@&page_type=%@&ret_url=%@&user_id_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"",@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
+    P2PViewController *p2pVC = [[P2PViewController alloc] init];
+    p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [self.navigationController pushViewController:p2pVC animated:YES];
     
 }
 

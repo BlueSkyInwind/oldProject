@@ -65,7 +65,7 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
 -(void)changeBank{
 
     [self dismissSemiModalView];
-    self.changeBankBlock(self.payType,_selectCardInfo,_banckCurrentIndex);
+    self.changeBankBlock();
 //    [self dismissSemiModalView];
 //    UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
 //    [self.navigationController pushViewController:controller animated:YES];

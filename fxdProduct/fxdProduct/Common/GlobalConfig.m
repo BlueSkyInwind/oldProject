@@ -379,13 +379,13 @@ NSString * const    _paymentService_url    =    @"http/do.jhtml?router=activrePa
 NSString * const    _cash_url    =    @"http/huifush/toCash.jhtml";
 
 //激活老账户
-NSString * const    _bosAcctActivate_url    =    @"http/huifush /toBosAcctActivate.jhtml";
+NSString * const    _bosAcctActivate_url    =    @"http/huifush/toBosAcctActivate.jhtml";
 
 //标的状态查询接口
 NSString * const    _queryBidStatus_url    =    @"http/do.jhtml?router= BidsService.queryBidStatus";
 
 //激活老账户返回url
-NSString * const    _queryBidStatusRet_url    =    @"https://h5.faxindai.com:8028/fxd-h5/page/case/app_queryBidStatus.html";
+NSString * const    _bosAcctActivateRet_url    =    @"https://h5.faxindai.com:8028/fxd-h5/page/case/app_toBosAcctActivate.html";
 
 
 NSString * const  CODE_REG           =    @"MSG_REG_"; ///注册验证码
