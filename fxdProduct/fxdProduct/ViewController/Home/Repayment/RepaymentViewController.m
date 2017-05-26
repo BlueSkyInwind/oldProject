@@ -344,7 +344,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-//立即还款按钮
+#pragma mark  立即还款按钮
+
 - (IBAction)btnRepayImmediatelyClick:(id)sender {
     DLog(@"%f",[_allAmount floatValue]);
     
@@ -417,6 +418,7 @@
 }
 
 
+#pragma mark 正常还款
 - (void)repaySure
 {
     NSDictionary *dic = @{@"bill_id_":_p2pRepayMentModel.result.bill_id_,
@@ -462,6 +464,8 @@
     }
 }
 
+
+#pragma mark 结清
 - (void)cleanUserMoney
 {
     if (_p2pAccountInfo.data.accountInfo.available_amount_ < _settleRepayModel.result.settle_amount_.floatValue) {

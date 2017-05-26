@@ -10,4 +10,22 @@
 
 @implementation QueryCardInfo
 
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"data":[QueryCardInfoData class]};
+}
+
+@end
+
+
+@implementation QueryCardInfoData
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"UsrCardInfolist":[QueryCardInfoUsrCardInfolist class]};
+}
+
+@end
+@implementation QueryCardInfoUsrCardInfolist
+
+
+
 @end

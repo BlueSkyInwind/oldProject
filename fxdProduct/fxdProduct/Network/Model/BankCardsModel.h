@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class BankCardsDataModel;
 
 @interface BankCardsModel : NSObject
 
@@ -14,6 +15,14 @@
 @property (nonatomic,copy)NSString *appcode;
 //结果描述
 @property (nonatomic,copy)NSString *appmsg;
+
+@property (nonatomic,strong)BankCardsDataModel *data;
+
+@end
+
+
+@interface BankCardsDataModel : NSObject
+
 //结果标志   true false
 @property (nonatomic,copy)NSString *success;
 

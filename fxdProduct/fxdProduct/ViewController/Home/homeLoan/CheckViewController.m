@@ -48,6 +48,7 @@
 #import "AccountHSServiceModel.h"
 #import "QueryCardInfo.h"
 #import "ActivationViewController.h"
+#import "UnbundlingBankCardViewController.h"
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -734,6 +735,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 }
 - (void)addBildInfo:(GetCaseInfo *)caseInfo
 {
+    
     NSDictionary *paramDic = @{@"product_id_":caseInfo.result.product_id_,
                                @"auditor_":caseInfo.result.auditor_,
                                @"desc_":caseInfo.result.desc_,
@@ -816,7 +818,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 }
                 PayViewController *payVC = [[PayViewController alloc] init];
                 payVC.payType = PayTypeGetMoneyToCard;
-                
+                payVC.isP2P = NO;
                 payVC.cardInfo = _selectCard;
                 payVC.bankCardModel = _bankCardModel;
                 if (userSelectIndex == -1) {
@@ -1424,7 +1426,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                             bankVC.purposeSelect = _purposeSelect;
                             bankVC.userStateModel = _userStateModel;
                             bankVC.isP2P = YES;
-                            
+                            bankVC.uploadP2PUserInfo = _uploadP2PUserInfo;
                             //            bankVC.idString = _idString;
                             bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
                             [self.navigationController pushViewController:bankVC animated:YES];
@@ -1439,21 +1441,26 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     
                     
                     //激活用户
-                    [self bankCardQuery];
                     
-                }else if ([model.data.flg isEqualToString:@"6"]){
-                    
-                    //发标
-                    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-                        DLog(@"%@",object);
-                        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
-                        if ([caseInfo.flag isEqualToString:@"0000"]) {
-                            [self addBildInfo:caseInfo];
-                        }
+                    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
+                        
+                        QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:object];
+                        
+                        ActivationViewController *controller = [[ActivationViewController alloc]initWithNibName:@"ActivationViewController" bundle:nil];
+                        controller.carNum = model.data.UsrCardInfolist.CardId;
+                        controller.mobile = model.data.UsrCardInfolist.CardId;
+                        [self.navigationController pushViewController:controller animated:YES];
                         
                     } failure:^(EnumServerStatus status, id object) {
                         
                     }];
+                    
+                    
+//                    [self bankCardQuery];
+                    
+                }else if ([model.data.flg isEqualToString:@"6"]){
+                    
+                    [self chooseBankCard];
                     
                 }
             }else{
@@ -1476,14 +1483,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 }
 
 
-
 #pragma mark 银行卡查询接口
 -(void)bankCardQuery{
 
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryCardInfo_url] parameters:@{@"UsrCustId":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
     
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:object];
-        if (model.UsrCardInfolist) {
+        if (model.data.UsrCardInfolist) {
             //激活开户
             ActivationViewController *controller = [[ActivationViewController alloc]initWithNibName:@"ActivationViewController" bundle:nil];
             [self.navigationController pushViewController:controller animated:YES];
@@ -1495,4 +1501,99 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 }
 
 
+#pragma mark 弹出银行卡列表
+-(void)chooseBankCard{
+
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
+        
+        QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:object];
+        NSString *bankName = [self bankName:model.data.UsrCardInfolist.BankId];
+        PayViewController *payVC = [[PayViewController alloc] init];
+        payVC.payType = PayTypeGetMoneyToCard;
+        payVC.isP2P = YES;
+        payVC.bankName = bankName;
+        NSString *bank = model.data.UsrCardInfolist.CardId;
+        payVC.banNum = [bank substringFromIndex:bank.length-4];
+        
+        payVC.makesureBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){
+            [self addBidInfo];
+        };
+        
+        payVC.changeBankBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){
+            
+            UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
+            [self.navigationController pushViewController:controller animated:YES];
+        };
+        PayNavigationViewController *payNC = [[PayNavigationViewController alloc] initWithRootViewController:payVC];
+        payNC.view.frame = CGRectMake(0, 0, _k_w, 200);
+        [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
+        
+        
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+    
+    
+    
+}
+
+
+#pragma mark 银行卡名字的转换
+-(NSString *)bankName:(NSString *)bankCode{
+    
+    NSString *name = @"";
+    if([bankCode isEqualToString:@"BC"]){
+    
+        name = @"中国银行";
+        
+    }else if ([bankCode isEqualToString:@"ICBC"]){
+    
+        name = @"中国工商银行";
+    }else if ([bankCode isEqualToString:@"CCB"]){
+    
+        name = @"中国建设银行";
+    }else if ([bankCode isEqualToString:@"ABC"]){
+    
+        name = @"中国农业银行";
+    }else if ([bankCode isEqualToString:@"CNCB"]){
+    
+        name = @"中信银行";
+    }else if ([bankCode isEqualToString:@"CIB"]){
+    
+        name = @"中国兴业银行";
+    }else if ([bankCode isEqualToString:@"CEB"]){
+    
+        name = @"中国光大银行";
+    }else if ([bankCode isEqualToString:@"PSBC"]){
+    
+        name = @"中国邮政";
+    }
+    
+
+    return name;
+}
+
+#pragma mark 标的录入
+-(void)addBidInfo{
+
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
+        if ([caseInfo.flag isEqualToString:@"0000"]) {
+            
+            //                            NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&cash_serv_fee_=%@&trans_amt_=%@ret_url_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[NSString stringWithFormat:@"%.2f",_approvalModel.result.week_service_fee_rate],caseInfo.result.amount_,_toCash_url];
+            //                            NSLog(@"%@",url);
+            //                            P2PViewController *p2pVC = [[P2PViewController alloc] init];
+            //                            p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            //                            p2pVC.userSelectNum = _userSelectNum;
+            //                            [self.navigationController pushViewController:p2pVC animated:YES];
+            
+            [self addBildInfo:caseInfo];
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
 @end

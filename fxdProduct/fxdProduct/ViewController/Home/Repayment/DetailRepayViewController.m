@@ -352,6 +352,8 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     _save_amount = 0.0;
     if (_selectAllBtn.selected) {
         
+         [self showAlert];
+        
         for (int i = 0; i < _cellSelectArr.count; i++) {
             if (_repayListModel != nil) {
                 if (![[_repayListModel.result.situations objectAtIndex:i].status isEqualToString:@"1"]) {
@@ -558,6 +560,16 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     }];
 }
 
+#pragma mark 弹框
+-(void)showAlert{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提前结清费用" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

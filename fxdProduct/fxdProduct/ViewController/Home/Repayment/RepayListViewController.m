@@ -384,6 +384,18 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     [self.repayTableView reloadData];
 }
 
+
+#pragma mark 弹框
+-(void)showAlert{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提前结清费用" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
 /**
  *  @author dd
  *
@@ -618,17 +630,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     
 }
 
-
-#pragma mark 弹框
--(void)showAlert{
-
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提前结清费用" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }]];
-    [self presentViewController:alert animated:YES completion:nil];
-    
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -10,4 +10,14 @@
 
 @implementation BankCardsModel
 
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"data":[BankCardsDataModel class]};
+}
+
+@end
+
+@implementation BankCardsDataModel
+
+
+
 @end

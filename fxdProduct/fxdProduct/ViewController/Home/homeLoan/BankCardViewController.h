@@ -33,4 +33,6 @@
 
 @property (nonatomic,assign)BOOL isP2P;
 
+@property (nonatomic, strong) NSDictionary * uploadP2PUserInfo;
+
 @end

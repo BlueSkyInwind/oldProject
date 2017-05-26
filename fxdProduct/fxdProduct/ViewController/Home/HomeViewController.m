@@ -591,16 +591,16 @@
 {
     
     
-    ActivationViewController *controller = [[ActivationViewController alloc]initWithNibName:@"ActivationViewController" bundle:nil];
-    [self.navigationController pushViewController:controller animated:YES];
-//    if ([Utility sharedUtility].loginFlage) {
-//        //        [self checkState:nil];
-//        RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
-//        repayRequest.targetVC = self;
-//        [repayRequest repayRequest];
-//    } else {
-//        [self presentLogin:self];
-//    }
+//    ActivationViewController *controller = [[ActivationViewController alloc]initWithNibName:@"ActivationViewController" bundle:nil];
+//    [self.navigationController pushViewController:controller animated:YES];
+    if ([Utility sharedUtility].loginFlage) {
+        //        [self checkState:nil];
+        RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+        repayRequest.targetVC = self;
+        [repayRequest repayRequest];
+    } else {
+        [self presentLogin:self];
+    }
 }
 
 - (void)loanProcess

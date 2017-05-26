@@ -246,6 +246,9 @@ NSString * const    _netSave_url                =   @"http/huifu/toNetSave.jhtml
 //开户返回URL
 NSString * const    _transition_url     =  @"https://h5.faxindai.com:8028/fxd-h5/page/case/app_transition.html";
 
+//取现返回URL
+NSString * const    _toCash_url     =  @"https://h5.faxindai.com:8028/fxd-h5/page/case/app_cash.html";
+
 //充值返回URL
 NSString * const    _rechargeing_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/mine/rechargeing.html";
 
@@ -364,10 +367,26 @@ NSString * const    _bankCards_url    =    @"http/do.jhtml?router=bankCardsSHSer
 NSString * const    _huifu_url    =    @"http/huifush/toRegister.jhtml";
 
 //银行卡查询接口
-NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsSHService.QueryCardInfo";
+NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsSHService.queryCardInfo";
 
 //用户状态查询接口
 NSString * const    _accountHSService_url    =    @"http/do.jhtml?router=accountHSService.qryUserStatus";
+
+//主动还款接口
+NSString * const    _paymentService_url    =    @"http/do.jhtml?router=activrePaymentService.activrePayment";
+
+//取现
+NSString * const    _cash_url    =    @"http/huifush/toCash.jhtml";
+
+//激活老账户
+NSString * const    _bosAcctActivate_url    =    @"http/huifush /toBosAcctActivate.jhtml";
+
+//标的状态查询接口
+NSString * const    _queryBidStatus_url    =    @"http/do.jhtml?router= BidsService.queryBidStatus";
+
+//激活老账户返回url
+NSString * const    _queryBidStatusRet_url    =    @"https://h5.faxindai.com:8028/fxd-h5/page/case/app_queryBidStatus.html";
+
 
 NSString * const  CODE_REG           =    @"MSG_REG_"; ///注册验证码
 NSString * const  CODE_FINDPASS      =    @"MSG_FIND_PASSWORD_"; ///密码找回验证码

@@ -8,6 +8,7 @@
 
 #import "ActivationViewController.h"
 #import "SendSmsModel.h"
+#import "BoAcctActivateModel.h"
 @interface ActivationViewController ()<UITextFieldDelegate>
 {
 
@@ -47,8 +48,8 @@
 #pragma mark 发送短信网络请求
 -(void)sendSms{
 
-    NSDictionary *paramDic = @{@"busi_type_":@"activation",@"card_number_":@"",@"mobile_":@""};
-    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    NSDictionary *paramDic = @{@"busi_type_":@"activation",@"card_number_":_carNum,@"mobile_":_mobile};
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         SendSmsModel *model = [SendSmsModel yy_modelWithJSON:object];
         if ([model.appcode isEqualToString:@"1"]) {
@@ -89,6 +90,13 @@
 #pragma mark 确认找回按钮
 -(void)clickBtn{
 
+    NSDictionary *paramDic = @{@"mer_id_":@"",@"page_type":@"2",@"ret_url":_queryBidStatusRet_url,@"user_id_":@""};
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_bosAcctActivate_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
     
 }
 

@@ -1181,6 +1181,10 @@
 		CCE3BE241ED2D61C004C35A4 /* OpenAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE221ED2D61C004C35A4 /* OpenAccount.m */; };
 		CCE3BE281ED2D655004C35A4 /* QueryCardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE271ED2D655004C35A4 /* QueryCardInfo.m */; };
 		CCE3BE291ED2D655004C35A4 /* QueryCardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE271ED2D655004C35A4 /* QueryCardInfo.m */; };
+		CCEEB4171ED6E9DE00588B6A /* BoAcctActivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB4161ED6E9DE00588B6A /* BoAcctActivateModel.m */; };
+		CCEEB4181ED6E9DE00588B6A /* BoAcctActivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB4161ED6E9DE00588B6A /* BoAcctActivateModel.m */; };
+		CCEEB41C1ED6EA6800588B6A /* QueryBidStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB41B1ED6EA6800588B6A /* QueryBidStatusModel.m */; };
+		CCEEB41D1ED6EA6800588B6A /* QueryBidStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB41B1ED6EA6800588B6A /* QueryBidStatusModel.m */; };
 		CCF8031C1ED3D043003B7975 /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
 		CCF803201ED420C1003B7975 /* ActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031E1ED420C1003B7975 /* ActivationViewController.m */; };
 		CCF803211ED420C1003B7975 /* ActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031E1ED420C1003B7975 /* ActivationViewController.m */; };
@@ -2270,6 +2274,10 @@
 		CCE3BE221ED2D61C004C35A4 /* OpenAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenAccount.m; sourceTree = "<group>"; };
 		CCE3BE261ED2D655004C35A4 /* QueryCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCardInfo.h; sourceTree = "<group>"; };
 		CCE3BE271ED2D655004C35A4 /* QueryCardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryCardInfo.m; sourceTree = "<group>"; };
+		CCEEB4151ED6E9DE00588B6A /* BoAcctActivateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoAcctActivateModel.h; sourceTree = "<group>"; };
+		CCEEB4161ED6E9DE00588B6A /* BoAcctActivateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoAcctActivateModel.m; sourceTree = "<group>"; };
+		CCEEB41A1ED6EA6800588B6A /* QueryBidStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryBidStatusModel.h; sourceTree = "<group>"; };
+		CCEEB41B1ED6EA6800588B6A /* QueryBidStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryBidStatusModel.m; sourceTree = "<group>"; };
 		CCF8031A1ED3D043003B7975 /* AccountHSServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountHSServiceModel.h; sourceTree = "<group>"; };
 		CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountHSServiceModel.m; sourceTree = "<group>"; };
 		CCF8031D1ED420C1003B7975 /* ActivationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivationViewController.h; sourceTree = "<group>"; };
@@ -4284,6 +4292,8 @@
 		63E076541B67114800E269F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCEEB4191ED6EA5700588B6A /* queryBidStatus */,
+				CCEEB4141ED6E9AF00588B6A /* BosAcctActivate */,
 				CC5D70291ED4403600A074AF /* PaymentService */,
 				CC5D70241ED43FE500A074AF /* Cash */,
 				CCF803191ED3D02E003B7975 /* AccountHSService */,
@@ -4858,6 +4868,24 @@
 			name = QueryCardInfo;
 			sourceTree = "<group>";
 		};
+		CCEEB4141ED6E9AF00588B6A /* BosAcctActivate */ = {
+			isa = PBXGroup;
+			children = (
+				CCEEB4151ED6E9DE00588B6A /* BoAcctActivateModel.h */,
+				CCEEB4161ED6E9DE00588B6A /* BoAcctActivateModel.m */,
+			);
+			name = BosAcctActivate;
+			sourceTree = "<group>";
+		};
+		CCEEB4191ED6EA5700588B6A /* queryBidStatus */ = {
+			isa = PBXGroup;
+			children = (
+				CCEEB41A1ED6EA6800588B6A /* QueryBidStatusModel.h */,
+				CCEEB41B1ED6EA6800588B6A /* QueryBidStatusModel.m */,
+			);
+			name = queryBidStatus;
+			sourceTree = "<group>";
+		};
 		CCF803191ED3D02E003B7975 /* AccountHSService */ = {
 			isa = PBXGroup;
 			children = (
@@ -5404,6 +5432,7 @@
 				630D462F1BD097B900874064 /* GetMoneyResultAuditRecordBean.m in Sources */,
 				0F5407F61C8D289100592B56 /* CheckInfoView.m in Sources */,
 				63ED33371B6B4593008B6085 /* BaseNavigationViewController.m in Sources */,
+				CCEEB4171ED6E9DE00588B6A /* BoAcctActivateModel.m in Sources */,
 				63FF484A1B6F036F009E384C /* MyViewController.m in Sources */,
 				63878FE31C1519CD008E1CF9 /* GetUserIP.m in Sources */,
 				63112A731BDF162F002B372C /* HelpViewController.m in Sources */,
@@ -5463,6 +5492,7 @@
 				63145AA91CA294B800D04ED8 /* LoginResult.m in Sources */,
 				6313DC1A1BB4F35C00EB45DE /* UserInfoObj.m in Sources */,
 				630CC0961BC8E14200AE9690 /* QueryRepaymentsBaseClass.m in Sources */,
+				CCEEB41C1ED6EA6800588B6A /* QueryBidStatusModel.m in Sources */,
 				63F254731E499C8000852CF1 /* InvitationViewController.m in Sources */,
 				638A17001E517D9F00AB8AB6 /* LOTLayer.m in Sources */,
 				63F254881E49A45900852CF1 /* HMScannerMaskView.m in Sources */,
@@ -5914,6 +5944,7 @@
 				CC0DF9B21EA5B1090024841A /* LOTShapeGroup.m in Sources */,
 				CC0DF9B31EA5B1090024841A /* HMScanerCardViewController.m in Sources */,
 				CC0DF9B41EA5B1090024841A /* testView.m in Sources */,
+				CCEEB41D1ED6EA6800588B6A /* QueryBidStatusModel.m in Sources */,
 				CC0DF9B51EA5B1090024841A /* SaveCustomBaseViewModel.m in Sources */,
 				CC0DF9B61EA5B1090024841A /* BankCardInfoBaseClass.m in Sources */,
 				CC0DF9B71EA5B1090024841A /* CheckViewIng.m in Sources */,
@@ -6077,6 +6108,7 @@
 				CC0DFA511EA5B1090024841A /* LOTEllipseShapeLayer.m in Sources */,
 				CC0DFA521EA5B1090024841A /* JXLMessagePrse.m in Sources */,
 				CC0DFA531EA5B1090024841A /* YYTextAsyncLayer.m in Sources */,
+				CCEEB4181ED6E9DE00588B6A /* BoAcctActivateModel.m in Sources */,
 				CC0DFA541EA5B1090024841A /* HomePopView.m in Sources */,
 				CC0DFA551EA5B1090024841A /* CareerParse.m in Sources */,
 				CC0DFA561EA5B1090024841A /* YYTextArchiver.m in Sources */,

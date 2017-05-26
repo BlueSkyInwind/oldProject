@@ -15,4 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn;
 
+@property (nonatomic,copy)NSString *carNum;
+@property (nonatomic,copy)NSString *mobile;
+
 @end

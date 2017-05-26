@@ -15,7 +15,8 @@
 #import <MGBankCard/MGBankCard.h>
 #import "BankCardsModel.h"
 #import "WTCameraViewController.h"
-
+#import "CheckViewController.h"
+#import "RTRootNavigationController.h"
 @interface ChangeBankCardViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,WTCameraDelegate,BankTableViewSelectDelegate>
 {
 
@@ -186,6 +187,8 @@
 }
 
 #pragma mark  点击发送验证码网络请求
+
+
 -(void)senderSms{
 
     NSDictionary *paramDic = [self getParamDic];
@@ -215,7 +218,8 @@
     paramDic = @{@"busi_type_":@"rebind",
                  @"card_number_":bankNo,
                  @"mobile_":dataListAll3[2],
-                 @"sms_type_":@"N"
+                 @"sms_type_":@"N",
+                 @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone
                  };
     return paramDic;
 
@@ -235,7 +239,9 @@
 
         if (textField.text.length > 11) {
             textField.text = [textField.text substringToIndex:11];
+            
         }
+        [dataListAll3 replaceObjectAtIndex:2 withObject:textField.text];
     }else if (textField.tag == 103){
 
         sms_code = textField.text;
@@ -429,10 +435,19 @@
 -(void)changeBank{
 
     NSDictionary *paramDic = [self changeBankParamDic];
-    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         BankCardsModel *model = [BankCardsModel yy_modelWithJSON:object];
         if ([model.appcode isEqualToString:@"1"]) {
 
+            for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+                if ([vc isKindOfClass:[CheckViewController class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                }
+            }
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
+        }else{
+        
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
         }
 
     } failure:^(EnumServerStatus status, id object) {
@@ -444,8 +459,13 @@
 #pragma mark 更换银行卡参数
 -(NSDictionary *)changeBankParamDic{
 
-    NSDictionary *paramDic = @{@"bank_code_":_bankCode,
-                               @"card_number_":dataListAll3[1],
+    
+    _ordsms_ext_ = @"666666AAAAAAAA";
+    _sms_seq = @"AAAAAAAA";
+    NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *banName = [self bankName:_bankCode];
+    NSDictionary *paramDic = @{@"bank_code_":banName,
+                               @"card_number_":bankNo,
                                @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,
                                @"mobile_":dataListAll3[2],
                                @"ordsms_ext_":_ordsms_ext_,
@@ -454,6 +474,50 @@
                                @"trade_type_":@"REBIND",
                                };
     return paramDic;
+}
+
+#pragma mark 更改银行卡名称缩写
+-(NSString *)bankName:(NSString *)bankCode{
+    
+    NSString *name = @"";
+    NSInteger code = bankCode.integerValue;
+    switch (code) {
+        case 1:
+            name = @"BC";
+            return name;
+            break;
+        case 2:
+            name = @"ICBC";
+            return name;
+            break;
+        case 3:
+            name = @"CCB";
+            return name;
+            break;
+        case 4:
+            name = @"ABC";
+            return name;
+            break;
+        case 8:
+            name = @"CNCB";
+            return name;
+            break;
+        case 9:
+            name = @"CIB";
+            return name;
+            break;
+        case 10:
+            name = @"CEB";
+            return name;
+            break;
+        case 29:
+            name = @"PSBC";
+            return name;
+            break;
+        default:
+            break;
+    }
+    return name;
 }
 
 

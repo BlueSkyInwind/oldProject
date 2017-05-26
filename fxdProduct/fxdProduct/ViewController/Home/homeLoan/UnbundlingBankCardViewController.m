@@ -10,6 +10,7 @@
 #import "LabelCell.h"
 #import "SendSmsModel.h"
 #import "ChangeBankCardViewController.h"
+#import "QueryCardInfo.h"
 @interface UnbundlingBankCardViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 {
@@ -19,6 +20,7 @@
     UIButton *_backTimeBtn;
     NSInteger _countdown;
     NSTimer * _countdownTimer;
+    QueryCardInfo *_queryCadModel;
     
 }
 
@@ -66,6 +68,14 @@
             cell.btn.tag = indexPath.row + 200;
 //            [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.btnSecory.hidden = YES;
+            cell.textField.enabled = NO;
+            
+            
+            cell.textField.text = [self bankName:_queryCadModel.data.UsrCardInfolist.BankId];
+            
+//            cell.textField.text = @"农行";
+            
+            
         }else if (indexPath.row == 1) {
             [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
             cell.btn.hidden = NO;
@@ -73,6 +83,8 @@
 //            [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.btnSecory.hidden = YES;
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.text = _queryCadModel.data.UsrCardInfolist.CardId;
+            cell.textField.enabled = NO;
         }else if (indexPath.row == 3){
             cell.btn.hidden = YES;
             cell.btnSecory.hidden = NO;
@@ -80,13 +92,15 @@
             [cell.btnSecory addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+            cell.textField.enabled = YES;
             
         }else if (indexPath.row == 2){
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             cell.btnSecory.hidden = YES;
             cell.btn.hidden = YES;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
-            
+            cell.textField.enabled = NO;
+            cell.textField.text = [Utility sharedUtility].userInfo.userMobilePhone;
         }
         [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
         cell.selectionStyle  = UITableViewCellSelectionStyleNone;
@@ -106,6 +120,7 @@
     _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
     
     NSDictionary *paramDic = [self getParamDic];
+    
     [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
        
         SendSmsModel *model = [SendSmsModel yy_modelWithJSON:object];
@@ -143,13 +158,17 @@
 #pragma mark 获取验证码参数
 -(NSDictionary *)getParamDic{
 
+    _bankNum = @"622 822 93399 10450";
     NSString *bankNo =[_bankNum stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
     NSDictionary *paramDic;
     
     paramDic = @{@"busi_type_":@"rebind",
                      @"card_number_":bankNo,
-                     @"mobile_":_mobile,
-                     @"sms_type_":@"O"
+                     @"mobile_":[Utility sharedUtility].userInfo.userMobilePhone,
+                     @"sms_type_":@"O",
+                 @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone
+                 
                      };
     return paramDic;
   
@@ -171,21 +190,100 @@
         if (textField.text.length > 11) {
             textField.text = [textField.text substringToIndex:11];
         }
+        _mobile = textField.text;
     }else if(textField.tag == 103){
     
         _sms_code = textField.text;
     }
 }
 
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+    if (textField.tag == 103)
+    {
+        
+        NSLog(@"===%@",textField.text);
+        if ([textField.text length] !=6) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
+            
+        }else{
+            _sms_code = textField.text;
+        }
+    }
+    
+}
+
 #pragma mark 点击确认按钮
 -(void)clickBtn{
 
-    ChangeBankCardViewController *controller = [[ChangeBankCardViewController alloc]initWithNibName:@"ChangeBankCardViewController" bundle:nil];
+    if (_sms_code.length <6) {
+        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请输入验证码"];
+    }else{
     
-    controller.ordsms_ext_ = [NSString stringWithFormat:@"%@%@",_sms_code,_sms_seq];
-    [self.navigationController pushViewController:controller animated:YES];
+        ChangeBankCardViewController *controller = [[ChangeBankCardViewController alloc]initWithNibName:@"ChangeBankCardViewController" bundle:nil];
+        
+        controller.ordsms_ext_ = [NSString stringWithFormat:@"%@%@",_sms_code,_sms_seq];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    
     
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+
+    [self getBankDetail];
+}
+
+#pragma mark 获取银行卡信息
+-(void)getBankDetail{
+
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
+        
+        _queryCadModel = [QueryCardInfo yy_modelWithJSON:object];
+        [_bankTable reloadData];
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
+
+
+#pragma mark 银行卡名字的转换
+-(NSString *)bankName:(NSString *)bankCode{
+    
+    NSString *name = @"";
+    if([bankCode isEqualToString:@"BC"]){
+        
+        name = @"中国银行";
+        
+    }else if ([bankCode isEqualToString:@"ICBC"]){
+        
+        name = @"中国工商银行";
+    }else if ([bankCode isEqualToString:@"CCB"]){
+        
+        name = @"中国建设银行";
+    }else if ([bankCode isEqualToString:@"ABC"]){
+        
+        name = @"中国农业银行";
+    }else if ([bankCode isEqualToString:@"CNCB"]){
+        
+        name = @"中信银行";
+    }else if ([bankCode isEqualToString:@"CIB"]){
+        
+        name = @"中国兴业银行";
+    }else if ([bankCode isEqualToString:@"CEB"]){
+        
+        name = @"中国光大银行";
+    }else if ([bankCode isEqualToString:@"PSBC"]){
+        
+        name = @"中国邮政";
+    }
+    
+    
+    return name;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
