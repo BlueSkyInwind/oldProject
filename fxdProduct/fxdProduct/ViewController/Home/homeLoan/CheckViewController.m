@@ -1202,7 +1202,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             if ([_approvalModel.flag isEqualToString:@"0000"])
             {
                 
-                
                 [self getCycle:_approvalModel.result.approval_amount];
                 
                 //                _loanMountMoney= [[[object objectForKey:@"result"] objectForKey:@"approval_amount_"] doubleValue];
@@ -1445,19 +1444,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             
         }
 
-
-        
 //        } else {
 //            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
 //        }
     } failure:^(EnumServerStatus status, id object) {
         
     }];
-    
-    
 }
-
-
 
 #pragma mark 银行卡查询接口
 -(void)bankCardQuery{

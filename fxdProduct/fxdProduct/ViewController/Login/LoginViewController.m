@@ -59,7 +59,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"登录";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor  ];
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
     //视图加载
     _loginView =  [[NSBundle mainBundle]loadNibNamed:@"LoginView" owner:self options:nil].lastObject;
@@ -116,11 +116,9 @@
 }
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
-    
     //    DLog(@"didUpdateUserLocation lat %f,long%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     _latitude = userLocation.location.coordinate.latitude;
     _longitude = userLocation.location.coordinate.longitude;
-    
 }
 /**
  上传用户的位置信息
@@ -161,7 +159,6 @@
 #pragma mark - 开始登录
 - (void)startLogin
 {
-    
     LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
     [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
         _loginParse = returnValue;
