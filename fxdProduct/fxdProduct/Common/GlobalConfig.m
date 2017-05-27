@@ -46,6 +46,7 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 //准生产地址
 //NSString * const _main_url  =   @"http://192.168.6.240:9090/fxd-esb/esb/";
+
 //NSString * const _ValidESB_url = @"http://192.168.6.240:9090/fxd-esb/";
 //NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/";
 //NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";

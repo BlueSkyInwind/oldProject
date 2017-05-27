@@ -11,13 +11,17 @@
 #import "LoanProcessModel.h"
 #import "RefuseView.h"
 #import "FXDWebViewController.h"
-
+#import "WhiteRefuseView.h"
+#import "UserDataViewController.h"
+#import "HomeViewModel.h"
+#import "UserStateModel.h"
 @interface LoanProcessViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIView *_noneView;
     UIView *_toopLine;
     CGFloat _leadingSpacingOfLines;
-    BOOL isRefuse;
+    BOOL _isRefuse;
+    UserStateModel *_userStateModel;
 }
 @end
 
@@ -29,7 +33,7 @@
     self.navigationItem.title = @"我的借款进度";
     self.automaticallyAdjustsScrollViewInsets = false;
     
-    isRefuse = NO;
+    _isRefuse = NO;
     _toopLine = [[UIView alloc] init];
     [self.view addSubview:_toopLine];
     [self addBackItem];
@@ -39,6 +43,40 @@
     [self nonFatch];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+
+    [self getApplyStatus];
+}
+
+-(void)getApplyStatus{
+
+    HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
+    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        if([returnValue[@"flag"] isEqualToString:@"0000"])
+        {
+            _userStateModel = [UserStateModel yy_modelWithJSON:returnValue[@"result"]];
+            
+            
+            if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
+                
+                LoanProcessResult *loanProcess  =  _loanProcessParse.result.lastObject;
+                if ([loanProcess.apply_status_ isEqualToString:@"已拒绝"]) {
+                    _isRefuse = YES;
+                }
+            }
+//           _isRefuse = YES;
+            [self.tableView reloadData];
+            
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [homeViewModel fetchUserState:nil];
+    
+}
 -(void)createNoneView
 {
     _noneView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h)];
@@ -72,11 +110,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
-    LoanProcessResult *loanProcess  =  _loanProcessParse.result.lastObject;
-    if ([loanProcess.apply_status_ isEqualToString:@"已拒绝"]) {
-        isRefuse = YES;
-    }
-    
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
@@ -95,8 +128,14 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
     
-    if (isRefuse) {
-        return 100;
+    if (_isRefuse) {
+        if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+            return 100;
+        }else{
+        
+            return 190;
+        }
+        
     }else{
         return 0;
     }
@@ -105,12 +144,22 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    RefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"RefuseView" owner:self options:nil]lastObject];
-    refuseView.frame = CGRectZero;
-    [Tool setCorner:refuseView.seeBtn borderColor:UI_MAIN_COLOR];
-    [refuseView.seeBtn addTarget:self action:@selector(refuseBtn) forControlEvents:UIControlEventTouchUpInside];
-    //    [self.view addSubview:_refuseView];
-    return refuseView;
+    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {//工薪贷
+        
+            RefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"RefuseView" owner:self options:nil]lastObject];
+            refuseView.frame = CGRectZero;
+            [Tool setCorner:refuseView.seeBtn borderColor:UI_MAIN_COLOR];
+            [refuseView.seeBtn addTarget:self action:@selector(refuseBtn) forControlEvents:UIControlEventTouchUpInside];
+            return refuseView;
+    }else{//白领贷
+
+        WhiteRefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"WhiteRefuseView" owner:self options:nil]lastObject];
+        refuseView.frame = CGRectZero;
+        [Tool setCorner:refuseView.applyBtn borderColor:UI_MAIN_COLOR];
+        [refuseView.applyBtn addTarget:self action:@selector(applyBtn) forControlEvents:UIControlEventTouchUpInside];
+        return refuseView;
+
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -168,6 +217,13 @@
 }
 
 
+-(void)applyBtn{
+
+    UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+    userDataVC.product_id = @"P001002";
+    [self.navigationController pushViewController:userDataVC animated:true];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

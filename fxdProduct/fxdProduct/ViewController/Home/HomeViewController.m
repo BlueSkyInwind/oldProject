@@ -79,10 +79,7 @@
     self.navigationItem.title = @"发薪贷";
     _count = 0;
    _dataArray = [NSMutableArray array];
-    //    self.view.backgroundColor = [UIColor colorWithHexColorString:@"#1faaff"];
-//    [self getHomeProductList];
     [self setUpTableview];
-    //    [self setMessageBtn];
     [self setNavQRRightBar];
     [self fatchAdv];
 
@@ -252,13 +249,9 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeProductCell class]) bundle:nil] forCellReuseIdentifier:@"HomeProductCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeBottomCell class]) bundle:nil] forCellReuseIdentifier:@"HomeBottomCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
-    //    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-    //    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    //    self.tableView.sectionFooterHeight = 35;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-    //    self.tableView.scrollEnabled = false;
     
     DLog(@"%lf",_k_w);
     _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 0.5*_k_w) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
@@ -306,14 +299,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    if (indexPath.section == 0) {
-    //        return 30.f;
-    //    }else if (indexPath.section == 3) {
-    //        return 60.f;
-    //    }else {
-    //
-    //        return 100.0f;
-    //    }
     
     NSInteger i = 0;
     if (_dataArray.count>0) {
@@ -416,70 +401,7 @@
         
         return cell;
     }
-    
-    /*
-    
-    if (indexPath.section == 1) {
-        cell.proLogoImage.image = [UIImage imageNamed:@"home_01"];
-        //        cell.periodLabel.text = @"周期:5~50周";
-        cell.periodLabel.text = @"1000元-5000元";
-        cell.specialtyImage.image = [UIImage imageNamed:@"home_04"];
-        NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:@"最高5000元"];
-        [attributeStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 2)];
-        [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 2)];
-        [attributeStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, 5)];
-        [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(2, 4)];
-        //        cell.amountLabel.attributedText = attributeStr;
-        cell.amountLabel.text = @"工薪贷";
-        cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
-        cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
-        //        [cell.loanBtn addTarget:self action:@selector(highLoanClick) forControlEvents:UIControlEventTouchUpInside];
-        UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highSeeExpenses)];
-        cell.helpImage.userInteractionEnabled = true;
-        [cell.helpImage addGestureRecognizer:gest];
-        return cell;
-    }
-//    if (indexPath.section == 2) {
-//        cell.proLogoImage.image = [UIImage imageNamed:@"home_02"];
-//        //        cell.periodLabel.text = @"周期:1~2周";
-//        cell.periodLabel.text = @"500、800、1000元";
-//        cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
-//        NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:@"最高1000元"];
-//        [attributeStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 2)];
-//        [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 2)];
-//        [attributeStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, 5)];
-//        [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(2, 4)];
-//        //        cell.amountLabel.attributedText = attributeStr;
-//        cell.amountLabel.text = @"急速贷";
-//        cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
-//        cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
-//        UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
-//        cell.helpImage.userInteractionEnabled = true;
-//        [cell.helpImage addGestureRecognizer:gest];
-//        //        [cell.loanBtn addTarget:self action:@selector(lowLoan) forControlEvents:UIControlEventTouchUpInside];
-//        return cell;
-//    }
-    if (indexPath.section == 2) {
-        cell.proLogoImage.image = [UIImage imageNamed:@"home10"];
-        //        cell.periodLabel.text = @"周期:1~2周";
-        cell.periodLabel.text = @"10000-30000元";
-        cell.specialtyImage.image = [UIImage imageNamed:@"home11"];
-        NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:@"最高1000元"];
-        [attributeStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 2)];
-        [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 2)];
-        [attributeStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, 5)];
-        [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(2, 4)];
-        //        cell.amountLabel.attributedText = attributeStr;
-        cell.amountLabel.text = @"白领贷";
-        cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
-        cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
-        UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
-        cell.helpImage.userInteractionEnabled = true;
-        [cell.helpImage addGestureRecognizer:gest];
-        //        [cell.loanBtn addTarget:self action:@selector(lowLoan) forControlEvents:UIControlEventTouchUpInside];
-        return cell;
-    }
-   */ 
+
     if (indexPath.section == _dataArray.count+1&&_dataArray.count>0) {
         HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];
         UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
@@ -518,29 +440,13 @@
             
         }
     }
-    
-//    if (indexPath.section == 1) {
-//        [self highLoanClick];
-//    }
-////    if (indexPath.section == 2) {
-////        [self lowLoan];
-////    }
-//    if (indexPath.section == 2) {
-//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
-//    }
+
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     DLog(@"点击");
-//    if (index == 0) {
-//        HelpViewController *helpView=[[HelpViewController alloc]initWithNibName:@"HelpViewController" bundle:nil];
-//        [self.navigationController pushViewController:helpView animated:YES];
-//    }
-//    if (index == 1) {
-//        InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
-//        [self.navigationController pushViewController:invitationVC animated:true];
-//    }
+
     if (_bannerParse && _bannerParse.result.files_.count > 0) {
         HomeBannerFiles *files = _bannerParse.result.files_[index];
         if ([files.link_url_.lowercaseString hasPrefix:@"http"] || [files.link_url_.lowercaseString hasPrefix:@"https"]) {
@@ -606,25 +512,23 @@
 
 - (void)loanProcess
 {
-//    BankCardViewController *controller = [[BankCardViewController alloc]initWithNibName:@"BankCardViewController" bundle:nil];
-//    [self.navigationController pushViewController:controller animated:YES];
     
-    UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
-    [self.navigationController pushViewController:controller animated:YES];
+//    UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
+//    [self.navigationController pushViewController:controller animated:YES];
     DLog(@"借款进度");
-//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-//        LoanProcessModel *loanProcess = [LoanProcessModel yy_modelWithJSON:object];
-//        if ([loanProcess.flag isEqualToString:@"0000"]) {
-//            LoanProcessViewController *processVC = [[LoanProcessViewController alloc] init];
-//            processVC.loanProcessParse = loanProcess;
-//            [self.navigationController pushViewController:processVC animated:true];
-//        } else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:loanProcess.msg];
-//        }
-//        
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        LoanProcessModel *loanProcess = [LoanProcessModel yy_modelWithJSON:object];
+        if ([loanProcess.flag isEqualToString:@"0000"]) {
+            LoanProcessViewController *processVC = [[LoanProcessViewController alloc] init];
+            processVC.loanProcessParse = loanProcess;
+            [self.navigationController pushViewController:processVC animated:true];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:loanProcess.msg];
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
 }
 
 - (void)expense
