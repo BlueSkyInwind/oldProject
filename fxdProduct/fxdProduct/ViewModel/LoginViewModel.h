@@ -21,5 +21,14 @@
  */
 - (void)fatchLoginMoblieNumber:(NSString *)number password:(NSString *)password  fingerPrint:(NSString*)fingerPrint  verifyCode:(NSString *)verifycode;
 
+/**
+ 上传位置信息
+
+ @param longitude 经度
+ @param latitude 纬度
+ */
+-(void)uploadLocationInfoLongitude:(NSString *)longitude Latitude:(NSString *)latitude;
+
+
 
 @end

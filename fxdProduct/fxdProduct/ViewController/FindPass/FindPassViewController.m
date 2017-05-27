@@ -68,7 +68,7 @@
                 } WithFaileBlock:^{
                     
                 }];
-                [smsViewModel fatchRequestSMSParamPhoneNumber:self.phoneNumField.text flag:CODE_FINDPASS];
+                [smsViewModel fatchRequestSMSParamPhoneNumber:self.phoneNumField.text verifyCodeType:FINDPASS_CODE];
         }
     } else {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效的手机号码"];

@@ -21,32 +21,34 @@
 #if FXD_Environment_Mode == 0
 NSString * const _main_url  =   @"https://h5.faxindai.com:8028/fxd-esb/esb/"; //生产
 NSString * const _ValidESB_url = @"https://h5.faxindai.com:8028/fxd-esb/";
-
 NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/"; //生产
 NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 
 #elif FXD_Environment_Mode == 1
-//NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
+NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
 //饶明祥本地地址
 //NSString * const _main_url  =   @"http://192.168.9.2:8080/esb/";
 
 
 //新整合的地址
 //NSString * const _main_url  =   @"http://192.168.7.253:8081/fxd-esb/esb/";
-//NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
+NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.14.170:10010/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
+//本地
+//NSString * const _P2P_url   =   @"http://192.168.14.170:10010/p2p/";
 
 //准生产地址
-NSString * const _main_url  =   @"http://192.168.6.240:9090/fxd-esb/esb/";
-NSString * const _ValidESB_url = @"http://192.168.6.240:9090/fxd-esb/";
+//NSString * const _main_url  =   @"http://192.168.6.240:9090/fxd-esb/esb/";
+//NSString * const _ValidESB_url = @"http://192.168.6.240:9090/fxd-esb/";
+//NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/";
+//NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
+
 //本地测试芝麻信用
 //NSString * const _ZMXY_url   =   @"http://192.168.14.14:9191/fxd-esb/esb/";
 //本地测试芝麻信用步数
 //NSString * const _SETP_url   =   @"http://192.168.10.100:9191/fxd-esb/esb/";
-
 
 //芝麻信用回调地址
 NSString * const _ZhimaBack_url   =   @"http://180.168.159.198:19090/fxd-esb/esb/";
@@ -455,7 +457,6 @@ NSString * const SERVERNAME   =   @"com.hfsj.fxd";
 NSString * const UserInfomation = @"UserInfomation";
 
 NSString * const FirstLunch = @"FirstLunch";
-
 
 NSString * const theMoxieApiKey = @"54adcefe02314a44b82dca9b470c4bad";  //生产
 //NSString * const theMoxieApiKey = @"8190142167af4b30b898827623d57b4d";

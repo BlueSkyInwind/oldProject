@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic)NSString * mobile_phone_;
 @property (strong, nonatomic)NSString * flag;
+@property (strong, nonatomic)NSString<Optional> * pic_verify_id_;
+@property (strong, nonatomic)NSString<Optional> * pic_verify_code_;
 
 
 

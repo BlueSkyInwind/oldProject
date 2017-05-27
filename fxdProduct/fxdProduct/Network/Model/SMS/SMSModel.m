@@ -9,6 +9,6 @@
 #import "SMSModel.h"
 
 @implementation SMSModel
-@synthesize mobile_phone_,flag;
+@synthesize mobile_phone_,flag,pic_verify_id_,pic_verify_code_;
 
 @end

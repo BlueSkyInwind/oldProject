@@ -585,6 +585,10 @@
 		8446AC001EBDCDEA009E3551 /* FindZhimaCreditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446ABFE1EBDCDEA009E3551 /* FindZhimaCreditModel.m */; };
 		8446AC031EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */; };
 		8446AC041EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */; };
+		844E5F4B1ED94C9C00753671 /* RegViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4A1ED94C9C00753671 /* RegViewModel.m */; };
+		844E5F4C1ED94C9C00753671 /* RegViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4A1ED94C9C00753671 /* RegViewModel.m */; };
+		844E5F501ED94DCB00753671 /* RegParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4F1ED94DCB00753671 /* RegParamModel.m */; };
+		844E5F511ED94DCB00753671 /* RegParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4F1ED94DCB00753671 /* RegParamModel.m */; };
 		845017311ED7CD88008055E4 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84420A601ED678E200DFBFE0 /* LoginView.xib */; };
 		845017321ED7D051008055E4 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
 		84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
@@ -2258,6 +2262,10 @@
 		8446ABFE1EBDCDEA009E3551 /* FindZhimaCreditModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindZhimaCreditModel.m; sourceTree = "<group>"; };
 		8446AC011EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitZhimaCreditAuthModel.h; sourceTree = "<group>"; };
 		8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitZhimaCreditAuthModel.m; sourceTree = "<group>"; };
+		844E5F491ED94C9C00753671 /* RegViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewModel.h; sourceTree = "<group>"; };
+		844E5F4A1ED94C9C00753671 /* RegViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewModel.m; sourceTree = "<group>"; };
+		844E5F4E1ED94DCB00753671 /* RegParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegParamModel.h; sourceTree = "<group>"; };
+		844E5F4F1ED94DCB00753671 /* RegParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegParamModel.m; sourceTree = "<group>"; };
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
 		CC0559121EB988C000733C2E /* SesameCreditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditCell.h; sourceTree = "<group>"; };
@@ -3298,6 +3306,8 @@
 				633DAD2C1C3E47D0000DA852 /* FindPassViewModel.m */,
 				633DAD2E1C3E59A0000DA852 /* LoginViewModel.h */,
 				633DAD2F1C3E59A0000DA852 /* LoginViewModel.m */,
+				844E5F491ED94C9C00753671 /* RegViewModel.h */,
+				844E5F4A1ED94C9C00753671 /* RegViewModel.m */,
 				634831031CBCCF190005C4CD /* GetCareerInfoViewModel.h */,
 				634831041CBCCF190005C4CD /* GetCareerInfoViewModel.m */,
 				634831061CBCD4680005C4CD /* GetCustomerBaseViewModel.h */,
@@ -4390,6 +4400,7 @@
 				630CC08C1BC8E14200AE9690 /* QueryRepayments */,
 				630CC07E1BC8E05D00AE9690 /* GetMoneyState */,
 				6313DC061BB39BCC00EB45DE /* Login */,
+				844E5F4D1ED94D7E00753671 /* Register */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4833,6 +4844,15 @@
 				84420A601ED678E200DFBFE0 /* LoginView.xib */,
 			);
 			path = LoginView;
+			sourceTree = "<group>";
+		};
+		844E5F4D1ED94D7E00753671 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				844E5F4E1ED94DCB00753671 /* RegParamModel.h */,
+				844E5F4F1ED94DCB00753671 /* RegParamModel.m */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		84DD36361ED57DEE0057F19A /* SMS */ = {
@@ -5513,6 +5533,7 @@
 				636EE3061B662ABB00A1A3ED /* AppDelegate.mm in Sources */,
 				63145ABF1CA4E66100D04ED8 /* CustomerCareerResult.m in Sources */,
 				63A24C6C1BE063A90036E8EF /* UIView+Extend.m in Sources */,
+				844E5F4B1ED94C9C00753671 /* RegViewModel.m in Sources */,
 				638198A41CC0825400E8951E /* SSKeychain.m in Sources */,
 				63E1ECD41E1B8FAA0079A2F8 /* SDCycleScrollView.m in Sources */,
 				638A16F31E517D9F00AB8AB6 /* LOTAnimatablePointValue.m in Sources */,
@@ -5691,6 +5712,7 @@
 				63A24C591BE063A90036E8EF /* NSString+File.m in Sources */,
 				0F0443B81C17DCDD0026CAD9 /* BtnCell.m in Sources */,
 				63E640CC1DCAD88300783E9D /* MoreInfoCell.m in Sources */,
+				844E5F501ED94DCB00753671 /* RegParamModel.m in Sources */,
 				6326C9EB1BF0B15700FD23A8 /* GetMoneyProcessBaseClass.m in Sources */,
 				63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */,
 				63FC25031D98F7E9006F58F3 /* YYLabel.m in Sources */,
@@ -6005,6 +6027,7 @@
 				CC0DF9B71EA5B1090024841A /* CheckViewIng.m in Sources */,
 				CC0DF9B81EA5B1090024841A /* YYTextAttribute.m in Sources */,
 				CC0DF9B91EA5B1090024841A /* P2PAgreementViewController.m in Sources */,
+				844E5F511ED94DCB00753671 /* RegParamModel.m in Sources */,
 				CC0DF9BA1EA5B1090024841A /* FaceCell.m in Sources */,
 				CC0DF9BB1EA5B1090024841A /* CheckFalseView.m in Sources */,
 				CC0DF9BC1EA5B1090024841A /* MsgViewCell.m in Sources */,
@@ -6178,6 +6201,7 @@
 				CC0DFA5E1EA5B1090024841A /* RepaymentHelpCell.m in Sources */,
 				CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */,
 				CC0DFA601EA5B1090024841A /* CADisplayLink.m in Sources */,
+				844E5F4C1ED94C9C00753671 /* RegViewModel.m in Sources */,
 				CC0DFA611EA5B1090024841A /* Tool.m in Sources */,
 				CC0DFA621EA5B1090024841A /* RepayHistoryResult.m in Sources */,
 				CC0DFA631EA5B1090024841A /* UIBarButtonItem+Extend.m in Sources */,
