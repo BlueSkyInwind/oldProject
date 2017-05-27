@@ -264,10 +264,10 @@
     return UIStatusBarStyleLightContent;
 }
 
-//- (void)setUserName:(NSString *)str
-//{
-//    self.userNameField.text = str;
-//}
+- (void)setUserName:(NSString *)str
+{
+    _loginView.userNameField.text = str;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
