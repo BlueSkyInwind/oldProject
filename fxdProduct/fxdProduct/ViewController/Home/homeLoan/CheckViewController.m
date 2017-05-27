@@ -1406,8 +1406,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         NSDictionary *paramDic = @{@"client_":@"1",@"form_":@"2",@"form_user_id_":[Utility sharedUtility].userInfo.account_id,@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,@"id_number_":[Utility sharedUtility].userInfo.userIDNumber,@"user_contacter":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_contacter"]],@"user_info":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_info"]],@"user_type_":@"J"};
         
         [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_accountHSService_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-            
-    //        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+        
                 AccountHSServiceModel *model = [AccountHSServiceModel yy_modelWithJSON:object];
             if ([model.appcode isEqualToString:@"1"]) {
                 
@@ -1437,25 +1436,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     }];
                     
                 }else if ([model.data.flg isEqualToString:@"3"]){
-                    
-                    
+            
                     //激活用户
                     
-                    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
-                        
-                        QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:object];
-                        
-                        ActivationViewController *controller = [[ActivationViewController alloc]initWithNibName:@"ActivationViewController" bundle:nil];
-                        controller.carNum = model.data.UsrCardInfolist.CardId;
-                        controller.mobile = model.data.UsrCardInfolist.CardId;
-                        [self.navigationController pushViewController:controller animated:YES];
-                        
-                    } failure:^(EnumServerStatus status, id object) {
-                        
-                    }];
-                    
-                    
-//                    [self bankCardQuery];
+                    NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                    P2PViewController *p2pVC = [[P2PViewController alloc] init];
+                    p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                    [self.navigationController pushViewController:p2pVC animated:YES];
                     
                 }else if ([model.data.flg isEqualToString:@"6"]){
                     
@@ -1468,9 +1455,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 
             }
 
-    //        } else {
-    //            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-    //        }
         } failure:^(EnumServerStatus status, id object) {
             
         }];
@@ -1513,10 +1497,14 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         payVC.banNum = [bank substringFromIndex:bank.length-4];
         
         payVC.makesureBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){
-            [self addBidInfo];
+            
+            [self dismissSemiModalViewWithCompletion:^{
+                [self addBidInfo];
+            }];
+            
         };
         
-        payVC.changeBankBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){
+        payVC.changeBankBlock = ^(){
             
             UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
             [self.navigationController pushViewController:controller animated:YES];
@@ -1525,14 +1513,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         payNC.view.frame = CGRectMake(0, 0, _k_w, 200);
         [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
         
-        
-        
     } failure:^(EnumServerStatus status, id object) {
         
     }];
-    
-    
-    
 }
 
 
@@ -1578,13 +1561,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         DLog(@"%@",object);
         GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
         if ([caseInfo.flag isEqualToString:@"0000"]) {
-            
-            //                            NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&cash_serv_fee_=%@&trans_amt_=%@ret_url_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[NSString stringWithFormat:@"%.2f",_approvalModel.result.week_service_fee_rate],caseInfo.result.amount_,_toCash_url];
-            //                            NSLog(@"%@",url);
-            //                            P2PViewController *p2pVC = [[P2PViewController alloc] init];
-            //                            p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-            //                            p2pVC.userSelectNum = _userSelectNum;
-            //                            [self.navigationController pushViewController:p2pVC animated:YES];
             
             [self addBildInfo:caseInfo];
         }

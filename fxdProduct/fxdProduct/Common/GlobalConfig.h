@@ -159,7 +159,7 @@ UIKIT_EXTERN NSString * const       _cash_url;                    //取现
 UIKIT_EXTERN NSString * const       _toCash_url;                  //取现返回url
 UIKIT_EXTERN NSString * const       _bosAcctActivate_url;                  //激活老账户
 UIKIT_EXTERN NSString * const       _queryBidStatus_url;                  //标的状态查询接口
-UIKIT_EXTERN NSString * const       _queryBidStatusRet_url;                  //激活老账户返回url
+UIKIT_EXTERN NSString * const       _bosAcctActivateRet_url;                  //激活老账户返回url
 
 
 

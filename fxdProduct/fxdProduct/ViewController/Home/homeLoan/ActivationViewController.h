@@ -17,5 +17,4 @@
 
 @property (nonatomic,copy)NSString *carNum;
 @property (nonatomic,copy)NSString *mobile;
-
 @end
