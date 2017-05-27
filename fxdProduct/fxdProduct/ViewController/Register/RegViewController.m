@@ -18,9 +18,8 @@
 #import "DES3Util.h"
 #import <SDWebImage/UIButton+WebCache.h>
 #import "FMDeviceManager.h"
-#import "FMDeviceManager.h"
 #import "UIImage+Color.h"
-
+#import "RegViewModel.h"
 
 @interface RegViewController ()<UITextFieldDelegate>
 
@@ -87,25 +86,23 @@
     self.passIcon.image = [[UIImage imageNamed:@"1_Signin_icon_03"] imageWithTintColor:UI_MAIN_COLOR];
     self.invIcon.image = [[UIImage imageNamed:@"1_Signin_icon_07"] imageWithTintColor:UI_MAIN_COLOR];
     
-
-    [self setPicCode];
+    [self setPicVerifyCode];
     [self setLabel];
     [self setUISignal];
+    
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+    [super viewWillAppear:animated];
+    
 }
 
-- (void)setPicCode
+-(void)viewWillDisappear:(BOOL)animated
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getPicCode_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        DLog(@"%@ --  %@",_currendId,_oldId);
-        _pic_verify_url = [object objectForKey:@"pic_verify_url_"];
-        _oldId = _currendId;
-        _currendId = [object objectForKey:@"id_"];
-        DLog(@"%@",[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_ValidESB_url,[object objectForKey:@"pic_verify_url_"],_currendId,_oldId]);
-        [_picCodeBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_ValidESB_url,[object objectForKey:@"pic_verify_url_"],_currendId,_oldId]] forState:UIControlStateNormal placeholderImage:nil options:SDWebImageRefreshCached];
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+    [super viewWillDisappear:animated];
+    [_countdownTimer invalidate];
 }
 
 /**
@@ -200,41 +197,7 @@
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {
     
     [self.view endEditing:YES];
-    if ([Tool isMobileNumber:self.phoneNumText.text]) {
-        
-        DLog(@"%@",_picCodeText.text);
-        NSDictionary *parDic = [self getDicOfParam];
-        if (parDic) {
-            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_regCode_url] parameters:parDic finished:^(EnumServerStatus status, id object) {
-                ReturnMsgBaseClass *returnModel = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-                _codeParse = returnModel;
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-                if ([_codeParse.flag isEqualToString:@"0000"]) {
-                    [self setSMSBtnInvalid];
-                }
-                if ([_codeParse.flag isEqualToString:@"0017"]) {
-                    [self setPicCode];
-                }
-                
-            } failure:^(EnumServerStatus status, id object) {
-                
-            }];
-            
-            //            SMSViewModel *smsViewModel = [[SMSViewModel alloc]init];
-            //            [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-            //                _codeParse = returnValue;
-            //
-            //                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-            //
-            //                DLog(@"---%@",_codeParse.msg);
-            //            } WithFaileBlock:^{
-            //
-            //            }];
-            //            [smsViewModel fatchRequestSMS:parDic];
-        }
-    } else {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效的手机号码"];
-    }
+    [self setVerifyCode];
 }
 
 - (void)setSMSBtnInvalid
@@ -260,34 +223,10 @@
 }
 
 - (IBAction)picBtnClick:(UIButton *)sender {
-    [self setPicCode];
+    [self setPicVerifyCode];
 }
 
 
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-    [super viewWillAppear:animated];
-    
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-    [super viewWillDisappear:animated];
-    [_countdownTimer invalidate];
-}
-
-//获取验证码参数
-- (NSDictionary *)getDicOfParam
-{
-    return @{@"mobile_phone_":self.phoneNumText.text,
-             @"flag":CODE_REG,
-             @"pic_verify_id_":_currendId,
-             @"pic_verify_code_":_picCodeText.text
-             };
-}
 
 - (IBAction)agreeBtnClick:(UIButton *)sender {
     if (!self.btnStatus) {
@@ -297,133 +236,133 @@
     }
     self.btnStatus = !self.btnStatus;
 }
+#pragma mark - 数据请求
 
+- (void)setPicVerifyCode
+{
+    SMSViewModel *smsViewModel = [[SMSViewModel alloc]init];
+    [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
+        DLog(@"%@",returnValue);
+        DLog(@"%@ --  %@",_currendId,_oldId);
+        _pic_verify_url = [returnValue objectForKey:@"pic_verify_url_"];
+        _oldId = _currendId;
+        _currendId = [returnValue objectForKey:@"id_"];
+        DLog(@"%@",[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_ValidESB_url,[returnValue objectForKey:@"pic_verify_url_"],_currendId,_oldId]);
+        [_picCodeBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_ValidESB_url,[returnValue objectForKey:@"pic_verify_url_"],_currendId,_oldId]] forState:UIControlStateNormal placeholderImage:nil options:SDWebImageRefreshCached];
+    } WithFaileBlock:^{
+        
+    }];
+    [smsViewModel postPicVerifyCode];
+}
+
+-(void)setVerifyCode{
+    
+    if (![Tool isMobileNumber:self.phoneNumText.text]) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效的手机号码"];
+        return;
+    }
+    DLog(@"%@",_picCodeText.text);
+    SMSViewModel * smsViewModel = [[SMSViewModel alloc]init];
+    [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _codeParse = returnValue;
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+        if ([_codeParse.flag isEqualToString:@"0000"]) {
+            [self setSMSBtnInvalid];
+        }
+        if ([_codeParse.flag isEqualToString:@"0017"]) {
+            [self setPicVerifyCode];
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [smsViewModel fatchRequestRegSMSParamPhoneNumber:self.phoneNumText.text picVerifyId:_currendId picVerifyCode:_picCodeText.text];
+    
+}
 #pragma mark -确认注册
 - (IBAction)clickReg:(UIButton *)sender {
     
     if (self.btnStatus && ![self.phoneNumText.text isEqualToString:@""] && ![self.passText.text isEqualToString:@""] && ![self.verCodeText.text isEqualToString:@""]) {
-        if (self.passText.text.length<=16 && self.passText.text.length >=6) {
-            if ([Utility sharedUtility].networkState) {
-                NSDictionary *regParam = [self getRegParam];
-                [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_reg_url] parameters:regParam finished:^(EnumServerStatus status, id object) {
-                    _regParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-                    DLog(@"%@",_regParse.msg);
-                    if ([_regParse.flag isEqualToString:@"0000"]) {
-                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                            //                                LoginViewController *loginView = [LoginViewController new];
-                            //                            [self.navigationController popViewControllerAnimated:YES];
-                            //                            [self dismissViewControllerAnimated:YES completion:nil];
-                            [self login];
-                            
-                        });
-                        
-                    } else if ([_regParse.flag isEqualToString:@"0001"]) {
-                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                            [self.delegate setUserName:self.phoneNumText.text];
-                            [self.navigationController popViewControllerAnimated:YES];
-                            
-                        });
-                    } else {
-                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
-                    }
-                } failure:^(EnumServerStatus status, id object) {
-                    
-                }];
-            } else {
-                [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"似乎没有连接到网络"];
-            }
-        } else {
+        
+        if (!(self.passText.text.length<=16 && self.passText.text.length >=6)) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请保持密码长度在6~16位之间"];
+            return;
         }
+        
+        if (![Utility sharedUtility].networkState) {
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"似乎没有连接到网络"];
+            return;
+        }
+        RegViewModel * regViewModel = [[RegViewModel alloc]init];
+        [regViewModel setBlockWithReturnBlock:^(id returnValue) {
+            
+            _regParse = returnValue;
+            DLog(@"%@",_regParse.msg);
+            if ([_regParse.flag isEqualToString:@"0000"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+                    [self login];
+                });
+            } else if ([_regParse.flag isEqualToString:@"0001"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.delegate setUserName:self.phoneNumText.text];
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            } else {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
+            }
+        } WithFaileBlock:^{
+            
+            
+        }];
+        //发起请求
+        [regViewModel fatchRegMoblieNumber:self.phoneNumText.text password:self.passText.text verifyCode:self.verCodeText.text invitationCode:_invitationText.text picVerifyId:_currendId picVerifyCode:_picCodeText.text];
+        
     } else {
+        
         if ([_phoneNumText.text length] != 11) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号!"];
         }else if ([_verCodeText.text length] != 6){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码!"];
         }else if ([_passText.text length] < 6 || [_passText.text length] > 16){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入新设置密码!"];
-        }
-        //        else if ([_surePassField.text length] < 6 || [_surePassField.text length] > 16){
-        //            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"两次输入密码不同,请重试!"];
-        //        }
-        else if (!self.btnStatus){
+        }else if (!self.btnStatus){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请同意协议"];
         }
     }
 }
 
-- (NSDictionary *)getRegParam
-{
-    FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
-    NSString *blackBox = manager->getDeviceInfo();
-    DLog(@"%@",blackBox);
-    return @{@"password_":[DES3Util encrypt:self.passText.text],
-             @"mobile_phone_":self.phoneNumText.text,
-             @"register_from_":PLATFORM,
-             @"verify_code_":self.verCodeText.text,
-             @"register_ip_":[[GetUserIP sharedUserIP] getIPAddress],
-             @"register_device_":@"",
-             @"pic_verify_id_":_currendId,
-             @"pic_verify_code_":_picCodeText.text,
-             @"invitation_code":_invitationText.text,
-             @"third_tongd_code":blackBox};
-}
-
-- (NSDictionary *)getLoginParam
-{
-    NSString *app_Version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    DLog(@"uuid ----- %@",[Utility sharedUtility].userInfo.uuidStr);
-    if ([Utility sharedUtility].userInfo.clientId && ![[Utility sharedUtility].userInfo.clientId isEqualToString:@""]) {
-        return @{@"mobile_phone_":self.phoneNumText.text,
-                 @"password_":[DES3Util encrypt:self.passText.text],
-                 @"last_login_device_":[Utility sharedUtility].userInfo.uuidStr,
-                 @"app_version_":app_Version,
-                 @"last_login_from_":PLATFORM,
-                 @"last_login_ip_":[[GetUserIP sharedUserIP] getIPAddress],
-                 @"platform_type_":PLATFORM
-                 };
-    } else {
-        return @{@"mobile_phone_":self.phoneNumText.text,
-                 @"password_":[DES3Util encrypt:self.passText.text],
-                 @"last_login_device_":[Utility sharedUtility].userInfo.uuidStr,
-                 @"app_version_":app_Version,
-                 @"last_login_from_":PLATFORM,
-                 @"last_login_ip_":[[GetUserIP sharedUserIP] getIPAddress],
-                 @"platform_type_":PLATFORM
-                 };
-    }
-}
-
 - (void)login
 {
-    if ([Utility sharedUtility].networkState) {
-
-            LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
-            [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
-                _loginParse = returnValue;
-                if ([_loginParse.flag isEqualToString: @"0000"]) {
-                    
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_loginParse.msg];
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [self dismissViewControllerAnimated:YES completion:^{
-                        }];
-                    });
-                } else {
-                    if ([_loginParse.flag isEqualToString:@"0005"]) {
-                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您当前的版本太低,为了您的使用体验请升级版本后再来体验^_^"];
-                    } else {
-                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginParse.msg]];
-                    }
-                }
-            } WithFaileBlock:^{
-                
-            }];
-            [loginViewModel fatchLoginMoblieNumber:self.phoneNumText.text password:self.passText.text fingerPrint:nil verifyCode:nil];
+    if ([Utility sharedUtility].networkState == NO) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"没有连接到网络"];
+        return;
+    }
+    
+    LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
+    [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _loginParse = returnValue;
+        if ([_loginParse.flag isEqualToString: @"0000"]) {
+            
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_loginParse.msg];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self dismissViewControllerAnimated:YES completion:^{
+                }];
+            });
+            
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"没有连接到网络"];
+            if ([_loginParse.flag isEqualToString:@"0005"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您当前的版本太低,为了您的使用体验请升级版本后再来体验^_^"];
+            } else {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginParse.msg]];
+            }
         }
+    } WithFaileBlock:^{
+        
+    }];
+    [loginViewModel fatchLoginMoblieNumber:self.phoneNumText.text password:self.passText.text fingerPrint:nil verifyCode:nil];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

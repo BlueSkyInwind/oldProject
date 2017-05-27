@@ -56,11 +56,10 @@
     if (verifycode) {
         loginParamModel.verify_code_  = verifycode;
     }
-   NSDictionary  * paramDic =[loginParamModel toDictionary];
     
+   NSDictionary  * paramDic =[loginParamModel toDictionary];
     [self fatchLogin:paramDic];
 }
-
 - (void)fatchLogin:(NSDictionary *)paramDic{
     
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_login_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
@@ -94,8 +93,16 @@
     }];
 }
 
-
-
+-(void)uploadLocationInfoLongitude:(NSString *)longitude Latitude:(NSString *)latitude{
+    
+    LoginLocationParamModel * loginLocationParamModel = [[LoginLocationParamModel alloc]init];
+    loginLocationParamModel.last_longitude_  = longitude;
+    loginLocationParamModel.last_latitude_  = latitude;
+    
+    NSDictionary  * paramDic =[loginLocationParamModel toDictionary];
+    [self postUserLoginLocationInfo:paramDic];
+    
+}
 
 -(void)postUserLoginLocationInfo:(NSDictionary *)paramDic{
 
@@ -104,7 +111,6 @@
         self.returnBlock(object);
     } failure:^(EnumServerStatus status, id object) {
         [self faileBlock];
-
     }];
     
 }

@@ -271,7 +271,7 @@
             } WithFaileBlock:^{
                 
             }];
-            [smsViewModel fatchRequestSMSParamPhoneNumber:self.reservedTel flag:CODE_ADDCARD];
+            [smsViewModel fatchRequestSMSParamPhoneNumber:self.reservedTel verifyCodeType:ADDCARD_CODE];
             
             DLog(@"发送验证码");
     }

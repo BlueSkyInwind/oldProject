@@ -10,7 +10,7 @@
 
 @implementation LoginParamModel
 
-@synthesize mobile_phone_,password_,last_login_device_,app_version_,last_login_from_,last_login_ip_,BSFIT_DEVICEID;
+@synthesize mobile_phone_,password_,last_login_device_,app_version_,last_login_from_,last_login_ip_,BSFIT_DEVICEID,verify_code_;
 
 
 @end

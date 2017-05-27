@@ -50,7 +50,6 @@
     
 }
 
-
 @end
 
 @implementation LoginViewController
@@ -60,6 +59,7 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"登录";
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
+    
     //视图加载
     _loginView =  [[NSBundle mainBundle ]loadNibNamed:@"LoginView" owner:self options:nil].lastObject;
     _loginView.delegate = self;
@@ -67,6 +67,7 @@
     [_loginView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    
     //定位
     [self openLocationService];
     DLog(@"%d",[LunchViewController canShowNewFeature]);
@@ -79,7 +80,6 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
-    
     [_loginView loginAnimation];
 }
 
@@ -94,7 +94,6 @@
 {
     [super viewDidDisappear:animated];
     _loginParse = nil;
-    
     [_loginView initialLoginButtonState];
 }
 /**
@@ -128,16 +127,10 @@
         ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways
          || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)) {
             //定位功能可用，开始定位
-            NSDictionary *paramDic = @{@"last_longitude_":[NSString stringWithFormat:@"%f",_longitude],
-                                       @"last_latitude_":[NSString stringWithFormat:@"%f",_latitude]};
-            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_updateLoginLatitude_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                DLog(@"%@",object);
-            } failure:^(EnumServerStatus status, id object) {
-                
-            }];
+            LoginViewModel * loginViewModel = [[LoginViewModel alloc]init];
+            [loginViewModel uploadLocationInfoLongitude:[NSString stringWithFormat:@"%f",_longitude] Latitude:[NSString stringWithFormat:@"%f",_latitude]];
         }
     [_locService stopUserLocationService];
-    
 }
 
 #pragma mark
@@ -171,6 +164,7 @@
                 }];
             });
        } else {
+           
             if ([_loginParse.flag isEqualToString:@"0004"]) {
                 
                 [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前尝试在新设备上登录,确定要继续?" cencelBtn:@"取消" otherBtn:@[@"确定"] Onview:self.view compleBlock:^(NSInteger index) {
@@ -208,9 +202,7 @@
 {
     if (_loginParse) {
         if ([_loginParse.flag isEqualToString:@"0005"] || [_vaildCodeFlag isEqualToString:@"0005"]) {
-            
             [loginViewModel fatchLoginMoblieNumber:mobliePhone password:userPassword fingerPrint:_BSFIT_DEVICEID verifyCode:veriyCode];
-
         } else {
             [loginViewModel fatchLoginMoblieNumber:mobliePhone password:userPassword fingerPrint:_BSFIT_DEVICEID verifyCode:nil];
         }
@@ -247,7 +239,7 @@
     } WithFaileBlock:^{
         
     }];
-    [smsViewModel fatchRequestSMSParamPhoneNumber:number flag:CODE_LOGIN];
+    [smsViewModel fatchRequestSMSParamPhoneNumber:number verifyCodeType:LOGIN_CODE];
     
 }
 
@@ -260,7 +252,6 @@
 }
 
 -(void)regAction{
-    
     
     RegViewController *regView = [RegViewController new];
     regView.delegate = self;
