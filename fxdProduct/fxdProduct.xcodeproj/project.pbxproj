@@ -1163,6 +1163,14 @@
 		CC0DFB8F1EA5B1090024841A /* GesturesPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */; };
 		CC0DFB901EA5B1090024841A /* HomePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636F11D77BA3000E93289 /* HomePopView.xib */; };
 		CC0DFB911EA5B1090024841A /* HomeBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E1ECDE1E1CD3D80079A2F8 /* HomeBottomCell.xib */; };
+		CC31978F1ED911980083F263 /* WhiteRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC31978E1ED911980083F263 /* WhiteRefuseView.m */; };
+		CC3197901ED911980083F263 /* WhiteRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC31978E1ED911980083F263 /* WhiteRefuseView.m */; };
+		CC3197971ED926B90083F263 /* RefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3197951ED926B90083F263 /* RefuseView.m */; };
+		CC3197981ED926B90083F263 /* RefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3197951ED926B90083F263 /* RefuseView.m */; };
+		CC3197991ED926B90083F263 /* RefuseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC3197961ED926B90083F263 /* RefuseView.xib */; };
+		CC31979A1ED926B90083F263 /* RefuseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC3197961ED926B90083F263 /* RefuseView.xib */; };
+		CC3197A01ED929F10083F263 /* WhiteRefuseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC31979F1ED929F10083F263 /* WhiteRefuseView.xib */; };
+		CC3197A11ED929F10083F263 /* WhiteRefuseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC31979F1ED929F10083F263 /* WhiteRefuseView.xib */; };
 		CC3A7F311ED52A3200F30289 /* ChangeBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3A7F2F1ED52A3200F30289 /* ChangeBankCardViewController.m */; };
 		CC3A7F321ED52A3200F30289 /* ChangeBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3A7F2F1ED52A3200F30289 /* ChangeBankCardViewController.m */; };
 		CC3A7F331ED52A3200F30289 /* ChangeBankCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC3A7F301ED52A3200F30289 /* ChangeBankCardViewController.xib */; };
@@ -1175,8 +1183,6 @@
 		CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
-		CCBBEC731ECED2C4003E374C /* RefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEC711ECED2C4003E374C /* RefuseView.m */; };
-		CCBBEC741ECED2C4003E374C /* RefuseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCBBEC721ECED2C4003E374C /* RefuseView.xib */; };
 		CCD565BE1E8A46D500B6665D /* PserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */; };
 		CCD565C01E8A46D500B6665D /* PserInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */; };
 		CCE3BE191ED2D36E004C35A4 /* SendSmsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE181ED2D36E004C35A4 /* SendSmsModel.m */; };
@@ -2267,6 +2273,12 @@
 		CC05591D1EB9A36D00733C2E /* DisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayCell.m; sourceTree = "<group>"; };
 		CC05591E1EB9A36D00733C2E /* DisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisplayCell.xib; sourceTree = "<group>"; };
 		CC0DFB971EA5B1090024841A /* fxdProductDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fxdProductDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC31978D1ED911980083F263 /* WhiteRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteRefuseView.h; sourceTree = "<group>"; };
+		CC31978E1ED911980083F263 /* WhiteRefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteRefuseView.m; sourceTree = "<group>"; };
+		CC3197941ED926B90083F263 /* RefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefuseView.h; sourceTree = "<group>"; };
+		CC3197951ED926B90083F263 /* RefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefuseView.m; sourceTree = "<group>"; };
+		CC3197961ED926B90083F263 /* RefuseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefuseView.xib; sourceTree = "<group>"; };
+		CC31979F1ED929F10083F263 /* WhiteRefuseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WhiteRefuseView.xib; sourceTree = "<group>"; };
 		CC3A7F2E1ED52A3200F30289 /* ChangeBankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeBankCardViewController.h; sourceTree = "<group>"; };
 		CC3A7F2F1ED52A3200F30289 /* ChangeBankCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeBankCardViewController.m; sourceTree = "<group>"; };
 		CC3A7F301ED52A3200F30289 /* ChangeBankCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeBankCardViewController.xib; sourceTree = "<group>"; };
@@ -2277,9 +2289,6 @@
 		CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
-		CCBBEC701ECED2C4003E374C /* RefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefuseView.h; sourceTree = "<group>"; };
-		CCBBEC711ECED2C4003E374C /* RefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefuseView.m; sourceTree = "<group>"; };
-		CCBBEC721ECED2C4003E374C /* RefuseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefuseView.xib; sourceTree = "<group>"; };
 		CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PserInfoViewController.xib; sourceTree = "<group>"; };
 		CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PserInfoViewController.mm; sourceTree = "<group>"; };
 		CCD565BD1E8A46D500B6665D /* PserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PserInfoViewController.h; sourceTree = "<group>"; };
@@ -2627,9 +2636,9 @@
 		0FEA58521BE08EE3007F8A6D /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				CCBBEC701ECED2C4003E374C /* RefuseView.h */,
-				CCBBEC711ECED2C4003E374C /* RefuseView.m */,
-				CCBBEC721ECED2C4003E374C /* RefuseView.xib */,
+				CC3197941ED926B90083F263 /* RefuseView.h */,
+				CC3197951ED926B90083F263 /* RefuseView.m */,
+				CC3197961ED926B90083F263 /* RefuseView.xib */,
 				63FE3DE71E4877E1009E5B82 /* PayLoanChoose */,
 				63E1ECD61E1BA88F0079A2F8 /* HomeCell */,
 				1AEDCF181C197F5000014A87 /* RepaymentView */,
@@ -2650,6 +2659,9 @@
 				1ABDC8591BE9B7030059F607 /* sumitView.xib */,
 				0F099BC71C1E4CF700D97BAE /* CircleView.h */,
 				0F099BC81C1E4CF700D97BAE /* CircleView.m */,
+				CC31978D1ED911980083F263 /* WhiteRefuseView.h */,
+				CC31978E1ED911980083F263 /* WhiteRefuseView.m */,
+				CC31979F1ED929F10083F263 /* WhiteRefuseView.xib */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -5125,10 +5137,10 @@
 				63FE3DEC1E487819009E5B82 /* SumCell.xib in Resources */,
 				631CB4711B7AF5220090C94D /* indexViewController.xib in Resources */,
 				637636FB1D77FB1600E93289 /* repay_circle_selt@3x.png in Resources */,
+				CC3197991ED926B90083F263 /* RefuseView.xib in Resources */,
 				0F099B991C1A97EB00D97BAE /* ColledgeView.xib in Resources */,
 				CCF803291ED4249A003B7975 /* UnbundlingBankCardViewController.xib in Resources */,
 				1AB0F5B41CF305F800F3DF06 /* repayClearView.xib in Resources */,
-				CCBBEC741ECED2C4003E374C /* RefuseView.xib in Resources */,
 				63F2548E1E49CD2C00852CF1 /* LoanProcessViewController.xib in Resources */,
 				63FE3DF11E48821B009E5B82 /* DaysCell.xib in Resources */,
 				6391F77E1D348B4E0097C943 /* bank_code_9@2x.png in Resources */,
@@ -5180,6 +5192,7 @@
 				630B16461C561FDF006D46CF /* WriteInfoViewController.xib in Resources */,
 				636B1B8F1C2A416500450358 /* NextViewCell.xib in Resources */,
 				63553B1B1E5FD09D00B2C1FF /* MGLiveResource.bundle in Resources */,
+				CC3197A01ED929F10083F263 /* WhiteRefuseView.xib in Resources */,
 				63B63E411DB9E10F00CAFE32 /* MoxieSDKResource.bundle in Resources */,
 				1A8988FD1BEC9EBE00F9E81E /* MsgViewCell.xib in Resources */,
 				632DFF631E48500500E414B2 /* CycleTextCell.xib in Resources */,
@@ -5268,6 +5281,7 @@
 				CC0DFB3F1EA5B1090024841A /* indexViewController.xib in Resources */,
 				CC0DFB401EA5B1090024841A /* repay_circle_selt@3x.png in Resources */,
 				CC0DFB411EA5B1090024841A /* ColledgeView.xib in Resources */,
+				CC31979A1ED926B90083F263 /* RefuseView.xib in Resources */,
 				CC0DFB421EA5B1090024841A /* repayClearView.xib in Resources */,
 				CC0DFB431EA5B1090024841A /* LoanProcessViewController.xib in Resources */,
 				CC0DFB441EA5B1090024841A /* DaysCell.xib in Resources */,
@@ -5322,6 +5336,7 @@
 				CC0DFB721EA5B1090024841A /* WriteInfoViewController.xib in Resources */,
 				CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */,
 				CC0DFB741EA5B1090024841A /* MGLiveResource.bundle in Resources */,
+				CC3197A11ED929F10083F263 /* WhiteRefuseView.xib in Resources */,
 				CC0DFB751EA5B1090024841A /* MoxieSDKResource.bundle in Resources */,
 				CC0DFB761EA5B1090024841A /* MsgViewCell.xib in Resources */,
 				CC0DFB771EA5B1090024841A /* CycleTextCell.xib in Resources */,
@@ -5593,6 +5608,7 @@
 				639E88731CA1371800254216 /* UIApplication+Extend.m in Sources */,
 				63FE3DF01E48821B009E5B82 /* DaysCell.m in Sources */,
 				0F0650441BE219BF000DE94D /* LoanDoFindResult.m in Sources */,
+				CC31978F1ED911980083F263 /* WhiteRefuseView.m in Sources */,
 				635B0BDE1DF14B9C008EAFD1 /* AgreeMentListViewController.m in Sources */,
 				637636EB1D76A72A00E93289 /* LewPopupViewAnimationSpring.m in Sources */,
 				63FC25011D98F7E9006F58F3 /* YYTextUtilities.m in Sources */,
@@ -5617,7 +5633,6 @@
 				1A45A3F01CAA7002001BC841 /* BankCardInfoModel.m in Sources */,
 				6326C9E31BF097D400FD23A8 /* ContactList.m in Sources */,
 				0F920C131BCE549900AA9A31 /* MyCardsViewController.m in Sources */,
-				CCBBEC731ECED2C4003E374C /* RefuseView.m in Sources */,
 				638A16F61E517D9F00AB8AB6 /* LOTAnimationCache.m in Sources */,
 				63145AA81CA294B800D04ED8 /* LoginBaseClass.m in Sources */,
 				638A16F81E517D9F00AB8AB6 /* CGGeometryAdditions.m in Sources */,
@@ -5772,6 +5787,7 @@
 				630D459A1BCC99DE00874064 /* CardListBaseClass.m in Sources */,
 				CC3A7F311ED52A3200F30289 /* ChangeBankCardViewController.m in Sources */,
 				639E88721CA1371800254216 /* LunchViewController.m in Sources */,
+				CC3197971ED926B90083F263 /* RefuseView.m in Sources */,
 				637636D21D768BE800E93289 /* RepayListViewController.m in Sources */,
 				63FC25001D98F7E9006F58F3 /* YYTextTransaction.m in Sources */,
 				635AB7971BE2FE6600C32919 /* CashResult.m in Sources */,
@@ -6033,6 +6049,7 @@
 				CC0DF9D11EA5B1090024841A /* RedpacketBaseClass.m in Sources */,
 				CC0DF9D21EA5B1090024841A /* TicketCell.m in Sources */,
 				CC0DF9D31EA5B1090024841A /* UserSureRefuseResult.m in Sources */,
+				CC3197901ED911980083F263 /* WhiteRefuseView.m in Sources */,
 				CC0DF9D41EA5B1090024841A /* NSString+AES.m in Sources */,
 				CC0DF9D51EA5B1090024841A /* RegSecoryViewController.m in Sources */,
 				CC0DF9D61EA5B1090024841A /* ReconfrInfoModel.m in Sources */,
@@ -6210,6 +6227,7 @@
 				CC0DFA7D1EA5B1090024841A /* TicketExplainCell.m in Sources */,
 				CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */,
 				CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */,
+				CC3197981ED926B90083F263 /* RefuseView.m in Sources */,
 				CC0559261EB9A58500733C2E /* DisplayCell.m in Sources */,
 				CC0DFA801EA5B1090024841A /* CardListBaseClass.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchViewController.m in Sources */,

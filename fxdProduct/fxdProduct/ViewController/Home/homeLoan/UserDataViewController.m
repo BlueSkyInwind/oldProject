@@ -87,13 +87,13 @@
     //    processFlot += 0.25;
 //        _nextStep = @"-1";
     if (_nextStep.integerValue > 0) {
-        if ([_product_id isEqualToString:@"P001005"]) {
+//        if ([_product_id isEqualToString:@"P001005"]) {
             processFlot = (_nextStep.integerValue-1)*0.2;
 
-        }else{
-        
-            processFlot = (_nextStep.integerValue-1)*0.25;
-        }
+//        }else{
+//        
+//            processFlot = (_nextStep.integerValue-1)*0.25;
+//        }
         
     } else {
         if (_nextStep.integerValue == -1) {
@@ -174,32 +174,32 @@
         make.height.equalTo(numView.mas_width).multipliedBy(0.0597);
     }];
     [headView layoutIfNeeded];
-    int length;
-    if ([_product_id isEqualToString:@"P001005"]) {
-        length =6;
-    }else{
-    
-        length = 5;
-    }
-    for (int i = 0; i < length; i++) {
-        CGFloat width;
+//    int length;
+//    if ([_product_id isEqualToString:@"P001005"]) {
+//        length =6;
+//    }else{
+//    
+//        length = 5;
+//    }
+    for (int i = 0; i < 6; i++) {
+//        CGFloat width;
         UILabel *numLabel = [[UILabel alloc] init];
         numLabel.textColor = [UIColor whiteColor];
         numLabel.font = [UIFont systemFontOfSize:12.f];
         numLabel.textAlignment = NSTextAlignmentCenter;
-        if ([_product_id isEqualToString:@"P001005"]) {
+//        if ([_product_id isEqualToString:@"P001005"]) {
             numLabel.text = [NSString stringWithFormat:@"%d%%",i*20];
-            width = i*0.17;
-        }else{
-        
-            numLabel.text = [NSString stringWithFormat:@"%d%%",i*25];
-            width = i*0.22;
-        }
+//            width = i*0.17;
+//        }else{
+//        
+//            numLabel.text = [NSString stringWithFormat:@"%d%%",i*25];
+//            width = i*0.22;
+//        }
         
         [numView addSubview:numLabel];
         DLog(@"%lf",i*0.25*numView.frame.size.width);
         [numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(numView.mas_left).offset(width*numView.frame.size.width);
+            make.left.equalTo(numView.mas_left).offset(i*0.17*numView.frame.size.width);
             make.top.equalTo(@0);
             make.bottom.equalTo(@0);
             make.width.equalTo(numLabel.mas_height).multipliedBy(2);
@@ -426,35 +426,36 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    if ([_product_id isEqualToString:@"P001005"]) {
+//    if ([_product_id isEqualToString:@"P001005"]) {
         if (indexPath.row == 0) {
             return _k_w*0.06f;
         }else{
         
             return _k_w*0.21f;
         }
-    }else{
-    
-        if (_isDisplay) {
-            if (indexPath.row == 6) {
-                return _k_w*0.125f;
-            }else if(indexPath.row == 0){
-                
-                return _k_w*0.12f;
-            }else{
-                return _k_w*0.21;
-            }
-        }else{
-            
-            if (indexPath.row == 5) {
-                return _k_w*0.125f;
-            }else if (indexPath.row == 0){
-                return _k_w*0.12f;
-            }else{
-                return _k_w*0.21;
-            }
-        }
-    }
+//    }
+//    else{
+//    
+//        if (_isDisplay) {
+//            if (indexPath.row == 6) {
+//                return _k_w*0.125f;
+//            }else if(indexPath.row == 0){
+//                
+//                return _k_w*0.12f;
+//            }else{
+//                return _k_w*0.21;
+//            }
+//        }else{
+//            
+//            if (indexPath.row == 5) {
+//                return _k_w*0.125f;
+//            }else if (indexPath.row == 0){
+//                return _k_w*0.12f;
+//            }else{
+//                return _k_w*0.21;
+//            }
+//        }
+//    }
     
 }
 
@@ -488,119 +489,119 @@
                 make.height.equalTo(@15);
                 make.right.equalTo(cell.contentView);
             }];
-            if ([_product_id isEqualToString:@"P001002"]) {
-                UILabel *tipLabel = [[UILabel alloc]init];
-                [cell.contentView addSubview:tipLabel];
-                tipLabel.text = @"基础认证必填 完成后可进行借款";
-                tipLabel.textColor = [UIColor colorWithRed:191/255.0 green:192/255.0 blue:193/255.0 alpha:1.0];
-                tipLabel.font = [UIFont systemFontOfSize:13.f];
-                [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(@17);
-                    make.top.equalTo(@40);
-                    //                make.bottom.equalTo(cell.contentView);
-                    make.height.equalTo(@15);
-                    make.right.equalTo(cell.contentView);
-                }];
-            }
+//            if ([_product_id isEqualToString:@"P001002"]) {
+//                UILabel *tipLabel = [[UILabel alloc]init];
+//                [cell.contentView addSubview:tipLabel];
+//                tipLabel.text = @"基础认证必填 完成后可进行借款";
+//                tipLabel.textColor = [UIColor colorWithRed:191/255.0 green:192/255.0 blue:193/255.0 alpha:1.0];
+//                tipLabel.font = [UIFont systemFontOfSize:13.f];
+//                [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.left.equalTo(@17);
+//                    make.top.equalTo(@40);
+//                    //                make.bottom.equalTo(cell.contentView);
+//                    make.height.equalTo(@15);
+//                    make.right.equalTo(cell.contentView);
+//                }];
+//            }
         }
         return cell;
     }else {
         
-        if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001004"]) {
-
-            if (indexPath.row == 5||indexPath.row == 6) {
-                if (_isDisplay) {
-                    if (indexPath.row == 5) {
-                        SesameCreditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SesameCreditCell"];
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                        if (_isZmxyAuth.integerValue == 2) {
-                            cell.stateLabel.text = @"已完成";
-                            cell.stateLabel.textColor = rgb(42, 155, 234);
-                        } else if(_isZmxyAuth.integerValue == 1){
-                            cell.stateLabel.text = @"认证中";
-                            cell.stateLabel.textColor = rgb(159, 160, 162);
-                        }else if(_isZmxyAuth.integerValue == 3){
-                        
-                            cell.stateLabel.text = @"未完成";
-                            cell.stateLabel.textColor = rgb(159, 160, 162);
-                        }
-                        
-                        return cell;
-                    }
-                    if (indexPath.row == 6) {
-                        
-                        DisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DisplayCell"];
-                        cell.titleLabel.text = @"收起";
-                        cell.directionImageView.image = [UIImage imageNamed:@"jiantoushang"];
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        return cell;
-                    }
-                }else{
-                    
-                    DisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DisplayCell"];
-                    cell.titleLabel.text = @"更多认证";
-                    cell.directionImageView.image = [UIImage imageNamed:@"jiantouxia"];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    return cell;
-                }
-            }
-            
-                DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
-                    
-                    cell.statusLabel.text = @"已完成";
-                    cell.statusLabel.textColor = UI_MAIN_COLOR;
-                } else {
-                    cell.statusLabel.text = @"未完成";
-                    cell.statusLabel.textColor = rgb(159, 160, 162);
-                }
-                switch (indexPath.row) {
-                    case 1:
-                    {
-                        
-                        cell.iconImage.image = [UIImage imageNamed:@"UserData1"];
-                        cell.titleLable.text = @"个人信息";
-                        cell.subTitleLabel.text = @"完善您的个人信息";
-                        
-                        return cell;
-                    }
-                        break;
-                    case 2:
-                    {
-                        cell.iconImage.image = [UIImage imageNamed:@"UserData2"];
-                        cell.titleLable.text = @"联系人信息";
-                        cell.subTitleLabel.text = @"完善您的联系人信息";
-                        return cell;
-                    }
-                        break;
-                    case 3:
-                    {
-                        cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
-                        cell.titleLable.text = @"职业信息";
-                        cell.subTitleLabel.text = @"完善您的职业信息";
-                        return cell;
-                    }
-                        break;
-                    case 4:
-                    {
-                        cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
-                        cell.titleLable.text = @"第三方认证";
-                        cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
-                        if (UI_IS_IPHONE5) {
-                            cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
-                        }
-                        //                    cell.lineView.hidden = true;
-                        return cell;
-                    }
-                        break;
-                    default:
-                        break;
-                }
-            
-        }else{
+//        if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001004"]) {
+//
+//            if (indexPath.row == 5||indexPath.row == 6) {
+//                if (_isDisplay) {
+//                    if (indexPath.row == 5) {
+//                        SesameCreditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SesameCreditCell"];
+//                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//                        if (_isZmxyAuth.integerValue == 2) {
+//                            cell.stateLabel.text = @"已完成";
+//                            cell.stateLabel.textColor = rgb(42, 155, 234);
+//                        } else if(_isZmxyAuth.integerValue == 1){
+//                            cell.stateLabel.text = @"认证中";
+//                            cell.stateLabel.textColor = rgb(159, 160, 162);
+//                        }else if(_isZmxyAuth.integerValue == 3){
+//                        
+//                            cell.stateLabel.text = @"未完成";
+//                            cell.stateLabel.textColor = rgb(159, 160, 162);
+//                        }
+//                        
+//                        return cell;
+//                    }
+//                    if (indexPath.row == 6) {
+//                        
+//                        DisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DisplayCell"];
+//                        cell.titleLabel.text = @"收起";
+//                        cell.directionImageView.image = [UIImage imageNamed:@"jiantoushang"];
+//                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                        return cell;
+//                    }
+//                }else{
+//                    
+//                    DisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DisplayCell"];
+//                    cell.titleLabel.text = @"更多认证";
+//                    cell.directionImageView.image = [UIImage imageNamed:@"jiantouxia"];
+//                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                    return cell;
+//                }
+//            }
+//            
+//                DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
+//                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
+//                    
+//                    cell.statusLabel.text = @"已完成";
+//                    cell.statusLabel.textColor = UI_MAIN_COLOR;
+//                } else {
+//                    cell.statusLabel.text = @"未完成";
+//                    cell.statusLabel.textColor = rgb(159, 160, 162);
+//                }
+//                switch (indexPath.row) {
+//                    case 1:
+//                    {
+//                        
+//                        cell.iconImage.image = [UIImage imageNamed:@"UserData1"];
+//                        cell.titleLable.text = @"个人信息";
+//                        cell.subTitleLabel.text = @"完善您的个人信息";
+//                        
+//                        return cell;
+//                    }
+//                        break;
+//                    case 2:
+//                    {
+//                        cell.iconImage.image = [UIImage imageNamed:@"UserData2"];
+//                        cell.titleLable.text = @"联系人信息";
+//                        cell.subTitleLabel.text = @"完善您的联系人信息";
+//                        return cell;
+//                    }
+//                        break;
+//                    case 3:
+//                    {
+//                        cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
+//                        cell.titleLable.text = @"职业信息";
+//                        cell.subTitleLabel.text = @"完善您的职业信息";
+//                        return cell;
+//                    }
+//                        break;
+//                    case 4:
+//                    {
+//                        cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
+//                        cell.titleLable.text = @"第三方认证";
+//                        cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
+//                        if (UI_IS_IPHONE5) {
+//                            cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
+//                        }
+//                        //                    cell.lineView.hidden = true;
+//                        return cell;
+//                    }
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            
+//        }else{
         
             DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -674,7 +675,7 @@
                     return cell;
                 default:
                     break;
-            }
+//            }
         }
     }
     
@@ -683,17 +684,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 5||indexPath.row == 6) {
-        
-        if ([_product_id isEqualToString:@"P001005"]&&indexPath.row==5&&_nextStep.integerValue<5&&_nextStep.integerValue>0) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_subTitleArr[_nextStep.integerValue-1]];
-            return;
-        }else{
-        
-            [self clickCell:indexPath.row];
-        }
-        
-    }else{
+//    if (indexPath.row == 5||indexPath.row == 6) {
+//        
+//        if ([_product_id isEqualToString:@"P001005"]&&indexPath.row==5&&_nextStep.integerValue<5&&_nextStep.integerValue>0) {
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_subTitleArr[_nextStep.integerValue-1]];
+//            return;
+//        }else{
+//        
+//            [self clickCell:indexPath.row];
+//        }
+//        
+//    }else{
     
         DLog(@"%ld",_nextStep.integerValue);
         if (_nextStep.integerValue > 0) {
@@ -707,7 +708,7 @@
             return;
         }
         
-    }
+//    }
     
     
     

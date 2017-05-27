@@ -47,7 +47,6 @@
 #import "UserDataViewController.h"
 #import "AccountHSServiceModel.h"
 #import "QueryCardInfo.h"
-#import "ActivationViewController.h"
 #import "UnbundlingBankCardViewController.h"
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
@@ -1460,25 +1459,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         }];
     }
     
-}
-
-
-
-#pragma mark 银行卡查询接口
--(void)bankCardQuery{
-
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryCardInfo_url] parameters:@{@"UsrCustId":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
-    
-        QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:object];
-        if (model.data.UsrCardInfolist) {
-            //激活开户
-            ActivationViewController *controller = [[ActivationViewController alloc]initWithNibName:@"ActivationViewController" bundle:nil];
-            [self.navigationController pushViewController:controller animated:YES];
-        }
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
 }
 
 
