@@ -100,13 +100,11 @@
         for (HomeProductListProducts *product in _homeProductList.result.products) {
             [_dataArray addObject:product];
         }
-        
-        [_tableView reloadData];
+         [_tableView reloadData];
     } failure:^(EnumServerStatus status, id object) {
         
         DLog(@"%@",object);
     }];
-
 }
 
 - (void)setNavQRRightBar {
@@ -153,6 +151,7 @@
     //    btn.frame = CGRectMake(100, 25, 21, 21);
     [self.view addSubview:btn];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
         make.width.equalTo(@21);
         make.height.equalTo(@21);
         make.right.equalTo(self.view.mas_right).offset(-15);
@@ -219,7 +218,6 @@
     [self.navigationController pushViewController:expressVC animated:YES];
 }
 
-
 - (void)checkVersion{
     NSString *app_Version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSDictionary *paramDic = @{@"platform_type_":PLATFORM,
@@ -254,10 +252,10 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     
     DLog(@"%lf",_k_w);
+    
+    //    [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 187.5) imageNamesGroup:[NSArray arrayWithObjects:@"banner_01",@"banner_02",@"banner_03", nil]];
     _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 0.5*_k_w) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
     //375 185
-    
-//    [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 187.5) imageNamesGroup:[NSArray arrayWithObjects:@"banner_01",@"banner_02",@"banner_03", nil]];
     _sdView.delegate = self;
     _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
     
@@ -487,7 +485,6 @@
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = @"P001004";
         [self PostStatuesMyLoanAmount:@{@"product_id_":@"P001004"}];
-        
     } else {
         [self presentLogin:self];
     }
@@ -496,7 +493,6 @@
 #pragma mark ->我要还款
 - (void)payMoney
 {
-    
     
 //    ActivationViewController *controller = [[ActivationViewController alloc]initWithNibName:@"ActivationViewController" bundle:nil];
 //    [self.navigationController pushViewController:controller animated:YES];
@@ -810,9 +806,11 @@
 
 - (void)presentLogin:(UIViewController *)vc
 {
+    
     LoginViewController *loginVC = [[LoginViewController alloc]init];
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
     [vc presentViewController:nav animated:YES completion:nil];
+    
 }
 
 
