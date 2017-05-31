@@ -26,18 +26,30 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 
 #elif FXD_Environment_Mode == 1
-NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
-//饶明祥本地地址
-//NSString * const _main_url  =   @"http://192.168.9.2:8080/esb/";
 
+//NSString * const _main_url  =   @"http://192.168.7.253:8081/fxd-esb/esb/";
 
 //新整合的地址
+<<<<<<< HEAD
 //NSString * const _main_url  =   @"http://192.168.7.253:8081/fxd-esb/esb/";
 NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
 //NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
 
 NSString * const _P2P_url = @"http://192.168.7.253:8081/fxd-esb/esb/p2p";
+=======
+//NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
+//NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
+//NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
+
+//http://192.168.6.61  UAT
+NSString * const _main_url  =   @"http://192.168.6.61/fxd-esb/esb/";
+NSString * const _ValidESB_url = @"http://192.168.6.61/fxd-esb/";
+NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/";
+NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
+
+>>>>>>> b6c087cbcf3f0a0d795d6f21cfd47a8c9e06ca31
 //本地
 //NSString * const _P2P_url   =   @"http://192.168.14.170:10010/p2p/";
 
@@ -48,13 +60,6 @@ NSString * const _P2P_url = @"http://192.168.7.253:8081/fxd-esb/esb/p2p";
 //NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/";
 //NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
-//本地测试芝麻信用
-//NSString * const _ZMXY_url   =   @"http://192.168.14.14:9191/fxd-esb/esb/";
-//本地测试芝麻信用步数
-//NSString * const _SETP_url   =   @"http://192.168.10.100:9191/fxd-esb/esb/";
-
-//芝麻信用回调地址
-NSString * const _ZhimaBack_url   =   @"http://180.168.159.198:19090/fxd-esb/esb/";
 
 
 #else
