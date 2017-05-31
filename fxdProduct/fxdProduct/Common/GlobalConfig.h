@@ -160,8 +160,8 @@ UIKIT_EXTERN NSString * const       _toCash_url;                  //取现返回
 UIKIT_EXTERN NSString * const       _bosAcctActivate_url;                  //激活老账户
 UIKIT_EXTERN NSString * const       _queryBidStatus_url;                  //标的状态查询接口
 UIKIT_EXTERN NSString * const       _bosAcctActivateRet_url;                  //激活老账户返回url
-
-
+UIKIT_EXTERN NSString * const       _qryUserStatus_url;                  //用户状态查询
+UIKIT_EXTERN NSString * const       _getBidStatus_url;                  //用户标的状态查询
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码
 UIKIT_EXTERN NSString * const   CODE_FINDPASS;         ///密码找回验证码

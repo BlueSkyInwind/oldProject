@@ -15,6 +15,8 @@
 #import "RTRootNavigationController.h"
 #import "CheckViewController.h"
 #import "AccountHSServiceModel.h"
+#import "QryUserStatusModel.h"
+#import "getBidStatus.h"
 @interface P2PViewController ()<WKUIDelegate,WKNavigationDelegate>
 {
     UIProgressView *progressView;
@@ -146,6 +148,18 @@
     
     if ([request.URL.absoluteString isEqualToString:_bosAcctActivateRet_url]) {
         
+        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+            DLog(@"%@",object);
+            GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
+            if ([caseInfo.flag isEqualToString:@"0000"]) {
+                [self getBidStatus:caseInfo];
+            } else {
+                
+            }
+            
+        } failure:^(EnumServerStatus status, id object) {
+            
+        }];
     }
 }
 
@@ -155,6 +169,20 @@
     
 }
 
+
+#pragma mark  用户标的状态查询
+-(void)getBidStatus:(GetCaseInfo *)caseInfo{
+
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_getBidStatus_url] parameters:@{@"from_case_id_":caseInfo.result.from_case_id_} finished:^(EnumServerStatus status, id object) {
+        getBidStatus *model = [getBidStatus yy_modelWithJSON:object];
+        
+        if ([model.status isEqualToString:@"3"]||[model.status isEqualToString:@"4"]) {
+            
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
 #pragma mark  标的录入
 -(void)addBidInfoService{
 
@@ -173,6 +201,27 @@
 
 }
 
+#pragma mark  fxd用户状态查询
+-(void)fxdQryUserStatus{
+
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_qryUserStatus_url] parameters:@{@"client_":@"1"} finished:^(EnumServerStatus status, id object) {
+        
+        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:object];
+        if ([model.appCode isEqualToString:@"1"]) {
+            if ([model.flg isEqualToString:@"2"]) {//未注册
+                
+                
+                
+            }else if ([model.flg isEqualToString:@"3"]){//待激活
+            
+            }else if ([model.flg isEqualToString:@"6"]){//正常用户
+            
+            }
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
 
 -(void)checkP2PUserState{
 

@@ -48,6 +48,7 @@
 #import "AccountHSServiceModel.h"
 #import "QueryCardInfo.h"
 #import "UnbundlingBankCardViewController.h"
+#import "QryUserStatusModel.h"
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -126,10 +127,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     //    [self createScroll];
     
     [self createUI];
-//    [self create];
-//    _checking.ReceiveImmediatelyImage.userInteractionEnabled = true;
-//    UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap)];
-//    [_checking.ReceiveImmediatelyImage addGestureRecognizer:tapImage];
     
     [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -729,7 +726,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 #pragma mark 新的合规
 -(void)integrationP2PUserState{
 
-    [self userStatusQuery];
+//    [self userStatusQuery];
+    [self userStatus];
     
 }
 - (void)addBildInfo:(GetCaseInfo *)caseInfo
@@ -1394,8 +1392,65 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
 }
 
+#pragma mark fxd用户状态查询
+-(void)userStatus{
 
-#pragma  mark - 用户状态查询接口
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_qryUserStatus_url] parameters:@{@"client_":@"1"} finished:^(EnumServerStatus status, id object) {
+        
+        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:object];
+        if ([model.appCode isEqualToString:@"1"]) {
+            
+            if ([model.flg isEqualToString:@"2"]) {//未开户
+                
+                //绑定银行卡
+                NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
+                [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+                    BankModel *bankModel = [BankModel yy_modelWithJSON:object];
+                    if ([bankModel.flag isEqualToString:@"0000"]) {
+                        BankCardViewController *bankVC = [BankCardViewController new];
+                        bankVC.bankModel = bankModel;
+                        bankVC.periodSelect = _userSelectNum.integerValue;
+                        bankVC.purposeSelect = _purposeSelect;
+                        bankVC.userStateModel = _userStateModel;
+                        bankVC.isP2P = YES;
+                        bankVC.uploadP2PUserInfo = _uploadP2PUserInfo;
+                        //            bankVC.idString = _idString;
+                        bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
+                        [self.navigationController pushViewController:bankVC animated:YES];
+                    } else {
+                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
+                    }
+                } failure:^(EnumServerStatus status, id object) {
+                    DLog(@"%@",object);
+                }];
+                
+            }else if ([model.flg isEqualToString:@"3"]){//待激活
+            
+                //激活用户
+                
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                P2PViewController *p2pVC = [[P2PViewController alloc] init];
+                p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                [self.navigationController pushViewController:p2pVC animated:YES];
+                
+            }else if ([model.flg isEqualToString:@"6"]){//正常用户
+            
+                [self chooseBankCard];
+                
+            }
+        }else{
+        
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+        
+    }];
+    
+}
+
+
+#pragma  mark - 合规用户状态查询接口
 
 -(void)userStatusQuery{
     
