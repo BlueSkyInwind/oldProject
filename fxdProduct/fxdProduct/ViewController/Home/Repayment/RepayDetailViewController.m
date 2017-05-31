@@ -27,7 +27,7 @@
 #import "PayViewController.h"
 #import "QueryCardInfo.h"
 #import "UnbundlingBankCardViewController.h"
-
+#import "QryUserStatusModel.h"
 @interface RepayDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SelectViewDelegate>
 {
     UIImageView*navBarHairlineImageView;
@@ -929,19 +929,81 @@
 
 -(void)getMoney{
 
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDUserInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-//        _uploadP2PUserInfo = object;
-        [self checkUserStatus:object];
-        //                [self checkP2PUserState];
+//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDUserInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+//        DLog(@"%@",object);
+////        _uploadP2PUserInfo = object;
+//        [self checkUserStatus:object];
+//        //                [self checkP2PUserState];
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
+    
+#pragma mark fxd用户状态查询
+
+        
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_qryUserStatus_url] parameters:@{@"client_":@"1"} finished:^(EnumServerStatus status, id object) {
+        
+        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:object];
+        if ([model.result.appcode isEqualToString:@"1"]) {
+            
+            if ([model.result.flg isEqualToString:@"2"]) {//未开户
+                
+//                //绑定银行卡
+//                NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
+//                [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//                    BankModel *bankModel = [BankModel yy_modelWithJSON:object];
+//                    if ([bankModel.flag isEqualToString:@"0000"]) {
+//                        BankCardViewController *bankVC = [BankCardViewController new];
+//                        bankVC.bankModel = bankModel;
+//                        bankVC.periodSelect = _userSelectNum.integerValue;
+//                        bankVC.purposeSelect = _purposeSelect;
+//                        bankVC.userStateModel = _userStateModel;
+//                        bankVC.isP2P = YES;
+//                        bankVC.uploadP2PUserInfo = _uploadP2PUserInfo;
+//                        //            bankVC.idString = _idString;
+//                        bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
+//                        [self.navigationController pushViewController:bankVC animated:YES];
+//                    } else {
+//                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
+//                    }
+//                } failure:^(EnumServerStatus status, id object) {
+//                    DLog(@"%@",object);
+//                }];
+                
+            }else if ([model.result.flg isEqualToString:@"3"]){//待激活
+                
+                //激活用户
+                
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_p2P_url,_bosAcctActivate_url,@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                P2PViewController *p2pVC = [[P2PViewController alloc] init];
+                p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                [self.navigationController pushViewController:p2pVC animated:YES];
+                
+            }else if ([model.result.flg isEqualToString:@"6"]){//正常用户
+                
+                if (_repayType == RepayTypeOption) {
+                    [self p2pRepay];
+                } else {
+                    [self p2pRepayClean];
+                }
+//                [self chooseBankCard];
+                
+            }
+        }else{
+            
+            //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
+        }
     } failure:^(EnumServerStatus status, id object) {
         
+        
     }];
+    
+ 
     
 }
 
 
-
+#pragma mark  合规状态查询
 -(void)checkUserStatus:(id)object{
 
     if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {

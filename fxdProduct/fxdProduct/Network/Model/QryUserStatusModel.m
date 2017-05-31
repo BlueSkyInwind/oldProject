@@ -10,4 +10,13 @@
 
 @implementation QryUserStatusModel
 
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"result":[QryUserStatusResultModel class]};
+}
+
+@end
+
+@implementation QryUserStatusResultModel
+
+
 @end

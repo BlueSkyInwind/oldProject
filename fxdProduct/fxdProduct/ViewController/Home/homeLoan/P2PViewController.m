@@ -141,6 +141,7 @@
     
     if ([request.URL.absoluteString isEqualToString:_transition_url]) {
         decisionHandler(WKNavigationActionPolicyAllow);
+
         [self checkP2PUserState];
     }else {
         decisionHandler(WKNavigationActionPolicyAllow);
@@ -166,6 +167,15 @@
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     
+    
+}
+
+#pragma mark 跳转页面
+-(void)gotoCheckMoney{
+
+    LoanMoneyViewController *controller = [[LoanMoneyViewController alloc]initWithNibName:@"LoanMoneyViewController" bundle:nil];
+    controller.intStautes = 1;
+    [self.navigationController pushViewController:controller animated:YES];
     
 }
 
@@ -207,14 +217,14 @@
     [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_qryUserStatus_url] parameters:@{@"client_":@"1"} finished:^(EnumServerStatus status, id object) {
         
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:object];
-        if ([model.appCode isEqualToString:@"1"]) {
-            if ([model.flg isEqualToString:@"2"]) {//未注册
+        if ([model .result.appcode isEqualToString:@"1"]) {
+            if ([model.result.flg isEqualToString:@"2"]) {//未注册
                 
                 
                 
-            }else if ([model.flg isEqualToString:@"3"]){//待激活
+            }else if ([model.result.flg isEqualToString:@"3"]){//待激活
             
-            }else if ([model.flg isEqualToString:@"6"]){//正常用户
+            }else if ([model.result.flg isEqualToString:@"6"]){//正常用户
             
             }
         }

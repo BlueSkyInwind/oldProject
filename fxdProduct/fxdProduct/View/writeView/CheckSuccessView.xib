@@ -391,11 +391,11 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grg-sz-2aE">
                             <rect key="frame" x="39" y="255" width="297" height="26"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9FU-RD-ON8">
-                                    <rect key="frame" x="5" y="0.0" width="17" height="18"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gantan" translatesAutoresizingMaskIntoConstraints="NO" id="9FU-RD-ON8">
+                                    <rect key="frame" x="5" y="4" width="14" height="14"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="17" id="Pmh-Bk-ww1"/>
-                                        <constraint firstAttribute="height" constant="18" id="lc1-iI-C7e"/>
+                                        <constraint firstAttribute="width" constant="14" id="Pmh-Bk-ww1"/>
+                                        <constraint firstAttribute="height" constant="14" id="lc1-iI-C7e"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请在2017.5.30提前还款，过期后额度将失效" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ov6-0B-AmI">
@@ -411,11 +411,11 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="ov6-0B-AmI" firstAttribute="leading" secondItem="9FU-RD-ON8" secondAttribute="trailing" constant="6" id="0Ll-c1-dIo"/>
+                                <constraint firstItem="ov6-0B-AmI" firstAttribute="leading" secondItem="9FU-RD-ON8" secondAttribute="trailing" constant="9" id="0Ll-c1-dIo"/>
                                 <constraint firstItem="ov6-0B-AmI" firstAttribute="top" secondItem="grg-sz-2aE" secondAttribute="top" id="8ow-6w-ftY"/>
                                 <constraint firstAttribute="width" constant="297" id="AuG-dn-BPQ"/>
                                 <constraint firstAttribute="height" constant="26" id="GZ8-Ug-R9g"/>
-                                <constraint firstItem="9FU-RD-ON8" firstAttribute="top" secondItem="grg-sz-2aE" secondAttribute="top" id="LG7-nS-RZK"/>
+                                <constraint firstItem="9FU-RD-ON8" firstAttribute="top" secondItem="grg-sz-2aE" secondAttribute="top" constant="4" id="LG7-nS-RZK"/>
                                 <constraint firstItem="9FU-RD-ON8" firstAttribute="leading" secondItem="grg-sz-2aE" secondAttribute="leading" constant="5" id="Thk-ej-McK"/>
                             </constraints>
                         </view>
@@ -625,5 +625,6 @@
         <image name="3_lc_icon_25" width="51" height="51"/>
         <image name="5_shenhe_icon_01" width="20" height="20"/>
         <image name="5_shenhe_icon_02" width="20" height="20"/>
+        <image name="gantan" width="14" height="14"/>
     </resources>
 </document>

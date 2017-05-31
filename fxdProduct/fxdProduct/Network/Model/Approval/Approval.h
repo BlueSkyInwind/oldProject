@@ -40,4 +40,5 @@
 
 @property (nonatomic, copy) NSString *contract_id;
 
+@property (nonatomic, copy) NSString *payMessage;
 @end

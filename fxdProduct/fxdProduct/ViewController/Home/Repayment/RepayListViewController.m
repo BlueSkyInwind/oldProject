@@ -264,7 +264,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     _readyPayAmount = 0.0;
     _save_amount = 0.0;
     if (_selectAllBtn.selected) {
-        [self showAlert];
+//        [self showAlert];
         for (int i = 0; i < _cellSelectArr.count; i++) {
             [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
             if ([_userStateParse.platform_type isEqualToString:@"0"]) {
