@@ -115,7 +115,6 @@
 
 - (void)fatchBanner
 {
-    
     NSDictionary *paramDic = @{@"position_":@"1",
                                @"plate_":@"1",
                                @"channel_":PLATFORM};
@@ -241,7 +240,6 @@
         
     }];
 }
-
 - (void)setUpTableview
 {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeProductCell class]) bundle:nil] forCellReuseIdentifier:@"HomeProductCell"];
@@ -428,13 +426,13 @@
     if (indexPath.section>0&&_dataArray.count+1 !=indexPath.section) {
         
         HomeProductListProducts *product = _dataArray[indexPath.section-1];
-        if ([product.id_ isEqualToString:@"P001002"]) {
+        if ([product.id_ isEqualToString:SalaryLoan]) {
             [self highLoanClick];
         }
-        if ([product.id_ isEqualToString:@"P001004"]) {
+        if ([product.id_ isEqualToString:RapidLoan]) {
             [self lowLoan];
         }
-        if ([product.id_ isEqualToString:@"P001005"]) {
+        if ([product.id_ isEqualToString:WhiteCollarLoan]) {
             
             [self whiteCollarLoanClick];
             //        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
@@ -650,18 +648,7 @@
                 loanFirstVC.productId = [Utility sharedUtility].userInfo.pruductId;
                 loanFirstVC.model = model;
                 [self.navigationController pushViewController:loanFirstVC animated:true];
-                //                if ([model.applyAgain boolValue]) {
-                //
-                //
-                //                }else{
-                //                    BOOL mode = [model.identifier boolValue];
-                //                    if (mode) {
-                //                        WriteInfoViewController *writeVC = [WriteInfoViewController new];
-                //                        [self.navigationController pushViewController:writeVC animated:YES];
-                //                    }else{
-                //                        [self goCheckVC:model];
-                //                    }
-                //                }
+
             }else if ([model.applyFlag isEqualToString:@"0003"]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
             }else if ([model.applyFlag isEqualToString:@"0004"]){

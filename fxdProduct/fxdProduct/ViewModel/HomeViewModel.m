@@ -10,6 +10,10 @@
 
 @implementation HomeViewModel
 
+
+
+
+
 - (void)fetchUserState:(NSDictionary *)paramDic
 {
 //    NSDictionary *dicParam = @{@"token":[Utility sharedUtility].userInfo.tokenStr};
@@ -21,4 +25,7 @@
         [self faileBlock];
     }];
 }
+
+
+
 @end
