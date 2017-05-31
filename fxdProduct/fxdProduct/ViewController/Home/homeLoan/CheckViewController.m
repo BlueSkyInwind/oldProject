@@ -1252,6 +1252,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                     }];
                 checkSuccess.moneyLabel.attributedText = one;
                 checkSuccess.moneyLabel.textAlignment = NSTextAlignmentCenter;
+                checkSuccess.tipLabel.text = _approvalModel.result.payMessage;
+                
             }
         }
     } failure:^(EnumServerStatus status, id object) {
@@ -1398,9 +1400,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_qryUserStatus_url] parameters:@{@"client_":@"1"} finished:^(EnumServerStatus status, id object) {
         
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:object];
-        if ([model.appCode isEqualToString:@"1"]) {
+        if ([model.result.appcode isEqualToString:@"1"]) {
             
-            if ([model.flg isEqualToString:@"2"]) {//未开户
+            if ([model.result.flg isEqualToString:@"2"]) {//未开户
                 
                 //绑定银行卡
                 NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
@@ -1424,23 +1426,23 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     DLog(@"%@",object);
                 }];
                 
-            }else if ([model.flg isEqualToString:@"3"]){//待激活
+            }else if ([model.result.flg isEqualToString:@"3"]){//待激活
             
                 //激活用户
                 
-                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_p2P_url,_bosAcctActivate_url,@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
                 [self.navigationController pushViewController:p2pVC animated:YES];
                 
-            }else if ([model.flg isEqualToString:@"6"]){//正常用户
+            }else if ([model.result.flg isEqualToString:@"6"]){//正常用户
             
                 [self chooseBankCard];
                 
             }
         }else{
         
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
         }
     } failure:^(EnumServerStatus status, id object) {
         
@@ -1534,7 +1536,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         payVC.makesureBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){
             
             [self dismissSemiModalViewWithCompletion:^{
-                [self addBidInfo];
+                //传给后台字段的接口
+//                [self addBidInfo];
             }];
             
         };
