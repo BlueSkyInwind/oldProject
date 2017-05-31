@@ -1201,6 +1201,10 @@
 		CCEEB4181ED6E9DE00588B6A /* BoAcctActivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB4161ED6E9DE00588B6A /* BoAcctActivateModel.m */; };
 		CCEEB41C1ED6EA6800588B6A /* QueryBidStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB41B1ED6EA6800588B6A /* QueryBidStatusModel.m */; };
 		CCEEB41D1ED6EA6800588B6A /* QueryBidStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB41B1ED6EA6800588B6A /* QueryBidStatusModel.m */; };
+		CCF43AFE1EDE5D4A00CFD72C /* QryUserStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF43AFD1EDE5D4A00CFD72C /* QryUserStatusModel.m */; };
+		CCF43AFF1EDE5D4A00CFD72C /* QryUserStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF43AFD1EDE5D4A00CFD72C /* QryUserStatusModel.m */; };
+		CCF43B031EDE672D00CFD72C /* getBidStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF43B021EDE672D00CFD72C /* getBidStatus.m */; };
+		CCF43B041EDE672D00CFD72C /* getBidStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF43B021EDE672D00CFD72C /* getBidStatus.m */; };
 		CCF8031C1ED3D043003B7975 /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
 		CCF803201ED420C1003B7975 /* ActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031E1ED420C1003B7975 /* ActivationViewController.m */; };
 		CCF803211ED420C1003B7975 /* ActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031E1ED420C1003B7975 /* ActivationViewController.m */; };
@@ -2312,6 +2316,10 @@
 		CCEEB4161ED6E9DE00588B6A /* BoAcctActivateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoAcctActivateModel.m; sourceTree = "<group>"; };
 		CCEEB41A1ED6EA6800588B6A /* QueryBidStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryBidStatusModel.h; sourceTree = "<group>"; };
 		CCEEB41B1ED6EA6800588B6A /* QueryBidStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryBidStatusModel.m; sourceTree = "<group>"; };
+		CCF43AFC1EDE5D4A00CFD72C /* QryUserStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QryUserStatusModel.h; sourceTree = "<group>"; };
+		CCF43AFD1EDE5D4A00CFD72C /* QryUserStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QryUserStatusModel.m; sourceTree = "<group>"; };
+		CCF43B011EDE672D00CFD72C /* getBidStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getBidStatus.h; sourceTree = "<group>"; };
+		CCF43B021EDE672D00CFD72C /* getBidStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getBidStatus.m; sourceTree = "<group>"; };
 		CCF8031A1ED3D043003B7975 /* AccountHSServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountHSServiceModel.h; sourceTree = "<group>"; };
 		CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountHSServiceModel.m; sourceTree = "<group>"; };
 		CCF8031D1ED420C1003B7975 /* ActivationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivationViewController.h; sourceTree = "<group>"; };
@@ -4338,6 +4346,8 @@
 		63E076541B67114800E269F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCF43B001EDE670F00CFD72C /* GetBidStatus */,
+				CCF43AFB1EDE5D2400CFD72C /* QryUserStatus */,
 				CCEEB4191ED6EA5700588B6A /* queryBidStatus */,
 				CCEEB4141ED6E9AF00588B6A /* BosAcctActivate */,
 				84DD36361ED57DEE0057F19A /* SMS */,
@@ -4964,6 +4974,24 @@
 				CCEEB41B1ED6EA6800588B6A /* QueryBidStatusModel.m */,
 			);
 			name = queryBidStatus;
+			sourceTree = "<group>";
+		};
+		CCF43AFB1EDE5D2400CFD72C /* QryUserStatus */ = {
+			isa = PBXGroup;
+			children = (
+				CCF43AFC1EDE5D4A00CFD72C /* QryUserStatusModel.h */,
+				CCF43AFD1EDE5D4A00CFD72C /* QryUserStatusModel.m */,
+			);
+			name = QryUserStatus;
+			sourceTree = "<group>";
+		};
+		CCF43B001EDE670F00CFD72C /* GetBidStatus */ = {
+			isa = PBXGroup;
+			children = (
+				CCF43B011EDE672D00CFD72C /* getBidStatus.h */,
+				CCF43B021EDE672D00CFD72C /* getBidStatus.m */,
+			);
+			name = GetBidStatus;
 			sourceTree = "<group>";
 		};
 		CCF803191ED3D02E003B7975 /* AccountHSService */ = {
@@ -5772,6 +5800,7 @@
 				0F647E041BE6F2740002D2DF /* RegDetailViewController.m in Sources */,
 				1AEDCF1F1C197F5000014A87 /* RepaymentHelpCell.m in Sources */,
 				638A16F21E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m in Sources */,
+				CCF43B031EDE672D00CFD72C /* getBidStatus.m in Sources */,
 				638A16FA1E517D9F00AB8AB6 /* CADisplayLink.m in Sources */,
 				CCE3BE1E1ED2D424004C35A4 /* BankCardsModel.m in Sources */,
 				63878FE41C1519CD008E1CF9 /* Tool.m in Sources */,
@@ -5822,6 +5851,7 @@
 				63553AF21E5D8BA200B2C1FF /* ProfessionViewController.m in Sources */,
 				635B0BD41DF01706008EAFD1 /* MoneyIngView.m in Sources */,
 				63553AD81E5D2A4200B2C1FF /* DataDisplayCell.m in Sources */,
+				CCF43AFE1EDE5D4A00CFD72C /* QryUserStatusModel.m in Sources */,
 				637963AA1CABD0F8002A5910 /* ApprovalAmountResult.m in Sources */,
 				6301433E1DADE55C00FD5FC8 /* P2PSettleRepay.m in Sources */,
 				63A24C6D1BE063A90036E8EF /* UIWindow+Launch.m in Sources */,
@@ -6214,6 +6244,7 @@
 				CC0DFA5A1EA5B1090024841A /* SMSViewModel.m in Sources */,
 				CC0DFA5B1EA5B1090024841A /* GetMoneyStateUserBean.m in Sources */,
 				CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */,
+				CCF43B041EDE672D00CFD72C /* getBidStatus.m in Sources */,
 				CC0DFA5D1EA5B1090024841A /* RegDetailViewController.m in Sources */,
 				CC0DFA5E1EA5B1090024841A /* RepaymentHelpCell.m in Sources */,
 				CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */,
@@ -6264,6 +6295,7 @@
 				CC0DFA881EA5B1090024841A /* BasicInfoViewController.m in Sources */,
 				8446AC001EBDCDEA009E3551 /* FindZhimaCreditModel.m in Sources */,
 				CC0DFA891EA5B1090024841A /* GetMoneyProcessUserBean.m in Sources */,
+				CCF43AFF1EDE5D4A00CFD72C /* QryUserStatusModel.m in Sources */,
 				CC0DFA8A1EA5B1090024841A /* ProfessionViewController.m in Sources */,
 				CC0DFA8B1EA5B1090024841A /* MoneyIngView.m in Sources */,
 				CC0DFA8C1EA5B1090024841A /* DataDisplayCell.m in Sources */,
