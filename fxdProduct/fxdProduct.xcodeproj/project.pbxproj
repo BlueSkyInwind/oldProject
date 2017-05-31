@@ -591,6 +591,10 @@
 		844E5F511ED94DCB00753671 /* RegParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4F1ED94DCB00753671 /* RegParamModel.m */; };
 		845017311ED7CD88008055E4 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84420A601ED678E200DFBFE0 /* LoginView.xib */; };
 		845017321ED7D051008055E4 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
+		848394221EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */; };
+		848394231EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */; };
+		848394261EDEC96C003EF4EC /* HomePopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394251EDEC96C003EF4EC /* HomePopParam.m */; };
+		848394271EDEC96C003EF4EC /* HomePopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394251EDEC96C003EF4EC /* HomePopParam.m */; };
 		84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
@@ -2276,6 +2280,10 @@
 		844E5F4A1ED94C9C00753671 /* RegViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewModel.m; sourceTree = "<group>"; };
 		844E5F4E1ED94DCB00753671 /* RegParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegParamModel.h; sourceTree = "<group>"; };
 		844E5F4F1ED94DCB00753671 /* RegParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegParamModel.m; sourceTree = "<group>"; };
+		848394201EDEB82A003EF4EC /* HomeBannerParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerParamModel.h; sourceTree = "<group>"; };
+		848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerParamModel.m; sourceTree = "<group>"; };
+		848394241EDEC96C003EF4EC /* HomePopParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePopParam.h; sourceTree = "<group>"; };
+		848394251EDEC96C003EF4EC /* HomePopParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePopParam.m; sourceTree = "<group>"; };
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
 		CC0559121EB988C000733C2E /* SesameCreditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditCell.h; sourceTree = "<group>"; };
@@ -3210,6 +3218,8 @@
 			children = (
 				635B0BCE1DEEB187008EAFD1 /* HomePop.h */,
 				635B0BCF1DEEB187008EAFD1 /* HomePop.m */,
+				848394241EDEC96C003EF4EC /* HomePopParam.h */,
+				848394251EDEC96C003EF4EC /* HomePopParam.m */,
 			);
 			path = HomePop;
 			sourceTree = "<group>";
@@ -4249,6 +4259,8 @@
 			children = (
 				63C50E561E69381B0035EE4F /* HomeBannerModel.h */,
 				63C50E571E69381B0035EE4F /* HomeBannerModel.m */,
+				848394201EDEB82A003EF4EC /* HomeBannerParamModel.h */,
+				848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */,
 			);
 			path = HomeBanner;
 			sourceTree = "<group>";
@@ -5671,6 +5683,7 @@
 				1AEDCF161C197E9700014A87 /* JustMakeSureView.m in Sources */,
 				1AEDCF0A1C197E6100014A87 /* RepaymentHelpController.m in Sources */,
 				638A16EE1E517D9F00AB8AB6 /* LOTShapeLayerView.m in Sources */,
+				848394261EDEC96C003EF4EC /* HomePopParam.m in Sources */,
 				638C3F2E1CF53662000446A7 /* RepayMentAvailableRedpackets.m in Sources */,
 				635B2FBA1D6AEE22009CEFE0 /* GlobalConfig.m in Sources */,
 				CC5D702C1ED4405500A074AF /* PaymentServiceModel.m in Sources */,
@@ -5841,6 +5854,7 @@
 				CC3197971ED926B90083F263 /* RefuseView.m in Sources */,
 				637636D21D768BE800E93289 /* RepayListViewController.m in Sources */,
 				63FC25001D98F7E9006F58F3 /* YYTextTransaction.m in Sources */,
+				848394221EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */,
 				635AB7971BE2FE6600C32919 /* CashResult.m in Sources */,
 				63FC24F91D98F7E9006F58F3 /* YYTextRubyAnnotation.m in Sources */,
 				63C12DCF1E4978AF008119FB /* QRPopView.m in Sources */,
@@ -6115,6 +6129,7 @@
 				CC0DF9DD1EA5B1090024841A /* LOTShapeTrimPath.m in Sources */,
 				CC0DF9DE1EA5B1090024841A /* P2PViewController.m in Sources */,
 				CC0DF9DF1EA5B1090024841A /* RedpacketResult.m in Sources */,
+				848394271EDEC96C003EF4EC /* HomePopParam.m in Sources */,
 				CC0DF9E01EA5B1090024841A /* UserSureRefuseBaseClass.m in Sources */,
 				CC0DF9E11EA5B1090024841A /* EnterAgainController.m in Sources */,
 				CC0DF9E21EA5B1090024841A /* HomeBannerModel.m in Sources */,
@@ -6285,6 +6300,7 @@
 				CC3197981ED926B90083F263 /* RefuseView.m in Sources */,
 				CC0559261EB9A58500733C2E /* DisplayCell.m in Sources */,
 				CC0DFA801EA5B1090024841A /* CardListBaseClass.m in Sources */,
+				848394231EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchViewController.m in Sources */,
 				CC0DFA821EA5B1090024841A /* RepayListViewController.m in Sources */,
 				CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */,
