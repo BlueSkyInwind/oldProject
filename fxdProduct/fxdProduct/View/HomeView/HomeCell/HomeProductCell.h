@@ -27,6 +27,10 @@
 
 @property (strong, nonatomic) YYLabel *amountLabel;
 
+@property (strong, nonatomic) UIImageView * linesLimitImageView;
+
 @property (weak, nonatomic) IBOutlet UIView *centerView;
+
+
 
 @end

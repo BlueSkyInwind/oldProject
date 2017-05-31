@@ -30,7 +30,8 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 //NSString * const _main_url  =   @"http://192.168.7.253:8081/fxd-esb/esb/";
 
 //新整合的地址
-NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
+NSString * const _main_url  =   @"http://192.168.9.2:9191/fxd-esb/esb/";
+//NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
 NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
 //NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
@@ -62,8 +63,7 @@ NSString * const _p2P_url   =   @"http://192.168.14.170:10010/p2p/";
 #endif
 #endif
 
-
-
+#pragma Mark - 项目URL
 //获取验证码
 NSString * const     _getCode_url                   =   @"common/sendSMS.jhtml";
 
@@ -399,6 +399,9 @@ NSString * const    _qryUserStatus_url    =    @"hg/qryUserStatus.jhtml";
 //用户标的状态查询
 NSString * const    _getBidStatus_url    =    @"hg/getBidStatus";
 
+
+#pragma Mark - 验证码类型
+
 NSString * const  CODE_REG           =    @"MSG_REG_"; ///注册验证码
 NSString * const  CODE_FINDPASS      =    @"MSG_FIND_PASSWORD_"; ///密码找回验证码
 NSString * const  CODE_CHANGEPASS    =    @"MSG_UPDATE_PASSWORD_"; ///修改密码验证码
@@ -408,9 +411,16 @@ NSString * const  CODE_BANKMOBILE    =    @"MSG_CHANGE_DEBIT_"; ///银行预留�
 NSString * const  CODE_DRAW          =    @"MSG_DRAW_"; ///提款
 NSString * const  CODE_ADDCARD       =    @"MSG_BANKCARD_AUDIT_"; //新增卡
 
+#pragma Mark - 产品类型
+
+NSString * const SalaryLoan = @"P001002";                   //工薪贷平台
+NSString * const RapidLoan = @"P001004";                   //急速贷平台
+NSString * const WhiteCollarLoan = @"P001005";           //白领贷平台
+
+
+#pragma Mark - 项目配置信息
 
 NSString * const PLATFORM = @"1";                   //平台
-
 
 NSString * const Devcode = @"5LIK5RW35LIT6LW";     //开发码
 

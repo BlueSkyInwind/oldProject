@@ -41,6 +41,17 @@
         make.height.equalTo(@21);
         make.width.equalTo(@63);
     }];
+    
+//    self.linesLimitImageView  = [[UIImageView alloc]init];
+//    [self.contentView addSubview:self.linesLimitImageView];
+//    [self.linesLimitImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.contentView.mas_top).offset(30);
+//        make
+//        
+//        
+//    }];
+    
+    
     if (!self.helpImage.isHidden) {
         [self.helpImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@17);
@@ -49,6 +60,8 @@
             make.top.equalTo(self.specialtyImage.mas_bottom).offset(10);
         }];
     }
+    
+    
 }
 
 - (YYLabel *)amountLabel {
