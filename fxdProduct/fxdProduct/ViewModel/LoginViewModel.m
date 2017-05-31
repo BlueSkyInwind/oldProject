@@ -108,9 +108,8 @@
 
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_updateLoginLatitude_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
-        self.returnBlock(object);
     } failure:^(EnumServerStatus status, id object) {
-        [self faileBlock];
+        
     }];
     
 }

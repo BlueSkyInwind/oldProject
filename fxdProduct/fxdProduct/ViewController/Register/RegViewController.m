@@ -227,7 +227,6 @@
 }
 
 
-
 - (IBAction)agreeBtnClick:(UIButton *)sender {
     if (!self.btnStatus) {
         [self.agreeBtn setBackgroundImage:[UIImage imageNamed:@"tricked"] forState:UIControlStateNormal];
@@ -314,7 +313,6 @@
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
             }
         } WithFaileBlock:^{
-            
             
         }];
         //发起请求
