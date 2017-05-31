@@ -84,53 +84,48 @@
     [self fatchAdv];
 
 }
-
-#pragma mark - 获取首页产品列表
--(void)getHomeProductList{
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [UserDefaulInfo getUserInfoData];
     
-    NSDictionary *paramDic = @{@"juid":[Utility sharedUtility].userInfo.juid,
-                               @"token":[Utility sharedUtility].userInfo.tokenStr
-                               };
+    [self fatchRecord];
+    [self fatchBanner];
+    [self getHomeProductList];
     
-    [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_getLimitProductlist_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        
-        DLog(@"=========%@",object);
-        _homeProductList = [HomeProductList yy_modelWithJSON:object];
-       [_dataArray removeAllObjects];
-        for (HomeProductListProducts *product in _homeProductList.result.products) {
-            [_dataArray addObject:product];
-        }
-         [_tableView reloadData];
-    } failure:^(EnumServerStatus status, id object) {
-        
-        DLog(@"%@",object);
-    }];
+    //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
+    [super viewWillDisappear:animated];
+}
+#pragma mark  - 视图布局
 - (void)setNavQRRightBar {
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(qrClick)];
     //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
     self.navigationItem.rightBarButtonItem = aBarbi;
 }
-
-- (void)fatchBanner
+- (void)setUpTableview
 {
-    NSDictionary *paramDic = @{@"position_":@"1",
-                               @"plate_":@"1",
-                               @"channel_":PLATFORM};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_topBanner_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        _bannerParse = [HomeBannerModel yy_modelWithJSON:object];
-        NSMutableArray *filesArr = [NSMutableArray array];
-        for (HomeBannerFiles *file in _bannerParse.result.files_) {
-            [filesArr addObject:file.file_store_path_];
-        }
-        _sdView.imageURLStringsGroup = filesArr.copy;
-        [_tableView reloadData];
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeProductCell class]) bundle:nil] forCellReuseIdentifier:@"HomeProductCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeBottomCell class]) bundle:nil] forCellReuseIdentifier:@"HomeBottomCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.tableView.showsVerticalScrollIndicator = NO;
+    
+    DLog(@"%lf",_k_w);
+    
+    //  [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 187.5) imageNamesGroup:[NSArray arrayWithObjects:@"banner_01",@"banner_02",@"banner_03", nil]];
+    _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 0.5*_k_w) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
+    //375 185
+    _sdView.delegate = self;
+    _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
+    
+    self.tableView.tableHeaderView = _sdView;
 }
+
 
 - (void)qrClick
 {
@@ -206,14 +201,14 @@
 - (void)highSeeExpenses
 {
     ExpressViewController *expressVC = [[ExpressViewController alloc] init];
-    expressVC.productId = @"P001002";
+    expressVC.productId = SalaryLoan;
     [self.navigationController pushViewController:expressVC animated:YES];
 }
 
 - (void)lowSeeExpenses
 {
     ExpressViewController *expressVC = [[ExpressViewController alloc] init];
-    expressVC.productId = @"P001004";
+    expressVC.productId = RapidLoan;
     [self.navigationController pushViewController:expressVC animated:YES];
 }
 
@@ -239,25 +234,6 @@
     } failure:^(EnumServerStatus status, id object) {
         
     }];
-}
-- (void)setUpTableview
-{
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeProductCell class]) bundle:nil] forCellReuseIdentifier:@"HomeProductCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeBottomCell class]) bundle:nil] forCellReuseIdentifier:@"HomeBottomCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.tableView.showsVerticalScrollIndicator = NO;
-    
-    DLog(@"%lf",_k_w);
-    
-    //    [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 187.5) imageNamesGroup:[NSArray arrayWithObjects:@"banner_01",@"banner_02",@"banner_03", nil]];
-    _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 0.5*_k_w) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
-    //375 185
-    _sdView.delegate = self;
-    _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
-    
-    self.tableView.tableHeaderView = _sdView;
 }
 
 #pragma mark - TableViewDelegate
@@ -439,7 +415,6 @@
             
         }
     }
-
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
@@ -461,8 +436,8 @@
 {
     DLog(@"高额借款");
     if ([Utility sharedUtility].loginFlage) {
-        [Utility sharedUtility].userInfo.pruductId = @"P001002";
-        [self PostStatuesMyLoanAmount:@{@"product_id_":@"P001002"}];
+        [Utility sharedUtility].userInfo.pruductId = SalaryLoan;
+        [self PostStatuesMyLoanAmount:SalaryLoan];
     } else {
         [self presentLogin:self];
     }
@@ -473,8 +448,8 @@
 {
     DLog(@"白领贷借款");
     if ([Utility sharedUtility].loginFlage) {
-        [Utility sharedUtility].userInfo.pruductId = @"P001005";
-        [self PostStatuesMyLoanAmount:@{@"product_id_":@"P001005"}];
+        [Utility sharedUtility].userInfo.pruductId = WhiteCollarLoan;
+        [self PostStatuesMyLoanAmount:WhiteCollarLoan];
     } else {
         [self presentLogin:self];
     }
@@ -484,8 +459,8 @@
 {
     DLog(@"低额借款");
     if ([Utility sharedUtility].loginFlage) {
-        [Utility sharedUtility].userInfo.pruductId = @"P001004";
-        [self PostStatuesMyLoanAmount:@{@"product_id_":@"P001004"}];
+        [Utility sharedUtility].userInfo.pruductId = RapidLoan;
+        [self PostStatuesMyLoanAmount:RapidLoan];
     } else {
         [self presentLogin:self];
     }
@@ -509,9 +484,7 @@
 
 - (void)loanProcess
 {
-    
-//    UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
-//    [self.navigationController pushViewController:controller animated:YES];
+
     DLog(@"借款进度");
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
         LoanProcessModel *loanProcess = [LoanProcessModel yy_modelWithJSON:object];
@@ -530,7 +503,6 @@
 
 - (void)expense
 {
-    
     DLog(@"费用说明");
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
     webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_loanDetial_url];
@@ -547,59 +519,87 @@
     }
 }
 
-
--(void)viewWillAppear:(BOOL)animated
+#pragma mark - 获取数据
+/**
+ 获取首页产品列表
+ */
+-(void)getHomeProductList{
+    
+    ProductListViewModel *productListViewModel = [[ProductListViewModel alloc]init];
+    [productListViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
+        [_dataArray removeAllObjects];
+        for (HomeProductListProducts *product in _homeProductList.result.products) {
+            [_dataArray addObject:product];
+        }
+        [_tableView reloadData];
+    } WithFaileBlock:^{
+        
+    }];
+    
+    [productListViewModel fetchProductListInfo];
+}
+/**
+ 轮播图数据
+ */
+- (void)fatchBanner
 {
-    [super viewDidAppear:animated];
-    [UserDefaulInfo getUserInfoData];
+    BannerViewModel *bannerViewModel = [[BannerViewModel alloc]init];
+    [bannerViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        _bannerParse = [HomeBannerModel yy_modelWithJSON:returnValue];
+        NSMutableArray *filesArr = [NSMutableArray array];
+        for (HomeBannerFiles *file in _bannerParse.result.files_) {
+            [filesArr addObject:file.file_store_path_];
+        }
+        _sdView.imageURLStringsGroup = filesArr.copy;
+        [_tableView reloadData];
+    } WithFaileBlock:^{
+        
+    }];
     
-    [self fatchRecord];
-    [self fatchBanner];
-    [self getHomeProductList];
-    
-    //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+    [bannerViewModel fetchBannerInfo];
 }
 
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
-    [super viewWillDisappear:animated];
-}
-
+/**
+ 获取借款滚动记录
+ */
 - (void)fatchRecord
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanRecord_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        _loanRecordParse = [LoanRecordParse yy_modelWithJSON:object];
+    HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
+    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _loanRecordParse = [LoanRecordParse yy_modelWithJSON:returnValue];
         //        [self.tableView reloadData];
         NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
         NSArray *indexArray=[NSArray arrayWithObject:indexPath];
         [self.tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    [homeViewModel fetchLoanRecord];
 }
 
-
+/**
+ 推广弹窗
+ */
 - (void)fatchAdv
 {
-    NSDictionary *paramDic = @{@"channel_":PLATFORM,
-                               @"plate_":@"1",
-                               @"redpacket_from_":@"1"};
-    
-    [[FXDNetWorkManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_adv_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        HomePop *popParse = [HomePop yy_modelWithJSON:object];
+    PopViewModel *popViewModel = [[PopViewModel alloc]init];
+    [popViewModel setBlockWithReturnBlock:^(id returnValue) {
+        HomePop *popParse = [HomePop yy_modelWithJSON:returnValue];
         [self popView:popParse];
-    } failure:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
+    } WithFaileBlock:^{
+        
     }];
+    [popViewModel fetchPopViewInfo];
 }
 
-#pragma mark ->我要借款状态判断
+/**
+ 我要借款状态判断
 
--(void)PostStatuesMyLoanAmount:(NSDictionary *)paramDic {
+ @param paramDic 参数
+ */
+-(void)PostStatuesMyLoanAmount:(NSString *)productId {
     HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
     [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
         
@@ -614,24 +614,23 @@
             //            apply_flag_为0004，根据apply_status_跳转到相应的页面。
             
             if ([model.applyFlag isEqualToString:@"0000"]) {
-                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001004"]) {
+                if ([productId isEqualToString:@"P001004"]) {
                     [self fatchRate:^(RateModel *rate) {
                         PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-                        payLoanview.product_id = [paramDic objectForKey:@"product_id_"];
+                        payLoanview.product_id = productId;
                         payLoanview.userState = model;
                         payLoanview.rateModel = rate;
                         [self.navigationController pushViewController:payLoanview animated:true];
                     }];
                 }
-                
-                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001002"]) {
+                if ([productId isEqualToString:@"P001002"]) {
 //                    WriteInfoViewController *writeVC = [WriteInfoViewController new];
 //                    [self.navigationController pushViewController:writeVC animated:YES];
                     UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                     userDataVC.product_id = @"P001002";
                     [self.navigationController pushViewController:userDataVC animated:true];
                 }
-                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001005"]) {
+                if ([productId isEqualToString:@"P001005"]) {
                     //                    WriteInfoViewController *writeVC = [WriteInfoViewController new];
                     //                    [self.navigationController pushViewController:writeVC animated:YES];
                     UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
@@ -641,7 +640,7 @@
                 
             }else if ([model.applyFlag isEqualToString:@"0001"]){
                 UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-                userDataVC.product_id = [paramDic objectForKey:@"product_id_"];
+                userDataVC.product_id = productId;
                 [self.navigationController pushViewController:userDataVC animated:true];
             }else if ([model.applyFlag isEqualToString:@"0002"]) {
                 LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
@@ -661,7 +660,7 @@
                         BOOL mode = [model.identifier boolValue];
                         if (mode) {
                             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-                            userDataVC.product_id = [paramDic objectForKey:@"product_id_"];
+                            userDataVC.product_id = productId;
                             [self.navigationController pushViewController:userDataVC animated:true];
 //                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
 //                            [self.navigationController pushViewController:writeVC animated:YES];
@@ -707,23 +706,23 @@
                     }
                         break;
                     default:{
-                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001004"]) {
+                        if ([productId isEqualToString:@"P001004"]) {
                             [self fatchRate:^(RateModel *rate) {
                                 PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-                                payLoanview.product_id = [paramDic objectForKey:@"product_id_"];
+                                payLoanview.product_id = productId;
                                 payLoanview.userState = model;
                                 payLoanview.rateModel = rate;
                                 [self.navigationController pushViewController:payLoanview animated:true];
                             }];
                         }
-                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001002"]) {
+                        if ([productId isEqualToString:@"P001002"]) {
                             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                             userDataVC.product_id = @"P001002";
                             [self.navigationController pushViewController:userDataVC animated:true];
 //                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
 //                            [self.navigationController pushViewController:writeVC animated:YES];
                         }
-                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001005"]) {
+                        if ([productId isEqualToString:@"P001005"]) {
                             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                             userDataVC.product_id = @"P001005";
                             [self.navigationController pushViewController:userDataVC animated:true];
@@ -734,25 +733,25 @@
                         break;
                 }
             }else if ([model.applyFlag isEqualToString:@"0005"]) {
-                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001004"]) {
+                if ([productId isEqualToString:@"P001004"]) {
                     [self fatchRate:^(RateModel *rate) {
                         PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-                        payLoanview.product_id = [paramDic objectForKey:@"product_id_"];
+                        payLoanview.product_id = productId;
                         payLoanview.userState = model;
                         payLoanview.rateModel = rate;
                         [self.navigationController pushViewController:payLoanview animated:true];
                     }];
                 }
-                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001002"]) {
+                if ([productId isEqualToString:@"P001002"]) {
                     LoanSureSecondViewController *loanSecondVC = [[LoanSureSecondViewController alloc] init];
                     loanSecondVC.model = model;
-                    loanSecondVC.productId = [paramDic objectForKey:@"product_id_"];
+                    loanSecondVC.productId = productId;
                     [self.navigationController pushViewController:loanSecondVC animated:true];
                 }
-                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001005"]) {
+                if ([productId isEqualToString:@"P001005"]) {
                     LoanSureSecondViewController *loanSecondVC = [[LoanSureSecondViewController alloc] init];
                     loanSecondVC.model = model;
-                    loanSecondVC.productId = [paramDic objectForKey:@"product_id_"];
+                    loanSecondVC.productId = productId;
                     [self.navigationController pushViewController:loanSecondVC animated:true];
                 }
             }
@@ -762,7 +761,7 @@
     } WithFaileBlock:^{
         
     }];
-    [homeViewModel fetchUserState:paramDic];
+    [homeViewModel fetchUserState:productId];
 }
 
 - (void)fatchRate:(void(^)(RateModel *rate))finish
@@ -780,7 +779,7 @@
         
     }];
 }
-
+#pragma mark - 页面跳转
 - (void)goCheckVC:(UserStateModel *)model
 {
     CheckViewController *checkVC = [CheckViewController new];
