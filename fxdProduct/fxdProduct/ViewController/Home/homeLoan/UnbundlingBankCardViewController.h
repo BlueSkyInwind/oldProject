@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+#import "QueryCardInfo.h"
 @interface UnbundlingBankCardViewController : BaseViewController
 
 @property (nonatomic,copy)NSString *bankNo;
@@ -15,5 +15,5 @@
 @property (nonatomic,copy)NSString *mobile;
 @property (weak, nonatomic) IBOutlet UITableView *bankTable;
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
-
+@property (nonatomic,strong)QueryCardInfo *queryCardInfo;
 @end

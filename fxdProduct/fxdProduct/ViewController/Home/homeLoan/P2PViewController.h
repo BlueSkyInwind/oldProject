@@ -25,4 +25,6 @@
 @property (nonatomic,copy)NSString *drawAmount;
 @property (nonatomic,assign)NSInteger periodSelect;
 
+@property (nonatomic,assign)BOOL isCheck;
+
 @end

@@ -1191,6 +1191,16 @@
 		CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
+		CCCDA8771EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
+		CCCDA8781EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
+		CCCDA87C1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA87B1EDFAD0B00B48DFF /* SaveLoanCaseModel.m */; };
+		CCCDA87D1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA87B1EDFAD0B00B48DFF /* SaveLoanCaseModel.m */; };
+		CCCDA8801EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA87F1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m */; };
+		CCCDA8811EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA87F1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m */; };
+		CCCDA8841EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */; };
+		CCCDA8851EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */; };
+		CCCDA8881EE028DD00B48DFF /* SendSmsParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8871EE028DD00B48DFF /* SendSmsParamModel.m */; };
+		CCCDA8891EE028DD00B48DFF /* SendSmsParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8871EE028DD00B48DFF /* SendSmsParamModel.m */; };
 		CCD565BE1E8A46D500B6665D /* PserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */; };
 		CCD565C01E8A46D500B6665D /* PserInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */; };
 		CCE3BE191ED2D36E004C35A4 /* SendSmsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE181ED2D36E004C35A4 /* SendSmsModel.m */; };
@@ -2309,6 +2319,16 @@
 		CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
+		CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewModel.h; sourceTree = "<group>"; };
+		CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewModel.m; sourceTree = "<group>"; };
+		CCCDA87A1EDFAD0B00B48DFF /* SaveLoanCaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveLoanCaseModel.h; sourceTree = "<group>"; };
+		CCCDA87B1EDFAD0B00B48DFF /* SaveLoanCaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveLoanCaseModel.m; sourceTree = "<group>"; };
+		CCCDA87E1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveLoanCaseParamModel.h; sourceTree = "<group>"; };
+		CCCDA87F1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveLoanCaseParamModel.m; sourceTree = "<group>"; };
+		CCCDA8821EE028A200B48DFF /* UnbundlingBankCardViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnbundlingBankCardViewModel.h; sourceTree = "<group>"; };
+		CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnbundlingBankCardViewModel.m; sourceTree = "<group>"; };
+		CCCDA8861EE028DD00B48DFF /* SendSmsParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendSmsParamModel.h; sourceTree = "<group>"; };
+		CCCDA8871EE028DD00B48DFF /* SendSmsParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendSmsParamModel.m; sourceTree = "<group>"; };
 		CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PserInfoViewController.xib; sourceTree = "<group>"; };
 		CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PserInfoViewController.mm; sourceTree = "<group>"; };
 		CCD565BD1E8A46D500B6665D /* PserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PserInfoViewController.h; sourceTree = "<group>"; };
@@ -3350,6 +3370,10 @@
 				63DB3FC01E1DEE0600FBE1C4 /* UserDefaulInfo.m */,
 				638A16871E5045BC00AB8AB6 /* RepayRequestManage.h */,
 				638A16881E5045BC00AB8AB6 /* RepayRequestManage.m */,
+				CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */,
+				CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */,
+				CCCDA8821EE028A200B48DFF /* UnbundlingBankCardViewModel.h */,
+				CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4358,6 +4382,7 @@
 		63E076541B67114800E269F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCCDA8791EDFACED00B48DFF /* SaveLoanCase */,
 				CCF43B001EDE670F00CFD72C /* GetBidStatus */,
 				CCF43AFB1EDE5D2400CFD72C /* QryUserStatus */,
 				CCEEB4191ED6EA5700588B6A /* queryBidStatus */,
@@ -4934,11 +4959,24 @@
 			path = FindZhimaCredit;
 			sourceTree = "<group>";
 		};
+		CCCDA8791EDFACED00B48DFF /* SaveLoanCase */ = {
+			isa = PBXGroup;
+			children = (
+				CCCDA87A1EDFAD0B00B48DFF /* SaveLoanCaseModel.h */,
+				CCCDA87B1EDFAD0B00B48DFF /* SaveLoanCaseModel.m */,
+				CCCDA87E1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.h */,
+				CCCDA87F1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m */,
+			);
+			name = SaveLoanCase;
+			sourceTree = "<group>";
+		};
 		CCE3BE161ED2D321004C35A4 /* SendSms */ = {
 			isa = PBXGroup;
 			children = (
 				CCE3BE171ED2D36E004C35A4 /* SendSmsModel.h */,
 				CCE3BE181ED2D36E004C35A4 /* SendSmsModel.m */,
+				CCCDA8861EE028DD00B48DFF /* SendSmsParamModel.h */,
+				CCCDA8871EE028DD00B48DFF /* SendSmsParamModel.m */,
 			);
 			name = SendSms;
 			sourceTree = "<group>";
@@ -5574,6 +5612,7 @@
 				63E1ECD01E1B8FAA0079A2F8 /* TAAnimatedDotView.m in Sources */,
 				63FC24FA1D98F7E9006F58F3 /* YYTextRunDelegate.m in Sources */,
 				63D43EFC1D41F8380076AC7F /* DataWriteAndRead.m in Sources */,
+				CCCDA87C1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */,
 				638C3F3B1CF564A4000446A7 /* SquareRepaymentExt.m in Sources */,
 				63553B1F1E600D0D00B2C1FF /* FaceIDLiveModel.m in Sources */,
 				638C3F3A1CF564A4000446A7 /* SquareRepaymentBaseClass.m in Sources */,
@@ -5602,6 +5641,7 @@
 				63145AF41CA8DBBD00D04ED8 /* RegionSub.m in Sources */,
 				634830FF1CBCA1A90005C4CD /* RegionCodeResult.m in Sources */,
 				634795F01D38BED700EC4027 /* AuthorizationViewController.m in Sources */,
+				CCCDA8801EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */,
 				638A17081E517D9F00AB8AB6 /* LOTShapeTransform.m in Sources */,
 				6300CC071E4AB1BC0012B05A /* LoanRecordParse.m in Sources */,
 				63FC25021D98F7E9006F58F3 /* YYTextWeakProxy.m in Sources */,
@@ -5662,6 +5702,7 @@
 				63A24C661BE063A90036E8EF /* UIImage+Color.m in Sources */,
 				638C3F221CF2DE28000446A7 /* RedpacketBaseClass.m in Sources */,
 				1AB0F5AA1CF2D20E00F3DF06 /* TicketCell.m in Sources */,
+				CCCDA8881EE028DD00B48DFF /* SendSmsParamModel.m in Sources */,
 				0F0650461BE219BF000DE94D /* UserSureRefuseResult.m in Sources */,
 				63832C8C1CB7530400C6F194 /* NSString+AES.m in Sources */,
 				0FA644B61BF4628E00959EDF /* RegSecoryViewController.m in Sources */,
@@ -5738,6 +5779,7 @@
 				635AB7B41BE3540100C32919 /* AmountMsgResult.m in Sources */,
 				63FE3DEB1E487819009E5B82 /* SumCell.m in Sources */,
 				634830F21CBB82C30005C4CD /* CustomerBaseInfoContactBean.m in Sources */,
+				CCCDA8841EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
 				CCF803271ED4249A003B7975 /* UnbundlingBankCardViewController.m in Sources */,
 				63F254891E49A45900852CF1 /* HMScannerViewController.m in Sources */,
 				6326C9D11BF08CEE00FD23A8 /* Model.m in Sources */,
@@ -5920,6 +5962,7 @@
 				CCF803201ED420C1003B7975 /* ActivationViewController.m in Sources */,
 				630CC0991BC8E14200AE9690 /* QueryRepaymentsResult.m in Sources */,
 				0FBF11261BE376C9008F6393 /* HomeBankCardViewController.m in Sources */,
+				CCCDA8771EDF9F5200B48DFF /* CheckViewModel.m in Sources */,
 				63E1ECD31E1B8FAA0079A2F8 /* SDCollectionViewCell.m in Sources */,
 				634795DB1D378CED00EC4027 /* Aspects.m in Sources */,
 				63A24C691BE063A90036E8EF /* UIImage+FixOrientation.m in Sources */,
@@ -6020,6 +6063,7 @@
 				CC0DF9791EA5B1090024841A /* YYTextMagnifier.m in Sources */,
 				CC0DF97A1EA5B1090024841A /* BaseViewController.m in Sources */,
 				CC0DF97B1EA5B1090024841A /* UIImage+Cut.m in Sources */,
+				CCCDA87D1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */,
 				CC0DF97C1EA5B1090024841A /* LoanSureFirstViewController.m in Sources */,
 				CC0DF97D1EA5B1090024841A /* RegionResult.m in Sources */,
 				CC0DF97E1EA5B1090024841A /* TAAnimatedDotView.m in Sources */,
@@ -6048,6 +6092,7 @@
 				CC0DF9911EA5B1090024841A /* LOTAnimatablePointValue.m in Sources */,
 				CC0DF9921EA5B1090024841A /* Utility.m in Sources */,
 				CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */,
+				CCCDA8811EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */,
 				CC0DF9941EA5B1090024841A /* LoanProcessCell.m in Sources */,
 				CC0DF9951EA5B1090024841A /* CustomerBaseInfoResult.m in Sources */,
 				CC0DF9961EA5B1090024841A /* MessageCenterViewController.m in Sources */,
@@ -6108,6 +6153,7 @@
 				CC0DF9C91EA5B1090024841A /* DrawMoneyView.m in Sources */,
 				CC0DF9CA1EA5B1090024841A /* LOTShapeStroke.m in Sources */,
 				CC0DF9CB1EA5B1090024841A /* UserDefaulInfo.m in Sources */,
+				CCCDA8891EE028DD00B48DFF /* SendSmsParamModel.m in Sources */,
 				CC0DF9CC1EA5B1090024841A /* UIDevice+YYAdd.m in Sources */,
 				CC0DF9CD1EA5B1090024841A /* YYTextEffectWindow.m in Sources */,
 				CC0DF9CE1EA5B1090024841A /* GetMoneyResultResult.m in Sources */,
@@ -6184,6 +6230,7 @@
 				CC0DFA111EA5B1090024841A /* CALayer+Anim.m in Sources */,
 				CC0DFA121EA5B1090024841A /* JXLParse.m in Sources */,
 				CC0DFA131EA5B1090024841A /* NSValue+Compat.m in Sources */,
+				CCCDA8851EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
 				CC0DFA141EA5B1090024841A /* LewPopupViewAnimationFade.m in Sources */,
 				CC0DFA151EA5B1090024841A /* FaceIDOCRFront.m in Sources */,
 				CC0DFA161EA5B1090024841A /* SquareRepaymentResult.m in Sources */,
@@ -6366,6 +6413,7 @@
 				CC0DFABC1EA5B1090024841A /* HomeViewController.m in Sources */,
 				CC0DFABD1EA5B1090024841A /* TelPhoneCompanyCell.m in Sources */,
 				CC0DFABE1EA5B1090024841A /* BankCardTableViewCell.m in Sources */,
+				CCCDA8781EDF9F5200B48DFF /* CheckViewModel.m in Sources */,
 				CC0DFABF1EA5B1090024841A /* YYTextSelectionView.m in Sources */,
 				CC0DFAC01EA5B1090024841A /* QueryRepaymentsResult.m in Sources */,
 				CC0DFAC11EA5B1090024841A /* HomeBankCardViewController.m in Sources */,

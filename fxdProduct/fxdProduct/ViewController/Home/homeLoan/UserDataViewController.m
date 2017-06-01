@@ -89,12 +89,11 @@
     if (_nextStep.integerValue > 0) {
 //        if ([_product_id isEqualToString:@"P001005"]) {
             processFlot = (_nextStep.integerValue-1)*0.2;
-
+//            processFlot = (_nextStep.integerValue-1)*0.25;
 //        }else{
 //        
 //            processFlot = (_nextStep.integerValue-1)*0.25;
 //        }
-        
     } else {
         if (_nextStep.integerValue == -1) {
             processFlot = 1;
@@ -413,13 +412,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (_isDisplay) {
-        
-        return 7;
-    }else{
+//    if (_isDisplay) {
+//        
+//        return 7;
+//    }else{
     
         return 6;
-    }
+//    }
     
 }
 
@@ -773,6 +772,23 @@
                 }];
             }
         }
+            break;
+            case 5:
+            if (_isZmxyAuth.integerValue == 2||processFlot ==1) {
+                
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+                return;
+            }else if(_isZmxyAuth.integerValue == 1){
+                
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您正在认证中，请勿重复认证!"];
+                return;
+                
+            }else{
+                
+                SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
+                [self.navigationController pushViewController:controller animated:YES];
+                return;
+            }
             break;
         default:
             break;
