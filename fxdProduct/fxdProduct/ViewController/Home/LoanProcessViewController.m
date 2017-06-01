@@ -57,7 +57,6 @@
         {
             _userStateModel = [UserStateModel yy_modelWithJSON:returnValue[@"result"]];
             
-            
             if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
                 
                 LoanProcessResult *loanProcess  =  _loanProcessParse.result.lastObject;
@@ -151,6 +150,7 @@
             [Tool setCorner:refuseView.seeBtn borderColor:UI_MAIN_COLOR];
             [refuseView.seeBtn addTarget:self action:@selector(refuseBtn) forControlEvents:UIControlEventTouchUpInside];
             return refuseView;
+        
     }else{//白领贷
 
         WhiteRefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"WhiteRefuseView" owner:self options:nil]lastObject];
@@ -203,8 +203,8 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    _toopLine.frame = CGRectMake(_leadingSpacingOfLines, 64, 1, -scrollView.contentOffset.y);
     
+    _toopLine.frame = CGRectMake(_leadingSpacingOfLines, 64, 1, -scrollView.contentOffset.y);
     
 }
 

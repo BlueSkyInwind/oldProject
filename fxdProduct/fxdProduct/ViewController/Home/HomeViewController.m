@@ -116,8 +116,6 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     
     DLog(@"%lf",_k_w);
-    
-    //  [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 187.5) imageNamesGroup:[NSArray arrayWithObjects:@"banner_01",@"banner_02",@"banner_03", nil]];
     _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 0.5*_k_w) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
     //375 185
     _sdView.delegate = self;
@@ -254,7 +252,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    return 4;
     NSInteger i = 0;
     if (_dataArray.count>0) {
         i=_dataArray.count+2;
@@ -271,7 +268,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     NSInteger i = 0;
     if (_dataArray.count>0) {
         i=_dataArray.count+1;
@@ -409,18 +405,16 @@
             [self lowLoan];
         }
         if ([product.id_ isEqualToString:WhiteCollarLoan]) {
-            
             [self whiteCollarLoanClick];
             //        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
-            
         }
     }
 }
 
+#pragma mak - SDCycleScrollViewDelegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     DLog(@"点击");
-
     if (_bannerParse && _bannerParse.result.files_.count > 0) {
         HomeBannerFiles *files = _bannerParse.result.files_[index];
         if ([files.link_url_.lowercaseString hasPrefix:@"http"] || [files.link_url_.lowercaseString hasPrefix:@"https"]) {
@@ -480,25 +474,6 @@
     } else {
         [self presentLogin:self];
     }
-}
-
-- (void)loanProcess
-{
-
-    DLog(@"借款进度");
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        LoanProcessModel *loanProcess = [LoanProcessModel yy_modelWithJSON:object];
-        if ([loanProcess.flag isEqualToString:@"0000"]) {
-            LoanProcessViewController *processVC = [[LoanProcessViewController alloc] init];
-            processVC.loanProcessParse = loanProcess;
-            [self.navigationController pushViewController:processVC animated:true];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:loanProcess.msg];
-        }
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
 }
 
 - (void)expense
@@ -578,7 +553,31 @@
     }];
     [homeViewModel fetchLoanRecord];
 }
-
+/**
+ 获取借款进度
+ */
+- (void)loanProcess
+{
+    DLog(@"借款进度");
+    
+    HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
+    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        LoanProcessModel *loanProcess = [LoanProcessModel yy_modelWithJSON:returnValue];
+        if ([loanProcess.flag isEqualToString:@"0000"]) {
+            
+            LoanProcessViewController *processVC = [[LoanProcessViewController alloc] init];
+            processVC.loanProcessParse = loanProcess;
+            [self.navigationController pushViewController:processVC animated:true];
+            
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:loanProcess.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [homeViewModel fetchLoanProcess];
+}
 /**
  推广弹窗
  */
