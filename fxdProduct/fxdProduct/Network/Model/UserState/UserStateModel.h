@@ -28,5 +28,5 @@
 @property (nonatomic, copy) NSString *case_info_id;
 @property (nonatomic, copy) NSString *bid_id_;
 @property (nonatomic, copy) NSString *pre_prove_amt_;
-@property (nonatomic, copy) NSString *merchant_status;
+@property (nonatomic, copy) NSString *merchant_status;     //判断渠道，非渠道用户
 @end

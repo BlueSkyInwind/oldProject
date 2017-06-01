@@ -23,6 +23,12 @@
  */
 -(void)fetchLoanRecord;
 
+/**
+ 获取借款进度
+ */
+-(void)fetchLoanProcess;
+
+
 
 @end
 
@@ -35,7 +41,6 @@
 -(void)fetchBannerInfo;
 
 @end
-
 
 @interface ProductListViewModel : ViewModelClass
 

@@ -14,7 +14,6 @@
 - (void)fetchUserState:(NSString *)productId
 {
     
-    NSParameterAssert(productId);
     NSDictionary *dicParam = @{@"product_id_":productId};
     [self postUserStateParam:dicParam];
 
@@ -48,6 +47,21 @@
     }];
 }
 
+
+
+-(void)fetchLoanProcess{
+    
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
 
 
 @end
