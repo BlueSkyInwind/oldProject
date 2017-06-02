@@ -85,6 +85,9 @@ NSString * const     _updateDevID_url               =   @"updateLoginEquipment/u
 //忘记密码
 NSString * const     _forget_url                    =   @"findPasswordBack/findPasswordBack.jhtml";
 
+//更换密码
+NSString * const     _changePassword_url                    =   @"updatePassword/updatePassword.jhtml";
+
 //首页查询用户借款状态
 NSString * const     _userState_url                 =   @"caseInfo/getApplyStatus.jhtml";
 

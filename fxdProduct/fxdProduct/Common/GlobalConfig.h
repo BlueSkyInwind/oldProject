@@ -20,7 +20,12 @@
 typedef void(^ReturnValueBlock)(id returnValue);
 typedef void(^FaileBlock)();
 
- 
+//十六进制色值
+#define kUIColorFromRGB(rgbValue) [UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 // 设置三原色
 #define RGBColor(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
 
@@ -37,6 +42,8 @@ typedef void(^FaileBlock)();
 #define UI_IS_IPHONE4           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 480.0)
 
 #define UI_MAIN_COLOR [UIColor colorWithRed:0/255.0 green:170/255.0 blue:238/255.0 alpha:1]
+
+#define KCharacterNumber @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
 
 UIKIT_EXTERN NSString * const _main_url;
@@ -55,6 +62,7 @@ UIKIT_EXTERN NSString * const       _login_url;                              //�
 UIKIT_EXTERN NSString * const       _loginOut_url;                           //退出登陆
 UIKIT_EXTERN NSString * const       _updateDevID_url;                        //更改设备号
 UIKIT_EXTERN NSString * const       _forget_url;                             //忘记密码
+UIKIT_EXTERN NSString * const       _changePassword_url;                             //更换密码
 UIKIT_EXTERN NSString * const       _userState_url;                          //首页查询用户借款状态
 UIKIT_EXTERN NSString * const       _secondApply_url;                        //二次进件
 UIKIT_EXTERN NSString * const       _updateUserById_url;                     //提交用户信息
