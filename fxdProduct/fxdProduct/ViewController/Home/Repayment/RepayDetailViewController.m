@@ -28,6 +28,10 @@
 #import "QueryCardInfo.h"
 #import "UnbundlingBankCardViewController.h"
 #import "QryUserStatusModel.h"
+#import "CheckViewModel.h"
+#import "SaveLoanCaseModel.h"
+#import "HomeViewModel.h"
+#import "UserStateModel.h"
 @interface RepayDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SelectViewDelegate>
 {
     UIImageView*navBarHairlineImageView;
@@ -70,6 +74,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     navBarHairlineImageView.hidden=YES;
+    [self checkStatus];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -938,65 +943,68 @@
 //        
 //    }];
     
+    
+    [self getFxdCaseInfo];
 #pragma mark fxd用户状态查询
 
+    
         
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_qryUserStatus_url] parameters:@{@"client_":@"1"} finished:^(EnumServerStatus status, id object) {
-        
-        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:object];
-        if ([model.result.appcode isEqualToString:@"1"]) {
-            
-            if ([model.result.flg isEqualToString:@"2"]) {//未开户
-                
-//                //绑定银行卡
-//                NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-//                [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//                    BankModel *bankModel = [BankModel yy_modelWithJSON:object];
-//                    if ([bankModel.flag isEqualToString:@"0000"]) {
-//                        BankCardViewController *bankVC = [BankCardViewController new];
-//                        bankVC.bankModel = bankModel;
-//                        bankVC.periodSelect = _userSelectNum.integerValue;
-//                        bankVC.purposeSelect = _purposeSelect;
-//                        bankVC.userStateModel = _userStateModel;
-//                        bankVC.isP2P = YES;
-//                        bankVC.uploadP2PUserInfo = _uploadP2PUserInfo;
-//                        //            bankVC.idString = _idString;
-//                        bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
-//                        [self.navigationController pushViewController:bankVC animated:YES];
-//                    } else {
-//                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
-//                    }
-//                } failure:^(EnumServerStatus status, id object) {
-//                    DLog(@"%@",object);
-//                }];
-                
-            }else if ([model.result.flg isEqualToString:@"3"]){//待激活
-                
-                //激活用户
-                
-                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_p2P_url,_bosAcctActivate_url,@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
-                P2PViewController *p2pVC = [[P2PViewController alloc] init];
-                p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                [self.navigationController pushViewController:p2pVC animated:YES];
-                
-            }else if ([model.result.flg isEqualToString:@"6"]){//正常用户
-                
-                if (_repayType == RepayTypeOption) {
-                    [self p2pRepay];
-                } else {
-                    [self p2pRepayClean];
-                }
-//                [self chooseBankCard];
-                
-            }
-        }else{
-            
-            //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-        
-    }];
+//    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_qryUserStatus_url] parameters:@{@"client_":@"1"} finished:^(EnumServerStatus status, id object) {
+//        
+//        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:object];
+//        if ([model.result.appcode isEqualToString:@"1"]) {
+//            
+//            if ([model.result.flg isEqualToString:@"2"]) {//未开户
+//                
+////                //绑定银行卡
+////                NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
+////                [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+////                    BankModel *bankModel = [BankModel yy_modelWithJSON:object];
+////                    if ([bankModel.flag isEqualToString:@"0000"]) {
+////                        BankCardViewController *bankVC = [BankCardViewController new];
+////                        bankVC.bankModel = bankModel;
+////                        bankVC.periodSelect = _userSelectNum.integerValue;
+////                        bankVC.purposeSelect = _purposeSelect;
+////                        bankVC.userStateModel = _userStateModel;
+////                        bankVC.isP2P = YES;
+////                        bankVC.uploadP2PUserInfo = _uploadP2PUserInfo;
+////                        //            bankVC.idString = _idString;
+////                        bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
+////                        [self.navigationController pushViewController:bankVC animated:YES];
+////                    } else {
+////                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
+////                    }
+////                } failure:^(EnumServerStatus status, id object) {
+////                    DLog(@"%@",object);
+////                }];
+//                
+//            }else if ([model.result.flg isEqualToString:@"3"]){//待激活
+//                
+//                //激活用户
+//                
+//                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_p2P_url,_bosAcctActivate_url,@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
+//                P2PViewController *p2pVC = [[P2PViewController alloc] init];
+//                p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+//                [self.navigationController pushViewController:p2pVC animated:YES];
+//                
+//            }else if ([model.result.flg isEqualToString:@"6"]){//正常用户
+//                
+//                if (_repayType == RepayTypeOption) {
+//                    [self p2pRepay];
+//                } else {
+//                    [self p2pRepayClean];
+//                }
+////                [self chooseBankCard];
+//                
+//            }
+//        }else{
+//            
+//            //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//        
+//    }];
     
  
     
@@ -1055,7 +1063,7 @@
 #pragma mark 弹出银行卡列表
 -(void)chooseBankCard{
     
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
         
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:object];
         NSString *bankName = [self bankName:model.data.UsrCardInfolist.BankId];
@@ -1141,5 +1149,166 @@
     } failure:^(EnumServerStatus status, id object) {
         
     }];
+}
+
+
+#pragma mark 发标前查询进件
+-(void)getFxdCaseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
+        if ([caseInfo.flag isEqualToString:@"0000"]) {
+            
+//            _caseInfo = caseInfo;
+            [self getUserStatus:caseInfo];
+            //            [self saveLoanCase:type caseInfo:_caseInfo];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel getFXDCaseInfo];
+    
+}
+
+
+#pragma mark  fxd用户状态查询，viewmodel
+-(void)getUserStatus:(GetCaseInfo *)caseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
+        if ([model.result.appcode isEqualToString:@"1"]) {
+            
+            if ([model.result.flg isEqualToString:@"2"]) {//未开户
+                
+                //发标前查询进件
+                //                [self getFXDCaseInfo:@"20"];
+//                [self saveLoanCase:@"20" caseInfo:_caseInfo];
+                
+                
+            }else if ([model.result.flg isEqualToString:@"3"]){//待激活
+                
+                //激活用户
+                //                [self getFXDCaseInfo:@"10"];
+                [self saveLoanCase:@"10" caseInfo:caseInfo];
+                
+                
+            }else if ([model.result.flg isEqualToString:@"6"]){//正常用户
+                
+                //选择银行卡
+                //                [self chooseBankCard];
+                //                [self getFXDCaseInfo:@"30"];
+                [self saveLoanCase:@"30" caseInfo:caseInfo];
+                //                [self queryCardInfo];
+                
+            }
+        }else{
+            
+            //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    
+    [complianceViewModel getUserStatus:caseInfo];
+}
+
+#pragma mark 提款申请件记录
+-(void)saveLoanCase:(NSString *)type caseInfo:(GetCaseInfo *)caseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        SaveLoanCaseModel *model = [SaveLoanCaseModel yy_modelWithJSON:returnValue];
+        if ([model.flag isEqualToString:@"0000"]) {
+            if ([type isEqualToString:@"20"]) {
+                //绑定银行卡
+//                [self getBankListInfo];
+            }else if ([type isEqualToString:@"10"]){
+                
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_p2P_url,_bosAcctActivate_url,@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                P2PViewController *p2pVC = [[P2PViewController alloc] init];
+                p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                [self.navigationController pushViewController:p2pVC animated:YES];
+                
+            }else if ([type isEqualToString:@"30"]){
+                
+                if (_repayType == RepayTypeOption) {
+                    [self p2pRepay];
+                } else {
+                    [self p2pRepayClean];
+                }
+                
+//                [self queryCardInfo];
+            }
+            
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel saveLoanCase:type CaseInfo:caseInfo];
+}
+
+
+#pragma mark 查询激活的结果
+-(void)checkStatus
+{
+    HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
+    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        if([returnValue[@"flag"] isEqualToString:@"0000"])
+        {
+          UserStateModel *model=[UserStateModel yy_modelWithJSON:returnValue[@"result"]];
+//            _userStateModel = model;
+            
+            //            [model setValuesForKeysWithDictionary:returnValue[@"result"]];
+//            _platform = model.platform_type;
+            switch ([model.applyStatus integerValue]) {
+                    
+                case 5://放款中
+                case 4://待放款
+                {
+                    [_sureBtn setBackgroundColor:rgb(139, 140, 143)];
+                    _sureBtn.enabled = false;
+//                    _intStautes = [model.applyStatus integerValue];
+//                    [self createUIWith];
+                }
+                    break;
+                case 6://拒绝放款
+                {
+//                    CheckViewController *checkVC = [CheckViewController new];
+//                    checkVC.homeStatues = [model.applyStatus integerValue];
+//                    [self.navigationController pushViewController:checkVC animated:YES];
+                }   break;
+                case 13://已结清
+                case 12://提前结清
+                case 11://已记坏账
+                case 10://委外催收
+                case 9://内部催收
+                case 8://逾期
+                case 7:
+                case 16: //还款中
+                {
+                    [_sureBtn setBackgroundColor:UI_MAIN_COLOR];
+                    _sureBtn.enabled = true;
+//                    _intStautes = [model.applyStatus integerValue];
+//                    [self createUIWith];
+                }
+                    break;
+                default:
+//                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    break;
+            }
+        }
+        else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [homeViewModel fetchUserState:nil];
+    
 }
 @end

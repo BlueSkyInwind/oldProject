@@ -14,6 +14,10 @@
 - (void)fetchUserState:(NSString *)productId
 {
     
+<<<<<<< HEAD
+//    NSParameterAssert(productId);
+=======
+>>>>>>> 805276d7275e3bf52f014647e6cb1a9b2bd1b88b
     NSDictionary *dicParam = @{@"product_id_":productId};
     [self postUserStateParam:dicParam];
 

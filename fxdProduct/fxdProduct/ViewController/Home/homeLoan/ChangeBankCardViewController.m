@@ -192,7 +192,7 @@
 -(void)senderSms{
 
     NSDictionary *paramDic = [self getParamDic];
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
 
         SendSmsModel *model = [SendSmsModel yy_modelWithJSON:object];
         if ([model.appcode isEqualToString:@"1"]) {
@@ -435,7 +435,7 @@
 -(void)changeBank{
 
     NSDictionary *paramDic = [self changeBankParamDic];
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         BankCardsModel *model = [BankCardsModel yy_modelWithJSON:object];
         if ([model.appcode isEqualToString:@"1"]) {
 

@@ -17,6 +17,7 @@
 #import "AccountHSServiceModel.h"
 #import "QryUserStatusModel.h"
 #import "getBidStatus.h"
+#import "RepayDetailViewController.h"
 @interface P2PViewController ()<WKUIDelegate,WKNavigationDelegate>
 {
     UIProgressView *progressView;
@@ -138,29 +139,47 @@
 //        [self addBidInfoService];
     }
     
-    
-    if ([request.URL.absoluteString isEqualToString:_transition_url]) {
+    if ([request.URL.absoluteString isEqualToString:_transition_url]&&![request.URL.absoluteString isEqualToString:self.urlStr]) {
         decisionHandler(WKNavigationActionPolicyAllow);
 
-        [self checkP2PUserState];
+        LoanMoneyViewController *controller = [LoanMoneyViewController new];
+        [self.navigationController pushViewController:controller animated:YES];
+//        [self checkP2PUserState];
     }else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
     
-    if ([request.URL.absoluteString isEqualToString:_bosAcctActivateRet_url]) {
+    if ([request.URL.absoluteString isEqualToString:_bosAcctActivateRet_url]&&![request.URL.absoluteString isEqualToString:self.urlStr]) {
+        decisionHandler(WKNavigationActionPolicyAllow);
+        if (self.isCheck) {
+            LoanMoneyViewController *controller = [LoanMoneyViewController new];
+            [self.navigationController pushViewController:controller animated:YES];
+        }else{
         
-        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-            DLog(@"%@",object);
-            GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
-            if ([caseInfo.flag isEqualToString:@"0000"]) {
-                [self getBidStatus:caseInfo];
-            } else {
-                
+            for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+                if ([vc isKindOfClass:[RepayDetailViewController class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                }
             }
-            
-        } failure:^(EnumServerStatus status, id object) {
-            
-        }];
+        }
+        
+        
+//        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+//            DLog(@"%@",object);
+//            GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
+//            if ([caseInfo.flag isEqualToString:@"0000"]) {
+//                [self getBidStatus:caseInfo];
+//            } else {
+//                
+//            }
+//            
+//        } failure:^(EnumServerStatus status, id object) {
+//            
+//        }];
+    }else{
+        
+     decisionHandler(WKNavigationActionPolicyAllow);
+        
     }
 }
 

@@ -71,7 +71,7 @@
             cell.textField.enabled = NO;
             
             
-            cell.textField.text = [self bankName:_queryCadModel.data.UsrCardInfolist.BankId];
+            cell.textField.text = [self bankName:_queryCardInfo.data.UsrCardInfolist.BankId];
             
 //            cell.textField.text = @"农行";
             
@@ -83,7 +83,7 @@
 //            [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.btnSecory.hidden = YES;
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            cell.textField.text = _queryCadModel.data.UsrCardInfolist.CardId;
+            cell.textField.text = _queryCardInfo.data.UsrCardInfolist.CardId;
             cell.textField.enabled = NO;
         }else if (indexPath.row == 3){
             cell.btn.hidden = YES;
@@ -121,7 +121,7 @@
     
     NSDictionary *paramDic = [self getParamDic];
     
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
        
         SendSmsModel *model = [SendSmsModel yy_modelWithJSON:object];
         if ([model.appcode isEqualToString:@"1"]) {
@@ -159,7 +159,10 @@
 -(NSDictionary *)getParamDic{
 
     _bankNum = @"622 822 93399 10450";
-    NSString *bankNo =[_bankNum stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    NSString *bankNo =[_bankNum stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    
+    NSString *bankNo = _queryCardInfo.data.UsrCardInfolist.CardId;
     
     NSDictionary *paramDic;
     
@@ -233,13 +236,14 @@
 
 -(void)viewWillAppear:(BOOL)animated{
 
-    [self getBankDetail];
+//    [self getBankDetail];
 }
 
 #pragma mark 获取银行卡信息
 -(void)getBankDetail{
 
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
+    
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
         
         _queryCadModel = [QueryCardInfo yy_modelWithJSON:object];
         [_bankTable reloadData];
