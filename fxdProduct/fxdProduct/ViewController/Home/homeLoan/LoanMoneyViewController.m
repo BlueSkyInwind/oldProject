@@ -38,10 +38,14 @@
     Approval *_approvalModel;
     NSString *_cardNo;
     NSString *_cardBank;
+    NSTimer * _countdownTimer;
+    
 }
 
 @property (nonatomic, copy)NSString *platform;
 @property (nonatomic, weak) UIScrollView *scrollView;
+
+//@property (nonatomic, strong) UIRefreshControl* refreshControl;
 
 @end
 
@@ -56,6 +60,11 @@
     //    int flag = 1;
     
     [self checkStatus];
+
+    
+//    _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refreshUserState) userInfo:nil repeats:YES];
+    
+    
     //    [self PostGetCheckMoney];
     //    [self createUIWith];
 }
@@ -99,6 +108,19 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+//#pragma mark 倒计时
+//-(void)refreshUserState
+//{
+//
+//    [moenyViewing removeFromSuperview];
+//    [self checkStatus];
+//    if ([model.applyStatus isEqualToString:@"6"]) {
+//        
+//        [_countdownTimer invalidate];
+//    }
+//}
+
 
 -(void)checkStatus
 {
@@ -215,138 +237,181 @@
 
 -(void)createUIWith
 {
-    switch (_intStautes) {
-        case 4://待放款
-        case 5://放款中
-        {
-            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-            [self.view addSubview:moenyViewing];
-            moenyViewing.sureBtn.hidden = YES;
-            moenyViewing.labelProgress.text = @"到账中";
-            moenyViewing.labelDetail.text = @"请注意查收到账短信";
-            moenyViewing.lableData.hidden = YES;
-            moenyViewing.sureBtn.hidden = YES;
-            if (_popAlert) {
-                [self showAlertview];
+    if (_isHuiFu) {
+        
+        _isHuiFu = NO;
+        moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+        moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+        [self.view addSubview:moenyViewing];
+        moenyViewing.sureBtn.hidden = YES;
+        moenyViewing.labelProgress.text = @"处理中";
+        moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+        moenyViewing.lableData.hidden = YES;
+        moenyViewing.sureBtn.hidden = YES;
+        moenyViewing.middleView.hidden = YES;
+        
+    }else{
+        
+        switch (_intStautes) {
+                
+            case 0://开户失败
+                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+                [self.view addSubview:moenyViewing];
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.labelProgress.text = @"失败";
+                moenyViewing.labelDetail.text = @"处理失败，请重试";
+                moenyViewing.lableData.hidden = YES;
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.middleView.hidden = YES;
+                break;
+            case 4://待放款
+            case 5://放款中
+            {
+                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+                [self.view addSubview:moenyViewing];
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.labelProgress.text = @"到账中";
+                moenyViewing.labelDetail.text = @"请注意查收到账短信";
+                moenyViewing.lableData.hidden = YES;
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.middleView.hidden = NO;
+                if (_popAlert) {
+                    [self showAlertview];
+                }
             }
-        }
-            break;
-        case 13://已结清
-        case 12://提前结清
-        case 11://已记坏账
-        case 10://委外催收
-        case 9://内部催收
-        case 8://逾期
-        case 7://放款成功
-        case 16://还款中
-        {
-            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-            moenyViewing.frame = self.view.bounds;
-            [self.view addSubview:moenyViewing];
-            moenyViewing.labelProgress.text = @"已到账";
-            moenyViewing.labelDetail.text = @"请按时还款,保障信用";
-            
-            
-            [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-            if ([model.platform_type isEqualToString:@"0"]) {
-                moenyViewing.lableData.textAlignment = NSTextAlignmentLeft;
-                NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"《银行自动转账授权书》、《三方借款协议》"];
-                one.yy_font = [UIFont systemFontOfSize:13];
-                [one yy_setTextHighlightRange:NSMakeRange(0, 11)
-                                        color:UI_MAIN_COLOR
-                              backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
-                                    tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-                                        DLog(@"授权书点击");
-                                        
-                                        NSDictionary *paramDic = @{@"apply_id_":_userStateModel.applyID,
-                                                                   @"product_id_":_userStateModel.product_id,
-                                                                   @"protocol_type_":@"1",
-                                                                   @"card_no_":_cardNo,
-                                                                   @"card_bank_":_cardBank};
-                                        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                                            if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-                                                DetailViewController *detailVC = [[DetailViewController alloc] init];
-                                                detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
-                                                [self.navigationController pushViewController:detailVC animated:YES];
-                                            } else {
-                                                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-                                            }
-                                        } failure:^(EnumServerStatus status, id object) {
+                break;
+            case 13://已结清
+            case 12://提前结清
+            case 11://已记坏账
+            case 10://委外催收
+            case 9://内部催收
+            case 8://逾期
+            case 7://放款成功
+            case 16://还款中
+            {
+                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+                moenyViewing.frame = self.view.bounds;
+                [self.view addSubview:moenyViewing];
+                moenyViewing.labelProgress.text = @"已到账";
+                moenyViewing.labelDetail.text = @"请按时还款,保障信用";
+                moenyViewing.middleView.hidden = NO;
+                
+                [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+                if ([model.platform_type isEqualToString:@"0"]) {
+                    moenyViewing.lableData.textAlignment = NSTextAlignmentLeft;
+                    NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"《银行自动转账授权书》、《三方借款协议》"];
+                    one.yy_font = [UIFont systemFontOfSize:13];
+                    [one yy_setTextHighlightRange:NSMakeRange(0, 11)
+                                            color:UI_MAIN_COLOR
+                                  backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
+                                        tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+                                            DLog(@"授权书点击");
                                             
-                                        }];
-//                                        AutoTransferAccountsAgreement *autoTransfer = [[AutoTransferAccountsAgreement alloc] init];
-//                                        [self.navigationController pushViewController:autoTransfer animated:true];
-                                    }];
-                [one yy_setTextHighlightRange:NSMakeRange(12, 8)
-                                        color:UI_MAIN_COLOR
-                              backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-                                  DLog(@"三方协议");
-                                  NSDictionary *paramDic;
-                                  if ([model.product_id isEqualToString:@"P001002"]||[model.product_id isEqualToString:@"P001005"]) {
-                                      paramDic = @{@"apply_id_":_userStateModel.applyID,
-                                                   @"product_id_":_userStateModel.product_id,
-                                                   @"protocol_type_":@"2",
-                                                   @"periods_":_approvalModel.result.loan_staging_amount};
-                                  }
-                                  if ([model.product_id isEqualToString:@"P001004"]) {
-                                      paramDic = @{@"apply_id_":_userStateModel.applyID,
-                                                   @"product_id_":_userStateModel.product_id,
-                                                   @"protocol_type_":@"2",
-                                                   @"periods_":@2};
-                                  }
-                                  
-                                  [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                                      if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-                                          DetailViewController *detailVC = [[DetailViewController alloc] init];
-                                          detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
-                                          [self.navigationController pushViewController:detailVC animated:YES];
-                                      } else {
-                                          [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-                                      }
-                                  } failure:^(EnumServerStatus status, id object) {
-                                      
-                                  }];
-                              }];
-                moenyViewing.agreeMentLabel.attributedText = one;
-                moenyViewing.agreeMentLabel.textColor = UI_MAIN_COLOR;
-                moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentLeft;
-            }
-            
-            if ([model.platform_type isEqualToString:@"2"]) {
-                NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"查看合同"];
-                one.yy_font = [UIFont systemFontOfSize:13];
-                [one yy_setTextHighlightRange:NSMakeRange(0, one.length)
-                                        color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
-                              backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
-                                    tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
-                                        DLog(@"合同查看");
-                                        NSDictionary *dicParam = @{@"bid_id_":model.bid_id_};
-                                        [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_contractList_url] parameters:dicParam finished:^(EnumServerStatus status, id object) {
-                                            DLog(@"%@",object);
-                                            P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:object];
-                                            if ([agreeModel.appcode isEqualToString:@"1"]) {
-                                                AgreeMentListViewController *agreeMentListViewController = [[AgreeMentListViewController alloc] init];
-                                                agreeMentListViewController.agreeMentArr = agreeModel.data.pactList;
-                                                [self.navigationController pushViewController:agreeMentListViewController animated:true];
-                                            } else {
+                                            NSDictionary *paramDic = @{@"apply_id_":_userStateModel.applyID,
+                                                                       @"product_id_":_userStateModel.product_id,
+                                                                       @"protocol_type_":@"1",
+                                                                       @"card_no_":_cardNo,
+                                                                       @"card_bank_":_cardBank};
+                                            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+                                                if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+                                                    DetailViewController *detailVC = [[DetailViewController alloc] init];
+                                                    detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
+                                                    [self.navigationController pushViewController:detailVC animated:YES];
+                                                } else {
+                                                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+                                                }
+                                            } failure:^(EnumServerStatus status, id object) {
                                                 
-                                            }
-                                        } failure:^(EnumServerStatus status, id object) {
-                                            
+                                            }];
+                                            //                                        AutoTransferAccountsAgreement *autoTransfer = [[AutoTransferAccountsAgreement alloc] init];
+                                            //                                        [self.navigationController pushViewController:autoTransfer animated:true];
                                         }];
-                                    }];
-                moenyViewing.agreeMentLabel.attributedText = one;
-                moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentCenter;
+                    [one yy_setTextHighlightRange:NSMakeRange(12, 8)
+                                            color:UI_MAIN_COLOR
+                                  backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+                                      DLog(@"三方协议");
+                                      NSDictionary *paramDic;
+                                      if ([model.product_id isEqualToString:@"P001002"]||[model.product_id isEqualToString:@"P001005"]) {
+                                          paramDic = @{@"apply_id_":_userStateModel.applyID,
+                                                       @"product_id_":_userStateModel.product_id,
+                                                       @"protocol_type_":@"2",
+                                                       @"periods_":_approvalModel.result.loan_staging_amount};
+                                      }
+                                      if ([model.product_id isEqualToString:@"P001004"]) {
+                                          paramDic = @{@"apply_id_":_userStateModel.applyID,
+                                                       @"product_id_":_userStateModel.product_id,
+                                                       @"protocol_type_":@"2",
+                                                       @"periods_":@2};
+                                      }
+                                      
+                                      [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+                                          if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+                                              DetailViewController *detailVC = [[DetailViewController alloc] init];
+                                              detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
+                                              [self.navigationController pushViewController:detailVC animated:YES];
+                                          } else {
+                                              [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+                                          }
+                                      } failure:^(EnumServerStatus status, id object) {
+                                          
+                                      }];
+                                  }];
+                    moenyViewing.agreeMentLabel.attributedText = one;
+                    moenyViewing.agreeMentLabel.textColor = UI_MAIN_COLOR;
+                    moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentLeft;
+                }
+                
+                if ([model.platform_type isEqualToString:@"2"]) {
+                    NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"查看合同"];
+                    one.yy_font = [UIFont systemFontOfSize:13];
+                    [one yy_setTextHighlightRange:NSMakeRange(0, one.length)
+                                            color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
+                                  backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
+                                        tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
+                                            DLog(@"合同查看");
+                                            NSDictionary *dicParam = @{@"bid_id_":model.bid_id_};
+                                            [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_contractList_url] parameters:dicParam finished:^(EnumServerStatus status, id object) {
+                                                DLog(@"%@",object);
+                                                P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:object];
+                                                if ([agreeModel.appcode isEqualToString:@"1"]) {
+                                                    AgreeMentListViewController *agreeMentListViewController = [[AgreeMentListViewController alloc] init];
+                                                    agreeMentListViewController.agreeMentArr = agreeModel.data.pactList;
+                                                    [self.navigationController pushViewController:agreeMentListViewController animated:true];
+                                                } else {
+                                                    
+                                                }
+                                            } failure:^(EnumServerStatus status, id object) {
+                                                
+                                            }];
+                                        }];
+                    moenyViewing.agreeMentLabel.attributedText = one;
+                    moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentCenter;
+                }
+                
             }
-            
+                break;
+                
+            case 20:
+                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+                [self.view addSubview:moenyViewing];
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.labelProgress.text = @"处理中";
+                moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+                moenyViewing.lableData.hidden = YES;
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.middleView.hidden = YES;
+                break;
+            default:
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                break;
         }
-            break;
-        default:
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            break;
+
+        [self PostGetCheckMoney];
     }
-    [self PostGetCheckMoney];
+    
 }
 
 - (void)showAlertview

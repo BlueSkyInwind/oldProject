@@ -651,6 +651,12 @@
             }else if ([model.applyFlag isEqualToString:@"0004"]){
                 switch ([model.applyStatus integerValue])
                 {
+                    
+                    case 0://开户失败
+                    {
+                        [self goCheckVC:model];
+                    }
+                        break;
                     case 6://就拒绝放款
                     case 2://审核失败
                     case 14://人工审核未通过
@@ -697,6 +703,7 @@
                     case 5://放款中
                     case 4://待放款
                     case 16://还款中
+                    case 20://开户处理中
                     {
                         LoanMoneyViewController *loanVc = [LoanMoneyViewController new];
                         loanVc.userStateModel = model;

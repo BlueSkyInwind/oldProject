@@ -17,4 +17,7 @@
 
 @property (nonatomic, assign) BOOL popAlert;
 
+@property (nonatomic,assign)  BOOL isHuiFu;
+
+
 @end

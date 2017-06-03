@@ -1211,9 +1211,13 @@
                 //                [self getFXDCaseInfo:@"30"];
 //                [self saveLoanCase:@"30" caseInfo:caseInfo];
                 if (_repayType == RepayTypeOption) {
-                    [self p2pRepay];
+//                    [self p2pRepay];
+                    [self repaySure];
+                    
                 } else {
-                    [self p2pRepayClean];
+                    
+                    [self paySettle];
+//                    [self p2pRepayClean];
                 }
                 //                [self queryCardInfo];
                 

@@ -138,8 +138,9 @@
     
     if ([request.URL.absoluteString isEqualToString:_transition_url]&&![request.URL.absoluteString isEqualToString:self.urlStr]) {
         decisionHandler(WKNavigationActionPolicyAllow);
-
+        
         LoanMoneyViewController *controller = [LoanMoneyViewController new];
+        controller.isHuiFu = YES;
         [self.navigationController pushViewController:controller animated:YES];
     }else {
         decisionHandler(WKNavigationActionPolicyAllow);
