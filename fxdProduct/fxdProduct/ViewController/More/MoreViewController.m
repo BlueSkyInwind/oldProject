@@ -23,6 +23,8 @@
 #import "testView.h"
 #import "FXDWebViewController.h"
 #import "UIImage+Color.h"
+#import "ChangePasswordViewController.h"
+
 
 @interface MoreViewController () <UITableViewDataSource,UITableViewDelegate,MakeSureBtnDelegate,UIViewControllerTransitioningDelegate>
 {
@@ -57,9 +59,9 @@
     [super viewDidLoad];
 //    [self setNavMesRightBar];
     //    imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_07",@"7_gd_icon_08",@"7_gd_icon_09",@"7_gd_icon_10"];
-    imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09"];
+    imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09",@"7_gd_icon_09"];
     //    titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"分享好友",@"给个好评",@"客服热线",@"手势密码"];
-    titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"给个好评",@"客服热线"];
+    titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"给个好评",@"客服热线",@"修改密码"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     //    _MyTabView.scrollEnabled = NO;
     [_MyTabView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
@@ -220,7 +222,7 @@
             [self presentViewController:alertView animated:YES completion:nil];
             
         }
-        else{
+        else if(indexPath.row==4){
             UIAlertController *actionSheett = [UIAlertController alertControllerWithTitle:@"热线服务时间:9:00-17:30(工作日)" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
             UIAlertAction *teleAction = [UIAlertAction actionWithTitle:@"4008-678-655" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", @"4008-678-655"]];
@@ -230,6 +232,10 @@
             [actionSheett addAction:teleAction];
             [actionSheett addAction:cancelAction];
             [self presentViewController:actionSheett animated:YES completion:nil];
+        }    else if(indexPath.row==5){
+            
+          ChangePasswordViewController *   changePassVC =[[ChangePasswordViewController alloc]init];
+            [self.navigationController pushViewController:changePassVC animated:YES];
         }
     }
     //    else if(indexPath.section==1) {

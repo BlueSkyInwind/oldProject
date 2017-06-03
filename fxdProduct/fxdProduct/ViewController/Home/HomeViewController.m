@@ -559,7 +559,6 @@
 - (void)loanProcess
 {
     DLog(@"借款进度");
-    
     HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
     [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
         

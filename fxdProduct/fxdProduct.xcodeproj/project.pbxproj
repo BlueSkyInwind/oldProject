@@ -579,6 +579,14 @@
 		842C0B5A1ED599DE00366D11 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B581ED599DE00366D11 /* LoginViewController.xib */; };
 		842C0B5D1ED59C7A00366D11 /* LoginParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */; };
 		842C0B5E1ED59C7A00366D11 /* LoginParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */; };
+		8438F70F1EE14BD40089E121 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F70E1EE14BD40089E121 /* ChangePasswordViewController.m */; };
+		8438F7101EE14BD40089E121 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F70E1EE14BD40089E121 /* ChangePasswordViewController.m */; };
+		8438F7141EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F7131EE14DA00089E121 /* ChangePasswordTableViewCell.m */; };
+		8438F7151EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F7131EE14DA00089E121 /* ChangePasswordTableViewCell.m */; };
+		8438F7181EE163690089E121 /* ChangePasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F7171EE163690089E121 /* ChangePasswordViewModel.m */; };
+		8438F7191EE163690089E121 /* ChangePasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F7171EE163690089E121 /* ChangePasswordViewModel.m */; };
+		8438F71D1EE165460089E121 /* changePasswordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F71C1EE165460089E121 /* changePasswordParam.m */; };
+		8438F71E1EE165460089E121 /* changePasswordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F71C1EE165460089E121 /* changePasswordParam.m */; };
 		84420A611ED678E200DFBFE0 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
 		84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84420A601ED678E200DFBFE0 /* LoginView.xib */; };
 		8446ABFF1EBDCDEA009E3551 /* FindZhimaCreditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446ABFE1EBDCDEA009E3551 /* FindZhimaCreditModel.m */; };
@@ -2281,6 +2289,14 @@
 		842C0B581ED599DE00366D11 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		842C0B5B1ED59C7A00366D11 /* LoginParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginParamModel.h; sourceTree = "<group>"; };
 		842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginParamModel.m; sourceTree = "<group>"; };
+		8438F70D1EE14BD40089E121 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		8438F70E1EE14BD40089E121 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
+		8438F7121EE14DA00089E121 /* ChangePasswordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordTableViewCell.h; sourceTree = "<group>"; };
+		8438F7131EE14DA00089E121 /* ChangePasswordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordTableViewCell.m; sourceTree = "<group>"; };
+		8438F7161EE163690089E121 /* ChangePasswordViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewModel.h; sourceTree = "<group>"; };
+		8438F7171EE163690089E121 /* ChangePasswordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewModel.m; sourceTree = "<group>"; };
+		8438F71B1EE165460089E121 /* changePasswordParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = changePasswordParam.h; sourceTree = "<group>"; };
+		8438F71C1EE165460089E121 /* changePasswordParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = changePasswordParam.m; sourceTree = "<group>"; };
 		84420A5E1ED678E200DFBFE0 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		84420A5F1ED678E200DFBFE0 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		84420A601ED678E200DFBFE0 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
@@ -2650,6 +2666,7 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8438F7111EE14D2D0089E121 /* MoreView */,
 				84420A5D1ED6788D00DFBFE0 /* LoginView */,
 				63553AD41E5D29FC00B2C1FF /* UserDataCell */,
 				0F047F431C507D0D002ED7C0 /* writeView */,
@@ -3358,6 +3375,8 @@
 				636B1BA21C30DBCB00450358 /* SMSViewModel.m */,
 				633DAD2B1C3E47D0000DA852 /* FindPassViewModel.h */,
 				633DAD2C1C3E47D0000DA852 /* FindPassViewModel.m */,
+				8438F7161EE163690089E121 /* ChangePasswordViewModel.h */,
+				8438F7171EE163690089E121 /* ChangePasswordViewModel.m */,
 				633DAD2E1C3E59A0000DA852 /* LoginViewModel.h */,
 				633DAD2F1C3E59A0000DA852 /* LoginViewModel.m */,
 				844E5F491ED94C9C00753671 /* RegViewModel.h */,
@@ -4462,6 +4481,7 @@
 				630D45951BCC99DE00874064 /* CardInfo */,
 				630CC08C1BC8E14200AE9690 /* QueryRepayments */,
 				630CC07E1BC8E05D00AE9690 /* GetMoneyState */,
+				8438F71A1EE164E20089E121 /* changePassword */,
 				6313DC061BB39BCC00EB45DE /* Login */,
 				844E5F4D1ED94D7E00753671 /* Register */,
 			);
@@ -4638,6 +4658,8 @@
 				0F9E30CF1BC8A70C0018A801 /* IdeaBackViewController.h */,
 				0F9E30D01BC8A70C0018A801 /* IdeaBackViewController.m */,
 				0F9E30D11BC8A70C0018A801 /* IdeaBackViewController.xib */,
+				8438F70D1EE14BD40089E121 /* ChangePasswordViewController.h */,
+				8438F70E1EE14BD40089E121 /* ChangePasswordViewController.m */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -4897,6 +4919,24 @@
 				EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8438F7111EE14D2D0089E121 /* MoreView */ = {
+			isa = PBXGroup;
+			children = (
+				8438F7121EE14DA00089E121 /* ChangePasswordTableViewCell.h */,
+				8438F7131EE14DA00089E121 /* ChangePasswordTableViewCell.m */,
+			);
+			path = MoreView;
+			sourceTree = "<group>";
+		};
+		8438F71A1EE164E20089E121 /* changePassword */ = {
+			isa = PBXGroup;
+			children = (
+				8438F71B1EE165460089E121 /* changePasswordParam.h */,
+				8438F71C1EE165460089E121 /* changePasswordParam.m */,
+			);
+			path = changePassword;
 			sourceTree = "<group>";
 		};
 		84420A5D1ED6788D00DFBFE0 /* LoginView */ = {
@@ -5690,6 +5730,7 @@
 				63FC24FB1D98F7E9006F58F3 /* NSAttributedString+YYText.m in Sources */,
 				6326CAAC1BF1CA5F00FD23A8 /* pinyin.c in Sources */,
 				63741E341D3CC10900C0E2F8 /* PayNavigationViewController.m in Sources */,
+				8438F7181EE163690089E121 /* ChangePasswordViewModel.m in Sources */,
 				63C12DCB1E495CC9008119FB /* MoneyPlanCell.m in Sources */,
 				635B0BD01DEEB187008EAFD1 /* HomePop.m in Sources */,
 				CC5D70271ED4400600A074AF /* CashModel.m in Sources */,
@@ -5700,6 +5741,7 @@
 				63FC24F11D98F7E9006F58F3 /* YYTextKeyboardManager.m in Sources */,
 				1AEDCF141C197E9700014A87 /* DrawMoneyView.m in Sources */,
 				638A17071E517D9F00AB8AB6 /* LOTShapeStroke.m in Sources */,
+				8438F71D1EE165460089E121 /* changePasswordParam.m in Sources */,
 				63DB3FC11E1DEE0600FBE1C4 /* UserDefaulInfo.m in Sources */,
 				63F0E1B71CE4166E001251A9 /* UIDevice+YYAdd.m in Sources */,
 				63FC24EF1D98F7E9006F58F3 /* YYTextEffectWindow.m in Sources */,
@@ -5808,6 +5850,7 @@
 				630CC0981BC8E14200AE9690 /* QueryRepaymentsLoanApplicant.m in Sources */,
 				63001A231BA8113000E2850A /* GTMBase64.m in Sources */,
 				63553AED1E5D787800B2C1FF /* IdentityCell.m in Sources */,
+				8438F7141EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */,
 				637963A81CABD0F8002A5910 /* ApprovalAmountBaseClass.m in Sources */,
 				CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */,
 				637637031D7829BE00E93289 /* DetailRepayHeader.m in Sources */,
@@ -5965,6 +6008,7 @@
 				63FF48401B6F0322009E384C /* HomeViewController.m in Sources */,
 				0FEACE201CA0E2450027859A /* TelPhoneCompanyCell.m in Sources */,
 				0FEA586B1BE08EE3007F8A6D /* BankCardTableViewCell.m in Sources */,
+				8438F70F1EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
 				63FC24F51D98F7E9006F58F3 /* YYTextSelectionView.m in Sources */,
 				CCF803201ED420C1003B7975 /* ActivationViewController.m in Sources */,
 				630CC0991BC8E14200AE9690 /* QueryRepaymentsResult.m in Sources */,
@@ -6142,6 +6186,7 @@
 				844E5F511ED94DCB00753671 /* RegParamModel.m in Sources */,
 				CC0DF9BA1EA5B1090024841A /* FaceCell.m in Sources */,
 				CC0DF9BB1EA5B1090024841A /* CheckFalseView.m in Sources */,
+				8438F7191EE163690089E121 /* ChangePasswordViewModel.m in Sources */,
 				CC0DF9BC1EA5B1090024841A /* MsgViewCell.m in Sources */,
 				CC0DF9BD1EA5B1090024841A /* CheckViewController.m in Sources */,
 				CC0DF9BE1EA5B1090024841A /* Custom_BaseInfoResult.m in Sources */,
@@ -6152,6 +6197,7 @@
 				CC0DF9C31EA5B1090024841A /* MoneyPlanCell.m in Sources */,
 				CC0DF9C41EA5B1090024841A /* HomePop.m in Sources */,
 				CC0DF9C51EA5B1090024841A /* weekRepayModel.m in Sources */,
+				8438F71E1EE165460089E121 /* changePasswordParam.m in Sources */,
 				8446AC041EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */,
 				CC5D70281ED4400600A074AF /* CashModel.m in Sources */,
 				CC0DF9C61EA5B1090024841A /* CustomerCareerExt.m in Sources */,
@@ -6260,6 +6306,7 @@
 				CC0DFA261EA5B1090024841A /* BankListCell.m in Sources */,
 				CC0DFA271EA5B1090024841A /* RTRootNavigationController.m in Sources */,
 				CC0DFA281EA5B1090024841A /* MBPAlertView.m in Sources */,
+				8438F7151EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */,
 				CC0DFA291EA5B1090024841A /* testModelFmdb.m in Sources */,
 				CC0DFA2A1EA5B1090024841A /* QueryRepaymentsLoanApplicant.m in Sources */,
 				CC0DFA2B1EA5B1090024841A /* GTMBase64.m in Sources */,
@@ -6417,6 +6464,7 @@
 				CC0DFAB81EA5B1090024841A /* RepayWeeklyRecordController.m in Sources */,
 				CC0DFAB91EA5B1090024841A /* RegionCodeExt.m in Sources */,
 				CC0DFABA1EA5B1090024841A /* PayLoanChooseController.m in Sources */,
+				8438F7101EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
 				CC0DFABB1EA5B1090024841A /* DetailViewController.m in Sources */,
 				CC0DFABC1EA5B1090024841A /* HomeViewController.m in Sources */,
 				CC0DFABD1EA5B1090024841A /* TelPhoneCompanyCell.m in Sources */,
