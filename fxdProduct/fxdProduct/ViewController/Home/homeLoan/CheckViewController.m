@@ -1,4 +1,4 @@
-//
+ //
 //  CheckViewController.m
 //  fxdProduct
 //
@@ -1405,7 +1405,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
-        if ([model.result.appcode isEqualToString:@"1"]) {
+        if ([model.flag isEqualToString:@"0000"]) {
             
             if ([model.result.flg isEqualToString:@"2"]) {//未开户
                 
@@ -1432,7 +1432,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             }
         }else{
             
-            //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
+                        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
     } WithFaileBlock:^{
         
@@ -1478,7 +1478,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [self getBankListInfo];
             }else if ([type isEqualToString:@"10"]){
             
-                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_p2P_url,_bosAcctActivate_url,@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 p2pVC.isCheck = YES;
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -1493,7 +1493,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     } WithFaileBlock:^{
         
     }];
-    [complianceViewModel saveLoanCase:type CaseInfo:caseInfo];
+    [complianceViewModel saveLoanCase:type CaseInfo:caseInfo Period:_userSelectNum.description PurposeSelect:_purposeSelect];
 }
 
 #pragma mark 获取银行卡列表信息

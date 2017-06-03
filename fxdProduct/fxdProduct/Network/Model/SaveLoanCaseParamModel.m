@@ -10,6 +10,6 @@
 
 @implementation SaveLoanCaseParamModel
 
-@synthesize case_id_,type_;
+@synthesize case_id_,type_,period_,description_,client_;
 
 @end

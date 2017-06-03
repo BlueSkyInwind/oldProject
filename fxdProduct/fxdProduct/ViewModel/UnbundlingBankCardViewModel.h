@@ -13,6 +13,7 @@
  合规发送验证码
  */
 
--(void)sendSmsSHService:(NSString *)bankNo BusiType:(NSString *)busi_type SmsType:(NSString *)sms_type;
+-(void)sendSmsSHServiceBankNo:(NSString *)bankNo BusiType:(NSString *)busi_type SmsType:(NSString *)sms_type Mobile:(NSString *)mobile;
 
+/**合规更换银行卡*/
 @end

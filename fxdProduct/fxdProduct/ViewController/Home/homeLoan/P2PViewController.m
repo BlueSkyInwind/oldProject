@@ -135,16 +135,12 @@
 //        }
 //    }
     
-    if([webView.URL.absoluteString containsString:_toCash_url]){
-//        [self addBidInfoService];
-    }
     
     if ([request.URL.absoluteString isEqualToString:_transition_url]&&![request.URL.absoluteString isEqualToString:self.urlStr]) {
         decisionHandler(WKNavigationActionPolicyAllow);
 
         LoanMoneyViewController *controller = [LoanMoneyViewController new];
         [self.navigationController pushViewController:controller animated:YES];
-//        [self checkP2PUserState];
     }else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
@@ -158,6 +154,7 @@
         
             for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                 if ([vc isKindOfClass:[RepayDetailViewController class]]) {
+                    
                     [self.navigationController popToViewController:vc animated:YES];
                 }
             }
@@ -189,193 +186,193 @@
     
 }
 
-#pragma mark 跳转页面
--(void)gotoCheckMoney{
-
-    LoanMoneyViewController *controller = [[LoanMoneyViewController alloc]initWithNibName:@"LoanMoneyViewController" bundle:nil];
-    controller.intStautes = 1;
-    [self.navigationController pushViewController:controller animated:YES];
-    
-}
-
-
-#pragma mark  用户标的状态查询
--(void)getBidStatus:(GetCaseInfo *)caseInfo{
-
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_getBidStatus_url] parameters:@{@"from_case_id_":caseInfo.result.from_case_id_} finished:^(EnumServerStatus status, id object) {
-        getBidStatus *model = [getBidStatus yy_modelWithJSON:object];
-        
-        if ([model.status isEqualToString:@"3"]||[model.status isEqualToString:@"4"]) {
-            
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-#pragma mark  标的录入
--(void)addBidInfoService{
-
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
-        if ([caseInfo.flag isEqualToString:@"0000"]) {
-            [self addBildInfo:caseInfo];
-        } else {
-            
-        }
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-
-}
-
-#pragma mark  fxd用户状态查询
--(void)fxdQryUserStatus{
-
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_qryUserStatus_url] parameters:@{@"client_":@"1"} finished:^(EnumServerStatus status, id object) {
-        
-        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:object];
-        if ([model .result.appcode isEqualToString:@"1"]) {
-            if ([model.result.flg isEqualToString:@"2"]) {//未注册
-                
-                
-                
-            }else if ([model.result.flg isEqualToString:@"3"]){//待激活
-            
-            }else if ([model.result.flg isEqualToString:@"6"]){//正常用户
-            
-            }
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
--(void)checkP2PUserState{
-
-    NSDictionary *paramDic = @{@"client_":@"1",@"form_":@"2",@"form_user_id_":[Utility sharedUtility].userInfo.account_id,@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,@"id_number_":[Utility sharedUtility].userInfo.userIDNumber,@"user_contacter":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_contacter"]],@"user_info":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_info"]],@"user_type_":@"J"};
-    
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_accountHSService_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        
-        //        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-        AccountHSServiceModel *model = [AccountHSServiceModel yy_modelWithJSON:object];
-        if ([model.appcode isEqualToString:@"1"]) {
-            
-            //                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.data.appmsg];
-            
-            if ([model.data.flg isEqualToString:@"2"]||[model.data.flg isEqualToString:@"5"]) {  //2、未开户 3、待激活 4、冻
-                
-            }else if ([model.data.flg isEqualToString:@"3"]){
-                
-            }else if ([model.data.flg isEqualToString:@"6"]){
-                
-                for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
-                        if ([vc isKindOfClass:[CheckViewController class]]) {
-                            [self.navigationController popToViewController:vc animated:YES];
-                        }
-                    }
-                
-            }
-        }else{
-            
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.data.appmsg];
-            
-        }
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-
-}
-
-- (void)checkP2PUserState1
-{
-    NSDictionary *paramDic = @{@"user_info":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_info"]],
-                               @"user_contacter":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_contacter"]],
-                               @"mobile_":[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"mobile_"],
-                               @"id_number_":[Utility sharedUtility].userInfo.userIDNumber};
-    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_drawService_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        DrawService *drawServiceParse = [DrawService yy_modelWithJSON:object];
-        //                        drawServiceParse.data.flg = @"4";
-        //开户
-        if ([drawServiceParse.data.flg isEqualToString:@"2"]) {
-//            NSString *url = [NSString stringWithFormat:@"%@%@?from_user_id_=%@&from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&RetUrl=%@",_P2P_url,_register_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url];
-//            self.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-//            [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
-//            [_webview reload];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        //绑卡
-        if ([drawServiceParse.data.flg isEqualToString:@"3"]) {
-            P2PBindCardViewController *p2pBindCardVC = [[P2PBindCardViewController alloc] init];
-            p2pBindCardVC.uploadP2PUserInfo = _uploadP2PUserInfo;
-            p2pBindCardVC.userSelectNum = _userSelectNum;
-            [self.navigationController pushViewController:p2pBindCardVC animated:YES];
-        }
-        //发标
-        if ([drawServiceParse.data.flg isEqualToString:@"4"]) {
-            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-                DLog(@"%@",object);
-                GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
-                if ([caseInfo.flag isEqualToString:@"0000"]) {
-                    [self addBildInfo:caseInfo];
-                } else {
-                    
-                }
-                
-            } failure:^(EnumServerStatus status, id object) {
-                
-            }];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
+//#pragma mark 跳转页面
+//-(void)gotoCheckMoney{
+//
+//    LoanMoneyViewController *controller = [[LoanMoneyViewController alloc]initWithNibName:@"LoanMoneyViewController" bundle:nil];
+//    controller.intStautes = 1;
+//    [self.navigationController pushViewController:controller animated:YES];
+//    
+//}
 
 
-- (void)addBildInfo:(GetCaseInfo *)caseInfo
-{
-    
-    NSDictionary *paramDic = @{@"product_id_":caseInfo.result.product_id_,
-                               @"auditor_":caseInfo.result.auditor_,
-                               @"desc_":caseInfo.result.desc_,
-                               @"amount_":caseInfo.result.amount_,
-                               @"period_":_userSelectNum,
-                               @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,
-                               @"title_":caseInfo.result.title_,
-                               @"from_":caseInfo.result.from_,
-                               @"client_":caseInfo.result.client_,
-                               @"from_case_id_":caseInfo.result.from_case_id_,
-                               @"description_":caseInfo.result.description_,
-                               @"invest_days_":caseInfo.result.invest_days_};
-    
-    NSLog(@"=========%@",paramDic);
-    
-    //    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_addBidInfo_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
-    
-    NSString *url = [NSString stringWithFormat:@"%@%@",_P2P_url,_addBidInfo_url];
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DrawService *model = [DrawService yy_modelWithJSON:object];
-        if ([model.appcode isEqualToString:@"1"]) {
-            //            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"发标成功"];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        if ([model.appcode isEqualToString:@"-1"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.appmsg];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-            //            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"发标成功"];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
+//#pragma mark  用户标的状态查询
+//-(void)getBidStatus:(GetCaseInfo *)caseInfo{
+//
+//    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_getBidStatus_url] parameters:@{@"from_case_id_":caseInfo.result.from_case_id_} finished:^(EnumServerStatus status, id object) {
+//        getBidStatus *model = [getBidStatus yy_modelWithJSON:object];
+//        
+//        if ([model.status isEqualToString:@"3"]||[model.status isEqualToString:@"4"]) {
+//            
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
+//}
+//#pragma mark  标的录入
+//-(void)addBidInfoService{
+//
+//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+//        DLog(@"%@",object);
+//        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
+//        if ([caseInfo.flag isEqualToString:@"0000"]) {
+//            [self addBildInfo:caseInfo];
+//        } else {
+//            
+//        }
+//        
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
+//
+//}
+
+//#pragma mark  fxd用户状态查询
+//-(void)fxdQryUserStatus{
+//
+//    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_qryUserStatus_url] parameters:@{@"client_":@"1"} finished:^(EnumServerStatus status, id object) {
+//        
+//        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:object];
+//        if ([model .result.appcode isEqualToString:@"1"]) {
+//            if ([model.result.flg isEqualToString:@"2"]) {//未注册
+//                
+//                
+//                
+//            }else if ([model.result.flg isEqualToString:@"3"]){//待激活
+//            
+//            }else if ([model.result.flg isEqualToString:@"6"]){//正常用户
+//            
+//            }
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
+//}
+
+//-(void)checkP2PUserState{
+//
+//    NSDictionary *paramDic = @{@"client_":@"1",@"form_":@"2",@"form_user_id_":[Utility sharedUtility].userInfo.account_id,@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,@"id_number_":[Utility sharedUtility].userInfo.userIDNumber,@"user_contacter":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_contacter"]],@"user_info":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_info"]],@"user_type_":@"J"};
+//    
+//    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_accountHSService_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        
+//        //        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+//        AccountHSServiceModel *model = [AccountHSServiceModel yy_modelWithJSON:object];
+//        if ([model.appcode isEqualToString:@"1"]) {
+//            
+//            //                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.data.appmsg];
+//            
+//            if ([model.data.flg isEqualToString:@"2"]||[model.data.flg isEqualToString:@"5"]) {  //2、未开户 3、待激活 4、冻
+//                
+//            }else if ([model.data.flg isEqualToString:@"3"]){
+//                
+//            }else if ([model.data.flg isEqualToString:@"6"]){
+//                
+//                for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+//                        if ([vc isKindOfClass:[CheckViewController class]]) {
+//                            [self.navigationController popToViewController:vc animated:YES];
+//                        }
+//                    }
+//                
+//            }
+//        }else{
+//            
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.data.appmsg];
+//            
+//        }
+//        
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
+//
+//}
+
+//- (void)checkP2PUserState1
+//{
+//    NSDictionary *paramDic = @{@"user_info":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_info"]],
+//                               @"user_contacter":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_contacter"]],
+//                               @"mobile_":[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"mobile_"],
+//                               @"id_number_":[Utility sharedUtility].userInfo.userIDNumber};
+//    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_drawService_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
+//    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        DLog(@"%@",object);
+//        DrawService *drawServiceParse = [DrawService yy_modelWithJSON:object];
+//        //                        drawServiceParse.data.flg = @"4";
+//        //开户
+//        if ([drawServiceParse.data.flg isEqualToString:@"2"]) {
+////            NSString *url = [NSString stringWithFormat:@"%@%@?from_user_id_=%@&from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&RetUrl=%@",_P2P_url,_register_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url];
+////            self.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+////            [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
+////            [_webview reload];
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }
+//        //绑卡
+//        if ([drawServiceParse.data.flg isEqualToString:@"3"]) {
+//            P2PBindCardViewController *p2pBindCardVC = [[P2PBindCardViewController alloc] init];
+//            p2pBindCardVC.uploadP2PUserInfo = _uploadP2PUserInfo;
+//            p2pBindCardVC.userSelectNum = _userSelectNum;
+//            [self.navigationController pushViewController:p2pBindCardVC animated:YES];
+//        }
+//        //发标
+//        if ([drawServiceParse.data.flg isEqualToString:@"4"]) {
+//            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+//                DLog(@"%@",object);
+//                GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
+//                if ([caseInfo.flag isEqualToString:@"0000"]) {
+//                    [self addBildInfo:caseInfo];
+//                } else {
+//                    
+//                }
+//                
+//            } failure:^(EnumServerStatus status, id object) {
+//                
+//            }];
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
+//}
+
+
+//- (void)addBildInfo:(GetCaseInfo *)caseInfo
+//{
+//    
+//    NSDictionary *paramDic = @{@"product_id_":caseInfo.result.product_id_,
+//                               @"auditor_":caseInfo.result.auditor_,
+//                               @"desc_":caseInfo.result.desc_,
+//                               @"amount_":caseInfo.result.amount_,
+//                               @"period_":_userSelectNum,
+//                               @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,
+//                               @"title_":caseInfo.result.title_,
+//                               @"from_":caseInfo.result.from_,
+//                               @"client_":caseInfo.result.client_,
+//                               @"from_case_id_":caseInfo.result.from_case_id_,
+//                               @"description_":caseInfo.result.description_,
+//                               @"invest_days_":caseInfo.result.invest_days_};
+//    
+//    NSLog(@"=========%@",paramDic);
+//    
+//    //    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_addBidInfo_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
+//    
+//    NSString *url = [NSString stringWithFormat:@"%@%@",_P2P_url,_addBidInfo_url];
+//    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        DrawService *model = [DrawService yy_modelWithJSON:object];
+//        if ([model.appcode isEqualToString:@"1"]) {
+//            //            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"发标成功"];
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+//        }
+//        if ([model.appcode isEqualToString:@"-1"]) {
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.appmsg];
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+//        }
+//        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+//            //            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"发标成功"];
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+//        }
+//        
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
+//}
 
 //- (void)addBildInfo:(GetCaseInfo *)caseInfo
 //{
@@ -413,52 +410,52 @@
 }
 
 
-#pragma mark ->进件信息
--(void)PostSubmitUrl
-{
-    //提款
-    NSDictionary *paramDic = [self getSubmitInfo];
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_drawApply_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
-                LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
-                [self.navigationController pushViewController:loanVC animated:YES];
-            } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-            }
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-    
-}
-
--(NSDictionary *)getSubmitInfo
-{
-    NSString *bankNo =[_dataArray[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    NSDictionary *paramDic;
-    if ([self.product_id isEqualToString:@"P001004"]) {
-        paramDic = @{@"card_no_":bankNo,
-                     @"card_bank_":_dataArray[1],
-                     @"bank_reserve_phone_":[_dataArray objectAtIndex:2],
-                     @"periods_":@2,
-                     @"loan_for_":_purposeSelect,
-                     @"verify_code_":_dataArray[3],
-                     @"drawing_amount_":_drawAmount};
-    }
-    if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001005"]) {
-        paramDic = @{@"card_no_":bankNo,
-                     @"card_bank_":_bankCodeNUm,
-                     @"bank_reserve_phone_":[_dataArray objectAtIndex:2],
-                     @"periods_":@(_periodSelect),
-                     @"loan_for_":_purposeSelect,
-                     @"verify_code_":_dataArray[3],
-                     @"drawing_amount_":_drawAmount};
-    }
-    
-    return paramDic;
-}
+//#pragma mark ->进件信息
+//-(void)PostSubmitUrl
+//{
+//    //提款
+//    NSDictionary *paramDic = [self getSubmitInfo];
+//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_drawApply_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        if (status == Enum_SUCCESS) {
+//            if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
+//                LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
+//                [self.navigationController pushViewController:loanVC animated:YES];
+//            } else {
+//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+//            }
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
+//    
+//}
+//
+//-(NSDictionary *)getSubmitInfo
+//{
+//    NSString *bankNo =[_dataArray[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    
+//    NSDictionary *paramDic;
+//    if ([self.product_id isEqualToString:@"P001004"]) {
+//        paramDic = @{@"card_no_":bankNo,
+//                     @"card_bank_":_dataArray[1],
+//                     @"bank_reserve_phone_":[_dataArray objectAtIndex:2],
+//                     @"periods_":@2,
+//                     @"loan_for_":_purposeSelect,
+//                     @"verify_code_":_dataArray[3],
+//                     @"drawing_amount_":_drawAmount};
+//    }
+//    if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001005"]) {
+//        paramDic = @{@"card_no_":bankNo,
+//                     @"card_bank_":_bankCodeNUm,
+//                     @"bank_reserve_phone_":[_dataArray objectAtIndex:2],
+//                     @"periods_":@(_periodSelect),
+//                     @"loan_for_":_purposeSelect,
+//                     @"verify_code_":_dataArray[3],
+//                     @"drawing_amount_":_drawAmount};
+//    }
+//    
+//    return paramDic;
+//}
 
 
 /*

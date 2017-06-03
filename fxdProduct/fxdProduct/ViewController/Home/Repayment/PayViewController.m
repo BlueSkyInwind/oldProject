@@ -114,7 +114,7 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
        
         PayMethodCell *cell = [tableView dequeueReusableCellWithIdentifier:methodCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (_payType == PayTypeGetMoneyToCard) {
             cell.PayTitleLabel.text = @"银行卡";
         }
@@ -122,6 +122,7 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
             
             cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_bankName,_banNum];
         }else{
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (_cardInfo) {
                 cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_cardInfo.bankName,_cardInfo.tailNumber];
             } else {

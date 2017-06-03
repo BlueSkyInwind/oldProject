@@ -13,7 +13,7 @@
 /**/
 @property (nonatomic,copy)NSString *flag;
 
-
+@property (nonatomic,copy)NSString *msg;
 @property (nonatomic,strong)QryUserStatusResultModel *result;
 
 @end

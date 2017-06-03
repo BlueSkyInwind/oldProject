@@ -21,6 +21,7 @@
 #import <MGBankCard/MGBankCard.h>
 #import "SendSmsModel.h"
 #import "P2PViewController.h"
+#import "UnbundlingBankCardViewModel.h"
 #define redColor rgb(252, 0, 6)
 
 @interface BankCardViewController ()<UITableViewDataSource,UITableViewDelegate,
@@ -528,33 +529,55 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    NSDictionary *parDic = @{@"mobile_":dataListAll3[2],
-                             @"busi_type_":@"user_register",
-                             @"card_number_":bankNo
-                             };
-    
-    NSLog(@"==============%@",parDic);
-    if (parDic) {
+    UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
+    [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
         
-        [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:parDic finished:^(EnumServerStatus status, id object) {
-            SendSmsModel *sendSmsModel = [SendSmsModel yy_modelWithJSON:object];
+        SendSmsModel *sendSmsModel = [SendSmsModel yy_modelWithJSON:returnValue];
+        
+        if ([sendSmsModel.appcode isEqualToString:@"1"]) {
+            [_sureBtn setEnabled:YES];
+            [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
+            _sms_seq = sendSmsModel.data.sms_seq_;
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
             
-            if ([sendSmsModel.appcode isEqualToString:@"1"]) {
-                [_sureBtn setEnabled:YES];
-                [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
-                _sms_seq = sendSmsModel.data.sms_seq_;
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
-                
-            } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
-            }
-            
-        } failure:^(EnumServerStatus status, id object) {
-            
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
-        }];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
+        }
+        
+    } WithFaileBlock:^{
+        
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
+    }];
+    [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"user_register" SmsType:nil Mobile:dataListAll3[2]];
     
-    }
+    
+//    NSDictionary *parDic = @{@"mobile_":dataListAll3[2],
+//                             @"busi_type_":@"user_register",
+//                             @"card_number_":bankNo
+//                             };
+//    
+//    NSLog(@"==============%@",parDic);
+//    if (parDic) {
+//        
+//        [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:parDic finished:^(EnumServerStatus status, id object) {
+//            SendSmsModel *sendSmsModel = [SendSmsModel yy_modelWithJSON:object];
+//            
+//            if ([sendSmsModel.appcode isEqualToString:@"1"]) {
+//                [_sureBtn setEnabled:YES];
+//                [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
+//                _sms_seq = sendSmsModel.data.sms_seq_;
+//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
+//                
+//            } else {
+//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
+//            }
+//            
+//        } failure:^(EnumServerStatus status, id object) {
+//            
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
+//        }];
+//    
+//    }
 }
 
 #pragma mark 发薪贷的短信发送
@@ -770,7 +793,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
 //    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,@"ABC",bankNo,dataListAll3[3],_sms_seq];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=2&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@",_p2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,bankName,bankNo,code,sms_seq];
+    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=2&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,bankName,bankNo,code,sms_seq];
     NSLog(@"%@",url);
     P2PViewController *p2pVC = [[P2PViewController alloc] init];
     p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];

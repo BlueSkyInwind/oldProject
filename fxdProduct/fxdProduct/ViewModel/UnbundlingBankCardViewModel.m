@@ -10,17 +10,17 @@
 #import "SendSmsParamModel.h"
 @implementation UnbundlingBankCardViewModel
 
--(void)sendSmsSHService:(NSString *)bankNo BusiType:(NSString *)busi_type SmsType:(NSString *)sms_type{
+-(void)sendSmsSHServiceBankNo:(NSString *)bankNo BusiType:(NSString *)busi_type SmsType:(NSString *)sms_type Mobile:(NSString *)mobile{
 
     SendSmsParamModel *sendSmsParamModel = [[SendSmsParamModel alloc]init];
     sendSmsParamModel.busi_type_ = busi_type;
     sendSmsParamModel.card_number_ = bankNo;
-    sendSmsParamModel.mobile_ = [Utility sharedUtility].userInfo.userMobilePhone;
+    sendSmsParamModel.mobile_ = mobile;
     sendSmsParamModel.sms_type_ = sms_type;
     sendSmsParamModel.from_mobile_ = [Utility sharedUtility].userInfo.userMobilePhone;
     
     NSDictionary * paramDic  = [sendSmsParamModel toDictionary];
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {
             self.returnBlock(object);

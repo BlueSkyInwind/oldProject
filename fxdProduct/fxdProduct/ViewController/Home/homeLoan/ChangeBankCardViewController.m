@@ -17,6 +17,7 @@
 #import "WTCameraViewController.h"
 #import "CheckViewController.h"
 #import "RTRootNavigationController.h"
+#import "UnbundlingBankCardViewModel.h"
 @interface ChangeBankCardViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,WTCameraDelegate,BankTableViewSelectDelegate>
 {
 
@@ -191,39 +192,60 @@
 
 -(void)senderSms{
 
-    NSDictionary *paramDic = [self getParamDic];
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-
-        SendSmsModel *model = [SendSmsModel yy_modelWithJSON:object];
+    NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
+    [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        SendSmsModel *model = [SendSmsModel yy_modelWithJSON:returnValue];
         if ([model.appcode isEqualToString:@"1"]) {
             [_sureBtn setEnabled:YES];
             _sms_seq = model.data.sms_seq_;
             [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
         }else{
-
+            
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+        
+    } WithFaileBlock:^{
+        
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
+        
     }];
+    [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"rebind" SmsType:@"N" Mobile:dataListAll3[2]];
+//    NSDictionary *paramDic = [self getParamDic];
+//    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//
+//        SendSmsModel *model = [SendSmsModel yy_modelWithJSON:object];
+//        if ([model.appcode isEqualToString:@"1"]) {
+//            [_sureBtn setEnabled:YES];
+//            _sms_seq = model.data.sms_seq_;
+//            [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
+//        }else{
+//
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
+//    }];
 
 }
 
-#pragma  mark 获取验证码的参数
--(NSDictionary *)getParamDic{
-
-     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSDictionary *paramDic;
-    paramDic = @{@"busi_type_":@"rebind",
-                 @"card_number_":bankNo,
-                 @"mobile_":dataListAll3[2],
-                 @"sms_type_":@"N",
-                 @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone
-                 };
-    return paramDic;
-
-}
+//#pragma  mark 获取验证码的参数
+//-(NSDictionary *)getParamDic{
+//
+//     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    NSDictionary *paramDic;
+//    paramDic = @{@"busi_type_":@"rebind",
+//                 @"card_number_":bankNo,
+//                 @"mobile_":dataListAll3[2],
+//                 @"sms_type_":@"N",
+//                 @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone
+//                 };
+//    return paramDic;
+//
+//}
 
 
 
@@ -435,7 +457,7 @@
 -(void)changeBank{
 
     NSDictionary *paramDic = [self changeBankParamDic];
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         BankCardsModel *model = [BankCardsModel yy_modelWithJSON:object];
         if ([model.appcode isEqualToString:@"1"]) {
 

@@ -24,13 +24,13 @@
  获取fxd合规用户状态
  */
 
--(void)getUserStatus:(GetCaseInfo *)caseInfo;;
+-(void)getUserStatus:(GetCaseInfo *)caseInfo;
 
 /**
  提款申请件记录
  */
 
--(void)saveLoanCase:(NSString *)type CaseInfo:(GetCaseInfo *)caseInfo;
+-(void)saveLoanCase:(NSString *)type CaseInfo:(GetCaseInfo *)caseInfo Period:(NSString *)period PurposeSelect:(NSString *)purposeSelect;
 
 /**
  发标前查询进件

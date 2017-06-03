@@ -1171,6 +1171,8 @@
 		CC0DFB8F1EA5B1090024841A /* GesturesPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */; };
 		CC0DFB901EA5B1090024841A /* HomePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636F11D77BA3000E93289 /* HomePopView.xib */; };
 		CC0DFB911EA5B1090024841A /* HomeBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E1ECDE1E1CD3D80079A2F8 /* HomeBottomCell.xib */; };
+		CC2A4D091EE13260000A38DC /* QryUserStatusParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2A4D081EE13260000A38DC /* QryUserStatusParamModel.m */; };
+		CC2A4D0A1EE13260000A38DC /* QryUserStatusParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2A4D081EE13260000A38DC /* QryUserStatusParamModel.m */; };
 		CC31978F1ED911980083F263 /* WhiteRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC31978E1ED911980083F263 /* WhiteRefuseView.m */; };
 		CC3197901ED911980083F263 /* WhiteRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC31978E1ED911980083F263 /* WhiteRefuseView.m */; };
 		CC3197971ED926B90083F263 /* RefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3197951ED926B90083F263 /* RefuseView.m */; };
@@ -2303,6 +2305,8 @@
 		CC05591D1EB9A36D00733C2E /* DisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayCell.m; sourceTree = "<group>"; };
 		CC05591E1EB9A36D00733C2E /* DisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisplayCell.xib; sourceTree = "<group>"; };
 		CC0DFB971EA5B1090024841A /* fxdProductDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fxdProductDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC2A4D071EE13260000A38DC /* QryUserStatusParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QryUserStatusParamModel.h; sourceTree = "<group>"; };
+		CC2A4D081EE13260000A38DC /* QryUserStatusParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QryUserStatusParamModel.m; sourceTree = "<group>"; };
 		CC31978D1ED911980083F263 /* WhiteRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteRefuseView.h; sourceTree = "<group>"; };
 		CC31978E1ED911980083F263 /* WhiteRefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteRefuseView.m; sourceTree = "<group>"; };
 		CC3197941ED926B90083F263 /* RefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefuseView.h; sourceTree = "<group>"; };
@@ -5031,6 +5035,8 @@
 			children = (
 				CCF43AFC1EDE5D4A00CFD72C /* QryUserStatusModel.h */,
 				CCF43AFD1EDE5D4A00CFD72C /* QryUserStatusModel.m */,
+				CC2A4D071EE13260000A38DC /* QryUserStatusParamModel.h */,
+				CC2A4D081EE13260000A38DC /* QryUserStatusParamModel.m */,
 			);
 			name = QryUserStatus;
 			sourceTree = "<group>";
@@ -5846,6 +5852,7 @@
 				637636F01D77BA0800E93289 /* HomePopView.m in Sources */,
 				6300CC0B1E4AE5FD0012B05A /* CareerParse.m in Sources */,
 				63FC24F61D98F7E9006F58F3 /* YYTextArchiver.m in Sources */,
+				CC2A4D091EE13260000A38DC /* QryUserStatusParamModel.m in Sources */,
 				638A16FD1E517D9F00AB8AB6 /* UIBezierPath.m in Sources */,
 				636B30E91DD41B330014DB7B /* Approval.m in Sources */,
 				63F5AD981E238736001BDF44 /* LoanSureSecondViewController.m in Sources */,
@@ -6297,6 +6304,7 @@
 				CC0DFA521EA5B1090024841A /* JXLMessagePrse.m in Sources */,
 				CC0DFA531EA5B1090024841A /* YYTextAsyncLayer.m in Sources */,
 				CCEEB4181ED6E9DE00588B6A /* BoAcctActivateModel.m in Sources */,
+				CC2A4D0A1EE13260000A38DC /* QryUserStatusParamModel.m in Sources */,
 				CC0DFA541EA5B1090024841A /* HomePopView.m in Sources */,
 				CC0DFA551EA5B1090024841A /* CareerParse.m in Sources */,
 				CC0DFA561EA5B1090024841A /* YYTextArchiver.m in Sources */,

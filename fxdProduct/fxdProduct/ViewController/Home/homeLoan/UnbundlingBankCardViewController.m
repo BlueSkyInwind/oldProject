@@ -11,6 +11,8 @@
 #import "SendSmsModel.h"
 #import "ChangeBankCardViewController.h"
 #import "QueryCardInfo.h"
+#import "UnbundlingBankCardViewModel.h"
+#import "CheckViewModel.h"
 @interface UnbundlingBankCardViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 {
@@ -118,24 +120,43 @@
     
     [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
     _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
-    
-    NSDictionary *paramDic = [self getParamDic];
-    
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-       
-        SendSmsModel *model = [SendSmsModel yy_modelWithJSON:object];
+    NSString *bankNo = _queryCardInfo.data.UsrCardInfolist.CardId;
+    UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
+    [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        SendSmsModel *model = [SendSmsModel yy_modelWithJSON:returnValue];
         if ([model.appcode isEqualToString:@"1"]) {
             
             _sms_seq = model.data.sms_seq_;
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
         }else{
-        
+            
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+        
+    } WithFaileBlock:^{
         
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
+        
     }];
+    [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"rebind" SmsType:@"O" Mobile:[Utility sharedUtility].userInfo.userMobilePhone];
+//    NSDictionary *paramDic = [self getParamDic];
+//    
+//    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//       
+//        SendSmsModel *model = [SendSmsModel yy_modelWithJSON:object];
+//        if ([model.appcode isEqualToString:@"1"]) {
+//            
+//            _sms_seq = model.data.sms_seq_;
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
+//        }else{
+//        
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
+//    }];
     
 }
 
@@ -239,18 +260,27 @@
 //    [self getBankDetail];
 }
 
-#pragma mark 获取银行卡信息
--(void)getBankDetail{
-
-    
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
-        
-        _queryCadModel = [QueryCardInfo yy_modelWithJSON:object];
-        [_bankTable reloadData];
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
+//#pragma mark 获取银行卡信息
+//-(void)getBankDetail{
+//
+//    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+//    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+//        
+//        _queryCadModel = [QueryCardInfo yy_modelWithJSON:returnValue];
+//        [_bankTable reloadData];
+//        
+//    } WithFaileBlock:^{
+//        
+//    }];
+//    [checkBankViewModel queryCardInfo];
+////    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
+////        
+////        _queryCadModel = [QueryCardInfo yy_modelWithJSON:object];
+////        [_bankTable reloadData];
+////    } failure:^(EnumServerStatus status, id object) {
+////        
+////    }];
+//}
 
 
 #pragma mark 银行卡名字的转换
