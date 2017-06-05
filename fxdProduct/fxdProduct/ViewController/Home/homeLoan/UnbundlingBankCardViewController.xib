@@ -22,15 +22,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VIj-N0-VAM">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="521"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="395"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="521" id="AuS-aG-NXk"/>
+                        <constraint firstAttribute="height" constant="395" id="AuS-aG-NXk"/>
                         <constraint firstAttribute="width" constant="375" id="lwg-u0-x45"/>
                     </constraints>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcx-4d-kXl">
-                    <rect key="frame" x="40" y="556" width="295" height="44"/>
+                    <rect key="frame" x="40" y="445" width="295" height="44"/>
                     <color key="backgroundColor" red="0.0" green="0.53333333329999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="hi9-ZY-nkZ"/>
@@ -45,11 +45,11 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="jcx-4d-kXl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="33e-dw-ef9"/>
-                <constraint firstAttribute="bottom" secondItem="VIj-N0-VAM" secondAttribute="bottom" constant="146" id="FhK-ao-71g"/>
+                <constraint firstAttribute="bottom" secondItem="VIj-N0-VAM" secondAttribute="bottom" constant="272" id="FhK-ao-71g"/>
                 <constraint firstAttribute="trailing" secondItem="VIj-N0-VAM" secondAttribute="trailing" id="HY6-NC-lkf"/>
                 <constraint firstItem="VIj-N0-VAM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PHi-5o-lAm"/>
                 <constraint firstItem="VIj-N0-VAM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dcc-mo-yCX"/>
-                <constraint firstAttribute="bottom" secondItem="jcx-4d-kXl" secondAttribute="bottom" constant="67" id="j2f-F7-qao"/>
+                <constraint firstAttribute="bottom" secondItem="jcx-4d-kXl" secondAttribute="bottom" constant="178" id="j2f-F7-qao"/>
                 <constraint firstAttribute="trailing" secondItem="jcx-4d-kXl" secondAttribute="trailing" constant="40" id="see-xB-o9T"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

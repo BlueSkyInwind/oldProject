@@ -1221,6 +1221,8 @@
 		CCE3BE241ED2D61C004C35A4 /* OpenAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE221ED2D61C004C35A4 /* OpenAccount.m */; };
 		CCE3BE281ED2D655004C35A4 /* QueryCardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE271ED2D655004C35A4 /* QueryCardInfo.m */; };
 		CCE3BE291ED2D655004C35A4 /* QueryCardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE271ED2D655004C35A4 /* QueryCardInfo.m */; };
+		CCEC9C931EE5095000452291 /* BankCardsParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEC9C921EE5095000452291 /* BankCardsParamModel.m */; };
+		CCEC9C941EE5095000452291 /* BankCardsParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEC9C921EE5095000452291 /* BankCardsParamModel.m */; };
 		CCEEB4171ED6E9DE00588B6A /* BoAcctActivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB4161ED6E9DE00588B6A /* BoAcctActivateModel.m */; };
 		CCEEB4181ED6E9DE00588B6A /* BoAcctActivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB4161ED6E9DE00588B6A /* BoAcctActivateModel.m */; };
 		CCEEB41C1ED6EA6800588B6A /* QueryBidStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB41B1ED6EA6800588B6A /* QueryBidStatusModel.m */; };
@@ -2360,6 +2362,8 @@
 		CCE3BE221ED2D61C004C35A4 /* OpenAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenAccount.m; sourceTree = "<group>"; };
 		CCE3BE261ED2D655004C35A4 /* QueryCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCardInfo.h; sourceTree = "<group>"; };
 		CCE3BE271ED2D655004C35A4 /* QueryCardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryCardInfo.m; sourceTree = "<group>"; };
+		CCEC9C911EE5095000452291 /* BankCardsParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardsParamModel.h; sourceTree = "<group>"; };
+		CCEC9C921EE5095000452291 /* BankCardsParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardsParamModel.m; sourceTree = "<group>"; };
 		CCEEB4151ED6E9DE00588B6A /* BoAcctActivateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoAcctActivateModel.h; sourceTree = "<group>"; };
 		CCEEB4161ED6E9DE00588B6A /* BoAcctActivateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoAcctActivateModel.m; sourceTree = "<group>"; };
 		CCEEB41A1ED6EA6800588B6A /* QueryBidStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryBidStatusModel.h; sourceTree = "<group>"; };
@@ -5030,6 +5034,8 @@
 			children = (
 				CCE3BE1C1ED2D424004C35A4 /* BankCardsModel.h */,
 				CCE3BE1D1ED2D424004C35A4 /* BankCardsModel.m */,
+				CCEC9C911EE5095000452291 /* BankCardsParamModel.h */,
+				CCEC9C921EE5095000452291 /* BankCardsParamModel.m */,
 			);
 			name = BankCards;
 			sourceTree = "<group>";
@@ -5882,6 +5888,7 @@
 				63FF48581B6F15DB009E384C /* BaseTabBarViewController.m in Sources */,
 				0F647E191BF1DD030002D2DF /* MyAboutOursViewController.m in Sources */,
 				6348310E1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m in Sources */,
+				CCEC9C931EE5095000452291 /* BankCardsParamModel.m in Sources */,
 				6395E2AA1BAFA14E00B7AFC2 /* FXDNetWorkManager.m in Sources */,
 				63553AF71E5D937600B2C1FF /* UserContactsViewController.m in Sources */,
 				63A24C5A1BE063A90036E8EF /* CoreArchive.m in Sources */,
@@ -6338,6 +6345,7 @@
 				CC0DFA451EA5B1090024841A /* EmptyUserData.m in Sources */,
 				CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */,
 				CC0DFA471EA5B1090024841A /* BaseTabBarViewController.m in Sources */,
+				CCEC9C941EE5095000452291 /* BankCardsParamModel.m in Sources */,
 				CC0DFA481EA5B1090024841A /* MyAboutOursViewController.m in Sources */,
 				CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */,
 				CC0DFA4A1EA5B1090024841A /* FXDNetWorkManager.m in Sources */,

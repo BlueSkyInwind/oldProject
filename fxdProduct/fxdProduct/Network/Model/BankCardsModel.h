@@ -11,8 +11,7 @@
 
 @interface BankCardsModel : NSObject
 
-//结果对照码   1发送成功 -1发送失败
-@property (nonatomic,copy)NSString *appcode;
+
 //结果描述
 @property (nonatomic,copy)NSString *appmsg;
 
@@ -25,5 +24,7 @@
 
 //结果标志   true false
 @property (nonatomic,copy)NSString *success;
+//结果对照码   1发送成功 -1发送失败
+@property (nonatomic,copy)NSString *appcode;
 
 @end

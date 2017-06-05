@@ -94,6 +94,7 @@
             [cell.btnSecory addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+            cell.textField.placeholder = @"验证码";
             cell.textField.enabled = YES;
             
         }else if (indexPath.row == 2){

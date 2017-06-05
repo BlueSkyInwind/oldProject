@@ -441,6 +441,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             repayMent.save_amount = _save_amount;
             repayMent.p2pBillModel = _p2pBillModel;
             repayMent.bills = _bills;
+            repayMent.product_id = _userStateParse.product_id;
             [self.navigationController pushViewController:repayMent animated:YES];
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请至少选择一期"];

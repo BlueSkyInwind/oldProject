@@ -66,9 +66,6 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
 
     [self dismissSemiModalView];
     self.changeBankBlock();
-//    [self dismissSemiModalView];
-//    UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
-//    [self.navigationController pushViewController:controller animated:YES];
     
 }
 
@@ -145,25 +142,30 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //    [self fatchCardInfo];
-    PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-    payMethodVC.bankModel = _bankCardModel;
-    
-    
-    if (_payType == PayTypeWeekPay || _payType == PayTypeCleanPay) {
-        payMethodVC.payMethod = PayMethodNormal;
-    } else {
-        payMethodVC.payMethod = PayMethodSelectBankCad;
-    }
-    payMethodVC.currentIndex = _banckCurrentIndex;
-    payMethodVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex){
-        if (cardInfo) {
-            _selectCardInfo = cardInfo;
-            _cardInfo = cardInfo;
+    if (!_isP2P) {
+        
+        PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
+        payMethodVC.bankModel = _bankCardModel;
+        
+        
+        if (_payType == PayTypeWeekPay || _payType == PayTypeCleanPay) {
+            payMethodVC.payMethod = PayMethodNormal;
+        } else {
+            payMethodVC.payMethod = PayMethodSelectBankCad;
         }
-        _banckCurrentIndex = currentIndex;
-        [self.myTableview reloadData];
-    };
-    [self.navigationController pushViewController:payMethodVC animated:YES];
+        payMethodVC.currentIndex = _banckCurrentIndex;
+        payMethodVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex){
+            if (cardInfo) {
+                _selectCardInfo = cardInfo;
+                _cardInfo = cardInfo;
+            }
+            _banckCurrentIndex = currentIndex;
+            [self.myTableview reloadData];
+        };
+        [self.navigationController pushViewController:payMethodVC animated:YES];
+        
+    }
+    
 }
 
 //- (void)fatchCardInfo

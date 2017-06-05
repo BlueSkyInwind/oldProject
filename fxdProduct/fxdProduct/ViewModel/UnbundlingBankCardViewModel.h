@@ -16,4 +16,7 @@
 -(void)sendSmsSHServiceBankNo:(NSString *)bankNo BusiType:(NSString *)busi_type SmsType:(NSString *)sms_type Mobile:(NSString *)mobile;
 
 /**合规更换银行卡*/
+
+-(void)bankCardsSHServiceParamArray:(NSMutableArray *)paramArray;
+
 @end

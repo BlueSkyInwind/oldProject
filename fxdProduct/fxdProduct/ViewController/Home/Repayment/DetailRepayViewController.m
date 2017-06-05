@@ -523,6 +523,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
             repayMent.cellSelectArr = _cellSelectArr;
             repayMent.save_amount = _save_amount;
             repayMent.p2pBillModel = _p2pBillDetail;
+            repayMent.product_id = _product_id;
             repayMent.bills = _bills;
             [self.navigationController pushViewController:repayMent animated:YES];
         } else {

@@ -456,47 +456,87 @@
 #pragma mark 点击确定按钮，更换银行卡
 -(void)changeBank{
 
-    NSDictionary *paramDic = [self changeBankParamDic];
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        BankCardsModel *model = [BankCardsModel yy_modelWithJSON:object];
-        if ([model.appcode isEqualToString:@"1"]) {
-
+    _ordsms_ext_ = @"666666AAAAAAAA";
+    _sms_seq = @"AAAAAAAA";
+    NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *banName = [self bankName:_bankCode];
+    NSMutableArray *paramArray = [NSMutableArray array];
+    [paramArray addObject:banName];
+    [paramArray addObject:bankNo];
+    [paramArray addObject:[Utility sharedUtility].userInfo.userMobilePhone];
+    [paramArray addObject:dataListAll3[2]];
+    [paramArray addObject:_ordsms_ext_];
+    [paramArray addObject:dataListAll3[3]];
+    [paramArray addObject:_sms_seq];
+    
+    
+    UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
+    [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        BankCardsModel *model = [BankCardsModel yy_modelWithJSON:returnValue];
+        if ([model.data.appcode isEqualToString:@"1"]) {
+            
+            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.appmsg];
             for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                 if ([vc isKindOfClass:[CheckViewController class]]) {
                     [self.navigationController popToViewController:vc animated:YES];
                 }
             }
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
+            
+            //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
         }else{
-        
+            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
         }
-
-    } failure:^(EnumServerStatus status, id object) {
-
+        
+    } WithFaileBlock:^{
+        
     }];
-
-}
-
-#pragma mark 更换银行卡参数
--(NSDictionary *)changeBankParamDic{
-
+    [unbundlingBankCardViewModel bankCardsSHServiceParamArray:paramArray];
     
-    _ordsms_ext_ = @"666666AAAAAAAA";
-    _sms_seq = @"AAAAAAAA";
-    NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *banName = [self bankName:_bankCode];
-    NSDictionary *paramDic = @{@"bank_code_":banName,
-                               @"card_number_":bankNo,
-                               @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,
-                               @"mobile_":dataListAll3[2],
-                               @"ordsms_ext_":_ordsms_ext_,
-                               @"sms_code_":dataListAll3[3],
-                               @"sms_seq_":_sms_seq,
-                               @"trade_type_":@"REBIND",
-                               };
-    return paramDic;
+//    NSDictionary *paramDic = [self changeBankParamDic];
+//    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        BankCardsModel *model = [BankCardsModel yy_modelWithJSON:object];
+//        if ([model.data.appcode isEqualToString:@"1"]) {
+//
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.appmsg];
+//            for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+//                if ([vc isKindOfClass:[CheckViewController class]]) {
+//                    [self.navigationController popToViewController:vc animated:YES];
+//                }
+//            }
+//            
+////            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
+//        }else{
+//        
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
+//        }
+//
+//    } failure:^(EnumServerStatus status, id object) {
+//
+//    }];
+
 }
+
+//#pragma mark 更换银行卡参数
+//-(NSDictionary *)changeBankParamDic{
+//
+//    
+//    _ordsms_ext_ = @"666666AAAAAAAA";
+//    _sms_seq = @"AAAAAAAA";
+//    NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    NSString *banName = [self bankName:_bankCode];
+//    NSDictionary *paramDic = @{@"bank_code_":banName,
+//                               @"card_number_":bankNo,
+//                               @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,
+//                               @"mobile_":dataListAll3[2],
+//                               @"ordsms_ext_":_ordsms_ext_,
+//                               @"sms_code_":dataListAll3[3],
+//                               @"sms_seq_":_sms_seq,
+//                               @"trade_type_":@"REBIND",
+//                               };
+//    return paramDic;
+//}
 
 #pragma mark 更改银行卡名称缩写
 -(NSString *)bankName:(NSString *)bankCode{

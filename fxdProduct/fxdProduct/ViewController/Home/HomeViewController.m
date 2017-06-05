@@ -649,6 +649,9 @@
             }else if ([model.applyFlag isEqualToString:@"0003"]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
             }else if ([model.applyFlag isEqualToString:@"0004"]){
+//                if ([model.applyStatus isEqualToString:@""]) {
+//                    model.applyStatus = @"21";
+//                }
                 switch ([model.applyStatus integerValue])
                 {
                     
@@ -710,6 +713,14 @@
                         [self.navigationController pushViewController:loanVc animated:YES];
                     }
                         break;
+//                        case 21:
+//                    {
+//                        LoanMoneyViewController *loanVc = [LoanMoneyViewController new];
+//                        loanVc.userStateModel = model;
+//                        [self.navigationController pushViewController:loanVc animated:YES];
+//                    }
+//                        break;
+                        
                     default:{
                         if ([productId isEqualToString:@"P001004"]) {
                             [self fatchRate:^(RateModel *rate) {
