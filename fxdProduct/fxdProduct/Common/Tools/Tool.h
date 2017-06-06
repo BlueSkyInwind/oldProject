@@ -43,6 +43,8 @@
 +(NSString *)EmptyObjectContainEmptyString:(id)object;
 //判断手机号是否有效
 + (BOOL)isMobileNumber:(NSString *)mobileNum;
+//判断输入密码是否有效
++(BOOL)isPasswordNumber:(NSString *)passWordNum;
 //得到加密后的参数
 + (NSDictionary *)getParameters:(id)params;
 //将加密后的数据解密后转换为字符串

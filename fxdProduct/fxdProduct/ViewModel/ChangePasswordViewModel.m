@@ -13,8 +13,9 @@
 
 -(void)fetchChangePassowrdCurrent:(NSString *)CurrentPassword new:(NSString *)newPassword{
     changePasswordParam *  changePassword = [[changePasswordParam alloc]init];
-    changePassword.mobile_phone_ =
+    changePassword.mobile_phone_ = [Utility sharedUtility].userInfo.userMobilePhone;
     changePassword.old_password_ = CurrentPassword;
+    changePassword.update_password_ = newPassword;
     
     NSDictionary * dic = [changePassword toDictionary];
     [self requestChangePassword:dic];

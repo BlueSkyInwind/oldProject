@@ -11,6 +11,7 @@
 #import "ChangePasswordViewModel.h"
 #import "BaseNavigationViewController.h"
 #import "LoginViewController.h"
+#import "ChangePasswordModel.h"
 @interface ChangePasswordViewController ()<UITableViewDelegate,UITableViewDataSource,UIViewControllerTransitioningDelegate>{
     
     NSString * oldPassword;
@@ -117,6 +118,21 @@
     __weak typeof (self) weakSelf = self;
     [changePasswordVM setBlockWithReturnBlock:^(id returnValue) {
         
+        NSLog(@"=========%@",returnValue);
+        
+        ChangePasswordModel *model = returnValue;
+        
+        
+        if ([model.flag isEqualToString:@"0000"]) {
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:model.msg];
+            [weakSelf presentLogin];
+        }else{
+            NSLog(@"%@",model.msg);
+
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
+        }
+        
     } WithFaileBlock:^{
         
     }];
@@ -143,7 +159,7 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请保持密码长度在6~16位"];
         return NO;
     }
-    if ([newcell1.contentTextField.text isEqualToString:newcell2.contentTextField.text]) {
+    if (![newcell1.contentTextField.text isEqualToString:newcell2.contentTextField.text]) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"两次输入密码不一致！"];
         return NO;
     }

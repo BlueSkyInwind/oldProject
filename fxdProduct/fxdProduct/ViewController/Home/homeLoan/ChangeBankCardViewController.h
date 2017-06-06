@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 
 @property (nonatomic,strong)NSString *ordsms_ext_;
+@property (nonatomic,assign)BOOL isCheck;
+
 
 @end

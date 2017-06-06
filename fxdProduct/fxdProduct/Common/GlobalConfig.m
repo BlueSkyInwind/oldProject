@@ -34,6 +34,9 @@ NSString * const _main_url  =   @"http://192.168.7.253:8081/fxd-esb/esb/";
 //NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
 //黄源本地的地址
 //NSString * const _main_url  =   @"http://192.168.14.18:9191/fxd-esb/esb/";
+//饶明祥本地地址
+//NSString * const _main_url  =   @"http://192.168.9.2:8080/esb/";
+
 
 NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
@@ -45,8 +48,9 @@ NSString * const _p2P_url = @"http://192.168.7.253:8081/fxd-esb/p2p/";
 //合规本地
 NSString * const _P2P_url   =   @"http://192.168.14.170:10010/p2p/";
 
-//饶明祥本地地址
-//NSString * const _main_url  =   @"http://192.168.9.2:9191/fxd-esb/esb/";
+
+
+
 
 //http://192.168.6.61  UAT
 //NSString * const _main_url  =   @"http://192.168.6.61/fxd-esb/esb/";

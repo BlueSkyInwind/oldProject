@@ -16,4 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *bankTable;
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 @property (nonatomic,strong)QueryCardInfo *queryCardInfo;
+@property (nonatomic,assign)BOOL isCheck;
+
 @end

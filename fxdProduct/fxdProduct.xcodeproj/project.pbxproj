@@ -1179,6 +1179,10 @@
 		CC0DFB8F1EA5B1090024841A /* GesturesPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */; };
 		CC0DFB901EA5B1090024841A /* HomePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636F11D77BA3000E93289 /* HomePopView.xib */; };
 		CC0DFB911EA5B1090024841A /* HomeBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E1ECDE1E1CD3D80079A2F8 /* HomeBottomCell.xib */; };
+		CC0F1B991EE64A2A00A23651 /* ChangePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B981EE64A2A00A23651 /* ChangePasswordModel.m */; };
+		CC0F1B9A1EE64A2A00A23651 /* ChangePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B981EE64A2A00A23651 /* ChangePasswordModel.m */; };
+		CC0F1B9D1EE6537700A23651 /* IdeaBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */; };
+		CC0F1B9E1EE6537700A23651 /* IdeaBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */; };
 		CC2A4D091EE13260000A38DC /* QryUserStatusParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2A4D081EE13260000A38DC /* QryUserStatusParamModel.m */; };
 		CC2A4D0A1EE13260000A38DC /* QryUserStatusParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2A4D081EE13260000A38DC /* QryUserStatusParamModel.m */; };
 		CC31978F1ED911980083F263 /* WhiteRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC31978E1ED911980083F263 /* WhiteRefuseView.m */; };
@@ -2323,6 +2327,10 @@
 		CC05591D1EB9A36D00733C2E /* DisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayCell.m; sourceTree = "<group>"; };
 		CC05591E1EB9A36D00733C2E /* DisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisplayCell.xib; sourceTree = "<group>"; };
 		CC0DFB971EA5B1090024841A /* fxdProductDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fxdProductDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC0F1B971EE64A2A00A23651 /* ChangePasswordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordModel.h; sourceTree = "<group>"; };
+		CC0F1B981EE64A2A00A23651 /* ChangePasswordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordModel.m; sourceTree = "<group>"; };
+		CC0F1B9B1EE6537700A23651 /* IdeaBackViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdeaBackViewModel.h; sourceTree = "<group>"; };
+		CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaBackViewModel.m; sourceTree = "<group>"; };
 		CC2A4D071EE13260000A38DC /* QryUserStatusParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QryUserStatusParamModel.h; sourceTree = "<group>"; };
 		CC2A4D081EE13260000A38DC /* QryUserStatusParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QryUserStatusParamModel.m; sourceTree = "<group>"; };
 		CC31978D1ED911980083F263 /* WhiteRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteRefuseView.h; sourceTree = "<group>"; };
@@ -3401,6 +3409,8 @@
 				CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */,
 				CCCDA8821EE028A200B48DFF /* UnbundlingBankCardViewModel.h */,
 				CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */,
+				CC0F1B9B1EE6537700A23651 /* IdeaBackViewModel.h */,
+				CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4939,6 +4949,8 @@
 			children = (
 				8438F71B1EE165460089E121 /* changePasswordParam.h */,
 				8438F71C1EE165460089E121 /* changePasswordParam.m */,
+				CC0F1B971EE64A2A00A23651 /* ChangePasswordModel.h */,
+				CC0F1B981EE64A2A00A23651 /* ChangePasswordModel.m */,
 			);
 			path = changePassword;
 			sourceTree = "<group>";
@@ -5190,7 +5202,7 @@
 				TargetAttributes = {
 					636EE2FC1B662ABB00A1A3ED = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 6W7BW6GZZR;
+						DevelopmentTeam = B4V533E2T3;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -5214,7 +5226,7 @@
 						TestTargetID = CC0DF9531EA5B1090024841A;
 					};
 					CC0DF9531EA5B1090024841A = {
-						DevelopmentTeam = 6W7BW6GZZR;
+						DevelopmentTeam = B4V533E2T3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -5735,6 +5747,7 @@
 				842C0B5D1ED59C7A00366D11 /* LoginParamModel.m in Sources */,
 				63FC24FB1D98F7E9006F58F3 /* NSAttributedString+YYText.m in Sources */,
 				6326CAAC1BF1CA5F00FD23A8 /* pinyin.c in Sources */,
+				CC0F1B9D1EE6537700A23651 /* IdeaBackViewModel.m in Sources */,
 				63741E341D3CC10900C0E2F8 /* PayNavigationViewController.m in Sources */,
 				8438F7181EE163690089E121 /* ChangePasswordViewModel.m in Sources */,
 				63C12DCB1E495CC9008119FB /* MoneyPlanCell.m in Sources */,
@@ -5953,6 +5966,7 @@
 				CC3197971ED926B90083F263 /* RefuseView.m in Sources */,
 				637636D21D768BE800E93289 /* RepayListViewController.m in Sources */,
 				63FC25001D98F7E9006F58F3 /* YYTextTransaction.m in Sources */,
+				CC0F1B991EE64A2A00A23651 /* ChangePasswordModel.m in Sources */,
 				848394221EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */,
 				635AB7971BE2FE6600C32919 /* CashResult.m in Sources */,
 				63FC24F91D98F7E9006F58F3 /* YYTextRubyAnnotation.m in Sources */,
@@ -6192,6 +6206,7 @@
 				CC0DF9B91EA5B1090024841A /* P2PAgreementViewController.m in Sources */,
 				844E5F511ED94DCB00753671 /* RegParamModel.m in Sources */,
 				CC0DF9BA1EA5B1090024841A /* FaceCell.m in Sources */,
+				CC0F1B9E1EE6537700A23651 /* IdeaBackViewModel.m in Sources */,
 				CC0DF9BB1EA5B1090024841A /* CheckFalseView.m in Sources */,
 				8438F7191EE163690089E121 /* ChangePasswordViewModel.m in Sources */,
 				CC0DF9BC1EA5B1090024841A /* MsgViewCell.m in Sources */,
@@ -6410,6 +6425,7 @@
 				CC3197981ED926B90083F263 /* RefuseView.m in Sources */,
 				CC0559261EB9A58500733C2E /* DisplayCell.m in Sources */,
 				CC0DFA801EA5B1090024841A /* CardListBaseClass.m in Sources */,
+				CC0F1B9A1EE64A2A00A23651 /* ChangePasswordModel.m in Sources */,
 				848394231EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchViewController.m in Sources */,
 				CC0DFA821EA5B1090024841A /* RepayListViewController.m in Sources */,
@@ -6645,7 +6661,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 6W7BW6GZZR;
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6738,8 +6754,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bf8b3920-98a5-4c71-8967-0b11bbc8dde7";
-				PROVISIONING_PROFILE_SPECIFIER = FXD_Pro;
+				PROVISIONING_PROFILE = "1b16c4d0-c6a8-48ab-948c-ca1be54f774f";
+				PROVISIONING_PROFILE_SPECIFIER = "FXD-Product";
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/ViewController/Home/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -6761,7 +6777,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 6W7BW6GZZR;
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6840,8 +6856,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bf8b3920-98a5-4c71-8967-0b11bbc8dde7";
-				PROVISIONING_PROFILE_SPECIFIER = FXD_Pro;
+				PROVISIONING_PROFILE = "1b16c4d0-c6a8-48ab-948c-ca1be54f774f";
+				PROVISIONING_PROFILE_SPECIFIER = "FXD-Product";
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/ViewController/Home/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6898,7 +6914,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 6W7BW6GZZR;
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7014,7 +7030,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 6W7BW6GZZR;
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -18,6 +18,7 @@
 #import "CheckViewController.h"
 #import "RTRootNavigationController.h"
 #import "UnbundlingBankCardViewModel.h"
+#import "RepayDetailViewController.h"
 @interface ChangeBankCardViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,WTCameraDelegate,BankTableViewSelectDelegate>
 {
 
@@ -477,9 +478,19 @@
         if ([model.data.appcode isEqualToString:@"1"]) {
             
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.appmsg];
-            for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
-                if ([vc isKindOfClass:[CheckViewController class]]) {
-                    [self.navigationController popToViewController:vc animated:YES];
+            if (_isCheck) {
+                
+                for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+                    if ([vc isKindOfClass:[CheckViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
+            }else{
+            
+                for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+                    if ([vc isKindOfClass:[RepayDetailViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
                 }
             }
             

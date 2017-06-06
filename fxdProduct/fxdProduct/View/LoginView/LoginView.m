@@ -39,10 +39,15 @@
     self.moblieIcon.image = [[UIImage imageNamed:@"1_Signin_icon_01"] imageWithTintColor:UI_MAIN_COLOR];
     self.passIcon.image = [[UIImage imageNamed:@"1_Signin_icon_03"] imageWithTintColor:UI_MAIN_COLOR];
     self.smsIcon.image = [[UIImage imageNamed:@"1_Signin_icon_02"] imageWithTintColor:UI_MAIN_COLOR];
+
     for (UIImageView *imageView in _lines) {
         imageView.image = [[UIImage imageNamed:@"login_line"] imageWithTintColor:UI_MAIN_COLOR];
     }
     [self adaptive];
+    
+    [self.userNameField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+    [self.veriyCodeField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+    
 }
 /**
  适配
@@ -52,6 +57,25 @@
         self.headerViewHeight.constant = 300;
     }
 }
+
+
+/**
+ 限制账号、验证码位数
+ */
+-(void)changeTextField:(UITextField *)textField{
+
+    if (textField == self.userNameField) {
+        if (textField.text.length>11) {
+            textField.text = [textField.text substringToIndex:11];
+        }
+    }
+    if (textField == self.veriyCodeField) {
+        if (textField.text.length>6) {
+            textField.text = [textField.text substringToIndex:6];
+        }
+    }
+}
+
 /**
  设置信号量
  */
