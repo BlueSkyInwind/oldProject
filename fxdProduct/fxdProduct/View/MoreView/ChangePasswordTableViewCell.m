@@ -24,6 +24,7 @@
 
 -(void)configureView{
     
+    self.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     self.backView = [[UIView alloc]init];
     [Tool setCorner:self.backView borderColor:UI_MAIN_COLOR];
     [self.contentView addSubview:self.backView];
@@ -71,6 +72,16 @@
         
     }];
 }
+
+-(void)updateTitleWidth:(NSString *)title{
+    
+   CGFloat width =  [Tool widthForText:title font:17] + 5;
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo([NSNumber numberWithFloat:width]);
+    }];
+    [self layoutIfNeeded];
+}
+
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
