@@ -5190,7 +5190,7 @@
 				TargetAttributes = {
 					636EE2FC1B662ABB00A1A3ED = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 6W7BW6GZZR;
+						DevelopmentTeam = B4V533E2T3;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -5214,7 +5214,7 @@
 						TestTargetID = CC0DF9531EA5B1090024841A;
 					};
 					CC0DF9531EA5B1090024841A = {
-						DevelopmentTeam = 6W7BW6GZZR;
+						DevelopmentTeam = B4V533E2T3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -5536,7 +5536,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5A6607F74FFA249EAA402F8E /* [CP] Embed Pods Frameworks */ = {
@@ -5596,7 +5596,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F32DD3C6D7FE66AE524BDBA3 /* [CP] Copy Pods Resources */ = {
@@ -6645,7 +6645,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 6W7BW6GZZR;
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6738,8 +6738,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bf8b3920-98a5-4c71-8967-0b11bbc8dde7";
-				PROVISIONING_PROFILE_SPECIFIER = FXD_Pro;
+				PROVISIONING_PROFILE = "1b16c4d0-c6a8-48ab-948c-ca1be54f774f";
+				PROVISIONING_PROFILE_SPECIFIER = "FXD-Product";
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/ViewController/Home/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -6761,7 +6761,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 6W7BW6GZZR;
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6840,8 +6840,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bf8b3920-98a5-4c71-8967-0b11bbc8dde7";
-				PROVISIONING_PROFILE_SPECIFIER = FXD_Pro;
+				PROVISIONING_PROFILE = "1b16c4d0-c6a8-48ab-948c-ca1be54f774f";
+				PROVISIONING_PROFILE_SPECIFIER = "FXD-Product";
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/ViewController/Home/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6898,7 +6898,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 6W7BW6GZZR;
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7014,7 +7014,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 6W7BW6GZZR;
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
