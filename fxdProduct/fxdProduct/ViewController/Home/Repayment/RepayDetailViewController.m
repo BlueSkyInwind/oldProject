@@ -66,6 +66,8 @@
     // 银行卡尾数号
     NSString *_bankNo;
     
+    QueryCardInfo *_queryCardInfoModel;
+    
 }
 @property (nonatomic,strong) UILabel *lblShouldrepay;
 @end
@@ -487,7 +489,7 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.PayTitleLabel.text=titleAry[indexPath.row];
             
-            cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_bankName,_bankNo];
+            cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[self bankName:_queryCardInfoModel.data.UsrCardInfolist.BankId],[_queryCardInfoModel.data.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.data.UsrCardInfolist.CardId.length-4]];
            
             
             return cell;
@@ -631,7 +633,7 @@
                 
 //                [self chooseBankCard];
                 
-                [self queryCardInfo];
+                [self gotoUnbundlingBank];
                 
             }
             
@@ -676,7 +678,7 @@
             }
             if (_p2pBillModel != nil) {
                 
-                [self queryCardInfo];
+                [self gotoUnbundlingBank];
 //                [self chooseBankCard];
                 
             }
@@ -1067,21 +1069,13 @@
 //}
 
 #pragma mark 弹出合规银行卡列表viewmodel
--(void)queryCardInfo{
+-(void)gotoUnbundlingBank{
     
-    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
-    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
-        UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
-        controller.queryCardInfo = model;
-        controller.isCheck = NO;
-        [self.navigationController pushViewController:controller animated:YES];
-        
-    } WithFaileBlock:^{
-        
-    }];
-    [checkBankViewModel queryCardInfo];
+    UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
+    controller.queryCardInfo = _queryCardInfoModel;
+    controller.isCheck = NO;
+    [self.navigationController pushViewController:controller animated:YES];
+    
 }
 
 -(void)showBankList{
@@ -1214,20 +1208,22 @@
 #pragma mark  银行卡查询
 -(void)checkBank{
 
-    
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
         
-        QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:object];
-        _bankName = [self bankName:model.data.UsrCardInfolist.BankId];
-        
-        NSString *bank = model.data.UsrCardInfolist.CardId;
-        _bankNo = [bank substringFromIndex:bank.length-4];
+        QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
+        _queryCardInfoModel = model;
+//        _bankName = [self bankName:model.data.UsrCardInfolist.BankId];
+//        NSString *bank = model.data.UsrCardInfolist.CardId;
+//        _bankNo = [bank substringFromIndex:bank.length-4];
         
         [self.PayDetailTB reloadData];
         
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    [checkBankViewModel queryCardInfo];
+    
 }
 
 

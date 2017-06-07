@@ -10,7 +10,7 @@
 #import "ReturnMsgBaseClass.h"
 #import "LoginViewController.h"
 #import "BaseNavigationViewController.h"
-
+#import "ChangePasswordViewModel.h"
 @interface ChangePWViewController ()<UITextFieldDelegate>
 {
     NSInteger _countdown;
@@ -46,18 +46,32 @@
     self.sendCodeBtn.userInteractionEnabled = NO;
     [self.sendCodeBtn setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
     _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
-    NSDictionary *parDic = [self getDicOfParam];
-    if (parDic) {
+    
+    
+    ChangePasswordViewModel *changePasswordViewModel = [[ChangePasswordViewModel alloc]init];
+    [changePasswordViewModel setBlockWithReturnBlock:^(id returnValue) {
         
-        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getCode_url] parameters:parDic finished:^(EnumServerStatus status, id object) {
-            _codeParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-            DLog(@"%d,%@",status,object);
-            DLog(@"---%@",_codeParse.msg);
-        } failure:^(EnumServerStatus status, id object) {
-            
-        }];
-    }
+        _codeParse = [ReturnMsgBaseClass modelObjectWithDictionary:returnValue];
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+        DLog(@"---%@",_codeParse.msg);
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [changePasswordViewModel changePasswordSendSMS];
+    
+//    NSDictionary *parDic = [self getDicOfParam];
+//    if (parDic) {
+//        
+//        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getCode_url] parameters:parDic finished:^(EnumServerStatus status, id object) {
+//            _codeParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+//            DLog(@"%d,%@",status,object);
+//            DLog(@"---%@",_codeParse.msg);
+//        } failure:^(EnumServerStatus status, id object) {
+//            
+//        }];
+//    }
 }
 
 
@@ -78,14 +92,14 @@
 }
 
 
-//获取验证码参数
-- (NSDictionary *)getDicOfParam
-{
-    return @{@"token":[Utility sharedUtility].userInfo.tokenStr,
-             @"phone":[Utility sharedUtility].userInfo.userName,
-             @"type":CODE_CHANGEPASS,
-             };
-}
+////获取验证码参数
+//- (NSDictionary *)getDicOfParam
+//{
+//    return @{@"token":[Utility sharedUtility].userInfo.tokenStr,
+//             @"phone":[Utility sharedUtility].userInfo.userName,
+//             @"type":CODE_CHANGEPASS,
+//             };
+//}
 
 - (IBAction)changeCommit:(UIButton *)sender {
     [self.view endEditing:YES];
@@ -93,29 +107,54 @@
     if (![self.codeField.text isEqualToString:@""] && ![self.passwordField.text isEqualToString:@""] && ![self.surePassField.text isEqualToString:@""]) {
         if ([self.passwordField.text isEqualToString:self.surePassField.text]) {
             if (self.passwordField.text.length >= 6 && self.passwordField.text.length <= 16) {
-                NSDictionary *paramDic = [self getChangeParam];
-                if (paramDic) {
+                
+                ChangePasswordViewModel *changePasswordViewModel = [[ChangePasswordViewModel alloc]init];
+                [changePasswordViewModel setBlockWithReturnBlock:^(id returnValue) {
                     
-                    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_CHANGEPASS_URL] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                        _changeParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-                        if ([_changeParse.flag isEqualToString:@"0001"]) {
-                            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_changeParse.msg];
-                        }
-                        if ([_changeParse.flag isEqualToString:@"0000"]) {
-                            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeSuccess title:@"修改成功" detail:@"密码修改成功,请使用新密码登录!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
-                                if (index == 1) {
-                                    LoginViewController *loginView = [LoginViewController new];
-                                    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-                                    [self presentViewController:nav animated:YES completion:^{
-                                        
-                                    }];
-                                }
-                            }];
-                        }
-                    } failure:^(EnumServerStatus status, id object) {
-                        
-                    }];
-                }
+                    _changeParse = [ReturnMsgBaseClass modelObjectWithDictionary:returnValue];
+                    if ([_changeParse.flag isEqualToString:@"0001"]) {
+                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_changeParse.msg];
+                    }
+                    if ([_changeParse.flag isEqualToString:@"0000"]) {
+                        [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeSuccess title:@"修改成功" detail:@"密码修改成功,请使用新密码登录!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+                            if (index == 1) {
+                                LoginViewController *loginView = [LoginViewController new];
+                                BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
+                                [self presentViewController:nav animated:YES completion:^{
+                                    
+                                }];
+                            }
+                        }];
+                    }
+                    
+                } WithFaileBlock:^{
+                    
+                }];
+                [changePasswordViewModel updatePasswordSmscode:self.codeField.text Password:self.passwordField.text];
+                
+//                NSDictionary *paramDic = [self getChangeParam];
+//                if (paramDic) {
+//                    
+//                    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_CHANGEPASS_URL] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//                        _changeParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
+//                        if ([_changeParse.flag isEqualToString:@"0001"]) {
+//                            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_changeParse.msg];
+//                        }
+//                        if ([_changeParse.flag isEqualToString:@"0000"]) {
+//                            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeSuccess title:@"修改成功" detail:@"密码修改成功,请使用新密码登录!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+//                                if (index == 1) {
+//                                    LoginViewController *loginView = [LoginViewController new];
+//                                    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
+//                                    [self presentViewController:nav animated:YES completion:^{
+//                                        
+//                                    }];
+//                                }
+//                            }];
+//                        }
+//                    } failure:^(EnumServerStatus status, id object) {
+//                        
+//                    }];
+//                }
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请保持密码长度在6~16位之间"];
             }
@@ -128,15 +167,15 @@
     }
 }
 
-- (NSDictionary *)getChangeParam
-{
-    if (![self.passwordField.text isEqualToString:@""] && ![self.codeField.text isEqualToString:@""]) {
-        return @{@"token":[Utility sharedUtility].userInfo.tokenStr,
-                 @"smscode":self.codeField.text,
-                 @"password":self.passwordField.text};
-    }
-    return nil;
-}
+//- (NSDictionary *)getChangeParam
+//{
+//    if (![self.passwordField.text isEqualToString:@""] && ![self.codeField.text isEqualToString:@""]) {
+//        return @{@"token":[Utility sharedUtility].userInfo.tokenStr,
+//                 @"smscode":self.codeField.text,
+//                 @"password":self.passwordField.text};
+//    }
+//    return nil;
+//}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {

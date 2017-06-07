@@ -103,7 +103,7 @@
             cell.btn.hidden = YES;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
             cell.textField.enabled = NO;
-            cell.textField.text = [Utility sharedUtility].userInfo.userMobilePhone;
+            cell.textField.text = _queryCardInfo.data.UsrCardInfolist.BindMobile;
         }
         [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
         cell.selectionStyle  = UITableViewCellSelectionStyleNone;

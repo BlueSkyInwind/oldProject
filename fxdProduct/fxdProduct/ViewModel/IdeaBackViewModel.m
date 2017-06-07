@@ -7,15 +7,16 @@
 //
 
 #import "IdeaBackViewModel.h"
-
+#import "IdeaBackParamModel.h"
 @implementation IdeaBackViewModel
 
 -(void)saveFeedBackContent:(NSString *)content{
 
-    NSDictionary *paramDic = @{
-                               @"content_":content,
-                               @"feedback_way_":PLATFORM,
-                               };
+    IdeaBackParamModel *ideaBackParamModel = [[IdeaBackParamModel alloc]init];
+    ideaBackParamModel.content_ = content;
+    ideaBackParamModel.feedback_way_ = PLATFORM;
+    
+    NSDictionary * paramDic  = [ideaBackParamModel toDictionary];
     
     [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_feedBack_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {

@@ -60,7 +60,7 @@
     
     [self checkStatus];
 
-    if (![model.applyStatus isEqualToString:@"20"]) {
+    if ([model.applyStatus isEqualToString:@"20"]) {
         
        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refreshUserState) userInfo:nil repeats:YES];
     }
@@ -523,6 +523,12 @@
     } failure:^(EnumServerStatus status, id object) {
         
     }];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+
+    [_countdownTimer invalidate];
     
 }
 //#pragma mark 发标前查询进件

@@ -140,7 +140,7 @@
                     <rect key="frame" x="0.0" y="129" width="375" height="336"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的资料正在审核，请耐心等待" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XH2-Pf-nq0">
-                            <rect key="frame" x="0.0" y="304" width="375" height="32"/>
+                            <rect key="frame" x="0.0" y="264" width="375" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="6wC-tr-ImU"/>
                             </constraints>
@@ -161,16 +161,29 @@
                             <color key="textColor" red="0.0" green="0.66666666669999997" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关注公众号“急速发薪”，随时查看借款进度" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JjI-ke-mdH">
+                            <rect key="frame" x="0.0" y="304" width="375" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="ANU-Mz-JMG"/>
+                                <constraint firstAttribute="width" constant="375" id="KaV-H9-ksr"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstItem="JjI-ke-mdH" firstAttribute="top" secondItem="XH2-Pf-nq0" secondAttribute="bottom" constant="8" id="EwG-XY-Xqh"/>
                         <constraint firstItem="1as-LT-XQ8" firstAttribute="centerY" secondItem="nKe-Bu-PLW" secondAttribute="centerY" constant="-20" id="RMg-BE-WLc"/>
                         <constraint firstAttribute="trailing" secondItem="XH2-Pf-nq0" secondAttribute="trailing" id="VT5-QY-pHF"/>
+                        <constraint firstAttribute="trailing" secondItem="JjI-ke-mdH" secondAttribute="trailing" id="YVd-kh-7ny"/>
                         <constraint firstItem="dEL-A0-6bT" firstAttribute="centerX" secondItem="nKe-Bu-PLW" secondAttribute="centerX" id="cnl-e9-fRG"/>
                         <constraint firstItem="dEL-A0-6bT" firstAttribute="centerY" secondItem="nKe-Bu-PLW" secondAttribute="centerY" constant="-20" id="ieW-fG-I6m"/>
                         <constraint firstItem="XH2-Pf-nq0" firstAttribute="leading" secondItem="nKe-Bu-PLW" secondAttribute="leading" id="lGb-P4-8PL"/>
-                        <constraint firstAttribute="bottom" secondItem="XH2-Pf-nq0" secondAttribute="bottom" id="sag-BB-qc4"/>
+                        <constraint firstAttribute="bottom" secondItem="XH2-Pf-nq0" secondAttribute="bottom" constant="40" id="sag-BB-qc4"/>
                         <constraint firstItem="1as-LT-XQ8" firstAttribute="centerX" secondItem="nKe-Bu-PLW" secondAttribute="centerX" id="t4P-Qd-ZnD"/>
+                        <constraint firstItem="JjI-ke-mdH" firstAttribute="leading" secondItem="nKe-Bu-PLW" secondAttribute="leading" id="w3p-cD-39V"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ixb-Ep-5uH">
