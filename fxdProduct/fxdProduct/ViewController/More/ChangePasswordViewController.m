@@ -16,6 +16,7 @@
     
     NSString * oldPassword;
     NSString * newPassword;
+    NSArray * tiitleArr;
 
 }
 
@@ -32,6 +33,7 @@
     // Do any additional setup after loading the view.
     self.title = @"修改登录密码";
     [self addBackItem];
+    tiitleArr = @[@"当前密码",@"新密码",@"确认新密码"];
     self.view.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     [self configureview];
 
@@ -43,6 +45,7 @@
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
+    self.tableView.bounces = NO;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -52,7 +55,11 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 70;
+    if (UI_IS_IPHONE6P) {
+        return 70;
+    }else{
+        return 60;
+    }
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -68,17 +75,20 @@
     }
     switch (indexPath.row) {
         case 0:{
-            cell.titleLabel.text = @"当前密码";
+            cell.titleLabel.text = tiitleArr[indexPath.row];
+            [cell updateTitleWidth:tiitleArr[indexPath.row]];
             cell.contentTextField.placeholder = @"请输入当前的登录密码";
         }
             break;
         case 1:{
-            cell.titleLabel.text = @"新密码";
+            cell.titleLabel.text = tiitleArr[indexPath.row];
+            [cell updateTitleWidth:tiitleArr[indexPath.row]];
             cell.contentTextField.placeholder = @"6-12位字母、数字";
         }
             break;
         case 2:{
-            cell.titleLabel.text = @"确认新密码";
+            cell.titleLabel.text = tiitleArr[indexPath.row];
+            [cell updateTitleWidth:tiitleArr[indexPath.row]];
             cell.contentTextField.placeholder = @"6-12位字母、数字";
         }
             break;
@@ -108,9 +118,12 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    return 60;
+    return 100;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 20;
+}
 
 -(void)saveChangePassword:(id)sender{
     
@@ -121,7 +134,6 @@
         NSLog(@"=========%@",returnValue);
         
         ChangePasswordModel *model = returnValue;
-        
         
         if ([model.flag isEqualToString:@"0000"]) {
             

@@ -163,7 +163,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
                 break;
         }
     }];
-    
     // 3.开始监控
     [mgr startMonitoring];
 }

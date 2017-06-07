@@ -17,5 +17,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier;
 
+-(void)updateTitleWidth:(NSString *_Nullable)title;
+
 
 @end
