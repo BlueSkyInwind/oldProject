@@ -45,7 +45,6 @@
 @property (nonatomic, copy)NSString *platform;
 @property (nonatomic, weak) UIScrollView *scrollView;
 
-//@property (nonatomic, strong) UIRefreshControl* refreshControl;
 
 @end
 
@@ -61,9 +60,10 @@
     
     [self checkStatus];
 
-    
-//    _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refreshUserState) userInfo:nil repeats:YES];
-    
+    if (![model.applyStatus isEqualToString:@"20"]) {
+        
+       _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refreshUserState) userInfo:nil repeats:YES];
+    }
     
     //    [self PostGetCheckMoney];
     //    [self createUIWith];
@@ -110,16 +110,16 @@
  */
 
 //#pragma mark 倒计时
-//-(void)refreshUserState
-//{
-//
-//    [moenyViewing removeFromSuperview];
-//    [self checkStatus];
-//    if ([model.applyStatus isEqualToString:@"6"]) {
-//        
-//        [_countdownTimer invalidate];
-//    }
-//}
+-(void)refreshUserState
+{
+
+    [moenyViewing removeFromSuperview];
+    [self checkStatus];
+    if (![model.applyStatus isEqualToString:@"20"]) {
+        
+        [_countdownTimer invalidate];
+    }
+}
 
 
 -(void)checkStatus
@@ -161,6 +161,17 @@
                     _intStautes = [model.applyStatus integerValue];
                     [self createUIWith];
                 }
+                    break;
+                case 20:
+                    moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+                    moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+                    [self.view addSubview:moenyViewing];
+                    moenyViewing.sureBtn.hidden = YES;
+                    moenyViewing.labelProgress.text = @"处理中";
+                    moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+                    moenyViewing.lableData.hidden = YES;
+                    moenyViewing.sureBtn.hidden = YES;
+                    moenyViewing.middleView.hidden = YES;
                     break;
                 default:
                     if (_isHuiFu) {

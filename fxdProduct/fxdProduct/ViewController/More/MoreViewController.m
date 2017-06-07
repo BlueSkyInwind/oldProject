@@ -234,8 +234,16 @@
             [self presentViewController:actionSheett animated:YES completion:nil];
         }    else if(indexPath.row==5){
             
-          ChangePasswordViewController *   changePassVC =[[ChangePasswordViewController alloc]init];
-            [self.navigationController pushViewController:changePassVC animated:YES];
+            if ([Utility sharedUtility].loginFlage) {
+                
+                ChangePasswordViewController *   changePassVC =[[ChangePasswordViewController alloc]init];
+                [self.navigationController pushViewController:changePassVC animated:YES];
+            
+            } else {
+                [self presentLogin:self];
+            }
+            
+          
         }
     }
     //    else if(indexPath.section==1) {

@@ -250,6 +250,7 @@
         ChangeBankCardViewController *controller = [[ChangeBankCardViewController alloc]initWithNibName:@"ChangeBankCardViewController" bundle:nil];
         
         controller.ordsms_ext_ = [NSString stringWithFormat:@"%@%@",_sms_code,_sms_seq];
+        controller.isCheck = _isCheck;
         [self.navigationController pushViewController:controller animated:YES];
     }
     

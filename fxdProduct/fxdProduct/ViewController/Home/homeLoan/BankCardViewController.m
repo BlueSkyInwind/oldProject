@@ -172,11 +172,13 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             cell.btnSecory.tag = 203;
             [cell.btnSecory addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.tag = 203;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
         }else if (indexPath.row == 2){
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             cell.btnSecory.hidden = YES;
             cell.btn.hidden = YES;
+            cell.textField.tag = 202;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
         }
         [Tool setCorner:cell.bgView borderColor:dataColorAll3[indexPath.row]];
@@ -215,10 +217,20 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 
 -(void)changeTextField:(UITextField *)textField
 {
+    if(textField.tag==202){
     
-    if ([textField.text length] ==11) {
-        [self.view endEditing:YES];
-        [dataListAll3 replaceObjectAtIndex:2 withObject:textField.text];
+        if ([textField.text length] ==11) {
+            [self.view endEditing:YES];
+            [dataListAll3 replaceObjectAtIndex:2 withObject:textField.text];
+        }
+        if (textField.text.length>11) {
+            textField.text = [textField.text substringToIndex:11];
+        }
+    }else if (textField.tag == 203){
+    
+        if (textField.text.length>6) {
+            textField.text = [textField.text substringToIndex:6];
+        }
     }
 }
 #pragma mark->textFieldDelegate
@@ -793,7 +805,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
 //    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,@"ABC",bankNo,dataListAll3[3],_sms_seq];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,bankName,bankNo,code,sms_seq];
+    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@&mobile_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,bankName,bankNo,code,sms_seq,dataListAll3[2]];
     NSLog(@"%@",url);
     P2PViewController *p2pVC = [[P2PViewController alloc] init];
     p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];

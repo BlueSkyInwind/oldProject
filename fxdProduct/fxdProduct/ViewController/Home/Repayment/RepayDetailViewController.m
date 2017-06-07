@@ -1073,57 +1073,10 @@
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
-        NSString *bankName = [self bankName:model.data.UsrCardInfolist.BankId];
-        
-        
-        PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-        payMethodVC.bankModel = _bankModel;
-        payMethodVC.payMethod = PayMethodNormal;
-        if (userSelectIndex == -1) {
-            payMethodVC.currentIndex = defaultBankIndex;
-        } else {
-            payMethodVC.currentIndex  = userSelectIndex;
-        }
-        payMethodVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex){
-            if (cardInfo) {
-                _selectCard = cardInfo;
-            }
-            userSelectIndex = currentIndex;
-            [self.PayDetailTB reloadData];
-        };
-        
-        
-//        PayViewController *payVC = [[PayViewController alloc] init];
-//        payVC.payType = PayTypeGetMoneyToCard;
-//        payVC.isP2P = YES;
-//        payVC.bankName = bankName;
-//        NSString *bank = model.data.UsrCardInfolist.CardId;
-//        payVC.banNum = [bank substringFromIndex:bank.length-4];
-//        
-//        payVC.makesureBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){
-//            
-//            [self dismissSemiModalViewWithCompletion:^{
-//                
-////                LoanMoneyViewController *controller = [LoanMoneyViewController new];
-////                controller.popAlert = true;
-////                [self.navigationController pushViewController:controller animated:YES];
-//                //传给后台字段的接口
-//                //                [self addBidInfo];
-//            }];
-//            
-//        };
-//        
-//        payVC.changeBankBlock = ^(){
-//            
-//            UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
-//            controller.queryCardInfo = model;
-//            [self.navigationController pushViewController:controller animated:YES];
-//        };
-        
-        
-        PayNavigationViewController *payNC = [[PayNavigationViewController alloc] initWithRootViewController:payMethodVC];
-        payNC.view.frame = CGRectMake(0, 0, _k_w, 200);
-        [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
+        UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
+        controller.queryCardInfo = model;
+        controller.isCheck = NO;
+        [self.navigationController pushViewController:controller animated:YES];
         
     } WithFaileBlock:^{
         
@@ -1131,6 +1084,60 @@
     [checkBankViewModel queryCardInfo];
 }
 
+-(void)showBankList{
+
+//    NSString *bankName = [self bankName:model.data.UsrCardInfolist.BankId];
+
+    PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
+    payMethodVC.bankModel = _bankModel;
+    payMethodVC.payMethod = PayMethodNormal;
+    if (userSelectIndex == -1) {
+        payMethodVC.currentIndex = defaultBankIndex;
+    } else {
+        payMethodVC.currentIndex  = userSelectIndex;
+    }
+    payMethodVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex){
+        if (cardInfo) {
+            _selectCard = cardInfo;
+        }
+        userSelectIndex = currentIndex;
+        [self.PayDetailTB reloadData];
+    };
+    
+    
+    //        PayViewController *payVC = [[PayViewController alloc] init];
+    //        payVC.payType = PayTypeGetMoneyToCard;
+    //        payVC.isP2P = YES;
+    //        payVC.bankName = bankName;
+    //        NSString *bank = model.data.UsrCardInfolist.CardId;
+    //        payVC.banNum = [bank substringFromIndex:bank.length-4];
+    //
+    //        payVC.makesureBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){
+    //
+    //            [self dismissSemiModalViewWithCompletion:^{
+    //
+    ////                LoanMoneyViewController *controller = [LoanMoneyViewController new];
+    ////                controller.popAlert = true;
+    ////                [self.navigationController pushViewController:controller animated:YES];
+    //                //传给后台字段的接口
+    //                //                [self addBidInfo];
+    //            }];
+    //
+    //        };
+    //
+    //        payVC.changeBankBlock = ^(){
+    //
+    //            UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
+    //            controller.queryCardInfo = model;
+    //            [self.navigationController pushViewController:controller animated:YES];
+    //        };
+    
+    
+    PayNavigationViewController *payNC = [[PayNavigationViewController alloc] initWithRootViewController:payMethodVC];
+    payNC.view.frame = CGRectMake(0, 0, _k_w, 200);
+    [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
+    
+}
 
 //#pragma mark 弹出银行卡列表
 //-(void)chooseBankCard{

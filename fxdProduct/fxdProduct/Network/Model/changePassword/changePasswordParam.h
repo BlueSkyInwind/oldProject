@@ -12,7 +12,7 @@
 
 @property (nonatomic,strong)NSString * mobile_phone_;
 @property (nonatomic,strong)NSString * old_password_;
-//@property (nonatomic,strong)NSString * new_password_;
+@property (nonatomic,strong)NSString * update_password_   ;
 
 
 

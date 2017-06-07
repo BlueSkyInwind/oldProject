@@ -1478,7 +1478,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [self getBankListInfo];
             }else if ([type isEqualToString:@"10"]){
             
-                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 p2pVC.isCheck = YES;
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -1679,6 +1679,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             
             UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
             controller.queryCardInfo = model;
+            controller.isCheck = YES;
             [self.navigationController pushViewController:controller animated:YES];
         };
         PayNavigationViewController *payNC = [[PayNavigationViewController alloc] initWithRootViewController:payVC];

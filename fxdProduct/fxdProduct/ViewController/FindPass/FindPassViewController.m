@@ -42,10 +42,32 @@
     
     [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     
+    [self.phoneNumField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+    [self.codeField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+    
     [self setSome];
 }
 
 
+
+/**
+ 手机号、验证码位数限制
+ */
+
+-(void)changeTextField:(UITextField *)textField{
+
+
+    if (textField == self.phoneNumField) {
+        if (textField.text.length>11) {
+            textField.text = [textField.text substringToIndex:11];
+        }
+    }else if (textField == self.codeField){
+    
+        if (textField.text.length>6) {
+            textField.text = [textField.text substringToIndex:6];
+        }
+    }
+}
 - (void)setSome
 {
     self.navigationItem.title = @"找回密码";
