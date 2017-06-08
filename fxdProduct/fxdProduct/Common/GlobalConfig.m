@@ -31,15 +31,13 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 //新整合的地址
 //NSString * const _main_url  =   @"http://192.168.9.2:9191/fxd-esb/esb/";
-//NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
+NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
 //黄源本地的地址
 //NSString * const _main_url  =   @"http://192.168.14.18:9191/fxd-esb/esb/";
 //饶明祥本地地址
 //NSString * const _main_url  =   @"http://192.168.9.2:8080/esb/";
 //饶明翔本地，用于优化测试
-NSString * const _main_url  =   @"http://192.168.9.2:9191/fxd-esb/esb/";
-
-
+//NSString * const _main_url  =   @"http://192.168.9.2:9191/fxd-esb/esb/";
 
 NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
@@ -65,7 +63,6 @@ NSString * const _P2P_url   =   @"http://192.168.14.170:10010/p2p/";
 
 //准生产地址
 //NSString * const _main_url  =   @"http://192.168.6.240:9090/fxd-esb/esb/";
-
 //NSString * const _ValidESB_url = @"http://192.168.6.240:9090/fxd-esb/";
 //NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/";
 //NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";

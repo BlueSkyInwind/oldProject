@@ -242,8 +242,6 @@
             } else {
                 [self presentLogin:self];
             }
-            
-          
         }
     }
     //    else if(indexPath.section==1) {

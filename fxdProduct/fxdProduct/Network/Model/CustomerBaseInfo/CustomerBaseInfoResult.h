@@ -30,7 +30,7 @@
 @property (nonatomic, strong) NSString *createBy;
 @property (nonatomic, strong) NSArray *contactBean;
 @property (nonatomic, strong) NSString *authenticateStatus;
-@property (nonatomic, strong) NSString *cityName;
+@property (nonatomic, strong) NSString *cityName; 
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

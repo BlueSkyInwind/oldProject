@@ -10,7 +10,9 @@
 #import "LoginParse.h"
 #import "DataBaseManager.h"
 #import "DES3Util.h"
-
+#import "GetCustomerBaseViewModel.h"
+#import "DataWriteAndRead.h"
+#import "CustomerBaseInfoBaseClass.h"
 @implementation LoginViewModel
 
 
@@ -82,10 +84,12 @@
             }
             DLog(@"token -- %@  \n  juid -- %@",[Utility sharedUtility].userInfo.tokenStr,[Utility sharedUtility].userInfo.juid);
             
+            [self PostPersonInfoMessage];
             //登录统计(账号)
             [MobClick profileSignInWithPUID:userTableName];
             //打开数据库
             [[DataBaseManager shareManager] dbOpen:userTableName];
+            
         }
         self.returnBlock(loginParse);
     } failure:^(EnumServerStatus status, id object) {
@@ -111,9 +115,22 @@
     } failure:^(EnumServerStatus status, id object) {
         
     }];
-    
 }
 
+#pragma mark->获取个人信息
+-(void)PostPersonInfoMessage
+{
+    GetCustomerBaseViewModel *customBaseViewModel = [[GetCustomerBaseViewModel alloc] init];
+    [customBaseViewModel setBlockWithReturnBlock:^(id returnValue) {
+      CustomerBaseInfoBaseClass  * customerBase = returnValue;
+        if ([customerBase.flag isEqualToString:@"0000"]) {
+            [DataWriteAndRead writeDataWithkey:UserInfomation value:customerBase];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [customBaseViewModel fatchCustomBaseInfo:nil];
+}
                                   
                                   
                             
