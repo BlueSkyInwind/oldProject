@@ -31,7 +31,7 @@
         BankModel *_bankModel;
         UIButton *_backTimeBtn;
         NSString *_sms_seq;
-        NSString *sms_code;
+
 }
 @end
 
@@ -214,42 +214,8 @@
         
     }];
     [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"rebind" SmsType:@"N" Mobile:dataListAll3[2]];
-//    NSDictionary *paramDic = [self getParamDic];
-//    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//
-//        SendSmsModel *model = [SendSmsModel yy_modelWithJSON:object];
-//        if ([model.appcode isEqualToString:@"1"]) {
-//            [_sureBtn setEnabled:YES];
-//            _sms_seq = model.data.sms_seq_;
-//            [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
-//        }else{
-//
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
-//    }];
 
 }
-
-//#pragma  mark 获取验证码的参数
-//-(NSDictionary *)getParamDic{
-//
-//     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    NSDictionary *paramDic;
-//    paramDic = @{@"busi_type_":@"rebind",
-//                 @"card_number_":bankNo,
-//                 @"mobile_":dataListAll3[2],
-//                 @"sms_type_":@"N",
-//                 @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone
-//                 };
-//    return paramDic;
-//
-//}
-
-
-
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 70.f;
@@ -267,7 +233,12 @@
         [dataListAll3 replaceObjectAtIndex:2 withObject:textField.text];
     }else if (textField.tag == 103){
 
-        sms_code = textField.text;
+        if (textField.text.length >6) {
+            
+            textField.text = [textField.text substringToIndex:6];
+        }
+    
+        [dataListAll3 replaceObjectAtIndex:3 withObject:textField.text];
 
     }
 }
@@ -505,49 +476,7 @@
     }];
     [unbundlingBankCardViewModel bankCardsSHServiceParamArray:paramArray];
     
-//    NSDictionary *paramDic = [self changeBankParamDic];
-//    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//        BankCardsModel *model = [BankCardsModel yy_modelWithJSON:object];
-//        if ([model.data.appcode isEqualToString:@"1"]) {
-//
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.appmsg];
-//            for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
-//                if ([vc isKindOfClass:[CheckViewController class]]) {
-//                    [self.navigationController popToViewController:vc animated:YES];
-//                }
-//            }
-//            
-////            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
-//        }else{
-//        
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
-//        }
-//
-//    } failure:^(EnumServerStatus status, id object) {
-//
-//    }];
-
 }
-
-//#pragma mark 更换银行卡参数
-//-(NSDictionary *)changeBankParamDic{
-//
-//    
-//    _ordsms_ext_ = @"666666AAAAAAAA";
-//    _sms_seq = @"AAAAAAAA";
-//    NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    NSString *banName = [self bankName:_bankCode];
-//    NSDictionary *paramDic = @{@"bank_code_":banName,
-//                               @"card_number_":bankNo,
-//                               @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,
-//                               @"mobile_":dataListAll3[2],
-//                               @"ordsms_ext_":_ordsms_ext_,
-//                               @"sms_code_":dataListAll3[3],
-//                               @"sms_seq_":_sms_seq,
-//                               @"trade_type_":@"REBIND",
-//                               };
-//    return paramDic;
-//}
 
 #pragma mark 更改银行卡名称缩写
 -(NSString *)bankName:(NSString *)bankCode{

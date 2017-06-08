@@ -404,6 +404,11 @@
     if (indexPath.section>0&&_dataArray.count+1 !=indexPath.section) {
         
         HomeProductListProducts *product = _dataArray[indexPath.section-1];
+        
+        if ([product.isOverLimit boolValue]) {
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"您申请的产品今日额度已满，请尝试其他产品或明天再来"];
+            return;
+        }
         if ([product.id_ isEqualToString:SalaryLoan]) {
             [self highLoanClick];
         }

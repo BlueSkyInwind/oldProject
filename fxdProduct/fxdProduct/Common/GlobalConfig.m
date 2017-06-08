@@ -45,9 +45,9 @@ NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
 NSString * const _p2P_url = @"http://192.168.7.253:8081/fxd-esb/p2p/";
 //NSString * const _p2P_url = @"http://192.168.14.18:9191/fxd-esb/p2p/";
 
-//NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
 //合规本地
-NSString * const _P2P_url   =   @"http://192.168.14.170:10010/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.14.170:10010/p2p/";
 
 
 
