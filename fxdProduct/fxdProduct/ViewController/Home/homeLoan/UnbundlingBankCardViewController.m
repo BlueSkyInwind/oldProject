@@ -59,30 +59,21 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil] lastObject];
         }
-//        cell.textField.placeholder = placeArray3[indexPath.row];
         cell.textField.tag = indexPath.row + 100;
         cell.textField.delegate = self;
-//        cell.textField.text = dataListAll3[indexPath.row];
     
         if (indexPath.row == 0) {
             [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
             cell.btn.hidden = NO;
             cell.btn.tag = indexPath.row + 200;
-//            [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.btnSecory.hidden = YES;
             cell.textField.enabled = NO;
-            
-            
             cell.textField.text = [self bankName:_queryCardInfo.data.UsrCardInfolist.BankId];
-            
-//            cell.textField.text = @"农行";
-            
             
         }else if (indexPath.row == 1) {
             [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
             cell.btn.hidden = NO;
             cell.btn.tag = indexPath.row + 200;
-//            [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.btnSecory.hidden = YES;
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             cell.textField.text = _queryCardInfo.data.UsrCardInfolist.CardId;
@@ -101,6 +92,7 @@
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             cell.btnSecory.hidden = YES;
             cell.btn.hidden = YES;
+            cell.textField.placeholder = @"手机号";
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
             cell.textField.enabled = NO;
             cell.textField.text = _queryCardInfo.data.UsrCardInfolist.BindMobile;
@@ -140,24 +132,7 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
         
     }];
-    [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"rebind" SmsType:@"O" Mobile:[Utility sharedUtility].userInfo.userMobilePhone];
-//    NSDictionary *paramDic = [self getParamDic];
-//    
-//    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//       
-//        SendSmsModel *model = [SendSmsModel yy_modelWithJSON:object];
-//        if ([model.appcode isEqualToString:@"1"]) {
-//            
-//            _sms_seq = model.data.sms_seq_;
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
-//        }else{
-//        
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
-//    }];
+    [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"rebind" SmsType:@"O" Mobile:_queryCardInfo.data.UsrCardInfolist.BindMobile];
     
 }
 
@@ -175,31 +150,6 @@
         [_countdownTimer invalidate];
     }
 }
-
-
-#pragma mark 获取验证码参数
--(NSDictionary *)getParamDic{
-
-    _bankNum = @"622 822 93399 10450";
-//    NSString *bankNo =[_bankNum stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    
-    NSString *bankNo = _queryCardInfo.data.UsrCardInfolist.CardId;
-    
-    NSDictionary *paramDic;
-    
-    paramDic = @{@"busi_type_":@"rebind",
-                     @"card_number_":bankNo,
-                     @"mobile_":[Utility sharedUtility].userInfo.userMobilePhone,
-                     @"sms_type_":@"O",
-                 @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone
-                 
-                     };
-    return paramDic;
-  
-}
-
-
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -256,34 +206,6 @@
     
     
 }
-
--(void)viewWillAppear:(BOOL)animated{
-
-//    [self getBankDetail];
-}
-
-//#pragma mark 获取银行卡信息
-//-(void)getBankDetail{
-//
-//    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
-//    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-//        
-//        _queryCadModel = [QueryCardInfo yy_modelWithJSON:returnValue];
-//        [_bankTable reloadData];
-//        
-//    } WithFaileBlock:^{
-//        
-//    }];
-//    [checkBankViewModel queryCardInfo];
-////    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_queryCardInfo_url] parameters:@{@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone} finished:^(EnumServerStatus status, id object) {
-////        
-////        _queryCadModel = [QueryCardInfo yy_modelWithJSON:object];
-////        [_bankTable reloadData];
-////    } failure:^(EnumServerStatus status, id object) {
-////        
-////    }];
-//}
-
 
 #pragma mark 银行卡名字的转换
 -(NSString *)bankName:(NSString *)bankCode{

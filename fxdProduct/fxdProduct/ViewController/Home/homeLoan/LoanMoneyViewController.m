@@ -60,14 +60,24 @@
     
     [self checkStatus];
 
-    if ([model.applyStatus isEqualToString:@"20"]) {
-        
-       _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refreshUserState) userInfo:nil repeats:YES];
-    }
+    UISwipeGestureRecognizer *recognizer;
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
+    [[self view] addGestureRecognizer:recognizer];
     
     //    [self PostGetCheckMoney];
     //    [self createUIWith];
 }
+
+-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+
+    [moenyViewing removeFromSuperview];
+    [self checkStatus];
+    
+    
+}
+
 
 - (void)addBackItemroot
 {
@@ -109,17 +119,6 @@
  }
  */
 
-//#pragma mark 倒计时
--(void)refreshUserState
-{
-
-    [moenyViewing removeFromSuperview];
-    [self checkStatus];
-    if (![model.applyStatus isEqualToString:@"20"]) {
-        
-        [_countdownTimer invalidate];
-    }
-}
 
 
 -(void)checkStatus
@@ -526,49 +525,4 @@
     
 }
 
--(void)viewDidAppear:(BOOL)animated{
-
-    [_countdownTimer invalidate];
-    
-}
-//#pragma mark 发标前查询进件
-//
-//-(void)addBid{
-//
-//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-//        DLog(@"%@",object);
-//        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
-//        if ([caseInfo.flag isEqualToString:@"0000"]) {
-//            
-//            //                            NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&cash_serv_fee_=%@&trans_amt_=%@ret_url_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[NSString stringWithFormat:@"%.2f",_approvalModel.result.week_service_fee_rate],caseInfo.result.amount_,_toCash_url];
-//            //                            NSLog(@"%@",url);
-//            //                            P2PViewController *p2pVC = [[P2PViewController alloc] init];
-//            //                            p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-//            //                            p2pVC.userSelectNum = _userSelectNum;
-//            //                            [self.navigationController pushViewController:p2pVC animated:YES];
-//            
-//            [self queryBidStatus:caseInfo];
-//        }
-//        
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
-//}
-//
-//
-//
-//#pragma mark  标的状态查询接口
-//
-//-(void)queryBidStatus:(GetCaseInfo *)caseInfo{
-//
-//    NSDictionary *paramDic = @{@"from_":caseInfo.result.from_,@"from_case_id_":caseInfo.result.from_case_id_};
-//    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_queryBidStatus_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//        
-//        QueryBidStatusModel *model = [QueryBidStatusModel yy_modelWithJSON:object];
-//        
-//        
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
-//}
 @end
