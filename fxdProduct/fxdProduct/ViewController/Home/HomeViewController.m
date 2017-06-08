@@ -332,12 +332,17 @@
     if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
         
         HomeProductListProducts *product = _dataArray[indexPath.section-1];
+        cell.rightImageView.image = [UIImage imageNamed:@"home_08"];
+        
         BOOL isOverLimit = [product.isOverLimit boolValue];
         if (isOverLimit) {
             [cell.loanBtn setBackgroundImage:[UIImage imageNamed:@"beyond_lines_Limit"] forState:UIControlStateNormal];
+            [cell.loanBtn setTitle:@"" forState:UIControlStateNormal];
+            
         }else {
+            [cell.loanBtn setBackgroundImage:nil forState:UIControlStateNormal];
             [cell.loanBtn setTitle:@"我要借款" forState:UIControlStateNormal];
-            cell.rightImageView.image = [UIImage imageNamed:@"home_08"];
+            
         }
 
         [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];

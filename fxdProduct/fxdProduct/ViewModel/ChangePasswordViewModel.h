@@ -20,4 +20,21 @@
  */
 -(void)fetchChangePassowrdCurrent:(NSString *)CurrentPassword new:(NSString *)newPassword;
 
+/**
+ 请求更改密码
+ 
+ @param smscode 验证码
+ @param password 密码
+ */
+
+-(void)updatePasswordSmscode:(NSString *)smscode Password:(NSString *)password;
+
+/**
+ 请求更改密码发送验证码
+ 
+ @param smscode 验证码
+ @param password 密码
+ */
+
+-(void)changePasswordSendSMS;
 @end

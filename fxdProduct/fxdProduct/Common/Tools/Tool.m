@@ -215,25 +215,6 @@
     }
 }
 
-
-+(BOOL)isPasswordNumber:(NSString *)passWordNum
-{
-    NSString *PASSWORD = @"^[0-9a-zA-z]{6,12}$";
-    NSString *PASSWORD2 = @"/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,10}$/";
-    
-     NSString *reg = @"[a-z][A-Z]//d{6,12}";
-    NSPredicate *regexTestPassword = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", reg];
-    
-    NSPredicate *regexTestPassword2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", PASSWORD2];
-    if (([regexTestPassword evaluateWithObject:passWordNum] == YES))
-    {
-        return NO;
-    }
-    else {
-        return YES;
-    }
-}
-
 //判断手机号是否有效
 + (BOOL)isMobileNumber:(NSString *)mobileNum
 {

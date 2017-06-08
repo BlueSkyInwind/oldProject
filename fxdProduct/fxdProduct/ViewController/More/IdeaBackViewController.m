@@ -8,7 +8,7 @@
 
 #import "IdeaBackViewController.h"
 #import "ReturnMsgBaseClass.h"
-
+#import "IdeaBackViewModel.h"
 @interface IdeaBackViewController () <UITextViewDelegate>
 {
     ReturnMsgBaseClass *_feedParse;
@@ -41,15 +41,12 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入100字以内!"];
         }else{
             NSLog(@"%@",[Utility sharedUtility].userInfo.userName);
-            NSDictionary *paramDic = @{
-                                       @"content_":self.foreTextview.text,
-                                       @"feedback_way_":PLATFORM,
-                                       };
-            NSLog(@"%@",paramDic);
-            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:
-             [NSString stringWithFormat:@"%@%@",_main_url,_feedBack_url]
-                                                       parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                _feedParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
+            
+            
+            IdeaBackViewModel *ideaBackViewModel = [[IdeaBackViewModel alloc]init];
+            [ideaBackViewModel setBlockWithReturnBlock:^(id returnValue) {
+                
+                _feedParse = [ReturnMsgBaseClass modelObjectWithDictionary:returnValue];
                 if ([_feedParse.flag isEqualToString:@"0000"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"谢谢您的反馈"];
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -59,9 +56,33 @@
                 } else {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_feedParse.msg];
                 }
-            } failure:^(EnumServerStatus status, id object) {
+                
+            } WithFaileBlock:^{
                 
             }];
+            [ideaBackViewModel saveFeedBackContent:self.foreTextview.text];
+            
+//            NSDictionary *paramDic = @{
+//                                       @"content_":self.foreTextview.text,
+//                                       @"feedback_way_":PLATFORM,
+//                                       };
+//            NSLog(@"%@",paramDic);
+//            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:
+//             [NSString stringWithFormat:@"%@%@",_main_url,_feedBack_url]
+//                                                       parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//                _feedParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
+//                if ([_feedParse.flag isEqualToString:@"0000"]) {
+//                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"谢谢您的反馈"];
+//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                        [self.navigationController popViewControllerAnimated:YES];
+//                    });
+//                    
+//                } else {
+//                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_feedParse.msg];
+//                }
+//            } failure:^(EnumServerStatus status, id object) {
+//                
+//            }];
         }
     } else {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写您宝贵的意见"];
