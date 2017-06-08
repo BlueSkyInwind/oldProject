@@ -30,4 +30,6 @@
 @property (nonatomic, copy) NSString *account_id;
 @property (nonatomic, copy) NSString *pruductId;
 
+
+
 @end

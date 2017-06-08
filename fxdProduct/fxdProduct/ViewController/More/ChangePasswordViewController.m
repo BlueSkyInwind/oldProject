@@ -23,8 +23,8 @@
 @property (strong , nonatomic)UITableView * tableView;
 @property (strong , nonatomic)UIButton * sureButton;
 
-
 @end
+
 
 @implementation ChangePasswordViewController
 
@@ -152,7 +152,6 @@
     if ([self checkInputPassword]) {
         [changePasswordVM fetchChangePassowrdCurrent:oldPassword new:newPassword];
     }
-    
 }
 -(BOOL)checkInputPassword{
     

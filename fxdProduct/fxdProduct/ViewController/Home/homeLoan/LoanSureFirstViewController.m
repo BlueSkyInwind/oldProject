@@ -62,7 +62,7 @@
 - (void)fatchRate
 {
     NSDictionary *dic = @{@"priduct_id_":_productId};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) { 
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         _rateModel = rateParse;
         

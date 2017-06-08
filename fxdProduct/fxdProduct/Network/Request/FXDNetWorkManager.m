@@ -68,7 +68,6 @@
             DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
             
             
-            
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
             
@@ -79,7 +78,6 @@
                     paramDic = [muDic copy];
                 } else {
                     paramDic = [Tool getParameters:parameters];
-                    
                 }
             }
             DLog(@"加密后参数:---%@",paramDic);
@@ -88,8 +86,8 @@
             //        securityPolicy setPinnedCertificates:
             //        securityPolicy.validatesDomainName = YES;
             //        manager.securityPolicy = securityPolicy;
-            
             //            manager.requestSerializer=[AFHTTPRequestSerializer serializer];
+            
             DLog(@"juid --- %@\n token --- %@",[Utility sharedUtility].userInfo.juid,[Utility sharedUtility].userInfo.tokenStr);
             if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
                 if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
