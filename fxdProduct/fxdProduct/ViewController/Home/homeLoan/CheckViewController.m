@@ -288,7 +288,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
            
                 checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
                 UILabel *daysLabel = [[UILabel alloc] init];
-                daysLabel.text = @"借款期限: 14天";
+                daysLabel.text = [NSString stringWithFormat:@"借款期限: %@天", [Utility sharedUtility].rateParse.result.ext_attr_.period_desc_];
                 daysLabel.textAlignment = NSTextAlignmentCenter;
                 daysLabel.font = [UIFont systemFontOfSize:16.f];
                 daysLabel.textColor = [UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000];

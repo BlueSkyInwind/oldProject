@@ -495,7 +495,7 @@
                     
                     if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
                         moenyViewing.payMoneyTitle.text = @"到期还款";
-                        moenyViewing.labelweek.text = @"14天";
+                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@天",[Utility sharedUtility].rateParse.result.ext_attr_.period_desc_];
                         moenyViewing.loanTimeTitle.text = @"借款期限";
                         moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount];
                     } else {

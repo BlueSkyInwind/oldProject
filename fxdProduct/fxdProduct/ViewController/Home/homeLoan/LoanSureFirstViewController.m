@@ -249,7 +249,7 @@
         self.amountLabel.attributedText = attriStr;
     }
     
-    self.timeLabel.text = @"期限:14天";
+    self.timeLabel.text =  [NSString stringWithFormat:@"%@天",_rateModel.result.ext_attr_.period_desc_];;
     
     
 }
