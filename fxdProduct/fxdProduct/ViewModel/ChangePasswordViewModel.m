@@ -14,9 +14,9 @@
 @implementation ChangePasswordViewModel
 
 -(void)fetchChangePassowrdCurrent:(NSString *)CurrentPassword new:(NSString *)newPassword{
-    changePasswordParam *  changePassword = [[changePasswordParam alloc]init];
-    changePassword.mobile_phone_ = [Utility sharedUtility].userInfo.userMobilePhone;
     
+    changePasswordParam *  changePassword = [[changePasswordParam alloc]init];
+    changePassword.mobile_phone_ = [Utility sharedUtility].userInfo.userName;
     changePassword.old_password_ = [DES3Util encrypt:CurrentPassword];
     changePassword.update_password_ = [DES3Util encrypt:newPassword];
     
@@ -65,7 +65,6 @@
 }
 
 -(void)changePasswordSendSMS{
-
 
     SendSmsParam *sendSmsParam = [[SendSmsParam alloc]init];
     sendSmsParam.token = [Utility sharedUtility].userInfo.tokenStr;

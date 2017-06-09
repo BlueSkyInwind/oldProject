@@ -85,7 +85,8 @@
 -(void)makeTabBarHidden:(BOOL)hide { // Custom code to hide TabBar
     if ( [self.view.subviews count] < 2 ) { return;
     }
-    UIView *contentView; if ( [[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] ) {
+    UIView *contentView;
+    if ( [[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] ) {
         contentView = [self.view.subviews objectAtIndex:1]; } else {
             contentView = [self.view.subviews objectAtIndex:0]; }
     if (hide) {

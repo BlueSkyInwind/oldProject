@@ -99,6 +99,7 @@
 {
     //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     [super viewWillDisappear:animated];
+    
 }
 #pragma mark  - 视图布局
 - (void)setNavQRRightBar {
