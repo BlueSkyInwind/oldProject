@@ -19,4 +19,13 @@
 
 -(void)bankCardsSHServiceParamArray:(NSMutableArray *)paramArray;
 
+/**
+ 发薪贷添加银行卡更换银行卡
+ */
+-(void)saveAccountBankCard:(NSMutableArray *)paramArray;
+
+/**
+ 发薪贷添加银行卡获取银行卡列表
+ */
+-(void)getBankList;
 @end
