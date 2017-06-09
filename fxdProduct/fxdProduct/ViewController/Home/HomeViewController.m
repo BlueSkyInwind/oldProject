@@ -797,6 +797,7 @@
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         if ([rateParse.flag isEqualToString:@"0000"]) {
+            [Utility sharedUtility].rateParse = rateParse;
             finish(rateParse);
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];

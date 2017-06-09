@@ -19,11 +19,11 @@
 
 #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0
+
 NSString * const _main_url  =   @"https://h5.faxindai.com:8028/fxd-esb/esb/"; //生产
 NSString * const _ValidESB_url = @"https://h5.faxindai.com:8028/fxd-esb/";
 NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/"; //生产
 NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
-
 
 #elif FXD_Environment_Mode == 1
 
@@ -41,16 +41,11 @@ NSString * const _main_url  =   @"http://192.168.7.253:8081/fxd-esb/esb/";
 
 NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
-
 NSString * const _p2P_url = @"http://192.168.7.253:8081/fxd-esb/p2p/";
 //NSString * const _p2P_url = @"http://192.168.14.18:9191/fxd-esb/p2p/";
-
 NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
 //合规本地
 //NSString * const _P2P_url   =   @"http://192.168.14.170:10010/p2p/";
-
-
-
 
 
 //http://192.168.6.61  UAT
@@ -58,7 +53,6 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
 //NSString * const _ValidESB_url = @"http://192.168.6.61/fxd-esb/";
 //NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/";
 //NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
-
 
 
 //准生产地址

@@ -18,6 +18,8 @@
     if (self) {
         self.userInfo = [[UserInfoObj alloc] init];
         self.getMineyInfo = [[GetMoneyInfo alloc] init];
+        self.rateParse = [[RateModel alloc]init];
+
     }
     return self;
 }

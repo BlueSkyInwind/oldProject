@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "UserInfoObj.h"
 #import "GetMoneyInfo.h"
+#import "RateModel.h"
 
 @interface Utility : NSObject
 
+@property (nonatomic,strong) RateModel *rateParse;
 @property (nonatomic,strong) UserInfoObj *userInfo;
 @property (nonatomic,strong) GetMoneyInfo *getMineyInfo;
 @property (nonatomic,assign) BOOL loginFlage;
