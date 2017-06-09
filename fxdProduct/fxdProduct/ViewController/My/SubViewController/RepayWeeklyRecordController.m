@@ -9,6 +9,7 @@
 #import "RepayWeeklyRecordController.h"
 #import "weeklyRecordCell.h"
 #import "RepayWeeklyRecord.h"
+#import "RepayWeeklyRecordViewModel.h"
 @interface RepayWeeklyRecordController ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *dataAry;
@@ -32,17 +33,19 @@
 }
 -(void)getRecord
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getRepayHistory_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if([object[@"flag"] isEqualToString:@"0000"])
+    
+    RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
+    [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
+        if([returnValue[@"flag"] isEqualToString:@"0000"])
         {
-            if(object[@"result"])
+            if(returnValue[@"result"])
             {
-            for(NSDictionary *dict in object[@"result"])
-            {
-                RepayWeeklyRecord *weekModel=[RepayWeeklyRecord new];
-                [weekModel setValuesForKeysWithDictionary:dict];
-                [dataAry addObject:weekModel];
-            }
+                for(NSDictionary *dict in returnValue[@"result"])
+                {
+                    RepayWeeklyRecord *weekModel=[RepayWeeklyRecord new];
+                    [weekModel setValuesForKeysWithDictionary:dict];
+                    [dataAry addObject:weekModel];
+                }
             }
             if(dataAry.count==0)
             {
@@ -56,12 +59,14 @@
         }
         else
         {
-        NoneView.hidden = NO;
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:object[@"msg"]];
+            NoneView.hidden = NO;
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         NoneView.hidden = NO;
     }];
+    [repayWeeklyRecordViewModel getRepayHistoryList];
+
 }
 -(void)createNoneView
 {

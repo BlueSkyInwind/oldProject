@@ -10,6 +10,7 @@
 #import "GetMoneyHistoryBaseClass.h"
 #import "RepayRecord.h"
 #import "loanRecordCell.h"
+#import "RepayWeeklyRecordViewModel.h"
 @interface RepayRecordController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UIView *NoneView;
@@ -42,11 +43,14 @@
 }
 -(void)getLoadRecrod
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getMoneyHistory_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if ([[object objectForKey:@"flag"]  isEqual: @"0000"]) {
-            if(object[@"result"])
+    
+    RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
+    [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        if ([[returnValue objectForKey:@"flag"]  isEqual: @"0000"]) {
+            if(returnValue[@"result"])
             {
-                for (NSDictionary *dic in object[@"result"]) {
+                for (NSDictionary *dic in returnValue[@"result"]) {
                     RepayRecord *repayModel=[RepayRecord new];
                     NSLog(@"%@",dic);
                     [repayModel setValuesForKeysWithDictionary:dic];
@@ -63,12 +67,15 @@
         }
         else
         {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:object[@"msg"]];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
             NoneView.hidden=NO;
         }
-    } failure:^(EnumServerStatus status, id object) {
-        NoneView.hidden=NO;
+        
+    } WithFaileBlock:^{
+         NoneView.hidden=NO;
     }];
+    
+    [repayWeeklyRecordViewModel getMoneyHistoryList];
     
 }
 

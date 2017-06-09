@@ -12,7 +12,7 @@
 #import "EditCardsController.h"
 #import "BankModel.h"
 #import "UserCardResult.h"
-
+#import "RepayWeeklyRecordViewModel.h"
 @interface MyCardsViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     //    BankCardInfoBaseClass
@@ -120,8 +120,10 @@
 //网络请求
 -(void)postUrlMessageandDictionary{
     //请求银行卡列表信息
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        _userCardModel =[UserCardResult yy_modelWithJSON:object];
+    
+    RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
+    [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _userCardModel =[UserCardResult yy_modelWithJSON:returnValue];
         if([_userCardModel.flag isEqualToString:@"0000"]){
             for(NSInteger j=0;j<_userCardModel.result.count;j++)
             {
@@ -145,13 +147,15 @@
             [_tableView reloadData];
             [self createMyCardUI];
         }else{
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardModel.msg];
+           
             NoneView.hidden=NO;
             
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         NoneView.hidden=NO;
     }];
+    [repayWeeklyRecordViewModel bankCardList];
+
 }
 
 - (NSString *)formatString:(NSString *)str

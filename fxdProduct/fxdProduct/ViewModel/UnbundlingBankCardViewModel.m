@@ -9,6 +9,7 @@
 #import "UnbundlingBankCardViewModel.h"
 #import "SendSmsParamModel.h"
 #import "BankCardsParamModel.h"
+#import "SaveAccountBankCardParamModel.h"
 @implementation UnbundlingBankCardViewModel
 
 -(void)sendSmsSHServiceBankNo:(NSString *)bankNo BusiType:(NSString *)busi_type SmsType:(NSString *)sms_type Mobile:(NSString *)mobile{
@@ -52,6 +53,44 @@
             self.returnBlock(object);
         }
     } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+
+-(void)saveAccountBankCard:(NSMutableArray *)paramArray{
+
+    SaveAccountBankCardParamModel *saveAccountBankCardParamModel = [[SaveAccountBankCardParamModel alloc]init];
+    saveAccountBankCardParamModel.card_bank_ = paramArray[0];
+    saveAccountBankCardParamModel.card_type_ = paramArray[1];
+    saveAccountBankCardParamModel.card_no_ = paramArray[2];
+    saveAccountBankCardParamModel.bank_reserve_phone_ = paramArray[3];
+    saveAccountBankCardParamModel.verify_code_ = paramArray[4];
+    
+    NSDictionary *paramDic = [saveAccountBankCardParamModel toDictionary];
+    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_BankNumCheck_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+-(void)getBankList{
+
+    NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
+    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
         if (self.faileBlock) {
             [self faileBlock];
         }
