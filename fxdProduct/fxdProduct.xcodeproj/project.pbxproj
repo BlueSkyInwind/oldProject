@@ -1260,6 +1260,8 @@
 		CCF803281ED4249A003B7975 /* UnbundlingBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF803251ED4249A003B7975 /* UnbundlingBankCardViewController.m */; };
 		CCF803291ED4249A003B7975 /* UnbundlingBankCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF803261ED4249A003B7975 /* UnbundlingBankCardViewController.xib */; };
 		CCF8032A1ED4249A003B7975 /* UnbundlingBankCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF803261ED4249A003B7975 /* UnbundlingBankCardViewController.xib */; };
+		CCF9384D1EEE2CA80074791D /* ExpressCreditRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF9384C1EEE2CA80074791D /* ExpressCreditRefuseView.m */; };
+		CCF9384E1EEE2CA80074791D /* ExpressCreditRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF9384C1EEE2CA80074791D /* ExpressCreditRefuseView.m */; };
 		CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
 		CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
 		EF27DA27932A7C2AC840F7ED /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ECD9F837F823AC9D2C9344A /* Pods_fxd_fxdProductDev.framework */; };
@@ -2420,6 +2422,8 @@
 		CCF803241ED42499003B7975 /* UnbundlingBankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnbundlingBankCardViewController.h; sourceTree = "<group>"; };
 		CCF803251ED4249A003B7975 /* UnbundlingBankCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnbundlingBankCardViewController.m; sourceTree = "<group>"; };
 		CCF803261ED4249A003B7975 /* UnbundlingBankCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnbundlingBankCardViewController.xib; sourceTree = "<group>"; };
+		CCF9384B1EEE2CA80074791D /* ExpressCreditRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressCreditRefuseView.h; sourceTree = "<group>"; };
+		CCF9384C1EEE2CA80074791D /* ExpressCreditRefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressCreditRefuseView.m; sourceTree = "<group>"; };
 		CCFA2DC81EB02FFE0071F46B /* HomeProductList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeProductList.h; sourceTree = "<group>"; };
 		CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeProductList.m; sourceTree = "<group>"; };
 		DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2672,6 +2676,8 @@
 				0FEACE1D1CA0E2450027859A /* TelPhoneCompanyCell.h */,
 				0FEACE1E1CA0E2450027859A /* TelPhoneCompanyCell.m */,
 				0FEACE1F1CA0E2450027859A /* TelPhoneCompanyCell.xib */,
+				CCF9384B1EEE2CA80074791D /* ExpressCreditRefuseView.h */,
+				CCF9384C1EEE2CA80074791D /* ExpressCreditRefuseView.m */,
 			);
 			path = writeView;
 			sourceTree = "<group>";
@@ -6147,6 +6153,7 @@
 				63D47FF91D9A6F8B0058315E /* GetCaseInfo.m in Sources */,
 				63C50E4C1E67F6C10035EE4F /* CustomerIDInfo.m in Sources */,
 				63E8F1B11E6FDAEC00FE4BDD /* DataDicParse.m in Sources */,
+				CCF9384D1EEE2CA80074791D /* ExpressCreditRefuseView.m in Sources */,
 				635AB7AD1BE34F9F00C32919 /* ShouldAlsoAmountResult.m in Sources */,
 				CCCE40C51EE7D19C00E3F102 /* ChangePasswordParamModel.m in Sources */,
 			);
@@ -6614,6 +6621,7 @@
 				CC0DFAE51EA5B1090024841A /* GetCaseInfo.m in Sources */,
 				CC0DFAE61EA5B1090024841A /* CustomerIDInfo.m in Sources */,
 				CC0DFAE71EA5B1090024841A /* DataDicParse.m in Sources */,
+				CCF9384E1EEE2CA80074791D /* ExpressCreditRefuseView.m in Sources */,
 				CC0DFAE81EA5B1090024841A /* ShouldAlsoAmountResult.m in Sources */,
 				CCCE40C61EE7D19C00E3F102 /* ChangePasswordParamModel.m in Sources */,
 			);

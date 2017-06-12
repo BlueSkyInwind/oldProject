@@ -1411,6 +1411,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 
                  [self saveLoanCase:@"20" caseInfo:_caseInfo];
                 
+//                 [self getBankListInfo];
                 
             }else if ([model.result.flg isEqualToString:@"3"]){//待激活
                 

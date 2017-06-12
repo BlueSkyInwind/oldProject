@@ -149,12 +149,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                         [_cellSelectArr addObject:[NSNumber numberWithBool:true]];
                         _readyPayAmount += billList.amount_total_;
                         
-//                        if (billList.status_ == 2) {
-//                            
-//                            if (_clickMax == _p2pBillModel.data.bill_List_.count-1) {
-//                                _clickMax = 0;
-//                            }
-//                        }
                     } else {
                         [_cellSelectArr addObject:[NSNumber numberWithBool:false]];
                     }
@@ -171,7 +165,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             }
             
             if (_clickMax == _p2pBillModel.data.bill_List_.count-1) {
-                _lastClick = -1;
+                _lastClick = 0;
                 _selectAllBtn.selected = YES;
                 [self selectAll];
             }else{

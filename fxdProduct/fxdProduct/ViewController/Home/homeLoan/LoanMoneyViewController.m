@@ -559,7 +559,7 @@
 
 -(void)PostGetCheckMoney
 {
-<<<<<<< HEAD
+
     
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -582,35 +582,8 @@
                 } else {
                     moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
                     moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount/_approvalModel.result.loan_staging_amount.integerValue + _approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate];
-=======
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_approvalAmount_jhtml] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            _approvalModel = [Approval yy_modelWithJSON:object];
-            //            approvalModel.result.loan_staging_amount.integerValue
-            if ([_approvalModel.flag isEqualToString:@"0000"])
-            {
-                if (_approvalModel.result.approval_amount >0 && _approvalModel.result.loan_staging_amount.integerValue > 0) {
-                    //                    double approAmountSting = 0.0;
-                    //                    if (approvalModel.result.approval_amount >= 500) {
-                    //                        approAmountSting = approvalBaseClass.result.approvalAmount;
-                    //                    }
-                    moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%.0f元", _approvalModel.result.approval_amount];
-                    
-                    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
-                        moenyViewing.payMoneyTitle.text = @"到期还款";
-                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@天",[Utility sharedUtility].rateParse.result.ext_attr_.period_desc_];
-                        moenyViewing.loanTimeTitle.text = @"借款期限";
-                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount];
-                    } else {
-                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
-                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount/_approvalModel.result.loan_staging_amount.integerValue + _approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate];
-                    }
 
-                    //                    [NSString stringWithFormat:@"%.2f元",approAmountSting/(approvalBaseClass.result.loanStagingAmount) + approAmountSting*0.021];
-                    moenyViewing.labelAllMoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate*_approvalModel.result.loan_staging_amount.integerValue];
-                    //                                                       approAmountSting +approAmountSting*approvalBaseClass.result.loanStagingAmount*0.021];
->>>>>>> ad6cb320ad93ab3896369487ae2975a2455f9470
-                }
+
                 
                 //                    [NSString stringWithFormat:@"%.2f元",approAmountSting/(approvalBaseClass.result.loanStagingAmount) + approAmountSting*0.021];
                 moenyViewing.labelAllMoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate*_approvalModel.result.loan_staging_amount.integerValue];
@@ -627,6 +600,7 @@
                 }
             }
         }
+      }
     } WithFaileBlock:^{
         
     }];
@@ -635,4 +609,35 @@
     
 }
 
+-(void)FxdNetWorking{
+
+    //    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_approvalAmount_jhtml] parameters:nil finished:^(EnumServerStatus status, id object) {
+    //        if (status == Enum_SUCCESS) {
+    //            _approvalModel = [Approval yy_modelWithJSON:object];
+    //            //            approvalModel.result.loan_staging_amount.integerValue
+    //            if ([_approvalModel.flag isEqualToString:@"0000"])
+    //            {
+    //                if (_approvalModel.result.approval_amount >0 && _approvalModel.result.loan_staging_amount.integerValue > 0) {
+    //                    //                    double approAmountSting = 0.0;
+    //                    //                    if (approvalModel.result.approval_amount >= 500) {
+    //                    //                        approAmountSting = approvalBaseClass.result.approvalAmount;
+    //                    //                    }
+    //                    moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%.0f元", _approvalModel.result.approval_amount];
+    //
+    //                    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+    //                        moenyViewing.payMoneyTitle.text = @"到期还款";
+    //                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@天",[Utility sharedUtility].rateParse.result.ext_attr_.period_desc_];
+    //                        moenyViewing.loanTimeTitle.text = @"借款期限";
+    //                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount];
+    //                    } else {
+    //                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
+    //                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount/_approvalModel.result.loan_staging_amount.integerValue + _approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate];
+    //                    }
+    
+    //                    [NSString stringWithFormat:@"%.2f元",approAmountSting/(approvalBaseClass.result.loanStagingAmount) + approAmountSting*0.021];
+    //                    moenyViewing.labelAllMoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate*_approvalModel.result.loan_staging_amount.integerValue];
+    //                    //                                                       approAmountSting +approAmountSting*approvalBaseClass.result.loanStagingAmount*0.021];
+    //                }
+    
+}
 @end
