@@ -175,22 +175,22 @@
                     moenyViewing.middleView.hidden = YES;
                     break;
                 default:
-                    if (_isHuiFu) {
-                        
-                        _isHuiFu = NO;
-                        moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-                        moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-                        [self.view addSubview:moenyViewing];
-                        moenyViewing.sureBtn.hidden = YES;
-                        moenyViewing.labelProgress.text = @"处理中";
-                        moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-                        moenyViewing.lableData.hidden = YES;
-                        moenyViewing.sureBtn.hidden = YES;
-                        moenyViewing.middleView.hidden = YES;
-                        
-                    }else{
+//                    if (_isHuiFu) {
+//                        
+//                        _isHuiFu = NO;
+//                        moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//                        moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//                        [self.view addSubview:moenyViewing];
+//                        moenyViewing.sureBtn.hidden = YES;
+//                        moenyViewing.labelProgress.text = @"处理中";
+//                        moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+//                        moenyViewing.lableData.hidden = YES;
+//                        moenyViewing.sureBtn.hidden = YES;
+//                        moenyViewing.middleView.hidden = YES;
+//                        
+//                    }else{
                     [self.navigationController popToRootViewControllerAnimated:YES];
-                    }
+//                    }
                     break;
             }
         }
@@ -285,21 +285,21 @@
 
 -(void)createUIWith
 {
-    if (_isHuiFu) {
-        
-        _isHuiFu = NO;
-        moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-        moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-        [self.view addSubview:moenyViewing];
-        moenyViewing.sureBtn.hidden = YES;
-        moenyViewing.labelProgress.text = @"处理中";
-        moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-        moenyViewing.lableData.hidden = YES;
-        moenyViewing.sureBtn.hidden = YES;
-        moenyViewing.middleView.hidden = YES;
-        
-    }else{
-        
+//    if (_isHuiFu) {
+//        
+//        _isHuiFu = NO;
+//        moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//        moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//        [self.view addSubview:moenyViewing];
+//        moenyViewing.sureBtn.hidden = YES;
+//        moenyViewing.labelProgress.text = @"处理中";
+//        moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+//        moenyViewing.lableData.hidden = YES;
+//        moenyViewing.sureBtn.hidden = YES;
+//        moenyViewing.middleView.hidden = YES;
+//        
+//    }else{
+    
         switch (_intStautes) {
                 
             case 0://开户失败
@@ -514,7 +514,7 @@
         }
 
         [self PostGetCheckMoney];
-    }
+//    }
     
 }
 

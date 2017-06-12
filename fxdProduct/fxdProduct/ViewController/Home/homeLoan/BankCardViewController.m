@@ -80,7 +80,9 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     
     
     if (![_flagString isEqualToString:@"1"]) {
-        [self PostGetBankCardCheck];
+        if (!_isP2P) {
+            [self PostGetBankCardCheck];
+        }
     }
     
     if (_bankMobile) {

@@ -51,6 +51,7 @@
 #import "QryUserStatusModel.h"
 #import "CheckViewModel.h"
 #import "SaveLoanCaseModel.h"
+#import "QryUserStatusModel.h"
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -88,6 +89,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     DataDicParse *_dataDicModel;
     NSString *_userFlag;
     GetCaseInfo *_caseInfo;
+    QryUserStatusModel *_userStstusModel;
 
 }
 
@@ -165,6 +167,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
     [self checkState];
+    
+    [self getFxdCaseInfo];
 }
 
 -(void)createUI
@@ -729,13 +733,29 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 #pragma mark 新的合规
 -(void)integrationP2PUserState{
 
-//    [self userStatusQuery];
-//    [self userStatus];
+
+    if ([_userStstusModel.result.flg isEqualToString:@"2"]) {//未开户
+        
+        [self saveLoanCase:@"20" caseInfo:_caseInfo];
+        
+    }else if ([_userStstusModel.result.flg isEqualToString:@"3"]){//待激活
+        
+        [self saveLoanCase:@"10" caseInfo:_caseInfo];
+        
+        
+    }else if ([_userStstusModel.result.flg isEqualToString:@"6"]){//正常用户
+        
+        //选择银行卡
+        
+        [self queryCardInfo];
+        
+    }
     
-    [self getFxdCaseInfo];
-//    [self getUserStatus];
+//    [self getFxdCaseInfo];
     
 }
+
+
 - (void)addBildInfo:(GetCaseInfo *)caseInfo
 {
     
@@ -1407,29 +1427,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
             
-            if ([model.result.flg isEqualToString:@"2"]) {//未开户
-                
-                 [self saveLoanCase:@"20" caseInfo:_caseInfo];
-                
-//                 [self getBankListInfo];
-                
-            }else if ([model.result.flg isEqualToString:@"3"]){//待激活
-                
-                 [self saveLoanCase:@"10" caseInfo:_caseInfo];
-               
-                
-            }else if ([model.result.flg isEqualToString:@"6"]){//正常用户
-                
-                //选择银行卡
-                
-                 [self queryCardInfo];
-//                 [self saveLoanCase:@"30" caseInfo:_caseInfo];
-
-                
-            }
+            _userStstusModel = model;
+            
         }else{
             
-                [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
     } WithFaileBlock:^{
         
