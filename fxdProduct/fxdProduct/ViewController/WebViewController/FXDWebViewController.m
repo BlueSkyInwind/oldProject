@@ -284,8 +284,6 @@
             
         }];
         
-        
-        
     } else {
         
         NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
