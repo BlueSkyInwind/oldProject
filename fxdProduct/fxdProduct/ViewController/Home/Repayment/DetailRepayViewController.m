@@ -161,7 +161,16 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
             break;
         }
     }
-    _lastClick = _clickMax;
+    
+    //修改逾期全选和取消的逻辑
+    if (_clickMax == _p2pBillDetail.data.bill_List_.count-1) {
+        _lastClick = 0;
+        _selectAllBtn.selected = YES;
+        [self selectAll];
+    }else{
+        _lastClick = _clickMax;
+    }
+//    _lastClick = _clickMax;
     if (_repayListModel != nil) {
         _headerView.sigingDayLabel.text = [NSString stringWithFormat:@"借款时间%@",_repayListModel.result.siging_day];
         _headerView.principalAmountLabel.text = [NSString stringWithFormat:@"%.2f",_repayListModel.result.principal_amount];
@@ -346,6 +355,102 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     [self.tableView reloadData];
 }
 
+-(void)selectAll{
+
+    for (int i = 0; i < _cellSelectArr.count; i++) {
+        if (_repayListModel != nil) {
+            if (![[_repayListModel.result.situations objectAtIndex:i].status isEqualToString:@"1"]) {
+                [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
+            }
+            if([_cellSelectArr objectAtIndex:i].boolValue){
+                Situations *situation = [_repayListModel.result.situations objectAtIndex:i];
+                _readyPayAmount += situation.debt_total;
+                if ([situation.status isEqualToString:@"3"]) {
+                    _save_amount += situation.debt_service_fee;
+                }
+            }
+        }
+        if (_p2pBillDetail != nil) {
+            if ([_p2pBillDetail.data.bill_List_ objectAtIndex:i].status_ != 1) {
+                [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
+            }
+            if ([_cellSelectArr objectAtIndex:i].boolValue) {
+                BillList *bill = [_p2pBillDetail.data.bill_List_ objectAtIndex:i];
+                _readyPayAmount += bill.amount_total_;
+                if (bill.status_ == 3) {
+                    _save_amount += (bill.amount_total_ - bill.repayment_corpus_);
+                }
+            }
+        }
+    }
+    
+    if (_repayListModel != nil) {
+        if ([_repayListModel.result.situations.lastObject.status isEqualToString:@"2"]) {
+            _save_amount = 0;
+        }else {
+            if (_repayListModel.result.situations.count < _repayListModel.result.service_fee_min_period) {
+                if (_currenPeriod <= _repayListModel.result.situations.count) {
+                    _save_amount = 0.0;
+                }
+            } else {
+                if (_currenPeriod < _repayListModel.result.service_fee_min_period) {
+                    //                        _save_amount -= (_repayListModel.result.service_fee_min_period - _currenPeriod) * (_repayListModel.result.fee_amount / _repayListModel.result.situations.count);
+                    //                        NSInteger k = _repayListModel.result.service_fee_min_period - _currenPeriod;
+                    //                        NSInteger count = _repayListModel.result.situations.count - 1;
+                    //                        while (k > 0 && count >= 0 && count < _repayListModel.result.situations.count) {
+                    //                            _save_amount -= _repayListModel.result.situations[count].debt_service_fee;
+                    //                            k--;
+                    //                            count--;
+                    //                        }
+                    for (NSInteger i = _currenPeriod; i < _repayListModel.result.service_fee_min_period; i++) {
+                        _save_amount -= _repayListModel.result.situations[i].debt_service_fee;
+                    }
+                }
+            }
+        }
+    }
+    
+    if (_p2pBillDetail != nil) {
+        if (_p2pBillDetail.data.bill_List_.lastObject.status_ == 2) {
+            _save_amount = 0;
+        }else {
+            if (_p2pBillDetail.data.bill_List_.count < _p2pBillDetail.data.service_fee_min_period) {
+                if (_currenPeriod <= _p2pBillDetail.data.bill_List_.count) {
+                    _save_amount = 0.0;
+                }
+            } else {
+                if (_currenPeriod < _p2pBillDetail.data.service_fee_min_period) {
+                    NSInteger k = _p2pBillDetail.data.service_fee_min_period - _currenPeriod;
+                    NSInteger count = _p2pBillDetail.data.bill_List_.count - 1;
+                    while (k > 0 && count >= 0 && count < _p2pBillDetail.data.bill_List_.count) {
+                        _save_amount -= _p2pBillDetail.data.bill_List_[count].repayment_interest_ + _p2pBillDetail.data.bill_List_[count].repayment_service_charge_;
+                        k--;
+                        count--;
+                    }
+                    //                        _save_amount -= (_p2pBillDetail.data.service_fee_min_period - _currenPeriod) * ([_p2pBillDetail.data.bill_List_ firstObject].amount_total_ - [_p2pBillDetail.data.bill_List_ firstObject].repayment_corpus_);
+                }
+            }
+        }
+    }
+    if (_p2pBillDetail != nil) {
+        _readyPayAmount = _p2pBillDetail.data.curr_settle_amt_;
+    }else {
+        _readyPayAmount = _readyPayAmount - _save_amount;
+    }
+    
+    //        _readyPayAmount = _readyPayAmount - _save_amount;
+    if ([_product_id isEqualToString:@"P001002"]) {
+        NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
+        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(255, 134, 25) range:NSMakeRange(2, saveAmount.length)];
+        self.saveUpLabel.attributedText = attriStr;
+        self.saveUpLabel.hidden = NO;
+        _payNumberTop.constant = 5;
+        _payNumberBottom.constant = 15;
+        [_payNumberLabel updateConstraintsIfNeeded];
+        [_payNumberLabel updateConstraints];
+    }
+}
 - (IBAction)checkAll:(UIButton *)sender {
     _selectAllBtn.selected = !_selectAllBtn.selected;
     _readyPayAmount = 0.0;

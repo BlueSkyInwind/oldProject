@@ -30,6 +30,8 @@
 #import "IdeaBackViewController.h"
 #import "QueryBidStatusModel.h"
 #import "GetCaseInfo.h"
+#import "RepayWeeklyRecordViewModel.h"
+#import "LoanMoneyViewModel.h"
 @interface LoanMoneyViewController ()
 {
     MoneyIngView *moenyViewing;
@@ -173,22 +175,22 @@
                     moenyViewing.middleView.hidden = YES;
                     break;
                 default:
-                    if (_isHuiFu) {
-                        
-                        _isHuiFu = NO;
-                        moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-                        moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-                        [self.view addSubview:moenyViewing];
-                        moenyViewing.sureBtn.hidden = YES;
-                        moenyViewing.labelProgress.text = @"处理中";
-                        moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-                        moenyViewing.lableData.hidden = YES;
-                        moenyViewing.sureBtn.hidden = YES;
-                        moenyViewing.middleView.hidden = YES;
-                        
-                    }else{
+//                    if (_isHuiFu) {
+//                        
+//                        _isHuiFu = NO;
+//                        moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//                        moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//                        [self.view addSubview:moenyViewing];
+//                        moenyViewing.sureBtn.hidden = YES;
+//                        moenyViewing.labelProgress.text = @"处理中";
+//                        moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+//                        moenyViewing.lableData.hidden = YES;
+//                        moenyViewing.sureBtn.hidden = YES;
+//                        moenyViewing.middleView.hidden = YES;
+//                        
+//                    }else{
                     [self.navigationController popToRootViewControllerAnimated:YES];
-                    }
+//                    }
                     break;
             }
         }
@@ -204,8 +206,10 @@
 
 -(void)postUrlMessageandDictionary{
     //请求银行卡列表信息
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        UserCardResult *_userCardModel =[UserCardResult yy_modelWithJSON:object];
+    
+    RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
+    [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
+        UserCardResult *_userCardModel =[UserCardResult yy_modelWithJSON:returnValue];
         if([_userCardModel.flag isEqualToString:@"0000"]){
             for(NSInteger j=0;j<_userCardModel.result.count;j++)
             {
@@ -219,8 +223,27 @@
                 }
             }
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
+        
     }];
+    [repayWeeklyRecordViewModel bankCardList];
+//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+//        UserCardResult *_userCardModel =[UserCardResult yy_modelWithJSON:object];
+//        if([_userCardModel.flag isEqualToString:@"0000"]){
+//            for(NSInteger j=0;j<_userCardModel.result.count;j++)
+//            {
+//                CardResult *cardResult = _userCardModel.result[j];
+//                if([cardResult.card_type_ isEqualToString:@"2"])
+//                {
+//                    if ([cardResult.if_default_ isEqualToString:@"1"]) {
+//                        _cardNo = cardResult.card_no_;
+//                        _cardBank = cardResult.card_bank_;
+//                    }
+//                }
+//            }
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//    }];
 }
 
 - (void)getUserInfoData:(void(^)())completion
@@ -262,21 +285,21 @@
 
 -(void)createUIWith
 {
-    if (_isHuiFu) {
-        
-        _isHuiFu = NO;
-        moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-        moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-        [self.view addSubview:moenyViewing];
-        moenyViewing.sureBtn.hidden = YES;
-        moenyViewing.labelProgress.text = @"处理中";
-        moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-        moenyViewing.lableData.hidden = YES;
-        moenyViewing.sureBtn.hidden = YES;
-        moenyViewing.middleView.hidden = YES;
-        
-    }else{
-        
+//    if (_isHuiFu) {
+//        
+//        _isHuiFu = NO;
+//        moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//        moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//        [self.view addSubview:moenyViewing];
+//        moenyViewing.sureBtn.hidden = YES;
+//        moenyViewing.labelProgress.text = @"处理中";
+//        moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+//        moenyViewing.lableData.hidden = YES;
+//        moenyViewing.sureBtn.hidden = YES;
+//        moenyViewing.middleView.hidden = YES;
+//        
+//    }else{
+    
         switch (_intStautes) {
                 
             case 0://开户失败
@@ -334,22 +357,37 @@
                                         tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                                             DLog(@"授权书点击");
                                             
-                                            NSDictionary *paramDic = @{@"apply_id_":_userStateModel.applyID,
-                                                                       @"product_id_":_userStateModel.product_id,
-                                                                       @"protocol_type_":@"1",
-                                                                       @"card_no_":_cardNo,
-                                                                       @"card_bank_":_cardBank};
-                                            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                                                if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+                                            NSArray *paramArray = @[_userStateModel.applyID,_userStateModel.product_id,@"1",_cardNo,_cardBank];
+                                            
+                                            LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+                                            [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+                                                if ([[returnValue objectForKey:@"flag"] isEqualToString:@"0000"]) {
                                                     DetailViewController *detailVC = [[DetailViewController alloc] init];
-                                                    detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
+                                                    detailVC.content = [[returnValue objectForKey:@"result"] objectForKey:@"protocol_content_"];
                                                     [self.navigationController pushViewController:detailVC animated:YES];
                                                 } else {
-                                                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+                                                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
                                                 }
-                                            } failure:^(EnumServerStatus status, id object) {
+                                            } WithFaileBlock:^{
                                                 
                                             }];
+                                            [loanMoneyViewModel getProductProtocol:paramArray];
+//                                            NSDictionary *paramDic = @{@"apply_id_":_userStateModel.applyID,
+//                                                                       @"product_id_":_userStateModel.product_id,
+//                                                                       @"protocol_type_":@"1",
+//                                                                       @"card_no_":_cardNo,
+//                                                                       @"card_bank_":_cardBank};
+//                                            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//                                                if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+//                                                    DetailViewController *detailVC = [[DetailViewController alloc] init];
+//                                                    detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
+//                                                    [self.navigationController pushViewController:detailVC animated:YES];
+//                                                } else {
+//                                                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+//                                                }
+//                                            } failure:^(EnumServerStatus status, id object) {
+//                                                
+//                                            }];
                                             //                                        AutoTransferAccountsAgreement *autoTransfer = [[AutoTransferAccountsAgreement alloc] init];
                                             //                                        [self.navigationController pushViewController:autoTransfer animated:true];
                                         }];
@@ -357,31 +395,55 @@
                                             color:UI_MAIN_COLOR
                                   backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                                       DLog(@"三方协议");
-                                      NSDictionary *paramDic;
+                                      
+                                      NSArray *paramArray = [NSArray array];
                                       if ([model.product_id isEqualToString:@"P001002"]||[model.product_id isEqualToString:@"P001005"]) {
-                                          paramDic = @{@"apply_id_":_userStateModel.applyID,
-                                                       @"product_id_":_userStateModel.product_id,
-                                                       @"protocol_type_":@"2",
-                                                       @"periods_":_approvalModel.result.loan_staging_amount};
+                                          paramArray = @[_userStateModel.applyID,_userStateModel.product_id,@"2",_approvalModel.result.loan_staging_amount];
                                       }
                                       if ([model.product_id isEqualToString:@"P001004"]) {
-                                          paramDic = @{@"apply_id_":_userStateModel.applyID,
-                                                       @"product_id_":_userStateModel.product_id,
-                                                       @"protocol_type_":@"2",
-                                                       @"periods_":@2};
+                                          paramArray = @[_userStateModel.applyID,_userStateModel.product_id,@"2",@2];
                                       }
                                       
-                                      [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                                          if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+                                      LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+                                      [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+                                          if ([[returnValue objectForKey:@"flag"] isEqualToString:@"0000"]) {
                                               DetailViewController *detailVC = [[DetailViewController alloc] init];
-                                              detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
+                                              detailVC.content = [[returnValue objectForKey:@"result"] objectForKey:@"protocol_content_"];
                                               [self.navigationController pushViewController:detailVC animated:YES];
                                           } else {
-                                              [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+                                              [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
                                           }
-                                      } failure:^(EnumServerStatus status, id object) {
+                                      } WithFaileBlock:^{
                                           
                                       }];
+                                      [loanMoneyViewModel getProductProtocol:paramArray];
+                                      
+                                      
+//                                      NSDictionary *paramDic;
+//                                      if ([model.product_id isEqualToString:@"P001002"]||[model.product_id isEqualToString:@"P001005"]) {
+//                                          paramDic = @{@"apply_id_":_userStateModel.applyID,
+//                                                       @"product_id_":_userStateModel.product_id,
+//                                                       @"protocol_type_":@"2",
+//                                                       @"periods_":_approvalModel.result.loan_staging_amount};
+//                                      }
+//                                      if ([model.product_id isEqualToString:@"P001004"]) {
+//                                          paramDic = @{@"apply_id_":_userStateModel.applyID,
+//                                                       @"product_id_":_userStateModel.product_id,
+//                                                       @"protocol_type_":@"2",
+//                                                       @"periods_":@2};
+//                                      }
+//                                      
+//                                      [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//                                          if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+//                                              DetailViewController *detailVC = [[DetailViewController alloc] init];
+//                                              detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
+//                                              [self.navigationController pushViewController:detailVC animated:YES];
+//                                          } else {
+//                                              [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+//                                          }
+//                                      } failure:^(EnumServerStatus status, id object) {
+//                                          
+//                                      }];
                                   }];
                     moenyViewing.agreeMentLabel.attributedText = one;
                     moenyViewing.agreeMentLabel.textColor = UI_MAIN_COLOR;
@@ -396,10 +458,10 @@
                                   backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
                                         tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
                                             DLog(@"合同查看");
-                                            NSDictionary *dicParam = @{@"bid_id_":model.bid_id_};
-                                            [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_contractList_url] parameters:dicParam finished:^(EnumServerStatus status, id object) {
-                                                DLog(@"%@",object);
-                                                P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:object];
+                                            
+                                            LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+                                            [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+                                                P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:returnValue];
                                                 if ([agreeModel.appcode isEqualToString:@"1"]) {
                                                     AgreeMentListViewController *agreeMentListViewController = [[AgreeMentListViewController alloc] init];
                                                     agreeMentListViewController.agreeMentArr = agreeModel.data.pactList;
@@ -407,9 +469,26 @@
                                                 } else {
                                                     
                                                 }
-                                            } failure:^(EnumServerStatus status, id object) {
+                                            } WithFaileBlock:^{
                                                 
                                             }];
+                                            [loanMoneyViewModel getContractList:model.bid_id_];
+                                            
+                                            
+//                                            NSDictionary *dicParam = @{@"bid_id_":model.bid_id_};
+//                                            [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_contractList_url] parameters:dicParam finished:^(EnumServerStatus status, id object) {
+//                                                DLog(@"%@",object);
+//                                                P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:object];
+//                                                if ([agreeModel.appcode isEqualToString:@"1"]) {
+//                                                    AgreeMentListViewController *agreeMentListViewController = [[AgreeMentListViewController alloc] init];
+//                                                    agreeMentListViewController.agreeMentArr = agreeModel.data.pactList;
+//                                                    [self.navigationController pushViewController:agreeMentListViewController animated:true];
+//                                                } else {
+//                                                    
+//                                                }
+//                                            } failure:^(EnumServerStatus status, id object) {
+//                                                
+//                                            }];
                                         }];
                     moenyViewing.agreeMentLabel.attributedText = one;
                     moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentCenter;
@@ -435,7 +514,7 @@
         }
 
         [self PostGetCheckMoney];
-    }
+//    }
     
 }
 
@@ -480,49 +559,85 @@
 
 -(void)PostGetCheckMoney
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_approvalAmount_jhtml] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            _approvalModel = [Approval yy_modelWithJSON:object];
-            //            approvalModel.result.loan_staging_amount.integerValue
-            if ([_approvalModel.flag isEqualToString:@"0000"])
-            {
-                if (_approvalModel.result.approval_amount >0 && _approvalModel.result.loan_staging_amount.integerValue > 0) {
-                    //                    double approAmountSting = 0.0;
-                    //                    if (approvalModel.result.approval_amount >= 500) {
-                    //                        approAmountSting = approvalBaseClass.result.approvalAmount;
-                    //                    }
-                    moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%.0f元", _approvalModel.result.approval_amount];
-                    
-                    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
-                        moenyViewing.payMoneyTitle.text = @"到期还款";
-                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@天",[Utility sharedUtility].rateParse.result.ext_attr_.period_desc_];
-                        moenyViewing.loanTimeTitle.text = @"借款期限";
-                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount];
-                    } else {
-                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
-                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount/_approvalModel.result.loan_staging_amount.integerValue + _approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate];
-                    }
 
-                    //                    [NSString stringWithFormat:@"%.2f元",approAmountSting/(approvalBaseClass.result.loanStagingAmount) + approAmountSting*0.021];
-                    moenyViewing.labelAllMoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate*_approvalModel.result.loan_staging_amount.integerValue];
-                    //                                                       approAmountSting +approAmountSting*approvalBaseClass.result.loanStagingAmount*0.021];
-                }
-                if (_approvalModel.result.first_repay_date !=nil && [_approvalModel.result.first_repay_date length] >= 10) {
-                    if (UI_IS_IPHONE5) {
-                        moenyViewing.lableData.font = [UIFont systemFontOfSize:9.f];
-//                        moenyViewing.lableData.backgroundColor = [UIColor redColor];
-                        moenyViewing.lableData.numberOfLines = 0;
-                        moenyViewing.lableData.text = [NSString stringWithFormat:@"\n第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
-                    }else {
-                        moenyViewing.lableData.text = [NSString stringWithFormat:@"第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
-                    }
+    
+    LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+    [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _approvalModel = [Approval yy_modelWithJSON:returnValue];
+        //            approvalModel.result.loan_staging_amount.integerValue
+        if ([_approvalModel.flag isEqualToString:@"0000"])
+        {
+            if (_approvalModel.result.approval_amount >0 && _approvalModel.result.loan_staging_amount.integerValue > 0) {
+                //                    double approAmountSting = 0.0;
+                //                    if (approvalModel.result.approval_amount >= 500) {
+                //                        approAmountSting = approvalBaseClass.result.approvalAmount;
+                //                    }
+                moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%.0f元", _approvalModel.result.approval_amount];
+                
+                if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+                    moenyViewing.payMoneyTitle.text = @"到期还款";
+                    moenyViewing.labelweek.text = @"14天";
+                    moenyViewing.loanTimeTitle.text = @"借款期限";
+                    moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount];
+                } else {
+                    moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
+                    moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount/_approvalModel.result.loan_staging_amount.integerValue + _approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate];
+
+
+                
+                //                    [NSString stringWithFormat:@"%.2f元",approAmountSting/(approvalBaseClass.result.loanStagingAmount) + approAmountSting*0.021];
+                moenyViewing.labelAllMoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate*_approvalModel.result.loan_staging_amount.integerValue];
+                //                                                       approAmountSting +approAmountSting*approvalBaseClass.result.loanStagingAmount*0.021];
+            }
+            if (_approvalModel.result.first_repay_date !=nil && [_approvalModel.result.first_repay_date length] >= 10) {
+                if (UI_IS_IPHONE5) {
+                    moenyViewing.lableData.font = [UIFont systemFontOfSize:9.f];
+                    //                        moenyViewing.lableData.backgroundColor = [UIColor redColor];
+                    moenyViewing.lableData.numberOfLines = 0;
+                    moenyViewing.lableData.text = [NSString stringWithFormat:@"\n第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
+                }else {
+                    moenyViewing.lableData.text = [NSString stringWithFormat:@"第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
                 }
             }
         }
-    } failure:^(EnumServerStatus status, id object) {
+      }
+    } WithFaileBlock:^{
         
     }];
+    [loanMoneyViewModel getApprovalAmount];
+
     
 }
 
+-(void)FxdNetWorking{
+
+    //    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_approvalAmount_jhtml] parameters:nil finished:^(EnumServerStatus status, id object) {
+    //        if (status == Enum_SUCCESS) {
+    //            _approvalModel = [Approval yy_modelWithJSON:object];
+    //            //            approvalModel.result.loan_staging_amount.integerValue
+    //            if ([_approvalModel.flag isEqualToString:@"0000"])
+    //            {
+    //                if (_approvalModel.result.approval_amount >0 && _approvalModel.result.loan_staging_amount.integerValue > 0) {
+    //                    //                    double approAmountSting = 0.0;
+    //                    //                    if (approvalModel.result.approval_amount >= 500) {
+    //                    //                        approAmountSting = approvalBaseClass.result.approvalAmount;
+    //                    //                    }
+    //                    moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%.0f元", _approvalModel.result.approval_amount];
+    //
+    //                    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+    //                        moenyViewing.payMoneyTitle.text = @"到期还款";
+    //                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@天",[Utility sharedUtility].rateParse.result.ext_attr_.period_desc_];
+    //                        moenyViewing.loanTimeTitle.text = @"借款期限";
+    //                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount];
+    //                    } else {
+    //                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
+    //                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount/_approvalModel.result.loan_staging_amount.integerValue + _approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate];
+    //                    }
+    
+    //                    [NSString stringWithFormat:@"%.2f元",approAmountSting/(approvalBaseClass.result.loanStagingAmount) + approAmountSting*0.021];
+    //                    moenyViewing.labelAllMoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate*_approvalModel.result.loan_staging_amount.integerValue];
+    //                    //                                                       approAmountSting +approAmountSting*approvalBaseClass.result.loanStagingAmount*0.021];
+    //                }
+    
+}
 @end

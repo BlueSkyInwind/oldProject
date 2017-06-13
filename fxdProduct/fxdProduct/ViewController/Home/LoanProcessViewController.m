@@ -15,6 +15,7 @@
 #import "UserDataViewController.h"
 #import "HomeViewModel.h"
 #import "UserStateModel.h"
+#import "ExpressCreditRefuseView.h"
 @interface LoanProcessViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIView *_noneView;
@@ -23,6 +24,8 @@
     BOOL _isRefuse;
     UserStateModel *_userStateModel;
 }
+
+@property (nonatomic,strong)ExpressCreditRefuseView *expressView;
 @end
 
 @implementation LoanProcessViewController
@@ -135,6 +138,8 @@
             return 190;
         }
         
+//        return 260;
+        
     }else{
         return 0;
     }
@@ -160,6 +165,11 @@
         return refuseView;
 
     }
+    
+//    self.expressView = [[ExpressCreditRefuseView alloc]initWithFrame:CGRectZero];
+//    NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
+//    [self.expressView setContent:content];
+//    return self.expressView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

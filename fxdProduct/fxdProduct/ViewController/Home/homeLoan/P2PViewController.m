@@ -140,7 +140,7 @@
         decisionHandler(WKNavigationActionPolicyAllow);
         
         LoanMoneyViewController *controller = [LoanMoneyViewController new];
-        controller.isHuiFu = YES;
+//        controller.isHuiFu = YES;
         [self.navigationController pushViewController:controller animated:YES];
     }else {
         decisionHandler(WKNavigationActionPolicyAllow);

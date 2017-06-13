@@ -22,6 +22,8 @@
 #import "SendSmsModel.h"
 #import "P2PViewController.h"
 #import "UnbundlingBankCardViewModel.h"
+#import "CheckViewModel.h"
+#import "SaveLoanCaseModel.h"
 #define redColor rgb(252, 0, 6)
 
 @interface BankCardViewController ()<UITableViewDataSource,UITableViewDelegate,
@@ -78,7 +80,9 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     
     
     if (![_flagString isEqualToString:@"1"]) {
-        [self PostGetBankCardCheck];
+        if (!_isP2P) {
+            [self PostGetBankCardCheck];
+        }
     }
     
     if (_bankMobile) {
@@ -621,6 +625,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         
         if(_isP2P){
             
+//        [self getFxdCaseInfo];
          [self openAccount];
         }else{
             
@@ -791,6 +796,45 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 //    p2pVC.userSelectNum = _userSelectNum;
     p2pVC.purposeSelect = _purposeSelect;
     [self.navigationController pushViewController:p2pVC animated:YES];
+}
+
+
+#pragma mark 发标前查询进件
+-(void)getFxdCaseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
+        if ([caseInfo.flag isEqualToString:@"0000"]) {
+            
+            [self save:caseInfo];
+            
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel getFXDCaseInfo];
+    
+}
+
+
+#pragma mark 提款申请件记录
+-(void)save:(GetCaseInfo *)caseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        SaveLoanCaseModel *model = [SaveLoanCaseModel yy_modelWithJSON:returnValue];
+        if ([model.flag isEqualToString:@"0000"]) {
+            [self openAccount];
+            
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel saveLoanCase:@"20" CaseInfo:caseInfo Period:[NSString stringWithFormat:@"%ld",_periodSelect] PurposeSelect:_purposeSelect];
+    
 }
 
 #pragma mark  银行卡名字的缩写

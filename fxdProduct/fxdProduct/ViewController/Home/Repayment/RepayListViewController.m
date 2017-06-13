@@ -140,12 +140,15 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             for (BillList *billList in _p2pBillModel.data.bill_List_) {
                 if (billList.status_ != 1 ) {
                     if (billList.status_ == 2 || billList.status_ == 4) {
+                        
                         if (billList.status_ == 4) {
                             _currenPeriod = billList.cur_stage_no_;
+                            
                         }
+                        _clickMax++;
                         [_cellSelectArr addObject:[NSNumber numberWithBool:true]];
                         _readyPayAmount += billList.amount_total_;
-                        _clickMax++;
+                        
                     } else {
                         [_cellSelectArr addObject:[NSNumber numberWithBool:false]];
                     }
@@ -160,7 +163,15 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                     }
                 }
             }
-            _lastClick = _clickMax;
+            
+            if (_clickMax == _p2pBillModel.data.bill_List_.count-1) {
+                _lastClick = 0;
+                _selectAllBtn.selected = YES;
+                [self selectAll];
+            }else{
+               _lastClick = _clickMax;
+            }
+            
             [self updateUserNeedPayAmount];
             [self.repayTableView reloadData];
         } else {
@@ -258,6 +269,90 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
  *  status: 1->已还   2->逾期   3->未来期   4->当期
  */
 
+-(void)selectAll{
+
+    _readyPayAmount = 0.0;
+    _save_amount = 0.0;
+    for (int i = 0; i < _cellSelectArr.count; i++) {
+        [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
+        if ([_userStateParse.platform_type isEqualToString:@"0"]) {
+            Situations *situation = [_vaildSituations objectAtIndex:i];
+            _readyPayAmount += situation.debt_total;
+            if ([situation.status isEqualToString:@"3"]) {
+                _save_amount += situation.debt_service_fee;
+            }
+        }
+        if ([_userStateParse.platform_type isEqualToString:@"2"]) {
+            BillList *bill = [_vaildBills objectAtIndex:i];
+            _readyPayAmount += bill.amount_total_;
+            if (bill.status_ == 3) {
+                _save_amount += (bill.repayment_service_charge_ + bill.repayment_interest_);
+            }
+        }
+    }
+    
+    if ([_userStateParse.platform_type isEqualToString:@"0"]) {
+        if ([_vaildSituations.firstObject.status isEqualToString:@"2"] && [_vaildSituations.lastObject.status isEqualToString:@"2"]) {
+            _save_amount = 0;
+        }else {
+            if (_repayListModel.result.situations.count < _repayListModel.result.service_fee_min_period) {
+                if (_currenPeriod <= _repayListModel.result.situations.count) {
+                    _save_amount = 0.0;
+                }
+            } else {
+                if (_currenPeriod < _repayListModel.result.service_fee_min_period) {
+                    //                        _save_amount -= (_repayListModel.result.service_fee_min_period - _currenPeriod) * (_repayListModel.result.fee_amount / _repayListModel.result.situations.count);
+                    //                        NSInteger k = _repayListModel.result.service_fee_min_period - _currenPeriod;
+                    //                        NSInteger count = _repayListModel.result.situations.count - 1;
+                    //                        while (k > 0 && count >= 0 && count < _repayListModel.result.situations.count) {
+                    //                            _save_amount -= _repayListModel.result.situations[count].debt_service_fee;
+                    //                            k--;
+                    //                            count--;
+                    //                        }
+                    for (NSInteger i = _currenPeriod; i < _repayListModel.result.service_fee_min_period; i++) {
+                        _save_amount -= _repayListModel.result.situations[i].debt_service_fee;
+                    }
+                }
+            }
+        }
+    }
+    if ([_userStateParse.platform_type isEqualToString:@"2"]) {
+        if (_vaildBills.firstObject.status_ == 2 && _vaildBills.lastObject.status_ == 2) {
+            _save_amount = 0;
+        }else {
+            if (_p2pBillModel.data.bill_List_.count < _p2pBillModel.data.service_fee_min_period) {
+                if (_currenPeriod <= _p2pBillModel.data.bill_List_.count) {
+                    _save_amount = 0.0;
+                }
+            } else {
+                if (_p2pBillModel.data.paid_period_ < _p2pBillModel.data.service_fee_min_period) {
+                    if (_currenPeriod < _p2pBillModel.data.service_fee_min_period) {
+                        _save_amount -= (_p2pBillModel.data.service_fee_min_period - _currenPeriod) * (_vaildBills.firstObject.repayment_interest_ + _vaildBills.firstObject.repayment_service_charge_);
+                    }
+                }
+            }
+        }
+    }
+    if ([_userStateParse.platform_type isEqualToString:@"2"]) {
+        _readyPayAmount = _p2pBillModel.data.curr_settle_amt_;
+    }else {
+        _readyPayAmount = _readyPayAmount - _save_amount;
+    }
+    
+    
+    if ([_userStateParse.product_id isEqualToString:@"P001002"]||[_userStateParse.product_id isEqualToString:@"P001005"]) {
+        NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
+        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, saveAmount.length)];
+        self.saveUpLabel.attributedText = attriStr;
+        self.saveUpLabel.hidden = NO;
+        _payNumberTop.constant = 5;
+        _payNumberBottom.constant = 15;
+        [_payNumberLabel updateConstraintsIfNeeded];
+        [_payNumberLabel updateConstraints];
+    }
+
+}
 #pragma mark 全部还款
 - (IBAction)checkAll:(UIButton *)sender {
     _selectAllBtn.selected = !_selectAllBtn.selected;
@@ -346,6 +441,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         
         
     }else {
+        
         for (int i = 0; i < _cellSelectArr.count; i++) {
             if (i <= _lastClick) {
                 [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
@@ -544,7 +640,10 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     
     NSNumber *n = [NSNumber numberWithBool:state];
     if (state) {
-        _lastClick = row;
+        if (_clickMax != _vaildBills.count-1) {
+            _lastClick = row;
+        }
+        
         for (int i = 0; i <= row; i++) {
             [_cellSelectArr replaceObjectAtIndex:i withObject:n];
         }

@@ -859,7 +859,7 @@
             p2pSaveVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
             [self.navigationController pushViewController:p2pSaveVC animated:YES];
         } else {
-            [self repaySure];
+            [self repaySure1];
         }
     } failure:^(EnumServerStatus status, id object) {
         
@@ -867,7 +867,7 @@
 }
 
 
-- (void)repaySure
+- (void)repaySure1
 {
     NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
                           @"bid_id_":_p2pBillModel.data.bid_id_,
@@ -889,36 +889,36 @@
 
 
 
-//#pragma mark 正常扣款
-//- (void)repaySure
-//{
-////    NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
-////                          @"bid_id_":_p2pBillModel.data.bid_id_,
-////                          @"repay_amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
-////                          @"max_bill_date_":[Tool dateToFormatString:_bills.lastObject.bill_date_],
-////                          };
-//    
+#pragma mark 正常扣款
+- (void)repaySure
+{
 //    NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
 //                          @"bid_id_":_p2pBillModel.data.bid_id_,
-//                          @"amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
-//                          @"method_":@"doPay",
+//                          @"repay_amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
 //                          @"max_bill_date_":[Tool dateToFormatString:_bills.lastObject.bill_date_],
-//                          @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone};
-//    
-////    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_doPay_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
-//    NSString *url = [NSString stringWithFormat:@"%@%@",_P2P_url,_paymentService_url];
-//    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:dic finished:^(EnumServerStatus status, id object) {
-//        DLog(@"%@",object);
-//        if ([[object objectForKey:@"appcode"] isEqualToString:@"1"]) {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
-//            [self.navigationController popToRootViewControllerAnimated:YES];
-//        }else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"appmsg"]];
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
-//}
+//                          };
+    
+    NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
+                          @"bid_id_":_p2pBillModel.data.bid_id_,
+                          @"amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
+                          @"method_":@"doPay",
+                          @"max_bill_date_":[Tool dateToFormatString:_bills.lastObject.bill_date_],
+                          @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone};
+    
+//    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_doPay_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
+    NSString *url = [NSString stringWithFormat:@"%@%@",_P2P_url,_paymentService_url];
+    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:dic finished:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+        if ([[object objectForKey:@"appcode"] isEqualToString:@"1"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"appmsg"]];
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
 
 - (void)p2pRepayClean
 {
@@ -946,11 +946,11 @@
         p2pSaveVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         [self.navigationController pushViewController:p2pSaveVC animated:YES];
     } else {
-        [self paySettle];
+        [self paySettle1];
     }
 }
 
-- (void)paySettle
+- (void)paySettle1
 {
     NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
                           @"bid_id_":_p2pBillModel.data.bid_id_,
@@ -968,31 +968,31 @@
 }
 
 //#pragma mark P2P结清  全部还款
-//- (void)paySettle
-//{
-//
-//    
-//    NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
-//                          @"bid_id_":_p2pBillModel.data.bid_id_,
-//                          @"amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
-//                          @"method_":@"doSettle",
-//                          @"max_bill_date_":[Tool dateToFormatString:_bills.lastObject.bill_date_],
-//                          @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone};
-//    
-//    NSString *url = [NSString stringWithFormat:@"%@%@",_P2P_url,_paymentService_url];
-//    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:dic finished:^(EnumServerStatus status, id object) {
-//        DLog(@"%@",object);
-//        if ([[object objectForKey:@"appcode"] isEqualToString:@"1"]) {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
-//            [self.navigationController popToRootViewControllerAnimated:YES];
-//        }else{
-//        
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
-//}
+- (void)paySettle
+{
+
+    
+    NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
+                          @"bid_id_":_p2pBillModel.data.bid_id_,
+                          @"amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
+                          @"method_":@"doSettle",
+                          @"max_bill_date_":[Tool dateToFormatString:_bills.lastObject.bill_date_],
+                          @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone};
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@",_P2P_url,_paymentService_url];
+    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:dic finished:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+        if ([[object objectForKey:@"appcode"] isEqualToString:@"1"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+        
+            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
 
 
 #pragma mark 查询用户状态
