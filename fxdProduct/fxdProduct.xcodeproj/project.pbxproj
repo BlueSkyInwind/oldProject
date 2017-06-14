@@ -1201,6 +1201,10 @@
 		CC5D70281ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
 		CC5D702C1ED4405500A074AF /* PaymentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */; };
 		CC5D702D1ED4405500A074AF /* PaymentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */; };
+		CC6747F51EF121DB00B1912E /* QueryUserBidStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6747F41EF121DB00B1912E /* QueryUserBidStatusModel.m */; };
+		CC6747F61EF121DB00B1912E /* QueryUserBidStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6747F41EF121DB00B1912E /* QueryUserBidStatusModel.m */; };
+		CC6747F91EF1221E00B1912E /* QueryUserBidStatusParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6747F81EF1221E00B1912E /* QueryUserBidStatusParamModel.m */; };
+		CC6747FA1EF1221E00B1912E /* QueryUserBidStatusParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6747F81EF1221E00B1912E /* QueryUserBidStatusParamModel.m */; };
 		CCA056BC1EBB3ECB00CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
@@ -2364,6 +2368,10 @@
 		CC5D70261ED4400600A074AF /* CashModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashModel.m; sourceTree = "<group>"; };
 		CC5D702A1ED4405500A074AF /* PaymentServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentServiceModel.h; sourceTree = "<group>"; };
 		CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentServiceModel.m; sourceTree = "<group>"; };
+		CC6747F31EF121DB00B1912E /* QueryUserBidStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryUserBidStatusModel.h; sourceTree = "<group>"; };
+		CC6747F41EF121DB00B1912E /* QueryUserBidStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryUserBidStatusModel.m; sourceTree = "<group>"; };
+		CC6747F71EF1221E00B1912E /* QueryUserBidStatusParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryUserBidStatusParamModel.h; sourceTree = "<group>"; };
+		CC6747F81EF1221E00B1912E /* QueryUserBidStatusParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryUserBidStatusParamModel.m; sourceTree = "<group>"; };
 		CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
@@ -4469,6 +4477,7 @@
 		63E076541B67114800E269F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CC6747F21EF121BC00B1912E /* QueryUserBidStatus */,
 				CCDEDF661EEA9257009CEC32 /* ProductProtocol */,
 				CCDEDF591EEA3863009CEC32 /* SaveAccountBankCard */,
 				CCCDA8791EDFACED00B48DFF /* SaveLoanCase */,
@@ -5051,6 +5060,17 @@
 				CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */,
 			);
 			name = PaymentService;
+			sourceTree = "<group>";
+		};
+		CC6747F21EF121BC00B1912E /* QueryUserBidStatus */ = {
+			isa = PBXGroup;
+			children = (
+				CC6747F31EF121DB00B1912E /* QueryUserBidStatusModel.h */,
+				CC6747F41EF121DB00B1912E /* QueryUserBidStatusModel.m */,
+				CC6747F71EF1221E00B1912E /* QueryUserBidStatusParamModel.h */,
+				CC6747F81EF1221E00B1912E /* QueryUserBidStatusParamModel.m */,
+			);
+			name = QueryUserBidStatus;
 			sourceTree = "<group>";
 		};
 		CCB323401EBC5A7B0001D9DE /* SubmitZhimaCreditAuth */ = {
@@ -5798,6 +5818,7 @@
 				63F254881E49A45900852CF1 /* HMScannerMaskView.m in Sources */,
 				CC05591F1EB9A36D00733C2E /* DisplayCell.m in Sources */,
 				0FFA91791C59F641008D91D2 /* LoanMoneyViewController.m in Sources */,
+				CC6747F51EF121DB00B1912E /* QueryUserBidStatusModel.m in Sources */,
 				636AC4381D38EA9500599590 /* PayMoneyCell.m in Sources */,
 				1A762F6F1C1FBE4700964719 /* RepayRecordController.m in Sources */,
 				638A17041E517D9F00AB8AB6 /* LOTShapeGroup.m in Sources */,
@@ -6149,6 +6170,7 @@
 				63C50E451E666FF40035EE4F /* ContactBean.m in Sources */,
 				6391F7451D33799C0097C943 /* BankModel.m in Sources */,
 				6313DC201BB512BD00EB45DE /* BaseIndexViewController.m in Sources */,
+				CC6747F91EF1221E00B1912E /* QueryUserBidStatusParamModel.m in Sources */,
 				63FC24F31D98F7E9006F58F3 /* YYTextLine.m in Sources */,
 				63D47FF91D9A6F8B0058315E /* GetCaseInfo.m in Sources */,
 				63C50E4C1E67F6C10035EE4F /* CustomerIDInfo.m in Sources */,
@@ -6266,6 +6288,7 @@
 				CC0DF9A71EA5B1090024841A /* SSKeychainQuery.m in Sources */,
 				CC0DF9A81EA5B1090024841A /* FirstRepayment.m in Sources */,
 				CC0DF9A91EA5B1090024841A /* LoginResult.m in Sources */,
+				CC6747F61EF121DB00B1912E /* QueryUserBidStatusModel.m in Sources */,
 				CC0DF9AA1EA5B1090024841A /* UserInfoObj.m in Sources */,
 				CC0DF9AB1EA5B1090024841A /* QueryRepaymentsBaseClass.m in Sources */,
 				CC0DF9AC1EA5B1090024841A /* InvitationViewController.m in Sources */,
@@ -6617,6 +6640,7 @@
 				CC0DFAE11EA5B1090024841A /* ContactBean.m in Sources */,
 				CC0DFAE21EA5B1090024841A /* BankModel.m in Sources */,
 				CC0DFAE31EA5B1090024841A /* BaseIndexViewController.m in Sources */,
+				CC6747FA1EF1221E00B1912E /* QueryUserBidStatusParamModel.m in Sources */,
 				CC0DFAE41EA5B1090024841A /* YYTextLine.m in Sources */,
 				CC0DFAE51EA5B1090024841A /* GetCaseInfo.m in Sources */,
 				CC0DFAE61EA5B1090024841A /* CustomerIDInfo.m in Sources */,

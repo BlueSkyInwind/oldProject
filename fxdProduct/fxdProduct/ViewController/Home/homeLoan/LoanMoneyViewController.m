@@ -32,6 +32,9 @@
 #import "GetCaseInfo.h"
 #import "RepayWeeklyRecordViewModel.h"
 #import "LoanMoneyViewModel.h"
+#import "CheckViewModel.h"
+#import "QueryUserBidStatusModel.h"
+#import "QryUserStatusModel.h"
 @interface LoanMoneyViewController ()
 {
     MoneyIngView *moenyViewing;
@@ -41,6 +44,7 @@
     NSString *_cardNo;
     NSString *_cardBank;
     NSTimer * _countdownTimer;
+    
     
 }
 
@@ -163,16 +167,24 @@
                     [self createUIWith];
                 }
                     break;
-                case 20:
-                    moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-                    moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-                    [self.view addSubview:moenyViewing];
-                    moenyViewing.sureBtn.hidden = YES;
-                    moenyViewing.labelProgress.text = @"处理中";
-                    moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-                    moenyViewing.lableData.hidden = YES;
-                    moenyViewing.sureBtn.hidden = YES;
-                    moenyViewing.middleView.hidden = YES;
+                case 15:
+                    
+                    if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
+                        
+                        moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+                        moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+                        [self.view addSubview:moenyViewing];
+                        moenyViewing.sureBtn.hidden = YES;
+                        moenyViewing.labelProgress.text = @"处理中";
+                        moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+                        moenyViewing.lableData.hidden = YES;
+                        moenyViewing.sureBtn.hidden = YES;
+                        moenyViewing.middleView.hidden = YES;
+                        
+                    }
+                    
+//                    [self getUserStatus:_caseInfo];
+//                    [self getFxdCaseInfo];
                     break;
                 default:
 
@@ -188,6 +200,83 @@
         
     }];
     [homeViewModel fetchUserState:nil];
+    
+}
+
+
+#pragma mark  fxd用户状态查询，viewmodel
+-(void)getUserStatus:(GetCaseInfo *)caseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        QryUserStatusModel *qryUserStatusModel = [QryUserStatusModel yy_modelWithJSON:returnValue];
+        if ([qryUserStatusModel.flag isEqualToString:@"0000"]) {
+            
+            if ([qryUserStatusModel.flag isEqualToString:@"11"]||[qryUserStatusModel.flag isEqualToString:@"12"]) {
+                
+                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+                [self.view addSubview:moenyViewing];
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.labelProgress.text = @"处理中";
+                moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+                moenyViewing.lableData.hidden = YES;
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.middleView.hidden = YES;
+                
+            }
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    
+    [complianceViewModel getUserStatus:caseInfo];
+}
+
+
+#pragma mark  用户标的状态查询
+
+-(void)queryUserBidStatus:(GetCaseInfo *)caseInfo{
+
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        QueryUserBidStatusModel *queryModel = [QueryUserBidStatusModel yy_modelWithJSON:returnValue];
+        if ([queryModel.result.status isEqualToString:@"1"]) {
+            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+            [self.view addSubview:moenyViewing];
+            moenyViewing.sureBtn.hidden = YES;
+            moenyViewing.labelProgress.text = @"处理中";
+            moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+            moenyViewing.lableData.hidden = YES;
+            moenyViewing.sureBtn.hidden = YES;
+            moenyViewing.middleView.hidden = YES;
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel queryUserBidStatusForm:caseInfo.result.from_ fromCaseId:caseInfo.result.from_case_id_];
+}
+
+#pragma mark 发标前查询进件
+-(void)getFxdCaseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
+        if ([caseInfo.flag isEqualToString:@"0000"]) {
+            [self getUserStatus:caseInfo];
+//            [self queryUserBidStatus:caseInfo];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel getFXDCaseInfo];
     
 }
 
@@ -471,16 +560,24 @@
         }
             break;
             
-        case 20:
-            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-            [self.view addSubview:moenyViewing];
-            moenyViewing.sureBtn.hidden = YES;
-            moenyViewing.labelProgress.text = @"处理中";
-            moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-            moenyViewing.lableData.hidden = YES;
-            moenyViewing.sureBtn.hidden = YES;
-            moenyViewing.middleView.hidden = YES;
+        case 15:
+            
+            if ([_qryUserStatusModel.flag isEqualToString:@"11"]||[_qryUserStatusModel.flag isEqualToString:@"12"]) {
+                
+                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+                [self.view addSubview:moenyViewing];
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.labelProgress.text = @"处理中";
+                moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+                moenyViewing.lableData.hidden = YES;
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.middleView.hidden = YES;
+                
+            }
+//            [self getUserStatus:_caseInfo];
+//            [self getFxdCaseInfo];
+
             break;
         default:
             [self.navigationController popToRootViewControllerAnimated:YES];
@@ -525,7 +622,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    
+
 //    [self addBid];
 }
 
@@ -583,35 +680,6 @@
     
 }
 
--(void)FxdNetWorking{
 
-    //    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_approvalAmount_jhtml] parameters:nil finished:^(EnumServerStatus status, id object) {
-    //        if (status == Enum_SUCCESS) {
-    //            _approvalModel = [Approval yy_modelWithJSON:object];
-    //            //            approvalModel.result.loan_staging_amount.integerValue
-    //            if ([_approvalModel.flag isEqualToString:@"0000"])
-    //            {
-    //                if (_approvalModel.result.approval_amount >0 && _approvalModel.result.loan_staging_amount.integerValue > 0) {
-    //                    //                    double approAmountSting = 0.0;
-    //                    //                    if (approvalModel.result.approval_amount >= 500) {
-    //                    //                        approAmountSting = approvalBaseClass.result.approvalAmount;
-    //                    //                    }
-    //                    moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%.0f元", _approvalModel.result.approval_amount];
-    //
-    //                    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
-    //                        moenyViewing.payMoneyTitle.text = @"到期还款";
-    //                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@天",[Utility sharedUtility].rateParse.result.ext_attr_.period_desc_];
-    //                        moenyViewing.loanTimeTitle.text = @"借款期限";
-    //                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount];
-    //                    } else {
-    //                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
-    //                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount/_approvalModel.result.loan_staging_amount.integerValue + _approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate];
-    //                    }
-    
-    //                    [NSString stringWithFormat:@"%.2f元",approAmountSting/(approvalBaseClass.result.loanStagingAmount) + approAmountSting*0.021];
-    //                    moenyViewing.labelAllMoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate*_approvalModel.result.loan_staging_amount.integerValue];
-    //                    //                                                       approAmountSting +approAmountSting*approvalBaseClass.result.loanStagingAmount*0.021];
-    //                }
-    
-}
+
 @end

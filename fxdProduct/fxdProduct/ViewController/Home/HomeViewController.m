@@ -48,7 +48,8 @@
 #import "UnbundlingBankCardViewController.h"
 #import "ChangeBankCardViewController.h"
 #import "BankCardViewController.h"
-
+#import "CheckViewModel.h"
+#import "QryUserStatusModel.h"
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
@@ -615,7 +616,7 @@
         if([returnValue[@"flag"] isEqualToString:@"0000"])
         {
             UserStateModel *model=[UserStateModel yy_modelWithJSON:returnValue[@"result"]];
-            
+            _model = model;
             //            apply_flag_为0000，跳转到客户基本信息填写页面；
             //            apply_flag_为0001，跳转到审核未通过页面；
             //            apply_flag_为0002，跳转到提款选择还款周期页面；
@@ -692,7 +693,14 @@
                     case 15://人工审核通过
                     case 17:
                     {
-                        [self goCheckVC:model];
+                        if ([model.platform_type isEqualToString:@"2"]) {
+                            [self getFxdCaseInfo];
+                        }else{
+                        
+                            [self goCheckVC:model];
+                        }
+                        
+                        
                     }
                         break;
                     case 13://已结清
@@ -807,6 +815,61 @@
         
     }];
 }
+
+
+#pragma mark 发标前查询进件
+-(void)getFxdCaseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
+        if ([caseInfo.flag isEqualToString:@"0000"]) {
+            
+//            _caseInfo = caseInfo;
+            //            [self queryUserBidStatus:caseInfo];
+            [self getUserStatus:caseInfo];
+            
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel getFXDCaseInfo];
+    
+}
+
+#pragma mark  fxd用户状态查询，viewmodel
+-(void)getUserStatus:(GetCaseInfo *)caseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
+        if ([model.flag isEqualToString:@"0000"]) {
+            
+            
+            if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
+
+                LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                controller.qryUserStatusModel = model;
+                [self.navigationController pushViewController:controller animated:YES];
+
+            }else{
+            
+                [self goCheckVC:_model];
+            }
+            
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    
+    [complianceViewModel getUserStatus:caseInfo];
+}
+
+
 #pragma mark - 页面跳转
 - (void)goCheckVC:(UserStateModel *)model
 {
