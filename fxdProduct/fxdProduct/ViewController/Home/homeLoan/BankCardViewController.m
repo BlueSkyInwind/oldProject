@@ -792,9 +792,11 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     p2pVC.periodSelect = _periodSelect;
     p2pVC.dataArray = dataListAll3;
     p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
+    p2pVC.isCheck = YES;
 //    p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
 //    p2pVC.userSelectNum = _userSelectNum;
     p2pVC.purposeSelect = _purposeSelect;
+//    p2pVC.isOpenAccount = YES;
     [self.navigationController pushViewController:p2pVC animated:YES];
 }
 

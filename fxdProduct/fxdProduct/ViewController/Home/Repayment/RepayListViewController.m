@@ -164,13 +164,13 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                 }
             }
             
-            if (_clickMax == _p2pBillModel.data.bill_List_.count-1) {
-                _lastClick = 0;
-                _selectAllBtn.selected = YES;
-                [self selectAll];
-            }else{
+//            if (_clickMax == _p2pBillModel.data.bill_List_.count-1) {
+//                _lastClick = 0;
+//                _selectAllBtn.selected = YES;
+//                [self selectAll];
+//            }else{
                _lastClick = _clickMax;
-            }
+//            }
             
             [self updateUserNeedPayAmount];
             [self.repayTableView reloadData];

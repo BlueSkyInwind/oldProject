@@ -40,7 +40,7 @@
 }
 
 - (IBAction)loginAction:(UIButton *)sender {
-    LoginViewController *loginView = [LoginViewController new];
+    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     [self.navigationController pushViewController:loginView animated:YES];
 }
 

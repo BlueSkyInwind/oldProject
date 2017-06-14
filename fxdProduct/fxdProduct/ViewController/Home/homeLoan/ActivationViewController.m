@@ -92,7 +92,7 @@
 #pragma mark 确认激活按钮
 -(void)clickBtn{
 
-    NSString *url = [NSString stringWithFormat:@"%@%@?mer_id_=%@&page_type=%@&ret_url=%@&user_id_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"",@"2",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
+    NSString *url = [NSString stringWithFormat:@"%@%@?mer_id_=%@&page_type=%@&ret_url=%@&user_id_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"",@"2",_transition_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
     P2PViewController *p2pVC = [[P2PViewController alloc] init];
     p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [self.navigationController pushViewController:p2pVC animated:YES];

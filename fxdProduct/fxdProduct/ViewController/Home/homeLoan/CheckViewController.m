@@ -169,6 +169,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self checkState];
     
     [self getFxdCaseInfo];
+//    [self getUserStatus];
 }
 
 -(void)createUI
@@ -696,6 +697,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
                 p2pVC.userSelectNum = _userSelectNum;
                 p2pVC.purposeSelect = _purposeSelect;
+//                p2pVC.isOpenAccount = YES;
                 [self.navigationController pushViewController:p2pVC animated:YES];
             }
             //绑卡
@@ -1477,9 +1479,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [self getBankListInfo];
             }else if ([type isEqualToString:@"10"]){
             
-                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_bosAcctActivateRet_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 p2pVC.isCheck = YES;
+//                p2pVC.isOpenAccount = NO;
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
                 [self.navigationController pushViewController:p2pVC animated:YES];
                 

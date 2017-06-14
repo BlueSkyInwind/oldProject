@@ -824,7 +824,7 @@
 - (void)presentLogin:(UIViewController *)vc
 {
     
-    LoginViewController *loginVC = [[LoginViewController alloc]init];
+    LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
     [vc presentViewController:nav animated:YES completion:nil];
     

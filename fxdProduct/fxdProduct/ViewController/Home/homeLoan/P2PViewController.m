@@ -139,46 +139,40 @@
     if ([request.URL.absoluteString isEqualToString:_transition_url]&&![request.URL.absoluteString isEqualToString:self.urlStr]) {
         decisionHandler(WKNavigationActionPolicyAllow);
         
-        LoanMoneyViewController *controller = [LoanMoneyViewController new];
-//        controller.isHuiFu = YES;
-        [self.navigationController pushViewController:controller animated:YES];
-    }else {
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }
-    
-    if ([request.URL.absoluteString isEqualToString:_bosAcctActivateRet_url]&&![request.URL.absoluteString isEqualToString:self.urlStr]) {
-        decisionHandler(WKNavigationActionPolicyAllow);
-        if (self.isCheck) {
+        if (_isCheck) {
             LoanMoneyViewController *controller = [LoanMoneyViewController new];
             [self.navigationController pushViewController:controller animated:YES];
         }else{
         
             for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
-                if ([vc isKindOfClass:[RepayDetailViewController class]]) {
-                    
+                if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
+
                     [self.navigationController popToViewController:vc animated:YES];
                 }
             }
         }
         
-        
-//        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-//            DLog(@"%@",object);
-//            GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
-//            if ([caseInfo.flag isEqualToString:@"0000"]) {
-//                [self getBidStatus:caseInfo];
-//            } else {
-//                
-//            }
-//            
-//        } failure:^(EnumServerStatus status, id object) {
-//            
-//        }];
-    }else{
-        
-     decisionHandler(WKNavigationActionPolicyAllow);
-        
+    }else {
+        decisionHandler(WKNavigationActionPolicyAllow);
     }
+    
+//    if ([request.URL.absoluteString isEqualToString:_transition_url]&&![request.URL.absoluteString isEqualToString:self.urlStr]&&!_isOpenAccount) {
+//        decisionHandler(WKNavigationActionPolicyAllow);
+//        if (self.isCheck) {
+//            LoanMoneyViewController *controller = [LoanMoneyViewController new];
+//            [self.navigationController pushViewController:controller animated:YES];
+//        }else{
+//        
+//            for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+//                if ([vc isKindOfClass:[RepayDetailViewController class]]) {
+//                    
+//                    [self.navigationController popToViewController:vc animated:YES];
+//                }
+//            }
+//        }
+//        
+//        
+
 }
 
 
