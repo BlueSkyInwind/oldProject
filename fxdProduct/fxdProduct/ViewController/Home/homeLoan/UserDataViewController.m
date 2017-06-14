@@ -380,7 +380,6 @@
                     loanSecondVC.productId = [paramDic objectForKey:@"product_id_"];
                     [self.navigationController pushViewController:loanSecondVC animated:true];
                 }
-                
             }
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
@@ -388,7 +387,9 @@
     } WithFaileBlock:^{
         
     }];
-    [homeViewModel fetchUserState:_product_id];
+
+    [homeViewModel fetchUserState:[paramDic objectForKey:@"product_id_"] ];
+
 }
 
 - (void)goCheckVC:(UserStateModel *)model
