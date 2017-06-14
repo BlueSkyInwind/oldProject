@@ -218,7 +218,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.promoteLabel.hidden = YES;
                 if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
                     
-                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
+//                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
                         if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
                             checkFalse.seeView.hidden = NO;
                             [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -229,11 +229,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                             [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
                         }
                         
-                    }else{
-                    
-                        checkFalse.seeView.hidden = YES;
-                        checkFalse.jsdView.hidden = YES;
-                    }
+//                    }else{
+//                    
+//                        checkFalse.seeView.hidden = YES;
+//                        checkFalse.jsdView.hidden = YES;
+//                    }
 //                    checkFalse.jsdView.hidden = NO;
                     
                 }else{
@@ -1360,8 +1360,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         if ([rateParse.flag isEqualToString:@"0000"]) {
             
             checkFalse.nameLabel.text = rateParse.result.name_;
-            checkFalse.quotaLabel.text = [NSString stringWithFormat:@"额度:%ld-%ld元",rateParse.result.principal_bottom_,rateParse.result.principal_top_];
-            checkFalse.termLabel.text = [NSString stringWithFormat:@"期限:%ld-%ld%@",rateParse.result.staging_bottom_,rateParse.result.staging_top_,rateParse.result.remark_];
+            checkFalse.quotaLabel.text = [NSString stringWithFormat:@"%ld-%ld元",rateParse.result.principal_bottom_,rateParse.result.principal_top_];
+            checkFalse.termLabel.text = [NSString stringWithFormat:@"%ld-%ld%@",rateParse.result.staging_bottom_,rateParse.result.staging_top_,rateParse.result.remark_];
             
             
         } else {
