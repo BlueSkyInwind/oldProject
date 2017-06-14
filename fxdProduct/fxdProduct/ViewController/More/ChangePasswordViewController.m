@@ -182,7 +182,7 @@
 }
 - (void)presentLogin
 {
-    LoginViewController *loginView = [[LoginViewController alloc] init];
+    LoginViewController *loginView = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
     nav.transitioningDelegate = self;
     [self presentViewController:nav animated:YES completion:nil];

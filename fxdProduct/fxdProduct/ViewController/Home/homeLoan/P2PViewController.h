@@ -26,5 +26,7 @@
 @property (nonatomic,assign)NSInteger periodSelect;
 
 @property (nonatomic,assign)BOOL isCheck;
+@property (nonatomic,assign)BOOL isOpenAccount;
+
 
 @end

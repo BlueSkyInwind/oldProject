@@ -163,14 +163,14 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     }
     
     //修改逾期全选和取消的逻辑
-    if (_clickMax == _p2pBillDetail.data.bill_List_.count-1) {
-        _lastClick = 0;
-        _selectAllBtn.selected = YES;
-        [self selectAll];
-    }else{
-        _lastClick = _clickMax;
-    }
-//    _lastClick = _clickMax;
+//    if (_clickMax == _p2pBillDetail.data.bill_List_.count-1) {
+//        _lastClick = 0;
+//        _selectAllBtn.selected = YES;
+//        [self selectAll];
+//    }else{
+//        _lastClick = _clickMax;
+//    }
+    _lastClick = _clickMax;
     if (_repayListModel != nil) {
         _headerView.sigingDayLabel.text = [NSString stringWithFormat:@"借款时间%@",_repayListModel.result.siging_day];
         _headerView.principalAmountLabel.text = [NSString stringWithFormat:@"%.2f",_repayListModel.result.principal_amount];
