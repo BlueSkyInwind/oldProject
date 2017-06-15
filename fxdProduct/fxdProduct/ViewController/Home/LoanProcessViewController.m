@@ -60,13 +60,13 @@
         {
             _userStateModel = [UserStateModel yy_modelWithJSON:returnValue[@"result"]];
             
-            if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-                
+//            if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
+            
                 LoanProcessResult *loanProcess  =  _loanProcessParse.result.lastObject;
                 if ([loanProcess.apply_status_ isEqualToString:@"已拒绝"]) {
                     _isRefuse = YES;
                 }
-            }
+//            }
 //           _isRefuse = YES;
             [self.tableView reloadData];
             

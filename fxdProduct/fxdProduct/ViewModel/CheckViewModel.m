@@ -8,7 +8,7 @@
 
 #import "CheckViewModel.h"
 #import "SaveLoanCaseParamModel.h"
-
+#import "QueryUserBidStatusParamModel.h"
 @implementation CheckViewModel
 
 -(void)approvalAmount{
@@ -81,6 +81,26 @@
         }
     }];
 }
+
+
+-(void)queryUserBidStatusForm:(NSString *)form fromCaseId:(NSString *)fromCaseId{
+    
+    QueryUserBidStatusParamModel *queryUserBidStatusParamModel = [[QueryUserBidStatusParamModel alloc]init];
+    queryUserBidStatusParamModel.form_ = form;
+    queryUserBidStatusParamModel.from_case_id_ = fromCaseId;
+    NSDictionary *paramDic = [queryUserBidStatusParamModel toDictionary];
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_queryUserBidStatus_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+    
+    
+}
 @end
 
 
@@ -119,4 +139,7 @@
         }
     }];
 }
+
+
+
 @end

@@ -387,7 +387,9 @@
     } WithFaileBlock:^{
         
     }];
+
     [homeViewModel fetchUserState:[paramDic objectForKey:@"product_id_"] ];
+
 }
 
 - (void)goCheckVC:(UserStateModel *)model

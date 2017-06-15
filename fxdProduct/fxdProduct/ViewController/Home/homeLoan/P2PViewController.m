@@ -18,6 +18,7 @@
 #import "QryUserStatusModel.h"
 #import "getBidStatus.h"
 #import "RepayDetailViewController.h"
+#import "CheckViewModel.h"
 @interface P2PViewController ()<WKUIDelegate,WKNavigationDelegate>
 {
     UIProgressView *progressView;
@@ -139,18 +140,7 @@
     if ([request.URL.absoluteString isEqualToString:_transition_url]&&![request.URL.absoluteString isEqualToString:self.urlStr]) {
         decisionHandler(WKNavigationActionPolicyAllow);
         
-        if (_isCheck) {
-            LoanMoneyViewController *controller = [LoanMoneyViewController new];
-            [self.navigationController pushViewController:controller animated:YES];
-        }else{
-        
-            for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
-                if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
-
-                    [self.navigationController popToViewController:vc animated:YES];
-                }
-            }
-        }
+        [self addBidInfoService];
         
     }else {
         decisionHandler(WKNavigationActionPolicyAllow);
@@ -174,6 +164,8 @@
 //        
 
 }
+
+
 
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
@@ -205,81 +197,75 @@
 //    }];
 //}
 //#pragma mark  标的录入
-//-(void)addBidInfoService{
-//
-//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-//        DLog(@"%@",object);
-//        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
-//        if ([caseInfo.flag isEqualToString:@"0000"]) {
-//            [self addBildInfo:caseInfo];
-//        } else {
-//            
-//        }
-//        
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
-//
-//}
+-(void)addBidInfoService{
 
-//#pragma mark  fxd用户状态查询
-//-(void)fxdQryUserStatus{
-//
-//    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_qryUserStatus_url] parameters:@{@"client_":@"1"} finished:^(EnumServerStatus status, id object) {
-//        
-//        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:object];
-//        if ([model .result.appcode isEqualToString:@"1"]) {
-//            if ([model.result.flg isEqualToString:@"2"]) {//未注册
-//                
-//                
-//                
-//            }else if ([model.result.flg isEqualToString:@"3"]){//待激活
-//            
-//            }else if ([model.result.flg isEqualToString:@"6"]){//正常用户
-//            
-//            }
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
-//}
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
+        if ([caseInfo.flag isEqualToString:@"0000"]) {
+            
+            [self getUserStatus:caseInfo];
+            
+            
+            
+            
+        } else {
+            
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
 
-//-(void)checkP2PUserState{
-//
-//    NSDictionary *paramDic = @{@"client_":@"1",@"form_":@"2",@"form_user_id_":[Utility sharedUtility].userInfo.account_id,@"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,@"id_number_":[Utility sharedUtility].userInfo.userIDNumber,@"user_contacter":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_contacter"]],@"user_info":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_info"]],@"user_type_":@"J"};
-//    
-//    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_accountHSService_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//        
-//        //        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-//        AccountHSServiceModel *model = [AccountHSServiceModel yy_modelWithJSON:object];
-//        if ([model.appcode isEqualToString:@"1"]) {
-//            
-//            //                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.data.appmsg];
-//            
-//            if ([model.data.flg isEqualToString:@"2"]||[model.data.flg isEqualToString:@"5"]) {  //2、未开户 3、待激活 4、冻
-//                
-//            }else if ([model.data.flg isEqualToString:@"3"]){
-//                
-//            }else if ([model.data.flg isEqualToString:@"6"]){
-//                
-//                for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
-//                        if ([vc isKindOfClass:[CheckViewController class]]) {
-//                            [self.navigationController popToViewController:vc animated:YES];
-//                        }
-//                    }
-//                
-//            }
-//        }else{
-//            
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.data.appmsg];
-//            
-//        }
-//        
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
-//
-//}
+}
+
+
+#pragma mark  fxd用户状态查询，viewmodel
+-(void)getUserStatus:(GetCaseInfo *)caseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        QryUserStatusModel *qryUserStatusModel = [QryUserStatusModel yy_modelWithJSON:returnValue];
+        if ([qryUserStatusModel.flag isEqualToString:@"0000"]) {
+            
+            if ([qryUserStatusModel.result.flg isEqualToString:@"2"]) {
+                for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+                    if ([vc isKindOfClass:[CheckViewController class]]) {
+                        
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
+            }else{
+            
+                if (_isCheck) {
+                    
+                    LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                    controller.qryUserStatusModel = qryUserStatusModel;
+                    [self.navigationController pushViewController:controller animated:YES];
+                    
+                    
+                }else{
+                    
+                    for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+                        if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
+                            LoanMoneyViewController *controller = (LoanMoneyViewController *)vc;
+                            controller.qryUserStatusModel = qryUserStatusModel;
+                            [self.navigationController popToViewController:controller animated:YES];
+                        }
+                    }
+                }
+            }
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    
+    [complianceViewModel getUserStatus:caseInfo];
+}
+
 
 //- (void)checkP2PUserState1
 //{
