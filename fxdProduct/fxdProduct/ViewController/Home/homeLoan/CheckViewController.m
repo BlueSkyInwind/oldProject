@@ -90,8 +90,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     DataDicParse *_dataDicModel;
     NSString *_userFlag;
     GetCaseInfo *_caseInfo;
-//    QryUserStatusModel *_userStstusModel;
-    QueryUserBidStatusModel *_queryUserBidStatusModel;
+    QryUserStatusModel *_qryUserStatusModel;
+//    QueryUserBidStatusModel *_queryUserBidStatusModel;
 
 }
 
@@ -170,7 +170,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     self.navigationController.navigationBar.translucent = YES;
     [self checkState];
     
-//    [self getFxdCaseInfo];
+    [self getFxdCaseInfo];
 //    [self getUserStatus];
 }
 
@@ -736,26 +736,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 #pragma mark 新的合规
 -(void)integrationP2PUserState{
-
     
-//    if ([_queryUserBidStatusModel.result.status isEqualToString:@"0"]) {//未开户
-//        
-//        [self saveLoanCase:@"20" caseInfo:_caseInfo];
-//        
-//    }else if ([_queryUserBidStatusModel.result.status isEqualToString:@"2"]){//待激活
-//        
-//        [self saveLoanCase:@"10" caseInfo:_caseInfo];
-//        
-//        
-//    }else if ([_queryUserBidStatusModel.result.status isEqualToString:@"3"]){//正常用户
-//        
-//        //选择银行卡
-//        
-//        [self queryCardInfo];
-//        
-//    }
-    
-
     if ([_qryUserStatusModel.result.flg isEqualToString:@"2"]) {//未开户
         
         [self saveLoanCase:@"20" caseInfo:_caseInfo];
@@ -1448,15 +1429,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
             
-//            _userStstusModel = model;
-            
-//            if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
-//                
-//                LoanMoneyViewController *controller = [LoanMoneyViewController new];
-//                controller.qryUserStatusModel = model;
-//                [self.navigationController pushViewController:controller animated:YES];
-//                
-//            }
+            _qryUserStatusModel = model;
             
         }else{
             
@@ -1482,7 +1455,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         if ([caseInfo.flag isEqualToString:@"0000"]) {
             
             _caseInfo = caseInfo;
-//            [self queryUserBidStatus:caseInfo];
             [self getUserStatus];
 
         }
@@ -1493,19 +1465,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 }
 
--(void)queryUserBidStatus:(GetCaseInfo *)caseInfo{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        QueryUserBidStatusModel *queryModel = [QueryUserBidStatusModel yy_modelWithJSON:returnValue];
-        _queryUserBidStatusModel = queryModel;
-        
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel queryUserBidStatusForm:caseInfo.result.from_ fromCaseId:caseInfo.result.from_case_id_];
-}
 #pragma mark 提款申请件记录
 -(void)saveLoanCase:(NSString *)type caseInfo:(GetCaseInfo *)caseInfo{
 

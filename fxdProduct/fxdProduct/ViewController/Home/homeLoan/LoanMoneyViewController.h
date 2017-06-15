@@ -7,8 +7,8 @@
 //
 
 #import "BaseViewController.h"
-@class UserStateModel;
-@class QryUserStatusModel;
+@class UserStateModel,QryUserStatusModel,GetCaseInfo;
+
 @interface LoanMoneyViewController : BaseViewController
 
 @property (nonatomic, assign) NSInteger intStautes;

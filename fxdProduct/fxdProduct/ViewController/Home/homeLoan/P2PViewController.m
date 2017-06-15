@@ -231,8 +231,8 @@
             if ([qryUserStatusModel.result.flg isEqualToString:@"2"]) {
                 for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                     if ([vc isKindOfClass:[CheckViewController class]]) {
-                        
-                        [self.navigationController popToViewController:vc animated:YES];
+                        CheckViewController *controller = (CheckViewController *)vc;
+                        [self.navigationController popToViewController:controller animated:YES];
                     }
                 }
             }else{

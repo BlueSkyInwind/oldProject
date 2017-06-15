@@ -12,6 +12,7 @@
 #import "FMDeviceManager.h"
 #import "RateModel.h"
 #import "ExpressViewController.h"
+
 @interface LoanSureFirstViewController ()
 
 @property (nonatomic, strong) YYTextView *textView;
@@ -57,6 +58,8 @@
 -(void)viewWillAppear:(BOOL)animated{
 
     [self fatchRate];
+    
+//    [self getFxdCaseInfo];
 }
 
 - (void)fatchRate
@@ -285,6 +288,8 @@
             if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
                 
                 CheckViewController *checkView = [CheckViewController new];
+//                checkView.qryUserStatusModel = _qryUserStatusModel;
+//                checkView.caseInfo = _caseInfo;
                 checkView.homeStatues = 1;
                 [self.navigationController pushViewController:checkView animated:YES];
             } else {
@@ -339,6 +344,9 @@
     }];
     [homeViewModel fetchUserState:nil];
 }
+
+
+
 
 - (void)goCheckVC:(UserStateModel *)model
 {

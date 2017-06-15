@@ -50,6 +50,7 @@
 #import "BankCardViewController.h"
 #import "CheckViewModel.h"
 #import "QryUserStatusModel.h"
+#import "GetCaseInfo.h"
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
@@ -64,7 +65,6 @@
     HomeProductList *_homeProductList;
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
-    QryUserStatusModel *_qryUserStatusModel;
 }
 
 @end
@@ -668,11 +668,6 @@
                 switch ([model.applyStatus integerValue])
                 {
                     
-                    case 0://开户失败
-                    {
-                        [self goCheckVC:model productId:productId];
-                    }
-                        break;
                     case 6://就拒绝放款
                     case 2://审核失败
                     case 14://人工审核未通过
@@ -710,7 +705,14 @@
                         BOOL idtatues  = [model.identifier boolValue];
                         if (idtatues) {
                             if (appAgin) {
-                                [self goCheckVC:model productId:productId];
+                                
+                                if ([model.platform_type isEqualToString:@"2"]) {
+                                    [self getFxdCaseInfoProductId:productId];
+                                }else{
+                                    
+                                    [self goCheckVC:model productId:productId];
+                                }
+//                                [self goCheckVC:model productId:productId caseInfo:nil qryUserStatus:nil];
                             }
                         }else{
                             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已经结清借款，当天不能借款"];
@@ -732,13 +734,6 @@
                         [self.navigationController pushViewController:loanVc animated:YES];
                     }
                         break;
-//                        case 21:
-//                    {
-//                        LoanMoneyViewController *loanVc = [LoanMoneyViewController new];
-//                        loanVc.userStateModel = model;
-//                        [self.navigationController pushViewController:loanVc animated:YES];
-//                    }
-//                        break;
                         
                     default:{
                         if ([productId isEqualToString:@"P001004"]) {
@@ -843,7 +838,7 @@
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
-        _qryUserStatusModel = model;
+//        _qryUserStatusModel = model;
         if ([model.flag isEqualToString:@"0000"]) {
             
             if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
@@ -874,7 +869,7 @@
     checkVC.userStateModel = model;
     checkVC.task_status = model.taskStatus;
     checkVC.apply_again_ = model.applyAgain;
-    checkVC.qryUserStatusModel = _qryUserStatusModel;
+
     if (model.days) {
         checkVC.days = model.days;
     }

@@ -35,6 +35,9 @@
 #import "CheckViewModel.h"
 #import "QueryUserBidStatusModel.h"
 #import "QryUserStatusModel.h"
+#import "CheckViewController.h"
+#import "RTRootNavigationController.h"
+#import "GetCaseInfo.h"
 @interface LoanMoneyViewController ()
 {
     MoneyIngView *moenyViewing;
@@ -50,7 +53,7 @@
 
 @property (nonatomic, copy)NSString *platform;
 @property (nonatomic, weak) UIScrollView *scrollView;
-
+@property (nonatomic,strong)GetCaseInfo *caseInfo;
 
 @end
 
@@ -79,7 +82,8 @@
 -(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
 
     [moenyViewing removeFromSuperview];
-    [self checkStatus];
+    [self getFxdCaseInfo];
+//    [self checkStatus];
     
     
 }
@@ -169,19 +173,8 @@
                     break;
                 case 15:
                     
-                    if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
-                        
-                        moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-                        moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-                        [self.view addSubview:moenyViewing];
-                        moenyViewing.sureBtn.hidden = YES;
-                        moenyViewing.labelProgress.text = @"处理中";
-                        moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-                        moenyViewing.lableData.hidden = YES;
-                        moenyViewing.sureBtn.hidden = YES;
-                        moenyViewing.middleView.hidden = YES;
-                        
-                    }
+                    _intStautes = [model.applyStatus integerValue];
+                    [self createUIWith];
                     
 //                    [self getUserStatus:_caseInfo];
 //                    [self getFxdCaseInfo];
@@ -212,19 +205,21 @@
         QryUserStatusModel *qryUserStatusModel = [QryUserStatusModel yy_modelWithJSON:returnValue];
         if ([qryUserStatusModel.flag isEqualToString:@"0000"]) {
             
-            if ([qryUserStatusModel.flag isEqualToString:@"11"]||[qryUserStatusModel.flag isEqualToString:@"12"]) {
-                
-                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-                [self.view addSubview:moenyViewing];
-                moenyViewing.sureBtn.hidden = YES;
-                moenyViewing.labelProgress.text = @"处理中";
-                moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-                moenyViewing.lableData.hidden = YES;
-                moenyViewing.sureBtn.hidden = YES;
-                moenyViewing.middleView.hidden = YES;
-                
-            }
+            _qryUserStatusModel = qryUserStatusModel;
+            [self checkStatus];
+//            if ([qryUserStatusModel.flag isEqualToString:@"11"]||[qryUserStatusModel.flag isEqualToString:@"12"]) {
+//                
+//                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//                [self.view addSubview:moenyViewing];
+//                moenyViewing.sureBtn.hidden = YES;
+//                moenyViewing.labelProgress.text = @"处理中";
+//                moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+//                moenyViewing.lableData.hidden = YES;
+//                moenyViewing.sureBtn.hidden = YES;
+//                moenyViewing.middleView.hidden = YES;
+//                
+//            }
         }else{
             
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
@@ -270,6 +265,7 @@
         
         GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
         if ([caseInfo.flag isEqualToString:@"0000"]) {
+            _caseInfo = caseInfo;
             [self getUserStatus:caseInfo];
 //            [self queryUserBidStatus:caseInfo];
         }
@@ -562,7 +558,7 @@
             
         case 15:
             
-            if ([_qryUserStatusModel.flag isEqualToString:@"11"]||[_qryUserStatusModel.flag isEqualToString:@"12"]) {
+            if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
                 
                 moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
                 moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
@@ -575,6 +571,31 @@
                 moenyViewing.middleView.hidden = YES;
                 
             }
+            if ([_qryUserStatusModel.result.flg isEqualToString:@"2"]) {
+                
+                BOOL isHave = NO;
+                CheckViewController *controller;
+                for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+                    if ([vc isKindOfClass:[CheckViewController class]]) {
+                        controller = (CheckViewController *)vc;
+//                        controller.qryUserStatusModel = _qryUserStatusModel;
+//                        controller.caseInfo = _caseInfo;
+                        isHave = YES;
+                        //                                [self.navigationController popToViewController:controller animated:YES];
+                    }
+                }
+                
+                if (isHave) {
+                    [self.navigationController popToViewController:controller animated:YES];
+                }else{
+                    
+                    controller = [CheckViewController new];
+//                    controller.qryUserStatusModel = _qryUserStatusModel;
+                    [self.navigationController pushViewController:controller animated:YES];
+                }
+            }
+            
+
 //            [self getUserStatus:_caseInfo];
 //            [self getFxdCaseInfo];
 
