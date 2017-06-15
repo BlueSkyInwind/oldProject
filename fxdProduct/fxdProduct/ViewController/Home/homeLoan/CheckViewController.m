@@ -1114,17 +1114,17 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                             [view removeFromSuperview];
                         }
                     }
-                    [_datalist removeAllObjects];
-                    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
-                        for (int i=0; i < 46; i++) {
-                            [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
-                        }
-                    }
-                    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
-                        for (int i=1; i < 2; i++) {
-                            [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
-                        }
-                    }
+//                    [_datalist removeAllObjects];
+//                    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+//                        for (int i=0; i < 46; i++) {
+//                            [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
+//                        }
+//                    }
+//                    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+//                        for (int i=1; i < 2; i++) {
+//                            [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
+//                        }
+//                    }
                     _userSelectNum = @0;
                     [self createUI];
                 }
@@ -1182,6 +1182,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 #pragma mark 更改工薪贷和白领贷的周期
 -(void)getCycle:(CGFloat)money{
 
+    [_datalist removeAllObjects];
     int j = 0;
     int k = 0;
     if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
