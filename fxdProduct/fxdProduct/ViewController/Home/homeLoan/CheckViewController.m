@@ -90,7 +90,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     DataDicParse *_dataDicModel;
     NSString *_userFlag;
     GetCaseInfo *_caseInfo;
-    QryUserStatusModel *_userStstusModel;
+//    QryUserStatusModel *_userStstusModel;
     QueryUserBidStatusModel *_queryUserBidStatusModel;
 
 }
@@ -170,7 +170,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     self.navigationController.navigationBar.translucent = YES;
     [self checkState];
     
-    [self getFxdCaseInfo];
+//    [self getFxdCaseInfo];
 //    [self getUserStatus];
 }
 
@@ -756,16 +756,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 //    }
     
 
-    if ([_userStstusModel.result.flg isEqualToString:@"2"]) {//未开户
+    if ([_qryUserStatusModel.result.flg isEqualToString:@"2"]) {//未开户
         
         [self saveLoanCase:@"20" caseInfo:_caseInfo];
         
-    }else if ([_userStstusModel.result.flg isEqualToString:@"3"]){//待激活
+    }else if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]){//待激活
         
         [self saveLoanCase:@"10" caseInfo:_caseInfo];
         
         
-    }else if ([_userStstusModel.result.flg isEqualToString:@"6"]){//正常用户
+    }else if ([_qryUserStatusModel.result.flg isEqualToString:@"6"]){//正常用户
         
         //选择银行卡
         
@@ -1448,7 +1448,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
             
-            _userStstusModel = model;
+//            _userStstusModel = model;
             
 //            if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
 //                
@@ -1534,9 +1534,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 //                [self queryCardInfo];
             }
             
+        }else{
+        
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
     } WithFaileBlock:^{
         
+//        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
     }];
     [complianceViewModel saveLoanCase:type CaseInfo:caseInfo Period:_userSelectNum.description PurposeSelect:_purposeSelect];
 }

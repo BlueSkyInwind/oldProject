@@ -11,7 +11,7 @@
 @interface SaveLoanCaseModel : NSObject
 
 @property (nonatomic,copy)NSString *flag;
-
+@property (nonatomic,copy)NSString *msg;
 @property (nonatomic,strong)SaveLoanCaseResultModel *result;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 #import "UserStateModel.h"
-
+#import "QryUserStatusModel.h"
 @interface CheckViewController : BaseViewController
 //状态
 @property (nonatomic, assign) NSInteger homeStatues;
@@ -19,4 +19,5 @@
 @property (nonatomic, strong) NSString *apply_again_;
 @property (nonatomic, strong) NSString *task_status;
 @property (nonatomic, strong) UserStateModel *userStateModel;
+@property (nonatomic, strong) QryUserStatusModel *qryUserStatusModel;
 @end

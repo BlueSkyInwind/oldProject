@@ -64,6 +64,7 @@
     HomeProductList *_homeProductList;
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
+    QryUserStatusModel *_qryUserStatusModel;
 }
 
 @end
@@ -844,6 +845,7 @@
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
+        _qryUserStatusModel = model;
         if ([model.flag isEqualToString:@"0000"]) {
             
             
@@ -878,6 +880,7 @@
     checkVC.userStateModel = model;
     checkVC.task_status = model.taskStatus;
     checkVC.apply_again_ = model.applyAgain;
+    checkVC.qryUserStatusModel = _qryUserStatusModel;
     if (model.days) {
         checkVC.days = model.days;
     }
