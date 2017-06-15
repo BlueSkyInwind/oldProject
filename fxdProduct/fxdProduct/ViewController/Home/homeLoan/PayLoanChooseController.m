@@ -218,6 +218,7 @@
     }
     if (indexPath.row == 3) {
         DaysCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DaysCell"];
+        cell.dayLabel.text =  [Utility sharedUtility].rateParse.result.ext_attr_.period_desc_;
         return cell;
     }
     if (indexPath.row == 4) {

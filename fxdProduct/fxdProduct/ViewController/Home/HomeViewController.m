@@ -670,7 +670,7 @@
                     
                     case 0://开户失败
                     {
-                        [self goCheckVC:model];
+                        [self goCheckVC:model productId:productId];
                     }
                         break;
                     case 6://就拒绝放款
@@ -685,7 +685,7 @@
 //                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
 //                            [self.navigationController pushViewController:writeVC animated:YES];
                         }else{
-                            [self goCheckVC:model];
+                            [self goCheckVC:model productId:productId];
                         }
                     }break;
                         
@@ -695,13 +695,12 @@
                     case 17:
                     {
                         if ([model.platform_type isEqualToString:@"2"]) {
-                            [self getFxdCaseInfo];
+                            [self getFxdCaseInfoProductId:productId];
                         }else{
                         
-                            [self goCheckVC:model];
+                            [self goCheckVC:model productId:productId];
                         }
-                        
-                        
+
                     }
                         break;
                     case 13://已结清
@@ -711,7 +710,7 @@
                         BOOL idtatues  = [model.identifier boolValue];
                         if (idtatues) {
                             if (appAgin) {
-                                [self goCheckVC:model];
+                                [self goCheckVC:model productId:productId];
                             }
                         }else{
                             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已经结清借款，当天不能借款"];
@@ -819,7 +818,7 @@
 
 
 #pragma mark 发标前查询进件
--(void)getFxdCaseInfo{
+-(void)getFxdCaseInfoProductId:(NSString *)productId{
     
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -829,8 +828,7 @@
             
 //            _caseInfo = caseInfo;
             //            [self queryUserBidStatus:caseInfo];
-            [self getUserStatus:caseInfo];
-            
+            [self getUserStatus:caseInfo productId:productId];
         }
     } WithFaileBlock:^{
         
@@ -840,14 +838,13 @@
 }
 
 #pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(GetCaseInfo *)caseInfo{
+-(void)getUserStatus:(GetCaseInfo *)caseInfo productId:(NSString *)productId{
     
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
         _qryUserStatusModel = model;
         if ([model.flag isEqualToString:@"0000"]) {
-            
             
             if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
 
@@ -856,25 +853,22 @@
                 [self.navigationController pushViewController:controller animated:YES];
 
             }else{
-            
-                [self goCheckVC:_model];
+                [self goCheckVC:_model productId:productId];
             }
-            
         }else{
-            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
     } WithFaileBlock:^{
         
     }];
-    
     [complianceViewModel getUserStatus:caseInfo];
 }
 
 
 #pragma mark - 页面跳转
-- (void)goCheckVC:(UserStateModel *)model
+- (void)goCheckVC:(UserStateModel *)model productId:(NSString *)productId
 {
+
     CheckViewController *checkVC = [CheckViewController new];
     checkVC.homeStatues = [model.applyStatus integerValue];
     checkVC.userStateModel = model;
@@ -884,7 +878,15 @@
     if (model.days) {
         checkVC.days = model.days;
     }
-    [self.navigationController pushViewController:checkVC animated:YES];
+    //急速贷特殊处理，获取到费率，期限后再跳转
+    if ([productId isEqualToString:@"P001004"]) {
+        __weak typeof (self) weakSelf = self;
+        [self fatchRate:^(RateModel *rate) {
+            [weakSelf.navigationController pushViewController:checkVC animated:YES];
+        }];
+    }else{
+        [self.navigationController pushViewController:checkVC animated:YES];
+    }
 }
 
 - (void)presentLogin:(UIViewController *)vc
