@@ -563,10 +563,10 @@
                           DLog(@"三方协议");
                           
                           NSArray *paramArray = [NSArray array];
-                          if ([model.product_id isEqualToString:@"P001002"]||[model.product_id isEqualToString:@"P001005"]) {
+                          if ([model.product_id isEqualToString:SalaryLoan]||[model.product_id isEqualToString:WhiteCollarLoan]) {
                               paramArray = @[_userStateModel.applyID,_userStateModel.product_id,@"2",_approvalModel.result.loan_staging_amount];
                           }
-                          if ([model.product_id isEqualToString:@"P001004"]) {
+                          if ([model.product_id isEqualToString:RapidLoan]) {
                               paramArray = @[_userStateModel.applyID,_userStateModel.product_id,@"2",@2];
                           }
                           
@@ -735,7 +735,7 @@
                 //                    }
                 moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%.0f元", _approvalModel.result.approval_amount];
                 
-                if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+                if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
                     moenyViewing.payMoneyTitle.text = @"到期还款";
                     moenyViewing.labelweek.text = @"14天";
                     moenyViewing.loanTimeTitle.text = @"借款期限";

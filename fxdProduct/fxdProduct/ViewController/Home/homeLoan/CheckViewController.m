@@ -122,7 +122,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     
     
-    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+    if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
         for (int i = 1; i < 2; i++) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
         }
@@ -224,10 +224,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoLabel.hidden = YES;
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
-                if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
+                if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
                     
 //                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-                        if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+                        if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
                             checkFalse.seeView.hidden = NO;
                             [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
                         }else{
@@ -292,7 +292,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             checkSuccess.toolsureBtn.action =@selector(shareBtn:);
             checkSuccess.toolsureBtn.target = self;
             
-            if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+            if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
                 checkSuccess.weekBtn.hidden = true;
                 checkSuccess.textFiledWeek.hidden = true;
                 checkSuccess.purposeTextField.text = @"请选择借款用途";
@@ -381,7 +381,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [self getUserInfoData:^{
                     if ([_userStateModel.platform_type isEqualToString:@"0"]) {
                         NSDictionary *paramDic;
-                        if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
+                        if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
                             if (_userSelectNum.integerValue == 0) {
                                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择借款周期"];
                                 return;
@@ -391,7 +391,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                          @"protocol_type_":@"2",
                                          @"periods_":_userSelectNum};
                         }
-                        if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+                        if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
                             paramDic = @{@"apply_id_":_userStateModel.applyID,
                                          @"product_id_":_userStateModel.product_id,
                                          @"protocol_type_":@"2",
@@ -565,7 +565,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         {
             DLog(@"提款")
             DLog(@"%d",_userSelectNum.intValue);
-            if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
+            if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
                 if (_userSelectNum.integerValue == 0) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请选择借款周期"];
                     return;
@@ -581,7 +581,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 
                 [self getMoney];
             }
-            if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+            if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
                 
                 if (_purposeSelect.integerValue == 0) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请选择借款用途"];
@@ -930,14 +930,14 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 -(void)PostGetdrawApplyAgain
 {
     NSDictionary *paramDic;
-    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+    if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
         paramDic = @{@"periods_":@1,
                      @"loan_for_":_purposeSelect,
                      @"drawing_amount_":@(_approvalModel.result.approval_amount),
                      @"account_card_id_":_selectCard.cardIdentifier
                      };
     }
-    if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
+    if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
         paramDic = @{@"periods_":[NSString stringWithFormat:@"%d",_userSelectNum.intValue],
                      @"drawing_amount_":@(_approvalModel.result.approval_amount),
                      @"account_card_id_":_selectCard.cardIdentifier,
@@ -1041,13 +1041,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             checkSuccess.allMoney.text = @"0元";
         }
     }
-    if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
+    if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
         if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]) {
             checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
         }else{
             checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
         }
-    }else if ([_userStateModel.product_id isEqualToString:@"P001004"]){
+    }else if ([_userStateModel.product_id isEqualToString:RapidLoan]){
         if (![_purposeSelect isEqualToString:@"0"]) {
             checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
         }else{
@@ -1200,7 +1200,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [_datalist removeAllObjects];
     int j = 0;
     int k = 0;
-    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+    if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
         
         if (money>=0&&money<=1999) {
             j=11;
@@ -1224,7 +1224,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         }
     }
     
-    if ([_userStateModel.product_id isEqualToString:@"P001005"]) {
+    if ([_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
         
         if (money>=5000&&money<=30000) {
             j=46;
@@ -1253,7 +1253,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 //                _loanMountMoney= [[[object objectForKey:@"result"] objectForKey:@"approval_amount_"] doubleValue];
                 checkSuccess.loadMoney.text =[NSString stringWithFormat:@"¥%.0f元",_approvalModel.result.approval_amount];
                 //[NSString stringWithFormat:@"%.2f元",(_loanMountMoney +_loanMountMoney*_userSelectNum.intValue*0.021)/_userSelectNum.intValue];
-                if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+                if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
                     NSString *amountText = [NSString stringWithFormat:@"%.0f元",_approvalModel.result.approval_amount];
                     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"到期还款:"];
                     [attStr yy_appendString:amountText];
@@ -1362,14 +1362,14 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 -(void)clickApplyImmediate{
 
     UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-    userDataVC.product_id = @"P001002";
+    userDataVC.product_id = SalaryLoan;
     [self.navigationController pushViewController:userDataVC animated:true];
 }
 
 #pragma  mark - 白领贷拒绝导流工薪贷的详情
 -(void)getContent{
     
-     NSDictionary *dic = @{@"priduct_id_":@"P001002"};
+     NSDictionary *dic = @{@"priduct_id_":SalaryLoan};
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         
@@ -1393,7 +1393,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     [self fatchRate:^(RateModel *rate) {
         PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-        payLoanview.product_id = @"P001004";
+        payLoanview.product_id = RapidLoan;
         payLoanview.userState = _userStateModel;
         payLoanview.rateModel = rate;
         [self.navigationController pushViewController:payLoanview animated:true];
@@ -1403,7 +1403,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 - (void)fatchRate:(void(^)(RateModel *rate))finish
 {
-    NSDictionary *dic = @{@"priduct_id_":@"P001004"};
+    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         if ([rateParse.flag isEqualToString:@"0000"]) {

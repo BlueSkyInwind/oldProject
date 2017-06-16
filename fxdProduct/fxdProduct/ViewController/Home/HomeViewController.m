@@ -357,14 +357,14 @@
         cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
         cell.helpImage.userInteractionEnabled = true;
  
-        if ([product.id_ isEqualToString:@"P001002"]) {
+        if ([product.id_ isEqualToString:SalaryLoan]) {
             
 //         cell.proLogoImage.image = [UIImage imageNamed:@"home_01"];
             cell.specialtyImage.image = [UIImage imageNamed:@"home_04"];
             UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highSeeExpenses)];
             [cell.helpImage addGestureRecognizer:gest];
             
-        }else if([product.id_ isEqualToString:@"P001005"]){
+        }else if([product.id_ isEqualToString:WhiteCollarLoan]){
         
 //            cell.proLogoImage.image = [UIImage imageNamed:@"home10"];
 //            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
@@ -510,6 +510,7 @@
 
 - (void)repayRecordClick
 {
+    
     if ([Utility sharedUtility].loginFlage) {
         RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
         [self.navigationController pushViewController:repayRecord animated:YES];
@@ -636,7 +637,7 @@
             //            apply_flag_为0004，根据apply_status_跳转到相应的页面。
             
             if ([model.applyFlag isEqualToString:@"0000"]) {
-                if ([productId isEqualToString:@"P001004"]) {
+                if ([productId isEqualToString:RapidLoan]) {
                     [self fatchRate:^(RateModel *rate) {
                         PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
                         payLoanview.product_id = productId;
@@ -645,18 +646,18 @@
                         [self.navigationController pushViewController:payLoanview animated:true];
                     }];
                 }
-                if ([productId isEqualToString:@"P001002"]) {
+                if ([productId isEqualToString:SalaryLoan]) {
 //                    WriteInfoViewController *writeVC = [WriteInfoViewController new];
 //                    [self.navigationController pushViewController:writeVC animated:YES];
                     UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-                    userDataVC.product_id = @"P001002";
+                    userDataVC.product_id = SalaryLoan;
                     [self.navigationController pushViewController:userDataVC animated:true];
                 }
-                if ([productId isEqualToString:@"P001005"]) {
+                if ([productId isEqualToString:WhiteCollarLoan]) {
                     //                    WriteInfoViewController *writeVC = [WriteInfoViewController new];
                     //                    [self.navigationController pushViewController:writeVC animated:YES];
                     UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-                    userDataVC.product_id = @"P001005";
+                    userDataVC.product_id = WhiteCollarLoan;
                     [self.navigationController pushViewController:userDataVC animated:true];
                 }
                 
@@ -768,7 +769,7 @@
                         break;
                         
                     default:{
-                        if ([productId isEqualToString:@"P001004"]) {
+                        if ([productId isEqualToString:RapidLoan]) {
                             [self fatchRate:^(RateModel *rate) {
                                 PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
                                 payLoanview.product_id = productId;
@@ -777,16 +778,16 @@
                                 [self.navigationController pushViewController:payLoanview animated:true];
                             }];
                         }
-                        if ([productId isEqualToString:@"P001002"]) {
+                        if ([productId isEqualToString:SalaryLoan]) {
                             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-                            userDataVC.product_id = @"P001002";
+                            userDataVC.product_id = SalaryLoan;
                             [self.navigationController pushViewController:userDataVC animated:true];
 //                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
 //                            [self.navigationController pushViewController:writeVC animated:YES];
                         }
-                        if ([productId isEqualToString:@"P001005"]) {
+                        if ([productId isEqualToString:WhiteCollarLoan]) {
                             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-                            userDataVC.product_id = @"P001005";
+                            userDataVC.product_id = WhiteCollarLoan;
                             [self.navigationController pushViewController:userDataVC animated:true];
                             //                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
                             //                            [self.navigationController pushViewController:writeVC animated:YES];
@@ -795,7 +796,7 @@
                         break;
                 }
             }else if ([model.applyFlag isEqualToString:@"0005"]) {
-                if ([productId isEqualToString:@"P001004"]) {
+                if ([productId isEqualToString:RapidLoan]) {
                     [self fatchRate:^(RateModel *rate) {
                         PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
                         payLoanview.product_id = productId;
@@ -804,13 +805,13 @@
                         [self.navigationController pushViewController:payLoanview animated:true];
                     }];
                 }
-                if ([productId isEqualToString:@"P001002"]) {
+                if ([productId isEqualToString:SalaryLoan]) {
                     LoanSureSecondViewController *loanSecondVC = [[LoanSureSecondViewController alloc] init];
                     loanSecondVC.model = model;
                     loanSecondVC.productId = productId;
                     [self.navigationController pushViewController:loanSecondVC animated:true];
                 }
-                if ([productId isEqualToString:@"P001005"]) {
+                if ([productId isEqualToString:WhiteCollarLoan]) {
                     LoanSureSecondViewController *loanSecondVC = [[LoanSureSecondViewController alloc] init];
                     loanSecondVC.model = model;
                     loanSecondVC.productId = productId;
@@ -828,7 +829,7 @@
 
 - (void)fatchRate:(void(^)(RateModel *rate))finish
 {
-    NSDictionary *dic = @{@"priduct_id_":@"P001004"};
+    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         if ([rateParse.flag isEqualToString:@"0000"]) {
@@ -907,7 +908,7 @@
         checkVC.days = model.days;
     }
     //急速贷特殊处理，获取到费率，期限后再跳转
-    if ([productId isEqualToString:@"P001004"]) {
+    if ([productId isEqualToString:RapidLoan]) {
         __weak typeof (self) weakSelf = self;
         [self fatchRate:^(RateModel *rate) {
             [weakSelf.navigationController pushViewController:checkVC animated:YES];

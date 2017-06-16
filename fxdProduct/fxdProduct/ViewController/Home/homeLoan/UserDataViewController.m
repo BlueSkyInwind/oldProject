@@ -313,7 +313,7 @@
                     loanFirstVC.rulesId = _rulesId;
                 }
                 loanFirstVC.model = _model;
-                if ([_product_id isEqualToString:@"P001004"]) {
+                if ([_product_id isEqualToString:RapidLoan]) {
                     loanFirstVC.req_loan_amt = _req_loan_amt;
                 }
                 [self.navigationController pushViewController:loanFirstVC animated:true];
@@ -367,11 +367,11 @@
                     }
                         break;
                     default:{
-                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001004"]) {
+                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:RapidLoan]) {
                             PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
                             [self.navigationController pushViewController:payLoanview animated:true];
                         }
-                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001002"]) {
+                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:SalaryLoan]) {
                             //                            UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                             //                            userDataVC.product_id = @"P001002";
                             //                            [self.navigationController pushViewController:userDataVC animated:true];
@@ -382,7 +382,7 @@
                         break;
                 }
             }else if ([_model.applyFlag isEqualToString:@"0005"]) {
-                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001004"]) {
+                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:RapidLoan]) {
                     LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
                     loanFirstVC.productId = _product_id;
                     if (_careerParse != nil) {
@@ -393,12 +393,12 @@
                         loanFirstVC.rulesId = _rulesId;
                     }
                     loanFirstVC.model = _model;
-                    if ([_product_id isEqualToString:@"P001004"]) {
+                    if ([_product_id isEqualToString:RapidLoan]) {
                         loanFirstVC.req_loan_amt = _req_loan_amt;
                     }
                     [self.navigationController pushViewController:loanFirstVC animated:true];
                 }
-                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001002"]||[[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001005"]) {
+                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:SalaryLoan]||[[paramDic objectForKey:@"product_id_"] isEqualToString:WhiteCollarLoan]) {
                     LoanSureSecondViewController *loanSecondVC = [[LoanSureSecondViewController alloc] init];
                     loanSecondVC.model = _model;
                     loanSecondVC.productId = [paramDic objectForKey:@"product_id_"];
@@ -994,7 +994,7 @@
         loanFirstVC.rulesId = _rulesId;
     }
     loanFirstVC.model = _model;
-    if ([_product_id isEqualToString:@"P001004"]) {
+    if ([_product_id isEqualToString:RapidLoan]) {
         loanFirstVC.req_loan_amt = _req_loan_amt;
     }
     [self.navigationController pushViewController:loanFirstVC animated:true];
@@ -1018,7 +1018,7 @@
         loanFirstVC.rulesId = _rulesId;
     }
     
-    if ([[Utility sharedUtility].userInfo.pruductId isEqualToString:@"P001004"]) {
+    if ([[Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan]) {
         loanFirstVC.req_loan_amt = _req_loan_amt;
     }
     [self.navigationController pushViewController:loanFirstVC animated:true];
@@ -1026,7 +1026,7 @@
 
 - (void)fatchRate:(void(^)(RateModel *rate))finish
 {
-    NSDictionary *dic = @{@"priduct_id_":@"P001004"};
+    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         if ([rateParse.flag isEqualToString:@"0000"]) {
@@ -1136,7 +1136,7 @@
             
         }
     }else{
-        if ([_product_id isEqualToString:@"P001005"]) {
+        if ([_product_id isEqualToString:WhiteCollarLoan]) {
             
             if (_isZmxyAuth.integerValue == 2||processFlot ==1) {
                 

@@ -1781,7 +1781,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
                 DLog(@"%@-------%@",_careerParse.result.resultcode,_careerParse.result.rulesid);
                 loanFirstVC.resultCode = _careerParse.result.resultcode;
                 loanFirstVC.rulesId = _careerParse.result.rulesid;
-                if ([[Utility sharedUtility].userInfo.pruductId isEqualToString:@"P001004"]) {
+                if ([[Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan]) {
                     loanFirstVC.req_loan_amt = _req_loan_amt;
                 }
                 [self.navigationController pushViewController:loanFirstVC animated:true];
@@ -1804,7 +1804,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
                 DLog(@"%@-------%@",_careerParse.result.resultcode,_careerParse.result.rulesid);
                 loanFirstVC.resultCode = _careerParse.result.resultcode;
                 loanFirstVC.rulesId = _careerParse.result.rulesid;
-                if ([[Utility sharedUtility].userInfo.pruductId isEqualToString:@"P001004"]) {
+                if ([[Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan]) {
                     loanFirstVC.req_loan_amt = _req_loan_amt;
                 }
                 [self.navigationController pushViewController:loanFirstVC animated:true];
@@ -3019,7 +3019,7 @@ ColledgeViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINav
         DLog(@"%@-------%@",_careerParse.result.resultcode,_careerParse.result.rulesid);
         loanFirstVC.resultCode = _careerParse.result.resultcode;
         loanFirstVC.rulesId = _careerParse.result.rulesid;
-        if ([[Utility sharedUtility].userInfo.pruductId isEqualToString:@"P001004"]) {
+        if ([[Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan]) {
             loanFirstVC.req_loan_amt = _req_loan_amt;
         }
         [self.navigationController pushViewController:loanFirstVC animated:true];

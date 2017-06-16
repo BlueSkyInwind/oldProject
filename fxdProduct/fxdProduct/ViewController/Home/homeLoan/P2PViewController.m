@@ -35,7 +35,8 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [self addBackItem];
+    [self addBack];
+//    [self addBackItem];
     
 //    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
 //    config.preferences = [[WKPreferences alloc] init];
@@ -66,6 +67,34 @@
     [_webview addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [_webview addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
 }
+
+
+- (void)addBack
+{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    
+    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [btn setImage:img forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, 0, 45, 44);
+    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    
+    //    修改距离,距离边缘的
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceItem.width = -15;
+    
+    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
+    //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
+}
+
+- (void)popBack
+{
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [self addBidInfoService];
+//    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {

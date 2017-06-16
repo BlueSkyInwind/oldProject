@@ -37,7 +37,7 @@
             //            RepaymentViewController *repayMent=[[RepaymentViewController alloc]initWithNibName:@"RepaymentViewController" bundle:nil];
             if (_model.platform_type != nil) {
                 if ([_model.platform_type isEqualToString:@"0"]) {
-                    if ([_model.product_id isEqualToString:@"P001004"]) {
+                    if ([_model.product_id isEqualToString:RapidLoan]) {
                         [self post_getLastDate];
                     }else {
                         RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
@@ -108,7 +108,7 @@
                 finalRepayAmount += situation.debt_total;
             }
             repayMent.repayAmount = finalRepayAmount;
-            repayMent.product_id = @"P001004";
+            repayMent.product_id = RapidLoan;
             //            repayMent.cellSelectArr = _cellSelectArr;
             //            repayMent.save_amount = _save_amount;
             repayMent.repayListInfo = repayListInfo;

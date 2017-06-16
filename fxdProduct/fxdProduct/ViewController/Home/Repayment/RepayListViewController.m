@@ -340,7 +340,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     }
     
     
-    if ([_userStateParse.product_id isEqualToString:@"P001002"]||[_userStateParse.product_id isEqualToString:@"P001005"]) {
+    if ([_userStateParse.product_id isEqualToString:SalaryLoan]||[_userStateParse.product_id isEqualToString:WhiteCollarLoan]) {
         NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
         NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
         [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, saveAmount.length)];
@@ -427,7 +427,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         }
         
         
-        if ([_userStateParse.product_id isEqualToString:@"P001002"]||[_userStateParse.product_id isEqualToString:@"P001005"]) {
+        if ([_userStateParse.product_id isEqualToString:SalaryLoan]||[_userStateParse.product_id isEqualToString:WhiteCollarLoan]) {
             NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
             NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
             [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, saveAmount.length)];
@@ -467,7 +467,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             }
         }
         
-        if ([_userStateParse.product_id isEqualToString:@"P001002"]||[_userStateParse.product_id isEqualToString:@"P001005"]) {
+        if ([_userStateParse.product_id isEqualToString:SalaryLoan]||[_userStateParse.product_id isEqualToString:WhiteCollarLoan]) {
             self.saveUpLabel.hidden = YES;
             _payNumberTop.constant = 10;
             _payNumberBottom.constant = 10;

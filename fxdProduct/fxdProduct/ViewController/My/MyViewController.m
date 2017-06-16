@@ -132,7 +132,7 @@
     if (indexPath.section == 0){
         if(indexPath.row==0) {
             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-            userDataVC.product_id = @"P001002";
+            userDataVC.product_id = SalaryLoan;
             [self.navigationController pushViewController:userDataVC animated:true];
             
         }else if (indexPath.row == 1) {

@@ -244,7 +244,7 @@
             }
         }
     }else {
-        if ([_product_id isEqualToString:@"P001004"]) {
+        if ([_product_id isEqualToString:RapidLoan]) {
             noneView.hidden = false;
         }
     }
@@ -258,7 +258,7 @@
 {
     DLog(@"%@",_product_id);
     if (_repayListInfo != nil) {
-        if ([_product_id isEqualToString:@"P001004"]){
+        if ([_product_id isEqualToString:RapidLoan]){
             return payLoanArry.count;
         }else {
             return titleAry.count;
@@ -280,7 +280,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_repayListInfo != nil) {
-        if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001005"]) {
+        if ([_product_id isEqualToString:SalaryLoan]||[_product_id isEqualToString:WhiteCollarLoan]) {
             //红包和银行的cell
             if(indexPath.row==3){
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
@@ -361,7 +361,7 @@
                         cell.payLabel.textColor=rgb(255, 134, 25);
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     }
-                    if ([_product_id isEqualToString:@"P001004"]) {
+                    if ([_product_id isEqualToString:RapidLoan]) {
                         cell.payLabel.text=@"不可用";
                         _canUseReadPacket = false;
                         cell.payLabel.textColor=rgb(255, 134, 25);
@@ -470,7 +470,7 @@
                         cell.payLabel.textColor=rgb(255, 134, 25);
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     }
-                    if ([_product_id isEqualToString:@"P001004"]) {
+                    if ([_product_id isEqualToString:RapidLoan]) {
                         cell.payLabel.text=@"不可用";
                         _canUseReadPacket = false;
                         cell.payLabel.textColor=rgb(255, 134, 25);
@@ -568,7 +568,7 @@
                     cell.payLabel.textColor=rgb(255, 134, 25);
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 }
-                if ([_product_id isEqualToString:@"P001004"]) {
+                if ([_product_id isEqualToString:RapidLoan]) {
                     cell.payLabel.text=@"不可用";
                     _canUseReadPacket = false;
                     cell.payLabel.textColor=rgb(255, 134, 25);
@@ -598,7 +598,7 @@
 {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001005"]) {
+    if ([_product_id isEqualToString:SalaryLoan]||[_product_id isEqualToString:WhiteCollarLoan]) {
         if(indexPath.row==0){//红包
             if (_canUseReadPacket) {
                 DLog(@"红包");
