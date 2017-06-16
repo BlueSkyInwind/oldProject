@@ -168,9 +168,15 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
-    [self checkState];
+    if ([_userStateModel.platform_type isEqualToString:@"2"]) {
+        
+        [self getFxdCaseInfo];
+    }else{
     
-    [self getFxdCaseInfo];
+        [self checkState];
+    }
+    
+    
 //    [self getUserStatus];
 }
 
@@ -752,7 +758,15 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
         [self queryCardInfo];
         
+    }else if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]){
+    
+        LoanMoneyViewController *controller = [LoanMoneyViewController new];
+        controller.userStateModel = _userStateModel;
+        controller.qryUserStatusModel = _qryUserStatusModel;
+        controller.popAlert = true;
+        [self.navigationController pushViewController:controller animated:YES];
     }
+    
 //    [self getFxdCaseInfo];
     
 }
@@ -1432,6 +1446,15 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         if ([model.flag isEqualToString:@"0000"]) {
             
             _qryUserStatusModel = model;
+            if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
+                
+                LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                controller.userStateModel = _userStateModel;
+                controller.qryUserStatusModel = _qryUserStatusModel;
+                controller.popAlert = true;
+                [self.navigationController pushViewController:controller animated:YES];
+                
+            }
             
         }else{
             

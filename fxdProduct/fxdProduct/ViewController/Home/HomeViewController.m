@@ -65,6 +65,7 @@
     HomeProductList *_homeProductList;
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
+    QryUserStatusModel *_qryUserStatusModel;
 }
 
 @end
@@ -94,7 +95,7 @@
     [self fatchRecord];
     [self fatchBanner];
     [self getHomeProductList];
-    
+    [self getFxdCaseInfo];
     //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
 - (void)viewWillDisappear:(BOOL)animated
@@ -481,9 +482,19 @@
 //    [self.navigationController pushViewController:controller animated:YES];
     if ([Utility sharedUtility].loginFlage) {
         //        [self checkState:nil];
-        RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
-        repayRequest.targetVC = self;
-        [repayRequest repayRequest];
+        if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
+            
+            LoanMoneyViewController *controller = [LoanMoneyViewController new];
+            controller.userStateModel = _model;
+            controller.qryUserStatusModel = _qryUserStatusModel;
+            [self.navigationController pushViewController:controller animated:YES];
+            
+        }else{
+            RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+            repayRequest.targetVC = self;
+            [repayRequest repayRequest];
+        }
+        
     } else {
         [self presentLogin:self];
     }
@@ -689,12 +700,23 @@
                     case 15://人工审核通过
                     case 17:
                     {
-                        if ([model.platform_type isEqualToString:@"2"]) {
-                            [self getFxdCaseInfoProductId:productId];
-                        }else{
                         
-                            [self goCheckVC:model productId:productId];
+                        if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
+                            
+                            LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                            controller.userStateModel = _model;
+                            controller.qryUserStatusModel = _qryUserStatusModel;
+                            [self.navigationController pushViewController:controller animated:YES];
+                            
+                        }else{
+                            [self goCheckVC:_model productId:productId];
                         }
+//                        if ([model.platform_type isEqualToString:@"2"]) {
+////                            [self getFxdCaseInfoProductId:productId];
+//                        }else{
+//                        
+//                            [self goCheckVC:model productId:productId];
+//                        }
 
                     }
                         break;
@@ -706,12 +728,22 @@
                         if (idtatues) {
                             if (appAgin) {
                                 
-                                if ([model.platform_type isEqualToString:@"2"]) {
-                                    [self getFxdCaseInfoProductId:productId];
+                                if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
+                    
+                                    LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                                    controller.userStateModel = _model;
+                                    controller.qryUserStatusModel = _qryUserStatusModel;
+                                    [self.navigationController pushViewController:controller animated:YES];
+                    
                                 }else{
-                                    
-                                    [self goCheckVC:model productId:productId];
+                                    [self goCheckVC:_model productId:productId];
                                 }
+//                                if ([model.platform_type isEqualToString:@"2"]) {
+////                                    [self getFxdCaseInfoProductId:productId];
+//                                }else{
+//                                    
+//                                    [self goCheckVC:model productId:productId];
+//                                }
 //                                [self goCheckVC:model productId:productId caseInfo:nil qryUserStatus:nil];
                             }
                         }else{
@@ -813,7 +845,7 @@
 
 
 #pragma mark 发标前查询进件
--(void)getFxdCaseInfoProductId:(NSString *)productId{
+-(void)getFxdCaseInfo{
     
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -823,7 +855,7 @@
             
 //            _caseInfo = caseInfo;
             //            [self queryUserBidStatus:caseInfo];
-            [self getUserStatus:caseInfo productId:productId];
+            [self getUserStatus:caseInfo];
         }
     } WithFaileBlock:^{
         
@@ -833,24 +865,24 @@
 }
 
 #pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(GetCaseInfo *)caseInfo productId:(NSString *)productId{
+-(void)getUserStatus:(GetCaseInfo *)caseInfo{
     
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
-//        _qryUserStatusModel = model;
+        _qryUserStatusModel = model;
         if ([model.flag isEqualToString:@"0000"]) {
             
-            if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
-
-                LoanMoneyViewController *controller = [LoanMoneyViewController new];
-                controller.userStateModel = _model;
-                controller.qryUserStatusModel = model;
-                [self.navigationController pushViewController:controller animated:YES];
-
-            }else{
-                [self goCheckVC:_model productId:productId];
-            }
+//            if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
+//
+//                LoanMoneyViewController *controller = [LoanMoneyViewController new];
+//                controller.userStateModel = _model;
+//                controller.qryUserStatusModel = model;
+//                [self.navigationController pushViewController:controller animated:YES];
+//
+//            }else{
+//                [self goCheckVC:_model productId:productId];
+//            }
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }

@@ -1014,7 +1014,7 @@
         //激活用户
         //                [self getFXDCaseInfo:@"10"];
         //                [self saveLoanCase:@"10" caseInfo:caseInfo];
-        NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"2",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+        NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
         P2PViewController *p2pVC = [[P2PViewController alloc] init];
 //        p2pVC.isOpenAccount = NO;
         p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
