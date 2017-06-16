@@ -192,7 +192,7 @@
     } WithFaileBlock:^{
         
     }];
-    [homeViewModel fetchUserState:nil];
+    [homeViewModel fetchUserState:_userStateModel.product_id];
     
 }
 

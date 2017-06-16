@@ -342,7 +342,7 @@
     } WithFaileBlock:^{
         
     }];
-    [homeViewModel fetchUserState:nil];
+    [homeViewModel fetchUserState:_model.product_id];
 }
 
 

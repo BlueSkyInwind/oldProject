@@ -71,7 +71,7 @@
     self.automaticallyAdjustsScrollViewInsets = false;
     processFlot = 0.0;
     _subTitleArr = @[@"请完善您的个人信息",@"请完善您的联系人信息",@"请完善您的职业信息",@"请完成三方认证"];
-    [self addBackItem];
+    [self addBackItemRoot];
     
     [self configTableview];
     self.navigationController.navigationBar.barTintColor = UI_MAIN_COLOR;
@@ -80,6 +80,30 @@
     [self.view addSubview:topView];
     _isDisplay = NO;
     
+}
+
+- (void)addBackItemRoot
+{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    
+    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [btn setImage:img forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, 0, 45, 44);
+    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    
+    //    修改距离,距离边缘的
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceItem.width = -15;
+    
+    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
+    //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
+}
+
+- (void)popBack
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)setProcess

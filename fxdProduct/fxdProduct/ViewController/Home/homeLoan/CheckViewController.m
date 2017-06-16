@@ -937,6 +937,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
                 
                 LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
+                loanVC.userStateModel = _userStateModel;
                 loanVC.popAlert = true;
                 [self.navigationController pushViewController:loanVC animated:YES];
                 
@@ -1138,7 +1139,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         @strongify(self);
         [self.scrollView.mj_header endRefreshing];
     }];
-    [homeViewModel fetchUserState:nil];
+    [homeViewModel fetchUserState:_userStateModel.product_id];
 }
 
 - (void)getUserInfoData:(void(^)())completion
@@ -1489,6 +1490,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             }else if ([type isEqualToString:@"30"]){
                 
                 LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                controller.userStateModel = _userStateModel;
                 controller.popAlert = true;
                 [self.navigationController pushViewController:controller animated:YES];
 //                [self queryCardInfo];

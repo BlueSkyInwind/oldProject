@@ -844,6 +844,7 @@
             if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
 
                 LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                controller.userStateModel = _model;
                 controller.qryUserStatusModel = model;
                 [self.navigationController pushViewController:controller animated:YES];
 
