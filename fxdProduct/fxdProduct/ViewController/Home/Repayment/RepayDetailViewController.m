@@ -789,6 +789,9 @@
 
 - (void)fxdRepay
 {
+    
+    NSLog(@"====================================支付点击");
+    self.sureBtn.enabled = NO;
     NSMutableString *staging_ids = [NSMutableString string];
     for (int i = 0; i < _situations.count; i++) {
         //        if ([_cellSelectArr objectAtIndex:i].boolValue) {
@@ -835,15 +838,17 @@
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_RepayOrSettleWithPeriod_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object[@"msg"]);
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+            
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
         }else {
+            self.sureBtn.enabled = YES;
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
         }
     } failure:^(EnumServerStatus status, id object) {
-        
+        self.sureBtn.enabled = YES;
     }];
 }
 

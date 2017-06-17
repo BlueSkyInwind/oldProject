@@ -66,6 +66,16 @@
     self.navigationItem.title = @"审核";
     self.automaticallyAdjustsScrollViewInsets = false;
     [self addBackItemroot];
+    
+    moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+    moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//    moenyViewing.bottomView.hidden = YES;
+    moenyViewing.sureBtn.hidden = YES;
+    moenyViewing.lableData.hidden = YES;
+    moenyViewing.middleView.hidden = YES;
+    moenyViewing.moneyImage.hidden = YES;
+    [self.view addSubview:moenyViewing];
+    
     //    int flag = 1;
     
 //    [self checkStatus];
@@ -288,7 +298,7 @@
 
 #pragma mark 发标前查询进件
 -(void)getFxdCaseInfo{
-    [moenyViewing removeFromSuperview];
+//    [moenyViewing removeFromSuperview];
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
         
@@ -388,13 +398,13 @@
 -(void)createUIWith
 {
 
-    
+    moenyViewing.moneyImage.hidden = NO;
     switch (_intStautes) {
             
         case 0://开户失败
-            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-            [self.view addSubview:moenyViewing];
+//            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//            [self.view addSubview:moenyViewing];
             moenyViewing.sureBtn.hidden = YES;
             moenyViewing.labelProgress.text = @"失败";
             moenyViewing.labelDetail.text = @"处理失败，请重试";
@@ -405,9 +415,9 @@
         case 4://待放款
         case 5://放款中
         {
-            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-            [self.view addSubview:moenyViewing];
+//            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//            [self.view addSubview:moenyViewing];
             moenyViewing.sureBtn.hidden = YES;
             moenyViewing.labelProgress.text = @"到账中";
             moenyViewing.labelDetail.text = @"请注意查收到账短信";
@@ -431,9 +441,9 @@
             
             if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
                 
-                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-                [self.view addSubview:moenyViewing];
+//                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//                [self.view addSubview:moenyViewing];
                 moenyViewing.sureBtn.hidden = YES;
                 moenyViewing.labelProgress.text = @"处理中";
                 moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
@@ -453,9 +463,9 @@
             
             if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
                 
-                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-                [self.view addSubview:moenyViewing];
+//                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//                [self.view addSubview:moenyViewing];
                 moenyViewing.sureBtn.hidden = YES;
                 moenyViewing.labelProgress.text = @"处理中";
                 moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
@@ -505,9 +515,11 @@
 
 -(void)fxdStatus{
 
-    moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-    moenyViewing.frame = self.view.bounds;
-    [self.view addSubview:moenyViewing];
+//    moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//    moenyViewing.frame = self.view.bounds;
+//    [self.view addSubview:moenyViewing];
+    moenyViewing.sureBtn.hidden = NO;
+    moenyViewing.lableData.hidden = NO;
     moenyViewing.labelProgress.text = @"已到账";
     moenyViewing.labelDetail.text = @"请按时还款,保障信用";
     moenyViewing.middleView.hidden = NO;

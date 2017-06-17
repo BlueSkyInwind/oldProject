@@ -276,13 +276,25 @@
                     
                 }else{
                     
+                    LoanMoneyViewController *controller;
+                    BOOL isHave = NO;
                     for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                         if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
-                            LoanMoneyViewController *controller = (LoanMoneyViewController *)vc;
+                            isHave = YES;
+                            controller = (LoanMoneyViewController *)vc;
                             controller.userStateModel.product_id = caseInfo.result.product_id_;
                             controller.qryUserStatusModel = qryUserStatusModel;
-                            [self.navigationController popToViewController:controller animated:YES];
+//                            [self.navigationController popToViewController:controller animated:YES];
                         }
+                    }
+                    if (isHave) {
+                        [self.navigationController popToViewController:controller animated:YES];
+                    }else{
+                    
+                        LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                        controller.userStateModel.product_id = caseInfo.result.product_id_;
+                        controller.qryUserStatusModel = qryUserStatusModel;
+                        [self.navigationController pushViewController:controller animated:YES];
                     }
                 }
             }
