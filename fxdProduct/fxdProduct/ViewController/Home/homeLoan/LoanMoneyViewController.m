@@ -75,29 +75,9 @@
     moenyViewing.middleView.hidden = YES;
     moenyViewing.moneyImage.hidden = YES;
     [self.view addSubview:moenyViewing];
-    
-    //    int flag = 1;
-    
-//    [self checkStatus];
 
-//    UISwipeGestureRecognizer *recognizer;
-//    
-//    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
-//    [[self view] addGestureRecognizer:recognizer];
-    
-    //    [self PostGetCheckMoney];
-    //    [self createUIWith];
 }
 
-//-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
-//
-//    [moenyViewing removeFromSuperview];
-//    [self getFxdCaseInfo];
-////    [self checkStatus];
-//    
-//    
-//}
 
 - (void)loadView
 {
@@ -195,12 +175,7 @@
                 {
                     _intStautes = [model.applyStatus integerValue];
                     [self createUIWith];
-//                    if ([model.platform_type isEqualToString:@"2"]) {
-//                        [self getFxdCaseInfo];
-//                    }else{
-//                    
-//                        [self createUIWith];
-//                    }
+
                     
                 }
                     break;
@@ -208,15 +183,7 @@
                     
                     _intStautes = [model.applyStatus integerValue];
                     [self createUIWith];
-//                    if ([model.platform_type isEqualToString:@"2"]) {
-//                        [self getFxdCaseInfo];
-//                    }else{
-//                        
-//                        [self createUIWith];
-//                    }
-                    
-//                    [self getUserStatus:_caseInfo];
-//                    [self getFxdCaseInfo];
+
                     break;
                 default:
 
@@ -246,19 +213,7 @@
             
             _qryUserStatusModel = qryUserStatusModel;
             [self checkStatus];
-//            if ([qryUserStatusModel.flag isEqualToString:@"11"]||[qryUserStatusModel.flag isEqualToString:@"12"]) {
-//                
-//                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-//                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-//                [self.view addSubview:moenyViewing];
-//                moenyViewing.sureBtn.hidden = YES;
-//                moenyViewing.labelProgress.text = @"处理中";
-//                moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-//                moenyViewing.lableData.hidden = YES;
-//                moenyViewing.sureBtn.hidden = YES;
-//                moenyViewing.middleView.hidden = YES;
-//                
-//            }
+
         }else{
             
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
@@ -271,31 +226,6 @@
 }
 
 
-#pragma mark  用户标的状态查询
-
--(void)queryUserBidStatus:(GetCaseInfo *)caseInfo{
-
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        QueryUserBidStatusModel *queryModel = [QueryUserBidStatusModel yy_modelWithJSON:returnValue];
-        if ([queryModel.result.status isEqualToString:@"1"]) {
-            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-            [self.view addSubview:moenyViewing];
-            moenyViewing.sureBtn.hidden = YES;
-            moenyViewing.labelProgress.text = @"处理中";
-            moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-            moenyViewing.lableData.hidden = YES;
-            moenyViewing.sureBtn.hidden = YES;
-            moenyViewing.middleView.hidden = YES;
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel queryUserBidStatusForm:caseInfo.result.from_ fromCaseId:caseInfo.result.from_case_id_];
-}
-
 #pragma mark 发标前查询进件
 -(void)getFxdCaseInfo{
 //    [moenyViewing removeFromSuperview];
@@ -307,7 +237,6 @@
             [self.scrollView.mj_header endRefreshing];
             _caseInfo = caseInfo;
             [self getUserStatus:caseInfo];
-//            [self queryUserBidStatus:caseInfo];
         }
     } WithFaileBlock:^{
         [self.scrollView.mj_header endRefreshing];
@@ -339,23 +268,7 @@
         
     }];
     [repayWeeklyRecordViewModel bankCardList];
-//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-//        UserCardResult *_userCardModel =[UserCardResult yy_modelWithJSON:object];
-//        if([_userCardModel.flag isEqualToString:@"0000"]){
-//            for(NSInteger j=0;j<_userCardModel.result.count;j++)
-//            {
-//                CardResult *cardResult = _userCardModel.result[j];
-//                if([cardResult.card_type_ isEqualToString:@"2"])
-//                {
-//                    if ([cardResult.if_default_ isEqualToString:@"1"]) {
-//                        _cardNo = cardResult.card_no_;
-//                        _cardBank = cardResult.card_bank_;
-//                    }
-//                }
-//            }
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//    }];
+
 }
 
 - (void)getUserInfoData:(void(^)())completion
@@ -401,17 +314,6 @@
     moenyViewing.moneyImage.hidden = NO;
     switch (_intStautes) {
             
-        case 0://开户失败
-//            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-//            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-//            [self.view addSubview:moenyViewing];
-            moenyViewing.sureBtn.hidden = YES;
-            moenyViewing.labelProgress.text = @"失败";
-            moenyViewing.labelDetail.text = @"处理失败，请重试";
-            moenyViewing.lableData.hidden = YES;
-            moenyViewing.sureBtn.hidden = YES;
-            moenyViewing.middleView.hidden = YES;
-            break;
         case 4://待放款
         case 5://放款中
         {
@@ -550,24 +452,7 @@
                                     
                                 }];
                                 [loanMoneyViewModel getProductProtocol:paramArray];
-                                //                                            NSDictionary *paramDic = @{@"apply_id_":_userStateModel.applyID,
-                                //                                                                       @"product_id_":_userStateModel.product_id,
-                                //                                                                       @"protocol_type_":@"1",
-                                //                                                                       @"card_no_":_cardNo,
-                                //                                                                       @"card_bank_":_cardBank};
-                                //                                            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                                //                                                if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-                                //                                                    DetailViewController *detailVC = [[DetailViewController alloc] init];
-                                //                                                    detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
-                                //                                                    [self.navigationController pushViewController:detailVC animated:YES];
-                                //                                                } else {
-                                //                                                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-                                //                                                }
-                                //                                            } failure:^(EnumServerStatus status, id object) {
-                                //
-                                //                                            }];
-                                //                                        AutoTransferAccountsAgreement *autoTransfer = [[AutoTransferAccountsAgreement alloc] init];
-                                //                                        [self.navigationController pushViewController:autoTransfer animated:true];
+                             
                             }];
         [one yy_setTextHighlightRange:NSMakeRange(12, 8)
                                 color:UI_MAIN_COLOR
@@ -596,33 +481,7 @@
                           }];
                           [loanMoneyViewModel getProductProtocol:paramArray];
                           
-                          
-                          //                                      NSDictionary *paramDic;
-                          //                                      if ([model.product_id isEqualToString:@"P001002"]||[model.product_id isEqualToString:@"P001005"]) {
-                          //                                          paramDic = @{@"apply_id_":_userStateModel.applyID,
-                          //                                                       @"product_id_":_userStateModel.product_id,
-                          //                                                       @"protocol_type_":@"2",
-                          //                                                       @"periods_":_approvalModel.result.loan_staging_amount};
-                          //                                      }
-                          //                                      if ([model.product_id isEqualToString:@"P001004"]) {
-                          //                                          paramDic = @{@"apply_id_":_userStateModel.applyID,
-                          //                                                       @"product_id_":_userStateModel.product_id,
-                          //                                                       @"protocol_type_":@"2",
-                          //                                                       @"periods_":@2};
-                          //                                      }
-                          //
-                          //                                      [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                          //                                          if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-                          //                                              DetailViewController *detailVC = [[DetailViewController alloc] init];
-                          //                                              detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
-                          //                                              [self.navigationController pushViewController:detailVC animated:YES];
-                          //                                          } else {
-                          //                                              [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-                          //                                          }
-                          //                                      } failure:^(EnumServerStatus status, id object) {
-                          //
-                          //                                      }];
-                      }];
+                                }];
         moenyViewing.agreeMentLabel.attributedText = one;
         moenyViewing.agreeMentLabel.textColor = UI_MAIN_COLOR;
         moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentLeft;
@@ -652,21 +511,6 @@
                                 }];
                                 [loanMoneyViewModel getContractList:model.bid_id_];
                                 
-                                
-                                //                                            NSDictionary *dicParam = @{@"bid_id_":model.bid_id_};
-                                //                                            [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_contractList_url] parameters:dicParam finished:^(EnumServerStatus status, id object) {
-                                //                                                DLog(@"%@",object);
-                                //                                                P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:object];
-                                //                                                if ([agreeModel.appcode isEqualToString:@"1"]) {
-                                //                                                    AgreeMentListViewController *agreeMentListViewController = [[AgreeMentListViewController alloc] init];
-                                //                                                    agreeMentListViewController.agreeMentArr = agreeModel.data.pactList;
-                                //                                                    [self.navigationController pushViewController:agreeMentListViewController animated:true];
-                                //                                                } else {
-                                //                                                    
-                                //                                                }
-                                //                                            } failure:^(EnumServerStatus status, id object) {
-                                //                                                
-                                //                                            }];
                             }];
         moenyViewing.agreeMentLabel.attributedText = one;
         moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentCenter;

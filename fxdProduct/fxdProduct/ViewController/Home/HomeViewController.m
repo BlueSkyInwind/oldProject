@@ -7,7 +7,6 @@
 //
 
 #import "HomeViewController.h"
-#import "WriteInfoViewController.h"
 #import "HomeViewModel.h"
 #import "CheckViewController.h"
 #import "LoanMoneyViewController.h"
@@ -15,7 +14,6 @@
 #import "BaseNavigationViewController.h"
 #import "UserStateModel.h"
 #import "ReturnMsgBaseClass.h"
-#import "DataWriteAndRead.h"
 #import "ExpressViewController.h"
 #import "HomePopView.h"
 #import "LewPopupViewController.h"
@@ -28,7 +26,6 @@
 #import "HomeBottomCell.h"
 #import "RepayRecordController.h"
 #import "UserDefaulInfo.h"
-#import "HelpViewController.h"
 #import "LoanSureSecondViewController.h"
 #import "LoanSureFirstViewController.h"
 #import "CycleTextCell.h"
@@ -38,16 +35,11 @@
 #import "LoanProcessModel.h"
 #import "LoanRecordParse.h"
 #import "RepayRequestManage.h"
-#import "InvitationViewController.h"
 //#import "ContactClass.h"
 #import "UserDataViewController.h"
 #import "HomeBannerModel.h"
 #import "RateModel.h"
 #import "HomeProductList.h"
-#import "ActivationViewController.h"
-#import "UnbundlingBankCardViewController.h"
-#import "ChangeBankCardViewController.h"
-#import "BankCardViewController.h"
 #import "CheckViewModel.h"
 #import "QryUserStatusModel.h"
 #import "GetCaseInfo.h"
@@ -478,8 +470,6 @@
 - (void)payMoney
 {
     
-//    ActivationViewController *controller = [[ActivationViewController alloc]initWithNibName:@"ActivationViewController" bundle:nil];
-//    [self.navigationController pushViewController:controller animated:YES];
     if ([Utility sharedUtility].loginFlage) {
         //        [self checkState:nil];
         if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
@@ -647,15 +637,13 @@
                     }];
                 }
                 if ([productId isEqualToString:SalaryLoan]) {
-//                    WriteInfoViewController *writeVC = [WriteInfoViewController new];
-//                    [self.navigationController pushViewController:writeVC animated:YES];
+
                     UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                     userDataVC.product_id = SalaryLoan;
                     [self.navigationController pushViewController:userDataVC animated:true];
                 }
                 if ([productId isEqualToString:WhiteCollarLoan]) {
-                    //                    WriteInfoViewController *writeVC = [WriteInfoViewController new];
-                    //                    [self.navigationController pushViewController:writeVC animated:YES];
+
                     UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                     userDataVC.product_id = WhiteCollarLoan;
                     [self.navigationController pushViewController:userDataVC animated:true];
@@ -689,8 +677,7 @@
                             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                             userDataVC.product_id = productId;
                             [self.navigationController pushViewController:userDataVC animated:true];
-//                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
-//                            [self.navigationController pushViewController:writeVC animated:YES];
+
                         }else{
                             [self goCheckVC:model productId:productId];
                         }
@@ -712,12 +699,6 @@
                         }else{
                             [self goCheckVC:_model productId:productId];
                         }
-//                        if ([model.platform_type isEqualToString:@"2"]) {
-////                            [self getFxdCaseInfoProductId:productId];
-//                        }else{
-//                        
-//                            [self goCheckVC:model productId:productId];
-//                        }
 
                     }
                         break;
@@ -739,13 +720,7 @@
                                 }else{
                                     [self goCheckVC:_model productId:productId];
                                 }
-//                                if ([model.platform_type isEqualToString:@"2"]) {
-////                                    [self getFxdCaseInfoProductId:productId];
-//                                }else{
-//                                    
-//                                    [self goCheckVC:model productId:productId];
-//                                }
-//                                [self goCheckVC:model productId:productId caseInfo:nil qryUserStatus:nil];
+
                             }
                         }else{
                             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已经结清借款，当天不能借款"];
@@ -782,15 +757,12 @@
                             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                             userDataVC.product_id = SalaryLoan;
                             [self.navigationController pushViewController:userDataVC animated:true];
-//                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
-//                            [self.navigationController pushViewController:writeVC animated:YES];
                         }
                         if ([productId isEqualToString:WhiteCollarLoan]) {
                             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                             userDataVC.product_id = WhiteCollarLoan;
                             [self.navigationController pushViewController:userDataVC animated:true];
-                            //                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
-                            //                            [self.navigationController pushViewController:writeVC animated:YES];
+
                         }
                     }
                         break;
@@ -874,16 +846,7 @@
         _qryUserStatusModel = model;
         if ([model.flag isEqualToString:@"0000"]) {
             
-//            if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
-//
-//                LoanMoneyViewController *controller = [LoanMoneyViewController new];
-//                controller.userStateModel = _model;
-//                controller.qryUserStatusModel = model;
-//                [self.navigationController pushViewController:controller animated:YES];
-//
-//            }else{
-//                [self goCheckVC:_model productId:productId];
-//            }
+
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }

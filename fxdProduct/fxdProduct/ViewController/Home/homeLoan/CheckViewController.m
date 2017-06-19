@@ -169,7 +169,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
     if ([_userStateModel.platform_type isEqualToString:@"2"]) {
-        
+    
+      
         [self getFxdCaseInfo];
     }else{
     
@@ -659,14 +660,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 {
     if([_userStateModel.platform_type isEqualToString:@"2"] || [_userStateModel.platform_type isEqualToString:@"0"]){
         if ([_userStateModel.platform_type isEqualToString:@"2"]) {
-            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDUserInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-                DLog(@"%@",object);
-                _uploadP2PUserInfo = object;
-                [self integrationP2PUserState];
-//                [self checkP2PUserState];
-            } failure:^(EnumServerStatus status, id object) {
-                
-            }];
+            [self integrationP2PUserState];
         }
         if ([_userStateModel.platform_type isEqualToString:@"0"]) {
             [self fatchCardInfo];
@@ -676,69 +670,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
 }
 
-
-#pragma mark 旧的合规
-- (void)checkP2PUserState
-{
-    NSDictionary *paramDic = @{@"user_info":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_info"]],
-                               @"user_contacter":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_contacter"]],
-                               @"mobile_":[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"mobile_"],
-                               @"id_number_":[Utility sharedUtility].userInfo.userIDNumber};
-    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_drawService_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        DrawService *drawServiceParse = [DrawService yy_modelWithJSON:object];
-        //                        drawServiceParse.data.flg = @"4";
-        //        if ([drawServiceParse.appcode isEqualToString:@"0"]) {
-        DLog(@"%@",[Utility sharedUtility].userInfo.account_id);
-        if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"参数缺失,请退出重新登陆"];
-        } else {
-            //
-            
-            
-            //开户
-            if ([drawServiceParse.data.flg isEqualToString:@"2"]) {
-                NSString *url = [NSString stringWithFormat:@"%@%@?from_user_id_=%@&from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&RetUrl=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url];
-                P2PViewController *p2pVC = [[P2PViewController alloc] init];
-                p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
-                p2pVC.userSelectNum = _userSelectNum;
-                p2pVC.purposeSelect = _purposeSelect;
-//                p2pVC.isOpenAccount = YES;
-                [self.navigationController pushViewController:p2pVC animated:YES];
-            }
-            //绑卡
-            if ([drawServiceParse.data.flg isEqualToString:@"3"]) {
-                P2PBindCardViewController *p2pBindCardVC = [[P2PBindCardViewController alloc] init];
-                p2pBindCardVC.uploadP2PUserInfo = _uploadP2PUserInfo;
-                p2pBindCardVC.userSelectNum = _userSelectNum;
-                p2pBindCardVC.purposeSelect = _purposeSelect;
-                [self.navigationController pushViewController:p2pBindCardVC animated:YES];
-            }
-            //发标
-            if ([drawServiceParse.data.flg isEqualToString:@"4"]) {
-                [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-                    DLog(@"%@",object);
-                    GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
-                    if ([caseInfo.flag isEqualToString:@"0000"]) {
-                        [self addBildInfo:caseInfo];
-                    }
-                    
-                } failure:^(EnumServerStatus status, id object) {
-                    
-                }];
-            }
-        }
-        
-        //        } else {
-        //            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:drawServiceParse.appmsg];
-        //        }
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
 
 #pragma mark 新的合规
 -(void)integrationP2PUserState{
@@ -767,52 +698,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         [self.navigationController pushViewController:controller animated:YES];
     }
     
-//    [self getFxdCaseInfo];
     
 }
-
-
-- (void)addBildInfo:(GetCaseInfo *)caseInfo
-{
-    
-    NSDictionary *paramDic = @{@"product_id_":caseInfo.result.product_id_,
-                               @"auditor_":caseInfo.result.auditor_,
-                               @"desc_":caseInfo.result.desc_,
-                               @"amount_":caseInfo.result.amount_,
-                               @"period_":_userSelectNum,
-                               @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone,
-                               @"title_":caseInfo.result.title_,
-                               @"from_":caseInfo.result.from_,
-                               @"client_":caseInfo.result.client_,
-                               @"from_case_id_":caseInfo.result.from_case_id_,
-                               @"description_":caseInfo.result.description_,
-                               @"invest_days_":caseInfo.result.invest_days_};
-    
-    NSLog(@"=========%@",paramDic);
-    
-//    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_addBidInfo_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
-    
-    NSString *url = [NSString stringWithFormat:@"%@%@",_P2P_url,_addBidInfo_url];
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DrawService *model = [DrawService yy_modelWithJSON:object];
-        if ([model.appcode isEqualToString:@"1"]) {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"发标成功"];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        if ([model.appcode isEqualToString:@"-1"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.appmsg];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"发标成功"];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
 
 - (void)fatchCardInfo
 {
@@ -906,15 +793,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     DLog(@"%@",object);
                 }];
             }
-            
-            //            PayViewController *payVC = [[PayViewController alloc] init];
-            //                payVC.payType = PayTypeGetMoneyToCard;
-            //                payVC.makesureBlock = ^(PayType payType){
-            //                    DLog(@"确认支付");
-            //                };
-            //                PayNavigationViewController *payNC = [[PayNavigationViewController alloc] initWithRootViewController:payVC];
-            //                payNC.view.frame = CGRectMake(0, 0, _k_w, 200);
-            //                [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
+
         }else{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
         }
@@ -1129,17 +1008,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                             [view removeFromSuperview];
                         }
                     }
-//                    [_datalist removeAllObjects];
-//                    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
-//                        for (int i=0; i < 46; i++) {
-//                            [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
-//                        }
-//                    }
-//                    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
-//                        for (int i=1; i < 2; i++) {
-//                            [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
-//                        }
-//                    }
+
                     _userSelectNum = @0;
                     [self createUI];
                 }
@@ -1438,7 +1307,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
 }
 #pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus{
+-(void)getUserStatus:(GetCaseInfo *)caseInfo{
 
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -1463,8 +1332,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     } WithFaileBlock:^{
         
     }];
-    
-    [complianceViewModel getUserStatus:_caseInfo];
+
+    [complianceViewModel getUserStatus:caseInfo];
 }
 
 
@@ -1480,7 +1349,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         if ([caseInfo.flag isEqualToString:@"0000"]) {
             
             _caseInfo = caseInfo;
-            [self getUserStatus];
+            [self getUserStatus:caseInfo];
 
         }
     } WithFaileBlock:^{
@@ -1506,7 +1375,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 p2pVC.isCheck = YES;
-//                p2pVC.isOpenAccount = NO;
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
                 [self.navigationController pushViewController:p2pVC animated:YES];
                 
@@ -1516,7 +1384,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 controller.userStateModel = _userStateModel;
                 controller.popAlert = true;
                 [self.navigationController pushViewController:controller animated:YES];
-//                [self queryCardInfo];
+
             }
             
         }else{
@@ -1579,10 +1447,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [self dismissSemiModalViewWithCompletion:^{
                 
                 [self saveLoanCase:@"30" caseInfo:_caseInfo];
-                
-               
-                //传给后台字段的接口
-                //                [self addBidInfo];
+
             }];
             
         };

@@ -1256,10 +1256,6 @@
 		CCF43B031EDE672D00CFD72C /* getBidStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF43B021EDE672D00CFD72C /* getBidStatus.m */; };
 		CCF43B041EDE672D00CFD72C /* getBidStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF43B021EDE672D00CFD72C /* getBidStatus.m */; };
 		CCF8031C1ED3D043003B7975 /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
-		CCF803201ED420C1003B7975 /* ActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031E1ED420C1003B7975 /* ActivationViewController.m */; };
-		CCF803211ED420C1003B7975 /* ActivationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031E1ED420C1003B7975 /* ActivationViewController.m */; };
-		CCF803221ED420C1003B7975 /* ActivationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF8031F1ED420C1003B7975 /* ActivationViewController.xib */; };
-		CCF803231ED420C1003B7975 /* ActivationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF8031F1ED420C1003B7975 /* ActivationViewController.xib */; };
 		CCF803271ED4249A003B7975 /* UnbundlingBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF803251ED4249A003B7975 /* UnbundlingBankCardViewController.m */; };
 		CCF803281ED4249A003B7975 /* UnbundlingBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF803251ED4249A003B7975 /* UnbundlingBankCardViewController.m */; };
 		CCF803291ED4249A003B7975 /* UnbundlingBankCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF803261ED4249A003B7975 /* UnbundlingBankCardViewController.xib */; };
@@ -2424,9 +2420,6 @@
 		CCF43B021EDE672D00CFD72C /* getBidStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getBidStatus.m; sourceTree = "<group>"; };
 		CCF8031A1ED3D043003B7975 /* AccountHSServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountHSServiceModel.h; sourceTree = "<group>"; };
 		CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountHSServiceModel.m; sourceTree = "<group>"; };
-		CCF8031D1ED420C1003B7975 /* ActivationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivationViewController.h; sourceTree = "<group>"; };
-		CCF8031E1ED420C1003B7975 /* ActivationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivationViewController.m; sourceTree = "<group>"; };
-		CCF8031F1ED420C1003B7975 /* ActivationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivationViewController.xib; sourceTree = "<group>"; };
 		CCF803241ED42499003B7975 /* UnbundlingBankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnbundlingBankCardViewController.h; sourceTree = "<group>"; };
 		CCF803251ED4249A003B7975 /* UnbundlingBankCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnbundlingBankCardViewController.m; sourceTree = "<group>"; };
 		CCF803261ED4249A003B7975 /* UnbundlingBankCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnbundlingBankCardViewController.xib; sourceTree = "<group>"; };
@@ -2635,9 +2628,6 @@
 				CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */,
 				CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */,
 				CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */,
-				CCF8031D1ED420C1003B7975 /* ActivationViewController.h */,
-				CCF8031E1ED420C1003B7975 /* ActivationViewController.m */,
-				CCF8031F1ED420C1003B7975 /* ActivationViewController.xib */,
 				CCF803241ED42499003B7975 /* UnbundlingBankCardViewController.h */,
 				CCF803251ED4249A003B7975 /* UnbundlingBankCardViewController.m */,
 				CCF803261ED4249A003B7975 /* UnbundlingBankCardViewController.xib */,
@@ -5348,7 +5338,6 @@
 			files = (
 				CC0559201EB9A36D00733C2E /* DisplayCell.xib in Resources */,
 				0FFA91621C589D76008D91D2 /* CheckViewIng.xib in Resources */,
-				CCF803221ED420C1003B7975 /* ActivationViewController.xib in Resources */,
 				6313DC171BB3F07B00EB45DE /* Images.xcassets in Resources */,
 				633BA56A1DB4AB1E0092C782 /* PhotoDetailViewController.xib in Resources */,
 				1AE5E6251C1EA5240099CCA0 /* AboutMainViewController.xib in Resources */,
@@ -5557,7 +5546,6 @@
 				CC0DFB561EA5B1090024841A /* CheckFalseView.xib in Resources */,
 				842C0B5A1ED599DE00366D11 /* LoginViewController.xib in Resources */,
 				CC0DFB571EA5B1090024841A /* DataDisplayCell.xib in Resources */,
-				CCF803231ED420C1003B7975 /* ActivationViewController.xib in Resources */,
 				CC0DFB581EA5B1090024841A /* CheckSuccessView.xib in Resources */,
 				CC0DFB591EA5B1090024841A /* MoreViewController.xib in Resources */,
 				CC0DFB5A1EA5B1090024841A /* TicketExplainCell.xib in Resources */,
@@ -6127,7 +6115,6 @@
 				0FEA586B1BE08EE3007F8A6D /* BankCardTableViewCell.m in Sources */,
 				8438F70F1EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
 				63FC24F51D98F7E9006F58F3 /* YYTextSelectionView.m in Sources */,
-				CCF803201ED420C1003B7975 /* ActivationViewController.m in Sources */,
 				630CC0991BC8E14200AE9690 /* QueryRepaymentsResult.m in Sources */,
 				0FBF11261BE376C9008F6393 /* HomeBankCardViewController.m in Sources */,
 				CCCDA8771EDF9F5200B48DFF /* CheckViewModel.m in Sources */,
@@ -6252,7 +6239,6 @@
 				CC0DF9881EA5B1090024841A /* RepayRequestManage.m in Sources */,
 				CC0DF9891EA5B1090024841A /* DataBaseManager.m in Sources */,
 				CC0DF98A1EA5B1090024841A /* HomeBottomCell.m in Sources */,
-				CCF803211ED420C1003B7975 /* ActivationViewController.m in Sources */,
 				CC0DF98B1EA5B1090024841A /* CALayer+Transition.m in Sources */,
 				CCE3BE241ED2D61C004C35A4 /* OpenAccount.m in Sources */,
 				CC0DF98C1EA5B1090024841A /* AppDelegate.mm in Sources */,

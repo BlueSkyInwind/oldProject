@@ -240,6 +240,7 @@ UIKIT_EXTERN NSString * const FirstLunch;
 
 UIKIT_EXTERN NSString * const theMoxieApiKey;            //魔蝎key
 
+
 #define MAS_SHORTHAND_GLOBALS
 
 #endif
