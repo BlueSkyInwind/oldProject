@@ -14,7 +14,6 @@
 #import "CheckProcessViewController.h"
 #import "MoreViewController.h"
 #import "UIImageView+WebCache.h"
-#import "RepaymentViewController.h"
 #import "RepayRecordController.h"
 #import "RepayWeeklyRecordController.h"
 #import "DiscountTicketController.h"

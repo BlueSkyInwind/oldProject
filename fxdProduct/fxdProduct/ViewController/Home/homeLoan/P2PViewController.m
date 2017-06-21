@@ -10,7 +10,6 @@
 #import <WebKit/WebKit.h>
 #import "GetCaseInfo.h"
 #import "DrawService.h"
-#import "P2PBindCardViewController.h"
 #import "LoanMoneyViewController.h"
 #import "RTRootNavigationController.h"
 #import "CheckViewController.h"

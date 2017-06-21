@@ -16,11 +16,9 @@
 #import "YYText.h"
 #import "P2PAgreeMentModel.h"
 #import "AgreeMentListViewController.h"
-#import "AutoTransferAccountsAgreement.h"
 #import "DataWriteAndRead.h"
 #import "CustomerBaseInfoBaseClass.h"
 #import "GetCustomerBaseViewModel.h"
-#import "HomeDailViewController.h"
 #import "DetailViewController.h"
 #import "UserCardResult.h"
 #import "RepayListInfo.h"
@@ -28,14 +26,11 @@
 #import "RepayDetailViewController.h"
 #import "RepayRequestManage.h"
 #import "IdeaBackViewController.h"
-#import "QueryBidStatusModel.h"
 #import "GetCaseInfo.h"
 #import "RepayWeeklyRecordViewModel.h"
 #import "LoanMoneyViewModel.h"
 #import "CheckViewModel.h"
-#import "QueryUserBidStatusModel.h"
 #import "QryUserStatusModel.h"
-#import "CheckViewController.h"
 #import "RTRootNavigationController.h"
 #import "GetCaseInfo.h"
 #import "P2PViewController.h"
@@ -48,8 +43,7 @@
     NSString *_cardNo;
     NSString *_cardBank;
     NSTimer * _countdownTimer;
-    
-    
+    BOOL _isFirst;
 }
 
 @property (nonatomic, copy)NSString *platform;
@@ -76,7 +70,9 @@
     moenyViewing.moneyImage.hidden = YES;
     [self.view addSubview:moenyViewing];
 
-}
+    _isFirst = _popAlert;
+
+  }
 
 
 - (void)loadView
@@ -326,7 +322,8 @@
             moenyViewing.lableData.hidden = YES;
             moenyViewing.sureBtn.hidden = YES;
             moenyViewing.middleView.hidden = NO;
-            if (_popAlert) {
+            if (_popAlert&&_isFirst) {
+                _isFirst = NO;
                 [self showAlertview];
             }
         }

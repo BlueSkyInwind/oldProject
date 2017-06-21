@@ -825,9 +825,7 @@
         
         GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
         if ([caseInfo.flag isEqualToString:@"0000"]) {
-            
-//            _caseInfo = caseInfo;
-            //            [self queryUserBidStatus:caseInfo];
+
             [self getUserStatus:caseInfo];
         }
     } WithFaileBlock:^{

@@ -25,18 +25,14 @@
 #import "CardInfo.h"
 #import "LoanMoneyViewController.h"
 #import "YYText.h"
-#import "ExpressViewController.h"
 #import "DrawService.h"
 #import "P2PViewController.h"
 #import "GetCaseInfo.h"
-#import "P2PBindCardViewController.h"
-#import "HomeDailViewController.h"
 #import "DataWriteAndRead.h"
 #import "CustomerBaseInfoBaseClass.h"
 #import "GetCustomerBaseViewModel.h"
 #import "ReplenishViewController.h"
 #import "Approval.h"
-#import "P2PAgreementViewController.h"
 #import "DetailViewController.h"
 #import "IdeaBackViewController.h"
 #import "FXDWebViewController.h"
@@ -52,7 +48,6 @@
 #import "CheckViewModel.h"
 #import "SaveLoanCaseModel.h"
 #import "QryUserStatusModel.h"
-#import "QueryUserBidStatusModel.h"
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -91,7 +86,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSString *_userFlag;
     GetCaseInfo *_caseInfo;
     QryUserStatusModel *_qryUserStatusModel;
-//    QueryUserBidStatusModel *_queryUserBidStatusModel;
 
 }
 
@@ -1155,9 +1149,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                         color:UI_MAIN_COLOR
                               backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
                                     tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
-//                                        ExpressViewController *expressVC = [[ExpressViewController alloc] init];
-//                                        expressVC.productId = _userStateModel.product_id;
-//                                        [self.navigationController pushViewController:expressVC animated:YES];
                                         DLog(@"费用说明");
                                         FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
                                         webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_loanDetial_url];

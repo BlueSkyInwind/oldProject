@@ -426,9 +426,6 @@ NSString * const    _getBidStatus_url    =    @"hg/getBidStatus";
 //提款申请件记录
 NSString * const    _saveLoanCase_url    =    @"hg/saveLoanCase.jhtml";
 
-//用户标的状态查询
-NSString * const    _queryUserBidStatus_url    =    @"hg/queryUserBidStatus.jhtml";
-
 #pragma Mark - 验证码类型
 
 NSString * const  CODE_REG           =    @"MSG_REG_"; ///注册验证码

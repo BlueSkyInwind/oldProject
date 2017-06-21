@@ -375,8 +375,7 @@
                             //                            UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                             //                            userDataVC.product_id = @"P001002";
                             //                            [self.navigationController pushViewController:userDataVC animated:true];
-                            //                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
-                            //                            [self.navigationController pushViewController:writeVC animated:YES];
+
                         }
                     }
                         break;

@@ -10,7 +10,6 @@
 #import "SumCell.h"
 #import "DaysCell.h"
 #import "MoneyPlanCell.h"
-#import "WriteInfoViewController.h"
 #import "UserStateModel.h"
 #import "LoanSureSecondViewController.h"
 #import "UserDataViewController.h"
@@ -130,9 +129,7 @@
             userDataVC.req_loan_amt = _user_req_amt;
             userDataVC.product_id = _product_id;
             [self.navigationController pushViewController:userDataVC animated:true];
-//            WriteInfoViewController *writInfoVC = [[WriteInfoViewController alloc] init];
-//            writInfoVC.req_loan_amt = _user_req_amt;
-//            [self.navigationController pushViewController:writInfoVC animated:true];
+
         }
         
     } else {

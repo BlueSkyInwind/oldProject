@@ -34,7 +34,6 @@
         if([returnValue[@"flag"] isEqualToString:@"0000"])
         {
             _model=[UserStateModel yy_modelWithJSON:returnValue[@"result"]];
-            //            RepaymentViewController *repayMent=[[RepaymentViewController alloc]initWithNibName:@"RepaymentViewController" bundle:nil];
             if (_model.platform_type != nil) {
                 if ([_model.platform_type isEqualToString:@"0"]) {
                     if ([_model.product_id isEqualToString:RapidLoan]) {

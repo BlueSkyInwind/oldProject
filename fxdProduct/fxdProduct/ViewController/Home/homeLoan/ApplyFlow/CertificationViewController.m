@@ -44,7 +44,7 @@
     
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"三方认证";
+    self.navigationItem.title = @"第三方认证";
     _btnStatus = YES;
     [self addBackItem];
     [self configTableView];
