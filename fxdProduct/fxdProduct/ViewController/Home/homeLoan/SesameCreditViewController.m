@@ -56,11 +56,6 @@
             DLog(@"%@",object);
             
         }];
-    
-    
-//    FXDWebViewController *webview = [[FXDWebViewController alloc] init];
-//    NSString *url = [NSString stringWithFormat:@"%@%@",_ZMXY_url,_findZhimaCredit_url];
-//    [self.navigationController pushViewController:webview animated:true];
    
     
 }

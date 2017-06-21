@@ -13,7 +13,6 @@
 #import "FaceIDLiveModel.h"
 #import "JXLParse.h"
 #import "JXLMessagePrse.h"
-#import "telphoneView.h"
 #import "ReturnMsgBaseClass.h"
 #import "MGLiveViewController.h"
 #import "BaseNavigationViewController.h"
@@ -310,9 +309,7 @@
     FXDWebViewController *controller = [[FXDWebViewController alloc]init];
     controller.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_mobileAuthentication_url];
     [self.navigationController pushViewController:controller animated:YES];
-//    telphoneView *telview = [[[NSBundle mainBundle] loadNibNamed:@"telphoneView" owner:self options:nil] lastObject];
-//    telview.frame = CGRectMake(0, 0, _k_w, _k_h);
-//    [telview show];
+
 }
 
 #pragma mark - UITextFieldDelegate

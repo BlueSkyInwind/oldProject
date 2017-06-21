@@ -14,7 +14,6 @@
 #import "SMSViewModel.h"
 #import "UserCardResult.h"
 #import "BankModel.h"
-#import "AuthorizationViewController.h"
 #import "UserStateModel.h"
 #import "DetailViewController.h"
 #import <MGBaseKit/MGBaseKit.h>
@@ -101,10 +100,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 
 - (void)clicksecry
 {
-//    AuthorizationViewController *authVC = [[AuthorizationViewController alloc] init];
-//    authVC.cardNum = [dataListAll3 objectAtIndex:1];
-//    authVC.bankName = [dataListAll3 objectAtIndex:0];
-//    [self.navigationController pushViewController:authVC animated:YES];
+
     NSDictionary *paramDic = @{@"apply_id_":_userStateModel.applyID,
                                @"product_id_":_userStateModel.product_id,
                                @"protocol_type_":@"1",
