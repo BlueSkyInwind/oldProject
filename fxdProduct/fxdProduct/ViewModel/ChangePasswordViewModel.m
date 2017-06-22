@@ -34,7 +34,7 @@
     } failure:^(EnumServerStatus status, id object) {
         [self faileBlock];
     }];
-
+    
 }
 
 -(void)updatePasswordSmscode:(NSString *)smscode Password:(NSString *)password{
@@ -50,7 +50,6 @@
     
         paramDic = nil;
     }
-    
     
     [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_CHANGEPASS_URL] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
