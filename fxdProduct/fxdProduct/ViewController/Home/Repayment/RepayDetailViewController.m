@@ -20,7 +20,6 @@
 #import "RepayListInfo.h"
 #import "P2PBillDetail.h"
 #import "P2PAccountInfo.h"
-#import "P2PRepaySaveViewController.h"
 #import "PaymentServiceModel.h"
 #import "AccountHSServiceModel.h"
 #import "P2PViewController.h"
@@ -32,7 +31,6 @@
 #import "SaveLoanCaseModel.h"
 #import "HomeViewModel.h"
 #import "UserStateModel.h"
-#import "QueryUserBidStatusModel.h"
 @interface RepayDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SelectViewDelegate>
 {
     UIImageView*navBarHairlineImageView;
@@ -70,8 +68,6 @@
     QueryCardInfo *_queryCardInfoModel;
     
     QryUserStatusModel *_userStatusModel;
-    
-    QueryUserBidStatusModel *_queryUserBidStatusModel;
     
 }
 @property (nonatomic,strong) UILabel *lblShouldrepay;
@@ -244,7 +240,7 @@
             }
         }
     }else {
-        if ([_product_id isEqualToString:@"P001004"]) {
+        if ([_product_id isEqualToString:RapidLoan]) {
             noneView.hidden = false;
         }
     }
@@ -258,7 +254,7 @@
 {
     DLog(@"%@",_product_id);
     if (_repayListInfo != nil) {
-        if ([_product_id isEqualToString:@"P001004"]){
+        if ([_product_id isEqualToString:RapidLoan]){
             return payLoanArry.count;
         }else {
             return titleAry.count;
@@ -280,7 +276,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_repayListInfo != nil) {
-        if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001005"]) {
+        if ([_product_id isEqualToString:SalaryLoan]||[_product_id isEqualToString:WhiteCollarLoan]) {
             //红包和银行的cell
             if(indexPath.row==3){
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
@@ -361,7 +357,7 @@
                         cell.payLabel.textColor=rgb(255, 134, 25);
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     }
-                    if ([_product_id isEqualToString:@"P001004"]) {
+                    if ([_product_id isEqualToString:RapidLoan]) {
                         cell.payLabel.text=@"不可用";
                         _canUseReadPacket = false;
                         cell.payLabel.textColor=rgb(255, 134, 25);
@@ -470,7 +466,7 @@
                         cell.payLabel.textColor=rgb(255, 134, 25);
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     }
-                    if ([_product_id isEqualToString:@"P001004"]) {
+                    if ([_product_id isEqualToString:RapidLoan]) {
                         cell.payLabel.text=@"不可用";
                         _canUseReadPacket = false;
                         cell.payLabel.textColor=rgb(255, 134, 25);
@@ -568,7 +564,7 @@
                     cell.payLabel.textColor=rgb(255, 134, 25);
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 }
-                if ([_product_id isEqualToString:@"P001004"]) {
+                if ([_product_id isEqualToString:RapidLoan]) {
                     cell.payLabel.text=@"不可用";
                     _canUseReadPacket = false;
                     cell.payLabel.textColor=rgb(255, 134, 25);
@@ -598,7 +594,7 @@
 {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001005"]) {
+    if ([_product_id isEqualToString:SalaryLoan]||[_product_id isEqualToString:WhiteCollarLoan]) {
         if(indexPath.row==0){//红包
             if (_canUseReadPacket) {
                 DLog(@"红包");
@@ -771,15 +767,6 @@
         [self fxdRepay];
     }
     
-//    if (_p2pBillModel != nil) {
-//        
-//        if (_repayType == RepayTypeOption) {
-//            [self p2pRepay];
-//        } else {
-//            [self p2pRepayClean];
-//        }
-//    }
-    
     if (_p2pBillModel != nil) {
         
         [self getMoney];
@@ -789,6 +776,9 @@
 
 - (void)fxdRepay
 {
+    
+    NSLog(@"====================================支付点击");
+    self.sureBtn.enabled = NO;
     NSMutableString *staging_ids = [NSMutableString string];
     for (int i = 0; i < _situations.count; i++) {
         //        if ([_cellSelectArr objectAtIndex:i].boolValue) {
@@ -835,75 +825,23 @@
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_RepayOrSettleWithPeriod_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object[@"msg"]);
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+            
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
         }else {
+            self.sureBtn.enabled = YES;
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
         }
     } failure:^(EnumServerStatus status, id object) {
-        
+        self.sureBtn.enabled = YES;
     }];
 }
-
-
-
-
-- (void)p2pRepay
-{
-    //    _finalyRepayAmount
-    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_memberService_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:nil finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        _p2pAccountInfo = [P2PAccountInfo yy_modelWithJSON:object];
-//        [self repaySure];
-        if (_p2pAccountInfo.data.accountInfo.available_amount_ < _finalyRepayAmount) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"您的帐户余额不足,请充值"];
-            NSString *url = [NSString stringWithFormat:@"%@%@?from_user_id_=%@&from_mobile_=%@&RetUrl=%@&amount_=%lf&PageType=1&GateBusiId=QP&bill_id_=%@&bid_id_=%@&repay_amount_=%.2f&max_bill_date_=%@&method_=doPay",_P2P_url,_netSave_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone,_rechargeing_url,_finalyRepayAmount -_p2pAccountInfo.data.accountInfo.available_amount_,_p2pBillModel.data.bill_id_,_p2pBillModel.data.bid_id_,_finalyRepayAmount,[Tool dateToFormatString:_bills.lastObject.bill_date_]];
-            
-            P2PRepaySaveViewController *p2pSaveVC = [[P2PRepaySaveViewController alloc] init];
-            p2pSaveVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-            [self.navigationController pushViewController:p2pSaveVC animated:YES];
-        } else {
-            [self repaySure1];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
-
-- (void)repaySure1
-{
-    NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
-                          @"bid_id_":_p2pBillModel.data.bid_id_,
-                          @"repay_amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
-                          @"max_bill_date_":[Tool dateToFormatString:_bills.lastObject.bill_date_]};
-    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_doPay_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:dic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if ([[object objectForKey:@"appcode"] isEqualToString:@"1"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"还款成功"];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"appmsg"]];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
-
 
 #pragma mark 正常扣款
 - (void)repaySure
 {
-//    NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
-//                          @"bid_id_":_p2pBillModel.data.bid_id_,
-//                          @"repay_amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
-//                          @"max_bill_date_":[Tool dateToFormatString:_bills.lastObject.bill_date_],
-//                          };
     
     NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
                           @"bid_id_":_p2pBillModel.data.bid_id_,
@@ -911,8 +849,6 @@
                           @"method_":@"doPay",
                           @"max_bill_date_":[Tool dateToFormatString:_bills.lastObject.bill_date_],
                           @"from_mobile_":[Utility sharedUtility].userInfo.userMobilePhone};
-    
-//    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_doPay_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
     NSString *url = [NSString stringWithFormat:@"%@%@",_P2P_url,_paymentService_url];
     [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:dic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
@@ -921,53 +857,6 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"appmsg"]];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
-- (void)p2pRepayClean
-{
-    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_memberService_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:nil finished:^(EnumServerStatus status, id object) {
-        _p2pAccountInfo = [P2PAccountInfo yy_modelWithJSON:object];
-        [self cleanUserMoney];
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
-
-
-
-- (void)cleanUserMoney
-{
-    
-//    [self paySettle];
-    
-    if (_p2pAccountInfo.data.accountInfo.available_amount_ < _finalyRepayAmount) {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"您的帐户余额不足,请充值"];
-        NSString *url = [NSString stringWithFormat:@"%@%@?from_user_id_=%@&from_mobile_=%@&amount_=%f&PageType=1&RetUrl=%@&GateBusiId=QP&bid_id_=%@&bill_id_=%@&repay_amount_=%.2f&method_=doSettle",_P2P_url,_netSave_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone,_finalyRepayAmount - _p2pAccountInfo.data.accountInfo.available_amount_,_rechargeing_url,_p2pBillModel.data.bid_id_,_p2pBillModel.data.bill_id_,_finalyRepayAmount];
-        P2PRepaySaveViewController *p2pSaveVC = [[P2PRepaySaveViewController alloc] init];
-        p2pSaveVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        [self.navigationController pushViewController:p2pSaveVC animated:YES];
-    } else {
-        [self paySettle1];
-    }
-}
-
-- (void)paySettle1
-{
-    NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
-                          @"bid_id_":_p2pBillModel.data.bid_id_,
-                          @"repay_amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount]};
-    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_doSettle_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:dic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if ([[object objectForKey:@"appcode"] isEqualToString:@"1"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"结清成功"];
-            [self.navigationController popToRootViewControllerAnimated:YES];
         }
     } failure:^(EnumServerStatus status, id object) {
         
@@ -1006,76 +895,28 @@
 
 -(void)getMoney{
     
-//    [self checkUserStatus];
     if ([_userStatusModel.result.flg isEqualToString:@"2"]) {//未开户
         
     }else if ([_userStatusModel.result.flg isEqualToString:@"3"]){//待激活
-        
-        //激活用户
-        //                [self getFXDCaseInfo:@"10"];
-        //                [self saveLoanCase:@"10" caseInfo:caseInfo];
-        NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"2",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+
+        NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
         P2PViewController *p2pVC = [[P2PViewController alloc] init];
-//        p2pVC.isOpenAccount = NO;
         p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         [self.navigationController pushViewController:p2pVC animated:YES];
         
     }else if ([_userStatusModel.result.flg isEqualToString:@"6"]){//正常用户
-        
-        //选择银行卡
-        //                [self chooseBankCard];
-        //                [self getFXDCaseInfo:@"30"];
-        //                [self saveLoanCase:@"30" caseInfo:caseInfo];
+
         if (_repayType == RepayTypeOption) {
-            //                    [self p2pRepay];
             [self repaySure];
             
         } else {
             
             [self paySettle];
-            //                    [self p2pRepayClean];
-        }
-        
-}
-    
 
-//    [self getFxdCaseInfo];
-}
-
--(void)checkUserStatus{
-    
-    if ([_queryUserBidStatusModel.result.status isEqualToString:@"0"]) {//未开户
-        
-    }else if ([_queryUserBidStatusModel.result.status isEqualToString:@"2"]){//待激活
-        
-        //激活用户
-        //                [self getFXDCaseInfo:@"10"];
-        //                [self saveLoanCase:@"10" caseInfo:caseInfo];
-        NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"2",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
-        P2PViewController *p2pVC = [[P2PViewController alloc] init];
-        //        p2pVC.isOpenAccount = NO;
-        p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        [self.navigationController pushViewController:p2pVC animated:YES];
-        
-    }else if ([_queryUserBidStatusModel.result.status isEqualToString:@"3"]){//正常用户
-        
-        //选择银行卡
-        //                [self chooseBankCard];
-        //                [self getFXDCaseInfo:@"30"];
-        //                [self saveLoanCase:@"30" caseInfo:caseInfo];
-        if (_repayType == RepayTypeOption) {
-            //                    [self p2pRepay];
-            [self repaySure];
-            
-        } else {
-            
-            [self paySettle];
-            //                    [self p2pRepayClean];
         }
-        //                [self queryCardInfo];
     }
-    
 }
+
 #pragma mark 弹出合规银行卡列表viewmodel
 -(void)gotoUnbundlingBank{
     
@@ -1149,32 +990,15 @@
         
         GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
         if ([caseInfo.flag isEqualToString:@"0000"]) {
-            
-//            _caseInfo = caseInfo;
+
             [self getUserStatus:caseInfo];
-            
-//            [self queryUserBidStatus:caseInfo];
-            //            [self saveLoanCase:type caseInfo:_caseInfo];
+
         }
     } WithFaileBlock:^{
         
     }];
     [complianceViewModel getFXDCaseInfo];
     
-}
-
--(void)queryUserBidStatus:(GetCaseInfo *)caseInfo{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        QueryUserBidStatusModel *queryModel = [QueryUserBidStatusModel yy_modelWithJSON:returnValue];
-        _queryUserBidStatusModel = queryModel;
-        
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel queryUserBidStatusForm:caseInfo.result.from_ fromCaseId:caseInfo.result.from_case_id_];
 }
 
 #pragma mark  fxd用户状态查询，viewmodel

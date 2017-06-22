@@ -18,7 +18,6 @@ typedef NS_ENUM(NSUInteger, PayType) {
 };
 typedef void(^MakeSurePayBlock)(PayType payType,CardInfo *cardInfo,NSInteger currentIndex);
 
-//typedef void(^ChangeBankBlock)(PayType payType,CardInfo *cardInfo,NSInteger currentIndex);
 typedef void(^ChangeBankBlock)(void);
 @interface PayViewController : UIViewController
 

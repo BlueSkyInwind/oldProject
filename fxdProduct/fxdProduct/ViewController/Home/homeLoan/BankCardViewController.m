@@ -14,7 +14,6 @@
 #import "SMSViewModel.h"
 #import "UserCardResult.h"
 #import "BankModel.h"
-#import "AuthorizationViewController.h"
 #import "UserStateModel.h"
 #import "DetailViewController.h"
 #import <MGBaseKit/MGBaseKit.h>
@@ -101,10 +100,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 
 - (void)clicksecry
 {
-//    AuthorizationViewController *authVC = [[AuthorizationViewController alloc] init];
-//    authVC.cardNum = [dataListAll3 objectAtIndex:1];
-//    authVC.bankName = [dataListAll3 objectAtIndex:0];
-//    [self.navigationController pushViewController:authVC animated:YES];
+
     NSDictionary *paramDic = @{@"apply_id_":_userStateModel.applyID,
                                @"product_id_":_userStateModel.product_id,
                                @"protocol_type_":@"1",
@@ -647,7 +643,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     NSDictionary *paramDic;
-    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
+    if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
         paramDic = @{@"card_no_":bankNo,
                    @"card_bank_":_bankCodeNUm,
                    @"bank_reserve_phone_":[dataListAll3 objectAtIndex:2],
@@ -656,7 +652,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                    @"verify_code_":dataListAll3[3],
                    @"drawing_amount_":_drawAmount};
     }
-    if ([_userStateModel.product_id isEqualToString:@"P001002"]||[_userStateModel.product_id isEqualToString:@"P001005"]) {
+    if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
         paramDic = @{@"card_no_":bankNo,
                      @"card_bank_":_bankCodeNUm,
                      @"bank_reserve_phone_":[dataListAll3 objectAtIndex:2],
@@ -758,6 +754,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
                 LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
+                loanVC.userStateModel = _userStateModel;
                 [self.navigationController pushViewController:loanVC animated:YES];
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
@@ -779,10 +776,10 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 
 
     NSString *bankName = [self bankName:_bankCodeNUm];
-    NSString *sms_seq = @"AAAAAAAA";
+//    NSString *sms_seq = @"AAAAAAAA";
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@&mobile_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,bankName,bankNo,dataListAll3[3],sms_seq,dataListAll3[2]];
+    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@&mobile_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,bankName,bankNo,dataListAll3[3],_sms_seq,dataListAll3[2]];
     NSLog(@"%@",url);
     P2PViewController *p2pVC = [[P2PViewController alloc] init];
     p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];

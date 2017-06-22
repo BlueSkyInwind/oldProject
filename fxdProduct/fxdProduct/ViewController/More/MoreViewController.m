@@ -131,24 +131,6 @@
             cell.lineView.hidden=NO;
         }
     }
-    //    else if(indexPath.section == 1)
-    //    {
-    //        //password
-    //        GesturesPasswordCell *cell=[tableView dequeueReusableCellWithIdentifier:@"password"];
-    //        cell.imgView.image=[UIImage imageNamed:imgAry[imgAry.count-1]];
-    //        cell.lblTitle.text=titleAry[titleAry.count-1];
-    //
-    //        if ([[PCCircleViewConst getGestureWithKey:gestureFinalSaveKey] isEqualToString:@""] || [PCCircleViewConst getGestureWithKey:gestureFinalSaveKey] == nil) {
-    //            cell.passwordSwitch.on = NO;
-    //        } else {
-    //            cell.passwordSwitch.on = YES;
-    //        }
-    //
-    //        DLog(@"state  --- %d",cell.passwordSwitch.on);
-    //        [cell.passwordSwitch addTarget:self action:@selector(switchClick:) forControlEvents:UIControlEventValueChanged];
-    //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //        return cell;
-    //    }
     
     else{
         HelpViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"outLog"];

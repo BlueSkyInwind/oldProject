@@ -27,10 +27,7 @@
 #import "LoanSureSecondViewController.h"
 #import "RateModel.h"
 #import "DataWriteAndRead.h"
-#import "SesameCreditCell.h"
-#import "DisplayCell.h"
 #import "SesameCreditViewController.h"
-#import "FindZhimaCreditModel.h"
 
 
 @interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate>
@@ -51,7 +48,6 @@
     NSString *_isMobileAuth;
     NSString *_isZmxyAuth;
     UserStateModel *_model;
-    BOOL _isDisplay;
     
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -71,29 +67,47 @@
     self.automaticallyAdjustsScrollViewInsets = false;
     processFlot = 0.0;
     _subTitleArr = @[@"请完善您的个人信息",@"请完善您的联系人信息",@"请完善您的职业信息",@"请完成三方认证"];
-    [self addBackItem];
+    [self addBackItemRoot];
     
     [self configTableview];
     self.navigationController.navigationBar.barTintColor = UI_MAIN_COLOR;
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     topView = [[UIView alloc] init];
     [self.view addSubview:topView];
-    _isDisplay = NO;
     
+}
+
+- (void)addBackItemRoot
+{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    
+    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [btn setImage:img forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, 0, 45, 44);
+    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    
+    //    修改距离,距离边缘的
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceItem.width = -15;
+    
+    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
+    //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
+}
+
+- (void)popBack
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)setProcess
 {
-    //    processFlot += 0.25;
-//        _nextStep = @"-1";
+
     if (_nextStep.integerValue > 0) {
-//        if ([_product_id isEqualToString:@"P001005"]) {
-            processFlot = (_nextStep.integerValue-1)*0.2;
-//            processFlot = (_nextStep.integerValue-1)*0.25;
-//        }else{
-//        
-//            processFlot = (_nextStep.integerValue-1)*0.25;
-//        }
+
+        processFlot = (_nextStep.integerValue-1)*0.2;
+
     } else {
         if (_nextStep.integerValue == -1) {
             processFlot = 1;
@@ -121,23 +135,14 @@
     [super viewWillAppear:animated];
     [_tableView.mj_header beginRefreshing];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-//    [self findZhimaCredit];
 }
 
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    [self refreshInfoStep];
-//}
 
 - (void)configTableview
 {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DataDisplayCell class]) bundle:nil] forCellReuseIdentifier:@"DataDisplayCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SesameCreditCell class]) bundle:nil] forCellReuseIdentifier:@"SesameCreditCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DisplayCell class]) bundle:nil] forCellReuseIdentifier:@"DisplayCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    //    self.tableView.sectionFooterHeight = 35;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
     
@@ -158,7 +163,6 @@
         make.left.equalTo(@20);
         make.top.equalTo(@100);
         make.right.equalTo(@(-20));
-        //        make.height.equalTo(@20);
         make.height.equalTo(processBack.mas_width).multipliedBy(0.0597);
     }];
     [headView layoutIfNeeded];
@@ -173,27 +177,14 @@
         make.height.equalTo(numView.mas_width).multipliedBy(0.0597);
     }];
     [headView layoutIfNeeded];
-//    int length;
-//    if ([_product_id isEqualToString:@"P001005"]) {
-//        length =6;
-//    }else{
-//    
-//        length = 5;
-//    }
+
     for (int i = 0; i < 6; i++) {
-//        CGFloat width;
+
         UILabel *numLabel = [[UILabel alloc] init];
         numLabel.textColor = [UIColor whiteColor];
         numLabel.font = [UIFont systemFontOfSize:12.f];
         numLabel.textAlignment = NSTextAlignmentCenter;
-//        if ([_product_id isEqualToString:@"P001005"]) {
-            numLabel.text = [NSString stringWithFormat:@"%d%%",i*20];
-//            width = i*0.17;
-//        }else{
-//        
-//            numLabel.text = [NSString stringWithFormat:@"%d%%",i*25];
-//            width = i*0.22;
-//        }
+        numLabel.text = [NSString stringWithFormat:@"%d%%",i*20];
         
         [numView addSubview:numLabel];
         DLog(@"%lf",i*0.25*numView.frame.size.width);
@@ -248,13 +239,11 @@
         make.height.equalTo(_applyBtn.mas_width).multipliedBy(0.15f);
     }];
     self.tableView.tableFooterView = footView;
-    //    [self setProcess];
 }
 
 - (void)applyBtnClick
 {
     DLog(@"确认申请");
-    //    [self popViewFamily];
     
     [self PostStatuesMyLoanAmount:@{@"product_id_":_product_id}];
 }
@@ -289,7 +278,7 @@
                     loanFirstVC.rulesId = _rulesId;
                 }
                 loanFirstVC.model = _model;
-                if ([_product_id isEqualToString:@"P001004"]) {
+                if ([_product_id isEqualToString:RapidLoan]) {
                     loanFirstVC.req_loan_amt = _req_loan_amt;
                 }
                 [self.navigationController pushViewController:loanFirstVC animated:true];
@@ -343,22 +332,21 @@
                     }
                         break;
                     default:{
-                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001004"]) {
+                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:RapidLoan]) {
                             PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
                             [self.navigationController pushViewController:payLoanview animated:true];
                         }
-                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001002"]) {
+                        if ([[paramDic objectForKey:@"product_id_"] isEqualToString:SalaryLoan]) {
                             //                            UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                             //                            userDataVC.product_id = @"P001002";
                             //                            [self.navigationController pushViewController:userDataVC animated:true];
-                            //                            WriteInfoViewController *writeVC = [WriteInfoViewController new];
-                            //                            [self.navigationController pushViewController:writeVC animated:YES];
+
                         }
                     }
                         break;
                 }
             }else if ([_model.applyFlag isEqualToString:@"0005"]) {
-                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001004"]) {
+                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:RapidLoan]) {
                     LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
                     loanFirstVC.productId = _product_id;
                     if (_careerParse != nil) {
@@ -369,12 +357,12 @@
                         loanFirstVC.rulesId = _rulesId;
                     }
                     loanFirstVC.model = _model;
-                    if ([_product_id isEqualToString:@"P001004"]) {
+                    if ([_product_id isEqualToString:RapidLoan]) {
                         loanFirstVC.req_loan_amt = _req_loan_amt;
                     }
                     [self.navigationController pushViewController:loanFirstVC animated:true];
                 }
-                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001002"]||[[paramDic objectForKey:@"product_id_"] isEqualToString:@"P001005"]) {
+                if ([[paramDic objectForKey:@"product_id_"] isEqualToString:SalaryLoan]||[[paramDic objectForKey:@"product_id_"] isEqualToString:WhiteCollarLoan]) {
                     LoanSureSecondViewController *loanSecondVC = [[LoanSureSecondViewController alloc] init];
                     loanSecondVC.model = _model;
                     loanSecondVC.productId = [paramDic objectForKey:@"product_id_"];
@@ -413,49 +401,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if (_isDisplay) {
-//        
-//        return 7;
-//    }else{
+
     
-        return 6;
-//    }
+    return 6;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-//    if ([_product_id isEqualToString:@"P001005"]) {
         if (indexPath.row == 0) {
             return _k_w*0.06f;
         }else{
         
             return _k_w*0.21f;
         }
-//    }
-//    else{
-//    
-//        if (_isDisplay) {
-//            if (indexPath.row == 6) {
-//                return _k_w*0.125f;
-//            }else if(indexPath.row == 0){
-//                
-//                return _k_w*0.12f;
-//            }else{
-//                return _k_w*0.21;
-//            }
-//        }else{
-//            
-//            if (indexPath.row == 5) {
-//                return _k_w*0.125f;
-//            }else if (indexPath.row == 0){
-//                return _k_w*0.12f;
-//            }else{
-//                return _k_w*0.21;
-//            }
-//        }
-//    }
     
 }
 
@@ -474,8 +434,7 @@
                 make.top.equalTo(@5);
                 make.width.equalTo(@22);
                 make.height.equalTo(@22);
-                //                make.bottom.equalTo(@5);
-                //                make.width.equalTo(iconView.mas_height).multipliedBy(1.f);
+
             }];
             UILabel *label = [[UILabel alloc] init];
             [cell.contentView addSubview:label];
@@ -485,123 +444,13 @@
             [label mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(iconView.mas_right).offset(4);
                 make.top.equalTo(@10);
-                //                make.bottom.equalTo(cell.contentView);
                 make.height.equalTo(@15);
                 make.right.equalTo(cell.contentView);
             }];
-//            if ([_product_id isEqualToString:@"P001002"]) {
-//                UILabel *tipLabel = [[UILabel alloc]init];
-//                [cell.contentView addSubview:tipLabel];
-//                tipLabel.text = @"基础认证必填 完成后可进行借款";
-//                tipLabel.textColor = [UIColor colorWithRed:191/255.0 green:192/255.0 blue:193/255.0 alpha:1.0];
-//                tipLabel.font = [UIFont systemFontOfSize:13.f];
-//                [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//                    make.left.equalTo(@17);
-//                    make.top.equalTo(@40);
-//                    //                make.bottom.equalTo(cell.contentView);
-//                    make.height.equalTo(@15);
-//                    make.right.equalTo(cell.contentView);
-//                }];
-//            }
+
         }
         return cell;
     }else {
-        
-//        if ([_product_id isEqualToString:@"P001002"]||[_product_id isEqualToString:@"P001004"]) {
-//
-//            if (indexPath.row == 5||indexPath.row == 6) {
-//                if (_isDisplay) {
-//                    if (indexPath.row == 5) {
-//                        SesameCreditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SesameCreditCell"];
-//                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//                        if (_isZmxyAuth.integerValue == 2) {
-//                            cell.stateLabel.text = @"已完成";
-//                            cell.stateLabel.textColor = rgb(42, 155, 234);
-//                        } else if(_isZmxyAuth.integerValue == 1){
-//                            cell.stateLabel.text = @"认证中";
-//                            cell.stateLabel.textColor = rgb(159, 160, 162);
-//                        }else if(_isZmxyAuth.integerValue == 3){
-//                        
-//                            cell.stateLabel.text = @"未完成";
-//                            cell.stateLabel.textColor = rgb(159, 160, 162);
-//                        }
-//                        
-//                        return cell;
-//                    }
-//                    if (indexPath.row == 6) {
-//                        
-//                        DisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DisplayCell"];
-//                        cell.titleLabel.text = @"收起";
-//                        cell.directionImageView.image = [UIImage imageNamed:@"jiantoushang"];
-//                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//                        return cell;
-//                    }
-//                }else{
-//                    
-//                    DisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DisplayCell"];
-//                    cell.titleLabel.text = @"更多认证";
-//                    cell.directionImageView.image = [UIImage imageNamed:@"jiantouxia"];
-//                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//                    return cell;
-//                }
-//            }
-//            
-//                DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
-//                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//                if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
-//                    
-//                    cell.statusLabel.text = @"已完成";
-//                    cell.statusLabel.textColor = UI_MAIN_COLOR;
-//                } else {
-//                    cell.statusLabel.text = @"未完成";
-//                    cell.statusLabel.textColor = rgb(159, 160, 162);
-//                }
-//                switch (indexPath.row) {
-//                    case 1:
-//                    {
-//                        
-//                        cell.iconImage.image = [UIImage imageNamed:@"UserData1"];
-//                        cell.titleLable.text = @"个人信息";
-//                        cell.subTitleLabel.text = @"完善您的个人信息";
-//                        
-//                        return cell;
-//                    }
-//                        break;
-//                    case 2:
-//                    {
-//                        cell.iconImage.image = [UIImage imageNamed:@"UserData2"];
-//                        cell.titleLable.text = @"联系人信息";
-//                        cell.subTitleLabel.text = @"完善您的联系人信息";
-//                        return cell;
-//                    }
-//                        break;
-//                    case 3:
-//                    {
-//                        cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
-//                        cell.titleLable.text = @"职业信息";
-//                        cell.subTitleLabel.text = @"完善您的职业信息";
-//                        return cell;
-//                    }
-//                        break;
-//                    case 4:
-//                    {
-//                        cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
-//                        cell.titleLable.text = @"第三方认证";
-//                        cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
-//                        if (UI_IS_IPHONE5) {
-//                            cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
-//                        }
-//                        //                    cell.lineView.hidden = true;
-//                        return cell;
-//                    }
-//                        break;
-//                    default:
-//                        break;
-//                }
-//            
-//        }else{
         
             DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -613,7 +462,6 @@
                 cell.statusLabel.text = @"未完成";
                 cell.statusLabel.textColor = rgb(159, 160, 162);
             }
-            //        return cell;
             switch (indexPath.row) {
                 case 1:
                 {
@@ -649,7 +497,6 @@
                     if (UI_IS_IPHONE5) {
                         cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
                     }
-//                    cell.lineView.hidden = true;
                     return cell;
                 }
                     break;
@@ -675,7 +522,6 @@
                     return cell;
                 default:
                     break;
-//            }
         }
     }
     
@@ -684,17 +530,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.row == 5||indexPath.row == 6) {
-//        
-//        if ([_product_id isEqualToString:@"P001005"]&&indexPath.row==5&&_nextStep.integerValue<5&&_nextStep.integerValue>0) {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_subTitleArr[_nextStep.integerValue-1]];
-//            return;
-//        }else{
-//        
-//            [self clickCell:indexPath.row];
-//        }
-//        
-//    }else{
+
     
         DLog(@"%ld",_nextStep.integerValue);
         if (_nextStep.integerValue > 0) {
@@ -707,17 +543,6 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
             return;
         }
-        
-//    }
-    
-    
-    
-    
-//    if (_nextStep.integerValue == 4) {
-//        if (_isInfoEditable.integerValue == 0) {
-//            return;
-//        }
-//    }
     
     switch (indexPath.row) {
         case 1:
@@ -942,23 +767,7 @@
 
 - (void)goVC:(NSString *)is_know
 {
-    //    if ([_product_id isEqualToString:@"P001004"]) {
-    //        [self fatchRate:^(RateModel *rate) {
-    //            PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-    //            payLoanview.is_know = is_know;
-    //            payLoanview.product_id = _product_id;
-    //            payLoanview.userState = _model;
-    //            payLoanview.rateModel = rate;
-    //            if (_careerParse != nil) {
-    //                payLoanview.resultcode = _careerParse.result.resultcode;
-    //                payLoanview.rulesid = _careerParse.result.rulesid;
-    //            } else {
-    //                payLoanview.resultcode = _resultCode;
-    //                payLoanview.rulesid = _rulesId;
-    //            }
-    //            [self.navigationController pushViewController:payLoanview animated:true];
-    //        }];
-    //    } else {
+    
     LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
     loanFirstVC.productId = _product_id;
     loanFirstVC.if_family_know = is_know;
@@ -970,11 +779,10 @@
         loanFirstVC.rulesId = _rulesId;
     }
     loanFirstVC.model = _model;
-    if ([_product_id isEqualToString:@"P001004"]) {
+    if ([_product_id isEqualToString:RapidLoan]) {
         loanFirstVC.req_loan_amt = _req_loan_amt;
     }
     [self.navigationController pushViewController:loanFirstVC animated:true];
-    //    }
     
     
 }
@@ -994,7 +802,7 @@
         loanFirstVC.rulesId = _rulesId;
     }
     
-    if ([[Utility sharedUtility].userInfo.pruductId isEqualToString:@"P001004"]) {
+    if ([[Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan]) {
         loanFirstVC.req_loan_amt = _req_loan_amt;
     }
     [self.navigationController pushViewController:loanFirstVC animated:true];
@@ -1002,7 +810,7 @@
 
 - (void)fatchRate:(void(^)(RateModel *rate))finish
 {
-    NSDictionary *dic = @{@"priduct_id_":@"P001004"};
+    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         if ([rateParse.flag isEqualToString:@"0000"]) {
@@ -1027,135 +835,7 @@
 {
     view.layer.cornerRadius = 10;
     view.layer.masksToBounds = YES;
-    //    view.layer.borderWidth = 1;
-    //    view.layer.borderColor = color.CGColor;
-}
 
-
-#pragma mark - DZNEmptyDataSetSourceDelagete
-
-//- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    return [UIImage imageNamed:@"my-logo"];
-//}
-//
-//- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    return -150.0f;
-//}
-//
-//- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    NSString *text = @"网络加载失败";
-//    
-//    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0f],
-//                                 NSForegroundColorAttributeName: rgb(173, 173, 173)};
-//    
-//    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
-//}
-//
-//- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
-//{
-//    return rgb(242, 242, 242);
-//}
-//
-//- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
-//{
-////    if (_repayStateFlag.integerValue == 0) {
-////        //        _endView.hidden = true;
-////        return NO;
-////    } else {
-////        _endView.hidden = true;
-////        return YES;
-////    }
-//    return true;
-//    
-//}
-
-#pragma mark -发薪贷和白领贷点击cell的区分
--(void)clickCell:(NSInteger)index{
-
-    if (_isDisplay) {
-        if (index == 6) {
-            _isDisplay = !_isDisplay;
-            [_tableView reloadData];
-        }
-        if (index == 5) {
-            
-//            SesameCreditViewController *controller = [[SesameCreditViewController alloc]init];
-//            [self.navigationController pushViewController:controller animated:YES];
-            if (processFlot == 1) {
-                if (_isZmxyAuth.integerValue == 2) {
-//                    SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
-//                    [self.navigationController pushViewController:controller animated:YES];
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
-                    return;
-                }else if(_isZmxyAuth.integerValue == 1){
-                
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您正在认证中，请勿重复认证!"];
-                    return;
-                    
-                }else{
-                
-                    SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
-                    [self.navigationController pushViewController:controller animated:YES];
-                    return;
-                    
-                }
-                
-//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"芝麻信用"];
-                
-            }else{
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完成必填项目"];
-                return;
-            }
-            
-        }
-    }else{
-        if ([_product_id isEqualToString:@"P001005"]) {
-            
-            if (_isZmxyAuth.integerValue == 2||processFlot ==1) {
-                
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
-                return;
-            }else if(_isZmxyAuth.integerValue == 1){
-                
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您正在认证中，请勿重复认证!"];
-                return;
-                
-            }else{
-            
-                SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
-                [self.navigationController pushViewController:controller animated:YES];
-                return;
-            }
-            
-            
-            
-        }else{
-            if (index == 5) {
-                _isDisplay = !_isDisplay;
-                [_tableView reloadData];
-            }
-        }
-        
-    }
-}
-
-#pragma mark -芝麻信用认证返回
--(void)findZhimaCredit{
-
-    NSDictionary *dic = @{@"juid":[Utility sharedUtility].userInfo.juid};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_findZhimaCredit_url] parameters:dic finished:^(EnumServerStatus status, id object) {
-        FindZhimaCreditModel *model = [FindZhimaCreditModel yy_modelWithJSON:object];
-        if ([model.authentic_status_ isEqualToString:@"2"]) {
-            _nextStep = @"-1";
-            [self setProcess];
-        }
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

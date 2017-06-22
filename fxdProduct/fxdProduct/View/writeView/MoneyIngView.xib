@@ -478,7 +478,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzJ-0x-xaM" userLabel="View20">
                     <rect key="frame" x="0.0" y="129" width="375" height="269"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请注意查收到账短信" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSw-JM-F44">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSw-JM-F44">
                             <rect key="frame" x="0.0" y="237" width="375" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="iBk-Tk-uhh"/>
@@ -490,8 +490,8 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2_home_yuan" translatesAutoresizingMaskIntoConstraints="NO" id="Urt-co-PDM">
                             <rect key="frame" x="86" y="13" width="204" height="204"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到账中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5r6-y1-4Ns">
-                            <rect key="frame" x="133" y="93" width="109" height="43"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5r6-y1-4Ns">
+                            <rect key="frame" x="187.5" y="114.5" width="0.0" height="0.0"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="111" id="n2Y-SV-bbF"/>
                                 <constraint firstAttribute="height" constant="45" id="xbE-6S-bdt"/>
@@ -563,6 +563,7 @@
             </variation>
             <connections>
                 <outlet property="agreeMentView" destination="haH-wT-02O" id="ixx-xH-LGU"/>
+                <outlet property="bottomView" destination="hWU-sA-8y5" id="l0X-ML-t2f"/>
                 <outlet property="labelDetail" destination="kSw-JM-F44" id="bNy-Yj-rxH"/>
                 <outlet property="labelLoan" destination="BPz-Ce-S5M" id="AkG-Rr-D8r"/>
                 <outlet property="labelProgress" destination="5r6-y1-4Ns" id="Xra-hu-0pU"/>
@@ -571,6 +572,7 @@
                 <outlet property="lableData" destination="WSP-Ph-xht" id="kFW-t7-XQT"/>
                 <outlet property="loanTimeTitle" destination="eLV-EQ-kZT" id="sMf-RU-RZH"/>
                 <outlet property="middleView" destination="lIp-0N-SAL" id="Ng8-11-1wK"/>
+                <outlet property="moneyImage" destination="Urt-co-PDM" id="YDO-Qi-ASP"/>
                 <outlet property="payMoneyTitle" destination="TYY-al-iat" id="yh9-qQ-lUQ"/>
                 <outlet property="repayBtnView" destination="kwj-PQ-oYM" id="M3h-mT-u3O"/>
                 <outlet property="sureBtn" destination="MCd-D5-fVF" id="Ii7-uh-B16"/>

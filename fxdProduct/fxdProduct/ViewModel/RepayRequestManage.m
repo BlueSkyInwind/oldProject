@@ -34,10 +34,9 @@
         if([returnValue[@"flag"] isEqualToString:@"0000"])
         {
             _model=[UserStateModel yy_modelWithJSON:returnValue[@"result"]];
-            //            RepaymentViewController *repayMent=[[RepaymentViewController alloc]initWithNibName:@"RepaymentViewController" bundle:nil];
             if (_model.platform_type != nil) {
                 if ([_model.platform_type isEqualToString:@"0"]) {
-                    if ([_model.product_id isEqualToString:@"P001004"]) {
+                    if ([_model.product_id isEqualToString:RapidLoan]) {
                         [self post_getLastDate];
                     }else {
                         RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
@@ -45,7 +44,7 @@
                         [_targetVC.navigationController pushViewController:repayMent animated:YES];
                     }
                 }
-                if ([_model.platform_type isEqualToString:@"2"]) {
+                if ([_model.platform_type isEqualToString:@"2"]) { 
                     RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
                     repayMent.userStateParse = _model;
                     [_targetVC.navigationController pushViewController:repayMent animated:YES];
@@ -108,7 +107,7 @@
                 finalRepayAmount += situation.debt_total;
             }
             repayMent.repayAmount = finalRepayAmount;
-            repayMent.product_id = @"P001004";
+            repayMent.product_id = RapidLoan;
             //            repayMent.cellSelectArr = _cellSelectArr;
             //            repayMent.save_amount = _save_amount;
             repayMent.repayListInfo = repayListInfo;

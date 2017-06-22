@@ -37,12 +37,6 @@
  */
 -(void)getFXDCaseInfo;
 
-/**
- 用户标的状态查询
- */
-
--(void)queryUserBidStatusForm:(NSString *)form fromCaseId:(NSString *)fromCaseId;
-
 @end
 
 @interface CheckBankViewModel : ViewModelClass

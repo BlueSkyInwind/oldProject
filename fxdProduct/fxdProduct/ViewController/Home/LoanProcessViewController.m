@@ -131,7 +131,7 @@
     
     
     if (_isRefuse) {
-        if ([_userStateModel.product_id isEqualToString:@"P001002"]) {
+        if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
             return 100;
         }else{
         
@@ -148,7 +148,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    if ([_userStateModel.product_id isEqualToString:@"P001002"]) {//工薪贷
+    if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {//工薪贷
         
             RefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"RefuseView" owner:self options:nil]lastObject];
             refuseView.frame = CGRectZero;
@@ -230,7 +230,7 @@
 -(void)applyBtn{
 
     UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-    userDataVC.product_id = @"P001002";
+    userDataVC.product_id = SalaryLoan;
     [self.navigationController pushViewController:userDataVC animated:true];
     
 }

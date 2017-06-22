@@ -171,7 +171,6 @@ UIKIT_EXTERN NSString * const       _bosAcctActivateRet_url;                  //
 UIKIT_EXTERN NSString * const       _qryUserStatus_url;                  //用户状态查询
 UIKIT_EXTERN NSString * const       _getBidStatus_url;                  //用户标的状态查询
 UIKIT_EXTERN NSString * const       _saveLoanCase_url;                  //提款申请件记录
-UIKIT_EXTERN NSString * const       _queryUserBidStatus_url;                  //用户标的状态查询
 
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码
@@ -239,6 +238,7 @@ UIKIT_EXTERN NSString * const FirstLunch;
 
 
 UIKIT_EXTERN NSString * const theMoxieApiKey;            //魔蝎key
+
 
 #define MAS_SHORTHAND_GLOBALS
 
