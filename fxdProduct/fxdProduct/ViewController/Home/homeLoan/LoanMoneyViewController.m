@@ -380,10 +380,7 @@
                 for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                     if ([vc isKindOfClass:[CheckViewController class]]) {
                         controller = (CheckViewController *)vc;
-//                        controller.qryUserStatusModel = _qryUserStatusModel;
-//                        controller.caseInfo = _caseInfo;
                         isHave = YES;
-                        //                                [self.navigationController popToViewController:controller animated:YES];
                     }
                 }
                 
@@ -392,14 +389,9 @@
                 }else{
                     
                     controller = [CheckViewController new];
-//                    controller.qryUserStatusModel = _qryUserStatusModel;
                     [self.navigationController pushViewController:controller animated:YES];
                 }
             }
-            
-
-//            [self getUserStatus:_caseInfo];
-//            [self getFxdCaseInfo];
 
             break;
         default:

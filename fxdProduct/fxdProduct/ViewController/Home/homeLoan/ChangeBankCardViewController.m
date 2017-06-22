@@ -428,8 +428,8 @@
 #pragma mark 点击确定按钮，更换银行卡
 -(void)changeBank{
 
-    _ordsms_ext_ = @"666666AAAAAAAA";
-    _sms_seq = @"AAAAAAAA";
+//    _ordsms_ext_ = @"666666AAAAAAAA";
+//    _sms_seq = @"AAAAAAAA";
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *banName = [self bankName:_bankCode];
     NSMutableArray *paramArray = [NSMutableArray array];

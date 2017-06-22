@@ -42,6 +42,7 @@
     self.bankTable.separatorStyle = NO;
     [self.sureBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     
+    
 }
 
 
@@ -94,8 +95,17 @@
             cell.btn.hidden = YES;
             cell.textField.placeholder = @"手机号";
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
-            cell.textField.enabled = NO;
-            cell.textField.text = _queryCardInfo.data.UsrCardInfolist.BindMobile;
+            if (_queryCardInfo.data.UsrCardInfolist.BankId.length>0) {
+                
+                cell.textField.enabled = NO;
+                cell.textField.text = _queryCardInfo.data.UsrCardInfolist.BindMobile;
+                _mobile = cell.textField.text;
+            }else{
+                
+                cell.textField.enabled = YES;
+                cell.textField.text = @"";
+            }
+            
         }
         [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
         cell.selectionStyle  = UITableViewCellSelectionStyleNone;
@@ -132,7 +142,7 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
         
     }];
-    [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"rebind" SmsType:@"O" Mobile:_queryCardInfo.data.UsrCardInfolist.BindMobile];
+    [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"rebind" SmsType:@"O" Mobile:_mobile];
     
 }
 

@@ -206,29 +206,29 @@
     [self.navigationController pushViewController:expressVC animated:YES];
 }
 
-- (void)checkVersion{
-    NSString *app_Version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    NSDictionary *paramDic = @{@"platform_type_":PLATFORM,
-                               @"app_version_":app_Version};
-    [[FXDNetWorkManager sharedNetWorkManager] CheckVersion:[NSString stringWithFormat:@"%@%@",_main_url,_checkVersion_jhtml] paramters:paramDic finished:^(EnumServerStatus status, id object) {
-        _returnParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-        [UserDefaulInfo getUserInfoData];
-        if ([_returnParse.flag isEqualToString:@"0012"]) {
-            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:_returnParse.msg cencelBtn:nil otherBtn:@[@"好的"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
-                
-            }];
-        } else if ([_returnParse.flag isEqualToString:@"0013"]) {
-            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:_returnParse.msg cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
-                if (index == 1) {
-                    [Utility sharedUtility].userInfo.isUpdate = YES;
-                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
-                }
-            }];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
+//- (void)checkVersion{
+//    NSString *app_Version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+//    NSDictionary *paramDic = @{@"platform_type_":PLATFORM,
+//                               @"app_version_":app_Version};
+//    [[FXDNetWorkManager sharedNetWorkManager] CheckVersion:[NSString stringWithFormat:@"%@%@",_main_url,_checkVersion_jhtml] paramters:paramDic finished:^(EnumServerStatus status, id object) {
+//        _returnParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
+//        [UserDefaulInfo getUserInfoData];
+//        if ([_returnParse.flag isEqualToString:@"0012"]) {
+//            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:_returnParse.msg cencelBtn:nil otherBtn:@[@"好的"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+//                
+//            }];
+//        } else if ([_returnParse.flag isEqualToString:@"0013"]) {
+//            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:_returnParse.msg cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+//                if (index == 1) {
+//                    [Utility sharedUtility].userInfo.isUpdate = YES;
+//                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
+//                }
+//            }];
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
+//}
 
 #pragma mark - TableViewDelegate
 
