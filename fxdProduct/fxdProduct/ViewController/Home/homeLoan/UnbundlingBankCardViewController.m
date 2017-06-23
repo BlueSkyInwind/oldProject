@@ -22,7 +22,6 @@
     UIButton *_backTimeBtn;
     NSInteger _countdown;
     NSTimer * _countdownTimer;
-    QueryCardInfo *_queryCadModel;
     
 }
 
@@ -49,7 +48,13 @@
 #pragma mark ->UItableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    if ([_queryCardInfo.data.UsrCardInfolist.BankId isEqualToString:@""]) {
+        return 3;
+    }else{
+    
+        return 4;
+    }
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,6 +67,49 @@
         }
         cell.textField.tag = indexPath.row + 100;
         cell.textField.delegate = self;
+    if ([_queryCardInfo.data.UsrCardInfolist.BankId isEqualToString:@""]) {
+        
+      if (indexPath.row == 0) {
+            [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
+            cell.btn.hidden = NO;
+            cell.btn.tag = indexPath.row + 200;
+            cell.btnSecory.hidden = YES;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.text = _queryCardInfo.data.UsrCardInfolist.CardId;
+            cell.textField.enabled = NO;
+        }else if (indexPath.row == 2){
+            cell.btn.hidden = YES;
+            cell.btnSecory.hidden = NO;
+            cell.btnSecory.tag = 203;
+            [cell.btnSecory addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+            [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+            cell.textField.placeholder = @"验证码";
+            cell.textField.enabled = YES;
+            
+        }else if (indexPath.row == 1){
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.btnSecory.hidden = YES;
+            cell.btn.hidden = YES;
+            cell.textField.placeholder = @"手机号";
+            [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+            if (_queryCardInfo.data.UsrCardInfolist.BindMobile!=nil) {
+                
+                cell.textField.enabled = NO;
+                cell.textField.text = _queryCardInfo.data.UsrCardInfolist.BindMobile;
+                _mobile = cell.textField.text;
+            }else{
+                
+                cell.textField.enabled = YES;
+                cell.textField.text = @"";
+            }
+            
+        }
+        [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
+        cell.selectionStyle  = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    }else{
     
         if (indexPath.row == 0) {
             [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
@@ -95,7 +143,7 @@
             cell.btn.hidden = YES;
             cell.textField.placeholder = @"手机号";
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
-            if (_queryCardInfo.data.UsrCardInfolist.BankId.length>0) {
+            if (_queryCardInfo.data.UsrCardInfolist.BindMobile!=nil) {
                 
                 cell.textField.enabled = NO;
                 cell.textField.text = _queryCardInfo.data.UsrCardInfolist.BindMobile;
@@ -110,6 +158,8 @@
         [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
         cell.selectionStyle  = UITableViewCellSelectionStyleNone;
         return cell;
+    }
+    
 
     return nil;
 }
@@ -243,6 +293,9 @@
     }else if ([bankCode isEqualToString:@"CEB"]){
         
         name = @"中国光大银行";
+    }else if ([bankCode isEqualToString:@"CMB"]){
+    
+        name = @"招商银行";
     }
     
     return name;

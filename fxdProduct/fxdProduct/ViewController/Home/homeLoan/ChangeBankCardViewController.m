@@ -416,23 +416,29 @@
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         _bankModel = [BankModel yy_modelWithJSON:returnValue];
-        NSArray *bankArray = @[@"中国银行",@"中国工商银行",@"中国建设银行",@"中国农业银行",@"中信银行",@"兴业银行",@"中国光大银行"];
-        NSMutableArray *array = [NSMutableArray array];
-        for (int i = 0; i<_bankModel.result.count; i++) {
-            BankList *bankList = _bankModel.result[i];
-            for (int j = 0; j<bankArray.count; j++) {
-                if ([bankList.desc isEqualToString:bankArray[j]]) {
-                    [array addObject:bankList];
-                    
+        if ([_bankModel.flag isEqualToString:@"0000"]) {
+            NSArray *bankArray = @[@"中国银行",@"中国工商银行",@"中国建设银行",@"中国农业银行",@"中信银行",@"兴业银行",@"中国光大银行"];
+            NSMutableArray *array = [NSMutableArray array];
+            for (int i = 0; i<_bankModel.result.count; i++) {
+                BankList *bankList = _bankModel.result[i];
+                for (int j = 0; j<bankArray.count; j++) {
+                    if ([bankList.desc isEqualToString:bankArray[j]]) {
+                        [array addObject:bankList];
+                        
+                    }
                 }
+                
             }
-            
+            [_bankModel.result removeAllObjects];
+            for (BankList *bank in array) {
+                
+                [_bankModel.result addObject:bank];
+            }
+        }else{
+        
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_bankModel.msg];
         }
-        [_bankModel.result removeAllObjects];
-        for (BankList *bank in array) {
-            
-            [_bankModel.result addObject:bank];
-        }
+        
         
     } WithFaileBlock:^{
         

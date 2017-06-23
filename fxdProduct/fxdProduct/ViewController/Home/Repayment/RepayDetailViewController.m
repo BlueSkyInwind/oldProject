@@ -491,8 +491,15 @@
             PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.PayTitleLabel.text=titleAry[indexPath.row];
+            if ([_queryCardInfoModel.data.UsrCardInfolist.BankId isEqualToString:@""]) {
+                
+                cell.whichBank.text = @"请更换银行卡";
+                
+            }else{
             
-            cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[self bankName:_queryCardInfoModel.data.UsrCardInfolist.BankId],[_queryCardInfoModel.data.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.data.UsrCardInfolist.CardId.length-4]];
+                cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[self bankName:_queryCardInfoModel.data.UsrCardInfolist.BankId],[_queryCardInfoModel.data.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.data.UsrCardInfolist.CardId.length-4]];
+            }
+            
            
             
             return cell;
@@ -656,6 +663,14 @@
                 }
             }
         }
+        if (indexPath.row==3) {
+            if (_p2pBillModel != nil) {
+                
+                [self gotoUnbundlingBank];
+                //                [self chooseBankCard];
+                
+            }
+        }
         if(indexPath.row==4)//选择银行卡
         {
             if (_repayListInfo != nil) {
@@ -679,13 +694,13 @@
                 payNC.view.frame = CGRectMake(0, 0, _k_w, 270);
                 [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
             }
+           
             if (_p2pBillModel != nil) {
                 
                 [self gotoUnbundlingBank];
-//                [self chooseBankCard];
+                //                [self chooseBankCard];
                 
             }
-            
         }
     }
     
@@ -966,9 +981,18 @@
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
         
+        NSArray *array = @[@"BOC",@"ICBC",@"CCB",@"ABC",@"CITIC",@"CIB",@"CEB"];
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
         _queryCardInfoModel = model;
-        
+        BOOL isHave = NO;
+        for (NSString *name in array) {
+            if ([name isEqualToString:model.data.UsrCardInfolist.BankId]) {
+                isHave = YES;
+            }
+        }
+        if (!isHave) {
+            _queryCardInfoModel.data.UsrCardInfolist.BankId = @"";
+        }
         [self.PayDetailTB reloadData];
         
     } WithFaileBlock:^{
