@@ -221,7 +221,7 @@
 -(NSString *)bankName:(NSString *)bankCode{
     
     NSString *name = @"";
-    if([bankCode isEqualToString:@"BC"]){
+    if([bankCode isEqualToString:@"BOC"]){
         
         name = @"中国银行";
         
@@ -234,20 +234,16 @@
     }else if ([bankCode isEqualToString:@"ABC"]){
         
         name = @"中国农业银行";
-    }else if ([bankCode isEqualToString:@"CNCB"]){
+    }else if ([bankCode isEqualToString:@"CITIC"]){
         
         name = @"中信银行";
     }else if ([bankCode isEqualToString:@"CIB"]){
         
-        name = @"中国兴业银行";
+        name = @"兴业银行";
     }else if ([bankCode isEqualToString:@"CEB"]){
         
         name = @"中国光大银行";
-    }else if ([bankCode isEqualToString:@"PSBC"]){
-        
-        name = @"中国邮政";
     }
-    
     
     return name;
 }

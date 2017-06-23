@@ -843,7 +843,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     NSInteger code = bankCode.integerValue;
     switch (code) {
         case 1:
-            name = @"BC";
+            name = @"BOC";
             return name;
             break;
         case 2:
@@ -859,7 +859,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             return name;
             break;
         case 8:
-            name = @"CNCB";
+            name = @"CITIC";
             return name;
             break;
         case 9:
@@ -868,10 +868,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             break;
         case 10:
             name = @"CEB";
-            return name;
-            break;
-        case 29:
-            name = @"PSBC";
             return name;
             break;
         default:

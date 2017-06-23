@@ -19,6 +19,7 @@
 #import "RTRootNavigationController.h"
 #import "UnbundlingBankCardViewModel.h"
 #import "RepayDetailViewController.h"
+#import "CheckViewModel.h"
 @interface ChangeBankCardViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,WTCameraDelegate,BankTableViewSelectDelegate>
 {
 
@@ -53,7 +54,7 @@
     }
 
     [dataListAll3 replaceObjectAtIndex:5 withObject:@"100"];
-    [self getBankList];
+    [self getBankListInfo];
     self.changTab.delegate = self;
     self.changTab.dataSource = self;
     self.changTab.separatorStyle = NO;
@@ -408,21 +409,35 @@
     return newString;
 }
 
-#pragma mark 获取银行卡列表
-
--(void)getBankList{
-
-    NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        BankModel *bankModel = [BankModel yy_modelWithJSON:object];
-        if ([bankModel.flag isEqualToString:@"0000"]) {
-            _bankModel = bankModel;
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
+#pragma mark 获取银行卡列表信息
+-(void)getBankListInfo{
+    
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        _bankModel = [BankModel yy_modelWithJSON:returnValue];
+        NSArray *bankArray = @[@"中国银行",@"中国工商银行",@"中国建设银行",@"中国农业银行",@"中信银行",@"兴业银行",@"中国光大银行"];
+        NSMutableArray *array = [NSMutableArray array];
+        for (int i = 0; i<_bankModel.result.count; i++) {
+            BankList *bankList = _bankModel.result[i];
+            for (int j = 0; j<bankArray.count; j++) {
+                if ([bankList.desc isEqualToString:bankArray[j]]) {
+                    [array addObject:bankList];
+                    
+                }
+            }
+            
         }
-    } failure:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
+        [_bankModel.result removeAllObjects];
+        for (BankList *bank in array) {
+            
+            [_bankModel.result addObject:bank];
+        }
+        
+    } WithFaileBlock:^{
+        
     }];
+    [checkBankViewModel getBankListInfo];
 }
 
 #pragma mark 点击确定按钮，更换银行卡
@@ -485,7 +500,7 @@
     NSInteger code = bankCode.integerValue;
     switch (code) {
         case 1:
-            name = @"BC";
+            name = @"BOC";
             return name;
             break;
         case 2:
@@ -501,7 +516,7 @@
             return name;
             break;
         case 8:
-            name = @"CNCB";
+            name = @"CITIC";
             return name;
             break;
         case 9:
@@ -510,10 +525,6 @@
             break;
         case 10:
             name = @"CEB";
-            return name;
-            break;
-        case 29:
-            name = @"PSBC";
             return name;
             break;
         default:

@@ -11,7 +11,7 @@
 
 @interface BankModel : NSObject
 
-@property (nonatomic, strong)NSArray *result;
+@property (nonatomic, strong)NSMutableArray *result;
 @property (nonatomic, copy)NSString *flag;
 @property (nonatomic, copy)NSString *msg;
 

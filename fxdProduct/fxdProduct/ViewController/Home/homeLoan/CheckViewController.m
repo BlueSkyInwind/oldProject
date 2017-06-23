@@ -1397,6 +1397,25 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
         BankModel *bankModel = [BankModel yy_modelWithJSON:returnValue];
         if ([bankModel.flag isEqualToString:@"0000"]) {
+            
+            NSArray *bankArray = @[@"中国银行",@"中国工商银行",@"中国建设银行",@"中国农业银行",@"中信银行",@"兴业银行",@"中国光大银行"];
+            NSMutableArray *array = [NSMutableArray array];
+            for (int i = 0; i<bankModel.result.count; i++) {
+                BankList *bankList = bankModel.result[i];
+                for (int j = 0; j<bankArray.count; j++) {
+                    if ([bankList.desc isEqualToString:bankArray[j]]) {
+                        [array addObject:bankList];
+                        
+                    }
+                }
+                
+            }
+            [bankModel.result removeAllObjects];
+            for (BankList *bank in array) {
+                
+                [bankModel.result addObject:bank];
+            }
+            
             BankCardViewController *bankVC = [BankCardViewController new];
             bankVC.bankModel = bankModel;
             bankVC.periodSelect = _userSelectNum.integerValue;
@@ -1465,7 +1484,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 -(NSString *)bankName:(NSString *)bankCode{
     
     NSString *name = @"";
-    if([bankCode isEqualToString:@"BC"]){
+    if([bankCode isEqualToString:@"BOC"]){
     
         name = @"中国银行";
         
@@ -1478,21 +1497,17 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }else if ([bankCode isEqualToString:@"ABC"]){
     
         name = @"中国农业银行";
-    }else if ([bankCode isEqualToString:@"CNCB"]){
+    }else if ([bankCode isEqualToString:@"CITIC"]){
     
         name = @"中信银行";
     }else if ([bankCode isEqualToString:@"CIB"]){
     
-        name = @"中国兴业银行";
+        name = @"兴业银行";
     }else if ([bankCode isEqualToString:@"CEB"]){
     
         name = @"中国光大银行";
-    }else if ([bankCode isEqualToString:@"PSBC"]){
-    
-        name = @"中国邮政";
     }
     
-
     return name;
 }
 
