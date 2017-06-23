@@ -566,7 +566,6 @@
 -(void)PostGetCheckMoney
 {
 
-    
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
         _approvalModel = [Approval yy_modelWithJSON:returnValue];
@@ -582,15 +581,13 @@
                 
                 if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
                     moenyViewing.payMoneyTitle.text = @"到期还款";
-                    moenyViewing.labelweek.text = @"14天";
+                    moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
                     moenyViewing.loanTimeTitle.text = @"借款期限";
                     moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount];
                 } else {
                     moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
                     moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount/_approvalModel.result.loan_staging_amount.integerValue + _approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate];
 
-
-                
                 //                    [NSString stringWithFormat:@"%.2f元",approAmountSting/(approvalBaseClass.result.loanStagingAmount) + approAmountSting*0.021];
                 moenyViewing.labelAllMoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate*_approvalModel.result.loan_staging_amount.integerValue];
                 //                                                       approAmountSting +approAmountSting*approvalBaseClass.result.loanStagingAmount*0.021];

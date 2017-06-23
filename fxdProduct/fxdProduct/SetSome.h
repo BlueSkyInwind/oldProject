@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface SetSome : NSObject
++ (SetSome *)shared;
 
+-(void)InitializeAppSet;
 @end

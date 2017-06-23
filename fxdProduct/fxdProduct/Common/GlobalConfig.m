@@ -27,6 +27,7 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 #elif FXD_Environment_Mode == 1
 
+
 //测试环境
 NSString * const _main_url  =   @"http://192.168.7.253:8081/fxd-esb/esb/";
 NSString * const _ValidESB_url  =   @"http://192.168.7.253:8081/fxd-esb/";

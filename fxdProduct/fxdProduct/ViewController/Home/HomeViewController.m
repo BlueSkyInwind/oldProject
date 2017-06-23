@@ -810,7 +810,6 @@
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
         }
-        
     } failure:^(EnumServerStatus status, id object) {
         
     }];
