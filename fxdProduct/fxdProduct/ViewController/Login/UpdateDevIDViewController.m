@@ -82,30 +82,32 @@
 }
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {
     [self.view endEditing:YES];
-    if ([Tool isMobileNumber:self.phoneNumText.text]) {
-        if ([Utility sharedUtility].networkState) {
-            self.sendCodeButton.userInteractionEnabled = NO;
-            self.sendCodeButton.alpha = 0.4;
-            [self.sendCodeButton setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
-            _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
-            NSDictionary *parDic = [self getDicOfParam];
-            if (parDic) {
-                SMSViewModel *smsViewModel = [[SMSViewModel alloc] init];
-                [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-                    _codeParse = returnValue;
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-                    DLog(@"---%@",_codeParse.msg);
-                } WithFaileBlock:^{
-                    
-                }];
-                [smsViewModel fatchRequestSMS:parDic];
-            }
-        } else {
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"似乎没有连接到网络"];
-        }
-    } else {
+    
+    if (![Tool isMobileNumber:self.phoneNumText.text]) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效的手机号码"];
+        return;
     }
+    
+    if (![Utility sharedUtility].networkState) {
+        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"似乎没有连接到网络"];
+        return;
+    }
+    
+    self.sendCodeButton.userInteractionEnabled = NO;
+    self.sendCodeButton.alpha = 0.4;
+    [self.sendCodeButton setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
+    _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
+    
+    SMSViewModel *smsViewModel = [[SMSViewModel alloc] init];
+    [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _codeParse = returnValue;
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
+        DLog(@"---%@",_codeParse.msg);
+    } WithFaileBlock:^{
+        
+    }];
+    [smsViewModel fatchRequestSMSParamPhoneNumber:self.phoneNumText.text verifyCodeType:CHANGEDEVID_CODE];
+    
 }
 
 - (void)closeGetVerifyButtonUser
@@ -140,37 +142,9 @@
     }];
 }
 
-- (NSDictionary *)getLoginParam
-{
-    NSString *app_Version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    DLog(@"uuid ----- %@",[Utility sharedUtility].userInfo.uuidStr);
-    if ([Utility sharedUtility].userInfo.clientId && ![[Utility sharedUtility].userInfo.clientId isEqualToString:@""]) {
-        return @{@"mobile_phone_":self.phoneNumText.text,
-                 @"password_":[DES3Util encrypt:self.passStr],
-                 @"last_login_device_":[Utility sharedUtility].userInfo.uuidStr,
-                 @"app_version_":app_Version,
-                 @"last_login_from_":PLATFORM,
-                 @"last_login_ip_":[[GetUserIP sharedUserIP] getIPAddress],
-                 @"platform_type_":PLATFORM
-                 };
-    } else {
-        return @{@"mobile_phone_":self.phoneNumText.text,
-                 @"password_":[DES3Util encrypt:self.passStr],
-                 @"last_login_device_":[Utility sharedUtility].userInfo.uuidStr,
-                 @"app_version_":app_Version,
-                 @"last_login_from_":PLATFORM,
-                 @"last_login_ip_":[[GetUserIP sharedUserIP] getIPAddress],
-                 @"platform_type_":PLATFORM
-                 };
-    }
-}
-
 - (void)login
 {
     if ([Utility sharedUtility].networkState) {
-        NSDictionary *paramDic = [self getLoginParam];
-        
-        if (paramDic) {
             
             LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
             [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -191,10 +165,9 @@
             } WithFaileBlock:^{
                 
             }];
-            [loginViewModel fatchLogin:paramDic];
-        }
-    } else {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"似乎没有连接到网络"];
+             [loginViewModel fatchLoginMoblieNumber:self.phoneNumText.text password:self.passStr fingerPrint:nil verifyCode:nil];
+    }else{
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"没有连接到网络"];
     }
 }
 
@@ -204,16 +177,6 @@
     return @{@"mobile_phone_":self.phoneNumText.text,
              @"verify_code_":self.verCodeText.text,
              @"last_login_device_":[Utility sharedUtility].userInfo.uuidStr};
-}
-
-
-
-//获取验证码参数
-- (NSDictionary *)getDicOfParam
-{
-    return @{@"mobile_phone_":self.phoneNumText.text,
-             @"flag":CODE_CHANGEDEVID,
-             };
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

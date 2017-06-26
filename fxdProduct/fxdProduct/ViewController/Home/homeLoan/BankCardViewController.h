@@ -31,4 +31,8 @@
 
 @property (nonatomic, strong) UserStateModel *userStateModel;
 
+@property (nonatomic,assign)BOOL isP2P;
+
+@property (nonatomic, strong) NSDictionary * uploadP2PUserInfo;
+
 @end

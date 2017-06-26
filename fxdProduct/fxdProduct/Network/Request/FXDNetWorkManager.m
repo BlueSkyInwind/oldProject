@@ -68,7 +68,6 @@
             DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
             
             
-            
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
             
@@ -79,7 +78,6 @@
                     paramDic = [muDic copy];
                 } else {
                     paramDic = [Tool getParameters:parameters];
-                    
                 }
             }
             DLog(@"加密后参数:---%@",paramDic);
@@ -88,8 +86,8 @@
             //        securityPolicy setPinnedCertificates:
             //        securityPolicy.validatesDomainName = YES;
             //        manager.securityPolicy = securityPolicy;
-            
             //            manager.requestSerializer=[AFHTTPRequestSerializer serializer];
+            
             DLog(@"juid --- %@\n token --- %@",[Utility sharedUtility].userInfo.juid,[Utility sharedUtility].userInfo.tokenStr);
             if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
                 if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
@@ -112,7 +110,7 @@
                         if (index == 1) {
                             [EmptyUserData EmptyData];
                             
-                            LoginViewController *loginView = [LoginViewController new];
+                            LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
                                 [_waitView removeFromSuperview];
@@ -181,7 +179,7 @@
                         if (index == 1) {
                             [EmptyUserData EmptyData];
                             
-                            LoginViewController *loginView = [LoginViewController new];
+                            LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
                                 [_waitView removeFromSuperview];
@@ -236,7 +234,7 @@
             [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
                 if (index == 1) {
                     [EmptyUserData EmptyData];
-                    LoginViewController *loginView = [LoginViewController new];
+                    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
                         [_waitView removeFromSuperview];
@@ -311,7 +309,7 @@
                 [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
                     if (index == 1) {
                         [EmptyUserData EmptyData];
-                        LoginViewController *loginView = [LoginViewController new];
+                        LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                         BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                         [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
                         }];
@@ -449,7 +447,7 @@
                     [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
                         if (index == 1) {
                             [EmptyUserData EmptyData];
-                            LoginViewController *loginView = [LoginViewController new];
+                            LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
                                 [_waitView removeFromSuperview];
@@ -529,7 +527,7 @@
                     [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
                         if (index == 1) {
                             [EmptyUserData EmptyData];
-                            LoginViewController *loginView = [LoginViewController new];
+                            LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
                                 [_waitView removeFromSuperview];

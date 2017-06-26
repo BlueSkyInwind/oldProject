@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-@class LoanProcessModel;
+@class LoanProcessModel,UserStateModel;
 
 @interface LoanProcessViewController : BaseViewController
 

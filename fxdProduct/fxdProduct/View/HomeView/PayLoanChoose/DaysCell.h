@@ -13,4 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *dayView;
 
+@property (weak, nonatomic) IBOutlet UILabel *dayLabel;
+
 @end

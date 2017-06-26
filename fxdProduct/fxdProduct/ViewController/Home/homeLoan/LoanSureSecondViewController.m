@@ -40,13 +40,13 @@
     [self featchTel];
     
     [self.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    if ([self.productId isEqualToString:@"P001002"]) {
+    if ([self.productId isEqualToString:SalaryLoan]) {
         [self setUpProductCredit];
     }
-    if ([self.productId isEqualToString:@"P001004"]) {
+    if ([self.productId isEqualToString:RapidLoan]) {
         [self setUpProductQuickly];
     }
-    if ([self.productId isEqualToString:@"P001005"]) {
+    if ([self.productId isEqualToString:WhiteCollarLoan]) {
         [self setUpProductWhiteCollar];
     }
     if (UI_IS_IPHONE5) {
@@ -182,7 +182,7 @@
     FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
     NSString *blackBox = manager->getDeviceInfo();
     NSDictionary *dict;
-    if ([_productId isEqualToString:@"P001004"]) {
+    if ([_productId isEqualToString:RapidLoan]) {
         dict = @{@"plantform_source":PLATFORM,
                  @"product_id_":_productId,
                  @"req_loan_amt_":_req_loan_amt,
@@ -294,7 +294,7 @@
 - (void)setUpProductWhiteCollar
 {
 
-    self.productLogo.image = [UIImage imageNamed:@"icon_Product2"];
+    self.productLogo.image = [UIImage imageNamed:@"home10"];
     self.productTitle.text = @"白领贷";
 }
 

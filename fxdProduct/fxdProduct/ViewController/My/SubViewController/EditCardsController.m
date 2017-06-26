@@ -17,7 +17,7 @@
 #import "AuthorizationViewController.h"
 #import <MGBaseKit/MGBaseKit.h>
 #import <MGBankCard/MGBankCard.h>
-
+#import "UnbundlingBankCardViewModel.h"
 @interface EditCardsController ()<UITableViewDataSource,UITableViewDelegate,BankTableViewSelectDelegate,WTCameraDelegate,UITextFieldDelegate>
 {
     NSInteger _countdown;
@@ -67,16 +67,19 @@
 
 - (void)fatchCardInfo
 {
-    NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        _bankCardModel = [BankModel yy_modelWithJSON:object];
+    UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
+    [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _bankCardModel = [BankModel yy_modelWithJSON:returnValue];
         if ([_bankCardModel.flag isEqualToString:@"0000"]) {
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_bankCardModel.msg];
         }
-    } failure:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
+    } WithFaileBlock:^{
+        
     }];
+    [unbundlingBankCardViewModel getBankList];
+    
+
 }
 
 - (void)addBackItem
@@ -261,10 +264,6 @@
         btn.alpha = 0.4;
         _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
         
-        
-        NSDictionary *parDic = [self getDicOfParam];
-        if (parDic) {
-            
             SMSViewModel *smsViewModel = [[SMSViewModel alloc]init];
             [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
                 _codeParse = returnValue;
@@ -275,10 +274,9 @@
             } WithFaileBlock:^{
                 
             }];
-            [smsViewModel fatchRequestSMS:parDic];
+            [smsViewModel fatchRequestSMSParamPhoneNumber:self.reservedTel verifyCodeType:ADDCARD_CODE];
             
             DLog(@"发送验证码");
-        }
     }
     else
     {
@@ -286,13 +284,6 @@
     }
 }
 
-//获取验证码参数
-- (NSDictionary *)getDicOfParam
-{
-    return @{@"mobile_phone_":self.reservedTel,
-             @"flag":CODE_ADDCARD,
-             };
-}
 
 #pragma mark TextfileDelegate
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -481,18 +472,6 @@
  // Pass the selected object to the new view controller.
  }
  */
--(NSDictionary *)getEditDic
-{
-    return @{
-//             @"card_id_":self.accountId,
-//             @"reques_type_":@"3",
-             @"card_bank_":self.cardCode,
-             @"card_type_":@"2",
-             @"card_no_":self.intNum,
-             @"bank_reserve_phone_":self.reservedTel,
-             @"verify_code_":self.verCode
-             };
-}
 
 - (IBAction)btnSave:(id)sender {
     self.intNum = [self.cardNum stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -518,24 +497,44 @@
         }
         else
         {
-            NSDictionary *dic=[self getEditDic];
-            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_BankNumCheck_url] parameters:dic finished:^(EnumServerStatus status, id object) {
-                if ([[object objectForKey:@"flag"]  isEqual: @"0000"]) {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"msg"]];
-//                    [self.navigationController popToRootViewControllerAnimated:YES];
+            
+            NSMutableArray *paramArray = [self getParamArray];
+            UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
+            [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
+                
+                if ([[returnValue objectForKey:@"flag"]  isEqual: @"0000"]) {
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[returnValue objectForKey:@"msg"]];
+                    //                    [self.navigationController popToRootViewControllerAnimated:YES];
                     [self dismissViewControllerAnimated:YES completion:^{
                         self.addCarSuccess();
                     }];
                 }
                 else
                 {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
                 }
                 
-            } failure:^(EnumServerStatus status, id object) {
+            } WithFaileBlock:^{
                 
             }];
+            [unbundlingBankCardViewModel saveAccountBankCard:paramArray];
+
         }
     }
+}
+
+/**
+ 获取更换银行卡参数数组
+ */
+-(NSMutableArray *)getParamArray{
+
+    NSMutableArray *array = [NSMutableArray array];
+    [array addObject:self.cardCode];
+    [array addObject:@"2"];
+    [array addObject:self.intNum];
+    [array addObject:self.reservedTel];
+    [array addObject:self.verCode];
+    return array;
+    
 }
 @end

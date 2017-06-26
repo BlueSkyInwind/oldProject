@@ -10,8 +10,14 @@
 #import <WebKit/WebKit.h>
 #import "GetCaseInfo.h"
 #import "DrawService.h"
-#import "P2PBindCardViewController.h"
-
+#import "LoanMoneyViewController.h"
+#import "RTRootNavigationController.h"
+#import "CheckViewController.h"
+#import "AccountHSServiceModel.h"
+#import "QryUserStatusModel.h"
+#import "getBidStatus.h"
+#import "RepayDetailViewController.h"
+#import "CheckViewModel.h"
 @interface P2PViewController ()<WKUIDelegate,WKNavigationDelegate>
 {
     UIProgressView *progressView;
@@ -28,7 +34,8 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor whiteColor];
-    [self addBackItem];
+    [self addBack];
+//    [self addBackItem];
     
 //    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
 //    config.preferences = [[WKPreferences alloc] init];
@@ -59,6 +66,35 @@
     [_webview addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [_webview addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
 }
+
+
+- (void)addBack
+{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    
+    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [btn setImage:img forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, 0, 45, 44);
+    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    
+    //    修改距离,距离边缘的
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceItem.width = -15;
+    
+    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
+    //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
+}
+
+- (void)popBack
+{
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+
+    [self getFxdCaseInfo];
+//    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
@@ -117,79 +153,110 @@
 {
     NSURLRequest *request = navigationAction.request;
     DLog(@"%@",request.URL.absoluteString);
-    if ([request.URL.absoluteString isEqualToString:_transition_url]) {
+    
+    DLog(@"=======%@",webView.URL.absoluteString);
+    
+    
+    if ([request.URL.absoluteString isEqualToString:_transition_url]&&![request.URL.absoluteString isEqualToString:self.urlStr]) {
         decisionHandler(WKNavigationActionPolicyAllow);
-        [self checkP2PUserState];
+
+        [self getFxdCaseInfo];
+        
     }else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
+
 }
 
-- (void)checkP2PUserState
-{
-    NSDictionary *paramDic = @{@"user_info":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_info"]],
-                               @"user_contacter":[Tool objextToJSON:[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"user_contacter"]],
-                               @"mobile_":[[_uploadP2PUserInfo objectForKey:@"result"] objectForKey:@"mobile_"],
-                               @"id_number_":[Utility sharedUtility].userInfo.userIDNumber};
-    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_drawService_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        DrawService *drawServiceParse = [DrawService yy_modelWithJSON:object];
-        //                        drawServiceParse.data.flg = @"4";
-        //开户
-        if ([drawServiceParse.data.flg isEqualToString:@"2"]) {
-//            NSString *url = [NSString stringWithFormat:@"%@%@?from_user_id_=%@&from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&RetUrl=%@",_P2P_url,_register_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url];
-//            self.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-//            [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
-//            [_webview reload];
-            [self.navigationController popViewControllerAnimated:YES];
+
+
+
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+    
+    
+}
+
+
+
+#pragma mark 发标前查询进件
+-(void)getFxdCaseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
+        if ([caseInfo.flag isEqualToString:@"0000"]) {
+            
+            [self getUserStatus:caseInfo];
+            
         }
-        //绑卡
-        if ([drawServiceParse.data.flg isEqualToString:@"3"]) {
-            P2PBindCardViewController *p2pBindCardVC = [[P2PBindCardViewController alloc] init];
-            p2pBindCardVC.uploadP2PUserInfo = _uploadP2PUserInfo;
-            p2pBindCardVC.userSelectNum = _userSelectNum;
-            [self.navigationController pushViewController:p2pBindCardVC animated:YES];
-        }
-        //发标
-        if ([drawServiceParse.data.flg isEqualToString:@"4"]) {
-            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-                DLog(@"%@",object);
-                GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:object];
-                if ([caseInfo.flag isEqualToString:@"0000"]) {
-                    [self addBildInfo:caseInfo];
-                } else {
-                    
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel getFXDCaseInfo];
+    
+}
+
+#pragma mark  fxd用户状态查询，viewmodel
+-(void)getUserStatus:(GetCaseInfo *)caseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        QryUserStatusModel *qryUserStatusModel = [QryUserStatusModel yy_modelWithJSON:returnValue];
+        if ([qryUserStatusModel.flag isEqualToString:@"0000"]) {
+            
+            if ([qryUserStatusModel.result.flg isEqualToString:@"2"]) {
+                for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+                    if ([vc isKindOfClass:[CheckViewController class]]) {
+                        CheckViewController *controller = (CheckViewController *)vc;
+                        [self.navigationController popToViewController:controller animated:YES];
+                    }
                 }
-                
-            } failure:^(EnumServerStatus status, id object) {
-                
-            }];
+            }else{
+            
+                if (_isCheck) {
+                    
+                    LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                    controller.userStateModel.product_id = caseInfo.result.product_id_;
+                    controller.qryUserStatusModel = qryUserStatusModel;
+                    [self.navigationController pushViewController:controller animated:YES];
+                    
+                    
+                }else{
+                    
+                    LoanMoneyViewController *controller;
+                    BOOL isHave = NO;
+                    for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+                        if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
+                            isHave = YES;
+                            controller = (LoanMoneyViewController *)vc;
+                            controller.userStateModel.product_id = caseInfo.result.product_id_;
+                            controller.qryUserStatusModel = qryUserStatusModel;
+//                            [self.navigationController popToViewController:controller animated:YES];
+                        }
+                    }
+                    if (isHave) {
+                        [self.navigationController popToViewController:controller animated:YES];
+                    }else{
+                    
+                        LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                        controller.userStateModel.product_id = caseInfo.result.product_id_;
+                        controller.qryUserStatusModel = qryUserStatusModel;
+                        [self.navigationController pushViewController:controller animated:YES];
+                    }
+                }
+            }
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    
+    [complianceViewModel getUserStatus:caseInfo];
 }
 
-- (void)addBildInfo:(GetCaseInfo *)caseInfo
-{
-    NSDictionary *paramDic = @{@"product_id_":caseInfo.result.product_id_,
-                               @"auditor_":caseInfo.result.auditor_,
-                               @"desc_":caseInfo.result.desc_,
-                               @"amount_":caseInfo.result.amount_,
-                               @"period_":_userSelectNum,
-                               @"loan_for_":_purposeSelect,
-                               @"title_":caseInfo.result.title_};
-    NSString *url = [NSString stringWithFormat:@"%@%@&from_user_id_=%@&from_mobile_=%@",_P2P_url,_addBidInfo_url,[Utility sharedUtility].userInfo.account_id,[Utility sharedUtility].userInfo.userMobilePhone];
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:url parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"发标成功"];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
 
 -(void)dealloc
 {
@@ -205,6 +272,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation

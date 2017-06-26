@@ -48,6 +48,8 @@
 @property (nonatomic , copy) NSString              * staging_bottom_;
 //期数上限
 @property (nonatomic , copy) NSString              * staging_top_;
+//是否超限
+@property (nonatomic , copy) NSString              * isOverLimit;
 
 @end
 

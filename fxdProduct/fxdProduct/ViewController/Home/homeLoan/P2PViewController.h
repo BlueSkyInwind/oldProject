@@ -18,4 +18,15 @@
 
 @property (nonatomic, assign) NSString *purposeSelect;
 
+@property (nonatomic,assign)NSMutableArray *dataArray;
+
+@property (nonatomic,copy)NSString *bankCodeNUm;
+@property (nonatomic,copy)NSString *product_id;
+@property (nonatomic,copy)NSString *drawAmount;
+@property (nonatomic,assign)NSInteger periodSelect;
+
+@property (nonatomic,assign)BOOL isCheck;
+@property (nonatomic,assign)BOOL isOpenAccount;
+
+
 @end

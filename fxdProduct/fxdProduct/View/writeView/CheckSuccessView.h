@@ -35,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIView *purposeView;
 @property (weak, nonatomic) IBOutlet UIButton *purposeBtn;
 @property (weak, nonatomic) IBOutlet UITextField *purposeTextField;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *surBtnLeadRight;
 

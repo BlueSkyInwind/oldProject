@@ -20,6 +20,7 @@
 #endif
 #import "FXDAppUpdateChecker.h"
 #import "SetUpFMDevice.h"
+#import "SetSome.h"
 
 
 
@@ -47,18 +48,13 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     [self monitorNetworkState];
     self.window.rootViewController = [UIViewController new];
     
-    //shareSDK
-    [ShareConfig configDefaultShare];
-    //FMDevice
-    [SetUpFMDevice configFMDevice];
-    
-    
+    [self tripartiteInitialize];
+
     [[IQKeyboardManager sharedManager] setToolbarManageBehaviour:IQAutoToolbarByPosition];
     [[IQKeyboardManager sharedManager]setShouldResignOnTouchOutside:true];
     [IQKeyboardManager sharedManager].shouldToolbarUsesTextFieldTintColor = true;
 
-    
-    
+
     if (!kiOS8Later) {
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:nil message:@"您的系统版本太低,请升级至iOS8.0以上使用!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -82,28 +78,8 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     // [2]:注册APNS
     [self registerRemoteNotification];
     
-    // [2-EXT]: 获取启动时收到的APN数据
-    NSDictionary* message = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if (message) {
-        NSString *payloadMsg = [message objectForKey:@"payload"];
-        NSString *record = [NSString stringWithFormat:@"[APN]%@, %@", [NSDate date], payloadMsg];
-        if (payloadMsg && ![payloadMsg isEqualToString:@""]) {
-            //数据库创建
-            if(![userTableName isEqualToString:@""])
-            {
-                testModelFmdb *msg=[[testModelFmdb alloc]init];
-                msg.title=@"通知";
-                msg.date=[Tool getNowTime];
-                msg.content=payloadMsg;
-                [[DataBaseManager shareManager]insertWithModel:msg:userTableName];
-                
-            }
-        }
-        
-        DLog(@"%@",record);
-    }
-    
-    
+    [self createFMDB:launchOptions];
+
     BOOL isFirst = [LunchViewController canShowNewFeature];
 //    isFirst = true;
     if (isFirst) {
@@ -120,6 +96,40 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     
     
     return YES;
+}
+/**
+ 三方初始化
+ */
+-(void)tripartiteInitialize{
+    dispatch_queue_t queue = dispatch_queue_create("trilateral_initialize", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_async(queue, ^{
+        //shareSDK
+        [ShareConfig configDefaultShare];
+        //FMDevice
+        [SetUpFMDevice configFMDevice];
+        [[SetSome shared]InitializeAppSet];
+    });
+}
+-(void)createFMDB:(NSDictionary *)launchOptions{
+    
+    // [2-EXT]: 获取启动时收到的APN数据
+    NSDictionary* message = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (message) {
+        NSString *payloadMsg = [message objectForKey:@"payload"];
+        NSString *record = [NSString stringWithFormat:@"[APN]%@, %@", [NSDate date], payloadMsg];
+        if (payloadMsg && ![payloadMsg isEqualToString:@""]) {
+            //数据库创建
+            if(![userTableName isEqualToString:@""])
+            {
+                testModelFmdb *msg=[[testModelFmdb alloc]init];
+                msg.title=@"通知";
+                msg.date=[Tool getNowTime];
+                msg.content=payloadMsg;
+                [[DataBaseManager shareManager]insertWithModel:msg:userTableName];
+            }
+        }
+        DLog(@"%@",record);
+    }
 }
 
 //- (BOOL)application:(UIApplication *)application
@@ -155,7 +165,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
                 [Utility sharedUtility].networkState = NO;
                 break;
                 
-                
             case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络
             case AFNetworkReachabilityStatusReachableViaWiFi: // WIFI
                 DLog(@"手机自带网络 || WIFI");
@@ -163,7 +172,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
                 break;
         }
     }];
-    
     // 3.开始监控
     [mgr startMonitoring];
 }

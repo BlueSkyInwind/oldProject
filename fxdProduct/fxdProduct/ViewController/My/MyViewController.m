@@ -11,12 +11,9 @@
 #import "NextViewCell.h"
 #import "UserInfoViewController.h"
 #import "MyCardsViewController.h"
-#import "CheckProcessViewController.h"
 #import "MoreViewController.h"
 #import "UIImageView+WebCache.h"
-#import "RepaymentViewController.h"
 #import "RepayRecordController.h"
-#import "RepayWeeklyRecordController.h"
 #import "DiscountTicketController.h"
 #import "BankModel.h"
 #import "RepayListViewController.h"
@@ -132,7 +129,7 @@
     if (indexPath.section == 0){
         if(indexPath.row==0) {
             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-            userDataVC.product_id = @"P001002";
+            userDataVC.product_id = SalaryLoan;
             [self.navigationController pushViewController:userDataVC animated:true];
             
         }else if (indexPath.row == 1) {
@@ -144,10 +141,7 @@
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:YES];
         }
-        //        else if (indexPath.row == 3) {
-        //            RepayWeeklyRecordController *weeklyRecord=[RepayWeeklyRecordController new];
-        //            [self.navigationController pushViewController:weeklyRecord animated:YES];
-        //        }
+
         else {
             DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];

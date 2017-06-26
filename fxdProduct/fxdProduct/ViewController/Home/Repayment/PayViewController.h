@@ -18,6 +18,7 @@ typedef NS_ENUM(NSUInteger, PayType) {
 };
 typedef void(^MakeSurePayBlock)(PayType payType,CardInfo *cardInfo,NSInteger currentIndex);
 
+typedef void(^ChangeBankBlock)(void);
 @interface PayViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableview;
@@ -25,6 +26,7 @@ typedef void(^MakeSurePayBlock)(PayType payType,CardInfo *cardInfo,NSInteger cur
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 
 @property (nonatomic, strong)MakeSurePayBlock makesureBlock;
+@property (nonatomic, strong)ChangeBankBlock  changeBankBlock;
 
 @property (nonatomic, assign) PayType payType;
 
@@ -36,5 +38,13 @@ typedef void(^MakeSurePayBlock)(PayType payType,CardInfo *cardInfo,NSInteger cur
 
 //BankModel *_bankCardModel;
 @property (nonatomic, strong) BankModel *bankCardModel;
+
+@property (nonatomic,assign)BOOL isP2P;
+
+//银行卡名字
+@property (nonatomic,copy)NSString *bankName;
+//银行卡尾号
+@property (nonatomic,copy)NSString *banNum;
+
 
 @end

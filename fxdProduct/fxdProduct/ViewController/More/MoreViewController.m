@@ -23,6 +23,7 @@
 #import "testView.h"
 #import "FXDWebViewController.h"
 #import "UIImage+Color.h"
+#import "ChangePasswordViewController.h"
 
 
 @interface MoreViewController () <UITableViewDataSource,UITableViewDelegate,MakeSureBtnDelegate,UIViewControllerTransitioningDelegate>
@@ -58,9 +59,9 @@
     [super viewDidLoad];
 //    [self setNavMesRightBar];
     //    imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_07",@"7_gd_icon_08",@"7_gd_icon_09",@"7_gd_icon_10"];
-    imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09"];
+    imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09",@"changeP_icon"];
     //    titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"分享好友",@"给个好评",@"客服热线",@"手势密码"];
-    titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"给个好评",@"客服热线"];
+    titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"给个好评",@"客服热线",@"修改密码"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     //    _MyTabView.scrollEnabled = NO;
     [_MyTabView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
@@ -130,24 +131,6 @@
             cell.lineView.hidden=NO;
         }
     }
-    //    else if(indexPath.section == 1)
-    //    {
-    //        //password
-    //        GesturesPasswordCell *cell=[tableView dequeueReusableCellWithIdentifier:@"password"];
-    //        cell.imgView.image=[UIImage imageNamed:imgAry[imgAry.count-1]];
-    //        cell.lblTitle.text=titleAry[titleAry.count-1];
-    //
-    //        if ([[PCCircleViewConst getGestureWithKey:gestureFinalSaveKey] isEqualToString:@""] || [PCCircleViewConst getGestureWithKey:gestureFinalSaveKey] == nil) {
-    //            cell.passwordSwitch.on = NO;
-    //        } else {
-    //            cell.passwordSwitch.on = YES;
-    //        }
-    //
-    //        DLog(@"state  --- %d",cell.passwordSwitch.on);
-    //        [cell.passwordSwitch addTarget:self action:@selector(switchClick:) forControlEvents:UIControlEventValueChanged];
-    //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //        return cell;
-    //    }
     
     else{
         HelpViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"outLog"];
@@ -185,6 +168,7 @@
     if(indexPath.section==0)
     {
         if(indexPath.row==0){
+
             aboutUs=[[AboutMainViewController alloc]initWithNibName:@"AboutMainViewController" bundle:nil];
             [self.navigationController pushViewController:aboutUs animated:YES];
         }
@@ -220,7 +204,7 @@
             [self presentViewController:alertView animated:YES completion:nil];
             
         }
-        else{
+        else if(indexPath.row==4){
             UIAlertController *actionSheett = [UIAlertController alertControllerWithTitle:@"热线服务时间:9:00-17:30(工作日)" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
             UIAlertAction *teleAction = [UIAlertAction actionWithTitle:@"4008-678-655" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", @"4008-678-655"]];
@@ -230,6 +214,16 @@
             [actionSheett addAction:teleAction];
             [actionSheett addAction:cancelAction];
             [self presentViewController:actionSheett animated:YES completion:nil];
+        }    else if(indexPath.row==5){
+            
+            if ([Utility sharedUtility].loginFlage) {
+                
+                ChangePasswordViewController *   changePassVC =[[ChangePasswordViewController alloc]init];
+                [self.navigationController pushViewController:changePassVC animated:YES];
+            
+            } else {
+                [self presentLogin:self];
+            }
         }
     }
     //    else if(indexPath.section==1) {
@@ -328,7 +322,7 @@
 
 - (void)presentLogin:(UIViewController *)vc
 {
-    LoginViewController *loginView = [[LoginViewController alloc] init];
+    LoginViewController *loginView = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
     nav.transitioningDelegate = self;
     [self presentViewController:nav animated:YES completion:nil];
@@ -344,7 +338,7 @@
             [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_loginOut_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
                 _returnMsgParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
                 if ([_returnMsgParse.flag isEqualToString:@"0000"]) {
-                    LoginViewController *loginView = [LoginViewController new];
+                    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                     [self presentViewController:nav animated:YES completion:^{
                         [_alertView hide];

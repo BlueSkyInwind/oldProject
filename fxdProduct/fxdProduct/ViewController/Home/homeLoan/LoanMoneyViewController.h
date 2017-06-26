@@ -7,14 +7,15 @@
 //
 
 #import "BaseViewController.h"
-@class UserStateModel;
+@class UserStateModel,QryUserStatusModel,GetCaseInfo;
 
 @interface LoanMoneyViewController : BaseViewController
 
 @property (nonatomic, assign) NSInteger intStautes;
 
 @property (nonatomic, strong) UserStateModel *userStateModel;
-
+@property (nonatomic, strong) QryUserStatusModel *qryUserStatusModel;
 @property (nonatomic, assign) BOOL popAlert;
+
 
 @end

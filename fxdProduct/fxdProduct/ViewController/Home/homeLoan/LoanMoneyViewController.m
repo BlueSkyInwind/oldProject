@@ -16,11 +16,9 @@
 #import "YYText.h"
 #import "P2PAgreeMentModel.h"
 #import "AgreeMentListViewController.h"
-#import "AutoTransferAccountsAgreement.h"
 #import "DataWriteAndRead.h"
 #import "CustomerBaseInfoBaseClass.h"
 #import "GetCustomerBaseViewModel.h"
-#import "HomeDailViewController.h"
 #import "DetailViewController.h"
 #import "UserCardResult.h"
 #import "RepayListInfo.h"
@@ -28,8 +26,14 @@
 #import "RepayDetailViewController.h"
 #import "RepayRequestManage.h"
 #import "IdeaBackViewController.h"
-
-
+#import "GetCaseInfo.h"
+#import "RepayWeeklyRecordViewModel.h"
+#import "LoanMoneyViewModel.h"
+#import "CheckViewModel.h"
+#import "QryUserStatusModel.h"
+#import "RTRootNavigationController.h"
+#import "GetCaseInfo.h"
+#import "P2PViewController.h"
 @interface LoanMoneyViewController ()
 {
     MoneyIngView *moenyViewing;
@@ -38,10 +42,13 @@
     Approval *_approvalModel;
     NSString *_cardNo;
     NSString *_cardBank;
+    NSTimer * _countdownTimer;
+    BOOL _isFirst;
 }
 
 @property (nonatomic, copy)NSString *platform;
 @property (nonatomic, weak) UIScrollView *scrollView;
+@property (nonatomic,strong)GetCaseInfo *caseInfo;
 
 @end
 
@@ -53,12 +60,36 @@
     self.navigationItem.title = @"审核";
     self.automaticallyAdjustsScrollViewInsets = false;
     [self addBackItemroot];
-    //    int flag = 1;
     
-    [self checkStatus];
-    //    [self PostGetCheckMoney];
-    //    [self createUIWith];
+    moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+    moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//    moenyViewing.bottomView.hidden = YES;
+    moenyViewing.sureBtn.hidden = YES;
+    moenyViewing.lableData.hidden = YES;
+    moenyViewing.middleView.hidden = YES;
+    moenyViewing.moneyImage.hidden = YES;
+    [self.view addSubview:moenyViewing];
+
+    _isFirst = _popAlert;
+
+  }
+
+
+- (void)loadView
+{
+    UIScrollView *view = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    view.contentSize = CGSizeMake(_k_w, _k_h);
+    view.backgroundColor = [UIColor whiteColor];
+    // 去掉滚动条
+    view.showsVerticalScrollIndicator = NO;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getFxdCaseInfo)];
+    header.automaticallyChangeAlpha = YES;
+    view.mj_header = header;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view = view;
+    self.scrollView = view;
 }
+
 
 - (void)addBackItemroot
 {
@@ -100,6 +131,8 @@
  }
  */
 
+
+
 -(void)checkStatus
 {
     HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
@@ -138,10 +171,20 @@
                 {
                     _intStautes = [model.applyStatus integerValue];
                     [self createUIWith];
+
+                    
                 }
                     break;
+                case 15:
+                    
+                    _intStautes = [model.applyStatus integerValue];
+                    [self createUIWith];
+
+                    break;
                 default:
+
                     [self.navigationController popToRootViewControllerAnimated:YES];
+
                     break;
             }
         }
@@ -151,14 +194,59 @@
     } WithFaileBlock:^{
         
     }];
-    [homeViewModel fetchUserState:nil];
+    [homeViewModel fetchUserState:_userStateModel.product_id];
+    
+}
+
+
+#pragma mark  fxd用户状态查询，viewmodel
+-(void)getUserStatus:(GetCaseInfo *)caseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        QryUserStatusModel *qryUserStatusModel = [QryUserStatusModel yy_modelWithJSON:returnValue];
+        if ([qryUserStatusModel.flag isEqualToString:@"0000"]) {
+            
+            _qryUserStatusModel = qryUserStatusModel;
+            [self checkStatus];
+
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    
+    [complianceViewModel getUserStatus:caseInfo];
+}
+
+
+#pragma mark 发标前查询进件
+-(void)getFxdCaseInfo{
+//    [moenyViewing removeFromSuperview];
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
+        if ([caseInfo.flag isEqualToString:@"0000"]) {
+            [self.scrollView.mj_header endRefreshing];
+            _caseInfo = caseInfo;
+            [self getUserStatus:caseInfo];
+        }
+    } WithFaileBlock:^{
+        [self.scrollView.mj_header endRefreshing];
+    }];
+    [complianceViewModel getFXDCaseInfo];
     
 }
 
 -(void)postUrlMessageandDictionary{
     //请求银行卡列表信息
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        UserCardResult *_userCardModel =[UserCardResult yy_modelWithJSON:object];
+    
+    RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
+    [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
+        UserCardResult *_userCardModel =[UserCardResult yy_modelWithJSON:returnValue];
         if([_userCardModel.flag isEqualToString:@"0000"]){
             for(NSInteger j=0;j<_userCardModel.result.count;j++)
             {
@@ -172,8 +260,11 @@
                 }
             }
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
+        
     }];
+    [repayWeeklyRecordViewModel bankCardList];
+
 }
 
 - (void)getUserInfoData:(void(^)())completion
@@ -215,19 +306,24 @@
 
 -(void)createUIWith
 {
+
+    moenyViewing.moneyImage.hidden = NO;
     switch (_intStautes) {
+            
         case 4://待放款
         case 5://放款中
         {
-            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-            [self.view addSubview:moenyViewing];
+//            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//            [self.view addSubview:moenyViewing];
             moenyViewing.sureBtn.hidden = YES;
             moenyViewing.labelProgress.text = @"到账中";
             moenyViewing.labelDetail.text = @"请注意查收到账短信";
             moenyViewing.lableData.hidden = YES;
             moenyViewing.sureBtn.hidden = YES;
-            if (_popAlert) {
+            moenyViewing.middleView.hidden = NO;
+            if (_popAlert&&_isFirst) {
+                _isFirst = NO;
                 [self showAlertview];
             }
         }
@@ -241,114 +337,174 @@
         case 7://放款成功
         case 16://还款中
         {
-            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-            moenyViewing.frame = self.view.bounds;
-            [self.view addSubview:moenyViewing];
-            moenyViewing.labelProgress.text = @"已到账";
-            moenyViewing.labelDetail.text = @"请按时还款,保障信用";
             
+            if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
+                
+//                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//                [self.view addSubview:moenyViewing];
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.labelProgress.text = @"处理中";
+                moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+                moenyViewing.lableData.hidden = YES;
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.middleView.hidden = YES;
+                
+            }else{
             
-            [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-            if ([model.platform_type isEqualToString:@"0"]) {
-                moenyViewing.lableData.textAlignment = NSTextAlignmentLeft;
-                NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"《银行自动转账授权书》、《三方借款协议》"];
-                one.yy_font = [UIFont systemFontOfSize:13];
-                [one yy_setTextHighlightRange:NSMakeRange(0, 11)
-                                        color:UI_MAIN_COLOR
-                              backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
-                                    tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-                                        DLog(@"授权书点击");
-                                        
-                                        NSDictionary *paramDic = @{@"apply_id_":_userStateModel.applyID,
-                                                                   @"product_id_":_userStateModel.product_id,
-                                                                   @"protocol_type_":@"1",
-                                                                   @"card_no_":_cardNo,
-                                                                   @"card_bank_":_cardBank};
-                                        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                                            if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-                                                DetailViewController *detailVC = [[DetailViewController alloc] init];
-                                                detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
-                                                [self.navigationController pushViewController:detailVC animated:YES];
-                                            } else {
-                                                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-                                            }
-                                        } failure:^(EnumServerStatus status, id object) {
-                                            
-                                        }];
-//                                        AutoTransferAccountsAgreement *autoTransfer = [[AutoTransferAccountsAgreement alloc] init];
-//                                        [self.navigationController pushViewController:autoTransfer animated:true];
-                                    }];
-                [one yy_setTextHighlightRange:NSMakeRange(12, 8)
-                                        color:UI_MAIN_COLOR
-                              backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-                                  DLog(@"三方协议");
-                                  NSDictionary *paramDic;
-                                  if ([model.product_id isEqualToString:@"P001002"]||[model.product_id isEqualToString:@"P001005"]) {
-                                      paramDic = @{@"apply_id_":_userStateModel.applyID,
-                                                   @"product_id_":_userStateModel.product_id,
-                                                   @"protocol_type_":@"2",
-                                                   @"periods_":_approvalModel.result.loan_staging_amount};
-                                  }
-                                  if ([model.product_id isEqualToString:@"P001004"]) {
-                                      paramDic = @{@"apply_id_":_userStateModel.applyID,
-                                                   @"product_id_":_userStateModel.product_id,
-                                                   @"protocol_type_":@"2",
-                                                   @"periods_":@2};
-                                  }
-                                  
-                                  [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                                      if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-                                          DetailViewController *detailVC = [[DetailViewController alloc] init];
-                                          detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
-                                          [self.navigationController pushViewController:detailVC animated:YES];
-                                      } else {
-                                          [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-                                      }
-                                  } failure:^(EnumServerStatus status, id object) {
-                                      
-                                  }];
-                              }];
-                moenyViewing.agreeMentLabel.attributedText = one;
-                moenyViewing.agreeMentLabel.textColor = UI_MAIN_COLOR;
-                moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentLeft;
-            }
-            
-            if ([model.platform_type isEqualToString:@"2"]) {
-                NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"查看合同"];
-                one.yy_font = [UIFont systemFontOfSize:13];
-                [one yy_setTextHighlightRange:NSMakeRange(0, one.length)
-                                        color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
-                              backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
-                                    tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
-                                        DLog(@"合同查看");
-                                        NSDictionary *dicParam = @{@"bid_id_":model.bid_id_};
-                                        [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_contractList_url] parameters:dicParam finished:^(EnumServerStatus status, id object) {
-                                            DLog(@"%@",object);
-                                            P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:object];
-                                            if ([agreeModel.appcode isEqualToString:@"1"]) {
-                                                AgreeMentListViewController *agreeMentListViewController = [[AgreeMentListViewController alloc] init];
-                                                agreeMentListViewController.agreeMentArr = agreeModel.data.pactList;
-                                                [self.navigationController pushViewController:agreeMentListViewController animated:true];
-                                            } else {
-                                                
-                                            }
-                                        } failure:^(EnumServerStatus status, id object) {
-                                            
-                                        }];
-                                    }];
-                moenyViewing.agreeMentLabel.attributedText = one;
-                moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentCenter;
+                [self fxdStatus];
             }
             
         }
+            break;
+            
+        case 15:
+            
+            if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
+                
+//                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
+//                [self.view addSubview:moenyViewing];
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.labelProgress.text = @"处理中";
+                moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
+                moenyViewing.lableData.hidden = YES;
+                moenyViewing.sureBtn.hidden = YES;
+                moenyViewing.middleView.hidden = YES;
+                
+            }
+            if ([_qryUserStatusModel.result.flg isEqualToString:@"2"]||[_qryUserStatusModel.result.flg isEqualToString:@"6"]) {
+                
+                BOOL isHave = NO;
+                CheckViewController *controller;
+                for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+                    if ([vc isKindOfClass:[CheckViewController class]]) {
+                        controller = (CheckViewController *)vc;
+                        isHave = YES;
+                    }
+                }
+                
+                if (isHave) {
+                    [self.navigationController popToViewController:controller animated:YES];
+                }else{
+                    
+                    controller = [CheckViewController new];
+                    [self.navigationController pushViewController:controller animated:YES];
+                }
+            }
+
             break;
         default:
             [self.navigationController popToRootViewControllerAnimated:YES];
             break;
     }
+
     [self PostGetCheckMoney];
+
+    
 }
 
+-(void)fxdStatus{
+
+//    moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
+//    moenyViewing.frame = self.view.bounds;
+//    [self.view addSubview:moenyViewing];
+    moenyViewing.sureBtn.hidden = NO;
+    moenyViewing.lableData.hidden = NO;
+    moenyViewing.labelProgress.text = @"已到账";
+    moenyViewing.labelDetail.text = @"请按时还款,保障信用";
+    moenyViewing.middleView.hidden = NO;
+    
+    [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    if ([model.platform_type isEqualToString:@"0"]) {
+        moenyViewing.lableData.textAlignment = NSTextAlignmentLeft;
+        NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"《银行自动转账授权书》、《三方借款协议》"];
+        one.yy_font = [UIFont systemFontOfSize:13];
+        [one yy_setTextHighlightRange:NSMakeRange(0, 11)
+                                color:UI_MAIN_COLOR
+                      backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
+                            tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+                                DLog(@"授权书点击");
+                                
+                                NSArray *paramArray = @[_userStateModel.applyID,_userStateModel.product_id,@"1",_cardNo,_cardBank];
+                                
+                                LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+                                [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+                                    if ([[returnValue objectForKey:@"flag"] isEqualToString:@"0000"]) {
+                                        DetailViewController *detailVC = [[DetailViewController alloc] init];
+                                        detailVC.content = [[returnValue objectForKey:@"result"] objectForKey:@"protocol_content_"];
+                                        [self.navigationController pushViewController:detailVC animated:YES];
+                                    } else {
+                                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
+                                    }
+                                } WithFaileBlock:^{
+                                    
+                                }];
+                                [loanMoneyViewModel getProductProtocol:paramArray];
+                             
+                            }];
+        [one yy_setTextHighlightRange:NSMakeRange(12, 8)
+                                color:UI_MAIN_COLOR
+                      backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
+                          DLog(@"三方协议");
+                          
+                          NSArray *paramArray = [NSArray array];
+                          if ([model.product_id isEqualToString:SalaryLoan]||[model.product_id isEqualToString:WhiteCollarLoan]) {
+                              paramArray = @[_userStateModel.applyID,_userStateModel.product_id,@"2",_approvalModel.result.loan_staging_amount];
+                          }
+                          if ([model.product_id isEqualToString:RapidLoan]) {
+                              paramArray = @[_userStateModel.applyID,_userStateModel.product_id,@"2",@2];
+                          }
+                          
+                          LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+                          [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+                              if ([[returnValue objectForKey:@"flag"] isEqualToString:@"0000"]) {
+                                  DetailViewController *detailVC = [[DetailViewController alloc] init];
+                                  detailVC.content = [[returnValue objectForKey:@"result"] objectForKey:@"protocol_content_"];
+                                  [self.navigationController pushViewController:detailVC animated:YES];
+                              } else {
+                                  [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
+                              }
+                          } WithFaileBlock:^{
+                              
+                          }];
+                          [loanMoneyViewModel getProductProtocol:paramArray];
+                          
+                                }];
+        moenyViewing.agreeMentLabel.attributedText = one;
+        moenyViewing.agreeMentLabel.textColor = UI_MAIN_COLOR;
+        moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    
+    if ([model.platform_type isEqualToString:@"2"]) {
+        NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"查看合同"];
+        one.yy_font = [UIFont systemFontOfSize:13];
+        [one yy_setTextHighlightRange:NSMakeRange(0, one.length)
+                                color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
+                      backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
+                            tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
+                                DLog(@"合同查看");
+                                
+                                LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+                                [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+                                    P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:returnValue];
+                                    if ([agreeModel.appcode isEqualToString:@"1"]) {
+                                        AgreeMentListViewController *agreeMentListViewController = [[AgreeMentListViewController alloc] init];
+                                        agreeMentListViewController.agreeMentArr = agreeModel.data.pactList;
+                                        [self.navigationController pushViewController:agreeMentListViewController animated:true];
+                                    } else {
+                                        
+                                    }
+                                } WithFaileBlock:^{
+                                    
+                                }];
+                                [loanMoneyViewModel getContractList:model.bid_id_];
+                                
+                            }];
+        moenyViewing.agreeMentLabel.attributedText = one;
+        moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentCenter;
+    }
+}
 - (void)showAlertview
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"亲，您对发薪贷的服务满意吗？" preferredStyle:(UIAlertControllerStyleAlert)];
@@ -373,67 +529,89 @@
 
 -(void)sureBtnClick:(UIButton *)sender
 {
-    RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
-    repayRequest.targetVC = self;
-    [repayRequest repayRequest];
+    if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]) {
+        
+        NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+        P2PViewController *p2pVC = [[P2PViewController alloc] init];
+        //        p2pVC.isOpenAccount = NO;
+        p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        [self.navigationController pushViewController:p2pVC animated:YES];
+        
+    }else{
+    
+        RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+        repayRequest.targetVC = self;
+        [repayRequest repayRequest];
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    if ([_userStateModel.platform_type isEqualToString:@"2"]) {
+        
+        [self getFxdCaseInfo];
+    }else{
+    
+        [self checkStatus];
+    }
+    
+//    [self addBid];
 }
 
 #pragma mark -> 2.22	审批金额查询接口
 
 -(void)PostGetCheckMoney
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_approvalAmount_jhtml] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            _approvalModel = [Approval yy_modelWithJSON:object];
-            //            approvalModel.result.loan_staging_amount.integerValue
-            if ([_approvalModel.flag isEqualToString:@"0000"])
-            {
-                if (_approvalModel.result.approval_amount >0 && _approvalModel.result.loan_staging_amount.integerValue > 0) {
-                    //                    double approAmountSting = 0.0;
-                    //                    if (approvalModel.result.approval_amount >= 500) {
-                    //                        approAmountSting = approvalBaseClass.result.approvalAmount;
-                    //                    }
-                    moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%.0f元", _approvalModel.result.approval_amount];
-                    
-                    if ([_userStateModel.product_id isEqualToString:@"P001004"]) {
-                        moenyViewing.payMoneyTitle.text = @"到期还款";
-                        moenyViewing.labelweek.text = @"14天";
-                        moenyViewing.loanTimeTitle.text = @"借款期限";
-                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount];
-                    } else {
-                        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
-                        moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount/_approvalModel.result.loan_staging_amount.integerValue + _approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate];
-                    }
-                    
-                    
-                    
-                    
-                    //                    [NSString stringWithFormat:@"%.2f元",approAmountSting/(approvalBaseClass.result.loanStagingAmount) + approAmountSting*0.021];
-                    moenyViewing.labelAllMoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate*_approvalModel.result.loan_staging_amount.integerValue];
-                    //                                                       approAmountSting +approAmountSting*approvalBaseClass.result.loanStagingAmount*0.021];
-                }
-                if (_approvalModel.result.first_repay_date !=nil && [_approvalModel.result.first_repay_date length] >= 10) {
-                    if (UI_IS_IPHONE5) {
-                        moenyViewing.lableData.font = [UIFont systemFontOfSize:9.f];
-//                        moenyViewing.lableData.backgroundColor = [UIColor redColor];
-                        moenyViewing.lableData.numberOfLines = 0;
-                        moenyViewing.lableData.text = [NSString stringWithFormat:@"\n第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
-                    }else {
-                        moenyViewing.lableData.text = [NSString stringWithFormat:@"第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
-                    }
+
+    LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+    [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _approvalModel = [Approval yy_modelWithJSON:returnValue];
+        //            approvalModel.result.loan_staging_amount.integerValue
+        if ([_approvalModel.flag isEqualToString:@"0000"])
+        {
+            if (_approvalModel.result.approval_amount >0 && _approvalModel.result.loan_staging_amount.integerValue > 0) {
+                //                    double approAmountSting = 0.0;
+                //                    if (approvalModel.result.approval_amount >= 500) {
+                //                        approAmountSting = approvalBaseClass.result.approvalAmount;
+                //                    }
+                moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%.0f元", _approvalModel.result.approval_amount];
+                
+                if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
+                    moenyViewing.payMoneyTitle.text = @"到期还款";
+                    moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
+                    moenyViewing.loanTimeTitle.text = @"借款期限";
+                    moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount];
+                } else {
+                    moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
+                    moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount/_approvalModel.result.loan_staging_amount.integerValue + _approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate];
+
+                //                    [NSString stringWithFormat:@"%.2f元",approAmountSting/(approvalBaseClass.result.loanStagingAmount) + approAmountSting*0.021];
+                moenyViewing.labelAllMoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate*_approvalModel.result.loan_staging_amount.integerValue];
+                //                                                       approAmountSting +approAmountSting*approvalBaseClass.result.loanStagingAmount*0.021];
+            }
+            if (_approvalModel.result.first_repay_date !=nil && [_approvalModel.result.first_repay_date length] >= 10) {
+                if (UI_IS_IPHONE5) {
+                    moenyViewing.lableData.font = [UIFont systemFontOfSize:9.f];
+                    //                        moenyViewing.lableData.backgroundColor = [UIColor redColor];
+                    moenyViewing.lableData.numberOfLines = 0;
+                    moenyViewing.lableData.text = [NSString stringWithFormat:@"\n第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
+                }else {
+                    moenyViewing.lableData.text = [NSString stringWithFormat:@"第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
                 }
             }
         }
-    } failure:^(EnumServerStatus status, id object) {
+      }
+    } WithFaileBlock:^{
         
     }];
+    [loanMoneyViewModel getApprovalAmount];
+
     
 }
+
+
 
 @end

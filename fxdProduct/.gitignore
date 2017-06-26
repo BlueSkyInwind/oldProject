@@ -23,6 +23,7 @@ fxdProduct.xcworkspace
 pods/
 /pods/
 .swp
+*.lock
 
 # CocoaPods
 #

@@ -67,5 +67,13 @@
 + (void)setCornerWithoutRadius:(UIView *)view borderColor:(UIColor *)color;
 
 +(NSString *)toCapitalLetters:(NSString *)money;
-
+/**
+ *  计算字符串宽度
+ *
+ *  @param text 文本内容
+ *  @param size 字体大小
+ *
+ *  @return 返回文本宽度
+ */
++ (CGFloat)widthForText:(NSString *)text font:(CGFloat)size;
 @end

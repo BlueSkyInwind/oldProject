@@ -388,5 +388,19 @@
     return endStr;
 }
 
+/**
+ *  计算字符串宽度
+ *
+ *  @param text 文本内容
+ *  @param size 字体大小
+ *
+ *  @return 返回文本宽度
+ */
++ (CGFloat)widthForText:(NSString *)text font:(CGFloat)size
+{
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:size]};
+    CGSize aSize = [text sizeWithAttributes:attributes];
+    return aSize.width;
+}
 
 @end

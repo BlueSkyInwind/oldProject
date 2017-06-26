@@ -10,7 +10,7 @@
 #import "TicketCell.h"
 #import "TicketDetailController.h"
 #import "RedpacketBaseClass.h"
-
+#import "RepayWeeklyRecordViewModel.h"
 @interface DiscountTicketController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UIView *NoneView;
@@ -37,9 +37,11 @@
     if (_validRedPacketArr.count > 0) {
         [_validRedPacketArr removeAllObjects];
     }
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getUserRedpacket_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    
+    RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
+    [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
         [self.tableView.mj_header endRefreshing];
-        _redPacketParse = [RedpacketBaseClass modelObjectWithDictionary:object];
+        _redPacketParse = [RedpacketBaseClass modelObjectWithDictionary:returnValue];
         for (RedpacketResult *result in _redPacketParse.result) {
             if (result.valid) {
                 [_validRedPacketArr addObject:result];
@@ -57,9 +59,11 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_redPacketParse.msg];
         }
         DLog(@"%@",_redPacketParse);
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         NoneView.hidden = NO;
     }];
+    [repayWeeklyRecordViewModel getUserRedpacketList];
+
 }
 
 -(void)createTableView

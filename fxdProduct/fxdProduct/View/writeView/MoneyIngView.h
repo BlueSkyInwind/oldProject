@@ -38,5 +38,7 @@
 @property (weak, nonatomic) IBOutlet UIView *middleView;
 
 @property (weak, nonatomic) IBOutlet UIView *repayBtnView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIImageView *moneyImage;
 
 @end

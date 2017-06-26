@@ -25,19 +25,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-//    if (![[PCCircleViewConst getGestureWithKey:gestureFinalSaveKey] isEqualToString:@""] && [PCCircleViewConst getGestureWithKey:gestureFinalSaveKey] != nil) {
-//        GestureViewController *gestureVc = [[GestureViewController alloc] init];
-//        [gestureVc setType:GestureViewControllerTypeLogin];
-//        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:gestureVc animated:YES completion:nil];
-//    } else {
-//        LoginViewController *loginView = [LoginViewController new];
-//        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-//        
-//        
-//        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
-//    }
-    
     [self setTabbarCon];
     self.delegate = self;
 }
@@ -85,7 +72,8 @@
 -(void)makeTabBarHidden:(BOOL)hide { // Custom code to hide TabBar
     if ( [self.view.subviews count] < 2 ) { return;
     }
-    UIView *contentView; if ( [[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] ) {
+    UIView *contentView;
+    if ( [[self.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] ) {
         contentView = [self.view.subviews objectAtIndex:1]; } else {
             contentView = [self.view.subviews objectAtIndex:0]; }
     if (hide) {
@@ -112,7 +100,7 @@
 
 - (void)presentLogin:(UIViewController *)vc
 {
-    LoginViewController *loginView = [LoginViewController new];
+    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
     [vc presentViewController:nav animated:YES completion:nil];
 }

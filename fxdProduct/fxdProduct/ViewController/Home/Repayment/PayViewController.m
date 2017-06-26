@@ -12,7 +12,7 @@
 #import "UIViewController+KNSemiModal.h"
 #import "PayMethodViewController.h"
 #import "CardInfo.h"
-
+#import "UnbundlingBankCardViewController.h"
 @interface PayViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 {
@@ -52,6 +52,21 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
     UIBarButtonItem *disMissItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(dismiss)];
     [disMissItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName,[UIColor grayColor],NSForegroundColorAttributeName, nil]  forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = disMissItem;
+    
+    if (_isP2P) {
+        
+        UIBarButtonItem *changeBankItem = [[UIBarButtonItem alloc] initWithTitle:@"更换" style:UIBarButtonItemStylePlain target:self action:@selector(changeBank)];
+        [changeBankItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName,[UIColor grayColor],NSForegroundColorAttributeName, nil]  forState:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem = changeBankItem;
+    }
+}
+
+#pragma mark  更换银行卡按钮
+-(void)changeBank{
+
+    [self dismissSemiModalView];
+    self.changeBankBlock();
+    
 }
 
 - (void)dismiss
@@ -60,6 +75,8 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
 }
 
 - (IBAction)sureBtnClick:(UIButton *)sender {
+    
+    
     self.makesureBlock(self.payType,_selectCardInfo,_banckCurrentIndex);
 }
 
@@ -91,18 +108,28 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
+       
         PayMethodCell *cell = [tableView dequeueReusableCellWithIdentifier:methodCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (_payType == PayTypeGetMoneyToCard) {
             cell.PayTitleLabel.text = @"银行卡";
         }
-        if (_cardInfo) {
-            cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_cardInfo.bankName,_cardInfo.tailNumber];
-        } else {
-            cell.whichBank.text = @"";
+        if (_isP2P) {
+            
+            cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_bankName,_banNum];
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            if (_cardInfo) {
+                cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_cardInfo.bankName,_cardInfo.tailNumber];
+            } else {
+                cell.whichBank.text = @"";
+            }
         }
+        
         return cell;
+        
+        
     } else {
         PayMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:moneyCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -115,25 +142,30 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //    [self fatchCardInfo];
-    PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-    payMethodVC.bankModel = _bankCardModel;
-    
-    
-    if (_payType == PayTypeWeekPay || _payType == PayTypeCleanPay) {
-        payMethodVC.payMethod = PayMethodNormal;
-    } else {
-        payMethodVC.payMethod = PayMethodSelectBankCad;
-    }
-    payMethodVC.currentIndex = _banckCurrentIndex;
-    payMethodVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex){
-        if (cardInfo) {
-            _selectCardInfo = cardInfo;
-            _cardInfo = cardInfo;
+    if (!_isP2P) {
+        
+        PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
+        payMethodVC.bankModel = _bankCardModel;
+        
+        
+        if (_payType == PayTypeWeekPay || _payType == PayTypeCleanPay) {
+            payMethodVC.payMethod = PayMethodNormal;
+        } else {
+            payMethodVC.payMethod = PayMethodSelectBankCad;
         }
-        _banckCurrentIndex = currentIndex;
-        [self.myTableview reloadData];
-    };
-    [self.navigationController pushViewController:payMethodVC animated:YES];
+        payMethodVC.currentIndex = _banckCurrentIndex;
+        payMethodVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex){
+            if (cardInfo) {
+                _selectCardInfo = cardInfo;
+                _cardInfo = cardInfo;
+            }
+            _banckCurrentIndex = currentIndex;
+            [self.myTableview reloadData];
+        };
+        [self.navigationController pushViewController:payMethodVC animated:YES];
+        
+    }
+    
 }
 
 //- (void)fatchCardInfo

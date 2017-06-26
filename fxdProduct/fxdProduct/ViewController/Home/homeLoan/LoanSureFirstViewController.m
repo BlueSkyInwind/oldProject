@@ -12,6 +12,7 @@
 #import "FMDeviceManager.h"
 #import "RateModel.h"
 #import "ExpressViewController.h"
+
 @interface LoanSureFirstViewController ()
 
 @property (nonatomic, strong) YYTextView *textView;
@@ -57,28 +58,30 @@
 -(void)viewWillAppear:(BOOL)animated{
 
     [self fatchRate];
+    
+//    [self getFxdCaseInfo];
 }
 
 - (void)fatchRate
 {
     NSDictionary *dic = @{@"priduct_id_":_productId};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) { 
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         _rateModel = rateParse;
         
         if ([rateParse.flag isEqualToString:@"0000"]) {
             
-            if ([self.productId isEqualToString:@"P001002"]) {
+            if ([self.productId isEqualToString:SalaryLoan]) {
                 [self setUpProductCredit];
             }
-            if ([self.productId isEqualToString:@"P001004"]) {
+            if ([self.productId isEqualToString:RapidLoan]) {
                 [self setUpProductQuickly];
             }
-            if ([self.productId isEqualToString:@"P001005"]) {
+            if ([self.productId isEqualToString:WhiteCollarLoan]) {
                 [self setUpProductWhiteCollar];
             }
             
-            if ([_productId isEqualToString:@"P001002"]) {
+            if ([_productId isEqualToString:SalaryLoan]) {
                 NSString *str = [NSString stringWithFormat:@"工薪贷产品：\n纯信用，无抵押借款，用户可提前结清不额外收费\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
                 NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
                 if (UI_IS_IPHONE5) {
@@ -89,7 +92,7 @@
                 contentText.yy_color = rgb(122, 131, 139);
                 self.textView.attributedText = contentText;
             }
-            if ([_productId isEqualToString:@"P001004"]) {
+            if ([_productId isEqualToString:RapidLoan]) {
                 NSString *str = [NSString stringWithFormat:@"急速贷产品：\n5分钟申请,30分钟下款,极速体验\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
                 NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
                 contentText.yy_font = [UIFont systemFontOfSize:14];
@@ -97,7 +100,7 @@
                 self.textView.attributedText = contentText;
                 self.specialLabel.text = @"用户在申请急速贷产品后不得同时继续申请其他产品";
             }
-            if ([_productId isEqualToString:@"P001005"]) {
+            if ([_productId isEqualToString:WhiteCollarLoan]) {
                 NSString *str = [NSString stringWithFormat:@"白领贷产品：\n专为高端人群设计，超低费用，提前结清不额外收费\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
                 NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
                 if (UI_IS_IPHONE5) {
@@ -249,7 +252,7 @@
         self.amountLabel.attributedText = attriStr;
     }
     
-    self.timeLabel.text = @"期限:14天";
+    self.timeLabel.text =  [NSString stringWithFormat:@"%@天",_rateModel.result.ext_attr_.period_desc_];;
     
     
 }
@@ -261,7 +264,7 @@
     NSDictionary *dict;
     FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
     NSString *blackBox = manager->getDeviceInfo();
-    if ([_productId isEqualToString:@"P001004"]) {
+    if ([_productId isEqualToString:RapidLoan]) {
         dict = @{@"plantform_source":PLATFORM,
                  @"product_id_":_productId,
                  @"if_family_know_":_if_family_know,
@@ -271,7 +274,7 @@
                  @"loan_staging_amount_":@1,
                  @"third_tongd_code":blackBox};
     }
-    if ([_productId isEqualToString:@"P001002"]||[_productId isEqualToString:@"P001005"]) {
+    if ([_productId isEqualToString:SalaryLoan]||[_productId isEqualToString:WhiteCollarLoan]) {
         dict = @{@"plantform_source":PLATFORM,
                    @"product_id_":_productId,
                    @"if_family_know_":_if_family_know,
@@ -285,6 +288,8 @@
             if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
                 
                 CheckViewController *checkView = [CheckViewController new];
+//                checkView.qryUserStatusModel = _qryUserStatusModel;
+//                checkView.caseInfo = _caseInfo;
                 checkView.homeStatues = 1;
                 [self.navigationController pushViewController:checkView animated:YES];
             } else {
@@ -337,8 +342,11 @@
     } WithFaileBlock:^{
         
     }];
-    [homeViewModel fetchUserState:nil];
+    [homeViewModel fetchUserState:_model.product_id];
 }
+
+
+
 
 - (void)goCheckVC:(UserStateModel *)model
 {

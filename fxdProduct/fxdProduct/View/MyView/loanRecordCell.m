@@ -64,13 +64,13 @@
     {
         UILabel *lbl=[self.contentView viewWithTag:i+100];
         if (i == 0) {
-            if ([result.product_id_ isEqualToString:@"P001004"]) {
+            if ([result.product_id_ isEqualToString:RapidLoan]) {
                 lbl.text = @"急速贷";
             }
-            if ([result.product_id_ isEqualToString:@"P001002"]) {
+            if ([result.product_id_ isEqualToString:SalaryLoan]) {
                 lbl.text = @"工薪贷";
             }
-            if ([result.product_id_ isEqualToString:@"P001005"]) {
+            if ([result.product_id_ isEqualToString:WhiteCollarLoan]) {
                 lbl.text = @"白领贷";
             }
         }else if(i==1)

@@ -20,7 +20,11 @@
 typedef void(^ReturnValueBlock)(id returnValue);
 typedef void(^FaileBlock)();
 
-
+//十六进制色值
+#define kUIColorFromRGB(rgbValue) [UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 // 设置三原色
 #define RGBColor(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
@@ -35,8 +39,11 @@ typedef void(^FaileBlock)();
 #define UI_IS_IPHONE            ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 #define UI_IS_IPHONE5           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0)
 #define UI_IS_IPHONE6P            (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 736.0)
+#define UI_IS_IPHONE4           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 480.0)
 
 #define UI_MAIN_COLOR [UIColor colorWithRed:0/255.0 green:170/255.0 blue:238/255.0 alpha:1]
+
+#define KCharacterNumber @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
 
 UIKIT_EXTERN NSString * const _main_url;
@@ -46,7 +53,7 @@ UIKIT_EXTERN NSString * const _H5_url;
 UIKIT_EXTERN NSString * const _ZMXY_url;
 UIKIT_EXTERN NSString * const _SETP_url;
 UIKIT_EXTERN NSString * const _ZhimaBack_url;
-
+UIKIT_EXTERN NSString * const _p2P_url;
 
 UIKIT_EXTERN NSString * const       _getCode_url;                            //获取验证码
 UIKIT_EXTERN NSString * const       _regCode_url;                            //注册验证码
@@ -55,6 +62,7 @@ UIKIT_EXTERN NSString * const       _login_url;                              //�
 UIKIT_EXTERN NSString * const       _loginOut_url;                           //退出登陆
 UIKIT_EXTERN NSString * const       _updateDevID_url;                        //更改设备号
 UIKIT_EXTERN NSString * const       _forget_url;                             //忘记密码
+UIKIT_EXTERN NSString * const       _changePassword_url;                             //更换密码
 UIKIT_EXTERN NSString * const       _userState_url;                          //首页查询用户借款状态
 UIKIT_EXTERN NSString * const       _secondApply_url;                        //二次进件
 UIKIT_EXTERN NSString * const       _updateUserById_url;                     //提交用户信息
@@ -149,6 +157,20 @@ UIKIT_EXTERN NSString * const       _selectPlatform_url;                     //�
 UIKIT_EXTERN NSString * const       _findZhimaCredit_url;                     //芝麻信用授权查询
 UIKIT_EXTERN NSString * const       _submitZhimaCredit_url;                    //芝麻信用授权提交
 UIKIT_EXTERN NSString * const       _zhimaCreditCallBack_url;                    //芝麻信用回调地址
+UIKIT_EXTERN NSString * const       _sendSms_url;                     //发送短信接口
+UIKIT_EXTERN NSString * const       _bankCards_url;                     //换绑银行卡
+UIKIT_EXTERN NSString * const       _huifu_url;                    //用户开户接口
+UIKIT_EXTERN NSString * const       _queryCardInfo_url;                    //银行卡查询接口
+UIKIT_EXTERN NSString * const       _accountHSService_url;                    //用户状态查询接口
+UIKIT_EXTERN NSString * const       _paymentService_url;                    //主动还款接口
+UIKIT_EXTERN NSString * const       _cash_url;                    //取现
+UIKIT_EXTERN NSString * const       _toCash_url;                  //取现返回url
+UIKIT_EXTERN NSString * const       _bosAcctActivate_url;                  //激活老账户
+UIKIT_EXTERN NSString * const       _queryBidStatus_url;                  //标的状态查询接口
+UIKIT_EXTERN NSString * const       _bosAcctActivateRet_url;                  //激活老账户返回url
+UIKIT_EXTERN NSString * const       _qryUserStatus_url;                  //用户状态查询
+UIKIT_EXTERN NSString * const       _getBidStatus_url;                  //用户标的状态查询
+UIKIT_EXTERN NSString * const       _saveLoanCase_url;                  //提款申请件记录
 
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码
@@ -160,6 +182,10 @@ UIKIT_EXTERN NSString * const   CODE_BANKMOBILE;         ///银行预留手机�
 UIKIT_EXTERN NSString * const   CODE_DRAW;              ///提款
 UIKIT_EXTERN NSString * const   CODE_ADDCARD;          //新增卡
 
+
+UIKIT_EXTERN NSString * const SalaryLoan;          //工薪贷平台
+UIKIT_EXTERN NSString * const RapidLoan;         //急速贷平台
+UIKIT_EXTERN NSString * const WhiteCollarLoan;       //白领贷平台
 
 UIKIT_EXTERN NSString * const PLATFORM;                 //平台
 UIKIT_EXTERN NSString * const Devcode;      //开发码
@@ -212,6 +238,7 @@ UIKIT_EXTERN NSString * const FirstLunch;
 
 
 UIKIT_EXTERN NSString * const theMoxieApiKey;            //魔蝎key
+
 
 #define MAS_SHORTHAND_GLOBALS
 
