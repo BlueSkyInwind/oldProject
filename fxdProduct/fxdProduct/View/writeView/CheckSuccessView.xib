@@ -433,7 +433,7 @@
                                 </mask>
                             </variation>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grg-sz-2aE">
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grg-sz-2aE">
                             <rect key="frame" x="39" y="245" width="297" height="15"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gantan" translatesAutoresizingMaskIntoConstraints="NO" id="9FU-RD-ON8">
