@@ -573,6 +573,10 @@
 		848394231EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */; };
 		848394261EDEC96C003EF4EC /* HomePopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394251EDEC96C003EF4EC /* HomePopParam.m */; };
 		848394271EDEC96C003EF4EC /* HomePopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394251EDEC96C003EF4EC /* HomePopParam.m */; };
+		84A6350E1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
+		84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
+		84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
+		84A635131F01096900146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
 		84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
@@ -2217,6 +2221,10 @@
 		848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerParamModel.m; sourceTree = "<group>"; };
 		848394241EDEC96C003EF4EC /* HomePopParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePopParam.h; sourceTree = "<group>"; };
 		848394251EDEC96C003EF4EC /* HomePopParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePopParam.m; sourceTree = "<group>"; };
+		84A6350C1F00F8B800146A8A /* MobilePhoneOperatorParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobilePhoneOperatorParamModel.h; sourceTree = "<group>"; };
+		84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobilePhoneOperatorParamModel.m; sourceTree = "<group>"; };
+		84A6350F1F00FCA200146A8A /* AuthenticationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewModel.h; sourceTree = "<group>"; };
+		84A635101F00FCA200146A8A /* AuthenticationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewModel.m; sourceTree = "<group>"; };
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
 		CC0DFB971EA5B1090024841A /* fxdProductDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fxdProductDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3282,6 +3290,8 @@
 				CCDEDF5F1EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m */,
 				CCDEDF621EEA912A009CEC32 /* LoanMoneyViewModel.h */,
 				CCDEDF631EEA912A009CEC32 /* LoanMoneyViewModel.m */,
+				84A6350F1F00FCA200146A8A /* AuthenticationViewModel.h */,
+				84A635101F00FCA200146A8A /* AuthenticationViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4285,6 +4295,7 @@
 		63E076541B67114800E269F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84A6350B1F00F85700146A8A /* MobilePhoneOperator */,
 				CCDEDF661EEA9257009CEC32 /* ProductProtocol */,
 				CCDEDF591EEA3863009CEC32 /* SaveAccountBankCard */,
 				CCCDA8791EDFACED00B48DFF /* SaveLoanCase */,
@@ -4838,6 +4849,15 @@
 				844E5F4F1ED94DCB00753671 /* RegParamModel.m */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		84A6350B1F00F85700146A8A /* MobilePhoneOperator */ = {
+			isa = PBXGroup;
+			children = (
+				84A6350C1F00F8B800146A8A /* MobilePhoneOperatorParamModel.h */,
+				84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */,
+			);
+			path = MobilePhoneOperator;
 			sourceTree = "<group>";
 		};
 		84DD36361ED57DEE0057F19A /* SMS */ = {
@@ -5513,6 +5533,7 @@
 				63E1ECD01E1B8FAA0079A2F8 /* TAAnimatedDotView.m in Sources */,
 				63FC24FA1D98F7E9006F58F3 /* YYTextRunDelegate.m in Sources */,
 				63D43EFC1D41F8380076AC7F /* DataWriteAndRead.m in Sources */,
+				84A6350E1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m in Sources */,
 				CCCDA87C1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */,
 				638C3F3B1CF564A4000446A7 /* SquareRepaymentExt.m in Sources */,
 				63553B1F1E600D0D00B2C1FF /* FaceIDLiveModel.m in Sources */,
@@ -5607,6 +5628,7 @@
 				0F0650461BE219BF000DE94D /* UserSureRefuseResult.m in Sources */,
 				63832C8C1CB7530400C6F194 /* NSString+AES.m in Sources */,
 				0FA644B61BF4628E00959EDF /* RegSecoryViewController.m in Sources */,
+				84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */,
 				63C50E501E6804950035EE4F /* ReconfrInfoModel.m in Sources */,
 				639E88731CA1371800254216 /* UIApplication+Extend.m in Sources */,
 				63FE3DF01E48821B009E5B82 /* DaysCell.m in Sources */,
@@ -5917,6 +5939,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84A635131F01096900146A8A /* MobilePhoneOperatorParamModel.m in Sources */,
+				84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */,
 				845017321ED7D051008055E4 /* LoginView.m in Sources */,
 				842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */,
 				84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */,

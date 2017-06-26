@@ -47,6 +47,7 @@
     NSString *_rulesId;
     NSString *_isMobileAuth;
     NSString *_isZmxyAuth;
+    NSString *_phoneAuthChannel;
     UserStateModel *_model;
     
 }
@@ -582,6 +583,7 @@
             }else {
                 [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
                     CertificationViewController *certificationVC = [[CertificationViewController alloc] init];
+                    certificationVC.phoneAuthChannel = _phoneAuthChannel;
                     certificationVC.isMobileAuth = _isMobileAuth;
                     if (custom_baseInfo.result.verifyStatus == 2) {
                         certificationVC.liveEnabel = false;
@@ -712,6 +714,7 @@
             _rulesId = [[object objectForKey:@"result"] objectForKey:@"rulesid"];
             _isMobileAuth = [[object objectForKey:@"result"] objectForKey:@"isMobileAuth"];
             _isZmxyAuth = [[object objectForKey:@"result"] objectForKey:@"isZmxyAuth"];// 1 未认证    2 认证通过   3 认证未通过
+            _phoneAuthChannel = [[object objectForKey:@"result"] objectForKey:@"TRUCKS_"];  // 手机认证通道 JXL 表示聚信立，TC 表示天创认证
             if (_nextStep.integerValue == 4) {
                 _isInfoEditable = [[object objectForKey:@"result"] objectForKey:@"isInfoEditable"];
             }
