@@ -504,7 +504,7 @@ typedef enum {
             [_tableView reloadData];
         }else if ([_mobileParse.flag isEqualToString:@"0006"]){
             //需要手机验证码
-            _currentDisplayType = VerifyCodeViewType;//错误时 验证码显示
+            _currentDisplayType = VerifyCodeViewType; //错误时 验证码显示
             [_tableView reloadData];
         }else{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
@@ -540,13 +540,13 @@ typedef enum {
         }else{
             //            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:returnParse.msg];
         }
-        
         //        if ([authCode isEqualToString:@"1"]) {
         //            [blockDataList replaceObjectAtIndex:13 withObject:@"2"];
         //        } else {
         //            [blockDataList replaceObjectAtIndex:13 withObject:@""];
         //        }
     } failure:^(EnumServerStatus status, id object) {
+        
     }];
 }
 

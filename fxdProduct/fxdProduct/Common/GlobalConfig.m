@@ -30,10 +30,10 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 //测试环境
 //http://192.168.14.14:9090/fxd-esb/esb/
-NSString * const _main_url  =   @"http://192.168.14.14:9090/fxd-esb/esb/";
-NSString * const _ValidESB_url  =   @"http://192.168.7.253:8081/fxd-esb/";
+NSString * const _main_url  =   @"http://192.168.7.253:9292/fxd-esb/esb/";
+NSString * const _ValidESB_url  =   @"http://192.168.7.253:9292/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
-NSString * const _p2P_url = @"http://192.168.7.253:8081/fxd-esb/p2p/";
+NSString * const _p2P_url = @"http://192.168.7.253:9292/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
 
 
@@ -57,9 +57,6 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
 //饶明翔本地，用于优化测试
 //NSString * const _main_url  =   @"http://192.168.9.2:9191/fxd-esb/esb/";
 //NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
-
-
-
 
 
 //http://192.168.6.61  UAT
