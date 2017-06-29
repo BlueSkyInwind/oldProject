@@ -107,10 +107,10 @@ typedef enum {
         if (_showAll) {
             return 200.f;
         }else {
-            return _k_h-64;
+            return 400.f;
         }
     } else {
-        return 380.f;
+        return 400.f;
     }
 }
 
@@ -231,7 +231,9 @@ typedef enum {
                     case verifyCodeAndPicCodeViewType:{
                         cell.picCodeView.hidden = NO;
                         cell.smsCodeView.hidden = NO;
+                        cell.picCodeViewTopConstraint.constant = 51;
                         cell.agreementTopConstraint.constant = 97;
+                        cell.moblieBtnTopConstraint.constant = 111;
                         [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
 
                     }
@@ -304,8 +306,8 @@ typedef enum {
                 case VerifyCodeViewType:{
                     cell.picCodeView.hidden = YES;
                     cell.smsCodeView.hidden = NO;
-                    cell.agreementTopConstraint.constant = 51;
-                    cell.moblieBtnTopConstraint.constant = 76;
+                    cell.agreementTopConstraint.constant = 55;
+                    cell.moblieBtnTopConstraint.constant = 80;
                 }
                     break;
                 case PicCodeViewType:{
@@ -313,8 +315,8 @@ typedef enum {
                     cell.picCodeView.hidden = NO;
                     cell.smsCodeView.hidden = YES;
                     cell.picCodeViewTopConstraint.constant = 5;
-                    cell.agreementTopConstraint.constant = 51;
-                    cell.moblieBtnTopConstraint.constant = 76;
+                    cell.agreementTopConstraint.constant = 55;
+                    cell.moblieBtnTopConstraint.constant = 80;
                     [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
 
                 }
@@ -322,7 +324,9 @@ typedef enum {
                 case verifyCodeAndPicCodeViewType:{
                     cell.picCodeView.hidden = NO;
                     cell.smsCodeView.hidden = NO;
-                    cell.agreementTopConstraint.constant = 97;
+                    cell.picCodeViewTopConstraint.constant = 55;
+                    cell.agreementTopConstraint.constant = 100;
+                    cell.moblieBtnTopConstraint.constant = 125;
                     [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
 
                 }
@@ -538,7 +542,7 @@ typedef enum {
                 [weakself.navigationController popViewControllerAnimated:YES];
             });
         }else{
-            //            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:returnParse.msg];
+//                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:returnParse.msg];
         }
         //        if ([authCode isEqualToString:@"1"]) {
         //            [blockDataList replaceObjectAtIndex:13 withObject:@"2"];
@@ -854,8 +858,6 @@ typedef enum {
         agreementImage.image = [UIImage imageNamed:@"tricked"];
     
     }
-    
-    
 }
 
 -(void)clickAgreement{

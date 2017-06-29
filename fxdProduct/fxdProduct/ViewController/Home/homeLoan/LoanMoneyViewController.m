@@ -131,8 +131,6 @@
  }
  */
 
-
-
 -(void)checkStatus
 {
     HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
@@ -172,7 +170,6 @@
                     _intStautes = [model.applyStatus integerValue];
                     [self createUIWith];
 
-                    
                 }
                     break;
                 case 15:
@@ -400,8 +397,6 @@
     }
 
     [self PostGetCheckMoney];
-
-    
 }
 
 -(void)fxdStatus{

@@ -23,7 +23,7 @@
         tcOperatorModel.picCode = picCode;
     }
     NSDictionary * paramDic = [tcOperatorModel toDictionary];
-    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getTianChuangCertification_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]TCPOSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getTianChuangCertification_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             if (self.returnBlock) {
                 self.returnBlock(object);

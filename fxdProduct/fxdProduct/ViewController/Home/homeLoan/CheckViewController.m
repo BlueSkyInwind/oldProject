@@ -691,8 +691,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         controller.popAlert = true;
         [self.navigationController pushViewController:controller animated:YES];
     }
-    
-    
 }
 
 - (void)fatchCardInfo
