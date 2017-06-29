@@ -133,6 +133,7 @@
             [self.navigationController pushViewController:userDataVC animated:true];
             
         }else if (indexPath.row == 1) {
+            
             RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
             repayRequest.targetVC = self;
             [repayRequest repayRequest];
