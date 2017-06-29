@@ -50,7 +50,7 @@
     //    titleAry=@[@"个人资料",@"我要还款",@"优惠劵",@"借款记录",@"还款记录",@"我的银行卡"];
     titleAry=@[@"完善资料",@"我要还款",@"借款记录",@"我的红包",@"我的银行卡",@"邀请好友"];
     //  imgAry=@[@"6_my_icon_01",@"6_my_icon_02",@"6_my_icon_07",@"6_my_icon_03",@"6_my_icon_04",@"6_my_icon_05"];
-    imgAry=@[@"6_my_icon_01",@"6_my_icon_02",@"6_my_icon_03",@"6_my_icon_07",@"6_my_icon_05",@"6_my_icon_11"];
+ imgAry=@[@"6_my_icon_01",@"6_my_icon_02",@"6_my_icon_03",@"6_my_icon_07",@"6_my_icon_05",@"6_my_icon_11"];
     
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -262,7 +262,6 @@
     [homeViewModel fetchUserState:nil];
     
 }
-
 
 
 - (void)didReceiveMemoryWarning {
