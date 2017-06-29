@@ -55,6 +55,10 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
 //NSString * const _main_url  =   @"http://192.168.9.2:9191/fxd-esb/esb/";
 //NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
 
+
+//芝麻信用测试地址
+//NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";
+
 //http://192.168.6.61  UAT
 //NSString * const _main_url  =   @"http://192.168.6.61/fxd-esb/esb/";
 //NSString * const _ValidESB_url = @"http://192.168.6.61/fxd-esb/";

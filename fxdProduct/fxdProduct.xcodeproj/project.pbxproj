@@ -1143,6 +1143,8 @@
 		CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
+		CCC344FC1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
+		CCC344FD1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
 		CCCDA8771EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
 		CCCDA8781EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
 		CCCDA87C1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA87B1EDFAD0B00B48DFF /* SaveLoanCaseModel.m */; };
@@ -2250,6 +2252,8 @@
 		CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
+		CCC344FA1F03833E006D0F83 /* JRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRefuseView.h; sourceTree = "<group>"; };
+		CCC344FB1F03833E006D0F83 /* JRefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRefuseView.m; sourceTree = "<group>"; };
 		CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewModel.h; sourceTree = "<group>"; };
 		CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewModel.m; sourceTree = "<group>"; };
 		CCCDA87A1EDFAD0B00B48DFF /* SaveLoanCaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveLoanCaseModel.h; sourceTree = "<group>"; };
@@ -2614,6 +2618,8 @@
 				CC31978D1ED911980083F263 /* WhiteRefuseView.h */,
 				CC31978E1ED911980083F263 /* WhiteRefuseView.m */,
 				CC31979F1ED929F10083F263 /* WhiteRefuseView.xib */,
+				CCC344FA1F03833E006D0F83 /* JRefuseView.h */,
+				CCC344FB1F03833E006D0F83 /* JRefuseView.m */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -5820,6 +5826,7 @@
 				63FC24F91D98F7E9006F58F3 /* YYTextRubyAnnotation.m in Sources */,
 				63C12DCF1E4978AF008119FB /* QRPopView.m in Sources */,
 				63145AB21CA2952400D04ED8 /* LoginMsgBaseClass.m in Sources */,
+				CCC344FC1F03833E006D0F83 /* JRefuseView.m in Sources */,
 				630B16431C5601CE006D46CF /* BasicInfoViewController.m in Sources */,
 				6326C9ED1BF0B15700FD23A8 /* GetMoneyProcessUserBean.m in Sources */,
 				63553AF21E5D8BA200B2C1FF /* ProfessionViewController.m in Sources */,
@@ -6268,6 +6275,7 @@
 				CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */,
 				CC0DFA841EA5B1090024841A /* CashResult.m in Sources */,
 				CC0DFA851EA5B1090024841A /* YYTextRubyAnnotation.m in Sources */,
+				CCC344FD1F03833E006D0F83 /* JRefuseView.m in Sources */,
 				CC0DFA861EA5B1090024841A /* QRPopView.m in Sources */,
 				CC0DFA871EA5B1090024841A /* LoginMsgBaseClass.m in Sources */,
 				CC0DFA881EA5B1090024841A /* BasicInfoViewController.m in Sources */,
