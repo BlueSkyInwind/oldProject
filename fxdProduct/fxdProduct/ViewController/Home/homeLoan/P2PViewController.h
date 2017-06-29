@@ -27,6 +27,6 @@
 
 @property (nonatomic,assign)BOOL isCheck;
 @property (nonatomic,assign)BOOL isOpenAccount;
-
+@property (nonatomic,assign)BOOL isRepay;
 
 @end
