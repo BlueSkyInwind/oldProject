@@ -23,7 +23,9 @@
 #import "RepayListInfo.h"
 #import "RepayRequestManage.h"
 #import "UserDataViewController.h"
-
+#import "CheckViewModel.h"
+#import "QryUserStatusModel.h"
+#import "GetCaseInfo.h"
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     NSArray *titleAry;
@@ -134,6 +136,8 @@
             
         }else if (indexPath.row == 1) {
             
+            
+            
             RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
             repayRequest.targetVC = self;
             [repayRequest repayRequest];
@@ -172,6 +176,45 @@
         DLog(@"%@",object);
     }];
 }
+
+
+#pragma mark 发标前查询进件
+-(void)getFxdCaseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
+        if ([caseInfo.flag isEqualToString:@"0000"]) {
+            
+            [self getUserStatus:caseInfo];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel getFXDCaseInfo];
+    
+}
+
+#pragma mark  fxd用户状态查询，viewmodel
+-(void)getUserStatus:(GetCaseInfo *)caseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
+        _qryUserStatusModel = model;
+        if ([model.flag isEqualToString:@"0000"]) {
+            
+            
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel getUserStatus:caseInfo];
+}
+
 
 
 - (void)didReceiveMemoryWarning {

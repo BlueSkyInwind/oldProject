@@ -44,6 +44,7 @@
 #import "QryUserStatusModel.h"
 #import "GetCaseInfo.h"
 #import "ExpressCreditRefuseView.h"
+#import "P2PViewController.h"
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
@@ -329,7 +330,7 @@
         return cell;
     }
     
-    if (indexPath.section == 1) {
+//    if (indexPath.section == 1) {
 //        ExpressCreditRefuseView *view = [[ExpressCreditRefuseView alloc]init];
 //        NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
 //        [view setContent:content];
@@ -342,7 +343,7 @@
 //            [weakSelf clickView:url];
 //        };
 //        return view;
-    }
+//    }
     if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
         
         HomeProductListProducts *product = _dataArray[indexPath.section-1];
@@ -511,11 +512,21 @@
             controller.qryUserStatusModel = _qryUserStatusModel;
             [self.navigationController pushViewController:controller animated:YES];
             
+        }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
+            
+            NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+            P2PViewController *p2pVC = [[P2PViewController alloc] init];
+            //        p2pVC.isOpenAccount = NO;
+            p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            [self.navigationController pushViewController:p2pVC animated:YES];
+            
         }else{
+        
             RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
             repayRequest.targetVC = self;
             [repayRequest repayRequest];
         }
+        
         
     } else {
         [self presentLogin:self];
