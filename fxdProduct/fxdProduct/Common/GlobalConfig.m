@@ -29,7 +29,7 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 //测试环境
 //http://192.168.14.14:9090/fxd-esb/esb/
 
-NSString * const _main_url  =   @"http://http://192.168.7.253:9292/fxd-esb/esb/";
+NSString * const _main_url  =   @"http://192.168.7.253:9292/fxd-esb/esb/";
 NSString * const _ValidESB_url  =   @"http://192.168.7.253:9292/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
 NSString * const _p2P_url = @"http://192.168.7.253:9292/fxd-esb/p2p/";

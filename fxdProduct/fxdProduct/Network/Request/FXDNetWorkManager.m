@@ -523,7 +523,7 @@
             //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
             
-            manager.requestSerializer.timeoutInterval = 120.0;
+            manager.requestSerializer.timeoutInterval = 180.0;
             DLog(@"%@",parameters);
             [manager POST:strURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
                 
