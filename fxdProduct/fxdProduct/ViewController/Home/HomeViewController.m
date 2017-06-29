@@ -84,12 +84,13 @@
 {
     [super viewDidAppear:animated];
     [UserDefaulInfo getUserInfoData];
-    
+    [self getApplyStatus];
+    [self getFxdCaseInfo];
     [self fatchRecord];
     [self fatchBanner];
     [self getHomeProductList];
-    [self getApplyStatus];
-    [self getFxdCaseInfo];
+    
+    
     //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
 - (void)viewWillDisappear:(BOOL)animated
