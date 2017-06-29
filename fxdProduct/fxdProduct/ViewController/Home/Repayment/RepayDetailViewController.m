@@ -118,11 +118,43 @@
     self.PayDetailTB.bounces=NO;
     [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     [self createHeaderView];
-    [self addBackItem];
+    if (_isP2pView) {
+        [self addBackItemRoot];
+    }else{
+    
+        [self addBackItem];
+    }
+    
     [self createNoneView];
     [self updateTotalAmount];
     
 }
+
+
+- (void)addBackItemRoot
+{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    
+    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [btn setImage:img forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, 0, 45, 44);
+    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    
+    //    修改距离,距离边缘的
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceItem.width = -15;
+    
+    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
+    //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
+}
+
+- (void)popBack
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 
 -(void)createHeaderView
 {

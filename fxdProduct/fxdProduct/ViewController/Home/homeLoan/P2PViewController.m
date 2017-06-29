@@ -219,6 +219,7 @@
                     
                     RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                     repayRequest.targetVC = self;
+                    repayRequest.isP2pView = YES;
                     [repayRequest repayRequest];
                     
                 }else{

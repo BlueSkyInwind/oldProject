@@ -144,8 +144,17 @@
             
         }else if (indexPath.row == 1) {
             if ([_model.platform_type isEqualToString:@"2"]) {
+                if ([_model.applyStatus isEqualToString:@"7"]||[_model.applyStatus isEqualToString:@"8"]) {
+                    
+                    [self getFxdCaseInfo];
+                }else{
                 
-                [self getFxdCaseInfo];
+                    RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+                    repayRequest.targetVC = self;
+                    [repayRequest repayRequest];
+                }
+                
+                
             }else{
             
                 RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];

@@ -13,5 +13,7 @@
 - (void)repayRequest;
 
 @property (nonatomic, strong) UIViewController *targetVC;
+@property (nonatomic,assign)BOOL isP2pView;
+
 
 @end
