@@ -28,13 +28,15 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 #elif FXD_Environment_Mode == 1
 
-
 //测试环境
-NSString * const _main_url  =   @"http://192.168.7.253:8081/fxd-esb/esb/";
-NSString * const _ValidESB_url  =   @"http://192.168.7.253:8081/fxd-esb/";
+//http://192.168.14.14:9090/fxd-esb/esb/
+NSString * const _main_url  =   @"http://192.168.7.253:9292/fxd-esb/esb/";
+NSString * const _ValidESB_url  =   @"http://192.168.7.253:9292/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
-NSString * const _p2P_url = @"http://192.168.7.253:8081/fxd-esb/p2p/";
+NSString * const _p2P_url = @"http://192.168.7.253:9292/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
+
+
 //新整合的地址
 //NSString * const _main_url  =   @"http://192.168.9.2:9191/fxd-esb/esb/";
 //NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
@@ -58,8 +60,6 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
 
 //芝麻信用测试地址
 //NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";
-
-
 
 //http://192.168.6.61  UAT
 //NSString * const _main_url  =   @"http://192.168.6.61/fxd-esb/esb/";
@@ -172,6 +172,9 @@ NSString * const     _BankNumCheck_url              =   @"saveAccountBankCard/sa
 //手机认证信息
 NSString * const     _Certification_url             =   @"customer/saveCustomerAuthMobile.jhtml";
 //NSString * const     _Certification_url             =   @"customer/saveCustomerAuthTcMobile.jhtml";
+
+//获取手机运营商天创
+NSString * const     _getTianChuangCertification_url          =   @"customer/saveCustomerAuthTcMobile.jhtml";
 
 //获取手机认证信息
 NSString * const     _getCustomerAuth_jhtml         =   @"customer/getCustomerAuth.jhtml";
@@ -429,6 +432,11 @@ NSString * const    _getBidStatus_url    =    @"hg/getBidStatus";
 
 //提款申请件记录
 NSString * const    _saveLoanCase_url    =    @"hg/saveLoanCase.jhtml";
+
+//量子互助
+NSString * const    _liangzihuzhu_url    =    @"http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767";
+
+
 
 #pragma Mark - 验证码类型
 

@@ -29,7 +29,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *AgreementImage;
 @property (weak, nonatomic) IBOutlet UILabel *AgreementLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *agreementTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *picCodeViewTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *moblieBtnTopConstraint;
 
+@property (weak, nonatomic) IBOutlet UIView *picCodeView;
+@property (weak, nonatomic) IBOutlet UITextField *picCodeTextField;
 
+@property (weak, nonatomic) IBOutlet UIButton *picCodeBtn;
 
 @end

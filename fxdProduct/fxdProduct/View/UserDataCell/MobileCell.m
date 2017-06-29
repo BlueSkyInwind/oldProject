@@ -15,6 +15,7 @@
     // Initialization code
     [Tool setCorner:self.passView borderColor:UI_MAIN_COLOR];
     [Tool setCorner:self.smsCodeView borderColor:UI_MAIN_COLOR];
+    [Tool setCorner:self.picCodeView borderColor:UI_MAIN_COLOR];
     
 }
 

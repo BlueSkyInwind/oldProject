@@ -18,4 +18,6 @@
 
 @property (nonatomic, copy) NSString *verifyStatus;
 
+@property (nonatomic, copy) NSString *phoneAuthChannel;
+
 @end

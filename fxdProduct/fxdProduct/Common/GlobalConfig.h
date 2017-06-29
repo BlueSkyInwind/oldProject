@@ -87,6 +87,8 @@ UIKIT_EXTERN NSString * const       _getCustomerAuth_jhtml;                  //�
 UIKIT_EXTERN NSString * const       _drawApply_url;                          //提款
 UIKIT_EXTERN NSString * const       _getFristRepaymentDate;                  //提款获取第一个还款日
 UIKIT_EXTERN NSString * const       _getMobileOpera_url;                     //获取手机运营商
+UIKIT_EXTERN NSString * const       _getTianChuangCertification_url;                     //手机号认证 (天创)
+
 UIKIT_EXTERN NSString * const       _getCustomerBase_url;                    //客户所有信息获取接口-点击我要借款
 UIKIT_EXTERN NSString * const       _saveCustomerBase_url;                   //客户基本信息保存接口
 UIKIT_EXTERN NSString * const       _getAllRegionList_url;                   //获取省市区全部数据接口
@@ -171,6 +173,9 @@ UIKIT_EXTERN NSString * const       _bosAcctActivateRet_url;                  //
 UIKIT_EXTERN NSString * const       _qryUserStatus_url;                  //用户状态查询
 UIKIT_EXTERN NSString * const       _getBidStatus_url;                  //用户标的状态查询
 UIKIT_EXTERN NSString * const       _saveLoanCase_url;                  //提款申请件记录
+UIKIT_EXTERN NSString * const       _liangzihuzhu_url;                  //量子互助
+
+
 
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码

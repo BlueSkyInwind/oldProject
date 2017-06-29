@@ -18,16 +18,34 @@
 #import "BaseNavigationViewController.h"
 #import "ExpressViewController.h"
 #import "FXDWebViewController.h"
+#import "AuthenticationViewModel.h"
+
+typedef enum {
+    
+    DeafultViewType,
+    VerifyCodeViewType,
+    PicCodeViewType,
+    verifyCodeAndPicCodeViewType,
+
+}CurrentDisplayType;
+
+
+
 @interface CertificationViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,LiveDeteDelgate>
 {
     JXLParse *_jxlParse;
     BOOL _captchaHidenDisplay;
+    BOOL _picCodeHidenDisplay;
     
     NSMutableArray <NSString *>*_mobileRequArr;
     ReturnMsgBaseClass *_mobileParse;
+    
+    UIImage * picCodeImage;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) BOOL btnStatus;
+
+@property (nonatomic,assign)CurrentDisplayType  currentDisplayType;
 
 @end
 
@@ -39,8 +57,9 @@
     self.automaticallyAdjustsScrollViewInsets = false;
     
     _captchaHidenDisplay = true;
-    _mobileRequArr = [NSMutableArray arrayWithObjects:@"",@"",@"",@"", nil];
-    
+    _picCodeHidenDisplay= true;
+    _currentDisplayType = DeafultViewType;
+    _mobileRequArr = [NSMutableArray arrayWithObjects:@"",@"",@"",@"",@"", nil];
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"第三方认证";
@@ -58,23 +77,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([FaceCell class]) bundle:nil] forCellReuseIdentifier:@"FaceCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MobileCell class]) bundle:nil] forCellReuseIdentifier:@"MobileCell"];
-    
-    //    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, 100)];
-    //    UIButton *saveBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    //    [footView addSubview:saveBtn];
-    //    [saveBtn setTitle:@"点击认证" forState:UIControlStateNormal];
-    //    [saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    //    [Tool setCorner:saveBtn borderColor:[UIColor clearColor]];
-    //    [saveBtn setBackgroundColor:UI_MAIN_COLOR];
-    //    [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.left.equalTo(@20);
-    //        make.right.equalTo(@(-20));
-    //        make.bottom.equalTo(@0);
-    //        make.height.equalTo(saveBtn.mas_width).multipliedBy(0.15);
-    //    }];
-    //    [saveBtn addTarget:self action:@selector(saveBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    //    self.tableView.tableFooterView = footView;
-    
+
 }
 
 //- (void)saveBtnClick
@@ -153,7 +156,9 @@
                 }
                 return cell;
             } else {
+                
                 MobileCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MobileCell"];
+                //协议
                 cell.AgreementImage.userInteractionEnabled = YES;
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementImage:)];
                 [cell.AgreementImage addGestureRecognizer:tap];
@@ -168,6 +173,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.passwordField.delegate = self;
                 cell.veritifyCodeField.delegate = self;
+                cell.picCodeTextField.delegate = self;
                 [Tool setCorner:cell.mobileBtn borderColor:[UIColor clearColor]];
                 if ([_isMobileAuth isEqualToString:@"0"]) {
                     if ([self isCanEnable]) {
@@ -184,31 +190,56 @@
                     [cell.mobileBtn setTitle:@"已认证" forState:UIControlStateNormal];
                     cell.mobileBtn.enabled = false;
                 }
+                //初始化UI
                 cell.mobileLabel.text = _mobileRequArr[0];
                 cell.operatorLabel.text = _mobileRequArr[1];
-                cell.smsCodeView.hidden = _captchaHidenDisplay;
                 cell.passwordField.text = _mobileRequArr[2];
                 cell.passwordField.tag = 1;
                 cell.veritifyCodeField.text = _mobileRequArr[3];
                 cell.veritifyCodeField.tag = 2;
                 [cell.mobileHelpBtn addTarget:self action:@selector(showMobileHelp) forControlEvents:UIControlEventTouchUpInside];
+                //图片验证码
+                cell.picCodeTextField.text = _mobileRequArr[4];
+                cell.picCodeTextField.tag = 3;
                 
-                [cell.mobileBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(@15);
-                    //                make.top.equalTo(cell.smsCodeView.mas_bottom).offset(14);
-                    make.bottom.equalTo(cell.contentView).offset(-5);
-                    make.right.equalTo(@(-15));
-                    make.height.equalTo(cell.mobileBtn.mas_width).multipliedBy(0.15);
-                }];
-                if (_captchaHidenDisplay) {
+                switch (_currentDisplayType) {
+                    case DeafultViewType:{
+                        cell.picCodeView.hidden = YES;
+                        cell.smsCodeView.hidden = YES;
+                        cell.agreementTopConstraint.constant = 5;
+                        cell.moblieBtnTopConstraint.constant = 30;
+                    }
+                        break;
+                    case VerifyCodeViewType:{
+                        cell.picCodeView.hidden = YES;
+                        cell.smsCodeView.hidden = NO;
+                        cell.agreementTopConstraint.constant = 51;
+                        cell.moblieBtnTopConstraint.constant = 76;
+                    }
+                        break;
+                    case PicCodeViewType:{
+                        
+                        cell.picCodeView.hidden = NO;
+                        cell.smsCodeView.hidden = YES;
+                        cell.picCodeViewTopConstraint.constant = 5;
+                        cell.agreementTopConstraint.constant = 51;
+                        cell.moblieBtnTopConstraint.constant = 76;
+                        [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
 
-                    cell.agreementTopConstraint.constant = 5;
-                }else{
-                
-                    cell.agreementTopConstraint.constant = 55;
+                    }
+                        break;
+                    case verifyCodeAndPicCodeViewType:{
+                        cell.picCodeView.hidden = NO;
+                        cell.smsCodeView.hidden = NO;
+                        cell.agreementTopConstraint.constant = 97;
+                        [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
 
-                    
+                    }
+                        break;
+                    default:
+                        break;
                 }
+                
                 return cell;
             }
         }
@@ -232,6 +263,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.passwordField.delegate = self;
             cell.veritifyCodeField.delegate = self;
+            cell.picCodeTextField.delegate = self;
             [Tool setCorner:cell.mobileBtn borderColor:[UIColor clearColor]];
             if ([_isMobileAuth isEqualToString:@"0"]) {
                 if ([self isCanEnable]) {
@@ -252,30 +284,52 @@
             
             cell.mobileLabel.text = _mobileRequArr[0];
             cell.operatorLabel.text = _mobileRequArr[1];
-            cell.smsCodeView.hidden = _captchaHidenDisplay;
             cell.passwordField.text = _mobileRequArr[2];
             cell.passwordField.tag = 1;
             cell.veritifyCodeField.text = _mobileRequArr[3];
             cell.veritifyCodeField.tag = 2;
             [cell.mobileHelpBtn addTarget:self action:@selector(showMobileHelp) forControlEvents:UIControlEventTouchUpInside];
-            [cell.mobileBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(@15);
-                //                make.top.equalTo(cell.smsCodeView.mas_bottom).offset(14);
-                make.bottom.equalTo(cell.contentView).offset(-5);
-                make.right.equalTo(@(-15));
-                make.height.equalTo(cell.mobileBtn.mas_width).multipliedBy(0.15);
-            }];
+            //图片验证码
+            cell.picCodeTextField.text = _mobileRequArr[4];
+            cell.picCodeTextField.tag = 3;
             
-            if (_captchaHidenDisplay) {
+            switch (_currentDisplayType) {
+                case DeafultViewType:{
+                    cell.picCodeView.hidden = YES;
+                    cell.smsCodeView.hidden = YES;
+                    cell.agreementTopConstraint.constant = 5;
+                    cell.moblieBtnTopConstraint.constant = 30;
+                }
+                    break;
+                case VerifyCodeViewType:{
+                    cell.picCodeView.hidden = YES;
+                    cell.smsCodeView.hidden = NO;
+                    cell.agreementTopConstraint.constant = 51;
+                    cell.moblieBtnTopConstraint.constant = 76;
+                }
+                    break;
+                case PicCodeViewType:{
+                    
+                    cell.picCodeView.hidden = NO;
+                    cell.smsCodeView.hidden = YES;
+                    cell.picCodeViewTopConstraint.constant = 5;
+                    cell.agreementTopConstraint.constant = 51;
+                    cell.moblieBtnTopConstraint.constant = 76;
+                    [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
 
-                cell.agreementTopConstraint.constant = 5;
+                }
+                    break;
+                case verifyCodeAndPicCodeViewType:{
+                    cell.picCodeView.hidden = NO;
+                    cell.smsCodeView.hidden = NO;
+                    cell.agreementTopConstraint.constant = 97;
+                    [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
 
-            }else{
-                
-                cell.agreementTopConstraint.constant = 55;
-
+                }
+                    break;
+                default:
+                    break;
             }
-            
             return cell;
         }
             break;
@@ -285,22 +339,35 @@
     
     return nil;
 }
-
+//认证button是否能点击
 - (BOOL)isCanEnable
 {
-    if (_captchaHidenDisplay) {
+    if (_currentDisplayType == DeafultViewType) {
         if (_mobileRequArr[2].length > 5) {
             return true;
         } else {
             return false;
         }
-    } else {
+    }else if (_currentDisplayType == VerifyCodeViewType){
         if (_mobileRequArr[2].length > 5 && _mobileRequArr[3].length > 3) {
             return true;
         } else {
             return false;
         }
+    }else if (_currentDisplayType == PicCodeViewType){
+        if (_mobileRequArr[2].length > 5 && _mobileRequArr[4].length > 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }else if (_currentDisplayType == verifyCodeAndPicCodeViewType){
+        if (_mobileRequArr[2].length > 5 && _mobileRequArr[4].length > 3 && _mobileRequArr[3].length > 3) {
+            return true;
+        } else {
+            return false;
+        }
     }
+    return false;
 }
 
 - (void)showMobileHelp
@@ -331,9 +398,17 @@
             [_mobileRequArr replaceObjectAtIndex:3 withObject:textField.text];
         }
     }
+    if (textField.tag == 3) {
+        if (textField.text.length < 3) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
+            [_mobileRequArr replaceObjectAtIndex:4 withObject:@""];
+        }else{
+            [_mobileRequArr replaceObjectAtIndex:4 withObject:textField.text];
+        }
+    }
     [_tableView reloadData];
 }
-
+#pragma mark - 认证Btn点击
 - (void)mobileCheck
 {
     if (!_btnStatus) {
@@ -349,26 +424,33 @@
                 } else {
                     [self saveMobileAuth:@"1"];
                 }
-                
             } else {
-                [self mibileAuth];
+                if ([self.phoneAuthChannel isEqualToString:@"JXL"]) {
+                   // 手机号认证  （聚立信）
+                    [self mibileAuth];
+                }else if([self.phoneAuthChannel isEqualToString:@"TC"]){
+                    //手机号认证  （天创）
+                    [self TCmobileAuth];
+                }else{
+                    [self mibileAuth];
+                }
             }
         }else {
             [self saveMobileAuth:@"1"];
         }
     }
-    
 }
 
+#pragma mark - 聚信立手机号认证
 - (void)mibileAuth
 {
     NSDictionary *paramDic;
     NSString *mobileStr = [_mobileRequArr[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if (_captchaHidenDisplay) {
+    if (_currentDisplayType == DeafultViewType) {
         paramDic = @{@"mobile_phone_":mobileStr,
                      @"service_password_":_mobileRequArr[2]
                      };
-    } else {
+    } else if(_currentDisplayType == VerifyCodeViewType){
         paramDic = @{@"mobile_phone_":mobileStr,
                      @"service_password_":_mobileRequArr[2],
                      @"verify_code_":_mobileRequArr[3]
@@ -387,7 +469,7 @@
             }else if ([_mobileParse.flag isEqualToString:@"0006"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
                 //                [dataListAll2 replaceObjectAtIndex:12 withObject:@"flag"];
-                _captchaHidenDisplay = false;//错误时 验证码显示
+                _currentDisplayType = VerifyCodeViewType;//错误时 验证码显示
                 [_tableView reloadData];
             }else{
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
@@ -398,13 +480,55 @@
         
     }];
 }
+#pragma mark - 天创手机号认证
+
+-(void)TCmobileAuth{
+    
+    NSString *mobileStr = [_mobileRequArr[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+    AuthenticationViewModel * authenticationViewModel = [[AuthenticationViewModel alloc]init];
+    [authenticationViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _mobileParse = [ReturnMsgBaseClass modelObjectWithDictionary:returnValue];
+        if ([_mobileParse.flag isEqualToString:@"0000"]){
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
+            [self saveMobileAuth:@"1"];
+        }else if ([_mobileParse.flag isEqualToString:@"0019"]){
+            //需要图片验证码
+            picCodeImage = [self returnPicCodeImage:[[returnValue objectForKey:@"result"] objectForKey:@"picContent"]];
+            _currentDisplayType = PicCodeViewType;
+            [_tableView reloadData];
+        }else if ([_mobileParse.flag isEqualToString:@"0020"]){
+            //需要图片和手机验证码
+            picCodeImage = [self returnPicCodeImage:[[returnValue objectForKey:@"result"] objectForKey:@"picContent"]];
+            _currentDisplayType = verifyCodeAndPicCodeViewType;
+            [_tableView reloadData];
+        }else if ([_mobileParse.flag isEqualToString:@"0006"]){
+            //需要手机验证码
+            _currentDisplayType = VerifyCodeViewType; //错误时 验证码显示
+            [_tableView reloadData];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
+            [self saveMobileAuth:@"-1"];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [authenticationViewModel TCphoneAuthenticationPhoneNum:mobileStr password:_mobileRequArr[2] smsCode:_mobileRequArr[3] picCode:_mobileRequArr[4]];
+}
+-(UIImage *)returnPicCodeImage:(NSString *)imageStr{
+    
+//    NSRange range = [imageStr rangeOfString:@","];
+//    NSString * str = [imageStr substringFromIndex:range.location + 1];
+    NSData *decodedImageData   = [[NSData alloc]initWithBase64EncodedString:imageStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    UIImage *  image = [UIImage imageWithData:decodedImageData];
+    return image;
+}
 
 - (void)saveMobileAuth:(NSString *)authCode
 {
     NSDictionary *dic = @{@"code":authCode};
     __weak CertificationViewController *weakself = self;
     //    __block NSMutableArray * blockDataList = dataListAll2;
-    
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_authMobilePhone_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         ReturnMsgBaseClass *returnParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
         if ([returnParse.flag isEqualToString:@"0000"]) {
@@ -416,16 +540,37 @@
         }else{
             //            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:returnParse.msg];
         }
-        
         //        if ([authCode isEqualToString:@"1"]) {
         //            [blockDataList replaceObjectAtIndex:13 withObject:@"2"];
         //        } else {
         //            [blockDataList replaceObjectAtIndex:13 withObject:@""];
         //        }
     } failure:^(EnumServerStatus status, id object) {
+        
     }];
 }
 
+#pragma mark - 获取手机运营商
+- (void)fatchMobileOpera
+{
+    //获取手机运营商
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getMobileOpera_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (status == Enum_SUCCESS) {
+            if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+                NSString *telNum = [[object objectForKey:@"ext"] objectForKey:@"mobile_phone_"];
+                [_mobileRequArr replaceObjectAtIndex:0 withObject:[self formatString:telNum]];
+                NSString *result = [object objectForKey:@"result"];
+                [_mobileRequArr replaceObjectAtIndex:1 withObject:result];
+                [_tableView reloadData];
+            }else{
+                DLog(@"获取失败");
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"运营商信息获取失败"];
+            }
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
 //- (void)mobileCheck
 //{
 //    if (_mobileRequArr[0].length<5 || _mobileRequArr[1].length < 3) {
@@ -485,7 +630,6 @@
     }
 }
 
-
 - (void)fatchJXLToken:(void(^)())finsh
 {
     NSDictionary *paramDic = @{@"basic_info":@{@"name":@"水世星",
@@ -542,7 +686,6 @@
         }
     }];
 }
-
 
 - (void)checkFaceDecetion
 {
@@ -674,26 +817,6 @@
     [self presentViewController:alertController animated:true completion:nil];
 }
 
-- (void)fatchMobileOpera
-{
-    //获取手机运营商
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getMobileOpera_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-                NSString *telNum = [[object objectForKey:@"ext"] objectForKey:@"mobile_phone_"];
-                [_mobileRequArr replaceObjectAtIndex:0 withObject:[self formatString:telNum]];
-                NSString *result = [object objectForKey:@"result"];
-                [_mobileRequArr replaceObjectAtIndex:1 withObject:result];
-                [_tableView reloadData];
-            }else{
-                DLog(@"获取失败");
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"运营商信息获取失败"];
-            }
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
 
 - (NSString *)formatString:(NSString *)str
 {

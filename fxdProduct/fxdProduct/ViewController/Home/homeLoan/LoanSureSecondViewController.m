@@ -154,8 +154,8 @@
     }];
 }
 
+
 -(void)postTelSecory:(NSDictionary *)dicParam{
-    
     
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_Certification_url] parameters:dicParam finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
