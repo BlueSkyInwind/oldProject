@@ -44,4 +44,6 @@ typedef NS_ENUM(NSUInteger, RepayType) {
 @property (nonatomic, strong) UserStateModel *model;
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 
+@property (nonatomic,assign)BOOL isP2pView;
+
 @end
