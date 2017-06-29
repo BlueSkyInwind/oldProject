@@ -29,7 +29,7 @@
 #import "P2PViewController.h"
 #import "LoanMoneyViewController.h"
 #import "HomeViewModel.h"
-#import "UserStateModel.h"
+
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     NSArray *titleAry;
@@ -152,7 +152,6 @@
                 repayRequest.targetVC = self;
                 [repayRequest repayRequest];
             }
-            
         }
         else if (indexPath.row == 2){
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
@@ -263,6 +262,8 @@
     [homeViewModel fetchUserState:nil];
     
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

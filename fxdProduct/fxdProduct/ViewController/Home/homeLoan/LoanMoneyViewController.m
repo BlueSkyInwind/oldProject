@@ -42,7 +42,6 @@
     Approval *_approvalModel;
     NSString *_cardNo;
     NSString *_cardBank;
-    NSTimer * _countdownTimer;
     BOOL _isFirst;
 }
 

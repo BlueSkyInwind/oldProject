@@ -139,7 +139,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     FXDWebViewController *webView = [[FXDWebViewController alloc] init];
     //http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767
     webView.urlStr = _liangzihuzhu_url;
-        [self.navigationController pushViewController:webView animated:true];
+    [self.navigationController pushViewController:webView animated:true];
 }
 
 - (void)loadView
