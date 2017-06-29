@@ -43,7 +43,6 @@
 #import "CheckViewModel.h"
 #import "QryUserStatusModel.h"
 #import "GetCaseInfo.h"
-#import "ExpressCreditRefuseView.h"
 #import "P2PViewController.h"
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 {
@@ -109,7 +108,6 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeProductCell class]) bundle:nil] forCellReuseIdentifier:@"HomeProductCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeBottomCell class]) bundle:nil] forCellReuseIdentifier:@"HomeBottomCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
-    [self.tableView registerClass:[ExpressCreditRefuseView class] forCellReuseIdentifier:@"ExpressCreditRefuseView"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -505,29 +503,36 @@
     
     if ([Utility sharedUtility].loginFlage) {
         //        [self checkState:nil];
-        if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
-            
-            LoanMoneyViewController *controller = [LoanMoneyViewController new];
-            controller.userStateModel = _model;
-            controller.qryUserStatusModel = _qryUserStatusModel;
-            [self.navigationController pushViewController:controller animated:YES];
-            
-        }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
-            
-            NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
-            P2PViewController *p2pVC = [[P2PViewController alloc] init];
-            //        p2pVC.isOpenAccount = NO;
-            p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-            [self.navigationController pushViewController:p2pVC animated:YES];
-            
+        if ([_model.platform_type isEqualToString:@"2"]) {
+            if ([_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
+                
+                LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                controller.userStateModel = _model;
+                controller.qryUserStatusModel = _qryUserStatusModel;
+                [self.navigationController pushViewController:controller animated:YES];
+                
+            }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
+                
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                P2PViewController *p2pVC = [[P2PViewController alloc] init];
+                //        p2pVC.isOpenAccount = NO;
+                p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                [self.navigationController pushViewController:p2pVC animated:YES];
+                
+            }else{
+                
+                RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+                repayRequest.targetVC = self;
+                [repayRequest repayRequest];
+            }
         }else{
         
             RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
             repayRequest.targetVC = self;
             [repayRequest repayRequest];
+            
         }
-        
-        
+       
     } else {
         [self presentLogin:self];
     }

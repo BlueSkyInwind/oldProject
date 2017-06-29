@@ -523,21 +523,27 @@
 
 -(void)sureBtnClick:(UIButton *)sender
 {
-    if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]) {
-        
-        NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
-        P2PViewController *p2pVC = [[P2PViewController alloc] init];
-        //        p2pVC.isOpenAccount = NO;
-        p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        [self.navigationController pushViewController:p2pVC animated:YES];
-        
+    if ([model.platform_type isEqualToString:@"2"]) {
+        if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]) {
+            
+            NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+            P2PViewController *p2pVC = [[P2PViewController alloc] init];
+            //        p2pVC.isOpenAccount = NO;
+            p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            [self.navigationController pushViewController:p2pVC animated:YES];
+            
+        }else{
+            
+            RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+            repayRequest.targetVC = self;
+            [repayRequest repayRequest];
+        }
     }else{
     
         RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
         repayRequest.targetVC = self;
         [repayRequest repayRequest];
     }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
