@@ -12,6 +12,8 @@
 
 @property (nonatomic, assign) BOOL showAll;
 
+@property (nonatomic, assign) NSString  * resultCode;
+
 @property (nonatomic, assign) BOOL liveEnabel;
 
 @property (nonatomic, copy) NSString *isMobileAuth;

@@ -94,7 +94,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
         [[DataBaseManager shareManager] dbOpen:userTableName];
     }
     
-    
     return YES;
 }
 /**

@@ -382,7 +382,6 @@ typedef enum {
     [self.navigationController pushViewController:controller animated:YES];
 
 }
-
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
@@ -416,31 +415,39 @@ typedef enum {
 - (void)mobileCheck
 {
     if (!_btnStatus) {
-        
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"需同意授权协议，才可进行认证"];
-    }else{
-    
-        if (_showAll) {
-            if (_liveEnabel) {
-                if ([_verifyStatus isEqualToString:@"1"]) {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先进行人脸识别"];
-                    return;
-                } else {
-                    [self saveMobileAuth:@"1"];
-                }
-            } else {
-                if ([self.phoneAuthChannel isEqualToString:@"JXL"]) {
-                   // 手机号认证  （聚立信）
-                    [self mibileAuth];
-                }else if([self.phoneAuthChannel isEqualToString:@"TC"]){
-                    //手机号认证  （天创）
-                    [self TCmobileAuth];
-                }else{
-                    [self mibileAuth];
-                }
-            }
-        }else {
+        return;
+    }
+    if (_showAll) {
+        [self liveDiscernAndmibileAuthJudge];
+    }else {
+        if ([self.resultCode isEqualToString:@"1"]) {
             [self saveMobileAuth:@"1"];
+        }else{
+            [self liveDiscernAndmibileAuthJudge];
+        }
+    }
+}
+/**
+ 活体认证，与手机运营商认证流程
+ */
+-(void)liveDiscernAndmibileAuthJudge{
+    if (_liveEnabel) {
+        if ([_verifyStatus isEqualToString:@"1"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先进行人脸识别"];
+            return;
+        } else {
+            [self saveMobileAuth:@"1"];
+        }
+    } else {
+        if ([self.phoneAuthChannel isEqualToString:@"JXL"]) {
+            // 手机号认证  （聚立信）
+            [self mibileAuth];
+        }else if([self.phoneAuthChannel isEqualToString:@"TC"]){
+            //手机号认证  （天创）
+            [self TCmobileAuth];
+        }else{
+            [self mibileAuth];
         }
     }
 }

@@ -585,12 +585,14 @@
                     CertificationViewController *certificationVC = [[CertificationViewController alloc] init];
                     certificationVC.phoneAuthChannel = _phoneAuthChannel;
                     certificationVC.isMobileAuth = _isMobileAuth;
+                    certificationVC.resultCode = _resultCode;
                     if (custom_baseInfo.result.verifyStatus == 2) {
                         certificationVC.liveEnabel = false;
                     } else {
                         certificationVC.liveEnabel = true;
                         certificationVC.verifyStatus = [NSString stringWithFormat:@"%.0lf",custom_baseInfo.result.verifyStatus];
                     }
+                    //  只有为 0  条件为真 走第三方认证   否则非零只显示运营商认证
                     if ([_resultCode isEqualToString:@"0"]) {
                         certificationVC.showAll = true;
                     } else {

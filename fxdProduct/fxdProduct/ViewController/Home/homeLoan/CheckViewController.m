@@ -164,14 +164,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     self.navigationController.navigationBar.translucent = YES;
     if ([_userStateModel.platform_type isEqualToString:@"2"]) {
     
-      
         [self getFxdCaseInfo];
     }else{
     
         [self checkState];
     }
-    
-    
 //    [self getUserStatus];
 }
 
