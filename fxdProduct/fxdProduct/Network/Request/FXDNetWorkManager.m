@@ -273,6 +273,8 @@
         //            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
         //            return;
         //        } else {
+        MBProgressHUD *_waitView = [self loadingHUD];
+        [_waitView show:YES];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
         NSDictionary *paramDic = [NSDictionary dictionary];
         DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
@@ -312,6 +314,7 @@
                         LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                         BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                         [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
+                            [_waitView removeFromSuperview];
                         }];
                     }
                 }];
@@ -319,6 +322,7 @@
             NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
             NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
             NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            [_waitView removeFromSuperview];
             DLog(@"response json --- %@",jsonStr);
             //            [Tool dataToDictionary:responseObject]
             finished(Enum_SUCCESS,responseObject);
@@ -326,6 +330,7 @@
             failure(Enum_FAIL,error);
             DLog(@"error---%@",error.description);
             [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
+            [_waitView removeFromSuperview];
         }];
     }
 }
