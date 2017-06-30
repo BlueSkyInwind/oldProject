@@ -114,9 +114,7 @@
     } failure:^(EnumServerStatus status, id object) {
         
     }];
-    
 }
-
 #pragma mark  - 视图布局
 - (void)setNavQRRightBar {
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(qrClick)];
@@ -290,7 +288,6 @@
     if (_dataArray.count>0) {
         i=_dataArray.count+1;
     }else{
-        
         i=1;
     }
     
@@ -308,7 +305,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
- 
     HomeProductCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeProductCell"];
     cell.helpImage.hidden = true;
     
