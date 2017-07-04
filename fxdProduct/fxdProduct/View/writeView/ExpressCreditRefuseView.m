@@ -20,12 +20,23 @@
 }
 */
 
--(instancetype)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:frame];
-    if (self) {
-        
++ (instancetype)cellWithTableView:(UITableView *)tableView {
+         // NSLog(@"cellForRowAtIndexPath");
+        static NSString *identifier = @"status";
+        // 1.缓存中取
+        ExpressCreditRefuseView *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        // 2.创建
+        if (cell == nil) {
+                cell = [[ExpressCreditRefuseView alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            }
+        return cell;
+    }
+
+
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self configureView];
-        
     }
     return self;
 }
@@ -33,6 +44,48 @@
 -(void)configureView{
     
     __weak typeof(self) wekSelf = self;
+    
+    UIView *tipView = [[UIView alloc]init];
+    tipView.backgroundColor = [UIColor clearColor];
+    [self addSubview:tipView];
+    [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(wekSelf.mas_top).with.offset(10);
+        make.centerX.equalTo(wekSelf.mas_centerX);
+        make.height.equalTo(@20);
+        make.width.equalTo(@220);
+    }];
+    
+    UIImageView *tipImage = [[UIImageView alloc]init];
+    tipImage.image = [UIImage imageNamed:@""];
+    [tipView addSubview:tipImage];
+    [tipImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(tipView.mas_top).with.offset(5);
+        make.left.equalTo(tipView.mas_left).with.offset(10);
+    }];
+    
+    UILabel *tipLabel = [[UILabel alloc]init];
+    tipLabel.text = @"很抱歉，您的借款申请审核失败";
+    tipLabel.textColor = [UIColor redColor];
+    tipLabel.font = [UIFont systemFontOfSize:15];
+    [tipView addSubview:tipLabel];
+    [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(tipView.mas_top).with.offset(5);
+        make.left.equalTo(tipImage.mas_right).with.offset(10);
+        make.height.equalTo(@15);
+    }];
+    
+    
+    UIView *contentView = [[UIView alloc]init];
+    contentView.backgroundColor = [UIColor whiteColor];
+    contentView.layer.cornerRadius = 5.0;
+    [self addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(tipView.mas_bottom).with.offset(10);
+        make.left.equalTo(wekSelf.mas_left).with.offset(20);
+        make.right.equalTo(wekSelf.mas_right).with.offset(-20);
+        make.bottom.equalTo(wekSelf.mas_bottom).with.offset(-10);
+    }];
+    
     UILabel *refusedLabel = [[UILabel alloc]init];
     refusedLabel.text = @"为您匹配更合适平台，借款成功率提高80%";
     refusedLabel.textAlignment = NSTextAlignmentCenter;
@@ -41,13 +94,13 @@
     if (UI_IS_IPHONE5) {
         refusedLabel.font = [UIFont systemFontOfSize:13];
     }
-    [self addSubview:refusedLabel];
+    [contentView addSubview:refusedLabel];
     
     [refusedLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(wekSelf.mas_centerX);
-        make.left.equalTo(wekSelf.mas_left).with.offset(20);
-        make.top.equalTo(wekSelf.mas_top).with.offset(5);
-        make.right.equalTo(wekSelf.mas_right).with.offset(-20);
+        make.centerX.equalTo(contentView.mas_centerX);
+        make.left.equalTo(contentView.mas_left).with.offset(20);
+        make.top.equalTo(contentView.mas_top).with.offset(5);
+        make.right.equalTo(contentView.mas_right).with.offset(-20);
         make.height.equalTo(@30);
     }];
     
@@ -56,11 +109,11 @@
     firstView.tag = 101;
     UITapGestureRecognizer *firstTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickFirstView:)];
     [firstView addGestureRecognizer:firstTap];
-    [self addSubview:firstView];
+    [contentView addSubview:firstView];
     [firstView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(wekSelf.mas_top).with.offset(30);
-        make.left.equalTo(wekSelf.mas_left).with.offset(20);
-        make.right.equalTo(wekSelf.mas_right).with.offset(-20);
+        make.top.equalTo(contentView.mas_top).with.offset(30);
+        make.left.equalTo(contentView.mas_left).with.offset(20);
+        make.right.equalTo(contentView.mas_right).with.offset(-20);
         make.height.equalTo(@100);
     }];
     
@@ -134,11 +187,11 @@
     secondView.userInteractionEnabled = YES;
     UITapGestureRecognizer *secondGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickFirstView:)];
     [secondView addGestureRecognizer:secondGest];
-    [self addSubview:secondView];
+    [contentView addSubview:secondView];
     [secondView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(firstView.mas_bottom).with.offset(0);
-        make.left.equalTo(wekSelf.mas_left).with.offset(20);
-        make.right.equalTo(wekSelf.mas_right).with.offset(-20);
+        make.left.equalTo(contentView.mas_left).with.offset(20);
+        make.right.equalTo(contentView.mas_right).with.offset(-20);
         make.height.equalTo(@100);
         
     }];
@@ -213,19 +266,19 @@
     [self.jumpBtn setTitleColor:tipColor forState:UIControlStateNormal];
     self.jumpBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.jumpBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.jumpBtn];
+    [contentView addSubview:self.jumpBtn];
     [self.jumpBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(secondView.mas_bottom).with.offset(20);
-        make.centerX.equalTo(wekSelf.mas_centerX);
+        make.top.equalTo(secondView.mas_bottom).with.offset(10);
+        make.centerX.equalTo(contentView.mas_centerX);
         make.height.equalTo(@20);
         make.width.equalTo(@100);
     }];
     UIView *lineView = [[UIView alloc]init];
     lineView.backgroundColor = tipColor;
-    [self addSubview:lineView];
+    [contentView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(wekSelf.jumpBtn.mas_bottom).with.offset(2);
-        make.centerX.equalTo(wekSelf.mas_centerX);
+        make.centerX.equalTo(contentView.mas_centerX);
         make.height.equalTo(@2);
         make.width.equalTo(@100);
     }];

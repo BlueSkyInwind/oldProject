@@ -954,6 +954,7 @@
     }else if ([_userStatusModel.result.flg isEqualToString:@"6"]){//正常用户
 
         if (_repayType == RepayTypeOption) {
+            
             [self repaySure];
             
         } else {
@@ -964,7 +965,7 @@
     }
 }
 
-#pragma mark 弹出合规银行卡列表viewmodel
+#pragma mark 跳转到解绑银行卡页面
 -(void)gotoUnbundlingBank{
     
     UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];

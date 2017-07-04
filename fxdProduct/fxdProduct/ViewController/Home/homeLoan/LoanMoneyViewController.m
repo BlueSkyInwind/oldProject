@@ -42,7 +42,7 @@
     Approval *_approvalModel;
     NSString *_cardNo;
     NSString *_cardBank;
-    BOOL _isFirst;
+    BOOL _isFirst;//好评只弹出一次，再次刷新时，不弹对话框
 }
 
 @property (nonatomic, copy)NSString *platform;
@@ -521,10 +521,14 @@
     [self presentViewController:alertController animated:true completion:nil];
 }
 
+/**
+ 我要还款按钮
+ */
 -(void)sureBtnClick:(UIButton *)sender
 {
+    //platform_type 2、合规平台  0发薪贷平台
     if ([model.platform_type isEqualToString:@"2"]) {
-        if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]) {
+        if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]) {//待激活用户
             
             NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
             P2PViewController *p2pVC = [[P2PViewController alloc] init];
@@ -550,11 +554,13 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    //platform_type 2、合规平台  0发薪贷平台
     if ([_userStateModel.platform_type isEqualToString:@"2"]) {
-        
+        //查询用户状态
         [self getFxdCaseInfo];
     }else{
     
+        //发薪贷申请件状态查询
         [self checkStatus];
     }
     

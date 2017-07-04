@@ -35,8 +35,6 @@ typedef void(^ViewClick)(NSString* url);
 //贷嘛产品描述
 @property (nonatomic,strong)UIImageView *descSecondImage;
 
--(instancetype)initWithFrame:(CGRect)frame;
-
 @property (nonatomic,strong)UIButton *jumpBtn;
 
 @property (nonatomic,copy)JumpBtn jumpBtnClick;
@@ -45,5 +43,7 @@ typedef void(^ViewClick)(NSString* url);
 
 @property (nonatomic,strong)NSString *firstUrl;
 @property (nonatomic,strong)NSString *secondUrl;
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end
