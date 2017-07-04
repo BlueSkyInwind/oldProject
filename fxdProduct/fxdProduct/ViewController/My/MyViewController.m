@@ -143,9 +143,11 @@
             [self.navigationController pushViewController:userDataVC animated:true];
             
         }else if (indexPath.row == 1) {
+            //platform_type  2、合规   0、发薪贷
             if ([_model.platform_type isEqualToString:@"2"]) {
+                //applyStatus  7、8 待还款
                 if ([_model.applyStatus isEqualToString:@"7"]||[_model.applyStatus isEqualToString:@"8"]) {
-                    
+                    //查询用户状态
                     [self getFxdCaseInfo];
                 }else{
                 
@@ -223,13 +225,13 @@
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
             
-            if ([model.result.flg isEqualToString:@"3"]) {
+            if ([model.result.flg isEqualToString:@"3"]) {//待激活
                 NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 p2pVC.isRepay = YES;
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
                 [self.navigationController pushViewController:p2pVC animated:YES];
-            }else if ([model.result.flg isEqualToString:@"12"]){
+            }else if ([model.result.flg isEqualToString:@"12"]){//处理中
             
                 LoanMoneyViewController *controller = [LoanMoneyViewController new];
                 controller.userStateModel = _model;
@@ -252,6 +254,9 @@
     [complianceViewModel getUserStatus:caseInfo];
 }
 
+/**
+ 申请件状态查询
+ */
 -(void)getApplyStatus{
     
     HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];

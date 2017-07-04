@@ -161,6 +161,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
+    //platform_type  2、合规平台   0、发薪贷平台
     if ([_userStateModel.platform_type isEqualToString:@"2"]) {
     
         [self getFxdCaseInfo];
@@ -648,6 +649,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 - (void)getMoney
 {
+    //  platform_type  2、合规平台    0、发薪贷平台
     if([_userStateModel.platform_type isEqualToString:@"2"] || [_userStateModel.platform_type isEqualToString:@"0"]){
         if ([_userStateModel.platform_type isEqualToString:@"2"]) {
             [self integrationP2PUserState];
@@ -1350,10 +1352,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
         SaveLoanCaseModel *model = [SaveLoanCaseModel yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
-            if ([type isEqualToString:@"20"]) {
+            if ([type isEqualToString:@"20"]) {//未开户
                 //绑定银行卡
                 [self getBankListInfo];
-            }else if ([type isEqualToString:@"10"]){
+            }else if ([type isEqualToString:@"10"]){//待激活
             
                 NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];

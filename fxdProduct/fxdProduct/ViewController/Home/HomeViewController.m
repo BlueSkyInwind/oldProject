@@ -44,6 +44,7 @@
 #import "QryUserStatusModel.h"
 #import "GetCaseInfo.h"
 #import "P2PViewController.h"
+#import "ExpressCreditRefuseView.h"
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
@@ -263,6 +264,7 @@
     }else{
         i=2;
     }
+//    i = 3;
     return i;
 }
 
@@ -279,12 +281,19 @@
     }else{
         i=1;
     }
-    
     if (indexPath.section == 0) {
         return 30.f;
     } else {
         return (_k_h-0.5*_k_w-155)/i;
     }
+//    if (indexPath.section == 0) {
+//            return 30.f;
+//        } else if(indexPath.section == 1){
+//            return 330;
+//        }else{
+//        
+//            return 80;
+//        }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -296,7 +305,6 @@
 {
     HomeProductCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeProductCell"];
     cell.helpImage.hidden = true;
-    
     if (indexPath.section == 0) {
         CycleTextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CycleTextCell"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_cycleICON"]];
@@ -333,20 +341,7 @@
         return cell;
     }
     
-//    if (indexPath.section == 1) {
-//        ExpressCreditRefuseView *view = [[ExpressCreditRefuseView alloc]init];
-//        NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
-//        [view setContent:content];
-//        __weak typeof(self) weakSelf = self;
-//        view.jumpBtnClick = ^(UIButton *jumpBtn) {
-//            [weakSelf moreClick];
-//        };
-//        view.viewClick = ^(NSString *url){
-//    
-//            [weakSelf clickView:url];
-//        };
-//        return view;
-//    }
+    
     if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
         
         HomeProductListProducts *product = _dataArray[indexPath.section-1];
@@ -404,6 +399,42 @@
         [cell.repayRecordView addGestureRecognizer:gest];
         return cell;
     }
+
+//    if (indexPath.section == 1) {
+//        
+//        ExpressCreditRefuseView *cell = [ExpressCreditRefuseView cellWithTableView:tableView];
+//        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//        cell.selected = NO;
+//        cell.backgroundColor = [UIColor grayColor];
+//        NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
+//        [cell setContent:content];
+//        __weak typeof(self) weakSelf = self;
+//        cell.jumpBtnClick = ^(UIButton *jumpBtn) {
+//            [weakSelf moreClick];
+//        };
+//        cell.viewClick = ^(NSString *url){
+//            
+//            [weakSelf clickView:url];
+//        };
+//        return cell;
+//    }
+//    
+//    
+//    if (indexPath.section == 2) {
+//        HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];
+//        UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
+//        cell.payView.userInteractionEnabled = true;
+//        [cell.payView addGestureRecognizer:gestPay];
+//
+//        UITapGestureRecognizer *gestProcess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loanProcess)];
+//        cell.loanProcessView.userInteractionEnabled = true;
+//        [cell.loanProcessView addGestureRecognizer:gestProcess];
+//
+//        UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expense)];
+//        cell.repayRecordView.userInteractionEnabled = true;
+//        [cell.repayRecordView addGestureRecognizer:gest];
+//        return cell;
+//    }
     
     return cell;
 }
@@ -431,6 +462,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     
     if (indexPath.section>0&&_dataArray.count+1 !=indexPath.section) {
         
