@@ -528,8 +528,7 @@
                     controller.userStateModel = _model;
                     controller.qryUserStatusModel = _qryUserStatusModel;
                     [self.navigationController pushViewController:controller animated:YES];
-                    
-                }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
+                                     }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
                     
                     NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
                     P2PViewController *p2pVC = [[P2PViewController alloc] init];
@@ -542,6 +541,7 @@
                     RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                     repayRequest.targetVC = self;
                     [repayRequest repayRequest];
+                    
                 }
             }else{
             
@@ -555,8 +555,6 @@
             repayRequest.targetVC = self;
             [repayRequest repayRequest];
         }
-        
-       
     } else {
         [self presentLogin:self];
     }
@@ -572,7 +570,6 @@
 
 - (void)repayRecordClick
 {
-    
     if ([Utility sharedUtility].loginFlage) {
         RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
         [self.navigationController pushViewController:repayRecord animated:YES];
@@ -771,7 +768,6 @@
                         }else{
                             [self goCheckVC:_model productId:productId];
                         }
-
                     }
                         break;
                     case 13://已结清
@@ -915,7 +911,6 @@
         _qryUserStatusModel = model;
         if ([model.flag isEqualToString:@"0000"]) {
             
-
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }

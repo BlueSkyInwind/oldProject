@@ -315,14 +315,6 @@ NSString * const    _mediaReport_url            =    @"more/mediaReport.html";
 //首页广告
 NSString * const    _adv_url                    =    @"event/pop_up.jhtml";
 
-//平台合同列表
-NSString * const    _contractList_url           =    @"http/do.jhtml?router=contractService.contractList";
-
-//合同内容
-NSString * const    _contractStr_url            =    @"http/do.jhtml?router=contractService.contractStr";
-
-//P2P平台账单期供查询
-NSString * const    _querybillDetails_url       =    @"http/do.jhtml?router=prematurityService.querybillDetails";
 
 //协议内容获取接口
 NSString * const    _productProtocol_url        =    @"ProductProtocol/getProductProtocol.jhtml";
@@ -396,6 +388,16 @@ NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.
 //芝麻信用回调地址
 NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
 
+#pragma mark - 合规接口
+//P2P平台账单期供查询 （还款账单）
+NSString * const    _querybillDetails_url       =    @"http/do.jhtml?router=prematurityService.querybillDetails";
+
+//平台合同列表
+NSString * const    _contractList_url           =    @"http/do.jhtml?router=contractService.contractList";
+
+//合同内容
+NSString * const    _contractStr_url            =    @"http/do.jhtml?router=contractService.contractStr";
+
 //发送短信接口
 NSString * const    _sendSms_url    =    @"http/do.jhtml?router=sendSmsSHService.send";
 
@@ -411,14 +413,14 @@ NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsS
 //用户状态查询接口
 NSString * const    _accountHSService_url    =    @"http/do.jhtml?router=accountHSService.qryUserStatus";
 
-//主动还款接口
+//主动还款接口 （自动划扣）
 NSString * const    _paymentService_url    =    @"http/do.jhtml?router=activrePaymentService.activrePayment";
-
-//取现
-NSString * const    _cash_url    =    @"http/huifush/toCash.jhtml";
 
 //激活老账户
 NSString * const    _bosAcctActivate_url    =    @"http/huifush/toBosAcctActivate.jhtml";
+
+//取现
+NSString * const    _cash_url    =    @"http/huifush/toCash.jhtml";
 
 //标的状态查询接口
 NSString * const    _queryBidStatus_url    =    @"http/do.jhtml?router= BidsService.queryBidStatus";
@@ -426,18 +428,19 @@ NSString * const    _queryBidStatus_url    =    @"http/do.jhtml?router= BidsServ
 //激活老账户返回url
 NSString * const    _bosAcctActivateRet_url    =    @"https://h5.faxindai.com:8028/fxd-h5/page/case/app_toBosAcctActivate.html";
 
-//用户状态查询
+//用户状态查询   *
 NSString * const    _qryUserStatus_url    =    @"hg/qryUserStatus.jhtml";
 
 //用户标的状态查询
 NSString * const    _getBidStatus_url    =    @"hg/getBidStatus";
 
-//提款申请件记录
+//提款申请件记录 *
 NSString * const    _saveLoanCase_url    =    @"hg/saveLoanCase.jhtml";
+
+#pragma mark - 对外导流接口
 
 //量子互助
 NSString * const    _liangzihuzhu_url    =    @"http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767";
-
 
 
 #pragma Mark - 验证码类型
