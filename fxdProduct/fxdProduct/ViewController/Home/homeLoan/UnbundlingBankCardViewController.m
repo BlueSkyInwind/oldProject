@@ -14,7 +14,6 @@
 #import "UnbundlingBankCardViewModel.h"
 #import "CheckViewModel.h"
 @interface UnbundlingBankCardViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
-
 {
 
     NSString *_sms_seq;
@@ -40,8 +39,7 @@
     self.bankTable.dataSource = self;
     self.bankTable.separatorStyle = NO;
     [self.sureBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
-    
-    
+        
 }
 
 
@@ -51,15 +49,12 @@
     if ([_queryCardInfo.data.UsrCardInfolist.BankId isEqualToString:@""]) {
         return 3;
     }else{
-    
         return 4;
     }
-    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     
         LabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"abcef%ld",indexPath.row]];
         if (!cell) {
@@ -92,18 +87,19 @@
             cell.btnSecory.hidden = YES;
             cell.btn.hidden = YES;
             cell.textField.placeholder = @"手机号";
+            cell.textField.tag = 102;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
             if (_queryCardInfo.data.UsrCardInfolist.BindMobile!=nil) {
                 
                 cell.textField.enabled = NO;
                 cell.textField.text = _queryCardInfo.data.UsrCardInfolist.BindMobile;
                 _mobile = cell.textField.text;
+                
             }else{
                 
                 cell.textField.enabled = YES;
                 cell.textField.text = @"";
             }
-            
         }
         [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
         cell.selectionStyle  = UITableViewCellSelectionStyleNone;
@@ -142,6 +138,7 @@
             cell.btnSecory.hidden = YES;
             cell.btn.hidden = YES;
             cell.textField.placeholder = @"手机号";
+            cell.textField.tag = 102;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
             if (_queryCardInfo.data.UsrCardInfolist.BindMobile!=nil) {
                 
@@ -153,20 +150,22 @@
                 cell.textField.enabled = YES;
                 cell.textField.text = @"";
             }
-            
         }
         [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
         cell.selectionStyle  = UITableViewCellSelectionStyleNone;
         return cell;
     }
-    
-
     return nil;
 }
 
 #pragma mark  点击发送验证码
 -(void)senderBtn:(UIButton *)sender{
 
+    if (_mobile.length < 11 || ![Tool isMobileNumber:_mobile]) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效手机号！"];
+        return;
+    }
+    
     _backTimeBtn = sender;
     sender.userInteractionEnabled = NO;
     sender.alpha = 0.4;
@@ -192,6 +191,7 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"网络请求失败"];
         
     }];
+    
     [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"rebind" SmsType:@"O" Mobile:_mobile];
     
 }
@@ -216,7 +216,6 @@
     return 70.f;
 }
 
-
 #pragma mark 处理手机位数
 -(void)changeTextField:(UITextField *)textField{
 
@@ -227,7 +226,6 @@
         }
         _mobile = textField.text;
     }else if(textField.tag == 103){
-    
         _sms_code = textField.text;
     }
 }

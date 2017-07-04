@@ -34,7 +34,6 @@
     }];
 }
 
-
 -(void)bankCardsSHServiceParamArray:(NSMutableArray *)paramArray{
 
     BankCardsParamModel *bankCardsParamModel = [[BankCardsParamModel alloc]init];

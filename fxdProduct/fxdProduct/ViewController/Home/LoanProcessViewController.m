@@ -44,6 +44,7 @@
     [self createNoneView];
     
     [self nonFatch];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -138,7 +139,7 @@
             return 190;
         }
         
-//        return 260;
+        return 260;
         
     }else{
         return 0;
@@ -169,9 +170,38 @@
 //    self.expressView = [[ExpressCreditRefuseView alloc]initWithFrame:CGRectZero];
 //    NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
 //    [self.expressView setContent:content];
+//    __weak typeof(self) weakSelf = self;
+//    self.expressView.jumpBtnClick = ^(UIButton *jumpBtn) {
+//        [weakSelf moreClick];
+//    };
+//    self.expressView.viewClick = ^(NSString *url){
+//    
+//        [weakSelf clickView:url];
+//    };
 //    return self.expressView;
+    
 }
 
+/**
+ 点击view
+ */
+-(void)clickView:(NSString *)url{
+
+    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+    webVC.urlStr = url;
+    [self.navigationController pushViewController:webVC animated:true];
+    
+}
+
+/**
+ 点击更多
+ */
+-(void)moreClick{
+
+    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+    webVC.urlStr = @"http:www.baidu.com";
+    [self.navigationController pushViewController:webVC animated:true];
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LoanProcessCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LoanProcessCell"];

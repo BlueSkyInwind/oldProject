@@ -23,6 +23,12 @@
 #import "RepayListInfo.h"
 #import "RepayRequestManage.h"
 #import "UserDataViewController.h"
+#import "CheckViewModel.h"
+#import "GetCaseInfo.h"
+#import "QryUserStatusModel.h"
+#import "P2PViewController.h"
+#import "LoanMoneyViewController.h"
+#import "HomeViewModel.h"
 
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -44,7 +50,7 @@
     //    titleAry=@[@"个人资料",@"我要还款",@"优惠劵",@"借款记录",@"还款记录",@"我的银行卡"];
     titleAry=@[@"完善资料",@"我要还款",@"借款记录",@"我的红包",@"我的银行卡",@"邀请好友"];
     //  imgAry=@[@"6_my_icon_01",@"6_my_icon_02",@"6_my_icon_07",@"6_my_icon_03",@"6_my_icon_04",@"6_my_icon_05"];
-    imgAry=@[@"6_my_icon_01",@"6_my_icon_02",@"6_my_icon_03",@"6_my_icon_07",@"6_my_icon_05",@"6_my_icon_11"];
+ imgAry=@[@"6_my_icon_01",@"6_my_icon_02",@"6_my_icon_03",@"6_my_icon_07",@"6_my_icon_05",@"6_my_icon_11"];
     
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -55,6 +61,10 @@
     btn.frame=CGRectMake(100, 100, 120, 12);
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+
+    [self getApplyStatus];
+}
 #pragma mark - TableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -133,9 +143,24 @@
             [self.navigationController pushViewController:userDataVC animated:true];
             
         }else if (indexPath.row == 1) {
-            RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
-            repayRequest.targetVC = self;
-            [repayRequest repayRequest];
+            if ([_model.platform_type isEqualToString:@"2"]) {
+                if ([_model.applyStatus isEqualToString:@"7"]||[_model.applyStatus isEqualToString:@"8"]) {
+                    
+                    [self getFxdCaseInfo];
+                }else{
+                
+                    RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+                    repayRequest.targetVC = self;
+                    [repayRequest repayRequest];
+                }
+                
+                
+            }else{
+            
+                RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+                repayRequest.targetVC = self;
+                [repayRequest repayRequest];
+            }
         }
         else if (indexPath.row == 2){
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
@@ -170,6 +195,81 @@
     } failure:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     }];
+}
+
+#pragma mark 发标前查询进件
+-(void)getFxdCaseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
+        if ([caseInfo.flag isEqualToString:@"0000"]) {
+            
+            [self getUserStatus:caseInfo];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel getFXDCaseInfo];
+    
+}
+
+#pragma mark  fxd用户状态查询，viewmodel
+-(void)getUserStatus:(GetCaseInfo *)caseInfo{
+    
+    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
+        if ([model.flag isEqualToString:@"0000"]) {
+            
+            if ([model.result.flg isEqualToString:@"3"]) {
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                P2PViewController *p2pVC = [[P2PViewController alloc] init];
+                p2pVC.isRepay = YES;
+                p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                [self.navigationController pushViewController:p2pVC animated:YES];
+            }else if ([model.result.flg isEqualToString:@"12"]){
+            
+                LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                controller.userStateModel = _model;
+                controller.qryUserStatusModel = model;
+                [self.navigationController pushViewController:controller animated:YES];
+            }else{
+            
+                RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+                repayRequest.targetVC = self;
+                [repayRequest repayRequest];
+            
+            }
+            
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceViewModel getUserStatus:caseInfo];
+}
+
+-(void)getApplyStatus{
+    
+    HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
+    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        if([returnValue[@"flag"] isEqualToString:@"0000"])
+        {
+            _model = [UserStateModel yy_modelWithJSON:returnValue[@"result"]];
+        
+            
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [homeViewModel fetchUserState:nil];
+    
 }
 
 

@@ -18,8 +18,8 @@
 
 + (void)configDefaultShare
 {
-    [ShareSDK registerApp:@"d82769b95fe6"
-          activePlatforms:@[@(SSDKPlatformSubTypeWechatSession),
+    
+    [ShareSDK  registerActivePlatforms:@[@(SSDKPlatformSubTypeWechatSession),
                             @(SSDKPlatformSubTypeWechatTimeline),
                             @(SSDKPlatformTypeSinaWeibo),
                             @(SSDKPlatformTypeQQ),
@@ -59,7 +59,6 @@
                              break;
                      }
                  }];
-    
 }
 
 @end

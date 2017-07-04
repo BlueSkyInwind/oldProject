@@ -81,6 +81,7 @@
             } else {
                 RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
                 repayMent.product_id = _model.product_id;
+                repayMent.isP2pView = _isP2pView;
 //                _model.product_id;
                 [_targetVC.navigationController pushViewController:repayMent animated:YES];
             }
@@ -106,6 +107,7 @@
             for (Situations *situation in repayListInfo.result.situations) {
                 finalRepayAmount += situation.debt_total;
             }
+            repayMent.isP2pView = _isP2pView;
             repayMent.repayAmount = finalRepayAmount;
             repayMent.product_id = RapidLoan;
             //            repayMent.cellSelectArr = _cellSelectArr;

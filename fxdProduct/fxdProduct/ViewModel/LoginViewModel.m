@@ -40,7 +40,7 @@
         loginParamModel.last_login_from_ = PLATFORM;
         loginParamModel.last_login_ip_ = [[GetUserIP sharedUserIP] getIPAddress];
         loginParamModel.platform_type_ = PLATFORM;
-        loginParamModel.BSFIT_DEVICEID =fingerPrint;
+        loginParamModel.BSFIT_DEVICEID = fingerPrint;
 
     } else {
         

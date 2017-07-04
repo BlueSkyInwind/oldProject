@@ -43,6 +43,7 @@
 #import "CheckViewModel.h"
 #import "QryUserStatusModel.h"
 #import "GetCaseInfo.h"
+#import "P2PViewController.h"
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
@@ -83,11 +84,13 @@
 {
     [super viewDidAppear:animated];
     [UserDefaulInfo getUserInfoData];
-    
+    [self getApplyStatus];
+    [self getFxdCaseInfo];
     [self fatchRecord];
     [self fatchBanner];
     [self getHomeProductList];
-    [self getFxdCaseInfo];
+    
+    
     //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
 - (void)viewWillDisappear:(BOOL)animated
@@ -95,6 +98,22 @@
     //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     [super viewWillDisappear:animated];
     
+}
+
+-(void)getApplyStatus{
+    
+    [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_userState_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        
+        if([object[@"flag"] isEqualToString:@"0000"])
+        {
+            _model = [UserStateModel yy_modelWithJSON:object[@"result"]];
+            
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:object[@"msg"]];
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
 }
 #pragma mark  - 视图布局
 - (void)setNavQRRightBar {
@@ -107,6 +126,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeProductCell class]) bundle:nil] forCellReuseIdentifier:@"HomeProductCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeBottomCell class]) bundle:nil] forCellReuseIdentifier:@"HomeBottomCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -268,9 +288,9 @@
     if (_dataArray.count>0) {
         i=_dataArray.count+1;
     }else{
-        
         i=1;
     }
+    
     if (indexPath.section == 0) {
         return 30.f;
     } else {
@@ -285,7 +305,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
- 
     HomeProductCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeProductCell"];
     cell.helpImage.hidden = true;
     
@@ -325,6 +344,20 @@
         return cell;
     }
     
+//    if (indexPath.section == 1) {
+//        ExpressCreditRefuseView *view = [[ExpressCreditRefuseView alloc]init];
+//        NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
+//        [view setContent:content];
+//        __weak typeof(self) weakSelf = self;
+//        view.jumpBtnClick = ^(UIButton *jumpBtn) {
+//            [weakSelf moreClick];
+//        };
+//        view.viewClick = ^(NSString *url){
+//    
+//            [weakSelf clickView:url];
+//        };
+//        return view;
+//    }
     if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
         
         HomeProductListProducts *product = _dataArray[indexPath.section-1];
@@ -350,22 +383,15 @@
         cell.helpImage.userInteractionEnabled = true;
  
         if ([product.id_ isEqualToString:SalaryLoan]) {
-            
-//         cell.proLogoImage.image = [UIImage imageNamed:@"home_01"];
             cell.specialtyImage.image = [UIImage imageNamed:@"home_04"];
             UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highSeeExpenses)];
             [cell.helpImage addGestureRecognizer:gest];
             
         }else if([product.id_ isEqualToString:WhiteCollarLoan]){
-        
-//            cell.proLogoImage.image = [UIImage imageNamed:@"home10"];
-//            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
-//            [cell.helpImage addGestureRecognizer:gest];
             cell.specialtyImage.image = [UIImage imageNamed:@"home11"];
             
         }else{
             
-//         cell.proLogoImage.image = [UIImage imageNamed:@"home_02"];
             UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
             [cell.helpImage addGestureRecognizer:gest];
             cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
@@ -391,6 +417,27 @@
     }
     
     return cell;
+}
+
+/**
+ 点击view
+ */
+-(void)clickView:(NSString *)url{
+    
+    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+    webVC.urlStr = url;
+    [self.navigationController pushViewController:webVC animated:true];
+    
+}
+
+/**
+ 点击更多
+ */
+-(void)moreClick{
+    
+    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+    webVC.urlStr = @"http:www.baidu.com";
+    [self.navigationController pushViewController:webVC animated:true];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -472,19 +519,42 @@
     
     if ([Utility sharedUtility].loginFlage) {
         //        [self checkState:nil];
-        if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
+        if ([_model.platform_type isEqualToString:@"2"]) {
+            if ([_model.applyStatus isEqualToString:@"7"]||[_model.applyStatus isEqualToString:@"8"]) {
+               
+                if ([_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
+                    
+                    LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                    controller.userStateModel = _model;
+                    controller.qryUserStatusModel = _qryUserStatusModel;
+                    [self.navigationController pushViewController:controller animated:YES];
+                                     }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
+                    
+                    NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                    P2PViewController *p2pVC = [[P2PViewController alloc] init];
+                    p2pVC.isRepay = YES;
+                    p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                    [self.navigationController pushViewController:p2pVC animated:YES];
+                    
+                }else{
+                    
+                    RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+                    repayRequest.targetVC = self;
+                    [repayRequest repayRequest];
+                    
+                }
+            }else{
             
-            LoanMoneyViewController *controller = [LoanMoneyViewController new];
-            controller.userStateModel = _model;
-            controller.qryUserStatusModel = _qryUserStatusModel;
-            [self.navigationController pushViewController:controller animated:YES];
-            
+                RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+                repayRequest.targetVC = self;
+                [repayRequest repayRequest];
+            }
         }else{
+        
             RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
             repayRequest.targetVC = self;
             [repayRequest repayRequest];
         }
-        
     } else {
         [self presentLogin:self];
     }
@@ -500,7 +570,6 @@
 
 - (void)repayRecordClick
 {
-    
     if ([Utility sharedUtility].loginFlage) {
         RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
         [self.navigationController pushViewController:repayRecord animated:YES];
@@ -699,7 +768,6 @@
                         }else{
                             [self goCheckVC:_model productId:productId];
                         }
-
                     }
                         break;
                     case 13://已结清
@@ -843,7 +911,6 @@
         _qryUserStatusModel = model;
         if ([model.flag isEqualToString:@"0000"]) {
             
-
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
