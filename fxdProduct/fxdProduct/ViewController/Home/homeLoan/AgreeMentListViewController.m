@@ -73,7 +73,7 @@ NSString * const Identifier = @"cell";
                      @"status_":@"2"};
     }
    
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_contractStr_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_contractStr_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if ([[object objectForKey:@"appcode"] isEqualToString:@"1"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];

@@ -115,7 +115,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self listenForResult];
     
     
-    
     if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
         for (int i = 1; i < 2; i++) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
@@ -1212,7 +1211,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 }
 
-
 #pragma  mark - 白领贷拒绝导流
 -(void)clickApplyImmediate{
 
@@ -1233,7 +1231,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             checkFalse.nameLabel.text = rateParse.result.name_;
             checkFalse.quotaLabel.text = [NSString stringWithFormat:@"%ld-%ld元",rateParse.result.principal_bottom_,rateParse.result.principal_top_];
             checkFalse.termLabel.text = [NSString stringWithFormat:@"%ld-%ld%@",rateParse.result.staging_bottom_,rateParse.result.staging_top_,rateParse.result.remark_];
-            
             
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
@@ -1454,7 +1451,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [self saveLoanCase:@"30" caseInfo:_caseInfo];
 
             }];
-            
         };
         
         payVC.changeBankBlock = ^(){

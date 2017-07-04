@@ -22,7 +22,7 @@
     sendSmsParamModel.from_mobile_ = [Utility sharedUtility].userInfo.userMobilePhone;
     
     NSDictionary * paramDic  = [sendSmsParamModel toDictionary];
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {
             self.returnBlock(object);
@@ -46,7 +46,7 @@
     bankCardsParamModel.sms_seq_ = paramArray[6];
     bankCardsParamModel.trade_type_ = @"REBIND";
     NSDictionary * paramDic  = [bankCardsParamModel toDictionary];
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {
             self.returnBlock(object);

@@ -30,11 +30,14 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 //http://192.168.14.14:9090/fxd-esb/esb/    张鹏
 //http://192.168.15.116:8055/fxd-esb    俊杰
 
-NSString * const _main_url  =   @"http://192.168.7.253:9292/fxd-esb/esb/";
-NSString * const _ValidESB_url  =   @"http://192.168.7.253:9292/fxd-esb/";
+
+NSString * const _main_url  =   @"http://192.168.7.140:8001/fxd-esb/esb/";
+NSString * const _ValidESB_url  =   @"http://192.168.7.140:8001/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
-NSString * const _p2P_url = @"http://192.168.7.253:9292/fxd-esb/p2p/";
+//NSString * const _p2P_url = @"http://192.168.7.253:9292/fxd-esb/p2p/";
+NSString * const _p2P_url = @"http://192.168.7.140:8001/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
+
 
 //NSString * const _main_url  =   @"http://192.168.7.253:8081/fxd-esb/esb/";
 //NSString * const _ValidESB_url  =   @"http://192.168.7.253:8081/fxd-esb/";
@@ -315,7 +318,6 @@ NSString * const    _mediaReport_url            =    @"more/mediaReport.html";
 //首页广告
 NSString * const    _adv_url                    =    @"event/pop_up.jhtml";
 
-
 //协议内容获取接口
 NSString * const    _productProtocol_url        =    @"ProductProtocol/getProductProtocol.jhtml";
 
@@ -389,35 +391,41 @@ NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.
 NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
 
 #pragma mark - 合规接口
-//P2P平台账单期供查询 （还款账单）
-NSString * const    _querybillDetails_url       =    @"http/do.jhtml?router=prematurityService.querybillDetails";
-
-//平台合同列表
-NSString * const    _contractList_url           =    @"http/do.jhtml?router=contractService.contractList";
-
-//合同内容
-NSString * const    _contractStr_url            =    @"http/do.jhtml?router=contractService.contractStr";
-
-//发送短信接口
-NSString * const    _sendSms_url    =    @"http/do.jhtml?router=sendSmsSHService.send";
-
-//换绑银行卡
-NSString * const    _bankCards_url    =    @"http/do.jhtml?router=bankCardsSHService.quickChangeBindingCard";
 
 //用户开户接口
 NSString * const    _huifu_url    =    @"http/huifush/toRegister.jhtml";
+//激活老账户
+NSString * const    _bosAcctActivate_url    =    @"http/huifush/toBosAcctActivate.jhtml";
 
-//银行卡查询接口
-NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsSHService.queryCardInfo";
-
-//用户状态查询接口
-NSString * const    _accountHSService_url    =    @"http/do.jhtml?router=accountHSService.qryUserStatus";
+//P2P平台账单期供查询 （还款账单）
+NSString * const    _querybillDetails_url       =    @"http/do.jhtml?router=prematurityService.querybillDetails";
 
 //主动还款接口 （自动划扣）
 NSString * const    _paymentService_url    =    @"http/do.jhtml?router=activrePaymentService.activrePayment";
 
-//激活老账户
-NSString * const    _bosAcctActivate_url    =    @"http/huifush/toBosAcctActivate.jhtml";
+//平台合同列表
+//NSString * const    _contractList_url           =    @"http/do.jhtml?router=contractService.contractList";
+NSString * const    _contractList_url           =    @"hg/contractList.jhtml";
+
+//合同内容
+//NSString * const    _contractStr_url            =    @"http/do.jhtml?router=contractService.contractStr";
+NSString * const    _contractStr_url            =    @"hg/contractStr.jhtml";
+
+//发送短信接口
+//NSString * const    _sendSms_url    =    @"http/do.jhtml?router=sendSmsSHService.send";
+NSString * const    _sendSms_url    =    @"http/do.jhtml?router=sendSmsSHService.send";
+
+//换绑银行卡
+//NSString * const    _bankCards_url    =    @"http/do.jhtml?router=bankCardsSHService.quickChangeBindingCard";
+NSString * const    _bankCards_url    =    @"hg/quickChangeBindingCard.jhtml";
+
+//银行卡查询接口
+//NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsSHService.queryCardInfo";
+NSString * const    _queryCardInfo_url    =    @"hg/queryCardInfo.jhtml";
+
+
+//用户状态查询接口
+NSString * const    _accountHSService_url    =    @"http/do.jhtml?router=accountHSService.qryUserStatus";
 
 //取现
 NSString * const    _cash_url    =    @"http/huifush/toCash.jhtml";

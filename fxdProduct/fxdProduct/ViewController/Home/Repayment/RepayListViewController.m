@@ -107,7 +107,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
  */
 -(void)checkState{
     
-    
     switch ([self.userStateParse.applyStatus intValue]) {
         case 7:    //正常放款->开始有记录
         case 8:    //逾期
@@ -118,7 +117,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             if ([_userStateParse.platform_type isEqualToString:@"2"]) {
                 [self fatchP2PBillDetail];
             }
-            
             break;
         default:
             _repayStateFlag=@100;
@@ -143,7 +141,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                         
                         if (billList.status_ == 4) {
                             _currenPeriod = billList.cur_stage_no_;
-                            
                         }
                         _clickMax++;
                         [_cellSelectArr addObject:[NSNumber numberWithBool:true]];
