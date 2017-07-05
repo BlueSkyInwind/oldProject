@@ -45,5 +45,7 @@ typedef void(^ViewClick)(NSString* url);
 @property (nonatomic,strong)NSString *secondUrl;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
+@property (nonatomic,strong)NSArray *data;
+
 
 @end

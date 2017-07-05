@@ -11,6 +11,11 @@
 #define nameColor rgb(26,26,26)
 #define quotaColor rgb(77,77,77)
 #define termColor rgb(102,102,102)
+
+@interface ExpressCreditRefuseView ()
+@property (strong, nonatomic) UITableView *tableView;
+@end
+
 @implementation ExpressCreditRefuseView
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -22,7 +27,7 @@
 
 + (instancetype)cellWithTableView:(UITableView *)tableView {
          // NSLog(@"cellForRowAtIndexPath");
-        static NSString *identifier = @"status";
+        static NSString *identifier = @"cell";
         // 1.缓存中取
         ExpressCreditRefuseView *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         // 2.创建
@@ -282,8 +287,13 @@
         make.height.equalTo(@2);
         make.width.equalTo(@100);
     }];
-    
 }
+
+
+
+
+
+
 
 -(void)clickFirstView:(UITapGestureRecognizer *)gest{
 
@@ -339,6 +349,16 @@
     self.descSecondImage.image = [UIImage imageNamed:@"tuoyuan_2"];
     self.firstUrl = @"http:www.baidu.com";
     self.secondUrl = @"http:www.taobao.com";
+    
+}
+
+-(void)setData:(NSArray *)data{
+
+    [self settingData:data];
+}
+
+-(void)settingData:(NSArray *)data{
+
     
 }
 @end

@@ -1135,6 +1135,8 @@
 		CC3A7F321ED52A3200F30289 /* ChangeBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3A7F2F1ED52A3200F30289 /* ChangeBankCardViewController.m */; };
 		CC3A7F331ED52A3200F30289 /* ChangeBankCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC3A7F301ED52A3200F30289 /* ChangeBankCardViewController.xib */; };
 		CC3A7F341ED52A3200F30289 /* ChangeBankCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC3A7F301ED52A3200F30289 /* ChangeBankCardViewController.xib */; };
+		CC4271E61F0C8ED7004904B8 /* HomeRefuseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4271E51F0C8ED7004904B8 /* HomeRefuseCell.m */; };
+		CC4271E71F0C8ED7004904B8 /* HomeRefuseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4271E51F0C8ED7004904B8 /* HomeRefuseCell.m */; };
 		CC5D70271ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
 		CC5D70281ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
 		CC5D702C1ED4405500A074AF /* PaymentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */; };
@@ -2245,6 +2247,8 @@
 		CC3A7F2E1ED52A3200F30289 /* ChangeBankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeBankCardViewController.h; sourceTree = "<group>"; };
 		CC3A7F2F1ED52A3200F30289 /* ChangeBankCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeBankCardViewController.m; sourceTree = "<group>"; };
 		CC3A7F301ED52A3200F30289 /* ChangeBankCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeBankCardViewController.xib; sourceTree = "<group>"; };
+		CC4271E41F0C8ED7004904B8 /* HomeRefuseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeRefuseCell.h; sourceTree = "<group>"; };
+		CC4271E51F0C8ED7004904B8 /* HomeRefuseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeRefuseCell.m; sourceTree = "<group>"; };
 		CC5D70251ED4400600A074AF /* CashModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashModel.h; sourceTree = "<group>"; };
 		CC5D70261ED4400600A074AF /* CashModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashModel.m; sourceTree = "<group>"; };
 		CC5D702A1ED4405500A074AF /* PaymentServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentServiceModel.h; sourceTree = "<group>"; };
@@ -2620,6 +2624,8 @@
 				CC31979F1ED929F10083F263 /* WhiteRefuseView.xib */,
 				CCC344FA1F03833E006D0F83 /* JRefuseView.h */,
 				CCC344FB1F03833E006D0F83 /* JRefuseView.m */,
+				CC4271E41F0C8ED7004904B8 /* HomeRefuseCell.h */,
+				CC4271E51F0C8ED7004904B8 /* HomeRefuseCell.m */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -5744,6 +5750,7 @@
 				63E5C75E1D4AEA8F009A633C /* UserCardResult.m in Sources */,
 				63E640C21DCACF2300783E9D /* ReplenishViewController.m in Sources */,
 				0F099BC91C1E4CF700D97BAE /* CircleView.m in Sources */,
+				CC4271E61F0C8ED7004904B8 /* HomeRefuseCell.m in Sources */,
 				63811B0F1B8EDE17008F605B /* UserInfoViewController.m in Sources */,
 				6379641F1CAD1BE0002A5910 /* LivenessSelfie.m in Sources */,
 				63AD1D1A1BFC1AA400807877 /* MLBlackTransition.m in Sources */,
@@ -6193,6 +6200,7 @@
 				CC0DFA371EA5B1090024841A /* CycleTextCell.m in Sources */,
 				CC0DFA381EA5B1090024841A /* P2PAccountInfo.m in Sources */,
 				CC0DFA391EA5B1090024841A /* ViewModelClass.m in Sources */,
+				CC4271E71F0C8ED7004904B8 /* HomeRefuseCell.m in Sources */,
 				CC0DFA3A1EA5B1090024841A /* UserCardResult.m in Sources */,
 				CC0DFA3B1EA5B1090024841A /* ReplenishViewController.m in Sources */,
 				CC0DFA3C1EA5B1090024841A /* CircleView.m in Sources */,

@@ -165,7 +165,7 @@
     }];
     
     RACSignal *validVerCodeSignal = [self.verCodeText.rac_textSignal map:^id(NSString *value) {
-        return @(value.length >5);
+        return @(value.length >3);
     }];
     
     RACSignal *validPassWordSignal = [self.passText.rac_textSignal map:^id(NSString *value) {
@@ -322,7 +322,7 @@
         
         if ([_phoneNumText.text length] != 11) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号!"];
-        }else if ([_verCodeText.text length] != 6){
+        }else if ([_verCodeText.text length] != 4){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码!"];
         }else if ([_passText.text length] < 6 || [_passText.text length] > 16){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入新设置密码!"];

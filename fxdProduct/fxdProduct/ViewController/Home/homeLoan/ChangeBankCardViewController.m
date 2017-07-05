@@ -234,9 +234,9 @@
         [dataListAll3 replaceObjectAtIndex:2 withObject:textField.text];
     }else if (textField.tag == 103){
 
-        if (textField.text.length >6) {
+        if (textField.text.length >4) {
             
-            textField.text = [textField.text substringToIndex:6];
+            textField.text = [textField.text substringToIndex:4];
         }
     
         [dataListAll3 replaceObjectAtIndex:3 withObject:textField.text];
@@ -294,7 +294,7 @@
     if (textField.tag == 103) {
         NSString *stringlength = [NSString stringWithFormat:@"%@%@",textField.text,string];
 
-        if ([stringlength length] > 6) {
+        if ([stringlength length] > 4) {
 
             return NO;
         }
@@ -330,7 +330,7 @@
     }
     if (textField.tag == 103)
     {
-        if ([textField.text length] !=6) {
+        if ([textField.text length] !=4) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
             //                [dataColorAll3 replaceObjectAtIndex:3 withObject:redColor];
         }else{

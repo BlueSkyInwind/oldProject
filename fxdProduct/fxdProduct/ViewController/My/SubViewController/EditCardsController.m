@@ -329,7 +329,7 @@
     else if(textField.tag==1003)
     {
         NSString *stringLength=[NSString stringWithFormat:@"%@%@",textField.text,string];
-        if ([stringLength length]>6) {
+        if ([stringLength length]>4) {
             self.verCode=textField.text;
             return NO;
         }

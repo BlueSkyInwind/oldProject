@@ -45,7 +45,8 @@
 #import "GetCaseInfo.h"
 #import "P2PViewController.h"
 #import "ExpressCreditRefuseView.h"
-@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
+#import "HomeRefuseCell.h"
+@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,HomeRefuseCellDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
     LoanRecordParse *_loanRecordParse;
@@ -128,6 +129,10 @@
     _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
     
     self.tableView.tableHeaderView = _sdView;
+    
+    
+    
+    
 }
 
 
@@ -288,11 +293,11 @@
     }
 //    if (indexPath.section == 0) {
 //            return 30.f;
-//        } else if(indexPath.section == 1){
-//            return 330;
+//        } else if(indexPath.section == 2){
+//            return 70;
 //        }else{
 //        
-//            return 80;
+//            return (_k_h-0.5*_k_w-215);
 //        }
 }
 
@@ -402,20 +407,21 @@
 
 //    if (indexPath.section == 1) {
 //        
-//        ExpressCreditRefuseView *cell = [ExpressCreditRefuseView cellWithTableView:tableView];
+//        HomeRefuseCell *cell = [HomeRefuseCell cellWithTableView:tableView];
 //        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 //        cell.selected = NO;
 //        cell.backgroundColor = [UIColor grayColor];
-//        NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
-//        [cell setContent:content];
-//        __weak typeof(self) weakSelf = self;
-//        cell.jumpBtnClick = ^(UIButton *jumpBtn) {
-//            [weakSelf moreClick];
-//        };
-//        cell.viewClick = ^(NSString *url){
-//            
-//            [weakSelf clickView:url];
-//        };
+//        cell.delegate = self;
+////        NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
+////        [cell setContent:content];
+////        __weak typeof(self) weakSelf = self;
+////        cell.jumpBtnClick = ^(UIButton *jumpBtn) {
+////            [weakSelf moreClick];
+////        };
+////        cell.viewClick = ^(NSString *url){
+////            
+////            [weakSelf clickView:url];
+////        };
 //        return cell;
 //    }
 //    

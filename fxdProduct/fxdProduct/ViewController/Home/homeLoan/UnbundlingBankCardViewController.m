@@ -81,6 +81,7 @@
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
             cell.textField.placeholder = @"验证码";
             cell.textField.enabled = YES;
+            cell.textField.tag = 103;
             
         }else if (indexPath.row == 1){
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
@@ -132,6 +133,7 @@
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
             cell.textField.placeholder = @"验证码";
             cell.textField.enabled = YES;
+            cell.textField.tag = 103;
             
         }else if (indexPath.row == 2){
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
@@ -238,7 +240,7 @@
     {
         
         NSLog(@"===%@",textField.text);
-        if ([textField.text length] !=6) {
+        if ([textField.text length] !=4) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
             
         }else{
@@ -251,7 +253,7 @@
 #pragma mark 点击确认按钮
 -(void)clickBtn{
 
-    if (_sms_code.length <6) {
+    if (_sms_code.length <4) {
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请输入验证码"];
     }else{
     

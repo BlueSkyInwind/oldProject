@@ -63,8 +63,8 @@
         }
     }else if (textField == self.codeField){
     
-        if (textField.text.length>6) {
-            textField.text = [textField.text substringToIndex:6];
+        if (textField.text.length>4) {
+            textField.text = [textField.text substringToIndex:4];
         }
     }
 }
@@ -140,7 +140,7 @@
     } else {
         if ([_phoneNumField.text length] != 11) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号!"];
-        }else if ([_codeField.text length] != 6){
+        }else if ([_codeField.text length] != 4){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码!"];
         }else if ([_passField.text length] < 6 || [_passField.text length] > 16){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的新设置密码!"];
@@ -198,7 +198,7 @@
     
     if (textField.tag == 100) {
         NSString *stringLength=[NSString stringWithFormat:@"%@%@",textField.text,string];
-        if ([stringLength length]>6) {
+        if ([stringLength length]>4) {
             return NO;
         }
     }
