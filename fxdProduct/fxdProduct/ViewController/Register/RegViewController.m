@@ -322,7 +322,7 @@
         
         if ([_phoneNumText.text length] != 11) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号!"];
-        }else if ([_verCodeText.text length] != 4){
+        }else if ([_verCodeText.text length] != 4 || _verCodeText.text.length !=6){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码!"];
         }else if ([_passText.text length] < 6 || [_passText.text length] > 16){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入新设置密码!"];

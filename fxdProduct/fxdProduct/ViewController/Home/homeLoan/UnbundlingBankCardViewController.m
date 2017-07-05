@@ -240,7 +240,7 @@
     {
         
         NSLog(@"===%@",textField.text);
-        if ([textField.text length] !=4) {
+        if ([textField.text length] !=4 || textField.text.length !=6) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
             
         }else{
