@@ -86,7 +86,10 @@
 {
     [super viewDidAppear:animated];
     [UserDefaulInfo getUserInfoData];
-    [self getApplyStatus];
+    //获取进件状态
+    [self getApplyStatus:^(BOOL isSuccess, UserStateModel *resultModel) {
+    }];
+    
     [self getFxdCaseInfo];
     [self fatchRecord];
     [self fatchBanner];
@@ -102,21 +105,7 @@
     
 }
 
--(void)getApplyStatus{
-    
-    [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_userState_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        
-        if([object[@"flag"] isEqualToString:@"0000"])
-        {
-            _model = [UserStateModel yy_modelWithJSON:object[@"result"]];
-            
-        }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:object[@"msg"]];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
+
 #pragma mark  - 视图布局
 - (void)setNavQRRightBar {
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(qrClick)];
@@ -554,47 +543,46 @@
 #pragma mark ->我要还款
 - (void)payMoney
 {
+    if (![Utility sharedUtility].loginFlage) {
+        [self presentLogin:self];
+        return;
+    }
     
-    if ([Utility sharedUtility].loginFlage) {
-        //        [self checkState:nil];
-        if ([_model.platform_type isEqualToString:@"2"]) {
-            if ([_model.applyStatus isEqualToString:@"7"]||[_model.applyStatus isEqualToString:@"8"]) {
-               
-                if ([_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
-                    
-                    LoanMoneyViewController *controller = [LoanMoneyViewController new];
-                    controller.userStateModel = _model;
-                    controller.qryUserStatusModel = _qryUserStatusModel;
-                    [self.navigationController pushViewController:controller animated:YES];
-                                     }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
-                    
-                    NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
-                    P2PViewController *p2pVC = [[P2PViewController alloc] init];
-                    p2pVC.isRepay = YES;
-                    p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                    [self.navigationController pushViewController:p2pVC animated:YES];
-                    
-                }else{
-                    
-                    RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
-                    repayRequest.targetVC = self;
-                    [repayRequest repayRequest];
-                    
-                }
+    if ([_model.platform_type isEqualToString:@"2"]) {
+        if ([_model.applyStatus isEqualToString:@"7"]||[_model.applyStatus isEqualToString:@"8"]) {
+            //此时用户的状态为 有还款列表的
+            if ([_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
+                LoanMoneyViewController *controller = [LoanMoneyViewController new];
+                controller.userStateModel = _model;
+                controller.qryUserStatusModel = _qryUserStatusModel;
+                [self.navigationController pushViewController:controller animated:YES];
+                
+            }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
+                //激活用户
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                P2PViewController *p2pVC = [[P2PViewController alloc] init];
+                p2pVC.isRepay = YES;
+                p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                [self.navigationController pushViewController:p2pVC animated:YES];
+                
             }else{
-            
+                
                 RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                 repayRequest.targetVC = self;
                 [repayRequest repayRequest];
+                
             }
         }else{
-        
+            
             RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
             repayRequest.targetVC = self;
             [repayRequest repayRequest];
+            
         }
-    } else {
-        [self presentLogin:self];
+    }else{
+        RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
+        repayRequest.targetVC = self;
+        [repayRequest repayRequest];
     }
 }
 
@@ -633,7 +621,6 @@
     } WithFaileBlock:^{
         
     }];
-    
     [productListViewModel fetchProductListInfo];
 }
 /**
@@ -712,6 +699,22 @@
         
     }];
     [popViewModel fetchPopViewInfo];
+}
+
+-(void)getApplyStatus:(void(^)(BOOL isSuccess, UserStateModel *resultModel))finish{
+    
+    [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_userState_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        
+        if([object[@"flag"] isEqualToString:@"0000"])
+        {
+            _model = [UserStateModel yy_modelWithJSON:object[@"result"]];
+            finish(YES,_model);
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:object[@"msg"]];
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
 }
 
 /**
@@ -921,7 +924,6 @@
     }];
 }
 
-
 #pragma mark 发标前查询进件
 -(void)getFxdCaseInfo{
     
@@ -937,7 +939,6 @@
         
     }];
     [complianceViewModel getFXDCaseInfo];
-    
 }
 
 #pragma mark  fxd用户状态查询，viewmodel
@@ -957,7 +958,6 @@
     }];
     [complianceViewModel getUserStatus:caseInfo];
 }
-
 
 #pragma mark - 页面跳转
 - (void)goCheckVC:(UserStateModel *)model productId:(NSString *)productId

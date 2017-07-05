@@ -815,9 +815,7 @@
     }
     
     if (_p2pBillModel != nil) {
-        
         [self getMoney];
-        
     }
 }
 
@@ -914,7 +912,6 @@
 - (void)paySettle
 {
 
-    
     NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
                           @"bid_id_":_p2pBillModel.data.bid_id_,
                           @"amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
@@ -960,7 +957,7 @@
         } else {
             
             [self paySettle];
-
+            
         }
     }
 }
