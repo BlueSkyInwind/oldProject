@@ -211,7 +211,7 @@
     
     if (textField.tag == 100) {
         NSString *stringLength=[NSString stringWithFormat:@"%@%@",textField.text,string];
-        if ([stringLength length]>4) {
+        if ([stringLength length]>6) {
             return NO;
         }
     }
