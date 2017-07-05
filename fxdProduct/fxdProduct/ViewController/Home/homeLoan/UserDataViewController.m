@@ -376,9 +376,7 @@
     } WithFaileBlock:^{
         
     }];
-
     [homeViewModel fetchUserState:[paramDic objectForKey:@"product_id_"] ];
-
 }
 
 - (void)goCheckVC:(UserStateModel *)model
@@ -720,7 +718,6 @@
             if (_nextStep.integerValue == 4) {
                 _isInfoEditable = [[object objectForKey:@"result"] objectForKey:@"isInfoEditable"];
             }
-        
             [self setProcess];
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];

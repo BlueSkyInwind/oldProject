@@ -507,7 +507,6 @@
             //            }
             //            DLog(@"加密后参数:---%@",paramDic);
             
-            
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             //        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
             //        securityPolicy.allowInvalidCertificates = YES;
