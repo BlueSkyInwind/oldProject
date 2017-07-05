@@ -427,7 +427,6 @@
                         
                     }
                 }
-                
             }
             [_bankModel.result removeAllObjects];
             for (BankList *bank in array) {
@@ -438,7 +437,6 @@
         
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_bankModel.msg];
         }
-        
         
     } WithFaileBlock:^{
         
@@ -461,7 +459,6 @@
     [paramArray addObject:_ordsms_ext_];
     [paramArray addObject:dataListAll3[3]];
     [paramArray addObject:_sms_seq];
-    
     
     UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
     [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -486,7 +483,7 @@
                 }
             }
             
-            //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
+            //  [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
         }else{
             
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
