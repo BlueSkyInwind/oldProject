@@ -68,6 +68,7 @@
     }];
 }
 
+
 -(void)getFXDCaseInfo{
 
     [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {

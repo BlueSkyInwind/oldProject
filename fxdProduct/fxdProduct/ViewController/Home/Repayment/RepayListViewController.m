@@ -125,7 +125,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     }
 }
 
-
 /**
  获取P2P期供信息
  */
@@ -336,7 +335,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         _readyPayAmount = _readyPayAmount - _save_amount;
     }
     
-    
     if ([_userStateParse.product_id isEqualToString:SalaryLoan]||[_userStateParse.product_id isEqualToString:WhiteCollarLoan]) {
         NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
         NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
@@ -348,8 +346,8 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         [_payNumberLabel updateConstraintsIfNeeded];
         [_payNumberLabel updateConstraints];
     }
-
 }
+
 #pragma mark 全部还款
 - (IBAction)checkAll:(UIButton *)sender {
     _selectAllBtn.selected = !_selectAllBtn.selected;
@@ -423,7 +421,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             _readyPayAmount = _readyPayAmount - _save_amount;
         }
         
-        
         if ([_userStateParse.product_id isEqualToString:SalaryLoan]||[_userStateParse.product_id isEqualToString:WhiteCollarLoan]) {
             NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
             NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
@@ -435,8 +432,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             [_payNumberLabel updateConstraintsIfNeeded];
             [_payNumberLabel updateConstraints];
         }
-        
-        
     }else {
         
         for (int i = 0; i < _cellSelectArr.count; i++) {
@@ -476,7 +471,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     [self updateUserNeedPayAmount];
     [self.repayTableView reloadData];
 }
-
 
 #pragma mark 弹框
 -(void)showAlert{
@@ -722,8 +716,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         _endView.hidden = true;
         return YES;
     }
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {

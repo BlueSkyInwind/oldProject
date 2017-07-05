@@ -139,10 +139,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     //http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767
     webView.urlStr = _liangzihuzhu_url;
     [self.navigationController pushViewController:webView animated:true];
+    
 }
 
 - (void)loadView
 {
+    
     UIScrollView *view = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     view.contentSize = CGSizeMake(_k_w, _k_h);
     view.backgroundColor = [UIColor whiteColor];
@@ -154,11 +156,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view = view;
     self.scrollView = view;
+    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
     //platform_type  2、合规平台   0、发薪贷平台
@@ -170,6 +174,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         [self checkState];
     }
 //    [self getUserStatus];
+    
 }
 
 -(void)createUI
@@ -1309,9 +1314,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [self.navigationController pushViewController:controller animated:YES];
                 
             }
-            
         }else{
-            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
     } WithFaileBlock:^{
@@ -1320,8 +1323,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     [complianceViewModel getUserStatus:caseInfo];
 }
-
-
 
 
 #pragma mark 发标前查询进件
@@ -1402,14 +1403,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                         
                     }
                 }
-                
             }
             [bankModel.result removeAllObjects];
             for (BankList *bank in array) {
                 
                 [bankModel.result addObject:bank];
             }
-            
             BankCardViewController *bankVC = [BankCardViewController new];
             bankVC.bankModel = bankModel;
             bankVC.periodSelect = _userSelectNum.integerValue;
@@ -1423,7 +1422,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
         }
-        
     } WithFaileBlock:^{
         
     }];
