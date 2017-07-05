@@ -10,8 +10,8 @@
 @class QueryCardInfoUsrCardInfolist,QueryCardInfoData;
 @interface QueryCardInfo : NSObject
 
-@property (nonatomic,copy)NSString *appcode;
-@property (nonatomic,strong)QueryCardInfoData *data;
+@property (nonatomic,copy)NSString *flag;
+@property (nonatomic,strong)QueryCardInfoData *result;
 
 @end
 

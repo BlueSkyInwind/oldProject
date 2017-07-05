@@ -413,7 +413,7 @@ NSString * const    _contractStr_url            =    @"hg/contractStr.jhtml";
 
 //发送短信接口
 //NSString * const    _sendSms_url    =    @"http/do.jhtml?router=sendSmsSHService.send";
-NSString * const    _sendSms_url    =    @"http/do.jhtml?router=sendSmsSHService.send";
+NSString * const    _sendSms_url    =    @"hg/sendSms.jhtml";
 
 //换绑银行卡
 //NSString * const    _bankCards_url    =    @"http/do.jhtml?router=bankCardsSHService.quickChangeBindingCard";

@@ -13,9 +13,9 @@
 
 
 //结果描述
-@property (nonatomic,copy)NSString *appmsg;
+@property (nonatomic,copy)NSString *flag;
 
-@property (nonatomic,strong)BankCardsDataModel *data;
+@property (nonatomic,strong)BankCardsDataModel *result;
 
 @end
 
@@ -26,5 +26,7 @@
 @property (nonatomic,copy)NSString *success;
 //结果对照码   1发送成功 -1发送失败
 @property (nonatomic,copy)NSString *appcode;
+@property (nonatomic,copy)NSString *appmsg;
+
 
 @end

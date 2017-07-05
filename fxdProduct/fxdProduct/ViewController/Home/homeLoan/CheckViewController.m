@@ -1436,12 +1436,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
-        NSString *bankName = [self bankName:model.data.UsrCardInfolist.BankId];
+        NSString *bankName = [self bankName:model.result.UsrCardInfolist.BankId];
         PayViewController *payVC = [[PayViewController alloc] init];
         payVC.payType = PayTypeGetMoneyToCard;
         payVC.isP2P = YES;
         payVC.bankName = bankName;
-        NSString *bank = model.data.UsrCardInfolist.CardId;
+        NSString *bank = model.result.UsrCardInfolist.CardId;
         payVC.banNum = [bank substringFromIndex:bank.length-4];
         
         payVC.makesureBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){

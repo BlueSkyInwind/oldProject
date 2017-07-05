@@ -548,14 +548,13 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         
         SendSmsModel *sendSmsModel = [SendSmsModel yy_modelWithJSON:returnValue];
         
-        if ([sendSmsModel.appcode isEqualToString:@"1"]) {
+        if ([sendSmsModel.result.appcode isEqualToString:@"1"]) {
             [_sureBtn setEnabled:YES];
             [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
-            _sms_seq = sendSmsModel.data.sms_seq_;
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
-            
+            _sms_seq = sendSmsModel.result.sms_seq_;
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.result.appmsg];
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.result.appmsg];
         }
         
     } WithFaileBlock:^{

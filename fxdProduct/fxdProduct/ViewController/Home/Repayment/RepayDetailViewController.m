@@ -523,13 +523,13 @@
             PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.PayTitleLabel.text=titleAry[indexPath.row];
-            if ([_queryCardInfoModel.data.UsrCardInfolist.BankId isEqualToString:@""]) {
+            if ([_queryCardInfoModel.result.UsrCardInfolist.BankId isEqualToString:@""]) {
                 
                 cell.whichBank.text = @"请更换银行卡";
                 
             }else{
             
-                cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[self bankName:_queryCardInfoModel.data.UsrCardInfolist.BankId],[_queryCardInfoModel.data.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.data.UsrCardInfolist.CardId.length-4]];
+                cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[self bankName:_queryCardInfoModel.result.UsrCardInfolist.BankId],[_queryCardInfoModel.result.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.result.UsrCardInfolist.CardId.length-4]];
             }
             
            
@@ -1016,12 +1016,12 @@
         _queryCardInfoModel = model;
         BOOL isHave = NO;
         for (NSString *name in array) {
-            if ([name isEqualToString:model.data.UsrCardInfolist.BankId]) {
+            if ([name isEqualToString:model.result.UsrCardInfolist.BankId]) {
                 isHave = YES;
             }
         }
         if (!isHave) {
-            _queryCardInfoModel.data.UsrCardInfolist.BankId = @"";
+            _queryCardInfoModel.result.UsrCardInfolist.BankId = @"";
         }
         [self.PayDetailTB reloadData];
         

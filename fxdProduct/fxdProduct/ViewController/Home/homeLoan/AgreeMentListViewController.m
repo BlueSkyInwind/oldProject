@@ -9,7 +9,8 @@
 #import "AgreeMentListViewController.h"
 #import "P2PAgreeMentModel.h"
 #import "DetailViewController.h"
-
+#import "LoanMoneyViewModel.h"
+#import "P2PContactContentModel.h"
 @interface AgreeMentListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)UITableView *tableview;
@@ -61,31 +62,31 @@ NSString * const Identifier = @"cell";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Pact *pact = self.agreeMentArr[indexPath.row];
-    NSDictionary *paramDic;
-    if ([pact.status_ isEqualToString:@"1"]) {
-        paramDic = @{@"pact_no_":pact.id_,
-                     @"bid_id_":pact.bid_id_,
-                     @"status_":@"2"};
-    }
-    if ([pact.status_ isEqualToString:@"2"]) {
-        paramDic = @{@"pact_no_":pact.id_,
-                     @"debt_id_":pact.debt_id_,
-                     @"status_":@"2"};
-    }
-   
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_contractStr_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if ([[object objectForKey:@"appcode"] isEqualToString:@"1"]) {
-            DetailViewController *detailVC = [[DetailViewController alloc] init];
-            detailVC.content = [[object objectForKey:@"data"] objectForKey:@"content"];
-            detailVC.navTitle = pact.name_;
-            [self.navigationController pushViewController:detailVC animated:true];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"获取失败"];
+    
+    LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+    [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseResultM.flag isEqualToString:@"0000"]) {
+            P2PContactContentModel * p2PContactConM = [[P2PContactContentModel alloc]initWithDictionary:(NSDictionary *)baseResultM.result error:nil];
+            if ([p2PContactConM.appcode integerValue] == 1) {
+                DetailViewController *detailVC = [[DetailViewController alloc] init];
+                detailVC.content = p2PContactConM.content;
+                detailVC.navTitle = pact.name_;
+                [self.navigationController pushViewController:detailVC animated:true];
+            } else {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"获取失败"];
+            }
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    
+    if ([pact.status_ isEqualToString:@"1"]) {
+        [loanMoneyViewModel getContactCon:pact.id_ Bid_id_:pact.bid_id_ Debt_id_:pact.debt_id_];
+    }
+    if ([pact.status_ isEqualToString:@"2"]) {
+        [loanMoneyViewModel getContactCon:pact.id_ Bid_id_:pact.bid_id_ Debt_id_:pact.debt_id_];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
