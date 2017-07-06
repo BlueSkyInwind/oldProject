@@ -28,9 +28,13 @@ typedef enum {
 typedef void (^FinishedBlock)(EnumServerStatus status, id object);
 typedef void (^FailureBlock)(EnumServerStatus status, id object);
 
-@interface FXDNetWorkManager : NSObject
+@interface FXDNetWorkManager : NSObject{
+    
+}
 
 + (FXDNetWorkManager *)sharedNetWorkManager;
+
+- (void)DataRequestWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus isNeedWait:(BOOL)isNeedWait parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
 
 - (void)POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
 

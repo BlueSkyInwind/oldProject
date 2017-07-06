@@ -14,6 +14,10 @@
 #import "GTMBase64.h"
 #import "DataWriteAndRead.h"
 
+@interface FXDNetWorkManager(){
+    MBProgressHUD * _requestWaitView;
+}
+@end
 @implementation FXDNetWorkManager
 
 + (FXDNetWorkManager *)sharedNetWorkManager
@@ -46,7 +50,13 @@
     return _waitView;
     
 }
-- (void)DataRequestWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
+-(void)removeWaitView{
+    if (_requestWaitView) {
+        [_requestWaitView removeFromSuperview];
+    }
+}
+
+- (void)DataRequestWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus isNeedWait:(BOOL)isNeedWait parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
 {
     DLog(@"%d",[Utility sharedUtility].userInfo.isUpdate);
     //版本强制更新
@@ -57,17 +67,18 @@
             }
         }];
     }
-    
     // 网络判断
-    if (![Utility sharedUtility].networkState) {
+    if (![Utility sharedUtility].networkState && isNeedNetStatus) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
         return;
     }
     
-    MBProgressHUD *_waitView = [self loadingHUD];
-    [_waitView show:YES];
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-    
+    if (isNeedWait) {
+        MBProgressHUD *_waitView = [self loadingHUD];
+        [_waitView show:YES];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
+    }
+
     NSDictionary *paramDic = [NSDictionary dictionary];
     DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -115,7 +126,7 @@
                     LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
-                        [_waitView removeFromSuperview];
+                        [self removeWaitView];
                     }];
                 }
             }];
@@ -127,14 +138,14 @@
         DLog(@"response json --- %@",jsonStr);
         //            [Tool dataToDictionary:responseObject]
         finished(Enum_SUCCESS,responseObject);
-        [_waitView removeFromSuperview];
-        [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
+        [self removeWaitView];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(Enum_FAIL,error);
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
         DLog(@"error---%@",error.description);
-        [_waitView removeFromSuperview];
-        [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
+        [self removeWaitView];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
     }];
 }
 

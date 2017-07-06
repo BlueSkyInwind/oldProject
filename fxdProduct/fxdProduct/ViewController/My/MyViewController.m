@@ -62,11 +62,10 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
     if ([Utility sharedUtility].loginFlage) {
-        [self getApplyStatus];
+        [self getApplyStatus:^(BOOL isSuccess, UserStateModel *resultModel) {
+        }];
     }
-    
 }
 #pragma mark - TableView
 
@@ -159,7 +158,6 @@
                     [repayRequest repayRequest];
                 }
             }else{
-            
                 RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                 repayRequest.targetVC = self;
                 [repayRequest repayRequest];
@@ -256,26 +254,21 @@
 /**
  申请件状态查询
  */
--(void)getApplyStatus{
+
+-(void)getApplyStatus:(void(^)(BOOL isSuccess, UserStateModel *resultModel))finish{
     
-    HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
-    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        if([returnValue[@"flag"] isEqualToString:@"0000"])
+    [[FXDNetWorkManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_userState_url]   isNeedNetStatus:NO isNeedWait:NO parameters:nil finished:^(EnumServerStatus status, id object) {
+        if([object[@"flag"] isEqualToString:@"0000"])
         {
-            _model = [UserStateModel yy_modelWithJSON:returnValue[@"result"]];
-        
-            
+            _model = [UserStateModel yy_modelWithJSON:object[@"result"]];
+            finish(YES,_model);
         }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:object[@"msg"]];
         }
-    } WithFaileBlock:^{
+    } failure:^(EnumServerStatus status, id object) {
         
     }];
-    [homeViewModel fetchUserState:nil];
-    
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

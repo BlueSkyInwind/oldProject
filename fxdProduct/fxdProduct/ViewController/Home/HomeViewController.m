@@ -98,14 +98,12 @@
     [self fatchBanner];
     [self getHomeProductList];
     
-    
     //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     [super viewWillDisappear:animated];
-    
 }
 
 #pragma mark  - 视图布局
@@ -705,8 +703,7 @@
 
 -(void)getApplyStatus:(void(^)(BOOL isSuccess, UserStateModel *resultModel))finish{
     
-    [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_userState_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        
+    [[FXDNetWorkManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_userState_url]   isNeedNetStatus:NO isNeedWait:NO parameters:nil finished:^(EnumServerStatus status, id object) {
         if([object[@"flag"] isEqualToString:@"0000"])
         {
             _model = [UserStateModel yy_modelWithJSON:object[@"result"]];
