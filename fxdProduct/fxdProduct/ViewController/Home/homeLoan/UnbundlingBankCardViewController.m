@@ -240,7 +240,7 @@
     {
         
         NSLog(@"===%@",textField.text);
-        if ([textField.text length] !=4 || textField.text.length !=6) {
+        if ([textField.text isEqualToString:@""]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
             
         }else{
@@ -253,7 +253,7 @@
 #pragma mark 点击确认按钮
 -(void)clickBtn{
 
-    if (_sms_code.length <4) {
+    if ([_sms_code isEqualToString:@""]) {
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请输入验证码"];
     }else{
     

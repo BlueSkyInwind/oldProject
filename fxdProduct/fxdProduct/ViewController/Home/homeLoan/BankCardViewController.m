@@ -322,7 +322,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     {
         
         NSLog(@"===%@",textField.text);
-        if ([textField.text length] !=4 || textField.text.length !=6) {
+        if ([textField.text isEqualToString:@""]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
             //                [dataColorAll3 replaceObjectAtIndex:3 withObject:redColor];
         }else{
@@ -613,7 +613,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的卡号"];
     }else if (![Tool isMobileNumber:dataListAll3[2]]){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的手机号"];
-    }else if ([dataListAll3[3] length]!= 4 || [dataListAll3[3] length]!=6){
+    }else if ([dataListAll3[3] isEqualToString:@""]){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
     }else if (!_btnStatus) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请同意授权书"];
@@ -632,7 +632,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 -(BOOL)isSureInfo
 {
     if ([[dataListAll3 objectAtIndex:0] length]>1 && [[dataListAll3 objectAtIndex:1] length]>16
-        && [CheckUtils checkTelNumber:dataListAll3[2]] && ([dataListAll3[3] length] == 4 || [dataListAll3[3]length]==6)) {
+        && [CheckUtils checkTelNumber:dataListAll3[2]] && ![dataListAll3[3] isEqualToString:@""]) {
         return YES;
     }
     return NO;
