@@ -62,8 +62,11 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-
-    [self getApplyStatus];
+    
+    if ([Utility sharedUtility].loginFlage) {
+        [self getApplyStatus];
+    }
+    
 }
 #pragma mark - TableView
 
@@ -155,8 +158,6 @@
                     repayRequest.targetVC = self;
                     [repayRequest repayRequest];
                 }
-                
-                
             }else{
             
                 RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
@@ -167,9 +168,7 @@
         else if (indexPath.row == 2){
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:YES];
-        }
-
-        else {
+        }else {
             DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
         }

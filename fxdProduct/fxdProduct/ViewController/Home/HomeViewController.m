@@ -86,11 +86,14 @@
 {
     [super viewDidAppear:animated];
     [UserDefaulInfo getUserInfoData];
-    //获取进件状态
-    [self getApplyStatus:^(BOOL isSuccess, UserStateModel *resultModel) {
-    }];
     
-    [self getFxdCaseInfo];
+    if ([Utility sharedUtility].loginFlage) {
+        //获取进件状态
+        [self getApplyStatus:^(BOOL isSuccess, UserStateModel *resultModel) {
+        }];
+        [self getFxdCaseInfo];
+    }
+    
     [self fatchRecord];
     [self fatchBanner];
     [self getHomeProductList];
@@ -104,7 +107,6 @@
     [super viewWillDisappear:animated];
     
 }
-
 
 #pragma mark  - 视图布局
 - (void)setNavQRRightBar {
