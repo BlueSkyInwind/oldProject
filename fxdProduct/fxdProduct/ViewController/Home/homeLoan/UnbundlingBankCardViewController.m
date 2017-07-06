@@ -169,18 +169,20 @@
     }
     
     _backTimeBtn = sender;
-    sender.userInteractionEnabled = NO;
-    sender.alpha = 0.4;
     
-    [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
-    _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
+    
+    
+//    _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
     NSString *bankNo = _queryCardInfo.result.UsrCardInfolist.CardId;
     UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
     [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         SendSmsModel *model = [SendSmsModel yy_modelWithJSON:returnValue];
         if ([model.result.appcode isEqualToString:@"1"]) {
-            
+            sender.userInteractionEnabled = NO;
+            sender.alpha = 0.4;
+            [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
+             _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
             _sms_seq = model.result.sms_seq_;
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
         }else{
@@ -213,6 +215,15 @@
     }
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+
+    [super viewWillDisappear:animated];
+    _backTimeBtn.userInteractionEnabled = YES;
+    [_backTimeBtn setTitle:@"重新获取" forState:UIControlStateNormal];
+    _backTimeBtn.alpha = 1.0;
+    _countdown = 60;
+    [_countdownTimer invalidate];
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 70.f;
@@ -228,6 +239,10 @@
         }
         _mobile = textField.text;
     }else if(textField.tag == 103){
+        
+        if (textField.text.length >6) {
+            textField.text = [textField.text substringToIndex:6];
+        }
         _sms_code = textField.text;
     }
 }
@@ -253,7 +268,7 @@
 #pragma mark 点击确认按钮
 -(void)clickBtn{
 
-    if ([_sms_code isEqualToString:@""]) {
+    if (_sms_code == nil ||[_sms_code isEqualToString:@""]) {
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请输入验证码"];
     }else{
     

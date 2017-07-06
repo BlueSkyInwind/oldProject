@@ -158,12 +158,7 @@
             }else if (![Tool isMobileNumber:dataListAll3[2]]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的手机号"];
             }else{
-                sender.userInteractionEnabled = NO;
-                sender.alpha = 0.4;
-
-                [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
-                _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
-
+                
                 [self senderSms];
 
             }
@@ -193,20 +188,26 @@
 
 
 -(void)senderSms{
-
+    
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
     UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
     [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         SendSmsModel *model = [SendSmsModel yy_modelWithJSON:returnValue];
         if ([model.result.appcode isEqualToString:@"1"]) {
+            
+            _backTimeBtn.userInteractionEnabled = NO;
+            _backTimeBtn.alpha = 0.4;
+            [_backTimeBtn setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
+            _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
             [_sureBtn setEnabled:YES];
             _sms_seq = model.result.sms_seq_;
             [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
         }else{
-            
+           
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
+            
         }
         
     } WithFaileBlock:^{
@@ -215,6 +216,8 @@
         
     }];
     [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"rebind" SmsType:@"N" Mobile:dataListAll3[2]];
+    
+    
 
 }
 
@@ -449,6 +452,11 @@
 
 //    _ordsms_ext_ = @"666666AAAAAAAA";
 //    _sms_seq = @"AAAAAAAA";
+    if ([dataListAll3[3] isEqualToString:@""]) {
+        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请输入正确的验证码"];
+        return;
+    }
+    
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *banName = [self bankName:_bankCode];
     NSMutableArray *paramArray = [NSMutableArray array];
@@ -475,7 +483,7 @@
                     }
                 }
             }else{
-            
+                
                 for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                     if ([vc isKindOfClass:[RepayDetailViewController class]]) {
                         [self.navigationController popToViewController:vc animated:YES];
@@ -493,7 +501,7 @@
         
     }];
     [unbundlingBankCardViewModel bankCardsSHServiceParamArray:paramArray];
-    
+
 }
 
 #pragma mark 更改银行卡名称缩写

@@ -87,8 +87,8 @@
     self.invIcon.image = [[UIImage imageNamed:@"1_Signin_icon_07"] imageWithTintColor:UI_MAIN_COLOR];
     
     self.verCodeText.delegate = self;
-    [self.verCodeText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventValueChanged];
-    [self.phoneNumText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventValueChanged];
+    [self.verCodeText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventEditingChanged];
+    [self.phoneNumText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventEditingChanged];
     
     [self setPicVerifyCode];
     [self setLabel];

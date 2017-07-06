@@ -55,6 +55,20 @@
         [self addBackItem];
     }
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
+    
+    self.verCodeText.delegate = self;
+    [self.verCodeText addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+    
+}
+
+
+-(void)changeTextField:(UITextField *)textField{
+
+    if (textField == self.verCodeText) {
+        if (textField.text.length>6) {
+            self.verCodeText.text = [textField.text substringToIndex:6];
+        }
+    }
 }
 - (void)addBackItemTwo
 {
