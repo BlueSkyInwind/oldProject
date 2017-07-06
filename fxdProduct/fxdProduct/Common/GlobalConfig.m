@@ -43,6 +43,17 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
 //NSString * const _main_url  =   @"http://192.168.7.253:8081/fxd-esb/esb/";
 //NSString * const _ValidESB_url  =   @"http://192.168.7.253:8081/fxd-esb/";
 //NSString * const _p2P_url = @"http://192.168.7.253:8081/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
+//NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
+
+
+//NSString * const _main_url  =   @"http://192.168.7.253:9191/fxd-esb/esb/";
+//NSString * const _ValidESB_url  =   @"http://192.168.7.253:9191/fxd-esb/";
+//NSString * const _p2P_url = @"http://192.168.7.253:9191/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
+//NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
+
+
 //新整合的地址
 //NSString * const _main_url  =   @"http://192.168.9.2:9191/fxd-esb/esb/";
 //NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
