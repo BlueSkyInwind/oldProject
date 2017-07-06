@@ -37,7 +37,7 @@
 
 -(void)fetchLoanRecord{
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanRecord_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanRecord_url]  isNeedNetStatus:NO isNeedWait:NO parameters:nil finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if (self.returnBlock) {
             self.returnBlock(object);
@@ -68,8 +68,6 @@
 
 @end
 
-
-
 @implementation BannerViewModel
 
 -(void)fetchBannerInfo{
@@ -85,7 +83,7 @@
 
 -(void)postBannerParam:(NSDictionary *)paramDic{
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_topBanner_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_topBanner_url]   isNeedNetStatus:NO isNeedWait:NO parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if (self.returnBlock) {
             self.returnBlock(object);
@@ -145,7 +143,7 @@
 
 -(void)postPopviewParam:(NSDictionary *)paramDic{
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_adv_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_adv_url]    isNeedNetStatus:NO isNeedWait:NO parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if (self.returnBlock) {
             self.returnBlock(object);
