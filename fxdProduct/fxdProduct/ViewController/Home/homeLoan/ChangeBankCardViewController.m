@@ -330,7 +330,7 @@
     }
     if (textField.tag == 103)
     {
-        if ([textField.text length] !=4 || textField.text.length !=6) {
+        if ([textField.text isEqualToString:@""]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
             //                [dataColorAll3 replaceObjectAtIndex:3 withObject:redColor];
         }else{
