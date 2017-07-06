@@ -46,7 +46,7 @@
 #pragma mark ->UItableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([_queryCardInfo.data.UsrCardInfolist.BankId isEqualToString:@""]) {
+    if ([_queryCardInfo.result.UsrCardInfolist.BankId isEqualToString:@""]) {
         return 3;
     }else{
         return 4;
@@ -62,7 +62,7 @@
         }
         cell.textField.tag = indexPath.row + 100;
         cell.textField.delegate = self;
-    if ([_queryCardInfo.data.UsrCardInfolist.BankId isEqualToString:@""]) {
+    if ([_queryCardInfo.result.UsrCardInfolist.BankId isEqualToString:@""]) {
         
       if (indexPath.row == 0) {
             [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
@@ -70,7 +70,7 @@
             cell.btn.tag = indexPath.row + 200;
             cell.btnSecory.hidden = YES;
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            cell.textField.text = _queryCardInfo.data.UsrCardInfolist.CardId;
+            cell.textField.text = _queryCardInfo.result.UsrCardInfolist.CardId;
             cell.textField.enabled = NO;
         }else if (indexPath.row == 2){
             cell.btn.hidden = YES;
@@ -90,10 +90,10 @@
             cell.textField.placeholder = @"手机号";
             cell.textField.tag = 102;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
-            if (_queryCardInfo.data.UsrCardInfolist.BindMobile!=nil) {
+            if (_queryCardInfo.result.UsrCardInfolist.BindMobile!=nil) {
                 
                 cell.textField.enabled = NO;
-                cell.textField.text = _queryCardInfo.data.UsrCardInfolist.BindMobile;
+                cell.textField.text = _queryCardInfo.result.UsrCardInfolist.BindMobile;
                 _mobile = cell.textField.text;
                 
             }else{
@@ -114,7 +114,7 @@
             cell.btn.tag = indexPath.row + 200;
             cell.btnSecory.hidden = YES;
             cell.textField.enabled = NO;
-            cell.textField.text = [self bankName:_queryCardInfo.data.UsrCardInfolist.BankId];
+            cell.textField.text = [self bankName:_queryCardInfo.result.UsrCardInfolist.BankId];
             
         }else if (indexPath.row == 1) {
             [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
@@ -122,7 +122,7 @@
             cell.btn.tag = indexPath.row + 200;
             cell.btnSecory.hidden = YES;
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            cell.textField.text = _queryCardInfo.data.UsrCardInfolist.CardId;
+            cell.textField.text = _queryCardInfo.result.UsrCardInfolist.CardId;
             cell.textField.enabled = NO;
         }else if (indexPath.row == 3){
             cell.btn.hidden = YES;
@@ -142,10 +142,10 @@
             cell.textField.placeholder = @"手机号";
             cell.textField.tag = 102;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
-            if (_queryCardInfo.data.UsrCardInfolist.BindMobile!=nil) {
+            if (_queryCardInfo.result.UsrCardInfolist.BindMobile!=nil) {
                 
                 cell.textField.enabled = NO;
-                cell.textField.text = _queryCardInfo.data.UsrCardInfolist.BindMobile;
+                cell.textField.text = _queryCardInfo.result.UsrCardInfolist.BindMobile;
                 _mobile = cell.textField.text;
             }else{
                 
@@ -174,18 +174,18 @@
     
     [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
     _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
-    NSString *bankNo = _queryCardInfo.data.UsrCardInfolist.CardId;
+    NSString *bankNo = _queryCardInfo.result.UsrCardInfolist.CardId;
     UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
     [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         SendSmsModel *model = [SendSmsModel yy_modelWithJSON:returnValue];
-        if ([model.appcode isEqualToString:@"1"]) {
+        if ([model.result.appcode isEqualToString:@"1"]) {
             
-            _sms_seq = model.data.sms_seq_;
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
+            _sms_seq = model.result.sms_seq_;
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
         }else{
             
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
         }
         
     } WithFaileBlock:^{

@@ -199,14 +199,14 @@
     [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         SendSmsModel *model = [SendSmsModel yy_modelWithJSON:returnValue];
-        if ([model.appcode isEqualToString:@"1"]) {
+        if ([model.result.appcode isEqualToString:@"1"]) {
             [_sureBtn setEnabled:YES];
-            _sms_seq = model.data.sms_seq_;
+            _sms_seq = model.result.sms_seq_;
             [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
         }else{
             
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
         }
         
     } WithFaileBlock:^{
@@ -427,7 +427,6 @@
                         
                     }
                 }
-                
             }
             [_bankModel.result removeAllObjects];
             for (BankList *bank in array) {
@@ -438,7 +437,6 @@
         
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_bankModel.msg];
         }
-        
         
     } WithFaileBlock:^{
         
@@ -462,14 +460,13 @@
     [paramArray addObject:dataListAll3[3]];
     [paramArray addObject:_sms_seq];
     
-    
     UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
     [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         BankCardsModel *model = [BankCardsModel yy_modelWithJSON:returnValue];
-        if ([model.data.appcode isEqualToString:@"1"]) {
+        if ([model.result.appcode isEqualToString:@"1"]) {
             
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.appmsg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.result.appmsg];
             if (_isCheck) {
                 
                 for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
@@ -486,10 +483,10 @@
                 }
             }
             
-            //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
+            //  [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
         }else{
             
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
         }
         
     } WithFaileBlock:^{

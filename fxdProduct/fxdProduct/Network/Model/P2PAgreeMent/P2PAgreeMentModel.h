@@ -15,7 +15,7 @@
 
 @property (nonatomic, assign)BOOL success;
 
-@property (nonatomic, strong)P2PAgreeMentModelData *data;
+@property (nonatomic, strong)P2PAgreeMentModelData *result;
 
 @end
 

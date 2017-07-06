@@ -482,9 +482,9 @@
                                 LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
                                 [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
                                     P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:returnValue];
-                                    if ([agreeModel.appcode isEqualToString:@"1"]) {
+                                    if ([agreeModel.result.appcode isEqualToString:@"1"]) {
                                         AgreeMentListViewController *agreeMentListViewController = [[AgreeMentListViewController alloc] init];
-                                        agreeMentListViewController.agreeMentArr = agreeModel.data.pactList;
+                                        agreeMentListViewController.agreeMentArr = agreeModel.result.pactList;
                                         [self.navigationController pushViewController:agreeMentListViewController animated:true];
                                     } else {
                                         
