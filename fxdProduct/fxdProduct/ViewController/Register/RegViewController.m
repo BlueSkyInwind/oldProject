@@ -88,6 +88,7 @@
     
     self.verCodeText.delegate = self;
     [self.verCodeText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventEditingChanged];
+    self.phoneNumText.delegate = self;
     [self.phoneNumText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventEditingChanged];
     
     [self setPicVerifyCode];

@@ -222,24 +222,27 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
                 if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
-                    
-//                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-                        if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
-                            checkFalse.seeView.hidden = NO;
-                            [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
-                        }else{
+
+                    if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]){
                         
                             [self getContent];
                             checkFalse.jsdView.hidden = NO;
                             [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
-                        }
                         
-//                    }else{
-//                    
-//                        checkFalse.seeView.hidden = YES;
-//                        checkFalse.jsdView.hidden = YES;
-//                    }
-//                    checkFalse.jsdView.hidden = NO;
+                    }else{
+                    
+                        checkFalse.seeView.hidden = NO;
+                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                    }
+//                        if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
+//                            checkFalse.seeView.hidden = NO;
+//                            [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+//                        }else{
+//                        
+//                            [self getContent];
+//                            checkFalse.jsdView.hidden = NO;
+//                            [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
+//                        }
                     
                 }else{
                 
@@ -1221,15 +1224,37 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 #pragma  mark - 白领贷拒绝导流
 -(void)clickApplyImmediate{
 
-    UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-    userDataVC.product_id = SalaryLoan;
-    [self.navigationController pushViewController:userDataVC animated:true];
+    if([_userStateModel.product_id isEqualToString:SalaryLoan]){
+        
+        [self fatchRate:^(RateModel *rate) {
+            PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+            payLoanview.product_id = WhiteCollarLoan;
+            //            payLoanview.userState = model;
+            payLoanview.rateModel = rate;
+            [self.navigationController pushViewController:payLoanview animated:true];
+        }];
+        
+    }else{
+        
+        UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+        userDataVC.product_id = SalaryLoan;
+        [self.navigationController pushViewController:userDataVC animated:true];
+    }
+//    UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+//    userDataVC.product_id = SalaryLoan;
+//    [self.navigationController pushViewController:userDataVC animated:true];
 }
 
 #pragma  mark - 白领贷拒绝导流工薪贷的详情
 -(void)getContent{
+    NSString *product;
+    if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
+        product = SalaryLoan;
+    }else{
     
-     NSDictionary *dic = @{@"priduct_id_":SalaryLoan};
+        product = WhiteCollarLoan;
+    }
+     NSDictionary *dic = @{@"priduct_id_":product};
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         

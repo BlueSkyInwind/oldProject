@@ -28,7 +28,7 @@
 #import "RateModel.h"
 #import "DataWriteAndRead.h"
 #import "SesameCreditViewController.h"
-
+#import "HomeProductList.h"
 
 @interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate>
 {
@@ -136,6 +136,29 @@
     [super viewWillAppear:animated];
     [_tableView.mj_header beginRefreshing];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+    [self getHomeProductList];
+}
+
+
+/**
+ 获取首页产品列表
+ */
+-(void)getHomeProductList{
+    
+    ProductListViewModel *productListViewModel = [[ProductListViewModel alloc]init];
+    [productListViewModel setBlockWithReturnBlock:^(id returnValue) {
+      HomeProductList *homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
+
+        if ([homeProductList.result.type isEqualToString:@"1"]) {
+            _applyBtn.enabled = NO;
+            _applyBtn.hidden = YES;
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:homeProductList.result.refuseMsg];
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [productListViewModel fetchProductListInfo];
 }
 
 

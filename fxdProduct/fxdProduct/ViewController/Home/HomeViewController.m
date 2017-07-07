@@ -61,6 +61,8 @@
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
     QryUserStatusModel *_qryUserStatusModel;
+    NSString *_type;
+    
 }
 
 @end
@@ -239,12 +241,18 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger i = 0;
-    if (_dataArray.count>0) {
-        i=_dataArray.count+2;
+    if ([_homeProductList.result.type isEqualToString:@"0"]) {
+        if (_dataArray.count>0) {
+            i=_dataArray.count+2;
+        }else{
+            i=2;
+        }
+    }else if ([_homeProductList.result.type isEqualToString:@"1"]){
+    
+        i = 3;
     }else{
-        i=2;
+        i = 2;
     }
-//    i = 3;
     return i;
 }
 
@@ -255,25 +263,37 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger i = 0;
-    if (_dataArray.count>0) {
-        i=_dataArray.count+1;
+    if ([_homeProductList.result.type isEqualToString:@"0"]) {
+        NSInteger i = 0;
+        if (_dataArray.count>0) {
+            i=_dataArray.count+1;
+        }else{
+            i=1;
+        }
+        if (indexPath.section == 0) {
+            return 30.f;
+        } else {
+            return (_k_h-0.5*_k_w-155)/i;
+        }
+    }else if ([_homeProductList.result.type isEqualToString:@"1"]){
+    
+        if (indexPath.section == 0) {
+                return 30.f;
+            } else if(indexPath.section == 2){
+                return 70;
+            }else{
+
+                return (_k_h-0.5*_k_w-215);
+            }
     }else{
-        i=1;
+    
+        if (indexPath.section == 0) {
+            return 30.f;
+        }else{
+        
+            return (_k_h-0.5*_k_w-155);
+        }
     }
-    if (indexPath.section == 0) {
-        return 30.f;
-    } else {
-        return (_k_h-0.5*_k_w-155)/i;
-    }
-//    if (indexPath.section == 0) {
-//            return 30.f;
-//        } else if(indexPath.section == 2){
-//            return 70;
-//        }else{
-//        
-//            return (_k_h-0.5*_k_w-215);
-//        }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -321,102 +341,96 @@
         return cell;
     }
     
-    
-    if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
+    if ([_homeProductList.result.type isEqualToString:@"0"]) {
         
-        HomeProductListProducts *product = _dataArray[indexPath.section-1];
-        cell.rightImageView.image = [UIImage imageNamed:@"home_08"];
-        
-        BOOL isOverLimit = [product.isOverLimit boolValue];
-        if (isOverLimit) {
-            [cell.loanBtn setBackgroundImage:[UIImage imageNamed:@"beyond_lines_Limit"] forState:UIControlStateNormal];
-            [cell.loanBtn setTitle:@"" forState:UIControlStateNormal];
+        if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
             
-        }else {
-            [cell.loanBtn setBackgroundImage:nil forState:UIControlStateNormal];
-            [cell.loanBtn setTitle:@"我要借款" forState:UIControlStateNormal];
+            HomeProductListProducts *product = _dataArray[indexPath.section-1];
+            cell.rightImageView.image = [UIImage imageNamed:@"home_08"];
             
+            BOOL isOverLimit = [product.isOverLimit boolValue];
+            if (isOverLimit) {
+                [cell.loanBtn setBackgroundImage:[UIImage imageNamed:@"beyond_lines_Limit"] forState:UIControlStateNormal];
+                [cell.loanBtn setTitle:@"" forState:UIControlStateNormal];
+                
+            }else {
+                [cell.loanBtn setBackgroundImage:nil forState:UIControlStateNormal];
+                [cell.loanBtn setTitle:@"我要借款" forState:UIControlStateNormal];
+                
+            }
+            
+            [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];
+            cell.periodLabel.text = product.ext_attr_.amt_desc_;
+            cell.amountLabel.text = product.name_;
+            
+            cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
+            cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
+            cell.helpImage.userInteractionEnabled = true;
+            
+            if ([product.id_ isEqualToString:SalaryLoan]) {
+                cell.specialtyImage.image = [UIImage imageNamed:@"home_04"];
+                UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highSeeExpenses)];
+                [cell.helpImage addGestureRecognizer:gest];
+                
+            }else if([product.id_ isEqualToString:WhiteCollarLoan]){
+                cell.specialtyImage.image = [UIImage imageNamed:@"home11"];
+                
+            }else{
+                
+                UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
+                [cell.helpImage addGestureRecognizer:gest];
+                cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
+                
+            }
+            return cell;
         }
-
-        [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];
-        cell.periodLabel.text = product.ext_attr_.amt_desc_;
-        cell.amountLabel.text = product.name_;
         
-        cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
-        cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
-        cell.helpImage.userInteractionEnabled = true;
- 
-        if ([product.id_ isEqualToString:SalaryLoan]) {
-            cell.specialtyImage.image = [UIImage imageNamed:@"home_04"];
-            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highSeeExpenses)];
-            [cell.helpImage addGestureRecognizer:gest];
+        if (indexPath.section == _dataArray.count+1&&_dataArray.count>0) {
+            HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];
+            UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
+            cell.payView.userInteractionEnabled = true;
+            [cell.payView addGestureRecognizer:gestPay];
             
-        }else if([product.id_ isEqualToString:WhiteCollarLoan]){
-            cell.specialtyImage.image = [UIImage imageNamed:@"home11"];
+            UITapGestureRecognizer *gestProcess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loanProcess)];
+            cell.loanProcessView.userInteractionEnabled = true;
+            [cell.loanProcessView addGestureRecognizer:gestProcess];
             
-        }else{
-            
-            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
-            [cell.helpImage addGestureRecognizer:gest];
-            cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
-        
+            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expense)];
+            cell.repayRecordView.userInteractionEnabled = true;
+            [cell.repayRecordView addGestureRecognizer:gest];
+            return cell;
         }
-        return cell;
-    }
-
-    if (indexPath.section == _dataArray.count+1&&_dataArray.count>0) {
-        HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];
-        UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
-        cell.payView.userInteractionEnabled = true;
-        [cell.payView addGestureRecognizer:gestPay];
-        
-        UITapGestureRecognizer *gestProcess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loanProcess)];
-        cell.loanProcessView.userInteractionEnabled = true;
-        [cell.loanProcessView addGestureRecognizer:gestProcess];
-        
-        UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expense)];
-        cell.repayRecordView.userInteractionEnabled = true;
-        [cell.repayRecordView addGestureRecognizer:gest];
-        return cell;
-    }
-
-//    if (indexPath.section == 1) {
-//        
-//        HomeRefuseCell *cell = [HomeRefuseCell cellWithTableView:tableView];
-//        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//        cell.selected = NO;
-//        cell.backgroundColor = [UIColor grayColor];
-//        cell.delegate = self;
-////        NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
-////        [cell setContent:content];
-////        __weak typeof(self) weakSelf = self;
-////        cell.jumpBtnClick = ^(UIButton *jumpBtn) {
-////            [weakSelf moreClick];
-////        };
-////        cell.viewClick = ^(NSString *url){
-////            
-////            [weakSelf clickView:url];
-////        };
-//        return cell;
-//    }
-//    
-//    
-//    if (indexPath.section == 2) {
-//        HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];
-//        UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
-//        cell.payView.userInteractionEnabled = true;
-//        [cell.payView addGestureRecognizer:gestPay];
-//
-//        UITapGestureRecognizer *gestProcess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loanProcess)];
-//        cell.loanProcessView.userInteractionEnabled = true;
-//        [cell.loanProcessView addGestureRecognizer:gestProcess];
-//
-//        UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expense)];
-//        cell.repayRecordView.userInteractionEnabled = true;
-//        [cell.repayRecordView addGestureRecognizer:gest];
-//        return cell;
-//    }
+    }else if([_homeProductList.result.type isEqualToString:@"1"]){
     
+        if (indexPath.section == 1) {
+    
+            HomeRefuseCell *cell = [HomeRefuseCell cellWithTableView:tableView];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            cell.selected = NO;
+            cell.backgroundColor = [UIColor grayColor];
+            cell.homeProductList = _homeProductList;
+            cell.delegate = self;
+            return cell;
+        }
+    
+    
+        if (indexPath.section == 2) {
+            HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];
+            UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
+            cell.payView.userInteractionEnabled = true;
+            [cell.payView addGestureRecognizer:gestPay];
+    
+            UITapGestureRecognizer *gestProcess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loanProcess)];
+            cell.loanProcessView.userInteractionEnabled = true;
+            [cell.loanProcessView addGestureRecognizer:gestProcess];
+    
+            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expense)];
+            cell.repayRecordView.userInteractionEnabled = true;
+            [cell.repayRecordView addGestureRecognizer:gest];
+            return cell;
+        }
+        
+    }
     return cell;
 }
 
@@ -437,7 +451,7 @@
 -(void)moreClick{
     
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = @"http:www.baidu.com";
+    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
     [self.navigationController pushViewController:webVC animated:true];
 }
 
@@ -598,7 +612,14 @@
         for (HomeProductListProducts *product in _homeProductList.result.products) {
             [_dataArray addObject:product];
         }
+        
+        if ([_homeProductList.result.type isEqualToString:@"1"]) {
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_homeProductList.result.refuseMsg];
+        }
+        
+        _homeProductList.result.type = @"1";
         [_tableView reloadData];
+        
     } WithFaileBlock:^{
         
     }];

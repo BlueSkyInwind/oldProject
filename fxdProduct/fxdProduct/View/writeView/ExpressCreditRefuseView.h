@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeProductList.h"
 typedef void(^JumpBtn)();
 typedef void(^ViewClick)(NSString* url);
 @interface ExpressCreditRefuseView : UITableViewCell
@@ -21,7 +22,7 @@ typedef void(^ViewClick)(NSString* url);
 //用钱宝产品费用
 @property (nonatomic,strong)UILabel *feeFirstLabel;
 //用钱宝产品描述
-@property (nonatomic,strong)UIImageView *descFirstImage;
+@property (nonatomic,strong)UIButton *descFirstBtn;
 
 @property (nonatomic,strong)UIImageView *secondImage;
 //贷嘛产品名字
@@ -33,19 +34,17 @@ typedef void(^ViewClick)(NSString* url);
 //贷嘛产品费用
 @property (nonatomic,strong)UILabel *feeSecondLabel;
 //贷嘛产品描述
-@property (nonatomic,strong)UIImageView *descSecondImage;
+@property (nonatomic,strong)UIButton *descSecondBtn;
 
 @property (nonatomic,strong)UIButton *jumpBtn;
 
 @property (nonatomic,copy)JumpBtn jumpBtnClick;
 @property (nonatomic,copy)ViewClick viewClick;
--(void)setContent:(NSArray *)content;
 
 @property (nonatomic,strong)NSString *firstUrl;
 @property (nonatomic,strong)NSString *secondUrl;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
-@property (nonatomic,strong)NSArray *data;
-
+@property (nonatomic,strong)HomeProductList *homeProductList;
 
 @end
