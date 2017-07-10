@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HomeProductList.h"
 
 @protocol HomeRefuseCellDelegate <NSObject>
 -(void)clickView:(NSString *)url;
@@ -18,4 +18,7 @@
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 @property(nonatomic,assign) id<HomeRefuseCellDelegate>delegate;
+
+@property (nonatomic,strong)HomeProductList *homeProductList;
+
 @end

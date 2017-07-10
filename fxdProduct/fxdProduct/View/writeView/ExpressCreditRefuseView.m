@@ -7,7 +7,8 @@
 //
 
 #import "ExpressCreditRefuseView.h"
-#define tipColor rgb(0,170,238)
+#import "UIImageView+WebCache.h"
+
 #define nameColor rgb(26,26,26)
 #define quotaColor rgb(77,77,77)
 #define termColor rgb(102,102,102)
@@ -56,25 +57,25 @@
     [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(wekSelf.mas_top).with.offset(10);
         make.centerX.equalTo(wekSelf.mas_centerX);
-        make.height.equalTo(@20);
-        make.width.equalTo(@220);
+        make.height.equalTo(@22);
+        make.width.equalTo(@270);
     }];
     
     UIImageView *tipImage = [[UIImageView alloc]init];
-    tipImage.image = [UIImage imageNamed:@""];
+    tipImage.image = [UIImage imageNamed:@"icon_shibai"];
     [tipView addSubview:tipImage];
     [tipImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(tipView.mas_top).with.offset(5);
-        make.left.equalTo(tipView.mas_left).with.offset(10);
+        make.top.equalTo(tipView.mas_top).with.offset(0);
+        make.left.equalTo(tipView.mas_left).with.offset(0);
     }];
     
     UILabel *tipLabel = [[UILabel alloc]init];
     tipLabel.text = @"很抱歉，您的借款申请审核失败";
-    tipLabel.textColor = [UIColor redColor];
-    tipLabel.font = [UIFont systemFontOfSize:15];
+    tipLabel.textColor = UI_MAIN_COLOR;
+    tipLabel.font = [UIFont systemFontOfSize:16];
     [tipView addSubview:tipLabel];
     [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(tipView.mas_top).with.offset(5);
+        make.top.equalTo(tipView.mas_top).with.offset(3);
         make.left.equalTo(tipImage.mas_right).with.offset(10);
         make.height.equalTo(@15);
     }];
@@ -94,7 +95,7 @@
     UILabel *refusedLabel = [[UILabel alloc]init];
     refusedLabel.text = @"为您匹配更合适平台，借款成功率提高80%";
     refusedLabel.textAlignment = NSTextAlignmentCenter;
-    refusedLabel.textColor = tipColor;
+    refusedLabel.textColor = termColor;
     refusedLabel.font = [UIFont systemFontOfSize:15];
     if (UI_IS_IPHONE5) {
         refusedLabel.font = [UIFont systemFontOfSize:13];
@@ -127,6 +128,8 @@
     [self.firstImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(firstView.mas_top).with.offset(15);
         make.left.equalTo(firstView.mas_left).with.offset(15);
+        make.width.equalTo(@49);
+        make.height.equalTo(@49);
 
     }];
     
@@ -171,12 +174,22 @@
         
     }];
     
-    self.descFirstImage = [[UIImageView alloc]init];
-    [firstView addSubview:self.descFirstImage];
-    [self.descFirstImage mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.descFirstBtn = [[UIButton alloc]init];
+    [Tool setCorner:self.descFirstBtn borderColor:UI_MAIN_COLOR];
+    self.descFirstBtn.titleLabel.font = [UIFont systemFontOfSize:11];
+    [self.descFirstBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+    [firstView addSubview:self.descFirstBtn];
+    [self.descFirstBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(wekSelf.termFirstLabel.mas_bottom).with.offset(5);
         make.left.equalTo(wekSelf.firstImage.mas_right).with.offset(15);
+        make.height.equalTo(@15);
     }];
+//    self.descFirstImage = [[UIImageView alloc]init];
+//    [firstView addSubview:self.descFirstImage];
+//    [self.descFirstImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(wekSelf.termFirstLabel.mas_bottom).with.offset(5);
+//        make.left.equalTo(wekSelf.firstImage.mas_right).with.offset(15);
+//    }];
     
     UIImageView *arrowFirstImage = [[UIImageView alloc]init];
     arrowFirstImage.image = [UIImage imageNamed:@"icon_jiantou"];
@@ -206,6 +219,8 @@
     [self.secondImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(secondView.mas_top).with.offset(10);
         make.left.equalTo(secondView.mas_left).with.offset(10);
+        make.width.equalTo(@49);
+        make.height.equalTo(@49);
 
     }];
 
@@ -249,13 +264,23 @@
         make.height.equalTo(@12);
     }];
 
-    self.descSecondImage = [[UIImageView alloc]init];
-    [secondView addSubview:self.descSecondImage];
-    [self.descSecondImage mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.descSecondBtn = [[UIButton alloc]init];
+    [Tool setCorner:self.descSecondBtn borderColor:UI_MAIN_COLOR];
+    self.descSecondBtn.titleLabel.font = [UIFont systemFontOfSize:11];
+    [self.descSecondBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+    [firstView addSubview:self.descSecondBtn];
+    [self.descSecondBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(wekSelf.termSecondLabel.mas_bottom).with.offset(5);
         make.left.equalTo(wekSelf.secondImage.mas_right).with.offset(15);
-
+        make.height.equalTo(@15);
     }];
+//    self.descSecondImage = [[UIImageView alloc]init];
+//    [secondView addSubview:self.descSecondImage];
+//    [self.descSecondImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(wekSelf.termSecondLabel.mas_bottom).with.offset(5);
+//        make.left.equalTo(wekSelf.secondImage.mas_right).with.offset(15);
+//
+//    }];
 
     UIImageView *arrowSecondImage = [[UIImageView alloc]init];
     arrowSecondImage.image = [UIImage imageNamed:@"icon_jiantou"];
@@ -268,7 +293,7 @@
     
     self.jumpBtn = [[UIButton alloc]init];
     [self.jumpBtn setTitle:@"点击查看更多" forState:UIControlStateNormal];
-    [self.jumpBtn setTitleColor:tipColor forState:UIControlStateNormal];
+    [self.jumpBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
     self.jumpBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.jumpBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:self.jumpBtn];
@@ -279,7 +304,7 @@
         make.width.equalTo(@100);
     }];
     UIView *lineView = [[UIView alloc]init];
-    lineView.backgroundColor = tipColor;
+    lineView.backgroundColor = UI_MAIN_COLOR;
     [contentView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(wekSelf.jumpBtn.mas_bottom).with.offset(2);
@@ -288,11 +313,6 @@
         make.width.equalTo(@100);
     }];
 }
-
-
-
-
-
 
 
 -(void)clickFirstView:(UITapGestureRecognizer *)gest{
@@ -318,47 +338,47 @@
     
 }
 
--(void)setContent:(NSArray *)content{
 
-    self.firstImage.image = [UIImage imageNamed:@"logo_yongqianbao"];
-    self.nameFirstLabel.text = content[0];
-    self.quotaFirstLabel.text = content[1];
-    self.termFirstLabel.text = content[2];
+-(void)setHomeProductList:(HomeProductList *)homeProductList
+{
+
+    [self settingData:homeProductList];
+}
+
+-(void)settingData:(HomeProductList *)homeProductList{
+
+    NSURL *firstUrl = [NSURL URLWithString:homeProductList.result.products[0].ext_attr_.icon_];
+    [self.firstImage sd_setImageWithURL:firstUrl];
+    self.nameFirstLabel.text = homeProductList.result.products[0].name_;
+    self.quotaFirstLabel.text = [NSString stringWithFormat:@"额度：最高%@元",homeProductList.result.products[0].principal_top_];
+    self.termFirstLabel.text = [NSString stringWithFormat:@"期限：%@-%@%@",homeProductList.result.products[0].staging_top_,homeProductList.result.products[0].staging_bottom_,homeProductList.result.products[0].remark_];
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:self.termFirstLabel.text];
-    [attributedStr addAttribute:NSForegroundColorAttributeName value:tipColor range:NSMakeRange(3, self.termFirstLabel.text.length-4)];
+    [attributedStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, self.termFirstLabel.text.length-4)];
     self.termFirstLabel.attributedText = attributedStr;
     
-    self.feeFirstLabel.text = content[3];
+    self.feeFirstLabel.text = [NSString stringWithFormat:@"费用：%@/%@",homeProductList.result.products[0].pre_service_fee_rate_,homeProductList.result.products[0].remark_];
     NSMutableAttributedString *feeAttribute = [[NSMutableAttributedString alloc]initWithString:self.feeFirstLabel.text];
-    [feeAttribute addAttribute:NSForegroundColorAttributeName value:tipColor range:NSMakeRange(3, self.feeFirstLabel.text.length-5)];
+    [feeAttribute addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, self.feeFirstLabel.text.length-5)];
     self.feeFirstLabel.attributedText = feeAttribute;
-    self.descFirstImage.image = [UIImage imageNamed:@"tuoyuan_1"];
+    [self.descFirstBtn setTitle:[NSString stringWithFormat:@" %@ ",homeProductList.result.products[0].ext_attr_.tags[0]] forState:UIControlStateNormal];
+//    self.descFirstImage.image = [UIImage imageNamed:@"tuoyuan_1"];
     
-    
-    self.secondImage.image = [UIImage imageNamed:@"logo_daima"];
-    self.nameSecondLabel.text = content[4];
-    self.quotaSecondLabel.text = content[5];
-    self.termSecondLabel.text = content[6];
+    NSURL *secondUrl = [NSURL URLWithString:homeProductList.result.products[1].ext_attr_.icon_];
+    [self.secondImage sd_setImageWithURL:secondUrl];
+    self.nameSecondLabel.text = homeProductList.result.products[1].name_;
+    self.quotaSecondLabel.text = [NSString stringWithFormat:@"额度：最高%@元",homeProductList.result.products[1].principal_top_];
+    self.termSecondLabel.text = [NSString stringWithFormat:@"期限：%@-%@%@",homeProductList.result.products[1].staging_top_,homeProductList.result.products[1].staging_bottom_,homeProductList.result.products[1].remark_];
     NSMutableAttributedString *termAttribute = [[NSMutableAttributedString alloc]initWithString:self.termSecondLabel.text];
-    [termAttribute addAttribute:NSForegroundColorAttributeName value:tipColor range:NSMakeRange(3, self.termSecondLabel.text.length-4)];
+    [termAttribute addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, self.termSecondLabel.text.length-4)];
     self.termSecondLabel.attributedText = termAttribute;
-    self.feeSecondLabel.text = content[7];
+    self.feeSecondLabel.text = [NSString stringWithFormat:@"费用：%@%@",homeProductList.result.products[1].pre_service_fee_rate_,homeProductList.result.products[1].remark_];
     NSMutableAttributedString *feeSecondAttribute = [[NSMutableAttributedString alloc]initWithString:self.feeSecondLabel.text];
-    [feeSecondAttribute addAttribute:NSForegroundColorAttributeName value:tipColor range:NSMakeRange(3, self.feeSecondLabel.text.length-4)];
+    [feeSecondAttribute addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, self.feeSecondLabel.text.length-4)];
     self.feeSecondLabel.attributedText = feeSecondAttribute;
-    self.descSecondImage.image = [UIImage imageNamed:@"tuoyuan_2"];
-    self.firstUrl = @"http:www.baidu.com";
-    self.secondUrl = @"http:www.taobao.com";
-    
-}
-
--(void)setData:(NSArray *)data{
-
-    [self settingData:data];
-}
-
--(void)settingData:(NSArray *)data{
-
-    
+    [self.descSecondBtn setTitle:[NSString stringWithFormat:@" %@ ",homeProductList.result.products[1].ext_attr_.tags[0]] forState:UIControlStateNormal];
+//    self.descSecondImage.image = [UIImage imageNamed:@"tuoyuan_2"];
+    self.firstUrl = homeProductList.result.products[1].ext_attr_.path_;
+    self.secondUrl = homeProductList.result.products[1].ext_attr_.path_;
+    [self setNeedsDisplay];
 }
 @end

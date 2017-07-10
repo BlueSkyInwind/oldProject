@@ -86,10 +86,29 @@
     self.passIcon.image = [[UIImage imageNamed:@"1_Signin_icon_03"] imageWithTintColor:UI_MAIN_COLOR];
     self.invIcon.image = [[UIImage imageNamed:@"1_Signin_icon_07"] imageWithTintColor:UI_MAIN_COLOR];
     
+    self.verCodeText.delegate = self;
+    [self.verCodeText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventEditingChanged];
+    self.phoneNumText.delegate = self;
+    [self.phoneNumText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventEditingChanged];
+    
     [self setPicVerifyCode];
     [self setLabel];
     [self setUISignal];
     
+}
+
+-(void)changTextField:(UITextField *)textField{
+
+    if (textField == self.verCodeText) {
+        if (textField.text.length>6) {
+            self.verCodeText.text = [textField.text substringToIndex:6];
+        }
+    }
+    if (textField == self.phoneNumText) {
+        if (textField.text.length>11) {
+            self.phoneNumText.text = [textField.text substringToIndex:11];
+        }
+    }
 }
 - (void)viewWillAppear:(BOOL)animated
 {

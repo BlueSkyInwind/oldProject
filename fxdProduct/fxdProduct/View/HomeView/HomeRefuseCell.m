@@ -86,21 +86,18 @@
     ExpressCreditRefuseView *cell = [ExpressCreditRefuseView cellWithTableView:tableView];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.selected = NO;
-    cell.backgroundColor = [UIColor grayColor];
-    NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
-    [cell setContent:content];
+    cell.backgroundColor = rgb(245, 245, 245);
+    cell.homeProductList = _homeProductList;
     __weak typeof(self) weakSelf = self;
     cell.jumpBtnClick = ^(UIButton *jumpBtn) {
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(moreClick)]) {
             [weakSelf.delegate moreClick];
         }
-//        [weakSelf moreClick];
     };
     cell.viewClick = ^(NSString *url){
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(clickView:)]) {
             [weakSelf.delegate clickView:url];
         }
-//        [weakSelf clickView:url];
     };
     return cell;
     

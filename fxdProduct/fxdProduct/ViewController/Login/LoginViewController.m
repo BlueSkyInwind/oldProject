@@ -218,7 +218,7 @@
     veriyCode = code;
     
     if (_loginParse && [_loginParse.flag isEqualToString:@"0005"]) {
-        if (code && ![code isEqualToString:@""]) {
+        if (code && (![code isEqualToString:@""] ||code ==nil)) {
             [self startLogin];
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入验证码"];
