@@ -131,9 +131,6 @@
     
     self.tableView.tableHeaderView = _sdView;
     
-    
-    
-    
 }
 
 
@@ -248,7 +245,6 @@
             i=2;
         }
     }else if ([_homeProductList.result.type isEqualToString:@"1"]){
-    
         i = 3;
     }else{
         i = 2;
@@ -276,13 +272,11 @@
             return (_k_h-0.5*_k_w-155)/i;
         }
     }else if ([_homeProductList.result.type isEqualToString:@"1"]){
-    
         if (indexPath.section == 0) {
                 return 30.f;
             } else if(indexPath.section == 2){
                 return 70;
             }else{
-
                 return (_k_h-0.5*_k_w-215);
             }
     }else{
@@ -290,7 +284,6 @@
         if (indexPath.section == 0) {
             return 30.f;
         }else{
-        
             return (_k_h-0.5*_k_w-155);
         }
     }
@@ -412,7 +405,6 @@
             cell.delegate = self;
             return cell;
         }
-    
     
         if (indexPath.section == 2) {
             HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];

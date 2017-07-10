@@ -32,7 +32,6 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 //http://192.168.12.109:8082/fxd-esb/  罗兵本地
 //http://192.168.7.140:8001/fxd-esb/esb/ 合规贷后测试地址
 
-
 //NSString * const _main_url  =   @"http://192.168.12.109:8082/fxd-esb/esb/";
 //NSString * const _ValidESB_url  =   @"http://192.168.12.109:8082/fxd-esb/";
 //NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
