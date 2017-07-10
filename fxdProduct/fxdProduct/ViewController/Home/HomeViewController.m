@@ -566,11 +566,9 @@
                 [self.navigationController pushViewController:p2pVC animated:YES];
                 
             }else{
-                
                 RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                 repayRequest.targetVC = self;
                 [repayRequest repayRequest];
-                
             }
         }else{
             
