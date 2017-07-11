@@ -236,8 +236,8 @@
     FXDWebViewController *webView = [[FXDWebViewController alloc] init];
     webView.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
     [self.navigationController pushViewController:webView animated:true];
+    
 }
-
 
 -(void)applyBtn{
 

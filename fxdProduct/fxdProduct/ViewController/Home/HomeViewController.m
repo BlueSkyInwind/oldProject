@@ -252,9 +252,6 @@
     
     self.tableView.tableHeaderView = _sdView;
     
-    
-    
-    
 }
 
 
@@ -407,6 +404,7 @@
     }else{
     
         return (_k_h-0.5*_k_w-235)/i;
+
     }
 
 }
@@ -648,11 +646,9 @@
                     
                 }
             }else{
-                
                 RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                 repayRequest.targetVC = weakSelf;
                 [repayRequest repayRequest];
-                
             }
         }else{
             RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
