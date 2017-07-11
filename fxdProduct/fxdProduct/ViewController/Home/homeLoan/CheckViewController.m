@@ -222,6 +222,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
 
+                checkFalse.seeView.hidden = YES;
+                checkFalse.jsdView.hidden = YES;
                 if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]){
                     
                         [self getContent];
