@@ -1229,7 +1229,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         [self fatchRate:^(RateModel *rate) {
             PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
             payLoanview.product_id = WhiteCollarLoan;
-            //            payLoanview.userState = model;
+            payLoanview.userState = _userStateModel;
             payLoanview.rateModel = rate;
             [self.navigationController pushViewController:payLoanview animated:true];
         }];
