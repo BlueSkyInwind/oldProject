@@ -53,6 +53,7 @@
     
     UIView *tipView = [[UIView alloc]init];
     tipView.backgroundColor = [UIColor clearColor];
+//    tipView.backgroundColor = [UIColor redColor];
     [self addSubview:tipView];
     [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(wekSelf.mas_top).with.offset(10);
@@ -72,7 +73,12 @@
     UILabel *tipLabel = [[UILabel alloc]init];
     tipLabel.text = @"很抱歉，您的借款申请审核失败";
     tipLabel.textColor = UI_MAIN_COLOR;
-    tipLabel.font = [UIFont systemFontOfSize:16];
+    if (UI_IS_IPHONE5) {
+        tipLabel.font = [UIFont systemFontOfSize:13];
+    }else{
+    
+        tipLabel.font = [UIFont systemFontOfSize:16];
+    }
     [tipView addSubview:tipLabel];
     [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(tipView.mas_top).with.offset(3);
@@ -104,9 +110,9 @@
     
     [refusedLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(contentView.mas_centerX);
-        make.left.equalTo(contentView.mas_left).with.offset(20);
-        make.top.equalTo(contentView.mas_top).with.offset(5);
-        make.right.equalTo(contentView.mas_right).with.offset(-20);
+        make.left.equalTo(contentView.mas_left).with.offset(0);
+        make.top.equalTo(contentView.mas_top).with.offset(10);
+        make.right.equalTo(contentView.mas_right).with.offset(0);
         make.height.equalTo(@30);
     }];
     
@@ -118,8 +124,8 @@
     [contentView addSubview:firstView];
     [firstView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(contentView.mas_top).with.offset(30);
-        make.left.equalTo(contentView.mas_left).with.offset(20);
-        make.right.equalTo(contentView.mas_right).with.offset(-20);
+        make.left.equalTo(contentView.mas_left).with.offset(0);
+        make.right.equalTo(contentView.mas_right).with.offset(0);
         make.height.equalTo(@100);
     }];
     
@@ -127,7 +133,7 @@
     [firstView addSubview:self.firstImage];
     [self.firstImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(firstView.mas_top).with.offset(15);
-        make.left.equalTo(firstView.mas_left).with.offset(15);
+        make.left.equalTo(firstView.mas_left).with.offset(8);
         make.width.equalTo(@49);
         make.height.equalTo(@49);
 
@@ -184,19 +190,13 @@
         make.left.equalTo(wekSelf.firstImage.mas_right).with.offset(15);
         make.height.equalTo(@15);
     }];
-//    self.descFirstImage = [[UIImageView alloc]init];
-//    [firstView addSubview:self.descFirstImage];
-//    [self.descFirstImage mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(wekSelf.termFirstLabel.mas_bottom).with.offset(5);
-//        make.left.equalTo(wekSelf.firstImage.mas_right).with.offset(15);
-//    }];
     
     UIImageView *arrowFirstImage = [[UIImageView alloc]init];
     arrowFirstImage.image = [UIImage imageNamed:@"icon_jiantou"];
     [firstView addSubview:arrowFirstImage];
     [arrowFirstImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(firstView.mas_top).with.offset(40);
-        make.right.equalTo(firstView.mas_right).with.offset(-15);
+        make.right.equalTo(firstView.mas_right).with.offset(-10);
 
     }];
     
@@ -208,8 +208,8 @@
     [contentView addSubview:secondView];
     [secondView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(firstView.mas_bottom).with.offset(0);
-        make.left.equalTo(contentView.mas_left).with.offset(20);
-        make.right.equalTo(contentView.mas_right).with.offset(-20);
+        make.left.equalTo(contentView.mas_left).with.offset(0);
+        make.right.equalTo(contentView.mas_right).with.offset(0);
         make.height.equalTo(@100);
         
     }];
@@ -218,7 +218,7 @@
     [secondView addSubview:self.secondImage];
     [self.secondImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(secondView.mas_top).with.offset(10);
-        make.left.equalTo(secondView.mas_left).with.offset(10);
+        make.left.equalTo(secondView.mas_left).with.offset(8);
         make.width.equalTo(@49);
         make.height.equalTo(@49);
 
@@ -274,20 +274,13 @@
         make.left.equalTo(wekSelf.secondImage.mas_right).with.offset(15);
         make.height.equalTo(@15);
     }];
-//    self.descSecondImage = [[UIImageView alloc]init];
-//    [secondView addSubview:self.descSecondImage];
-//    [self.descSecondImage mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(wekSelf.termSecondLabel.mas_bottom).with.offset(5);
-//        make.left.equalTo(wekSelf.secondImage.mas_right).with.offset(15);
-//
-//    }];
 
     UIImageView *arrowSecondImage = [[UIImageView alloc]init];
     arrowSecondImage.image = [UIImage imageNamed:@"icon_jiantou"];
     [secondView addSubview:arrowSecondImage];
     [arrowSecondImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(secondView.mas_top).with.offset(40);
-        make.right.equalTo(secondView.mas_right).with.offset(-15);
+        make.right.equalTo(secondView.mas_right).with.offset(-10);
 
     }];
     
@@ -361,7 +354,6 @@
     [feeAttribute addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, self.feeFirstLabel.text.length-5)];
     self.feeFirstLabel.attributedText = feeAttribute;
     [self.descFirstBtn setTitle:[NSString stringWithFormat:@" %@ ",homeProductList.result.products[0].ext_attr_.tags[0]] forState:UIControlStateNormal];
-//    self.descFirstImage.image = [UIImage imageNamed:@"tuoyuan_1"];
     
     NSURL *secondUrl = [NSURL URLWithString:homeProductList.result.products[1].ext_attr_.icon_];
     [self.secondImage sd_setImageWithURL:secondUrl];
@@ -376,7 +368,6 @@
     [feeSecondAttribute addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, self.feeSecondLabel.text.length-4)];
     self.feeSecondLabel.attributedText = feeSecondAttribute;
     [self.descSecondBtn setTitle:[NSString stringWithFormat:@" %@ ",homeProductList.result.products[1].ext_attr_.tags[0]] forState:UIControlStateNormal];
-//    self.descSecondImage.image = [UIImage imageNamed:@"tuoyuan_2"];
     self.firstUrl = homeProductList.result.products[1].ext_attr_.path_;
     self.secondUrl = homeProductList.result.products[1].ext_attr_.path_;
     [self setNeedsDisplay];

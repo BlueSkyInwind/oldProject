@@ -403,7 +403,13 @@
         return 30.f;
     }else{
     
-        return (_k_h-0.5*_k_w-235)/i;
+        if (UI_IS_IPHONE5) {
+            return (_k_h-0.5*_k_w-225)/i;
+        }else{
+            
+            return (_k_h-0.5*_k_w-235)/i;
+        }
+        
 
     }
 
