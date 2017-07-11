@@ -429,7 +429,7 @@ NSString * const    _contractList_url           =    @"hg/contractList.jhtml";
 NSString * const    _contractStr_url            =    @"hg/contractStr.jhtml";
 
 //发送短信接口
-//NSString * const    _sendSms_url    =    @"http/do.jhtml?router=sendSmsSHService.send";
+//NSString * const    _sendSms_url    =    @"h ttp/do.jhtml?router=sendSmsSHService.send";
 NSString * const    _sendSms_url    =    @"hg/sendSms.jhtml";
 
 //换绑银行卡
