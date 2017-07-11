@@ -58,22 +58,19 @@
     self.tableView.showsHorizontalScrollIndicator = NO;
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.scrollEnabled = YES;
-    
+    __weak typeof(self) wekSelf = self;
     [self addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left);
-        make.right.equalTo(self.mas_right);
-        make.top.equalTo(self.mas_top);
-        make.bottom.equalTo(self.mas_bottom);
+        make.left.equalTo(wekSelf.mas_left);
+        make.right.equalTo(wekSelf.mas_right);
+        make.top.equalTo(wekSelf.mas_top);
+        make.bottom.equalTo(wekSelf.mas_bottom);
         
     }];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (UI_IS_IPHONE5) {
-        return 30;
-    }
     return 330;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -102,26 +99,5 @@
     return cell;
     
 }
-
-///**
-// 点击view
-// */
-//-(void)clickView:(NSString *)url{
-//    
-//    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-//    webVC.urlStr = url;
-//    [self.navigationController pushViewController:webVC animated:true];
-//    
-//}
-//
-///**
-// 点击更多
-// */
-//-(void)moreClick{
-//    
-//    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-//    webVC.urlStr = @"http:www.baidu.com";
-//    [self.navigationController pushViewController:webVC animated:true];
-//}
 
 @end

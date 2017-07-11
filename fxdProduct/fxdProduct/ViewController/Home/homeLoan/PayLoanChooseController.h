@@ -23,4 +23,5 @@
 
 @property (nonatomic, copy) NSString *rulesid;
 
+
 @end

@@ -61,7 +61,6 @@
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
     QryUserStatusModel *_qryUserStatusModel;
-    NSString *_type;
     
 }
 
@@ -82,7 +81,129 @@
     [self setUpTableview];
     [self setNavQRRightBar];
     [self fatchAdv];
+    [self createBottomView];
 
+}
+
+
+-(void)createBottomView{
+
+    CGFloat heigh;
+    if (UI_IS_IPHONE5) {
+        heigh = 70;
+    }else{
+    
+        heigh = 80;
+    }
+    UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, _k_h-49-heigh, _k_w, heigh)];
+    bottomView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:bottomView];
+//    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(self.view.mas_bottom).with.offset(-55);
+//        make.left.equalTo(self.view.mas_left).with.offset(0);
+//        make.right.equalTo(self.view.mas_right).with.offset(0);
+//        make.width.equalTo(@186);
+//    }];
+    UIView *payView = [[UIView alloc]init];
+    UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
+    payView.userInteractionEnabled = true;
+    [payView addGestureRecognizer:gestPay];
+    [bottomView addSubview:payView];
+    [payView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bottomView.mas_top).with.offset(0);
+        make.left.equalTo(bottomView.mas_left).with.offset(25);
+        make.bottom.equalTo(bottomView.mas_bottom).with.offset(0);
+        make.width.equalTo(@70);
+    }];
+    
+    UIImageView *payImage = [[UIImageView alloc]init];
+    payImage.image = [UIImage imageNamed:@"home_06"];
+    [payView addSubview:payImage];
+    [payImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(payView.mas_top).with.offset(10);
+        make.centerX.equalTo(payView.mas_centerX);
+    }];
+    UILabel *payLabel = [[UILabel alloc]init];
+    payLabel.text = @"我要还款";
+    payLabel.font = [UIFont systemFontOfSize:13];
+    payLabel.textAlignment = NSTextAlignmentCenter;
+    payLabel.textColor = [UIColor colorWithRed:169/255.0 green:169/255.0 blue:169/255.0 alpha:1.0];
+    [payView addSubview:payLabel];
+    [payLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(payImage.mas_bottom).with.offset(5);
+        make.centerX.equalTo(payView.mas_centerX);
+        make.height.equalTo(@15);
+        make.width.equalTo(@70);
+    }];
+    
+    UIView *processView = [[UIView alloc]init];
+    
+    UITapGestureRecognizer *gestProcess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loanProcess)];
+    processView.userInteractionEnabled = true;
+    [processView addGestureRecognizer:gestProcess];
+    [bottomView addSubview:processView];
+    [processView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bottomView.mas_top).with.offset(0);
+        make.bottom.equalTo(bottomView.mas_bottom).with.offset(0);
+        make.centerX.equalTo(bottomView.mas_centerX);
+        make.width.equalTo(@70);
+    }];
+    
+    UIImageView *processImage = [[UIImageView alloc]init];
+    processImage.image = [UIImage imageNamed:@"home_07"];
+    [processView addSubview:processImage];
+    [processImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(processView.mas_top).with.offset(10);
+        make.centerX.equalTo(processView.mas_centerX);
+        
+    }];
+    
+    UILabel *processLabel = [[UILabel alloc]init];
+    processLabel.textAlignment = NSTextAlignmentCenter;
+    processLabel.text = @"借款进度";
+    processLabel.font = [UIFont systemFontOfSize:13];
+    processLabel.textColor = [UIColor colorWithRed:169/255.0 green:169/255.0 blue:169/255.0 alpha:1.0];
+    [processView addSubview:processLabel];
+    [processLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(processImage.mas_bottom).with.offset(5);
+        make.centerX.equalTo(processView.mas_centerX);
+        make.height.equalTo(@15);
+        make.width.equalTo(@70);
+    }];
+    
+    UIView *expenseView = [[UIView alloc]init];
+    UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expense)];
+    expenseView.userInteractionEnabled = true;
+    [expenseView addGestureRecognizer:gest];
+    [bottomView addSubview:expenseView];
+    [expenseView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bottomView.mas_top).with.offset(0);
+        make.right.equalTo(bottomView.mas_right).with.offset(-25);
+        make.bottom.equalTo(bottomView.mas_bottom).with.offset(0);
+        make.width.equalTo(@70);
+    }];
+    
+    UIImageView *expenseImage = [[UIImageView alloc]init];
+    expenseImage.image = [UIImage imageNamed:@"home_09"];
+    [expenseView addSubview:expenseImage];
+    [expenseImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(expenseView.mas_top).with.offset(10);
+        make.centerX.equalTo(expenseView.mas_centerX);
+    }];
+    
+    UILabel *expenseLabel = [[UILabel alloc]init];
+    expenseLabel.text = @"费用说明";
+    expenseLabel.textAlignment = NSTextAlignmentCenter;
+    expenseLabel.font = [UIFont systemFontOfSize:13];
+    expenseLabel.textColor = [UIColor colorWithRed:169/255.0 green:169/255.0 blue:169/255.0 alpha:1.0];
+    [expenseView addSubview:expenseLabel];
+    [expenseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(expenseImage.mas_bottom).with.offset(5);
+        make.centerX.equalTo(expenseView.mas_centerX);
+        make.height.equalTo(@15);
+        make.width.equalTo(@70);
+    }];
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -225,9 +346,9 @@
 {
     NSInteger i=0;
     if (_dataArray.count>0) {
-        i=_dataArray.count+1;
+        i=_dataArray.count;
     }else{
-        i=1;
+        i=2;
     }
     if (section < i) {
         return 3.0f;
@@ -238,18 +359,20 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger i = 0;
-    if ([_homeProductList.result.type isEqualToString:@"0"]) {
-        if (_dataArray.count>0) {
-            i=_dataArray.count+2;
+    if (_dataArray.count>0) {
+        if ([_homeProductList.result.type isEqualToString:@"0"]) {
+            i = _dataArray.count + 1;
+            
         }else{
-            i=2;
+        
+            i = 2;
         }
-    }else if ([_homeProductList.result.type isEqualToString:@"1"]){
-        i = 3;
     }else{
-        i = 2;
+    
+        i = 1;
     }
     return i;
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -259,34 +382,37 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_homeProductList.result.type isEqualToString:@"0"]) {
-        NSInteger i = 0;
-        if (_dataArray.count>0) {
-            i=_dataArray.count+1;
-        }else{
-            i=1;
-        }
-        if (indexPath.section == 0) {
-            return 30.f;
-        } else {
-            return (_k_h-0.5*_k_w-155)/i;
-        }
-    }else if ([_homeProductList.result.type isEqualToString:@"1"]){
-        if (indexPath.section == 0) {
-                return 30.f;
-            } else if(indexPath.section == 2){
-                return 70;
+    NSInteger i = 0;
+    if (_dataArray.count > 0) {
+        if ([_homeProductList.result.type isEqualToString:@"0"]) {
+            if (_dataArray.count == 1) {
+                i = 3;
             }else{
-                return (_k_h-0.5*_k_w-215);
+            
+                i = _dataArray.count;
             }
+            
+        }else{
+            i = 1;
+        }
     }else{
     
-        if (indexPath.section == 0) {
-            return 30.f;
-        }else{
-            return (_k_h-0.5*_k_w-155);
-        }
+        i = 1;
     }
+    if (indexPath.section == 0) {
+        return 30.f;
+    }else{
+    
+        if (UI_IS_IPHONE5) {
+            return (_k_h-0.5*_k_w-225)/i;
+        }else{
+            
+            return (_k_h-0.5*_k_w-235)/i;
+        }
+        
+
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -378,21 +504,6 @@
             return cell;
         }
         
-        if (indexPath.section == _dataArray.count+1&&_dataArray.count>0) {
-            HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];
-            UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
-            cell.payView.userInteractionEnabled = true;
-            [cell.payView addGestureRecognizer:gestPay];
-            
-            UITapGestureRecognizer *gestProcess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loanProcess)];
-            cell.loanProcessView.userInteractionEnabled = true;
-            [cell.loanProcessView addGestureRecognizer:gestProcess];
-            
-            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expense)];
-            cell.repayRecordView.userInteractionEnabled = true;
-            [cell.repayRecordView addGestureRecognizer:gest];
-            return cell;
-        }
     }else if([_homeProductList.result.type isEqualToString:@"1"]){
     
         if (indexPath.section == 1) {
@@ -403,22 +514,6 @@
             cell.backgroundColor = [UIColor grayColor];
             cell.homeProductList = _homeProductList;
             cell.delegate = self;
-            return cell;
-        }
-    
-        if (indexPath.section == 2) {
-            HomeBottomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBottomCell"];
-            UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
-            cell.payView.userInteractionEnabled = true;
-            [cell.payView addGestureRecognizer:gestPay];
-    
-            UITapGestureRecognizer *gestProcess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loanProcess)];
-            cell.loanProcessView.userInteractionEnabled = true;
-            [cell.loanProcessView addGestureRecognizer:gestProcess];
-    
-            UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expense)];
-            cell.repayRecordView.userInteractionEnabled = true;
-            [cell.repayRecordView addGestureRecognizer:gest];
             return cell;
         }
         
@@ -601,13 +696,14 @@
         [_dataArray removeAllObjects];
         for (HomeProductListProducts *product in _homeProductList.result.products) {
             [_dataArray addObject:product];
+            
         }
         
         if ([_homeProductList.result.type isEqualToString:@"1"]) {
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_homeProductList.result.refuseMsg];
         }
         
-        _homeProductList.result.type = @"1";
+//        _homeProductList.result.type = @"1";
         [_tableView reloadData];
         
     } WithFaileBlock:^{

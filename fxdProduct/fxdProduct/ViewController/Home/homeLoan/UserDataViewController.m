@@ -624,7 +624,7 @@
             }
         }
             break;
-            case 5:
+        case 5:
             if (_isZmxyAuth.integerValue == 2||processFlot ==1) {
                 
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];

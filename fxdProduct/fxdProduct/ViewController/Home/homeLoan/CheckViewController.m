@@ -221,43 +221,29 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoLabel.hidden = YES;
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
-                if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
 
-                    if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]){
-                        
-                            [self getContent];
-                            checkFalse.jsdView.hidden = NO;
-                            [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
-                        
-                    }else{
+                if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]){
                     
-                        checkFalse.seeView.hidden = NO;
-                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
-                    }
-//                        if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
-//                            checkFalse.seeView.hidden = NO;
-//                            [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
-//                        }else{
-//                        
-//                            [self getContent];
-//                            checkFalse.jsdView.hidden = NO;
-//                            [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
-//                        }
+                        [self getContent];
+                        checkFalse.jsdView.hidden = NO;
+                        [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
                     
                 }else{
                 
-                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-                        
-                        checkFalse.seeView.hidden = NO;
-                        checkFalse.jsdView.hidden = YES;
-                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
-                    }else{
+                    checkFalse.seeView.hidden = NO;
+                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                }
+                
+                
+                if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
                     
-                        checkFalse.seeView.hidden = YES;
-                        checkFalse.jsdView.hidden = YES;
-                    }
-                   
-
+                    checkFalse.seeView.hidden = NO;
+                    checkFalse.jsdView.hidden = YES;
+                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                }else{
+                
+                    checkFalse.seeView.hidden = YES;
+                    checkFalse.jsdView.hidden = YES;
                 }
                 
             }
@@ -1226,19 +1212,20 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     if([_userStateModel.product_id isEqualToString:SalaryLoan]){
         
-        [self fatchRate:^(RateModel *rate) {
-            PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-            payLoanview.product_id = WhiteCollarLoan;
-            //            payLoanview.userState = model;
-            payLoanview.rateModel = rate;
-            [self.navigationController pushViewController:payLoanview animated:true];
-        }];
-        
-    }else{
-        
         UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
         userDataVC.product_id = SalaryLoan;
         [self.navigationController pushViewController:userDataVC animated:true];
+        
+        
+    }else{
+        
+        [self fatchRate:^(RateModel *rate) {
+            PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+            payLoanview.product_id = WhiteCollarLoan;
+            payLoanview.userState = _userStateModel;
+            payLoanview.rateModel = rate;
+            [self.navigationController pushViewController:payLoanview animated:true];
+        }];
     }
 //    UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
 //    userDataVC.product_id = SalaryLoan;
