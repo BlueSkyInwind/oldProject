@@ -508,7 +508,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                 [_situations addObject:[_vaildSituations objectAtIndex:i]];
             }
         }
-        
         if (_situations.count > 0) {
             [self fatchCardInfo];
         } else {

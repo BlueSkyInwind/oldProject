@@ -24,6 +24,7 @@
 
 - (void)checkAPPVersion
 {
+    
     NSString *app_Version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSDictionary *paramDic = @{@"platform_type_":PLATFORM,
                                @"app_version_":app_Version};

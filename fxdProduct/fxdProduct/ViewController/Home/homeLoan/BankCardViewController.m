@@ -620,7 +620,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     }else{
         
         if(_isP2P){
-            
 //        [self getFxdCaseInfo];
          [self openAccount];
         }else{
@@ -763,7 +762,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     } failure:^(EnumServerStatus status, id object) {
         
     }];
-    
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
