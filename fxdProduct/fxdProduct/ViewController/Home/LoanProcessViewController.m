@@ -171,7 +171,7 @@
         }
         return refuseView;
         
-    }else{//白领贷
+    }else{//急速贷导流
 
         RefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"RefuseView" owner:self options:nil]lastObject];
         refuseView.frame = CGRectZero;

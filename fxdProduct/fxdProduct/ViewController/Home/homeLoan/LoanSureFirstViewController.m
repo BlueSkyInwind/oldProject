@@ -308,7 +308,7 @@
     FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
     NSString *blackBox = manager->getDeviceInfo();
     
-    NSDictionary *paramDic = @{@"product_id_":[Utility sharedUtility].userInfo.pruductId,
+    NSDictionary *paramDic = @{@"product_id_":_productId,
                                @"third_tongd_code":blackBox};
     __weak LoanSureFirstViewController *weakSelf = self;
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_secondApply_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
