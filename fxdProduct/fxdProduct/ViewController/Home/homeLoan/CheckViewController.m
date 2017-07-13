@@ -222,6 +222,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
 
+                checkFalse.seeView.hidden = YES;
+                checkFalse.jsdView.hidden = YES;
                 if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]){
                     
                         [self getContent];
@@ -230,21 +232,22 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     
                 }else{
                 
-                    checkFalse.seeView.hidden = NO;
-                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                    //1表示不是渠道用户 0是渠道用户
+                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
+                        
+                        checkFalse.seeView.hidden = NO;
+                        checkFalse.jsdView.hidden = YES;
+                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                    }else{
+                        
+                        checkFalse.seeView.hidden = YES;
+                        checkFalse.jsdView.hidden = YES;
+                    }
+//                    checkFalse.seeView.hidden = NO;
+//                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
                 }
                 
                 
-                if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-                    
-                    checkFalse.seeView.hidden = NO;
-                    checkFalse.jsdView.hidden = YES;
-                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
-                }else{
-                
-                    checkFalse.seeView.hidden = YES;
-                    checkFalse.jsdView.hidden = YES;
-                }
                 
             }
             
@@ -1212,20 +1215,21 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     if([_userStateModel.product_id isEqualToString:SalaryLoan]){
         
-        UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-        userDataVC.product_id = SalaryLoan;
-        [self.navigationController pushViewController:userDataVC animated:true];
-        
-        
-    }else{
-        
         [self fatchRate:^(RateModel *rate) {
             PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-            payLoanview.product_id = WhiteCollarLoan;
+            payLoanview.product_id = RapidLoan;
             payLoanview.userState = _userStateModel;
             payLoanview.rateModel = rate;
             [self.navigationController pushViewController:payLoanview animated:true];
         }];
+        
+        
+    }else{
+        
+        UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+        userDataVC.product_id = SalaryLoan;
+        [self.navigationController pushViewController:userDataVC animated:true];
+        
     }
 //    UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
 //    userDataVC.product_id = SalaryLoan;
@@ -1236,10 +1240,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 -(void)getContent{
     NSString *product;
     if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
-        product = SalaryLoan;
+        product = RapidLoan;
     }else{
     
-        product = WhiteCollarLoan;
+        product = SalaryLoan;
     }
      NSDictionary *dic = @{@"priduct_id_":product};
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
@@ -1248,8 +1252,19 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         if ([rateParse.flag isEqualToString:@"0000"]) {
             
             checkFalse.nameLabel.text = rateParse.result.name_;
-            checkFalse.quotaLabel.text = [NSString stringWithFormat:@"%ld-%ld元",rateParse.result.principal_bottom_,rateParse.result.principal_top_];
-            checkFalse.termLabel.text = [NSString stringWithFormat:@"%ld-%ld%@",rateParse.result.staging_bottom_,rateParse.result.staging_top_,rateParse.result.remark_];
+            if ([product isEqualToString:RapidLoan]) {
+                checkFalse.nameImage.image = [UIImage imageNamed:@"home_02"];
+                checkFalse.homeImage.image = [UIImage imageNamed:@"home_05"];
+                checkFalse.quotaLabel.text = @"500-1000元";
+                checkFalse.termLabel.text = @"14天";
+            }else{
+            
+                checkFalse.homeImage.image = [UIImage imageNamed:@"home_04"];
+                checkFalse.nameImage.image = [UIImage imageNamed:@"home_01"];
+                checkFalse.quotaLabel.text = [NSString stringWithFormat:@"%ld-%ld元",rateParse.result.principal_bottom_,rateParse.result.principal_top_];
+                checkFalse.termLabel.text = [NSString stringWithFormat:@"%ld-%ld%@",rateParse.result.staging_bottom_,rateParse.result.staging_top_,rateParse.result.remark_];
+            }
+            
             
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
