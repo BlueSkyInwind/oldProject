@@ -111,12 +111,14 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         case 7:    //正常放款->开始有记录
         case 8:    //逾期
             _repayStateFlag=@0;
-            if ([_userStateParse.platform_type isEqualToString:@"0"]) {
-                [self post_getLastDate];
-            }
-            if ([_userStateParse.platform_type isEqualToString:@"2"]) {
-                [self fatchP2PBillDetail];
-            }
+            [self post_getLastDate];
+
+//            if ([_userStateParse.platform_type isEqualToString:@"0"]) {
+//                [self post_getLastDate];
+//            }
+//            if ([_userStateParse.platform_type isEqualToString:@"2"]) {
+//                [self fatchP2PBillDetail];
+//            }
             break;
         default:
             _repayStateFlag=@100;
@@ -264,7 +266,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
  *  查询用户账单信息
  *  status: 1->已还   2->逾期   3->未来期   4->当期
  */
-
 -(void)selectAll{
 
     _readyPayAmount = 0.0;

@@ -147,7 +147,20 @@
     self.regSecoryLabel.userInteractionEnabled=YES;
     [self.regSecoryLabel addGestureRecognizer:tapSecory];
 }
-
+-(BOOL)checkMoblieNumber:(NSString *)number{
+    
+    NSString * numStr = @"^\\d{5,11}$";
+    
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numStr];
+    
+    if ([regextestmobile evaluateWithObject:number] == YES) {
+        NSLog(@"sucess %@",number);
+        return YES;
+    }else{
+        NSLog(@"false %@",number);
+        return NO;
+    }
+}
 /**
  *  @author dd, 16-01-21 13:01:21
  *
@@ -156,7 +169,8 @@
 - (void)setUISignal
 {
     RACSignal *validUserNameSignal = [self.phoneNumText.rac_textSignal map:^id(NSString *value) {
-        return @([Tool isMobileNumber:value]);
+//        return @([Tool isMobileNumber:value]);
+        return @([self checkMoblieNumber:value]);
     }];
     
     RACSignal *validPicTextSignal = [self.picCodeText.rac_textSignal map:^id(NSString *value) {
@@ -199,7 +213,6 @@
         return regActive;
     }];
 }
-
 
 -(void)clickurl:(id)sender
 {

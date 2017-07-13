@@ -253,8 +253,6 @@
     self.tableView.tableHeaderView = _sdView;
     
 }
-
-
 - (void)qrClick
 {
     QRPopView *qrPopView = [QRPopView defaultQRPopView];
@@ -471,11 +469,9 @@
             if (isOverLimit) {
                 [cell.loanBtn setBackgroundImage:[UIImage imageNamed:@"beyond_lines_Limit"] forState:UIControlStateNormal];
                 [cell.loanBtn setTitle:@"" forState:UIControlStateNormal];
-                
             }else {
                 [cell.loanBtn setBackgroundImage:nil forState:UIControlStateNormal];
                 [cell.loanBtn setTitle:@"我要借款" forState:UIControlStateNormal];
-                
             }
             
             [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];
@@ -516,7 +512,6 @@
             cell.delegate = self;
             return cell;
         }
-        
     }
     return cell;
 }
