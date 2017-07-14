@@ -51,40 +51,40 @@
     
     __weak typeof(self) wekSelf = self;
     
-    UIView *tipView = [[UIView alloc]init];
-    tipView.backgroundColor = [UIColor clearColor];
-//    tipView.backgroundColor = [UIColor redColor];
-    [self addSubview:tipView];
-    [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(wekSelf.mas_top).with.offset(10);
-        make.centerX.equalTo(wekSelf.mas_centerX);
-        make.height.equalTo(@22);
-        make.width.equalTo(@270);
-    }];
-    
-    UIImageView *tipImage = [[UIImageView alloc]init];
-    tipImage.image = [UIImage imageNamed:@"icon_shibai"];
-    [tipView addSubview:tipImage];
-    [tipImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(tipView.mas_top).with.offset(0);
-        make.left.equalTo(tipView.mas_left).with.offset(0);
-    }];
-    
-    UILabel *tipLabel = [[UILabel alloc]init];
-    tipLabel.text = @"很抱歉，您的借款申请审核失败";
-    tipLabel.textColor = UI_MAIN_COLOR;
-    if (UI_IS_IPHONE5) {
-        tipLabel.font = [UIFont systemFontOfSize:13];
-    }else{
-    
-        tipLabel.font = [UIFont systemFontOfSize:16];
-    }
-    [tipView addSubview:tipLabel];
-    [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(tipView.mas_top).with.offset(3);
-        make.left.equalTo(tipImage.mas_right).with.offset(10);
-        make.height.equalTo(@15);
-    }];
+//    UIView *tipView = [[UIView alloc]init];
+//    tipView.backgroundColor = [UIColor clearColor];
+////    tipView.backgroundColor = [UIColor redColor];
+//    [self addSubview:tipView];
+//    [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(wekSelf.mas_top).with.offset(10);
+//        make.centerX.equalTo(wekSelf.mas_centerX);
+//        make.height.equalTo(@22);
+//        make.width.equalTo(@270);
+//    }];
+//    
+//    UIImageView *tipImage = [[UIImageView alloc]init];
+//    tipImage.image = [UIImage imageNamed:@"icon_shibai"];
+//    [tipView addSubview:tipImage];
+//    [tipImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(tipView.mas_top).with.offset(0);
+//        make.left.equalTo(tipView.mas_left).with.offset(0);
+//    }];
+//    
+//    UILabel *tipLabel = [[UILabel alloc]init];
+//    tipLabel.text = @"很抱歉，您的借款申请审核失败";
+//    tipLabel.textColor = UI_MAIN_COLOR;
+//    if (UI_IS_IPHONE5) {
+//        tipLabel.font = [UIFont systemFontOfSize:13];
+//    }else{
+//    
+//        tipLabel.font = [UIFont systemFontOfSize:16];
+//    }
+//    [tipView addSubview:tipLabel];
+//    [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(tipView.mas_top).with.offset(3);
+//        make.left.equalTo(tipImage.mas_right).with.offset(10);
+//        make.height.equalTo(@15);
+//    }];
     
     
     UIView *contentView = [[UIView alloc]init];
@@ -92,7 +92,7 @@
     contentView.layer.cornerRadius = 5.0;
     [self addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(tipView.mas_bottom).with.offset(10);
+        make.top.equalTo(wekSelf.mas_top).with.offset(10);
         make.left.equalTo(wekSelf.mas_left).with.offset(20);
         make.right.equalTo(wekSelf.mas_right).with.offset(-20);
         make.bottom.equalTo(wekSelf.mas_bottom).with.offset(-10);

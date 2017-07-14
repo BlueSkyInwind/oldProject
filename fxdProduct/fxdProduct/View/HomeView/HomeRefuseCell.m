@@ -63,7 +63,7 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(wekSelf.mas_left);
         make.right.equalTo(wekSelf.mas_right);
-        make.top.equalTo(wekSelf.mas_top);
+        make.top.equalTo(wekSelf.mas_top).with.offset(40);
         make.bottom.equalTo(wekSelf.mas_bottom);
         
     }];
