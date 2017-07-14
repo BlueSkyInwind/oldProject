@@ -546,6 +546,7 @@
 		63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */; };
 		81B4154D94C5352EFA4832C3 /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */; };
 		841BE5C61F177C4F00BABD04 /* UserLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */; };
+		841BE5C91F17829D00BABD04 /* LoginStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C81F17829D00BABD04 /* LoginStatusView.m */; };
 		842C0B531ED5909E00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
 		842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
 		842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B581ED599DE00366D11 /* LoginViewController.xib */; };
@@ -2208,6 +2209,8 @@
 		63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NilSafe.m"; sourceTree = "<group>"; };
 		841BE5C41F177C4F00BABD04 /* UserLevelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLevelViewController.h; sourceTree = "<group>"; };
 		841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLevelViewController.m; sourceTree = "<group>"; };
+		841BE5C71F17829D00BABD04 /* LoginStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginStatusView.h; sourceTree = "<group>"; };
+		841BE5C81F17829D00BABD04 /* LoginStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginStatusView.m; sourceTree = "<group>"; };
 		842C0B511ED5909E00366D11 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		842C0B521ED5909E00366D11 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		842C0B581ED599DE00366D11 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -2658,6 +2661,8 @@
 				1A6AEDDB1C72BC3C00D48C6A /* TicketExplainCell.h */,
 				1A6AEDDC1C72BC3C00D48C6A /* TicketExplainCell.m */,
 				1A6AEDDD1C72BC3C00D48C6A /* TicketExplainCell.xib */,
+				841BE5C71F17829D00BABD04 /* LoginStatusView.h */,
+				841BE5C81F17829D00BABD04 /* LoginStatusView.m */,
 			);
 			path = MyView;
 			sourceTree = "<group>";
@@ -5722,6 +5727,7 @@
 				63E1ECD51E1B8FAA0079A2F8 /* UIView+SDExtension.m in Sources */,
 				638C3F191CF2CB08000446A7 /* UIViewController+KNSemiModal.m in Sources */,
 				632C58851E5AC8E400490C14 /* ContactClass.m in Sources */,
+				841BE5C91F17829D00BABD04 /* LoginStatusView.m in Sources */,
 				63BDF8981E712932008C4E10 /* MyBottomView.mm in Sources */,
 				63145ABD1CA4E66100D04ED8 /* CustomerCareerBaseClass.m in Sources */,
 				63C50E471E666FF40035EE4F /* Custom_BaseInfoExt.m in Sources */,

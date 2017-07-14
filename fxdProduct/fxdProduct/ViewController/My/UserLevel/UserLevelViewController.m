@@ -20,6 +20,8 @@
     self.navigationItem.title = @"用户等级";
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = false;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
