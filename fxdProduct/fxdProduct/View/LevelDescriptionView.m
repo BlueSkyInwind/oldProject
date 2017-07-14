@@ -104,6 +104,96 @@
     
     UILabel *middleHeadLabel = [[UILabel alloc]init];
     middleHeadLabel.textAlignment = NSTextAlignmentCenter;
+    middleHeadLabel.text = @"=== 如何提升等级 ===";
+    middleHeadLabel.textColor = [UIColor grayColor];
+    middleHeadLabel.font = [UIFont systemFontOfSize:15];
+    [middleView addSubview:middleHeadLabel];
+    [middleHeadLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(middleView.mas_bottom).with.offset(10);
+        make.left.equalTo(middleView.mas_left).with.offset(0);
+        make.right.equalTo(middleView.mas_right).with.offset(0);
+        make.height.equalTo(@15);
+        
+    }];
+    
+    UIImageView *contentImage = [[UIImageView alloc]init];
+    contentImage.image = [UIImage imageNamed:@""];
+    [middleView addSubview:contentImage];
+    [contentImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(middleHeadLabel.mas_bottom).with.offset(20);
+        make.left.equalTo(middleView.mas_left).with.offset(10);
+        
+    }];
+    
+    UILabel *middleTitleLabel = [[UILabel alloc]init];
+    middleTitleLabel.textColor = [UIColor grayColor];
+    middleTitleLabel.text = @"借款、还款";
+    middleTitleLabel.font = [UIFont systemFontOfSize:13];
+    [middleView addSubview:middleTitleLabel];
+    [middleHeadLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(middleView.mas_bottom).with.offset(20);
+        make.left.equalTo(contentImage.mas_right).with.offset(5);
+        make.height.equalTo(@15);
+    }];
+    
+    UILabel *middleContentLabel = [[UILabel alloc]init];
+    middleContentLabel.text = @"每次成功借款、还款都会增加一定的成长值，记得不要逾期哦";
+    middleContentLabel.font = [UIFont systemFontOfSize:13];
+    middleContentLabel.textColor = [UIColor grayColor];
+    [middleView addSubview:middleContentLabel];
+    [middleContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(middleTitleLabel.mas_bottom).with.offset(20);
+        make.left.equalTo(middleView.mas_left).with.offset(20);
+        make.right.equalTo(middleView.mas_right).with.offset(0);
+        make.height.equalTo(@30);
+    }];
+    
+    UIImageView *middleImage1 = [[UIImageView alloc]init];
+    middleImage1.image = [UIImage imageNamed:@""];
+    [middleView addSubview:middleImage1];
+    [middleImage1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(middleContentLabel.mas_bottom).with.offset(20);
+        make.left.equalTo(middleView.mas_left).with.offset(10);
+    }];
+    
+    UILabel *middleTitleLabel1 = [[UILabel alloc]init];
+    middleTitleLabel1.textColor = [UIColor grayColor];
+    middleTitleLabel1.text = @"邀请好友";
+    middleTitleLabel1.font = [UIFont systemFontOfSize:13];
+    [middleView addSubview:middleTitleLabel1];
+    [middleTitleLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(middleContentLabel.mas_bottom).with.offset(20);
+        make.left.equalTo(middleImage1.mas_right).with.offset(5);
+        make.height.equalTo(@15);
+    }];
+    
+    UILabel *middleContentLabel1 = [[UILabel alloc]init];
+    middleContentLabel1.text = @"邀请好友注册、好友借款、还款都会增加您的成长值，邀请越多，升级越快！";
+    middleContentLabel1.textColor = [UIColor grayColor];
+    middleContentLabel1.font = [UIFont systemFontOfSize:13];
+    [middleView addSubview:middleContentLabel1];
+    [middleContentLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(middleTitleLabel1.mas_bottom).with.offset(20);
+        make.left.equalTo(middleView.mas_left).with.offset(20);
+        make.right.equalTo(middleView.mas_right).with.offset(0);
+        make.height.equalTo(@30);
+    }];
+    
+    UIView *bottomView = [[UIView alloc]init];
+    bottomView.backgroundColor = [UIColor redColor];
+    [self addSubview:bottomView];
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(middleView.mas_bottom).with.offset(20);
+        make.left.equalTo(weakSelf.mas_left).with.offset(10);
+        make.right.equalTo(weakSelf.mas_right).with.offset(-10);
+        make.height.equalTo(@50);
+    }];
+    
+    UILabel *bottomLabel = [[UILabel alloc]init];
+    bottomLabel.textColor = [UIColor grayColor];
+    bottomLabel.text = @"=== 扣减条款 ===";
+    bottomLabel.font = [UIFont systemFontOfSize:15];
+    bottomLabel.textAlignment = NSTextAlignmentCenter;
     
 }
 @end
