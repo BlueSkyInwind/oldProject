@@ -545,6 +545,7 @@
 		63FF48581B6F15DB009E384C /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */; };
 		63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */; };
 		81B4154D94C5352EFA4832C3 /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */; };
+		841BE5C61F177C4F00BABD04 /* UserLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */; };
 		842C0B531ED5909E00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
 		842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
 		842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B581ED599DE00366D11 /* LoginViewController.xib */; };
@@ -2207,6 +2208,8 @@
 		63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarViewController.m; sourceTree = "<group>"; };
 		63FFFBEC1D86B285000E3C38 /* NSDictionary+NilSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NilSafe.h"; sourceTree = "<group>"; };
 		63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NilSafe.m"; sourceTree = "<group>"; };
+		841BE5C41F177C4F00BABD04 /* UserLevelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLevelViewController.h; sourceTree = "<group>"; };
+		841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLevelViewController.m; sourceTree = "<group>"; };
 		842C0B511ED5909E00366D11 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		842C0B521ED5909E00366D11 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		842C0B581ED599DE00366D11 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -4590,6 +4593,7 @@
 		63ED333D1B6B523E008B6085 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				841BE5C31F177BDB00BABD04 /* UserLevel */,
 				63811AF71B8EB14F008F605B /* SubViewController */,
 				63FF48471B6F036F009E384C /* MyViewController.h */,
 				63FF48481B6F036F009E384C /* MyViewController.m */,
@@ -4842,6 +4846,15 @@
 				EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		841BE5C31F177BDB00BABD04 /* UserLevel */ = {
+			isa = PBXGroup;
+			children = (
+				841BE5C41F177C4F00BABD04 /* UserLevelViewController.h */,
+				841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */,
+			);
+			path = UserLevel;
 			sourceTree = "<group>";
 		};
 		8436149A1F0CF4A50036201A /* contract */ = {
@@ -5655,6 +5668,7 @@
 				842C0B5D1ED59C7A00366D11 /* LoginParamModel.m in Sources */,
 				63FC24FB1D98F7E9006F58F3 /* NSAttributedString+YYText.m in Sources */,
 				6326CAAC1BF1CA5F00FD23A8 /* pinyin.c in Sources */,
+				841BE5C61F177C4F00BABD04 /* UserLevelViewController.m in Sources */,
 				CC0F1B9D1EE6537700A23651 /* IdeaBackViewModel.m in Sources */,
 				CCDEDF691EEA9271009CEC32 /* ProductProtocolParamModel.m in Sources */,
 				63741E341D3CC10900C0E2F8 /* PayNavigationViewController.m in Sources */,

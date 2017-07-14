@@ -117,7 +117,6 @@
     }];
     [_saveBtn addTarget:self action:@selector(saveBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableFooterView = footView;
-    
 }
 
 - (void)getDataDic:(void(^)())finish
