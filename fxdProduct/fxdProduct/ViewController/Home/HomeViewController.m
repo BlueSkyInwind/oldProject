@@ -243,7 +243,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-    
+    self.tableView.backgroundColor = rgb(245, 245, 245);
     DLog(@"%lf",_k_w);
     _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 0.5*_k_w) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
     //375 185
@@ -503,11 +503,46 @@
     }else if([_homeProductList.result.type isEqualToString:@"1"]){
     
         if (indexPath.section == 1) {
+
+            UIView *tipView = [[UIView alloc]init];
+            tipView.backgroundColor = [UIColor clearColor];
+            [self.view addSubview:tipView];
+            [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(tableView.mas_top).with.offset(230);
+                make.centerX.equalTo(tableView.mas_centerX);
+                make.height.equalTo(@22);
+                make.width.equalTo(@270);
+            }];
+            
+            UIImageView *tipImage = [[UIImageView alloc]init];
+            tipImage.image = [UIImage imageNamed:@"icon_shibai"];
+            [tipView addSubview:tipImage];
+            [tipImage mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(tipView.mas_top).with.offset(0);
+                make.left.equalTo(tipView.mas_left).with.offset(0);
+            }];
+            
+            UILabel *tipLabel = [[UILabel alloc]init];
+            tipLabel.text = @"很抱歉，您的借款申请审核失败";
+            tipLabel.textColor = UI_MAIN_COLOR;
+            if (UI_IS_IPHONE5) {
+                tipLabel.font = [UIFont systemFontOfSize:13];
+            }else{
+                
+                tipLabel.font = [UIFont systemFontOfSize:16];
+            }
+            [tipView addSubview:tipLabel];
+            [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(tipView.mas_top).with.offset(3);
+                make.left.equalTo(tipImage.mas_right).with.offset(10);
+                make.height.equalTo(@15);
+            }];
     
+            
             HomeRefuseCell *cell = [HomeRefuseCell cellWithTableView:tableView];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             cell.selected = NO;
-            cell.backgroundColor = [UIColor grayColor];
+            cell.backgroundColor = rgb(245, 245, 245);
             cell.homeProductList = _homeProductList;
             cell.delegate = self;
             return cell;

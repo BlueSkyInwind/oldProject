@@ -1143,6 +1143,8 @@
 		CC3A7F341ED52A3200F30289 /* ChangeBankCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC3A7F301ED52A3200F30289 /* ChangeBankCardViewController.xib */; };
 		CC4271E61F0C8ED7004904B8 /* HomeRefuseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4271E51F0C8ED7004904B8 /* HomeRefuseCell.m */; };
 		CC4271E71F0C8ED7004904B8 /* HomeRefuseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4271E51F0C8ED7004904B8 /* HomeRefuseCell.m */; };
+		CC4BB60F1F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
+		CC4BB6101F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
 		CC5D70271ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
 		CC5D70281ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
 		CC5D702C1ED4405500A074AF /* PaymentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */; };
@@ -2261,6 +2263,8 @@
 		CC3A7F301ED52A3200F30289 /* ChangeBankCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeBankCardViewController.xib; sourceTree = "<group>"; };
 		CC4271E41F0C8ED7004904B8 /* HomeRefuseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeRefuseCell.h; sourceTree = "<group>"; };
 		CC4271E51F0C8ED7004904B8 /* HomeRefuseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeRefuseCell.m; sourceTree = "<group>"; };
+		CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelDescriptionView.h; sourceTree = "<group>"; };
+		CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelDescriptionView.m; sourceTree = "<group>"; };
 		CC5D70251ED4400600A074AF /* CashModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashModel.h; sourceTree = "<group>"; };
 		CC5D70261ED4400600A074AF /* CashModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashModel.m; sourceTree = "<group>"; };
 		CC5D702A1ED4405500A074AF /* PaymentServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentServiceModel.h; sourceTree = "<group>"; };
@@ -2585,6 +2589,7 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CC4BB60C1F17709D0027A0AA /* MineView */,
 				8438F7111EE14D2D0089E121 /* MoreView */,
 				84420A5D1ED6788D00DFBFE0 /* LoginView */,
 				63553AD41E5D29FC00B2C1FF /* UserDataCell */,
@@ -4907,6 +4912,15 @@
 			path = SMS;
 			sourceTree = "<group>";
 		};
+		CC4BB60C1F17709D0027A0AA /* MineView */ = {
+			isa = PBXGroup;
+			children = (
+				CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */,
+				CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */,
+			);
+			name = MineView;
+			sourceTree = "<group>";
+		};
 		CC5D70241ED43FE500A074AF /* Cash */ = {
 			isa = PBXGroup;
 			children = (
@@ -5659,6 +5673,7 @@
 				63F0E1B71CE4166E001251A9 /* UIDevice+YYAdd.m in Sources */,
 				63FC24EF1D98F7E9006F58F3 /* YYTextEffectWindow.m in Sources */,
 				630D46311BD097B900874064 /* GetMoneyResultResult.m in Sources */,
+				CC4BB60F1F17712E0027A0AA /* LevelDescriptionView.m in Sources */,
 				63F2548D1E49CD2C00852CF1 /* LoanProcessViewController.m in Sources */,
 				63A24C661BE063A90036E8EF /* UIImage+Color.m in Sources */,
 				638C3F221CF2DE28000446A7 /* RedpacketBaseClass.m in Sources */,
@@ -6112,6 +6127,7 @@
 				CC0DF9C41EA5B1090024841A /* HomePop.m in Sources */,
 				CC0DF9C51EA5B1090024841A /* weekRepayModel.m in Sources */,
 				8438F71E1EE165460089E121 /* changePasswordParam.m in Sources */,
+				CC4BB6101F17712E0027A0AA /* LevelDescriptionView.m in Sources */,
 				8446AC041EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */,
 				CC5D70281ED4400600A074AF /* CashModel.m in Sources */,
 				CC0DF9C61EA5B1090024841A /* CustomerCareerExt.m in Sources */,
