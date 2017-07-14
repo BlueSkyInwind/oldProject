@@ -61,6 +61,7 @@
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
     QryUserStatusModel *_qryUserStatusModel;
+    UIView *_tipView;
     
 }
 
@@ -460,6 +461,7 @@
     
     if ([_homeProductList.result.type isEqualToString:@"0"]) {
         
+        [_tipView removeFromSuperview];
         if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
             
             HomeProductListProducts *product = _dataArray[indexPath.section-1];
@@ -504,10 +506,10 @@
     
         if (indexPath.section == 1) {
 
-            UIView *tipView = [[UIView alloc]init];
-            tipView.backgroundColor = [UIColor clearColor];
-            [self.view addSubview:tipView];
-            [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+            _tipView = [[UIView alloc]init];
+            _tipView.backgroundColor = [UIColor clearColor];
+            [self.view addSubview:_tipView];
+            [_tipView mas_makeConstraints:^(MASConstraintMaker *make) {
                 if (UI_IS_IPHONE5) {
                     make.top.equalTo(tableView.mas_top).with.offset(_k_h-0.5*_k_w-30-175);
                 }else if(UI_IS_IPHONE6P){
@@ -524,10 +526,10 @@
             
             UIImageView *tipImage = [[UIImageView alloc]init];
             tipImage.image = [UIImage imageNamed:@"icon_shibai"];
-            [tipView addSubview:tipImage];
+            [_tipView addSubview:tipImage];
             [tipImage mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(tipView.mas_top).with.offset(0);
-                make.left.equalTo(tipView.mas_left).with.offset(0);
+                make.top.equalTo(_tipView.mas_top).with.offset(0);
+                make.left.equalTo(_tipView.mas_left).with.offset(0);
             }];
             
             UILabel *tipLabel = [[UILabel alloc]init];
@@ -539,9 +541,9 @@
                 
                 tipLabel.font = [UIFont systemFontOfSize:16];
             }
-            [tipView addSubview:tipLabel];
+            [_tipView addSubview:tipLabel];
             [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(tipView.mas_top).with.offset(3);
+                make.top.equalTo(_tipView.mas_top).with.offset(3);
                 make.left.equalTo(tipImage.mas_right).with.offset(10);
                 make.height.equalTo(@15);
             }];
