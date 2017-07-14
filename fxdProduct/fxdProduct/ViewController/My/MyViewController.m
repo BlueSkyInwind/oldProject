@@ -142,6 +142,7 @@
         if(indexPath.row==0) {
             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
             userDataVC.product_id = SalaryLoan;
+            userDataVC.isMine = YES;
             [self.navigationController pushViewController:userDataVC animated:true];
             
         }else if (indexPath.row == 1) {

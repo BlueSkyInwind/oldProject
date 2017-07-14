@@ -76,6 +76,12 @@
     topView = [[UIView alloc] init];
     [self.view addSubview:topView];
     
+    if (_isMine) {
+        
+        _applyBtn.enabled = NO;
+        _applyBtn.hidden = YES;
+    }
+    
 }
 
 - (void)addBackItemRoot
