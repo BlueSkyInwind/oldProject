@@ -508,7 +508,15 @@
             tipView.backgroundColor = [UIColor clearColor];
             [self.view addSubview:tipView];
             [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(tableView.mas_top).with.offset(230);
+                if (UI_IS_IPHONE5) {
+                    make.top.equalTo(tableView.mas_top).with.offset(_k_h-0.5*_k_w-30-175);
+                }else if(UI_IS_IPHONE6P){
+                    
+                    make.top.equalTo(tableView.mas_top).with.offset(_k_h-0.5*_k_w-275);
+                }else{
+                    
+                    make.top.equalTo(tableView.mas_top).with.offset(_k_h-0.5*_k_w-240);
+                }
                 make.centerX.equalTo(tableView.mas_centerX);
                 make.height.equalTo(@22);
                 make.width.equalTo(@270);
