@@ -14,8 +14,6 @@
 #import "DataWriteAndRead.h"
 #import "CustomerBaseInfoBaseClass.h"
 @implementation LoginViewModel
-
-
 /**
  登录请求
 

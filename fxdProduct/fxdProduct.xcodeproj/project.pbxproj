@@ -577,6 +577,14 @@
 		844E5F511ED94DCB00753671 /* RegParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4F1ED94DCB00753671 /* RegParamModel.m */; };
 		845017311ED7CD88008055E4 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84420A601ED678E200DFBFE0 /* LoginView.xib */; };
 		845017321ED7D051008055E4 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
+		846A90071F1F3B2700896169 /* PayVerificationCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90051F1F3B2700896169 /* PayVerificationCodeCell.m */; };
+		846A90081F1F3B2700896169 /* PayVerificationCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90061F1F3B2700896169 /* PayVerificationCodeCell.xib */; };
+		846A90091F1F3D9F00896169 /* PayVerificationCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90051F1F3B2700896169 /* PayVerificationCodeCell.m */; };
+		846A900A1F1F3DB300896169 /* PayVerificationCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90061F1F3B2700896169 /* PayVerificationCodeCell.xib */; };
+		846A90181F1F48AB00896169 /* PayDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90161F1F48AB00896169 /* PayDisplayCell.m */; };
+		846A90191F1F48AB00896169 /* PayDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90161F1F48AB00896169 /* PayDisplayCell.m */; };
+		846A901A1F1F48AB00896169 /* PayDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90171F1F48AB00896169 /* PayDisplayCell.xib */; };
+		846A901B1F1F48AB00896169 /* PayDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90171F1F48AB00896169 /* PayDisplayCell.xib */; };
 		848394221EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */; };
 		848394231EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */; };
 		848394261EDEC96C003EF4EC /* HomePopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394251EDEC96C003EF4EC /* HomePopParam.m */; };
@@ -2241,6 +2249,12 @@
 		844E5F4A1ED94C9C00753671 /* RegViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewModel.m; sourceTree = "<group>"; };
 		844E5F4E1ED94DCB00753671 /* RegParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegParamModel.h; sourceTree = "<group>"; };
 		844E5F4F1ED94DCB00753671 /* RegParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegParamModel.m; sourceTree = "<group>"; };
+		846A90041F1F3B2700896169 /* PayVerificationCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayVerificationCodeCell.h; sourceTree = "<group>"; };
+		846A90051F1F3B2700896169 /* PayVerificationCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayVerificationCodeCell.m; sourceTree = "<group>"; };
+		846A90061F1F3B2700896169 /* PayVerificationCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayVerificationCodeCell.xib; sourceTree = "<group>"; };
+		846A90151F1F48AB00896169 /* PayDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayDisplayCell.h; sourceTree = "<group>"; };
+		846A90161F1F48AB00896169 /* PayDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayDisplayCell.m; sourceTree = "<group>"; };
+		846A90171F1F48AB00896169 /* PayDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayDisplayCell.xib; sourceTree = "<group>"; };
 		848394201EDEB82A003EF4EC /* HomeBannerParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerParamModel.h; sourceTree = "<group>"; };
 		848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerParamModel.m; sourceTree = "<group>"; };
 		848394241EDEC96C003EF4EC /* HomePopParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePopParam.h; sourceTree = "<group>"; };
@@ -3220,6 +3234,12 @@
 				636AC4351D38EA9500599590 /* PayMoneyCell.h */,
 				636AC4361D38EA9500599590 /* PayMoneyCell.m */,
 				636AC4371D38EA9500599590 /* PayMoneyCell.xib */,
+				846A90041F1F3B2700896169 /* PayVerificationCodeCell.h */,
+				846A90051F1F3B2700896169 /* PayVerificationCodeCell.m */,
+				846A90061F1F3B2700896169 /* PayVerificationCodeCell.xib */,
+				846A90151F1F48AB00896169 /* PayDisplayCell.h */,
+				846A90161F1F48AB00896169 /* PayDisplayCell.m */,
+				846A90171F1F48AB00896169 /* PayDisplayCell.xib */,
 				63741E351D3CD4A300C0E2F8 /* BankListCell.h */,
 				63741E361D3CD4A300C0E2F8 /* BankListCell.m */,
 				63741E371D3CD4A300C0E2F8 /* BankListCell.xib */,
@@ -5251,6 +5271,7 @@
 				CC3197991ED926B90083F263 /* RefuseView.xib in Resources */,
 				0F099B991C1A97EB00D97BAE /* ColledgeView.xib in Resources */,
 				CCF803291ED4249A003B7975 /* UnbundlingBankCardViewController.xib in Resources */,
+				846A90081F1F3B2700896169 /* PayVerificationCodeCell.xib in Resources */,
 				63F2548E1E49CD2C00852CF1 /* LoanProcessViewController.xib in Resources */,
 				63FE3DF11E48821B009E5B82 /* DaysCell.xib in Resources */,
 				6391F77E1D348B4E0097C943 /* bank_code_9@2x.png in Resources */,
@@ -5278,6 +5299,7 @@
 				1AB0F5AB1CF2D20E00F3DF06 /* TicketCell.xib in Resources */,
 				63811B621B8EFC67008F605B /* ChangePWViewController.xib in Resources */,
 				6391F7781D348B4E0097C943 /* bank_code_3@2x.png in Resources */,
+				846A901A1F1F48AB00896169 /* PayDisplayCell.xib in Resources */,
 				842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */,
 				6391F77A1D348B4E0097C943 /* bank_code_5@2x.png in Resources */,
 				22D2BFB41EA4A97100B69360 /* MGBankCardResource.bundle in Resources */,
@@ -5342,6 +5364,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846A900A1F1F3DB300896169 /* PayVerificationCodeCell.xib in Resources */,
 				845017311ED7CD88008055E4 /* LoginView.xib in Resources */,
 				CC0DFB191EA5B1090024841A /* CheckViewIng.xib in Resources */,
 				CC0DFB1A1EA5B1090024841A /* Images.xcassets in Resources */,
@@ -5408,6 +5431,7 @@
 				CC0DFB5B1EA5B1090024841A /* TicketCell.xib in Resources */,
 				CC0DFB5C1EA5B1090024841A /* ChangePWViewController.xib in Resources */,
 				CC0DFB5D1EA5B1090024841A /* bank_code_3@2x.png in Resources */,
+				846A901B1F1F48AB00896169 /* PayDisplayCell.xib in Resources */,
 				CC0DFB5E1EA5B1090024841A /* bank_code_5@2x.png in Resources */,
 				CC0DFB5F1EA5B1090024841A /* MGBankCardResource.bundle in Resources */,
 				CC0DFB601EA5B1090024841A /* BasicInfoViewController.xib in Resources */,
@@ -5865,6 +5889,7 @@
 				638A16EA1E517D9F00AB8AB6 /* LOTGroupLayerView.m in Sources */,
 				638A17031E517D9F00AB8AB6 /* LOTShapeFill.m in Sources */,
 				63C50E461E666FF40035EE4F /* Custom_BaseInfo.m in Sources */,
+				846A90181F1F48AB00896169 /* PayDisplayCell.m in Sources */,
 				638A16F71E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				636B1B9A1C2D153900450358 /* HomeViewModel.m in Sources */,
 				638A16F41E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m in Sources */,
@@ -5965,6 +5990,7 @@
 				630D46171BCCD2FB00874064 /* UpdateDevIDViewController.m in Sources */,
 				CCE3BE281ED2D655004C35A4 /* QueryCardInfo.m in Sources */,
 				637636EA1D76A72A00E93289 /* LewPopupViewAnimationSlide.m in Sources */,
+				846A90071F1F3B2700896169 /* PayVerificationCodeCell.m in Sources */,
 				63A24C6A1BE063A90036E8EF /* UIImage+Water.m in Sources */,
 				CCCE40C11EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */,
 				63A24C5F1BE063A90036E8EF /* NSObject+Extend.m in Sources */,
@@ -6017,6 +6043,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846A90091F1F3D9F00896169 /* PayVerificationCodeCell.m in Sources */,
 				843614A61F0CFD4B0036201A /* P2PContactContentModel.m in Sources */,
 				843614A51F0CFD320036201A /* BaseResultModel.m in Sources */,
 				8436149E1F0CF7440036201A /* P2PContactContenParam.m in Sources */,
@@ -6357,6 +6384,7 @@
 				CC0DFA881EA5B1090024841A /* BasicInfoViewController.m in Sources */,
 				CCDEDF611EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m in Sources */,
 				CC0DFA891EA5B1090024841A /* GetMoneyProcessUserBean.m in Sources */,
+				846A90191F1F48AB00896169 /* PayDisplayCell.m in Sources */,
 				CCF43AFF1EDE5D4A00CFD72C /* QryUserStatusModel.m in Sources */,
 				CC0DFA8A1EA5B1090024841A /* ProfessionViewController.m in Sources */,
 				CC0DFA8B1EA5B1090024841A /* MoneyIngView.m in Sources */,

@@ -50,7 +50,42 @@
 
 
 -(void)configureView{
-
+    
+    __weak typeof(self) wekSelf = self;
+    UIView *tipView = [[UIView alloc]init];
+    tipView.backgroundColor = [UIColor clearColor];
+    [self addSubview:tipView];
+    [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(wekSelf.mas_top).with.offset(10);
+        make.centerX.equalTo(wekSelf.mas_centerX);
+        make.height.equalTo(@22);
+        make.width.equalTo(@270);
+    }];
+    
+    UIImageView *tipImage = [[UIImageView alloc]init];
+    tipImage.image = [UIImage imageNamed:@"icon_shibai"];
+    [tipView addSubview:tipImage];
+    [tipImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(tipView.mas_top).with.offset(0);
+        make.left.equalTo(tipView.mas_left).with.offset(0);
+    }];
+    
+    UILabel *tipLabel = [[UILabel alloc]init];
+    tipLabel.text = @"很抱歉，您的借款申请审核失败";
+    tipLabel.textColor = UI_MAIN_COLOR;
+    if (UI_IS_IPHONE5) {
+        tipLabel.font = [UIFont systemFontOfSize:13];
+    }else{
+        
+        tipLabel.font = [UIFont systemFontOfSize:16];
+    }
+    [tipView addSubview:tipLabel];
+    [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(tipView.mas_top).with.offset(3);
+        make.left.equalTo(tipImage.mas_right).with.offset(10);
+        make.height.equalTo(@15);
+    }];
     self.tableView = [[UITableView alloc]init];
     self.tableView.delegate  =self;
     self.tableView.dataSource = self;
@@ -58,7 +93,6 @@
     self.tableView.showsHorizontalScrollIndicator = NO;
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.scrollEnabled = YES;
-    __weak typeof(self) wekSelf = self;
     [self addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(wekSelf.mas_left);

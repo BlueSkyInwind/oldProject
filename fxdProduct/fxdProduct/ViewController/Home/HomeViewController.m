@@ -459,7 +459,6 @@
     }
     
     if ([_homeProductList.result.type isEqualToString:@"0"]) {
-        
         if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
             
             HomeProductListProducts *product = _dataArray[indexPath.section-1];
@@ -504,41 +503,6 @@
     
         if (indexPath.section == 1) {
 
-            UIView *tipView = [[UIView alloc]init];
-            tipView.backgroundColor = [UIColor clearColor];
-            [self.view addSubview:tipView];
-            [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(tableView.mas_top).with.offset(230);
-                make.centerX.equalTo(tableView.mas_centerX);
-                make.height.equalTo(@22);
-                make.width.equalTo(@270);
-            }];
-            
-            UIImageView *tipImage = [[UIImageView alloc]init];
-            tipImage.image = [UIImage imageNamed:@"icon_shibai"];
-            [tipView addSubview:tipImage];
-            [tipImage mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(tipView.mas_top).with.offset(0);
-                make.left.equalTo(tipView.mas_left).with.offset(0);
-            }];
-            
-            UILabel *tipLabel = [[UILabel alloc]init];
-            tipLabel.text = @"很抱歉，您的借款申请审核失败";
-            tipLabel.textColor = UI_MAIN_COLOR;
-            if (UI_IS_IPHONE5) {
-                tipLabel.font = [UIFont systemFontOfSize:13];
-            }else{
-                
-                tipLabel.font = [UIFont systemFontOfSize:16];
-            }
-            [tipView addSubview:tipLabel];
-            [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(tipView.mas_top).with.offset(3);
-                make.left.equalTo(tipImage.mas_right).with.offset(10);
-                make.height.equalTo(@15);
-            }];
-    
-            
             HomeRefuseCell *cell = [HomeRefuseCell cellWithTableView:tableView];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             cell.selected = NO;
@@ -675,11 +639,9 @@
                     [weakSelf.navigationController pushViewController:p2pVC animated:YES];
                     
                 }else{
-                    
                     RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                     repayRequest.targetVC = weakSelf;
                     [repayRequest repayRequest];
-                    
                 }
             }else{
                 RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];

@@ -284,6 +284,7 @@
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
                                 [_waitView removeFromSuperview];
+                                
                             }];
                         }
                     }];

@@ -529,6 +529,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             repayMent.p2pBillModel = _p2pBillModel;
             repayMent.bills = _bills;
             repayMent.product_id = _userStateParse.product_id;
+            repayMent.model = _userStateParse;
             [self.navigationController pushViewController:repayMent animated:YES];
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请至少选择一期"];
@@ -610,15 +611,17 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     cell.identifierSelect = [_cellSelectArr objectAtIndex:indexPath.row].boolValue;
     cell.detailClickBlock = ^(NSInteger row){
         DetailRepayViewController *detailVC = [[DetailRepayViewController alloc] init];
-        
-        if ([_userStateParse.platform_type isEqualToString:@"0"]) {
+        detailVC.userStateM = _userStateParse;
+        //无论合规还是发薪贷 都走发薪贷的通道
+        if ([_userStateParse.platform_type isEqualToString:@"0"] || [_userStateParse.platform_type isEqualToString:@"2"]) {
             detailVC.repayListModel = _repayListModel;
             detailVC.product_id = _userStateParse.product_id;
         }
         
-        if ([_userStateParse.platform_type isEqualToString:@"2"]) {
-            detailVC.p2pBillDetail = _p2pBillModel;
-        }
+//        if ([_userStateParse.platform_type isEqualToString:@"2"]) {
+//            detailVC.p2pBillDetail = _p2pBillModel;
+//        }
+        
         [self.navigationController pushViewController:detailVC animated:YES];
     };
     return cell;

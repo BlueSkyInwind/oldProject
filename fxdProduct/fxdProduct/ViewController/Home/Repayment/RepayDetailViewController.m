@@ -31,6 +31,9 @@
 #import "SaveLoanCaseModel.h"
 #import "HomeViewModel.h"
 #import "UserStateModel.h"
+#import "PayVerificationCodeCell.h"
+#import "PayDisplayCell.h"
+
 @interface RepayDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SelectViewDelegate>
 {
     UIImageView*navBarHairlineImageView;
@@ -69,6 +72,8 @@
     
     QryUserStatusModel *_userStatusModel;
     
+    NSString *verfiyCode;
+    
 }
 @property (nonatomic,strong) UILabel *lblShouldrepay;
 @end
@@ -78,8 +83,8 @@
 {
     navBarHairlineImageView.hidden=YES;
 //    [self checkStatus];
-    if (_p2pBillModel != nil) {
-        
+    if ([_model.platform_type isEqualToString:@"2"]) {
+       //合规银行卡查询
         [self checkBank];
     }
     
@@ -113,7 +118,14 @@
     navBarHairlineImageView= [self findHairlineImageViewUnder:self.navigationController.navigationBar];
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMoneyCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMethodCell" bundle:nil] forCellReuseIdentifier:@"paycell"];
-    titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式"];
+    [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayVerificationCodeCell" bundle:nil] forCellReuseIdentifier:@"PayVerificationCodeCell"];
+    [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayDisplayCell" bundle:nil] forCellReuseIdentifier:@"PayDisplayCell"];
+    
+    if ([_model.platform_type isEqualToString:@"2"]) {
+        titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式",@"验证码",@"提示语"];
+    }else{
+        titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式"];
+    }
     payLoanArry = @[@"使用红包",@"逾期费用",@"使用溢缴金额",@"实扣金额",@"支付方式"];
     self.PayDetailTB.bounces=NO;
     [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
@@ -235,8 +247,10 @@
                                 //                                _selectCard
                                 CardInfo *cardInfo = [[CardInfo alloc] init];
                                 cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
+                                cardInfo.cardlNumber = cardResult.card_no_;
                                 cardInfo.bankName = banlist.desc;
                                 cardInfo.cardIdentifier = cardResult.id_;
+                                cardInfo.phoneNum = cardResult.bank_reserve_phone_;
                                 _selectCard = cardInfo;
                             }
                         }
@@ -291,9 +305,8 @@
         }else {
             return titleAry.count;
         }
-        
     }
-    
+    //合规通道弃用
     if (_p2pBillModel != nil) {
         return 4;
     }
@@ -309,17 +322,45 @@
 {
     if (_repayListInfo != nil) {
         if ([_product_id isEqualToString:SalaryLoan]||[_product_id isEqualToString:WhiteCollarLoan]) {
+            
+            //合规发送验证码
+            if (indexPath.row== 4) {
+                PayVerificationCodeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PayVerificationCodeCell"];
+                cell.titleLabel.text = titleAry[indexPath.row];
+                cell.cardNum = _queryCardInfoModel.result.UsrCardInfolist.CardId;
+                cell.phoneNum = _selectCard.phoneNum;
+                cell.userVerfiyCode = ^(NSString *str) {
+                    verfiyCode = str;
+                };
+                return cell;
+            }
+            
+            //合规验证码提示
+            if (indexPath.row== 5) {
+                PayDisplayCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PayDisplayCell"];
+                [cell setDispalyLabeltext:_selectCard.phoneNum];
+                return cell;
+            }
+            
             //红包和银行的cell
             if(indexPath.row==3){
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.PayTitleLabel.text=titleAry[indexPath.row];
-                if (_selectCard != nil) {
-                    cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,_selectCard.tailNumber];
-                }else {
-                    cell.whichBank.text = @"";
-                }
                 
+                if ([_model.platform_type isEqualToString:@"2"]) {
+                    if ([_queryCardInfoModel.result.UsrCardInfolist.BankId isEqualToString:@""]) {
+                        cell.whichBank.text = @"请更换银行卡";
+                    }else{
+                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[self bankName:_queryCardInfoModel.result.UsrCardInfolist.BankId],[_queryCardInfoModel.result.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.result.UsrCardInfolist.CardId.length-4]];
+                    }
+                }else{
+                    if (_selectCard != nil) {
+                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,_selectCard.tailNumber];
+                    }else {
+                        cell.whichBank.text = @"";
+                    }
+                }
                 return cell;
             }
             else//溢缴金额和应付金额cell
@@ -399,7 +440,7 @@
                 else if(indexPath.row==1){//溢缴金额
                     cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useTotalAmount];
                 }
-                else{                //应付金额
+                else if(indexPath.row == 2){                //应付金额
                     cell.payLabel.text = [NSString stringWithFormat:@"%.2f元",_finalyRepayAmount];
                 }
                 cell.lblTitle.text=titleAry[indexPath.row];
@@ -408,9 +449,6 @@
         } else {
             //红包和银行的cell
             if(indexPath.row == 4){
-                
-                
-                
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.PayTitleLabel.text=payLoanArry[indexPath.row];
@@ -428,7 +466,6 @@
 //                }else {
 //                    cell.whichBank.text = @"";
 //                }
-                
                 
                 return cell;
             } else//溢缴金额和应付金额cell
@@ -517,6 +554,8 @@
             }
         }
     }
+    
+    //合规通道弃用
     if (_p2pBillModel != nil) {
         //红包和银行的cell
         if(indexPath.row==3){
@@ -531,9 +570,6 @@
             
                 cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[self bankName:_queryCardInfoModel.result.UsrCardInfolist.BankId],[_queryCardInfoModel.result.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.result.UsrCardInfolist.CardId.length-4]];
             }
-            
-           
-            
             return cell;
         }
         else//溢缴金额和应付金额cell
@@ -650,6 +686,12 @@
         }
         if(indexPath.row==3)//选择银行卡
         {
+            if ([_model.platform_type isEqualToString:@"2"]) {
+                //                [self chooseBankCard];
+                [self gotoUnbundlingBank];
+                return;
+            }
+            
             if (_repayListInfo != nil) {
                 DLog(@"选择付款方式");
                 PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
@@ -671,14 +713,6 @@
                 payNC.view.frame = CGRectMake(0, 0, _k_w, 270);
                 [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
             }
-            if (_p2pBillModel != nil) {
-                
-//                [self chooseBankCard];
-                
-                [self gotoUnbundlingBank];
-                
-            }
-            
         }
     }else {
         if(indexPath.row==0){//红包
@@ -810,13 +844,16 @@
 #pragma mark  确定按钮
 - (IBAction)btnSureClick:(UIButton *)sender {
     DLog(@"确定按钮");
-    if (_repayListInfo != nil) {
+    if (_repayListInfo == nil) {
+        return;
+    }
+    
+    if ([_model.platform_type isEqualToString:@"2"] ) {
+        [self getMoney];
+    }else{
         [self fxdRepay];
     }
     
-    if (_p2pBillModel != nil) {
-        [self getMoney];
-    }
 }
 
 - (void)fxdRepay
@@ -951,13 +988,9 @@
     }else if ([_userStatusModel.result.flg isEqualToString:@"6"]){//正常用户
 
         if (_repayType == RepayTypeOption) {
-            
             [self repaySure];
-            
         } else {
-            
             [self paySettle];
-            
         }
     }
 }
@@ -971,7 +1004,6 @@
     [self.navigationController pushViewController:controller animated:YES];
     
 }
-
 
 #pragma mark 银行卡名字的转换
 -(NSString *)bankName:(NSString *)bankCode{
