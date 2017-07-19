@@ -42,9 +42,9 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 //192.168.7.253:8080
 //192.168.6.130:9191
 
-NSString * const _main_url  =   @"http://192.168.7.253:8080/fxd-esb/esb/";
-NSString * const _ValidESB_url  =   @"http://192.168.7.253:8080/fxd-esb/";
-NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
+NSString * const _main_url  =  @"http://192.168.7.253:8080/fxd-esb/esb/";
+NSString * const _ValidESB_url  =  @"http://192.168.7.253:8080/fxd-esb/";
+NSString * const _H5_url   =  @"http://192.168.6.130/fxd-h5/page/";
 //NSString * const _p2P_url = @"http://192.168.7.253:9292/fxd-esb/p2p/";
 NSString * const _p2P_url = @"http://192.168.7.253:8080/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
