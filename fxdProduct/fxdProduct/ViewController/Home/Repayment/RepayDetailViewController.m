@@ -33,6 +33,10 @@
 #import "UserStateModel.h"
 #import "PayVerificationCodeCell.h"
 #import "PayDisplayCell.h"
+#import "PaymentViewModel.h"
+#import "PaymentDetailModel.h"
+#import "BaseResultModel.h"
+
 
 @interface RepayDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SelectViewDelegate>
 {
@@ -133,13 +137,11 @@
     if (_isP2pView) {
         [self addBackItemRoot];
     }else{
-    
         [self addBackItem];
     }
     
     [self createNoneView];
     [self updateTotalAmount];
-    
 }
 
 
@@ -201,7 +203,6 @@
     lblRepayTip.alpha=0.7;
     lblRepayTip.textAlignment=NSTextAlignmentCenter;
     [header addSubview:lblRepayTip];
-    
     
     self.PayDetailTB.tableHeaderView = header;
     self.PayDetailTB.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -769,7 +770,6 @@
             }
         }
     }
-    
 }
 
 #pragma mark - selectVCDelegate
@@ -857,7 +857,7 @@
 - (void)fxdRepay
 {
     
-    NSLog(@"====================================支付点击");
+    NSLog(@"=================支付点击===================");
     self.sureBtn.enabled = NO;
     NSMutableString *staging_ids = [NSMutableString string];
     for (int i = 0; i < _situations.count; i++) {
@@ -875,48 +875,47 @@
     } else {
         save_amountTemp = @"0";
     }
+    PaymentDetailModel *  paymentDetailModel = [[PaymentDetailModel alloc]init];
     
     if (_useredPacketAmount > 0) {
-        paramDic = @{@"staging_ids_":staging_ids,
-                     @"account_card_id_":_selectCard.cardIdentifier,
-                     @"total_amount_":@(_useTotalAmount),
-                     @"repay_amount_":@(_finalyRepayAmount),
-                     @"repay_total_":@(_repayAmount),
-                     @"save_amount_":@(_save_amount),
-                     @"socket":_repayListInfo.result.socket,
-                     @"request_type_":save_amountTemp,
-                     @"redpacket_id_":_selectRedPacketID,
-                     @"redpacket_cash_":@(_useredPacketAmount),
-                     };
+        paymentDetailModel.staging_ids_ =staging_ids;
+        paymentDetailModel.account_card_id_ =_selectCard.cardIdentifier;
+        paymentDetailModel.total_amount_ = @(_useTotalAmount);
+        paymentDetailModel.repay_amount_ = @(_finalyRepayAmount);
+        paymentDetailModel.repay_total_ = @(_repayAmount);
+        paymentDetailModel.save_amount_ = @(_save_amount);
+        paymentDetailModel.socket = _repayListInfo.result.socket;
+        paymentDetailModel.request_type_ = save_amountTemp;
+        paymentDetailModel.redpacket_id_ = _selectRedPacketID;
+        paymentDetailModel.redpacket_cash_ = @(_useredPacketAmount);
     }else {
-        paramDic = @{@"staging_ids_":staging_ids,
-                     @"account_card_id_":_selectCard.cardIdentifier,
-                     @"total_amount_":@(_useTotalAmount),
-                     @"repay_amount_":@(_finalyRepayAmount),
-                     @"repay_total_":@(_repayAmount),
-                     @"save_amount_":@(_save_amount),
-                     @"socket":_repayListInfo.result.socket,
-                     @"request_type_":save_amountTemp,
-                     };
+        paymentDetailModel.staging_ids_ =staging_ids;
+        paymentDetailModel.account_card_id_ =_selectCard.cardIdentifier;
+        paymentDetailModel.total_amount_ = @(_useTotalAmount);
+        paymentDetailModel.repay_amount_ = @(_finalyRepayAmount);
+        paymentDetailModel.repay_total_ = @(_repayAmount);
+        paymentDetailModel.save_amount_ = @(_save_amount);
+        paymentDetailModel.socket = _repayListInfo.result.socket;
+        paymentDetailModel.request_type_ = save_amountTemp;
     }
     
-    DLog(@"========%@",paramDic);
-    
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_RepayOrSettleWithPeriod_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object[@"msg"]);
-        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-            
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+    PaymentViewModel * paymentViewModel = [[PaymentViewModel alloc]init];
+    [paymentViewModel setBlockWithReturnBlock:^(id returnValue) {
+        DLog(@"%@",returnValue[@"msg"]);
+        BaseResultModel * baseResultModel = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseResultModel.flag isEqualToString:@"0000"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.msg];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
         }else {
             self.sureBtn.enabled = YES;
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.msg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         self.sureBtn.enabled = YES;
     }];
+    [paymentViewModel FXDpaymentDetail:paymentDetailModel];
 }
 
 #pragma mark 正常扣款

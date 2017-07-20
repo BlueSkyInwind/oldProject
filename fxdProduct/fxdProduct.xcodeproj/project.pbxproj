@@ -567,6 +567,10 @@
 		8438F7191EE163690089E121 /* ChangePasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F7171EE163690089E121 /* ChangePasswordViewModel.m */; };
 		8438F71D1EE165460089E121 /* changePasswordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F71C1EE165460089E121 /* changePasswordParam.m */; };
 		8438F71E1EE165460089E121 /* changePasswordParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F71C1EE165460089E121 /* changePasswordParam.m */; };
+		843FF1F51F20860B00ECCE16 /* PaymentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843FF1F41F20860B00ECCE16 /* PaymentViewModel.m */; };
+		843FF1F81F20863600ECCE16 /* PaymentDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843FF1F71F20863600ECCE16 /* PaymentDetailModel.m */; };
+		843FF1F91F20863600ECCE16 /* PaymentDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843FF1F71F20863600ECCE16 /* PaymentDetailModel.m */; };
+		843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843FF1F41F20860B00ECCE16 /* PaymentViewModel.m */; };
 		84420A611ED678E200DFBFE0 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
 		84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84420A601ED678E200DFBFE0 /* LoginView.xib */; };
 		8446AC031EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */; };
@@ -2240,6 +2244,10 @@
 		8438F7171EE163690089E121 /* ChangePasswordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewModel.m; sourceTree = "<group>"; };
 		8438F71B1EE165460089E121 /* changePasswordParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = changePasswordParam.h; sourceTree = "<group>"; };
 		8438F71C1EE165460089E121 /* changePasswordParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = changePasswordParam.m; sourceTree = "<group>"; };
+		843FF1F31F20860B00ECCE16 /* PaymentViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentViewModel.h; sourceTree = "<group>"; };
+		843FF1F41F20860B00ECCE16 /* PaymentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentViewModel.m; sourceTree = "<group>"; };
+		843FF1F61F20863600ECCE16 /* PaymentDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentDetailModel.h; sourceTree = "<group>"; };
+		843FF1F71F20863600ECCE16 /* PaymentDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentDetailModel.m; sourceTree = "<group>"; };
 		84420A5E1ED678E200DFBFE0 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		84420A5F1ED678E200DFBFE0 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		84420A601ED678E200DFBFE0 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
@@ -3349,6 +3357,8 @@
 				CCDEDF631EEA912A009CEC32 /* LoanMoneyViewModel.m */,
 				84A6350F1F00FCA200146A8A /* AuthenticationViewModel.h */,
 				84A635101F00FCA200146A8A /* AuthenticationViewModel.m */,
+				843FF1F31F20860B00ECCE16 /* PaymentViewModel.h */,
+				843FF1F41F20860B00ECCE16 /* PaymentViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4354,6 +4364,7 @@
 			children = (
 				843614A21F0CF9130036201A /* BaseResultModel.h */,
 				843614A31F0CF9130036201A /* BaseResultModel.m */,
+				843FF1EC1F2083F800ECCE16 /* ReplayModel */,
 				8436149A1F0CF4A50036201A /* contract */,
 				84A6350B1F00F85700146A8A /* MobilePhoneOperator */,
 				CCDEDF661EEA9257009CEC32 /* ProductProtocol */,
@@ -4911,6 +4922,15 @@
 				CC0F1B981EE64A2A00A23651 /* ChangePasswordModel.m */,
 			);
 			path = changePassword;
+			sourceTree = "<group>";
+		};
+		843FF1EC1F2083F800ECCE16 /* ReplayModel */ = {
+			isa = PBXGroup;
+			children = (
+				843FF1F61F20863600ECCE16 /* PaymentDetailModel.h */,
+				843FF1F71F20863600ECCE16 /* PaymentDetailModel.m */,
+			);
+			path = ReplayModel;
 			sourceTree = "<group>";
 		};
 		84420A5D1ED6788D00DFBFE0 /* LoginView */ = {
@@ -5820,6 +5840,7 @@
 				63553AED1E5D787800B2C1FF /* IdentityCell.m in Sources */,
 				8438F7141EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */,
 				637963A81CABD0F8002A5910 /* ApprovalAmountBaseClass.m in Sources */,
+				843FF1F51F20860B00ECCE16 /* PaymentViewModel.m in Sources */,
 				CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */,
 				637637031D7829BE00E93289 /* DetailRepayHeader.m in Sources */,
 				636AC4331D38EA7F00599590 /* PayMethodCell.m in Sources */,
@@ -5942,6 +5963,7 @@
 				63D43EF61D41F76D0076AC7F /* YYCache.m in Sources */,
 				63F254861E49A45900852CF1 /* HMScannerBorder.m in Sources */,
 				638A17011E517D9F00AB8AB6 /* LOTMask.m in Sources */,
+				843FF1F81F20863600ECCE16 /* PaymentDetailModel.m in Sources */,
 				631CB4701B7AF5220090C94D /* indexViewController.m in Sources */,
 				63145AB41CA2952400D04ED8 /* LoginMsgResult.m in Sources */,
 				633DAD2D1C3E47D0000DA852 /* FindPassViewModel.m in Sources */,
@@ -6043,6 +6065,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */,
 				846A90091F1F3D9F00896169 /* PayVerificationCodeCell.m in Sources */,
 				843614A61F0CFD4B0036201A /* P2PContactContentModel.m in Sources */,
 				843614A51F0CFD320036201A /* BaseResultModel.m in Sources */,
@@ -6338,6 +6361,7 @@
 				CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */,
 				CC0DFA601EA5B1090024841A /* CADisplayLink.m in Sources */,
 				844E5F4C1ED94C9C00753671 /* RegViewModel.m in Sources */,
+				843FF1F91F20863600ECCE16 /* PaymentDetailModel.m in Sources */,
 				CC0DFA611EA5B1090024841A /* Tool.m in Sources */,
 				CC0DFA621EA5B1090024841A /* RepayHistoryResult.m in Sources */,
 				CC0DFA631EA5B1090024841A /* UIBarButtonItem+Extend.m in Sources */,
