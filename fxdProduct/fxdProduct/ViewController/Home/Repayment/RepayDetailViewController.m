@@ -406,7 +406,7 @@
                                     }
                                 }
                             }
-                            //            cell.accessoryType = UITableViewCellAccessoryNone;
+                            // cell.accessoryType = UITableViewCellAccessoryNone;
                             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
                         }else {
@@ -615,7 +615,7 @@
                                 }
                             }
                         }
-                        //            cell.accessoryType = UITableViewCellAccessoryNone;
+                        // cell.accessoryType = UITableViewCellAccessoryNone;
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
                     }else {
@@ -811,8 +811,6 @@
         [self.PayDetailTB reloadData];
     }];
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
