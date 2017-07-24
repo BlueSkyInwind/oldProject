@@ -20,5 +20,9 @@
 @property(nonatomic,strong)NSString<Optional> * request_type_;
 @property(nonatomic,strong)NSString<Optional> * redpacket_id_;
 @property(nonatomic,strong)NSNumber<Optional> * redpacket_cash_;
+//合规
+@property(nonatomic,strong)NSString<Optional> * sms_code_ ;
+@property(nonatomic,strong)NSString<Optional> * sms_seq_ ;
+
 
 @end

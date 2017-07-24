@@ -49,9 +49,12 @@
 /**
  合规银行卡查询
  */
-
 -(void)queryCardInfo;
 
+/**
+ 合规银行卡列表
+ */
+-(void)queryCardListInfo;
 
 
 @end

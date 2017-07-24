@@ -581,6 +581,8 @@
 		844E5F511ED94DCB00753671 /* RegParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4F1ED94DCB00753671 /* RegParamModel.m */; };
 		845017311ED7CD88008055E4 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84420A601ED678E200DFBFE0 /* LoginView.xib */; };
 		845017321ED7D051008055E4 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
+		8451682C1F26011A0026B415 /* HGBankListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8451682B1F26011A0026B415 /* HGBankListModel.m */; };
+		8451682D1F2603BD0026B415 /* HGBankListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8451682B1F26011A0026B415 /* HGBankListModel.m */; };
 		846A90071F1F3B2700896169 /* PayVerificationCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90051F1F3B2700896169 /* PayVerificationCodeCell.m */; };
 		846A90081F1F3B2700896169 /* PayVerificationCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90061F1F3B2700896169 /* PayVerificationCodeCell.xib */; };
 		846A90091F1F3D9F00896169 /* PayVerificationCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90051F1F3B2700896169 /* PayVerificationCodeCell.m */; };
@@ -2257,6 +2259,8 @@
 		844E5F4A1ED94C9C00753671 /* RegViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewModel.m; sourceTree = "<group>"; };
 		844E5F4E1ED94DCB00753671 /* RegParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegParamModel.h; sourceTree = "<group>"; };
 		844E5F4F1ED94DCB00753671 /* RegParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegParamModel.m; sourceTree = "<group>"; };
+		8451682A1F26011A0026B415 /* HGBankListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGBankListModel.h; sourceTree = "<group>"; };
+		8451682B1F26011A0026B415 /* HGBankListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGBankListModel.m; sourceTree = "<group>"; };
 		846A90041F1F3B2700896169 /* PayVerificationCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayVerificationCodeCell.h; sourceTree = "<group>"; };
 		846A90051F1F3B2700896169 /* PayVerificationCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayVerificationCodeCell.m; sourceTree = "<group>"; };
 		846A90061F1F3B2700896169 /* PayVerificationCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayVerificationCodeCell.xib; sourceTree = "<group>"; };
@@ -5071,6 +5075,8 @@
 			children = (
 				CCE3BE261ED2D655004C35A4 /* QueryCardInfo.h */,
 				CCE3BE271ED2D655004C35A4 /* QueryCardInfo.m */,
+				8451682A1F26011A0026B415 /* HGBankListModel.h */,
+				8451682B1F26011A0026B415 /* HGBankListModel.m */,
 			);
 			name = QueryCardInfo;
 			sourceTree = "<group>";
@@ -5198,9 +5204,8 @@
 				TargetAttributes = {
 					636EE2FC1B662ABB00A1A3ED = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = B4V533E2T3;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -5223,7 +5228,7 @@
 					};
 					CC0DF9531EA5B1090024841A = {
 						DevelopmentTeam = B4V533E2T3;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -5657,6 +5662,7 @@
 				633DAD301C3E59A0000DA852 /* LoginViewModel.m in Sources */,
 				63D43EF81D41F76D0076AC7F /* YYKVStorage.m in Sources */,
 				638A16891E5045BC00AB8AB6 /* RepayRequestManage.m in Sources */,
+				8451682C1F26011A0026B415 /* HGBankListModel.m in Sources */,
 				1A5A69C31BF1ED7700250317 /* DataBaseManager.m in Sources */,
 				63E1ECDF1E1CD3D80079A2F8 /* HomeBottomCell.m in Sources */,
 				63A24C5C1BE063A90036E8EF /* CALayer+Transition.m in Sources */,
@@ -6065,6 +6071,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8451682D1F2603BD0026B415 /* HGBankListModel.m in Sources */,
 				843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */,
 				846A90091F1F3D9F00896169 /* PayVerificationCodeCell.m in Sources */,
 				843614A61F0CFD4B0036201A /* P2PContactContentModel.m in Sources */,
@@ -6884,7 +6891,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
@@ -6979,8 +6986,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "c47ad159-f488-4d97-94f2-0ba5437d6ed8";
+				PROVISIONING_PROFILE_SPECIFIER = fxd_deve;
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/ViewController/Home/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -7000,7 +7007,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
@@ -7081,8 +7088,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "c47ad159-f488-4d97-94f2-0ba5437d6ed8";
+				PROVISIONING_PROFILE_SPECIFIER = fxd_deve;
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/ViewController/Home/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;

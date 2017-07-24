@@ -1,4 +1,4 @@
-//
+ //
 //  RepayDetailViewController.m
 //  fxdProduct
 //
@@ -36,6 +36,7 @@
 #import "PaymentViewModel.h"
 #import "PaymentDetailModel.h"
 #import "BaseResultModel.h"
+#import "HGBankListModel.h"
 
 
 @interface RepayDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SelectViewDelegate>
@@ -77,6 +78,8 @@
     QryUserStatusModel *_userStatusModel;
     
     NSString *verfiyCode;
+    NSString *smsSeq;
+
     
 }
 @property (nonatomic,strong) UILabel *lblShouldrepay;
@@ -120,6 +123,7 @@
     _finalyRepayAmount = _repayAmount;
     
     navBarHairlineImageView= [self findHairlineImageViewUnder:self.navigationController.navigationBar];
+    self.PayDetailTB.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMoneyCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMethodCell" bundle:nil] forCellReuseIdentifier:@"paycell"];
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayVerificationCodeCell" bundle:nil] forCellReuseIdentifier:@"PayVerificationCodeCell"];
@@ -329,9 +333,10 @@
                 PayVerificationCodeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PayVerificationCodeCell"];
                 cell.titleLabel.text = titleAry[indexPath.row];
                 cell.cardNum = _queryCardInfoModel.result.UsrCardInfolist.CardId;
-                cell.phoneNum = _selectCard.phoneNum;
-                cell.userVerfiyCode = ^(NSString *str) {
+                cell.phoneNum = _queryCardInfoModel.result.UsrCardInfolist.BindMobile;
+                cell.userVerfiyCode = ^(NSString *str, NSString *seqStr) {
                     verfiyCode = str;
+                    smsSeq = seqStr;
                 };
                 return cell;
             }
@@ -339,7 +344,7 @@
             //合规验证码提示
             if (indexPath.row== 5) {
                 PayDisplayCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PayDisplayCell"];
-                [cell setDispalyLabeltext:_selectCard.phoneNum];
+                [cell setDispalyLabeltext:_queryCardInfoModel.result.UsrCardInfolist.BindMobile];
                 return cell;
             }
             
@@ -897,6 +902,11 @@
         paymentDetailModel.save_amount_ = @(_save_amount);
         paymentDetailModel.socket = _repayListInfo.result.socket;
         paymentDetailModel.request_type_ = save_amountTemp;
+        //合规的还款增加两个参数
+        if ([_model.platform_type isEqualToString:@"2"]) {
+            paymentDetailModel.sms_code_ =  verfiyCode;
+            paymentDetailModel.sms_seq_ = smsSeq;
+        }
     }
     
     PaymentViewModel * paymentViewModel = [[PaymentViewModel alloc]init];
@@ -983,12 +993,12 @@
         [self.navigationController pushViewController:p2pVC animated:YES];
         
     }else if ([_userStatusModel.result.flg isEqualToString:@"6"]){//正常用户
-
-        if (_repayType == RepayTypeOption) {
-            [self repaySure];
-        } else {
-            [self paySettle];
-        }
+        [self fxdRepay];
+//        if (_repayType == RepayTypeOption) {
+//            [self repaySure];
+//        } else {
+//            [self paySettle];
+//        }
     }
 }
 
@@ -1029,8 +1039,6 @@
         
         name = @"中国光大银行";
     }
-    
-    
     return name;
 }
 
@@ -1039,26 +1047,42 @@
 
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        NSArray *array = @[@"BOC",@"ICBC",@"CCB",@"ABC",@"CITIC",@"CIB",@"CEB"];
+//        NSArray *array = @[@"BOC",@"ICBC",@"CCB",@"ABC",@"CITIC",@"CIB",@"CEB"];
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
         _queryCardInfoModel = model;
-        BOOL isHave = NO;
-        for (NSString *name in array) {
-            if ([name isEqualToString:model.result.UsrCardInfolist.BankId]) {
-                isHave = YES;
-            }
-        }
-        if (!isHave) {
-            _queryCardInfoModel.result.UsrCardInfolist.BankId = @"";
-        }
-        [self.PayDetailTB reloadData];
-        
+        [self obtain_HeGui_BankList:model];
+    
     } WithFaileBlock:^{
         
     }];
     [checkBankViewModel queryCardInfo];
-    
+}
+
+-(void)obtain_HeGui_BankList:(QueryCardInfo *)infoModel{
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseREsultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseREsultM.flag isEqualToString:@"0000"]) {
+            BOOL isHave = NO;
+            NSArray * array = (NSArray *)baseREsultM.result;
+            for (NSDictionary *dic  in array) {
+                HGBankListModel *  hgBankListM = [[HGBankListModel alloc]initWithDictionary:dic error:nil];
+                if ([hgBankListM.key_ isEqualToString:infoModel.result.UsrCardInfolist.BankId]) {
+                    isHave = YES;
+                    break;
+                }
+            }
+            if (!isHave) {
+                _queryCardInfoModel.result.UsrCardInfolist.BankId = @"";
+            }
+            [self.PayDetailTB reloadData];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view  message:baseREsultM.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [checkBankViewModel queryCardListInfo];
 }
 
 

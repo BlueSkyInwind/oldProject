@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.backgroundColor = kUIColorFromRGB(0xf3f3f0);
 }
 
 -(void)setDispalyLabeltext:(NSString *)text{

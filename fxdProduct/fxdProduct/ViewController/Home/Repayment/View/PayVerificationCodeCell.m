@@ -13,6 +13,8 @@
 @interface PayVerificationCodeCell(){
     NSInteger _countdown;
     NSTimer * _countdownTimer;
+    
+    NSString * _sms_seq_;
 }
 
 
@@ -25,7 +27,7 @@
     [super awakeFromNib];
     // Initialization code
     _verfiyCodeTextField.delegate = self;
-    
+    _countdown = 60;
 }
 
 - (IBAction)cilckSendVerfiyCodeBtn:(id)sender {
@@ -56,8 +58,7 @@
     [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
         SendSmsModel *sendSmsModel = [SendSmsModel yy_modelWithJSON:returnValue];
         if ([sendSmsModel.result.appcode isEqualToString:@"1"]) {
-            
-            
+            _sms_seq_ = sendSmsModel.result.sms_seq_;
             [[MBPAlertView sharedMBPTextView] showTextOnly:self message:sendSmsModel.result.appmsg];
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self message:sendSmsModel.result.appmsg];
@@ -67,12 +68,11 @@
     }];
     [unbundlingBankCardViewModel sendSmsSHServiceBankNo:_cardNum BusiType:@"recharge" SmsType:nil Mobile:_phoneNum];
 }
-
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     NSString * str = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (str.length != 0) {
         if (self.userVerfiyCode) {
-            self.userVerfiyCode(textField.text);
+            self.userVerfiyCode(textField.text,_sms_seq_);
         }
     }
 }

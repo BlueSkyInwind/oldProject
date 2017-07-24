@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^UserVerfiyCode)(NSString * str);
+typedef void(^UserVerfiyCode)(NSString * str,NSString * seqStr);
 
 @interface PayVerificationCodeCell : UITableViewCell<UITextFieldDelegate>
 

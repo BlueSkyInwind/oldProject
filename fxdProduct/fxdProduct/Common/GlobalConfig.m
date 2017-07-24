@@ -43,12 +43,11 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 //NSString * const _H5_url   =  @"http://192.168.6.130/fxd-h5/page/";
 
 //测试导流 192.168.6.133
-NSString * const _main_url  =   @"http://192.168.6.133/fxd-esb/esb/";
-NSString * const _ValidESB_url  =   @"http://192.168.6.133/fxd-esb/";
+NSString * const _main_url  =   @"http://192.168.15.116:8055/fxd-esb/esb/";
+NSString * const _ValidESB_url  =   @"http://192.168.15.116:8055/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
-
 //NSString * const _p2P_url = @"http://192.168.7.253:9292/fxd-esb/p2p/";
-NSString * const _p2P_url = @"http://192.168.6.133/fxd-esb/p2p/";
+NSString * const _p2P_url = @"http://192.168.15.116:8055/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
 
 
@@ -457,6 +456,9 @@ NSString * const    _bankCards_url    =    @"hg/quickChangeBindingCard.jhtml";
 //银行卡查询接口
 //NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsSHService.queryCardInfo";
 NSString * const    _queryCardInfo_url    =    @"hg/queryCardInfo.jhtml";
+
+//合规银行卡列表信息
+NSString * const    _queryCardListInfo_url    =    @"bankCardsSHService.queryCardInfo.jhtml";
 
 //用户状态查询接口
 NSString * const    _accountHSService_url    =    @"http/do.jhtml?router=accountHSService.qryUserStatus";

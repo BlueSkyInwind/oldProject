@@ -1427,7 +1427,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 for (int j = 0; j<bankArray.count; j++) {
                     if ([bankList.desc isEqualToString:bankArray[j]]) {
                         [array addObject:bankList];
-                        
                     }
                 }
             }
