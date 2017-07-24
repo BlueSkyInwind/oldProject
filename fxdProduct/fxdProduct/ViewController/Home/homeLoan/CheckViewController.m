@@ -1064,7 +1064,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             j=11;
             k=0;
         }else if (money>=2000&&money<=2999){
-        
             j=16;
             k=0;
         }else if (money>=3000&&money<=3999){

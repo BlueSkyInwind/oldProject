@@ -18,11 +18,11 @@
  #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0
 
-//NSString * const _main_url  =   @"https://h5.faxindai.com:8028/fxd-esb/esb/"; //生产
-//NSString * const _ValidESB_url = @"https://h5.faxindai.com:8028/fxd-esb/";
-//NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/"; //生产
-//NSString * const _p2P_url = @"https://h5.faxindai.com:8028/fxd-esb/p2p/";
-//NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
+NSString * const _main_url  =   @"https://h5.faxindai.com:8028/fxd-esb/esb/"; //生产
+NSString * const _ValidESB_url = @"https://h5.faxindai.com:8028/fxd-esb/";
+NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/"; //生产
+NSString * const _p2P_url = @"https://h5.faxindai.com:8028/fxd-esb/p2p/";
+NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 #elif FXD_Environment_Mode == 1
 
