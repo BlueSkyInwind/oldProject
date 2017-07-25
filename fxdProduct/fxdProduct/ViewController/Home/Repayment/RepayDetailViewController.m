@@ -173,7 +173,6 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-
 -(void)createHeaderView
 {
     UIView *header=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 200)];
@@ -230,8 +229,6 @@
     noneView.hidden = YES;
     [self.view addSubview:noneView];
 }
-
-
 /**
  获取用户绑定卡列表
  */
@@ -279,7 +276,6 @@
 
 - (void)updateTotalAmount
 {
-    
     if (_repayListInfo != nil) {
         if (_repayListInfo.result.total_amount > 0) {
             if (_repayListInfo.result.total_amount <= _repayAmount) {
@@ -856,7 +852,6 @@
     }else{
         [self fxdRepay];
     }
-    
 }
 
 - (void)fxdRepay
@@ -931,7 +926,6 @@
 #pragma mark 正常扣款
 - (void)repaySure
 {
-    
     NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
                           @"bid_id_":_p2pBillModel.data.bid_id_,
                           @"amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],

@@ -76,4 +76,7 @@
  *  @return 返回文本宽度
  */
 + (CGFloat)widthForText:(NSString *)text font:(CGFloat)size;
+
+
+
 @end
