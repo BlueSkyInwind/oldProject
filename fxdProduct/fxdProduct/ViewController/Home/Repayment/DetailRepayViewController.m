@@ -117,6 +117,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
         }
     }
     
+    //合规的通道暂时弃用
     if (_p2pBillDetail != nil) {
         for (int i = 0; i < _p2pBillDetail.data.bill_List_.count; i++) {
             BillList *bill = [_p2pBillDetail.data.bill_List_ objectAtIndex:i];
@@ -145,6 +146,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
                 }
             }
         }
+        
         if (_p2pBillDetail != nil) {
             for (BillList *bill in _p2pBillDetail.data.bill_List_) {
                 if (bill.status_ == 3) {
@@ -153,7 +155,6 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
                 }
             }
         }
-        
     }
     for (int i = 0; i < _cellSelectArr.count; i++) {
         if ([_cellSelectArr objectAtIndex:i].boolValue) {
@@ -194,7 +195,6 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
 - (void)updateUserNeedPayAmount
 {
     //    _payNumberLabel.text = [NSString stringWithFormat:@"待支付%.2f元",_readyPayAmount];
-    
     NSString *repAmount = [NSString stringWithFormat:@"%.2f",_readyPayAmount];
     NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待支付%@元",repAmount]];
     [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(255, 134, 25) range:NSMakeRange(3, repAmount.length)];
@@ -583,7 +583,6 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
                     _readyPayAmount += bill.amount_total_;
                 }
             }
-            
         }
         
         self.saveUpLabel.hidden = YES;
@@ -611,6 +610,8 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请至少选择一期"];
         }
     }
+    
+    //合规还款通道弃用
     if (_p2pBillDetail != nil) {
         for (int i = 0; i < _cellSelectArr.count; i++) {
             if ([_cellSelectArr objectAtIndex:i].boolValue) {
@@ -635,7 +636,6 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请至少选择一期"];
         }
     }
-    
 }
 
 - (void)fatchCardInfo
@@ -657,6 +657,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
             repayMent.cellSelectArr = _cellSelectArr;
             repayMent.save_amount = _save_amount;
             repayMent.situations = _situations;
+            repayMent.model = _userStateM;
             [self.navigationController pushViewController:repayMent animated:YES];
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_bankCardModel.msg];

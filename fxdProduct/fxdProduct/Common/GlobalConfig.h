@@ -163,6 +163,7 @@ UIKIT_EXTERN NSString * const       _sendSms_url;                     //发送�
 UIKIT_EXTERN NSString * const       _bankCards_url;                     //换绑银行卡
 UIKIT_EXTERN NSString * const       _huifu_url;                    //用户开户接口
 UIKIT_EXTERN NSString * const       _queryCardInfo_url;                    //银行卡查询接口
+UIKIT_EXTERN NSString * const       _queryCardListInfo_url;                    //合规银行卡列表信息
 UIKIT_EXTERN NSString * const       _accountHSService_url;                    //用户状态查询接口
 UIKIT_EXTERN NSString * const       _paymentService_url;                    //主动还款接口
 UIKIT_EXTERN NSString * const       _cash_url;                    //取现

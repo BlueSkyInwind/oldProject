@@ -16,4 +16,9 @@
 
 @property (nonatomic, copy)NSString *tailNumber;
 
+@property (nonatomic, copy)NSString *cardlNumber;
+
+@property (nonatomic, copy)NSString *phoneNum;
+
+
 @end

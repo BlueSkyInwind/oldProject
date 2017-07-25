@@ -441,6 +441,10 @@
         sdCycleScrollview.scrollDirection = UICollectionViewScrollDirectionVertical;
         NSMutableArray *titlesArray = [NSMutableArray new];
         for (LoanRecordResult *result in _loanRecordParse.result) {
+            //测试
+            if (result.content == nil) {
+                continue;
+            }
             [titlesArray addObject:result.content];
         }
         sdCycleScrollview.titlesGroup = [titlesArray copy];
@@ -639,11 +643,9 @@
                     [weakSelf.navigationController pushViewController:p2pVC animated:YES];
                     
                 }else{
-                    
                     RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                     repayRequest.targetVC = weakSelf;
                     [repayRequest repayRequest];
-                    
                 }
             }else{
                 RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];

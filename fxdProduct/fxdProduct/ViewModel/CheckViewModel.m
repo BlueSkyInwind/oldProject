@@ -8,6 +8,8 @@
 
 #import "CheckViewModel.h"
 #import "SaveLoanCaseParamModel.h"
+#import "HGBankListModel.h"
+
 @implementation CheckViewModel
 
 -(void)approvalAmount{
@@ -120,6 +122,22 @@
         }
     }];
 }
+
+-(void)queryCardListInfo{
+    
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:@{@"dict_type_":@"__HG_CARD_BANK_"} finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+
 
 
 

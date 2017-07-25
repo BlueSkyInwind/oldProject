@@ -10,4 +10,11 @@
 
 @implementation UserInfoObj
 
+
+
+
+
+
+
+
 @end

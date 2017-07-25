@@ -48,6 +48,8 @@
 #import "CheckViewModel.h"
 #import "SaveLoanCaseModel.h"
 #import "QryUserStatusModel.h"
+#import "HGBankListModel.h"
+
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -421,7 +423,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                             
                         }];
                     }
-                    
                 }];
             }];
             checkSuccess.agreementLabel.attributedText = attributeStr;
@@ -938,7 +939,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     return NO;
 }
 
-
 //分享函数
 -(void)shareContent:(UIButton*)tableView
 {
@@ -995,7 +995,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                             [view removeFromSuperview];
                         }
                     }
-
                     _userSelectNum = @0;
                     [self createUI];
                 }
@@ -1427,13 +1426,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 for (int j = 0; j<bankArray.count; j++) {
                     if ([bankList.desc isEqualToString:bankArray[j]]) {
                         [array addObject:bankList];
-                        
                     }
                 }
             }
             [bankModel.result removeAllObjects];
             for (BankList *bank in array) {
-                
                 [bankModel.result addObject:bank];
             }
             BankCardViewController *bankVC = [BankCardViewController new];
@@ -1458,7 +1455,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 #pragma mark 弹出合规银行卡列表viewmodel
 -(void)queryCardInfo{
-
+ 
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
         

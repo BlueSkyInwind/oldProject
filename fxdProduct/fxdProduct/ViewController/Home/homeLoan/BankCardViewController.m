@@ -736,7 +736,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             } else{
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardModel.msg];
             }
-            
         }
     } failure:^(EnumServerStatus status, id object) {
         
@@ -770,7 +769,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 
 #pragma mark 开户
 -(void)openAccount{
-
 
     NSString *bankName = [self bankName:_bankCodeNUm];
 //    NSString *_sms_seq = @"AAAAAAAA";
