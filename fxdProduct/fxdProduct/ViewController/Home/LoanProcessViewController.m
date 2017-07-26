@@ -130,16 +130,16 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    
     if (_isRefuse) {
         if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
             return 100;
-        }else{
+        }else if([_userStateModel.product_id isEqualToString:WhiteCollarLoan]){
         
             return 190;
-        }
+        }else{
         
-        return 260;
+            return 0;
+        }
         
     }else{
         return 0;
@@ -149,36 +149,24 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {//工薪贷
+    if ([_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {//白领贷
         
-            RefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"RefuseView" owner:self options:nil]lastObject];
-            refuseView.frame = CGRectZero;
-            [Tool setCorner:refuseView.seeBtn borderColor:UI_MAIN_COLOR];
-            [refuseView.seeBtn addTarget:self action:@selector(refuseBtn) forControlEvents:UIControlEventTouchUpInside];
-            return refuseView;
-        
-    }else{//白领贷
-
         WhiteRefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"WhiteRefuseView" owner:self options:nil]lastObject];
         refuseView.frame = CGRectZero;
         [Tool setCorner:refuseView.applyBtn borderColor:UI_MAIN_COLOR];
         [refuseView.applyBtn addTarget:self action:@selector(applyBtn) forControlEvents:UIControlEventTouchUpInside];
         return refuseView;
+        
+    }else if([_userStateModel.product_id isEqualToString:SalaryLoan]){//工薪贷
 
+        RefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"RefuseView" owner:self options:nil]lastObject];
+        refuseView.frame = CGRectZero;
+        [Tool setCorner:refuseView.seeBtn borderColor:UI_MAIN_COLOR];
+        [refuseView.seeBtn addTarget:self action:@selector(refuseBtn) forControlEvents:UIControlEventTouchUpInside];
+        return refuseView;
+        
     }
-    
-//    self.expressView = [[ExpressCreditRefuseView alloc]initWithFrame:CGRectZero];
-//    NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
-//    [self.expressView setContent:content];
-//    __weak typeof(self) weakSelf = self;
-//    self.expressView.jumpBtnClick = ^(UIButton *jumpBtn) {
-//        [weakSelf moreClick];
-//    };
-//    self.expressView.viewClick = ^(NSString *url){
-//    
-//        [weakSelf clickView:url];
-//    };
-//    return self.expressView;
+    return nil;
     
 }
 

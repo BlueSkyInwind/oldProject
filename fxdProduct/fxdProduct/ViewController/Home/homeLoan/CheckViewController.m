@@ -218,7 +218,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.promoteLabel.hidden = YES;
                 if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
                     
-//                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
                         if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
                             checkFalse.seeView.hidden = NO;
                             [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -228,29 +227,22 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                             checkFalse.jsdView.hidden = NO;
                             [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
                         }
-                        
+                }
+//                else{
+//                
+//                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
+//                        
+//                        checkFalse.seeView.hidden = NO;
+//                        checkFalse.jsdView.hidden = YES;
+//                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
 //                    }else{
 //                    
 //                        checkFalse.seeView.hidden = YES;
 //                        checkFalse.jsdView.hidden = YES;
 //                    }
-//                    checkFalse.jsdView.hidden = NO;
-                    
-                }else{
                 
-                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-                        
-                        checkFalse.seeView.hidden = NO;
-                        checkFalse.jsdView.hidden = YES;
-                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
-                    }else{
-                    
-                        checkFalse.seeView.hidden = YES;
-                        checkFalse.jsdView.hidden = YES;
-                    }
-                   
 
-                }
+//                }
                 
             }
             

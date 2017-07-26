@@ -344,20 +344,7 @@
         return cell;
     }
     
-//    if (indexPath.section == 1) {
-//        ExpressCreditRefuseView *view = [[ExpressCreditRefuseView alloc]init];
-//        NSArray *content = @[@"用钱宝",@"额度：最高5000元",@"期限：7-30天",@"费用：0.3%/日",@"贷嘛",@"额度：1000元-10万元",@"期限：1-60月",@"费用：0.35%-2%月"];
-//        [view setContent:content];
-//        __weak typeof(self) weakSelf = self;
-//        view.jumpBtnClick = ^(UIButton *jumpBtn) {
-//            [weakSelf moreClick];
-//        };
-//        view.viewClick = ^(NSString *url){
-//    
-//            [weakSelf clickView:url];
-//        };
-//        return view;
-//    }
+
     if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
         
         HomeProductListProducts *product = _dataArray[indexPath.section-1];
@@ -375,13 +362,12 @@
         }
 
         [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];
-        cell.periodLabel.text = product.ext_attr_.amt_desc_;
+        cell.periodLabel.text = [NSString stringWithFormat:@"%@还款，额度%@",product.ext_attr_.period_desc_,product.ext_attr_.amt_desc_];;
         cell.amountLabel.text = product.name_;
         
         cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
         cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
         cell.helpImage.userInteractionEnabled = true;
- 
         if ([product.id_ isEqualToString:SalaryLoan]) {
             cell.specialtyImage.image = [UIImage imageNamed:@"home_04"];
             UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highSeeExpenses)];
@@ -391,7 +377,7 @@
             cell.specialtyImage.image = [UIImage imageNamed:@"home11"];
             
         }else{
-            
+            cell.periodLabel.text = [NSString stringWithFormat:@"%@天还款，额度%@",product.ext_attr_.period_desc_,product.ext_attr_.amt_desc_];
             UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
             [cell.helpImage addGestureRecognizer:gest];
             cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
@@ -698,11 +684,17 @@
             if ([model.applyFlag isEqualToString:@"0000"]) {
                 if ([productId isEqualToString:RapidLoan]) {
                     [self fatchRate:^(RateModel *rate) {
-                        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-                        payLoanview.product_id = productId;
-                        payLoanview.userState = model;
-                        payLoanview.rateModel = rate;
-                        [self.navigationController pushViewController:payLoanview animated:true];
+                        
+                        UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+                        userDataVC.product_id = productId;
+                        userDataVC.req_loan_amt = [NSString stringWithFormat:@"%ld",rate.result.principal_bottom_];
+                        [self.navigationController pushViewController:userDataVC animated:true];
+                        
+//                        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+//                        payLoanview.product_id = productId;
+//                        payLoanview.userState = model;
+//                        payLoanview.rateModel = rate;
+//                        [self.navigationController pushViewController:payLoanview animated:true];
                     }];
                 }
                 if ([productId isEqualToString:SalaryLoan]) {
@@ -814,11 +806,16 @@
                     default:{
                         if ([productId isEqualToString:RapidLoan]) {
                             [self fatchRate:^(RateModel *rate) {
-                                PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-                                payLoanview.product_id = productId;
-                                payLoanview.userState = model;
-                                payLoanview.rateModel = rate;
-                                [self.navigationController pushViewController:payLoanview animated:true];
+                                UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+                                userDataVC.product_id = productId;
+                                userDataVC.req_loan_amt = [NSString stringWithFormat:@"%ld",rate.result.principal_bottom_];
+                                [self.navigationController pushViewController:userDataVC animated:true];
+                                
+//                                PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+//                                payLoanview.product_id = productId;
+//                                payLoanview.userState = model;
+//                                payLoanview.rateModel = rate;
+//                                [self.navigationController pushViewController:payLoanview animated:true];
                             }];
                         }
                         if ([productId isEqualToString:SalaryLoan]) {
@@ -838,11 +835,16 @@
             }else if ([model.applyFlag isEqualToString:@"0005"]) {
                 if ([productId isEqualToString:RapidLoan]) {
                     [self fatchRate:^(RateModel *rate) {
-                        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-                        payLoanview.product_id = productId;
-                        payLoanview.userState = model;
-                        payLoanview.rateModel = rate;
-                        [self.navigationController pushViewController:payLoanview animated:true];
+                        
+                        UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+                        userDataVC.product_id = productId;
+                        userDataVC.req_loan_amt = [NSString stringWithFormat:@"%ld",rate.result.principal_bottom_];
+                        [self.navigationController pushViewController:userDataVC animated:true];
+//                        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+//                        payLoanview.product_id = productId;
+//                        payLoanview.userState = model;
+//                        payLoanview.rateModel = rate;
+//                        [self.navigationController pushViewController:payLoanview animated:true];
                     }];
                 }
                 if ([productId isEqualToString:SalaryLoan]) {
