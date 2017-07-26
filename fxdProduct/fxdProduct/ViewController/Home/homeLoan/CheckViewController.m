@@ -162,13 +162,21 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
-    if ([_userStateModel.platform_type isEqualToString:@"2"]) {
-    
-        [self getFxdCaseInfo];
+    if (_isSecondFailed) {
+        _homeStatues = 2;
+        [self createUI];
     }else{
     
-        [self checkState];
+        if ([_userStateModel.platform_type isEqualToString:@"2"]) {
+            
+            [self getFxdCaseInfo];
+        }else{
+           
+            [self checkState];
+           
+        }
     }
+    
 //    [self getUserStatus];
 }
 
@@ -216,9 +224,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoLabel.hidden = YES;
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
-                if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
+                NSString *productId;
+                if (_isSecondFailed) {
+                    productId = _product_id;
+                }else{
+                
+                    productId = _userStateModel.product_id;
+                }
+                if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:WhiteCollarLoan]) {
                     
-                        if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
+                        if ([productId isEqualToString:SalaryLoan]) {
                             checkFalse.seeView.hidden = NO;
                             [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
                         }else{

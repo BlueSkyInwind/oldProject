@@ -316,6 +316,13 @@
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             if ([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0002"]) {
                 [weakSelf checkState];
+            }else if([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0001"]){
+                
+                [self failed];
+                
+            }else if([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0003"]){
+            
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
             }
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
@@ -345,7 +352,14 @@
     [homeViewModel fetchUserState:_model.product_id];
 }
 
+-(void)failed{
 
+    CheckViewController *checkVC = [CheckViewController new];
+    checkVC.isSecondFailed = YES;
+    checkVC.product_id = _productId;
+    [self.navigationController pushViewController:checkVC animated:YES];
+    
+}
 
 
 - (void)goCheckVC:(UserStateModel *)model
