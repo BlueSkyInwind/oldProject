@@ -145,16 +145,16 @@ NSString * const     _forget_url                    =   @"findPasswordBack/findP
 NSString * const     _changePassword_url                    =   @"updatePassword/updatePassword.jhtml";
 
 ////首页查询用户借款状态
-//NSString * const     _userState_url                 =   @"caseInfo/getApplyStatus.jhtml";
+NSString * const     _userState_url                 =   @"caseInfo/getApplyStatus.jhtml";
 
 //首页查询用户借款状态
-NSString * const     _userState_url                 =   @"caseInfo/getApplyStatusTemp.jhtml";
-
-////二次进件
-//NSString * const     _secondApply_url               =   @"caseInfo/secondApply.jhtml";
+//NSString * const     _userState_url                 =   @"caseInfo/getApplyStatusTemp.jhtml";
 
 //二次进件
-NSString * const     _secondApply_url               =   @"caseInfo/secondApplyTemp.jhtml";
+NSString * const     _secondApply_url               =   @"caseInfo/secondApply.jhtml";
+
+//二次进件
+//NSString * const     _secondApply_url               =   @"caseInfo/secondApplyTemp.jhtml";
 
 //提交用户信息
 NSString * const     _updateUserById_url            =   @"userWs/updateUserById";

@@ -657,7 +657,6 @@
             repayRequest.targetVC = weakSelf;
             [repayRequest repayRequest];
         }
-        
     }];
     
 }
@@ -843,7 +842,6 @@
                     userDataVC.product_id = WhiteCollarLoan;
                     [self.navigationController pushViewController:userDataVC animated:true];
                 }
-                
             }else if ([model.applyFlag isEqualToString:@"0001"]){
                 UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                 userDataVC.product_id = productId;

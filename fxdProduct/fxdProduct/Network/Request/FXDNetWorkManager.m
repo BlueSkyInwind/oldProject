@@ -494,7 +494,6 @@
     }
 }
 
-
 - (void)P2POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
 {
     DLog(@"%d",[Utility sharedUtility].userInfo.isUpdate);
