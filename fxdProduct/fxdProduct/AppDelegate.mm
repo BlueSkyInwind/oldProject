@@ -365,8 +365,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     
 }
 
-
-
 #pragma mark - GexinSdkDelegate
 - (void)GeTuiSdkDidRegisterClient:(NSString *)clientId
 {
