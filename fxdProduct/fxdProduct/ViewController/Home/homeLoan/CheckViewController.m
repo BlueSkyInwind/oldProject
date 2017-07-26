@@ -1316,7 +1316,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [self.navigationController pushViewController:controller animated:YES];
                 
             }
-            
         }else{
             
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];

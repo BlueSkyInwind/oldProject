@@ -346,7 +346,6 @@
         }else {
             [cell.loanBtn setBackgroundImage:nil forState:UIControlStateNormal];
             [cell.loanBtn setTitle:@"我要借款" forState:UIControlStateNormal];
-            
         }
 
         [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];
@@ -534,7 +533,6 @@
             RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
             repayRequest.targetVC = weakSelf;
             [repayRequest repayRequest];
-            
         }
     }];
 }
