@@ -317,11 +317,9 @@
             if ([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0002"]) {
                 [weakSelf checkState];
             }else if([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0001"]){
-                
-                [self failed];
-                
+//                [self failed];
+                [weakSelf checkState];
             }else if([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0003"]){
-            
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
             }
         } else {
@@ -342,7 +340,6 @@
         {
             UserStateModel *model=[UserStateModel yy_modelWithJSON:returnValue[@"result"]];
             [weakSelf goCheckVC:model];
-            
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
         }

@@ -114,8 +114,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     DLog(@"%@",_moxieSDK.mxSDKVersion);
     [self listenForResult];
     
-    
-    
     if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
         for (int i = 1; i < 2; i++) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
@@ -168,15 +166,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }else{
     
         if ([_userStateModel.platform_type isEqualToString:@"2"]) {
-            
             [self getFxdCaseInfo];
         }else{
-           
             [self checkState];
-           
         }
     }
-    
 //    [self getUserStatus];
 }
 
@@ -224,11 +218,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoLabel.hidden = YES;
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
+                
                 NSString *productId;
                 if (_isSecondFailed) {
                     productId = _product_id;
                 }else{
-                
                     productId = _userStateModel.product_id;
                 }
                 if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:WhiteCollarLoan]) {
