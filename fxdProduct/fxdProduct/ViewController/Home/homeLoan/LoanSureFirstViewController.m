@@ -253,8 +253,6 @@
     }
     
     self.timeLabel.text =  [NSString stringWithFormat:@"%@天",_rateModel.result.ext_attr_.period_desc_];;
-    
-    
 }
 
 #pragma mark -> 进件接口
@@ -317,7 +315,6 @@
             if ([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0002"]) {
                 [weakSelf checkState];
             }else if([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0001"]){
-//                [self failed];
                 [weakSelf checkState];
             }else if([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0003"]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
@@ -325,7 +322,6 @@
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
         }
-        
     } failure:^(EnumServerStatus status, id object) {
         
     }];
@@ -342,7 +338,7 @@
             [weakSelf goCheckVC:model];
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
-        }
+        } 
     } WithFaileBlock:^{
         
     }];
@@ -357,7 +353,6 @@
     [self.navigationController pushViewController:checkVC animated:YES];
     
 }
-
 
 - (void)goCheckVC:(UserStateModel *)model
 {
@@ -379,9 +374,8 @@
     ExpressViewController *controller = [[ExpressViewController alloc]init];
     controller.productId = @"agreement";
     [self.navigationController pushViewController:controller animated:YES];
-    
-    
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

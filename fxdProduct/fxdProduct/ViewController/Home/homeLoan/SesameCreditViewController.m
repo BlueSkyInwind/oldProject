@@ -13,10 +13,11 @@
 #import "HomeViewController.h"
 @interface SesameCreditViewController ()
 
+
 @end
 
 @implementation SesameCreditViewController
-
+ 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -26,14 +27,11 @@
     self.userIDNumberTextField.text = [Utility sharedUtility].userInfo.userIDNumber;
     [self.immediateAuthorizationBtn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    
-    
 }
 #pragma mark - 获取首页产品列表
 -(void)click{
     
-    DLog(@"%@",self.navigationController.viewControllers);
+        DLog(@"%@",self.navigationController.viewControllers);
     
         NSDictionary *paramDic = @{
                                    @"juid":[Utility sharedUtility].userInfo.juid,
@@ -56,8 +54,6 @@
             DLog(@"%@",object);
             
         }];
-   
-    
 }
 
 - (void)didReceiveMemoryWarning {

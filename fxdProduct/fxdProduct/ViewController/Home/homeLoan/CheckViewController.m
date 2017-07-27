@@ -249,8 +249,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 //                        checkFalse.seeView.hidden = YES;
 //                        checkFalse.jsdView.hidden = YES;
 //                    }
-                
-
 //                }
                 
             }
