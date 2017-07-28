@@ -44,7 +44,10 @@
 #import "QryUserStatusModel.h"
 #import "GetCaseInfo.h"
 #import "P2PViewController.h"
-@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate>
+#import <BaiduMapAPI_Location/BMKLocationComponent.h>
+#import "LoginViewModel.h"
+
+@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
     LoanRecordParse *_loanRecordParse;
@@ -59,6 +62,10 @@
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
     QryUserStatusModel *_qryUserStatusModel;
+    
+    BMKLocationService *_locService;
+    double _latitude;
+    double _longitude;
 }
 
 @end
@@ -86,22 +93,65 @@
     [UserDefaulInfo getUserInfoData];
     
     if ([Utility sharedUtility].loginFlage) {
+        //获取位置信息
+        if ([Utility sharedUtility].isObtainUserLocation) {
+            [self openLocationService];
+        }
         //获取进件状态
         [self getFxdCaseInfo];
-    }
+       }
     
     [self fatchRecord];
     [self fatchBanner];
     [self getHomeProductList];
     
-    //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     [super viewWillDisappear:animated];
     
 }
+
+#pragma mark -  定位服务迁移
+/**
+ 开启定位服务
+ */
+-(void)openLocationService{
+    
+    _locService = [[BMKLocationService alloc] init];
+    _locService.delegate = self;
+    [_locService startUserLocationService];
+    
+}
+
+#pragma mark - BMKLocaltionServiceDelegate
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+{
+    
+}
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    //    DLog(@"didUpdateUserLocation lat %f,long%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    _latitude = userLocation.location.coordinate.latitude;
+    _longitude = userLocation.location.coordinate.longitude;
+    [self uploadUserLocationInfo];
+}
+/**
+ 上传用户的位置信息
+ */
+-(void)uploadUserLocationInfo{
+    
+    if ([CLLocationManager locationServicesEnabled] &&
+        ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways
+         || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse)) {
+            //定位功能可用，开始定位
+            LoginViewModel * loginViewModel = [[LoginViewModel alloc]init];
+            [loginViewModel uploadLocationInfoLongitude:[NSString stringWithFormat:@"%f",_longitude] Latitude:[NSString stringWithFormat:@"%f",_latitude]];
+        }
+    [_locService stopUserLocationService];
+    [Utility sharedUtility].isObtainUserLocation = NO;
+}
+
 
 #pragma mark  - 视图布局
 - (void)setNavQRRightBar {
