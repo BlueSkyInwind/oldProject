@@ -318,6 +318,8 @@
                 [weakSelf checkState];
             }else if([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0003"]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+            }else{
+                [weakSelf checkState];
             }
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];

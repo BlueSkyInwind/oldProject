@@ -51,7 +51,6 @@ NSString * const _main_url  =   @"http://192.168.14.18:9191/fxd-esb/esb/";
 NSString * const _ValidESB_url  =   @"http://192.14.18:9191/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
 NSString * const _p2P_url = @"http://192.168.14.18:9191/fxd-esb/p2p/";
-
 //NSString * const _p2P_url = @"http://192.168.15.116:8066/fxd/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
 
