@@ -95,9 +95,6 @@
     }
 }
 
-
-
-
 - (void)presentLogin:(UIViewController *)vc
 {
     LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];

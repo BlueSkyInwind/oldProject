@@ -30,10 +30,11 @@
 @property (nonatomic,copy)NSString *RespDesc;
 //用户银行卡信息列表
 //@property (nonatomic,copy)NSArray *UsrCardInfolist;
-
 @property (nonatomic,strong)QueryCardInfoUsrCardInfolist *UsrCardInfolist;
 //用户客户号   由汇付生成，用户的唯一性标识
 @property (nonatomic,copy)NSString *UsrCustId;
+//账户银行卡id
+@property (nonatomic,copy)NSString *accountCardId;
 
 @end
 

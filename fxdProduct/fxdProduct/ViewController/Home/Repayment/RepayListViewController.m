@@ -268,20 +268,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         if ([situation.status isEqualToString:@"3"]) {
             _save_amount += situation.debt_service_fee;
         }
-//        if ([_userStateParse.platform_type isEqualToString:@"0"]) {
-//            Situations *situation = [_vaildSituations objectAtIndex:i];
-//            _readyPayAmount += situation.debt_total;
-//            if ([situation.status isEqualToString:@"3"]) {
-//                _save_amount += situation.debt_service_fee;
-//            }
-//        }
-//        if ([_userStateParse.platform_type isEqualToString:@"2"]) {
-//            BillList *bill = [_vaildBills objectAtIndex:i];
-//            _readyPayAmount += bill.amount_total_;
-//            if (bill.status_ == 3) {
-//                _save_amount += (bill.repayment_service_charge_ + bill.repayment_interest_);
-//            }
-//        }
     }
     
     if ([_userStateParse.platform_type isEqualToString:@"0"]|| [_userStateParse.platform_type isEqualToString:@"2"]) {
@@ -404,7 +390,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             [_payNumberLabel updateConstraints];
         }
     }else {
-        
         for (int i = 0; i < _cellSelectArr.count; i++) {
             if (i <= _lastClick) {
                 [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
@@ -413,23 +398,12 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             }
         }
         DLog(@"%@",_cellSelectArr);
-        if ([_userStateParse.platform_type isEqualToString:@"0"]) {
-            for (int i = 0; i < _cellSelectArr.count; i++) {
-                if([_cellSelectArr objectAtIndex:i].boolValue){
-                    Situations *situation = [_vaildSituations objectAtIndex:i];
-                    _readyPayAmount += situation.debt_total;
-                }
+        for (int i = 0; i < _cellSelectArr.count; i++) {
+            if([_cellSelectArr objectAtIndex:i].boolValue){
+                Situations *situation = [_vaildSituations objectAtIndex:i];
+                _readyPayAmount += situation.debt_total;
             }
         }
-        if ([_userStateParse.platform_type isEqualToString:@"2"]) {
-            for (int i = 0; i < _cellSelectArr.count; i++) {
-                if ([_cellSelectArr objectAtIndex:i].boolValue) {
-                    BillList *bill = [_vaildBills objectAtIndex:i];
-                    _readyPayAmount += bill.amount_total_;
-                }
-            }
-        }
-        
         if ([_userStateParse.product_id isEqualToString:SalaryLoan]||[_userStateParse.product_id isEqualToString:WhiteCollarLoan]) {
             self.saveUpLabel.hidden = YES;
             _payNumberTop.constant = 10;
@@ -437,7 +411,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             [_payNumberLabel updateConstraintsIfNeeded];
             [_payNumberLabel updateConstraints];
         }
-        
     }
     [self updateUserNeedPayAmount];
     [self.repayTableView reloadData];

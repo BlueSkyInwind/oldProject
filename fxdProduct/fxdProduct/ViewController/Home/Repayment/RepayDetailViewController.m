@@ -93,10 +93,11 @@
     if ([_model.platform_type isEqualToString:@"2"]) {
        //合规银行卡查询
         [self checkBank];
+    }else{
+        [self fatchUserCardList];
     }
     
     [self getFxdCaseInfo];
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -128,7 +129,7 @@
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMethodCell" bundle:nil] forCellReuseIdentifier:@"paycell"];
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayVerificationCodeCell" bundle:nil] forCellReuseIdentifier:@"PayVerificationCodeCell"];
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayDisplayCell" bundle:nil] forCellReuseIdentifier:@"PayDisplayCell"];
-    
+
     if ([_model.platform_type isEqualToString:@"2"]) {
         titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式",@"验证码",@"提示语"];
     }else{
@@ -138,6 +139,7 @@
     self.PayDetailTB.bounces=NO;
     [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     [self createHeaderView];
+    
     if (_isP2pView) {
         [self addBackItemRoot];
     }else{
@@ -209,7 +211,6 @@
     
     self.PayDetailTB.tableHeaderView = header;
     self.PayDetailTB.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self fatchUserCardList];
 }
 
 -(void)createNoneView
@@ -861,10 +862,8 @@
     self.sureBtn.enabled = NO;
     NSMutableString *staging_ids = [NSMutableString string];
     for (int i = 0; i < _situations.count; i++) {
-        //        if ([_cellSelectArr objectAtIndex:i].boolValue) {
         NSString *str = [NSString stringWithFormat:@"%@,",[_situations objectAtIndex:i].staging_id];
         [staging_ids appendString:str];
-        //        }
     }
     [staging_ids deleteCharactersInRange:NSMakeRange(staging_ids.length - 1, 1)];
     
@@ -897,13 +896,14 @@
         paymentDetailModel.save_amount_ = @(_save_amount);
         paymentDetailModel.socket = _repayListInfo.result.socket;
         paymentDetailModel.request_type_ = save_amountTemp;
-        //合规的还款增加两个参数
-        if ([_model.platform_type isEqualToString:@"2"]) {
-            paymentDetailModel.sms_code_ =  verfiyCode;
-            paymentDetailModel.sms_seq_ = smsSeq;
-        }
     }
     
+    //合规的还款增加两个参数
+    if ([_model.platform_type isEqualToString:@"2"]) {
+        paymentDetailModel.sms_code_ =  verfiyCode;
+        paymentDetailModel.sms_seq_ = smsSeq;
+        paymentDetailModel.account_card_id_ =_queryCardInfoModel.result.accountCardId;
+    }
     PaymentViewModel * paymentViewModel = [[PaymentViewModel alloc]init];
     [paymentViewModel setBlockWithReturnBlock:^(id returnValue) {
         DLog(@"%@",returnValue[@"msg"]);
