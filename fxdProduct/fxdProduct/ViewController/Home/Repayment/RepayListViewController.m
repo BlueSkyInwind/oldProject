@@ -194,7 +194,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                     [_cellSelectArr addObject:[NSNumber numberWithBool:true]];
                     _readyPayAmount += situation.debt_total;
                     _clickMax++;
-                    
                 }else {
                     [_cellSelectArr addObject:[NSNumber numberWithBool:false]];
                 }
@@ -295,31 +294,9 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             }
         }
     }
-    //合规弃用
-    if ([_userStateParse.platform_type isEqualToString:@"2"]) {
-        if (_vaildBills.firstObject.status_ == 2 && _vaildBills.lastObject.status_ == 2) {
-            _save_amount = 0;
-        }else {
-            if (_p2pBillModel.data.bill_List_.count < _p2pBillModel.data.service_fee_min_period) {
-                if (_currenPeriod <= _p2pBillModel.data.bill_List_.count) {
-                    _save_amount = 0.0;
-                }
-            } else {
-                if (_p2pBillModel.data.paid_period_ < _p2pBillModel.data.service_fee_min_period) {
-                    if (_currenPeriod < _p2pBillModel.data.service_fee_min_period) {
-                        _save_amount -= (_p2pBillModel.data.service_fee_min_period - _currenPeriod) * (_vaildBills.firstObject.repayment_interest_ + _vaildBills.firstObject.repayment_service_charge_);
-                    }
-                }
-            }
-        }
-    }
     
-    if ([_userStateParse.platform_type isEqualToString:@"2"]) {
-        _readyPayAmount = _p2pBillModel.data.curr_settle_amt_;
-    }else {
-        _readyPayAmount = _readyPayAmount - _save_amount;
-    }
-    
+    _readyPayAmount = _readyPayAmount - _save_amount;
+
     if ([_userStateParse.product_id isEqualToString:SalaryLoan]||[_userStateParse.product_id isEqualToString:WhiteCollarLoan]) {
         NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
         NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
@@ -449,6 +426,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请至少选择一期"];
         }
     }
+    
     //合规弃用
     if ([_userStateParse.platform_type isEqualToString:@"1"]) {
         if (_bills.count > 0) {
