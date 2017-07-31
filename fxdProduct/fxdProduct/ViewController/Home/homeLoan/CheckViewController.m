@@ -115,8 +115,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     _moxieSDK = [[MoxieSDK shared] initWithUserID:[NSString stringWithFormat:@"%@_1",[Utility sharedUtility].userInfo.juid] mApikey:theMoxieApiKey controller:self];
     DLog(@"%@",_moxieSDK.mxSDKVersion);
     [self listenForResult];
-    
-    
+
     if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
         for (int i = 1; i < 2; i++) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
@@ -167,13 +166,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
-    //platform_type  2、合规平台   0、发薪贷平台
-    if ([_userStateModel.platform_type isEqualToString:@"2"]) {
-    
-        [self getFxdCaseInfo];
+    if (_isSecondFailed) {
+        _homeStatues = 2;
+        [self createUI];
     }else{
     
-        [self checkState];
+        if ([_userStateModel.platform_type isEqualToString:@"2"]) {
+            [self getFxdCaseInfo];
+        }else{
+            [self checkState];
+        }
     }
 //    [self getUserStatus];
     
@@ -236,21 +238,17 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 
                     //1表示不是渠道用户 0是渠道用户
                     if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-                        
                         checkFalse.seeView.hidden = NO;
                         checkFalse.jsdView.hidden = YES;
                         [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
                     }else{
-                        
                         checkFalse.seeView.hidden = YES;
                         checkFalse.jsdView.hidden = YES;
                     }
 //                    checkFalse.seeView.hidden = NO;
 //                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
                 }
-                
-                
-                
+
             }
             
             [self.view addSubview:checkFalse];
@@ -1061,7 +1059,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             j=11;
             k=0;
         }else if (money>=2000&&money<=2999){
-        
             j=16;
             k=0;
         }else if (money>=3000&&money<=3999){

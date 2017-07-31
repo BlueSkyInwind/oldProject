@@ -363,8 +363,8 @@
                         break;
                     default:{
                         if ([[paramDic objectForKey:@"product_id_"] isEqualToString:RapidLoan]) {
-                            PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-                            [self.navigationController pushViewController:payLoanview animated:true];
+//                            PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+//                            [self.navigationController pushViewController:payLoanview animated:true];
                         }
                         if ([[paramDic objectForKey:@"product_id_"] isEqualToString:SalaryLoan]) {
                             //                            UserDataViewController *userDataVC = [[UserDataViewController alloc] init];

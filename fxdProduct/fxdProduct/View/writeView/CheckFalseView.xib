@@ -745,8 +745,6 @@
                 <constraint firstItem="ZcP-bw-Dbp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4ad-xH-m4Q"/>
                 <constraint firstItem="20A-DS-xzq" firstAttribute="leading" secondItem="ZcP-bw-Dbp" secondAttribute="leading" id="9Ye-9d-qs6"/>
                 <constraint firstAttribute="trailing" secondItem="tfN-DC-c7v" secondAttribute="trailing" id="EfD-64-E4f"/>
-                <constraint firstAttribute="bottom" secondItem="wXr-T2-0QX" secondAttribute="bottom" constant="6" id="Q0P-iG-8C1"/>
-                <constraint firstAttribute="trailing" secondItem="wXr-T2-0QX" secondAttribute="trailing" constant="15" id="RfS-BQ-VPQ"/>
                 <constraint firstItem="20A-DS-xzq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="129" id="Taa-2p-Rzd"/>
                 <constraint firstItem="ZcP-bw-Dbp" firstAttribute="height" secondItem="20A-DS-xzq" secondAttribute="height" multiplier="0.5" id="Zor-N8-6q3"/>
                 <constraint firstAttribute="bottom" secondItem="ZcP-bw-Dbp" secondAttribute="bottom" id="Zpk-hJ-BxB"/>
@@ -757,7 +755,6 @@
                 <constraint firstItem="ZcP-bw-Dbp" firstAttribute="top" secondItem="20A-DS-xzq" secondAttribute="bottom" id="ofJ-ku-tlY"/>
                 <constraint firstAttribute="trailing" secondItem="Nyn-9Z-Nzo" secondAttribute="trailing" id="pg7-Bc-YLE"/>
                 <constraint firstItem="20A-DS-xzq" firstAttribute="leading" secondItem="yic-D2-HIw" secondAttribute="leading" id="rRc-0i-PWI"/>
-                <constraint firstItem="wXr-T2-0QX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="rXb-C9-v6y"/>
                 <constraint firstAttribute="bottom" secondItem="Nyn-9Z-Nzo" secondAttribute="bottom" constant="69" id="ufh-9v-yaW"/>
                 <constraint firstItem="20A-DS-xzq" firstAttribute="trailing" secondItem="ZcP-bw-Dbp" secondAttribute="trailing" id="umU-JF-4G4"/>
                 <constraint firstItem="20A-DS-xzq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uy1-Xy-Np4"/>
@@ -798,14 +795,9 @@
         <image name="5_shenhe_icon_03" width="95" height="130"/>
         <image name="home_01" width="38" height="38"/>
         <image name="home_04" width="63" height="21"/>
-        <image name="icon_jiantou" width="7" height="12"/>
         <image name="kuang" width="361" height="198"/>
         <image name="kuang_big" width="340" height="50"/>
         <image name="lan_anniu" width="229" height="40"/>
-        <image name="logo_daima" width="49" height="49"/>
-        <image name="logo_yongqianbao" width="57" height="57"/>
-        <image name="tuoyuan_1" width="106" height="16"/>
-        <image name="tuoyuan_2" width="154" height="16"/>
         <image name="xian" width="1" height="49"/>
     </resources>
 </document>

@@ -131,7 +131,6 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    
     if (_isRefuse) {
         if ([_userStateModel.product_id isEqualToString:SalaryLoan] || [_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
             return 190;
@@ -139,6 +138,7 @@
         
             return 100;
         }
+
     }else{
         return 0;
     }
@@ -148,7 +148,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
     if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {//工薪贷
-        
+
         WhiteRefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"WhiteRefuseView" owner:self options:nil]lastObject];
         refuseView.frame = CGRectZero;
         [Tool setCorner:refuseView.applyBtn borderColor:UI_MAIN_COLOR];
@@ -173,16 +173,17 @@
         
     }else{//急速贷导流
 
+
         RefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"RefuseView" owner:self options:nil]lastObject];
         refuseView.frame = CGRectZero;
         [Tool setCorner:refuseView.seeBtn borderColor:UI_MAIN_COLOR];
         [refuseView.seeBtn addTarget:self action:@selector(refuseBtn) forControlEvents:UIControlEventTouchUpInside];
         return refuseView;
         
-
     }
-    
+    return nil;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -31,7 +31,7 @@
     [_periodLabel mas_makeConstraints:^(MASConstraintMaker *make) {
        make.left.equalTo(_proLogoImage.mas_right).offset(25);
         make.top.equalTo(_amountView.mas_bottom).offset(9);
-        make.width.equalTo(@120);
+        make.width.equalTo(@200);
         make.height.equalTo(_periodLabel.mas_width).multipliedBy(0.15);
     }];
     

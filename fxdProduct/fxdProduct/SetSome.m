@@ -83,6 +83,7 @@
         [Utility sharedUtility].userInfo.tokenStr = [Tool getContentWithKey:Fxd_Token];
         [Utility sharedUtility].loginFlage = [[Tool getContentWithKey:kLoginFlag] integerValue];
         [Utility sharedUtility].userInfo.userName = [Tool getContentWithKey:UserName];
+        [Utility sharedUtility].isObtainUserLocation = YES;
     });
 }
 @end

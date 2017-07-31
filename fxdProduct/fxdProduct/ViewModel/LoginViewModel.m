@@ -39,6 +39,7 @@
         loginParamModel.last_login_ip_ = [[GetUserIP sharedUserIP] getIPAddress];
         loginParamModel.platform_type_ = PLATFORM;
         loginParamModel.BSFIT_DEVICEID = fingerPrint;
+        
 
     } else {
         
@@ -108,10 +109,10 @@
 
 -(void)postUserLoginLocationInfo:(NSDictionary *)paramDic{
 
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_updateLoginLatitude_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_updateLoginLatitude_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     } failure:^(EnumServerStatus status, id object) {
-        
+        DLog(@"%@",object);
     }];
 }
 

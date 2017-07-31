@@ -46,7 +46,10 @@
 #import "P2PViewController.h"
 #import "ExpressCreditRefuseView.h"
 #import "HomeRefuseCell.h"
-@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,HomeRefuseCellDelegate>
+#import <BaiduMapAPI_Location/BMKLocationComponent.h>
+#import "LoginViewModel.h"
+
+@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
     LoanRecordParse *_loanRecordParse;
@@ -62,6 +65,10 @@
     NSMutableArray *_dataArray;
     QryUserStatusModel *_qryUserStatusModel;
     
+
+    BMKLocationService *_locService;
+    double _latitude;
+    double _longitude;
 }
 
 @end
@@ -211,8 +218,12 @@
     [UserDefaulInfo getUserInfoData];
     
     if ([Utility sharedUtility].loginFlage) {
+
+        //获取位置信息
+        if ([Utility sharedUtility].isObtainUserLocation) {
+            [self openLocationService];
+        }
         //获取进件状态
-        
         [self getFxdCaseInfo];
     }
     
@@ -220,13 +231,52 @@
     [self fatchBanner];
     [self getHomeProductList];
     
-    //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    //[[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:1];
     [super viewWillDisappear:animated];
 }
+
+#pragma mark -  定位服务迁移
+/**
+ 开启定位服务
+ */
+-(void)openLocationService{
+    
+    _locService = [[BMKLocationService alloc] init];
+    _locService.delegate = self;
+    [_locService startUserLocationService];
+    
+}
+
+#pragma mark - BMKLocaltionServiceDelegate
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+{
+    
+}
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    //    DLog(@"didUpdateUserLocation lat %f,long%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    _latitude = userLocation.location.coordinate.latitude;
+    _longitude = userLocation.location.coordinate.longitude;
+    [self uploadUserLocationInfo];
+}
+/**
+ 上传用户的位置信息
+ */
+-(void)uploadUserLocationInfo{
+    
+    if ([CLLocationManager locationServicesEnabled] &&
+        ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways
+         || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse)) {
+            //定位功能可用，开始定位
+            LoginViewModel * loginViewModel = [[LoginViewModel alloc]init];
+            [loginViewModel uploadLocationInfoLongitude:[NSString stringWithFormat:@"%f",_longitude] Latitude:[NSString stringWithFormat:@"%f",_latitude]];
+        }
+    [_locService stopUserLocationService];
+    [Utility sharedUtility].isObtainUserLocation = NO;
+}
+
 
 #pragma mark  - 视图布局
 - (void)setNavQRRightBar {
@@ -476,11 +526,9 @@
                 [cell.loanBtn setBackgroundImage:nil forState:UIControlStateNormal];
                 [cell.loanBtn setTitle:@"我要借款" forState:UIControlStateNormal];
             }
-            
             [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];
-            cell.periodLabel.text = product.ext_attr_.amt_desc_;
+            cell.periodLabel.text = [NSString stringWithFormat:@"%@还款，额度%@",product.ext_attr_.period_desc_,product.ext_attr_.amt_desc_];;
             cell.amountLabel.text = product.name_;
-            
             cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
             cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
             cell.helpImage.userInteractionEnabled = true;
@@ -495,12 +543,14 @@
                 
             }else{
                 
+                cell.periodLabel.text = [NSString stringWithFormat:@"%@天还款，额度%@",product.ext_attr_.period_desc_,product.ext_attr_.amt_desc_];
                 UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
                 [cell.helpImage addGestureRecognizer:gest];
                 cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
                 
             }
             return cell;
+
         }
         
     }else if([_homeProductList.result.type isEqualToString:@"1"]){
@@ -617,7 +667,7 @@
 #pragma mark ->我要还款
 - (void)payMoney
 {
-    
+
     if (![Utility sharedUtility].loginFlage) {
         [self presentLogin:self];
         return;
@@ -628,12 +678,13 @@
         if ([resultModel.platform_type isEqualToString:@"2"]) {
             if ([resultModel.applyStatus isEqualToString:@"7"]||[resultModel.applyStatus isEqualToString:@"8"]) {
                 //此时用户的状态为 有还款列表的
+
                 if ([_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
                     LoanMoneyViewController *controller = [LoanMoneyViewController new];
                     controller.userStateModel = resultModel;
                     controller.qryUserStatusModel = _qryUserStatusModel;
                     [weakSelf.navigationController pushViewController:controller animated:YES];
-                    
+
                 }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
                     //激活用户
                     NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
@@ -648,17 +699,20 @@
                     [repayRequest repayRequest];
                 }
             }else{
+
                 RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                 repayRequest.targetVC = weakSelf;
                 [repayRequest repayRequest];
+                
             }
         }else{
+
             RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
             repayRequest.targetVC = weakSelf;
             [repayRequest repayRequest];
         }
     }];
-    
+
 }
 
 - (void)expense
@@ -793,6 +847,7 @@
             UserStateModel *result;
             result = [UserStateModel yy_modelWithJSON:object[@"result"]];
             finish(YES,result);
+
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:object[@"msg"]];
         }
@@ -823,11 +878,17 @@
             if ([model.applyFlag isEqualToString:@"0000"]) {
                 if ([productId isEqualToString:RapidLoan]) {
                     [self fatchRate:^(RateModel *rate) {
-                        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-                        payLoanview.product_id = productId;
-                        payLoanview.userState = model;
-                        payLoanview.rateModel = rate;
-                        [self.navigationController pushViewController:payLoanview animated:true];
+                        
+                        UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+                        userDataVC.product_id = productId;
+                        userDataVC.req_loan_amt = [NSString stringWithFormat:@"%ld",rate.result.principal_bottom_];
+                        [self.navigationController pushViewController:userDataVC animated:true];
+                        
+//                        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+//                        payLoanview.product_id = productId;
+//                        payLoanview.userState = model;
+//                        payLoanview.rateModel = rate;
+//                        [self.navigationController pushViewController:payLoanview animated:true];
                     }];
                 }
                 if ([productId isEqualToString:SalaryLoan]) {
@@ -938,11 +999,16 @@
                     default:{
                         if ([productId isEqualToString:RapidLoan]) {
                             [self fatchRate:^(RateModel *rate) {
-                                PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-                                payLoanview.product_id = productId;
-                                payLoanview.userState = model;
-                                payLoanview.rateModel = rate;
-                                [self.navigationController pushViewController:payLoanview animated:true];
+                                UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+                                userDataVC.product_id = productId;
+                                userDataVC.req_loan_amt = [NSString stringWithFormat:@"%ld",rate.result.principal_bottom_];
+                                [self.navigationController pushViewController:userDataVC animated:true];
+                                
+//                                PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+//                                payLoanview.product_id = productId;
+//                                payLoanview.userState = model;
+//                                payLoanview.rateModel = rate;
+//                                [self.navigationController pushViewController:payLoanview animated:true];
                             }];
                         }
                         if ([productId isEqualToString:SalaryLoan]) {
@@ -962,11 +1028,16 @@
             }else if ([model.applyFlag isEqualToString:@"0005"]) {
                 if ([productId isEqualToString:RapidLoan]) {
                     [self fatchRate:^(RateModel *rate) {
-                        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-                        payLoanview.product_id = productId;
-                        payLoanview.userState = model;
-                        payLoanview.rateModel = rate;
-                        [self.navigationController pushViewController:payLoanview animated:true];
+                        
+                        UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+                        userDataVC.product_id = productId;
+                        userDataVC.req_loan_amt = [NSString stringWithFormat:@"%ld",rate.result.principal_bottom_];
+                        [self.navigationController pushViewController:userDataVC animated:true];
+//                        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+//                        payLoanview.product_id = productId;
+//                        payLoanview.userState = model;
+//                        payLoanview.rateModel = rate;
+//                        [self.navigationController pushViewController:payLoanview animated:true];
                     }];
                 }
                 if ([productId isEqualToString:SalaryLoan]) {
