@@ -1031,7 +1031,6 @@
         
     }];
     [checkBankViewModel queryCardInfo];
-    
 }
 
 

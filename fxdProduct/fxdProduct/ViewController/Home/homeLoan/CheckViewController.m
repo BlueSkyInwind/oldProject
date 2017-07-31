@@ -114,8 +114,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     DLog(@"%@",_moxieSDK.mxSDKVersion);
     [self listenForResult];
     
-    
-    
     if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
         for (int i = 1; i < 2; i++) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
@@ -162,12 +160,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
-    if ([_userStateModel.platform_type isEqualToString:@"2"]) {
-    
-        [self getFxdCaseInfo];
+    if (_isSecondFailed) {
+        _homeStatues = 2;
+        [self createUI];
     }else{
     
-        [self checkState];
+        if ([_userStateModel.platform_type isEqualToString:@"2"]) {
+            [self getFxdCaseInfo];
+        }else{
+            [self checkState];
+        }
     }
 //    [self getUserStatus];
 }
@@ -216,10 +218,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoLabel.hidden = YES;
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
-                if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
+                
+                NSString *productId;
+                if (_isSecondFailed) {
+                    productId = _product_id;
+                }else{
+                    productId = _userStateModel.product_id;
+                }
+                if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:WhiteCollarLoan]) {
                     
-//                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-                        if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
+                        if ([productId isEqualToString:SalaryLoan]) {
                             checkFalse.seeView.hidden = NO;
                             [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
                         }else{
@@ -228,29 +236,20 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                             checkFalse.jsdView.hidden = NO;
                             [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
                         }
-                        
+                }
+//                else{
+//                
+//                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
+//                        
+//                        checkFalse.seeView.hidden = NO;
+//                        checkFalse.jsdView.hidden = YES;
+//                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
 //                    }else{
 //                    
 //                        checkFalse.seeView.hidden = YES;
 //                        checkFalse.jsdView.hidden = YES;
 //                    }
-//                    checkFalse.jsdView.hidden = NO;
-                    
-                }else{
-                
-                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-                        
-                        checkFalse.seeView.hidden = NO;
-                        checkFalse.jsdView.hidden = YES;
-                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
-                    }else{
-                    
-                        checkFalse.seeView.hidden = YES;
-                        checkFalse.jsdView.hidden = YES;
-                    }
-                   
-
-                }
+//                }
                 
             }
             
@@ -1064,7 +1063,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             j=11;
             k=0;
         }else if (money>=2000&&money<=2999){
-        
             j=16;
             k=0;
         }else if (money>=3000&&money<=3999){
@@ -1310,7 +1308,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [self.navigationController pushViewController:controller animated:YES];
                 
             }
-            
         }else{
             
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];

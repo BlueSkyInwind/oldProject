@@ -31,12 +31,7 @@
     NSTimer * _countdownTimer;
     LoginParse *_loginParse;
     
-    BMKLocationService *_locService;
-    
     ReturnMsgBaseClass *_codeParse;
-    
-    double _latitude;
-    double _longitude;
     
     NSString *_loginFlagCode;
     NSString *_vaildCodeFlag;
@@ -68,10 +63,9 @@
         make.edges.equalTo(self.view);
     }];
     
-    //定位
-    [self openLocationService];
     DLog(@"%d",[LunchViewController canShowNewFeature]);
     //设备指纹
+    _BSFIT_DEVICEID = @"";
     [[BSFingerSDK sharedInstance] getFingerPrint:self withKey:@"com.hfsj.fxd"];
     
     [self setNav];
@@ -95,42 +89,6 @@
     [super viewDidDisappear:animated];
     _loginParse = nil;
     [_loginView initialLoginButtonState];
-}
-/**
- 开启定位服务
- */
--(void)openLocationService{
-    
-    _locService = [[BMKLocationService alloc] init];
-    _BSFIT_DEVICEID = @"";
-    _locService.delegate = self;
-    [_locService startUserLocationService];
-}
-
-#pragma mark - BMKLocaltionServiceDelegate
-- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
-{
-
-}
-- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
-{
-    //    DLog(@"didUpdateUserLocation lat %f,long%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
-    _latitude = userLocation.location.coordinate.latitude;
-    _longitude = userLocation.location.coordinate.longitude;
-}
-/**
- 上传用户的位置信息
- */
--(void)uploadUserLocationInfo{
-    
-    if ([CLLocationManager locationServicesEnabled] &&
-        ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways
-         || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)) {
-            //定位功能可用，开始定位
-            LoginViewModel * loginViewModel = [[LoginViewModel alloc]init];
-            [loginViewModel uploadLocationInfoLongitude:[NSString stringWithFormat:@"%f",_longitude] Latitude:[NSString stringWithFormat:@"%f",_latitude]];
-        }
-    [_locService stopUserLocationService];
 }
 
 #pragma mark
@@ -159,8 +117,8 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self dismissViewControllerAnimated:YES completion:^{
                     _vaildCodeFlag = @"";
+                    [Utility sharedUtility].isObtainUserLocation = YES;
                     ((AppDelegate *)[UIApplication sharedApplication].delegate).btb.selectedIndex = 0;
-                    [self uploadUserLocationInfo];
                 }];
             });
        } else {

@@ -19,7 +19,7 @@
 @property (nonatomic,assign) BOOL loginFlage;
 @property (nonatomic,assign) BOOL networkState;
 @property (nonatomic,retain) NSMutableDictionary *getMoneyParam;
-
+@property (nonatomic, assign) BOOL isObtainUserLocation;
 
 + (Utility *)sharedUtility;
 
