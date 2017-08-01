@@ -49,7 +49,7 @@
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "LoginViewModel.h"
 
-@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate>
+@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeRefuseCellDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
     LoanRecordParse *_loanRecordParse;
