@@ -16,6 +16,8 @@
 #import "BankModel.h"
 #import "P2PBillDetail.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "CheckViewModel.h"
+#import "SupportBankList.h"
 
 @interface RepayListViewController () <UITableViewDelegate,UITableViewDataSource,RepayCellDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
@@ -32,6 +34,7 @@
     NSInteger _clickMax;
     
     BankModel *_bankCardModel;
+    NSMutableArray *_supportBankListArr;
     
     //最后一次点击坐标
     NSInteger _lastClick;
@@ -71,6 +74,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     _vaildSituations = [NSMutableArray array];
     _vaildBills = [NSMutableArray array];
     _bills = [NSMutableArray array];
+    _supportBankListArr = [NSMutableArray array];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.endView.layer.borderWidth = 0.5;
     self.endView.layer.borderColor = [UIColor grayColor].CGColor;
@@ -468,10 +472,17 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         }
     }
     if (i > 0) {
-        NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-            _bankCardModel = [BankModel yy_modelWithJSON:object];
-            if ([_bankCardModel.flag isEqualToString:@"0000"]) {
+        CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+        [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+            BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+            if ([baseResult.flag isEqualToString:@"0000"]) {
+                NSArray * array  = (NSArray *)baseResult.result;
+                _supportBankListArr = [NSMutableArray array];
+                for (int i = 0; i < array.count; i++) {
+                    SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                    [_supportBankListArr addObject:bankList];
+                }
+                
                 RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
                 repayMent.product_id = _userStateParse.product_id;
                 if (_selectAllBtn.selected) {
@@ -479,23 +490,32 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                 } else {
                     repayMent.repayType = RepayTypeOption;
                 }
-                repayMent.bankModel = _bankCardModel;
+                repayMent.supportBankListArr = _supportBankListArr;
                 repayMent.repayAmount = _readyPayAmount;
+                repayMent.repayListInfo = _repayListModel;
                 repayMent.cellSelectArr = _cellSelectArr;
                 repayMent.save_amount = _save_amount;
-                repayMent.repayListInfo = _repayListModel;
                 repayMent.situations = _situations;
                 repayMent.model = _userStateParse;
                 [self.navigationController pushViewController:repayMent animated:YES];
+                
             } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_bankCardModel.msg];
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
             }
-        } failure:^(EnumServerStatus status, id object) {
-            DLog(@"%@",object);
+        } WithFaileBlock:^{
+            
         }];
+        
+        if ([_userStateParse.platform_type isEqualToString:@"2"]) {
+            [checkBankViewModel getSupportBankListInfo:@"4"];
+        }else if ([_userStateParse.platform_type isEqualToString:@"0"]){
+            [checkBankViewModel getSupportBankListInfo:@"2"];
+        }
     } else {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请至少选择一期"];
     }
+    
+ 
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

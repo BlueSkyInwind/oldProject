@@ -13,6 +13,7 @@
 #import "BankModel.h"
 #import "UserCardResult.h"
 #import "RepayWeeklyRecordViewModel.h"
+#import "SupportBankList.h"
 @interface MyCardsViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     //    BankCardInfoBaseClass
@@ -130,16 +131,16 @@
                 CardResult *cardResult = _userCardModel.result[j];
                 if([cardResult.card_type_ isEqualToString:@"2"])
                 {
-                    for (BankList *banlist in _bankModel.result) {
-                        if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
+                    for (SupportBankList *banlist in _supportBankListArr) {
+                        if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
                             if ([cardResult.if_default_ isEqualToString:@"1"]) {
                                 _defaultCardIndex = j;
                             }
                             [_dataliat addObject:[self formatString:cardResult.card_no_]];
                             [_dataNumList addObject:cardResult.card_type_];
-                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.code]];
+                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.bank_code_]];
                             [_bankWitch addObject:@"银行卡"];
-                            [_bankWitchArray addObject:banlist.desc];
+                            [_bankWitchArray addObject:banlist.bank_name_];
                         }
                     }
                 }

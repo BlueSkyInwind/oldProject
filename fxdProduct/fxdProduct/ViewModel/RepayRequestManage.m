@@ -14,6 +14,8 @@
 #import "RepayDetailViewController.h"
 #import "RepayListInfo.h"
 #import "BankModel.h"
+#import "CheckViewModel.h"
+#import "SupportBankList.h"
 
 @implementation RepayRequestManage
 {
@@ -96,13 +98,21 @@
 
 - (void)fatchCardInfo:(RepayListInfo *)repayListInfo
 {
-    NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        BankModel *bankCardModel = [BankModel yy_modelWithJSON:object];
-        if ([bankCardModel.flag isEqualToString:@"0000"]) {
+
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResult.flag isEqualToString:@"0000"]) {
+            NSArray * array  = (NSArray *)baseResult.result;
+            NSMutableArray * supportBankListArr = [NSMutableArray array];
+            for (int i = 0; i < array.count; i++) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                [supportBankListArr addObject:bankList];
+            }
+            
             RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
             repayMent.repayType = RepayTypeClean;
-            repayMent.bankModel = bankCardModel;
+            repayMent.supportBankListArr = supportBankListArr;
             CGFloat finalRepayAmount = 0.0f;
             for (Situations *situation in repayListInfo.result.situations) {
                 finalRepayAmount += situation.debt_total;
@@ -116,12 +126,16 @@
             repayMent.situations = repayListInfo.result.situations.copy;
             repayMent.model = _model;
             [_targetVC.navigationController pushViewController:repayMent animated:YES];
+            
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:_targetVC.view message:bankCardModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:_targetVC.view message:baseResult.msg];
         }
-    } failure:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
+    } WithFaileBlock:^{
+        
     }];
+    
+    [checkBankViewModel getSupportBankListInfo:@"2"];
+
 }
 
 

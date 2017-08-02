@@ -38,6 +38,7 @@ typedef void(^ChangeBankBlock)(void);
 
 //BankModel *_bankCardModel;
 @property (nonatomic, strong) BankModel *bankCardModel;
+@property (nonatomic, strong) NSMutableArray * supportBankListArr;
 
 @property (nonatomic,assign)BOOL isP2P;
 

@@ -74,20 +74,20 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
                 CardResult *cardResult = [_userCardsModel.result objectAtIndex:j];
                 if([cardResult.card_type_ isEqualToString:@"2"])
                 {
-                    for (BankList *banlist in _bankModel.result) {
-                        if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
+                    for (SupportBankList *banlist in _supportBankListArr) {
+                        if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
                             if ([cardResult.if_default_ isEqualToString:@"1"]) {
 //                                _currentIndex = j;
                                 CardInfo *cardInfo = [[CardInfo alloc] init];
                                 cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
-                                cardInfo.bankName = banlist.desc;
+                                cardInfo.bankName = banlist.bank_name_;
                                 cardInfo.cardIdentifier = cardResult.id_;
                                 _cardInfo = cardInfo;
                             }
                             [_dataliat addObject:[self formatTailNumber:cardResult.card_no_]];
                             [_dataNumList addObject:cardResult.card_type_];
-                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.code]];
-                            [_bankWitchArray addObject:banlist.desc];
+                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.bank_code_]];
+                            [_bankWitchArray addObject:banlist.bank_name_];
                         }
                     }
                     

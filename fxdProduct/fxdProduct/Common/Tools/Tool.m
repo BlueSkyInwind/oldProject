@@ -267,7 +267,6 @@
 
 + (NSString *)getContentWithKey:(NSString *)key;
 {
-    
     return [[NSUserDefaults standardUserDefaults] objectForKey:key];
 }
 

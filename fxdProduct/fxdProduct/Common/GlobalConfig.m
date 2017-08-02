@@ -223,6 +223,9 @@ NSString * const     _caseStatusUpdateApi_url   =   @"increase/caseStatusUpdateA
 //银行卡获取接口
 NSString * const     _getBankList_url           =   @"getDictCode/getDictCodeList.jhtml";
 
+//获取银行卡类型接口
+NSString * const     _getSupportBankList_url           =   @"getAccountCardList/getSupportBankListApi.jhtml";
+
 //输入框埋点
 NSString * const     _saveInputBackInfo_url     =   @"userWs/saveInputBackInfo.jhtml";
 
@@ -493,7 +496,6 @@ NSString * const kTopView     =    @"TopView";
 NSString * const UserName    =    @"userName";
 
 NSString * const  kAddMaterailNotification  =   @"zbctongzhi";
-
 
 NSString * const isLoginFlag  =   @"loginState";
 

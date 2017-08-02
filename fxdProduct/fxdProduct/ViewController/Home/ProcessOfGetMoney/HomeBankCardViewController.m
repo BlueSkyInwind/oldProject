@@ -71,7 +71,11 @@
 #pragma mark-UITableViewDelegate,UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _bankModel.result.count;
+    return _bankArray.count;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -83,10 +87,11 @@
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellinditior];
     }
 
-    BankList *bankListInfo = [_bankModel.result objectAtIndex:indexPath.row];
+    SupportBankList * supportBankList = [_bankArray objectAtIndex:indexPath.row];
 //    DLog(@"%@",[NSString stringWithFormat:@"bank_code%@",bankListInfo.code]);
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"bank_code_%@",bankListInfo.code]];
-    cell.textLabel.text = bankListInfo.desc;
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:supportBankList.icon_url_]];
+//    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"bank_code_%@",bankListInfo.code]];
+    cell.textLabel.text = supportBankList.bank_name_;
     if (self.cardTag == indexPath.row) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
@@ -96,7 +101,6 @@
     return cell;
     
 }
-
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -108,9 +112,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.cardTag=indexPath.row;
     if ([self.delegate respondsToSelector:@selector(BankSelect:andSectionRow:)]) {
-//        [self.delegate BankTableViewSelect:[_dataArray objectAtIndex:self.cardTag] andBankInfoList:[_dataInfoArray objectAtIndex:_cardTag] andSectionRow:_cardTag];
-        BankList *bankListInfo = [_bankModel.result objectAtIndex:indexPath.row];
-        [self.delegate BankSelect:bankListInfo andSectionRow:_cardTag];
+        SupportBankList * supportBankList = [_bankArray objectAtIndex:indexPath.row];
+        [self.delegate BankSelect:supportBankList andSectionRow:_cardTag];
     }
     [tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];

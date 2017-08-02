@@ -30,6 +30,7 @@
         NSInteger _countdown;
         NSTimer * _countdownTimer;
         BankModel *_bankModel;
+        NSMutableArray * _supportBankListArr;
         UIButton *_backTimeBtn;
         NSString *_sms_seq;
 
@@ -48,6 +49,7 @@
     placeArray3 = @[@"接受到账的银行卡",@"卡号",@"预留手机号",@"验证码"];
     dataListAll3 = [NSMutableArray new];
     dataColorAll3 = [NSMutableArray new];
+    _supportBankListArr = [NSMutableArray array];
     for (int i=0; i<10; i++) {
         [dataListAll3 addObject:@""];
         [dataColorAll3 addObject:UI_MAIN_COLOR];
@@ -130,7 +132,7 @@
             DLog(@"%@",placeArray3[0]);
             DLog(@"%@",_bankModel);
             HomeBankCardViewController *homebankVC = [HomeBankCardViewController new];
-            homebankVC.bankModel = _bankModel;
+            homebankVC.bankArray = _supportBankListArr;
             homebankVC.delegate = self;
             homebankVC.cardTag = [dataListAll3[5] integerValue];
             //            homebankVC.bankFlag = 100;
@@ -414,37 +416,24 @@
 
 #pragma mark 获取银行卡列表信息
 -(void)getBankListInfo{
-    
+
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        _bankModel = [BankModel yy_modelWithJSON:returnValue];
-        if ([_bankModel.flag isEqualToString:@"0000"]) {
-            NSArray *bankArray = @[@"中国银行",@"中国工商银行",@"中国建设银行",@"中国农业银行",@"中信银行",@"兴业银行",@"中国光大银行"];
-            NSMutableArray *array = [NSMutableArray array];
-            for (int i = 0; i<_bankModel.result.count; i++) {
-                BankList *bankList = _bankModel.result[i];
-                for (int j = 0; j<bankArray.count; j++) {
-                    if ([bankList.desc isEqualToString:bankArray[j]]) {
-                        [array addObject:bankList];
-                        
-                    }
-                }
+        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResult.flag isEqualToString:@"0000"]) {
+            NSArray * array  = (NSArray *)baseResult.result;
+            for (int i = 0; i < array.count; i++) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                [_supportBankListArr addObject:bankList];
             }
-            [_bankModel.result removeAllObjects];
-            for (BankList *bank in array) {
-                
-                [_bankModel.result addObject:bank];
-            }
-        }else{
-        
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_bankModel.msg];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
         }
-        
     } WithFaileBlock:^{
         
     }];
-    [checkBankViewModel getBankListInfo];
+    [checkBankViewModel getSupportBankListInfo:@"2"];
+    
 }
 
 #pragma mark 点击确定按钮，更换银行卡

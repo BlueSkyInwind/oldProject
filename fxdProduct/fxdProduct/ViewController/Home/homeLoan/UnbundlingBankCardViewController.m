@@ -71,6 +71,7 @@
             cell.btnSecory.hidden = YES;
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             cell.textField.text = _queryCardInfo.result.UsrCardInfolist.CardId;
+          cell.textField.placeholder = @"银行卡号";
             cell.textField.enabled = NO;
         }else if (indexPath.row == 2){
             cell.btn.hidden = YES;
@@ -115,7 +116,8 @@
             cell.btnSecory.hidden = YES;
             cell.textField.enabled = NO;
             cell.textField.text = [self bankName:_queryCardInfo.result.UsrCardInfolist.BankId];
-            
+            cell.textField.placeholder = @"银行名称";
+
         }else if (indexPath.row == 1) {
             [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
             cell.btn.hidden = NO;
@@ -123,6 +125,7 @@
             cell.btnSecory.hidden = YES;
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             cell.textField.text = _queryCardInfo.result.UsrCardInfolist.CardId;
+            cell.textField.placeholder = @"银行卡号";
             cell.textField.enabled = NO;
         }else if (indexPath.row == 3){
             cell.btn.hidden = YES;

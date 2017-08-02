@@ -44,7 +44,15 @@
 /**
  银行卡获取接口
  */
--(void)getBankListInfo;
+//-(void)getBankListInfo;
+
+
+/**
+ 支持银行卡列表
+ 
+ @param platform 平台     2 - 银生宝   4 - 汇付
+ */
+-(void)getSupportBankListInfo:(NSString *)platform;
 
 /**
  合规银行卡查询
@@ -54,7 +62,7 @@
 /**
  合规银行卡列表
  */
--(void)queryCardListInfo;
+//-(void)queryCardListInfo;
 
 
 @end
