@@ -745,7 +745,6 @@
         [_dataArray removeAllObjects];
         for (HomeProductListProducts *product in _homeProductList.result.products) {
             [_dataArray addObject:product];
-            
         }
         
         if ([_homeProductList.result.type isEqualToString:@"1"]) {
