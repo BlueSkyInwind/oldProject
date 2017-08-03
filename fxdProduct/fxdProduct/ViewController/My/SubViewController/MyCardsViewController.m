@@ -138,7 +138,8 @@
                             }
                             [_dataliat addObject:[self formatString:cardResult.card_no_]];
                             [_dataNumList addObject:cardResult.card_type_];
-                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.bank_code_]];
+//                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.bank_code_]];
+                            [_dataImageListBank addObject:banlist.icon_url_];
                             [_bankWitch addObject:@"银行卡"];
                             [_bankWitchArray addObject:banlist.bank_name_];
                         }
@@ -201,7 +202,8 @@
 {
     
     MyCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCardCell"];
-    cell.iconImage.image = [UIImage imageNamed:[_dataImageListBank objectAtIndex:indexPath.row]];
+//    cell.iconImage.image = [UIImage imageNamed:[_dataImageListBank objectAtIndex:indexPath.row]];
+    [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[_dataImageListBank objectAtIndex:indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
     cell.bankCompanyLabel.text = _bankWitchArray[indexPath.row];
     cell.bankNum.text =_dataliat[indexPath.row];
     cell.banklist.text =_bankWitch[indexPath.row];

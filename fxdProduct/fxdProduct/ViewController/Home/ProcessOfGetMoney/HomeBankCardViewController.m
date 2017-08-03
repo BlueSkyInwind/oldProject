@@ -89,7 +89,7 @@
 
     SupportBankList * supportBankList = [_bankArray objectAtIndex:indexPath.row];
 //    DLog(@"%@",[NSString stringWithFormat:@"bank_code%@",bankListInfo.code]);
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:supportBankList.icon_url_]];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:supportBankList.icon_url_] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
 //    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"bank_code_%@",bankListInfo.code]];
     cell.textLabel.text = supportBankList.bank_name_;
     if (self.cardTag == indexPath.row) {

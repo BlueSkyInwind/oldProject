@@ -162,7 +162,6 @@
         decisionHandler(WKNavigationActionPolicyCancel);
         [self.navigationController popViewControllerAnimated:YES];
 
-        
     }else{
     
         decisionHandler(WKNavigationActionPolicyAllow);
@@ -181,7 +180,6 @@
             }
         }
     }
-    
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
@@ -190,7 +188,7 @@
 }
 
 
-#pragma mark -WKUIDelegate
+#pragma mark -
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
     DLog(@"alert");

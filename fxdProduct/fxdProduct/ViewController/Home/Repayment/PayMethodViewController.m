@@ -86,7 +86,8 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
                             }
                             [_dataliat addObject:[self formatTailNumber:cardResult.card_no_]];
                             [_dataNumList addObject:cardResult.card_type_];
-                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.bank_code_]];
+//                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.bank_code_]];
+                            [_dataImageListBank addObject:banlist.icon_url_];
                             [_bankWitchArray addObject:banlist.bank_name_];
                         }
                     }
@@ -193,7 +194,9 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     } else {
         BankListCell *cell = [tableView dequeueReusableCellWithIdentifier:bankListCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.bankLogo.image = [UIImage imageNamed:[_dataImageListBank objectAtIndex:indexPath.row]];
+//        cell.bankLogo.image = [UIImage imageNamed:[_dataImageListBank objectAtIndex:indexPath.row]];
+        [cell.bankLogo sd_setImageWithURL:[NSURL URLWithString:[_dataImageListBank objectAtIndex:indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
+
         cell.bankCardInfoLabel.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[_bankWitchArray objectAtIndex:indexPath.row],[_dataliat objectAtIndex:indexPath.row]];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.bankCardInfoLabel.textColor = [UIColor grayColor];
