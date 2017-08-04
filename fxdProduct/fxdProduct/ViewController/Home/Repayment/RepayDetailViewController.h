@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, RepayType) {
 
 
 @property (nonatomic,strong)BankModel *bankModel;
+@property (nonatomic,strong)NSMutableArray *supportBankListArr;
 
 @property (nonatomic,strong)RepayListInfo *repayListInfo;
 

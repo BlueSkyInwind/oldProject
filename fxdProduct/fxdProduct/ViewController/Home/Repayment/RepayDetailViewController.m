@@ -37,7 +37,7 @@
 #import "PaymentDetailModel.h"
 #import "BaseResultModel.h"
 #import "HGBankListModel.h"
-
+#import "SupportBankList.h"
 
 @interface RepayDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SelectViewDelegate>
 {
@@ -245,13 +245,13 @@
                 {
                     if ([cardResult.if_default_ isEqualToString:@"1"]) {
                         defaultBankIndex = j;
-                        for (BankList *banlist in _bankModel.result) {
-                            if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
+                        for (SupportBankList *banlist in _supportBankListArr) {
+                            if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
                                 //                                _selectCard
                                 CardInfo *cardInfo = [[CardInfo alloc] init];
                                 cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
                                 cardInfo.cardlNumber = cardResult.card_no_;
-                                cardInfo.bankName = banlist.desc;
+                                cardInfo.bankName = banlist.bank_name_;
                                 cardInfo.cardIdentifier = cardResult.id_;
                                 cardInfo.phoneNum = cardResult.bank_reserve_phone_;
                                 _selectCard = cardInfo;
@@ -385,59 +385,48 @@
                             }
                         }
                         
-                        if (d > 0) {
-                            _canUseReadPacket = true;
-                            if (_selectRedPacket > 0) {
-                                cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                            }else {
-                                Situations *currentSituation = nil;
-                                for (Situations *situation in _situations) {
-                                    if ([situation.status isEqualToString:@"4"]) {
-                                        currentSituation = situation;
+                        if (y > 0) {
+                            cell.payLabel.text=@"您已逾期，不可使用红包";
+                            _canUseReadPacket = false;
+                            cell.payLabel.textColor=rgb(255, 134, 25);
+                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        }else{
+                            if (d > 0) {
+                                _canUseReadPacket = true;
+                                if (_selectRedPacket > 0) {
+                                    cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
+                                    cell.payLabel.textColor=rgb(255, 134, 25);
+                                }else {
+                                    Situations *currentSituation = nil;
+                                    for (Situations *situation in _situations) {
+                                        if ([situation.status isEqualToString:@"4"]) {
+                                            currentSituation = situation;
+                                        }
+                                    }
+                                    if (currentSituation) {
+                                        if (currentSituation.debt_service_fee > 0) {
+                                            cell.payLabel.text = @"请选择";
+                                            cell.payLabel.textColor = [UIColor grayColor];
+                                        } else {
+                                            cell.payLabel.text=@"不可用";
+                                            _canUseReadPacket = false;
+                                            cell.payLabel.textColor=rgb(255, 134, 25);
+                                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                                        }
                                     }
                                 }
-                                if (currentSituation) {
-                                    if (currentSituation.debt_service_fee > 0) {
-                                        cell.payLabel.text = @"请选择";
-                                        cell.payLabel.textColor = [UIColor grayColor];
-                                    } else {
-                                        cell.payLabel.text=@"不可用";
-                                        _canUseReadPacket = false;
-                                        cell.payLabel.textColor=rgb(255, 134, 25);
-                                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                                    }
+                                // cell.accessoryType = UITableViewCellAccessoryNone;
+                                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                            } else {
+                                if (w > 0) {
+                                    cell.payLabel.text=@"不可用";
+                                    _canUseReadPacket = false;
+                                    cell.payLabel.textColor=rgb(255, 134, 25);
+                                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
                                 }
-                            }
-                            // cell.accessoryType = UITableViewCellAccessoryNone;
-                            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-                        }else {
-                            if (y > 0) {
-                                cell.payLabel.text=@"您已逾期，不可使用红包";
-                                _canUseReadPacket = false;
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                            }
-                            if (w > 0) {
-                                cell.payLabel.text=@"不可用";
-                                _canUseReadPacket = false;
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                             }
                         }
-                    }
-                    if (_p2pBillModel != nil) {
-                        cell.payLabel.text=@"不可用";
-                        _canUseReadPacket = false;
-                        cell.payLabel.textColor=rgb(255, 134, 25);
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    }
-                    if ([_product_id isEqualToString:RapidLoan]) {
-                        cell.payLabel.text=@"不可用";
-                        _canUseReadPacket = false;
-                        cell.payLabel.textColor=rgb(255, 134, 25);
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     }
                 }
                 else if(indexPath.row==1){//溢缴金额
@@ -489,60 +478,41 @@
                                 d++;
                             }
                         }
-                        
-                        if (d > 0) {
-                            _canUseReadPacket = true;
-                            if (_selectRedPacket > 0) {
-                                cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                            }else {
-                                Situations *currentSituation = nil;
-                                for (Situations *situation in _situations) {
-                                    if ([situation.status isEqualToString:@"4"]) {
-                                        currentSituation = situation;
+                        if (y > 0) {
+                            cell.payLabel.text=@"您已逾期，不可使用红包";
+                            _canUseReadPacket = false;
+                            cell.payLabel.textColor=rgb(255, 134, 25);
+                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        }else{
+                            if (d > 0) {
+                                _canUseReadPacket = true;
+                                if (_selectRedPacket > 0) {
+                                    cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
+                                    cell.payLabel.textColor=rgb(255, 134, 25);
+                                }else {
+                                    Situations *currentSituation = nil;
+                                    for (Situations *situation in _situations) {
+                                        if ([situation.status isEqualToString:@"4"]) {
+                                            currentSituation = situation;
+                                        }
                                     }
-                                }
-                                if (currentSituation) {
-                                    if (currentSituation.debt_service_fee > 0) {
+                                    if (currentSituation) {
                                         cell.payLabel.text = @"请选择";
                                         cell.payLabel.textColor = [UIColor grayColor];
-                                    } else {
-                                        cell.payLabel.text=@"不可用";
-                                        _canUseReadPacket = false;
-                                        cell.payLabel.textColor=rgb(255, 134, 25);
-                                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
                                     }
                                 }
-                            }
-                            //            cell.accessoryType = UITableViewCellAccessoryNone;
-                            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-                        }else {
-                            if (y > 0) {
-                                cell.payLabel.text=@"您已逾期，不可使用红包";
-                                _canUseReadPacket = false;
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                            }
-                            if (w > 0) {
-                                cell.payLabel.text=@"不可用";
-                                _canUseReadPacket = false;
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                                //            cell.accessoryType = UITableViewCellAccessoryNone;
+                                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                            }else {
+                                if (w > 0) {
+                                    cell.payLabel.text=@"不可用";
+                                    _canUseReadPacket = false;
+                                    cell.payLabel.textColor=rgb(255, 134, 25);
+                                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                                }
                             }
                         }
-                    }
-                    if (_p2pBillModel != nil) {
-                        cell.payLabel.text=@"不可用";
-                        _canUseReadPacket = false;
-                        cell.payLabel.textColor=rgb(255, 134, 25);
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    }
-                    if ([_product_id isEqualToString:RapidLoan]) {
-                        cell.payLabel.text=@"不可用";
-                        _canUseReadPacket = false;
-                        cell.payLabel.textColor=rgb(255, 134, 25);
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     }
                 }
                 else if(indexPath.row == 1 ){//逾期费用
@@ -557,109 +527,7 @@
             }
         }
     }
-    
-    //合规通道弃用
-    if (_p2pBillModel != nil) {
-        //红包和银行的cell
-        if(indexPath.row==3){
-            PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.PayTitleLabel.text=titleAry[indexPath.row];
-            if ([_queryCardInfoModel.result.UsrCardInfolist.BankId isEqualToString:@""]) {
-                
-                cell.whichBank.text = @"请更换银行卡";
-                
-            }else{
-            
-                cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[self bankName:_queryCardInfoModel.result.UsrCardInfolist.BankId],[_queryCardInfoModel.result.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.result.UsrCardInfolist.CardId.length-4]];
-            }
-            return cell;
-        }
-        else//溢缴金额和应付金额cell
-        {
-            PayMoneyCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-            if(indexPath.row==0)    //红包
-            {
-                if (_repayListInfo != nil) {
-                    int y = 0;  //逾期
-                    int w = 0;  //未来
-                    int d = 0;  //当期
-                    for (int i = 0; i < _situations.count; i++) {
-                        if ([[_situations objectAtIndex:i].status isEqualToString:@"2"]) {
-                            y++;
-                        } else if ([[_situations objectAtIndex:i].status isEqualToString:@"3"]) {
-                            w++;
-                        } else  {
-                            d++;
-                        }
-                    }
-                    
-                    if (d > 0) {
-                        _canUseReadPacket = true;
-                        if (_selectRedPacket > 0) {
-                            cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
-                            cell.payLabel.textColor=rgb(255, 134, 25);
-                        }else {
-                            Situations *currentSituation = nil;
-                            for (Situations *situation in _situations) {
-                                if ([situation.status isEqualToString:@"4"]) {
-                                    currentSituation = situation;
-                                }
-                            }
-                            if (currentSituation) {
-                                if (currentSituation.debt_service_fee > 0) {
-                                    cell.payLabel.text = @"请选择";
-                                    cell.payLabel.textColor = [UIColor grayColor];
-                                } else {
-                                    cell.payLabel.text=@"不可用";
-                                    _canUseReadPacket = false;
-                                    cell.payLabel.textColor=rgb(255, 134, 25);
-                                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                                }
-                            }
-                        }
-                        // cell.accessoryType = UITableViewCellAccessoryNone;
-                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-                    }else {
-                        if (y > 0) {
-                            cell.payLabel.text=@"您已逾期，不可使用红包";
-                            _canUseReadPacket = false;
-                            cell.payLabel.textColor=rgb(255, 134, 25);
-                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        }
-                        if (w > 0) {
-                            cell.payLabel.text=@"不可用";
-                            _canUseReadPacket = false;
-                            cell.payLabel.textColor=rgb(255, 134, 25);
-                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        }
-                    }
-                }
-                if (_p2pBillModel != nil) {
-                    cell.payLabel.text=@"不可用";
-                    _canUseReadPacket = false;
-                    cell.payLabel.textColor=rgb(255, 134, 25);
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                }
-                if ([_product_id isEqualToString:RapidLoan]) {
-                    cell.payLabel.text=@"不可用";
-                    _canUseReadPacket = false;
-                    cell.payLabel.textColor=rgb(255, 134, 25);
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                }
-            }
-            else if(indexPath.row==1){//溢缴金额
-                cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useTotalAmount];
-            }
-            else{                //应付金额
-                cell.payLabel.text = [NSString stringWithFormat:@"%.2f元",_finalyRepayAmount];
-            }
-            cell.lblTitle.text=titleAry[indexPath.row];
-            return cell;
-        }
-    }
-    
+
     return nil;
 }
 
@@ -698,7 +566,7 @@
             if (_repayListInfo != nil) {
                 DLog(@"选择付款方式");
                 PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-                payMethodVC.bankModel = _bankModel;
+                payMethodVC.supportBankListArr = _supportBankListArr;
                 payMethodVC.payMethod = PayMethodNormal;
                 if (userSelectIndex == -1) {
                     payMethodVC.currentIndex = defaultBankIndex;
@@ -745,7 +613,7 @@
             if (_repayListInfo != nil) {
                 DLog(@"选择付款方式");
                 PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-                payMethodVC.bankModel = _bankModel;
+                payMethodVC.supportBankListArr = _supportBankListArr;
                 payMethodVC.payMethod = PayMethodNormal;
                 if (userSelectIndex == -1) {
                     payMethodVC.currentIndex = defaultBankIndex;
@@ -768,7 +636,6 @@
                 
                 [self gotoUnbundlingBank];
                 //                [self chooseBankCard];
-                
             }
         }
     }
@@ -785,33 +652,39 @@
 {
     [self dismissSemiModalViewWithCompletion:^{
         Available_Redpackets *redPacket = [_repayListInfo.result.available_redpackets objectAtIndex:index];
-        _selectRedPacket = redPacket.residual_amount;
-        _selectRedPacketID = redPacket.RedpacketID;
-        
+        _selectRedPacket = redPacket.residual_amount;   //所选红包金额
+        _selectRedPacketID = redPacket.RedpacketID;     //红包id
         _finalyRepayAmount = _repayAmount - _repayListInfo.result.situations.firstObject.debt_service_fee;
+        // 折息金额
+        CGFloat _discountsAmount = 0;   // 红包 或者 利息
+        // 红包小于服务费，使用红包
         if (_selectRedPacket <= _repayListInfo.result.situations.firstObject.debt_service_fee) {
             _useredPacketAmount = _selectRedPacket;
-            if (_repayListInfo.result.total_amount >= (_repayAmount - _selectRedPacket)) {
-//                _useTotalAmount = fabs(_repayAmount - _selectRedPacket - _repayListInfo.result.total_amount);
-                _useTotalAmount = fabs(_repayAmount - _selectRedPacket);
-                _finalyRepayAmount = 0.0;
-            } else {
-                
-                _useTotalAmount = _repayListInfo.result.total_amount;
-                _finalyRepayAmount = _repayAmount - _selectRedPacket - _repayListInfo.result.total_amount;
-            }
+            _discountsAmount = _selectRedPacket;
         } else {
+             // 红包大于服务费，使用服务费
             _useredPacketAmount = _repayListInfo.result.situations.firstObject.debt_service_fee;
-            if (_repayListInfo.result.total_amount >= (_repayAmount - _repayListInfo.result.situations.firstObject.debt_service_fee)) {
-                _useTotalAmount = _repayAmount - _repayListInfo.result.situations.firstObject.debt_service_fee;
-                _finalyRepayAmount = 0.0;
-            } else {
-                _useTotalAmount = _repayListInfo.result.total_amount;
-                _finalyRepayAmount = _repayAmount - _repayListInfo.result.situations.firstObject.debt_service_fee - _repayListInfo.result.total_amount;
-            }
+            _discountsAmount = _repayListInfo.result.situations.firstObject.debt_service_fee;
+        }
+        
+        if ([_product_id isEqualToString:RapidLoan]) {
+            //急速贷没有服务费，直接拿本金减红包
+            _useredPacketAmount = _selectRedPacket > 10 ? 10 : _selectRedPacket;    // 急速贷红包上线10元
+            _finalyRepayAmount -= _useredPacketAmount;
+            _discountsAmount = _useredPacketAmount;
+        }
+        // 溢缴金  大于  本金减折息金额
+        if (_repayListInfo.result.total_amount >= (_repayAmount - _discountsAmount)) {
+            //              _useTotalAmount = fabs(_repayAmount - _selectRedPacket - _repayListInfo.result.total_amount);
+            _useTotalAmount = fabs(_repayAmount - _discountsAmount);
+            _finalyRepayAmount = 0.0;
+        } else {
+            _useTotalAmount = _repayListInfo.result.total_amount;
+            _finalyRepayAmount = _repayAmount - _discountsAmount - _repayListInfo.result.total_amount;
         }
         [self.PayDetailTB reloadData];
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -1060,8 +933,8 @@
             BOOL isHave = NO;
             NSArray * array = (NSArray *)baseREsultM.result;
             for (NSDictionary *dic  in array) {
-                HGBankListModel *  hgBankListM = [[HGBankListModel alloc]initWithDictionary:dic error:nil];
-                if ([hgBankListM.key_ isEqualToString:infoModel.result.UsrCardInfolist.BankId]) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:dic error:nil];
+                if ([bankList.bank_short_name_ isEqualToString:infoModel.result.UsrCardInfolist.BankId]) {
                     isHave = YES;
                     break;
                 }
@@ -1076,7 +949,7 @@
     } WithFaileBlock:^{
         
     }];
-    [checkBankViewModel queryCardListInfo];
+    [checkBankViewModel getSupportBankListInfo:@"4"];
 }
 
 

@@ -745,7 +745,6 @@
         [_dataArray removeAllObjects];
         for (HomeProductListProducts *product in _homeProductList.result.products) {
             [_dataArray addObject:product];
-            
         }
         
         if ([_homeProductList.result.type isEqualToString:@"1"]) {
@@ -883,12 +882,7 @@
                         userDataVC.product_id = productId;
                         userDataVC.req_loan_amt = [NSString stringWithFormat:@"%ld",rate.result.principal_bottom_];
                         [self.navigationController pushViewController:userDataVC animated:true];
-                        
-//                        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-//                        payLoanview.product_id = productId;
-//                        payLoanview.userState = model;
-//                        payLoanview.rateModel = rate;
-//                        [self.navigationController pushViewController:payLoanview animated:true];
+
                     }];
                 }
                 if ([productId isEqualToString:SalaryLoan]) {
@@ -902,17 +896,20 @@
                     UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                     userDataVC.product_id = WhiteCollarLoan;
                     [self.navigationController pushViewController:userDataVC animated:true];
+                    
                 }
             }else if ([model.applyFlag isEqualToString:@"0001"]){
                 UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
                 userDataVC.product_id = productId;
                 [self.navigationController pushViewController:userDataVC animated:true];
             }else if ([model.applyFlag isEqualToString:@"0002"]) {
-                LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
-                loanFirstVC.productId = [Utility sharedUtility].userInfo.pruductId;
-                loanFirstVC.model = model;
-                [self.navigationController pushViewController:loanFirstVC animated:true];
-
+                    __weak typeof (self) weakSelf = self;
+                    [self fatchRate:^(RateModel *rate) {
+                        LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
+                        loanFirstVC.productId = [Utility sharedUtility].userInfo.pruductId;
+                        loanFirstVC.model = model;
+                        [weakSelf.navigationController pushViewController:loanFirstVC animated:true];
+                    }];
             }else if ([model.applyFlag isEqualToString:@"0003"]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
             }else if ([model.applyFlag isEqualToString:@"0004"]){

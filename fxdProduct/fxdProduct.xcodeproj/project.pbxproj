@@ -591,6 +591,8 @@
 		846A90191F1F48AB00896169 /* PayDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90161F1F48AB00896169 /* PayDisplayCell.m */; };
 		846A901A1F1F48AB00896169 /* PayDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90171F1F48AB00896169 /* PayDisplayCell.xib */; };
 		846A901B1F1F48AB00896169 /* PayDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90171F1F48AB00896169 /* PayDisplayCell.xib */; };
+		8473F1411F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
+		8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
 		848394221EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */; };
 		848394231EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */; };
 		848394261EDEC96C003EF4EC /* HomePopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394251EDEC96C003EF4EC /* HomePopParam.m */; };
@@ -2267,6 +2269,8 @@
 		846A90151F1F48AB00896169 /* PayDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayDisplayCell.h; sourceTree = "<group>"; };
 		846A90161F1F48AB00896169 /* PayDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayDisplayCell.m; sourceTree = "<group>"; };
 		846A90171F1F48AB00896169 /* PayDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayDisplayCell.xib; sourceTree = "<group>"; };
+		8473F13F1F31CAA1005B4933 /* SupportBankList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportBankList.h; sourceTree = "<group>"; };
+		8473F1401F31CAA1005B4933 /* SupportBankList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportBankList.m; sourceTree = "<group>"; };
 		848394201EDEB82A003EF4EC /* HomeBannerParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerParamModel.h; sourceTree = "<group>"; };
 		848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerParamModel.m; sourceTree = "<group>"; };
 		848394241EDEC96C003EF4EC /* HomePopParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePopParam.h; sourceTree = "<group>"; };
@@ -3932,6 +3936,8 @@
 				6391F7271D3377940097C943 /* BankList.m */,
 				6391F7431D33799C0097C943 /* BankModel.h */,
 				6391F7441D33799C0097C943 /* BankModel.m */,
+				8473F13F1F31CAA1005B4933 /* SupportBankList.h */,
+				8473F1401F31CAA1005B4933 /* SupportBankList.m */,
 			);
 			path = BankList;
 			sourceTree = "<group>";
@@ -5868,6 +5874,7 @@
 				CC4271E61F0C8ED7004904B8 /* HomeRefuseCell.m in Sources */,
 				63811B0F1B8EDE17008F605B /* UserInfoViewController.m in Sources */,
 				6379641F1CAD1BE0002A5910 /* LivenessSelfie.m in Sources */,
+				8473F1411F31CAA1005B4933 /* SupportBankList.m in Sources */,
 				63AD1D1A1BFC1AA400807877 /* MLBlackTransition.m in Sources */,
 				63A24D2E1BE10F4A0036E8EF /* GetMoneyStateResult.m in Sources */,
 				634830F31CBB82C30005C4CD /* CustomerBaseInfoExt.m in Sources */,
@@ -6407,6 +6414,7 @@
 				848394231EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchViewController.m in Sources */,
 				CC0DFA821EA5B1090024841A /* RepayListViewController.m in Sources */,
+				8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */,
 				CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */,
 				CC0DFA841EA5B1090024841A /* CashResult.m in Sources */,
 				CC0DFA851EA5B1090024841A /* YYTextRubyAnnotation.m in Sources */,

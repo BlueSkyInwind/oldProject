@@ -135,7 +135,6 @@
         if ([_userStateModel.product_id isEqualToString:SalaryLoan] || [_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
             return 190;
         }else{
-        
             return 100;
         }
 

@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
-@class RepayListInfo,P2PBillDetail,UserStateModel;
+#import "UserStateModel.h"
+@class RepayListInfo,P2PBillDetail;
 
 @interface DetailRepayViewController : BaseViewController
 

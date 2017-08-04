@@ -214,7 +214,6 @@
                     }
                 }
             }else{
-                
                 if ([qryUserStatusModel.result.flg isEqualToString:@"6"]&&_isRepay) {//正常用户并且从我要还款入口进入
                     
                     RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
@@ -238,14 +237,12 @@
                     if (isHave) {
                         [self.navigationController popToViewController:controller animated:YES];
                     }else{
-                        
                         LoanMoneyViewController *controller = [LoanMoneyViewController new];
                         controller.userStateModel.product_id = caseInfo.result.product_id_;
                         controller.qryUserStatusModel = qryUserStatusModel;
                         [self.navigationController pushViewController:controller animated:YES];
                     }
                 }
-               
             }
         }else{
             

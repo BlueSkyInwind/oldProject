@@ -29,12 +29,13 @@
 #import "P2PViewController.h"
 #import "LoanMoneyViewController.h"
 #import "HomeViewModel.h"
-
+#import "SupportBankList.h"
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     NSArray *titleAry;
     NSArray *imgAry;
     BankModel *_bankCardModel;
+    NSMutableArray *_supportBankListArr;
     UserStateModel *_model;
 }
 @property (strong, nonatomic) IBOutlet UITableView *MyViewTable;
@@ -182,19 +183,27 @@
 
 - (void)fatchCardInfo
 {
-    NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        _bankCardModel = [BankModel yy_modelWithJSON:object];
-        if ([_bankCardModel.flag isEqualToString:@"0000"]) {
+
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResult.flag isEqualToString:@"0000"]) {
+            NSArray * array  = (NSArray *)baseResult.result;
+            _supportBankListArr = [NSMutableArray array];
+            for (int i = 0; i < array.count; i++) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                [_supportBankListArr addObject:bankList];
+            }
             MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
-            myCrad.bankModel = _bankCardModel;
+            myCrad.supportBankListArr = _supportBankListArr;
             [self.navigationController pushViewController:myCrad animated:YES];
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_bankCardModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
         }
-    } failure:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
+    } WithFaileBlock:^{
+        
     }];
+    [checkBankViewModel getSupportBankListInfo:@"2"];
 }
 
 #pragma mark 发标前查询进件

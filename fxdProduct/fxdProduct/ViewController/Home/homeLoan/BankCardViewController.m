@@ -330,7 +330,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             [dataColorAll3 replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
     }
-    
 }
 
 #pragma mark ->BankTableViewSelectDelegate
@@ -344,12 +343,12 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 //    [_tableView reloadData];
 //}
 
-- (void)BankSelect:(BankList *)bankInfo andSectionRow:(NSInteger)sectionRow
+- (void)BankSelect:(SupportBankList *)bankInfo andSectionRow:(NSInteger)sectionRow
 {
-    [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.desc];//银行名字
+    [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.bank_name_];//银行名字
     //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
-    _bankNum = bankInfo.code;
-    _bankCodeNUm = bankInfo.code;
+    _bankNum = bankInfo.bank_code_;
+    _bankCodeNUm = bankInfo.bank_code_;
     [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",(long)sectionRow]];
     [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
     [_tableView reloadData];
@@ -488,6 +487,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             DLog(@"%@",_bankModel);
             HomeBankCardViewController *homebankVC = [HomeBankCardViewController new];
             homebankVC.bankModel = _bankModel;
+            homebankVC.bankArray = _bankArray;
             homebankVC.delegate = self;
             homebankVC.cardTag = [dataListAll3[5] integerValue];
             //            homebankVC.bankFlag = 100;

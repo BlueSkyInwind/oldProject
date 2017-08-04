@@ -7,13 +7,14 @@
 //
 
 #import "BaseViewController.h"
+#import "SupportBankList.h"
 #import "BankModel.h"
 
 @protocol BankTableViewSelectDelegate <NSObject>
 
 //-(void)BankTableViewSelect:(NSString *)CurrentRow andBankInfoList:(NSString *)bankNum andSectionRow:(NSInteger)SectionRow;
 
-- (void)BankSelect:(BankList *)bankInfo andSectionRow:(NSInteger)sectionRow;
+- (void)BankSelect:(SupportBankList *)bankInfo andSectionRow:(NSInteger)sectionRow;
 
 @end
 
@@ -24,6 +25,7 @@
 
 
 @property (nonatomic, strong) BankModel *bankModel;
+@property (nonatomic, strong)NSMutableArray *bankArray;
 
 //@property(assign,nonatomic)NSInteger bankFlag;
 @property(assign,nonatomic)NSInteger cardTag;

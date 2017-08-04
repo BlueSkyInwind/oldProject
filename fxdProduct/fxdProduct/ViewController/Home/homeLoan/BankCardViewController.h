@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSString *flagString;
 
 @property (nonatomic, strong) NSString *bankMobile;
+@property (nonatomic, strong)NSMutableArray *bankArray;
 @property (nonatomic, strong)BankModel *bankModel;
 
 @property (weak, nonatomic) IBOutlet UIButton *agreeBtn;
