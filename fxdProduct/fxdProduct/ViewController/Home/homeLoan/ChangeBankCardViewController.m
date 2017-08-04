@@ -347,11 +347,11 @@
 }
 
 
-- (void)BankSelect:(BankList *)bankInfo andSectionRow:(NSInteger)sectionRow
+- (void)BankSelect:(SupportBankList *)bankInfo andSectionRow:(NSInteger)sectionRow
 {
-    [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.desc];//银行名字
+    [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.bank_name_];//银行名字
     //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
-    _bankCode = bankInfo.code;
+    _bankCode = bankInfo.bank_code_;
     [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",(long)sectionRow]];
     [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
     [_changTab reloadData];
@@ -432,7 +432,7 @@
     } WithFaileBlock:^{
         
     }];
-    [checkBankViewModel getSupportBankListInfo:@"2"];
+    [checkBankViewModel getSupportBankListInfo:@"4"];
     
 }
 
