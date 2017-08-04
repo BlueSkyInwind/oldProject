@@ -26,7 +26,7 @@
         NSArray *placeArray3;
         NSMutableArray *dataListAll3;
         NSMutableArray *dataColorAll3;
-        NSString *_bankCode;
+        NSString *_bankLogogram;
         NSInteger _countdown;
         NSTimer * _countdownTimer;
         BankModel *_bankModel;
@@ -153,16 +153,14 @@
             _backTimeBtn = sender;
             if ([dataListAll3[0] length] < 1) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择银行卡"];
-            }else if ([_bankCode length] < 1 || _bankCode == nil){
+            }else if ([_bankLogogram length] < 1 || _bankLogogram == nil){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请重新选择银行卡类型"];
             }else if ([dataListAll3[1] length]<16){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的卡号"];
             }else if (![Tool isMobileNumber:dataListAll3[2]]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的手机号"];
             }else{
-                
                 [self senderSms];
-
             }
         }
             break;
@@ -351,7 +349,7 @@
 {
     [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.bank_name_];//银行名字
     //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
-    _bankCode = bankInfo.bank_code_;
+    _bankLogogram = bankInfo.bank_short_name_;
     [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",(long)sectionRow]];
     [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
     [_changTab reloadData];
@@ -446,10 +444,10 @@
         return;
     }
     
-    NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *banName = [self bankName:_bankCode];
-    NSMutableArray *paramArray = [NSMutableArray array];
-    [paramArray addObject:banName];
+    NSString * bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * bankShortName = _bankLogogram;
+    NSMutableArray * paramArray = [NSMutableArray array];
+    [paramArray addObject:bankShortName];
     [paramArray addObject:bankNo];
     [paramArray addObject:[Utility sharedUtility].userInfo.userMobilePhone];
     [paramArray addObject:dataListAll3[2]];
@@ -465,27 +463,22 @@
             
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.result.appmsg];
             if (_isCheck) {
-                
                 for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                     if ([vc isKindOfClass:[CheckViewController class]]) {
                         [self.navigationController popToViewController:vc animated:YES];
                     }
                 }
             }else{
-                
                 for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                     if ([vc isKindOfClass:[RepayDetailViewController class]]) {
                         [self.navigationController popToViewController:vc animated:YES];
                     }
                 }
             }
-            
             //  [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
         }else{
-            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
         }
-        
     } WithFaileBlock:^{
         
     }];
