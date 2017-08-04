@@ -76,7 +76,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
                 {
                     for (SupportBankList *banlist in _supportBankListArr) {
                         if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-                            if ([cardResult.if_default_ isEqualToString:@"1"]) {
+                            if (j==0) {
 //                                _currentIndex = j;
                                 CardInfo *cardInfo = [[CardInfo alloc] init];
                                 cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
@@ -91,13 +91,6 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
                             [_bankWitchArray addObject:banlist.bank_name_];
                         }
                     }
-                    
-                    
-                    //                    for (BankList *banlist in _bankModel.result) {
-                    //                        if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
-                    //
-                    //                        }
-                    //                    }
                 }
             }
             [self.tableView.mj_header endRefreshing];

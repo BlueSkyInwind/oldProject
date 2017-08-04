@@ -246,13 +246,12 @@
         if([_userCardModel.flag isEqualToString:@"0000"]){
             for(NSInteger j=0;j<_userCardModel.result.count;j++)
             {
-                CardResult *cardResult = _userCardModel.result[j];
+                CardResult *cardResult = _userCardModel.result[0];
                 if([cardResult.card_type_ isEqualToString:@"2"])
                 {
-                    if ([cardResult.if_default_ isEqualToString:@"1"]) {
-                        _cardNo = cardResult.card_no_;
-                        _cardBank = cardResult.card_bank_;
-                    }
+                    _cardNo = cardResult.card_no_;
+                    _cardBank = cardResult.card_bank_;
+                    break;
                 }
             }
         }

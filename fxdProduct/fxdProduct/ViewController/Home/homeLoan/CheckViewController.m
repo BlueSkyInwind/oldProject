@@ -718,22 +718,20 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             if (_userCardsModel.result.count > 0) {
                 for(NSInteger j=0;j<_userCardsModel.result.count;j++)
                 {
-                    CardResult *cardResult = [_userCardsModel.result objectAtIndex:j];
+                    CardResult *cardResult = [_userCardsModel.result objectAtIndex:0];
                     if([cardResult.card_type_ isEqualToString:@"2"])
                     {
-                        if ([cardResult.if_default_ isEqualToString:@"1"]) {
-                            defaultBankIndex = j;
-                            for (SupportBankList *banlist in _supportBankListArr) {
-                                if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-                                    //                                _selectCard
-                                    CardInfo *cardInfo = [[CardInfo alloc] init];
-                                    cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
-                                    cardInfo.bankName = banlist.bank_name_;
-                                    cardInfo.cardIdentifier = cardResult.id_;
-                                    _selectCard = cardInfo;
-                                }
+                        defaultBankIndex = 0;
+                        for (SupportBankList *banlist in _supportBankListArr) {
+                            if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
+                                CardInfo *cardInfo = [[CardInfo alloc] init];
+                                cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
+                                cardInfo.bankName = banlist.bank_name_;
+                                cardInfo.cardIdentifier = cardResult.id_;
+                                _selectCard = cardInfo;
                             }
                         }
+                        break;
                     }
                 }
                 PayViewController *payVC = [[PayViewController alloc] init];

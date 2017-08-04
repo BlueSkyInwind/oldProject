@@ -240,27 +240,26 @@
         if([_userCardsModel.flag isEqualToString:@"0000"]){
             for(NSInteger j=0;j<_userCardsModel.result.count;j++)
             {
-                CardResult *cardResult = [_userCardsModel.result objectAtIndex:j];
+                CardResult *cardResult = [_userCardsModel.result objectAtIndex:0];
                 if([cardResult.card_type_ isEqualToString:@"2"])
                 {
-                    if ([cardResult.if_default_ isEqualToString:@"1"]) {
-                        defaultBankIndex = j;
-                        for (SupportBankList *banlist in _supportBankListArr) {
-                            if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-                                //                                _selectCard
-                                CardInfo *cardInfo = [[CardInfo alloc] init];
-                                cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
-                                cardInfo.cardlNumber = cardResult.card_no_;
-                                cardInfo.bankName = banlist.bank_name_;
-                                cardInfo.cardIdentifier = cardResult.id_;
-                                cardInfo.phoneNum = cardResult.bank_reserve_phone_;
-                                _selectCard = cardInfo;
-                            }
+                    defaultBankIndex = 0;
+                    for (SupportBankList *banlist in _supportBankListArr) {
+                        if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
+                            //                                _selectCard
+                            CardInfo *cardInfo = [[CardInfo alloc] init];
+                            cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
+                            cardInfo.cardlNumber = cardResult.card_no_;
+                            cardInfo.bankName = banlist.bank_name_;
+                            cardInfo.cardIdentifier = cardResult.id_;
+                            cardInfo.phoneNum = cardResult.bank_reserve_phone_;
+                            _selectCard = cardInfo;
                         }
-                        //                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
-                        //                        [self.PayDetailTB reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                        [self.PayDetailTB reloadData];
                     }
+                    //                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+                    //                        [self.PayDetailTB reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                    [self.PayDetailTB reloadData];
+                    break;
                 }
             }
         }else{
