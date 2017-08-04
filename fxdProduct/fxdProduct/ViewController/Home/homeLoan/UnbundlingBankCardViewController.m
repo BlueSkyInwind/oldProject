@@ -110,12 +110,13 @@
     }else{
     
         if (indexPath.row == 0) {
+            
             [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
             cell.btn.hidden = NO;
             cell.btn.tag = indexPath.row + 200;
             cell.btnSecory.hidden = YES;
             cell.textField.enabled = NO;
-            cell.textField.text = [self bankName:_queryCardInfo.result.UsrCardInfolist.BankId];
+            cell.textField.text = _queryCardInfo.result.UsrCardInfolist.bankName;
             cell.textField.placeholder = @"银行名称";
 
         }else if (indexPath.row == 1) {
@@ -170,11 +171,7 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效手机号！"];
         return;
     }
-    
     _backTimeBtn = sender;
-    
-    
-    
 //    _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
     NSString *bankNo = _queryCardInfo.result.UsrCardInfolist.CardId;
     UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
@@ -276,13 +273,10 @@
     }else{
     
         ChangeBankCardViewController *controller = [[ChangeBankCardViewController alloc]initWithNibName:@"ChangeBankCardViewController" bundle:nil];
-        
         controller.ordsms_ext_ = [NSString stringWithFormat:@"%@%@",_sms_code,_sms_seq];
         controller.isCheck = _isCheck;
         [self.navigationController pushViewController:controller animated:YES];
     }
-    
-    
 }
 
 #pragma mark 银行卡名字的转换

@@ -357,7 +357,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             
             if([_userStateModel.platform_type isEqualToString:@"2"] || [_userStateModel.platform_type isEqualToString:@"0"]){
                 if ([_userStateModel.platform_type isEqualToString:@"0"]) {
-                    attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《三方借款协议》"];
+                    attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《借款协议》"];
                     range = NSMakeRange(attributeStr.length - 8, 8);
                 }
                 if ([_userStateModel.platform_type isEqualToString:@"2"]) {
@@ -677,7 +677,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }else if ([_qryUserStatusModel.result.flg isEqualToString:@"6"]){//正常用户
         
         //选择银行卡
-        
         [self queryCardInfo];
         
     }else if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]){
@@ -707,7 +706,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
         }
     } WithFaileBlock:^{
-        
     }];
     [checkBankViewModel getSupportBankListInfo:@"2"];
 }
@@ -1447,25 +1445,19 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
-        NSString *bankName = [self bankName:model.result.UsrCardInfolist.BankId];
+        NSString *bankName = model.result.UsrCardInfolist.bankName;
         PayViewController *payVC = [[PayViewController alloc] init];
         payVC.payType = PayTypeGetMoneyToCard;
         payVC.isP2P = YES;
         payVC.bankName = bankName;
         NSString *bank = model.result.UsrCardInfolist.CardId;
         payVC.banNum = [bank substringFromIndex:bank.length-4];
-        
         payVC.makesureBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){
-            
             [self dismissSemiModalViewWithCompletion:^{
-                
                 [self saveLoanCase:@"30" caseInfo:_caseInfo];
-
             }];
         };
-        
         payVC.changeBankBlock = ^(){
-            
             UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
             controller.queryCardInfo = model;
             controller.isCheck = YES;

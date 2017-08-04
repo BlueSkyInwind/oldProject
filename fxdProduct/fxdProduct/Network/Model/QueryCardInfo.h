@@ -51,6 +51,10 @@
 
 @property (nonatomic,copy)NSString *BankId;
 
+@property (nonatomic,copy)NSString *bankName;
+
+@property (nonatomic,copy)NSString *bankCode;
+
 @property (nonatomic,copy)NSString *CardId;
 
 @property (nonatomic,copy)NSString *RealFlag;

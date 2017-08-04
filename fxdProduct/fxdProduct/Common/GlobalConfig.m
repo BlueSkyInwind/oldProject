@@ -49,7 +49,7 @@ NSString * const _ValidESB_url  =   @"http://192.168.6.133/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
 //NSString * const _p2P_url = @"http://192.168.7.253:9292/fxd-esb/p2p/";
 NSString * const _p2P_url = @"http://192.168.6.133/fxd-esb/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //芝麻信用测试地址
 //NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";

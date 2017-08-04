@@ -355,7 +355,7 @@
                     if ([_queryCardInfoModel.result.UsrCardInfolist.BankId isEqualToString:@""]) {
                         cell.whichBank.text = @"请更换银行卡";
                     }else{
-                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[self bankName:_queryCardInfoModel.result.UsrCardInfolist.BankId],[_queryCardInfoModel.result.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.result.UsrCardInfolist.CardId.length-4]];
+                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_queryCardInfoModel.result.UsrCardInfolist.bankName,[_queryCardInfoModel.result.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.result.UsrCardInfolist.CardId.length-4]];
                     }
                 }else{
                     if (_selectCard != nil) {

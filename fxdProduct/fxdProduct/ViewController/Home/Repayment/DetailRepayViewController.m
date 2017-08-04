@@ -26,10 +26,10 @@
     CGFloat _readyPayAmount;
     
     //可点击最大范围
-    NSInteger _clickMax;
+    int _clickMax;
     
     //可点击最小范围
-    NSInteger _clickMin;
+    int _clickMin;
     
     //最后一次点击坐标
     NSInteger _lastClick;
@@ -58,7 +58,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     self.navigationItem.title = @"期供详情";
     self.automaticallyAdjustsScrollViewInsets = NO;
     _readyPayAmount = 0.0;
-    _clickMax = 0;
+    _clickMax = -1;
     _clickMin = 0;
     _save_amount = 0.0;
     _lastClick = -1;
@@ -561,7 +561,6 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     }else {
         for (int i = 0; i < _cellSelectArr.count; i++) {
             if (_repayListModel != nil) {
-                
                 if (![[_repayListModel.result.situations objectAtIndex:i].status isEqualToString:@"1"]) {
                     if (i <= _lastClick) {
                         [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
@@ -574,8 +573,8 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
                     _readyPayAmount += situation.debt_total;
                 }
             }
+            
             if (_p2pBillDetail != nil) {
-                
                 if ([_p2pBillDetail.data.bill_List_ objectAtIndex:i].status_ != 1) {
                     if (i <= _lastClick) {
                         [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];

@@ -396,6 +396,7 @@
 {
     self.cardName = bankInfo.bank_name_;//银行名字
     self.cardCode = bankInfo.bank_code_;//银行编码
+    self.cardLogogram = bankInfo.bank_short_name_; //银行缩写
     _cardFlag = sectionRow;
     DLog(@"%@ %@",self.cardName,self.cardCode);
     [self.tableView reloadData];
