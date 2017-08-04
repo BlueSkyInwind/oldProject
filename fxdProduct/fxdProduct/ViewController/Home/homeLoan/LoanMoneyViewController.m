@@ -411,7 +411,7 @@
     [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     if ([model.platform_type isEqualToString:@"0"]) {
         moenyViewing.lableData.textAlignment = NSTextAlignmentLeft;
-        NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"《银行自动转账授权书》、《三方借款协议》"];
+        NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"《银行自动转账授权书》、《借款协议》"];
         one.yy_font = [UIFont systemFontOfSize:13];
         [one yy_setTextHighlightRange:NSMakeRange(0, 11)
                                 color:UI_MAIN_COLOR
@@ -436,7 +436,7 @@
                                 [loanMoneyViewModel getProductProtocol:paramArray];
                              
                             }];
-        [one yy_setTextHighlightRange:NSMakeRange(12, 8)
+        [one yy_setTextHighlightRange:NSMakeRange(12, 6)
                                 color:UI_MAIN_COLOR
                       backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                           DLog(@"三方协议");

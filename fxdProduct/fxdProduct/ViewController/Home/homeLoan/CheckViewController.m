@@ -358,7 +358,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             if([_userStateModel.platform_type isEqualToString:@"2"] || [_userStateModel.platform_type isEqualToString:@"0"]){
                 if ([_userStateModel.platform_type isEqualToString:@"0"]) {
                     attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《借款协议》"];
-                    range = NSMakeRange(attributeStr.length - 8, 8);
+                    range = NSMakeRange(attributeStr.length - 6, 6);
                 }
                 if ([_userStateModel.platform_type isEqualToString:@"2"]) {
                     attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《信用咨询及管理服务协议》"];
