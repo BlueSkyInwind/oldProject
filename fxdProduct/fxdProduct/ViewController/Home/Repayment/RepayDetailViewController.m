@@ -772,6 +772,9 @@
     
     //合规的还款增加两个参数
     if ([_model.platform_type isEqualToString:@"2"]) {
+        if (!smsSeq) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
+        }
         paymentDetailModel.sms_code_ =  verfiyCode;
         paymentDetailModel.sms_seq_ = smsSeq;
         paymentDetailModel.account_card_id_ =_queryCardInfoModel.result.accountCardId;
