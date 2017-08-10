@@ -68,6 +68,11 @@
 @property (nonatomic, strong) YYLabel *agreementLabel;
 
 @property (nonatomic, assign)BOOL userCheckBtnState;
+@property (weak, nonatomic) IBOutlet UIButton *firstAgreemwntBtn;
+@property (weak, nonatomic) IBOutlet UIButton *secondAgreemwntBtn;
 
+@property (weak, nonatomic) IBOutlet UIView *agreementView;
+@property (weak, nonatomic) IBOutlet UILabel *agreementDescLabel;
+@property (weak, nonatomic) IBOutlet UIView *agreementsView;
 
 @end
