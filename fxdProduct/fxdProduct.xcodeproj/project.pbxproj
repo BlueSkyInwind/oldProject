@@ -604,6 +604,10 @@
 		84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
+		CC0346261F3C4CB8001F6F3D /* FirstBorrowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0346241F3C4CB8001F6F3D /* FirstBorrowViewController.m */; };
+		CC0346271F3C4CB8001F6F3D /* FirstBorrowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0346251F3C4CB8001F6F3D /* FirstBorrowViewController.xib */; };
+		CC0346281F3C4CDF001F6F3D /* FirstBorrowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0346251F3C4CB8001F6F3D /* FirstBorrowViewController.xib */; };
+		CC0346291F3C4FBF001F6F3D /* FirstBorrowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0346241F3C4CB8001F6F3D /* FirstBorrowViewController.m */; };
 		CC0DF9571EA5B1090024841A /* RepaymentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEDCF1D1C197F5000014A87 /* RepaymentViewCell.m */; };
 		CC0DF9581EA5B1090024841A /* DetailRepayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636FD1D78287D00E93289 /* DetailRepayViewController.m */; };
 		CC0DF9591EA5B1090024841A /* ProductListResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6379639C1CABAFE9002A5910 /* ProductListResult.m */; };
@@ -2281,6 +2285,9 @@
 		84A635101F00FCA200146A8A /* AuthenticationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewModel.m; sourceTree = "<group>"; };
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
+		CC0346231F3C4CB8001F6F3D /* FirstBorrowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstBorrowViewController.h; sourceTree = "<group>"; };
+		CC0346241F3C4CB8001F6F3D /* FirstBorrowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstBorrowViewController.m; sourceTree = "<group>"; };
+		CC0346251F3C4CB8001F6F3D /* FirstBorrowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstBorrowViewController.xib; sourceTree = "<group>"; };
 		CC0DFB971EA5B1090024841A /* fxdProductDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fxdProductDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0F1B971EE64A2A00A23651 /* ChangePasswordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordModel.h; sourceTree = "<group>"; };
 		CC0F1B981EE64A2A00A23651 /* ChangePasswordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordModel.m; sourceTree = "<group>"; };
@@ -4601,6 +4608,9 @@
 				63F2548A1E49CD2C00852CF1 /* LoanProcessViewController.h */,
 				63F2548B1E49CD2C00852CF1 /* LoanProcessViewController.m */,
 				63F2548C1E49CD2C00852CF1 /* LoanProcessViewController.xib */,
+				CC0346231F3C4CB8001F6F3D /* FirstBorrowViewController.h */,
+				CC0346241F3C4CB8001F6F3D /* FirstBorrowViewController.m */,
+				CC0346251F3C4CB8001F6F3D /* FirstBorrowViewController.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -5307,6 +5317,7 @@
 				63F2548E1E49CD2C00852CF1 /* LoanProcessViewController.xib in Resources */,
 				63FE3DF11E48821B009E5B82 /* DaysCell.xib in Resources */,
 				6391F77E1D348B4E0097C943 /* bank_code_9@2x.png in Resources */,
+				CC0346271F3C4CB8001F6F3D /* FirstBorrowViewController.xib in Resources */,
 				0F6AAF3A1C30D8950060F137 /* MyCardCell.xib in Resources */,
 				63E640C31DCACF2300783E9D /* ReplenishViewController.xib in Resources */,
 				63B65DED1D518D8B00207231 /* ExpressViewController.xib in Resources */,
@@ -5439,6 +5450,7 @@
 				CC0DFB441EA5B1090024841A /* DaysCell.xib in Resources */,
 				CC0DFB451EA5B1090024841A /* bank_code_9@2x.png in Resources */,
 				CC0DFB461EA5B1090024841A /* MyCardCell.xib in Resources */,
+				CC0346281F3C4CDF001F6F3D /* FirstBorrowViewController.xib in Resources */,
 				CC0DFB471EA5B1090024841A /* ReplenishViewController.xib in Resources */,
 				CC0DFB481EA5B1090024841A /* ExpressViewController.xib in Resources */,
 				CC0DFB491EA5B1090024841A /* PserInfoViewController.xib in Resources */,
@@ -5865,6 +5877,7 @@
 				6326C9EB1BF0B15700FD23A8 /* GetMoneyProcessBaseClass.m in Sources */,
 				63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */,
 				63FC25031D98F7E9006F58F3 /* YYLabel.m in Sources */,
+				CC0346261F3C4CB8001F6F3D /* FirstBorrowViewController.m in Sources */,
 				632DFF621E48500500E414B2 /* CycleTextCell.m in Sources */,
 				63441F9A1DAC7C8E0086D615 /* P2PAccountInfo.m in Sources */,
 				636B1B971C2D118000450358 /* ViewModelClass.m in Sources */,
@@ -6079,6 +6092,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC0346291F3C4FBF001F6F3D /* FirstBorrowViewController.m in Sources */,
 				8451682D1F2603BD0026B415 /* HGBankListModel.m in Sources */,
 				843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */,
 				846A90091F1F3D9F00896169 /* PayVerificationCodeCell.m in Sources */,
