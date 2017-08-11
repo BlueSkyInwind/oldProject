@@ -66,7 +66,8 @@
             make.height.equalTo(@18);
             make.left.equalTo(_userCheckBtn.mas_right).offset(5);
             make.right.equalTo(@(-10));
-            make.centerY.equalTo(_userCheckView.mas_centerY);
+            make.top.equalTo(_userCheckView.mas_top).offset(0);
+//            make.centerY.equalTo(_userCheckView.mas_centerY);
         }];
     }
     return _agreementLabel;
