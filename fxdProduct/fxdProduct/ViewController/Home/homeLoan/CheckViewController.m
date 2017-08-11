@@ -145,16 +145,71 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 -(void)clickFirstAgreementBtn{
 
-    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-    webView.urlStr = _liangzihuzhu_url;
-    [self.navigationController pushViewController:webView animated:true];
+    
+    NSDictionary *paramDic;
+    if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
+        if (_userSelectNum.integerValue == 0) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择借款周期"];
+            return;
+        }
+        paramDic = @{@"apply_id_":_userStateModel.applyID,
+                     @"product_id_":@"fxd_riskpro",
+                     @"protocol_type_":@"7",
+                     @"periods_":_userSelectNum};
+    }
+    if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
+        paramDic = @{@"apply_id_":_userStateModel.applyID,
+                     @"product_id_":@"fxd_riskpro",
+                     @"protocol_type_":@"7",
+                     @"periods_":@2};
+    }
+    
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+            DetailViewController *detailVC = [[DetailViewController alloc] init];
+            detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+    
 }
 
 -(void)clickSecondAgreementBtn{
     
-    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-    webView.urlStr = _liangzihuzhu_url;
-    [self.navigationController pushViewController:webView animated:true];
+    NSDictionary *paramDic;
+    if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
+        if (_userSelectNum.integerValue == 0) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择借款周期"];
+            return;
+        }
+        paramDic = @{@"apply_id_":_userStateModel.applyID,
+                     @"product_id_":@"fxd_skillpro",
+                     @"protocol_type_":@"6",
+                     @"periods_":_userSelectNum};
+    }
+    if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
+        paramDic = @{@"apply_id_":_userStateModel.applyID,
+                     @"product_id_":@"fxd_skillpro",
+                     @"protocol_type_":@"6",
+                     @"periods_":@2};
+    }
+    
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+            DetailViewController *detailVC = [[DetailViewController alloc] init];
+            detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+
 }
 
 
