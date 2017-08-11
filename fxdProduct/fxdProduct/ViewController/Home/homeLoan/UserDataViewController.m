@@ -543,7 +543,6 @@
                         cell.statusLabel.text = @"认证中";
                         cell.statusLabel.textColor = rgb(159, 160, 162);
                     }else if(_isZmxyAuth.integerValue == 3){
-                        
                         cell.statusLabel.text = @"未完成";
                         cell.statusLabel.textColor = rgb(159, 160, 162);
                     }
@@ -552,7 +551,6 @@
                     break;
         }
     }
-    
     return nil;
 }
 

@@ -32,7 +32,9 @@
     if ([Utility sharedUtility].userInfo.clientId && ![[Utility sharedUtility].userInfo.clientId isEqualToString:@""]) {
         
         loginParamModel.mobile_phone_ = number;
+//        loginParamModel.password_ = @"9aBmzMJ5FEP+vuTMs9Gndw==";
         loginParamModel.password_ = [DES3Util encrypt:password];
+
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
         loginParamModel.last_login_from_ = PLATFORM;
@@ -40,10 +42,10 @@
         loginParamModel.platform_type_ = PLATFORM;
         loginParamModel.BSFIT_DEVICEID = fingerPrint;
         
-
     } else {
         
         loginParamModel.mobile_phone_ = number;
+//        loginParamModel.password_ = @"9aBmzMJ5FEP+vuTMs9Gndw==";;
         loginParamModel.password_ = [DES3Util encrypt:password];
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
