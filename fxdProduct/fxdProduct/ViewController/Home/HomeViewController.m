@@ -48,7 +48,7 @@
 #import "HomeRefuseCell.h"
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "LoginViewModel.h"
-
+#import "FirstBorrowViewController.h"
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeRefuseCellDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
@@ -343,6 +343,7 @@
         _popView.closeBtn.hidden = YES;
         _popView.delegate = self;
         [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.result.files_.firstObject.file_store_path_]];
+//        _popView.imageView.image = [UIImage imageNamed:@"tanchuang"];
         _advTapToUrl = model.result.files_.firstObject.link_url_;
         _shareContent = model.result.content_;
         _popView.parentVC = self;
@@ -353,24 +354,31 @@
     }
 }
 
+- (void)imageTap
+{
+    DLog(@"广告图片点击");
+//    if ([_advTapToUrl hasPrefix:@"http://"] || [_advTapToUrl hasPrefix:@"https://"]) {
+//        FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+//        webView.urlStr = _advTapToUrl;
+//        webView.shareContent = _shareContent;
+//        [self.navigationController pushViewController:webView animated:true];
+//        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+//    }
+    
+    FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
+//    firstBorrowVC.url = files.file_store_path_;
+    [self.navigationController pushViewController:firstBorrowVC animated:YES];
+    [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+    
+}
+
+
 - (void)onClose
 {
     _count += 1;
     if (_count == 2) {
         _popView.closeBtn.hidden = false;
         [_countdownTimer invalidate];
-    }
-}
-
-- (void)imageTap
-{
-    DLog(@"广告图片点击");
-    if ([_advTapToUrl hasPrefix:@"http://"] || [_advTapToUrl hasPrefix:@"https://"]) {
-        FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-        webView.urlStr = _advTapToUrl;
-        webView.shareContent = _shareContent;
-        [self.navigationController pushViewController:webView animated:true];
-        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
     }
 }
 
@@ -619,14 +627,18 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     DLog(@"点击");
-    if (_bannerParse && _bannerParse.result.files_.count > 0) {
-        HomeBannerFiles *files = _bannerParse.result.files_[index];
-        if ([files.link_url_.lowercaseString hasPrefix:@"http"] || [files.link_url_.lowercaseString hasPrefix:@"https"]) {
-            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-            webView.urlStr = files.link_url_;
-            [self.navigationController pushViewController:webView animated:true];
-        }
-    }
+    HomeBannerFiles *files = _bannerParse.result.files_[index];
+    FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
+    firstBorrowVC.url = files.file_store_path_;
+    [self.navigationController pushViewController:firstBorrowVC animated:YES];
+//    if (_bannerParse && _bannerParse.result.files_.count > 0) {
+//        HomeBannerFiles *files = _bannerParse.result.files_[index];
+//        if ([files.link_url_.lowercaseString hasPrefix:@"http"] || [files.link_url_.lowercaseString hasPrefix:@"https"]) {
+//            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+//            webView.urlStr = files.link_url_;
+//            [self.navigationController pushViewController:webView animated:true];
+//        }
+//    }
 }
 
 #pragma mark ->我要借款... Action
@@ -830,6 +842,7 @@
     PopViewModel *popViewModel = [[PopViewModel alloc]init];
     [popViewModel setBlockWithReturnBlock:^(id returnValue) {
         HomePop *popParse = [HomePop yy_modelWithJSON:returnValue];
+        popParse.result.is_valid_ = @"1";
         [self popView:popParse];
     } WithFaileBlock:^{
         
