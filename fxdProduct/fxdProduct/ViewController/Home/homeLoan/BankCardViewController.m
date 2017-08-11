@@ -39,6 +39,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     ReturnMsgBaseClass *_codeParse;
     UserCardResult *_userCardModel;
     NSString *_bankCodeNUm;
+    NSString *_bankLogogram;
     NSString *_bankNum;
     NSInteger _cardFlag;
     NSInteger defaultBankIndex;
@@ -76,7 +77,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     [self.authorLabel addGestureRecognizer:tapSecory];
     
     [dataListAll3 replaceObjectAtIndex:5 withObject:@"100"];
-    
     
     if (![_flagString isEqualToString:@"1"]) {
         if (!_isP2P) {
@@ -349,6 +349,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
     _bankNum = bankInfo.bank_code_;
     _bankCodeNUm = bankInfo.bank_code_;
+    _bankLogogram = bankInfo.bank_short_name_;
     [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",(long)sectionRow]];
     [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
     [_tableView reloadData];
@@ -370,8 +371,8 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     if (!bankcard) {
         
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"SDK授权失败，请检查"];
-        
         return;
+        
     }
     
     __unsafe_unretained BankCardViewController * weakSelf = self;
@@ -570,7 +571,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 
     NSDictionary *parDic = @{@"mobile_phone_":dataListAll3[2],
                              @"flag":CODE_DRAW,
-                             
                              };
     if (parDic) {
         
@@ -612,13 +612,13 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的卡号"];
     }else if (![Tool isMobileNumber:dataListAll3[2]]){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的手机号"];
-    }else if ([dataListAll3[3] isEqualToString:@""]){
+    }else if ([dataListAll3[3] isEqualToString:@""] ){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
     }else if (!_btnStatus) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请同意授权书"];
     }else{
         
-        if(_isP2P){
+        if(_isP2P ){
 //        [self getFxdCaseInfo];
          [self openAccount];
         }else{
@@ -701,34 +701,25 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     //银行卡四要素验证
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
-            
             _userCardModel = [UserCardResult yy_modelWithJSON:object];
             if ([_userCardModel.flag isEqualToString:@"0000"]) {
                 for (NSInteger i = 0; i < _userCardModel.result.count; i++) {
-                    CardResult *cardResult = [_userCardModel.result objectAtIndex:i];
+                    CardResult *cardResult = [_userCardModel.result objectAtIndex:0];
                     if([cardResult.card_type_ isEqualToString:@"2"])
                     {
-                        if ([cardResult.if_default_ isEqualToString:@"1"]) {
-                            NSInteger j = -1;
-                            for (BankList *banlist in _bankModel.result) {
-                                j++;
-                                if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
-                                    //                                _selectCard
-                                    //                                    CardInfo *cardInfo = [[CardInfo alloc] init];
-                                    //                                    cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
-                                    //                                    cardInfo.bankName = banlist.desc;
-                                    //                                    cardInfo.cardIdentifier = cardResult.id_;
-                                    //                                    _selectCard = cardInfo;
-                                    [dataListAll3 replaceObjectAtIndex:1 withObject:cardResult.card_no_];
-                                    _bankCodeNUm = cardResult.card_bank_;
-                                    [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",j]];
-                                    [dataListAll3 replaceObjectAtIndex:0 withObject:banlist.desc];
-                                    [dataListAll3 replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%@",cardResult.bank_reserve_phone_]];
-                                }
+                        NSInteger j = -1;
+                        for (SupportBankList *banlist in _bankArray) {
+                            j++;
+                            if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
+                                [dataListAll3 replaceObjectAtIndex:1 withObject:cardResult.card_no_];
+                                _bankCodeNUm = cardResult.card_bank_;
+                                [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",j]];
+                                [dataListAll3 replaceObjectAtIndex:0 withObject:banlist.bank_name_];
+                                [dataListAll3 replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%@",cardResult.bank_reserve_phone_]];
                             }
-                            if (j == -1) {
-                                [dataListAll3 replaceObjectAtIndex:0 withObject:@""];
-                            }
+                        }
+                        if (j == -1) {
+                            [dataListAll3 replaceObjectAtIndex:0 withObject:@""];
                         }
                     }
                 }
@@ -770,10 +761,15 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 #pragma mark 开户
 -(void)openAccount{
 
-    NSString *bankName = [self bankName:_bankCodeNUm];
+    NSString *bankName = _bankLogogram;
 //    NSString *_sms_seq = @"AAAAAAAA";
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
     
+    //效验验证码序列号
+    if (!_sms_seq) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
+        return;
+    }
     NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@&mobile_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,bankName,bankNo,dataListAll3[3],_sms_seq,dataListAll3[2]];
     NSLog(@"%@",url);
     P2PViewController *p2pVC = [[P2PViewController alloc] init];
@@ -809,7 +805,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         
     }];
     [complianceViewModel getFXDCaseInfo];
-    
 }
 
 

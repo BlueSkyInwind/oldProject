@@ -133,9 +133,7 @@
                 {
                     for (SupportBankList *banlist in _supportBankListArr) {
                         if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-                            if ([cardResult.if_default_ isEqualToString:@"1"]) {
-                                _defaultCardIndex = j;
-                            }
+                            _defaultCardIndex = 0;
                             [_dataliat addObject:[self formatString:cardResult.card_no_]];
                             [_dataNumList addObject:cardResult.card_type_];
 //                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.bank_code_]];

@@ -439,7 +439,7 @@
 
 //    _ordsms_ext_ = @"666666AAAAAAAA";
 //    _sms_seq = @"AAAAAAAA";
-    if ([dataListAll3[3] isEqualToString:@""]) {
+    if ([dataListAll3[3] isEqualToString:@""] || !_sms_seq) {
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请输入正确的验证码"];
         return;
     }
