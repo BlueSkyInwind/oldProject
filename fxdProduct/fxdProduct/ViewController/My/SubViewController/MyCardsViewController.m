@@ -13,6 +13,7 @@
 #import "BankModel.h"
 #import "UserCardResult.h"
 #import "RepayWeeklyRecordViewModel.h"
+#import "SupportBankList.h"
 @interface MyCardsViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     //    BankCardInfoBaseClass
@@ -130,16 +131,15 @@
                 CardResult *cardResult = _userCardModel.result[j];
                 if([cardResult.card_type_ isEqualToString:@"2"])
                 {
-                    for (BankList *banlist in _bankModel.result) {
-                        if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
-                            if ([cardResult.if_default_ isEqualToString:@"1"]) {
-                                _defaultCardIndex = j;
-                            }
+                    for (SupportBankList *banlist in _supportBankListArr) {
+                        if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
+                            _defaultCardIndex = 0;
                             [_dataliat addObject:[self formatString:cardResult.card_no_]];
                             [_dataNumList addObject:cardResult.card_type_];
-                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.code]];
+//                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.bank_code_]];
+                            [_dataImageListBank addObject:banlist.icon_url_];
                             [_bankWitch addObject:@"银行卡"];
-                            [_bankWitchArray addObject:banlist.desc];
+                            [_bankWitchArray addObject:banlist.bank_name_];
                         }
                     }
                 }
@@ -200,7 +200,8 @@
 {
     
     MyCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCardCell"];
-    cell.iconImage.image = [UIImage imageNamed:[_dataImageListBank objectAtIndex:indexPath.row]];
+//    cell.iconImage.image = [UIImage imageNamed:[_dataImageListBank objectAtIndex:indexPath.row]];
+    [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[_dataImageListBank objectAtIndex:indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
     cell.bankCompanyLabel.text = _bankWitchArray[indexPath.row];
     cell.bankNum.text =_dataliat[indexPath.row];
     cell.banklist.text =_bankWitch[indexPath.row];

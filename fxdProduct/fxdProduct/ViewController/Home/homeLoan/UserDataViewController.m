@@ -28,7 +28,7 @@
 #import "RateModel.h"
 #import "DataWriteAndRead.h"
 #import "SesameCreditViewController.h"
-
+#import "HomeProductList.h"
 
 @interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate>
 {
@@ -75,6 +75,12 @@
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     topView = [[UIView alloc] init];
     [self.view addSubview:topView];
+    
+    if (_isMine) {
+        
+        _applyBtn.enabled = NO;
+        _applyBtn.hidden = YES;
+    }
     
 }
 
@@ -136,6 +142,29 @@
     [super viewWillAppear:animated];
     [_tableView.mj_header beginRefreshing];
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+    [self getHomeProductList];
+}
+
+
+/**
+ 获取首页产品列表
+ */
+-(void)getHomeProductList{
+    
+    ProductListViewModel *productListViewModel = [[ProductListViewModel alloc]init];
+    [productListViewModel setBlockWithReturnBlock:^(id returnValue) {
+      HomeProductList *homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
+
+        if ([homeProductList.result.type isEqualToString:@"1"]) {
+            _applyBtn.enabled = NO;
+            _applyBtn.hidden = YES;
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:homeProductList.result.refuseMsg];
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [productListViewModel fetchProductListInfo];
 }
 
 
@@ -376,9 +405,7 @@
     } WithFaileBlock:^{
         
     }];
-
     [homeViewModel fetchUserState:[paramDic objectForKey:@"product_id_"] ];
-
 }
 
 - (void)goCheckVC:(UserStateModel *)model
@@ -603,7 +630,7 @@
             }
         }
             break;
-            case 5:
+        case 5:
             if (_isZmxyAuth.integerValue == 2||processFlot ==1) {
                 
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
@@ -720,7 +747,6 @@
             if (_nextStep.integerValue == 4) {
                 _isInfoEditable = [[object objectForKey:@"result"] objectForKey:@"isInfoEditable"];
             }
-        
             [self setProcess];
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];

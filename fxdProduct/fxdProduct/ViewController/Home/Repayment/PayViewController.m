@@ -145,8 +145,7 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
     if (!_isP2P) {
         
         PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-        payMethodVC.bankModel = _bankCardModel;
-        
+        payMethodVC.supportBankListArr = _supportBankListArr;
         
         if (_payType == PayTypeWeekPay || _payType == PayTypeCleanPay) {
             payMethodVC.payMethod = PayMethodNormal;

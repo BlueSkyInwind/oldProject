@@ -104,7 +104,8 @@ UIKIT_EXTERN NSString * const       _checkVersion_jhtml;                     //�
 UIKIT_EXTERN NSString * const       _drawApplyAgain_jhtml;                   //二次提款
 UIKIT_EXTERN NSString * const       _getUserRedpacket_url;                   //红包获取
 UIKIT_EXTERN NSString * const       _caseStatusUpdateApi_url;                //申请件状态更新
-UIKIT_EXTERN NSString * const       _getBankList_url;                        //银行卡获取接口
+UIKIT_EXTERN NSString * const       _getBankList_url;                        //银行卡获取接口   _getSupportBankList_url
+UIKIT_EXTERN NSString * const       _getSupportBankList_url;                        //获取银行卡支持列表
 UIKIT_EXTERN NSString * const       _saveInputBackInfo_url;                  //输入框埋点
 UIKIT_EXTERN NSString * const       _getContractStagingInfo_url;             //合同及期供信息查询接口
 UIKIT_EXTERN NSString * const       _doRepayOrSettle_url;                    //还款结清接口
@@ -162,6 +163,7 @@ UIKIT_EXTERN NSString * const       _sendSms_url;                     //发送�
 UIKIT_EXTERN NSString * const       _bankCards_url;                     //换绑银行卡
 UIKIT_EXTERN NSString * const       _huifu_url;                    //用户开户接口
 UIKIT_EXTERN NSString * const       _queryCardInfo_url;                    //银行卡查询接口
+UIKIT_EXTERN NSString * const       _queryCardListInfo_url;                    //合规银行卡列表信息
 UIKIT_EXTERN NSString * const       _accountHSService_url;                    //用户状态查询接口
 UIKIT_EXTERN NSString * const       _paymentService_url;                    //主动还款接口
 UIKIT_EXTERN NSString * const       _cash_url;                    //取现

@@ -18,6 +18,7 @@
 #import <MGBaseKit/MGBaseKit.h>
 #import <MGBankCard/MGBankCard.h>
 #import "UnbundlingBankCardViewModel.h"
+#import "CheckViewModel.h"
 @interface EditCardsController ()<UITableViewDataSource,UITableViewDelegate,BankTableViewSelectDelegate,WTCameraDelegate,UITextFieldDelegate>
 {
     NSInteger _countdown;
@@ -31,6 +32,7 @@
     NSString *_currentCardNum;
     NSInteger _cardFlag;
     BankModel *_bankCardModel;
+    NSMutableArray * supportBankListArr;
     BOOL _btnStatus;
 }
 @end
@@ -51,6 +53,7 @@
     {
         self.title=@"添加银行卡";
     }
+    supportBankListArr = [NSMutableArray array];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.automaticallyAdjustsScrollViewInsets=NO;
@@ -67,19 +70,23 @@
 
 - (void)fatchCardInfo
 {
-    UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
-    [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _bankCardModel = [BankModel yy_modelWithJSON:returnValue];
-        if ([_bankCardModel.flag isEqualToString:@"0000"]) {
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResult.flag isEqualToString:@"0000"]) {
+            NSArray * array  = (NSArray *)baseResult.result;
+            for (int i = 0; i < array.count; i++) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                [supportBankListArr addObject:bankList];
+            }
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_bankCardModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
         }
     } WithFaileBlock:^{
         
     }];
-    [unbundlingBankCardViewModel getBankList];
+    [checkBankViewModel getSupportBankListInfo:@"2"];
     
-
 }
 
 - (void)addBackItem
@@ -241,7 +248,7 @@
     //    {
     //        bankType.bankFlag=101;
     //    }
-    bankType.bankModel = _bankCardModel;
+    bankType.bankArray = supportBankListArr;
     [self.navigationController pushViewController:bankType animated:YES];
 }
 
@@ -385,10 +392,11 @@
 //    [self.tableView reloadData];
 //}
 
-- (void)BankSelect:(BankList *)bankInfo andSectionRow:(NSInteger)sectionRow
+- (void)BankSelect:(SupportBankList *)bankInfo andSectionRow:(NSInteger)sectionRow
 {
-    self.cardName = bankInfo.desc;//银行名字
-    self.cardCode = bankInfo.code;//银行编码
+    self.cardName = bankInfo.bank_name_;//银行名字
+    self.cardCode = bankInfo.bank_code_;//银行编码
+    self.cardLogogram = bankInfo.bank_short_name_; //银行缩写
     _cardFlag = sectionRow;
     DLog(@"%@ %@",self.cardName,self.cardCode);
     [self.tableView reloadData];

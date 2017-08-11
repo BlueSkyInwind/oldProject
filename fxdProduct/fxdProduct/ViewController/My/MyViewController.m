@@ -29,12 +29,13 @@
 #import "P2PViewController.h"
 #import "LoanMoneyViewController.h"
 #import "HomeViewModel.h"
-
+#import "SupportBankList.h"
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     NSArray *titleAry;
     NSArray *imgAry;
     BankModel *_bankCardModel;
+    NSMutableArray *_supportBankListArr;
     UserStateModel *_model;
 }
 @property (strong, nonatomic) IBOutlet UITableView *MyViewTable;
@@ -62,8 +63,10 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-
-    [self getApplyStatus];
+    if ([Utility sharedUtility].loginFlage) {
+        [self getApplyStatus:^(BOOL isSuccess, UserStateModel *resultModel) {
+        }];
+    }
 }
 #pragma mark - TableView
 
@@ -140,12 +143,15 @@
         if(indexPath.row==0) {
             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
             userDataVC.product_id = SalaryLoan;
+            userDataVC.isMine = YES;
             [self.navigationController pushViewController:userDataVC animated:true];
             
         }else if (indexPath.row == 1) {
+            //platform_type  2、合规   0、发薪贷
             if ([_model.platform_type isEqualToString:@"2"]) {
+                //applyStatus  7、8 待还款
                 if ([_model.applyStatus isEqualToString:@"7"]||[_model.applyStatus isEqualToString:@"8"]) {
-                    
+                    //查询用户状态
                     [self getFxdCaseInfo];
                 }else{
                 
@@ -153,10 +159,7 @@
                     repayRequest.targetVC = self;
                     [repayRequest repayRequest];
                 }
-                
-                
             }else{
-            
                 RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                 repayRequest.targetVC = self;
                 [repayRequest repayRequest];
@@ -165,9 +168,7 @@
         else if (indexPath.row == 2){
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:YES];
-        }
-
-        else {
+        }else {
             DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
         }
@@ -182,19 +183,27 @@
 
 - (void)fatchCardInfo
 {
-    NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        _bankCardModel = [BankModel yy_modelWithJSON:object];
-        if ([_bankCardModel.flag isEqualToString:@"0000"]) {
+
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResult.flag isEqualToString:@"0000"]) {
+            NSArray * array  = (NSArray *)baseResult.result;
+            _supportBankListArr = [NSMutableArray array];
+            for (int i = 0; i < array.count; i++) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                [_supportBankListArr addObject:bankList];
+            }
             MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
-            myCrad.bankModel = _bankCardModel;
+            myCrad.supportBankListArr = _supportBankListArr;
             [self.navigationController pushViewController:myCrad animated:YES];
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_bankCardModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
         }
-    } failure:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
+    } WithFaileBlock:^{
+        
     }];
+    [checkBankViewModel getSupportBankListInfo:@"2"];
 }
 
 #pragma mark 发标前查询进件
@@ -223,13 +232,13 @@
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
             
-            if ([model.result.flg isEqualToString:@"3"]) {
+            if ([model.result.flg isEqualToString:@"3"]) {//待激活
                 NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 p2pVC.isRepay = YES;
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
                 [self.navigationController pushViewController:p2pVC animated:YES];
-            }else if ([model.result.flg isEqualToString:@"12"]){
+            }else if ([model.result.flg isEqualToString:@"12"]){//处理中
             
                 LoanMoneyViewController *controller = [LoanMoneyViewController new];
                 controller.userStateModel = _model;
@@ -252,26 +261,24 @@
     [complianceViewModel getUserStatus:caseInfo];
 }
 
--(void)getApplyStatus{
+/**
+ 申请件状态查询
+ */
+
+-(void)getApplyStatus:(void(^)(BOOL isSuccess, UserStateModel *resultModel))finish{
     
-    HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
-    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        if([returnValue[@"flag"] isEqualToString:@"0000"])
+    [[FXDNetWorkManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_userState_url]   isNeedNetStatus:NO isNeedWait:NO parameters:nil finished:^(EnumServerStatus status, id object) {
+        if([object[@"flag"] isEqualToString:@"0000"])
         {
-            _model = [UserStateModel yy_modelWithJSON:returnValue[@"result"]];
-        
-            
+            _model = [UserStateModel yy_modelWithJSON:object[@"result"]];
+            finish(YES,_model);
         }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:object[@"msg"]];
         }
-    } WithFaileBlock:^{
+    } failure:^(EnumServerStatus status, id object) {
         
     }];
-    [homeViewModel fetchUserState:nil];
-    
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

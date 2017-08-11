@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BankList : NSObject
+@interface BankList : JSONModel
 
 @property (nonatomic, copy)NSString *desc;
 @property (nonatomic, copy)NSString *code;
+
+
+
 
 @end

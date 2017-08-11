@@ -23,9 +23,7 @@
 
 -(void)awakeFromNib{
     [super awakeFromNib];
-    
     [self configureView];
-    
 }
 
 #pragma mark - 师徒布局

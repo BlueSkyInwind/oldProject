@@ -11,7 +11,12 @@
 @interface WhiteRefuseView : UIView
 
 @property (weak, nonatomic) IBOutlet UIButton *applyBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *nameImage;
 
+@property (weak, nonatomic) IBOutlet UIImageView *contentImage;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *quatoLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *termLabel;
 
 @end

@@ -11,7 +11,7 @@
 @implementation BankCardsModel
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"data":[BankCardsDataModel class]};
+    return @{@"result":[BankCardsDataModel class]};
 }
 
 @end

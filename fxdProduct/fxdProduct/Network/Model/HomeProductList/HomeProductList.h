@@ -21,6 +21,10 @@
 
 
 @interface HomeProductListResult : NSObject
+/*导流判断*/
+@property (nonatomic , copy) NSString              * type;
+
+@property (nonatomic , copy) NSString              * refuseMsg;
 
 @property (nonatomic , strong) NSArray<HomeProductListProducts *> * products;
 
@@ -50,6 +54,12 @@
 @property (nonatomic , copy) NSString              * staging_top_;
 //是否超限
 @property (nonatomic , copy) NSString              * isOverLimit;
+//产品路径
+@property (nonatomic , copy) NSString              * out_operate_fee_;
+//产品路径
+@property (nonatomic , copy) NSString              * remark_;
+//产品路径
+@property (nonatomic , copy) NSString              * pre_service_fee_rate_;
 
 @end
 

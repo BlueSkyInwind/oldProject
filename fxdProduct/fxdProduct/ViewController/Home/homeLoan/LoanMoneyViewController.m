@@ -42,7 +42,7 @@
     Approval *_approvalModel;
     NSString *_cardNo;
     NSString *_cardBank;
-    BOOL _isFirst;
+    BOOL _isFirst;//好评只弹出一次，再次刷新时，不弹对话框
 }
 
 @property (nonatomic, copy)NSString *platform;
@@ -246,13 +246,12 @@
         if([_userCardModel.flag isEqualToString:@"0000"]){
             for(NSInteger j=0;j<_userCardModel.result.count;j++)
             {
-                CardResult *cardResult = _userCardModel.result[j];
+                CardResult *cardResult = _userCardModel.result[0];
                 if([cardResult.card_type_ isEqualToString:@"2"])
                 {
-                    if ([cardResult.if_default_ isEqualToString:@"1"]) {
-                        _cardNo = cardResult.card_no_;
-                        _cardBank = cardResult.card_bank_;
-                    }
+                    _cardNo = cardResult.card_no_;
+                    _cardBank = cardResult.card_bank_;
+                    break;
                 }
             }
         }
@@ -412,7 +411,7 @@
     [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     if ([model.platform_type isEqualToString:@"0"]) {
         moenyViewing.lableData.textAlignment = NSTextAlignmentLeft;
-        NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"《银行自动转账授权书》、《三方借款协议》"];
+        NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"《银行自动转账授权书》、《借款协议》"];
         one.yy_font = [UIFont systemFontOfSize:13];
         [one yy_setTextHighlightRange:NSMakeRange(0, 11)
                                 color:UI_MAIN_COLOR
@@ -437,7 +436,7 @@
                                 [loanMoneyViewModel getProductProtocol:paramArray];
                              
                             }];
-        [one yy_setTextHighlightRange:NSMakeRange(12, 8)
+        [one yy_setTextHighlightRange:NSMakeRange(12, 6)
                                 color:UI_MAIN_COLOR
                       backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                           DLog(@"三方协议");
@@ -482,9 +481,9 @@
                                 LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
                                 [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
                                     P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:returnValue];
-                                    if ([agreeModel.appcode isEqualToString:@"1"]) {
+                                    if ([agreeModel.result.appcode isEqualToString:@"1"]) {
                                         AgreeMentListViewController *agreeMentListViewController = [[AgreeMentListViewController alloc] init];
-                                        agreeMentListViewController.agreeMentArr = agreeModel.data.pactList;
+                                        agreeMentListViewController.agreeMentArr = agreeModel.result.pactList;
                                         [self.navigationController pushViewController:agreeMentListViewController animated:true];
                                     } else {
                                         
@@ -521,10 +520,14 @@
     [self presentViewController:alertController animated:true completion:nil];
 }
 
+/**
+ 我要还款按钮
+ */
 -(void)sureBtnClick:(UIButton *)sender
 {
+    //platform_type 2、合规平台  0发薪贷平台
     if ([model.platform_type isEqualToString:@"2"]) {
-        if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]) {
+        if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]) {//待激活用户
             
             NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
             P2PViewController *p2pVC = [[P2PViewController alloc] init];
@@ -550,11 +553,13 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    //platform_type 2、合规平台  0发薪贷平台
     if ([_userStateModel.platform_type isEqualToString:@"2"]) {
-        
+        //查询用户状态
         [self getFxdCaseInfo];
     }else{
     
+        //发薪贷申请件状态查询
         [self checkStatus];
     }
     

@@ -48,6 +48,10 @@
 #import "CheckViewModel.h"
 #import "SaveLoanCaseModel.h"
 #import "QryUserStatusModel.h"
+#import "HGBankListModel.h"
+#import "SupportBankList.h"
+
+
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
 //Apikey,您的APP使用SDK的API的权限
@@ -73,6 +77,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSMutableArray<NSNumber *> *_datalist;
     UserCardResult *_userCardModel;
     BankModel *_bankCardModel;
+    NSMutableArray *_supportBankListArr;
     UserCardResult *_userCardsModel;
     CardInfo *_selectCard;
     NSInteger defaultBankIndex;
@@ -113,7 +118,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     _moxieSDK = [[MoxieSDK shared] initWithUserID:[NSString stringWithFormat:@"%@_1",[Utility sharedUtility].userInfo.juid] mApikey:theMoxieApiKey controller:self];
     DLog(@"%@",_moxieSDK.mxSDKVersion);
     [self listenForResult];
-    
+
     if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
         for (int i = 1; i < 2; i++) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
@@ -138,10 +143,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     //http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767
     webView.urlStr = _liangzihuzhu_url;
     [self.navigationController pushViewController:webView animated:true];
+    
 }
 
 - (void)loadView
 {
+    
     UIScrollView *view = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     view.contentSize = CGSizeMake(_k_w, _k_h);
     view.backgroundColor = [UIColor whiteColor];
@@ -153,11 +160,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view = view;
     self.scrollView = view;
+    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
     if (_isSecondFailed) {
@@ -172,6 +181,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         }
     }
 //    [self getUserStatus];
+    
 }
 
 -(void)createUI
@@ -218,39 +228,30 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkFalse.moreInfoLabel.hidden = YES;
                 checkFalse.moreInfoBtn.hidden = YES;
                 checkFalse.promoteLabel.hidden = YES;
-                
-                NSString *productId;
-                if (_isSecondFailed) {
-                    productId = _product_id;
-                }else{
-                    productId = _userStateModel.product_id;
-                }
-                if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:WhiteCollarLoan]) {
+
+                checkFalse.seeView.hidden = YES;
+                checkFalse.jsdView.hidden = YES;
+                if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]){
                     
-                        if ([productId isEqualToString:SalaryLoan]) {
-                            checkFalse.seeView.hidden = NO;
-                            [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
-                        }else{
-                        
-                            [self getContent];
-                            checkFalse.jsdView.hidden = NO;
-                            [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
-                        }
-                }
-//                else{
-//                
-//                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-//                        
-//                        checkFalse.seeView.hidden = NO;
-//                        checkFalse.jsdView.hidden = YES;
-//                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
-//                    }else{
-//                    
-//                        checkFalse.seeView.hidden = YES;
-//                        checkFalse.jsdView.hidden = YES;
-//                    }
-//                }
+                        [self getContent];
+                        checkFalse.jsdView.hidden = NO;
+                        [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
+                    
+                }else{
                 
+                    //1表示不是渠道用户 0是渠道用户
+                    if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
+                        checkFalse.seeView.hidden = NO;
+                        checkFalse.jsdView.hidden = YES;
+                        [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                    }else{
+                        checkFalse.seeView.hidden = YES;
+                        checkFalse.jsdView.hidden = YES;
+                    }
+//                    checkFalse.seeView.hidden = NO;
+//                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
+                }
+
             }
             
             [self.view addSubview:checkFalse];
@@ -356,8 +357,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             
             if([_userStateModel.platform_type isEqualToString:@"2"] || [_userStateModel.platform_type isEqualToString:@"0"]){
                 if ([_userStateModel.platform_type isEqualToString:@"0"]) {
-                    attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《三方借款协议》"];
-                    range = NSMakeRange(attributeStr.length - 8, 8);
+                    attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《借款协议》"];
+                    range = NSMakeRange(attributeStr.length - 6, 6);
                 }
                 if ([_userStateModel.platform_type isEqualToString:@"2"]) {
                     attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《信用咨询及管理服务协议》"];
@@ -423,7 +424,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                             
                         }];
                     }
-                    
                 }];
             }];
             checkSuccess.agreementLabel.attributedText = attributeStr;
@@ -648,6 +648,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 - (void)getMoney
 {
+    //  platform_type  2、合规平台    0、发薪贷平台
     if([_userStateModel.platform_type isEqualToString:@"2"] || [_userStateModel.platform_type isEqualToString:@"0"]){
         if ([_userStateModel.platform_type isEqualToString:@"2"]) {
             [self integrationP2PUserState];
@@ -676,7 +677,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }else if ([_qryUserStatusModel.result.flg isEqualToString:@"6"]){//正常用户
         
         //选择银行卡
-        
         [self queryCardInfo];
         
     }else if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]){
@@ -691,17 +691,23 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 - (void)fatchCardInfo
 {
-    NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        _bankCardModel = [BankModel yy_modelWithJSON:object];
-        if ([_bankCardModel.flag isEqualToString:@"0000"]) {
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResult.flag isEqualToString:@"0000"]) {
+            NSArray * array  = (NSArray *)baseResult.result;
+            _supportBankListArr = [NSMutableArray array];
+            for (int i = 0; i < array.count; i++) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                [_supportBankListArr addObject:bankList];
+            }
             [self fatchUserCardList];
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_bankCardModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
         }
-    } failure:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
+    } WithFaileBlock:^{
     }];
+    [checkBankViewModel getSupportBankListInfo:@"2"];
 }
 
 - (void)fatchUserCardList
@@ -712,29 +718,27 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             if (_userCardsModel.result.count > 0) {
                 for(NSInteger j=0;j<_userCardsModel.result.count;j++)
                 {
-                    CardResult *cardResult = [_userCardsModel.result objectAtIndex:j];
+                    CardResult *cardResult = [_userCardsModel.result objectAtIndex:0];
                     if([cardResult.card_type_ isEqualToString:@"2"])
                     {
-                        if ([cardResult.if_default_ isEqualToString:@"1"]) {
-                            defaultBankIndex = j;
-                            for (BankList *banlist in _bankCardModel.result) {
-                                if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
-                                    //                                _selectCard
-                                    CardInfo *cardInfo = [[CardInfo alloc] init];
-                                    cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
-                                    cardInfo.bankName = banlist.desc;
-                                    cardInfo.cardIdentifier = cardResult.id_;
-                                    _selectCard = cardInfo;
-                                }
+                        defaultBankIndex = 0;
+                        for (SupportBankList *banlist in _supportBankListArr) {
+                            if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
+                                CardInfo *cardInfo = [[CardInfo alloc] init];
+                                cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
+                                cardInfo.bankName = banlist.bank_name_;
+                                cardInfo.cardIdentifier = cardResult.id_;
+                                _selectCard = cardInfo;
                             }
                         }
+                        break;
                     }
                 }
                 PayViewController *payVC = [[PayViewController alloc] init];
                 payVC.payType = PayTypeGetMoneyToCard;
                 payVC.isP2P = NO;
                 payVC.cardInfo = _selectCard;
-                payVC.bankCardModel = _bankCardModel;
+                payVC.supportBankListArr = _supportBankListArr;
                 if (userSelectIndex == -1) {
                     payVC.banckCurrentIndex = defaultBankIndex;
                 } else {
@@ -761,27 +765,17 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 payNC.view.frame = CGRectMake(0, 0, _k_w, 200);
                 [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
             } else {
-                NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-                [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                    BankModel *bankModel = [BankModel yy_modelWithJSON:object];
-                    if ([bankModel.flag isEqualToString:@"0000"]) {
-                        BankCardViewController *bankVC = [BankCardViewController new];
-                        bankVC.bankModel = bankModel;
-                        bankVC.periodSelect = _userSelectNum.integerValue;
-                        bankVC.purposeSelect = _purposeSelect;
-                        bankVC.userStateModel = _userStateModel;
-                        bankVC.isP2P = NO;
-                        //            bankVC.idString = _idString;
-                        bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
-                        [self.navigationController pushViewController:bankVC animated:YES];
-                    } else {
-                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
-                    }
-                } failure:^(EnumServerStatus status, id object) {
-                    DLog(@"%@",object);
-                }];
+                
+                BankCardViewController *bankVC = [BankCardViewController new];
+                bankVC.bankArray = _supportBankListArr;
+                bankVC.periodSelect = _userSelectNum.integerValue;
+                bankVC.purposeSelect = _purposeSelect;
+                bankVC.userStateModel = _userStateModel;
+                bankVC.isP2P = NO;
+                //            bankVC.idString = _idString;
+                bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
+                [self.navigationController pushViewController:bankVC animated:YES];
             }
-
         }else{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
         }
@@ -939,7 +933,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     return NO;
 }
 
-
 //分享函数
 -(void)shareContent:(UIButton*)tableView
 {
@@ -996,7 +989,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                             [view removeFromSuperview];
                         }
                     }
-
                     _userSelectNum = @0;
                     [self createUI];
                 }
@@ -1210,27 +1202,60 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 }
 
-
 #pragma  mark - 白领贷拒绝导流
 -(void)clickApplyImmediate{
 
-    UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-    userDataVC.product_id = SalaryLoan;
-    [self.navigationController pushViewController:userDataVC animated:true];
+    if([_userStateModel.product_id isEqualToString:SalaryLoan]){
+        
+        [self fatchRate:^(RateModel *rate) {
+            PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+            payLoanview.product_id = RapidLoan;
+            payLoanview.userState = _userStateModel;
+            payLoanview.rateModel = rate;
+            [self.navigationController pushViewController:payLoanview animated:true];
+        }];
+        
+        
+    }else{
+        
+        UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+        userDataVC.product_id = SalaryLoan;
+        [self.navigationController pushViewController:userDataVC animated:true];
+        
+    }
+//    UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+//    userDataVC.product_id = SalaryLoan;
+//    [self.navigationController pushViewController:userDataVC animated:true];
 }
 
 #pragma  mark - 白领贷拒绝导流工薪贷的详情
 -(void)getContent{
+    NSString *product;
+    if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
+        product = RapidLoan;
+    }else{
     
-     NSDictionary *dic = @{@"priduct_id_":SalaryLoan};
+        product = SalaryLoan;
+    }
+     NSDictionary *dic = @{@"priduct_id_":product};
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         
         if ([rateParse.flag isEqualToString:@"0000"]) {
             
             checkFalse.nameLabel.text = rateParse.result.name_;
-            checkFalse.quotaLabel.text = [NSString stringWithFormat:@"%ld-%ld元",rateParse.result.principal_bottom_,rateParse.result.principal_top_];
-            checkFalse.termLabel.text = [NSString stringWithFormat:@"%ld-%ld%@",rateParse.result.staging_bottom_,rateParse.result.staging_top_,rateParse.result.remark_];
+            if ([product isEqualToString:RapidLoan]) {
+                checkFalse.nameImage.image = [UIImage imageNamed:@"home_02"];
+                checkFalse.homeImage.image = [UIImage imageNamed:@"home_05"];
+                checkFalse.quotaLabel.text = @"500-1000元";
+                checkFalse.termLabel.text = @"14天";
+            }else{
+            
+                checkFalse.homeImage.image = [UIImage imageNamed:@"home_04"];
+                checkFalse.nameImage.image = [UIImage imageNamed:@"home_01"];
+                checkFalse.quotaLabel.text = [NSString stringWithFormat:@"%ld-%ld元",rateParse.result.principal_bottom_,rateParse.result.principal_top_];
+                checkFalse.termLabel.text = [NSString stringWithFormat:@"%ld-%ld%@",rateParse.result.staging_bottom_,rateParse.result.staging_top_,rateParse.result.remark_];
+            }
             
             
         } else {
@@ -1264,7 +1289,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
         }
-        
     } failure:^(EnumServerStatus status, id object) {
         
     }];
@@ -1309,7 +1333,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 
             }
         }else{
-            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
     } WithFaileBlock:^{
@@ -1318,8 +1341,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     [complianceViewModel getUserStatus:caseInfo];
 }
-
-
 
 
 #pragma mark 发标前查询进件
@@ -1350,10 +1371,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
         SaveLoanCaseModel *model = [SaveLoanCaseModel yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
-            if ([type isEqualToString:@"20"]) {
+            if ([type isEqualToString:@"20"]) {//未开户
                 //绑定银行卡
                 [self getBankListInfo];
-            }else if ([type isEqualToString:@"10"]){
+            }else if ([type isEqualToString:@"10"]){//待激活
             
                 NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
@@ -1386,30 +1407,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        BankModel *bankModel = [BankModel yy_modelWithJSON:returnValue];
-        if ([bankModel.flag isEqualToString:@"0000"]) {
-            
-            NSArray *bankArray = @[@"中国银行",@"中国工商银行",@"中国建设银行",@"中国农业银行",@"中信银行",@"兴业银行",@"中国光大银行"];
-            NSMutableArray *array = [NSMutableArray array];
-            for (int i = 0; i<bankModel.result.count; i++) {
-                BankList *bankList = bankModel.result[i];
-                for (int j = 0; j<bankArray.count; j++) {
-                    if ([bankList.desc isEqualToString:bankArray[j]]) {
-                        [array addObject:bankList];
-                        
-                    }
-                }
-                
+        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResult.flag isEqualToString:@"0000"]) {
+            NSMutableArray * bankArr = [NSMutableArray array];
+            NSArray * array  = (NSArray *)baseResult.result;
+            for (int i = 0; i < array.count; i++) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                [bankArr addObject:bankList];
             }
-            [bankModel.result removeAllObjects];
-            for (BankList *bank in array) {
-                
-                [bankModel.result addObject:bank];
-            }
-            
             BankCardViewController *bankVC = [BankCardViewController new];
-            bankVC.bankModel = bankModel;
+            bankVC.bankArray = bankArr;
             bankVC.periodSelect = _userSelectNum.integerValue;
             bankVC.purposeSelect = _purposeSelect;
             bankVC.userStateModel = _userStateModel;
@@ -1418,44 +1425,37 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             //            bankVC.idString = _idString;
             bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
             [self.navigationController pushViewController:bankVC animated:YES];
+
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:bankModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
         }
-        
     } WithFaileBlock:^{
         
     }];
-    [checkBankViewModel getBankListInfo];
+    [checkBankViewModel getSupportBankListInfo:@"4"];
 }
 
 
 #pragma mark 弹出合规银行卡列表viewmodel
 -(void)queryCardInfo{
-
+ 
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
-        NSString *bankName = [self bankName:model.data.UsrCardInfolist.BankId];
+        NSString *bankName = model.result.UsrCardInfolist.bankName;
         PayViewController *payVC = [[PayViewController alloc] init];
         payVC.payType = PayTypeGetMoneyToCard;
         payVC.isP2P = YES;
         payVC.bankName = bankName;
-        NSString *bank = model.data.UsrCardInfolist.CardId;
+        NSString *bank = model.result.UsrCardInfolist.CardId;
         payVC.banNum = [bank substringFromIndex:bank.length-4];
-        
         payVC.makesureBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){
-            
             [self dismissSemiModalViewWithCompletion:^{
-                
                 [self saveLoanCase:@"30" caseInfo:_caseInfo];
-
             }];
-            
         };
-        
         payVC.changeBankBlock = ^(){
-            
             UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
             controller.queryCardInfo = model;
             controller.isCheck = YES;

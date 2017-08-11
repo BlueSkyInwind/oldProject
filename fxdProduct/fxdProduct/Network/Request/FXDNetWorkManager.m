@@ -14,6 +14,10 @@
 #import "GTMBase64.h"
 #import "DataWriteAndRead.h"
 
+@interface FXDNetWorkManager(){
+    MBProgressHUD * _requestWaitView;
+}
+@end
 @implementation FXDNetWorkManager
 
 + (FXDNetWorkManager *)sharedNetWorkManager
@@ -46,6 +50,105 @@
     return _waitView;
     
 }
+-(void)removeWaitView{
+    if (_requestWaitView) {
+        [_requestWaitView removeFromSuperview];
+    }
+}
+
+- (void)DataRequestWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus isNeedWait:(BOOL)isNeedWait parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
+{
+    DLog(@"%d",[Utility sharedUtility].userInfo.isUpdate);
+    //版本强制更新
+    if ([Utility sharedUtility].userInfo.isUpdate) {
+        [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前使用版本太低,请前往APP Store更新后再使用!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+            if (index == 1) {
+                return;
+            }
+        }];
+    }
+    // 网络判断
+    if (![Utility sharedUtility].networkState && isNeedNetStatus) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
+        return;
+    }
+    
+    if (isNeedWait) {
+        MBProgressHUD *_waitView = [self loadingHUD];
+        [_waitView show:YES];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
+    }
+
+    NSDictionary *paramDic = [NSDictionary dictionary];
+    DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    if (parameters) {
+        if ([Tool dicContainsKey:parameters keyValue:@"Encrypt"]) {
+            NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
+            [muDic removeObjectForKey:@"Encrypt"];
+            paramDic = [muDic copy];
+        } else {
+            paramDic = [Tool getParameters:parameters];
+        }
+    }
+    DLog(@"加密后参数:---%@",paramDic);
+    //        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
+    //        securityPolicy.allowInvalidCertificates = YES;
+    //        securityPolicy setPinnedCertificates:
+    //        securityPolicy.validatesDomainName = YES;
+    //        manager.securityPolicy = securityPolicy;
+    //            manager.requestSerializer=[AFHTTPRequestSerializer serializer];
+    
+    DLog(@"juid --- %@\n token --- %@",[Utility sharedUtility].userInfo.juid,[Utility sharedUtility].userInfo.tokenStr);
+    if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
+        if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
+            [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
+            [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
+        }
+    }
+    //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
+    
+    manager.requestSerializer.timeoutInterval = 30.0;
+    DLog(@"%@",parameters);
+    [manager POST:strURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {
+            UIViewController *vc = [self getCurrentVC];
+            [vc.navigationController popToRootViewControllerAnimated:YES];
+            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+                if (index == 1) {
+                    [EmptyUserData EmptyData];
+                    
+                    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+                    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
+                    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
+                        [self removeWaitView];
+                    }];
+                }
+            }];
+        }
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        DLog(@"response json --- %@",jsonStr);
+        //            [Tool dataToDictionary:responseObject]
+        finished(Enum_SUCCESS,responseObject);
+        [self removeWaitView];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(Enum_FAIL,error);
+        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
+        DLog(@"error---%@",error.description);
+        [self removeWaitView];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
+    }];
+}
+
 
 - (void)POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
 {
@@ -64,9 +167,9 @@
             MBProgressHUD *_waitView = [self loadingHUD];
             [_waitView show:YES];
             [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+            
             NSDictionary *paramDic = [NSDictionary dictionary];
             DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
-            
             
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -89,15 +192,15 @@
             //            manager.requestSerializer=[AFHTTPRequestSerializer serializer];
             
             DLog(@"juid --- %@\n token --- %@",[Utility sharedUtility].userInfo.juid,[Utility sharedUtility].userInfo.tokenStr);
+            
             if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
                 if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
                     [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
                     [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
                 }
             }
-            //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
-            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
             
+            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
             manager.requestSerializer.timeoutInterval = 30.0;
             DLog(@"%@",parameters);
             [manager POST:strURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -157,8 +260,6 @@
             [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
             DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
             
-            
-            
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -183,6 +284,7 @@
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
                                 [_waitView removeFromSuperview];
+                                
                             }];
                         }
                     }];
@@ -283,7 +385,6 @@
         }
         DLog(@"加密后参数:---%@",paramDic);
         
-        
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         //        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
@@ -334,7 +435,6 @@
         }];
     }
 }
-
 
 - (void)POSTUpLoadImage:(NSString *)strURL FilePath:(NSDictionary *)images  parameters:(id)parameters finished:(FinishedBlock)finshed failure:(FailureBlock)failure
 {
@@ -394,7 +494,6 @@
     }
 }
 
-
 - (void)P2POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
 {
     DLog(@"%d",[Utility sharedUtility].userInfo.isUpdate);
@@ -418,7 +517,6 @@
             //                paramDic = [Tool getParameters:parameters];
             //            }
             //            DLog(@"加密后参数:---%@",paramDic);
-            
             
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             //        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];

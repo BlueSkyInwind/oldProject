@@ -28,7 +28,7 @@
     [self.immediateAuthorizationBtn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
     
 }
-#pragma mark - 获取首页产品列表
+#pragma mark -
 -(void)click{
     
         DLog(@"%@",self.navigationController.viewControllers);

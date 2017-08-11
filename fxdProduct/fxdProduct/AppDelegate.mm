@@ -41,6 +41,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
@@ -48,12 +49,13 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     [self monitorNetworkState];
     self.window.rootViewController = [UIViewController new];
     
+//    [self heguiceshi];
+
     [self tripartiteInitialize];
 
     [[IQKeyboardManager sharedManager] setToolbarManageBehaviour:IQAutoToolbarByPosition];
     [[IQKeyboardManager sharedManager]setShouldResignOnTouchOutside:true];
     [IQKeyboardManager sharedManager].shouldToolbarUsesTextFieldTintColor = true;
-
 
     if (!kiOS8Later) {
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:nil message:@"您的系统版本太低,请升级至iOS8.0以上使用!" preferredStyle:UIAlertControllerStyleAlert];
@@ -129,6 +131,13 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
         }
         DLog(@"%@",record);
     }
+}
+
+-(void)heguiceshi{
+    
+    [Utility sharedUtility].userInfo.juid = @"ab6a0ee1ecaa48069b1af882375891c4";
+    [Utility sharedUtility].userInfo.tokenStr = [NSString stringWithFormat:@"%@token",@"ab6a0ee1ecaa48069b1af882375891c4"];
+    [Utility sharedUtility].loginFlage = YES;
 }
 
 //- (BOOL)application:(UIApplication *)application

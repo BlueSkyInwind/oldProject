@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SupportBankList.h"
 @class BankModel;
 @class CardInfo;
 
@@ -22,6 +23,7 @@ typedef void(^BankSelectBlock)(CardInfo *cardInfo, NSInteger currentIndex);
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong)BankModel *bankModel;
+@property (nonatomic, strong)NSMutableArray *supportBankListArr;
 
 @property (nonatomic, assign) NSInteger currentIndex;
 

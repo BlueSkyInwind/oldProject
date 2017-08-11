@@ -10,12 +10,9 @@
 @class SendSmsDataModel;
 @interface SendSmsModel : NSObject
 
-//结果对照码   1发送成功 -1发送失败
-@property (nonatomic,copy)NSString *appcode;
-//结果描述
-@property (nonatomic,copy)NSString *appmsg;
-//短信序列号
-@property (nonatomic,strong)SendSmsDataModel *data;
+@property (nonatomic,copy)NSString *flag;
+
+@property (nonatomic,strong)SendSmsDataModel *result;
 
 @end
 

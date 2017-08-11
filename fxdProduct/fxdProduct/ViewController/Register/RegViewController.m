@@ -86,10 +86,29 @@
     self.passIcon.image = [[UIImage imageNamed:@"1_Signin_icon_03"] imageWithTintColor:UI_MAIN_COLOR];
     self.invIcon.image = [[UIImage imageNamed:@"1_Signin_icon_07"] imageWithTintColor:UI_MAIN_COLOR];
     
+    self.verCodeText.delegate = self;
+    [self.verCodeText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventEditingChanged];
+    self.phoneNumText.delegate = self;
+    [self.phoneNumText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventEditingChanged];
+    
     [self setPicVerifyCode];
     [self setLabel];
     [self setUISignal];
     
+}
+
+-(void)changTextField:(UITextField *)textField{
+
+    if (textField == self.verCodeText) {
+        if (textField.text.length>6) {
+            self.verCodeText.text = [textField.text substringToIndex:6];
+        }
+    }
+    if (textField == self.phoneNumText) {
+        if (textField.text.length>11) {
+            self.phoneNumText.text = [textField.text substringToIndex:11];
+        }
+    }
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -106,7 +125,7 @@
 }
 
 /**
- *  @author dd, 16-01-21 13:01:34
+ *  @author dd, 16-01-21 13:01:3
  *
  *  设置注册协议Label相关属性
  */
@@ -128,7 +147,20 @@
     self.regSecoryLabel.userInteractionEnabled=YES;
     [self.regSecoryLabel addGestureRecognizer:tapSecory];
 }
-
+-(BOOL)checkMoblieNumber:(NSString *)number{
+    
+    NSString * numStr = @"^\\d{5,11}$";
+    
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numStr];
+    
+    if ([regextestmobile evaluateWithObject:number] == YES) {
+        NSLog(@"sucess %@",number);
+        return YES;
+    }else{
+        NSLog(@"false %@",number);
+        return NO;
+    }
+}
 /**
  *  @author dd, 16-01-21 13:01:21
  *
@@ -137,7 +169,8 @@
 - (void)setUISignal
 {
     RACSignal *validUserNameSignal = [self.phoneNumText.rac_textSignal map:^id(NSString *value) {
-        return @([Tool isMobileNumber:value]);
+//        return @([Tool isMobileNumber:value]);
+        return @([self checkMoblieNumber:value]);
     }];
     
     RACSignal *validPicTextSignal = [self.picCodeText.rac_textSignal map:^id(NSString *value) {
@@ -165,7 +198,7 @@
     }];
     
     RACSignal *validVerCodeSignal = [self.verCodeText.rac_textSignal map:^id(NSString *value) {
-        return @(value.length >5);
+        return @(value.length >3);
     }];
     
     RACSignal *validPassWordSignal = [self.passText.rac_textSignal map:^id(NSString *value) {
@@ -180,7 +213,6 @@
         return regActive;
     }];
 }
-
 
 -(void)clickurl:(id)sender
 {
@@ -322,7 +354,7 @@
         
         if ([_phoneNumText.text length] != 11) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号!"];
-        }else if ([_verCodeText.text length] != 6){
+        }else if ([_verCodeText.text isEqualToString:@""]){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码!"];
         }else if ([_passText.text length] < 6 || [_passText.text length] > 16){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入新设置密码!"];

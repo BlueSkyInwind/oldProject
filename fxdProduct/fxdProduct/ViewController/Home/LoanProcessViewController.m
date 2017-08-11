@@ -16,6 +16,7 @@
 #import "HomeViewModel.h"
 #import "UserStateModel.h"
 #import "ExpressCreditRefuseView.h"
+#import "PayLoanChooseController.h"
 @interface LoanProcessViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIView *_noneView;
@@ -131,16 +132,12 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
     if (_isRefuse) {
-        if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
-            return 100;
-        }else if([_userStateModel.product_id isEqualToString:WhiteCollarLoan]){
-        
+        if ([_userStateModel.product_id isEqualToString:SalaryLoan] || [_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
             return 190;
         }else{
-        
-            return 0;
+            return 100;
         }
-        
+
     }else{
         return 0;
     }
@@ -149,15 +146,32 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    if ([_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {//白领贷
-        
+    if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {//工薪贷
+
         WhiteRefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"WhiteRefuseView" owner:self options:nil]lastObject];
         refuseView.frame = CGRectZero;
         [Tool setCorner:refuseView.applyBtn borderColor:UI_MAIN_COLOR];
         [refuseView.applyBtn addTarget:self action:@selector(applyBtn) forControlEvents:UIControlEventTouchUpInside];
+        if([_userStateModel.product_id isEqualToString:SalaryLoan]){
+        
+            refuseView.nameImage.image = [UIImage imageNamed:@"home_02"];
+            refuseView.nameLabel.text = @"急速贷";
+            refuseView.contentImage.image = [UIImage imageNamed:@"home_05"];
+            refuseView.quatoLabel.text = @"500-1000元";
+            refuseView.termLabel.text = @"14天";
+            
+        }else{
+        
+            refuseView.nameImage.image = [UIImage imageNamed:@"home_01"];
+            refuseView.nameLabel.text = @"工薪贷";
+            refuseView.contentImage.image = [UIImage imageNamed:@"home_04"];
+            refuseView.quatoLabel.text = @"1000-5000元";
+            refuseView.termLabel.text = @"5-50周";
+        }
         return refuseView;
         
-    }else if([_userStateModel.product_id isEqualToString:SalaryLoan]){//工薪贷
+    }else{//急速贷导流
+
 
         RefuseView *refuseView = [[[NSBundle mainBundle] loadNibNamed:@"RefuseView" owner:self options:nil]lastObject];
         refuseView.frame = CGRectZero;
@@ -167,29 +181,9 @@
         
     }
     return nil;
-    
 }
 
-/**
- 点击view
- */
--(void)clickView:(NSString *)url{
 
-    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = url;
-    [self.navigationController pushViewController:webVC animated:true];
-    
-}
-
-/**
- 点击更多
- */
--(void)moreClick{
-
-    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = @"http:www.baidu.com";
-    [self.navigationController pushViewController:webVC animated:true];
-}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LoanProcessCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LoanProcessCell"];
@@ -242,16 +236,45 @@
     FXDWebViewController *webView = [[FXDWebViewController alloc] init];
     webView.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
     [self.navigationController pushViewController:webView animated:true];
+    
 }
-
 
 -(void)applyBtn{
 
-    UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-    userDataVC.product_id = SalaryLoan;
-    [self.navigationController pushViewController:userDataVC animated:true];
+    if([_userStateModel.product_id isEqualToString:SalaryLoan]){
     
+        [self fatchRate:^(RateModel *rate) {
+            PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
+            payLoanview.product_id = WhiteCollarLoan;
+//            payLoanview.userState = model;
+            payLoanview.rateModel = rate;
+            [self.navigationController pushViewController:payLoanview animated:true];
+        }];
+        
+    }else{
+    
+        UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+        userDataVC.product_id = SalaryLoan;
+        [self.navigationController pushViewController:userDataVC animated:true];
+    }
 }
+
+- (void)fatchRate:(void(^)(RateModel *rate))finish
+{
+    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
+        if ([rateParse.flag isEqualToString:@"0000"]) {
+            [Utility sharedUtility].rateParse = rateParse;
+            finish(rateParse);
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

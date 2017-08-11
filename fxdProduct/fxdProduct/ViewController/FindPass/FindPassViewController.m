@@ -140,7 +140,7 @@
     } else {
         if ([_phoneNumField.text length] != 11) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号!"];
-        }else if ([_codeField.text length] != 6){
+        }else if ([_codeField.text isEqualToString:@""]){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码!"];
         }else if ([_passField.text length] < 6 || [_passField.text length] > 16){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的新设置密码!"];

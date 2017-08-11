@@ -46,7 +46,7 @@
 #pragma mark ->UItableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([_queryCardInfo.data.UsrCardInfolist.BankId isEqualToString:@""]) {
+    if ([_queryCardInfo.result.UsrCardInfolist.BankId isEqualToString:@""]) {
         return 3;
     }else{
         return 4;
@@ -62,7 +62,7 @@
         }
         cell.textField.tag = indexPath.row + 100;
         cell.textField.delegate = self;
-    if ([_queryCardInfo.data.UsrCardInfolist.BankId isEqualToString:@""]) {
+    if ([_queryCardInfo.result.UsrCardInfolist.BankId isEqualToString:@""]) {
         
       if (indexPath.row == 0) {
             [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
@@ -70,7 +70,8 @@
             cell.btn.tag = indexPath.row + 200;
             cell.btnSecory.hidden = YES;
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            cell.textField.text = _queryCardInfo.data.UsrCardInfolist.CardId;
+            cell.textField.text = _queryCardInfo.result.UsrCardInfolist.CardId;
+          cell.textField.placeholder = @"银行卡号";
             cell.textField.enabled = NO;
         }else if (indexPath.row == 2){
             cell.btn.hidden = YES;
@@ -81,6 +82,7 @@
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
             cell.textField.placeholder = @"验证码";
             cell.textField.enabled = YES;
+            cell.textField.tag = 103;
             
         }else if (indexPath.row == 1){
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
@@ -89,10 +91,10 @@
             cell.textField.placeholder = @"手机号";
             cell.textField.tag = 102;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
-            if (_queryCardInfo.data.UsrCardInfolist.BindMobile!=nil) {
+            if (_queryCardInfo.result.UsrCardInfolist.BindMobile!=nil) {
                 
                 cell.textField.enabled = NO;
-                cell.textField.text = _queryCardInfo.data.UsrCardInfolist.BindMobile;
+                cell.textField.text = _queryCardInfo.result.UsrCardInfolist.BindMobile;
                 _mobile = cell.textField.text;
                 
             }else{
@@ -108,20 +110,23 @@
     }else{
     
         if (indexPath.row == 0) {
+            
             [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
             cell.btn.hidden = NO;
             cell.btn.tag = indexPath.row + 200;
             cell.btnSecory.hidden = YES;
             cell.textField.enabled = NO;
-            cell.textField.text = [self bankName:_queryCardInfo.data.UsrCardInfolist.BankId];
-            
+            cell.textField.text = _queryCardInfo.result.UsrCardInfolist.bankName;
+            cell.textField.placeholder = @"银行名称";
+
         }else if (indexPath.row == 1) {
             [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
             cell.btn.hidden = NO;
             cell.btn.tag = indexPath.row + 200;
             cell.btnSecory.hidden = YES;
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            cell.textField.text = _queryCardInfo.data.UsrCardInfolist.CardId;
+            cell.textField.text = _queryCardInfo.result.UsrCardInfolist.CardId;
+            cell.textField.placeholder = @"银行卡号";
             cell.textField.enabled = NO;
         }else if (indexPath.row == 3){
             cell.btn.hidden = YES;
@@ -132,6 +137,7 @@
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
             cell.textField.placeholder = @"验证码";
             cell.textField.enabled = YES;
+            cell.textField.tag = 103;
             
         }else if (indexPath.row == 2){
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
@@ -140,10 +146,10 @@
             cell.textField.placeholder = @"手机号";
             cell.textField.tag = 102;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
-            if (_queryCardInfo.data.UsrCardInfolist.BindMobile!=nil) {
+            if (_queryCardInfo.result.UsrCardInfolist.BindMobile!=nil) {
                 
                 cell.textField.enabled = NO;
-                cell.textField.text = _queryCardInfo.data.UsrCardInfolist.BindMobile;
+                cell.textField.text = _queryCardInfo.result.UsrCardInfolist.BindMobile;
                 _mobile = cell.textField.text;
             }else{
                 
@@ -165,25 +171,23 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效手机号！"];
         return;
     }
-    
     _backTimeBtn = sender;
-    sender.userInteractionEnabled = NO;
-    sender.alpha = 0.4;
-    
-    [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
-    _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
-    NSString *bankNo = _queryCardInfo.data.UsrCardInfolist.CardId;
+//    _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
+    NSString *bankNo = _queryCardInfo.result.UsrCardInfolist.CardId;
     UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
     [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         SendSmsModel *model = [SendSmsModel yy_modelWithJSON:returnValue];
-        if ([model.appcode isEqualToString:@"1"]) {
-            
-            _sms_seq = model.data.sms_seq_;
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
+        if ([model.result.appcode isEqualToString:@"1"]) {
+            sender.userInteractionEnabled = NO;
+            sender.alpha = 0.4;
+            [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
+             _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
+            _sms_seq = model.result.sms_seq_;
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
         }else{
             
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
         }
         
     } WithFaileBlock:^{
@@ -211,6 +215,15 @@
     }
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+
+    [super viewWillDisappear:animated];
+    _backTimeBtn.userInteractionEnabled = YES;
+    [_backTimeBtn setTitle:@"重新获取" forState:UIControlStateNormal];
+    _backTimeBtn.alpha = 1.0;
+    _countdown = 60;
+    [_countdownTimer invalidate];
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 70.f;
@@ -226,6 +239,10 @@
         }
         _mobile = textField.text;
     }else if(textField.tag == 103){
+        
+        if (textField.text.length >6) {
+            textField.text = [textField.text substringToIndex:6];
+        }
         _sms_code = textField.text;
     }
 }
@@ -238,7 +255,7 @@
     {
         
         NSLog(@"===%@",textField.text);
-        if ([textField.text length] !=6) {
+        if ([textField.text isEqualToString:@""]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
             
         }else{
@@ -251,18 +268,15 @@
 #pragma mark 点击确认按钮
 -(void)clickBtn{
 
-    if (_sms_code.length <6) {
+    if (_sms_code == nil ||[_sms_code isEqualToString:@""]) {
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请输入验证码"];
     }else{
     
         ChangeBankCardViewController *controller = [[ChangeBankCardViewController alloc]initWithNibName:@"ChangeBankCardViewController" bundle:nil];
-        
         controller.ordsms_ext_ = [NSString stringWithFormat:@"%@%@",_sms_code,_sms_seq];
         controller.isCheck = _isCheck;
         [self.navigationController pushViewController:controller animated:YES];
     }
-    
-    
 }
 
 #pragma mark 银行卡名字的转换

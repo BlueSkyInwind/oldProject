@@ -267,7 +267,6 @@
 
 + (NSString *)getContentWithKey:(NSString *)key;
 {
-    
     return [[NSUserDefaults standardUserDefaults] objectForKey:key];
 }
 
@@ -402,5 +401,8 @@
     CGSize aSize = [text sizeWithAttributes:attributes];
     return aSize.width;
 }
+
+
+
 
 @end

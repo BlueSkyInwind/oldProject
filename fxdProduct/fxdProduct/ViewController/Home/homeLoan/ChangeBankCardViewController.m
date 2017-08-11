@@ -26,10 +26,11 @@
         NSArray *placeArray3;
         NSMutableArray *dataListAll3;
         NSMutableArray *dataColorAll3;
-        NSString *_bankCode;
+        NSString *_bankLogogram;
         NSInteger _countdown;
         NSTimer * _countdownTimer;
         BankModel *_bankModel;
+        NSMutableArray * _supportBankListArr;
         UIButton *_backTimeBtn;
         NSString *_sms_seq;
 
@@ -48,6 +49,7 @@
     placeArray3 = @[@"接受到账的银行卡",@"卡号",@"预留手机号",@"验证码"];
     dataListAll3 = [NSMutableArray new];
     dataColorAll3 = [NSMutableArray new];
+    _supportBankListArr = [NSMutableArray array];
     for (int i=0; i<10; i++) {
         [dataListAll3 addObject:@""];
         [dataColorAll3 addObject:UI_MAIN_COLOR];
@@ -130,7 +132,7 @@
             DLog(@"%@",placeArray3[0]);
             DLog(@"%@",_bankModel);
             HomeBankCardViewController *homebankVC = [HomeBankCardViewController new];
-            homebankVC.bankModel = _bankModel;
+            homebankVC.bankArray = _supportBankListArr;
             homebankVC.delegate = self;
             homebankVC.cardTag = [dataListAll3[5] integerValue];
             //            homebankVC.bankFlag = 100;
@@ -151,21 +153,14 @@
             _backTimeBtn = sender;
             if ([dataListAll3[0] length] < 1) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择银行卡"];
-            }else if ([_bankCode length] < 1 || _bankCode == nil){
+            }else if ([_bankLogogram length] < 1 || _bankLogogram == nil){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请重新选择银行卡类型"];
             }else if ([dataListAll3[1] length]<16){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的卡号"];
             }else if (![Tool isMobileNumber:dataListAll3[2]]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的手机号"];
             }else{
-                sender.userInteractionEnabled = NO;
-                sender.alpha = 0.4;
-
-                [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
-                _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
-
                 [self senderSms];
-
             }
         }
             break;
@@ -193,20 +188,26 @@
 
 
 -(void)senderSms{
-
+    
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
     UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
     [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         SendSmsModel *model = [SendSmsModel yy_modelWithJSON:returnValue];
-        if ([model.appcode isEqualToString:@"1"]) {
-            [_sureBtn setEnabled:YES];
-            _sms_seq = model.data.sms_seq_;
-            [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
-        }else{
+        if ([model.result.appcode isEqualToString:@"1"]) {
             
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.appmsg];
+            _backTimeBtn.userInteractionEnabled = NO;
+            _backTimeBtn.alpha = 0.4;
+            [_backTimeBtn setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
+            _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
+            [_sureBtn setEnabled:YES];
+            _sms_seq = model.result.sms_seq_;
+            [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
+        }else{
+           
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
+            
         }
         
     } WithFaileBlock:^{
@@ -215,6 +216,8 @@
         
     }];
     [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"rebind" SmsType:@"N" Mobile:dataListAll3[2]];
+    
+    
 
 }
 
@@ -330,7 +333,7 @@
     }
     if (textField.tag == 103)
     {
-        if ([textField.text length] !=6) {
+        if ([textField.text isEqualToString:@""]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
             //                [dataColorAll3 replaceObjectAtIndex:3 withObject:redColor];
         }else{
@@ -342,11 +345,11 @@
 }
 
 
-- (void)BankSelect:(BankList *)bankInfo andSectionRow:(NSInteger)sectionRow
+- (void)BankSelect:(SupportBankList *)bankInfo andSectionRow:(NSInteger)sectionRow
 {
-    [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.desc];//银行名字
+    [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.bank_name_];//银行名字
     //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
-    _bankCode = bankInfo.code;
+    _bankLogogram = bankInfo.bank_short_name_;
     [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",(long)sectionRow]];
     [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
     [_changTab reloadData];
@@ -411,39 +414,24 @@
 
 #pragma mark 获取银行卡列表信息
 -(void)getBankListInfo{
-    
+
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        _bankModel = [BankModel yy_modelWithJSON:returnValue];
-        if ([_bankModel.flag isEqualToString:@"0000"]) {
-            NSArray *bankArray = @[@"中国银行",@"中国工商银行",@"中国建设银行",@"中国农业银行",@"中信银行",@"兴业银行",@"中国光大银行"];
-            NSMutableArray *array = [NSMutableArray array];
-            for (int i = 0; i<_bankModel.result.count; i++) {
-                BankList *bankList = _bankModel.result[i];
-                for (int j = 0; j<bankArray.count; j++) {
-                    if ([bankList.desc isEqualToString:bankArray[j]]) {
-                        [array addObject:bankList];
-                        
-                    }
-                }
-                
+        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResult.flag isEqualToString:@"0000"]) {
+            NSArray * array  = (NSArray *)baseResult.result;
+            for (int i = 0; i < array.count; i++) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                [_supportBankListArr addObject:bankList];
             }
-            [_bankModel.result removeAllObjects];
-            for (BankList *bank in array) {
-                
-                [_bankModel.result addObject:bank];
-            }
-        }else{
-        
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_bankModel.msg];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
         }
-        
-        
     } WithFaileBlock:^{
         
     }];
-    [checkBankViewModel getBankListInfo];
+    [checkBankViewModel getSupportBankListInfo:@"4"];
+    
 }
 
 #pragma mark 点击确定按钮，更换银行卡
@@ -451,10 +439,15 @@
 
 //    _ordsms_ext_ = @"666666AAAAAAAA";
 //    _sms_seq = @"AAAAAAAA";
-    NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *banName = [self bankName:_bankCode];
-    NSMutableArray *paramArray = [NSMutableArray array];
-    [paramArray addObject:banName];
+    if ([dataListAll3[3] isEqualToString:@""] || !_sms_seq) {
+        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请输入正确的验证码"];
+        return;
+    }
+    
+    NSString * bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * bankShortName = _bankLogogram;
+    NSMutableArray * paramArray = [NSMutableArray array];
+    [paramArray addObject:bankShortName];
     [paramArray addObject:bankNo];
     [paramArray addObject:[Utility sharedUtility].userInfo.userMobilePhone];
     [paramArray addObject:dataListAll3[2]];
@@ -462,41 +455,35 @@
     [paramArray addObject:dataListAll3[3]];
     [paramArray addObject:_sms_seq];
     
-    
     UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
     [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         BankCardsModel *model = [BankCardsModel yy_modelWithJSON:returnValue];
-        if ([model.data.appcode isEqualToString:@"1"]) {
+        if ([model.result.appcode isEqualToString:@"1"]) {
             
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.appmsg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:model.result.appmsg];
             if (_isCheck) {
-                
                 for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                     if ([vc isKindOfClass:[CheckViewController class]]) {
                         [self.navigationController popToViewController:vc animated:YES];
                     }
                 }
             }else{
-            
                 for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                     if ([vc isKindOfClass:[RepayDetailViewController class]]) {
                         [self.navigationController popToViewController:vc animated:YES];
                     }
                 }
             }
-            
-            //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
+            //  [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
         }else{
-            
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
         }
-        
     } WithFaileBlock:^{
         
     }];
     [unbundlingBankCardViewModel bankCardsSHServiceParamArray:paramArray];
-    
+
 }
 
 #pragma mark 更改银行卡名称缩写
