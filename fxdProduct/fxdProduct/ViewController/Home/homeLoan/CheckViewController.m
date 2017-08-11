@@ -92,6 +92,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     GetCaseInfo *_caseInfo;
     QryUserStatusModel *_qryUserStatusModel;
 
+    BOOL _isOpen;
 }
 
 @property (nonatomic, weak) UIScrollView *scrollView;
@@ -131,10 +132,45 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     //    [self createScroll];
     
     [self createUI];
-    
+
+    _isOpen = NO;
+    checkSuccess.agreementsView.hidden = YES;
+    checkSuccess.agreementView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *agreementGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
+    [checkSuccess.agreementView addGestureRecognizer:agreementGest];
+    [checkSuccess.firstAgreemwntBtn addTarget:self action:@selector(clickFirstAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
+    [checkSuccess.secondAgreemwntBtn addTarget:self action:@selector(clickSecondAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
     [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(void)clickFirstAgreementBtn{
+
+    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+    webView.urlStr = _liangzihuzhu_url;
+    [self.navigationController pushViewController:webView animated:true];
+}
+
+-(void)clickSecondAgreementBtn{
+    
+    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+    webView.urlStr = _liangzihuzhu_url;
+    [self.navigationController pushViewController:webView animated:true];
+}
+
+
+-(void)clickAgreementView{
+
+    _isOpen = !_isOpen;
+    if (_isOpen) {
+        checkSuccess.agreementDescLabel.text = @"收起";
+        checkSuccess.agreementsView.hidden = NO;
+    }else{
+    
+        checkSuccess.agreementDescLabel.text = @"展开";
+        checkSuccess.agreementsView.hidden = YES;
+    }
+
+}
 
 #pragma mark 审核中，量子互助链接
 -(void)imageTap{
@@ -361,7 +397,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     range = NSMakeRange(attributeStr.length - 6, 6);
                 }
                 if ([_userStateModel.platform_type isEqualToString:@"2"]) {
-                    attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《信用咨询及管理服务协议》"];
+                    attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《三方借款协议》"];
                     range = NSMakeRange(attributeStr.length - 13, 13);
                 }
             } else {
@@ -1142,6 +1178,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkSuccess.moneyLabel.attributedText = one;
                 checkSuccess.moneyLabel.textAlignment = NSTextAlignmentCenter;
                 checkSuccess.tipLabel.text = _approvalModel.result.payMessage;
+//                checkSuccess.tipLabel.text = @"tip提示";
                 
             }
         }
