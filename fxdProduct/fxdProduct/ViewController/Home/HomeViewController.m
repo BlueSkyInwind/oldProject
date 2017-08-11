@@ -627,18 +627,20 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     DLog(@"点击");
-    HomeBannerFiles *files = _bannerParse.result.files_[index];
-    FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
-    firstBorrowVC.url = files.file_store_path_;
-    [self.navigationController pushViewController:firstBorrowVC animated:YES];
-//    if (_bannerParse && _bannerParse.result.files_.count > 0) {
-//        HomeBannerFiles *files = _bannerParse.result.files_[index];
-//        if ([files.link_url_.lowercaseString hasPrefix:@"http"] || [files.link_url_.lowercaseString hasPrefix:@"https"]) {
-//            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-//            webView.urlStr = files.link_url_;
-//            [self.navigationController pushViewController:webView animated:true];
-//        }
-//    }
+    
+    if (_bannerParse && _bannerParse.result.files_.count > 0) {
+        HomeBannerFiles *files = _bannerParse.result.files_[index];
+        if ([files.link_url_.lowercaseString hasPrefix:@"http"] || [files.link_url_.lowercaseString hasPrefix:@"https"]) {
+            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+            webView.urlStr = files.link_url_;
+            [self.navigationController pushViewController:webView animated:true];
+        }
+        if ([files.link_url_.lowercaseString hasSuffix:@""]) {
+            FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
+            firstBorrowVC.url = files.file_store_path_;
+            [self.navigationController pushViewController:firstBorrowVC animated:YES];
+        }
+    }
 }
 
 #pragma mark ->我要借款... Action
@@ -842,7 +844,7 @@
     PopViewModel *popViewModel = [[PopViewModel alloc]init];
     [popViewModel setBlockWithReturnBlock:^(id returnValue) {
         HomePop *popParse = [HomePop yy_modelWithJSON:returnValue];
-        popParse.result.is_valid_ = @"1";
+//        popParse.result.is_valid_ = @"1";
         [self popView:popParse];
     } WithFaileBlock:^{
         
