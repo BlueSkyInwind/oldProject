@@ -30,6 +30,7 @@
 //        _innerView.frame = frame;
 //        [self addSubview:_innerView];
         self.imageView.userInteractionEnabled = true;
+//        self.imageView.contentMode = UIViewContentModeScaleToFill;
         UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap)];
         tapImage.numberOfTapsRequired = 1;
         tapImage.numberOfTouchesRequired = 1;
@@ -49,7 +50,7 @@
 }
 
 + (instancetype)defaultPopupView{
-    return [[HomePopView alloc]initWithFrame:CGRectMake(0, 0, 300, 325)];
+    return [[HomePopView alloc]initWithFrame:CGRectMake(0, 0, 300, 510)];
 }
 
 @end

@@ -381,24 +381,28 @@
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66F-U3-N1D">
-                                    <rect key="frame" x="301" y="2" width="59" height="23"/>
+                                    <rect key="frame" x="300" y="2" width="70" height="23"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="展开" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDA-63-a8Z">
-                                            <rect key="frame" x="23" y="0.0" width="36" height="21"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="more-arrow-3" translatesAutoresizingMaskIntoConstraints="NO" id="Tck-oW-BVu">
+                                            <rect key="frame" x="10" y="5" width="14" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="展开" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDA-63-a8Z">
+                                            <rect key="frame" x="40" y="0.0" width="36" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="7RN-MW-i9n"/>
                                                 <constraint firstAttribute="width" constant="36" id="D8q-um-dz7"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.0" green="0.66666666666666663" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="CDA-63-a8Z" firstAttribute="top" secondItem="66F-U3-N1D" secondAttribute="top" id="CWN-2g-UUn"/>
-                                        <constraint firstAttribute="trailing" secondItem="CDA-63-a8Z" secondAttribute="trailing" id="Chh-C6-8Vz"/>
-                                        <constraint firstAttribute="width" constant="59" id="g4R-Fm-Ujw"/>
+                                        <constraint firstAttribute="trailing" secondItem="CDA-63-a8Z" secondAttribute="trailing" constant="-6" id="Chh-C6-8Vz"/>
+                                        <constraint firstAttribute="width" constant="70" id="g4R-Fm-Ujw"/>
                                         <constraint firstAttribute="height" constant="23" id="pVf-gT-gex"/>
                                     </constraints>
                                 </view>
@@ -412,7 +416,9 @@
                                                 <constraint firstAttribute="width" constant="155" id="Qxh-k0-lxb"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <state key="normal" title="&lt;&lt;风险管理与数据服务协议&gt;&gt;"/>
+                                            <state key="normal" title="&lt;&lt;风险管理与数据服务协议&gt;&gt;">
+                                                <color key="titleColor" red="0.0" green="0.66666666666666663" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="、" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xac-bk-vI3">
                                             <rect key="frame" x="180" y="0.0" width="20" height="19"/>
@@ -421,7 +427,7 @@
                                                 <constraint firstAttribute="height" constant="19" id="FM5-rs-TMJ"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.0" green="0.66666666666666663" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWD-mJ-Yqh">
@@ -431,7 +437,9 @@
                                                 <constraint firstAttribute="width" constant="97" id="onF-Kj-J5y"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <state key="normal" title="&lt;&lt;技术服务协议&gt;&gt;"/>
+                                            <state key="normal" title="&lt;&lt;技术服务协议&gt;&gt;">
+                                                <color key="titleColor" red="0.0" green="0.66666666666666663" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -449,7 +457,7 @@
                             </subviews>
                             <constraints>
                                 <constraint firstItem="5fw-nY-Ekh" firstAttribute="top" secondItem="9jC-iM-jgZ" secondAttribute="top" id="GfA-ES-jJh"/>
-                                <constraint firstAttribute="trailing" secondItem="66F-U3-N1D" secondAttribute="trailing" constant="15" id="M6M-EE-TTF"/>
+                                <constraint firstAttribute="trailing" secondItem="66F-U3-N1D" secondAttribute="trailing" constant="5" id="M6M-EE-TTF"/>
                                 <constraint firstAttribute="bottom" secondItem="5fw-nY-Ekh" secondAttribute="bottom" constant="25" id="SFT-QX-2Fc"/>
                                 <constraint firstItem="YG0-d7-t95" firstAttribute="top" secondItem="5fw-nY-Ekh" secondAttribute="bottom" constant="5" id="Slp-mc-lvc"/>
                                 <constraint firstItem="66F-U3-N1D" firstAttribute="top" secondItem="9jC-iM-jgZ" secondAttribute="top" constant="2" id="XEV-L3-iI4"/>
@@ -651,6 +659,7 @@
             </variation>
             <connections>
                 <outlet property="agreementDescLabel" destination="CDA-63-a8Z" id="KhP-hG-kCt"/>
+                <outlet property="agreementImage" destination="Tck-oW-BVu" id="5yF-MX-6j7"/>
                 <outlet property="agreementView" destination="66F-U3-N1D" id="MDD-oB-G0x"/>
                 <outlet property="agreementsView" destination="YG0-d7-t95" id="Z03-mX-JL9"/>
                 <outlet property="arrowFirst" destination="uaD-mG-gJN" id="Avy-jU-Q17"/>
@@ -698,5 +707,6 @@
         <image name="5_shenhe_icon_01" width="20" height="20"/>
         <image name="5_shenhe_icon_02" width="20" height="20"/>
         <image name="gantan" width="14" height="14"/>
+        <image name="more-arrow-3" width="14" height="14"/>
     </resources>
 </document>
