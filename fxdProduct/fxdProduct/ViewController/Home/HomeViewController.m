@@ -55,6 +55,7 @@
     LoanRecordParse *_loanRecordParse;
     NSString *_advTapToUrl;
     NSString *_shareContent;
+    NSString *_advImageUrl;
     NSTimer * _countdownTimer;
     HomePopView *_popView;
     NSInteger _count;
@@ -232,8 +233,11 @@
     [self getHomeProductList];
     
 }
+
 - (void)viewWillDisappear:(BOOL)animated
 {
+    
+    [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
     [super viewWillDisappear:animated];
 }
 
@@ -344,9 +348,11 @@
         _popView.delegate = self;
         [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.result.files_.firstObject.file_store_path_]];
 //        _popView.imageView.image = [UIImage imageNamed:@"tanchuang"];
+        _advImageUrl = model.result.files_.firstObject.link_url_;
         _advTapToUrl = model.result.files_.firstObject.link_url_;
         _shareContent = model.result.content_;
         _popView.parentVC = self;
+        
         [self lew_presentPopupView:_popView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
             
         }];
@@ -366,7 +372,7 @@
 //    }
     
     FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
-//    firstBorrowVC.url = files.file_store_path_;
+    firstBorrowVC.url = _advImageUrl;
     [self.navigationController pushViewController:firstBorrowVC animated:YES];
     [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
     
@@ -631,15 +637,20 @@
     if (_bannerParse && _bannerParse.result.files_.count > 0) {
         HomeBannerFiles *files = _bannerParse.result.files_[index];
         if ([files.link_url_.lowercaseString hasPrefix:@"http"] || [files.link_url_.lowercaseString hasPrefix:@"https"]) {
-            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-            webView.urlStr = files.link_url_;
-            [self.navigationController pushViewController:webView animated:true];
+            
+            if ([files.link_url_.lowercaseString hasSuffix:@"sjbuy"]) {
+                FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
+                firstBorrowVC.url = files.link_url_;
+                [self.navigationController pushViewController:firstBorrowVC animated:YES];
+            }else{
+            
+                FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+                webView.urlStr = files.link_url_;
+                [self.navigationController pushViewController:webView animated:true];
+            }
+            
         }
-        if ([files.link_url_.lowercaseString hasSuffix:@""]) {
-            FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
-            firstBorrowVC.url = files.file_store_path_;
-            [self.navigationController pushViewController:firstBorrowVC animated:YES];
-        }
+        
     }
 }
 

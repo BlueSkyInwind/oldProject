@@ -26,13 +26,33 @@
 
 -(void)imageViewTap{
 
+    if([Utility sharedUtility].userInfo.juid != nil){
+        
+        NSDictionary *paramDic =@{@"juid":[Utility sharedUtility].userInfo.juid,
+                                  @"mobile":[Utility sharedUtility].userInfo.userMobilePhone};
+        [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_sjRecord_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+            
+        } failure:^(EnumServerStatus status, id object) {
+            
+        }];
+        
+//        [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_sjRecord_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//            
+//        } failure:^(EnumServerStatus status, id object) {
+//            
+//        }];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
 
-    self.firstImageView.image = [UIImage imageNamed:@"yunying"];
+    NSURL *url = [NSURL URLWithString:_url];
+    UIImage *placeholder = [UIImage imageNamed:@"placeholder_Image"];
+    [self.firstImageView sd_setImageWithURL:url placeholderImage:placeholder];
+    
 //    [self.firstImageView sd_setImageWithURL:[NSURL URLWithString:_url]];
+
     [self.navigationController setNavigationBarHidden:YES];
 }
 

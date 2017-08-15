@@ -136,6 +136,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     _isOpen = NO;
     checkSuccess.agreementsView.hidden = YES;
     checkSuccess.agreementView.userInteractionEnabled = YES;
+    checkSuccess.agreementImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer *agreement = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
+    [checkSuccess.agreementImage addGestureRecognizer:agreement];
     UITapGestureRecognizer *agreementGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
     [checkSuccess.agreementView addGestureRecognizer:agreementGest];
     [checkSuccess.firstAgreemwntBtn addTarget:self action:@selector(clickFirstAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -153,13 +156,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             return;
         }
         paramDic = @{@"apply_id_":_userStateModel.applyID,
-                     @"product_id_":@"fxd_riskpro",
+                     @"product_id_":_userStateModel.product_id,
                      @"protocol_type_":@"7",
                      @"periods_":_userSelectNum};
     }
     if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
         paramDic = @{@"apply_id_":_userStateModel.applyID,
-                     @"product_id_":@"fxd_riskpro",
+                     @"product_id_":_userStateModel.product_id,
                      @"protocol_type_":@"7",
                      @"periods_":@2};
     }
@@ -187,13 +190,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             return;
         }
         paramDic = @{@"apply_id_":_userStateModel.applyID,
-                     @"product_id_":@"fxd_skillpro",
+                     @"product_id_":_userStateModel.product_id,
                      @"protocol_type_":@"6",
                      @"periods_":_userSelectNum};
     }
     if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
         paramDic = @{@"apply_id_":_userStateModel.applyID,
-                     @"product_id_":@"fxd_skillpro",
+                     @"product_id_":_userStateModel.product_id,
                      @"protocol_type_":@"6",
                      @"periods_":@2};
     }
@@ -219,10 +222,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     if (_isOpen) {
         checkSuccess.agreementDescLabel.text = @"收起";
         checkSuccess.agreementsView.hidden = NO;
+        checkSuccess.agreementImage.image = [UIImage imageNamed:@"icon_down"];
     }else{
     
         checkSuccess.agreementDescLabel.text = @"展开";
         checkSuccess.agreementsView.hidden = YES;
+        checkSuccess.agreementImage.image = [UIImage imageNamed:@"more-arrow-3"];
     }
 
 }
@@ -439,6 +444,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkSuccess.surBtnLeadRight.constant = .0f;
                 [checkSuccess.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.right.equalTo(checkSuccess.bottomBtnView.mas_right).offset(-21);
+                    make.top.equalTo(checkSuccess.weekMoney.mas_bottom).offset(10);
+                    make.height.equalTo(@66);
                 }];
                 [checkSuccess.sureBtn layoutIfNeeded];
                 [checkSuccess.sureBtn updateConstraints];
@@ -447,14 +454,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             NSRange range;
             
             if([_userStateModel.platform_type isEqualToString:@"2"] || [_userStateModel.platform_type isEqualToString:@"0"]){
-                if ([_userStateModel.platform_type isEqualToString:@"0"]) {
+
                     attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《借款协议》"];
                     range = NSMakeRange(attributeStr.length - 6, 6);
-                }
-                if ([_userStateModel.platform_type isEqualToString:@"2"]) {
-                    attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《三方借款协议》"];
-                    range = NSMakeRange(attributeStr.length - 13, 13);
-                }
+               
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"产品类型错误"];
             }

@@ -698,7 +698,7 @@
             //        securityPolicy.validatesDomainName = YES;
             //        manager.securityPolicy = securityPolicy;
             manager.requestSerializer=[AFHTTPRequestSerializer serializer];
-            //            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
             DLog(@"juid --- %@\n token --- %@",[Utility sharedUtility].userInfo.juid,[Utility sharedUtility].userInfo.tokenStr);
             if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
                 if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
@@ -715,23 +715,18 @@
             [manager GET:strURL parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {
-                    [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
-                        if (index == 1) {
-                            [EmptyUserData EmptyData];
-                            LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-                            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-                            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
-                                [_waitView removeFromSuperview];
-                            }];
-                        }
-                    }];
+                NSString *jsonStr;
+               
+                if ([responseObject isKindOfClass:[NSData class]]) {
+                    jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+
+                }else{
+                    NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
+                    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+                    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    DLog(@"response json --- %@",jsonStr);
+                    //            [Tool dataToDictionary:responseObject]
                 }
-                NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
-                NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-                NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                DLog(@"response json --- %@",jsonStr);
-                //            [Tool dataToDictionary:responseObject]
                 finished(Enum_SUCCESS,responseObject);
                 [_waitView removeFromSuperview];
                 [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
