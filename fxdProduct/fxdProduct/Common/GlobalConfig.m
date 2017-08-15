@@ -44,9 +44,12 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 //测试导流 192.168.6.133
 //192.168.6.134:9090
-NSString * const _main_url  =   @"http://192.168.6.133/fxd-esb/esb/";
+//NSString * const _main_url  =   @"http://192.168.6.133/fxd-esb/esb/";
+NSString * const _main_url  =   @"http://192.168.12.166:9191/fxd-esb/esb/";
 NSString * const _ValidESB_url  =   @"http://192.168.6.133/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
+
+
 //NSString * const _p2P_url = @"http://192.168.7.253:9292/fxd-esb/p2p/";
 NSString * const _p2P_url = @"http://192.168.6.133/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
@@ -424,7 +427,10 @@ NSString * const    _getBidStatus_url    =    @"hg/getBidStatus";
 
 //提款申请件记录 *
 NSString * const    _saveLoanCase_url    =    @"hg/saveLoanCase.jhtml";
-
+//风险管理与数据服务协议
+NSString *const     _riskControl_url     =    @"protocol/riskControl.html";
+//技术服务协议
+NSString *const     _techniqueSevice_url =    @"protocol/techniqueSevice";
 #pragma mark - 对外导流接口
 
 //量子互助

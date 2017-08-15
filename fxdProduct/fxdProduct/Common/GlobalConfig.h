@@ -175,7 +175,8 @@ UIKIT_EXTERN NSString * const       _qryUserStatus_url;                  //用�
 UIKIT_EXTERN NSString * const       _getBidStatus_url;                  //用户标的状态查询
 UIKIT_EXTERN NSString * const       _saveLoanCase_url;                  //提款申请件记录
 UIKIT_EXTERN NSString * const       _liangzihuzhu_url;                  //量子互助
-
+UIKIT_EXTERN NSString * const       _riskControl_url;                  //风险管理与数据服务协议
+UIKIT_EXTERN NSString * const       _techniqueSevice_url;                  //技术服务协议
 
 
 
