@@ -114,7 +114,6 @@
 {
     [MobClick beginLogPageView:NSStringFromClass([self class])];
     [super viewWillAppear:animated];
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -193,7 +192,6 @@
                 self.sendCodeButton.alpha = 1.0;
             }
         }
-        
         return sendCodeBtnActive;
     }];
     
@@ -258,7 +256,6 @@
     [self setPicVerifyCode];
 }
 
-
 - (IBAction)agreeBtnClick:(UIButton *)sender {
     if (!self.btnStatus) {
         [self.agreeBtn setBackgroundImage:[UIImage imageNamed:@"tricked"] forState:UIControlStateNormal];
@@ -280,6 +277,7 @@
         _currendId = [returnValue objectForKey:@"id_"];
         DLog(@"%@",[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_ValidESB_url,[returnValue objectForKey:@"pic_verify_url_"],_currendId,_oldId]);
         [_picCodeBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_ValidESB_url,[returnValue objectForKey:@"pic_verify_url_"],_currendId,_oldId]] forState:UIControlStateNormal placeholderImage:nil options:SDWebImageRefreshCached];
+        
     } WithFaileBlock:^{
         
     }];
@@ -303,12 +301,10 @@
         if ([_codeParse.flag isEqualToString:@"0017"]) {
             [self setPicVerifyCode];
         }
-        
     } WithFaileBlock:^{
         
     }];
     [smsViewModel fatchRequestRegSMSParamPhoneNumber:self.phoneNumText.text picVerifyId:_currendId picVerifyCode:_picCodeText.text];
-    
 }
 #pragma mark -确认注册
 - (IBAction)clickReg:(UIButton *)sender {
@@ -332,7 +328,6 @@
             if ([_regParse.flag isEqualToString:@"0000"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
                     [self login];
                 });
             } else if ([_regParse.flag isEqualToString:@"0001"]) {
@@ -375,13 +370,11 @@
     [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
         _loginParse = returnValue;
         if ([_loginParse.flag isEqualToString: @"0000"]) {
-            
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_loginParse.msg];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self dismissViewControllerAnimated:YES completion:^{
                 }];
             });
-            
         } else {
             if ([_loginParse.flag isEqualToString:@"0005"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您当前的版本太低,为了您的使用体验请升级版本后再来体验^_^"];

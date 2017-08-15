@@ -700,6 +700,8 @@ typedef enum {
 
 - (void)checkFaceDecetion
 {
+    
+    NSString * str =  [MGLiveManager LiveDetectionVersion];
     [MGLicenseManager licenseForNetWokrFinish:^(bool License) {
         if (License) {
             MGLiveViewController *myVC = [[MGLiveViewController alloc] initWithDefauleSetting];
