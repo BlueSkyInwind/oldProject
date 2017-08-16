@@ -127,7 +127,7 @@
         UIView *overlayView = [[UIView alloc] initWithFrame:sourceView.bounds];
         overlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         overlayView.tag = kLEWOverlayViewTag;
-        overlayView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
+        overlayView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
         
         // BackgroundView
 //        UIView *backgroundView = [[LewPopupBackgroundView alloc] initWithFrame:sourceView.bounds];

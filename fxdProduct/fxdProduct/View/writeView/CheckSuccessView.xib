@@ -380,7 +380,7 @@
                                         <action selector="userCheck:" destination="iN0-l3-epB" eventType="touchUpInside" id="w4z-7n-el3"/>
                                     </connections>
                                 </button>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66F-U3-N1D">
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66F-U3-N1D">
                                     <rect key="frame" x="300" y="2" width="70" height="23"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="more-arrow-3" translatesAutoresizingMaskIntoConstraints="NO" id="Tck-oW-BVu">
@@ -406,7 +406,7 @@
                                         <constraint firstAttribute="height" constant="23" id="pVf-gT-gex"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YG0-d7-t95">
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YG0-d7-t95">
                                     <rect key="frame" x="0.0" y="25" width="300" height="20"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45D-O8-Dvv">

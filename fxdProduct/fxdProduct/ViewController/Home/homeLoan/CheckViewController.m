@@ -135,8 +135,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     _isOpen = NO;
     checkSuccess.agreementsView.hidden = YES;
-    checkSuccess.agreementView.userInteractionEnabled = YES;
-    checkSuccess.agreementImage.userInteractionEnabled = YES;
+//    checkSuccess.agreementView.userInteractionEnabled = YES;
+//    checkSuccess.agreementImage.userInteractionEnabled = YES;
     UITapGestureRecognizer *agreement = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
     [checkSuccess.agreementImage addGestureRecognizer:agreement];
     UITapGestureRecognizer *agreementGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
