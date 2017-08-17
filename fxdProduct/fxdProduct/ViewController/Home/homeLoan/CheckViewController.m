@@ -135,8 +135,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     _isOpen = NO;
     checkSuccess.agreementsView.hidden = YES;
-//    checkSuccess.agreementView.userInteractionEnabled = YES;
-//    checkSuccess.agreementImage.userInteractionEnabled = YES;
+    checkSuccess.agreementView.userInteractionEnabled = YES;
+    checkSuccess.agreementImage.userInteractionEnabled = YES;
     UITapGestureRecognizer *agreement = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
     [checkSuccess.agreementImage addGestureRecognizer:agreement];
     UITapGestureRecognizer *agreementGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
@@ -146,7 +146,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 }
 
--(void)clickFirstAgreementBtn{
+-(void)clickSecondAgreementBtn{
 
     
     NSDictionary *paramDic;
@@ -181,7 +181,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
 }
 
--(void)clickSecondAgreementBtn{
+-(void)clickFirstAgreementBtn{
     
     NSDictionary *paramDic;
     if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
@@ -454,10 +454,15 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             NSRange range;
             
             if([_userStateModel.platform_type isEqualToString:@"2"] || [_userStateModel.platform_type isEqualToString:@"0"]){
-
+                if ([_userStateModel.platform_type isEqualToString:@"0"]) {
+                    
                     attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《借款协议》"];
                     range = NSMakeRange(attributeStr.length - 6, 6);
-               
+                }else{
+                
+                    attributeStr = [[NSMutableAttributedString alloc]initWithString:@"我已阅读并认可发薪贷《信用咨询及管理服务协议》"];
+                    range = NSMakeRange(attributeStr.length - 13, 13);
+                }
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"产品类型错误"];
             }
