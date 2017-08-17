@@ -134,15 +134,15 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self createUI];
 
     _isOpen = NO;
-    checkSuccess.agreementsView.hidden = YES;
-    checkSuccess.agreementView.userInteractionEnabled = YES;
-    checkSuccess.agreementImage.userInteractionEnabled = YES;
-    UITapGestureRecognizer *agreement = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
-    [checkSuccess.agreementImage addGestureRecognizer:agreement];
-    UITapGestureRecognizer *agreementGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
-    [checkSuccess.agreementView addGestureRecognizer:agreementGest];
-    [checkSuccess.firstAgreemwntBtn addTarget:self action:@selector(clickFirstAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
-    [checkSuccess.secondAgreemwntBtn addTarget:self action:@selector(clickSecondAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
+//    checkSuccess.agreementsView.hidden = YES;
+//    checkSuccess.agreementView.userInteractionEnabled = YES;
+//    checkSuccess.agreementImage.userInteractionEnabled = YES;
+//    UITapGestureRecognizer *agreement = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
+//    [checkSuccess.agreementImage addGestureRecognizer:agreement];
+//    UITapGestureRecognizer *agreementGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
+//    [checkSuccess.agreementView addGestureRecognizer:agreementGest];
+//    [checkSuccess.firstAgreemwntBtn addTarget:self action:@selector(clickFirstAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
+//    [checkSuccess.secondAgreemwntBtn addTarget:self action:@selector(clickSecondAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
     [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 }
 
