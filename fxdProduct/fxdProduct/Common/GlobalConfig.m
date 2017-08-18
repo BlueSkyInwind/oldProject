@@ -321,8 +321,8 @@ NSString * const    _queryLoanStatus_url        =    @"caseInfo/queryLoanStatus.
 NSString * const    _h5register_url             =    @"register.html";
 
 //H5费用说明
-NSString * const    _loanDetial_url             =    @"protocol/loanDetial.html";
-
+//NSString * const    _loanDetial_url             =    @"protocol/loanDetial.html";
+NSString * const    _loanDetial_url             =    @"protocol/protocol.html";
 //FaceIDOCR
 NSString * const    _detectIDCardOCR_url        =    @"https://api.faceid.com/faceid/v1/ocridcard";
 
