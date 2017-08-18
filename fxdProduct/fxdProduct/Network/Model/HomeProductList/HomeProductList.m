@@ -11,16 +11,19 @@
 @implementation HomeProductList
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"result":[HomeProductListResult class]};
+    return @{@"data":[HomeProductListData class]};
 }
 
 @end
 
 
-@implementation HomeProductListResult
+@implementation HomeProductListData
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"products":[HomeProductListProducts class]};
+    return @{@"bannerList":[HomeBannerList class],
+             @"popList":[HomePopList class],
+             @"productList":[HomeProductsList class]
+             };
 }
 
 
@@ -40,5 +43,28 @@
 
 @implementation HomeProductLisTextAttr
 
+
+@end
+
+@implementation HomeBannerList
+
+@end
+
+@implementation HomePaidList
+
+
+
+@end
+
+@implementation HomePopList
+
+
+@end
+
+@implementation HomeProductsList
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"products":[HomeProductListProducts class]};
+}
 
 @end

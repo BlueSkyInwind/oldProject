@@ -155,10 +155,10 @@
     [productListViewModel setBlockWithReturnBlock:^(id returnValue) {
       HomeProductList *homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
 
-        if ([homeProductList.result.type isEqualToString:@"1"]) {
+        if ([homeProductList.data.productList.type isEqualToString:@"1"]) {
             _applyBtn.enabled = NO;
             _applyBtn.hidden = YES;
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:homeProductList.result.refuseMsg];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:homeProductList.data.productList.refuseMsg];
         }
         
     } WithFaileBlock:^{
