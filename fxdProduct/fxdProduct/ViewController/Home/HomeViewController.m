@@ -628,7 +628,7 @@
     if (_bannerParse && _bannerParse.result.files_.count > 0) {
         HomeBannerFiles *files = _bannerParse.result.files_[index];
         if ([files.link_url_.lowercaseString hasPrefix:@"http"] || [files.link_url_.lowercaseString hasPrefix:@"https"]) {
-            
+                                                             
             if ([files.link_url_.lowercaseString hasSuffix:@"sjbuy"]) {
                 FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
                 firstBorrowVC.url = files.link_url_;
