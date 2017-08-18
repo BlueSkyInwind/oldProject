@@ -194,6 +194,7 @@ UIKIT_EXTERN NSString * const RapidLoan;         //急速贷平台
 UIKIT_EXTERN NSString * const WhiteCollarLoan;       //白领贷平台
 
 UIKIT_EXTERN NSString * const PLATFORM;                 //平台
+UIKIT_EXTERN NSString * const CHANNEL;              
 UIKIT_EXTERN NSString * const Devcode;      //开发码
 
 UIKIT_EXTERN NSString * const FaceIDAppKey; //FaceID

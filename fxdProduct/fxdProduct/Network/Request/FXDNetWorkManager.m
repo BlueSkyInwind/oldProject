@@ -677,8 +677,8 @@
     } else {
         if (![Utility sharedUtility].networkState) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
-            return;
-        } else {
+//            return;
+        }
             MBProgressHUD *_waitView = [self loadingHUD];
             [_waitView show:YES];
             [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
@@ -688,7 +688,6 @@
             //                paramDic = [Tool getParameters:parameters];
             //            }
             //            DLog(@"加密后参数:---%@",paramDic);
-            
             
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             //        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
@@ -714,19 +713,17 @@
             [manager GET:strURL parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                NSString *jsonStr;
-               
+                NSDictionary * resultDic = [NSDictionary dictionary];
                 if ([responseObject isKindOfClass:[NSData class]]) {
-                    jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-
+                    resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+                    NSLog(@"%@",resultDic);
                 }else{
                     NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
                     NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
                     NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     DLog(@"response json --- %@",jsonStr);
-                    //            [Tool dataToDictionary:responseObject]
                 }
-                finished(Enum_SUCCESS,responseObject);
+                finished(Enum_SUCCESS,resultDic);
                 [_waitView removeFromSuperview];
                 [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -736,7 +733,6 @@
                 [_waitView removeFromSuperview];
                 [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
             }];
-        }
     }
 }
 

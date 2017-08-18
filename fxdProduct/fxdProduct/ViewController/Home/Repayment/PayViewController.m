@@ -162,9 +162,7 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
             [self.myTableview reloadData];
         };
         [self.navigationController pushViewController:payMethodVC animated:YES];
-        
-    }
-    
+    }    
 }
 
 //- (void)fatchCardInfo

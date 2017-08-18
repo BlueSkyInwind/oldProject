@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewModel.h"
-
+#import "HomeParam.h"
 @implementation HomeViewModel
 
 
@@ -50,7 +50,6 @@
 }
 
 
-
 -(void)fetchLoanProcess{
     
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
@@ -64,6 +63,35 @@
         }
     }];
 }
+
+-(void)homeDataRequest{
+    
+    HomeParam * homeParam = [[HomeParam alloc]init];
+    homeParam.platformType = PLATFORM;
+    homeParam.channel_ = @"1";
+    homeParam.position_ = @"1";
+    homeParam.juid = [Utility sharedUtility].userInfo.juid == nil ? @"" : [Utility sharedUtility].userInfo.juid;
+                                                                            
+    NSDictionary * paramDic = [homeParam toDictionary];
+    //http://192.168.12.109:8005/apigw/client/summary?
+
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:@"http://192.168.12.109:8005/apigw/client/summary?" parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+
+}
+
+
+
+
+
 
 
 @end
@@ -155,6 +183,12 @@
         }
     }];
 }
+
+
+
+
+
+
 
 @end
 

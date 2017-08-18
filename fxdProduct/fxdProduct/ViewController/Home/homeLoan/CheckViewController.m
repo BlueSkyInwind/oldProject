@@ -212,7 +212,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     } failure:^(EnumServerStatus status, id object) {
         
     }];
-
 }
 
 
@@ -347,9 +346,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 //                    checkFalse.seeView.hidden = NO;
 //                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
                 }
-
             }
-            
             [self.view addSubview:checkFalse];
         }
             break;
@@ -456,6 +453,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             if([_userStateModel.platform_type isEqualToString:@"2"] || [_userStateModel.platform_type isEqualToString:@"0"]){
 
                     attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《借款协议》"];
+                    attributeStr.yy_font = [UIFont systemFontOfSize:6];
                     range = NSMakeRange(attributeStr.length - 6, 6);
                
             } else {

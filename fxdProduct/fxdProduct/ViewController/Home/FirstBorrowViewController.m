@@ -46,13 +46,12 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-
+    
     NSURL *url = [NSURL URLWithString:_url];
     UIImage *placeholder = [UIImage imageNamed:@"placeholder_Image"];
     [self.firstImageView sd_setImageWithURL:url placeholderImage:placeholder];
     
 //    [self.firstImageView sd_setImageWithURL:[NSURL URLWithString:_url]];
-
     [self.navigationController setNavigationBarHidden:YES];
 }
 

@@ -28,6 +28,10 @@
  */
 -(void)fetchLoanProcess;
 
+/**
+ 首页用户请求
+ */
+-(void)homeDataRequest;
 
 
 @end

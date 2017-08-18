@@ -66,7 +66,6 @@
     NSMutableArray *_dataArray;
     QryUserStatusModel *_qryUserStatusModel;
     
-
     BMKLocationService *_locService;
     double _latitude;
     double _longitude;
@@ -93,14 +92,12 @@
 
 }
 
-
 -(void)createBottomView{
 
     CGFloat heigh;
     if (UI_IS_IPHONE5) {
         heigh = 70;
     }else{
-    
         heigh = 80;
     }
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, _k_h-49-heigh, _k_w, heigh)];
@@ -227,11 +224,10 @@
         //获取进件状态
         [self getFxdCaseInfo];
     }
-    
     [self fatchRecord];
     [self fatchBanner];
     [self getHomeProductList];
-    
+    [self getHomeData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -426,11 +422,9 @@
             i = _dataArray.count + 1;
             
         }else{
-        
             i = 2;
         }
     }else{
-    
         i = 1;
     }
     return i;
@@ -471,10 +465,7 @@
             
             return (_k_h-0.5*_k_w-235)/i;
         }
-        
-
     }
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -648,9 +639,7 @@
                 webView.urlStr = files.link_url_;
                 [self.navigationController pushViewController:webView animated:true];
             }
-            
         }
-        
     }
 }
 
@@ -692,7 +681,6 @@
 #pragma mark ->我要还款
 - (void)payMoney
 {
-
     if (![Utility sharedUtility].loginFlage) {
         [self presentLogin:self];
         return;
@@ -709,7 +697,6 @@
                     controller.userStateModel = resultModel;
                     controller.qryUserStatusModel = _qryUserStatusModel;
                     [weakSelf.navigationController pushViewController:controller animated:YES];
-
                 }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
                     //激活用户
                     NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
@@ -717,18 +704,15 @@
                     p2pVC.isRepay = YES;
                     p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
                     [weakSelf.navigationController pushViewController:p2pVC animated:YES];
-                    
                 }else{
                     RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                     repayRequest.targetVC = weakSelf;
                     [repayRequest repayRequest];
                 }
             }else{
-
                 RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                 repayRequest.targetVC = weakSelf;
                 [repayRequest repayRequest];
-                
             }
         }else{
 
@@ -759,6 +743,22 @@
 }
 
 #pragma mark - 获取数据
+
+-(void)getHomeData{
+    
+    HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
+    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+
+    } WithFaileBlock:^{
+        
+    }];
+    [homeViewModel homeDataRequest];
+    
+}
+
+
+
 /**
  获取首页产品列表
  */
@@ -838,7 +838,6 @@
             LoanProcessViewController *processVC = [[LoanProcessViewController alloc] init];
             processVC.loanProcessParse = loanProcess;
             [self.navigationController pushViewController:processVC animated:true];
-            
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:loanProcess.msg];
         }
@@ -872,7 +871,6 @@
             UserStateModel *result;
             result = [UserStateModel yy_modelWithJSON:object[@"result"]];
             finish(YES,result);
-
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:object[@"msg"]];
         }
@@ -1162,7 +1160,6 @@
 
 - (void)presentLogin:(UIViewController *)vc
 {
-    
     LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
     [vc presentViewController:nav animated:YES completion:nil];
