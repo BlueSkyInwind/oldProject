@@ -454,10 +454,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 if ([_userStateModel.platform_type isEqualToString:@"0"]) {
                     
                     attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《借款协议》"];
-                    attributeStr.yy_font = [UIFont systemFontOfSize:6];
                     range = NSMakeRange(attributeStr.length - 6, 6);
                 }else{
-                
                     attributeStr = [[NSMutableAttributedString alloc]initWithString:@"我已阅读并认可发薪贷《信用咨询及管理服务协议》"];
                     if (UI_IS_IPHONE5) {
                         attributeStr.yy_font = [UIFont systemFontOfSize:11];

@@ -86,7 +86,6 @@
         
     }];
     [checkBankViewModel getSupportBankListInfo:@"2"];
-    
 }
 
 - (void)addBackItem
