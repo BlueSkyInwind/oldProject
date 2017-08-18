@@ -134,19 +134,19 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self createUI];
 
     _isOpen = NO;
-    checkSuccess.agreementsView.hidden = YES;
+//    checkSuccess.agreementsView.hidden = YES;
 //    checkSuccess.agreementView.userInteractionEnabled = YES;
 //    checkSuccess.agreementImage.userInteractionEnabled = YES;
-    UITapGestureRecognizer *agreement = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
-    [checkSuccess.agreementImage addGestureRecognizer:agreement];
-    UITapGestureRecognizer *agreementGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
-    [checkSuccess.agreementView addGestureRecognizer:agreementGest];
+//    UITapGestureRecognizer *agreement = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
+//    [checkSuccess.agreementImage addGestureRecognizer:agreement];
+//    UITapGestureRecognizer *agreementGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
+//    [checkSuccess.agreementView addGestureRecognizer:agreementGest];
     [checkSuccess.firstAgreemwntBtn addTarget:self action:@selector(clickFirstAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
     [checkSuccess.secondAgreemwntBtn addTarget:self action:@selector(clickSecondAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
     [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 }
 
--(void)clickFirstAgreementBtn{
+-(void)clickSecondAgreementBtn{
 
     
     NSDictionary *paramDic;
@@ -181,7 +181,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
 }
 
--(void)clickSecondAgreementBtn{
+-(void)clickFirstAgreementBtn{
     
     NSDictionary *paramDic;
     if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
@@ -451,11 +451,19 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             NSRange range;
             
             if([_userStateModel.platform_type isEqualToString:@"2"] || [_userStateModel.platform_type isEqualToString:@"0"]){
-
+                if ([_userStateModel.platform_type isEqualToString:@"0"]) {
+                    
                     attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《借款协议》"];
                     attributeStr.yy_font = [UIFont systemFontOfSize:6];
                     range = NSMakeRange(attributeStr.length - 6, 6);
-               
+                }else{
+                
+                    attributeStr = [[NSMutableAttributedString alloc]initWithString:@"我已阅读并认可发薪贷《信用咨询及管理服务协议》"];
+                    if (UI_IS_IPHONE5) {
+                        attributeStr.yy_font = [UIFont systemFontOfSize:11];
+                    }
+                    range = NSMakeRange(attributeStr.length - 13, 13);
+                }
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"产品类型错误"];
             }
@@ -519,7 +527,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 }];
             }];
             checkSuccess.agreementLabel.attributedText = attributeStr;
-            
+           
         }
             break;
         default:
@@ -1218,7 +1226,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 CGFloat factMoney = _approvalModel.result.actual_loan_amount;
                 //                [[[object objectForKey:@"result"] objectForKey:@"actual_loan_amount_"] doubleValue] ;
                 NSString  *factMoneyStr = [NSString stringWithFormat:@"%.2f",factMoney];
-                NSString *attributeStr = [NSString stringWithFormat:@"实际到账%@元,详情见费用说明",factMoneyStr];
+//                NSString *attributeStr = [NSString stringWithFormat:@"实际到账%@元,详情见费用说明",factMoneyStr];
+                NSString *attributeStr = [NSString stringWithFormat:@"实际到账%@元",factMoneyStr];
                 NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:attributeStr];
                 one.yy_font = [UIFont systemFontOfSize:16];
                 [one addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,factMoneyStr.length)];
