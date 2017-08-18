@@ -464,7 +464,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     if (UI_IS_IPHONE5) {
                         attributeStr.yy_font = [UIFont systemFontOfSize:11];
                     }
-                    
                     range = NSMakeRange(attributeStr.length - 13, 13);
                 }
             } else {
