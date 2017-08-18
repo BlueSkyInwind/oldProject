@@ -340,36 +340,36 @@
 
 -(void)settingData:(HomeProductList *)homeProductList{
 
-    NSURL *firstUrl = [NSURL URLWithString:homeProductList.result.products[0].ext_attr_.icon_];
+    NSURL *firstUrl = [NSURL URLWithString:homeProductList.data.productList.products[0].extAttr.icon_];
     [self.firstImage sd_setImageWithURL:firstUrl];
-    self.nameFirstLabel.text = homeProductList.result.products[0].name_;
-    self.quotaFirstLabel.text = [NSString stringWithFormat:@"额度：最高%@元",homeProductList.result.products[0].principal_top_];
-    self.termFirstLabel.text = [NSString stringWithFormat:@"期限：%@-%@%@",homeProductList.result.products[0].staging_top_,homeProductList.result.products[0].staging_bottom_,homeProductList.result.products[0].remark_];
+    self.nameFirstLabel.text = homeProductList.data.productList.products[0].name;
+    self.quotaFirstLabel.text = [NSString stringWithFormat:@"额度：最高%@元",homeProductList.data.productList.products[0].principalTop];
+    self.termFirstLabel.text = [NSString stringWithFormat:@"期限：%@-%@%@",homeProductList.data.productList.products[0].stagingTop,homeProductList.data.productList.products[0].stagingBottom,homeProductList.data.productList.products[0].remark_];
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc]initWithString:self.termFirstLabel.text];
     [attributedStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, self.termFirstLabel.text.length-4)];
     self.termFirstLabel.attributedText = attributedStr;
     
-    self.feeFirstLabel.text = [NSString stringWithFormat:@"费用：%@/%@",homeProductList.result.products[0].pre_service_fee_rate_,homeProductList.result.products[0].remark_];
+    self.feeFirstLabel.text = [NSString stringWithFormat:@"费用：%@/%@",homeProductList.data.productList.products[0].pre_service_fee_rate_,homeProductList.data.productList.products[0].remark_];
     NSMutableAttributedString *feeAttribute = [[NSMutableAttributedString alloc]initWithString:self.feeFirstLabel.text];
     [feeAttribute addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, self.feeFirstLabel.text.length-5)];
     self.feeFirstLabel.attributedText = feeAttribute;
-    [self.descFirstBtn setTitle:[NSString stringWithFormat:@" %@ ",homeProductList.result.products[0].ext_attr_.tags[0]] forState:UIControlStateNormal];
+    [self.descFirstBtn setTitle:[NSString stringWithFormat:@" %@ ",homeProductList.data.productList.products[0].extAttr.tags[0]] forState:UIControlStateNormal];
     
-    NSURL *secondUrl = [NSURL URLWithString:homeProductList.result.products[1].ext_attr_.icon_];
+    NSURL *secondUrl = [NSURL URLWithString:homeProductList.data.productList.products[1].extAttr.icon_];
     [self.secondImage sd_setImageWithURL:secondUrl];
-    self.nameSecondLabel.text = homeProductList.result.products[1].name_;
-    self.quotaSecondLabel.text = [NSString stringWithFormat:@"额度：最高%@元",homeProductList.result.products[1].principal_top_];
-    self.termSecondLabel.text = [NSString stringWithFormat:@"期限：%@-%@%@",homeProductList.result.products[1].staging_top_,homeProductList.result.products[1].staging_bottom_,homeProductList.result.products[1].remark_];
+    self.nameSecondLabel.text = homeProductList.data.productList.products[1].name;
+    self.quotaSecondLabel.text = [NSString stringWithFormat:@"额度：最高%@元",homeProductList.data.productList.products[1].principalTop];
+    self.termSecondLabel.text = [NSString stringWithFormat:@"期限：%@-%@%@",homeProductList.data.productList.products[1].stagingTop,homeProductList.data.productList.products[1].stagingBottom,homeProductList.data.productList.products[1].remark_];
     NSMutableAttributedString *termAttribute = [[NSMutableAttributedString alloc]initWithString:self.termSecondLabel.text];
     [termAttribute addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, self.termSecondLabel.text.length-4)];
     self.termSecondLabel.attributedText = termAttribute;
-    self.feeSecondLabel.text = [NSString stringWithFormat:@"费用：%@%@",homeProductList.result.products[1].pre_service_fee_rate_,homeProductList.result.products[1].remark_];
+    self.feeSecondLabel.text = [NSString stringWithFormat:@"费用：%@%@",homeProductList.data.productList.products[1].pre_service_fee_rate_,homeProductList.data.productList.products[1].remark_];
     NSMutableAttributedString *feeSecondAttribute = [[NSMutableAttributedString alloc]initWithString:self.feeSecondLabel.text];
     [feeSecondAttribute addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, self.feeSecondLabel.text.length-4)];
     self.feeSecondLabel.attributedText = feeSecondAttribute;
-    [self.descSecondBtn setTitle:[NSString stringWithFormat:@" %@ ",homeProductList.result.products[1].ext_attr_.tags[0]] forState:UIControlStateNormal];
-    self.firstUrl = homeProductList.result.products[1].ext_attr_.path_;
-    self.secondUrl = homeProductList.result.products[1].ext_attr_.path_;
+    [self.descSecondBtn setTitle:[NSString stringWithFormat:@" %@ ",homeProductList.data.productList.products[1].extAttr.tags[0]] forState:UIControlStateNormal];
+    self.firstUrl = homeProductList.data.productList.products[1].extAttr.path_;
+    self.secondUrl = homeProductList.data.productList.products[1].extAttr.path_;
     [self setNeedsDisplay];
 }
 @end

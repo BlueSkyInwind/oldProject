@@ -103,12 +103,7 @@
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, _k_h-49-heigh, _k_w, heigh)];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bottomView];
-//    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(self.view.mas_bottom).with.offset(-55);
-//        make.left.equalTo(self.view.mas_left).with.offset(0);
-//        make.right.equalTo(self.view.mas_right).with.offset(0);
-//        make.width.equalTo(@186);
-//    }];
+
     UIView *payView = [[UIView alloc]init];
     UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
     payView.userInteractionEnabled = true;
@@ -224,9 +219,7 @@
         //获取进件状态
         [self getFxdCaseInfo];
     }
-    [self fatchRecord];
     [self fatchBanner];
-    [self getHomeProductList];
     [self getHomeData];
 }
 
@@ -418,7 +411,7 @@
 {
     NSInteger i = 0;
     if (_dataArray.count>0) {
-        if ([_homeProductList.result.type isEqualToString:@"0"]) {
+        if ([_homeProductList.data.productList.type isEqualToString:@"0"]) {
             i = _dataArray.count + 1;
             
         }else{
@@ -440,7 +433,7 @@
 {
     NSInteger i = 0;
     if (_dataArray.count > 0) {
-        if ([_homeProductList.result.type isEqualToString:@"0"]) {
+        if ([_homeProductList.data.productList.type isEqualToString:@"0"]) {
             if (_dataArray.count == 1) {
                 i = 3;
             }else{
@@ -495,6 +488,7 @@
         sdCycleScrollview.titleLabelTextColor = rgb(82, 82, 82);
         sdCycleScrollview.scrollDirection = UICollectionViewScrollDirectionVertical;
         NSMutableArray *titlesArray = [NSMutableArray new];
+       
         for (LoanRecordResult *result in _loanRecordParse.result) {
             //测试
             if (result.content == nil) {
@@ -502,7 +496,8 @@
             }
             [titlesArray addObject:result.content];
         }
-        sdCycleScrollview.titlesGroup = [titlesArray copy];
+//        sdCycleScrollview.titlesGroup = [titlesArray copy];
+        sdCycleScrollview.titlesGroup = _homeProductList.data.paidList;
         if (UI_IS_IPHONE5) {
             sdCycleScrollview.titleLabelTextFont = [UIFont systemFontOfSize:13.f];
         }
@@ -517,7 +512,7 @@
         return cell;
     }
     
-    if ([_homeProductList.result.type isEqualToString:@"0"]) {
+    if ([_homeProductList.data.productList.type isEqualToString:@"0"]) {
         if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
             
             HomeProductListProducts *product = _dataArray[indexPath.section-1];
@@ -531,9 +526,9 @@
                 [cell.loanBtn setBackgroundImage:nil forState:UIControlStateNormal];
                 [cell.loanBtn setTitle:@"我要借款" forState:UIControlStateNormal];
             }
-            [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.ext_attr_.icon_]];
-            cell.periodLabel.text = [NSString stringWithFormat:@"%@还款，额度%@",product.ext_attr_.period_desc_,product.ext_attr_.amt_desc_];;
-            cell.amountLabel.text = product.name_;
+            [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.extAttr.icon_]];
+            cell.periodLabel.text = [NSString stringWithFormat:@"%@还款，额度%@",product.extAttr.period_desc_,product.extAttr.amt_desc_];;
+            cell.amountLabel.text = product.name;
             cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
             cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
             cell.helpImage.userInteractionEnabled = true;
@@ -548,7 +543,7 @@
                 
             }else{
                 
-                cell.periodLabel.text = [NSString stringWithFormat:@"%@天还款，额度%@",product.ext_attr_.period_desc_,product.ext_attr_.amt_desc_];
+                cell.periodLabel.text = [NSString stringWithFormat:@"%@天还款，额度%@",product.extAttr.period_desc_,product.extAttr.amt_desc_];
                 UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
                 [cell.helpImage addGestureRecognizer:gest];
                 cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
@@ -558,7 +553,7 @@
 
         }
         
-    }else if([_homeProductList.result.type isEqualToString:@"1"]){
+    }else if([_homeProductList.data.productList.type isEqualToString:@"1"]){
     
         if (indexPath.section == 1) {
 
@@ -749,6 +744,22 @@
     HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
     [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
         
+        _homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
+        [_dataArray removeAllObjects];
+        for (HomeProductListProducts *product in _homeProductList.data.productList.products) {
+            [_dataArray addObject:product];
+        }
+        
+        if ([_homeProductList.data.productList.type isEqualToString:@"1"]) {
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_homeProductList.data.productList.refuseMsg];
+        }
+        [_tableView reloadData];
+        
+        if (_homeProductList.data.paidList.count>0) {
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+            NSArray *indexArray=[NSArray arrayWithObject:indexPath];
+            [self.tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
 
     } WithFaileBlock:^{
         
@@ -758,32 +769,6 @@
 }
 
 
-
-/**
- 获取首页产品列表
- */
--(void)getHomeProductList{
-    
-    ProductListViewModel *productListViewModel = [[ProductListViewModel alloc]init];
-    [productListViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
-        [_dataArray removeAllObjects];
-        for (HomeProductListProducts *product in _homeProductList.result.products) {
-            [_dataArray addObject:product];
-        }
-        
-        if ([_homeProductList.result.type isEqualToString:@"1"]) {
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_homeProductList.result.refuseMsg];
-        }
-        
-//        _homeProductList.result.type = @"1";
-        [_tableView reloadData];
-        
-    } WithFaileBlock:^{
-        
-    }];
-    [productListViewModel fetchProductListInfo];
-}
 /**
  轮播图数据
  */
@@ -806,23 +791,6 @@
     [bannerViewModel fetchBannerInfo];
 }
 
-/**
- 获取借款滚动记录
- */
-- (void)fatchRecord
-{
-    HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
-    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _loanRecordParse = [LoanRecordParse yy_modelWithJSON:returnValue];
-        //        [self.tableView reloadData];
-        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-        NSArray *indexArray=[NSArray arrayWithObject:indexPath];
-        [self.tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
-    } WithFaileBlock:^{
-        
-    }];
-    [homeViewModel fetchLoanRecord];
-}
 /**
  获取借款进度
  */
