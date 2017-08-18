@@ -141,8 +141,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 //    [checkSuccess.agreementImage addGestureRecognizer:agreement];
 //    UITapGestureRecognizer *agreementGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
 //    [checkSuccess.agreementView addGestureRecognizer:agreementGest];
-//    [checkSuccess.firstAgreemwntBtn addTarget:self action:@selector(clickFirstAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
-//    [checkSuccess.secondAgreemwntBtn addTarget:self action:@selector(clickSecondAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
+    [checkSuccess.firstAgreemwntBtn addTarget:self action:@selector(clickFirstAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
+    [checkSuccess.secondAgreemwntBtn addTarget:self action:@selector(clickSecondAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
     [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -461,6 +461,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 }else{
                 
                     attributeStr = [[NSMutableAttributedString alloc]initWithString:@"我已阅读并认可发薪贷《信用咨询及管理服务协议》"];
+                    if (UI_IS_IPHONE5) {
+                        attributeStr.yy_font = [UIFont systemFontOfSize:12];
+                    }
+                    
                     range = NSMakeRange(attributeStr.length - 13, 13);
                 }
             } else {
@@ -526,7 +530,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 }];
             }];
             checkSuccess.agreementLabel.attributedText = attributeStr;
-            
+           
         }
             break;
         default:
@@ -1225,7 +1229,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 CGFloat factMoney = _approvalModel.result.actual_loan_amount;
                 //                [[[object objectForKey:@"result"] objectForKey:@"actual_loan_amount_"] doubleValue] ;
                 NSString  *factMoneyStr = [NSString stringWithFormat:@"%.2f",factMoney];
-                NSString *attributeStr = [NSString stringWithFormat:@"实际到账%@元,详情见费用说明",factMoneyStr];
+//                NSString *attributeStr = [NSString stringWithFormat:@"实际到账%@元,详情见费用说明",factMoneyStr];
+                NSString *attributeStr = [NSString stringWithFormat:@"实际到账%@元",factMoneyStr];
                 NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:attributeStr];
                 one.yy_font = [UIFont systemFontOfSize:16];
                 [one addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,factMoneyStr.length)];

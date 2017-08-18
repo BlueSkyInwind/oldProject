@@ -61,10 +61,6 @@
         _agreementLabel.textVerticalAlignment = YYTextVerticalAlignmentCenter;
         _agreementLabel.numberOfLines = 0;
         _agreementLabel.font = [UIFont systemFontOfSize:15];
-        if (UI_IS_IPHONE5) {
-            _agreementLabel.font = [UIFont systemFontOfSize:10];
-        }
-        
         [self.userCheckView addSubview:_agreementLabel];
         [_agreementLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@18);
