@@ -64,7 +64,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     PromoteLimit,
 };
 
-@interface CheckViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,ReplenishDoneDelegate>
+@interface CheckViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,ReplenishDoneDelegate,MoxieSDKDelegate>
 {
     CheckViewIng *_checking;
     CheckSuccessView *checkSuccess;
@@ -116,9 +116,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     self.rt_disableInteractivePop = YES;
     [self addBackItemRoot];
     DLog(@"%@",[Utility sharedUtility].userInfo.juid);
-    _moxieSDK = [[MoxieSDK shared] initWithUserID:[NSString stringWithFormat:@"%@_1",[Utility sharedUtility].userInfo.juid] mApikey:theMoxieApiKey controller:self];
-    DLog(@"%@",_moxieSDK.mxSDKVersion);
-    [self listenForResult];
+    [self configMoxieSDK];
+    DLog(@"%@",_moxieSDK.version);
 
     if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
         for (int i = 1; i < 2; i++) {
@@ -540,41 +539,82 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 - (void)refreshUI{
     [self updateUserState];
 }
-
-
+-(void)configMoxieSDK{
+    /***必须配置的基本参数*/
+    [MoxieSDK shared].delegate = self;
+    [MoxieSDK shared].userId = [Utility sharedUtility].userInfo.juid;
+    [MoxieSDK shared].apiKey = theMoxieApiKey;
+    [MoxieSDK shared].fromController = self;
+    //-------------更多自定义参数，请参考文档----------------//
+};
 - (void)promote
 {
-    [_moxieSDK startFunction:MXSDKFunctionbank];
+    [MoxieSDK shared].taskType = @"bank";
+    [[MoxieSDK shared] startFunction];
 }
-
+#pragma MoxieSDK Result Delegate
+-(void)receiveMoxieSDKResult:(NSDictionary*)resultDictionary{
+    int code = [resultDictionary[@"code"] intValue];
+    NSString *taskType = resultDictionary[@"taskType"];
+    NSString *taskId = resultDictionary[@"taskId"];
+    NSString *message = resultDictionary[@"message"];
+    NSString *account = resultDictionary[@"account"];
+    BOOL loginDone = [resultDictionary[@"loginDone"] boolValue];
+    NSLog(@"get import result---code:%d,taskType:%@,taskId:%@,message:%@,account:%@,loginDone:%d",code,taskType,taskId,message,account,loginDone);
+    //【登录中】假如code是2且loginDone为false，表示正在登录中
+    if(code == 2 && loginDone == false){
+        NSLog(@"任务正在登录中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
+    }
+    //【采集中】假如code是2且loginDone为true，已经登录成功，正在采集中
+    else if(code == 2 && loginDone == true){
+        NSLog(@"任务已经登录成功，正在采集中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
+    }
+    //【采集成功】假如code是1则采集成功（不代表回调成功）
+    else if(code == 1){
+        [self updateUserState];
+        NSLog(@"任务采集成功，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
+    }
+    //【未登录】假如code是-1则用户未登录
+    else if(code == -1){
+        NSLog(@"用户未登录");
+    }
+    //【任务失败】该任务按失败处理，可能的code为0，-2，-3，-4
+    //0 其他失败原因
+    //-2平台方不可用（如中国移动维护等）
+    //-3魔蝎数据服务异常
+    //-4用户输入出错（密码、验证码等输错后退出）
+    else{
+        NSLog(@"任务失败");
+    }
+}
 #pragma mark -- 魔蝎回调
--(void)listenForResult{
-    //    __weak CheckViewController *weakSelf = self;
-    @weakify(self);
-    self.moxieSDK.resultBlock=^(int code,MXSDKFunction funciton,NSString *taskid,NSString *searchid){
-        DLog(@"get import result---statusCode:%d,function:%d,taskid:%@,searchid:%@",code,funciton,taskid,searchid);
-        
-        if(funciton == MXSDKFunctionbank){
-            if(code == 1){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    @strongify(self);
-                    for (UIView *view in self.view.subviews) {
-                        if (![[view class] isSubclassOfClass:[MJRefreshNormalHeader class]]) {
-                            [view removeFromSuperview];
-                        }
-                    }
-                });
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [NSThread sleepForTimeInterval:1];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        @strongify(self);
-                        [self updateUserState];
-                    });
-                });
-            }
-        }
-    };
-}
+//-(void)listenForResult{
+//    //    __weak CheckViewController *weakSelf = self;
+//    @weakify(self);
+//    self.moxieSDK.resultBlock=^(int code,MXSDKFunction funciton,NSString *taskid,NSString *searchid){
+//        DLog(@"get import result---statusCode:%d,function:%d,taskid:%@,searchid:%@",code,funciton,taskid,searchid);
+//        
+//        if(funciton == MXSDKFunctionbank){
+//            if(code == 1){
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    @strongify(self);
+//                    for (UIView *view in self.view.subviews) {
+//                        if (![[view class] isSubclassOfClass:[MJRefreshNormalHeader class]]) {
+//                            [view removeFromSuperview];
+//                        }
+//                    }
+//                });
+//                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                    [NSThread sleepForTimeInterval:1];
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        @strongify(self);
+//                        [self updateUserState];
+//                    });
+//                });
+//            }
+//        }
+//    };
+//}
 
 - (void)updateUserState
 {
@@ -1319,13 +1359,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [self.navigationController pushViewController:payLoanview animated:true];
         }];
         
-        
     }else{
-        
         UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
         userDataVC.product_id = SalaryLoan;
         [self.navigationController pushViewController:userDataVC animated:true];
-        
     }
 //    UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
 //    userDataVC.product_id = SalaryLoan;
