@@ -49,6 +49,8 @@
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "LoginViewModel.h"
 #import "FirstBorrowViewController.h"
+//#import "fxdProduct-Swift.h"
+
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeRefuseCellDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
