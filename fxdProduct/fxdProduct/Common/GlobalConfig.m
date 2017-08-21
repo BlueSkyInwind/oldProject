@@ -44,11 +44,11 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 //测试导流 192.168.6.133
 
-//NSString * const _main_url  =   @"http://192.168.6.133/fxd-esb/esb/";
-//NSString * const _ValidESB_url  =   @"http://192.168.6.133/fxd-esb/";
-//NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://192.168.6.133/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+NSString * const _main_url  =   @"http://192.168.6.133/fxd-esb/esb/";
+NSString * const _ValidESB_url  =   @"http://192.168.6.133/fxd-esb/";
+NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
+NSString * const _p2P_url = @"http://192.168.6.133/fxd-esb/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //彭冲本地
 //NSString * const _main_url  =   @"http://192.168.9.243:8080/fxd-esb/esb/";
@@ -60,11 +60,11 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 
 //张宇本地
-NSString * const _main_url  =   @"http://192.168.12.166:9191/fxd-esb/esb/";
-NSString * const _ValidESB_url  =   @"http://192.168.12.166:9191/fxd-esb/";
-NSString * const _H5_url    =   @"http://192.168.12.166:9191/fxd-h5/page/";
-NSString * const _p2P_url = @"http://192.168.12.166:9191/fxd-esb/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+//NSString * const _main_url  =   @"http://192.168.12.166:9191/fxd-esb/esb/";
+//NSString * const _ValidESB_url  =   @"http://192.168.12.166:9191/fxd-esb/";
+//NSString * const _H5_url    =   @"http://192.168.12.166:9191/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://192.168.12.166:9191/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //芝麻信用测试地址
 //NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";
