@@ -602,7 +602,7 @@
                     moenyViewing.lableData.font = [UIFont systemFontOfSize:9.f];
                     //                        moenyViewing.lableData.backgroundColor = [UIColor redColor];
                     moenyViewing.lableData.numberOfLines = 0;
-                    moenyViewing.lableData.text = [NSString stringWithFormat:@"\n第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
+                    moenyViewing.lableData.text = [NSString stringWithFormat:@"第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
                 }else {
                     moenyViewing.lableData.text = [NSString stringWithFormat:@"第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
                 }
