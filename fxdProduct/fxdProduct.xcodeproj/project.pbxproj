@@ -1175,6 +1175,10 @@
 		CC5D702D1ED4405500A074AF /* PaymentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */; };
 		CC6C93EA1F4A816500587C74 /* HomeDefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93E91F4A816500587C74 /* HomeDefaultCell.swift */; };
 		CC6C93EB1F4A816500587C74 /* HomeDefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93E91F4A816500587C74 /* HomeDefaultCell.swift */; };
+		CC6C93EE1F4AB58C00587C74 /* TrackRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */; };
+		CC6C93EF1F4AB58C00587C74 /* TrackRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */; };
+		CC6C93F11F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
+		CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
 		CCA056BC1EBB3ECB00CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
@@ -2319,6 +2323,8 @@
 		CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentServiceModel.m; sourceTree = "<group>"; };
 		CC6C93E91F4A816500587C74 /* HomeDefaultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDefaultCell.swift; sourceTree = "<group>"; };
 		CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "fxdProduct-Bridging-Header.h"; sourceTree = "<group>"; };
+		CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackRect.swift; sourceTree = "<group>"; };
+		CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseThirdView.swift; sourceTree = "<group>"; };
 		CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
@@ -4519,6 +4525,8 @@
 				63F2548F1E49CFE800852CF1 /* LoanProcessCell.h */,
 				63F254901E49CFE800852CF1 /* LoanProcessCell.m */,
 				63F254911E49CFE800852CF1 /* LoanProcessCell.xib */,
+				CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */,
+				CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -5870,6 +5878,7 @@
 				63FE3DF01E48821B009E5B82 /* DaysCell.m in Sources */,
 				0F0650441BE219BF000DE94D /* LoanDoFindResult.m in Sources */,
 				CC31978F1ED911980083F263 /* WhiteRefuseView.m in Sources */,
+				CC6C93EE1F4AB58C00587C74 /* TrackRect.swift in Sources */,
 				635B0BDE1DF14B9C008EAFD1 /* AgreeMentListViewController.m in Sources */,
 				637636EB1D76A72A00E93289 /* LewPopupViewAnimationSpring.m in Sources */,
 				63FC25011D98F7E9006F58F3 /* YYTextUtilities.m in Sources */,
@@ -5887,6 +5896,7 @@
 				848394261EDEC96C003EF4EC /* HomePopParam.m in Sources */,
 				638C3F2E1CF53662000446A7 /* RepayMentAvailableRedpackets.m in Sources */,
 				635B2FBA1D6AEE22009CEFE0 /* GlobalConfig.m in Sources */,
+				CC6C93F11F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */,
 				CC5D702C1ED4405500A074AF /* PaymentServiceModel.m in Sources */,
 				630D459B1BCC99DE00874064 /* CardListResult.m in Sources */,
 				63F1A5011BD8CB1C00B83751 /* RepayHistoryBaseClass.m in Sources */,
@@ -6515,6 +6525,7 @@
 				CC0DFA791EA5B1090024841A /* P2PBillDetail.m in Sources */,
 				CC0DFA7A1EA5B1090024841A /* YYDiskCache.m in Sources */,
 				CC0DFA7B1EA5B1090024841A /* SelectTableViewController.m in Sources */,
+				CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */,
 				CC0DFA7C1EA5B1090024841A /* YYTextDebugOption.m in Sources */,
 				CC0DFA7D1EA5B1090024841A /* TicketExplainCell.m in Sources */,
 				CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */,
@@ -6617,6 +6628,7 @@
 				CC0DFAD31EA5B1090024841A /* ProfessViewController.m in Sources */,
 				CC0DFAD41EA5B1090024841A /* QueryRepaymentsData.m in Sources */,
 				CC0DFAD71EA5B1090024841A /* P2PRepaySaveViewController.m in Sources */,
+				CC6C93EF1F4AB58C00587C74 /* TrackRect.swift in Sources */,
 				CC0DFAD81EA5B1090024841A /* ShareConfig.m in Sources */,
 				CC0DFAD91EA5B1090024841A /* ContactViewController.m in Sources */,
 				CC0DFADA1EA5B1090024841A /* NSString+Extend.m in Sources */,
