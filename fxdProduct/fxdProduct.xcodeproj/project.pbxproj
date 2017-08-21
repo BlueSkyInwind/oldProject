@@ -1173,7 +1173,8 @@
 		CC5D70281ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
 		CC5D702C1ED4405500A074AF /* PaymentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */; };
 		CC5D702D1ED4405500A074AF /* PaymentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */; };
-		CC6C93E11F4A6F0000587C74 /* HomeDefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93E01F4A6F0000587C74 /* HomeDefaultCell.swift */; };
+		CC6C93EA1F4A816500587C74 /* HomeDefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93E91F4A816500587C74 /* HomeDefaultCell.swift */; };
+		CC6C93EB1F4A816500587C74 /* HomeDefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93E91F4A816500587C74 /* HomeDefaultCell.swift */; };
 		CCA056BC1EBB3ECB00CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
@@ -2316,8 +2317,8 @@
 		CC5D70261ED4400600A074AF /* CashModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashModel.m; sourceTree = "<group>"; };
 		CC5D702A1ED4405500A074AF /* PaymentServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentServiceModel.h; sourceTree = "<group>"; };
 		CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentServiceModel.m; sourceTree = "<group>"; };
-		CC6C93E01F4A6F0000587C74 /* HomeDefaultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeDefaultCell.swift; path = "../../../../../../fxd-product-swift/FXDProduct/View/Home/HomeDefaultCell.swift"; sourceTree = "<group>"; };
-		CC6C93E31F4A7AB400587C74 /* fxdProduct-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "fxdProduct-Bridging-Header.h"; sourceTree = "<group>"; };
+		CC6C93E91F4A816500587C74 /* HomeDefaultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDefaultCell.swift; sourceTree = "<group>"; };
+		CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "fxdProduct-Bridging-Header.h"; sourceTree = "<group>"; };
 		CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
@@ -4358,7 +4359,7 @@
 				63117FB61DFFC42600635BB3 /* ShareConfig.m */,
 				638A16841E5030D700AB8AB6 /* SetUpFMDevice.h */,
 				638A16851E5030D700AB8AB6 /* SetUpFMDevice.m */,
-				CC6C93E31F4A7AB400587C74 /* fxdProduct-Bridging-Header.h */,
+				CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -4505,7 +4506,7 @@
 		63E1ECD61E1BA88F0079A2F8 /* HomeCell */ = {
 			isa = PBXGroup;
 			children = (
-				CC6C93E01F4A6F0000587C74 /* HomeDefaultCell.swift */,
+				CC6C93E91F4A816500587C74 /* HomeDefaultCell.swift */,
 				63E1ECD71E1BA8E30079A2F8 /* HomeProductCell.h */,
 				63E1ECD81E1BA8E30079A2F8 /* HomeProductCell.m */,
 				63E1ECD91E1BA8E30079A2F8 /* HomeProductCell.xib */,
@@ -5585,6 +5586,7 @@
 				"${BUILT_PRODUCTS_DIR}/OpenUDID/OpenUDID.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
@@ -5601,6 +5603,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenUDID.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
@@ -5648,6 +5651,7 @@
 				"${BUILT_PRODUCTS_DIR}/OpenUDID/OpenUDID.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
@@ -5664,6 +5668,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenUDID.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
@@ -5960,7 +5965,7 @@
 				637637031D7829BE00E93289 /* DetailRepayHeader.m in Sources */,
 				636AC4331D38EA7F00599590 /* PayMethodCell.m in Sources */,
 				1A686DB01C1E961C009227A9 /* NextViewCell.m in Sources */,
-				CC6C93E11F4A6F0000587C74 /* HomeDefaultCell.swift in Sources */,
+				CC6C93EA1F4A816500587C74 /* HomeDefaultCell.swift in Sources */,
 				63A24C591BE063A90036E8EF /* NSString+File.m in Sources */,
 				843614A41F0CF9130036201A /* BaseResultModel.m in Sources */,
 				63E640CC1DCAD88300783E9D /* MoreInfoCell.m in Sources */,
@@ -6565,6 +6570,7 @@
 				CC0DFAA81EA5B1090024841A /* TADotView.m in Sources */,
 				CC0DFAA91EA5B1090024841A /* UIDevice+Extend.m in Sources */,
 				CC0DFAAA1EA5B1090024841A /* LOTShapeRectangle.m in Sources */,
+				CC6C93EB1F4A816500587C74 /* HomeDefaultCell.swift in Sources */,
 				CC0DFAAB1EA5B1090024841A /* PushParse.m in Sources */,
 				CC0DFAAC1EA5B1090024841A /* BankList.m in Sources */,
 				CC0DFAAD1EA5B1090024841A /* RegionBaseClass.m in Sources */,
@@ -7110,7 +7116,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h ";
+				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -7213,7 +7219,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h ";
+				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}";
