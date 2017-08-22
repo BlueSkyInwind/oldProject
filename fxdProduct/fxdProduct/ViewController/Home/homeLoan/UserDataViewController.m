@@ -469,6 +469,10 @@
         if (unfoldBtnIndex == indexPath.row) {
             UnfoldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UnfoldTableViewCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.titleLabel.text = @"拉起";
+            if (!isOpen) {
+                cell.titleLabel.text = @"更多";
+            }
             __weak typeof(self) weakSelf = self;
             cell.unfoldBtnClick = ^{
                 isOpen = !isOpen;
@@ -537,8 +541,7 @@
             cell.titleLable.text = @"收款信息";
             cell.subTitleLabel.text = @"";
             return cell;
-        }
-            break;
+        }             break;
         case 3:
         {
             cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
@@ -640,10 +643,20 @@
             break;
         case 3:
         {
-            if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0){
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
-            }else {
+//            if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0){
+//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+//            }else {
                 [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
+                    
+                    thirdPartyAuthViewController * thirdPartyAuthVC = [[thirdPartyAuthViewController alloc]init];
+                    thirdPartyAuthVC.phoneAuthChannel = _phoneAuthChannel;
+                    thirdPartyAuthVC.isZmxyAuth = [NSString stringWithFormat:@"%@",_isZmxyAuth];
+                    thirdPartyAuthVC.resultCode = _resultCode;
+                    thirdPartyAuthVC.verifyStatus =  [NSString stringWithFormat:@"%.0lf",custom_baseInfo.result.verifyStatus];
+                    thirdPartyAuthVC.isMobileAuth = _isMobileAuth;
+                    [self.navigationController pushViewController:thirdPartyAuthVC animated:true];
+                    
+
                     CertificationViewController *certificationVC = [[CertificationViewController alloc] init];
                     certificationVC.phoneAuthChannel = _phoneAuthChannel;
                     certificationVC.isMobileAuth = _isMobileAuth;
@@ -660,9 +673,9 @@
                     } else {
                         certificationVC.showAll = false;
                     }
-                    [self.navigationController pushViewController:certificationVC animated:true];
+//                    [self.navigationController pushViewController:certificationVC animated:true];
                 }];
-            }
+//            }
         }
             break;
         case 4:

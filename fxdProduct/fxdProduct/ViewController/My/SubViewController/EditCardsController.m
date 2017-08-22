@@ -111,8 +111,8 @@
 {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 - (void)clicksecry
 {

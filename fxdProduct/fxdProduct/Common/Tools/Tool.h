@@ -77,6 +77,7 @@
  */
 + (CGFloat)widthForText:(NSString *)text font:(CGFloat)size;
 
++ (void)showMessage:(NSString *)msg vc:(UIViewController *)vc;
 
 
 @end

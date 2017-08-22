@@ -10,6 +10,15 @@
 #define fxdProduct_Bridging_Header_h
 
 #import "Tool.h"
+#import "SesameCreditViewController.h"
+#import "CertificationViewController.h"
+#import "MGLiveViewController.h"
+#import "BaseNavigationViewController.h"
+#import "GlobalConfig.h"
+#import "Utility.h"
+#import "UserDataViewModel.h"
+#import "MBPAlertView.h"
+#import "UIColor+Extend.h"
 
 
 
