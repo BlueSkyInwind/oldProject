@@ -12,7 +12,7 @@
 #import "UserStateModel.h"
 #import "AuthStatus.h"
 
-@interface ReplenishViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ReplenishViewController ()<UITableViewDelegate,UITableViewDataSource,MoxieSDKDelegate>
 {
     NSArray *_imageArr;
     NSArray *_titleArr;
@@ -125,69 +125,77 @@ NSString * const CellIdentifier = @"MoreOnfoCell";
 {
     if (indexPath.row == 0) {
         if ([_authStateModel.result.alipay_status isEqualToString:@"0"]) {
-            [self initMXSDK];
-            [_moxieSDK startFunction:MXSDKFunctionalipay];
+            [self configMoxieSDK];
+            [MoxieSDK shared].taskType = @"qq";
+            [[MoxieSDK shared] startFunction];
         }
-//        else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前不可进行认证操作"];
-//        }
+
     }
     if (indexPath.row == 1) {
         if ([_authStateModel.result.qq_status isEqualToString:@"0"]) {
-            [self initMXSDK];
-            [_moxieSDK startFunction:MXSDKFunctionqq];
+            [self configMoxieSDK];
+            [MoxieSDK shared].taskType = @"alipay";
+            [[MoxieSDK shared] startFunction];
         }
     }
 }
 
+-(void)configMoxieSDK{
+    /***必须配置的基本参数*/
+    [MoxieSDK shared].delegate = self;
+    [MoxieSDK shared].userId = [Utility sharedUtility].userInfo.juid;
+    [MoxieSDK shared].apiKey = theMoxieApiKey;
+    [MoxieSDK shared].fromController = self;
+    //-------------更多自定义参数，请参考文档----------------//
+};
 
--(void)initMXSDK{
-    //设置公司和用户参数
-    if (_moxieSDK == nil) {
-        _moxieSDK = [[MoxieSDK shared] initWithUserID:_userStateModel.case_info_id mApikey:theMoxieApiKey controller:self];
+#pragma MoxieSDK Result Delegate
+-(void)receiveMoxieSDKResult:(NSDictionary*)resultDictionary{
+    int code = [resultDictionary[@"code"] intValue];
+    NSString *taskType = resultDictionary[@"taskType"];
+    NSString *taskId = resultDictionary[@"taskId"];
+    NSString *message = resultDictionary[@"message"];
+    NSString *account = resultDictionary[@"account"];
+    BOOL loginDone = [resultDictionary[@"loginDone"] boolValue];
+    NSLog(@"get import result---code:%d,taskType:%@,taskId:%@,message:%@,account:%@,loginDone:%d",code,taskType,taskId,message,account,loginDone);
+    //【登录中】假如code是2且loginDone为false，表示正在登录中
+    if(code == 2 && loginDone == false){
+        NSLog(@"任务正在登录中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
     }
-    DLog(@"%@",_moxieSDK.mxSDKVersion);
-    //修改内部参数
-    [self editSDKInfo];
-    //添加结果回调
-    [self listenForResult];
-}
+    //【采集中】假如code是2且loginDone为true，已经登录成功，正在采集中
+    else if(code == 2 && loginDone == true){
+        NSLog(@"任务已经登录成功，正在采集中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
+    }
+    //【采集成功】假如code是1则采集成功（不代表回调成功）
+    else if(code == 1){
+        if ([taskType isEqualToString:@"qq"]) {
+            [self fatchUserState];
 
--(void)listenForResult{
-    __weak ReplenishViewController *weakself = self;
-    [MoxieSDK shared].resultBlock=^(int code,MXSDKFunction funciton,NSString *taskid,NSString *searchid){
-        DLog(@"get import result---statusCode:%d,function:%d,taskid:%@,searchid:%@",code,funciton,taskid,searchid);
-        if (funciton == MXSDKFunctionalipay) {
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                dispatch_async(dispatch_get_main_queue(), ^{
-//                    if (code == 1) {
-//                        [_describeArr replaceObjectAtIndex:0 withObject:@"认证中"];
-//                        [weakself.tableview reloadData];
-//                    }
-                    [weakself fatchUserState];
-                });
-            });
         }
-        
-        if (MXSDKFunctionqq) {
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                dispatch_async(dispatch_get_main_queue(), ^{
-//                    if (code == 1) {
-//                        [_describeArr replaceObjectAtIndex:1 withObject:@"认证中"];
-//                        [weakself.tableview reloadData];
-//                    }
-                    [weakself fatchUserState];
-                });
-            });
+        if ([taskType isEqualToString:@"alipay"]) {
+            [self fatchUserState];
         }
-    };
+        NSLog(@"任务采集成功，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
+    }
+    //【未登录】假如code是-1则用户未登录
+    else if(code == -1){
+        NSLog(@"用户未登录");
+    }
+    //【任务失败】该任务按失败处理，可能的code为0，-2，-3，-4
+    //0 其他失败原因
+    //-2平台方不可用（如中国移动维护等）
+    //-3魔蝎数据服务异常
+    //-4用户输入出错（密码、验证码等输错后退出）
+    else{
+        NSLog(@"任务失败");
+    }
 }
 
 -(void)editSDKInfo{
-    _moxieSDK.mxNavigationController.navigationBar.translucent = YES;
-    _moxieSDK.mxNavigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
-    [_moxieSDK.mxNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
-    _moxieSDK.backImage = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    _moxieSDK.navigationController.navigationBar.translucent = YES;
+    _moxieSDK.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
+    [_moxieSDK.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
+    _moxieSDK.backImageName = @"return";
 }
 
 - (void)didReceiveMemoryWarning {

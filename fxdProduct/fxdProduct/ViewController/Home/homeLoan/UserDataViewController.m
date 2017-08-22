@@ -29,8 +29,12 @@
 #import "DataWriteAndRead.h"
 #import "SesameCreditViewController.h"
 #import "HomeProductList.h"
+#import "SeniorCertificationView.h"
+#import "UnfoldTableViewCell.h"
+#import "MoxieSDK.h"
+#import "EditCardsController.h"
 
-@interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate>
+@interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
 {
     CGFloat processFlot;
     UIView *processView;
@@ -50,6 +54,8 @@
     NSString *_phoneAuthChannel;
     UserStateModel *_model;
     
+    BOOL isOpen;
+    
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -65,23 +71,21 @@
     
     self.navigationItem.title = @"资料填写";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.automaticallyAdjustsScrollViewInsets = false;
+    self.automaticallyAdjustsScrollViewInsets = true;
     processFlot = 0.0;
+    isOpen = YES;
     _subTitleArr = @[@"请完善您的个人信息",@"请完善您的联系人信息",@"请完善您的职业信息",@"请完成三方认证"];
     [self addBackItemRoot];
-    
+    [self configMoxieSDK];
     [self configTableview];
-    self.navigationController.navigationBar.barTintColor = UI_MAIN_COLOR;
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.barTintColor = UI_MAIN_COLOR;
+//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     topView = [[UIView alloc] init];
     [self.view addSubview:topView];
-    
     if (_isMine) {
-        
         _applyBtn.enabled = NO;
         _applyBtn.hidden = YES;
     }
-    
 }
 
 - (void)addBackItemRoot
@@ -112,9 +116,7 @@
 {
 
     if (_nextStep.integerValue > 0) {
-
         processFlot = (_nextStep.integerValue-1)*0.2;
-
     } else {
         if (_nextStep.integerValue == -1) {
             processFlot = 1;
@@ -125,7 +127,6 @@
             [_applyBtn setBackgroundColor:UI_MAIN_COLOR];
             _applyBtn.enabled = true;
         }
-        
         [_tableView reloadData];
     }
     if (processFlot <= 1 && processFlot >= 0) {
@@ -141,10 +142,9 @@
 {
     [super viewWillAppear:animated];
     [_tableView.mj_header beginRefreshing];
-    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
+//    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
     [self getHomeProductList];
 }
-
 
 /**
  获取首页产品列表
@@ -160,7 +160,6 @@
             _applyBtn.hidden = YES;
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:homeProductList.data.productList.refuseMsg];
         }
-        
     } WithFaileBlock:^{
         
     }];
@@ -171,6 +170,7 @@
 - (void)configTableview
 {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DataDisplayCell class]) bundle:nil] forCellReuseIdentifier:@"DataDisplayCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([UnfoldTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"UnfoldTableViewCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -182,75 +182,76 @@
     [header beginRefreshing];
     self.tableView.mj_header = header;
     
-    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.53)];
-    headView.backgroundColor = UI_MAIN_COLOR;
-    UIImageView *processBack = [[UIImageView alloc] init];
-    [self setCornerWithoutRadius:processBack];
-    processBack.image = [UIImage imageNamed:@"process"];
-    processBack.clipsToBounds = true;
-    [headView addSubview:processBack];
-    [processBack mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@20);
-        make.top.equalTo(@100);
-        make.right.equalTo(@(-20));
-        make.height.equalTo(processBack.mas_width).multipliedBy(0.0597);
-    }];
-    [headView layoutIfNeeded];
+//    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.53)];
+//    headView.backgroundColor = UI_MAIN_COLOR;
+//    UIImageView *processBack = [[UIImageView alloc] init];
+//    [self setCornerWithoutRadius:processBack];
+//    processBack.image = [UIImage imageNamed:@"process"];
+//    processBack.clipsToBounds = true;
+//    [headView addSubview:processBack];
+//    [processBack mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(@20);
+//        make.top.equalTo(@100);
+//        make.right.equalTo(@(-20));
+//        make.height.equalTo(processBack.mas_width).multipliedBy(0.0597);
+//    }];
+//    [headView layoutIfNeeded];
+//    
+//    UIView *numView = [[UIView alloc] init];
+//    numView.backgroundColor = [UIColor clearColor];
+//    [headView addSubview:numView];
+//    [numView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(@20);
+//        make.top.equalTo(processBack.mas_bottom).offset(5);
+//        make.right.equalTo(@(-20));
+//        make.height.equalTo(numView.mas_width).multipliedBy(0.0597);
+//    }];
+//    [headView layoutIfNeeded];
+//
+//    for (int i = 0; i < 6; i++) {
+//
+//        UILabel *numLabel = [[UILabel alloc] init];
+//        numLabel.textColor = [UIColor whiteColor];
+//        numLabel.font = [UIFont systemFontOfSize:12.f];
+//        numLabel.textAlignment = NSTextAlignmentCenter;
+//        numLabel.text = [NSString stringWithFormat:@"%d%%",i*20];
+//        
+//        [numView addSubview:numLabel];
+//        DLog(@"%lf",i*0.25*numView.frame.size.width);
+//        [numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(numView.mas_left).offset(i*0.17*numView.frame.size.width);
+//            make.top.equalTo(@0);
+//            make.bottom.equalTo(@0);
+//            make.width.equalTo(numLabel.mas_height).multipliedBy(2);
+//        }];
+//        [numLabel layoutIfNeeded];
+//    }
+//    
+//    processView = [[UIView alloc] init];
+//    processView.backgroundColor = rgb(128, 189, 51);
+//    [headView addSubview:processView];
+//    [self setCornerWithoutRadius:processView];
+//    [processView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(@20);
+//        make.top.equalTo(@100);
+//        make.height.equalTo(processBack.mas_height);
+//    }];
+//    
+//    UILabel *label = [[UILabel alloc] init];
+//    label.textColor = [UIColor whiteColor];
+//    label.font = [UIFont systemFontOfSize:13.f];
+//    label.text = @"资料填写进度达到100%,即可借款";
+//    label.textAlignment = NSTextAlignmentCenter;
+//    [headView addSubview:label];
+//    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(@0);
+//        make.right.equalTo(@0);
+//        make.bottom.equalTo(@(-10));
+//        make.height.equalTo(@20);
+//    }];
+//    
+//    self.tableView.tableHeaderView = headView;
     
-    UIView *numView = [[UIView alloc] init];
-    numView.backgroundColor = [UIColor clearColor];
-    [headView addSubview:numView];
-    [numView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@20);
-        make.top.equalTo(processBack.mas_bottom).offset(5);
-        make.right.equalTo(@(-20));
-        make.height.equalTo(numView.mas_width).multipliedBy(0.0597);
-    }];
-    [headView layoutIfNeeded];
-
-    for (int i = 0; i < 6; i++) {
-
-        UILabel *numLabel = [[UILabel alloc] init];
-        numLabel.textColor = [UIColor whiteColor];
-        numLabel.font = [UIFont systemFontOfSize:12.f];
-        numLabel.textAlignment = NSTextAlignmentCenter;
-        numLabel.text = [NSString stringWithFormat:@"%d%%",i*20];
-        
-        [numView addSubview:numLabel];
-        DLog(@"%lf",i*0.25*numView.frame.size.width);
-        [numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(numView.mas_left).offset(i*0.17*numView.frame.size.width);
-            make.top.equalTo(@0);
-            make.bottom.equalTo(@0);
-            make.width.equalTo(numLabel.mas_height).multipliedBy(2);
-        }];
-        [numLabel layoutIfNeeded];
-    }
-    
-    processView = [[UIView alloc] init];
-    processView.backgroundColor = rgb(128, 189, 51);
-    [headView addSubview:processView];
-    [self setCornerWithoutRadius:processView];
-    [processView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@20);
-        make.top.equalTo(@100);
-        make.height.equalTo(processBack.mas_height);
-    }];
-    
-    UILabel *label = [[UILabel alloc] init];
-    label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:13.f];
-    label.text = @"资料填写进度达到100%,即可借款";
-    label.textAlignment = NSTextAlignmentCenter;
-    [headView addSubview:label];
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@0);
-        make.right.equalTo(@0);
-        make.bottom.equalTo(@(-10));
-        make.height.equalTo(@20);
-    }];
-    
-    self.tableView.tableHeaderView = headView;
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.213)];
     footView.backgroundColor = [UIColor whiteColor];
     _applyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -426,137 +427,169 @@
 }
 
 #pragma mark -Tableview
-
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    
-    return 6;
-    
+    if (section == 0) {
+        return 5;
+    }else if(section == 1){
+        if (isOpen) {
+            return 3;
+        }
+        return 1;
+    }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-        if (indexPath.row == 0) {
-            return _k_w*0.06f;
-        }else{
-        
-            return _k_w*0.21f;
-        }
-    
+    return _k_w*0.21f;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    SeniorCertificationView * seniorCertificationView =   [[NSBundle mainBundle]loadNibNamed:@"SeniorCertificationView" owner:self options:nil].lastObject;
+    if (section == 0) {
+        seniorCertificationView.titleLabel.text = @"基础信息（必填）";
+        seniorCertificationView.subtitleLabel.text = @"请按照顺序进行各项资料填写";
+    }
+    return seniorCertificationView;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 44;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UIImageView *iconView = [[UIImageView alloc] init];
-            iconView.image = [UIImage imageNamed:@"topCellIcon"];
-            [cell.contentView addSubview:iconView];
-            [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(@8);
-                make.top.equalTo(@5);
-                make.width.equalTo(@22);
-                make.height.equalTo(@22);
-
-            }];
-            UILabel *label = [[UILabel alloc] init];
-            [cell.contentView addSubview:label];
-            label.text = @"请按照顺序进行各项资料填写";
-            label.textColor = [UIColor redColor];
-            label.font = [UIFont systemFontOfSize:13.f];
-            [label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(iconView.mas_right).offset(4);
-                make.top.equalTo(@10);
-                make.height.equalTo(@15);
-                make.right.equalTo(cell.contentView);
-            }];
-
+    if (indexPath.section == 1) {
+        NSInteger  unfoldBtnIndex = 2;
+        if (!isOpen) {
+            unfoldBtnIndex = 0;
         }
-        return cell;
-    }else {
-        
-            DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if (unfoldBtnIndex == indexPath.row) {
+            UnfoldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UnfoldTableViewCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
+            __weak typeof(self) weakSelf = self;
+            cell.unfoldBtnClick = ^{
+                isOpen = !isOpen;
+                NSIndexSet * set  =  [NSIndexSet indexSetWithIndex:1];
+                [weakSelf.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+            };
+            return cell;
+        }
+        
+        DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        switch (indexPath.row) {
+            case 0:
+            {
+                cell.iconImage.image = [UIImage imageNamed:@"creditCard_icon"];
+                cell.subTitleLabel.text = @"完善信用卡认证信息";
+                cell.titleLable.text = @"信用卡认证";
+                return cell;
+            }
+                break;
+            case 1:
+            {
+                cell.iconImage.image = [UIImage imageNamed:@"shebao_icon"];
+                cell.subTitleLabel.text = @"完善社保认证信息";
+                cell.titleLable.text = @"社保认证";
+                return cell;
+            }
+                break;
+            default:
+                break;
+        }
+    }
+    
+    DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
+        cell.statusLabel.text = @"已完成";
+        cell.statusLabel.textColor = rgb(42, 155, 234);
+    } else {
+        cell.statusLabel.text = @"未完成";
+        cell.statusLabel.textColor = rgb(159, 160, 162);
+    }
+    switch (indexPath.row) {
+        case 0:
+        {
+            cell.iconImage.image = [UIImage imageNamed:@"UserData2"];
+            cell.titleLable.text = @"身份信息";
+            cell.subTitleLabel.text = @"完善您的个人信息";
+            return cell;
+        }
+            break;
+        case 1:
+        {
+            cell.iconImage.image = [UIImage imageNamed:@"UserData1"];
+            cell.titleLable.text = @"个人信息";
+            cell.subTitleLabel.text = @"完善您的联系人信息";
+            return cell;
+        }
+            break;
+        case 2:
+        {
+            cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
+            cell.titleLable.text = @"收款信息";
+            cell.subTitleLabel.text = @"";
+            return cell;
+        }
+            break;
+        case 3:
+        {
+            cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
+            cell.titleLable.text = @"第三方认证";
+            cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
+            if (UI_IS_IPHONE5) {
+                cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
+            }
+            return cell;
+        }
+            break;
+        case 4:
+            cell.iconImage.image = [UIImage imageNamed:@"zhima"];
+            cell.titleLable.text = @"芝麻信用";
+            cell.subTitleLabel.text = @"授权获取您的芝麻信用信息";
+            if (UI_IS_IPHONE5) {
+                cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
+            }
+            cell.lineView.hidden = true;
+            if (_isZmxyAuth.integerValue == 2) {
                 cell.statusLabel.text = @"已完成";
                 cell.statusLabel.textColor = rgb(42, 155, 234);
-            } else {
+            } else if(_isZmxyAuth.integerValue == 1){
+                cell.statusLabel.text = @"认证中";
+                cell.statusLabel.textColor = rgb(159, 160, 162);
+            }else if(_isZmxyAuth.integerValue == 3){
                 cell.statusLabel.text = @"未完成";
                 cell.statusLabel.textColor = rgb(159, 160, 162);
             }
-            switch (indexPath.row) {
-                case 1:
-                {
-                    
-                    cell.iconImage.image = [UIImage imageNamed:@"UserData1"];
-                    cell.titleLable.text = @"个人信息";
-                    cell.subTitleLabel.text = @"完善您的个人信息";
-                    
-                    return cell;
-                }
-                    break;
-                case 2:
-                {
-                    cell.iconImage.image = [UIImage imageNamed:@"UserData2"];
-                    cell.titleLable.text = @"联系人信息";
-                    cell.subTitleLabel.text = @"完善您的联系人信息";
-                    return cell;
-                }
-                    break;
-                case 3:
-                {
-                    cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
-                    cell.titleLable.text = @"职业信息";
-                    cell.subTitleLabel.text = @"完善您的职业信息";
-                    return cell;
-                }
-                    break;
-                case 4:
-                {
-                    cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
-                    cell.titleLable.text = @"第三方认证";
-                    cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
-                    if (UI_IS_IPHONE5) {
-                        cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
-                    }
-                    return cell;
-                }
-                    break;
-                case 5:
-                    cell.iconImage.image = [UIImage imageNamed:@"zhima"];
-                    cell.titleLable.text = @"芝麻信用";
-                    cell.subTitleLabel.text = @"授权获取您的芝麻信用信息";
-                    if (UI_IS_IPHONE5) {
-                        cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
-                    }
-                    cell.lineView.hidden = true;
-                    if (_isZmxyAuth.integerValue == 2) {
-                        cell.statusLabel.text = @"已完成";
-                        cell.statusLabel.textColor = rgb(42, 155, 234);
-                    } else if(_isZmxyAuth.integerValue == 1){
-                        cell.statusLabel.text = @"认证中";
-                        cell.statusLabel.textColor = rgb(159, 160, 162);
-                    }else if(_isZmxyAuth.integerValue == 3){
-                        cell.statusLabel.text = @"未完成";
-                        cell.statusLabel.textColor = rgb(159, 160, 162);
-                    }
-                    return cell;
-                default:
-                    break;
-        }
+            return cell;
+        default:
+            break;
     }
     return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:
+                [self mailImportClick];
+                break;
+            case 1:
+                [self securityImportClick];
+                break;
+            default:
+                break;
+        }
+        return;
+    }
     
         DLog(@"%ld",_nextStep.integerValue);
         if (_nextStep.integerValue > 0) {
@@ -571,7 +604,7 @@
         }
     
     switch (indexPath.row) {
-        case 1:
+        case 0:
         {
             [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
                 PserInfoViewController *perInfoVC = [[PserInfoViewController alloc] init];
@@ -581,7 +614,7 @@
         }
             break;
             
-        case 2:
+        case 1:
         {
             [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
                 UserContactsViewController *userContactVC = [[UserContactsViewController alloc] init];
@@ -590,18 +623,22 @@
             }];
         }
             break;
-        case 3:
+        case 2:
         {
             [self getCustomerCarrer_jhtml:^(CustomerCareerBaseClass *careerInfo) {
-                ProfessionViewController *professVC = [[ProfessionViewController alloc] init];
-                professVC.delegate = self;
-                professVC.product_id = _product_id;
-                professVC.careerInfo = careerInfo;
-                [self.navigationController pushViewController:professVC animated:true];
+                
+                EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
+                editCard.typeFlag = @"0";
+                [self.navigationController pushViewController:editCard animated:YES];
+//                ProfessionViewController *professVC = [[ProfessionViewController alloc] init];
+//                professVC.delegate = self;
+//                professVC.product_id = _product_id;
+//                professVC.careerInfo = careerInfo;
+//                [self.navigationController pushViewController:professVC animated:true];
             }];
         }
             break;
-        case 4:
+        case 3:
         {
             if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
@@ -617,7 +654,7 @@
                         certificationVC.liveEnabel = true;
                         certificationVC.verifyStatus = [NSString stringWithFormat:@"%.0lf",custom_baseInfo.result.verifyStatus];
                     }
-                    //  只有为 0  条件为真 走第三方认证   否则非零只显示运营商认证
+                    //  只有为 0 条件为真 走第三方认证   否则非零只显示运营商认证
                     if ([_resultCode isEqualToString:@"0"]) {
                         certificationVC.showAll = true;
                     } else {
@@ -628,7 +665,7 @@
             }
         }
             break;
-        case 5:
+        case 4:
             if (_isZmxyAuth.integerValue == 2||processFlot ==1) {
                 
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
@@ -650,12 +687,10 @@
     }
 }
 
-
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    topView.backgroundColor = UI_MAIN_COLOR;
-    topView.frame = CGRectMake(0, 0, _k_w, -scrollView.contentOffset.y);
+//    topView.backgroundColor = UI_MAIN_COLOR;
+//    topView.frame = CGRectMake(0, 0, _k_w, -scrollView.contentOffset.y);
 }
 
 - (void)getUserInfo:(void(^)(Custom_BaseInfo *custom_baseInfo))finish
@@ -813,7 +848,6 @@
     }
     [self.navigationController pushViewController:loanFirstVC animated:true];
     
-    
 }
 
 #pragma mark - 借款确认页面
@@ -865,6 +899,78 @@
     view.layer.cornerRadius = 10;
     view.layer.masksToBounds = YES;
 
+}
+
+#pragma mark - 魔蝎信用卡以及社保集成
+//邮箱导入
+- (void)mailImportClick{
+    [MoxieSDK shared].taskType = @"email";
+    [[MoxieSDK shared] startFunction];
+
+}
+//社保导入
+-(void)securityImportClick{
+    [MoxieSDK shared].taskType = @"security";
+    [[MoxieSDK shared] startFunction];
+
+}
+-(void)configMoxieSDK{
+    /***必须配置的基本参数*/
+    [MoxieSDK shared].delegate = self;
+    [MoxieSDK shared].userId = [Utility sharedUtility].userInfo.juid;
+    [MoxieSDK shared].apiKey = theMoxieApiKey;
+    [MoxieSDK shared].fromController = self;
+    [MoxieSDK shared].useNavigationPush = NO;
+    [self editSDKInfo];
+};
+
+#pragma MoxieSDK Result Delegate
+-(void)receiveMoxieSDKResult:(NSDictionary*)resultDictionary{
+    int code = [resultDictionary[@"code"] intValue];
+    NSString *taskType = resultDictionary[@"taskType"];
+    NSString *taskId = resultDictionary[@"taskId"];
+    NSString *message = resultDictionary[@"message"];
+    NSString *account = resultDictionary[@"account"];
+    BOOL loginDone = [resultDictionary[@"loginDone"] boolValue];
+    NSLog(@"get import result---code:%d,taskType:%@,taskId:%@,message:%@,account:%@,loginDone:%d",code,taskType,taskId,message,account,loginDone);
+    //【登录中】假如code是2且loginDone为false，表示正在登录中
+    if(code == 2 && loginDone == false){
+        NSLog(@"任务正在登录中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
+    }
+    //【采集中】假如code是2且loginDone为true，已经登录成功，正在采集中
+    else if(code == 2 && loginDone == true){
+        NSLog(@"任务已经登录成功，正在采集中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
+    }
+    //【采集成功】假如code是1则采集成功（不代表回调成功）
+    else if(code == 1){
+        NSLog(@"任务采集成功，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
+        if ([taskType isEqualToString:@"email"]) {
+            
+        }
+        if ([taskType isEqualToString:@"security"]) {
+            
+        }
+    }
+    //【未登录】假如code是-1则用户未登录
+    else if(code == -1){
+        NSLog(@"用户未登录");
+    }
+    //【任务失败】该任务按失败处理，可能的code为0，-2，-3，-4
+    //0 其他失败原因
+    //-2平台方不可用（如中国移动维护等）
+    //-3魔蝎数据服务异常
+    //-4用户输入出错（密码、验证码等输错后退出）
+    else{
+        NSLog(@"任务失败");
+    }
+}
+
+-(void)editSDKInfo{
+    [MoxieSDK shared].navigationController.navigationBar.translucent = YES;
+    [MoxieSDK shared].backImageName = @"return";
+    [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
+    [MoxieSDK shared].navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [[MoxieSDK shared].navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)didReceiveMemoryWarning {

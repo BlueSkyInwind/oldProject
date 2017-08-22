@@ -40,9 +40,7 @@
                                    };
         
         [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_submitZhimaCredit_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-            
             DLog(@"=======%@",object);
-        
             SubmitZhimaCreditAuthModel *model = [SubmitZhimaCreditAuthModel yy_modelWithJSON:object];
             FXDWebViewController *webview = [[FXDWebViewController alloc] init];
             NSLog(@"%@",model.result.auth_url);
@@ -50,9 +48,7 @@
             webview.isZhima = YES;
             [self.navigationController pushViewController:webview animated:true];
         } failure:^(EnumServerStatus status, id object) {
-            
             DLog(@"%@",object);
-            
         }];
 }
 
