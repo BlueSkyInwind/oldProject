@@ -53,7 +53,8 @@ class HomeDefaultCell: UITableViewCell {
 //homeCell各种视图
 extension HomeDefaultCell{
 
-    //默认情况
+    //
+    //MARK:默认情况
     func setupDefaultUI(){
     
         let k_w = UIScreen.main.bounds.size.width
@@ -192,7 +193,8 @@ extension HomeDefaultCell{
         }
         
     }
-    //不满60天被拒，升级高级认证
+    //
+    //MARK:不满60天被拒，升级高级认证
      func setupRefuseUI(){
     
         let k_w = UIScreen.main.bounds.size.width
@@ -260,9 +262,11 @@ extension HomeDefaultCell{
         }
     }
     
-    //信用评分不足，导流其他平台
+    //
+    //MARK:信用评分不足，导流其他平台
     func setupOtherPlatformsUI(){
     
+        let k_w = UIScreen.main.bounds.size.width
         let titleLabel = UILabel()
         titleLabel.text = "您目前的信用评分不足，更新资料可提升(需60天后)"
         titleLabel.font = UIFont.systemFont(ofSize: 13)
@@ -301,15 +305,13 @@ extension HomeDefaultCell{
         firstView.titleLabel?.text = "用钱宝"
         firstView.qutaLabel?.text = "额度：最高5000元"
         firstView.termLabel?.text = "期限：7-30天"
-//        var termStr = firstView.termLabel?.text
-//        let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:termStr)
-//        attrstr.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,termStr.))
-//        bottomLabel.attributedText = attrstr
+        let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(firstView.termLabel?.text)!)
+        attrstr.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr.length-4))
+        firstView.termLabel?.attributedText = attrstr
         firstView.feeLabel?.text = "费用：0.3%/日"
-//        let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:bottomLabel.text!)
-//        attrstr.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(2,1))
-//        attrstr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(2,1))
-//        bottomLabel.attributedText = attrstr
+        let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(firstView.feeLabel?.text)!)
+        attrstr1.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr1.length-5))
+        firstView.feeLabel?.attributedText = attrstr1
         firstView.descImage?.image = UIImage(named:"zhuishi1")
         
         let secondView = HomeRefuseThirdView()
@@ -325,25 +327,39 @@ extension HomeDefaultCell{
         secondView.titleLabel?.text = "贷嘛"
         secondView.qutaLabel?.text = "额度：最高5000元"
         secondView.termLabel?.text = "期限：1-60月"
+        let attrstr2 : NSMutableAttributedString = NSMutableAttributedString(string:(secondView.termLabel?.text)!)
+        attrstr2.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr2.length-4))
+        secondView.termLabel?.attributedText = attrstr2
         secondView.feeLabel?.text = "费用：0.35%-2%/月"
+        let attrstr3 : NSMutableAttributedString = NSMutableAttributedString(string:(secondView.feeLabel?.text)!)
+        attrstr3.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr3.length-5))
+        secondView.feeLabel?.attributedText = attrstr3
         secondView.descImage?.image = UIImage(named:"zhushi2")
         
-        let thirdView = HomeRefuseThirdView()
-        thirdView.backgroundColor = UIColor.white
-        self.addSubview(thirdView)
-        thirdView.snp.makeConstraints { (make) in
-            make.top.equalTo(secondView.snp.bottom).offset(0)
-            make.left.equalTo(self).offset(0)
-            make.right.equalTo(self).offset(0)
-            make.height.equalTo(82)
+        if k_w != 320 {
+            
+            let thirdView = HomeRefuseThirdView()
+            thirdView.backgroundColor = UIColor.white
+            self.addSubview(thirdView)
+            thirdView.snp.makeConstraints { (make) in
+                make.top.equalTo(secondView.snp.bottom).offset(0)
+                make.left.equalTo(self).offset(0)
+                make.right.equalTo(self).offset(0)
+                make.height.equalTo(82)
+            }
+            thirdView.leftImageView?.image = UIImage(named:"logo_daima")
+            thirdView.titleLabel?.text = "平安i贷"
+            thirdView.qutaLabel?.text = "额度：最高5000元"
+            thirdView.termLabel?.text = "期限：20月"
+            let attrstr4 : NSMutableAttributedString = NSMutableAttributedString(string:(thirdView.termLabel?.text)!)
+            attrstr4.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr4.length-4))
+            thirdView.termLabel?.attributedText = attrstr4
+            thirdView.feeLabel?.text = "费用：1.25%/月"
+            let attrstr5 : NSMutableAttributedString = NSMutableAttributedString(string:(thirdView.feeLabel?.text)!)
+            attrstr5.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr5.length-4))
+            thirdView.feeLabel?.attributedText = attrstr5
+            thirdView.descImage?.image = UIImage(named:"zhushi3")
         }
-        thirdView.leftImageView?.image = UIImage(named:"logo_daima")
-        thirdView.titleLabel?.text = "平安i贷"
-        thirdView.qutaLabel?.text = "额度：最高5000元"
-        thirdView.termLabel?.text = "期限：20月"
-        thirdView.feeLabel?.text = "费用：1.25%/月"
-        thirdView.descImage?.image = UIImage(named:"zhushi3")
-        
         
         let moreBtn = UIButton()
         moreBtn.setTitle("更多", for: .normal)
@@ -353,7 +369,14 @@ extension HomeDefaultCell{
         moreBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
         self.addSubview(moreBtn)
         moreBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(thirdView.snp.bottom).offset(10)
+            if k_w == 320 {
+            
+                make.top.equalTo(secondView.snp.bottom).offset(5)
+            }else{
+            
+                make.top.equalTo(secondView.snp.bottom).offset(87)
+            }
+            
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(20)
         }
@@ -361,6 +384,7 @@ extension HomeDefaultCell{
     }
     
     //进件带提款
+    //MARK:进件带提款
     func setupDrawingUI(){
     
         let k_w = UIScreen.main.bounds.size.width
@@ -451,6 +475,7 @@ extension HomeDefaultCell{
     }
     
     //产品列表，第一个
+    //MARK:产品列表，第一个
     func productListFirst(){
     
         let bgImage = UIImageView()
@@ -527,6 +552,7 @@ extension HomeDefaultCell{
         }
     }
     
+    //MARK:产品列表，其他的
     func productListOther(){
     
         let bgImage = UIImageView()
@@ -643,6 +669,7 @@ extension HomeDefaultCell{
 extension HomeDefaultCell{
 
     //提款的View
+    //MARK:提款的View
    fileprivate func setView()->UIView{
     
      let k_w = UIScreen.main.bounds.size.width
@@ -679,19 +706,22 @@ extension HomeDefaultCell{
         return view
     }
 }
-//点击事件
+//MARK:点击事件
 extension HomeDefaultCell{
 
+    //MARK:立即添加高级认证
     func advancedCertificationClick(){
     
         print("立即添加高级认证")
     }
     
+    //MARK:点击提款
     func bottomBtnClick(){
     
         print("点击提款")
     }
     
+    //MARK:UISlider滑动事件
     func changed(slider:UISlider){
 //        print("slider.value = %d",slider.value)
 
@@ -701,16 +731,19 @@ extension HomeDefaultCell{
         
     }
     
+    //MARK:点击立即申请
     func applyBtnClick(){
     
         print("点击立即申请")
     }
     
+    //MARK:点击导流平台的更多
     func moreBtnClick(){
     
         print("点击导流平台的更多")
     }
     
+    //MARK:我要借款
     func loanBtnClick(){
     
         print("我要借款")
