@@ -34,7 +34,6 @@
     }];
 }
 
-
 -(void)fetchLoanRecord{
     
     [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanRecord_url]  isNeedNetStatus:NO isNeedWait:NO parameters:nil finished:^(EnumServerStatus status, id object) {
@@ -49,8 +48,6 @@
     }];
 }
 
-
-
 -(void)fetchLoanProcess{
     
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
@@ -63,6 +60,42 @@
             [self faileBlock];
         }
     }];
+}
+
+
+#pragma  mark - 社保  公积金
+
+/**
+ 社保
+ 
+ @param taskid 任务id
+ */
+-(void)socialSecurityInfoUpload:(NSString *)taskid{
+    
+    NSDictionary * paramDic = @{@"task_id":taskid,@"user_id":[Utility sharedUtility].userInfo.juid};
+    
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_shebaoupload_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+    
+}
+/**
+ 信用卡
+ 
+ @param taskid 任务id
+ */
+-(void)TheCreditCardInfoUpload:(NSString *)taskid{
+    
+    NSDictionary * paramDic = @{@"task_id":taskid,@"user_id":[Utility sharedUtility].userInfo.juid};
+    
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_TheCreditCardupload_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+    
 }
 
 
@@ -155,6 +188,16 @@
         }
     }];
 }
+
+
+
+
+
+
+
+
+
+
 
 @end
 

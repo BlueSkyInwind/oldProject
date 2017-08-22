@@ -32,6 +32,7 @@
 #import "SeniorCertificationView.h"
 #import "UnfoldTableViewCell.h"
 #import "MoxieSDK.h"
+#import "HomeViewModel.h"
 
 
 @interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
@@ -992,7 +993,7 @@
     else if(code == 1){
         NSLog(@"任务采集成功，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
         if ([taskType isEqualToString:@"email"]) {
-            
+            [self TheCreditCardInfoupload:taskId];
         }
         if ([taskType isEqualToString:@"security"]) {
             
@@ -1019,6 +1020,15 @@
     [MoxieSDK shared].navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [[MoxieSDK shared].navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
 }
+
+-(void)TheCreditCardInfoupload:(NSString *)taskid {
+    
+    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
+    [homeVM TheCreditCardInfoUpload:taskid];
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

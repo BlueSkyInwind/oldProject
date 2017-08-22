@@ -50,7 +50,6 @@
         }];
     }
     
-    
     [self.webView loadHTMLString:htmlStr baseURL:nil];
 }
 

@@ -44,6 +44,7 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 
 //测试导流 192.168.6.133
 NSString * const _main_url  =   @"http://192.168.6.133/fxd-esb/esb/";
+NSString * const _main_new_url  =   @"http://h5.test.fxds/";
 NSString * const _ValidESB_url  =   @"http://192.168.6.133/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
 NSString * const _p2P_url = @"http://192.168.6.133/fxd-esb/p2p/";
@@ -379,6 +380,13 @@ NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.
 
 //芝麻信用回调地址
 NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
+
+//社保
+NSString * const    _shebaoupload_url    =    @"apigw/client/resource/mxsbtask_create.jhtml";
+
+//信用卡
+NSString * const    _TheCreditCardupload_url    =    @"apigw/client/resource/mxmailtask_create.jhtml";
+
 
 #pragma mark - 合规接口
 

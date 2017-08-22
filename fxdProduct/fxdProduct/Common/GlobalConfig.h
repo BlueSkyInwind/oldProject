@@ -46,6 +46,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 
 UIKIT_EXTERN NSString * const _main_url;
+UIKIT_EXTERN NSString * const _main_new_url;
 UIKIT_EXTERN NSString * const _ValidESB_url;
 UIKIT_EXTERN NSString * const _P2P_url;
 UIKIT_EXTERN NSString * const _H5_url;
@@ -176,6 +177,9 @@ UIKIT_EXTERN NSString * const       _getBidStatus_url;                  //用户
 UIKIT_EXTERN NSString * const       _saveLoanCase_url;                  //提款申请件记录
 UIKIT_EXTERN NSString * const       _liangzihuzhu_url;                  //量子互助
 UIKIT_EXTERN NSString * const       _sjRecord_url;                  //首借免息
+
+UIKIT_EXTERN NSString * const       _shebaoupload_url;                  //首借免息
+UIKIT_EXTERN NSString * const       _TheCreditCardupload_url;                  //首借免息
 
 
 
