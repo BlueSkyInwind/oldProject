@@ -20,7 +20,7 @@
 #import "FMDeviceManager.h"
 #import "UIImage+Color.h"
 #import "RegViewModel.h"
-
+#import "FXDWebViewController.h"
 @interface RegViewController ()<UITextFieldDelegate>
 
 {
@@ -214,14 +214,22 @@
 
 -(void)clickurl:(id)sender
 {
-    RegDetailViewController *regDetail = [RegDetailViewController new];
-    [self.navigationController pushViewController:regDetail animated:YES];
+    DLog(@"注册协议");
+    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+    webVC.urlStr = [NSString stringWithFormat:@"%@%@?title=%@&type=%@",_H5_url,_loanDetial_url,@"register",@"1"];
+    [self.navigationController pushViewController:webVC animated:true];
+//    RegDetailViewController *regDetail = [RegDetailViewController new];
+//    [self.navigationController pushViewController:regDetail animated:YES];
 }
 
 -(void)clicksecry{
     
-    RegSecoryViewController *regSeVc = [RegSecoryViewController new];
-    [self.navigationController pushViewController:regSeVc animated:YES];
+    DLog(@"隐私保密协议");
+    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+    webVC.urlStr = [NSString stringWithFormat:@"%@%@?title=%@&type=%@",_H5_url,_loanDetial_url,@"secrecy",@"2"];
+    [self.navigationController pushViewController:webVC animated:true];
+//    RegSecoryViewController *regSeVc = [RegSecoryViewController new];
+//    [self.navigationController pushViewController:regSeVc animated:YES];
 }
 
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {

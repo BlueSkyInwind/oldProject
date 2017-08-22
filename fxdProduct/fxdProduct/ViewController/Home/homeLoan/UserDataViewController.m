@@ -29,8 +29,12 @@
 #import "DataWriteAndRead.h"
 #import "SesameCreditViewController.h"
 #import "HomeProductList.h"
+#import "SeniorCertificationView.h"
+#import "UnfoldTableViewCell.h"
+#import "MoxieSDK.h"
 
-@interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate>
+
+@interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
 {
     CGFloat processFlot;
     UIView *processView;
@@ -50,6 +54,8 @@
     NSString *_phoneAuthChannel;
     UserStateModel *_model;
     
+    BOOL isOpen;
+    
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -67,21 +73,19 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = false;
     processFlot = 0.0;
+    isOpen = YES;
     _subTitleArr = @[@"请完善您的个人信息",@"请完善您的联系人信息",@"请完善您的职业信息",@"请完成三方认证"];
     [self addBackItemRoot];
-    
+    [self configMoxieSDK];
     [self configTableview];
     self.navigationController.navigationBar.barTintColor = UI_MAIN_COLOR;
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     topView = [[UIView alloc] init];
     [self.view addSubview:topView];
-    
     if (_isMine) {
-        
         _applyBtn.enabled = NO;
         _applyBtn.hidden = YES;
     }
-    
 }
 
 - (void)addBackItemRoot
@@ -125,7 +129,6 @@
             [_applyBtn setBackgroundColor:UI_MAIN_COLOR];
             _applyBtn.enabled = true;
         }
-        
         [_tableView reloadData];
     }
     if (processFlot <= 1 && processFlot >= 0) {
@@ -144,7 +147,6 @@
     [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
     [self getHomeProductList];
 }
-
 
 /**
  获取首页产品列表
@@ -171,6 +173,7 @@
 - (void)configTableview
 {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DataDisplayCell class]) bundle:nil] forCellReuseIdentifier:@"DataDisplayCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([UnfoldTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"UnfoldTableViewCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -427,28 +430,91 @@
 
 #pragma mark -Tableview
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    
-    return 6;
-    
+    if (section == 0) {
+        return 6;
+    }else if(section == 1){
+        if (isOpen) {
+            return 3;
+        }
+        return 1;
+    }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-        if (indexPath.row == 0) {
-            return _k_w*0.06f;
-        }else{
-        
-            return _k_w*0.21f;
-        }
+    if (indexPath.row == 0 && indexPath.section == 0) {
+        return _k_w*0.08f;
+    }else{
+        return _k_w*0.21f;
+    }
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        SeniorCertificationView * seniorCertificationView =   [[NSBundle mainBundle]loadNibNamed:@"SeniorCertificationView" owner:self options:nil].lastObject;
+        return seniorCertificationView;
+    }
+    return nil;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
+    if (section != 1) {
+        return 0;
+    }
+    return 44;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 1) {
+        NSInteger  unfoldBtnIndex = 2;
+        if (!isOpen) {
+            unfoldBtnIndex = 0;
+        }
+        if (unfoldBtnIndex == indexPath.row) {
+            UnfoldTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UnfoldTableViewCell"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            __weak typeof(self) weakSelf = self;
+            cell.unfoldBtnClick = ^{
+                isOpen = !isOpen;
+                NSIndexSet * set  =  [NSIndexSet indexSetWithIndex:1];
+                [weakSelf.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+            };
+            return cell;
+        }
+        
+        DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        switch (indexPath.row) {
+            case 0:
+            {
+                cell.iconImage.image = [UIImage imageNamed:@"creditCard_icon"];
+                cell.subTitleLabel.text = @"完善信用卡认证信息";
+                cell.titleLable.text = @"信用卡认证";
+                return cell;
+            }
+                break;
+            case 1:
+            {
+                cell.iconImage.image = [UIImage imageNamed:@"shebao_icon"];
+                cell.subTitleLabel.text = @"完善社保认证信息";
+                cell.titleLable.text = @"社保认证";
+                return cell;
+            }
+                break;
+
+            default:
+                break;
+        }
+    }
+    
     if (indexPath.row == 0) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
         if (cell == nil) {
@@ -462,7 +528,6 @@
                 make.top.equalTo(@5);
                 make.width.equalTo(@22);
                 make.height.equalTo(@22);
-
             }];
             UILabel *label = [[UILabel alloc] init];
             [cell.contentView addSubview:label];
@@ -556,7 +621,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:
+                [self mailImportClick];
+                break;
+            case 1:
+                [self securityImportClick];
+                break;
+            default:
+                break;
+        }
+        return;
+    }
     
         DLog(@"%ld",_nextStep.integerValue);
         if (_nextStep.integerValue > 0) {
@@ -649,8 +726,6 @@
             break;
     }
 }
-
-
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -865,6 +940,78 @@
     view.layer.cornerRadius = 10;
     view.layer.masksToBounds = YES;
 
+}
+
+#pragma mark - 魔蝎信用卡以及社保集成
+//邮箱导入
+- (void)mailImportClick{
+    [MoxieSDK shared].taskType = @"email";
+    [[MoxieSDK shared] startFunction];
+
+}
+//社保导入
+-(void)securityImportClick{
+    [MoxieSDK shared].taskType = @"security";
+    [[MoxieSDK shared] startFunction];
+
+}
+-(void)configMoxieSDK{
+    /***必须配置的基本参数*/
+    [MoxieSDK shared].delegate = self;
+    [MoxieSDK shared].userId = [Utility sharedUtility].userInfo.juid;
+    [MoxieSDK shared].apiKey = theMoxieApiKey;
+    [MoxieSDK shared].fromController = self;
+    [MoxieSDK shared].useNavigationPush = NO;
+    [self editSDKInfo];
+};
+
+#pragma MoxieSDK Result Delegate
+-(void)receiveMoxieSDKResult:(NSDictionary*)resultDictionary{
+    int code = [resultDictionary[@"code"] intValue];
+    NSString *taskType = resultDictionary[@"taskType"];
+    NSString *taskId = resultDictionary[@"taskId"];
+    NSString *message = resultDictionary[@"message"];
+    NSString *account = resultDictionary[@"account"];
+    BOOL loginDone = [resultDictionary[@"loginDone"] boolValue];
+    NSLog(@"get import result---code:%d,taskType:%@,taskId:%@,message:%@,account:%@,loginDone:%d",code,taskType,taskId,message,account,loginDone);
+    //【登录中】假如code是2且loginDone为false，表示正在登录中
+    if(code == 2 && loginDone == false){
+        NSLog(@"任务正在登录中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
+    }
+    //【采集中】假如code是2且loginDone为true，已经登录成功，正在采集中
+    else if(code == 2 && loginDone == true){
+        NSLog(@"任务已经登录成功，正在采集中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
+    }
+    //【采集成功】假如code是1则采集成功（不代表回调成功）
+    else if(code == 1){
+        NSLog(@"任务采集成功，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
+        if ([taskType isEqualToString:@"email"]) {
+            
+        }
+        if ([taskType isEqualToString:@"security"]) {
+            
+        }
+    }
+    //【未登录】假如code是-1则用户未登录
+    else if(code == -1){
+        NSLog(@"用户未登录");
+    }
+    //【任务失败】该任务按失败处理，可能的code为0，-2，-3，-4
+    //0 其他失败原因
+    //-2平台方不可用（如中国移动维护等）
+    //-3魔蝎数据服务异常
+    //-4用户输入出错（密码、验证码等输错后退出）
+    else{
+        NSLog(@"任务失败");
+    }
+}
+
+-(void)editSDKInfo{
+    [MoxieSDK shared].navigationController.navigationBar.translucent = YES;
+    [MoxieSDK shared].backImageName = @"return";
+    [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
+    [MoxieSDK shared].navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [[MoxieSDK shared].navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)didReceiveMemoryWarning {

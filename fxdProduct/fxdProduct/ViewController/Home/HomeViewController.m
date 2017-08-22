@@ -756,7 +756,7 @@
 {
     DLog(@"费用说明");
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_loanDetial_url];
+    webVC.urlStr = [NSString stringWithFormat:@"%@%@?title=%@&type=%@",_H5_url,_loanDetial_url,@"loanDetail",@"1"];
     [self.navigationController pushViewController:webVC animated:true];
 }
 
