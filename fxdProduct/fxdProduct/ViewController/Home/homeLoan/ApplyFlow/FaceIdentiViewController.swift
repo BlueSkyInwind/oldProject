@@ -57,13 +57,13 @@ class FaceIdentiViewController: BaseViewController,LiveDeteDelgate{
         switch (errorType) {
         case DETECTION_FAILED_TYPE_ACTIONBLEND:
             Tool.showMessage("请按照提示完成动作", vc: self)
-        break;
+            break;
         case DETECTION_FAILED_TYPE_NOTVIDEO:
             Tool.showMessage("活体检测未成功", vc: self)
-        break;
+            break;
         case DETECTION_FAILED_TYPE_TIMEOUT:
             Tool.showMessage("请在规定时间内完成动作", vc: self)
-        break;
+            break;
         default:
             Tool.showMessage("请按照提示完成动作", vc: self)
             break;

@@ -706,7 +706,6 @@ typedef enum {
             MGLiveViewController *myVC = [[MGLiveViewController alloc] initWithDefauleSetting];
             myVC.delagate = self;
             BaseNavigationViewController *liveVC = [[BaseNavigationViewController alloc] initWithRootViewController:myVC];
-            
             [self presentViewController:liveVC animated:true completion:nil];
         } else {
             

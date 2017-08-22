@@ -121,6 +121,11 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         }
     }
     
+    func mobilePhoneOperatorChannels() -> Void {
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
