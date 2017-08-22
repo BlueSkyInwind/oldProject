@@ -567,6 +567,18 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
     //【采集成功】假如code是1则采集成功（不代表回调成功）
     else if(code == 1){
+        for (UIView *view in self.view.subviews) {
+            if (![[view class] isSubclassOfClass:[MJRefreshNormalHeader class]]) {
+                [view removeFromSuperview];
+            }
+        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [NSThread sleepForTimeInterval:1];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self updateUserState];
+            });
+        });
+        
         [self updateUserState];
         NSLog(@"任务采集成功，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
     }

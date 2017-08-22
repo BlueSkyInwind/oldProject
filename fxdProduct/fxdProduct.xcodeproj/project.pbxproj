@@ -599,6 +599,12 @@
 		848394231EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */; };
 		848394261EDEC96C003EF4EC /* HomePopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394251EDEC96C003EF4EC /* HomePopParam.m */; };
 		848394271EDEC96C003EF4EC /* HomePopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394251EDEC96C003EF4EC /* HomePopParam.m */; };
+		848C531B1F4BDF740092F87C /* FaceIdentiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C531A1F4BDF740092F87C /* FaceIdentiViewController.swift */; };
+		848C531C1F4BDF740092F87C /* FaceIdentiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C531A1F4BDF740092F87C /* FaceIdentiViewController.swift */; };
+		848C531E1F4C0C920092F87C /* thirdPartyAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C531D1F4C0C920092F87C /* thirdPartyAuthViewController.swift */; };
+		848C531F1F4C0C920092F87C /* thirdPartyAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C531D1F4C0C920092F87C /* thirdPartyAuthViewController.swift */; };
+		848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
+		848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
 		84A6350E1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
 		84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
@@ -2299,6 +2305,9 @@
 		848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerParamModel.m; sourceTree = "<group>"; };
 		848394241EDEC96C003EF4EC /* HomePopParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePopParam.h; sourceTree = "<group>"; };
 		848394251EDEC96C003EF4EC /* HomePopParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePopParam.m; sourceTree = "<group>"; };
+		848C531A1F4BDF740092F87C /* FaceIdentiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceIdentiViewController.swift; sourceTree = "<group>"; };
+		848C531D1F4C0C920092F87C /* thirdPartyAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = thirdPartyAuthViewController.swift; sourceTree = "<group>"; };
+		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
 		84A6350C1F00F8B800146A8A /* MobilePhoneOperatorParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobilePhoneOperatorParamModel.h; sourceTree = "<group>"; };
 		84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobilePhoneOperatorParamModel.m; sourceTree = "<group>"; };
 		84A6350F1F00FCA200146A8A /* AuthenticationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewModel.h; sourceTree = "<group>"; };
@@ -3125,6 +3134,7 @@
 				84ED5B701F4AC9F6004C0A59 /* UnfoldTableViewCell.h */,
 				84ED5B711F4AC9F6004C0A59 /* UnfoldTableViewCell.m */,
 				84ED5B721F4AC9F6004C0A59 /* UnfoldTableViewCell.xib */,
+				848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */,
 			);
 			path = UserDataCell;
 			sourceTree = "<group>";
@@ -3148,6 +3158,8 @@
 				63BDF8941E7128D2008C4E10 /* MGLiveViewController.m */,
 				63BDF8961E712932008C4E10 /* MyBottomView.h */,
 				63BDF8971E712932008C4E10 /* MyBottomView.mm */,
+				848C531A1F4BDF740092F87C /* FaceIdentiViewController.swift */,
+				848C531D1F4C0C920092F87C /* thirdPartyAuthViewController.swift */,
 			);
 			path = ApplyFlow;
 			sourceTree = "<group>";
@@ -4254,22 +4266,6 @@
 				63B142AB1D9A43B000C43B3F /* DrawService.m */,
 			);
 			path = DrawService;
-			sourceTree = "<group>";
-		};
-		63B63E3B1DB9E10F00CAFE32 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				63B63E3C1DB9E10F00CAFE32 /* MoxieSDK */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		63B63E3C1DB9E10F00CAFE32 /* MoxieSDK */ = {
-			isa = PBXGroup;
-			children = (
-				63B63E3D1DB9E10F00CAFE32 /* MoxieSDK.h */,
-			);
-			path = MoxieSDK;
 			sourceTree = "<group>";
 		};
 		63B65DE31D50431200207231 /* Lib */ = {
@@ -5864,6 +5860,7 @@
 				1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */,
 				63F254921E49CFE800852CF1 /* LoanProcessCell.m in Sources */,
 				634830F41CBB82C30005C4CD /* CustomerBaseInfoResult.m in Sources */,
+				848C531B1F4BDF740092F87C /* FaceIdentiViewController.swift in Sources */,
 				63334AD01B7C3BB3003844F4 /* MessageCenterViewController.m in Sources */,
 				635AB7961BE2FE6600C32919 /* CashBaseClass.m in Sources */,
 				638A16EB1E517D9F00AB8AB6 /* LOTLayerView.m in Sources */,
@@ -5937,6 +5934,7 @@
 				CCCDA8881EE028DD00B48DFF /* SendSmsParamModel.m in Sources */,
 				0F0650461BE219BF000DE94D /* UserSureRefuseResult.m in Sources */,
 				63832C8C1CB7530400C6F194 /* NSString+AES.m in Sources */,
+				848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
 				0FA644B61BF4628E00959EDF /* RegSecoryViewController.m in Sources */,
 				84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */,
 				63C50E501E6804950035EE4F /* ReconfrInfoModel.m in Sources */,
@@ -6001,6 +5999,7 @@
 				636B1B581C23BB4100450358 /* GetMoneyHistoryBaseClass.m in Sources */,
 				0F6AAF391C30D8950060F137 /* MyCardCell.m in Sources */,
 				635AB7901BE2FE2700C32919 /* ReturnMsgBaseClass.m in Sources */,
+				848C531E1F4C0C920092F87C /* thirdPartyAuthViewController.swift in Sources */,
 				63A24C5B1BE063A90036E8EF /* CALayer+Anim.m in Sources */,
 				63553B231E61825300B2C1FF /* JXLParse.m in Sources */,
 				638A16FC1E517D9F00AB8AB6 /* NSValue+Compat.m in Sources */,
@@ -6347,6 +6346,7 @@
 				CC0DF9911EA5B1090024841A /* LOTAnimatablePointValue.m in Sources */,
 				CC0DF9921EA5B1090024841A /* Utility.m in Sources */,
 				CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */,
+				848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
 				CCCDA8811EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */,
 				CC0DF9941EA5B1090024841A /* LoanProcessCell.m in Sources */,
 				CC0DF9951EA5B1090024841A /* CustomerBaseInfoResult.m in Sources */,
@@ -6487,6 +6487,7 @@
 				CC0DFA131EA5B1090024841A /* NSValue+Compat.m in Sources */,
 				CCCDA8851EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
 				CC0DFA141EA5B1090024841A /* LewPopupViewAnimationFade.m in Sources */,
+				848C531F1F4C0C920092F87C /* thirdPartyAuthViewController.swift in Sources */,
 				CC0DFA151EA5B1090024841A /* FaceIDOCRFront.m in Sources */,
 				CC0DFA161EA5B1090024841A /* SquareRepaymentResult.m in Sources */,
 				CC0DFA171EA5B1090024841A /* FaceIDOCRBack.m in Sources */,
@@ -6542,6 +6543,7 @@
 				CCEC9C941EE5095000452291 /* BankCardsParamModel.m in Sources */,
 				CC0DFA481EA5B1090024841A /* MyAboutOursViewController.m in Sources */,
 				CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */,
+				848C531C1F4BDF740092F87C /* FaceIdentiViewController.swift in Sources */,
 				CC0DFA4A1EA5B1090024841A /* FXDNetWorkManager.m in Sources */,
 				CC0DFA4B1EA5B1090024841A /* UserContactsViewController.m in Sources */,
 				CC0DFA4C1EA5B1090024841A /* CoreArchive.m in Sources */,

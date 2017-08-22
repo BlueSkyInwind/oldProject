@@ -148,7 +148,6 @@ typedef enum {
                         [cell.detectionBtn setBackgroundColor:rgb(139, 140, 143)];
                         [cell.detectionBtn setTitle:@"已认证" forState:UIControlStateNormal];
                     }
-                    
                 } else {
                     cell.detectionBtn.enabled = false;
                     [cell.detectionBtn setBackgroundColor:rgb(139, 140, 143)];
@@ -225,7 +224,6 @@ typedef enum {
                         cell.agreementTopConstraint.constant = 51;
                         cell.moblieBtnTopConstraint.constant = 76;
                         [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
-
                     }
                         break;
                     case verifyCodeAndPicCodeViewType:{
@@ -235,7 +233,6 @@ typedef enum {
                         cell.agreementTopConstraint.constant = 97;
                         cell.moblieBtnTopConstraint.constant = 111;
                         [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
-
                     }
                         break;
                     default:
@@ -713,21 +710,7 @@ typedef enum {
             
         }
     }];
-    
-    
-    //    MGLiveManager *manager = [[MGLiveManager alloc] init];
-    //    manager.detectionWithMovier = NO;
-    //    manager.actionCount = 3;
-    //
-    //    __weak CertificationViewController *weakSlf = self;
-    //    [manager startFaceDecetionViewController:self finish:^(FaceIDData *finishDic, UIViewController *viewController) {
-    //        [viewController dismissViewControllerAnimated:YES completion:nil];
-    //        [weakSlf verifyLive:finishDic];
-    //    } error:^(MGLivenessDetectionFailedType errorType, UIViewController *viewController) {
-    //        [viewController dismissViewControllerAnimated:YES completion:nil];
-    //
-    //        [self showErrorString:errorType];
-    //    }];
+
 }
 
 #pragma mark - LiveDeteDelgate

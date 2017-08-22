@@ -16,8 +16,8 @@
     UITapGestureRecognizer * tap  = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapViewClick)];
     [self.tapView addGestureRecognizer:tap];
 }
+
 -(void)tapViewClick{
-    
     if (self.unfoldBtnClick) {
         self.unfoldBtnClick();
     }
