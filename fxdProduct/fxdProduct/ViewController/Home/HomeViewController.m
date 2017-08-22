@@ -464,17 +464,38 @@
 //            return (_k_h-0.5*_k_w-155)/i;
 //        }
 //    }
+//    
+//    if (indexPath.section == 0) {
+//        return 30.f;
+//    }else if(indexPath.section == 1){
+//        if (UI_IS_IPHONE5) {
+//            return 180.0f;
+//        }else{
+//            return 210.0f;
+//        }
+//        
+//        
+//    }else{
+//    
+//        if (UI_IS_IPHONE5) {
+//            return (_k_h-0.5*_k_w-330);
+//        }else{
+//            
+//            return (_k_h-0.5*_k_w-360);
+//        }
+//    }
     
     if (indexPath.section == 0) {
         return 30.f;
-    }else{
+    }else {
         
         if (UI_IS_IPHONE5) {
             return (_k_h-0.5*_k_w-155);
         }else{
-            
+
             return (_k_h-0.5*_k_w-155);
         }
+        
     }
 }
 
@@ -530,16 +551,24 @@
     }
     
     HomeDefaultCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomeDefaultCell"];
-
     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    homeCell.backgroundColor = rgb(245, 245, 245);
     homeCell.selected = NO;
 //    [homeCell setupDefaultUI];
-//    [HomeCell setupRefuseUI];
-//    [HomeCell setupOtherPlatformsUI];
+//    [homeCell setupRefuseUI];
+//    [homeCell setupOtherPlatformsUI];
     homeCell.leftTitleArray = @[@"申请产品：",@"借款金额：",@"借款周期：",@"每周还款：",@"最近账单日："];
     homeCell.rightContentArray = @[@"工薪贷",@"2000元",@"5-50周",@"108元",@"2016-3-12"];
     homeCell.drawingTitle = @"您已逾期";
     [homeCell setupDrawingUI];
+//    if (indexPath.section == 1) {
+//        homeCell.homeProductFirstArray = @[@"home_01",@"工薪贷",@"home_04",@"2000元",@"5-50周"];
+//        [homeCell productListFirst];
+//        return homeCell;
+//    }
+//    homeCell.homeProductOtherArray = @[@"home_02",@"急速贷",@"home_05",@"1000元",@"14天"];
+//    homeCell.isWait = true;
+//    [homeCell productListOther];
     return homeCell;
     
     
@@ -627,25 +656,25 @@
 {
     
     
-    if (indexPath.section>0&&_dataArray.count+1 !=indexPath.section) {
-        
-        HomeProductListProducts *product = _dataArray[indexPath.section-1];
-        
-        if ([product.isOverLimit boolValue]) {
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"您申请的产品今日额度已满，请尝试其他产品或明天再来"];
-            return;
-        }
-        if ([product.id_ isEqualToString:SalaryLoan]) {
-            [self highLoanClick];
-        }
-        if ([product.id_ isEqualToString:RapidLoan]) {
-            [self lowLoan];
-        }
-        if ([product.id_ isEqualToString:WhiteCollarLoan]) {
-            [self whiteCollarLoanClick];
-            //        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
-        }
-    }
+//    if (indexPath.section>0&&_dataArray.count+1 !=indexPath.section) {
+//        
+//        HomeProductListProducts *product = _dataArray[indexPath.section-1];
+//        
+//        if ([product.isOverLimit boolValue]) {
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"您申请的产品今日额度已满，请尝试其他产品或明天再来"];
+//            return;
+//        }
+//        if ([product.id_ isEqualToString:SalaryLoan]) {
+//            [self highLoanClick];
+//        }
+//        if ([product.id_ isEqualToString:RapidLoan]) {
+//            [self lowLoan];
+//        }
+//        if ([product.id_ isEqualToString:WhiteCollarLoan]) {
+//            [self whiteCollarLoanClick];
+//            //        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
+//        }
+//    }
 }
 
 #pragma mak - SDCycleScrollViewDelegate

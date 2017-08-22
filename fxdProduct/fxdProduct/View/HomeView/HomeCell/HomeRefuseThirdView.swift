@@ -44,14 +44,13 @@ extension HomeRefuseThirdView{
         leftImageView = UIImageView()
         view.addSubview(leftImageView!)
         leftImageView?.snp.makeConstraints({ (make) in
-//            make.top.equalTo(view.snp.top).offset(10)
             make.centerY.equalTo(self.snp.centerY)
             make.left.equalTo(view.snp.left).offset(25)
         })
         
         titleLabel = UILabel()
         titleLabel?.textColor = UIColor.black
-        titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        titleLabel?.font = UIFont.systemFont(ofSize: 15)
         view.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo(view.snp.top).offset(10)
@@ -59,8 +58,8 @@ extension HomeRefuseThirdView{
             make.height.equalTo(20)
         })
         qutaLabel = UILabel()
-        qutaLabel?.textColor = UIColor.black
-        qutaLabel?.font = UIFont.systemFont(ofSize: 16)
+        qutaLabel?.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
+        qutaLabel?.font = UIFont.systemFont(ofSize: 12)
         view.addSubview(qutaLabel!)
         qutaLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo(view.snp.top).offset(10)
@@ -69,7 +68,7 @@ extension HomeRefuseThirdView{
         })
         
         termLabel = UILabel()
-        termLabel?.textColor = UIColor.black
+        termLabel?.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
         termLabel?.font = UIFont.systemFont(ofSize: 12)
         view.addSubview(termLabel!)
         termLabel?.snp.makeConstraints({ (make) in
@@ -79,7 +78,7 @@ extension HomeRefuseThirdView{
         })
         
         feeLabel = UILabel()
-        feeLabel?.textColor = UIColor.black
+        feeLabel?.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
         feeLabel?.font = UIFont.systemFont(ofSize: 12)
         view.addSubview(feeLabel!)
         feeLabel?.snp.makeConstraints({ (make) in
@@ -91,26 +90,25 @@ extension HomeRefuseThirdView{
         descImage = UIImageView()
         view.addSubview(descImage!)
         descImage?.snp.makeConstraints({ (make) in
-            make.top.equalTo((termLabel?.snp.bottom)!).offset(10)
+            make.top.equalTo((termLabel?.snp.bottom)!).offset(5)
             make.left.equalTo((leftImageView?.snp.right)!).offset(8)
         })
         
-        let lineView = UIView()
-        lineView.backgroundColor = UIColor.gray
-        view.addSubview(lineView)
-        lineView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self).offset(0.5)
+        let lineImage = UIImageView()
+        lineImage.image = UIImage(named:"line")
+        view.addSubview(lineImage)
+        lineImage.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self).offset(0)
             make.left.equalTo(self).offset(15)
             make.right.equalTo(self).offset(-15)
-            make.height.equalTo(0.5)
         }
         
         let rightImage = UIImageView()
         rightImage.image = UIImage(named:"icon_youjiantou")
         view.addSubview(rightImage)
         rightImage.snp.makeConstraints { (make) in
-            make.centerY.equalTo(view.snp.centerY)
-            make.right.equalTo(view.snp.right).offset(-20)
+            make.centerY.equalTo(self.snp.centerY)
+            make.right.equalTo(self).offset(-20)
         }
     }
 }
