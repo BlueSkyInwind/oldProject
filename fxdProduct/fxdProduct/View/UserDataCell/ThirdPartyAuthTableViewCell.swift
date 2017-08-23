@@ -53,7 +53,7 @@ extension ThirdPartyAuthTableViewCell {
         })
         
         arrowsImage = UIImageView()
-        arrowsImage?.image = UIImage.init(named: "faceIcon")
+        arrowsImage?.image = UIImage.init(named: "icon_arrowRight")
         self.addSubview(arrowsImage!)
         arrowsImage?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.center.y)

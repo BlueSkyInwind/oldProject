@@ -69,20 +69,17 @@
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"个人信息";
-    _placeHolderArr = @[@"请确保填写的均为本人真实信息",@"身份证识别",@"姓名",@"身份证号",@"学历",@"现居住地",@"居住地详址"];
+     _placeHolderArr = @[@[@"请确保填写的均为本人真实信息",@"身份证识别"],@[@"姓名",@"身份证号"],@[@"学历",@"现居住地",@"居住地详址"]];
     if (UI_IS_IPHONE5) {
         self.automaticallyAdjustsScrollViewInsets = false;
     }
     
     NSString *device = [[UIDevice currentDevice] systemVersion];
     if (device.floatValue>10) {
-        
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
-        
         self.automaticallyAdjustsScrollViewInsets = false;
     }
-    
     
     index = 0;
     _pickerArray = [NSMutableArray array];
@@ -126,12 +123,12 @@
 
 - (void)configTableView
 {
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([IdentityCell class]) bundle:nil] forCellReuseIdentifier:@"IdentityCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
+    [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
     
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, 100)];
     _saveBtn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -272,15 +269,24 @@
 }
 
 #pragma mark - TableViewDelegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 7;
+    if (section == 0) {
+        return 2;
+    }else if (section == 1){
+        return 2;
+    }else{
+        return 3;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (indexPath.row == 0 && indexPath.section == 0) {
         return 50.f;
     } else {
         return 70.f;
@@ -296,88 +302,109 @@
         _saveBtn.enabled = false;
         [_saveBtn setBackgroundColor:rgb(139, 140, 143)];
     }
-    if (indexPath.row == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    switch (indexPath.section) {
+        case 0:{
+            if (indexPath.row == 0) {
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+                if (cell == nil) {
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    UIImageView *iconView = [[UIImageView alloc] init];
+                    iconView.image = [UIImage imageNamed:@"topCellIcon"];
+                    [cell.contentView addSubview:iconView];
+                    [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.left.equalTo(@10);
+                        make.top.equalTo(@9);
+                        make.width.equalTo(@22);
+                        make.height.equalTo(@22);
+                    }];
+                    UILabel *label = [[UILabel alloc] init];
+                    [cell.contentView addSubview:label];
+                    label.text = _placeHolderArr[indexPath.section][indexPath.row];
+                    label.textColor = [UIColor redColor];
+                    label.font = [UIFont systemFontOfSize:13.f];
+                    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.left.equalTo(iconView.mas_right).offset(4);
+                        make.top.equalTo(@5);
+                        //                make.bottom.equalTo(cell.contentView);
+                        make.height.equalTo(@30);
+                        make.right.equalTo(cell.contentView);
+                    }];
+                }
+                return cell;
+            } else if(indexPath.row == 1){
+                IdentityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IdentityCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                [cell.identityUpBtn addTarget:self action:@selector(identityUpBtnClick) forControlEvents:UIControlEventTouchUpInside];
+                [cell.identityBackBtn addTarget:self action:@selector(identityBackBtnClick) forControlEvents:UIControlEventTouchUpInside];
+                if (_idOCRFrontParse != nil || _custom_baseInfo.result.ocrStatus == 2) {
+                    [cell.identityUpBtn setBackgroundImage:[UIImage imageNamed:@"identitySelUp"] forState:UIControlStateNormal];
+                    cell.identityUpBtn.enabled = false;
+                }else {
+                    [cell.identityUpBtn setBackgroundImage:[UIImage imageNamed:@"identityUpUn"] forState:UIControlStateNormal];
+                    cell.identityUpBtn.enabled = true;
+                }
+                if (_idOCRBackParse != nil || _custom_baseInfo.result.ocrStatus == 2) {
+                    [cell.identityBackBtn setBackgroundImage:[UIImage imageNamed:@"identitySelBack"] forState:UIControlStateNormal];
+                    cell.identityBackBtn.enabled = false;
+                } else {
+                    [cell.identityBackBtn setBackgroundImage:[UIImage imageNamed:@"identityUnBack"] forState:UIControlStateNormal];
+                    cell.identityBackBtn.enabled = true;
+                }
+                if (!cell.identityUpBtn.isEnabled && !cell.identityBackBtn.isEnabled) {
+                    cell.identityLabel.textColor = UI_MAIN_COLOR;
+                }
+                //        [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
+                return cell;
+            }
+        }
+            break;
+        case 1:{
+            LabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"LabelCell%ld%ld",indexPath.row,indexPath.section]];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UIImageView *iconView = [[UIImageView alloc] init];
-            iconView.image = [UIImage imageNamed:@"topCellIcon"];
-            [cell.contentView addSubview:iconView];
-            [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(@10);
-                make.top.equalTo(@9);
-                make.width.equalTo(@22);
-                make.height.equalTo(@22);
-                //                make.bottom.equalTo(@5);
-                //                make.width.equalTo(iconView.mas_height).multipliedBy(1.f);
-            }];
-            UILabel *label = [[UILabel alloc] init];
-            [cell.contentView addSubview:label];
-            label.text = _placeHolderArr[indexPath.row];
-            label.textColor = [UIColor redColor];
-            label.font = [UIFont systemFontOfSize:13.f];
-            [label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(iconView.mas_right).offset(4);
-                make.top.equalTo(@5);
-                //                make.bottom.equalTo(cell.contentView);
-                make.height.equalTo(@30);
-                make.right.equalTo(cell.contentView);
-            }];
-        }
-        return cell;
-    } else if(indexPath.row == 1){
-        IdentityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IdentityCell"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell.identityUpBtn addTarget:self action:@selector(identityUpBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [cell.identityBackBtn addTarget:self action:@selector(identityBackBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        if (_idOCRFrontParse != nil || _custom_baseInfo.result.ocrStatus == 2) {
-            [cell.identityUpBtn setBackgroundImage:[UIImage imageNamed:@"identitySelUp"] forState:UIControlStateNormal];
-            cell.identityUpBtn.enabled = false;
-        }else {
-            [cell.identityUpBtn setBackgroundImage:[UIImage imageNamed:@"identityUpUn"] forState:UIControlStateNormal];
-            cell.identityUpBtn.enabled = true;
-        }
-        if (_idOCRBackParse != nil || _custom_baseInfo.result.ocrStatus == 2) {
-            [cell.identityBackBtn setBackgroundImage:[UIImage imageNamed:@"identitySelBack"] forState:UIControlStateNormal];
-            cell.identityBackBtn.enabled = false;
-        } else {
-            [cell.identityBackBtn setBackgroundImage:[UIImage imageNamed:@"identityUnBack"] forState:UIControlStateNormal];
-            cell.identityBackBtn.enabled = true;
-        }
-        if (!cell.identityUpBtn.isEnabled && !cell.identityBackBtn.isEnabled) {
-            cell.identityLabel.textColor = UI_MAIN_COLOR;
-        }
-        
-        [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
-        return cell;
-    }else {
-        
-        LabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"LabelCell%ld",indexPath.row]];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil] lastObject];
-        }
-        cell.textField.placeholder = _placeHolderArr[indexPath.row];
-        cell.textField.tag = indexPath.row +100;
-        cell.textField.delegate = self;
-        cell.textField.text = dataListArr[indexPath.row-1];
-        //        cell.textField.text = _placeHolderArr[indexPath.row];
-        if (indexPath.row ==2 || indexPath.row == 3 || indexPath.row ==6) {
+            if (!cell) {
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil] lastObject];
+            }
+            cell.textField.placeholder = _placeHolderArr[indexPath.section][indexPath.row];
+            cell.textField.tag = indexPath.row +100;
+            cell.textField.delegate = self;
+            cell.textField.text = dataListArr[indexPath.row-1];
+            //        cell.textField.text = _placeHolderArr[indexPath.row];
             cell.btn.hidden = YES;
-        }else{
-            cell.btn.hidden = NO;
-            cell.btn.tag = indexPath.row + 10;
-            [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
+            cell.btnSecory.hidden =YES;
+            //        [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
+            cell.selectionStyle  = UITableViewCellSelectionStyleNone;
+            return cell;
         }
-        cell.btnSecory.hidden =YES;
-        [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
-        cell.selectionStyle  = UITableViewCellSelectionStyleNone;
-        return cell;
-        
+            break;
+        case 2:{
+            LabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"LabelCell%ld",indexPath.row]];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (!cell) {
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil] lastObject];
+            }
+            cell.textField.placeholder = _placeHolderArr[indexPath.section][indexPath.row];
+            cell.textField.tag = indexPath.row +100;
+            cell.textField.delegate = self;
+            cell.textField.text = dataListArr[indexPath.row-1];
+            //        cell.textField.text = _placeHolderArr[indexPath.row];
+            if (indexPath.row ==3) {
+                cell.btn.hidden = YES;
+            }else{
+                cell.btn.hidden = NO;
+                cell.btn.tag = indexPath.row + 10;
+                [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
+            }
+            cell.btnSecory.hidden =YES;
+            //        [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
+            cell.selectionStyle  = UITableViewCellSelectionStyleNone;
+            return cell;
+        }
+            break;
+        default:
+            break;
     }
-    
     return nil;
 }
 
@@ -534,8 +561,6 @@
             return false;
         }
     }
-
-    
     return YES;
 }
 

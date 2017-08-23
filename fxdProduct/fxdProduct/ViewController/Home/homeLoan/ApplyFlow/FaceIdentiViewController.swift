@@ -178,7 +178,7 @@ extension FaceIdentiViewController {
     statusBtn = UIButton.init(type: UIButtonType.custom)
     statusBtn?.setTitle("进入检测", for: UIControlState.normal)
     statusBtn?.backgroundColor = UIColor.red
-    Tool.setCorner(statusBtn, borderColor: UIColor.red)
+    Tool.setCorner(statusBtn, borderColor: UIColor.clear)
     statusBtn?.setTitleColor(UIColor.white, for: UIControlState.normal)
     statusBtn?.addTarget(self, action: #selector(statusBtnClick), for: UIControlEvents.touchUpInside)
     self.view.addSubview(statusBtn!)
