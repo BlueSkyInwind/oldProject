@@ -125,7 +125,7 @@
 {
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([IdentityCell class]) bundle:nil] forCellReuseIdentifier:@"IdentityCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
     [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
@@ -360,45 +360,32 @@
         }
             break;
         case 1:{
-            LabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"LabelCell%ld%ld",indexPath.row,indexPath.section]];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            ContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
             if (!cell) {
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil] lastObject];
+                cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
             }
-            cell.textField.placeholder = _placeHolderArr[indexPath.section][indexPath.row];
-            cell.textField.tag = indexPath.row +100;
-            cell.textField.delegate = self;
-            cell.textField.text = dataListArr[indexPath.row-1];
-            //        cell.textField.text = _placeHolderArr[indexPath.row];
-            cell.btn.hidden = YES;
-            cell.btnSecory.hidden =YES;
-            //        [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
+            cell.titleLabel.text = _placeHolderArr[indexPath.section][indexPath.row];
+            cell.contentTextField.tag = indexPath.row +100 + indexPath.section;
+            cell.contentTextField.delegate = self;
+            cell.contentTextField.text = dataListArr[indexPath.row+1];
+            cell.arrowsImageBtn.hidden = YES;
             cell.selectionStyle  = UITableViewCellSelectionStyleNone;
             return cell;
         }
             break;
         case 2:{
-            LabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"LabelCell%ld",indexPath.row]];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            ContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
             if (!cell) {
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil] lastObject];
+                cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
             }
-            cell.textField.placeholder = _placeHolderArr[indexPath.section][indexPath.row];
-            cell.textField.tag = indexPath.row +100;
-            cell.textField.delegate = self;
-            cell.textField.text = dataListArr[indexPath.row-1];
-            //        cell.textField.text = _placeHolderArr[indexPath.row];
-            if (indexPath.row ==3) {
-                cell.btn.hidden = YES;
-            }else{
-                cell.btn.hidden = NO;
-                cell.btn.tag = indexPath.row + 10;
-                [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
-            }
-            cell.btnSecory.hidden =YES;
-            //        [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
+            
+            cell.titleLabel.text = _placeHolderArr[indexPath.section][indexPath.row];
+            cell.contentTextField.tag = indexPath.row +100 + indexPath.section;
+            cell.contentTextField.delegate = self;
+            cell.contentTextField.text = dataListArr[indexPath.row+3];
             cell.selectionStyle  = UITableViewCellSelectionStyleNone;
+            
             return cell;
         }
             break;

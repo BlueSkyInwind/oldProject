@@ -58,8 +58,9 @@
         
     }else{
         
-        //https://fintech.chinazyjr.com/p2p/http/huifush/toBosAcctActivate.jhtml?page_type_=1&ret_url_=https://h5.faxindai.com:8028/fxd-h5/page/case/app_transition.html&from_mobile_=15241892226
+
 //        NSString * str = @"https://fintech.chinazyjr.com/p2p/http/huifush/toBosAcctActivate.jhtml?page_type_=1&ret_url_=https://h5.faxindai.com:8028/fxd-h5/page/case/app_transition.html&from_mobile_=15241892226";
+//        NSString * str = @"http://192.168.14.71:8000/page/weixin.html";
         
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
@@ -192,6 +193,7 @@
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
     DLog(@"alert");
+    completionHandler();
 }
 
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler
