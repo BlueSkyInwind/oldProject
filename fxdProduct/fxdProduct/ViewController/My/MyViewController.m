@@ -73,9 +73,9 @@
     }
 }
 
--(void)viewWillDisappear:(BOOL)animated{
+-(void)viewDidDisappear:(BOOL)animated{
 
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
 #pragma mark - TableView
@@ -169,6 +169,8 @@
             break;
         case 5:
         {
+            MoreViewController *ticket=[[MoreViewController alloc]init];
+            [self.navigationController pushViewController:ticket animated:YES];
             
         }
             break;
