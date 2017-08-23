@@ -170,10 +170,10 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeBottomCell class]) bundle:nil] forCellReuseIdentifier:@"HomeBottomCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
     [self.tableView registerClass:[HomeDefaultCell class] forCellReuseIdentifier:@"HomeDefaultCell"];
-//    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeDefaultCell class]) bundle:nil] forCellReuseIdentifier:@"HomeDefaultCell"];
+
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.backgroundColor = rgb(245, 245, 245);
     DLog(@"%lf",_k_w);
@@ -183,8 +183,21 @@
     _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
     
     self.tableView.tableHeaderView = _sdView;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
+    header.automaticallyChangeAlpha = YES;
+    header.lastUpdatedTimeLabel.hidden = YES;
+    [header beginRefreshing];
+    self.tableView.mj_header = header;
+}
+
+-(void)headerRefreshing{
+
+    __weak HomeViewController *weakSelf = self;
+    NSLog(@"下拉刷新");
+    [weakSelf.tableView.mj_header endRefreshing];
     
 }
+
 - (void)qrClick
 {
     QRPopView *qrPopView = [QRPopView defaultQRPopView];
@@ -457,65 +470,7 @@
 //    homeCell.isWait = true;
 //    [homeCell productListOther];
     return homeCell;
-    
-    
-    
-//    [HomeCell setupRefuseUI];
-//    if ([_homeProductList.data.productList.type isEqualToString:@"0"]) {
-//        if (indexPath.section>0&&indexPath.section<=_dataArray.count) {
-//            
-//            HomeProductListProducts *product = _dataArray[indexPath.section-1];
-//            cell.rightImageView.image = [UIImage imageNamed:@"home_08"];
-//            
-//            BOOL isOverLimit = [product.isOverLimit boolValue];
-//            if (isOverLimit) {
-//                [cell.loanBtn setBackgroundImage:[UIImage imageNamed:@"beyond_lines_Limit"] forState:UIControlStateNormal];
-//                [cell.loanBtn setTitle:@"" forState:UIControlStateNormal];
-//            }else {
-//                [cell.loanBtn setBackgroundImage:nil forState:UIControlStateNormal];
-//                [cell.loanBtn setTitle:@"我要借款" forState:UIControlStateNormal];
-//            }
-//            [cell.proLogoImage sd_setImageWithURL:[NSURL URLWithString:product.extAttr.icon_]];
-//            cell.periodLabel.text = [NSString stringWithFormat:@"%@还款，额度%@",product.extAttr.period_desc_,product.extAttr.amt_desc_];;
-//            cell.amountLabel.text = product.name;
-//            cell.amountLabel.font = [UIFont systemFontOfSize:18.0];
-//            cell.amountLabel.textColor = [UIColor colorWithHexColorString:@"666666"];
-//            cell.helpImage.userInteractionEnabled = true;
-//            
-//            if ([product.id_ isEqualToString:SalaryLoan]) {
-//                cell.specialtyImage.image = [UIImage imageNamed:@"home_04"];
-//                UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(highSeeExpenses)];
-//                [cell.helpImage addGestureRecognizer:gest];
-//                
-//            }else if([product.id_ isEqualToString:WhiteCollarLoan]){
-//                cell.specialtyImage.image = [UIImage imageNamed:@"home11"];
-//                
-//            }else{
-//                
-//                cell.periodLabel.text = [NSString stringWithFormat:@"%@天还款，额度%@",product.extAttr.period_desc_,product.extAttr.amt_desc_];
-//                UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lowSeeExpenses)];
-//                [cell.helpImage addGestureRecognizer:gest];
-//                cell.specialtyImage.image = [UIImage imageNamed:@"home_05"];
-//                
-//            }
-//            return cell;
-//
-//        }
-//        
-//    }else if([_homeProductList.data.productList.type isEqualToString:@"1"]){
-//    
-//        if (indexPath.section == 1) {
-//
-//            HomeRefuseCell *cell = [HomeRefuseCell cellWithTableView:tableView];
-//            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//            cell.selected = NO;
-//            cell.backgroundColor = rgb(245, 245, 245);
-//            cell.homeProductList = _homeProductList;
-//            cell.delegate = self;
-//            return cell;
-//        }
-//    }
-//    return cell;
+
 }
 
 /**

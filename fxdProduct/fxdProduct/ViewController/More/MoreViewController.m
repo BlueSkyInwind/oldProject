@@ -50,8 +50,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
-    //    [self.MyTabView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [_MyTabView reloadData];
 }
 
@@ -171,8 +169,6 @@
             [self.navigationController pushViewController:aboutUs animated:YES];
         }
         else if(indexPath.row==1){
-//            helpView=[[HelpViewController alloc]initWithNibName:@"HelpViewController" bundle:nil];
-//            [self.navigationController pushViewController:helpView animated:YES];
             FXDWebViewController *webview = [[FXDWebViewController alloc] init];
             webview.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_question_url];
             [self.navigationController pushViewController:webview animated:true];
@@ -185,10 +181,6 @@
                 [self presentLogin:self];
             }
         }
-//        else if(indexPath.row==3)
-//        {
-//            [self shareContent:tableView];
-//        }
         else if(indexPath.row==3){
             UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"欢迎给出评价!" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -224,9 +216,7 @@
             }
         }
     }
-    //    else if(indexPath.section==1) {
-    //
-    //    }
+  
     else {
         _alertView = [[[NSBundle mainBundle] loadNibNamed:@"testView" owner:self options:nil] objectAtIndex:0];
         _alertView.frame=CGRectMake(0, 0, _k_w, _k_h);
@@ -235,33 +225,9 @@
         _alertView.lbltitle.textColor = [UIColor blackColor];
         [_alertView.sureBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
         [_alertView show];
-        
-        
-        //        [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前尝试退出登录状态，是否继续操作？" cencelBtn:@"取消" otherBtn:@[@"确定"] Onview:[[UIApplication sharedApplication].delegate window]  compleBlock:^(NSInteger index) {
-        //            if (index == 1) {
-        //
-        //
-        //            }
-        //        }];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
-#define mark ActionSheetDelegate
-
-//- (void)switchClick:(UISwitch *)sender
-//{
-//    DLog(@"%d",sender.on);
-//    if (sender.on == TRUE) {
-//        GestureViewController *gestureVc = [[GestureViewController alloc] init];
-//        gestureVc.type = GestureViewControllerTypeSetting;
-//        gestureVc.delegate = self;
-//        [self.navigationController pushViewController:gestureVc animated:YES];
-//    } else {
-//        GestureVerifyViewController *gestureVerifyVc = [[GestureVerifyViewController alloc] init];
-//        [self.navigationController pushViewController:gestureVerifyVc animated:YES];
-//    }
-//}
 
 
 - (void)setSwithchState:(BOOL)state
