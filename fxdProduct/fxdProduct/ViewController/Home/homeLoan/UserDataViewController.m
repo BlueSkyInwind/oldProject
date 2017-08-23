@@ -603,7 +603,7 @@
         }
         if (_nextStep.integerValue == -2) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
-            return;
+//            return;
         }
     
     switch (indexPath.row) {
@@ -655,25 +655,7 @@
                     thirdPartyAuthVC.verifyStatus =  [NSString stringWithFormat:@"%.0lf",custom_baseInfo.result.verifyStatus];
                     thirdPartyAuthVC.isMobileAuth = _isMobileAuth;
                     [self.navigationController pushViewController:thirdPartyAuthVC animated:true];
-                    
-
-                    CertificationViewController *certificationVC = [[CertificationViewController alloc] init];
-                    certificationVC.phoneAuthChannel = _phoneAuthChannel;
-                    certificationVC.isMobileAuth = _isMobileAuth;
-                    certificationVC.resultCode = _resultCode;
-                    if (custom_baseInfo.result.verifyStatus == 2) {
-                        certificationVC.liveEnabel = false;
-                    } else {
-                        certificationVC.liveEnabel = true;
-                        certificationVC.verifyStatus = [NSString stringWithFormat:@"%.0lf",custom_baseInfo.result.verifyStatus];
-                    }
-                    //  只有为 0 条件为真 走第三方认证   否则非零只显示运营商认证
-                    if ([_resultCode isEqualToString:@"0"]) {
-                        certificationVC.showAll = true;
-                    } else {
-                        certificationVC.showAll = false;
-                    }
-//                    [self.navigationController pushViewController:certificationVC animated:true];
+            
                 }];
 //            }
         }

@@ -16,9 +16,8 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
     var isZmxyAuth : String?
     var verifyStatus : String?
     var isMobileAuth : String?
+    var isPhoneAuthType : Bool?
 
-
-    
     var tableView : UITableView?
     var thirdPartyAuthCell :ThirdPartyAuthTableViewCell?
     let dataArr : Array<String> = ["人脸识别","手机认证","芝麻信用"]
@@ -47,6 +46,9 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         return dataArr.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if resultCode == "0" && indexPath.row == 0 {
+            return 0
+        }
         return 44
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -96,10 +98,23 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         switch indexPath.row{
         case 0:
             let faceIdentiCreditVC  = FaceIdentiViewController.init()
+            faceIdentiCreditVC.verifyStatus = verifyStatus
             self.navigationController?.pushViewController(faceIdentiCreditVC, animated: true)
+            faceIdentiCreditVC.identifyResultStatus = { [weak self] (status) -> () in
+                self?.verifyStatus  = status
+                self?.tableView?.reloadData()
+            }
             break
         case 1:
+            
+            guard mobilePhoneOperatorChannels() else {
+                return
+            }
+            
             let certificationVC = CertificationViewController.init()
+            certificationVC.phoneAuthChannel = phoneAuthChannel
+            certificationVC.isMobileAuth = isMobileAuth
+            certificationVC.whetherPhoneAuth = isPhoneAuthType!
             self.navigationController?.pushViewController(certificationVC, animated: true)
             break
         case 2:
@@ -110,7 +125,7 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
             
             if isZmxyAuth == "1" {
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "您正在认证中，请勿重复认证!")
-                return;
+                return
             }
             
             let sesameCreditVC  = SesameCreditViewController.init()
@@ -121,10 +136,35 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         }
     }
     
-    func mobilePhoneOperatorChannels() -> Void {
-        
-        
+    func mobilePhoneOperatorChannels() -> Bool {
+        var result = true
+        if resultCode == "1" {
+            //模拟的运营商认证
+            isPhoneAuthType = false
+        }else{
+            liveDiscernAndmibileAuthJudge(result: { (isPass) in
+                result = isPass
+            })
+        }
+        return result
     }
+    
+    func liveDiscernAndmibileAuthJudge(result:(_ isPass:Bool) -> Void) -> Void {
+        
+        if verifyStatus == "2" ||  verifyStatus == "3" {
+            //三方运营商认证
+            isPhoneAuthType = true
+            result(true)
+        }else if verifyStatus == "1"{
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请先进行人脸识别")
+            result(false)
+        }else{
+            //模拟的运营商认证
+            isPhoneAuthType = false
+            result(true)
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -554,6 +554,7 @@
     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     homeCell.backgroundColor = rgb(245, 245, 245);
     homeCell.selected = NO;
+
 //    [homeCell setupDefaultUI];
 //    [homeCell setupRefuseUI];
 //    [homeCell setupOtherPlatformsUI];
