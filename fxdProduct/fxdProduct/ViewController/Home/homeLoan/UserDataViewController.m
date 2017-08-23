@@ -53,6 +53,8 @@
     NSString *_isMobileAuth;
     NSString *_isZmxyAuth;
     NSString *_phoneAuthChannel;
+    NSString *_creditCardStatus;
+    NSString *_socialSecurityStatus;
     UserStateModel *_model;
     
     BOOL isOpen;
@@ -75,6 +77,9 @@
     self.automaticallyAdjustsScrollViewInsets = false;
     processFlot = 0.0;
     isOpen = YES;
+    _creditCardStatus = @"0";
+    _socialSecurityStatus = @"0";
+
     _subTitleArr = @[@"请完善您的个人信息",@"请完善您的联系人信息",@"请完善您的职业信息",@"请完成三方认证"];
     [self addBackItemRoot];
     [self configMoxieSDK];
@@ -498,13 +503,18 @@
         DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        cell.statusLabel.text = @"未完成";
+        cell.statusLabel.textColor = rgb(159, 160, 162);
         switch (indexPath.row) {
             case 0:
             {
                 cell.iconImage.image = [UIImage imageNamed:@"creditCard_icon"];
                 cell.subTitleLabel.text = @"完善信用卡认证信息";
                 cell.titleLable.text = @"信用卡认证";
+                if ([_creditCardStatus isEqualToString:@"1"]) {
+                    cell.statusLabel.text = @"已完成";
+                    cell.statusLabel.textColor = rgb(42, 155, 234);
+                }
                 return cell;
             }
                 break;
@@ -513,6 +523,10 @@
                 cell.iconImage.image = [UIImage imageNamed:@"shebao_icon"];
                 cell.subTitleLabel.text = @"完善社保认证信息";
                 cell.titleLable.text = @"社保认证";
+                if ([_socialSecurityStatus isEqualToString:@"1"]) {
+                    cell.statusLabel.text = @"已完成";
+                    cell.statusLabel.textColor = rgb(42, 155, 234);
+                }
                 return cell;
             }
                 break;
@@ -631,9 +645,15 @@
     if (indexPath.section == 1) {
         switch (indexPath.row) {
             case 0:
+                if ([_creditCardStatus isEqualToString:@"1"]) {
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+                }
                 [self mailImportClick];
                 break;
             case 1:
+                if ([_socialSecurityStatus isEqualToString:@"1"]) {
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+                }
                 [self securityImportClick];
                 break;
             default:
@@ -993,10 +1013,12 @@
     else if(code == 1){
         NSLog(@"任务采集成功，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
         if ([taskType isEqualToString:@"email"]) {
+            _creditCardStatus = @"1";
             [self TheCreditCardInfoupload:taskId];
         }
         if ([taskType isEqualToString:@"security"]) {
-            
+            _socialSecurityStatus = @"1";
+            [self TheSocialSecurityupload:taskId];
         }
     }
     //【未登录】假如code是-1则用户未登录
@@ -1027,7 +1049,12 @@
     [homeVM TheCreditCardInfoUpload:taskid];
     
 }
-
+-(void)TheSocialSecurityupload:(NSString *)taskid {
+    
+    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
+    [homeVM socialSecurityInfoUpload:taskid];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {
