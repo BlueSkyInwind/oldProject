@@ -10,11 +10,12 @@ import UIKit
 import Masonry
 import SnapKit
 
-protocol HomeDefaultCellDelegate: class {
+//@objc(HomeDefaultCellDelegate)
+@objc protocol HomeDefaultCellDelegate: NSObjectProtocol {
     
     func advancedCertification()
     func drawingBtnClick()
-    func applyBtnClick(money: String)
+    func applyBtnClick(_ money: String)->Void
     func moreBtnClick()
     func loanBtnClick()
 }
@@ -59,12 +60,6 @@ class HomeDefaultCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func feffefe() {
-        
-    }
-    func fewfwefwe() {
-        
-    }
 }
 
 //homeCell各种视图
@@ -191,6 +186,15 @@ extension HomeDefaultCell{
             make.right.equalTo(bgImage.snp.right).offset(-25)
             make.height.equalTo(50)
         }
+        
+//        //渐变颜色
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.frame = applyBtn.frame
+//        //设置渐变的主颜色（可多个颜色添加）
+//        gradientLayer.colors = [UIColor.red.cgColor, UIColor.init(red: 0/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1.0).cgColor]
+//        //将gradientLayer作为子layer添加到主layer上
+//        applyBtn.layer.addSublayer(gradientLayer)
+        
         
         let bottomLabel = UILabel()
         bottomLabel.text = "最快2分钟审核完成"
@@ -741,7 +745,7 @@ extension HomeDefaultCell{
     
         if delegate != nil {
             
-            delegate?.advancedCertification()
+            delegate?.drawingBtnClick()
         }
         print("点击提款")
     }
@@ -760,8 +764,12 @@ extension HomeDefaultCell{
     func applyBtnClick(){
     
         if delegate != nil {
+        
+            let moneyStr = NSString(format: "%@", (defaultHeadLabel?.text)!) as String
+            let index = moneyStr.index(moneyStr.endIndex, offsetBy: -1)
+            let money = moneyStr.substring(to: index)
             
-            delegate?.applyBtnClick(money: (defaultHeadLabel?.text)!)
+            delegate?.applyBtnClick(money)
         }
         print("点击立即申请")
     }
@@ -785,6 +793,4 @@ extension HomeDefaultCell{
         }
         print("我要借款")
     }
-    
-
 }

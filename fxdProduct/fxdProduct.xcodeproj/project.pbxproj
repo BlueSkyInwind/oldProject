@@ -1205,6 +1205,8 @@
 		CC6C93EF1F4AB58C00587C74 /* TrackRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */; };
 		CC6C93F11F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
 		CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
+		CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
+		CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CCA056BC1EBB3ECB00CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
@@ -2367,6 +2369,7 @@
 		CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "fxdProduct-Bridging-Header.h"; sourceTree = "<group>"; };
 		CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackRect.swift; sourceTree = "<group>"; };
 		CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseThirdView.swift; sourceTree = "<group>"; };
+		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
 		CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
@@ -5087,6 +5090,7 @@
 			children = (
 				CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */,
 				CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */,
+				CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */,
 			);
 			name = MineView;
 			sourceTree = "<group>";
@@ -6107,6 +6111,7 @@
 				0F647E041BE6F2740002D2DF /* RegDetailViewController.m in Sources */,
 				1AEDCF1F1C197F5000014A87 /* RepaymentHelpCell.m in Sources */,
 				638A16F21E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m in Sources */,
+				CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */,
 				CCF43B031EDE672D00CFD72C /* getBidStatus.m in Sources */,
 				638A16FA1E517D9F00AB8AB6 /* CADisplayLink.m in Sources */,
 				CCE3BE1E1ED2D424004C35A4 /* BankCardsModel.m in Sources */,
@@ -6430,6 +6435,7 @@
 				CC0DF9CB1EA5B1090024841A /* UserDefaulInfo.m in Sources */,
 				CCCDA8891EE028DD00B48DFF /* SendSmsParamModel.m in Sources */,
 				CC0DF9CC1EA5B1090024841A /* UIDevice+YYAdd.m in Sources */,
+				CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */,
 				CC0DF9CD1EA5B1090024841A /* YYTextEffectWindow.m in Sources */,
 				CC0DF9CE1EA5B1090024841A /* GetMoneyResultResult.m in Sources */,
 				CC0DF9CF1EA5B1090024841A /* LoanProcessViewController.m in Sources */,
