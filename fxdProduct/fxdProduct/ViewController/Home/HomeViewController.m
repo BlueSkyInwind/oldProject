@@ -89,123 +89,9 @@
     [self setUpTableview];
     [self setNavQRRightBar];
     [self fatchAdv];
-//    [self createBottomView];
 
 }
 
--(void)createBottomView{
-
-    CGFloat heigh;
-    if (UI_IS_IPHONE5) {
-        heigh = 70;
-    }else{
-        heigh = 80;
-    }
-    UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, _k_h-49-heigh, _k_w, heigh)];
-    bottomView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:bottomView];
-
-    UIView *payView = [[UIView alloc]init];
-    UITapGestureRecognizer *gestPay = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(payMoney)];
-    payView.userInteractionEnabled = true;
-    [payView addGestureRecognizer:gestPay];
-    [bottomView addSubview:payView];
-    [payView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bottomView.mas_top).with.offset(0);
-        make.left.equalTo(bottomView.mas_left).with.offset(25);
-        make.bottom.equalTo(bottomView.mas_bottom).with.offset(0);
-        make.width.equalTo(@70);
-    }];
-    
-    UIImageView *payImage = [[UIImageView alloc]init];
-    payImage.image = [UIImage imageNamed:@"home_06"];
-    [payView addSubview:payImage];
-    [payImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(payView.mas_top).with.offset(10);
-        make.centerX.equalTo(payView.mas_centerX);
-    }];
-    UILabel *payLabel = [[UILabel alloc]init];
-    payLabel.text = @"我要还款";
-    payLabel.font = [UIFont systemFontOfSize:13];
-    payLabel.textAlignment = NSTextAlignmentCenter;
-    payLabel.textColor = [UIColor colorWithRed:169/255.0 green:169/255.0 blue:169/255.0 alpha:1.0];
-    [payView addSubview:payLabel];
-    [payLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(payImage.mas_bottom).with.offset(5);
-        make.centerX.equalTo(payView.mas_centerX);
-        make.height.equalTo(@15);
-        make.width.equalTo(@70);
-    }];
-    
-    UIView *processView = [[UIView alloc]init];
-    
-    UITapGestureRecognizer *gestProcess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loanProcess)];
-    processView.userInteractionEnabled = true;
-    [processView addGestureRecognizer:gestProcess];
-    [bottomView addSubview:processView];
-    [processView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bottomView.mas_top).with.offset(0);
-        make.bottom.equalTo(bottomView.mas_bottom).with.offset(0);
-        make.centerX.equalTo(bottomView.mas_centerX);
-        make.width.equalTo(@70);
-    }];
-    
-    UIImageView *processImage = [[UIImageView alloc]init];
-    processImage.image = [UIImage imageNamed:@"home_07"];
-    [processView addSubview:processImage];
-    [processImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(processView.mas_top).with.offset(10);
-        make.centerX.equalTo(processView.mas_centerX);
-        
-    }];
-    
-    UILabel *processLabel = [[UILabel alloc]init];
-    processLabel.textAlignment = NSTextAlignmentCenter;
-    processLabel.text = @"借款进度";
-    processLabel.font = [UIFont systemFontOfSize:13];
-    processLabel.textColor = [UIColor colorWithRed:169/255.0 green:169/255.0 blue:169/255.0 alpha:1.0];
-    [processView addSubview:processLabel];
-    [processLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(processImage.mas_bottom).with.offset(5);
-        make.centerX.equalTo(processView.mas_centerX);
-        make.height.equalTo(@15);
-        make.width.equalTo(@70);
-    }];
-    
-    UIView *expenseView = [[UIView alloc]init];
-    UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expense)];
-    expenseView.userInteractionEnabled = true;
-    [expenseView addGestureRecognizer:gest];
-    [bottomView addSubview:expenseView];
-    [expenseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bottomView.mas_top).with.offset(0);
-        make.right.equalTo(bottomView.mas_right).with.offset(-25);
-        make.bottom.equalTo(bottomView.mas_bottom).with.offset(0);
-        make.width.equalTo(@70);
-    }];
-    
-    UIImageView *expenseImage = [[UIImageView alloc]init];
-    expenseImage.image = [UIImage imageNamed:@"home_09"];
-    [expenseView addSubview:expenseImage];
-    [expenseImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(expenseView.mas_top).with.offset(10);
-        make.centerX.equalTo(expenseView.mas_centerX);
-    }];
-    
-    UILabel *expenseLabel = [[UILabel alloc]init];
-    expenseLabel.text = @"费用说明";
-    expenseLabel.textAlignment = NSTextAlignmentCenter;
-    expenseLabel.font = [UIFont systemFontOfSize:13];
-    expenseLabel.textColor = [UIColor colorWithRed:169/255.0 green:169/255.0 blue:169/255.0 alpha:1.0];
-    [expenseView addSubview:expenseLabel];
-    [expenseLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(expenseImage.mas_bottom).with.offset(5);
-        make.centerX.equalTo(expenseView.mas_centerX);
-        make.height.equalTo(@15);
-        make.width.equalTo(@70);
-    }];
-    
-}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -555,13 +441,14 @@
     homeCell.backgroundColor = rgb(245, 245, 245);
     homeCell.selected = NO;
 
-//    [homeCell setupDefaultUI];
+//    homeCell.delegate = self 
+    [homeCell setupDefaultUI];
 //    [homeCell setupRefuseUI];
 //    [homeCell setupOtherPlatformsUI];
-    homeCell.leftTitleArray = @[@"申请产品：",@"借款金额：",@"借款周期：",@"每周还款：",@"最近账单日："];
-    homeCell.rightContentArray = @[@"工薪贷",@"2000元",@"5-50周",@"108元",@"2016-3-12"];
-    homeCell.drawingTitle = @"您已逾期";
-    [homeCell setupDrawingUI];
+//    homeCell.leftTitleArray = @[@"申请产品：",@"借款金额：",@"借款周期：",@"每周还款：",@"最近账单日："];
+//    homeCell.rightContentArray = @[@"工薪贷",@"2000元",@"5-50周",@"108元",@"2016-3-12"];
+//    homeCell.drawingTitle = @"您已逾期";
+//    [homeCell setupDrawingUI];
 //    if (indexPath.section == 1) {
 //        homeCell.homeProductFirstArray = @[@"home_01",@"工薪贷",@"home_04",@"2000元",@"5-50周"];
 //        [homeCell productListFirst];
