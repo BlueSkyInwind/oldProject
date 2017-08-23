@@ -92,6 +92,7 @@ extension HomeRefuseThirdView{
         descImage?.snp.makeConstraints({ (make) in
             make.top.equalTo((termLabel?.snp.bottom)!).offset(5)
             make.left.equalTo((leftImageView?.snp.right)!).offset(8)
+        
         })
         
         let lineImage = UIImageView()
@@ -109,6 +110,8 @@ extension HomeRefuseThirdView{
         rightImage.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.snp.centerY)
             make.right.equalTo(self).offset(-20)
+            make.width.equalTo(6)
+            make.height.equalTo(13)
         }
     }
 }

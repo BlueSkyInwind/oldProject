@@ -10,8 +10,19 @@ import UIKit
 import Masonry
 import SnapKit
 
+protocol HomeDefaultCellDelegate: class {
+    
+    func advancedCertification()
+    func drawingBtnClick()
+    func applyBtnClick(money: String)
+    func moreBtnClick()
+    func loanBtnClick()
+}
+
 class HomeDefaultCell: UITableViewCell {
 
+    weak var delegate: HomeDefaultCellDelegate?
+    
     var leftLabel: UILabel?
     var rightLabel: UILabel?
     var leftTitleArray = [""]
@@ -47,7 +58,12 @@ class HomeDefaultCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    func feffefe() {
+        
+    }
+    func fewfwefwe() {
+        
+    }
 }
 
 //homeCell各种视图
@@ -712,12 +728,20 @@ extension HomeDefaultCell{
     //MARK:立即添加高级认证
     func advancedCertificationClick(){
     
+        if delegate != nil {
+            
+            delegate?.advancedCertification()
+        }
         print("立即添加高级认证")
     }
     
     //MARK:点击提款
     func bottomBtnClick(){
     
+        if delegate != nil {
+            
+            delegate?.advancedCertification()
+        }
         print("点击提款")
     }
     
@@ -734,18 +758,35 @@ extension HomeDefaultCell{
     //MARK:点击立即申请
     func applyBtnClick(){
     
+        if delegate != nil {
+            
+            delegate?.applyBtnClick(money: (defaultHeadLabel?.text)!)
+        }
         print("点击立即申请")
     }
     
     //MARK:点击导流平台的更多
     func moreBtnClick(){
     
+        if delegate != nil {
+            
+            delegate?.moreBtnClick()
+        }
         print("点击导流平台的更多")
     }
     
     //MARK:我要借款
     func loanBtnClick(){
     
+        if delegate != nil {
+            
+            delegate?.loanBtnClick()
+        }
         print("我要借款")
+    }
+    
+    func test(){
+    
+        
     }
 }
