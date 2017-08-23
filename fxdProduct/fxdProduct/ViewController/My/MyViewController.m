@@ -157,8 +157,11 @@
             break;
         case 3:
         {
-            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
-            [self.navigationController pushViewController:invitationVC animated:true];
+            UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
+//            userDataVC.product_id = WhiteCollarLoan;
+            [self.navigationController pushViewController:userDataVC animated:true];
+//            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
+//            [self.navigationController pushViewController:invitationVC animated:true];
         }
             break;
         case 4:
