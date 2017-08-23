@@ -543,6 +543,8 @@
 		81B4154D94C5352EFA4832C3 /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */; };
 		841BE5C61F177C4F00BABD04 /* UserLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */; };
 		841BE5C91F17829D00BABD04 /* LoginStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C81F17829D00BABD04 /* LoginStatusView.m */; };
+		841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
+		841E66EF1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
 		842C0B531ED5909E00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
 		842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
 		842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B581ED599DE00366D11 /* LoginViewController.xib */; };
@@ -614,6 +616,8 @@
 		84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
+		84DFBECF1F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */; };
+		84DFBED01F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */; };
 		84ED5B581F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B591F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
@@ -2256,6 +2260,7 @@
 		841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLevelViewController.m; sourceTree = "<group>"; };
 		841BE5C71F17829D00BABD04 /* LoginStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginStatusView.h; sourceTree = "<group>"; };
 		841BE5C81F17829D00BABD04 /* LoginStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginStatusView.m; sourceTree = "<group>"; };
+		841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
 		842C0B511ED5909E00366D11 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		842C0B521ED5909E00366D11 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		842C0B581ED599DE00366D11 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -2318,6 +2323,7 @@
 		84A635101F00FCA200146A8A /* AuthenticationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewModel.m; sourceTree = "<group>"; };
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
+		84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSwift.swift; sourceTree = "<group>"; };
 		84ED5B511F4AB9E6004C0A59 /* MoxieSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoxieSDK.h; sourceTree = "<group>"; };
 		84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMoxieSDK.a; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
@@ -3138,6 +3144,7 @@
 				84ED5B701F4AC9F6004C0A59 /* UnfoldTableViewCell.h */,
 				84ED5B711F4AC9F6004C0A59 /* UnfoldTableViewCell.m */,
 				84ED5B721F4AC9F6004C0A59 /* UnfoldTableViewCell.xib */,
+				841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */,
 				848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */,
 			);
 			path = UserDataCell;
@@ -3147,8 +3154,8 @@
 			isa = PBXGroup;
 			children = (
 				CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */,
-				CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */,
 				CCD565BD1E8A46D500B6665D /* PserInfoViewController.h */,
+				CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */,
 				63553AF41E5D937600B2C1FF /* UserContactsViewController.h */,
 				63553AF51E5D937600B2C1FF /* UserContactsViewController.m */,
 				63553AF61E5D937600B2C1FF /* UserContactsViewController.xib */,
@@ -4396,6 +4403,7 @@
 				63117FB61DFFC42600635BB3 /* ShareConfig.m */,
 				638A16841E5030D700AB8AB6 /* SetUpFMDevice.h */,
 				638A16851E5030D700AB8AB6 /* SetUpFMDevice.m */,
+				84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */,
 				CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */,
 			);
 			path = Common;
@@ -6121,6 +6129,7 @@
 				0FFA91321C56058A008D91D2 /* telphoneView.m in Sources */,
 				638A16EF1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m in Sources */,
 				63E5C7611D4AFDBF009A633C /* CardInfo.m in Sources */,
+				84DFBECF1F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */,
 				84ED5B731F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
 				63553B061E5D9E1B00B2C1FF /* MobileCell.m in Sources */,
 				638A16FB1E517D9F00AB8AB6 /* CALayer+Compat.m in Sources */,
@@ -6179,6 +6188,7 @@
 				6300CC031E4AAB870012B05A /* LoanProcessModel.m in Sources */,
 				6326C9EC1BF0B15700FD23A8 /* GetMoneyProcessResult.m in Sources */,
 				63553AFC1E5D9A8C00B2C1FF /* CertificationViewController.m in Sources */,
+				841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */,
 				638A17051E517D9F00AB8AB6 /* LOTShapePath.m in Sources */,
 				63FC25041D98F7E9006F58F3 /* YYTextView.m in Sources */,
 				635077661DD1CC8800ED031A /* AuthStatus.m in Sources */,
@@ -6506,6 +6516,7 @@
 				CC0DFA1B1EA5B1090024841A /* CustomerBaseInfoContactBean.m in Sources */,
 				CC0DFA1C1EA5B1090024841A /* HMScannerViewController.m in Sources */,
 				CC0DFA1D1EA5B1090024841A /* Model.m in Sources */,
+				84DFBED01F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */,
 				CC0DFA1E1EA5B1090024841A /* GetMoneyInfo.m in Sources */,
 				CC0DFA1F1EA5B1090024841A /* UIColor+Extend.m in Sources */,
 				CC0DFA211EA5B1090024841A /* TicketDetailController.m in Sources */,
@@ -6620,6 +6631,7 @@
 				CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */,
 				CC0DFA841EA5B1090024841A /* CashResult.m in Sources */,
 				CC0DFA851EA5B1090024841A /* YYTextRubyAnnotation.m in Sources */,
+				841E66EF1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */,
 				CCC344FD1F03833E006D0F83 /* JRefuseView.m in Sources */,
 				CC0DFA861EA5B1090024841A /* QRPopView.m in Sources */,
 				CC0DFA871EA5B1090024841A /* LoginMsgBaseClass.m in Sources */,

@@ -28,8 +28,7 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         self.navigationItem.title = "三方认证"
         addBackItem()
         setupUI()
-        
-    }
+     }
     
     func setupUI() -> Void {
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)

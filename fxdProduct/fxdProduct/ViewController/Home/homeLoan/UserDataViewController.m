@@ -53,8 +53,7 @@
     NSString *_isZmxyAuth;
     NSString *_phoneAuthChannel;
     UserStateModel *_model;
-    
-    BOOL isOpen;
+     BOOL isOpen;
     
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -433,7 +432,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 5;
+        return 4;
     }else if(section == 1){
         if (isOpen) {
             return 3;
@@ -553,25 +552,6 @@
             return cell;
         }
             break;
-        case 4:
-            cell.iconImage.image = [UIImage imageNamed:@"zhima"];
-            cell.titleLable.text = @"芝麻信用";
-            cell.subTitleLabel.text = @"授权获取您的芝麻信用信息";
-            if (UI_IS_IPHONE5) {
-                cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
-            }
-            cell.lineView.hidden = true;
-            if (_isZmxyAuth.integerValue == 2) {
-                cell.statusLabel.text = @"已完成";
-                cell.statusLabel.textColor = rgb(42, 155, 234);
-            } else if(_isZmxyAuth.integerValue == 1){
-                cell.statusLabel.text = @"认证中";
-                cell.statusLabel.textColor = rgb(159, 160, 162);
-            }else if(_isZmxyAuth.integerValue == 3){
-                cell.statusLabel.text = @"未完成";
-                cell.statusLabel.textColor = rgb(159, 160, 162);
-            }
-            return cell;
         default:
             break;
     }
@@ -659,23 +639,6 @@
                 }];
 //            }
         }
-            break;
-        case 4:
-            if (_isZmxyAuth.integerValue == 2||processFlot ==1) {
-                
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
-                return;
-            }else if(_isZmxyAuth.integerValue == 1){
-                
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您正在认证中，请勿重复认证!"];
-                return;
-                
-            }else{
-                
-                SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
-                [self.navigationController pushViewController:controller animated:YES];
-                return;
-            }
             break;
         default:
             break;
