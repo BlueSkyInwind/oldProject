@@ -33,6 +33,7 @@
 #import "UnfoldTableViewCell.h"
 #import "MoxieSDK.h"
 #import "UserDataViewModel.h"
+#import "HighRandingModel.h"
 
 
 @interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
@@ -515,6 +516,14 @@
                     cell.statusLabel.text = @"已完成";
                     cell.statusLabel.textColor = rgb(42, 155, 234);
                 }
+                if ([_creditCardStatus isEqualToString:@"2"]) {
+                    cell.statusLabel.text = @"评测中";
+                    cell.statusLabel.textColor = rgb(159, 160, 162);
+                }
+                if ([_creditCardStatus isEqualToString:@"3"]) {
+                    cell.statusLabel.text = @"失败";
+                    cell.statusLabel.textColor = rgb(159, 160, 162);
+                }
                 return cell;
             }
                 break;
@@ -526,6 +535,14 @@
                 if ([_socialSecurityStatus isEqualToString:@"1"]) {
                     cell.statusLabel.text = @"已完成";
                     cell.statusLabel.textColor = rgb(42, 155, 234);
+                }
+                if ([_socialSecurityStatus isEqualToString:@"2"]) {
+                    cell.statusLabel.text = @"评测中";
+                    cell.statusLabel.textColor = rgb(159, 160, 162);
+                }
+                if ([_socialSecurityStatus isEqualToString:@"3"]) {
+                    cell.statusLabel.text = @"失败";
+                    cell.statusLabel.textColor = rgb(159, 160, 162);
                 }
                 return cell;
             }
@@ -1063,7 +1080,19 @@
     
     UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
     [userDataVM setBlockWithReturnBlock:^(id returnValue) {
-  
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            NSArray * array = (NSArray *)baseResultM.data;
+            for (NSDictionary * dic  in array) {
+                HighRandingModel * highRandM  = [[HighRandingModel alloc]initWithDictionary:dic error:nil];
+                if ([highRandM.type isEqualToString:@"社保"]) {
+                    _socialSecurityStatus = highRandM.resultid;
+                }
+                if ([highRandM.type isEqualToString:@"信用卡"]) {
+                    _creditCardStatus = highRandM.resultid;
+                }
+            }
+        }
     } WithFaileBlock:^{
         
     }];

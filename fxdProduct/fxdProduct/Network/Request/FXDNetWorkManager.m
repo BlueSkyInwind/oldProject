@@ -714,18 +714,17 @@
             [manager GET:strURL parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                NSString *jsonStr;
-               
+                NSDictionary * resultDic = [NSDictionary dictionary];
                 if ([responseObject isKindOfClass:[NSData class]]) {
-                    jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                    resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+                    NSLog(@"%@",resultDic);
                 }else{
                     NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
                     NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
                     NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     DLog(@"response json --- %@",jsonStr);
-                    //            [Tool dataToDictionary:responseObject]
                 }
-                finished(Enum_SUCCESS,responseObject);
+                finished(Enum_SUCCESS,resultDic);
                 [_waitView removeFromSuperview];
                 [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

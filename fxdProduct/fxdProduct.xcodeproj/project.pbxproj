@@ -604,6 +604,8 @@
 		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
 		84DFBED31F4D72050009DAB9 /* UserDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */; };
 		84DFBED41F4D72050009DAB9 /* UserDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */; };
+		84DFBEDE1F4D97D50009DAB9 /* HighRandingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBEDD1F4D97D50009DAB9 /* HighRandingModel.m */; };
+		84DFBEDF1F4D97D50009DAB9 /* HighRandingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBEDD1F4D97D50009DAB9 /* HighRandingModel.m */; };
 		84ED5B581F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B591F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
@@ -2300,6 +2302,8 @@
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
 		84DFBED11F4D72050009DAB9 /* UserDataViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataViewModel.h; sourceTree = "<group>"; };
 		84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataViewModel.m; sourceTree = "<group>"; };
+		84DFBEDC1F4D97D50009DAB9 /* HighRandingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighRandingModel.h; sourceTree = "<group>"; };
+		84DFBEDD1F4D97D50009DAB9 /* HighRandingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighRandingModel.m; sourceTree = "<group>"; };
 		84ED5B511F4AB9E6004C0A59 /* MoxieSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoxieSDK.h; sourceTree = "<group>"; };
 		84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMoxieSDK.a; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
@@ -4482,6 +4486,7 @@
 				8438F71A1EE164E20089E121 /* changePassword */,
 				6313DC061BB39BCC00EB45DE /* Login */,
 				844E5F4D1ED94D7E00753671 /* Register */,
+				84DFBEDB1F4D976F0009DAB9 /* HighRanding */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5007,6 +5012,15 @@
 				84DD36381ED57DEE0057F19A /* SMSModel.m */,
 			);
 			path = SMS;
+			sourceTree = "<group>";
+		};
+		84DFBEDB1F4D976F0009DAB9 /* HighRanding */ = {
+			isa = PBXGroup;
+			children = (
+				84DFBEDC1F4D97D50009DAB9 /* HighRandingModel.h */,
+				84DFBEDD1F4D97D50009DAB9 /* HighRandingModel.m */,
+			);
+			path = HighRanding;
 			sourceTree = "<group>";
 		};
 		84ED5B4F1F4AB9E6004C0A59 /* include */ = {
@@ -5882,6 +5896,7 @@
 				1A0703371CA530C1001DEE43 /* weekRepayModel.m in Sources */,
 				63145ABE1CA4E66100D04ED8 /* CustomerCareerExt.m in Sources */,
 				1A0703341CA52259001DEE43 /* UserStateModel.m in Sources */,
+				84DFBEDE1F4D97D50009DAB9 /* HighRandingModel.m in Sources */,
 				8446AC031EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */,
 				63FC24F11D98F7E9006F58F3 /* YYTextKeyboardManager.m in Sources */,
 				638A17071E517D9F00AB8AB6 /* LOTShapeStroke.m in Sources */,
@@ -6338,6 +6353,7 @@
 				CC0DF9B41EA5B1090024841A /* testView.m in Sources */,
 				CCEEB41D1ED6EA6800588B6A /* QueryBidStatusModel.m in Sources */,
 				CC0DF9B51EA5B1090024841A /* SaveCustomBaseViewModel.m in Sources */,
+				84DFBEDF1F4D97D50009DAB9 /* HighRandingModel.m in Sources */,
 				CC0DF9B61EA5B1090024841A /* BankCardInfoBaseClass.m in Sources */,
 				CC0DF9B71EA5B1090024841A /* CheckViewIng.m in Sources */,
 				CC0DF9B81EA5B1090024841A /* YYTextAttribute.m in Sources */,
