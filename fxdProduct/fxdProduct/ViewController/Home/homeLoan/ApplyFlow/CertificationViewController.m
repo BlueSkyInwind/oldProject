@@ -149,9 +149,11 @@ typedef enum {
                         [cell.detectionBtn setTitle:@"已认证" forState:UIControlStateNormal];
                     }
                 } else {
-                    cell.detectionBtn.enabled = false;
+                    cell.detectionBtn.enabled = true;
                     [cell.detectionBtn setBackgroundColor:rgb(139, 140, 143)];
                     [cell.detectionBtn setTitle:@"已认证" forState:UIControlStateNormal];
+                    [cell.detectionBtn addTarget:self action:@selector(startDetection) forControlEvents:UIControlEventTouchUpInside];
+
                 }
                 return cell;
             } else {
@@ -704,7 +706,6 @@ typedef enum {
             MGLiveViewController *myVC = [[MGLiveViewController alloc] initWithDefauleSetting];
             myVC.delagate = self;
             BaseNavigationViewController *liveVC = [[BaseNavigationViewController alloc] initWithRootViewController:myVC];
-            
             [self presentViewController:liveVC animated:true completion:nil];
         } else {
             

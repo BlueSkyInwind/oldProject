@@ -13,5 +13,6 @@ typedef void(^UnfoldBtnClick)();
 @interface UnfoldTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *tapView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property(copy,nonatomic)UnfoldBtnClick  unfoldBtnClick;
 @end

@@ -57,6 +57,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="tapView" destination="IEq-cb-iYR" id="XHk-RU-uN4"/>
+                <outlet property="titleLabel" destination="hc5-QI-rLT" id="PbD-bt-pqg"/>
             </connections>
         </tableViewCell>
     </objects>

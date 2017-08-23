@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class FaceIdentiViewController: UIViewController {
+import MGLivenessDetection
+class FaceIdentiViewController: BaseViewController,LiveDeteDelgate{
 
     var iconImage : UIImageView?
     var titleLabel : UILabel?
@@ -19,18 +19,71 @@ class FaceIdentiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        self.view.backgroundColor = UIColor.white
+        self.navigationItem.title = "人脸识别"
+        addBackItem()
+        setupUI()
     }
     
     func statusBtnClick() -> Void {
-        
-        
+        startFaceDetection()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func startFaceDetection() -> Void {
+        MGLicenseManager.license { (License) in
+            if License {
+                let mGLiveVC = MGLiveViewController.init(defauleSetting: ())
+                mGLiveVC?.delagate  = self
+                let baseVC = BaseNavigationViewController.init(rootViewController: mGLiveVC!)
+                self.present(baseVC, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    //MARK:  LiveDeteDelgate 事件
+    func liveDateSuccess(_ faceIDData: FaceIDData!) {
+        
+    }
+    func liveDateFaile(_ errorType: MGLivenessDetectionFailedType) {
+        showErrorString(errorType: errorType)
+    }
+
+    func showErrorString(errorType: MGLivenessDetectionFailedType) -> Void {
+        switch (errorType) {
+        case DETECTION_FAILED_TYPE_ACTIONBLEND:
+            Tool.showMessage("请按照提示完成动作", vc: self)
+            break;
+        case DETECTION_FAILED_TYPE_NOTVIDEO:
+            Tool.showMessage("活体检测未成功", vc: self)
+            break;
+        case DETECTION_FAILED_TYPE_TIMEOUT:
+            Tool.showMessage("请在规定时间内完成动作", vc: self)
+            break;
+        default:
+            Tool.showMessage("请按照提示完成动作", vc: self)
+            break;
+        }
+    }
+    
+    //MARK: 网络请求
+    func verifyLive( faceIDData : FaceIDData) -> Void {
+       let userDataVM =  UserDataViewModel.init()
+        userDataVM.setBlockWithReturn({ (object) in
+            
+            
+            
+        }) { 
+            
+        }
+        userDataVM.uploadLiveIdentiInfo(faceIDData)
+        
+    }
+    
     
 
     /*
@@ -52,7 +105,7 @@ extension FaceIdentiViewController {
     iconImage?.image = UIImage.init(named: "faceIcon")
     self.view.addSubview(iconImage!)
     iconImage?.snp.makeConstraints({ (make) in
-        make.centerX.equalTo(self.view.center.y)
+        make.centerX.equalTo(self.view.center.x)
         make.width.equalTo(60)
         make.height.equalTo((iconImage?.snp.width)!).multipliedBy(1)
         make.top.equalTo(self.view.snp.top).offset(100)
@@ -65,7 +118,7 @@ extension FaceIdentiViewController {
     self.view.addSubview(titleLabel!)
     titleLabel?.snp.makeConstraints({ (make) in
         make.centerX.equalTo(self.view.center.x)
-        make.width.equalTo(60)
+        make.width.equalTo(120)
         make.height.equalTo(21)
         make.top.equalTo((iconImage?.snp.bottom)!).offset(5)
     })

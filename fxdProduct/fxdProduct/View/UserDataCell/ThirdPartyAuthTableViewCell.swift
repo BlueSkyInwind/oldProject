@@ -19,6 +19,14 @@ class ThirdPartyAuthTableViewCell: UITableViewCell {
         // Initialization code
     }
     
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -55,8 +63,8 @@ extension ThirdPartyAuthTableViewCell {
         })
         
         statusLabel = UILabel()
-        statusLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        statusLabel?.textAlignment = NSTextAlignment.left
+        statusLabel?.font = UIFont.systemFont(ofSize: 15)
+        statusLabel?.textAlignment = NSTextAlignment.right
         self.addSubview(statusLabel!)
         statusLabel?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.center.y)
