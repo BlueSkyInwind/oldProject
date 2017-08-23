@@ -78,10 +78,8 @@
     if (device.floatValue>10) {
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
-        
         self.automaticallyAdjustsScrollViewInsets = false;
     }
-    
     
     index = 0;
     _pickerArray = [NSMutableArray array];
@@ -130,6 +128,7 @@
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([IdentityCell class]) bundle:nil] forCellReuseIdentifier:@"IdentityCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
+    [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
     
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, 100)];
     _saveBtn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -406,10 +405,6 @@
         default:
             break;
     }
-    
-
-        
-    
     return nil;
 }
 

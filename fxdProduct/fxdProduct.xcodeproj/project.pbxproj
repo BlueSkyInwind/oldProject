@@ -618,6 +618,8 @@
 		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
 		84DFBECF1F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */; };
 		84DFBED01F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */; };
+		84DFBED91F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBED81F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift */; };
+		84DFBEDA1F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBED81F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift */; };
 		84ED5B581F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B591F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
@@ -2326,6 +2328,7 @@
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
 		84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSwift.swift; sourceTree = "<group>"; };
+		84DFBED81F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterViewController.swift; sourceTree = "<group>"; };
 		84ED5B511F4AB9E6004C0A59 /* MoxieSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoxieSDK.h; sourceTree = "<group>"; };
 		84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMoxieSDK.a; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
@@ -4594,9 +4597,10 @@
 		63ED33301B6B4472008B6085 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				63DE56F91DE7CC4200747AE2 /* WebViewController */,
-				63A24BEB1BE063A90036E8EF /* CoreNewFeatureVC */,
 				63112A6A1BDF148F002B372C /* Help */,
+				63A24BEB1BE063A90036E8EF /* CoreNewFeatureVC */,
+				63DE56F91DE7CC4200747AE2 /* WebViewController */,
+				84DFBED71F4D7C520009DAB9 /* AuthenticationCenter */,
 				63ED33391B6B523E008B6085 /* FindPass */,
 				63ED333A1B6B523E008B6085 /* Home */,
 				63ED333B1B6B523E008B6085 /* Login */,
@@ -5056,6 +5060,14 @@
 				84DD36381ED57DEE0057F19A /* SMSModel.m */,
 			);
 			path = SMS;
+			sourceTree = "<group>";
+		};
+		84DFBED71F4D7C520009DAB9 /* AuthenticationCenter */ = {
+			isa = PBXGroup;
+			children = (
+				84DFBED81F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift */,
+			);
+			path = AuthenticationCenter;
 			sourceTree = "<group>";
 		};
 		84ED5B4F1F4AB9E6004C0A59 /* include */ = {
@@ -6008,6 +6020,7 @@
 				63A24C611BE063A90036E8EF /* NSString+Password.m in Sources */,
 				0FFA91751C59BE57008D91D2 /* BankCardViewController.m in Sources */,
 				636AC42D1D38DEBC00599590 /* PayViewController.m in Sources */,
+				84DFBED91F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift in Sources */,
 				637963A91CABD0F8002A5910 /* ApprovalAmountExt.m in Sources */,
 				1AB442E61D782E53000459E6 /* RepayDetailViewController.m in Sources */,
 				0F047F471C507D59002ED7C0 /* LabelCell.m in Sources */,
@@ -6558,6 +6571,7 @@
 				CC0DFA3E1EA5B1090024841A /* LivenessSelfie.m in Sources */,
 				CC0DFA3F1EA5B1090024841A /* MLBlackTransition.m in Sources */,
 				CC0DFA401EA5B1090024841A /* GetMoneyStateResult.m in Sources */,
+				84DFBEDA1F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift in Sources */,
 				CC0DFA411EA5B1090024841A /* CustomerBaseInfoExt.m in Sources */,
 				CC0DFA421EA5B1090024841A /* PayMethodViewController.m in Sources */,
 				CC0DFA431EA5B1090024841A /* LoginParse.m in Sources */,
