@@ -50,7 +50,7 @@
 #import "LoginViewModel.h"
 #import "FirstBorrowViewController.h"
 
-@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeRefuseCellDelegate>
+@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeRefuseCellDelegate,HomeDefaultCellDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
     LoanRecordParse *_loanRecordParse;
@@ -440,9 +440,8 @@
     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     homeCell.backgroundColor = rgb(245, 245, 245);
     homeCell.selected = NO;
-//    homeCell.delegate = self 
+    homeCell.delegate = self;
     [homeCell setupDefaultUI];
-    [homeCell feffefe];
 //    [homeCell setupRefuseUI];
 //    [homeCell setupOtherPlatformsUI];
 //    homeCell.leftTitleArray = @[@"申请产品：",@"借款金额：",@"借款周期：",@"每周还款：",@"最近账单日："];
@@ -1082,6 +1081,30 @@
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
     [vc presentViewController:nav animated:YES completion:nil];
     
+}
+
+#pragma mark  首页视图的各种代理
+
+#pragma mark 立即添加高级认证
+-(void)advancedCertification{
+
+    NSLog(@"立即添加高级认证");
+}
+#pragma mark 点击提款
+-(void)drawingBtnClick{
+    NSLog(@"点击提款");
+}
+#pragma mark 点击立即申请
+-(void)applyBtnClick:(NSString *)money{
+    NSLog(@"点击立即申请=%@",money);
+}
+#pragma mark 点击导流平台的更多
+-(void)moreBtnClick{
+    NSLog(@"点击导流平台的更多");
+}
+#pragma mark 我要借款
+-(void)loanBtnClick{
+    NSLog(@"我要借款");
 }
 
 

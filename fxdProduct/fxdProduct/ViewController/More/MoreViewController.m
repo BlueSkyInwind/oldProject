@@ -55,15 +55,13 @@
     [_MyTabView reloadData];
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self setNavMesRightBar];
-    //    imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_07",@"7_gd_icon_08",@"7_gd_icon_09",@"7_gd_icon_10"];
+
     imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09",@"changeP_icon"];
-    //    titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"分享好友",@"给个好评",@"客服热线",@"手势密码"];
     titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"给个好评",@"客服热线",@"修改密码"];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    //    _MyTabView.scrollEnabled = NO;
     [_MyTabView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     [_MyTabView registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"moreFunction"];
     [_MyTabView registerNib:[UINib nibWithNibName:@"HelpViewCell" bundle:nil] forCellReuseIdentifier:@"outLog"];
