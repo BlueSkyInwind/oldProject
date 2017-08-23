@@ -718,7 +718,6 @@
                
                 if ([responseObject isKindOfClass:[NSData class]]) {
                     jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-
                 }else{
                     NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
                     NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];

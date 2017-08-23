@@ -387,6 +387,9 @@ NSString * const    _shebaoupload_url    =    @"apigw/client/resource/mxsbtask_c
 //信用卡
 NSString * const    _TheCreditCardupload_url    =    @"apigw/client/resource/mxmailtask_create.jhtml";
 
+//高级认证状态查询
+NSString * const    _HighRankingStatus_url    =    @"apigw/client/resource/fundtask.jhtml";
+
 
 #pragma mark - 合规接口
 

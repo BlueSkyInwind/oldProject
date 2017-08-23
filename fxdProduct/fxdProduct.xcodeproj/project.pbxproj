@@ -602,6 +602,8 @@
 		84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
+		84DFBED31F4D72050009DAB9 /* UserDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */; };
+		84DFBED41F4D72050009DAB9 /* UserDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */; };
 		84ED5B581F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B591F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
@@ -2296,6 +2298,8 @@
 		84A635101F00FCA200146A8A /* AuthenticationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewModel.m; sourceTree = "<group>"; };
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
+		84DFBED11F4D72050009DAB9 /* UserDataViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataViewModel.h; sourceTree = "<group>"; };
+		84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataViewModel.m; sourceTree = "<group>"; };
 		84ED5B511F4AB9E6004C0A59 /* MoxieSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoxieSDK.h; sourceTree = "<group>"; };
 		84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMoxieSDK.a; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
@@ -3403,6 +3407,8 @@
 				84A635101F00FCA200146A8A /* AuthenticationViewModel.m */,
 				843FF1F31F20860B00ECCE16 /* PaymentViewModel.h */,
 				843FF1F41F20860B00ECCE16 /* PaymentViewModel.m */,
+				84DFBED11F4D72050009DAB9 /* UserDataViewModel.h */,
+				84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -5827,6 +5833,7 @@
 				CCCDA8801EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */,
 				638A17081E517D9F00AB8AB6 /* LOTShapeTransform.m in Sources */,
 				6300CC071E4AB1BC0012B05A /* LoanRecordParse.m in Sources */,
+				84DFBED31F4D72050009DAB9 /* UserDataViewModel.m in Sources */,
 				63FC25021D98F7E9006F58F3 /* YYTextWeakProxy.m in Sources */,
 				63F0E1BE1CE41821001251A9 /* NSData+YYAdd.m in Sources */,
 				638A16F01E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.m in Sources */,
@@ -6661,6 +6668,7 @@
 				CC0DFAE51EA5B1090024841A /* GetCaseInfo.m in Sources */,
 				CC0DFAE61EA5B1090024841A /* CustomerIDInfo.m in Sources */,
 				CC0DFAE71EA5B1090024841A /* DataDicParse.m in Sources */,
+				84DFBED41F4D72050009DAB9 /* UserDataViewModel.m in Sources */,
 				CCF9384E1EEE2CA80074791D /* ExpressCreditRefuseView.m in Sources */,
 				CC0DFAE81EA5B1090024841A /* ShouldAlsoAmountResult.m in Sources */,
 				CCCE40C61EE7D19C00E3F102 /* ChangePasswordParamModel.m in Sources */,

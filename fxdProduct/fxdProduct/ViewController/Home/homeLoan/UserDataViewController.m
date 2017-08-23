@@ -32,7 +32,7 @@
 #import "SeniorCertificationView.h"
 #import "UnfoldTableViewCell.h"
 #import "MoxieSDK.h"
-#import "HomeViewModel.h"
+#import "UserDataViewModel.h"
 
 
 @interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
@@ -647,12 +647,14 @@
             case 0:
                 if ([_creditCardStatus isEqualToString:@"1"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+                    return;
                 }
                 [self mailImportClick];
                 break;
             case 1:
                 if ([_socialSecurityStatus isEqualToString:@"1"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+                    return;
                 }
                 [self securityImportClick];
                 break;
@@ -661,7 +663,6 @@
         }
         return;
     }
-    
         DLog(@"%ld",_nextStep.integerValue);
         if (_nextStep.integerValue > 0) {
             if (![self checkUserAuth:indexPath.row]) {
@@ -831,6 +832,8 @@
 #pragma mark -获取进度条的进度
 - (void)refreshInfoStep
 {
+    //高级认证状态查询
+    [self obtainHighRanking];
     
     NSDictionary *paramDic = @{@"product_id_":_product_id,
                                
@@ -1045,16 +1048,28 @@
 
 -(void)TheCreditCardInfoupload:(NSString *)taskid {
     
-    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
-    [homeVM TheCreditCardInfoUpload:taskid];
+    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
+    [userDataVM TheCreditCardInfoUpload:taskid];
     
 }
 -(void)TheSocialSecurityupload:(NSString *)taskid {
     
-    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
-    [homeVM socialSecurityInfoUpload:taskid];
+    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
+    [userDataVM socialSecurityInfoUpload:taskid];
     
 }
+
+-(void)obtainHighRanking{
+    
+    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
+    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+  
+    } WithFaileBlock:^{
+        
+    }];
+    [userDataVM obtainhighRankingStatus];
+}
+
 
 
 - (void)didReceiveMemoryWarning {

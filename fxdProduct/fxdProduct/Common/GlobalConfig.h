@@ -178,8 +178,10 @@ UIKIT_EXTERN NSString * const       _saveLoanCase_url;                  //提款
 UIKIT_EXTERN NSString * const       _liangzihuzhu_url;                  //量子互助
 UIKIT_EXTERN NSString * const       _sjRecord_url;                  //首借免息
 
-UIKIT_EXTERN NSString * const       _shebaoupload_url;                  //首借免息
-UIKIT_EXTERN NSString * const       _TheCreditCardupload_url;                  //首借免息
+UIKIT_EXTERN NSString * const       _shebaoupload_url;                  //社保认证信息提交
+UIKIT_EXTERN NSString * const       _TheCreditCardupload_url;                  //信用卡信息提交
+UIKIT_EXTERN NSString * const       _HighRankingStatus_url;                  //高级认证状态查询
+
 
 
 

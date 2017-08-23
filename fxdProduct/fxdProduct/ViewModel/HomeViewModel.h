@@ -29,22 +29,6 @@
 -(void)fetchLoanProcess;
 
 
-#pragma  mark - 社保  公积金
-
-/**
- 社保
- 
- @param taskid 任务id
- */
--(void)socialSecurityInfoUpload:(NSString *)taskid;
-
-/**
- 信用卡
- 
- @param taskid 任务id
- */
--(void)TheCreditCardInfoUpload:(NSString *)taskid;
-
 @end
 
 
