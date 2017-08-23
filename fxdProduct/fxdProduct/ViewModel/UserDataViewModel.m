@@ -31,9 +31,7 @@
             NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             __weak typeof(self) weakSelf = self;
             [self uploadLiveInfo:jsonStr isSuccess:^(id object) {
-                if (weakSelf.returnBlock) {
-                    weakSelf.returnBlock(object);
-                }
+  
             }];
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:faceIDLiveParse.error_message];
@@ -49,6 +47,9 @@
 - (void)uploadLiveInfo:(NSString *)resultJSONStr isSuccess:(void(^)(id object))success
 {
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_detectInfo_url] parameters:@{@"records":resultJSONStr} finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
         success(object);
     } failure:^(EnumServerStatus status, id object) {
         

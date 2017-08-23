@@ -8,13 +8,18 @@
 
 import UIKit
 import MGLivenessDetection
+
+typealias IdentifyResultStatus = (_ status : String) ->Void
 class FaceIdentiViewController: BaseViewController,LiveDeteDelgate{
+    
+    var verifyStatus : String?
 
     var iconImage : UIImageView?
     var titleLabel : UILabel?
     var explainLabel : UILabel?
     var promptLabel : UILabel?
     var statusBtn : UIButton?
+    var identifyResultStatus : IdentifyResultStatus?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +28,19 @@ class FaceIdentiViewController: BaseViewController,LiveDeteDelgate{
         self.navigationItem.title = "人脸识别"
         addBackItem()
         setupUI()
+        changeStatus()
+    }
+    
+    func changeStatus() -> Void {
+        if verifyStatus == "1" {
+            statusBtn?.isEnabled = true
+            statusBtn?.backgroundColor = UIColor.red
+            statusBtn?.setTitle("进入检测", for: UIControlState.normal)
+        }else {
+            statusBtn?.isEnabled = false
+            statusBtn?.backgroundColor = UIColor.init(red: 139/255, green: 140/255, blue: 143/255, alpha: 1)
+            statusBtn?.setTitle("已认证", for: UIControlState.normal)
+        }
     }
     
     func statusBtnClick() -> Void {
@@ -47,7 +65,7 @@ class FaceIdentiViewController: BaseViewController,LiveDeteDelgate{
     
     //MARK:  LiveDeteDelgate 事件
     func liveDateSuccess(_ faceIDData: FaceIDData!) {
-        
+        verifyLive(faceIDData: faceIDData)
     }
     func liveDateFaile(_ errorType: MGLivenessDetectionFailedType) {
         showErrorString(errorType: errorType)
@@ -73,11 +91,20 @@ class FaceIdentiViewController: BaseViewController,LiveDeteDelgate{
     //MARK: 网络请求
     func verifyLive( faceIDData : FaceIDData) -> Void {
        let userDataVM =  UserDataViewModel.init()
-        userDataVM.setBlockWithReturn({ (object) in
-            
-            
-            
-        }) { 
+        userDataVM.setBlockWithReturn({[weak self] (object) in
+            let dic =  object as! NSDictionary
+            if dic["flag"] as! String == "0000"{
+                let statusMsg = (dic["result"] as! NSDictionary)["verify_msg_"] as! String
+                let status = (dic["result"] as! NSDictionary)["verify_status_"] as! String
+                
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: statusMsg)
+                if ((self?.identifyResultStatus) != nil) {
+                    self?.identifyResultStatus!(status)
+                }
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: (dic["msg"] as! String))
+            }
+        }) {
             
         }
         userDataVM.uploadLiveIdentiInfo(faceIDData)
@@ -161,8 +188,6 @@ extension FaceIdentiViewController {
         make.right.equalTo(self.view.snp.right).offset(-15)
         make.height.equalTo(40)
     })
-    
-    
     
     
     }

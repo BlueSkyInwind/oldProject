@@ -59,7 +59,7 @@ class HomeDefaultCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
 }
 
 //homeCell各种视图

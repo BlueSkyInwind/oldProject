@@ -62,7 +62,7 @@ typedef enum {
     _mobileRequArr = [NSMutableArray arrayWithObjects:@"",@"",@"",@"",@"", nil];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"第三方认证";
+    self.navigationItem.title = @"手机运营商认证";
     _btnStatus = YES;
     [self addBackItem];
     [self configTableView];
@@ -75,15 +75,9 @@ typedef enum {
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([FaceCell class]) bundle:nil] forCellReuseIdentifier:@"FaceCell"];
+//    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([FaceCell class]) bundle:nil] forCellReuseIdentifier:@"FaceCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MobileCell class]) bundle:nil] forCellReuseIdentifier:@"MobileCell"];
-
 }
-
-//- (void)saveBtnClick
-//{
-//    DLog(@"认证");
-//}
 
 #pragma mark - TableviewDelegate
 
@@ -94,253 +88,108 @@ typedef enum {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (_showAll) {
-        return 2;
-    } else {
-        return 1;
-    }
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        if (_showAll) {
-            return 200.f;
-        }else {
-            return 400.f;
-        }
-    } else {
-        return 400.f;
-    }
+    return 400.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 0) {
-        if (_showAll) {
-            return 7.0f;
-        } else {
-            return 0.1f;
-        }
-    }else {
-        return 0.1f;
-    }
+
+    return 0.1f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.section) {
-        case 0:
-        {
-            if (_showAll) {
-                FaceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FaceCell"];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                [Tool setCorner:cell.detectionBtn borderColor:[UIColor clearColor]];
-                
-                if (_liveEnabel) {
-                    if ([_verifyStatus isEqualToString:@"1"]) {
-                        [cell.detectionBtn setTitle:@"进入检测" forState:UIControlStateNormal];
-                        cell.detectionBtn.enabled = true;
-                        [cell.detectionBtn setBackgroundColor:UI_MAIN_COLOR];
-                        [cell.detectionBtn addTarget:self action:@selector(startDetection) forControlEvents:UIControlEventTouchUpInside];
-                    } else {
-                        cell.detectionBtn.enabled = false;
-                        [cell.detectionBtn setBackgroundColor:rgb(139, 140, 143)];
-                        [cell.detectionBtn setTitle:@"已认证" forState:UIControlStateNormal];
-                    }
-                } else {
-                    cell.detectionBtn.enabled = true;
-                    [cell.detectionBtn setBackgroundColor:rgb(139, 140, 143)];
-                    [cell.detectionBtn setTitle:@"已认证" forState:UIControlStateNormal];
-                    [cell.detectionBtn addTarget:self action:@selector(startDetection) forControlEvents:UIControlEventTouchUpInside];
 
-                }
-                return cell;
-            } else {
-                
-                MobileCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MobileCell"];
-                //协议
-                cell.AgreementImage.userInteractionEnabled = YES;
-                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementImage:)];
-                [cell.AgreementImage addGestureRecognizer:tap];
-                NSString *str = cell.AgreementLabel.text;
-                NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
-                [ssa addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,13)];
-                cell.AgreementLabel.attributedText = ssa;
-                cell.AgreementLabel.userInteractionEnabled = YES;
-                UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreement)];
-                [cell.AgreementLabel addGestureRecognizer:tap1];
-                
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.passwordField.delegate = self;
-                cell.veritifyCodeField.delegate = self;
-                cell.picCodeTextField.delegate = self;
-                [Tool setCorner:cell.mobileBtn borderColor:[UIColor clearColor]];
-                if ([_isMobileAuth isEqualToString:@"0"]) {
-                    if ([self isCanEnable]) {
-                        [cell.mobileBtn setBackgroundColor:UI_MAIN_COLOR];
-                        cell.mobileBtn.enabled = true;
-                        [cell.mobileBtn addTarget:self action:@selector(mobileCheck) forControlEvents:UIControlEventTouchUpInside];
-                    }else {
-                        [cell.mobileBtn setBackgroundColor:rgb(139, 140, 143)];
-                        cell.mobileBtn.enabled = false;
-                    }
-                } else {
-                    [cell.mobileBtn setBackgroundColor:rgb(139, 140, 143)];
-                    cell.passwordField.enabled = false;
-                    [cell.mobileBtn setTitle:@"已认证" forState:UIControlStateNormal];
-                    cell.mobileBtn.enabled = false;
-                }
-                //初始化UI
-                cell.mobileLabel.text = _mobileRequArr[0];
-                cell.operatorLabel.text = _mobileRequArr[1];
-                cell.passwordField.text = _mobileRequArr[2];
-                cell.passwordField.tag = 1;
-                cell.veritifyCodeField.text = _mobileRequArr[3];
-                cell.veritifyCodeField.tag = 2;
-                [cell.mobileHelpBtn addTarget:self action:@selector(showMobileHelp) forControlEvents:UIControlEventTouchUpInside];
-                //图片验证码
-                cell.picCodeTextField.text = _mobileRequArr[4];
-                cell.picCodeTextField.tag = 3;
-                
-                switch (_currentDisplayType) {
-                    case DeafultViewType:{
-                        cell.picCodeView.hidden = YES;
-                        cell.smsCodeView.hidden = YES;
-                        cell.agreementTopConstraint.constant = 5;
-                        cell.moblieBtnTopConstraint.constant = 30;
-                    }
-                        break;
-                    case VerifyCodeViewType:{
-                        cell.picCodeView.hidden = YES;
-                        cell.smsCodeView.hidden = NO;
-                        cell.agreementTopConstraint.constant = 51;
-                        cell.moblieBtnTopConstraint.constant = 76;
-                    }
-                        break;
-                    case PicCodeViewType:{
-                        
-                        cell.picCodeView.hidden = NO;
-                        cell.smsCodeView.hidden = YES;
-                        cell.picCodeViewTopConstraint.constant = 5;
-                        cell.agreementTopConstraint.constant = 51;
-                        cell.moblieBtnTopConstraint.constant = 76;
-                        [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
-                    }
-                        break;
-                    case verifyCodeAndPicCodeViewType:{
-                        cell.picCodeView.hidden = NO;
-                        cell.smsCodeView.hidden = NO;
-                        cell.picCodeViewTopConstraint.constant = 51;
-                        cell.agreementTopConstraint.constant = 97;
-                        cell.moblieBtnTopConstraint.constant = 111;
-                        [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
-                    }
-                        break;
-                    default:
-                        break;
-                }
-                
-                return cell;
-            }
+    MobileCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MobileCell"];
+    //协议
+    cell.AgreementImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementImage:)];
+    [cell.AgreementImage addGestureRecognizer:tap];
+    NSString *str = cell.AgreementLabel.text;
+    NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
+    [ssa addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,13)];
+    cell.AgreementLabel.attributedText = ssa;
+    cell.AgreementLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreement)];
+    [cell.AgreementLabel addGestureRecognizer:tap1];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.passwordField.delegate = self;
+    cell.veritifyCodeField.delegate = self;
+    cell.picCodeTextField.delegate = self;
+    [Tool setCorner:cell.mobileBtn borderColor:[UIColor clearColor]];
+    if ([_isMobileAuth isEqualToString:@"0"]) {
+        if ([self isCanEnable]) {
+            [cell.mobileBtn setBackgroundColor:UI_MAIN_COLOR];
+            cell.mobileBtn.enabled = true;
+            [cell.mobileBtn addTarget:self action:@selector(mobileCheck) forControlEvents:UIControlEventTouchUpInside];
+        }else {
+            [cell.mobileBtn setBackgroundColor:rgb(139, 140, 143)];
+            cell.mobileBtn.enabled = false;
+        }
+    } else {
+        [cell.mobileBtn setBackgroundColor:rgb(139, 140, 143)];
+        cell.passwordField.enabled = false;
+        [cell.mobileBtn setTitle:@"已认证" forState:UIControlStateNormal];
+        cell.mobileBtn.enabled = false;
+    }
+    //初始化UI
+    cell.mobileLabel.text = _mobileRequArr[0];
+    cell.operatorLabel.text = _mobileRequArr[1];
+    cell.passwordField.text = _mobileRequArr[2];
+    cell.passwordField.tag = 1;
+    cell.veritifyCodeField.text = _mobileRequArr[3];
+    cell.veritifyCodeField.tag = 2;
+    [cell.mobileHelpBtn addTarget:self action:@selector(showMobileHelp) forControlEvents:UIControlEventTouchUpInside];
+    //图片验证码
+    cell.picCodeTextField.text = _mobileRequArr[4];
+    cell.picCodeTextField.tag = 3;
+    
+    switch (_currentDisplayType) {
+        case DeafultViewType:{
+            cell.picCodeView.hidden = YES;
+            cell.smsCodeView.hidden = YES;
+            cell.agreementTopConstraint.constant = 5;
+            cell.moblieBtnTopConstraint.constant = 30;
         }
             break;
-        case 1:
-        {
-            MobileCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MobileCell"];
+        case VerifyCodeViewType:{
+            cell.picCodeView.hidden = YES;
+            cell.smsCodeView.hidden = NO;
+            cell.agreementTopConstraint.constant = 51;
+            cell.moblieBtnTopConstraint.constant = 76;
+        }
+            break;
+        case PicCodeViewType:{
             
-            cell.AgreementImage.userInteractionEnabled = YES;
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementImage:)];
-            [cell.AgreementImage addGestureRecognizer:tap];
-            NSString *str = cell.AgreementLabel.text;
-            NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
-            [ssa addAttribute:NSForegroundColorAttributeName value:rgb(0, 170, 238) range:NSMakeRange(3,13)];
-            cell.AgreementLabel.attributedText = ssa;
-            
-            cell.AgreementLabel.userInteractionEnabled = YES;
-            UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreement)];
-            [cell.AgreementLabel addGestureRecognizer:tap1];
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.passwordField.delegate = self;
-            cell.veritifyCodeField.delegate = self;
-            cell.picCodeTextField.delegate = self;
-            [Tool setCorner:cell.mobileBtn borderColor:[UIColor clearColor]];
-            if ([_isMobileAuth isEqualToString:@"0"]) {
-                if ([self isCanEnable]) {
-                    [cell.mobileBtn setBackgroundColor:UI_MAIN_COLOR];
-                    cell.mobileBtn.enabled = true;
-                    [cell.mobileBtn addTarget:self action:@selector(mobileCheck) forControlEvents:UIControlEventTouchUpInside];
-                }else {
-                    [cell.mobileBtn setBackgroundColor:rgb(139, 140, 143)];
-                    cell.mobileBtn.enabled = false;
-                }
-            } else {
-                [cell.mobileBtn setBackgroundColor:rgb(139, 140, 143)];
-                cell.passwordField.enabled = false;
-                cell.passView.hidden = true;
-                [cell.mobileBtn setTitle:@"已认证" forState:UIControlStateNormal];
-                cell.mobileBtn.enabled = false;
-            }
-            
-            cell.mobileLabel.text = _mobileRequArr[0];
-            cell.operatorLabel.text = _mobileRequArr[1];
-            cell.passwordField.text = _mobileRequArr[2];
-            cell.passwordField.tag = 1;
-            cell.veritifyCodeField.text = _mobileRequArr[3];
-            cell.veritifyCodeField.tag = 2;
-            [cell.mobileHelpBtn addTarget:self action:@selector(showMobileHelp) forControlEvents:UIControlEventTouchUpInside];
-            //图片验证码
-            cell.picCodeTextField.text = _mobileRequArr[4];
-            cell.picCodeTextField.tag = 3;
-            
-            switch (_currentDisplayType) {
-                case DeafultViewType:{
-                    cell.picCodeView.hidden = YES;
-                    cell.smsCodeView.hidden = YES;
-                    cell.agreementTopConstraint.constant = 5;
-                    cell.moblieBtnTopConstraint.constant = 30;
-                }
-                    break;
-                case VerifyCodeViewType:{
-                    cell.picCodeView.hidden = YES;
-                    cell.smsCodeView.hidden = NO;
-                    cell.agreementTopConstraint.constant = 55;
-                    cell.moblieBtnTopConstraint.constant = 80;
-                }
-                    break;
-                case PicCodeViewType:{
-                    
-                    cell.picCodeView.hidden = NO;
-                    cell.smsCodeView.hidden = YES;
-                    cell.picCodeViewTopConstraint.constant = 5;
-                    cell.agreementTopConstraint.constant = 55;
-                    cell.moblieBtnTopConstraint.constant = 80;
-                    [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
-
-                }
-                    break;
-                case verifyCodeAndPicCodeViewType:{
-                    cell.picCodeView.hidden = NO;
-                    cell.smsCodeView.hidden = NO;
-                    cell.picCodeViewTopConstraint.constant = 55;
-                    cell.agreementTopConstraint.constant = 100;
-                    cell.moblieBtnTopConstraint.constant = 125;
-                    [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
-
-                }
-                    break;
-                default:
-                    break;
-            }
-            return cell;
+            cell.picCodeView.hidden = NO;
+            cell.smsCodeView.hidden = YES;
+            cell.picCodeViewTopConstraint.constant = 5;
+            cell.agreementTopConstraint.constant = 51;
+            cell.moblieBtnTopConstraint.constant = 76;
+            [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
+        }
+            break;
+        case verifyCodeAndPicCodeViewType:{
+            cell.picCodeView.hidden = NO;
+            cell.smsCodeView.hidden = NO;
+            cell.picCodeViewTopConstraint.constant = 51;
+            cell.agreementTopConstraint.constant = 97;
+            cell.moblieBtnTopConstraint.constant = 111;
+            [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
         }
             break;
         default:
             break;
     }
     
-    return nil;
+    return cell;
+
 }
 //认证button是否能点击
 - (BOOL)isCanEnable
@@ -417,28 +266,9 @@ typedef enum {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"需同意授权协议，才可进行认证"];
         return;
     }
-    if (_showAll) {
-        [self liveDiscernAndmibileAuthJudge];
+    if (_whetherPhoneAuth) {
+        [self saveMobileAuth:@"1"];
     }else {
-        if ([self.resultCode isEqualToString:@"1"]) {
-            [self saveMobileAuth:@"1"];
-        }else{
-            [self liveDiscernAndmibileAuthJudge];
-        }
-    }
-}
-/**
- 活体认证，与手机运营商认证流程
- */
--(void)liveDiscernAndmibileAuthJudge{
-    if (_liveEnabel) {
-        if ([_verifyStatus isEqualToString:@"1"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先进行人脸识别"];
-            return;
-        } else {
-            [self saveMobileAuth:@"1"];
-        }
-    } else {
         if ([self.phoneAuthChannel isEqualToString:@"JXL"]) {
             // 手机号认证  （聚立信）
             [self mibileAuth];
@@ -450,7 +280,6 @@ typedef enum {
         }
     }
 }
-
 #pragma mark - 聚信立手机号认证
 - (void)mibileAuth
 {
@@ -686,133 +515,6 @@ typedef enum {
     }];
 }
 
-- (void)startDetection
-{
-    [MGLicenseManager licenseForNetWokrFinish:^(bool License) {
-        if (License) {
-            [self checkFaceDecetion];
-        } else {
-            
-        }
-    }];
-}
-
-- (void)checkFaceDecetion
-{
-    
-    NSString * str =  [MGLiveManager LiveDetectionVersion];
-    [MGLicenseManager licenseForNetWokrFinish:^(bool License) {
-        if (License) {
-            MGLiveViewController *myVC = [[MGLiveViewController alloc] initWithDefauleSetting];
-            myVC.delagate = self;
-            BaseNavigationViewController *liveVC = [[BaseNavigationViewController alloc] initWithRootViewController:myVC];
-            [self presentViewController:liveVC animated:true completion:nil];
-        } else {
-            
-        }
-    }];
-
-}
-
-#pragma mark - LiveDeteDelgate
-
-- (void)liveDateSuccess:(FaceIDData *)faceIDData
-{
-    [self verifyLive:faceIDData];
-}
-
-- (void)liveDateFaile:(MGLivenessDetectionFailedType)errorType
-{
-    [self showErrorString:errorType];
-}
-
-- (void)verifyLive:(FaceIDData *)imagesDic
-{
-    NSDictionary *paramDic = @{@"api_key":FaceIDAppKey,
-                               @"api_secret":FaceIDAppSecret,
-                               @"comparison_type":@1,
-                               @"face_image_type":@"meglive",
-                               @"idcard_name":[Utility sharedUtility].userInfo.realName,
-                               @"idcard_number":[Utility sharedUtility].userInfo.userIDNumber,
-                               @"delta":imagesDic.delta};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTUpLoadImage:_verifyLive_url FilePath:imagesDic.images parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        FaceIDLiveModel *faceIDLiveParse = [FaceIDLiveModel yy_modelWithJSON:object];
-        if (!faceIDLiveParse.error_message) {
-            NSDictionary *dic = [NSDictionary dictionaryWithDictionary:object];
-            NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-            NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [self uploadLiveInfo:jsonStr];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:faceIDLiveParse.error_message];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-//        NSError *error = object;
-//        
-//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"Error-%ld",(long)error.code]];
-    }];
-}
-
-- (void)uploadLiveInfo:(NSString *)resultJSONStr
-{
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_detectInfo_url] parameters:@{@"records":resultJSONStr} finished:^(EnumServerStatus status, id object) {
-        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-            NSNumber *status = [[object objectForKey:@"result"] objectForKey:@"verify_status_"];
-            if (status.intValue == 2 || status.intValue == 3) {
-                _liveEnabel = false;
-                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[[object objectForKey:@"result"] objectForKey:@"verify_msg_"]];
-                if ([_isMobileAuth isEqualToString:@"1"]) {
-                    [self.navigationController popViewControllerAnimated:true];
-                }
-            } else {
-                _liveEnabel = true;
-                _verifyStatus = [NSString stringWithFormat:@"%d",status.intValue];
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[[object objectForKey:@"result"] objectForKey:@"verify_msg_"]];
-            }
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-        }
-        [_tableView reloadData];
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-    
-}
-
-- (void)showErrorString:(MGLivenessDetectionFailedType)errorType{
-    switch (errorType) {
-        case DETECTION_FAILED_TYPE_ACTIONBLEND:
-        {
-            [self showMessage:@"请按照提示完成动作"];
-        }
-            break;
-        case DETECTION_FAILED_TYPE_NOTVIDEO:
-        {
-            [self showMessage:@"活体检测未成功"];
-        }
-            break;
-        case DETECTION_FAILED_TYPE_TIMEOUT:
-        {
-            [self showMessage:@"请在规定时间内完成动作"];
-        }
-            break;
-        default:
-        {
-            [self showMessage:@"请按照提示完成动作"];
-        }
-            break;
-    }
-}
-
-- (void)showMessage:(NSString *)msg
-{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    [alertController addAction:action];
-    [self presentViewController:alertController animated:true completion:nil];
-}
 
 
 - (NSString *)formatString:(NSString *)str
