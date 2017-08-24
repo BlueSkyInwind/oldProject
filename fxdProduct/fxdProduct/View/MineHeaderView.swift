@@ -37,7 +37,7 @@ extension MineHeaderView{
     fileprivate func setupUI(){
     
         let leftImage = UIImageView()
-        leftImage.image = UIImage(named:"3_lc_icon_15")
+        leftImage.image = UIImage(named:"icon_my_logo")
         self.addSubview(leftImage)
         leftImage.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
@@ -47,7 +47,7 @@ extension MineHeaderView{
         let headLabel = UILabel()
         headLabel.text = "我的"
         headLabel.textColor = UIColor.white
-        headLabel.font = UIFont.systemFont(ofSize: 20)
+        headLabel.font = UIFont.systemFont(ofSize: 18)
         self.addSubview(headLabel)
         headLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(35)
@@ -57,17 +57,17 @@ extension MineHeaderView{
         
         nameLabel = UILabel()
         nameLabel?.textColor = UIColor.white
-        nameLabel?.font = UIFont.systemFont(ofSize: 15)
+        nameLabel?.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(nameLabel!)
         nameLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self).offset(80)
+            make.top.equalTo(self).offset(90)
             make.left.equalTo(leftImage.snp.right).offset(30)
             make.height.equalTo(15)
         })
         
         accountLabel = UILabel()
         accountLabel?.textColor = UIColor.white
-        accountLabel?.font = UIFont.systemFont(ofSize: 15)
+        accountLabel?.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(accountLabel!)
         accountLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo((nameLabel?.snp.bottom)!).offset(10)
@@ -81,7 +81,7 @@ extension MineHeaderView{
         
         didSet{
             let k_w = UIScreen.main.bounds.size.width
-            let newFrame = CGRect(x:0,y:0,width:k_w,height:150)
+            let newFrame = CGRect(x:0,y:0,width:k_w,height:180)
             super.frame = newFrame
             
         }

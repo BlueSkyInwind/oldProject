@@ -1214,6 +1214,8 @@
 		CCA056BC1EBB3ECB00CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
+		CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
+		CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
 		CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCC344FC1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
 		CCC344FD1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
@@ -1452,7 +1454,7 @@
 		1AEDCF1E1C197F5000014A87 /* RepaymentViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepaymentViewCell.xib; sourceTree = "<group>"; };
 		1AEFFA7A1C50BF72003936CE /* loanRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loanRecordCell.h; sourceTree = "<group>"; };
 		1AEFFA7B1C50BF72003936CE /* loanRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loanRecordCell.m; sourceTree = "<group>"; };
-		1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GesturesPasswordCell.h; sourceTree = "<group>"; };
+		1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GesturesPasswordCell.h; path = ../GesturesPasswordCell.h; sourceTree = "<group>"; };
 		1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GesturesPasswordCell.m; sourceTree = "<group>"; };
 		1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GesturesPasswordCell.xib; sourceTree = "<group>"; };
 		1ECD9F837F823AC9D2C9344A /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2380,6 +2382,7 @@
 		CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
+		CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterHeaderView.swift; sourceTree = "<group>"; };
 		CCC344FA1F03833E006D0F83 /* JRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRefuseView.h; sourceTree = "<group>"; };
 		CCC344FB1F03833E006D0F83 /* JRefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRefuseView.m; sourceTree = "<group>"; };
 		CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewModel.h; sourceTree = "<group>"; };
@@ -2718,7 +2721,6 @@
 				63E640C91DCAD88300783E9D /* MoreInfoCell.h */,
 				63E640CA1DCAD88300783E9D /* MoreInfoCell.m */,
 				63E640CB1DCAD88300783E9D /* MoreInfoCell.xib */,
-				1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */,
 				1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */,
 				1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */,
 				0F6AAF361C30D8950060F137 /* MyCardCell.h */,
@@ -5004,6 +5006,7 @@
 		8438F7111EE14D2D0089E121 /* MoreView */ = {
 			isa = PBXGroup;
 			children = (
+				1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */,
 				8438F7121EE14DA00089E121 /* ChangePasswordTableViewCell.h */,
 				8438F7131EE14DA00089E121 /* ChangePasswordTableViewCell.m */,
 			);
@@ -5135,6 +5138,7 @@
 			isa = PBXGroup;
 			children = (
 				CC989C331F4D8738000CDACF /* AuthenticationCenterCell.swift */,
+				CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */,
 			);
 			name = AuthenticationCenterView;
 			sourceTree = "<group>";
@@ -6145,6 +6149,7 @@
 				CCE3BE1E1ED2D424004C35A4 /* BankCardsModel.m in Sources */,
 				63878FE41C1519CD008E1CF9 /* Tool.m in Sources */,
 				63F1A5031BD8CB1C00B83751 /* RepayHistoryResult.m in Sources */,
+				CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
 				63A24C621BE063A90036E8EF /* UIBarButtonItem+Extend.m in Sources */,
 				636EE3031B662ABB00A1A3ED /* main.m in Sources */,
 				638A16EC1E517D9F00AB8AB6 /* LOTMaskLayer.m in Sources */,
@@ -6655,6 +6660,7 @@
 				CC0DFA7C1EA5B1090024841A /* YYTextDebugOption.m in Sources */,
 				CC0DFA7D1EA5B1090024841A /* TicketExplainCell.m in Sources */,
 				CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */,
+				CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
 				CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */,
 				CC3197981ED926B90083F263 /* RefuseView.m in Sources */,
 				CC0DFA801EA5B1090024841A /* CardListBaseClass.m in Sources */,
