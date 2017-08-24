@@ -57,6 +57,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = @"设置";
+    [self addBackItem];
     imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09",@"changeP_icon"];
     titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"给个好评",@"客服热线",@"修改密码"];
     self.automaticallyAdjustsScrollViewInsets = NO;

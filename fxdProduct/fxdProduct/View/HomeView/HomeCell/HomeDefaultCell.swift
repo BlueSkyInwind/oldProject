@@ -69,7 +69,6 @@ extension HomeDefaultCell{
     //MARK:默认情况
     func setupDefaultUI(){
     
-        let k_w = UIScreen.main.bounds.size.width
         let bgImage = UIImageView()
         bgImage.image = UIImage(named:"beijing big")
         bgImage.isUserInteractionEnabled = true
@@ -88,7 +87,7 @@ extension HomeDefaultCell{
         defaultHeadLabel?.text = "3000元"
         bgImage.addSubview(defaultHeadLabel!)
         defaultHeadLabel?.snp.makeConstraints({ (make) in
-            if(k_w == 320){
+            if UI_IS_IPONE5{
                 make.top.equalTo(bgImage.snp.top).offset(15)
             }else{
             
@@ -129,15 +128,15 @@ extension HomeDefaultCell{
         // 设置圆点颜色
 //        slider.thumbTintColor = UIColor.red
         // 设置滑动过的颜色
-        slider.minimumTrackTintColor = UIColor.init(red: 0/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1.0)
+        slider.minimumTrackTintColor = UI_MAIN_COLOR
         // 设置未滑动过的颜色
-        slider.maximumTrackTintColor = UIColor.init(red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1.0)
+        slider.maximumTrackTintColor = LINE_COLOR
         
         // 添加事件
         slider.addTarget(self, action: #selector(changed(slider:)), for: UIControlEvents.valueChanged)
         bgImage.addSubview(slider)
         slider.snp.makeConstraints { (make) in
-            if(k_w == 320){
+            if UI_IS_IPONE5{
             
                 make.top.equalTo(label.snp.bottom).offset(10)
             }else{
@@ -175,7 +174,7 @@ extension HomeDefaultCell{
         let applyBtn = UIButton()
         applyBtn.setTitle("立即申请", for: .normal)
         applyBtn.setTitleColor(UIColor.white, for: .normal)
-        applyBtn.backgroundColor = UIColor.init(red: 0/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1.0)
+        applyBtn.backgroundColor = UI_MAIN_COLOR
         applyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         applyBtn.layer.cornerRadius = 5.0
         applyBtn.addTarget(self, action: #selector(applyBtnClick), for: .touchUpInside)
@@ -218,7 +217,6 @@ extension HomeDefaultCell{
     //MARK:不满60天被拒，升级高级认证
      func setupRefuseUI(){
     
-        let k_w = UIScreen.main.bounds.size.width
         let bgImage = UIImageView()
         bgImage.image = UIImage(named:"beijing big")
         bgImage.isUserInteractionEnabled = true
@@ -235,7 +233,7 @@ extension HomeDefaultCell{
         textLabel?.numberOfLines = 0
         titleLabel.textAlignment = .left
         titleLabel.font = UIFont.systemFont(ofSize: 15)
-        if k_w == 320 {
+        if UI_IS_IPONE5 {
             titleLabel.font = UIFont.systemFont(ofSize: 13)
         }
         titleLabel.textColor = UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0)
@@ -287,7 +285,6 @@ extension HomeDefaultCell{
     //MARK:信用评分不足，导流其他平台
     func setupOtherPlatformsUI(){
     
-        let k_w = UIScreen.main.bounds.size.width
         let titleLabel = UILabel()
         titleLabel.text = "您目前的信用评分不足，更新资料可提升(需60天后)"
         titleLabel.font = UIFont.systemFont(ofSize: 13)
@@ -357,7 +354,7 @@ extension HomeDefaultCell{
         secondView.feeLabel?.attributedText = attrstr3
         secondView.descImage?.image = UIImage(named:"zhushi2")
         
-        if k_w != 320 {
+        if !UI_IS_IPONE5 {
             
             let thirdView = HomeRefuseThirdView()
             thirdView.backgroundColor = UIColor.white
@@ -390,7 +387,7 @@ extension HomeDefaultCell{
         moreBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
         self.addSubview(moreBtn)
         moreBtn.snp.makeConstraints { (make) in
-            if k_w == 320 {
+            if UI_IS_IPONE5 {
             
                 make.top.equalTo(secondView.snp.bottom).offset(5)
             }else{
@@ -408,7 +405,6 @@ extension HomeDefaultCell{
     //MARK:进件带提款
     func setupDrawingUI(){
     
-        let k_w = UIScreen.main.bounds.size.width
         let bgImage = UIImageView()
         bgImage.image = UIImage(named:"beijing big")
         bgImage.isUserInteractionEnabled = true
@@ -426,7 +422,7 @@ extension HomeDefaultCell{
             make.centerY.equalTo(bgImage.snp.centerY)
             make.left.equalTo(bgImage.snp.left).offset(0)
             make.right.equalTo(bgImage.snp.right).offset(0)
-            if (k_w == 320){
+            if UI_IS_IPONE5{
             
                 make.height.equalTo((leftTitleArray.count*36)+60)
             }else{
@@ -460,7 +456,7 @@ extension HomeDefaultCell{
                 j = 20+i
             }else{
             
-                if(k_w == 320){
+                if UI_IS_IPONE5{
                 
                     j = j+25
                 }else{
@@ -483,7 +479,7 @@ extension HomeDefaultCell{
         bottomBtn.setTitle("点击提款", for: .normal)
         bottomBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         bottomBtn.setTitleColor(UIColor.white, for: .normal)
-        bottomBtn.backgroundColor = UIColor.init(red: 0/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1.0)
+        bottomBtn.backgroundColor = UI_MAIN_COLOR
         bottomBtn.layer.cornerRadius = 5.0
         bottomBtn.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
         bgView.addSubview(bottomBtn)
@@ -560,7 +556,7 @@ extension HomeDefaultCell{
         let loanBtn = UIButton()
         loanBtn.setTitle("我要借款", for: .normal)
         loanBtn.setTitleColor(UIColor.white, for: .normal)
-        loanBtn.backgroundColor = UIColor.init(red: 0/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1.0)
+        loanBtn.backgroundColor = UI_MAIN_COLOR
         loanBtn.layer.cornerRadius = 5.0
         loanBtn.addTarget(self, action: #selector(loanBtnClick), for: .touchUpInside)
         loanBtn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
@@ -650,7 +646,7 @@ extension HomeDefaultCell{
         }
         
         let loanLabel = UILabel()
-        loanLabel.textColor = UIColor.init(red: 0/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1.0)
+        loanLabel.textColor = UI_MAIN_COLOR
         loanLabel.font = UIFont.systemFont(ofSize: 12)
         loanLabel.text = "我要借款"
         bgView.addSubview(loanLabel)
@@ -693,8 +689,6 @@ extension HomeDefaultCell{
     //MARK:提款的View
    fileprivate func setView()->UIView{
     
-     let k_w = UIScreen.main.bounds.size.width
-    
         let view = UIView()
         self.addSubview(view)
         
@@ -705,12 +699,12 @@ extension HomeDefaultCell{
         view.addSubview(leftLabel!)
         leftLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo(view.snp.top).offset(0)
-            make.left.equalTo(view.snp.left).offset(k_w/2-160)
+            make.left.equalTo(view.snp.left).offset(_k_w/2-160)
             make.bottom.equalTo(view.snp.bottom).offset(0)
             make.width.equalTo(120)
         })
     
-       let width = k_w/2-160
+       let width = _k_w/2-160
     
         rightLabel = UILabel()
         rightLabel?.font = UIFont.systemFont(ofSize: 15)

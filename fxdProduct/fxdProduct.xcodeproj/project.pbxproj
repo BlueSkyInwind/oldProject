@@ -618,8 +618,6 @@
 		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
 		84DFBECF1F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */; };
 		84DFBED01F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */; };
-		84DFBED91F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBED81F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift */; };
-		84DFBEDA1F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBED81F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift */; };
 		84ED5B581F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B591F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
@@ -1209,9 +1207,15 @@
 		CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
 		CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
+		CC989C301F4D84A9000CDACF /* AuthenticationCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC989C2F1F4D84A9000CDACF /* AuthenticationCenterViewController.m */; };
+		CC989C311F4D84A9000CDACF /* AuthenticationCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC989C2F1F4D84A9000CDACF /* AuthenticationCenterViewController.m */; };
+		CC989C341F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989C331F4D8738000CDACF /* AuthenticationCenterCell.swift */; };
+		CC989C351F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989C331F4D8738000CDACF /* AuthenticationCenterCell.swift */; };
 		CCA056BC1EBB3ECB00CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
+		CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
+		CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
 		CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCC344FC1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
 		CCC344FD1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
@@ -1450,7 +1454,7 @@
 		1AEDCF1E1C197F5000014A87 /* RepaymentViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepaymentViewCell.xib; sourceTree = "<group>"; };
 		1AEFFA7A1C50BF72003936CE /* loanRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loanRecordCell.h; sourceTree = "<group>"; };
 		1AEFFA7B1C50BF72003936CE /* loanRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loanRecordCell.m; sourceTree = "<group>"; };
-		1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GesturesPasswordCell.h; sourceTree = "<group>"; };
+		1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GesturesPasswordCell.h; path = ../GesturesPasswordCell.h; sourceTree = "<group>"; };
 		1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GesturesPasswordCell.m; sourceTree = "<group>"; };
 		1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GesturesPasswordCell.xib; sourceTree = "<group>"; };
 		1ECD9F837F823AC9D2C9344A /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2328,7 +2332,6 @@
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
 		84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSwift.swift; sourceTree = "<group>"; };
-		84DFBED81F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterViewController.swift; sourceTree = "<group>"; };
 		84ED5B511F4AB9E6004C0A59 /* MoxieSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoxieSDK.h; sourceTree = "<group>"; };
 		84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMoxieSDK.a; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
@@ -2373,9 +2376,13 @@
 		CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackRect.swift; sourceTree = "<group>"; };
 		CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseThirdView.swift; sourceTree = "<group>"; };
 		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
+		CC989C2E1F4D84A9000CDACF /* AuthenticationCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationCenterViewController.h; sourceTree = "<group>"; };
+		CC989C2F1F4D84A9000CDACF /* AuthenticationCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationCenterViewController.m; sourceTree = "<group>"; };
+		CC989C331F4D8738000CDACF /* AuthenticationCenterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterCell.swift; sourceTree = "<group>"; };
 		CCA056B91EBB3ECB00CB5F29 /* SesameCreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditViewController.h; sourceTree = "<group>"; };
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
+		CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterHeaderView.swift; sourceTree = "<group>"; };
 		CCC344FA1F03833E006D0F83 /* JRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRefuseView.h; sourceTree = "<group>"; };
 		CCC344FB1F03833E006D0F83 /* JRefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRefuseView.m; sourceTree = "<group>"; };
 		CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewModel.h; sourceTree = "<group>"; };
@@ -2693,6 +2700,7 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CC989C321F4D86E1000CDACF /* AuthenticationCenterView */,
 				CC4BB60C1F17709D0027A0AA /* MineView */,
 				8438F7111EE14D2D0089E121 /* MoreView */,
 				84420A5D1ED6788D00DFBFE0 /* LoginView */,
@@ -2713,7 +2721,6 @@
 				63E640C91DCAD88300783E9D /* MoreInfoCell.h */,
 				63E640CA1DCAD88300783E9D /* MoreInfoCell.m */,
 				63E640CB1DCAD88300783E9D /* MoreInfoCell.xib */,
-				1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */,
 				1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */,
 				1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */,
 				0F6AAF361C30D8950060F137 /* MyCardCell.h */,
@@ -4999,6 +5006,7 @@
 		8438F7111EE14D2D0089E121 /* MoreView */ = {
 			isa = PBXGroup;
 			children = (
+				1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */,
 				8438F7121EE14DA00089E121 /* ChangePasswordTableViewCell.h */,
 				8438F7131EE14DA00089E121 /* ChangePasswordTableViewCell.m */,
 			);
@@ -5065,7 +5073,8 @@
 		84DFBED71F4D7C520009DAB9 /* AuthenticationCenter */ = {
 			isa = PBXGroup;
 			children = (
-				84DFBED81F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift */,
+				CC989C2E1F4D84A9000CDACF /* AuthenticationCenterViewController.h */,
+				CC989C2F1F4D84A9000CDACF /* AuthenticationCenterViewController.m */,
 			);
 			path = AuthenticationCenter;
 			sourceTree = "<group>";
@@ -5123,6 +5132,15 @@
 				CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */,
 			);
 			name = PaymentService;
+			sourceTree = "<group>";
+		};
+		CC989C321F4D86E1000CDACF /* AuthenticationCenterView */ = {
+			isa = PBXGroup;
+			children = (
+				CC989C331F4D8738000CDACF /* AuthenticationCenterCell.swift */,
+				CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */,
+			);
+			name = AuthenticationCenterView;
 			sourceTree = "<group>";
 		};
 		CCB323401EBC5A7B0001D9DE /* SubmitZhimaCreditAuth */ = {
@@ -5837,6 +5855,7 @@
 				1A0703311CA4E1E9001DEE43 /* RepayWeeklyRecord.m in Sources */,
 				CCD565C01E8A46D500B6665D /* PserInfoViewController.mm in Sources */,
 				63E86BB21B9ED2EB009BDB22 /* SetSome.m in Sources */,
+				CC989C341F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */,
 				6313DC151BB3E52B00EB45DE /* NSString+MD5Encrypt.m in Sources */,
 				1A133F1B1C1AD1EA0027749B /* HelpViewCell.m in Sources */,
 				638A17021E517D9F00AB8AB6 /* LOTShapeCircle.m in Sources */,
@@ -5849,6 +5868,7 @@
 				630D462F1BD097B900874064 /* GetMoneyResultAuditRecordBean.m in Sources */,
 				0F5407F61C8D289100592B56 /* CheckInfoView.m in Sources */,
 				63ED33371B6B4593008B6085 /* BaseNavigationViewController.m in Sources */,
+				CC989C301F4D84A9000CDACF /* AuthenticationCenterViewController.m in Sources */,
 				63FF484A1B6F036F009E384C /* MyViewController.m in Sources */,
 				63878FE31C1519CD008E1CF9 /* GetUserIP.m in Sources */,
 				63112A731BDF162F002B372C /* HelpViewController.m in Sources */,
@@ -6020,7 +6040,6 @@
 				63A24C611BE063A90036E8EF /* NSString+Password.m in Sources */,
 				0FFA91751C59BE57008D91D2 /* BankCardViewController.m in Sources */,
 				636AC42D1D38DEBC00599590 /* PayViewController.m in Sources */,
-				84DFBED91F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift in Sources */,
 				637963A91CABD0F8002A5910 /* ApprovalAmountExt.m in Sources */,
 				1AB442E61D782E53000459E6 /* RepayDetailViewController.m in Sources */,
 				0F047F471C507D59002ED7C0 /* LabelCell.m in Sources */,
@@ -6130,6 +6149,7 @@
 				CCE3BE1E1ED2D424004C35A4 /* BankCardsModel.m in Sources */,
 				63878FE41C1519CD008E1CF9 /* Tool.m in Sources */,
 				63F1A5031BD8CB1C00B83751 /* RepayHistoryResult.m in Sources */,
+				CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
 				63A24C621BE063A90036E8EF /* UIBarButtonItem+Extend.m in Sources */,
 				636EE3031B662ABB00A1A3ED /* main.m in Sources */,
 				638A16EC1E517D9F00AB8AB6 /* LOTMaskLayer.m in Sources */,
@@ -6571,7 +6591,6 @@
 				CC0DFA3E1EA5B1090024841A /* LivenessSelfie.m in Sources */,
 				CC0DFA3F1EA5B1090024841A /* MLBlackTransition.m in Sources */,
 				CC0DFA401EA5B1090024841A /* GetMoneyStateResult.m in Sources */,
-				84DFBEDA1F4D7CBA0009DAB9 /* AuthenticationCenterViewController.swift in Sources */,
 				CC0DFA411EA5B1090024841A /* CustomerBaseInfoExt.m in Sources */,
 				CC0DFA421EA5B1090024841A /* PayMethodViewController.m in Sources */,
 				CC0DFA431EA5B1090024841A /* LoginParse.m in Sources */,
@@ -6622,6 +6641,7 @@
 				CC0DFA6A1EA5B1090024841A /* LOTGroupLayerView.m in Sources */,
 				CC0DFA6C1EA5B1090024841A /* LOTShapeFill.m in Sources */,
 				CC0DFA6D1EA5B1090024841A /* Custom_BaseInfo.m in Sources */,
+				CC989C351F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */,
 				CC0DFA6E1EA5B1090024841A /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				CC0DFA6F1EA5B1090024841A /* HomeViewModel.m in Sources */,
 				CC0DFA701EA5B1090024841A /* LOTAnimatableScaleValue.m in Sources */,
@@ -6640,6 +6660,7 @@
 				CC0DFA7C1EA5B1090024841A /* YYTextDebugOption.m in Sources */,
 				CC0DFA7D1EA5B1090024841A /* TicketExplainCell.m in Sources */,
 				CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */,
+				CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
 				CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */,
 				CC3197981ED926B90083F263 /* RefuseView.m in Sources */,
 				CC0DFA801EA5B1090024841A /* CardListBaseClass.m in Sources */,
@@ -6698,6 +6719,7 @@
 				CC0DFAAC1EA5B1090024841A /* BankList.m in Sources */,
 				CC0DFAAD1EA5B1090024841A /* RegionBaseClass.m in Sources */,
 				CC0DFAAE1EA5B1090024841A /* RepaySuccessResult.m in Sources */,
+				CC989C311F4D84A9000CDACF /* AuthenticationCenterViewController.m in Sources */,
 				CC0DFAAF1EA5B1090024841A /* loanRecordCell.m in Sources */,
 				CC0DFAB01EA5B1090024841A /* NSArray+Extend.m in Sources */,
 				CC0DFAB11EA5B1090024841A /* ExpressViewController.m in Sources */,

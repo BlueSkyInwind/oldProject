@@ -48,13 +48,13 @@
     [super viewDidLoad];
 
     titleAry=@[@"我要还款",@"借还记录",@"我的银行卡",@"邀请好友",@"我的红包",@"更多"];
-    imgAry=@[@"6_my_icon_02",@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"6_my_icon_07",@""];
+    imgAry=@[@"6_my_icon_02",@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"6_my_icon_07",@"icon_my_setup"];
     
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.MyViewTable.scrollEnabled = NO;
     MineHeaderView *headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
-    headerView.backgroundColor = [UIColor blueColor];
+    headerView.backgroundColor = UI_MAIN_COLOR;
     headerView.nameLabel.text = @"您好!";
     headerView.accountLabel.text = @"15883945876";
     [self.MyViewTable setTableHeaderView:headerView];
@@ -73,9 +73,9 @@
     }
 }
 
--(void)viewWillDisappear:(BOOL)animated{
+-(void)viewDidDisappear:(BOOL)animated{
 
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
 #pragma mark - TableView
@@ -172,6 +172,8 @@
             break;
         case 5:
         {
+            MoreViewController *ticket=[[MoreViewController alloc]init];
+            [self.navigationController pushViewController:ticket animated:YES];
             
         }
             break;

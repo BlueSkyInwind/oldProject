@@ -107,7 +107,7 @@
         [self getFxdCaseInfo];
     }
     [self fatchBanner];
-    [self getHomeData];
+//    [self getHomeData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
