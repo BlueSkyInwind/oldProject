@@ -8,11 +8,14 @@
 
 import UIKit
 
+typealias ArrowImageBtnClick = (_ button:UIButton) -> Void
 class ContentTableViewCell: UITableViewCell {
 
     var titleLabel : UILabel?
     var contentTextField : UITextField?
     var arrowsImageBtn : UIButton?
+    
+    var btnClick : ArrowImageBtnClick?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,9 +30,10 @@ class ContentTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func arrowImageBtnClick() -> Void {
-        
-        
+    func arrowImageBtnClick(sender:UIButton) -> Void {
+        if btnClick != nil {
+            btnClick!(sender)
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,6 +51,7 @@ extension ContentTableViewCell {
         titleLabel = UILabel()
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         titleLabel?.textAlignment = NSTextAlignment.left
+        titleLabel?.textColor = UIColor.init(red: 77/255, green: 77/255, blue: 77/255, alpha: 1)
         self.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.snp.centerY)
@@ -57,7 +62,7 @@ extension ContentTableViewCell {
         
         arrowsImageBtn = UIButton.init(type: UIButtonType.custom)
         arrowsImageBtn?.setBackgroundImage(UIImage.init(named: "icon_arrowRight"), for: UIControlState.normal)
-        arrowsImageBtn?.addTarget(self, action: #selector(arrowImageBtnClick), for: UIControlEvents.touchUpInside)
+        arrowsImageBtn?.addTarget(self, action: #selector(arrowImageBtnClick(sender:)), for: UIControlEvents.touchUpInside)
         self.addSubview(arrowsImageBtn!)
         arrowsImageBtn?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.snp.centerY)
@@ -68,7 +73,7 @@ extension ContentTableViewCell {
         
         contentTextField = UITextField()
         contentTextField?.font = UIFont.systemFont(ofSize: 14)
-        contentTextField?.textColor = UI_MAIN_COLOR
+        contentTextField?.textColor = UIColor.init(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
         self.addSubview(contentTextField!)
         contentTextField?.snp.makeConstraints({ (make) in
             make.left.equalTo((titleLabel?.snp.right)!)
@@ -77,6 +82,41 @@ extension ContentTableViewCell {
             make.bottom.equalTo(self.snp.bottom).offset(-5)
         })
     }
+    // 选择联系人按钮位置
+    func  updateConatctImageBtnLayout() {
+        arrowsImageBtn?.snp.remakeConstraints({ (make) in
+            make.centerY.equalTo(self.snp.centerY)
+            make.height.equalTo(32)
+            make.width.equalTo((arrowsImageBtn?.snp.height)!).multipliedBy(0.78)
+            make.right.equalTo(self.snp.right).offset(-10)
+        })
+    }
+    
+    // 选择银行卡扫描按钮位置
+    func  updateScanCardImageBtnLayout() {
+        arrowsImageBtn?.snp.remakeConstraints({ (make) in
+            make.centerY.equalTo(self.snp.centerY)
+            make.height.equalTo(20)
+            make.width.equalTo((arrowsImageBtn?.snp.height)!).multipliedBy(1.3)
+            make.right.equalTo(self.snp.right).offset(-10)
+        })
+    }
+    
+    // 发送验证码
+    func  updateVerfiyCodeImageBtnLayout() {
+        arrowsImageBtn?.layer.cornerRadius = 15
+        arrowsImageBtn?.clipsToBounds = true
+        arrowsImageBtn?.backgroundColor = UI_MAIN_COLOR
+        arrowsImageBtn?.setBackgroundImage(nil, for: UIControlState.normal)
+        arrowsImageBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        arrowsImageBtn?.snp.remakeConstraints({ (make) in
+            make.centerY.equalTo(self.snp.centerY)
+            make.height.equalTo(30)
+            make.width.equalTo((arrowsImageBtn?.snp.height)!).multipliedBy(3.37)
+            make.right.equalTo(self.snp.right).offset(-10)
+        })
+    }
+    
 }
 
 
