@@ -30,6 +30,7 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 //http://192.168.15.116:8055/fxd-esb    俊杰
 //http://192.168.12.109:8082/fxd-esb/  罗兵本地
 //http://192.168.7.140:8001/fxd-esb/esb/ 合规贷后测试地址
+//http://192.168.13.173:8005/ 张强本地
 
 //NSString * const _main_url  =   @"http://192.168.12.109:8082/fxd-esb/esb/";
 //NSString * const _ValidESB_url  =   @"http://192.168.12.109:8082/fxd-esb/";
@@ -43,12 +44,21 @@ NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 //NSString * const _H5_url   =  @"http://192.168.6.130/fxd-h5/page/";
 
 //测试导流 192.168.6.133
-NSString * const _main_url  =   @"http://192.168.6.133/fxd-esb/esb/";
-NSString * const _main_new_url  =   @"http://h5.test.fxds/";
-NSString * const _ValidESB_url  =   @"http://192.168.6.133/fxd-esb/";
-NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
-NSString * const _p2P_url = @"http://192.168.6.133/fxd-esb/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+//NSString * const _main_url  =   @"http://192.168.6.133/fxd-esb/esb/";
+//NSString * const _main_new_url  =   @"http://h5.test.fxds/";
+//NSString * const _ValidESB_url  =   @"http://192.168.6.133/fxd-esb/";
+//NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://192.168.6.133/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+
+//张强本地
+NSString * const _main_url  =   @"http://192.168.13.173:8005/fxd-esb/esb/";
+NSString * const _ValidESB_url  =   @"http://192.168.13.173:8005/fxd-esb/";
+NSString * const _main_new_url  =  @"http://192.168.13.173:8005/";
+NSString * const _H5_url    =   @"http://192.168.13.173:8005/fxd-h5/page/";
+NSString * const _p2P_url = @"http://192.168.13.173:8005/fxd-esb/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.13.173:8005/p2p/";
+
 
 //彭冲本地
 //NSString * const _main_url  =   @"http://192.168.9.243:8080/fxd-esb/esb/";
@@ -56,7 +66,6 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 //NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
 //NSString * const _p2P_url = @"http://192.168.9.243:8080/fxd-esb/p2p/";
 //NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
-
 
 //张宇本地
 //NSString * const _main_url  =   @"http://192.168.12.166:9191/fxd-esb/esb/";
@@ -389,7 +398,6 @@ NSString * const    _TheCreditCardupload_url    =    @"apigw/client/resource/mxm
 
 //高级认证状态查询
 NSString * const    _HighRankingStatus_url    =    @"apigw/client/resource/fundtask.jhtml";
-
 
 #pragma mark - 合规接口
 
