@@ -54,7 +54,6 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
     self.navigationItem.leftBarButtonItem = disMissItem;
     
     if (_isP2P) {
-        
         UIBarButtonItem *changeBankItem = [[UIBarButtonItem alloc] initWithTitle:@"更换" style:UIBarButtonItemStylePlain target:self action:@selector(changeBank)];
         [changeBankItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName,[UIColor grayColor],NSForegroundColorAttributeName, nil]  forState:UIControlStateNormal];
         self.navigationItem.rightBarButtonItem = changeBankItem;
@@ -126,10 +125,7 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
                 cell.whichBank.text = @"";
             }
         }
-        
         return cell;
-        
-        
     } else {
         PayMoneyCell *cell = [tableView dequeueReusableCellWithIdentifier:moneyCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

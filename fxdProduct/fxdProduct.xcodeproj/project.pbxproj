@@ -609,6 +609,10 @@
 		848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
 		848C53251F4C2E550092F87C /* UserDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C53241F4C2E550092F87C /* UserDataViewModel.m */; };
 		848C53261F4C2E550092F87C /* UserDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C53241F4C2E550092F87C /* UserDataViewModel.m */; };
+		8499BF871F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */; };
+		8499BF881F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */; };
+		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
+		8499BF8B1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
 		84A6350E1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
 		84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
@@ -2325,6 +2329,9 @@
 		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
 		848C53231F4C2E550092F87C /* UserDataViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataViewModel.h; sourceTree = "<group>"; };
 		848C53241F4C2E550092F87C /* UserDataViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataViewModel.m; sourceTree = "<group>"; };
+		8499BF851F4FFDB700F193F9 /* UserBankCardListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserBankCardListViewController.h; sourceTree = "<group>"; };
+		8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserBankCardListViewController.m; sourceTree = "<group>"; };
+		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
 		84A6350C1F00F8B800146A8A /* MobilePhoneOperatorParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobilePhoneOperatorParamModel.h; sourceTree = "<group>"; };
 		84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobilePhoneOperatorParamModel.m; sourceTree = "<group>"; };
 		84A6350F1F00FCA200146A8A /* AuthenticationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewModel.h; sourceTree = "<group>"; };
@@ -2807,6 +2814,8 @@
 				63741E2D1D3CB8B200C0E2F8 /* PayMethodViewController.h */,
 				63741E2E1D3CB8B200C0E2F8 /* PayMethodViewController.m */,
 				63741E2F1D3CB8B200C0E2F8 /* PayMethodViewController.xib */,
+				8499BF851F4FFDB700F193F9 /* UserBankCardListViewController.h */,
+				8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */,
 			);
 			path = Repayment;
 			sourceTree = "<group>";
@@ -4416,6 +4425,7 @@
 				63117FB61DFFC42600635BB3 /* ShareConfig.m */,
 				638A16841E5030D700AB8AB6 /* SetUpFMDevice.h */,
 				638A16851E5030D700AB8AB6 /* SetUpFMDevice.m */,
+				8499BF891F50231600F193F9 /* MXVerifyManager.swift */,
 				84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */,
 				CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */,
 			);
@@ -5882,6 +5892,7 @@
 				84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */,
 				63F5AD931E23849C001BDF44 /* LoanSureFirstViewController.m in Sources */,
 				63145AF31CA8DBBD00D04ED8 /* RegionResult.m in Sources */,
+				8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */,
 				63E1ECD01E1B8FAA0079A2F8 /* TAAnimatedDotView.m in Sources */,
 				63FC24FA1D98F7E9006F58F3 /* YYTextRunDelegate.m in Sources */,
 				63D43EFC1D41F8380076AC7F /* DataWriteAndRead.m in Sources */,
@@ -5926,6 +5937,7 @@
 				634830FD1CBCA1A90005C4CD /* RegionCodeBaseClass.m in Sources */,
 				843614A11F0CF8700036201A /* P2PContactContentModel.m in Sources */,
 				638A16E81E517D9F00AB8AB6 /* LOTAnimatableLayer.m in Sources */,
+				8499BF871F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */,
 				63F0E1C11CE4183A001251A9 /* NSNumber+YYAdd.m in Sources */,
 				636B1BA01C2D2C4300450358 /* RepayMentViewModel.m in Sources */,
 				638A16FF1E517D9F00AB8AB6 /* LOTComposition.m in Sources */,
@@ -6645,6 +6657,7 @@
 				CC0DFA6E1EA5B1090024841A /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				CC0DFA6F1EA5B1090024841A /* HomeViewModel.m in Sources */,
 				CC0DFA701EA5B1090024841A /* LOTAnimatableScaleValue.m in Sources */,
+				8499BF8B1F50231600F193F9 /* MXVerifyManager.swift in Sources */,
 				CC0DFA711EA5B1090024841A /* telphoneView.m in Sources */,
 				CC0DFA721EA5B1090024841A /* LOTStrokeShapeLayer.m in Sources */,
 				CC0DFA731EA5B1090024841A /* CardInfo.m in Sources */,
@@ -6695,6 +6708,7 @@
 				CC0DFA941EA5B1090024841A /* LoanDoFindBaseClass.m in Sources */,
 				CC0DFA951EA5B1090024841A /* YYCache.m in Sources */,
 				CC0DFA961EA5B1090024841A /* HMScannerBorder.m in Sources */,
+				8499BF881F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */,
 				CC0DFA971EA5B1090024841A /* LOTMask.m in Sources */,
 				CC0DFA981EA5B1090024841A /* indexViewController.m in Sources */,
 				CC0DFA9A1EA5B1090024841A /* LoginMsgResult.m in Sources */,

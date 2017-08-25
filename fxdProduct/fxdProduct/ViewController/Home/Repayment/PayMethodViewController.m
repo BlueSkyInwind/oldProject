@@ -126,9 +126,6 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         [backItem setTintColor:rgb(94, 94, 94)];
         self.navigationItem.leftBarButtonItem = backItem;
     }
-    
-    
-    
 }
 
 - (void)dismissSelf
@@ -150,8 +147,6 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    
 }
 
 #pragma mark -TableViewDelegate

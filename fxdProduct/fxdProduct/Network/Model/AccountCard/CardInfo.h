@@ -20,5 +20,6 @@
 
 @property (nonatomic, copy)NSString *phoneNum;
 
+@property (nonatomic, copy)NSString *cardIcon;
 
 @end

@@ -551,8 +551,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [MoxieSDK shared].userId = [Utility sharedUtility].userInfo.juid;
     [MoxieSDK shared].apiKey = theMoxieApiKey;
     [MoxieSDK shared].fromController = self;
-    //-------------更多自定义参数，请参考文档----------------//
+    [MoxieSDK shared].useNavigationPush = NO;
+    [self editSDKInfo];
 };
+-(void)editSDKInfo{
+    [MoxieSDK shared].navigationController.navigationBar.translucent = YES;
+    [MoxieSDK shared].backImageName = @"return";
+    [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
+    [MoxieSDK shared].navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [[MoxieSDK shared].navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@""] forBarMetrics:UIBarMetricsDefault];
+}
 - (void)promote
 {
     [MoxieSDK shared].taskType = @"bank";
@@ -605,34 +613,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         NSLog(@"任务失败");
     }
 }
-#pragma mark -- 魔蝎回调
-//-(void)listenForResult{
-//    //    __weak CheckViewController *weakSelf = self;
-//    @weakify(self);
-//    self.moxieSDK.resultBlock=^(int code,MXSDKFunction funciton,NSString *taskid,NSString *searchid){
-//        DLog(@"get import result---statusCode:%d,function:%d,taskid:%@,searchid:%@",code,funciton,taskid,searchid);
-//        
-//        if(funciton == MXSDKFunctionbank){
-//            if(code == 1){
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    @strongify(self);
-//                    for (UIView *view in self.view.subviews) {
-//                        if (![[view class] isSubclassOfClass:[MJRefreshNormalHeader class]]) {
-//                            [view removeFromSuperview];
-//                        }
-//                    }
-//                });
-//                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//                    [NSThread sleepForTimeInterval:1];
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        @strongify(self);
-//                        [self updateUserState];
-//                    });
-//                });
-//            }
-//        }
-//    };
-//}
 
 - (void)updateUserState
 {
