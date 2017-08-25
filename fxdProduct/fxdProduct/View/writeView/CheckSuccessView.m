@@ -23,6 +23,7 @@
     [super awakeFromNib];
     [Tool setCorner:self.sureBtn borderColor:[UIColor whiteColor]];
     [Tool setCorner:self.promote borderColor:[UIColor whiteColor]];
+    [Tool setCorner:self.bankView borderColor:UI_MAIN_COLOR];
     UIImage *btnImg = [UIImage imageNamed:@"trick"];
     UIImage *selectImg = [UIImage imageNamed:@"tricked"];
     [_userCheckBtn setImage:btnImg forState:UIControlStateNormal];
