@@ -342,8 +342,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                         checkFalse.seeView.hidden = YES;
                         checkFalse.jsdView.hidden = YES;
                     }
-//                    checkFalse.seeView.hidden = NO;
-//                    [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
                 }
             }
             [self.view addSubview:checkFalse];
@@ -359,6 +357,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             }];
             checkSuccess =[[[NSBundle mainBundle] loadNibNamed:@"CheckSuccessView" owner:self options:nil] lastObject];
             checkSuccess.frame = CGRectMake(0, 0,_k_w, _k_h);
+            [checkSuccess.feeBtn addTarget:self action:@selector(shareBtn:)forControlEvents:UIControlEventTouchUpInside];
+            checkSuccess.feeBtn.tag = 107;
             checkSuccess.purposePicker.delegate = self;
             checkSuccess.purposePicker.dataSource = self;
             checkSuccess.purposePicker.tag = 101;
@@ -375,7 +375,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             checkSuccess.toolsureBtn.tag = 104;
             checkSuccess.toolsureBtn.action =@selector(shareBtn:);
             checkSuccess.toolsureBtn.target = self;
-            
+            checkSuccess.bankTextField.enabled = NO;
             if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
                 checkSuccess.weekBtn.hidden = true;
                 checkSuccess.textFiledWeek.hidden = true;
@@ -383,6 +383,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [Tool setCorner:checkSuccess.purposeView borderColor:UI_MAIN_COLOR];
                 checkSuccess.purposeTextField.delegate = self;
            
+                checkSuccess.bankTextField.text = @"收款方式";
+                checkSuccess.bankTextField.delegate = self;
+                
                 checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
                 UILabel *daysLabel = [[UILabel alloc] init];
                 daysLabel.text = [NSString stringWithFormat:@"借款期限: %@天", [Utility sharedUtility].rateParse.result.ext_attr_.period_desc_];
@@ -404,8 +407,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(4, amountText.length)];
                 checkSuccess.weekMoney.attributedText = attStr;
             }else {
+
+                checkSuccess.jsdDescView.hidden = YES;
                 checkSuccess.textFiledWeek.text = @"请选择借款周期";
                 checkSuccess.purposeTextField.text = @"请选择借款用途";
+                checkSuccess.bankTextField.text = @"收款方式";
                 [Tool setCorner:checkSuccess.bgView borderColor:UI_MAIN_COLOR];
                 [Tool setCorner:checkSuccess.purposeView borderColor:UI_MAIN_COLOR];
                 NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
@@ -415,6 +421,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkSuccess.allMoney.text = @"0元";
                 checkSuccess.textFiledWeek.delegate = self;
                 checkSuccess.purposeTextField.delegate = self;
+                checkSuccess.bankTextField.delegate = self;
      
             }
             //[NSString stringWithFormat:@"%d周",_datalist.firstObject.intValue];
@@ -425,6 +432,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [checkSuccess.weekBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
             checkSuccess.purposeBtn.tag = 105;
             [checkSuccess.purposeBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
+            checkSuccess.bankButton.tag = 106;
+            [checkSuccess.bankButton addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
             checkSuccess.loadMoney.text =[NSString stringWithFormat:@"¥%.0f元",_approvalModel.result.approval_amount];
             NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:checkSuccess.loadMoney.text];
             [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:30] range:NSMakeRange(0, 1)];
@@ -455,6 +464,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《借款协议》"];
                     range = NSMakeRange(attributeStr.length - 6, 6);
                 }else{
+//                    checkSuccess.bankView.hidden = YES;
                     attributeStr = [[NSMutableAttributedString alloc]initWithString:@"我已阅读并认可发薪贷《信用咨询及管理服务协议》"];
                     if (UI_IS_IPHONE5) {
                         attributeStr.yy_font = [UIFont systemFontOfSize:11];
@@ -791,6 +801,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             checkSuccess.purposePicker.hidden = NO;
             
         }
+            break;
+        case 106:
+            DLog(@"跳转到银行卡");
+            break;
+        case 107:
+            DLog(@"借款协议");
+            break;
         default:
             break;
     }
@@ -1053,11 +1070,27 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         }
     }
     if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
-        if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]) {
-            checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
+
+        if ([_userStateModel.platform_type isEqualToString:@"2"]) {
+            
+            if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]) {
+                checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
+            }else{
+                checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
+            }
         }else{
-            checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
+        
+            if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]&&checkSuccess.bankTextField.text.length>14) {
+                checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
+            }else{
+                checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
+            }
         }
+//        if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]) {
+//            checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
+//        }else{
+//            checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
+//        }
     }else if ([_userStateModel.product_id isEqualToString:RapidLoan]){
         if (![_purposeSelect isEqualToString:@"0"]) {
             checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
