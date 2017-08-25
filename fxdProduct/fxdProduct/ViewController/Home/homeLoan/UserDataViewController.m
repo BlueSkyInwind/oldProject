@@ -599,10 +599,13 @@
             
         case 1:
         {
-            [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
-                UserContactsViewController *userContactVC = [[UserContactsViewController alloc] init];
-                userContactVC.custom_baseInfo = custom_baseInfo;
-                [self.navigationController pushViewController:userContactVC animated:true];
+            [self getCustomerCarrer_jhtml:^(CustomerCareerBaseClass *careerInfo) {
+                
+                ProfessionViewController *professVC = [[ProfessionViewController alloc] init];
+                professVC.delegate = self;
+                professVC.product_id = _product_id;
+                professVC.careerInfo = careerInfo;
+                [self.navigationController pushViewController:professVC animated:true];
             }];
         }
             break;
@@ -613,11 +616,7 @@
                 EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
                 editCard.typeFlag = @"0";
                 [self.navigationController pushViewController:editCard animated:YES];
-//                ProfessionViewController *professVC = [[ProfessionViewController alloc] init];
-//                professVC.delegate = self;
-//                professVC.product_id = _product_id;
-//                professVC.careerInfo = careerInfo;
-//                [self.navigationController pushViewController:professVC animated:true];
+
             }];
         }
             break;

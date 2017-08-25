@@ -117,7 +117,6 @@
             }
         }
     } failure:^(EnumServerStatus status, id object) {
-        
     }];
 }
 
@@ -125,7 +124,8 @@
 {
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
+//    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
+    self.tableView.tableHeaderView = [self tableViewHeaderView];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([IdentityCell class]) bundle:nil] forCellReuseIdentifier:@"IdentityCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
     [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
@@ -146,8 +146,35 @@
     }];
     [_saveBtn addTarget:self action:@selector(saveBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableFooterView = footView;
-    
 }
+
+-(UIView *)tableViewHeaderView{
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 50)];
+    
+    UIImageView *iconView = [[UIImageView alloc] init];
+    iconView.image = [UIImage imageNamed:@"topCellIcon"];
+    [backView addSubview:iconView];
+    [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@10);
+        make.centerY.equalTo(backView.mas_centerY);
+        make.width.equalTo(@22);
+        make.height.equalTo(@22);
+    }];
+    UILabel *label = [[UILabel alloc] init];
+    [backView addSubview:label];
+    label.text = _placeHolderArr[0][0];
+    label.textColor = [UIColor redColor];
+    label.font = [UIFont systemFontOfSize:13.f];
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(iconView.mas_right).offset(4);
+        make.centerY.equalTo(backView.mas_centerY);
+        //                make.bottom.equalTo(cell.contentView);
+        make.height.equalTo(@30);
+        make.right.equalTo(backView);
+    }];
+    return backView;
+}
+
 
 //拉取用户信息
 - (void)setValueOfDataArr
@@ -276,7 +303,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 2;
+        return 1;
     }else if (section == 1){
         return 2;
     }else{
@@ -287,9 +314,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0 && indexPath.section == 0) {
-        return 50.f;
-    } else {
         return 70.f;
+    } else {
+        return 60.f;
     }
 }
 
@@ -304,35 +331,6 @@
     }
     switch (indexPath.section) {
         case 0:{
-            if (indexPath.row == 0) {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-                if (cell == nil) {
-                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    UIImageView *iconView = [[UIImageView alloc] init];
-                    iconView.image = [UIImage imageNamed:@"topCellIcon"];
-                    [cell.contentView addSubview:iconView];
-                    [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.left.equalTo(@10);
-                        make.top.equalTo(@9);
-                        make.width.equalTo(@22);
-                        make.height.equalTo(@22);
-                    }];
-                    UILabel *label = [[UILabel alloc] init];
-                    [cell.contentView addSubview:label];
-                    label.text = _placeHolderArr[indexPath.section][indexPath.row];
-                    label.textColor = [UIColor redColor];
-                    label.font = [UIFont systemFontOfSize:13.f];
-                    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.left.equalTo(iconView.mas_right).offset(4);
-                        make.top.equalTo(@5);
-                        //                make.bottom.equalTo(cell.contentView);
-                        make.height.equalTo(@30);
-                        make.right.equalTo(cell.contentView);
-                    }];
-                }
-                return cell;
-            } else if(indexPath.row == 1){
                 IdentityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IdentityCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [cell.identityUpBtn addTarget:self action:@selector(identityUpBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -356,7 +354,6 @@
                 }
                 //        [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
                 return cell;
-            }
         }
             break;
         case 1:{
@@ -365,7 +362,7 @@
                 cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
             }
             cell.titleLabel.text = _placeHolderArr[indexPath.section][indexPath.row];
-            cell.contentTextField.tag = indexPath.row +100 + indexPath.section;
+            cell.contentTextField.tag = indexPath.row +(100 * indexPath.section);
             cell.contentTextField.delegate = self;
             cell.contentTextField.text = dataListArr[indexPath.row+1];
             cell.arrowsImageBtn.hidden = YES;
@@ -379,9 +376,15 @@
             if (!cell) {
                 cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
             }
-            
+            cell.arrowsImageBtn.hidden = NO;
+            cell.contentTextField.enabled = NO;
+
+            if (indexPath.row == 2) {
+                cell.arrowsImageBtn.hidden = YES;
+                cell.contentTextField.enabled = YES;
+            }
             cell.titleLabel.text = _placeHolderArr[indexPath.section][indexPath.row];
-            cell.contentTextField.tag = indexPath.row +100 + indexPath.section;
+            cell.contentTextField.tag = indexPath.row +(100 * indexPath.section);;
             cell.contentTextField.delegate = self;
             cell.contentTextField.text = dataListArr[indexPath.row+3];
             cell.selectionStyle  = UITableViewCellSelectionStyleNone;
@@ -394,7 +397,35 @@
     }
     return nil;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section != 2) {
+        return;
+    }
+    if (indexPath.row == 0) {
+        [self.view endEditing:YES];
+        if (_dataDicEduLevel) {
+            _colledgeView = [[[NSBundle mainBundle] loadNibNamed:@"ColledgeView" owner:self options:nil] lastObject];
+            _colledgeView.frame = CGRectMake(0, 0, _k_w, _k_h);
+            _colledgeView.dataDic = _dataDicEduLevel;
+            _colledgeView.delegate = self;
+            [_colledgeView show];
+        } else {
+            [self getCodeDic:^{
+                _colledgeView = [[[NSBundle mainBundle] loadNibNamed:@"ColledgeView" owner:self options:nil] lastObject];
+                _colledgeView.frame = CGRectMake(0, 0, _k_w, _k_h);
+                _colledgeView.dataDic = _dataDicEduLevel;
+                _colledgeView.delegate = self;
+                [_colledgeView show];
+            }];
+        }
+    }else if (indexPath.row == 1){
+        DLog(@"现居地址");
+        if (_pickerArray.count != 34) {
+            [self PostGetCity];
+        }
+        [self createPickViewShowWithTag];
+    }
+}
 - (void)identityUpBtnClick
 {
     DLog(@"正面");
@@ -522,11 +553,11 @@
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     DLog(@"%ld",textField.tag);
-    if (textField.tag == 104 || textField.tag == 105) {
+    if (textField.tag == 200 || textField.tag == 201) {
         return NO;
     }
     
-    if (textField.tag == 102) {
+    if (textField.tag == 100) {
         if (_customerFrontIDParse.result.editable_field_ && _customerFrontIDParse.result.editable_field_.length > 2) {
             if ([_customerFrontIDParse.result.editable_field_ containsString:@"customer_name_"]) {
                 return true;
@@ -537,7 +568,7 @@
             return false;
         }
     }
-    if (textField.tag == 103) {
+    if (textField.tag == 101) {
         if (_customerFrontIDParse.result.editable_field_ && _customerFrontIDParse.result.editable_field_.length > 2) {
             if ([_customerFrontIDParse.result.editable_field_ containsString:@"id_code_"]) {
                 return true;

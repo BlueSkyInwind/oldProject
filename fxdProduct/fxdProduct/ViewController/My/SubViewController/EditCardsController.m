@@ -56,9 +56,10 @@
     supportBankListArr = [NSMutableArray array];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
     self.automaticallyAdjustsScrollViewInsets=NO;
-    [self.tableView registerNib:[UINib nibWithNibName:@"LabelCell" bundle:nil] forCellReuseIdentifier:@"cell"];
-    
+    [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
+
     _cardFlag = 100;
     _btnStatus = false;
     UITapGestureRecognizer *tapSecory = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicksecry)];
@@ -164,49 +165,55 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LabelCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
-    cell.textField.textColor=UI_MAIN_COLOR;
+    ContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
+    if (!cell) {
+        cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
+    }
+    
+    cell.contentTextField.textColor=UI_MAIN_COLOR;
     if(indexPath.row==0)
     {
-        cell.btnSecory.hidden=YES;
-        cell.textField.enabled=false;
-        cell.textField.text=self.cardName;
-        cell.textField.placeholder=@"银行卡类型";
-        [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
-        [cell.btn addTarget:self action:@selector(bankChoose) forControlEvents:UIControlEventTouchUpInside];
+        cell.contentTextField.enabled=false;
+        cell.contentTextField.text=self.cardName;
+        cell.titleLabel.text=@"银行卡类型";
     }
     else if(indexPath.row==1)
     {
-        cell.btnSecory.hidden=YES;
         
-        cell.textField.tag=1001;
-        cell.textField.delegate=self;
-        cell.textField.text=self.cardNum;
-        cell.textField.keyboardType=UIKeyboardTypeNumberPad;
-        cell.textField.placeholder=@"银行卡号";
-        [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
-        [cell.btn addTarget:self action:@selector(GetNum) forControlEvents:UIControlEventTouchUpInside];
+        cell.contentTextField.tag=1001;
+        cell.contentTextField.delegate=self;
+        cell.contentTextField.text=self.cardNum;
+        cell.contentTextField.keyboardType=UIKeyboardTypeNumberPad;
+        cell.titleLabel.text=@"银行卡号";
+        [cell.arrowsImageBtn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
+        [cell updateScanCardImageBtnLayout];
+        __weak typeof (self) weakSelf = self;
+        cell.btnClick = ^(UIButton * button) {
+            [weakSelf GetNum];
+        };
     }
     else if(indexPath.row==2)
     {
-        cell.textField.tag=1002;
-        cell.textField.delegate=self;
-        cell.textField.placeholder=@"预留手机号";
-        cell.textField.keyboardType=UIKeyboardTypeNumberPad;
-        cell.btnSecory.hidden=YES;
-        cell.btn.hidden=YES;
+        cell.contentTextField.tag=1002;
+        cell.contentTextField.delegate=self;
+        cell.titleLabel.text=@"预留手机号";
+        cell.contentTextField.keyboardType=UIKeyboardTypeNumberPad;
+        cell.arrowsImageBtn.hidden = YES;
     }
     else
     {
-        cell.textField.tag=1003;
-        cell.textField.delegate=self;
-        cell.textField.placeholder=@"验证码";
-        cell.textField.delegate=self;
-        cell.btnSecory.tag=1111;
-        cell.textField.keyboardType=UIKeyboardTypeNumberPad;
-        cell.btn.hidden=YES;
-        [cell.btnSecory addTarget:self action:@selector(getSecory) forControlEvents:UIControlEventTouchUpInside];
+        cell.contentTextField.tag=1003;
+        cell.contentTextField.delegate=self;
+        cell.titleLabel.text=@"验证码";
+        cell.contentTextField.delegate=self;
+        cell.arrowsImageBtn.tag=1111;
+        [cell.arrowsImageBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+        [cell updateVerfiyCodeImageBtnLayout];
+        cell.contentTextField.keyboardType=UIKeyboardTypeNumberPad;
+        __weak typeof (self) weakSelf = self;
+        cell.btnClick = ^(UIButton * button) {
+            [weakSelf getSecory];
+        };
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
@@ -214,6 +221,12 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 70;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row == 0) {
+        [self bankChoose];
+    }
 }
 
 - (void)closeGetVerifyButtonUser
