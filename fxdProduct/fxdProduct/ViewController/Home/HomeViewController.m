@@ -1052,6 +1052,7 @@
 #pragma mark 点击立即申请
 -(void)applyBtnClick:(NSString *)money{
     NSLog(@"点击立即申请=%@",money);
+    [self highLoanClick];
 }
 #pragma mark 点击导流平台的更多
 -(void)moreBtnClick{

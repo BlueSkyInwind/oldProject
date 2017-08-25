@@ -1292,6 +1292,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                     }];
                 checkSuccess.moneyLabel.attributedText = one;
                 checkSuccess.moneyLabel.textAlignment = NSTextAlignmentCenter;
+                checkSuccess.moneyLabel.hidden = YES;
                 checkSuccess.tipLabel.text = _approvalModel.result.payMessage;
 //                checkSuccess.tipLabel.text = @"tip提示";
                 

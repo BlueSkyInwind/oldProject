@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *toolCancleBtn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *toolsureBtn;
 @property (weak, nonatomic) IBOutlet UILabel *loadMoney;
+@property (weak, nonatomic) IBOutlet UIView *bankView;
+@property (weak, nonatomic) IBOutlet UITextField *bankTextField;
+@property (weak, nonatomic) IBOutlet UIButton *bankButton;
 
 @property (weak, nonatomic) IBOutlet UIView *displayMoneyView;
 
