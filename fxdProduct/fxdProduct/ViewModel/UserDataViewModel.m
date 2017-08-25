@@ -37,7 +37,7 @@
     NSDictionary * paramDic = @{@"task_id":taskid,@"user_id":[Utility sharedUtility].userInfo.juid};
     
     [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_TheCreditCardupload_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        
+        NSLog(@"%@",object);
     } failure:^(EnumServerStatus status, id object) {
         
     }];
