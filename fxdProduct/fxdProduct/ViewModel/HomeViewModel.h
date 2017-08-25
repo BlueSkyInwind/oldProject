@@ -33,7 +33,6 @@
  */
 -(void)homeDataRequest;
 
-
 @end
 
 
@@ -61,6 +60,8 @@
  获取弹窗信息
  */
 -(void)fetchPopViewInfo;
+
+
 
 @end
 

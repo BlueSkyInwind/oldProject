@@ -774,6 +774,11 @@
     if ([_model.platform_type isEqualToString:@"2"]) {
         if (!smsSeq) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
+            return;
+        }
+        if (!verfiyCode || [verfiyCode isEqualToString:@""]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
+            return;
         }
         paymentDetailModel.sms_code_ =  verfiyCode;
         paymentDetailModel.sms_seq_ = smsSeq;

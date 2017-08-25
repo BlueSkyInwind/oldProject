@@ -15,4 +15,9 @@
 @property (nonatomic, strong)id<Optional> result;
 
 
+@property (nonatomic, strong)NSString<Optional> *errCode;
+@property (nonatomic, strong)NSString<Optional> * errMsg;
+@property (nonatomic, strong)NSString<Optional> * friendErrMsg;
+@property (nonatomic, strong)id<Optional> data;
+
 @end

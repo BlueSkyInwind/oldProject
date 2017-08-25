@@ -56,8 +56,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="arrowImageView" destination="eGL-Qo-tiq" id="Dg3-hi-WHw"/>
                 <outlet property="tapView" destination="IEq-cb-iYR" id="XHk-RU-uN4"/>
-                <outlet property="titleLabel" destination="hc5-QI-rLT" id="PbD-bt-pqg"/>
+                <outlet property="titleLabel" destination="hc5-QI-rLT" id="Luw-6e-azV"/>
             </connections>
         </tableViewCell>
     </objects>
