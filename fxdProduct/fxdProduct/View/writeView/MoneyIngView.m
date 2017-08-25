@@ -21,11 +21,11 @@
 - (YYLabel *)agreeMentLabel{
     if (_agreeMentLabel == nil) {
         _agreeMentLabel = [YYLabel new];
-        if (UI_IS_IPHONE5) {
-            [self.agreeMentView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.bottom.equalTo(self.repayBtnView.mas_top).offset(10);
-            }];
-        }
+//        if (UI_IS_IPHONE5) {
+//            [self.agreeMentView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.bottom.equalTo(self.repayBtnView.mas_top).offset(10);
+//            }];
+//        }
         _agreeMentLabel.textVerticalAlignment = YYTextVerticalAlignmentCenter;
         _agreeMentLabel.numberOfLines = 0;
         _agreeMentLabel.font = [UIFont systemFontOfSize:18];

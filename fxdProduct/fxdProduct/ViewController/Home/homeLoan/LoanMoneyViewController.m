@@ -57,9 +57,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"审核";
-    self.automaticallyAdjustsScrollViewInsets = false;
     [self addBackItemroot];
-    
     moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
     moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
 //    moenyViewing.bottomView.hidden = YES;
@@ -84,7 +82,7 @@
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getFxdCaseInfo)];
     header.automaticallyChangeAlpha = YES;
     view.mj_header = header;
-    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view = view;
     self.scrollView = view;
 }
