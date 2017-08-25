@@ -553,6 +553,7 @@
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     DLog(@"%ld",textField.tag);
+    
     if (textField.tag == 200 || textField.tag == 201) {
         return NO;
     }

@@ -133,46 +133,48 @@ extension FaceIdentiViewController {
     self.view.addSubview(iconImage!)
     iconImage?.snp.makeConstraints({ (make) in
         make.centerX.equalTo(self.view.center.x)
-        make.width.equalTo(60)
+        make.width.equalTo(90)
         make.height.equalTo((iconImage?.snp.width)!).multipliedBy(1)
         make.top.equalTo(self.view.snp.top).offset(100)
     })
     
     titleLabel = UILabel()
-    titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+    titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
     titleLabel?.text = "人脸识别"
     titleLabel?.textAlignment = NSTextAlignment.center
     self.view.addSubview(titleLabel!)
     titleLabel?.snp.makeConstraints({ (make) in
         make.centerX.equalTo(self.view.center.x)
-        make.width.equalTo(120)
-        make.height.equalTo(21)
-        make.top.equalTo((iconImage?.snp.bottom)!).offset(5)
+        make.width.equalTo(200)
+        make.height.equalTo(35)
+        make.top.equalTo((iconImage?.snp.bottom)!).offset(20)
     })
     
     explainLabel = UILabel()
     explainLabel?.font = UIFont.systemFont(ofSize: 15)
     explainLabel?.text = "举起手机，正对屏幕，人脸完全置于虚线内跟随提示完成“摇头”“抬头”“眨眼”“张嘴”等动作"
     explainLabel?.numberOfLines = 0
+    explainLabel?.textColor = UIColor.init(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
     explainLabel?.textAlignment = NSTextAlignment.center
     self.view.addSubview(explainLabel!)
     explainLabel?.snp.makeConstraints({ (make) in
-        make.right.equalTo(self.view.snp.right).offset(-15)
-        make.left.equalTo(self.view.snp.left).offset(15)
-        make.top.equalTo((titleLabel?.snp.bottom)!).offset(10)
+        make.right.equalTo(self.view.snp.right).offset(-20)
+        make.left.equalTo(self.view.snp.left).offset(20)
+        make.top.equalTo((titleLabel?.snp.bottom)!).offset(60)
         make.height.equalTo(40)
     })
     
     promptLabel = UILabel()
     promptLabel?.font = UIFont.systemFont(ofSize: 15)
     promptLabel?.text = "温馨提示：动作幅度不要过快哦"
+    promptLabel?.textColor = UIColor.init(red: 63/255, green: 169/255, blue: 245/255, alpha: 1)
     promptLabel?.textAlignment = NSTextAlignment.center
     self.view.addSubview(promptLabel!)
     promptLabel?.snp.makeConstraints({ (make) in
         make.centerX.equalTo(self.view.center.x)
-        make.right.equalTo(self.view.snp.right).offset(-15)
-        make.left.equalTo(self.view.snp.left).offset(15)
-        make.top.equalTo((explainLabel?.snp.bottom)!).offset(15)
+        make.right.equalTo(self.view.snp.right).offset(-20)
+        make.left.equalTo(self.view.snp.left).offset(20)
+        make.top.equalTo((explainLabel?.snp.bottom)!).offset(60)
     })
     
     statusBtn = UIButton.init(type: UIButtonType.custom)
@@ -184,11 +186,10 @@ extension FaceIdentiViewController {
     self.view.addSubview(statusBtn!)
     statusBtn?.snp.makeConstraints({ (make) in
         make.top.equalTo(promptLabel!.snp.bottom).offset(20)
-        make.left.equalTo(self.view.snp.left).offset(15)
-        make.right.equalTo(self.view.snp.right).offset(-15)
-        make.height.equalTo(40)
+        make.left.equalTo(self.view.snp.left).offset(20)
+        make.right.equalTo(self.view.snp.right).offset(-20)
+        make.height.equalTo(50)
     })
-    
     
     }
 }

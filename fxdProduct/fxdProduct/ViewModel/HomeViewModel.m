@@ -34,7 +34,6 @@
     }];
 }
 
-
 -(void)fetchLoanRecord{
     
     [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanRecord_url]  isNeedNetStatus:NO isNeedWait:NO parameters:nil finished:^(EnumServerStatus status, id object) {
@@ -48,7 +47,6 @@
         }
     }];
 }
-
 
 -(void)fetchLoanProcess{
     
@@ -87,6 +85,8 @@
     }];
 
 }
+
+
 
 
 
@@ -183,10 +183,6 @@
         }
     }];
 }
-
-
-
-
 
 
 
