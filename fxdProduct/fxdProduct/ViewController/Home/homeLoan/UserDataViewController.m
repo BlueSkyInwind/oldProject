@@ -611,6 +611,7 @@
             break;
         case 2:
         {
+            //此处需要一个返回默认卡的接口
             [self getCustomerCarrer_jhtml:^(CustomerCareerBaseClass *careerInfo) {
                 
                 EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
