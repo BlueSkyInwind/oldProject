@@ -49,7 +49,8 @@
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "LoginViewModel.h"
 #import "FirstBorrowViewController.h"
-
+#import "AppDelegate.h"
+#import "AuthenticationCenterViewController.h"
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeRefuseCellDelegate,HomeDefaultCellDelegate>
 {
     ReturnMsgBaseClass *_returnParse;
@@ -88,7 +89,7 @@
    _dataArray = [NSMutableArray array];
     [self setUpTableview];
     [self setNavQRRightBar];
-    [self fatchAdv];
+//    [self fatchAdv];
 
 }
 
@@ -106,8 +107,8 @@
         //获取进件状态
         [self getFxdCaseInfo];
     }
-    [self fatchBanner];
-//    [self getHomeData];
+//    [self fatchBanner];
+    [self getHomeData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -193,6 +194,7 @@
 
     __weak HomeViewController *weakSelf = self;
     NSLog(@"下拉刷新");
+    [self getHomeData];
     [weakSelf.tableView.mj_header endRefreshing];
     
 }
@@ -230,17 +232,19 @@
     [self.navigationController pushViewController:messView animated:YES];
 }
 
-- (void)popView:(HomePop *)model
+- (void)popView:(HomeProductList *)model
 {
-    if ([model.result.is_valid_ isEqualToString:@"1"]) {
+    if ([model.data.popList.firstObject.isValid isEqualToString:@"1"]) {
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+        appDelegate.isShow = false;
         _popView = [HomePopView defaultPopupView];
         _popView.closeBtn.hidden = YES;
         _popView.delegate = self;
-        [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.result.files_.firstObject.file_store_path_]];
+        [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.data.popList.firstObject.image]];
 //        _popView.imageView.image = [UIImage imageNamed:@"tanchuang"];
-        _advImageUrl = model.result.files_.firstObject.link_url_;
-        _advTapToUrl = model.result.files_.firstObject.link_url_;
-        _shareContent = model.result.content_;
+        _advImageUrl = model.data.popList.firstObject.toUrl;
+        _advTapToUrl = model.data.popList.firstObject.toUrl;
+//        _shareContent = model.result.content_;
         _popView.parentVC = self;
         
         [self lew_presentPopupView:_popView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
@@ -453,7 +457,42 @@
     homeCell.backgroundColor = rgb(245, 245, 245);
     homeCell.selected = NO;
     homeCell.delegate = self;
-    [homeCell setupDefaultUI];
+    
+    //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中
+    
+    switch (_homeProductList.data.flag.integerValue) {
+        case 1:
+            [homeCell setupDefaultUI];
+            break;
+        case 2:
+            if (indexPath.section == 1) {
+                homeCell.homeProductFirstArray = @[@"home_01",@"工薪贷",@"home_04",@"2000元",@"5-50周"];
+                [homeCell productListFirst];
+                return homeCell;
+            }
+            homeCell.homeProductOtherArray = @[@"home_02",@"急速贷",@"home_05",@"1000元",@"14天"];
+            homeCell.isWait = true;
+            [homeCell productListOther];
+            break;
+        case 3:
+            [homeCell setupRefuseUI];
+            break;
+        case 4:
+            [homeCell setupOtherPlatformsUI];
+            break;
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+
+            homeCell.homeProductData = _homeProductList;
+            [homeCell setupDrawingUI];
+            break;
+        default:
+            break;
+    }
+    
+//    [homeCell setupDefaultUI];
 //    [homeCell setupRefuseUI];
 //    [homeCell setupOtherPlatformsUI];
 //    homeCell.leftTitleArray = @[@"申请产品：",@"借款金额：",@"借款周期：",@"每周还款：",@"最近账单日："];
@@ -523,18 +562,18 @@
 {
     DLog(@"点击");
     
-    if (_bannerParse && _bannerParse.result.files_.count > 0) {
-        HomeBannerFiles *files = _bannerParse.result.files_[index];
-        if ([files.link_url_.lowercaseString hasPrefix:@"http"] || [files.link_url_.lowercaseString hasPrefix:@"https"]) {
+    if (_homeProductList.data.bannerList && _homeProductList.data.bannerList.count > 0) {
+        HomeBannerList *files = _homeProductList.data.bannerList[index];
+        if ([files.image.lowercaseString hasPrefix:@"http"] || [files.image.lowercaseString hasPrefix:@"https"]) {
                                                              
-            if ([files.link_url_.lowercaseString hasSuffix:@"sjbuy"]) {
+            if ([files.image.lowercaseString hasSuffix:@"sjbuy"]) {
                 FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
-                firstBorrowVC.url = files.link_url_;
+                firstBorrowVC.url = files.image;
                 [self.navigationController pushViewController:firstBorrowVC animated:YES];
             }else{
             
                 FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-                webView.urlStr = files.link_url_;
+                webView.urlStr = files.image;
                 [self.navigationController pushViewController:webView animated:true];
             }
         }
@@ -656,6 +695,13 @@
         if ([_homeProductList.data.productList.type isEqualToString:@"1"]) {
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_homeProductList.data.productList.refuseMsg];
         }
+        
+        NSMutableArray *filesArr = [NSMutableArray array];
+        for (HomeBannerList *file in _homeProductList.data.bannerList) {
+            [filesArr addObject:file.image];
+        }
+        _sdView.imageURLStringsGroup = filesArr.copy;
+        
         [_tableView reloadData];
         
         if (_homeProductList.data.paidList.count>0) {
@@ -663,6 +709,12 @@
             NSArray *indexArray=[NSArray arrayWithObject:indexPath];
             [self.tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
         }
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+        if (appDelegate.isShow) {
+            [self popView:_homeProductList];
+        }
+        
 
     } WithFaileBlock:^{
         
@@ -671,28 +723,6 @@
     
 }
 
-
-/**
- 轮播图数据
- */
-- (void)fatchBanner
-{
-    BannerViewModel *bannerViewModel = [[BannerViewModel alloc]init];
-    [bannerViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        _bannerParse = [HomeBannerModel yy_modelWithJSON:returnValue];
-        NSMutableArray *filesArr = [NSMutableArray array];
-        for (HomeBannerFiles *file in _bannerParse.result.files_) {
-            [filesArr addObject:file.file_store_path_];
-        }
-        _sdView.imageURLStringsGroup = filesArr.copy;
-        [_tableView reloadData];
-    } WithFaileBlock:^{
-        
-    }];
-    
-    [bannerViewModel fetchBannerInfo];
-}
 
 /**
  获取借款进度
@@ -717,21 +747,7 @@
     }];
     [homeViewModel fetchLoanProcess];
 }
-/**
- 推广弹窗
- */
-- (void)fatchAdv
-{
-    PopViewModel *popViewModel = [[PopViewModel alloc]init];
-    [popViewModel setBlockWithReturnBlock:^(id returnValue) {
-        HomePop *popParse = [HomePop yy_modelWithJSON:returnValue];
-//        popParse.result.is_valid_ = @"1";
-        [self popView:popParse];
-    } WithFaileBlock:^{
-        
-    }];
-    [popViewModel fetchPopViewInfo];
-}
+
 
 -(void)getApplyStatus:(void(^)(BOOL isSuccess, UserStateModel *resultModel))finish{
     
@@ -1043,6 +1059,9 @@
 -(void)advancedCertification{
 
     NSLog(@"立即添加高级认证");
+    
+    self.tabBarController.selectedIndex = 1;
+
 }
 #pragma mark 点击提款
 -(void)drawingBtnClick{
@@ -1055,6 +1074,10 @@
 }
 #pragma mark 点击导流平台的更多
 -(void)moreBtnClick{
+    
+    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
+    [self.navigationController pushViewController:webVC animated:true];
     NSLog(@"点击导流平台的更多");
 }
 #pragma mark 我要借款

@@ -22,6 +22,7 @@ static BOOL isProduction = false;
 
 @property (nonatomic,strong)BaseTabBarViewController *btb;
 @property (nonatomic,strong)NSDictionary * notificationContentInfo;
+@property (nonatomic,assign)BOOL isShow;
 
 @end
 
