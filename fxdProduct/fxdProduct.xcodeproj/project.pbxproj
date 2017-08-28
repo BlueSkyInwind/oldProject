@@ -540,7 +540,6 @@
 		63FF48541B6F06F7009E384C /* FindPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48521B6F06F7009E384C /* FindPassViewController.m */; };
 		63FF48581B6F15DB009E384C /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */; };
 		63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */; };
-		81B4154D94C5352EFA4832C3 /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */; };
 		841BE5C61F177C4F00BABD04 /* UserLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */; };
 		841BE5C91F17829D00BABD04 /* LoginStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C81F17829D00BABD04 /* LoginStatusView.m */; };
 		841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
@@ -607,8 +606,6 @@
 		848C531F1F4C0C920092F87C /* thirdPartyAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C531D1F4C0C920092F87C /* thirdPartyAuthViewController.swift */; };
 		848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
 		848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
-		848C53251F4C2E550092F87C /* UserDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C53241F4C2E550092F87C /* UserDataViewModel.m */; };
-		848C53261F4C2E550092F87C /* UserDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C53241F4C2E550092F87C /* UserDataViewModel.m */; };
 		8499BF871F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */; };
 		8499BF881F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */; };
 		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
@@ -644,6 +641,7 @@
 		84ED5B741F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED5B711F4AC9F6004C0A59 /* UnfoldTableViewCell.m */; };
 		84ED5B751F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B721F4AC9F6004C0A59 /* UnfoldTableViewCell.xib */; };
 		84ED5B761F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B721F4AC9F6004C0A59 /* UnfoldTableViewCell.xib */; };
+		84FA3F571F53AA5D00C8ABED /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */; };
 		CC0346261F3C4CB8001F6F3D /* FirstBorrowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0346241F3C4CB8001F6F3D /* FirstBorrowViewController.m */; };
 		CC0346271F3C4CB8001F6F3D /* FirstBorrowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0346251F3C4CB8001F6F3D /* FirstBorrowViewController.xib */; };
 		CC0346281F3C4CDF001F6F3D /* FirstBorrowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0346251F3C4CB8001F6F3D /* FirstBorrowViewController.xib */; };
@@ -1280,8 +1278,6 @@
 		CCF9384E1EEE2CA80074791D /* ExpressCreditRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF9384C1EEE2CA80074791D /* ExpressCreditRefuseView.m */; };
 		CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
 		CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
-		EF27DA27932A7C2AC840F7ED /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ECD9F837F823AC9D2C9344A /* Pods_fxd_fxdProductDev.framework */; };
-		FEC9E035CB1E3F9712B4E125 /* Pods_fxd_fxdProduct.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0224CD8C7698BC9AFEDB3968 /* Pods_fxd_fxdProduct.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1325,7 +1321,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0224CD8C7698BC9AFEDB3968 /* Pods_fxd_fxdProduct.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProduct.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		032FA7DA1BE1BB3300CF2D21 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		032FA7DC1BE1BB3A00CF2D21 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		032FA7DE1BE1BB3F00CF2D21 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1465,7 +1460,6 @@
 		1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GesturesPasswordCell.h; path = ../GesturesPasswordCell.h; sourceTree = "<group>"; };
 		1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GesturesPasswordCell.m; sourceTree = "<group>"; };
 		1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GesturesPasswordCell.xib; sourceTree = "<group>"; };
-		1ECD9F837F823AC9D2C9344A /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGBankCardResource.bundle; sourceTree = "<group>"; };
 		22D2BFB71EA4BD9900B69360 /* MGBankCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBankCard.framework; sourceTree = "<group>"; };
 		3C2819F71AD8F8FCD65CAD98 /* Pods_fxdProduct.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxdProduct.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2331,8 +2325,6 @@
 		848C531A1F4BDF740092F87C /* FaceIdentiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceIdentiViewController.swift; sourceTree = "<group>"; };
 		848C531D1F4C0C920092F87C /* thirdPartyAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = thirdPartyAuthViewController.swift; sourceTree = "<group>"; };
 		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
-		848C53231F4C2E550092F87C /* UserDataViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataViewModel.h; sourceTree = "<group>"; };
-		848C53241F4C2E550092F87C /* UserDataViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataViewModel.m; sourceTree = "<group>"; };
 		8499BF851F4FFDB700F193F9 /* UserBankCardListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserBankCardListViewController.h; sourceTree = "<group>"; };
 		8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserBankCardListViewController.m; sourceTree = "<group>"; };
 		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
@@ -2509,7 +2501,6 @@
 				63F0E1C71CE57B80001251A9 /* libBSFingerSDK.a in Frameworks */,
 				6326C9CB1BF040A600FD23A8 /* AdSupport.framework in Frameworks */,
 				032FA7E31BE1BB4900CF2D21 /* CFNetwork.framework in Frameworks */,
-				FEC9E035CB1E3F9712B4E125 /* Pods_fxd_fxdProduct.framework in Frameworks */,
 				3E2B09C36E24E9E9316FAC1B /* Pods_fxd_fxdProduct.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2525,6 +2516,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84ED5B591F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */,
+				84FA3F571F53AA5D00C8ABED /* Pods_fxd_fxdProductDev.framework in Frameworks */,
 				CC0DFAEA1EA5B1090024841A /* UserNotifications.framework in Frameworks */,
 				CC0DFAEB1EA5B1090024841A /* CoreTelephony.framework in Frameworks */,
 				CC0DFAEC1EA5B1090024841A /* MGBankCard.framework in Frameworks */,
@@ -2542,7 +2535,6 @@
 				CC0DFAF81EA5B1090024841A /* libz.tbd in Frameworks */,
 				CC0DFAF91EA5B1090024841A /* libicucore.tbd in Frameworks */,
 				CC0DFAFA1EA5B1090024841A /* MGLivenessDetection.framework in Frameworks */,
-				84ED5B591F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */,
 				CC0DFAFB1EA5B1090024841A /* MGBaseKit.framework in Frameworks */,
 				CC0DFAFC1EA5B1090024841A /* libstdc++.6.0.9.tbd in Frameworks */,
 				CC0DFAFD1EA5B1090024841A /* BaiduMapAPI_Utils.framework in Frameworks */,
@@ -2569,8 +2561,6 @@
 				CC0DFB131EA5B1090024841A /* libBSFingerSDK.a in Frameworks */,
 				CC0DFB141EA5B1090024841A /* AdSupport.framework in Frameworks */,
 				CC0DFB151EA5B1090024841A /* CFNetwork.framework in Frameworks */,
-				EF27DA27932A7C2AC840F7ED /* Pods_fxd_fxdProductDev.framework in Frameworks */,
-				81B4154D94C5352EFA4832C3 /* Pods_fxd_fxdProductDev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3469,8 +3459,6 @@
 				84A635101F00FCA200146A8A /* AuthenticationViewModel.m */,
 				843FF1F31F20860B00ECCE16 /* PaymentViewModel.h */,
 				843FF1F41F20860B00ECCE16 /* PaymentViewModel.m */,
-				848C53231F4C2E550092F87C /* UserDataViewModel.h */,
-				848C53241F4C2E550092F87C /* UserDataViewModel.m */,
 				84DFBED11F4D72050009DAB9 /* UserDataViewModel.h */,
 				84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */,
 			);
@@ -3574,7 +3562,6 @@
 				63FC24B81D98F7E9006F58F3 /* YYText */,
 				637636D91D76A72A00E93289 /* popupViewController */,
 				63F526C41D5C0D4900F68524 /* MoxieSDK */,
-				63B65DE31D50431200207231 /* Lib */,
 				63D43EED1D41F76D0076AC7F /* YYCache */,
 				634795D81D378CED00EC4027 /* Aspects */,
 				638C3F251CF2F470000446A7 /* PCCircleViewConst.h */,
@@ -4311,13 +4298,6 @@
 				63B142AB1D9A43B000C43B3F /* DrawService.m */,
 			);
 			path = DrawService;
-			sourceTree = "<group>";
-		};
-		63B65DE31D50431200207231 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Lib;
 			sourceTree = "<group>";
 		};
 		63C50E491E67F6AE0035EE4F /* CustomerIDInfo */ = {
@@ -5098,8 +5078,8 @@
 				CC989C2F1F4D84A9000CDACF /* AuthenticationCenterViewController.m */,
 			);
 			path = AuthenticationCenter;
-           sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		84DFBEDB1F4D976F0009DAB9 /* HighRanding */ = {
 			isa = PBXGroup;
 			children = (
@@ -6223,7 +6203,6 @@
 				637636D21D768BE800E93289 /* RepayListViewController.m in Sources */,
 				63FC25001D98F7E9006F58F3 /* YYTextTransaction.m in Sources */,
 				CC0F1B991EE64A2A00A23651 /* ChangePasswordModel.m in Sources */,
-				848C53251F4C2E550092F87C /* UserDataViewModel.m in Sources */,
 				848394221EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */,
 				635AB7971BE2FE6600C32919 /* CashResult.m in Sources */,
 				63FC24F91D98F7E9006F58F3 /* YYTextRubyAnnotation.m in Sources */,
@@ -6429,7 +6408,6 @@
 				CC0DF98D1EA5B1090024841A /* CustomerCareerResult.m in Sources */,
 				CC0DF98E1EA5B1090024841A /* UIView+Extend.m in Sources */,
 				CC0DF98F1EA5B1090024841A /* SSKeychain.m in Sources */,
-				848C53261F4C2E550092F87C /* UserDataViewModel.m in Sources */,
 				CCF803281ED4249A003B7975 /* UnbundlingBankCardViewController.m in Sources */,
 				842C0B5E1ED59C7A00366D11 /* LoginParamModel.m in Sources */,
 				CC0DF9901EA5B1090024841A /* SDCycleScrollView.m in Sources */,
@@ -6952,7 +6930,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/Lib",
 					"$(PROJECT_DIR)/fxdProduct/Third/MGKit",
 				);
 				GCC_PREFIX_HEADER = fxdProduct/fxdProduct.pch;
@@ -6975,17 +6952,13 @@
 					"\"$(SRCROOT)/../../dist/include\"",
 				);
 				INFOPLIST_FILE = fxdProduct/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/fxdProduct/Third/dist",
 					"$(PROJECT_DIR)/fxdProduct/Third/BankCardRecogPro",
-					"$(PROJECT_DIR)/fxdProduct/Third/mp3Lame",
-					"$(PROJECT_DIR)/fxdProduct/Third/libSTLivenessController",
 					"$(PROJECT_DIR)/fxdProduct/Third/BSFinger",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/GtSdkLib",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 				);
@@ -7070,7 +7043,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/Lib",
 					"$(PROJECT_DIR)/fxdProduct/Third/MGKit",
 				);
 				GCC_PREFIX_HEADER = fxdProduct/fxdProduct.pch;
@@ -7093,17 +7065,13 @@
 					"\"$(SRCROOT)/../../dist/include\"",
 				);
 				INFOPLIST_FILE = fxdProduct/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/fxdProduct/Third/dist",
 					"$(PROJECT_DIR)/fxdProduct/Third/BankCardRecogPro",
-					"$(PROJECT_DIR)/fxdProduct/Third/mp3Lame",
-					"$(PROJECT_DIR)/fxdProduct/Third/libSTLivenessController",
 					"$(PROJECT_DIR)/fxdProduct/Third/BSFinger",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/GtSdkLib",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 				);
@@ -7210,7 +7178,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/Lib",
 					"$(PROJECT_DIR)/fxdProduct/Third/MGKit",
 				);
 				GCC_PREFIX_HEADER = fxdProduct/fxdProduct.pch;
@@ -7230,20 +7197,17 @@
 					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
 					"\"${PODS_ROOT}/Headers/Public/OpenUDID\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"\"$(SRCROOT)/../../dist/include\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/fxdProduct/fxdProductDev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/fxdProduct/Third/dist",
 					"$(PROJECT_DIR)/fxdProduct/Third/BankCardRecogPro",
 					"$(PROJECT_DIR)/fxdProduct/Third/mp3Lame",
 					"$(PROJECT_DIR)/fxdProduct/Third/libSTLivenessController",
 					"$(PROJECT_DIR)/fxdProduct/Third/BSFinger",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/GtSdkLib",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 				);
@@ -7327,7 +7291,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/Lib",
 					"$(PROJECT_DIR)/fxdProduct/Third/MGKit",
 				);
 				GCC_PREFIX_HEADER = fxdProduct/fxdProduct.pch;
@@ -7347,20 +7310,17 @@
 					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
 					"\"${PODS_ROOT}/Headers/Public/OpenUDID\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"\"$(SRCROOT)/../../dist/include\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/fxdProduct/fxdProductDev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/fxdProduct/Third/dist",
 					"$(PROJECT_DIR)/fxdProduct/Third/BankCardRecogPro",
 					"$(PROJECT_DIR)/fxdProduct/Third/mp3Lame",
 					"$(PROJECT_DIR)/fxdProduct/Third/libSTLivenessController",
 					"$(PROJECT_DIR)/fxdProduct/Third/BSFinger",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/GtSdkLib",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 				);
