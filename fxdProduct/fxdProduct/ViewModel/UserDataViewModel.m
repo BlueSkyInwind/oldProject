@@ -88,7 +88,6 @@
     } failure:^(EnumServerStatus status, id object) {
         
     }];
-    
 }
 
 -(void)obtainhighRankingStatus{

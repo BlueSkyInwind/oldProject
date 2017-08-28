@@ -23,6 +23,7 @@ NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/"; //生产
 NSString * const _p2P_url = @"https://h5.faxindai.com:8028/fxd-esb/p2p/";
 NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
 NSString * const _main_new_url  =  @"http://192.168.13.173:8005/";
+
 #elif FXD_Environment_Mode == 1
 
 //测试环境
