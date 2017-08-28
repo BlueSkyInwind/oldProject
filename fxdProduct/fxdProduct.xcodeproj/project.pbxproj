@@ -607,8 +607,6 @@
 		848C531F1F4C0C920092F87C /* thirdPartyAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C531D1F4C0C920092F87C /* thirdPartyAuthViewController.swift */; };
 		848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
 		848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
-		848C53251F4C2E550092F87C /* UserDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C53241F4C2E550092F87C /* UserDataViewModel.m */; };
-		848C53261F4C2E550092F87C /* UserDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C53241F4C2E550092F87C /* UserDataViewModel.m */; };
 		8499BF871F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */; };
 		8499BF881F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */; };
 		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
@@ -2331,8 +2329,6 @@
 		848C531A1F4BDF740092F87C /* FaceIdentiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceIdentiViewController.swift; sourceTree = "<group>"; };
 		848C531D1F4C0C920092F87C /* thirdPartyAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = thirdPartyAuthViewController.swift; sourceTree = "<group>"; };
 		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
-		848C53231F4C2E550092F87C /* UserDataViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataViewModel.h; sourceTree = "<group>"; };
-		848C53241F4C2E550092F87C /* UserDataViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataViewModel.m; sourceTree = "<group>"; };
 		8499BF851F4FFDB700F193F9 /* UserBankCardListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserBankCardListViewController.h; sourceTree = "<group>"; };
 		8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserBankCardListViewController.m; sourceTree = "<group>"; };
 		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
@@ -3469,8 +3465,6 @@
 				84A635101F00FCA200146A8A /* AuthenticationViewModel.m */,
 				843FF1F31F20860B00ECCE16 /* PaymentViewModel.h */,
 				843FF1F41F20860B00ECCE16 /* PaymentViewModel.m */,
-				848C53231F4C2E550092F87C /* UserDataViewModel.h */,
-				848C53241F4C2E550092F87C /* UserDataViewModel.m */,
 				84DFBED11F4D72050009DAB9 /* UserDataViewModel.h */,
 				84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */,
 			);
@@ -5098,8 +5092,8 @@
 				CC989C2F1F4D84A9000CDACF /* AuthenticationCenterViewController.m */,
 			);
 			path = AuthenticationCenter;
-           sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		84DFBEDB1F4D976F0009DAB9 /* HighRanding */ = {
 			isa = PBXGroup;
 			children = (
@@ -6223,7 +6217,6 @@
 				637636D21D768BE800E93289 /* RepayListViewController.m in Sources */,
 				63FC25001D98F7E9006F58F3 /* YYTextTransaction.m in Sources */,
 				CC0F1B991EE64A2A00A23651 /* ChangePasswordModel.m in Sources */,
-				848C53251F4C2E550092F87C /* UserDataViewModel.m in Sources */,
 				848394221EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */,
 				635AB7971BE2FE6600C32919 /* CashResult.m in Sources */,
 				63FC24F91D98F7E9006F58F3 /* YYTextRubyAnnotation.m in Sources */,
@@ -6429,7 +6422,6 @@
 				CC0DF98D1EA5B1090024841A /* CustomerCareerResult.m in Sources */,
 				CC0DF98E1EA5B1090024841A /* UIView+Extend.m in Sources */,
 				CC0DF98F1EA5B1090024841A /* SSKeychain.m in Sources */,
-				848C53261F4C2E550092F87C /* UserDataViewModel.m in Sources */,
 				CCF803281ED4249A003B7975 /* UnbundlingBankCardViewController.m in Sources */,
 				842C0B5E1ED59C7A00366D11 /* LoginParamModel.m in Sources */,
 				CC0DF9901EA5B1090024841A /* SDCycleScrollView.m in Sources */,
@@ -6952,7 +6944,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/Lib",
 					"$(PROJECT_DIR)/fxdProduct/Third/MGKit",
 				);
 				GCC_PREFIX_HEADER = fxdProduct/fxdProduct.pch;
@@ -6972,20 +6963,16 @@
 					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
 					"\"${PODS_ROOT}/Headers/Public/OpenUDID\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"\"$(SRCROOT)/../../dist/include\"",
 				);
 				INFOPLIST_FILE = fxdProduct/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/fxdProduct/Third/dist",
 					"$(PROJECT_DIR)/fxdProduct/Third/BankCardRecogPro",
-					"$(PROJECT_DIR)/fxdProduct/Third/mp3Lame",
 					"$(PROJECT_DIR)/fxdProduct/Third/libSTLivenessController",
 					"$(PROJECT_DIR)/fxdProduct/Third/BSFinger",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/GtSdkLib",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 				);
@@ -7070,7 +7057,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/Lib",
 					"$(PROJECT_DIR)/fxdProduct/Third/MGKit",
 				);
 				GCC_PREFIX_HEADER = fxdProduct/fxdProduct.pch;
@@ -7090,20 +7076,16 @@
 					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
 					"\"${PODS_ROOT}/Headers/Public/OpenUDID\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"\"$(SRCROOT)/../../dist/include\"",
 				);
 				INFOPLIST_FILE = fxdProduct/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/fxdProduct/Third/dist",
 					"$(PROJECT_DIR)/fxdProduct/Third/BankCardRecogPro",
-					"$(PROJECT_DIR)/fxdProduct/Third/mp3Lame",
 					"$(PROJECT_DIR)/fxdProduct/Third/libSTLivenessController",
 					"$(PROJECT_DIR)/fxdProduct/Third/BSFinger",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/GtSdkLib",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 				);
@@ -7210,7 +7192,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/Lib",
 					"$(PROJECT_DIR)/fxdProduct/Third/MGKit",
 				);
 				GCC_PREFIX_HEADER = fxdProduct/fxdProduct.pch;
@@ -7230,20 +7211,16 @@
 					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
 					"\"${PODS_ROOT}/Headers/Public/OpenUDID\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"\"$(SRCROOT)/../../dist/include\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/fxdProduct/fxdProductDev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/fxdProduct/Third/dist",
 					"$(PROJECT_DIR)/fxdProduct/Third/BankCardRecogPro",
-					"$(PROJECT_DIR)/fxdProduct/Third/mp3Lame",
 					"$(PROJECT_DIR)/fxdProduct/Third/libSTLivenessController",
 					"$(PROJECT_DIR)/fxdProduct/Third/BSFinger",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/GtSdkLib",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 				);
@@ -7327,7 +7304,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/Lib",
 					"$(PROJECT_DIR)/fxdProduct/Third/MGKit",
 				);
 				GCC_PREFIX_HEADER = fxdProduct/fxdProduct.pch;
@@ -7347,20 +7323,16 @@
 					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
 					"\"${PODS_ROOT}/Headers/Public/OpenUDID\"",
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"\"$(SRCROOT)/../../dist/include\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/fxdProduct/fxdProductDev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/fxdProduct/Third/dist",
 					"$(PROJECT_DIR)/fxdProduct/Third/BankCardRecogPro",
-					"$(PROJECT_DIR)/fxdProduct/Third/mp3Lame",
 					"$(PROJECT_DIR)/fxdProduct/Third/libSTLivenessController",
 					"$(PROJECT_DIR)/fxdProduct/Third/BSFinger",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
-					"$(PROJECT_DIR)/fxdProduct/Third/GtSdkLib",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 				);
