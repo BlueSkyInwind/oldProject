@@ -65,11 +65,11 @@
 -(void)homeDataRequest{
     
     HomeParam * homeParam = [[HomeParam alloc]init];
-    homeParam.platformType = PLATFORM;
-    homeParam.channel_ = @"1";
-    homeParam.position_ = @"1";
+//    homeParam.platformType = PLATFORM;
+    homeParam.channel_ = PLATFORM;
+//    homeParam.position_ = @"1";
     homeParam.juid = [Utility sharedUtility].userInfo.juid == nil ? @"" : [Utility sharedUtility].userInfo.juid;
-                                                                            
+    homeParam.token = [Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [Utility sharedUtility].userInfo.tokenStr;
     NSDictionary * paramDic = [homeParam toDictionary];
     //http://192.168.12.109:8005/apigw/client/summary?
 

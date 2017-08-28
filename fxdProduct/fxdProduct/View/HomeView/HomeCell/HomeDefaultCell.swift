@@ -26,23 +26,22 @@ class HomeDefaultCell: UITableViewCell {
     
     var leftLabel: UILabel?
     var rightLabel: UILabel?
-    var leftTitleArray = [""]
-    var rightContentArray = [""]
 
     var thirdTitleArray = [""]
     
     var defaultHeadLabel :UILabel?
-    
-    var drawingTitle = ""
+
     var homeProductFirstArray = [""]
     var homeProductOtherArray = [""]
     
     var isWait = false
+    var homeProductData = HomeProductList()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
 
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -424,20 +423,20 @@ extension HomeDefaultCell{
             make.right.equalTo(bgImage.snp.right).offset(0)
             if UI_IS_IPONE5{
             
-                make.height.equalTo((leftTitleArray.count*36)+60)
+                make.height.equalTo((homeProductData.data.infoList.count*36)+60)
             }else{
             
-                make.height.equalTo((leftTitleArray.count*46)+60)
+                make.height.equalTo((homeProductData.data.infoList.count*46)+60)
             }
             
         }
         
         var i = 0
-        if drawingTitle != "" {
+        if homeProductData.data.warnText != "" && homeProductData.data.warnText != nil {
             let drawingTitleLabel = UILabel()
             drawingTitleLabel.textAlignment = .center
             drawingTitleLabel.textColor = UIColor.init(red: 237/255.0, green: 28/255.0, blue: 36/255.0, alpha: 1.0)
-            drawingTitleLabel.text = drawingTitle
+            drawingTitleLabel.text = homeProductData.data.warnText
             drawingTitleLabel.font = UIFont.systemFont(ofSize: 19)
             bgView.addSubview(drawingTitleLabel)
             drawingTitleLabel.snp.makeConstraints({ (make) in
@@ -448,7 +447,7 @@ extension HomeDefaultCell{
             i = 30
         }
         var j = 0
-        for index in 0..<leftTitleArray.count {
+        for index in 0..<homeProductData.data.infoList.count {
             let indexView = setView()
             bgView.addSubview(indexView)
             
@@ -471,12 +470,12 @@ extension HomeDefaultCell{
                 make.right.equalTo(bgView.snp.right).offset(0)
                 make.height.equalTo(30)
             })
-            leftLabel?.text = leftTitleArray[index]
-            rightLabel?.text = rightContentArray[index]
+            leftLabel?.text = homeProductData.data.infoList[index].label
+            rightLabel?.text = homeProductData.data.infoList[index].value
         }
         
         let bottomBtn = UIButton()
-        bottomBtn.setTitle("点击提款", for: .normal)
+        bottomBtn.setTitle(homeProductData.data.buttonText, for: .normal)
         bottomBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         bottomBtn.setTitleColor(UIColor.white, for: .normal)
         bottomBtn.backgroundColor = UI_MAIN_COLOR

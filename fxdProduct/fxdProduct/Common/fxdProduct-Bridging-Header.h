@@ -20,7 +20,7 @@
 #import "MBPAlertView.h"
 #import "UIColor+Extend.h"
 #import "MoxieSDK.h"
-
+#import "HomeProductList.h"
 
 
 #endif /* fxdProduct_Bridging_Header_h */

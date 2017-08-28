@@ -68,7 +68,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     
     //判断屏幕尺寸适配
     AppDelegate *myDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    
+    myDelegate.isShow = true;
     if(_k_h > 480){
         myDelegate.autoSizeScaleX = _k_w/320;
         myDelegate.autoSizeScaleY = _k_h/568;
@@ -200,6 +200,9 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    AppDelegate *myDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    myDelegate.isShow = false;
     [[DataBaseManager shareManager] dbClose];
     [[BSFingerSDK sharedInstance] cancelAll];
 }

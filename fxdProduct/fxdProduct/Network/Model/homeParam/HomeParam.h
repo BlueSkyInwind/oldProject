@@ -14,6 +14,6 @@
 @property(nonatomic,strong)NSString<Optional> * channel_;
 @property(nonatomic,strong)NSString<Optional> * position_;
 @property(nonatomic,strong)NSString<Optional> * juid;
-
+@property(nonatomic,strong)NSString<Optional> * token;
 
 @end

@@ -22,7 +22,9 @@
 + (NSDictionary *)modelContainerPropertyGenericClass {
     return @{@"bannerList":[HomeBannerList class],
              @"popList":[HomePopList class],
-             @"productList":[HomeProductsList class]
+             @"productList":[HomeProductsList class],
+             @"infoList":[HomeInfoList class],
+             @"thirdProductList":[HomeThirdProductList class],
              };
 }
 
@@ -68,3 +70,13 @@
 }
 
 @end
+@implementation HomeInfoList
+
+
+
+@end
+@implementation HomeThirdProductList
+
+
+@end
+

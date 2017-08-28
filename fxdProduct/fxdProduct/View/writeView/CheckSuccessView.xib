@@ -39,8 +39,8 @@
                             <color key="textColor" red="0.40784313729999999" green="0.40000000000000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIu-75-8Un">
-                            <rect key="frame" x="-49" y="73.5" width="473" height="48"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已逾期" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIu-75-8Un">
+                            <rect key="frame" x="85.5" y="73.5" width="204" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="nHU-Ck-bD4"/>
                             </constraints>
@@ -98,11 +98,11 @@
                         <constraint firstAttribute="bottom" secondItem="Kea-G0-Hp2" secondAttribute="bottom" constant="-19" id="Eeo-IO-egh"/>
                         <constraint firstAttribute="bottom" secondItem="fN5-wJ-1L6" secondAttribute="bottom" constant="12" id="Eg8-IJ-uhg"/>
                         <constraint firstAttribute="trailing" secondItem="fN5-wJ-1L6" secondAttribute="trailing" constant="31" id="IAd-Yu-QNT"/>
-                        <constraint firstItem="AIu-75-8Un" firstAttribute="trailing" secondItem="FZr-as-c68" secondAttribute="trailing" constant="134.5" id="IOM-az-WIN"/>
+                        <constraint firstItem="AIu-75-8Un" firstAttribute="trailing" secondItem="FZr-as-c68" secondAttribute="trailing" id="IOM-az-WIN"/>
                         <constraint firstItem="AIu-75-8Un" firstAttribute="centerY" secondItem="uBi-V4-ceP" secondAttribute="centerY" constant="-2.5" id="Ifq-PY-NyL"/>
                         <constraint firstItem="fN5-wJ-1L6" firstAttribute="leading" secondItem="uBi-V4-ceP" secondAttribute="leading" constant="31" id="RXn-i8-utG"/>
                         <constraint firstAttribute="bottom" secondItem="FZr-as-c68" secondAttribute="bottom" constant="22" id="Ube-lc-mTw"/>
-                        <constraint firstItem="AIu-75-8Un" firstAttribute="leading" secondItem="FZr-as-c68" secondAttribute="leading" constant="-134.5" id="XHV-vR-ygg"/>
+                        <constraint firstItem="AIu-75-8Un" firstAttribute="leading" secondItem="FZr-as-c68" secondAttribute="leading" id="XHV-vR-ygg"/>
                         <constraint firstItem="nbm-VU-cGe" firstAttribute="centerX" secondItem="uBi-V4-ceP" secondAttribute="centerX" id="YO6-Tq-kSP"/>
                         <constraint firstItem="Kea-G0-Hp2" firstAttribute="leading" secondItem="uBi-V4-ceP" secondAttribute="leading" id="eO7-vc-Di9"/>
                         <constraint firstItem="Kea-G0-Hp2" firstAttribute="top" secondItem="nbm-VU-cGe" secondAttribute="bottom" constant="17" id="m6d-Nf-hYp"/>
