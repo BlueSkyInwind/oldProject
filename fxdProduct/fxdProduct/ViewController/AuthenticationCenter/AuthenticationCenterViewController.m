@@ -7,7 +7,6 @@
 //
 
 #import "AuthenticationCenterViewController.h"
-#import "SeniorCertificationView.h"
 @interface AuthenticationCenterViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 {
