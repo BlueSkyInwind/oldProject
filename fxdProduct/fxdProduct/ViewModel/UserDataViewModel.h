@@ -11,8 +11,17 @@
 
 @interface UserDataViewModel : ViewModelClass
 
+/**
+ 查询用户资料的录入进度
+
+ @param product_id_ 产品
+ */
+-(void)obtainCustomerAuthInfoProgress:(NSString *)product_id_;
+
 //上传活体认证信息
 -(void)uploadLiveIdentiInfo:(FaceIDData *)imagesDic;
+
+
 #pragma  mark - 社保  公积金
 
 /**
@@ -33,5 +42,10 @@
  获取状态
  */
 -(void)obtainhighRankingStatus;
+
+
+
+
+
 
 @end

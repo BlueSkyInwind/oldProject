@@ -72,17 +72,12 @@
 //                         @"医疗/制药/环保",@"其他"];
     dataColor = [NSMutableArray array];
     dataListAll = [NSMutableArray array];
-    if (UI_IS_IPHONE5) {
-        self.automaticallyAdjustsScrollViewInsets = false;
-    }
-    
+
     NSString *device = [[UIDevice currentDevice] systemVersion];
     if (device.floatValue>10) {
-        
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
-        
-        self.automaticallyAdjustsScrollViewInsets = false;
+//        self.automaticallyAdjustsScrollViewInsets = false;
     }
     
     for (int i = 0; i < 6; i++) {

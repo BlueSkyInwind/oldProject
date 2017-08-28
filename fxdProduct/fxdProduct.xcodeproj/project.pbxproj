@@ -623,6 +623,8 @@
 		84DFBED41F4D72050009DAB9 /* UserDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */; };
 		84DFBEDE1F4D97D50009DAB9 /* HighRandingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBEDD1F4D97D50009DAB9 /* HighRandingModel.m */; };
 		84DFBEDF1F4D97D50009DAB9 /* HighRandingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBEDD1F4D97D50009DAB9 /* HighRandingModel.m */; };
+		84E2BDE01F53F3FB00E447EB /* UserDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E2BDDF1F53F3FB00E447EB /* UserDataModel.m */; };
+		84E2BDE11F53F3FB00E447EB /* UserDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E2BDDF1F53F3FB00E447EB /* UserDataModel.m */; };
 		84ED5B581F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B591F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
@@ -2339,6 +2341,8 @@
 		84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataViewModel.m; sourceTree = "<group>"; };
 		84DFBEDC1F4D97D50009DAB9 /* HighRandingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighRandingModel.h; sourceTree = "<group>"; };
 		84DFBEDD1F4D97D50009DAB9 /* HighRandingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighRandingModel.m; sourceTree = "<group>"; };
+		84E2BDDE1F53F3FB00E447EB /* UserDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataModel.h; sourceTree = "<group>"; };
+		84E2BDDF1F53F3FB00E447EB /* UserDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataModel.m; sourceTree = "<group>"; };
 		84ED5B511F4AB9E6004C0A59 /* MoxieSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoxieSDK.h; sourceTree = "<group>"; };
 		84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMoxieSDK.a; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
@@ -4519,6 +4523,7 @@
 				8438F71A1EE164E20089E121 /* changePassword */,
 				6313DC061BB39BCC00EB45DE /* Login */,
 				844E5F4D1ED94D7E00753671 /* Register */,
+				84E2BDDD1F53F3A700E447EB /* UserDataModel */,
 				84DFBEDB1F4D976F0009DAB9 /* HighRanding */,
 			);
 			path = Model;
@@ -5087,6 +5092,15 @@
 				84DFBEDD1F4D97D50009DAB9 /* HighRandingModel.m */,
 			);
 			path = HighRanding;
+			sourceTree = "<group>";
+		};
+		84E2BDDD1F53F3A700E447EB /* UserDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				84E2BDDE1F53F3FB00E447EB /* UserDataModel.h */,
+				84E2BDDF1F53F3FB00E447EB /* UserDataModel.m */,
+			);
+			path = UserDataModel;
 			sourceTree = "<group>";
 		};
 		84ED5B4F1F4AB9E6004C0A59 /* include */ = {
@@ -6227,6 +6241,7 @@
 				63A24C5E1BE063A90036E8EF /* NSDate+Extend.m in Sources */,
 				0F0650431BE219BF000DE94D /* LoanDoFindBaseClass.m in Sources */,
 				63D43EF61D41F76D0076AC7F /* YYCache.m in Sources */,
+				84E2BDE01F53F3FB00E447EB /* UserDataModel.m in Sources */,
 				63F254861E49A45900852CF1 /* HMScannerBorder.m in Sources */,
 				638A17011E517D9F00AB8AB6 /* LOTMask.m in Sources */,
 				843FF1F81F20863600ECCE16 /* PaymentDetailModel.m in Sources */,
@@ -6589,6 +6604,7 @@
 				CC0DFA2F1EA5B1090024841A /* PayMethodCell.m in Sources */,
 				CC0DFA301EA5B1090024841A /* NextViewCell.m in Sources */,
 				CC0DFA311EA5B1090024841A /* NSString+File.m in Sources */,
+				84E2BDE11F53F3FB00E447EB /* UserDataModel.m in Sources */,
 				CC0DFA331EA5B1090024841A /* MoreInfoCell.m in Sources */,
 				CC0DFA341EA5B1090024841A /* GetMoneyProcessBaseClass.m in Sources */,
 				CC0DFA351EA5B1090024841A /* NSDictionary+NilSafe.m in Sources */,
