@@ -35,6 +35,7 @@
 #import "EditCardsController.h"
 #import "UserDataViewModel.h"
 #import "HighRandingModel.h"
+#import "UserDataModel.h"
 
 
 @interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
@@ -45,7 +46,6 @@
     UIButton *_applyBtn;
     //职业信息返回信息
     CareerParse *_careerParse;
-    
     testView *_alertView;
     
     UIView *topView;
@@ -83,7 +83,7 @@
     _creditCardStatus = @"0";
     _socialSecurityStatus = @"0";
 
-    _subTitleArr = @[@"请完善您的个人信息",@"请完善您的联系人信息",@"请完善您的职业信息",@"请完成三方认证"];
+    _subTitleArr = @[@"请完善您的身份信息",@"请完善您的个人信息",@"请完善您的职业信息",@"请完成三方认证"];
     [self addBackItemRoot];
     [self configMoxieSDK];
     [self configTableview];
@@ -631,7 +631,7 @@
         }
         if (_nextStep.integerValue == -2) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
-//            return;
+            return;
         }
     
     switch (indexPath.row) {
@@ -671,9 +671,9 @@
             break;
         case 3:
         {
-//            if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0){
-//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
-//            }else {
+            if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0){
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+            }else {
                 [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
                     
                     thirdPartyAuthViewController * thirdPartyAuthVC = [[thirdPartyAuthViewController alloc]init];
@@ -685,7 +685,7 @@
                     [self.navigationController pushViewController:thirdPartyAuthVC animated:true];
             
                 }];
-//            }
+            }
         }
             break;
         default:
@@ -773,29 +773,29 @@
     //高级认证状态查询
     [self obtainHighRanking];
     
-    NSDictionary *paramDic = @{@"product_id_":_product_id,
-                               
-                               };
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_customerAuthInfo_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-            _nextStep = [[object objectForKey:@"result"] objectForKey:@"nextStep"];
-            _resultCode = [[object objectForKey:@"result"] objectForKey:@"resultcode"];
-            _rulesId = [[object objectForKey:@"result"] objectForKey:@"rulesid"];
-            _isMobileAuth = [[object objectForKey:@"result"] objectForKey:@"isMobileAuth"];
-            _isZmxyAuth = [[object objectForKey:@"result"] objectForKey:@"isZmxyAuth"];// 1 未认证    2 认证通过   3 认证未通过
-            _phoneAuthChannel = [[object objectForKey:@"result"] objectForKey:@"TRUCKS_"];  // 手机认证通道 JXL 表示聚信立，TC 表示天创认证
+    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
+    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([resultM.flag isEqualToString:@"0000"]) {
+            UserDataModel * userDataM = [[UserDataModel alloc]initWithDictionary:(NSDictionary *)resultM.result error:nil];
+            _nextStep = userDataM.nextStep;
+            _resultCode = userDataM.resultcode;
+            _rulesId = userDataM.rulesid;
+            _isMobileAuth = userDataM.isMobileAuth;
+            _isZmxyAuth = userDataM.isZmxyAuth;// 1 未认证    2 认证通过   3 认证未通过
+            _phoneAuthChannel = userDataM.TRUCKS_;  // 手机认证通道 JXL 表示聚信立，TC 表示天创认证
             if (_nextStep.integerValue == 4) {
-                _isInfoEditable = [[object objectForKey:@"result"] objectForKey:@"isInfoEditable"];
+                _isInfoEditable = userDataM.isInfoEditable;
             }
             [self setProcess];
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.msg];
         }
         [self.tableView.mj_header endRefreshing];
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         [self.tableView.mj_header endRefreshing];
     }];
+    [userDataVM obtainCustomerAuthInfoProgress:_product_id];
 }
 
 - (void)popViewFamily
@@ -906,12 +906,12 @@
 {
     view.layer.cornerRadius = 10;
     view.layer.masksToBounds = YES;
-
 }
 
 #pragma mark - 魔蝎信用卡以及社保集成
 //邮箱导入
 - (void)mailImportClick{
+    
     [MoxieSDK shared].taskType = @"email";
     [[MoxieSDK shared] startFunction];
 
@@ -1011,7 +1011,6 @@
     if (!taskId || !type) {
         return;
     }
-    
     if ([type isEqualToString:@"email"]) {
 //        _creditCardStatus = @"1";
         [self TheCreditCardInfoupload:taskId];
