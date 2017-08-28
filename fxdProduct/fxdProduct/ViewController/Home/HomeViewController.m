@@ -1066,6 +1066,7 @@
 #pragma mark 点击提款
 -(void)drawingBtnClick{
     NSLog(@"点击提款");
+    [self highLoanClick];
 }
 #pragma mark 点击立即申请
 -(void)applyBtnClick:(NSString *)money{
