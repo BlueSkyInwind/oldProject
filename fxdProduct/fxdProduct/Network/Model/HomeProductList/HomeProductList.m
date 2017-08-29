@@ -31,22 +31,6 @@
 
 @end
 
-@implementation HomeProductListProducts
-
-+ (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"ext_attr_":[HomeProductLisTextAttr class]};
-}
-+ (NSDictionary *)modelCustomPropertyMapper
-{
-    return @{@"id_":@"id"};
-}
-
-@end
-
-@implementation HomeProductLisTextAttr
-
-
-@end
 
 @implementation HomeBannerList
 
@@ -65,18 +49,25 @@
 
 @implementation HomeProductsList
 
-+ (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"products":[HomeProductListProducts class]};
-}
 
 @end
 @implementation HomeInfoList
 
 
-
 @end
+
 @implementation HomeThirdProductList
 
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"extAttr":[HomeThirdExtAttr class]};
+}
++ (NSDictionary *)modelCustomPropertyMapper
+{
+    return @{@"id_":@"id"};
+}
+@end
+
+@implementation HomeThirdExtAttr
 
 @end
 

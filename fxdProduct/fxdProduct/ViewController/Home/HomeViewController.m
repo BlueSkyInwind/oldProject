@@ -13,17 +13,11 @@
 #import "LoginViewController.h"
 #import "BaseNavigationViewController.h"
 #import "UserStateModel.h"
-#import "ReturnMsgBaseClass.h"
-#import "ExpressViewController.h"
 #import "HomePopView.h"
 #import "LewPopupViewController.h"
-#import "PCCircleViewConst.h"
 #import "HomePop.h"
 #import "FXDWebViewController.h"
-#import "MessageCenterViewController.h"
-#import "HomeProductCell.h"
 #import "SDCycleScrollView.h"
-#import "HomeBottomCell.h"
 #import "RepayRecordController.h"
 #import "UserDefaulInfo.h"
 #import "LoanSureSecondViewController.h"
@@ -31,29 +25,23 @@
 #import "CycleTextCell.h"
 #import "PayLoanChooseController.h"
 #import "QRPopView.h"
-#import "LoanProcessViewController.h"
-#import "LoanProcessModel.h"
 #import "LoanRecordParse.h"
 #import "RepayRequestManage.h"
-//#import "ContactClass.h"
 #import "UserDataViewController.h"
-#import "HomeBannerModel.h"
 #import "RateModel.h"
 #import "HomeProductList.h"
 #import "CheckViewModel.h"
 #import "QryUserStatusModel.h"
 #import "GetCaseInfo.h"
 #import "P2PViewController.h"
-#import "ExpressCreditRefuseView.h"
-#import "HomeRefuseCell.h"
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "LoginViewModel.h"
 #import "FirstBorrowViewController.h"
 #import "AppDelegate.h"
 #import "AuthenticationCenterViewController.h"
-@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeRefuseCellDelegate,HomeDefaultCellDelegate>
+@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate>
 {
-    ReturnMsgBaseClass *_returnParse;
+   
     LoanRecordParse *_loanRecordParse;
     NSString *_advTapToUrl;
     NSString *_shareContent;
@@ -62,7 +50,6 @@
     HomePopView *_popView;
     NSInteger _count;
     UserStateModel *_model;
-    HomeBannerModel *_bannerParse;
     HomeProductList *_homeProductList;
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
@@ -71,6 +58,7 @@
     BMKLocationService *_locService;
     double _latitude;
     double _longitude;
+
 }
 
 @end
@@ -82,14 +70,12 @@
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self setNavMesRightBar];
     
     self.navigationItem.title = @"发薪贷";
     _count = 0;
    _dataArray = [NSMutableArray array];
     [self setUpTableview];
     [self setNavQRRightBar];
-//    [self fatchAdv];
 
 }
 
@@ -107,7 +93,6 @@
         //获取进件状态
         [self getFxdCaseInfo];
     }
-//    [self fatchBanner];
     [self getHomeData];
 }
 
@@ -166,13 +151,10 @@
 }
 - (void)setUpTableview
 {
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeProductCell class]) bundle:nil] forCellReuseIdentifier:@"HomeProductCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HomeBottomCell class]) bundle:nil] forCellReuseIdentifier:@"HomeBottomCell"];
+    
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
     [self.tableView registerClass:[HomeDefaultCell class] forCellReuseIdentifier:@"HomeDefaultCell"];
-
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.backgroundColor = rgb(245, 245, 245);
     DLog(@"%lf",_k_w);
@@ -206,29 +188,6 @@
     [self lew_presentPopupView:qrPopView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
         
     }];
-}
-
-- (void)setMessageBtn
-{
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"homemesage"] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(messageClick) forControlEvents:UIControlEventTouchUpInside];
-    //    btn.frame = CGRectMake(100, 25, 21, 21);
-    [self.view addSubview:btn];
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.equalTo(@21);
-        make.height.equalTo(@21);
-        make.right.equalTo(self.view.mas_right).offset(-15);
-        make.top.equalTo(@25);
-        
-    }];
-}
-
-- (void)messageClick
-{
-    MessageCenterViewController *messView = [MessageCenterViewController new];
-    [self.navigationController pushViewController:messView animated:YES];
 }
 
 - (void)popView:(HomeProductList *)model
@@ -281,20 +240,6 @@
     }
 }
 
-- (void)highSeeExpenses
-{
-    ExpressViewController *expressVC = [[ExpressViewController alloc] init];
-    expressVC.productId = SalaryLoan;
-    [self.navigationController pushViewController:expressVC animated:YES];
-}
-
-- (void)lowSeeExpenses
-{
-    ExpressViewController *expressVC = [[ExpressViewController alloc] init];
-    expressVC.productId = RapidLoan;
-    [self.navigationController pushViewController:expressVC animated:YES];
-}
-
 #pragma mark - TableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -313,19 +258,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    NSInteger i = 0;
-//    if (_dataArray.count>0) {
-//        if ([_homeProductList.data.productList.type isEqualToString:@"0"]) {
-//            i = _dataArray.count + 1;
-//            
-//        }else{
-//            i = 2;
-//        }
-//    }else{
-//        i = 1;
-//    }
-//    return i;
-    
+
+    if (_dataArray.count>0) {
+        return _dataArray.count + 1;
+    }
     return 2;
 
 }
@@ -337,66 +273,42 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSInteger i = 0;
-//    if (_dataArray.count > 0) {
-//        if ([_homeProductList.data.productList.type isEqualToString:@"0"]) {
-//            if (_dataArray.count == 1) {
-//                i = 3;
-//            }else{
-//            
-//                i = _dataArray.count;
-//            }
-//            
-//        }else{
-//            i = 1;
-//        }
-//    }else{
-//    
-//        i = 1;
-//    }
-//    if (indexPath.section == 0) {
-//        return 30.f;
-//    }else{
-//    
-//        if (UI_IS_IPHONE5) {
-//            return (_k_h-0.5*_k_w-155)/i;
-//        }else{
-//            
-//            return (_k_h-0.5*_k_w-155)/i;
-//        }
-//    }
-//    
-//    if (indexPath.section == 0) {
-//        return 30.f;
-//    }else if(indexPath.section == 1){
-//        if (UI_IS_IPHONE5) {
-//            return 180.0f;
-//        }else{
-//            return 210.0f;
-//        }
-//        
-//        
-//    }else{
-//    
-//        if (UI_IS_IPHONE5) {
-//            return (_k_h-0.5*_k_w-330);
-//        }else{
-//            
-//            return (_k_h-0.5*_k_w-360);
-//        }
-//    }
-    
+
     if (indexPath.section == 0) {
         return 30.f;
     }else {
         
-        if (UI_IS_IPHONE5) {
-            return (_k_h-0.5*_k_w-155);
-        }else{
+        if (_dataArray.count>0) {
+            
+            if (indexPath.section == 1) {
+                if (UI_IS_IPHONE5) {
 
-            return (_k_h-0.5*_k_w-155);
-        }
+                    return (180);
+                
+                }else{
+
+                    return (210);
+                }
+            }else{
+                if (UI_IS_IPHONE5) {
+
+                    return (_k_h-0.5*_k_w-330);
+                    
+                }else{
+                    
+                    return (_k_h-0.5*_k_w-360);
+                }
+              
+            }
+        }else{
         
+            if (UI_IS_IPHONE5) {
+                return (_k_h-0.5*_k_w-155);
+            }else{
+                
+                return (_k_h-0.5*_k_w-155);
+            }
+        }
     }
 }
 
@@ -407,8 +319,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    HomeProductCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeProductCell"];
-//    cell.helpImage.hidden = true;
+
     if (indexPath.section == 0) {
         CycleTextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CycleTextCell"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_cycleICON"]];
@@ -456,27 +367,38 @@
     homeCell.backgroundColor = rgb(245, 245, 245);
     homeCell.selected = NO;
     homeCell.delegate = self;
-    
+    [homeCell.defaultBgImage removeFromSuperview];
+    [homeCell.productFirstBgImage removeFromSuperview];
+    [homeCell.productSecondBgImage removeFromSuperview];
+    [homeCell.refuseBgImage removeFromSuperview];
+    [homeCell.drawingBgImage removeFromSuperview];
+    [homeCell.otherPlatformsBgView removeFromSuperview];
     //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中
+    //
     
+     [homeCell removeFromSuperview];
+    homeCell.homeProductData = _homeProductList;
     switch (_homeProductList.data.flag.integerValue) {
+           
         case 1:
             [homeCell setupDefaultUI];
             break;
         case 2:
+        
             if (indexPath.section == 1) {
-                homeCell.homeProductFirstArray = @[@"home_01",@"工薪贷",@"home_04",@"2000元",@"5-50周"];
+            
                 [homeCell productListFirst];
                 return homeCell;
             }
-            homeCell.homeProductOtherArray = @[@"home_02",@"急速贷",@"home_05",@"1000元",@"14天"];
-            homeCell.isWait = true;
+
             [homeCell productListOther];
             break;
         case 3:
+
             [homeCell setupRefuseUI];
             break;
         case 4:
+
             [homeCell setupOtherPlatformsUI];
             break;
         case 5:
@@ -484,28 +406,12 @@
         case 7:
         case 8:
 
-            homeCell.homeProductData = _homeProductList;
             [homeCell setupDrawingUI];
             break;
         default:
             break;
     }
-    
-//    [homeCell setupDefaultUI];
-//    [homeCell setupRefuseUI];
-//    [homeCell setupOtherPlatformsUI];
-//    homeCell.leftTitleArray = @[@"申请产品：",@"借款金额：",@"借款周期：",@"每周还款：",@"最近账单日："];
-//    homeCell.rightContentArray = @[@"工薪贷",@"2000元",@"5-50周",@"108元",@"2016-3-12"];
-//    homeCell.drawingTitle = @"您已逾期";
-//    [homeCell setupDrawingUI];
-//    if (indexPath.section == 1) {
-//        homeCell.homeProductFirstArray = @[@"home_01",@"工薪贷",@"home_04",@"2000元",@"5-50周"];
-//        [homeCell productListFirst];
-//        return homeCell;
-//    }
-//    homeCell.homeProductOtherArray = @[@"home_02",@"急速贷",@"home_05",@"1000元",@"14天"];
-//    homeCell.isWait = true;
-//    [homeCell productListOther];
+
     return homeCell;
 
 }
@@ -534,26 +440,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-//    if (indexPath.section>0&&_dataArray.count+1 !=indexPath.section) {
-//        
-//        HomeProductListProducts *product = _dataArray[indexPath.section-1];
-//        
-//        if ([product.isOverLimit boolValue]) {
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"您申请的产品今日额度已满，请尝试其他产品或明天再来"];
-//            return;
-//        }
-//        if ([product.id_ isEqualToString:SalaryLoan]) {
-//            [self highLoanClick];
-//        }
-//        if ([product.id_ isEqualToString:RapidLoan]) {
-//            [self lowLoan];
-//        }
-//        if ([product.id_ isEqualToString:WhiteCollarLoan]) {
-//            [self whiteCollarLoanClick];
-//            //        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"本产品目前仅开放微信公众号用户申请，请关注“急速发薪”微信公众号进行申请"];
-//        }
-//    }
+
 }
 
 #pragma mak - SDCycleScrollViewDelegate
@@ -660,14 +547,6 @@
 
 }
 
-- (void)expense
-{
-    DLog(@"费用说明");
-    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = [NSString stringWithFormat:@"%@%@?title=%@&type=%@",_H5_url,_loanDetial_url,@"loanDetail",@"1"];
-    [self.navigationController pushViewController:webVC animated:true];
-}
-
 - (void)repayRecordClick
 {
     if ([Utility sharedUtility].loginFlage) {
@@ -687,13 +566,13 @@
         
         _homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
         [_dataArray removeAllObjects];
-        for (HomeProductListProducts *product in _homeProductList.data.productList.products) {
+        for (HomeProductList *product in _homeProductList.data.productList) {
             [_dataArray addObject:product];
         }
         
-        if ([_homeProductList.data.productList.type isEqualToString:@"1"]) {
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_homeProductList.data.productList.refuseMsg];
-        }
+//        if ([_homeProductList.data.productList.type isEqualToString:@"1"]) {
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_homeProductList.data.productList.refuseMsg];
+//        }
         
         NSMutableArray *filesArr = [NSMutableArray array];
         for (HomeBannerList *file in _homeProductList.data.bannerList) {
@@ -719,31 +598,6 @@
     }];
     [homeViewModel homeDataRequest];
     
-}
-
-
-/**
- 获取借款进度
- */
-- (void)loanProcess
-{
-    DLog(@"借款进度");
-    HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
-    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        LoanProcessModel *loanProcess = [LoanProcessModel yy_modelWithJSON:returnValue];
-        if ([loanProcess.flag isEqualToString:@"0000"]) {
-            
-            LoanProcessViewController *processVC = [[LoanProcessViewController alloc] init];
-            processVC.loanProcessParse = loanProcess;
-            [self.navigationController pushViewController:processVC animated:true];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:loanProcess.msg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [homeViewModel fetchLoanProcess];
 }
 
 
@@ -1064,6 +918,7 @@
 #pragma mark 点击提款
 -(void)drawingBtnClick{
     NSLog(@"点击提款");
+    [self highLoanClick];
 }
 #pragma mark 点击立即申请
 -(void)applyBtnClick:(NSString *)money{
@@ -1083,5 +938,21 @@
     NSLog(@"我要借款");
 }
 
+
+#pragma mark 点击产品列表
+-(void)productBtnClick:(NSString *)productId{
+
+    if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:RapidLoan]) {
+        
+    }else{
+    
+        FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+        webVC.urlStr = productId;
+        [self.navigationController pushViewController:webVC animated:true];
+    }
+    
+    NSLog(@"产品productId = %@",productId);
+    
+}
 
 @end

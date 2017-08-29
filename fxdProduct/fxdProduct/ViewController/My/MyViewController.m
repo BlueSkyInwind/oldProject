@@ -7,7 +7,6 @@
 //
 
 #import "MyViewController.h"
-#import "MessageCenterViewController.h"
 #import "NextViewCell.h"
 #import "UserInfoViewController.h"
 #import "MyCardsViewController.h"

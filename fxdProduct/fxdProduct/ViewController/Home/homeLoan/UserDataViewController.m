@@ -165,11 +165,11 @@
     [productListViewModel setBlockWithReturnBlock:^(id returnValue) {
       HomeProductList *homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
 
-        if ([homeProductList.data.productList.type isEqualToString:@"1"]) {
-            _applyBtn.enabled = NO;
-            _applyBtn.hidden = YES;
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:homeProductList.data.productList.refuseMsg];
-        }
+//        if ([homeProductList.data.productList.type isEqualToString:@"1"]) {
+//            _applyBtn.enabled = NO;
+//            _applyBtn.hidden = YES;
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:homeProductList.data.productList.refuseMsg];
+//        }
     } WithFaileBlock:^{
         
     }];

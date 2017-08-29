@@ -16,7 +16,7 @@ class HomeRefuseThirdView: UIView {
     var qutaLabel: UILabel?
     var termLabel: UILabel?
     var feeLabel: UILabel?
-    var descImage : UIImageView?
+    var descBtn : UIButton?
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -46,6 +46,8 @@ extension HomeRefuseThirdView{
         leftImageView?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.snp.centerY)
             make.left.equalTo(view.snp.left).offset(25)
+            make.width.equalTo(57)
+            make.height.equalTo(57)
         })
         
         titleLabel = UILabel()
@@ -87,12 +89,14 @@ extension HomeRefuseThirdView{
             make.height.equalTo(15)
         })
         
-        descImage = UIImageView()
-        view.addSubview(descImage!)
-        descImage?.snp.makeConstraints({ (make) in
-            make.top.equalTo((termLabel?.snp.bottom)!).offset(5)
-            make.left.equalTo((leftImageView?.snp.right)!).offset(8)
+        descBtn = UIButton()
+        descBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         
+        view.addSubview(descBtn!)
+        descBtn?.snp.makeConstraints({ (make) in
+            make.top.equalTo((termLabel?.snp.bottom)!).offset(3)
+            make.left.equalTo((leftImageView?.snp.right)!).offset(8)
+            make.height.equalTo(20)
         })
         
         let lineImage = UIImageView()

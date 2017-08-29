@@ -416,6 +416,9 @@ NSString * const    _AuthenticationCenterBasicInformation_url    =    @"apigw/cl
 //联系人信息的完成状态
 NSString * const    _UserContactInfo_url    =    @"apigw/client/user/contact/info.jhtml";
 
+//首页状态查询
+NSString * const    _HomeState_url    =    @"apigw/client/summary.jhtml";
+
 #pragma mark - 合规接口
 
 //用户开户接口
