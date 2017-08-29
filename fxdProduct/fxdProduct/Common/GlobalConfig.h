@@ -44,7 +44,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 #define KCharacterNumber @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
-
 UIKIT_EXTERN NSString * const _main_url;
 UIKIT_EXTERN NSString * const _main_new_url;
 UIKIT_EXTERN NSString * const _ValidESB_url;
@@ -181,6 +180,7 @@ UIKIT_EXTERN NSString * const       _sjRecord_url;                  //首借免�
 UIKIT_EXTERN NSString * const       _shebaoupload_url;                  //社保认证信息提交
 UIKIT_EXTERN NSString * const       _TheCreditCardupload_url;                  //信用卡信息提交
 UIKIT_EXTERN NSString * const       _HighRankingStatus_url;                  //高级认证状态查询
+UIKIT_EXTERN NSString * const       _HomeState_url;                  //首页状态查询
 
 
 

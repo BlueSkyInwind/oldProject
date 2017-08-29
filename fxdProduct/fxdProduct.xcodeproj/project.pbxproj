@@ -2736,7 +2736,8 @@
 				0F6AAF371C30D8950060F137 /* MyCardCell.m */,
 				0F6AAF381C30D8950060F137 /* MyCardCell.xib */,
 			);
-			path = View;
+			name = View;
+			path = fxdProduct/View;
 			sourceTree = "<group>";
 		};
 		0FEA58521BE08EE3007F8A6D /* HomeView */ = {
@@ -3481,6 +3482,7 @@
 		636EE2F41B662ABB00A1A3ED = {
 			isa = PBXGroup;
 			children = (
+				0FEA58481BE08EE3007F8A6D /* View */,
 				636EE2FF1B662ABB00A1A3ED /* fxdProduct */,
 				636EE3191B662ABB00A1A3ED /* fxdProductTests */,
 				636EE2FE1B662ABB00A1A3ED /* Products */,
@@ -3509,7 +3511,6 @@
 				636EE3051B662ABB00A1A3ED /* AppDelegate.mm */,
 				63E86BB01B9ED2EB009BDB22 /* SetSome.h */,
 				63E86BB11B9ED2EB009BDB22 /* SetSome.m */,
-				0FEA58481BE08EE3007F8A6D /* View */,
 				63E076521B67114800E269F2 /* Common */,
 				63E076531B67114800E269F2 /* Network */,
 				636EE32A1B662E5C00A1A3ED /* Third */,

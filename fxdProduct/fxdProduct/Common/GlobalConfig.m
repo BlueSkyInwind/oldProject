@@ -47,7 +47,7 @@ NSString * const _main_new_url  =  @"http://192.168.13.173:8005/";
 //测试导流 192.168.6.133
 
 NSString * const _main_url  =   @"http://192.168.6.133/fxd-esb/esb/";
-NSString * const _main_new_url  =  @"http://192.168.13.173:8005/";
+NSString * const _main_new_url  =  @"http://service-apigateway.test.fxds:8005/";
 NSString * const _ValidESB_url  =   @"http://192.168.6.133/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
 NSString * const _p2P_url = @"http://192.168.6.133/fxd-esb/p2p/";
@@ -402,6 +402,9 @@ NSString * const    _TheCreditCardupload_url    =    @"apigw/client/resource/mxm
 
 //高级认证状态查询
 NSString * const    _HighRankingStatus_url    =    @"apigw/client/resource/fundtask.jhtml";
+
+//首页状态查询
+NSString * const    _HomeState_url    =    @"apigw/client/summary.jhtml";
 
 #pragma mark - 合规接口
 

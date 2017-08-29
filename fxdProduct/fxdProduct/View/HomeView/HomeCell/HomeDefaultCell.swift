@@ -9,8 +9,8 @@
 import UIKit
 import Masonry
 import SnapKit
+import SDWebImage
 
-//@objc(HomeDefaultCellDelegate)
 @objc protocol HomeDefaultCellDelegate: NSObjectProtocol {
     
     func advancedCertification()
@@ -18,6 +18,7 @@ import SnapKit
     func applyBtnClick(_ money: String)->Void
     func moreBtnClick()
     func loanBtnClick()
+    func productBtnClick(_ productId: String)->Void
 }
 
 class HomeDefaultCell: UITableViewCell {
@@ -26,16 +27,14 @@ class HomeDefaultCell: UITableViewCell {
     
     var leftLabel: UILabel?
     var rightLabel: UILabel?
-
-    var thirdTitleArray = [""]
-    
     var defaultHeadLabel :UILabel?
-
-    var homeProductFirstArray = [""]
-    var homeProductOtherArray = [""]
-    
-    var isWait = false
     var homeProductData = HomeProductList()
+    var defaultBgImage : UIImageView?
+    var refuseBgImage : UIImageView?
+    var otherPlatformsBgView : UIView?
+    var drawingBgImage : UIImageView?
+    var productFirstBgImage : UIImageView?
+    var productSecondBgImage : UIImageView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,11 +67,11 @@ extension HomeDefaultCell{
     //MARK:默认情况
     func setupDefaultUI(){
     
-        let bgImage = UIImageView()
-        bgImage.image = UIImage(named:"beijing big")
-        bgImage.isUserInteractionEnabled = true
-        self.addSubview(bgImage)
-        bgImage.snp.makeConstraints { (make) in
+        defaultBgImage = UIImageView()
+        defaultBgImage?.image = UIImage(named:"beijing big")
+        defaultBgImage?.isUserInteractionEnabled = true
+        self.addSubview(defaultBgImage!)
+        defaultBgImage?.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(10)
             make.left.equalTo(self).offset(20)
             make.right.equalTo(self).offset(-20)
@@ -84,16 +83,16 @@ extension HomeDefaultCell{
         defaultHeadLabel?.font = UIFont.systemFont(ofSize: 30)
         defaultHeadLabel?.textAlignment = .center
         defaultHeadLabel?.text = "3000元"
-        bgImage.addSubview(defaultHeadLabel!)
+        defaultBgImage?.addSubview(defaultHeadLabel!)
         defaultHeadLabel?.snp.makeConstraints({ (make) in
             if UI_IS_IPONE5{
-                make.top.equalTo(bgImage.snp.top).offset(15)
+                make.top.equalTo((defaultBgImage?.snp.top)!).offset(15)
             }else{
             
-                make.top.equalTo(bgImage.snp.top).offset(30)
+                make.top.equalTo((defaultBgImage?.snp.top)!).offset(30)
             }
             
-            make.centerX.equalTo(bgImage.snp.centerX)
+            make.centerX.equalTo((defaultBgImage?.snp.centerX)!)
             make.height.equalTo(30)
         })
         
@@ -102,10 +101,10 @@ extension HomeDefaultCell{
         label.textColor = UIColor.init(red: 128/255.0, green: 128/255.0, blue: 128/255.0, alpha: 1.0)
         label.text = "借款额度(元)"
         label.font = UIFont.systemFont(ofSize: 15)
-        bgImage.addSubview(label)
+        defaultBgImage?.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.top.equalTo((defaultHeadLabel?.snp.bottom)!).offset(8)
-            make.centerX.equalTo(bgImage.snp.centerX)
+            make.centerX.equalTo((defaultBgImage?.snp.centerX)!)
             make.height.equalTo(20)
         }
         
@@ -133,7 +132,7 @@ extension HomeDefaultCell{
         
         // 添加事件
         slider.addTarget(self, action: #selector(changed(slider:)), for: UIControlEvents.valueChanged)
-        bgImage.addSubview(slider)
+        defaultBgImage?.addSubview(slider)
         slider.snp.makeConstraints { (make) in
             if UI_IS_IPONE5{
             
@@ -141,8 +140,8 @@ extension HomeDefaultCell{
             }else{
                 make.top.equalTo(label.snp.bottom).offset(20)
             }
-            make.left.equalTo(bgImage.snp.left).offset(15)
-            make.right.equalTo(bgImage.snp.right).offset(-15)
+            make.left.equalTo((defaultBgImage?.snp.left)!).offset(15)
+            make.right.equalTo((defaultBgImage?.snp.right)!).offset(-15)
             
         }
         
@@ -150,12 +149,12 @@ extension HomeDefaultCell{
         leftLabel.text = "500元"
         leftLabel.font = UIFont.systemFont(ofSize: 15)
         leftLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
-        bgImage.addSubview(leftLabel)
+        defaultBgImage?.addSubview(leftLabel)
     
         leftLabel.snp.makeConstraints { (make) in
             
             make.top.equalTo(slider.snp.bottom).offset(-10)
-            make.left.equalTo(bgImage.snp.left).offset(15)
+            make.left.equalTo((defaultBgImage?.snp.left)!).offset(15)
             make.height.equalTo(15)
         }
         
@@ -163,10 +162,10 @@ extension HomeDefaultCell{
         rightLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
         rightLabel.text = "3000元"
         rightLabel.font = UIFont.systemFont(ofSize: 15)
-        bgImage.addSubview(rightLabel)
+        defaultBgImage?.addSubview(rightLabel)
         rightLabel.snp.makeConstraints { (make) in
             make.top.equalTo(slider.snp.bottom).offset(-10)
-            make.right.equalTo(bgImage.snp.right).offset(-15)
+            make.right.equalTo((defaultBgImage?.snp.right)!).offset(-15)
             make.height.equalTo(15)
         }
         
@@ -177,11 +176,11 @@ extension HomeDefaultCell{
         applyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         applyBtn.layer.cornerRadius = 5.0
         applyBtn.addTarget(self, action: #selector(applyBtnClick), for: .touchUpInside)
-        bgImage.addSubview(applyBtn)
+        defaultBgImage?.addSubview(applyBtn)
         applyBtn.snp.makeConstraints { (make) in
-            make.bottom.equalTo(bgImage.snp.bottom).offset(-60)
-            make.left.equalTo(bgImage.snp.left).offset(25)
-            make.right.equalTo(bgImage.snp.right).offset(-25)
+            make.bottom.equalTo((defaultBgImage?.snp.bottom)!).offset(-60)
+            make.left.equalTo((defaultBgImage?.snp.left)!).offset(25)
+            make.right.equalTo((defaultBgImage?.snp.right)!).offset(-25)
             make.height.equalTo(50)
         }
         
@@ -204,10 +203,10 @@ extension HomeDefaultCell{
         attrstr.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(2,1))
         attrstr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(2,1))
         bottomLabel.attributedText = attrstr
-        bgImage.addSubview(bottomLabel)
+        defaultBgImage?.addSubview(bottomLabel)
         bottomLabel.snp.makeConstraints { (make) in
             make.top.equalTo(applyBtn.snp.bottom).offset(10)
-            make.centerX.equalTo(bgImage.snp.centerX)
+            make.centerX.equalTo((defaultBgImage?.snp.centerX)!)
             make.height.equalTo(20)
         }
         
@@ -216,11 +215,11 @@ extension HomeDefaultCell{
     //MARK:不满60天被拒，升级高级认证
      func setupRefuseUI(){
     
-        let bgImage = UIImageView()
-        bgImage.image = UIImage(named:"beijing big")
-        bgImage.isUserInteractionEnabled = true
-        self.addSubview(bgImage)
-        bgImage.snp.makeConstraints { (make) in
+        refuseBgImage = UIImageView()
+        refuseBgImage?.image = UIImage(named:"beijing big")
+        refuseBgImage?.isUserInteractionEnabled = true
+        self.addSubview(refuseBgImage!)
+        refuseBgImage?.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(10)
             make.left.equalTo(self).offset(20)
             make.right.equalTo(self).offset(-20)
@@ -236,12 +235,11 @@ extension HomeDefaultCell{
             titleLabel.font = UIFont.systemFont(ofSize: 13)
         }
         titleLabel.textColor = UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0)
-        bgImage.addSubview(titleLabel)
+        refuseBgImage?.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(bgImage.snp.top).offset(43)
-//            make.centerX.equalTo(bgImage.snp.centerX)
-            make.left.equalTo(bgImage.snp.left).offset(15)
-            make.right.equalTo(bgImage.snp.right).offset(0)
+            make.top.equalTo((refuseBgImage?.snp.top)!).offset(43)
+            make.left.equalTo((refuseBgImage?.snp.left)!).offset(15)
+            make.right.equalTo((refuseBgImage?.snp.right)!).offset(0)
             make.height.equalTo(20)
         }
         
@@ -249,10 +247,10 @@ extension HomeDefaultCell{
         firstLabel.text = "一、60天后，更新基础资料"
         firstLabel.font = UIFont.systemFont(ofSize: 17)
         firstLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
-        bgImage.addSubview(firstLabel)
+        refuseBgImage?.addSubview(firstLabel)
         firstLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(30)
-            make.left.equalTo(bgImage.snp.left).offset(25)
+            make.left.equalTo((refuseBgImage?.snp.left)!).offset(25)
             make.height.equalTo(20)
         }
         
@@ -260,10 +258,10 @@ extension HomeDefaultCell{
         secondLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
         secondLabel.text = "二、添加高级认证"
         secondLabel.font = UIFont.systemFont(ofSize: 17)
-        bgImage.addSubview(secondLabel)
+        refuseBgImage?.addSubview(secondLabel)
         secondLabel.snp.makeConstraints { (make) in
             make.top.equalTo(firstLabel.snp.bottom).offset(30)
-            make.left.equalTo(bgImage.snp.left).offset(25)
+            make.left.equalTo((refuseBgImage?.snp.left)!).offset(25)
             make.height.equalTo(20)
         }
     
@@ -272,10 +270,10 @@ extension HomeDefaultCell{
         advancedCertificationBtn.setTitleColor(UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
         advancedCertificationBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         advancedCertificationBtn.addTarget(self, action: #selector(advancedCertificationClick), for: .touchUpInside)
-        bgImage.addSubview(advancedCertificationBtn)
+        refuseBgImage?.addSubview(advancedCertificationBtn)
         advancedCertificationBtn.snp.makeConstraints { (make) in
             make.top.equalTo(secondLabel.snp.bottom).offset(12)
-            make.centerX.equalTo(bgImage.snp.centerX)
+            make.centerX.equalTo((refuseBgImage?.snp.centerX)!)
             make.height.equalTo(44)
         }
     }
@@ -284,16 +282,24 @@ extension HomeDefaultCell{
     //MARK:信用评分不足，导流其他平台
     func setupOtherPlatformsUI(){
     
+        otherPlatformsBgView  = UIView()
+        self.addSubview(otherPlatformsBgView!)
+        otherPlatformsBgView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self).offset(0)
+            make.left.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(0)
+        })
         let titleLabel = UILabel()
         titleLabel.text = "您目前的信用评分不足，更新资料可提升(需60天后)"
         titleLabel.font = UIFont.systemFont(ofSize: 13)
-        titleLabel.textColor = UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0)
+        titleLabel.textColor = UI_MAIN_COLOR
         titleLabel.textAlignment = .center
-        self.addSubview(titleLabel)
+        otherPlatformsBgView?.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self).offset(10)
-            make.left.equalTo(self).offset(0)
-            make.right.equalTo(self).offset(0)
+            make.top.equalTo((otherPlatformsBgView?.snp.top)!).offset(20)
+            make.left.equalTo((otherPlatformsBgView?.snp.left)!).offset(0)
+            make.right.equalTo((otherPlatformsBgView?.snp.right)!).offset(0)
             make.height.equalTo(13)
         }
         
@@ -302,81 +308,71 @@ extension HomeDefaultCell{
         label.textAlignment = .center
         label.text = "先试试其他平台"
         label.font = UIFont.systemFont(ofSize: 12)
-        self.addSubview(label)
+        otherPlatformsBgView?.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.centerX.equalTo(self.snp.centerX)
+            make.centerX.equalTo((otherPlatformsBgView?.snp.centerX)!)
             make.height.equalTo(12)
         }
-        
-        let firstView = HomeRefuseThirdView()
-        firstView.backgroundColor = UIColor.white
-        self.addSubview(firstView)
-        firstView.snp.makeConstraints { (make) in
+        let bgView = UIView()
+        otherPlatformsBgView?.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
             make.top.equalTo(label.snp.bottom).offset(10)
-            make.left.equalTo(self).offset(0)
-            make.right.equalTo(self).offset(0)
-            make.height.equalTo(82)
+            make.left.equalTo((otherPlatformsBgView?.snp.left)!).offset(0)
+            make.right.equalTo((otherPlatformsBgView?.snp.right)!).offset(0)
+            make.height.equalTo(homeProductData.data.thirdProductList.count * 82)
         }
-        firstView.leftImageView?.image = UIImage(named:"logo_yongqianbao")
-        firstView.titleLabel?.text = "用钱宝"
-        firstView.qutaLabel?.text = "额度：最高5000元"
-        firstView.termLabel?.text = "期限：7-30天"
-        let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(firstView.termLabel?.text)!)
-        attrstr.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr.length-4))
-        firstView.termLabel?.attributedText = attrstr
-        firstView.feeLabel?.text = "费用：0.3%/日"
-        let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(firstView.feeLabel?.text)!)
-        attrstr1.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr1.length-5))
-        firstView.feeLabel?.attributedText = attrstr1
-        firstView.descImage?.image = UIImage(named:"zhuishi1")
         
-        let secondView = HomeRefuseThirdView()
-        secondView.backgroundColor = UIColor.white
-        self.addSubview(secondView)
-        secondView.snp.makeConstraints { (make) in
-            make.top.equalTo(firstView.snp.bottom).offset(0)
-            make.left.equalTo(self).offset(0)
-            make.right.equalTo(self).offset(0)
-            make.height.equalTo(82)
-        }
-        secondView.leftImageView?.image = UIImage(named:"logo_daima")
-        secondView.titleLabel?.text = "贷嘛"
-        secondView.qutaLabel?.text = "额度：最高5000元"
-        secondView.termLabel?.text = "期限：1-60月"
-        let attrstr2 : NSMutableAttributedString = NSMutableAttributedString(string:(secondView.termLabel?.text)!)
-        attrstr2.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr2.length-4))
-        secondView.termLabel?.attributedText = attrstr2
-        secondView.feeLabel?.text = "费用：0.35%-2%/月"
-        let attrstr3 : NSMutableAttributedString = NSMutableAttributedString(string:(secondView.feeLabel?.text)!)
-        attrstr3.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr3.length-5))
-        secondView.feeLabel?.attributedText = attrstr3
-        secondView.descImage?.image = UIImage(named:"zhushi2")
         
-        if !UI_IS_IPONE5 {
+        for index in 0..<homeProductData.data.thirdProductList.count {
+        
+            if index >= 2{
             
-            let thirdView = HomeRefuseThirdView()
-            thirdView.backgroundColor = UIColor.white
-            self.addSubview(thirdView)
-            thirdView.snp.makeConstraints { (make) in
-                make.top.equalTo(secondView.snp.bottom).offset(0)
-                make.left.equalTo(self).offset(0)
-                make.right.equalTo(self).offset(0)
-                make.height.equalTo(82)
+                if UI_IS_IPONE5{
+                
+                    continue
+                }
             }
-            thirdView.leftImageView?.image = UIImage(named:"logo_daima")
-            thirdView.titleLabel?.text = "平安i贷"
-            thirdView.qutaLabel?.text = "额度：最高5000元"
-            thirdView.termLabel?.text = "期限：20月"
-            let attrstr4 : NSMutableAttributedString = NSMutableAttributedString(string:(thirdView.termLabel?.text)!)
-            attrstr4.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr4.length-4))
-            thirdView.termLabel?.attributedText = attrstr4
-            thirdView.feeLabel?.text = "费用：1.25%/月"
-            let attrstr5 : NSMutableAttributedString = NSMutableAttributedString(string:(thirdView.feeLabel?.text)!)
-            attrstr5.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr5.length-4))
-            thirdView.feeLabel?.attributedText = attrstr5
-            thirdView.descImage?.image = UIImage(named:"zhushi3")
+            let thirdRefuseView = HomeRefuseThirdView()
+            thirdRefuseView.backgroundColor = UIColor.white
+            thirdRefuseView.isUserInteractionEnabled = true
+            thirdRefuseView.tag = index + 103
+            let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
+            thirdRefuseView.addGestureRecognizer(tapGest)
+            bgView.addSubview(thirdRefuseView)
+            thirdRefuseView.snp.makeConstraints({ (make) in
+                make.top.equalTo(bgView.snp.top).offset(index * 82)
+                make.left.equalTo(bgView.snp.left).offset(0)
+                make.right.equalTo(bgView.snp.right).offset(0)
+                make.height.equalTo(82)
+            })
+           
+            let url = URL(string: homeProductData.data.thirdProductList[index].extAttr.icon_)
+            thirdRefuseView.leftImageView?.sd_setImage(with: url)
+            
+            thirdRefuseView.titleLabel?.text = homeProductData.data.thirdProductList[index].name
+            thirdRefuseView.qutaLabel?.text = homeProductData.data.thirdProductList[index].principalTop
+            thirdRefuseView.termLabel?.text = homeProductData.data.thirdProductList[index].stagingTop
+            let name1 = "期限:"
+            let name2 = "-"
+            let name3 = "天"
+            thirdRefuseView.termLabel?.text = name1+homeProductData.data.thirdProductList[index].stagingBottom+name2+homeProductData.data.thirdProductList[index].stagingTop+name3
+            let name4 = "费用："
+            thirdRefuseView.feeLabel?.text = name4 + homeProductData.data.thirdProductList[0].extAttr.charge_desc_
+            let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.termLabel?.text)!)
+            attrstr.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr.length-4))
+            thirdRefuseView.termLabel?.attributedText = attrstr
+            let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.feeLabel?.text)!)
+            attrstr1.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr1.length-5))
+            thirdRefuseView.feeLabel?.attributedText = attrstr1
+            let str = homeProductData.data.thirdProductList[index].extAttr.tags[0]
+            thirdRefuseView.descBtn?.setTitle(str as? String, for: .normal)
+            thirdRefuseView.descBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
+            setCornerBorder(view: thirdRefuseView.descBtn!, borderColor: UI_MAIN_COLOR)
+            
+            
         }
+        
         
         let moreBtn = UIButton()
         moreBtn.setTitle("更多", for: .normal)
@@ -384,17 +380,17 @@ extension HomeDefaultCell{
         moreBtn.setTitleColor(UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
         moreBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         moreBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
-        self.addSubview(moreBtn)
+        otherPlatformsBgView?.addSubview(moreBtn)
         moreBtn.snp.makeConstraints { (make) in
             if UI_IS_IPONE5 {
             
-                make.top.equalTo(secondView.snp.bottom).offset(5)
+                make.bottom.equalTo(bgView.snp.bottom).offset(25)
             }else{
             
-                make.top.equalTo(secondView.snp.bottom).offset(87)
+                make.bottom.equalTo(bgView.snp.bottom).offset(25)
             }
             
-            make.centerX.equalTo(self.snp.centerX)
+            make.centerX.equalTo((otherPlatformsBgView?.snp.centerX)!)
             make.height.equalTo(20)
         }
         
@@ -404,11 +400,11 @@ extension HomeDefaultCell{
     //MARK:进件带提款
     func setupDrawingUI(){
     
-        let bgImage = UIImageView()
-        bgImage.image = UIImage(named:"beijing big")
-        bgImage.isUserInteractionEnabled = true
-        self.addSubview(bgImage)
-        bgImage.snp.makeConstraints { (make) in
+        drawingBgImage = UIImageView()
+        drawingBgImage?.image = UIImage(named:"beijing big")
+        drawingBgImage?.isUserInteractionEnabled = true
+        self.addSubview(drawingBgImage!)
+        drawingBgImage?.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(10)
             make.left.equalTo(self).offset(20)
             make.right.equalTo(self).offset(-20)
@@ -416,11 +412,11 @@ extension HomeDefaultCell{
         }
         
         let bgView = UIView()
-        bgImage.addSubview(bgView)
+        drawingBgImage?.addSubview(bgView)
         bgView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(bgImage.snp.centerY)
-            make.left.equalTo(bgImage.snp.left).offset(0)
-            make.right.equalTo(bgImage.snp.right).offset(0)
+            make.centerY.equalTo((drawingBgImage?.snp.centerY)!)
+            make.left.equalTo((drawingBgImage?.snp.left)!).offset(0)
+            make.right.equalTo((drawingBgImage?.snp.right)!).offset(0)
             if UI_IS_IPONE5{
             
                 make.height.equalTo((homeProductData.data.infoList.count*36)+60)
@@ -494,38 +490,51 @@ extension HomeDefaultCell{
     //MARK:产品列表，第一个
     func productListFirst(){
     
-        let bgImage = UIImageView()
-        bgImage.image = UIImage(named:"beijing small")
-        self.addSubview(bgImage)
-        bgImage.snp.makeConstraints { (make) in
+        productFirstBgImage = UIImageView()
+        productFirstBgImage?.isUserInteractionEnabled = true
+        productFirstBgImage?.image = UIImage(named:"beijing small")
+        productFirstBgImage?.tag = 101
+        let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
+        productFirstBgImage?.addGestureRecognizer(tapGest)
+        self.addSubview(productFirstBgImage!)
+        productFirstBgImage?.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(15)
             make.left.equalTo(self).offset(20)
             make.right.equalTo(self).offset(-20)
             make.bottom.equalTo(self).offset(0)
         }
+        
         let leftImage = UIImageView()
-        leftImage.image = UIImage(named:homeProductFirstArray[0])
-        bgImage.addSubview(leftImage)
+        let url = URL(string: homeProductData.data.productList[0].icon)
+        leftImage.sd_setImage(with: url)
+        productFirstBgImage?.addSubview(leftImage)
         leftImage.snp.makeConstraints { (make) in
-            make.top.equalTo(bgImage.snp.top).offset(20)
-            make.left.equalTo(bgImage.snp.left).offset(25)
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(20)
+            make.left.equalTo((productFirstBgImage?.snp.left)!).offset(25)
+            make.width.equalTo(38)
+            make.height.equalTo(38)
         }
         
         let titleLabel = UILabel()
         titleLabel.textColor = UIColor.init(red: 128/255.0, green: 128/255.0, blue: 128/255.0, alpha: 1.0)
         titleLabel.font = UIFont.systemFont(ofSize: 18)
-        titleLabel.text = homeProductFirstArray[1]
-        bgImage.addSubview(titleLabel)
+        titleLabel.text = homeProductData.data.productList[0].productName
+        productFirstBgImage?.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(bgImage.snp.top).offset(30)
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(30)
             make.left.equalTo(leftImage.snp.right).offset(8)
             make.height.equalTo(20)
         }
         let rightImage = UIImageView()
-        rightImage.image = UIImage(named:homeProductFirstArray[2])
-        bgImage.addSubview(rightImage)
+        
+        rightImage.image = UIImage(named:"home_04")
+        if homeProductData.data.productList[0].productId == "P001004"{
+        
+            rightImage.image = UIImage(named:"home_05")
+        }
+        productFirstBgImage?.addSubview(rightImage)
         rightImage.snp.makeConstraints { (make) in
-            make.top.equalTo(bgImage.snp.top).offset(30)
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(30)
             make.left.equalTo(titleLabel.snp.right).offset(20)
         }
         
@@ -533,22 +542,22 @@ extension HomeDefaultCell{
         moneyLabel.textColor = UIColor.black
         moneyLabel.textAlignment = .center
         moneyLabel.font = UIFont.systemFont(ofSize: 30)
-        moneyLabel.text = homeProductFirstArray[3]
-        bgImage.addSubview(moneyLabel)
+        moneyLabel.text = homeProductData.data.productList[0].amount
+        productFirstBgImage?.addSubview(moneyLabel)
         moneyLabel.snp.makeConstraints { (make) in
             make.top.equalTo(rightImage.snp.bottom).offset(10)
-            make.centerX.equalTo(bgImage.snp.centerX)
+            make.centerX.equalTo((productFirstBgImage?.snp.centerX)!)
             make.height.equalTo(30)
         }
         
         let termLabel = UILabel()
         termLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
         termLabel.font = UIFont.systemFont(ofSize: 14)
-        termLabel.text = homeProductFirstArray[4]
-        bgImage.addSubview(termLabel)
+        termLabel.text = homeProductData.data.productList[0].period
+        productFirstBgImage?.addSubview(termLabel)
         termLabel.snp.makeConstraints { (make) in
             make.top.equalTo(rightImage.snp.bottom).offset(20)
-            make.right.equalTo(bgImage.snp.right).offset(-30)
+            make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-30)
             make.height.equalTo(20)
         }
         
@@ -559,11 +568,11 @@ extension HomeDefaultCell{
         loanBtn.layer.cornerRadius = 5.0
         loanBtn.addTarget(self, action: #selector(loanBtnClick), for: .touchUpInside)
         loanBtn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
-        bgImage.addSubview(loanBtn)
+        productFirstBgImage?.addSubview(loanBtn)
         loanBtn.snp.makeConstraints { (make) in
-            make.bottom.equalTo(bgImage.snp.bottom).offset(-20)
-            make.left.equalTo(bgImage.snp.left).offset(20)
-            make.right.equalTo(bgImage.snp.right).offset(-20)
+            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-20)
+            make.left.equalTo((productFirstBgImage?.snp.left)!).offset(20)
+            make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-20)
             make.height.equalTo(50)
         }
     }
@@ -571,10 +580,16 @@ extension HomeDefaultCell{
     //MARK:产品列表，其他的
     func productListOther(){
     
-        let bgImage = UIImageView()
-        bgImage.image = UIImage(named:"xiaokuang")
-        self.addSubview(bgImage)
-        bgImage.snp.makeConstraints { (make) in
+        productSecondBgImage = UIImageView()
+        productSecondBgImage?.tag = 102
+        productSecondBgImage?.isUserInteractionEnabled = true
+        productSecondBgImage?.image = UIImage(named:"xiaokuang")
+        self.addSubview(productSecondBgImage!)
+        
+        let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
+        productSecondBgImage?.addGestureRecognizer(tapGest)
+        
+        productSecondBgImage?.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(0)
             make.left.equalTo(self).offset(20)
             make.right.equalTo(self).offset(-20)
@@ -582,25 +597,28 @@ extension HomeDefaultCell{
         }
         
         let bgView = UIView()
-        bgImage.addSubview(bgView)
+        productSecondBgImage?.addSubview(bgView)
         bgView.snp.makeConstraints { (make) in
-            make.left.equalTo(bgImage.snp.left).offset(15)
-            make.right.equalTo(bgImage.snp.right).offset(-15)
-            make.centerY.equalTo(bgImage.snp.centerY)
+            make.left.equalTo((productSecondBgImage?.snp.left)!).offset(15)
+            make.right.equalTo((productSecondBgImage?.snp.right)!).offset(-15)
+            make.centerY.equalTo((productSecondBgImage?.snp.centerY)!)
             make.height.equalTo(50)
         }
         
         let leftImage = UIImageView()
-        leftImage.image = UIImage(named:homeProductOtherArray[0])
+        let url = URL(string: homeProductData.data.productList[1].icon)
+        leftImage.sd_setImage(with: url)
         bgView.addSubview(leftImage)
         leftImage.snp.makeConstraints { (make) in
             make.centerY.equalTo(bgView.snp.centerY)
             make.left.equalTo(bgView.snp.left).offset(10)
+            make.width.equalTo(38)
+            make.height.equalTo(38)
         }
         let titleLabel = UILabel()
         titleLabel.textColor = UIColor.black
         titleLabel.font = UIFont.systemFont(ofSize: 22)
-        titleLabel.text = homeProductOtherArray[1]
+        titleLabel.text = homeProductData.data.productList[1].productName
         bgView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(0)
@@ -608,7 +626,11 @@ extension HomeDefaultCell{
             make.height.equalTo(22)
         }
         let rightImage = UIImageView()
-        rightImage.image = UIImage(named:homeProductOtherArray[2])
+        rightImage.image = UIImage(named:"home_04")
+        if homeProductData.data.productList[1].productId == "P001004"{
+            
+            rightImage.image = UIImage(named:"home_05")
+        }
         bgView.addSubview(rightImage)
         rightImage.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(0)
@@ -618,7 +640,7 @@ extension HomeDefaultCell{
         let moneyLabel = UILabel()
         moneyLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
         moneyLabel.font = UIFont.systemFont(ofSize: 14)
-        moneyLabel.text = homeProductOtherArray[3]
+        moneyLabel.text = homeProductData.data.productList[1].amount
         bgView.addSubview(moneyLabel)
         moneyLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
@@ -628,7 +650,7 @@ extension HomeDefaultCell{
         let termLabel = UILabel()
         termLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
         termLabel.font = UIFont.systemFont(ofSize: 14)
-        termLabel.text = homeProductOtherArray[4]
+        termLabel.text = homeProductData.data.productList[1].period
         bgView.addSubview(termLabel)
         termLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
@@ -654,17 +676,18 @@ extension HomeDefaultCell{
             make.right.equalTo(jiantouImage.snp.left).offset(-8)
             make.height.equalTo(20)
         }
-        if isWait{
+        if (homeProductData.data.productList[1].isValidate == "0"){
         
+            productSecondBgImage?.isUserInteractionEnabled = false
             let hiddleView = UIView()
             hiddleView.backgroundColor = UIColor.black
             hiddleView.alpha = 0.5
-            bgImage.addSubview(hiddleView)
+            productSecondBgImage?.addSubview(hiddleView)
             hiddleView.snp.makeConstraints({ (make) in
-                make.top.equalTo(bgImage.snp.top).offset(7)
-                make.left.equalTo(bgImage.snp.left).offset(8)
-                make.right.equalTo(bgImage.snp.right).offset(-8)
-                make.bottom.equalTo(bgImage.snp.bottom).offset(-14)
+                make.top.equalTo((productSecondBgImage?.snp.top)!).offset(7)
+                make.left.equalTo((productSecondBgImage?.snp.left)!).offset(8)
+                make.right.equalTo((productSecondBgImage?.snp.right)!).offset(-8)
+                make.bottom.equalTo((productSecondBgImage?.snp.bottom)!).offset(-14)
             })
             
             let label = UILabel()
@@ -719,6 +742,14 @@ extension HomeDefaultCell{
     
         return view
     }
+    
+    func setCornerBorder(view:UIView,borderColor:UIColor) -> Void {
+        view.layer.cornerRadius = 8
+        view.layer.masksToBounds = true
+        view.layer.borderWidth = 1;
+        view.layer.borderColor = borderColor.cgColor
+    }
+    
 }
 //MARK:点击事件
 extension HomeDefaultCell{
@@ -785,5 +816,35 @@ extension HomeDefaultCell{
             delegate?.loanBtnClick()
         }
         print("我要借款")
+    }
+    
+    func clickFirstView(_ tapGes : UITapGestureRecognizer){
+        
+        var productId = ""
+        let tag = tapGes.view?.tag
+        switch tag! {
+        case 101:
+            productId = "第一个View"
+        case 102:
+            productId = "点击第二个View"
+        case 103:
+            productId = homeProductData.data.thirdProductList[0].extAttr.path_
+
+        case 104:
+            productId = homeProductData.data.thirdProductList[1].extAttr.path_
+
+        case 105:
+            productId = ""
+
+        default:
+            break
+        }
+        
+        if delegate != nil {
+        
+            delegate?.productBtnClick(productId)
+            
+        }
+        print("点击产品列表")
     }
 }
