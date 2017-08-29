@@ -158,7 +158,6 @@
     [Utility sharedUtility].isObtainUserLocation = NO;
 }
 
-
 #pragma mark  - 视图布局
 - (void)setNavQRRightBar {
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(qrClick)];
@@ -715,7 +714,6 @@
             [self popView:_homeProductList];
         }
         
-
     } WithFaileBlock:^{
         
     }];

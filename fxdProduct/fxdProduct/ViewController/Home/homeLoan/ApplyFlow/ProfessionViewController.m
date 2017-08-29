@@ -48,6 +48,8 @@
     NSString *add;
     
     DataDicParse *_dataDicModel;
+    
+    NSString * _contactStatus;
 }
 
 @property (nonatomic, strong) UIPickerView *localPicker;
@@ -72,7 +74,8 @@
 //                         @"医疗/制药/环保",@"其他"];
     dataColor = [NSMutableArray array];
     dataListAll = [NSMutableArray array];
-
+    _contactStatus = @"0";
+    
     NSString *device = [[UIDevice currentDevice] systemVersion];
     if (device.floatValue>10) {
         self.automaticallyAdjustsScrollViewInsets = true;
@@ -91,7 +94,9 @@
     [self setDataInfo];
 //    [self getDataDic:nil];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [self obtainUserContactInfoStatus];
+}
 - (void)configTableView
 {
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -442,6 +447,9 @@
         cell.contentTextField.enabled = NO;
         cell.titleLabel.text = @"联系人信息";
         cell.contentTextField.placeholder = @"未完成";
+        if ([_contactStatus isEqualToString:@"1"]) {
+            cell.contentTextField.placeholder = @"已完成";
+        }
         return cell;
     }
     
@@ -589,6 +597,22 @@
     
 }
 
+-(void)obtainUserContactInfoStatus{
+    
+    UserDataViewModel * userDataVM1 = [[UserDataViewModel alloc]init];
+    [userDataVM1 setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([resultM.errCode isEqualToString:@"0"]) {
+            _contactStatus = (NSString *)resultM.data;
+            [self.tableView reloadData];
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [userDataVM1 obtainContactInfoStatus];
+}
 #pragma mark ->获取省市区代码
 -(void)PostGetCityCode:(NSString *)datalisCity
 {

@@ -22,7 +22,7 @@
     [super viewDidLoad];
     self.navigationItem.title=@"关于我们";
     [self addBackItem];
-//    contentAry=[[NSArray alloc]initWithObjects:@"发薪贷简介",@"发展历程",@"媒体报道",@"微信:急速发薪/faxindai",@"微博:http://weibo.com/5697425557",@"官网:http://www.faxindai.com", nil];
+//    contentAry=[[NSArray alloc]initWithObjects:@"发薪贷简介",@"发展历程",@"媒体报道",@"微信:急速发薪/faxindai",@"微博:http://weibo.com/5697425557",@"官网:https://www.faxindai.com", nil];
     contentAry=[[NSArray alloc]initWithObjects:@"发薪贷简介",@"发展历程", nil];
 
     self.tableView.delegate=self;

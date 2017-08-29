@@ -15,6 +15,7 @@ class ContentTableViewCell: UITableViewCell {
     var contentTextField : UITextField?
     var arrowsImageBtn : UIButton?
     
+    
     var btnClick : ArrowImageBtnClick?
     
     override func awakeFromNib() {

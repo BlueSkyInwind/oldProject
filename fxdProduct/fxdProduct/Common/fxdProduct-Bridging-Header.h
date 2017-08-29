@@ -21,6 +21,9 @@
 #import "UIColor+Extend.h"
 #import "MoxieSDK.h"
 #import "HomeProductList.h"
+#import "UserDataViewModel.h"
+#import "UserDataModel.h"
+#import "BaseResultModel.h"
 
 
 #endif /* fxdProduct_Bridging_Header_h */

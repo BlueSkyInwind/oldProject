@@ -36,7 +36,6 @@
     // 添加JS到HTML中，可以直接在JS中调用添加的JS方法
     //    WKUserScript *script = [[WKUserScript alloc] initWithSource:@"function showAlert() { alert('在载入webview时通过OC注入的JS方法'); }" injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:true];
     //    [config.userContentController addUserScript:script];
-    
     // window.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
     [config.userContentController addScriptMessageHandler:self name:@"FXDNative"];
     
@@ -58,9 +57,7 @@
         
     }else{
         
-
-//        NSString * str = @"https://fintech.chinazyjr.com/p2p/http/huifush/toBosAcctActivate.jhtml?page_type_=1&ret_url_=https://h5.faxindai.com:8028/fxd-h5/page/case/app_transition.html&from_mobile_=15241892226";
-//        NSString * str = @"http://192.168.14.71:8000/page/weixin.html";
+        //        NSString * str = @"https://fintech.chinazyjr.com/p2p/http/huifush/toBosAcctActivate.jhtml?page_type_=1&ret_url_=https://h5.faxindai.com:8028/fxd-h5/page/case/app_transition.html&from_mobile_=15241892226";
         
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
@@ -152,28 +149,22 @@
     }
 }
 
-
 #pragma mark -WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-    
     NSURLRequest *request = navigationAction.request;
     NSLog(@"=========%@",request.URL.absoluteString);
     if ([request.URL.absoluteString hasSuffix:@"main.html"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
         [self.navigationController popViewControllerAnimated:YES];
-
     }else{
-    
         decisionHandler(WKNavigationActionPolicyAllow);
-        
     }
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
     self.navigationItem.title = @"加载中...";
-    
     if([webView.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_main_url,_zhimaCreditCallBack_url]]){
         for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
             if ([vc isKindOfClass:[UserDataViewController class]]) {
@@ -187,7 +178,6 @@
 {
     self.navigationItem.title = @"加载失败";
 }
-
 
 #pragma mark -
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
@@ -247,8 +237,6 @@
 }
 
 - (void)deleteWebCache {
-    
-    
     
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
         

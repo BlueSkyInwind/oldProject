@@ -18,5 +18,31 @@
 @property (strong,nonatomic)NSString<Optional> * TRUCKS_;  // 手机认证通道 JXL 表示聚信立，TC 表示天创认证
 @property (strong,nonatomic)NSString<Optional> * isInfoEditable;
 
+//新的api
+@property (strong,nonatomic)NSString<Optional> * gathering;
+@property (strong,nonatomic)NSString<Optional> * identity;
+@property (strong,nonatomic)NSString<Optional> * others;
+@property (strong,nonatomic)NSString<Optional> * person;
+@property (strong,nonatomic)NSString<Optional> * edit;
+@property (strong,nonatomic)NSString<Optional> * test;
+@property (strong,nonatomic)NSString<Optional> * faceIdentity;
+@property (strong,nonatomic)NSString<Optional> * telephone;
+@property (strong,nonatomic)NSString<Optional> * zmIdentity;
 
 @end
+
+
+@interface UserThirdPartCertificationModel : JSONModel
+
+@property (strong,nonatomic)NSString<Optional> * faceIdentity;
+@property (strong,nonatomic)NSString<Optional> * telephone;
+@property (strong,nonatomic)NSString<Optional> * zmIdentity;
+
+@end
+
+
+
+
+
+
+

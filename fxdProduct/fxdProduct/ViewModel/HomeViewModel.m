@@ -83,14 +83,7 @@
             [self faileBlock];
         }
     }];
-
 }
-
-
-
-
-
-
 
 
 

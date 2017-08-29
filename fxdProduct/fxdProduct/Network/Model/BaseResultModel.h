@@ -14,7 +14,7 @@
 @property (nonatomic, strong)NSString<Optional> * flag;
 @property (nonatomic, strong)id<Optional> result;
 
-
+//新api外壳
 @property (nonatomic, strong)NSString<Optional> *errCode;
 @property (nonatomic, strong)NSString<Optional> * errMsg;
 @property (nonatomic, strong)NSString<Optional> * friendErrMsg;

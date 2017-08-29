@@ -428,7 +428,6 @@ extension HomeDefaultCell{
             
                 make.height.equalTo((homeProductData.data.infoList.count*46)+60)
             }
-            
         }
         
         var i = 0
@@ -750,7 +749,6 @@ extension HomeDefaultCell{
         let money = Int(slider.value)
         print("整除后的数字=%d",(money/100)*100)
         defaultHeadLabel?.text = NSString(format: "%d元", (money/100)*100) as String
-        
     }
     
     //MARK:点击立即申请

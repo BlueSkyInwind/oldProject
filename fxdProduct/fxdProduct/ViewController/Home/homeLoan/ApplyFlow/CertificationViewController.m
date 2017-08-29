@@ -276,7 +276,7 @@ typedef enum {
             //手机号认证  （天创）
             [self TCmobileAuth];
         }else{
-            [self mibileAuth];
+            [self TCmobileAuth];
         }
     }
 }
@@ -514,8 +514,6 @@ typedef enum {
         
     }];
 }
-
-
 
 - (NSString *)formatString:(NSString *)str
 {
