@@ -60,7 +60,8 @@
     HighRandingModel * _creditCardHighRandM;
     HighRandingModel * _socialSecurityHighRandM;
     UserStateModel *_model;
-     BOOL isOpen;
+    UserDataModel * _userDataModel;
+    BOOL isOpen;
     
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -539,19 +540,19 @@
     DataDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DataDisplayCell"];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0) {
-        cell.statusLabel.text = @"已完成";
-        cell.statusLabel.textColor = rgb(42, 155, 234);
-    } else {
-        cell.statusLabel.text = @"未完成";
-        cell.statusLabel.textColor = rgb(159, 160, 162);
-    }
+
     switch (indexPath.row) {
         case 0:
         {
             cell.iconImage.image = [UIImage imageNamed:@"UserData2"];
             cell.titleLable.text = @"身份信息";
             cell.subTitleLabel.text = @"完善您的个人信息";
+            cell.statusLabel.text = @"未完成";
+            cell.statusLabel.textColor = rgb(159, 160, 162);
+            if ([_userDataModel.identity isEqualToString:@"1"]) {
+                cell.statusLabel.text = @"已完成";
+                cell.statusLabel.textColor = rgb(42, 155, 234);
+            }
             return cell;
         }
             break;
@@ -560,6 +561,12 @@
             cell.iconImage.image = [UIImage imageNamed:@"UserData1"];
             cell.titleLable.text = @"个人信息";
             cell.subTitleLabel.text = @"完善您的联系人信息";
+            cell.statusLabel.text = @"未完成";
+            cell.statusLabel.textColor = rgb(159, 160, 162);
+            if ([_userDataModel.person isEqualToString:@"1"]) {
+                cell.statusLabel.text = @"已完成";
+                cell.statusLabel.textColor = rgb(42, 155, 234);
+            }
             return cell;
         }
             break;
@@ -568,6 +575,12 @@
             cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
             cell.titleLable.text = @"收款信息";
             cell.subTitleLabel.text = @"";
+            cell.statusLabel.text = @"未完成";
+            cell.statusLabel.textColor = rgb(159, 160, 162);
+            if ([_userDataModel.gathering isEqualToString:@"1"]) {
+                cell.statusLabel.text = @"已完成";
+                cell.statusLabel.textColor = rgb(42, 155, 234);
+            }
             return cell;
         }             break;
         case 3:
@@ -577,6 +590,12 @@
             cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
             if (UI_IS_IPHONE5) {
                 cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
+            }
+            cell.statusLabel.text = @"未完成";
+            cell.statusLabel.textColor = rgb(159, 160, 162);
+            if ([_userDataModel.others isEqualToString:@"1"]) {
+                cell.statusLabel.text = @"已完成";
+                cell.statusLabel.textColor = rgb(42, 155, 234);
             }
             return cell;
         }
@@ -590,7 +609,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        if (_nextStep.integerValue > 0) {
+        if ([_userDataModel.others isEqualToString:@"0"]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完成基础资料认证"];
             return;
         }
@@ -622,18 +641,10 @@
         }
         return;
     }
-        DLog(@"%ld",_nextStep.integerValue);
-        if (_nextStep.integerValue > 0) {
-            if (![self checkUserAuth:indexPath.row]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_subTitleArr[_nextStep.integerValue-1]];
-                return;
-            }
-        }
-        if (_nextStep.integerValue == -2) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
-            return;
-        }
-    
+
+    if (![self cellStatusIsSelect:indexPath.row]) {
+        return;
+    }
     switch (indexPath.row) {
         case 0:
         {
@@ -648,7 +659,6 @@
         case 1:
         {
             [self getCustomerCarrer_jhtml:^(CustomerCareerBaseClass *careerInfo) {
-                
                 ProfessionViewController *professVC = [[ProfessionViewController alloc] init];
                 professVC.delegate = self;
                 professVC.product_id = _product_id;
@@ -661,17 +671,15 @@
         {
             //此处需要一个返回默认卡的接口
             [self getCustomerCarrer_jhtml:^(CustomerCareerBaseClass *careerInfo) {
-                
                 EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
                 editCard.typeFlag = @"0";
                 [self.navigationController pushViewController:editCard animated:YES];
-
             }];
         }
             break;
         case 3:
         {
-            if (indexPath.row < _nextStep.integerValue || _nextStep.integerValue < 0){
+            if ([_userDataModel.others isEqualToString:@"1"]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
             }else {
                 [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
@@ -692,7 +700,39 @@
             break;
     }
 }
-
+-(BOOL)cellStatusIsSelect:(NSInteger)row{
+    
+    if ([_isInfoEditable isEqualToString:@"0"] &&  row < 3) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
+        return false;
+    }
+    switch (row) {
+        case 1:{
+            if ([_userDataModel.identity isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请完善身份信息！"];
+                return false;
+            }
+        }
+            break;
+        case 2:{
+            if ([_userDataModel.person isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请完善个人信息！"];
+                return false;
+            }
+        }
+            break;
+        case 3:{
+            if ([_userDataModel.gathering isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请完善收款信息！"];
+                return false;
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    return true;
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 //    topView.backgroundColor = UI_MAIN_COLOR;
@@ -773,29 +813,47 @@
     //高级认证状态查询
     [self obtainHighRanking];
     
-    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
-    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+    UserDataViewModel * userDataVM1 = [[UserDataViewModel alloc]init];
+    [userDataVM1 setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([resultM.flag isEqualToString:@"0000"]) {
-            UserDataModel * userDataM = [[UserDataModel alloc]initWithDictionary:(NSDictionary *)resultM.result error:nil];
-            _nextStep = userDataM.nextStep;
-            _resultCode = userDataM.resultcode;
-            _rulesId = userDataM.rulesid;
-            _isMobileAuth = userDataM.isMobileAuth;
-            _isZmxyAuth = userDataM.isZmxyAuth;// 1 未认证    2 认证通过   3 认证未通过
-            _phoneAuthChannel = userDataM.TRUCKS_;  // 手机认证通道 JXL 表示聚信立，TC 表示天创认证
-            if (_nextStep.integerValue == 4) {
-                _isInfoEditable = userDataM.isInfoEditable;
-            }
-            [self setProcess];
-        } else {
+        if ([resultM.errCode isEqualToString:@"0"]) {
+            UserDataModel * userDataM = [[UserDataModel alloc]initWithDictionary:(NSDictionary *)resultM.data error:nil];
+            _isInfoEditable = userDataM.edit;
+            _userDataModel = userDataM;
+            [self.tableView reloadData];
+        }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.msg];
         }
         [self.tableView.mj_header endRefreshing];
     } WithFaileBlock:^{
         [self.tableView.mj_header endRefreshing];
     }];
-    [userDataVM obtainCustomerAuthInfoProgress:_product_id];
+    [userDataVM1 obtainBasicInformationStatus];
+
+    
+//    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
+//    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+//        BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+//        if ([resultM.flag isEqualToString:@"0000"]) {
+//            UserDataModel * userDataM = [[UserDataModel alloc]initWithDictionary:(NSDictionary *)resultM.result error:nil];
+//            _nextStep = userDataM.nextStep;
+//            _resultCode = userDataM.resultcode;
+//            _rulesId = userDataM.rulesid;
+//            _isMobileAuth = userDataM.isMobileAuth;
+//            _isZmxyAuth = userDataM.isZmxyAuth;// 1 未认证    2 认证通过   3 认证未通过
+//            _phoneAuthChannel = userDataM.TRUCKS_;  // 手机认证通道 JXL 表示聚信立，TC 表示天创认证
+//            if (_nextStep.integerValue == 4) {
+//                _isInfoEditable = userDataM.isInfoEditable;
+//            }
+//            [self setProcess];
+//        } else {
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.msg];
+//        }
+//        [self.tableView.mj_header endRefreshing];
+//    } WithFaileBlock:^{
+//        [self.tableView.mj_header endRefreshing];
+//    }];
+//    [userDataVM obtainCustomerAuthInfoProgress:_product_id];
 }
 
 - (void)popViewFamily
@@ -1046,8 +1104,6 @@
     }];
     [userDataVM obtainhighRankingStatus];
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

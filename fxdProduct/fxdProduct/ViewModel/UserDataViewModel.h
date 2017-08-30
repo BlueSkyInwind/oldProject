@@ -18,8 +18,31 @@
  */
 -(void)obtainCustomerAuthInfoProgress:(NSString *)product_id_;
 
+
+/**
+  基础信息状态
+ */
+-(void)obtainBasicInformationStatus;
+/**
+ 三方信息状态
+ */
+-(void)obtainthirdPartCertificationStatus;
+
+
 //上传活体认证信息
 -(void)uploadLiveIdentiInfo:(FaceIDData *)imagesDic;
+
+
+/**
+ 认证中心获取基础资料接口
+ */
+-(void)obtainBasicInformationStatusOfAuthenticationCenter;
+
+
+/**
+ 用户联系人信息的状态
+ */
+-(void)obtainContactInfoStatus;
 
 
 #pragma  mark - 社保  公积金

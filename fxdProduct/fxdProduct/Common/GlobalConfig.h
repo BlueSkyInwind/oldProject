@@ -180,6 +180,10 @@ UIKIT_EXTERN NSString * const       _sjRecord_url;                  //首借免�
 UIKIT_EXTERN NSString * const       _shebaoupload_url;                  //社保认证信息提交
 UIKIT_EXTERN NSString * const       _TheCreditCardupload_url;                  //信用卡信息提交
 UIKIT_EXTERN NSString * const       _HighRankingStatus_url;                  //高级认证状态查询
+UIKIT_EXTERN NSString * const       _UserBasicInformation_url;                  //基础认证状态查询
+UIKIT_EXTERN NSString * const       _UserThirdPartCertification_url;                  //三方认证状态查询
+UIKIT_EXTERN NSString * const       _AuthenticationCenterBasicInformation_url;                  //认证中心基础认证
+UIKIT_EXTERN NSString * const       _UserContactInfo_url;                  //用户联系人信息
 UIKIT_EXTERN NSString * const       _HomeState_url;                  //首页状态查询
 
 

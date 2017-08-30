@@ -414,7 +414,6 @@ extension HomeDefaultCell{
             
                 make.height.equalTo((homeProductData.data.infoList.count*46)+100)
             }
-            
         }
         
         var i = 0
@@ -802,6 +801,9 @@ extension HomeDefaultCell{
         print("整除后的数字=%d",(money/500)*500)
         defaultHeadLabel?.text = NSString(format: "%d元", (money/500)*500) as String
         
+//        print("整除后的数字=%d",(money/100)*100)
+//        defaultHeadLabel?.text = NSString(format: "%d元", (money/100)*100) as String
+
     }
     
     //MARK:点击立即申请

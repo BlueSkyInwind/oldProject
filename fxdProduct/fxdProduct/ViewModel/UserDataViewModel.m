@@ -25,8 +25,57 @@
     }];
 }
 
+-(void)obtainBasicInformationStatus{
+    
+//    NSDictionary *paramDic = @{@"userId":[Utility sharedUtility].userInfo.juid,};
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserBasicInformation_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+-(void)obtainthirdPartCertificationStatus{
+    
+//    NSDictionary *paramDic = @{@"userId":[Utility sharedUtility].userInfo.juid,};
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserThirdPartCertification_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
 
-
+-(void)obtainBasicInformationStatusOfAuthenticationCenter{
+    
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_AuthenticationCenterBasicInformation_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+-(void)obtainContactInfoStatus{
+    
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserContactInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
 
 -(void)uploadLiveIdentiInfo:(FaceIDData *)imagesDic{
     

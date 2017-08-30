@@ -11,3 +11,7 @@
 @implementation UserDataModel
 
 @end
+
+@implementation UserThirdPartCertificationModel
+
+@end

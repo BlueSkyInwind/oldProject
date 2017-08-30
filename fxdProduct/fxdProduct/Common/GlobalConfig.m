@@ -53,7 +53,6 @@ NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
 NSString * const _p2P_url = @"http://192.168.6.133/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
-
 //张强本地
 //NSString * const _main_url  =   @"http://192.168.13.173:8005/fxd-esb/esb/";
 //NSString * const _ValidESB_url  =   @"http://192.168.13.173:8005/fxd-esb/";
@@ -394,6 +393,8 @@ NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.
 //芝麻信用回调地址
 NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
 
+#pragma mark - 新的api
+
 //社保
 NSString * const    _shebaoupload_url    =    @"apigw/client/resource/mxsbtask_create.jhtml";
 
@@ -402,6 +403,18 @@ NSString * const    _TheCreditCardupload_url    =    @"apigw/client/resource/mxm
 
 //高级认证状态查询
 NSString * const    _HighRankingStatus_url    =    @"apigw/client/resource/fundtask.jhtml";
+
+//基础信息状态查询接口
+NSString * const    _UserBasicInformation_url    =    @"apigw/client/user/info/base.jhtml";
+
+//三方信息状态查询接口
+NSString * const    _UserThirdPartCertification_url    =    @"apigw/client/user/other/info.jhtml";
+
+//三方信息状态查询接口
+NSString * const    _AuthenticationCenterBasicInformation_url    =    @"apigw/client/user/base/complete/info.jhtml";
+
+//联系人信息的完成状态
+NSString * const    _UserContactInfo_url    =    @"apigw/client/user/contact/info.jhtml";
 
 //首页状态查询
 NSString * const    _HomeState_url    =    @"apigw/client/summary.jhtml";

@@ -31,7 +31,7 @@ extension AuthenticationCenterCell{
     
         let bgView = UIView()
         bgView.backgroundColor = UIColor.white
-        self.addSubview(bgView)
+        self.contentView.addSubview(bgView)
         bgView.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(0)
             make.left.equalTo(self).offset(0)

@@ -30,6 +30,11 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         setupUI()
      }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ThirdPartCertification()
+    }
+    
     func setupUI() -> Void {
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
         tableView?.delegate = self;
@@ -59,15 +64,17 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         case 0:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
             if verifyStatus == "1" {
-                thirdPartyAuthCell?.statusLabel?.text = "未完成"
-            }else{
                 thirdPartyAuthCell?.statusLabel?.text = "已完成"
+            }else{
+                thirdPartyAuthCell?.statusLabel?.text = "未完成"
             }
             break
         case 1:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
-            if isMobileAuth != "0" {
+            if isMobileAuth == "1" {
                 thirdPartyAuthCell?.statusLabel?.text = "已完成"
+            }else{
+                thirdPartyAuthCell?.statusLabel?.text = "未完成"
             }
             break
         case 2:
@@ -89,7 +96,6 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         }else{
             thirdPartyAuthCell?.statusLabel?.textColor = UIColor.init(red: 159/255, green: 160/255, blue: 162/255, alpha: 1)
         }
-        
         return thirdPartyAuthCell!
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -105,11 +111,11 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
             }
             break
         case 1:
-            
+            /*
             guard mobilePhoneOperatorChannels() else {
                 return
             }
-            
+            */
             let certificationVC = CertificationViewController.init()
             certificationVC.phoneAuthChannel = phoneAuthChannel
             certificationVC.isMobileAuth = isMobileAuth
@@ -164,6 +170,25 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         }
     }
     
+    //MARK: 三方认证状态
+    func ThirdPartCertification() -> Void{
+        let  userDataVM =  UserDataViewModel()
+        userDataVM.setBlockWithReturn({ (result) in
+           let baseResult = try! BaseResultModel.init(dictionary: result as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                 let userThirdPartCertificationModel = try! UserThirdPartCertificationModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self.verifyStatus = userThirdPartCertificationModel.faceIdentity;
+                self.isMobileAuth = userThirdPartCertificationModel.telephone;
+                self.isZmxyAuth = userThirdPartCertificationModel.zmIdentity;
+                self.tableView?.reloadData()
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        userDataVM.obtainthirdPartCertificationStatus()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
