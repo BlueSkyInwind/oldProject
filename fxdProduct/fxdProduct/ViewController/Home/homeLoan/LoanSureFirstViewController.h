@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 @class UserStateModel;
+@class HomeProductList;
 
 @interface LoanSureFirstViewController : BaseViewController
 
@@ -28,6 +29,7 @@
 @property (nonatomic, copy) NSString *if_family_know;
 
 @property (nonatomic, strong) UserStateModel *model;
+@property (nonatomic, strong) HomeProductList *homeModel;
 
 @property (nonatomic, copy) NSString *productId;
 

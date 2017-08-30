@@ -920,12 +920,38 @@
 #pragma mark 点击提款
 -(void)drawingBtnClick{
     NSLog(@"点击提款");
-    [self highLoanClick];
+    [self PostStatuesMyLoanAmount:_homeProductList.data.productId];
+
+}
+
+-(void)applyStatus{
+
+    switch (_homeProductList.data.flag.integerValue) {
+        case 5:
+        
+            [self goCheckVC:_model productId:_homeProductList.data.productId];
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 8:
+            break;
+        case 9:
+            break;
+            
+        default:
+            break;
+    }
 }
 #pragma mark 点击立即申请
 -(void)applyBtnClick:(NSString *)money{
     NSLog(@"点击立即申请=%@",money);
-    [self highLoanClick];
+    
+    UserDataViewController *userDataVC = [[UserDataViewController alloc]initWithNibName:@"UserDataViewController" bundle:nil];
+    [self.navigationController pushViewController:userDataVC animated:YES];
+    
+//    [self highLoanClick];
 }
 #pragma mark 点击导流平台的更多
 -(void)moreBtnClick{
@@ -938,6 +964,7 @@
 #pragma mark 我要借款
 -(void)loanBtnClick{
     NSLog(@"我要借款");
+    [self PostStatuesMyLoanAmount:_homeProductList.data.productList[0].productId];
 }
 
 
@@ -945,6 +972,12 @@
 -(void)productBtnClick:(NSString *)productId{
 
     if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:RapidLoan]) {
+        
+        [self PostStatuesMyLoanAmount:productId];
+//        LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
+//        loanFirstVC.homeModel = _homeProductList;
+//        loanFirstVC.productId = productId;
+//        [self.navigationController pushViewController:loanFirstVC animated:true];
         
     }else{
     
