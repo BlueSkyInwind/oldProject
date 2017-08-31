@@ -1245,6 +1245,8 @@
 		CCCE40C61EE7D19C00E3F102 /* ChangePasswordParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40C41EE7D19C00E3F102 /* ChangePasswordParamModel.m */; };
 		CCCE40CD1EE7D61700E3F102 /* SendSmsParam.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40CC1EE7D61700E3F102 /* SendSmsParam.m */; };
 		CCCE40CE1EE7D61700E3F102 /* SendSmsParam.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40CC1EE7D61700E3F102 /* SendSmsParam.m */; };
+		CCD32B4E1F58133B0092A9CB /* CurrentInformationHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD32B4D1F58133B0092A9CB /* CurrentInformationHeadView.swift */; };
+		CCD32B4F1F58133B0092A9CB /* CurrentInformationHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD32B4D1F58133B0092A9CB /* CurrentInformationHeadView.swift */; };
 		CCD565BE1E8A46D500B6665D /* PserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */; };
 		CCD565C01E8A46D500B6665D /* PserInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */; };
 		CCDEDF5C1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDEDF5B1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m */; };
@@ -2414,6 +2416,7 @@
 		CCCE40C41EE7D19C00E3F102 /* ChangePasswordParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordParamModel.m; sourceTree = "<group>"; };
 		CCCE40CB1EE7D61700E3F102 /* SendSmsParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendSmsParam.h; sourceTree = "<group>"; };
 		CCCE40CC1EE7D61700E3F102 /* SendSmsParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendSmsParam.m; sourceTree = "<group>"; };
+		CCD32B4D1F58133B0092A9CB /* CurrentInformationHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentInformationHeadView.swift; sourceTree = "<group>"; };
 		CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PserInfoViewController.xib; sourceTree = "<group>"; };
 		CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PserInfoViewController.mm; sourceTree = "<group>"; };
 		CCD565BD1E8A46D500B6665D /* PserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PserInfoViewController.h; sourceTree = "<group>"; };
@@ -2671,6 +2674,7 @@
 				0FEACE1F1CA0E2450027859A /* TelPhoneCompanyCell.xib */,
 				CCF9384B1EEE2CA80074791D /* ExpressCreditRefuseView.h */,
 				CCF9384C1EEE2CA80074791D /* ExpressCreditRefuseView.m */,
+				CCD32B4D1F58133B0092A9CB /* CurrentInformationHeadView.swift */,
 			);
 			path = writeView;
 			sourceTree = "<group>";
@@ -6075,6 +6079,7 @@
 				63FC24FD1D98F7E9006F58F3 /* UIPasteboard+YYText.m in Sources */,
 				63E1ECCF1E1B8FAA0079A2F8 /* TAAbstractDotView.m in Sources */,
 				636B1B581C23BB4100450358 /* GetMoneyHistoryBaseClass.m in Sources */,
+				CCD32B4E1F58133B0092A9CB /* CurrentInformationHeadView.swift in Sources */,
 				0F6AAF391C30D8950060F137 /* MyCardCell.m in Sources */,
 				635AB7901BE2FE2700C32919 /* ReturnMsgBaseClass.m in Sources */,
 				848C531E1F4C0C920092F87C /* thirdPartyAuthViewController.swift in Sources */,
@@ -6468,6 +6473,7 @@
 				84DFBEDF1F4D97D50009DAB9 /* HighRandingModel.m in Sources */,
 				CC0DF9B61EA5B1090024841A /* BankCardInfoBaseClass.m in Sources */,
 				CC0DF9B71EA5B1090024841A /* CheckViewIng.m in Sources */,
+				CCD32B4F1F58133B0092A9CB /* CurrentInformationHeadView.swift in Sources */,
 				CC0DF9B81EA5B1090024841A /* YYTextAttribute.m in Sources */,
 				844E5F511ED94DCB00753671 /* RegParamModel.m in Sources */,
 				CC0DF9BA1EA5B1090024841A /* FaceCell.m in Sources */,
