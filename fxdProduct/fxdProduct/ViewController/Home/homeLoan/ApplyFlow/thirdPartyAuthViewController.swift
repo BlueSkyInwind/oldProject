@@ -26,8 +26,12 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.navigationItem.title = "三方认证"
+        isZmxyAuth = "3"
+        isMobileAuth = "0"
+        verifyStatus = "0"
         addBackItem()
         setupUI()
+        
      }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,7 +67,7 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         switch indexPath.row {
         case 0:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
-            if verifyStatus == "1" {
+            if verifyStatus == "2" {
                 thirdPartyAuthCell?.statusLabel?.text = "已完成"
             }else{
                 thirdPartyAuthCell?.statusLabel?.text = "未完成"
@@ -71,7 +75,7 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
             break
         case 1:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
-            if isMobileAuth == "1" {
+            if isMobileAuth == "2" {
                 thirdPartyAuthCell?.statusLabel?.text = "已完成"
             }else{
                 thirdPartyAuthCell?.statusLabel?.text = "未完成"
@@ -106,8 +110,8 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
             faceIdentiCreditVC.verifyStatus = verifyStatus
             self.navigationController?.pushViewController(faceIdentiCreditVC, animated: true)
             faceIdentiCreditVC.identifyResultStatus = { [weak self] (status) -> () in
-                self?.verifyStatus  = status
-                self?.tableView?.reloadData()
+//                self?.verifyStatus  = status
+//                self?.tableView?.reloadData()
             }
             break
         case 1:
@@ -117,9 +121,8 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
             }
             */
             let certificationVC = CertificationViewController.init()
-            certificationVC.phoneAuthChannel = phoneAuthChannel
+            certificationVC.phoneAuthChannel = "TC"
             certificationVC.isMobileAuth = isMobileAuth
-            certificationVC.whetherPhoneAuth = isPhoneAuthType!
             self.navigationController?.pushViewController(certificationVC, animated: true)
             break
         case 2:
@@ -127,12 +130,10 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "您已完成认证")
                 return;
             }
-            
             if isZmxyAuth == "1" {
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "您正在认证中，请勿重复认证!")
                 return
             }
-            
             let sesameCreditVC  = SesameCreditViewController.init()
             self.navigationController?.pushViewController(sesameCreditVC, animated: true)
             break
@@ -185,7 +186,6 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) {
-            
         }
         userDataVM.obtainthirdPartCertificationStatus()
     }

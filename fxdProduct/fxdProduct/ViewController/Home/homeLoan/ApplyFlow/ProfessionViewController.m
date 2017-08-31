@@ -446,9 +446,10 @@
         }
         cell.contentTextField.enabled = NO;
         cell.titleLabel.text = @"联系人信息";
-        cell.contentTextField.placeholder = @"未完成";
-        if ([_contactStatus isEqualToString:@"1"]) {
-            cell.contentTextField.placeholder = @"已完成";
+        cell.promptLabel.hidden = NO;
+        cell.promptLabel.text = @"未完成";
+        if (_contactStatus.boolValue == true) {
+            cell.promptLabel.text = @"已完成";
         }
         return cell;
     }
@@ -486,6 +487,7 @@
             cell.contentTextField.enabled = YES;
             if (indexPath.row == 2 || indexPath.row == 3) {
                 cell.contentTextField.enabled = NO;
+                cell.contentTextField.placeholder = @"点击选择";
             }
 
             cell.selectionStyle  = UITableViewCellSelectionStyleNone;

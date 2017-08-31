@@ -816,7 +816,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
 }
 
-
 #pragma mark 新的合规
 -(void)integrationP2PUserState{
     
@@ -827,7 +826,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }else if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]){//待激活
         
         [self saveLoanCase:@"10" caseInfo:_caseInfo];
-        
         
     }else if ([_qryUserStatusModel.result.flg isEqualToString:@"6"]){//正常用户
         
@@ -864,7 +862,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
     [checkBankViewModel getSupportBankListInfo:@"2"];
 }
-
 - (void)fatchUserCardList
 {
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
@@ -904,7 +901,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     if (cardInfo) {
                         _selectCard = cardInfo;
                     }
-                    
                     if (payType == PayTypeGetMoneyToCard) {
                         if (_selectCard != nil) {
                             [self dismissSemiModalViewWithCompletion:^{
@@ -920,7 +916,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 payNC.view.frame = CGRectMake(0, 0, _k_w, 200);
                 [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
             } else {
-                
                 BankCardViewController *bankVC = [BankCardViewController new];
                 bankVC.bankArray = _supportBankListArr;
                 bankVC.periodSelect = _userSelectNum.integerValue;

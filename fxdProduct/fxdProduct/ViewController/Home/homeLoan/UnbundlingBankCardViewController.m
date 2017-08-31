@@ -37,9 +37,10 @@
     _countdown = 60;
     self.bankTable.delegate = self;
     self.bankTable.dataSource = self;
-    self.bankTable.separatorStyle = NO;
+    self.bankTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
     [self.sureBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
-        
+    [self.bankTable registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
+
 }
 
 
@@ -55,55 +56,56 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    ContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
+    if (!cell) {
+        cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
+    }
     
-        LabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"abcef%ld",indexPath.row]];
-        if (!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil] lastObject];
-        }
-        cell.textField.tag = indexPath.row + 100;
-        cell.textField.delegate = self;
+        cell.contentTextField.tag = indexPath.row + 100;
+        cell.contentTextField.delegate = self;
     if ([_queryCardInfo.result.UsrCardInfolist.BankId isEqualToString:@""]) {
         
       if (indexPath.row == 0) {
-            [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
-            cell.btn.hidden = NO;
-            cell.btn.tag = indexPath.row + 200;
-            cell.btnSecory.hidden = YES;
-            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            cell.textField.text = _queryCardInfo.result.UsrCardInfolist.CardId;
-          cell.textField.placeholder = @"银行卡号";
-            cell.textField.enabled = NO;
+            [cell.arrowsImageBtn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
+            cell.arrowsImageBtn.tag = indexPath.row + 200;
+            cell.contentTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.contentTextField.text = _queryCardInfo.result.UsrCardInfolist.CardId;
+            cell.titleLabel.text = @"银行卡号";
+            cell.contentTextField.enabled = NO;
+            [cell updateScanCardImageBtnLayout];
+  
         }else if (indexPath.row == 2){
-            cell.btn.hidden = YES;
-            cell.btnSecory.hidden = NO;
-            cell.btnSecory.tag = 203;
-            [cell.btnSecory addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
-            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
-            cell.textField.placeholder = @"验证码";
-            cell.textField.enabled = YES;
-            cell.textField.tag = 103;
+            cell.arrowsImageBtn.tag = 203;
+            cell.contentTextField.keyboardType = UIKeyboardTypeNumberPad;
+            [cell.contentTextField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+            cell.titleLabel.text = @"验证码";
+            cell.contentTextField.enabled = YES;
+            cell.contentTextField.tag = 103;
+            [cell.arrowsImageBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+            [cell updateVerfiyCodeImageBtnLayout];
+            __weak typeof (self) weakSelf = self;
+            cell.btnClick = ^(UIButton * button) {
+                [weakSelf senderBtn:button];
+            };
             
         }else if (indexPath.row == 1){
-            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            cell.btnSecory.hidden = YES;
-            cell.btn.hidden = YES;
-            cell.textField.placeholder = @"手机号";
-            cell.textField.tag = 102;
-            [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+            cell.contentTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.arrowsImageBtn.hidden = YES;
+            cell.titleLabel.text = @"手机号";
+            cell.contentTextField.tag = 102;
+            [cell.contentTextField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
             if (_queryCardInfo.result.UsrCardInfolist.BindMobile!=nil) {
                 
-                cell.textField.enabled = NO;
-                cell.textField.text = _queryCardInfo.result.UsrCardInfolist.BindMobile;
-                _mobile = cell.textField.text;
+                cell.contentTextField.enabled = NO;
+                cell.contentTextField.text = _queryCardInfo.result.UsrCardInfolist.BindMobile;
+                _mobile = cell.contentTextField.text;
                 
             }else{
                 
-                cell.textField.enabled = YES;
-                cell.textField.text = @"";
+                cell.contentTextField.enabled = YES;
+                cell.contentTextField.text = @"";
             }
         }
-        [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
         cell.selectionStyle  = UITableViewCellSelectionStyleNone;
         return cell;
         
@@ -111,53 +113,50 @@
     
         if (indexPath.row == 0) {
             
-            [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
-            cell.btn.hidden = NO;
-            cell.btn.tag = indexPath.row + 200;
-            cell.btnSecory.hidden = YES;
-            cell.textField.enabled = NO;
-            cell.textField.text = _queryCardInfo.result.UsrCardInfolist.bankName;
-            cell.textField.placeholder = @"银行名称";
+            cell.contentTextField.enabled = NO;
+            cell.contentTextField.text = _queryCardInfo.result.UsrCardInfolist.bankName;
+            cell.titleLabel.text = @"银行名称";
 
         }else if (indexPath.row == 1) {
-            [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
-            cell.btn.hidden = NO;
-            cell.btn.tag = indexPath.row + 200;
-            cell.btnSecory.hidden = YES;
-            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            cell.textField.text = _queryCardInfo.result.UsrCardInfolist.CardId;
-            cell.textField.placeholder = @"银行卡号";
-            cell.textField.enabled = NO;
+            [cell.arrowsImageBtn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
+            cell.contentTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.contentTextField.text = _queryCardInfo.result.UsrCardInfolist.CardId;
+            cell.titleLabel.text = @"银行卡号";
+            cell.contentTextField.enabled = NO;
+            [cell updateScanCardImageBtnLayout];
+
         }else if (indexPath.row == 3){
-            cell.btn.hidden = YES;
-            cell.btnSecory.hidden = NO;
-            cell.btnSecory.tag = 203;
-            [cell.btnSecory addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
-            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
-            cell.textField.placeholder = @"验证码";
-            cell.textField.enabled = YES;
-            cell.textField.tag = 103;
-            
+            cell.arrowsImageBtn.tag = 203;
+            cell.contentTextField.keyboardType = UIKeyboardTypeNumberPad;
+            [cell.contentTextField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+            cell.titleLabel.text = @"验证码";
+            cell.contentTextField.enabled = YES;
+            cell.contentTextField.tag = 103;
+            [cell.arrowsImageBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+            [cell updateVerfiyCodeImageBtnLayout];
+            __weak typeof (self) weakSelf = self;
+            cell.btnClick = ^(UIButton * button) {
+                
+                [weakSelf senderBtn:button];
+            };
         }else if (indexPath.row == 2){
-            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            cell.btnSecory.hidden = YES;
-            cell.btn.hidden = YES;
-            cell.textField.placeholder = @"手机号";
-            cell.textField.tag = 102;
-            [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+            cell.contentTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.arrowsImageBtn.hidden = YES;
+            cell.titleLabel.text = @"手机号";
+            cell.contentTextField.tag = 102;
+            [cell.contentTextField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
             if (_queryCardInfo.result.UsrCardInfolist.BindMobile!=nil) {
                 
-                cell.textField.enabled = NO;
-                cell.textField.text = _queryCardInfo.result.UsrCardInfolist.BindMobile;
-                _mobile = cell.textField.text;
+                cell.contentTextField.enabled = NO;
+                cell.contentTextField.text = _queryCardInfo.result.UsrCardInfolist.BindMobile;
+                _mobile = cell.contentTextField.text;
+                
             }else{
                 
-                cell.textField.enabled = YES;
-                cell.textField.text = @"";
+                cell.contentTextField.enabled = YES;
+                cell.contentTextField.text = @"";
             }
         }
-        [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
         cell.selectionStyle  = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -226,7 +225,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70.f;
+    return 50.f;
 }
 
 #pragma mark 处理手机位数

@@ -44,7 +44,6 @@ extension AuthenticationCenterCell{
         image?.snp.makeConstraints({ (make) in
             make.top.equalTo(bgView.snp.top).offset(15)
             if k_w == 320{
-            
                 make.top.equalTo(bgView.snp.top).offset(5)
             }
             make.centerX.equalTo(bgView.snp.centerX)

@@ -123,7 +123,7 @@ typedef enum {
     cell.veritifyCodeField.delegate = self;
     cell.picCodeTextField.delegate = self;
     [Tool setCorner:cell.mobileBtn borderColor:[UIColor clearColor]];
-    if ([_isMobileAuth isEqualToString:@"0"]) {
+    if (![_isMobileAuth isEqualToString:@"2"]) {
         if ([self isCanEnable]) {
             [cell.mobileBtn setBackgroundColor:UI_MAIN_COLOR];
             cell.mobileBtn.enabled = true;

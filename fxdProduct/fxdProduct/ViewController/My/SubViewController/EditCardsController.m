@@ -47,10 +47,8 @@
     [Tool setCorner:self.btnSaveInfo borderColor:UI_MAIN_COLOR];
     _currentCardNum=self.cardNum;
     self.cardNum=[self changeStr:self.cardNum];
-    self.reservedTel=@"";
     self.verCode=@"";
-    if([self.typeFlag isEqualToString:@"0"])
-    {
+    if([self.typeFlag isEqualToString:@"0"]){
         self.title=@"添加银行卡";
     }
     supportBankListArr = [NSMutableArray array];
@@ -92,7 +90,6 @@
 - (void)addBackItem
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    
     UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [btn setImage:img forState:UIControlStateNormal];
     btn.frame = CGRectMake(0, 0, 45, 44);
@@ -131,8 +128,6 @@
     }
     _btnStatus = !_btnStatus;
 }
-
-
 - (BOOL)isValidCode:(NSString *)passWord
 {
     return passWord.length > 5;
@@ -170,7 +165,7 @@
         cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
     }
     
-    cell.contentTextField.textColor=UI_MAIN_COLOR;
+//    cell.contentTextField.textColor=UI_MAIN_COLOR;
     if(indexPath.row==0)
     {
         cell.contentTextField.enabled=false;
@@ -179,7 +174,6 @@
     }
     else if(indexPath.row==1)
     {
-        
         cell.contentTextField.tag=1001;
         cell.contentTextField.delegate=self;
         cell.contentTextField.text=self.cardNum;
@@ -197,6 +191,7 @@
         cell.contentTextField.tag=1002;
         cell.contentTextField.delegate=self;
         cell.titleLabel.text=@"预留手机号";
+        cell.contentTextField.text = self.reservedTel != nil ? self.reservedTel : @"";
         cell.contentTextField.keyboardType=UIKeyboardTypeNumberPad;
         cell.arrowsImageBtn.hidden = YES;
     }
@@ -220,7 +215,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70;
+    return 50;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -392,7 +387,6 @@
     }];
     
 }
-
 
 #pragma  mark Delegate
 //-(void)BankTableViewSelect:(NSString *)CurrentRow andBankInfoList:(NSString *)bankNum andSectionRow:(NSInteger)SectionRow

@@ -594,8 +594,12 @@
 		846A90191F1F48AB00896169 /* PayDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90161F1F48AB00896169 /* PayDisplayCell.m */; };
 		846A901A1F1F48AB00896169 /* PayDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90171F1F48AB00896169 /* PayDisplayCell.xib */; };
 		846A901B1F1F48AB00896169 /* PayDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90171F1F48AB00896169 /* PayDisplayCell.xib */; };
+		846BB6DF1F580B6400CD3545 /* RenewalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6DE1F580B6400CD3545 /* RenewalViewController.swift */; };
+		846BB6E01F580B6400CD3545 /* RenewalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6DE1F580B6400CD3545 /* RenewalViewController.swift */; };
 		8473F1411F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
 		8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
+		848139631F568A8600CD701C /* YX_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848139621F568A8600CD701C /* YX_TextField.swift */; };
+		848139641F568A8600CD701C /* YX_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848139621F568A8600CD701C /* YX_TextField.swift */; };
 		848394221EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */; };
 		848394231EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */; };
 		848394261EDEC96C003EF4EC /* HomePopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394251EDEC96C003EF4EC /* HomePopParam.m */; };
@@ -2320,8 +2324,10 @@
 		846A90151F1F48AB00896169 /* PayDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayDisplayCell.h; sourceTree = "<group>"; };
 		846A90161F1F48AB00896169 /* PayDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayDisplayCell.m; sourceTree = "<group>"; };
 		846A90171F1F48AB00896169 /* PayDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayDisplayCell.xib; sourceTree = "<group>"; };
+		846BB6DE1F580B6400CD3545 /* RenewalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenewalViewController.swift; sourceTree = "<group>"; };
 		8473F13F1F31CAA1005B4933 /* SupportBankList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportBankList.h; sourceTree = "<group>"; };
 		8473F1401F31CAA1005B4933 /* SupportBankList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportBankList.m; sourceTree = "<group>"; };
+		848139621F568A8600CD701C /* YX_TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YX_TextField.swift; sourceTree = "<group>"; };
 		848394201EDEB82A003EF4EC /* HomeBannerParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerParamModel.h; sourceTree = "<group>"; };
 		848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerParamModel.m; sourceTree = "<group>"; };
 		848394241EDEC96C003EF4EC /* HomePopParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePopParam.h; sourceTree = "<group>"; };
@@ -3172,6 +3178,7 @@
 				84ED5B701F4AC9F6004C0A59 /* UnfoldTableViewCell.h */,
 				84ED5B711F4AC9F6004C0A59 /* UnfoldTableViewCell.m */,
 				84ED5B721F4AC9F6004C0A59 /* UnfoldTableViewCell.xib */,
+				848139621F568A8600CD701C /* YX_TextField.swift */,
 				841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */,
 				848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */,
 			);
@@ -4660,6 +4667,7 @@
 		63ED333A1B6B523E008B6085 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				847D52321F58021B004BB11B /* Renewal-续期 */,
 				637636ED1D77B9D200E93289 /* PopView */,
 				1AEDCF011C197E6100014A87 /* Repayment */,
 				631CB46D1B7AF5220090C94D /* indexViewController.h */,
@@ -5060,6 +5068,14 @@
 				844E5F4F1ED94DCB00753671 /* RegParamModel.m */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		847D52321F58021B004BB11B /* Renewal-续期 */ = {
+			isa = PBXGroup;
+			children = (
+				846BB6DE1F580B6400CD3545 /* RenewalViewController.swift */,
+			);
+			path = "Renewal-续期";
 			sourceTree = "<group>";
 		};
 		84A6350B1F00F85700146A8A /* MobilePhoneOperator */ = {
@@ -6072,6 +6088,7 @@
 				63A24C611BE063A90036E8EF /* NSString+Password.m in Sources */,
 				0FFA91751C59BE57008D91D2 /* BankCardViewController.m in Sources */,
 				636AC42D1D38DEBC00599590 /* PayViewController.m in Sources */,
+				848139631F568A8600CD701C /* YX_TextField.swift in Sources */,
 				637963A91CABD0F8002A5910 /* ApprovalAmountExt.m in Sources */,
 				1AB442E61D782E53000459E6 /* RepayDetailViewController.m in Sources */,
 				0F047F471C507D59002ED7C0 /* LabelCell.m in Sources */,
@@ -6254,6 +6271,7 @@
 				63145AB41CA2952400D04ED8 /* LoginMsgResult.m in Sources */,
 				633DAD2D1C3E47D0000DA852 /* FindPassViewModel.m in Sources */,
 				638A16861E5030D700AB8AB6 /* SetUpFMDevice.m in Sources */,
+				846BB6DF1F580B6400CD3545 /* RenewalViewController.swift in Sources */,
 				63145AF21CA8DBBD00D04ED8 /* RegionExt.m in Sources */,
 				1AE362F51C586060006FC276 /* EditCardsController.m in Sources */,
 				6300CC031E4AAB870012B05A /* LoanProcessModel.m in Sources */,
@@ -6446,6 +6464,7 @@
 				CC0DF99B1EA5B1090024841A /* AuthorizationViewController.m in Sources */,
 				CC0DF99C1EA5B1090024841A /* LOTShapeTransform.m in Sources */,
 				CC0DF99D1EA5B1090024841A /* LoanRecordParse.m in Sources */,
+				848139641F568A8600CD701C /* YX_TextField.swift in Sources */,
 				CC0DF99E1EA5B1090024841A /* YYTextWeakProxy.m in Sources */,
 				CC0DF99F1EA5B1090024841A /* NSData+YYAdd.m in Sources */,
 				CC0DF9A01EA5B1090024841A /* LOTAnimatableBoundsValue.m in Sources */,
@@ -6616,6 +6635,7 @@
 				CC0DFA351EA5B1090024841A /* NSDictionary+NilSafe.m in Sources */,
 				CC0DFA361EA5B1090024841A /* YYLabel.m in Sources */,
 				CC0DFA371EA5B1090024841A /* CycleTextCell.m in Sources */,
+				846BB6E01F580B6400CD3545 /* RenewalViewController.swift in Sources */,
 				CC0DFA381EA5B1090024841A /* P2PAccountInfo.m in Sources */,
 				CC0DFA391EA5B1090024841A /* ViewModelClass.m in Sources */,
 				CC4271E71F0C8ED7004904B8 /* HomeRefuseCell.m in Sources */,

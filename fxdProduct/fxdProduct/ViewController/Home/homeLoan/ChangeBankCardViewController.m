@@ -59,8 +59,11 @@
     [self getBankListInfo];
     self.changTab.delegate = self;
     self.changTab.dataSource = self;
-    self.changTab.separatorStyle = NO;
+    self.changTab.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
     [self.sureBtn addTarget:self action:@selector(changeBank) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.changTab registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,67 +81,62 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    LabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"abcef%ld",indexPath.row]];
+    ContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
     if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil] lastObject];
+        cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
     }
-    cell.textField.placeholder = placeArray3[indexPath.row];
-    cell.textField.tag = indexPath.row + 100;
-    cell.textField.delegate = self;
-    cell.textField.text = dataListAll3[indexPath.row];
+    cell.titleLabel.text = placeArray3[indexPath.row];
+    cell.contentTextField.tag = indexPath.row + 100;
+    cell.contentTextField.delegate = self;
+    cell.contentTextField.text = dataListAll3[indexPath.row];
 
     if (indexPath.row == 0) {
-        [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
-        cell.btn.hidden = NO;
-        cell.btn.tag = indexPath.row + 200;
-        [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
-        cell.btnSecory.hidden = YES;
+        cell.arrowsImageBtn.tag = indexPath.row + 200;
+        
     }else if (indexPath.row == 1) {
-        [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
-        cell.btn.hidden = NO;
-        cell.btn.tag = indexPath.row + 200;
-        [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
-        cell.btnSecory.hidden = YES;
-        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+        [cell.arrowsImageBtn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
+        cell.arrowsImageBtn.tag = indexPath.row + 200;
+        cell.contentTextField.keyboardType = UIKeyboardTypeNumberPad;
+        [cell updateScanCardImageBtnLayout];
+        __weak typeof (self) weakSelf = self;
+        cell.btnClick = ^(UIButton * button) {
+            [weakSelf senderBtn:button];
+        };
     }else if (indexPath.row == 3){
-        cell.btn.hidden = YES;
-        cell.btnSecory.hidden = NO;
-        cell.btnSecory.tag = 203;
-        [cell.btnSecory addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
-        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-        [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
-
+        cell.arrowsImageBtn.tag = 203;
+        cell.contentTextField.keyboardType = UIKeyboardTypeNumberPad;
+        [cell.contentTextField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
+        [cell.arrowsImageBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+        [cell updateVerfiyCodeImageBtnLayout];
+        __weak typeof (self) weakSelf = self;
+        cell.btnClick = ^(UIButton * button) {
+            [weakSelf senderBtn:button];
+        };
     }else if (indexPath.row == 2){
-        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-        cell.btnSecory.hidden = YES;
-        cell.btn.hidden = YES;
-        [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
-
+        cell.contentTextField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.arrowsImageBtn.hidden = YES;
+        [cell.contentTextField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
     }
-    [Tool setCorner:cell.bgView borderColor:UI_MAIN_COLOR];
     cell.selectionStyle  = UITableViewCellSelectionStyleNone;
     return cell;
 
     return nil;
 }
-
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        HomeBankCardViewController *homebankVC = [HomeBankCardViewController new];
+        homebankVC.bankArray = _supportBankListArr;
+        homebankVC.delegate = self;
+        homebankVC.cardTag = [dataListAll3[5] integerValue];
+        //            homebankVC.bankFlag = 100;
+        [self.navigationController pushViewController:homebankVC animated:YES];
+    }
+}
 
 -(void)senderBtn:(UIButton *)sender
 {
     switch (sender.tag) {
-        case 200:
-        {
-            DLog(@"%@",placeArray3[0]);
-            DLog(@"%@",_bankModel);
-            HomeBankCardViewController *homebankVC = [HomeBankCardViewController new];
-            homebankVC.bankArray = _supportBankListArr;
-            homebankVC.delegate = self;
-            homebankVC.cardTag = [dataListAll3[5] integerValue];
-            //            homebankVC.bankFlag = 100;
-            [self.navigationController pushViewController:homebankVC animated:YES];
-        }
-            break;
+
         case 201:
         {
             DLog(@"%@",placeArray3[1]);
@@ -205,9 +203,7 @@
             [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
         }else{
-           
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:model.result.appmsg];
-            
         }
         
     } WithFaileBlock:^{
@@ -216,13 +212,11 @@
         
     }];
     [unbundlingBankCardViewModel sendSmsSHServiceBankNo:bankNo BusiType:@"rebind" SmsType:@"N" Mobile:dataListAll3[2]];
-    
-    
 
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70.f;
+    return 50.f;
 }
 
 

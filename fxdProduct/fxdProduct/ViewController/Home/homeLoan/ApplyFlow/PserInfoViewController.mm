@@ -373,12 +373,13 @@
             if (!cell) {
                 cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
             }
-            cell.arrowsImageBtn.hidden = NO;
-            cell.contentTextField.enabled = NO;
-
             if (indexPath.row == 2) {
                 cell.arrowsImageBtn.hidden = YES;
                 cell.contentTextField.enabled = YES;
+            }else{
+                cell.arrowsImageBtn.hidden = NO;
+                cell.contentTextField.enabled = NO;
+                cell.contentTextField.placeholder = @"点击选择";
             }
             cell.titleLabel.text = _placeHolderArr[indexPath.section][indexPath.row];
             cell.contentTextField.tag = indexPath.row +(100 * indexPath.section);;
@@ -583,13 +584,13 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *stringLength=[NSString stringWithFormat:@"%@%@",textField.text,string];
-    if(textField.tag == 103)
+    if(textField.tag == 101)
     {
         if ([stringLength length]>18) {
             return NO;
         }
     }
-    if (textField.tag == 104 || textField.tag == 105) {
+    if (textField.tag == 200 || textField.tag == 201) {
         return NO;
     }
     return YES;
@@ -597,7 +598,7 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField.tag == 102) {
+    if (textField.tag == 100) {
         if (![CheckUtils checkUserNameHanzi:textField.text]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的姓名"];
             [dataColor replaceObjectAtIndex:1 withObject:CellBGColorRed];
@@ -607,7 +608,7 @@
             [dataColor replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag == 103) {
+    if (textField.tag == 101) {
         if (![CheckUtils checkUserIdCard:textField.text]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的身份证号"];
             [dataColor replaceObjectAtIndex:2 withObject:CellBGColorRed];
@@ -617,7 +618,7 @@
             [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag == 104) {
+    if (textField.tag == 200) {
         if (textField.text.length <1) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择正确的学历"];
             [dataColor replaceObjectAtIndex:3 withObject:CellBGColorRed];
@@ -626,7 +627,7 @@
             [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag == 105) {
+    if (textField.tag == 201) {
         if (textField.text.length <2) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择正确的现居住地"];
             [dataColor replaceObjectAtIndex:4 withObject:CellBGColorRed];
@@ -635,7 +636,7 @@
             [dataColor replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag == 106) {
+    if (textField.tag == 202) {
         NSString *deta = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         if (![CheckUtils checkUserDetail:deta] || [CheckUtils checkNumber1_30wei:deta]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择正确的居住地详址"];
@@ -645,10 +646,10 @@
             [dataColor replaceObjectAtIndex:5 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag >= 102 && textField.tag <= 106)
+    if (textField.tag >= 100 && textField.tag <= 202)
     {
         if ([self isCanSelectBtn]) {
-            NSIndexPath *indexPat=[NSIndexPath indexPathForRow:textField.tag -100 inSection:0];
+            NSIndexPath *indexPat=[NSIndexPath indexPathForRow:textField.tag % 100 inSection:textField.tag / 100];
             NSArray *indexArray=[NSArray arrayWithObject:indexPat];
             [_tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
         } else {
