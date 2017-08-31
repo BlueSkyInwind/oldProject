@@ -47,7 +47,8 @@
 @property (nonatomic , copy)NSString *warnText;
 //二级提醒文字
 @property (nonatomic , copy)NSString *subWarnText;
-
+//二级提醒文字
+@property (nonatomic , copy)NSString *platformType;
 @end
 
 

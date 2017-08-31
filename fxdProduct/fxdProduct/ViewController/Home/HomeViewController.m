@@ -373,10 +373,12 @@
     [homeCell.refuseBgImage removeFromSuperview];
     [homeCell.drawingBgImage removeFromSuperview];
     [homeCell.otherPlatformsBgView removeFromSuperview];
-    //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中
+    //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中 0 延期失败
     //
     
-     [homeCell removeFromSuperview];
+    if (_homeProductList == nil) {
+        return homeCell;
+    }
     homeCell.homeProductData = _homeProductList;
     switch (_homeProductList.data.flag.integerValue) {
            
@@ -401,6 +403,7 @@
 
             [homeCell setupOtherPlatformsUI];
             break;
+        case 0:
         case 5:
         case 6:
         case 7:
@@ -918,36 +921,27 @@
 #pragma mark 点击提款
 -(void)drawingBtnClick{
     NSLog(@"点击提款");
-    [self PostStatuesMyLoanAmount:_homeProductList.data.productId];
-
-}
-
--(void)applyStatus{
-
-    switch (_homeProductList.data.flag.integerValue) {
-        case 5:
-        
-            [self goCheckVC:_model productId:_homeProductList.data.productId];
-            break;
-        case 6:
-            break;
-        case 7:
-            break;
-        case 8:
-            break;
-        case 9:
-            break;
-            
-        default:
-            break;
+    if ([Utility sharedUtility].loginFlage) {
+        [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
+        [self PostStatuesMyLoanAmount:_homeProductList.data.productId];
+    } else {
+        [self presentLogin:self];
     }
+//    [self PostStatuesMyLoanAmount:_homeProductList.data.productId];
+
 }
+
 #pragma mark 点击立即申请
 -(void)applyBtnClick:(NSString *)money{
     NSLog(@"点击立即申请=%@",money);
+    if ([Utility sharedUtility].loginFlage) {
+        [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
+        UserDataViewController *userDataVC = [[UserDataViewController alloc]initWithNibName:@"UserDataViewController" bundle:nil];
+        [self.navigationController pushViewController:userDataVC animated:YES];
+    } else {
+        [self presentLogin:self];
+    }
     
-    UserDataViewController *userDataVC = [[UserDataViewController alloc]initWithNibName:@"UserDataViewController" bundle:nil];
-    [self.navigationController pushViewController:userDataVC animated:YES];
     
 //    [self highLoanClick];
 }
@@ -962,20 +956,37 @@
 #pragma mark 我要借款
 -(void)loanBtnClick{
     NSLog(@"我要借款");
-    [self PostStatuesMyLoanAmount:_homeProductList.data.productList[0].productId];
+    
+    if ([_homeProductList.data.productList[0].isOverLimit isEqualToString:@"1"]) {
+        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"额度已满"];
+        return;
+    }
+    if ([Utility sharedUtility].loginFlage) {
+        [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productList[0].productId;
+        [self PostStatuesMyLoanAmount:_homeProductList.data.productList[0].productId];
+    } else {
+        [self presentLogin:self];
+    }
+//    [self PostStatuesMyLoanAmount:_homeProductList.data.productList[0].productId];
 }
 
 
 #pragma mark 点击产品列表
--(void)productBtnClick:(NSString *)productId{
+-(void)productBtnClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit{
 
     if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:RapidLoan]) {
         
-        [self PostStatuesMyLoanAmount:productId];
-//        LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
-//        loanFirstVC.homeModel = _homeProductList;
-//        loanFirstVC.productId = productId;
-//        [self.navigationController pushViewController:loanFirstVC animated:true];
+        if ([isOverLimit isEqualToString:@"1"]) {
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"额度已满"];
+            return;
+        }
+        if ([Utility sharedUtility].loginFlage) {
+            [Utility sharedUtility].userInfo.pruductId = productId;
+            [self PostStatuesMyLoanAmount:productId];
+        } else {
+            [self presentLogin:self];
+        }
+//        [self PostStatuesMyLoanAmount:productId];
         
     }else{
     

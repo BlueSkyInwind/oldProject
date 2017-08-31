@@ -10,7 +10,6 @@
 #import "BaseNavigationViewController.h"
 #import "HomeViewController.h"
 #import "MyViewController.h"
-#import "MoreViewController.h"
 #import "HelpViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
@@ -87,7 +86,7 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    if (tabBarController.selectedIndex == 1) {
+    if (tabBarController.selectedIndex == 1 || tabBarController.selectedIndex == 2) {
         if ([Utility sharedUtility].loginFlage) {
             
         } else {

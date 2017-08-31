@@ -24,53 +24,68 @@
 
 -(void)configureView{
     
-    self.backgroundColor = kUIColorFromRGB(0xf2f2f2);
+    self.backgroundColor = [UIColor whiteColor];
     self.backView = [[UIView alloc]init];
-    [Tool setCorner:self.backView borderColor:UI_MAIN_COLOR];
+//    [Tool setCorner:self.backView borderColor:UI_MAIN_COLOR];
     [self.contentView addSubview:self.backView];
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView.mas_left).with.offset(17);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-17);
-        make.top.equalTo(self.contentView.mas_top).with.offset(5);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-5);
+        make.left.equalTo(self.contentView.mas_left).with.offset(0);
+        make.right.equalTo(self.contentView.mas_right).with.offset(0);
+        make.top.equalTo(self.contentView.mas_top).with.offset(0);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0);
     }];
    
+    self.topLineView = [[UIView alloc]init];
+    self.topLineView.backgroundColor = rgb(153, 153, 147);
+    [self.backView addSubview:self.topLineView];
+    [self.topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.backView.mas_left).offset(0);
+        make.right.equalTo(self.backView.mas_right).offset(0);
+        make.height.equalTo(@0.5);
+        make.top.equalTo(self.backView.mas_top).offset(0);
+    }];
+    
     self.titleLabel = [[UILabel alloc]init];
-    self.titleLabel.font = [UIFont systemFontOfSize:17];
-    self.titleLabel.textColor = UI_MAIN_COLOR;
+    self.titleLabel.font = [UIFont systemFontOfSize:16];
+    self.titleLabel.textColor = rgb(77, 77, 77);
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.backView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.backView.mas_left).with.offset(8);
+        make.left.equalTo(self.backView.mas_left).with.offset(20);
         make.height.equalTo(@30);
         make.centerY.equalTo(self.backView.mas_centerY);
         make.width.equalTo(@100);
     }];
     
-    self.lineView  = [[UIView alloc]init];
-    self.lineView.backgroundColor = UI_MAIN_COLOR;
-    [self.backView addSubview:self.lineView];
-    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLabel.mas_right).with.offset(5);
-        make.width.equalTo(@1);
-        make.height.equalTo(@30);
-        make.centerY.equalTo(self.backView.mas_centerY);
-    }];
+
     
     self.contentTextField = [[UITextField alloc]init];
-    self.contentTextField.font = [UIFont systemFontOfSize:15];
+    self.contentTextField.font = [UIFont systemFontOfSize:14];
     self.contentTextField.secureTextEntry = YES;
     self.contentTextField.clearsOnBeginEditing = YES;
     self.contentTextField.delegate =self;
     [self.backView addSubview:self.contentTextField];
     [self.contentTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.lineView.mas_right).with.offset(5);
+        make.left.equalTo(self.backView.mas_left).with.offset(120);
         make.right.equalTo(self.contentView.mas_right).with.offset(10);
         make.centerY.equalTo(self.backView.mas_centerY);
         make.height.equalTo(@30);
         
     }];
+    
+    self.lineView  = [[UIView alloc]init];
+    self.lineView.backgroundColor = rgb(153, 153, 147);
+    [self.backView addSubview:self.lineView];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.backView.mas_left).with.offset(20);
+        make.right.equalTo(self.backView.mas_right).with.offset(0);
+//        make.width.equalTo(@1);
+        make.height.equalTo(@0.5);
+//        make.centerY.equalTo(self.backView.mas_centerY);
+        make.bottom.equalTo(self.backView.mas_bottom).with.offset(-0.5);
+    }];
+    
 }
 
 -(void)updateTitleWidth:(NSString *)title{

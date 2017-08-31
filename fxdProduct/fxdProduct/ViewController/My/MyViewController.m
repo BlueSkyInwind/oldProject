@@ -52,11 +52,7 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.MyViewTable.scrollEnabled = NO;
-    MineHeaderView *headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
-    headerView.backgroundColor = UI_MAIN_COLOR;
-    headerView.nameLabel.text = @"您好!";
-    headerView.accountLabel.text = @"15883945876";
-    [self.MyViewTable setTableHeaderView:headerView];
+    
     [self.MyViewTable setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     [self.MyViewTable registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"bCell"];
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -70,6 +66,11 @@
         [self getApplyStatus:^(BOOL isSuccess, UserStateModel *resultModel) {
         }];
     }
+    MineHeaderView *headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
+    headerView.backgroundColor = UI_MAIN_COLOR;
+    headerView.nameLabel.text = @"您好!";
+    headerView.accountLabel.text = [Utility sharedUtility].userInfo.userMobilePhone;
+    [self.MyViewTable setTableHeaderView:headerView];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

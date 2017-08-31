@@ -18,7 +18,7 @@ import SDWebImage
     func applyBtnClick(_ money: String)->Void
     func moreBtnClick()
     func loanBtnClick()
-    func productBtnClick(_ productId: String)->Void
+    func productBtnClick(_ productId: String, isOverLimit: String)->Void
 }
 
 class HomeDefaultCell: UITableViewCell {
@@ -703,10 +703,10 @@ extension HomeDefaultCell{
             productSecondBgImage?.addSubview(hiddleImage)
             hiddleImage.snp.makeConstraints({ (make) in
                 
-                make.top.equalTo((productSecondBgImage?.snp.top)!).offset(0)
+                make.top.equalTo((productSecondBgImage?.snp.top)!).offset(-2)
                 make.left.equalTo((productSecondBgImage?.snp.left)!).offset(0)
                 make.right.equalTo((productSecondBgImage?.snp.right)!).offset(0)
-                make.bottom.equalTo((productSecondBgImage?.snp.bottom)!).offset(0)
+                make.bottom.equalTo((productSecondBgImage?.snp.bottom)!).offset(-2)
             })
             
             let label = UILabel()
@@ -843,13 +843,16 @@ extension HomeDefaultCell{
     func clickFirstView(_ tapGes : UITapGestureRecognizer){
         
         var productId = ""
+        var isOverLimit = ""
         let tag = tapGes.view?.tag
         switch tag! {
         case 101:
             productId = homeProductData.data.productList[0].productId
+            isOverLimit = homeProductData.data.productList[0].isOverLimit
 //            productId = "第一个View"
         case 102:
             productId = homeProductData.data.productList[1].productId
+            isOverLimit = homeProductData.data.productList[1].isOverLimit
 //            productId = "点击第二个View"
         case 103:
             productId = homeProductData.data.thirdProductList[0].extAttr.path_
@@ -866,7 +869,7 @@ extension HomeDefaultCell{
         
         if delegate != nil {
         
-            delegate?.productBtnClick(productId)
+            delegate?.productBtnClick(productId ,isOverLimit: isOverLimit)
             
         }
         print("点击产品列表")
