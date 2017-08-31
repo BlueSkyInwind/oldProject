@@ -43,6 +43,10 @@
  用户联系人信息的状态
  */
 -(void)obtainContactInfoStatus;
+/**
+ 获取收款信息
+ */
+-(void)obtainGatheringInformation;
 
 
 #pragma  mark - 社保  公积金

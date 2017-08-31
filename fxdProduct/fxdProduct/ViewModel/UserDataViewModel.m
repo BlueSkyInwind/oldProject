@@ -8,7 +8,7 @@
 
 #import "UserDataViewModel.h"
 #import "FaceIDLiveModel.h"
-
+#import "UserCardResult.h"
 @implementation UserDataViewModel
 
 -(void)obtainCustomerAuthInfoProgress:(NSString *)product_id_{
@@ -65,8 +65,19 @@
     }];
 }
 -(void)obtainContactInfoStatus{
-    
     [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserContactInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+-(void)obtainGatheringInformation{
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -130,14 +141,13 @@
  */
 -(void)socialSecurityInfoUpload:(NSString *)taskid{
     
-    NSDictionary * paramDic = @{@"task_id":taskid,@"user_id":[Utility sharedUtility].userInfo.juid};
+    NSDictionary * paramDic = @{@"task_id":taskid};
     
     [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_shebaoupload_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
     } failure:^(EnumServerStatus status, id object) {
         
     }];
-    
 }
 /**
  信用卡
@@ -146,7 +156,7 @@
  */
 -(void)TheCreditCardInfoUpload:(NSString *)taskid{
     
-    NSDictionary * paramDic = @{@"task_id":taskid,@"user_id":[Utility sharedUtility].userInfo.juid};
+    NSDictionary * paramDic = @{@"task_id":taskid};
     
     [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_TheCreditCardupload_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         NSLog(@"%@",object);
@@ -157,9 +167,9 @@
 
 -(void)obtainhighRankingStatus{
     
-    NSDictionary * paramDic = @{@"user_id":[Utility sharedUtility].userInfo.juid};
+//    NSDictionary * paramDic = @{@"user_id":[Utility sharedUtility].userInfo.juid};
 
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_HighRankingStatus_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_HighRankingStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }

@@ -976,7 +976,6 @@
         
     }];
     [complianceViewModel getFXDCaseInfo];
-    
 }
 
 #pragma mark  fxd用户状态查询，viewmodel

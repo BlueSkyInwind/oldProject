@@ -36,7 +36,10 @@
 #import "UserDataViewModel.h"
 #import "HighRandingModel.h"
 #import "UserDataModel.h"
-
+#import "UserCardResult.h"
+#import "CardInfo.h"
+#import "CheckViewModel.h"
+#import "SupportBankList.h"
 
 @interface UserDataViewController ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
 {
@@ -670,9 +673,12 @@
         case 2:
         {
             //此处需要一个返回默认卡的接口
-            [self getCustomerCarrer_jhtml:^(CustomerCareerBaseClass *careerInfo) {
+            [self getGatheringInformation_jhtml:^(CardInfo *cardInfo) {
                 EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
                 editCard.typeFlag = @"0";
+                editCard.cardName = cardInfo.bankName;
+                editCard.cardNum = cardInfo.tailNumber;
+                editCard.reservedTel = cardInfo.phoneNum;
                 [self.navigationController pushViewController:editCard animated:YES];
             }];
         }
@@ -682,17 +688,8 @@
             if ([_userDataModel.others isEqualToString:@"1"]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
             }else {
-                [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
-                    
                     thirdPartyAuthViewController * thirdPartyAuthVC = [[thirdPartyAuthViewController alloc]init];
-                    thirdPartyAuthVC.phoneAuthChannel = _phoneAuthChannel;
-                    thirdPartyAuthVC.isZmxyAuth = [NSString stringWithFormat:@"%@",_isZmxyAuth];
-                    thirdPartyAuthVC.resultCode = _resultCode;
-                    thirdPartyAuthVC.verifyStatus =  [NSString stringWithFormat:@"%.0lf",custom_baseInfo.result.verifyStatus];
-                    thirdPartyAuthVC.isMobileAuth = _isMobileAuth;
                     [self.navigationController pushViewController:thirdPartyAuthVC animated:true];
-            
-                }];
             }
         }
             break;
@@ -706,30 +703,11 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
         return false;
     }
-    switch (row) {
-        case 1:{
-            if ([_userDataModel.identity isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请完善身份信息！"];
-                return false;
-            }
+    if (row != 0) {
+        if ([_userDataModel.identity isEqualToString:@"0"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请完善身份信息！"];
+            return false;
         }
-            break;
-        case 2:{
-            if ([_userDataModel.person isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请完善个人信息！"];
-                return false;
-            }
-        }
-            break;
-        case 3:{
-            if ([_userDataModel.gathering isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请完善收款信息！"];
-                return false;
-            }
-        }
-            break;
-        default:
-            break;
     }
     return true;
 }
@@ -781,7 +759,6 @@
     }];
     [customerInfo fatchCustomBaseInfo:nil];
 }
-
 -(void)getCustomerCarrer_jhtml:(void(^)(CustomerCareerBaseClass *careerInfo))finish
 {
     GetCareerInfoViewModel *getCareerInfoViewModel = [[GetCareerInfoViewModel alloc] init];
@@ -798,6 +775,62 @@
     [getCareerInfoViewModel fatchCareerInfo:nil];
 }
 
+-(void)getGatheringInformation_jhtml:(void(^)(CardInfo *cardInfo))finish{
+    
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResult.flag isEqualToString:@"0000"]) {
+            NSArray * array  = (NSArray *)baseResult.result;
+            NSMutableArray * supportBankListArr = [NSMutableArray array];
+            for (int i = 0; i < array.count; i++) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                [supportBankListArr addObject:bankList];
+            }
+            [self fatchCardInfo:supportBankListArr success:^(CardInfo *cardInfo) {
+                finish(cardInfo);
+            }];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [checkBankViewModel getSupportBankListInfo:@"2"];
+}
+- (void)fatchCardInfo:(NSMutableArray *)supportBankListArr success:(void(^)(CardInfo *cardInfo))finish
+{
+    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
+    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+        UserCardResult *  userCardsModel = [UserCardResult yy_modelWithJSON:returnValue];
+        if([userCardsModel.flag isEqualToString:@"0000"]){
+            if (userCardsModel.result.count > 0) {
+                for(NSInteger j=0;j<userCardsModel.result.count;j++)
+                {
+                    CardResult * cardResult = [userCardsModel.result objectAtIndex:0];
+                    if([cardResult.card_type_ isEqualToString:@"2"]){
+                        for (SupportBankList *banlist in supportBankListArr) {
+                            if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
+                                CardInfo *cardInfo = [[CardInfo alloc] init];
+                                cardInfo.tailNumber = cardResult.card_no_;
+                                cardInfo.bankName = banlist.bank_name_;
+                                cardInfo.cardIdentifier = cardResult.id_;
+                                cardInfo.phoneNum = cardResult.bank_reserve_phone_;
+                                finish(cardInfo);
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:userCardsModel.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [userDataVM obtainGatheringInformation];
+}
 - (BOOL)checkUserAuth:(NSInteger)selectRow
 {
     if (_nextStep.integerValue > 0 && _nextStep.integerValue >= selectRow) {
@@ -829,31 +862,6 @@
         [self.tableView.mj_header endRefreshing];
     }];
     [userDataVM1 obtainBasicInformationStatus];
-
-    
-//    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
-//    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
-//        BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-//        if ([resultM.flag isEqualToString:@"0000"]) {
-//            UserDataModel * userDataM = [[UserDataModel alloc]initWithDictionary:(NSDictionary *)resultM.result error:nil];
-//            _nextStep = userDataM.nextStep;
-//            _resultCode = userDataM.resultcode;
-//            _rulesId = userDataM.rulesid;
-//            _isMobileAuth = userDataM.isMobileAuth;
-//            _isZmxyAuth = userDataM.isZmxyAuth;// 1 未认证    2 认证通过   3 认证未通过
-//            _phoneAuthChannel = userDataM.TRUCKS_;  // 手机认证通道 JXL 表示聚信立，TC 表示天创认证
-//            if (_nextStep.integerValue == 4) {
-//                _isInfoEditable = userDataM.isInfoEditable;
-//            }
-//            [self setProcess];
-//        } else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.msg];
-//        }
-//        [self.tableView.mj_header endRefreshing];
-//    } WithFaileBlock:^{
-//        [self.tableView.mj_header endRefreshing];
-//    }];
-//    [userDataVM obtainCustomerAuthInfoProgress:_product_id];
 }
 
 - (void)popViewFamily

@@ -84,7 +84,5 @@ class MXVerifyManager: NSObject,MoxieSDKDelegate {
         else{
             print("任务失败");
         }
-
-        
     }
 }

@@ -28,7 +28,6 @@
 
 @end
 
-
 @interface BSFingerSDK : NSObject
 
 /**
@@ -47,7 +46,6 @@
  *
  */
 + (instancetype)sharedInstance;
-
 /**
  * 生成设备指纹的方法.
  *

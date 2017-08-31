@@ -9,12 +9,12 @@
 import UIKit
 
 typealias ArrowImageBtnClick = (_ button:UIButton) -> Void
-class ContentTableViewCell: UITableViewCell {
+class ContentTableViewCell: UITableViewCell{
 
     var titleLabel : UILabel?
-    var contentTextField : UITextField?
+    var promptLabel : UILabel?
+    var contentTextField : YX_TextField?
     var arrowsImageBtn : UIButton?
-    
     
     var btnClick : ArrowImageBtnClick?
     
@@ -26,7 +26,7 @@ class ContentTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -72,9 +72,10 @@ extension ContentTableViewCell {
             make.right.equalTo(self.snp.right).offset(-10)
         })
         
-        contentTextField = UITextField()
+        contentTextField = YX_TextField()
         contentTextField?.font = UIFont.systemFont(ofSize: 14)
         contentTextField?.textColor = UIColor.init(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
+        contentTextField?.addTarget(self, action: #selector(textFieldChanged(textField:)), for: UIControlEvents.editingChanged)
         self.addSubview(contentTextField!)
         contentTextField?.snp.makeConstraints({ (make) in
             make.left.equalTo((titleLabel?.snp.right)!)
@@ -82,7 +83,20 @@ extension ContentTableViewCell {
             make.top.equalTo(self.snp.top).offset(5)
             make.bottom.equalTo(self.snp.bottom).offset(-5)
         })
+        
+        promptLabel = UILabel()
+        promptLabel?.font = UIFont.systemFont(ofSize: 14)
+        promptLabel?.textColor = UIColor.init(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
+        promptLabel?.isHidden = true
+        self.addSubview(promptLabel!)
+        promptLabel?.snp.makeConstraints({ (make) in
+            make.right.equalTo((arrowsImageBtn?.snp.left)!).offset(-10)
+            make.centerY.equalTo(self.snp.centerY)
+            make.width.equalTo(60)
+            make.height.equalTo(21)
+        })
     }
+    
     // 选择联系人按钮位置
     func  updateConatctImageBtnLayout() {
         arrowsImageBtn?.snp.remakeConstraints({ (make) in
@@ -118,7 +132,12 @@ extension ContentTableViewCell {
         })
     }
     
+    func textFieldChanged(textField:UITextField) -> Void {
+        promptLabel?.isHidden = true
+    }
 }
+
+
 
 
 
