@@ -118,7 +118,9 @@
                 [self dismissViewControllerAnimated:YES completion:^{
                     _vaildCodeFlag = @"";
                     [Utility sharedUtility].isObtainUserLocation = YES;
+                    
                     ((AppDelegate *)[UIApplication sharedApplication].delegate).btb.selectedIndex = 0;
+                    
                 }];
             });
        } else {

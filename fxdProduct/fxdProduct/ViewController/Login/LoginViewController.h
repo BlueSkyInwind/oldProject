@@ -10,5 +10,4 @@
 #import "BaseIndexViewController.h"
 @interface LoginViewController : BaseIndexViewController
 
-
 @end

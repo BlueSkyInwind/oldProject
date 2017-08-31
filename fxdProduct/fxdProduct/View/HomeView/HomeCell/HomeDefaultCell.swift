@@ -18,7 +18,7 @@ import SDWebImage
     func applyBtnClick(_ money: String)->Void
     func moreBtnClick()
     func loanBtnClick()
-    func productBtnClick(_ productId: String)->Void
+    func productBtnClick(_ productId: String, isOverLimit: String)->Void
 }
 
 class HomeDefaultCell: UITableViewCell {
@@ -172,7 +172,8 @@ extension HomeDefaultCell{
         let applyBtn = UIButton()
         applyBtn.setTitle("立即申请", for: .normal)
         applyBtn.setTitleColor(UIColor.white, for: .normal)
-        applyBtn.backgroundColor = UI_MAIN_COLOR
+        applyBtn.setBackgroundImage(UIImage(named:"icon_anniu"), for: .normal)
+//        applyBtn.backgroundColor = UIColor.clear
         applyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         applyBtn.layer.cornerRadius = 5.0
         applyBtn.addTarget(self, action: #selector(applyBtnClick), for: .touchUpInside)
@@ -183,14 +184,6 @@ extension HomeDefaultCell{
             make.right.equalTo((defaultBgImage?.snp.right)!).offset(-25)
             make.height.equalTo(50)
         }
-        
-//        //渐变颜色
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.frame = applyBtn.frame
-//        //设置渐变的主颜色（可多个颜色添加）
-//        gradientLayer.colors = [UIColor.red.cgColor, UIColor.init(red: 0/255.0, green: 170/255.0, blue: 238/255.0, alpha: 1.0).cgColor]
-//        //将gradientLayer作为子layer添加到主layer上
-//        applyBtn.layer.addSublayer(gradientLayer)
         
         
         let bottomLabel = UILabel()
@@ -353,12 +346,8 @@ extension HomeDefaultCell{
             thirdRefuseView.titleLabel?.text = homeProductData.data.thirdProductList[index].name
             thirdRefuseView.qutaLabel?.text = homeProductData.data.thirdProductList[index].principalTop
             thirdRefuseView.termLabel?.text = homeProductData.data.thirdProductList[index].stagingTop
-            let name1 = "期限:"
-            let name2 = "-"
-            let name3 = "天"
-            thirdRefuseView.termLabel?.text = name1+homeProductData.data.thirdProductList[index].stagingBottom+name2+homeProductData.data.thirdProductList[index].stagingTop+name3
-            let name4 = "费用："
-            thirdRefuseView.feeLabel?.text = name4 + homeProductData.data.thirdProductList[0].extAttr.charge_desc_
+            thirdRefuseView.termLabel?.text = "期限:"+homeProductData.data.thirdProductList[index].stagingBottom+"-"+homeProductData.data.thirdProductList[index].stagingTop+"天"
+            thirdRefuseView.feeLabel?.text = "费用：" + homeProductData.data.thirdProductList[0].extAttr.charge_desc_
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.termLabel?.text)!)
             attrstr.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr.length-4))
             thirdRefuseView.termLabel?.attributedText = attrstr
@@ -412,6 +401,7 @@ extension HomeDefaultCell{
         }
         
         let bgView = UIView()
+    
         drawingBgImage?.addSubview(bgView)
         bgView.snp.makeConstraints { (make) in
             make.centerY.equalTo((drawingBgImage?.snp.centerY)!)
@@ -419,10 +409,10 @@ extension HomeDefaultCell{
             make.right.equalTo((drawingBgImage?.snp.right)!).offset(0)
             if UI_IS_IPONE5{
             
-                make.height.equalTo((homeProductData.data.infoList.count*36)+60)
+                make.height.equalTo((homeProductData.data.infoList.count*36)+90)
             }else{
             
-                make.height.equalTo((homeProductData.data.infoList.count*46)+60)
+                make.height.equalTo((homeProductData.data.infoList.count*46)+100)
             }
         }
         
@@ -435,11 +425,28 @@ extension HomeDefaultCell{
             drawingTitleLabel.font = UIFont.systemFont(ofSize: 19)
             bgView.addSubview(drawingTitleLabel)
             drawingTitleLabel.snp.makeConstraints({ (make) in
-                make.top.equalTo(bgView.snp.top).offset(25)
+                make.top.equalTo(bgView.snp.top).offset(15)
                 make.centerX.equalTo(bgView.snp.centerX)
                 make.height.equalTo(20)
             })
-            i = 30
+            i = 20
+        }
+        
+        if homeProductData.data.subWarnText != "" && homeProductData.data.subWarnText != nil{
+        
+            let tipLabel = UILabel()
+            tipLabel.textColor = UIColor.init(red: 179/255.0, green: 179/255.0, blue: 179/255.0, alpha: 1.0)
+            tipLabel.textAlignment = .center
+            tipLabel.font = UIFont.systemFont(ofSize: 14)
+            tipLabel.text = homeProductData.data.subWarnText
+            bgView.addSubview(tipLabel)
+            tipLabel.snp.makeConstraints({ (make) in
+                make.top.equalTo(bgView.snp.top).offset(43)
+                make.centerX.equalTo(bgView.snp.centerX)
+                make.height.equalTo(14)
+            })
+            
+            i = 40
         }
         var j = 0
         for index in 0..<homeProductData.data.infoList.count {
@@ -465,24 +472,34 @@ extension HomeDefaultCell{
                 make.right.equalTo(bgView.snp.right).offset(0)
                 make.height.equalTo(30)
             })
-            leftLabel?.text = homeProductData.data.infoList[index].label
-            rightLabel?.text = homeProductData.data.infoList[index].value
+            for k in 0..<homeProductData.data.infoList.count{
+            
+                let str = homeProductData.data.infoList[k].index
+                
+                if (index+1 == Int(str!)!){
+                
+                    leftLabel?.text = homeProductData.data.infoList[k].label
+                    rightLabel?.text = homeProductData.data.infoList[k].value
+                    
+                }
+            }
         }
         
         let bottomBtn = UIButton()
         bottomBtn.setTitle(homeProductData.data.buttonText, for: .normal)
         bottomBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         bottomBtn.setTitleColor(UIColor.white, for: .normal)
-        bottomBtn.backgroundColor = UI_MAIN_COLOR
+        bottomBtn.setBackgroundImage(UIImage(named:"icon_anniu"), for: .normal)
         bottomBtn.layer.cornerRadius = 5.0
         bottomBtn.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
         bgView.addSubview(bottomBtn)
         bottomBtn.snp.makeConstraints { (make) in
-            make.bottom.equalTo(bgView.snp.bottom).offset(-20)
+            make.top.equalTo(bgView.snp.top).offset(j+40)
             make.left.equalTo(bgView.snp.left).offset(25)
             make.right.equalTo(bgView.snp.right).offset(-25)
             make.height.equalTo(44)
         }
+        
     }
     
     //产品列表，第一个
@@ -563,8 +580,8 @@ extension HomeDefaultCell{
         let loanBtn = UIButton()
         loanBtn.setTitle("我要借款", for: .normal)
         loanBtn.setTitleColor(UIColor.white, for: .normal)
-        loanBtn.backgroundColor = UI_MAIN_COLOR
         loanBtn.layer.cornerRadius = 5.0
+        loanBtn.setBackgroundImage(UIImage(named:"icon_anniu"), for: .normal)
         loanBtn.addTarget(self, action: #selector(loanBtnClick), for: .touchUpInside)
         loanBtn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         productFirstBgImage?.addSubview(loanBtn)
@@ -574,6 +591,7 @@ extension HomeDefaultCell{
             make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-20)
             make.height.equalTo(50)
         }
+
     }
     
     //MARK:产品列表，其他的
@@ -663,6 +681,8 @@ extension HomeDefaultCell{
         jiantouImage.snp.makeConstraints { (make) in
             make.centerY.equalTo(bgView.snp.centerY)
             make.right.equalTo(bgView.snp.right).offset(-15)
+            make.height.equalTo(14)
+            make.width.equalTo(8)
         }
         
         let loanLabel = UILabel()
@@ -678,25 +698,25 @@ extension HomeDefaultCell{
         if (homeProductData.data.productList[1].isValidate == "0"){
         
             productSecondBgImage?.isUserInteractionEnabled = false
-            let hiddleView = UIView()
-            hiddleView.backgroundColor = UIColor.black
-            hiddleView.alpha = 0.5
-            productSecondBgImage?.addSubview(hiddleView)
-            hiddleView.snp.makeConstraints({ (make) in
-                make.top.equalTo((productSecondBgImage?.snp.top)!).offset(7)
-                make.left.equalTo((productSecondBgImage?.snp.left)!).offset(8)
-                make.right.equalTo((productSecondBgImage?.snp.right)!).offset(-8)
-                make.bottom.equalTo((productSecondBgImage?.snp.bottom)!).offset(-14)
+            let hiddleImage = UIImageView()
+            hiddleImage.image = UIImage(named:"yinying")
+            productSecondBgImage?.addSubview(hiddleImage)
+            hiddleImage.snp.makeConstraints({ (make) in
+                
+                make.top.equalTo((productSecondBgImage?.snp.top)!).offset(-2)
+                make.left.equalTo((productSecondBgImage?.snp.left)!).offset(0)
+                make.right.equalTo((productSecondBgImage?.snp.right)!).offset(0)
+                make.bottom.equalTo((productSecondBgImage?.snp.bottom)!).offset(-2)
             })
             
             let label = UILabel()
             label.text = "敬请期待"
             label.textColor = UIColor.white
             label.font = UIFont.systemFont(ofSize: 30)
-            hiddleView.addSubview(label)
+            hiddleImage.addSubview(label)
             label.snp.makeConstraints({ (make) in
-                make.centerY.equalTo(hiddleView.snp.centerY)
-                make.centerX.equalTo(hiddleView.snp.centerX)
+                make.centerY.equalTo(hiddleImage.snp.centerY)
+                make.centerX.equalTo(hiddleImage.snp.centerX)
                 make.height.equalTo(20)
             })
         }
@@ -778,8 +798,12 @@ extension HomeDefaultCell{
 //        print("slider.value = %d",slider.value)
 
         let money = Int(slider.value)
-        print("整除后的数字=%d",(money/100)*100)
-        defaultHeadLabel?.text = NSString(format: "%d元", (money/100)*100) as String
+        print("整除后的数字=%d",(money/500)*500)
+        defaultHeadLabel?.text = NSString(format: "%d元", (money/500)*500) as String
+        
+//        print("整除后的数字=%d",(money/100)*100)
+//        defaultHeadLabel?.text = NSString(format: "%d元", (money/100)*100) as String
+
     }
     
     //MARK:点击立即申请
@@ -819,12 +843,17 @@ extension HomeDefaultCell{
     func clickFirstView(_ tapGes : UITapGestureRecognizer){
         
         var productId = ""
+        var isOverLimit = ""
         let tag = tapGes.view?.tag
         switch tag! {
         case 101:
-            productId = "第一个View"
+            productId = homeProductData.data.productList[0].productId
+            isOverLimit = homeProductData.data.productList[0].isOverLimit
+//            productId = "第一个View"
         case 102:
-            productId = "点击第二个View"
+            productId = homeProductData.data.productList[1].productId
+            isOverLimit = homeProductData.data.productList[1].isOverLimit
+//            productId = "点击第二个View"
         case 103:
             productId = homeProductData.data.thirdProductList[0].extAttr.path_
 
@@ -832,7 +861,7 @@ extension HomeDefaultCell{
             productId = homeProductData.data.thirdProductList[1].extAttr.path_
 
         case 105:
-            productId = ""
+            productId = homeProductData.data.thirdProductList[2].extAttr.path_
 
         default:
             break
@@ -840,7 +869,7 @@ extension HomeDefaultCell{
         
         if delegate != nil {
         
-            delegate?.productBtnClick(productId)
+            delegate?.productBtnClick(productId ,isOverLimit: isOverLimit)
             
         }
         print("点击产品列表")

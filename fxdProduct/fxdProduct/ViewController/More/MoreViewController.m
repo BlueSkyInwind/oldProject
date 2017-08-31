@@ -304,9 +304,17 @@
             [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_loginOut_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
                 _returnMsgParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
                 if ([_returnMsgParse.flag isEqualToString:@"0000"]) {
+                    
+                    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
+                    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    });
+                    
                     LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                     [self presentViewController:nav animated:YES completion:^{
+                    
                         [_alertView hide];
                         [EmptyUserData EmptyData];
                     }];

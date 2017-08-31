@@ -444,12 +444,20 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             _promoteType = PromoteLimit;
             [self.view addSubview:checkSuccess];
             DLog(@"%d",[_userStateModel.applyAgain boolValue]);
+            if (UI_IS_IPHONE5) {
+                [checkSuccess.bottomBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@44);
+                }];
+            }
             if (![_userStateModel.applyAgain boolValue] || ![_userStateModel.taskStatus isEqualToString:@"1"] || ![_userStateModel.applyStatus isEqualToString:@"15"]) {
                 [checkSuccess.promote setHidden:YES];
                 checkSuccess.surBtnLeadRight.constant = .0f;
                 [checkSuccess.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.right.equalTo(checkSuccess.bottomBtnView.mas_right).offset(-21);
                     make.top.equalTo(checkSuccess.weekMoney.mas_bottom).offset(10);
+                    if (UI_IS_IPHONE5) {
+                        make.height.equalTo(@44);
+                    }
                     make.height.equalTo(@66);
                 }];
                 [checkSuccess.sureBtn layoutIfNeeded];
@@ -1255,7 +1263,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             {
                 
                 [self getCycle:_approvalModel.result.approval_amount];
-                
+                if (UI_IS_IPHONE5) {
+                    checkSuccess.loadMoney.font = [UIFont systemFontOfSize:30];
+                }
                 //                _loanMountMoney= [[[object objectForKey:@"result"] objectForKey:@"approval_amount_"] doubleValue];
                 checkSuccess.loadMoney.text =[NSString stringWithFormat:@"¥%.0f元",_approvalModel.result.approval_amount];
                 //[NSString stringWithFormat:@"%.2f元",(_loanMountMoney +_loanMountMoney*_userSelectNum.intValue*0.021)/_userSelectNum.intValue];

@@ -373,10 +373,12 @@
     [homeCell.refuseBgImage removeFromSuperview];
     [homeCell.drawingBgImage removeFromSuperview];
     [homeCell.otherPlatformsBgView removeFromSuperview];
-    //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中
+    //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中 0 延期失败
     //
     
-     [homeCell removeFromSuperview];
+    if (_homeProductList == nil) {
+        return homeCell;
+    }
     homeCell.homeProductData = _homeProductList;
     switch (_homeProductList.data.flag.integerValue) {
            
@@ -401,6 +403,7 @@
 
             [homeCell setupOtherPlatformsUI];
             break;
+        case 0:
         case 5:
         case 6:
         case 7:
@@ -918,12 +921,29 @@
 #pragma mark 点击提款
 -(void)drawingBtnClick{
     NSLog(@"点击提款");
-    [self highLoanClick];
+    if ([Utility sharedUtility].loginFlage) {
+        [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
+        [self PostStatuesMyLoanAmount:_homeProductList.data.productId];
+    } else {
+        [self presentLogin:self];
+    }
+//    [self PostStatuesMyLoanAmount:_homeProductList.data.productId];
+
 }
+
 #pragma mark 点击立即申请
 -(void)applyBtnClick:(NSString *)money{
     NSLog(@"点击立即申请=%@",money);
-    [self highLoanClick];
+    if ([Utility sharedUtility].loginFlage) {
+        [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
+        UserDataViewController *userDataVC = [[UserDataViewController alloc]initWithNibName:@"UserDataViewController" bundle:nil];
+        [self.navigationController pushViewController:userDataVC animated:YES];
+    } else {
+        [self presentLogin:self];
+    }
+    
+    
+//    [self highLoanClick];
 }
 #pragma mark 点击导流平台的更多
 -(void)moreBtnClick{
@@ -936,13 +956,37 @@
 #pragma mark 我要借款
 -(void)loanBtnClick{
     NSLog(@"我要借款");
+    
+    if ([_homeProductList.data.productList[0].isOverLimit isEqualToString:@"1"]) {
+        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"额度已满"];
+        return;
+    }
+    if ([Utility sharedUtility].loginFlage) {
+        [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productList[0].productId;
+        [self PostStatuesMyLoanAmount:_homeProductList.data.productList[0].productId];
+    } else {
+        [self presentLogin:self];
+    }
+//    [self PostStatuesMyLoanAmount:_homeProductList.data.productList[0].productId];
 }
 
 
 #pragma mark 点击产品列表
--(void)productBtnClick:(NSString *)productId{
+-(void)productBtnClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit{
 
     if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:RapidLoan]) {
+        
+        if ([isOverLimit isEqualToString:@"1"]) {
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"额度已满"];
+            return;
+        }
+        if ([Utility sharedUtility].loginFlage) {
+            [Utility sharedUtility].userInfo.pruductId = productId;
+            [self PostStatuesMyLoanAmount:productId];
+        } else {
+            [self presentLogin:self];
+        }
+//        [self PostStatuesMyLoanAmount:productId];
         
     }else{
     

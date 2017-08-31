@@ -74,7 +74,7 @@
 - (void)addCardBtn
 {
     UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(addCard)];
-    btn.tintColor = [UIColor whiteColor];
+    btn.tintColor = [UIColor blackColor];
     self.navigationItem.rightBarButtonItem = btn;
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14], NSFontAttributeName, nil] forState:UIControlStateNormal];
 }
