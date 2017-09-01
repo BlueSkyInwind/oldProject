@@ -52,16 +52,13 @@
     _contact2 = @[@"同事",@"朋友"];
     _flagTag = 0;
     _toolbarCancelDone.hidden = true;
-    if (UI_IS_IPHONE5) {
-        self.automaticallyAdjustsScrollViewInsets = false;
-    }
+
     NSString *device = [[UIDevice currentDevice] systemVersion];
     if (device.floatValue>10) {
         
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
-        
-        self.automaticallyAdjustsScrollViewInsets = false;
+//        self.automaticallyAdjustsScrollViewInsets = false;
     }
     
     dataListAll = [NSMutableArray array];
@@ -651,7 +648,6 @@
     return 300.f;
 }
 
-
 -(void)setRomovePickView
 {
     _toolbarCancelDone.hidden = NO;
@@ -806,9 +802,9 @@
         }else{
             [dataListAll replaceObjectAtIndex:4 withObject:textField.text];
             [dataColor replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
-            
         }
     }
+    
     if (textField.tag == 22) {
         NSString *telString = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         if (![CheckUtils checkTelNumber:telString] ) {
@@ -826,30 +822,28 @@
             [dataColor replaceObjectAtIndex:5 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag < 17 && textField.tag > 10) {
-        if ([self isCanSelectBtn]) {
-            NSIndexPath *indexPat=[NSIndexPath indexPathForRow:textField.tag -10 inSection:0];
-            NSArray *indexArray=[NSArray arrayWithObject:indexPat];
-            [_tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
-        }else{
-            NSIndexPath *indexPath_1=[NSIndexPath indexPathForRow:textField.tag -10 inSection:0];
-            NSArray *indexArray=[NSArray arrayWithObject:indexPath_1];
-            [_tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
+    if (textField.tag < 23 && textField.tag > 9) {
+        [self.tableView reloadData];
     }
 }
 
 - (BOOL)isCanSelectBtn
 {
-    //    && ![tel1 isEqualToString:_TelPhoneExt.mobilePhone]
-    //    && ![dataListAll[0] isEqualToString:dataListAll[6]]
     NSString *tel1 = [dataListAll[2] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *tel2 = [dataListAll[5] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if ([CheckUtils checkUserName:[dataListAll objectAtIndex:0]] && [[dataListAll objectAtIndex:1] length] >=1 && [CheckUtils checkTelNumber:tel1] && [CheckUtils checkUserName:[dataListAll objectAtIndex:4]] && [[dataListAll objectAtIndex:4] length] >=1 && [CheckUtils checkTelNumber:tel2]  && ![dataListAll[1] isEqualToString:dataListAll[4]] && ![dataListAll[2] isEqualToString:dataListAll[5]]) {
-        return YES;
-    } else {
-        return NO;
+    
+    if (![CheckUtils checkTelNumber:tel1]  || ![CheckUtils checkTelNumber:tel2]) {
+        return false;
     }
+    
+    if (![CheckUtils checkUserName:[dataListAll objectAtIndex:1]] || [[dataListAll objectAtIndex:1] length] <1 || ![CheckUtils checkUserName:[dataListAll objectAtIndex:4]] || [[dataListAll objectAtIndex:4] length] <1) {
+        return false;
+    }
+    
+    if ([dataListAll[1] isEqualToString:dataListAll[4]] || [dataListAll[2] isEqualToString:dataListAll[5]]) {
+        return false;
+    }
+    return true;
 }
 
 

@@ -185,6 +185,9 @@ UIKIT_EXTERN NSString * const       _UserThirdPartCertification_url;            
 UIKIT_EXTERN NSString * const       _AuthenticationCenterBasicInformation_url;                  //认证中心基础认证
 UIKIT_EXTERN NSString * const       _UserContactInfo_url;                  //用户联系人信息
 UIKIT_EXTERN NSString * const       _HomeState_url;                  //首页状态查询
+UIKIT_EXTERN NSString * const       _createApplication_url;                  //用户进件接口
+UIKIT_EXTERN NSString * const       _ApplicationViewInfo_url;                  //申请确认页数据
+UIKIT_EXTERN NSString * const       _UserDrawingInfo_url;                  //申请确认页数据
 
 
 

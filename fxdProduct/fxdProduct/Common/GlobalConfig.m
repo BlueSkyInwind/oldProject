@@ -419,6 +419,15 @@ NSString * const    _UserContactInfo_url    =    @"apigw/client/user/contact/inf
 //首页状态查询
 NSString * const    _HomeState_url    =    @"apigw/client/summary.jhtml";
 
+//申请进件
+NSString * const    _createApplication_url    =    @"apigw/client/application/create.jhtml";
+
+//申请确认页数据
+NSString * const    _ApplicationViewInfo_url    =    @"apigw/client/application/confirm.jhtml";
+
+//提款页数据
+NSString * const    _UserDrawingInfo_url    =    @"apigw/client/application/loan.jhtml";
+
 #pragma mark - 合规接口
 
 //用户开户接口

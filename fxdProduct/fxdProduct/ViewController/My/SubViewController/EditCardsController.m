@@ -51,6 +51,7 @@
     if([self.typeFlag isEqualToString:@"0"]){
         self.title=@"添加银行卡";
     }
+
     supportBankListArr = [NSMutableArray array];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
@@ -109,6 +110,7 @@
 {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -247,14 +249,7 @@
     //    bankType.bankFlag = 100;
     bankType.delegate=self;
     bankType.cardTag = _cardFlag;
-    //    if([self.typeFlag isEqualToString:@"0"])
-    //    {
-    //        bankType.bankFlag=99;
-    //    }
-    //    else
-    //    {
-    //        bankType.bankFlag=101;
-    //    }
+
     bankType.bankArray = supportBankListArr;
     [self.navigationController pushViewController:bankType animated:YES];
 }
@@ -356,12 +351,7 @@
 */
 - (void)startBankCamera
 {
-//    WTCameraViewController *cameraVC = [[WTCameraViewController alloc]init];
-//    cameraVC.delegate = self;
-//    cameraVC.devcode = Devcode; //开发码
-//    self.navigationController.navigationBarHidden = YES;
-//    [self.navigationController pushViewController:cameraVC animated:YES];
-    
+
     BOOL bankcard = [MGBankCardManager getLicense];
     
     if (!bankcard) {
@@ -389,14 +379,7 @@
 }
 
 #pragma  mark Delegate
-//-(void)BankTableViewSelect:(NSString *)CurrentRow andBankInfoList:(NSString *)bankNum andSectionRow:(NSInteger)SectionRow
-//{
-//    self.cardName=CurrentRow;//银行名字
-//    self.cardCode=bankNum;//银行编码
-//    _cardFlag = SectionRow;
-//    DLog(@"%@ %@",self.cardName,self.cardCode);
-//    [self.tableView reloadData];
-//}
+
 
 - (void)BankSelect:(SupportBankList *)bankInfo andSectionRow:(NSInteger)sectionRow
 {
@@ -407,65 +390,6 @@
     DLog(@"%@ %@",self.cardName,self.cardCode);
     [self.tableView reloadData];
 }
-/*
-#pragma mark - CamaraDelegate
-//银行卡识别核心初始化结果，判断核心是否初始化成功
-- (void)initBankCardRecWithResult:(int)nInit{
-    self.tabBarController.tabBar.hidden = YES;
-    DLog(@"识别核心初始化结果nInit>>>%d<<<",nInit);
-}
-//拍照和识别成功后返回结果图片、识别字符串
-- (void)cameraViewController:(WTCameraViewController *)cameraVC resultImage:(UIImage *)image resultDictionary:(NSDictionary *)resultDic{
-    
-    DLog(@"银行卡识别结果resultDic>>>%@<<<",resultDic);
-    int isExistFlag=0;
-//    NSArray *KeyArry=[_createBankDict allKeys];
-    for (int i=0; i < _bankCardModel.result.count; i++) {
-        
-        for (BankList *banklist in _bankCardModel.result) {
-            if ([banklist.desc isEqualToString:[resultDic objectForKey:@"bankName"]] || [banklist.desc containsString:[resultDic objectForKey:@"bankName"]] || [[resultDic objectForKey:@"bankName"] containsString:banklist.desc]) {
-                self.cardCode = banklist.code;
-                
-                self.cardNum=resultDic[@"cardNumber"];
-                self.cardNum = [self.cardNum stringByReplacingOccurrencesOfString:@" " withString:@""];
-                self.cardNum=[self changeStr:self.cardNum];
-                
-                self.cardName=resultDic[@"bankName"];
-                isExistFlag=1;
-                break;
-            }
-        }
-    }
-    if(isExistFlag==0)
-    {
-        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"银行卡暂不支持"];
-    }
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    [self.tableView reloadData];
-}
-
-
-//返回按钮被点击时回调此方法，返回相机视图控制器
-- (void)backWithCameraViewController:(WTCameraViewController *)cameraVC{
-    [cameraVC.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)viewWillAppearWithCameraViewController:(WTCameraViewController *)cameraVC
-{
-    [cameraVC.navigationController setNavigationBarHidden:YES];
-}
-
-//点击UIAlertView时返回相机视图控制器
-- (void)clickAlertViewWithCameraViewController:(WTCameraViewController *)cameraVC{
-    [cameraVC.navigationController popViewControllerAnimated:YES];
-}
-//相机视图将要消失时回调此方法，返回相机视图控制器
-- (void)viewWillDisappearWithCameraViewController:(WTCameraViewController *)cameraVC
-{
-    cameraVC.navigationController.navigationBarHidden = NO;
-}
-*/
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -518,16 +442,18 @@
                 
                 if ([[returnValue objectForKey:@"flag"]  isEqual: @"0000"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[returnValue objectForKey:@"msg"]];
-                    //                    [self.navigationController popToRootViewControllerAnimated:YES];
-                    [self dismissViewControllerAnimated:YES completion:^{
-                        self.addCarSuccess();
-                    }];
+                    if (self.popOrdiss == true) {
+                        [self.navigationController popViewControllerAnimated:true];
+                    }else{
+                        [self dismissViewControllerAnimated:YES completion:^{
+                            self.addCarSuccess();
+                        }];
+                    }
                 }
                 else
                 {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
                 }
-                
             } WithFaileBlock:^{
                 
             }];

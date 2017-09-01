@@ -18,10 +18,12 @@ typedef void(^AddCarBlock)();
 @property (strong,nonatomic) NSString *cardNum;//卡号
 @property (strong,nonatomic) NSString *typeFlag;//信用卡或储蓄卡识别标识
 @property (strong,nonatomic) NSString *cardCode;//银行卡编码
-@property (strong,nonatomic) NSString *cardLogogram;//银行卡编码
+@property (strong,nonatomic) NSString *cardLogogram;//银行卡缩写
 @property (strong,nonatomic) NSString *reservedTel;//预留手机号
 @property (strong,nonatomic) NSString *accountId;
 @property (strong,nonatomic) NSString *verCode;//验证码
+@property (assign,nonatomic) BOOL popOrdiss;
+
 @property (weak, nonatomic) IBOutlet UIButton *btnSaveInfo;
 
 @property (weak, nonatomic) IBOutlet UIButton *agreeBtn;

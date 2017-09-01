@@ -49,6 +49,7 @@ extension AuthenticationCenterCell{
             make.centerX.equalTo(bgView.snp.centerX)
         })
         
+        
         nameLabel = UILabel()
         nameLabel?.textColor = UIColor.black
         nameLabel?.font = UIFont.systemFont(ofSize: 18)

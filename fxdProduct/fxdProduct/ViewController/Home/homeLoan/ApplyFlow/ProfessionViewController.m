@@ -324,11 +324,7 @@
         }];
     }
     
-//    for (int i = 0; i < _professionArray.count; i++) {
-//        if ([dataListAll[2] isEqualToString:_professionArray[i]]) {
-//            profefssiontag =[NSString stringWithFormat:@"%d",i+1];
-//        }
-//    }
+
     NSString *cityDetail = [dataListAll[4] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *companyString  = [dataListAll[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
     return @{@"organization_name_":companyString,
@@ -354,7 +350,9 @@
         [saveCustomerCarrerViewModel setBlockWithReturnBlock:^(id returnValue) {
             _careerParse = [CareerParse yy_modelWithJSON:returnValue];
             if ([_careerParse.flag isEqualToString:@"0000"]) {
-                [self.delegate setProfessRule:_careerParse];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(setProfessRule:)]) {
+                    [self.delegate setProfessRule:_careerParse];
+                }
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:_careerParse.msg];
                 [self.navigationController popViewControllerAnimated:true];
                 

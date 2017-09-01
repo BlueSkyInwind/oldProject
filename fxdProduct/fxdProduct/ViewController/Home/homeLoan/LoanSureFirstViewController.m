@@ -12,6 +12,8 @@
 #import "FMDeviceManager.h"
 #import "RateModel.h"
 #import "ExpressViewController.h"
+#import "ApplicationViewModel.h"
+#import "ApplicaitonModel.h"
 
 @interface LoanSureFirstViewController ()
 
@@ -27,7 +29,6 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"借款申请确认";
     [self addBackItem];
-//    [self setUpProductCredit];
     [Tool setCorner:self.sureBtn borderColor:[UIColor clearColor]];
     NSString *str = self.agreementLabel.text;
     NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
@@ -36,88 +37,79 @@
     self.agreementLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreement)];
     [self.agreementLabel addGestureRecognizer:tap1];
-    
-//    if ([self.productId isEqualToString:@"P001002"]) {
-//        [self setUpProductCredit];
-//    }
-//    if ([self.productId isEqualToString:@"P001004"]) {
-//        [self setUpProductQuickly];
-//    }
-//    if ([self.productId isEqualToString:@"P001005"]) {
-//        [self setUpProductWhiteCollar];
-//    }
-    if ([_model.applyFlag isEqualToString:@"0002"] && [_model.applyAgain isEqualToString:@"1"]) {
-        [self.sureBtn addTarget:self action:@selector(secondLoanMoney) forControlEvents:UIControlEventTouchUpInside];
-    } else {
-        [self.sureBtn addTarget:self action:@selector(getcreateApplication) forControlEvents:UIControlEventTouchUpInside];
-    }
-
-    
+    [self.sureBtn addTarget:self action:@selector(getcreateApplication) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
 
     [self fatchRate];
-    
-//    [self getFxdCaseInfo];
 }
 
 - (void)fatchRate
 {
-    NSDictionary *dic = @{@"priduct_id_":_productId};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) { 
-        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
-        _rateModel = rateParse;
-        
-        if ([rateParse.flag isEqualToString:@"0000"]) {
-            
-            if ([self.productId isEqualToString:SalaryLoan]) {
-                [self setUpProductCredit];
-            }
-            if ([self.productId isEqualToString:RapidLoan]) {
-                [self setUpProductQuickly];
-            }
-            if ([self.productId isEqualToString:WhiteCollarLoan]) {
-                [self setUpProductWhiteCollar];
-            }
-            
-            if ([_productId isEqualToString:SalaryLoan]) {
-                NSString *str = [NSString stringWithFormat:@"工薪贷产品：\n纯信用，无抵押借款，用户可提前结清不额外收费\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
-                NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
-                if (UI_IS_IPHONE5) {
-                    contentText.yy_font = [UIFont systemFontOfSize:10];
-                } else {
-                    contentText.yy_font = [UIFont systemFontOfSize:14];
-                }
-                contentText.yy_color = rgb(122, 131, 139);
-                self.textView.attributedText = contentText;
-            }
-            if ([_productId isEqualToString:RapidLoan]) {
-                NSString *str = [NSString stringWithFormat:@"急速贷产品：\n5分钟申请,30分钟下款,极速体验\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
-                NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
-                contentText.yy_font = [UIFont systemFontOfSize:14];
-                contentText.yy_color = rgb(122, 131, 139);
-                self.textView.attributedText = contentText;
-                self.specialLabel.text = @"用户在申请急速贷产品后不得同时继续申请其他产品";
-            }
-            if ([_productId isEqualToString:WhiteCollarLoan]) {
-                NSString *str = [NSString stringWithFormat:@"白领贷产品：\n专为高端人群设计，超低费用，提前结清不额外收费\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
-                NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
-                if (UI_IS_IPHONE5) {
-                    contentText.yy_font = [UIFont systemFontOfSize:10];
-                } else {
-                    contentText.yy_font = [UIFont systemFontOfSize:14];
-                }
-                contentText.yy_color = rgb(122, 131, 139);
-                self.textView.attributedText = contentText;
-            }
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
+    ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
+    [applicationVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            ApplicaitonViewInfoModel * applicationVM = [[ApplicaitonViewInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            [self setUpProductData:applicationVM];
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
-        
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    [applicationVM queryApplicationInfo:_productId];
+    
+    
+//    NSDictionary *dic = @{@"priduct_id_":_productId};
+//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) { 
+//        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
+//        _rateModel = rateParse;
+//        
+//        if ([rateParse.flag isEqualToString:@"0000"]) {
+//            if ([self.productId isEqualToString:SalaryLoan]) {
+//                [self setUpProductCredit];
+//            }
+//            if ([self.productId isEqualToString:RapidLoan]) {
+//                [self setUpProductQuickly];
+//            }
+//            if ([_productId isEqualToString:SalaryLoan]) {
+//                NSString *str = [NSString stringWithFormat:@"工薪贷产品：\n纯信用，无抵押借款，用户可提前结清不额外收费\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
+//                NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
+//                if (UI_IS_IPHONE5) {
+//                    contentText.yy_font = [UIFont systemFontOfSize:10];
+//                } else {
+//                    contentText.yy_font = [UIFont systemFontOfSize:14];
+//                }
+//                contentText.yy_color = rgb(122, 131, 139);
+//                self.textView.attributedText = contentText;
+//            }
+//            if ([_productId isEqualToString:RapidLoan]) {
+//                NSString *str = [NSString stringWithFormat:@"急速贷产品：\n5分钟申请,30分钟下款,极速体验\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
+//                NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
+//                contentText.yy_font = [UIFont systemFontOfSize:14];
+//                contentText.yy_color = rgb(122, 131, 139);
+//                self.textView.attributedText = contentText;
+//                self.specialLabel.text = @"用户在申请急速贷产品后不得同时继续申请其他产品";
+//            }
+//            if ([_productId isEqualToString:WhiteCollarLoan]) {
+//                NSString *str = [NSString stringWithFormat:@"白领贷产品：\n专为高端人群设计，超低费用，提前结清不额外收费\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
+//                NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
+//                if (UI_IS_IPHONE5) {
+//                    contentText.yy_font = [UIFont systemFontOfSize:10];
+//                } else {
+//                    contentText.yy_font = [UIFont systemFontOfSize:14];
+//                }
+//                contentText.yy_color = rgb(122, 131, 139);
+//                self.textView.attributedText = contentText;
+//            }
+//        } else {
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
 }
 
 - (YYTextView *)textView
@@ -131,7 +123,6 @@
         }else {
             _textView.scrollEnabled = NO;
         }
-        
         _textView.editable = NO;
         [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(@0);
@@ -141,6 +132,50 @@
         }];
     }
     return _textView;
+}
+-(void)setUpProductData:(ApplicaitonViewInfoModel *)applicationVM{
+    
+//    [self.productLogo sd_setImageWithURL:[NSURL URLWithString:applicationVM.icon] placeholderImage:[UIImage imageNamed:@"placeholderImage_Icon"] options:SDWebImageRefreshCached];
+    [self.productLogo sd_setImageWithURL:[NSURL URLWithString:applicationVM.icon] placeholderImage:[UIImage imageNamed:@"placeholderImage_Icon"] options:SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+        
+    } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        
+    }];
+    self.productTitle.text = applicationVM.productName;
+    NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"当前额度:"];
+    NSString *amountStr = [NSString stringWithFormat:@"%@",applicationVM.amount];
+    [attriStr yy_appendString:amountStr];
+    [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 5)];
+    [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
+    [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(5, amountStr.length-1)];
+    [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5, amountStr.length)];
+    self.amountLabel.attributedText = attriStr;
+    
+    NSString *str = [NSString stringWithFormat:@"期限:%@",applicationVM.period];
+    NSMutableAttributedString * attriStr2 = [[NSMutableAttributedString alloc] initWithString:str];
+    [attriStr2 addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 2)];
+    [attriStr2 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 2)];
+    [attriStr2 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, str.length-3)];
+    [attriStr2 addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, str.length-3)];
+    self.timeLabel.attributedText = attriStr2;
+     NSString * detailStr = @"";
+    for (NSString *str1  in applicationVM.detail) {
+        detailStr = [detailStr stringByAppendingString:str1];
+    } 
+    NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:detailStr];
+    if (UI_IS_IPHONE5) {
+        contentText.yy_font = [UIFont systemFontOfSize:12];
+    } else {
+        contentText.yy_font = [UIFont systemFontOfSize:14];
+    }
+    contentText.yy_color = rgb(122, 131, 139);
+    self.textView.attributedText = contentText;
+    
+    NSString * specialStr = @"";
+    for (NSString *str2  in applicationVM.special) {
+        specialStr = [specialStr stringByAppendingString:str2];
+    }
+    self.specialLabel.text = specialStr;
 }
 
 - (void)setUpProductCredit
@@ -160,7 +195,6 @@
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
     }else {
-        
         NSString *str = [NSString stringWithFormat:@"额度:%ld-%ld元",_rateModel.result.principal_bottom_,_rateModel.result.principal_top_];
         NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:str];
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
@@ -170,15 +204,7 @@
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
         
-//        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"额度:1000-5000元"];
-//        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
-//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
-//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, 9)];
-//        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, 10)];
-//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
-//        self.amountLabel.attributedText = attriStr;
     }
-    
     self.timeLabel.text = [NSString stringWithFormat:@"期限:%ld-%ld%@",_rateModel.result.staging_bottom_,_rateModel.result.staging_top_,_rateModel.result.remark_];
 //    self.timeLabel.text = @"期限:5-50周";
     self.specialLabel.text = @"用户在申请工薪贷产品后不得同时继续申请其他产品";
@@ -189,12 +215,10 @@
 - (void)setUpProductWhiteCollar
 {
     self.productLogo.image = [UIImage imageNamed:@"home10"];
-//    self.productTitle.text = @"白领贷";
     self.productTitle.text = _rateModel.result.name_;
     if ([_model.applyFlag isEqualToString:@"0002"]) {
         NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"当前额度:"];
         NSString *amountStr = [NSString stringWithFormat:@"%@元",_model.pre_prove_amt_];
-//        NSString *amountStr = _rateModel.result.ext_attr_.amt_desc_;
         [attriStr yy_appendString:amountStr];
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 5)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
@@ -212,13 +236,7 @@
         [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, attriStr.length-3)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
-//        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"额度:1000-3000元"];
-//        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
-//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
-//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, 9)];
-//        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, 10)];
-//        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
-//        self.amountLabel.attributedText = attriStr;
+
     }
     
     self.timeLabel.text = [NSString stringWithFormat:@"期限:%ld-%ld%@",_rateModel.result.staging_bottom_,_rateModel.result.staging_top_,_rateModel.result.remark_];
@@ -259,44 +277,20 @@
 -(void)getcreateApplication
 {
     DLog(@"首次进件")
-    NSDictionary *dict;
-    FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
-    NSString *blackBox = manager->getDeviceInfo();
-    if ([_productId isEqualToString:RapidLoan]) {
-        dict = @{@"plantform_source":PLATFORM,
-                 @"product_id_":_productId,
-                 @"if_family_know_":_if_family_know,
-                 @"resultcode":_resultCode,
-                 @"rulesid":_rulesId,
-                 @"req_loan_amt_":_req_loan_amt,
-                 @"loan_staging_amount_":@1,
-                 @"third_tongd_code":blackBox};
-    }
-    if ([_productId isEqualToString:SalaryLoan]||[_productId isEqualToString:WhiteCollarLoan]) {
-        dict = @{@"plantform_source":PLATFORM,
-                   @"product_id_":_productId,
-                   @"if_family_know_":_if_family_know,
-                   @"resultcode":_resultCode,
-                   @"rulesid":_rulesId,
-                   @"third_tongd_code":blackBox};
-    }
-    
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_createApplication_jhtml] parameters:dict finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-                
-                CheckViewController *checkView = [CheckViewController new];
-//                checkView.qryUserStatusModel = _qryUserStatusModel;
-//                checkView.caseInfo = _caseInfo;
-                checkView.homeStatues = 1;
-                [self.navigationController pushViewController:checkView animated:YES];
-            } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-            }
+    ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
+    [applicationVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+
+            [self checkState];
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    [applicationVM userCreateApplication:_productId];
+    
 }
 
 - (void)secondLoanMoney

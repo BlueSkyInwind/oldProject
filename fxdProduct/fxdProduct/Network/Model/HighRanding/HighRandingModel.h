@@ -10,7 +10,9 @@
 
 @interface HighRandingModel : JSONModel
 
+
 @property(nonatomic,strong)NSString<Optional> * userid;
+@property(nonatomic,strong)NSString<Optional> * tasktypeid;
 @property(nonatomic,strong)NSString<Optional> * taskid;
 @property(nonatomic,strong)NSString<Optional> * type;
 @property(nonatomic,strong)NSString<Optional> * result;

@@ -50,6 +50,7 @@
 #import "QryUserStatusModel.h"
 #import "HGBankListModel.h"
 #import "SupportBankList.h"
+#import "DrawingsInfoModel.h"
 
 
 //#error 以下需要修改为您平台的信息
@@ -115,7 +116,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     userSelectIndex = defaultBankIndex;
     self.rt_disableInteractivePop = YES;
     [self addBackItemRoot];
-    DLog(@"%@",[Utility sharedUtility].userInfo.juid);
     [self configMoxieSDK];
     DLog(@"%@",_moxieSDK.version);
 
@@ -143,11 +143,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [checkSuccess.firstAgreemwntBtn addTarget:self action:@selector(clickFirstAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
     [checkSuccess.secondAgreemwntBtn addTarget:self action:@selector(clickSecondAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
     [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self obtainDrawingInformation];
 }
 
 -(void)clickSecondAgreementBtn{
 
-    
     NSDictionary *paramDic;
     if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
         if (_userSelectNum.integerValue == 0) {
@@ -227,7 +228,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         checkSuccess.agreementsView.hidden = YES;
         checkSuccess.agreementImage.image = [UIImage imageNamed:@"more-arrow-3"];
     }
-
 }
 
 #pragma mark 审核中，量子互助链接
@@ -267,15 +267,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         _homeStatues = 2;
         [self createUI];
     }else{
-    
         if ([_userStateModel.platform_type isEqualToString:@"2"]) {
             [self getFxdCaseInfo];
         }else{
             [self checkState];
         }
     }
-//    [self getUserStatus];
-    
 }
 
 -(void)createUI
@@ -385,29 +382,20 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
            
                 checkSuccess.bankTextField.text = @"收款方式";
                 checkSuccess.bankTextField.delegate = self;
-                
                 checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
-                UILabel *daysLabel = [[UILabel alloc] init];
-                daysLabel.text = [NSString stringWithFormat:@"借款期限: %@天", [Utility sharedUtility].rateParse.result.ext_attr_.period_desc_];
-                daysLabel.textAlignment = NSTextAlignmentCenter;
-                daysLabel.font = [UIFont systemFontOfSize:16.f];
-                daysLabel.textColor = UI_MAIN_COLOR;
                 
-                [checkSuccess.bgView addSubview:daysLabel];
-                [daysLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(@0);
-                    make.top.equalTo(@0);
-                    make.right.equalTo(@0);
-                    make.bottom.equalTo(@0);
-                }];
-                NSString *amountText = [NSString stringWithFormat:@"%.0f元",_approvalModel.result.approval_amount];
-                NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"到期还款:"];
-                [attStr yy_appendString:amountText];
-                [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-                [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(4, amountText.length)];
-                checkSuccess.weekMoney.attributedText = attStr;
+                 NSString *timeLimitText = [NSString stringWithFormat:@"借款期限: %@天", [Utility sharedUtility].rateParse.result.ext_attr_.period_desc_];;
+                 NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:timeLimitText];
+                [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,timeLimitText.length - 5)];
+                checkSuccess.termLabel.attributedText = attStr;
+//                checkSuccess.termLabel.text = [NSString stringWithFormat:@"借款期限: %@天", [Utility sharedUtility].rateParse.result.ext_attr_.period_desc_];
+                
+                NSString *amountText = [NSString stringWithFormat:@"到期还款: %.0f元", _approvalModel.result.approval_amount];
+                NSMutableAttributedString *amountStr = [[NSMutableAttributedString alloc] initWithString:amountText];
+                [amountStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,amountText.length - 5)];
+                checkSuccess.jsdMonayLabel.attributedText = amountStr;
+                
             }else {
-
                 checkSuccess.jsdDescView.hidden = YES;
                 checkSuccess.textFiledWeek.text = @"请选择借款周期";
                 checkSuccess.purposeTextField.text = @"请选择借款用途";
@@ -468,7 +456,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             
             if([_userStateModel.platform_type isEqualToString:@"2"] || [_userStateModel.platform_type isEqualToString:@"0"]){
                 if ([_userStateModel.platform_type isEqualToString:@"0"]) {
-                    
                     attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《借款协议》"];
                     range = NSMakeRange(attributeStr.length - 6, 6);
                 }else{
@@ -1258,32 +1245,24 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         if (status == Enum_SUCCESS) {
             _approvalModel = [Approval yy_modelWithJSON:object];
             
-            
             if ([_approvalModel.flag isEqualToString:@"0000"])
             {
-                
                 [self getCycle:_approvalModel.result.approval_amount];
                 if (UI_IS_IPHONE5) {
                     checkSuccess.loadMoney.font = [UIFont systemFontOfSize:30];
                 }
-                //                _loanMountMoney= [[[object objectForKey:@"result"] objectForKey:@"approval_amount_"] doubleValue];
                 checkSuccess.loadMoney.text =[NSString stringWithFormat:@"¥%.0f元",_approvalModel.result.approval_amount];
-                //[NSString stringWithFormat:@"%.2f元",(_loanMountMoney +_loanMountMoney*_userSelectNum.intValue*0.021)/_userSelectNum.intValue];
                 if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
-                    NSString *amountText = [NSString stringWithFormat:@"%.0f元",_approvalModel.result.approval_amount];
-                    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"到期还款:"];
-                    [attStr yy_appendString:amountText];
-                    [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-                    [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4, amountText.length)];
-                    checkSuccess.weekMoney.attributedText = attStr;
+                    NSString *amountText = [NSString stringWithFormat:@"到期还款: %.0f元", _approvalModel.result.approval_amount];
+                    NSMutableAttributedString *amountStr = [[NSMutableAttributedString alloc] initWithString:amountText];
+                    [amountStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,amountText.length - 5)];
+                    checkSuccess.jsdMonayLabel.attributedText = amountStr;
                 }else {
                     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
                     [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
                     [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-2, 2)];
                     checkSuccess.weekMoney.attributedText = attStr;
                 }
-                
-                //[NSString stringWithFormat:@"%.2f元",_loanMountMoney +_loanMountMoney*_userSelectNum.intValue*0.021];
                 checkSuccess.allMoney.text = @"0元";
                 NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:checkSuccess.loadMoney.text];
                 [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:30] range:NSMakeRange(0, 1)];
@@ -1312,7 +1291,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 checkSuccess.moneyLabel.textAlignment = NSTextAlignmentCenter;
                 checkSuccess.moneyLabel.hidden = YES;
                 checkSuccess.tipLabel.text = _approvalModel.result.payMessage;
-//                checkSuccess.tipLabel.text = @"tip提示";
                 
             }
         }
@@ -1461,7 +1439,23 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
     }];
 }
-
+#pragma  mark - 获取
+-(void)obtainDrawingInformation{
+    CheckViewModel * checkVM = [[CheckViewModel alloc]init];
+    [checkVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            DrawingsInfoModel * drawingsInfoM = [[DrawingsInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            
+            
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [checkVM obtainDrawingInformation];
+}
 
 #pragma  mark - 获取借款用途接口
 
@@ -1519,10 +1513,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
         GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
         if ([caseInfo.flag isEqualToString:@"0000"]) {
-            
             _caseInfo = caseInfo;
             [self getUserStatus:caseInfo];
-
         }
     } WithFaileBlock:^{
         
@@ -1640,36 +1632,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 }
 
 
-#pragma mark 银行卡名字的转换
--(NSString *)bankName:(NSString *)bankCode{
-    
-    NSString *name = @"";
-    if([bankCode isEqualToString:@"BOC"]){
-    
-        name = @"中国银行";
-        
-    }else if ([bankCode isEqualToString:@"ICBC"]){
-    
-        name = @"中国工商银行";
-    }else if ([bankCode isEqualToString:@"CCB"]){
-    
-        name = @"中国建设银行";
-    }else if ([bankCode isEqualToString:@"ABC"]){
-    
-        name = @"中国农业银行";
-    }else if ([bankCode isEqualToString:@"CITIC"]){
-    
-        name = @"中信银行";
-    }else if ([bankCode isEqualToString:@"CIB"]){
-    
-        name = @"兴业银行";
-    }else if ([bankCode isEqualToString:@"CEB"]){
-    
-        name = @"中国光大银行";
-    }
-    
-    return name;
-}
+
 
 
 @end

@@ -374,7 +374,6 @@
     [homeCell.drawingBgImage removeFromSuperview];
     [homeCell.otherPlatformsBgView removeFromSuperview];
     //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中 0 延期失败
-    //
     
     if (_homeProductList == nil) {
         return homeCell;
@@ -591,11 +590,9 @@
             [self.tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-    
         if (appDelegate.isShow) {
             [self popView:_homeProductList];
         }
-        
     } WithFaileBlock:^{
         
     }];
@@ -804,16 +801,17 @@
                     }];
                 }
                 if ([productId isEqualToString:SalaryLoan]) {
-                    LoanSureSecondViewController *loanSecondVC = [[LoanSureSecondViewController alloc] init];
-                    loanSecondVC.model = model;
-                    loanSecondVC.productId = productId;
-                    [self.navigationController pushViewController:loanSecondVC animated:true];
-                }
-                if ([productId isEqualToString:WhiteCollarLoan]) {
-                    LoanSureSecondViewController *loanSecondVC = [[LoanSureSecondViewController alloc] init];
-                    loanSecondVC.model = model;
-                    loanSecondVC.productId = productId;
-                    [self.navigationController pushViewController:loanSecondVC animated:true];
+                    __weak typeof (self) weakSelf = self;
+                    [self fatchRate:^(RateModel *rate) {
+                        LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
+                        loanFirstVC.productId = productId;
+                        loanFirstVC.model = model;
+                        [weakSelf.navigationController pushViewController:loanFirstVC animated:true];
+                    }];
+//                    LoanSureSecondViewController *loanSecondVC = [[LoanSureSecondViewController alloc] init];
+//                    loanSecondVC.model = model;
+//                    loanSecondVC.productId = productId;
+//                    [self.navigationController pushViewController:loanSecondVC animated:true];
                 }
             }
         }else {
@@ -927,8 +925,6 @@
     } else {
         [self presentLogin:self];
     }
-//    [self PostStatuesMyLoanAmount:_homeProductList.data.productId];
-
 }
 
 #pragma mark 点击立即申请
@@ -942,8 +938,6 @@
         [self presentLogin:self];
     }
     
-    
-//    [self highLoanClick];
 }
 #pragma mark 点击导流平台的更多
 -(void)moreBtnClick{
@@ -963,11 +957,17 @@
     }
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productList[0].productId;
-        [self PostStatuesMyLoanAmount:_homeProductList.data.productList[0].productId];
+//        [self PostStatuesMyLoanAmount:_homeProductList.data.productList[0].productId];
+        __weak typeof (self) weakSelf = self;
+        [self fatchRate:^(RateModel *rate) {
+            LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
+            loanFirstVC.productId = _homeProductList.data.productList[0].productId;
+//            loanFirstVC.model = model;
+            [weakSelf.navigationController pushViewController:loanFirstVC animated:true];
+        }];
     } else {
         [self presentLogin:self];
     }
-//    [self PostStatuesMyLoanAmount:_homeProductList.data.productList[0].productId];
 }
 
 
