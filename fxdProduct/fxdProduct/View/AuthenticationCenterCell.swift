@@ -27,8 +27,6 @@ extension AuthenticationCenterCell{
 
     fileprivate func setupUI(){
     
-        let k_w = UIScreen.main.bounds.size.width
-    
         let bgView = UIView()
         bgView.backgroundColor = UIColor.white
         self.contentView.addSubview(bgView)
@@ -43,11 +41,19 @@ extension AuthenticationCenterCell{
         bgView.addSubview(image!)
         image?.snp.makeConstraints({ (make) in
             make.top.equalTo(bgView.snp.top).offset(15)
-            if k_w == 320{
-                make.top.equalTo(bgView.snp.top).offset(5)
-            }
+//            if k_w == 320{
+//                make.top.equalTo(bgView.snp.top).offset(5)
+//            }
             make.centerX.equalTo(bgView.snp.centerX)
         })
+        
+        if UI_IS_IPONE5{
+        
+            image?.snp.updateConstraints({ (make) in
+                make.top.equalTo(bgView.snp.top).offset(5)
+            })
+        }
+        
         
         nameLabel = UILabel()
         nameLabel?.textColor = UIColor.black

@@ -68,8 +68,6 @@
     homeParam.channel_ = PLATFORM;
     NSDictionary * paramDic = [homeParam toDictionary];
     //http://192.168.12.109:8005/apigw/client/summary?
-
-    NSString *url = @"http://service-apigateway.test.fxds:8005";
     [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_HomeState_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if (self.returnBlock) {

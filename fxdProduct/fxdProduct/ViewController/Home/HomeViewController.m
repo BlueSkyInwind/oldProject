@@ -564,10 +564,15 @@
 
 -(void)getHomeData{
     
+    __weak typeof (self) weakSelf = self;
     HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
     [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         _homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
+        if (![_homeProductList.errCode isEqualToString:@"0"]) {
+            [[MBPAlertView sharedMBPTextView]showTextOnly:weakSelf.view message:_homeProductList.friendErrMsg];
+            return;
+        }
         [_dataArray removeAllObjects];
         for (HomeProductList *product in _homeProductList.data.productList) {
             [_dataArray addObject:product];

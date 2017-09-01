@@ -1228,6 +1228,10 @@
 		CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */; };
 		CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
 		CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
+		CCAA8EAE1F5901ED00278D16 /* FooterBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EAD1F5901ED00278D16 /* FooterBtnView.swift */; };
+		CCAA8EAF1F5901ED00278D16 /* FooterBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EAD1F5901ED00278D16 /* FooterBtnView.swift */; };
+		CCAA8EB61F5940CC00278D16 /* RenewalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EB51F5940CC00278D16 /* RenewalModel.m */; };
+		CCAA8EB71F5940CC00278D16 /* RenewalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EB51F5940CC00278D16 /* RenewalModel.m */; };
 		CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCC344FC1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
 		CCC344FD1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
@@ -1251,6 +1255,8 @@
 		CCCE40CE1EE7D61700E3F102 /* SendSmsParam.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40CC1EE7D61700E3F102 /* SendSmsParam.m */; };
 		CCD32B4E1F58133B0092A9CB /* CurrentInformationHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD32B4D1F58133B0092A9CB /* CurrentInformationHeadView.swift */; };
 		CCD32B4F1F58133B0092A9CB /* CurrentInformationHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD32B4D1F58133B0092A9CB /* CurrentInformationHeadView.swift */; };
+		CCD32B521F5819980092A9CB /* CurrentInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD32B511F5819980092A9CB /* CurrentInformationCell.swift */; };
+		CCD32B531F5819980092A9CB /* CurrentInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD32B511F5819980092A9CB /* CurrentInformationCell.swift */; };
 		CCD565BE1E8A46D500B6665D /* PserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */; };
 		CCD565C01E8A46D500B6665D /* PserInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */; };
 		CCDEDF5C1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDEDF5B1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m */; };
@@ -2402,6 +2408,9 @@
 		CCA056BA1EBB3ECB00CB5F29 /* SesameCreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditViewController.m; sourceTree = "<group>"; };
 		CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditViewController.xib; sourceTree = "<group>"; };
 		CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterHeaderView.swift; sourceTree = "<group>"; };
+		CCAA8EAD1F5901ED00278D16 /* FooterBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterBtnView.swift; sourceTree = "<group>"; };
+		CCAA8EB41F5940CC00278D16 /* RenewalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenewalModel.h; sourceTree = "<group>"; };
+		CCAA8EB51F5940CC00278D16 /* RenewalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalModel.m; sourceTree = "<group>"; };
 		CCC344FA1F03833E006D0F83 /* JRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRefuseView.h; sourceTree = "<group>"; };
 		CCC344FB1F03833E006D0F83 /* JRefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRefuseView.m; sourceTree = "<group>"; };
 		CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewModel.h; sourceTree = "<group>"; };
@@ -2423,6 +2432,7 @@
 		CCCE40CB1EE7D61700E3F102 /* SendSmsParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendSmsParam.h; sourceTree = "<group>"; };
 		CCCE40CC1EE7D61700E3F102 /* SendSmsParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendSmsParam.m; sourceTree = "<group>"; };
 		CCD32B4D1F58133B0092A9CB /* CurrentInformationHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentInformationHeadView.swift; sourceTree = "<group>"; };
+		CCD32B511F5819980092A9CB /* CurrentInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentInformationCell.swift; sourceTree = "<group>"; };
 		CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PserInfoViewController.xib; sourceTree = "<group>"; };
 		CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PserInfoViewController.mm; sourceTree = "<group>"; };
 		CCD565BD1E8A46D500B6665D /* PserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PserInfoViewController.h; sourceTree = "<group>"; };
@@ -2651,6 +2661,7 @@
 		0F047F431C507D0D002ED7C0 /* writeView */ = {
 			isa = PBXGroup;
 			children = (
+				CCD32B501F58195D0092A9CB /* CurrentInformation */,
 				0F047F441C507D59002ED7C0 /* LabelCell.h */,
 				0F047F451C507D59002ED7C0 /* LabelCell.m */,
 				0F047F461C507D59002ED7C0 /* LabelCell.xib */,
@@ -4449,6 +4460,7 @@
 		63E076541B67114800E269F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCAA8EB01F59408C00278D16 /* Renewal */,
 				843614A21F0CF9130036201A /* BaseResultModel.h */,
 				843614A31F0CF9130036201A /* BaseResultModel.m */,
 				842CA0E01F453B0700A2150B /* homeParam */,
@@ -5187,6 +5199,15 @@
 			name = AuthenticationCenterView;
 			sourceTree = "<group>";
 		};
+		CCAA8EB01F59408C00278D16 /* Renewal */ = {
+			isa = PBXGroup;
+			children = (
+				CCAA8EB41F5940CC00278D16 /* RenewalModel.h */,
+				CCAA8EB51F5940CC00278D16 /* RenewalModel.m */,
+			);
+			name = Renewal;
+			sourceTree = "<group>";
+		};
 		CCB323401EBC5A7B0001D9DE /* SubmitZhimaCreditAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -5205,6 +5226,15 @@
 				CCCDA87F1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m */,
 			);
 			name = SaveLoanCase;
+			sourceTree = "<group>";
+		};
+		CCD32B501F58195D0092A9CB /* CurrentInformation */ = {
+			isa = PBXGroup;
+			children = (
+				CCD32B511F5819980092A9CB /* CurrentInformationCell.swift */,
+				CCAA8EAD1F5901ED00278D16 /* FooterBtnView.swift */,
+			);
+			name = CurrentInformation;
 			sourceTree = "<group>";
 		};
 		CCDEDF591EEA3863009CEC32 /* SaveAccountBankCard */ = {
@@ -5909,6 +5939,7 @@
 				63ED33471B6B5569008B6085 /* RegViewController.m in Sources */,
 				63F254871E49A45900852CF1 /* HMScannerController.m in Sources */,
 				63553AD21E5D26F500B2C1FF /* UserDataViewController.m in Sources */,
+				CCD32B521F5819980092A9CB /* CurrentInformationCell.swift in Sources */,
 				630D462F1BD097B900874064 /* GetMoneyResultAuditRecordBean.m in Sources */,
 				0F5407F61C8D289100592B56 /* CheckInfoView.m in Sources */,
 				63ED33371B6B4593008B6085 /* BaseNavigationViewController.m in Sources */,
@@ -5988,6 +6019,7 @@
 				0FFA91791C59F641008D91D2 /* LoanMoneyViewController.m in Sources */,
 				636AC4381D38EA9500599590 /* PayMoneyCell.m in Sources */,
 				1A762F6F1C1FBE4700964719 /* RepayRecordController.m in Sources */,
+				CCAA8EB61F5940CC00278D16 /* RenewalModel.m in Sources */,
 				638A17041E517D9F00AB8AB6 /* LOTShapeGroup.m in Sources */,
 				63F254831E49A45900852CF1 /* HMScanerCardViewController.m in Sources */,
 				0FEA58891BE0A497007F8A6D /* testView.m in Sources */,
@@ -6113,6 +6145,7 @@
 				63FE3DEB1E487819009E5B82 /* SumCell.m in Sources */,
 				634830F21CBB82C30005C4CD /* CustomerBaseInfoContactBean.m in Sources */,
 				CCCDA8841EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
+				CCAA8EAE1F5901ED00278D16 /* FooterBtnView.swift in Sources */,
 				CCF803271ED4249A003B7975 /* UnbundlingBankCardViewController.m in Sources */,
 				63F254891E49A45900852CF1 /* HMScannerViewController.m in Sources */,
 				6326C9D11BF08CEE00FD23A8 /* Model.m in Sources */,
@@ -6555,6 +6588,7 @@
 				CC0DF9E81EA5B1090024841A /* GlobalConfig.m in Sources */,
 				CC0DF9E91EA5B1090024841A /* CardListResult.m in Sources */,
 				CC0DF9EA1EA5B1090024841A /* RepayHistoryBaseClass.m in Sources */,
+				CCAA8EB71F5940CC00278D16 /* RenewalModel.m in Sources */,
 				CC0DF9EB1EA5B1090024841A /* P2PAgreeMentModel.m in Sources */,
 				CC0DF9EC1EA5B1090024841A /* GetCustomerBaseViewModel.m in Sources */,
 				CC0DF9ED1EA5B1090024841A /* YYTextInput.m in Sources */,
@@ -6801,6 +6835,7 @@
 				CC0DFAC31EA5B1090024841A /* Aspects.m in Sources */,
 				CC0DFAC41EA5B1090024841A /* UIImage+FixOrientation.m in Sources */,
 				CC0DFAC51EA5B1090024841A /* GesturesPasswordCell.m in Sources */,
+				CCD32B531F5819980092A9CB /* CurrentInformationCell.swift in Sources */,
 				CC0DFAC61EA5B1090024841A /* UpdateDevIDViewController.m in Sources */,
 				CCCE40C21EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */,
 				CC0DFAC71EA5B1090024841A /* LewPopupViewAnimationSlide.m in Sources */,
@@ -6835,6 +6870,7 @@
 				CC0DFAE41EA5B1090024841A /* YYTextLine.m in Sources */,
 				CC0DFAE51EA5B1090024841A /* GetCaseInfo.m in Sources */,
 				CC0DFAE61EA5B1090024841A /* CustomerIDInfo.m in Sources */,
+				CCAA8EAF1F5901ED00278D16 /* FooterBtnView.swift in Sources */,
 				CC0DFAE71EA5B1090024841A /* DataDicParse.m in Sources */,
 				84DFBED41F4D72050009DAB9 /* UserDataViewModel.m in Sources */,
 				CCF9384E1EEE2CA80074791D /* ExpressCreditRefuseView.m in Sources */,

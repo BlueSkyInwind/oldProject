@@ -21,3 +21,7 @@ let UI_IS_IPONE = (UIDevice.current.userInterfaceIdiom == .phone)
 let UI_IS_IPONE5 = (UI_IS_IPONE && _k_h == 568.0)
 let UI_IS_IPONE6P = (UI_IS_IPONE && _k_h == 736.0)
 let UI_IS_IPONE4 = (UI_IS_IPONE && _k_h == 480.0)
+
+
+
+

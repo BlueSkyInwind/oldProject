@@ -419,6 +419,9 @@ NSString * const    _UserContactInfo_url    =    @"apigw/client/user/contact/inf
 //首页状态查询
 NSString * const    _HomeState_url    =    @"apigw/client/summary.jhtml";
 
+//获取当前期的续期信息
+NSString * const    _repayment_url    =    @"apigw/client/repayment/staging/continue/info.jhtml";
+
 #pragma mark - 合规接口
 
 //用户开户接口
@@ -478,6 +481,8 @@ NSString * const    _getBidStatus_url    =    @"hg/getBidStatus";
 NSString * const    _saveLoanCase_url    =    @"hg/saveLoanCase.jhtml";
 //首借免息
 NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
+
+
 
 #pragma mark - 对外导流接口
 

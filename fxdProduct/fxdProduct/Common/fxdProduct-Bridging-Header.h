@@ -21,9 +21,11 @@
 #import "UIColor+Extend.h"
 #import "MoxieSDK.h"
 #import "HomeProductList.h"
-#import "UserDataViewModel.h"
 #import "UserDataModel.h"
 #import "BaseResultModel.h"
-
-
+#import "RepayMentViewModel.h"
+#import "RenewalModel.h"
+#import "CheckViewModel.h"
+#import "SupportBankList.h"
+#import "UserCardResult.h"
 #endif /* fxdProduct_Bridging_Header_h */

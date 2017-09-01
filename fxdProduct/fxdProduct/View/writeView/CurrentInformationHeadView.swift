@@ -8,12 +8,15 @@
 
 import UIKit
 
+//typealias BackBtn = ()->Void
+
 class CurrentInformationHeadView: UIView {
 
-    var titleLabel: UILabel?
+//    var titleLabel: UILabel?
     var moneyDescLabel: UILabel?
     var moneyLabel: UILabel?
     
+//    var backClosure : BackBtn?
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -37,25 +40,25 @@ extension CurrentInformationHeadView{
 
     fileprivate func setupUI(){
     
-        let backBtn = UIButton()
-        backBtn.setImage(UIImage(named:""), for: .normal)
-        backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
-        self.addSubview(backBtn)
-        backBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(self).offset(30)
-            make.left.equalTo(self).offset(20)
-        }
-        
-        titleLabel = UILabel()
-        titleLabel?.textColor = UIColor.white
-        titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        titleLabel?.textAlignment = .center
-        self.addSubview(titleLabel!)
-        titleLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self).offset(30)
-            make.centerX.equalTo(self.snp.centerX)
-            make.height.equalTo(20)
-        })
+//        let backBtn = UIButton()
+//        backBtn.setImage(UIImage(named:"return_white"), for: .normal)
+//        backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
+//        self.addSubview(backBtn)
+//        backBtn.snp.makeConstraints { (make) in
+//            make.top.equalTo(self).offset(30)
+//            make.left.equalTo(self).offset(20)
+//        }
+//        
+//        titleLabel = UILabel()
+//        titleLabel?.textColor = UIColor.white
+//        titleLabel?.font = UIFont.systemFont(ofSize: 18)
+//        titleLabel?.textAlignment = .center
+//        self.addSubview(titleLabel!)
+//        titleLabel?.snp.makeConstraints({ (make) in
+//            make.top.equalTo(self).offset(30)
+//            make.centerX.equalTo(self.snp.centerX)
+//            make.height.equalTo(20)
+//        })
         
         moneyDescLabel = UILabel()
         moneyDescLabel?.textColor = UIColor.white
@@ -63,7 +66,7 @@ extension CurrentInformationHeadView{
         moneyDescLabel?.textAlignment = .center
         self.addSubview(moneyDescLabel!)
         moneyDescLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo((titleLabel?.snp.bottom)!).offset(40)
+            make.top.equalTo(self).offset(40)
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(20)
         })
@@ -79,11 +82,25 @@ extension CurrentInformationHeadView{
             make.height.equalTo(30)
         })
     }
+    
+    override var  frame:(CGRect){
+        
+        didSet{
+            
+            let newFrame = CGRect(x:0,y:0,width:_k_w,height:150)
+            super.frame = newFrame
+            
+        }
+    }
 }
 
 extension CurrentInformationHeadView{
 
-    func back(){
-    
-    }
+//    func back(){
+//    
+//        if self.backClosure != nil {
+//            
+//            self.backClosure!()
+//        }
+//    }
 }
