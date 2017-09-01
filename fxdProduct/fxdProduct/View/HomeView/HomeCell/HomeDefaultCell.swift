@@ -85,16 +85,22 @@ extension HomeDefaultCell{
         defaultHeadLabel?.text = "3000元"
         defaultBgImage?.addSubview(defaultHeadLabel!)
         defaultHeadLabel?.snp.makeConstraints({ (make) in
-            if UI_IS_IPONE5{
-                make.top.equalTo((defaultBgImage?.snp.top)!).offset(15)
-            }else{
+//            if UI_IS_IPONE5{
+//                make.top.equalTo((defaultBgImage?.snp.top)!).offset(15)
+//            }else{
             
                 make.top.equalTo((defaultBgImage?.snp.top)!).offset(30)
-            }
+//            }
             
             make.centerX.equalTo((defaultBgImage?.snp.centerX)!)
             make.height.equalTo(30)
         })
+        
+        if UI_IS_IPONE5 {
+            defaultHeadLabel?.snp.updateConstraints({ (make) in
+                make.top.equalTo((defaultBgImage?.snp.top)!).offset(15)
+            })
+        }
         
         let label = UILabel()
         label.textAlignment = .center
@@ -134,15 +140,22 @@ extension HomeDefaultCell{
         slider.addTarget(self, action: #selector(changed(slider:)), for: UIControlEvents.valueChanged)
         defaultBgImage?.addSubview(slider)
         slider.snp.makeConstraints { (make) in
-            if UI_IS_IPONE5{
-            
-                make.top.equalTo(label.snp.bottom).offset(10)
-            }else{
+//            if UI_IS_IPONE5{
+//            
+//                make.top.equalTo(label.snp.bottom).offset(10)
+//            }else{
                 make.top.equalTo(label.snp.bottom).offset(20)
-            }
+//            }
             make.left.equalTo((defaultBgImage?.snp.left)!).offset(15)
             make.right.equalTo((defaultBgImage?.snp.right)!).offset(-15)
             
+        }
+        
+        if UI_IS_IPONE5{
+        
+            slider.snp.updateConstraints({ (make) in
+                make.top.equalTo(label.snp.bottom).offset(10)
+            })
         }
         
         let leftLabel = UILabel()
@@ -235,6 +248,7 @@ extension HomeDefaultCell{
             make.right.equalTo((refuseBgImage?.snp.right)!).offset(0)
             make.height.equalTo(20)
         }
+        
         
         let firstLabel = UILabel()
         firstLabel.text = "一、60天后，更新基础资料"
@@ -371,16 +385,23 @@ extension HomeDefaultCell{
         moreBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
         otherPlatformsBgView?.addSubview(moreBtn)
         moreBtn.snp.makeConstraints { (make) in
-            if UI_IS_IPONE5 {
+//            if UI_IS_IPONE5 {
+//            
+//                make.bottom.equalTo(bgView.snp.bottom).offset(25)
+//            }else{
             
                 make.bottom.equalTo(bgView.snp.bottom).offset(25)
-            }else{
-            
-                make.bottom.equalTo(bgView.snp.bottom).offset(25)
-            }
+//            }
             
             make.centerX.equalTo((otherPlatformsBgView?.snp.centerX)!)
             make.height.equalTo(20)
+        }
+        
+        if UI_IS_IPONE5{
+            
+            moreBtn.snp.updateConstraints({ (make) in
+                make.bottom.equalTo(bgView.snp.bottom).offset(25)
+            })
         }
         
     }
@@ -407,13 +428,20 @@ extension HomeDefaultCell{
             make.centerY.equalTo((drawingBgImage?.snp.centerY)!)
             make.left.equalTo((drawingBgImage?.snp.left)!).offset(0)
             make.right.equalTo((drawingBgImage?.snp.right)!).offset(0)
-            if UI_IS_IPONE5{
-            
-                make.height.equalTo((homeProductData.data.infoList.count*36)+90)
-            }else{
+//            if UI_IS_IPONE5{
+//            
+//                make.height.equalTo((homeProductData.data.infoList.count*36)+90)
+//            }else{
             
                 make.height.equalTo((homeProductData.data.infoList.count*46)+100)
-            }
+//            }
+        }
+        
+        if UI_IS_IPONE5{
+        
+            bgView.snp.updateConstraints({ (make) in
+                make.height.equalTo((homeProductData.data.infoList.count*36)+90)
+            })
         }
         
         var i = 0

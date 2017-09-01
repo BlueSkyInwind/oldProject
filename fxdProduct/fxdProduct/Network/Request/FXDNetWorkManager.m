@@ -702,6 +702,8 @@
                 if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
                     [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
                     [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
+//                    [manager.requestSerializer setValue:@"a0334e081d734935a3762d103f3aec3b" forHTTPHeaderField:@"juid"];
+                     DLog(@"juid --- %@\n ",[Utility sharedUtility].userInfo.juid);
                     [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel_"];
                 }
             }

@@ -77,6 +77,7 @@
 
     [super viewDidDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
+
 }
 #pragma mark - TableView
 
@@ -148,7 +149,9 @@
             break;
         case 1:
         {
-            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+            RenewalViewController *repayRecord = [[RenewalViewController alloc] init];
+            
+//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:YES];
         }
             break;

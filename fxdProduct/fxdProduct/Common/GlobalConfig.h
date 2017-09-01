@@ -146,6 +146,9 @@ UIKIT_EXTERN NSString * const       _customerContact_url;                    //�
 UIKIT_EXTERN NSString * const       _saveIDInfo_url;
 UIKIT_EXTERN NSString * const       _getLimitProductlist_url;                //首页产品列表路径
 
+UIKIT_EXTERN NSString * const       _repayment_url;                          //获取当前期的续期信息
+
+
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集
 UIKIT_EXTERN NSString * const       _detectInfo_url;                         //活体检测信息上传
