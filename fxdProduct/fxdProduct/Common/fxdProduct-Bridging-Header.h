@@ -33,6 +33,6 @@
 #import "PayMethodViewController.h"
 #import "PayNavigationViewController.h"
 #import "UIViewController+KNSemiModal.h"
-#import "BankCardLlistModel.h"
 #import "UserBankCardListViewController.h"
+#import "BankInfoViewModel.h"
 #endif /* fxdProduct_Bridging_Header_h */
