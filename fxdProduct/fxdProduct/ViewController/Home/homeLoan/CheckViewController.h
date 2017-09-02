@@ -10,6 +10,9 @@
 #import "UserStateModel.h"
 #import "QryUserStatusModel.h"
 #import "GetCaseInfo.h"
+
+
+
 @interface CheckViewController : BaseViewController
 //状态
 @property (nonatomic, assign) NSInteger homeStatues;

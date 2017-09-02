@@ -255,7 +255,6 @@
                 [repayRequest repayRequest];
             
             }
-            
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }

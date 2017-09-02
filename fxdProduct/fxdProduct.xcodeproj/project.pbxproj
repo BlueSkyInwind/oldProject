@@ -612,6 +612,8 @@
 		848C531F1F4C0C920092F87C /* thirdPartyAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C531D1F4C0C920092F87C /* thirdPartyAuthViewController.swift */; };
 		848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
 		848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
+		8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
+		8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		8499BF871F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */; };
 		8499BF881F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */; };
 		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
@@ -2349,6 +2351,8 @@
 		848C531A1F4BDF740092F87C /* FaceIdentiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceIdentiViewController.swift; sourceTree = "<group>"; };
 		848C531D1F4C0C920092F87C /* thirdPartyAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = thirdPartyAuthViewController.swift; sourceTree = "<group>"; };
 		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
+		8496D3141F5A9E3A00CCEE72 /* BankInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankInfoViewModel.h; sourceTree = "<group>"; };
+		8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankInfoViewModel.m; sourceTree = "<group>"; };
 		8499BF851F4FFDB700F193F9 /* UserBankCardListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserBankCardListViewController.h; sourceTree = "<group>"; };
 		8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserBankCardListViewController.m; sourceTree = "<group>"; };
 		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
@@ -3501,6 +3505,8 @@
 				84DFBED21F4D72050009DAB9 /* UserDataViewModel.m */,
 				846BB6E11F5835E100CD3545 /* ApplicationViewModel.h */,
 				846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */,
+				8496D3141F5A9E3A00CCEE72 /* BankInfoViewModel.h */,
+				8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -6307,6 +6313,7 @@
 				639E88721CA1371800254216 /* LunchViewController.m in Sources */,
 				CC3197971ED926B90083F263 /* RefuseView.m in Sources */,
 				637636D21D768BE800E93289 /* RepayListViewController.m in Sources */,
+				8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
 				63FC25001D98F7E9006F58F3 /* YYTextTransaction.m in Sources */,
 				CC0F1B991EE64A2A00A23651 /* ChangePasswordModel.m in Sources */,
 				848394221EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */,
@@ -6455,6 +6462,7 @@
 				842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */,
 				84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */,
 				CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */,
+				8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
 				CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */,
 				CC0DF9571EA5B1090024841A /* RepaymentViewCell.m in Sources */,
 				CC0DF9581EA5B1090024841A /* DetailRepayViewController.m in Sources */,

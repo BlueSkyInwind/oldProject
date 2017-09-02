@@ -22,7 +22,6 @@
         }
     }];
 }
-
 -(void)getMoneyHistoryList{
 
     [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getMoneyHistory_url] parameters:nil finished:^(EnumServerStatus status, id object) {

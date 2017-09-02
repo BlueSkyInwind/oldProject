@@ -27,9 +27,10 @@
 @property(nonatomic,strong)NSString<Optional> * applicationId;
 @property(nonatomic,strong)NSString<Optional> * dayServiceFeeRate;
 @property(nonatomic,strong)NSString<Optional> * fee;
-@property(nonatomic,strong)NSArray<LoanForModel *> * loanFor;
+@property(nonatomic,strong)NSArray<LoanForModel> * loanFor;
 @property(nonatomic,strong)NSString<Optional> * maxPeriod;
 @property(nonatomic,strong)NSString<Optional> * minPeriod;
+@property(nonatomic,strong)NSString<Optional> * period;
 @property(nonatomic,strong)NSString<Optional> * numDaysPerPeriod;
 @property(nonatomic,strong)NSString<Optional> * platformType;
 @property(nonatomic,strong)NSString<Optional> * productId;

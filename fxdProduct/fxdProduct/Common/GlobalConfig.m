@@ -431,6 +431,11 @@ NSString * const    _UserDrawingInfo_url    =    @"apigw/client/application/loan
 //获取当前期的续期信息
 NSString * const    _repayment_url    =    @"apigw/client/repayment/staging/continue/info.jhtml";
 
+//银行卡列表信息
+NSString * const    _BankCardList_url    =    @"apigw/client/bank/card/list.jhtml";
+
+
+
 #pragma mark - 合规接口
 
 //用户开户接口

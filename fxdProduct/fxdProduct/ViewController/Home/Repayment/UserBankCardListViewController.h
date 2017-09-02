@@ -11,19 +11,15 @@
 @class BankModel;
 @class CardInfo;
 
-typedef NS_ENUM(NSUInteger, PayMethod) {
-    PayMethodNormal = 0,
-    PayMethodSelectBankCad,
-};
 
 typedef void(^BankSelectBlock)(CardInfo *cardInfo, NSInteger currentIndex);
 
 @interface UserBankCardListViewController : BaseViewController
 
-@property (nonatomic, strong)NSMutableArray *supportBankListArr;
 @property (nonatomic, assign) NSInteger currentIndex;
-@property (nonatomic, strong) BankSelectBlock bankSelectBlock;
-@property (nonatomic, assign) PayMethod payMethod;
-  
+@property (nonatomic, copy) BankSelectBlock bankSelectBlock;
+
+//swift调用
+-(void)userSelectedBankCard:(BankSelectBlock)block;
 
 @end
