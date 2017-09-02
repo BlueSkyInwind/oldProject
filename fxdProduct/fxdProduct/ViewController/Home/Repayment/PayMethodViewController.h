@@ -27,9 +27,12 @@ typedef void(^BankSelectBlock)(CardInfo *cardInfo, NSInteger currentIndex);
 
 @property (nonatomic, assign) NSInteger currentIndex;
 
-@property (nonatomic, strong) BankSelectBlock bankSelectBlock;
+@property (nonatomic, copy) BankSelectBlock bankSelectBlock;
 
 @property (nonatomic, assign) PayMethod payMethod;
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
+
+
+-(void)tranferValue:(BankSelectBlock)block;
 
 @end

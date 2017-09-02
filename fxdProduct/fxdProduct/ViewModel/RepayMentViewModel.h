@@ -13,4 +13,6 @@
 - (void)fatchQueryWeekShouldAlsoAmount:(NSDictionary *)paramDic;
 
 - (void)getCurrentRenewalWithStagingId:(NSString *)stagingId;
+
+- (void)getBankCardList;
 @end

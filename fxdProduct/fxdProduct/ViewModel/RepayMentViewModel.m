@@ -28,4 +28,15 @@
         [self faileBlock];
     }];
 }
+
+- (void)getBankCardList{
+
+    [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_bankList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        
+        self.returnBlock(object);
+        
+    } failure:^(EnumServerStatus status, id object) {
+        [self faileBlock];
+    }];
+}
 @end

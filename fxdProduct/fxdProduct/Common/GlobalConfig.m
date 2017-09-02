@@ -393,6 +393,8 @@ NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.
 //芝麻信用回调地址
 NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
 
+
+
 #pragma mark - 新的api
 
 //社保
@@ -421,6 +423,9 @@ NSString * const    _HomeState_url    =    @"apigw/client/summary.jhtml";
 
 //获取当前期的续期信息
 NSString * const    _repayment_url    =    @"apigw/client/repayment/staging/continue/info.jhtml";
+
+//获取银行卡信息列表
+NSString * const    _bankList_url    =    @"apigw/client/bank/card/list.jhtml";
 
 #pragma mark - 合规接口
 

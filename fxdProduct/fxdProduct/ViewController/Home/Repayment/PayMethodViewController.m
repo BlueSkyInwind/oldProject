@@ -149,6 +149,14 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     }
 }
 
+-(void)tranferValue:(BankSelectBlock)block{
+    
+    self.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
+        block(cardInfo,currentIndex);
+    };
+}
+
+
 #pragma mark -TableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -15,6 +15,10 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
     var headerView: CurrentInformationHeadView? = nil
     var contentArr : [String] = [String]()
     var supportBankListArr : [AnyObject] = [AnyObject]()
+    var cardInfo : CardInfo?
+    var defaultBankIndex: NSInteger?
+    var userSelectIndex : NSInteger?
+    
     let renewalTableView: UITableView = {
         
         let tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
@@ -36,6 +40,8 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         self.title = "续期费用"
         
         addBackItem()
+        defaultBankIndex = -1
+        userSelectIndex = defaultBankIndex
         
         headerView = CurrentInformationHeadView()
         headerView?.moneyDescLabel?.text = "续期费用(元)"
@@ -70,7 +76,8 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         
        getData()
 
-       getGatheringInformation_jhtml()
+       getBankList()
+//       getGatheringInformation_jhtml()
         
         
 //        headerView.backClosure = {
@@ -172,6 +179,19 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         
             cell.cellType = CurrentInfoCellType(cellType: .Default)
             cell.leftLabel?.text = leftTitleArr[indexPath.row]
+            
+            if indexPath.row == 3{
+            
+                if cardInfo != nil{
+                
+                    let index = cardInfo?.tailNumber.index((cardInfo?.tailNumber.endIndex)!, offsetBy: -4)
+                    let numStr = cardInfo?.tailNumber.substring(from: index!)
+                    cell.rightLabel?.text = (cardInfo?.bankName)!+" 尾号 "+"("+numStr!+")"
+                }
+                
+                return cell
+            }
+            
             cell.rightLabel?.text = contentArr[indexPath.row]+"元"
             return cell
         }
@@ -183,10 +203,40 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
+        if indexPath.row == 3{
+            
+            
+            let payVC = UserBankCardListViewController()
+            payVC.supportBankListArr = self.supportBankListArr as! NSMutableArray
+            payVC.payMethod = .normal
+            if userSelectIndex == -1{
+            
+                payVC.currentIndex = defaultBankIndex!
+            }else{
+            
+                payVC.currentIndex = userSelectIndex!
+            }
+            
+            payVC.tranferValue({ [weak self](card, currentIndex) in
+                if card != nil{
+                    
+                    self?.cardInfo = card
+                    
+                }
+                self?.userSelectIndex = currentIndex
+                self?.renewalTableView.reloadData()
+            })
+            
+            
+            let payNC = PayNavigationViewController.init(rootViewController: payVC)
+            
+            payNC.view.frame = CGRect(x:0,y:0,width:_k_w,height:270)
+            self.presentSemiViewController(payVC, withOptions: [KNSemiModalOptionKeys.pushParentBack.takeRetainedValue():false,KNSemiModalOptionKeys.parentAlpha.takeRetainedValue():0.8])
+        }
     }
+
     
-    
+
     func getGatheringInformation_jhtml() -> Void {
         
         let checkBankViewModel = CheckBankViewModel()
@@ -215,77 +265,64 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
     }
     
     
-//    -(void)getGatheringInformation_jhtml:(void(^)(CardInfo *cardInfo))finish{
-//    
-//    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
-//    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-//    BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-//    if ([baseResult.flag isEqualToString:@"0000"]) {
-//    NSArray * array  = (NSArray *)baseResult.result;
-//    _supportBankListArr = [NSMutableArray array];
-//    for (int i = 0; i < array.count; i++) {
-//    SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
-//    [_supportBankListArr addObject:bankList];
-//    }
-//    [self fatchCardInfo:_supportBankListArr success:^(CardInfo *cardInfo) {
-//    finish(cardInfo);
-//    }];
-//    } else {
-//    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
-//    }
-//    } WithFaileBlock:^{
-//    
-//    }];
-//    [checkBankViewModel getSupportBankListInfo:@"2"];
-//    }
-    
-    
     func fatchCardInfo(supportBankListArr : NSArray){
     
         let userDataVM = UserDataViewModel()
         userDataVM.setBlockWithReturn({ (returnValue) in
+
+            let  userCardsModel = (UserCardResult.yy_model(with: returnValue as! [AnyHashable : Any]))!
+            if userCardsModel.flag! == "0000"{
             
+                self.cardInfo = CardInfo()
+                if userCardsModel.result.count>0{
+                
+                    for _ in 0..<userCardsModel.result.count{
+                    
+                        let cardResult = userCardsModel.result[0]
+                        if cardResult.card_type_ == "2"{
+                        
+                            self.defaultBankIndex = 0
+                            
+                            for banlist in self.supportBankListArr{
+                                if cardResult.card_bank_ == banlist.bank_code_{
+                                    
+                                    self.cardInfo?.tailNumber = cardResult.card_no_
+                                    self.cardInfo?.bankName = banlist.bank_name_
+                                    self.cardInfo?.cardIdentifier = cardResult.id_
+                                    self.cardInfo?.phoneNum = cardResult.bank_reserve_phone_
+                                    self.renewalTableView.reloadData()
+                                    break
+                                }
+                                
+                            }
+                            
+                        }
+                    }
+                }
+            }else{
+            
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userCardsModel.msg!)
+            }
         }) { 
             
         }
         userDataVM.obtainGatheringInformation()
-        
+        return
     }
-//    - (void)fatchCardInfo:(NSMutableArray *)supportBankListArr success:(void(^)(CardInfo *cardInfo))finish
-//    {
-//    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
-//    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
-//    UserCardResult *  userCardsModel = [UserCardResult yy_modelWithJSON:returnValue];
-//    if([userCardsModel.flag isEqualToString:@"0000"]){
-//    CardInfo *cardInfo = [[CardInfo alloc] init];
-//    if (userCardsModel.result.count > 0) {
-//    for(NSInteger j=0;j<userCardsModel.result.count;j++)
-//    {
-//    CardResult * cardResult = [userCardsModel.result objectAtIndex:0];
-//    if([cardResult.card_type_ isEqualToString:@"2"]){
-//    for (SupportBankList *banlist in _supportBankListArr) {
-//    if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-//    cardInfo.tailNumber = cardResult.card_no_;
-//    cardInfo.bankName = banlist.bank_name_;
-//    cardInfo.cardIdentifier = cardResult.id_;
-//    cardInfo.phoneNum = cardResult.bank_reserve_phone_;
-//    }
-//    }
-//    break;
-//    }
-//    }
-//    }
-//    finish(cardInfo);
-//    }else{
-//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:userCardsModel.msg];
-//    }
-//    } WithFaileBlock:^{
-//    
-//    }];
-//    [userDataVM obtainGatheringInformation];
-//    }
-    
 
+
+    func getBankList(){
+    
+        let repayMentViewModel = RepayMentViewModel()
+        repayMentViewModel.setBlockWithReturn({ (returnValue) in
+        
+
+            
+        }) { 
+            
+        }
+        repayMentViewModel.getBankCardList()
+    }
     /*
     // MARK: - Navigation
 

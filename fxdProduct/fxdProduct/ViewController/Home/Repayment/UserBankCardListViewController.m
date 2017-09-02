@@ -32,7 +32,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     // Do any additional setup after loading the view.
     
     _datalist = [[NSMutableArray alloc] init];
-    if (_payMethod == PayMethodSelectBankCad) {
+    if (_payMethod == UserPayMethodSelectBankCad) {
         self.navigationItem.title = @"选择银行卡";
     } else {
         self.navigationItem.title = @"选择付款方式";
@@ -45,6 +45,14 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     header.lastUpdatedTimeLabel.hidden = YES;
     [header beginRefreshing];
     self.tableView.mj_header = header;
+}
+
+
+-(void)tranferValue:(BankSelectBlock)block{
+    
+    self.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
+        block(cardInfo,currentIndex);
+    };
 }
 
 -(void)configuireView{
@@ -63,7 +71,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 - (void)addBackItem
 {
     UIBarButtonItem *backItem;
-    if (_payMethod == PayMethodSelectBankCad) {
+    if (_payMethod == UserPayMethodSelectBankCad) {
         self.navigationItem.title = @"选择银行卡";
         backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"icon_arrowLeft"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
         UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
