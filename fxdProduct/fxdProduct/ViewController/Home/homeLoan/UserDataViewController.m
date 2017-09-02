@@ -69,7 +69,6 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic, copy) NSString *isInfoEditable;  //0-前3项不可修改  1-可修改
 
 @end
 
@@ -84,8 +83,8 @@
     self.automaticallyAdjustsScrollViewInsets = true;
     processFlot = 0.0;
     isOpen = YES;
-    _creditCardStatus = @"0";
-    _socialSecurityStatus = @"0";
+    _creditCardStatus = @"3";
+    _socialSecurityStatus = @"3";
 
     _subTitleArr = @[@"请完善您的身份信息",@"请完善您的个人信息",@"请完善您的职业信息",@"请完成三方认证"];
     [self addBackItemRoot];
@@ -125,29 +124,14 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (void)setProcess
+- (void)setApplyBtnStatus
 {
-
-    if (_nextStep.integerValue > 0) {
-        processFlot = (_nextStep.integerValue-1)*0.2;
-    } else {
-        if (_nextStep.integerValue == -1) {
-            processFlot = 1;
-            [_applyBtn setBackgroundColor:UI_MAIN_COLOR];
-            _applyBtn.enabled = true;
-        } else {
-            processFlot = 1;
-            [_applyBtn setBackgroundColor:UI_MAIN_COLOR];
-            _applyBtn.enabled = true;
-        }
-        [_tableView reloadData];
-    }
-    if (processFlot <= 1 && processFlot >= 0) {
-        CGFloat rightMarge = (_k_w-40)*processFlot;
-        [processView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@(-(_k_w-20 - rightMarge)));
-        }];
-        [self.tableView reloadData];
+    if ([_userDataModel.others isEqualToString:@"1"]) {
+        [_applyBtn setBackgroundColor:UI_MAIN_COLOR];
+        _applyBtn.enabled = true;
+    }else{
+        [_applyBtn setBackgroundColor:rgb(139, 140, 143)];
+        _applyBtn.enabled = false;
     }
 }
 
@@ -194,76 +178,6 @@
     header.lastUpdatedTimeLabel.hidden = YES;
     [header beginRefreshing];
     self.tableView.mj_header = header;
-    
-//    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.53)];
-//    headView.backgroundColor = UI_MAIN_COLOR;
-//    UIImageView *processBack = [[UIImageView alloc] init];
-//    [self setCornerWithoutRadius:processBack];
-//    processBack.image = [UIImage imageNamed:@"process"];
-//    processBack.clipsToBounds = true;
-//    [headView addSubview:processBack];
-//    [processBack mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(@20);
-//        make.top.equalTo(@100);
-//        make.right.equalTo(@(-20));
-//        make.height.equalTo(processBack.mas_width).multipliedBy(0.0597);
-//    }];
-//    [headView layoutIfNeeded];
-//    
-//    UIView *numView = [[UIView alloc] init];
-//    numView.backgroundColor = [UIColor clearColor];
-//    [headView addSubview:numView];
-//    [numView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(@20);
-//        make.top.equalTo(processBack.mas_bottom).offset(5);
-//        make.right.equalTo(@(-20));
-//        make.height.equalTo(numView.mas_width).multipliedBy(0.0597);
-//    }];
-//    [headView layoutIfNeeded];
-//
-//    for (int i = 0; i < 6; i++) {
-//
-//        UILabel *numLabel = [[UILabel alloc] init];
-//        numLabel.textColor = [UIColor whiteColor];
-//        numLabel.font = [UIFont systemFontOfSize:12.f];
-//        numLabel.textAlignment = NSTextAlignmentCenter;
-//        numLabel.text = [NSString stringWithFormat:@"%d%%",i*20];
-//        
-//        [numView addSubview:numLabel];
-//        DLog(@"%lf",i*0.25*numView.frame.size.width);
-//        [numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(numView.mas_left).offset(i*0.17*numView.frame.size.width);
-//            make.top.equalTo(@0);
-//            make.bottom.equalTo(@0);
-//            make.width.equalTo(numLabel.mas_height).multipliedBy(2);
-//        }];
-//        [numLabel layoutIfNeeded];
-//    }
-//    
-//    processView = [[UIView alloc] init];
-//    processView.backgroundColor = rgb(128, 189, 51);
-//    [headView addSubview:processView];
-//    [self setCornerWithoutRadius:processView];
-//    [processView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(@20);
-//        make.top.equalTo(@100);
-//        make.height.equalTo(processBack.mas_height);
-//    }];
-//    
-//    UILabel *label = [[UILabel alloc] init];
-//    label.textColor = [UIColor whiteColor];
-//    label.font = [UIFont systemFontOfSize:13.f];
-//    label.text = @"资料填写进度达到100%,即可借款";
-//    label.textAlignment = NSTextAlignmentCenter;
-//    [headView addSubview:label];
-//    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(@0);
-//        make.right.equalTo(@0);
-//        make.bottom.equalTo(@(-10));
-//        make.height.equalTo(@20);
-//    }];
-//    
-//    self.tableView.tableHeaderView = headView;
     
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.213)];
     footView.backgroundColor = [UIColor whiteColor];
@@ -510,10 +424,10 @@
                 cell.titleLable.text = @"信用卡认证";
                 cell.statusLabel.text = _creditCardHighRandM != nil ? _creditCardHighRandM.result : @"未完成";
                 cell.statusLabel.textColor = rgb(159, 160, 162);
-                if ([_creditCardStatus isEqualToString:@"1"]) {
+                if ([_creditCardStatus isEqualToString:@"2"]) {
                     cell.statusLabel.textColor = rgb(42, 155, 234);
                 }
-                if ([_creditCardStatus isEqualToString:@"0"]) {
+                if ([_creditCardStatus isEqualToString:@"3"]) {
                     cell.statusLabel.text = @"未完成";
                 }
                 return cell;
@@ -526,10 +440,10 @@
                 cell.titleLable.text = @"社保认证";
                 cell.statusLabel.text = _socialSecurityHighRandM != nil ? _socialSecurityHighRandM.result : @"未完成";;
                 cell.statusLabel.textColor = rgb(159, 160, 162);
-                if ([_socialSecurityStatus isEqualToString:@"1"]) {
+                if ([_socialSecurityStatus isEqualToString:@"2"]) {
                     cell.statusLabel.textColor = rgb(42, 155, 234);
                 }
-                if ([_socialSecurityStatus isEqualToString:@"0"]) {
+                if ([_socialSecurityStatus isEqualToString:@"3"]) {
                     cell.statusLabel.text = @"未完成";
                 }
                 return cell;
@@ -618,22 +532,22 @@
         }
         switch (indexPath.row) {
             case 0:
-                if ([_creditCardStatus isEqualToString:@"1"]) {
+                if ([_creditCardStatus isEqualToString:@"2"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                     return;
                 }
-                if ([_creditCardStatus isEqualToString:@"2"]) {
+                if ([_creditCardStatus isEqualToString:@"1"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证中，请稍后！"];
                     return;
                 }
                 [self mailImportClick];
                 break;
             case 1:
-                if ([_socialSecurityStatus isEqualToString:@"1"]) {
+                if ([_socialSecurityStatus isEqualToString:@"2"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                     return;
                 }
-                if ([_socialSecurityStatus isEqualToString:@"2"]) {
+                if ([_socialSecurityStatus isEqualToString:@"1"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证中，请稍后！"];
                     return;
                 }
@@ -658,7 +572,6 @@
             }];
         }
             break;
-            
         case 1:
         {
             [self getCustomerCarrer_jhtml:^(CustomerCareerBaseClass *careerInfo) {
@@ -679,6 +592,8 @@
                 editCard.cardName = cardInfo.bankName;
                 editCard.cardNum = cardInfo.tailNumber;
                 editCard.reservedTel = cardInfo.phoneNum;
+                editCard.cardCode = cardInfo.cardIdentifier;
+                editCard.popOrdiss  = true;
                 [self.navigationController pushViewController:editCard animated:YES];
             }];
         }
@@ -699,15 +614,49 @@
 }
 -(BOOL)cellStatusIsSelect:(NSInteger)row{
     
-    if ([_isInfoEditable isEqualToString:@"0"] &&  row < 3) {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
-        return false;
-    }
-    if (row != 0) {
-        if ([_userDataModel.identity isEqualToString:@"0"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请完善身份信息！"];
-            return false;
+    switch (row) {
+        case 0:{
+            if ([_userDataModel.identityEdit isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
+                return false;
+            }
         }
+            break;
+        case 1:{
+            if ([_userDataModel.identity isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完善身份信息！"];
+                return false;
+            }
+            if ([_userDataModel.personEdit isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
+                return false;
+            }
+        }
+            break;
+        case 2:{
+            if ([_userDataModel.person isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完善个人信息！"];
+                return false;
+            }
+            if ([_userDataModel.gathering isEqualToString:@"1"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
+                return false;
+            }
+        }
+            break;
+        case 3:{
+            if ([_userDataModel.gathering isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完善收款信息！"];
+                return false;
+            }
+            if ([_userDataModel.others isEqualToString:@"1"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
+                return false;
+            }
+        }
+            break;
+        default:
+            break;
     }
     return true;
 }
@@ -804,6 +753,7 @@
     [userDataVM setBlockWithReturnBlock:^(id returnValue) {
         UserCardResult *  userCardsModel = [UserCardResult yy_modelWithJSON:returnValue];
         if([userCardsModel.flag isEqualToString:@"0000"]){
+            CardInfo *cardInfo = [[CardInfo alloc] init];
             if (userCardsModel.result.count > 0) {
                 for(NSInteger j=0;j<userCardsModel.result.count;j++)
                 {
@@ -811,18 +761,17 @@
                     if([cardResult.card_type_ isEqualToString:@"2"]){
                         for (SupportBankList *banlist in supportBankListArr) {
                             if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-                                CardInfo *cardInfo = [[CardInfo alloc] init];
                                 cardInfo.tailNumber = cardResult.card_no_;
                                 cardInfo.bankName = banlist.bank_name_;
                                 cardInfo.cardIdentifier = cardResult.id_;
                                 cardInfo.phoneNum = cardResult.bank_reserve_phone_;
-                                finish(cardInfo);
                             }
                         }
                         break;
                     }
                 }
             }
+            finish(cardInfo);
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:userCardsModel.msg];
         }
@@ -851,8 +800,8 @@
         BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([resultM.errCode isEqualToString:@"0"]) {
             UserDataModel * userDataM = [[UserDataModel alloc]initWithDictionary:(NSDictionary *)resultM.data error:nil];
-            _isInfoEditable = userDataM.edit;
             _userDataModel = userDataM;
+            [self setApplyBtnStatus];
             [self.tableView reloadData];
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.msg];
@@ -977,10 +926,10 @@
 #pragma mark - 魔蝎信用卡以及社保集成
 //邮箱导入
 - (void)mailImportClick{
-    
+
     [MoxieSDK shared].taskType = @"email";
     [[MoxieSDK shared] startFunction];
-
+    
 }
 //社保导入
 -(void)securityImportClick{
@@ -1096,11 +1045,11 @@
             NSArray * array = (NSArray *)baseResultM.data;
             for (NSDictionary * dic  in array) {
                 HighRandingModel * highRandM  = [[HighRandingModel alloc]initWithDictionary:dic error:nil];
-                if ([highRandM.type isEqualToString:@"社保"]) {
+                if ([highRandM.tasktypeid isEqualToString:@"1"]) {
                     _socialSecurityHighRandM = highRandM;
                     _socialSecurityStatus = highRandM.resultid;
                 }
-                if ([highRandM.type isEqualToString:@"邮箱信用卡"]) {
+                if ([highRandM.tasktypeid isEqualToString:@"2"]) {
                     _creditCardHighRandM = highRandM;
                     _creditCardStatus = highRandM.resultid;
                 }

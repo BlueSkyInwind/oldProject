@@ -16,13 +16,13 @@ class MXVerifyManager: NSObject,MoxieSDKDelegate {
     var mxVerifyResult : MXVerifyResult?
 
     //初始化SDK
-    func configMoxieSDK( Viewcontroller:UIViewController,  mxResult : @escaping MXVerifyResult){
+    func configMoxieSDK( viewcontroller:UIViewController,  mxResult : @escaping MXVerifyResult){
         //初始化SDK
         MoxieSDK.shared().apiKey = theMoxieApiKey
         MoxieSDK.shared().userId = Utility.shared().userInfo.juid
-        MoxieSDK.shared().fromController = Viewcontroller
+        MoxieSDK.shared().fromController = viewcontroller
         MoxieSDK.shared().delegate = self
-        configureUI()
+//        configureUI()
         mxVerifyResult = { (result) -> () in
             mxResult(result)
         }

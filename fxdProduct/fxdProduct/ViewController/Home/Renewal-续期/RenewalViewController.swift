@@ -206,32 +206,6 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         if indexPath.row == 3{
             
             
-            let payVC = UserBankCardListViewController()
-            payVC.supportBankListArr = self.supportBankListArr as! NSMutableArray
-            payVC.payMethod = .normal
-            if userSelectIndex == -1{
-            
-                payVC.currentIndex = defaultBankIndex!
-            }else{
-            
-                payVC.currentIndex = userSelectIndex!
-            }
-            
-            payVC.tranferValue({ [weak self](card, currentIndex) in
-                if card != nil{
-                    
-                    self?.cardInfo = card
-                    
-                }
-                self?.userSelectIndex = currentIndex
-                self?.renewalTableView.reloadData()
-            })
-            
-            
-            let payNC = PayNavigationViewController.init(rootViewController: payVC)
-            
-            payNC.view.frame = CGRect(x:0,y:0,width:_k_w,height:270)
-            self.presentSemiViewController(payVC, withOptions: [KNSemiModalOptionKeys.pushParentBack.takeRetainedValue():false,KNSemiModalOptionKeys.parentAlpha.takeRetainedValue():0.8])
         }
     }
 

@@ -549,7 +549,6 @@ typedef enum {
         agreementImage.image = [UIImage imageNamed:@"trick"];
     } else {
         agreementImage.image = [UIImage imageNamed:@"tricked"];
-    
     }
 }
 

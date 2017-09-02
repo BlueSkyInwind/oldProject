@@ -8,18 +8,32 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CardInfo : NSObject
+@interface CardInfo : JSONModel
 
-@property (nonatomic, copy)NSString *bankName;
 
-@property (nonatomic, copy)NSString *cardIdentifier;
+@property (nonatomic, copy)NSString<Optional> *cardIdentifier;
 
-@property (nonatomic, copy)NSString *tailNumber;
+@property (nonatomic, copy)NSString<Optional> *tailNumber;
 
-@property (nonatomic, copy)NSString *cardlNumber;
+@property (nonatomic, copy)NSString<Optional> *cardlNumber;
 
-@property (nonatomic, copy)NSString *phoneNum;
+@property (nonatomic, copy)NSString<Optional> *phoneNum;
 
-@property (nonatomic, copy)NSString *cardIcon;
+//新的Key值
+@property (nonatomic, copy)NSString<Optional> *cardIcon;
+
+@property (nonatomic, copy)NSString<Optional> *bankName;
+@property (nonatomic, copy)NSString<Optional> *cardId;
+@property (nonatomic, copy)NSString<Optional> *cardNo;
+@property (nonatomic, copy)NSString<Optional> *cardShortName;
+@property (nonatomic, copy)NSString<Optional> *cardType;  //1:信用卡，2:借记卡
+
+
+
+
+
+
+
+
 
 @end

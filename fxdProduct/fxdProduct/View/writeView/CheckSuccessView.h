@@ -29,7 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *bankButton;
 @property (weak, nonatomic) IBOutlet UIButton *feeBtn;
 
-@property (weak, nonatomic) IBOutlet UIView *displayMoneyView;
+@property (weak, nonatomic) IBOutlet UILabel *displayLabel;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *purposePicker;
 

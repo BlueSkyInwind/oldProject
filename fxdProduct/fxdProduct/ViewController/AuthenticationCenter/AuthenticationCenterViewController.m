@@ -51,7 +51,6 @@
     NSString *_phoneAuthChannel;
     NSString *_creditCardStatus;
     NSString *_socialSecurityStatus;
-    NSString *_isInfoEditable;  //0-前3项不可修改  1-可修改
     HighRandingModel * _creditCardHighRandM;
     HighRandingModel * _socialSecurityHighRandM;
     
@@ -97,7 +96,6 @@
     [self configMoxieSDK];
     [self headingRefresh];
     
-    _isInfoEditable = @"0";
 
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -198,12 +196,23 @@
                     cell.image.image = [UIImage imageNamed:_imageArr[indexPath.row]];
                     break;
                 }
+                //是否可编辑控制前三个cell
+                if ([userDataModel.identityEdit isEqualToString:@"1"]) {
+                    cell.image.image = [UIImage imageNamed:_editImageArr[indexPath.row]];
+                    break;
+                }
                 cell.image.image = [UIImage imageNamed:_completeImageArr[indexPath.row]];
+         
             }
                 break;
             case 1:{
                 if ([userDataModel.person isEqualToString:@"0"]) {
                     cell.image.image = [UIImage imageNamed:_imageArr[indexPath.row]];
+                    break;
+                }
+                //是否可编辑控制前三个cell
+                if ([userDataModel.personEdit isEqualToString:@"1"]) {
+                    cell.image.image = [UIImage imageNamed:_editImageArr[indexPath.row]];
                     break;
                 }
                 cell.image.image = [UIImage imageNamed:_completeImageArr[indexPath.row]];
@@ -249,25 +258,21 @@
                 break;
         }
         
-        //是否可编辑控制前三个cell
-        if (_isInfoEditable.boolValue == true && indexPath.row < 3) {
-            cell.image.image = [UIImage imageNamed:_editImageArr[indexPath.row]];
-        }
     }else{
         if (indexPath.row == 0) {
             cell.image.image = [UIImage imageNamed:_imageArr[_imageArr.count-3]];
             cell.nameLabel.text = _titleArr[_titleArr.count-3];
-            if ([_creditCardStatus isEqualToString:@"1"]) {
+            if ([_creditCardStatus isEqualToString:@"2"]) {
                 cell.image.image = [UIImage imageNamed:_completeImageArr[_completeImageArr.count-3]];
-            }else if ([_creditCardStatus isEqualToString:@"2"]){
+            }else if ([_creditCardStatus isEqualToString:@"1"]){
                 cell.image.image = [UIImage imageNamed:_inAuthenticationImageArr[_inAuthenticationImageArr.count-2]];
             }
         }else if(indexPath.row == 1){
             cell.image.image = [UIImage imageNamed:_imageArr[_imageArr.count-2]];
             cell.nameLabel.text = _titleArr[_titleArr.count-2];
-            if ([_socialSecurityStatus isEqualToString:@"1"]) {
+            if ([_socialSecurityStatus isEqualToString:@"2"]) {
                 cell.image.image = [UIImage imageNamed:_completeImageArr[_completeImageArr.count-2]];
-            }else if ([_socialSecurityStatus isEqualToString:@"2"]){
+            }else if ([_socialSecurityStatus isEqualToString:@"1"]){
                 cell.image.image = [UIImage imageNamed:_inAuthenticationImageArr[_inAuthenticationImageArr.count-1]];
             }
         }
@@ -331,6 +336,8 @@
                         editCard.cardName = cardInfo.bankName;
                         editCard.cardNum = cardInfo.tailNumber;
                         editCard.reservedTel = cardInfo.phoneNum;
+                        editCard.cardCode = cardInfo.cardIdentifier;
+                        editCard.popOrdiss  = true;
                         [self.navigationController pushViewController:editCard animated:YES];
                     }];
                 }
@@ -360,7 +367,6 @@
                     CertificationViewController * certificationVC = [[CertificationViewController alloc]init];
                     certificationVC.phoneAuthChannel = @"TC";
                     certificationVC.isMobileAuth = userDataModel.telephone;
-                    certificationVC.whetherPhoneAuth = @"1";
                     [self.navigationController pushViewController:certificationVC animated:true];
                 }
                     break;
@@ -389,11 +395,11 @@
             }
             switch (indexPath.row) {
                 case 0:{
-                    if ([_creditCardStatus isEqualToString:@"1"]) {
+                    if ([_creditCardStatus isEqualToString:@"2"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                         return;
                     }
-                    if ([_creditCardStatus isEqualToString:@"2"]) {
+                    if ([_creditCardStatus isEqualToString:@"1"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证中，请稍后！"];
                         return;
                     }
@@ -402,11 +408,11 @@
                     break;
                 case 1:
                 {
-                    if ([_socialSecurityStatus isEqualToString:@"1"]) {
+                    if ([_socialSecurityStatus isEqualToString:@"2"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                         return;
                     }
-                    if ([_socialSecurityStatus isEqualToString:@"2"]) {
+                    if ([_socialSecurityStatus isEqualToString:@"1"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证中，请稍后！"];
                         return;
                     }
@@ -423,26 +429,81 @@
 }
 -(BOOL)cellStatusIsSelect:(NSInteger)row{
     
-    if ([_isInfoEditable isEqualToString:@"0"] &&  row < 3) {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
-        return false;
-    }
-    if (row != 0) {
-        if ([userDataModel.identity isEqualToString:@"0"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善身份信息！"];
-            return false;
+    switch (row) {
+        case 0:{
+            if ([userDataModel.identityEdit isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
+                return false;
+            }
         }
+            break;
+        case 1:{
+            if ([userDataModel.identity isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善身份信息！"];
+                return false;
+            }
+            if ([userDataModel.personEdit isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
+                return false;
+            }
+        }
+            break;
+        case 2:{
+            if ([userDataModel.person isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善个人信息！"];
+                return false;
+            }
+            if ([userDataModel.gathering isEqualToString:@"1"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
+                return false;
+            }
+        }
+            break;
+        case 3:{
+            if ([userDataModel.gathering isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善收款信息！"];
+                return false;
+            }
+            if ([userDataModel.faceIdentity isEqualToString:@"2"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已认证"];
+                return false;
+            }
+        }
+            break;
+        case 4:{
+            if ([userDataModel.faceIdentity isEqualToString:@"1"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完成人脸识别认证！"];
+                return false;
+            }
+            if ([userDataModel.telephone isEqualToString:@"2"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已认证"];
+                return false;
+            }
+        }
+            break;
+        case 5:{
+            if (![userDataModel.telephone isEqualToString:@"2"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完成手机认证！"];
+                return false;
+            }
+            if ([userDataModel.zmIdentity isEqualToString:@"2"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已认证"];
+                return false;
+            }
+        }
+            break;
+            
+        default:
+            break;
     }
     return true;
 }
-
-
 -(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
 
     
+ 
     
 }
-
 -(void)headingRefresh{
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshInfoStep)];
     header.automaticallyChangeAlpha = YES;
@@ -480,7 +541,7 @@
 #pragma mark - 魔蝎信用卡以及社保集成
 //邮箱导入
 - (void)mailImportClick{
-    
+
     [MoxieSDK shared].taskType = @"email";
     [[MoxieSDK shared] startFunction];
     
@@ -573,7 +634,6 @@
         BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([resultM.errCode isEqualToString:@"0"]) {
             UserDataModel * userDataM = [[UserDataModel alloc]initWithDictionary:(NSDictionary *)resultM.data error:nil];
-            _isInfoEditable = userDataM.edit;
             self.isEvaluation = userDataModel.test;
             userDataModel = userDataM;
             [self.collectionView reloadData];
@@ -586,6 +646,7 @@
     }];
     [userDataVM1 obtainBasicInformationStatusOfAuthenticationCenter];
 }
+
 -(void)TheCreditCardInfoupload:(NSString *)taskid {
     
     UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
@@ -623,11 +684,11 @@
             NSArray * array = (NSArray *)baseResultM.data;
             for (NSDictionary * dic  in array) {
                 HighRandingModel * highRandM  = [[HighRandingModel alloc]initWithDictionary:dic error:nil];
-                if ([highRandM.type isEqualToString:@"社保"]) {
+                if ([highRandM.tasktypeid isEqualToString:@"1"]) {
                     _socialSecurityHighRandM = highRandM;
                     _socialSecurityStatus = highRandM.resultid;
                 }
-                if ([highRandM.type isEqualToString:@"邮箱信用卡"]) {
+                if ([highRandM.tasktypeid isEqualToString:@"2"]) {
                     _creditCardHighRandM = highRandM;
                     _creditCardStatus = highRandM.resultid;
                 }
@@ -695,6 +756,7 @@
     }];
     [getCareerInfoViewModel fatchCareerInfo:nil];
 }
+
 -(void)getGatheringInformation_jhtml:(void(^)(CardInfo *cardInfo))finish{
     
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];

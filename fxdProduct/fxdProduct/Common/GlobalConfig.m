@@ -421,11 +421,20 @@ NSString * const    _UserContactInfo_url    =    @"apigw/client/user/contact/inf
 //首页状态查询
 NSString * const    _HomeState_url    =    @"apigw/client/summary.jhtml";
 
+//申请进件
+NSString * const    _createApplication_url    =    @"apigw/client/application/create.jhtml";
+
+//申请确认页数据
+NSString * const    _ApplicationViewInfo_url    =    @"apigw/client/application/confirm.jhtml";
+
+//提款页数据
+NSString * const    _UserDrawingInfo_url    =    @"apigw/client/application/loan.jhtml";
+
 //获取当前期的续期信息
 NSString * const    _repayment_url    =    @"apigw/client/repayment/staging/continue/info.jhtml";
 
-//获取银行卡信息列表
-NSString * const    _bankList_url    =    @"apigw/client/bank/card/list.jhtml";
+//银行卡列表信息
+NSString * const    _BankCardList_url    =    @"apigw/client/bank/card/list.jhtml";
 
 #pragma mark - 合规接口
 

@@ -15,6 +15,11 @@
  */
 
 -(void)approvalAmount;
+
+#pragma mark - 新API
+//提款信息页面
+-(void)obtainDrawingInformation;
+
 @end
 
 
@@ -37,6 +42,8 @@
  */
 -(void)getFXDCaseInfo;
 
+
+
 @end
 
 @interface CheckBankViewModel : ViewModelClass
@@ -45,7 +52,6 @@
  银行卡获取接口
  */
 //-(void)getBankListInfo;
-
 
 /**
  支持银行卡列表

@@ -78,10 +78,6 @@
     }];
 }
 
-
-
-
-
 -(void)getApprovalAmount{
 
     [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_approvalAmount_jhtml] parameters:nil finished:^(EnumServerStatus status, id object) {

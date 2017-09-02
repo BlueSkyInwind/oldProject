@@ -26,6 +26,21 @@
     }];
 }
 
+#pragma mark - 新API
+//提款信息页面
+-(void)obtainDrawingInformation{
+    
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserDrawingInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
 @end
 
 
@@ -149,6 +164,10 @@
         }
     }];
 }
+
+
+
+
 
 
 

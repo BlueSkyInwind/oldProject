@@ -43,7 +43,7 @@
         _moneyLabel.textVerticalAlignment = YYTextVerticalAlignmentCenter;
         _moneyLabel.numberOfLines = 0;
         _moneyLabel.font = [UIFont systemFontOfSize:20];
-        [self.displayMoneyView addSubview:_moneyLabel];
+//        [self.displayMoneyView addSubview:_moneyLabel];
         [_moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@32);
             make.left.equalTo(@0);
@@ -119,6 +119,7 @@
         
         _weekMoney.font=[UIFont systemFontOfSize:13];
         _allMoney.font=[UIFont systemFontOfSize:13];
+        _displayLabel.font = [UIFont systemFontOfSize:11];
         [self setNeedsLayout];
     }
 }

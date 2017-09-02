@@ -146,7 +146,9 @@ UIKIT_EXTERN NSString * const       _customerContact_url;                    //�
 UIKIT_EXTERN NSString * const       _saveIDInfo_url;
 UIKIT_EXTERN NSString * const       _getLimitProductlist_url;                //首页产品列表路径
 UIKIT_EXTERN NSString * const       _repayment_url;                          //获取当前期的续期信息
-UIKIT_EXTERN NSString * const       _bankList_url;                           //获取银行卡信息列表
+
+UIKIT_EXTERN NSString * const       _BankCardList_url;                          //银行卡列表信息
+
 
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集
@@ -187,6 +189,9 @@ UIKIT_EXTERN NSString * const       _UserThirdPartCertification_url;            
 UIKIT_EXTERN NSString * const       _AuthenticationCenterBasicInformation_url;                  //认证中心基础认证
 UIKIT_EXTERN NSString * const       _UserContactInfo_url;                  //用户联系人信息
 UIKIT_EXTERN NSString * const       _HomeState_url;                  //首页状态查询
+UIKIT_EXTERN NSString * const       _createApplication_url;                  //用户进件接口
+UIKIT_EXTERN NSString * const       _ApplicationViewInfo_url;                  //申请确认页数据
+UIKIT_EXTERN NSString * const       _UserDrawingInfo_url;                  //申请确认页数据
 
 
 
