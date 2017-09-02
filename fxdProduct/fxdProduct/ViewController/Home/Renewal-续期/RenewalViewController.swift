@@ -217,7 +217,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
                 self.renewalTableView.reloadData()
             })
 
-            self.navigationController?.pushViewController(userBankCardListVC, animated: false)
+            self.navigationController?.pushViewController(userBankCardListVC, animated: true)
            
         }
     }
