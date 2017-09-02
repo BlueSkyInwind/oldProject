@@ -148,14 +148,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     _isOpen = NO;
     
-//    checkSuccess.agreementsView.hidden = YES;
-//    checkSuccess.agreementView.userInteractionEnabled = YES;
-//    checkSuccess.agreementImage.userInteractionEnabled = YES;
-//    UITapGestureRecognizer *agreement = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
-//    [checkSuccess.agreementImage addGestureRecognizer:agreement];
-//    UITapGestureRecognizer *agreementGest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreementView)];
-//    [checkSuccess.agreementView addGestureRecognizer:agreementGest];
-    
     //技术服务协议，风险管理与数据服务
     [checkSuccess.firstAgreemwntBtn addTarget:self action:@selector(clickFirstAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
     [checkSuccess.secondAgreemwntBtn addTarget:self action:@selector(clickSecondAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -636,7 +628,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
     userBankCardListVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
-        _selectCard = cardInfo;
+        self.selectCard = cardInfo;
     };
     [self.navigationController pushViewController:userBankCardListVC animated:true];
     
@@ -682,16 +674,27 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
 }
 
+/**
+ 发薪贷银行卡信息
+ */
 - (void)fatchCardInfo
 {
     BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
     [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
-            if (_datalist.count > 0) {
-                [_datalist removeAllObjects];
+            NSArray * array = (NSArray *)baseResultM.data;
+            if (array.count <= 0){
+                BankCardViewController *bankVC = [BankCardViewController new];
+                bankVC.bankArray = _supportBankListArr;
+                bankVC.periodSelect = _userSelectNum.integerValue;
+                bankVC.purposeSelect = _purposeSelect;
+                bankVC.drawingsInfoModel = _drawingsInfoModel;
+                bankVC.isP2P = NO;
+                bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",[_drawingsInfoModel.repayAmount floatValue]];
+                [self.navigationController pushViewController:bankVC animated:YES];
             }
-            for (NSDictionary *dic in (NSDictionary *)baseResultM.data) {
+            for (NSDictionary *dic in baseResultM.data) {
                 CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
                 if ([cardInfo.cardType isEqualToString:@"2"]) {
                     self.selectCard = cardInfo;
@@ -738,7 +741,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 bankVC.bankArray = _supportBankListArr;
                 bankVC.periodSelect = _userSelectNum.integerValue;
                 bankVC.purposeSelect = _purposeSelect;
-                bankVC.userStateModel = _userStateModel;
+                bankVC.drawingsInfoModel = _drawingsInfoModel;
                 bankVC.isP2P = NO;
                 bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
                 [self.navigationController pushViewController:bankVC animated:YES];
@@ -773,7 +776,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"loan_for_":_purposeSelect,
                      };
     }
-    
     //二次提款
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_drawApplyAgain_jhtml] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
@@ -894,11 +896,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     return 40.f;
 }
 #pragma mark-
-//-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    DLog(@"%@",string);
-//    return NO;
-//}
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
@@ -981,47 +978,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     [checkSuccess.pickweek reloadAllComponents];
 }
-#pragma mark -> 银行卡读取接口
--(void)PostGetBankCardCheck
-{
-    NSDictionary *paramDic = @{@"card_id_":@""
-                               };
-    //银行卡四要素验证
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
-                
-                _userCardModel = [UserCardResult yy_modelWithJSON:object];
-                if (_userCardModel.result.count >0) {
-                    CardResult *cardResult = _userCardModel.result[0];
-                    //4
-                    if ([cardResult.card_bank_ integerValue] == 4) {
-                        BankCardViewController *bankVC = [BankCardViewController new];
-                        bankVC.purposeSelect = _purposeSelect;
-                        bankVC.periodSelect = _userSelectNum.intValue;
-                        //            bankVC.idString = _idString;
-                        bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
-                        bankVC.flagString = @"1";
-                        bankVC.bankMobile = cardResult.bank_reserve_phone_;
-                        bankVC.isP2P = NO;
-                        [self.navigationController pushViewController:bankVC animated:YES];
-                    }else{
-                        EnterAgainController *again=[EnterAgainController new];
-                        again.periods_ = [NSString stringWithFormat:@"%d",_userSelectNum.intValue];
-                        again.drawing_amount_ = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
-                        again.userCardModel = _userCardModel;
-                        [self.navigationController pushViewController:again animated:YES];
-                    }
-                }
-            } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardModel.msg];
-            }
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
 
 #pragma  mark - 工薪贷拒绝导流
 -(void)clickSeeBtn{
@@ -1113,7 +1069,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
     }];
 }
-
 #pragma  mark - 获取提款页信息
 -(void)obtainDrawingInformation:(void(^)(DrawingsInfoModel * drawingsInfo))finish{
     
@@ -1265,24 +1220,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
 }
 
-#pragma  mark - 获取借款用途接口
-- (void)getDataDic:(void(^)())finish
-{
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getDicCode_url] parameters:@{@"dict_type_":@"LOAN_FOR_"} finished:^(EnumServerStatus status, id object) {
-        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-            _dataDicModel = [DataDicParse yy_modelWithJSON:object];
-            _dateArray = [_dataDicModel.result copy];
-            [checkSuccess.purposePicker reloadAllComponents];
-            if (finish) {
-                finish();
-            }
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
 #pragma mark  fxd用户状态查询，viewmodel
 -(void)getUserStatus:(GetCaseInfo *)caseInfo{
 
@@ -1306,7 +1243,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
     [complianceViewModel getUserStatus:caseInfo];
 }
-
 
 #pragma mark 发标前查询进件
 -(void)getFxdCaseInfo{
@@ -1378,10 +1314,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             bankVC.bankArray = bankArr;
             bankVC.periodSelect = _userSelectNum.integerValue;
             bankVC.purposeSelect = _purposeSelect;
-            bankVC.userStateModel = _userStateModel;
+            bankVC.drawingsInfoModel = _drawingsInfoModel;
             bankVC.isP2P = YES;
             bankVC.uploadP2PUserInfo = _uploadP2PUserInfo;
-            //            bankVC.idString = _idString;
             bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
             [self.navigationController pushViewController:bankVC animated:YES];
 

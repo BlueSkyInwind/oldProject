@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "DrawingsInfoModel.h"
 @class BankModel,UserStateModel;
 
 @interface BankCardViewController : BaseViewController
@@ -31,6 +32,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 
 @property (nonatomic, strong) UserStateModel *userStateModel;
+
+@property (nonatomic, strong) DrawingsInfoModel * drawingsInfoModel;
+
 
 @property (nonatomic,assign)BOOL isP2P;
 

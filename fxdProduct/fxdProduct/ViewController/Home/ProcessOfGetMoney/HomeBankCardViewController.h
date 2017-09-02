@@ -26,8 +26,7 @@
 
 @property (nonatomic, strong) BankModel *bankModel;
 @property (nonatomic, strong)NSMutableArray *bankArray;
-
-//@property(assign,nonatomic)NSInteger bankFlag;
+@property(assign,nonatomic)BOOL  isP2P;
 @property(assign,nonatomic)NSInteger cardTag;
 
 
