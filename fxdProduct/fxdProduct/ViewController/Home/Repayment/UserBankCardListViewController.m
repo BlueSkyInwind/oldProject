@@ -36,8 +36,9 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     _datalist = [[NSMutableArray alloc] init];
     _currentIndex = 0;
     self.navigationItem.title = @"选择银行卡";
-    self.automaticallyAdjustsScrollViewInsets = NO;
     [self addBackItem];
+    [self addBanckCard];
+    [self configuireView];
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(fatchBankList)];
     header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;
@@ -58,15 +59,9 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([BankListCell class]) bundle:nil] forCellReuseIdentifier:bankListCellIdentifier];
 }
-- (void)addBackItem
+- (void)addBanckCard
 {
-    UIBarButtonItem *backItem;
-    self.navigationItem.title = @"选择银行卡";
-    backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"icon_arrowLeft"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
-    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spaceItem.width = -10;
-    self.navigationItem.leftBarButtonItems = @[spaceItem,backItem];
-
+    
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"addBankCardIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(addCardClick)];
     self.navigationItem.rightBarButtonItem = aBarbi;
     
@@ -113,41 +108,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     }];
     [bankInfoVM obtainUserBankCardList];
     
-//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-//        _userCardsModel = [UserCardResult yy_modelWithJSON:object];
-//        if([_userCardsModel.flag isEqualToString:@"0000"]){
-//            if (_datalist.count > 0) {
-//                [_datalist removeAllObjects];
-//            }
-//            for(NSInteger j=0;j<_userCardsModel.result.count;j++)
-//            {
-//                CardResult *cardResult = [_userCardsModel.result objectAtIndex:j];
-//                if([cardResult.card_type_ isEqualToString:@"2"])
-//                {
-//                    for (SupportBankList *banlist in _supportBankListArr) {
-//                        CardInfo *cardInfo = [[CardInfo alloc] init];
-//                        cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
-//                        cardInfo.bankName = banlist.bank_name_;
-//                        cardInfo.cardIdentifier = cardResult.id_;
-//                        cardInfo.cardIcon = banlist.icon_url_;
-//                        if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-//                            if (j==0) {
-//                                _cardInfo = cardInfo;
-//                            }
-//                            [_datalist addObject:cardInfo];
-//                        }
-//                    }
-//                }
-//            }
-//            [self.tableView.mj_header endRefreshing];
-//            [_tableView reloadData];
-//        }else{
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
-//            [self.tableView.mj_header endRefreshing];
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        [self.tableView.mj_header endRefreshing];
-//    }];
+
 }
 - (NSString *)formatTailNumber:(NSString *)str
 {
@@ -160,7 +121,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  _userCardsModel.result.count;
+    return  _datalist.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -186,7 +147,6 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     _currentIndex = indexPath.row;
     CardInfo *cardInfo = [_datalist objectAtIndex:indexPath.row];
     _cardInfo = cardInfo;

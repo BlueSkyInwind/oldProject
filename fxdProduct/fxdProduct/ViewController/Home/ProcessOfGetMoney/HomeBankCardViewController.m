@@ -27,6 +27,9 @@
     self.view.backgroundColor=[UIColor whiteColor];
     [self addBackItem];
     [self createUI];
+    if (!self.bankArray) {
+        [self fatchCardInfo];
+    }
 }
 
 
@@ -38,33 +41,6 @@
     self.automaticallyAdjustsScrollViewInsets=NO;
     [self.view addSubview:_tableView];
     
-//    if (_bankFlag == 100) {
-//        self.title=@"银行卡类别";
-//        _bankImageArray = @[@"bank_ICBC",@"bank_boc",@"bank_CBC",
-//                            @"bank_CEB",@"bank_CMSZ",@"bank_CIB",
-//                            @"bank_CITIC",@"bank_spd",@"pinganbank"];
-//        _dataArray=@[@"中国工商银行",@"中国银行",@"中国建设银行",
-//                     @"中国光大银行",@"中国民生银行",@"兴业银行",
-//                     @"中信银行",@"浦发银行",@"平安银行"];
-//        _dataInfoArray=@[@"2",@"1",@"3",
-//                         @"10",@"6",@"9",
-//                         @"8",@"5",@"28"];
-//    }
-//    if (_bankFlag == 99) {
-//        self.title=@"银行卡类别";
-//        _bankImageArray = @[@"bank_ICBC",@"bank_ABC",@"bank_boc",@"bank_CBC",
-//                            @"bank_CEB",@"bank_CMSZ",@"bank_CIB",
-//                            @"bank_CITIC",@"bank_spd",@"pinganbank"];
-//        _dataArray=@[@"中国工商银行",@"中国农业银行",@"中国银行",@"中国建设银行",
-//                     @"中国光大银行",@"中国民生银行",@"兴业银行",
-//                     @"中信银行",@"浦发银行",@"平安银行"];
-//        _dataInfoArray=@[@"2",@"4",@"1",@"3",
-//                         @"10",@"6",@"9",
-//                         @"8",@"5",@"28"];
-//    }
-    //    8、中信银行(需开通银联无卡业务)
-    //    9、浦发银行(需开通银联无卡业务)
-    //    10、平安银行(需开通银联无卡业务)
 }
 
 
@@ -88,18 +64,14 @@
     }
 
     SupportBankList * supportBankList = [_bankArray objectAtIndex:indexPath.row];
-//    DLog(@"%@",[NSString stringWithFormat:@"bank_code%@",bankListInfo.code]);
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:supportBankList.icon_url_] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
-//    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"bank_code_%@",bankListInfo.code]];
     cell.textLabel.text = supportBankList.bank_name_;
     if (self.cardTag == indexPath.row) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    //    cell.textLabel.textAlignment=NSTextAlignmentCenter;
     return cell;
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -118,6 +90,30 @@
     [tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+- (void)fatchCardInfo
+{
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResult.flag isEqualToString:@"0000"]) {
+            NSArray * array  = (NSArray *)baseResult.result;
+            _bankArray = [NSMutableArray array];
+            for (int i = 0; i < array.count; i++) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                [_bankArray addObject:bankList];
+            }
+            [_tableView reloadData];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    if (_isP2P) {
+        [checkBankViewModel getSupportBankListInfo:@"4"];
+        return;
+    }
+    [checkBankViewModel getSupportBankListInfo:@"2"];
+}
 
 @end
