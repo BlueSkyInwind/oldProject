@@ -86,35 +86,35 @@
     if(_k_h == 568)
     {
         CGRect rect = _labelFirst.frame;
-        rect.origin.y=rect.origin.y+25;
+        rect.origin.y=rect.origin.y+5;
         _labelFirst.frame=rect;
         
         rect = _circleFirst.frame;
-        rect.origin.y=rect.origin.y+25;
+        rect.origin.y=rect.origin.y+5;
         _circleFirst.frame=rect;
         
         rect = _arrowFirst.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _arrowFirst.frame = rect;
         
         rect = _labelSecond.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _labelSecond.frame = rect;
         
         rect = _circleSecond.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _circleSecond.frame = rect;
         
         rect = _arrowThird.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _arrowThird.frame = rect;
         
         rect = _circleThird.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _circleThird.frame = rect;
         
         rect = _labelThird.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _labelThird.frame = rect;
         
         _weekMoney.font=[UIFont systemFontOfSize:13];
