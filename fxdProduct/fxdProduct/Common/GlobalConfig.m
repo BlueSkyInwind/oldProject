@@ -436,6 +436,9 @@ NSString * const    _repayment_url    =    @"apigw/client/repayment/staging/cont
 //银行卡列表信息
 NSString * const    _BankCardList_url    =    @"apigw/client/bank/card/list.jhtml";
 
+//工薪贷根据周期获取费用
+NSString * const    _SalaryProductFee_url    =    @"apigw/client/fee/calc.jhtml";
+
 #pragma mark - 合规接口
 
 //用户开户接口

@@ -295,7 +295,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         }) { 
             
         }
-        repayMentViewModel.getBankCardList()
+//        repayMentViewModel.getBankCardList()
     }
     /*
     // MARK: - Navigation

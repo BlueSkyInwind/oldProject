@@ -21,7 +21,7 @@
 
 //新的Key值
 @property (nonatomic, copy)NSString<Optional> *cardIcon;
-
+@property (nonatomic, copy)NSString<Optional> *bankPhone;
 @property (nonatomic, copy)NSString<Optional> *bankName;
 @property (nonatomic, copy)NSString<Optional> *cardId;
 @property (nonatomic, copy)NSString<Optional> *cardNo;
