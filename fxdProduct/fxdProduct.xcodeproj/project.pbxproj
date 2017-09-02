@@ -1241,8 +1241,6 @@
 		CCAA8EB61F5940CC00278D16 /* RenewalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EB51F5940CC00278D16 /* RenewalModel.m */; };
 		CCAA8EB71F5940CC00278D16 /* RenewalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EB51F5940CC00278D16 /* RenewalModel.m */; };
 		CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
-		CCC1126D1F5A99D700C0ABA8 /* BankCardLlistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1126C1F5A99D700C0ABA8 /* BankCardLlistModel.m */; };
-		CCC1126E1F5A99D700C0ABA8 /* BankCardLlistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1126C1F5A99D700C0ABA8 /* BankCardLlistModel.m */; };
 		CCC344FC1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
 		CCC344FD1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
 		CCCDA8771EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
@@ -2429,8 +2427,6 @@
 		CCAA8EAD1F5901ED00278D16 /* FooterBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterBtnView.swift; sourceTree = "<group>"; };
 		CCAA8EB41F5940CC00278D16 /* RenewalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenewalModel.h; sourceTree = "<group>"; };
 		CCAA8EB51F5940CC00278D16 /* RenewalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalModel.m; sourceTree = "<group>"; };
-		CCC1126B1F5A99D700C0ABA8 /* BankCardLlistModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardLlistModel.h; sourceTree = "<group>"; };
-		CCC1126C1F5A99D700C0ABA8 /* BankCardLlistModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardLlistModel.m; sourceTree = "<group>"; };
 		CCC344FA1F03833E006D0F83 /* JRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRefuseView.h; sourceTree = "<group>"; };
 		CCC344FB1F03833E006D0F83 /* JRefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRefuseView.m; sourceTree = "<group>"; };
 		CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewModel.h; sourceTree = "<group>"; };
@@ -5248,8 +5244,6 @@
 			children = (
 				CCAA8EB41F5940CC00278D16 /* RenewalModel.h */,
 				CCAA8EB51F5940CC00278D16 /* RenewalModel.m */,
-				CCC1126B1F5A99D700C0ABA8 /* BankCardLlistModel.h */,
-				CCC1126C1F5A99D700C0ABA8 /* BankCardLlistModel.m */,
 			);
 			name = Renewal;
 			sourceTree = "<group>";
@@ -5999,7 +5993,6 @@
 				63DE56FF1DE7CD2900747AE2 /* FXDWebViewController.m in Sources */,
 				63FC24F41D98F7E9006F58F3 /* YYTextMagnifier.m in Sources */,
 				63ED33341B6B4570008B6085 /* BaseViewController.m in Sources */,
-				CCC1126D1F5A99D700C0ABA8 /* BankCardLlistModel.m in Sources */,
 				63A24C671BE063A90036E8EF /* UIImage+Cut.m in Sources */,
 				84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */,
 				63F5AD931E23849C001BDF44 /* LoanSureFirstViewController.m in Sources */,
@@ -6777,7 +6770,6 @@
 				CC0DFA641EA5B1090024841A /* main.m in Sources */,
 				CC0DFA651EA5B1090024841A /* LOTMaskLayer.m in Sources */,
 				CC0DFA661EA5B1090024841A /* RedpacketExt.m in Sources */,
-				CCC1126E1F5A99D700C0ABA8 /* BankCardLlistModel.m in Sources */,
 				CC0DFA671EA5B1090024841A /* HHAlertViewCust.m in Sources */,
 				CC0DFA681EA5B1090024841A /* CustomerBaseInfoBaseClass.m in Sources */,
 				CC0DFA691EA5B1090024841A /* MoreViewController.m in Sources */,

@@ -76,7 +76,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         
        getData()
 
-       getBankList()
+       fatchBankList()
 //       getGatheringInformation_jhtml()
         
         
@@ -95,16 +95,21 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         repayMentViewModel.setBlockWithReturn({ (returnValue) in
             
              let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                
+                let renewalModel = try! RenewalModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                
+                self.headerView?.moneyLabel?.text = renewalModel.extensionFee!
+                self.contentArr.append(renewalModel.overdueAmount!)
+                self.contentArr.append(renewalModel.balanceFee!)
+                self.contentArr.append(renewalModel.shallPayFee!)
+                
+                self.renewalTableView.reloadData()
+            }else{
             
-             let renewalModel = try! RenewalModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
             
-            self.headerView?.moneyLabel?.text = renewalModel.extensionFee!
-            self.contentArr.append(renewalModel.overdueAmount!)
-            self.contentArr.append(renewalModel.balanceFee!)
-            self.contentArr.append(renewalModel.shallPayFee!)
-            self.contentArr.append("")
-            
-            self.renewalTableView.reloadData()
             
         }) { 
             
@@ -184,8 +189,8 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
             
                 if cardInfo != nil{
                 
-                    let index = cardInfo?.tailNumber.index((cardInfo?.tailNumber.endIndex)!, offsetBy: -4)
-                    let numStr = cardInfo?.tailNumber.substring(from: index!)
+                    let index = cardInfo?.cardNo.index((cardInfo?.cardNo.endIndex)!, offsetBy: -4)
+                    let numStr = cardInfo?.cardNo.substring(from: index!)
                     cell.rightLabel?.text = (cardInfo?.bankName)!+" 尾号 "+"("+numStr!+")"
                 }
                 
@@ -205,97 +210,120 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         
         if indexPath.row == 3{
             
-            
+            let userBankCardListVC = UserBankCardListViewController()
+            userBankCardListVC.userSelectedBankCard({ (cardInfo, currentIndex) in
+                
+                self.cardInfo = cardInfo
+                self.renewalTableView.reloadData()
+            })
+
+            self.navigationController?.pushViewController(userBankCardListVC, animated: false)
+           
         }
     }
 
     
 
-    func getGatheringInformation_jhtml() -> Void {
-        
-        let checkBankViewModel = CheckBankViewModel()
-        checkBankViewModel.setBlockWithReturn({ (returnValue) in
-            
-             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
-            if baseResult.flag == "0000"{
-            
-                let array = baseResult.result!
-                
-                for index in 0..<(array as! NSArray).count{
-                
-                    let bankList = try! SupportBankList.init(dictionary: (array as! NSArray)[index] as! [AnyHashable : Any])
-                    self.supportBankListArr.append(bankList)
-                }
-                self.fatchCardInfo(supportBankListArr: self.supportBankListArr as NSArray)
-            }else{
-            
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.msg)
-            }
-        }) { 
-            
-        }
-        
-        checkBankViewModel.getSupportBankListInfo("2")
-    }
-    
-    
-    func fatchCardInfo(supportBankListArr : NSArray){
-    
-        let userDataVM = UserDataViewModel()
-        userDataVM.setBlockWithReturn({ (returnValue) in
+//    func getGatheringInformation_jhtml() -> Void {
+//        
+//        let checkBankViewModel = CheckBankViewModel()
+//        checkBankViewModel.setBlockWithReturn({ (returnValue) in
+//            
+//             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+//            if baseResult.flag == "0000"{
+//            
+//                let array = baseResult.result!
+//                
+//                for index in 0..<(array as! NSArray).count{
+//                
+//                    let bankList = try! SupportBankList.init(dictionary: (array as! NSArray)[index] as! [AnyHashable : Any])
+//                    self.supportBankListArr.append(bankList)
+//                }
+//                self.fatchCardInfo(supportBankListArr: self.supportBankListArr as NSArray)
+//            }else{
+//            
+//                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.msg)
+//            }
+//        }) { 
+//            
+//        }
+//        
+//        checkBankViewModel.getSupportBankListInfo("2")
+//    }
+//    
+//    
+//    func fatchCardInfo(supportBankListArr : NSArray){
+//    
+//        let userDataVM = UserDataViewModel()
+//        userDataVM.setBlockWithReturn({ (returnValue) in
+//
+//            let  userCardsModel = (UserCardResult.yy_model(with: returnValue as! [AnyHashable : Any]))!
+//            if userCardsModel.flag! == "0000"{
+//            
+//                self.cardInfo = CardInfo()
+//                if userCardsModel.result.count>0{
+//                
+//                    for _ in 0..<userCardsModel.result.count{
+//                    
+//                        let cardResult = userCardsModel.result[0]
+//                        if cardResult.card_type_ == "2"{
+//                        
+//                            self.defaultBankIndex = 0
+//                            
+//                            for banlist in self.supportBankListArr{
+//                                if cardResult.card_bank_ == banlist.bank_code_{
+//                                    
+//                                    self.cardInfo?.tailNumber = cardResult.card_no_
+//                                    self.cardInfo?.bankName = banlist.bank_name_
+//                                    self.cardInfo?.cardIdentifier = cardResult.id_
+//                                    self.cardInfo?.phoneNum = cardResult.bank_reserve_phone_
+//                                    self.renewalTableView.reloadData()
+//                                    break
+//                                }
+//                                
+//                            }
+//                            
+//                        }
+//                    }
+//                }
+//            }else{
+//            
+//                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userCardsModel.msg!)
+//            }
+//        }) { 
+//            
+//        }
+//        userDataVM.obtainGatheringInformation()
+//        return
+//    }
 
-            let  userCardsModel = (UserCardResult.yy_model(with: returnValue as! [AnyHashable : Any]))!
-            if userCardsModel.flag! == "0000"{
+
+    func fatchBankList(){
+    
+        let bankInfoVM = BankInfoViewModel()
+        bankInfoVM.setBlockWithReturn({ (returnValue) in
             
-                self.cardInfo = CardInfo()
-                if userCardsModel.result.count>0{
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                for dic in baseResult.data as! NSArray{
                 
-                    for _ in 0..<userCardsModel.result.count{
+                    let cardInfo = try! CardInfo.init(dictionary: dic as! [AnyHashable : Any])
+                    if cardInfo.cardType == "2"{
                     
-                        let cardResult = userCardsModel.result[0]
-                        if cardResult.card_type_ == "2"{
+                        self.cardInfo = cardInfo
+                        self.renewalTableView.reloadData()
+                        break
                         
-                            self.defaultBankIndex = 0
-                            
-                            for banlist in self.supportBankListArr{
-                                if cardResult.card_bank_ == banlist.bank_code_{
-                                    
-                                    self.cardInfo?.tailNumber = cardResult.card_no_
-                                    self.cardInfo?.bankName = banlist.bank_name_
-                                    self.cardInfo?.cardIdentifier = cardResult.id_
-                                    self.cardInfo?.phoneNum = cardResult.bank_reserve_phone_
-                                    self.renewalTableView.reloadData()
-                                    break
-                                }
-                                
-                            }
-                            
-                        }
                     }
                 }
             }else{
             
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userCardsModel.msg!)
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
-        }) { 
+        }) {
             
         }
-        userDataVM.obtainGatheringInformation()
-        return
-    }
-
-
-    func getBankList(){
-    
-        let repayMentViewModel = RepayMentViewModel()
-        repayMentViewModel.setBlockWithReturn({ (returnValue) in
-        
-
-            
-        }) { 
-            
-        }
-        repayMentViewModel.getBankCardList()
+        bankInfoVM.obtainUserBankCardList()
     }
     /*
     // MARK: - Navigation
