@@ -16,3 +16,14 @@
 @implementation LoanForModel
 
 @end
+
+
+@implementation SalaryFeeDetailModel
+
+@end
+
+
+
+@implementation SalaryDrawingsFeeInfoModel
+
+@end

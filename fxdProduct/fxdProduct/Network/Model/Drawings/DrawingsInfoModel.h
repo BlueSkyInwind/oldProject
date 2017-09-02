@@ -38,8 +38,37 @@
 @property(nonatomic,strong)NSString<Optional> * userAgain;
 @property(nonatomic,strong)NSString<Optional> * userStatus;
 
+@end
+
+@protocol SalaryFeeDetailModel <NSObject>
+
 
 @end
+
+@interface SalaryFeeDetailModel : JSONModel
+
+@property(nonatomic,strong)NSString<Optional> * index;
+@property(nonatomic,strong)NSString<Optional> * label;
+@property(nonatomic,strong)NSString<Optional> * unit;
+@property(nonatomic,strong)NSString<Optional> * value;
+
+@end
+
+
+@interface SalaryDrawingsFeeInfoModel : JSONModel
+
+@property(nonatomic,strong)NSArray<SalaryFeeDetailModel> * feeInfo;
+@property(nonatomic,strong)NSString<Optional> * repaymentAmount;
+@property(nonatomic,strong)NSString<Optional> * totalFee;
+
+@end
+
+
+
+
+
+
+
 
 
 

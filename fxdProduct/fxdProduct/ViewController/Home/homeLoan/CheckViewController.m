@@ -274,11 +274,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         checkFalse.seeView.hidden = YES;
         checkFalse.jsdView.hidden = YES;
         if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]){
-            
             [self getContent];
             checkFalse.jsdView.hidden = NO;
             [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
-            
         }else{
             //1表示不是渠道用户 0是渠道用户
             if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
@@ -440,6 +438,19 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
     checkSuccess.agreementLabel.attributedText = attributeStr;
 }
+//每周还款的视图
+-(void)refreshWeekAmount:(NSString *)weekMoney{
+    
+    checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
+    [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
+    NSString *amountStr = [NSString stringWithFormat:@"%.2f元",[weekMoney floatValue]];
+    [attStr yy_appendString:amountStr];
+    [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-amountStr.length, amountStr.length)];
+    checkSuccess.weekMoney.attributedText = attStr;
+    checkSuccess.allMoney.text =[NSString stringWithFormat:@"%.2f元",[weekMoney floatValue]];
+    
+}
 
 /**
  退出银行卡View
@@ -582,14 +593,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 return;
             }
             if (_userSelectNum.integerValue > 0) {
-                checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
-                NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
-                [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-                NSString *amountStr = [NSString stringWithFormat:@"%.2f元",[_drawingsInfoModel.actualAmount floatValue]/_userSelectNum.intValue];
-                [attStr yy_appendString:amountStr];
-                [attStr addAttribute:NSForegroundColorAttributeName value:rgb(3, 154, 238) range:NSMakeRange(attStr.length-amountStr.length, amountStr.length)];
-                checkSuccess.weekMoney.attributedText = attStr;
-                checkSuccess.allMoney.text = _drawingsInfoModel.repayAmount;
+                
+                [self obtainSalaryFee];
+                
             }else {
                 checkSuccess.textFiledWeek.text = @"请选择周期";
                 NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
@@ -710,48 +716,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [bankInfoVM obtainUserBankCardList];
     
 }
-- (void)fatchUserCardList
-{
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        _userCardsModel = [UserCardResult yy_modelWithJSON:object];
-        if([_userCardsModel.flag isEqualToString:@"0000"]){
-            if (_userCardsModel.result.count > 0) {
-                for(NSInteger j=0;j<_userCardsModel.result.count;j++)
-                {
-                    CardResult *cardResult = [_userCardsModel.result objectAtIndex:0];
-                    if([cardResult.card_type_ isEqualToString:@"2"])
-                    {
-                        defaultBankIndex = 0;
-                        for (SupportBankList *banlist in _supportBankListArr) {
-                            if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-                                CardInfo *cardInfo = [[CardInfo alloc] init];
-                                cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
-                                cardInfo.bankName = banlist.bank_name_;
-                                cardInfo.cardIdentifier = cardResult.id_;
-                                _selectCard = cardInfo;
-                            }
-                        }
-                        break;
-                    }
-                }
-                //发薪贷
-                checkSuccess.bankTextField.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,_selectCard.tailNumber];
-            } else {
-                BankCardViewController *bankVC = [BankCardViewController new];
-                bankVC.bankArray = _supportBankListArr;
-                bankVC.periodSelect = _userSelectNum.integerValue;
-                bankVC.purposeSelect = _purposeSelect;
-                bankVC.drawingsInfoModel = _drawingsInfoModel;
-                bankVC.isP2P = NO;
-                bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
-                [self.navigationController pushViewController:bankVC animated:YES];
-            }
-        }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-    }];
-}
 
 - (NSString *)formatTailNumber:(NSString *)str
 {
@@ -846,6 +810,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }else{
         if (row != 0) {
             _userSelectNum = [_datalist objectAtIndex:row-1];
+            
             checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
             NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
             [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
@@ -895,6 +860,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 {
     return 40.f;
 }
+
+
+
 #pragma mark-
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -962,7 +930,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             j=26;
             k=5;
         }
-        
         for (int i = k; i < j; i++) {
             [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
         }
@@ -975,8 +942,24 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [_datalist addObject:[NSNumber numberWithInt:(i+5)]];
         }
     }
-    
     [checkSuccess.pickweek reloadAllComponents];
+}
+
+#pragma mark - 工薪贷费用获取
+-(void)obtainSalaryFee{
+    CheckViewModel * checkVM = [[CheckViewModel alloc]init];
+    [checkVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            SalaryDrawingsFeeInfoModel * salaryDrawingM = [[SalaryDrawingsFeeInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            [self refreshWeekAmount:salaryDrawingM.repaymentAmount];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [checkVM obtainSalaryProductFeeOfperiod:[NSString stringWithFormat:@"%@",_userSelectNum]];
 }
 
 #pragma  mark - 工薪贷拒绝导流

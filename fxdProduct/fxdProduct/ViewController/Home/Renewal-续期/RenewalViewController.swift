@@ -323,7 +323,8 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         }) {
             
         }
-        bankInfoVM.obtainUserBankCardList()
+//        repayMentViewModel.getBankCardList()
+
     }
     /*
     // MARK: - Navigation

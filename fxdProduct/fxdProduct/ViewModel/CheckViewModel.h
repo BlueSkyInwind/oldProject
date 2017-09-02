@@ -20,6 +20,12 @@
 //提款信息页面
 -(void)obtainDrawingInformation;
 
+/**
+ 工薪贷获取费用
+ */
+-(void)obtainSalaryProductFeeOfperiod:(NSString *)periods;
+
+
 @end
 
 
