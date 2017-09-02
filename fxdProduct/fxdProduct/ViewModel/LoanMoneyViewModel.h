@@ -36,5 +36,9 @@
  */
 -(void)getApprovalAmount;
 
+/**
+ 放款中 还款中 展期中 状态实时获取
+ */
+-(void)getApplicationStatus:(NSString *)flag;
 
 @end

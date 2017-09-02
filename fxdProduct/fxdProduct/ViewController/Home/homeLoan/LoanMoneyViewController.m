@@ -34,6 +34,7 @@
 #import "RTRootNavigationController.h"
 #import "GetCaseInfo.h"
 #import "P2PViewController.h"
+#import "ApplicationStatusModel.h"
 @interface LoanMoneyViewController ()
 {
     MoneyIngView *moenyViewing;
@@ -48,6 +49,8 @@
 @property (nonatomic, copy)NSString *platform;
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic,strong)GetCaseInfo *caseInfo;
+@property (nonatomic,strong)ApplicationStatusModel *applicationStatusModel;
+
 
 @end
 
@@ -69,6 +72,7 @@
 
     _isFirst = _popAlert;
 
+    _applicationStatus = InLoan;
   }
 
 
@@ -558,12 +562,95 @@
     }else{
     
         //发薪贷申请件状态查询
-        [self checkStatus];
+//        [self checkStatus];
     }
+    
+    [self getApplicationStatus];
     
 //    [self addBid];
 }
 
+
+-(void)getApplicationStatus{
+
+    LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+    [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            
+            self.applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            [self updateUI:self.applicationStatusModel];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    
+    [loanMoneyViewModel getApplicationStatus:@"1"];
+}
+
+
+#pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
+-(void)updateUI:(ApplicationStatusModel *)applicationStatusModel{
+
+    switch (_applicationStatus) {
+        case InLoan:
+            
+            moenyViewing.labelProgress.text = @"到账中";
+            moenyViewing.labelDetail.text = @"请注意查收到账短信";
+            [self arrivalAndRenewalUI:applicationStatusModel];
+            if (_popAlert&&_isFirst) {
+                _isFirst = NO;
+                [self showAlertview];
+            }
+            break;
+        case Repayment:
+            moenyViewing.labelProgress.text = @"还款中";
+            moenyViewing.labelDetail.text = @"请注意查收到账短信";
+            [self arrivalAndRenewalUI:applicationStatusModel];
+            if (_popAlert&&_isFirst) {
+                _isFirst = NO;
+                [self showAlertview];
+            }
+            break;
+        case Extension:
+            moenyViewing.labelProgress.text = @"续期处理中";
+            moenyViewing.labelDetail.text = @"请注意查收到账短信";
+            [self arrivalAndRenewalUI:applicationStatusModel];
+            if (_popAlert&&_isFirst) {
+                _isFirst = NO;
+                [self showAlertview];
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+
+-(void)arrivalAndRenewalUI:(ApplicationStatusModel *)applicationStatusModel{
+
+    moenyViewing.sureBtn.hidden = YES;
+    moenyViewing.lableData.hidden = YES;
+    moenyViewing.sureBtn.hidden = YES;
+    moenyViewing.middleView.hidden = NO;
+    
+    for (int i = 0; i<applicationStatusModel.infoList.count; i++) {
+        
+        InfoListModel *infoListModel = applicationStatusModel.infoList[i];
+        
+        
+        if ([infoListModel.index isEqualToString:@"1"]) {
+            moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%@%@", infoListModel.value,infoListModel.unit];
+        }else if ([infoListModel.index isEqualToString:@"2"]){
+            
+            moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@%@",infoListModel.value,infoListModel.unit];
+        }else if ([infoListModel.index isEqualToString:@"3"]){
+            
+            moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%@%@",infoListModel.value,infoListModel.unit];
+        }
+    }
+}
 #pragma mark -> 2.22	审批金额查询接口
 
 -(void)PostGetCheckMoney

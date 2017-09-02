@@ -1225,6 +1225,8 @@
 		CC6C93EF1F4AB58C00587C74 /* TrackRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */; };
 		CC6C93F11F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
 		CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
+		CC6CBA841F5AB9620015C92C /* ApplicationStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */; };
+		CC6CBA851F5AB9620015C92C /* ApplicationStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */; };
 		CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989C301F4D84A9000CDACF /* AuthenticationCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC989C2F1F4D84A9000CDACF /* AuthenticationCenterViewController.m */; };
@@ -2416,6 +2418,8 @@
 		CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "fxdProduct-Bridging-Header.h"; sourceTree = "<group>"; };
 		CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackRect.swift; sourceTree = "<group>"; };
 		CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseThirdView.swift; sourceTree = "<group>"; };
+		CC6CBA821F5AB9620015C92C /* ApplicationStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationStatusModel.h; sourceTree = "<group>"; };
+		CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationStatusModel.m; sourceTree = "<group>"; };
 		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
 		CC989C2E1F4D84A9000CDACF /* AuthenticationCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationCenterViewController.h; sourceTree = "<group>"; };
 		CC989C2F1F4D84A9000CDACF /* AuthenticationCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationCenterViewController.m; sourceTree = "<group>"; };
@@ -4480,6 +4484,7 @@
 		63E076541B67114800E269F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CC6CBA811F5AB93C0015C92C /* ApplicationStatus */,
 				CCAA8EB01F59408C00278D16 /* Renewal */,
 				843614A21F0CF9130036201A /* BaseResultModel.h */,
 				843614A31F0CF9130036201A /* BaseResultModel.m */,
@@ -5228,6 +5233,15 @@
 				CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */,
 			);
 			name = PaymentService;
+			sourceTree = "<group>";
+		};
+		CC6CBA811F5AB93C0015C92C /* ApplicationStatus */ = {
+			isa = PBXGroup;
+			children = (
+				CC6CBA821F5AB9620015C92C /* ApplicationStatusModel.h */,
+				CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */,
+			);
+			name = ApplicationStatus;
 			sourceTree = "<group>";
 		};
 		CC989C321F4D86E1000CDACF /* AuthenticationCenterView */ = {
@@ -5984,6 +5998,7 @@
 				0F5407F61C8D289100592B56 /* CheckInfoView.m in Sources */,
 				63ED33371B6B4593008B6085 /* BaseNavigationViewController.m in Sources */,
 				CC989C301F4D84A9000CDACF /* AuthenticationCenterViewController.m in Sources */,
+				CC6CBA841F5AB9620015C92C /* ApplicationStatusModel.m in Sources */,
 				63FF484A1B6F036F009E384C /* MyViewController.m in Sources */,
 				63878FE31C1519CD008E1CF9 /* GetUserIP.m in Sources */,
 				63112A731BDF162F002B372C /* HelpViewController.m in Sources */,
@@ -6618,6 +6633,7 @@
 				CCCE40CE1EE7D61700E3F102 /* SendSmsParam.m in Sources */,
 				CC0DF9D91EA5B1090024841A /* LoanDoFindResult.m in Sources */,
 				CC0DF9DA1EA5B1090024841A /* AgreeMentListViewController.m in Sources */,
+				CC6CBA851F5AB9620015C92C /* ApplicationStatusModel.m in Sources */,
 				CC0DF9DB1EA5B1090024841A /* LewPopupViewAnimationSpring.m in Sources */,
 				CC0DF9DC1EA5B1090024841A /* YYTextUtilities.m in Sources */,
 				CC0DF9DD1EA5B1090024841A /* LOTShapeTrimPath.m in Sources */,
