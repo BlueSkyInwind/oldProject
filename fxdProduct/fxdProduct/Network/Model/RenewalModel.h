@@ -12,29 +12,15 @@
 
 @interface RenewalModel : JSONModel
 
-
+//溢缴金
 @property (strong,nonatomic)NSString<Optional> * balanceFee;
+//续期费用
 @property (strong,nonatomic)NSString<Optional> * extensionFee;
+//逾期费用
 @property (strong,nonatomic)NSString<Optional> * overdueAmount;
+//应付金额
 @property (strong,nonatomic)NSString<Optional> * shallPayFee;
 
 
-//@property (nonatomic , copy) NSString              * errCode;
-//@property (nonatomic , strong) RenewalDataModel              * data;
-//@property (nonatomic , copy) NSString              * errMsg;
-//@property (nonatomic , copy) NSString              * friendErrMsg;
-
 @end
 
-//@interface RenewalDataModel : NSObject
-//
-////溢缴金
-//@property (nonatomic , copy)NSString *balanceFee;
-////续期费用
-//@property (nonatomic , copy)NSString *extensionFee;
-////逾期费用
-//@property (nonatomic , copy)NSString *overdueAmount;
-////应付金额
-//@property (nonatomic , copy)NSString *shallPayFee;
-//
-//@end

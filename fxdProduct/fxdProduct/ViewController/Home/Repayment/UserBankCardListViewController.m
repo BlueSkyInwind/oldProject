@@ -34,8 +34,10 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     // Do any additional setup after loading the view.
     
     _datalist = [[NSMutableArray alloc] init];
+
     _currentIndex = 0;
     self.navigationItem.title = @"选择银行卡";
+
     [self addBackItem];
     [self addBanckCard];
     [self configuireView];
@@ -45,6 +47,8 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     [header beginRefreshing];
     self.tableView.mj_header = header;
 }
+
+
 
 -(void)configuireView{
     
@@ -61,7 +65,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (void)addBanckCard
 {
-    
+
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"addBankCardIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(addCardClick)];
     self.navigationItem.rightBarButtonItem = aBarbi;
     

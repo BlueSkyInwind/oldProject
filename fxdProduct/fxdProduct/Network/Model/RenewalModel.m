@@ -10,14 +10,6 @@
 
 @implementation RenewalModel
 
-
-//+ (NSDictionary *)modelContainerPropertyGenericClass {
-//    return @{@"data":[RenewalDataModel class]};
-//}
-
 @end
 
-//@implementation RenewalDataModel
-//
-//
-//@end
+

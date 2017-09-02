@@ -145,9 +145,10 @@ UIKIT_EXTERN NSString * const       _JXLGetToken_url;                        //�
 UIKIT_EXTERN NSString * const       _customerContact_url;                    //联系人信息上传
 UIKIT_EXTERN NSString * const       _saveIDInfo_url;
 UIKIT_EXTERN NSString * const       _getLimitProductlist_url;                //首页产品列表路径
-
 UIKIT_EXTERN NSString * const       _repayment_url;                          //获取当前期的续期信息
+
 UIKIT_EXTERN NSString * const       _BankCardList_url;                          //银行卡列表信息
+
 
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集

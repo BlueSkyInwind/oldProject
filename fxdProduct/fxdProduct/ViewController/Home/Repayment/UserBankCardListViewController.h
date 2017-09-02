@@ -12,11 +12,12 @@
 @class CardInfo;
 
 
-typedef void(^BankSelectBlock)(CardInfo *cardInfo, NSInteger currentIndex);
+typedef void(^BankSelectBlock)(CardInfo * cardInfo, NSInteger currentIndex);
 
 @interface UserBankCardListViewController : BaseViewController
 
 @property (nonatomic, assign) NSInteger currentIndex;
+
 @property (nonatomic, copy) BankSelectBlock bankSelectBlock;
 
 //swift调用
