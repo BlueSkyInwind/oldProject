@@ -53,6 +53,7 @@
 #import "DrawingsInfoModel.h"
 #import "UserBankCardListViewController.h"
 #import "BankInfoViewModel.h"
+#import "FeesDescriptionViewController.h"
 
 
 //#error 以下需要修改为您平台的信息
@@ -94,6 +95,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSString *_userFlag;
     GetCaseInfo *_caseInfo;
     QryUserStatusModel *_qryUserStatusModel;
+    NSArray * feeArray; //费用说明
 
     BOOL _isOpen;
 }
@@ -620,8 +622,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [self pushUserBankListVC];
         }
             break;
-        case 107:
-            DLog(@"借款协议");
+        case 107:{
+            [self pushFeeDescription];
+        }
             break;
         default:
             break;
@@ -637,6 +640,17 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         self.selectCard = cardInfo;
     };
     [self.navigationController pushViewController:userBankCardListVC animated:true];
+    
+}
+-(void)pushFeeDescription{
+    
+    if (!feeArray) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请选择周期"];
+        return;
+    }
+    FeesDescriptionViewController * feeDescVC = [[FeesDescriptionViewController alloc]init];
+    feeDescVC.feeArray = [feeArray mutableCopy];
+    [self.navigationController pushViewController:feeDescVC animated:true];
     
 }
 
@@ -952,6 +966,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
             SalaryDrawingsFeeInfoModel * salaryDrawingM = [[SalaryDrawingsFeeInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            feeArray = salaryDrawingM.feeInfo;
             [self refreshWeekAmount:salaryDrawingM.repaymentAmount];
         }else{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
