@@ -637,6 +637,12 @@
 		84DFBEDF1F4D97D50009DAB9 /* HighRandingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBEDD1F4D97D50009DAB9 /* HighRandingModel.m */; };
 		84E2BDE01F53F3FB00E447EB /* UserDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E2BDDF1F53F3FB00E447EB /* UserDataModel.m */; };
 		84E2BDE11F53F3FB00E447EB /* UserDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E2BDDF1F53F3FB00E447EB /* UserDataModel.m */; };
+		84EC95AC1F5AC35D008656BA /* FeesDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EC95AB1F5AC35D008656BA /* FeesDescriptionViewController.m */; };
+		84EC95AD1F5AC35D008656BA /* FeesDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EC95AB1F5AC35D008656BA /* FeesDescriptionViewController.m */; };
+		84EC95B21F5AC4E3008656BA /* FeeDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EC95B01F5AC4E3008656BA /* FeeDescriptionTableViewCell.m */; };
+		84EC95B31F5AC4E3008656BA /* FeeDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EC95B01F5AC4E3008656BA /* FeeDescriptionTableViewCell.m */; };
+		84EC95B41F5AC4E3008656BA /* FeeDescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EC95B11F5AC4E3008656BA /* FeeDescriptionTableViewCell.xib */; };
+		84EC95B51F5AC4E3008656BA /* FeeDescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EC95B11F5AC4E3008656BA /* FeeDescriptionTableViewCell.xib */; };
 		84ED5B581F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B591F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
@@ -2375,6 +2381,11 @@
 		84DFBEDD1F4D97D50009DAB9 /* HighRandingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighRandingModel.m; sourceTree = "<group>"; };
 		84E2BDDE1F53F3FB00E447EB /* UserDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataModel.h; sourceTree = "<group>"; };
 		84E2BDDF1F53F3FB00E447EB /* UserDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataModel.m; sourceTree = "<group>"; };
+		84EC95AA1F5AC35D008656BA /* FeesDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeesDescriptionViewController.h; sourceTree = "<group>"; };
+		84EC95AB1F5AC35D008656BA /* FeesDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeesDescriptionViewController.m; sourceTree = "<group>"; };
+		84EC95AF1F5AC4E3008656BA /* FeeDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeeDescriptionTableViewCell.h; sourceTree = "<group>"; };
+		84EC95B01F5AC4E3008656BA /* FeeDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeeDescriptionTableViewCell.m; sourceTree = "<group>"; };
+		84EC95B11F5AC4E3008656BA /* FeeDescriptionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeeDescriptionTableViewCell.xib; sourceTree = "<group>"; };
 		84ED5B511F4AB9E6004C0A59 /* MoxieSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoxieSDK.h; sourceTree = "<group>"; };
 		84ED5B521F4AB9E7004C0A59 /* libMoxieSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMoxieSDK.a; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
@@ -2632,6 +2643,7 @@
 		0F047F3D1C4F814F002ED7C0 /* homeLoan */ = {
 			isa = PBXGroup;
 			children = (
+				84EC95A91F5AC312008656BA /* descriptionOfFees */,
 				63553ADF1E5D536800B2C1FF /* ApplyFlow */,
 				0FEACE631CA390C10027859A /* ContactViewController.h */,
 				0FEACE641CA390C10027859A /* ContactViewController.m */,
@@ -2776,6 +2788,9 @@
 				0F6AAF361C30D8950060F137 /* MyCardCell.h */,
 				0F6AAF371C30D8950060F137 /* MyCardCell.m */,
 				0F6AAF381C30D8950060F137 /* MyCardCell.xib */,
+				84EC95AF1F5AC4E3008656BA /* FeeDescriptionTableViewCell.h */,
+				84EC95B01F5AC4E3008656BA /* FeeDescriptionTableViewCell.m */,
+				84EC95B11F5AC4E3008656BA /* FeeDescriptionTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5180,6 +5195,15 @@
 			path = UserDataModel;
 			sourceTree = "<group>";
 		};
+		84EC95A91F5AC312008656BA /* descriptionOfFees */ = {
+			isa = PBXGroup;
+			children = (
+				84EC95AA1F5AC35D008656BA /* FeesDescriptionViewController.h */,
+				84EC95AB1F5AC35D008656BA /* FeesDescriptionViewController.m */,
+			);
+			path = descriptionOfFees;
+			sourceTree = "<group>";
+		};
 		84ED5B4F1F4AB9E6004C0A59 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -5639,6 +5663,7 @@
 				0F920C141BCE549900AA9A31 /* MyCardsViewController.xib in Resources */,
 				63553AD31E5D26F500B2C1FF /* UserDataViewController.xib in Resources */,
 				0FFA91761C59BE57008D91D2 /* BankCardViewController.xib in Resources */,
+				84EC95B41F5AC4E3008656BA /* FeeDescriptionTableViewCell.xib in Resources */,
 				63553B071E5D9E1B00B2C1FF /* MobileCell.xib in Resources */,
 				63F0E1C61CE57B80001251A9 /* BSFingerResource.bundle in Resources */,
 				63F5AD991E238736001BDF44 /* LoanSureSecondViewController.xib in Resources */,
@@ -5777,6 +5802,7 @@
 				CC0DFB801EA5B1090024841A /* UserDataViewController.xib in Resources */,
 				CC0DFB811EA5B1090024841A /* BankCardViewController.xib in Resources */,
 				CC0DFB831EA5B1090024841A /* MobileCell.xib in Resources */,
+				84EC95B51F5AC4E3008656BA /* FeeDescriptionTableViewCell.xib in Resources */,
 				CC0DFB861EA5B1090024841A /* BSFingerResource.bundle in Resources */,
 				CC0DFB871EA5B1090024841A /* LoanSureSecondViewController.xib in Resources */,
 				CC0DFB881EA5B1090024841A /* TelPhoneCompanyCell.xib in Resources */,
@@ -6074,6 +6100,7 @@
 				63F254881E49A45900852CF1 /* HMScannerMaskView.m in Sources */,
 				0FFA91791C59F641008D91D2 /* LoanMoneyViewController.m in Sources */,
 				636AC4381D38EA9500599590 /* PayMoneyCell.m in Sources */,
+				84EC95AC1F5AC35D008656BA /* FeesDescriptionViewController.m in Sources */,
 				1A762F6F1C1FBE4700964719 /* RepayRecordController.m in Sources */,
 				CCAA8EB61F5940CC00278D16 /* RenewalModel.m in Sources */,
 				638A17041E517D9F00AB8AB6 /* LOTShapeGroup.m in Sources */,
@@ -6432,6 +6459,7 @@
 				63117FB71DFFC42600635BB3 /* ShareConfig.m in Sources */,
 				0FEACE651CA390C10027859A /* ContactViewController.m in Sources */,
 				63A24C601BE063A90036E8EF /* NSString+Extend.m in Sources */,
+				84EC95B21F5AC4E3008656BA /* FeeDescriptionTableViewCell.m in Sources */,
 				63EC5C871E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m in Sources */,
 				6313DC111BB3E48800EB45DE /* DES3Util.m in Sources */,
 				637636D71D76A28700E93289 /* RepayListCell.m in Sources */,
@@ -6484,6 +6512,7 @@
 				842CA0E41F453B4A00A2150B /* HomeParam.m in Sources */,
 				CC0DF9591EA5B1090024841A /* ProductListResult.m in Sources */,
 				CC0DF95A1EA5B1090024841A /* NSData+AES.m in Sources */,
+				84EC95B31F5AC4E3008656BA /* FeeDescriptionTableViewCell.m in Sources */,
 				CC0DF95B1EA5B1090024841A /* LivenessBaseClass.m in Sources */,
 				CC0DF95C1EA5B1090024841A /* AmountMsgBaseClass.m in Sources */,
 				CC0DF95D1EA5B1090024841A /* RepaymentViewController.m in Sources */,
@@ -6737,6 +6766,7 @@
 				CC0DFA391EA5B1090024841A /* ViewModelClass.m in Sources */,
 				CC4271E71F0C8ED7004904B8 /* HomeRefuseCell.m in Sources */,
 				CC0DFA3A1EA5B1090024841A /* UserCardResult.m in Sources */,
+				84EC95AD1F5AC35D008656BA /* FeesDescriptionViewController.m in Sources */,
 				CC0DFA3B1EA5B1090024841A /* ReplenishViewController.m in Sources */,
 				CC0DFA3C1EA5B1090024841A /* CircleView.m in Sources */,
 				CC0DFA3D1EA5B1090024841A /* UserInfoViewController.m in Sources */,
