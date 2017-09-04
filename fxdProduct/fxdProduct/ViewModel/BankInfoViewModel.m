@@ -39,13 +39,14 @@
 //}
 
 
--(void)obtainUserCommitstaging:(NSString *)staging cardNo:(NSString *)cardNo{
+-(void)obtainUserCommitstaging:(NSString *)staging cardId:(NSString *)cardId{
 
-    
-    NSDictionary *paramDic = @{@"cardNo":cardNo,
-                               @"juid":[Utility sharedUtility].userInfo.juid,
+    //@"juid":[Utility sharedUtility].userInfo.juid,
+
+    NSDictionary *paramDic = @{@"cardId":cardId,
                                @"staging":staging};
-    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_Staging_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    
+    [[FXDNetWorkManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_Staging_url] isNeedNetStatus:YES isNeedWait:YES parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -54,5 +55,14 @@
             [self faileBlock];
         }
     }];
+//    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_Staging_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        if (self.returnBlock) {
+//            self.returnBlock(object);
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        if (self.faileBlock) {
+//            [self faileBlock];
+//        }
+//    }];
 }
 @end

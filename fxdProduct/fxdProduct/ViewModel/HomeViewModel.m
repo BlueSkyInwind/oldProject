@@ -34,19 +34,7 @@
     }];
 }
 
--(void)fetchLoanRecord{
-    
-    [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanRecord_url]  isNeedNetStatus:NO isNeedWait:NO parameters:nil finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
+
 
 -(void)fetchLoanProcess{
     
@@ -82,34 +70,6 @@
 
 @end
 
-@implementation BannerViewModel
-
--(void)fetchBannerInfo{
-    
-    HomeBannerParamModel * homeBannerParamModel = [[HomeBannerParamModel alloc]init];
-    homeBannerParamModel.plate_ = @"1";
-    homeBannerParamModel.position_ = @"1";
-    homeBannerParamModel.channel_ = PLATFORM;
-    
-    NSDictionary * paramDic  = [homeBannerParamModel toDictionary];
-    [self postBannerParam:paramDic];
-}
-
--(void)postBannerParam:(NSDictionary *)paramDic{
-    
-    [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_topBanner_url]   isNeedNetStatus:NO isNeedWait:NO parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
-
-@end
 
 
 @implementation ProductListViewModel
@@ -141,38 +101,9 @@
 @end
 
 
-@implementation PopViewModel
-
--(void)fetchPopViewInfo{
-    
-    HomePopParam * homePopParam = [[HomePopParam alloc]init];
-    homePopParam.channel_ = PLATFORM;
-    homePopParam.plate_ = @"1";
-    homePopParam.redpacket_from_ = @"1";
-    
-    NSDictionary *paramDic =  [homePopParam toDictionary];
-    [self postPopviewParam:paramDic];
-
-}
-
--(void)postPopviewParam:(NSDictionary *)paramDic{
-    
-    [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_adv_url]    isNeedNetStatus:NO isNeedWait:NO parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
 
 
 
-@end
 
 
 

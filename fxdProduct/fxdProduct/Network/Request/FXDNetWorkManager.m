@@ -84,22 +84,17 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     
-    if (parameters) {
-        if ([Tool dicContainsKey:parameters keyValue:@"Encrypt"]) {
-            NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
-            [muDic removeObjectForKey:@"Encrypt"];
-            paramDic = [muDic copy];
-        } else {
-            paramDic = [Tool getParameters:parameters];
-        }
-    }
-    DLog(@"加密后参数:---%@",paramDic);
-    //        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
-    //        securityPolicy.allowInvalidCertificates = YES;
-    //        securityPolicy setPinnedCertificates:
-    //        securityPolicy.validatesDomainName = YES;
-    //        manager.securityPolicy = securityPolicy;
-    //            manager.requestSerializer=[AFHTTPRequestSerializer serializer];
+//    if (parameters) {
+//        if ([Tool dicContainsKey:parameters keyValue:@"Encrypt"]) {
+//            NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
+//            [muDic removeObjectForKey:@"Encrypt"];
+//            paramDic = [muDic copy];
+//        } else {
+//            paramDic = [Tool getParameters:parameters];
+//        }
+//    }
+    DLog(@"参数:---%@",paramDic);
+
     
     DLog(@"juid --- %@\n token --- %@",[Utility sharedUtility].userInfo.juid,[Utility sharedUtility].userInfo.tokenStr);
     if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
@@ -116,20 +111,7 @@
     [manager POST:strURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {
-            UIViewController *vc = [self getCurrentVC];
-            [vc.navigationController popToRootViewControllerAnimated:YES];
-            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
-                if (index == 1) {
-                    [EmptyUserData EmptyData];
-                    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-                    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-                    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
-                        [self removeWaitView];
-                    }];
-                }
-            }];
-        }
+
         
         NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
         NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
@@ -265,7 +247,7 @@
            
             //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"charset=UTF-8",@"text/html",@"text/json",@"text/plain", nil];
-            [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//            [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             
             manager.requestSerializer.timeoutInterval = 30.0;
             DLog(@"%@",parameters);

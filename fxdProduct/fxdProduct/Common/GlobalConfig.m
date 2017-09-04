@@ -443,7 +443,7 @@ NSString * const    _ApplicationStatus_url    =    @"apigw/client/application/st
 NSString * const    _SalaryProductFee_url    =    @"apigw/client/fee/calc.jhtml";
 
 //提交续期请求
-NSString * const    _Staging_url    =    @"apigw/client/staging/continue/add.jhtml";
+NSString * const    _Staging_url    =    @"apigw/client/staging/continue/add";
 
 //待还款界面信息获取
 NSString * const    _Repay_url    =    @"apigw/client/ready/to/repay.jhtml";

@@ -347,7 +347,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         }) { 
             
         }
-        bankInfoVM.obtainUserCommitstaging(stagingId, cardNo: self.cardInfo?.cardNo)
+        bankInfoVM.obtainUserCommitstaging(stagingId, cardId: self.cardInfo?.cardId)
     }
     /*
     // MARK: - Navigation
