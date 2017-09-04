@@ -41,10 +41,10 @@
 
 -(void)obtainUserCommitstaging:(NSString *)staging cardId:(NSString *)cardId{
 
-    //@"juid":[Utility sharedUtility].userInfo.juid,
+    
 
     NSDictionary *paramDic = @{@"cardId":cardId,
-                               @"staging":staging};
+                               @"stagingId":staging};
     
     [[FXDNetWorkManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_Staging_url] isNeedNetStatus:YES isNeedWait:YES parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {

@@ -82,7 +82,9 @@
     NSDictionary *paramDic = [NSDictionary dictionary];
     DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
 //    if (parameters) {
 //        if ([Tool dicContainsKey:parameters keyValue:@"Encrypt"]) {
@@ -95,11 +97,10 @@
 //    }
     DLog(@"参数:---%@",paramDic);
 
-    
     DLog(@"juid --- %@\n token --- %@",[Utility sharedUtility].userInfo.juid,[Utility sharedUtility].userInfo.tokenStr);
     if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
         if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
-            [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
+//            [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
             [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
         }
     }
@@ -111,13 +112,10 @@
     [manager POST:strURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-
-        
         NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
         NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
         NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         DLog(@"response json --- %@",jsonStr);
-        //            [Tool dataToDictionary:responseObject]
         finished(Enum_SUCCESS,responseObject);
 //        [self removeWaitView];
          [_waitView removeFromSuperview];
