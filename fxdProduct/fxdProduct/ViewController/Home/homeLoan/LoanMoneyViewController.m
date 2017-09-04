@@ -68,11 +68,13 @@
     moenyViewing.lableData.hidden = YES;
     moenyViewing.middleView.hidden = YES;
     moenyViewing.moneyImage.hidden = YES;
+    moenyViewing.repayView.hidden = YES;
     [self.view addSubview:moenyViewing];
 
     _isFirst = _popAlert;
 
     _applicationStatus = InLoan;
+    
   }
 
 
@@ -83,12 +85,24 @@
     view.backgroundColor = [UIColor whiteColor];
     // 去掉滚动条
     view.showsVerticalScrollIndicator = NO;
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getFxdCaseInfo)];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
+    
     header.automaticallyChangeAlpha = YES;
     view.mj_header = header;
 //    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view = view;
     self.scrollView = view;
+}
+
+-(void)refresh{
+
+    if ([self.applicationStatusModel.platformType isEqualToString:@"0"]) {
+        _applicationStatus = Repayment;
+        [self getApplicationStatus];
+    }else{
+    
+        [self getFxdCaseInfo];
+    }
 }
 
 
@@ -305,6 +319,7 @@
 {
 
     moenyViewing.moneyImage.hidden = NO;
+    
     switch (_intStautes) {
             
         case 4://待放款
@@ -573,17 +588,28 @@
 
 -(void)getApplicationStatus{
 
+    __weak typeof (self) weakSelf = self;
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
-            
-            self.applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            [self updateUI:self.applicationStatusModel];
+            [weakSelf.scrollView.mj_header endRefreshing];
+            weakSelf.applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            switch (weakSelf.applicationStatusModel.status.integerValue) {
+                case 1:
+                    [weakSelf updateUI:weakSelf.applicationStatusModel];
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                   [self.navigationController popToRootViewControllerAnimated:YES];
+                default:
+                    break;
+            }
         }
     } WithFaileBlock:^{
-        
+        [self.scrollView.mj_header endRefreshing];
     }];
     
     [loanMoneyViewModel getApplicationStatus:@"1"];
@@ -592,41 +618,47 @@
 
 #pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
 -(void)updateUI:(ApplicationStatusModel *)applicationStatusModel{
-
+    
+    moenyViewing.repayBtnView.hidden = YES;
+    moenyViewing.moneyImage.hidden = NO;
+    moenyViewing.repayView.hidden = YES;
     switch (_applicationStatus) {
         case InLoan:
             
-            moenyViewing.labelProgress.text = @"到账中";
-            moenyViewing.labelDetail.text = @"请注意查收到账短信";
+            moenyViewing.labelProgress.text = @"放款中";
+            moenyViewing.tipLabel.text = @"请注意查收放款短信";
             [self arrivalAndRenewalUI:applicationStatusModel];
-            if (_popAlert&&_isFirst) {
-                _isFirst = NO;
-                [self showAlertview];
-            }
+            
             break;
         case Repayment:
             moenyViewing.labelProgress.text = @"还款中";
-            moenyViewing.labelDetail.text = @"请注意查收到账短信";
-            [self arrivalAndRenewalUI:applicationStatusModel];
-            if (_popAlert&&_isFirst) {
-                _isFirst = NO;
-                [self showAlertview];
-            }
+            moenyViewing.tipLabel.text = @"还款处理中，请稍后";
+            moenyViewing.middleView.hidden = YES;
+            moenyViewing.repayView.hidden = NO;
+            NSRange range = NSMakeRange(5, moenyViewing.repayMoneyLabel.text.length-6);
+            moenyViewing.repayMoneyLabel.attributedText = [self changeAtr:moenyViewing.repayMoneyLabel.text color:UI_MAIN_COLOR range:range];
+            NSRange rangeTime = NSMakeRange(5, moenyViewing.repayMoneyTime.text.length-5);
+            moenyViewing.repayMoneyTime.attributedText = [self changeAtr:moenyViewing.repayMoneyTime.text color:UI_MAIN_COLOR range:rangeTime];
+            
             break;
         case Extension:
             moenyViewing.labelProgress.text = @"续期处理中";
-            moenyViewing.labelDetail.text = @"请注意查收到账短信";
+            moenyViewing.labelProgress.font = [UIFont systemFontOfSize:34];
+            moenyViewing.tipLabel.text = @"续期处理中，请稍等";
             [self arrivalAndRenewalUI:applicationStatusModel];
-            if (_popAlert&&_isFirst) {
-                _isFirst = NO;
-                [self showAlertview];
-            }
+            
             break;
         default:
             break;
     }
 }
 
+-(NSMutableAttributedString *)changeAtr:(NSString *)str color:(UIColor *)color range:(NSRange)range{
+
+    NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
+    [ssa addAttribute:NSForegroundColorAttributeName value:color range:range];
+    return ssa;
+}
 
 -(void)arrivalAndRenewalUI:(ApplicationStatusModel *)applicationStatusModel{
 
@@ -634,20 +666,28 @@
     moenyViewing.lableData.hidden = YES;
     moenyViewing.sureBtn.hidden = YES;
     moenyViewing.middleView.hidden = NO;
-    
+    NSRange range;
     for (int i = 0; i<applicationStatusModel.infoList.count; i++) {
         
         InfoListModel *infoListModel = applicationStatusModel.infoList[i];
         
-        
+        range = NSMakeRange(0, infoListModel.value.length);
         if ([infoListModel.index isEqualToString:@"1"]) {
             moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%@%@", infoListModel.value,infoListModel.unit];
+            moenyViewing.labelLoan.attributedText = [self changeAtr:moenyViewing.labelLoan.text color:UI_MAIN_COLOR range:range];
+            moenyViewing.loanTitleLabel.text = infoListModel.label;
+            
         }else if ([infoListModel.index isEqualToString:@"2"]){
             
             moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@%@",infoListModel.value,infoListModel.unit];
+            moenyViewing.labelweek.attributedText = [self changeAtr:moenyViewing.labelweek.text color:UI_MAIN_COLOR range:range];
+            moenyViewing.loanTimeTitle.text = infoListModel.label;
+            
         }else if ([infoListModel.index isEqualToString:@"3"]){
             
             moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%@%@",infoListModel.value,infoListModel.unit];
+            moenyViewing.labelWeekmoney.attributedText = [self changeAtr:moenyViewing.labelWeekmoney.text color:UI_MAIN_COLOR range:range];
+            moenyViewing.payMoneyTitle.text = infoListModel.label;
         }
     }
 }
