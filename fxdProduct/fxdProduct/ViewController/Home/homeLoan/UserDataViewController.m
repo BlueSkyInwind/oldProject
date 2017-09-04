@@ -140,29 +140,7 @@
     [super viewWillAppear:animated];
     [_tableView.mj_header beginRefreshing];
 //    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
-    [self getHomeProductList];
 }
-
-/**
- 获取首页产品列表
- */
--(void)getHomeProductList{
-    
-    ProductListViewModel *productListViewModel = [[ProductListViewModel alloc]init];
-    [productListViewModel setBlockWithReturnBlock:^(id returnValue) {
-      HomeProductList *homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
-
-//        if ([homeProductList.data.productList.type isEqualToString:@"1"]) {
-//            _applyBtn.enabled = NO;
-//            _applyBtn.hidden = YES;
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:homeProductList.data.productList.refuseMsg];
-//        }
-    } WithFaileBlock:^{
-        
-    }];
-    [productListViewModel fetchProductListInfo];
-}
-
 
 - (void)configTableview
 {
@@ -183,7 +161,7 @@
     footView.backgroundColor = [UIColor whiteColor];
     _applyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [Tool setCorner:_applyBtn borderColor:[UIColor clearColor]];
-    [_applyBtn setTitle:@"立即申请" forState:UIControlStateNormal];
+    [_applyBtn setTitle:@"资料测评" forState:UIControlStateNormal];
     [_applyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_applyBtn setBackgroundColor:rgb(139, 140, 143)];
     _applyBtn.enabled = false;
@@ -202,8 +180,9 @@
 - (void)applyBtnClick
 {
     DLog(@"确认申请");
+
     
-    [self PostStatuesMyLoanAmount:@{@"product_id_":_product_id}];
+    
 }
 
 -(void)PostStatuesMyLoanAmount:(NSDictionary *)paramDic {
@@ -339,17 +318,8 @@
 - (void)goCheckVC:(UserStateModel *)model
 {
     CheckViewController *checkVC = [CheckViewController new];
-    if ([model.applyFlag isEqualToString:@"0001"]) {
-        checkVC.homeStatues = 2;
-    }else {
-        checkVC.homeStatues = [model.applyStatus integerValue];
-    }
     checkVC.userStateModel = model;
     checkVC.task_status = model.taskStatus;
-    checkVC.apply_again_ = model.applyAgain;
-    if (model.days) {
-        checkVC.days = model.days;
-    }
     [self.navigationController pushViewController:checkVC animated:YES];
 }
 
@@ -590,9 +560,9 @@
                 EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
                 editCard.typeFlag = @"0";
                 editCard.cardName = cardInfo.bankName;
-                editCard.cardNum = cardInfo.tailNumber;
-                editCard.reservedTel = cardInfo.phoneNum;
-                editCard.cardCode = cardInfo.cardIdentifier;
+                editCard.cardNum = cardInfo.cardNo;
+                editCard.reservedTel = cardInfo.bankPhone;
+                editCard.cardCode = cardInfo.cardId;
                 editCard.popOrdiss  = true;
                 [self.navigationController pushViewController:editCard animated:YES];
             }];
@@ -723,63 +693,34 @@
     }];
     [getCareerInfoViewModel fatchCareerInfo:nil];
 }
+/**
+ 发薪贷银行卡信息
+ */
 
 -(void)getGatheringInformation_jhtml:(void(^)(CardInfo *cardInfo))finish{
     
-    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
-    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResult.flag isEqualToString:@"0000"]) {
-            NSArray * array  = (NSArray *)baseResult.result;
-            NSMutableArray * supportBankListArr = [NSMutableArray array];
-            for (int i = 0; i < array.count; i++) {
-                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
-                [supportBankListArr addObject:bankList];
-            }
-            [self fatchCardInfo:supportBankListArr success:^(CardInfo *cardInfo) {
-                finish(cardInfo);
-            }];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [checkBankViewModel getSupportBankListInfo:@"2"];
-}
-- (void)fatchCardInfo:(NSMutableArray *)supportBankListArr success:(void(^)(CardInfo *cardInfo))finish
-{
-    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
-    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
-        UserCardResult *  userCardsModel = [UserCardResult yy_modelWithJSON:returnValue];
-        if([userCardsModel.flag isEqualToString:@"0000"]){
-            CardInfo *cardInfo = [[CardInfo alloc] init];
-            if (userCardsModel.result.count > 0) {
-                for(NSInteger j=0;j<userCardsModel.result.count;j++)
-                {
-                    CardResult * cardResult = [userCardsModel.result objectAtIndex:0];
-                    if([cardResult.card_type_ isEqualToString:@"2"]){
-                        for (SupportBankList *banlist in supportBankListArr) {
-                            if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-                                cardInfo.tailNumber = cardResult.card_no_;
-                                cardInfo.bankName = banlist.bank_name_;
-                                cardInfo.cardIdentifier = cardResult.id_;
-                                cardInfo.phoneNum = cardResult.bank_reserve_phone_;
-                            }
-                        }
-                        break;
-                    }
+    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
+    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            CardInfo *resultCardInfo = [[CardInfo alloc] init];
+            for (NSDictionary *dic in baseResultM.data) {
+                CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
+                if ([cardInfo.cardType isEqualToString:@"2"]) {
+                    resultCardInfo = cardInfo;
+                    break;
                 }
             }
-            finish(cardInfo);
+            finish(resultCardInfo);
         }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:userCardsModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.msg];
         }
     } WithFaileBlock:^{
         
     }];
-    [userDataVM obtainGatheringInformation];
+    [bankInfoVM obtainUserBankCardList];
 }
+
 - (BOOL)checkUserAuth:(NSInteger)selectRow
 {
     if (_nextStep.integerValue > 0 && _nextStep.integerValue >= selectRow) {

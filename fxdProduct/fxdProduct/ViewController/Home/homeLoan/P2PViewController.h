@@ -28,5 +28,6 @@
 @property (nonatomic,assign)BOOL isCheck;
 @property (nonatomic,assign)BOOL isOpenAccount;
 @property (nonatomic,assign)BOOL isRepay;
+@property (nonatomic, assign) NSString *applicationId;
 
 @end

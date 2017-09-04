@@ -49,6 +49,9 @@
 @property (nonatomic , copy)NSString *subWarnText;
 //二级提醒文字
 @property (nonatomic , copy)NSString *platformType;
+//申请件id
+@property (nonatomic , copy)NSString *applicationId;
+
 @end
 
 

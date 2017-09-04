@@ -61,9 +61,9 @@
 
 @implementation ComplianceViewModel
 
--(void)getUserStatus:(GetCaseInfo *)caseInfo{
+-(void)getUserStatus:(NSString *)applicationId{
 
-    NSDictionary *param = @{@"client_":@"1",@"from_case_id_":caseInfo.result.from_case_id_};
+    NSDictionary *param = @{@"client_":@"1",@"from_case_id_":applicationId};
 
     [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_qryUserStatus_url] parameters:param finished:^(EnumServerStatus status, id object) {
         

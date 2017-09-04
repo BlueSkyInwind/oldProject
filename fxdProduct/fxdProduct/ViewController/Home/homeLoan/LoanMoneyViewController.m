@@ -156,7 +156,6 @@
                 case 6://拒绝放款
                 {
                     CheckViewController *checkVC = [CheckViewController new];
-                    checkVC.homeStatues = [model.applyStatus integerValue];
                     [self.navigationController pushViewController:checkVC animated:YES];
                 }   break;
                 case 13://已结清
@@ -538,13 +537,11 @@
             [self.navigationController pushViewController:p2pVC animated:YES];
             
         }else{
-            
             RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
             repayRequest.targetVC = self;
             [repayRequest repayRequest];
         }
     }else{
-    
         RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
         repayRequest.targetVC = self;
         [repayRequest repayRequest];
@@ -566,7 +563,6 @@
     }
     
     [self getApplicationStatus];
-    
 //    [self addBid];
 }
 
