@@ -47,5 +47,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *loanTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *stagingBtn;
 @property (weak, nonatomic) IBOutlet UILabel *overdueFeeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *agreementBtn;
 
 @end

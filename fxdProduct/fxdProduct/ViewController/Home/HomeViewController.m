@@ -608,19 +608,7 @@
 
 -(void)getApplyStatus:(void(^)(BOOL isSuccess, UserStateModel *resultModel))finish{
     
-    [[FXDNetWorkManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_userState_url]   isNeedNetStatus:NO isNeedWait:NO parameters:nil finished:^(EnumServerStatus status, id object) {
-        if([object[@"flag"] isEqualToString:@"0000"])
-        {
-        
-            UserStateModel *result;
-            result = [UserStateModel yy_modelWithJSON:object[@"result"]];
-            finish(YES,result);
-        }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:object[@"msg"]];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
+
 }
 
 /**

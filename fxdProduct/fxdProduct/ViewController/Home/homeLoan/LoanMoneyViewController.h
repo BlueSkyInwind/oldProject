@@ -15,6 +15,7 @@ typedef NS_ENUM(NSUInteger, ApplicationStatus) {
     Staging,
     RepaymentNormal,
     ComplianceInProcess
+    
 };
 
 @interface LoanMoneyViewController : BaseViewController
