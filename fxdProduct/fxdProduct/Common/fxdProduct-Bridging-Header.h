@@ -35,4 +35,5 @@
 #import "UIViewController+KNSemiModal.h"
 #import "UserBankCardListViewController.h"
 #import "BankInfoViewModel.h"
+#import "LoanMoneyViewController.h"
 #endif /* fxdProduct_Bridging_Header_h */

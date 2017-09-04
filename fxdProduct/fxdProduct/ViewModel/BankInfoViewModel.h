@@ -15,4 +15,8 @@
  */
 -(void)obtainUserBankCardList;
 
+/**
+ 提交续期请求
+ */
+-(void)obtainUserCommitstaging:(NSString *)staging cardNo:(NSString *)cardNo;
 @end

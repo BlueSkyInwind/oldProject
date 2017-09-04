@@ -45,5 +45,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *repayMoneyTime;
 @property (weak, nonatomic) IBOutlet UIView *repayView;
 @property (weak, nonatomic) IBOutlet UILabel *loanTitleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *stagingBtn;
+@property (weak, nonatomic) IBOutlet UILabel *overdueFeeLabel;
 
 @end

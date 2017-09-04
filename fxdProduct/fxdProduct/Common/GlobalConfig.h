@@ -146,10 +146,11 @@ UIKIT_EXTERN NSString * const       _customerContact_url;                    //�
 UIKIT_EXTERN NSString * const       _saveIDInfo_url;
 UIKIT_EXTERN NSString * const       _getLimitProductlist_url;                //首页产品列表路径
 UIKIT_EXTERN NSString * const       _repayment_url;                          //获取当前期的续期信息
-UIKIT_EXTERN NSString * const       _ApplicationStatus_url;                   //放款中 还款中 展期中 状态实时获取
-UIKIT_EXTERN NSString * const       _BankCardList_url;                          //银行卡列表信息
-UIKIT_EXTERN NSString * const       _SalaryProductFee_url;                          //工薪贷根据周期获取费用
-
+UIKIT_EXTERN NSString * const       _ApplicationStatus_url;                  //放款中 还款中 展期中 状态实时获取
+UIKIT_EXTERN NSString * const       _BankCardList_url;                       //银行卡列表信息
+UIKIT_EXTERN NSString * const       _SalaryProductFee_url;                   //工薪贷根据周期获取费用
+UIKIT_EXTERN NSString * const       _Staging_url;                            //提交续期请求
+UIKIT_EXTERN NSString * const       _Repay_url;                              //待还款界面信息获取
 
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集

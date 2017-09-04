@@ -442,6 +442,11 @@ NSString * const    _ApplicationStatus_url    =    @"apigw/client/application/st
 //工薪贷根据周期获取费用
 NSString * const    _SalaryProductFee_url    =    @"apigw/client/fee/calc.jhtml";
 
+//提交续期请求
+NSString * const    _Staging_url    =    @"apigw/client/staging/continue/add.jhtml";
+
+//待还款界面信息获取
+NSString * const    _Repay_url    =    @"apigw/client/ready/to/repay.jhtml";
 
 #pragma mark - 合规接口
 

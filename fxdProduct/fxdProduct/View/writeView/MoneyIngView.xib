@@ -436,11 +436,13 @@
                 <outlet property="loanTitleLabel" destination="0ir-46-bI3" id="IF4-ZQ-H0P"/>
                 <outlet property="middleView" destination="lIp-0N-SAL" id="Ng8-11-1wK"/>
                 <outlet property="moneyImage" destination="Urt-co-PDM" id="YDO-Qi-ASP"/>
+                <outlet property="overdueFeeLabel" destination="JIo-bb-VC8" id="Zcw-WL-hzl"/>
                 <outlet property="payMoneyTitle" destination="TYY-al-iat" id="yh9-qQ-lUQ"/>
                 <outlet property="repayBtnView" destination="kwj-PQ-oYM" id="M3h-mT-u3O"/>
                 <outlet property="repayMoneyLabel" destination="5aR-cb-FXC" id="UgZ-cp-qNz"/>
                 <outlet property="repayMoneyTime" destination="Mkj-Ry-SaG" id="n9I-oL-wyv"/>
                 <outlet property="repayView" destination="MsW-O3-xFO" id="N0B-lm-KK6"/>
+                <outlet property="stagingBtn" destination="G77-OQ-sEz" id="8Yp-h4-E8C"/>
                 <outlet property="sureBtn" destination="MCd-D5-fVF" id="Ii7-uh-B16"/>
                 <outlet property="tipLabel" destination="2mg-b1-bKf" id="0Ic-Fx-FPQ"/>
             </connections>
