@@ -131,11 +131,9 @@
             [self getRepayInfo];
             return;
         }
-        
         [self getApplicationStatus];
         return;
     }
-    
     [self getFxdCaseInfo];
 }
 
