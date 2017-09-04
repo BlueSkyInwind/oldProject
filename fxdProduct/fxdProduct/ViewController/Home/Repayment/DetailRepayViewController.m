@@ -668,7 +668,9 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
             repayMent.cellSelectArr = _cellSelectArr;
             repayMent.save_amount = _save_amount;
             repayMent.situations = _situations;
-            repayMent.model = _userStateM;
+            repayMent.product_id = self.product_id;
+            repayMent.platform_Type = self.platform_type;
+            repayMent.applicationID = self.applicationId;
             [self.navigationController pushViewController:repayMent animated:YES];
             
         } else {
@@ -678,9 +680,9 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
         
     }];
     
-    if ([_userStateM.platform_type isEqualToString:@"2"]) {
+    if ([self.platform_type isEqualToString:@"2"]) {
         [checkBankViewModel getSupportBankListInfo:@"4"];
-    }else if ([_userStateM.platform_type isEqualToString:@"0"]){
+    }else if ([self.platform_type isEqualToString:@"0"]){
         [checkBankViewModel getSupportBankListInfo:@"2"];
     }
 }

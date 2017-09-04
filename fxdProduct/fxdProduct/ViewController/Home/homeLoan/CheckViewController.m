@@ -203,16 +203,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
-//    if (_isSecondFailed) {
-//        _homeStatues = 2;
-//        [self createUI];
-//    }else{
-//        if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
-////            [self getFxdCaseInfo];
-//        }else{
-////            [self checkState];
-//        }
-//    }
+
 
 }
 
@@ -221,7 +212,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     __weak typeof (self) weakSelf = self;
     [self obtainDrawingInformation:^(DrawingsInfoModel *drawingsInfo) {
         if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
-            [weakSelf getFxdCaseInfo];
+            [weakSelf getUserStatus:drawingsInfo.applicationId];
         }
         //急速贷产品费率获取
         if ([_drawingsInfoModel.productId isEqualToString:RapidLoan]) {
@@ -736,7 +727,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
                 
                 LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
-                loanVC.userStateModel = _userStateModel;
+                loanVC.applicationStatus = InLoan;
                 loanVC.popAlert = true;
                 [self.navigationController pushViewController:loanVC animated:YES];
                 
@@ -1200,7 +1191,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 }
 
 #pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(GetCaseInfo *)caseInfo{
+-(void)getUserStatus:(NSString *)applicationId{
 
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -1209,7 +1200,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             _qryUserStatusModel = model;
             if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
                 LoanMoneyViewController *controller = [LoanMoneyViewController new];
-                controller.userStateModel = _userStateModel;
+                controller.applicationStatus = ComplianceInProcess;
                 controller.qryUserStatusModel = _qryUserStatusModel;
                 controller.popAlert = true;
                 [self.navigationController pushViewController:controller animated:YES];
@@ -1218,27 +1209,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
     } WithFaileBlock:^{
-        
     }];
-    [complianceViewModel getUserStatus:caseInfo];
+    [complianceViewModel getUserStatus:applicationId];
 }
 
-#pragma mark 发标前查询进件
--(void)getFxdCaseInfo{
-
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
-        if ([caseInfo.flag isEqualToString:@"0000"]) {
-            _caseInfo = caseInfo;
-            [self getUserStatus:caseInfo];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel getFXDCaseInfo];
-}
 
 #pragma mark 提款申请件记录
 -(void)saveLoanCase:(NSString *)type caseInfo:(GetCaseInfo *)caseInfo{
@@ -1270,7 +1244,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         }
     } WithFaileBlock:^{
         
-//        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
     }];
     [complianceViewModel saveLoanCase:type CaseInfo:caseInfo Period:_userSelectNum.description PurposeSelect:_purposeSelect];
 }

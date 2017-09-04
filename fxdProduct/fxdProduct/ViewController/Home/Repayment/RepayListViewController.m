@@ -111,62 +111,20 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
  */
 -(void)checkState{
     
-    switch ([self.userStateParse.applyStatus intValue]) {
-        case 7:    //正常放款->开始有记录
-        case 8:    //逾期
-            _repayStateFlag=@0;
-            [self post_getLastDate];
-            break;
-        default:
-            _repayStateFlag=@100;
-            [self loadViewWithState];
-            break;
-    }
-}
-
-/**
- 获取P2P期供信息
- */
-- (void)fatchP2PBillDetail
-{
-    NSDictionary *paramDic = @{@"bid_id_":_userStateParse.bid_id_};
-    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_querybillDetails_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        _p2pBillModel = [P2PBillDetail yy_modelWithJSON:object];
-        if ([_p2pBillModel.appcode isEqualToString:@"1"]) {
-            for (BillList *billList in _p2pBillModel.data.bill_List_) {
-                if (billList.status_ != 1 ) {
-                    if (billList.status_ == 2 || billList.status_ == 4) {
-                        
-                        if (billList.status_ == 4) {
-                            _currenPeriod = billList.cur_stage_no_;
-                        }
-                        _clickMax++;
-                        [_cellSelectArr addObject:[NSNumber numberWithBool:true]];
-                        _readyPayAmount += billList.amount_total_;
-                        
-                    } else {
-                        [_cellSelectArr addObject:[NSNumber numberWithBool:false]];
-                    }
-                    [_vaildBills addObject:billList];
-                }
-            }
-            if (_currenPeriod == 0) {
-                for (BillList *billList in _p2pBillModel.data.bill_List_) {
-                    if (billList.status_ == 3) {
-                        _currenPeriod = billList.cur_stage_no_ - 1;
-                        break;
-                    }
-                }
-            }
-            _lastClick = _clickMax;
-            [self updateUserNeedPayAmount];
-            [self.repayTableView reloadData];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_p2pBillModel.appmsg];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
+    _repayStateFlag=@0;
+    [self post_getLastDate];
+    
+//    switch ([self.userStateParse.applyStatus intValue]) {
+//        case 7:    //正常放款->开始有记录
+//        case 8:    //逾期
+//            _repayStateFlag=@0;
+//            [self post_getLastDate];
+//            break;
+//        default:
+//            _repayStateFlag=@100;
+//            [self loadViewWithState];
+//            break;
+//    }
 }
 
 /**
@@ -264,7 +222,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         }
     }
     
-    if ([_userStateParse.platform_type isEqualToString:@"0"]|| [_userStateParse.platform_type isEqualToString:@"2"]) {
+    if ([self.platform_type isEqualToString:@"0"]|| [self.platform_type isEqualToString:@"2"]) {
         if ([_vaildSituations.firstObject.status isEqualToString:@"2"] && [_vaildSituations.lastObject.status isEqualToString:@"2"]) {
             _save_amount = 0;
         }else {
@@ -285,7 +243,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     
     _readyPayAmount = _readyPayAmount - _save_amount;
 
-    if ([_userStateParse.product_id isEqualToString:SalaryLoan]||[_userStateParse.product_id isEqualToString:WhiteCollarLoan]) {
+    if ([self.product_id isEqualToString:SalaryLoan]||[self.product_id isEqualToString:WhiteCollarLoan]) {
         NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
         NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
         [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, saveAmount.length)];
@@ -307,7 +265,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
 //        [self showAlert];
         for (int i = 0; i < _cellSelectArr.count; i++) {
             [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
-            if ([_userStateParse.platform_type isEqualToString:@"0"] ||[_userStateParse.platform_type isEqualToString:@"2"]) {
+            if ([self.platform_type isEqualToString:@"0"] ||[self.platform_type isEqualToString:@"2"]) {
                 Situations *situation = [_vaildSituations objectAtIndex:i];
                 _readyPayAmount += situation.debt_total;
                 if ([situation.status isEqualToString:@"3"]) {
@@ -316,7 +274,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             }
         }
         
-        if ([_userStateParse.platform_type isEqualToString:@"0"] || [_userStateParse.platform_type isEqualToString:@"2"]) {
+        if ([self.platform_type isEqualToString:@"0"] || [self.platform_type isEqualToString:@"2"]) {
             if ([_vaildSituations.firstObject.status isEqualToString:@"2"] && [_vaildSituations.lastObject.status isEqualToString:@"2"]) {
                 _save_amount = 0;
             }else {
@@ -343,7 +301,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         }
         _readyPayAmount = _readyPayAmount - _save_amount;
 
-        if ([_userStateParse.product_id isEqualToString:SalaryLoan]||[_userStateParse.product_id isEqualToString:WhiteCollarLoan]) {
+        if ([self.product_id isEqualToString:SalaryLoan]||[self.product_id isEqualToString:WhiteCollarLoan]) {
             NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
             NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
             [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, saveAmount.length)];
@@ -369,7 +327,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                 _readyPayAmount += situation.debt_total;
             }
         }
-        if ([_userStateParse.product_id isEqualToString:SalaryLoan]||[_userStateParse.product_id isEqualToString:WhiteCollarLoan]) {
+        if ([self.product_id isEqualToString:SalaryLoan]||[self.product_id isEqualToString:WhiteCollarLoan]) {
             self.saveUpLabel.hidden = YES;
             _payNumberTop.constant = 10;
             _payNumberBottom.constant = 10;
@@ -400,7 +358,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
  *
  */
 - (IBAction)repayClick:(UIButton *)sender {
-    if ([_userStateParse.platform_type isEqualToString:@"0"] || [_userStateParse.platform_type isEqualToString:@"2"]) {
+    if ([self.platform_type isEqualToString:@"0"] || [self.platform_type isEqualToString:@"2"]) {
         if (_situations.count > 0) {
             [_situations removeAllObjects];
         }
@@ -438,7 +396,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                 }
                 
                 RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
-                repayMent.product_id = _userStateParse.product_id;
                 if (_selectAllBtn.selected) {
                     repayMent.repayType = RepayTypeClean;
                 } else {
@@ -450,7 +407,9 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                 repayMent.cellSelectArr = _cellSelectArr;
                 repayMent.save_amount = _save_amount;
                 repayMent.situations = _situations;
-                repayMent.model = _userStateParse;
+                repayMent.product_id = self.product_id;
+                repayMent.platform_Type = self.platform_type;
+                repayMent.applicationID = self.applicationId;
                 [self.navigationController pushViewController:repayMent animated:YES];
                 
             } else {
@@ -460,9 +419,9 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             
         }];
         
-        if ([_userStateParse.platform_type isEqualToString:@"2"]) {
+        if ([self.platform_type isEqualToString:@"2"]) {
             [checkBankViewModel getSupportBankListInfo:@"4"];
-        }else if ([_userStateParse.platform_type isEqualToString:@"0"]){
+        }else if ([self.platform_type isEqualToString:@"0"]){
             [checkBankViewModel getSupportBankListInfo:@"2"];
         }
     } else {
@@ -501,13 +460,10 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     cell.identifierSelect = [_cellSelectArr objectAtIndex:indexPath.row].boolValue;
     cell.detailClickBlock = ^(NSInteger row){
         DetailRepayViewController *detailVC = [[DetailRepayViewController alloc] init];
-        detailVC.userStateM = _userStateParse;
-        //无论合规还是发薪贷 都走发薪贷的通道
-        if ([_userStateParse.platform_type isEqualToString:@"0"] || [_userStateParse.platform_type isEqualToString:@"2"]) {
-            detailVC.repayListModel = _repayListModel;
-            detailVC.product_id = _userStateParse.product_id;
-        }
-        
+        detailVC.platform_type = self.platform_type;
+        detailVC.repayListModel = _repayListModel;
+        detailVC.product_id = self.product_id;
+        detailVC.applicationId = self.applicationId;
         [self.navigationController pushViewController:detailVC animated:YES];
     };
     return cell;

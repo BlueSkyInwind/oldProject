@@ -30,40 +30,29 @@
 //查询状态
 -(void)checkState{
     
-    HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
-    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
+
+    
+    if ([self.platform_type isEqualToString:@"0"]) {
         
-        if([returnValue[@"flag"] isEqualToString:@"0000"])
-        {
-            _model=[UserStateModel yy_modelWithJSON:returnValue[@"result"]];
-            if (_model.platform_type != nil) {
-                if ([_model.platform_type isEqualToString:@"0"]) {
-                    if ([_model.product_id isEqualToString:RapidLoan]) {
-                        [self post_getLastDate];
-                    }else {
-                        RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
-                        repayMent.userStateParse = _model;
-                        [_targetVC.navigationController pushViewController:repayMent animated:YES];
-                    }
-                }
-                if ([_model.platform_type isEqualToString:@"2"]) { 
-                    RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
-                    repayMent.userStateParse = _model;
-                    [_targetVC.navigationController pushViewController:repayMent animated:YES];
-                }
-            } else {
-                RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
-                repayMent.userStateParse = _model;
-                [_targetVC.navigationController pushViewController:repayMent animated:YES];
-            }
+        if ([self.product_id isEqualToString:RapidLoan]) {
+            [self post_getLastDate];
+            return;
         }
-        else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:_targetVC.view message:returnValue[@"msg"]];
-        }
-    } WithFaileBlock:^{
         
-    }];
-    [homeViewModel fetchUserState:nil];
+        RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
+        repayMent.product_id = self.product_id;
+        repayMent.applicationId = self.applicationId;
+        repayMent.platform_type = self.platform_type;
+        [_targetVC.navigationController pushViewController:repayMent animated:YES];
+    }
+    
+    if ([_model.platform_type isEqualToString:@"2"]) {
+        RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
+        repayMent.product_id = self.product_id;
+        repayMent.applicationId = self.applicationId;
+        repayMent.platform_type = self.platform_type;
+        [_targetVC.navigationController pushViewController:repayMent animated:YES];
+    }
 }
 
 /**
@@ -83,7 +72,7 @@
             } else {
                 RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
                 repayMent.product_id = _model.product_id;
-                repayMent.isP2pView = _isP2pView;
+                repayMent.isPopRoot = _isPopRoot;
 //                _model.product_id;
                 [_targetVC.navigationController pushViewController:repayMent animated:YES];
             }
@@ -117,14 +106,15 @@
             for (Situations *situation in repayListInfo.result.situations) {
                 finalRepayAmount += situation.debt_total;
             }
-            repayMent.isP2pView = _isP2pView;
+            repayMent.isPopRoot = _isPopRoot;
             repayMent.repayAmount = finalRepayAmount;
             repayMent.product_id = RapidLoan;
             //            repayMent.cellSelectArr = _cellSelectArr;
             //            repayMent.save_amount = _save_amount;
             repayMent.repayListInfo = repayListInfo;
             repayMent.situations = repayListInfo.result.situations.copy;
-            repayMent.model = _model;
+            repayMent.platform_Type = self.platform_type;
+            repayMent.applicationID = self.applicationId;
             [_targetVC.navigationController pushViewController:repayMent animated:YES];
             
         } else {

@@ -175,7 +175,7 @@
                 if ([qryUserStatusModel.result.flg isEqualToString:@"6"]&&_isRepay) {//正常用户并且从我要还款入口进入
                     RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                     repayRequest.targetVC = self;
-                    repayRequest.isP2pView = YES;
+                    repayRequest.isPopRoot = YES;
                     [repayRequest repayRequest];
                 }else{
                     LoanMoneyViewController *controller;

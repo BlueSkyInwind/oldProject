@@ -571,10 +571,10 @@
     [vc presentViewController:nav animated:YES completion:nil];
 }
 
--(void)goLoanMoneVC{
+-(void)goLoanMoneVC:(ApplicationStatus)status{
     
     LoanMoneyViewController *loanVc = [LoanMoneyViewController new];
-    loanVc.userStateModel = nil;
+    loanVc.applicationStatus = status;
     if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
         loanVc.qryUserStatusModel = _qryUserStatusModel;
     }
@@ -616,15 +616,21 @@
             [self goCheckVC:nil];
         }
             break;
-        case 6:
-        case 7:
+        case 6:{
+            [self goLoanMoneVC:InLoan];
+        }
+            break;
+        case 7:{
+            [self goLoanMoneVC:RepaymentNormal];
+        }
+            break;
         case 8:{
             if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
                 __weak typeof (self) weakSelf = self;
                 [self getUserStatus:_homeProductList.data.applicationId success:^(QryUserStatusModel *resultModel) {
                     if ([_qryUserStatusModel.result.flg isEqualToString:@"11"] || [_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
                         
-                        [weakSelf goLoanMoneVC];
+                        [weakSelf goLoanMoneVC:ComplianceInProcess];
                         
                     }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
                         //激活用户
@@ -639,7 +645,8 @@
                 }];
                 return;
             }
-            [self goLoanMoneVC];
+            [self goLoanMoneVC:Repayment];
+
         }
             break;
         default:

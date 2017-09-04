@@ -37,6 +37,8 @@
 
 @property(strong,nonatomic)UserStateModel *userStateM;
 
-@property (nonatomic, copy) NSString *product_id;
+@property (nonatomic,strong)NSString * platform_type;
+@property (nonatomic,strong)NSString * applicationId;
+@property (nonatomic,strong)NSString * product_id;
 
 @end

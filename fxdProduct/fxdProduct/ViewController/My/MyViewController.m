@@ -46,8 +46,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    titleAry=@[@"我要还款",@"借还记录",@"我的银行卡",@"邀请好友",@"我的红包",@"更多"];
-    imgAry=@[@"6_my_icon_02",@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"6_my_icon_07",@"icon_my_setup"];
+    titleAry=@[@"借还记录",@"我的银行卡",@"邀请好友",@"我的红包",@"更多"];
+    imgAry=@[@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"6_my_icon_07",@"icon_my_setup"];
     
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -62,7 +62,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
- 
+
     MineHeaderView *headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
     headerView.backgroundColor = UI_MAIN_COLOR;
     headerView.nameLabel.text = @"您好!";
@@ -125,37 +125,20 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
+
         case 0:
-            //platform_type  2、合规   0、发薪贷
-            if ([_model.platform_type isEqualToString:@"2"]) {
-                //applyStatus  7、8 待还款
-                if ([_model.applyStatus isEqualToString:@"7"]||[_model.applyStatus isEqualToString:@"8"]) {
-                    //查询用户状态
-                    [self getFxdCaseInfo];
-                }else{
-                    RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
-                    repayRequest.targetVC = self;
-                    [repayRequest repayRequest];
-                }
-            }else{
-                RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
-                repayRequest.targetVC = self;
-                [repayRequest repayRequest];
-            }
-            break;
-        case 1:
         {
             RenewalViewController *repayRecord = [[RenewalViewController alloc] init];
 //            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:YES];
         }
             break;
-        case 2:{
+        case 1:{
             MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
             [self.navigationController pushViewController:myCrad animated:YES];
         }
             break;
-        case 3:
+        case 2:
         {
             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
             [self.navigationController pushViewController:userDataVC animated:true];
@@ -163,14 +146,14 @@
 //            [self.navigationController pushViewController:invitationVC animated:true];
         }
             break;
-        case 4:
+        case 3:
         {
             LoanMoneyViewController *ticket=[[LoanMoneyViewController alloc]init];
 //            DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
         }
             break;
-        case 5:
+        case 4:
         {
             
 //             LoanMoneyViewController *ticket=[[LoanMoneyViewController alloc]init];
@@ -184,58 +167,6 @@
     }
 }
 
-#pragma mark 发标前查询进件
--(void)getFxdCaseInfo{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
-        if ([caseInfo.flag isEqualToString:@"0000"]) {
-            [self getUserStatus:caseInfo];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel getFXDCaseInfo];
-    
-}
-
-#pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(GetCaseInfo *)caseInfo{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
-        if ([model.flag isEqualToString:@"0000"]) {
-            
-            if ([model.result.flg isEqualToString:@"3"]) {//待激活
-                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
-                P2PViewController *p2pVC = [[P2PViewController alloc] init];
-                p2pVC.isRepay = YES;
-                p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                [self.navigationController pushViewController:p2pVC animated:YES];
-            }else if ([model.result.flg isEqualToString:@"12"]){//处理中
-            
-                LoanMoneyViewController *controller = [LoanMoneyViewController new];
-                controller.userStateModel = _model;
-                controller.qryUserStatusModel = model;
-                [self.navigationController pushViewController:controller animated:YES];
-            }else{
-            
-                RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
-                repayRequest.targetVC = self;
-                [repayRequest repayRequest];
-            
-            }
-        }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel getUserStatus:caseInfo];
-}
 
 
 

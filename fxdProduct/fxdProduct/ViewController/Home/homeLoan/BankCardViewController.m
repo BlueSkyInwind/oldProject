@@ -531,7 +531,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     }else if (!_btnStatus) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请同意授权书"];
     }else{
-        
         if(_isP2P){
          [self openAccount];
         }else{
@@ -693,10 +692,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     p2pVC.dataArray = dataListAll3;
     p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
     p2pVC.isCheck = YES;
-//    p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
-//    p2pVC.userSelectNum = _userSelectNum;
     p2pVC.purposeSelect = _purposeSelect;
-//    p2pVC.isOpenAccount = YES;
     [self.navigationController pushViewController:p2pVC animated:YES];
 }
 
