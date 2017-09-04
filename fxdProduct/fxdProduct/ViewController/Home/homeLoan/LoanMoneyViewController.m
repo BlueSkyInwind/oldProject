@@ -125,12 +125,17 @@
 -(void)refresh{
 
     if ([self.applicationStatusModel.platformType isEqualToString:@"0"]) {
-        _applicationStatus = Repayment;
+        
+        if (_applicationStatus == RepaymentNormal) {
+            [self getRepayInfo];
+            return;
+        }
+        
         [self getApplicationStatus];
-    }else{
-    
-        [self getFxdCaseInfo];
+        return;
     }
+    
+    [self getFxdCaseInfo];
 }
 
 
@@ -620,12 +625,12 @@
     [super viewWillAppear:animated];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     //platform_type 2、合规平台  0发薪贷平台
-    if ([_userStateModel.platform_type isEqualToString:@"2"]) {
-        //查询用户状态
-        [self getFxdCaseInfo];
-    }else{
-    
-        [self getRepayInfo];
+//    if ([_userStateModel.platform_type isEqualToString:@"2"]) {
+//        //查询用户状态
+//        [self getFxdCaseInfo];
+//    }else{
+//    
+//        [self getRepayInfo];
 //        if (_applicationStatus == RepaymentNormal) {
 //            
 //            [self getRepayInfo];
@@ -637,15 +642,16 @@
 
         if (_applicationStatus == RepaymentNormal) {
             [self getRepayInfo];
-        }else{
-            [self getApplicationStatus];
+            return;
         }
+        [self getApplicationStatus];
+    
 
         //发薪贷申请件状态查询
 //        [self checkStatus];
-    }
+//    }
     
-    [self getApplicationStatus];
+    [self getRepayInfo];
 //    [self addBid];
 }
 
