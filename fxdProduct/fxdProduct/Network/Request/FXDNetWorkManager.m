@@ -72,9 +72,9 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
         return;
     }
-    
+    MBProgressHUD *_waitView = [self loadingHUD];
     if (isNeedWait) {
-        MBProgressHUD *_waitView = [self loadingHUD];
+        
         [_waitView show:YES];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
     }
@@ -119,13 +119,15 @@
         DLog(@"response json --- %@",jsonStr);
         //            [Tool dataToDictionary:responseObject]
         finished(Enum_SUCCESS,responseObject);
-        [self removeWaitView];
+//        [self removeWaitView];
+         [_waitView removeFromSuperview];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(Enum_FAIL,error);
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
         DLog(@"error---%@",error.description);
-        [self removeWaitView];
+//        [self removeWaitView];
+         [_waitView removeFromSuperview];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
     }];
 }
