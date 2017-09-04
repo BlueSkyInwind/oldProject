@@ -76,7 +76,6 @@
     [moenyViewing.agreementBtn addTarget:self action:@selector(agreementBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     _isFirst = _popAlert;
 
-    _applicationStatus = InLoan;
     
   }
 
