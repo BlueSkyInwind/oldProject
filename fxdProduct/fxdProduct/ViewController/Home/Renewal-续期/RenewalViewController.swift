@@ -14,10 +14,11 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
     let cellId = "CellId"
     var headerView: CurrentInformationHeadView? = nil
     var contentArr : [String] = [String]()
-    var supportBankListArr : [AnyObject] = [AnyObject]()
+//    var supportBankListArr : [AnyObject] = [AnyObject]()
     var cardInfo : CardInfo?
-    var defaultBankIndex: NSInteger?
-    var userSelectIndex : NSInteger?
+//    var defaultBankIndex: NSInteger?
+//    var userSelectIndex : NSInteger?
+    var stagingId : String?
     
     let renewalTableView: UITableView = {
         
@@ -40,8 +41,8 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         self.title = "续期费用"
         
         addBackItem()
-        defaultBankIndex = -1
-        userSelectIndex = defaultBankIndex
+//        defaultBankIndex = -1
+//        userSelectIndex = defaultBankIndex
         
         headerView = CurrentInformationHeadView()
         headerView?.moneyDescLabel?.text = "续期费用(元)"
@@ -53,6 +54,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         footerView.footerBtn?.setTitle("确认", for: .normal)
         footerView.footerBtnClosure = {
         
+            self.commitStaging()
             print("确认按钮点击")
         }
         renewalTableView.tableFooterView = footerView
@@ -114,7 +116,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         }) { 
             
         }
-        repayMentViewModel.getCurrentRenewal(withStagingId: "34c563ab9f934a7396b4d8569622f56b")
+        repayMentViewModel.getCurrentRenewal(withStagingId: stagingId)
 
     }
     func addBackItem(){
@@ -323,8 +325,29 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         }) {
             
         }
-//        repayMentViewModel.getBankCardList()
+        bankInfoVM.obtainUserBankCardList()
 
+    }
+    
+    func commitStaging(){
+    
+        let bankInfoVM = BankInfoViewModel()
+        bankInfoVM.setBlockWithReturn({ (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+            
+                self.navigationController?.popViewController(animated: true)
+//                let loanMonayCtrl = LoanMoneyViewController()
+//                self.navigationController?.pushViewController(loanMonayCtrl, animated: true)
+                
+            }else{
+            
+                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) { 
+            
+        }
+        bankInfoVM.obtainUserCommitstaging(stagingId, cardNo: self.cardInfo?.cardNo)
     }
     /*
     // MARK: - Navigation

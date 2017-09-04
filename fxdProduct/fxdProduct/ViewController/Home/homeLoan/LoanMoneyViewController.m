@@ -35,6 +35,7 @@
 #import "GetCaseInfo.h"
 #import "P2PViewController.h"
 #import "ApplicationStatusModel.h"
+#import "RepayModel.h"
 @interface LoanMoneyViewController ()
 {
     MoneyIngView *moenyViewing;
@@ -44,6 +45,7 @@
     NSString *_cardNo;
     NSString *_cardBank;
     BOOL _isFirst;//好评只弹出一次，再次刷新时，不弹对话框
+    RepayModel *_repayModel;
 }
 
 @property (nonatomic, copy)NSString *platform;
@@ -63,18 +65,35 @@
     [self addBackItemroot];
     moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
     moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-//    moenyViewing.bottomView.hidden = YES;
     moenyViewing.sureBtn.hidden = YES;
     moenyViewing.lableData.hidden = YES;
     moenyViewing.middleView.hidden = YES;
     moenyViewing.moneyImage.hidden = YES;
+    moenyViewing.repayView.hidden = YES;
     [self.view addSubview:moenyViewing];
 
+    [moenyViewing.stagingBtn addTarget:self action:@selector(stagingBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     _isFirst = _popAlert;
 
     _applicationStatus = InLoan;
+    
   }
 
+#pragma mark 续借一期点击按钮
+-(void)stagingBtnClick{
+
+    
+    if (!_repayModel.continueStaging) {
+        
+        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"一次借款最多续借三次"];
+        return;
+    }
+        
+    RenewalViewController *controller = [[RenewalViewController alloc]init];
+    controller.stagingId = _repayModel.stagingId;
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 - (void)loadView
 {
@@ -83,12 +102,23 @@
     view.backgroundColor = [UIColor whiteColor];
     // 去掉滚动条
     view.showsVerticalScrollIndicator = NO;
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getFxdCaseInfo)];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
+    
     header.automaticallyChangeAlpha = YES;
     view.mj_header = header;
-//    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view = view;
     self.scrollView = view;
+}
+
+-(void)refresh{
+
+    if ([self.applicationStatusModel.platformType isEqualToString:@"0"]) {
+        _applicationStatus = Repayment;
+        [self getApplicationStatus];
+    }else{
+    
+        [self getFxdCaseInfo];
+    }
 }
 
 
@@ -132,69 +162,69 @@
  }
  */
 
--(void)checkStatus
-{
-    HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
-    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        if([returnValue[@"flag"] isEqualToString:@"0000"])
-        {
-            model=[UserStateModel yy_modelWithJSON:returnValue[@"result"]];
-            _userStateModel = model;
-            [self postUrlMessageandDictionary];
-            //            [model setValuesForKeysWithDictionary:returnValue[@"result"]];
-            _platform = model.platform_type;
-            switch ([model.applyStatus integerValue]) {
-                    
-                case 5://放款中
-                case 4://待放款
-                {
-                    _intStautes = [model.applyStatus integerValue];
-                    [self createUIWith];
-                }
-                    break;
-                case 6://拒绝放款
-                {
-                    CheckViewController *checkVC = [CheckViewController new];
-                    [self.navigationController pushViewController:checkVC animated:YES];
-                }   break;
-                case 13://已结清
-                case 12://提前结清
-                case 11://已记坏账
-                case 10://委外催收
-                case 9://内部催收
-                case 8://逾期
-                case 7:
-                case 16: //还款中
-                {
-                    _intStautes = [model.applyStatus integerValue];
-                    [self createUIWith];
-
-                }
-                    break;
-                case 15:
-                    
-                    _intStautes = [model.applyStatus integerValue];
-                    [self createUIWith];
-
-                    break;
-                default:
-
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-
-                    break;
-            }
-        }
-        else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [homeViewModel fetchUserState:_userStateModel.product_id];
-    
-}
-
+//-(void)checkStatus
+//{
+//    HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
+//    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
+//        
+//        if([returnValue[@"flag"] isEqualToString:@"0000"])
+//        {
+//            model=[UserStateModel yy_modelWithJSON:returnValue[@"result"]];
+//            _userStateModel = model;
+//            [self postUrlMessageandDictionary];
+//            //            [model setValuesForKeysWithDictionary:returnValue[@"result"]];
+//            _platform = model.platform_type;
+//            switch ([model.applyStatus integerValue]) {
+//                    
+//                case 5://放款中
+//                case 4://待放款
+//                {
+//                    _intStautes = [model.applyStatus integerValue];
+//                    [self createUIWith];
+//                }
+//                    break;
+//                case 6://拒绝放款
+//                {
+//                    CheckViewController *checkVC = [CheckViewController new];
+//                    checkVC.homeStatues = [model.applyStatus integerValue];
+//                    [self.navigationController pushViewController:checkVC animated:YES];
+//                }   break;
+//                case 13://已结清
+//                case 12://提前结清
+//                case 11://已记坏账
+//                case 10://委外催收
+//                case 9://内部催收
+//                case 8://逾期
+//                case 7:
+//                case 16: //还款中
+//                {
+//                    _intStautes = [model.applyStatus integerValue];
+//                    [self createUIWith];
+//
+//                }
+//                    break;
+//                case 15:
+//                    
+//                    _intStautes = [model.applyStatus integerValue];
+//                    [self createUIWith];
+//
+//                    break;
+//                default:
+//
+//                    [self.navigationController popToRootViewControllerAnimated:YES];
+//
+//                    break;
+//            }
+//        }
+//        else {
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
+//        }
+//    } WithFaileBlock:^{
+//        
+//    }];
+//    [homeViewModel fetchUserState:_userStateModel.product_id];
+//    
+//}
 
 #pragma mark  fxd用户状态查询，viewmodel
 -(void)getUserStatus:(GetCaseInfo *)caseInfo{
@@ -205,7 +235,8 @@
         if ([qryUserStatusModel.flag isEqualToString:@"0000"]) {
             
             _qryUserStatusModel = qryUserStatusModel;
-            [self checkStatus];
+            _applicationStatus  = ComplianceInProcess;
+//            [self checkStatus];
 
         }else{
             
@@ -221,7 +252,7 @@
 
 #pragma mark 发标前查询进件
 -(void)getFxdCaseInfo{
-//    [moenyViewing removeFromSuperview];
+
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
         
@@ -304,6 +335,7 @@
 {
 
     moenyViewing.moneyImage.hidden = NO;
+    
     switch (_intStautes) {
             
         case 4://待放款
@@ -400,16 +432,13 @@
 
 -(void)fxdStatus{
 
-//    moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-//    moenyViewing.frame = self.view.bounds;
-//    [self.view addSubview:moenyViewing];
-    moenyViewing.sureBtn.hidden = NO;
-    moenyViewing.lableData.hidden = NO;
-    moenyViewing.labelProgress.text = @"已到账";
-    moenyViewing.labelDetail.text = @"请按时还款,保障信用";
-    moenyViewing.middleView.hidden = NO;
+//    moenyViewing.sureBtn.hidden = NO;
+//    moenyViewing.lableData.hidden = NO;
+//    moenyViewing.labelProgress.text = @"已到账";
+//    moenyViewing.labelDetail.text = @"请按时还款,保障信用";
+//    moenyViewing.middleView.hidden = NO;
     
-    [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     if ([model.platform_type isEqualToString:@"0"]) {
         moenyViewing.lableData.textAlignment = NSTextAlignmentLeft;
         NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"《银行自动转账授权书》、《借款协议》"];
@@ -557,7 +586,11 @@
         //查询用户状态
         [self getFxdCaseInfo];
     }else{
-    
+        if (_applicationStatus == RepaymentNormal) {
+            [self getRepayInfo];
+        }else{
+            [self getApplicationStatus];
+        }
         //发薪贷申请件状态查询
 //        [self checkStatus];
     }
@@ -567,83 +600,170 @@
 }
 
 
+#pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
 -(void)getApplicationStatus{
 
+    __weak typeof (self) weakSelf = self;
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
         
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
-            
-            self.applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            [self updateUI:self.applicationStatusModel];
+            [weakSelf.scrollView.mj_header endRefreshing];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+            weakSelf.applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            switch (weakSelf.applicationStatusModel.status.integerValue) {
+                case 1:
+                    [weakSelf updateUI:weakSelf.applicationStatusModel repayModel:nil];
+                    break;
+                case 2:
+                    _applicationStatus = RepaymentNormal;
+                    [weakSelf updateUI:weakSelf.applicationStatusModel repayModel:nil];
+                    break;
+                case 3:
+                case 4:
+                   [self.navigationController popToRootViewControllerAnimated:YES];
+                default:
+                    break;
+            }
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
-        
+        [self.scrollView.mj_header endRefreshing];
     }];
     
     [loanMoneyViewModel getApplicationStatus:@"1"];
 }
 
+#pragma mark -> 2.22	待还款界面信息获取
+-(void)getRepayInfo{
+
+    LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+    [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            [self.scrollView.mj_header endRefreshing];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+            _repayModel = [[RepayModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            [self updateUI:nil repayModel:_repayModel];
+        }
+    } WithFaileBlock:^{
+        [self.scrollView.mj_header endRefreshing];
+    }];
+    [loanMoneyViewModel getRepayInfo];
+}
+
 
 #pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
--(void)updateUI:(ApplicationStatusModel *)applicationStatusModel{
-
+-(void)updateUI:(ApplicationStatusModel *)applicationStatusModel repayModel:(RepayModel *)repayModel{
+    
+    moenyViewing.repayBtnView.hidden = YES;
+    moenyViewing.moneyImage.hidden = NO;
+    moenyViewing.repayView.hidden = YES;
+    moenyViewing.middleView.hidden = NO;
     switch (_applicationStatus) {
         case InLoan:
             
-            moenyViewing.labelProgress.text = @"到账中";
-            moenyViewing.labelDetail.text = @"请注意查收到账短信";
+            moenyViewing.labelProgress.text = @"放款中";
+            moenyViewing.tipLabel.text = @"请注意查收放款短信";
             [self arrivalAndRenewalUI:applicationStatusModel];
-            if (_popAlert&&_isFirst) {
-                _isFirst = NO;
-                [self showAlertview];
-            }
+            
             break;
         case Repayment:
             moenyViewing.labelProgress.text = @"还款中";
-            moenyViewing.labelDetail.text = @"请注意查收到账短信";
-            [self arrivalAndRenewalUI:applicationStatusModel];
-            if (_popAlert&&_isFirst) {
-                _isFirst = NO;
-                [self showAlertview];
-            }
+            moenyViewing.tipLabel.text = @"还款处理中，请稍后";
+            moenyViewing.middleView.hidden = YES;
+            moenyViewing.repayView.hidden = NO;
+            NSRange range = NSMakeRange(5, moenyViewing.repayMoneyLabel.text.length-6);
+            moenyViewing.repayMoneyLabel.attributedText = [self changeAtr:moenyViewing.repayMoneyLabel.text color:UI_MAIN_COLOR range:range];
+            NSRange rangeTime = NSMakeRange(5, moenyViewing.repayMoneyTime.text.length-5);
+            moenyViewing.repayMoneyTime.attributedText = [self changeAtr:moenyViewing.repayMoneyTime.text color:UI_MAIN_COLOR range:rangeTime];
+            
             break;
-        case Extension:
+        case Staging:
             moenyViewing.labelProgress.text = @"续期处理中";
-            moenyViewing.labelDetail.text = @"请注意查收到账短信";
+            moenyViewing.labelProgress.font = [UIFont systemFontOfSize:34];
+            moenyViewing.tipLabel.text = @"续期处理中，请稍等";
             [self arrivalAndRenewalUI:applicationStatusModel];
-            if (_popAlert&&_isFirst) {
-                _isFirst = NO;
-                [self showAlertview];
-            }
+            
             break;
+        case RepaymentNormal:
+            
+            [self repayUI:repayModel];
+            [self fxdStatus];
+        case ComplianceInProcess:
+            
         default:
             break;
     }
 }
 
+#pragma mark 我要还款视图加载
+-(void)repayUI:(RepayModel *)repayModel{
 
+    moenyViewing.labelProgress.text = @"正常还款";
+    moenyViewing.tipLabel.text = @"请按时还款,保障信用";
+    moenyViewing.repayBtnView.hidden = NO;
+    moenyViewing.loanTitleLabel.text = @"借款金额";
+    moenyViewing.labelLoan.text = repayModel.money;
+    moenyViewing.loanTimeTitle.text = @"借款周期";
+    moenyViewing.labelweek.text = repayModel.duration;
+    moenyViewing.payMoneyTitle.text = @"每周还款";
+    if ([repayModel.productId isEqualToString:RapidLoan]) {
+        moenyViewing.payMoneyTitle.text = @"到期还款";
+    }
+    
+    moenyViewing.labelWeekmoney.text = repayModel.repayment;
+    moenyViewing.lableData.text = [NSString stringWithFormat:@"最近一期还款日:%@",repayModel.billDate];
+    moenyViewing.lableData.attributedText = [self changeAtr:moenyViewing.lableData.text color:UI_MAIN_COLOR range:NSMakeRange(8, moenyViewing.lableData.text.length-8)];
+    if (repayModel.overdueFee != nil) {
+        moenyViewing.overdueFeeLabel.text = [NSString stringWithFormat:@"逾期费用:%@元",repayModel.overdueFee];
+        moenyViewing.overdueFeeLabel.attributedText = [self changeAtr:moenyViewing.overdueFeeLabel.text color:UI_MAIN_COLOR range:NSMakeRange(5, moenyViewing.lableData.text.length-6)];
+        moenyViewing.lableData.text = [NSString stringWithFormat:@"最近一期还款日:%@%@",repayModel.billDate,repayModel.overdueDesc];
+        moenyViewing.lableData.attributedText = [self changeAtr:moenyViewing.lableData.text color:UI_MAIN_COLOR range:NSMakeRange(8, moenyViewing.lableData.text.length-8)];
+        moenyViewing.lableData.attributedText = [self changeAtr:moenyViewing.lableData.text color:[UIColor redColor] range:NSMakeRange(moenyViewing.lableData.text.length-6, repayModel.overdueDesc.length+2)];
+    }
+    moenyViewing.stagingBtn.hidden = YES;
+    if (repayModel.display) {
+        moenyViewing.stagingBtn.hidden = NO;
+    }
+    
+}
+
+#pragma mark字体改变颜色
+-(NSMutableAttributedString *)changeAtr:(NSString *)str color:(UIColor *)color range:(NSRange)range{
+
+    NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
+    [ssa addAttribute:NSForegroundColorAttributeName value:color range:range];
+    return ssa;
+}
+
+#pragma mark放款中和续期处理中视图加载
 -(void)arrivalAndRenewalUI:(ApplicationStatusModel *)applicationStatusModel{
 
-    moenyViewing.sureBtn.hidden = YES;
-    moenyViewing.lableData.hidden = YES;
-    moenyViewing.sureBtn.hidden = YES;
-    moenyViewing.middleView.hidden = NO;
-    
+    NSRange range;
     for (int i = 0; i<applicationStatusModel.infoList.count; i++) {
         
         InfoListModel *infoListModel = applicationStatusModel.infoList[i];
         
-        
+        range = NSMakeRange(0, infoListModel.value.length);
         if ([infoListModel.index isEqualToString:@"1"]) {
             moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%@%@", infoListModel.value,infoListModel.unit];
+            moenyViewing.labelLoan.attributedText = [self changeAtr:moenyViewing.labelLoan.text color:UI_MAIN_COLOR range:range];
+            moenyViewing.loanTitleLabel.text = infoListModel.label;
+            
         }else if ([infoListModel.index isEqualToString:@"2"]){
             
             moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@%@",infoListModel.value,infoListModel.unit];
+            moenyViewing.labelweek.attributedText = [self changeAtr:moenyViewing.labelweek.text color:UI_MAIN_COLOR range:range];
+            moenyViewing.loanTimeTitle.text = infoListModel.label;
+            
         }else if ([infoListModel.index isEqualToString:@"3"]){
             
             moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%@%@",infoListModel.value,infoListModel.unit];
+            moenyViewing.labelWeekmoney.attributedText = [self changeAtr:moenyViewing.labelWeekmoney.text color:UI_MAIN_COLOR range:range];
+            moenyViewing.payMoneyTitle.text = infoListModel.label;
         }
     }
 }

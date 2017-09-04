@@ -12,7 +12,9 @@
 typedef NS_ENUM(NSUInteger, ApplicationStatus) {
     InLoan = 0,
     Repayment,
-    Extension
+    Staging,
+    RepaymentNormal,
+    ComplianceInProcess
 };
 
 @interface LoanMoneyViewController : BaseViewController

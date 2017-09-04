@@ -41,4 +41,10 @@
  */
 -(void)getApplicationStatus:(NSString *)flag;
 
+/**
+ 待还款界面信息获取
+ */
+
+-(void)getRepayInfo;
+
 @end
