@@ -67,15 +67,7 @@
     [repayMentViewModel setBlockWithReturnBlock:^(id returnValue) {
         RepayListInfo *_repayListModel = [RepayListInfo yy_modelWithJSON:returnValue];
         if ([_repayListModel.flag isEqualToString:@"0000"]) {
-            if (_model.applyStatus.integerValue == 7 || _model.applyStatus.integerValue == 8) {
-                [self fatchCardInfo:_repayListModel];
-            } else {
-                RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
-                repayMent.product_id = _model.product_id;
-                repayMent.isPopRoot = _isPopRoot;
-//                _model.product_id;
-                [_targetVC.navigationController pushViewController:repayMent animated:YES];
-            }
+            [self fatchCardInfo:_repayListModel];
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:_targetVC.view message:_repayListModel.msg];
         }
