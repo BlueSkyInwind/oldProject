@@ -30,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *saveUpLabel;
 
 
-@property(strong,nonatomic) UserStateModel *userStateParse;
+@property (nonatomic,strong)NSString * platform_type;
+@property (nonatomic,strong)NSString * applicationId;
+@property (nonatomic,strong)NSString * product_id;
 
 @end

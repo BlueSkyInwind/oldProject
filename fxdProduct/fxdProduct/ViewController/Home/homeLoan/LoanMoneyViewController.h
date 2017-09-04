@@ -10,11 +10,11 @@
 @class UserStateModel,QryUserStatusModel,GetCaseInfo;
 
 typedef NS_ENUM(NSUInteger, ApplicationStatus) {
-    InLoan = 0,
-    Repayment,
-    Staging,
-    RepaymentNormal,
-    ComplianceInProcess
+    InLoan = 0,      //放款中
+    Repayment,     //还款中
+    Staging,          //续期中
+    RepaymentNormal,   //正常还款
+    ComplianceInProcess   //合规处理中
 };
 
 @interface LoanMoneyViewController : BaseViewController

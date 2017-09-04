@@ -90,14 +90,12 @@
 {
     navBarHairlineImageView.hidden=YES;
 //    [self checkStatus];
-    if ([_model.platform_type isEqualToString:@"2"]) {
+    if ([self.platform_Type isEqualToString:@"2"]) {
        //合规银行卡查询
         [self checkBank];
     }else{
         [self fatchUserCardList];
     }
-    
-    [self getFxdCaseInfo];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -130,7 +128,7 @@
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayVerificationCodeCell" bundle:nil] forCellReuseIdentifier:@"PayVerificationCodeCell"];
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayDisplayCell" bundle:nil] forCellReuseIdentifier:@"PayDisplayCell"];
 
-    if ([_model.platform_type isEqualToString:@"2"]) {
+    if ([self.platform_Type isEqualToString:@"2"]) {
         titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式",@"验证码",@"提示语"];
     }else{
         titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式"];
@@ -140,7 +138,7 @@
     [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     [self createHeaderView];
     
-    if (_isP2pView) {
+    if (_isPopRoot) {
         [self addBackItemRoot];
     }else{
         [self addBackItem];
@@ -341,7 +339,7 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.PayTitleLabel.text=titleAry[indexPath.row];
                 
-                if ([_model.platform_type isEqualToString:@"2"]) {
+                if ([self.platform_Type isEqualToString:@"2"]) {
                     if ([_queryCardInfoModel.result.UsrCardInfolist.BankId isEqualToString:@""]) {
                         cell.whichBank.text = @"请更换银行卡";
                     }else{
@@ -538,7 +536,7 @@
         }
         if(indexPath.row==3)//选择银行卡
         {
-            if ([_model.platform_type isEqualToString:@"2"]) {
+            if ([self.platform_Type isEqualToString:@"2"]) {
                 //                [self chooseBankCard];
                 [self gotoUnbundlingBank];
                 return;
@@ -702,7 +700,7 @@
         return;
     }
     
-    if ([_model.platform_type isEqualToString:@"2"] ) {
+    if ([self.platform_Type isEqualToString:@"2"] ) {
         [self getMoney];
     }else{
         [self fxdRepay];
@@ -753,7 +751,7 @@
     }
     
     //合规的还款增加两个参数
-    if ([_model.platform_type isEqualToString:@"2"]) {
+    if ([self.platform_Type isEqualToString:@"2"]) {
         if (!smsSeq) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
             return;
@@ -839,23 +837,20 @@
 
 -(void)getMoney{
     
-    if ([_userStatusModel.result.flg isEqualToString:@"2"]) {//未开户
-        
-    }else if ([_userStatusModel.result.flg isEqualToString:@"3"]){//待激活
-
-        NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
-        P2PViewController *p2pVC = [[P2PViewController alloc] init];
-        p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        [self.navigationController pushViewController:p2pVC animated:YES];
-        
-    }else if ([_userStatusModel.result.flg isEqualToString:@"6"]){//正常用户
-        [self fxdRepay];
-//        if (_repayType == RepayTypeOption) {
-//            [self repaySure];
-//        } else {
-//            [self paySettle];
-//        }
-    }
+    [self getUserStatus:self.applicationID success:^(QryUserStatusModel *_model) {
+        if ([_model.result.flg isEqualToString:@"2"]) {//未开户
+            
+        }else if ([_model.result.flg isEqualToString:@"3"]){//待激活
+            
+            NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+            P2PViewController *p2pVC = [[P2PViewController alloc] init];
+            p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            [self.navigationController pushViewController:p2pVC animated:YES];
+            
+        }else if ([_model.result.flg isEqualToString:@"6"]){//正常用户
+            [self fxdRepay];
+        }
+    }];
 }
 
 #pragma mark 跳转到解绑银行卡页面
@@ -912,43 +907,22 @@
 }
 
 
-#pragma mark 发标前查询进件
--(void)getFxdCaseInfo{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
-        if ([caseInfo.flag isEqualToString:@"0000"]) {
-
-            [self getUserStatus:caseInfo];
-
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel getFXDCaseInfo];
-}
-
 #pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(GetCaseInfo *)caseInfo{
+-(void)getUserStatus:(NSString  *)applicationId success:(void(^)(QryUserStatusModel *_model))finish{
     
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
         if ([model.result.appcode isEqualToString:@"1"]) {
-            
             _userStatusModel = model;
-            
+            finish(model);
         }else{
             
-            //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
         }
     } WithFaileBlock:^{
         
     }];
-    
-    [complianceViewModel getUserStatus:caseInfo];
+    [complianceViewModel getUserStatus:applicationId];
 }
 
 
