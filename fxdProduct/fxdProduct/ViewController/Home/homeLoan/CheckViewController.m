@@ -150,9 +150,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     _isOpen = NO;
     
-    //技术服务协议，风险管理与数据服务
-    [checkSuccess.firstAgreemwntBtn addTarget:self action:@selector(clickFirstAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
-    [checkSuccess.secondAgreemwntBtn addTarget:self action:@selector(clickSecondAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
+
     [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 
 }
@@ -205,16 +203,17 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
-    if (_isSecondFailed) {
-        _homeStatues = 2;
-        [self createUI];
-    }else{
-        if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
-            [self getFxdCaseInfo];
-        }else{
-//            [self checkState];
-        }
-    }
+//    if (_isSecondFailed) {
+//        _homeStatues = 2;
+//        [self createUI];
+//    }else{
+//        if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
+////            [self getFxdCaseInfo];
+//        }else{
+////            [self checkState];
+//        }
+//    }
+
 }
 
 -(void)createUI
@@ -233,7 +232,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         [weakSelf loadWithdrawalsView:drawingsInfo];
     }];
 }
-
 //刷新UI
 - (void)refreshUI{
     [self createUI];
@@ -250,6 +248,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
 }
 
+/**
+ 导流失败的视图，展示不用
+ */
 -(void)loadFailedStateView{
     
     if (_checking) {
@@ -273,10 +274,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         checkFalse.seeView.hidden = YES;
         checkFalse.jsdView.hidden = YES;
     }else {
+        
         checkFalse.moreInfoLabel.hidden = YES;
         checkFalse.moreInfoBtn.hidden = YES;
         checkFalse.promoteLabel.hidden = YES;
-        
         checkFalse.seeView.hidden = YES;
         checkFalse.jsdView.hidden = YES;
         if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]){
@@ -297,6 +298,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
     [self.view addSubview:checkFalse];
 }
+
 
 #pragma mark - 提款视图
 -(void)loadWithdrawalsView:(DrawingsInfoModel *) drawingsInfo{
@@ -373,11 +375,20 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [checkSuccess.purposeBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
     checkSuccess.bankButton.tag = 106;
     [checkSuccess.bankButton addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //技术服务协议，风险管理与数据服务
+    [checkSuccess.firstAgreemwntBtn addTarget:self action:@selector(clickFirstAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
+    [checkSuccess.secondAgreemwntBtn addTarget:self action:@selector(clickSecondAgreementBtn) forControlEvents:UIControlEventTouchUpInside];
+    
     checkSuccess.loadMoney.text =[NSString stringWithFormat:@"¥%.0f元",[_drawingsInfoModel.repayAmount floatValue]];
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:checkSuccess.loadMoney.text];
     [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:30] range:NSMakeRange(0, 1)];
     [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange([checkSuccess.loadMoney.text length]-1, 1)];
     checkSuccess.loadMoney.attributedText = att;
+    
+    //移除 收款方式 的视图
+    if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
+        [checkSuccess.bankView removeFromSuperview];
+    }
     
     //提款按钮处理事件
     [checkSuccess.promote addTarget:self action:@selector(promote) forControlEvents:UIControlEventTouchUpInside];
@@ -404,6 +415,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         [checkSuccess.sureBtn updateConstraints];
     }
     [self withdrawalsViewAgreement:drawingsInfo];
+    
 }
 //提款协议
 -(void)withdrawalsViewAgreement:(DrawingsInfoModel *) drawingsInfo{
@@ -432,7 +444,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             if ([_drawingsInfoModel.platformType isEqualToString:@"0"]) {
                 [self LoanAgreementRequest];
             }
-            
             if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
                 [self heguiAgreementRequest];
             }
@@ -440,6 +451,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
     checkSuccess.agreementLabel.attributedText = attributeStr;
 }
+
+
 //每周还款的视图
 -(void)refreshWeekAmount:(NSString *)weekMoney{
     
@@ -519,7 +532,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [self getMoney];
             }
             if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan]) {
-                
                 if (_purposeSelect.integerValue == 0) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请选择借款用途"];
                     return;
@@ -677,7 +689,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",[_drawingsInfoModel.repayAmount floatValue]];
                 [self.navigationController pushViewController:bankVC animated:YES];
             }
-            for (NSDictionary *dic in baseResultM.data) {
+            for (int  i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
                 CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
                 if ([cardInfo.cardType isEqualToString:@"2"]) {
                     self.selectCard = cardInfo;
@@ -981,7 +994,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
         product = RapidLoan;
     }else{
-    
         product = SalaryLoan;
     }
      NSDictionary *dic = @{@"priduct_id_":product};
@@ -1226,7 +1238,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
     }];
     [complianceViewModel getFXDCaseInfo];
-
 }
 
 #pragma mark 提款申请件记录

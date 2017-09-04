@@ -118,8 +118,8 @@
         bCell.lineView.hidden=NO;
     }
     return bCell;
-    
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -133,7 +133,6 @@
                     //查询用户状态
                     [self getFxdCaseInfo];
                 }else{
-                    
                     RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                     repayRequest.targetVC = self;
                     [repayRequest repayRequest];
@@ -147,18 +146,18 @@
         case 1:
         {
             RenewalViewController *repayRecord = [[RenewalViewController alloc] init];
-            
 //            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:YES];
         }
             break;
-        case 2:
-            [self fatchCardInfo];
+        case 2:{
+            MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
+            [self.navigationController pushViewController:myCrad animated:YES];
+        }
             break;
         case 3:
         {
             UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-//            userDataVC.product_id = WhiteCollarLoan;
             [self.navigationController pushViewController:userDataVC animated:true];
 //            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
 //            [self.navigationController pushViewController:invitationVC animated:true];
@@ -174,7 +173,6 @@
         case 5:
         {
             
-            
 //             LoanMoneyViewController *ticket=[[LoanMoneyViewController alloc]init];
             MoreViewController *ticket=[[MoreViewController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
@@ -186,31 +184,6 @@
     }
 }
 
-- (void)fatchCardInfo
-{
-
-    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
-    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResult.flag isEqualToString:@"0000"]) {
-            NSArray * array  = (NSArray *)baseResult.result;
-            _supportBankListArr = [NSMutableArray array];
-            for (int i = 0; i < array.count; i++) {
-                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
-                [_supportBankListArr addObject:bankList];
-            }
-            MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
-            myCrad.supportBankListArr = _supportBankListArr;
-            [self.navigationController pushViewController:myCrad animated:YES];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [checkBankViewModel getSupportBankListInfo:@"2"];
-}
-
 #pragma mark 发标前查询进件
 -(void)getFxdCaseInfo{
     
@@ -219,7 +192,6 @@
         
         GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
         if ([caseInfo.flag isEqualToString:@"0000"]) {
-            
             [self getUserStatus:caseInfo];
         }
     } WithFaileBlock:^{

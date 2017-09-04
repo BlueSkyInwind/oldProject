@@ -235,38 +235,29 @@
  */
 - (void)fatchUserCardList
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        _userCardsModel = [UserCardResult yy_modelWithJSON:object];
-        if([_userCardsModel.flag isEqualToString:@"0000"]){
-            for(NSInteger j=0;j<_userCardsModel.result.count;j++)
-            {
-                CardResult *cardResult = [_userCardsModel.result objectAtIndex:0];
-                if([cardResult.card_type_ isEqualToString:@"2"])
-                {
-                    defaultBankIndex = 0;
-                    for (SupportBankList *banlist in _supportBankListArr) {
-                        if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-                            //                                _selectCard
-                            CardInfo *cardInfo = [[CardInfo alloc] init];
-                            cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
-                            cardInfo.cardlNumber = cardResult.card_no_;
-                            cardInfo.bankName = banlist.bank_name_;
-                            cardInfo.cardIdentifier = cardResult.id_;
-                            cardInfo.phoneNum = cardResult.bank_reserve_phone_;
-                            _selectCard = cardInfo;
-                        }
-                    }
-                    //                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
-                    //                        [self.PayDetailTB reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                    [self.PayDetailTB reloadData];
+    
+    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
+    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            NSArray * array = (NSArray *)baseResultM.data;
+            for (int  i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
+                CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
+                if ([cardInfo.cardType isEqualToString:@"2"]) {
+                    _selectCard = cardInfo;
                     break;
                 }
             }
+            [self.PayDetailTB reloadData];
         }else{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
+        
     }];
+    [bankInfoVM obtainUserBankCardList];
+    
 }
 
 - (NSString *)formatTailNumber:(NSString *)str
@@ -358,7 +349,7 @@
                     }
                 }else{
                     if (_selectCard != nil) {
-                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,_selectCard.tailNumber];
+                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
                     }else {
                         cell.whichBank.text = @"";
                     }
@@ -444,19 +435,10 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.PayTitleLabel.text=payLoanArry[indexPath.row];
                 if (_selectCard != nil) {
-                    cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,_selectCard.tailNumber];
+                    cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
                 }else {
                     cell.whichBank.text = @"";
                 }
-                
-//                PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
-//                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//                cell.PayTitleLabel.text=payLoanArry[indexPath.row];
-//                if (_selectCard != nil) {
-//                    cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_bankName,_bankNo];
-//                }else {
-//                    cell.whichBank.text = @"";
-//                }
                 
                 return cell;
             } else//溢缴金额和应付金额cell
@@ -750,7 +732,7 @@
     
     if (_useredPacketAmount > 0) {
         paymentDetailModel.staging_ids_ =staging_ids;
-        paymentDetailModel.account_card_id_ =_selectCard.cardIdentifier;
+        paymentDetailModel.account_card_id_ =_selectCard.cardId;
         paymentDetailModel.total_amount_ = @(_useTotalAmount);
         paymentDetailModel.repay_amount_ = @(_finalyRepayAmount);
         paymentDetailModel.repay_total_ = @(_repayAmount);
@@ -761,7 +743,7 @@
         paymentDetailModel.redpacket_cash_ = @(_useredPacketAmount);
     }else {
         paymentDetailModel.staging_ids_ =staging_ids;
-        paymentDetailModel.account_card_id_ =_selectCard.cardIdentifier;
+        paymentDetailModel.account_card_id_ =_selectCard.cardId;
         paymentDetailModel.total_amount_ = @(_useTotalAmount);
         paymentDetailModel.repay_amount_ = @(_finalyRepayAmount);
         paymentDetailModel.repay_total_ = @(_repayAmount);
@@ -884,36 +866,6 @@
     controller.isCheck = NO;
     [self.navigationController pushViewController:controller animated:YES];
     
-}
-
-#pragma mark 银行卡名字的转换
--(NSString *)bankName:(NSString *)bankCode{
-    
-    NSString *name = @"";
-    if([bankCode isEqualToString:@"BOC"]){
-        
-        name = @"中国银行";
-        
-    }else if ([bankCode isEqualToString:@"ICBC"]){
-        
-        name = @"中国工商银行";
-    }else if ([bankCode isEqualToString:@"CCB"]){
-        
-        name = @"中国建设银行";
-    }else if ([bankCode isEqualToString:@"ABC"]){
-        
-        name = @"中国农业银行";
-    }else if ([bankCode isEqualToString:@"CITIC"]){
-        
-        name = @"中信银行";
-    }else if ([bankCode isEqualToString:@"CIB"]){
-        
-        name = @"兴业银行";
-    }else if ([bankCode isEqualToString:@"CEB"]){
-        
-        name = @"中国光大银行";
-    }
-    return name;
 }
 
 #pragma mark  银行卡查询

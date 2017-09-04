@@ -353,13 +353,8 @@
 - (void)goCheckVC:(UserStateModel *)model
 {
     CheckViewController *checkVC = [CheckViewController new];
-    checkVC.homeStatues = [model.applyStatus integerValue];
     checkVC.userStateModel = model;
     checkVC.task_status = model.taskStatus;
-    checkVC.apply_again_ = model.applyAgain;
-    if (model.days) {
-        checkVC.days = model.days;
-    }
     [self.navigationController pushViewController:checkVC animated:YES];
 }
 

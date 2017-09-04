@@ -35,7 +35,7 @@
  获取fxd合规用户状态
  */
 
--(void)getUserStatus:(GetCaseInfo *)caseInfo;
+-(void)getUserStatus:(NSString *)applicationId;
 
 /**
  提款申请件记录

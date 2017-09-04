@@ -238,7 +238,6 @@
 //    
 //}
 
-
 #pragma mark  fxd用户状态查询，viewmodel
 -(void)getUserStatus:(GetCaseInfo *)caseInfo{
     
@@ -605,13 +604,11 @@
             [self.navigationController pushViewController:p2pVC animated:YES];
             
         }else{
-            
             RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
             repayRequest.targetVC = self;
             [repayRequest repayRequest];
         }
     }else{
-    
         RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
         repayRequest.targetVC = self;
         [repayRequest repayRequest];
@@ -637,12 +634,18 @@
 //        
 //            [self getApplicationStatus];
 //        }
+
+        if (_applicationStatus == RepaymentNormal) {
+            [self getRepayInfo];
+        }else{
+            [self getApplicationStatus];
+        }
+
         //发薪贷申请件状态查询
 //        [self checkStatus];
     }
     
-    
-    
+    [self getApplicationStatus];
 //    [self addBid];
 }
 

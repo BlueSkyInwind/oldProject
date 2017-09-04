@@ -158,20 +158,12 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                     }
                 }
             }
-//            if (_clickMax == _p2pBillModel.data.bill_List_.count-1) {
-//                _lastClick = 0;
-//                _selectAllBtn.selected = YES;
-//                [self selectAll];
-//            }else{
-               _lastClick = _clickMax;
-//            }
+            _lastClick = _clickMax;
             [self updateUserNeedPayAmount];
             [self.repayTableView reloadData];
         } else {
-//            self.endView.hidden = YES;
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_p2pBillModel.appmsg];
         }
-        
     } failure:^(EnumServerStatus status, id object) {
         
     }];
@@ -253,7 +245,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     [self.view addSubview:noneView];
 }
 
-
 /**
  *  @author dd
  *
@@ -283,14 +274,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                 }
             } else {
                 if (_currenPeriod < _repayListModel.result.service_fee_min_period) {
-                    //                        _save_amount -= (_repayListModel.result.service_fee_min_period - _currenPeriod) * (_repayListModel.result.fee_amount / _repayListModel.result.situations.count);
-                    //                        NSInteger k = _repayListModel.result.service_fee_min_period - _currenPeriod;
-                    //                        NSInteger count = _repayListModel.result.situations.count - 1;
-                    //                        while (k > 0 && count >= 0 && count < _repayListModel.result.situations.count) {
-                    //                            _save_amount -= _repayListModel.result.situations[count].debt_service_fee;
-                    //                            k--;
-                    //                            count--;
-                    //                        }
+
                     for (NSInteger i = _currenPeriod; i < _repayListModel.result.service_fee_min_period; i++) {
                         _save_amount -= _repayListModel.result.situations[i].debt_service_fee;
                     }
@@ -408,6 +392,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     
 }
 
+#pragma mrak - 还款点击处理
 /**
  *  @author dd
  *
@@ -426,37 +411,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         }
         if (_situations.count > 0) {
             [self fatchCardInfo];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请至少选择一期"];
-        }
-    }
-    
-    //合规弃用
-    if ([_userStateParse.platform_type isEqualToString:@"1"]) {
-        if (_bills.count > 0) {
-            [_bills removeAllObjects];
-        }
-        for (int i = 0; i < _cellSelectArr.count; i++) {
-            if ([_cellSelectArr objectAtIndex:i].boolValue) {
-                [_bills addObject:[_vaildBills objectAtIndex:i]];
-            }
-        }
-        
-        if (_bills.count > 0) {
-            RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
-            if (_selectAllBtn.selected) {
-                repayMent.repayType = RepayTypeClean;
-            } else {
-                repayMent.repayType = RepayTypeOption;
-            }
-            repayMent.repayAmount = _readyPayAmount;
-            repayMent.cellSelectArr = _cellSelectArr;
-            repayMent.save_amount = _save_amount;
-            repayMent.p2pBillModel = _p2pBillModel;
-            repayMent.bills = _bills;
-            repayMent.product_id = _userStateParse.product_id;
-            repayMent.model = _userStateParse;
-            [self.navigationController pushViewController:repayMent animated:YES];
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请至少选择一期"];
         }
@@ -513,9 +467,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         }
     } else {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请至少选择一期"];
-    }
-    
- 
+    }    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

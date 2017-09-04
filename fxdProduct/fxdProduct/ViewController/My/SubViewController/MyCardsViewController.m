@@ -122,40 +122,34 @@
 -(void)postUrlMessageandDictionary{
     //请求银行卡列表信息
     
-    RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
-    [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _userCardModel =[UserCardResult yy_modelWithJSON:returnValue];
-        if([_userCardModel.flag isEqualToString:@"0000"]){
-            for(NSInteger j=0;j<_userCardModel.result.count;j++)
-            {
-                CardResult *cardResult = _userCardModel.result[j];
-                if([cardResult.card_type_ isEqualToString:@"2"])
-                {
-                    for (SupportBankList *banlist in _supportBankListArr) {
-                        if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-                            _defaultCardIndex = 0;
-                            [_dataliat addObject:[self formatString:cardResult.card_no_]];
-                            [_dataNumList addObject:cardResult.card_type_];
-//                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.bank_code_]];
-                            [_dataImageListBank addObject:banlist.icon_url_];
-                            [_bankWitch addObject:@"银行卡"];
-                            [_bankWitchArray addObject:banlist.bank_name_];
-                        }
-                    }
+    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
+    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            NSArray * array = (NSArray *)baseResultM.data;
+            for (int  i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
+                CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
+                if ([cardInfo.cardType isEqualToString:@"2"]) {
+                    _defaultCardIndex = 0;
+                    [_dataliat addObject:[self formatString:cardInfo.cardNo]];
+                    [_dataNumList addObject:cardInfo.cardType];
+                    [_dataImageListBank addObject:cardInfo.cardIcon];
+                    [_bankWitch addObject:@"银行卡"];
+                    [_bankWitchArray addObject:cardInfo.bankName];
                 }
             }
             [_tableView reloadData];
             [self createMyCardUI];
         }else{
-           
             NoneView.hidden=NO;
-            
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         NoneView.hidden=NO;
     }];
-    [repayWeeklyRecordViewModel bankCardList];
-
+    [bankInfoVM obtainUserBankCardList];
+    
 }
 
 - (NSString *)formatString:(NSString *)str
