@@ -128,7 +128,6 @@
         _applicationStatus = Repayment;
         [self getApplicationStatus];
     }else{
-    
         [self getFxdCaseInfo];
     }
 }

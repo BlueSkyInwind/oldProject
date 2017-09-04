@@ -646,7 +646,6 @@
                 return;
             }
             [self goLoanMoneVC:Repayment];
-
         }
             break;
         default:
