@@ -125,16 +125,11 @@
 
 -(void)refresh{
 
-    if ([self.applicationStatusModel.platformType isEqualToString:@"0"]) {
-        
         if (_applicationStatus == RepaymentNormal) {
             [self getRepayInfo];
             return;
         }
         [self getApplicationStatus];
-        return;
-    }
-    [self getFxdCaseInfo];
 }
 
 
@@ -243,7 +238,7 @@
 //}
 
 #pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(GetCaseInfo *)caseInfo{
+-(void)getUserStatus:(NSString *)applicationID{
     
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -259,40 +254,15 @@
             }
             
             [self updateUI:nil repayModel:nil];
-//            _applicationStatus  = ComplianceInProcess;
-//            [self checkStatus];
-
         }else{
-            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
         }
     } WithFaileBlock:^{
         
     }];
     
-    [complianceViewModel getUserStatus:caseInfo.result.from_case_id_];
+    [complianceViewModel getUserStatus:applicationID];
 }
-
-
-#pragma mark 发标前查询进件
--(void)getFxdCaseInfo{
-
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
-        if ([caseInfo.flag isEqualToString:@"0000"]) {
-            [self.scrollView.mj_header endRefreshing];
-            _caseInfo = caseInfo;
-            [self getUserStatus:caseInfo];
-        }
-    } WithFaileBlock:^{
-        [self.scrollView.mj_header endRefreshing];
-    }];
-    [complianceViewModel getFXDCaseInfo];
-    
-}
-
 
 #pragma mark 请求银行卡列表信息
 - (void)postUrlMessageandDictionary:(void(^)(CardResult *rate))finish{
@@ -647,18 +617,12 @@
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     //platform_type 2、合规平台  0发薪贷平台
     
-    if ([_userStateModel.platform_type isEqualToString:@"0"]){
-    
-        if (_applicationStatus == RepaymentNormal) {
-            
-            [self getRepayInfo];
-            return;
-        }
-        [self getApplicationStatus];
+    if (_applicationStatus == RepaymentNormal) {
+        
+        [self getRepayInfo];
         return;
     }
-    
-    [self getFxdCaseInfo];
+    [self getApplicationStatus];
     
 //    if ([_userStateModel.platform_type isEqualToString:@"2"]) {
 //        //查询用户状态
@@ -727,6 +691,10 @@
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.errMsg];
             _applicationStatus = RepaymentNormal;
             _repayModel = [[RepayModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            if ([_repayModel.platformType isEqualToString:@"2"]) {
+                [self getUserStatus:_repayModel.applyId];
+                return;
+            }
             [self updateUI:nil repayModel:_repayModel];
         }else{
         

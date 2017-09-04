@@ -41,8 +41,6 @@
 
 -(void)obtainUserCommitstaging:(NSString *)staging cardId:(NSString *)cardId{
 
-    
-
     NSDictionary *paramDic = @{@"cardId":cardId,
                                @"stagingId":staging};
     
@@ -55,14 +53,6 @@
             [self faileBlock];
         }
     }];
-//    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_Staging_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//        if (self.returnBlock) {
-//            self.returnBlock(object);
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        if (self.faileBlock) {
-//            [self faileBlock];
-//        }
-//    }];
+    
 }
 @end

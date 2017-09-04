@@ -83,8 +83,9 @@
     NSDictionary *paramDic = [NSDictionary dictionary];
     DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
 //    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
 //    if (parameters) {
@@ -98,10 +99,9 @@
 //    }
     DLog(@"参数:---%@",paramDic);
 
-    DLog(@"juid --- %@\n token --- %@",[Utility sharedUtility].userInfo.juid,[Utility sharedUtility].userInfo.tokenStr);
     if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
         if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
-//            [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
+            [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
             [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
         }
     }
@@ -110,15 +110,20 @@
     
     manager.requestSerializer.timeoutInterval = 30.0;
     DLog(@"%@",parameters);
-    [manager POST:strURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
+    [manager POST:strURL parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
-        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        DLog(@"response json --- %@",jsonStr);
-        finished(Enum_SUCCESS,responseObject);
-//        [self removeWaitView];
+        NSDictionary * resultDic = [NSDictionary dictionary];
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"%@",resultDic);
+        }else{
+            NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
+            NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+            NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            DLog(@"response json --- %@",jsonStr);
+        }
+        finished(Enum_SUCCESS,resultDic);
          [_waitView removeFromSuperview];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -129,8 +134,8 @@
          [_waitView removeFromSuperview];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
     }];
+    
 }
-
 
 - (void)POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
 {
