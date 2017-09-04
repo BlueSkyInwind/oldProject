@@ -444,17 +444,19 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLh-2e-PyM">
                                     <rect key="frame" x="0.0" y="0.0" width="324" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="hFF-mE-OXc"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="zLh-2e-PyM" firstAttribute="leading" secondItem="PTE-2w-mJJ" secondAttribute="leading" id="Gsw-EH-quh"/>
+                                <constraint firstItem="zLh-2e-PyM" firstAttribute="top" secondItem="PTE-2w-mJJ" secondAttribute="top" id="DIx-xZ-W8C"/>
                                 <constraint firstAttribute="height" constant="20" id="IeV-yc-Uil"/>
-                                <constraint firstItem="zLh-2e-PyM" firstAttribute="top" secondItem="PTE-2w-mJJ" secondAttribute="top" id="Mkt-WH-7rP"/>
-                                <constraint firstAttribute="trailing" secondItem="zLh-2e-PyM" secondAttribute="trailing" id="ShE-cR-tOT"/>
-                                <constraint firstAttribute="bottom" secondItem="zLh-2e-PyM" secondAttribute="bottom" id="eT4-k6-gBS"/>
+                                <constraint firstItem="zLh-2e-PyM" firstAttribute="leading" secondItem="PTE-2w-mJJ" secondAttribute="leading" id="K5X-re-UnS"/>
+                                <constraint firstAttribute="trailing" secondItem="zLh-2e-PyM" secondAttribute="trailing" id="iSQ-hB-pfX"/>
                             </constraints>
                         </view>
                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3OZ-45-10O">
