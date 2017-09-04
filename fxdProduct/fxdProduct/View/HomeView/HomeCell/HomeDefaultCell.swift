@@ -428,21 +428,16 @@ extension HomeDefaultCell{
             make.centerY.equalTo((drawingBgImage?.snp.centerY)!)
             make.left.equalTo((drawingBgImage?.snp.left)!).offset(0)
             make.right.equalTo((drawingBgImage?.snp.right)!).offset(0)
-//            if UI_IS_IPONE5{
-//            
-//                make.height.equalTo((homeProductData.data.infoList.count*36)+90)
-//            }else{
-            
-                make.height.equalTo((homeProductData.data.infoList.count*46)+100)
-//            }
+            make.height.equalTo((homeProductData.data.infoList.count*36)+70)
+
         }
         
-        if UI_IS_IPONE5{
-        
-            bgView.snp.updateConstraints({ (make) in
-                make.height.equalTo((homeProductData.data.infoList.count*36)+90)
-            })
-        }
+//        if UI_IS_IPONE5{
+//        
+//            bgView.snp.updateConstraints({ (make) in
+//                make.height.equalTo((homeProductData.data.infoList.count*25)+70)
+//            })
+//        }
         
         var i = 0
         if homeProductData.data.warnText != "" && homeProductData.data.warnText != nil {
@@ -457,7 +452,7 @@ extension HomeDefaultCell{
                 make.centerX.equalTo(bgView.snp.centerX)
                 make.height.equalTo(20)
             })
-            i = 20
+            i = 35
         }
         
         if homeProductData.data.subWarnText != "" && homeProductData.data.subWarnText != nil{
@@ -474,15 +469,17 @@ extension HomeDefaultCell{
                 make.height.equalTo(14)
             })
             
-            i = 40
+            i = 57
         }
+        
+        
         var j = 0
         for index in 0..<homeProductData.data.infoList.count {
             let indexView = setView()
             bgView.addSubview(indexView)
             
             if index == 0 {
-                j = 20+i
+                j = 10+i
             }else{
             
                 if UI_IS_IPONE5{
@@ -513,6 +510,9 @@ extension HomeDefaultCell{
             }
         }
         
+        bgView.snp.updateConstraints({ (make) in
+            make.height.equalTo(j+84)
+        })
         let bottomBtn = UIButton()
         bottomBtn.setTitle(homeProductData.data.buttonText, for: .normal)
         bottomBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)

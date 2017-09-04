@@ -148,15 +148,13 @@
             break;
         case 3:
         {
-            LoanMoneyViewController *ticket=[[LoanMoneyViewController alloc]init];
-//            DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
+            DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
         }
             break;
         case 4:
         {
             
-//             LoanMoneyViewController *ticket=[[LoanMoneyViewController alloc]init];
             MoreViewController *ticket=[[MoreViewController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
             

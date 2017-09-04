@@ -14,7 +14,8 @@ typedef NS_ENUM(NSUInteger, ApplicationStatus) {
     Repayment,     //还款中
     Staging,          //续期中
     RepaymentNormal,   //正常还款
-    ComplianceInProcess   //合规处理中
+    ComplianceInProcess,   //合规处理中
+    ComplianceNotActive   //合规未激活，失败
 
 };
 
