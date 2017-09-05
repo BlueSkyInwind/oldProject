@@ -30,9 +30,11 @@
 @property(nonatomic,strong)NSString<Optional> * repayment;
 //续期id
 @property(nonatomic,strong)NSString<Optional> * stagingId;
-//进件平台类型
+//进件平台类型  0是发薪贷，2是合规
 @property(nonatomic,strong)NSString<Optional> * platformType;
 //申请件id
 @property(nonatomic,strong)NSString<Optional> * applyId;
+//合规标id   0 为默认值，其他大于0的数字为合规的
+@property(nonatomic,strong)NSString<Optional> * bidId;
 
 @end

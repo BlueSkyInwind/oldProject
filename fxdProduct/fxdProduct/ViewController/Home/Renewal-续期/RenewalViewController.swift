@@ -342,7 +342,8 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
                 
             }else{
             
-                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                print("================",baseResult.errMsg)
+                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.errMsg)
             }
         }) { 
             

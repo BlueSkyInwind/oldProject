@@ -48,5 +48,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *stagingBtn;
 @property (weak, nonatomic) IBOutlet UILabel *overdueFeeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *agreementBtn;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @end

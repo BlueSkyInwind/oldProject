@@ -113,7 +113,7 @@
                                                 <constraint firstAttribute="height" constant="18" id="EnH-js-5SF"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" red="0.40784313729999999" green="0.40000000000000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIo-bb-VC8">
@@ -440,6 +440,7 @@
                 <outlet property="agreeMentView" destination="haH-wT-02O" id="ixx-xH-LGU"/>
                 <outlet property="agreementBtn" destination="urj-Uk-xdN" id="y6f-ZQ-3LH"/>
                 <outlet property="bottomView" destination="hWU-sA-8y5" id="l0X-ML-t2f"/>
+                <outlet property="headerView" destination="yzJ-0x-xaM" id="Z4l-gk-ae5"/>
                 <outlet property="labelDetail" destination="kSw-JM-F44" id="bNy-Yj-rxH"/>
                 <outlet property="labelLoan" destination="BPz-Ce-S5M" id="AkG-Rr-D8r"/>
                 <outlet property="labelProgress" destination="5r6-y1-4Ns" id="Xra-hu-0pU"/>
