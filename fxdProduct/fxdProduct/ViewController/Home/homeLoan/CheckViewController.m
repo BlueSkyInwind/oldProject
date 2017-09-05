@@ -331,12 +331,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
         NSString *timeLimitText = [NSString stringWithFormat:@"借款期限: %@天", _drawingsInfoModel.period];
         NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:timeLimitText];
-        [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,timeLimitText.length - 5)];
+        [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5,timeLimitText.length - 5)];
         checkSuccess.termLabel.attributedText = attStr;
         
         NSString *amountText = [NSString stringWithFormat:@"到期还款: %.0f元", [_drawingsInfoModel.repaymentAmount floatValue]];
         NSMutableAttributedString *amountStr = [[NSMutableAttributedString alloc] initWithString:amountText];
-        [amountStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,amountText.length - 5)];
+        [amountStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5,amountText.length - 5)];
         checkSuccess.jsdMonayLabel.attributedText = amountStr;
     }else {
         checkSuccess.jsdDescView.hidden = YES;

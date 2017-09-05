@@ -224,82 +224,6 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         }
     }
 
-    
-
-//    func getGatheringInformation_jhtml() -> Void {
-//        
-//        let checkBankViewModel = CheckBankViewModel()
-//        checkBankViewModel.setBlockWithReturn({ (returnValue) in
-//            
-//             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
-//            if baseResult.flag == "0000"{
-//            
-//                let array = baseResult.result!
-//                
-//                for index in 0..<(array as! NSArray).count{
-//                
-//                    let bankList = try! SupportBankList.init(dictionary: (array as! NSArray)[index] as! [AnyHashable : Any])
-//                    self.supportBankListArr.append(bankList)
-//                }
-//                self.fatchCardInfo(supportBankListArr: self.supportBankListArr as NSArray)
-//            }else{
-//            
-//                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.msg)
-//            }
-//        }) { 
-//            
-//        }
-//        
-//        checkBankViewModel.getSupportBankListInfo("2")
-//    }
-//    
-//    
-//    func fatchCardInfo(supportBankListArr : NSArray){
-//    
-//        let userDataVM = UserDataViewModel()
-//        userDataVM.setBlockWithReturn({ (returnValue) in
-//
-//            let  userCardsModel = (UserCardResult.yy_model(with: returnValue as! [AnyHashable : Any]))!
-//            if userCardsModel.flag! == "0000"{
-//            
-//                self.cardInfo = CardInfo()
-//                if userCardsModel.result.count>0{
-//                
-//                    for _ in 0..<userCardsModel.result.count{
-//                    
-//                        let cardResult = userCardsModel.result[0]
-//                        if cardResult.card_type_ == "2"{
-//                        
-//                            self.defaultBankIndex = 0
-//                            
-//                            for banlist in self.supportBankListArr{
-//                                if cardResult.card_bank_ == banlist.bank_code_{
-//                                    
-//                                    self.cardInfo?.tailNumber = cardResult.card_no_
-//                                    self.cardInfo?.bankName = banlist.bank_name_
-//                                    self.cardInfo?.cardIdentifier = cardResult.id_
-//                                    self.cardInfo?.phoneNum = cardResult.bank_reserve_phone_
-//                                    self.renewalTableView.reloadData()
-//                                    break
-//                                }
-//                                
-//                            }
-//                            
-//                        }
-//                    }
-//                }
-//            }else{
-//            
-//                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userCardsModel.msg!)
-//            }
-//        }) { 
-//            
-//        }
-//        userDataVM.obtainGatheringInformation()
-//        return
-//    }
-
-
     func fatchBankList(){
     
         let bankInfoVM = BankInfoViewModel()
@@ -330,23 +254,22 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
     }
     
     func commitStaging(){
-    
+
+        
+        
         let bankInfoVM = BankInfoViewModel()
         bankInfoVM.setBlockWithReturn({ (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
             
-                self.navigationController?.popToRootViewController(animated: true)
-//                let loanMonayCtrl = LoanMoneyViewController()
-//                loanMonayCtrl.applicationStatus = .Staging
-//                self.navigationController?.popToViewController(loanMonayCtrl, animated: true)
-//                self.navigationController?.popViewController(animated: true)
-
-                
+                let idVC = self.rt_navigationController?.rt_viewControllers[1] as! LoanMoneyViewController
+                idVC.applicationStatus = .Staging
+                _ = self.navigationController?.popToViewController(idVC, animated: true)
+//                self.navigationController?.popToRootViewController(animated: true)
             }else{
             
                 print("================",baseResult.errMsg)
-                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.errMsg)
+                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) { 
             

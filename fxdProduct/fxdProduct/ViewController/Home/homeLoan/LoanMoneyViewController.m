@@ -94,7 +94,7 @@
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"一次借款最多续借三次"];
         return;
     }
-        
+    
     RenewalViewController *controller = [[RenewalViewController alloc]init];
     controller.stagingId = _repayModel.stagingId;
     [self.navigationController pushViewController:controller animated:YES];
