@@ -94,7 +94,7 @@
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"一次借款最多续借三次"];
         return;
     }
-        
+    
     RenewalViewController *controller = [[RenewalViewController alloc]init];
     controller.stagingId = _repayModel.stagingId;
     [self.navigationController pushViewController:controller animated:YES];
@@ -716,7 +716,6 @@
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             [self.scrollView.mj_header endRefreshing];
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.errMsg];
             _applicationStatus = RepaymentNormal;
             _repayModel = [[RepayModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             if ([_repayModel.platformType isEqualToString:@"2"]) {
