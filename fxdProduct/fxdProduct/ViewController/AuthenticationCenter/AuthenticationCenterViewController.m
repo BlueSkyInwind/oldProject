@@ -173,8 +173,8 @@
     if (section == 0) {
         return 6;
     }
-    return 2;
-//    return _imageArr.count;
+    return 3;
+
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -275,6 +275,11 @@
             }else if ([_socialSecurityStatus isEqualToString:@"1"]){
                 cell.image.image = [UIImage imageNamed:_inAuthenticationImageArr[_inAuthenticationImageArr.count-1]];
             }
+        }else if(indexPath.row == 2){
+        
+            cell.image.image = [UIImage imageNamed:@""];
+            cell.nameLabel.text = @"";
+            
         }
     }
     return cell;

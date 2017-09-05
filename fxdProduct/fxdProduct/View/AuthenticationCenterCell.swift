@@ -52,7 +52,7 @@ extension AuthenticationCenterCell{
         
         nameLabel = UILabel()
         nameLabel?.textColor = UIColor.black
-        nameLabel?.font = UIFont.systemFont(ofSize: 18)
+        nameLabel?.font = UIFont.systemFont(ofSize: 14)
         bgView.addSubview(nameLabel!)
         nameLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo((image?.snp.bottom)!).offset(5)

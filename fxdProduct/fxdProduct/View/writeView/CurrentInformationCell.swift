@@ -97,7 +97,7 @@ extension CurrentInformationCell{
         })
         
         let lineView = UIView()
-        lineView.backgroundColor = UIColor.gray
+        lineView.backgroundColor = UIColor.init(red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1.0)
         self.addSubview(lineView)
         lineView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(15)

@@ -73,7 +73,7 @@ extension CurrentInformationHeadView{
         
         moneyLabel = UILabel()
         moneyLabel?.textColor = UIColor.white
-        moneyLabel?.font = UIFont.systemFont(ofSize: 20)
+        moneyLabel?.font = UIFont.systemFont(ofSize: 40)
         moneyLabel?.textAlignment = .center
         self.addSubview(moneyLabel!)
         moneyLabel?.snp.makeConstraints({ (make) in
