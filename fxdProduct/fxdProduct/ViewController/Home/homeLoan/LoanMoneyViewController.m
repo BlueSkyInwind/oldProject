@@ -83,7 +83,6 @@
     [moenyViewing.agreementBtn addTarget:self action:@selector(agreementBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     _isFirst = _popAlert;
 
-    
   }
 
 #pragma mark 续借一期点击按钮
@@ -599,6 +598,8 @@
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 //        p2pVC.isOpenAccount = NO;
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                p2pVC.applicationId = _repayModel.applyId;
+                p2pVC.product_id = _repayModel.productId;
                 [self.navigationController pushViewController:p2pVC animated:YES];
                 
             }else{
@@ -620,10 +621,8 @@
             [repayRequest repayRequest];
         }
     }else{
-    
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请勾选协议"];
     }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated

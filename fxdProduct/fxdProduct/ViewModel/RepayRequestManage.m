@@ -31,7 +31,6 @@
 -(void)checkState{
     
 
-    
     if ([self.platform_type isEqualToString:@"0"]) {
         
         if ([self.product_id isEqualToString:RapidLoan]) {

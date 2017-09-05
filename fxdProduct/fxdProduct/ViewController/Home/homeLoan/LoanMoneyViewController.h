@@ -18,7 +18,6 @@ typedef NS_ENUM(NSUInteger, ApplicationStatus) {
     ComplianceNotActive,   //合规未激活，失败
     Assessment           //测评中
     
-
 };
 
 @interface LoanMoneyViewController : BaseViewController

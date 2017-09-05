@@ -630,18 +630,9 @@
                 __weak typeof (self) weakSelf = self;
                 [self getUserStatus:_homeProductList.data.applicationId success:^(QryUserStatusModel *resultModel) {
                     if ([_qryUserStatusModel.result.flg isEqualToString:@"11"] || [_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
-                        
                         [weakSelf goLoanMoneVC:ComplianceInProcess];
-                        
-                    }else if([_qryUserStatusModel.result.flg isEqualToString:@"3"]){
-                        //激活用户
-                        NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
-                        P2PViewController *p2pVC = [[P2PViewController alloc] init];
-                        p2pVC.isRepay = YES;
-                        p2pVC.applicationId = _homeProductList.data.applicationId;
-                        p2pVC.product_id = _homeProductList.data.productId;
-                        p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                        [weakSelf.navigationController pushViewController:p2pVC animated:YES];
+                    }else{
+                        [self goLoanMoneVC:RepaymentNormal];
                     }
                 }];
                 return;

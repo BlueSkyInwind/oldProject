@@ -62,7 +62,6 @@ extension AuthenticationCenterHeaderView{
             let k_w = UIScreen.main.bounds.size.width
             let newFrame = CGRect(x:0,y:0,width:k_w,height:39)
             super.frame = newFrame
-            
         }
     }
 }

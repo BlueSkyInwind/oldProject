@@ -158,7 +158,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.btnSecory.hidden = YES;
         }else if (indexPath.row == 1) {
-            [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
+            [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_31"] forState:UIControlStateNormal];
             cell.btn.hidden = NO;
             cell.btn.tag = indexPath.row + 200;
             [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -693,6 +693,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
     p2pVC.isCheck = YES;
     p2pVC.purposeSelect = _purposeSelect;
+    p2pVC.applicationId = self.drawingsInfoModel.applicationId;
     [self.navigationController pushViewController:p2pVC animated:YES];
 }
 
