@@ -71,6 +71,7 @@
     moenyViewing.moneyImage.hidden = YES;
     moenyViewing.repayView.hidden = YES;
     moenyViewing.headerView.hidden = YES;
+    moenyViewing.promptLabel.hidden = YES;
     [self.view addSubview:moenyViewing];
 
     [Tool setCorner:moenyViewing.sureBtn borderColor:rgb(158, 158, 159)];
@@ -588,8 +589,6 @@
 #pragma mark 我要还款按钮
 -(void)sureBtnClick:(UIButton *)sender
 {
-    if (moenyViewing.agreementBtn.selected) {
-        
         //platform_type 2、合规平台  0发薪贷平台
         if ([_repayModel.platformType isEqualToString:@"2"]) {
             if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]) {//待激活用户
@@ -620,9 +619,9 @@
             repayRequest.applicationId = _repayModel.applyId;
             [repayRequest repayRequest];
         }
-    }else{
-        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请勾选协议"];
-    }
+//    }else{
+//        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请勾选协议"];
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -697,7 +696,7 @@
                     break;
             }
         }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.errMsg];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         [self.scrollView.mj_header endRefreshing];
@@ -725,7 +724,7 @@
             [self updateUI:nil repayModel:_repayModel];
         }else{
         
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.errMsg];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         [self.scrollView.mj_header endRefreshing];
