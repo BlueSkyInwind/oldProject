@@ -125,7 +125,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.title = @"审核";
+    self.navigationItem.title = @"待提款";
     _promoteType = -1;
     _flag = 1;
     _datalist = [NSMutableArray array];

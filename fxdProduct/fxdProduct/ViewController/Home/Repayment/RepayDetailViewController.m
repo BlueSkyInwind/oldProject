@@ -709,7 +709,6 @@
 
 - (void)fxdRepay
 {
-    
     NSLog(@"=================支付点击===================");
     self.sureBtn.enabled = NO;
     NSMutableString *staging_ids = [NSMutableString string];
