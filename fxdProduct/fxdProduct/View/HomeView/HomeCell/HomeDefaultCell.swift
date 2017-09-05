@@ -410,6 +410,26 @@ extension HomeDefaultCell{
     //MARK:进件带提款
     func setupDrawingUI(){
     
+
+        var dataArray : [HomeInfoList] = [HomeInfoList]()
+        for index in homeProductData.data.infoList {
+            dataArray.append(index)
+        }
+        
+        for index in 0..<dataArray.count{
+            
+            for x in index+1..<dataArray.count{
+                
+                if dataArray[index].index > dataArray[x].index{
+                    
+                    let temp = dataArray[index]
+                    dataArray[index] = dataArray[x]
+                    dataArray[x] = temp
+                }
+            }
+        }
+        
+        
         drawingBgImage = UIImageView()
         drawingBgImage?.image = UIImage(named:"beijing big")
         drawingBgImage?.isUserInteractionEnabled = true
@@ -497,17 +517,28 @@ extension HomeDefaultCell{
                 make.right.equalTo(bgView.snp.right).offset(0)
                 make.height.equalTo(30)
             })
-            for k in 0..<homeProductData.data.infoList.count{
             
-                let str = homeProductData.data.infoList[k].index
-                
-                if (index+1 == Int(str!)!){
-                
-                    leftLabel?.text = homeProductData.data.infoList[k].label
-                    rightLabel?.text = homeProductData.data.infoList[k].value
-                    
-                }
-            }
+            leftLabel?.text = dataArray[index].label
+            rightLabel?.text = dataArray[index].value
+           
+//            for k in 0..<homeProductData.data.infoList.count{
+//            
+//                let str = homeProductData.data.infoList[k].index
+//                
+//                if (index+1 == Int(str!)!){
+//                
+//                    leftLabel?.text = homeProductData.data.infoList[k].label
+//                    rightLabel?.text = homeProductData.data.infoList[k].value
+//                    
+//                }
+//            }
+            
+//            for k in 0..<dataArray.count{
+//                    
+//                leftLabel?.text = dataArray[k].label
+//                rightLabel?.text = dataArray[k].value
+//                
+//            }
         }
         
         bgView.snp.updateConstraints({ (make) in
@@ -523,8 +554,8 @@ extension HomeDefaultCell{
         bgView.addSubview(bottomBtn)
         bottomBtn.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(j+40)
-            make.left.equalTo(bgView.snp.left).offset(25)
-            make.right.equalTo(bgView.snp.right).offset(-25)
+            make.left.equalTo(bgView.snp.left).offset(40)
+            make.right.equalTo(bgView.snp.right).offset(-40)
             make.height.equalTo(44)
         }
         

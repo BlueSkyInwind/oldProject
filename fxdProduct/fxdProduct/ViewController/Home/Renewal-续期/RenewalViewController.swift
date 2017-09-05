@@ -336,9 +336,11 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
             
-                self.navigationController?.popViewController(animated: true)
-//                let loanMonayCtrl = LoanMoneyViewController()
-//                self.navigationController?.pushViewController(loanMonayCtrl, animated: true)
+                let loanMonayCtrl = LoanMoneyViewController()
+                loanMonayCtrl.applicationStatus = .Staging
+                self.navigationController?.popToViewController(loanMonayCtrl, animated: true)
+//                self.navigationController?.popViewController(animated: true)
+
                 
             }else{
             

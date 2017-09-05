@@ -138,7 +138,7 @@
     _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h) collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
-    _collectionView.backgroundColor = [UIColor whiteColor];
+    _collectionView.backgroundColor = rgb(242, 242, 242);
     [self.view addSubview:_collectionView];
     [_collectionView registerClass:[AuthenticationCenterCell class] forCellWithReuseIdentifier:@"AuthenticationCenterCell"];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ReusableView"];
@@ -173,8 +173,8 @@
     if (section == 0) {
         return 6;
     }
-    return 2;
-//    return _imageArr.count;
+    return 3;
+
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -275,6 +275,11 @@
             }else if ([_socialSecurityStatus isEqualToString:@"1"]){
                 cell.image.image = [UIImage imageNamed:_inAuthenticationImageArr[_inAuthenticationImageArr.count-1]];
             }
+        }else if(indexPath.row == 2){
+        
+            cell.image.image = [UIImage imageNamed:@""];
+            cell.nameLabel.text = @"";
+            
         }
     }
     return cell;

@@ -49,5 +49,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *overdueFeeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *agreementBtn;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIView *stagingView;
+@property (weak, nonatomic) IBOutlet UIImageView *tipImage;
+@property (weak, nonatomic) IBOutlet UILabel *promptLabel;
 
 @end

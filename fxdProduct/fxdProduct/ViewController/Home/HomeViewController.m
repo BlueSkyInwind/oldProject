@@ -402,6 +402,7 @@
         case 6:
         case 7:
         case 8:
+        case 9:
 
             [homeCell setupDrawingUI];
             break;
@@ -580,9 +581,9 @@
     }
     [self.navigationController pushViewController:loanVc animated:YES];
 }
--(void)goLoanSureVC{
+-(void)goLoanSureVC:(NSString *)productId{
     LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
-    loanFirstVC.productId = _homeProductList.data.productList[0].productId;
+    loanFirstVC.productId = productId;
     [self.navigationController pushViewController:loanFirstVC animated:true];
 }
 -(void)goUserDataVC{
@@ -648,6 +649,12 @@
             [self goLoanMoneVC:Repayment];
         }
             break;
+            
+        case 9:{
+            
+           [self goLoanMoneVC:Staging];
+        }
+            
         default:
             break;
     }
@@ -682,7 +689,7 @@
     }
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productList[0].productId;
-        [self goLoanSureVC];
+        [self goLoanSureVC:_homeProductList.data.productList[0].productId];
     } else {
         [self presentLogin:self];
     }
@@ -700,7 +707,7 @@
         }
         if ([Utility sharedUtility].loginFlage) {
             [Utility sharedUtility].userInfo.pruductId = productId;
-            [self goLoanSureVC];
+            [self goLoanSureVC:productId];
         } else {
             [self presentLogin:self];
         }
