@@ -118,7 +118,6 @@
     }
 }
 
-
 -(void)createProUI
 {
     CGFloat progressBarHeight = 1.f;
@@ -154,6 +153,7 @@
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     
     
+    
 }
 
 #pragma mark  fxd用户状态查询，viewmodel
@@ -184,16 +184,16 @@
                         if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
                             isHave = YES;
                             controller = (LoanMoneyViewController *)vc;
-                            controller.userStateModel.product_id = self.product_id;
                             controller.qryUserStatusModel = qryUserStatusModel;
+                            controller.applicationStatus = ComplianceInProcess;
                         }
                     }
                     if (isHave) {
                         [self.navigationController popToViewController:controller animated:YES];
                     }else{
                         LoanMoneyViewController *controller = [LoanMoneyViewController new];
-                        controller.userStateModel.product_id = self.product_id;
                         controller.qryUserStatusModel = qryUserStatusModel;
+                        controller.applicationStatus = ComplianceInProcess;
                         [self.navigationController pushViewController:controller animated:YES];
                     }
                 }
@@ -203,10 +203,8 @@
         }
     } WithFaileBlock:^{
     }];
-    
     [complianceViewModel getUserStatus:applicationId];
 }
-
 
 -(void)dealloc
 {

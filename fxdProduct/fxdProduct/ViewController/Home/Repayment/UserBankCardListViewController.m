@@ -35,7 +35,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     
     _datalist = [[NSMutableArray alloc] init];
 
-    _currentIndex = 0;
+//    _currentIndex = 0;
     self.navigationItem.title = @"选择银行卡";
 
     [self addBackItem];

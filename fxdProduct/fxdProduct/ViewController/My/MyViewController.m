@@ -25,7 +25,6 @@
 #import "CheckViewModel.h"
 #import "GetCaseInfo.h"
 #import "QryUserStatusModel.h"
-#import "P2PViewController.h"
 #import "LoanMoneyViewController.h"
 #import "HomeViewModel.h"
 #import "SupportBankList.h"

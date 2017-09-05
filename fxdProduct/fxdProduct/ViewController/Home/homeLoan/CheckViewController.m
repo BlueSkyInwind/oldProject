@@ -79,12 +79,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSString *_purposeSelect;
     //    int datalist[60];
     NSMutableArray<NSNumber *> *_datalist;
-    UserCardResult *_userCardModel;
     BankModel *_bankCardModel;
     NSMutableArray *_supportBankListArr;
     UserCardResult *_userCardsModel;
     CardInfo *_selectCard;
-    NSInteger defaultBankIndex;
     NSInteger userSelectIndex;
     PromoteType _promoteType;
     NSDictionary *_uploadP2PUserInfo;
@@ -98,6 +96,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSArray * feeArray; //费用说明
 
     BOOL _isOpen;
+    BOOL _isBankCard;    //用户是否有银行卡
+
 }
 
 @property (nonatomic, weak) UIScrollView *scrollView;
@@ -129,8 +129,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     _promoteType = -1;
     _flag = 1;
     _datalist = [NSMutableArray array];
-    defaultBankIndex = -1;
-    userSelectIndex = defaultBankIndex;
+    userSelectIndex = 0;
     self.rt_disableInteractivePop = YES;
     [self addBackItemRoot];
     [self configMoxieSDK];
@@ -150,7 +149,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     _isOpen = NO;
     
-
     [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 
 }
@@ -296,7 +294,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     checkSuccess =[[[NSBundle mainBundle] loadNibNamed:@"CheckSuccessView" owner:self options:nil] lastObject];
     checkSuccess.frame = CGRectMake(0, 0,_k_w, _k_h);
-    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.2f元",[_drawingsInfoModel.actualAmount floatValue],[_drawingsInfoModel.fee floatValue]];
+    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.2f元",[_drawingsInfoModel.actualAmount floatValue],[_drawingsInfoModel.totalFee floatValue]];
     [checkSuccess.feeBtn addTarget:self action:@selector(shareBtn:)forControlEvents:UIControlEventTouchUpInside];
     checkSuccess.feeBtn.tag = 107;
     //用途
@@ -336,13 +334,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,timeLimitText.length - 5)];
         checkSuccess.termLabel.attributedText = attStr;
         
-        NSString *amountText = [NSString stringWithFormat:@"到期还款: %.0f元", [_drawingsInfoModel.repayAmount floatValue]];
+        NSString *amountText = [NSString stringWithFormat:@"到期还款: %.0f元", [_drawingsInfoModel.repaymentAmount floatValue]];
         NSMutableAttributedString *amountStr = [[NSMutableAttributedString alloc] initWithString:amountText];
         [amountStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,amountText.length - 5)];
         checkSuccess.jsdMonayLabel.attributedText = amountStr;
-        
     }else {
-        
         checkSuccess.jsdDescView.hidden = YES;
         checkSuccess.textFiledWeek.text = @"请选择借款周期";
         checkSuccess.purposeTextField.text = @"请选择借款用途";
@@ -391,7 +387,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         }];
     }
     
-    if (![drawingsInfo.userAgain boolValue] || ![_userStateModel.taskStatus isEqualToString:@"1"] ) {
+    if (![drawingsInfo.userAgain boolValue] || ![drawingsInfo.taskStatus isEqualToString:@"1"] ) {
         [checkSuccess.promote setHidden:YES];
         checkSuccess.surBtnLeadRight.constant = .0f;
         [checkSuccess.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -445,16 +441,17 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 
 //每周还款的视图
--(void)refreshWeekAmount:(NSString *)weekMoney{
+-(void)refreshWeekAmount:(SalaryDrawingsFeeInfoModel *)feeInfoModel{
     
+    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.2f元",[_drawingsInfoModel.actualAmount floatValue],[feeInfoModel.totalFee floatValue]];
     checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
     [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-    NSString *amountStr = [NSString stringWithFormat:@"%.2f元",[weekMoney floatValue]];
+    NSString *amountStr = [NSString stringWithFormat:@"%.2f元",[feeInfoModel.repaymentAmount floatValue]];
     [attStr yy_appendString:amountStr];
     [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-amountStr.length, amountStr.length)];
     checkSuccess.weekMoney.attributedText = attStr;
-    checkSuccess.allMoney.text =[NSString stringWithFormat:@"%.2f元",[weekMoney floatValue]];
+    checkSuccess.allMoney.text =[NSString stringWithFormat:@"%.2f元",[feeInfoModel.repaymentAmount floatValue]];
     
 }
 
@@ -519,7 +516,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请勾选借款协议"];
                     return;
                 }
-                
                 [self getMoney];
             }
             if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan]) {
@@ -585,6 +581,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         }
             break;
         case 106:{
+            if (!_isBankCard) {
+                [self pushAddBanckCard];
+                return;
+            }
             [self pushUserBankListVC];
         }
             break;
@@ -602,11 +602,23 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 -(void)pushUserBankListVC{
     
     UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
+    userBankCardListVC.currentIndex = userSelectIndex;
     userBankCardListVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
         self.selectCard = cardInfo;
+        userSelectIndex = currentIndex;
     };
     [self.navigationController pushViewController:userBankCardListVC animated:true];
     
+}
+-(void)pushAddBanckCard{
+    BankCardViewController *bankVC = [BankCardViewController new];
+    bankVC.bankArray = _supportBankListArr;
+    bankVC.periodSelect = _userSelectNum.integerValue;
+    bankVC.purposeSelect = _purposeSelect;
+    bankVC.drawingsInfoModel = _drawingsInfoModel;
+    bankVC.isP2P = NO;
+    bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",[_drawingsInfoModel.repayAmount floatValue]];
+    [self.navigationController pushViewController:bankVC animated:YES];
 }
 -(void)pushFeeDescription{
     
@@ -671,15 +683,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         if ([baseResultM.errCode isEqualToString:@"0"]){
             NSArray * array = (NSArray *)baseResultM.data;
             if (array.count <= 0){
-                BankCardViewController *bankVC = [BankCardViewController new];
-                bankVC.bankArray = _supportBankListArr;
-                bankVC.periodSelect = _userSelectNum.integerValue;
-                bankVC.purposeSelect = _purposeSelect;
-                bankVC.drawingsInfoModel = _drawingsInfoModel;
-                bankVC.isP2P = NO;
-                bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",[_drawingsInfoModel.repayAmount floatValue]];
-                [self.navigationController pushViewController:bankVC animated:YES];
+                _isBankCard = NO;
+                return;
             }
+            _isBankCard = YES;
             for (int  i = 0; i < array.count; i++) {
                 NSDictionary *dic = array[i];
                 CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
@@ -767,7 +774,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             return  loanForM.desc;
         }
     }else{
-    
         if (row == 0) {
             return @"选择周期";
         } else {
@@ -935,7 +941,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             SalaryDrawingsFeeInfoModel * salaryDrawingM = [[SalaryDrawingsFeeInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             feeArray = salaryDrawingM.feeInfo;
             if ([_drawingsInfoModel.productId isEqualToString:SalaryLoan]) {
-                [self refreshWeekAmount:salaryDrawingM.repaymentAmount];
+                [self refreshWeekAmount:salaryDrawingM];
             }
         }else{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
@@ -1219,7 +1225,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
         SaveLoanCaseModel *model = [SaveLoanCaseModel yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
             if ([type isEqualToString:@"20"]) {//未开户
@@ -1230,12 +1235,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 p2pVC.isCheck = YES;
+                p2pVC.applicationId = _drawingsInfoModel.applicationId;
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
                 [self.navigationController pushViewController:p2pVC animated:YES];
                 
             }else if ([type isEqualToString:@"30"]){
                 LoanMoneyViewController *controller = [LoanMoneyViewController new];
-                controller.userStateModel = _userStateModel;
+                controller.applicationStatus = InLoan;
                 controller.popAlert = true;
                 [self.navigationController pushViewController:controller animated:YES];
             }

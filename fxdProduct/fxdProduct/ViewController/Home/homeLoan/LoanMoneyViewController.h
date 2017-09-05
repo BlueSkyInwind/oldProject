@@ -16,7 +16,6 @@ typedef NS_ENUM(NSUInteger, ApplicationStatus) {
     RepaymentNormal,   //正常还款
     ComplianceInProcess,   //合规处理中
     ComplianceNotActive   //合规未激活，失败
-
 };
 
 @interface LoanMoneyViewController : BaseViewController
