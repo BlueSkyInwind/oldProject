@@ -248,6 +248,7 @@
             moenyViewing.lableData.textAlignment = NSTextAlignmentLeft;
             NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《银行自动转账授权书》、《借款协议》"];
             one.yy_font = [UIFont systemFontOfSize:13];
+            one.yy_color = rgb(102, 102, 102);
             [one yy_setTextHighlightRange:NSMakeRange(10, 11)
                                     color:UI_MAIN_COLOR
                           backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
@@ -332,6 +333,8 @@
         moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentCenter;
     }
 }
+
+#pragma mark 五星好评的弹框
 - (void)showAlertview
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"亲，您对发薪贷的服务满意吗？" preferredStyle:(UIAlertControllerStyleAlert)];
@@ -440,9 +443,9 @@
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
         
+        [weakSelf.scrollView.mj_header endRefreshing];
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
-            [weakSelf.scrollView.mj_header endRefreshing];
             
             ApplicationStatusModel *applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
@@ -458,6 +461,7 @@
                     break;
             }
         }else{
+    
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
@@ -472,18 +476,20 @@
 #pragma mark -> 2.22	待还款界面信息获取
 -(void)getRepayInfo{
 
+     __weak typeof (self) weakSelf = self;
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        [weakSelf.scrollView.mj_header endRefreshing];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
-            [self.scrollView.mj_header endRefreshing];
+            
             _applicationStatus = RepaymentNormal;
             _repayModel = [[RepayModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             if ([_repayModel.platformType isEqualToString:@"2"]) {
-                [self getUserStatus:_repayModel.applyId];
+                [weakSelf getUserStatus:_repayModel.applyId];
                 return;
             }
-            [self updateUI:nil repayModel:_repayModel];
+            [weakSelf updateUI:nil repayModel:_repayModel];
         }else{
         
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
@@ -570,6 +576,11 @@
 
     moenyViewing.overdueFeeLabel.hidden = YES;
     moenyViewing.labelProgress.text = @"正常还款";
+    if (![repayModel.overdueFee isEqualToString:@"0"] && repayModel.overdueFee != nil){
+    
+        moenyViewing.labelProgress.text = @"已逾期";
+        moenyViewing.labelProgress.textColor = [UIColor redColor];
+    }
     moenyViewing.tipLabel.text = @"请按时还款,保障信用";
     moenyViewing.repayBtnView.hidden = NO;
     moenyViewing.loanTitleLabel.text = @"借款金额";
@@ -590,16 +601,14 @@
     if (![repayModel.overdueFee isEqualToString:@"0"] && repayModel.overdueFee != nil) {
         moenyViewing.overdueFeeLabel.hidden = NO;
         moenyViewing.overdueFeeLabel.text = [NSString stringWithFormat:@"逾期费用:%@元",repayModel.overdueFee];
-        moenyViewing.overdueFeeLabel.attributedText = [self changeAtr:moenyViewing.overdueFeeLabel.text color:UI_MAIN_COLOR range:NSMakeRange(5, moenyViewing.overdueFeeLabel.text.length-6)];
-        moenyViewing.lableData.text = [NSString stringWithFormat:@"最近一期还款日:%@%@",repayModel.billDate,repayModel.overdueDesc];
+        moenyViewing.overdueFeeLabel.attributedText = [self changeAtr:moenyViewing.overdueFeeLabel.text color:UI_MAIN_COLOR range:NSMakeRange(5, moenyViewing.overdueFeeLabel.text.length-5)];
+        moenyViewing.lableData.text = [NSString stringWithFormat:@"最近账单日:%@%@",repayModel.billDate,repayModel.overdueDesc];
         
-        NSMutableAttributedString *billDate = [self changeAtr:moenyViewing.lableData.text color:UI_MAIN_COLOR range:NSMakeRange(8, repayModel.billDate.length)];
-        billDate = [self changeAtr:moenyViewing.lableData.text color:[UIColor redColor] range:NSMakeRange(moenyViewing.lableData.text.length-repayModel.overdueDesc.length, repayModel.overdueDesc.length)];
-        moenyViewing.lableData.attributedText = billDate;
-        
-//        moenyViewing.lableData.attributedText = [self changeAtr:moenyViewing.lableData.text color:UI_MAIN_COLOR range:NSMakeRange(8, repayModel.billDate.length)];
-//        NSLog(@"==========%ld",moenyViewing.lableData.text.length);
-//        moenyViewing.lableData.attributedText = [self changeAtr:moenyViewing.lableData.text color:[UIColor redColor] range:NSMakeRange(moenyViewing.lableData.text.length-repayModel.overdueDesc.length, repayModel.overdueDesc.length)];
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:moenyViewing.lableData.text];
+        [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(6,repayModel.billDate.length)];
+        [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(moenyViewing.lableData.text.length-repayModel.overdueDesc.length,repayModel.overdueDesc.length)];
+        moenyViewing.lableData.attributedText = str;
+
     }
     moenyViewing.stagingView.hidden = YES;
     if (repayModel.display) {
