@@ -103,6 +103,7 @@
         if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
             [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
             [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
+            [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
         }
     }
     //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
