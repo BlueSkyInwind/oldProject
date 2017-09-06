@@ -328,7 +328,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         checkSuccess.bankTextField.delegate = self;
         checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
         
-        NSString *timeLimitText = [NSString stringWithFormat:@"借款期限: %@天", _drawingsInfoModel.period];
+        NSString *timeLimitText = [NSString stringWithFormat:@"借款期限: %@", _drawingsInfoModel.period];
         NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:timeLimitText];
         [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5,timeLimitText.length - 5)];
         checkSuccess.termLabel.attributedText = attStr;
@@ -438,7 +438,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     checkSuccess.agreementLabel.attributedText = attributeStr;
 }
 
-
 //每周还款的视图
 -(void)refreshWeekAmount:(SalaryDrawingsFeeInfoModel *)feeInfoModel{
     
@@ -457,14 +456,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 - (void)addBackItemRoot
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    
     UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [btn setImage:img forState:UIControlStateNormal];
     btn.frame = CGRectMake(0, 0, 45, 44);
     [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];    
     //    修改距离,距离边缘的
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = -15;
@@ -522,11 +518,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请选择借款用途"];
                     return;
                 }
-                if (checkSuccess.userCheckBtnState) {
-                    [self getMoney];
-                } else {
+                if (!checkSuccess.userCheckBtnState) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请勾选借款协议"];
+                    return;
                 }
+                [self getMoney];
             }
         }
             break;
@@ -639,7 +635,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [self integrationP2PUserState];
         }
         if ([_drawingsInfoModel.platformType isEqualToString:@"0"]) {
-            
+            if (_isBankCard == NO) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请添加收款方式！"];
+                return;
+            }
             [self PostGetdrawApplyAgain];
         }
     }else{
@@ -817,28 +816,25 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         }
     }
     if ([_drawingsInfoModel.productId isEqualToString:SalaryLoan]||[_drawingsInfoModel.productId isEqualToString:WhiteCollarLoan]) {
-
         if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
-            
             if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]) {
                 checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
-            }else{
-                checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
+                return;
             }
+            checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
         }else{
-        
-            if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]&&checkSuccess.bankTextField.text.length>14) {
+            if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]&&_isBankCard == true) {
                 checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
-            }else{
-                checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
+                return;
             }
-        }
-    }else if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan]){
-        if (![_purposeSelect isEqualToString:@"0"]) {
-            checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
-        }else{
             checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
         }
+    }else if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan]){
+        if (![_purposeSelect isEqualToString:@"0"] && _isBankCard == true) {
+            checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
+            return;
+        }
+        checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
     }
 }
 
@@ -847,9 +843,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     return 40.f;
 }
 
-
-
-#pragma mark-
+#pragma mark -
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {

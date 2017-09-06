@@ -78,14 +78,13 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
             NSArray *array = (NSMutableArray *)baseResultM.data;
             if (array.count <= 0){
                 
-           
             }
             for (int  i = 0; i < array.count; i++) {
                 NSDictionary *dic = array[i];
                 CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
                 if ([cardInfo.cardType isEqualToString:@"2"]) {
                     if (i==0) {
-                        _currentIndex =0;
+//                        _currentIndex =0;
                         _cardInfo = cardInfo;
                     }
                     [_cardListArr addObject:cardInfo];
