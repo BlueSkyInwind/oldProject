@@ -72,6 +72,7 @@
     moenyViewing.repayView.hidden = YES;
     moenyViewing.headerView.hidden = YES;
     moenyViewing.promptLabel.hidden = YES;
+    moenyViewing.statusBottomView.hidden = YES;
     [self.view addSubview:moenyViewing];
 
     [Tool setCorner:moenyViewing.sureBtn borderColor:rgb(158, 158, 159)];
@@ -744,6 +745,8 @@
     moenyViewing.headerView.hidden = NO;
     moenyViewing.promptLabel.hidden = YES;
     moenyViewing.tipImage.hidden = NO;
+    moenyViewing.statusBottomView.hidden = NO;
+    
     switch (_applicationStatus) {
         case InLoan:
             
@@ -762,7 +765,7 @@
             moenyViewing.tipLabel.text = @"还款处理中，请稍后";
             moenyViewing.middleView.hidden = YES;
             moenyViewing.repayView.hidden = NO;
-            
+            moenyViewing.statusBottomView.hidden = YES;
             InfoListModel *firstModel = applicationStatusModel.infoList[0];
             moenyViewing.repayMoneyLabel.text = [NSString stringWithFormat:@"%@%@",firstModel.label,firstModel.value];
             InfoListModel *secondModel = applicationStatusModel.infoList[1];
@@ -784,6 +787,7 @@
             
             [self repayUI:repayModel];
             [self fxdStatus];
+            moenyViewing.statusBottomView.hidden = YES;
             break;
             
         case ComplianceInProcess:

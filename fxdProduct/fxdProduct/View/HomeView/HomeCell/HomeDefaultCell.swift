@@ -85,13 +85,8 @@ extension HomeDefaultCell{
         defaultHeadLabel?.text = "3000元"
         defaultBgImage?.addSubview(defaultHeadLabel!)
         defaultHeadLabel?.snp.makeConstraints({ (make) in
-//            if UI_IS_IPONE5{
-//                make.top.equalTo((defaultBgImage?.snp.top)!).offset(15)
-//            }else{
             
-                make.top.equalTo((defaultBgImage?.snp.top)!).offset(30)
-//            }
-            
+            make.top.equalTo((defaultBgImage?.snp.top)!).offset(30)
             make.centerX.equalTo((defaultBgImage?.snp.centerX)!)
             make.height.equalTo(30)
         })
@@ -140,14 +135,10 @@ extension HomeDefaultCell{
         slider.addTarget(self, action: #selector(changed(slider:)), for: UIControlEvents.valueChanged)
         defaultBgImage?.addSubview(slider)
         slider.snp.makeConstraints { (make) in
-//            if UI_IS_IPONE5{
-//            
-//                make.top.equalTo(label.snp.bottom).offset(10)
-//            }else{
-                make.top.equalTo(label.snp.bottom).offset(20)
-//            }
-            make.left.equalTo((defaultBgImage?.snp.left)!).offset(15)
-            make.right.equalTo((defaultBgImage?.snp.right)!).offset(-15)
+
+            make.top.equalTo(label.snp.bottom).offset(30)
+            make.left.equalTo((defaultBgImage?.snp.left)!).offset(20)
+            make.right.equalTo((defaultBgImage?.snp.right)!).offset(-20)
             
         }
         
@@ -167,7 +158,7 @@ extension HomeDefaultCell{
         leftLabel.snp.makeConstraints { (make) in
             
             make.top.equalTo(slider.snp.bottom).offset(-10)
-            make.left.equalTo((defaultBgImage?.snp.left)!).offset(15)
+            make.left.equalTo((defaultBgImage?.snp.left)!).offset(20)
             make.height.equalTo(15)
         }
         
@@ -178,7 +169,7 @@ extension HomeDefaultCell{
         defaultBgImage?.addSubview(rightLabel)
         rightLabel.snp.makeConstraints { (make) in
             make.top.equalTo(slider.snp.bottom).offset(-10)
-            make.right.equalTo((defaultBgImage?.snp.right)!).offset(-15)
+            make.right.equalTo((defaultBgImage?.snp.right)!).offset(-20)
             make.height.equalTo(15)
         }
         
@@ -468,11 +459,11 @@ extension HomeDefaultCell{
             drawingTitleLabel.font = UIFont.systemFont(ofSize: 19)
             bgView.addSubview(drawingTitleLabel)
             drawingTitleLabel.snp.makeConstraints({ (make) in
-                make.top.equalTo(bgView.snp.top).offset(15)
+                make.top.equalTo(bgView.snp.top).offset(0)
                 make.centerX.equalTo(bgView.snp.centerX)
                 make.height.equalTo(20)
             })
-            i = 35
+            i = 20
         }
         
         if homeProductData.data.subWarnText != "" && homeProductData.data.subWarnText != nil{
@@ -484,12 +475,12 @@ extension HomeDefaultCell{
             tipLabel.text = homeProductData.data.subWarnText
             bgView.addSubview(tipLabel)
             tipLabel.snp.makeConstraints({ (make) in
-                make.top.equalTo(bgView.snp.top).offset(43)
+                make.top.equalTo(bgView.snp.top).offset(35)
                 make.centerX.equalTo(bgView.snp.centerX)
                 make.height.equalTo(14)
             })
             
-            i = 57
+            i = 50
         }
         
         
@@ -499,7 +490,14 @@ extension HomeDefaultCell{
             bgView.addSubview(indexView)
             
             if index == 0 {
-                j = 10+i
+                if(i == 0){
+                
+                    j = 0
+                }else{
+                
+                    j = 10+i
+                }
+                
             }else{
             
                 if UI_IS_IPONE5{
@@ -857,7 +855,7 @@ extension HomeDefaultCell{
 //        print("slider.value = %d",slider.value)
 
         let money = Int(slider.value)
-        print("整除后的数字=%d",(money/500)*500)
+//        print("整除后的数字=%d",(money/500)*500)
         defaultHeadLabel?.text = NSString(format: "%d元", (money/500)*500) as String
         
 //        print("整除后的数字=%d",(money/100)*100)

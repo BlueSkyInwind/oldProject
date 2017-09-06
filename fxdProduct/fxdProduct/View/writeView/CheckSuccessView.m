@@ -122,6 +122,17 @@
         _displayLabel.font = [UIFont systemFontOfSize:11];
         [self setNeedsLayout];
     }
+    
+    if(UI_IS_IPHONE6P){
+        CGRect rect = _displayLabel.frame;
+        rect.origin.x=rect.origin.x+20;
+        _displayLabel.frame=rect;
+        
+        CGRect rect1 = _feeBtn.frame;
+        rect1.origin.x=rect.origin.x+rect.size.width+5;
+        _feeBtn.frame=rect1;
+        [self setNeedsLayout];
+    }
 }
 
 
