@@ -714,4 +714,17 @@
     
 }
 
+-(void)tesst{
+    
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:@"https://blueskyinwind.github.io/FXProduct/123.strings" parameters:nil finished:^(EnumServerStatus status, id object) {
+        NSLog(@"%@",object);
+    } failure:^(EnumServerStatus status, id object) {
+
+    }];
+    
+}
+
+
+
+
 @end

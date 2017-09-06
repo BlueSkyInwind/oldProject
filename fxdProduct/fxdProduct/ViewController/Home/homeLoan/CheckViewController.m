@@ -201,8 +201,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
-
-
+    
 }
 
 -(void)createUI
