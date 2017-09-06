@@ -801,10 +801,10 @@ extension HomeDefaultCell{
             make.top.equalTo(view.snp.top).offset(0)
             make.left.equalTo(view.snp.left).offset(_k_w/2-160)
             make.bottom.equalTo(view.snp.bottom).offset(0)
-            make.width.equalTo(120)
+            make.width.equalTo(130)
         })
     
-       let width = _k_w/2-160
+       let width = _k_w/2-170
     
         rightLabel = UILabel()
         rightLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -815,7 +815,7 @@ extension HomeDefaultCell{
             make.top.equalTo(view.snp.top).offset(0)
             make.right.equalTo(view.snp.right).offset(-width)
             make.bottom.equalTo(view.snp.bottom).offset(0)
-            make.width.equalTo(120)
+            make.width.equalTo(130)
         })
     
         return view

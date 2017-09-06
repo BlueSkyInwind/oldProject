@@ -397,7 +397,7 @@
 
             [homeCell setupOtherPlatformsUI];
             break;
-        case 0:
+        case 10:
         case 5:
         case 6:
         case 7:
@@ -621,7 +621,9 @@
             [self goLoanMoneVC:InLoan];
         }
             break;
-        case 7:{
+        case 7:
+        case 10:
+        {
             [self goLoanMoneVC:RepaymentNormal];
         }
             break;
@@ -645,7 +647,8 @@
             
            [self goLoanMoneVC:Staging];
         }
-            
+            break;
+        
         default:
             break;
     }

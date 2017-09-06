@@ -7044,6 +7044,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "50f551c6-cf23-4bf0-bb7c-71b8c4050d6a";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -7086,6 +7087,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "50f551c6-cf23-4bf0-bb7c-71b8c4050d6a";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -7558,7 +7560,7 @@
 				636EE31F1B662ABB00A1A3ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		636EE3201B662ABB00A1A3ED /* Build configuration list for PBXNativeTarget "fxdProduct" */ = {
 			isa = XCConfigurationList;
@@ -7567,7 +7569,7 @@
 				636EE3221B662ABB00A1A3ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		636EE3231B662ABB00A1A3ED /* Build configuration list for PBXNativeTarget "fxdProductTests" */ = {
 			isa = XCConfigurationList;
@@ -7576,7 +7578,7 @@
 				636EE3251B662ABB00A1A3ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CC0DFB941EA5B1090024841A /* Build configuration list for PBXNativeTarget "fxdProductDev" */ = {
 			isa = XCConfigurationList;
@@ -7585,7 +7587,7 @@
 				CC0DFB961EA5B1090024841A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
