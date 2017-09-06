@@ -448,6 +448,9 @@ NSString * const    _Staging_url    =    @"apigw/client/staging/continue/add";
 //待还款界面信息获取
 NSString * const    _Repay_url    =    @"apigw/client/ready/to/repay.jhtml";
 
+//获取续期规则
+NSString * const    _StagingRule_url    =    @"apigw/client/continue/rule/detail";
+
 #pragma mark - 合规接口
 
 //用户开户接口

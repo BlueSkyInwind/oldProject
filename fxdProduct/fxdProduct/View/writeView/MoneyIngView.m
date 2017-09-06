@@ -28,8 +28,7 @@
 //        }
         _agreeMentLabel.textVerticalAlignment = YYTextVerticalAlignmentCenter;
         _agreeMentLabel.numberOfLines = 0;
-        _agreeMentLabel.font = [UIFont systemFontOfSize:18];
-        _agreeMentLabel.textColor = rgb(102, 102, 102);
+        _agreeMentLabel.font = [UIFont systemFontOfSize:12];
         [self.agreeMentView addSubview:_agreeMentLabel];
         [_agreeMentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(_agreeMentView.mas_height);
@@ -45,7 +44,7 @@
 {
     [super layoutSubviews];
     
-    if(UI_IS_IPHONE6P){
+    if(!UI_IS_IPHONE5){
         CGRect rect = _overdueFeeLabel.frame;
         rect.origin.y=rect.origin.y-10;
         _overdueFeeLabel.frame=rect;

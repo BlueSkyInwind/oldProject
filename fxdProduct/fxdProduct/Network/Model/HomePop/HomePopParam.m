@@ -10,6 +10,6 @@
 
 @implementation HomePopParam
 
-@synthesize channel_,plate_,redpacket_from_;
+@synthesize channel,plate_,redpacket_from_;
 
 @end

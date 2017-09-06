@@ -36,4 +36,5 @@
 #import "UserBankCardListViewController.h"
 #import "BankInfoViewModel.h"
 #import "LoanMoneyViewController.h"
+#import "DetailViewController.h"
 #endif /* fxdProduct_Bridging_Header_h */
