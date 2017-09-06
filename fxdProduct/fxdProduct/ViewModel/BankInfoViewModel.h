@@ -18,5 +18,10 @@
 /**
  提交续期请求
  */
--(void)obtainUserCommitstaging:(NSString *)staging cardId:(NSString *)cardId;
+-(void)obtainUserCommitStaging:(NSString *)staging cardId:(NSString *)cardId;
+
+/**
+ 获取续期规则
+ */
+-(void)obtainUserStagingRule;
 @end

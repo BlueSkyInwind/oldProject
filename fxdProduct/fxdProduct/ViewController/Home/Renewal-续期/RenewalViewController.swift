@@ -14,10 +14,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
     let cellId = "CellId"
     var headerView: CurrentInformationHeadView? = nil
     var contentArr : [String] = [String]()
-//    var supportBankListArr : [AnyObject] = [AnyObject]()
     var cardInfo : CardInfo?
-//    var defaultBankIndex: NSInteger?
-//    var userSelectIndex : NSInteger?
     var stagingId : String?
     
     let renewalTableView: UITableView = {
@@ -27,9 +24,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         tableView.showsVerticalScrollIndicator = false
         tableView.isScrollEnabled = false
-        
-        
-//        tableView.backgroundColor = APPColor.shareInstance.homeTableViewColor
+
         return tableView
         
     }()
@@ -41,8 +36,6 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         self.title = "续期费用"
         
         addBackItem()
-//        defaultBankIndex = -1
-//        userSelectIndex = defaultBankIndex
         
         headerView = CurrentInformationHeadView()
         headerView?.moneyDescLabel?.text = "续期费用(元)"
@@ -54,7 +47,8 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         footerView.footerBtn?.setTitle("确认", for: .normal)
         footerView.footerBtnClosure = {
         
-            self.commitStaging()
+//            self.commitStaging()
+            self.getStagingRule()
             print("确认按钮点击")
         }
         renewalTableView.tableFooterView = footerView
@@ -89,7 +83,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
 
     }
     
-    
+    //MARK:获取当前期的续期信息
     func getData(){
     
         let repayMentViewModel = RepayMentViewModel()
@@ -222,6 +216,10 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
             self.navigationController?.pushViewController(userBankCardListVC, animated: true)
            
         }
+        if indexPath.row == 4{
+        
+            getStagingRule()
+        }
     }
 
     func fatchBankList(){
@@ -253,9 +251,8 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
 
     }
     
+    //MARK:提交续期请求
     func commitStaging(){
-
-        
         
         let bankInfoVM = BankInfoViewModel()
         bankInfoVM.setBlockWithReturn({ (returnValue) in
@@ -265,7 +262,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
                 let idVC = self.rt_navigationController?.rt_viewControllers[1] as! LoanMoneyViewController
                 idVC.applicationStatus = .Staging
                 _ = self.navigationController?.popToViewController(idVC, animated: true)
-//                self.navigationController?.popToRootViewController(animated: true)
+
             }else{
             
                 print("================",baseResult.errMsg)
@@ -274,9 +271,34 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         }) { 
             
         }
-        bankInfoVM.obtainUserCommitstaging(stagingId, cardId: self.cardInfo?.cardId)
+        bankInfoVM.obtainUserCommitStaging(stagingId, cardId: self.cardInfo?.cardId)
     }
     
+    //MARK:获取续期规则
+    func getStagingRule(){
+    
+        let bankInfoVM = BankInfoViewModel()
+        bankInfoVM.setBlockWithReturn({ (returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+            
+                let detailVC = DetailViewController()
+//                detailVC.content = p2PContactConM.content;
+                detailVC.navTitle = "续期规则";
+                self.navigationController?.pushViewController(detailVC, animated: true)
+
+                
+            }else{
+                
+                print("================",baseResult.errMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) { 
+            
+        }
+        bankInfoVM.obtainUserStagingRule()
+    }
     //d19296c082164be1af7f4a8e7279b04b
     /*
     // MARK: - Navigation

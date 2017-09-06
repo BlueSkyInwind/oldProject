@@ -151,6 +151,7 @@ UIKIT_EXTERN NSString * const       _BankCardList_url;                       //�
 UIKIT_EXTERN NSString * const       _SalaryProductFee_url;                   //工薪贷根据周期获取费用
 UIKIT_EXTERN NSString * const       _Staging_url;                            //提交续期请求
 UIKIT_EXTERN NSString * const       _Repay_url;                              //待还款界面信息获取
+UIKIT_EXTERN NSString * const       _StagingRule_url;                        //获取续期规则
 
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集

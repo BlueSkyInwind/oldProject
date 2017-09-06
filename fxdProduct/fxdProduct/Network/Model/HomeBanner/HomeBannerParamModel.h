@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic)NSString *position_;
 @property (strong, nonatomic)NSString *plate_;
-@property (strong, nonatomic)NSString *channel_;
+@property (strong, nonatomic)NSString *channel;
 
 
 

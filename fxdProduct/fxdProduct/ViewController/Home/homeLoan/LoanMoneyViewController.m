@@ -8,28 +8,13 @@
 
 #import "LoanMoneyViewController.h"
 #import "MoneyIngView.h"
-#import "RepaymentViewController.h"
-#import "CheckViewController.h"
-#import "ApprovalAmountBaseClass.h"
-#import "RepayListViewController.h"
-#import "Approval.h"
 #import "YYText.h"
 #import "P2PAgreeMentModel.h"
 #import "AgreeMentListViewController.h"
-#import "DataWriteAndRead.h"
-#import "CustomerBaseInfoBaseClass.h"
-#import "GetCustomerBaseViewModel.h"
 #import "DetailViewController.h"
-#import "UserCardResult.h"
-#import "RepayListInfo.h"
-#import "BankModel.h"
-#import "RepayDetailViewController.h"
 #import "RepayRequestManage.h"
 #import "IdeaBackViewController.h"
-#import "GetCaseInfo.h"
-#import "RepayWeeklyRecordViewModel.h"
 #import "LoanMoneyViewModel.h"
-#import "CheckViewModel.h"
 #import "QryUserStatusModel.h"
 #import "RTRootNavigationController.h"
 #import "GetCaseInfo.h"
@@ -40,15 +25,12 @@
 @interface LoanMoneyViewController ()
 {
     MoneyIngView *moenyViewing;
-    Approval *_approvalModel;
     BOOL _isFirst;//好评只弹出一次，再次刷新时，不弹对话框
     RepayModel *_repayModel;
 }
 
-@property (nonatomic, copy)NSString *platform;
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic,strong)GetCaseInfo *caseInfo;
-//@property (nonatomic,strong)ApplicationStatusModel *applicationStatusModel;
 
 @end
 
@@ -182,7 +164,7 @@
  */
 
 #pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(NSString *)applicationID{
+-(void)getUserStatus:(NSString *)applicationID repayModel:(RepayModel *)repayModel{
     
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -193,12 +175,13 @@
             _qryUserStatusModel = qryUserStatusModel;
             if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
                 _applicationStatus  = ComplianceInProcess;
-            }
-            if ([_qryUserStatusModel.result.flg isEqualToString:@"2"]||[_qryUserStatusModel.result.flg isEqualToString:@"6"]) {
-
+                [self updateUI:nil repayModel:nil];
+                return ;
             }
             
-            [self updateUI:nil repayModel:nil];
+            _applicationStatus  = RepaymentNormal;
+            [self updateUI:nil repayModel:repayModel];
+        
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
         }
@@ -457,6 +440,7 @@
                 case 3:
                 case 4:
                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    break;
                 default:
                     break;
             }
@@ -486,7 +470,7 @@
             _applicationStatus = RepaymentNormal;
             _repayModel = [[RepayModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             if ([_repayModel.platformType isEqualToString:@"2"]) {
-                [weakSelf getUserStatus:_repayModel.applyId];
+                [weakSelf getUserStatus:_repayModel.applyId repayModel:_repayModel];
                 return;
             }
             [weakSelf updateUI:nil repayModel:_repayModel];
@@ -520,10 +504,6 @@
             moenyViewing.labelProgress.text = @"放款中";
             moenyViewing.tipLabel.text = @"请注意查收放款短信";
             [self arrivalAndRenewalUI:applicationStatusModel];
-            if (_popAlert&&_isFirst) {
-                    _isFirst = NO;
-                    [self showAlertview];
-                }
             
             break;
         case Repayment:
@@ -547,6 +527,7 @@
             moenyViewing.labelProgress.text = @"续期处理中";
             moenyViewing.labelProgress.font = [UIFont systemFontOfSize:34];
             moenyViewing.tipLabel.text = @"续期处理中，请稍等";
+            moenyViewing.statusBottomView.hidden = YES;
             [self arrivalAndRenewalUI:applicationStatusModel];
             
             break;
@@ -555,6 +536,10 @@
             [self repayUI:repayModel];
             [self fxdStatus];
             moenyViewing.statusBottomView.hidden = YES;
+            if (_popAlert&&_isFirst) {
+                _isFirst = NO;
+                [self showAlertview];
+            }
             break;
             
         case ComplianceInProcess:
