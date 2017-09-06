@@ -697,26 +697,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     [self.navigationController pushViewController:p2pVC animated:YES];
 }
 
-
-#pragma mark 发标前查询进件
--(void)getFxdCaseInfo{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
-        if ([caseInfo.flag isEqualToString:@"0000"]) {
-            
-            [self save:caseInfo];
-            
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel getFXDCaseInfo];
-}
-
-
 #pragma mark 提款申请件记录
 -(void)save:(GetCaseInfo *)caseInfo{
     
@@ -726,12 +706,11 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         SaveLoanCaseModel *model = [SaveLoanCaseModel yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
             [self openAccount];
-            
         }
     } WithFaileBlock:^{
         
     }];
-    [complianceViewModel saveLoanCase:@"20" CaseInfo:caseInfo Period:[NSString stringWithFormat:@"%ld",_periodSelect] PurposeSelect:_purposeSelect];
+    [complianceViewModel saveLoanCase:@"20" ApplicationID:_drawingsInfoModel.applicationId Period:[NSString stringWithFormat:@"%ld",_periodSelect] PurposeSelect:_purposeSelect];
     
 }
 

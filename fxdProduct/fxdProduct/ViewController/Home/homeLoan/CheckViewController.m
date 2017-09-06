@@ -369,6 +369,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:checkSuccess.loadMoney.text];
     [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:30] range:NSMakeRange(0, 1)];
     [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange([checkSuccess.loadMoney.text length]-1, 1)];
+    if (UI_IS_IPHONE5) {
+        [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:20] range:NSMakeRange(0, 1)];
+        [att addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:10] range:NSMakeRange([checkSuccess.loadMoney.text length]-1, 1)];
+    }
     checkSuccess.loadMoney.attributedText = att;
     
     //移除 收款方式 的视图
@@ -383,6 +387,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     if (UI_IS_IPHONE5) {
         [checkSuccess.bottomBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@40);
+            make.top.equalTo(checkSuccess.userCheckView.mas_bottom).offset(0);
         }];
     }
     
@@ -400,8 +405,14 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         [checkSuccess.sureBtn layoutIfNeeded];
         [checkSuccess.sureBtn updateConstraints];
     }
+    
     [self withdrawalsViewAgreement:drawingsInfo];
     
+    //协议点击
+    __weak typeof (self) weakSelf = self;
+    checkSuccess.agreementStatus = ^(UIButton *button) {
+        [weakSelf productIsDrawingsStatus];
+    };
 }
 //提款协议
 -(void)withdrawalsViewAgreement:(DrawingsInfoModel *) drawingsInfo{
@@ -460,7 +471,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [btn setImage:img forState:UIControlStateNormal];
     btn.frame = CGRectMake(0, 0, 45, 44);
     [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
     //    修改距离,距离边缘的
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = -15;
@@ -651,11 +662,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     if ([_qryUserStatusModel.result.flg isEqualToString:@"2"]) {//未开户
         
-        [self saveLoanCase:@"20" caseInfo:_caseInfo];
+        [self saveLoanCase:@"20"];
         
     }else if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]){//待激活
         
-        [self saveLoanCase:@"10" caseInfo:_caseInfo];
+        [self saveLoanCase:@"10"];
         
     }else if ([_qryUserStatusModel.result.flg isEqualToString:@"6"]){//正常用户
         //选择银行卡
@@ -663,7 +674,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }else if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]){
     
         LoanMoneyViewController *controller = [LoanMoneyViewController new];
-        controller.userStateModel = _userStateModel;
+        controller.applicationStatus = ComplianceInProcess;
         controller.qryUserStatusModel = _qryUserStatusModel;
         controller.popAlert = true;
         [self.navigationController pushViewController:controller animated:YES];
@@ -815,28 +826,35 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             checkSuccess.allMoney.text = @"0元";
         }
     }
+    [self productIsDrawingsStatus];
+}
+
+/**
+ 提款按钮颜色
+ */
+-(void)productIsDrawingsStatus{
+    BOOL result = false;
     if ([_drawingsInfoModel.productId isEqualToString:SalaryLoan]||[_drawingsInfoModel.productId isEqualToString:WhiteCollarLoan]) {
         if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
-            if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]) {
-                checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
-                return;
+            if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"] && checkSuccess.userCheckBtnState) {
+                result = true;
             }
-            checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
         }else{
-            if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]&&_isBankCard == true) {
-                checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
-                return;
+            if (![_userSelectNum isEqual:@0]&&![_purposeSelect isEqualToString:@"0"]&&_isBankCard == true && checkSuccess.userCheckBtnState) {
+                result = true;
             }
-            checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
         }
     }else if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan]){
-        if (![_purposeSelect isEqualToString:@"0"] && _isBankCard == true) {
-            checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
-            return;
+        if (![_purposeSelect isEqualToString:@"0"] && _isBankCard == true && checkSuccess.userCheckBtnState) {
+            result = true;
         }
-        checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
+    }    if (result) {
+        checkSuccess.sureBtn.backgroundColor = UI_MAIN_COLOR;
+        return;
     }
+    checkSuccess.sureBtn.backgroundColor = rgb(158, 158, 159);
 }
+
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
 {
@@ -1085,7 +1103,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"protocol_type_":@"7",
                      @"periods_":@2};
     }
-    
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
@@ -1214,7 +1231,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 
 #pragma mark 提款申请件记录
--(void)saveLoanCase:(NSString *)type caseInfo:(GetCaseInfo *)caseInfo{
+-(void)saveLoanCase:(NSString *)type{
 
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -1244,7 +1261,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     } WithFaileBlock:^{
         
     }];
-    [complianceViewModel saveLoanCase:type CaseInfo:caseInfo Period:_userSelectNum.description PurposeSelect:_purposeSelect];
+    [complianceViewModel saveLoanCase:type ApplicationID:_drawingsInfoModel.applicationId Period:_userSelectNum.description PurposeSelect:_purposeSelect];
 }
 
 #pragma mark 获取银行卡列表信息
@@ -1296,7 +1313,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         payVC.banNum = [bank substringFromIndex:bank.length-4];
         payVC.makesureBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){
             [self dismissSemiModalViewWithCompletion:^{
-                [self saveLoanCase:@"30" caseInfo:_caseInfo];
+                [self saveLoanCase:@"30"];
             }];
         };
         payVC.changeBankBlock = ^(){

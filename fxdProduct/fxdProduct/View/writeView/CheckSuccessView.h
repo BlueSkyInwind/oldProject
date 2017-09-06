@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "YYText.h"
 
+typedef void(^AgreementClickStatus)(UIButton * button);
+
 @interface CheckSuccessView : UIView
 
 - (id)initWithFrame:(CGRect)frame;
@@ -82,5 +84,7 @@
 @property (weak, nonatomic) IBOutlet UIView *jsdDescView;
 @property (weak, nonatomic) IBOutlet UILabel *termLabel;
 @property (weak, nonatomic) IBOutlet UILabel *jsdMonayLabel;
+
+@property (copy,nonatomic)AgreementClickStatus agreementStatus;
 
 @end

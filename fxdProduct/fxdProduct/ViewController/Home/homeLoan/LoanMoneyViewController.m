@@ -675,8 +675,6 @@
 #pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
 -(void)getApplicationStatus{
 
-    
-    
     __weak typeof (self) weakSelf = self;
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {

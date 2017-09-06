@@ -11,8 +11,6 @@
 #import "QryUserStatusModel.h"
 #import "GetCaseInfo.h"
 
-
-
 @interface CheckViewController : BaseViewController
 //状态
 @property (nonatomic, strong) NSString *task_status;

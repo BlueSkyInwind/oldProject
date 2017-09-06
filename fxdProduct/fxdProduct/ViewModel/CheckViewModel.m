@@ -79,10 +79,10 @@
     }];
 }
 
--(void)saveLoanCase:(NSString *)type CaseInfo:(GetCaseInfo *)caseInfo Period:(NSString *)period PurposeSelect:(NSString *)purposeSelect{
+-(void)saveLoanCase:(NSString *)type ApplicationID:(NSString *)applicationId Period:(NSString *)period PurposeSelect:(NSString *)purposeSelect{
 
     SaveLoanCaseParamModel * saveLoanCaseParamModel = [[SaveLoanCaseParamModel alloc]init];
-    saveLoanCaseParamModel.case_id_ = caseInfo.result.from_case_id_;
+    saveLoanCaseParamModel.case_id_ = applicationId;
     saveLoanCaseParamModel.type_ = type;
     saveLoanCaseParamModel.client_ = @"1";
     saveLoanCaseParamModel.description_ = purposeSelect;
