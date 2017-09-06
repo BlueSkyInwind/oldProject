@@ -108,17 +108,12 @@
     self.title = @"支付详情";
     self.automaticallyAdjustsScrollViewInsets=NO;
     defaultBankIndex = -1;
-    userSelectIndex = defaultBankIndex;
+    userSelectIndex = 0;
     _useTotalAmount = 0.0;
     _selectRedPacket = 0.0;
     _useredPacketAmount = 0.0;
     _canUseReadPacket = false;
-    //    if ([_product_id isEqualToString:@"P001002"]) {
-    //        _finalyRepayAmount = _repayAmount;
-    //    }
-    //    if ([_product_id isEqualToString:@"P001004"]) {
-    //        _finalyRepayAmount = _repayAmount + _repayListInfo.result.overdue_total_;
-    //    }
+
     _finalyRepayAmount = _repayAmount;
     
     navBarHairlineImageView= [self findHairlineImageViewUnder:self.navigationController.navigationBar];
