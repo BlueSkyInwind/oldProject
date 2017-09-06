@@ -377,7 +377,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     //移除 收款方式 的视图
     if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
-        [checkSuccess.bankView removeFromSuperview];
+//        [checkSuccess.bankView removeFromSuperview];
+        [checkSuccess.bankView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@0);
+        }];
     }
     
     //提款按钮处理事件
