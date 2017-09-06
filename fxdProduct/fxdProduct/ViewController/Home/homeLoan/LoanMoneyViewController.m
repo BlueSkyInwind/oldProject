@@ -163,34 +163,34 @@
  }
  */
 
-#pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(NSString *)applicationID repayModel:(RepayModel *)repayModel{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        QryUserStatusModel *qryUserStatusModel = [QryUserStatusModel yy_modelWithJSON:returnValue];
-        if ([qryUserStatusModel.flag isEqualToString:@"0000"]) {
-            
-            _qryUserStatusModel = qryUserStatusModel;
-            if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
-                _applicationStatus  = ComplianceInProcess;
-                [self updateUI:nil repayModel:nil];
-                return ;
-            }
-            
-            _applicationStatus  = RepaymentNormal;
-            [self updateUI:nil repayModel:repayModel];
-        
-        }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    
-    [complianceViewModel getUserStatus:applicationID];
-}
+//#pragma mark  fxd用户状态查询，viewmodel
+//-(void)getUserStatus:(NSString *)applicationID repayModel:(RepayModel *)repayModel{
+//    
+//    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
+//    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
+//        
+//        QryUserStatusModel *qryUserStatusModel = [QryUserStatusModel yy_modelWithJSON:returnValue];
+//        if ([qryUserStatusModel.flag isEqualToString:@"0000"]) {
+//            
+//            _qryUserStatusModel = qryUserStatusModel;
+//            if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
+//                _applicationStatus  = ComplianceInProcess;
+//                [self updateUI:nil repayModel:nil];
+//                return ;
+//            }
+//            
+//            _applicationStatus  = RepaymentNormal;
+//            [self updateUI:nil repayModel:repayModel];
+//        
+//        }else{
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
+//        }
+//    } WithFaileBlock:^{
+//        
+//    }];
+//    
+//    [complianceViewModel getUserStatus:applicationID];
+//}
 
 #pragma mark 请求银行卡列表信息
 
@@ -431,12 +431,48 @@
         if ([baseResultM.errCode isEqualToString:@"0"]){
             
             ApplicationStatusModel *applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            
+            if ([applicationStatusModel.platformType isEqualToString:@"2"]) {
+                if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]) {
+                    _applicationStatus = ComplianceInProcess;
+                    [weakSelf updateUI:applicationStatusModel repayModel:nil];
+                    return ;
+                }
+                if ([applicationStatusModel.userStatus isEqualToString:@"2"]||[applicationStatusModel.userStatus isEqualToString:@"3"]) {
+                    
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    return;
+                }
+//                if ([applicationStatusModel.userStatus isEqualToString:@"6"]) {
+//                    
+//                    switch (applicationStatusModel.status.integerValue) {
+//                        case 1:
+//                            
+//                            [weakSelf updateUI:applicationStatusModel repayModel:nil];
+//                            break;
+//                        case 2:
+//                            _applicationStatus = RepaymentNormal;
+//                            [weakSelf updateUI:applicationStatusModel repayModel:nil];
+//                            break;
+//                        case 3:
+//                        case 4:
+//                            [self.navigationController popToRootViewControllerAnimated:YES];
+//                            break;
+//                        default:
+//                            break;
+//                    }
+//                }
+//                return;
+            }
             switch (applicationStatusModel.status.integerValue) {
                 case 1:
+                    
                     [weakSelf updateUI:applicationStatusModel repayModel:nil];
                     break;
                 case 2:
+                    _applicationStatus = RepaymentNormal;
+                    [self getRepayInfo];
+                    break;
                 case 3:
                 case 4:
                    [self.navigationController popToRootViewControllerAnimated:YES];
@@ -469,10 +505,11 @@
             
             _applicationStatus = RepaymentNormal;
             _repayModel = [[RepayModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            if ([_repayModel.platformType isEqualToString:@"2"]) {
-                [weakSelf getUserStatus:_repayModel.applyId repayModel:_repayModel];
-                return;
-            }
+//            if ([_repayModel.platformType isEqualToString:@"2"]) {
+//                [weakSelf getUserStatus:_repayModel.applyId repayModel:_repayModel];
+//                return;
+//            }
+            
             [weakSelf updateUI:nil repayModel:_repayModel];
         }else{
         
@@ -487,7 +524,6 @@
 
 #pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
 -(void)updateUI:(ApplicationStatusModel *)applicationStatusModel repayModel:(RepayModel *)repayModel{
-    
     
     moenyViewing.repayBtnView.hidden = YES;
     moenyViewing.moneyImage.hidden = NO;

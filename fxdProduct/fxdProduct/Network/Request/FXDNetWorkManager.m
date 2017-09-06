@@ -692,9 +692,10 @@
                     [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
 //                    [manager.requestSerializer setValue:@"a0334e081d734935a3762d103f3aec3b" forHTTPHeaderField:@"juid"];
                      DLog(@"juid --- %@\n ",[Utility sharedUtility].userInfo.juid);
-                    [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
                 }
             }
+            [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
+
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/xml",@"text/html",@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"charset=UTF-8", nil];
             
             manager.requestSerializer.timeoutInterval = 30.0;
