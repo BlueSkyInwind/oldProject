@@ -77,6 +77,9 @@
 
 - (IBAction)userCheck:(UIButton *)sender {
     _userCheckBtn.selected = !_userCheckBtn.selected;
+    if (self.agreementStatus) {
+        self.agreementStatus(sender);
+    }
 }
 
 
