@@ -75,11 +75,10 @@
     moenyViewing.statusBottomView.hidden = YES;
     [self.view addSubview:moenyViewing];
 
-    [Tool setCorner:moenyViewing.sureBtn borderColor:rgb(158, 158, 159)];
+    [Tool setCorner:moenyViewing.sureBtn borderColor:UI_MAIN_COLOR];
     moenyViewing.stagingView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(stagingBtnClick)];
     [moenyViewing.stagingView addGestureRecognizer:tap];
-    moenyViewing.sureBtn.enabled = NO;
     [moenyViewing.stagingBtn addTarget:self action:@selector(stagingBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [moenyViewing.agreementBtn addTarget:self action:@selector(agreementBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -105,19 +104,20 @@
 #pragma mark 协议勾选按钮
 -(void)agreementBtnClick:(UIButton *)btn{
 
-    btn.selected = !btn.selected;
     if (moenyViewing.agreementBtn.selected) {
         moenyViewing.sureBtn.enabled = YES;
         [Tool setCorner:moenyViewing.sureBtn borderColor:UI_MAIN_COLOR];
         moenyViewing.sureBtn.backgroundColor = UI_MAIN_COLOR;
-        [moenyViewing.agreementBtn setBackgroundImage:[UIImage imageNamed:@"Sign-in-icon06"] forState:UIControlStateNormal];
+        [moenyViewing.agreementBtn setImage:[UIImage imageNamed:@"Sign-in-icon06"] forState:UIControlStateNormal];
+
     }else{
     
         moenyViewing.sureBtn.enabled = NO;
         [Tool setCorner:moenyViewing.sureBtn borderColor:rgb(158, 158, 159)];
         moenyViewing.sureBtn.backgroundColor = rgb(158, 158, 159);
-        [moenyViewing.agreementBtn setBackgroundImage:[UIImage imageNamed:@"Sign-in-icon05"] forState:UIControlStateNormal];
+        [moenyViewing.agreementBtn setImage:[UIImage imageNamed:@"Sign-in-icon05"] forState:UIControlStateNormal];
     }
+    btn.selected = !btn.selected;
 }
 
 #pragma mark 下拉刷新
@@ -264,7 +264,7 @@
                 _applicationStatus  = ComplianceInProcess;
             }
             if ([_qryUserStatusModel.result.flg isEqualToString:@"2"]||[_qryUserStatusModel.result.flg isEqualToString:@"6"]) {
-                _applicationStatus = ComplianceNotActive;
+
             }
             
             [self updateUI:nil repayModel:nil];
@@ -620,9 +620,7 @@
             repayRequest.applicationId = _repayModel.applyId;
             [repayRequest repayRequest];
         }
-//    }else{
-//        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请勾选协议"];
-//    }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -660,12 +658,7 @@
         case ComplianceInProcess:
             return @"处理中";
             break;
-        case ComplianceNotActive:
-            return @"待还款";
-            break;
-        case Assessment:
-            return @"测评中";
-            break;
+
         default:
             break;
     }
@@ -796,21 +789,7 @@
             moenyViewing.repayBtnView.hidden = YES;
             
             break;
-        case ComplianceNotActive:
-            
-            
-            break;
-        case Assessment:
-            
-            moenyViewing.labelProgress.text = @"资料测评中";
-            moenyViewing.tipImage.hidden = YES;
-            moenyViewing.tipLabel.hidden = YES;
-            moenyViewing.middleView.hidden = YES;
-            moenyViewing.repayBtnView.hidden = YES;
-            moenyViewing.promptLabel.hidden = NO;
-            moenyViewing.promptLabel.text = @"资料测评中，大约需要3分钟";
-            
-            break;
+
         default:
             break;
     }

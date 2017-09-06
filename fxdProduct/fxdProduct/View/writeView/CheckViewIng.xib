@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -83,53 +82,21 @@
                             <color key="textColor" red="0.0" green="0.66666666669999997" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30万大病保障,100万人共同之选" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uuf-TD-drI">
-                            <rect key="frame" x="0.0" y="35" width="375" height="16"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="16" id="KkQ-4b-gHy"/>
-                                <constraint firstAttribute="width" constant="375" id="uZS-wP-VGr"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" red="1" green="0.62745098039215685" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homeLoan" translatesAutoresizingMaskIntoConstraints="NO" id="jFI-Ci-cl9">
-                            <rect key="frame" x="68" y="59" width="240" height="46"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="46" id="NZi-V0-lfm"/>
-                                <constraint firstAttribute="width" constant="240" id="OAT-Sy-Hhi"/>
-                            </constraints>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgq-sV-53l">
-                            <rect key="frame" x="68" y="59" width="240" height="46"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="46" id="19G-F7-5H9"/>
-                                <constraint firstAttribute="width" constant="240" id="fhm-WY-ybl"/>
-                            </constraints>
-                            <state key="normal" image="homeLoan"/>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="Uuf-TD-drI" firstAttribute="top" secondItem="cvG-AG-GZm" secondAttribute="top" constant="35" id="02d-j0-msm"/>
-                        <constraint firstItem="bgq-sV-53l" firstAttribute="top" secondItem="Uuf-TD-drI" secondAttribute="bottom" constant="8" id="6zq-89-Ysu"/>
                         <constraint firstAttribute="bottom" secondItem="HYg-ho-YB8" secondAttribute="bottom" constant="38" id="9hX-j2-ZQA"/>
                         <constraint firstItem="G7M-gi-eyU" firstAttribute="leading" secondItem="Bov-7b-71v" secondAttribute="trailing" constant="3" id="CEr-te-pBh"/>
-                        <constraint firstItem="bgq-sV-53l" firstAttribute="centerX" secondItem="cvG-AG-GZm" secondAttribute="centerX" id="CmQ-CB-UFx"/>
                         <constraint firstItem="Bov-7b-71v" firstAttribute="leading" secondItem="9O9-vO-kFQ" secondAttribute="trailing" constant="21" id="DCi-1C-tUR"/>
                         <constraint firstItem="HYg-ho-YB8" firstAttribute="leading" secondItem="5nQ-s7-MC6" secondAttribute="trailing" constant="3" id="GTF-jT-LwL"/>
-                        <constraint firstItem="Uuf-TD-drI" firstAttribute="leading" secondItem="cvG-AG-GZm" secondAttribute="leading" id="Hyi-iL-wbP"/>
-                        <constraint firstItem="jFI-Ci-cl9" firstAttribute="centerX" secondItem="cvG-AG-GZm" secondAttribute="centerX" id="PWs-8Y-Yhg"/>
                         <constraint firstItem="9O9-vO-kFQ" firstAttribute="leading" secondItem="HYg-ho-YB8" secondAttribute="trailing" id="PZk-wT-SOh"/>
                         <constraint firstAttribute="bottom" secondItem="pNb-gn-1T0" secondAttribute="bottom" constant="40" id="Pzw-cF-MI4"/>
                         <constraint firstAttribute="bottom" secondItem="pM1-w3-dT7" secondAttribute="bottom" constant="35" id="UGJ-T3-Iad"/>
                         <constraint firstItem="pNb-gn-1T0" firstAttribute="leading" secondItem="PiD-D3-GPS" secondAttribute="trailing" constant="1" id="Vy6-Th-WAd"/>
-                        <constraint firstAttribute="trailing" secondItem="Uuf-TD-drI" secondAttribute="trailing" id="XiW-wq-U9C"/>
                         <constraint firstAttribute="bottom" secondItem="Bov-7b-71v" secondAttribute="bottom" constant="35" id="ZtE-YW-wup"/>
                         <constraint firstItem="PiD-D3-GPS" firstAttribute="leading" secondItem="pM1-w3-dT7" secondAttribute="trailing" constant="2" id="bXI-iW-jKC"/>
                         <constraint firstItem="HYg-ho-YB8" firstAttribute="centerX" secondItem="cvG-AG-GZm" secondAttribute="centerX" constant="10" id="epi-mt-sI5"/>
                         <constraint firstAttribute="bottom" secondItem="G7M-gi-eyU" secondAttribute="bottom" constant="37" id="lmf-AP-OKb"/>
-                        <constraint firstItem="jFI-Ci-cl9" firstAttribute="top" secondItem="Uuf-TD-drI" secondAttribute="bottom" constant="8" id="lxX-d9-8M1"/>
                         <constraint firstAttribute="bottom" secondItem="9O9-vO-kFQ" secondAttribute="bottom" constant="40" id="nmP-jn-fkd"/>
                         <constraint firstAttribute="bottom" secondItem="5nQ-s7-MC6" secondAttribute="bottom" constant="35" id="oJU-FK-Yy6"/>
                         <constraint firstItem="5nQ-s7-MC6" firstAttribute="leading" secondItem="pNb-gn-1T0" secondAttribute="trailing" constant="21" id="u7I-rV-deA"/>
@@ -139,22 +106,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKe-Bu-PLW" userLabel="View20">
                     <rect key="frame" x="0.0" y="64" width="375" height="376.5"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的资料正在审核，请耐心等待" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XH2-Pf-nq0">
-                            <rect key="frame" x="0.0" y="304.5" width="375" height="32"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="32" id="6wC-tr-ImU"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2_home_yuan" translatesAutoresizingMaskIntoConstraints="NO" id="dEL-A0-6bT">
                             <rect key="frame" x="86" y="66.5" width="204" height="204"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="审核中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1as-LT-XQ8">
-                            <rect key="frame" x="132" y="146.5" width="111" height="45"/>
+                            <rect key="frame" x="97.5" y="146.5" width="180" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="111" id="RO3-1b-L6Y"/>
+                                <constraint firstAttribute="width" constant="180" id="RO3-1b-L6Y"/>
                                 <constraint firstAttribute="height" constant="45" id="l5S-Lm-gLL"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="36"/>
@@ -162,26 +120,23 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关注公众号“急速发薪”，随时查看借款进度" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JjI-ke-mdH">
-                            <rect key="frame" x="0.0" y="344.5" width="375" height="21"/>
+                            <rect key="frame" x="0.0" y="314.5" width="375" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="ANU-Mz-JMG"/>
                                 <constraint firstAttribute="width" constant="375" id="KaV-H9-ksr"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="JjI-ke-mdH" firstAttribute="top" secondItem="XH2-Pf-nq0" secondAttribute="bottom" constant="8" id="EwG-XY-Xqh"/>
+                        <constraint firstItem="JjI-ke-mdH" firstAttribute="top" secondItem="dEL-A0-6bT" secondAttribute="bottom" constant="44" id="ODQ-wp-5lR"/>
                         <constraint firstItem="1as-LT-XQ8" firstAttribute="centerY" secondItem="nKe-Bu-PLW" secondAttribute="centerY" constant="-20" id="RMg-BE-WLc"/>
-                        <constraint firstAttribute="trailing" secondItem="XH2-Pf-nq0" secondAttribute="trailing" id="VT5-QY-pHF"/>
                         <constraint firstAttribute="trailing" secondItem="JjI-ke-mdH" secondAttribute="trailing" id="YVd-kh-7ny"/>
                         <constraint firstItem="dEL-A0-6bT" firstAttribute="centerX" secondItem="nKe-Bu-PLW" secondAttribute="centerX" id="cnl-e9-fRG"/>
                         <constraint firstItem="dEL-A0-6bT" firstAttribute="centerY" secondItem="nKe-Bu-PLW" secondAttribute="centerY" constant="-20" id="ieW-fG-I6m"/>
-                        <constraint firstItem="XH2-Pf-nq0" firstAttribute="leading" secondItem="nKe-Bu-PLW" secondAttribute="leading" id="lGb-P4-8PL"/>
-                        <constraint firstAttribute="bottom" secondItem="XH2-Pf-nq0" secondAttribute="bottom" constant="40" id="sag-BB-qc4"/>
                         <constraint firstItem="1as-LT-XQ8" firstAttribute="centerX" secondItem="nKe-Bu-PLW" secondAttribute="centerX" id="t4P-Qd-ZnD"/>
                         <constraint firstItem="JjI-ke-mdH" firstAttribute="leading" secondItem="nKe-Bu-PLW" secondAttribute="leading" id="w3p-cD-39V"/>
                     </constraints>
@@ -207,8 +162,6 @@
                 </mask>
             </variation>
             <connections>
-                <outlet property="ReceiveImmediatelyImage" destination="jFI-Ci-cl9" id="jcY-c7-Swq"/>
-                <outlet property="receiveImmediatelyBtn" destination="bgq-sV-53l" id="skY-7F-8bw"/>
                 <outlet property="statusLabel" destination="1as-LT-XQ8" id="PRc-mf-GEj"/>
             </connections>
             <point key="canvasLocation" x="294" y="368"/>
@@ -220,6 +173,5 @@
         <image name="3_lc_icon_05_03" width="15" height="15"/>
         <image name="5_shenhe_icon_01" width="20" height="20"/>
         <image name="5_shenhe_icon_02" width="20" height="20"/>
-        <image name="homeLoan" width="240" height="46"/>
     </resources>
 </document>
