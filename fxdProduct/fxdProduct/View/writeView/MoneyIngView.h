@@ -52,5 +52,6 @@
 @property (weak, nonatomic) IBOutlet UIView *stagingView;
 @property (weak, nonatomic) IBOutlet UIImageView *tipImage;
 @property (weak, nonatomic) IBOutlet UILabel *promptLabel;
+@property (weak, nonatomic) IBOutlet UIView *statusBottomView;
 
 @end
