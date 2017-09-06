@@ -40,11 +40,7 @@
 @interface LoanMoneyViewController ()
 {
     MoneyIngView *moenyViewing;
-//    UserStateModel *model;
-//    CustomerBaseInfoBaseClass *_customerBase;
     Approval *_approvalModel;
-//    NSString *_cardNo;
-//    NSString *_cardBank;
     BOOL _isFirst;//好评只弹出一次，再次刷新时，不弹对话框
     RepayModel *_repayModel;
 }
@@ -52,8 +48,7 @@
 @property (nonatomic, copy)NSString *platform;
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic,strong)GetCaseInfo *caseInfo;
-@property (nonatomic,strong)ApplicationStatusModel *applicationStatusModel;
-
+//@property (nonatomic,strong)ApplicationStatusModel *applicationStatusModel;
 
 @end
 
@@ -186,70 +181,6 @@
  }
  */
 
-//-(void)checkStatus
-//{
-//    HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
-//    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
-//        
-//        if([returnValue[@"flag"] isEqualToString:@"0000"])
-//        {
-//            model=[UserStateModel yy_modelWithJSON:returnValue[@"result"]];
-//            _userStateModel = model;
-//            [self postUrlMessageandDictionary];
-//            //            [model setValuesForKeysWithDictionary:returnValue[@"result"]];
-//            _platform = model.platform_type;
-//            switch ([model.applyStatus integerValue]) {
-//                    
-//                case 5://放款中
-//                case 4://待放款
-//                {
-//                    _intStautes = [model.applyStatus integerValue];
-//                    [self createUIWith];
-//                }
-//                    break;
-//                case 6://拒绝放款
-//                {
-//                    CheckViewController *checkVC = [CheckViewController new];
-//                    checkVC.homeStatues = [model.applyStatus integerValue];
-//                    [self.navigationController pushViewController:checkVC animated:YES];
-//                }   break;
-//                case 13://已结清
-//                case 12://提前结清
-//                case 11://已记坏账
-//                case 10://委外催收
-//                case 9://内部催收
-//                case 8://逾期
-//                case 7:
-//                case 16: //还款中
-//                {
-//                    _intStautes = [model.applyStatus integerValue];
-//                    [self createUIWith];
-//
-//                }
-//                    break;
-//                case 15:
-//                    
-//                    _intStautes = [model.applyStatus integerValue];
-//                    [self createUIWith];
-//
-//                    break;
-//                default:
-//
-//                    [self.navigationController popToRootViewControllerAnimated:YES];
-//
-//                    break;
-//            }
-//        }
-//        else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
-//        }
-//    } WithFaileBlock:^{
-//        
-//    }];
-//    [homeViewModel fetchUserState:_userStateModel.product_id];
-//    
-//}
-
 #pragma mark  fxd用户状态查询，viewmodel
 -(void)getUserStatus:(NSString *)applicationID{
     
@@ -293,9 +224,7 @@
                 NSDictionary *dic = array[i];
                 CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
                 if ([cardInfo.cardType isEqualToString:@"2"]) {
-                    
-//                    _cardNo = cardInfo.cardNo;
-//                    _cardBank = cardInfo.bankName;
+
                     finish(cardInfo);
                     break;
                 }
@@ -308,167 +237,6 @@
     [bankInfoVM obtainUserBankCardList];
     
 }
-
-//-(void)postUrlMessageandDictionary{
-//    //请求银行卡列表信息
-//    
-//    RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
-//    [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
-//        UserCardResult *_userCardModel =[UserCardResult yy_modelWithJSON:returnValue];
-//        if([_userCardModel.flag isEqualToString:@"0000"]){
-//            for(NSInteger j=0;j<_userCardModel.result.count;j++)
-//            {
-//                CardResult *cardResult = _userCardModel.result[0];
-//                if([cardResult.card_type_ isEqualToString:@"2"])
-//                {
-//                    _cardNo = cardResult.card_no_;
-//                    _cardBank = cardResult.card_bank_;
-//                    break;
-//                }
-//            }
-//        }
-//    } WithFaileBlock:^{
-//        
-//    }];
-//    [repayWeeklyRecordViewModel bankCardList];
-//
-//}
-
-//- (void)getUserInfoData:(void(^)())completion
-//{
-//    DLog(@"%@",[Utility sharedUtility].userInfo.account_id);
-//    //    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-//    id data = [DataWriteAndRead readDataWithkey:UserInfomation];
-//    if (data) {
-//        DLog(@"%@",data);
-//        _customerBase = data;
-//        if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-//            [Utility sharedUtility].userInfo.account_id = _customerBase.result.createBy;
-//        }
-//        [Utility sharedUtility].userInfo.userIDNumber = _customerBase.result.idCode;
-//        [Utility sharedUtility].userInfo.userMobilePhone = _customerBase.ext.mobilePhone;
-//        [Utility sharedUtility].userInfo.realName = _customerBase.result.customerName;
-//    } else {
-//        if ([Utility sharedUtility].loginFlage) {
-//            GetCustomerBaseViewModel *customBaseViewModel = [[GetCustomerBaseViewModel alloc] init];
-//            [customBaseViewModel setBlockWithReturnBlock:^(id returnValue) {
-//                _customerBase = returnValue;
-//                if ([_customerBase.flag isEqualToString:@"0000"]) {
-//                    [DataWriteAndRead writeDataWithkey:UserInfomation value:_customerBase];
-//                    [Utility sharedUtility].userInfo.userIDNumber = _customerBase.result.idCode;
-//                    [Utility sharedUtility].userInfo.userMobilePhone = _customerBase.ext.mobilePhone;
-//                    [Utility sharedUtility].userInfo.realName = _customerBase.result.customerName;
-//                    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-//                        [Utility sharedUtility].userInfo.account_id = _customerBase.result.createBy;
-//                    }
-//                }
-//            } WithFaileBlock:^{
-//                
-//            }];
-//            [customBaseViewModel fatchCustomBaseInfo:nil];
-//        }
-//    }
-//    completion();
-//}
-
-//-(void)createUIWith
-//{
-//
-//    moenyViewing.moneyImage.hidden = NO;
-//    
-//    switch (_intStautes) {
-//            
-//        case 4://待放款
-//        case 5://放款中
-//        {
-////            moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-////            moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-////            [self.view addSubview:moenyViewing];
-//            moenyViewing.sureBtn.hidden = YES;
-//            moenyViewing.labelProgress.text = @"到账中";
-//            moenyViewing.labelDetail.text = @"请注意查收到账短信";
-//            moenyViewing.lableData.hidden = YES;
-//            moenyViewing.sureBtn.hidden = YES;
-//            moenyViewing.middleView.hidden = NO;
-//            if (_popAlert&&_isFirst) {
-//                _isFirst = NO;
-//                [self showAlertview];
-//            }
-//        }
-//            break;
-//        case 13://已结清
-//        case 12://提前结清
-//        case 11://已记坏账
-//        case 10://委外催收
-//        case 9://内部催收
-//        case 8://逾期
-//        case 7://放款成功
-//        case 16://还款中
-//        {
-//            
-//            if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
-//                
-////                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-////                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-////                [self.view addSubview:moenyViewing];
-//                moenyViewing.sureBtn.hidden = YES;
-//                moenyViewing.labelProgress.text = @"处理中";
-//                moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-//                moenyViewing.lableData.hidden = YES;
-//                moenyViewing.sureBtn.hidden = YES;
-//                moenyViewing.middleView.hidden = YES;
-//                
-//            }else{
-//            
-//                [self fxdStatus];
-//            }
-//            
-//        }
-//            break;
-//            
-//        case 15:
-//            
-//            if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
-//                
-////                moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
-////                moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
-////                [self.view addSubview:moenyViewing];
-//                moenyViewing.sureBtn.hidden = YES;
-//                moenyViewing.labelProgress.text = @"处理中";
-//                moenyViewing.labelDetail.text = @"正在处理，请耐心等待";
-//                moenyViewing.lableData.hidden = YES;
-//                moenyViewing.sureBtn.hidden = YES;
-//                moenyViewing.middleView.hidden = YES;
-//                
-//            }
-//            if ([_qryUserStatusModel.result.flg isEqualToString:@"2"]||[_qryUserStatusModel.result.flg isEqualToString:@"6"]) {
-//                
-//                BOOL isHave = NO;
-//                CheckViewController *controller;
-//                for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
-//                    if ([vc isKindOfClass:[CheckViewController class]]) {
-//                        controller = (CheckViewController *)vc;
-//                        isHave = YES;
-//                    }
-//                }
-//                
-//                if (isHave) {
-//                    [self.navigationController popToViewController:controller animated:YES];
-//                }else{
-//                    
-//                    controller = [CheckViewController new];
-//                    [self.navigationController pushViewController:controller animated:YES];
-//                }
-//            }
-//
-//            break;
-//        default:
-//            [self.navigationController popToRootViewControllerAnimated:YES];
-//            break;
-//    }
-//
-//    [self PostGetCheckMoney];
-//}
 
 #pragma mark 获取协议
 -(void)fxdStatus{
@@ -677,10 +445,12 @@
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
             [weakSelf.scrollView.mj_header endRefreshing];
-            weakSelf.applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            switch (weakSelf.applicationStatusModel.status.integerValue) {
+            
+            ApplicationStatusModel *applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            switch (applicationStatusModel.status.integerValue) {
                 case 1:
-                    [weakSelf updateUI:weakSelf.applicationStatusModel repayModel:nil];
+                    [weakSelf updateUI:applicationStatusModel repayModel:nil];
                     break;
                 case 2:
                 case 3:
@@ -876,57 +646,5 @@
         }
     }
 }
-#pragma mark -> 2.22	审批金额查询接口
-
-//-(void)PostGetCheckMoney
-//{
-//
-//    LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
-//    [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
-//        _approvalModel = [Approval yy_modelWithJSON:returnValue];
-//        //            approvalModel.result.loan_staging_amount.integerValue
-//        if ([_approvalModel.flag isEqualToString:@"0000"])
-//        {
-//            if (_approvalModel.result.approval_amount >0 && _approvalModel.result.loan_staging_amount.integerValue > 0) {
-//                //                    double approAmountSting = 0.0;
-//                //                    if (approvalModel.result.approval_amount >= 500) {
-//                //                        approAmountSting = approvalBaseClass.result.approvalAmount;
-//                //                    }
-//                moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%.0f元", _approvalModel.result.approval_amount];
-//                
-//                if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
-//                    moenyViewing.payMoneyTitle.text = @"到期还款";
-//                    moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
-//                    moenyViewing.loanTimeTitle.text = @"借款期限";
-//                    moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount];
-//                } else {
-//                    moenyViewing.labelweek.text = [NSString stringWithFormat:@"%d周",_approvalModel.result.loan_staging_amount.intValue];
-//                    moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount/_approvalModel.result.loan_staging_amount.integerValue + _approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate];
-//
-//                //                    [NSString stringWithFormat:@"%.2f元",approAmountSting/(approvalBaseClass.result.loanStagingAmount) + approAmountSting*0.021];
-//                moenyViewing.labelAllMoney.text = [NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_approvalModel.result.week_service_fee_rate*_approvalModel.result.loan_staging_amount.integerValue];
-//                //                                                       approAmountSting +approAmountSting*approvalBaseClass.result.loanStagingAmount*0.021];
-//            }
-//            if (_approvalModel.result.first_repay_date !=nil && [_approvalModel.result.first_repay_date length] >= 10) {
-//                if (UI_IS_IPHONE5) {
-//                    moenyViewing.lableData.font = [UIFont systemFontOfSize:9.f];
-//                    //                        moenyViewing.lableData.backgroundColor = [UIColor redColor];
-//                    moenyViewing.lableData.numberOfLines = 0;
-//                    moenyViewing.lableData.text = [NSString stringWithFormat:@"第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
-//                }else {
-//                    moenyViewing.lableData.text = [NSString stringWithFormat:@"第1期还款日:%@", [_approvalModel.result.first_repay_date substringToIndex:10]];
-//                }
-//            }
-//        }
-//      }
-//    } WithFaileBlock:^{
-//        
-//    }];
-//    [loanMoneyViewModel getApprovalAmount];
-//
-//    
-//}
-
-
 
 @end

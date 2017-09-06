@@ -45,7 +45,7 @@
 {
     [super layoutSubviews];
     
-    if(UI_IS_IPHONE6P){
+    if(!UI_IS_IPHONE5){
         CGRect rect = _overdueFeeLabel.frame;
         rect.origin.y=rect.origin.y-10;
         _overdueFeeLabel.frame=rect;
