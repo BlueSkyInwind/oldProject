@@ -504,7 +504,6 @@
         _sdView.imageURLStringsGroup = filesArr.copy;
         
         [_tableView reloadData];
-        
         if (_homeProductList.data.paidList.count>0) {
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
             NSArray *indexArray=[NSArray arrayWithObject:indexPath];
@@ -560,11 +559,9 @@
 }
 
 #pragma mark - 页面跳转
-- (void)goCheckVC:(UserStateModel *)model
+- (void)goCheckVC
 {
     CheckViewController *checkVC = [CheckViewController new];
-    checkVC.userStateModel = model;
-    checkVC.task_status = model.taskStatus;
     [self.navigationController pushViewController:checkVC animated:YES];
 }
 
@@ -616,40 +613,59 @@
     
     switch (_homeProductList.data.flag.integerValue) {
         case 5:{
-            [self goCheckVC:nil];
+            //提款
+            if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
+                if ([_homeProductList.data.userStatus isEqualToString:@"11"] || [_homeProductList.data.userStatus isEqualToString:@"12"]) {
+                    [self getApplicationStatus:@"4"];
+                    return;
+                }
+                if ([_homeProductList.data.userStatus isEqualToString:@"2"] || [_homeProductList.data.userStatus isEqualToString:@"3"]) {
+                    //合规未开户
+                    [self goCheckVC];
+                    return;
+                }
+            }
+            //发薪贷待提款
+            [self goCheckVC];
         }
             break;
         case 6:{
-            [self goLoanMoneVC:InLoan];
+            //放款中
+            [self getApplicationStatus:@"1"];
         }
             break;
-        case 7:
+        case 7:{
+            //还款
+            if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
+                if ([_homeProductList.data.userStatus isEqualToString:@"11"] || [_homeProductList.data.userStatus isEqualToString:@"12"]) {
+                    [self getApplicationStatus:@"5"];
+                    return;
+                }
+                if ([_homeProductList.data.userStatus isEqualToString:@"2"] || [_homeProductList.data.userStatus isEqualToString:@"3"] || [_homeProductList.data.userStatus isEqualToString:@"6"]) {
+                    //还款激活成功，和未激活
+                    [self goLoanMoneVC:RepaymentNormal];
+                    return;
+                }
+            }
+            //发薪贷待还款
+            [self goLoanMoneVC:RepaymentNormal];
+        }
+            break;
         case 10:{
+            //延期成功
             [self goLoanMoneVC:RepaymentNormal];
         }
             break;
         case 8:{
-            if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
-                __weak typeof (self) weakSelf = self;
-                [self getUserStatus:_homeProductList.data.applicationId success:^(QryUserStatusModel *resultModel) {
-                    if ([_qryUserStatusModel.result.flg isEqualToString:@"11"] || [_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
-                        [weakSelf goLoanMoneVC:ComplianceInProcess];
-                    }else{
-                        [self goLoanMoneVC:RepaymentNormal];
-                    }
-                }];
-                return;
-            }
-            [self goLoanMoneVC:Repayment];
+            //还款中
+            [self getApplicationStatus:@"2"];
         }
             break;
-            
         case 9:{
-            
-           [self goLoanMoneVC:Staging];
+            //延期中
+            [self getApplicationStatus:@"3"];
         }
             break;
-        
         default:
             break;
     }
@@ -723,16 +739,30 @@
         if ([baseResultM.errCode isEqualToString:@"0"]){
             ApplicationStatusModel *applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            
-            
+            if ([applicationStatusModel.platformType isEqualToString:@"2"]) {
+                if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]) {
+                    [self goLoanMoneVC:ComplianceInProcess];
+                    return;
+                }
+                if ([applicationStatusModel.userStatus isEqualToString:@"2"] || [applicationStatusModel.userStatus isEqualToString:@"3"]) {
+                    
+                    return;
+                }
+            }
             switch (applicationStatusModel.status.integerValue) {
-                case 1:
-//                    [weakSelf updateUI:applicationStatusModel repayModel:nil];
+                case 1:{
+                    
+                }
                     break;
-                case 2:
+                case 2:{
+                    
+                }
+                    break;
                 case 3:
-                case 4:
-                    [self.navigationController popToRootViewControllerAnimated:YES];
+                case 4:{
+                    //中间状态失败刷新首页
+                    [self getHomeData];
+                }
                     break;
                 default:
                     break;

@@ -51,6 +51,8 @@
 @property (nonatomic , copy)NSString *platformType;
 //申请件id
 @property (nonatomic , copy)NSString *applicationId;
+//合规用户状态
+@property (nonatomic , copy)NSString *userStatus;
 
 @end
 
