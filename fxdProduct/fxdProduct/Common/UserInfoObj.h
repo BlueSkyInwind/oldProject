@@ -19,7 +19,6 @@ typedef NS_ENUM(NSUInteger, ApplicationStatus) {
     Activation,      //激活处理中
     RepaymentNormal,  //正常还款
     //    ComplianceInProcess,   //合规处理中
-    
 };
 
 @interface UserInfoObj : NSObject
