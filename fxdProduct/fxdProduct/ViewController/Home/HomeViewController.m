@@ -93,7 +93,6 @@
         }
     }
     [self getHomeData:^(BOOL isSuccess) {
-        
         if (_loadFailView) {
             [_loadFailView removeFromSuperview];
         }
@@ -560,24 +559,6 @@
     }];
 }
 
-#pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(NSString *)applicationId success:(void(^)(QryUserStatusModel *resultModel))finish{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
-        _qryUserStatusModel = model;
-        if ([model.flag isEqualToString:@"0000"]) {
-            finish(model);
-        }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel getUserStatus:applicationId];
-}
-
 #pragma mark - 页面跳转
 - (void)goCheckVC
 {
@@ -596,9 +577,6 @@
     
     LoanMoneyViewController *loanVc = [LoanMoneyViewController new];
     loanVc.applicationStatus = status;
-    if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
-        loanVc.qryUserStatusModel = _qryUserStatusModel;
-    }
     [self.navigationController pushViewController:loanVc animated:YES];
 }
 -(void)goLoanSureVC:(NSString *)productId{

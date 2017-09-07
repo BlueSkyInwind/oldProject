@@ -665,7 +665,7 @@
         }];
     } else {
         if (![Utility sharedUtility].networkState) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
             failure(Enum_FAIL,nil);
             return;
         }

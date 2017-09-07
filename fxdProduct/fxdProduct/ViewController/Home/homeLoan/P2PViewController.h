@@ -14,8 +14,6 @@
 
 @property (nonatomic, assign) NSNumber *userSelectNum;
 
-@property (nonatomic, strong) NSDictionary * uploadP2PUserInfo;
-
 @property (nonatomic, assign) NSString *purposeSelect;
 
 @property (nonatomic,assign)NSMutableArray *dataArray;

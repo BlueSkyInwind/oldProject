@@ -206,9 +206,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 {
     __weak typeof (self) weakSelf = self;
     [self obtainDrawingInformation:^(DrawingsInfoModel *drawingsInfo) {
-        if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
-            [weakSelf getUserStatus:drawingsInfo.applicationId];
-        }
+//        if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
+//            [weakSelf getUserStatus:drawingsInfo.applicationId];
+//        }
         //急速贷产品费率获取
         if ([_drawingsInfoModel.productId isEqualToString:RapidLoan]) {
             [self obtainProductFee];
@@ -621,7 +621,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
     editCard.typeFlag = @"0";
+    editCard.addCarSuccess = ^{
+        DLog(@"添加卡成功");
+        [self  fatchCardInfo];
+    };
     [self.navigationController pushViewController:editCard animated:YES];
+    
 }
 -(void)pushFeeDescription{
     
@@ -657,22 +662,21 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 #pragma mark 新的合规
 -(void)integrationP2PUserState{
     
-    if ([_qryUserStatusModel.result.flg isEqualToString:@"2"]) {//未开户
+    if ([_drawingsInfoModel.userStatus isEqualToString:@"2"]) {//未开户
         
         [self saveLoanCase:@"20"];
         
-    }else if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]){//待激活
+    }else if ([_drawingsInfoModel.userStatus isEqualToString:@"3"]){//待激活
         
         [self saveLoanCase:@"10"];
         
-    }else if ([_qryUserStatusModel.result.flg isEqualToString:@"6"]){//正常用户
+    }else if ([_drawingsInfoModel.userStatus isEqualToString:@"6"]){//正常用户
         //选择银行卡
         [self queryCardInfo];
-    }else if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]){
+    }else if ([_drawingsInfoModel.userStatus isEqualToString:@"11"]||[_drawingsInfoModel.userStatus isEqualToString:@"12"]){
     
         LoanMoneyViewController *controller = [LoanMoneyViewController new];
         controller.applicationStatus = ComplianceInLoan;
-        controller.qryUserStatusModel = _qryUserStatusModel;
         controller.popAlert = true;
         [self.navigationController pushViewController:controller animated:YES];
     }
@@ -1203,30 +1207,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
 }
 
-#pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(NSString *)applicationId{
-
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
-        if ([model.flag isEqualToString:@"0000"]) {
-            _qryUserStatusModel = model;
-            if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
-                LoanMoneyViewController *controller = [LoanMoneyViewController new];
-                controller.applicationStatus = ComplianceInLoan;
-                controller.qryUserStatusModel = _qryUserStatusModel;
-                controller.popAlert = true;
-                [self.navigationController pushViewController:controller animated:YES];
-            }
-        }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
-        }
-    } WithFaileBlock:^{
-    }];
-    [complianceViewModel getUserStatus:applicationId];
-}
-
-
 #pragma mark 提款申请件记录
 -(void)saveLoanCase:(NSString *)type{
 
@@ -1279,8 +1259,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             bankVC.periodSelect = _userSelectNum.integerValue;
             bankVC.purposeSelect = _purposeSelect;
             bankVC.drawingsInfoModel = _drawingsInfoModel;
-            bankVC.isP2P = YES;
-            bankVC.uploadP2PUserInfo = _uploadP2PUserInfo;
             bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",_approvalModel.result.approval_amount];
             [self.navigationController pushViewController:bankVC animated:YES];
 
