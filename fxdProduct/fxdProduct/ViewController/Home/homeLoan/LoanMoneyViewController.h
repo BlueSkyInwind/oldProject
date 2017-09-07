@@ -13,10 +13,10 @@
 
 @interface LoanMoneyViewController : BaseViewController
 
-@property (nonatomic, assign) NSInteger intStautes;
+//@property (nonatomic, assign) NSInteger intStautes;
 
-@property (nonatomic, strong) UserStateModel *userStateModel;
-@property (nonatomic, strong) QryUserStatusModel *qryUserStatusModel;
+//@property (nonatomic, strong) UserStateModel *userStateModel;
+//@property (nonatomic, strong) QryUserStatusModel *qryUserStatusModel;
 @property (nonatomic, assign) BOOL popAlert;
 @property (nonatomic, assign) ApplicationStatus applicationStatus;
 

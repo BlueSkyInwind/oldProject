@@ -348,7 +348,7 @@
 {
         //platform_type 2、合规平台  0发薪贷平台
         if ([_repayModel.platformType isEqualToString:@"2"]) {
-            if ([_qryUserStatusModel.result.flg isEqualToString:@"3"]) {//待激活用户
+            if ([_repayModel.platformType isEqualToString:@"3"]) {//待激活用户
                 
                 NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];

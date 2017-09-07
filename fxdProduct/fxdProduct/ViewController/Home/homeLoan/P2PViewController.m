@@ -184,7 +184,7 @@
                         if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
                             isHave = YES;
                             controller = (LoanMoneyViewController *)vc;
-                            controller.qryUserStatusModel = qryUserStatusModel;
+//                            controller.qryUserStatusModel = qryUserStatusModel;
                             controller.applicationStatus = ComplianceRepayment;
                         }
                     }
@@ -192,7 +192,7 @@
                         [self.navigationController popToViewController:controller animated:YES];
                     }else{
                         LoanMoneyViewController *controller = [LoanMoneyViewController new];
-                        controller.qryUserStatusModel = qryUserStatusModel;
+//                        controller.qryUserStatusModel = qryUserStatusModel;
                         controller.applicationStatus = ComplianceInLoan;
                         [self.navigationController pushViewController:controller animated:YES];
                     }
