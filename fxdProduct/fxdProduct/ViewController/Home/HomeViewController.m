@@ -741,7 +741,7 @@
             applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             if ([applicationStatusModel.platformType isEqualToString:@"2"]) {
                 if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]) {
-                    [self goLoanMoneVC:ComplianceInProcess];
+//                    [self goLoanMoneVC:ComplianceInProcess];
                     return;
                 }
                 if ([applicationStatusModel.userStatus isEqualToString:@"2"] || [applicationStatusModel.userStatus isEqualToString:@"3"]) {
