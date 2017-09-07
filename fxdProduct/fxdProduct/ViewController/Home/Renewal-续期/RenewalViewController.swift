@@ -43,7 +43,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         renewalTableView.tableHeaderView = headerView
         
         let footerView = FooterBtnView()
-        footerView.frame = CGRect(x:0,y:0,width:_k_w,height:60)
+        footerView.frame = CGRect(x:0,y:0,width:_k_w,height:50)
         footerView.footerBtn?.setTitle("确认", for: .normal)
         footerView.footerBtnClosure = {
         
@@ -95,13 +95,11 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
                 
                 let renewalModel = try! RenewalModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 
-                self.headerView?.moneyLabel?.text = renewalModel.extensionFee!
+//                self.headerView?.moneyLabel?.text = renewalModel.extensionFee!
                 
-//                let str=NSString(string:renewalModel.extensionFee!)
-//                NSNumber *number = [NSNumber numberWithFloat:_repayAmount];
-//                [_lblShouldrepay fn_setNumber:number format:@"%.2f"];
-//                let number = NSNumber.init(value: str.floatValue)
-//                self.headerView?.moneyLabel?.text
+                let str=NSString(string:renewalModel.extensionFee!)
+                let number = NSNumber.init(value: str.floatValue)
+                self.headerView?.moneyLabel?.fn_setNumber(number, format: "%.0f")
                 
                 self.contentArr.append(renewalModel.overdueAmount!)
                 self.contentArr.append(renewalModel.balanceFee!)

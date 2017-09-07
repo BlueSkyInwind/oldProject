@@ -40,8 +40,8 @@ extension FooterBtnView{
     fileprivate func setupUI(){
     
         footerBtn = UIButton()
-//        btn.setTitle(titleLabel?.text, for: .normal)
         footerBtn?.backgroundColor = UI_MAIN_COLOR
+        footerBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         footerBtn?.setTitleColor(UIColor.white, for: .normal)
         footerBtn?.addTarget(self, action: #selector(btnClick), for: .touchUpInside)
         footerBtn?.layer.cornerRadius = 5.0
