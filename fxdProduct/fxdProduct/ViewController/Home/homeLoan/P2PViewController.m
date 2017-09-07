@@ -185,7 +185,7 @@
                             isHave = YES;
                             controller = (LoanMoneyViewController *)vc;
                             controller.qryUserStatusModel = qryUserStatusModel;
-                            controller.applicationStatus = ComplianceInProcess;
+                            controller.applicationStatus = Activation;
                         }
                     }
                     if (isHave) {
@@ -193,7 +193,7 @@
                     }else{
                         LoanMoneyViewController *controller = [LoanMoneyViewController new];
                         controller.qryUserStatusModel = qryUserStatusModel;
-                        controller.applicationStatus = ComplianceInProcess;
+                        controller.applicationStatus = OpenAccountStatus;
                         [self.navigationController pushViewController:controller animated:YES];
                     }
                 }

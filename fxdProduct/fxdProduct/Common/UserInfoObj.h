@@ -10,6 +10,18 @@
 #import "LoginBaseClass.h"
 #import "LoginParse.h"
 
+//用户进件状态
+typedef NS_ENUM(NSUInteger, ApplicationStatus) {
+    InLoan = 1,      //放款中
+    Repayment,       //还款中
+    Staging,         //续期中
+    OpenAccountStatus,     //开户处理中
+    Activation,      //激活处理中
+    RepaymentNormal,  //正常还款
+    //    ComplianceInProcess,   //合规处理中
+    
+};
+
 @interface UserInfoObj : NSObject
 
 @property (nonatomic,assign) NSInteger login_flag;
