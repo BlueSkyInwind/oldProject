@@ -97,7 +97,7 @@
     btn.selected = !btn.selected;
 }
 
-#pragma mark 下拉刷新
+
 - (void)loadView
 {
     UIScrollView *view = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -113,9 +113,10 @@
     self.scrollView = view;
 }
 
+#pragma mark 下拉刷新
 -(void)refresh{
 
-    self.navigationItem.title = [self setTitle];
+//    self.navigationItem.title = [self setTitle];
         if (_applicationStatus == RepaymentNormal) {
             [self getRepayInfo];
             return;
@@ -448,16 +449,18 @@
                 if ([applicationStatusModel.userStatus isEqualToString:@"6"]) {
                     if (_applicationStatus == ComplianceInLoan) {
                         _applicationStatus = InLoan;
+                        
                     }
                 }
             }
             switch (applicationStatusModel.status.integerValue) {
                 case 1:
-                    
+                    self.navigationItem.title = [self setTitle];
                     [weakSelf updateUI:applicationStatusModel repayModel:nil];
                     break;
                 case 2:
                     _applicationStatus = RepaymentNormal;
+                    self.navigationItem.title = [self setTitle];
                     [self getRepayInfo];
                     break;
                 case 3:

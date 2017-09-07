@@ -96,6 +96,9 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
                 let renewalModel = try! RenewalModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 
                 self.headerView?.moneyLabel?.text = renewalModel.extensionFee!
+//                NSNumber *number = [NSNumber numberWithFloat:_repayAmount];
+//                [_lblShouldrepay fn_setNumber:number format:@"%.2f"];
+//                let number = NSNumber.init(value: renewalModel.extensionFee!)
                 self.contentArr.append(renewalModel.overdueAmount!)
                 self.contentArr.append(renewalModel.balanceFee!)
                 self.contentArr.append(renewalModel.shallPayFee!)
