@@ -108,32 +108,28 @@ extension CurrentInformationCell{
     }
     
     fileprivate func renewalCell(){
-    
-        let rightImageBtn = UIButton()
-        rightImageBtn.setBackgroundImage(UIImage(named:""), for: .normal)
-        rightImageBtn.addTarget(self, action: #selector(renewalBtnClick), for: .touchUpInside)
-        self.addSubview(rightImageBtn)
-        rightImageBtn.snp.makeConstraints { (make) in
+        
+        let rightImage = UIImageView()
+        rightImage.image = UIImage(named:"icon_gengduo")
+        self.addSubview(rightImage)
+        rightImage.snp.makeConstraints { (make) in
             make.right.equalTo(self).offset(-15)
             make.centerY.equalTo(self.snp.centerY)
         }
         
-        let renewalBtn = UIButton()
-        renewalBtn.setTitle("了解续期规则", for: .normal)
-        renewalBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
-        renewalBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        renewalBtn.addTarget(self, action: #selector(renewalBtnClick), for: .touchUpInside)
-        self.addSubview(renewalBtn)
-        renewalBtn.snp.makeConstraints { (make) in
+        let renewalLabel = UILabel()
+        renewalLabel.text = "了解续期规则"
+        renewalLabel.textColor = UI_MAIN_COLOR
+        renewalLabel.font = UIFont.systemFont(ofSize: 16)
+        self.addSubview(renewalLabel)
+        renewalLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.snp.centerY)
-            make.right.equalTo(rightImageBtn.snp.left).offset(-10)
+            make.right.equalTo(rightImage.snp.left).offset(-10)
         }
+        
     }
 }
 
 extension CurrentInformationCell{
 
-    func renewalBtnClick(){
-    
-    }
 }

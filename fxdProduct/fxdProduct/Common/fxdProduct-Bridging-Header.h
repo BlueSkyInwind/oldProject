@@ -38,4 +38,5 @@
 #import "LoanMoneyViewController.h"
 #import "DetailViewController.h"
 #import "P2PContactContentModel.h"
+#import "UILabel+FlickerNumber.h"
 #endif /* fxdProduct_Bridging_Header_h */

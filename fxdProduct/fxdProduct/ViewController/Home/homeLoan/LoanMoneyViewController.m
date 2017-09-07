@@ -459,6 +459,12 @@
                     [weakSelf updateUI:applicationStatusModel repayModel:nil];
                     break;
                 case 2:
+                    if (_applicationStatus == Repayment) {
+                        
+                        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"还款成功"];
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                        break;
+                    }
                     _applicationStatus = RepaymentNormal;
                     self.navigationItem.title = [self setTitle];
                     [self getRepayInfo];
