@@ -38,6 +38,10 @@
 #import "FirstBorrowViewController.h"
 #import "AppDelegate.h"
 #import "AuthenticationCenterViewController.h"
+#import "LoanMoneyViewModel.h"
+#import "ApplicationStatusModel.h"
+
+
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate>
 {
    
@@ -68,7 +72,6 @@
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
     self.navigationItem.title = @"发薪贷";
     _count = 0;
    _dataArray = [NSMutableArray array];
@@ -501,7 +504,6 @@
         _sdView.imageURLStringsGroup = filesArr.copy;
         
         [_tableView reloadData];
-        
         if (_homeProductList.data.paidList.count>0) {
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
             NSArray *indexArray=[NSArray arrayWithObject:indexPath];
@@ -557,11 +559,9 @@
 }
 
 #pragma mark - 页面跳转
-- (void)goCheckVC:(UserStateModel *)model
+- (void)goCheckVC
 {
     CheckViewController *checkVC = [CheckViewController new];
-    checkVC.userStateModel = model;
-    checkVC.task_status = model.taskStatus;
     [self.navigationController pushViewController:checkVC animated:YES];
 }
 
@@ -594,7 +594,6 @@
 }
 
 #pragma mark  首页视图的各种代理
-
 #pragma mark 立即添加高级认证
 -(void)advancedCertification{
     //立即添加高级认证
@@ -614,41 +613,61 @@
     
     switch (_homeProductList.data.flag.integerValue) {
         case 5:{
-            [self goCheckVC:nil];
+            //提款
+            if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
+                if ([_homeProductList.data.userStatus isEqualToString:@"11"] || [_homeProductList.data.userStatus isEqualToString:@"12"]) {
+                    [self getApplicationStatus:@"4"];
+                    return;
+                }
+                if ([_homeProductList.data.userStatus isEqualToString:@"2"] || [_homeProductList.data.userStatus isEqualToString:@"3"]) {
+                    //合规未开户
+                    [self goCheckVC];
+                    return;
+                }
+            }
+            //发薪贷待提款
+            [self goCheckVC];
         }
             break;
         case 6:{
-            [self goLoanMoneVC:InLoan];
+            //放款中
+            [self getApplicationStatus:@"1"];
         }
             break;
-        case 7:
-        case 10:
-        {
+        case 7:{
+            //还款
+            if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
+                if ([_homeProductList.data.userStatus isEqualToString:@"11"] || [_homeProductList.data.userStatus isEqualToString:@"12"]) {
+                    [self getApplicationStatus:@"5"];
+                    return;
+                }
+                if ([_homeProductList.data.userStatus isEqualToString:@"2"] || [_homeProductList.data.userStatus isEqualToString:@"3"] || [_homeProductList.data.userStatus isEqualToString:@"6"]) {
+                    //还款激活成功，和未激活
+                    [self goLoanMoneVC:RepaymentNormal];
+                    return;
+                }
+            }
+            //发薪贷待还款
+            [self goLoanMoneVC:RepaymentNormal];
+        }
+            break;
+        case 10:{
+            //延期成功
             [self goLoanMoneVC:RepaymentNormal];
         }
             break;
         case 8:{
-            if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
-                __weak typeof (self) weakSelf = self;
-                [self getUserStatus:_homeProductList.data.applicationId success:^(QryUserStatusModel *resultModel) {
-                    if ([_qryUserStatusModel.result.flg isEqualToString:@"11"] || [_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
-                        [weakSelf goLoanMoneVC:ComplianceInLoan];
-                    }else{
-                        [self goLoanMoneVC:RepaymentNormal];
-                    }
-                }];
-                return;
-            }
-            [self goLoanMoneVC:Repayment];
+
+            //还款中
+            [self getApplicationStatus:@"2"];
+
         }
             break;
-            
         case 9:{
-            
-           [self goLoanMoneVC:Staging];
+            //延期中
+            [self getApplicationStatus:@"3"];
         }
             break;
-        
         default:
             break;
     }
@@ -676,7 +695,6 @@
 #pragma mark 我要借款
 -(void)loanBtnClick{
     NSLog(@"我要借款");
-    
     if ([_homeProductList.data.productList[0].isOverLimit isEqualToString:@"1"]) {
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"额度已满"];
         return;
@@ -688,7 +706,6 @@
         [self presentLogin:self];
     }
 }
-
 
 #pragma mark 点击产品列表
 -(void)productBtnClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit{
@@ -707,27 +724,59 @@
         }
         return;
     }
-    
     //导流产品
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
     webVC.urlStr = productId;
     [self.navigationController pushViewController:webVC animated:true];
-    
     NSLog(@"产品productId = %@",productId);
-    
 }
 
--(void)tesst{
+#pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
+-(void)getApplicationStatus:(NSString *)flag{
     
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:@"https://blueskyinwind.github.io/FXProduct/123.strings" parameters:nil finished:^(EnumServerStatus status, id object) {
-        NSLog(@"%@",object);
-    } failure:^(EnumServerStatus status, id object) {
-
+    __weak typeof (self) weakSelf = self;
+    LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+    [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            ApplicationStatusModel *applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            if ([applicationStatusModel.platformType isEqualToString:@"2"]) {
+                if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]) {
+//                    [self goLoanMoneVC:ComplianceInProcess];
+                    return;
+                }
+                if ([applicationStatusModel.userStatus isEqualToString:@"2"] || [applicationStatusModel.userStatus isEqualToString:@"3"]) {
+                    
+                    return;
+                }
+            }
+            switch (applicationStatusModel.status.integerValue) {
+                case 1:{
+                    
+                }
+                    break;
+                case 2:{
+                    
+                }
+                    break;
+                case 3:
+                case 4:{
+                    //中间状态失败刷新首页
+                    [self getHomeData];
+                }
+                    break;
+                default:
+                    break;
+            }
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
     }];
-    
+    [loanMoneyViewModel getApplicationStatus:flag];
 }
-
-
 
 
 @end
