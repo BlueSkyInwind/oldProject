@@ -8,9 +8,8 @@
 
 import UIKit
 
-protocol LoadFailureDelegate {
+@objc protocol LoadFailureDelegate: NSObjectProtocol{
     func LoadFailureLoadRefreshButtonClick()
-    
 }
 
 class LoadFailureView: UIView {
@@ -58,7 +57,7 @@ extension LoadFailureView {
             make.centerX .equalTo(self.snp.centerX)
             make.centerY.equalTo(self.snp.centerY).offset(-5)
             make.height.equalTo(25)
-            make.width.equalTo(150)
+            make.width.equalTo(200)
         })
     
         iconImageView = UIImageView.init()
@@ -66,11 +65,12 @@ extension LoadFailureView {
         self.addSubview(iconImageView!)
         iconImageView?.snp.makeConstraints({ (make) in
             make.bottom.equalTo((reminderLabel?.snp.top)!).offset(-5)
+            make.centerX.equalTo(self.snp.centerX)
         })
         
         refreshBtn = UIButton()
         refreshBtn?.setTitle("点击刷新", for: .normal)
-        refreshBtn?.setTitleColor(UIColor.white, for: .normal)
+        refreshBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
         refreshBtn?.addTarget(self, action: #selector(refreshBtnClick), for: .touchUpInside)
         Tool.setCorner(refreshBtn, borderColor: UI_MAIN_COLOR)
         self.addSubview(refreshBtn!)

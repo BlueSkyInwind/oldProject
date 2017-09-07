@@ -51,6 +51,5 @@ typedef void (^FailureBlock)(EnumServerStatus status, id object);
 - (void)TCPOSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
 
 
-- (void)GetWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
-
+- (void)GetWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
 @end

@@ -28,7 +28,7 @@
 -(void)obtainBasicInformationStatus{
     
 //    NSDictionary *paramDic = @{@"userId":[Utility sharedUtility].userInfo.juid,};
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserBasicInformation_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserBasicInformation_url] isNeedNetStatus:true  parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -41,7 +41,7 @@
 -(void)obtainthirdPartCertificationStatus{
     
 //    NSDictionary *paramDic = @{@"userId":[Utility sharedUtility].userInfo.juid,};
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserThirdPartCertification_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserThirdPartCertification_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -54,7 +54,7 @@
 
 -(void)obtainBasicInformationStatusOfAuthenticationCenter{
     
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_AuthenticationCenterBasicInformation_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_AuthenticationCenterBasicInformation_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -65,7 +65,7 @@
     }];
 }
 -(void)obtainContactInfoStatus{
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserContactInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserContactInfo_url] isNeedNetStatus:true  parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -143,7 +143,7 @@
     
     NSDictionary * paramDic = @{@"task_id":taskid};
     
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_shebaoupload_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_shebaoupload_url]  isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
     } failure:^(EnumServerStatus status, id object) {
         
@@ -158,7 +158,7 @@
     
     NSDictionary * paramDic = @{@"task_id":taskid};
     
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_TheCreditCardupload_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_TheCreditCardupload_url]  isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         NSLog(@"%@",object);
     } failure:^(EnumServerStatus status, id object) {
         
@@ -169,7 +169,7 @@
     
 //    NSDictionary * paramDic = @{@"user_id":[Utility sharedUtility].userInfo.juid};
 
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_HighRankingStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_HighRankingStatus_url]  isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }

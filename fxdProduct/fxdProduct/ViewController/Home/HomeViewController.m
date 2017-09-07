@@ -42,7 +42,7 @@
 #import "ApplicationStatusModel.h"
 
 
-@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate>
+@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
 {
    
     LoanRecordParse *_loanRecordParse;
@@ -92,6 +92,13 @@
             [self openLocationService];
         }
     }
+    [self loadViewStatus];
+}
+
+/**
+ 根据数据加载视图的状况
+ */
+-(void)loadViewStatus{
     [self getHomeData:^(BOOL isSuccess) {
         if (_loadFailView) {
             [_loadFailView removeFromSuperview];
@@ -105,7 +112,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    
     [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
     [super viewWillDisappear:animated];
 }
@@ -184,13 +190,16 @@
     }
     self.tableView.hidden = true;
     _loadFailView = [[LoadFailureView alloc]initWithFrame:CGRectZero];
+    _loadFailView.delegate = self;
     [self.view addSubview:_loadFailView];
     [_loadFailView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
 }
+-(void)LoadFailureLoadRefreshButtonClick{
+    [self loadViewStatus];
 
+}
 
 -(void)headerRefreshing{
 
@@ -461,6 +470,7 @@
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
     webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
     [self.navigationController pushViewController:webVC animated:true];
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
