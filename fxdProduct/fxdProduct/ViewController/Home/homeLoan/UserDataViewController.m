@@ -180,19 +180,9 @@
 - (void)applyBtnClick
 {
     DLog(@"确认申请");
-
-    
     
 }
 
-
-- (void)goCheckVC:(UserStateModel *)model
-{
-    CheckViewController *checkVC = [CheckViewController new];
-    checkVC.userStateModel = model;
-    checkVC.task_status = model.taskStatus;
-    [self.navigationController pushViewController:checkVC animated:YES];
-}
 
 #pragma mark -Tableview
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

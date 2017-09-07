@@ -79,7 +79,6 @@
    _dataArray = [NSMutableArray array];
     [self setUpTableview];
     [self setNavQRRightBar];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -93,7 +92,16 @@
             [self openLocationService];
         }
     }
-    [self getHomeData];
+    [self getHomeData:^(BOOL isSuccess) {
+        
+        if (_loadFailView) {
+            [_loadFailView removeFromSuperview];
+        }
+        self.tableView.hidden = false;
+        if (_homeProductList == nil) {
+            [self setUploadFailView];
+        }
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -175,6 +183,7 @@
     if (_loadFailView) {
         [_loadFailView removeFromSuperview];
     }
+    self.tableView.hidden = true;
     _loadFailView = [[LoadFailureView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_loadFailView];
     [_loadFailView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -188,7 +197,9 @@
 
     __weak HomeViewController *weakSelf = self;
     NSLog(@"下拉刷新");
-    [self getHomeData];
+    [self getHomeData:^(BOOL isSuccess) {
+        
+    }];
     [weakSelf.tableView.mj_header endRefreshing];
     
 }
@@ -493,7 +504,7 @@
 
 #pragma mark - 获取数据
 
--(void)getHomeData{
+-(void)getHomeData:(void(^)(BOOL isSuccess))finish{
     
     __weak typeof (self) weakSelf = self;
     HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
@@ -502,8 +513,10 @@
         _homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
         if (![_homeProductList.errCode isEqualToString:@"0"]) {
             [[MBPAlertView sharedMBPTextView]showTextOnly:weakSelf.view message:_homeProductList.friendErrMsg];
+            finish(false);
             return;
         }
+        finish(true);
         [_dataArray removeAllObjects];
         for (HomeProductList *product in _homeProductList.data.productList) {
             [_dataArray addObject:product];
@@ -514,19 +527,14 @@
             [filesArr addObject:file.image];
         }
         _sdView.imageURLStringsGroup = filesArr.copy;
-        
         [_tableView reloadData];
-        if (_homeProductList.data.paidList.count>0) {
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-            NSArray *indexArray=[NSArray arrayWithObject:indexPath];
-            [self.tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
+        
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         if (appDelegate.isShow) {
             [self popView:_homeProductList];
         }
     } WithFaileBlock:^{
-        
+        finish(false);
     }];
     [homeViewModel homeDataRequest];
 }
@@ -781,13 +789,21 @@
                 }
                     break;
                 case 2:{
+                    if (applicationStatus == Repayment) {
+                        //还款成功刷新首页
+                        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"还款成功"];
+                        [self getHomeData:^(BOOL isSuccess) {
+                        }];
+                        return;
+                    }
                     [self goLoanMoneVC:RepaymentNormal];
                 }
                     break;
                 case 3:
                 case 4:{
                     //中间状态失败刷新首页
-                    [self getHomeData];
+                    [self getHomeData:^(BOOL isSuccess) {
+                    }];
                 }
                     break;
                 default:
