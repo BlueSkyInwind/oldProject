@@ -750,9 +750,9 @@
                 }
                 if ([applicationStatusModel.userStatus isEqualToString:@"2"] || [applicationStatusModel.userStatus isEqualToString:@"3"]) {
                     // 未激活未开户 或者失败
-                    if (applicationStatus == Activation) {
+                    if (applicationStatus == ComplianceRepayment) {
                         [self goLoanMoneVC:RepaymentNormal];
-                    }else if (applicationStatus == OpenAccountStatus){
+                    }else if (applicationStatus == ComplianceInLoan){
                         [self goCheckVC];
                     }
                     return;
@@ -760,9 +760,9 @@
             }
             switch (applicationStatusModel.status.integerValue) {
                 case 1:{
-                    if (applicationStatus == Activation) {
+                    if (applicationStatus == ComplianceRepayment) {
                         [self goLoanMoneVC:RepaymentNormal];
-                    }else if (applicationStatus == OpenAccountStatus){
+                    }else if (applicationStatus == ComplianceInLoan){
                         [self goLoanMoneVC:InLoan];
                     }else{
                         [self goLoanMoneVC:applicationStatus];
