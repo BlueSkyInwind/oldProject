@@ -36,5 +36,7 @@
 @property(nonatomic,strong)NSString<Optional> * applyId;
 //合规标id   0 为默认值，其他大于0的数字为合规的
 @property(nonatomic,strong)NSString<Optional> * bidId;
+//合规用户状态   2、未开户 3、待激活 4、冻结 5、销户 6、正常7、已注册 11、开 户中 12、激活中
+@property(nonatomic,strong)NSString<Optional> * flg;
 
 @end

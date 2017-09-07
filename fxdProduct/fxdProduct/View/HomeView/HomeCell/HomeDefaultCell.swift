@@ -673,8 +673,8 @@ extension HomeDefaultCell{
         let bgView = UIView()
         productSecondBgImage?.addSubview(bgView)
         bgView.snp.makeConstraints { (make) in
-            make.left.equalTo((productSecondBgImage?.snp.left)!).offset(15)
-            make.right.equalTo((productSecondBgImage?.snp.right)!).offset(-15)
+            make.left.equalTo((productSecondBgImage?.snp.left)!).offset(20)
+            make.right.equalTo((productSecondBgImage?.snp.right)!).offset(-20)
             make.centerY.equalTo((productSecondBgImage?.snp.centerY)!)
             make.height.equalTo(50)
         }
@@ -685,7 +685,7 @@ extension HomeDefaultCell{
         bgView.addSubview(leftImage)
         leftImage.snp.makeConstraints { (make) in
             make.centerY.equalTo(bgView.snp.centerY)
-            make.left.equalTo(bgView.snp.left).offset(10)
+            make.left.equalTo(bgView.snp.left).offset(0)
             make.width.equalTo(38)
             make.height.equalTo(38)
         }
@@ -708,7 +708,7 @@ extension HomeDefaultCell{
         bgView.addSubview(rightImage)
         rightImage.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(0)
-            make.left.equalTo(titleLabel.snp.right).offset(20)
+            make.left.equalTo(titleLabel.snp.right).offset(15)
         }
         
         let moneyLabel = UILabel()
@@ -737,7 +737,7 @@ extension HomeDefaultCell{
         bgView.addSubview(jiantouImage)
         jiantouImage.snp.makeConstraints { (make) in
             make.centerY.equalTo(bgView.snp.centerY)
-            make.right.equalTo(bgView.snp.right).offset(-15)
+            make.right.equalTo(bgView.snp.right).offset(0)
             make.height.equalTo(14)
             make.width.equalTo(8)
         }

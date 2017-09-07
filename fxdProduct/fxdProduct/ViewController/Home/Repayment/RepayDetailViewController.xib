@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,10 +33,10 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jbV-q8-Ya4">
-                    <rect key="frame" x="15" y="586" width="345" height="44"/>
+                    <rect key="frame" x="15" y="586" width="345" height="50"/>
                     <color key="backgroundColor" red="0.074509803921568626" green="0.59607843137254901" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="jbV-q8-Ya4" secondAttribute="height" multiplier="345:61" constant="96.147540983606575" id="NM2-GU-xkB"/>
+                        <constraint firstAttribute="width" secondItem="jbV-q8-Ya4" secondAttribute="height" multiplier="345:61" constant="62.213114754098342" id="NM2-GU-xkB"/>
                     </constraints>
                     <state key="normal" title="确认"/>
                     <connections>
@@ -50,7 +49,7 @@
                 <constraint firstItem="KIP-Rk-fCo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8ho-NH-wLC"/>
                 <constraint firstAttribute="trailing" secondItem="KIP-Rk-fCo" secondAttribute="trailing" id="Rqg-Ls-KJk"/>
                 <constraint firstItem="KIP-Rk-fCo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="X9T-xi-bj2"/>
-                <constraint firstAttribute="bottom" secondItem="jbV-q8-Ya4" secondAttribute="bottom" constant="37" id="XUe-KW-RcE"/>
+                <constraint firstAttribute="bottom" secondItem="jbV-q8-Ya4" secondAttribute="bottom" constant="31" id="XUe-KW-RcE"/>
                 <constraint firstAttribute="trailing" secondItem="jbV-q8-Ya4" secondAttribute="trailing" constant="15" id="d3l-dG-nZk"/>
                 <constraint firstItem="jbV-q8-Ya4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="z4L-Ke-QLc"/>
             </constraints>
