@@ -115,6 +115,7 @@
 
 -(void)refresh{
 
+    self.navigationItem.title = [self setTitle];
         if (_applicationStatus == RepaymentNormal) {
             [self getRepayInfo];
             return;
@@ -443,6 +444,14 @@
                     
                     [self.navigationController popToRootViewControllerAnimated:YES];
                     return;
+                }
+                if ([applicationStatusModel.userStatus isEqualToString:@"6"]) {
+                    if (_applicationStatus == OpenAccountStatus) {
+                        _applicationStatus = InLoan;
+                    }else if (_applicationStatus == Activation){
+                    
+                        _applicationStatus = Repayment;
+                    }
                 }
 //                if ([applicationStatusModel.userStatus isEqualToString:@"6"]) {
 //                    

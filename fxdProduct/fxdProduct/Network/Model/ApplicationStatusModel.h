@@ -22,7 +22,7 @@
 //合规用户状态
 @property(nonatomic,strong)NSString<Optional> * userStatus;
 //展示数据
-@property(nonatomic,strong)NSArray<InfoListModel> * infoList;
+@property(nonatomic,strong)NSArray<InfoListModel,Optional> * infoList;
 
 @end
 
