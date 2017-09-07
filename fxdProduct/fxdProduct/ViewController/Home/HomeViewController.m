@@ -62,6 +62,7 @@
     double _latitude;
     double _longitude;
 
+    ApplicationStatus applicationStatus;
 }
 
 @end
@@ -493,9 +494,6 @@
         for (HomeProductList *product in _homeProductList.data.productList) {
             [_dataArray addObject:product];
         }
-//        if ([_homeProductList.data.productList.type isEqualToString:@"1"]) {
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_homeProductList.data.productList.refuseMsg];
-//        }
         
         NSMutableArray *filesArr = [NSMutableArray array];
         for (HomeBannerList *file in _homeProductList.data.bannerList) {
@@ -616,6 +614,7 @@
             //提款
             if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
                 if ([_homeProductList.data.userStatus isEqualToString:@"11"] || [_homeProductList.data.userStatus isEqualToString:@"12"]) {
+                    applicationStatus = OpenAccountStatus;
                     [self getApplicationStatus:@"4"];
                     return;
                 }
@@ -631,6 +630,7 @@
             break;
         case 6:{
             //放款中
+            applicationStatus = InLoan;
             [self getApplicationStatus:@"1"];
         }
             break;
@@ -638,6 +638,7 @@
             //还款
             if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
                 if ([_homeProductList.data.userStatus isEqualToString:@"11"] || [_homeProductList.data.userStatus isEqualToString:@"12"]) {
+                    applicationStatus = Activation;
                     [self getApplicationStatus:@"5"];
                     return;
                 }
@@ -659,12 +660,14 @@
         case 8:{
 
             //还款中
+            applicationStatus = Repayment;
             [self getApplicationStatus:@"2"];
 
         }
             break;
         case 9:{
             //延期中
+            applicationStatus = Staging;
             [self getApplicationStatus:@"3"];
         }
             break;
@@ -733,7 +736,6 @@
 
 #pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
 -(void)getApplicationStatus:(NSString *)flag{
-    
     __weak typeof (self) weakSelf = self;
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -743,21 +745,32 @@
             applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             if ([applicationStatusModel.platformType isEqualToString:@"2"]) {
                 if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]) {
-//                    [self goLoanMoneVC:ComplianceInProcess];
+                    [self goLoanMoneVC:applicationStatus];
                     return;
                 }
                 if ([applicationStatusModel.userStatus isEqualToString:@"2"] || [applicationStatusModel.userStatus isEqualToString:@"3"]) {
-                    
+                    // 未激活未开户 或者失败
+                    if (applicationStatus == Activation) {
+                        [self goLoanMoneVC:RepaymentNormal];
+                    }else if (applicationStatus == OpenAccountStatus){
+                        [self goCheckVC];
+                    }
                     return;
                 }
             }
             switch (applicationStatusModel.status.integerValue) {
                 case 1:{
-                    
+                    if (applicationStatus == Activation) {
+                        [self goLoanMoneVC:RepaymentNormal];
+                    }else if (applicationStatus == OpenAccountStatus){
+                        [self goLoanMoneVC:InLoan];
+                    }else{
+                        [self goLoanMoneVC:applicationStatus];
+                    }
                 }
                     break;
                 case 2:{
-                    
+                    [self goLoanMoneVC:RepaymentNormal];
                 }
                     break;
                 case 3:
