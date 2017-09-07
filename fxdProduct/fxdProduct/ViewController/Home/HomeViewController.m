@@ -65,6 +65,7 @@
     ApplicationStatus applicationStatus;
 }
 
+@property (nonatomic,strong) LoadFailureView * loadFailView;
 @end
 
 
@@ -169,6 +170,19 @@
     [header beginRefreshing];
     self.tableView.mj_header = header;
 }
+
+-(void)setUploadFailView{
+    if (_loadFailView) {
+        [_loadFailView removeFromSuperview];
+    }
+    _loadFailView = [[LoadFailureView alloc]initWithFrame:CGRectZero];
+    [self.view addSubview:_loadFailView];
+    [_loadFailView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
+}
+
 
 -(void)headerRefreshing{
 
@@ -614,7 +628,7 @@
             //提款
             if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
                 if ([_homeProductList.data.userStatus isEqualToString:@"11"] || [_homeProductList.data.userStatus isEqualToString:@"12"]) {
-                    applicationStatus = OpenAccountStatus;
+                    applicationStatus = ComplianceInLoan;
                     [self getApplicationStatus:@"4"];
                     return;
                 }
@@ -638,7 +652,7 @@
             //还款
             if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
                 if ([_homeProductList.data.userStatus isEqualToString:@"11"] || [_homeProductList.data.userStatus isEqualToString:@"12"]) {
-                    applicationStatus = Activation;
+                    applicationStatus = ComplianceRepayment;
                     [self getApplicationStatus:@"5"];
                     return;
                 }
@@ -658,11 +672,9 @@
         }
             break;
         case 8:{
-
             //还款中
             applicationStatus = Repayment;
             [self getApplicationStatus:@"2"];
-
         }
             break;
         case 9:{
@@ -736,7 +748,6 @@
 
 #pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
 -(void)getApplicationStatus:(NSString *)flag{
-    __weak typeof (self) weakSelf = self;
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
