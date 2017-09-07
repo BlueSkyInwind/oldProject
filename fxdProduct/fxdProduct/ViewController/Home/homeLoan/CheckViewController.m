@@ -54,6 +54,7 @@
 #import "UserBankCardListViewController.h"
 #import "BankInfoViewModel.h"
 #import "FeesDescriptionViewController.h"
+#import "EditCardsController.h"
 
 
 //#error 以下需要修改为您平台的信息
@@ -141,7 +142,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         }
     }
     _dateArray = [NSArray array];
-//    _dateArray = @[@"资金周转",@"购物",@"旅游",@"医疗",@"教育",@"其他"];
     _userSelectNum = @0;
     _purposeSelect = @"0";
     //    [self createScroll];
@@ -198,10 +198,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = YES;
-    
 }
 
 -(void)createUI
@@ -620,14 +618,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
 }
 -(void)pushAddBanckCard{
-    BankCardViewController *bankVC = [BankCardViewController new];
-    bankVC.bankArray = _supportBankListArr;
-    bankVC.periodSelect = _userSelectNum.integerValue;
-    bankVC.purposeSelect = _purposeSelect;
-    bankVC.drawingsInfoModel = _drawingsInfoModel;
-    bankVC.isP2P = NO;
-    bankVC.drawAmount = [NSString stringWithFormat:@"%.0f",[_drawingsInfoModel.repayAmount floatValue]];
-    [self.navigationController pushViewController:bankVC animated:YES];
+    
+    EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
+    editCard.typeFlag = @"0";
+    [self.navigationController pushViewController:editCard animated:YES];
 }
 -(void)pushFeeDescription{
     

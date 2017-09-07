@@ -47,8 +47,9 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     [header beginRefreshing];
     self.tableView.mj_header = header;
 }
-
-
+-(void)viewWillAppear:(BOOL)animated{
+    
+}
 
 -(void)configuireView{
     
@@ -76,7 +77,11 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     editCard.typeFlag = @"0";
     editCard.addCarSuccess = ^{
         DLog(@"添加卡成功");
+        _currentIndex = 0;
         [self.tableView.mj_header beginRefreshing];
+        if (self.bankSelectBlock) {
+            self.bankSelectBlock(_cardInfo,_currentIndex);
+        }
     };
     BaseNavigationViewController *addCarNC = [[BaseNavigationViewController alloc] initWithRootViewController:editCard];
     [self presentViewController:addCarNC animated:YES completion:nil];
@@ -111,8 +116,6 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         [self.tableView.mj_header endRefreshing];
     }];
     [bankInfoVM obtainUserBankCardList];
-    
-
 }
 - (NSString *)formatTailNumber:(NSString *)str
 {

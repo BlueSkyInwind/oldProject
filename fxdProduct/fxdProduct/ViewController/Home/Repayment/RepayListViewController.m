@@ -81,7 +81,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     [self setUpTableview];
     [self setUpSelectAllBtn];
     [self addBackItem];
-//    [self createNoneView];
+    [self createNoneView];
     [self checkState];
 }
 
