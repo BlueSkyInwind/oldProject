@@ -653,7 +653,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
                 LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
-                loanVC.userStateModel = _userStateModel;
+//                loanVC.userStateModel = _userStateModel;
                 [self.navigationController pushViewController:loanVC animated:YES];
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];

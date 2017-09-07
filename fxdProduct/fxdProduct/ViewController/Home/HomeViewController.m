@@ -589,7 +589,7 @@
     LoanMoneyViewController *loanVc = [LoanMoneyViewController new];
     loanVc.applicationStatus = status;
     if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
-        loanVc.qryUserStatusModel = _qryUserStatusModel;
+//        loanVc.qryUserStatusModel = _qryUserStatusModel;
     }
     [self.navigationController pushViewController:loanVc animated:YES];
 }

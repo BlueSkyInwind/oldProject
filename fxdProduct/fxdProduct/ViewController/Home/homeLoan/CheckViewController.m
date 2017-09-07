@@ -678,7 +678,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
         LoanMoneyViewController *controller = [LoanMoneyViewController new];
         controller.applicationStatus = ComplianceInLoan;
-        controller.qryUserStatusModel = _qryUserStatusModel;
+//        controller.qryUserStatusModel = _qryUserStatusModel;
         controller.popAlert = true;
         [self.navigationController pushViewController:controller animated:YES];
     }
@@ -1220,7 +1220,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             if ([model.result.flg isEqualToString:@"11"]||[model.result.flg isEqualToString:@"12"]) {
                 LoanMoneyViewController *controller = [LoanMoneyViewController new];
                 controller.applicationStatus = ComplianceInLoan;
-                controller.qryUserStatusModel = _qryUserStatusModel;
+//                controller.qryUserStatusModel = _qryUserStatusModel;
                 controller.popAlert = true;
                 [self.navigationController pushViewController:controller animated:YES];
             }
