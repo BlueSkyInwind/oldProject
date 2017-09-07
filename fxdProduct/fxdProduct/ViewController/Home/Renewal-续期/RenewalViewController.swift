@@ -47,8 +47,8 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         footerView.footerBtn?.setTitle("确认", for: .normal)
         footerView.footerBtnClosure = {
         
-//            self.commitStaging()
-            self.getStagingRule()
+            self.commitStaging()
+//            self.getStagingRule()
             print("确认按钮点击")
         }
         renewalTableView.tableFooterView = footerView
@@ -282,9 +282,10 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
             
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
-            
+                
+                let model = try! P2PContactContentModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 let detailVC = DetailViewController()
-//                detailVC.content = p2PContactConM.content;
+                detailVC.content = model.rule;
                 detailVC.navTitle = "续期规则";
                 self.navigationController?.pushViewController(detailVC, animated: true)
 

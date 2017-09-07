@@ -37,4 +37,5 @@
 #import "BankInfoViewModel.h"
 #import "LoanMoneyViewController.h"
 #import "DetailViewController.h"
+#import "P2PContactContentModel.h"
 #endif /* fxdProduct_Bridging_Header_h */

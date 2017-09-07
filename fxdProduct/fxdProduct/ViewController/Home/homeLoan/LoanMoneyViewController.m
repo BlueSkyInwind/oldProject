@@ -409,7 +409,8 @@
         case RepaymentNormal:
             return @"待还款";
             break;
-        case ComplianceInProcess:
+        case OpenAccountStatus:
+        case Activation:
             return @"处理中";
             break;
 
@@ -434,7 +435,7 @@
             
             if ([applicationStatusModel.platformType isEqualToString:@"2"]) {
                 if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]) {
-                    _applicationStatus = ComplianceInProcess;
+//                    _applicationStatus = ComplianceInProcess;
                     [weakSelf updateUI:applicationStatusModel repayModel:nil];
                     return ;
                 }
@@ -578,7 +579,9 @@
             }
             break;
             
-        case ComplianceInProcess:
+//        case ComplianceInProcess:
+        case OpenAccountStatus:
+        case Activation:
             
             moenyViewing.labelProgress.text = @"处理中";
             moenyViewing.tipLabel.text = @"正在处理，请耐心等待";

@@ -13,5 +13,6 @@
 @property (nonatomic, strong)NSNumber<Optional> * success;
 @property (nonatomic, strong)NSNumber<Optional> * appcode;
 @property (nonatomic, strong)NSString<Optional> * content;
+@property (nonatomic, strong)NSString<Optional> * rule;
 
 @end

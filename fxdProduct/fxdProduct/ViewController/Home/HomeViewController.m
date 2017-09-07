@@ -632,7 +632,7 @@
                 __weak typeof (self) weakSelf = self;
                 [self getUserStatus:_homeProductList.data.applicationId success:^(QryUserStatusModel *resultModel) {
                     if ([_qryUserStatusModel.result.flg isEqualToString:@"11"] || [_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
-                        [weakSelf goLoanMoneVC:ComplianceInProcess];
+                        [weakSelf goLoanMoneVC:OpenAccountStatus];
                     }else{
                         [self goLoanMoneVC:RepaymentNormal];
                     }
