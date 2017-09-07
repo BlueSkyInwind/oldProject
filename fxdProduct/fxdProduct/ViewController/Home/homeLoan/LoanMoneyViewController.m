@@ -410,8 +410,8 @@
         case RepaymentNormal:
             return @"待还款";
             break;
-        case OpenAccountStatus:
-        case Activation:
+        case ComplianceInLoan:
+        case ComplianceRepayment:
             return @"处理中";
             break;
 
@@ -436,7 +436,7 @@
             
             if ([applicationStatusModel.platformType isEqualToString:@"2"]) {
                 if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]) {
-//                    _applicationStatus = ComplianceInProcess;
+
                     [weakSelf updateUI:applicationStatusModel repayModel:nil];
                     return ;
                 }
@@ -446,33 +446,10 @@
                     return;
                 }
                 if ([applicationStatusModel.userStatus isEqualToString:@"6"]) {
-                    if (_applicationStatus == OpenAccountStatus) {
+                    if (_applicationStatus == ComplianceInLoan) {
                         _applicationStatus = InLoan;
-                    }else if (_applicationStatus == Activation){
-                    
-                        _applicationStatus = Repayment;
                     }
                 }
-//                if ([applicationStatusModel.userStatus isEqualToString:@"6"]) {
-//                    
-//                    switch (applicationStatusModel.status.integerValue) {
-//                        case 1:
-//                            
-//                            [weakSelf updateUI:applicationStatusModel repayModel:nil];
-//                            break;
-//                        case 2:
-//                            _applicationStatus = RepaymentNormal;
-//                            [weakSelf updateUI:applicationStatusModel repayModel:nil];
-//                            break;
-//                        case 3:
-//                        case 4:
-//                            [self.navigationController popToRootViewControllerAnimated:YES];
-//                            break;
-//                        default:
-//                            break;
-//                    }
-//                }
-//                return;
             }
             switch (applicationStatusModel.status.integerValue) {
                 case 1:
@@ -588,9 +565,8 @@
             }
             break;
             
-//        case ComplianceInProcess:
-        case OpenAccountStatus:
-        case Activation:
+        case ComplianceInLoan:
+        case ComplianceRepayment:
             
             moenyViewing.labelProgress.text = @"处理中";
             moenyViewing.tipLabel.text = @"正在处理，请耐心等待";

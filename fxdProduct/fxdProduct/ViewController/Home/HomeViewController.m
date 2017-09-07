@@ -658,9 +658,11 @@
         }
             break;
         case 8:{
+
             //还款中
             applicationStatus = Repayment;
             [self getApplicationStatus:@"2"];
+
         }
             break;
         case 9:{
