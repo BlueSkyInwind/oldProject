@@ -8,33 +8,17 @@
 
 #import "MyViewController.h"
 #import "NextViewCell.h"
-#import "UserInfoViewController.h"
 #import "MyCardsViewController.h"
 #import "MoreViewController.h"
-#import "UIImageView+WebCache.h"
 #import "RepayRecordController.h"
 #import "DiscountTicketController.h"
-#import "BankModel.h"
-#import "RepayListViewController.h"
-#import "UserStateModel.h"
 #import "InvitationViewController.h"
-#import "RepayDetailViewController.h"
-#import "RepayListInfo.h"
-#import "RepayRequestManage.h"
-#import "UserDataViewController.h"
-#import "CheckViewModel.h"
-#import "GetCaseInfo.h"
-#import "QryUserStatusModel.h"
-#import "LoanMoneyViewController.h"
-#import "HomeViewModel.h"
-#import "SupportBankList.h"
+
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     NSArray *titleAry;
     NSArray *imgAry;
-    BankModel *_bankCardModel;
-    NSMutableArray *_supportBankListArr;
-    UserStateModel *_model;
+   
 }
 @property (strong, nonatomic) IBOutlet UITableView *MyViewTable;
 
@@ -127,8 +111,7 @@
 
         case 0:
         {
-            RenewalViewController *repayRecord = [[RenewalViewController alloc] init];
-//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:YES];
         }
             break;
@@ -139,10 +122,9 @@
             break;
         case 2:
         {
-            UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-            [self.navigationController pushViewController:userDataVC animated:true];
-//            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
-//            [self.navigationController pushViewController:invitationVC animated:true];
+
+            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
+            [self.navigationController pushViewController:invitationVC animated:true];
         }
             break;
         case 3:

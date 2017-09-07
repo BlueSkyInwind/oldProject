@@ -165,35 +165,6 @@
  }
  */
 
-//#pragma mark  fxd用户状态查询，viewmodel
-//-(void)getUserStatus:(NSString *)applicationID repayModel:(RepayModel *)repayModel{
-//    
-//    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-//    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-//        
-//        QryUserStatusModel *qryUserStatusModel = [QryUserStatusModel yy_modelWithJSON:returnValue];
-//        if ([qryUserStatusModel.flag isEqualToString:@"0000"]) {
-//            
-//            _qryUserStatusModel = qryUserStatusModel;
-//            if ([_qryUserStatusModel.result.flg isEqualToString:@"11"]||[_qryUserStatusModel.result.flg isEqualToString:@"12"]) {
-//                _applicationStatus  = ComplianceInProcess;
-//                [self updateUI:nil repayModel:nil];
-//                return ;
-//            }
-//            
-//            _applicationStatus  = RepaymentNormal;
-//            [self updateUI:nil repayModel:repayModel];
-//        
-//        }else{
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
-//        }
-//    } WithFaileBlock:^{
-//        
-//    }];
-//    
-//    [complianceViewModel getUserStatus:applicationID];
-//}
-
 #pragma mark 请求银行卡列表信息
 
 - (void)postUrlMessageandDictionary:(void(^)(CardInfo *rate))finish{
@@ -348,7 +319,7 @@
 {
         //platform_type 2、合规平台  0发薪贷平台
         if ([_repayModel.platformType isEqualToString:@"2"]) {
-            if ([_repayModel.platformType isEqualToString:@"3"]) {//待激活用户
+            if ([_repayModel.flg isEqualToString:@"3"]) {//待激活用户
                 
                 NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
@@ -546,7 +517,7 @@
             moenyViewing.repayView.hidden = NO;
             moenyViewing.statusBottomView.hidden = YES;
             InfoListModel *firstModel = applicationStatusModel.infoList[0];
-            moenyViewing.repayMoneyLabel.text = [NSString stringWithFormat:@"%@%@",firstModel.label,firstModel.value];
+            moenyViewing.repayMoneyLabel.text = [NSString stringWithFormat:@"%@%@元",firstModel.label,firstModel.value];
             InfoListModel *secondModel = applicationStatusModel.infoList[1];
             moenyViewing.repayMoneyTime.text = [NSString stringWithFormat:@"%@%@",secondModel.label,secondModel.value];
             NSRange range = NSMakeRange(firstModel.label.length, firstModel.value.length);
