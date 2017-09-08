@@ -86,5 +86,6 @@ typedef void(^AgreementClickStatus)(UIButton * button);
 @property (weak, nonatomic) IBOutlet UILabel *jsdMonayLabel;
 
 @property (copy,nonatomic)AgreementClickStatus agreementStatus;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *displayLabelLeftCons;
 
 @end

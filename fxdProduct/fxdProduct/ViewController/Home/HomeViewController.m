@@ -226,6 +226,7 @@
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         appDelegate.isShow = false;
         _popView = [HomePopView defaultPopupView];
+//        _popView.backgroundColor = [UIColor redColor];
         _popView.closeBtn.hidden = YES;
         _popView.delegate = self;
         [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.data.popList.firstObject.image]];

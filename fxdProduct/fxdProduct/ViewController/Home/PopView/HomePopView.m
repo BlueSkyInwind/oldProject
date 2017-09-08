@@ -27,6 +27,19 @@
         // Initialization code
         
         self = [[NSBundle mainBundle] loadNibNamed:[[self class] description] owner:self options:nil].lastObject;
+        CGRect frame = self.frame;
+        frame.size.width = 375;
+        frame.size.height = 660;
+        
+        if (UI_IS_IPHONE5) {
+            frame.size.width = 300;
+            frame.size.height = 500;
+        }
+        if (UI_IS_IPHONE) {
+            frame.size.width = 355;
+            frame.size.height = 600;
+        }
+        self.frame = frame;
 //        _innerView.frame = frame;
 //        [self addSubview:_innerView];
         self.imageView.userInteractionEnabled = true;
@@ -50,7 +63,8 @@
 }
 
 + (instancetype)defaultPopupView{
-    return [[HomePopView alloc]initWithFrame:CGRectMake(0, 0, 300, 510)];
+    
+    return [[HomePopView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];;
 }
 
 @end

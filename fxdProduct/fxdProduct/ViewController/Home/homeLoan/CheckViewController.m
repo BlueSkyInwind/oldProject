@@ -291,7 +291,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     checkSuccess =[[[NSBundle mainBundle] loadNibNamed:@"CheckSuccessView" owner:self options:nil] lastObject];
     checkSuccess.frame = CGRectMake(0, 0,_k_w, _k_h);
-    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.2f元",[_drawingsInfoModel.actualAmount floatValue],[_drawingsInfoModel.totalFee floatValue]];
+    
+    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.0f元",[_drawingsInfoModel.actualAmount floatValue],[_drawingsInfoModel.totalFee floatValue]];
+
     [checkSuccess.feeBtn addTarget:self action:@selector(shareBtn:)forControlEvents:UIControlEventTouchUpInside];
     checkSuccess.feeBtn.tag = 107;
     //用途
@@ -453,7 +455,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 //每周还款的视图
 -(void)refreshWeekAmount:(SalaryDrawingsFeeInfoModel *)feeInfoModel{
     
-    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.2f元",[_drawingsInfoModel.actualAmount floatValue],[feeInfoModel.totalFee floatValue]];
+    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.0f元",[_drawingsInfoModel.actualAmount floatValue],[feeInfoModel.totalFee floatValue]];
     checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
     [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];

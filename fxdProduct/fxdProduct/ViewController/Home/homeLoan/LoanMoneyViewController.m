@@ -319,7 +319,7 @@
 {
         //platform_type 2、合规平台  0发薪贷平台
         if ([_repayModel.platformType isEqualToString:@"2"]) {
-            if ([_repayModel.flg isEqualToString:@"3"]) {//待激活用户
+            if ([_repayModel.userStatus isEqualToString:@"3"]) {//待激活用户
                 
                 NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
@@ -407,7 +407,7 @@
             ApplicationStatusModel *applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             
             if ([applicationStatusModel.platformType isEqualToString:@"2"]) {
-                if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]) {
+                if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]||[applicationStatusModel.userStatus isEqualToString:@"13"]) {
 
                     [weakSelf updateUI:applicationStatusModel repayModel:nil];
                     return ;
@@ -575,27 +575,43 @@
     moenyViewing.labelLoan.text = [NSString stringWithFormat:@"%@元",repayModel.money];
     moenyViewing.labelLoan.attributedText = [self changeAtr:moenyViewing.labelLoan.text color:UI_MAIN_COLOR range:NSMakeRange(0, repayModel.money.length)];
     moenyViewing.loanTimeTitle.text = @"借款周期";
+    
     moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@周",repayModel.duration];
+    if ([repayModel.productId isEqualToString:RapidLoan]) {
+        moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@天",repayModel.duration];
+    }
     moenyViewing.labelweek.attributedText = [self changeAtr:moenyViewing.labelweek.text color:UI_MAIN_COLOR range:NSMakeRange(0, repayModel.duration.length)];
     moenyViewing.payMoneyTitle.text = @"每周还款";
-    if ([repayModel.productId isEqualToString:RapidLoan]) {
-        moenyViewing.payMoneyTitle.text = @"到期还款";
-    }
+    
     
     moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%@元",repayModel.repayment];
     moenyViewing.labelWeekmoney.attributedText = [self changeAtr:moenyViewing.labelWeekmoney.text color:UI_MAIN_COLOR range:NSMakeRange(0, repayModel.repayment.length)];
     moenyViewing.lableData.text = [NSString stringWithFormat:@"最近一期还款日:%@",repayModel.billDate];
     moenyViewing.lableData.attributedText = [self changeAtr:moenyViewing.lableData.text color:UI_MAIN_COLOR range:NSMakeRange(8, moenyViewing.lableData.text.length-8)];
+    if ([repayModel.productId isEqualToString:RapidLoan]) {
+        moenyViewing.payMoneyTitle.text = @"到期还款";
+        moenyViewing.lableData.text = [NSString stringWithFormat:@"账单日:%@",repayModel.billDate];
+        moenyViewing.lableData.attributedText = [self changeAtr:moenyViewing.lableData.text color:UI_MAIN_COLOR range:NSMakeRange(4, moenyViewing.lableData.text.length-4)];
+    }
     if (![repayModel.overdueFee isEqualToString:@"0"] && repayModel.overdueFee != nil) {
         moenyViewing.overdueFeeLabel.hidden = NO;
         moenyViewing.overdueFeeLabel.text = [NSString stringWithFormat:@"逾期费用:%@元",repayModel.overdueFee];
         moenyViewing.overdueFeeLabel.attributedText = [self changeAtr:moenyViewing.overdueFeeLabel.text color:UI_MAIN_COLOR range:NSMakeRange(5, moenyViewing.overdueFeeLabel.text.length-5)];
-        moenyViewing.lableData.text = [NSString stringWithFormat:@"最近账单日:%@%@",repayModel.billDate,repayModel.overdueDesc];
         
+        
+        moenyViewing.lableData.text = [NSString stringWithFormat:@"最近一期还款日:%@%@",repayModel.billDate,repayModel.overdueDesc];
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:moenyViewing.lableData.text];
-        [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(6,repayModel.billDate.length)];
+        [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(8,repayModel.billDate.length)];
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(moenyViewing.lableData.text.length-repayModel.overdueDesc.length,repayModel.overdueDesc.length)];
         moenyViewing.lableData.attributedText = str;
+        if ([repayModel.productId isEqualToString:RapidLoan]) {
+            
+            moenyViewing.lableData.text = [NSString stringWithFormat:@"账单日:%@%@",repayModel.billDate,repayModel.overdueDesc];
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:moenyViewing.lableData.text];
+            [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,repayModel.billDate.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(moenyViewing.lableData.text.length-repayModel.overdueDesc.length,repayModel.overdueDesc.length)];
+            moenyViewing.lableData.attributedText = str;
+        }
 
     }
     moenyViewing.stagingView.hidden = YES;
