@@ -239,7 +239,9 @@
                               if ([_repayModel.productId isEqualToString:RapidLoan]) {
                                   paramArray = @[_repayModel.applyId,_repayModel.productId,@"2",@2];
                               }
-                              
+                              if ([_repayModel.productId isEqualToString:DeriveRapidLoan]) {
+                                  paramArray = @[_repayModel.applyId,_repayModel.productId,@"2",@1];
+                              }
                               LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
                               [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
                                   if ([[returnValue objectForKey:@"flag"] isEqualToString:@"0000"]) {
@@ -420,7 +422,13 @@
                 if ([applicationStatusModel.userStatus isEqualToString:@"6"]) {
                     if (_applicationStatus == ComplianceInLoan) {
                         _applicationStatus = InLoan;
-                        
+                    }
+                    if (_applicationStatus == ComplianceRepayment) {
+                       
+                        _applicationStatus = RepaymentNormal;
+                        self.navigationItem.title = [self setTitle];
+                        [self getRepayInfo];
+                        return;
                     }
                 }
             }
@@ -577,7 +585,7 @@
     moenyViewing.loanTimeTitle.text = @"借款周期";
     
     moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@周",repayModel.duration];
-    if ([repayModel.productId isEqualToString:RapidLoan]) {
+    if ([repayModel.productId isEqualToString:RapidLoan] || [repayModel.productId isEqualToString:DeriveRapidLoan]) {
         moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@天",repayModel.duration];
     }
     moenyViewing.labelweek.attributedText = [self changeAtr:moenyViewing.labelweek.text color:UI_MAIN_COLOR range:NSMakeRange(0, repayModel.duration.length)];
@@ -588,7 +596,7 @@
     moenyViewing.labelWeekmoney.attributedText = [self changeAtr:moenyViewing.labelWeekmoney.text color:UI_MAIN_COLOR range:NSMakeRange(0, repayModel.repayment.length)];
     moenyViewing.lableData.text = [NSString stringWithFormat:@"最近一期还款日:%@",repayModel.billDate];
     moenyViewing.lableData.attributedText = [self changeAtr:moenyViewing.lableData.text color:UI_MAIN_COLOR range:NSMakeRange(8, moenyViewing.lableData.text.length-8)];
-    if ([repayModel.productId isEqualToString:RapidLoan]) {
+    if ([repayModel.productId isEqualToString:RapidLoan]|| [repayModel.productId isEqualToString:DeriveRapidLoan]) {
         moenyViewing.payMoneyTitle.text = @"到期还款";
         moenyViewing.lableData.text = [NSString stringWithFormat:@"账单日:%@",repayModel.billDate];
         moenyViewing.lableData.attributedText = [self changeAtr:moenyViewing.lableData.text color:UI_MAIN_COLOR range:NSMakeRange(4, moenyViewing.lableData.text.length-4)];
@@ -604,7 +612,7 @@
         [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(8,repayModel.billDate.length)];
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(moenyViewing.lableData.text.length-repayModel.overdueDesc.length,repayModel.overdueDesc.length)];
         moenyViewing.lableData.attributedText = str;
-        if ([repayModel.productId isEqualToString:RapidLoan]) {
+        if ([repayModel.productId isEqualToString:RapidLoan]|| [repayModel.productId isEqualToString:DeriveRapidLoan]) {
             
             moenyViewing.lableData.text = [NSString stringWithFormat:@"账单日:%@%@",repayModel.billDate,repayModel.overdueDesc];
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:moenyViewing.lableData.text];

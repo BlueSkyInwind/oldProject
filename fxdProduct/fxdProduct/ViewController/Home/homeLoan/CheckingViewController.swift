@@ -10,6 +10,8 @@ import UIKit
 
 class CheckingViewController: UIViewController {
 
+    var scrollView: UIScrollView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +23,23 @@ class CheckingViewController: UIViewController {
     }
 
     
+
+    override func loadView() {
+        super.loadView()
+        let view = UIScrollView.init(frame: UIScreen.main.bounds)
+        view.contentSize = CGSize(width:_k_w,height:_k_h)
+        view.backgroundColor = UIColor.white
+        view.showsVerticalScrollIndicator = false
+        
+//        view.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+//            print("下拉刷新.")
+//
+//            //结束刷新
+//        })
+        
+        self.view = view;
+        self.scrollView = view;
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
