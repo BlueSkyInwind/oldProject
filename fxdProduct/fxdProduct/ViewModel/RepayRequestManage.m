@@ -33,7 +33,7 @@
 
     if ([self.platform_type isEqualToString:@"0"]) {
         
-        if ([self.product_id isEqualToString:RapidLoan]) {
+        if ([self.product_id isEqualToString:RapidLoan] || [self.product_id isEqualToString:DeriveRapidLoan]) {
             [self post_getLastDate];
             return;
         }
@@ -100,6 +100,9 @@
             repayMent.isPopRoot = _isPopRoot;
             repayMent.repayAmount = finalRepayAmount;
             repayMent.product_id = RapidLoan;
+            if ([self.product_id isEqualToString:DeriveRapidLoan]) {
+                repayMent.product_id = DeriveRapidLoan;
+            }
             //            repayMent.cellSelectArr = _cellSelectArr;
             //            repayMent.save_amount = _save_amount;
             repayMent.repayListInfo = repayListInfo;

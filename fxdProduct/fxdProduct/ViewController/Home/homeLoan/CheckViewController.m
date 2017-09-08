@@ -136,7 +136,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self configMoxieSDK];
     DLog(@"%@",_moxieSDK.version);
 
-    if ([_drawingsInfoModel.productId isEqualToString:RapidLoan]) {
+    if ([_drawingsInfoModel.productId isEqualToString:RapidLoan] || [_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
         for (int i = 1; i < 2; i++) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
         }
@@ -210,7 +210,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 //            [weakSelf getUserStatus:drawingsInfo.applicationId];
 //        }
         //急速贷产品费率获取
-        if ([_drawingsInfoModel.productId isEqualToString:RapidLoan]) {
+        if ([_drawingsInfoModel.productId isEqualToString:RapidLoan] || [_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
             [self obtainProductFee];
         }
         //获取默认银行卡
@@ -305,10 +305,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     checkSuccess =[[[NSBundle mainBundle] loadNibNamed:@"CheckSuccessView" owner:self options:nil] lastObject];
     checkSuccess.frame = CGRectMake(0, 0,_k_w, _k_h);
-    
     checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.0f元",[_drawingsInfoModel.actualAmount floatValue],[_drawingsInfoModel.totalFee floatValue]];
 
     [self changeDisplayLabelTextColor];
+
     [checkSuccess.feeBtn addTarget:self action:@selector(shareBtn:)forControlEvents:UIControlEventTouchUpInside];
     checkSuccess.feeBtn.tag = 107;
     //用途
@@ -330,7 +330,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     checkSuccess.toolsureBtn.target = self;
     checkSuccess.bankTextField.enabled = NO;
     //区别不同产品
-    if ([_drawingsInfoModel.productId isEqualToString:RapidLoan]) {
+    if ([_drawingsInfoModel.productId isEqualToString:RapidLoan] || [_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
         //周期
         checkSuccess.weekBtn.hidden = true;
         checkSuccess.textFiledWeek.hidden = true;
@@ -543,7 +543,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 }
                 [self getMoney];
             }
-            if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan]) {
+            if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan] || [_drawingsInfoModel.productId  isEqualToString:DeriveRapidLoan]) {
                 if (_purposeSelect.integerValue == 0) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请选择借款用途"];
                     return;
@@ -636,8 +636,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         userSelectIndex = currentIndex;
     };
     [self.navigationController pushViewController:userBankCardListVC animated:true];
-    
 }
+
 -(void)pushAddBanckCard{
     
     EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
@@ -646,8 +646,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         DLog(@"添加卡成功");
         [self  fatchCardInfo];
     };
-    [self.navigationController pushViewController:editCard animated:YES];
-    
+    BaseNavigationViewController *addCarNC = [[BaseNavigationViewController alloc] initWithRootViewController:editCard];
+    [self presentViewController:addCarNC animated:YES completion:nil];
 }
 -(void)pushFeeDescription{
     
@@ -745,7 +745,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 -(void)PostGetdrawApplyAgain
 {
     NSDictionary *paramDic;
-    if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan]) {
+    if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan] || [_drawingsInfoModel.productId  isEqualToString:DeriveRapidLoan]) {
         paramDic = @{@"periods_":@1,
                      @"loan_for_":_purposeSelect,
                      @"drawing_amount_":_drawingsInfoModel.repayAmount,
@@ -866,7 +866,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 result = true;
             }
         }
-    }else if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan]){
+    }else if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan] || [_drawingsInfoModel.productId  isEqualToString:DeriveRapidLoan]){
         if (![_purposeSelect isEqualToString:@"0"] && _isBankCard == true && checkSuccess.userCheckBtnState) {
             result = true;
         }
@@ -1078,6 +1078,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
     }];
 }
+
 #pragma  mark - 获取提款页信息
 -(void)obtainDrawingInformation:(void(^)(DrawingsInfoModel * drawingsInfo))finish{
     
@@ -1119,7 +1120,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"protocol_type_":@"7",
                      @"periods_":_userSelectNum};
     }
-    if ([_drawingsInfoModel.productId isEqualToString:RapidLoan]) {
+    if ([_drawingsInfoModel.productId isEqualToString:RapidLoan] || [_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
         paramDic = @{@"apply_id_":_drawingsInfoModel.applicationId,
                      @"product_id_":_drawingsInfoModel.productId,
                      @"protocol_type_":@"7",
@@ -1249,7 +1250,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 
             }else if ([type isEqualToString:@"30"]){
                 LoanMoneyViewController *controller = [LoanMoneyViewController new];
-                controller.applicationStatus = InLoan;
+                controller.applicationStatus = ComplianceProcessing;
                 controller.popAlert = true;
                 [self.navigationController pushViewController:controller animated:YES];
             }
