@@ -271,7 +271,7 @@
             }
         }
     }else {
-        if ([_product_id isEqualToString:RapidLoan]) {
+        if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
             noneView.hidden = false;
         }
     }
@@ -285,7 +285,7 @@
 {
     DLog(@"%@",_product_id);
     if (_repayListInfo != nil) {
-        if ([_product_id isEqualToString:RapidLoan]){
+        if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan] ){
             return payLoanArry.count;
         }else {
             return titleAry.count;
@@ -641,7 +641,7 @@
             _discountsAmount = _repayListInfo.result.situations.firstObject.debt_service_fee;
         }
         
-        if ([_product_id isEqualToString:RapidLoan]) {
+        if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
             //急速贷没有服务费，直接拿本金减红包
             _useredPacketAmount = _selectRedPacket > 10 ? 10 : _selectRedPacket;    // 急速贷红包上线10元
             _finalyRepayAmount -= _useredPacketAmount;

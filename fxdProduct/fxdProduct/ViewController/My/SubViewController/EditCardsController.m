@@ -435,7 +435,6 @@
         }
         else
         {
-            
             NSMutableArray *paramArray = [self getParamArray];
             UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
             [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {

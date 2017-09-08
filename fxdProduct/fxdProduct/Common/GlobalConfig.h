@@ -212,6 +212,7 @@ UIKIT_EXTERN NSString * const   CODE_ADDCARD;          //新增卡
 UIKIT_EXTERN NSString * const SalaryLoan;          //工薪贷平台
 UIKIT_EXTERN NSString * const RapidLoan;         //急速贷平台
 UIKIT_EXTERN NSString * const WhiteCollarLoan;       //白领贷平台
+UIKIT_EXTERN NSString * const DeriveRapidLoan;       //急速贷衍生（30天）平台
 
 UIKIT_EXTERN NSString * const PLATFORM;                 //平台
 UIKIT_EXTERN NSString * const CHANNEL;              
