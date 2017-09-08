@@ -24,7 +24,6 @@
 #import "LoanMoneyViewController.h"
 #import "PayLoanChooseController.h"
 #import "CheckViewController.h"
-#import "LoanSureSecondViewController.h"
 #import "RateModel.h"
 #import "DataWriteAndRead.h"
 #import "SesameCreditViewController.h"

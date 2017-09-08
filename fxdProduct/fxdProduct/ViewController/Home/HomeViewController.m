@@ -20,7 +20,6 @@
 #import "SDCycleScrollView.h"
 #import "RepayRecordController.h"
 #import "UserDefaulInfo.h"
-#import "LoanSureSecondViewController.h"
 #import "LoanSureFirstViewController.h"
 #import "CycleTextCell.h"
 #import "PayLoanChooseController.h"

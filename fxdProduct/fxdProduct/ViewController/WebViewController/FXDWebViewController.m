@@ -36,9 +36,8 @@
     // 添加JS到HTML中，可以直接在JS中调用添加的JS方法
     //    WKUserScript *script = [[WKUserScript alloc] initWithSource:@"function showAlert() { alert('在载入webview时通过OC注入的JS方法'); }" injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:true];
     //    [config.userContentController addUserScript:script];
-    // window.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
-    [config.userContentController addScriptMessageHandler:self name:@"FXDNative"];
-    
+//     window.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
+    [config.userContentController addScriptMessageHandler:self name:@"jsToNative"];
     _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
     _webView.navigationDelegate = self;
     _webView.UIDelegate = self;
@@ -52,20 +51,17 @@
     NSLog(@"%@",_urlStr);
     _webView.scrollView.showsVerticalScrollIndicator = false;
     if (_isZhima) {
-        
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
-        
     }else{
         
         //        NSString * str = @"https://fintech.chinazyjr.com/p2p/http/huifush/toBosAcctActivate.jhtml?page_type_=1&ret_url_=https://h5.faxindai.com:8028/fxd-h5/page/case/app_transition.html&from_mobile_=15241892226";
         
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
     
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
-    
 }
 
 - (void)addBackItem
@@ -136,14 +132,13 @@
 #pragma mark -WKScriptMessageHandler
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
-    if ([message.name isEqualToString:@"FXDNative"]) {
-        DLog(@"注入JS调用成功");
+    if ([message.name isEqualToString:@"jsToNative"]) {
         DLog(@"%@",[message.body class]);
         NSDictionary *dic = message.body;
         if ([[dic objectForKey:@"body"] isEqualToString:@"nativeShare"]) {
             [self shareContent:self.view];
         }
-        if ([[dic objectForKey:@"body"] isEqualToString:@"nativeClose"]) {
+        if ([[dic objectForKey:@"functionName"] isEqualToString:@"mxBack"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
@@ -177,6 +172,15 @@
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
     self.navigationItem.title = @"加载失败";
+}
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
+    
+//    NSString *inputValueJS = @"document.getElementsByName('click_a')[0].onclick";
+//    NSLog(@"%@",inputValueJS);
+//    //执行JS
+//    [webView evaluateJavaScript:inputValueJS completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+//        NSLog(@"value: %@ error: %@", response, error);
+//    }];
 }
 
 #pragma mark -
@@ -291,7 +295,6 @@
         [[NSFileManager defaultManager] removeItemAtPath:cookiesFolderPath error:&errors];
         
     }
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
