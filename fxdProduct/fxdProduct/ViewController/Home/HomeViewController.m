@@ -435,6 +435,7 @@
             [homeCell setupOtherPlatformsUI];
             break;
         case 10:
+        case 11:
         case 5:
         case 6:
         case 7:
@@ -616,6 +617,7 @@
         [self presentLogin:self];
     }
 }
+
 //状态判断
 -(void)PostStatuesMyLoanAmount{
     
@@ -677,6 +679,12 @@
             //延期中
             applicationStatus = Staging;
             [self getApplicationStatus:@"3"];
+        }
+            break;
+        case 11:{
+            //延期中
+            applicationStatus = ComplianceProcessing;
+            [self getApplicationStatus:@"6"];
         }
             break;
         default:
@@ -759,9 +767,13 @@
                     // 未激活未开户 或者失败
                     if (applicationStatus == ComplianceRepayment) {
                         [self goLoanMoneVC:RepaymentNormal];
-                    }else if (applicationStatus == ComplianceInLoan){
+                    }else if (applicationStatus == ComplianceInLoan) {
                         [self goCheckVC];
                     }
+                    return;
+                }
+                if ([applicationStatusModel.userStatus isEqualToString:@"13"]) {
+                    [self goLoanMoneVC:applicationStatus];
                     return;
                 }
             }

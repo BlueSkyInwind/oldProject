@@ -13,12 +13,12 @@
 //用户进件状态
 typedef NS_ENUM(NSUInteger, ApplicationStatus) {
     InLoan = 1,      //放款中
-    Repayment,       //还款中
+    Repayment,    //还款中
     Staging,         //续期中
-    ComplianceInLoan, // 放款阶段的合规用户中间状态
-    ComplianceRepayment,      //还款阶段合规用户中间状态
     RepaymentNormal,  //正常还款
-    //    ComplianceInProcess,   //合规处理中
+    ComplianceInLoan, // 放款阶段的合规用户中间状态
+    ComplianceRepayment,  //还款阶段合规用户中间状态
+    ComplianceProcessing,  //合规标的处理中状态
 };
 
 @interface UserInfoObj : NSObject
