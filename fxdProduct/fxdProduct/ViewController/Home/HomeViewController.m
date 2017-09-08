@@ -412,7 +412,7 @@
                 return homeCell;
             }
 
-            [homeCell productListOther];
+            [homeCell productListOtherWithIndex:indexPath.section];
             break;
         case 3:
 

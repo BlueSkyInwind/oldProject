@@ -35,7 +35,6 @@ class HomeDefaultCell: UITableViewCell {
     var drawingBgImage : UIImageView?
     var productFirstBgImage : UIImageView?
     var productSecondBgImage : UIImageView?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -334,7 +333,7 @@ extension HomeDefaultCell{
             let thirdRefuseView = HomeRefuseThirdView()
             thirdRefuseView.backgroundColor = UIColor.white
             thirdRefuseView.isUserInteractionEnabled = true
-            thirdRefuseView.tag = index + 103
+            thirdRefuseView.tag = index + 104
             let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
             thirdRefuseView.addGestureRecognizer(tapGest)
             bgView.addSubview(thirdRefuseView)
@@ -601,7 +600,7 @@ extension HomeDefaultCell{
         let rightImage = UIImageView()
         
         rightImage.image = UIImage(named:"home_04")
-        if homeProductData.data.productList[0].productId == "P001004"{
+        if homeProductData.data.productList[0].productId == RapidLoan || homeProductData.data.productList[0].productId == DeriveRapidLoan{
         
             rightImage.image = UIImage(named:"home_05")
         }
@@ -652,10 +651,9 @@ extension HomeDefaultCell{
     }
     
     //MARK:产品列表，其他的
-    func productListOther(){
+    func productListOther(index:NSInteger){
     
         productSecondBgImage = UIImageView()
-        productSecondBgImage?.tag = 102
         productSecondBgImage?.isUserInteractionEnabled = true
         productSecondBgImage?.image = UIImage(named:"xiaokuang")
         self.addSubview(productSecondBgImage!)
@@ -680,8 +678,6 @@ extension HomeDefaultCell{
         }
         
         let leftImage = UIImageView()
-        let url = URL(string: homeProductData.data.productList[1].icon)
-        leftImage.sd_setImage(with: url)
         bgView.addSubview(leftImage)
         leftImage.snp.makeConstraints { (make) in
             make.centerY.equalTo(bgView.snp.centerY)
@@ -692,7 +688,6 @@ extension HomeDefaultCell{
         let titleLabel = UILabel()
         titleLabel.textColor = UIColor.black
         titleLabel.font = UIFont.systemFont(ofSize: 22)
-        titleLabel.text = homeProductData.data.productList[1].productName
         bgView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(0)
@@ -700,11 +695,12 @@ extension HomeDefaultCell{
             make.height.equalTo(22)
         }
         let rightImage = UIImageView()
-        rightImage.image = UIImage(named:"home_04")
-        if homeProductData.data.productList[1].productId == "P001004"{
-            
-            rightImage.image = UIImage(named:"home_05")
-        }
+        
+//        if homeProductData.data.productList[1].productId == "P001004"{
+//            
+//            rightImage.image = UIImage(named:"home_05")
+//        }
+        rightImage.image = UIImage(named:"home_05")
         bgView.addSubview(rightImage)
         rightImage.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(0)
@@ -714,7 +710,6 @@ extension HomeDefaultCell{
         let moneyLabel = UILabel()
         moneyLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
         moneyLabel.font = UIFont.systemFont(ofSize: 14)
-        moneyLabel.text = homeProductData.data.productList[1].amount
         bgView.addSubview(moneyLabel)
         moneyLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
@@ -724,13 +719,61 @@ extension HomeDefaultCell{
         let termLabel = UILabel()
         termLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
         termLabel.font = UIFont.systemFont(ofSize: 14)
-        termLabel.text = homeProductData.data.productList[1].period
         bgView.addSubview(termLabel)
         termLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.left.equalTo(moneyLabel.snp.right).offset(20)
             make.height.equalTo(20)
         }
+        
+        var product :HomeProductsList
+        
+        product = homeProductData.data.productList[2]
+        if index == 2{
+        
+            product = homeProductData.data.productList[1]
+            
+        }
+        
+        productSecondBgImage?.tag = 100+index
+        if product.productId == SalaryLoan{
+            
+            rightImage.image = UIImage(named:"home_04")
+        }
+        let url1 = URL(string: product.icon)
+        leftImage.sd_setImage(with: url1)
+        titleLabel.text = product.productName
+        moneyLabel.text = product.amount
+        termLabel.text = product.period
+        
+        
+        
+//        rightImage.image = UIImage(named:"home_05")
+//        if homeProductData.data.productList[2].productId == SalaryLoan{
+//
+//            rightImage.image = UIImage(named:"home_04")
+//        }
+//        productSecondBgImage?.tag = 103
+//        let url1 = URL(string: homeProductData.data.productList[2].icon)
+//        leftImage.sd_setImage(with: url1)
+//        titleLabel.text = homeProductData.data.productList[2].productName
+//        moneyLabel.text = homeProductData.data.productList[2].amount
+//        termLabel.text = homeProductData.data.productList[2].period
+//        
+//        if index == 2 {
+//            rightImage.image = UIImage(named:"home_05")
+//            productSecondBgImage?.tag = 102
+//            let url = URL(string: homeProductData.data.productList[1].icon)
+//            leftImage.sd_setImage(with: url)
+//            titleLabel.text = homeProductData.data.productList[1].productName
+//            moneyLabel.text = homeProductData.data.productList[1].amount
+//            termLabel.text = homeProductData.data.productList[1].period
+//            if homeProductData.data.productList[1].productId == SalaryLoan{
+//                
+//                rightImage.image = UIImage(named:"home_04")
+//            }
+//        }
+        
         
         let jiantouImage = UIImageView()
         jiantouImage.image = UIImage(named:"icon_youjiantou")
@@ -752,7 +795,7 @@ extension HomeDefaultCell{
             make.right.equalTo(jiantouImage.snp.left).offset(-8)
             make.height.equalTo(20)
         }
-        if (homeProductData.data.productList[1].isValidate == "0"){
+        if (product.isValidate == "0"){
         
             productSecondBgImage?.isUserInteractionEnabled = false
             let hiddleImage = UIImageView()
@@ -779,6 +822,7 @@ extension HomeDefaultCell{
         }
     }
 }
+
 
 
 extension HomeDefaultCell{
@@ -912,12 +956,15 @@ extension HomeDefaultCell{
             isOverLimit = homeProductData.data.productList[1].isOverLimit
 //            productId = "点击第二个View"
         case 103:
+            productId = homeProductData.data.productList[2].productId
+            isOverLimit = homeProductData.data.productList[2].isOverLimit
+        case 104:
             productId = homeProductData.data.thirdProductList[0].extAttr.path_
 
-        case 104:
+        case 105:
             productId = homeProductData.data.thirdProductList[1].extAttr.path_
 
-        case 105:
+        case 106:
             productId = homeProductData.data.thirdProductList[2].extAttr.path_
 
         default:
