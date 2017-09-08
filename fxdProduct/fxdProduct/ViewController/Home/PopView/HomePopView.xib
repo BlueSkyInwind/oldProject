@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,10 +32,10 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="qDU-I0-SEc" secondAttribute="trailing" id="CXN-Ed-u6N"/>
-                <constraint firstAttribute="bottom" secondItem="qDU-I0-SEc" secondAttribute="bottom" id="Icb-L4-6vM"/>
+                <constraint firstAttribute="trailing" secondItem="qDU-I0-SEc" secondAttribute="trailing" id="EmR-js-V8D"/>
+                <constraint firstItem="qDU-I0-SEc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FkY-iu-hTV"/>
+                <constraint firstAttribute="bottom" secondItem="qDU-I0-SEc" secondAttribute="bottom" id="LfJ-Gz-bHv"/>
                 <constraint firstAttribute="trailing" secondItem="Cua-JS-8FQ" secondAttribute="trailing" id="OlE-q2-XUO"/>
-                <constraint firstItem="qDU-I0-SEc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ner-kc-eDB"/>
                 <constraint firstItem="qDU-I0-SEc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pyq-Ku-unI"/>
                 <constraint firstItem="Cua-JS-8FQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rSJ-Fp-E7O"/>
             </constraints>
