@@ -42,7 +42,7 @@
 #import "ApplicationStatusModel.h"
 
 
-@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate>
+@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
 {
    
     LoanRecordParse *_loanRecordParse;
@@ -92,6 +92,13 @@
             [self openLocationService];
         }
     }
+    [self loadViewStatus];
+}
+
+/**
+ 根据数据加载视图的状况
+ */
+-(void)loadViewStatus{
     [self getHomeData:^(BOOL isSuccess) {
         if (_loadFailView) {
             [_loadFailView removeFromSuperview];
@@ -105,7 +112,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    
     [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
     [super viewWillDisappear:animated];
 }
@@ -184,13 +190,16 @@
     }
     self.tableView.hidden = true;
     _loadFailView = [[LoadFailureView alloc]initWithFrame:CGRectZero];
+    _loadFailView.delegate = self;
     [self.view addSubview:_loadFailView];
     [_loadFailView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
 }
+-(void)LoadFailureLoadRefreshButtonClick{
+    [self loadViewStatus];
 
+}
 
 -(void)headerRefreshing{
 
@@ -427,6 +436,7 @@
             [homeCell setupOtherPlatformsUI];
             break;
         case 10:
+        case 11:
         case 5:
         case 6:
         case 7:
@@ -462,6 +472,7 @@
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
     webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
     [self.navigationController pushViewController:webVC animated:true];
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -607,6 +618,7 @@
         [self presentLogin:self];
     }
 }
+
 //状态判断
 -(void)PostStatuesMyLoanAmount{
     
@@ -668,6 +680,12 @@
             //延期中
             applicationStatus = Staging;
             [self getApplicationStatus:@"3"];
+        }
+            break;
+        case 11:{
+            //延期中
+            applicationStatus = ComplianceProcessing;
+            [self getApplicationStatus:@"6"];
         }
             break;
         default:
@@ -750,9 +768,13 @@
                     // 未激活未开户 或者失败
                     if (applicationStatus == ComplianceRepayment) {
                         [self goLoanMoneVC:RepaymentNormal];
-                    }else if (applicationStatus == ComplianceInLoan){
+                    }else if (applicationStatus == ComplianceInLoan) {
                         [self goCheckVC];
                     }
+                    return;
+                }
+                if ([applicationStatusModel.userStatus isEqualToString:@"13"]) {
+                    [self goLoanMoneVC:applicationStatus];
                     return;
                 }
             }

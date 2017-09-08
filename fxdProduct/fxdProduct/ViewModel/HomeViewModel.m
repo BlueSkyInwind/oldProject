@@ -56,14 +56,14 @@
 //    homeParam.channel = PLATFORM;
     NSDictionary * paramDic = [homeParam toDictionary];
     //http://192.168.12.109:8005/apigw/client/summary?
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_HomeState_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_HomeState_url] isNeedNetStatus:false parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if (self.returnBlock) {
             self.returnBlock(object);
         }
     } failure:^(EnumServerStatus status, id object) {
         if (self.faileBlock) {
-            [self faileBlock];
+            self.faileBlock();
         }
     }];
 }
