@@ -420,7 +420,13 @@
                 if ([applicationStatusModel.userStatus isEqualToString:@"6"]) {
                     if (_applicationStatus == ComplianceInLoan) {
                         _applicationStatus = InLoan;
-                        
+                    }
+                    if (_applicationStatus == ComplianceRepayment) {
+                       
+                        _applicationStatus = RepaymentNormal;
+                        self.navigationItem.title = [self setTitle];
+                        [self getRepayInfo];
+                        return;
                     }
                 }
             }
