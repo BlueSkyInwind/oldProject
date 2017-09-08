@@ -28,16 +28,17 @@
         
         self = [[NSBundle mainBundle] loadNibNamed:[[self class] description] owner:self options:nil].lastObject;
         CGRect frame = self.frame;
-        frame.size.width = 375;
-        frame.size.height = 660;
+        
+        frame.size.width = 355;
+        frame.size.height = 600;
         
         if (UI_IS_IPHONE5) {
             frame.size.width = 300;
             frame.size.height = 500;
         }
-        if (UI_IS_IPHONE) {
-            frame.size.width = 355;
-            frame.size.height = 600;
+        if (UI_IS_IPHONE6P) {
+            frame.size.width = 375;
+            frame.size.height = 660;
         }
         self.frame = frame;
 //        _innerView.frame = frame;
