@@ -54,11 +54,11 @@ NSString * const _main_new_url  =  @"http://192.168.13.173:8005/";
 
 
 //测试导流 192.168.6.134
-NSString * const _main_url  =   @"http://192.168.6.134/fxd-esb/esb/";
+NSString * const _main_url  =   @"http://192.168.12.109:8088/fxd-esb/esb/";
 NSString * const _main_new_url  =  @"http://service-apigateway.test.fxds:8005/";
-NSString * const _ValidESB_url  =   @"http://192.168.6.134/fxd-esb/";
+NSString * const _ValidESB_url  =   @"http://192.168.12.109:8088/fxd-esb/";
 NSString * const _H5_url    =   @"http://192.168.6.134/fxd-h5/page/";
-NSString * const _p2P_url = @"http://192.168.6.134/fxd-esb/p2p/";
+NSString * const _p2P_url = @"http://192.168.12.109:8088/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 
