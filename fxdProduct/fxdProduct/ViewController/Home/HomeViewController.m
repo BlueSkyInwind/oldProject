@@ -715,7 +715,7 @@
 #pragma mark 点击产品列表
 -(void)productBtnClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit{
 
-    if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:RapidLoan]) {
+    if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:RapidLoan] || [productId isEqualToString:DeriveRapidLoan]) {
         
         if ([isOverLimit isEqualToString:@"1"]) {
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"额度已满"];

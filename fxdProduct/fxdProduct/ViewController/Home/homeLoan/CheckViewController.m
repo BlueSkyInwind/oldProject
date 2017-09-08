@@ -1161,6 +1161,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"protocol_type_":@"6",
                      @"periods_":@2};
     }
+    if ([_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
+        paramDic = @{@"apply_id_":_drawingsInfoModel.applicationId,
+                     @"product_id_":_drawingsInfoModel.productId,
+                     @"protocol_type_":@"6",
+                     @"periods_":@1};
+    }
     
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
@@ -1195,7 +1201,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"protocol_type_":@"2",
                      @"periods_":@2};
     }
-    
+    if ([_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
+        paramDic = @{@"apply_id_":_drawingsInfoModel.applicationId,
+                     @"product_id_":_drawingsInfoModel.productId,
+                     @"protocol_type_":@"2",
+                     @"periods_":@1};
+    }
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
