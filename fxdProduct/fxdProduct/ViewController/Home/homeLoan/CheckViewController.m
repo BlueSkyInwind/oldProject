@@ -614,6 +614,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     userBankCardListVC.currentIndex = userSelectIndex;
     userBankCardListVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
         self.selectCard = cardInfo;
+        if (cardInfo == nil) {
+            [self  fatchCardInfo];
+        }
         userSelectIndex = currentIndex;
     };
     [self.navigationController pushViewController:userBankCardListVC animated:true];
