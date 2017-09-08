@@ -546,7 +546,7 @@
             
         case ComplianceInLoan:
         case ComplianceRepayment:
-            
+        case ComplianceProcessing:
             moenyViewing.labelProgress.text = @"处理中";
             moenyViewing.tipLabel.text = @"正在处理，请耐心等待";
             moenyViewing.middleView.hidden = YES;
