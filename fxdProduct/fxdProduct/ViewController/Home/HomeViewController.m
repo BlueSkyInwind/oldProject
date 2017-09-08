@@ -198,7 +198,6 @@
 }
 -(void)LoadFailureLoadRefreshButtonClick{
     [self loadViewStatus];
-
 }
 
 -(void)headerRefreshing{
@@ -206,7 +205,6 @@
     __weak HomeViewController *weakSelf = self;
     NSLog(@"下拉刷新");
     [self getHomeData:^(BOOL isSuccess) {
-        
     }];
     [weakSelf.tableView.mj_header endRefreshing];
     
@@ -309,35 +307,24 @@
     if (indexPath.section == 0) {
         return 30.f;
     }else {
-        
         if (_dataArray.count>0) {
-            
             if (indexPath.section == 1) {
                 if (UI_IS_IPHONE5) {
-
                     return (180);
-                
                 }else{
-
                     return (210);
                 }
             }else{
                 if (UI_IS_IPHONE5) {
-
                     return (_k_h-0.5*_k_w-330);
-                    
                 }else{
-                    
                     return (_k_h-0.5*_k_w-360);
                 }
-              
             }
         }else{
-        
             if (UI_IS_IPHONE5) {
                 return (_k_h-0.5*_k_w-155);
             }else{
-                
                 return (_k_h-0.5*_k_w-155);
             }
         }
@@ -484,7 +471,6 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     DLog(@"点击");
-    
     if (_homeProductList.data.bannerList && _homeProductList.data.bannerList.count > 0) {
         HomeBannerList *files = _homeProductList.data.bannerList[index];
         if ([files.image.lowercaseString hasPrefix:@"http"] || [files.image.lowercaseString hasPrefix:@"https"]) {
@@ -552,8 +538,8 @@
 -(void)getApplyStatus:(void(^)(BOOL isSuccess, UserStateModel *resultModel))finish{
     
 
+    
 }
-
 - (void)fatchRate:(void(^)(RateModel *rate))finish
 {
     NSDictionary *dic = @{@"priduct_id_":RapidLoan};
@@ -590,16 +576,16 @@
     loanVc.applicationStatus = status;
     [self.navigationController pushViewController:loanVc animated:YES];
 }
+
 -(void)goLoanSureVC:(NSString *)productId{
     LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
     loanFirstVC.productId = productId;
     [self.navigationController pushViewController:loanFirstVC animated:true];
 }
+
 -(void)goUserDataVC{
-    
     UserDataViewController *userDataVC = [[UserDataViewController alloc]initWithNibName:@"UserDataViewController" bundle:nil];
     [self.navigationController pushViewController:userDataVC animated:YES];
-    
 }
 
 #pragma mark  首页视图的各种代理
