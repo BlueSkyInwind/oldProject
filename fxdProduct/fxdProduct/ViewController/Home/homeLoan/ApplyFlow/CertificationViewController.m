@@ -55,12 +55,10 @@ typedef enum {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.automaticallyAdjustsScrollViewInsets = false;
-    
     _captchaHidenDisplay = true;
     _picCodeHidenDisplay= true;
     _currentDisplayType = DeafultViewType;
     _mobileRequArr = [NSMutableArray arrayWithObjects:@"",@"",@"",@"",@"", nil];
-    
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"手机运营商认证";
     _btnStatus = YES;
@@ -85,7 +83,6 @@ typedef enum {
 {
     return 1;
 }
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -187,9 +184,7 @@ typedef enum {
         default:
             break;
     }
-    
     return cell;
-
 }
 //认证button是否能点击
 - (BOOL)isCanEnable
@@ -222,8 +217,7 @@ typedef enum {
     return false;
 }
 
-- (void)showMobileHelp
-{
+- (void)showMobileHelp{
     
     FXDWebViewController *controller = [[FXDWebViewController alloc]init];
     controller.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_mobileAuthentication_url];

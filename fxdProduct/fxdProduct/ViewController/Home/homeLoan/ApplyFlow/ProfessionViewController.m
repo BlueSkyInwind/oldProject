@@ -126,7 +126,7 @@
     self.tableView.tableFooterView = footView;
 }
 -(UIView *)tableViewHeaderView{
-    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 50)];
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 40)];
     
     UIImageView *iconView = [[UIImageView alloc] init];
     iconView.image = [UIImage imageNamed:@"topCellIcon"];

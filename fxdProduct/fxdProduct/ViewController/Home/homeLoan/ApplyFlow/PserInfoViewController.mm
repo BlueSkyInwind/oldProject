@@ -121,7 +121,7 @@
 {
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-//    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
+// self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
     self.tableView.tableHeaderView = [self tableViewHeaderView];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([IdentityCell class]) bundle:nil] forCellReuseIdentifier:@"IdentityCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
@@ -146,8 +146,7 @@
 }
 
 -(UIView *)tableViewHeaderView{
-    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 50)];
-    
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 40)];
     UIImageView *iconView = [[UIImageView alloc] init];
     iconView.image = [UIImage imageNamed:@"topCellIcon"];
     [backView addSubview:iconView];
