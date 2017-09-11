@@ -589,8 +589,11 @@
         moenyViewing.labelweek.text = [NSString stringWithFormat:@"%@天",repayModel.duration];
     }
     moenyViewing.labelweek.attributedText = [self changeAtr:moenyViewing.labelweek.text color:UI_MAIN_COLOR range:NSMakeRange(0, repayModel.duration.length)];
-    moenyViewing.payMoneyTitle.text = @"每周还款";
     
+    moenyViewing.payMoneyTitle.text = @"每周还款";
+    if ([repayModel.productId isEqualToString:RapidLoan]||[repayModel.productId isEqualToString:DeriveRapidLoan]) {
+        moenyViewing.payMoneyTitle.text = @"到期还款";
+    }
     
     moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%@元",repayModel.repayment];
     moenyViewing.labelWeekmoney.attributedText = [self changeAtr:moenyViewing.labelWeekmoney.text color:UI_MAIN_COLOR range:NSMakeRange(0, repayModel.repayment.length)];
