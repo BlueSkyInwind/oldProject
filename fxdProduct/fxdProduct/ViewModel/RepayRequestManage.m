@@ -45,7 +45,7 @@
         [_targetVC.navigationController pushViewController:repayMent animated:YES];
     }
     
-    if ([_model.platform_type isEqualToString:@"2"]) {
+    if ([self.platform_type isEqualToString:@"2"]) {
         RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
         repayMent.product_id = self.product_id;
         repayMent.applicationId = self.applicationId;

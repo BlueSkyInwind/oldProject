@@ -728,12 +728,13 @@ extension HomeDefaultCell{
         
         var product :HomeProductsList
         
-        product = homeProductData.data.productList[2]
-        if index == 2{
-        
-            product = homeProductData.data.productList[1]
-            
-        }
+        product = homeProductData.data.productList[index-1]
+//        product = homeProductData.data.productList[2]
+//        if index == 2{
+//        
+//            product = homeProductData.data.productList[1]
+//            
+//        }
         
         productSecondBgImage?.tag = 100+index
         if product.productId == SalaryLoan{
@@ -745,34 +746,6 @@ extension HomeDefaultCell{
         titleLabel.text = product.productName
         moneyLabel.text = product.amount
         termLabel.text = product.period
-        
-        
-        
-//        rightImage.image = UIImage(named:"home_05")
-//        if homeProductData.data.productList[2].productId == SalaryLoan{
-//
-//            rightImage.image = UIImage(named:"home_04")
-//        }
-//        productSecondBgImage?.tag = 103
-//        let url1 = URL(string: homeProductData.data.productList[2].icon)
-//        leftImage.sd_setImage(with: url1)
-//        titleLabel.text = homeProductData.data.productList[2].productName
-//        moneyLabel.text = homeProductData.data.productList[2].amount
-//        termLabel.text = homeProductData.data.productList[2].period
-//        
-//        if index == 2 {
-//            rightImage.image = UIImage(named:"home_05")
-//            productSecondBgImage?.tag = 102
-//            let url = URL(string: homeProductData.data.productList[1].icon)
-//            leftImage.sd_setImage(with: url)
-//            titleLabel.text = homeProductData.data.productList[1].productName
-//            moneyLabel.text = homeProductData.data.productList[1].amount
-//            termLabel.text = homeProductData.data.productList[1].period
-//            if homeProductData.data.productList[1].productId == SalaryLoan{
-//                
-//                rightImage.image = UIImage(named:"home_04")
-//            }
-//        }
         
         
         let jiantouImage = UIImageView()
