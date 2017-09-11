@@ -89,13 +89,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     navBarHairlineImageView.hidden=YES;
-//    [self checkStatus];
-    if ([self.platform_Type isEqualToString:@"2"]) {
-       //合规银行卡查询
-        [self checkBank];
-    }else{
-        [self fatchUserCardList];
-    }
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -141,6 +135,14 @@
     
     [self createNoneView];
     [self updateTotalAmount];
+    
+    //    [self checkStatus];
+    if ([self.platform_Type isEqualToString:@"2"]) {
+        //合规银行卡查询
+        [self checkBank];
+    }else{
+        [self fatchUserCardList];
+    }
 }
 
 
@@ -512,7 +514,6 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([_product_id isEqualToString:SalaryLoan]||[_product_id isEqualToString:WhiteCollarLoan]) {
         if(indexPath.row==0){//红包
@@ -532,31 +533,13 @@
         if(indexPath.row==3)//选择银行卡
         {
             if ([self.platform_Type isEqualToString:@"2"]) {
-                //                [self chooseBankCard];
                 [self gotoUnbundlingBank];
                 return;
             }
             
             if (_repayListInfo != nil) {
                 DLog(@"选择付款方式");
-                PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-                payMethodVC.supportBankListArr = _supportBankListArr;
-                payMethodVC.payMethod = PayMethodNormal;
-                if (userSelectIndex == -1) {
-                    payMethodVC.currentIndex = defaultBankIndex;
-                } else {
-                    payMethodVC.currentIndex  = userSelectIndex;
-                }
-                payMethodVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex){
-                    if (cardInfo) {
-                        _selectCard = cardInfo;
-                    }
-                    userSelectIndex = currentIndex;
-                    [self.PayDetailTB reloadData];
-                };
-                PayNavigationViewController *payNC = [[PayNavigationViewController alloc] initWithRootViewController:payMethodVC];
-                payNC.view.frame = CGRectMake(0, 0, _k_w, 270);
-                [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
+                [self pushUserBankListVC];
             }
         }
     }else {
@@ -579,42 +562,43 @@
                 
                 [self gotoUnbundlingBank];
                 //                [self chooseBankCard];
-                
             }
         }
         if(indexPath.row==4)//选择银行卡
         {
             if (_repayListInfo != nil) {
                 DLog(@"选择付款方式");
-                PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-                payMethodVC.supportBankListArr = _supportBankListArr;
-                payMethodVC.payMethod = PayMethodNormal;
-                if (userSelectIndex == -1) {
-                    payMethodVC.currentIndex = defaultBankIndex;
-                } else {
-                    payMethodVC.currentIndex  = userSelectIndex;
-                }
-                payMethodVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex){
-                    if (cardInfo) {
-                        _selectCard = cardInfo;
-                    }
-                    userSelectIndex = currentIndex;
-                    [self.PayDetailTB reloadData];
-                };
-                PayNavigationViewController *payNC = [[PayNavigationViewController alloc] initWithRootViewController:payMethodVC];
-                payNC.view.frame = CGRectMake(0, 0, _k_w, 270);
-                [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
+                [self pushUserBankListVC];
             }
-           
             if (_p2pBillModel != nil) {
-                
                 [self gotoUnbundlingBank];
                 //                [self chooseBankCard];
             }
         }
     }
 }
-
+/**
+ 跳转到银行卡
+ */
+-(void)pushUserBankListVC{
+    
+    UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
+    userBankCardListVC.isHavealipay = true;
+    if (userSelectIndex == -1) {
+        userBankCardListVC.currentIndex = defaultBankIndex;
+    } else {
+        userBankCardListVC.currentIndex  = userSelectIndex;
+    }
+    userBankCardListVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
+        _selectCard = cardInfo;
+        if (cardInfo == nil) {
+            [self  fatchUserCardList];
+        }
+        userSelectIndex = currentIndex;
+        [self.PayDetailTB reloadData];
+    };
+    [self.navigationController pushViewController:userBankCardListVC animated:true];
+}
 #pragma mark - selectVCDelegate
 
 /**

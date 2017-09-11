@@ -113,8 +113,8 @@
         case 0:
         {
     
-            CheckingViewController *repayRecord=[[CheckingViewController alloc]init];
-//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+//            CheckingViewController *repayRecord=[[CheckingViewController alloc]init];
+            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:YES];
         }
             break;
@@ -125,10 +125,10 @@
             break;
         case 2:
         {
-            UserDataViewController *userDataVC = [[UserDataViewController alloc]initWithNibName:@"UserDataViewController" bundle:nil];
-            [self.navigationController pushViewController:userDataVC animated:YES];
-//            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
-//            [self.navigationController pushViewController:invitationVC animated:true];
+//            UserDataViewController *userDataVC = [[UserDataViewController alloc]initWithNibName:@"UserDataViewController" bundle:nil];
+//            [self.navigationController pushViewController:userDataVC animated:YES];
+            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
+            [self.navigationController pushViewController:invitationVC animated:true];
         }
             break;
         case 3:

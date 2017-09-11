@@ -1311,7 +1311,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [checkBankViewModel getSupportBankListInfo:@"4"];
 }
 
-
 #pragma mark 弹出合规银行卡列表viewmodel
 -(void)queryCardInfo{
  

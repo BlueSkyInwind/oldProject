@@ -856,8 +856,8 @@
     [userDataVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
-            
-            
+            CheckingViewController * checkVC = [[CheckingViewController  alloc]init];
+            [self.navigationController pushViewController:checkVC animated:true];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
@@ -866,7 +866,6 @@
     }];
     [userDataVM UserDataCertification];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

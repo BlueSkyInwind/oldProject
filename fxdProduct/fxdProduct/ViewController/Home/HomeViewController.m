@@ -103,7 +103,7 @@
             [_loadFailView removeFromSuperview];
         }
         self.tableView.hidden = false;
-        if (_homeProductList == nil) {
+        if (_homeProductList == nil || _homeProductList.data == nil) {
             [self setUploadFailView];
         }
     }];
@@ -124,7 +124,6 @@
     _locService = [[BMKLocationService alloc] init];
     _locService.delegate = self;
     [_locService startUserLocationService];
-    
 }
 
 #pragma mark - BMKLocaltionServiceDelegate

@@ -124,7 +124,6 @@
         [self getApplicationStatus];
 }
 
-
 - (void)addBackItemroot
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -424,7 +423,6 @@
                         _applicationStatus = InLoan;
                     }
                     if (_applicationStatus == ComplianceRepayment) {
-                       
                         _applicationStatus = RepaymentNormal;
                         self.navigationItem.title = [self setTitle];
                         [self getRepayInfo];
@@ -464,8 +462,6 @@
     
     [loanMoneyViewModel getApplicationStatus:[NSString stringWithFormat:@"%ld",_applicationStatus]];
 }
-
-
 
 #pragma mark -> 2.22	待还款界面信息获取
 -(void)getRepayInfo{
@@ -559,7 +555,6 @@
             moenyViewing.tipLabel.text = @"正在处理，请耐心等待";
             moenyViewing.middleView.hidden = YES;
             moenyViewing.repayBtnView.hidden = YES;
-            
             break;
 
         default:

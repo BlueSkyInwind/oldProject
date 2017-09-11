@@ -583,7 +583,6 @@
             NSDictionary *paramDic = [NSDictionary dictionary];
             DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
             
-            
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
             
