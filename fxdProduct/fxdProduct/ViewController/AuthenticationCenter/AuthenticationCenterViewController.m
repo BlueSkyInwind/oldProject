@@ -133,7 +133,6 @@
     // 设置滚动方向（默认垂直滚动）
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.headerReferenceSize = CGSizeMake(0, 39);
-    layout.footerReferenceSize = CGSizeMake(0, 39);
     _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h) collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
@@ -141,7 +140,7 @@
     [self.view addSubview:_collectionView];
     [_collectionView registerClass:[AuthenticationCenterCell class] forCellWithReuseIdentifier:@"AuthenticationCenterCell"];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ReusableView"];
-    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView"];
+//    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView"];
 
     _evaluationBtn = [[UIButton alloc]init];
     [_evaluationBtn setTitle:@"资料重新测评" forState:UIControlStateNormal];
@@ -161,7 +160,7 @@
 
 -(void)bottomClick{
 
-    NSLog(@"资料重新测评");
+    [self UserDataCertificationinterface];
     
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -255,17 +254,17 @@
         if (indexPath.row == 0) {
             cell.image.image = [UIImage imageNamed:_imageArr[_imageArr.count-3]];
             cell.nameLabel.text = _titleArr[_titleArr.count-3];
-            if ([_creditCardStatus isEqualToString:@"2"]) {
+            if ([_creditCardStatus isEqualToString:@"1"]) {
                 cell.image.image = [UIImage imageNamed:_completeImageArr[_completeImageArr.count-3]];
-            }else if ([_creditCardStatus isEqualToString:@"1"]){
+            }else if ([_creditCardStatus isEqualToString:@"2"]){
                 cell.image.image = [UIImage imageNamed:_inAuthenticationImageArr[_inAuthenticationImageArr.count-2]];
             }
         }else if(indexPath.row == 1){
             cell.image.image = [UIImage imageNamed:_imageArr[_imageArr.count-2]];
             cell.nameLabel.text = _titleArr[_titleArr.count-2];
-            if ([_socialSecurityStatus isEqualToString:@"2"]) {
+            if ([_socialSecurityStatus isEqualToString:@"1"]) {
                 cell.image.image = [UIImage imageNamed:_completeImageArr[_completeImageArr.count-2]];
-            }else if ([_socialSecurityStatus isEqualToString:@"1"]){
+            }else if ([_socialSecurityStatus isEqualToString:@"2"]){
                 cell.image.image = [UIImage imageNamed:_inAuthenticationImageArr[_inAuthenticationImageArr.count-1]];
             }
         }else if(indexPath.row == 2){
@@ -295,7 +294,6 @@
         [headerView addSubview:headView];
         return headerView;
     }
-    
 //    if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
 //        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView" forIndexPath:indexPath];
 //        footerView.backgroundColor = rgb(242, 242, 242);
@@ -420,11 +418,11 @@
             }
             switch (indexPath.row) {
                 case 0:{
-                    if ([_creditCardStatus isEqualToString:@"2"]) {
+                    if ([_creditCardStatus isEqualToString:@"1"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                         return;
                     }
-                    if ([_creditCardStatus isEqualToString:@"1"]) {
+                    if ([_creditCardStatus isEqualToString:@"2"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证中，请稍后！"];
                         return;
                     }
@@ -433,11 +431,11 @@
                     break;
                 case 1:
                 {
-                    if ([_socialSecurityStatus isEqualToString:@"2"]) {
+                    if ([_socialSecurityStatus isEqualToString:@"1"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                         return;
                     }
-                    if ([_socialSecurityStatus isEqualToString:@"1"]) {
+                    if ([_socialSecurityStatus isEqualToString:@"2"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证中，请稍后！"];
                         return;
                     }
@@ -850,6 +848,26 @@
 {
     return [str substringWithRange:NSMakeRange(str.length - 4, 4)];
 }
+/**
+ 用户认证接口
+ */
+-(void)UserDataCertificationinterface{
+    UserDataViewModel * userDataVM =  [[UserDataViewModel alloc]init];
+    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            
+            
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [userDataVM UserDataCertification];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

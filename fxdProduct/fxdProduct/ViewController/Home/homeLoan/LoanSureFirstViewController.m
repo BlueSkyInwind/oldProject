@@ -137,10 +137,9 @@
     
 //    [self.productLogo sd_setImageWithURL:[NSURL URLWithString:applicationVM.icon] placeholderImage:[UIImage imageNamed:@"placeholderImage_Icon"] options:SDWebImageRefreshCached];
     [self.productLogo sd_setImageWithURL:[NSURL URLWithString:applicationVM.icon] placeholderImage:[UIImage imageNamed:@"placeholderImage_Icon"] options:SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-        
     } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        
     }];
+    
     self.productTitle.text = applicationVM.productName;
     NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"当前额度:"];
     NSString *amountStr = [NSString stringWithFormat:@"%@",applicationVM.amount];
@@ -186,7 +185,7 @@
     if ([_model.applyFlag isEqualToString:@"0002"]) {
         NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"当前额度:"];
         NSString *amountStr = [NSString stringWithFormat:@"%@元",_model.pre_prove_amt_];
-//        NSString *amountStr = _rateModel.result.ext_attr_.amt_desc_;
+//     NSString *amountStr = _rateModel.result.ext_attr_.amt_desc_;
         [attriStr yy_appendString:amountStr];
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 5)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
@@ -203,7 +202,6 @@
         [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, attriStr.length-3)];
         [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
         self.amountLabel.attributedText = attriStr;
-        
     }
     self.timeLabel.text = [NSString stringWithFormat:@"期限:%ld-%ld%@",_rateModel.result.staging_bottom_,_rateModel.result.staging_top_,_rateModel.result.remark_];
 //    self.timeLabel.text = @"期限:5-50周";
@@ -357,7 +355,6 @@
     checkVC.task_status = model.taskStatus;
     [self.navigationController pushViewController:checkVC animated:YES];
 }
-
 
 #pragma mark -> 跳转到用户信息授权服务协议
 -(void)clickAgreement{
