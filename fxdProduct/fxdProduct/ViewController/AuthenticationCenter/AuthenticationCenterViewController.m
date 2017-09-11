@@ -95,8 +95,6 @@
     [self configureView];
     [self configMoxieSDK];
     [self headingRefresh];
-    
-
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -135,6 +133,7 @@
     // 设置滚动方向（默认垂直滚动）
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.headerReferenceSize = CGSizeMake(0, 39);
+    layout.footerReferenceSize = CGSizeMake(0, 39);
     _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h) collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
@@ -142,7 +141,8 @@
     [self.view addSubview:_collectionView];
     [_collectionView registerClass:[AuthenticationCenterCell class] forCellWithReuseIdentifier:@"AuthenticationCenterCell"];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ReusableView"];
-    
+    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView"];
+
     _evaluationBtn = [[UIButton alloc]init];
     [_evaluationBtn setTitle:@"资料重新测评" forState:UIControlStateNormal];
     [_evaluationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -162,6 +162,7 @@
 -(void)bottomClick{
 
     NSLog(@"资料重新测评");
+    
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
 
@@ -169,27 +170,21 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-
     if (section == 0) {
         return 6;
     }
     return 3;
-
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
 
     AuthenticationCenterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AuthenticationCenterCell" forIndexPath:indexPath];
-    
     if (indexPath.section == 0) {
-        
         cell.image.image = [UIImage imageNamed:_imageArr[indexPath.row]];
         cell.nameLabel.text = _titleArr[indexPath.row];
-        
         if (!userDataModel) {
             return cell;
         }
-        
         switch (indexPath.row) {
             case 0:{
                 if ([userDataModel.identity isEqualToString:@"0"]) {
@@ -202,7 +197,6 @@
                     break;
                 }
                 cell.image.image = [UIImage imageNamed:_completeImageArr[indexPath.row]];
-         
             }
                 break;
             case 1:{
@@ -257,7 +251,6 @@
             default:
                 break;
         }
-        
     }else{
         if (indexPath.row == 0) {
             cell.image.image = [UIImage imageNamed:_imageArr[_imageArr.count-3]];
@@ -276,10 +269,8 @@
                 cell.image.image = [UIImage imageNamed:_inAuthenticationImageArr[_inAuthenticationImageArr.count-1]];
             }
         }else if(indexPath.row == 2){
-        
             cell.image.image = [UIImage imageNamed:@""];
             cell.nameLabel.text = @"";
-            
         }
     }
     return cell;
@@ -304,11 +295,40 @@
         [headerView addSubview:headView];
         return headerView;
     }
+    
+//    if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
+//        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView" forIndexPath:indexPath];
+//        footerView.backgroundColor = rgb(242, 242, 242);
+//        if (footerView.subviews.count > 0) {
+//            [footerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+//        }
+//        _evaluationBtn = [[UIButton alloc]init];
+//        [_evaluationBtn setTitle:@"资料重新测评" forState:UIControlStateNormal];
+//        [_evaluationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        _evaluationBtn.backgroundColor = UI_MAIN_COLOR;
+//        [_evaluationBtn addTarget:self action:@selector(bottomClick) forControlEvents:UIControlEventTouchUpInside];
+//        [Tool setCorner:_evaluationBtn borderColor:[UIColor clearColor]];
+//        if ([_isEvaluation isEqualToString:@"0"]) {
+//            _evaluationBtn.backgroundColor = kUIColorFromRGB(0x9e9e9f);
+//            _evaluationBtn.enabled = false;
+//        }else{
+//            _evaluationBtn.backgroundColor = UI_MAIN_COLOR;
+//            _evaluationBtn.enabled = true;
+//        }
+//        [footerView addSubview:_evaluationBtn];
+//        [_evaluationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerX.equalTo(footerView.mas_centerX);
+//            make.left.equalTo(footerView.mas_left).offset(20);
+//            make.right.equalTo(footerView.mas_right).offset(-20);
+//            make.height.equalTo(@44);
+//        }];
+//        [footerView addSubview:_evaluationBtn];
+//        return footerView;
+//    }
     return nil;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-
     switch (indexPath.section) {
         case 0:
             if (![self cellStatusIsSelect:indexPath.row]) {
@@ -546,16 +566,24 @@
 #pragma mark - 魔蝎信用卡以及社保集成
 //邮箱导入
 - (void)mailImportClick{
-
-    [MoxieSDK shared].taskType = @"email";
-    [[MoxieSDK shared] startFunction];
-    
+    @try {
+        [MoxieSDK shared].taskType = @"email";
+        [[MoxieSDK shared] startFunction];
+    } @catch (NSException *exception) {
+        DLog(@"%s\n%@", __FUNCTION__, exception);
+    } @finally {
+        
+    }
 }
 //社保导入
 -(void)securityImportClick{
-    [MoxieSDK shared].taskType = @"security";
-    [[MoxieSDK shared] startFunction];
-    
+    @try {
+        [MoxieSDK shared].taskType = @"security";
+        [[MoxieSDK shared] startFunction];
+    } @catch (NSException *exception) {
+        DLog(@"%s\n%@", __FUNCTION__, exception);
+    } @finally {
+    }
 }
 -(void)configMoxieSDK{
     /***必须配置的基本参数*/
@@ -639,10 +667,10 @@
         BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([resultM.errCode isEqualToString:@"0"]) {
             UserDataModel * userDataM = [[UserDataModel alloc]initWithDictionary:(NSDictionary *)resultM.data error:nil];
-            self.isEvaluation = userDataModel.test;
+            self.isEvaluation = userDataM.test;
             userDataModel = userDataM;
             [self.collectionView reloadData];
-        }else {
+        } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.friendErrMsg];
         }
         [self.collectionView.mj_header endRefreshing];

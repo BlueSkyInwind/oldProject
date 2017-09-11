@@ -125,7 +125,7 @@
 
 - (void)setApplyBtnStatus
 {
-    if ([_userDataModel.others isEqualToString:@"1"]) {
+    if ([_userDataModel.test isEqualToString:@"1"]) {
         [_applyBtn setBackgroundColor:UI_MAIN_COLOR];
         _applyBtn.enabled = true;
     }else{
@@ -727,16 +727,23 @@
 #pragma mark - 魔蝎信用卡以及社保集成
 //邮箱导入
 - (void)mailImportClick{
-
-    [MoxieSDK shared].taskType = @"email";
-    [[MoxieSDK shared] startFunction];
-    
+    @try {
+        [MoxieSDK shared].taskType = @"email";
+        [[MoxieSDK shared] startFunction];
+    } @catch (NSException *exception) {
+        DLog(@"%s\n%@", __FUNCTION__, exception);
+    } @finally {
+    }
 }
 //社保导入
 -(void)securityImportClick{
-    [MoxieSDK shared].taskType = @"security";
-    [[MoxieSDK shared] startFunction];
-
+    @try {
+        [MoxieSDK shared].taskType = @"security";
+        [[MoxieSDK shared] startFunction];
+    } @catch (NSException *exception) {
+        DLog(@"%s\n%@", __FUNCTION__, exception);
+    } @finally {
+    }
 }
 -(void)configMoxieSDK{
     /***必须配置的基本参数*/
