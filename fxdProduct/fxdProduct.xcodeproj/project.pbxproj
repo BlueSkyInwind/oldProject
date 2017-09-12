@@ -1257,6 +1257,8 @@
 		CCBD8F6D1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
 		CCC344FC1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
 		CCC344FD1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
+		CCCC0A8E1F677B9B007E1EB0 /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */; };
+		CCCC0A8F1F677B9B007E1EB0 /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */; };
 		CCCDA8771EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
 		CCCDA8781EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
 		CCCDA87C1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA87B1EDFAD0B00B48DFF /* SaveLoanCaseModel.m */; };
@@ -2454,6 +2456,8 @@
 		CCBD8F6B1F5D26BD005A980B /* RepayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayModel.m; sourceTree = "<group>"; };
 		CCC344FA1F03833E006D0F83 /* JRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRefuseView.h; sourceTree = "<group>"; };
 		CCC344FB1F03833E006D0F83 /* JRefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRefuseView.m; sourceTree = "<group>"; };
+		CCCC0A8C1F677B9B007E1EB0 /* UserDataResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataResult.h; sourceTree = "<group>"; };
+		CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataResult.m; sourceTree = "<group>"; };
 		CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewModel.h; sourceTree = "<group>"; };
 		CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewModel.m; sourceTree = "<group>"; };
 		CCCDA87A1EDFAD0B00B48DFF /* SaveLoanCaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveLoanCaseModel.h; sourceTree = "<group>"; };
@@ -4602,6 +4606,8 @@
 				84DFBEDB1F4D976F0009DAB9 /* HighRanding */,
 				84CC89961F593BC500537910 /* ApplicationModel */,
 				84CC899B1F59704900537910 /* Drawings */,
+				CCCC0A8C1F677B9B007E1EB0 /* UserDataResult.h */,
+				CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -6333,6 +6339,7 @@
 				638A16FA1E517D9F00AB8AB6 /* CADisplayLink.m in Sources */,
 				CCE3BE1E1ED2D424004C35A4 /* BankCardsModel.m in Sources */,
 				63878FE41C1519CD008E1CF9 /* Tool.m in Sources */,
+				CCCC0A8E1F677B9B007E1EB0 /* UserDataResult.m in Sources */,
 				63F1A5031BD8CB1C00B83751 /* RepayHistoryResult.m in Sources */,
 				CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
 				63A24C621BE063A90036E8EF /* UIBarButtonItem+Extend.m in Sources */,
@@ -6667,6 +6674,7 @@
 				CC0DF9CD1EA5B1090024841A /* YYTextEffectWindow.m in Sources */,
 				CC0DF9CE1EA5B1090024841A /* GetMoneyResultResult.m in Sources */,
 				CC0DF9CF1EA5B1090024841A /* LoanProcessViewController.m in Sources */,
+				CCCC0A8F1F677B9B007E1EB0 /* UserDataResult.m in Sources */,
 				CC0DF9D01EA5B1090024841A /* UIImage+Color.m in Sources */,
 				CC0DF9D11EA5B1090024841A /* RedpacketBaseClass.m in Sources */,
 				CC0DF9D21EA5B1090024841A /* TicketCell.m in Sources */,

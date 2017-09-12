@@ -12,7 +12,7 @@
 
 @property (nonatomic,copy)NSString *flag;
 @property (nonatomic,strong)QueryCardInfoData *result;
-
+@property (nonatomic,copy)NSString *msg;
 @end
 
 @interface QueryCardInfoData : NSObject

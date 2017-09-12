@@ -57,13 +57,52 @@ class CheckingViewController: UIViewController {
         
         view.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             print("下拉刷新.")
-            self.scrollView?.mj_header.endRefreshing()
+            self.refresh()
+            
             //结束刷新
         })
         self.view = view;
         self.scrollView = view;
     }
     
+    
+    func refresh(){
+    
+        let userDataMV = UserDataViewModel()
+        userDataMV.setBlockWithReturn({ (returnValue) in
+            
+            self.scrollView?.mj_header.endRefreshing()
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+            
+                let userDataModel = try! UserDataResult.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                let str = NSString(string:userDataModel.rc_status!)
+                switch str.intValue{
+                
+                case 10:
+                    break
+                case 00,20,30:
+                    
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                        print("延时提交的任务")
+                        self.navigationController?.popToRootViewController(animated: true)
+                        
+                    }
+                    self.tabBarController?.selectedIndex = 0;
+
+                default:
+                    break
+                }
+                
+            }
+        }) { 
+            
+            self.scrollView?.mj_header.endRefreshing()
+        }
+        userDataMV.userDataCertificationResult()
+        
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

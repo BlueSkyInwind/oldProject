@@ -469,6 +469,9 @@ NSString * const    _UserDataCertification_url    =    @"apigw/client/user/measu
 //用户资料测评接口
 NSString * const    _Trilateral_url    =    @"apigw/client/repay/third/pay";
 
+//得到测评结果
+NSString * const    _UserDataCertificationResult_url    =    @"apigw/client/user/verify/status";
+
 #pragma mark - 合规接口
 
 //用户开户接口

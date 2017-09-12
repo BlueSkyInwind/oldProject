@@ -71,7 +71,10 @@
  */
 -(void)UserDataCertification;
 
+/**
+ 得到测评结果
+ */
 
-
+-(void)UserDataCertificationResult;
 
 @end

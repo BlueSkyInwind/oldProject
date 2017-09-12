@@ -48,8 +48,8 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         footerView.footerBtnClosure = {
         
             self.commitStaging()
-//            self.getStagingRule()
-            print("确认按钮点击")
+
+//            print("确认按钮点击")
         }
         renewalTableView.tableFooterView = footerView
         
@@ -73,13 +73,6 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
        getData()
 
        fatchBankList()
-//       getGatheringInformation_jhtml()
-        
-        
-//        headerView.backClosure = {
-//        
-//            self.navigationController?.popViewController(animated: true)
-//        }
 
     }
     
@@ -94,8 +87,6 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
             if baseResult.errCode == "0"{
                 
                 let renewalModel = try! RenewalModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
-                
-//                self.headerView?.moneyLabel?.text = renewalModel.extensionFee!
                 
                 let str=NSString(string:renewalModel.extensionFee!)
                 let number = NSNumber.init(value: str.floatValue)

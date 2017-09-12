@@ -12,10 +12,9 @@
 #import "LoanMoneyViewController.h"
 #import "LoginViewController.h"
 #import "BaseNavigationViewController.h"
-#import "UserStateModel.h"
 #import "HomePopView.h"
 #import "LewPopupViewController.h"
-#import "HomePop.h"
+//#import "HomePop.h"
 #import "FXDWebViewController.h"
 #import "SDCycleScrollView.h"
 #import "RepayRecordController.h"
@@ -24,13 +23,9 @@
 #import "CycleTextCell.h"
 #import "PayLoanChooseController.h"
 #import "QRPopView.h"
-#import "LoanRecordParse.h"
 #import "UserDataViewController.h"
-#import "RateModel.h"
 #import "HomeProductList.h"
 #import "CheckViewModel.h"
-#import "QryUserStatusModel.h"
-#import "GetCaseInfo.h"
 #import "P2PViewController.h"
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "LoginViewModel.h"
@@ -44,19 +39,15 @@
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
 {
    
-    LoanRecordParse *_loanRecordParse;
     NSString *_advTapToUrl;
     NSString *_shareContent;
     NSString *_advImageUrl;
     NSTimer * _countdownTimer;
     HomePopView *_popView;
     NSInteger _count;
-    UserStateModel *_model;
     HomeProductList *_homeProductList;
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
-    QryUserStatusModel *_qryUserStatusModel;
-    
     BMKLocationService *_locService;
     double _latitude;
     double _longitude;
@@ -355,16 +346,6 @@
         sdCycleScrollview.titleLabelBackgroundColor = [UIColor whiteColor];
         sdCycleScrollview.titleLabelTextColor = rgb(82, 82, 82);
         sdCycleScrollview.scrollDirection = UICollectionViewScrollDirectionVertical;
-        NSMutableArray *titlesArray = [NSMutableArray new];
-       
-        for (LoanRecordResult *result in _loanRecordParse.result) {
-            //测试
-            if (result.content == nil) {
-                continue;
-            }
-            [titlesArray addObject:result.content];
-        }
-//        sdCycleScrollview.titlesGroup = [titlesArray copy];
         sdCycleScrollview.titlesGroup = _homeProductList.data.paidList;
         if (UI_IS_IPHONE5) {
             sdCycleScrollview.titleLabelTextFont = [UIFont systemFontOfSize:13.f];
@@ -391,7 +372,7 @@
     [homeCell.refuseBgImage removeFromSuperview];
     [homeCell.drawingBgImage removeFromSuperview];
     [homeCell.otherPlatformsBgView removeFromSuperview];
-    //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中 0 延期失败
+    //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中 10 延期失败
     
     if (_homeProductList == nil) {
         return homeCell;
@@ -437,27 +418,6 @@
 
 }
 
-/**
- 点击view
- */
--(void)clickView:(NSString *)url{
-    
-    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = url;
-    [self.navigationController pushViewController:webVC animated:true];
-    
-}
-
-/**
- 点击更多
- */
--(void)moreClick{
-    
-    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
-    [self.navigationController pushViewController:webVC animated:true];
-    
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -538,21 +498,21 @@
 
     
 }
-- (void)fatchRate:(void(^)(RateModel *rate))finish
-{
-    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
-        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
-        if ([rateParse.flag isEqualToString:@"0000"]) {
-            [Utility sharedUtility].rateParse = rateParse;
-            finish(rateParse);
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
+//- (void)fatchRate:(void(^)(RateModel *rate))finish
+//{
+//    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
+//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+//        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
+//        if ([rateParse.flag isEqualToString:@"0000"]) {
+//            [Utility sharedUtility].rateParse = rateParse;
+//            finish(rateParse);
+//        } else {
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        
+//    }];
+//}
 
 #pragma mark - 页面跳转
 - (void)goCheckVC

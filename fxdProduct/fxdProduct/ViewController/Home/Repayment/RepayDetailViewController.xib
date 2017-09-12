@@ -38,6 +38,7 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="jbV-q8-Ya4" secondAttribute="height" multiplier="345:61" constant="62.213114754098342" id="NM2-GU-xkB"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <state key="normal" title="确认"/>
                     <connections>
                         <action selector="btnSureClick:" destination="-1" eventType="touchUpInside" id="4Bf-uR-SGD"/>
