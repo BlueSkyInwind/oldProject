@@ -75,13 +75,10 @@
     [btn setImage:img forState:UIControlStateNormal];
     btn.frame = CGRectMake(0, 0, 45, 44);
     [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
-    
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    
     //    修改距离,距离边缘的
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = -15;
-    
     self.navigationItem.leftBarButtonItems = @[spaceItem,item];
     //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
 }

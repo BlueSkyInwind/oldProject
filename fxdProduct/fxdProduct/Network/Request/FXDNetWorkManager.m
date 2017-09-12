@@ -251,7 +251,6 @@
            
             //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"charset=UTF-8",@"text/html",@"text/json",@"text/plain", nil];
-//            [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             
             manager.requestSerializer.timeoutInterval = 30.0;
             DLog(@"%@",parameters);
@@ -356,10 +355,7 @@
             }
         }];
     } else {
-        //        if (![Utility sharedUtility].networkState) {
-        //            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
-        //            return;
-        //        } else {
+
         MBProgressHUD *_waitView = [self loadingHUD];
         [_waitView show:YES];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;

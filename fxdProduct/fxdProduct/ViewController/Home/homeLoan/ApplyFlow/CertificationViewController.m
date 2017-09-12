@@ -163,7 +163,6 @@ typedef enum {
         }
             break;
         case PicCodeViewType:{
-            
             cell.picCodeView.hidden = NO;
             cell.smsCodeView.hidden = YES;
             cell.picCodeViewTopConstraint.constant = 5;
@@ -186,6 +185,7 @@ typedef enum {
     }
     return cell;
 }
+
 //认证button是否能点击
 - (BOOL)isCanEnable
 {
@@ -365,7 +365,6 @@ typedef enum {
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_authMobilePhone_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         ReturnMsgBaseClass *returnParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
         if ([returnParse.flag isEqualToString:@"0000"]) {
-            //            [blockDataList replaceObjectAtIndex:13 withObject:@"2"];
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"认证成功"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakself.navigationController popViewControllerAnimated:YES];
@@ -373,11 +372,6 @@ typedef enum {
         }else{
 //                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:returnParse.msg];
         }
-        //        if ([authCode isEqualToString:@"1"]) {
-        //            [blockDataList replaceObjectAtIndex:13 withObject:@"2"];
-        //        } else {
-        //            [blockDataList replaceObjectAtIndex:13 withObject:@""];
-        //        }
     } failure:^(EnumServerStatus status, id object) {
         
     }];
@@ -463,52 +457,6 @@ typedef enum {
     }
 }
 
-- (void)fatchJXLToken:(void(^)())finsh
-{
-    NSDictionary *paramDic = @{@"basic_info":@{@"name":@"水世星",
-                                               @"id_card_num":@"34040619760917815X",
-                                               @"cell_phone_num":@"18108030979"
-                                               }
-                               };
-    [[FXDNetWorkManager sharedNetWorkManager] JXLPOSTWithURL:_JXLGetToken_url parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        _jxlParse = [JXLParse yy_modelWithJSON:object];
-        DLog(@"%@",_jxlParse);
-        if (_jxlParse.success) {
-            //            [self startRequMessage:_jxlParse.data.token];
-            finsh();
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
-- (void)startRequMessage:(NSString *)tokenStr finsh:(void(^)(JXLMessagePrse *messageParse))finish
-{
-    NSDictionary *paramDic;
-    if (_captchaHidenDisplay) {
-        paramDic = @{@"token":tokenStr,
-                     @"account":@"18108030979",
-                     @"password":_mobileRequArr[0],
-                     @"website":_jxlParse.data.datasource.website};
-    } else {
-        paramDic = @{@"token":tokenStr,
-                     @"account":@"18108030979",
-                     @"password":_mobileRequArr[0],
-                     @"website":_jxlParse.data.datasource.website,
-                     @"captcha":_mobileRequArr[1],
-                     @"type":@"SUBMIT_CAPTCHA"};
-    }
-    
-    //    @"type":
-    [[FXDNetWorkManager sharedNetWorkManager] JXLPOSTWithURL:_messagesReq_url parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        JXLMessagePrse *messageParse = [JXLMessagePrse yy_modelWithJSON:object];
-        finish(messageParse);
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
 - (NSString *)formatString:(NSString *)str
 {
     NSMutableString *returnStr = [NSMutableString stringWithString:str];
@@ -529,10 +477,8 @@ typedef enum {
             [zbc appendFormat:@"%C",c];
         }
     }
-    
     return zbc;
 }
-
 
 -(void)clickAgreementImage:(UITapGestureRecognizer *)sender{
 

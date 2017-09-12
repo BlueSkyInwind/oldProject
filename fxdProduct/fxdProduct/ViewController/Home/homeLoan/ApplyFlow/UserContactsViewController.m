@@ -55,7 +55,6 @@
 
     NSString *device = [[UIDevice currentDevice] systemVersion];
     if (device.floatValue>10) {
-        
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
 //        self.automaticallyAdjustsScrollViewInsets = false;
@@ -181,7 +180,6 @@
                 [dataListAll replaceObjectAtIndex:2 withObject:[self formatString:contact2.contactPhone]];
             }
             
-            
             if (contact1.relationship) {
                 if ([contact1.relationship isEqualToString:@"4"]) {
                     [dataListAll replaceObjectAtIndex:3 withObject:@"同事"];
@@ -201,7 +199,6 @@
         }
     }
 }
-
 
 - (NSString *)formatString:(NSString *)str
 {
@@ -364,7 +361,6 @@
                 nav.predicateForSelectionOfPerson = [NSPredicate predicateWithValue:false];
                 [self presentViewController:nav animated:YES completion:nil];
             }
-            
         }
             break;
         case 1001:
@@ -445,7 +441,6 @@
             phoneNumStr = [phoneNumStr substringFromIndex:3];
         }
     }
-    
     [picker dismissViewControllerAnimated:true completion:^{
         [self contactSelect:fullName phone:phoneNumStr];
         ContactClass *contact = [[ContactClass alloc] init];
@@ -492,7 +487,6 @@
     personViewController.displayedPerson = person;
     [peoplePicker pushViewController:personViewController animated:YES];
 }
-
 
 - (void)uploadUserContact:(NSArray *)conArr
 {
@@ -845,7 +839,6 @@
     }
     return true;
 }
-
 
 -(NSString*)noneSpaseString:(NSString*)string {
     return [string stringByReplacingOccurrencesOfString:@" " withString:@""];

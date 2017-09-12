@@ -68,7 +68,6 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-
 @end
 
 @implementation UserDataViewController
@@ -138,7 +137,6 @@
 {
     [super viewWillAppear:animated];
     [_tableView.mj_header beginRefreshing];
-//    [[[self.navigationController.navigationBar subviews] objectAtIndex:0] setAlpha:0];
 }
 
 - (void)configTableview
@@ -178,10 +176,8 @@
 
 - (void)applyBtnClick
 {
-    DLog(@"确认申请");
-    
+    [self UserDataCertificationinterface];
 }
-
 
 #pragma mark -Tableview
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -613,7 +609,24 @@
     }];
     [userDataVM1 obtainBasicInformationStatus];
 }
-
+/**
+ 用户认证接口
+ */
+-(void)UserDataCertificationinterface{
+    UserDataViewModel * userDataVM =  [[UserDataViewModel alloc]init];
+    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            CheckingViewController * checkVC = [[CheckingViewController  alloc]init];
+            [self.navigationController pushViewController:checkVC animated:true];
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [userDataVM UserDataCertification];
+}
 - (void)popViewFamily
 {
     _alertView = [[[NSBundle mainBundle] loadNibNamed:@"testView" owner:self options:nil] lastObject];

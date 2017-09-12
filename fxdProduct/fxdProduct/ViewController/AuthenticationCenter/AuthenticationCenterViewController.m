@@ -27,9 +27,7 @@
 #import "CheckViewModel.h"
 #import "SupportBankList.h"
 
-
 @interface AuthenticationCenterViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
-
 {
 
     NSArray *_imageArr;
@@ -103,7 +101,6 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.collectionView.mj_header endRefreshing];
-
 }
 -(void)configureView{
     // 设置流水布局
@@ -137,6 +134,7 @@
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.backgroundColor = rgb(242, 242, 242);
+    _collectionView.scrollEnabled = false;
     [self.view addSubview:_collectionView];
     [_collectionView registerClass:[AuthenticationCenterCell class] forCellWithReuseIdentifier:@"AuthenticationCenterCell"];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ReusableView"];
@@ -159,9 +157,7 @@
 }
 
 -(void)bottomClick{
-
     [self UserDataCertificationinterface];
-    
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
 
@@ -534,7 +530,7 @@
     [header beginRefreshing];
     self.collectionView.mj_header = header;
 }
-
+/*
 -(BOOL)mobilePhoneOperatorChannels{
     __block BOOL result = true;
     if ([_resultCode isEqualToString:@"1"]) {
@@ -561,6 +557,7 @@
         result(true);
     }
 }
+ */
 #pragma mark - 魔蝎信用卡以及社保集成
 //邮箱导入
 - (void)mailImportClick{
@@ -570,7 +567,6 @@
     } @catch (NSException *exception) {
         DLog(@"%s\n%@", __FUNCTION__, exception);
     } @finally {
-        
     }
 }
 //社保导入

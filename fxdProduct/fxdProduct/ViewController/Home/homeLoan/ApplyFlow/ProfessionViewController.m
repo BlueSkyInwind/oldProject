@@ -235,9 +235,7 @@
                     [dataListAll replaceObjectAtIndex:1 withObject:telArray1[1]];
                 }
             }
-            
         }else{
-            
             if ([self isCommonString:_careerInfo.result.organizationTelephone]) {
                 [dataListAll replaceObjectAtIndex:1 withObject:_careerInfo.result.organizationTelephone];
             }

@@ -350,7 +350,6 @@
             repayRequest.applicationId = _repayModel.applyId;
             [repayRequest repayRequest];
         }
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -413,7 +412,7 @@
                 if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]||[applicationStatusModel.userStatus isEqualToString:@"13"]) {
 
                     [weakSelf updateUI:applicationStatusModel repayModel:nil];
-                    return ;
+                    return;
                 }
                 if ([applicationStatusModel.userStatus isEqualToString:@"2"]||[applicationStatusModel.userStatus isEqualToString:@"3"]) {
                     
