@@ -53,6 +53,8 @@ UIKIT_EXTERN NSString * const _ZMXY_url;
 UIKIT_EXTERN NSString * const _SETP_url;
 UIKIT_EXTERN NSString * const _ZhimaBack_url;
 UIKIT_EXTERN NSString * const _p2P_url;
+UIKIT_EXTERN NSString * const _agreement_url;
+
 
 UIKIT_EXTERN NSString * const       _getCode_url;                            //获取验证码
 UIKIT_EXTERN NSString * const       _regCode_url;                            //注册验证码
