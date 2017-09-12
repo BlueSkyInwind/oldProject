@@ -20,6 +20,7 @@
 #import "ApplicationStatusModel.h"
 #import "RepayModel.h"
 #import "BankInfoViewModel.h"
+#import "QueryCardInfo.h"
 @interface LoanMoneyViewController ()
 {
     MoneyIngView *moenyViewing;
@@ -47,6 +48,8 @@
     moenyViewing.headerView.hidden = YES;
     moenyViewing.promptLabel.hidden = YES;
     moenyViewing.statusBottomView.hidden = YES;
+    moenyViewing.heguiBtn.hidden = YES;
+    moenyViewing.heguiBtn.enabled = NO;
     [self.view addSubview:moenyViewing];
 
     [Tool setCorner:moenyViewing.sureBtn borderColor:UI_MAIN_COLOR];
@@ -56,10 +59,30 @@
     [moenyViewing.stagingBtn addTarget:self action:@selector(stagingBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [moenyViewing.agreementBtn addTarget:self action:@selector(agreementBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [moenyViewing.heguiBtn addTarget:self action:@selector(heguiBtnClick) forControlEvents:UIControlEventTouchUpInside];
     _isFirst = _popAlert;
 
   }
 
+#pragma mark 合规查看合同
+-(void)heguiBtnClick{
+
+    LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+    [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+        P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:returnValue];
+        if ([agreeModel.result.appcode isEqualToString:@"1"]) {
+            AgreeMentListViewController *agreeMentListViewController = [[AgreeMentListViewController alloc] init];
+            agreeMentListViewController.agreeMentArr = agreeModel.result.pactList;
+            [self.navigationController pushViewController:agreeMentListViewController animated:true];
+        } else {
+            
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [loanMoneyViewModel getContractList:_repayModel.bidId];
+
+}
 #pragma mark 续借一期点击按钮
 -(void)stagingBtnClick{
 
@@ -191,6 +214,33 @@
     
 }
 
+#pragma mark 请求银行卡列表信息
+
+- (void)postUrlBank:(void(^)(QueryCardInfo *rate))finish{
+    
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
+        if ([model.flag isEqualToString:@"0000"]) {
+            
+            finish(model);
+           
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
+        }
+        
+        
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [checkBankViewModel queryCardInfo];
+    
+}
+
+
 #pragma mark 获取协议
 -(void)fxdStatus{
 
@@ -260,37 +310,90 @@
     }
     
     if ([_repayModel.platformType isEqualToString:@"2"]) {
-        moenyViewing.agreementBtn.hidden = YES;
-        moenyViewing.agreementBtn.enabled = NO;
-        NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"查看合同"];
-        one.yy_font = [UIFont systemFontOfSize:13];
-        [one yy_setTextHighlightRange:NSMakeRange(0, one.length)
-                                color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
-                      backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
-                            tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
-                                DLog(@"合同查看");
-                                
-                                LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
-                                [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
-                                    P2PAgreeMentModel *agreeModel = [P2PAgreeMentModel yy_modelWithJSON:returnValue];
-                                    if ([agreeModel.result.appcode isEqualToString:@"1"]) {
-                                        AgreeMentListViewController *agreeMentListViewController = [[AgreeMentListViewController alloc] init];
-                                        agreeMentListViewController.agreeMentArr = agreeModel.result.pactList;
-                                        [self.navigationController pushViewController:agreeMentListViewController animated:true];
-                                    } else {
+    
+        moenyViewing.heguiBtn.hidden = NO;
+        moenyViewing.heguiBtn.enabled = YES;
+        [self postUrlBank:^(QueryCardInfo *rate) {
+            NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"我已阅读《银行自动转账授权书》、《信用咨询及管理服务协议》"];
+            moenyViewing.lableData.textAlignment = NSTextAlignmentLeft;
+            one.yy_font = [UIFont systemFontOfSize:13];
+            one.yy_color = rgb(102, 102, 102);
+            [one yy_setTextHighlightRange:NSMakeRange(4, 11)
+                                    color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
+                          backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
+                                tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
+                                    DLog(@"《银行自动转账授权书》");
+                                    
+                                    NSArray *paramArray = @[_repayModel.applyId,_repayModel.productId,@"1",rate.result.UsrCardInfolist.CardId,rate.result.UsrCardInfolist.bankName];
+                                    LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
+                                    [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
+                                        if ([[returnValue objectForKey:@"flag"] isEqualToString:@"0000"]) {
+                                            DetailViewController *detailVC = [[DetailViewController alloc] init];
+                                            detailVC.content = [[returnValue objectForKey:@"result"] objectForKey:@"protocol_content_"];
+                                            [self.navigationController pushViewController:detailVC animated:YES];
+                                        } else {
+                                            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
+                                        }
+                                    } WithFaileBlock:^{
                                         
-                                    }
-                                } WithFaileBlock:^{
+                                    }];
+                                    [loanMoneyViewModel getProductProtocol:paramArray];
                                     
                                 }];
-                                [loanMoneyViewModel getContractList:_repayModel.bidId];
-                                
-                            }];
+            
+            [one yy_setTextHighlightRange:NSMakeRange(15, 14)
+                                    color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000]
+                          backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220]
+                                tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
+                                    DLog(@"《信用咨询及管理服务协议》");
+                                    
+                                    [self clickSecondAgreementBtn];
+                                    
+                                }];
+            
         moenyViewing.agreeMentLabel.attributedText = one;
         moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentCenter;
+        }];
     }
 }
 
+
+
+#pragma mark 信用咨询及管理服务协议
+-(void)clickSecondAgreementBtn{
+    
+    NSDictionary *paramDic;
+    if ([_repayModel.productId isEqualToString:SalaryLoan]||[_repayModel.productId isEqualToString:WhiteCollarLoan]) {
+        
+        paramDic = @{@"apply_id_":_repayModel.applyId,
+                     @"product_id_":_repayModel.productId,
+                     @"protocol_type_":@"7",
+                     @"periods_":_repayModel.duration};
+    }
+    if ([_repayModel.productId isEqualToString:RapidLoan]) {
+        paramDic = @{@"apply_id_":_repayModel.applyId,
+                     @"product_id_":_repayModel.productId,
+                     @"protocol_type_":@"7",
+                     @"periods_":@2};
+    }
+    if ( [_repayModel.productId isEqualToString:DeriveRapidLoan]) {
+        paramDic = @{@"apply_id_":_repayModel.applyId,
+                     @"product_id_":_repayModel.productId,
+                     @"protocol_type_":@"7",
+                     @"periods_":@1};
+    }
+    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+            DetailViewController *detailVC = [[DetailViewController alloc] init];
+            detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        
+    }];
+}
 #pragma mark 五星好评的弹框
 - (void)showAlertview
 {
