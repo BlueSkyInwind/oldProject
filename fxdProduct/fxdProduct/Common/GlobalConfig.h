@@ -153,7 +153,8 @@ UIKIT_EXTERN NSString * const       _Staging_url;                            //�
 UIKIT_EXTERN NSString * const       _Repay_url;                              //待还款界面信息获取
 UIKIT_EXTERN NSString * const       _StagingRule_url;                        //获取续期规则
 UIKIT_EXTERN NSString * const       _registerID_url;                        //上传用户的registerID
-UIKIT_EXTERN NSString * const       _UserDataCertification_url;                        //用户资料测评接口
+UIKIT_EXTERN NSString * const       _UserDataCertification_url;              //用户资料测评接口
+UIKIT_EXTERN NSString * const       _UserDataCertificationResult_url;        //得到测评结果
 
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集

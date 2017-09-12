@@ -41,6 +41,7 @@
 #import "UILabel+FlickerNumber.h"
 #import "CheckViewIng.h"
 #import <MJRefresh/MJRefresh.h>
-
+#import "UserDataResult.h"
+#import "LoanSureFirstViewController.h"
 
 #endif /* fxdProduct_Bridging_Header_h */
