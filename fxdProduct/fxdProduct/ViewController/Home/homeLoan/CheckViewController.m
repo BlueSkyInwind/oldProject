@@ -946,7 +946,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             j=16;
             k=0;
         }else if (money>=3000&&money<=3999){
-        
             j=21;
             k=3;
         }else if (money>=4000&&money<=5000){
@@ -1018,7 +1017,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         userDataVC.product_id = SalaryLoan;
         [self.navigationController pushViewController:userDataVC animated:true];
     }
-
 }
 
 #pragma  mark - 白领贷拒绝导流工薪贷的详情
@@ -1222,9 +1220,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
         }
     } failure:^(EnumServerStatus status, id object) {
-        
     }];
 }
+
 //合规
 -(void)heguiAgreementRequest{
     if (_userSelectNum.integerValue == 0) {
@@ -1312,7 +1310,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
     [checkBankViewModel getSupportBankListInfo:@"4"];
 }
-
 
 #pragma mark 弹出合规银行卡列表viewmodel
 -(void)queryCardInfo{

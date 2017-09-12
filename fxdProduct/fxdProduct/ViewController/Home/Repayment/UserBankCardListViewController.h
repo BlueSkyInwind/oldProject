@@ -20,6 +20,8 @@ typedef void(^BankSelectBlock)(CardInfo * cardInfo, NSInteger currentIndex);
 
 @property (nonatomic, copy) BankSelectBlock bankSelectBlock;
 
+@property (nonatomic, assign) BOOL isHavealipay;
+
 //swift调用
 -(void)userSelectedBankCard:(BankSelectBlock)block;
 

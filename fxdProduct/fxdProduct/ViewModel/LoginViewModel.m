@@ -13,6 +13,7 @@
 #import "GetCustomerBaseViewModel.h"
 #import "DataWriteAndRead.h"
 #import "CustomerBaseInfoBaseClass.h"
+#import "JPUSHService.h"
 @implementation LoginViewModel
 /**
  登录请求
@@ -85,11 +86,12 @@
             DLog(@"token -- %@  \n  juid -- %@",[Utility sharedUtility].userInfo.tokenStr,[Utility sharedUtility].userInfo.juid);
             
             [self PostPersonInfoMessage];
+            //上传推送id
+            [self uploadUserRegisterID:[JPUSHService registrationID]];
             //登录统计(账号)
             [MobClick profileSignInWithPUID:userTableName];
             //打开数据库
             [[DataBaseManager shareManager] dbOpen:userTableName];
-            
         }
         self.returnBlock(loginParse);
     } failure:^(EnumServerStatus status, id object) {
@@ -132,8 +134,16 @@
     [customBaseViewModel fatchCustomBaseInfo:nil];
 }
                                   
-                                  
-                            
+-(void)uploadUserRegisterID:(NSString *)registerID{
+    
+    NSDictionary * paramDic  = @{@"registerId":registerID};
+    [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_registerID_url] isNeedNetStatus:false isNeedWait:false parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+    } failure:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+    }];
+    
+}
 
 
 @end

@@ -43,12 +43,8 @@ class CheckingViewController: UIViewController {
         self.navigationItem.leftBarButtonItems = [spaceItem,item]
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self as? UIGestureRecognizerDelegate
         
-        
-        
     }
-
     func popBack(){
-    
         self.navigationController?.popViewController(animated: true)
     }
 
@@ -61,23 +57,18 @@ class CheckingViewController: UIViewController {
         
         view.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             print("下拉刷新.")
-
             self.scrollView?.mj_header.endRefreshing()
             //结束刷新
         })
-        
         self.view = view;
         self.scrollView = view;
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 

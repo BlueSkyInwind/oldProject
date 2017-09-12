@@ -460,6 +460,12 @@ NSString * const    _Repay_url    =    @"apigw/client/ready/to/repay.jhtml";
 //获取续期规则
 NSString * const    _StagingRule_url    =    @"apigw/client/continue/rule/detail";
 
+//上传用户的registerID
+NSString * const    _registerID_url    =    @"apigw/client/center/jiguang/register";
+
+//用户资料测评接口
+NSString * const    _UserDataCertification_url    =    @"apigw/client/user/measurement/info";
+
 #pragma mark - 合规接口
 
 //用户开户接口

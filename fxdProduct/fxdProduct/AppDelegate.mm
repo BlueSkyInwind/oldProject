@@ -21,7 +21,7 @@
 #import "FXDAppUpdateChecker.h"
 #import "SetUpFMDevice.h"
 #import "SetSome.h"
-
+#import "LoginViewModel.h"
 
 
 NSString* const NotificationCategoryIdent  = @"ACTIONABLE";
@@ -90,6 +90,8 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     if (userTableName) {
         [[DataBaseManager shareManager] dbOpen:userTableName];
     }
+    //上传jpushID
+    [self uploadJPushID];
     
     return YES;
 }
@@ -293,11 +295,18 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];
 }
-
+-(void)uploadJPushID{
+    
+    [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
+        if (registrationID != nil && [Utility sharedUtility].userInfo.juid) {
+            LoginViewModel * loginVM = [[LoginViewModel alloc]init];
+            [loginVM uploadUserRegisterID:registrationID];
+        }
+    }];
+}
 
 
 //数据库创建

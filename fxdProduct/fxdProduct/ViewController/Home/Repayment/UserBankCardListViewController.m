@@ -34,11 +34,10 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     // Do any additional setup after loading the view.
     
     _datalist = [[NSMutableArray alloc] init];
-
+//    _isHavealipay = false;
 //    _currentIndex = 0;
     self.navigationItem.title = @"选择银行卡";
 
-    [self addBackItem];
     [self addBanckCard];
     [self configuireView];
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(fatchBankList)];
@@ -53,9 +52,10 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 
 -(void)configuireView{
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -66,10 +66,29 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (void)addBanckCard
 {
-
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [btn setImage:img forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, 0, 45, 44);
+    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    //    修改距离,距离边缘的
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceItem.width = -15;
+    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
+    
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"addBankCardIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(addCardClick)];
     self.navigationItem.rightBarButtonItem = aBarbi;
     
+}
+- (void)popBack
+{
+    if (self.bankSelectBlock) {
+        self.bankSelectBlock(_cardInfo,_currentIndex);
+    }
+    
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)addCardClick{
     
@@ -79,9 +98,6 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         DLog(@"添加卡成功");
         _currentIndex = 0;
         [self.tableView.mj_header beginRefreshing];
-        if (self.bankSelectBlock) {
-            self.bankSelectBlock(_cardInfo,_currentIndex);
-        }
     };
     BaseNavigationViewController *addCarNC = [[BaseNavigationViewController alloc] initWithRootViewController:editCard];
     [self presentViewController:addCarNC animated:YES completion:nil];
@@ -106,6 +122,9 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
                     [_datalist addObject:cardInfo];
                 }
             }
+            if (_currentIndex < _datalist.count) {
+                _cardInfo = _datalist[_currentIndex];
+            }
             [self.tableView.mj_header endRefreshing];
             [_tableView reloadData];
         }else{
@@ -123,12 +142,18 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (_isHavealipay) {
+        return 2;
+    }
     return 1;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  _datalist.count;
+    if (section == 0) {
+        return  _datalist.count;
+    }else{
+        return 1;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -138,30 +163,41 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     BankListCell *cell = [tableView dequeueReusableCellWithIdentifier:bankListCellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    CardInfo *cardInfo = [_datalist objectAtIndex:indexPath.row];
-    [cell.bankLogo sd_setImageWithURL:[NSURL URLWithString:cardInfo.cardIcon] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
-    cell.bankCardInfoLabel.text = [NSString stringWithFormat:@"%@ 尾号(%@)",cardInfo.bankName,[self formatTailNumber:cardInfo.cardNo]];
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.bankCardInfoLabel.textColor = [UIColor grayColor];
-    if (_currentIndex == indexPath.row) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        cell.bankCardInfoLabel.textColor = [UIColor blackColor];
+    
+    if (indexPath.section == 0) {
+        CardInfo *cardInfo = [_datalist objectAtIndex:indexPath.row];
+        [cell.bankLogo sd_setImageWithURL:[NSURL URLWithString:cardInfo.cardIcon] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
+        cell.bankCardInfoLabel.text = [NSString stringWithFormat:@"%@ 尾号(%@)",cardInfo.bankName,[self formatTailNumber:cardInfo.cardNo]];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.bankCardInfoLabel.textColor = [UIColor grayColor];
+        if (_currentIndex == indexPath.row) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            cell.bankCardInfoLabel.textColor = [UIColor blackColor];
+        }
+    }else{
+        
+        [cell.bankLogo setImage:[UIImage imageNamed:@"placeholder_Image"]];
+        cell.bankCardInfoLabel.text = @"支付宝";
     }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _currentIndex = indexPath.row;
-    CardInfo *cardInfo = [_datalist objectAtIndex:indexPath.row];
-    _cardInfo = cardInfo;
-    [self.tableView reloadData];
-    if (self.bankSelectBlock) {
-        self.bankSelectBlock(_cardInfo,_currentIndex);
+    if (indexPath.section == 0) {
+        _currentIndex = indexPath.row;
+        CardInfo *cardInfo = [_datalist objectAtIndex:indexPath.row];
+        _cardInfo = cardInfo;
+        [self.tableView reloadData];
+        if (self.bankSelectBlock) {
+            self.bankSelectBlock(_cardInfo,_currentIndex);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        
     }
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)userSelectedBankCard:(BankSelectBlock)block{

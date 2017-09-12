@@ -94,25 +94,22 @@ class FaceIdentiViewController: BaseViewController,LiveDeteDelgate{
         userDataVM.setBlockWithReturn({[weak self] (object) in
             let dic =  object as! NSDictionary
             if dic["flag"] as! String == "0000"{
+                self?.verifyStatus = "2"
+                self?.changeStatus()
                 let statusMsg = (dic["result"] as! NSDictionary)["verify_msg_"] as! String
-                let status = (dic["result"] as! NSDictionary)["verify_status_"] as! String
-                
+                let status = (dic["result"] as! NSDictionary)["verify_status_"] as! Int
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: statusMsg)
                 if ((self?.identifyResultStatus) != nil) {
-                    self?.identifyResultStatus!(status)
+                    self?.identifyResultStatus!(String(status))
                 }
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: (dic["msg"] as! String))
             }
         }) {
-            
         }
         userDataVM.uploadLiveIdentiInfo(faceIDData)
-        
     }
     
-    
-
     /*
     // MARK: - Navigation
 
