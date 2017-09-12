@@ -15,9 +15,7 @@
 #import "RepayRequestManage.h"
 #import "IdeaBackViewController.h"
 #import "LoanMoneyViewModel.h"
-#import "QryUserStatusModel.h"
 #import "RTRootNavigationController.h"
-#import "GetCaseInfo.h"
 #import "P2PViewController.h"
 #import "ApplicationStatusModel.h"
 #import "RepayModel.h"
@@ -30,7 +28,6 @@
 }
 
 @property (nonatomic, weak) UIScrollView *scrollView;
-@property (nonatomic,strong)GetCaseInfo *caseInfo;
 
 @end
 
@@ -462,7 +459,7 @@
         [self.scrollView.mj_header endRefreshing];
     }];
     
-    [loanMoneyViewModel getApplicationStatus:[NSString stringWithFormat:@"%ld",_applicationStatus]];
+    [loanMoneyViewModel getApplicationStatus:[NSString stringWithFormat:@"%ld",(unsigned long)_applicationStatus]];
 }
 
 #pragma mark -> 2.22	待还款界面信息获取
