@@ -166,9 +166,20 @@
                                                         <constraint firstItem="WSP-Ph-xht" firstAttribute="top" secondItem="JIo-bb-VC8" secondAttribute="bottom" constant="12" id="v1i-Vj-PIa"/>
                                                     </constraints>
                                                 </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7m-CD-2NR">
+                                                    <rect key="frame" x="150" y="110" width="75" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="kim-aa-dJ2"/>
+                                                        <constraint firstAttribute="width" constant="75" id="q7M-3k-oQu"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <state key="normal" title="查看合同"/>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
+                                                <constraint firstItem="w7m-CD-2NR" firstAttribute="centerX" secondItem="aBv-ir-cn5" secondAttribute="centerX" id="612-f9-q2K"/>
+                                                <constraint firstAttribute="bottom" secondItem="w7m-CD-2NR" secondAttribute="bottom" id="C2F-gk-hqP"/>
                                                 <constraint firstAttribute="trailing" secondItem="hO2-Wx-wdq" secondAttribute="trailing" id="FKU-1h-c4f"/>
                                                 <constraint firstItem="hO2-Wx-wdq" firstAttribute="leading" secondItem="aBv-ir-cn5" secondAttribute="leading" id="fsP-uB-Skg"/>
                                                 <constraint firstItem="hO2-Wx-wdq" firstAttribute="centerY" secondItem="aBv-ir-cn5" secondAttribute="centerY" id="r9Y-5e-0D8"/>
@@ -500,6 +511,7 @@
                 <outlet property="agreementBtn" destination="urj-Uk-xdN" id="y6f-ZQ-3LH"/>
                 <outlet property="bottomView" destination="hWU-sA-8y5" id="l0X-ML-t2f"/>
                 <outlet property="headerView" destination="yzJ-0x-xaM" id="Z4l-gk-ae5"/>
+                <outlet property="heguiBtn" destination="w7m-CD-2NR" id="A82-wG-irI"/>
                 <outlet property="labelDetail" destination="kSw-JM-F44" id="bNy-Yj-rxH"/>
                 <outlet property="labelLoan" destination="BPz-Ce-S5M" id="AkG-Rr-D8r"/>
                 <outlet property="labelProgress" destination="5r6-y1-4Ns" id="Xra-hu-0pU"/>
