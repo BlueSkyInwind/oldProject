@@ -849,8 +849,16 @@
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
 //        NSArray *array = @[@"BOC",@"ICBC",@"CCB",@"ABC",@"CITIC",@"CIB",@"CEB"];
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
-        _queryCardInfoModel = model;
-        [self obtain_HeGui_BankList:model];
+        if ([model.flag isEqualToString:@"0000"]) {
+            
+            _queryCardInfoModel = model;
+            [self obtain_HeGui_BankList:model];
+        }else{
+        
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
+        }
+        
+        
     
     } WithFaileBlock:^{
         

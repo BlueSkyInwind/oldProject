@@ -79,9 +79,9 @@ class CheckingViewController: UIViewController {
                 let str = NSString(string:userDataModel.rc_status!)
                 switch str.intValue{
                 
-                case 00,10:
+                case 10:
                     break
-                case 20,30:
+                case 00,20,30:
                     
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                         print("延时提交的任务")
