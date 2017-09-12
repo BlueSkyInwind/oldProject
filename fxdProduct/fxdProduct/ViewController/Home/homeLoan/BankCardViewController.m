@@ -415,9 +415,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         default:
             break;
     }
-    
 }
-
 
 #pragma mark P2P短信发送
 -(void)p2p{

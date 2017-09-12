@@ -129,9 +129,7 @@
     if ([message.name isEqualToString:@"jsToNative"]) {
         DLog(@"%@",[message.body class]);
         NSDictionary *dic = message.body;
-        if ([[dic objectForKey:@"body"] isEqualToString:@"nativeShare"]) {
-            [self shareContent:self.view];
-        }
+        //JS交互点击事件
         if ([[dic objectForKey:@"functionName"] isEqualToString:@"mxBack"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -142,10 +140,31 @@
 {
     NSURLRequest *request = navigationAction.request;
     NSLog(@"=========%@",request.URL.absoluteString);
+    //打开支付宝
+    if ([request.URL.absoluteString hasPrefix:@"alipays"]) {
+        if ([Tool getIOSVersion] < 10) {
+            if ([[UIApplication sharedApplication] canOpenURL:request.URL]) {
+                [[UIApplication sharedApplication] openURL:request.URL ];
+            }
+            else{
+                [self showMessage:@"打开支付宝失败！" vc:self];
+            }
+        }
+        else {
+            [[UIApplication sharedApplication] openURL:request.URL options:@{} completionHandler:^(BOOL success) {
+                if (!success) {
+                    [self showMessage:@"打开支付宝失败！" vc:self];
+                }
+            }];
+        }
+           decisionHandler(WKNavigationActionPolicyAllow);
+    }
+    
     if ([request.URL.absoluteString hasSuffix:@"main.html"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
         [self.navigationController popViewControllerAnimated:YES];
-    }else{
+    }
+    else{
         decisionHandler(WKNavigationActionPolicyAllow);
     }
 }
@@ -207,6 +226,15 @@
     _webView = nil;
 }
 
+- (void)showMessage:(NSString *)msg vc:(UIViewController *)vc
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.navigationController popViewControllerAnimated:true];
+    }];
+    [alertController addAction:action];
+    [vc presentViewController:alertController animated:true completion:nil];
+}
 -(void)shareContent:(UIView *)view
 {
     NSArray *imageArr = @[[UIImage imageNamed:@"logo_60"]];

@@ -540,6 +540,7 @@
             if (_repayListInfo != nil) {
                 DLog(@"选择付款方式");
                 [self pushUserBankListVC];
+        
             }
         }
     }else {
@@ -584,6 +585,7 @@
     
     UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
     userBankCardListVC.isHavealipay = true;
+    userBankCardListVC.stagingID = [self obtainRepayStaging_ids];
     if (userSelectIndex == -1) {
         userBankCardListVC.currentIndex = defaultBankIndex;
     } else {
@@ -678,7 +680,6 @@
     if (_repayListInfo == nil) {
         return;
     }
-    
     if ([self.platform_Type isEqualToString:@"2"] ) {
         [self getMoney];
     }else{
@@ -686,10 +687,13 @@
     }
 }
 
-- (void)fxdRepay
-{
-    NSLog(@"=================支付点击===================");
-    self.sureBtn.enabled = NO;
+/**
+ 获取还款期数id
+
+ @return 期数id
+ */
+-(NSMutableString *)obtainRepayStaging_ids{
+    
     NSMutableString *staging_ids = [NSMutableString string];
     for (int i = 0; i < _situations.count; i++) {
         NSString *str = [NSString stringWithFormat:@"%@,",[_situations objectAtIndex:i].staging_id];
@@ -697,6 +701,14 @@
     }
     [staging_ids deleteCharactersInRange:NSMakeRange(staging_ids.length - 1, 1)];
     
+    return staging_ids;
+}
+
+- (void)fxdRepay
+{
+    NSLog(@"=================支付点击===================");
+    self.sureBtn.enabled = NO;
+    NSMutableString *staging_ids = [self obtainRepayStaging_ids];
     NSDictionary *paramDic;
     NSString *save_amountTemp;
     if (_repayType == RepayTypeClean) {

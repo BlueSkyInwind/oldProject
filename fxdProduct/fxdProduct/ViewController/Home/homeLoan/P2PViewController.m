@@ -89,6 +89,7 @@
 - (void)popBack
 {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [self getUserStatus:self.applicationId];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
@@ -112,7 +113,6 @@
         }
         DLog(@"%@",title);
     }
-    
     if (object == _webview && [keyPath isEqualToString:@"URL"]) {
         DLog(@"%@",_webview.URL.absoluteString);
     }
@@ -155,7 +155,6 @@
     
     
 }
-
 #pragma mark  fxd用户状态查询，viewmodel
 -(void)getUserStatus:(NSString *)applicationId{
     

@@ -135,14 +135,13 @@
 }
                                   
 -(void)uploadUserRegisterID:(NSString *)registerID{
-    
+    //@"http://192.168.12.252:8012/excenter/jiguang/register"
     NSDictionary * paramDic  = @{@"registerId":registerID};
     [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_registerID_url] isNeedNetStatus:false isNeedWait:false parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     } failure:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     }];
-    
 }
 
 
