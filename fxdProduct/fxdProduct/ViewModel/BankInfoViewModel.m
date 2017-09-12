@@ -71,10 +71,14 @@
     }];
 }
 
--(void)obtainTrilateralLink:(NSString * )stagingId payType:(NSString *)payType{
+-(void)obtainTrilateralLink:(NSString * )stagingId  redPacketAmount:(NSString *)redPacketAmount redPacketId:(NSString *)redPacketId payType:(NSString *)payType stagingContinue:(BOOL)stagingContinue{
     
     NSDictionary *paramDic = @{@"payType":@"1",
+                               @"redPacketAmount":redPacketAmount,
+                               @"redPacketId":redPacketId,
+                               @"stagingContinue":[NSNumber numberWithBool:stagingContinue],
                                @"stagingId":stagingId};
+    
     
     [[FXDNetWorkManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_Trilateral_url] isNeedNetStatus:YES isNeedWait:YES parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {

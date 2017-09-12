@@ -13,7 +13,6 @@
 #import "UserCardResult.h"
 #import "CardInfo.h"
 #import "BankInfoViewModel.h"
-#import "FXDWebViewController.h"
 
 @interface UserBankCardListViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -48,6 +47,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     self.tableView.mj_header = header;
 }
 -(void)viewWillAppear:(BOOL)animated{
+    
     
 }
 
@@ -84,8 +84,8 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (void)popBack
 {
-    if (self.bankSelectBlock) {
-        self.bankSelectBlock(_cardInfo,_currentIndex);
+    if (self.payPatternSelectBlock) {
+        self.payPatternSelectBlock(_cardInfo,_currentIndex,self.payPattern);
     }
     
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -173,62 +173,48 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         cell.bankCardInfoLabel.text = [NSString stringWithFormat:@"%@ 尾号(%@)",cardInfo.bankName,[self formatTailNumber:cardInfo.cardNo]];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.bankCardInfoLabel.textColor = [UIColor grayColor];
-        if (_currentIndex == indexPath.row) {
+        if (_currentIndex == indexPath.row && self.payPattern == BankCard) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             cell.bankCardInfoLabel.textColor = [UIColor blackColor];
         }
     }else{
-        
         [cell.bankLogo setImage:[UIImage imageNamed:@"approve_alipay"]];
         cell.bankCardInfoLabel.text = @"支付宝";
+        if (self.payPattern == Alipays) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            cell.bankCardInfoLabel.textColor = [UIColor blackColor];
+        }
     }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
+        self.payPattern = BankCard;
         _currentIndex = indexPath.row;
         CardInfo *cardInfo = [_datalist objectAtIndex:indexPath.row];
         _cardInfo = cardInfo;
         [self.tableView reloadData];
-        if (self.bankSelectBlock) {
-            self.bankSelectBlock(_cardInfo,_currentIndex);
+        if (self.payPatternSelectBlock) {
+            self.payPatternSelectBlock(_cardInfo,_currentIndex,BankCard);
         }
-        [self.navigationController popViewControllerAnimated:YES];
     }else{
-        [self trilateralEntrance];
+        self.payPattern = Alipays;
+        if (self.payPatternSelectBlock) {
+            _currentIndex = -2;
+            self.payPatternSelectBlock(_cardInfo,_currentIndex,Alipays);
+        }
     }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)userSelectedBankCard:(BankSelectBlock)block{
-    
-    self.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
-        block(cardInfo,currentIndex);
+-(void)userSelectedBankCard:(PayPatternSelectBlock)block{
+    self.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex,PatternOfPayment patternOfPayment) {
+        block(cardInfo,currentIndex,patternOfPayment);
     };
 }
 
--(void)trilateralEntrance{
-    
-    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
-    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
-        
-//        FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-//        webView.urlStr = (NSString *)returnValue[@"data"][@"callbackUrl"];
-//        [self.navigationController pushViewController:webView animated:YES];
-//        return;
-        
-        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResultM.errCode isEqualToString:@"0"]){
-            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-            webView.urlStr = baseResultM.data[@"callbackUrl"];
-            [self.navigationController pushViewController:webView animated:YES];
-        }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
-        }
-    } WithFaileBlock:^{
-    }];
-    [bankInfoVM obtainTrilateralLink:self.stagingID payType:@"1"];
-}
+
 
 
 - (void)didReceiveMemoryWarning {

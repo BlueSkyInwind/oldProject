@@ -43,5 +43,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import "UserDataResult.h"
 #import "LoanSureFirstViewController.h"
+#import "UserInfoObj.h"
+#import "FXDWebViewController.h"
 
 #endif /* fxdProduct_Bridging_Header_h */

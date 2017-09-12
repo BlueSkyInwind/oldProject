@@ -13,6 +13,10 @@
 @property (nonatomic, copy)NSString *urlStr;
 
 @property (nonatomic, copy) NSString *shareContent;
+
 @property (nonatomic,assign)BOOL isZhima;
+
+@property (nonatomic, copy)NSString * payType;  // 1、还款   2、续期
+
 
 @end

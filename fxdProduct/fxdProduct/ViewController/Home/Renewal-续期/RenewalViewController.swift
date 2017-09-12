@@ -16,7 +16,9 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
     var contentArr : [String] = [String]()
     var cardInfo : CardInfo?
     var stagingId : String?
-    
+    var currentindex : Int?
+    var paymentPattern : PatternOfPayment?
+
     let renewalTableView: UITableView = {
         
         let tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
@@ -34,9 +36,9 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         // Do any additional setup after loading the view.
         
         self.title = "续期费用"
-        
+        currentindex = 0
         addBackItem()
-        
+        paymentPattern = .BankCard
         headerView = CurrentInformationHeadView()
         headerView?.moneyDescLabel?.text = "续期费用(元)"
         headerView?.backgroundColor = UI_MAIN_COLOR
@@ -46,9 +48,12 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         footerView.frame = CGRect(x:0,y:0,width:_k_w,height:50)
         footerView.footerBtn?.setTitle("确认", for: .normal)
         footerView.footerBtnClosure = {
-        
-            self.commitStaging()
-
+            if self.paymentPattern == .BankCard{
+                self.commitStaging()
+            }
+            else{
+                self.trilateralEntrance()
+            }
 //            print("确认按钮点击")
         }
         renewalTableView.tableFooterView = footerView
@@ -101,9 +106,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
             
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
-            
-            
-        }) { 
+        }) {
             
         }
         repayMentViewModel.getCurrentRenewal(withStagingId: stagingId)
@@ -178,17 +181,18 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
             cell.leftLabel?.text = leftTitleArr[indexPath.row]
             
             if indexPath.row == 3{
-            
-                if cardInfo != nil{
-                
-                    let index = cardInfo?.cardNo.index((cardInfo?.cardNo.endIndex)!, offsetBy: -4)
-                    let numStr = cardInfo?.cardNo.substring(from: index!)
-                    cell.rightLabel?.text = (cardInfo?.bankName)!+" 尾号 "+"("+numStr!+")"
+                if paymentPattern == .Alipays {
+                    cell.rightLabel?.text = " 支付宝付款 "
                 }
-                
+                else{
+                    if cardInfo != nil{
+                        let index = cardInfo?.cardNo.index((cardInfo?.cardNo.endIndex)!, offsetBy: -4)
+                        let numStr = cardInfo?.cardNo.substring(from: index!)
+                        cell.rightLabel?.text = (cardInfo?.bankName)!+" 尾号 "+"("+numStr!+")"
+                    }
+                }
                 return cell
             }
-            
             cell.rightLabel?.text = contentArr[indexPath.row]+"元"
             return cell
         }
@@ -203,21 +207,22 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         if indexPath.row == 3{
             
             let userBankCardListVC = UserBankCardListViewController()
-            userBankCardListVC.userSelectedBankCard({ (cardInfo, currentIndex) in
-                
-                self.cardInfo = cardInfo
-                self.renewalTableView.reloadData()
+            userBankCardListVC.isHavealipay = true
+            userBankCardListVC.currentIndex = currentindex!
+            userBankCardListVC.payPattern = paymentPattern!
+            userBankCardListVC.userSelectedBankCard({ [weak self] (cardInfo, currentIndex,patternOfPayment) in
+                self?.cardInfo = cardInfo
+                self?.paymentPattern = patternOfPayment
+                self?.currentindex = currentIndex
+                self?.renewalTableView.reloadData()
             })
-
             self.navigationController?.pushViewController(userBankCardListVC, animated: true)
-           
         }
         if indexPath.row == 4{
-        
             getStagingRule()
         }
     }
-
+ 
     func fatchBankList(){
     
         let bankInfoVM = BankInfoViewModel()
@@ -229,22 +234,18 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
                 
                     let cardInfo = try! CardInfo.init(dictionary: dic as! [AnyHashable : Any])
                     if cardInfo.cardType == "2"{
-                    
                         self.cardInfo = cardInfo
                         self.renewalTableView.reloadData()
                         break
-                        
                     }
                 }
             }else{
-            
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) {
             
         }
         bankInfoVM.obtainUserBankCardList()
-
     }
     
     //MARK:提交续期请求
@@ -260,7 +261,6 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
                 _ = self.navigationController?.popToViewController(idVC, animated: true)
 
             }else{
-            
                 print("================",baseResult.errMsg)
                  MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
@@ -268,6 +268,23 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
             
         }
         bankInfoVM.obtainUserCommitStaging(stagingId, cardId: self.cardInfo?.cardId)
+    }
+    
+    func trilateralEntrance() -> Void {
+        let bankInfoVM = BankInfoViewModel()
+        bankInfoVM.setBlockWithReturn({ (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                let webView = FXDWebViewController.init()
+                let dic = baseResult.data as! NSDictionary
+                webView.urlStr = dic.object(forKey: "callbackUrl") as! String
+                self.navigationController?.pushViewController(webView, animated: true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+        }
+        bankInfoVM.obtainTrilateralLink(stagingId, redPacketAmount: nil, redPacketId: nil, payType: "1", stagingContinue: true)
     }
     
     //MARK:获取续期规则
@@ -285,9 +302,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
                 detailVC.navTitle = "续期规则";
                 self.navigationController?.pushViewController(detailVC, animated: true)
 
-                
             }else{
-                
                 print("================",baseResult.errMsg)
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
