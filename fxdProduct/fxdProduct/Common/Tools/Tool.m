@@ -17,7 +17,10 @@
 {
     return @{@"record":[self getEncryptStringWithParameters:params]};
 }
-
++ (float)getIOSVersion
+{
+    return [[[UIDevice currentDevice] systemVersion] floatValue];
+}
 //加密json串
 + (NSString *)getEncryptStringWithParameters:(id)params
 {

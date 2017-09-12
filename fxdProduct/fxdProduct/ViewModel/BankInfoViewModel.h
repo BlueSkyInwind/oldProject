@@ -24,4 +24,12 @@
  获取续期规则
  */
 -(void)obtainUserStagingRule;
+
+
+/**
+ 获取三方支付链接
+ */
+-(void)obtainTrilateralLink:(NSString * )stagingId payType:(NSString *)payType;
+
+
 @end

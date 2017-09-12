@@ -13,6 +13,7 @@
 #import "UserCardResult.h"
 #import "CardInfo.h"
 #import "BankInfoViewModel.h"
+#import "FXDWebViewController.h"
 
 @interface UserBankCardListViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -108,7 +109,6 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (void)fatchBankList
 {
-    
     BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
     [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
@@ -179,7 +179,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         }
     }else{
         
-        [cell.bankLogo setImage:[UIImage imageNamed:@"placeholder_Image"]];
+        [cell.bankLogo setImage:[UIImage imageNamed:@"approve_alipay"]];
         cell.bankCardInfoLabel.text = @"支付宝";
     }
     return cell;
@@ -196,7 +196,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         }
         [self.navigationController popViewControllerAnimated:YES];
     }else{
-        
+        [self trilateralEntrance];
     }
 }
 
@@ -205,6 +205,29 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     self.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
         block(cardInfo,currentIndex);
     };
+}
+
+-(void)trilateralEntrance{
+    
+    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
+    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        
+//        FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+//        webView.urlStr = (NSString *)returnValue[@"data"][@"callbackUrl"];
+//        [self.navigationController pushViewController:webView animated:YES];
+//        return;
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+            webView.urlStr = baseResultM.data[@"callbackUrl"];
+            [self.navigationController pushViewController:webView animated:YES];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [bankInfoVM obtainTrilateralLink:self.stagingID payType:@"1"];
 }
 
 

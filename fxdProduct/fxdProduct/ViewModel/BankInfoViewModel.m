@@ -68,7 +68,24 @@
         if (self.faileBlock) {
             [self faileBlock];
         }
-        
     }];
 }
+
+-(void)obtainTrilateralLink:(NSString * )stagingId payType:(NSString *)payType{
+    
+    NSDictionary *paramDic = @{@"payType":@"1",
+                               @"stagingId":stagingId};
+    
+    [[FXDNetWorkManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_Trilateral_url] isNeedNetStatus:YES isNeedWait:YES parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+
 @end

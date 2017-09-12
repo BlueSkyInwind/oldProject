@@ -22,6 +22,8 @@ typedef void(^BankSelectBlock)(CardInfo * cardInfo, NSInteger currentIndex);
 
 @property (nonatomic, assign) BOOL isHavealipay;
 
+@property (nonatomic, strong) NSString * stagingID;
+
 //swift调用
 -(void)userSelectedBankCard:(BankSelectBlock)block;
 

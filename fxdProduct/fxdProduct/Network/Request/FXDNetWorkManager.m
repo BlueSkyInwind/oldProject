@@ -83,11 +83,10 @@
     NSDictionary *paramDic = [NSDictionary dictionary];
     DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-//    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
+//    [manager.requestSerializer setValue:@"applicaiton/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
 //    if (parameters) {
 //        if ([Tool dicContainsKey:parameters keyValue:@"Encrypt"]) {
 //            NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
@@ -119,10 +118,8 @@
             resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
             NSLog(@"%@",resultDic);
         }else{
-            NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
-            NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-            NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            DLog(@"response json --- %@",jsonStr);
+            resultDic = [NSDictionary dictionaryWithDictionary:responseObject];
+            DLog(@"response json --- %@",resultDic);
         }
         finished(Enum_SUCCESS,resultDic);
          [_waitView removeFromSuperview];
