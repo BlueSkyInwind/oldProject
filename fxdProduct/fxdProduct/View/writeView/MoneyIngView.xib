@@ -22,6 +22,44 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWU-sA-8y5" userLabel="View21">
                             <rect key="frame" x="0.0" y="80" width="375" height="324.5"/>
                             <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yyT-h8-0LW">
+                                    <rect key="frame" x="0.0" y="216.5" width="375" height="50"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uf0-bz-usX">
+                                            <rect key="frame" x="87" y="0.0" width="200" height="30"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G77-OQ-sEz">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="IWR-FY-X8Z"/>
+                                                        <constraint firstAttribute="width" constant="150" id="i2J-yq-z9h"/>
+                                                    </constraints>
+                                                    <state key="normal" title="钱不够，续借一期 》">
+                                                        <color key="titleColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_wenhao" translatesAutoresizingMaskIntoConstraints="NO" id="qln-P2-6l2">
+                                                    <rect key="frame" x="160" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="UXR-Sj-oHU"/>
+                                                <constraint firstAttribute="width" constant="200" id="fEb-AY-JBZ"/>
+                                                <constraint firstItem="G77-OQ-sEz" firstAttribute="leading" secondItem="uf0-bz-usX" secondAttribute="leading" id="jUP-VD-YeZ"/>
+                                                <constraint firstItem="G77-OQ-sEz" firstAttribute="top" secondItem="uf0-bz-usX" secondAttribute="top" id="lrB-BE-Icb"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="2zt-Zv-Noj"/>
+                                        <constraint firstItem="uf0-bz-usX" firstAttribute="top" secondItem="yyT-h8-0LW" secondAttribute="top" id="ZcZ-WO-Aci"/>
+                                        <constraint firstItem="uf0-bz-usX" firstAttribute="centerX" secondItem="yyT-h8-0LW" secondAttribute="centerX" id="m63-KD-GA4"/>
+                                        <constraint firstAttribute="width" constant="375" id="wYG-KG-Wgt"/>
+                                    </constraints>
+                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p84-oi-gpm" userLabel="View32">
                                     <rect key="frame" x="0.0" y="216.5" width="375" height="108"/>
                                     <subviews>
@@ -186,38 +224,10 @@
                                                 <constraint firstItem="hO2-Wx-wdq" firstAttribute="centerX" secondItem="aBv-ir-cn5" secondAttribute="centerX" id="tEj-OV-ncM"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uf0-bz-usX">
-                                            <rect key="frame" x="87" y="224" width="200" height="30"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G77-OQ-sEz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="IWR-FY-X8Z"/>
-                                                        <constraint firstAttribute="width" constant="150" id="i2J-yq-z9h"/>
-                                                    </constraints>
-                                                    <state key="normal" title="钱不够，续借一期 》">
-                                                        <color key="titleColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_wenhao" translatesAutoresizingMaskIntoConstraints="NO" id="qln-P2-6l2">
-                                                    <rect key="frame" x="160" y="5" width="20" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="UXR-Sj-oHU"/>
-                                                <constraint firstAttribute="width" constant="200" id="fEb-AY-JBZ"/>
-                                                <constraint firstItem="G77-OQ-sEz" firstAttribute="leading" secondItem="uf0-bz-usX" secondAttribute="leading" id="jUP-VD-YeZ"/>
-                                                <constraint firstItem="G77-OQ-sEz" firstAttribute="top" secondItem="uf0-bz-usX" secondAttribute="top" id="lrB-BE-Icb"/>
-                                            </constraints>
-                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstItem="uf0-bz-usX" firstAttribute="centerX" secondItem="kwj-PQ-oYM" secondAttribute="centerX" id="2Mg-Yb-6CA"/>
                                         <constraint firstAttribute="trailing" secondItem="aBv-ir-cn5" secondAttribute="trailing" id="B5d-bB-01j"/>
-                                        <constraint firstItem="uf0-bz-usX" firstAttribute="top" secondItem="MCd-D5-fVF" secondAttribute="bottom" constant="7.5" id="FZZ-mn-Jd7"/>
                                         <constraint firstItem="MCd-D5-fVF" firstAttribute="top" secondItem="aBv-ir-cn5" secondAttribute="bottom" constant="5.5" id="JTh-nz-9oJ"/>
                                         <constraint firstItem="aBv-ir-cn5" firstAttribute="leading" secondItem="kwj-PQ-oYM" secondAttribute="leading" id="PKm-8E-gBL"/>
                                         <constraint firstItem="MCd-D5-fVF" firstAttribute="centerX" secondItem="kwj-PQ-oYM" secondAttribute="centerX" id="Tjr-0u-zno"/>
@@ -236,9 +246,12 @@
                                 <constraint firstItem="p84-oi-gpm" firstAttribute="height" secondItem="kwj-PQ-oYM" secondAttribute="height" multiplier="0.5" id="Bhl-oY-hLK"/>
                                 <constraint firstItem="p84-oi-gpm" firstAttribute="leading" secondItem="hWU-sA-8y5" secondAttribute="leading" id="HYH-8b-9mj"/>
                                 <constraint firstAttribute="trailing" secondItem="p84-oi-gpm" secondAttribute="trailing" id="Naa-0A-doD"/>
+                                <constraint firstItem="yyT-h8-0LW" firstAttribute="top" secondItem="kwj-PQ-oYM" secondAttribute="bottom" id="OIt-wp-UGF"/>
                                 <constraint firstItem="kwj-PQ-oYM" firstAttribute="leading" secondItem="hWU-sA-8y5" secondAttribute="leading" id="Qrh-Aw-1rC"/>
                                 <constraint firstItem="p84-oi-gpm" firstAttribute="top" secondItem="kwj-PQ-oYM" secondAttribute="bottom" id="Sl3-q7-nUR"/>
                                 <constraint firstItem="p84-oi-gpm" firstAttribute="top" secondItem="kwj-PQ-oYM" secondAttribute="bottom" id="aGt-me-WpF"/>
+                                <constraint firstAttribute="trailing" secondItem="yyT-h8-0LW" secondAttribute="trailing" id="iF8-2M-Ylp"/>
+                                <constraint firstItem="yyT-h8-0LW" firstAttribute="leading" secondItem="hWU-sA-8y5" secondAttribute="leading" id="s6W-Ui-y06"/>
                                 <constraint firstAttribute="bottom" secondItem="p84-oi-gpm" secondAttribute="bottom" id="s8K-bl-isv"/>
                             </constraints>
                         </view>
@@ -529,6 +542,7 @@
                 <outlet property="repayMoneyLabel" destination="5aR-cb-FXC" id="UgZ-cp-qNz"/>
                 <outlet property="repayMoneyTime" destination="Mkj-Ry-SaG" id="n9I-oL-wyv"/>
                 <outlet property="repayView" destination="MsW-O3-xFO" id="N0B-lm-KK6"/>
+                <outlet property="stagingBgView" destination="yyT-h8-0LW" id="RVL-4I-0PK"/>
                 <outlet property="stagingBtn" destination="G77-OQ-sEz" id="8Yp-h4-E8C"/>
                 <outlet property="stagingView" destination="uf0-bz-usX" id="pkc-vY-ZW7"/>
                 <outlet property="statusBottomView" destination="p84-oi-gpm" id="fMp-lj-Wz4"/>

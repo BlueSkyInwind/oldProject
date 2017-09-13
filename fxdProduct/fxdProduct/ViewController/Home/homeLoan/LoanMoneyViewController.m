@@ -50,6 +50,8 @@
     moenyViewing.statusBottomView.hidden = YES;
     moenyViewing.heguiBtn.hidden = YES;
     moenyViewing.heguiBtn.enabled = NO;
+    moenyViewing.stagingBgView.hidden = YES;
+    
     [self.view addSubview:moenyViewing];
 
     [Tool setCorner:moenyViewing.sureBtn borderColor:UI_MAIN_COLOR];
@@ -605,10 +607,10 @@
     moenyViewing.promptLabel.hidden = YES;
     moenyViewing.tipImage.hidden = NO;
     moenyViewing.statusBottomView.hidden = NO;
-    
+    moenyViewing.stagingBgView.hidden = NO;
     switch (_applicationStatus) {
         case InLoan:
-            
+            moenyViewing.stagingBgView.hidden = YES;
             moenyViewing.labelProgress.text = @"放款中";
             moenyViewing.tipLabel.text = @"请注意查收放款短信";
             [self arrivalAndRenewalUI:applicationStatusModel];
@@ -621,6 +623,7 @@
             moenyViewing.middleView.hidden = YES;
             moenyViewing.repayView.hidden = NO;
             moenyViewing.statusBottomView.hidden = YES;
+            moenyViewing.stagingBgView.hidden = YES;
             InfoListModel *firstModel = applicationStatusModel.infoList[0];
             moenyViewing.repayMoneyLabel.text = [NSString stringWithFormat:@"%@%@元",firstModel.label,firstModel.value];
             InfoListModel *secondModel = applicationStatusModel.infoList[1];
@@ -632,10 +635,13 @@
         }
             break;
         case Staging:
+            
+            moenyViewing.stagingBgView.hidden = YES;
             moenyViewing.labelProgress.text = @"续期处理中";
             moenyViewing.labelProgress.font = [UIFont systemFontOfSize:34];
             moenyViewing.tipLabel.text = @"续期处理中，请稍等";
             moenyViewing.statusBottomView.hidden = YES;
+            moenyViewing.stagingBgView.hidden = YES;
             [self arrivalAndRenewalUI:applicationStatusModel];
             
             break;
@@ -644,6 +650,7 @@
             [self repayUI:repayModel];
             [self fxdStatus];
             moenyViewing.statusBottomView.hidden = YES;
+//            moenyViewing.stagingBgView.hidden = NO;
             if (_popAlert&&_isFirst) {
                 _isFirst = NO;
                 [self showAlertview];
@@ -657,6 +664,7 @@
             moenyViewing.tipLabel.text = @"正在处理，请耐心等待";
             moenyViewing.middleView.hidden = YES;
             moenyViewing.repayBtnView.hidden = YES;
+            moenyViewing.stagingBgView.hidden = YES;
             break;
 
         default:
@@ -742,8 +750,10 @@
         
     }
     moenyViewing.stagingView.hidden = YES;
+    moenyViewing.stagingBgView.hidden = YES;
     if (repayModel.display) {
         moenyViewing.stagingView.hidden = NO;
+        moenyViewing.stagingBgView.hidden = NO;
     }
  }
 
