@@ -695,6 +695,10 @@
     moenyViewing.labelWeekmoney.text = [NSString stringWithFormat:@"%@元",repayModel.repayment];
     moenyViewing.labelWeekmoney.attributedText = [self changeAtr:moenyViewing.labelWeekmoney.text color:UI_MAIN_COLOR range:NSMakeRange(0, repayModel.repayment.length)];
     
+    if (UI_IS_IPHONE5) {
+        moenyViewing.lableData.font = [UIFont systemFontOfSize:13];
+        moenyViewing.overdueFeeLabel.font = [UIFont systemFontOfSize:13];
+    }
     int start;
     
     NSString * strDesc = repayModel.overdueDesc != nil ?  repayModel.overdueDesc : @"";
