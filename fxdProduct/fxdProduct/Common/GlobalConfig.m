@@ -18,6 +18,7 @@
 #if FXD_Environment_Mode == 0
 
 NSString * const _main_url  =   @"https://h5.faxindai.com:8028/fxd-esb/esb/"; //生产
+NSString * const _agreement_url  =   @"https://h5.faxindai.com:8028/fxd-esb/esb/";
 NSString * const _ValidESB_url = @"https://h5.faxindai.com:8028/fxd-esb/";
 NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/"; //生产
 NSString * const _p2P_url = @"https://h5.faxindai.com:8028/fxd-esb/p2p/";
@@ -32,7 +33,6 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 //http://192.168.12.109:8082/fxd-esb/  罗兵本地
 //http://192.168.7.140:8001/fxd-esb/esb/ 合规贷后测试地址
 //http://192.168.13.173:8005/ 张强本地
-
 
 //测试导流 192.168.6.134
 NSString * const _main_url  =   @"http://192.168.6.134/fxd-esb/esb/";
