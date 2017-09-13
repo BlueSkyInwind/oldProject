@@ -351,7 +351,7 @@
                                 }];
             
         moenyViewing.agreeMentLabel.attributedText = one;
-        moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentCenter;
+        moenyViewing.agreeMentLabel.textAlignment = NSTextAlignmentLeft;
         }];
     }
 }
