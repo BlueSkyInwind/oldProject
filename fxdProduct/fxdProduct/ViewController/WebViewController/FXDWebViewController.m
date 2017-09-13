@@ -134,11 +134,21 @@
         if ([[dic objectForKey:@"functionName"] isEqualToString:@"mxBack"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
-        
         //三方支付点击结果反馈   1、还款中 2、还款成功 3、还款失败  4、第三方未受理 5、h5支付异常
         if ([[dic allKeys] containsObject:@"payData"]) {
             NSDictionary * resultDic = dic[@"payData"];
             NSString * str =  resultDic[@"status"];
+            //续期支付宝支付反馈情况
+            if ([self.payType isEqualToString:@"2"] ) {
+                if ([str isEqualToString:@"5"]) {
+                    [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:@"支付宝支付失败！"];
+                    [self.navigationController popViewControllerAnimated:true];
+                    return;
+                }
+                [self payOverpopBack];
+                return;
+            }
+            // 还款支付宝支付反馈情况
             if ([str isEqualToString:@"1"]) {
                 [self payOverpopBack];
             }

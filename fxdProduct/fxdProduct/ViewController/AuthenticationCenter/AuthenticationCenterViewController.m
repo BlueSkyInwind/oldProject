@@ -91,12 +91,13 @@
     _isEvaluation = @"0";
     
     [self configureView];
-    [self configMoxieSDK];
     [self headingRefresh];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.collectionView.mj_header beginRefreshing];
+    [self configMoxieSDK];
+
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
