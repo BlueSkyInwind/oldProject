@@ -567,7 +567,8 @@
         [MoxieSDK shared].taskType = @"email";
         [[MoxieSDK shared] startFunction];
     } @catch (NSException *exception) {
-        DLog(@"%s\n%@", __FUNCTION__, exception);
+        DLog(@"%@", exception);
+        return;
     } @finally {
     }
 }
@@ -577,12 +578,14 @@
         [MoxieSDK shared].taskType = @"security";
         [[MoxieSDK shared] startFunction];
     } @catch (NSException *exception) {
-        DLog(@"%s\n%@", __FUNCTION__, exception);
+        DLog(@"%@", exception);
+        return;
     } @finally {
     }
 }
 -(void)configMoxieSDK{
     /***必须配置的基本参数*/
+    
     [MoxieSDK shared].delegate = self;
     [MoxieSDK shared].userId = [Utility sharedUtility].userInfo.juid;
     [MoxieSDK shared].apiKey = theMoxieApiKey;
@@ -613,7 +616,6 @@
     //【采集成功】假如code是1则采集成功（不代表回调成功）
     else if(code == 1){
         NSLog(@"任务采集成功，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
-        
         [self obtainHighRankingClassifyStatus:taskType TaskId:taskId];
     }
     //【未登录】假如code是-1则用户未登录

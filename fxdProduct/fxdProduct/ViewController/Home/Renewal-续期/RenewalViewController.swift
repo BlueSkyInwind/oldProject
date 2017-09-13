@@ -172,7 +172,6 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         }
         cell.selectionStyle = .none
         if contentArr.count<2{
-        
             return cell
         }
         if indexPath.row<leftTitleArr.count{
@@ -199,7 +198,6 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         
         cell.cellType = CurrentInfoCellType(cellType: .Renewal)
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -278,6 +276,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
                 let webView = FXDWebViewController.init()
                 let dic = baseResult.data as! NSDictionary
                 webView.urlStr = dic.object(forKey: "callbackUrl") as! String
+                webView.payType = "2"
                 self.navigationController?.pushViewController(webView, animated: true)
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)

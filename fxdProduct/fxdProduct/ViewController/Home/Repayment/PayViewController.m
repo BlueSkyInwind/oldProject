@@ -75,8 +75,7 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
 
 - (IBAction)sureBtnClick:(UIButton *)sender {
     
-    
-    self.makesureBlock(self.payType,_selectCardInfo,_banckCurrentIndex);
+    self.makesureBlock(self.payType,_payPattern);
 }
 
 
@@ -110,12 +109,11 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
        
         PayMethodCell *cell = [tableView dequeueReusableCellWithIdentifier:methodCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (_payType == PayTypeGetMoneyToCard) {
             cell.PayTitleLabel.text = @"银行卡";
         }
         if (_isP2P) {
-            
             cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_bankName,_banNum];
         }else{
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -137,7 +135,6 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    [self fatchCardInfo];
     if (!_isP2P) {
         
         PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
@@ -161,35 +158,6 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
     }    
 }
 
-//- (void)fatchCardInfo
-//{
-//    if (_bankCardModel) {
-//        PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-//        payMethodVC.bankModel = _bankCardModel;
-//        [self.navigationController pushViewController:payMethodVC animated:YES];
-//    } else {
-//        NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-//        [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//            _bankCardModel = [BankModel yy_modelWithJSON:object];
-//            if ([_bankCardModel.flag isEqualToString:@"0000"]) {
-//                PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-//                payMethodVC.bankModel = _bankCardModel;
-//
-//                if (_payType == PayTypeWeekPay || _payType == PayTypeCleanPay) {
-//                    payMethodVC.payMethod = PayMethodNormal;
-//                } else {
-//                    payMethodVC.payMethod = PayMethodSelectBankCad;
-//                }
-//                payMethodVC.currentIndex = -1;
-//                [self.navigationController pushViewController:payMethodVC animated:YES];
-//            } else {
-//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_bankCardModel.msg];
-//            }
-//        } failure:^(EnumServerStatus status, id object) {
-//            DLog(@"%@",object);
-//        }];
-//    }
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
