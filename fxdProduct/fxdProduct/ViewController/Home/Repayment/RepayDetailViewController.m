@@ -548,7 +548,6 @@
             if (_repayListInfo != nil) {
                 DLog(@"选择付款方式");
                 [self pushUserBankListVC];
-        
             }
         }
     }else {
@@ -691,7 +690,6 @@
         [self getMoney];
         
     }else{
-        
         if (paymentPattern == BankCard) {
             [self fxdRepay];
         }
@@ -796,9 +794,10 @@
         if ([baseResultM.errCode isEqualToString:@"0"]){
             FXDWebViewController *webView = [[FXDWebViewController alloc] init];
             webView.urlStr = baseResultM.data[@"callbackUrl"];
+            webView.payType = @"1";
             [self.navigationController pushViewController:webView animated:YES];
         }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
     }];
@@ -846,7 +845,6 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else{
-        
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
         }
     } failure:^(EnumServerStatus status, id object) {
@@ -863,13 +861,11 @@
         if ([_model.result.flg isEqualToString:@"2"]) {//未开户
             
         }else if ([_model.result.flg isEqualToString:@"3"]){//待激活
-            
             NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
             P2PViewController *p2pVC = [[P2PViewController alloc] init];
             p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
             p2pVC.applicationId = self.applicationID;
             [self.navigationController pushViewController:p2pVC animated:YES];
-            
         }else if ([_model.result.flg isEqualToString:@"6"]){//正常用户
             [self fxdRepay];
         }
@@ -902,8 +898,6 @@
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
         
-        
-    
     } WithFaileBlock:^{
         
     }];

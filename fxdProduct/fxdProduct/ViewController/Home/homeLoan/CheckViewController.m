@@ -1325,7 +1325,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         payVC.bankName = bankName;
         NSString *bank = model.result.UsrCardInfolist.CardId;
         payVC.banNum = [bank substringFromIndex:bank.length-4];
-        payVC.makesureBlock = ^(PayType payType,CardInfo *cardInfo,NSInteger currentIndex){
+        payVC.makesureBlock = ^(PayType payType, PatternOfPayment payPattern) {
             [self dismissSemiModalViewWithCompletion:^{
                 [self saveLoanCase:@"30"];
             }];
@@ -1339,7 +1339,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         PayNavigationViewController *payNC = [[PayNavigationViewController alloc] initWithRootViewController:payVC];
         payNC.view.frame = CGRectMake(0, 0, _k_w, 200);
         [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
-        
     } WithFaileBlock:^{
         
     }];

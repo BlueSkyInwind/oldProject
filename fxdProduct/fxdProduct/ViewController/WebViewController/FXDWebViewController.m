@@ -36,7 +36,7 @@
     // 添加JS到HTML中，可以直接在JS中调用添加的JS方法
     //    WKUserScript *script = [[WKUserScript alloc] initWithSource:@"function showAlert() { alert('在载入webview时通过OC注入的JS方法'); }" injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:true];
     //    [config.userContentController addUserScript:script];
-//     window.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
+//     w÷indow.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
     [config.userContentController addScriptMessageHandler:self name:@"jsToNative"];
     _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
     _webView.navigationDelegate = self;
@@ -54,6 +54,7 @@
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
         // NSString * str = @"https://fintech.chinazyjr.com/p2p/http/huifush/toBosAcctActivate.jhtml?page_type_=1&ret_url_=https://h5.faxindai.com:8028/fxd-h5/page/case/app_transition.html&from_mobile_=15241892226";
+
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
     
@@ -127,18 +128,26 @@
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
     if ([message.name isEqualToString:@"jsToNative"]) {
-        DLog(@"%@",[message.body class]);
         NSDictionary *dic = message.body;
+        DLog(@"%@",dic);
         //JS交互点击事件
         if ([[dic objectForKey:@"functionName"] isEqualToString:@"mxBack"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
-        //三方支付点击结果反馈   1、还款中 2、还款成功 3、还款失败  4、第三方未受理
+        
+        //三方支付点击结果反馈   1、还款中 2、还款成功 3、还款失败  4、第三方未受理 5、h5支付异常
         if ([[dic allKeys] containsObject:@"payData"]) {
             NSDictionary * resultDic = dic[@"payData"];
             NSString * str =  resultDic[@"status"];
-            if ([str isEqualToString:@"2"]) {
+            if ([str isEqualToString:@"1"]) {
                 [self payOverpopBack];
+            }
+            else if ([str isEqualToString:@"2"] || [str isEqualToString:@"3"]){
+                [self.navigationController popToRootViewControllerAnimated:true];
+            }
+            else{
+                [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:@"支付宝支付失败！"];
+                [self.navigationController popViewControllerAnimated:true];
             }
         }
     }
@@ -161,13 +170,14 @@
         }
     }
 }
+
 #pragma mark -WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
     NSURLRequest *request = navigationAction.request;
     NSLog(@"=========%@",request.URL.absoluteString);
     //打开支付宝
-    if ([request.URL.absoluteString hasPrefix:@"alipays"]) {
+    if ([request.URL.absoluteString hasPrefix:@"alipays://"]) {
         if ([Tool getIOSVersion] < 10) {
             if ([[UIApplication sharedApplication] canOpenURL:request.URL]) {
                 [[UIApplication sharedApplication] openURL:request.URL ];
@@ -177,7 +187,7 @@
             }
         }
         else {
-            [[UIApplication sharedApplication] openURL:request.URL options:@{} completionHandler:^(BOOL success) {
+            [[UIApplication sharedApplication] openURL:request.URL options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO} completionHandler:^(BOOL success) {
                 if (!success) {
                     [self showMessage:@"打开支付宝失败！" vc:self];
                 }
@@ -185,10 +195,9 @@
         }
            decisionHandler(WKNavigationActionPolicyAllow);
     }
-    
     if ([request.URL.absoluteString hasSuffix:@"main.html"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
-//        [self.navigationController popViewControllerAnimated:YES];
+//      [self.navigationController popViewControllerAnimated:YES];
     }
     else{
         decisionHandler(WKNavigationActionPolicyAllow);
@@ -212,14 +221,15 @@
     self.navigationItem.title = @"加载失败";
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
-    
-//    NSString *inputValueJS = @"document.getElementsByName('click_a')[0].onclick";
-//    NSLog(@"%@",inputValueJS);
-//    //执行JS
-//    [webView evaluateJavaScript:inputValueJS completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-//        NSLog(@"value: %@ error: %@", response, error);
-//    }];
-    
+    //调用js发送平台
+    if([webView.URL.absoluteString containsString:@"fxd-pay-fe"] || [webView.URL.absoluteString containsString:@"fxd-wxact"]){
+        NSString *inputValueJS = @"window.FXDNAVIGATOR.platformFn('0')";
+        NSLog(@"%@",inputValueJS);
+        //执行JS
+        [webView evaluateJavaScript:inputValueJS completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            DLog(@"value: %@ error: %@", response, error);
+        }];
+    }
 }
 
 #pragma mark -
