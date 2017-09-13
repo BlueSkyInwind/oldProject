@@ -54,5 +54,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *promptLabel;
 @property (weak, nonatomic) IBOutlet UIView *statusBottomView;
 @property (weak, nonatomic) IBOutlet UIButton *heguiBtn;
+@property (weak, nonatomic) IBOutlet UIView *stagingBgView;
 
 @end
