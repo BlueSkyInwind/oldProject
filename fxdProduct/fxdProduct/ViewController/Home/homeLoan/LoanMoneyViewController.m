@@ -202,18 +202,15 @@
                 NSDictionary *dic = array[i];
                 CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
                 if ([cardInfo.cardType isEqualToString:@"2"]) {
-
                     finish(cardInfo);
                     break;
                 }
             }
         }
-
     } WithFaileBlock:^{
         
     }];
     [bankInfoVM obtainUserBankCardList];
-    
 }
 
 #pragma mark 请求银行卡列表信息
@@ -225,21 +222,14 @@
         
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
-            
             finish(model);
-           
         }else{
-            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
-        
-        
-        
     } WithFaileBlock:^{
         
     }];
     [checkBankViewModel queryCardInfo];
-    
 }
 
 
