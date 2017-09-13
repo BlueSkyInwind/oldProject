@@ -96,6 +96,7 @@
     RenewalViewController *controller = [[RenewalViewController alloc]init];
     controller.stagingId = _repayModel.stagingId;
     [self.navigationController pushViewController:controller animated:YES];
+    
 }
 
 #pragma mark 协议勾选按钮

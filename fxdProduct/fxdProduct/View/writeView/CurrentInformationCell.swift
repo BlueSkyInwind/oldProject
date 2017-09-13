@@ -58,20 +58,19 @@ class CurrentInformationCell: UITableViewCell {
 extension CurrentInformationCell{
 
     fileprivate func setCellType(CellType : CurrentInfoCellType){
-    
+        
+        for view in self.contentView.subviews {
+            view.removeFromSuperview()
+        }
+        
         let type = CellType.cellType
-        
         switch type! {
-            
         case .Default:
-        
             defaultCell()
-            
         case .Payment:
             renewalCell()
         case .Renewal:
             renewalCell()
-        
         }
     }
     
@@ -81,7 +80,7 @@ extension CurrentInformationCell{
         leftLabel = UILabel()
         leftLabel?.textColor = UIColor.black
         leftLabel?.font = UIFont.systemFont(ofSize: 15)
-        self.addSubview(leftLabel!)
+        self.contentView.addSubview(leftLabel!)
         leftLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(15)
             make.centerY.equalTo(self.snp.centerY)
@@ -90,7 +89,7 @@ extension CurrentInformationCell{
         rightLabel = UILabel()
         rightLabel?.font = UIFont.systemFont(ofSize: 15)
         rightLabel?.textAlignment = .right
-        self.addSubview(rightLabel!)
+        self.contentView.addSubview(rightLabel!)
         rightLabel?.snp.makeConstraints({ (make) in
             make.right.equalTo(self).offset(-15)
             make.centerY.equalTo(self.snp.centerY)
@@ -98,7 +97,7 @@ extension CurrentInformationCell{
         
         let lineView = UIView()
         lineView.backgroundColor = UIColor.init(red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1.0)
-        self.addSubview(lineView)
+        self.contentView.addSubview(lineView)
         lineView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(15)
             make.right.equalTo(self).offset(0)
@@ -111,7 +110,7 @@ extension CurrentInformationCell{
         
         let rightImage = UIImageView()
         rightImage.image = UIImage(named:"icon_gengduo")
-        self.addSubview(rightImage)
+        self.contentView.addSubview(rightImage)
         rightImage.snp.makeConstraints { (make) in
             make.right.equalTo(self).offset(-15)
             make.centerY.equalTo(self.snp.centerY)
@@ -121,7 +120,7 @@ extension CurrentInformationCell{
         renewalLabel.text = "了解续期规则"
         renewalLabel.textColor = UI_MAIN_COLOR
         renewalLabel.font = UIFont.systemFont(ofSize: 16)
-        self.addSubview(renewalLabel)
+        self.contentView.addSubview(renewalLabel)
         renewalLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.snp.centerY)
             make.right.equalTo(rightImage.snp.left).offset(-10)

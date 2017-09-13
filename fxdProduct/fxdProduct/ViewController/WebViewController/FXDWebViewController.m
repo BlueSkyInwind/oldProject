@@ -133,6 +133,32 @@
         if ([[dic objectForKey:@"functionName"] isEqualToString:@"mxBack"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
+        //三方支付点击结果反馈   1、还款中 2、还款成功 3、还款失败  4、第三方未受理
+        if ([[dic allKeys] containsObject:@"payData"]) {
+            NSDictionary * resultDic = dic[@"payData"];
+            NSString * str =  resultDic[@"status"];
+            if ([str isEqualToString:@"2"]) {
+                [self payOverpopBack];
+            }
+        }
+    }
+}
+
+/**
+ 三方支付结果，返回处理
+ */
+-(void)payOverpopBack{
+    
+    for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
+        if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
+            LoanMoneyViewController *  loanMoneyVC  =(LoanMoneyViewController *) vc;
+            if ([self.payType isEqualToString:@"1"]) {
+                loanMoneyVC.applicationStatus = Repayment;
+            }else if ([self.payType isEqualToString:@"2"]){
+                loanMoneyVC.applicationStatus = Staging;
+            }
+            [self.navigationController popToViewController:loanMoneyVC animated:YES];
+        }
     }
 }
 #pragma mark -WKNavigationDelegate
@@ -162,7 +188,7 @@
     
     if ([request.URL.absoluteString hasSuffix:@"main.html"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
-        [self.navigationController popViewControllerAnimated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
     }
     else{
         decisionHandler(WKNavigationActionPolicyAllow);

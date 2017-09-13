@@ -631,7 +631,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
     userBankCardListVC.currentIndex = userSelectIndex;
-    userBankCardListVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
+    userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex ,PatternOfPayment patternOfPayment) {
         self.selectCard = cardInfo;
         if (cardInfo == nil) {
             [self  fatchCardInfo];

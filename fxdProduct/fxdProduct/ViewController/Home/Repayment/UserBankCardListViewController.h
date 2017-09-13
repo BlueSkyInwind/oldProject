@@ -12,19 +12,19 @@
 @class CardInfo;
 
 
-typedef void(^BankSelectBlock)(CardInfo * cardInfo, NSInteger currentIndex);
+typedef void(^PayPatternSelectBlock)(CardInfo * cardInfo, NSInteger currentIndex , PatternOfPayment patternOfPayment);
 
 @interface UserBankCardListViewController : BaseViewController
 
 @property (nonatomic, assign) NSInteger currentIndex;
 
-@property (nonatomic, copy) BankSelectBlock bankSelectBlock;
+@property (nonatomic, copy) PayPatternSelectBlock payPatternSelectBlock;
 
 @property (nonatomic, assign) BOOL isHavealipay;
 
-@property (nonatomic, strong) NSString * stagingID;
+@property (nonatomic,assign)PatternOfPayment payPattern;
 
 //swift调用
--(void)userSelectedBankCard:(BankSelectBlock)block;
+-(void)userSelectedBankCard:(PayPatternSelectBlock)block;
 
 @end

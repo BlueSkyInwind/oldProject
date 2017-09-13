@@ -45,6 +45,8 @@
     NSArray *titleAry;
     NSArray *payLoanArry;
     CardInfo *_selectCard;
+    PatternOfPayment  paymentPattern;
+    
     UserCardResult *_userCardsModel;
     
     NSInteger defaultBankIndex;
@@ -107,7 +109,7 @@
     _selectRedPacket = 0.0;
     _useredPacketAmount = 0.0;
     _canUseReadPacket = false;
-
+    paymentPattern = BankCard;
     _finalyRepayAmount = _repayAmount;
     
     navBarHairlineImageView= [self findHairlineImageViewUnder:self.navigationController.navigationBar];
@@ -277,7 +279,6 @@
             noneView.hidden = false;
         }
     }
-    
     [self.PayDetailTB reloadData];
 }
 
@@ -343,10 +344,14 @@
                         cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_queryCardInfoModel.result.UsrCardInfolist.bankName,[_queryCardInfoModel.result.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.result.UsrCardInfolist.CardId.length-4]];
                     }
                 }else{
-                    if (_selectCard != nil) {
-                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
-                    }else {
+                    if (paymentPattern == Alipays) {
+                        cell.whichBank.text = @"支付宝付款";
+                    }
+                    else{
                         cell.whichBank.text = @"";
+                        if (_selectCard != nil) {
+                            cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
+                        }
                     }
                 }
                 return cell;
@@ -429,12 +434,15 @@
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.PayTitleLabel.text=payLoanArry[indexPath.row];
-                if (_selectCard != nil) {
-                    cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
-                }else {
-                    cell.whichBank.text = @"";
+                if (paymentPattern == Alipays) {
+                    cell.whichBank.text = @"支付宝付款";
                 }
-                
+                else{
+                    cell.whichBank.text = @"";
+                    if (_selectCard != nil) {
+                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
+                    }
+                }
                 return cell;
             } else//溢缴金额和应付金额cell
             {
@@ -560,9 +568,7 @@
         }
         if (indexPath.row==3) {
             if (_p2pBillModel != nil) {
-                
                 [self gotoUnbundlingBank];
-                //                [self chooseBankCard];
             }
         }
         if(indexPath.row==4)//选择银行卡
@@ -573,7 +579,6 @@
             }
             if (_p2pBillModel != nil) {
                 [self gotoUnbundlingBank];
-                //                [self chooseBankCard];
             }
         }
     }
@@ -585,14 +590,15 @@
     
     UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
     userBankCardListVC.isHavealipay = true;
-    userBankCardListVC.stagingID = [self obtainRepayStaging_ids];
     if (userSelectIndex == -1) {
         userBankCardListVC.currentIndex = defaultBankIndex;
     } else {
         userBankCardListVC.currentIndex  = userSelectIndex;
     }
-    userBankCardListVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
+    userBankCardListVC.payPattern = paymentPattern;
+    userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex ,PatternOfPayment patternOfPayment) {
         _selectCard = cardInfo;
+        paymentPattern = patternOfPayment;
         if (cardInfo == nil) {
             [self  fatchUserCardList];
         }
@@ -681,9 +687,18 @@
         return;
     }
     if ([self.platform_Type isEqualToString:@"2"] ) {
+        
         [self getMoney];
+        
     }else{
-        [self fxdRepay];
+        
+        if (paymentPattern == BankCard) {
+            [self fxdRepay];
+        }
+        else{
+            [self trilateralEntrance];
+        }
+        
     }
 }
 
@@ -772,7 +787,24 @@
     }];
     [paymentViewModel FXDpaymentDetail:paymentDetailModel];
 }
-
+#pragma mark - 三方支付
+-(void)trilateralEntrance{
+    
+    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
+    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+            webView.urlStr = baseResultM.data[@"callbackUrl"];
+            [self.navigationController pushViewController:webView animated:YES];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [bankInfoVM obtainTrilateralLink:[self obtainRepayStaging_ids] redPacketAmount:[NSString stringWithFormat:@"%.2f",_useredPacketAmount] redPacketId:_selectRedPacketID payType:@"1" stagingContinue:false];
+    
+}
 #pragma mark 正常扣款
 - (void)repaySure
 {
