@@ -770,7 +770,7 @@
     [userDataMV setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
-            UserDataResult * userDataModel = [[UserDataResult alloc]initWithDictionary:(NSDictionary *)baseResultM.result error:nil];
+            UserDataResult * userDataModel = [[UserDataResult alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             switch (userDataModel.rc_status.integerValue) {
                 case 10:
                 {
