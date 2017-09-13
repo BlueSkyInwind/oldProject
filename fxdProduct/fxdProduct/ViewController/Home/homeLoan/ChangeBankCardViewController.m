@@ -93,7 +93,7 @@
     if (indexPath.row == 0) {
         cell.arrowsImageBtn.tag = indexPath.row + 200;
         cell.contentTextField.enabled=false;
-
+        
     }else if (indexPath.row == 1) {
         [cell.arrowsImageBtn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
         cell.arrowsImageBtn.tag = indexPath.row + 200;

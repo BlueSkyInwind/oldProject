@@ -56,7 +56,7 @@ extension ContentTableViewCell {
         self.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.snp.centerY)
-            make.width.equalTo(100)
+            make.width.equalTo(90)
             make.height.equalTo(21)
             make.left.equalTo(15)
         })
@@ -129,6 +129,12 @@ extension ContentTableViewCell {
             make.height.equalTo(30)
             make.width.equalTo((arrowsImageBtn?.snp.height)!).multipliedBy(3.37)
             make.right.equalTo(self.snp.right).offset(-10)
+        })
+    }
+    
+    func updateTitleLabelLayout() -> Void {
+        titleLabel?.snp.updateConstraints({ (make) in
+            make.width.equalTo(120)
         })
     }
     

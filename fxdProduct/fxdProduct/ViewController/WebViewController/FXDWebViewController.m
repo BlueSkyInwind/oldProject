@@ -152,7 +152,7 @@
             if ([str isEqualToString:@"1"]) {
                 [self payOverpopBack];
             }
-            else if ([str isEqualToString:@"2"] || [str isEqualToString:@"3"]){
+            else if ([str isEqualToString:@"2"] || [str isEqualToString:@"3"] || [str isEqualToString:@"4"]){
                 [self.navigationController popToRootViewControllerAnimated:true];
             }
             else{
