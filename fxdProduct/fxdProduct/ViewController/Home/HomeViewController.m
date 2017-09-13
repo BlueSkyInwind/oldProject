@@ -431,15 +431,15 @@
     DLog(@"点击");
     if (_homeProductList.data.bannerList && _homeProductList.data.bannerList.count > 0) {
         HomeBannerList *files = _homeProductList.data.bannerList[index];
-        if ([files.image.lowercaseString hasPrefix:@"http"] || [files.image.lowercaseString hasPrefix:@"https"]) {
-            if ([files.image.lowercaseString hasSuffix:@"sjbuy"]) {
+        if ([files.toUrl.lowercaseString hasPrefix:@"http"] || [files.toUrl.lowercaseString hasPrefix:@"https"]) {
+            if ([files.toUrl.lowercaseString hasSuffix:@"sjbuy"]) {
                 FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
-                firstBorrowVC.url = files.image;
+                firstBorrowVC.url = files.toUrl;
                 [self.navigationController pushViewController:firstBorrowVC animated:YES];
             }else{
             
                 FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-                webView.urlStr = files.image;
+                webView.urlStr = files.toUrl;
                 [self.navigationController pushViewController:webView animated:true];
             }
         }
