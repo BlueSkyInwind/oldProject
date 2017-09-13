@@ -118,10 +118,12 @@
      */
     //    // 定义大小
     CGFloat height = 110;
+    CGFloat width = _k_w/3;
     if (UI_IS_IPHONE5) {
         height = 100;
+        width = (_k_w-2)/3;
     }
-    layout.itemSize = CGSizeMake(_k_w/3, height);
+    layout.itemSize = CGSizeMake(width, height);
     //    // 设置最小行间距
     layout.minimumLineSpacing = 0;
     //    // 设置垂直间距

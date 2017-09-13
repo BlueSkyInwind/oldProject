@@ -69,6 +69,10 @@ extension AuthenticationCenterCell{
             make.bottom.equalTo(bgView.snp.bottom).offset(-1)
             make.width.equalTo(1)
         }
+        if UI_IS_IPONE5{
+        
+            leftLineView.isHidden = true
+        }
         let bottomLineView = UIView()
         bottomLineView.backgroundColor = LINE_COLOR
         bgView.addSubview(bottomLineView)
