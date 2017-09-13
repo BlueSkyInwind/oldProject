@@ -34,7 +34,7 @@
 #import "AuthenticationCenterViewController.h"
 #import "LoanMoneyViewModel.h"
 #import "ApplicationStatusModel.h"
-
+#import "UserDataViewModel.h"
 
 @interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
 {
@@ -641,7 +641,8 @@
     NSLog(@"点击立即申请=%@",money);
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
-        [self goUserDataVC];
+        [self userDataResult];
+        
     } else {
         [self presentLogin:self];
     }
@@ -762,5 +763,42 @@
     [loanMoneyViewModel getApplicationStatus:flag];
 }
 
+#pragma mark 得到测评结果
+-(void)userDataResult{
+
+    UserDataViewModel *userDataMV = [[UserDataViewModel alloc]init];
+    [userDataMV setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            UserDataResult * userDataModel = [[UserDataResult alloc]initWithDictionary:(NSDictionary *)baseResultM.result error:nil];
+            switch (userDataModel.rc_status.integerValue) {
+                case 10:
+                {
+                    CheckingViewController *controller = [[CheckingViewController alloc]init];
+                    [self.navigationController pushViewController:controller animated:true];
+                }
+                    break;
+                case 00:
+                    [self goUserDataVC];
+                    break;
+                case 20:
+                case 30:
+                {
+                    //中间状态失败刷新首页
+                    [self getHomeData:^(BOOL isSuccess) {
+                    }];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [userDataMV UserDataCertificationResult];
+}
 
 @end
