@@ -388,55 +388,55 @@ NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackA
 #pragma mark - 新的api
 
 //社保
-NSString * const    _shebaoupload_url    =    @"apigw/client/resource/mxsbtask_create.jhtml";
+NSString * const    _shebaoupload_url    =    @"apigw/client/resource/mxsbtask_create";
 
 //信用卡
-NSString * const    _TheCreditCardupload_url    =    @"apigw/client/resource/mxmailtask_create.jhtml";
+NSString * const    _TheCreditCardupload_url    =    @"apigw/client/resource/mxmailtask_create";
 
 //高级认证状态查询
-NSString * const    _HighRankingStatus_url    =    @"apigw/client/resource/fundtask.jhtml";
+NSString * const    _HighRankingStatus_url    =    @"apigw/client/resource/fundtask";
 
 //基础信息状态查询接口
-NSString * const    _UserBasicInformation_url    =    @"apigw/client/user/info/base.jhtml";
+NSString * const    _UserBasicInformation_url    =    @"apigw/client/user/info/base";
 
 //三方信息状态查询接口
-NSString * const    _UserThirdPartCertification_url    =    @"apigw/client/user/other/info.jhtml";
+NSString * const    _UserThirdPartCertification_url    =    @"apigw/client/user/other/info";
 
 //三方信息状态查询接口
-NSString * const    _AuthenticationCenterBasicInformation_url    =    @"apigw/client/user/base/complete/info.jhtml";
+NSString * const    _AuthenticationCenterBasicInformation_url    =    @"apigw/client/user/base/complete/info";
 
 //联系人信息的完成状态
-NSString * const    _UserContactInfo_url    =    @"apigw/client/user/contact/info.jhtml";
+NSString * const    _UserContactInfo_url    =    @"apigw/client/user/contact/info";
 
 //首页状态查询
-NSString * const    _HomeState_url    =    @"apigw/client/summary.jhtml";
+NSString * const    _HomeState_url    =    @"apigw/client/summary";
 
 //申请进件
-NSString * const    _createApplication_url    =    @"apigw/client/application/create.jhtml";
+NSString * const    _createApplication_url    =    @"apigw/client/application/create";
 
 //申请确认页数据
-NSString * const    _ApplicationViewInfo_url    =    @"apigw/client/application/confirm.jhtml";
+NSString * const    _ApplicationViewInfo_url    =    @"apigw/client/application/confirm";
 
 //提款页数据
-NSString * const    _UserDrawingInfo_url    =    @"apigw/client/application/loan.jhtml";
+NSString * const    _UserDrawingInfo_url    =    @"apigw/client/application/loan";
 
 //获取当前期的续期信息
-NSString * const    _repayment_url    =    @"apigw/client/repayment/staging/continue/info.jhtml";
+NSString * const    _repayment_url    =    @"apigw/client/repayment/staging/continue/info";
 
 //银行卡列表信息
-NSString * const    _BankCardList_url    =    @"apigw/client/bank/card/list.jhtml";
+NSString * const    _BankCardList_url    =    @"apigw/client/bank/card/list";
 
 //放款中 还款中 展期中 状态实时获取
-NSString * const    _ApplicationStatus_url    =    @"apigw/client/application/status.jhtml";
+NSString * const    _ApplicationStatus_url    =    @"apigw/client/application/status";
 
 //工薪贷根据周期获取费用
-NSString * const    _SalaryProductFee_url    =    @"apigw/client/fee/calc.jhtml";
+NSString * const    _SalaryProductFee_url    =    @"apigw/client/fee/calc";
 
 //提交续期请求
 NSString * const    _Staging_url    =    @"apigw/client/staging/continue/add";
 
 //待还款界面信息获取
-NSString * const    _Repay_url    =    @"apigw/client/ready/to/repay.jhtml";
+NSString * const    _Repay_url    =    @"apigw/client/ready/to/repay";
 
 //获取续期规则
 NSString * const    _StagingRule_url    =    @"apigw/client/continue/rule/detail";

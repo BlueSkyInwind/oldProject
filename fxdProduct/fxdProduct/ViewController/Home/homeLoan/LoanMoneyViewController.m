@@ -719,30 +719,16 @@
     moenyViewing.lableData.attributedText = str;
     
     
-    
-    
-    
-    
-//    moenyViewing.lableData.attributedText = [self changeAtr:moenyViewing.lableData.text color:UI_MAIN_COLOR range:NSMakeRange(8, moenyViewing.lableData.text.length-8)];
-//    if ([repayModel.productId isEqualToString:RapidLoan]|| [repayModel.productId isEqualToString:DeriveRapidLoan]) {
-//        NSString * strDesc = repayModel.overdueDesc != nil ?  repayModel.overdueDesc : @"";
-//        moenyViewing.lableData.text = [NSString stringWithFormat:@"账单日:%@%@",repayModel.billDate,strDesc];
-//        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:moenyViewing.lableData.text];
-//        [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,repayModel.billDate.length)];
-//        [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(moenyViewing.lableData.text.length-repayModel.overdueDesc.length,repayModel.overdueDesc.length)];
-//        moenyViewing.lableData.attributedText = str;
-//    }
-    
     if (![repayModel.overdueFee isEqualToString:@"0"] && repayModel.overdueFee != nil) {
         moenyViewing.overdueFeeLabel.hidden = NO;
-        moenyViewing.overdueFeeLabel.text = [NSString stringWithFormat:@"逾期费用:%@元",repayModel.overdueFee];
-        moenyViewing.overdueFeeLabel.attributedText = [self changeAtr:moenyViewing.overdueFeeLabel.text color:UI_MAIN_COLOR range:NSMakeRange(5, repayModel.overdueFee.length)];
+        moenyViewing.overdueFeeLabel.text = [NSString stringWithFormat:@"最近一期逾期费用:%@元",repayModel.overdueFee];
+        moenyViewing.overdueFeeLabel.attributedText = [self changeAtr:moenyViewing.overdueFeeLabel.text color:UI_MAIN_COLOR range:NSMakeRange(9, repayModel.overdueFee.length)];
         
-//        moenyViewing.lableData.text = [NSString stringWithFormat:@"最近一期还款日:%@%@",repayModel.billDate,repayModel.overdueDesc];
-//        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:moenyViewing.lableData.text];
-//        [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(8,repayModel.billDate.length)];
-//        [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(moenyViewing.lableData.text.length-repayModel.overdueDesc.length,repayModel.overdueDesc.length)];
-//        moenyViewing.lableData.attributedText = str;
+        if ([repayModel.productId isEqualToString:RapidLoan]|| [repayModel.productId isEqualToString:DeriveRapidLoan]) {
+            
+            moenyViewing.overdueFeeLabel.text = [NSString stringWithFormat:@"逾期费用:%@元",repayModel.overdueFee];
+            moenyViewing.overdueFeeLabel.attributedText = [self changeAtr:moenyViewing.overdueFeeLabel.text color:UI_MAIN_COLOR range:NSMakeRange(5, repayModel.overdueFee.length)];
+        }
         
     }
     moenyViewing.stagingView.hidden = YES;
