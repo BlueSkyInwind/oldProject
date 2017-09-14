@@ -58,7 +58,6 @@
 @property (nonatomic,strong) LoadFailureView * loadFailView;
 @end
 
-
 @implementation HomeViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -293,7 +292,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     if (indexPath.section == 0) {
         return 30.f;
     }else {
@@ -422,7 +420,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-
 }
 
 #pragma mak - SDCycleScrollViewDelegate
@@ -437,7 +434,6 @@
                 firstBorrowVC.url = files.toUrl;
                 [self.navigationController pushViewController:firstBorrowVC animated:YES];
             }else{
-            
                 FXDWebViewController *webView = [[FXDWebViewController alloc] init];
                 webView.urlStr = files.toUrl;
                 [self.navigationController pushViewController:webView animated:true];
@@ -794,7 +790,6 @@
                     break;
             }
         }
-        
     } WithFaileBlock:^{
         
     }];
