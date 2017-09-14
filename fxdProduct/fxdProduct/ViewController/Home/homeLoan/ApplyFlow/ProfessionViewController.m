@@ -16,6 +16,11 @@
 #import "CareerParse.h"
 #import "CustomerCareerBaseClass.h"
 #import "DataDicParse.h"
+#import "DataDisplayCell.h"
+#import "UserContactsViewController.h"
+#import "Custom_BaseInfo.h"
+#import "GetCustomerBaseViewModel.h"
+#import "DataWriteAndRead.h"
 
 #define FirstComponent 0
 #define SubComponent 1
@@ -43,6 +48,8 @@
     NSString *add;
     
     DataDicParse *_dataDicModel;
+    
+    NSString * _contactStatus;
 }
 
 @property (nonatomic, strong) UIPickerView *localPicker;
@@ -67,17 +74,13 @@
 //                         @"医疗/制药/环保",@"其他"];
     dataColor = [NSMutableArray array];
     dataListAll = [NSMutableArray array];
-    if (UI_IS_IPHONE5) {
-        self.automaticallyAdjustsScrollViewInsets = false;
-    }
+    _contactStatus = @"0";
     
     NSString *device = [[UIDevice currentDevice] systemVersion];
     if (device.floatValue>10) {
-        
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
-        
-        self.automaticallyAdjustsScrollViewInsets = false;
+//        self.automaticallyAdjustsScrollViewInsets = false;
     }
     
     for (int i = 0; i < 6; i++) {
@@ -91,16 +94,20 @@
     [self setDataInfo];
 //    [self getDataDic:nil];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [self obtainUserContactInfoStatus];
+}
 - (void)configTableView
 {
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableHeaderView = [self tableViewHeaderView];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([TelPhoneCompanyCell class]) bundle:nil] forCellReuseIdentifier:@"TelPhoneCompanyCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
-    
+    [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DataDisplayCell class]) bundle:nil] forCellReuseIdentifier:@"DataDisplayCell"];
+
+
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, 100)];
     _saveBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [footView addSubview:_saveBtn];
@@ -117,9 +124,33 @@
     }];
     [_saveBtn addTarget:self action:@selector(saveBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableFooterView = footView;
-    
 }
-
+-(UIView *)tableViewHeaderView{
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 40)];
+    
+    UIImageView *iconView = [[UIImageView alloc] init];
+    iconView.image = [UIImage imageNamed:@"topCellIcon"];
+    [backView addSubview:iconView];
+    [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@10);
+        make.centerY.equalTo(backView.mas_centerY);
+        make.width.equalTo(@22);
+        make.height.equalTo(@22);
+    }];
+    UILabel *label = [[UILabel alloc] init];
+    [backView addSubview:label];
+    label.text = _placeHolderArr[0];
+    label.textColor = [UIColor redColor];
+    label.font = [UIFont systemFontOfSize:13.f];
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(iconView.mas_right).offset(4);
+        make.centerY.equalTo(backView.mas_centerY);
+        //                make.bottom.equalTo(cell.contentView);
+        make.height.equalTo(@30);
+        make.right.equalTo(backView);
+    }];
+    return backView;
+}
 - (void)getDataDic:(void(^)())finish
 {
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getDicCode_url] parameters:@{@"dict_type_":@"INDUSTRY_"} finished:^(EnumServerStatus status, id object) {
@@ -135,7 +166,48 @@
         
     }];
 }
-
+- (void)getUserInfo:(void(^)(Custom_BaseInfo *custom_baseInfo))finish
+{
+    GetCustomerBaseViewModel *customerInfo = [[GetCustomerBaseViewModel alloc] init];
+    [customerInfo setBlockWithReturnBlock:^(id returnValue) {
+        Custom_BaseInfo *custom_model = returnValue;
+        [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+        if ([custom_model.flag isEqualToString:@"0000"]) {
+            id data = [DataWriteAndRead readDataWithkey:UserInfomation];
+            if (data) {
+                [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
+                if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
+                    [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
+                    [Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
+                    [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+                    [Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
+                    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
+                        [Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
+                    }
+                }
+            } else {
+                if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
+                    [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
+                    [Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
+                    [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+                    [Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
+                    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
+                        [Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
+                    }
+                } else {
+                    [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
+                }
+            }
+            finish(custom_model);
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:custom_model.msg];
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [customerInfo fatchCustomBaseInfo:nil];
+}
 - (void)setDataInfo
 {
     if (_careerInfo.result.organizationName) {
@@ -163,9 +235,7 @@
                     [dataListAll replaceObjectAtIndex:1 withObject:telArray1[1]];
                 }
             }
-            
         }else{
-            
             if ([self isCommonString:_careerInfo.result.organizationTelephone]) {
                 [dataListAll replaceObjectAtIndex:1 withObject:_careerInfo.result.organizationTelephone];
             }
@@ -252,11 +322,7 @@
         }];
     }
     
-//    for (int i = 0; i < _professionArray.count; i++) {
-//        if ([dataListAll[2] isEqualToString:_professionArray[i]]) {
-//            profefssiontag =[NSString stringWithFormat:@"%d",i+1];
-//        }
-//    }
+
     NSString *cityDetail = [dataListAll[4] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *companyString  = [dataListAll[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
     return @{@"organization_name_":companyString,
@@ -282,7 +348,9 @@
         [saveCustomerCarrerViewModel setBlockWithReturnBlock:^(id returnValue) {
             _careerParse = [CareerParse yy_modelWithJSON:returnValue];
             if ([_careerParse.flag isEqualToString:@"0000"]) {
-                [self.delegate setProfessRule:_careerParse];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(setProfessRule:)]) {
+                    [self.delegate setProfessRule:_careerParse];
+                }
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:_careerParse.msg];
                 [self.navigationController popViewControllerAnimated:true];
                 
@@ -339,19 +407,22 @@
 
 
 #pragma mark - TableviewDelegate
-
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    if (section == 0) {
+        return 5;
+    }else if (section == 1){
+        return 1;
+    }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return 50.f;
-    } else {
-        return 70.f;
-    }
+        return 60.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -364,128 +435,110 @@
         [_saveBtn setBackgroundColor:rgb(139, 140, 143)];
     }
     
-    if (indexPath.row == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UIImageView *iconView = [[UIImageView alloc] init];
-            iconView.image = [UIImage imageNamed:@"topCellIcon"];
-            [cell.contentView addSubview:iconView];
-            [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(@10);
-                make.top.equalTo(@9);
-                make.width.equalTo(@22);
-                make.height.equalTo(@22);
-                //                make.bottom.equalTo(@5);
-                //                make.width.equalTo(iconView.mas_height).multipliedBy(1.f);
-            }];
-            UILabel *label = [[UILabel alloc] init];
-            [cell.contentView addSubview:label];
-            label.text = _placeHolderArr[indexPath.row];
-            label.textColor = [UIColor redColor];
-            label.font = [UIFont systemFontOfSize:13.f];
-            [label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(iconView.mas_right).offset(4);
-                make.top.equalTo(@5);
-                //                make.bottom.equalTo(cell.contentView);
-                make.height.equalTo(@30);
-                make.right.equalTo(cell.contentView);
-            }];
+    if (indexPath.section == 1) {
+        ContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
+        if (!cell) {
+            cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
+        }
+        cell.contentTextField.enabled = NO;
+        cell.titleLabel.text = @"联系人信息";
+        cell.promptLabel.hidden = NO;
+        cell.promptLabel.text = @"未完成";
+        if (_contactStatus.boolValue == true) {
+            cell.promptLabel.text = @"已完成";
         }
         return cell;
-    }else {
-        switch (indexPath.row) {
-            case 2:
-            {
-                TelPhoneCompanyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TelPhoneCompanyCell"];
-                if (!cell) {
-                    cell = [[[NSBundle mainBundle] loadNibNamed:@"TelPhoneCompanyCell" owner:self options:nil] lastObject];
-                }
-                cell.textfiledCode.text = dataListAll.lastObject;
-                cell.textfiledCode.tag = 2;
-                cell.textfiledCode.delegate = self;
-                cell.textfiledCode.keyboardType = UIKeyboardTypePhonePad;
-                
-                cell.textfiledTel.text = dataListAll[indexPath.row-1];
-                cell.textfiledTel.delegate = self;
-                cell.textfiledTel.tag = indexPath.row + 10;
-                cell.textfiledTel.keyboardType = UIKeyboardTypePhonePad;
-                [Tool setCorner:cell.viewCode borderColor:dataColor.lastObject];
-                [Tool setCorner:cell.viewTel borderColor:dataColor[indexPath.row-1]];
-                return cell;
-            }
-                break;
-            case 1:
-            case 3:
-            case 4:
-            case 5:
-            {
-                LabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"LabelCell%ld",indexPath.row]];
-                if (!cell) {
-                    cell = [[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil] lastObject];
-                }
-                
-                cell.textField.placeholder = _placeHolderArr[indexPath.row];
-                cell.textField.tag = indexPath.row + 10;
-                cell.textField.delegate = self;
-                cell.textField.text = dataListAll[indexPath.row-1];
-                
-                if (indexPath.row == 1 || indexPath.row == 5) {
-                    cell.btn.hidden = YES;
-                }else{
-                    cell.btn.hidden = NO;
-                    cell.btn.tag = indexPath.row + 200;
-                    [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
-                    [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
-                }
-                cell.btnSecory.hidden = YES;
-                [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
-                cell.selectionStyle  = UITableViewCellSelectionStyleNone;
-                return cell;
-            }
-                break;
-                
-            default:
-                break;
-        }
     }
     
-    return nil;
-}
-
--(void)senderBtn:(UIButton *)sender
-{
-    switch (sender.tag) {
-        case 203:
+    switch (indexPath.row) {
+        case 1:
         {
-            if (_dataDicModel) {
-                [self createPickViewShowWithTag:203];
-            } else {
-                [self getDataDic:^{
-                    [self createPickViewShowWithTag:203];
-                }];
+            TelPhoneCompanyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TelPhoneCompanyCell"];
+            if (!cell) {
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"TelPhoneCompanyCell" owner:self options:nil] lastObject];
             }
+            cell.textfiledCode.text = dataListAll.lastObject;
+            cell.textfiledCode.tag = 2;
+            cell.textfiledCode.delegate = self;
+            cell.textfiledCode.keyboardType = UIKeyboardTypePhonePad;
+            
+            cell.textfiledTel.text = dataListAll[indexPath.row];
+            cell.textfiledTel.delegate = self;
+            cell.textfiledTel.tag = indexPath.row + 10;
+            cell.textfiledTel.keyboardType = UIKeyboardTypePhonePad;
+            
+            return cell;
         }
             break;
-        case 204:
+        case 0:
+        case 2:
+        case 3:
+        case 4:
         {
-            if (_pickerArray.count != 34) {
-                [self PostGetCity];
+            
+            ContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
+            if (!cell) {
+                cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
             }
-            [self createPickViewShowWithTag:204];
+            cell.contentTextField.enabled = YES;
+            if (indexPath.row == 2 || indexPath.row == 3) {
+                cell.contentTextField.enabled = NO;
+                cell.contentTextField.placeholder = @"点击选择";
+            }
+
+            cell.selectionStyle  = UITableViewCellSelectionStyleNone;
+            cell.titleLabel.text = _placeHolderArr[indexPath.row + 1];
+            cell.contentTextField.tag = indexPath.row + 10;
+            cell.contentTextField.delegate = self;
+            cell.contentTextField.text = dataListAll[indexPath.row];
+            cell.arrowsImageBtn.tag = 200 + indexPath.row;
+            cell.arrowsImageBtn.hidden = NO;
+            if (indexPath.row == 0 || indexPath.row == 4) {
+                cell.arrowsImageBtn.hidden = YES;
+            }
+            return cell;
         }
             break;
             
         default:
             break;
     }
+    return nil;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1) {
+        [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
+            UserContactsViewController *userContactVC = [[UserContactsViewController alloc] init];
+            userContactVC.custom_baseInfo = custom_baseInfo;
+            [self.navigationController pushViewController:userContactVC animated:true];
+        }];
+        return;
+    }
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 2) {
+            if (_dataDicModel) {
+                [self createPickViewShowWithTag:202];
+            } else {
+                [self getDataDic:^{
+                    [self createPickViewShowWithTag:202];
+                }];
+            }
+        }
+        if (indexPath.row == 3) {
+            if (_pickerArray.count != 34) {
+                [self PostGetCity];
+            }
+            [self createPickViewShowWithTag:203];
+        }
+    }
 }
 
 - (IBAction)doneAction:(id)sender {
     NSString *localString = @"";
     NSString *loString = @"";
-    if (_pickerTag == 204) {
+    if (_pickerTag == 203) {
         
         if (_pickerArray.count > 0 && _subPickerArray.count > 0 && _thirdPickerArray.count > 0) {
             if ([[_pickerArray objectAtIndex:[self.localPicker selectedRowInComponent:0]] isEqualToString:[_subPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:1]]]) {
@@ -542,6 +595,22 @@
     
 }
 
+-(void)obtainUserContactInfoStatus{
+    
+    UserDataViewModel * userDataVM1 = [[UserDataViewModel alloc]init];
+    [userDataVM1 setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([resultM.errCode isEqualToString:@"0"]) {
+            _contactStatus = (NSString *)resultM.data;
+            [self.tableView reloadData];
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.msg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [userDataVM1 obtainContactInfoStatus];
+}
 #pragma mark ->获取省市区代码
 -(void)PostGetCityCode:(NSString *)datalisCity
 {
@@ -605,7 +674,7 @@
     [self setRomovePickView];
     
     switch (tag) {
-        case 203: //行业
+        case 202: //行业
         {
             _pickerTag = tag;
             _localPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, _k_h-183, _k_w, 183)];
@@ -615,7 +684,7 @@
             [self.view addSubview:_localPicker];
         }
             break;
-        case 204: //单位地址
+        case 203: //单位地址
         {
             _pickerTag = tag;
             _localPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, _k_h-183, _k_w, 183)];
@@ -633,7 +702,7 @@
 #pragma mark--UIPickerViewDataSource
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    if (_pickerTag == 203) {
+    if (_pickerTag == 202) {
         return 1;
     }
     return 3;
@@ -646,7 +715,7 @@
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    if (_pickerTag == 203)
+    if (_pickerTag == 202)
     {
         return _dataDicModel.result.count;
     }else {
@@ -667,7 +736,7 @@
 #pragma mark--UIPickerViewDelegate
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if (_pickerTag == 203)
+    if (_pickerTag == 202)
     {
         return _dataDicModel.result[row].desc_;
     }else{
@@ -693,7 +762,7 @@
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    if (_pickerTag == 203) {
+    if (_pickerTag == 202) {
         [dataListAll replaceObjectAtIndex:2 withObject:_dataDicModel.result[row].desc_];
     }else{
         if (component == 0) {
@@ -752,7 +821,7 @@
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
-    if (_pickerTag == 203) {
+    if (_pickerTag == 202) {
         return 300.;
     }else{
         if (component==FirstComponent) {
@@ -773,7 +842,7 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if (textField.tag == 13 || textField.tag == 14) {
+    if (textField.tag == 12 || textField.tag == 13) {
         return NO;
     }
     
@@ -787,7 +856,7 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField.tag == 11) {
+    if (textField.tag == 10) {
         if (![CheckUtils checkUserName:textField.text]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的单位名称"];
             [dataColor replaceObjectAtIndex:0 withObject:CellBGColorRed];
@@ -796,7 +865,7 @@
             [dataColor replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag == 12) {
+    if (textField.tag == 11) {
         if (![self isCommonString:textField.text]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的单位电话"];
             [dataColor replaceObjectAtIndex:1 withObject:CellBGColorRed];
@@ -805,7 +874,7 @@
             [dataColor replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag == 13) {
+    if (textField.tag == 12) {
         if (textField.text.length < 5) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择正确的行业/职业"];
             [dataColor replaceObjectAtIndex:2 withObject:CellBGColorRed];
@@ -814,7 +883,7 @@
             [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag == 14) {
+    if (textField.tag == 13) {
         if (textField.text.length < 5) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择正确的单位所在地"];
             [dataColor replaceObjectAtIndex:3 withObject:CellBGColorRed];
@@ -823,7 +892,7 @@
             [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag == 15) {
+    if (textField.tag == 14) {
         NSString *detain = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         if (![CheckUtils checkUserDetail:detain] || [CheckUtils checkNumber1_30wei:detain]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的单位详址"];

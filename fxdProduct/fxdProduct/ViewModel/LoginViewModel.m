@@ -13,9 +13,8 @@
 #import "GetCustomerBaseViewModel.h"
 #import "DataWriteAndRead.h"
 #import "CustomerBaseInfoBaseClass.h"
+#import "JPUSHService.h"
 @implementation LoginViewModel
-
-
 /**
  登录请求
 
@@ -34,6 +33,7 @@
     if ([Utility sharedUtility].userInfo.clientId && ![[Utility sharedUtility].userInfo.clientId isEqualToString:@""]) {
         
         loginParamModel.mobile_phone_ = number;
+//        loginParamModel.password_ = @"UOaJcWCD8OWv01mr/VS4cQ==";
         loginParamModel.password_ = [DES3Util encrypt:password];
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
@@ -42,10 +42,10 @@
         loginParamModel.platform_type_ = PLATFORM;
         loginParamModel.BSFIT_DEVICEID = fingerPrint;
         
-
     } else {
         
         loginParamModel.mobile_phone_ = number;
+//        loginParamModel.password_ = @"UOaJcWCD8OWv01mr/VS4cQ==";;
         loginParamModel.password_ = [DES3Util encrypt:password];
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
@@ -86,11 +86,12 @@
             DLog(@"token -- %@  \n  juid -- %@",[Utility sharedUtility].userInfo.tokenStr,[Utility sharedUtility].userInfo.juid);
             
             [self PostPersonInfoMessage];
+            //上传推送id
+            [self uploadUserRegisterID:[JPUSHService registrationID]];
             //登录统计(账号)
             [MobClick profileSignInWithPUID:userTableName];
             //打开数据库
             [[DataBaseManager shareManager] dbOpen:userTableName];
-            
         }
         self.returnBlock(loginParse);
     } failure:^(EnumServerStatus status, id object) {
@@ -133,8 +134,15 @@
     [customBaseViewModel fatchCustomBaseInfo:nil];
 }
                                   
-                                  
-                            
+-(void)uploadUserRegisterID:(NSString *)registerID{
+    //@"http://192.168.12.252:8012/excenter/jiguang/register"
+    NSDictionary * paramDic  = @{@"registerId":registerID};
+    [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_registerID_url] isNeedNetStatus:false isNeedWait:false parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+    } failure:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+    }];
+}
 
 
 @end

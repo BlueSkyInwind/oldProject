@@ -10,6 +10,6 @@
 
 @implementation HomeBannerParamModel
 
-@synthesize plate_,position_,channel_;
+@synthesize plate_,position_,channel;
 
 @end

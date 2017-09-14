@@ -17,7 +17,10 @@
 {
     return @{@"record":[self getEncryptStringWithParameters:params]};
 }
-
++ (float)getIOSVersion
+{
+    return [[[UIDevice currentDevice] systemVersion] floatValue];
+}
 //加密json串
 + (NSString *)getEncryptStringWithParameters:(id)params
 {
@@ -267,7 +270,6 @@
 
 + (NSString *)getContentWithKey:(NSString *)key;
 {
-    
     return [[NSUserDefaults standardUserDefaults] objectForKey:key];
 }
 
@@ -402,5 +404,16 @@
     CGSize aSize = [text sizeWithAttributes:attributes];
     return aSize.width;
 }
+
++ (void)showMessage:(NSString *)msg vc:(UIViewController *)vc
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:action];
+    [vc presentViewController:alertController animated:true completion:nil];
+}
+
 
 @end

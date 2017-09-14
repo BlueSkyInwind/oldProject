@@ -11,7 +11,7 @@
 @implementation P2PAgreeMentModel
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"data":[P2PAgreeMentModelData class]};
+    return @{@"result":[P2PAgreeMentModelData class]};
 }
 
 @end

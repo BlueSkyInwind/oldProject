@@ -14,8 +14,6 @@
 
 @property (nonatomic, assign) NSNumber *userSelectNum;
 
-@property (nonatomic, strong) NSDictionary * uploadP2PUserInfo;
-
 @property (nonatomic, assign) NSString *purposeSelect;
 
 @property (nonatomic,assign)NSMutableArray *dataArray;
@@ -28,5 +26,6 @@
 @property (nonatomic,assign)BOOL isCheck;
 @property (nonatomic,assign)BOOL isOpenAccount;
 @property (nonatomic,assign)BOOL isRepay;
+@property (nonatomic, assign) NSString *applicationId;
 
 @end

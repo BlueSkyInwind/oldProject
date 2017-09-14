@@ -17,4 +17,6 @@
 
 @property (nonatomic, copy) NSString *req_loan_amt;
 
+@property (nonatomic,assign) BOOL isMine;
+
 @end

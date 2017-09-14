@@ -13,7 +13,10 @@
 - (void)repayRequest;
 
 @property (nonatomic, strong) UIViewController *targetVC;
-@property (nonatomic,assign)BOOL isP2pView;
+@property (nonatomic,assign)BOOL isPopRoot;
+@property (nonatomic,strong)NSString * platform_type;
+@property (nonatomic,strong)NSString * applicationId;
+@property (nonatomic,strong)NSString * product_id;
 
 
 @end

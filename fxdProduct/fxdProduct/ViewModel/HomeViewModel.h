@@ -28,19 +28,14 @@
  */
 -(void)fetchLoanProcess;
 
-
-
-@end
-
-
-@interface BannerViewModel : ViewModelClass
-
 /**
- 请求轮播图信息
+ 首页用户请求
  */
--(void)fetchBannerInfo;
+-(void)homeDataRequest;
 
 @end
+
+
 
 @interface ProductListViewModel : ViewModelClass
 
@@ -51,13 +46,6 @@
 
 @end
 
-@interface PopViewModel : ViewModelClass
 
-/**
- 获取弹窗信息
- */
--(void)fetchPopViewInfo;
-
-@end
 
 

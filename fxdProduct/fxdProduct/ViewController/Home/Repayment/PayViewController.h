@@ -16,7 +16,8 @@ typedef NS_ENUM(NSUInteger, PayType) {
     PayTypeCleanPay,
     PayTypeGetMoneyToCard,
 };
-typedef void(^MakeSurePayBlock)(PayType payType,CardInfo *cardInfo,NSInteger currentIndex);
+//typedef void(^MakeSurePayBlock)(PayType payType,CardInfo *cardInfo,NSInteger currentIndex);
+typedef void(^MakeSurePayBlock)(PayType payType,PatternOfPayment payPattern);
 
 typedef void(^ChangeBankBlock)(void);
 @interface PayViewController : UIViewController
@@ -27,8 +28,10 @@ typedef void(^ChangeBankBlock)(void);
 
 @property (nonatomic, strong)MakeSurePayBlock makesureBlock;
 @property (nonatomic, strong)ChangeBankBlock  changeBankBlock;
-
-@property (nonatomic, assign) PayType payType;
+// 付款还是提款
+@property (nonatomic, assign)PayType payType;
+//支付方式
+@property (nonatomic,assign)PatternOfPayment payPattern;
 
 @property (nonatomic, strong) CardInfo *cardInfo;
 
@@ -38,6 +41,7 @@ typedef void(^ChangeBankBlock)(void);
 
 //BankModel *_bankCardModel;
 @property (nonatomic, strong) BankModel *bankCardModel;
+@property (nonatomic, strong) NSMutableArray * supportBankListArr;
 
 @property (nonatomic,assign)BOOL isP2P;
 

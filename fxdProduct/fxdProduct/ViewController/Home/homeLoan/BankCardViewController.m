@@ -39,6 +39,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     ReturnMsgBaseClass *_codeParse;
     UserCardResult *_userCardModel;
     NSString *_bankCodeNUm;
+    NSString *_bankLogogram;
     NSString *_bankNum;
     NSInteger _cardFlag;
     NSInteger defaultBankIndex;
@@ -68,22 +69,13 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     for (int i=0; i<10; i++) {
         [dataListAll3 addObject:@""];
         [dataColorAll3 addObject:UI_MAIN_COLOR];
-    }
-    //    [_sureBtn setEnabled:NO];
-    
+    }    
     UITapGestureRecognizer *tapSecory = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicksecry)];
     self.authorLabel.userInteractionEnabled=YES;
     [self.authorLabel addGestureRecognizer:tapSecory];
     
     [dataListAll3 replaceObjectAtIndex:5 withObject:@"100"];
-    
-    
-    if (![_flagString isEqualToString:@"1"]) {
-        if (!_isP2P) {
-            [self PostGetBankCardCheck];
-        }
-    }
-    
+        
     if (_bankMobile) {
         [dataListAll3 replaceObjectAtIndex:2 withObject:_bankMobile];
     }
@@ -101,8 +93,8 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 - (void)clicksecry
 {
 
-    NSDictionary *paramDic = @{@"apply_id_":_userStateModel.applyID,
-                               @"product_id_":_userStateModel.product_id,
+    NSDictionary *paramDic = @{@"apply_id_":_drawingsInfoModel.applicationId,
+                               @"product_id_":_drawingsInfoModel.productId,
                                @"protocol_type_":@"1",
                                @"card_no_":[dataListAll3 objectAtIndex:1],
                                @"card_bank_":_bankCodeNUm};
@@ -160,7 +152,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.btnSecory.hidden = YES;
         }else if (indexPath.row == 1) {
-            [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
+            [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_31"] forState:UIControlStateNormal];
             cell.btn.hidden = NO;
             cell.btn.tag = indexPath.row + 200;
             [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -193,25 +185,12 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if ([_flagString isEqualToString:@"1"]) {
-        return 20.f;
-    }
+
     return 0.1f;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if ([_flagString isEqualToString:@"1"]) {
-        UIView *viewbg = [[UIView alloc] init];
-        viewbg.backgroundColor = [UIColor whiteColor];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(18, 0, _k_w-18, 20)];
-        label.text = @"您原绑定的中国农业银行卡，现在不支持到账，请更换其它银行卡。";
-        label.textColor = rgb(250, 206, 63);
-        label.adjustsFontSizeToFitWidth = YES;
-        [viewbg addSubview:label];
-        return viewbg;
-    }
-    
     return nil;
 }
 
@@ -322,7 +301,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     {
         
         NSLog(@"===%@",textField.text);
-        if ([textField.text length] !=6) {
+        if ([textField.text isEqualToString:@""]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
             //                [dataColorAll3 replaceObjectAtIndex:3 withObject:redColor];
         }else{
@@ -330,26 +309,17 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             [dataColorAll3 replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
     }
-    
 }
 
 #pragma mark ->BankTableViewSelectDelegate
-//-(void)BankTableViewSelect:(NSString *)CurrentRow andBankInfoList:(NSString *)bankNum andSectionRow:(NSInteger)SectionRow
-//{
-//    [dataListAll3 replaceObjectAtIndex:0 withObject:CurrentRow];//银行名字
-//    //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
-//    _bankCodeNUm = bankNum;
-//    [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",(long)SectionRow]];
-//    [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
-//    [_tableView reloadData];
-//}
 
-- (void)BankSelect:(BankList *)bankInfo andSectionRow:(NSInteger)sectionRow
+- (void)BankSelect:(SupportBankList *)bankInfo andSectionRow:(NSInteger)sectionRow
 {
-    [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.desc];//银行名字
+    [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.bank_name_];//银行名字
     //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
-    _bankNum = bankInfo.code;
-    _bankCodeNUm = bankInfo.code;
+    _bankNum = bankInfo.bank_code_;
+    _bankCodeNUm = bankInfo.bank_code_;
+    _bankLogogram = bankInfo.bank_short_name_;
     [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",(long)sectionRow]];
     [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
     [_tableView reloadData];
@@ -360,32 +330,17 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
  */
 - (void)startBankCamera
 {
-//    WTCameraViewController *cameraVC = [[WTCameraViewController alloc]init];
-//    cameraVC.delegate = self;
-//    cameraVC.devcode = Devcode; //开发码
-//    self.navigationController.navigationBarHidden = YES;
-//    [self.navigationController pushViewController:cameraVC animated:YES];
-    
+
     BOOL bankcard = [MGBankCardManager getLicense];
-    
     if (!bankcard) {
-        
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"SDK授权失败，请检查"];
-        
         return;
     }
-    
     __unsafe_unretained BankCardViewController * weakSelf = self;
     MGBankCardManager *cardManager = [[MGBankCardManager alloc] init];
     [cardManager setDebug:YES];
     [cardManager CardStart:self finish:^(MGBankCardModel * _Nullable result) {
-        //        weakSelf.bankImageView.image = result.image;
-        //        weakSelf.bankNumView.text = result.bankCardNumber;
-        
-//        _bankCodeNUm = result.bankCardNumber;
-//        _bankCodeNUm = [_bankCodeNUm stringByReplacingOccurrencesOfString:@" " withString:@""];
-//        _bankCodeNUm = [self changeStr:_bankCodeNUm];
-        
+
         _bankNum = result.bankCardNumber;
         _bankNum = [_bankNum stringByReplacingOccurrencesOfString:@" " withString:@""];
         _bankNum = [self changeStr:_bankNum];
@@ -408,76 +363,8 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         }
         str = [str substringFromIndex:MIN(str.length, 4)];
     }
-    
     return newString;
 }
-/*
-#pragma mark - CamaraDelegate
-//银行卡识别核心初始化结果，判断核心是否初始化成功
-- (void)initBankCardRecWithResult:(int)nInit{
-    self.tabBarController.tabBar.hidden = YES;
-    DLog(@"识别核心初始化结果nInit>>>%d<<<",nInit);
-}
-//拍照和识别成功后返回结果图片、识别字符串
-- (void)cameraViewController:(WTCameraViewController *)cameraVC resultImage:(UIImage *)image resultDictionary:(NSDictionary *)resultDic{
-    
-    DLog(@"银行卡识别结果resultDic>>>%@<<<",resultDic);
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    //信用卡
-    [dataListAll3 replaceObjectAtIndex:1 withObject:[resultDic objectForKey:@"cardNumber"]];
-    [dataListAll3 replaceObjectAtIndex:0 withObject:[resultDic objectForKey:@"bankName"]];
-    //        _creditBankName
-    //    NSArray *keyArr = [_createBankDict allKeys];
-    for (int i = 0; i < _bankModel.result.count; i++) {
-        BOOL isBreak = false;
-        for (BankList *bankList in _bankModel.result) {
-            if (_bankCodeNUm || ![_bankCodeNUm isEqualToString:@""]) {
-                _bankCodeNUm = @"";
-            }
-            if ([bankList.desc isEqualToString:[resultDic objectForKey:@"bankName"]] || [bankList.desc containsString:[resultDic objectForKey:@"bankName"]] || [[resultDic objectForKey:@"bankName"] containsString:bankList.desc]) {
-                //                [dataListAll3 replaceObjectAtIndex:4 withObject:keyStr];
-                _bankCodeNUm = bankList.code;
-                //                [dataListAll3 replaceObjectAtIndex:0 withObject:bankStr];
-                [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
-                [dataColorAll3 replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
-                isBreak = true;
-                break;
-            }
-        }
-        if (isBreak) {
-            break;
-        }
-    }
-    if ([_bankCodeNUm isEqualToString:@""] || _bankCodeNUm == nil) {
-        [dataListAll3 replaceObjectAtIndex:1 withObject:@""];
-        [dataListAll3 replaceObjectAtIndex:0 withObject:@""];
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请使用支持列表中的银行卡"];
-        [dataColorAll3 replaceObjectAtIndex:0 withObject:redColor];
-        [dataColorAll3 replaceObjectAtIndex:1 withObject:redColor];
-    }
-    
-    
-    [_tableView reloadData];
-}
-
-//返回按钮被点击时回调此方法，返回相机视图控制器
-- (void)backWithCameraViewController:(WTCameraViewController *)cameraVC{
-    [cameraVC.navigationController popViewControllerAnimated:YES];
-}
-
-//点击UIAlertView时返回相机视图控制器
-- (void)clickAlertViewWithCameraViewController:(WTCameraViewController *)cameraVC{
-    [cameraVC.navigationController popViewControllerAnimated:YES];
-}
-
-//相机视图将要消失时回调此方法，返回相机视图控制器
-- (void)viewWillDisappearWithCameraViewController:(WTCameraViewController *)cameraVC
-{
-    cameraVC.navigationController.navigationBarHidden = NO;
-}
-*/
 
 -(void)senderBtn:(UIButton *)sender
 {
@@ -488,9 +375,10 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             DLog(@"%@",_bankModel);
             HomeBankCardViewController *homebankVC = [HomeBankCardViewController new];
             homebankVC.bankModel = _bankModel;
+            homebankVC.bankArray = _bankArray;
+            homebankVC.isP2P = true;
             homebankVC.delegate = self;
             homebankVC.cardTag = [dataListAll3[5] integerValue];
-            //            homebankVC.bankFlag = 100;
             [self.navigationController pushViewController:homebankVC animated:YES];
         }
             break;
@@ -520,23 +408,14 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                 
                 [sender setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
                 _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButton) userInfo:nil repeats:YES];
-                
-                if (_isP2P) {
-                    
-                    [self p2p];
-                }else{
-                
-                    [self sms];
-                }
+                [self p2p];
             }
         }
             break;
         default:
             break;
     }
-    
 }
-
 
 #pragma mark P2P短信发送
 -(void)p2p{
@@ -548,14 +427,13 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         
         SendSmsModel *sendSmsModel = [SendSmsModel yy_modelWithJSON:returnValue];
         
-        if ([sendSmsModel.appcode isEqualToString:@"1"]) {
+        if ([sendSmsModel.result.appcode isEqualToString:@"1"]) {
             [_sureBtn setEnabled:YES];
             [dataListAll3 replaceObjectAtIndex:7 withObject:@"10"];
-            _sms_seq = sendSmsModel.data.sms_seq_;
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
-            
+            _sms_seq = sendSmsModel.result.sms_seq_;
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.result.appmsg];
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.appmsg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:sendSmsModel.result.appmsg];
         }
         
     } WithFaileBlock:^{
@@ -571,7 +449,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 
     NSDictionary *parDic = @{@"mobile_phone_":dataListAll3[2],
                              @"flag":CODE_DRAW,
-                             
                              };
     if (parDic) {
         
@@ -603,7 +480,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     }
 }
 
-
 - (IBAction)sureBtn:(id)sender {
     if ([dataListAll3[0] length] < 1) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择银行卡"];
@@ -613,26 +489,19 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的卡号"];
     }else if (![Tool isMobileNumber:dataListAll3[2]]){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的手机号"];
-    }else if ([dataListAll3[3] length]!= 6){
+    }else if ([dataListAll3[3] isEqualToString:@""] ){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
     }else if (!_btnStatus) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请同意授权书"];
     }else{
-        
-        if(_isP2P){
-//        [self getFxdCaseInfo];
-         [self openAccount];
-        }else{
-            
-        [self PostSubmitUrl];
-        }
+        [self openAccount];
     }
 }
 
 -(BOOL)isSureInfo
 {
     if ([[dataListAll3 objectAtIndex:0] length]>1 && [[dataListAll3 objectAtIndex:1] length]>16
-        && [CheckUtils checkTelNumber:dataListAll3[2]] && [dataListAll3[3] length] == 6) {
+        && [CheckUtils checkTelNumber:dataListAll3[2]] && ![dataListAll3[3] isEqualToString:@""]) {
         return YES;
     }
     return NO;
@@ -642,7 +511,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     NSDictionary *paramDic;
-    if ([_userStateModel.product_id isEqualToString:RapidLoan]) {
+    if ([_drawingsInfoModel.productId isEqualToString:RapidLoan] || [_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
         paramDic = @{@"card_no_":bankNo,
                    @"card_bank_":_bankCodeNUm,
                    @"bank_reserve_phone_":[dataListAll3 objectAtIndex:2],
@@ -651,7 +520,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                    @"verify_code_":dataListAll3[3],
                    @"drawing_amount_":_drawAmount};
     }
-    if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]) {
+    if ([_drawingsInfoModel.productId isEqualToString:SalaryLoan]||[_drawingsInfoModel.productId isEqualToString:WhiteCollarLoan]) {
         paramDic = @{@"card_no_":bankNo,
                      @"card_bank_":_bankCodeNUm,
                      @"bank_reserve_phone_":[dataListAll3 objectAtIndex:2],
@@ -684,60 +553,9 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
                 [self PostSubmitUrl];
                 //                [_sureBtn setEnabled:YES];
-                
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
             }
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
-#pragma mark -> 银行卡读取接口
--(void)PostGetBankCardCheck
-{
-    NSDictionary *paramDic = @{@"card_id_":@""
-                               };
-    //银行卡四要素验证
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            
-            _userCardModel = [UserCardResult yy_modelWithJSON:object];
-            if ([_userCardModel.flag isEqualToString:@"0000"]) {
-                for (NSInteger i = 0; i < _userCardModel.result.count; i++) {
-                    CardResult *cardResult = [_userCardModel.result objectAtIndex:i];
-                    if([cardResult.card_type_ isEqualToString:@"2"])
-                    {
-                        if ([cardResult.if_default_ isEqualToString:@"1"]) {
-                            NSInteger j = -1;
-                            for (BankList *banlist in _bankModel.result) {
-                                j++;
-                                if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
-                                    //                                _selectCard
-                                    //                                    CardInfo *cardInfo = [[CardInfo alloc] init];
-                                    //                                    cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
-                                    //                                    cardInfo.bankName = banlist.desc;
-                                    //                                    cardInfo.cardIdentifier = cardResult.id_;
-                                    //                                    _selectCard = cardInfo;
-                                    [dataListAll3 replaceObjectAtIndex:1 withObject:cardResult.card_no_];
-                                    _bankCodeNUm = cardResult.card_bank_;
-                                    [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",j]];
-                                    [dataListAll3 replaceObjectAtIndex:0 withObject:banlist.desc];
-                                    [dataListAll3 replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%@",cardResult.bank_reserve_phone_]];
-                                }
-                            }
-                            if (j == -1) {
-                                [dataListAll3 replaceObjectAtIndex:0 withObject:@""];
-                            }
-                        }
-                    }
-                }
-                [_tableView reloadData];
-            } else{
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardModel.msg];
-            }
-            
         }
     } failure:^(EnumServerStatus status, id object) {
         
@@ -753,7 +571,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
                 LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
-                loanVC.userStateModel = _userStateModel;
+//                loanVC.userStateModel = _userStateModel;
                 [self.navigationController pushViewController:loanVC animated:YES];
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
@@ -772,106 +590,31 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 #pragma mark 开户
 -(void)openAccount{
 
-
-    NSString *bankName = [self bankName:_bankCodeNUm];
+    NSString *bankName = _bankLogogram;
 //    NSString *_sms_seq = @"AAAAAAAA";
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
     
+    //效验验证码序列号
+    if (!_sms_seq) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
+        return;
+    }
     NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@&mobile_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,bankName,bankNo,dataListAll3[3],_sms_seq,dataListAll3[2]];
     NSLog(@"%@",url);
     P2PViewController *p2pVC = [[P2PViewController alloc] init];
     p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     p2pVC.bankCodeNUm = _bankCodeNUm;
     p2pVC.drawAmount= _drawAmount;
-    p2pVC.product_id = _userStateModel.product_id;
+    p2pVC.product_id = _drawingsInfoModel.productId;
     p2pVC.periodSelect = _periodSelect;
     p2pVC.dataArray = dataListAll3;
-    p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
     p2pVC.isCheck = YES;
-//    p2pVC.uploadP2PUserInfo = _uploadP2PUserInfo;
-//    p2pVC.userSelectNum = _userSelectNum;
     p2pVC.purposeSelect = _purposeSelect;
-//    p2pVC.isOpenAccount = YES;
+    p2pVC.applicationId = self.drawingsInfoModel.applicationId;
     [self.navigationController pushViewController:p2pVC animated:YES];
 }
 
 
-#pragma mark 发标前查询进件
--(void)getFxdCaseInfo{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
-        if ([caseInfo.flag isEqualToString:@"0000"]) {
-            
-            [self save:caseInfo];
-            
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel getFXDCaseInfo];
-    
-}
 
-
-#pragma mark 提款申请件记录
--(void)save:(GetCaseInfo *)caseInfo{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        SaveLoanCaseModel *model = [SaveLoanCaseModel yy_modelWithJSON:returnValue];
-        if ([model.flag isEqualToString:@"0000"]) {
-            [self openAccount];
-            
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel saveLoanCase:@"20" CaseInfo:caseInfo Period:[NSString stringWithFormat:@"%ld",_periodSelect] PurposeSelect:_purposeSelect];
-    
-}
-
-#pragma mark  银行卡名字的缩写
--(NSString *)bankName:(NSString *)bankCode{
-
-    NSString *name = @"";
-    NSInteger code = bankCode.integerValue;
-    switch (code) {
-        case 1:
-            name = @"BOC";
-            return name;
-            break;
-        case 2:
-            name = @"ICBC";
-            return name;
-            break;
-        case 3:
-            name = @"CCB";
-            return name;
-            break;
-        case 4:
-            name = @"ABC";
-            return name;
-            break;
-        case 8:
-            name = @"CITIC";
-            return name;
-            break;
-        case 9:
-            name = @"CIB";
-            return name;
-            break;
-        case 10:
-            name = @"CEB";
-            return name;
-            break;
-        default:
-            break;
-    }
-    return name;
-}
 
 @end

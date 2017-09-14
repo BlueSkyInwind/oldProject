@@ -8,66 +8,155 @@
 
 #import <Foundation/Foundation.h>
 
-@class HomeProductListResult,HomeProductListProducts,HomeProductLisTextAttr;
+@class HomeProductListData,HomePopList,HomePaidList,HomeProductsList,HomeBannerList,HomeInfoList,HomeThirdProductList,HomeThirdExtAttr;
 
 
 @interface HomeProductList : NSObject
 
-@property (nonatomic , copy) NSString              * flag;
-@property (nonatomic , strong) HomeProductListResult              * result;
-@property (nonatomic , copy) NSString              * ext;
+@property (nonatomic , copy) NSString              * errCode;
+@property (nonatomic , strong) HomeProductListData              * data;
+@property (nonatomic , copy) NSString              * errMsg;
+@property (nonatomic , copy) NSString              * friendErrMsg;
 
 @end
 
 
-@interface HomeProductListResult : NSObject
+@interface HomeProductListData : NSObject
 
-@property (nonatomic , strong) NSArray<HomeProductListProducts *> * products;
-
-@end
-
-@interface HomeProductListProducts : NSObject
-
-//利率
-@property (nonatomic , copy) NSString      * day_service_fee_rate_;
-//相关产品描述参数
-@property (nonatomic , strong) HomeProductLisTextAttr     * ext_attr_;
+//首页banner位
+@property (nonatomic , strong) NSArray<HomeBannerList *>   * bannerList;
+//借款记录
+@property (nonatomic , strong) NSArray<NSString *>     * paidList;
+//弹窗banner
+@property (nonatomic , strong) NSArray<HomePopList *>      * popList;
+//产品列表
+@property (nonatomic , strong) NSArray<HomeProductsList *>            * productList;
+@property (nonatomic , copy)NSString *user;
+//首页按钮文字
+@property (nonatomic , copy)NSString *buttonText;
+//首页页面状态
+//1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中
+@property (nonatomic , copy)NSString *flag;
+//首页放款还款显示文字
+@property (nonatomic , strong) NSArray<HomeInfoList *>      * infoList;
 //产品id
-@property (nonatomic , copy) NSString              * id_;
-//产品名称
-@property (nonatomic , copy) NSString              * name_;
-//期数时长
-@property (nonatomic , copy) NSString              * staging_duration_;
-//违约金额度
-@property (nonatomic , copy) NSString              * liquidated_damages_;
-//借款本金下限
-@property (nonatomic , copy) NSString              * principal_bottom_;
-//借款本金上限
-@property (nonatomic , copy) NSString              * principal_top_;
-//期数下限
-@property (nonatomic , copy) NSString              * staging_bottom_;
-//期数上限
-@property (nonatomic , copy) NSString              * staging_top_;
-//是否超限
-@property (nonatomic , copy) NSString              * isOverLimit;
+@property (nonatomic , copy)NSString *productId;
+//导流产品列表
+@property (nonatomic , strong) NSArray<HomeThirdProductList *>            * thirdProductList;
+//首页红色提醒文字
+@property (nonatomic , copy)NSString *warnText;
+//二级提醒文字
+@property (nonatomic , copy)NSString *subWarnText;
+//二级提醒文字
+@property (nonatomic , copy)NSString *platformType;
+//申请件id
+@property (nonatomic , copy)NSString *applicationId;
+//合规用户状态
+@property (nonatomic , copy)NSString *userStatus;
 
 @end
 
-@interface HomeProductLisTextAttr : NSObject
 
-//金额描述
+@interface HomeBannerList : NSObject
+
+//图片url
+@property (nonatomic , copy) NSString              * image;
+//是否有效
+@property (nonatomic , copy) NSString              * isValid;
+//跳转url
+@property (nonatomic , copy) NSString              * toUrl;
+
+@end
+
+@interface HomePaidList : NSObject
+
+@end
+
+@interface HomePopList : NSObject
+
+//图片url
+@property (nonatomic , copy) NSString              * image;
+//是否有效
+@property (nonatomic , copy) NSString              * isValid;
+//跳转url
+@property (nonatomic , copy) NSString              * toUrl;
+
+@end
+
+@interface HomeProductsList : NSObject
+
+//借款额度
+@property (nonatomic , copy) NSString              * amount;
+//产品图标
+@property (nonatomic , copy) NSString              * icon;
+//是否超额
+@property (nonatomic , copy) NSString              * isOverLimit;
+//是否能借
+@property (nonatomic , copy) NSString              * isValidate;
+//借款周期
+@property (nonatomic , copy) NSString              * period;
+//产品id
+@property (nonatomic , copy) NSString              * productId;
+//产品名称
+@property (nonatomic , copy) NSString              * productName;
+//产品标签
+@property (nonatomic , copy) NSArray              * tags;
+
+@end
+
+@interface HomeInfoList : NSObject
+//显示排序
+@property (nonatomic , copy) NSString              * index;
+//左边文字
+@property (nonatomic , copy) NSString              * label;
+//右边对应值
+@property (nonatomic , copy) NSString              * value;
+
+@end
+
+
+@interface HomeThirdProductList : NSObject
+
+//显示排序
+@property (nonatomic , copy) NSString              * dayServiceFeeRate;
+//左边文字
+@property (nonatomic , copy) NSString              * id_;
+//右边对应值
+@property (nonatomic , copy) NSString              * isOverLimit;
+//显示排序
+@property (nonatomic , copy) NSString              * liquidatedDamages;
+//左边文字
+@property (nonatomic , copy) NSString              * name;
+//右边对应值
+@property (nonatomic , copy) NSString              * platformType;
+//右边对应值
+@property (nonatomic , copy) NSString              * principalBottom;
+//显示排序
+@property (nonatomic , copy) NSString              * principalTop;
+//左边文字
+@property (nonatomic , copy) NSString              * stagingBottom;
+//右边对应值
+@property (nonatomic , copy) NSString              * stagingDuration;
+//左边文字
+@property (nonatomic , copy) NSString              * stagingTop;
+//左边文字
+@property (nonatomic , strong) HomeThirdExtAttr      * extAttr;
+
+@end
+
+@interface HomeThirdExtAttr : NSObject
+
+//左边文字
 @property (nonatomic , copy) NSString              * amt_desc_;
-//利率描述
+//右边对应值
 @property (nonatomic , copy) NSString              * charge_desc_;
-//图标
+//左边文字
 @property (nonatomic , copy) NSString              * icon_;
-//通过率
+//左边文字
 @property (nonatomic , copy) NSString              * pass_level_;
-//详细地址
+//左边文字
 @property (nonatomic , copy) NSString              * path_;
-//期限描述
-@property (nonatomic , copy) NSString              * period_desc_;
-//产品简述
+//右边对应值
 @property (nonatomic , copy) NSArray              * tags;
 
 @end

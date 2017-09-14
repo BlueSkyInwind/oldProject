@@ -19,6 +19,8 @@
 {
     UserCardResult *_userCardsModel;
     
+    NSMutableArray *_cardListArr;
+
     NSMutableArray *_dataliat;
     NSMutableArray *_dataNumList;
     NSMutableArray *_dataImageListBank;
@@ -34,6 +36,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _cardListArr = [NSMutableArray array];
     _dataliat =[[NSMutableArray alloc] init];
     _dataNumList = [[NSMutableArray alloc] init];
     _dataImageListBank = [[NSMutableArray alloc] init];
@@ -60,44 +63,36 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 
 - (void)fatchBankList
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        _userCardsModel = [UserCardResult yy_modelWithJSON:object];
-        if([_userCardsModel.flag isEqualToString:@"0000"]){
+    
+    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
+    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
             if (_dataliat.count > 0 || _dataNumList.count > 0 || _dataImageListBank.count > 0 || _bankWitchArray.count > 0) {
                 [_dataliat removeAllObjects];
                 [_dataNumList removeAllObjects];
                 [_dataImageListBank removeAllObjects];
                 [_bankWitchArray removeAllObjects];
+                [_cardListArr removeAllObjects];
             }
-            for(NSInteger j=0;j<_userCardsModel.result.count;j++)
-            {
-                CardResult *cardResult = [_userCardsModel.result objectAtIndex:j];
-                if([cardResult.card_type_ isEqualToString:@"2"])
-                {
-                    for (BankList *banlist in _bankModel.result) {
-                        if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
-                            if ([cardResult.if_default_ isEqualToString:@"1"]) {
-//                                _currentIndex = j;
-                                CardInfo *cardInfo = [[CardInfo alloc] init];
-                                cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
-                                cardInfo.bankName = banlist.desc;
-                                cardInfo.cardIdentifier = cardResult.id_;
-                                _cardInfo = cardInfo;
-                            }
-                            [_dataliat addObject:[self formatTailNumber:cardResult.card_no_]];
-                            [_dataNumList addObject:cardResult.card_type_];
-                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.code]];
-                            [_bankWitchArray addObject:banlist.desc];
-                        }
+            NSArray *array = (NSMutableArray *)baseResultM.data;
+            if (array.count <= 0){
+                
+            }
+            for (int  i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
+                CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
+                if ([cardInfo.cardType isEqualToString:@"2"]) {
+                    if (i==0) {
+//                        _currentIndex =0;
+                        _cardInfo = cardInfo;
                     }
-                    
-                    
-                    //                    for (BankList *banlist in _bankModel.result) {
-                    //                        if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
-                    //
-                    //                        }
-                    //                    }
-                }
+                    [_cardListArr addObject:cardInfo];
+                    [_dataliat addObject:[self formatTailNumber:cardInfo.cardNo]];
+                    [_dataNumList addObject:cardInfo.cardType];
+                    [_dataImageListBank addObject:cardInfo.cardIcon];
+                    [_bankWitchArray addObject:cardInfo.bankName];
+                 }
             }
             [self.tableView.mj_header endRefreshing];
             [_tableView reloadData];
@@ -105,9 +100,54 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
             [self.tableView.mj_header endRefreshing];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         [self.tableView.mj_header endRefreshing];
     }];
+    [bankInfoVM obtainUserBankCardList];
+    
+    
+//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+//        _userCardsModel = [UserCardResult yy_modelWithJSON:object];
+//        if([_userCardsModel.flag isEqualToString:@"0000"]){
+//            if (_dataliat.count > 0 || _dataNumList.count > 0 || _dataImageListBank.count > 0 || _bankWitchArray.count > 0) {
+//                [_dataliat removeAllObjects];
+//                [_dataNumList removeAllObjects];
+//                [_dataImageListBank removeAllObjects];
+//                [_bankWitchArray removeAllObjects];
+//            }
+//            for(NSInteger j=0;j<_userCardsModel.result.count;j++)
+//            {
+//                CardResult *cardResult = [_userCardsModel.result objectAtIndex:j];
+//                if([cardResult.card_type_ isEqualToString:@"2"])
+//                {
+//                    for (SupportBankList *banlist in _supportBankListArr) {
+//                        if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
+//                            if (j==0) {
+////                                _currentIndex = j;
+//                                CardInfo *cardInfo = [[CardInfo alloc] init];
+//                                cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
+//                                cardInfo.bankName = banlist.bank_name_;
+//                                cardInfo.cardIdentifier = cardResult.id_;
+//                                _cardInfo = cardInfo;
+//                            }
+//                            [_dataliat addObject:[self formatTailNumber:cardResult.card_no_]];
+//                            [_dataNumList addObject:cardResult.card_type_];
+////                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.bank_code_]];
+//                            [_dataImageListBank addObject:banlist.icon_url_];
+//                            [_bankWitchArray addObject:banlist.bank_name_];
+//                        }
+//                    }
+//                }
+//            }
+//            [self.tableView.mj_header endRefreshing];
+//            [_tableView reloadData];
+//        }else{
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
+//            [self.tableView.mj_header endRefreshing];
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        [self.tableView.mj_header endRefreshing];
+//    }];
 }
 
 - (NSString *)formatTailNumber:(NSString *)str
@@ -132,11 +172,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         [backItem setTintColor:rgb(94, 94, 94)];
         self.navigationItem.leftBarButtonItem = backItem;
     }
-    
-    
-    
 }
-
 - (void)dismissSelf
 {
     [self dismissSemiModalView];
@@ -150,15 +186,23 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 
 - (IBAction)surePayMethod:(UIButton *)sender {
     
-    self.bankSelectBlock(_cardInfo,_currentIndex);
+    if (self.bankSelectBlock) {
+        self.bankSelectBlock(_cardInfo,_currentIndex);
+    }
     if (_payMethod == PayMethodNormal) {
         [self dismissSelf];
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    
 }
+
+-(void)tranferValue:(BankSelectBlock)block{
+    
+    self.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
+        block(cardInfo,currentIndex);
+    };
+}
+
 
 #pragma mark -TableViewDelegate
 
@@ -174,7 +218,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     //    } else {
     //        return  _userCardsModel.result.count+1;
     //    }
-    return  _userCardsModel.result.count+1;
+    return  _cardListArr.count+1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -184,7 +228,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == _userCardsModel.result.count) {
+    if (indexPath.row ==  _cardListArr.count) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -193,7 +237,9 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     } else {
         BankListCell *cell = [tableView dequeueReusableCellWithIdentifier:bankListCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.bankLogo.image = [UIImage imageNamed:[_dataImageListBank objectAtIndex:indexPath.row]];
+//        cell.bankLogo.image = [UIImage imageNamed:[_dataImageListBank objectAtIndex:indexPath.row]];
+        [cell.bankLogo sd_setImageWithURL:[NSURL URLWithString:[_dataImageListBank objectAtIndex:indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
+
         cell.bankCardInfoLabel.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[_bankWitchArray objectAtIndex:indexPath.row],[_dataliat objectAtIndex:indexPath.row]];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.bankCardInfoLabel.textColor = [UIColor grayColor];
@@ -207,7 +253,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == _userCardsModel.result.count) {
+    if (indexPath.row == _cardListArr.count) {
         EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:NSStringFromClass([EditCardsController class]) bundle:nil];
         editCard.typeFlag = @"0";
         editCard.addCarSuccess = ^{
@@ -218,11 +264,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         [self presentViewController:addCarNC animated:YES completion:nil];
     } else {
         _currentIndex = indexPath.row;
-        CardResult *cardResult = [_userCardsModel.result objectAtIndex:indexPath.row];
-        CardInfo *cardInfo = [[CardInfo alloc] init];
-        cardInfo.bankName = [_bankWitchArray objectAtIndex:indexPath.row];
-        cardInfo.cardIdentifier = cardResult.id_;
-        cardInfo.tailNumber = [_dataliat objectAtIndex:indexPath.row];
+        CardInfo *cardInfo = [_cardListArr objectAtIndex:indexPath.row];
         _cardInfo = cardInfo;
         [self.tableView reloadData];
     }

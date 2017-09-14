@@ -47,21 +47,17 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self addBackItem];
     self.navigationItem.title = @"联系人信息";
-    _placeHolderArr = @[@"从通讯录读取联系人会增加审核通过率",@"联系人关系",@"联系人1姓名",@"联系人1号码",@"联系人关系",@"联系人2姓名",@"联系人2号码"];
+    _placeHolderArr = @[@"从通讯录读取联系人会增加审核通过率",@[@"联系人关系",@"联系人1姓名",@"联系人1号码"],@[@"联系人关系",@"联系人2姓名",@"联系人2号码"]];
     _contact1 = @[@"父母",@"配偶"];
     _contact2 = @[@"同事",@"朋友"];
     _flagTag = 0;
     _toolbarCancelDone.hidden = true;
-    if (UI_IS_IPHONE5) {
-        self.automaticallyAdjustsScrollViewInsets = false;
-    }
+
     NSString *device = [[UIDevice currentDevice] systemVersion];
     if (device.floatValue>10) {
-        
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
-        
-        self.automaticallyAdjustsScrollViewInsets = false;
+//        self.automaticallyAdjustsScrollViewInsets = false;
     }
     
     dataListAll = [NSMutableArray array];
@@ -77,11 +73,10 @@
 
 - (void)configTableView
 {
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    //    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([TelPhoneCompanyCell class]) bundle:nil] forCellReuseIdentifier:@"TelPhoneCompanyCell"];
+    self.tableView.tableHeaderView = [self tableViewHeaderView];
+    [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
     
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, 100)];
@@ -102,7 +97,32 @@
     self.tableView.tableFooterView = footView;
     
 }
-
+-(UIView *)tableViewHeaderView{
+    UIView * backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 40)];
+    
+    UIImageView *iconView = [[UIImageView alloc] init];
+    iconView.image = [UIImage imageNamed:@"topCellIcon"];
+    [backView addSubview:iconView];
+    [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@10);
+        make.centerY.equalTo(backView.mas_centerY);
+        make.width.equalTo(@22);
+        make.height.equalTo(@22);
+    }];
+    UILabel *label = [[UILabel alloc] init];
+    [backView addSubview:label];
+    label.text = _placeHolderArr[0];
+    label.textColor = [UIColor redColor];
+    label.font = [UIFont systemFontOfSize:13.f];
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(iconView.mas_right).offset(4);
+        make.centerY.equalTo(backView.mas_centerY);
+        //                make.bottom.equalTo(cell.contentView);
+        make.height.equalTo(@30);
+        make.right.equalTo(backView);
+    }];
+    return backView;
+}
 - (void)setDataInfo
 {
     if (_custom_baseInfo.result.contactBean.count > 1) {
@@ -160,7 +180,6 @@
                 [dataListAll replaceObjectAtIndex:2 withObject:[self formatString:contact2.contactPhone]];
             }
             
-            
             if (contact1.relationship) {
                 if ([contact1.relationship isEqualToString:@"4"]) {
                     [dataListAll replaceObjectAtIndex:3 withObject:@"同事"];
@@ -180,7 +199,6 @@
         }
     }
 }
-
 
 - (NSString *)formatString:(NSString *)str
 {
@@ -252,19 +270,17 @@
 }
 
 #pragma mark - TableView
-
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 7;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return 50.f;
-    } else {
-        return 70.f;
-    }
+    return 60.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -276,86 +292,65 @@
         _saveBtn.enabled = false;
         [_saveBtn setBackgroundColor:rgb(139, 140, 143)];
     }
-    if (indexPath.row == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UIImageView *iconView = [[UIImageView alloc] init];
-            iconView.image = [UIImage imageNamed:@"topCellIcon"];
-            [cell.contentView addSubview:iconView];
-            [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(@10);
-                make.top.equalTo(@9);
-                make.width.equalTo(@22);
-                make.height.equalTo(@22);
-                //                make.bottom.equalTo(@5);
-                //                make.width.equalTo(iconView.mas_height).multipliedBy(1.f);
-            }];
-            UILabel *label = [[UILabel alloc] init];
-            [cell.contentView addSubview:label];
-            label.text = _placeHolderArr[indexPath.row];
-            label.textColor = [UIColor redColor];
-            label.font = [UIFont systemFontOfSize:13.f];
-            [label mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(iconView.mas_right).offset(4);
-                make.top.equalTo(@5);
-                //                make.bottom.equalTo(cell.contentView);
-                make.height.equalTo(@30);
-                make.right.equalTo(cell.contentView);
-            }];
-        }
-        return cell;
-    }else{
-        LabelCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"abcde%ld",indexPath.row]];
-        if (!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"LabelCell" owner:self options:nil] lastObject];
-        }
-        if(indexPath.row == 3 || indexPath.row == 6)
-        {
-            cell.textField.keyboardType =UIKeyboardTypePhonePad;
-        }
-        cell.textField.placeholder = _placeHolderArr[indexPath.row];
-        cell.textField.tag = indexPath.row +10;
-        cell.textField.delegate = self;
-        cell.textField.text = dataListAll[indexPath.row-1];
-        if (indexPath.row ==3 || indexPath.row == 6) {
-            cell.btn.hidden = YES;
-        }else{
-            cell.btn.hidden = NO;
-            cell.btn.tag = indexPath.row + 100;
-            if (indexPath.row == 2 || indexPath.row == 5) {
-                [cell.btn setBackgroundImage:[UIImage imageNamed:@"cotactIco"] forState:UIControlStateNormal];
-            } else {
-                [cell.btn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_25"] forState:UIControlStateNormal];
-            }
-            [cell.btn addTarget:self action:@selector(senderBtn:) forControlEvents:UIControlEventTouchUpInside];
-        }
-        cell.btnSecory.hidden =YES;
-        [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
-        cell.selectionStyle  = UITableViewCellSelectionStyleNone;
-        return cell;
+    ContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
+    if (!cell) {
+        cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
     }
-    return nil;
+    cell.selectionStyle  = UITableViewCellSelectionStyleNone;
+    cell.arrowsImageBtn.hidden = NO;
+    cell.contentTextField.enabled = YES;
+    if (indexPath.row == 0) {
+        cell.contentTextField.enabled = NO;
+    }
+    if (indexPath.row == 1) {
+        [cell.arrowsImageBtn setBackgroundImage:[UIImage imageNamed:@"cotactIco"] forState:UIControlStateNormal];
+        cell.arrowsImageBtn.tag = 1000 + indexPath.section;
+        [cell updateConatctImageBtnLayout];
+    }
+    if(indexPath.row == 2 ){
+        cell.contentTextField.keyboardType =UIKeyboardTypePhonePad;
+        cell.arrowsImageBtn.hidden = YES;
+    }
+    __weak typeof (self) weakSelf = self;
+    cell.btnClick = ^(UIButton * button) {
+        [weakSelf senderBtn:button];
+    };
+    
+    switch (indexPath.section) {
+        case 0:{
+            cell.titleLabel.text = _placeHolderArr[indexPath.section + 1][indexPath.row];
+            cell.contentTextField.tag = indexPath.row +(10 * (indexPath.section+1));
+            cell.contentTextField.delegate = self;
+            cell.contentTextField.text = dataListAll[indexPath.row];
+        }
+            break;
+        case 1:{
+            cell.titleLabel.text = _placeHolderArr[indexPath.section + 1][indexPath.row];
+            cell.contentTextField.tag = indexPath.row +(10 * (indexPath.section+1));
+            cell.contentTextField.delegate = self;
+            cell.contentTextField.text = dataListAll[indexPath.row + 3];
+        }
+            break;
+        default:
+            break;
+    }
+    return cell;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        [self createPickViewShowWithTag:101];
+    }else if  (indexPath.section == 1 && indexPath.row == 0) {
+        [self createPickViewShowWithTag:104];
+    }
+}
 -(void)senderBtn:(UIButton *)sender
 {
     switch (sender.tag) {
-        case 101:
-        {
-            [self createPickViewShowWithTag:101];
-        }
-            break;
-        case 104:
-        {
-            [self createPickViewShowWithTag:104];
-        }
-            break;
-        case 102:
+        case 1000:
         {
             DLog(@"选择通讯录");
-            _flagTag = 102;
+            _flagTag = 1000;
             if (kiOS9Later) {
                 CNContactPickerViewController * con = [[CNContactPickerViewController alloc] init];
                 con.delegate = self;
@@ -366,13 +361,12 @@
                 nav.predicateForSelectionOfPerson = [NSPredicate predicateWithValue:false];
                 [self presentViewController:nav animated:YES completion:nil];
             }
-            
         }
             break;
-        case 105:
+        case 1001:
         {
             DLog(@"选择通讯录");
-            _flagTag = 105;
+            _flagTag = 1001;
             if (kiOS9Later) {
                 CNContactPickerViewController * con = [[CNContactPickerViewController alloc] init];
                 con.delegate = self;
@@ -383,7 +377,6 @@
                 nav.predicateForSelectionOfPerson = [NSPredicate predicateWithValue:false];
                 [self presentViewController:nav animated:YES completion:nil];
             }
-            
         }
             break;
         default:
@@ -448,7 +441,6 @@
             phoneNumStr = [phoneNumStr substringFromIndex:3];
         }
     }
-    
     [picker dismissViewControllerAnimated:true completion:^{
         [self contactSelect:fullName phone:phoneNumStr];
         ContactClass *contact = [[ContactClass alloc] init];
@@ -496,7 +488,6 @@
     [peoplePicker pushViewController:personViewController animated:YES];
 }
 
-
 - (void)uploadUserContact:(NSArray *)conArr
 {
     NSData *data = [NSJSONSerialization dataWithJSONObject:conArr options:NSJSONWritingPrettyPrinted error:nil];
@@ -518,7 +509,7 @@
 
 - (void)contactSelect:(NSString *)name phone:(NSString *)phoneNum
 {
-    if (_flagTag == 102) {
+    if (_flagTag == 1000) {
         if ([CheckUtils checkUserName:name]) {
             if ([dataListAll[4] isEqualToString:name]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"两个联系人名称不能一致"];
@@ -557,7 +548,7 @@
         
         [_tableView reloadData];
     }
-    if (_flagTag == 105) {
+    if (_flagTag == 1001) {
         if ([CheckUtils checkUserName:name]) {
             if ([dataListAll[1] isEqualToString:name]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"两个联系人名称不能一致"];
@@ -651,7 +642,6 @@
     return 300.f;
 }
 
-
 -(void)setRomovePickView
 {
     _toolbarCancelDone.hidden = NO;
@@ -664,16 +654,15 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if (textField.tag == 11 || textField.tag == 14) {
+    if (textField.tag == 10 || textField.tag == 20) {
         return NO;
     }
-    
     return YES;
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (textField.tag == 13 || textField.tag == 16) {
+    if (textField.tag == 12 || textField.tag == 22) {
         NSString* text = textField.text;
         //删除
         if([string isEqualToString:@""]){
@@ -743,7 +732,7 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField.tag == 11) {
+    if (textField.tag == 10) {
         if (![CheckUtils checkUserName:textField.text]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的联系人关系"];
             [dataColor replaceObjectAtIndex:0 withObject:CellBGColorRed];
@@ -752,7 +741,7 @@
             [dataColor replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag == 12) {
+    if (textField.tag == 11) {
         if (![CheckUtils checkUserNameHanzi:textField.text]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的联系人姓名"];
             [dataColor replaceObjectAtIndex:1 withObject:CellBGColorRed];
@@ -768,7 +757,7 @@
             
         }
     }
-    if (textField.tag == 13) {
+    if (textField.tag == 12) {
         NSString *telString = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         if (![CheckUtils checkTelNumber:telString]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的联系人手机号"];
@@ -784,7 +773,7 @@
             
         }
     }
-    if (textField.tag == 14) {
+    if (textField.tag == 20) {
         if (![CheckUtils checkUserName:textField.text]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的联系人关系"];
             [dataColor replaceObjectAtIndex:3 withObject:CellBGColorRed];
@@ -793,7 +782,7 @@
             [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag == 15) {
+    if (textField.tag == 21) {
         if (![CheckUtils checkUserNameHanzi:textField.text]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的联系人姓名"];
             [dataColor replaceObjectAtIndex:4 withObject:CellBGColorRed];
@@ -807,10 +796,10 @@
         }else{
             [dataListAll replaceObjectAtIndex:4 withObject:textField.text];
             [dataColor replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
-            
         }
     }
-    if (textField.tag == 16) {
+    
+    if (textField.tag == 22) {
         NSString *telString = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         if (![CheckUtils checkTelNumber:telString] ) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的联系人手机号"];
@@ -827,32 +816,29 @@
             [dataColor replaceObjectAtIndex:5 withObject:UI_MAIN_COLOR];
         }
     }
-    if (textField.tag < 17 && textField.tag > 10) {
-        if ([self isCanSelectBtn]) {
-            NSIndexPath *indexPat=[NSIndexPath indexPathForRow:textField.tag -10 inSection:0];
-            NSArray *indexArray=[NSArray arrayWithObject:indexPat];
-            [_tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
-        }else{
-            NSIndexPath *indexPath_1=[NSIndexPath indexPathForRow:textField.tag -10 inSection:0];
-            NSArray *indexArray=[NSArray arrayWithObject:indexPath_1];
-            [_tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
+    if (textField.tag < 23 && textField.tag > 9) {
+        [self.tableView reloadData];
     }
 }
 
 - (BOOL)isCanSelectBtn
 {
-    //    && ![tel1 isEqualToString:_TelPhoneExt.mobilePhone]
-    //    && ![dataListAll[0] isEqualToString:dataListAll[6]]
     NSString *tel1 = [dataListAll[2] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *tel2 = [dataListAll[5] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if ([CheckUtils checkUserName:[dataListAll objectAtIndex:0]] && [[dataListAll objectAtIndex:1] length] >=1 && [CheckUtils checkTelNumber:tel1] && [CheckUtils checkUserName:[dataListAll objectAtIndex:4]] && [[dataListAll objectAtIndex:4] length] >=1 && [CheckUtils checkTelNumber:tel2]  && ![dataListAll[1] isEqualToString:dataListAll[4]] && ![dataListAll[2] isEqualToString:dataListAll[5]]) {
-        return YES;
-    } else {
-        return NO;
+    
+    if (![CheckUtils checkTelNumber:tel1]  || ![CheckUtils checkTelNumber:tel2]) {
+        return false;
     }
+    
+    if (![CheckUtils checkUserName:[dataListAll objectAtIndex:1]] || [[dataListAll objectAtIndex:1] length] <1 || ![CheckUtils checkUserName:[dataListAll objectAtIndex:4]] || [[dataListAll objectAtIndex:4] length] <1) {
+        return false;
+    }
+    
+    if ([dataListAll[1] isEqualToString:dataListAll[4]] || [dataListAll[2] isEqualToString:dataListAll[5]]) {
+        return false;
+    }
+    return true;
 }
-
 
 -(NSString*)noneSpaseString:(NSString*)string {
     return [string stringByReplacingOccurrencesOfString:@" " withString:@""];

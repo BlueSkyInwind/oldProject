@@ -15,6 +15,17 @@
  */
 
 -(void)approvalAmount;
+
+#pragma mark - 新API
+//提款信息页面
+-(void)obtainDrawingInformation;
+
+/**
+ 工薪贷获取费用
+ */
+-(void)obtainSalaryProductFeeOfperiod:(NSString *)periods;
+
+
 @end
 
 
@@ -24,18 +35,20 @@
  获取fxd合规用户状态
  */
 
--(void)getUserStatus:(GetCaseInfo *)caseInfo;
+-(void)getUserStatus:(NSString *)applicationId;
 
 /**
  提款申请件记录
  */
 
--(void)saveLoanCase:(NSString *)type CaseInfo:(GetCaseInfo *)caseInfo Period:(NSString *)period PurposeSelect:(NSString *)purposeSelect;
+-(void)saveLoanCase:(NSString *)type ApplicationID:(NSString *)applicationId Period:(NSString *)period PurposeSelect:(NSString *)purposeSelect;
 
 /**
  发标前查询进件
  */
 -(void)getFXDCaseInfo;
+
+
 
 @end
 
@@ -44,14 +57,24 @@
 /**
  银行卡获取接口
  */
--(void)getBankListInfo;
+//-(void)getBankListInfo;
+
+/**
+ 支持银行卡列表
+ 
+ @param platform 平台     2 - 银生宝   4 - 汇付
+ */
+-(void)getSupportBankListInfo:(NSString *)platform;
 
 /**
  合规银行卡查询
  */
-
 -(void)queryCardInfo;
 
+/**
+ 合规银行卡列表
+ */
+//-(void)queryCardListInfo;
 
 
 @end

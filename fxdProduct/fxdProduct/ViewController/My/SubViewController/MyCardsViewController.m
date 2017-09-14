@@ -13,6 +13,7 @@
 #import "BankModel.h"
 #import "UserCardResult.h"
 #import "RepayWeeklyRecordViewModel.h"
+#import "SupportBankList.h"
 @interface MyCardsViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     //    BankCardInfoBaseClass
@@ -73,7 +74,7 @@
 - (void)addCardBtn
 {
     UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(addCard)];
-    btn.tintColor = [UIColor whiteColor];
+    btn.tintColor = [UIColor blackColor];
     self.navigationItem.rightBarButtonItem = btn;
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14], NSFontAttributeName, nil] forState:UIControlStateNormal];
 }
@@ -121,41 +122,34 @@
 -(void)postUrlMessageandDictionary{
     //请求银行卡列表信息
     
-    RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
-    [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _userCardModel =[UserCardResult yy_modelWithJSON:returnValue];
-        if([_userCardModel.flag isEqualToString:@"0000"]){
-            for(NSInteger j=0;j<_userCardModel.result.count;j++)
-            {
-                CardResult *cardResult = _userCardModel.result[j];
-                if([cardResult.card_type_ isEqualToString:@"2"])
-                {
-                    for (BankList *banlist in _bankModel.result) {
-                        if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
-                            if ([cardResult.if_default_ isEqualToString:@"1"]) {
-                                _defaultCardIndex = j;
-                            }
-                            [_dataliat addObject:[self formatString:cardResult.card_no_]];
-                            [_dataNumList addObject:cardResult.card_type_];
-                            [_dataImageListBank addObject:[NSString stringWithFormat:@"bank_code_%@",banlist.code]];
-                            [_bankWitch addObject:@"银行卡"];
-                            [_bankWitchArray addObject:banlist.desc];
-                        }
-                    }
+    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
+    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            NSArray * array = (NSArray *)baseResultM.data;
+            for (int  i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
+                CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
+                if ([cardInfo.cardType isEqualToString:@"2"]) {
+                    _defaultCardIndex = 0;
+                    [_dataliat addObject:[self formatString:cardInfo.cardNo]];
+                    [_dataNumList addObject:cardInfo.cardType];
+                    [_dataImageListBank addObject:cardInfo.cardIcon];
+                    [_bankWitch addObject:@"银行卡"];
+                    [_bankWitchArray addObject:cardInfo.bankName];
                 }
             }
             [_tableView reloadData];
             [self createMyCardUI];
         }else{
-           
             NoneView.hidden=NO;
-            
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         NoneView.hidden=NO;
     }];
-    [repayWeeklyRecordViewModel bankCardList];
-
+    [bankInfoVM obtainUserBankCardList];
+    
 }
 
 - (NSString *)formatString:(NSString *)str
@@ -187,8 +181,8 @@
     
     return ss;
 }
-//6*** **** **** ***9 782
 
+//6*** **** **** ***9 782
 #pragma mark-----UItableview--delegete---
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -200,7 +194,8 @@
 {
     
     MyCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCardCell"];
-    cell.iconImage.image = [UIImage imageNamed:[_dataImageListBank objectAtIndex:indexPath.row]];
+//    cell.iconImage.image = [UIImage imageNamed:[_dataImageListBank objectAtIndex:indexPath.row]];
+    [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[_dataImageListBank objectAtIndex:indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
     cell.bankCompanyLabel.text = _bankWitchArray[indexPath.row];
     cell.bankNum.text =_dataliat[indexPath.row];
     cell.banklist.text =_bankWitch[indexPath.row];
@@ -217,7 +212,6 @@
     {
         cell.cardTypeFlag=1;
         cell.btnEdit.hidden=YES;
-        
     }
     cell.selected = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

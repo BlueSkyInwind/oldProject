@@ -230,8 +230,6 @@
         cell.repayAmountLabel.text = repayText;
         return cell;
     }
-    
-    
     return cell;
 }
 

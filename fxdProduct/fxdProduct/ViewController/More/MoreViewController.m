@@ -50,20 +50,18 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
-    //    [self.MyTabView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
     [_MyTabView reloadData];
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self setNavMesRightBar];
-    //    imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_07",@"7_gd_icon_08",@"7_gd_icon_09",@"7_gd_icon_10"];
+
+    self.title = @"设置";
+    [self addBackItem];
     imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09",@"changeP_icon"];
-    //    titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"分享好友",@"给个好评",@"客服热线",@"手势密码"];
     titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"给个好评",@"客服热线",@"修改密码"];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    //    _MyTabView.scrollEnabled = NO;
     [_MyTabView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     [_MyTabView registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"moreFunction"];
     [_MyTabView registerNib:[UINib nibWithNibName:@"HelpViewCell" bundle:nil] forCellReuseIdentifier:@"outLog"];
@@ -173,8 +171,6 @@
             [self.navigationController pushViewController:aboutUs animated:YES];
         }
         else if(indexPath.row==1){
-//            helpView=[[HelpViewController alloc]initWithNibName:@"HelpViewController" bundle:nil];
-//            [self.navigationController pushViewController:helpView animated:YES];
             FXDWebViewController *webview = [[FXDWebViewController alloc] init];
             webview.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_question_url];
             [self.navigationController pushViewController:webview animated:true];
@@ -187,10 +183,6 @@
                 [self presentLogin:self];
             }
         }
-//        else if(indexPath.row==3)
-//        {
-//            [self shareContent:tableView];
-//        }
         else if(indexPath.row==3){
             UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"欢迎给出评价!" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -226,9 +218,7 @@
             }
         }
     }
-    //    else if(indexPath.section==1) {
-    //
-    //    }
+  
     else {
         _alertView = [[[NSBundle mainBundle] loadNibNamed:@"testView" owner:self options:nil] objectAtIndex:0];
         _alertView.frame=CGRectMake(0, 0, _k_w, _k_h);
@@ -237,33 +227,9 @@
         _alertView.lbltitle.textColor = [UIColor blackColor];
         [_alertView.sureBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
         [_alertView show];
-        
-        
-        //        [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前尝试退出登录状态，是否继续操作？" cencelBtn:@"取消" otherBtn:@[@"确定"] Onview:[[UIApplication sharedApplication].delegate window]  compleBlock:^(NSInteger index) {
-        //            if (index == 1) {
-        //
-        //
-        //            }
-        //        }];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
-#define mark ActionSheetDelegate
-
-//- (void)switchClick:(UISwitch *)sender
-//{
-//    DLog(@"%d",sender.on);
-//    if (sender.on == TRUE) {
-//        GestureViewController *gestureVc = [[GestureViewController alloc] init];
-//        gestureVc.type = GestureViewControllerTypeSetting;
-//        gestureVc.delegate = self;
-//        [self.navigationController pushViewController:gestureVc animated:YES];
-//    } else {
-//        GestureVerifyViewController *gestureVerifyVc = [[GestureVerifyViewController alloc] init];
-//        [self.navigationController pushViewController:gestureVerifyVc animated:YES];
-//    }
-//}
 
 
 - (void)setSwithchState:(BOOL)state
@@ -338,9 +304,17 @@
             [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_loginOut_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
                 _returnMsgParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
                 if ([_returnMsgParse.flag isEqualToString:@"0000"]) {
+                    
+                    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
+                    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    });
+                    
                     LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                     [self presentViewController:nav animated:YES completion:^{
+                    
                         [_alertView hide];
                         [EmptyUserData EmptyData];
                     }];

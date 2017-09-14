@@ -12,6 +12,7 @@
 @interface Tool : NSObject
 
 #pragma mark- 时间处理
++ (float)getIOSVersion;
 
 //获取今天日期
 + (NSString *)getToday;
@@ -51,12 +52,9 @@
 + (NSDictionary *)dataToDictionary:(NSData *)data;
 ///对象转字符串
 + (NSString *)objextToJSON:(id)param;
-
 //设置沙盒
 + (void)saveUserDefaul:(NSString *)content Key:(NSString *)key;
 + (NSString *)getContentWithKey:(NSString *)key;
-
-
 
 /**
  *  @author dd, 16-01-20 19:01:42
@@ -76,4 +74,8 @@
  *  @return 返回文本宽度
  */
 + (CGFloat)widthForText:(NSString *)text font:(CGFloat)size;
+
++ (void)showMessage:(NSString *)msg vc:(UIViewController *)vc;
+
+
 @end

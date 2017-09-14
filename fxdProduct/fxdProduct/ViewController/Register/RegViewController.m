@@ -20,7 +20,7 @@
 #import "FMDeviceManager.h"
 #import "UIImage+Color.h"
 #import "RegViewModel.h"
-
+#import "FXDWebViewController.h"
 @interface RegViewController ()<UITextFieldDelegate>
 
 {
@@ -86,16 +86,34 @@
     self.passIcon.image = [[UIImage imageNamed:@"1_Signin_icon_03"] imageWithTintColor:UI_MAIN_COLOR];
     self.invIcon.image = [[UIImage imageNamed:@"1_Signin_icon_07"] imageWithTintColor:UI_MAIN_COLOR];
     
+    self.verCodeText.delegate = self;
+    [self.verCodeText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventEditingChanged];
+    self.phoneNumText.delegate = self;
+    [self.phoneNumText addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventEditingChanged];
+    
     [self setPicVerifyCode];
     [self setLabel];
     [self setUISignal];
     
 }
+
+-(void)changTextField:(UITextField *)textField{
+
+    if (textField == self.verCodeText) {
+        if (textField.text.length>6) {
+            self.verCodeText.text = [textField.text substringToIndex:6];
+        }
+    }
+    if (textField == self.phoneNumText) {
+        if (textField.text.length>11) {
+            self.phoneNumText.text = [textField.text substringToIndex:11];
+        }
+    }
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [MobClick beginLogPageView:NSStringFromClass([self class])];
     [super viewWillAppear:animated];
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -106,7 +124,7 @@
 }
 
 /**
- *  @author dd, 16-01-21 13:01:34
+ *  @author dd, 16-01-21 13:01:3
  *
  *  设置注册协议Label相关属性
  */
@@ -128,7 +146,20 @@
     self.regSecoryLabel.userInteractionEnabled=YES;
     [self.regSecoryLabel addGestureRecognizer:tapSecory];
 }
-
+-(BOOL)checkMoblieNumber:(NSString *)number{
+    
+    NSString * numStr = @"^\\d{5,11}$";
+    
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numStr];
+    
+    if ([regextestmobile evaluateWithObject:number] == YES) {
+        NSLog(@"sucess %@",number);
+        return YES;
+    }else{
+        NSLog(@"false %@",number);
+        return NO;
+    }
+}
 /**
  *  @author dd, 16-01-21 13:01:21
  *
@@ -137,7 +168,8 @@
 - (void)setUISignal
 {
     RACSignal *validUserNameSignal = [self.phoneNumText.rac_textSignal map:^id(NSString *value) {
-        return @([Tool isMobileNumber:value]);
+//        return @([Tool isMobileNumber:value]);
+        return @([self checkMoblieNumber:value]);
     }];
     
     RACSignal *validPicTextSignal = [self.picCodeText.rac_textSignal map:^id(NSString *value) {
@@ -160,12 +192,11 @@
                 self.sendCodeButton.alpha = 1.0;
             }
         }
-        
         return sendCodeBtnActive;
     }];
     
     RACSignal *validVerCodeSignal = [self.verCodeText.rac_textSignal map:^id(NSString *value) {
-        return @(value.length >5);
+        return @(value.length >3);
     }];
     
     RACSignal *validPassWordSignal = [self.passText.rac_textSignal map:^id(NSString *value) {
@@ -181,17 +212,24 @@
     }];
 }
 
-
 -(void)clickurl:(id)sender
 {
-    RegDetailViewController *regDetail = [RegDetailViewController new];
-    [self.navigationController pushViewController:regDetail animated:YES];
+    DLog(@"注册协议");
+    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+    webVC.urlStr = [NSString stringWithFormat:@"%@%@?title=%@&type=%@",_H5_url,_loanDetial_url,@"register",@"1"];
+    [self.navigationController pushViewController:webVC animated:true];
+//    RegDetailViewController *regDetail = [RegDetailViewController new];
+//    [self.navigationController pushViewController:regDetail animated:YES];
 }
 
 -(void)clicksecry{
     
-    RegSecoryViewController *regSeVc = [RegSecoryViewController new];
-    [self.navigationController pushViewController:regSeVc animated:YES];
+    DLog(@"隐私保密协议");
+    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+    webVC.urlStr = [NSString stringWithFormat:@"%@%@?title=%@&type=%@",_H5_url,_loanDetial_url,@"secrecy",@"2"];
+    [self.navigationController pushViewController:webVC animated:true];
+//    RegSecoryViewController *regSeVc = [RegSecoryViewController new];
+//    [self.navigationController pushViewController:regSeVc animated:YES];
 }
 
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {
@@ -226,7 +264,6 @@
     [self setPicVerifyCode];
 }
 
-
 - (IBAction)agreeBtnClick:(UIButton *)sender {
     if (!self.btnStatus) {
         [self.agreeBtn setBackgroundImage:[UIImage imageNamed:@"tricked"] forState:UIControlStateNormal];
@@ -248,6 +285,7 @@
         _currendId = [returnValue objectForKey:@"id_"];
         DLog(@"%@",[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_ValidESB_url,[returnValue objectForKey:@"pic_verify_url_"],_currendId,_oldId]);
         [_picCodeBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_ValidESB_url,[returnValue objectForKey:@"pic_verify_url_"],_currendId,_oldId]] forState:UIControlStateNormal placeholderImage:nil options:SDWebImageRefreshCached];
+        
     } WithFaileBlock:^{
         
     }];
@@ -271,12 +309,10 @@
         if ([_codeParse.flag isEqualToString:@"0017"]) {
             [self setPicVerifyCode];
         }
-        
     } WithFaileBlock:^{
         
     }];
     [smsViewModel fatchRequestRegSMSParamPhoneNumber:self.phoneNumText.text picVerifyId:_currendId picVerifyCode:_picCodeText.text];
-    
 }
 #pragma mark -确认注册
 - (IBAction)clickReg:(UIButton *)sender {
@@ -300,7 +336,6 @@
             if ([_regParse.flag isEqualToString:@"0000"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
                     [self login];
                 });
             } else if ([_regParse.flag isEqualToString:@"0001"]) {
@@ -322,7 +357,7 @@
         
         if ([_phoneNumText.text length] != 11) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号!"];
-        }else if ([_verCodeText.text length] != 6){
+        }else if ([_verCodeText.text isEqualToString:@""]){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码!"];
         }else if ([_passText.text length] < 6 || [_passText.text length] > 16){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入新设置密码!"];
@@ -343,13 +378,11 @@
     [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
         _loginParse = returnValue;
         if ([_loginParse.flag isEqualToString: @"0000"]) {
-            
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_loginParse.msg];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self dismissViewControllerAnimated:YES completion:^{
                 }];
             });
-            
         } else {
             if ([_loginParse.flag isEqualToString:@"0005"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您当前的版本太低,为了您的使用体验请升级版本后再来体验^_^"];

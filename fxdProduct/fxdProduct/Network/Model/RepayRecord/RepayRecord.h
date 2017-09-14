@@ -17,4 +17,6 @@
 @property (nonatomic,copy)NSString *application_status_;    //申请状态
 @property (nonatomic,copy)NSString *create_date_;      //申请时间
 @property (nonatomic, copy) NSString *product_id_;
+@property (nonatomic, copy) NSString *loan_staging_duration_;  // 1：天    5：周
+
 @end

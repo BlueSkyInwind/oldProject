@@ -76,7 +76,6 @@
                     {
                         [array addObject:model.tel];
                     }
-                    
                     [numarr addObject:array];
                     [dic setObject:numarr forKey:[NSNumber numberWithChar:i]];
                 }

@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "UserStateModel.h"
 @class RepayListInfo,P2PBillDetail;
 
 @interface DetailRepayViewController : BaseViewController
@@ -34,6 +35,10 @@
 
 @property (nonatomic, strong) P2PBillDetail *p2pBillDetail;
 
-@property (nonatomic, copy) NSString *product_id;
+@property(strong,nonatomic)UserStateModel *userStateM;
+
+@property (nonatomic,strong)NSString * platform_type;
+@property (nonatomic,strong)NSString * applicationId;
+@property (nonatomic,strong)NSString * product_id;
 
 @end

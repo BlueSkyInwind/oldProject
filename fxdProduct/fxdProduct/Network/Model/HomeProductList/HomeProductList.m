@@ -11,35 +11,63 @@
 @implementation HomeProductList
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"result":[HomeProductListResult class]};
+    return @{@"data":[HomeProductListData class]};
 }
 
 @end
 
 
-@implementation HomeProductListResult
+@implementation HomeProductListData
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"products":[HomeProductListProducts class]};
+    return @{@"bannerList":[HomeBannerList class],
+             @"popList":[HomePopList class],
+             @"productList":[HomeProductsList class],
+             @"infoList":[HomeInfoList class],
+             @"thirdProductList":[HomeThirdProductList class],
+             };
 }
+
+
+@end
+
+
+@implementation HomeBannerList
+
+@end
+
+@implementation HomePaidList
 
 
 
 @end
 
-@implementation HomeProductListProducts
+@implementation HomePopList
+
+
+@end
+
+@implementation HomeProductsList
+
+
+@end
+@implementation HomeInfoList
+
+
+@end
+
+@implementation HomeThirdProductList
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"ext_attr_":[HomeProductLisTextAttr class]};
+    return @{@"extAttr":[HomeThirdExtAttr class]};
 }
 + (NSDictionary *)modelCustomPropertyMapper
 {
     return @{@"id_":@"id"};
 }
+@end
+
+@implementation HomeThirdExtAttr
 
 @end
 
-@implementation HomeProductLisTextAttr
-
-
-@end

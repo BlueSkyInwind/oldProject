@@ -11,7 +11,7 @@
 @interface UserStateModel : NSObject
 
 @property (nonatomic,strong) NSString *productId;
-@property (nonatomic,strong) NSString *applyStatus;
+@property (nonatomic,strong) NSString *applyStatus;    
 @property (nonatomic,strong) NSString *modifyDate;
 @property (nonatomic,strong) NSString *validStatus;
 @property (nonatomic,strong) NSString *days;
@@ -20,7 +20,7 @@
 @property (nonatomic,strong) NSString *applyAgain;
 @property (nonatomic,strong) NSString *applyID;
 @property (nonatomic,strong) NSString *taskStatus;
-@property (nonatomic, copy) NSString *platform_type;
+@property (nonatomic, copy) NSString *platform_type;   //渠道类型  0 ： 发薪贷   2：合规 
 @property (nonatomic, copy) NSString *qq_status;
 @property (nonatomic, copy) NSString *zfb_status;
 @property (nonatomic, assign) BOOL if_add_documents;

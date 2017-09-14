@@ -1,6 +1,5 @@
 
 
-
 //NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
 //NSString * const _main_url  =   @"http://192.168.14.18:9191/fxd-esb/esb/";
 
@@ -19,88 +18,57 @@
 #if FXD_Environment_Mode == 0
 
 NSString * const _main_url  =   @"https://h5.faxindai.com:8028/fxd-esb/esb/"; //生产
+NSString * const _agreement_url  =   @"https://h5.faxindai.com:8028/fxd-esb/esb/";
 NSString * const _ValidESB_url = @"https://h5.faxindai.com:8028/fxd-esb/";
 NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/"; //生产
 NSString * const _p2P_url = @"https://h5.faxindai.com:8028/fxd-esb/p2p/";
 NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
+NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 
 #elif FXD_Environment_Mode == 1
 
 //测试环境
 //http://192.168.14.14:9090/fxd-esb/esb/    张鹏
 //http://192.168.15.116:8055/fxd-esb    俊杰
+//http://192.168.12.109:8082/fxd-esb/  罗兵本地
+//http://192.168.7.140:8001/fxd-esb/esb/ 合规贷后测试地址
+//http://192.168.13.173:8005/ 张强本地
 
-//NSString * const _main_url  =   @"http://192.168.6.133/fxd-esb/esb/";
-//NSString * const _ValidESB_url  =   @"http://192.168.6.133/fxd-esb/";
+//测试导流 192.168.6.134
+NSString * const _main_url  =   @"http://192.168.6.134/fxd-esb/esb/";
+NSString * const _agreement_url  =   @"http://192.168.6.134:9191/fxd-esb/esb/";
+NSString * const _main_new_url  =  @"http://service-apigateway.test.fxds:8005/";
+NSString * const _ValidESB_url  =   @"http://192.168.12.109:8088/fxd-esb/";
+NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
+NSString * const _p2P_url = @"http://192.168.6.134/fxd-esb/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+
+//http://192.168.6.134:9191/fxd-esb/
+
+//张强本地
+//NSString * const _main_url  =   @"http://192.168.13.173:8005/fxd-esb/esb/";
+//NSString * const _ValidESB_url  =   @"http://192.168.13.173:8005/fxd-esb/";
+//NSString * const _main_new_url  =  @"http://192.168.13.173:8005/";
+//NSString * const _H5_url    =   @"http://192.168.13.173:8005/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://192.168.13.173:8005/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.13.173:8005/p2p/";
+
+//彭冲本地
+//NSString * const _main_url  =   @"http://192.168.9.243:8080/fxd-esb/esb/";
+//NSString * const _ValidESB_url  =   @"http://192.168.9.243:8080/fxd-esb/";
 //NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://192.168.6.133/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
+//NSString * const _p2P_url = @"http://192.168.9.243:8080/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
-//NSString * const _main_url  =   @"http://192.168.15.116:8066/fxd/esb/";
-//NSString * const _ValidESB_url  =   @"http://192.168.15.116:8066/fxd/";
-//NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://192.168.15.116:8066/fxd/p2p/";
-
-//NSString * const _main_url  =   @"http://192.168.6.134:9191/fxd-esb/esb/";
-//NSString * const _ValidESB_url  =   @"http://192.168.6.134:9191/fxd-esb/";
-//NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://192.168.6.134:9191/fxd-esb/p2p/";
-
-
-NSString * const _main_url  =   @"http://192.168.14.18:9191/fxd-esb/esb/";
-NSString * const _ValidESB_url  =   @"http://192.14.18:9191/fxd-esb/";
-NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
-NSString * const _p2P_url = @"http://192.168.14.18:9191/fxd-esb/p2p/";
-//NSString * const _p2P_url = @"http://192.168.15.116:8066/fxd/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
-
-
-
-//NSString * const _main_url  =   @"http://192.168.7.253:9292/fxd-esb/esb/";
-//NSString * const _ValidESB_url  =   @"http://192.168.7.253:9292/fxd-esb/";
-//NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://192.168.7.253:9292/fxd-esb/p2p/";
-
-//NSString * const _main_url  =   @"http://192.168.7.253:8081/fxd-esb/esb/";
-//NSString * const _ValidESB_url  =   @"http://192.168.7.253:8081/fxd-esb/";
-//NSString * const _p2P_url = @"http://192.168.7.253:8081/fxd-esb/p2p/";
-//新整合的地址
-//NSString * const _main_url  =   @"http://192.168.9.2:9191/fxd-esb/esb/";
-//NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
-
-//黄源本地的地址
-//NSString * const _main_url  =   @"http://192.168.14.18:9191/fxd-esb/esb/";
-//NSString * const _ValidESB_url = @"http://192.168.14.18:9191/fxd-esb/";
-//NSString * const _p2P_url = @"http://192.168.14.18:9191/fxd-esb/p2p/";
-//NSString * const _H5_url    =   @"http://192.168.6.130/fxd-h5/page/";
-//合规本地
-//NSString * const _P2P_url   =   @"http://192.168.14.170:10010/p2p/";
-//合规预演
-//NSString * const _P2P_url   =   @"http://116.236.225.158:8066/p2p/";
-
-//饶明祥本地地址
-//NSString * const _main_url  =   @"http://192.168.9.2:8080/esb/";
-//饶明翔本地，用于优化测试
-//NSString * const _main_url  =   @"http://192.168.9.2:9191/fxd-esb/esb/";
-//NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
-
+//张宇本地
+//NSString * const _main_url  =   @"http://192.168.12.166:9191/fxd-esb/esb/";
+//NSString * const _ValidESB_url  =   @"http://192.168.12.166:9191/fxd-esb/";
+//NSString * const _H5_url    =   @"http://192.168.12.166:9191/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://192.168.12.166:9191/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //芝麻信用测试地址
 //NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";
-
-//http://192.168.6.61  UAT
-//NSString * const _main_url  =   @"http://192.168.6.61/fxd-esb/esb/";
-//NSString * const _ValidESB_url = @"http://192.168.6.61/fxd-esb/";
-//NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/";
-//NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://192.168.6.61/fxd-esb/p2p/";
-
-//准生产地址
-//NSString * const _main_url  =   @"http://192.168.6.240:9090/fxd-esb/esb/";
-//NSString * const _ValidESB_url = @"http://192.168.6.240:9090/fxd-esb/";
-//NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/";
-//NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://192.168.6.240:9090/fxd-esb/p2p/";
 
 
 #else
@@ -134,16 +102,16 @@ NSString * const     _forget_url                    =   @"findPasswordBack/findP
 NSString * const     _changePassword_url                    =   @"updatePassword/updatePassword.jhtml";
 
 ////首页查询用户借款状态
-//NSString * const     _userState_url                 =   @"caseInfo/getApplyStatus.jhtml";
+NSString * const     _userState_url                 =   @"caseInfo/getApplyStatus.jhtml";
 
 //首页查询用户借款状态
-NSString * const     _userState_url                 =   @"caseInfo/getApplyStatusTemp.jhtml";
-
-////二次进件
-//NSString * const     _secondApply_url               =   @"caseInfo/secondApply.jhtml";
+//NSString * const     _userState_url                 =   @"caseInfo/getApplyStatusTemp.jhtml";
 
 //二次进件
-NSString * const     _secondApply_url               =   @"caseInfo/secondApplyTemp.jhtml";
+NSString * const     _secondApply_url               =   @"caseInfo/secondApply.jhtml";
+
+//二次进件
+//NSString * const     _secondApply_url               =   @"caseInfo/secondApplyTemp.jhtml";
 
 //提交用户信息
 NSString * const     _updateUserById_url            =   @"userWs/updateUserById";
@@ -271,6 +239,9 @@ NSString * const     _caseStatusUpdateApi_url   =   @"increase/caseStatusUpdateA
 //银行卡获取接口
 NSString * const     _getBankList_url           =   @"getDictCode/getDictCodeList.jhtml";
 
+//获取银行卡类型接口
+NSString * const     _getSupportBankList_url           =   @"getAccountCardList/getSupportBankListApi.jhtml";
+
 //输入框埋点
 NSString * const     _saveInputBackInfo_url     =   @"userWs/saveInputBackInfo.jhtml";
 
@@ -340,7 +311,6 @@ NSString * const    _mediaReport_url            =    @"more/mediaReport.html";
 //首页广告
 NSString * const    _adv_url                    =    @"event/pop_up.jhtml";
 
-
 //协议内容获取接口
 NSString * const    _productProtocol_url        =    @"ProductProtocol/getProductProtocol.jhtml";
 
@@ -354,8 +324,8 @@ NSString * const    _queryLoanStatus_url        =    @"caseInfo/queryLoanStatus.
 NSString * const    _h5register_url             =    @"register.html";
 
 //H5费用说明
-NSString * const    _loanDetial_url             =    @"protocol/loanDetial.html";
-
+//NSString * const    _loanDetial_url             =    @"protocol/loanDetial.html";
+NSString * const    _loanDetial_url             =    @"protocol/protocol.html";
 //FaceIDOCR
 NSString * const    _detectIDCardOCR_url        =    @"https://api.faceid.com/faceid/v1/ocridcard";
 
@@ -413,36 +383,115 @@ NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.
 //芝麻信用回调地址
 NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
 
+
+
+#pragma mark - 新的api
+
+//社保
+NSString * const    _shebaoupload_url    =    @"apigw/client/resource/mxsbtask_create";
+
+//信用卡
+NSString * const    _TheCreditCardupload_url    =    @"apigw/client/resource/mxmailtask_create";
+
+//高级认证状态查询
+NSString * const    _HighRankingStatus_url    =    @"apigw/client/resource/fundtask";
+
+//基础信息状态查询接口
+NSString * const    _UserBasicInformation_url    =    @"apigw/client/user/info/base";
+
+//三方信息状态查询接口
+NSString * const    _UserThirdPartCertification_url    =    @"apigw/client/user/other/info";
+
+//三方信息状态查询接口
+NSString * const    _AuthenticationCenterBasicInformation_url    =    @"apigw/client/user/base/complete/info";
+
+//联系人信息的完成状态
+NSString * const    _UserContactInfo_url    =    @"apigw/client/user/contact/info";
+
+//首页状态查询
+NSString * const    _HomeState_url    =    @"apigw/client/summary";
+
+//申请进件
+NSString * const    _createApplication_url    =    @"apigw/client/application/create";
+
+//申请确认页数据
+NSString * const    _ApplicationViewInfo_url    =    @"apigw/client/application/confirm";
+
+//提款页数据
+NSString * const    _UserDrawingInfo_url    =    @"apigw/client/application/loan";
+
+//获取当前期的续期信息
+NSString * const    _repayment_url    =    @"apigw/client/repayment/staging/continue/info";
+
+//银行卡列表信息
+NSString * const    _BankCardList_url    =    @"apigw/client/bank/card/list";
+
+//放款中 还款中 展期中 状态实时获取
+NSString * const    _ApplicationStatus_url    =    @"apigw/client/application/status";
+
+//工薪贷根据周期获取费用
+NSString * const    _SalaryProductFee_url    =    @"apigw/client/fee/calc";
+
+//提交续期请求
+NSString * const    _Staging_url    =    @"apigw/client/staging/continue/add";
+
+//待还款界面信息获取
+NSString * const    _Repay_url    =    @"apigw/client/ready/to/repay";
+
+//获取续期规则
+NSString * const    _StagingRule_url    =    @"apigw/client/continue/rule/detail";
+
+//上传用户的registerID
+NSString * const    _registerID_url    =    @"apigw/client/center/jiguang/register";
+
+//用户资料测评接口
+NSString * const    _UserDataCertification_url    =    @"apigw/client/user/measurement/info";
+
+//用户资料测评接口
+NSString * const    _Trilateral_url    =    @"apigw/client/repay/third/pay";
+
+//得到测评结果
+NSString * const    _UserDataCertificationResult_url    =    @"apigw/client/user/verify/status";
+
 #pragma mark - 合规接口
-//P2P平台账单期供查询 （还款账单）
-NSString * const    _querybillDetails_url       =    @"http/do.jhtml?router=prematurityService.querybillDetails";
-
-//平台合同列表
-NSString * const    _contractList_url           =    @"http/do.jhtml?router=contractService.contractList";
-
-//合同内容
-NSString * const    _contractStr_url            =    @"http/do.jhtml?router=contractService.contractStr";
-
-//发送短信接口
-NSString * const    _sendSms_url    =    @"http/do.jhtml?router=sendSmsSHService.send";
-
-//换绑银行卡
-NSString * const    _bankCards_url    =    @"http/do.jhtml?router=bankCardsSHService.quickChangeBindingCard";
 
 //用户开户接口
 NSString * const    _huifu_url    =    @"http/huifush/toRegister.jhtml";
 
-//银行卡查询接口
-NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsSHService.queryCardInfo";
+//激活老账户
+NSString * const    _bosAcctActivate_url    =    @"http/huifush/toBosAcctActivate.jhtml";
 
-//用户状态查询接口
-NSString * const    _accountHSService_url    =    @"http/do.jhtml?router=accountHSService.qryUserStatus";
+//P2P平台账单期供查询 （还款账单）
+NSString * const    _querybillDetails_url       =    @"http/do.jhtml?router=prematurityService.querybillDetails";
 
 //主动还款接口 （自动划扣）
 NSString * const    _paymentService_url    =    @"http/do.jhtml?router=activrePaymentService.activrePayment";
 
-//激活老账户
-NSString * const    _bosAcctActivate_url    =    @"http/huifush/toBosAcctActivate.jhtml";
+//平台合同列表
+//NSString * const    _contractList_url           =    @"http/do.jhtml?router=contractService.contractList";
+NSString * const    _contractList_url           =    @"hg/contractList.jhtml";
+
+//合同内容
+//NSString * const    _contractStr_url            =    @"http/do.jhtml?router=contractService.contractStr";
+NSString * const    _contractStr_url            =    @"hg/contractStr.jhtml";
+
+//发送短信接口
+//NSString * const    _sendSms_url    =    @"h ttp/do.jhtml?router=sendSmsSHService.send";
+NSString * const    _sendSms_url    =    @"hg/sendSms.jhtml";
+
+//换绑银行卡
+//NSString * const    _bankCards_url    =    @"http/do.jhtml?router=bankCardsSHService.quickChangeBindingCard";
+NSString * const    _bankCards_url    =    @"hg/quickChangeBindingCard.jhtml";
+
+//银行卡查询接口
+//NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsSHService.queryCardInfo";
+NSString * const    _queryCardInfo_url    =    @"hg/queryCardInfo.jhtml";
+
+//合规银行卡列表信息
+NSString * const    _queryCardListInfo_url    =    @"bankCardsSHService.queryCardInfo.jhtml";
+
+//用户状态查询接口
+NSString * const    _accountHSService_url    =    @"http/do.jhtml?router=accountHSService.qryUserStatus";
 
 //取现
 NSString * const    _cash_url    =    @"http/huifush/toCash.jhtml";
@@ -461,12 +510,15 @@ NSString * const    _getBidStatus_url    =    @"hg/getBidStatus";
 
 //提款申请件记录 *
 NSString * const    _saveLoanCase_url    =    @"hg/saveLoanCase.jhtml";
+//首借免息
+NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
+
+
 
 #pragma mark - 对外导流接口
 
 //量子互助
 NSString * const    _liangzihuzhu_url    =    @"http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767";
-
 
 #pragma Mark - 验证码类型
 
@@ -484,10 +536,13 @@ NSString * const  CODE_ADDCARD       =    @"MSG_BANKCARD_AUDIT_"; //新增卡
 NSString * const SalaryLoan = @"P001002";                   //工薪贷平台
 NSString * const RapidLoan = @"P001004";                   //急速贷平台
 NSString * const WhiteCollarLoan = @"P001005";           //白领贷平台
+NSString * const DeriveRapidLoan = @"P001006";           //急速贷衍生（30天）平台
+
 
 #pragma Mark - 项目配置信息
 
 NSString * const PLATFORM = @"1";                   //平台
+NSString * const CHANNEL = @"1";                   //平台
 
 NSString * const Devcode = @"5LIK5RW35LIT6LW";     //开发码
 
@@ -534,7 +589,6 @@ NSString * const kTopView     =    @"TopView";
 NSString * const UserName    =    @"userName";
 
 NSString * const  kAddMaterailNotification  =   @"zbctongzhi";
-
 
 NSString * const isLoginFlag  =   @"loginState";
 

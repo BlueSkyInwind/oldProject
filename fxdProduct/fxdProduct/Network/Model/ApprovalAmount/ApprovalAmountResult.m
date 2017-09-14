@@ -7,13 +7,11 @@
 
 #import "ApprovalAmountResult.h"
 
-
 NSString *const kApprovalAmountResultApprovalAmount = @"approval_amount_";
 NSString *const kApprovalAmountResultLoanStagingAmount = @"loan_staging_amount_";
 NSString *const kApprovalAmountResultLoanStagingDuration = @"loan_staging_duration_";
 NSString *const kApprovalAmountResultContractId = @"contract_id_";
 NSString *const kApprovalAmountResultFirstRepayDate = @"first_repay_date_";
-
 
 @interface ApprovalAmountResult ()
 

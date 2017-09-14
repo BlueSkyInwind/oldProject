@@ -27,9 +27,24 @@
         // Initialization code
         
         self = [[NSBundle mainBundle] loadNibNamed:[[self class] description] owner:self options:nil].lastObject;
+        CGRect frame = self.frame;
+        
+        frame.size.width = 355;
+        frame.size.height = 600;
+        
+        if (UI_IS_IPHONE5) {
+            frame.size.width = 300;
+            frame.size.height = 500;
+        }
+        if (UI_IS_IPHONE6P) {
+            frame.size.width = 375;
+            frame.size.height = 660;
+        }
+        self.frame = frame;
 //        _innerView.frame = frame;
 //        [self addSubview:_innerView];
         self.imageView.userInteractionEnabled = true;
+//        self.imageView.contentMode = UIViewContentModeScaleToFill;
         UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap)];
         tapImage.numberOfTapsRequired = 1;
         tapImage.numberOfTouchesRequired = 1;
@@ -49,7 +64,8 @@
 }
 
 + (instancetype)defaultPopupView{
-    return [[HomePopView alloc]initWithFrame:CGRectMake(0, 0, 300, 325)];
+    
+    return [[HomePopView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];;
 }
 
 @end

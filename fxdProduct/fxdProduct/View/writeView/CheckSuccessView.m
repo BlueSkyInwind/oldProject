@@ -23,6 +23,7 @@
     [super awakeFromNib];
     [Tool setCorner:self.sureBtn borderColor:[UIColor whiteColor]];
     [Tool setCorner:self.promote borderColor:[UIColor whiteColor]];
+    [Tool setCorner:self.bankView borderColor:UI_MAIN_COLOR];
     UIImage *btnImg = [UIImage imageNamed:@"trick"];
     UIImage *selectImg = [UIImage imageNamed:@"tricked"];
     [_userCheckBtn setImage:btnImg forState:UIControlStateNormal];
@@ -42,7 +43,7 @@
         _moneyLabel.textVerticalAlignment = YYTextVerticalAlignmentCenter;
         _moneyLabel.numberOfLines = 0;
         _moneyLabel.font = [UIFont systemFontOfSize:20];
-        [self.displayMoneyView addSubview:_moneyLabel];
+//        [self.displayMoneyView addSubview:_moneyLabel];
         [_moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@32);
             make.left.equalTo(@0);
@@ -66,7 +67,8 @@
             make.height.equalTo(@18);
             make.left.equalTo(_userCheckBtn.mas_right).offset(5);
             make.right.equalTo(@(-10));
-            make.centerY.equalTo(_userCheckView.mas_centerY);
+            make.top.equalTo(_userCheckView.mas_top).offset(0);
+//            make.centerY.equalTo(_userCheckView.mas_centerY);
         }];
     }
     return _agreementLabel;
@@ -75,6 +77,9 @@
 
 - (IBAction)userCheck:(UIButton *)sender {
     _userCheckBtn.selected = !_userCheckBtn.selected;
+    if (self.agreementStatus) {
+        self.agreementStatus(sender);
+    }
 }
 
 
@@ -84,43 +89,48 @@
     if(_k_h == 568)
     {
         CGRect rect = _labelFirst.frame;
-        rect.origin.y=rect.origin.y+25;
+        rect.origin.y=rect.origin.y+5;
         _labelFirst.frame=rect;
         
         rect = _circleFirst.frame;
-        rect.origin.y=rect.origin.y+25;
+        rect.origin.y=rect.origin.y+5;
         _circleFirst.frame=rect;
         
         rect = _arrowFirst.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _arrowFirst.frame = rect;
         
         rect = _labelSecond.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _labelSecond.frame = rect;
         
         rect = _circleSecond.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _circleSecond.frame = rect;
         
         rect = _arrowThird.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _arrowThird.frame = rect;
         
         rect = _circleThird.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _circleThird.frame = rect;
         
         rect = _labelThird.frame;
-        rect.origin.y = rect.origin.y+25;
+        rect.origin.y = rect.origin.y+5;
         _labelThird.frame = rect;
         
         _weekMoney.font=[UIFont systemFontOfSize:13];
         _allMoney.font=[UIFont systemFontOfSize:13];
+        _displayLabel.font = [UIFont systemFontOfSize:11];
         [self setNeedsLayout];
     }
+    
+    if(UI_IS_IPHONE6P){
+        
+        self.displayLabelLeftCons.constant = 40;
+    }
 }
-
 
 - (id)initWithFrame:(CGRect)frame
 {

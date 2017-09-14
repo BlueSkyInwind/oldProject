@@ -27,5 +27,5 @@
 /**
  发薪贷添加银行卡获取银行卡列表
  */
--(void)getBankList;
+//-(void)getBankList;
 @end

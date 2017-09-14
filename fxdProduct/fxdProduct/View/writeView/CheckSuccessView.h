@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "YYText.h"
 
+typedef void(^AgreementClickStatus)(UIButton * button);
+
 @interface CheckSuccessView : UIView
 
 - (id)initWithFrame:(CGRect)frame;
@@ -24,8 +26,12 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *toolCancleBtn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *toolsureBtn;
 @property (weak, nonatomic) IBOutlet UILabel *loadMoney;
+@property (weak, nonatomic) IBOutlet UIView *bankView;
+@property (weak, nonatomic) IBOutlet UITextField *bankTextField;
+@property (weak, nonatomic) IBOutlet UIButton *bankButton;
+@property (weak, nonatomic) IBOutlet UIButton *feeBtn;
 
-@property (weak, nonatomic) IBOutlet UIView *displayMoneyView;
+@property (weak, nonatomic) IBOutlet UILabel *displayLabel;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *purposePicker;
 
@@ -36,6 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *purposeBtn;
 @property (weak, nonatomic) IBOutlet UITextField *purposeTextField;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *agreementImage;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *surBtnLeadRight;
 
@@ -68,6 +75,17 @@
 @property (nonatomic, strong) YYLabel *agreementLabel;
 
 @property (nonatomic, assign)BOOL userCheckBtnState;
+@property (weak, nonatomic) IBOutlet UIButton *firstAgreemwntBtn;
+@property (weak, nonatomic) IBOutlet UIButton *secondAgreemwntBtn;
 
+@property (weak, nonatomic) IBOutlet UIView *agreementView;
+@property (weak, nonatomic) IBOutlet UILabel *agreementDescLabel;
+@property (weak, nonatomic) IBOutlet UIView *agreementsView;
+@property (weak, nonatomic) IBOutlet UIView *jsdDescView;
+@property (weak, nonatomic) IBOutlet UILabel *termLabel;
+@property (weak, nonatomic) IBOutlet UILabel *jsdMonayLabel;
+
+@property (copy,nonatomic)AgreementClickStatus agreementStatus;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *displayLabelLeftCons;
 
 @end

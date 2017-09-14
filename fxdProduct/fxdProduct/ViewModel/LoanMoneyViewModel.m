@@ -8,6 +8,8 @@
 
 #import "LoanMoneyViewModel.h"
 #import "ProductProtocolParamModel.h"
+#import "P2PContactContenParam.h"
+
 @implementation LoanMoneyViewModel
 
 -(void)getProductProtocol:(NSArray *)paramArray{
@@ -30,7 +32,7 @@
     }
     NSDictionary *paramDic = [productProtocolParamModel toDictionary];
     
-    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -45,7 +47,27 @@
 -(void)getContractList:(NSString *)bid_id{
 
     NSDictionary *paramDic = @{@"bid_id_":bid_id};
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_P2P_url,_contractList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_contractList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+-(void)getContactCon:(NSString *)pact_no_  Bid_id_:(NSString *)bid_id_  Debt_id_:(NSString *)debt_id_{
+    
+    P2PContactContenParam * p2PContactContenParam = [[P2PContactContenParam alloc]init];
+    p2PContactContenParam.pact_no_ = pact_no_;
+    p2PContactContenParam.bid_id_ = bid_id_;
+    p2PContactContenParam.debt_id_ = debt_id_;
+    p2PContactContenParam.status_ = @"2";
+    NSDictionary *paramDic = [p2PContactContenParam toDictionary];
+    
+    [[FXDNetWorkManager sharedNetWorkManager] P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_contractStr_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -68,5 +90,34 @@
         }
     }];
     
+}
+
+
+-(void)getApplicationStatus:(NSString *)flag{
+
+    NSDictionary *paramDic = @{@"flag":flag};
+    
+    [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_ApplicationStatus_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+-(void)getRepayInfo{
+
+    [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_Repay_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
 }
 @end

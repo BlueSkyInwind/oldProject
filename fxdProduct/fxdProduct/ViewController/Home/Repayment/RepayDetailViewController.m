@@ -1,4 +1,4 @@
-//
+ //
 //  RepayDetailViewController.m
 //  fxdProduct
 //
@@ -31,12 +31,22 @@
 #import "SaveLoanCaseModel.h"
 #import "HomeViewModel.h"
 #import "UserStateModel.h"
+#import "PayVerificationCodeCell.h"
+#import "PayDisplayCell.h"
+#import "PaymentViewModel.h"
+#import "PaymentDetailModel.h"
+#import "BaseResultModel.h"
+#import "HGBankListModel.h"
+#import "SupportBankList.h"
+
 @interface RepayDetailViewController ()<UITableViewDelegate,UITableViewDataSource,SelectViewDelegate>
 {
     UIImageView*navBarHairlineImageView;
     NSArray *titleAry;
     NSArray *payLoanArry;
     CardInfo *_selectCard;
+    PatternOfPayment  paymentPattern;
+    
     UserCardResult *_userCardsModel;
     
     NSInteger defaultBankIndex;
@@ -69,6 +79,10 @@
     
     QryUserStatusModel *_userStatusModel;
     
+    NSString *verfiyCode;
+    NSString *smsSeq;
+
+    
 }
 @property (nonatomic,strong) UILabel *lblShouldrepay;
 @end
@@ -77,14 +91,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     navBarHairlineImageView.hidden=YES;
-//    [self checkStatus];
-    if (_p2pBillModel != nil) {
-        
-        [self checkBank];
-    }
-    
-    [self getFxdCaseInfo];
-    
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -97,37 +104,47 @@
     self.title = @"支付详情";
     self.automaticallyAdjustsScrollViewInsets=NO;
     defaultBankIndex = -1;
-    userSelectIndex = defaultBankIndex;
+    userSelectIndex = 0;
     _useTotalAmount = 0.0;
     _selectRedPacket = 0.0;
     _useredPacketAmount = 0.0;
     _canUseReadPacket = false;
-    //    if ([_product_id isEqualToString:@"P001002"]) {
-    //        _finalyRepayAmount = _repayAmount;
-    //    }
-    //    if ([_product_id isEqualToString:@"P001004"]) {
-    //        _finalyRepayAmount = _repayAmount + _repayListInfo.result.overdue_total_;
-    //    }
+    paymentPattern = BankCard;
     _finalyRepayAmount = _repayAmount;
     
     navBarHairlineImageView= [self findHairlineImageViewUnder:self.navigationController.navigationBar];
+    self.PayDetailTB.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMoneyCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMethodCell" bundle:nil] forCellReuseIdentifier:@"paycell"];
-    titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式"];
+    [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayVerificationCodeCell" bundle:nil] forCellReuseIdentifier:@"PayVerificationCodeCell"];
+    [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayDisplayCell" bundle:nil] forCellReuseIdentifier:@"PayDisplayCell"];
+
+    if ([self.platform_Type isEqualToString:@"2"]) {
+        titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式",@"验证码",@"提示语"];
+    }else{
+        titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式"];
+    }
     payLoanArry = @[@"使用红包",@"逾期费用",@"使用溢缴金额",@"实扣金额",@"支付方式"];
     self.PayDetailTB.bounces=NO;
     [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     [self createHeaderView];
-    if (_isP2pView) {
+    
+    if (_isPopRoot) {
         [self addBackItemRoot];
     }else{
-    
         [self addBackItem];
     }
     
     [self createNoneView];
     [self updateTotalAmount];
     
+    //    [self checkStatus];
+    if ([self.platform_Type isEqualToString:@"2"]) {
+        //合规银行卡查询
+        [self checkBank];
+    }else{
+        [self fatchUserCardList];
+    }
 }
 
 
@@ -154,7 +171,6 @@
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
-
 
 -(void)createHeaderView
 {
@@ -190,10 +206,8 @@
     lblRepayTip.textAlignment=NSTextAlignmentCenter;
     [header addSubview:lblRepayTip];
     
-    
     self.PayDetailTB.tableHeaderView = header;
     self.PayDetailTB.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self fatchUserCardList];
 }
 
 -(void)createNoneView
@@ -213,44 +227,34 @@
     noneView.hidden = YES;
     [self.view addSubview:noneView];
 }
-
-
 /**
  获取用户绑定卡列表
  */
 - (void)fatchUserCardList
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        _userCardsModel = [UserCardResult yy_modelWithJSON:object];
-        if([_userCardsModel.flag isEqualToString:@"0000"]){
-            for(NSInteger j=0;j<_userCardsModel.result.count;j++)
-            {
-                CardResult *cardResult = [_userCardsModel.result objectAtIndex:j];
-                if([cardResult.card_type_ isEqualToString:@"2"])
-                {
-                    if ([cardResult.if_default_ isEqualToString:@"1"]) {
-                        defaultBankIndex = j;
-                        for (BankList *banlist in _bankModel.result) {
-                            if ([cardResult.card_bank_ isEqualToString: banlist.code]) {
-                                //                                _selectCard
-                                CardInfo *cardInfo = [[CardInfo alloc] init];
-                                cardInfo.tailNumber = [self formatTailNumber:cardResult.card_no_];
-                                cardInfo.bankName = banlist.desc;
-                                cardInfo.cardIdentifier = cardResult.id_;
-                                _selectCard = cardInfo;
-                            }
-                        }
-                        //                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
-                        //                        [self.PayDetailTB reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                        [self.PayDetailTB reloadData];
-                    }
+    
+    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
+    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            NSArray * array = (NSArray *)baseResultM.data;
+            for (int  i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
+                CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
+                if ([cardInfo.cardType isEqualToString:@"2"]) {
+                    _selectCard = cardInfo;
+                    break;
                 }
             }
+            [self.PayDetailTB reloadData];
         }else{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
+        
     }];
+    [bankInfoVM obtainUserBankCardList];
+    
 }
 
 - (NSString *)formatTailNumber:(NSString *)str
@@ -260,7 +264,6 @@
 
 - (void)updateTotalAmount
 {
-    
     if (_repayListInfo != nil) {
         if (_repayListInfo.result.total_amount > 0) {
             if (_repayListInfo.result.total_amount <= _repayAmount) {
@@ -272,11 +275,10 @@
             }
         }
     }else {
-        if ([_product_id isEqualToString:RapidLoan]) {
+        if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
             noneView.hidden = false;
         }
     }
-    
     [self.PayDetailTB reloadData];
 }
 
@@ -286,14 +288,13 @@
 {
     DLog(@"%@",_product_id);
     if (_repayListInfo != nil) {
-        if ([_product_id isEqualToString:RapidLoan]){
+        if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan] ){
             return payLoanArry.count;
         }else {
             return titleAry.count;
         }
-        
     }
-    
+    //合规通道弃用
     if (_p2pBillModel != nil) {
         return 4;
     }
@@ -309,17 +310,50 @@
 {
     if (_repayListInfo != nil) {
         if ([_product_id isEqualToString:SalaryLoan]||[_product_id isEqualToString:WhiteCollarLoan]) {
+            
+            //合规发送验证码
+            if (indexPath.row== 4) {
+                PayVerificationCodeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PayVerificationCodeCell"];
+                cell.titleLabel.text = titleAry[indexPath.row];
+                cell.cardNum = _queryCardInfoModel.result.UsrCardInfolist.CardId;
+                cell.phoneNum = _queryCardInfoModel.result.UsrCardInfolist.BindMobile;
+                cell.userVerfiyCode = ^(NSString *str, NSString *seqStr) {
+                    verfiyCode = str;
+                    smsSeq = seqStr;
+                };
+                return cell;
+            }
+            
+            //合规验证码提示
+            if (indexPath.row== 5) {
+                PayDisplayCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PayDisplayCell"];
+                [cell setDispalyLabeltext:_queryCardInfoModel.result.UsrCardInfolist.BindMobile];
+                return cell;
+            }
+            
             //红包和银行的cell
             if(indexPath.row==3){
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.PayTitleLabel.text=titleAry[indexPath.row];
-                if (_selectCard != nil) {
-                    cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,_selectCard.tailNumber];
-                }else {
-                    cell.whichBank.text = @"";
-                }
                 
+                if ([self.platform_Type isEqualToString:@"2"]) {
+                    if ([_queryCardInfoModel.result.UsrCardInfolist.BankId isEqualToString:@""]) {
+                        cell.whichBank.text = @"请更换银行卡";
+                    }else{
+                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_queryCardInfoModel.result.UsrCardInfolist.bankName,[_queryCardInfoModel.result.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.result.UsrCardInfolist.CardId.length-4]];
+                    }
+                }else{
+                    if (paymentPattern == Alipays) {
+                        cell.whichBank.text = @"支付宝付款";
+                    }
+                    else{
+                        cell.whichBank.text = @"";
+                        if (_selectCard != nil) {
+                            cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
+                        }
+                    }
+                }
                 return cell;
             }
             else//溢缴金额和应付金额cell
@@ -341,65 +375,54 @@
                             }
                         }
                         
-                        if (d > 0) {
-                            _canUseReadPacket = true;
-                            if (_selectRedPacket > 0) {
-                                cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                            }else {
-                                Situations *currentSituation = nil;
-                                for (Situations *situation in _situations) {
-                                    if ([situation.status isEqualToString:@"4"]) {
-                                        currentSituation = situation;
+                        if (y > 0) {
+                            cell.payLabel.text=@"您已逾期，不可使用红包";
+                            _canUseReadPacket = false;
+                            cell.payLabel.textColor=rgb(255, 134, 25);
+                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        }else{
+                            if (d > 0) {
+                                _canUseReadPacket = true;
+                                if (_selectRedPacket > 0) {
+                                    cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
+                                    cell.payLabel.textColor=rgb(255, 134, 25);
+                                }else {
+                                    Situations *currentSituation = nil;
+                                    for (Situations *situation in _situations) {
+                                        if ([situation.status isEqualToString:@"4"]) {
+                                            currentSituation = situation;
+                                        }
+                                    }
+                                    if (currentSituation) {
+                                        if (currentSituation.debt_service_fee > 0) {
+                                            cell.payLabel.text = @"请选择";
+                                            cell.payLabel.textColor = [UIColor grayColor];
+                                        } else {
+                                            cell.payLabel.text=@"不可用";
+                                            _canUseReadPacket = false;
+                                            cell.payLabel.textColor=rgb(255, 134, 25);
+                                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                                        }
                                     }
                                 }
-                                if (currentSituation) {
-                                    if (currentSituation.debt_service_fee > 0) {
-                                        cell.payLabel.text = @"请选择";
-                                        cell.payLabel.textColor = [UIColor grayColor];
-                                    } else {
-                                        cell.payLabel.text=@"不可用";
-                                        _canUseReadPacket = false;
-                                        cell.payLabel.textColor=rgb(255, 134, 25);
-                                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                                    }
+                                // cell.accessoryType = UITableViewCellAccessoryNone;
+                                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                            } else {
+                                if (w > 0) {
+                                    cell.payLabel.text=@"不可用";
+                                    _canUseReadPacket = false;
+                                    cell.payLabel.textColor=rgb(255, 134, 25);
+                                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
                                 }
-                            }
-                            //            cell.accessoryType = UITableViewCellAccessoryNone;
-                            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-                        }else {
-                            if (y > 0) {
-                                cell.payLabel.text=@"您已逾期，不可使用红包";
-                                _canUseReadPacket = false;
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                            }
-                            if (w > 0) {
-                                cell.payLabel.text=@"不可用";
-                                _canUseReadPacket = false;
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                             }
                         }
-                    }
-                    if (_p2pBillModel != nil) {
-                        cell.payLabel.text=@"不可用";
-                        _canUseReadPacket = false;
-                        cell.payLabel.textColor=rgb(255, 134, 25);
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    }
-                    if ([_product_id isEqualToString:RapidLoan]) {
-                        cell.payLabel.text=@"不可用";
-                        _canUseReadPacket = false;
-                        cell.payLabel.textColor=rgb(255, 134, 25);
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     }
                 }
                 else if(indexPath.row==1){//溢缴金额
                     cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useTotalAmount];
                 }
-                else{                //应付金额
+                else if(indexPath.row == 2){                //应付金额
                     cell.payLabel.text = [NSString stringWithFormat:@"%.2f元",_finalyRepayAmount];
                 }
                 cell.lblTitle.text=titleAry[indexPath.row];
@@ -408,28 +431,18 @@
         } else {
             //红包和银行的cell
             if(indexPath.row == 4){
-                
-                
-                
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.PayTitleLabel.text=payLoanArry[indexPath.row];
-                if (_selectCard != nil) {
-                    cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,_selectCard.tailNumber];
-                }else {
-                    cell.whichBank.text = @"";
+                if (paymentPattern == Alipays) {
+                    cell.whichBank.text = @"支付宝付款";
                 }
-                
-//                PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
-//                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//                cell.PayTitleLabel.text=payLoanArry[indexPath.row];
-//                if (_selectCard != nil) {
-//                    cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_bankName,_bankNo];
-//                }else {
-//                    cell.whichBank.text = @"";
-//                }
-                
-                
+                else{
+                    cell.whichBank.text = @"";
+                    if (_selectCard != nil) {
+                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
+                    }
+                }
                 return cell;
             } else//溢缴金额和应付金额cell
             {
@@ -449,60 +462,41 @@
                                 d++;
                             }
                         }
-                        
-                        if (d > 0) {
-                            _canUseReadPacket = true;
-                            if (_selectRedPacket > 0) {
-                                cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                            }else {
-                                Situations *currentSituation = nil;
-                                for (Situations *situation in _situations) {
-                                    if ([situation.status isEqualToString:@"4"]) {
-                                        currentSituation = situation;
+                        if (y > 0) {
+                            cell.payLabel.text=@"您已逾期，不可使用红包";
+                            _canUseReadPacket = false;
+                            cell.payLabel.textColor=rgb(255, 134, 25);
+                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        }else{
+                            if (d > 0) {
+                                _canUseReadPacket = true;
+                                if (_selectRedPacket > 0) {
+                                    cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
+                                    cell.payLabel.textColor=rgb(255, 134, 25);
+                                }else {
+                                    Situations *currentSituation = nil;
+                                    for (Situations *situation in _situations) {
+                                        if ([situation.status isEqualToString:@"4"]) {
+                                            currentSituation = situation;
+                                        }
                                     }
-                                }
-                                if (currentSituation) {
-                                    if (currentSituation.debt_service_fee > 0) {
+                                    if (currentSituation) {
                                         cell.payLabel.text = @"请选择";
                                         cell.payLabel.textColor = [UIColor grayColor];
-                                    } else {
-                                        cell.payLabel.text=@"不可用";
-                                        _canUseReadPacket = false;
-                                        cell.payLabel.textColor=rgb(255, 134, 25);
-                                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
                                     }
                                 }
-                            }
-                            //            cell.accessoryType = UITableViewCellAccessoryNone;
-                            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-                        }else {
-                            if (y > 0) {
-                                cell.payLabel.text=@"您已逾期，不可使用红包";
-                                _canUseReadPacket = false;
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                            }
-                            if (w > 0) {
-                                cell.payLabel.text=@"不可用";
-                                _canUseReadPacket = false;
-                                cell.payLabel.textColor=rgb(255, 134, 25);
-                                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                                //            cell.accessoryType = UITableViewCellAccessoryNone;
+                                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                            }else {
+                                if (w > 0) {
+                                    cell.payLabel.text=@"不可用";
+                                    _canUseReadPacket = false;
+                                    cell.payLabel.textColor=rgb(255, 134, 25);
+                                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                                }
                             }
                         }
-                    }
-                    if (_p2pBillModel != nil) {
-                        cell.payLabel.text=@"不可用";
-                        _canUseReadPacket = false;
-                        cell.payLabel.textColor=rgb(255, 134, 25);
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    }
-                    if ([_product_id isEqualToString:RapidLoan]) {
-                        cell.payLabel.text=@"不可用";
-                        _canUseReadPacket = false;
-                        cell.payLabel.textColor=rgb(255, 134, 25);
-                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     }
                 }
                 else if(indexPath.row == 1 ){//逾期费用
@@ -517,110 +511,7 @@
             }
         }
     }
-    if (_p2pBillModel != nil) {
-        //红包和银行的cell
-        if(indexPath.row==3){
-            PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.PayTitleLabel.text=titleAry[indexPath.row];
-            if ([_queryCardInfoModel.data.UsrCardInfolist.BankId isEqualToString:@""]) {
-                
-                cell.whichBank.text = @"请更换银行卡";
-                
-            }else{
-            
-                cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",[self bankName:_queryCardInfoModel.data.UsrCardInfolist.BankId],[_queryCardInfoModel.data.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.data.UsrCardInfolist.CardId.length-4]];
-            }
-            
-           
-            
-            return cell;
-        }
-        else//溢缴金额和应付金额cell
-        {
-            PayMoneyCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-            if(indexPath.row==0)    //红包
-            {
-                if (_repayListInfo != nil) {
-                    int y = 0;  //逾期
-                    int w = 0;  //未来
-                    int d = 0;  //当期
-                    for (int i = 0; i < _situations.count; i++) {
-                        if ([[_situations objectAtIndex:i].status isEqualToString:@"2"]) {
-                            y++;
-                        } else if ([[_situations objectAtIndex:i].status isEqualToString:@"3"]) {
-                            w++;
-                        } else  {
-                            d++;
-                        }
-                    }
-                    
-                    if (d > 0) {
-                        _canUseReadPacket = true;
-                        if (_selectRedPacket > 0) {
-                            cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
-                            cell.payLabel.textColor=rgb(255, 134, 25);
-                        }else {
-                            Situations *currentSituation = nil;
-                            for (Situations *situation in _situations) {
-                                if ([situation.status isEqualToString:@"4"]) {
-                                    currentSituation = situation;
-                                }
-                            }
-                            if (currentSituation) {
-                                if (currentSituation.debt_service_fee > 0) {
-                                    cell.payLabel.text = @"请选择";
-                                    cell.payLabel.textColor = [UIColor grayColor];
-                                } else {
-                                    cell.payLabel.text=@"不可用";
-                                    _canUseReadPacket = false;
-                                    cell.payLabel.textColor=rgb(255, 134, 25);
-                                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                                }
-                            }
-                        }
-                        //            cell.accessoryType = UITableViewCellAccessoryNone;
-                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-                    }else {
-                        if (y > 0) {
-                            cell.payLabel.text=@"您已逾期，不可使用红包";
-                            _canUseReadPacket = false;
-                            cell.payLabel.textColor=rgb(255, 134, 25);
-                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        }
-                        if (w > 0) {
-                            cell.payLabel.text=@"不可用";
-                            _canUseReadPacket = false;
-                            cell.payLabel.textColor=rgb(255, 134, 25);
-                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        }
-                    }
-                }
-                if (_p2pBillModel != nil) {
-                    cell.payLabel.text=@"不可用";
-                    _canUseReadPacket = false;
-                    cell.payLabel.textColor=rgb(255, 134, 25);
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                }
-                if ([_product_id isEqualToString:RapidLoan]) {
-                    cell.payLabel.text=@"不可用";
-                    _canUseReadPacket = false;
-                    cell.payLabel.textColor=rgb(255, 134, 25);
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                }
-            }
-            else if(indexPath.row==1){//溢缴金额
-                cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useTotalAmount];
-            }
-            else{                //应付金额
-                cell.payLabel.text = [NSString stringWithFormat:@"%.2f元",_finalyRepayAmount];
-            }
-            cell.lblTitle.text=titleAry[indexPath.row];
-            return cell;
-        }
-    }
-    
+
     return nil;
 }
 
@@ -631,7 +522,6 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([_product_id isEqualToString:SalaryLoan]||[_product_id isEqualToString:WhiteCollarLoan]) {
         if(indexPath.row==0){//红包
@@ -650,35 +540,15 @@
         }
         if(indexPath.row==3)//选择银行卡
         {
-            if (_repayListInfo != nil) {
-                DLog(@"选择付款方式");
-                PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-                payMethodVC.bankModel = _bankModel;
-                payMethodVC.payMethod = PayMethodNormal;
-                if (userSelectIndex == -1) {
-                    payMethodVC.currentIndex = defaultBankIndex;
-                } else {
-                    payMethodVC.currentIndex  = userSelectIndex;
-                }
-                payMethodVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex){
-                    if (cardInfo) {
-                        _selectCard = cardInfo;
-                    }
-                    userSelectIndex = currentIndex;
-                    [self.PayDetailTB reloadData];
-                };
-                PayNavigationViewController *payNC = [[PayNavigationViewController alloc] initWithRootViewController:payMethodVC];
-                payNC.view.frame = CGRectMake(0, 0, _k_w, 270);
-                [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
-            }
-            if (_p2pBillModel != nil) {
-                
-//                [self chooseBankCard];
-                
+            if ([self.platform_Type isEqualToString:@"2"]) {
                 [self gotoUnbundlingBank];
-                
+                return;
             }
             
+            if (_repayListInfo != nil) {
+                DLog(@"选择付款方式");
+                [self pushUserBankListVC];
+            }
         }
     }else {
         if(indexPath.row==0){//红包
@@ -697,47 +567,45 @@
         }
         if (indexPath.row==3) {
             if (_p2pBillModel != nil) {
-                
                 [self gotoUnbundlingBank];
-                //                [self chooseBankCard];
-                
             }
         }
         if(indexPath.row==4)//选择银行卡
         {
             if (_repayListInfo != nil) {
                 DLog(@"选择付款方式");
-                PayMethodViewController *payMethodVC = [[PayMethodViewController alloc] init];
-                payMethodVC.bankModel = _bankModel;
-                payMethodVC.payMethod = PayMethodNormal;
-                if (userSelectIndex == -1) {
-                    payMethodVC.currentIndex = defaultBankIndex;
-                } else {
-                    payMethodVC.currentIndex  = userSelectIndex;
-                }
-                payMethodVC.bankSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex){
-                    if (cardInfo) {
-                        _selectCard = cardInfo;
-                    }
-                    userSelectIndex = currentIndex;
-                    [self.PayDetailTB reloadData];
-                };
-                PayNavigationViewController *payNC = [[PayNavigationViewController alloc] initWithRootViewController:payMethodVC];
-                payNC.view.frame = CGRectMake(0, 0, _k_w, 270);
-                [self presentSemiViewController:payNC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)}];
+                [self pushUserBankListVC];
             }
-           
             if (_p2pBillModel != nil) {
-                
                 [self gotoUnbundlingBank];
-                //                [self chooseBankCard];
-                
             }
         }
     }
-    
 }
-
+/**
+ 跳转到银行卡
+ */
+-(void)pushUserBankListVC{
+    
+    UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
+    userBankCardListVC.isHavealipay = true;
+    if (userSelectIndex == -1) {
+        userBankCardListVC.currentIndex = defaultBankIndex;
+    } else {
+        userBankCardListVC.currentIndex  = userSelectIndex;
+    }
+    userBankCardListVC.payPattern = paymentPattern;
+    userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex ,PatternOfPayment patternOfPayment) {
+        _selectCard = cardInfo;
+        paymentPattern = patternOfPayment;
+        if (cardInfo == nil) {
+            [self  fatchUserCardList];
+        }
+        userSelectIndex = currentIndex;
+        [self.PayDetailTB reloadData];
+    };
+    [self.navigationController pushViewController:userBankCardListVC animated:true];
+}
 #pragma mark - selectVCDelegate
 
 /**
@@ -749,36 +617,40 @@
 {
     [self dismissSemiModalViewWithCompletion:^{
         Available_Redpackets *redPacket = [_repayListInfo.result.available_redpackets objectAtIndex:index];
-        _selectRedPacket = redPacket.residual_amount;
-        _selectRedPacketID = redPacket.RedpacketID;
-        
+        _selectRedPacket = redPacket.residual_amount;   //所选红包金额
+        _selectRedPacketID = redPacket.RedpacketID;     //红包id
         _finalyRepayAmount = _repayAmount - _repayListInfo.result.situations.firstObject.debt_service_fee;
+        // 折息金额
+        CGFloat _discountsAmount = 0;   // 红包 或者 利息
+        // 红包小于服务费，使用红包
         if (_selectRedPacket <= _repayListInfo.result.situations.firstObject.debt_service_fee) {
             _useredPacketAmount = _selectRedPacket;
-            if (_repayListInfo.result.total_amount >= (_repayAmount - _selectRedPacket)) {
-//                _useTotalAmount = fabs(_repayAmount - _selectRedPacket - _repayListInfo.result.total_amount);
-                _useTotalAmount = fabs(_repayAmount - _selectRedPacket);
-                _finalyRepayAmount = 0.0;
-            } else {
-                
-                _useTotalAmount = _repayListInfo.result.total_amount;
-                _finalyRepayAmount = _repayAmount - _selectRedPacket - _repayListInfo.result.total_amount;
-            }
+            _discountsAmount = _selectRedPacket;
         } else {
+             // 红包大于服务费，使用服务费
             _useredPacketAmount = _repayListInfo.result.situations.firstObject.debt_service_fee;
-            if (_repayListInfo.result.total_amount >= (_repayAmount - _repayListInfo.result.situations.firstObject.debt_service_fee)) {
-                _useTotalAmount = _repayAmount - _repayListInfo.result.situations.firstObject.debt_service_fee;
-                _finalyRepayAmount = 0.0;
-            } else {
-                _useTotalAmount = _repayListInfo.result.total_amount;
-                _finalyRepayAmount = _repayAmount - _repayListInfo.result.situations.firstObject.debt_service_fee - _repayListInfo.result.total_amount;
-            }
+            _discountsAmount = _repayListInfo.result.situations.firstObject.debt_service_fee;
+        }
+        
+        if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
+            //急速贷没有服务费，直接拿本金减红包
+            _useredPacketAmount = _selectRedPacket > 10 ? 10 : _selectRedPacket;    // 急速贷红包上线10元
+            _finalyRepayAmount -= _useredPacketAmount;
+            _discountsAmount = _useredPacketAmount;
+        }
+        // 溢缴金  大于  本金减折息金额
+        if (_repayListInfo.result.total_amount >= (_repayAmount - _discountsAmount)) {
+            //              _useTotalAmount = fabs(_repayAmount - _selectRedPacket - _repayListInfo.result.total_amount);
+            _useTotalAmount = fabs(_repayAmount - _discountsAmount);
+            _finalyRepayAmount = 0.0;
+        } else {
+            _useTotalAmount = _repayListInfo.result.total_amount;
+            _finalyRepayAmount = _repayAmount - _discountsAmount - _repayListInfo.result.total_amount;
         }
         [self.PayDetailTB reloadData];
     }];
+    
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -810,31 +682,46 @@
 #pragma mark  确定按钮
 - (IBAction)btnSureClick:(UIButton *)sender {
     DLog(@"确定按钮");
-    if (_repayListInfo != nil) {
-        [self fxdRepay];
+    if (_repayListInfo == nil) {
+        return;
     }
-    
-    if (_p2pBillModel != nil) {
+    if ([self.platform_Type isEqualToString:@"2"] ) {
         
         [self getMoney];
+        
+    }else{
+        if (paymentPattern == BankCard) {
+            [self fxdRepay];
+        }
+        else{
+            [self trilateralEntrance];
+        }
         
     }
 }
 
-- (void)fxdRepay
-{
+/**
+ 获取还款期数id
+
+ @return 期数id
+ */
+-(NSMutableString *)obtainRepayStaging_ids{
     
-    NSLog(@"====================================支付点击");
-    self.sureBtn.enabled = NO;
     NSMutableString *staging_ids = [NSMutableString string];
     for (int i = 0; i < _situations.count; i++) {
-        //        if ([_cellSelectArr objectAtIndex:i].boolValue) {
         NSString *str = [NSString stringWithFormat:@"%@,",[_situations objectAtIndex:i].staging_id];
         [staging_ids appendString:str];
-        //        }
     }
     [staging_ids deleteCharactersInRange:NSMakeRange(staging_ids.length - 1, 1)];
     
+    return staging_ids;
+}
+
+- (void)fxdRepay
+{
+    NSLog(@"=================支付点击===================");
+    self.sureBtn.enabled = NO;
+    NSMutableString *staging_ids = [self obtainRepayStaging_ids];
     NSDictionary *paramDic;
     NSString *save_amountTemp;
     if (_repayType == RepayTypeClean) {
@@ -842,54 +729,84 @@
     } else {
         save_amountTemp = @"0";
     }
+    PaymentDetailModel *  paymentDetailModel = [[PaymentDetailModel alloc]init];
     
     if (_useredPacketAmount > 0) {
-        paramDic = @{@"staging_ids_":staging_ids,
-                     @"account_card_id_":_selectCard.cardIdentifier,
-                     @"total_amount_":@(_useTotalAmount),
-                     @"repay_amount_":@(_finalyRepayAmount),
-                     @"repay_total_":@(_repayAmount),
-                     @"save_amount_":@(_save_amount),
-                     @"socket":_repayListInfo.result.socket,
-                     @"request_type_":save_amountTemp,
-                     @"redpacket_id_":_selectRedPacketID,
-                     @"redpacket_cash_":@(_useredPacketAmount),
-                     };
+        paymentDetailModel.staging_ids_ =staging_ids;
+        paymentDetailModel.account_card_id_ =_selectCard.cardId;
+        paymentDetailModel.total_amount_ = @(_useTotalAmount);
+        paymentDetailModel.repay_amount_ = @(_finalyRepayAmount);
+        paymentDetailModel.repay_total_ = @(_repayAmount);
+        paymentDetailModel.save_amount_ = @(_save_amount);
+        paymentDetailModel.socket = _repayListInfo.result.socket;
+        paymentDetailModel.request_type_ = save_amountTemp;
+        paymentDetailModel.redpacket_id_ = _selectRedPacketID;
+        paymentDetailModel.redpacket_cash_ = @(_useredPacketAmount);
     }else {
-        paramDic = @{@"staging_ids_":staging_ids,
-                     @"account_card_id_":_selectCard.cardIdentifier,
-                     @"total_amount_":@(_useTotalAmount),
-                     @"repay_amount_":@(_finalyRepayAmount),
-                     @"repay_total_":@(_repayAmount),
-                     @"save_amount_":@(_save_amount),
-                     @"socket":_repayListInfo.result.socket,
-                     @"request_type_":save_amountTemp,
-                     };
+        paymentDetailModel.staging_ids_ =staging_ids;
+        paymentDetailModel.account_card_id_ =_selectCard.cardId;
+        paymentDetailModel.total_amount_ = @(_useTotalAmount);
+        paymentDetailModel.repay_amount_ = @(_finalyRepayAmount);
+        paymentDetailModel.repay_total_ = @(_repayAmount);
+        paymentDetailModel.save_amount_ = @(_save_amount);
+        paymentDetailModel.socket = _repayListInfo.result.socket;
+        paymentDetailModel.request_type_ = save_amountTemp;
     }
     
-    DLog(@"========%@",paramDic);
-    
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_RepayOrSettleWithPeriod_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object[@"msg"]);
-        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-            
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+    //合规的还款增加两个参数
+    if ([self.platform_Type isEqualToString:@"2"]) {
+        if (!smsSeq) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
+            return;
+        }
+        if (!verfiyCode || [verfiyCode isEqualToString:@""]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
+            return;
+        }
+        paymentDetailModel.sms_code_ =  verfiyCode;
+        paymentDetailModel.sms_seq_ = smsSeq;
+        paymentDetailModel.account_card_id_ =_queryCardInfoModel.result.accountCardId;
+    }
+    PaymentViewModel * paymentViewModel = [[PaymentViewModel alloc]init];
+    [paymentViewModel setBlockWithReturnBlock:^(id returnValue) {
+        DLog(@"%@",returnValue[@"msg"]);
+        BaseResultModel * baseResultModel = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseResultModel.flag isEqualToString:@"0000"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.msg];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
         }else {
             self.sureBtn.enabled = YES;
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.msg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         self.sureBtn.enabled = YES;
     }];
+    [paymentViewModel FXDpaymentDetail:paymentDetailModel];
 }
-
+#pragma mark - 三方支付
+-(void)trilateralEntrance{
+    
+    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
+    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+            webView.urlStr = baseResultM.data[@"callbackUrl"];
+            webView.payType = @"1";
+            [self.navigationController pushViewController:webView animated:YES];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [bankInfoVM obtainTrilateralLink:[self obtainRepayStaging_ids] redPacketAmount:[NSString stringWithFormat:@"%.2f",_useredPacketAmount] redPacketId:_selectRedPacketID payType:@"1" stagingContinue:false];
+    
+}
 #pragma mark 正常扣款
 - (void)repaySure
 {
-    
     NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
                           @"bid_id_":_p2pBillModel.data.bid_id_,
                           @"amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
@@ -914,7 +831,6 @@
 - (void)paySettle
 {
 
-    
     NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
                           @"bid_id_":_p2pBillModel.data.bid_id_,
                           @"amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
@@ -929,7 +845,6 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else{
-        
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
         }
     } failure:^(EnumServerStatus status, id object) {
@@ -942,29 +857,22 @@
 
 -(void)getMoney{
     
-    if ([_userStatusModel.result.flg isEqualToString:@"2"]) {//未开户
-        
-    }else if ([_userStatusModel.result.flg isEqualToString:@"3"]){//待激活
-
-        NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
-        P2PViewController *p2pVC = [[P2PViewController alloc] init];
-        p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        [self.navigationController pushViewController:p2pVC animated:YES];
-        
-    }else if ([_userStatusModel.result.flg isEqualToString:@"6"]){//正常用户
-
-        if (_repayType == RepayTypeOption) {
-            [self repaySure];
+    [self getUserStatus:self.applicationID success:^(QryUserStatusModel *_model) {
+        if ([_model.result.flg isEqualToString:@"2"]) {//未开户
             
-        } else {
-            
-            [self paySettle];
-
+        }else if ([_model.result.flg isEqualToString:@"3"]){//待激活
+            NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+            P2PViewController *p2pVC = [[P2PViewController alloc] init];
+            p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            p2pVC.applicationId = self.applicationID;
+            [self.navigationController pushViewController:p2pVC animated:YES];
+        }else if ([_model.result.flg isEqualToString:@"6"]){//正常用户
+            [self fxdRepay];
         }
-    }
+    }];
 }
 
-#pragma mark 弹出合规银行卡列表viewmodel
+#pragma mark 跳转到解绑银行卡页面
 -(void)gotoUnbundlingBank{
     
     UnbundlingBankCardViewController *controller = [[UnbundlingBankCardViewController alloc]initWithNibName:@"UnbundlingBankCardViewController" bundle:nil];
@@ -974,58 +882,21 @@
     
 }
 
-
-#pragma mark 银行卡名字的转换
--(NSString *)bankName:(NSString *)bankCode{
-    
-    NSString *name = @"";
-    if([bankCode isEqualToString:@"BOC"]){
-        
-        name = @"中国银行";
-        
-    }else if ([bankCode isEqualToString:@"ICBC"]){
-        
-        name = @"中国工商银行";
-    }else if ([bankCode isEqualToString:@"CCB"]){
-        
-        name = @"中国建设银行";
-    }else if ([bankCode isEqualToString:@"ABC"]){
-        
-        name = @"中国农业银行";
-    }else if ([bankCode isEqualToString:@"CITIC"]){
-        
-        name = @"中信银行";
-    }else if ([bankCode isEqualToString:@"CIB"]){
-        
-        name = @"兴业银行";
-    }else if ([bankCode isEqualToString:@"CEB"]){
-        
-        name = @"中国光大银行";
-    }
-    
-    
-    return name;
-}
-
 #pragma mark  银行卡查询
 -(void)checkBank{
 
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        NSArray *array = @[@"BOC",@"ICBC",@"CCB",@"ABC",@"CITIC",@"CIB",@"CEB"];
+//        NSArray *array = @[@"BOC",@"ICBC",@"CCB",@"ABC",@"CITIC",@"CIB",@"CEB"];
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
-        _queryCardInfoModel = model;
-        BOOL isHave = NO;
-        for (NSString *name in array) {
-            if ([name isEqualToString:model.data.UsrCardInfolist.BankId]) {
-                isHave = YES;
-            }
+        if ([model.flag isEqualToString:@"0000"]) {
+            
+            _queryCardInfoModel = model;
+            [self obtain_HeGui_BankList:model];
+        }else{
+        
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
-        if (!isHave) {
-            _queryCardInfoModel.data.UsrCardInfolist.BankId = @"";
-        }
-        [self.PayDetailTB reloadData];
         
     } WithFaileBlock:^{
         
@@ -1033,45 +904,50 @@
     [checkBankViewModel queryCardInfo];
 }
 
-
-#pragma mark 发标前查询进件
--(void)getFxdCaseInfo{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
-        if ([caseInfo.flag isEqualToString:@"0000"]) {
-
-            [self getUserStatus:caseInfo];
-
+-(void)obtain_HeGui_BankList:(QueryCardInfo *)infoModel{
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseREsultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseREsultM.flag isEqualToString:@"0000"]) {
+            BOOL isHave = NO;
+            NSArray * array = (NSArray *)baseREsultM.result;
+            for (NSDictionary *dic  in array) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:dic error:nil];
+                if ([bankList.bank_short_name_ isEqualToString:infoModel.result.UsrCardInfolist.BankId]) {
+                    isHave = YES;
+                    break;
+                }
+            }
+            if (!isHave) {
+                _queryCardInfoModel.result.UsrCardInfolist.BankId = @"";
+            }
+            [self.PayDetailTB reloadData];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view  message:baseREsultM.msg];
         }
     } WithFaileBlock:^{
         
     }];
-    [complianceViewModel getFXDCaseInfo];
-    
+    [checkBankViewModel getSupportBankListInfo:@"4"];
 }
 
+
 #pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(GetCaseInfo *)caseInfo{
+-(void)getUserStatus:(NSString  *)applicationId success:(void(^)(QryUserStatusModel *_model))finish{
     
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
         QryUserStatusModel *model = [QryUserStatusModel yy_modelWithJSON:returnValue];
         if ([model.result.appcode isEqualToString:@"1"]) {
-            
             _userStatusModel = model;
-            
+            finish(model);
         }else{
             
-            //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
         }
     } WithFaileBlock:^{
         
     }];
-    
-    [complianceViewModel getUserStatus:caseInfo];
+    [complianceViewModel getUserStatus:applicationId];
 }
 
 

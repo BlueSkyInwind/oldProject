@@ -117,9 +117,6 @@
     return boolValue;
 }
 
-
-
-
 #pragma mark - 文件归档
 //归档
 +(BOOL)archiveRootObject:(id)obj toFile:(NSString *)path{

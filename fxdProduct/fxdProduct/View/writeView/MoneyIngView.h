@@ -40,5 +40,20 @@
 @property (weak, nonatomic) IBOutlet UIView *repayBtnView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIImageView *moneyImage;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet UILabel *repayMoneyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *repayMoneyTime;
+@property (weak, nonatomic) IBOutlet UIView *repayView;
+@property (weak, nonatomic) IBOutlet UILabel *loanTitleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *stagingBtn;
+@property (weak, nonatomic) IBOutlet UILabel *overdueFeeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *agreementBtn;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIView *stagingView;
+@property (weak, nonatomic) IBOutlet UIImageView *tipImage;
+@property (weak, nonatomic) IBOutlet UILabel *promptLabel;
+@property (weak, nonatomic) IBOutlet UIView *statusBottomView;
+@property (weak, nonatomic) IBOutlet UIButton *heguiBtn;
+@property (weak, nonatomic) IBOutlet UIView *stagingBgView;
 
 @end

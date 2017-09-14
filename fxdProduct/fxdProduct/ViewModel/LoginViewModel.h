@@ -30,5 +30,11 @@
 -(void)uploadLocationInfoLongitude:(NSString *)longitude Latitude:(NSString *)latitude;
 
 
+/**
+ 上传registerID
+
+ @param registerID 推送id
+ */
+-(void)uploadUserRegisterID:(NSString *)registerID;
 
 @end

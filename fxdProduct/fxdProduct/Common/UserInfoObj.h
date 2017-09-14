@@ -10,6 +10,24 @@
 #import "LoginBaseClass.h"
 #import "LoginParse.h"
 
+//用户进件状态
+typedef NS_ENUM(NSUInteger, ApplicationStatus) {
+    InLoan = 1,      //放款中
+    Repayment,    //还款中
+    Staging,         //续期中
+    RepaymentNormal,  //正常还款
+    ComplianceInLoan, // 放款阶段的合规用户中间状态
+    ComplianceRepayment,  //还款阶段合规用户中间状态
+    ComplianceProcessing,  //合规标的处理中状态
+};
+
+//支付方式
+typedef NS_ENUM(NSUInteger, PatternOfPayment) {
+    BankCard = 1,      //银行卡
+    Alipays,    //支付宝
+};
+
+
 @interface UserInfoObj : NSObject
 
 @property (nonatomic,assign) NSInteger login_flag;

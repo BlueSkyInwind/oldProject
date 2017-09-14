@@ -24,7 +24,9 @@
     _webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
     [self addBackItem];
     _webView.scrollView.showsVerticalScrollIndicator = false;
-    [_webView loadHTMLString:_content baseURL:nil];
+    if (_content) {
+        [_webView loadHTMLString:_content baseURL:nil];
+    }
     [self.view addSubview:_webView];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
 }
@@ -39,9 +41,7 @@
             self.navigationItem.title = title;
         }
     }
-    
 }
-
 
 
 - (void)dealloc

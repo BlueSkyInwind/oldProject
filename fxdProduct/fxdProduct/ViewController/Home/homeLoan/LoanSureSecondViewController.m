@@ -199,7 +199,6 @@
             if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
                 
                 CheckViewController *checkView = [CheckViewController new];
-                checkView.homeStatues = 1;
                 [self.navigationController pushViewController:checkView animated:YES];
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];

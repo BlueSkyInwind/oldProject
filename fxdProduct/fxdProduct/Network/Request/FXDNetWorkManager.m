@@ -14,6 +14,10 @@
 #import "GTMBase64.h"
 #import "DataWriteAndRead.h"
 
+@interface FXDNetWorkManager(){
+    MBProgressHUD * _requestWaitView;
+}
+@end
 @implementation FXDNetWorkManager
 
 + (FXDNetWorkManager *)sharedNetWorkManager
@@ -46,6 +50,90 @@
     return _waitView;
     
 }
+-(void)removeWaitView{
+    if (_requestWaitView) {
+        [_requestWaitView removeFromSuperview];
+    }
+}
+
+- (void)DataRequestWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus isNeedWait:(BOOL)isNeedWait parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
+{
+    DLog(@"%d",[Utility sharedUtility].userInfo.isUpdate);
+    //版本强制更新
+    if ([Utility sharedUtility].userInfo.isUpdate) {
+        [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前使用版本太低,请前往APP Store更新后再使用!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+            if (index == 1) {
+                return;
+            }
+        }];
+    }
+    // 网络判断
+    if (![Utility sharedUtility].networkState && isNeedNetStatus) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
+        return;
+    }
+    
+    MBProgressHUD *_waitView = [self loadingHUD];
+    if (isNeedWait) {
+        
+        [_waitView show:YES];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
+    }
+
+    NSDictionary *paramDic = [NSDictionary dictionary];
+    DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+//    [manager.requestSerializer setValue:@"applicaiton/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+//    if (parameters) {
+//        if ([Tool dicContainsKey:parameters keyValue:@"Encrypt"]) {
+//            NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
+//            [muDic removeObjectForKey:@"Encrypt"];
+//            paramDic = [muDic copy];
+//        } else {
+//            paramDic = [Tool getParameters:parameters];
+//        }
+//    }
+    DLog(@"参数:---%@",paramDic);
+
+    if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
+        if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
+            [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
+            [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
+            [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
+        }
+    }
+    //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
+    
+    manager.requestSerializer.timeoutInterval = 30.0;
+    DLog(@"%@",parameters);
+    [manager POST:strURL parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary * resultDic = [NSDictionary dictionary];
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"%@",resultDic);
+        }else{
+            resultDic = [NSDictionary dictionaryWithDictionary:responseObject];
+            DLog(@"response json --- %@",resultDic);
+        }
+        finished(Enum_SUCCESS,resultDic);
+         [_waitView removeFromSuperview];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(Enum_FAIL,error);
+        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
+        DLog(@"error---%@",error.description);
+//        [self removeWaitView];
+         [_waitView removeFromSuperview];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
+    }];
+    
+}
 
 - (void)POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
 {
@@ -64,9 +152,9 @@
             MBProgressHUD *_waitView = [self loadingHUD];
             [_waitView show:YES];
             [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+            
             NSDictionary *paramDic = [NSDictionary dictionary];
             DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
-            
             
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -89,15 +177,15 @@
             //            manager.requestSerializer=[AFHTTPRequestSerializer serializer];
             
             DLog(@"juid --- %@\n token --- %@",[Utility sharedUtility].userInfo.juid,[Utility sharedUtility].userInfo.tokenStr);
+            
             if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
                 if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
                     [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
                     [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
                 }
             }
-            //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
-            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
             
+            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
             manager.requestSerializer.timeoutInterval = 30.0;
             DLog(@"%@",parameters);
             [manager POST:strURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -157,15 +245,12 @@
             [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
             DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
             
-            
-            
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
            
             //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"charset=UTF-8",@"text/html",@"text/json",@"text/plain", nil];
-            [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             
             manager.requestSerializer.timeoutInterval = 30.0;
             DLog(@"%@",parameters);
@@ -183,6 +268,7 @@
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
                                 [_waitView removeFromSuperview];
+                                
                             }];
                         }
                     }];
@@ -269,10 +355,7 @@
             }
         }];
     } else {
-        //        if (![Utility sharedUtility].networkState) {
-        //            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
-        //            return;
-        //        } else {
+
         MBProgressHUD *_waitView = [self loadingHUD];
         [_waitView show:YES];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
@@ -282,7 +365,6 @@
             paramDic = [Tool getParameters:parameters];
         }
         DLog(@"加密后参数:---%@",paramDic);
-        
         
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -334,7 +416,6 @@
         }];
     }
 }
-
 
 - (void)POSTUpLoadImage:(NSString *)strURL FilePath:(NSDictionary *)images  parameters:(id)parameters finished:(FinishedBlock)finshed failure:(FailureBlock)failure
 {
@@ -394,7 +475,6 @@
     }
 }
 
-
 - (void)P2POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
 {
     DLog(@"%d",[Utility sharedUtility].userInfo.isUpdate);
@@ -418,7 +498,6 @@
             //                paramDic = [Tool getParameters:parameters];
             //            }
             //            DLog(@"加密后参数:---%@",paramDic);
-            
             
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             //        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
@@ -497,7 +576,6 @@
             NSDictionary *paramDic = [NSDictionary dictionary];
             DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
             
-            
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
             
@@ -568,7 +646,7 @@
     }
 }
 
-- (void)GetWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
+- (void)GetWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure
 {
     DLog(@"%d",[Utility sharedUtility].userInfo.isUpdate);
     if ([Utility sharedUtility].userInfo.isUpdate) {
@@ -577,75 +655,66 @@
                 return;
             }
         }];
-    } else {
-        if (![Utility sharedUtility].networkState) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
-            return;
-        } else {
-            MBProgressHUD *_waitView = [self loadingHUD];
-            [_waitView show:YES];
-            [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-            //            NSDictionary *paramDic = [NSDictionary dictionary];
-            //            DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
-            //            if (parameters) {
-            //                paramDic = [Tool getParameters:parameters];
-            //            }
-            //            DLog(@"加密后参数:---%@",paramDic);
-            
-            
-            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-            //        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
-            //        securityPolicy.allowInvalidCertificates = YES;
-            //        securityPolicy setPinnedCertificates:
-            //        securityPolicy.validatesDomainName = YES;
-            //        manager.securityPolicy = securityPolicy;
-            manager.requestSerializer=[AFHTTPRequestSerializer serializer];
-            //            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-            DLog(@"juid --- %@\n token --- %@",[Utility sharedUtility].userInfo.juid,[Utility sharedUtility].userInfo.tokenStr);
-            if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
-                if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
-                    [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
-                    [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
-                }
-            }
-            
-            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/xml",@"text/html",@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"charset=UTF-8", nil];
-            
-            manager.requestSerializer.timeoutInterval = 30.0;
-            DLog(@"%@",parameters);
-            
-            [manager GET:strURL parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
-                
-            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {
-                    [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
-                        if (index == 1) {
-                            [EmptyUserData EmptyData];
-                            LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-                            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-                            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
-                                [_waitView removeFromSuperview];
-                            }];
-                        }
-                    }];
-                }
-                NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
-                NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-                NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                DLog(@"response json --- %@",jsonStr);
-                //            [Tool dataToDictionary:responseObject]
-                finished(Enum_SUCCESS,responseObject);
-                [_waitView removeFromSuperview];
-                [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                failure(Enum_FAIL,error);
-                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
-                DLog(@"error---%@",error.description);
-                [_waitView removeFromSuperview];
-                [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
-            }];
+    }
+    if (![Utility sharedUtility].networkState && isNeedNetStatus) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
+        failure(Enum_FAIL,nil);
+        return;
+    }
+    MBProgressHUD *_waitView = [self loadingHUD];
+    [_waitView show:YES];
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    //            NSDictionary *paramDic = [NSDictionary dictionary];
+    //            DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
+    //            if (parameters) {
+    //                paramDic = [Tool getParameters:parameters];
+    //            }
+    //            DLog(@"加密后参数:---%@",paramDic);
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
+    //        securityPolicy.allowInvalidCertificates = YES;
+    //        securityPolicy setPinnedCertificates:
+    //        securityPolicy.validatesDomainName = YES;
+    //        manager.securityPolicy = securityPolicy;
+    manager.requestSerializer=[AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    DLog(@"juid --- %@\n token --- %@",[Utility sharedUtility].userInfo.juid,[Utility sharedUtility].userInfo.tokenStr);
+    if ([Utility sharedUtility].userInfo.juid != nil && ![[Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
+        if ([Utility sharedUtility].userInfo.tokenStr != nil && ![[Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
+            [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
+            [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
+            //                    [manager.requestSerializer setValue:@"a0334e081d734935a3762d103f3aec3b" forHTTPHeaderField:@"juid"];
+            DLog(@"juid --- %@\n ",[Utility sharedUtility].userInfo.juid);
         }
     }
+    [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/xml",@"text/html",@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"charset=UTF-8", nil];
+    manager.requestSerializer.timeoutInterval = 30.0;
+    DLog(@"%@",parameters);
+    [manager GET:strURL parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary * resultDic = [NSDictionary dictionary];
+        if ([responseObject isKindOfClass:[NSData class]]) {
+            resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"%@",resultDic);
+        }else{
+            NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
+            NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+            NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            DLog(@"response json --- %@",jsonStr);
+        }
+        finished(Enum_SUCCESS,resultDic);
+        [_waitView removeFromSuperview];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(Enum_FAIL,error);
+        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
+        DLog(@"error---%@",error.description);
+        [_waitView removeFromSuperview];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
+    }];
 }
 
 - (UIViewController *)getCurrentVC{
@@ -687,7 +756,6 @@
     }else{
         result = nextResponder;
     }
-    
     return result;
 }
 

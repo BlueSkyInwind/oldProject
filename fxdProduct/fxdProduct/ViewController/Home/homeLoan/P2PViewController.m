@@ -47,7 +47,6 @@
 //    [config.userContentController addUserScript:script];
 //    [config.userContentController addScriptMessageHandler:self name:@"AppModel"];
     
-    
     _webview = [[WKWebView alloc] init];
     _webview.UIDelegate = self;
     _webview.navigationDelegate = self;
@@ -68,7 +67,6 @@
     [_webview addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
 }
 
-
 - (void)addBack
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -77,13 +75,10 @@
     [btn setImage:img forState:UIControlStateNormal];
     btn.frame = CGRectMake(0, 0, 45, 44);
     [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
-    
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    
     //    修改距离,距离边缘的
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = -15;
-    
     self.navigationItem.leftBarButtonItems = @[spaceItem,item];
     //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
 }
@@ -91,11 +86,8 @@
 - (void)popBack
 {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-
-    [self getFxdCaseInfo];
-//    [self.navigationController popViewControllerAnimated:YES];
+    [self getUserStatus:self.applicationId];
 }
-
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
@@ -118,12 +110,10 @@
         }
         DLog(@"%@",title);
     }
-    
     if (object == _webview && [keyPath isEqualToString:@"URL"]) {
         DLog(@"%@",_webview.URL.absoluteString);
     }
 }
-
 
 -(void)createProUI
 {
@@ -142,71 +132,35 @@
     [progressView removeFromSuperview];
 }
 
-//- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
-//{
-//    if ([message.name isEqualToString:@"AppModel"]) {
-//        NSLog(@"message name is AppModel");
-//    }
-//}
-
 //根据webView、navigationAction相关信息决定这次跳转是否可以继续进行,这些信息包含HTTP发送请求，如头部包含User-Agent,Accept
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
     NSURLRequest *request = navigationAction.request;
     DLog(@"%@",request.URL.absoluteString);
-    
     DLog(@"=======%@",webView.URL.absoluteString);
-    
     
     if ([request.URL.absoluteString isEqualToString:_transition_url]&&![request.URL.absoluteString isEqualToString:self.urlStr]) {
         decisionHandler(WKNavigationActionPolicyAllow);
-
-        [self getFxdCaseInfo];
-        
+        [self getUserStatus:self.applicationId];
     }else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
-
 }
-
-
-
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     
     
-}
-
-
-
-#pragma mark 发标前查询进件
--(void)getFxdCaseInfo{
-    
-    ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
-    [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        GetCaseInfo *caseInfo = [GetCaseInfo yy_modelWithJSON:returnValue];
-        if ([caseInfo.flag isEqualToString:@"0000"]) {
-            
-            [self getUserStatus:caseInfo];
-            
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceViewModel getFXDCaseInfo];
     
 }
-
 #pragma mark  fxd用户状态查询，viewmodel
--(void)getUserStatus:(GetCaseInfo *)caseInfo{
+-(void)getUserStatus:(NSString *)applicationId{
     
     ComplianceViewModel *complianceViewModel = [[ComplianceViewModel alloc]init];
     [complianceViewModel setBlockWithReturnBlock:^(id returnValue) {
         QryUserStatusModel *qryUserStatusModel = [QryUserStatusModel yy_modelWithJSON:returnValue];
         if ([qryUserStatusModel.flag isEqualToString:@"0000"]) {
             
-            if ([qryUserStatusModel.result.flg isEqualToString:@"2"]) {
+            if ([qryUserStatusModel.result.flg isEqualToString:@"2"]) {//未开户
                 for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                     if ([vc isKindOfClass:[CheckViewController class]]) {
                         CheckViewController *controller = (CheckViewController *)vc;
@@ -214,50 +168,39 @@
                     }
                 }
             }else{
-                
-                if ([qryUserStatusModel.result.flg isEqualToString:@"6"]&&_isRepay) {
-                    
+                if ([qryUserStatusModel.result.flg isEqualToString:@"6"]&&_isRepay) {//正常用户并且从我要还款入口进入
                     RepayRequestManage *repayRequest = [[RepayRequestManage alloc] init];
                     repayRequest.targetVC = self;
-                    repayRequest.isP2pView = YES;
+                    repayRequest.isPopRoot = YES;
                     [repayRequest repayRequest];
-                    
                 }else{
-                
                     LoanMoneyViewController *controller;
                     BOOL isHave = NO;
                     for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
                         if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
                             isHave = YES;
                             controller = (LoanMoneyViewController *)vc;
-                            controller.userStateModel.product_id = caseInfo.result.product_id_;
-                            controller.qryUserStatusModel = qryUserStatusModel;
-                            //                            [self.navigationController popToViewController:controller animated:YES];
+//                            controller.qryUserStatusModel = qryUserStatusModel;
+                            controller.applicationStatus = ComplianceRepayment;
                         }
                     }
                     if (isHave) {
                         [self.navigationController popToViewController:controller animated:YES];
                     }else{
-                        
                         LoanMoneyViewController *controller = [LoanMoneyViewController new];
-                        controller.userStateModel.product_id = caseInfo.result.product_id_;
-                        controller.qryUserStatusModel = qryUserStatusModel;
+//                        controller.qryUserStatusModel = qryUserStatusModel;
+                        controller.applicationStatus = ComplianceInLoan;
                         [self.navigationController pushViewController:controller animated:YES];
                     }
                 }
-               
             }
         }else{
-            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:qryUserStatusModel.msg];
         }
     } WithFaileBlock:^{
-        
     }];
-    
-    [complianceViewModel getUserStatus:caseInfo];
+    [complianceViewModel getUserStatus:applicationId];
 }
-
 
 -(void)dealloc
 {

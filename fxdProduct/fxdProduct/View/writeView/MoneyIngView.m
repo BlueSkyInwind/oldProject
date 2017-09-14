@@ -21,14 +21,14 @@
 - (YYLabel *)agreeMentLabel{
     if (_agreeMentLabel == nil) {
         _agreeMentLabel = [YYLabel new];
-        if (UI_IS_IPHONE5) {
-            [self.agreeMentView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.bottom.equalTo(self.repayBtnView.mas_top).offset(10);
-            }];
-        }
+//        if (UI_IS_IPHONE5) {
+//            [self.agreeMentView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.bottom.equalTo(self.repayBtnView.mas_top).offset(10);
+//            }];
+//        }
         _agreeMentLabel.textVerticalAlignment = YYTextVerticalAlignmentCenter;
         _agreeMentLabel.numberOfLines = 0;
-        _agreeMentLabel.font = [UIFont systemFontOfSize:18];
+        _agreeMentLabel.font = [UIFont systemFontOfSize:12];
         [self.agreeMentView addSubview:_agreeMentLabel];
         [_agreeMentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(_agreeMentView.mas_height);
@@ -39,5 +39,27 @@
     }
     return _agreeMentLabel;
 }
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if(!UI_IS_IPHONE5){
+        CGRect rect = _overdueFeeLabel.frame;
+        rect.origin.y=rect.origin.y-10;
+        _overdueFeeLabel.frame=rect;
+        
+        CGRect rect1 = _agreementBtn.frame;
+        rect1.origin.y=rect1.origin.y+10;
+        _agreementBtn.frame=rect1;
+        
+        CGRect rect2 = _agreeMentView.frame;
+        rect2.origin.y=rect2.origin.y+10;
+        _agreeMentView.frame=rect2;
+        
+        [self setNeedsLayout];
+    }
+}
+
 
 @end

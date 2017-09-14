@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "DrawingsInfoModel.h"
 @class BankModel,UserStateModel;
 
 @interface BankCardViewController : BaseViewController
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) NSString *flagString;
 
 @property (nonatomic, strong) NSString *bankMobile;
+@property (nonatomic, strong)NSMutableArray *bankArray;
 @property (nonatomic, strong)BankModel *bankModel;
 
 @property (weak, nonatomic) IBOutlet UIButton *agreeBtn;
@@ -31,8 +33,8 @@
 
 @property (nonatomic, strong) UserStateModel *userStateModel;
 
-@property (nonatomic,assign)BOOL isP2P;
+@property (nonatomic, strong) DrawingsInfoModel * drawingsInfoModel;
 
-@property (nonatomic, strong) NSDictionary * uploadP2PUserInfo;
+
 
 @end

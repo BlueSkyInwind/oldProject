@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewModel.h"
-
+#import "HomeParam.h"
 @implementation HomeViewModel
 
 
@@ -35,21 +35,6 @@
 }
 
 
--(void)fetchLoanRecord{
-    
-    [[FXDNetWorkManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanRecord_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
-
-
 
 -(void)fetchLoanProcess{
     
@@ -65,39 +50,26 @@
     }];
 }
 
-
-@end
-
-
-
-@implementation BannerViewModel
-
--(void)fetchBannerInfo{
+-(void)homeDataRequest{
     
-    HomeBannerParamModel * homeBannerParamModel = [[HomeBannerParamModel alloc]init];
-    homeBannerParamModel.plate_ = @"1";
-    homeBannerParamModel.position_ = @"1";
-    homeBannerParamModel.channel_ = PLATFORM;
-    
-    NSDictionary * paramDic  = [homeBannerParamModel toDictionary];
-    [self postBannerParam:paramDic];
-}
-
--(void)postBannerParam:(NSDictionary *)paramDic{
-    
-    [[FXDNetWorkManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_topBanner_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    HomeParam * homeParam = [[HomeParam alloc]init];
+//    homeParam.channel = PLATFORM;
+    NSDictionary * paramDic = [homeParam toDictionary];
+    //http://192.168.12.109:8005/apigw/client/summary?
+    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_HomeState_url] isNeedNetStatus:false parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if (self.returnBlock) {
             self.returnBlock(object);
         }
     } failure:^(EnumServerStatus status, id object) {
         if (self.faileBlock) {
-            [self faileBlock];
+            self.faileBlock();
         }
     }];
 }
 
 @end
+
 
 
 @implementation ProductListViewModel
@@ -129,36 +101,9 @@
 @end
 
 
-@implementation PopViewModel
 
--(void)fetchPopViewInfo{
-    
-    HomePopParam * homePopParam = [[HomePopParam alloc]init];
-    homePopParam.channel_ = PLATFORM;
-    homePopParam.plate_ = @"1";
-    homePopParam.redpacket_from_ = @"1";
-    
-    NSDictionary *paramDic =  [homePopParam toDictionary];
-    [self postPopviewParam:paramDic];
 
-}
 
--(void)postPopviewParam:(NSDictionary *)paramDic{
-    
-    [[FXDNetWorkManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_adv_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
-
-@end
 
 
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,43 +15,67 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfp-B7-zbJ" userLabel="Viewcode">
-                        <rect key="frame" x="18" y="7" width="68" height="55"/>
+                        <rect key="frame" x="18" y="7" width="121" height="55"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="区号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j2t-wS-pQY">
-                                <rect key="frame" x="8" y="0.0" width="60" height="55"/>
+                                <rect key="frame" x="45" y="0.0" width="71" height="55"/>
                                 <color key="textColor" red="0.0" green="0.64167815446853638" blue="0.93270629644393921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="区号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk2-4v-lyB">
+                                <rect key="frame" x="0.0" y="0.0" width="35" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="CAh-u9-ySh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="j2t-wS-pQY" firstAttribute="top" secondItem="qfp-B7-zbJ" secondAttribute="top" id="55c-gT-3Sw"/>
-                            <constraint firstAttribute="width" constant="68" id="fWM-K1-Dpe"/>
+                            <constraint firstItem="j2t-wS-pQY" firstAttribute="leading" secondItem="dk2-4v-lyB" secondAttribute="trailing" constant="10" id="I0v-3E-sAp"/>
+                            <constraint firstItem="dk2-4v-lyB" firstAttribute="leading" secondItem="qfp-B7-zbJ" secondAttribute="leading" id="KfD-F2-xRh"/>
+                            <constraint firstAttribute="bottom" secondItem="dk2-4v-lyB" secondAttribute="bottom" id="QCA-cf-vp6"/>
+                            <constraint firstAttribute="width" constant="121" id="fWM-K1-Dpe"/>
+                            <constraint firstItem="dk2-4v-lyB" firstAttribute="top" secondItem="qfp-B7-zbJ" secondAttribute="top" id="gHO-5y-txN"/>
                             <constraint firstAttribute="bottom" secondItem="j2t-wS-pQY" secondAttribute="bottom" id="pSv-q1-O8H"/>
-                            <constraint firstItem="j2t-wS-pQY" firstAttribute="leading" secondItem="qfp-B7-zbJ" secondAttribute="leading" constant="8" id="tar-jh-sMx"/>
-                            <constraint firstAttribute="trailing" secondItem="j2t-wS-pQY" secondAttribute="trailing" id="ykA-hF-FL9"/>
+                            <constraint firstAttribute="trailing" secondItem="j2t-wS-pQY" secondAttribute="trailing" constant="5" id="ykA-hF-FL9"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOg-JM-vQ9">
-                        <rect key="frame" x="104" y="7" width="253" height="55"/>
+                        <rect key="frame" x="147" y="7" width="210" height="55"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="单位固话" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ss5-zo-Ia8">
-                                <rect key="frame" x="8" y="0.0" width="245" height="55"/>
+                                <rect key="frame" x="90" y="0.0" width="115" height="55"/>
                                 <color key="textColor" red="0.0" green="0.64167815449999999" blue="0.93270629640000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单位固话" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRs-F8-rUs">
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="ndg-KO-MEs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ss5-zo-Ia8" firstAttribute="leading" secondItem="NOg-JM-vQ9" secondAttribute="leading" constant="8" id="bf2-WL-Jmi"/>
+                            <constraint firstItem="RRs-F8-rUs" firstAttribute="leading" secondItem="NOg-JM-vQ9" secondAttribute="leading" id="6TH-vI-NU8"/>
+                            <constraint firstAttribute="bottom" secondItem="RRs-F8-rUs" secondAttribute="bottom" id="Dik-cA-Tqp"/>
+                            <constraint firstItem="RRs-F8-rUs" firstAttribute="top" secondItem="NOg-JM-vQ9" secondAttribute="top" id="SKv-9D-mnG"/>
                             <constraint firstItem="ss5-zo-Ia8" firstAttribute="top" secondItem="NOg-JM-vQ9" secondAttribute="top" id="mdb-bc-qdP"/>
-                            <constraint firstAttribute="trailing" secondItem="ss5-zo-Ia8" secondAttribute="trailing" id="pUH-KJ-fKS"/>
+                            <constraint firstAttribute="trailing" secondItem="ss5-zo-Ia8" secondAttribute="trailing" constant="5" id="pUH-KJ-fKS"/>
+                            <constraint firstItem="ss5-zo-Ia8" firstAttribute="leading" secondItem="RRs-F8-rUs" secondAttribute="trailing" constant="10" id="saa-ad-6TL"/>
                             <constraint firstAttribute="bottom" secondItem="ss5-zo-Ia8" secondAttribute="bottom" id="z5a-hf-iV1"/>
                         </constraints>
                     </view>
@@ -63,7 +87,7 @@
                     <constraint firstAttribute="bottom" secondItem="NOg-JM-vQ9" secondAttribute="bottom" constant="7" id="c5N-OO-cHY"/>
                     <constraint firstAttribute="bottom" secondItem="qfp-B7-zbJ" secondAttribute="bottom" constant="7" id="pIv-Mf-k2H"/>
                     <constraint firstItem="qfp-B7-zbJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="rXO-qG-czo"/>
-                    <constraint firstItem="NOg-JM-vQ9" firstAttribute="leading" secondItem="qfp-B7-zbJ" secondAttribute="trailing" constant="18" id="yOj-rZ-XJa"/>
+                    <constraint firstItem="NOg-JM-vQ9" firstAttribute="leading" secondItem="qfp-B7-zbJ" secondAttribute="trailing" constant="8" id="yOj-rZ-XJa"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -72,6 +96,7 @@
                 <outlet property="viewCode" destination="qfp-B7-zbJ" id="d8O-oV-nAl"/>
                 <outlet property="viewTel" destination="NOg-JM-vQ9" id="TFP-Wt-Nwu"/>
             </connections>
+            <point key="canvasLocation" x="35.5" y="54"/>
         </tableViewCell>
     </objects>
 </document>

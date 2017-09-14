@@ -57,9 +57,9 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (UI_IS_IPHONE6P) {
-        return 70;
-    }else{
         return 60;
+    }else{
+        return 46;
     }
     
 }
@@ -76,21 +76,27 @@
     }
     switch (indexPath.row) {
         case 0:{
+            cell.topLineView.hidden = NO;
             cell.titleLabel.text = tiitleArr[indexPath.row];
             [cell updateTitleWidth:tiitleArr[indexPath.row]];
             cell.contentTextField.placeholder = @"请输入当前的登录密码";
         }
             break;
         case 1:{
+            cell.topLineView.hidden = YES;
             cell.titleLabel.text = tiitleArr[indexPath.row];
             [cell updateTitleWidth:tiitleArr[indexPath.row]];
             cell.contentTextField.placeholder = @"6-12位字母、数字";
         }
             break;
         case 2:{
+            cell.topLineView.hidden = YES;
             cell.titleLabel.text = tiitleArr[indexPath.row];
             [cell updateTitleWidth:tiitleArr[indexPath.row]];
             cell.contentTextField.placeholder = @"6-12位字母、数字";
+            [cell.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(cell.backView.mas_left).offset(0);
+            }];
         }
             break;
             
@@ -123,7 +129,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return 20;
+    return 30;
 }
 
 -(void)saveChangePassword:(id)sender{
@@ -139,6 +145,11 @@
         if ([model.flag isEqualToString:@"0000"]) {
             
             [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:model.msg];
+            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
+            dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            });
             [weakSelf presentLogin];
         }else{
             NSLog(@"%@",model.msg);

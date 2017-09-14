@@ -10,7 +10,7 @@
 
 @interface HomePopParam : JSONModel
 
-@property (strong , nonatomic)NSString *channel_;
+@property (strong , nonatomic)NSString *channel;
 @property (strong , nonatomic)NSString *plate_;
 @property (strong , nonatomic)NSString *redpacket_from_;
 

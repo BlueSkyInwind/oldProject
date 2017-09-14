@@ -14,6 +14,8 @@
 @property (nonatomic,strong)UILabel * titleLabel;
 @property (nonatomic,strong)UIView * lineView;
 @property (nonatomic,strong)UITextField * contentTextField;
+@property (nonatomic,strong)UIView * topLineView;
+
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier;
 

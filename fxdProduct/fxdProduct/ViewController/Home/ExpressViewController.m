@@ -50,7 +50,6 @@
         }];
     }
     
-    
     [self.webView loadHTMLString:htmlStr baseURL:nil];
 }
 
@@ -60,7 +59,6 @@
  @return 返回协议内容
  */
 -(void)operatorsAgreementRquestContent:(void(^)(NSString *resultStr))content{
-    
     
     NSDictionary *paramDic;
     if ([_productId isEqualToString:@"operInfo"]) {

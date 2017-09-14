@@ -22,8 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:19],NSForegroundColorAttributeName:[UIColor whiteColor]};
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:19],NSForegroundColorAttributeName:[UIColor blackColor]};
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.translucent = true;
 }
 
@@ -56,18 +57,14 @@
 - (void)addBackItem
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    
     UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [btn setImage:img forState:UIControlStateNormal];
     btn.frame = CGRectMake(0, 0, 45, 44);
     [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
-    
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    
     //    修改距离,距离边缘的
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = -15;
-    
     self.navigationItem.leftBarButtonItems = @[spaceItem,item];
 //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
 }
@@ -97,7 +94,7 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 - (void)dealloc

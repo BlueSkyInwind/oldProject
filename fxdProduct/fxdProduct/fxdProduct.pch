@@ -47,6 +47,24 @@
 #import "YYText.h"
 #import "UIDevice+YYAdd.h"
 #import <JSONModel/JSONModel.h>
+#import "BaseResultModel.h"
+#import "FXDWebViewController.h"
+
+#ifdef FXD_Environment_Mode
+#if FXD_Environment_Mode == 0
+
+#import "fxdProduct-Swift.h"
+
+#elif FXD_Environment_Mode == 1
+
+#import "fxdProductDev-Swift.h"
+
+#else
+#warning "未匹配环境"
+#endif
+#endif
+
+
 #endif
 
 #endif
