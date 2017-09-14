@@ -94,6 +94,9 @@ class CheckingViewController: UIViewController {
                     break
                 }
                 
+            }else{
+            
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) { 
             

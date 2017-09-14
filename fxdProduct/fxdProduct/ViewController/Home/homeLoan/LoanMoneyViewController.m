@@ -275,12 +275,19 @@
                               if ([_repayModel.productId isEqualToString:SalaryLoan]||[_repayModel.productId isEqualToString:WhiteCollarLoan]) {
                                   paramArray = @[_repayModel.applyId,_repayModel.productId,@"2",_repayModel.duration];
                               }
+                              
+                              /**
+                              if ([_repayModel.productId isEqualToString:RapidLoan]||[_repayModel.productId isEqualToString:DeriveRapidLoan]) {
+                                  paramArray = @[_repayModel.applyId,_repayModel.productId,@"2",@1];
+                              }
+                              */
                               if ([_repayModel.productId isEqualToString:RapidLoan]) {
                                   paramArray = @[_repayModel.applyId,_repayModel.productId,@"2",@2];
                               }
                               if ([_repayModel.productId isEqualToString:DeriveRapidLoan]) {
                                   paramArray = @[_repayModel.applyId,_repayModel.productId,@"2",@1];
                               }
+                              
                               LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
                               [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
                                   if ([[returnValue objectForKey:@"flag"] isEqualToString:@"0000"]) {
@@ -362,18 +369,30 @@
                      @"protocol_type_":@"7",
                      @"periods_":_repayModel.duration};
     }
+    
+    /**
+    if ([_repayModel.productId isEqualToString:RapidLoan]||[_repayModel.productId isEqualToString:DeriveRapidLoan]) {
+        paramDic = @{@"apply_id_":_repayModel.applyId,
+                     @"product_id_":_repayModel.productId,
+                     @"protocol_type_":@"7",
+                     @"periods_":@1};
+    }
+  */
+    
     if ([_repayModel.productId isEqualToString:RapidLoan]) {
         paramDic = @{@"apply_id_":_repayModel.applyId,
                      @"product_id_":_repayModel.productId,
                      @"protocol_type_":@"7",
                      @"periods_":@2};
     }
+    
     if ( [_repayModel.productId isEqualToString:DeriveRapidLoan]) {
         paramDic = @{@"apply_id_":_repayModel.applyId,
                      @"product_id_":_repayModel.productId,
                      @"protocol_type_":@"7",
                      @"periods_":@1};
     }
+    
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
