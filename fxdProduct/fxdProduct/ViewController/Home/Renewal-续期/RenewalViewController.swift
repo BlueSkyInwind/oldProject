@@ -91,26 +91,24 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
              let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
                 
-                let renewalModel = try! RenewalModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                let renewalModel = try? RenewalModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 
-                let str=NSString(string:renewalModel.extensionFee!)
+                let str=NSString(string:(renewalModel?.extensionFee!)!)
                 let number = NSNumber.init(value: str.floatValue)
                 self.headerView?.moneyLabel?.fn_setNumber(number, format: "%.0f")
                 
-                self.contentArr.append(renewalModel.overdueAmount!)
-                self.contentArr.append(renewalModel.balanceFee!)
-                self.contentArr.append(renewalModel.shallPayFee!)
-                
+                self.contentArr.append((renewalModel?.overdueAmount!)!)
+                self.contentArr.append((renewalModel?.balanceFee!)!)
+                self.contentArr.append((renewalModel?.shallPayFee!)!)
                 self.renewalTableView.reloadData()
+                
             }else{
-            
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) {
             
         }
         repayMentViewModel.getCurrentRenewal(withStagingId: stagingId)
-
     }
     func addBackItem(){
     
