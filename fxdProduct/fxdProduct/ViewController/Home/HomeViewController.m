@@ -790,7 +790,6 @@
                     break;
             }
         }else{
-        
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{

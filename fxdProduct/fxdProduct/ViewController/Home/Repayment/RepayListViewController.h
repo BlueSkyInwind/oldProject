@@ -29,7 +29,6 @@
 //节省金额
 @property (weak, nonatomic) IBOutlet UILabel *saveUpLabel;
 
-
 @property (nonatomic,strong)NSString * platform_type;
 @property (nonatomic,strong)NSString * applicationId;
 @property (nonatomic,strong)NSString * product_id;

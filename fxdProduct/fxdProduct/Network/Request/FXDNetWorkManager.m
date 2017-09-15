@@ -121,6 +121,20 @@
             resultDic = [NSDictionary dictionaryWithDictionary:responseObject];
             DLog(@"response json --- %@",resultDic);
         }
+        if ([[resultDic objectForKey:@"errCode"] isEqualToString:@"3"] ) {
+            UIViewController *vc = [self getCurrentVC];
+            [vc.navigationController popToRootViewControllerAnimated:YES];
+            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[resultDic objectForKey:@"friendErrMsg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+                if (index == 1) {
+                    [EmptyUserData EmptyData];
+                    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+                    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
+                    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
+                        [_waitView removeFromSuperview];
+                    }];
+                }
+            }];
+        }
         finished(Enum_SUCCESS,resultDic);
          [_waitView removeFromSuperview];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
@@ -617,7 +631,6 @@
                     [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
                         if (index == 1) {
                             [EmptyUserData EmptyData];
-                            
                             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
@@ -704,6 +717,20 @@
             NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
             NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             DLog(@"response json --- %@",jsonStr);
+        }
+        if ([[resultDic objectForKey:@"errCode"] isEqualToString:@"3"] ) {
+            UIViewController *vc = [self getCurrentVC];
+            [vc.navigationController popToRootViewControllerAnimated:YES];
+            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[resultDic objectForKey:@"friendErrMsg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+                if (index == 1) {
+                    [EmptyUserData EmptyData];
+                    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+                    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
+                    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
+                        [_waitView removeFromSuperview];
+                    }];
+                }
+            }];
         }
         finished(Enum_SUCCESS,resultDic);
         [_waitView removeFromSuperview];
