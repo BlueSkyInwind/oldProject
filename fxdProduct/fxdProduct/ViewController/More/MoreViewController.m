@@ -39,7 +39,6 @@
     testView *_alertView;
 }
 @property (weak, nonatomic) IBOutlet UITableView *MyTabView;
-
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
 @end
@@ -52,7 +51,6 @@
     [super viewWillAppear:animated];
     [_MyTabView reloadData];
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -158,7 +156,6 @@
             return 0.1f;
         }
     }
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
