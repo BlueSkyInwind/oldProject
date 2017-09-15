@@ -81,7 +81,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSMutableArray<NSNumber *> *_datalist;
     BankModel *_bankCardModel;
     NSMutableArray *_supportBankListArr;
-    UserCardResult *_userCardsModel;
+//    UserCardResult *_userCardsModel;
     CardInfo *_selectCard;
     NSInteger userSelectIndex;
     PromoteType _promoteType;
@@ -1101,7 +1101,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
-        
+        [self.scrollView.mj_header endRefreshing];
     }];
     [checkVM obtainDrawingInformation];
 }
