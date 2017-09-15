@@ -730,7 +730,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 }
             }
         }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.msg];
         }
     } WithFaileBlock:^{
         
@@ -1085,6 +1085,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     CheckViewModel * checkVM = [[CheckViewModel alloc]init];
     [checkVM setBlockWithReturnBlock:^(id returnValue) {
+        [self.scrollView.mj_header endRefreshing];
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
             //删除视图
@@ -1173,7 +1174,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
     /**
     if ([_drawingsInfoModel.productId isEqualToString:RapidLoan]||[_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
-        paramDic = @{@"apply_id_":_drawingsInfoModel.applicationId,
+        paramDic = @{ @"apply_id_":_drawingsInfoModel.applicationId,
                      @"product_id_":_drawingsInfoModel.productId,
                      @"protocol_type_":@"6",
                      @"periods_":@1};

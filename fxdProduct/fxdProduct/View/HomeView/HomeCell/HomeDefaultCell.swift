@@ -151,32 +151,46 @@ extension HomeDefaultCell{
         let leftLabel = UILabel()
         leftLabel.text = "500元"
         leftLabel.font = UIFont.systemFont(ofSize: 15)
+        leftLabel.textAlignment = .left
         leftLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
         defaultBgImage?.addSubview(leftLabel)
     
         leftLabel.snp.makeConstraints { (make) in
             
             make.top.equalTo(slider.snp.bottom).offset(-10)
-            make.left.equalTo((defaultBgImage?.snp.left)!).offset(20)
+            make.left.equalTo((defaultBgImage?.snp.left)!).offset(30)
             make.height.equalTo(15)
         }
+        
+        
         
         let rightLabel = UILabel()
         rightLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
         rightLabel.text = "3000元"
+        rightLabel.textAlignment = .right
         rightLabel.font = UIFont.systemFont(ofSize: 15)
         defaultBgImage?.addSubview(rightLabel)
         rightLabel.snp.makeConstraints { (make) in
             make.top.equalTo(slider.snp.bottom).offset(-10)
-            make.right.equalTo((defaultBgImage?.snp.right)!).offset(-20)
+            make.right.equalTo((defaultBgImage?.snp.right)!).offset(-30)
             make.height.equalTo(15)
+        }
+        
+        if UI_IS_IPONE5{
+            
+            leftLabel.snp.updateConstraints({ (make) in
+                make.top.equalTo(slider.snp.bottom).offset(0)
+            })
+            
+            rightLabel.snp.updateConstraints({ (make) in
+                make.top.equalTo(slider.snp.bottom).offset(0)
+            })
         }
         
         let applyBtn = UIButton()
         applyBtn.setTitle("立即申请", for: .normal)
         applyBtn.setTitleColor(UIColor.white, for: .normal)
         applyBtn.setBackgroundImage(UIImage(named:"icon_anniu"), for: .normal)
-//        applyBtn.backgroundColor = UIColor.clear
         applyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         applyBtn.layer.cornerRadius = 5.0
         applyBtn.addTarget(self, action: #selector(applyBtnClick), for: .touchUpInside)
@@ -188,6 +202,13 @@ extension HomeDefaultCell{
             make.height.equalTo(50)
         }
         
+        if UI_IS_IPONE5{
+        
+            applyBtn.snp.updateConstraints({ (make) in
+                
+                make.bottom.equalTo((defaultBgImage?.snp.bottom)!).offset(-50)
+            })
+        }
         
         let bottomLabel = UILabel()
         bottomLabel.text = "最快2分钟审核完成"
