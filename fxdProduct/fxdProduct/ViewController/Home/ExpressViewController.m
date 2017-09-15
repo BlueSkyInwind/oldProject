@@ -60,7 +60,6 @@
  */
 -(void)operatorsAgreementRquestContent:(void(^)(NSString *resultStr))content{
     
-    
     NSDictionary *paramDic;
     if ([_productId isEqualToString:@"operInfo"]) {
         

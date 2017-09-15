@@ -181,8 +181,8 @@
     
     return ss;
 }
-//6*** **** **** ***9 782
 
+//6*** **** **** ***9 782
 #pragma mark-----UItableview--delegete---
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -212,7 +212,6 @@
     {
         cell.cardTypeFlag=1;
         cell.btnEdit.hidden=YES;
-        
     }
     cell.selected = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

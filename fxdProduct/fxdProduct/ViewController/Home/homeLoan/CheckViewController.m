@@ -15,7 +15,6 @@
 #import <ShareSDKUI/ShareSDKUI.h>
 #import "HomeViewModel.h"
 #import "CheckInfoView.h"
-#import "EnterAgainController.h"
 #import "UserCardResult.h"
 #import "MoxieSDK.h"
 #import "PayViewController.h"
@@ -1194,7 +1193,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"periods_":@1};
     }
     
-    
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
@@ -1222,20 +1220,19 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"protocol_type_":@"2",
                      @"periods_":_userSelectNum};
     }
-    if ([_drawingsInfoModel.productId isEqualToString:RapidLoan]||[_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
+    if ([_drawingsInfoModel.productId isEqualToString:RapidLoan]) {
         paramDic = @{@"apply_id_":_drawingsInfoModel.applicationId,
                      @"product_id_":_drawingsInfoModel.productId,
                      @"protocol_type_":@"2",
-                     @"periods_":@1};
+                     @"periods_":@2};
     }
-    /**
+    
     if ([_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
         paramDic = @{@"apply_id_":_drawingsInfoModel.applicationId,
                      @"product_id_":_drawingsInfoModel.productId,
                      @"protocol_type_":@"2",
                      @"periods_":@1};
     }
-     */
     [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];

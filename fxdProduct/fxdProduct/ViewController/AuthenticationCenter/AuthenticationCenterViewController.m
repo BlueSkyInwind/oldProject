@@ -632,7 +632,6 @@
         NSLog(@"任务失败");
     }
 }
-
 -(void)editSDKInfo{
     [MoxieSDK shared].navigationController.navigationBar.translucent = YES;
     [MoxieSDK shared].backImageName = @"return";
@@ -769,7 +768,6 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:custom_model.msg];
         }
     } WithFaileBlock:^{
-        
     }];
     [customerInfo fatchCustomBaseInfo:nil];
 }
