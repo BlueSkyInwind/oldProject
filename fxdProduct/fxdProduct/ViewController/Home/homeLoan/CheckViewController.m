@@ -417,7 +417,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         [checkSuccess.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(checkSuccess.bottomBtnView.mas_right).offset(-21);
             make.top.equalTo(checkSuccess.bottomBtnView.mas_top).offset(0);
-            make.height.equalTo(@66);
+            make.height.equalTo(@50);
             if (UI_IS_IPHONE5) {
                 make.height.equalTo(@44);
             }

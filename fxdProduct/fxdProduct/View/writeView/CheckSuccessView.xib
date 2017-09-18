@@ -109,9 +109,10 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7t-QR-oKd">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借款期限:14天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scX-Qs-WOB">
-                                    <rect key="frame" x="0.0" y="5" width="375" height="20"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="借款期限:14天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scX-Qs-WOB">
+                                    <rect key="frame" x="123" y="5" width="130" height="20"/>
                                     <constraints>
+                                        <constraint firstAttribute="width" constant="129" id="f7u-PQ-ue0"/>
                                         <constraint firstAttribute="height" constant="20" id="hCM-Di-hjK"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -119,8 +120,9 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到期还款:1000元" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zI-XD-HtS">
-                                    <rect key="frame" x="0.0" y="30" width="375" height="20"/>
+                                    <rect key="frame" x="123" y="30" width="130" height="20"/>
                                     <constraints>
+                                        <constraint firstAttribute="width" constant="130" id="Ud0-Hu-SRZ"/>
                                         <constraint firstAttribute="height" constant="20" id="zt9-hj-YbZ"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -131,10 +133,8 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="5zI-XD-HtS" firstAttribute="top" secondItem="scX-Qs-WOB" secondAttribute="bottom" constant="5" id="CeH-S3-IQr"/>
-                                <constraint firstItem="5zI-XD-HtS" firstAttribute="leading" secondItem="a7t-QR-oKd" secondAttribute="leading" id="QQm-7c-sRL"/>
-                                <constraint firstAttribute="trailing" secondItem="scX-Qs-WOB" secondAttribute="trailing" id="QyD-1w-DVT"/>
-                                <constraint firstAttribute="trailing" secondItem="5zI-XD-HtS" secondAttribute="trailing" id="Xo6-ct-gWU"/>
-                                <constraint firstItem="scX-Qs-WOB" firstAttribute="leading" secondItem="a7t-QR-oKd" secondAttribute="leading" id="kIL-gE-2UG"/>
+                                <constraint firstItem="scX-Qs-WOB" firstAttribute="centerX" secondItem="a7t-QR-oKd" secondAttribute="centerX" id="CoI-yp-IkU"/>
+                                <constraint firstItem="5zI-XD-HtS" firstAttribute="centerX" secondItem="a7t-QR-oKd" secondAttribute="centerX" id="siJ-vW-y5H"/>
                                 <constraint firstItem="scX-Qs-WOB" firstAttribute="top" secondItem="a7t-QR-oKd" secondAttribute="top" constant="5" id="yA6-1t-t2c"/>
                             </constraints>
                         </view>

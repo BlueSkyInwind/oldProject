@@ -45,6 +45,7 @@ class CheckingViewController: UIViewController {
         
     }
     func popBack(){
+
         self.navigationController?.popViewController(animated: true)
     }
 
