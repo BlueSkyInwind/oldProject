@@ -144,7 +144,7 @@
 //    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView"];
 
     _evaluationBtn = [[UIButton alloc]init];
-    [_evaluationBtn setTitle:@"资料重新测评" forState:UIControlStateNormal];
+    [_evaluationBtn setTitle:@"资料审核" forState:UIControlStateNormal];
     [_evaluationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _evaluationBtn.backgroundColor = UI_MAIN_COLOR;
     [_evaluationBtn addTarget:self action:@selector(bottomClick) forControlEvents:UIControlEventTouchUpInside];
