@@ -104,29 +104,25 @@
     return bCell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
-
         case 0:
         {
-    
 //            CheckingViewController *repayRecord=[[CheckingViewController alloc]init];
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:YES];
         }
             break;
-        case 1:{
+        case 1:
+        {
             MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
             [self.navigationController pushViewController:myCrad animated:YES];
         }
             break;
         case 2:
         {
-//            UserDataViewController *userDataVC = [[UserDataViewController alloc]initWithNibName:@"UserDataViewController" bundle:nil];
-//            [self.navigationController pushViewController:userDataVC animated:YES];
             InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
             [self.navigationController pushViewController:invitationVC animated:true];
         }
@@ -139,10 +135,8 @@
             break;
         case 4:
         {
-            
             MoreViewController *ticket=[[MoreViewController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
-            
         }
             break;
         default:

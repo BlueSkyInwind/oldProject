@@ -133,7 +133,7 @@
     }];
     [customBaseViewModel fatchCustomBaseInfo:nil];
 }
-                                  
+
 -(void)uploadUserRegisterID:(NSString *)registerID{
     //@"http://192.168.12.252:8012/excenter/jiguang/register"
     NSDictionary * paramDic  = @{@"registerId":registerID};
@@ -143,6 +143,17 @@
         DLog(@"%@",object);
     }];
 }
+
+-(void)deleteUserRegisterID{
+    
+    [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_loginOutDeleteRegisterId_url] isNeedNetStatus:false parameters:nil finished:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+    } failure:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+    }];
+    
+}
+
 
 
 @end

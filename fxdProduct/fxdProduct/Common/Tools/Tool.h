@@ -78,4 +78,30 @@
 + (void)showMessage:(NSString *)msg vc:(UIViewController *)vc;
 
 
+ /**
+ 启动粘贴板
+
+ @param copyStr 拷贝内容
+ @param vc 目标controller
+ @param str 提示内容
+ */
++(void)ClipboardOfCopy:(NSString *)copyStr VC:(UIViewController *)vc prompt:(NSString *)str;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end

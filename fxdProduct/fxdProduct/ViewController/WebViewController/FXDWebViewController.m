@@ -12,6 +12,7 @@
 #import <ShareSDKUI/ShareSDKUI.h>
 #import "UserDataViewController.h"
 #import "RTRootNavigationController.h"
+#import "JSAndOCInteraction.h"
 @interface FXDWebViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate>
 {
     UIProgressView *progressView;
@@ -36,7 +37,7 @@
     // 添加JS到HTML中，可以直接在JS中调用添加的JS方法
     //    WKUserScript *script = [[WKUserScript alloc] initWithSource:@"function showAlert() { alert('在载入webview时通过OC注入的JS方法'); }" injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:true];
     //    [config.userContentController addUserScript:script];
-//     w÷indow.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
+//     window.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
     [config.userContentController addScriptMessageHandler:self name:@"jsToNative"];
     _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
     _webView.navigationDelegate = self;
@@ -54,7 +55,6 @@
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
         // NSString * str = @"https://fintech.chinazyjr.com/p2p/http/huifush/toBosAcctActivate.jhtml?page_type_=1&ret_url_=https://h5.faxindai.com:8028/fxd-h5/page/case/app_transition.html&from_mobile_=15241892226";
-
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
     
@@ -130,11 +130,70 @@
     if ([message.name isEqualToString:@"jsToNative"]) {
         NSDictionary *dic = message.body;
         DLog(@"%@",dic);
-        //JS交互点击事件
+        //JS交互点击返回事件
         if ([[dic objectForKey:@"functionName"] isEqualToString:@"mxBack"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
         
+        //JS交互分享事件  FXDShare
+        /*
+        {
+            "FXDShare" : {
+                "shareContent" : "djeiojgffejfoewk",
+                "shareUrl" : "djeiojgffejfoewk"
+            }
+        }
+         */
+        if ([[dic allKeys] containsObject:@"FXDShare"]) {
+            NSDictionary * resultDic = dic[@"FXDShare"];
+            NSString * shareContent =  resultDic[@"shareContent"];
+            NSString * shareUrl =  resultDic[@"shareUrl"];
+            [[JSAndOCInteraction sharedInteraction] shareContent:self.view shareContent:shareContent UrlStr:shareUrl];
+        }
+        
+        //JS交互前往某个页面  FXDClipboardOfCopy
+        /*
+        {
+            "FXDClipboardOfCopy" : {
+                "copyContent" : "djeiojgffejfoewk",
+            }
+        }
+         */
+        if ([[dic allKeys] containsObject:@"FXDClipboardOfCopy"]) {
+            NSDictionary * resultDic = dic[@"FXDClipboardOfCopy"];
+            NSString * copyContent =  resultDic[@"copyContent"];
+            [[JSAndOCInteraction sharedInteraction] ClipboardOfCopy:copyContent VC:self prompt:@"复制成功"];
+        }
+        
+        //JS交互复制内容到剪贴板  FXDPushVC
+        /*
+        {
+            "FXDPushVC" : {
+                "viewControllerName" : "djeiojgffejfoewk",
+            }
+        }
+         */
+        if ([[dic allKeys] containsObject:@"FXDPushVC"]) {
+            NSDictionary * resultDic = dic[@"FXDPushVC"];
+            NSString * viewControllerName =  resultDic[@"viewControllerName"];
+            [[JSAndOCInteraction sharedInteraction] pushViewController:viewControllerName VC:self];
+        }
+        
+        //JS交互保存图片到本地  FXDSaveImage
+        /*
+        {
+            "FXDSaveImage" : {
+                "saveImageUrl" : "djeiojgffejfoewk",
+            }
+        }
+         */
+        if ([[dic allKeys] containsObject:@"FXDSaveImage"]) {
+            NSDictionary * resultDic = dic[@"FXDSaveImage"];
+            NSString * saveImageUrl =  resultDic[@"saveImageUrl"];
+            [[JSAndOCInteraction sharedInteraction] savePictureToAlbum:saveImageUrl VC:self];
+        }
+        
+        //支付宝
         @try {
             //三方支付点击结果反馈   1、还款中 2、还款成功 3、还款失败  4、第三方未受理 5、h5支付异常
             if ([[dic allKeys] containsObject:@"payData"]) {
@@ -285,34 +344,6 @@
     }];
     [alertController addAction:action];
     [vc presentViewController:alertController animated:true completion:nil];
-}
--(void)shareContent:(UIView *)view
-{
-    NSArray *imageArr = @[[UIImage imageNamed:@"logo_60"]];
-    if (imageArr) {
-        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-        [shareParams SSDKSetupShareParamsByText:_shareContent
-                                         images:imageArr
-                                            url:[NSURL URLWithString:_urlStr]
-                                          title:@"发薪贷"
-                                           type:SSDKContentTypeAuto];
-        [shareParams SSDKEnableUseClientShare];
-        [ShareSDK showShareActionSheet:nil
-                                 items:nil
-                           shareParams:shareParams
-                   onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-                       switch (state) {
-                           case SSDKResponseStateSuccess:
-                               [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"分享成功"];
-                               break;
-                               
-                           case SSDKResponseStateFail:
-                               [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"分享失败"];
-                           default:
-                               break;
-                       }
-                   }];
-    }
 }
 
 - (void)deleteWebCache {

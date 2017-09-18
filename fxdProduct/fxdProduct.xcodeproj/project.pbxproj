@@ -526,6 +526,8 @@
 		63FF48541B6F06F7009E384C /* FindPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48521B6F06F7009E384C /* FindPassViewController.m */; };
 		63FF48581B6F15DB009E384C /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */; };
 		63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */; };
+		840911A21F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */; };
+		840911A31F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */; };
 		84117F561F60F6A700B7EAA9 /* LoadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */; };
 		84117F571F60F6A700B7EAA9 /* LoadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */; };
 		841BE5C61F177C4F00BABD04 /* UserLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */; };
@@ -2254,6 +2256,8 @@
 		63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarViewController.m; sourceTree = "<group>"; };
 		63FFFBEC1D86B285000E3C38 /* NSDictionary+NilSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NilSafe.h"; sourceTree = "<group>"; };
 		63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NilSafe.m"; sourceTree = "<group>"; };
+		840911A01F6F997E00DCDF03 /* JSAndOCInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAndOCInteraction.h; sourceTree = "<group>"; };
+		840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAndOCInteraction.m; sourceTree = "<group>"; };
 		84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadFailureView.swift; sourceTree = "<group>"; };
 		841BE5C41F177C4F00BABD04 /* UserLevelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLevelViewController.h; sourceTree = "<group>"; };
 		841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLevelViewController.m; sourceTree = "<group>"; };
@@ -4416,6 +4420,8 @@
 				63117FB61DFFC42600635BB3 /* ShareConfig.m */,
 				638A16841E5030D700AB8AB6 /* SetUpFMDevice.h */,
 				638A16851E5030D700AB8AB6 /* SetUpFMDevice.m */,
+				840911A01F6F997E00DCDF03 /* JSAndOCInteraction.h */,
+				840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */,
 				8499BF891F50231600F193F9 /* MXVerifyManager.swift */,
 				84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */,
 				CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */,
@@ -6204,6 +6210,7 @@
 				6379641F1CAD1BE0002A5910 /* LivenessSelfie.m in Sources */,
 				8473F1411F31CAA1005B4933 /* SupportBankList.m in Sources */,
 				63AD1D1A1BFC1AA400807877 /* MLBlackTransition.m in Sources */,
+				840911A21F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */,
 				63A24D2E1BE10F4A0036E8EF /* GetMoneyStateResult.m in Sources */,
 				634830F31CBB82C30005C4CD /* CustomerBaseInfoExt.m in Sources */,
 				63741E301D3CB8B200C0E2F8 /* PayMethodViewController.m in Sources */,
@@ -6620,6 +6627,7 @@
 				CC0DF9F81EA5B1090024841A /* UIViewController+KNSemiModal.m in Sources */,
 				CC0DF9F91EA5B1090024841A /* ContactClass.m in Sources */,
 				CC0DF9FB1EA5B1090024841A /* MyBottomView.mm in Sources */,
+				840911A31F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */,
 				CC0DF9FC1EA5B1090024841A /* CustomerCareerBaseClass.m in Sources */,
 				84ED5B6C1F4AC606004C0A59 /* SeniorCertificationView.m in Sources */,
 				CC0DF9FD1EA5B1090024841A /* Custom_BaseInfoExt.m in Sources */,
@@ -7045,7 +7053,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
 				);
 				INFOPLIST_FILE = fxdProduct/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7158,7 +7166,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
 				);
 				INFOPLIST_FILE = fxdProduct/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

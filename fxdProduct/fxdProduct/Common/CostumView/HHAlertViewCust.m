@@ -48,4 +48,10 @@
     }];
 }
 
+-(void)removeAlertView{
+    
+    [alertview removeFromSuperViewOnHide];
+    alertview = nil;
+}
+
 @end

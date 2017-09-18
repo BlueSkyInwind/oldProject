@@ -425,7 +425,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         [checkSuccess.sureBtn layoutIfNeeded];
         [checkSuccess.sureBtn updateConstraints];
     }
-    
     [self withdrawalsViewAgreement:drawingsInfo];
     
     //协议点击
@@ -442,7 +441,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     //协议分为合规  和发薪贷
     if ([drawingsInfo.platformType isEqualToString:@"0"]) {
-        
         attributeStr = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《借款协议》"];
         range = NSMakeRange(attributeStr.length - 6, 6);
     }else if([drawingsInfo.platformType isEqualToString:@"2"]){
