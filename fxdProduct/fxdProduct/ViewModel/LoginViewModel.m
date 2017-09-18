@@ -33,7 +33,7 @@
     if ([Utility sharedUtility].userInfo.clientId && ![[Utility sharedUtility].userInfo.clientId isEqualToString:@""]) {
         
         loginParamModel.mobile_phone_ = number;
-//        loginParamModel.password_ = @"UOaJcWCD8OWv01mr/VS4cQ==";
+//        loginParamModel.password_ = @"WsTFgPoSLjxYWwZl5v5V8g==";
         loginParamModel.password_ = [DES3Util encrypt:password];
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
@@ -45,7 +45,7 @@
     } else {
         
         loginParamModel.mobile_phone_ = number;
-//        loginParamModel.password_ = @"UOaJcWCD8OWv01mr/VS4cQ==";;
+//        loginParamModel.password_ = @"WsTFgPoSLjxYWwZl5v5V8g==";;
         loginParamModel.password_ = [DES3Util encrypt:password];
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
