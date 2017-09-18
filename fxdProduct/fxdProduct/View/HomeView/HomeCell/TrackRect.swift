@@ -18,7 +18,7 @@ class TrackRect: UISlider {
     }
     */
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x:10,y:0,width:self.frame.size.width-20,height:15)
+        return CGRect(x:10,y:0,width:self.frame.size.width-20,height:13)
     }
 
 }

@@ -85,7 +85,7 @@ extension HomeDefaultCell{
         defaultBgImage?.addSubview(defaultHeadLabel!)
         defaultHeadLabel?.snp.makeConstraints({ (make) in
             
-            make.top.equalTo((defaultBgImage?.snp.top)!).offset(30)
+            make.top.equalTo((defaultBgImage?.snp.top)!).offset(50)
             make.centerX.equalTo((defaultBgImage?.snp.centerX)!)
             make.height.equalTo(30)
         })
@@ -94,6 +94,8 @@ extension HomeDefaultCell{
             defaultHeadLabel?.snp.updateConstraints({ (make) in
                 make.top.equalTo((defaultBgImage?.snp.top)!).offset(15)
             })
+            
+            defaultHeadLabel?.font = UIFont.systemFont(ofSize: 25)
         }
         
         let label = UILabel()
@@ -122,7 +124,17 @@ extension HomeDefaultCell{
 //        // 设置按钮最大端图片
 //        slider.maximumValueImage = UIImage.init(named: "1.png")
         // 设置圆点图片
-        slider.setThumbImage(UIImage.init(named: "icon_quan"), for: UIControlState.normal)
+        
+        var imagea = setImageFrame(UIImage(named:"icon_quan")!, size: CGSize(width:28,height:28))
+        
+        if UI_IS_IPONE5{
+        
+          imagea  = setImageFrame(UIImage(named:"icon_quan")!, size: CGSize(width:24,height:24))
+            
+        }
+        slider.setThumbImage(imagea, for: .normal)
+        
+//        slider.setThumbImage(UIImage.init(named: "icon_quan"), for: UIControlState.normal)
         // 设置圆点颜色
 //        slider.thumbTintColor = UIColor.red
         // 设置滑动过的颜色
@@ -136,8 +148,8 @@ extension HomeDefaultCell{
         slider.snp.makeConstraints { (make) in
 
             make.top.equalTo(label.snp.bottom).offset(30)
-            make.left.equalTo((defaultBgImage?.snp.left)!).offset(20)
-            make.right.equalTo((defaultBgImage?.snp.right)!).offset(-20)
+            make.left.equalTo((defaultBgImage?.snp.left)!).offset(15)
+            make.right.equalTo((defaultBgImage?.snp.right)!).offset(-15)
             
         }
         
@@ -157,7 +169,7 @@ extension HomeDefaultCell{
     
         leftLabel.snp.makeConstraints { (make) in
             
-            make.top.equalTo(slider.snp.bottom).offset(-10)
+            make.top.equalTo(slider.snp.bottom).offset(5)
             make.left.equalTo((defaultBgImage?.snp.left)!).offset(30)
             make.height.equalTo(15)
         }
@@ -171,7 +183,7 @@ extension HomeDefaultCell{
         rightLabel.font = UIFont.systemFont(ofSize: 15)
         defaultBgImage?.addSubview(rightLabel)
         rightLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(slider.snp.bottom).offset(-10)
+            make.top.equalTo(slider.snp.bottom).offset(5)
             make.right.equalTo((defaultBgImage?.snp.right)!).offset(-30)
             make.height.equalTo(15)
         }
@@ -207,7 +219,9 @@ extension HomeDefaultCell{
             applyBtn.snp.updateConstraints({ (make) in
                 
                 make.bottom.equalTo((defaultBgImage?.snp.bottom)!).offset(-50)
+                make.height.equalTo(40)
             })
+            applyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         }
         
         let bottomLabel = UILabel()
@@ -237,9 +251,9 @@ extension HomeDefaultCell{
         refuseBgImage?.isUserInteractionEnabled = true
         self.addSubview(refuseBgImage!)
         refuseBgImage?.snp.makeConstraints { (make) in
-            make.top.equalTo(self).offset(10)
-            make.left.equalTo(self).offset(20)
-            make.right.equalTo(self).offset(-20)
+            make.top.equalTo(self).offset(24)
+            make.left.equalTo(self).offset(17)
+            make.right.equalTo(self).offset(-17)
             make.bottom.equalTo(self).offset(0)
         }
         
@@ -249,13 +263,13 @@ extension HomeDefaultCell{
         titleLabel.textAlignment = .left
         titleLabel.font = UIFont.systemFont(ofSize: 15)
         if UI_IS_IPONE5 {
-            titleLabel.font = UIFont.systemFont(ofSize: 13)
+            titleLabel.font = UIFont.systemFont(ofSize: 12)
         }
         titleLabel.textColor = UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0)
         refuseBgImage?.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo((refuseBgImage?.snp.top)!).offset(43)
-            make.left.equalTo((refuseBgImage?.snp.left)!).offset(15)
+            make.left.equalTo((refuseBgImage?.snp.left)!).offset(25)
             make.right.equalTo((refuseBgImage?.snp.right)!).offset(0)
             make.height.equalTo(20)
         }
@@ -383,10 +397,7 @@ extension HomeDefaultCell{
             thirdRefuseView.descBtn?.setTitle(str as? String, for: .normal)
             thirdRefuseView.descBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
             setCornerBorder(view: thirdRefuseView.descBtn!, borderColor: UI_MAIN_COLOR)
-            
-            
         }
-        
         
         let moreBtn = UIButton()
         moreBtn.setTitle("更多", for: .normal)
@@ -396,14 +407,8 @@ extension HomeDefaultCell{
         moreBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
         otherPlatformsBgView?.addSubview(moreBtn)
         moreBtn.snp.makeConstraints { (make) in
-//            if UI_IS_IPONE5 {
-//            
-//                make.bottom.equalTo(bgView.snp.bottom).offset(25)
-//            }else{
-            
-                make.bottom.equalTo(bgView.snp.bottom).offset(25)
-//            }
-            
+
+            make.bottom.equalTo(bgView.snp.bottom).offset(25)
             make.centerX.equalTo((otherPlatformsBgView?.snp.centerX)!)
             make.height.equalTo(20)
         }
@@ -452,23 +457,7 @@ extension HomeDefaultCell{
             make.bottom.equalTo(self).offset(0)
         }
         
-        let bgView = UIView()
-    
-        drawingBgImage?.addSubview(bgView)
-        bgView.snp.makeConstraints { (make) in
-            make.centerY.equalTo((drawingBgImage?.snp.centerY)!)
-            make.left.equalTo((drawingBgImage?.snp.left)!).offset(0)
-            make.right.equalTo((drawingBgImage?.snp.right)!).offset(0)
-            make.height.equalTo((homeProductData.data.infoList.count*36)+70)
-
-        }
         
-//        if UI_IS_IPONE5{
-//        
-//            bgView.snp.updateConstraints({ (make) in
-//                make.height.equalTo((homeProductData.data.infoList.count*25)+70)
-//            })
-//        }
         
         var i = 0
         if homeProductData.data.warnText != "" && homeProductData.data.warnText != nil {
@@ -477,13 +466,23 @@ extension HomeDefaultCell{
             drawingTitleLabel.textColor = UIColor.init(red: 237/255.0, green: 28/255.0, blue: 36/255.0, alpha: 1.0)
             drawingTitleLabel.text = homeProductData.data.warnText
             drawingTitleLabel.font = UIFont.systemFont(ofSize: 19)
-            bgView.addSubview(drawingTitleLabel)
+            drawingBgImage?.addSubview(drawingTitleLabel)
             drawingTitleLabel.snp.makeConstraints({ (make) in
-                make.top.equalTo(bgView.snp.top).offset(0)
-                make.centerX.equalTo(bgView.snp.centerX)
+
+                make.top.equalTo((drawingBgImage?.snp.top)!).offset(30)
+                make.centerX.equalTo((drawingBgImage?.snp.centerX)!)
                 make.height.equalTo(20)
             })
-            i = 20
+            i = 50
+            
+            if UI_IS_IPONE5{
+                
+                drawingTitleLabel.snp.updateConstraints({ (make) in
+                    make.top.equalTo((drawingBgImage?.snp.top)!).offset(20)
+                })
+                i = 40
+            }
+            
         }
         
         if homeProductData.data.subWarnText != "" && homeProductData.data.subWarnText != nil{
@@ -493,14 +492,44 @@ extension HomeDefaultCell{
             tipLabel.textAlignment = .center
             tipLabel.font = UIFont.systemFont(ofSize: 14)
             tipLabel.text = homeProductData.data.subWarnText
-            bgView.addSubview(tipLabel)
+            drawingBgImage?.addSubview(tipLabel)
             tipLabel.snp.makeConstraints({ (make) in
-                make.top.equalTo(bgView.snp.top).offset(35)
-                make.centerX.equalTo(bgView.snp.centerX)
+                make.top.equalTo((drawingBgImage?.snp.top)!).offset(60)
+                make.centerX.equalTo((drawingBgImage?.snp.centerX)!)
                 make.height.equalTo(14)
             })
             
-            i = 50
+            i = 80
+            
+            if UI_IS_IPONE5{
+                
+                tipLabel.snp.updateConstraints({ (make) in
+                    make.top.equalTo((drawingBgImage?.snp.top)!).offset(50)
+                })
+                i = 70
+            }
+            
+        }
+        
+        
+        let contentView = UIView()
+        drawingBgImage?.addSubview(contentView)
+        contentView.snp.makeConstraints { (make) in
+            make.top.equalTo((drawingBgImage?.snp.top)!).offset(i)
+            make.left.equalTo((drawingBgImage?.snp.left)!).offset(0)
+            make.right.equalTo((drawingBgImage?.snp.right)!).offset(0)
+            make.bottom.equalTo((drawingBgImage?.snp.bottom)!).offset(-110)
+        }
+        
+        let bgView = UIView()
+        
+        contentView.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.centerY.equalTo((contentView.snp.centerY))
+            make.left.equalTo((contentView.snp.left)).offset(0)
+            make.right.equalTo((contentView.snp.right)).offset(0)
+            make.height.equalTo((homeProductData.data.infoList.count*36))
+            
         }
         
         
@@ -508,27 +537,7 @@ extension HomeDefaultCell{
         for index in 0..<homeProductData.data.infoList.count {
             let indexView = setView()
             bgView.addSubview(indexView)
-            
-            if index == 0 {
-                if(i == 0){
-                
-                    j = 0
-                }else{
-                
-                    j = 10+i
-                }
-                
-            }else{
-            
-                if UI_IS_IPONE5{
-                
-                    j = j+25
-                }else{
-                
-                    j = j+36
-                }
-                
-            }
+
             indexView.snp.makeConstraints({ (make) in
                 make.top.equalTo(bgView.snp.top).offset(j)
                 make.left.equalTo(bgView.snp.left).offset(0)
@@ -536,31 +545,20 @@ extension HomeDefaultCell{
                 make.height.equalTo(30)
             })
             
+            if UI_IS_IPONE5{
+                
+                j = j+25
+            }else{
+                
+                j = j+36
+            }
             leftLabel?.text = dataArray[index].label
             rightLabel?.text = dataArray[index].value
            
-//            for k in 0..<homeProductData.data.infoList.count{
-//            
-//                let str = homeProductData.data.infoList[k].index
-//                
-//                if (index+1 == Int(str!)!){
-//                
-//                    leftLabel?.text = homeProductData.data.infoList[k].label
-//                    rightLabel?.text = homeProductData.data.infoList[k].value
-//                    
-//                }
-//            }
-            
-//            for k in 0..<dataArray.count{
-//                    
-//                leftLabel?.text = dataArray[k].label
-//                rightLabel?.text = dataArray[k].value
-//                
-//            }
         }
         
         bgView.snp.updateConstraints({ (make) in
-            make.height.equalTo(j+84)
+            make.height.equalTo(j)
         })
         let bottomBtn = UIButton()
         bottomBtn.setTitle(homeProductData.data.buttonText, for: .normal)
@@ -569,14 +567,66 @@ extension HomeDefaultCell{
         bottomBtn.setBackgroundImage(UIImage(named:"icon_anniu"), for: .normal)
         bottomBtn.layer.cornerRadius = 5.0
         bottomBtn.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
-        bgView.addSubview(bottomBtn)
+        drawingBgImage?.addSubview(bottomBtn)
         bottomBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(bgView.snp.top).offset(j+40)
-            make.left.equalTo(bgView.snp.left).offset(40)
-            make.right.equalTo(bgView.snp.right).offset(-40)
+            make.bottom.equalTo((drawingBgImage?.snp.bottom)!).offset(-60)
+            make.left.equalTo((drawingBgImage?.snp.left)!).offset(40)
+            make.right.equalTo((drawingBgImage?.snp.right)!).offset(-40)
             make.height.equalTo(44)
         }
         
+        if UI_IS_IPONE6P{
+        
+            bottomBtn.snp.updateConstraints({ (make) in
+                make.bottom.equalTo((drawingBgImage?.snp.bottom)!).offset(-80)
+            })
+            
+            contentView.snp.updateConstraints({ (make) in
+                
+                make.bottom.equalTo((drawingBgImage?.snp.bottom)!).offset(-130)
+            })
+            
+        }
+        
+        if UI_IS_IPONE5{
+        
+            bottomBtn.snp.updateConstraints({ (make) in
+                make.bottom.equalTo((drawingBgImage?.snp.bottom)!).offset(-20)
+                make.height.equalTo(40)
+            })
+            
+            
+            contentView.snp.updateConstraints({ (make) in
+                
+                make.bottom.equalTo((drawingBgImage?.snp.bottom)!).offset(-70)
+            })
+        }
+        
+        if homeProductData.data.productId == SalaryLoan{
+        
+            if homeProductData.data.flag == "7"{
+
+                bottomBtn.snp.updateConstraints({ (make) in
+                    make.bottom.equalTo((drawingBgImage?.snp.bottom)!).offset(-30)
+                })
+ 
+                contentView.snp.updateConstraints({ (make) in
+                    
+                    make.bottom.equalTo((drawingBgImage?.snp.bottom)!).offset(-80)
+                })
+                if UI_IS_IPONE5{
+                
+                    bottomBtn.snp.updateConstraints({ (make) in
+                        make.bottom.equalTo((drawingBgImage?.snp.bottom)!).offset(-20)
+                    })
+                    
+                    contentView.snp.updateConstraints({ (make) in
+                        
+                        make.bottom.equalTo((drawingBgImage?.snp.bottom)!).offset(-70)
+                    })
+                }
+            }
+        }
     }
     
     //产品列表，第一个
@@ -716,11 +766,7 @@ extension HomeDefaultCell{
             make.height.equalTo(22)
         }
         let rightImage = UIImageView()
-        
-//        if homeProductData.data.productList[1].productId == "P001004"{
-//            
-//            rightImage.image = UIImage(named:"home_05")
-//        }
+    
         rightImage.image = UIImage(named:"home_05")
         bgView.addSubview(rightImage)
         rightImage.snp.makeConstraints { (make) in
@@ -750,13 +796,6 @@ extension HomeDefaultCell{
         var product :HomeProductsList
         
         product = homeProductData.data.productList[index-1]
-//        product = homeProductData.data.productList[2]
-//        if index == 2{
-//        
-//            product = homeProductData.data.productList[1]
-//            
-//        }
-        
         productSecondBgImage?.tag = 100+index
         if product.productId == SalaryLoan{
             
@@ -857,6 +896,7 @@ extension HomeDefaultCell{
         return view
     }
     
+    //MARK:设置CornerBorder
     func setCornerBorder(view:UIView,borderColor:UIColor) -> Void {
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
@@ -864,6 +904,17 @@ extension HomeDefaultCell{
         view.layer.borderColor = borderColor.cgColor
     }
     
+    
+    //MARK:设置slider图片大小
+    func setImageFrame(_ image: UIImage, size: CGSize) ->(UIImage){
+    
+            UIGraphicsBeginImageContext(size);
+            image.draw(in: CGRect(x:0,y:0,width:size.width,height:size.height))
+            let scaleImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            return scaleImage!;  
+       
+    }
 }
 //MARK:点击事件
 extension HomeDefaultCell{

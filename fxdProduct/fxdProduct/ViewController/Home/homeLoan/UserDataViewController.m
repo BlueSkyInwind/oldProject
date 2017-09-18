@@ -224,9 +224,11 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.titleLabel.text = @"拉起";
             cell.arrowImageView.transform = CGAffineTransformMakeRotation(M_PI);
+
             if (!isOpen) {
                 cell.titleLabel.text = @"更多";
                 cell.arrowImageView.transform = CGAffineTransformIdentity;
+
             }
             __weak typeof(self) weakSelf = self;
             cell.unfoldBtnClick = ^{

@@ -69,11 +69,12 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = UI_MAIN_COLOR
-        self.navigationController?.navigationBar.titleTextAttributes =
-            [NSForegroundColorAttributeName: UIColor.white]
-        self.navigationController?.navigationBar.backgroundImage(for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.titleTextAttributes =
+//            [NSForegroundColorAttributeName: UIColor.white]
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), for: UIBarMetrics.default)
+//        self.navigationController!.navigationBar.shadowImage = UIImage()
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.black,NSFontAttributeName:UIFont.systemFont(ofSize: 19)]
         
        getData()
 
@@ -81,6 +82,25 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
 
     }
     
+//    func addBackItemroot(){
+//        
+//        let btn = UIButton.init(type: .system)
+//        let img = UIImage(named:"return")?.withRenderingMode(.alwaysOriginal)
+//        btn.setImage(img, for: .normal)
+//        btn.frame = CGRect(x:0,y:0,width:45,height:44)
+//        btn.addTarget(self, action: #selector(popBack), for: .touchUpInside)
+//        let item = UIBarButtonItem.init(customView: btn)
+//        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+//        spaceItem.width = -15
+//        self.navigationItem.leftBarButtonItems = [spaceItem,item]
+//        self.navigationController?.interactivePopGestureRecognizer?.delegate = self as? UIGestureRecognizerDelegate
+//        
+//    }
+//    func popBack(){
+//        
+//        self.navigationController?.popViewController(animated: true)
+//    }
+
     //MARK:获取当前期的续期信息
     func getData(){
     
@@ -113,7 +133,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
     func addBackItem(){
     
         let btn = UIButton.init(type: .system)
-        let img = UIImage(named:"return_white")?.withRenderingMode(.alwaysOriginal)
+        let img = UIImage(named:"return")?.withRenderingMode(.alwaysOriginal)
         btn.setImage(img, for: .normal)
         btn.frame = CGRect(x:0,y:0,width:45,height:44)
         btn.addTarget(self, action: #selector(backToPrevious), for: .touchUpInside)
@@ -189,6 +209,11 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
                     }
                 }
                 return cell
+            }
+            cell.rightLabel?.textColor = UIColor.black
+            if indexPath.row == 1 || indexPath.row == 2 {
+            
+                cell.rightLabel?.textColor = UI_MAIN_COLOR
             }
             cell.rightLabel?.text = contentArr[indexPath.row]+"元"
             return cell

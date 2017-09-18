@@ -636,8 +636,10 @@
     [MoxieSDK shared].navigationController.navigationBar.translucent = YES;
     [MoxieSDK shared].backImageName = @"return";
     [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
-    [MoxieSDK shared].navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [[MoxieSDK shared].navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
+    [MoxieSDK shared].navigationController.navigationBar.tintColor = UI_MAIN_COLOR;
+    [[MoxieSDK shared].navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
+    [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],NSForegroundColorAttributeName, nil];
+
 }
 -(void)obtainHighRankingClassifyStatus:(NSString *)type TaskId:(NSString *)taskId{
     if (!taskId || !type) {
