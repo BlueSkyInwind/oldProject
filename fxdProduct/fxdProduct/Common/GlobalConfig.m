@@ -44,7 +44,6 @@ NSString * const _p2P_url = @"http://192.168.6.134/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //http://192.168.6.134:9191/fxd-esb/
-
 //张强本地
 //NSString * const _main_url  =   @"http://192.168.13.173:8005/fxd-esb/esb/";
 //NSString * const _ValidESB_url  =   @"http://192.168.13.173:8005/fxd-esb/";
@@ -69,7 +68,6 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //芝麻信用测试地址
 //NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";
-
 
 #else
 #warning "未匹配环境"
@@ -452,6 +450,10 @@ NSString * const    _Trilateral_url    =    @"apigw/client/repay/third/pay";
 
 //得到测评结果
 NSString * const    _UserDataCertificationResult_url    =    @"apigw/client/user/verify/status";
+
+//退出登录删除推送id
+NSString * const    _loginOutDeleteRegisterId_url    =    @"apigw/client/center/jiguang/delete";
+
 
 #pragma mark - 合规接口
 

@@ -350,16 +350,12 @@
                         endStr =[NSMutableString stringWithFormat:@"%@",[endStr substringToIndex:endStr.length-1]];
                     }
                 }
-                
-                
             }else{
                 if (!zero) {
                     [endStr appendString:numArr[MyData]];
                     zero=YES;
                 }
-                
             }
-            
         }else{
             //拼接数字
             [endStr appendString:numArr[MyData]];
@@ -414,6 +410,20 @@
     [alertController addAction:action];
     [vc presentViewController:alertController animated:true completion:nil];
 }
+
++(void)ClipboardOfCopy:(NSString *)copyStr VC:(UIViewController *)vc prompt:(NSString *)str{
+    
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = copyStr;
+    [[MBPAlertView sharedMBPTextView] showTextOnly:vc.view message:str];
+    
+}
+
+
+
+
+
+
 
 
 @end
