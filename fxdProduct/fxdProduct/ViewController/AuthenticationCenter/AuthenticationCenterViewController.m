@@ -356,9 +356,9 @@
                         EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
                         editCard.typeFlag = @"0";
                         editCard.cardName = cardInfo.bankName;
-                        editCard.cardNum = cardInfo.tailNumber;
-                        editCard.reservedTel = cardInfo.phoneNum;
-                        editCard.cardCode = cardInfo.cardIdentifier;
+                        editCard.cardNum = cardInfo.cardNo;
+                        editCard.reservedTel = cardInfo.bankPhone;
+                        editCard.cardCode = cardInfo.bankNameCode;
                         editCard.popOrdiss  = true;
                         [self.navigationController pushViewController:editCard animated:YES];
                     }];
@@ -814,37 +814,39 @@
 }
 - (void)fatchCardInfo:(NSMutableArray *)supportBankListArr success:(void(^)(CardInfo *cardInfo))finish
 {
-    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
-    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
-        UserCardResult *  userCardsModel = [UserCardResult yy_modelWithJSON:returnValue];
-        if([userCardsModel.flag isEqualToString:@"0000"]){
-            CardInfo *cardInfo = [[CardInfo alloc] init];
-            if (userCardsModel.result.count > 0) {
-                for(NSInteger j=0;j<userCardsModel.result.count;j++)
-                {
-                    CardResult * cardResult = [userCardsModel.result objectAtIndex:0];
-                    if([cardResult.card_type_ isEqualToString:@"2"]){
-                        for (SupportBankList *banlist in _supportBankListArr) {
-                            if ([cardResult.card_bank_ isEqualToString: banlist.bank_code_]) {
-                                cardInfo.tailNumber = cardResult.card_no_;
-                                cardInfo.bankName = banlist.bank_name_;
-                                cardInfo.cardIdentifier = cardResult.id_;
-                                cardInfo.phoneNum = cardResult.bank_reserve_phone_;
-                            }
+    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
+    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            CardInfo *resultCardInfo = [[CardInfo alloc] init];
+            NSArray * array = (NSArray *)baseResultM.data;
+            if (array.count <= 0){
+                finish(resultCardInfo);
+                return;
+            }
+            for (int  i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
+                CardInfo * cardInfo = [[CardInfo alloc]initWithDictionary:dic error:nil];
+                if ([cardInfo.cardType isEqualToString:@"2"]) {
+                    for (SupportBankList *banlist in _supportBankListArr) {
+                        if ([cardInfo.cardShortName isEqualToString: banlist.bank_short_name_]) {
+                            resultCardInfo = cardInfo;
+                            resultCardInfo.bankNameCode = banlist.bank_code_;
                         }
-                        break;
                     }
+                    break;
                 }
             }
-            finish(cardInfo);
+            finish(resultCardInfo);
         }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:userCardsModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.msg];
         }
     } WithFaileBlock:^{
         
     }];
-    [userDataVM obtainGatheringInformation];
+    [bankInfoVM obtainUserBankCardList];
 }
+
 - (NSString *)formatTailNumber:(NSString *)str
 {
     return [str substringWithRange:NSMakeRange(str.length - 4, 4)];
