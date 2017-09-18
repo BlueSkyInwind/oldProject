@@ -211,7 +211,6 @@
                     [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
                         if (index == 1) {
                             [EmptyUserData EmptyData];
-                            
                             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
@@ -307,7 +306,6 @@
     }
 }
 
-
 - (void)CheckVersion:(NSString *)strUrl paramters:(id)paramters finished:(FinishedBlock)finished failure:(FailureBlock)failure
 {
     MBProgressHUD *_waitView = [self loadingHUD];
@@ -320,7 +318,6 @@
     }
     DLog(@"加密后参数:---%@",paramDic);
     
-    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/xml",@"text/html",@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"charset=UTF-8", nil];
@@ -330,19 +327,6 @@
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
-        if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0013"]) {
-            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
-                if (index == 1) {
-                    [EmptyUserData EmptyData];
-                    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-                    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-                    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
-                        [_waitView removeFromSuperview];
-                    }];
-                }
-            }];
-        }
-        
         NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
         NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
         NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
