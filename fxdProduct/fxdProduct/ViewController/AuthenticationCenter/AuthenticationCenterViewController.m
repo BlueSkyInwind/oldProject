@@ -568,7 +568,6 @@
 
     
  
-    
 }
 -(void)headingRefresh{
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshInfoStep)];

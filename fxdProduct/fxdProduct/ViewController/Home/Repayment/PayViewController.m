@@ -14,7 +14,6 @@
 #import "CardInfo.h"
 #import "UnbundlingBankCardViewController.h"
 @interface PayViewController ()<UITableViewDelegate,UITableViewDataSource>
-
 {
     CardInfo *_selectCardInfo;
 }
