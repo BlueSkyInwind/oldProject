@@ -400,10 +400,8 @@
             break;
         case 3:
 
-            
 //            [homeCell setupRefuseUI];
             [homeCell refuseTab];
-
 
             break;
         case 4:
