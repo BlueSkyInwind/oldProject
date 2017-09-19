@@ -19,11 +19,19 @@ import SDWebImage
     func moreBtnClick()
     func loanBtnClick()
     func productBtnClick(_ productId: String, isOverLimit: String)->Void
+    func otherBtnClick()
+    func refuseTabClick(_ index: NSInteger)->Void
+    
 }
 
-class HomeDefaultCell: UITableViewCell {
+
+typealias tabRefuseCell = (_ index: NSInteger)->Void
+
+class HomeDefaultCell: UITableViewCell ,UITableViewDelegate,UITableViewDataSource{
 
     weak var delegate: HomeDefaultCellDelegate?
+    
+    var tabRefuseCellClosure : tabRefuseCell?
     
     var leftLabel: UILabel?
     var rightLabel: UILabel?
@@ -35,6 +43,9 @@ class HomeDefaultCell: UITableViewCell {
     var drawingBgImage : UIImageView?
     var productFirstBgImage : UIImageView?
     var productSecondBgImage : UIImageView?
+    var refuseBgView : UIView?
+    var refuseLeftTitle : Array<Any>?
+    var refuseRightTitle : Array<Any>?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -348,8 +359,73 @@ extension HomeDefaultCell{
             make.centerX.equalTo((refuseBgImage?.snp.centerX)!)
             make.height.equalTo(44)
         }
+        
+        let thirdLabel = UILabel()
+        thirdLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
+        thirdLabel.text = "三、尝试其他平台"
+        thirdLabel.font = UIFont.systemFont(ofSize: 17)
+        refuseBgImage?.addSubview(thirdLabel)
+        thirdLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(advancedCertificationBtn.snp.bottom).offset(20)
+            make.left.equalTo((refuseBgImage?.snp.left)!).offset(25)
+            make.height.equalTo(20)
+        }
+        
+        let otherBtn = UIButton()
+        otherBtn.setTitle("进入精选平台 >>", for: .normal)
+        otherBtn.setTitleColor(UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
+        otherBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        otherBtn.addTarget(self, action: #selector(otherBtnClick), for: .touchUpInside)
+        refuseBgImage?.addSubview(otherBtn)
+        otherBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(thirdLabel.snp.bottom).offset(20)
+            make.left.equalTo((refuseBgImage?.snp.left)!).offset(35)
+            make.height.equalTo(20)
+        }
+        
     }
     
+    
+    func refuseTab(){
+    
+        refuseLeftTitle = ["60天后,更新基础资料","添加高级认证","尝试其他平台"]
+        refuseRightTitle = ["前往更新","立即添加","精选平台"]
+        refuseBgView = UIView()
+        refuseBgView?.backgroundColor = LINE_COLOR
+        self.addSubview(refuseBgView!)
+        refuseBgView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self).offset(-2)
+            make.left.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(7)
+        })
+        
+        let headerLabel = UILabel()
+        headerLabel.text = "您目前的信用评分不足,可进行以下操作"
+        headerLabel.textColor = UI_MAIN_COLOR
+        headerLabel.font = UIFont.systemFont(ofSize: 15)
+        refuseBgView?.addSubview(headerLabel)
+        headerLabel.snp.makeConstraints { (make) in
+            make.top.equalTo((refuseBgView?.snp.top)!).offset(20)
+            make.centerX.equalTo((refuseBgView?.snp.centerX)!)
+            make.height.equalTo(20)
+        }
+        
+        let refuseTab = UITableView()
+        refuseTab.delegate = self
+        refuseTab.dataSource = self
+        refuseTab.showsHorizontalScrollIndicator = false
+        refuseTab.isScrollEnabled = false
+        refuseTab.separatorStyle = .none
+        self.addSubview(refuseTab)
+        refuseTab.snp.makeConstraints { (make) in
+            make.top.equalTo(headerLabel.snp.bottom).offset(20)
+            make.left.equalTo((refuseBgView?.snp.left)!).offset(0)
+            make.right.equalTo((refuseBgView?.snp.right)!).offset(00)
+            make.bottom.equalTo((refuseBgView?.snp.bottom)!).offset(-40)
+        }
+        
+    }
     //
     //MARK:信用评分不足，导流其他平台
     func setupOtherPlatformsUI(){
@@ -937,7 +1013,7 @@ extension HomeDefaultCell{
     }
     
     //MARK:设置CornerBorder
-    func setCornerBorder(view:UIView,borderColor:UIColor) -> Void {
+    fileprivate func setCornerBorder(view:UIView,borderColor:UIColor) -> Void {
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         view.layer.borderWidth = 1;
@@ -946,7 +1022,7 @@ extension HomeDefaultCell{
     
     
     //MARK:设置slider图片大小
-    func setImageFrame(_ image: UIImage, size: CGSize) ->(UIImage){
+    fileprivate func setImageFrame(_ image: UIImage, size: CGSize) ->(UIImage){
     
             UIGraphicsBeginImageContext(size);
             image.draw(in: CGRect(x:0,y:0,width:size.width,height:size.height))
@@ -954,6 +1030,10 @@ extension HomeDefaultCell{
             UIGraphicsEndImageContext();
             return scaleImage!;  
        
+    }
+    fileprivate func refuseView(){
+    
+        
     }
 }
 //MARK:点击事件
@@ -967,6 +1047,16 @@ extension HomeDefaultCell{
             delegate?.advancedCertification()
         }
         print("立即添加高级认证")
+    }
+    
+    //MARK:精选平台
+    func otherBtnClick(){
+    
+        if delegate != nil {
+        
+            delegate?.otherBtnClick()
+        }
+        print("精选平台")
     }
     
     //MARK:点击提款
@@ -1062,5 +1152,51 @@ extension HomeDefaultCell{
             
         }
         print("点击产品列表")
+    }
+}
+
+extension HomeDefaultCell{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+//        return 90
+        return ((refuseBgView?.bounds.size.height)!-100)/3
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var cell:RefuseCell! = tableView.dequeueReusableCell(withIdentifier:"homeRefuseCell") as? RefuseCell
+        if cell == nil {
+            cell = RefuseCell.init(style: .default, reuseIdentifier: "homeRefuseCell")
+        }
+        cell.selectionStyle = .none
+        cell.isSelected = false;
+        cell.leftLabel?.text = refuseLeftTitle?[indexPath.row] as? String
+        cell.rightLabel?.text = refuseRightTitle?[indexPath.row] as?String
+        if indexPath.row == 2{
+        
+            cell.lineView?.isHidden = true
+        }
+        
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        refuseTabClick(index: indexPath.row)
+    }
+    
+    func refuseTabClick(index : NSInteger)->Void{
+    
+        if self.tabRefuseCellClosure != nil {
+            
+            self.tabRefuseCellClosure!(index)
+        }
+        print(index)
     }
 }

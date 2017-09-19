@@ -1209,6 +1209,8 @@
 		CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
 		CC6CBA841F5AB9620015C92C /* ApplicationStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */; };
 		CC6CBA851F5AB9620015C92C /* ApplicationStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */; };
+		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
+		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989C301F4D84A9000CDACF /* AuthenticationCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC989C2F1F4D84A9000CDACF /* AuthenticationCenterViewController.m */; };
@@ -2394,6 +2396,7 @@
 		CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseThirdView.swift; sourceTree = "<group>"; };
 		CC6CBA821F5AB9620015C92C /* ApplicationStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationStatusModel.h; sourceTree = "<group>"; };
 		CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationStatusModel.m; sourceTree = "<group>"; };
+		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
 		CC989C2E1F4D84A9000CDACF /* AuthenticationCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationCenterViewController.h; sourceTree = "<group>"; };
 		CC989C2F1F4D84A9000CDACF /* AuthenticationCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationCenterViewController.m; sourceTree = "<group>"; };
@@ -4594,6 +4597,7 @@
 				63F254911E49CFE800852CF1 /* LoanProcessCell.xib */,
 				CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */,
 				CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */,
+				CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -6092,6 +6096,7 @@
 				CC31978F1ED911980083F263 /* WhiteRefuseView.m in Sources */,
 				CC6C93EE1F4AB58C00587C74 /* TrackRect.swift in Sources */,
 				635B0BDE1DF14B9C008EAFD1 /* AgreeMentListViewController.m in Sources */,
+				CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */,
 				637636EB1D76A72A00E93289 /* LewPopupViewAnimationSpring.m in Sources */,
 				63FC25011D98F7E9006F58F3 /* YYTextUtilities.m in Sources */,
 				638A17091E517D9F00AB8AB6 /* LOTShapeTrimPath.m in Sources */,
@@ -6791,6 +6796,7 @@
 				CC0DFA871EA5B1090024841A /* LoginMsgBaseClass.m in Sources */,
 				CCDEDF611EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m in Sources */,
 				CC0DFA891EA5B1090024841A /* GetMoneyProcessUserBean.m in Sources */,
+				CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */,
 				846A90191F1F48AB00896169 /* PayDisplayCell.m in Sources */,
 				CCF43AFF1EDE5D4A00CFD72C /* QryUserStatusModel.m in Sources */,
 				CC0DFA8A1EA5B1090024841A /* ProfessionViewController.m in Sources */,

@@ -154,7 +154,7 @@
     [header beginRefreshing];
     self.tableView.mj_header = header;
     
-    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.213)];
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.15)];
     footView.backgroundColor = [UIColor whiteColor];
     _applyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [Tool setCorner:_applyBtn borderColor:[UIColor clearColor]];
@@ -198,7 +198,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return _k_w*0.18f;
+    return _k_w*0.21f;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     SeniorCertificationView * seniorCertificationView =   [[NSBundle mainBundle]loadNibNamed:@"SeniorCertificationView" owner:self options:nil].lastObject;
