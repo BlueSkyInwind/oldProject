@@ -647,7 +647,10 @@
             
             moenyViewing.stagingBgView.hidden = YES;
             moenyViewing.labelProgress.text = @"续期处理中";
-            moenyViewing.labelProgress.font = [UIFont systemFontOfSize:34];
+            moenyViewing.labelProgress.font = [UIFont systemFontOfSize:30];
+            if (UI_IS_IPHONE5) {
+                moenyViewing.labelProgress.font = [UIFont systemFontOfSize:25];
+            }
             moenyViewing.tipLabel.text = @"续期处理中，请稍等";
             moenyViewing.statusBottomView.hidden = YES;
             moenyViewing.stagingBgView.hidden = YES;
