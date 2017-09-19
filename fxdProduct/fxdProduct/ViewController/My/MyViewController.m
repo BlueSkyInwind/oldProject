@@ -36,7 +36,9 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.MyViewTable.scrollEnabled = NO;
-    
+    if (UI_IS_IPHONE4) {
+        self.MyViewTable.scrollEnabled = YES;
+    }
     [self.MyViewTable setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     [self.MyViewTable registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"bCell"];
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];

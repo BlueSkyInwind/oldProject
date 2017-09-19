@@ -241,6 +241,46 @@ extension HomeDefaultCell{
             make.height.equalTo(20)
         }
         
+        if UI_IS_IPONE4{
+        
+            defaultHeadLabel?.snp.updateConstraints({ (make) in
+                make.top.equalTo((defaultBgImage?.snp.top)!).offset(0)
+            })
+            defaultHeadLabel?.font = UIFont.systemFont(ofSize: 20)
+            
+            label.snp.updateConstraints({ (make) in
+                 make.top.equalTo((defaultHeadLabel?.snp.bottom)!).offset(0)
+            })
+            
+            imagea  = setImageFrame(UIImage(named:"icon_quan")!, size: CGSize(width:20,height:20))
+            slider.setThumbImage(imagea, for: .normal)
+            slider.snp.updateConstraints({ (make) in
+                
+                make.top.equalTo(label.snp.bottom).offset(5)
+                make.left.equalTo((defaultBgImage?.snp.left)!).offset(20)
+                make.right.equalTo((defaultBgImage?.snp.right)!).offset(-20)
+            })
+            
+            leftLabel.snp.updateConstraints({ (make) in
+                make.top.equalTo(slider.snp.bottom).offset(5)
+            })
+            
+            rightLabel.snp.updateConstraints({ (make) in
+                
+                make.top.equalTo(slider.snp.bottom).offset(5)
+            })
+            applyBtn.snp.updateConstraints({ (make) in
+                make.bottom.equalTo((defaultBgImage?.snp.bottom)!).offset(-30)
+                make.height.equalTo(25)
+            })
+            applyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            bottomLabel.snp.updateConstraints({ (make) in
+                
+                make.top.equalTo(applyBtn.snp.bottom).offset(5)
+                make.height.equalTo(10)
+            })
+            bottomLabel.font = UIFont.systemFont(ofSize: 10)
+        }
     }
     //
     //MARK:不满60天被拒，升级高级认证

@@ -53,6 +53,7 @@
     HighRandingModel * _socialSecurityHighRandM;
     
     UserDataModel * userDataModel;
+    UICollectionViewFlowLayout *layout;
     
 }
 @property (nonatomic,strong)NSString *isEvaluation;
@@ -105,7 +106,7 @@
 }
 -(void)configureView{
     // 设置流水布局
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    layout = [[UICollectionViewFlowLayout alloc]init];
     // UICollectionViewFlowLayout流水布局的内部成员属性有以下：
     /**
      @property (nonatomic) CGFloat minimumLineSpacing;
@@ -124,6 +125,7 @@
         height = 100;
         width = (_k_w-2)/3;
     }
+    
     layout.itemSize = CGSizeMake(width, height);
     //    // 设置最小行间距
     layout.minimumLineSpacing = 0;
@@ -133,18 +135,26 @@
     // 设置滚动方向（默认垂直滚动）
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.headerReferenceSize = CGSizeMake(0, 39);
+    
+   
+    
     _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h) collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.backgroundColor = rgb(242, 242, 242);
+
     _collectionView.scrollEnabled = false;
+    if (UI_IS_IPHONE4) {
+        _collectionView.scrollEnabled = true;
+//        layout.footerReferenceSize =CGSizeMake(_k_w-40, 44);
+    }
     [self.view addSubview:_collectionView];
     [_collectionView registerClass:[AuthenticationCenterCell class] forCellWithReuseIdentifier:@"AuthenticationCenterCell"];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ReusableView"];
-//    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView"];
+    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView"];
 
     _evaluationBtn = [[UIButton alloc]init];
-    [_evaluationBtn setTitle:@"资料审核" forState:UIControlStateNormal];
+    [_evaluationBtn setTitle:@"资料重新审核" forState:UIControlStateNormal];
     [_evaluationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _evaluationBtn.backgroundColor = UI_MAIN_COLOR;
     [_evaluationBtn addTarget:self action:@selector(bottomClick) forControlEvents:UIControlEventTouchUpInside];
@@ -157,6 +167,7 @@
         make.right.equalTo(wekSelf.view.mas_right).offset(-20);
         make.height.equalTo(@44);
     }];
+    
 }
 
 -(void)bottomClick{
@@ -173,6 +184,7 @@
     }
     return 3;
 }
+
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
 
@@ -292,7 +304,39 @@
         }
         [headerView addSubview:headView];
         return headerView;
+        
     }
+  
+//    NSLog(@"======%ld",indexPath.section);
+//    
+//    
+//    if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+//        if (indexPath.section == 0) {
+//            layout.footerReferenceSize =CGSizeMake(0, 0);
+//        }else{
+//            
+//            layout.footerReferenceSize =CGSizeMake(_k_w-40, 44);
+//        }
+//        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView" forIndexPath:indexPath];
+//        _evaluationBtn = [[UIButton alloc]init];
+//        [_evaluationBtn setTitle:@"资料审核" forState:UIControlStateNormal];
+//        [_evaluationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        _evaluationBtn.backgroundColor = UI_MAIN_COLOR;
+//        [_evaluationBtn addTarget:self action:@selector(bottomClick) forControlEvents:UIControlEventTouchUpInside];
+//        [Tool setCorner:_evaluationBtn borderColor:[UIColor clearColor]];
+//        [footerView addSubview:_evaluationBtn];
+//        [_evaluationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.equalTo(footerView.mas_bottom).offset(-50);
+//            make.left.equalTo(footerView.mas_left).offset(20);
+//            make.right.equalTo(footerView.mas_right).offset(-20);
+//            make.height.equalTo(@44);
+//        }];
+//        
+//        return footerView;
+//        
+//    }
+    
+    
 //    if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
 //        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView" forIndexPath:indexPath];
 //        footerView.backgroundColor = rgb(242, 242, 242);

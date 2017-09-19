@@ -25,6 +25,7 @@ class CheckingViewController: UIViewController {
         
         let checkingView = Bundle.main.loadNibNamed("CheckViewIng", owner: nil, options: nil)?.first as? CheckViewIng
         checkingView?.frame = CGRect(x:0, y:0, width:_k_w, height:_k_h-64);
+        checkingView?.receiveImmediatelyBtn.addTarget(self, action: #selector(applyImmediatelyBtnClick), for: .touchUpInside)
         self.view.addSubview(checkingView!)
         
         addBackItemroot()
@@ -46,9 +47,20 @@ class CheckingViewController: UIViewController {
     }
     func popBack(){
 
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
     }
 
+    //MARK:量子互助
+    func applyImmediatelyBtnClick(){
+    
+        let webView = FXDWebViewController()
+        webView.urlStr = "http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767"
+        self.navigationController?.pushViewController(webView, animated: true)
+   
+    }
+    
+    
     override func loadView() {
         super.loadView()
         let view = UIScrollView.init(frame: UIScreen.main.bounds)
@@ -66,7 +78,7 @@ class CheckingViewController: UIViewController {
         self.scrollView = view;
     }
     
-    
+    //MARK:刷新
     func refresh(){
     
         let userDataMV = UserDataViewModel()
