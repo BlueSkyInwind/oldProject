@@ -54,9 +54,9 @@
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
-//        NSString * testStr = @"http://192.168.13.250:8010/";
+        NSString * testStr = @"http://192.168.13.250:8010/";
         
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[testStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
     
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
@@ -153,7 +153,7 @@
             NSString * shareUrl =  resultDic[@"shareUrl"];
             NSString * shareTitle =  resultDic[@"shareTitle"];
             NSString * shareImage =  resultDic[@"shareImage"];
-            [[JSAndOCInteraction sharedInteraction] shareContent:self.view shareContent:shareContent UrlStr:shareUrl shareTitle:shareTitle shareImage:shareImage];
+            [[JSAndOCInteraction sharedInteraction] shareContent:self shareContent:shareContent UrlStr:shareUrl shareTitle:shareTitle shareImage:shareImage];
         }
         
         //JS交互前往某个页面  FXDClipboardOfCopy

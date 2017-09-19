@@ -33,9 +33,8 @@
  @param imageUrl 分享图片
 
  */
--(void)shareContent:(UIView *)view shareContent:(NSString *)content UrlStr:(NSString *)urlStr shareTitle:(NSString *)title shareImage:(NSString *)imageUrl
+-(void)shareContent:(UIViewController *)viewC shareContent:(NSString *)content UrlStr:(NSString *)urlStr shareTitle:(NSString *)title shareImage:(NSString *)imageUrl
 {
-    
     NSArray *imageArr = @[[UIImage imageNamed:@"logo_60"]];
     if (urlStr != nil) {
         imageArr = @[imageUrl];
@@ -43,11 +42,19 @@
     
     NSString * titleName  =  title == nil ? @"发薪贷" : title;
     
+    if (![Utility sharedUtility].loginFlage) {
+        [self presentLogin:viewC];
+        return;
+    }
+    
+    NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
+    NSString * targetUrl = [urlStr stringByAppendingFormat:@"?merchant_code_=%@",invationCode];
+    
     if (imageArr) {
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
         [shareParams SSDKSetupShareParamsByText:content
                                          images:imageArr
-                                            url:[NSURL URLWithString:urlStr]
+                                            url:[NSURL URLWithString:targetUrl]
                                           title:titleName
                                            type:SSDKContentTypeAuto];
         [shareParams SSDKEnableUseClientShare];
@@ -57,11 +64,11 @@
                    onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
                        switch (state) {
                            case SSDKResponseStateSuccess:
-                               [[MBPAlertView sharedMBPTextView] showTextOnly:view message:@"分享成功"];
+                               [[MBPAlertView sharedMBPTextView] showTextOnly:viewC.view message:@"分享成功"];
                                break;
                                
                            case SSDKResponseStateFail:
-                               [[MBPAlertView sharedMBPTextView] showTextOnly:view message:@"分享失败"];
+                               [[MBPAlertView sharedMBPTextView] showTextOnly:viewC.view message:@"分享失败"];
                            default:
                                break;
                        }

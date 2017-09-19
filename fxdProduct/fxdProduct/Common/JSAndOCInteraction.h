@@ -22,7 +22,7 @@
  @param imageUrl 分享图片
  
  */
--(void)shareContent:(UIView *)view shareContent:(NSString *)content UrlStr:(NSString *)urlStr shareTitle:(NSString *)title shareImage:(NSString *)imageUrl;
+-(void)shareContent:(UIViewController *)viewC shareContent:(NSString *)content UrlStr:(NSString *)urlStr shareTitle:(NSString *)title shareImage:(NSString *)imageUrl;
 
 /**
  复制

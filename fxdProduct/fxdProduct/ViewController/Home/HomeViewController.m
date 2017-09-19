@@ -249,7 +249,6 @@
     
 }
 
-
 - (void)onClose
 {
     _count += 1;
@@ -277,12 +276,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
     if (_dataArray.count>0) {
         return _dataArray.count + 1;
     }
     return 2;
-
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
