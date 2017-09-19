@@ -80,7 +80,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = true;
     processFlot = 0.0;
-    isOpen = YES;
+    isOpen = NO;
     _creditCardStatus = @"3";
     _socialSecurityStatus = @"3";
 
