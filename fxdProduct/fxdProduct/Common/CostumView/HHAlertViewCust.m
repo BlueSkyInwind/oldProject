@@ -43,8 +43,10 @@
     [alertview setEnterMode:Entermode];
     [alertview setLeaveMode:leaveMode];
     [view addSubview:alertview];
+    __weak typeof (self) weakSelf = self;
     [alertview showWithBlock:^(NSInteger index) {
         clickIndexBlock(index);
+        [weakSelf removeAlertView];
     }];
 }
 

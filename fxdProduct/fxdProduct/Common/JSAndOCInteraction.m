@@ -9,6 +9,7 @@
 #import "JSAndOCInteraction.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDKUI.h>
+#import "LoginViewController.h"
 
 @implementation JSAndOCInteraction
 
@@ -28,16 +29,26 @@
  @param view 分享视图u
  @param content 分享内容
  @param urlStr 分享链接
+ @param title 分享标题
+ @param imageUrl 分享图片
+
  */
--(void)shareContent:(UIView *)view shareContent:(NSString *)content UrlStr:(NSString *)urlStr
+-(void)shareContent:(UIView *)view shareContent:(NSString *)content UrlStr:(NSString *)urlStr shareTitle:(NSString *)title shareImage:(NSString *)imageUrl
 {
+    
     NSArray *imageArr = @[[UIImage imageNamed:@"logo_60"]];
+    if (urlStr != nil) {
+        imageArr = @[imageUrl];
+    }
+    
+    NSString * titleName  =  title == nil ? @"发薪贷" : title;
+    
     if (imageArr) {
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
         [shareParams SSDKSetupShareParamsByText:content
                                          images:imageArr
                                             url:[NSURL URLWithString:urlStr]
-                                          title:@"发薪贷"
+                                          title:titleName
                                            type:SSDKContentTypeAuto];
         [shareParams SSDKEnableUseClientShare];
         [ShareSDK showShareActionSheet:nil
@@ -72,7 +83,6 @@
     [[MBPAlertView sharedMBPTextView] showTextOnly:vc.view message:str];
     
 }
-
 /**
  前往某个固定页面
 
@@ -99,6 +109,11 @@
     
     if ([viewControllerName isEqualToString:@"ServiceHotline"]) {
         [self ServiceHotline:currentVC];
+        return;
+    }
+    
+    if (![Utility sharedUtility].loginFlage) {
+        [self presentLogin:currentVC];
         return;
     }
     
@@ -130,7 +145,6 @@
     [actionSheett addAction:teleAction];
     [actionSheett addAction:cancelAction];
     [vc presentViewController:actionSheett animated:YES completion:nil];
-    
 }
 
 /**
@@ -148,30 +162,34 @@
     
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         
-        NSURLCache *cache =[NSURLCache sharedURLCache];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:src]];
-        
-        NSData *imgData = [cache cachedResponseForRequest:request].data;
-        
-        UIImage *image = [UIImage imageWithData:imgData];
-        
-        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-        
+        [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:src] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+        } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+            NSLog(@"%ld",cacheType);
+            if (data) {
+                UIImage *image = [UIImage imageWithData:data];
+                UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            }else{
+                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"保存失败"];
+            }
+        }];
     }]];
     [currentVC presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
-    
     if (error != NULL){
-        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"下载失败"];
+        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"保存失败"];
     }else{
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"保存成功"];
     }
 }
 
-
+- (void)presentLogin:(UIViewController *)vc
+{
+    LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
+    [vc presentViewController:nav animated:YES completion:nil];
+}
 
 
 

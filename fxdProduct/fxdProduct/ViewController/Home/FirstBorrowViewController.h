@@ -12,3 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *firstImageView;
 @property (nonatomic,strong)NSString *url;
 @end
+
+
+
+

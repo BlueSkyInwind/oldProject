@@ -18,8 +18,11 @@
  @param view 分享视图u
  @param content 分享内容
  @param urlStr 分享链接
+ @param title 分享标题
+ @param imageUrl 分享图片
+ 
  */
--(void)shareContent:(UIView *)view shareContent:(NSString *)content UrlStr:(NSString *)urlStr;
+-(void)shareContent:(UIView *)view shareContent:(NSString *)content UrlStr:(NSString *)urlStr shareTitle:(NSString *)title shareImage:(NSString *)imageUrl;
 
 /**
  复制

@@ -56,9 +56,7 @@
     
     [self createMyCardUI];
     //请求银行卡列表信息
-    
-    self.automaticallyAdjustsScrollViewInsets=NO;
-    
+        
     if ([Utility sharedUtility].networkState) {
         [self postUrlMessageandDictionary];
     } else {

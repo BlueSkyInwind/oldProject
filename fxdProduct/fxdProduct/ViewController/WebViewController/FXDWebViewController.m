@@ -54,8 +54,9 @@
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
-        // NSString * str = @"https://fintech.chinazyjr.com/p2p/http/huifush/toBosAcctActivate.jhtml?page_type_=1&ret_url_=https://h5.faxindai.com:8028/fxd-h5/page/case/app_transition.html&from_mobile_=15241892226";
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+        NSString * testStr = @"http://192.168.13.250:8010/";
+        
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[testStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
     
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
@@ -141,6 +142,8 @@
             "FXDShare" : {
                 "shareContent" : "djeiojgffejfoewk",
                 "shareUrl" : "djeiojgffejfoewk"
+                "shareTitle" : "djeiojgffejfoewk"
+                "shareImage" : "djeiojgffejfoewk"
             }
         }
          */
@@ -148,7 +151,9 @@
             NSDictionary * resultDic = dic[@"FXDShare"];
             NSString * shareContent =  resultDic[@"shareContent"];
             NSString * shareUrl =  resultDic[@"shareUrl"];
-            [[JSAndOCInteraction sharedInteraction] shareContent:self.view shareContent:shareContent UrlStr:shareUrl];
+            NSString * shareTitle =  resultDic[@"shareTitle"];
+            NSString * shareImage =  resultDic[@"shareImage"];
+            [[JSAndOCInteraction sharedInteraction] shareContent:self.view shareContent:shareContent UrlStr:shareUrl shareTitle:shareTitle shareImage:shareImage];
         }
         
         //JS交互前往某个页面  FXDClipboardOfCopy

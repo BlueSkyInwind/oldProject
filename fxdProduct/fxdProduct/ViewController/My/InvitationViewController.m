@@ -34,7 +34,6 @@
     [self addBackItem];
     self.scrollView.contentSize = CGSizeMake(_k_w, _k_h*1.1);
     //    self.scrollView.backgroundColor = [UIColor redColor];
-    
 //    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(20, 30, _k_w-40, 370)];
     UIView *topView = [[UIView alloc] init];
     [Tool setCorner:topView borderColor:[UIColor clearColor]];
