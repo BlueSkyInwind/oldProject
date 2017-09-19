@@ -54,9 +54,9 @@
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
-        NSString * testStr = @"http://192.168.13.250:8010/";
+//        NSString * testStr = @"http://192.168.13.250:8010/";
         
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[testStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
     
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
@@ -301,7 +301,7 @@
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
     //调用js发送平台
-    if([webView.URL.absoluteString containsString:@"fxd-pay-fe"] || [webView.URL.absoluteString containsString:@"fxd-wxact"]){
+    if([webView.URL.absoluteString containsString:@"fxd-pay-fe"] || [webView.URL.absoluteString containsString:@"act"]){
         NSString *inputValueJS = @"window.FXDNAVIGATOR.platformFn('0')";
         NSLog(@"%@",inputValueJS);
         //执行JS
