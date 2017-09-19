@@ -370,12 +370,22 @@
     [homeCell.refuseBgImage removeFromSuperview];
     [homeCell.drawingBgImage removeFromSuperview];
     [homeCell.otherPlatformsBgView removeFromSuperview];
+    [homeCell.refuseBgView removeFromSuperview];
+    
+    
     //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中 10 延期失败
     
     if (_homeProductList == nil) {
         return homeCell;
     }
     homeCell.homeProductData = _homeProductList;
+    
+    homeCell.tabRefuseCellClosure = ^(NSInteger index){
+        
+        [self refuseTabClick:index];
+        
+    };
+    
     switch (_homeProductList.data.flag.integerValue) {
            
         case 1:
@@ -393,7 +403,11 @@
             break;
         case 3:
 
-            [homeCell setupRefuseUI];
+            
+//            [homeCell setupRefuseUI];
+            [homeCell refuseTab];
+
+
             break;
         case 4:
 
@@ -644,6 +658,22 @@
     }
 }
 
+-(void)refuseTabClick:(NSInteger)index{
+
+    switch (index) {
+        case 0:
+        case 1:
+            self.tabBarController.selectedIndex = 1;
+            break;
+        
+        case 2:
+            [self moreBtnClick];
+            break;
+            
+        default:
+            break;
+    }
+}
 #pragma mark 点击导流平台的更多
 -(void)moreBtnClick{
     
@@ -652,6 +682,16 @@
     [self.navigationController pushViewController:webVC animated:true];
     NSLog(@"点击导流平台的更多");
 }
+
+-(void)otherBtnClick{
+
+    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
+    [self.navigationController pushViewController:webVC animated:true];
+    NSLog(@"点击导流平台的更多");
+}
+
+
 #pragma mark 我要借款
 -(void)loanBtnClick{
     NSLog(@"我要借款");
