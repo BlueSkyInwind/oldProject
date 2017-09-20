@@ -78,7 +78,7 @@
     
     self.navigationItem.title = @"资料填写";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.automaticallyAdjustsScrollViewInsets = true;
+//    self.automaticallyAdjustsScrollViewInsets = true;
     processFlot = 0.0;
     isOpen = NO;
     _creditCardStatus = @"3";
@@ -88,38 +88,13 @@
     [self addBackItemRoot];
     [self configMoxieSDK];
     [self configTableview];
-//    self.navigationController.navigationBar.barTintColor = UI_MAIN_COLOR;
-//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
     topView = [[UIView alloc] init];
     [self.view addSubview:topView];
     if (_isMine) {
         _applyBtn.enabled = NO;
         _applyBtn.hidden = YES;
     }
-}
-
-- (void)addBackItemRoot
-{
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [btn setImage:img forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0, 0, 45, 44);
-    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    
-    //    修改距离,距离边缘的
-    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spaceItem.width = -15;
-    
-    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
-    //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
-}
-
-- (void)popBack
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)setApplyBtnStatus
@@ -147,7 +122,11 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-    
+    //声明tableView的位置 添加下面代码
+    if (@available(iOS 11.0, *)) {
+        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshInfoStep)];
     header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;
@@ -195,7 +174,6 @@
     }
     return 0;
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return _k_w*0.21f;
@@ -228,7 +206,6 @@
             if (!isOpen) {
                 cell.titleLabel.text = @"更多";
                 cell.arrowImageView.transform = CGAffineTransformIdentity;
-
             }
             __weak typeof(self) weakSelf = self;
             cell.unfoldBtnClick = ^{

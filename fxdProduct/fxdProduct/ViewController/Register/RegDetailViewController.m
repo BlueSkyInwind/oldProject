@@ -24,6 +24,7 @@
     [self createUI];
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets= NO;
+    
 }
 
 -(void)createUI{

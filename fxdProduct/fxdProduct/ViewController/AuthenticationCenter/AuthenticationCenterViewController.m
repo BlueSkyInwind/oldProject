@@ -80,7 +80,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"认证中心";
-
     _imageArr = @[@"icon_wri_ide_1",@"icon_wri_per_1",@"icon_wri_rece_1",@"icon_wri_face_1",@"icon_wri_mob_1",@"icon_wri_sesa_1",@"icon_wri_credit_1",@"icon_wri_social_1",@""];
     _editImageArr = @[@"icon_wri_ide_2",@"icon_wri_per_2",@"icon_wri_rece_2",@"icon_wri_face_2",@"icon_wri_mob_2",@"icon_wri_sesa_2",@"icon_wri_credit_2",@"icon_wri_social_2",@""];
     _completeImageArr = @[@"icon_wri_ide_3",@"icon_wri_per_3",@"icon_wri_rece_3",@"icon_wri_face_3",@"icon_wri_mob_3",@"icon_wri_sesa_3",@"icon_wri_credit_3",@"icon_wri_social_3",@""];
@@ -136,18 +135,19 @@
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.headerReferenceSize = CGSizeMake(0, 39);
     
-   
-    
     _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h) collectionViewLayout:layout];
+    if (@available(iOS 11.0, *)) {
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 64, _k_w, _k_h) collectionViewLayout:layout];
+        _collectionView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.backgroundColor = rgb(242, 242, 242);
-
-    _collectionView.scrollEnabled = false;
+    _collectionView.scrollEnabled = true;
     if (UI_IS_IPHONE4) {
         _collectionView.scrollEnabled = true;
-//        layout.footerReferenceSize =CGSizeMake(_k_w-40, 44);
     }
+
     [self.view addSubview:_collectionView];
     [_collectionView registerClass:[AuthenticationCenterCell class] forCellWithReuseIdentifier:@"AuthenticationCenterCell"];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ReusableView"];
@@ -167,24 +167,20 @@
         make.right.equalTo(wekSelf.view.mas_right).offset(-20);
         make.height.equalTo(@44);
     }];
-    
 }
 
 -(void)bottomClick{
     [self UserDataCertificationinterface];
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-
     return 2;
 }
-
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 0) {
         return 6;
     }
     return 3;
 }
-
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
 
@@ -308,7 +304,6 @@
     }
   
 //    NSLog(@"======%ld",indexPath.section);
-//    
 //    
 //    if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
 //        if (indexPath.section == 0) {

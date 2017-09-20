@@ -67,6 +67,15 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (void)addBanckCard
 {
+    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"addBankCardIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(addCardClick)];
+    self.navigationItem.rightBarButtonItem = aBarbi;
+    
+    if (@available(iOS 11.0, *)) {
+        UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
+        //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
+        self.navigationItem.leftBarButtonItem = aBarbi;
+        return;
+    }
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [btn setImage:img forState:UIControlStateNormal];
@@ -77,17 +86,12 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = -15;
     self.navigationItem.leftBarButtonItems = @[spaceItem,item];
-    
-    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"addBankCardIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(addCardClick)];
-    self.navigationItem.rightBarButtonItem = aBarbi;
-    
 }
 - (void)popBack
 {
     if (self.payPatternSelectBlock) {
         self.payPatternSelectBlock(_cardInfo,_currentIndex,self.payPattern);
     }
-    
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }

@@ -9,7 +9,7 @@
 import UIKit
 import MJRefresh
 
-class CheckingViewController: UIViewController {
+class CheckingViewController: BaseViewController {
 
     var scrollView: UIScrollView?
     
@@ -28,28 +28,9 @@ class CheckingViewController: UIViewController {
         checkingView?.receiveImmediatelyBtn.addTarget(self, action: #selector(applyImmediatelyBtnClick), for: .touchUpInside)
         self.view.addSubview(checkingView!)
         
-        addBackItemroot()
+        addBackItemRoot()
     }
 
-    func addBackItemroot(){
-    
-        let btn = UIButton.init(type: .system)
-        let img = UIImage(named:"return")?.withRenderingMode(.alwaysOriginal)
-        btn.setImage(img, for: .normal)
-        btn.frame = CGRect(x:0,y:0,width:45,height:44)
-        btn.addTarget(self, action: #selector(popBack), for: .touchUpInside)
-        let item = UIBarButtonItem.init(customView: btn)
-        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        spaceItem.width = -15
-        self.navigationItem.leftBarButtonItems = [spaceItem,item]
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self as? UIGestureRecognizerDelegate
-        
-    }
-    func popBack(){
-
-        self.navigationController?.popToRootViewController(animated: true)
-//        self.navigationController?.popViewController(animated: true)
-    }
 
     //MARK:量子互助
     func applyImmediatelyBtnClick(){
@@ -94,21 +75,24 @@ class CheckingViewController: UIViewController {
                 
                 case 10:
                     break
-                case 00,20,30:
-                    
+                case 00,20:
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-                        print("延时提交的任务")
+                        MBPAlertView.sharedMBPText().showTextOnly(UIApplication.shared.keyWindow, message: "资料测评失败")
                         self.navigationController?.popToRootViewController(animated: true)
-                        
                     }
                     self.tabBarController?.selectedIndex = 0;
-
+                    break
+                case 30:
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                        MBPAlertView.sharedMBPText().showTextOnly(UIApplication.shared.keyWindow, message: "资料测评通过啦")
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                    self.tabBarController?.selectedIndex = 0;
+                    break
                 default:
                     break
                 }
-                
             }else{
-            
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) { 

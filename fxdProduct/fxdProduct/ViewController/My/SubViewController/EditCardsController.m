@@ -90,6 +90,12 @@
 
 - (void)addBackItem
 {
+    if (@available(iOS 11.0, *)) {
+        UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(disMiss)];
+        //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
+        self.navigationItem.leftBarButtonItem = aBarbi;
+        return;
+    }
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [btn setImage:img forState:UIControlStateNormal];
@@ -110,7 +116,6 @@
 {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
-
     [self.navigationController popViewControllerAnimated:YES];
 }
 

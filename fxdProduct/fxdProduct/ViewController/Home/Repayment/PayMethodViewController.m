@@ -270,7 +270,6 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     }
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

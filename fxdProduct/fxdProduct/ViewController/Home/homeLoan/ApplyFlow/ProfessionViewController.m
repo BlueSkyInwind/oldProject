@@ -596,7 +596,6 @@
 }
 
 -(void)obtainUserContactInfoStatus{
-    
     UserDataViewModel * userDataVM1 = [[UserDataViewModel alloc]init];
     [userDataVM1 setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];

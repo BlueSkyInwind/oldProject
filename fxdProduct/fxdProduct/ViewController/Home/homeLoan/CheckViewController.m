@@ -180,7 +180,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 - (void)loadView
 {
-    
     UIScrollView *view = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     view.contentSize = CGSizeMake(_k_w, _k_h);
     view.backgroundColor = [UIColor whiteColor];
@@ -189,10 +188,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshUI)];
     header.automaticallyChangeAlpha = YES;
     view.mj_header = header;
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    if (@available(iOS 11.0, *)) {
+        view.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
     self.view = view;
     self.scrollView = view;
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -481,27 +483,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     checkSuccess.weekMoney.attributedText = attStr;
     checkSuccess.allMoney.text =[NSString stringWithFormat:@"%.2f元",[feeInfoModel.repaymentAmount floatValue]];
     
-}
-
-- (void)addBackItemRoot
-{
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [btn setImage:img forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0, 0, 45, 44);
-    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    //    修改距离,距离边缘的
-    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spaceItem.width = -15;
-    
-    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
-    //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
-}
-
-- (void)popBack
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -1335,7 +1316,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
  
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
         NSString *bankName = model.result.UsrCardInfolist.bankName;
         PayViewController *payVC = [[PayViewController alloc] init];

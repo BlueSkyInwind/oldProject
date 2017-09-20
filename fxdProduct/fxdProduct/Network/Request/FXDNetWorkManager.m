@@ -75,7 +75,6 @@
     
     MBProgressHUD *_waitView = [self loadingHUD];
     if (isNeedWait) {
-        
         [_waitView show:YES];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
     }
@@ -146,7 +145,6 @@
          [_waitView removeFromSuperview];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
     }];
-    
 }
 
 - (void)POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure

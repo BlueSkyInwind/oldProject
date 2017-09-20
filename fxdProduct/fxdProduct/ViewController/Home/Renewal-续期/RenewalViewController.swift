@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RenewalViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
+class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableViewDelegate{
 
     var leftTitleArr = ["逾期费用","使用溢缴金","应付金额","支付方式"]
     let cellId = "CellId"
@@ -82,25 +82,6 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
 
     }
     
-//    func addBackItemroot(){
-//        
-//        let btn = UIButton.init(type: .system)
-//        let img = UIImage(named:"return")?.withRenderingMode(.alwaysOriginal)
-//        btn.setImage(img, for: .normal)
-//        btn.frame = CGRect(x:0,y:0,width:45,height:44)
-//        btn.addTarget(self, action: #selector(popBack), for: .touchUpInside)
-//        let item = UIBarButtonItem.init(customView: btn)
-//        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-//        spaceItem.width = -15
-//        self.navigationItem.leftBarButtonItems = [spaceItem,item]
-//        self.navigationController?.interactivePopGestureRecognizer?.delegate = self as? UIGestureRecognizerDelegate
-//        
-//    }
-//    func popBack(){
-//        
-//        self.navigationController?.popViewController(animated: true)
-//    }
-
     //MARK:获取当前期的续期信息
     func getData(){
     
@@ -130,25 +111,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         }
         repayMentViewModel.getCurrentRenewal(withStagingId: stagingId)
     }
-    func addBackItem(){
-    
-        let btn = UIButton.init(type: .system)
-        let img = UIImage(named:"return")?.withRenderingMode(.alwaysOriginal)
-        btn.setImage(img, for: .normal)
-        btn.frame = CGRect(x:0,y:0,width:45,height:44)
-        btn.addTarget(self, action: #selector(backToPrevious), for: .touchUpInside)
-        let item = UIBarButtonItem.init(customView: btn)
-        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        spaceItem.width = -15
-        self.navigationItem.leftBarButtonItems = [spaceItem,item]
-        
-    }
-    
-    //返回按钮点击响应
-    func backToPrevious(){
-        self.navigationController!.popViewController(animated: true)
-    }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         

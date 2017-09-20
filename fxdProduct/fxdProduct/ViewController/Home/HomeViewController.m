@@ -61,7 +61,6 @@
 @implementation HomeViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"发薪贷";
     _count = 0;
@@ -170,8 +169,8 @@
     header.lastUpdatedTimeLabel.hidden = YES;
     [header beginRefreshing];
     self.tableView.mj_header = header;
+    
 }
-
 -(void)setUploadFailView{
     if (_loadFailView) {
         [_loadFailView removeFromSuperview];

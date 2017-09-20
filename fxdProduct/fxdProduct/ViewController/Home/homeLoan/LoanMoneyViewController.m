@@ -38,7 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"审核";
-    [self addBackItemroot];
+    [self addBackItemRoot];
     moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
     moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
     moenyViewing.repayBtnView.hidden = YES;
@@ -147,30 +147,6 @@
         [self getApplicationStatus];
 }
 
-- (void)addBackItemroot
-{
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [btn setImage:img forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0, 0, 45, 44);
-    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    
-    //    修改距离,距离边缘的
-    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spaceItem.width = -15;
-    
-    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
-    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
-}
-
-- (void)popBack
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -192,11 +168,9 @@
 - (void)postUrlMessageandDictionary:(void(^)(CardInfo *rate))finish{
     
     BankInfoViewModel *bankInfoVM = [[BankInfoViewModel alloc]init];
-    
     [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
-        
             NSArray * array = (NSArray *)baseResultM.data;
             for (int  i = 0; i < array.count; i++) {
                 NSDictionary *dic = array[i];
@@ -206,6 +180,8 @@
                     break;
                 }
             }
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         
