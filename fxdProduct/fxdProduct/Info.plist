@@ -50,7 +50,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>312</string>
+	<string>313</string>
 	<key>CompanyName</key>
 	<string>上海凡好金融信息服务有限公司</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -108,9 +108,9 @@
 	<string>用您的位置确定所在区域的门店</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>用您的位置确定所在区域的门店</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>访问您的相册</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>访问您的相册</string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>访问您的相册</string>
 	<key>UIBackgroundModes</key>
 	<array>
