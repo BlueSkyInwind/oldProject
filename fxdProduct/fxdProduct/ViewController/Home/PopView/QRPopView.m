@@ -71,7 +71,6 @@
     } else {
         return [[QRPopView alloc]initWithFrame:CGRectMake(0, 0, 300, 400)];
     }
-    
 }
 
 @end

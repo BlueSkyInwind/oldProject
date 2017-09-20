@@ -124,10 +124,8 @@
             break;
         case 2:
         {
-            UserDataViewController *userDataVC = [[UserDataViewController alloc]initWithNibName:@"UserDataViewController" bundle:nil];
-            [self.navigationController pushViewController:userDataVC animated:YES];
-//            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
-//            [self.navigationController pushViewController:invitationVC animated:true];
+            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
+            [self.navigationController pushViewController:invitationVC animated:true];
         }
             break;
         case 3:

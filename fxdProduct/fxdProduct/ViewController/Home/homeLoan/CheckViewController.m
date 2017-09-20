@@ -608,6 +608,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
     userBankCardListVC.currentIndex = userSelectIndex;
+    userBankCardListVC.payPattern = BankCard;
     userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex ,PatternOfPayment patternOfPayment) {
         self.selectCard = cardInfo;
         if (cardInfo == nil) {
@@ -906,7 +907,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
     completion();
 }
-
 
 #pragma mark 更改工薪贷和白领贷的周期
 -(void)getCycle:(CGFloat)money{
