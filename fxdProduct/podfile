@@ -13,7 +13,7 @@ abstract_target 'fxd' do
     #pod 'ReactiveCocoa', '~> 4.2.2'
     pod 'ReactiveObjC', '~> 3.0.0'
     pod 'YYModel'
-    pod 'SnapKit'
+    pod 'SnapKit', '~> 3.2.0'
     pod 'FMDB' ,'~> 2.6.2'
     # pod 'FMDB/FTS'   # FMDB with FTS
     # pod 'FMDB/standalone'   # FMDB with latest SQLite amalgamation source
