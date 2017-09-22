@@ -454,6 +454,11 @@ NSString * const    _UserDataCertificationResult_url    =    @"apigw/client/user
 //退出登录删除推送id
 NSString * const    _loginOutDeleteRegisterId_url    =    @"apigw/client/center/jiguang/delete";
 
+//资金平台列表
+NSString * const    _CapitalList_url    =    @"apigw/client/capital/list";
+
+//资金平台放款接口
+NSString * const    _CapitalLoan_url    =    @"apigw/client/capital/loan";
 
 #pragma mark - 合规接口
 

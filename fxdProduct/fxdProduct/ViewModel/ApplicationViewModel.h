@@ -22,5 +22,10 @@
  */
 -(void)queryApplicationInfo:(NSString *)productId;
 
+/**
+ 资金平台列表
+ */
+
+-(void)capitalList:(NSString *)productId;
 
 @end
