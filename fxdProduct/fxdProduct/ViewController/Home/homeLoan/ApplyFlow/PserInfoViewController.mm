@@ -451,6 +451,7 @@
 #pragma mark - OCR识别结果
 - (void)checkIDCard:(MGIDCardSide)CardSide
 {
+    NSLog(@"%@",[MGIDCardManager IDCardVersion]);
     __unsafe_unretained PserInfoViewController *weakSelf = self;
     BOOL idcard = [MGIDCardManager getLicense];
     if (!idcard) {
@@ -459,7 +460,6 @@
     }
     
     MGIDCardManager *cardManager = [[MGIDCardManager alloc] init];
-    
     [cardManager IDCardStartDetection:self IdCardSide:CardSide
                                finish:^(MGIDCardModel *model) {
                                    //                                   weakSelf.cardView.image = [model croppedImageOfIDCard];
@@ -470,7 +470,6 @@
                                      //                                     DLog(@"%ld",MGIDCardError);
                                  }];
 }
-
 - (void)verifyIDCard:(UIImage *)image cardSide:(MGIDCardSide)cardSide
 {
     __unsafe_unretained PserInfoViewController *weakSelf = self;

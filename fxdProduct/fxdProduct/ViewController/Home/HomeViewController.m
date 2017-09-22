@@ -151,7 +151,6 @@
 }
 - (void)setUpTableview
 {
-    
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
     [self.tableView registerClass:[HomeDefaultCell class] forCellReuseIdentifier:@"HomeDefaultCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -169,7 +168,6 @@
     header.lastUpdatedTimeLabel.hidden = YES;
     [header beginRefreshing];
     self.tableView.mj_header = header;
-    
 }
 -(void)setUploadFailView{
     if (_loadFailView) {
@@ -398,10 +396,8 @@
             [homeCell productListOtherWithIndex:indexPath.section];
             break;
         case 3:
-
 //            [homeCell setupRefuseUI];
             [homeCell refuseTab];
-
             break;
         case 4:
 
@@ -429,7 +425,6 @@
 {
     
 }
-
 #pragma mak - SDCycleScrollViewDelegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
@@ -500,8 +495,8 @@
 -(void)getApplyStatus:(void(^)(BOOL isSuccess, UserStateModel *resultModel))finish{
     
 
-    
 }
+
 //- (void)fatchRate:(void(^)(RateModel *rate))finish
 //{
 //    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
@@ -533,7 +528,6 @@
 }
 
 -(void)goLoanMoneVC:(ApplicationStatus)status{
-    
     LoanMoneyViewController *loanVc = [LoanMoneyViewController new];
     loanVc.applicationStatus = status;
     [self.navigationController pushViewController:loanVc animated:YES];
@@ -678,13 +672,11 @@
 }
 
 -(void)otherBtnClick{
-
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
     webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
     [self.navigationController pushViewController:webVC animated:true];
     NSLog(@"点击导流平台的更多");
 }
-
 
 #pragma mark 我要借款
 -(void)loanBtnClick{
