@@ -2,16 +2,17 @@
 //  MGLiveConfig.h
 //  MGLivenessDetection
 //
-//  Created by 张英堂 on 16/3/28.
-//  Copyright © 2016年 megvii. All rights reserved.
+//  Created by megvii on 16/3/28.
+//  Copyright © 2016Year megvii. All rights reserved.
 //
 
 #ifndef MGLiveConfig_h
 #define MGLiveConfig_h
 
-
 #import "LivenessEnumType.h"
 #import "LivenessDetector.h"
+
+#define KMGDEFAULTFACECENTER CGPointMake(0.5, 0.35)
 
 /**
  *  倒计时显示类型
@@ -24,7 +25,6 @@ typedef NS_ENUM(NSInteger, MGCountDownType) {
     /** 自定义 */
     MGCountDownTypeCustom,
 };
-
 
 /**
  *  活体检测各项配置错误类型
@@ -50,7 +50,5 @@ typedef void(^faceSuccess)(FaceIDData *faceData, UIViewController *vc);
 typedef void(^faceError)(MGLivenessDetectionFailedType errorType, UIViewController *vc);
 typedef void(^faceSettingError)(MGLiveSettingErrorType errorType, UIViewController *vc);
 typedef void(^faceQualitySuccess)(MGLivenessDetectionFrame *faceFrame, UIViewController *vc);
-
-
 
 #endif /* MGLiveConfig_h */

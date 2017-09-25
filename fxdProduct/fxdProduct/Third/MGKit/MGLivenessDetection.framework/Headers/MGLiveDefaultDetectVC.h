@@ -2,15 +2,14 @@
 //  MGLiveDefaultDetectVC.h
 //  MGLivenessDetection
 //
-//  Created by 张英堂 on 16/8/17.
-//  Copyright © 2016年 megvii. All rights reserved.
+//  Created by megvii on 16/8/17.
+//  Copyright © 2016Year megvii. All rights reserved.
 //
 
 #import <MGLivenessDetection/MGLivenessDetection.h>
 #import "MGLiveDetectViewController.h"
 
 @interface MGLiveDefaultDetectVC : MGLiveDetectViewController
-
 
 #pragma mark - 活体结束回调，使用block
 /**
@@ -27,7 +26,5 @@
  *  在只有照镜子模式下的成功回调
  */
 @property (nonatomic, copy) faceQualitySuccess Qualityfinish;
-
-
 
 @end

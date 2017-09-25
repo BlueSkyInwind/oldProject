@@ -4,7 +4,7 @@
 //
 //  Created by 张英堂 on 15/1/12.
 //  Edited by yangmu on 15/3/18.
-//  Copyright (c) 2015年 megvii. All rights reserved.
+//  Copyright (c) 2015Year megvii. All rights reserved.
 //
 
 /*!

@@ -2,19 +2,22 @@
 //  MGVideoManager.h
 //  MGLivenessDetection
 //
-//  Created by 张英堂 on 16/3/31.
-//  Copyright © 2016年 megvii. All rights reserved.
+//  Created by megvii on 16/3/31.
+//  Copyright © 2016Year megvii. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "MGVideoDelegate.h"
+#import "MGImage.h"
 #import "MGBaseDefine.h"
 
 @protocol MGVideoDelegate;
 
-/**
- *  视频流管理器
- */
 @interface MGVideoManager : NSObject
+
+@property (nonatomic, assign) id <MGVideoDelegate> videoDelegate;
+
+- (dispatch_queue_t)getVideoQueue;
 
 /**
  *  初始化方法
@@ -30,27 +33,20 @@
                 videoRecord:(BOOL)record
                  videoSound:(BOOL)sound;
 
-/**
- *  视频流的返回block， 不推荐使用。
- */
-@property (nonatomic, copy) videoOutputBlock videoManagerBlock DEPRECATED_ATTRIBUTE;
-
-
-/** 代理方式 返回视频流信息  */
-@property (nonatomic, assign) id<MGVideoDelegate> videoDelegate;
-
-
-/**
- *  视频流的预览layer 默认全屏大小
- *
- *  @return 实例化对象
- */
--(AVCaptureVideoPreviewLayer *)videoPreview;
-
-
 @property (nonatomic, strong, readonly) AVCaptureSession *videoSession;
 @property (nonatomic, strong, readonly) AVCaptureDeviceInput *videoInput;
 @property (nonatomic, assign, readonly) AVCaptureDevicePosition devicePosition;
+
+///**
+// *  视频流的最大帧率
+// */
+//@property (nonatomic, assign) int maxFrame;
+
+/**
+ *  视频流的预览layer 默认全屏大小
+ *  @return 实例化对象
+ */
+-(AVCaptureVideoPreviewLayer *)videoPreview;
 
 /**
  *  视频流的方向
@@ -63,12 +59,12 @@
 - (void)startRunning;
 
 /**
- *  关闭视频流 -- 如果录像器没有停止，会自动停止录像
+ *  关闭视频流
  */
 - (void)stopRunning;
 
 /**
- *  开始录像 --如果视频流没有开启，会自动开启。
+ *  开始录像
  */
 - (void)startRecording;
 
@@ -79,16 +75,10 @@
  */
 - (NSString *)stopRceording;
 
+- (CMFormatDescriptionRef)formatDescription;
 
-
-
-@end
-
-
-@protocol MGVideoDelegate <NSObject>
-
-- (void)MGCaptureOutput:(AVCaptureOutput *)captureOutput
-  didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
-         fromConnection:(AVCaptureConnection *)connection;
+/** only valid after startRunning has been called */
+- (CGAffineTransform)transformFromVideoBufferOrientationToOrientation:(AVCaptureVideoOrientation)orientation
+                                                    withAutoMirroring:(BOOL)mirroring;
 
 @end

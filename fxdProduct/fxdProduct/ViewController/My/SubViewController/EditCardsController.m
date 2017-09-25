@@ -51,7 +51,7 @@
     if([self.typeFlag isEqualToString:@"0"]){
         self.title=@"添加银行卡";
     }
-
+    [self license];
     supportBankListArr = [NSMutableArray array];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
@@ -258,7 +258,16 @@
     bankType.bankArray = supportBankListArr;
     [self.navigationController pushViewController:bankType animated:YES];
 }
-
+- (void)license
+{
+    [MGLicenseManager licenseForNetWokrFinish:^(bool License) {
+        if (License) {
+            DLog(@"授权成功");
+        } else {
+            DLog(@"授权失败");
+        }
+    }];
+}
 /**
  扫描银行卡
  */
@@ -356,13 +365,10 @@
 */
 - (void)startBankCamera
 {
-
     BOOL bankcard = [MGBankCardManager getLicense];
     
     if (!bankcard) {
-        
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"SDK授权失败，请检查"];
-
         return;
     }
     
@@ -372,15 +378,12 @@
     [cardManager CardStart:self finish:^(MGBankCardModel * _Nullable result) {
         //        weakSelf.bankImageView.image = result.image;
         //        weakSelf.bankNumView.text = result.bankCardNumber;
-        
         weakSelf.cardNum = result.bankCardNumber;
         weakSelf.cardNum = [self.cardNum stringByReplacingOccurrencesOfString:@" " withString:@""];
         weakSelf.cardNum=[self changeStr:self.cardNum];
         DLog(@"银行卡扫描可信度 -- %@",[NSString stringWithFormat:@"confidence:%.2f", result.bankCardconfidence]);
         [weakSelf.tableView reloadData];
-
     }];
-    
 }
 
 #pragma  mark Delegate

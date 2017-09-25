@@ -87,8 +87,6 @@
 		1AEFFA7C1C50BF72003936CE /* loanRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEFFA7B1C50BF72003936CE /* loanRecordCell.m */; };
 		1AFE7EAF1C2A3CC30016CD02 /* GesturesPasswordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */; };
 		1AFE7EB01C2A3CC30016CD02 /* GesturesPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */; };
-		22D2BFB41EA4A97100B69360 /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */; };
-		22D2BFB81EA4BD9900B69360 /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D2BFB71EA4BD9900B69360 /* MGBankCard.framework */; };
 		3E2B09C36E24E9E9316FAC1B /* Pods_fxd_fxdProduct.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 556C177616476C4A424DFF82 /* Pods_fxd_fxdProduct.framework */; };
 		63001A231BA8113000E2850A /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 63001A1F1BA8113000E2850A /* GTMBase64.m */; };
 		6300CC031E4AAB870012B05A /* LoanProcessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6300CC021E4AAB870012B05A /* LoanProcessModel.m */; };
@@ -146,9 +144,6 @@
 		6326CA4A1BF1B29800FD23A8 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6326CA491BF1B29800FD23A8 /* CoreVideo.framework */; };
 		6326CA4C1BF1B2BA00FD23A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6326CA4B1BF1B2BA00FD23A8 /* UIKit.framework */; };
 		6326CAAC1BF1CA5F00FD23A8 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 6326CAAB1BF1CA5F00FD23A8 /* pinyin.c */; };
-		632C587F1E5A933F00490C14 /* MGBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 632C587C1E5A933F00490C14 /* MGBaseKit.framework */; };
-		632C58801E5A933F00490C14 /* MGIDCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 632C587D1E5A933F00490C14 /* MGIDCard.framework */; };
-		632C58811E5A933F00490C14 /* MGLivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 632C587E1E5A933F00490C14 /* MGLivenessDetection.framework */; };
 		632C58851E5AC8E400490C14 /* ContactClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 632C58841E5AC8E400490C14 /* ContactClass.m */; };
 		632C588C1E5ADE1A00490C14 /* AddressClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 632C588B1E5ADE1A00490C14 /* AddressClass.m */; };
 		632DFF621E48500500E414B2 /* CycleTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 632DFF601E48500500E414B2 /* CycleTextCell.m */; };
@@ -192,10 +187,8 @@
 		63553B021E5D9C2E00B2C1FF /* FaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553B001E5D9C2E00B2C1FF /* FaceCell.xib */; };
 		63553B061E5D9E1B00B2C1FF /* MobileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B041E5D9E1B00B2C1FF /* MobileCell.m */; };
 		63553B071E5D9E1B00B2C1FF /* MobileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553B051E5D9E1B00B2C1FF /* MobileCell.xib */; };
-		63553B0E1E5EE73500B2C1FF /* MGIDCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63553B0D1E5EE73500B2C1FF /* MGIDCardResource.bundle */; };
 		63553B151E5EEF1C00B2C1FF /* FaceIDOCRFront.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B141E5EEF1C00B2C1FF /* FaceIDOCRFront.m */; };
 		63553B191E5F0AF900B2C1FF /* FaceIDOCRBack.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B181E5F0AF900B2C1FF /* FaceIDOCRBack.m */; };
-		63553B1B1E5FD09D00B2C1FF /* MGLiveResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63553B1A1E5FD09D00B2C1FF /* MGLiveResource.bundle */; };
 		63553B1F1E600D0D00B2C1FF /* FaceIDLiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B1E1E600D0D00B2C1FF /* FaceIDLiveModel.m */; };
 		63553B231E61825300B2C1FF /* JXLParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B221E61825300B2C1FF /* JXLParse.m */; };
 		63553B271E63CB8C00B2C1FF /* JXLMessagePrse.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B261E63CB8C00B2C1FF /* JXLMessagePrse.m */; };
@@ -546,6 +539,14 @@
 		842CA0EA1F45492000A2150B /* jcore-ios-1.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842CA0E61F45492000A2150B /* jcore-ios-1.1.5.a */; };
 		842CA0EB1F45492000A2150B /* jpush-ios-3.0.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842CA0E71F45492000A2150B /* jpush-ios-3.0.6.a */; };
 		842CA0EC1F45492000A2150B /* jpush-ios-3.0.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842CA0E71F45492000A2150B /* jpush-ios-3.0.6.a */; };
+		843149861F75036700FA3678 /* MGIDCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149821F75035000FA3678 /* MGIDCardResource.bundle */; };
+		843149871F75036700FA3678 /* MGLivenessDetectionResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */; };
+		843149881F75037E00FA3678 /* MGIDCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149831F75035100FA3678 /* MGIDCard.framework */; };
+		843149891F75037E00FA3678 /* MGLivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149841F75035100FA3678 /* MGLivenessDetection.framework */; };
+		8431498A1F75038D00FA3678 /* MGIDCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149821F75035000FA3678 /* MGIDCardResource.bundle */; };
+		8431498B1F75038D00FA3678 /* MGLivenessDetectionResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */; };
+		8431498C1F75039F00FA3678 /* MGIDCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149831F75035100FA3678 /* MGIDCard.framework */; };
+		8431498D1F75039F00FA3678 /* MGLivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149841F75035100FA3678 /* MGLivenessDetection.framework */; };
 		8436149D1F0CF57C0036201A /* P2PContactContenParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436149C1F0CF57C0036201A /* P2PContactContenParam.m */; };
 		8436149E1F0CF7440036201A /* P2PContactContenParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436149C1F0CF57C0036201A /* P2PContactContenParam.m */; };
 		843614A11F0CF8700036201A /* P2PContactContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843614A01F0CF8700036201A /* P2PContactContentModel.m */; };
@@ -616,6 +617,12 @@
 		84CC899A1F593C1E00537910 /* ApplicaitonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC89981F593C1E00537910 /* ApplicaitonModel.m */; };
 		84CC899E1F5973D700537910 /* DrawingsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC899D1F5973D700537910 /* DrawingsInfoModel.m */; };
 		84CC899F1F5973D700537910 /* DrawingsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC899D1F5973D700537910 /* DrawingsInfoModel.m */; };
+		84D715B41F7894B200F433E5 /* MGBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715A91F78936D00F433E5 /* MGBaseKit.framework */; };
+		84D715B61F7894C800F433E5 /* MGBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715A91F78936D00F433E5 /* MGBaseKit.framework */; };
+		84D715EF1F78CF5A00F433E5 /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715ED1F78CF3700F433E5 /* MGBankCard.framework */; };
+		84D715F01F78CF6700F433E5 /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */; };
+		84D715F11F78CF7C00F433E5 /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715ED1F78CF3700F433E5 /* MGBankCard.framework */; };
+		84D715F21F78CF8800F433E5 /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */; };
 		84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
@@ -1034,7 +1041,6 @@
 		CC0DFAE81EA5B1090024841A /* ShouldAlsoAmountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7AB1BE34F9F00C32919 /* ShouldAlsoAmountResult.m */; };
 		CC0DFAEA1EA5B1090024841A /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BDF8A71E762ABD008C4E10 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CC0DFAEB1EA5B1090024841A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032FA7E41BE1BB4D00CF2D21 /* CoreTelephony.framework */; };
-		CC0DFAEC1EA5B1090024841A /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D2BFB71EA4BD9900B69360 /* MGBankCard.framework */; };
 		CC0DFAED1EA5B1090024841A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BDF8A91E762B0E008C4E10 /* MobileCoreServices.framework */; };
 		CC0DFAEE1EA5B1090024841A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032FA7E61BE1BB5300CF2D21 /* CoreLocation.framework */; };
 		CC0DFAEF1EA5B1090024841A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F824AF1BFB20D000550978 /* CoreMotion.framework */; };
@@ -1047,8 +1053,6 @@
 		CC0DFAF71EA5B1090024841A /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BB43951DFF9FCB009A7886 /* libstdc++.tbd */; };
 		CC0DFAF81EA5B1090024841A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 032FA7DA1BE1BB3300CF2D21 /* libz.tbd */; };
 		CC0DFAF91EA5B1090024841A /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BB43931DFF9FAC009A7886 /* libicucore.tbd */; };
-		CC0DFAFA1EA5B1090024841A /* MGLivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 632C587E1E5A933F00490C14 /* MGLivenessDetection.framework */; };
-		CC0DFAFB1EA5B1090024841A /* MGBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 632C587C1E5A933F00490C14 /* MGBaseKit.framework */; };
 		CC0DFAFC1EA5B1090024841A /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 637963771CAB9CF3002A5910 /* libstdc++.6.0.9.tbd */; };
 		CC0DFAFD1EA5B1090024841A /* BaiduMapAPI_Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637963901CABA266002A5910 /* BaiduMapAPI_Utils.framework */; };
 		CC0DFAFE1EA5B1090024841A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 637963751CAB9CCC002A5910 /* libsqlite3.0.tbd */; };
@@ -1056,7 +1060,6 @@
 		CC0DFB001EA5B1090024841A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637963731CAB9CB8002A5910 /* CoreGraphics.framework */; };
 		CC0DFB011EA5B1090024841A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032FA7E01BE1BB4400CF2D21 /* SystemConfiguration.framework */; };
 		CC0DFB021EA5B1090024841A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F824AD1BFB20CA00550978 /* OpenGLES.framework */; };
-		CC0DFB031EA5B1090024841A /* MGIDCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 632C587D1E5A933F00490C14 /* MGIDCard.framework */; };
 		CC0DFB041EA5B1090024841A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637963711CAB9C9D002A5910 /* QuartzCore.framework */; };
 		CC0DFB051EA5B1090024841A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B311541BD75D01002C4B98 /* AudioToolbox.framework */; };
 		CC0DFB061EA5B1090024841A /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6379638F1CABA266002A5910 /* BaiduMapAPI_Search.framework */; };
@@ -1100,7 +1103,6 @@
 		CC0DFB371EA5B1090024841A /* RepayListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636D61D76A28700E93289 /* RepayListCell.xib */; };
 		CC0DFB391EA5B1090024841A /* bank_code_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76B1D348B4E0097C943 /* bank_code_4@2x.png */; };
 		CC0DFB3A1EA5B1090024841A /* MoneyPlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63C12DCA1E495CC9008119FB /* MoneyPlanCell.xib */; };
-		CC0DFB3C1EA5B1090024841A /* MGIDCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63553B0D1E5EE73500B2C1FF /* MGIDCardResource.bundle */; };
 		CC0DFB3D1EA5B1090024841A /* IdeaBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9E30D11BC8A70C0018A801 /* IdeaBackViewController.xib */; };
 		CC0DFB3E1EA5B1090024841A /* SumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FE3DEA1E487819009E5B82 /* SumCell.xib */; };
 		CC0DFB3F1EA5B1090024841A /* indexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 631CB46F1B7AF5220090C94D /* indexViewController.xib */; };
@@ -1134,7 +1136,6 @@
 		CC0DFB5C1EA5B1090024841A /* ChangePWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63811B601B8EFC67008F605B /* ChangePWViewController.xib */; };
 		CC0DFB5D1EA5B1090024841A /* bank_code_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76A1D348B4E0097C943 /* bank_code_3@2x.png */; };
 		CC0DFB5E1EA5B1090024841A /* bank_code_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76C1D348B4E0097C943 /* bank_code_5@2x.png */; };
-		CC0DFB5F1EA5B1090024841A /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */; };
 		CC0DFB621EA5B1090024841A /* bank_code_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7671D348B4E0097C943 /* bank_code_1@2x.png */; };
 		CC0DFB631EA5B1090024841A /* LoanSureFirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F5AD921E23849C001BDF44 /* LoanSureFirstViewController.xib */; };
 		CC0DFB641EA5B1090024841A /* BankListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63741E371D3CD4A300C0E2F8 /* BankListCell.xib */; };
@@ -1151,7 +1152,6 @@
 		CC0DFB701EA5B1090024841A /* wtproject.lsc in Resources */ = {isa = PBXBuildFile; fileRef = 63DCD7D81C87FDA200FAC7CE /* wtproject.lsc */; };
 		CC0DFB711EA5B1090024841A /* LoanProcessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F254911E49CFE800852CF1 /* LoanProcessCell.xib */; };
 		CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636B1B8E1C2A416500450358 /* NextViewCell.xib */; };
-		CC0DFB741EA5B1090024841A /* MGLiveResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63553B1A1E5FD09D00B2C1FF /* MGLiveResource.bundle */; };
 		CC0DFB761EA5B1090024841A /* MsgViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A8988FB1BEC9EBE00F9E81E /* MsgViewCell.xib */; };
 		CC0DFB771EA5B1090024841A /* CycleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632DFF611E48500500E414B2 /* CycleTextCell.xib */; };
 		CC0DFB781EA5B1090024841A /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 63B65DF01D519D1600207231 /* main.js */; };
@@ -1466,8 +1466,6 @@
 		1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GesturesPasswordCell.h; path = ../GesturesPasswordCell.h; sourceTree = "<group>"; };
 		1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GesturesPasswordCell.m; sourceTree = "<group>"; };
 		1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GesturesPasswordCell.xib; sourceTree = "<group>"; };
-		22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGBankCardResource.bundle; sourceTree = "<group>"; };
-		22D2BFB71EA4BD9900B69360 /* MGBankCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBankCard.framework; sourceTree = "<group>"; };
 		3C2819F71AD8F8FCD65CAD98 /* Pods_fxdProduct.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxdProduct.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		556C177616476C4A424DFF82 /* Pods_fxd_fxdProduct.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProduct.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63001A1E1BA8113000E2850A /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -1574,9 +1572,6 @@
 		6326CA4B1BF1B2BA00FD23A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6326CAAB1BF1CA5F00FD23A8 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
 		6326CAD71BF1F10800FD23A8 /* libIQKeyboardManager.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIQKeyboardManager.a; path = "Pods/../build/Debug-iphoneos/libIQKeyboardManager.a"; sourceTree = "<group>"; };
-		632C587C1E5A933F00490C14 /* MGBaseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBaseKit.framework; sourceTree = "<group>"; };
-		632C587D1E5A933F00490C14 /* MGIDCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGIDCard.framework; sourceTree = "<group>"; };
-		632C587E1E5A933F00490C14 /* MGLivenessDetection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGLivenessDetection.framework; sourceTree = "<group>"; };
 		632C58831E5AC8E400490C14 /* ContactClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactClass.h; sourceTree = "<group>"; };
 		632C58841E5AC8E400490C14 /* ContactClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactClass.m; sourceTree = "<group>"; };
 		632C58871E5ACD1C00490C14 /* ContactProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactProtocol.h; sourceTree = "<group>"; };
@@ -1652,12 +1647,10 @@
 		63553B031E5D9E1B00B2C1FF /* MobileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileCell.h; sourceTree = "<group>"; };
 		63553B041E5D9E1B00B2C1FF /* MobileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileCell.m; sourceTree = "<group>"; };
 		63553B051E5D9E1B00B2C1FF /* MobileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MobileCell.xib; sourceTree = "<group>"; };
-		63553B0D1E5EE73500B2C1FF /* MGIDCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGIDCardResource.bundle; sourceTree = "<group>"; };
 		63553B131E5EEF1C00B2C1FF /* FaceIDOCRFront.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceIDOCRFront.h; sourceTree = "<group>"; };
 		63553B141E5EEF1C00B2C1FF /* FaceIDOCRFront.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceIDOCRFront.m; sourceTree = "<group>"; };
 		63553B171E5F0AF900B2C1FF /* FaceIDOCRBack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceIDOCRBack.h; sourceTree = "<group>"; };
 		63553B181E5F0AF900B2C1FF /* FaceIDOCRBack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceIDOCRBack.m; sourceTree = "<group>"; };
-		63553B1A1E5FD09D00B2C1FF /* MGLiveResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGLiveResource.bundle; sourceTree = "<group>"; };
 		63553B1D1E600D0D00B2C1FF /* FaceIDLiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceIDLiveModel.h; sourceTree = "<group>"; };
 		63553B1E1E600D0D00B2C1FF /* FaceIDLiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceIDLiveModel.m; sourceTree = "<group>"; };
 		63553B211E61825300B2C1FF /* JXLParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXLParse.h; sourceTree = "<group>"; };
@@ -2276,6 +2269,10 @@
 		842CA0E61F45492000A2150B /* jcore-ios-1.1.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.5.a"; sourceTree = "<group>"; };
 		842CA0E71F45492000A2150B /* jpush-ios-3.0.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.6.a"; sourceTree = "<group>"; };
 		842CA0E81F45492000A2150B /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		843149821F75035000FA3678 /* MGIDCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGIDCardResource.bundle; sourceTree = "<group>"; };
+		843149831F75035100FA3678 /* MGIDCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGIDCard.framework; sourceTree = "<group>"; };
+		843149841F75035100FA3678 /* MGLivenessDetection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGLivenessDetection.framework; sourceTree = "<group>"; };
+		843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGLivenessDetectionResource.bundle; sourceTree = "<group>"; };
 		8436149B1F0CF57C0036201A /* P2PContactContenParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PContactContenParam.h; sourceTree = "<group>"; };
 		8436149C1F0CF57C0036201A /* P2PContactContenParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PContactContenParam.m; sourceTree = "<group>"; };
 		8436149F1F0CF8700036201A /* P2PContactContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PContactContentModel.h; sourceTree = "<group>"; };
@@ -2337,6 +2334,9 @@
 		84CC89981F593C1E00537910 /* ApplicaitonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicaitonModel.m; sourceTree = "<group>"; };
 		84CC899C1F5973D700537910 /* DrawingsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingsInfoModel.h; sourceTree = "<group>"; };
 		84CC899D1F5973D700537910 /* DrawingsInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingsInfoModel.m; sourceTree = "<group>"; };
+		84D715A91F78936D00F433E5 /* MGBaseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBaseKit.framework; sourceTree = "<group>"; };
+		84D715ED1F78CF3700F433E5 /* MGBankCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBankCard.framework; sourceTree = "<group>"; };
+		84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGBankCardResource.bundle; sourceTree = "<group>"; };
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
 		84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSwift.swift; sourceTree = "<group>"; };
@@ -2482,9 +2482,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D715F11F78CF7C00F433E5 /* MGBankCard.framework in Frameworks */,
+				84D715B41F7894B200F433E5 /* MGBaseKit.framework in Frameworks */,
+				8431498C1F75039F00FA3678 /* MGIDCard.framework in Frameworks */,
+				8431498D1F75039F00FA3678 /* MGLivenessDetection.framework in Frameworks */,
 				63BDF8AB1E768215008C4E10 /* UserNotifications.framework in Frameworks */,
 				032FA7E51BE1BB4D00CF2D21 /* CoreTelephony.framework in Frameworks */,
-				22D2BFB81EA4BD9900B69360 /* MGBankCard.framework in Frameworks */,
 				63BDF8AA1E762B0E008C4E10 /* MobileCoreServices.framework in Frameworks */,
 				032FA7E71BE1BB5300CF2D21 /* CoreLocation.framework in Frameworks */,
 				63F824B01BFB20D000550978 /* CoreMotion.framework in Frameworks */,
@@ -2498,9 +2501,7 @@
 				63BB43961DFF9FCB009A7886 /* libstdc++.tbd in Frameworks */,
 				032FA7DB1BE1BB3300CF2D21 /* libz.tbd in Frameworks */,
 				63BB43941DFF9FAC009A7886 /* libicucore.tbd in Frameworks */,
-				632C58811E5A933F00490C14 /* MGLivenessDetection.framework in Frameworks */,
 				84ED5B581F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */,
-				632C587F1E5A933F00490C14 /* MGBaseKit.framework in Frameworks */,
 				637963781CAB9CF3002A5910 /* libstdc++.6.0.9.tbd in Frameworks */,
 				637963941CABA266002A5910 /* BaiduMapAPI_Utils.framework in Frameworks */,
 				637963761CAB9CCC002A5910 /* libsqlite3.0.tbd in Frameworks */,
@@ -2508,7 +2509,6 @@
 				637963741CAB9CB8002A5910 /* CoreGraphics.framework in Frameworks */,
 				032FA7E11BE1BB4400CF2D21 /* SystemConfiguration.framework in Frameworks */,
 				63F824AE1BFB20CA00550978 /* OpenGLES.framework in Frameworks */,
-				632C58801E5A933F00490C14 /* MGIDCard.framework in Frameworks */,
 				637963721CAB9C9D002A5910 /* QuartzCore.framework in Frameworks */,
 				63B311551BD75D01002C4B98 /* AudioToolbox.framework in Frameworks */,
 				637963931CABA266002A5910 /* BaiduMapAPI_Search.framework in Frameworks */,
@@ -2541,11 +2541,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D715EF1F78CF5A00F433E5 /* MGBankCard.framework in Frameworks */,
+				84D715B61F7894C800F433E5 /* MGBaseKit.framework in Frameworks */,
+				843149881F75037E00FA3678 /* MGIDCard.framework in Frameworks */,
+				843149891F75037E00FA3678 /* MGLivenessDetection.framework in Frameworks */,
 				84ED5B591F4AB9E7004C0A59 /* libMoxieSDK.a in Frameworks */,
 				84FA3F571F53AA5D00C8ABED /* Pods_fxd_fxdProductDev.framework in Frameworks */,
 				CC0DFAEA1EA5B1090024841A /* UserNotifications.framework in Frameworks */,
 				CC0DFAEB1EA5B1090024841A /* CoreTelephony.framework in Frameworks */,
-				CC0DFAEC1EA5B1090024841A /* MGBankCard.framework in Frameworks */,
 				CC0DFAED1EA5B1090024841A /* MobileCoreServices.framework in Frameworks */,
 				CC0DFAEE1EA5B1090024841A /* CoreLocation.framework in Frameworks */,
 				CC0DFAEF1EA5B1090024841A /* CoreMotion.framework in Frameworks */,
@@ -2559,8 +2562,6 @@
 				CC0DFAF71EA5B1090024841A /* libstdc++.tbd in Frameworks */,
 				CC0DFAF81EA5B1090024841A /* libz.tbd in Frameworks */,
 				CC0DFAF91EA5B1090024841A /* libicucore.tbd in Frameworks */,
-				CC0DFAFA1EA5B1090024841A /* MGLivenessDetection.framework in Frameworks */,
-				CC0DFAFB1EA5B1090024841A /* MGBaseKit.framework in Frameworks */,
 				CC0DFAFC1EA5B1090024841A /* libstdc++.6.0.9.tbd in Frameworks */,
 				CC0DFAFD1EA5B1090024841A /* BaiduMapAPI_Utils.framework in Frameworks */,
 				CC0DFAFE1EA5B1090024841A /* libsqlite3.0.tbd in Frameworks */,
@@ -2568,7 +2569,6 @@
 				CC0DFB001EA5B1090024841A /* CoreGraphics.framework in Frameworks */,
 				CC0DFB011EA5B1090024841A /* SystemConfiguration.framework in Frameworks */,
 				CC0DFB021EA5B1090024841A /* OpenGLES.framework in Frameworks */,
-				CC0DFB031EA5B1090024841A /* MGIDCard.framework in Frameworks */,
 				CC0DFB041EA5B1090024841A /* QuartzCore.framework in Frameworks */,
 				CC0DFB051EA5B1090024841A /* AudioToolbox.framework in Frameworks */,
 				CC0DFB061EA5B1090024841A /* BaiduMapAPI_Search.framework in Frameworks */,
@@ -3076,13 +3076,13 @@
 		632C587B1E5A933F00490C14 /* MGKit */ = {
 			isa = PBXGroup;
 			children = (
-				22D2BFB71EA4BD9900B69360 /* MGBankCard.framework */,
-				22D2BFB31EA4A97100B69360 /* MGBankCardResource.bundle */,
-				63553B1A1E5FD09D00B2C1FF /* MGLiveResource.bundle */,
-				63553B0D1E5EE73500B2C1FF /* MGIDCardResource.bundle */,
-				632C587C1E5A933F00490C14 /* MGBaseKit.framework */,
-				632C587D1E5A933F00490C14 /* MGIDCard.framework */,
-				632C587E1E5A933F00490C14 /* MGLivenessDetection.framework */,
+				84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */,
+				84D715ED1F78CF3700F433E5 /* MGBankCard.framework */,
+				84D715A91F78936D00F433E5 /* MGBaseKit.framework */,
+				843149831F75035100FA3678 /* MGIDCard.framework */,
+				843149821F75035000FA3678 /* MGIDCardResource.bundle */,
+				843149841F75035100FA3678 /* MGLivenessDetection.framework */,
+				843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */,
 			);
 			path = MGKit;
 			sourceTree = "<group>";
@@ -5502,6 +5502,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D715F21F78CF8800F433E5 /* MGBankCardResource.bundle in Resources */,
+				8431498A1F75038D00FA3678 /* MGIDCardResource.bundle in Resources */,
+				8431498B1F75038D00FA3678 /* MGLivenessDetectionResource.bundle in Resources */,
 				0FFA91621C589D76008D91D2 /* CheckViewIng.xib in Resources */,
 				6313DC171BB3F07B00EB45DE /* Images.xcassets in Resources */,
 				84ED5B5C1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */,
@@ -5532,7 +5535,6 @@
 				637636D81D76A28700E93289 /* RepayListCell.xib in Resources */,
 				6391F7791D348B4E0097C943 /* bank_code_4@2x.png in Resources */,
 				63C12DCC1E495CC9008119FB /* MoneyPlanCell.xib in Resources */,
-				63553B0E1E5EE73500B2C1FF /* MGIDCardResource.bundle in Resources */,
 				0F9E30D31BC8A70C0018A801 /* IdeaBackViewController.xib in Resources */,
 				63FE3DEC1E487819009E5B82 /* SumCell.xib in Resources */,
 				84ED5B601F4AB9E7004C0A59 /* mx_refresh@2x.png in Resources */,
@@ -5575,7 +5577,6 @@
 				846A901A1F1F48AB00896169 /* PayDisplayCell.xib in Resources */,
 				842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */,
 				6391F77A1D348B4E0097C943 /* bank_code_5@2x.png in Resources */,
-				22D2BFB41EA4A97100B69360 /* MGBankCardResource.bundle in Resources */,
 				6391F7751D348B4E0097C943 /* bank_code_1@2x.png in Resources */,
 				63F5AD941E23849C001BDF44 /* LoanSureFirstViewController.xib in Resources */,
 				63741E391D3CD4A300C0E2F8 /* BankListCell.xib in Resources */,
@@ -5593,7 +5594,6 @@
 				63DCD7D91C87FDA200FAC7CE /* wtproject.lsc in Resources */,
 				63F254931E49CFE800852CF1 /* LoanProcessCell.xib in Resources */,
 				636B1B8F1C2A416500450358 /* NextViewCell.xib in Resources */,
-				63553B1B1E5FD09D00B2C1FF /* MGLiveResource.bundle in Resources */,
 				CC3197A01ED929F10083F263 /* WhiteRefuseView.xib in Resources */,
 				1A8988FD1BEC9EBE00F9E81E /* MsgViewCell.xib in Resources */,
 				632DFF631E48500500E414B2 /* CycleTextCell.xib in Resources */,
@@ -5635,6 +5635,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D715F01F78CF6700F433E5 /* MGBankCardResource.bundle in Resources */,
+				843149861F75036700FA3678 /* MGIDCardResource.bundle in Resources */,
+				843149871F75036700FA3678 /* MGLivenessDetectionResource.bundle in Resources */,
 				846A900A1F1F3DB300896169 /* PayVerificationCodeCell.xib in Resources */,
 				845017311ED7CD88008055E4 /* LoginView.xib in Resources */,
 				84ED5B5D1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */,
@@ -5666,7 +5669,6 @@
 				CC0DFB371EA5B1090024841A /* RepayListCell.xib in Resources */,
 				CC0DFB391EA5B1090024841A /* bank_code_4@2x.png in Resources */,
 				CC0DFB3A1EA5B1090024841A /* MoneyPlanCell.xib in Resources */,
-				CC0DFB3C1EA5B1090024841A /* MGIDCardResource.bundle in Resources */,
 				CC0DFB3D1EA5B1090024841A /* IdeaBackViewController.xib in Resources */,
 				84ED5B611F4AB9E7004C0A59 /* mx_refresh@2x.png in Resources */,
 				CC0DFB3E1EA5B1090024841A /* SumCell.xib in Resources */,
@@ -5707,7 +5709,6 @@
 				84ED5B5F1F4AB9E7004C0A59 /* mx_loading@2x.png in Resources */,
 				846A901B1F1F48AB00896169 /* PayDisplayCell.xib in Resources */,
 				CC0DFB5E1EA5B1090024841A /* bank_code_5@2x.png in Resources */,
-				CC0DFB5F1EA5B1090024841A /* MGBankCardResource.bundle in Resources */,
 				CC0DFB621EA5B1090024841A /* bank_code_1@2x.png in Resources */,
 				CC0DFB631EA5B1090024841A /* LoanSureFirstViewController.xib in Resources */,
 				CC0DFB641EA5B1090024841A /* BankListCell.xib in Resources */,
@@ -5726,7 +5727,6 @@
 				CC0DFB701EA5B1090024841A /* wtproject.lsc in Resources */,
 				CC0DFB711EA5B1090024841A /* LoanProcessCell.xib in Resources */,
 				CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */,
-				CC0DFB741EA5B1090024841A /* MGLiveResource.bundle in Resources */,
 				CC3197A11ED929F10083F263 /* WhiteRefuseView.xib in Resources */,
 				CC0DFB761EA5B1090024841A /* MsgViewCell.xib in Resources */,
 				CC0DFB771EA5B1090024841A /* CycleTextCell.xib in Resources */,
@@ -7274,6 +7274,7 @@
 			baseConfigurationReference = 10598D29CC76FAA5640B61D6 /* Pods-fxd-fxdProductDev.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
@@ -7386,6 +7387,7 @@
 			baseConfigurationReference = E64833171B0C1433C0C2116C /* Pods-fxd-fxdProductDev.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";

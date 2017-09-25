@@ -2,8 +2,8 @@
 //  MGFaceError.h
 //  MGFaceDetection
 //
-//  Created by 张英堂 on 15/12/23.
-//  Copyright © 2015年 megvii. All rights reserved.
+//  Created by megvii on 15/12/23.
+//  Copyright © 2015Year megvii. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,11 +15,20 @@
  */
 static NSString *const MGFaceFinishKey = @"com.megvii.face.finish";
 
-
 /**
  *  错误提示管理器,只在照镜子阶段调用，正式进入活体动作后，不再调用
  */
 @interface MGLiveErrorManager : NSObject
+
+/**
+ *  检测每一帧的错误 manager
+ */
+@property (nonatomic, strong, readonly) MGFaceQualityManager *qualityManager;
+
+/**
+ *  抛出出错最多的错误, 防止连续显示错误，造成显示异常，默认 10 帧。
+ */
+@property (nonatomic, assign) NSInteger holdingErrorCount;
 
 /**
  *  请使用 initWithFaceCenter: 方法进行初始化！
@@ -33,19 +42,6 @@ static NSString *const MGFaceFinishKey = @"com.megvii.face.finish";
  */
 - (instancetype)initWithFaceCenter:(CGPoint)center;
 
-
-/**
- *  检测每一帧的错误 manager
- */
-@property (nonatomic, strong, readonly) MGFaceQualityManager *qualityManager;
-
-
-/**
- *  抛出出错最多的错误, 防止连续显示错误，造成显示异常，默认 10 帧。
- */
-@property (nonatomic, assign) NSInteger holdingErrorCount;
-
-
 /**
  *  检测每一帧错误，并且返回要处理的事情
  *
@@ -56,11 +52,9 @@ static NSString *const MGFaceFinishKey = @"com.megvii.face.finish";
  */
 - (NSString *)checkImgWithMGFrame:(MGLivenessDetectionFrame *)frame motionY:(CGFloat)motionY;
 
-
 /**
  *  重置失败列表
  */
 - (void)resetErrorList;
-
 
 @end

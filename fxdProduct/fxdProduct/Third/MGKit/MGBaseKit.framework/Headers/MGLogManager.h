@@ -2,13 +2,11 @@
 //  YTLogManager.h
 //  BankCardTest
 //
-//  Created by 张英堂 on 15/12/9.
-//  Copyright © 2015年 megvii. All rights reserved.
+//  Created by megvii on 15/12/9.
+//  Copyright © 2015Year megvii. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
-
 
 @interface MGLogManager : NSObject
 
@@ -19,8 +17,6 @@
  */
 + (instancetype)sharedInstance;
 
-
-
 /**
  *  添加一条Log （子线程中进行文件读写处理）
  *
@@ -28,6 +24,5 @@
  *  @param fileName  要写入的文件名
  */
 - (void)addLog:(NSString *)logString fileName:(NSString *)fileName;
-
 
 @end

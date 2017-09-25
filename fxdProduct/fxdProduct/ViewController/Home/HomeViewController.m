@@ -201,7 +201,7 @@
     [qrPopView layoutIfNeeded];
     qrPopView.parentVC = self;
     [self lew_presentPopupView:qrPopView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-        
+
     }];
 }
 
@@ -823,5 +823,4 @@
     }];
     [userDataMV UserDataCertificationResult];
 }
-
 @end

@@ -2,15 +2,13 @@
 //  BottomAnimationView.h
 //  LivenessDetection
 //
-//  Created by 张英堂 on 15/1/8.
-//  Copyright (c) 2015年 megvii. All rights reserved.
+//  Created by megvii on 15/1/8.
+//  Copyright (c) 2015Year megvii. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "LivenessEnumType.h"
 #import "MGBaseCountdownView.h"
-#import "MGPlayAudio.h"
-
 #import "MGLiveConfig.h"
 #import "MGLiveBundle.h"
 
@@ -29,6 +27,15 @@
  */
 @property (nonatomic, assign, readonly) BOOL stopAnimaiton;
 
+/**
+ *  只有在 MGCountDownTypeCustom 模式下，请手动设置该类
+ */
+@property (nonatomic, strong) MGBaseCountdownView *countDownView;
+
+/**
+ *  提示信息label， 需要子类初始化
+ */
+@property (nonatomic, strong) UILabel *messageLabel;
 
 /**
  *  必须使用该方法初始化
@@ -41,16 +48,6 @@
 - (instancetype)initWithFrame:(CGRect)frame
              andCountDownType:(MGCountDownType)countDownType;
 
-
-/**
- *  只有在 MGCountDownTypeCustom 模式下，请手动设置该类
- */
-@property (nonatomic, strong) MGBaseCountdownView *countDownView;
-
-/**
- *  提示信息label， 需要子类初始化
- */
-@property (nonatomic, strong) UILabel *messageLabel;
 
 /**
  *  开始动画
@@ -75,7 +72,6 @@
  *  @param title 信息
  */
 - (void)recoveryWithTitle:(NSString *)title;
-
 
 #pragma mark - 用户可能重写的方法
 /* 子类需要重写一下方法，并且重写时候调用 [super  method]; 方法 */
@@ -103,7 +99,5 @@
 - (void)willChangeAnimation:(MGLivenessDetectionType)state
                     outTime:(CGFloat)time
                 currentStep:(NSInteger)step;
-
-
 
 @end
