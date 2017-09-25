@@ -111,9 +111,11 @@
     switch (indexPath.row) {
         case 0:
         {
-//            CheckingViewController *repayRecord=[[CheckingViewController alloc]init];
-            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-            [self.navigationController pushViewController:repayRecord animated:YES];
+            RapidLoanApplicationViewController *repayRecord=[[RapidLoanApplicationViewController alloc]init];
+            
+            
+//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+            [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
         case 1:

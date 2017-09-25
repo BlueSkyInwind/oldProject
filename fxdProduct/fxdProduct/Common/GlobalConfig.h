@@ -204,7 +204,8 @@ UIKIT_EXTERN NSString * const       _HomeState_url;                  //首页状
 UIKIT_EXTERN NSString * const       _createApplication_url;                  //用户进件接口
 UIKIT_EXTERN NSString * const       _ApplicationViewInfo_url;                  //申请确认页数据
 UIKIT_EXTERN NSString * const       _UserDrawingInfo_url;                  //申请确认页数据
-
+UIKIT_EXTERN NSString * const       _CapitalList_url;                  //资金平台列表
+UIKIT_EXTERN NSString * const       _CapitalLoan_url;                  //资金平台放款接口
 
 
 
