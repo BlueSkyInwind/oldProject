@@ -80,14 +80,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"认证中心";
-    _imageArr = @[@"icon_wri_ide_1",@"icon_wri_per_1",@"icon_wri_rece_1",@"icon_wri_face_1",@"icon_wri_mob_1",@"icon_wri_sesa_1",@"icon_wri_credit_1",@"icon_wri_social_1",@""];
-    _editImageArr = @[@"icon_wri_ide_2",@"icon_wri_per_2",@"icon_wri_rece_2",@"icon_wri_face_2",@"icon_wri_mob_2",@"icon_wri_sesa_2",@"icon_wri_credit_2",@"icon_wri_social_2",@""];
-    _completeImageArr = @[@"icon_wri_ide_3",@"icon_wri_per_3",@"icon_wri_rece_3",@"icon_wri_face_3",@"icon_wri_mob_3",@"icon_wri_sesa_3",@"icon_wri_credit_3",@"icon_wri_social_3",@""];
+    _imageArr = @[@"icon_wri_ide_1",@"icon_wri_per_1",@"icon_wri_face_1",@"icon_wri_mob_1",@"icon_wri_sesa_1",@"icon_wri_rece_1",@"icon_wri_credit_1",@"icon_wri_social_1",@""];
+    _editImageArr = @[@"icon_wri_ide_2",@"icon_wri_per_2",@"icon_wri_face_2",@"icon_wri_mob_2",@"icon_wri_sesa_2",@"icon_wri_rece_2",@"icon_wri_credit_2",@"icon_wri_social_2",@""];
+    _completeImageArr = @[@"icon_wri_ide_3",@"icon_wri_per_3",@"icon_wri_face_3",@"icon_wri_mob_3",@"icon_wri_sesa_3",@"icon_wri_rece_3",@"icon_wri_credit_3",@"icon_wri_social_3",@""];
     _inAuthenticationImageArr = @[@"icon_wri_mob_4",@"icon_wri_sesa_4",@"icon_wri_credit_4",@"icon_wri_social_4"];
 
-    _titleArr = @[@"身份信息",@"个人信息",@"收款信息",@"人脸识别",@"手机认证",@"芝麻信用",@"信用卡认证",@"社保认证",@""];
+    _titleArr = @[@"身份信息",@"个人信息",@"人脸识别",@"手机认证",@"芝麻信用",@"收款信息",@"信用卡认证",@"社保认证",@""];
     
-    _promtpTitleArr = @[@"请完善您的身份信息",@"请完善您的个人信息",@"请完善您的收款信息",@"请完成人脸识别认证",@"请完善您的收款信息",@"请完善您的手机认证",@"请完善您的芝麻信用认证"];
+    _promtpTitleArr = @[@"请完善您的身份信息",@"请完善您的个人信息",@"请完成人脸识别认证",@"请完善您的收款信息",@"请完善您的手机认证",@"请完善您的收款信息",@"请完善您的芝麻信用认证",];
     _isEvaluation = @"0";
     
     [self configureView];
@@ -219,14 +219,6 @@
             }
                 break;
             case 2:{
-                if ([userDataModel.gathering isEqualToString:@"0"]) {
-                    cell.image.image = [UIImage imageNamed:_imageArr[indexPath.row]];
-                    break;
-                }
-                cell.image.image = [UIImage imageNamed:_completeImageArr[indexPath.row]];
-            }
-                break;
-            case 3:{
                 if (![userDataModel.faceIdentity isEqualToString:@"2"]) {
                     cell.image.image = [UIImage imageNamed:_imageArr[indexPath.row]];
                     break;
@@ -234,7 +226,7 @@
                 cell.image.image = [UIImage imageNamed:_completeImageArr[indexPath.row]];
             }
                 break;
-            case 4:{
+            case 3:{
                 if (![userDataModel.telephone isEqualToString:@"2"]) {
                     cell.image.image = [UIImage imageNamed:_imageArr[indexPath.row]];
                     break;
@@ -242,13 +234,21 @@
                 cell.image.image = [UIImage imageNamed:_completeImageArr[indexPath.row]];
             }
                 break;
-            case 5:{
+            case 4:{
                 if ([userDataModel.zmIdentity isEqualToString:@"3"]) {
                     cell.image.image = [UIImage imageNamed:_imageArr[indexPath.row]];
                     break;
                 }
                 if ([userDataModel.zmIdentity isEqualToString:@"1"]) {
                     cell.image.image = [UIImage imageNamed:_inAuthenticationImageArr[indexPath.row - 4]];
+                    break;
+                }
+                cell.image.image = [UIImage imageNamed:_completeImageArr[indexPath.row]];
+            }
+                break;
+            case 5:{
+                if ([userDataModel.gathering isEqualToString:@"0"]) {
+                    cell.image.image = [UIImage imageNamed:_imageArr[indexPath.row]];
                     break;
                 }
                 cell.image.image = [UIImage imageNamed:_completeImageArr[indexPath.row]];
@@ -300,67 +300,7 @@
         }
         [headerView addSubview:headView];
         return headerView;
-        
     }
-  
-//    NSLog(@"======%ld",indexPath.section);
-//    
-//    if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
-//        if (indexPath.section == 0) {
-//            layout.footerReferenceSize =CGSizeMake(0, 0);
-//        }else{
-//            
-//            layout.footerReferenceSize =CGSizeMake(_k_w-40, 44);
-//        }
-//        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView" forIndexPath:indexPath];
-//        _evaluationBtn = [[UIButton alloc]init];
-//        [_evaluationBtn setTitle:@"资料审核" forState:UIControlStateNormal];
-//        [_evaluationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        _evaluationBtn.backgroundColor = UI_MAIN_COLOR;
-//        [_evaluationBtn addTarget:self action:@selector(bottomClick) forControlEvents:UIControlEventTouchUpInside];
-//        [Tool setCorner:_evaluationBtn borderColor:[UIColor clearColor]];
-//        [footerView addSubview:_evaluationBtn];
-//        [_evaluationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.bottom.equalTo(footerView.mas_bottom).offset(-50);
-//            make.left.equalTo(footerView.mas_left).offset(20);
-//            make.right.equalTo(footerView.mas_right).offset(-20);
-//            make.height.equalTo(@44);
-//        }];
-//        
-//        return footerView;
-//        
-//    }
-    
-    
-//    if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
-//        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusablefooterView" forIndexPath:indexPath];
-//        footerView.backgroundColor = rgb(242, 242, 242);
-//        if (footerView.subviews.count > 0) {
-//            [footerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-//        }
-//        _evaluationBtn = [[UIButton alloc]init];
-//        [_evaluationBtn setTitle:@"资料重新测评" forState:UIControlStateNormal];
-//        [_evaluationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        _evaluationBtn.backgroundColor = UI_MAIN_COLOR;
-//        [_evaluationBtn addTarget:self action:@selector(bottomClick) forControlEvents:UIControlEventTouchUpInside];
-//        [Tool setCorner:_evaluationBtn borderColor:[UIColor clearColor]];
-//        if ([_isEvaluation isEqualToString:@"0"]) {
-//            _evaluationBtn.backgroundColor = kUIColorFromRGB(0x9e9e9f);
-//            _evaluationBtn.enabled = false;
-//        }else{
-//            _evaluationBtn.backgroundColor = UI_MAIN_COLOR;
-//            _evaluationBtn.enabled = true;
-//        }
-//        [footerView addSubview:_evaluationBtn];
-//        [_evaluationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.centerX.equalTo(footerView.mas_centerX);
-//            make.left.equalTo(footerView.mas_left).offset(20);
-//            make.right.equalTo(footerView.mas_right).offset(-20);
-//            make.height.equalTo(@44);
-//        }];
-//        [footerView addSubview:_evaluationBtn];
-//        return footerView;
-//    }
     return nil;
 }
 
@@ -372,7 +312,6 @@
             }
             switch (indexPath.row) {
                 case 0:{
-                    
                     [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
                         PserInfoViewController *perInfoVC = [[PserInfoViewController alloc] init];
                         perInfoVC.custom_baseInfo = custom_baseInfo;
@@ -390,20 +329,6 @@
                 }
                     break;
                 case 2:{
-                    //此处需要一个返回默认卡的接口
-                    [self getGatheringInformation_jhtml:^(CardInfo *cardInfo) {
-                        EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
-                        editCard.typeFlag = @"0";
-                        editCard.cardName = cardInfo.bankName;
-                        editCard.cardNum = cardInfo.cardNo;
-                        editCard.reservedTel = cardInfo.bankPhone;
-                        editCard.cardCode = cardInfo.bankNameCode;
-                        editCard.popOrdiss  = true;
-                        [self.navigationController pushViewController:editCard animated:YES];
-                    }];
-                }
-                    break;
-                case 3:{
                     if ([userDataModel.faceIdentity isEqualToString:@"2"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                         return;
@@ -420,7 +345,7 @@
                     }];
                 }
                     break;
-                case 4:{
+                case 3:{
                     if ([userDataModel.telephone isEqualToString:@"2"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                         return;
@@ -431,8 +356,7 @@
                     [self.navigationController pushViewController:certificationVC animated:true];
                 }
                     break;
-                case 5:
-                {
+                case 4:{
                     if ([userDataModel.zmIdentity isEqualToString:@"2"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                         return;
@@ -443,6 +367,21 @@
                     }
                     SesameCreditViewController *controller = [[SesameCreditViewController alloc]initWithNibName:@"SesameCreditViewController" bundle:nil];
                     [self.navigationController pushViewController:controller animated:YES];
+                }
+                    break;
+                case 5:
+                {
+                    //此处需要一个返回默认卡的接口
+                    [self getGatheringInformation_jhtml:^(CardInfo *cardInfo) {
+                        EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
+                        editCard.typeFlag = @"0";
+                        editCard.cardName = cardInfo.bankName;
+                        editCard.cardNum = cardInfo.cardNo;
+                        editCard.reservedTel = cardInfo.bankPhone;
+                        editCard.cardCode = cardInfo.bankNameCode;
+                        editCard.popOrdiss  = true;
+                        [self.navigationController pushViewController:editCard animated:YES];
+                    }];
                 }
                     break;
                 default:
@@ -490,6 +429,14 @@
 }
 -(BOOL)cellStatusIsSelect:(NSInteger)row{
     
+    if ([userDataModel.identity isEqualToString:@"0"] && row > 0) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善身份信息！"];
+        return false;
+    }
+    if ([userDataModel.person isEqualToString:@"0"] && row > 1) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善个人信息！"];
+        return false;
+    }
     switch (row) {
         case 0:{
             if ([userDataModel.identityEdit isEqualToString:@"0"]) {
@@ -499,61 +446,41 @@
         }
             break;
         case 1:{
-            if ([userDataModel.identity isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善身份信息！"];
-                return false;
-            }
             if ([userDataModel.personEdit isEqualToString:@"0"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
                 return false;
             }
         }
             break;
-        case 2:{
-            if ([userDataModel.person isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善个人信息！"];
-                return false;
-            }
-            if ([userDataModel.gathering isEqualToString:@"1"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
-                return false;
-            }
-        }
-            break;
-        case 3:{
-            if ([userDataModel.gathering isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善收款信息！"];
-                return false;
-            }
+        case 2:
+        {
             if ([userDataModel.faceIdentity isEqualToString:@"2"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已认证"];
                 return false;
             }
         }
             break;
-        case 4:{
-            if ([userDataModel.faceIdentity isEqualToString:@"1"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完成人脸识别认证！"];
-                return false;
-            }
+        case 3:{
             if ([userDataModel.telephone isEqualToString:@"2"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已认证"];
                 return false;
             }
         }
             break;
-        case 5:{
-            if (![userDataModel.telephone isEqualToString:@"2"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完成手机认证！"];
-                return false;
-            }
+        case 4:{
             if ([userDataModel.zmIdentity isEqualToString:@"2"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已认证"];
                 return false;
             }
         }
             break;
-            
+        case 5:{
+            if ([userDataModel.gathering isEqualToString:@"1"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
+                return false;
+            }
+        }
+            break;
         default:
             break;
     }
@@ -624,7 +551,6 @@
 }
 -(void)configMoxieSDK{
     /***必须配置的基本参数*/
-    
     [MoxieSDK shared].delegate = self;
     [MoxieSDK shared].userId = [Utility sharedUtility].userInfo.juid;
     [MoxieSDK shared].apiKey = theMoxieApiKey;
@@ -650,7 +576,6 @@
     else if(code == 2 && loginDone == true){
         NSLog(@"任务已经登录成功，正在采集中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
         [self obtainHighRankingClassifyStatus:taskType TaskId:taskId];
-        
     }
     //【采集成功】假如code是1则采集成功（不代表回调成功）
     else if(code == 1){
