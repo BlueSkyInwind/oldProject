@@ -28,4 +28,10 @@
 
 -(void)capitalList:(NSString *)productId;
 
+/**
+ 资金平台放款接口
+ */
+
+-(void)capitalLoan:(NSString *)cardId loanfor:(NSString *)loanfor periods:(NSString *)periods;
+
 @end

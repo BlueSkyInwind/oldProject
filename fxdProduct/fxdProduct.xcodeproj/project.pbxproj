@@ -1217,6 +1217,8 @@
 		CC6F067A1F74F26B00FA889E /* PickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06781F74F26B00FA889E /* PickView.swift */; };
 		CC6F06851F750A5B00FA889E /* CapitalListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06841F750A5B00FA889E /* CapitalListModel.m */; };
 		CC6F06861F750A5B00FA889E /* CapitalListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06841F750A5B00FA889E /* CapitalListModel.m */; };
+		CC6F06891F789D7000FA889E /* CapitalLoanParam.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06881F789D7000FA889E /* CapitalLoanParam.m */; };
+		CC6F068A1F789D7000FA889E /* CapitalLoanParam.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06881F789D7000FA889E /* CapitalLoanParam.m */; };
 		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
@@ -2409,6 +2411,8 @@
 		CC6F06781F74F26B00FA889E /* PickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickView.swift; sourceTree = "<group>"; };
 		CC6F06831F750A5B00FA889E /* CapitalListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapitalListModel.h; sourceTree = "<group>"; };
 		CC6F06841F750A5B00FA889E /* CapitalListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CapitalListModel.m; sourceTree = "<group>"; };
+		CC6F06871F789D7000FA889E /* CapitalLoanParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapitalLoanParam.h; sourceTree = "<group>"; };
+		CC6F06881F789D7000FA889E /* CapitalLoanParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CapitalLoanParam.m; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
 		CC989C2E1F4D84A9000CDACF /* AuthenticationCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationCenterViewController.h; sourceTree = "<group>"; };
@@ -5240,6 +5244,8 @@
 			children = (
 				CC6F06831F750A5B00FA889E /* CapitalListModel.h */,
 				CC6F06841F750A5B00FA889E /* CapitalListModel.m */,
+				CC6F06871F789D7000FA889E /* CapitalLoanParam.h */,
+				CC6F06881F789D7000FA889E /* CapitalLoanParam.m */,
 			);
 			name = Capital;
 			path = "New Group";
@@ -5477,7 +5483,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = B4V533E2T3;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -6298,6 +6304,7 @@
 				846A90181F1F48AB00896169 /* PayDisplayCell.m in Sources */,
 				638A16F71E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				636B1B9A1C2D153900450358 /* HomeViewModel.m in Sources */,
+				CC6F06891F789D7000FA889E /* CapitalLoanParam.m in Sources */,
 				638A16F41E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m in Sources */,
 				0FFA91321C56058A008D91D2 /* telphoneView.m in Sources */,
 				638A16EF1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m in Sources */,
@@ -6472,6 +6479,7 @@
 				842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */,
 				84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */,
 				CCA056BE1EBB41F500CB5F29 /* SesameCreditViewController.m in Sources */,
+				CC6F068A1F789D7000FA889E /* CapitalLoanParam.m in Sources */,
 				8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
 				CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */,
 				CC0DF9571EA5B1090024841A /* RepaymentViewCell.m in Sources */,
@@ -7064,11 +7072,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = B4V533E2T3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7157,8 +7165,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1b16c4d0-c6a8-48ab-948c-ca1be54f774f";
-				PROVISIONING_PROFILE_SPECIFIER = "FXD-Product";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -7178,11 +7186,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = B4V533E2T3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7257,8 +7265,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1b16c4d0-c6a8-48ab-948c-ca1be54f774f";
-				PROVISIONING_PROFILE_SPECIFIER = "FXD-Product";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

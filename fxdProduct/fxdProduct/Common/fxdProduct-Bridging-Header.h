@@ -45,5 +45,7 @@
 #import "LoanSureFirstViewController.h"
 #import "UserInfoObj.h"
 #import "FXDWebViewController.h"
-
+#import "ApplicationViewModel.h"
+#import "CapitalListModel.h"
+#import "ApplicaitonModel.h"
 #endif /* fxdProduct_Bridging_Header_h */

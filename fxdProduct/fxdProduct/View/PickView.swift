@@ -12,7 +12,7 @@ import UIKit
 @objc protocol PickViewDelegate: NSObjectProtocol {
     
     func cancelBtn()
-    func sureBtn(_ selected: String)->Void
+    func sureBtn(_ capitalListModel: CapitalListModel)->Void
     
 }
 
@@ -27,13 +27,17 @@ class PickView: UIView ,UIPickerViewDelegate,UIPickerViewDataSource{
     }
     */
 
-    var dataArray : Array<Any>?
-    var selectedStr : String?
+    var dataArray  = [AnyObject]()
+    var model : CapitalListModel?
     weak var delegate: PickViewDelegate?
+    var selectRow : NSInteger?
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        selectRow = 0
         setupUI()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -116,11 +120,13 @@ extension PickView{
     @objc fileprivate func sureBtnClick(){
         
         if delegate != nil {
-            if selectedStr == nil
+            if model == nil
             {
-                selectedStr = dataArray![0] as? String
+
+                model = dataArray[0] as? CapitalListModel
+
             }
-            delegate?.sureBtn(selectedStr!)
+            delegate?.sureBtn(model!)
         }
     }
 }
@@ -132,12 +138,14 @@ extension PickView{
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return (dataArray?.count)!
+        return (dataArray.count)
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-        return dataArray![row] as? String
+        let model = dataArray[row] as? CapitalListModel
+        return model?.platformName
+    
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -146,15 +154,42 @@ extension PickView{
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        selectedStr = dataArray?[row] as? String
-        
+          model = dataArray[row] as? CapitalListModel
+          selectRow = row
+          pickerView.reloadAllComponents()
     }
     
-//    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-//
-//        let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:pickerView.tag)
-//        attrstr.addAttribute(NSForegroundColorAttributeName, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-3))
-//        attrstr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(3,attrstr1.length-3))
-//        return attrstr
-//    }
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        var pickerLabel = view as? UILabel
+        if (pickerLabel == nil){
+            
+            pickerLabel = UILabel()
+            pickerLabel?.textColor = UI_MAIN_COLOR
+            pickerLabel?.font = UIFont.systemFont(ofSize: 23)
+            pickerLabel?.adjustsFontSizeToFitWidth = true
+            pickerLabel?.textAlignment = .center
+            pickerLabel?.backgroundColor = UIColor.clear
+            if row != selectRow {
+                pickerLabel?.font = UIFont.systemFont(ofSize: 15)
+            }
+        }
+        
+        pickerLabel?.attributedText = self.pickerView(pickerView, attributedTitleForRow: row, forComponent: component)
+        return pickerLabel!
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+
+        let model = dataArray[row] as? CapitalListModel
+        let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(model?.platformName)!)
+        attrstr.addAttribute(NSForegroundColorAttributeName, value: QUTOA_COLOR, range: NSMakeRange(0,attrstr.length))
+        if row == selectRow{
+            
+            attrstr.addAttribute(NSForegroundColorAttributeName, value: UI_MAIN_COLOR, range: NSMakeRange(0,attrstr.length))
+        }
+        
+        return attrstr
+
+    }
 }

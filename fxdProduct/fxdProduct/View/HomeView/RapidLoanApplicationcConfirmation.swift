@@ -10,7 +10,7 @@ import UIKit
 
 @objc protocol RapidLoanApplicationcConfirmationDelegate: NSObjectProtocol {
     
-    func advancedCertification()
+    func commitBtn()
 
     func capitalSourceBtn()
     
@@ -101,7 +101,7 @@ extension RapidLoanApplicationcConfirmation{
         }
         
         let capitalSourceBtn = UIButton()
-        capitalSourceBtn.setBackgroundImage(UIImage(named:"3_lc_icon_25"), for: .normal)
+        capitalSourceBtn.setBackgroundImage(UIImage(named:"icon_xiajiatou"), for: .normal)
         capitalSourceBtn.addTarget(self, action: #selector(capitalSourceBtnClick), for: .touchUpInside)
         capitalSourceView.addSubview(capitalSourceBtn)
         capitalSourceBtn.snp.makeConstraints { (make) in
@@ -171,7 +171,7 @@ extension RapidLoanApplicationcConfirmation{
         
         if delegate != nil {
             
-            delegate?.advancedCertification()
+            delegate?.commitBtn()
 
         }
         print("点击确认申请")

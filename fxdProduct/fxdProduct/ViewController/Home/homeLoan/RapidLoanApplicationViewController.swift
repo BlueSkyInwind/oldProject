@@ -8,11 +8,12 @@
 
 import UIKit
 
-class RapidLoanApplicationViewController: UIViewController ,RapidLoanApplicationcConfirmationDelegate,PickViewDelegate{
+class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicationcConfirmationDelegate,PickViewDelegate{
     
     
     var pickView : PickView?
-
+    var peoductId : String?
+    
     var rapidLoanView : RapidLoanApplicationcConfirmation?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,43 +21,108 @@ class RapidLoanApplicationViewController: UIViewController ,RapidLoanApplication
     
         self.title = "申请确认"
         // Do any additional setup after loading the view.
+        addBackItemRoot()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        pickView = PickView()
+        pickView?.delegate = self
+        pickView?.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 0.4)
+        
         rapidLoanView = RapidLoanApplicationcConfirmation()
         rapidLoanView?.delegate = self
-        rapidLoanView?.titleLabel?.text = "急速贷"
-        rapidLoanView?.titleImageView?.image = UIImage(named:"icon_Product2")
-        rapidLoanView?.qutoaLabel?.text = "额度:1000元"
+        
+        getApplicationConfirmData()
+        getCapitalListData()
+    }
+
+    //MARK 申请件申请确认页面数据展示
+    func getApplicationConfirmData(){
+        
+        let applicationMV = ApplicationViewModel()
+        applicationMV.setBlockWithReturn({ (returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                
+                let applicationVM = try! ApplicaitonViewInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self.setProductUI(model: applicationVM)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        applicationMV.queryApplicationInfo(RapidLoan)
+    }
+    
+    func setProductUI(model : ApplicaitonViewInfoModel){
+        
+        
+        rapidLoanView?.titleLabel?.text = model.productName
+        
+        let url = URL(string: model.icon)
+        rapidLoanView?.titleImageView?.sd_setImage(with: url)
+        rapidLoanView?.qutoaLabel?.text = "额度:" + model.amount
         
         let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(rapidLoanView!.qutoaLabel?.text)!)
         attrstr.addAttribute(NSForegroundColorAttributeName, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-3))
         attrstr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(3,attrstr.length-3))
         rapidLoanView?.qutoaLabel?.attributedText = attrstr
         
-        rapidLoanView?.termLabel?.text = "期限:14天"
+        rapidLoanView?.termLabel?.text = "期限:" + model.period
         let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(rapidLoanView!.termLabel?.text)!)
         attrstr1.addAttribute(NSForegroundColorAttributeName, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-3))
         attrstr1.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(3,attrstr1.length-3))
         rapidLoanView?.termLabel?.attributedText = attrstr1
         
-        rapidLoanView?.capitalSourceLabel?.text = "善林金融"
         self.view.addSubview(rapidLoanView!)
-        
     }
 
+    //MARK 资金平台列表
+    func getCapitalListData(){
+        
+        let applicationMV = ApplicationViewModel()
+        applicationMV.setBlockWithReturn({ (returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                for dic in baseResult.data! as! NSArray{
+                    
+                    let capitalListModel = try! CapitalListModel.init(dictionary: dic as! [AnyHashable : Any])
+                    self.pickView?.dataArray.append(capitalListModel)
+                    
+                }
+                
+                let model = self.pickView?.dataArray[0] as! CapitalListModel
+                self.rapidLoanView?.capitalSourceLabel?.text = model.platformName!
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        applicationMV.capitalList(RapidLoan)
+    }
+    
+    //MARK 选择资金来源方按钮
     func capitalSourceBtn() {
+
         
-        pickView = PickView()
-        pickView?.delegate = self
-        pickView?.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 0.4)
-        pickView?.dataArray = ["善林金融","发薪贷","善林金融","善林金融"]
-        self.view.addSubview(pickView!)
-        
-        print("=====controller capitalSourceBtn is click====")
+        self.view.addSubview(self.pickView!)
+    
     }
     
-    func advancedCertification() {
-        print("=====controller bottom is click====")
+    //MARK 确认申请按钮
+    func commitBtn() {
+     print("确认申请按钮")
     }
     
+    //MARK 取消按钮
     func cancelBtn() {
         
         UIView.animate(withDuration: 2) {
@@ -64,19 +130,18 @@ class RapidLoanApplicationViewController: UIViewController ,RapidLoanApplication
             self.pickView?.removeFromSuperview()
             
         }
-        print("=====controller cancelBtn is click====")
     }
     
-    func sureBtn(_ selected: String) {
+    //MARK 确认按钮
+    func sureBtn(_ capitalListModel: CapitalListModel) {
         
         UIView.animate(withDuration: 2) {
             
             self.pickView?.removeFromSuperview()
             
         }
-        rapidLoanView?.capitalSourceLabel?.text = selected
-        print("=====controller cancelBtn is click====")
-        print("%@",selected)
+        rapidLoanView?.capitalSourceLabel?.text = capitalListModel.platformName
+
     }
     
     override func didReceiveMemoryWarning() {
