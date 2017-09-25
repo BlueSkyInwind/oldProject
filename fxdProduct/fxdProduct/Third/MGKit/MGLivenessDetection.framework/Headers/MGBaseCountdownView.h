@@ -2,8 +2,8 @@
 //  MGBaseCountdownView.h
 //  MGLivenessDetection
 //
-//  Created by 张英堂 on 16/4/12.
-//  Copyright © 2016年 megvii. All rights reserved.
+//  Created by megvii on 16/4/12.
+//  Copyright © 2016Year megvii. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -29,8 +29,6 @@
  */
 - (void)stopAnimation;
 
-
-
 /* 以下方法为 子类重写，每次倒计时改变都会被调用 */
 
 /**
@@ -40,11 +38,9 @@
  */
 - (void)timerChangeAndViewAnimation:(CGFloat)lastTime;
 
-
 /**
  *  创建倒计时界面 初始化时候被调用
  */
 - (void)creatCountDownView;
-
 
 @end

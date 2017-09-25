@@ -2,13 +2,12 @@
 //  MGFaceActionManager.h
 //  MGFaceDetection
 //
-//  Created by 张英堂 on 15/12/24.
-//  Copyright © 2015年 megvii. All rights reserved.
+//  Created by megvii on 15/12/24.
+//  Copyright © 2015Year megvii. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "LivenessEnumType.h"
-
 
 /**
  *  活体检测动作管理器
@@ -38,7 +37,6 @@
  */
 - (void)resetAction;
 
-
 /**
  *  随机一个动作
  *
@@ -46,13 +44,11 @@
  */
 - (MGLivenessDetectionType)randomActionType;
 
-
 /**
  *  恢复所有动作并且返回一个动作
  *
  *  @return 动作
  */
 - (MGLivenessDetectionType)resetAndRandomActionType;
-
 
 @end

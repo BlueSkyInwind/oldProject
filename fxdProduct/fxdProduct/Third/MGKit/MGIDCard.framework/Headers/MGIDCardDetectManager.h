@@ -8,20 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "MGIDCardConfig.h"
-
 #import "MGIDCardQualityAssessment.h"
-
+#import "MGIDCardDetectDelegate.h"
 
 @protocol MGIDCardDetectDelegate;
 
 @interface MGIDCardDetectManager : NSObject
 
+- (instancetype)init DEPRECATED_ATTRIBUTE;
 
--(instancetype)init DEPRECATED_ATTRIBUTE;
-
-+(instancetype)idCardCheckWithDelegate:(id<MGIDCardDetectDelegate>)delegate
-                              cardSide:(MGIDCardSide)side
-                     screenOrientation:(MGIDCardScreenOrientation)screenOrientation DEPRECATED_ATTRIBUTE;
+//+(instancetype)idCardCheckWithDelegate:(id<MGIDCardDetectDelegate>)delegate
+//                              cardSide:(MGIDCardSide)side
+//                     screenOrientation:(MGIDCardScreenOrientation)screenOrientation DEPRECATED_ATTRIBUTE;
 
 /**
  *  初始化方法
@@ -30,13 +28,17 @@
  *  @param screenOrientation 屏幕方向
  *  @return 实例化对象
  */
-+(instancetype)idCardManagerWithCardSide:(MGIDCardSide)side
++ (instancetype)idCardManagerWithCardSide:(MGIDCardSide)side
                        screenOrientation:(MGIDCardScreenOrientation)screenOrientation;
-
-@property (nonatomic, assign) MGIDCardScale IDCardScaleRect;
 
 @property (nonatomic, assign) id <MGIDCardDetectDelegate> delegate;
 
+@property (nonatomic, assign) MGIDCardScale IDCardScaleRect;
+
+/**
+ *  0 for 正面, 1 for 反面
+ */
+@property (nonatomic, assign) MGIDCardSide IDCardSide;
 
 /**
  *  检测身份证图片，异步返回
@@ -61,7 +63,6 @@
  */
 - (NSString *)getErrorShowString:(MGIDCardFailedType)errorType;
 
-
 /**
  *  重置数据
  */
@@ -72,23 +73,14 @@
  */
 - (void)stopDetect;
 
-
-@end
-
-
-@protocol MGIDCardDetectDelegate <NSObject>
-
-
-@required
 /**
- *  每一张图片检测完成返回信息
- *
- *  @param manager 指针
- *  @param result  检测结果
+ *  获取截取区域位置
  */
-- (void)cardCheck:(MGIDCardDetectManager *)manager finish:(MGIDCardQualityResult *)result;
+- (CGRect)expandFaceWithImageSize:(CGSize)size;
+
+/**
+ *  判断是否满足(是否在引导框内和是否是身份证)
+ */
+- (BOOL)isQualifiedWithInbound:(CGFloat)inBoundF isCard:(CGFloat)isCardF;
 
 @end
-
-
-

@@ -6,17 +6,14 @@
 //  Copyright © 2015年 megvii. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <MGBaseKit/MGBaseKit.h>
 #import "MGIDCardConfig.h"
 #import "MGIDCardModel.h"
 
-
 @interface MGIDCardManager : MGLicenseManager
 
-
 /**
- *  设置屏幕方向，默认水平方向 MGIDCardScreenOrientationPortrait；
+ *  设置屏幕方向，默认水平方向 MGIDCardScreenOrientationLandscapeLeft；
  */
 @property (nonatomic, assign) MGIDCardScreenOrientation screenOrientation;
 
@@ -33,15 +30,11 @@
                       finish:(void(^)(MGIDCardModel *model))finish
                         errr:(void(^)(MGIDCardError errorType))error;
 
-
-
 /**
  *  获取 身份证 SDK版本号
  *
  *  @return sdk 版本号
  */
 + (NSString *)IDCardVersion;
-
-
 
 @end

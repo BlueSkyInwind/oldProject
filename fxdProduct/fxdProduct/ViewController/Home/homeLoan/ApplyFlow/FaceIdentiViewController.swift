@@ -94,10 +94,10 @@ class FaceIdentiViewController: BaseViewController,LiveDeteDelgate{
         userDataVM.setBlockWithReturn({[weak self] (object) in
             let dic =  object as! NSDictionary
             if dic["flag"] as! String == "0000"{
-                self?.verifyStatus = "2"
-                self?.changeStatus()
                 let statusMsg = (dic["result"] as! NSDictionary)["verify_msg_"] as! String
                 let status = (dic["result"] as! NSDictionary)["verify_status_"] as! Int
+                self?.verifyStatus = String(status)
+                self?.changeStatus()
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: statusMsg)
                 if ((self?.identifyResultStatus) != nil) {
                     self?.identifyResultStatus!(String(status))

@@ -2,16 +2,14 @@
 //  MGImage.h
 //  MGBankCard
 //
-//  Created by 张英堂 on 15/12/11.
-//  Copyright © 2015年 megvii. All rights reserved.
+//  Created by megvii on 15/12/11.
+//  Copyright © 2015Year megvii. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
-
-
 
 @interface MGImage : NSObject
 
@@ -25,7 +23,6 @@
  */
 UIImage* MGCroppedImage(UIImage *image, CGRect bounds);
 
-
 /**
  *  修正图片方向
  *
@@ -34,7 +31,6 @@ UIImage* MGCroppedImage(UIImage *image, CGRect bounds);
  *  @return 修正完成的图片
  */
 UIImage* MGFixOrientationWithImage(UIImage *image);
-
 
 /**
  *  把sampleBuffer转化为图片
@@ -46,12 +42,7 @@ UIImage* MGFixOrientationWithImage(UIImage *image);
  */
 UIImage* MGImageFromSampleBuffer(CMSampleBufferRef sampleBuffer, UIImageOrientation orientation);
 
-
-
 /*视频角度转化为数值*/
 CGFloat MGAngleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOrientation orientation);
 
-
 @end
-
-

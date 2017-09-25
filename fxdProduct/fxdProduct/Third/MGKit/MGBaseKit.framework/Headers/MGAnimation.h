@@ -2,8 +2,8 @@
 //  MGAnimation.h
 //  MGBankCard
 //
-//  Created by 张英堂 on 15/12/11.
-//  Copyright © 2015年 megvii. All rights reserved.
+//  Created by megvii on 15/12/11.
+//  Copyright © 2015Year megvii. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,6 +17,5 @@
  *  @return 动画
  */
 + (CABasicAnimation *)animationWithOpacity;
-
 
 @end

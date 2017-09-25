@@ -2,11 +2,11 @@
 //  MGAutoSessionPreset.h
 //  MGBaseKit
 //
-//  Created by 张英堂 on 16/8/2.
-//  Copyright © 2016年 megvii. All rights reserved.
+//  Created by megvii on 16/8/2.
+//  Copyright © 2016Year megvii. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface MGAutoSessionPreset : NSObject
 
@@ -17,7 +17,6 @@
  */
 + (NSString *)autoSessionPreset;
 
-
-
++ (CGSize)autoSessionPresetSize;
 
 @end
