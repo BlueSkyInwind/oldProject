@@ -59,7 +59,7 @@ extension FooterBtnView{
 
 extension FooterBtnView {
 
-    func btnClick() -> Void {
+    @objc func btnClick() -> Void {
         
         if self.footerBtnClosure != nil {
             

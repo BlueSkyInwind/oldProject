@@ -10,9 +10,9 @@
 
 @interface FXDWebViewController : BaseViewController
 
-@property (nonatomic, copy)NSString *urlStr;
+@property (nonatomic, copy)NSString * urlStr;
 
-@property (nonatomic, copy) NSString *shareContent;
+@property (nonatomic, copy) NSString * loadContent;
 
 @property (nonatomic,assign)BOOL isZhima;
 

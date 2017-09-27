@@ -28,7 +28,7 @@ class LoadFailureView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func refreshBtnClick(){
+    @objc func refreshBtnClick(){
         if self.delegate != nil {
             self.delegate?.LoadFailureLoadRefreshButtonClick()
         }

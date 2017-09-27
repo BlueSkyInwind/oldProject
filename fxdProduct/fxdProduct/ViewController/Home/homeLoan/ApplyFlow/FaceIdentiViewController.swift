@@ -43,7 +43,7 @@ class FaceIdentiViewController: BaseViewController,LiveDeteDelgate{
         }
     }
     
-    func statusBtnClick() -> Void {
+    @objc func statusBtnClick() -> Void {
         startFaceDetection()
     }
     

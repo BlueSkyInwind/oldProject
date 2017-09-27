@@ -11,10 +11,10 @@ import UIKit
 typealias ArrowImageBtnClick = (_ button:UIButton) -> Void
 class ContentTableViewCell: UITableViewCell{
 
-    var titleLabel : UILabel?
-    var promptLabel : UILabel?
-    var contentTextField : YX_TextField?
-    var arrowsImageBtn : UIButton?
+   @objc var titleLabel : UILabel?
+   @objc var promptLabel : UILabel?
+  @objc  var contentTextField : YX_TextField?
+   @objc var arrowsImageBtn : UIButton?
     
     var btnClick : ArrowImageBtnClick?
     
@@ -31,7 +31,7 @@ class ContentTableViewCell: UITableViewCell{
         fatalError("init(coder:) has not been implemented")
     }
 
-    func arrowImageBtnClick(sender:UIButton) -> Void {
+    @objc func arrowImageBtnClick(sender:UIButton) -> Void {
         if btnClick != nil {
             btnClick!(sender)
         }
@@ -138,7 +138,7 @@ extension ContentTableViewCell {
         })
     }
     
-    func textFieldChanged(textField:UITextField) -> Void {
+    @objc func textFieldChanged(textField:UITextField) -> Void {
         promptLabel?.isHidden = true
     }
 }

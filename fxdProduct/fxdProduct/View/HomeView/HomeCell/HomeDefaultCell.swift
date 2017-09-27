@@ -242,8 +242,8 @@ extension HomeDefaultCell{
         bottomLabel.textAlignment = .center
         
         let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:bottomLabel.text!)
-        attrstr.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(2,1))
-        attrstr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(2,1))
+        attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(2,1))
+        attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(2,1))
         bottomLabel.attributedText = attrstr
         defaultBgImage?.addSubview(bottomLabel)
         bottomLabel.snp.makeConstraints { (make) in
@@ -504,10 +504,10 @@ extension HomeDefaultCell{
             thirdRefuseView.termLabel?.text = "期限:"+homeProductData.data.thirdProductList[index].stagingBottom+"-"+homeProductData.data.thirdProductList[index].stagingTop+"天"
             thirdRefuseView.feeLabel?.text = "费用：" + homeProductData.data.thirdProductList[0].extAttr.charge_desc_
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.termLabel?.text)!)
-            attrstr.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr.length-4))
+            attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr.length-4))
             thirdRefuseView.termLabel?.attributedText = attrstr
             let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.feeLabel?.text)!)
-            attrstr1.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr1.length-5))
+            attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.init(red: 251/255.0, green: 176/255.0, blue: 59/255.0, alpha: 1.0), range: NSMakeRange(3,attrstr1.length-5))
             thirdRefuseView.feeLabel?.attributedText = attrstr1
             let str = homeProductData.data.thirdProductList[index].extAttr.tags[0]
             thirdRefuseView.descBtn?.setTitle(str as? String, for: .normal)
@@ -1040,7 +1040,7 @@ extension HomeDefaultCell{
 extension HomeDefaultCell{
 
     //MARK:立即添加高级认证
-    func advancedCertificationClick(){
+    @objc func advancedCertificationClick(){
     
         if delegate != nil {
             
@@ -1050,7 +1050,7 @@ extension HomeDefaultCell{
     }
     
     //MARK:精选平台
-    func otherBtnClick(){
+    @objc func otherBtnClick(){
     
         if delegate != nil {
         
@@ -1060,7 +1060,7 @@ extension HomeDefaultCell{
     }
     
     //MARK:点击提款
-    func bottomBtnClick(){
+    @objc func bottomBtnClick(){
     
         if delegate != nil {
             
@@ -1070,7 +1070,7 @@ extension HomeDefaultCell{
     }
     
     //MARK:UISlider滑动事件
-    func changed(slider:UISlider){
+    @objc func changed(slider:UISlider){
 //        print("slider.value = %d",slider.value)
 
         let money = Int(slider.value)
@@ -1083,7 +1083,7 @@ extension HomeDefaultCell{
     }
     
     //MARK:点击立即申请
-    func applyBtnClick(){
+    @objc func applyBtnClick(){
     
         if delegate != nil {
         
@@ -1097,7 +1097,7 @@ extension HomeDefaultCell{
     }
     
     //MARK:点击导流平台的更多
-    func moreBtnClick(){
+    @objc func moreBtnClick(){
     
         if delegate != nil {
             
@@ -1107,7 +1107,7 @@ extension HomeDefaultCell{
     }
     
     //MARK:我要借款
-    func loanBtnClick(){
+    @objc func loanBtnClick(){
     
         if delegate != nil {
             
@@ -1116,7 +1116,7 @@ extension HomeDefaultCell{
         print("我要借款")
     }
     
-    func clickFirstView(_ tapGes : UITapGestureRecognizer){
+    @objc func clickFirstView(_ tapGes : UITapGestureRecognizer){
         
         var productId = ""
         var isOverLimit = ""

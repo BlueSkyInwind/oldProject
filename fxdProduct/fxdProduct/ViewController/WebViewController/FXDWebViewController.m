@@ -47,9 +47,9 @@
     [self.view addSubview:_webView];
     [self createProUI];
     [self addBackItem];
-    
-    NSLog(@"%@",_urlStr);
     _webView.scrollView.showsVerticalScrollIndicator = false;
+
+    NSLog(@"%@",_urlStr);
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
