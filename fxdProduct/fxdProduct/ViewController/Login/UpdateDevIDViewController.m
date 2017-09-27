@@ -154,6 +154,7 @@
             [self login];
         } else {
             [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeError title:nil detail:_updateParse.msg cencelBtn:nil otherBtn:@[@"重试"] Onview:self.view];
+            [[HHAlertViewCust sharedHHAlertView] removeAlertView];
         }
     } failure:^(EnumServerStatus status, id object) {
         
