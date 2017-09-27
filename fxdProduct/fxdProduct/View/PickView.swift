@@ -98,12 +98,9 @@ extension PickView{
     }
     
     override var  frame:(CGRect){
-        
         didSet{
-            
             let newFrame = CGRect(x:0,y:64,width:_k_w,height:_k_h-64)
             super.frame = newFrame
-            
         }
     }
 }
@@ -185,7 +182,6 @@ extension PickView{
         let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(model?.platformName)!)
         attrstr.addAttribute(NSForegroundColorAttributeName, value: QUTOA_COLOR, range: NSMakeRange(0,attrstr.length))
         if row == selectRow{
-            
             attrstr.addAttribute(NSForegroundColorAttributeName, value: UI_MAIN_COLOR, range: NSMakeRange(0,attrstr.length))
         }
         

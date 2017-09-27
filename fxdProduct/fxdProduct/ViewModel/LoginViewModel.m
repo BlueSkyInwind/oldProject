@@ -55,11 +55,9 @@
         loginParamModel.BSFIT_DEVICEID =fingerPrint;
         
     }
-    
     if (verifycode) {
         loginParamModel.verify_code_  = verifycode;
     }
-    
    NSDictionary  * paramDic =[loginParamModel toDictionary];
     [self fatchLogin:paramDic];
 }
@@ -145,15 +143,12 @@
 }
 
 -(void)deleteUserRegisterID{
-    
     [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_loginOutDeleteRegisterId_url] isNeedNetStatus:false parameters:nil finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     } failure:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     }];
-    
 }
-
 
 
 @end

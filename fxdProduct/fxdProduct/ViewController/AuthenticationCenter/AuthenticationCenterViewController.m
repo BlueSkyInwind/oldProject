@@ -219,7 +219,7 @@
             }
                 break;
             case 2:{
-                if (![userDataModel.faceIdentity isEqualToString:@"2"]) {
+                if (![userDataModel.faceIdentity isEqualToString:@"2"] && ![userDataModel.faceIdentity isEqualToString:@"3"]) {
                     cell.image.image = [UIImage imageNamed:_imageArr[indexPath.row]];
                     break;
                 }
@@ -329,7 +329,7 @@
                 }
                     break;
                 case 2:{
-                    if ([userDataModel.faceIdentity isEqualToString:@"2"]) {
+                    if ([userDataModel.faceIdentity isEqualToString:@"2"]  || [userDataModel.faceIdentity isEqualToString:@"3"]) {
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                         return;
                     }
@@ -454,7 +454,7 @@
             break;
         case 2:
         {
-            if ([userDataModel.faceIdentity isEqualToString:@"2"]) {
+            if ([userDataModel.faceIdentity isEqualToString:@"2"] || [userDataModel.faceIdentity isEqualToString:@"3"])  {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已认证"];
                 return false;
             }
