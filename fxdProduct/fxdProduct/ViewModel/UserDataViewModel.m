@@ -92,7 +92,7 @@
     
     NSDictionary *paramDic = @{@"api_key":FaceIDAppKey,
                                @"api_secret":FaceIDAppSecret,
-                               @"comparison_type":@1,
+                               @"comparison_type":@"1",
                                @"face_image_type":@"meglive",
                                @"idcard_name":[Utility sharedUtility].userInfo.realName,
                                @"idcard_number":[Utility sharedUtility].userInfo.userIDNumber,
@@ -118,7 +118,6 @@
         //        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"Error-%ld",(long)error.code]];
     }];
 }
-
 
 - (void)uploadLiveInfo:(NSString *)resultJSONStr isSuccess:(void(^)(id object))success
 {
