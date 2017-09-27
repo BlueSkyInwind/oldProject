@@ -683,7 +683,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     
     if ([self.platform_type isEqualToString:@"2"]) {
         [checkBankViewModel getSupportBankListInfo:@"4"];
-    }else if ([self.platform_type isEqualToString:@"0"]){
+    }else if ([self.platform_type isEqualToString:@"0"]||[self.platform_type isEqualToString:@"3"]){
         [checkBankViewModel getSupportBankListInfo:@"2"];
     }
 }

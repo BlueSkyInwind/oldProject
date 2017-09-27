@@ -12,9 +12,11 @@
 @implementation ApplicationViewModel
 
 
--(void)userCreateApplication:(NSString *)productId{
+-(void)userCreateApplication:(NSString *)productId platformCode:(NSString *)platformCode{
     
-    NSDictionary * paramDic = @{@"productId":productId};
+    NSDictionary * paramDic = @{@"productId":productId,
+                                @"platformCode":platformCode
+                                };
 
     [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_createApplication_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
@@ -43,9 +45,11 @@
     }];
 }
 
--(void)capitalList:(NSString *)productId{
+-(void)capitalList:(NSString *)productId approvalAmount:(NSString *)approvalAmount{
     
-    NSDictionary * paramDic = @{@"productId":productId};
+    NSDictionary * paramDic = @{@"productId":productId,
+                                @"approvalAmount":approvalAmount
+                                };
     
     [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_CapitalList_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {

@@ -54,7 +54,7 @@
 #import "BankInfoViewModel.h"
 #import "FeesDescriptionViewController.h"
 #import "EditCardsController.h"
-
+#import "ThirdWebViewController.h"
 
 //#error 以下需要修改为您平台的信息
 //启动SDK必须的参数
@@ -289,16 +289,16 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 #pragma mark 改变实际到账和总费用的文字颜色
 -(void)changeDisplayLabelTextColor:(NSString *)feeStr{
     
-    NSArray *strArr = [feeStr componentsSeparatedByString:@"."];
-    NSString *str1 = strArr[0];
+//    NSArray *strArr = [feeStr componentsSeparatedByString:@"."];
+//    NSString *str1 = strArr[0];
     
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:checkSuccess.displayLabel.text];
     [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,_drawingsInfoModel.actualAmount.length)];
-    [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(checkSuccess.displayLabel.text.length-1-str1.length,str1.length)];
-    if (feeStr.floatValue == 0) {
-        
-        [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(checkSuccess.displayLabel.text.length-1-1,1)];
-    }
+//    [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(checkSuccess.displayLabel.text.length-1-str1.length,str1.length)];
+//    if (feeStr.floatValue == 0) {
+//
+//        [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(checkSuccess.displayLabel.text.length-1-1,1)];
+//    }
     
     checkSuccess.displayLabel.attributedText = str;
     
@@ -309,12 +309,14 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     checkSuccess =[[[NSBundle mainBundle] loadNibNamed:@"CheckSuccessView" owner:self options:nil] lastObject];
     checkSuccess.frame = CGRectMake(0, 0,_k_w, _k_h);
-    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.0f元",[_drawingsInfoModel.actualAmount floatValue],[_drawingsInfoModel.totalFee floatValue]];
+//    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.0f元",[_drawingsInfoModel.actualAmount floatValue],[_drawingsInfoModel.totalFee floatValue]];
 
+    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,费用详情见协议",[_drawingsInfoModel.actualAmount floatValue]];
+    
     [self changeDisplayLabelTextColor:_drawingsInfoModel.totalFee];
 
-    [checkSuccess.feeBtn addTarget:self action:@selector(shareBtn:)forControlEvents:UIControlEventTouchUpInside];
-    checkSuccess.feeBtn.tag = 107;
+//    [checkSuccess.feeBtn addTarget:self action:@selector(shareBtn:)forControlEvents:UIControlEventTouchUpInside];
+//    checkSuccess.feeBtn.tag = 107;
     //用途
     checkSuccess.purposePicker.delegate = self;
     checkSuccess.purposePicker.dataSource = self;
@@ -451,6 +453,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             attributeStr.yy_font = [UIFont systemFontOfSize:11];
         }
         range = NSMakeRange(attributeStr.length - 13, 13);
+    }else if([_drawingsInfoModel.platformType isEqualToString:@"3"]){
+        attributeStr = [[NSMutableAttributedString alloc]initWithString:@"我已阅读并认可发薪贷《善林协议》"];
+        range = NSMakeRange(attributeStr.length - 6, 6);
     }else{
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"产品类型错误"];
     }
@@ -458,7 +463,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [attributeStr yy_setTextHighlightRange:range color:UI_MAIN_COLOR backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
         //协议点击
         [self getUserInfoData:^{
-            if ([_drawingsInfoModel.platformType isEqualToString:@"0"]) {
+            if ([_drawingsInfoModel.platformType isEqualToString:@"0"]|| [_drawingsInfoModel.platformType isEqualToString:@"3"]) {
                 [self LoanAgreementRequest];
             }
             if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
@@ -472,7 +477,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 //每周还款的视图
 -(void)refreshWeekAmount:(SalaryDrawingsFeeInfoModel *)feeInfoModel{
     
-    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.0f元",[_drawingsInfoModel.actualAmount floatValue],[feeInfoModel.totalFee floatValue]];
+//    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.0f元",[_drawingsInfoModel.actualAmount floatValue],[feeInfoModel.totalFee floatValue]];
+    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,费用详情见协议",[_drawingsInfoModel.actualAmount floatValue]];
     [self changeDisplayLabelTextColor:feeInfoModel.totalFee];
     checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
@@ -642,11 +648,13 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
 }
 
+#pragma mark 提款
 - (void)getMoney
 {
-    //  platform_type  2、合规平台    0、发薪贷平台
-    if([_drawingsInfoModel.platformType isEqualToString:@"2"] || [_drawingsInfoModel.platformType isEqualToString:@"0"]){
+    //  platform_type  2、合规平台    0、发薪贷平台    3、善林金融
+    if([_drawingsInfoModel.platformType isEqualToString:@"2"] || [_drawingsInfoModel.platformType isEqualToString:@"0"]||[_drawingsInfoModel.platformType isEqualToString:@"3"]){
         if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
+
             [self integrationP2PUserState];
         }
         if ([_drawingsInfoModel.platformType isEqualToString:@"0"]) {
@@ -654,13 +662,67 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请添加收款方式！"];
                 return;
             }
+
             [self PostGetdrawApplyAgain];
+        }
+        if ([_drawingsInfoModel.platformType isEqualToString:@"3"]) {
+            
+            
+            [self capitalLoan];
         }
     }else{
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"产品类型错误"];
     }
 }
 
+#pragma mark 善林金融放款
+-(void)capitalLoan{
+    ApplicationViewModel *applicationMV = [[ApplicationViewModel alloc]init];
+    [applicationMV setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]||[baseResultM.errCode isEqualToString:@"1"]||[baseResultM.errCode isEqualToString:@"2"]) {
+            
+            NSString *content = (NSString *)baseResultM.data;
+            [self result:baseResultM.errCode url:content message:baseResultM.friendErrMsg];
+            
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [applicationMV capitalLoan:_selectCard.cardId loanfor:_purposeSelect periods:@"1"];
+}
+
+#pragma mark 善林金融跳转页面
+-(void)result:(NSString *)errCode url:(NSString *)url message:(NSString *)message{
+    switch (errCode.integerValue) {
+        case 0:
+        {
+            LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
+            loanVC.applicationStatus = InLoan;
+            loanVC.popAlert = true;
+            [self.navigationController pushViewController:loanVC animated:YES];
+        }
+            break;
+        case 1:
+            [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:message];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            break;
+        case 2:
+            
+        {
+            ThirdWebViewController *webView = [[ThirdWebViewController alloc] init];
+//            webView.name = @"银行卡认证";
+            webView.loadContent = url;
+            [self.navigationController pushViewController:webView animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
+}
 #pragma mark 新的合规
 -(void)integrationP2PUserState{
     

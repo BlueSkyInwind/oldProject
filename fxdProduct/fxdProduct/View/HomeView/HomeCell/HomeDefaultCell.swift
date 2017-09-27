@@ -18,7 +18,7 @@ import SDWebImage
     func applyBtnClick(_ money: String)->Void
     func moreBtnClick()
     func loanBtnClick()
-    func productBtnClick(_ productId: String, isOverLimit: String)->Void
+    func productBtnClick(_ productId: String, isOverLimit: String, approvalAmount: String)->Void
     func otherBtnClick()
     func refuseTabClick(_ index: NSInteger)->Void
     
@@ -1120,19 +1120,23 @@ extension HomeDefaultCell{
         
         var productId = ""
         var isOverLimit = ""
+        var approvalAmount = ""
         let tag = tapGes.view?.tag
         switch tag! {
         case 101:
             productId = homeProductData.data.productList[0].productId
             isOverLimit = homeProductData.data.productList[0].isOverLimit
+            approvalAmount = homeProductData.data.productList[0].amount
 //            productId = "第一个View"
         case 102:
             productId = homeProductData.data.productList[1].productId
             isOverLimit = homeProductData.data.productList[1].isOverLimit
+            approvalAmount = homeProductData.data.productList[1].amount
 //            productId = "点击第二个View"
         case 103:
             productId = homeProductData.data.productList[2].productId
             isOverLimit = homeProductData.data.productList[2].isOverLimit
+            approvalAmount = homeProductData.data.productList[2].amount
         case 104:
             productId = homeProductData.data.thirdProductList[0].extAttr.path_
 
@@ -1145,10 +1149,14 @@ extension HomeDefaultCell{
         default:
             break
         }
-        
+        if approvalAmount != ""{
+            let length = approvalAmount.characters.count
+            approvalAmount = approvalAmount.substring(to: approvalAmount.index(approvalAmount.startIndex, offsetBy: length - 1))
+            
+        }
         if delegate != nil {
         
-            delegate?.productBtnClick(productId ,isOverLimit: isOverLimit)
+            delegate?.productBtnClick(productId ,isOverLimit: isOverLimit ,approvalAmount: approvalAmount)
             
         }
         print("点击产品列表")

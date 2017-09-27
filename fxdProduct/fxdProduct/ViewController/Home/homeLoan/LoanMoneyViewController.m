@@ -212,7 +212,7 @@
 #pragma mark 获取协议
 -(void)fxdStatus{
 
-    if ([_repayModel.platformType isEqualToString:@"0"]) {
+    if ([_repayModel.platformType isEqualToString:@"0"]||[_repayModel.platformType isEqualToString:@"3"]) {
         
         [self postUrlMessageandDictionary:^(CardInfo *rate) {
             
@@ -604,7 +604,7 @@
         case Repayment:
         {
             moenyViewing.labelProgress.text = @"还款中";
-            moenyViewing.tipLabel.text = @"还款处理中，请稍后";
+            moenyViewing.tipLabel.text = @"还款处理中,请稍后";
             moenyViewing.middleView.hidden = YES;
             moenyViewing.repayView.hidden = NO;
             moenyViewing.statusBottomView.hidden = YES;
@@ -627,7 +627,7 @@
             if (UI_IS_IPHONE5) {
                 moenyViewing.labelProgress.font = [UIFont systemFontOfSize:25];
             }
-            moenyViewing.tipLabel.text = @"续期处理中，请稍等";
+            moenyViewing.tipLabel.text = @"续期处理中,请稍等";
             moenyViewing.statusBottomView.hidden = YES;
             moenyViewing.stagingBgView.hidden = YES;
             [self arrivalAndRenewalUI:applicationStatusModel];
@@ -649,7 +649,7 @@
         case ComplianceRepayment:
         case ComplianceProcessing:
             moenyViewing.labelProgress.text = @"处理中";
-            moenyViewing.tipLabel.text = @"正在处理，请耐心等待";
+            moenyViewing.tipLabel.text = @"正在处理,请耐心等待";
             moenyViewing.middleView.hidden = YES;
             moenyViewing.repayBtnView.hidden = YES;
             moenyViewing.stagingBgView.hidden = YES;

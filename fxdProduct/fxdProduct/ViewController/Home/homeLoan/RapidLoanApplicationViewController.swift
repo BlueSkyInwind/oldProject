@@ -10,53 +10,64 @@ import UIKit
 
 class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicationcConfirmationDelegate,PickViewDelegate{
     
-    
     var pickView : PickView?
-    var peoductId : String?
-    
+    var productId : String?
+    var platformCode : String?
     var rapidLoanView : RapidLoanApplicationcConfirmation?
+    var dataArray : NSMutableArray?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
     
-        self.title = "申请确认"
+        self.title = "选择资金方"
         // Do any additional setup after loading the view.
         addBackItemRoot()
+        productId = RapidLoan
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if (pickView != nil){
+            pickView?.removeFromSuperview()
+        }
+        if (rapidLoanView != nil) {
+            rapidLoanView?.removeFromSuperview()
+        }
         pickView = PickView()
         pickView?.delegate = self
         pickView?.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 0.4)
+        self.pickView?.dataArray = dataArray! as [AnyObject]
         
         rapidLoanView = RapidLoanApplicationcConfirmation()
         rapidLoanView?.delegate = self
-        
+        let model = dataArray![0] as! CapitalListModel
+        self.rapidLoanView?.capitalSourceLabel?.text = model.platformName!
+        platformCode = model.platformCode
         getApplicationConfirmData()
-        getCapitalListData()
+//        getCapitalListData()
     }
 
     //MARK 申请件申请确认页面数据展示
     func getApplicationConfirmData(){
         
         let applicationMV = ApplicationViewModel()
-        applicationMV.setBlockWithReturn({ (returnValue) in
+        applicationMV.setBlockWithReturn({ [weak self](returnValue) in
             
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
                 
                 let applicationVM = try! ApplicaitonViewInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
-                self.setProductUI(model: applicationVM)
+                self?.setProductUI(model: applicationVM)
             }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
         }) {
             
         }
-        applicationMV.queryApplicationInfo(RapidLoan)
+        applicationMV.queryApplicationInfo(productId)
     }
     
     func setProductUI(model : ApplicaitonViewInfoModel){
@@ -82,37 +93,36 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
         self.view.addSubview(rapidLoanView!)
     }
 
-    //MARK 资金平台列表
-    func getCapitalListData(){
-        
-        let applicationMV = ApplicationViewModel()
-        applicationMV.setBlockWithReturn({ (returnValue) in
-            
-            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
-            if baseResult.errCode == "0"{
-                for dic in baseResult.data! as! NSArray{
-                    
-                    let capitalListModel = try! CapitalListModel.init(dictionary: dic as! [AnyHashable : Any])
-                    self.pickView?.dataArray.append(capitalListModel)
-                    
-                }
-                
-                let model = self.pickView?.dataArray[0] as! CapitalListModel
-                self.rapidLoanView?.capitalSourceLabel?.text = model.platformName!
-                
-            }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
-            }
-        }) {
-            
-        }
-        applicationMV.capitalList(RapidLoan)
-    }
+//    //MARK 资金平台列表
+//    func getCapitalListData(){
+//
+//        let applicationMV = ApplicationViewModel()
+//        applicationMV.setBlockWithReturn({[weak self] (returnValue) in
+//
+//            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+//            if baseResult.errCode == "0"{
+//                for dic in baseResult.data! as! NSArray{
+//
+//                    let capitalListModel = try! CapitalListModel.init(dictionary: dic as! [AnyHashable : Any])
+//                    self?.pickView?.dataArray.append(capitalListModel)
+//
+//                }
+//
+//                let model = self?.pickView?.dataArray[0] as! CapitalListModel
+//                self?.rapidLoanView?.capitalSourceLabel?.text = model.platformName!
+//
+//            }else{
+//                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+//            }
+//        }) {
+//
+//        }
+//        applicationMV.capitalList(productId)
+//    }
     
     //MARK 选择资金来源方按钮
     func capitalSourceBtn() {
 
-        
         self.view.addSubview(self.pickView!)
     
     }
@@ -120,6 +130,21 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
     //MARK 确认申请按钮
     func commitBtn() {
      print("确认申请按钮")
+        let applicationMV = ApplicationViewModel()
+        applicationMV.setBlockWithReturn({ [weak self](returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+                let checkVC = CheckViewController()
+                self?.navigationController?.pushViewController(checkVC, animated: true)
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        applicationMV.userCreateApplication(productId, platformCode: platformCode)
     }
     
     //MARK 取消按钮
@@ -142,6 +167,7 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
         }
         rapidLoanView?.capitalSourceLabel?.text = capitalListModel.platformName
 
+        platformCode = capitalListModel.platformCode
     }
     
     override func didReceiveMemoryWarning() {

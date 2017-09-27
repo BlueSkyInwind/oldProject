@@ -101,7 +101,7 @@ extension PickView{
         
         didSet{
             
-            let newFrame = CGRect(x:0,y:64,width:_k_w,height:_k_h-64)
+            let newFrame = CGRect(x:0,y:0,width:_k_w,height:_k_h)
             super.frame = newFrame
             
         }
@@ -165,14 +165,10 @@ extension PickView{
         if (pickerLabel == nil){
             
             pickerLabel = UILabel()
-            pickerLabel?.textColor = UI_MAIN_COLOR
-            pickerLabel?.font = UIFont.systemFont(ofSize: 23)
             pickerLabel?.adjustsFontSizeToFitWidth = true
             pickerLabel?.textAlignment = .center
             pickerLabel?.backgroundColor = UIColor.clear
-            if row != selectRow {
-                pickerLabel?.font = UIFont.systemFont(ofSize: 15)
-            }
+            
         }
         
         pickerLabel?.attributedText = self.pickerView(pickerView, attributedTitleForRow: row, forComponent: component)
@@ -184,9 +180,11 @@ extension PickView{
         let model = dataArray[row] as? CapitalListModel
         let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(model?.platformName)!)
         attrstr.addAttribute(NSForegroundColorAttributeName, value: QUTOA_COLOR, range: NSMakeRange(0,attrstr.length))
+        attrstr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, attrstr.length))
         if row == selectRow{
             
             attrstr.addAttribute(NSForegroundColorAttributeName, value: UI_MAIN_COLOR, range: NSMakeRange(0,attrstr.length))
+            attrstr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 23), range: NSMakeRange(0, attrstr.length))
         }
         
         return attrstr
