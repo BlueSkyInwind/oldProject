@@ -147,11 +147,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self createUI];
 
     _isOpen = NO;
-    
     [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 
 }
-
 
 -(void)clickAgreementView{
 
@@ -219,6 +217,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         [weakSelf loadWithdrawalsView:drawingsInfo];
     }];
 }
+
 //刷新UI
 - (void)refreshUI{
     [self createUI];
@@ -261,7 +260,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         checkFalse.seeView.hidden = YES;
         checkFalse.jsdView.hidden = YES;
     }else {
-        
         checkFalse.moreInfoLabel.hidden = YES;
         checkFalse.moreInfoBtn.hidden = YES;
         checkFalse.promoteLabel.hidden = YES;
@@ -294,14 +292,14 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:checkSuccess.displayLabel.text];
     [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,_drawingsInfoModel.actualAmount.length)];
+
 //    [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(checkSuccess.displayLabel.text.length-1-str1.length,str1.length)];
 //    if (feeStr.floatValue == 0) {
 //
 //        [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(checkSuccess.displayLabel.text.length-1-1,1)];
 //    }
-    
+
     checkSuccess.displayLabel.attributedText = str;
-    
 }
 
 #pragma mark - 提款视图
@@ -495,7 +493,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 /*
  #pragma mark - Navigation
@@ -821,13 +818,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
 }
 
-
 #pragma mark->UIPickerViewDataSource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
 }
-
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     if (pickerView.tag == 101) {

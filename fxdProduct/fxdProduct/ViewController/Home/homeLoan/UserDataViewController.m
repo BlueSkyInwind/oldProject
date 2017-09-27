@@ -83,7 +83,6 @@
     isOpen = NO;
     _creditCardStatus = @"3";
     _socialSecurityStatus = @"3";
-
     _subTitleArr = @[@"请完善您的身份信息",@"请完善您的个人信息",@"请完善您的职业信息",@"请完成三方认证"];
     [self addBackItemRoot];
     [self configMoxieSDK];
@@ -228,11 +227,12 @@
                 cell.subTitleLabel.text = @"完善信用卡认证信息";
                 cell.titleLable.text = @"信用卡认证";
                 cell.statusLabel.text = _creditCardHighRandM != nil ? _creditCardHighRandM.result : @"未完成";
-                cell.statusLabel.textColor = rgb(159, 160, 162);
+                cell.statusLabel.textColor = rgb(42, 155, 234);
                 if ([_creditCardStatus isEqualToString:@"2"]) {
                     cell.statusLabel.textColor = rgb(42, 155, 234);
                 }
                 if ([_creditCardStatus isEqualToString:@"3"]) {
+                    cell.statusLabel.textColor = rgb(159, 160, 162);
                     cell.statusLabel.text = @"未完成";
                 }
                 return cell;
@@ -244,11 +244,12 @@
                 cell.subTitleLabel.text = @"完善社保认证信息";
                 cell.titleLable.text = @"社保认证";
                 cell.statusLabel.text = _socialSecurityHighRandM != nil ? _socialSecurityHighRandM.result : @"未完成";;
-                cell.statusLabel.textColor = rgb(159, 160, 162);
+                cell.statusLabel.textColor =  rgb(42, 155, 234);
                 if ([_socialSecurityStatus isEqualToString:@"2"]) {
                     cell.statusLabel.textColor = rgb(42, 155, 234);
                 }
                 if ([_socialSecurityStatus isEqualToString:@"3"]) {
+                    cell.statusLabel.textColor = rgb(159, 160, 162);
                     cell.statusLabel.text = @"未完成";
                 }
                 return cell;
@@ -294,19 +295,6 @@
             break;
         case 2:
         {
-            cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
-            cell.titleLable.text = @"收款信息";
-            cell.subTitleLabel.text = @"";
-            cell.statusLabel.text = @"未完成";
-            cell.statusLabel.textColor = rgb(159, 160, 162);
-            if ([_userDataModel.gathering isEqualToString:@"1"]) {
-                cell.statusLabel.text = @"已完成";
-                cell.statusLabel.textColor = rgb(42, 155, 234);
-            }
-            return cell;
-        }             break;
-        case 3:
-        {
             cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
             cell.titleLable.text = @"第三方认证";
             cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
@@ -316,6 +304,21 @@
             cell.statusLabel.text = @"未完成";
             cell.statusLabel.textColor = rgb(159, 160, 162);
             if ([_userDataModel.others isEqualToString:@"1"]) {
+                cell.statusLabel.text = @"已完成";
+                cell.statusLabel.textColor = rgb(42, 155, 234);
+            }
+            return cell;
+
+        }
+            break;
+        case 3:
+        {
+            cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
+            cell.titleLable.text = @"收款信息";
+            cell.subTitleLabel.text = @"";
+            cell.statusLabel.text = @"未完成";
+            cell.statusLabel.textColor = rgb(159, 160, 162);
+            if ([_userDataModel.gathering isEqualToString:@"1"]) {
                 cell.statusLabel.text = @"已完成";
                 cell.statusLabel.textColor = rgb(42, 155, 234);
             }
@@ -390,6 +393,16 @@
             break;
         case 2:
         {
+            if ([_userDataModel.others isEqualToString:@"1"]){
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+            }else {
+                thirdPartyAuthViewController * thirdPartyAuthVC = [[thirdPartyAuthViewController alloc]init];
+                [self.navigationController pushViewController:thirdPartyAuthVC animated:true];
+            }
+        }
+            break;
+        case 3:
+        {
             //此处需要一个返回默认卡的接口
             [self getGatheringInformation_jhtml:^(CardInfo *cardInfo) {
                 EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
@@ -403,22 +416,19 @@
             }];
         }
             break;
-        case 3:
-        {
-            if ([_userDataModel.others isEqualToString:@"1"]){
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
-            }else {
-                    thirdPartyAuthViewController * thirdPartyAuthVC = [[thirdPartyAuthViewController alloc]init];
-                    [self.navigationController pushViewController:thirdPartyAuthVC animated:true];
-            }
-        }
-            break;
         default:
             break;
     }
 }
 -(BOOL)cellStatusIsSelect:(NSInteger)row{
-    
+    if ([_userDataModel.identity isEqualToString:@"0"] && row > 0) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善身份信息！"];
+        return false;
+    }
+    if ([_userDataModel.person isEqualToString:@"0"] && row > 1) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善个人信息！"];
+        return false;
+    }
     switch (row) {
         case 0:{
             if ([_userDataModel.identityEdit isEqualToString:@"0"]) {
@@ -428,10 +438,6 @@
         }
             break;
         case 1:{
-            if ([_userDataModel.identity isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完善身份信息！"];
-                return false;
-            }
             if ([_userDataModel.personEdit isEqualToString:@"0"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
                 return false;
@@ -439,22 +445,14 @@
         }
             break;
         case 2:{
-            if ([_userDataModel.person isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完善个人信息！"];
-                return false;
-            }
-            if ([_userDataModel.gathering isEqualToString:@"1"]) {
+            if ([_userDataModel.others isEqualToString:@"1"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
                 return false;
             }
         }
             break;
         case 3:{
-            if ([_userDataModel.gathering isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完善收款信息！"];
-                return false;
-            }
-            if ([_userDataModel.others isEqualToString:@"1"]) {
+            if ([_userDataModel.gathering isEqualToString:@"1"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
                 return false;
             }
@@ -470,7 +468,6 @@
 //    topView.backgroundColor = UI_MAIN_COLOR;
 //    topView.frame = CGRectMake(0, 0, _k_w, -scrollView.contentOffset.y);
 }
-
 - (void)getUserInfo:(void(^)(Custom_BaseInfo *custom_baseInfo))finish
 {
     GetCustomerBaseViewModel *customerInfo = [[GetCustomerBaseViewModel alloc] init];

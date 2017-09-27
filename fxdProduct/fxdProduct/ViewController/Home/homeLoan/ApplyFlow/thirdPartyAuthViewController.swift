@@ -67,7 +67,7 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         switch indexPath.row {
         case 0:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
-            if verifyStatus == "2" {
+            if verifyStatus == "2" || verifyStatus == "3"{
                 thirdPartyAuthCell?.statusLabel?.text = "已完成"
             }else{
                 thirdPartyAuthCell?.statusLabel?.text = "未完成"
@@ -94,7 +94,6 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         default:
             break
         }
-        
         if thirdPartyAuthCell?.statusLabel?.text == "已完成" {
             thirdPartyAuthCell?.statusLabel?.textColor = UIColor.init(red: 42/255, green: 155/255, blue: 234/255, alpha: 1)
         }else{
@@ -106,6 +105,10 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row{
         case 0:
+            if verifyStatus == "2" || verifyStatus == "3"{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "您已完成认证")
+                return;
+            }
             let faceIdentiCreditVC  = FaceIdentiViewController.init()
             faceIdentiCreditVC.verifyStatus = verifyStatus
             self.navigationController?.pushViewController(faceIdentiCreditVC, animated: true)
@@ -120,6 +123,10 @@ class thirdPartyAuthViewController: BaseViewController,UITableViewDelegate,UITab
                 return
             }
             */
+            if isMobileAuth == "2" {
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "您已完成认证")
+                return;
+            }
             let certificationVC = CertificationViewController.init()
             certificationVC.phoneAuthChannel = "TC"
             certificationVC.isMobileAuth = isMobileAuth

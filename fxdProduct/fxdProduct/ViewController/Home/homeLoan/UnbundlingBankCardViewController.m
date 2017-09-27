@@ -40,9 +40,7 @@
     self.bankTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
     [self.sureBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.bankTable registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
-
 }
-
 
 #pragma mark ->UItableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -33,7 +33,7 @@
     if ([Utility sharedUtility].userInfo.clientId && ![[Utility sharedUtility].userInfo.clientId isEqualToString:@""]) {
         
         loginParamModel.mobile_phone_ = number;
-//        loginParamModel.password_ = @"L6bEFB+eWnk=";
+//        loginParamModel.password_ = @"TVjebkujUOo=";
         loginParamModel.password_ = [DES3Util encrypt:password];
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
@@ -45,7 +45,7 @@
     } else {
         
         loginParamModel.mobile_phone_ = number;
-//        loginParamModel.password_ = @"L6bEFB+eWnk=";;
+//        loginParamModel.password_ = @"TVjebkujUOo=";;
         loginParamModel.password_ = [DES3Util encrypt:password];
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
@@ -55,11 +55,9 @@
         loginParamModel.BSFIT_DEVICEID =fingerPrint;
         
     }
-    
     if (verifycode) {
         loginParamModel.verify_code_  = verifycode;
     }
-    
    NSDictionary  * paramDic =[loginParamModel toDictionary];
     [self fatchLogin:paramDic];
 }
@@ -145,15 +143,12 @@
 }
 
 -(void)deleteUserRegisterID{
-    
     [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_loginOutDeleteRegisterId_url] isNeedNetStatus:false parameters:nil finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     } failure:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     }];
-    
 }
-
 
 
 @end

@@ -18,9 +18,9 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     
         self.title = "选择资金方"
+
         // Do any additional setup after loading the view.
         addBackItemRoot()
         productId = RapidLoan
@@ -58,7 +58,6 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
             
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
-                
                 let applicationVM = try! ApplicaitonViewInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 self?.setProductUI(model: applicationVM)
             }else{
@@ -71,7 +70,6 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
     }
     
     func setProductUI(model : ApplicaitonViewInfoModel){
-        
         
         rapidLoanView?.titleLabel?.text = model.productName
         
@@ -119,6 +117,7 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
 //        }
 //        applicationMV.capitalList(productId)
 //    }
+
     
     //MARK 选择资金来源方按钮
     func capitalSourceBtn() {
