@@ -14,7 +14,7 @@
 /**
  用户创建进件
  */
--(void)userCreateApplication:(NSString *)productId;
+-(void)userCreateApplication:(NSString *)productId platformCode:(NSString *)platformCode;
 
 
 /**
@@ -26,7 +26,7 @@
  资金平台列表
  */
 
--(void)capitalList:(NSString *)productId;
+-(void)capitalList:(NSString *)productId approvalAmount:(NSString *)approvalAmount;
 
 /**
  资金平台放款接口

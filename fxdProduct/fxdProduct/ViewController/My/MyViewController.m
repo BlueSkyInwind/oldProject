@@ -14,7 +14,7 @@
 #import "DiscountTicketController.h"
 #import "InvitationViewController.h"
 #import "UserDataViewController.h"
-
+#import "ThirdWebViewController.h"
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     NSArray *titleAry;
@@ -111,10 +111,10 @@
     switch (indexPath.row) {
         case 0:
         {
-            RapidLoanApplicationViewController *repayRecord=[[RapidLoanApplicationViewController alloc]init];
+//            RapidLoanApplicationViewController *repayRecord=[[RapidLoanApplicationViewController alloc]init];
             
-            
-//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+//            ThirdWebViewController *repayRecord=[[ThirdWebViewController alloc]init];
+            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;

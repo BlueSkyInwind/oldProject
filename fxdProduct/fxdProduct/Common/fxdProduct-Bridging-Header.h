@@ -48,4 +48,5 @@
 #import "ApplicationViewModel.h"
 #import "CapitalListModel.h"
 #import "ApplicaitonModel.h"
+#import "CheckViewController.h"
 #endif /* fxdProduct_Bridging_Header_h */

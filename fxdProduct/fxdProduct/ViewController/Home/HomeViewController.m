@@ -687,14 +687,26 @@
     }
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productList[0].productId;
-        [self goLoanSureVC:_homeProductList.data.productList[0].productId];
+        if ([_homeProductList.data.productList[0].productId isEqualToString:RapidLoan]) {
+            
+            
+            NSString *approvalAmount = _homeProductList.data.productList[0].amount;
+            approvalAmount = [approvalAmount substringToIndex:approvalAmount.length-1];
+            [self getCapitalListData:_homeProductList.data.productList[0].productId approvalAmount:approvalAmount];
+//            [self getCapitalListData:_homeProductList.data.productList[0].productId];
+        }else{
+            
+            [self goLoanSureVC:_homeProductList.data.productList[0].productId];
+        }
+        
+        
     } else {
         [self presentLogin:self];
     }
 }
 
 #pragma mark 点击产品列表
--(void)productBtnClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit{
+-(void)productBtnClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit approvalAmount:(NSString *)approvalAmount{
 
     if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:RapidLoan] || [productId isEqualToString:DeriveRapidLoan]) {
         
@@ -704,7 +716,13 @@
         }
         if ([Utility sharedUtility].loginFlage) {
             [Utility sharedUtility].userInfo.pruductId = productId;
-            [self goLoanSureVC:productId];
+            if ([productId isEqualToString:RapidLoan]) {
+                
+                [self getCapitalListData:productId approvalAmount:approvalAmount];
+            }else{
+                [self goLoanSureVC:productId];
+            }
+            
         } else {
             [self presentLogin:self];
         }
@@ -822,5 +840,49 @@
         
     }];
     [userDataMV UserDataCertificationResult];
+}
+
+
+
+#pragma mark 资金平台列表
+-(void)getCapitalListData:(NSString *)productId approvalAmount:(NSString *)approvalAmount{
+    
+    ApplicationViewModel *applicationMV = [[ApplicationViewModel alloc]init];
+    [applicationMV setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        //errCode=0 跳往资金平台选择页面 errCode=4跳往发薪贷原来确认页面
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            NSMutableArray *dataArray = [NSMutableArray array];
+            NSArray * array = (NSArray *)baseResultM.data;
+            for (int  i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
+                CapitalListModel * capitalListModel = [[CapitalListModel alloc]initWithDictionary:dic error:nil];
+                [dataArray addObject:capitalListModel];
+            }
+            
+            [self goRap:productId dataArray:dataArray];
+            
+        }else if([baseResultM.errCode isEqualToString:@"4"]){
+            
+            [self goLoanSureVC:productId];
+        
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [applicationMV capitalList:productId approvalAmount:approvalAmount];
+}
+
+#pragma mark 跳转善林金融申请确认页面
+-(void)goRap:(NSString *)productId dataArray:(NSMutableArray *)dataArray{
+    RapidLoanApplicationViewController *controller = [[RapidLoanApplicationViewController alloc]init];
+    controller.productId = productId;
+    controller.dataArray = dataArray;
+ 
+    [self.navigationController pushViewController:controller animated:false];
 }
 @end

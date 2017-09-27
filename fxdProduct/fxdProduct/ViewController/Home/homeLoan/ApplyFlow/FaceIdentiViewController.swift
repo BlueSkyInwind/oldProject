@@ -34,7 +34,7 @@ class FaceIdentiViewController: BaseViewController,LiveDeteDelgate{
     func changeStatus() -> Void {
         if verifyStatus == "1" {
             statusBtn?.isEnabled = true
-            statusBtn?.backgroundColor = UIColor.red
+            statusBtn?.backgroundColor = UI_MAIN_COLOR
             statusBtn?.setTitle("进入检测", for: UIControlState.normal)
         }else {
             statusBtn?.isEnabled = false
@@ -149,6 +149,9 @@ extension FaceIdentiViewController {
     
     explainLabel = UILabel()
     explainLabel?.font = UIFont.systemFont(ofSize: 15)
+    if UI_IS_IPONE5{
+        explainLabel?.font = UIFont.systemFont(ofSize: 13)
+    }
     explainLabel?.text = "举起手机，正对屏幕，人脸完全置于虚线内跟随提示完成“摇头”“抬头”“眨眼”“张嘴”等动作"
     explainLabel?.numberOfLines = 0
     explainLabel?.textColor = UIColor.init(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
@@ -176,7 +179,7 @@ extension FaceIdentiViewController {
     
     statusBtn = UIButton.init(type: UIButtonType.custom)
     statusBtn?.setTitle("进入检测", for: UIControlState.normal)
-    statusBtn?.backgroundColor = UIColor.red
+    statusBtn?.backgroundColor = UI_MAIN_COLOR
     Tool.setCorner(statusBtn, borderColor: UIColor.clear)
     statusBtn?.setTitleColor(UIColor.white, for: UIControlState.normal)
     statusBtn?.addTarget(self, action: #selector(statusBtnClick), for: UIControlEvents.touchUpInside)

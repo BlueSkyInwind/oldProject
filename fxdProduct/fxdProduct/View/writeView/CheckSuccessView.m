@@ -123,6 +123,7 @@
         _weekMoney.font=[UIFont systemFontOfSize:13];
         _allMoney.font=[UIFont systemFontOfSize:13];
         _displayLabel.font = [UIFont systemFontOfSize:11];
+        _feeBtn.titleLabel.font = [UIFont systemFontOfSize:11];
         [self setNeedsLayout];
     }
     

@@ -1219,6 +1219,8 @@
 		CC6F06861F750A5B00FA889E /* CapitalListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06841F750A5B00FA889E /* CapitalListModel.m */; };
 		CC6F06891F789D7000FA889E /* CapitalLoanParam.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06881F789D7000FA889E /* CapitalLoanParam.m */; };
 		CC6F068A1F789D7000FA889E /* CapitalLoanParam.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06881F789D7000FA889E /* CapitalLoanParam.m */; };
+		CC6F06901F7B8D3600FA889E /* ThirdWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F068F1F7B8D3600FA889E /* ThirdWebViewController.m */; };
+		CC6F06911F7B8D4200FA889E /* ThirdWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F068F1F7B8D3600FA889E /* ThirdWebViewController.m */; };
 		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
@@ -2413,6 +2415,8 @@
 		CC6F06841F750A5B00FA889E /* CapitalListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CapitalListModel.m; sourceTree = "<group>"; };
 		CC6F06871F789D7000FA889E /* CapitalLoanParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapitalLoanParam.h; sourceTree = "<group>"; };
 		CC6F06881F789D7000FA889E /* CapitalLoanParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CapitalLoanParam.m; sourceTree = "<group>"; };
+		CC6F068E1F7B8D3600FA889E /* ThirdWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdWebViewController.h; sourceTree = "<group>"; };
+		CC6F068F1F7B8D3600FA889E /* ThirdWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThirdWebViewController.m; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
 		CC989C2E1F4D84A9000CDACF /* AuthenticationCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationCenterViewController.h; sourceTree = "<group>"; };
@@ -2642,8 +2646,8 @@
 				63E640C11DCACF2300783E9D /* ReplenishViewController.xib */,
 				0FFA91721C59BE57008D91D2 /* BankCardViewController.h */,
 				0FFA91731C59BE57008D91D2 /* BankCardViewController.m */,
-				0FFA91741C59BE57008D91D2 /* BankCardViewController.xib */,
 				0FFA91771C59F641008D91D2 /* LoanMoneyViewController.h */,
+				0FFA91741C59BE57008D91D2 /* BankCardViewController.xib */,
 				0FFA91781C59F641008D91D2 /* LoanMoneyViewController.m */,
 				63B142AD1D9A5C2800C43B3F /* P2PViewController.h */,
 				63B142AE1D9A5C2800C43B3F /* P2PViewController.m */,
@@ -4412,6 +4416,7 @@
 		63DE56F91DE7CC4200747AE2 /* WebViewController */ = {
 			isa = PBXGroup;
 			children = (
+				CC6F068D1F7B8CA800FA889E /* ThirdWebViewController */,
 				63A24BFA1BE063A90036E8EF /* FrameWorks */,
 				63DE56FD1DE7CD2900747AE2 /* FXDWebViewController.h */,
 				63DE56FE1DE7CD2900747AE2 /* FXDWebViewController.m */,
@@ -5251,6 +5256,15 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
+		CC6F068D1F7B8CA800FA889E /* ThirdWebViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CC6F068E1F7B8D3600FA889E /* ThirdWebViewController.h */,
+				CC6F068F1F7B8D3600FA889E /* ThirdWebViewController.m */,
+			);
+			path = ThirdWebViewController;
+			sourceTree = "<group>";
+		};
 		CC989C321F4D86E1000CDACF /* AuthenticationCenterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -5483,7 +5497,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = B4V533E2T3;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -6399,6 +6413,7 @@
 				63FE3DE51E4873F2009E5B82 /* PayLoanChooseController.m in Sources */,
 				635B0BE11DF157EA008EAFD1 /* DetailViewController.m in Sources */,
 				63FF48401B6F0322009E384C /* HomeViewController.m in Sources */,
+				CC6F06901F7B8D3600FA889E /* ThirdWebViewController.m in Sources */,
 				0FEACE201CA0E2450027859A /* TelPhoneCompanyCell.m in Sources */,
 				8438F70F1EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
 				63FC24F51D98F7E9006F58F3 /* YYTextSelectionView.m in Sources */,
@@ -6751,6 +6766,7 @@
 				CC0DFA421EA5B1090024841A /* PayMethodViewController.m in Sources */,
 				CC0DFA431EA5B1090024841A /* LoginParse.m in Sources */,
 				CC0DFA441EA5B1090024841A /* ShouldAlsoAmountBaseClass.m in Sources */,
+				CC6F06911F7B8D4200FA889E /* ThirdWebViewController.m in Sources */,
 				CC0DFA451EA5B1090024841A /* EmptyUserData.m in Sources */,
 				CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */,
 				CC0DFA471EA5B1090024841A /* BaseTabBarViewController.m in Sources */,
@@ -7072,11 +7088,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7165,8 +7181,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1b16c4d0-c6a8-48ab-948c-ca1be54f774f";
+				PROVISIONING_PROFILE_SPECIFIER = "FXD-Product";
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -7186,11 +7202,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7265,8 +7281,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1b16c4d0-c6a8-48ab-948c-ca1be54f774f";
+				PROVISIONING_PROFILE_SPECIFIER = "FXD-Product";
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -16,7 +16,7 @@ import UIKit
     
 }
 
-class RapidLoanApplicationcConfirmation: UIView ,UIPickerViewDelegate,UIPickerViewDataSource{
+class RapidLoanApplicationcConfirmation: UIView{
     
     var titleLabel : UILabel?
     var qutoaLabel : UILabel?
@@ -177,20 +177,6 @@ extension RapidLoanApplicationcConfirmation{
         print("点击确认申请")
     }
     
-    fileprivate func setPickView(){
-        
-        let pickView = UIPickerView()
-        pickView.delegate = self
-        pickView.dataSource = self
-        self.addSubview(pickView)
-        pickView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self).offset(-20)
-            make.left.equalTo(self).offset(20)
-            make.right.equalTo(self).offset(-20)
-            make.height.equalTo(200)
-        }
-    }
-    
     override var  frame:(CGRect){
         
         didSet{
@@ -202,15 +188,3 @@ extension RapidLoanApplicationcConfirmation{
     }
 }
 
-extension RapidLoanApplicationcConfirmation{
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        return 2
-    }
-    
-}

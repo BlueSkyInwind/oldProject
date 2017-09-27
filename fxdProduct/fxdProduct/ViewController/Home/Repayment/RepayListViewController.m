@@ -222,7 +222,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         }
     }
     
-    if ([self.platform_type isEqualToString:@"0"]|| [self.platform_type isEqualToString:@"2"]) {
+    if ([self.platform_type isEqualToString:@"0"]|| [self.platform_type isEqualToString:@"2"]||[self.platform_type isEqualToString:@"3"]) {
         if ([_vaildSituations.firstObject.status isEqualToString:@"2"] && [_vaildSituations.lastObject.status isEqualToString:@"2"]) {
             _save_amount = 0;
         }else {
@@ -265,7 +265,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
 //        [self showAlert];
         for (int i = 0; i < _cellSelectArr.count; i++) {
             [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
-            if ([self.platform_type isEqualToString:@"0"] ||[self.platform_type isEqualToString:@"2"]) {
+            if ([self.platform_type isEqualToString:@"0"] ||[self.platform_type isEqualToString:@"2"]||[self.platform_type isEqualToString:@"3"]) {
                 Situations *situation = [_vaildSituations objectAtIndex:i];
                 _readyPayAmount += situation.debt_total;
                 if ([situation.status isEqualToString:@"3"]) {
@@ -274,7 +274,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             }
         }
         
-        if ([self.platform_type isEqualToString:@"0"] || [self.platform_type isEqualToString:@"2"]) {
+        if ([self.platform_type isEqualToString:@"0"] || [self.platform_type isEqualToString:@"2"]||[self.platform_type isEqualToString:@"3"]) {
             if ([_vaildSituations.firstObject.status isEqualToString:@"2"] && [_vaildSituations.lastObject.status isEqualToString:@"2"]) {
                 _save_amount = 0;
             }else {
@@ -358,7 +358,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
  *
  */
 - (IBAction)repayClick:(UIButton *)sender {
-    if ([self.platform_type isEqualToString:@"0"] || [self.platform_type isEqualToString:@"2"]) {
+    if ([self.platform_type isEqualToString:@"0"] || [self.platform_type isEqualToString:@"2"]||[self.platform_type isEqualToString:@"3"]) {
         if (_situations.count > 0) {
             [_situations removeAllObjects];
         }
@@ -421,7 +421,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         
         if ([self.platform_type isEqualToString:@"2"]) {
             [checkBankViewModel getSupportBankListInfo:@"4"];
-        }else if ([self.platform_type isEqualToString:@"0"]){
+        }else if ([self.platform_type isEqualToString:@"0"]||[self.platform_type isEqualToString:@"3"]){
             [checkBankViewModel getSupportBankListInfo:@"2"];
         }
     } else {
