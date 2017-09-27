@@ -340,6 +340,11 @@
 - (void)saveBtnClick
 {
     DLog(@"保存");
+    if ([_contactStatus isEqualToString:@"0"]) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您完善联系人资料！"];
+        return;
+    }
+    
     if (![_cityCode.provinceCode isEqualToString:@""] && ![_cityCode.cityCode isEqualToString:@""] && ![_cityCode.districtCode isEqualToString:@""]) {
         //职业信息保存
         NSDictionary *dictry = [self getProfessionInfo];
@@ -353,7 +358,6 @@
                 }
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:_careerParse.msg];
                 [self.navigationController popViewControllerAnimated:true];
-                
             }else{
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
             }

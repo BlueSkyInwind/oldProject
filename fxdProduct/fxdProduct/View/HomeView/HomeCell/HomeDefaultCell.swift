@@ -50,7 +50,6 @@ class HomeDefaultCell: UITableViewCell ,UITableViewDelegate,UITableViewDataSourc
         super.awakeFromNib()
         // Initialization code
 
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -184,8 +183,6 @@ extension HomeDefaultCell{
             make.left.equalTo((defaultBgImage?.snp.left)!).offset(30)
             make.height.equalTo(15)
         }
-        
-        
         
         let rightLabel = UILabel()
         rightLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
@@ -624,9 +621,7 @@ extension HomeDefaultCell{
                 })
                 i = 70
             }
-            
         }
-        
         
         let contentView = UIView()
         drawingBgImage?.addSubview(contentView)
