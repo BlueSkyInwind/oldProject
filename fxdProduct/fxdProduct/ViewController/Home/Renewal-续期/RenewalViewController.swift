@@ -15,7 +15,7 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
     var headerView: CurrentInformationHeadView? = nil
     var contentArr : [String] = [String]()
     var cardInfo : CardInfo?
-    var stagingId : String?
+   @objc var stagingId : String?
     var currentindex : Int?
     var paymentPattern : PatternOfPayment?
 

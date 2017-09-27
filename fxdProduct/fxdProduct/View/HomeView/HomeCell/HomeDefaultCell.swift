@@ -29,23 +29,23 @@ typealias tabRefuseCell = (_ index: NSInteger)->Void
 
 class HomeDefaultCell: UITableViewCell ,UITableViewDelegate,UITableViewDataSource{
 
-    weak var delegate: HomeDefaultCellDelegate?
+   @objc weak var delegate: HomeDefaultCellDelegate?
     
-    var tabRefuseCellClosure : tabRefuseCell?
+   @objc var tabRefuseCellClosure : tabRefuseCell?
     
-    var leftLabel: UILabel?
-    var rightLabel: UILabel?
-    var defaultHeadLabel :UILabel?
-    var homeProductData = HomeProductList()
-    var defaultBgImage : UIImageView?
-    var refuseBgImage : UIImageView?
-    var otherPlatformsBgView : UIView?
-    var drawingBgImage : UIImageView?
-    var productFirstBgImage : UIImageView?
-    var productSecondBgImage : UIImageView?
-    var refuseBgView : UIView?
-    var refuseLeftTitle : Array<Any>?
-    var refuseRightTitle : Array<Any>?
+   @objc var leftLabel: UILabel?
+   @objc var rightLabel: UILabel?
+   @objc var defaultHeadLabel :UILabel?
+   @objc var homeProductData = HomeProductList()
+   @objc var defaultBgImage : UIImageView?
+   @objc var refuseBgImage : UIImageView?
+   @objc  var otherPlatformsBgView : UIView?
+   @objc var drawingBgImage : UIImageView?
+   @objc  var productFirstBgImage : UIImageView?
+   @objc var productSecondBgImage : UIImageView?
+   @objc var refuseBgView : UIView?
+   @objc var refuseLeftTitle : Array<Any>?
+   @objc var refuseRightTitle : Array<Any>?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -75,7 +75,7 @@ extension HomeDefaultCell{
 
     //
     //MARK:默认情况
-    func setupDefaultUI(){
+   @objc func setupDefaultUI(){
     
         defaultBgImage = UIImageView()
         defaultBgImage?.image = UIImage(named:"beijing big")
@@ -386,7 +386,7 @@ extension HomeDefaultCell{
     }
     
     
-    func refuseTab(){
+   @objc func refuseTab(){
     
         refuseLeftTitle = ["60天后,更新基础资料","添加高级认证","尝试其他平台"]
         refuseRightTitle = ["前往更新","立即添加","精选平台"]
@@ -424,11 +424,10 @@ extension HomeDefaultCell{
             make.right.equalTo((refuseBgView?.snp.right)!).offset(00)
             make.bottom.equalTo((refuseBgView?.snp.bottom)!).offset(-40)
         }
-        
     }
     //
     //MARK:信用评分不足，导流其他平台
-    func setupOtherPlatformsUI(){
+  @objc  func setupOtherPlatformsUI(){
     
         otherPlatformsBgView  = UIView()
         self.addSubview(otherPlatformsBgView!)
@@ -471,13 +470,9 @@ extension HomeDefaultCell{
             make.height.equalTo(homeProductData.data.thirdProductList.count * 82)
         }
         
-        
         for index in 0..<homeProductData.data.thirdProductList.count {
-        
             if index >= 2{
-            
                 if UI_IS_IPONE5{
-                
                     continue
                 }
             }
@@ -540,7 +535,7 @@ extension HomeDefaultCell{
     
     //进件带提款
     //MARK:进件带提款
-    func setupDrawingUI(){
+   @objc func setupDrawingUI(){
     
 
         var dataArray : [HomeInfoList] = [HomeInfoList]()
@@ -747,7 +742,7 @@ extension HomeDefaultCell{
     
     //产品列表，第一个
     //MARK:产品列表，第一个
-    func productListFirst(){
+  @objc  func productListFirst(){
     
         productFirstBgImage = UIImageView()
         productFirstBgImage?.isUserInteractionEnabled = true
@@ -838,7 +833,7 @@ extension HomeDefaultCell{
     }
     
     //MARK:产品列表，其他的
-    func productListOther(index:NSInteger){
+   @objc func productListOther(index:NSInteger){
     
         productSecondBgImage = UIImageView()
         productSecondBgImage?.isUserInteractionEnabled = true
@@ -923,7 +918,6 @@ extension HomeDefaultCell{
         moneyLabel.text = product.amount
         termLabel.text = product.period
         
-        
         let jiantouImage = UIImageView()
         jiantouImage.image = UIImage(named:"icon_youjiantou")
         bgView.addSubview(jiantouImage)
@@ -972,8 +966,6 @@ extension HomeDefaultCell{
     }
 }
 
-
-
 extension HomeDefaultCell{
 
     //提款的View
@@ -1019,7 +1011,6 @@ extension HomeDefaultCell{
         view.layer.borderWidth = 1;
         view.layer.borderColor = borderColor.cgColor
     }
-    
     
     //MARK:设置slider图片大小
     fileprivate func setImageFrame(_ image: UIImage, size: CGSize) ->(UIImage){

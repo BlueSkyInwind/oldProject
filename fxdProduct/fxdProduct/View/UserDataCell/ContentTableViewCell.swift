@@ -11,12 +11,12 @@ import UIKit
 typealias ArrowImageBtnClick = (_ button:UIButton) -> Void
 class ContentTableViewCell: UITableViewCell{
 
-   @objc var titleLabel : UILabel?
-   @objc var promptLabel : UILabel?
-  @objc  var contentTextField : YX_TextField?
-   @objc var arrowsImageBtn : UIButton?
+    @objc var titleLabel : UILabel?
+    @objc var promptLabel : UILabel?
+    @objc  var contentTextField : YX_TextField?
+    @objc var arrowsImageBtn : UIButton?
     
-    var btnClick : ArrowImageBtnClick?
+    @objc var btnClick : ArrowImageBtnClick?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -98,7 +98,7 @@ extension ContentTableViewCell {
     }
     
     // 选择联系人按钮位置
-    func  updateConatctImageBtnLayout() {
+   @objc func  updateConatctImageBtnLayout() {
         arrowsImageBtn?.snp.remakeConstraints({ (make) in
             make.centerY.equalTo(self.snp.centerY)
             make.height.equalTo(32)
@@ -108,7 +108,7 @@ extension ContentTableViewCell {
     }
     
     // 选择银行卡扫描按钮位置
-    func  updateScanCardImageBtnLayout() {
+   @objc func  updateScanCardImageBtnLayout() {
         arrowsImageBtn?.snp.remakeConstraints({ (make) in
             make.centerY.equalTo(self.snp.centerY)
             make.height.equalTo(20)
@@ -118,7 +118,7 @@ extension ContentTableViewCell {
     }
     
     // 发送验证码
-    func  updateVerfiyCodeImageBtnLayout() {
+   @objc func  updateVerfiyCodeImageBtnLayout() {
         arrowsImageBtn?.layer.cornerRadius = 15
         arrowsImageBtn?.clipsToBounds = true
         arrowsImageBtn?.backgroundColor = UI_MAIN_COLOR
@@ -132,7 +132,7 @@ extension ContentTableViewCell {
         })
     }
     
-    func updateTitleLabelLayout() -> Void {
+   @objc func updateTitleLabelLayout() -> Void {
         titleLabel?.snp.updateConstraints({ (make) in
             make.width.equalTo(120)
         })

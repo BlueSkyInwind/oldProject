@@ -12,14 +12,14 @@ import MGLivenessDetection
 typealias IdentifyResultStatus = (_ status : String) ->Void
 class FaceIdentiViewController: BaseViewController,LiveDeteDelgate{
     
-    var verifyStatus : String?
+   @objc var verifyStatus : String?
 
-    var iconImage : UIImageView?
-    var titleLabel : UILabel?
-    var explainLabel : UILabel?
-    var promptLabel : UILabel?
-    var statusBtn : UIButton?
-    var identifyResultStatus : IdentifyResultStatus?
+   @objc var iconImage : UIImageView?
+   @objc var titleLabel : UILabel?
+   @objc var explainLabel : UILabel?
+   @objc var promptLabel : UILabel?
+   @objc var statusBtn : UIButton?
+   @objc var identifyResultStatus : IdentifyResultStatus?
 
     override func viewDidLoad() {
         super.viewDidLoad()
