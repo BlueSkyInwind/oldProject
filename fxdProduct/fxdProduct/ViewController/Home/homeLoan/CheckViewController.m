@@ -451,9 +451,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             attributeStr.yy_font = [UIFont systemFontOfSize:11];
         }
         range = NSMakeRange(attributeStr.length - 13, 13);
-    }else if([_drawingsInfoModel.platformType isEqualToString:@"3"]){
-        attributeStr = [[NSMutableAttributedString alloc]initWithString:@"我已阅读并认可发薪贷《善林协议》"];
-        range = NSMakeRange(attributeStr.length - 6, 6);
     }else{
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"产品类型错误"];
     }
@@ -461,7 +458,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [attributeStr yy_setTextHighlightRange:range color:UI_MAIN_COLOR backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
         //协议点击
         [self getUserInfoData:^{
-            if ([_drawingsInfoModel.platformType isEqualToString:@"0"]|| [_drawingsInfoModel.platformType isEqualToString:@"3"]) {
+            if ([_drawingsInfoModel.platformType isEqualToString:@"0"]) {
                 [self LoanAgreementRequest];
             }
             if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
@@ -649,7 +646,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 - (void)getMoney
 {
     //  platform_type  2、合规平台    0、发薪贷平台    3、善林金融
-    if([_drawingsInfoModel.platformType isEqualToString:@"2"] || [_drawingsInfoModel.platformType isEqualToString:@"0"]||[_drawingsInfoModel.platformType isEqualToString:@"3"]){
+    if([_drawingsInfoModel.platformType isEqualToString:@"2"] || [_drawingsInfoModel.platformType isEqualToString:@"0"]){
         if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
 
             [self integrationP2PUserState];
@@ -661,11 +658,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             }
 
             [self PostGetdrawApplyAgain];
-        }
-        if ([_drawingsInfoModel.platformType isEqualToString:@"3"]) {
-            
-            
-            [self capitalLoan];
         }
     }else{
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"产品类型错误"];
