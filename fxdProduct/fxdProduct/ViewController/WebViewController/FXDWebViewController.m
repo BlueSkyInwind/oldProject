@@ -53,8 +53,8 @@
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
-//        NSString * testStr = @"http://192.168.13.250:8010/";
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+//        NSString * testStr = @"http://192.168.8.125:8010/";
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
     
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
@@ -91,7 +91,6 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
     if (object == _webView && [keyPath isEqualToString:@"estimatedProgress"]) {
@@ -139,7 +138,6 @@
         if ([[dic objectForKey:@"functionName"] isEqualToString:@"mxBack"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
-        
         //JS交互分享事件  FXDShare
         /*
         {
@@ -159,7 +157,6 @@
             NSString * shareImage =  resultDic[@"shareImage"];
             [[JSAndOCInteraction sharedInteraction] shareContent:self shareContent:shareContent UrlStr:shareUrl shareTitle:shareTitle shareImage:shareImage];
         }
-        
         //JS交互前往某个页面  FXDClipboardOfCopy
         /*
         {
@@ -297,42 +294,39 @@
         }
     }
 }
-
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
     self.navigationItem.title = @"加载失败";
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
+    NSString * juidStr = [Utility sharedUtility].userInfo.juid == nil ? @"" : [Utility sharedUtility].userInfo.juid;
+    NSString * tokenStr = [Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [Utility sharedUtility].userInfo.tokenStr;
     //调用js发送平台
-    if([webView.URL.absoluteString containsString:@"fxd-pay-fe"] || [webView.URL.absoluteString containsString:@"act"]){
-        NSString *inputValueJS = @"window.FXDNAVIGATOR.platformFn('0')";
-        NSLog(@"%@",inputValueJS);
+    if([webView.URL.absoluteString containsString:@"fxd-pay-fe"] || [webView.URL.absoluteString containsString:@"act"] || [webView.URL.absoluteString containsString:@"192.168.8.125:8010"]){
+        NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0','%@','%@')",juidStr,tokenStr];
+        DLog(@"%@",inputValueJS);
         //执行JS
         [webView evaluateJavaScript:inputValueJS completionHandler:^(id _Nullable response, NSError * _Nullable error) {
             DLog(@"value: %@ error: %@", response, error);
         }];
     }
 }
-
 #pragma mark -
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
     DLog(@"alert");
     completionHandler();
 }
-
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler
 {
     DLog(@"confim");
     completionHandler(true);
 }
-
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * _Nullable result))completionHandler
 {
     DLog(@"inputPanel");
     completionHandler(@"");
 }
-
 -(void)dealloc
 {
     [_webView removeObserver:self forKeyPath:@"estimatedProgress"];

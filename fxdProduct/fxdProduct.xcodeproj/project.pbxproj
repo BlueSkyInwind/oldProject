@@ -2646,8 +2646,8 @@
 				63E640C11DCACF2300783E9D /* ReplenishViewController.xib */,
 				0FFA91721C59BE57008D91D2 /* BankCardViewController.h */,
 				0FFA91731C59BE57008D91D2 /* BankCardViewController.m */,
-				0FFA91771C59F641008D91D2 /* LoanMoneyViewController.h */,
 				0FFA91741C59BE57008D91D2 /* BankCardViewController.xib */,
+				0FFA91771C59F641008D91D2 /* LoanMoneyViewController.h */,
 				0FFA91781C59F641008D91D2 /* LoanMoneyViewController.m */,
 				63B142AD1D9A5C2800C43B3F /* P2PViewController.h */,
 				63B142AE1D9A5C2800C43B3F /* P2PViewController.m */,
@@ -7092,7 +7092,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = B4V533E2T3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7206,7 +7206,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = B4V533E2T3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
