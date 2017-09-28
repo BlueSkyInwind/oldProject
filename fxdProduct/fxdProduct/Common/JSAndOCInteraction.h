@@ -62,5 +62,11 @@
 - (void)savePictureToAlbum:(NSString *)src VC:(UIViewController *)currentVC;
 
 
+/**
+ 获取app的登录信息
+
+ @return 数据
+ */
+-(NSString *)obtainLoginInfo;
 
 @end
