@@ -125,6 +125,8 @@
     if (@available(iOS 11.0, *)) {
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = false;
     }
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshInfoStep)];
     header.automaticallyChangeAlpha = YES;

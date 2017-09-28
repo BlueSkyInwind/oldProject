@@ -48,7 +48,6 @@
     }
     NSString *device = [[UIDevice currentDevice] systemVersion];
     if (device.floatValue>10) {
-        
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
     
