@@ -113,8 +113,15 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:faceIDLiveParse.error_message];
         }
     } failure:^(EnumServerStatus status, id object) {
+        NSError * error  = (NSError *)object;
+        NSDictionary *erroInfo = error.userInfo;
+        NSData *data = [erroInfo valueForKey:@"com.alamofire.serialization.response.error.data"];
+        NSString *errorString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", errorString);
+        [self uploadLiveInfo:@"" isSuccess:^(id object) {
+            
+        }];
         //        NSError *error = object;
-        //
         //        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"Error-%ld",(long)error.code]];
     }];
 }
@@ -129,13 +136,10 @@
     } failure:^(EnumServerStatus status, id object) {
         
     }];
-    
 }
 #pragma  mark - 社保  公积金
-
 /**
  社保
- 
  @param taskid 任务id
  */
 -(void)socialSecurityInfoUpload:(NSString *)taskid{
