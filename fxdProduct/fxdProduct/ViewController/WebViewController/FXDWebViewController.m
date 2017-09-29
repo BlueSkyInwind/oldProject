@@ -53,12 +53,28 @@
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
-//        NSString * testStr = @"http://192.168.8.125:8010/act_171001";
+        //h5活动拼装url
+        if([_urlStr containsString:@"wxact"]){
+            _urlStr = [self assemblyUrl:_urlStr];
+        }
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+/**
+ h5活动拼装url
+ */
+-(NSString *)assemblyUrl:(NSString *)urlStr{
+    
+    NSString * juidStr = [Utility sharedUtility].userInfo.juid == nil ? @"" : [Utility sharedUtility].userInfo.juid;
+    NSString * tokenStr = [Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [Utility sharedUtility].userInfo.tokenStr;
+    NSString * phoneNumber = [Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [Utility sharedUtility].userInfo.userMobilePhone;
+    NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
+    NSString * resultStr = [urlStr stringByAppendingFormat:@"?type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@",@"0",juidStr,tokenStr,phoneNumber,invationCode];
+    return resultStr;
 }
 
 - (void)addBackItem
@@ -299,11 +315,11 @@
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
     
-    NSString * paramStr = [[JSAndOCInteraction sharedInteraction] obtainLoginInfo];
-
+//    NSString * paramStr = [[JSAndOCInteraction sharedInteraction] obtainLoginInfo];
     //调用js发送平台
     if([webView.URL.absoluteString containsString:@"fxd-pay-fe"] || [webView.URL.absoluteString containsString:@"act"] ){
-        NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0',%@)",paramStr];
+//        NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0',%@)",paramStr];
+        NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0')"];
         DLog(@"%@",inputValueJS);
         //执行JS
         [webView evaluateJavaScript:inputValueJS completionHandler:^(id _Nullable response, NSError * _Nullable error) {
