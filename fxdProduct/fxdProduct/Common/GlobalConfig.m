@@ -469,6 +469,9 @@ NSString * const    _CapitalList_url    =    @"apigw/client/capital/list";
 //资金平台放款接口
 NSString * const    _CapitalLoan_url    =    @"apigw/client/capital/loan";
 
+//支付列表
+NSString * const    _ThreePartiesPay_url    =    @"apigw/client/ios/expay";
+
 #pragma mark - 合规接口
 
 //用户开户接口
