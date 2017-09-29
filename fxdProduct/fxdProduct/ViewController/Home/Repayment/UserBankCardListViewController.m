@@ -162,7 +162,6 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         return _thiryPaylist.count;
     }
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;
