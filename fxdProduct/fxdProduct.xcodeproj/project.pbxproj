@@ -1221,6 +1221,8 @@
 		CC6F068A1F789D7000FA889E /* CapitalLoanParam.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06881F789D7000FA889E /* CapitalLoanParam.m */; };
 		CC6F06901F7B8D3600FA889E /* ThirdWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F068F1F7B8D3600FA889E /* ThirdWebViewController.m */; };
 		CC6F06911F7B8D4200FA889E /* ThirdWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F068F1F7B8D3600FA889E /* ThirdWebViewController.m */; };
+		CC6F06931F7DF6C000FA889E /* ShanLinBackAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */; };
+		CC6F06941F7DF6C200FA889E /* ShanLinBackAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */; };
 		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
@@ -2417,6 +2419,7 @@
 		CC6F06881F789D7000FA889E /* CapitalLoanParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CapitalLoanParam.m; sourceTree = "<group>"; };
 		CC6F068E1F7B8D3600FA889E /* ThirdWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdWebViewController.h; sourceTree = "<group>"; };
 		CC6F068F1F7B8D3600FA889E /* ThirdWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThirdWebViewController.m; sourceTree = "<group>"; };
+		CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShanLinBackAlertView.swift; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
 		CC989C2E1F4D84A9000CDACF /* AuthenticationCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationCenterViewController.h; sourceTree = "<group>"; };
@@ -2808,6 +2811,7 @@
 				CC4271E51F0C8ED7004904B8 /* HomeRefuseCell.m */,
 				84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */,
 				CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */,
+				CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -6432,6 +6436,7 @@
 				CCCE40C11EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */,
 				63A24C5F1BE063A90036E8EF /* NSObject+Extend.m in Sources */,
 				636B1B591C23BB4100450358 /* GetMoneyHistoryResult.m in Sources */,
+				CC6F06931F7DF6C000FA889E /* ShanLinBackAlertView.swift in Sources */,
 				84ED5B6B1F4AC606004C0A59 /* SeniorCertificationView.m in Sources */,
 				CCF8031C1ED3D043003B7975 /* AccountHSServiceModel.m in Sources */,
 				638A170B1E517D9F00AB8AB6 /* LOTAnimationView.m in Sources */,
@@ -6634,6 +6639,7 @@
 				CC0DF9CB1EA5B1090024841A /* UserDefaulInfo.m in Sources */,
 				CCCDA8891EE028DD00B48DFF /* SendSmsParamModel.m in Sources */,
 				CC0DF9CC1EA5B1090024841A /* UIDevice+YYAdd.m in Sources */,
+				CC6F06941F7DF6C200FA889E /* ShanLinBackAlertView.swift in Sources */,
 				CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */,
 				CC0DF9CD1EA5B1090024841A /* YYTextEffectWindow.m in Sources */,
 				CC0DF9CE1EA5B1090024841A /* GetMoneyResultResult.m in Sources */,

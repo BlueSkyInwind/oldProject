@@ -713,6 +713,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             ThirdWebViewController *webView = [[ThirdWebViewController alloc] init];
 //            webView.name = @"银行卡认证";
             webView.loadContent = url;
+            webView.isHidden = true;
             [self.navigationController pushViewController:webView animated:YES];
         }
             break;

@@ -14,7 +14,7 @@
 #import "RTRootNavigationController.h"
 #import "JSAndOCInteraction.h"
 #import "LoanMoneyViewController.h"
-@interface ThirdWebViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate>
+@interface ThirdWebViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate,ShanLinBackAlertViewDelegate>
 {
     UIProgressView *progressView;
 }
@@ -46,6 +46,7 @@
     
     [self.view addSubview:_webView];
     [self createProUI];
+    
     [self addBackItem];
     NSLog(@"%@",_urlStr);
     _webView.scrollView.showsVerticalScrollIndicator = false;
@@ -88,18 +89,29 @@
 
 - (void)popBack
 {
-//    if ([_webView canGoBack]) {
-//        [_webView goBack];
-//    } else {
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
-    
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-    LoanMoneyViewController *controller = [LoanMoneyViewController new];
-    controller.applicationStatus = InLoan;
-    controller.popAlert = true;
-    [self.navigationController pushViewController:controller animated:YES];
+    if ([_webView canGoBack]) {
+        [_webView goBack];
+    } else {
+        
+        [self.navigationController popToRootViewControllerAnimated:true];
+
+    }
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (_isHidden) {
+        self.navigationController.navigationBarHidden = true;
+    }else{
+        self.navigationController.navigationBarHidden = false;
+    }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = false;
+}
+
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
@@ -149,7 +161,19 @@
 {
     NSURLRequest *request = navigationAction.request;
     NSLog(@"=========%@",request.URL.absoluteString);
-    decisionHandler(WKNavigationActionPolicyAllow);
+    if ([request.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_H5_url,_CapitalLoanBack_url]]&&![request.URL.absoluteString containsString:@"#shanlinBack"]) {
+        decisionHandler(WKNavigationActionPolicyAllow);
+        [self.navigationController popToRootViewControllerAnimated:true];
+        
+    }else if([request.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_H5_url,_ShanLinBack_url]]){
+        
+        decisionHandler(WKNavigationActionPolicyAllow);
+        [self setAlert];
+    }else{
+        
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
+    
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
@@ -269,6 +293,38 @@
     [progressView removeFromSuperview];
     [self deleteWebCache];
 }
+
+
+-(void)setAlert{
+    
+    ShanLinBackAlertView *ticket=[[ShanLinBackAlertView alloc]init];
+    ticket.backgroundColor = [UIColor blackColor];
+    ticket.alpha = 0.8;
+    ticket.delegate = self;
+    [self.view addSubview:ticket];
+    
+}
+
+
+-(void)cancelBtn{
+    for (UIView *subView in self.view.subviews) {
+        if ([subView isKindOfClass:[ShanLinBackAlertView class]]) {
+            [subView removeFromSuperview];
+            [self.navigationController popToRootViewControllerAnimated:true];
+        }
+    }
+}
+
+-(void)sureBtn{
+   
+    for (UIView *subView in self.view.subviews) {
+        if ([subView isKindOfClass:[ShanLinBackAlertView class]]) {
+            [subView removeFromSuperview];
+        }
+    }
+    
+}
+
 
 /*
  #pragma mark - Navigation

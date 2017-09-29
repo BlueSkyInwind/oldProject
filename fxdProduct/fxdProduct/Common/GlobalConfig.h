@@ -206,7 +206,8 @@ UIKIT_EXTERN NSString * const       _ApplicationViewInfo_url;                  /
 UIKIT_EXTERN NSString * const       _UserDrawingInfo_url;                  //申请确认页数据
 UIKIT_EXTERN NSString * const       _CapitalList_url;                  //资金平台列表
 UIKIT_EXTERN NSString * const       _CapitalLoan_url;                  //资金平台放款接口
-
+UIKIT_EXTERN NSString * const       _CapitalLoanBack_url;                  //联联绑卡回调地址
+UIKIT_EXTERN NSString * const       _ShanLinBack_url;                  //联联绑卡返回回调地址
 
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码

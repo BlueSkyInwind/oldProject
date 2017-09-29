@@ -460,6 +460,12 @@ NSString * const    _CapitalList_url    =    @"apigw/client/capital/list";
 //资金平台放款接口
 NSString * const    _CapitalLoan_url    =    @"apigw/client/capital/loan";
 
+//联联绑卡回调地址
+NSString * const    _CapitalLoanBack_url    =    @"main.html";
+
+//联联绑卡返回回调地址
+NSString * const    _ShanLinBack_url    =    @"main.html#shanlinBack";
+
 #pragma mark - 合规接口
 
 //用户开户接口

@@ -10,5 +10,7 @@
 
 @property (nonatomic,copy) NSString *name;
 
+@property (nonatomic,assign) BOOL isHidden;
+
 @end
 

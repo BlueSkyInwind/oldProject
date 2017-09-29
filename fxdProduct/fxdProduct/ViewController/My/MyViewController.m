@@ -15,7 +15,7 @@
 #import "InvitationViewController.h"
 #import "UserDataViewController.h"
 #import "ThirdWebViewController.h"
-@interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface MyViewController () <UITableViewDataSource,UITableViewDelegate,ShanLinBackAlertViewDelegate>
 {
     NSArray *titleAry;
     NSArray *imgAry;
@@ -138,6 +138,7 @@
             break;
         case 4:
         {
+            
             MoreViewController *ticket=[[MoreViewController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
         }
@@ -146,8 +147,6 @@
             break;
     }
 }
-
-
 
 
 - (void)didReceiveMemoryWarning {

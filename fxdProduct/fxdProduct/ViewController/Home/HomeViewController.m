@@ -36,7 +36,7 @@
 #import "ApplicationStatusModel.h"
 #import "UserDataViewModel.h"
 
-@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
+@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate,ShanLinBackAlertViewDelegate>
 {
    
     NSString *_advTapToUrl;
@@ -637,14 +637,35 @@
 #pragma mark 点击立即申请
 -(void)applyBtnClick:(NSString *)money{
     NSLog(@"点击立即申请=%@",money);
+    
+    
+//    ShanLinBackAlertView *ticket=[[ShanLinBackAlertView alloc]init];
+//    ticket.backgroundColor = [UIColor blackColor];
+//    ticket.alpha = 0.8;
+//    ticket.delegate = self;
+//    [self.view addSubview:ticket];
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
         [self userDataResult];
-        
+
     } else {
         [self presentLogin:self];
     }
 }
+
+
+//-(void)cancelBtn{
+//    for (UIView *subView in self.view.subviews) {
+//        if ([subView isKindOfClass:[ShanLinBackAlertView class]]) {
+//            [subView removeFromSuperview];
+//        }
+//    }
+//}
+//
+//-(void)sureBtn{
+//
+//
+//}
 
 -(void)refuseTabClick:(NSInteger)index{
 
