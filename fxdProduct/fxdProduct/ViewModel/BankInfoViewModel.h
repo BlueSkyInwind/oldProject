@@ -31,5 +31,9 @@
  */
 -(void)obtainTrilateralLink:(NSString * )stagingId redPacketAmount:(NSString *)redPacketAmount redPacketId:(NSString *)redPacketId  payType:(NSString *)payType stagingContinue:(BOOL)stagingContinue;
 
+/**
+ 三方支付列表
+ */
+-(void)ThreePartiesPayList;
 
 @end

@@ -42,11 +42,6 @@
     
     NSString * titleName  =  title == nil ? @"发薪贷" : title;
     
-    if (![Utility sharedUtility].loginFlage) {
-        [self presentLogin:viewC];
-        return;
-    }
-    
     NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
 //    NSString * targetUrl = [urlStr stringByAppendingFormat:@"?merchant_code_=%@",invationCode];
     NSString * targetUrl = urlStr;
@@ -58,6 +53,11 @@
                                             url:[NSURL URLWithString:targetUrl]
                                           title:titleName
                                            type:SSDKContentTypeAuto];
+        
+        [shareParams SSDKSetupSinaWeiboShareParamsByText:[NSString stringWithFormat:@"%@\n%@链接:%@",titleName,content,targetUrl] title:titleName image:imageArr url:[NSURL URLWithString:targetUrl] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
+        
+        [shareParams SSDKSetupSMSParamsByText:[NSString stringWithFormat:@"%@\n%@链接:%@",titleName,content,targetUrl]  title:titleName images:imageArr attachments:nil recipients:nil type:SSDKContentTypeAuto];
+        
         [shareParams SSDKEnableUseClientShare];
         [ShareSDK showShareActionSheet:nil
                                  items:nil
@@ -229,7 +229,7 @@
                            @"juid":juidStr,
                            @"token":tokenStr,
                            @"mobile_phone_":phoneNumber,
-                           @"merchant_code_":invationCode,
+                           @"invitation_code_":invationCode,
                            };
     
     NSData *data = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:nil];
@@ -237,7 +237,7 @@
     return paraStr;
 }
 
-
+/*
 - (NSString *)noWhiteSpaceString {
     NSString *newString = self;
     //去除掉首尾的空白字符和换行字符
@@ -248,7 +248,7 @@
     //    可以去掉空格，注意此时生成的strUrl是autorelease属性的，所以不必对strUrl进行release操作！
     return newString;
 }
-
+*/
 
 
 

@@ -19,7 +19,7 @@
     UserCardResult *_userCardsModel;
     CardInfo *_cardInfo;
     NSMutableArray *_datalist;
-    
+    NSMutableArray *_thiryPaylist;
 }
 @property (nonatomic,strong)UITableView * tableView;
 @end
@@ -34,10 +34,10 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     // Do any additional setup after loading the view.
     
     _datalist = [[NSMutableArray alloc] init];
+    _thiryPaylist =  [[NSMutableArray alloc] init];
 //    _isHavealipay = false;
 //    _currentIndex = 0;
     self.navigationItem.title = @"选择银行卡";
-
     [self addBanckCard];
     [self configuireView];
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(fatchBankList)];
@@ -45,12 +45,11 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     header.lastUpdatedTimeLabel.hidden = YES;
     [header beginRefreshing];
     self.tableView.mj_header = header;
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     
-    
 }
-
 -(void)configuireView{
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -113,6 +112,10 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (void)fatchBankList
 {
+    if (_isHavealipay) {
+        [self obtainThreePartiesPayList];
+    }
+
     BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
     [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
@@ -156,10 +159,9 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     if (section == 0) {
         return  _datalist.count;
     }else{
-        return 1;
+        return _thiryPaylist.count;
     }
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;
@@ -182,8 +184,9 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
             cell.bankCardInfoLabel.textColor = [UIColor blackColor];
         }
     }else{
+        NSDictionary * dic = _thiryPaylist[indexPath.row];
         [cell.bankLogo setImage:[UIImage imageNamed:@"approve_alipay"]];
-        cell.bankCardInfoLabel.text = @"支付宝";
+        cell.bankCardInfoLabel.text = dic[@"payName"];
         if (self.payPattern == Alipays) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             cell.bankCardInfoLabel.textColor = [UIColor blackColor];
@@ -217,9 +220,32 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         block(cardInfo,currentIndex,patternOfPayment);
     };
 }
-
-
-
+-(void)obtainThreePartiesPayList{
+    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
+    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            @try{
+                if (_thiryPaylist.count > 0) {
+                    [_thiryPaylist removeAllObjects];
+                }
+                _thiryPaylist = [(NSMutableArray *)baseResultM.data mutableCopy];
+                NSDictionary * dic = _thiryPaylist[0];
+                NSString * str = dic[@"isEnable"];
+                _isHavealipay = [str boolValue];
+                [self.tableView reloadData];
+            }@catch (NSException *exception){
+                DLog(@"%@",exception);
+            }
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
+            [self.tableView.mj_header endRefreshing];
+        }
+    } WithFaileBlock:^{
+        [self.tableView.mj_header endRefreshing];
+    }];
+    [bankInfoVM ThreePartiesPayList];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

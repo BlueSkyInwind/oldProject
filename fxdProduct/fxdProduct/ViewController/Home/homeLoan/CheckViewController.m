@@ -1504,6 +1504,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                             url:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]
                                           title:@"发薪贷"
                                            type:SSDKContentTypeAuto];
+        
+        [shareParams SSDKSetupSinaWeiboShareParamsByText:[NSString stringWithFormat:@"发薪贷只专注于网络小额贷款。是一款新型网络小额贷款神器, 尽可能优化贷款申请流程，申请步骤更便捷，轻完成网上贷款。链接:http://www.faxindai.com 链接:%@",@"https://itunes.apple.com/cn/app/id1089086853"] title:@"发薪贷" image:imageArr url:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
+
         [shareParams SSDKEnableUseClientShare];
         [ShareSDK showShareActionSheet:nil
                                  items:nil

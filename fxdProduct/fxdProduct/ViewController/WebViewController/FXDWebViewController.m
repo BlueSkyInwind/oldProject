@@ -35,8 +35,8 @@
     config.userContentController = [[WKUserContentController alloc] init];
     // 添加JS到HTML中，可以直接在JS中调用添加的JS方法
     //    WKUserScript *script = [[WKUserScript alloc] initWithSource:@"function showAlert() { alert('在载入webview时通过OC注入的JS方法'); }" injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:true];
-    //    [config.userContentController addUserScript:script];
-//     window.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
+    //   [config.userContentController addUserScript:script];
+    //   window.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
     [config.userContentController addScriptMessageHandler:self name:@"jsToNative"];
     _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
     _webView.navigationDelegate = self;
@@ -53,13 +53,28 @@
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
-        NSString * testStr = @"http://192.168.8.125:8010/act_171001";
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[testStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+        //h5活动拼装url
+        if([_urlStr containsString:@"wxact"]){
+            _urlStr = [self assemblyUrl:_urlStr];
+        }
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
-    
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+/**
+ h5活动拼装url
+ */
+-(NSString *)assemblyUrl:(NSString *)urlStr{
+    
+    NSString * juidStr = [Utility sharedUtility].userInfo.juid == nil ? @"" : [Utility sharedUtility].userInfo.juid;
+    NSString * tokenStr = [Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [Utility sharedUtility].userInfo.tokenStr;
+    NSString * phoneNumber = [Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [Utility sharedUtility].userInfo.userMobilePhone;
+    NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
+    NSString * resultStr = [urlStr stringByAppendingFormat:@"?type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@",@"0",juidStr,tokenStr,phoneNumber,invationCode];
+    return resultStr;
 }
 
 - (void)addBackItem
@@ -300,11 +315,11 @@
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
     
-    NSString * paramStr = [[JSAndOCInteraction sharedInteraction] obtainLoginInfo];
-
+//    NSString * paramStr = [[JSAndOCInteraction sharedInteraction] obtainLoginInfo];
     //调用js发送平台
     if([webView.URL.absoluteString containsString:@"fxd-pay-fe"] || [webView.URL.absoluteString containsString:@"act"] ){
-        NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0',%@)",paramStr];
+//        NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0',%@)",paramStr];
+        NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0')"];
         DLog(@"%@",inputValueJS);
         //执行JS
         [webView evaluateJavaScript:inputValueJS completionHandler:^(id _Nullable response, NSError * _Nullable error) {
@@ -317,6 +332,7 @@
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
     DLog(@"alert");
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:message];
     completionHandler();
 }
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler
