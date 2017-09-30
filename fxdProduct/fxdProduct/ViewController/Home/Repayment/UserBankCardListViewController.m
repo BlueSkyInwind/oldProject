@@ -230,9 +230,9 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
                     [_thiryPaylist removeAllObjects];
                 }
                 _thiryPaylist = [(NSMutableArray *)baseResultM.data mutableCopy];
-                NSDictionary * dic = _thiryPaylist[0];
-                NSString * str = dic[@"isEnable"];
-                _isHavealipay = [str boolValue];
+//                NSDictionary * dic = _thiryPaylist[0];
+//                NSString * str = dic[@"isEnable"];
+//                _isHavealipay = [str boolValue];
                 [self.tableView reloadData];
             }@catch (NSException *exception){
                 DLog(@"%@",exception);

@@ -47,7 +47,7 @@
     [self.view addSubview:_webView];
     [self createProUI];
     [self addBackItem];
-    
+//    self.urlStr = @"http://h5.test.fxds/wxact_171001";
     NSLog(@"%@",_urlStr);
     _webView.scrollView.showsVerticalScrollIndicator = false;
     if (_isZhima) {
