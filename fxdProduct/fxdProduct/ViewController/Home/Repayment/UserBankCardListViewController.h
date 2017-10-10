@@ -12,7 +12,7 @@
 @class CardInfo;
 
 
-typedef void(^PayPatternSelectBlock)(CardInfo * cardInfo, NSInteger currentIndex , PatternOfPayment patternOfPayment);
+typedef void(^PayPatternSelectBlock)(CardInfo * cardInfo, NSInteger currentIndex , PatternOfChoose patternOfChoose ,NSString * patternName);
 
 @interface UserBankCardListViewController : BaseViewController
 
@@ -20,9 +20,9 @@ typedef void(^PayPatternSelectBlock)(CardInfo * cardInfo, NSInteger currentIndex
 
 @property (nonatomic, copy) PayPatternSelectBlock payPatternSelectBlock;
 
-@property (nonatomic, assign) BOOL isHavealipay;
+@property (nonatomic, assign) BOOL isHave;
 
-@property (nonatomic,assign)PatternOfPayment payPattern;
+@property (nonatomic,assign)PatternOfChoose pattern;
 
 //swift调用
 -(void)userSelectedBankCard:(PayPatternSelectBlock)block;

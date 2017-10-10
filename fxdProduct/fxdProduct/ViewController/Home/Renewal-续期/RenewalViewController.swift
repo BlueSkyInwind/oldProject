@@ -17,7 +17,8 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
     var cardInfo : CardInfo?
     var stagingId : String?
     var currentindex : Int?
-    var paymentPattern : PatternOfPayment?
+    var choosePattern : PatternOfChoose?
+    var patternName : String?
 
     let renewalTableView: UITableView = {
         
@@ -38,7 +39,7 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
         self.title = "续期费用"
         currentindex = 0
         addBackItem()
-        paymentPattern = .BankCard
+        choosePattern = .BankCard
         headerView = CurrentInformationHeadView()
         headerView?.moneyDescLabel?.text = "续期费用(元)"
         headerView?.backgroundColor = UI_MAIN_COLOR
@@ -48,7 +49,7 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
         footerView.frame = CGRect(x:0,y:0,width:_k_w,height:50)
         footerView.footerBtn?.setTitle("确认", for: .normal)
         footerView.footerBtnClosure = {
-            if self.paymentPattern == .BankCard{
+            if self.choosePattern == .BankCard{
                 self.commitStaging()
             }
             else{
@@ -161,7 +162,7 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
             cell.leftLabel?.text = leftTitleArr[indexPath.row]
             
             if indexPath.row == 3{
-                if paymentPattern == .Alipays {
+                if choosePattern == .Alipays {
                     cell.rightLabel?.text = " 支付宝付款 "
                 }
                 else{
@@ -191,12 +192,12 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
         if indexPath.row == 3{
             
             let userBankCardListVC = UserBankCardListViewController()
-            userBankCardListVC.isHavealipay = true
+            userBankCardListVC.isHave = true
             userBankCardListVC.currentIndex = currentindex!
-            userBankCardListVC.payPattern = paymentPattern!
-            userBankCardListVC.userSelectedBankCard({ [weak self] (cardInfo, currentIndex,patternOfPayment) in
+            userBankCardListVC.pattern = choosePattern!
+            userBankCardListVC.userSelectedBankCard({ [weak self] (cardInfo, currentIndex,PatternOfChoose,patternName) in
                 self?.cardInfo = cardInfo
-                self?.paymentPattern = patternOfPayment
+                self?.choosePattern = PatternOfChoose
                 self?.currentindex = currentIndex
                 self?.renewalTableView.reloadData()
             })
@@ -262,7 +263,7 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
                 let webView = FXDWebViewController.init()
                 let dic = baseResult.data as! NSDictionary
                 webView.urlStr = dic.object(forKey: "callbackUrl") as! String
-                webView.payType = "2"
+                webView.acceptType = "2"
                 self.navigationController?.pushViewController(webView, animated: true)
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)

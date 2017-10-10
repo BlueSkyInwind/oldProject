@@ -53,6 +53,7 @@
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
+//        _urlStr = @"http://192.168.8.125:8010/wxact_171001";
         //h5活动拼装url
         if([_urlStr containsString:@"wxact"]){
             _urlStr = [self assemblyUrl:_urlStr];
@@ -213,15 +214,14 @@
             NSString * saveImageUrl =  resultDic[@"saveImageUrl"];
             [[JSAndOCInteraction sharedInteraction] savePictureToAlbum:saveImageUrl VC:self];
         }
-        
-        //支付宝
+   
         @try {
-            //三方支付点击结果反馈   1、还款中 2、还款成功 3、还款失败  4、第三方未受理 5、h5支付异常
+            //结果反馈  1、还款中 2、还款成功 3、还款失败  4、第三方未受理 5、异常
             if ([[dic allKeys] containsObject:@"payData"]) {
                 NSDictionary * resultDic = dic[@"payData"];
                 NSString * str =  resultDic[@"status"];
-                //续期支付宝支付反馈情况
-                if ([self.payType isEqualToString:@"2"] ) {
+                //续期反馈情况
+                if ([self.acceptType isEqualToString:@"2"] ) {
                     if ([str isEqualToString:@"5"]) {
                         [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:@"支付宝支付失败！"];
                         [self.navigationController popViewControllerAnimated:true];
@@ -230,7 +230,7 @@
                     [self payOverpopBack];
                     return;
                 }
-                // 还款支付宝支付反馈情况
+                // 还款反馈情况
                 if ([str isEqualToString:@"1"]) {
                     [self payOverpopBack];
                 }
@@ -238,7 +238,6 @@
                     [self.navigationController popToRootViewControllerAnimated:true];
                 }
                 else{
-                    [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:@"支付宝支付失败！"];
                     [self.navigationController popViewControllerAnimated:true];
                 }
             }
@@ -249,16 +248,16 @@
 }
 
 /**
- 三方支付结果，返回处理
+ h5交互结果返回处理
  */
 -(void)payOverpopBack{
     
     for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
         if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
             LoanMoneyViewController *  loanMoneyVC  =(LoanMoneyViewController *) vc;
-            if ([self.payType isEqualToString:@"1"]) {
+            if ([self.acceptType isEqualToString:@"1"]) {
                 loanMoneyVC.applicationStatus = Repayment;
-            }else if ([self.payType isEqualToString:@"2"]){
+            }else if ([self.acceptType isEqualToString:@"2"]){
                 loanMoneyVC.applicationStatus = Staging;
             }
             [self.navigationController popToViewController:loanMoneyVC animated:YES];
@@ -271,20 +270,20 @@
 {
     NSURLRequest *request = navigationAction.request;
     NSLog(@"=========%@",request.URL.absoluteString);
-    //打开支付宝
+    //打开h5页面
     if ([request.URL.absoluteString hasPrefix:@"alipays://"]) {
         if ([Tool getIOSVersion] < 10) {
             if ([[UIApplication sharedApplication] canOpenURL:request.URL]) {
                 [[UIApplication sharedApplication] openURL:request.URL ];
             }
             else{
-                [self showMessage:@"打开支付宝失败！" vc:self];
+                [self showMessage:@"打开失败！" vc:self];
             }
         }
         else {
             [[UIApplication sharedApplication] openURL:request.URL options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO} completionHandler:^(BOOL success) {
                 if (!success) {
-                    [self showMessage:@"打开支付宝失败！" vc:self];
+                    [self showMessage:@"打开失败！" vc:self];
                 }
             }];
         }

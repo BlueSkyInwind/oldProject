@@ -608,8 +608,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
     userBankCardListVC.currentIndex = userSelectIndex;
-    userBankCardListVC.payPattern = BankCard;
-    userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex ,PatternOfPayment patternOfPayment) {
+    userBankCardListVC.pattern = BankCard;
+    userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex ,PatternOfChoose PatternOfChoose,NSString * patternName) {
         self.selectCard = cardInfo;
         if (cardInfo == nil) {
             [self  fatchCardInfo];
@@ -656,7 +656,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请添加收款方式！"];
                 return;
             }
-
             [self PostGetdrawApplyAgain];
         }
     }else{
@@ -759,7 +758,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 }
             }
         }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         
@@ -1373,7 +1372,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         payVC.bankName = bankName;
         NSString *bank = model.result.UsrCardInfolist.CardId;
         payVC.banNum = [bank substringFromIndex:bank.length-4];
-        payVC.makesureBlock = ^(PayType payType, PatternOfPayment payPattern) {
+        payVC.makesureBlock = ^(PayType payType, PatternOfChoose payPattern) {
             [self dismissSemiModalViewWithCompletion:^{
                 [self saveLoanCase:@"30"];
             }];

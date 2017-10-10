@@ -19,7 +19,8 @@
     UserCardResult *_userCardsModel;
     CardInfo *_cardInfo;
     NSMutableArray *_datalist;
-    NSMutableArray *_thiryPaylist;
+    NSMutableArray *_choosePatternList;
+    NSString * _patternName;
 }
 @property (nonatomic,strong)UITableView * tableView;
 @end
@@ -34,7 +35,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     // Do any additional setup after loading the view.
     
     _datalist = [[NSMutableArray alloc] init];
-    _thiryPaylist =  [[NSMutableArray alloc] init];
+    _choosePatternList =  [[NSMutableArray alloc] init];
 //    _isHavealipay = false;
 //    _currentIndex = 0;
     self.navigationItem.title = @"选择银行卡";
@@ -89,7 +90,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 - (void)popBack
 {
     if (self.payPatternSelectBlock) {
-        self.payPatternSelectBlock(_cardInfo,_currentIndex,self.payPattern);
+        self.payPatternSelectBlock(_cardInfo,_currentIndex,self.pattern,_patternName);
     }
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
@@ -112,8 +113,8 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (void)fatchBankList
 {
-    if (_isHavealipay) {
-        [self obtainThreePartiesPayList];
+    if (_isHave) {
+        [self obtainChoosePatternList];
     }
 
     BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
@@ -149,7 +150,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (_isHavealipay) {
+    if (_isHave) {
         return 2;
     }
     return 1;
@@ -159,7 +160,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     if (section == 0) {
         return  _datalist.count;
     }else{
-        return _thiryPaylist.count;
+        return _choosePatternList.count;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -179,15 +180,15 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         cell.bankCardInfoLabel.text = [NSString stringWithFormat:@"%@ 尾号(%@)",cardInfo.bankName,[self formatTailNumber:cardInfo.cardNo]];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.bankCardInfoLabel.textColor = [UIColor grayColor];
-        if (_currentIndex == indexPath.row && self.payPattern == BankCard) {
+        if (_currentIndex == indexPath.row && self.pattern == BankCard) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             cell.bankCardInfoLabel.textColor = [UIColor blackColor];
         }
     }else{
-        NSDictionary * dic = _thiryPaylist[indexPath.row];
+        NSDictionary * dic = _choosePatternList[indexPath.row];
         [cell.bankLogo setImage:[UIImage imageNamed:@"approve_alipay"]];
         cell.bankCardInfoLabel.text = dic[@"payName"];
-        if (self.payPattern == Alipays) {
+        if (self.pattern == Alipays) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             cell.bankCardInfoLabel.textColor = [UIColor blackColor];
         }
@@ -197,54 +198,55 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        self.payPattern = BankCard;
+        self.pattern = BankCard;
         _currentIndex = indexPath.row;
         CardInfo *cardInfo = [_datalist objectAtIndex:indexPath.row];
         _cardInfo = cardInfo;
         [self.tableView reloadData];
         if (self.payPatternSelectBlock) {
-            self.payPatternSelectBlock(_cardInfo,_currentIndex,BankCard);
+            self.payPatternSelectBlock(_cardInfo,_currentIndex,BankCard,_patternName);
         }
     }else{
-        self.payPattern = Alipays;
+        self.pattern = Alipays;
         if (self.payPatternSelectBlock) {
             _currentIndex = -2;
-            self.payPatternSelectBlock(_cardInfo,_currentIndex,Alipays);
+            self.payPatternSelectBlock(_cardInfo,_currentIndex,Alipays,_patternName);
         }
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)userSelectedBankCard:(PayPatternSelectBlock)block{
-    self.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex,PatternOfPayment patternOfPayment) {
-        block(cardInfo,currentIndex,patternOfPayment);
+    self.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex,PatternOfChoose PatternOfChoose,NSString * patternName) {
+        block(cardInfo,currentIndex,PatternOfChoose,patternName);
     };
 }
--(void)obtainThreePartiesPayList{
+-(void)obtainChoosePatternList{
     BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
     [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
             @try{
-                if (_thiryPaylist.count > 0) {
-                    [_thiryPaylist removeAllObjects];
+                if (_choosePatternList.count > 0) {
+                    [_choosePatternList removeAllObjects];
                 }
-                _thiryPaylist = [(NSMutableArray *)baseResultM.data mutableCopy];
-                NSDictionary * dic = _thiryPaylist[0];
+                _choosePatternList = [(NSMutableArray *)baseResultM.data mutableCopy];
+                NSDictionary * dic = _choosePatternList[0];
                 NSString * str = dic[@"isEnable"];
-                _isHavealipay = [str boolValue];
+                _patternName = dic[@"payName"];
+                _isHave = [str boolValue];
                 [self.tableView reloadData];
             }@catch (NSException *exception){
                 DLog(@"%@",exception);
             }
         }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_userCardsModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
             [self.tableView.mj_header endRefreshing];
         }
     } WithFaileBlock:^{
         [self.tableView.mj_header endRefreshing];
     }];
-    [bankInfoVM ThreePartiesPayList];
+    [bankInfoVM ChoosePatternList];
 }
 
 - (void)didReceiveMemoryWarning {
