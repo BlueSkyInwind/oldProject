@@ -23,7 +23,6 @@
     }];
 }
 
-
 //-(void)obtainUserCommitstaging:(NSString *)staging cardNo:(NSString *)cardNo{
 //
 //    NSDictionary *paramDic = @{@"cardNo":cardNo,@"staging":staging};
@@ -53,7 +52,6 @@
             [self faileBlock];
         }
     }];
-    
 }
 
 -(void)obtainUserStagingRule{

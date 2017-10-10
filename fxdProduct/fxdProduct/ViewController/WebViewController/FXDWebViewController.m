@@ -214,36 +214,6 @@
             NSString * saveImageUrl =  resultDic[@"saveImageUrl"];
             [[JSAndOCInteraction sharedInteraction] savePictureToAlbum:saveImageUrl VC:self];
         }
-   
-        @try {
-            //结果反馈  1、还款中 2、还款成功 3、还款失败  4、第三方未受理 5、异常
-            if ([[dic allKeys] containsObject:@"payData"]) {
-                NSDictionary * resultDic = dic[@"payData"];
-                NSString * str =  resultDic[@"status"];
-                //续期反馈情况
-                if ([self.acceptType isEqualToString:@"2"] ) {
-                    if ([str isEqualToString:@"5"]) {
-                        [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:@"支付宝支付失败！"];
-                        [self.navigationController popViewControllerAnimated:true];
-                        return;
-                    }
-                    [self payOverpopBack];
-                    return;
-                }
-                // 还款反馈情况
-                if ([str isEqualToString:@"1"]) {
-                    [self payOverpopBack];
-                }
-                else if ([str isEqualToString:@"2"] || [str isEqualToString:@"3"] || [str isEqualToString:@"4"]){
-                    [self.navigationController popToRootViewControllerAnimated:true];
-                }
-                else{
-                    [self.navigationController popViewControllerAnimated:true];
-                }
-            }
-        } @catch (NSException *exception) {
-            DLog(@"%@",exception);
-        }
     }
 }
 
@@ -270,24 +240,7 @@
 {
     NSURLRequest *request = navigationAction.request;
     NSLog(@"=========%@",request.URL.absoluteString);
-    //打开h5页面
-    if ([request.URL.absoluteString hasPrefix:@"alipays://"]) {
-        if ([Tool getIOSVersion] < 10) {
-            if ([[UIApplication sharedApplication] canOpenURL:request.URL]) {
-                [[UIApplication sharedApplication] openURL:request.URL ];
-            }
-            else{
-                [self showMessage:@"打开失败！" vc:self];
-            }
-        }
-        else {
-            [[UIApplication sharedApplication] openURL:request.URL options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO} completionHandler:^(BOOL success) {
-                if (!success) {
-                    [self showMessage:@"打开失败！" vc:self];
-                }
-            }];
-        }
-    }
+
     if ([request.URL.absoluteString hasSuffix:@"main.html"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
 //      [self.navigationController popViewControllerAnimated:YES];

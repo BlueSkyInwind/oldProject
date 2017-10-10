@@ -158,7 +158,7 @@ UIKIT_EXTERN NSString * const       _Repay_url;                              //�
 UIKIT_EXTERN NSString * const       _StagingRule_url;                        //获取续期规则
 UIKIT_EXTERN NSString * const       _registerID_url;                        //上传用户的registerID
 UIKIT_EXTERN NSString * const       _UserDataCertification_url;                        //用户资料测评接口
-UIKIT_EXTERN NSString * const       _Trilateral_url;                        //三方支付链接
+UIKIT_EXTERN NSString * const       _Trilateral_url;                        //用户资料测评接口
 UIKIT_EXTERN NSString * const       _UserDataCertificationResult_url;        //得到测评结果
 UIKIT_EXTERN NSString * const       _loginOutDeleteRegisterId_url;        //退出登录删除推送id
 

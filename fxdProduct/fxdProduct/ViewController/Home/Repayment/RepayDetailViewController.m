@@ -45,7 +45,6 @@
     NSArray *titleAry;
     NSArray *payLoanArry;
     CardInfo *_selectCard;
-    PatternOfChoose  choosePattern;
     
     UserCardResult *_userCardsModel;
     
@@ -109,7 +108,6 @@
     _selectRedPacket = 0.0;
     _useredPacketAmount = 0.0;
     _canUseReadPacket = false;
-    choosePattern = BankCard;
     _finalyRepayAmount = _repayAmount;
     
     navBarHairlineImageView= [self findHairlineImageViewUnder:self.navigationController.navigationBar];
@@ -319,14 +317,9 @@
                         cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_queryCardInfoModel.result.UsrCardInfolist.bankName,[_queryCardInfoModel.result.UsrCardInfolist.CardId substringFromIndex:_queryCardInfoModel.result.UsrCardInfolist.CardId.length-4]];
                     }
                 }else{
-                    if (choosePattern == Alipays) {
-                        cell.whichBank.text = _patternName;
-                    }
-                    else{
-                        cell.whichBank.text = @"";
-                        if (_selectCard != nil) {
-                            cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
-                        }
+                    cell.whichBank.text = @"";
+                    if (_selectCard != nil) {
+                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
                     }
                 }
                 return cell;
@@ -409,14 +402,9 @@
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.PayTitleLabel.text=payLoanArry[indexPath.row];
-                if (choosePattern == Alipays) {
-                    cell.whichBank.text = _patternName;
-                }
-                else{
-                    cell.whichBank.text = @"";
-                    if (_selectCard != nil) {
-                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
-                    }
+                cell.whichBank.text = @"";
+                if (_selectCard != nil) {
+                    cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
                 }
                 return cell;
             } else//溢缴金额和应付金额cell
@@ -563,17 +551,13 @@
 -(void)pushUserBankListVC{
     
     UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
-    userBankCardListVC.isHave = true;
     if (userSelectIndex == -1) {
         userBankCardListVC.currentIndex = defaultBankIndex;
     } else {
         userBankCardListVC.currentIndex  = userSelectIndex;
     }
-    userBankCardListVC.pattern = choosePattern;
-    userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex ,PatternOfChoose patternOfChoose,NSString * patternName) {
+    userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
         _selectCard = cardInfo;
-        choosePattern = patternOfChoose;
-        _patternName = patternName;
         if (cardInfo == nil) {
             [self  fatchUserCardList];
         }
@@ -664,12 +648,7 @@
     if ([self.platform_Type isEqualToString:@"2"] ) {        
         [self getMoney];
     }else{
-        if (choosePattern == BankCard) {
-            [self fxdRepay];
-        }
-        else{
-            [self trilateralEntrance];
-        }
+        [self fxdRepay];
     }
 }
 
@@ -758,24 +737,6 @@
     [paymentViewModel FXDpaymentDetail:paymentDetailModel];
 }
 
--(void)trilateralEntrance{
-    
-    BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
-    [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResultM.errCode isEqualToString:@"0"]){
-            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-            webView.urlStr = baseResultM.data[@"callbackUrl"];
-            webView.acceptType = @"1";
-            [self.navigationController pushViewController:webView animated:YES];
-        }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
-        }
-    } WithFaileBlock:^{
-    }];
-    [bankInfoVM obtainTrilateralLink:[self obtainRepayStaging_ids] redPacketAmount:[NSString stringWithFormat:@"%.2f",_useredPacketAmount] redPacketId:_selectRedPacketID payType:@"1" stagingContinue:false];
-    
-}
 #pragma mark 正常扣款
 - (void)repaySure
 {
@@ -866,10 +827,8 @@
             _queryCardInfoModel = model;
             [self obtain_HeGui_BankList:model];
         }else{
-        
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
         }
-        
     } WithFaileBlock:^{
         
     }];

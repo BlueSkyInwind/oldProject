@@ -26,9 +26,6 @@
 -(void)obtainUserStagingRule;
 
 
-/**
- 获取三方支付链接
- */
 -(void)obtainTrilateralLink:(NSString * )stagingId redPacketAmount:(NSString *)redPacketAmount redPacketId:(NSString *)redPacketId  payType:(NSString *)payType stagingContinue:(BOOL)stagingContinue;
 
 /**

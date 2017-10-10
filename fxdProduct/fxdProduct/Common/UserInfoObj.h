@@ -21,12 +21,6 @@ typedef NS_ENUM(NSUInteger, ApplicationStatus) {
     ComplianceProcessing,  //合规标的处理中状态
 };
 
-
-typedef NS_ENUM(NSUInteger, PatternOfChoose) {
-    BankCard = 1,      //银行卡
-    Alipays,
-};
-
 @interface UserInfoObj : NSObject
 
 @property (nonatomic,assign) NSInteger login_flag;
