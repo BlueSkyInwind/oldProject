@@ -50,13 +50,15 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
         }
         renewalTableView.tableFooterView = footerView
         
-        
         renewalTableView.delegate = self
         renewalTableView.dataSource = self
         self.view.addSubview(renewalTableView)
         renewalTableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        getData()
+        fatchBankList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -67,10 +69,6 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
 //        self.navigationController!.navigationBar.shadowImage = UIImage()
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.black,NSFontAttributeName:UIFont.systemFont(ofSize: 19)]
-        
-       getData()
-
-       fatchBankList()
 
     }
     

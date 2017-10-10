@@ -647,7 +647,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     //  platform_type  2、合规平台    0、发薪贷平台    3、善林金融
     if([_drawingsInfoModel.platformType isEqualToString:@"2"] || [_drawingsInfoModel.platformType isEqualToString:@"0"]){
         if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
-
             [self integrationP2PUserState];
         }
         if ([_drawingsInfoModel.platformType isEqualToString:@"0"]) {

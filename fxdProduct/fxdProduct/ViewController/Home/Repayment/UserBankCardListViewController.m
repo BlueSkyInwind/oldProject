@@ -149,15 +149,12 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return  _datalist.count;
-    }
+    return  _datalist.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -175,7 +172,6 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
             cell.bankCardInfoLabel.textColor = [UIColor blackColor];
         }
     }
-
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

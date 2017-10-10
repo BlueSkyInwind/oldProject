@@ -509,7 +509,6 @@
             }
             
             if (_repayListInfo != nil) {
-                DLog(@"选择付款方式");
                 [self pushUserBankListVC];
             }
         }
@@ -536,7 +535,6 @@
         if(indexPath.row==4)//选择银行卡
         {
             if (_repayListInfo != nil) {
-                DLog(@"选择付款方式");
                 [self pushUserBankListVC];
             }
             if (_p2pBillModel != nil) {
@@ -609,7 +607,6 @@
         }
         [self.PayDetailTB reloadData];
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -785,7 +782,6 @@
     }];
 }
 
-
 #pragma mark 查询用户状态
 
 -(void)getMoney{
@@ -823,7 +819,6 @@
 //        NSArray *array = @[@"BOC",@"ICBC",@"CCB",@"ABC",@"CITIC",@"CIB",@"CEB"];
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
-            
             _queryCardInfoModel = model;
             [self obtain_HeGui_BankList:model];
         }else{
