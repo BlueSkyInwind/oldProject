@@ -306,7 +306,6 @@
     
 }
 
-
 -(void)cancelBtn{
     for (UIView *subView in self.view.subviews) {
         if ([subView isKindOfClass:[ShanLinBackAlertView class]]) {

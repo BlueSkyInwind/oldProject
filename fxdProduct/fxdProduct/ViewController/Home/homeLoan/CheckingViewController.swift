@@ -19,8 +19,8 @@ class CheckingViewController: BaseViewController {
         // Do any additional setup after loading the view.
         self.title = "测评中"
         self.navigationController?.navigationBar.titleTextAttributes = {[
-            NSForegroundColorAttributeName: UIColor.black,
-            NSFontAttributeName: UIFont.systemFont(ofSize: 19)
+            NSAttributedStringKey.foregroundColor: UIColor.black,
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 19)
             ]}()
         
         let checkingView = Bundle.main.loadNibNamed("CheckViewIng", owner: nil, options: nil)?.first as? CheckViewIng
@@ -33,7 +33,7 @@ class CheckingViewController: BaseViewController {
 
 
     //MARK:量子互助
-    func applyImmediatelyBtnClick(){
+    @objc func applyImmediatelyBtnClick(){
     
         let webView = FXDWebViewController()
         webView.urlStr = "http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767"

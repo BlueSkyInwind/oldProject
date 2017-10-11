@@ -11,10 +11,10 @@ import UIKit
 class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicationcConfirmationDelegate,PickViewDelegate{
     
     var pickView : PickView?
-    var productId : String?
-    var platformCode : String?
-    var rapidLoanView : RapidLoanApplicationcConfirmation?
-    var dataArray : NSMutableArray?
+   @objc var productId : String?
+   @objc var platformCode : String?
+   @objc var rapidLoanView : RapidLoanApplicationcConfirmation?
+   @objc var dataArray : NSMutableArray?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,14 +78,14 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
         rapidLoanView?.qutoaLabel?.text = "额度:" + model.amount
         
         let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(rapidLoanView!.qutoaLabel?.text)!)
-        attrstr.addAttribute(NSForegroundColorAttributeName, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-3))
-        attrstr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(3,attrstr.length-3))
+        attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-3))
+        attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(3,attrstr.length-3))
         rapidLoanView?.qutoaLabel?.attributedText = attrstr
         
         rapidLoanView?.termLabel?.text = "期限:" + model.period
         let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(rapidLoanView!.termLabel?.text)!)
-        attrstr1.addAttribute(NSForegroundColorAttributeName, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-3))
-        attrstr1.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(3,attrstr1.length-3))
+        attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-3))
+        attrstr1.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(3,attrstr1.length-3))
         rapidLoanView?.termLabel?.attributedText = attrstr1
         
         self.view.addSubview(rapidLoanView!)

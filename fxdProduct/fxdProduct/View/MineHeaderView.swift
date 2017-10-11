@@ -10,8 +10,8 @@ import UIKit
 
 class MineHeaderView: UIView {
 
-    var nameLabel : UILabel?
-    var accountLabel : UILabel?
+   @objc var nameLabel : UILabel?
+   @objc var accountLabel : UILabel?
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -29,7 +29,6 @@ class MineHeaderView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 
 extension MineHeaderView{

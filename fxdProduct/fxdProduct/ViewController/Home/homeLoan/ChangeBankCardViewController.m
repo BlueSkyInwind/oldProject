@@ -120,8 +120,6 @@
     }
     cell.selectionStyle  = UITableViewCellSelectionStyleNone;
     return cell;
-
-    return nil;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
