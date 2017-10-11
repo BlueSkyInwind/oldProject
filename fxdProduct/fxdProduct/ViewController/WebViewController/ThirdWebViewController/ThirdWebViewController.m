@@ -14,6 +14,7 @@
 #import "RTRootNavigationController.h"
 #import "JSAndOCInteraction.h"
 #import "LoanMoneyViewController.h"
+#import "ApplicationViewModel.h"
 @interface ThirdWebViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate,ShanLinBackAlertViewDelegate>
 {
     UIProgressView *progressView;
@@ -317,11 +318,20 @@
 
 -(void)sureBtn{
    
-    for (UIView *subView in self.view.subviews) {
-        if ([subView isKindOfClass:[ShanLinBackAlertView class]]) {
-            [subView removeFromSuperview];
+    __weak typeof (self) weakSelf = self;
+    ApplicationViewModel * appModel = [[ApplicationViewModel alloc]init];
+    [appModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        for (UIView *subView in weakSelf.view.subviews) {
+            if ([subView isKindOfClass:[ShanLinBackAlertView class]]) {
+                [subView removeFromSuperview];
+            }
         }
-    }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [appModel capitalLoanFail];
     
 }
 

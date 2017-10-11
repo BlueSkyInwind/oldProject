@@ -34,4 +34,9 @@
 
 -(void)capitalLoan:(NSString *)cardId loanfor:(NSString *)loanfor periods:(NSString *)periods;
 
+/**
+ app 连连绑卡页面用户放弃操作接口
+ */
+-(void)capitalLoanFail;
+
 @end

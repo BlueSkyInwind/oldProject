@@ -466,6 +466,9 @@ NSString * const    _CapitalLoanBack_url    =    @"main.html";
 //联联绑卡返回回调地址
 NSString * const    _ShanLinBack_url    =    @"main.html#shanlinBack";
 
+//app 连连绑卡页面用户放弃操作接口
+NSString * const    _CapitalLoanFail_url    =    @"apigw/client/capital/loan/fail";
+
 #pragma mark - 合规接口
 
 //用户开户接口
