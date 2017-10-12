@@ -10,8 +10,8 @@ import UIKit
 
 class AuthenticationCenterCell: UICollectionViewCell {
     
-    var image: UIImageView?
-    var nameLabel: UILabel?
+  @objc  var image: UIImageView?
+  @objc  var nameLabel: UILabel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

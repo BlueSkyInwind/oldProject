@@ -26,7 +26,7 @@ class ShanLinBackAlertView: UIView {
     }
     */
     
-    weak var delegate: ShanLinBackAlertViewDelegate?
+   @objc weak var delegate: ShanLinBackAlertViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

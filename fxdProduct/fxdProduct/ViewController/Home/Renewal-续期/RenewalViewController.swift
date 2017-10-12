@@ -15,7 +15,7 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
     var headerView: CurrentInformationHeadView? = nil
     var contentArr : [String] = [String]()
     var cardInfo : CardInfo?
-    var stagingId : String?
+   @objc var stagingId : String?
     var currentindex : Int?
     var paymentPattern : PatternOfPayment?
 
@@ -78,7 +78,7 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
 //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), for: UIBarMetrics.default)
 //        self.navigationController!.navigationBar.shadowImage = UIImage()
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.black,NSFontAttributeName:UIFont.systemFont(ofSize: 19)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.black,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 19)]
         
       
 

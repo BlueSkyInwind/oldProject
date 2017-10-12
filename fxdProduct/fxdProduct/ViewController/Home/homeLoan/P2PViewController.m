@@ -155,7 +155,7 @@
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     
     
-    
+
 }
 #pragma mark  fxd用户状态查询，viewmodel
 -(void)getUserStatus:(NSString *)applicationId{

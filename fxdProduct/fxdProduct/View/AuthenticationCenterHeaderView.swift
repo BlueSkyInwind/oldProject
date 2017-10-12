@@ -10,8 +10,8 @@ import UIKit
 
 class AuthenticationCenterHeaderView: UIView {
 
-    var titleLabel : UILabel?
-    var descLabel : UILabel?
+   @objc var titleLabel : UILabel?
+   @objc var descLabel : UILabel?
     
     /*
     // Only override draw() if you perform custom drawing.

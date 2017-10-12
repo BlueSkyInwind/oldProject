@@ -310,7 +310,6 @@
     
 }
 
-
 -(void)cancelBtn{
     
     __weak typeof (self) weakSelf = self;

@@ -179,11 +179,11 @@ extension PickView{
 
         let model = dataArray[row] as? CapitalListModel
         let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(model?.platformName)!)
-        attrstr.addAttribute(NSForegroundColorAttributeName, value: QUTOA_COLOR, range: NSMakeRange(0,attrstr.length))
-        attrstr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, attrstr.length))
+        attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: QUTOA_COLOR, range: NSMakeRange(0,attrstr.length))
+        attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, attrstr.length))
         if row == selectRow{
-            attrstr.addAttribute(NSForegroundColorAttributeName, value: UI_MAIN_COLOR, range: NSMakeRange(0,attrstr.length))
-            attrstr.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 23), range: NSMakeRange(0, attrstr.length))
+            attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(0,attrstr.length))
+            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 23), range: NSMakeRange(0, attrstr.length))
         }
         
         return attrstr

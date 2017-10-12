@@ -14,10 +14,10 @@ import UIKit
 
 class LoadFailureView: UIView {
 
-    var iconImageView : UIImageView?
-    var reminderLabel : UILabel?
-    var refreshBtn : UIButton?
-    var delegate : LoadFailureDelegate?
+   @objc var iconImageView : UIImageView?
+   @objc var reminderLabel : UILabel?
+   @objc var refreshBtn : UIButton?
+   @objc var delegate : LoadFailureDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,7 +28,7 @@ class LoadFailureView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func refreshBtnClick(){
+    @objc func refreshBtnClick(){
         if self.delegate != nil {
             self.delegate?.LoadFailureLoadRefreshButtonClick()
         }
