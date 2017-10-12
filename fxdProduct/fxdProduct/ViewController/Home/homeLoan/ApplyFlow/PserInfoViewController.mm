@@ -68,7 +68,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"个人信息";
+    self.navigationItem.title = @"身份信息";
      _placeHolderArr = @[@[@"请确保填写的均为本人真实信息",@"身份证识别"],@[@"姓名",@"身份证号"],@[@"学历",@"现居住地",@"居住地详址"]];
 
     NSString *device = [[UIDevice currentDevice] systemVersion];

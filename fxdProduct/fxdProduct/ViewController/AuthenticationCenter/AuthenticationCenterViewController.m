@@ -597,7 +597,7 @@
 }
 -(void)editSDKInfo{
     [MoxieSDK shared].navigationController.navigationBar.translucent = YES;
-    [MoxieSDK shared].backImageName = @"return";
+    [MoxieSDK shared].backImageName = @"return_white";
     [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
     [MoxieSDK shared].navigationController.navigationBar.tintColor = UI_MAIN_COLOR;
     [[MoxieSDK shared].navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];

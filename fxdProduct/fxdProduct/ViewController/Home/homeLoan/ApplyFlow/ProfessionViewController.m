@@ -66,7 +66,7 @@
     _subPickerArray = [NSMutableArray array];
     _thirdPickerArray = [NSMutableArray array];
     dataListAll = [NSMutableArray array];
-    self.navigationItem.title = @"职业信息";
+    self.navigationItem.title = @"个人信息";
     _placeHolderArr = @[@"请确保填写的均为本人真实信息",@"单位名称",@"单位电话",@"行业",@"单位所在地",@"单位详址"];
 //    _professionArray = @[@"生活/服务业",@"人力/行政/管理",@"销售/客服/采购/淘宝",
 //                         @"市场/媒介/广告/设计",@"生产/物流/质控/汽车",

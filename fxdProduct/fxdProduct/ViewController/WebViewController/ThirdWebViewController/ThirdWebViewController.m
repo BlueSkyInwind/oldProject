@@ -164,12 +164,16 @@
     NSLog(@"=========%@",request.URL.absoluteString);
     if ([request.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_H5_url,_CapitalLoanBack_url]]&&![request.URL.absoluteString containsString:@"#shanlinBack"]) {
         decisionHandler(WKNavigationActionPolicyAllow);
+//        decisionHandler(WKNavigationActionPolicyCancel);
+//        [self setAlert];
         [self.navigationController popToRootViewControllerAnimated:true];
         
     }else if([request.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_H5_url,_ShanLinBack_url]]){
         
-        decisionHandler(WKNavigationActionPolicyAllow);
+        
+        decisionHandler(WKNavigationActionPolicyCancel);
         [self setAlert];
+        
     }else{
         
         decisionHandler(WKNavigationActionPolicyAllow);
@@ -308,16 +312,7 @@
 
 
 -(void)cancelBtn{
-    for (UIView *subView in self.view.subviews) {
-        if ([subView isKindOfClass:[ShanLinBackAlertView class]]) {
-            [subView removeFromSuperview];
-            [self.navigationController popToRootViewControllerAnimated:true];
-        }
-    }
-}
-
--(void)sureBtn{
-   
+    
     __weak typeof (self) weakSelf = self;
     ApplicationViewModel * appModel = [[ApplicationViewModel alloc]init];
     [appModel setBlockWithReturnBlock:^(id returnValue) {
@@ -325,6 +320,7 @@
         for (UIView *subView in weakSelf.view.subviews) {
             if ([subView isKindOfClass:[ShanLinBackAlertView class]]) {
                 [subView removeFromSuperview];
+                [self.navigationController popToRootViewControllerAnimated:true];
             }
         }
         
@@ -333,6 +329,16 @@
     }];
     [appModel capitalLoanFail];
     
+}
+
+-(void)sureBtn{
+   
+    for (UIView *subView in self.view.subviews) {
+        if ([subView isKindOfClass:[ShanLinBackAlertView class]]) {
+            [subView removeFromSuperview];
+            
+        }
+    }
 }
 
 

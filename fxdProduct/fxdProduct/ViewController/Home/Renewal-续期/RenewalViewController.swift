@@ -65,6 +65,10 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
         renewalTableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        getData()
+        fatchBankList()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -76,9 +80,7 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.black,NSFontAttributeName:UIFont.systemFont(ofSize: 19)]
         
-       getData()
-
-       fatchBankList()
+      
 
     }
     

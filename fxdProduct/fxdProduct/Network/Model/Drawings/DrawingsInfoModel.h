@@ -60,7 +60,7 @@
 
 @interface SalaryDrawingsFeeInfoModel : JSONModel
 
-@property(nonatomic,strong)NSArray<SalaryFeeDetailModel> * feeInfo;
+@property(nonatomic,strong)NSArray<SalaryFeeDetailModel,Optional> * feeInfo;
 @property(nonatomic,strong)NSString<Optional> * repaymentAmount;
 @property(nonatomic,strong)NSString<Optional> * totalFee;
 

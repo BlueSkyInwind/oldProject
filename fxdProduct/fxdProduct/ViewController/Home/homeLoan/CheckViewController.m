@@ -566,7 +566,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 return;
             }
             if (_userSelectNum.integerValue > 0) {
-                
+
                 [self obtainProductFee];
                 
             }else {
@@ -711,7 +711,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             
         {
             ThirdWebViewController *webView = [[ThirdWebViewController alloc] init];
-//            webView.name = @"银行卡认证";
             webView.loadContent = url;
             webView.isHidden = true;
             [self.navigationController pushViewController:webView animated:YES];
@@ -768,7 +767,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 }
             }
         }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         
@@ -867,24 +866,11 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }else{
         if (row != 0) {
             _userSelectNum = [_datalist objectAtIndex:row-1];
-            
-            checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
-            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];
-            [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-            NSString *amountStr = [NSString stringWithFormat:@"%.2f元",(_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate)/_userSelectNum.intValue];
-            [attStr yy_appendString:amountStr];
-            [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-amountStr.length, amountStr.length)];
-            checkSuccess.weekMoney.attributedText = attStr;
-            checkSuccess.allMoney.text =[NSString stringWithFormat:@"%.2f元",_approvalModel.result.approval_amount +_approvalModel.result.approval_amount*_userSelectNum.intValue*_approvalModel.result.week_service_fee_rate];
+
         }
         if (row == 0) {
             _userSelectNum = @0;
-            checkSuccess.textFiledWeek.text = @"请选择周期";
-            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
-            [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
-            [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-2, 2)];
-            checkSuccess.weekMoney.attributedText = attStr;
-            checkSuccess.allMoney.text = @"0元";
+
         }
     }
     [self productIsDrawingsStatus];

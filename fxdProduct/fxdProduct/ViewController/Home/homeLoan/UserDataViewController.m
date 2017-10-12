@@ -83,7 +83,7 @@
     isOpen = NO;
     _creditCardStatus = @"3";
     _socialSecurityStatus = @"3";
-    _subTitleArr = @[@"请完善您的身份信息",@"请完善您的个人信息",@"请完善您的职业信息",@"请完成三方认证"];
+    _subTitleArr = @[@"请完善您的身份信息",@"请完善您的个人信息",@"请完成三方认证",@"请完善您的收款信息"];
     [self addBackItemRoot];
     [self configMoxieSDK];
     [self configTableview];
@@ -785,7 +785,7 @@
 
 -(void)editSDKInfo{
     [MoxieSDK shared].navigationController.navigationBar.translucent = YES;
-    [MoxieSDK shared].backImageName = @"return";
+    [MoxieSDK shared].backImageName = @"return_white";
     [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
     [MoxieSDK shared].navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [[MoxieSDK shared].navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
