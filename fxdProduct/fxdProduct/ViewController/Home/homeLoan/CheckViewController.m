@@ -30,7 +30,6 @@
 #import "DataWriteAndRead.h"
 #import "CustomerBaseInfoBaseClass.h"
 #import "GetCustomerBaseViewModel.h"
-#import "ReplenishViewController.h"
 #import "Approval.h"
 #import "DetailViewController.h"
 #import "IdeaBackViewController.h"
@@ -68,7 +67,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     PromoteLimit,
 };
 
-@interface CheckViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,ReplenishDoneDelegate,MoxieSDKDelegate>
+@interface CheckViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,MoxieSDKDelegate>
 {
     CheckViewIng *_checking;
     CheckSuccessView *checkSuccess;
@@ -248,10 +247,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     checkFalse.labelday.text = @"您的信用评分不够";
     
     [[checkFalse.moreInfoBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        ReplenishViewController *replenVC = [[ReplenishViewController alloc] init];
-        replenVC.userStateModel = _userStateModel;
-        replenVC.delegate = self;
-        [self.navigationController pushViewController:replenVC animated:YES];
+
     }];
     if (_userStateModel.if_add_documents) {
         checkFalse.moreInfoLabel.hidden = NO;
