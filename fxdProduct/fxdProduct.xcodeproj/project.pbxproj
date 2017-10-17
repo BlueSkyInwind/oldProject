@@ -2619,8 +2619,8 @@
 			isa = PBXGroup;
 			children = (
 				0F099B951C1A97C300D97BAE /* ColledgeView.h */,
-				0F099B981C1A97EB00D97BAE /* ColledgeView.xib */,
 				0F099B961C1A97C300D97BAE /* ColledgeView.m */,
+				0F099B981C1A97EB00D97BAE /* ColledgeView.xib */,
 			);
 			path = addCell;
 			sourceTree = "<group>";
