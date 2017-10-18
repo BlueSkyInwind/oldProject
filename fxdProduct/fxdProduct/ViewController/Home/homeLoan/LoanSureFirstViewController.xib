@@ -14,9 +14,11 @@
             <connections>
                 <outlet property="agreementLabel" destination="As6-KC-iDu" id="MbZ-pm-eDp"/>
                 <outlet property="amountLabel" destination="bPA-7C-mhy" id="Q1m-Jv-chi"/>
+                <outlet property="bottomViewBottom" destination="l2w-6H-gDe" id="Bue-vQ-rj2"/>
                 <outlet property="bottomViewTop" destination="mSc-sZ-Ftl" id="UO6-gh-5tL"/>
                 <outlet property="detailView" destination="XsU-JD-Fxl" id="EG2-GR-q0o"/>
                 <outlet property="headerView" destination="ThU-hM-hwu" id="yyW-B7-bb8"/>
+                <outlet property="headerViewHeight" destination="oSi-5D-HKk" id="w9x-fR-n2n"/>
                 <outlet property="productLogo" destination="YaL-be-XGG" id="oVp-fg-LyH"/>
                 <outlet property="productTitle" destination="du4-7N-E8h" id="07h-Pp-Jaw"/>
                 <outlet property="specialLabel" destination="c6K-1p-7Lo" id="LGP-Wd-QYL"/>
@@ -166,12 +168,12 @@
                 <constraint firstItem="Q4f-b2-2l3" firstAttribute="top" secondItem="Fal-Sm-ebe" secondAttribute="bottom" constant="20" id="583-6a-GBs"/>
                 <constraint firstAttribute="trailing" secondItem="Fal-Sm-ebe" secondAttribute="trailing" id="6l4-FU-SV8"/>
                 <constraint firstItem="ThU-hM-hwu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="BAn-1f-1ll"/>
-                <constraint firstAttribute="bottom" secondItem="Q4f-b2-2l3" secondAttribute="bottom" constant="20" id="GpF-8K-nZH"/>
                 <constraint firstItem="Fal-Sm-ebe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Quz-gO-1J2"/>
                 <constraint firstItem="Q4f-b2-2l3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RmH-8a-QuY"/>
                 <constraint firstItem="Q4f-b2-2l3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="19" id="cSN-m7-M5L"/>
                 <constraint firstAttribute="trailing" secondItem="Q4f-b2-2l3" secondAttribute="trailing" constant="19" id="ccA-jh-ODZ"/>
                 <constraint firstAttribute="trailing" secondItem="ThU-hM-hwu" secondAttribute="trailing" id="dak-3e-YpG"/>
+                <constraint firstAttribute="bottom" secondItem="Fal-Sm-ebe" secondAttribute="bottom" constant="81" id="l2w-6H-gDe"/>
                 <constraint firstItem="Fal-Sm-ebe" firstAttribute="top" secondItem="ThU-hM-hwu" secondAttribute="bottom" constant="10" id="mSc-sZ-Ftl"/>
                 <constraint firstItem="ThU-hM-hwu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tyJ-Of-Oaf"/>
             </constraints>

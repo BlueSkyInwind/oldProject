@@ -26,7 +26,7 @@ class DiscountCouponViewController: UIViewController,UITableViewDelegate,UITable
     }
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
-        
+        tableView?.showsHorizontalScrollIndicator = false
         tableView?.delegate = self
         tableView?.dataSource = self
         self.view.addSubview(tableView!)
@@ -62,6 +62,8 @@ class DiscountCouponViewController: UIViewController,UITableViewDelegate,UITable
         
         if index == indexPath.row{
             discountcell?.chooseBtn?.setImage(UIImage.init(named: "choose_Icon"), for: UIControlState.normal);
+        }else{
+            discountcell?.chooseBtn?.setImage(UIImage.init(named: "unChoose_Icon"), for: UIControlState.normal);
         }
         return discountcell!
     }
@@ -80,7 +82,6 @@ class DiscountCouponViewController: UIViewController,UITableViewDelegate,UITable
             self.chooseDiscountTicket!(index!,discountTicketM,"")
         }
         self.dismissSemiModalView(completion: nil)
-
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

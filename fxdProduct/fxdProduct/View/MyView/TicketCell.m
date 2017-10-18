@@ -35,10 +35,16 @@
     //    self.lblTip.text=@"有效期:2016-02-07至2016-06-07";
     [self.TicketImgView addSubview:self.lblTip];
     
-//    self.lblName = [UILabel alloc]ini
-    
-    
-    
+    self.lblName = [[UILabel alloc]initWithFrame:CGRectMake(self.TicketImgView.frame.size.width *0.05, 0, self.TicketImgView.frame.size.width *0.09, self.TicketImgView.frame.size.height)];
+    self.lblName.textColor=[UIColor whiteColor];
+    self.lblName.numberOfLines = 0;
+    self.lblName.textAlignment = NSTextAlignmentCenter;
+    NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:@"抵\n扣\n券" attributes:@{NSKernAttributeName:@18}];
+    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:15];//行间距
+    self.lblName.attributedText = attributedString;
+    [self.TicketImgView addSubview:self.lblName];
+
     //已过期提示框
     self.lblOverTime=[[UILabel alloc]initWithFrame:CGRectMake(_k_w-34-80-15, 15, 80, 40)];
     self.lblOverTime.textAlignment=NSTextAlignmentCenter;
@@ -59,7 +65,6 @@
         str=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%.0f元",redPacketModel.residualAmount]];
         [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:50 weight:0] range:NSMakeRange(0, str.length-1)];
         [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:35] range:NSMakeRange(str.length-1, 1)];
-        
     }
     else
     {

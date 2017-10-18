@@ -35,7 +35,8 @@
 @property (nonatomic, copy) NSString *req_loan_amt;
 @property (weak, nonatomic) IBOutlet UILabel *agreementLabel;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewBottom;
 
 @end

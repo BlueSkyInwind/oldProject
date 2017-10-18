@@ -90,7 +90,6 @@
 -(void)goHelpVCClick{
     
     
-    
 }
 
 -(void)createNoneView
@@ -146,7 +145,7 @@
     [invationBtn setTitleColor:kUIColorFromRGB(0x00AAee) forState:UIControlStateNormal];
     [Tool setCorner:invationBtn borderColor:kUIColorFromRGB(0x00AAee)];
     [invationBtn addTarget:self action:@selector(pushInvationFriend) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:invationBtn];
+    [NoneView addSubview:invationBtn];
     [invationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(prometLabel.mas_bottom).with.offset(30);
         make.centerX.equalTo(self.view.mas_centerX);

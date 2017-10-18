@@ -20,7 +20,7 @@
     
     DiscountTicketModel * discountTM;
     DiscountTicketDetailModel * chooseDiscountTDM;
-
+    NSInteger chooseIndex;
 }
 
 @property (nonatomic, strong) YYTextView *textView;
@@ -35,6 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"借款申请确认";
+    chooseIndex = 1;
     [self addBackItem];
     [self obtainDiscountTicket:^(DiscountTicketModel *discountTicketModel) {
         if (discountTicketModel.valid != nil && discountTicketModel.valid.count != 0) {
@@ -58,11 +59,14 @@
     
     chooseDiscountTDM = discountTicketDetailM;
     
-    float discountCouponsHeight = 136;
     float discountCouponsTop = 115;
     if (UI_IS_IPHONE6P) {
         discountCouponsTop = 164;
-        discountCouponsHeight = 190;
+    }else if (UI_IS_IPHONE6){
+        discountCouponsTop = 140;
+    }else if (UI_IS_IPHONE5){
+        self.headerViewHeight.constant = 190;
+        self.bottomViewBottom.constant = 60;
     }
     self.discountCouponsV = [[DiscountCouponsView alloc]initWithFrame:CGRectZero];
     self.discountCouponsV.backgroundColor = kUIColorFromRGB(0xf2f2f2);
@@ -76,25 +80,22 @@
         make.height.equalTo(@(discountCouponsTop));
     }];
     self.bottomViewTop.constant = discountCouponsTop;
-    self.bottomViewHeight.constant = discountCouponsHeight;
 }
-
 
 #pragma DiscountCouponsDelergate
 -(void)pushChooseAmountView{
-    
     DiscountCouponViewController *discountCouponVC = [[DiscountCouponViewController alloc]init];
     discountCouponVC.dataListArr = discountTM.valid;
+    discountCouponVC.currentIndex = [NSString stringWithFormat:@"%ld",chooseIndex];
     discountCouponVC.view.frame = CGRectMake(0, 0, _k_w, _k_h * 0.6);
-    discountCouponVC.currentIndex = @"1";
     discountCouponVC.chooseDiscountTicket = ^(NSInteger index, DiscountTicketDetailModel * discountTicketDetailModel, NSString * str) {
         if (index != 0) {
             chooseDiscountTDM = discountTicketDetailModel;
+            chooseIndex = index;
         }
     };
     [self presentSemiViewController:discountCouponVC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)} completion:nil dismissBlock:^{
     }];
-
 }
 -(void)pushDirectionsForUse{
     
@@ -225,7 +226,7 @@
     } WithFaileBlock:^{
         
     }];
-    [applicationVM userCreateApplication:_productId platformCode:@"" baseId:nil];
+    [applicationVM userCreateApplication:_productId platformCode:@"" baseId:chooseDiscountTDM.baseid_];
     
 }
 
