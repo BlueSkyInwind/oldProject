@@ -39,4 +39,12 @@
  */
 -(void)capitalLoanFail;
 
+
+/**
+ 优惠券及现金红包接口
+ 
+ @param type 类型 1 、优惠券 2、现金红包
+ */
+-(void)obtainUserDiscountTicketList:(NSString *)type;
+
 @end

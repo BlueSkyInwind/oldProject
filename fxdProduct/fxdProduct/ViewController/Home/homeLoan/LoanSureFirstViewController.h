@@ -27,17 +27,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *specialLabel;
 
 @property (nonatomic, copy) NSString *if_family_know;
-
 @property (nonatomic, strong) UserStateModel *model;
 @property (nonatomic, strong) HomeProductList *homeModel;
-
 @property (nonatomic, copy) NSString *productId;
-
 @property (nonatomic, copy) NSString *rulesId;
-
 @property (nonatomic, copy) NSString *resultCode;
-
 @property (nonatomic, copy) NSString *req_loan_amt;
 @property (weak, nonatomic) IBOutlet UILabel *agreementLabel;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewTop;
 
 @end

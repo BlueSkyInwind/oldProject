@@ -15,7 +15,7 @@
 -(void)userCreateApplication:(NSString *)productId platformCode:(NSString *)platformCode{
     
     NSDictionary * paramDic = @{@"productId":productId,
-                                @"platformCode":platformCode
+                                @"platformCode":platformCode,
                                 };
 
     [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_createApplication_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
@@ -85,16 +85,35 @@
 
 -(void)capitalLoanFail{
     [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_CapitalLoanFail_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
-        
         if (self.returnBlock) {
             self.returnBlock(object);
         }
     } failure:^(EnumServerStatus status, id object) {
-        
         if (self.faileBlock) {
             [self faileBlock];
         }
-        
     }];
 }
+
+/**
+ 优惠券及现金红包接口
+
+ @param type 类型 1 、优惠券 2、现金红包
+ */
+-(void)obtainUserDiscountTicketList:(NSString *)type{
+    NSDictionary * paramDic = @{@"activityType":type};
+    [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_DiscountTicketList_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+
+
+
 @end

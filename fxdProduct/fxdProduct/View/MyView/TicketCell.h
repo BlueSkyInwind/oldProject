@@ -14,6 +14,7 @@
 @property (nonatomic,strong) UILabel *lblTitle;
 @property (nonatomic,strong) UILabel *lblPrice;
 @property (nonatomic,strong) UILabel *lblTip;
+@property (nonatomic,strong) UILabel *lblName;
 @property (nonatomic,strong) UILabel *lblOverTime;
 -(void)setValues:(RedpacketResult *)redPacketModel;
 @end

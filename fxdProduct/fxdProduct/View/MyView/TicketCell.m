@@ -20,11 +20,13 @@
     self.lblTitle=[[UILabel alloc]initWithFrame:CGRectMake((_k_w-34)*0.19, 15, 200, 30)];
     self.lblTitle.font=[UIFont systemFontOfSize:23];
     self.lblTitle.textColor=[UIColor whiteColor];
+    self.lblTitle.textAlignment = NSTextAlignmentCenter;
     self.lblTitle.text=@"恭喜您获得红包";
     [self.TicketImgView addSubview:self.lblTitle];
     
     self.lblPrice=[[UILabel alloc]initWithFrame:CGRectMake((_k_w-34)*0.19, self.TicketImgView.frame.size.height/2-25, 280*_k_WSwitch, 50)];
     self.lblPrice.textColor=[UIColor whiteColor];
+    self.lblPrice.textAlignment = NSTextAlignmentCenter;
     [self.TicketImgView addSubview:self.lblPrice];
     
     self.lblTip=[[UILabel alloc]initWithFrame:CGRectMake((_k_w-34)*0.19, self.TicketImgView.frame.size.height-10-30, 250, 30)];
@@ -32,6 +34,10 @@
     self.lblTip.textColor=[UIColor whiteColor];
     //    self.lblTip.text=@"有效期:2016-02-07至2016-06-07";
     [self.TicketImgView addSubview:self.lblTip];
+    
+//    self.lblName = [UILabel alloc]ini
+    
+    
     
     //已过期提示框
     self.lblOverTime=[[UILabel alloc]initWithFrame:CGRectMake(_k_w-34-80-15, 15, 80, 40)];
