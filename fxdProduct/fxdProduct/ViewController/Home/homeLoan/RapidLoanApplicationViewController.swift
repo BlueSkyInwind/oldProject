@@ -143,7 +143,7 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
         }) {
             
         }
-        applicationMV.userCreateApplication(productId, platformCode: platformCode)
+        applicationMV.userCreateApplication(productId, platformCode: platformCode,baseId: nil)
     }
     
     //MARK 取消按钮

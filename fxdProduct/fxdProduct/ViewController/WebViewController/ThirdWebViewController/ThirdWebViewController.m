@@ -94,18 +94,19 @@
         [_webView goBack];
     } else {
         
-        [self.navigationController popToRootViewControllerAnimated:true];
+        [self setAlert];
+//        [self.navigationController popToRootViewControllerAnimated:true];
 
     }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (_isHidden) {
-        self.navigationController.navigationBarHidden = true;
-    }else{
-        self.navigationController.navigationBarHidden = false;
-    }
+//    if (_isHidden) {
+//        self.navigationController.navigationBarHidden = true;
+//    }else{
+//        self.navigationController.navigationBarHidden = false;
+//    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -164,15 +165,13 @@
     NSLog(@"=========%@",request.URL.absoluteString);
     if ([request.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_H5_url,_CapitalLoanBack_url]]&&![request.URL.absoluteString containsString:@"#shanlinBack"]) {
         decisionHandler(WKNavigationActionPolicyAllow);
-//        decisionHandler(WKNavigationActionPolicyCancel);
-//        [self setAlert];
         [self.navigationController popToRootViewControllerAnimated:true];
         
     }else if([request.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_H5_url,_ShanLinBack_url]]){
         
-        
-        decisionHandler(WKNavigationActionPolicyCancel);
-        [self setAlert];
+        decisionHandler(WKNavigationActionPolicyAllow);
+//        decisionHandler(WKNavigationActionPolicyCancel);
+//        [self setAlert];
         
     }else{
         
