@@ -712,7 +712,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         {
             ThirdWebViewController *webView = [[ThirdWebViewController alloc] init];
             webView.loadContent = url;
-            webView.isHidden = true;
+            webView.isHidden = false;
             [self.navigationController pushViewController:webView animated:YES];
         }
             break;

@@ -12,10 +12,11 @@
 @implementation ApplicationViewModel
 
 
--(void)userCreateApplication:(NSString *)productId platformCode:(NSString *)platformCode{
+-(void)userCreateApplication:(NSString *)productId platformCode:(NSString *)platformCode baseId:(NSString *)baseId{
     
     NSDictionary * paramDic = @{@"productId":productId,
-                                @"platformCode":platformCode
+                                @"platformCode":platformCode,
+                                @"baseId":baseId
                                 };
 
     [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_createApplication_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {

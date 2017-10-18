@@ -14,7 +14,7 @@
 /**
  用户创建进件
  */
--(void)userCreateApplication:(NSString *)productId platformCode:(NSString *)platformCode;
+-(void)userCreateApplication:(NSString *)productId platformCode:(NSString *)platformCode baseId:(NSString *)baseId;
 
 
 /**

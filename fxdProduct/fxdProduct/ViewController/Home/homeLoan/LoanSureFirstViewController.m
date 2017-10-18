@@ -287,7 +287,7 @@
     } WithFaileBlock:^{
         
     }];
-    [applicationVM userCreateApplication:_productId platformCode:@""];
+    [applicationVM userCreateApplication:_productId platformCode:@"" baseId:nil];
     
 }
 

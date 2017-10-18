@@ -94,18 +94,19 @@
         [_webView goBack];
     } else {
         
-        [self.navigationController popToRootViewControllerAnimated:true];
+        [self setAlert];
+//        [self.navigationController popToRootViewControllerAnimated:true];
 
     }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (_isHidden) {
-        self.navigationController.navigationBarHidden = true;
-    }else{
-        self.navigationController.navigationBarHidden = false;
-    }
+//    if (_isHidden) {
+//        self.navigationController.navigationBarHidden = true;
+//    }else{
+//        self.navigationController.navigationBarHidden = false;
+//    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
