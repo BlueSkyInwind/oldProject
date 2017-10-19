@@ -32,6 +32,7 @@
 @property(nonatomic,strong)NSString<Optional> * user_id_;
 @property(nonatomic,strong)NSString<Optional> * start_time_;
 @property(nonatomic,strong)NSString<Optional> * end_time_;
+@property(nonatomic,strong)NSString<Optional> * is_used_;
 
 @end
 

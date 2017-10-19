@@ -12,11 +12,15 @@
 #import "RedpacketBaseClass.h"
 #import "RepayWeeklyRecordViewModel.h"
 #import "InvitationViewController.h"
+#import "DiscountTicketModel.h"
+#import "LapseDiscountTicketViewController.h"
+
 @interface DiscountTicketController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UIView *NoneView;
     RedpacketBaseClass *_redPacketParse;
     NSMutableArray *_validRedPacketArr;
+    DiscountTicketModel * discountTicketModel;
 }
 @end
 
@@ -26,10 +30,12 @@
     [super viewDidLoad];
     self.title=@"优惠券";
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     [self addBackItem];
     [self addHelpItem];
     [self createTableView];
     [self createNoneView];
+    [self createbottomView];
     _validRedPacketArr = [NSMutableArray array];
     //    [self fatchRedpacket];
 }
@@ -66,6 +72,22 @@
     [repayWeeklyRecordViewModel getUserRedpacketList];
 }
 
+-(void)obtainDiscountTicket:(void(^)(DiscountTicketModel * discountTicketModel))finish{
+    ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
+    [applicationVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            DiscountTicketModel * discountTicketM = [[DiscountTicketModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            discountTicketModel = discountTicketM;
+            finish(discountTicketM);
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [applicationVM obtainUserDiscountTicketList:@"1"];
+}
 -(void)createTableView
 {
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,64, _k_w, _k_h-64) style:UITableViewStyleGrouped];
@@ -94,13 +116,13 @@
 
 -(void)createNoneView
 {
-    NoneView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h)];
-    NoneView.backgroundColor = RGBColor(245, 245, 245, 1);
+    NoneView =[[UIView alloc]init];
+    NoneView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     [self.view addSubview:NoneView];
     [NoneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).with.offset(64);
         make.left.right.equalTo(self.view).with.offset(0);
-        make.bottom.equalTo(@80);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-100);
     }];
     
     UIImageView *logoImg=[[UIImageView alloc]init];
@@ -153,7 +175,50 @@
         make.width.equalTo(@130);
     }];
 }
+-(void)createbottomView{
+    
+    self.tableView.frame = CGRectMake(0, 64, _k_w, _k_h - 164);
+    UIView * bottomView = [[UIView alloc]init];
+    bottomView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pushInVailDiscountTicketVC)];
+    [bottomView addGestureRecognizer:tap];
+    [self.view addSubview:bottomView];
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(@(-60));
+        make.left.right.equalTo(@0);
+        make.height.equalTo(@40);
+    }];
+    
+    UILabel * prometLabel = [[UILabel alloc]init];
+    prometLabel.text = @"查看过期优惠券";
+    prometLabel.textColor = kUIColorFromRGB(0x666666);
+    prometLabel.font = [UIFont systemFontOfSize:13];
+    prometLabel.textAlignment = NSTextAlignmentCenter;
+    [bottomView addSubview:prometLabel];
+    [prometLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(bottomView.mas_centerX).with.offset(-10);
+        make.centerY.equalTo(bottomView.mas_centerY);
+        make.width.equalTo(@100);
+        make.height.equalTo(@30);
+    }];
+    
+    UIImageView * leftIcon = [[UIImageView alloc]init];
+    leftIcon.image = [UIImage imageNamed:@"left_Image_icon"];
+    [bottomView addSubview:leftIcon];
+    [leftIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(bottomView.mas_centerY);
+        make.left.equalTo(prometLabel.mas_right).with.offset(0);
+        make.width.equalTo(@15);
+        make.height.equalTo(@13);
+    }];
+}
 
+-(void)pushInVailDiscountTicketVC{
+    
+    LapseDiscountTicketViewController *lapseDiscountTicketVC = [[LapseDiscountTicketViewController alloc] init];
+    lapseDiscountTicketVC.invalidTicketArr = [discountTicketModel.invalid mutableCopy];
+    [self.navigationController pushViewController:lapseDiscountTicketVC animated:true];
+}
 -(void)pushInvationFriend{
     InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
     [self.navigationController pushViewController:invitationVC animated:true];
@@ -229,7 +294,6 @@
     {
         return 20;
     }
-    
     return CGFLOAT_MIN;
 }
 

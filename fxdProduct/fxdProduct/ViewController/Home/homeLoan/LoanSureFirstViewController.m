@@ -58,7 +58,6 @@
 -(void)addDiscountCoupons:(DiscountTicketDetailModel *)discountTicketDetailM{
     
     chooseDiscountTDM = discountTicketDetailM;
-    
     float discountCouponsTop = 115;
     if (UI_IS_IPHONE6P) {
         discountCouponsTop = 164;
@@ -89,9 +88,12 @@
     discountCouponVC.currentIndex = [NSString stringWithFormat:@"%ld",chooseIndex];
     discountCouponVC.view.frame = CGRectMake(0, 0, _k_w, _k_h * 0.6);
     discountCouponVC.chooseDiscountTicket = ^(NSInteger index, DiscountTicketDetailModel * discountTicketDetailModel, NSString * str) {
+        chooseIndex = index;
+        chooseDiscountTDM = discountTicketDetailModel;
         if (index != 0) {
-            chooseDiscountTDM = discountTicketDetailModel;
-            chooseIndex = index;
+            self.discountCouponsV.amountLabel.text = [NSString stringWithFormat:@"+￥%@",chooseDiscountTDM.amount_payment_];
+        }else{
+            self.discountCouponsV.amountLabel.text = [NSString stringWithFormat:@"+￥0"];
         }
     };
     [self presentSemiViewController:discountCouponVC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)} completion:nil dismissBlock:^{
@@ -101,11 +103,9 @@
     
 
 }
-
 -(void)viewWillAppear:(BOOL)animated{
     [self fatchRate];
 }
-
 #pragma 数据请求
 - (void)fatchRate
 {

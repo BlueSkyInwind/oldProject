@@ -611,6 +611,8 @@
 		8499BF881F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */; };
 		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
 		8499BF8B1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
+		84A5696D1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */; };
+		84A5696E1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */; };
 		84A6350E1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
 		84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
@@ -2349,6 +2351,8 @@
 		8499BF851F4FFDB700F193F9 /* UserBankCardListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserBankCardListViewController.h; sourceTree = "<group>"; };
 		8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserBankCardListViewController.m; sourceTree = "<group>"; };
 		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
+		84A5696B1F983AFC003A870E /* LapseDiscountTicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LapseDiscountTicketViewController.h; sourceTree = "<group>"; };
+		84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LapseDiscountTicketViewController.m; sourceTree = "<group>"; };
 		84A6350C1F00F8B800146A8A /* MobilePhoneOperatorParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobilePhoneOperatorParamModel.h; sourceTree = "<group>"; };
 		84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobilePhoneOperatorParamModel.m; sourceTree = "<group>"; };
 		84A6350F1F00FCA200146A8A /* AuthenticationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewModel.h; sourceTree = "<group>"; };
@@ -3768,6 +3772,8 @@
 				0F920C121BCE549900AA9A31 /* MyCardsViewController.xib */,
 				1A6E69EE1C7199A000053A75 /* DiscountTicketController.h */,
 				1A6E69EF1C7199A000053A75 /* DiscountTicketController.m */,
+				84A5696B1F983AFC003A870E /* LapseDiscountTicketViewController.h */,
+				84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */,
 				1A6AEDD81C72B5BE00D48C6A /* TicketDetailController.h */,
 				1A6AEDD91C72B5BE00D48C6A /* TicketDetailController.m */,
 				1A762F6C1C1FBE4700964719 /* RepayRecordController.h */,
@@ -6335,6 +6341,7 @@
 				636B1BA31C30DBCB00450358 /* SMSViewModel.m in Sources */,
 				63A24D2F1BE10F4A0036E8EF /* GetMoneyStateUserBean.m in Sources */,
 				638A170A1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m in Sources */,
+				84A5696D1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
 				0F647E041BE6F2740002D2DF /* RegDetailViewController.m in Sources */,
 				1AEDCF1F1C197F5000014A87 /* RepaymentHelpCell.m in Sources */,
 				638A16F21E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m in Sources */,
@@ -6657,6 +6664,7 @@
 				CCDEDF6A1EEA9271009CEC32 /* ProductProtocolParamModel.m in Sources */,
 				CC0DF9BB1EA5B1090024841A /* CheckFalseView.m in Sources */,
 				8438F7191EE163690089E121 /* ChangePasswordViewModel.m in Sources */,
+				84A5696E1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
 				CC0DF9BC1EA5B1090024841A /* MsgViewCell.m in Sources */,
 				CC0DF9BD1EA5B1090024841A /* CheckViewController.m in Sources */,
 				CC0DF9BE1EA5B1090024841A /* Custom_BaseInfoResult.m in Sources */,
