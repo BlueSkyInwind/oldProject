@@ -309,7 +309,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     checkSuccess.frame = CGRectMake(0, 0,_k_w, _k_h);
 //    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.0f元",[_drawingsInfoModel.actualAmount floatValue],[_drawingsInfoModel.totalFee floatValue]];
 
-    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,费用详情见协议",[_drawingsInfoModel.actualAmount floatValue]];
+    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.2f元,费用详情见协议",[_drawingsInfoModel.actualAmount floatValue]];
     
     [self changeDisplayLabelTextColor:_drawingsInfoModel.totalFee];
 
@@ -352,7 +352,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5,timeLimitText.length - 5)];
         checkSuccess.termLabel.attributedText = attStr;
         
-        NSString *amountText = [NSString stringWithFormat:@"到期还款: %.0f元", [_drawingsInfoModel.repaymentAmount floatValue]];
+        NSString *amountText = [NSString stringWithFormat:@"到期还款: %.2f元", [_drawingsInfoModel.repaymentAmount floatValue]];
         NSMutableAttributedString *amountStr = [[NSMutableAttributedString alloc] initWithString:amountText];
         [amountStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5,amountText.length - 5)];
         checkSuccess.jsdMonayLabel.attributedText = amountStr;
@@ -476,7 +476,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 -(void)refreshWeekAmount:(SalaryDrawingsFeeInfoModel *)feeInfoModel{
     
 //    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.0f元",[_drawingsInfoModel.actualAmount floatValue],[feeInfoModel.totalFee floatValue]];
-    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,费用详情见协议",[_drawingsInfoModel.actualAmount floatValue]];
+    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.2f元,费用详情见协议",[_drawingsInfoModel.actualAmount floatValue]];
     [self changeDisplayLabelTextColor:feeInfoModel.totalFee];
     checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:"];

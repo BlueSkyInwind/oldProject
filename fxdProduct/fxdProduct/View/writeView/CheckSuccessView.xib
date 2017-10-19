@@ -105,20 +105,20 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7t-QR-oKd">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="借款期限:14天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scX-Qs-WOB">
-                                    <rect key="frame" x="123" y="5" width="130" height="20"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借款期限:14天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scX-Qs-WOB">
+                                    <rect key="frame" x="113" y="5" width="150" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="129" id="f7u-PQ-ue0"/>
+                                        <constraint firstAttribute="width" constant="150" id="f7u-PQ-ue0"/>
                                         <constraint firstAttribute="height" constant="20" id="hCM-Di-hjK"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到期还款:1000元" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zI-XD-HtS">
-                                    <rect key="frame" x="123" y="30" width="130" height="20"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到期还款:1000.00元" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zI-XD-HtS">
+                                    <rect key="frame" x="113" y="30" width="150" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="130" id="Ud0-Hu-SRZ"/>
+                                        <constraint firstAttribute="width" constant="150" id="Ud0-Hu-SRZ"/>
                                         <constraint firstAttribute="height" constant="20" id="zt9-hj-YbZ"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
