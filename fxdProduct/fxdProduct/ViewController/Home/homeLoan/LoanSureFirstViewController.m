@@ -37,12 +37,15 @@
     self.navigationItem.title = @"借款申请确认";
     chooseIndex = 1;
     [self addBackItem];
-    [self obtainDiscountTicket:^(DiscountTicketModel *discountTicketModel) {
-        if (discountTicketModel.valid != nil && discountTicketModel.valid.count != 0) {
-            [self addDiscountCoupons:discountTicketModel.valid[0]];
-        }
-    }];
-
+    
+    if ([_productId isEqualToString:SalaryLoan]) {
+        [self obtainDiscountTicket:^(DiscountTicketModel *discountTicketModel) {
+            if (discountTicketModel.valid != nil && discountTicketModel.valid.count != 0) {
+                [self addDiscountCoupons:discountTicketModel.valid[0]];
+            }
+        }];
+    }
+    
     [Tool setCorner:self.sureBtn borderColor:[UIColor clearColor]];
     NSString *str = self.agreementLabel.text;
     NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
@@ -164,7 +167,6 @@
 }
 
 -(void)setUpProductData:(ApplicaitonViewInfoModel *)applicationVM{
-    
 //    [self.productLogo sd_setImageWithURL:[NSURL URLWithString:applicationVM.icon] placeholderImage:[UIImage imageNamed:@"placeholderImage_Icon"] options:SDWebImageRefreshCached];
     [self.productLogo sd_setImageWithURL:[NSURL URLWithString:applicationVM.icon] placeholderImage:[UIImage imageNamed:@"placeholderImage_Icon"] options:SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
     } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {

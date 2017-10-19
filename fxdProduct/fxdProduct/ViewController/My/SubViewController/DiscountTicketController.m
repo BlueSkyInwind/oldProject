@@ -8,8 +8,7 @@
 
 #import "DiscountTicketController.h"
 #import "TicketCell.h"
-#import "TicketDetailController.h"
-#import "RedpacketBaseClass.h"
+#import "RedPacketTicketModel.h"
 #import "RepayWeeklyRecordViewModel.h"
 #import "InvitationViewController.h"
 #import "DiscountTicketModel.h"
@@ -18,8 +17,8 @@
 @interface DiscountTicketController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UIView *NoneView;
-    RedpacketBaseClass *_redPacketParse;
-    NSMutableArray *_validRedPacketArr;
+    RedPacketTicketModel *_redPacketTicketM;
+    NSMutableArray *_validTicketArr;
     DiscountTicketModel * discountTicketModel;
 }
 @end
@@ -36,26 +35,27 @@
     [self createTableView];
     [self createNoneView];
     [self createbottomView];
-    _validRedPacketArr = [NSMutableArray array];
+    _validTicketArr = [NSMutableArray array];
     //    [self fatchRedpacket];
 }
 
 - (void)fatchRedpacket
 {
-    if (_validRedPacketArr.count > 0) {
-        [_validRedPacketArr removeAllObjects];
+    if (_validTicketArr.count > 0) {
+        [_validTicketArr removeAllObjects];
     }
     RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
     [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
         [self.tableView.mj_header endRefreshing];
-        _redPacketParse = [RedpacketBaseClass modelObjectWithDictionary:returnValue];
-        for (RedpacketResult *result in _redPacketParse.result) {
-            if (result.valid) {
-                [_validRedPacketArr addObject:result];
+         BaseResultModel *  baseModel = [[BaseResultModel alloc] initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseModel.flag isEqualToString:@"0000"]) {
+            _redPacketTicketM = [[RedPacketTicketModel alloc]initWithDictionary:(NSDictionary *)baseModel.result error:nil];
+            for (RedpacketDetailModel *redpacketDetailM in _redPacketTicketM.inValidRedPacket) {
+                if ([redpacketDetailM.is_valid_ boolValue]) {
+                    [_validTicketArr addObject:redpacketDetailM];
+                }
             }
-        }
-        if ([_redPacketParse.flag isEqualToString:@"0000"]) {
-            if (_validRedPacketArr.count < 1) {
+            if (_validTicketArr.count < 1) {
                 NoneView.hidden = NO;
             }else {
                 NoneView.hidden = YES;
@@ -63,23 +63,22 @@
             }
         } else {
             NoneView.hidden = NO;
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_redPacketParse.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseModel.msg];
         }
-        DLog(@"%@",_redPacketParse);
     } WithFaileBlock:^{
         NoneView.hidden = NO;
     }];
     [repayWeeklyRecordViewModel getUserRedpacketList];
 }
 
--(void)obtainDiscountTicket:(void(^)(DiscountTicketModel * discountTicketModel))finish{
+-(void)obtainDiscountTicket{
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
     [applicationVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
             DiscountTicketModel * discountTicketM = [[DiscountTicketModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             discountTicketModel = discountTicketM;
-            finish(discountTicketM);
+            [_validTicketArr arrayByAddingObjectsFromArray:discountTicketM.valid];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
@@ -229,26 +228,28 @@
 {
     return 1;
 }
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return _validRedPacketArr.count;
+    return _validTicketArr.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TicketCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    RedpacketResult *resultParse = [_validRedPacketArr objectAtIndex:indexPath.section];
-    [cell setValues:resultParse];
+    id resultParse = [_validTicketArr objectAtIndex:indexPath.section];
+    if ([resultParse isKindOfClass:[RedpacketDetailModel class]]) {
+        [cell setValues:resultParse];
+    }
+    if ([resultParse isKindOfClass:[DiscountTicketDetailModel class]]) {
+        [cell setInvailsValues:resultParse];
+    }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TicketDetailController *ticket=[TicketDetailController new];
-    RedpacketResult *resultParse = [_validRedPacketArr objectAtIndex:indexPath.section];
-    ticket.redPacketModel = resultParse;
-    [self.navigationController pushViewController:ticket animated:YES];
+
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

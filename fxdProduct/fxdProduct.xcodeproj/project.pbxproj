@@ -63,7 +63,6 @@
 		1A45A3F01CAA7002001BC841 /* BankCardInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A45A3EF1CAA7002001BC841 /* BankCardInfoModel.m */; };
 		1A5A69C31BF1ED7700250317 /* DataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A5A69C21BF1ED7700250317 /* DataBaseManager.m */; };
 		1A686DB01C1E961C009227A9 /* NextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A686DAE1C1E961C009227A9 /* NextViewCell.m */; };
-		1A6AEDDA1C72B5BE00D48C6A /* TicketDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6AEDD91C72B5BE00D48C6A /* TicketDetailController.m */; };
 		1A6AEDDE1C72BC3C00D48C6A /* TicketExplainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6AEDDC1C72BC3C00D48C6A /* TicketExplainCell.m */; };
 		1A6AEDDF1C72BC3C00D48C6A /* TicketExplainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A6AEDDD1C72BC3C00D48C6A /* TicketExplainCell.xib */; };
 		1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6E69EF1C7199A000053A75 /* DiscountTicketController.m */; };
@@ -335,9 +334,6 @@
 		638A170B1E517D9F00AB8AB6 /* LOTAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DF1E517D9F00AB8AB6 /* LOTAnimationView.m */; };
 		638A170D1E517E8C00AB8AB6 /* vcTransition1.json in Resources */ = {isa = PBXBuildFile; fileRef = 638A170C1E517E8C00AB8AB6 /* vcTransition1.json */; };
 		638C3F191CF2CB08000446A7 /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F181CF2CB08000446A7 /* UIViewController+KNSemiModal.m */; };
-		638C3F221CF2DE28000446A7 /* RedpacketBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F1D1CF2DE28000446A7 /* RedpacketBaseClass.m */; };
-		638C3F231CF2DE28000446A7 /* RedpacketExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F1F1CF2DE28000446A7 /* RedpacketExt.m */; };
-		638C3F241CF2DE28000446A7 /* RedpacketResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F211CF2DE28000446A7 /* RedpacketResult.m */; };
 		638C3F271CF2F470000446A7 /* PCCircleViewConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F261CF2F470000446A7 /* PCCircleViewConst.m */; };
 		638C3F2A1CF303D0000446A7 /* SelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F291CF303D0000446A7 /* SelectTableViewController.m */; };
 		638C3F2E1CF53662000446A7 /* RepayMentAvailableRedpackets.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F2D1CF53662000446A7 /* RepayMentAvailableRedpackets.m */; };
@@ -621,6 +617,8 @@
 		84CC899A1F593C1E00537910 /* ApplicaitonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC89981F593C1E00537910 /* ApplicaitonModel.m */; };
 		84CC899E1F5973D700537910 /* DrawingsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC899D1F5973D700537910 /* DrawingsInfoModel.m */; };
 		84CC899F1F5973D700537910 /* DrawingsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC899D1F5973D700537910 /* DrawingsInfoModel.m */; };
+		84D1846F1F98962A00A0B25F /* RedPacketTicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D1846E1F98962A00A0B25F /* RedPacketTicketModel.m */; };
+		84D184701F98962A00A0B25F /* RedPacketTicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D1846E1F98962A00A0B25F /* RedPacketTicketModel.m */; };
 		84D715B41F7894B200F433E5 /* MGBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715A91F78936D00F433E5 /* MGBaseKit.framework */; };
 		84D715B61F7894C800F433E5 /* MGBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715A91F78936D00F433E5 /* MGBaseKit.framework */; };
 		84D715EF1F78CF5A00F433E5 /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715ED1F78CF3700F433E5 /* MGBankCard.framework */; };
@@ -789,7 +787,6 @@
 		CC0DF9CE1EA5B1090024841A /* GetMoneyResultResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D462E1BD097B900874064 /* GetMoneyResultResult.m */; };
 		CC0DF9CF1EA5B1090024841A /* LoanProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F2548B1E49CD2C00852CF1 /* LoanProcessViewController.m */; };
 		CC0DF9D01EA5B1090024841A /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C231BE063A90036E8EF /* UIImage+Color.m */; };
-		CC0DF9D11EA5B1090024841A /* RedpacketBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F1D1CF2DE28000446A7 /* RedpacketBaseClass.m */; };
 		CC0DF9D21EA5B1090024841A /* TicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB0F5A81CF2D20E00F3DF06 /* TicketCell.m */; };
 		CC0DF9D31EA5B1090024841A /* UserSureRefuseResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06503F1BE219BF000DE94D /* UserSureRefuseResult.m */; };
 		CC0DF9D41EA5B1090024841A /* NSString+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 63832C8B1CB7530400C6F194 /* NSString+AES.m */; };
@@ -803,7 +800,6 @@
 		CC0DF9DC1EA5B1090024841A /* YYTextUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E51D98F7E9006F58F3 /* YYTextUtilities.m */; };
 		CC0DF9DD1EA5B1090024841A /* LOTShapeTrimPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DC1E517D9F00AB8AB6 /* LOTShapeTrimPath.m */; };
 		CC0DF9DE1EA5B1090024841A /* P2PViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B142AE1D9A5C2800C43B3F /* P2PViewController.m */; };
-		CC0DF9DF1EA5B1090024841A /* RedpacketResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F211CF2DE28000446A7 /* RedpacketResult.m */; };
 		CC0DF9E01EA5B1090024841A /* UserSureRefuseBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06503D1BE219BF000DE94D /* UserSureRefuseBaseClass.m */; };
 		CC0DF9E21EA5B1090024841A /* HomeBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50E571E69381B0035EE4F /* HomeBannerModel.m */; };
 		CC0DF9E31EA5B1090024841A /* ProductListExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 6379639A1CABAFE9002A5910 /* ProductListExt.m */; };
@@ -862,7 +858,6 @@
 		CC0DFA1D1EA5B1090024841A /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9CD1BF08CEE00FD23A8 /* Model.m */; };
 		CC0DFA1E1EA5B1090024841A /* GetMoneyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D46231BCF820F00874064 /* GetMoneyInfo.m */; };
 		CC0DFA1F1EA5B1090024841A /* UIColor+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B251C2000E900450358 /* UIColor+Extend.m */; };
-		CC0DFA211EA5B1090024841A /* TicketDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6AEDD91C72B5BE00D48C6A /* TicketDetailController.m */; };
 		CC0DFA221EA5B1090024841A /* UIViewController+LewPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636E61D76A72A00E93289 /* UIViewController+LewPopupViewController.m */; };
 		CC0DFA231EA5B1090024841A /* FXDUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B142A71D9A0D7300C43B3F /* FXDUserInfo.m */; };
 		CC0DFA241EA5B1090024841A /* SquareRepaymentAvailableRedpackets.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F321CF564A4000446A7 /* SquareRepaymentAvailableRedpackets.m */; };
@@ -928,7 +923,6 @@
 		CC0DFA631EA5B1090024841A /* UIBarButtonItem+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C171BE063A90036E8EF /* UIBarButtonItem+Extend.m */; };
 		CC0DFA641EA5B1090024841A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 636EE3021B662ABB00A1A3ED /* main.m */; };
 		CC0DFA651EA5B1090024841A /* LOTMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16991E517D9F00AB8AB6 /* LOTMaskLayer.m */; };
-		CC0DFA661EA5B1090024841A /* RedpacketExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F1F1CF2DE28000446A7 /* RedpacketExt.m */; };
 		CC0DFA671EA5B1090024841A /* HHAlertViewCust.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B1B1C1FDDD100450358 /* HHAlertViewCust.m */; };
 		CC0DFA681EA5B1090024841A /* CustomerBaseInfoBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830E91CBB82C30005C4CD /* CustomerBaseInfoBaseClass.m */; };
 		CC0DFA691EA5B1090024841A /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 633DF7871BDE22BF00A3998D /* MoreViewController.m */; };
@@ -1452,8 +1446,6 @@
 		1A5A69C21BF1ED7700250317 /* DataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseManager.m; sourceTree = "<group>"; };
 		1A686DAD1C1E961C009227A9 /* NextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextViewCell.h; sourceTree = "<group>"; };
 		1A686DAE1C1E961C009227A9 /* NextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextViewCell.m; sourceTree = "<group>"; };
-		1A6AEDD81C72B5BE00D48C6A /* TicketDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailController.h; sourceTree = "<group>"; };
-		1A6AEDD91C72B5BE00D48C6A /* TicketDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailController.m; sourceTree = "<group>"; };
 		1A6AEDDB1C72BC3C00D48C6A /* TicketExplainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketExplainCell.h; sourceTree = "<group>"; };
 		1A6AEDDC1C72BC3C00D48C6A /* TicketExplainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketExplainCell.m; sourceTree = "<group>"; };
 		1A6AEDDD1C72BC3C00D48C6A /* TicketExplainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketExplainCell.xib; sourceTree = "<group>"; };
@@ -1946,12 +1938,6 @@
 		638A170C1E517E8C00AB8AB6 /* vcTransition1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = vcTransition1.json; sourceTree = "<group>"; };
 		638C3F171CF2CB08000446A7 /* UIViewController+KNSemiModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KNSemiModal.h"; sourceTree = "<group>"; };
 		638C3F181CF2CB08000446A7 /* UIViewController+KNSemiModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KNSemiModal.m"; sourceTree = "<group>"; };
-		638C3F1C1CF2DE28000446A7 /* RedpacketBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketBaseClass.h; sourceTree = "<group>"; };
-		638C3F1D1CF2DE28000446A7 /* RedpacketBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketBaseClass.m; sourceTree = "<group>"; };
-		638C3F1E1CF2DE28000446A7 /* RedpacketExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketExt.h; sourceTree = "<group>"; };
-		638C3F1F1CF2DE28000446A7 /* RedpacketExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketExt.m; sourceTree = "<group>"; };
-		638C3F201CF2DE28000446A7 /* RedpacketResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedpacketResult.h; sourceTree = "<group>"; };
-		638C3F211CF2DE28000446A7 /* RedpacketResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedpacketResult.m; sourceTree = "<group>"; };
 		638C3F251CF2F470000446A7 /* PCCircleViewConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PCCircleViewConst.h; path = GestureUnlock/PCCircleViewConst.h; sourceTree = "<group>"; };
 		638C3F261CF2F470000446A7 /* PCCircleViewConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PCCircleViewConst.m; path = GestureUnlock/PCCircleViewConst.m; sourceTree = "<group>"; };
 		638C3F281CF303D0000446A7 /* SelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTableViewController.h; sourceTree = "<group>"; };
@@ -2361,6 +2347,8 @@
 		84CC89981F593C1E00537910 /* ApplicaitonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicaitonModel.m; sourceTree = "<group>"; };
 		84CC899C1F5973D700537910 /* DrawingsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingsInfoModel.h; sourceTree = "<group>"; };
 		84CC899D1F5973D700537910 /* DrawingsInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingsInfoModel.m; sourceTree = "<group>"; };
+		84D1846D1F98962A00A0B25F /* RedPacketTicketModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedPacketTicketModel.h; sourceTree = "<group>"; };
+		84D1846E1F98962A00A0B25F /* RedPacketTicketModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedPacketTicketModel.m; sourceTree = "<group>"; };
 		84D715A91F78936D00F433E5 /* MGBaseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBaseKit.framework; sourceTree = "<group>"; };
 		84D715ED1F78CF3700F433E5 /* MGBankCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBankCard.framework; sourceTree = "<group>"; };
 		84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGBankCardResource.bundle; sourceTree = "<group>"; };
@@ -3774,8 +3762,6 @@
 				1A6E69EF1C7199A000053A75 /* DiscountTicketController.m */,
 				84A5696B1F983AFC003A870E /* LapseDiscountTicketViewController.h */,
 				84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */,
-				1A6AEDD81C72B5BE00D48C6A /* TicketDetailController.h */,
-				1A6AEDD91C72B5BE00D48C6A /* TicketDetailController.m */,
 				1A762F6C1C1FBE4700964719 /* RepayRecordController.h */,
 				1A762F6D1C1FBE4700964719 /* RepayRecordController.m */,
 				1A762F6E1C1FBE4700964719 /* RepayRecordController.xib */,
@@ -4045,12 +4031,6 @@
 		638C3F1A1CF2DDB1000446A7 /* DiscountModel */ = {
 			isa = PBXGroup;
 			children = (
-				638C3F1C1CF2DE28000446A7 /* RedpacketBaseClass.h */,
-				638C3F1D1CF2DE28000446A7 /* RedpacketBaseClass.m */,
-				638C3F1E1CF2DE28000446A7 /* RedpacketExt.h */,
-				638C3F1F1CF2DE28000446A7 /* RedpacketExt.m */,
-				638C3F201CF2DE28000446A7 /* RedpacketResult.h */,
-				638C3F211CF2DE28000446A7 /* RedpacketResult.m */,
 			);
 			path = DiscountModel;
 			sourceTree = "<group>";
@@ -5209,6 +5189,8 @@
 			children = (
 				84E306CD1F972C4000C97D72 /* DiscountTicketModel.h */,
 				84E306CE1F972C4000C97D72 /* DiscountTicketModel.m */,
+				84D1846D1F98962A00A0B25F /* RedPacketTicketModel.h */,
+				84D1846E1F98962A00A0B25F /* RedPacketTicketModel.m */,
 			);
 			path = DiscountTicket;
 			sourceTree = "<group>";
@@ -6173,7 +6155,6 @@
 				CC4BB60F1F17712E0027A0AA /* LevelDescriptionView.m in Sources */,
 				63F2548D1E49CD2C00852CF1 /* LoanProcessViewController.m in Sources */,
 				63A24C661BE063A90036E8EF /* UIImage+Color.m in Sources */,
-				638C3F221CF2DE28000446A7 /* RedpacketBaseClass.m in Sources */,
 				1AB0F5AA1CF2D20E00F3DF06 /* TicketCell.m in Sources */,
 				CCCDA8881EE028DD00B48DFF /* SendSmsParamModel.m in Sources */,
 				0F0650461BE219BF000DE94D /* UserSureRefuseResult.m in Sources */,
@@ -6193,7 +6174,6 @@
 				63FC25011D98F7E9006F58F3 /* YYTextUtilities.m in Sources */,
 				638A17091E517D9F00AB8AB6 /* LOTShapeTrimPath.m in Sources */,
 				63B142AF1D9A5C2800C43B3F /* P2PViewController.m in Sources */,
-				638C3F241CF2DE28000446A7 /* RedpacketResult.m in Sources */,
 				CCCE40CD1EE7D61700E3F102 /* SendSmsParam.m in Sources */,
 				0F0650451BE219BF000DE94D /* UserSureRefuseBaseClass.m in Sources */,
 				63C50E581E69381B0035EE4F /* HomeBannerModel.m in Sources */,
@@ -6270,7 +6250,6 @@
 				636B1B261C2000E900450358 /* UIColor+Extend.m in Sources */,
 				CCA056BC1EBB3ECB00CB5F29 /* SesameCreditViewController.m in Sources */,
 				84420A611ED678E200DFBFE0 /* LoginView.m in Sources */,
-				1A6AEDDA1C72B5BE00D48C6A /* TicketDetailController.m in Sources */,
 				CCA8C3A01F6264CA00DCCAF9 /* CheckingViewController.swift in Sources */,
 				637636EC1D76A72A00E93289 /* UIViewController+LewPopupViewController.m in Sources */,
 				63B142A81D9A0D7300C43B3F /* FXDUserInfo.m in Sources */,
@@ -6356,7 +6335,6 @@
 				63A24C621BE063A90036E8EF /* UIBarButtonItem+Extend.m in Sources */,
 				636EE3031B662ABB00A1A3ED /* main.m in Sources */,
 				638A16EC1E517D9F00AB8AB6 /* LOTMaskLayer.m in Sources */,
-				638C3F231CF2DE28000446A7 /* RedpacketExt.m in Sources */,
 				636B1B1E1C1FDDD100450358 /* HHAlertViewCust.m in Sources */,
 				634830F11CBB82C30005C4CD /* CustomerBaseInfoBaseClass.m in Sources */,
 				633DF7891BDE22BF00A3998D /* MoreViewController.m in Sources */,
@@ -6492,6 +6470,7 @@
 				0FFA916F1C58BD18008D91D2 /* CheckSuccessView.m in Sources */,
 				CCCE40BD1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */,
 				6303C11C1C1816F000CD14A7 /* WTCameraViewController.m in Sources */,
+				84D1846F1F98962A00A0B25F /* RedPacketTicketModel.m in Sources */,
 				636B1B641C2790F400450358 /* RepayRecord.m in Sources */,
 				63FC24ED1D98F7E9006F58F3 /* YYTextContainerView.m in Sources */,
 				630CC0971BC8E14200AE9690 /* QueryRepaymentsData.m in Sources */,
@@ -6634,6 +6613,7 @@
 				CC0DF9A11EA5B1090024841A /* RegionCodeBaseClass.m in Sources */,
 				CC0DF9A21EA5B1090024841A /* LOTAnimatableLayer.m in Sources */,
 				CC0DF9A31EA5B1090024841A /* NSNumber+YYAdd.m in Sources */,
+				84D184701F98962A00A0B25F /* RedPacketTicketModel.m in Sources */,
 				CC0DF9A41EA5B1090024841A /* RepayMentViewModel.m in Sources */,
 				CC0DF9A61EA5B1090024841A /* LOTComposition.m in Sources */,
 				CC0DF9A71EA5B1090024841A /* SSKeychainQuery.m in Sources */,
@@ -6694,7 +6674,6 @@
 				CC0DF9CF1EA5B1090024841A /* LoanProcessViewController.m in Sources */,
 				CCCC0A8F1F677B9B007E1EB0 /* UserDataResult.m in Sources */,
 				CC0DF9D01EA5B1090024841A /* UIImage+Color.m in Sources */,
-				CC0DF9D11EA5B1090024841A /* RedpacketBaseClass.m in Sources */,
 				CC0DF9D21EA5B1090024841A /* TicketCell.m in Sources */,
 				CC0DF9D31EA5B1090024841A /* UserSureRefuseResult.m in Sources */,
 				CC3197901ED911980083F263 /* WhiteRefuseView.m in Sources */,
@@ -6711,7 +6690,6 @@
 				CC0DF9DC1EA5B1090024841A /* YYTextUtilities.m in Sources */,
 				CC0DF9DD1EA5B1090024841A /* LOTShapeTrimPath.m in Sources */,
 				CC0DF9DE1EA5B1090024841A /* P2PViewController.m in Sources */,
-				CC0DF9DF1EA5B1090024841A /* RedpacketResult.m in Sources */,
 				848394271EDEC96C003EF4EC /* HomePopParam.m in Sources */,
 				CC0DF9E01EA5B1090024841A /* UserSureRefuseBaseClass.m in Sources */,
 				CC0DF9E21EA5B1090024841A /* HomeBannerModel.m in Sources */,
@@ -6782,7 +6760,6 @@
 				84DFBED01F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */,
 				CC0DFA1E1EA5B1090024841A /* GetMoneyInfo.m in Sources */,
 				CC0DFA1F1EA5B1090024841A /* UIColor+Extend.m in Sources */,
-				CC0DFA211EA5B1090024841A /* TicketDetailController.m in Sources */,
 				CC0DFA221EA5B1090024841A /* UIViewController+LewPopupViewController.m in Sources */,
 				CC0DFA231EA5B1090024841A /* FXDUserInfo.m in Sources */,
 				CC0DFA241EA5B1090024841A /* SquareRepaymentAvailableRedpackets.m in Sources */,
@@ -6863,7 +6840,6 @@
 				CC0DFA631EA5B1090024841A /* UIBarButtonItem+Extend.m in Sources */,
 				CC0DFA641EA5B1090024841A /* main.m in Sources */,
 				CC0DFA651EA5B1090024841A /* LOTMaskLayer.m in Sources */,
-				CC0DFA661EA5B1090024841A /* RedpacketExt.m in Sources */,
 				CC0DFA671EA5B1090024841A /* HHAlertViewCust.m in Sources */,
 				CC0DFA681EA5B1090024841A /* CustomerBaseInfoBaseClass.m in Sources */,
 				CC0DFA691EA5B1090024841A /* MoreViewController.m in Sources */,

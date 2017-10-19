@@ -16,3 +16,5 @@
 @implementation DiscountTicketDetailModel
 
 @end
+
+
