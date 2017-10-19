@@ -18,9 +18,10 @@
 {
     UIView *NoneView;
     RedPacketTicketModel *_redPacketTicketM;
-    NSMutableArray *_validTicketArr;
     DiscountTicketModel * discountTicketModel;
+    
 }
+@property (nonatomic,strong)NSMutableArray * validTicketArr;
 @end
 
 @implementation DiscountTicketController
@@ -33,29 +34,38 @@
     [self addBackItem];
     [self addHelpItem];
     [self createTableView];
-    [self createNoneView];
     [self createbottomView];
     _validTicketArr = [NSMutableArray array];
-    //    [self fatchRedpacket];
+    
+    [self addObserver:self forKeyPath:@"validTicketArr" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"validTicketArr"]) {
+        if (_validTicketArr.count == 0 || _validTicketArr == nil) {
+            [self createNoneView];
+        }
+    }
 }
 
 - (void)fatchRedpacket
 {
-    if (_validTicketArr.count > 0) {
-        [_validTicketArr removeAllObjects];
+    if (self.validTicketArr.count > 0) {
+        [self.validTicketArr removeAllObjects];
     }
+    [self obtainDiscountTicket];
     RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
     [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
         [self.tableView.mj_header endRefreshing];
          BaseResultModel *  baseModel = [[BaseResultModel alloc] initWithDictionary:(NSDictionary *)returnValue error:nil];
         if ([baseModel.flag isEqualToString:@"0000"]) {
             _redPacketTicketM = [[RedPacketTicketModel alloc]initWithDictionary:(NSDictionary *)baseModel.result error:nil];
-            for (RedpacketDetailModel *redpacketDetailM in _redPacketTicketM.inValidRedPacket) {
+            for (RedpacketDetailModel *redpacketDetailM in _redPacketTicketM.validRedPacket) {
                 if ([redpacketDetailM.is_valid_ boolValue]) {
-                    [_validTicketArr addObject:redpacketDetailM];
+                    [self.validTicketArr addObject:redpacketDetailM];
                 }
             }
-            if (_validTicketArr.count < 1) {
+            if (self.validTicketArr.count < 1) {
                 NoneView.hidden = NO;
             }else {
                 NoneView.hidden = YES;
@@ -78,7 +88,10 @@
         if ([baseResultM.errCode isEqualToString:@"0"]){
             DiscountTicketModel * discountTicketM = [[DiscountTicketModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             discountTicketModel = discountTicketM;
-            [_validTicketArr arrayByAddingObjectsFromArray:discountTicketM.valid];
+            for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.valid) {
+                    [self.validTicketArr addObject:discountTicketDetailM];
+            }
+            [self.tableView reloadData];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
@@ -241,7 +254,7 @@
         [cell setValues:resultParse];
     }
     if ([resultParse isKindOfClass:[DiscountTicketDetailModel class]]) {
-        [cell setInvailsValues:resultParse];
+        [cell setVailValues:resultParse];
     }
     return cell;
 }
@@ -251,7 +264,6 @@
 
     
 }
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 142;

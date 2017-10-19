@@ -14,7 +14,7 @@
 @interface RedPacketTicketModel : JSONModel
 
 @property(nonatomic,strong)NSArray<RedpacketDetailModel,Optional> * inValidRedPacket;
-@property(nonatomic,strong)NSString<RedpacketDetailModel,Optional> * validRedPacket;
+@property(nonatomic,strong)NSArray<RedpacketDetailModel,Optional> * validRedPacket;
 
 @end
 

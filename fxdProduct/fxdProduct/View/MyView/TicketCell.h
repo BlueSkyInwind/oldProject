@@ -20,5 +20,6 @@
 
 -(void)setValues:(RedPacketTicketModel *)redPacketModel;
 - (void)setInvailsValues:(DiscountTicketDetailModel *)discountTicketDetailM;
+- (void)setVailValues:(DiscountTicketDetailModel *)discountTicketDetailM;
 
 @end
