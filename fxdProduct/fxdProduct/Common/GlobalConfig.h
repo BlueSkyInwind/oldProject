@@ -38,6 +38,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define UI_IS_IPHONE            ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 #define UI_IS_IPHONE5           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0)
 #define UI_IS_IPHONE6P            (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 736.0)
+#define UI_IS_IPHONE6            (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 667.0)
 #define UI_IS_IPHONE4           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 480.0)
 
 #define UI_IS_IPAD           ([[UIScreen mainScreen] bounds].size.height == 768.0)
@@ -209,7 +210,7 @@ UIKIT_EXTERN NSString * const       _CapitalLoan_url;                  //资金�
 UIKIT_EXTERN NSString * const       _CapitalLoanBack_url;                  //联联绑卡回调地址
 UIKIT_EXTERN NSString * const       _ShanLinBack_url;                  //联联绑卡返回回调地址
 UIKIT_EXTERN NSString * const       _CapitalLoanFail_url;                  //app 连连绑卡页面用户放弃操作接口
-
+UIKIT_EXTERN NSString * const       _DiscountTicketList_url;                  //免息券接口
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码
 UIKIT_EXTERN NSString * const   CODE_FINDPASS;         ///密码找回验证码

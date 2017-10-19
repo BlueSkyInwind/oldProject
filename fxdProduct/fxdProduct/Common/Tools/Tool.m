@@ -74,6 +74,7 @@
     return dateStr;
 }
 
+
 + (NSString *)getNowTime
 {
     NSDate *date = [NSDate date];
@@ -110,6 +111,7 @@
     return timeStr;
 }
 
+
 + (NSString *)timestampToTimeFormat:(NSTimeInterval)timestamp
 {
     //    NSString *longOftimesTamp = [NSString stringWithFormat:@"%.0lf", timestamp];
@@ -134,6 +136,8 @@
     formatter = nil;
     return timeStr;
 }
+
+
 
 + (UInt64)getNowTimeMS
 {

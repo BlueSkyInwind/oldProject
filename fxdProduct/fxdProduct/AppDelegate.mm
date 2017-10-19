@@ -41,7 +41,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
@@ -50,7 +49,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     self.window.rootViewController = [UIViewController new];
     
 //    [self heguiceshi];
-
     [self tripartiteInitialize];
 
     [[IQKeyboardManager sharedManager] setToolbarManageBehaviour:IQAutoToolbarByPosition];

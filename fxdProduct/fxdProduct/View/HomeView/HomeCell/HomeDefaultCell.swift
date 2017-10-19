@@ -1181,7 +1181,6 @@ extension HomeDefaultCell{
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         refuseTabClick(index: indexPath.row)
     }
     

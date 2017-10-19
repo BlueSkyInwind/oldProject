@@ -382,7 +382,6 @@ NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.
 NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
 
 
-
 #pragma mark - 新的api
 
 //社保
@@ -468,6 +467,9 @@ NSString * const    _ShanLinBack_url    =    @"main.html#shanlinBack";
 
 //app 连连绑卡页面用户放弃操作接口
 NSString * const    _CapitalLoanFail_url    =    @"apigw/client/capital/loan/fail";
+
+//免息券接口
+NSString * const    _DiscountTicketList_url    =    @"apigw/client/market/getuserBase";
 
 #pragma mark - 合规接口
 

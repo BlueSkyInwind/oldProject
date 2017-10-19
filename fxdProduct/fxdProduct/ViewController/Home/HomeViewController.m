@@ -903,7 +903,6 @@
     RapidLoanApplicationViewController *controller = [[RapidLoanApplicationViewController alloc]init];
     controller.productId = productId;
     controller.dataArray = dataArray;
- 
     [self.navigationController pushViewController:controller animated:false];
 }
 @end
