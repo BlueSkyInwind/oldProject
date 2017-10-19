@@ -44,7 +44,7 @@
         }
     } failure:^(EnumServerStatus status, id object) {
         if (self.faileBlock) {
-            [self faileBlock];
+            self.faileBlock();
         }
     }];
 }

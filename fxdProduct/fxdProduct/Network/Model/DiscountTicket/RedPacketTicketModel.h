@@ -25,6 +25,7 @@
 @property(nonatomic,strong)NSString<Optional> * validity_period_from_;
 @property(nonatomic,strong)NSString<Optional> * redpacket_name_;
 @property(nonatomic,strong)NSNumber<Optional> * is_valid_;
+@property(nonatomic,strong)NSNumber<Optional> * is_used_;
 @property(nonatomic,strong)NSString<Optional> * validity_period_to_;
 @property(nonatomic,strong)NSString<Optional> * use_conditions_;
 @property(nonatomic,strong)NSNumber<Optional> * residual_amount_;

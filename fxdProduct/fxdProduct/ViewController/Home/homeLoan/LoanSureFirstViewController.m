@@ -141,7 +141,7 @@
     } WithFaileBlock:^{
         
     }];
-    [applicationVM obtainUserDiscountTicketList:@"1"];
+    [applicationVM obtainUserDiscountTicketList:@"1" displayType:@"1"];
 }
 
 - (YYTextView *)textView

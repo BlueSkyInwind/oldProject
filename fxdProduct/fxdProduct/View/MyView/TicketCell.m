@@ -118,7 +118,14 @@
     self.lblTitle.text = @"红包";
     self.lblTip.text = [NSString stringWithFormat:@"有效期:%@至%@",redPacketModel.validity_period_from_,redPacketModel.validity_period_to_];
     self.userInteractionEnabled = NO;
-
+    if (![redPacketModel.is_valid_ boolValue]) {
+        self.lblOverTimeImageView.hidden = NO;
+        self.lblOverTimeImageView.image=[UIImage imageNamed:@"expired_Coupon_Icon"];
+        self.userInteractionEnabled = NO;
+        if ([redPacketModel.is_used_ boolValue]) {
+            self.lblOverTimeImageView.image=[UIImage imageNamed:@"used_Coupon_Icon"];
+        }
+    }
 }
 
 - (void)setVailValues:(DiscountTicketDetailModel *)discountTicketDetailM

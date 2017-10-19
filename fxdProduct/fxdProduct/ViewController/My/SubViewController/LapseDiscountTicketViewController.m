@@ -23,9 +23,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self addBackItem];
     [self createTableView];
-    if (self.invalidTicketArr.count == 0 || self.invalidTicketArr == nil) {
-        [self.tableView.mj_header beginRefreshing];
-    }
+
 }
 -(void)createTableView
 {
@@ -36,10 +34,10 @@
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:@"TicketCell" bundle:nil] forCellReuseIdentifier:@"cell"];
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(obtainDiscountTicket)];
-    header.automaticallyChangeAlpha = YES;
-    header.lastUpdatedTimeLabel.hidden = YES;
-    self.tableView.mj_header = header;
+//    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(obtainDiscountTicket)];
+//    header.automaticallyChangeAlpha = YES;
+//    header.lastUpdatedTimeLabel.hidden = YES;
+//    self.tableView.mj_header = header;
 }
 -(void)obtainDiscountTicket{
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
@@ -56,14 +54,13 @@
     } WithFaileBlock:^{
         [self.tableView.mj_header endRefreshing];
     }];
-    [applicationVM obtainUserDiscountTicketList:@"1"];
+    [applicationVM obtainUserDiscountTicketList:@"1" displayType:@"2"];
 }
 #pragma mark TableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
 }
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return _invalidTicketArr.count;
@@ -71,8 +68,13 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TicketCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-    DiscountTicketDetailModel * discountTicketDM = [_invalidTicketArr objectAtIndex:indexPath.row];
-    [cell setInvailsValues:discountTicketDM];
+    id resultParse = [_invalidTicketArr objectAtIndex:indexPath.section];
+    if ([resultParse isKindOfClass:[RedpacketDetailModel class]]) {
+        [cell setValues:resultParse];
+    }
+    if ([resultParse isKindOfClass:[DiscountTicketDetailModel class]]) {
+        [cell setInvailsValues:resultParse];
+    }
     return cell;
 }
 

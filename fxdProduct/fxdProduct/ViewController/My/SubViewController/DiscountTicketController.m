@@ -17,11 +17,13 @@
 @interface DiscountTicketController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UIView *NoneView;
+    UIView * bottomView;
     RedPacketTicketModel *_redPacketTicketM;
     DiscountTicketModel * discountTicketModel;
     
 }
 @property (nonatomic,strong)NSMutableArray * validTicketArr;
+@property (nonatomic,strong)NSMutableArray * invalidTicketArr;
 @end
 
 @implementation DiscountTicketController
@@ -34,17 +36,25 @@
     [self addBackItem];
     [self addHelpItem];
     [self createTableView];
-    [self createbottomView];
     _validTicketArr = [NSMutableArray array];
+    _invalidTicketArr = [NSMutableArray array];
     
-    [self addObserver:self forKeyPath:@"validTicketArr" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"validTicketArr"]) {
-        if (_validTicketArr.count == 0 || _validTicketArr == nil) {
-            [self createNoneView];
-        }
+-(void)isDisplayNoneViewAndBottomView{
+    
+    if (_invalidTicketArr.count != 0 &&  _invalidTicketArr != nil) {
+        [self createbottomView];
+    }else{
+        [bottomView removeFromSuperview];
+        bottomView = nil;
+    }
+    
+    if (_validTicketArr.count == 0 && _validTicketArr == nil) {
+        [self createNoneView];
+    }else{
+        [NoneView removeFromSuperview];
+        NoneView = nil;
     }
 }
 
@@ -65,18 +75,18 @@
                     [self.validTicketArr addObject:redpacketDetailM];
                 }
             }
-            if (self.validTicketArr.count < 1) {
-                NoneView.hidden = NO;
-            }else {
-                NoneView.hidden = YES;
-                [self.tableView reloadData];
+            for (RedpacketDetailModel *redpacketDetailM in _redPacketTicketM.inValidRedPacket) {
+                if (![redpacketDetailM.is_valid_ boolValue]) {
+                    [self.invalidTicketArr addObject:redpacketDetailM];
+                }
             }
+            [self.tableView reloadData];
         } else {
-            NoneView.hidden = NO;
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseModel.msg];
         }
+        [self isDisplayNoneViewAndBottomView];
     } WithFaileBlock:^{
-        NoneView.hidden = NO;
+        [self isDisplayNoneViewAndBottomView];
     }];
     [repayWeeklyRecordViewModel getUserRedpacketList];
 }
@@ -91,21 +101,25 @@
             for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.valid) {
                     [self.validTicketArr addObject:discountTicketDetailM];
             }
+            for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.invalid) {
+                [self.invalidTicketArr addObject:discountTicketDetailM];
+            }
             [self.tableView reloadData];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
+        [self isDisplayNoneViewAndBottomView];
     } WithFaileBlock:^{
-        
+        [self isDisplayNoneViewAndBottomView];
     }];
-    [applicationVM obtainUserDiscountTicketList:@"1"];
+    [applicationVM obtainUserDiscountTicketList:@"1" displayType:@"2"];
 }
 -(void)createTableView
 {
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,64, _k_w, _k_h-64) style:UITableViewStyleGrouped];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
-    self.tableView.backgroundColor=rgba(245, 245, 245, 1);
+    self.tableView.backgroundColor=kUIColorFromRGB(0xf2f2f2);
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:@"TicketCell" bundle:nil] forCellReuseIdentifier:@"cell"];
@@ -190,7 +204,7 @@
 -(void)createbottomView{
     
     self.tableView.frame = CGRectMake(0, 64, _k_w, _k_h - 164);
-    UIView * bottomView = [[UIView alloc]init];
+    bottomView = [[UIView alloc]init];
     bottomView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pushInVailDiscountTicketVC)];
     [bottomView addGestureRecognizer:tap];
@@ -228,7 +242,7 @@
 -(void)pushInVailDiscountTicketVC{
     
     LapseDiscountTicketViewController *lapseDiscountTicketVC = [[LapseDiscountTicketViewController alloc] init];
-    lapseDiscountTicketVC.invalidTicketArr = [discountTicketModel.invalid mutableCopy];
+    lapseDiscountTicketVC.invalidTicketArr = self.invalidTicketArr;
     [self.navigationController pushViewController:lapseDiscountTicketVC animated:true];
 }
 -(void)pushInvationFriend{
@@ -276,19 +290,19 @@
         UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 30)];
         view.backgroundColor=[UIColor whiteColor];
         UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, _k_w, 10)];
-        lbl.backgroundColor=rgba(245, 245, 245, 1);
+        lbl.backgroundColor=kUIColorFromRGB(0xf2f2f2);
         [view addSubview:lbl];
         return view;
     }
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 20)];
-    view.backgroundColor=[UIColor whiteColor];
+    view.backgroundColor=kUIColorFromRGB(0xf2f2f2);
     return view;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 20)];
-    view.backgroundColor=[UIColor whiteColor];
+    view.backgroundColor=kUIColorFromRGB(0xf2f2f2);
     return view;
 }
 
