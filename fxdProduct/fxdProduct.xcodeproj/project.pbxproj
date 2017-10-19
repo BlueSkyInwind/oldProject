@@ -4018,13 +4018,6 @@
 			path = source;
 			sourceTree = "<group>";
 		};
-		638C3F1A1CF2DDB1000446A7 /* DiscountModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DiscountModel;
-			sourceTree = "<group>";
-		};
 		638C3F2B1CF53662000446A7 /* RepaymentRedpackets */ = {
 			isa = PBXGroup;
 			children = (
@@ -4517,7 +4510,6 @@
 				6391F7251D3377830097C943 /* BankList */,
 				638C3F2F1CF564A4000446A7 /* SquareRepayment */,
 				638C3F2B1CF53662000446A7 /* RepaymentRedpackets */,
-				638C3F1A1CF2DDB1000446A7 /* DiscountModel */,
 				634830F51CBCA1A90005C4CD /* RegionCode */,
 				637964151CAD1BE0002A5910 /* Liveness */,
 				637963A01CABD0F8002A5910 /* ApprovalAmount */,

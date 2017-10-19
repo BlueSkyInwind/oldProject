@@ -50,7 +50,7 @@
         bottomView = nil;
     }
     
-    if (_validTicketArr.count == 0 && _validTicketArr == nil) {
+    if (_validTicketArr.count == 0 || _validTicketArr == nil) {
         [self createNoneView];
     }else{
         [NoneView removeFromSuperview];
@@ -133,6 +133,7 @@
 
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithTitle:@"使用帮助" style:UIBarButtonItemStylePlain target:self action:@selector(goHelpVCClick)];
     self.navigationItem.rightBarButtonItem = aBarbi;
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
 }
 
 -(void)goHelpVCClick{
@@ -203,14 +204,14 @@
 }
 -(void)createbottomView{
     
-    self.tableView.frame = CGRectMake(0, 64, _k_w, _k_h - 164);
+    self.tableView.frame = CGRectMake(0, 64, _k_w, _k_h - 114);
     bottomView = [[UIView alloc]init];
     bottomView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pushInVailDiscountTicketVC)];
     [bottomView addGestureRecognizer:tap];
     [self.view addSubview:bottomView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@(-60));
+        make.bottom.equalTo(@(-10));
         make.left.right.equalTo(@0);
         make.height.equalTo(@40);
     }];
@@ -218,13 +219,13 @@
     UILabel * prometLabel = [[UILabel alloc]init];
     prometLabel.text = @"查看过期优惠券";
     prometLabel.textColor = kUIColorFromRGB(0x666666);
-    prometLabel.font = [UIFont systemFontOfSize:13];
+    prometLabel.font = [UIFont systemFontOfSize:15];
     prometLabel.textAlignment = NSTextAlignmentCenter;
     [bottomView addSubview:prometLabel];
     [prometLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(bottomView.mas_centerX).with.offset(-10);
         make.centerY.equalTo(bottomView.mas_centerY);
-        make.width.equalTo(@100);
+        make.width.equalTo(@150);
         make.height.equalTo(@30);
     }];
     
@@ -280,6 +281,9 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (UI_IS_IPHONE6P) {
+        return 167;
+    }
     return 142;
 }
 
@@ -317,10 +321,6 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if(section==3)
-    {
-        return 20;
-    }
     return CGFLOAT_MIN;
 }
 
