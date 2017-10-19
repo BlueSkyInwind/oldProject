@@ -269,7 +269,7 @@
     
 //    NSString * paramStr = [[JSAndOCInteraction sharedInteraction] obtainLoginInfo];
     //调用js发送平台
-    if([webView.URL.absoluteString containsString:@"fxd-pay-fe"] || [webView.URL.absoluteString containsString:@"act"] ){
+    if([webView.URL.absoluteString containsString:@"fxd-pay-fe"]){
 //        NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0',%@)",paramStr];
         NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0')"];
         DLog(@"%@",inputValueJS);
