@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, PayType) {
     PayTypeGetMoneyToCard,
 };
 //typedef void(^MakeSurePayBlock)(PayType payType,CardInfo *cardInfo,NSInteger currentIndex);
-typedef void(^MakeSurePayBlock)(PayType payType,PatternOfPayment payPattern);
+typedef void(^MakeSurePayBlock)(PayType payType);
 
 typedef void(^ChangeBankBlock)(void);
 @interface PayViewController : UIViewController
@@ -30,8 +30,6 @@ typedef void(^ChangeBankBlock)(void);
 @property (nonatomic, strong)ChangeBankBlock  changeBankBlock;
 // 付款还是提款
 @property (nonatomic, assign)PayType payType;
-//支付方式
-@property (nonatomic,assign)PatternOfPayment payPattern;
 
 @property (nonatomic, strong) CardInfo *cardInfo;
 

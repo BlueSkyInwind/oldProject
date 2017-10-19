@@ -75,7 +75,7 @@
     if (device.floatValue>10) {
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
-//        self.automaticallyAdjustsScrollViewInsets = false;
+        self.automaticallyAdjustsScrollViewInsets = false;
     }
     
     index = 0;

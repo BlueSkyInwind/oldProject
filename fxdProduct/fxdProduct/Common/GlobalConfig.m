@@ -43,6 +43,15 @@ NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
 NSString * const _p2P_url = @"http://192.168.6.134/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
+//UAT环境
+//NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
+//NSString * const _main_new_url  =  @"http://h5.uat.fxds/";
+//NSString * const _ValidESB_url  =   @"http://h5.uat.fxds/fxd-esb/";
+//NSString * const _H5_url    =   @"http://h5.uat.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://h5.uat.fxds/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+
 //http://192.168.6.134:9191/fxd-esb/
 //张强本地
 //NSString * const _main_url  =   @"http://192.168.13.173:8005/fxd-esb/esb/";
@@ -470,6 +479,9 @@ NSString * const    _CapitalLoanFail_url    =    @"apigw/client/capital/loan/fai
 
 //免息券接口
 NSString * const    _DiscountTicketList_url    =    @"apigw/client/market/getuserBase";
+
+//选择模式列表
+NSString * const    _ChoosePattern_url    =    @"apigw/client/ios/expay";
 
 #pragma mark - 合规接口
 

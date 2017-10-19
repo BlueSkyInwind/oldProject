@@ -35,8 +35,8 @@
     config.userContentController = [[WKUserContentController alloc] init];
     // 添加JS到HTML中，可以直接在JS中调用添加的JS方法
     //    WKUserScript *script = [[WKUserScript alloc] initWithSource:@"function showAlert() { alert('在载入webview时通过OC注入的JS方法'); }" injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:true];
-    //    [config.userContentController addUserScript:script];
-//     window.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
+    //   [config.userContentController addUserScript:script];
+    //   window.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
     [config.userContentController addScriptMessageHandler:self name:@"jsToNative"];
     _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
     _webView.navigationDelegate = self;
@@ -48,18 +48,34 @@
     [self createProUI];
     [self addBackItem];
     _webView.scrollView.showsVerticalScrollIndicator = false;
-
     NSLog(@"%@",_urlStr);
+    
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
-//        NSString * testStr = @"http://192.168.13.250:8010/";
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+         //_urlStr = @"http://192.168.8.125:8010/wxact_171001";
+        //h5活动拼装url
+        if([_urlStr containsString:@"wxact"]){
+            _urlStr = [self assemblyUrl:_urlStr];
+        }
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     }
-    
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+/**
+ h5活动拼装url
+ */
+-(NSString *)assemblyUrl:(NSString *)urlStr{
+    
+    NSString * juidStr = [Utility sharedUtility].userInfo.juid == nil ? @"" : [Utility sharedUtility].userInfo.juid;
+    NSString * tokenStr = [Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [Utility sharedUtility].userInfo.tokenStr;
+    NSString * phoneNumber = [Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [Utility sharedUtility].userInfo.userMobilePhone;
+    NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
+    NSString * resultStr = [urlStr stringByAppendingFormat:@"?type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@",@"0",juidStr,tokenStr,phoneNumber,invationCode];
+    return resultStr;
 }
 
 - (void)addBackItem
@@ -91,7 +107,6 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
     if (object == _webView && [keyPath isEqualToString:@"estimatedProgress"]) {
@@ -139,7 +154,6 @@
         if ([[dic objectForKey:@"functionName"] isEqualToString:@"mxBack"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
-        
         //JS交互分享事件  FXDShare
         /*
         {
@@ -159,7 +173,6 @@
             NSString * shareImage =  resultDic[@"shareImage"];
             [[JSAndOCInteraction sharedInteraction] shareContent:self shareContent:shareContent UrlStr:shareUrl shareTitle:shareTitle shareImage:shareImage];
         }
-        
         //JS交互前往某个页面  FXDClipboardOfCopy
         /*
         {
@@ -201,52 +214,20 @@
             NSString * saveImageUrl =  resultDic[@"saveImageUrl"];
             [[JSAndOCInteraction sharedInteraction] savePictureToAlbum:saveImageUrl VC:self];
         }
-        
-        //支付宝
-        @try {
-            //三方支付点击结果反馈   1、还款中 2、还款成功 3、还款失败  4、第三方未受理 5、h5支付异常
-            if ([[dic allKeys] containsObject:@"payData"]) {
-                NSDictionary * resultDic = dic[@"payData"];
-                NSString * str =  resultDic[@"status"];
-                //续期支付宝支付反馈情况
-                if ([self.payType isEqualToString:@"2"] ) {
-                    if ([str isEqualToString:@"5"]) {
-                        [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:@"支付宝支付失败！"];
-                        [self.navigationController popViewControllerAnimated:true];
-                        return;
-                    }
-                    [self payOverpopBack];
-                    return;
-                }
-                // 还款支付宝支付反馈情况
-                if ([str isEqualToString:@"1"]) {
-                    [self payOverpopBack];
-                }
-                else if ([str isEqualToString:@"2"] || [str isEqualToString:@"3"] || [str isEqualToString:@"4"]){
-                    [self.navigationController popToRootViewControllerAnimated:true];
-                }
-                else{
-                    [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:@"支付宝支付失败！"];
-                    [self.navigationController popViewControllerAnimated:true];
-                }
-            }
-        } @catch (NSException *exception) {
-            DLog(@"%@",exception);
-        }
     }
 }
 
 /**
- 三方支付结果，返回处理
+ h5交互结果返回处理
  */
 -(void)payOverpopBack{
     
     for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
         if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
             LoanMoneyViewController *  loanMoneyVC  =(LoanMoneyViewController *) vc;
-            if ([self.payType isEqualToString:@"1"]) {
+            if ([self.acceptType isEqualToString:@"1"]) {
                 loanMoneyVC.applicationStatus = Repayment;
-            }else if ([self.payType isEqualToString:@"2"]){
+            }else if ([self.acceptType isEqualToString:@"2"]){
                 loanMoneyVC.applicationStatus = Staging;
             }
             [self.navigationController popToViewController:loanMoneyVC animated:YES];
@@ -259,24 +240,7 @@
 {
     NSURLRequest *request = navigationAction.request;
     NSLog(@"=========%@",request.URL.absoluteString);
-    //打开支付宝
-    if ([request.URL.absoluteString hasPrefix:@"alipays://"]) {
-        if ([Tool getIOSVersion] < 10) {
-            if ([[UIApplication sharedApplication] canOpenURL:request.URL]) {
-                [[UIApplication sharedApplication] openURL:request.URL ];
-            }
-            else{
-                [self showMessage:@"打开支付宝失败！" vc:self];
-            }
-        }
-        else {
-            [[UIApplication sharedApplication] openURL:request.URL options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO} completionHandler:^(BOOL success) {
-                if (!success) {
-                    [self showMessage:@"打开支付宝失败！" vc:self];
-                }
-            }];
-        }
-    }
+
     if ([request.URL.absoluteString hasSuffix:@"main.html"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
 //      [self.navigationController popViewControllerAnimated:YES];
@@ -297,16 +261,18 @@
         }
     }
 }
-
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
     self.navigationItem.title = @"加载失败";
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
+    
+//    NSString * paramStr = [[JSAndOCInteraction sharedInteraction] obtainLoginInfo];
     //调用js发送平台
-    if([webView.URL.absoluteString containsString:@"fxd-pay-fe"] || [webView.URL.absoluteString containsString:@"act"]){
-        NSString *inputValueJS = @"window.FXDNAVIGATOR.platformFn('0')";
-        NSLog(@"%@",inputValueJS);
+    if([webView.URL.absoluteString containsString:@"fxd-pay-fe"]){
+//        NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0',%@)",paramStr];
+        NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0')"];
+        DLog(@"%@",inputValueJS);
         //执行JS
         [webView evaluateJavaScript:inputValueJS completionHandler:^(id _Nullable response, NSError * _Nullable error) {
             DLog(@"value: %@ error: %@", response, error);
@@ -318,21 +284,19 @@
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
     DLog(@"alert");
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:message];
     completionHandler();
 }
-
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler
 {
     DLog(@"confim");
     completionHandler(true);
 }
-
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * _Nullable result))completionHandler
 {
     DLog(@"inputPanel");
     completionHandler(@"");
 }
-
 -(void)dealloc
 {
     [_webView removeObserver:self forKeyPath:@"estimatedProgress"];

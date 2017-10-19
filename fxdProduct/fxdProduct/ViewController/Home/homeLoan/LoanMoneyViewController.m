@@ -212,7 +212,7 @@
 #pragma mark 获取协议
 -(void)fxdStatus{
 
-    if ([_repayModel.platformType isEqualToString:@"0"]||[_repayModel.platformType isEqualToString:@"3"]) {
+    if ([_repayModel.platformType isEqualToString:@"0"]) {
         
         [self postUrlMessageandDictionary:^(CardInfo *rate) {
             

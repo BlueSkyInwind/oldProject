@@ -10,7 +10,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDKUI.h>
 #import "LoginViewController.h"
-
+#import "LoginViewModel.h"
 @implementation JSAndOCInteraction
 
 + (JSAndOCInteraction *)sharedInteraction
@@ -36,20 +36,16 @@
 -(void)shareContent:(UIViewController *)viewC shareContent:(NSString *)content UrlStr:(NSString *)urlStr shareTitle:(NSString *)title shareImage:(NSString *)imageUrl
 {
     NSArray *imageArr = @[[UIImage imageNamed:@"logo_60"]];
-    if (urlStr != nil) {
+    if (imageUrl != nil) {
         imageArr = @[imageUrl];
     }
     
     NSString * titleName  =  title == nil ? @"发薪贷" : title;
     
-    if (![Utility sharedUtility].loginFlage) {
-        [self presentLogin:viewC];
-        return;
-    }
-    
     NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
-    NSString * targetUrl = [urlStr stringByAppendingFormat:@"?merchant_code_=%@",invationCode];
-    
+//    NSString * targetUrl = [urlStr stringByAppendingFormat:@"?merchant_code_=%@",invationCode];
+    NSString * targetUrl = urlStr;
+
     if (imageArr) {
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
         [shareParams SSDKSetupShareParamsByText:content
@@ -57,6 +53,11 @@
                                             url:[NSURL URLWithString:targetUrl]
                                           title:titleName
                                            type:SSDKContentTypeAuto];
+        
+        [shareParams SSDKSetupSinaWeiboShareParamsByText:[NSString stringWithFormat:@"%@\n%@链接:%@",titleName,content,targetUrl] title:titleName image:imageArr url:[NSURL URLWithString:targetUrl] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
+        
+        [shareParams SSDKSetupSMSParamsByText:[NSString stringWithFormat:@"%@\n%@链接:%@",titleName,content,targetUrl]  title:titleName images:imageArr attachments:nil recipients:nil type:SSDKContentTypeAuto];
+        
         [shareParams SSDKEnableUseClientShare];
         [ShareSDK showShareActionSheet:nil
                                  items:nil
@@ -104,7 +105,8 @@
             ServiceHotline  服务热线，
             ChangePasswordViewController  修改密码，
             AboutMainViewController  关于我们，
-
+            LoginViewController  登录
+ 
  @param currentVC 当前VC
  */
 -(void)pushViewController:(NSString *)viewControllerName VC:(UIViewController *)currentVC{
@@ -119,7 +121,7 @@
         return;
     }
     
-    if (![Utility sharedUtility].loginFlage) {
+    if (![Utility sharedUtility].loginFlage || [viewControllerName isEqualToString:@"LoginViewController"]) {
         [self presentLogin:currentVC];
         return;
     }
@@ -193,11 +195,60 @@
 
 - (void)presentLogin:(UIViewController *)vc
 {
-    LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
-    [vc presentViewController:nav animated:YES completion:nil];
+    @try{
+        
+        if ([Utility sharedUtility].loginFlage) {
+            LoginViewModel * loginVM = [[LoginViewModel alloc]init];
+            [loginVM deleteUserRegisterID];
+            [EmptyUserData EmptyData];
+        }
+        
+        dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
+        dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+            [vc.navigationController popToRootViewControllerAnimated:YES];
+        });
+        
+        LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
+        [vc presentViewController:nav animated:YES completion:^{
+            
+        }];
+    }@catch (NSException *exception) {
+        DLog(@"%@",exception);
+    }
 }
 
+-(NSString *)obtainLoginInfo{
+    
+    NSString * juidStr = [Utility sharedUtility].userInfo.juid == nil ? @"" : [Utility sharedUtility].userInfo.juid;
+    NSString * tokenStr = [Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [Utility sharedUtility].userInfo.tokenStr;
+    NSString * phoneNumber = [Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [Utility sharedUtility].userInfo.userMobilePhone;
+    NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
+    
+    NSDictionary *paramDic = @{
+                           @"juid":juidStr,
+                           @"token":tokenStr,
+                           @"mobile_phone_":phoneNumber,
+                           @"invitation_code_":invationCode,
+                           };
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *paraStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return paraStr;
+}
+
+/*
+- (NSString *)noWhiteSpaceString {
+    NSString *newString = self;
+    //去除掉首尾的空白字符和换行字符
+    newString = [newString stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    newString = [newString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    newString = [newString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];  //去除掉首尾的空白字符和换行字符使用
+    newString = [newString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    //    可以去掉空格，注意此时生成的strUrl是autorelease属性的，所以不必对strUrl进行release操作！
+    return newString;
+}
+*/
 
 
 

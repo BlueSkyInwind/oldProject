@@ -288,7 +288,7 @@
     if(section==0)
     {
         UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 30)];
-        view.backgroundColor=[UIColor whiteColor];
+        view.backgroundColor=kUIColorFromRGB(0xf2f2f2);
         UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, _k_w, 10)];
         lbl.backgroundColor=kUIColorFromRGB(0xf2f2f2);
         [view addSubview:lbl];

@@ -19,7 +19,8 @@
     UserCardResult *_userCardsModel;
     CardInfo *_cardInfo;
     NSMutableArray *_datalist;
-    
+    NSMutableArray *_choosePatternList;
+    NSString * _patternName;
 }
 @property (nonatomic,strong)UITableView * tableView;
 @end
@@ -34,10 +35,9 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     // Do any additional setup after loading the view.
     
     _datalist = [[NSMutableArray alloc] init];
-//    _isHavealipay = false;
+    _choosePatternList =  [[NSMutableArray alloc] init];
 //    _currentIndex = 0;
     self.navigationItem.title = @"选择银行卡";
-
     [self addBanckCard];
     [self configuireView];
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(fatchBankList)];
@@ -45,12 +45,11 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     header.lastUpdatedTimeLabel.hidden = YES;
     [header beginRefreshing];
     self.tableView.mj_header = header;
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     
-    
 }
-
 -(void)configuireView{
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -90,7 +89,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 - (void)popBack
 {
     if (self.payPatternSelectBlock) {
-        self.payPatternSelectBlock(_cardInfo,_currentIndex,self.payPattern);
+        self.payPatternSelectBlock(_cardInfo,_currentIndex);
     }
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
@@ -146,25 +145,16 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (_isHavealipay) {
-        return 2;
-    }
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return  _datalist.count;
-    }else{
-        return 1;
-    }
+    return  _datalist.count;
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -177,14 +167,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         cell.bankCardInfoLabel.text = [NSString stringWithFormat:@"%@ 尾号(%@)",cardInfo.bankName,[self formatTailNumber:cardInfo.cardNo]];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.bankCardInfoLabel.textColor = [UIColor grayColor];
-        if (_currentIndex == indexPath.row && self.payPattern == BankCard) {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            cell.bankCardInfoLabel.textColor = [UIColor blackColor];
-        }
-    }else{
-        [cell.bankLogo setImage:[UIImage imageNamed:@"approve_alipay"]];
-        cell.bankCardInfoLabel.text = @"支付宝";
-        if (self.payPattern == Alipays) {
+        if (_currentIndex == indexPath.row) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             cell.bankCardInfoLabel.textColor = [UIColor blackColor];
         }
@@ -194,31 +177,27 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        self.payPattern = BankCard;
         _currentIndex = indexPath.row;
         CardInfo *cardInfo = [_datalist objectAtIndex:indexPath.row];
         _cardInfo = cardInfo;
         [self.tableView reloadData];
         if (self.payPatternSelectBlock) {
-            self.payPatternSelectBlock(_cardInfo,_currentIndex,BankCard);
+            self.payPatternSelectBlock(_cardInfo,_currentIndex);
         }
     }else{
-        self.payPattern = Alipays;
         if (self.payPatternSelectBlock) {
             _currentIndex = -2;
-            self.payPatternSelectBlock(_cardInfo,_currentIndex,Alipays);
+            self.payPatternSelectBlock(_cardInfo,_currentIndex);
         }
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)userSelectedBankCard:(PayPatternSelectBlock)block{
-    self.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex,PatternOfPayment patternOfPayment) {
-        block(cardInfo,currentIndex,patternOfPayment);
+    self.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
+        block(cardInfo,currentIndex);
     };
 }
-
-
 
 
 - (void)didReceiveMemoryWarning {

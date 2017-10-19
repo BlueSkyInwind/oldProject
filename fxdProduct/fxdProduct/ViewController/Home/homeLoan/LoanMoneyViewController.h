@@ -15,3 +15,8 @@
 @property (nonatomic, assign) ApplicationStatus applicationStatus;
 
 @end
+
+
+
+
+

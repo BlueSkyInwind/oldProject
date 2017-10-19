@@ -30,7 +30,6 @@
 #import "DataWriteAndRead.h"
 #import "CustomerBaseInfoBaseClass.h"
 #import "GetCustomerBaseViewModel.h"
-#import "ReplenishViewController.h"
 #import "Approval.h"
 #import "DetailViewController.h"
 #import "IdeaBackViewController.h"
@@ -68,7 +67,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     PromoteLimit,
 };
 
-@interface CheckViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,ReplenishDoneDelegate,MoxieSDKDelegate>
+@interface CheckViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,MoxieSDKDelegate>
 {
     CheckViewIng *_checking;
     CheckSuccessView *checkSuccess;
@@ -248,10 +247,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     checkFalse.labelday.text = @"您的信用评分不够";
     
     [[checkFalse.moreInfoBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        ReplenishViewController *replenVC = [[ReplenishViewController alloc] init];
-        replenVC.userStateModel = _userStateModel;
-        replenVC.delegate = self;
-        [self.navigationController pushViewController:replenVC animated:YES];
+
     }];
     if (_userStateModel.if_add_documents) {
         checkFalse.moreInfoLabel.hidden = NO;
@@ -451,9 +447,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             attributeStr.yy_font = [UIFont systemFontOfSize:11];
         }
         range = NSMakeRange(attributeStr.length - 13, 13);
-    }else if([_drawingsInfoModel.platformType isEqualToString:@"3"]){
-        attributeStr = [[NSMutableAttributedString alloc]initWithString:@"我已阅读并认可发薪贷《善林协议》"];
-        range = NSMakeRange(attributeStr.length - 6, 6);
     }else{
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"产品类型错误"];
     }
@@ -461,7 +454,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [attributeStr yy_setTextHighlightRange:range color:UI_MAIN_COLOR backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
         //协议点击
         [self getUserInfoData:^{
-            if ([_drawingsInfoModel.platformType isEqualToString:@"0"]|| [_drawingsInfoModel.platformType isEqualToString:@"3"]) {
+            if ([_drawingsInfoModel.platformType isEqualToString:@"0"]) {
                 [self LoanAgreementRequest];
             }
             if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
@@ -611,8 +604,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
     userBankCardListVC.currentIndex = userSelectIndex;
-    userBankCardListVC.payPattern = BankCard;
-    userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex ,PatternOfPayment patternOfPayment) {
+    userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
         self.selectCard = cardInfo;
         if (cardInfo == nil) {
             [self  fatchCardInfo];
@@ -649,9 +641,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 - (void)getMoney
 {
     //  platform_type  2、合规平台    0、发薪贷平台    3、善林金融
-    if([_drawingsInfoModel.platformType isEqualToString:@"2"] || [_drawingsInfoModel.platformType isEqualToString:@"0"]||[_drawingsInfoModel.platformType isEqualToString:@"3"]){
+    if([_drawingsInfoModel.platformType isEqualToString:@"2"] || [_drawingsInfoModel.platformType isEqualToString:@"0"]){
         if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
-
             [self integrationP2PUserState];
         }
         if ([_drawingsInfoModel.platformType isEqualToString:@"0"]) {
@@ -659,13 +650,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请添加收款方式！"];
                 return;
             }
-
             [self PostGetdrawApplyAgain];
-        }
-        if ([_drawingsInfoModel.platformType isEqualToString:@"3"]) {
-            
-            
-            [self capitalLoan];
         }
     }else{
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"产品类型错误"];
@@ -1368,7 +1353,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         payVC.bankName = bankName;
         NSString *bank = model.result.UsrCardInfolist.CardId;
         payVC.banNum = [bank substringFromIndex:bank.length-4];
-        payVC.makesureBlock = ^(PayType payType, PatternOfPayment payPattern) {
+        payVC.makesureBlock = ^(PayType payType) {
             [self dismissSemiModalViewWithCompletion:^{
                 [self saveLoanCase:@"30"];
             }];
@@ -1499,6 +1484,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                             url:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]
                                           title:@"发薪贷"
                                            type:SSDKContentTypeAuto];
+        
+        [shareParams SSDKSetupSinaWeiboShareParamsByText:[NSString stringWithFormat:@"发薪贷只专注于网络小额贷款。是一款新型网络小额贷款神器, 尽可能优化贷款申请流程，申请步骤更便捷，轻完成网上贷款。链接:http://www.faxindai.com 链接:%@",@"https://itunes.apple.com/cn/app/id1089086853"] title:@"发薪贷" image:imageArr url:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
+
         [shareParams SSDKEnableUseClientShare];
         [ShareSDK showShareActionSheet:nil
                                  items:nil

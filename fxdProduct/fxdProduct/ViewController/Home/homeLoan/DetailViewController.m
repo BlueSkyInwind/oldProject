@@ -24,8 +24,10 @@
     _webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
     [self addBackItem];
     _webView.scrollView.showsVerticalScrollIndicator = false;
+    
+    NSString *headerString = @"<header><meta name='viewport' content='width=device-width, initial-scale=0.8, maximum-scale=0.8, minimum-scale=0.8, user-scalable=no'></header>";
     if (_content) {
-        [_webView loadHTMLString:_content baseURL:nil];
+        [_webView loadHTMLString:[headerString stringByAppendingString:_content] baseURL:nil];
     }
     [self.view addSubview:_webView];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
@@ -42,8 +44,6 @@
         }
     }
 }
-
-
 - (void)dealloc
 {
     [_webView removeObserver:self forKeyPath:@"title"];

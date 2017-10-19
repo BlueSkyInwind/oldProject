@@ -23,7 +23,6 @@
     }];
 }
 
-
 //-(void)obtainUserCommitstaging:(NSString *)staging cardNo:(NSString *)cardNo{
 //
 //    NSDictionary *paramDic = @{@"cardNo":cardNo,@"staging":staging};
@@ -53,7 +52,6 @@
             [self faileBlock];
         }
     }];
-    
 }
 
 -(void)obtainUserStagingRule{
@@ -89,6 +87,21 @@
         }
     }];
 }
+
+-(void)ChoosePatternList{
+    
+    [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_ChoosePattern_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+
 
 
 @end

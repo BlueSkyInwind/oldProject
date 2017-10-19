@@ -80,7 +80,7 @@
     if (device.floatValue>10) {
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
-//        self.automaticallyAdjustsScrollViewInsets = false;
+        self.automaticallyAdjustsScrollViewInsets = false;
     }
     
     for (int i = 0; i < 6; i++) {
@@ -340,7 +340,7 @@
 - (void)saveBtnClick
 {
     DLog(@"保存");
-    if ([_contactStatus isEqualToString:@"0"]) {
+    if (_contactStatus.boolValue == false) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您完善联系人资料！"];
         return;
     }

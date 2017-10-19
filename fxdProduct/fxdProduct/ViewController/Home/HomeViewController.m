@@ -708,18 +708,8 @@
     }
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productList[0].productId;
-        if ([_homeProductList.data.productList[0].productId isEqualToString:RapidLoan]) {
-            
-            
-            NSString *approvalAmount = _homeProductList.data.productList[0].amount;
-            approvalAmount = [approvalAmount substringToIndex:approvalAmount.length-1];
-            [self getCapitalListData:_homeProductList.data.productList[0].productId approvalAmount:approvalAmount];
-//            [self getCapitalListData:_homeProductList.data.productList[0].productId];
-        }else{
-            
-            [self goLoanSureVC:_homeProductList.data.productList[0].productId];
-        }
         
+        [self goLoanSureVC:_homeProductList.data.productList[0].productId];
         
     } else {
         [self presentLogin:self];
@@ -737,12 +727,7 @@
         }
         if ([Utility sharedUtility].loginFlage) {
             [Utility sharedUtility].userInfo.pruductId = productId;
-            if ([productId isEqualToString:RapidLoan]) {
-                
-                [self getCapitalListData:productId approvalAmount:approvalAmount];
-            }else{
-                [self goLoanSureVC:productId];
-            }
+            [self goLoanSureVC:productId];
             
         } else {
             [self presentLogin:self];

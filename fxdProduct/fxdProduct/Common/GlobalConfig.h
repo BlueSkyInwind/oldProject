@@ -159,7 +159,7 @@ UIKIT_EXTERN NSString * const       _Repay_url;                              //�
 UIKIT_EXTERN NSString * const       _StagingRule_url;                        //获取续期规则
 UIKIT_EXTERN NSString * const       _registerID_url;                        //上传用户的registerID
 UIKIT_EXTERN NSString * const       _UserDataCertification_url;                        //用户资料测评接口
-UIKIT_EXTERN NSString * const       _Trilateral_url;                        //三方支付链接
+UIKIT_EXTERN NSString * const       _Trilateral_url;                        //用户资料测评接口
 UIKIT_EXTERN NSString * const       _UserDataCertificationResult_url;        //得到测评结果
 UIKIT_EXTERN NSString * const       _loginOutDeleteRegisterId_url;        //退出登录删除推送id
 
@@ -211,6 +211,8 @@ UIKIT_EXTERN NSString * const       _CapitalLoanBack_url;                  //联
 UIKIT_EXTERN NSString * const       _ShanLinBack_url;                  //联联绑卡返回回调地址
 UIKIT_EXTERN NSString * const       _CapitalLoanFail_url;                  //app 连连绑卡页面用户放弃操作接口
 UIKIT_EXTERN NSString * const       _DiscountTicketList_url;                  //免息券接口
+UIKIT_EXTERN NSString * const       _ChoosePattern_url;                  //支付列表
+
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码
 UIKIT_EXTERN NSString * const   CODE_FINDPASS;         ///密码找回验证码

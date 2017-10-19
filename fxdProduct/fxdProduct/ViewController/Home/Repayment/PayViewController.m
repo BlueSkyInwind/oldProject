@@ -74,7 +74,7 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
 
 - (IBAction)sureBtnClick:(UIButton *)sender {
     
-    self.makesureBlock(self.payType,_payPattern);
+    self.makesureBlock(self.payType);
 }
 
 

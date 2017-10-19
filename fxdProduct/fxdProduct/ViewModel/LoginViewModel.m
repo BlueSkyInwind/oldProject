@@ -33,7 +33,7 @@
     if ([Utility sharedUtility].userInfo.clientId && ![[Utility sharedUtility].userInfo.clientId isEqualToString:@""]) {
         
         loginParamModel.mobile_phone_ = number;
-//        loginParamModel.password_ = @"TVjebkujUOo=";
+//        loginParamModel.password_ = @"5ZSYw+QXcak=";
         loginParamModel.password_ = [DES3Util encrypt:password];
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
@@ -45,7 +45,7 @@
     } else {
         
         loginParamModel.mobile_phone_ = number;
-//        loginParamModel.password_ = @"TVjebkujUOo=";;
+//        loginParamModel.password_ = @"5ZSYw+QXcak=";
         loginParamModel.password_ = [DES3Util encrypt:password];
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
@@ -53,7 +53,6 @@
         loginParamModel.last_login_ip_ = [[GetUserIP sharedUserIP] getIPAddress];
         loginParamModel.platform_type_ = PLATFORM;
         loginParamModel.BSFIT_DEVICEID =fingerPrint;
-        
     }
     if (verifycode) {
         loginParamModel.verify_code_  = verifycode;
