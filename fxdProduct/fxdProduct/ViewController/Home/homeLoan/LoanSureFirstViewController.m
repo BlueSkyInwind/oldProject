@@ -104,7 +104,7 @@
 }
 -(void)pushDirectionsForUse{
     FXDWebViewController * webVC = [[FXDWebViewController alloc]init];
-    webVC.urlStr = _DiscountTicketRule_url;
+    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_DiscountTicketRule_url];
     [self.navigationController pushViewController:webVC animated:true];
 
 }
