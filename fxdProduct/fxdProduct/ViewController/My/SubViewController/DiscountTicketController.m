@@ -38,7 +38,6 @@
     [self createTableView];
     _validTicketArr = [NSMutableArray array];
     _invalidTicketArr = [NSMutableArray array];
-    
 }
 
 -(void)isDisplayNoneViewAndBottomView{
