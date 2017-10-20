@@ -67,8 +67,6 @@
 		1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6E69EF1C7199A000053A75 /* DiscountTicketController.m */; };
 		1A762F6F1C1FBE4700964719 /* RepayRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A762F6D1C1FBE4700964719 /* RepayRecordController.m */; };
 		1A762F701C1FBE4700964719 /* RepayRecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A762F6E1C1FBE4700964719 /* RepayRecordController.xib */; };
-		1A8988FC1BEC9EBE00F9E81E /* MsgViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A8988FA1BEC9EBE00F9E81E /* MsgViewCell.m */; };
-		1A8988FD1BEC9EBE00F9E81E /* MsgViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A8988FB1BEC9EBE00F9E81E /* MsgViewCell.xib */; };
 		1AB0F5AA1CF2D20E00F3DF06 /* TicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB0F5A81CF2D20E00F3DF06 /* TicketCell.m */; };
 		1AB0F5AB1CF2D20E00F3DF06 /* TicketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AB0F5A91CF2D20E00F3DF06 /* TicketCell.xib */; };
 		1AB442E61D782E53000459E6 /* RepayDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB442E41D782E53000459E6 /* RepayDetailViewController.m */; };
@@ -83,8 +81,6 @@
 		1AEDCF211C197F5000014A87 /* RepaymentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEDCF1D1C197F5000014A87 /* RepaymentViewCell.m */; };
 		1AEDCF221C197F5000014A87 /* RepaymentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AEDCF1E1C197F5000014A87 /* RepaymentViewCell.xib */; };
 		1AEFFA7C1C50BF72003936CE /* loanRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEFFA7B1C50BF72003936CE /* loanRecordCell.m */; };
-		1AFE7EAF1C2A3CC30016CD02 /* GesturesPasswordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */; };
-		1AFE7EB01C2A3CC30016CD02 /* GesturesPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */; };
 		3E2B09C36E24E9E9316FAC1B /* Pods_fxd_fxdProduct.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 556C177616476C4A424DFF82 /* Pods_fxd_fxdProduct.framework */; };
 		63001A231BA8113000E2850A /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 63001A1F1BA8113000E2850A /* GTMBase64.m */; };
 		6300CC031E4AAB870012B05A /* LoanProcessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6300CC021E4AAB870012B05A /* LoanProcessModel.m */; };
@@ -146,7 +142,6 @@
 		632C588C1E5ADE1A00490C14 /* AddressClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 632C588B1E5ADE1A00490C14 /* AddressClass.m */; };
 		632DFF621E48500500E414B2 /* CycleTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 632DFF601E48500500E414B2 /* CycleTextCell.m */; };
 		632DFF631E48500500E414B2 /* CycleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632DFF611E48500500E414B2 /* CycleTextCell.xib */; };
-		63334AD01B7C3BB3003844F4 /* MessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63334ACF1B7C3BB3003844F4 /* MessageCenterViewController.m */; };
 		633DAC061C34D46D000DA852 /* FindPassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633DAC051C34D46D000DA852 /* FindPassViewController.xib */; };
 		633DAC081C34D47A000DA852 /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633DAC071C34D47A000DA852 /* RegViewController.xib */; };
 		633DAD2D1C3E47D0000DA852 /* FindPassViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 633DAD2C1C3E47D0000DA852 /* FindPassViewModel.m */; };
@@ -729,7 +724,6 @@
 		CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6E69EF1C7199A000053A75 /* DiscountTicketController.m */; };
 		CC0DF9941EA5B1090024841A /* LoanProcessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F254901E49CFE800852CF1 /* LoanProcessCell.m */; };
 		CC0DF9951EA5B1090024841A /* CustomerBaseInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830EF1CBB82C30005C4CD /* CustomerBaseInfoResult.m */; };
-		CC0DF9961EA5B1090024841A /* MessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63334ACF1B7C3BB3003844F4 /* MessageCenterViewController.m */; };
 		CC0DF9971EA5B1090024841A /* CashBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7931BE2FE6600C32919 /* CashBaseClass.m */; };
 		CC0DF9981EA5B1090024841A /* LOTLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16971E517D9F00AB8AB6 /* LOTLayerView.m */; };
 		CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AF01CA8DBBD00D04ED8 /* RegionSub.m */; };
@@ -764,7 +758,6 @@
 		CC0DF9B81EA5B1090024841A /* YYTextAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24D01D98F7E9006F58F3 /* YYTextAttribute.m */; };
 		CC0DF9BA1EA5B1090024841A /* FaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553AFF1E5D9C2E00B2C1FF /* FaceCell.m */; };
 		CC0DF9BB1EA5B1090024841A /* CheckFalseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA91691C58B870008D91D2 /* CheckFalseView.m */; };
-		CC0DF9BC1EA5B1090024841A /* MsgViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A8988FA1BEC9EBE00F9E81E /* MsgViewCell.m */; };
 		CC0DF9BD1EA5B1090024841A /* CheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA91641C589E25008D91D2 /* CheckViewController.m */; };
 		CC0DF9BE1EA5B1090024841A /* Custom_BaseInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50E441E666FF40035EE4F /* Custom_BaseInfoResult.m */; };
 		CC0DF9BF1EA5B1090024841A /* NSParagraphStyle+YYText.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24DB1D98F7E9006F58F3 /* NSParagraphStyle+YYText.m */; };
@@ -1006,7 +999,6 @@
 		CC0DFAC21EA5B1090024841A /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECCA1E1B8FAA0079A2F8 /* SDCollectionViewCell.m */; };
 		CC0DFAC31EA5B1090024841A /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 634795DA1D378CED00EC4027 /* Aspects.m */; };
 		CC0DFAC41EA5B1090024841A /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C291BE063A90036E8EF /* UIImage+FixOrientation.m */; };
-		CC0DFAC51EA5B1090024841A /* GesturesPasswordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */; };
 		CC0DFAC61EA5B1090024841A /* UpdateDevIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D46151BCCD2FB00874064 /* UpdateDevIDViewController.m */; };
 		CC0DFAC71EA5B1090024841A /* LewPopupViewAnimationSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636E11D76A72A00E93289 /* LewPopupViewAnimationSlide.m */; };
 		CC0DFAC81EA5B1090024841A /* UIImage+Water.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C2B1BE063A90036E8EF /* UIImage+Water.m */; };
@@ -1150,7 +1142,6 @@
 		CC0DFB701EA5B1090024841A /* wtproject.lsc in Resources */ = {isa = PBXBuildFile; fileRef = 63DCD7D81C87FDA200FAC7CE /* wtproject.lsc */; };
 		CC0DFB711EA5B1090024841A /* LoanProcessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F254911E49CFE800852CF1 /* LoanProcessCell.xib */; };
 		CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636B1B8E1C2A416500450358 /* NextViewCell.xib */; };
-		CC0DFB761EA5B1090024841A /* MsgViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A8988FB1BEC9EBE00F9E81E /* MsgViewCell.xib */; };
 		CC0DFB771EA5B1090024841A /* CycleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632DFF611E48500500E414B2 /* CycleTextCell.xib */; };
 		CC0DFB781EA5B1090024841A /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 63B65DF01D519D1600207231 /* main.js */; };
 		CC0DFB791EA5B1090024841A /* PayMethodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636AC4321D38EA7F00599590 /* PayMethodCell.xib */; };
@@ -1170,7 +1161,6 @@
 		CC0DFB8C1EA5B1090024841A /* UserContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AF61E5D937600B2C1FF /* UserContactsViewController.xib */; };
 		CC0DFB8D1EA5B1090024841A /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F0FDAC11BC771EC00F3CF10 /* AboutViewController.xib */; };
 		CC0DFB8E1EA5B1090024841A /* PayMethodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63741E2F1D3CB8B200C0E2F8 /* PayMethodViewController.xib */; };
-		CC0DFB8F1EA5B1090024841A /* GesturesPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */; };
 		CC0DFB901EA5B1090024841A /* HomePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636F11D77BA3000E93289 /* HomePopView.xib */; };
 		CC0DFB911EA5B1090024841A /* HomeBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E1ECDE1E1CD3D80079A2F8 /* HomeBottomCell.xib */; };
 		CC0F1B991EE64A2A00A23651 /* ChangePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B981EE64A2A00A23651 /* ChangePasswordModel.m */; };
@@ -1446,9 +1436,6 @@
 		1A762F6C1C1FBE4700964719 /* RepayRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayRecordController.h; sourceTree = "<group>"; };
 		1A762F6D1C1FBE4700964719 /* RepayRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayRecordController.m; sourceTree = "<group>"; };
 		1A762F6E1C1FBE4700964719 /* RepayRecordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepayRecordController.xib; sourceTree = "<group>"; };
-		1A8988F91BEC9EBE00F9E81E /* MsgViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgViewCell.h; sourceTree = "<group>"; };
-		1A8988FA1BEC9EBE00F9E81E /* MsgViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgViewCell.m; sourceTree = "<group>"; };
-		1A8988FB1BEC9EBE00F9E81E /* MsgViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MsgViewCell.xib; sourceTree = "<group>"; };
 		1AB0F5A71CF2D20E00F3DF06 /* TicketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketCell.h; sourceTree = "<group>"; };
 		1AB0F5A81CF2D20E00F3DF06 /* TicketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCell.m; sourceTree = "<group>"; };
 		1AB0F5A91CF2D20E00F3DF06 /* TicketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketCell.xib; sourceTree = "<group>"; };
@@ -1471,9 +1458,6 @@
 		1AEDCF1E1C197F5000014A87 /* RepaymentViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepaymentViewCell.xib; sourceTree = "<group>"; };
 		1AEFFA7A1C50BF72003936CE /* loanRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loanRecordCell.h; sourceTree = "<group>"; };
 		1AEFFA7B1C50BF72003936CE /* loanRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loanRecordCell.m; sourceTree = "<group>"; };
-		1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GesturesPasswordCell.h; path = ../GesturesPasswordCell.h; sourceTree = "<group>"; };
-		1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GesturesPasswordCell.m; sourceTree = "<group>"; };
-		1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GesturesPasswordCell.xib; sourceTree = "<group>"; };
 		3C2819F71AD8F8FCD65CAD98 /* Pods_fxdProduct.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxdProduct.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		556C177616476C4A424DFF82 /* Pods_fxd_fxdProduct.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProduct.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63001A1E1BA8113000E2850A /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -1588,8 +1572,6 @@
 		632DFF5F1E48500500E414B2 /* CycleTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleTextCell.h; sourceTree = "<group>"; };
 		632DFF601E48500500E414B2 /* CycleTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleTextCell.m; sourceTree = "<group>"; };
 		632DFF611E48500500E414B2 /* CycleTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CycleTextCell.xib; sourceTree = "<group>"; };
-		63334ACE1B7C3BB3003844F4 /* MessageCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCenterViewController.h; sourceTree = "<group>"; };
-		63334ACF1B7C3BB3003844F4 /* MessageCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCenterViewController.m; sourceTree = "<group>"; };
 		633DAC051C34D46D000DA852 /* FindPassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindPassViewController.xib; sourceTree = "<group>"; };
 		633DAC071C34D47A000DA852 /* RegViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegViewController.xib; sourceTree = "<group>"; };
 		633DAD2B1C3E47D0000DA852 /* FindPassViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPassViewModel.h; sourceTree = "<group>"; };
@@ -2755,9 +2737,6 @@
 				1A762F711C1FBFB800964719 /* MyView */,
 				0F0443AA1C17D54F0026CAD9 /* addCell */,
 				0FEA58521BE08EE3007F8A6D /* HomeView */,
-				1A8988F91BEC9EBE00F9E81E /* MsgViewCell.h */,
-				1A8988FA1BEC9EBE00F9E81E /* MsgViewCell.m */,
-				1A8988FB1BEC9EBE00F9E81E /* MsgViewCell.xib */,
 				1A133F181C1AD1EA0027749B /* HelpViewCell.h */,
 				1A133F191C1AD1EA0027749B /* HelpViewCell.m */,
 				636B1B901C2CF57500450358 /* HelpViewCell.xib */,
@@ -2767,8 +2746,6 @@
 				63E640C91DCAD88300783E9D /* MoreInfoCell.h */,
 				63E640CA1DCAD88300783E9D /* MoreInfoCell.m */,
 				63E640CB1DCAD88300783E9D /* MoreInfoCell.xib */,
-				1AFE7EAD1C2A3CC30016CD02 /* GesturesPasswordCell.m */,
-				1AFE7EAE1C2A3CC30016CD02 /* GesturesPasswordCell.xib */,
 				0F6AAF361C30D8950060F137 /* MyCardCell.h */,
 				0F6AAF371C30D8950060F137 /* MyCardCell.m */,
 				0F6AAF381C30D8950060F137 /* MyCardCell.xib */,
@@ -4688,8 +4665,6 @@
 				63FF483D1B6F0322009E384C /* HomeViewController.h */,
 				63FF483E1B6F0322009E384C /* HomeViewController.m */,
 				636B1B2C1C216FCE00450358 /* HomeViewController.xib */,
-				63334ACE1B7C3BB3003844F4 /* MessageCenterViewController.h */,
-				63334ACF1B7C3BB3003844F4 /* MessageCenterViewController.m */,
 				63B65DE91D518D8B00207231 /* ExpressViewController.h */,
 				63B65DEA1D518D8B00207231 /* ExpressViewController.m */,
 				63B65DEB1D518D8B00207231 /* ExpressViewController.xib */,
@@ -5034,7 +5009,6 @@
 		8438F7111EE14D2D0089E121 /* MoreView */ = {
 			isa = PBXGroup;
 			children = (
-				1AFE7EAC1C2A3CC30016CD02 /* GesturesPasswordCell.h */,
 				8438F7121EE14DA00089E121 /* ChangePasswordTableViewCell.h */,
 				8438F7131EE14DA00089E121 /* ChangePasswordTableViewCell.m */,
 			);
@@ -5499,7 +5473,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = B4V533E2T3;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -5643,7 +5617,6 @@
 				63F254931E49CFE800852CF1 /* LoanProcessCell.xib in Resources */,
 				636B1B8F1C2A416500450358 /* NextViewCell.xib in Resources */,
 				CC3197A01ED929F10083F263 /* WhiteRefuseView.xib in Resources */,
-				1A8988FD1BEC9EBE00F9E81E /* MsgViewCell.xib in Resources */,
 				632DFF631E48500500E414B2 /* CycleTextCell.xib in Resources */,
 				84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */,
 				63B65DF11D519D1600207231 /* main.js in Resources */,
@@ -5665,7 +5638,6 @@
 				63553AF81E5D937600B2C1FF /* UserContactsViewController.xib in Resources */,
 				0F0FDAC31BC771EC00F3CF10 /* AboutViewController.xib in Resources */,
 				63741E311D3CB8B200C0E2F8 /* PayMethodViewController.xib in Resources */,
-				1AFE7EB01C2A3CC30016CD02 /* GesturesPasswordCell.xib in Resources */,
 				637636F21D77BA3000E93289 /* HomePopView.xib in Resources */,
 				63E1ECE01E1CD3D80079A2F8 /* HomeBottomCell.xib in Resources */,
 				CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */,
@@ -5775,7 +5747,6 @@
 				CC0DFB711EA5B1090024841A /* LoanProcessCell.xib in Resources */,
 				CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */,
 				CC3197A11ED929F10083F263 /* WhiteRefuseView.xib in Resources */,
-				CC0DFB761EA5B1090024841A /* MsgViewCell.xib in Resources */,
 				CC0DFB771EA5B1090024841A /* CycleTextCell.xib in Resources */,
 				CC0DFB781EA5B1090024841A /* main.js in Resources */,
 				CC0DFB791EA5B1090024841A /* PayMethodCell.xib in Resources */,
@@ -5797,7 +5768,6 @@
 				CC0DFB8D1EA5B1090024841A /* AboutViewController.xib in Resources */,
 				CCF8032A1ED4249A003B7975 /* UnbundlingBankCardViewController.xib in Resources */,
 				CC0DFB8E1EA5B1090024841A /* PayMethodViewController.xib in Resources */,
-				CC0DFB8F1EA5B1090024841A /* GesturesPasswordCell.xib in Resources */,
 				CC0DFB901EA5B1090024841A /* HomePopView.xib in Resources */,
 				CC0DFB911EA5B1090024841A /* HomeBottomCell.xib in Resources */,
 				CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */,
@@ -6052,7 +6022,6 @@
 				63F254921E49CFE800852CF1 /* LoanProcessCell.m in Sources */,
 				634830F41CBB82C30005C4CD /* CustomerBaseInfoResult.m in Sources */,
 				848C531B1F4BDF740092F87C /* FaceIdentiViewController.swift in Sources */,
-				63334AD01B7C3BB3003844F4 /* MessageCenterViewController.m in Sources */,
 				635AB7961BE2FE6600C32919 /* CashBaseClass.m in Sources */,
 				638A16EB1E517D9F00AB8AB6 /* LOTLayerView.m in Sources */,
 				63145AF41CA8DBBD00D04ED8 /* RegionSub.m in Sources */,
@@ -6096,7 +6065,6 @@
 				63FC24F71D98F7E9006F58F3 /* YYTextAttribute.m in Sources */,
 				63553B011E5D9C2E00B2C1FF /* FaceCell.m in Sources */,
 				0FFA916A1C58B870008D91D2 /* CheckFalseView.m in Sources */,
-				1A8988FC1BEC9EBE00F9E81E /* MsgViewCell.m in Sources */,
 				0FFA91661C589E25008D91D2 /* CheckViewController.m in Sources */,
 				63C50E481E666FF40035EE4F /* Custom_BaseInfoResult.m in Sources */,
 				63FC24FC1D98F7E9006F58F3 /* NSParagraphStyle+YYText.m in Sources */,
@@ -6422,7 +6390,6 @@
 				63E1ECD31E1B8FAA0079A2F8 /* SDCollectionViewCell.m in Sources */,
 				634795DB1D378CED00EC4027 /* Aspects.m in Sources */,
 				63A24C691BE063A90036E8EF /* UIImage+FixOrientation.m in Sources */,
-				1AFE7EAF1C2A3CC30016CD02 /* GesturesPasswordCell.m in Sources */,
 				630D46171BCCD2FB00874064 /* UpdateDevIDViewController.m in Sources */,
 				CCE3BE281ED2D655004C35A4 /* QueryCardInfo.m in Sources */,
 				637636EA1D76A72A00E93289 /* LewPopupViewAnimationSlide.m in Sources */,
@@ -6570,7 +6537,6 @@
 				CCCDA8811EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */,
 				CC0DF9941EA5B1090024841A /* LoanProcessCell.m in Sources */,
 				CC0DF9951EA5B1090024841A /* CustomerBaseInfoResult.m in Sources */,
-				CC0DF9961EA5B1090024841A /* MessageCenterViewController.m in Sources */,
 				CC0DF9971EA5B1090024841A /* CashBaseClass.m in Sources */,
 				CC0DF9981EA5B1090024841A /* LOTLayerView.m in Sources */,
 				CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */,
@@ -6617,7 +6583,6 @@
 				CC0DF9BB1EA5B1090024841A /* CheckFalseView.m in Sources */,
 				8438F7191EE163690089E121 /* ChangePasswordViewModel.m in Sources */,
 				84A5696E1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
-				CC0DF9BC1EA5B1090024841A /* MsgViewCell.m in Sources */,
 				CC0DF9BD1EA5B1090024841A /* CheckViewController.m in Sources */,
 				CC0DF9BE1EA5B1090024841A /* Custom_BaseInfoResult.m in Sources */,
 				CC0DF9BF1EA5B1090024841A /* NSParagraphStyle+YYText.m in Sources */,
@@ -6923,7 +6888,6 @@
 				CC0DFAC21EA5B1090024841A /* SDCollectionViewCell.m in Sources */,
 				CC0DFAC31EA5B1090024841A /* Aspects.m in Sources */,
 				CC0DFAC41EA5B1090024841A /* UIImage+FixOrientation.m in Sources */,
-				CC0DFAC51EA5B1090024841A /* GesturesPasswordCell.m in Sources */,
 				CCD32B531F5819980092A9CB /* CurrentInformationCell.swift in Sources */,
 				CC0DFAC61EA5B1090024841A /* UpdateDevIDViewController.m in Sources */,
 				CCCE40C21EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */,
@@ -7090,8 +7054,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = B4V533E2T3;
@@ -7183,8 +7147,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1b16c4d0-c6a8-48ab-948c-ca1be54f774f";
+				PROVISIONING_PROFILE_SPECIFIER = "FXD-Product";
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -7204,8 +7168,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = B4V533E2T3;
@@ -7283,8 +7247,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1b16c4d0-c6a8-48ab-948c-ca1be54f774f";
+				PROVISIONING_PROFILE_SPECIFIER = "FXD-Product";
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

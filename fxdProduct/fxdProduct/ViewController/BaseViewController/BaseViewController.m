@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "MessageCenterViewController.h"
 #import "ReturnMsgBaseClass.h"
 
 @interface BaseViewController ()
@@ -46,8 +45,8 @@
 }
 
 - (void)click {
-    MessageCenterViewController *messView = [MessageCenterViewController new];
-    [self.navigationController pushViewController:messView animated:YES];
+    
+
 }
 
 - (void)setNavCallRightBar {
@@ -58,7 +57,6 @@
 {
     if (@available(iOS 11.0, *)) {
         UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
-        //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
         self.navigationItem.leftBarButtonItem = aBarbi;
         return;
     }
@@ -78,7 +76,6 @@
 {
     if (@available(iOS 11.0, *)) {
         UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(popRootBack)];
-        //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
         self.navigationItem.leftBarButtonItem = aBarbi;
         return;
     }

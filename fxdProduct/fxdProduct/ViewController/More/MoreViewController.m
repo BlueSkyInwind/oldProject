@@ -13,7 +13,6 @@
 #import "HelpViewController.h"
 #import "NextViewCell.h"
 #import "HelpViewCell.h"
-#import "GesturesPasswordCell.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import "PCCircleViewConst.h"
@@ -63,7 +62,6 @@
     [_MyTabView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     [_MyTabView registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"moreFunction"];
     [_MyTabView registerNib:[UINib nibWithNibName:@"HelpViewCell" bundle:nil] forCellReuseIdentifier:@"outLog"];
-    [_MyTabView registerNib:[UINib nibWithNibName:@"GesturesPasswordCell" bundle:nil] forCellReuseIdentifier:@"password"];
     NSString *app_Version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     self.versionLabel.text = [NSString stringWithFormat:@"当前版本 V%@",app_Version];
 }
