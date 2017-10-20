@@ -35,22 +35,22 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 //http://192.168.13.173:8005/ 张强本地
 
 //测试导流 192.168.6.134
-NSString * const _main_url  =   @"http://192.168.6.134/fxd-esb/esb/";
-NSString * const _agreement_url  =   @"http://192.168.6.134/fxd-esb/esb/";
-NSString * const _main_new_url  =  @"http://service-apigateway.test.fxds:8005/";
-NSString * const _ValidESB_url  =   @"http://192.168.6.134/fxd-esb/";
-NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
-NSString * const _p2P_url = @"http://192.168.6.134/fxd-esb/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+//NSString * const _main_url  =   @"http://192.168.6.134/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://192.168.6.134/fxd-esb/esb/";
+//NSString * const _main_new_url  =  @"http://service-apigateway.test.fxds:8005/";
+//NSString * const _ValidESB_url  =   @"http://192.168.6.134/fxd-esb/";
+//NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://192.168.6.134/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //UAT环境
-//NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
-//NSString * const _agreement_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
-//NSString * const _main_new_url  =  @"http://h5.uat.fxds/";
-//NSString * const _ValidESB_url  =   @"http://h5.uat.fxds/fxd-esb/";
-//NSString * const _H5_url    =   @"http://h5.uat.fxds/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://h5.uat.fxds/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
+NSString * const _agreement_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
+NSString * const _main_new_url  =  @"http://h5.uat.fxds/";
+NSString * const _ValidESB_url  =   @"http://h5.uat.fxds/fxd-esb/";
+NSString * const _H5_url    =   @"http://h5.uat.fxds/fxd-h5/page/";
+NSString * const _p2P_url = @"http://h5.uat.fxds/fxd-esb/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //http://192.168.6.134:9191/fxd-esb/
 //张强本地
@@ -238,7 +238,7 @@ NSString * const     _checkVersion_jhtml        =   @"appcommon/checkVersion.jht
 NSString * const     _drawApplyAgain_jhtml      =   @"draw/drawApplyAgain.jhtml";
 
 //红包获取
-NSString * const     _getUserRedpacket_url      =   @"userWs/getUserAvailabelRedpacketList.jhtml";
+NSString * const     _getUserRedpacket_url      =   @"userWs/getUserAvailabelRedpacketAndCouponsList.jhtml";
 
 //申请件状态更新
 NSString * const     _caseStatusUpdateApi_url   =   @"increase/caseStatusUpdateApi.jhtml";

@@ -111,11 +111,11 @@
     switch (indexPath.row) {
         case 0:
         {
-            LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
-            loanFirstVC.productId = @"P001002";
-            [self.navigationController pushViewController:loanFirstVC animated:true];
-//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-//            [self.navigationController pushViewController:repayRecord animated:true];
+//            LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
+//            loanFirstVC.productId = @"P001002";
+//            [self.navigationController pushViewController:loanFirstVC animated:true];
+            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+            [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
         case 1:

@@ -26,8 +26,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    DLog(@"%@",NSStringFromCGRect(self.view.frame));
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     config.preferences = [[WKPreferences alloc] init];
     config.preferences.javaScriptEnabled = true;
@@ -43,17 +41,16 @@
     _webView.UIDelegate = self;
     _webView.scrollView.contentSize = self.view.bounds.size;
     DLog(@"%@  --- %@",NSStringFromCGRect(_webView.frame),NSStringFromCGSize(_webView.scrollView.contentSize));
-    
     [self.view addSubview:_webView];
     [self createProUI];
     [self addBackItem];
     _webView.scrollView.showsVerticalScrollIndicator = false;
-    NSLog(@"%@",_urlStr);
+    DLog(@"%@",_urlStr);
     
+    _urlStr = [_urlStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }else{
-         //_urlStr = @"http://192.168.8.125:8010/wxact_171001";
         //h5活动拼装url
         if([_urlStr containsString:@"wxact"]){
             _urlStr = [self assemblyUrl:_urlStr];

@@ -62,6 +62,9 @@
     if (self.validTicketArr.count > 0) {
         [self.validTicketArr removeAllObjects];
     }
+    if (self.invalidTicketArr.count > 0) {
+        [self.invalidTicketArr removeAllObjects];
+    }
     [self obtainDiscountTicket];
     RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
     [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {

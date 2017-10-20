@@ -127,6 +127,7 @@
 - (void)setVailValues:(DiscountTicketDetailModel *)discountTicketDetailM
 {
     self.lblName.attributedText = [self getNameAttributeString:@"提\n额\n券"];
+    
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@元",discountTicketDetailM.amount_payment_]];
     [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:50 weight:0] range:NSMakeRange(0, str.length-1)];
     [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:35] range:NSMakeRange(str.length-1, 1)];
@@ -157,10 +158,12 @@
 }
 
 -(NSMutableAttributedString *)getNameAttributeString:(NSString *)str{
+    
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:10];//行间距
     NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:str attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSParagraphStyleAttributeName:paragraphStyle}];
     return attributedString ;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
