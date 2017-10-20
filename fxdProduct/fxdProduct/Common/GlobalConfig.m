@@ -477,11 +477,14 @@ NSString * const    _ShanLinBack_url    =    @"main.html#shanlinBack";
 //app 连连绑卡页面用户放弃操作接口
 NSString * const    _CapitalLoanFail_url    =    @"apigw/client/capital/loan/fail";
 
-//免息券接口
+//优惠券接口
 NSString * const    _DiscountTicketList_url    =    @"apigw/client/market/getuserBase";
 
 //选择模式列表
 NSString * const    _ChoosePattern_url    =    @"apigw/client/ios/expay";
+
+//优惠券规则
+NSString * const    _DiscountTicketRule_url    =    @"http://192.168.14.71:8000/page/protocol/couponInstructions.html";
 
 #pragma mark - 合规接口
 

@@ -136,8 +136,9 @@
 }
 
 -(void)goHelpVCClick{
-    
-    
+    FXDWebViewController * webVC = [[FXDWebViewController alloc]init];
+    webVC.urlStr = _DiscountTicketRule_url;
+    [self.navigationController pushViewController:webVC animated:true];
 }
 
 -(void)createNoneView

@@ -103,7 +103,9 @@
     }];
 }
 -(void)pushDirectionsForUse{
-    
+    FXDWebViewController * webVC = [[FXDWebViewController alloc]init];
+    webVC.urlStr = _DiscountTicketRule_url;
+    [self.navigationController pushViewController:webVC animated:true];
 
 }
 -(void)viewWillAppear:(BOOL)animated{

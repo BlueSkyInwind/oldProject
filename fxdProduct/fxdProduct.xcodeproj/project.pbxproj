@@ -30,7 +30,6 @@
 		0F5407F61C8D289100592B56 /* CheckInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F5407F51C8D289100592B56 /* CheckInfoView.m */; };
 		0F5407F81C8D28A700592B56 /* CheckInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F5407F71C8D28A700592B56 /* CheckInfoView.xib */; };
 		0F647E041BE6F2740002D2DF /* RegDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F647E031BE6F2740002D2DF /* RegDetailViewController.m */; };
-		0F647E191BF1DD030002D2DF /* MyAboutOursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F647E181BF1DD030002D2DF /* MyAboutOursViewController.m */; };
 		0F6AAF391C30D8950060F137 /* MyCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AAF371C30D8950060F137 /* MyCardCell.m */; };
 		0F6AAF3A1C30D8950060F137 /* MyCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6AAF381C30D8950060F137 /* MyCardCell.xib */; };
 		0F920C131BCE549900AA9A31 /* MyCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F920C111BCE549900AA9A31 /* MyCardsViewController.m */; };
@@ -891,7 +890,6 @@
 		CC0DFA451EA5B1090024841A /* EmptyUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BC61DEBFED0008EAFD1 /* EmptyUserData.m */; };
 		CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEACE231CA10B480027859A /* NSString+Validate.m */; };
 		CC0DFA471EA5B1090024841A /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */; };
-		CC0DFA481EA5B1090024841A /* MyAboutOursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F647E181BF1DD030002D2DF /* MyAboutOursViewController.m */; };
 		CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6348310D1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m */; };
 		CC0DFA4A1EA5B1090024841A /* FXDNetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6395E2A91BAFA14E00B7AFC2 /* FXDNetWorkManager.m */; };
 		CC0DFA4B1EA5B1090024841A /* UserContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553AF51E5D937600B2C1FF /* UserContactsViewController.m */; };
@@ -1384,8 +1382,6 @@
 		0F5407F71C8D28A700592B56 /* CheckInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckInfoView.xib; sourceTree = "<group>"; };
 		0F647E021BE6F2740002D2DF /* RegDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegDetailViewController.h; sourceTree = "<group>"; };
 		0F647E031BE6F2740002D2DF /* RegDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegDetailViewController.m; sourceTree = "<group>"; };
-		0F647E171BF1DD030002D2DF /* MyAboutOursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAboutOursViewController.h; sourceTree = "<group>"; };
-		0F647E181BF1DD030002D2DF /* MyAboutOursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAboutOursViewController.m; sourceTree = "<group>"; };
 		0F6AAF361C30D8950060F137 /* MyCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCardCell.h; sourceTree = "<group>"; };
 		0F6AAF371C30D8950060F137 /* MyCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCardCell.m; sourceTree = "<group>"; };
 		0F6AAF381C30D8950060F137 /* MyCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCardCell.xib; sourceTree = "<group>"; };
@@ -4751,8 +4747,6 @@
 				1AE5E6211C1EA5240099CCA0 /* AboutMainViewController.h */,
 				1AE5E6221C1EA5240099CCA0 /* AboutMainViewController.m */,
 				1AE5E6231C1EA5240099CCA0 /* AboutMainViewController.xib */,
-				0F647E171BF1DD030002D2DF /* MyAboutOursViewController.h */,
-				0F647E181BF1DD030002D2DF /* MyAboutOursViewController.m */,
 				63F254701E499C8000852CF1 /* InvitationViewController.h */,
 				63F254711E499C8000852CF1 /* InvitationViewController.m */,
 			);
@@ -6277,7 +6271,6 @@
 				635B0BC71DEBFED0008EAFD1 /* EmptyUserData.m in Sources */,
 				0FEACE241CA10B480027859A /* NSString+Validate.m in Sources */,
 				63FF48581B6F15DB009E384C /* BaseTabBarViewController.m in Sources */,
-				0F647E191BF1DD030002D2DF /* MyAboutOursViewController.m in Sources */,
 				6348310E1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m in Sources */,
 				CCEC9C931EE5095000452291 /* BankCardsParamModel.m in Sources */,
 				6395E2AA1BAFA14E00B7AFC2 /* FXDNetWorkManager.m in Sources */,
@@ -6782,7 +6775,6 @@
 				CC0DFA471EA5B1090024841A /* BaseTabBarViewController.m in Sources */,
 				CCEC9C941EE5095000452291 /* BankCardsParamModel.m in Sources */,
 				84E306CB1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
-				CC0DFA481EA5B1090024841A /* MyAboutOursViewController.m in Sources */,
 				CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */,
 				848C531C1F4BDF740092F87C /* FaceIdentiViewController.swift in Sources */,
 				CC0DFA4A1EA5B1090024841A /* FXDNetWorkManager.m in Sources */,

@@ -7,7 +7,6 @@
 //
 
 #import "AboutMainViewController.h"
-#import "MyAboutOursViewController.h"
 #import "FXDWebViewController.h"
 
 @interface AboutMainViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -56,7 +55,6 @@
     UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     if(indexPath.row==0)
     {
-//        MyAboutOursViewController *Myabout=[[MyAboutOursViewController alloc]init];
         FXDWebViewController *webView = [[FXDWebViewController alloc] init];
         webView.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_aboutus_url];
         [self.navigationController pushViewController:webView animated:YES];

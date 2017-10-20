@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutViewController">
@@ -19,36 +23,36 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9o-k0-w43">
                     <rect key="frame" x="0.0" y="64" width="375" height="80"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="line" translatesAutoresizingMaskIntoConstraints="NO" id="vPb-sN-xcG">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="line" translatesAutoresizingMaskIntoConstraints="NO" id="vPb-sN-xcG">
                             <rect key="frame" x="187" y="17" width="1" height="47"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90Q-Ke-laY">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90Q-Ke-laY">
                             <rect key="frame" x="0.0" y="0.0" width="187" height="80"/>
                             <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <inset key="titleEdgeInsets" minX="-50" minY="40" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="60" minY="6" maxX="0.0" maxY="40"/>
                             <state key="normal" title="电话咨询" image="consult_icon">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="telephoneBtn:" destination="-1" eventType="touchUpInside" id="iFb-Fd-cH6"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GsV-Hb-Vd7">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GsV-Hb-Vd7">
                             <rect key="frame" x="188" y="0.0" width="187" height="80"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <inset key="titleEdgeInsets" minX="-50" minY="40" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="60" minY="8" maxX="0.0" maxY="40"/>
                             <state key="normal" title="意见反馈" image="advice_icon">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="ideaBtn:" destination="-1" eventType="touchUpInside" id="nQT-2S-Sbm"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="GsV-Hb-Vd7" secondAttribute="bottom" id="1ho-cX-Rf3"/>
                         <constraint firstAttribute="height" constant="80" id="1xa-e1-asu"/>
@@ -65,7 +69,7 @@
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wan-CI-tKZ">
                     <rect key="frame" x="0.0" y="171" width="375" height="199"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="199" id="tQU-qM-C2K"/>
                     </constraints>
@@ -75,7 +79,7 @@
                     </connections>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="h9o-k0-w43" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="FRc-xp-HVc"/>
                 <constraint firstItem="Wan-CI-tKZ" firstAttribute="top" secondItem="h9o-k0-w43" secondAttribute="bottom" constant="27" id="NoJ-Fq-Uxt"/>
@@ -84,12 +88,11 @@
                 <constraint firstItem="h9o-k0-w43" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dMM-9i-HrP"/>
                 <constraint firstItem="Wan-CI-tKZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="t3v-ts-Q5J"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
     <resources>
-        <image name="advice_icon" width="58" height="44"/>
-        <image name="consult_icon" width="49" height="38"/>
-        <image name="line" width="2" height="64"/>
+        <image name="advice_icon" width="34" height="26"/>
+        <image name="consult_icon" width="29" height="22"/>
+        <image name="line" width="672" height="2"/>
     </resources>
 </document>
