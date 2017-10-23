@@ -255,7 +255,6 @@
     [self.PayDetailTB reloadData];
 }
 
-
 #pragma mark TableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -580,6 +579,10 @@
         _finalyRepayAmount = _repayAmount - _repayListInfo.result.situations.firstObject.debt_service_fee;
         // 折息金额
         CGFloat _discountsAmount = 0;   // 红包 或者 利息
+        _useredPacketAmount = _selectRedPacket;
+        _discountsAmount = _selectRedPacket;
+        
+        /*
         // 红包小于服务费，使用红包
         if (_selectRedPacket <= _repayListInfo.result.situations.firstObject.debt_service_fee) {
             _useredPacketAmount = _selectRedPacket;
@@ -589,10 +592,11 @@
             _useredPacketAmount = _repayListInfo.result.situations.firstObject.debt_service_fee;
             _discountsAmount = _repayListInfo.result.situations.firstObject.debt_service_fee;
         }
+        */
         
         if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
             //急速贷没有服务费，直接拿本金减红包
-            _useredPacketAmount = _selectRedPacket > 10 ? 10 : _selectRedPacket;    // 急速贷红包上线10元
+//            _useredPacketAmount = _selectRedPacket > 10 ? 10 : _selectRedPacket;    // 急速贷红包上线10元
             _finalyRepayAmount -= _useredPacketAmount;
             _discountsAmount = _useredPacketAmount;
         }
