@@ -602,7 +602,7 @@
         }
         // 溢缴金  大于  本金减折息金额
         if (_repayListInfo.result.total_amount >= (_repayAmount - _discountsAmount)) {
-            //              _useTotalAmount = fabs(_repayAmount - _selectRedPacket - _repayListInfo.result.total_amount);
+            //_useTotalAmount = fabs(_repayAmount - _selectRedPacket - _repayListInfo.result.total_amount);
             _useTotalAmount = fabs(_repayAmount - _discountsAmount);
             _finalyRepayAmount = 0.0;
         } else {
