@@ -255,7 +255,6 @@
     [self.PayDetailTB reloadData];
 }
 
-
 #pragma mark TableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -578,27 +577,29 @@
         _selectRedPacket = redPacket.residual_amount;   //所选红包金额
         _selectRedPacketID = redPacket.RedpacketID;     //红包id
         _finalyRepayAmount = _repayAmount - _repayListInfo.result.situations.firstObject.debt_service_fee;
-        // 折息金额
+        // 折扣金额
         CGFloat _discountsAmount = 0;   // 红包 或者 利息
-        // 红包小于服务费，使用红包
-        if (_selectRedPacket <= _repayListInfo.result.situations.firstObject.debt_service_fee) {
+        _useredPacketAmount = _selectRedPacket;
+        _discountsAmount = _selectRedPacket;
+        
+        // 红包小于第一期，使用红包
+        if (_selectRedPacket <= _repayListInfo.result.situations.firstObject.debt_total) {
             _useredPacketAmount = _selectRedPacket;
             _discountsAmount = _selectRedPacket;
         } else {
-             // 红包大于服务费，使用服务费
-            _useredPacketAmount = _repayListInfo.result.situations.firstObject.debt_service_fee;
-            _discountsAmount = _repayListInfo.result.situations.firstObject.debt_service_fee;
+             // 红包大于第一期，使用服务费
+            _useredPacketAmount = _repayListInfo.result.situations.firstObject.debt_total;
+            _discountsAmount = _repayListInfo.result.situations.firstObject.debt_total;
         }
-        
+    
         if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
             //急速贷没有服务费，直接拿本金减红包
-            _useredPacketAmount = _selectRedPacket > 10 ? 10 : _selectRedPacket;    // 急速贷红包上线10元
-            _finalyRepayAmount -= _useredPacketAmount;
-            _discountsAmount = _useredPacketAmount;
+            _finalyRepayAmount = _repayAmount;
+            _discountsAmount = _selectRedPacket;
         }
+        
         // 溢缴金  大于  本金减折息金额
         if (_repayListInfo.result.total_amount >= (_repayAmount - _discountsAmount)) {
-            //              _useTotalAmount = fabs(_repayAmount - _selectRedPacket - _repayListInfo.result.total_amount);
             _useTotalAmount = fabs(_repayAmount - _discountsAmount);
             _finalyRepayAmount = 0.0;
         } else {
