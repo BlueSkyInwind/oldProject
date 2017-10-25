@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class HomeProductListData,HomePopList,HomePaidList,HomeProductsList,HomeBannerList,HomeInfoList,HomeThirdProductList,HomeThirdExtAttr;
+@class HomeProductListData,HomePopList,HomePaidList,HomeProductsList,HomeBannerList,HomeInfoList,HomeThirdProductList,HomeThirdExtAttr,HomeRedCollarList;
 
 
 @interface HomeProductList : NSObject
@@ -53,6 +53,10 @@
 @property (nonatomic , copy)NSString *applicationId;
 //合规用户状态
 @property (nonatomic , copy)NSString *userStatus;
+//评测领红包弹出框
+@property (nonatomic , strong) NSArray<HomeRedCollarList *>            * redCollarList;
+//跳转弹窗  1跳转资料补全页
+@property (nonatomic , copy)NSString *jumpBomb;
 
 @end
 
@@ -158,5 +162,16 @@
 @property (nonatomic , copy) NSString              * path_;
 //右边对应值
 @property (nonatomic , copy) NSArray              * tags;
+
+@end
+
+@interface HomeRedCollarList : NSObject
+
+//取消
+@property (nonatomic , copy) NSString              * cancel;
+//评测领红包文案
+@property (nonatomic , copy) NSString              * collarContent;
+//评测领红包
+@property (nonatomic , copy) NSString              * redCollar;
 
 @end
