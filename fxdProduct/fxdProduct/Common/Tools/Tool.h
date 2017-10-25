@@ -13,6 +13,7 @@
 
 #pragma mark- 时间处理
 + (float)getIOSVersion;
++ (NSString *)getAppVersion;
 
 //获取今天日期
 + (NSString *)getToday;

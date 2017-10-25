@@ -67,6 +67,8 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     //判断屏幕尺寸适配
     AppDelegate *myDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     myDelegate.isShow = true;
+    myDelegate.isHomeChooseShow = true;
+
     if(_k_h > 480){
         myDelegate.autoSizeScaleX = _k_w/320;
         myDelegate.autoSizeScaleY = _k_h/568;

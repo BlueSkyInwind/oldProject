@@ -77,13 +77,14 @@ extension HomeChoosePopView{
         backImageView?.addSubview(sureButton!)
         sureButton?.snp.makeConstraints { (make) in
             make.bottom.equalTo((backImageView?.snp.bottom)!).offset(-40)
-            make.right.equalTo((backImageView?.snp.left)!).offset(-24)
+            make.right.equalTo((backImageView?.snp.right)!).offset(-24)
         }
         
         displayLabel = UILabel()
         displayLabel?.font = UIFont.systemFont(ofSize: 14)
         displayLabel?.numberOfLines = 0;
         displayLabel?.textColor = UIColor.black
+        displayLabel?.textAlignment = .center
         backImageView?.addSubview(displayLabel!)
         displayLabel?.snp.makeConstraints { (make) in
             make.bottom.equalTo((cancelButton?.snp.top)!).offset(-30)
@@ -91,7 +92,28 @@ extension HomeChoosePopView{
             make.right.equalTo((backImageView?.snp.right)!).offset(-24)
             make.height.equalTo(40)
         }
+    
+    if UI_IS_IPONE5 || UI_IS_IPONE6 {
+        cancelButton?.snp.remakeConstraints { (make) in
+            make.bottom.equalTo((backImageView?.snp.bottom)!).offset(-30)
+            make.left.equalTo((backImageView?.snp.left)!).offset(15)
+            make.width.equalTo((backImageView?.snp.width)!).multipliedBy(0.4)
+            make.height.equalTo((cancelButton?.snp.width)!).multipliedBy(0.35)
+        }
+        sureButton?.snp.remakeConstraints { (make) in
+            make.bottom.equalTo((backImageView?.snp.bottom)!).offset(-30)
+            make.right.equalTo((backImageView?.snp.right)!).offset(-15)
+            make.width.equalTo((backImageView?.snp.width)!).multipliedBy(0.4)
+            make.height.equalTo((sureButton?.snp.width)!).multipliedBy(0.35)
+        }
+        displayLabel?.snp.remakeConstraints { (make) in
+            make.bottom.equalTo((cancelButton?.snp.top)!).offset(-25)
+            make.left.equalTo((backImageView?.snp.left)!).offset(24)
+            make.right.equalTo((backImageView?.snp.right)!).offset(-24)
+            make.height.equalTo(40)
+        }
     }
+}
     
     @objc func cancelBtnClick()  {
         if cancelClick != nil {

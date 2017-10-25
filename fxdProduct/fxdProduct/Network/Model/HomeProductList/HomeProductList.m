@@ -25,7 +25,7 @@
              @"productList":[HomeProductsList class],
              @"infoList":[HomeInfoList class],
              @"thirdProductList":[HomeThirdProductList class],
-             @"HomeRedCollarList":[HomeRedCollarList class]
+             @"redCollarList":[HomeRedCollarList class]
              };
 }
 

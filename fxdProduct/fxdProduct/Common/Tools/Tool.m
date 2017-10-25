@@ -21,6 +21,12 @@
 {
     return [[[UIDevice currentDevice] systemVersion] floatValue];
 }
++ (NSString *)getAppVersion
+{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    return app_Version;
+}
 //加密json串
 + (NSString *)getEncryptStringWithParameters:(id)params
 {

@@ -102,11 +102,12 @@
             [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[Utility sharedUtility].userInfo.juid]];
             [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
             [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
+            [manager.requestSerializer setValue:[Tool getAppVersion] forHTTPHeaderField:@"version"];
         }
     }
+    
     //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
-    
     manager.requestSerializer.timeoutInterval = 30.0;
     DLog(@"%@",parameters);
     [manager POST:strURL parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -196,7 +197,7 @@
                     [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
                 }
             }
-            
+            [manager.requestSerializer setValue:[Tool getAppVersion] forHTTPHeaderField:@"version"];
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
             manager.requestSerializer.timeoutInterval = 30.0;
             DLog(@"%@",parameters);
@@ -508,7 +509,7 @@
                     [manager.requestSerializer setValue:[Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
                 }
             }
-            
+            [manager.requestSerializer setValue:[Tool getAppVersion] forHTTPHeaderField:@"version"];
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/xml",@"text/html",@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"charset=UTF-8", nil];
             
             manager.requestSerializer.timeoutInterval = 30.0;
@@ -683,6 +684,7 @@
             DLog(@"juid --- %@\n ",[Utility sharedUtility].userInfo.juid);
         }
     }
+    [manager.requestSerializer setValue:[Tool getAppVersion] forHTTPHeaderField:@"version"];
     [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/xml",@"text/html",@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"charset=UTF-8", nil];
     manager.requestSerializer.timeoutInterval = 30.0;

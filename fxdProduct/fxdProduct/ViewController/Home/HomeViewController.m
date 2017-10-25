@@ -44,6 +44,8 @@
     NSString *_advImageUrl;
     NSTimer * _countdownTimer;
     HomePopView *_popView;
+    HomeChoosePopView *_popChooseView;
+
     NSInteger _count;
     HomeProductList *_homeProductList;
     SDCycleScrollView *_sdView;
@@ -205,6 +207,7 @@
     }];
 }
 
+#pragma mark - 首页活动弹窗
 - (void)popView:(HomeProductList *)model
 {
     if ([model.data.popList.firstObject.isValid isEqualToString:@"1"]) {
@@ -222,6 +225,26 @@
             
         }];
         _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onClose) userInfo:nil repeats:true];
+    }
+}
+-(void)popChooseView:(HomeProductList *)model{
+    if ([model.data.jumpBomb isEqualToString:@"1"]) {
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+        appDelegate.isHomeChooseShow = false;
+        _popChooseView = [[HomeChoosePopView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h)];
+        _popChooseView.displayLabel.text = model.data.redCollarList.firstObject.collarContent;
+        [_popChooseView.cancelButton setTitle:model.data.redCollarList.firstObject.cancel forState:UIControlStateNormal];
+         [_popChooseView.sureButton setTitle:model.data.redCollarList.firstObject.redCollar forState:UIControlStateNormal];
+        __weak typeof (self) weakSelf = self;
+        _popChooseView.cancelClick = ^{
+            [weakSelf lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+        };
+        _popChooseView.sureClick  = ^{
+            [weakSelf lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+            weakSelf.tabBarController.selectedIndex = 1;
+        };
+        [self lew_presentPopupView:_popChooseView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
+        }];
     }
 }
 
@@ -482,6 +505,9 @@
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         if (appDelegate.isShow) {
             [self popView:_homeProductList];
+        }
+        if (appDelegate.isHomeChooseShow) {
+            [self popChooseView:_homeProductList];
         }
     } WithFaileBlock:^{
         finish(false);
@@ -844,8 +870,6 @@
     }];
     [userDataMV UserDataCertificationResult];
 }
-
-
 
 #pragma mark 资金平台列表
 -(void)getCapitalListData:(NSString *)productId approvalAmount:(NSString *)approvalAmount{

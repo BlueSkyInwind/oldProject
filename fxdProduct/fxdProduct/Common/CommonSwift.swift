@@ -24,6 +24,7 @@ let  _k_h = UIScreen.main.bounds.size.height
 let UI_IS_IPONE = (UIDevice.current.userInterfaceIdiom == .phone)
 let UI_IS_IPONE5 = (UI_IS_IPONE && _k_h == 568.0)
 let UI_IS_IPONE6P = (UI_IS_IPONE && _k_h == 736.0)
+let UI_IS_IPONE6 = (UI_IS_IPONE && _k_h == 667.0)
 let UI_IS_IPONE4 = (UI_IS_IPONE && _k_h == 480.0)
 
 let SalaryLoan = "P001002"   //工薪贷平台
