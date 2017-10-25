@@ -211,14 +211,11 @@
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         appDelegate.isShow = false;
         _popView = [HomePopView defaultPopupView];
-//        _popView.backgroundColor = [UIColor redColor];
         _popView.closeBtn.hidden = YES;
         _popView.delegate = self;
         [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.data.popList.firstObject.image]];
-//        _popView.imageView.image = [UIImage imageNamed:@"tanchuang"];
         _advImageUrl = model.data.popList.firstObject.toUrl;
         _advTapToUrl = model.data.popList.firstObject.toUrl;
-//        _shareContent = model.result.content_;
         _popView.parentVC = self;
         
         [self lew_presentPopupView:_popView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{

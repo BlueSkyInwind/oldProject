@@ -617,6 +617,8 @@
 		84D715F01F78CF6700F433E5 /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */; };
 		84D715F11F78CF7C00F433E5 /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715ED1F78CF3700F433E5 /* MGBankCard.framework */; };
 		84D715F21F78CF8800F433E5 /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */; };
+		84DC119E1FA080630066822D /* HomeChoosePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC119D1FA080630066822D /* HomeChoosePopView.swift */; };
+		84DC119F1FA080630066822D /* HomeChoosePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC119D1FA080630066822D /* HomeChoosePopView.swift */; };
 		84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363B1ED580EE0057F19A /* AccountHSServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF8031B1ED3D043003B7975 /* AccountHSServiceModel.m */; };
@@ -2323,6 +2325,7 @@
 		84D715A91F78936D00F433E5 /* MGBaseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBaseKit.framework; sourceTree = "<group>"; };
 		84D715ED1F78CF3700F433E5 /* MGBankCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBankCard.framework; sourceTree = "<group>"; };
 		84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGBankCardResource.bundle; sourceTree = "<group>"; };
+		84DC119D1FA080630066822D /* HomeChoosePopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeChoosePopView.swift; sourceTree = "<group>"; };
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
 		84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSwift.swift; sourceTree = "<group>"; };
@@ -2782,6 +2785,7 @@
 				843C99EE1F9605510067E200 /* ApplicationConfirm */,
 				CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */,
 				CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */,
+				84DC119D1FA080630066822D /* HomeChoosePopView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -6428,6 +6432,7 @@
 				6313DC201BB512BD00EB45DE /* BaseIndexViewController.m in Sources */,
 				63FC24F31D98F7E9006F58F3 /* YYTextLine.m in Sources */,
 				63D47FF91D9A6F8B0058315E /* GetCaseInfo.m in Sources */,
+				84DC119E1FA080630066822D /* HomeChoosePopView.swift in Sources */,
 				63C50E4C1E67F6C10035EE4F /* CustomerIDInfo.m in Sources */,
 				63E8F1B11E6FDAEC00FE4BDD /* DataDicParse.m in Sources */,
 				CCF9384D1EEE2CA80074791D /* ExpressCreditRefuseView.m in Sources */,
@@ -6708,6 +6713,7 @@
 				CC0DFA291EA5B1090024841A /* testModelFmdb.m in Sources */,
 				CC0DFA2A1EA5B1090024841A /* QueryRepaymentsLoanApplicant.m in Sources */,
 				CC0DFA2B1EA5B1090024841A /* GTMBase64.m in Sources */,
+				84DC119F1FA080630066822D /* HomeChoosePopView.swift in Sources */,
 				CC0DFA2C1EA5B1090024841A /* IdentityCell.m in Sources */,
 				CC0DFA2D1EA5B1090024841A /* ApprovalAmountBaseClass.m in Sources */,
 				CC0DFA2E1EA5B1090024841A /* DetailRepayHeader.m in Sources */,
