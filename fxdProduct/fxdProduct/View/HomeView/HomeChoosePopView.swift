@@ -22,12 +22,34 @@ class HomeChoosePopView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.8)
         setupUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+  @objc  func show()  {
+        UIApplication.shared.keyWindow?.addSubview(self)
+        self.backImageView?.transform = CGAffineTransform(scaleX: 1.21, y: 1.21);
+        self.backImageView?.alpha = 0
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            self.backImageView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0);
+            self.backImageView?.alpha = 1
+        }, completion: nil)
+    }
+    
+    @objc  func dismiss()  {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            self.backImageView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0);
+            self.backImageView?.alpha = 0
+            self.alpha = 0
+        }) { (finished) in
+            self.removeFromSuperview()
+        }
+    }
+
     
     /*
     // Only override draw() if you perform custom drawing.

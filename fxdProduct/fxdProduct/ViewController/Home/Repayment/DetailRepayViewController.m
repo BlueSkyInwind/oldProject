@@ -56,8 +56,11 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     // Do any additional setup after loading the view from its nib.
     [self addBackItem];
     self.navigationItem.title = @"期供详情";
-
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
     _readyPayAmount = 0.0;
     _clickMax = -1;
     _clickMin = 0;

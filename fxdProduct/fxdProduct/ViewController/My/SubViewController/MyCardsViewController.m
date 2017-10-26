@@ -42,7 +42,6 @@
     [super viewDidLoad];
     [self addBackItem];
     self.title=@"我的银行卡";
-    
     _defaultCardIndex = -1;
     
     self.automaticallyAdjustsScrollViewInsets = NO;

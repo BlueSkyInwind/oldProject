@@ -47,7 +47,11 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         self.navigationItem.title = @"选择付款方式";
     }
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
     [self addBackItem];
     [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(fatchBankList)];

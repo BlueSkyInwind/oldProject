@@ -75,9 +75,10 @@
     dataColor = [NSMutableArray array];
     dataListAll = [NSMutableArray array];
     _contactStatus = @"0";
-    
-    NSString *device = [[UIDevice currentDevice] systemVersion];
-    if (device.floatValue>10) {
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }else if (@available(iOS 9.0, *)) {
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
         self.automaticallyAdjustsScrollViewInsets = false;

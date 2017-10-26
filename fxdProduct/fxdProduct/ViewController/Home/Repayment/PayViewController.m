@@ -28,7 +28,11 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    if (@available(iOS 11.0, *)) {
+        self.myTableview.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
     if (_payType == PayTypeWeekPay) {
         self.navigationItem.title = @"支付详情";
     } else if (_payType == PayTypeCleanPay){

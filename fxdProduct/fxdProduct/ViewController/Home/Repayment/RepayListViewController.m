@@ -75,7 +75,11 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     _vaildBills = [NSMutableArray array];
     _bills = [NSMutableArray array];
     _supportBankListArr = [NSMutableArray array];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    if (@available(iOS 11.0, *)) {
+        self.repayTableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
     self.endView.layer.borderWidth = 0.5;
     self.endView.layer.borderColor = [UIColor grayColor].CGColor;
     [self setUpTableview];

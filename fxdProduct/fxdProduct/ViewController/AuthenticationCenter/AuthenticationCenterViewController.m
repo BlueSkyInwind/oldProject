@@ -824,10 +824,10 @@
         if ([baseResultM.errCode isEqualToString:@"0"]){
             CheckingViewController * checkVC = [[CheckingViewController  alloc]init];
             [self.navigationController pushViewController:checkVC animated:true];
-            //发放红包提示
+            //首次测评发放红包提示
             NSString * str = baseResultM.data[@"redIssuedSucce"];
             if (str != nil && ![str isEqualToString:@""]) {
-                [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:baseResultM.friendErrMsg];
+                [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:str];
             }
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];

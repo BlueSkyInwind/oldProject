@@ -95,7 +95,6 @@
 
 - (void)_presentPopupView:(UIView*)popupView animation:(id<LewPopupAnimation>)animation backgroundClickable:(BOOL)clickable dismissed:(void(^)(void))dismissed{
 
-    
     // check if source view controller is not in destination
     if ([self.lewOverlayView.subviews containsObject:popupView]) return;
     

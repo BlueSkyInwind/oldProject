@@ -101,7 +101,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"支付详情";
-    self.automaticallyAdjustsScrollViewInsets=NO;
+    if (@available(iOS 11.0, *)) {
+        self.PayDetailTB.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
     defaultBankIndex = -1;
     userSelectIndex = 0;
     _useTotalAmount = 0.0;

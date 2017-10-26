@@ -29,14 +29,12 @@
 		0F0FDAC31BC771EC00F3CF10 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F0FDAC11BC771EC00F3CF10 /* AboutViewController.xib */; };
 		0F5407F61C8D289100592B56 /* CheckInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F5407F51C8D289100592B56 /* CheckInfoView.m */; };
 		0F5407F81C8D28A700592B56 /* CheckInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F5407F71C8D28A700592B56 /* CheckInfoView.xib */; };
-		0F647E041BE6F2740002D2DF /* RegDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F647E031BE6F2740002D2DF /* RegDetailViewController.m */; };
 		0F6AAF391C30D8950060F137 /* MyCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AAF371C30D8950060F137 /* MyCardCell.m */; };
 		0F6AAF3A1C30D8950060F137 /* MyCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6AAF381C30D8950060F137 /* MyCardCell.xib */; };
 		0F920C131BCE549900AA9A31 /* MyCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F920C111BCE549900AA9A31 /* MyCardsViewController.m */; };
 		0F920C141BCE549900AA9A31 /* MyCardsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F920C121BCE549900AA9A31 /* MyCardsViewController.xib */; };
 		0F9E30D21BC8A70C0018A801 /* IdeaBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E30D01BC8A70C0018A801 /* IdeaBackViewController.m */; };
 		0F9E30D31BC8A70C0018A801 /* IdeaBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9E30D11BC8A70C0018A801 /* IdeaBackViewController.xib */; };
-		0FA644B61BF4628E00959EDF /* RegSecoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA644B51BF4628E00959EDF /* RegSecoryViewController.m */; };
 		0FBF11261BE376C9008F6393 /* HomeBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF11251BE376C9008F6393 /* HomeBankCardViewController.m */; };
 		0FEA58891BE0A497007F8A6D /* testView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA58871BE0A497007F8A6D /* testView.m */; };
 		0FEA588A1BE0A497007F8A6D /* testView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA58881BE0A497007F8A6D /* testView.xib */; };
@@ -782,7 +780,6 @@
 		CC0DF9D21EA5B1090024841A /* TicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB0F5A81CF2D20E00F3DF06 /* TicketCell.m */; };
 		CC0DF9D31EA5B1090024841A /* UserSureRefuseResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06503F1BE219BF000DE94D /* UserSureRefuseResult.m */; };
 		CC0DF9D41EA5B1090024841A /* NSString+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 63832C8B1CB7530400C6F194 /* NSString+AES.m */; };
-		CC0DF9D51EA5B1090024841A /* RegSecoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA644B51BF4628E00959EDF /* RegSecoryViewController.m */; };
 		CC0DF9D61EA5B1090024841A /* ReconfrInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50E4F1E6804950035EE4F /* ReconfrInfoModel.m */; };
 		CC0DF9D71EA5B1090024841A /* UIApplication+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 639E88711CA1371800254216 /* UIApplication+Extend.m */; };
 		CC0DF9D81EA5B1090024841A /* DaysCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FE3DEE1E48821B009E5B82 /* DaysCell.m */; };
@@ -904,7 +901,6 @@
 		CC0DFA5A1EA5B1090024841A /* SMSViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1BA21C30DBCB00450358 /* SMSViewModel.m */; };
 		CC0DFA5B1EA5B1090024841A /* GetMoneyStateUserBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24D2C1BE10F4A0036E8EF /* GetMoneyStateUserBean.m */; };
 		CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DE1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m */; };
-		CC0DFA5D1EA5B1090024841A /* RegDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F647E031BE6F2740002D2DF /* RegDetailViewController.m */; };
 		CC0DFA5E1EA5B1090024841A /* RepaymentHelpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEDCF1A1C197F5000014A87 /* RepaymentHelpCell.m */; };
 		CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16A61E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m */; };
 		CC0DFA601EA5B1090024841A /* CADisplayLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16BB1E517D9F00AB8AB6 /* CADisplayLink.m */; };
@@ -1372,8 +1368,6 @@
 		0F5407F41C8D289100592B56 /* CheckInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckInfoView.h; sourceTree = "<group>"; };
 		0F5407F51C8D289100592B56 /* CheckInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckInfoView.m; sourceTree = "<group>"; };
 		0F5407F71C8D28A700592B56 /* CheckInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckInfoView.xib; sourceTree = "<group>"; };
-		0F647E021BE6F2740002D2DF /* RegDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegDetailViewController.h; sourceTree = "<group>"; };
-		0F647E031BE6F2740002D2DF /* RegDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegDetailViewController.m; sourceTree = "<group>"; };
 		0F6AAF361C30D8950060F137 /* MyCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCardCell.h; sourceTree = "<group>"; };
 		0F6AAF371C30D8950060F137 /* MyCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCardCell.m; sourceTree = "<group>"; };
 		0F6AAF381C30D8950060F137 /* MyCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCardCell.xib; sourceTree = "<group>"; };
@@ -1383,8 +1377,6 @@
 		0F9E30CF1BC8A70C0018A801 /* IdeaBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdeaBackViewController.h; sourceTree = "<group>"; };
 		0F9E30D01BC8A70C0018A801 /* IdeaBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaBackViewController.m; sourceTree = "<group>"; };
 		0F9E30D11BC8A70C0018A801 /* IdeaBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdeaBackViewController.xib; sourceTree = "<group>"; };
-		0FA644B41BF4628E00959EDF /* RegSecoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegSecoryViewController.h; sourceTree = "<group>"; };
-		0FA644B51BF4628E00959EDF /* RegSecoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegSecoryViewController.m; sourceTree = "<group>"; };
 		0FBF11241BE376C9008F6393 /* HomeBankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBankCardViewController.h; sourceTree = "<group>"; };
 		0FBF11251BE376C9008F6393 /* HomeBankCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBankCardViewController.m; sourceTree = "<group>"; };
 		0FEA58861BE0A497007F8A6D /* testView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testView.h; sourceTree = "<group>"; };
@@ -3183,9 +3175,9 @@
 		63553ADF1E5D536800B2C1FF /* ApplyFlow */ = {
 			isa = PBXGroup;
 			children = (
-				CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */,
 				CCD565BD1E8A46D500B6665D /* PserInfoViewController.h */,
 				CCD565BC1E8A46D500B6665D /* PserInfoViewController.mm */,
+				CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */,
 				63553AF41E5D937600B2C1FF /* UserContactsViewController.h */,
 				63553AF51E5D937600B2C1FF /* UserContactsViewController.m */,
 				63553AF61E5D937600B2C1FF /* UserContactsViewController.xib */,
@@ -4738,10 +4730,6 @@
 				63ED33441B6B5569008B6085 /* RegViewController.h */,
 				63ED33451B6B5569008B6085 /* RegViewController.m */,
 				633DAC071C34D47A000DA852 /* RegViewController.xib */,
-				0F647E021BE6F2740002D2DF /* RegDetailViewController.h */,
-				0F647E031BE6F2740002D2DF /* RegDetailViewController.m */,
-				0FA644B41BF4628E00959EDF /* RegSecoryViewController.h */,
-				0FA644B51BF4628E00959EDF /* RegSecoryViewController.m */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -6106,7 +6094,6 @@
 				0F0650461BE219BF000DE94D /* UserSureRefuseResult.m in Sources */,
 				63832C8C1CB7530400C6F194 /* NSString+AES.m in Sources */,
 				848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
-				0FA644B61BF4628E00959EDF /* RegSecoryViewController.m in Sources */,
 				84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */,
 				63C50E501E6804950035EE4F /* ReconfrInfoModel.m in Sources */,
 				639E88731CA1371800254216 /* UIApplication+Extend.m in Sources */,
@@ -6265,7 +6252,6 @@
 				63A24D2F1BE10F4A0036E8EF /* GetMoneyStateUserBean.m in Sources */,
 				638A170A1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m in Sources */,
 				84A5696D1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
-				0F647E041BE6F2740002D2DF /* RegDetailViewController.m in Sources */,
 				1AEDCF1F1C197F5000014A87 /* RepaymentHelpCell.m in Sources */,
 				638A16F21E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m in Sources */,
 				CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */,
@@ -6620,7 +6606,6 @@
 				CC0DF9D31EA5B1090024841A /* UserSureRefuseResult.m in Sources */,
 				CC3197901ED911980083F263 /* WhiteRefuseView.m in Sources */,
 				CC0DF9D41EA5B1090024841A /* NSString+AES.m in Sources */,
-				CC0DF9D51EA5B1090024841A /* RegSecoryViewController.m in Sources */,
 				CC0DF9D61EA5B1090024841A /* ReconfrInfoModel.m in Sources */,
 				CC0DF9D71EA5B1090024841A /* UIApplication+Extend.m in Sources */,
 				CC0DF9D81EA5B1090024841A /* DaysCell.m in Sources */,
@@ -6770,7 +6755,6 @@
 				CC0DFA5B1EA5B1090024841A /* GetMoneyStateUserBean.m in Sources */,
 				CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */,
 				CCF43B041EDE672D00CFD72C /* getBidStatus.m in Sources */,
-				CC0DFA5D1EA5B1090024841A /* RegDetailViewController.m in Sources */,
 				CC0DFA5E1EA5B1090024841A /* RepaymentHelpCell.m in Sources */,
 				CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */,
 				CC0DFA601EA5B1090024841A /* CADisplayLink.m in Sources */,

@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title=@"过期券";
-    self.automaticallyAdjustsScrollViewInsets = NO;
+
     [self addBackItem];
     [self createTableView];
 
@@ -34,10 +34,11 @@
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:@"TicketCell" bundle:nil] forCellReuseIdentifier:@"cell"];
-//    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(obtainDiscountTicket)];
-//    header.automaticallyChangeAlpha = YES;
-//    header.lastUpdatedTimeLabel.hidden = YES;
-//    self.tableView.mj_header = header;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
 }
 -(void)obtainDiscountTicket{
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
@@ -95,21 +96,21 @@
     if(section==0)
     {
         UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 30)];
-        view.backgroundColor=[UIColor whiteColor];
+        view.backgroundColor=kUIColorFromRGB(0xf2f2f2);
         UILabel *lbl=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, _k_w, 10)];
         lbl.backgroundColor=rgba(245, 245, 245, 1);
         [view addSubview:lbl];
         return view;
     }
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 20)];
-    view.backgroundColor=[UIColor whiteColor];
+    view.backgroundColor=kUIColorFromRGB(0xf2f2f2);
     return view;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 20)];
-    view.backgroundColor=[UIColor whiteColor];
+    view.backgroundColor=kUIColorFromRGB(0xf2f2f2);
     return view;
 }
 

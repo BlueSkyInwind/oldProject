@@ -44,7 +44,6 @@
     NSString *_advImageUrl;
     NSTimer * _countdownTimer;
     HomePopView *_popView;
-    HomeChoosePopView *_popChooseView;
 
     NSInteger _count;
     HomeProductList *_homeProductList;
@@ -58,12 +57,18 @@
 }
 
 @property (nonatomic,strong) LoadFailureView * loadFailView;
+@property (nonatomic,strong) HomeChoosePopView * popChooseView;
+
 @end
 
 @implementation HomeViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
     self.navigationItem.title = @"发薪贷";
     _count = 0;
    _dataArray = [NSMutableArray array];
@@ -103,6 +108,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+    [_popChooseView dismiss];
+    _popChooseView = nil;
     [super viewWillDisappear:animated];
 }
 
@@ -168,7 +175,7 @@
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;
-    [header beginRefreshing];
+//    [header beginRefreshing];
     self.tableView.mj_header = header;
 }
 -(void)setUploadFailView{
@@ -207,9 +214,10 @@
 }
 
 #pragma mark - 首页活动弹窗
+//首单活动
 - (void)popView:(HomeProductList *)model
 {
-    if ([model.data.popList.firstObject.isValid isEqualToString:@"0"]) {
+    if ([model.data.popList.firstObject.isValid isEqualToString:@"1"]) {
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         appDelegate.isShow = false;
         _popView = [HomePopView defaultPopupView];
@@ -219,15 +227,14 @@
         _advImageUrl = model.data.popList.firstObject.toUrl;
         _advTapToUrl = model.data.popList.firstObject.toUrl;
         _popView.parentVC = self;
-        
         [self lew_presentPopupView:_popView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-            
         }];
         _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onClose) userInfo:nil repeats:true];
     }
 }
-
+//测评红包活动
 -(void)popChooseView:(HomeProductList *)model{
+    
     if ([model.data.jumpBomb isEqualToString:@"1"]) {
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         appDelegate.isHomeChooseShow = false;
@@ -235,34 +242,34 @@
         _popChooseView.displayLabel.text = model.data.redCollarList.collarContent;
         [_popChooseView.cancelButton setTitle:model.data.redCollarList.cancel forState:UIControlStateNormal];
          [_popChooseView.sureButton setTitle:model.data.redCollarList.redCollar forState:UIControlStateNormal];
+         [_popChooseView show];
         __weak typeof (self) weakSelf = self;
         _popChooseView.cancelClick = ^{
-            [weakSelf lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+            [weakSelf.popChooseView dismiss];
+            weakSelf.popChooseView = nil;
         };
         _popChooseView.sureClick  = ^{
-            [weakSelf lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+            [weakSelf.popChooseView dismiss];
+            weakSelf.popChooseView = nil;
             weakSelf.tabBarController.selectedIndex = 1;
         };
-        [self lew_presentPopupView:_popChooseView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-        }];
     }
 }
 
 - (void)imageTap
 {
     DLog(@"广告图片点击");
-//    if ([_advTapToUrl hasPrefix:@"http://"] || [_advTapToUrl hasPrefix:@"https://"]) {
-//        FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-//        webView.urlStr = _advTapToUrl;
-//        webView.shareContent = _shareContent;
-//        [self.navigationController pushViewController:webView animated:true];
-//        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
-//    }
+    if ([_advTapToUrl hasPrefix:@"http://"] || [_advTapToUrl hasPrefix:@"https://"]) {
+        FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+        webView.urlStr = _advTapToUrl;
+        [self.navigationController pushViewController:webView animated:true];
+        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+    }
     
-    FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
-    firstBorrowVC.url = _advImageUrl;
-    [self.navigationController pushViewController:firstBorrowVC animated:YES];
-    [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+//    FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
+//    firstBorrowVC.url = _advImageUrl;
+//    [self.navigationController pushViewController:firstBorrowVC animated:YES];
+//    [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
     
 }
 

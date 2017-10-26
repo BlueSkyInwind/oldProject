@@ -52,14 +52,14 @@
     _contact2 = @[@"同事",@"朋友"];
     _flagTag = 0;
     _toolbarCancelDone.hidden = true;
-
-    NSString *device = [[UIDevice currentDevice] systemVersion];
-    if (device.floatValue>10) {
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }else if (@available(iOS 9.0, *)) {
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
         self.automaticallyAdjustsScrollViewInsets = false;
     }
-    
     dataListAll = [NSMutableArray array];
     dataColor = [NSMutableArray array];
     for (int i = 0; i < 6; i++) {
