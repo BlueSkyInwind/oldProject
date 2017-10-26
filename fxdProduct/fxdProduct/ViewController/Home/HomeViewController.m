@@ -203,14 +203,13 @@
     [qrPopView layoutIfNeeded];
     qrPopView.parentVC = self;
     [self lew_presentPopupView:qrPopView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-
     }];
 }
 
 #pragma mark - 首页活动弹窗
 - (void)popView:(HomeProductList *)model
 {
-    if ([model.data.popList.firstObject.isValid isEqualToString:@"1"]) {
+    if ([model.data.popList.firstObject.isValid isEqualToString:@"0"]) {
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         appDelegate.isShow = false;
         _popView = [HomePopView defaultPopupView];
@@ -227,14 +226,15 @@
         _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onClose) userInfo:nil repeats:true];
     }
 }
+
 -(void)popChooseView:(HomeProductList *)model{
     if ([model.data.jumpBomb isEqualToString:@"1"]) {
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         appDelegate.isHomeChooseShow = false;
         _popChooseView = [[HomeChoosePopView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h)];
-        _popChooseView.displayLabel.text = model.data.redCollarList.firstObject.collarContent;
-        [_popChooseView.cancelButton setTitle:model.data.redCollarList.firstObject.cancel forState:UIControlStateNormal];
-         [_popChooseView.sureButton setTitle:model.data.redCollarList.firstObject.redCollar forState:UIControlStateNormal];
+        _popChooseView.displayLabel.text = model.data.redCollarList.collarContent;
+        [_popChooseView.cancelButton setTitle:model.data.redCollarList.cancel forState:UIControlStateNormal];
+         [_popChooseView.sureButton setTitle:model.data.redCollarList.redCollar forState:UIControlStateNormal];
         __weak typeof (self) weakSelf = self;
         _popChooseView.cancelClick = ^{
             [weakSelf lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];

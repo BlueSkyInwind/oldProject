@@ -54,7 +54,7 @@
 //合规用户状态
 @property (nonatomic , copy)NSString *userStatus;
 //评测领红包弹出框
-@property (nonatomic , strong) NSArray<HomeRedCollarList *>            * redCollarList;
+@property (nonatomic , strong) HomeRedCollarList *     redCollarList;
 //跳转弹窗  1跳转资料补全页
 @property (nonatomic , copy)NSString *jumpBomb;
 

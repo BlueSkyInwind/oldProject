@@ -8,6 +8,7 @@
 
 #import "EmptyUserData.h"
 #import "DataWriteAndRead.h"
+#import "AppDelegate.h"
 
 @implementation EmptyUserData
 
@@ -27,6 +28,10 @@
     [Utility sharedUtility].userInfo.realName = @"";
     [Utility sharedUtility].userInfo.pruductId = @"";
     [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    appDelegate.isShow = true;
+    appDelegate.isHomeChooseShow = true;
+
 }
 
 @end
