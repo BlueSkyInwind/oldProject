@@ -24,10 +24,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.hfsj.fxd</string>
+			<string>h5.faxindai.com</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>HFfxd</string>
+				<string>fxdapp</string>
 			</array>
 		</dict>
 		<dict>

@@ -259,18 +259,18 @@
 - (void)imageTap
 {
     DLog(@"广告图片点击");
+    if ([_advTapToUrl containsString:@".png"] || [_advTapToUrl containsString:@".jpg"]) {
+        FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
+        firstBorrowVC.url = _advImageUrl;
+        [self.navigationController pushViewController:firstBorrowVC animated:YES];
+        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+    }
     if ([_advTapToUrl hasPrefix:@"http://"] || [_advTapToUrl hasPrefix:@"https://"]) {
         FXDWebViewController *webView = [[FXDWebViewController alloc] init];
         webView.urlStr = _advTapToUrl;
         [self.navigationController pushViewController:webView animated:true];
         [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
     }
-    
-//    FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
-//    firstBorrowVC.url = _advImageUrl;
-//    [self.navigationController pushViewController:firstBorrowVC animated:YES];
-//    [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
-    
 }
 
 - (void)onClose
@@ -283,7 +283,6 @@
 }
 
 #pragma mark - TableViewDelegate
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     NSInteger i=0;

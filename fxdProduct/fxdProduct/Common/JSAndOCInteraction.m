@@ -23,6 +23,8 @@
     return sharedInstance;
 }
 
+
+#pragma mark -- js交互处理
 /**
  分享
 
@@ -249,6 +251,39 @@
     return newString;
 }
 */
+
+#pragma mark -- app启动跳转处理
+
+
+/**
+ 外部启动app跳转某个页面
+
+ @param viewControllerNameIden 识别符
+ */
+-(void)pushAppViewController:(NSString *)viewControllerNameIden{
+    
+    BaseNavigationViewController * BaseNavigationVC = [self jumpVC];
+    
+    
+}
+
+-(BaseNavigationViewController *)jumpVC{
+    id currentVC = [[Tool share]topViewController];
+    BaseNavigationViewController * BaseNavigationVC;
+    if ([currentVC isKindOfClass:[BaseTabBarViewController class]]) {
+        BaseTabBarViewController * baseTabVC = currentVC;
+        BaseNavigationVC = baseTabVC.selectedViewController;
+    }
+    return BaseNavigationVC;
+}
+
+
+
+
+
+
+
+
 
 
 

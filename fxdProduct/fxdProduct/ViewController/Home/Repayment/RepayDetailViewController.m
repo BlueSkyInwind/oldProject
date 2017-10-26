@@ -599,7 +599,6 @@
         if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
             //急速贷没有服务费，直接拿本金减红包
             _finalyRepayAmount = _repayAmount;
-            _discountsAmount = _selectRedPacket;
         }
         
         // 溢缴金  大于  本金减折息金额

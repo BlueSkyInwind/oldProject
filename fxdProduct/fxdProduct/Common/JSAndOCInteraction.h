@@ -12,6 +12,8 @@
 
 + (JSAndOCInteraction *)sharedInteraction;
 
+#pragma mark -- js交互处理
+
 /**
  分享
  
@@ -68,5 +70,15 @@
  @return 数据
  */
 -(NSString *)obtainLoginInfo;
+
+#pragma mark -- app启动跳转处理
+
+/**
+ 外部启动app跳转某个页面
+ 
+ @param viewControllerNameIden 识别符
+ */
+-(void)pushAppViewController:(NSString *)viewControllerNameIden;
+
 
 @end

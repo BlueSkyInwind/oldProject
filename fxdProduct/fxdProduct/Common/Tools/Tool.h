@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @interface Tool : NSObject
++(Tool *)share;
 
 #pragma mark- 时间处理
 + (float)getIOSVersion;
@@ -89,6 +90,12 @@
 +(void)ClipboardOfCopy:(NSString *)copyStr VC:(UIViewController *)vc prompt:(NSString *)str;
 
 
+/**
+ 获取当前视图
+
+ @return 返回结果
+ */
+-(UIViewController *)topViewController;
 
 
 

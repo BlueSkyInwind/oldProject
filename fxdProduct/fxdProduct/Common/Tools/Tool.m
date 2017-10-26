@@ -12,6 +12,16 @@
 
 @implementation Tool
 
+static Tool * shareTool = nil;
++(Tool *)share{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shareTool = [[Tool alloc]init];
+    });
+    return shareTool;
+}
+
+
 //获取加密参数
 + (NSDictionary *)getParameters:(id)params
 {
@@ -429,6 +439,30 @@
     
 }
 
+
+/**
+ 获取当前视图
+ 
+ @return 返回结果
+ */
+-(UIViewController *)topViewController{
+    return [self topViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+}
+
+- (UIViewController *)topViewController:(UIViewController *)rootViewController
+{
+    if (rootViewController.presentedViewController == nil) {
+        return rootViewController;
+    }
+    if ([rootViewController.presentedViewController isMemberOfClass:[UINavigationController class]]) {
+        UINavigationController * navigationController = (UINavigationController *)rootViewController.presentedViewController;
+        UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
+        return [self topViewController:lastViewController];
+    }
+    
+    UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
+    return [self topViewController:presentedViewController];
+}
 
 
 
