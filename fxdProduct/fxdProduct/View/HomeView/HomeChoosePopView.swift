@@ -78,7 +78,7 @@ extension HomeChoosePopView{
     
         cancelButton = UIButton()
         cancelButton?.setTitleColor(UIColor.white, for: .normal)
-        cancelButton?.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        cancelButton?.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         cancelButton?.setBackgroundImage(UIImage(named:"homePop_cancelImage"), for: .normal)
         cancelButton?.layer.cornerRadius = 5
         cancelButton?.clipsToBounds = true
@@ -90,8 +90,8 @@ extension HomeChoosePopView{
         }
         
         sureButton = UIButton()
-        sureButton?.setTitleColor(UIColor.black, for: .normal)
-        sureButton?.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        sureButton?.setTitleColor(UIColor.white, for: .normal)
+        sureButton?.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         sureButton?.setBackgroundImage(UIImage(named:"homePop_sureImage"), for: .normal)
         sureButton?.layer.cornerRadius = 5
         sureButton?.clipsToBounds = true
@@ -103,16 +103,16 @@ extension HomeChoosePopView{
         }
         
         displayLabel = UILabel()
-        displayLabel?.font = UIFont.systemFont(ofSize: 14)
+        displayLabel?.font = UIFont.systemFont(ofSize: 18)
         displayLabel?.numberOfLines = 0;
         displayLabel?.textColor = UIColor.black
-        displayLabel?.textAlignment = .center
+        displayLabel?.textAlignment = .left
         backImageView?.addSubview(displayLabel!)
         displayLabel?.snp.makeConstraints { (make) in
             make.bottom.equalTo((cancelButton?.snp.top)!).offset(-30)
             make.left.equalTo((backImageView?.snp.left)!).offset(24)
             make.right.equalTo((backImageView?.snp.right)!).offset(-24)
-            make.height.equalTo(40)
+            make.height.equalTo(60)
         }
     
     if UI_IS_IPONE5 || UI_IS_IPONE6 {
@@ -134,6 +134,10 @@ extension HomeChoosePopView{
             make.right.equalTo((backImageView?.snp.right)!).offset(-24)
             make.height.equalTo(40)
         }
+        
+        cancelButton?.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        sureButton?.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        displayLabel?.font = UIFont.systemFont(ofSize: 15)
     }
 }
     
