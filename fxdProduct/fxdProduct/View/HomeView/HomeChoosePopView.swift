@@ -78,7 +78,7 @@ extension HomeChoosePopView{
     
         cancelButton = UIButton()
         cancelButton?.setTitleColor(UIColor.white, for: .normal)
-        cancelButton?.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        cancelButton?.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         cancelButton?.setBackgroundImage(UIImage(named:"homePop_cancelImage"), for: .normal)
         cancelButton?.layer.cornerRadius = 5
         cancelButton?.clipsToBounds = true
@@ -91,7 +91,7 @@ extension HomeChoosePopView{
         
         sureButton = UIButton()
         sureButton?.setTitleColor(UIColor.black, for: .normal)
-        sureButton?.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        sureButton?.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         sureButton?.setBackgroundImage(UIImage(named:"homePop_sureImage"), for: .normal)
         sureButton?.layer.cornerRadius = 5
         sureButton?.clipsToBounds = true
@@ -103,7 +103,7 @@ extension HomeChoosePopView{
         }
         
         displayLabel = UILabel()
-        displayLabel?.font = UIFont.systemFont(ofSize: 14)
+        displayLabel?.font = UIFont.systemFont(ofSize: 15)
         displayLabel?.numberOfLines = 0;
         displayLabel?.textColor = UIColor.black
         displayLabel?.textAlignment = .center

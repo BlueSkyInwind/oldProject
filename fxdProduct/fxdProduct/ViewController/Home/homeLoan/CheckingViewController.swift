@@ -11,8 +11,8 @@ import MJRefresh
 
 class CheckingViewController: BaseViewController {
 
-    var scrollView: UIScrollView?
-    
+    var scrollView : UIScrollView?
+    var refreshTimer : Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,9 +29,18 @@ class CheckingViewController: BaseViewController {
         self.view.addSubview(checkingView!)
         
         addBackItemRoot()
+        startReresh()
     }
-
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        refreshTimer?.invalidate()
+        refreshTimer = nil
+    }
+    
+    func startReresh()  {
+        refreshTimer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(refresh), userInfo: nil, repeats: true)
+    }
+    
     //MARK:量子互助
     @objc func applyImmediatelyBtnClick(){
     
@@ -52,7 +61,6 @@ class CheckingViewController: BaseViewController {
         view.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             print("下拉刷新.")
             self.refresh()
-            
             //结束刷新
         })
         self.view = view;
@@ -60,7 +68,7 @@ class CheckingViewController: BaseViewController {
     }
     
     //MARK:刷新
-    func refresh(){
+    @objc func refresh(){
     
         let userDataMV = UserDataViewModel()
         userDataMV.setBlockWithReturn({ (returnValue) in
