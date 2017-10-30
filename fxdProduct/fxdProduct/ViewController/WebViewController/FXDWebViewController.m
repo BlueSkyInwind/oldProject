@@ -46,7 +46,7 @@
     [self addBackItem];
     _webView.scrollView.showsVerticalScrollIndicator = false;
     DLog(@"%@",_urlStr);
-    
+    _urlStr = @"https://m.qunadai.com/land/land_phone/spclink.html?plid=ef1c4331-0c56-49c7-b0ca-e747e9a38e16";
     _urlStr = [_urlStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
@@ -237,14 +237,16 @@
 {
     NSURLRequest *request = navigationAction.request;
     NSLog(@"=========%@",request.URL.absoluteString);
-
+    WKNavigationActionPolicy policy = WKNavigationActionPolicyAllow;
+    /* 判断itunes的host链接 */
+    if([[request.URL host] isEqualToString:@"itunes.apple.com"] &&
+       [[UIApplication sharedApplication] openURL:navigationAction.request.URL]){
+        policy = WKNavigationActionPolicyCancel;
+    }
     if ([request.URL.absoluteString hasSuffix:@"main.html"]) {
-        decisionHandler(WKNavigationActionPolicyCancel);
-//      [self.navigationController popViewControllerAnimated:YES];
+        policy = WKNavigationActionPolicyCancel;
     }
-    else{
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }
+    decisionHandler(policy);
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
