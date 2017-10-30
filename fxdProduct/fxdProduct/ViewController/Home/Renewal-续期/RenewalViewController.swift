@@ -10,11 +10,14 @@ import UIKit
 
 class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableViewDelegate{
 
+    //tab左边的文字内容
     var leftTitleArr = ["逾期费用","使用溢缴金","应付金额","支付方式"]
     let cellId = "CellId"
     var headerView: CurrentInformationHeadView? = nil
+    //tab右边的内容
     var contentArr : [String] = [String]()
     var cardInfo : CardInfo?
+    //当前期的分期id
    @objc var stagingId : String?
     var currentindex : Int?
     var patternName : String?
@@ -36,11 +39,13 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
         self.title = "续期费用"
         currentindex = 0
         addBackItem()
+        //头部视图
         headerView = CurrentInformationHeadView()
         headerView?.moneyDescLabel?.text = "续期费用(元)"
         headerView?.backgroundColor = UI_MAIN_COLOR
         renewalTableView.tableHeaderView = headerView
         
+        //底部确认按钮视图
         let footerView = FooterBtnView()
         footerView.frame = CGRect(x:0,y:0,width:_k_w,height:50)
         footerView.footerBtn?.setTitle("确认", for: .normal)
@@ -188,6 +193,7 @@ class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableVi
         }
     }
  
+    //MARK:获取用户的银行卡列表
     func fatchBankList(){
     
         let bankInfoVM = BankInfoViewModel()

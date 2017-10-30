@@ -9,7 +9,6 @@
 #import "AuthenticationCenterViewController.h"
 #import "PserInfoViewController.h"
 #import "ProfessionViewController.h"
-#import "UserContactsViewController.h"
 #import "CertificationViewController.h"
 #import "EditCardsController.h"
 #import "SesameCreditViewController.h"

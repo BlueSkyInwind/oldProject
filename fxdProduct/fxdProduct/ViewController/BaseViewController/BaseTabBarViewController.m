@@ -10,7 +10,6 @@
 #import "BaseNavigationViewController.h"
 #import "HomeViewController.h"
 #import "MyViewController.h"
-#import "HelpViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 

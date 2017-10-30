@@ -15,7 +15,6 @@
 #import "UserDataViewController.h"
 #import "HomeViewModel.h"
 #import "UserStateModel.h"
-#import "ExpressCreditRefuseView.h"
 #import "PayLoanChooseController.h"
 @interface LoanProcessViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -25,8 +24,6 @@
     BOOL _isRefuse;
     UserStateModel *_userStateModel;
 }
-
-@property (nonatomic,strong)ExpressCreditRefuseView *expressView;
 @end
 
 @implementation LoanProcessViewController

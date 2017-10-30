@@ -74,6 +74,7 @@
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
 }
 
+#pragma mark 发送验证码
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {
     
     if([Tool isMobileNumber:self.phoneNumField.text]) {

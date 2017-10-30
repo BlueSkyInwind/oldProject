@@ -10,10 +10,15 @@ import UIKit
 
 class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicationcConfirmationDelegate,PickViewDelegate{
     
+    //选择资金列表弹窗
     var pickView : PickView?
+    //产品id
    @objc var productId : String?
+    //平台id
    @objc var platformCode : String?
+    //选择资金页面视图
    @objc var rapidLoanView : RapidLoanApplicationcConfirmation?
+    //资金列表数组
    @objc var dataArray : NSMutableArray?
     
     override func viewDidLoad() {
@@ -36,11 +41,13 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
         if (rapidLoanView != nil) {
             rapidLoanView?.removeFromSuperview()
         }
+        //选择资金列表弹窗
         pickView = PickView()
         pickView?.delegate = self
         pickView?.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 0.4)
         self.pickView?.dataArray = dataArray! as [AnyObject]
         
+         //选择资金页面视图
         rapidLoanView = RapidLoanApplicationcConfirmation()
         rapidLoanView?.delegate = self
         let model = dataArray![0] as! CapitalListModel
@@ -50,7 +57,7 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
 //        getCapitalListData()
     }
 
-    //MARK 申请件申请确认页面数据展示
+    //MARK:申请件申请确认页面数据展示
     func getApplicationConfirmData(){
         
         let applicationMV = ApplicationViewModel()
@@ -77,6 +84,7 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
         rapidLoanView?.titleImageView?.sd_setImage(with: url)
         rapidLoanView?.qutoaLabel?.text = "额度:" + model.amount
         
+        //更改区间字体颜色
         let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(rapidLoanView!.qutoaLabel?.text)!)
         attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-3))
         attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 20), range: NSMakeRange(3,attrstr.length-3))
@@ -119,14 +127,14 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
 //    }
 
     
-    //MARK 选择资金来源方按钮
+    //MARK: 选择资金来源方按钮
     func capitalSourceBtn() {
 
         self.view.addSubview(self.pickView!)
     
     }
     
-    //MARK 确认申请按钮
+    //MARK: 确认申请按钮
     func commitBtn() {
      print("确认申请按钮")
         let applicationMV = ApplicationViewModel()
@@ -146,7 +154,7 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
         applicationMV.userCreateApplication(productId, platformCode: platformCode,baseId: nil)
     }
     
-    //MARK 取消按钮
+    //MARK: 取消按钮
     func cancelBtn() {
         
         UIView.animate(withDuration: 2) {
@@ -156,7 +164,7 @@ class RapidLoanApplicationViewController: BaseViewController ,RapidLoanApplicati
         }
     }
     
-    //MARK 确认按钮
+    //MARK: 确认按钮
     func sureBtn(_ capitalListModel: CapitalListModel) {
         
         UIView.animate(withDuration: 2) {

@@ -10,7 +10,6 @@
 #import "AboutMainViewController.h"
 #import "AboutViewController.h"
 #import "IdeaBackViewController.h"
-#import "HelpViewController.h"
 #import "NextViewCell.h"
 #import "HelpViewCell.h"
 #import <ShareSDK/ShareSDK.h>
@@ -32,7 +31,6 @@
     UIView *lineView;
     //子功能视图
     AboutMainViewController *aboutUs;//关于视图
-    HelpViewController *helpView;//常见问题
     IdeaBackViewController *ideaBack;//反馈视图
     ReturnMsgBaseClass *_returnMsgParse;
     testView *_alertView;
