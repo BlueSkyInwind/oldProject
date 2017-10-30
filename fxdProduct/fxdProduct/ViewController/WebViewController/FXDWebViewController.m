@@ -46,7 +46,6 @@
     [self addBackItem];
     _webView.scrollView.showsVerticalScrollIndicator = false;
     DLog(@"%@",_urlStr);
-    _urlStr = @"https://m.qunadai.com/land/land_phone/spclink.html?plid=ef1c4331-0c56-49c7-b0ca-e747e9a38e16";
     _urlStr = [_urlStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
