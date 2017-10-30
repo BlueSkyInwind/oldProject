@@ -16,9 +16,13 @@
 @interface UnbundlingBankCardViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
 
+    //短信序列号
     NSString *_sms_seq;
+    //短信验证码
     NSString *_sms_code;
+    //验证码按钮
     UIButton *_backTimeBtn;
+    //验证码倒计时时间
     NSInteger _countdown;
     NSTimer * _countdownTimer;
     

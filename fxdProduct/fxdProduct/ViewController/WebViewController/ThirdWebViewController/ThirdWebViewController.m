@@ -52,7 +52,6 @@
     NSLog(@"%@",_urlStr);
     _webView.scrollView.showsVerticalScrollIndicator = false;
     
-//    self.loadContent = @"<form id=\"payBillForm\" action=\"https://wap.lianlianpay.com/signApply.htm\" method=\"post\"><input type='hidden' name='req_data' value= '{\"oid_partner\":\"201705161001740332\",\"url_return\":\"http://101.95.101.118:10219/open/bankCard/authSignReturn.htm\",\"risk_item\":\"{\"frms_ware_category\":\"2010\",\"user_info_bind_phone\":\"15622222223\",\"user_info_dt_register\":\"20170926113151\",\"user_info_full_name\":\"段金强\",\"user_info_id_no\":\"410526199004223444\",\"user_info_id_type\":\"0\",\"user_info_identify_state\":\"1\",\"user_info_identify_type\":\"1\",\"user_info_mercht_userno\":\"8effbc4b925a4fc6ad970ec68f7bef6d\"}\",\"sign\":\"AuixktknAAfzor/4tCj0AY0UJL/cdi2qZjYxPtIO9/TfH6GlF1Q0TG84eZU9UZkrmG6zFrLt1bhsEB67O8sszpgIAgGrHa81aIR+6MmDqmfQylY9X1lNcWalEID61XdbEBBQlo0fxvDSBohIwE6ClRx2kRMq3TxnGnvYazDNPFM=\",\"app_request\":\"3\",\"version\":\"1.1\",\"id_no\":\"410526199004223444\",\"card_no\":\"6215581116002010000\",\"user_id\":\"8effbc4b925a4fc6ad970ec68f7bef6d\",\"id_type\":\"0\",\"pay_type\":\"I\",\"acct_name\":\"段金强\",\"sign_type\":\"RSA\"}'/><input type=\"submit\" value=\"请求签约\" style=\"display:none;\"></form><script>document.forms['payBillForm'].submit();</script>";
     if (self.loadContent != nil) {
         [_webView loadHTMLString:self.loadContent baseURL:nil];
     }
@@ -67,6 +66,7 @@
     [_webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
 }
 
+#pragma mark 自定义返回按钮
 - (void)addBackItem
 {
     if (@available(iOS 11.0, *)) {
@@ -88,6 +88,7 @@
     self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
 }
 
+#pragma mark 自定义返回按钮点击
 - (void)popBack
 {
     if ([_webView canGoBack]) {
@@ -166,12 +167,6 @@
     if ([request.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_H5_url,_CapitalLoanBack_url]]&&![request.URL.absoluteString containsString:@"#shanlinBack"]) {
         decisionHandler(WKNavigationActionPolicyAllow);
         [self.navigationController popToRootViewControllerAnimated:true];
-        
-    }else if([request.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_H5_url,_ShanLinBack_url]]){
-        
-        decisionHandler(WKNavigationActionPolicyAllow);
-//        decisionHandler(WKNavigationActionPolicyCancel);
-//        [self setAlert];
         
     }else{
         
@@ -298,7 +293,7 @@
     [self deleteWebCache];
 }
 
-
+#pragma mark 善林返回弹窗
 -(void)setAlert{
     
     ShanLinBackAlertView *ticket=[[ShanLinBackAlertView alloc]init];
@@ -309,6 +304,7 @@
     
 }
 
+#pragma mark 善林返回弹窗取消按钮代理方法
 -(void)cancelBtn{
     
     __weak typeof (self) weakSelf = self;
@@ -329,6 +325,7 @@
     
 }
 
+#pragma mark 善林返回弹窗确认按钮代理方法
 -(void)sureBtn{
    
     for (UIView *subView in self.view.subviews) {

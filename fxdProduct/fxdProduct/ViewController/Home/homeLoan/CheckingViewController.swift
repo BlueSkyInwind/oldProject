@@ -77,6 +77,7 @@ class CheckingViewController: BaseViewController {
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
             
+                //00:未测评;10:测评中;20:测评不通过;30:测评通过
                 let userDataModel = try! UserDataResult.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 let str = NSString(string:userDataModel.rc_status!)
                 switch str.intValue{

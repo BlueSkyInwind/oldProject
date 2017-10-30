@@ -10,7 +10,9 @@ import UIKit
 
 class MineHeaderView: UIView {
 
+    //用户名字
    @objc var nameLabel : UILabel?
+    //用户账号
    @objc var accountLabel : UILabel?
     
     /*
@@ -35,6 +37,7 @@ extension MineHeaderView{
 
     fileprivate func setupUI(){
     
+        //左边图片
         let leftImage = UIImageView()
         leftImage.image = UIImage(named:"icon_my_logo")
         self.addSubview(leftImage)
@@ -43,6 +46,7 @@ extension MineHeaderView{
             make.bottom.equalTo(self).offset(-20)
         }
         
+        //上面的名字
         let headLabel = UILabel()
         headLabel.text = "我的"
         headLabel.textColor = UIColor.white
@@ -54,6 +58,7 @@ extension MineHeaderView{
             make.height.equalTo(20)
         }
         
+        //用户的名字
         nameLabel = UILabel()
         nameLabel?.textColor = UIColor.white
         nameLabel?.font = UIFont.systemFont(ofSize: 14)
@@ -63,7 +68,7 @@ extension MineHeaderView{
             make.left.equalTo(leftImage.snp.right).offset(30)
             make.height.equalTo(15)
         })
-        
+        //用户的账号
         accountLabel = UILabel()
         accountLabel?.textColor = UIColor.white
         accountLabel?.font = UIFont.systemFont(ofSize: 14)

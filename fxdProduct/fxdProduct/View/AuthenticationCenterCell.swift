@@ -9,8 +9,10 @@
 import UIKit
 
 class AuthenticationCenterCell: UICollectionViewCell {
-    
+  
+    //认证图片
   @objc  var image: UIImageView?
+    //认证名称
   @objc  var nameLabel: UILabel?
     
     override init(frame: CGRect) {
@@ -27,6 +29,7 @@ extension AuthenticationCenterCell{
 
     fileprivate func setupUI(){
     
+        //背景view
         let bgView = UIView()
         bgView.backgroundColor = UIColor.white
         self.contentView.addSubview(bgView)
@@ -44,6 +47,7 @@ extension AuthenticationCenterCell{
             make.centerX.equalTo(bgView.snp.centerX)
         })
         
+        //适配5的大小
         if UI_IS_IPONE5{
             image?.snp.updateConstraints({ (make) in
                 make.top.equalTo(bgView.snp.top).offset(5)
@@ -60,6 +64,7 @@ extension AuthenticationCenterCell{
             make.height.equalTo(20)
         })
     
+        //左边的线
         let leftLineView = UIView()
         leftLineView.backgroundColor = LINE_COLOR
         bgView.addSubview(leftLineView)
@@ -73,6 +78,7 @@ extension AuthenticationCenterCell{
         
             leftLineView.isHidden = true
         }
+        //底部的线
         let bottomLineView = UIView()
         bottomLineView.backgroundColor = LINE_COLOR
         bgView.addSubview(bottomLineView)

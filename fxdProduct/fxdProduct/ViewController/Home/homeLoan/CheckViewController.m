@@ -14,7 +14,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDKUI.h>
 #import "HomeViewModel.h"
-#import "CheckInfoView.h"
+
 #import "UserCardResult.h"
 #import "MoxieSDK.h"
 #import "PayViewController.h"
