@@ -238,7 +238,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 //    NSString *str1 = strArr[0];
     
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:checkSuccess.displayLabel.text];
-    [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,_drawingsInfoModel.actualAmount.length)];
+    NSString *strl = [NSString stringWithFormat:@"%.2f",_drawingsInfoModel.actualAmount.floatValue];
+    [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,strl.length)];
 
 //    [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(checkSuccess.displayLabel.text.length-1-str1.length,str1.length)];
 //    if (feeStr.floatValue == 0) {
