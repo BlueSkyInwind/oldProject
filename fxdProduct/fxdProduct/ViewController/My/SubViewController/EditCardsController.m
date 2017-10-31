@@ -7,7 +7,6 @@
 //
 
 #import "EditCardsController.h"
-#import "LabelCell.h"
 #import "HomeBankCardViewController.h"
 #import "WTCameraViewController.h"
 #import "ReturnMsgBaseClass.h"
