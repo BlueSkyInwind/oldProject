@@ -278,6 +278,7 @@
     if (_count == 2) {
         _popView.closeBtn.hidden = false;
         [_countdownTimer invalidate];
+        _countdownTimer = nil;
     }
 }
 
@@ -633,7 +634,7 @@
         }
             break;
         case 10:{
-            //延期成功
+            //延期失败
             [self goLoanMoneVC:RepaymentNormal];
         }
             break;
@@ -650,7 +651,7 @@
         }
             break;
         case 11:{
-            //延期中
+            //合规标处理中
             applicationStatus = ComplianceProcessing;
             [self getApplicationStatus:@"6"];
         }

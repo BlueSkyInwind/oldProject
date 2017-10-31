@@ -106,7 +106,7 @@ extension HomeChoosePopView{
         displayLabel?.font = UIFont.systemFont(ofSize: 18)
         displayLabel?.numberOfLines = 0;
         displayLabel?.textColor = UIColor.black
-        displayLabel?.textAlignment = .left
+        displayLabel?.textAlignment = .center
         backImageView?.addSubview(displayLabel!)
         displayLabel?.snp.makeConstraints { (make) in
             make.bottom.equalTo((cancelButton?.snp.top)!).offset(-30)
@@ -132,12 +132,17 @@ extension HomeChoosePopView{
             make.bottom.equalTo((cancelButton?.snp.top)!).offset(-25)
             make.left.equalTo((backImageView?.snp.left)!).offset(24)
             make.right.equalTo((backImageView?.snp.right)!).offset(-24)
-            make.height.equalTo(40)
+            make.height.equalTo(45)
         }
         
         cancelButton?.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         sureButton?.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         displayLabel?.font = UIFont.systemFont(ofSize: 15)
+        if UI_IS_IPONE6 {
+            cancelButton?.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+            sureButton?.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+            displayLabel?.font = UIFont.systemFont(ofSize: 17)
+        }
     }
 }
     

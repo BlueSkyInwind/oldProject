@@ -111,7 +111,7 @@
         [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:25] range:NSMakeRange(totStr.length+2, residStr.length+3)];
     }
     self.lblPrice.attributedText=str;
-    self.lblTitle.text = @"红包";
+    self.lblTitle.text = redPacketModel.redpacket_name_;
     self.lblTip.text = [NSString stringWithFormat:@"有效期:%@至%@",redPacketModel.validity_period_from_,redPacketModel.validity_period_to_];
     self.userInteractionEnabled = NO;
     if (![redPacketModel.is_valid_ boolValue]) {
@@ -127,7 +127,6 @@
 - (void)setVailValues:(DiscountTicketDetailModel *)discountTicketDetailM
 {
     self.lblName.attributedText = [self getNameAttributeString:@"提\n额\n券"];
-    
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@元",discountTicketDetailM.amount_payment_]];
     [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:50 weight:0] range:NSMakeRange(0, str.length-1)];
     [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:35] range:NSMakeRange(str.length-1, 1)];
