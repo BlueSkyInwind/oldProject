@@ -43,8 +43,6 @@
 		0FFA91601C589D5D008D91D2 /* CheckViewIng.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA915F1C589D5D008D91D2 /* CheckViewIng.m */; };
 		0FFA91621C589D76008D91D2 /* CheckViewIng.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA91611C589D76008D91D2 /* CheckViewIng.xib */; };
 		0FFA91661C589E25008D91D2 /* CheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA91641C589E25008D91D2 /* CheckViewController.m */; };
-		0FFA916A1C58B870008D91D2 /* CheckFalseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA91691C58B870008D91D2 /* CheckFalseView.m */; };
-		0FFA916C1C58B880008D91D2 /* CheckFalseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA916B1C58B880008D91D2 /* CheckFalseView.xib */; };
 		0FFA916F1C58BD18008D91D2 /* CheckSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA916E1C58BD18008D91D2 /* CheckSuccessView.m */; };
 		0FFA91751C59BE57008D91D2 /* BankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA91731C59BE57008D91D2 /* BankCardViewController.m */; };
 		0FFA91761C59BE57008D91D2 /* BankCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA91741C59BE57008D91D2 /* BankCardViewController.xib */; };
@@ -158,8 +156,6 @@
 		63553AF81E5D937600B2C1FF /* UserContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AF61E5D937600B2C1FF /* UserContactsViewController.xib */; };
 		63553AFC1E5D9A8C00B2C1FF /* CertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553AFA1E5D9A8C00B2C1FF /* CertificationViewController.m */; };
 		63553AFD1E5D9A8C00B2C1FF /* CertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AFB1E5D9A8C00B2C1FF /* CertificationViewController.xib */; };
-		63553B011E5D9C2E00B2C1FF /* FaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553AFF1E5D9C2E00B2C1FF /* FaceCell.m */; };
-		63553B021E5D9C2E00B2C1FF /* FaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553B001E5D9C2E00B2C1FF /* FaceCell.xib */; };
 		63553B061E5D9E1B00B2C1FF /* MobileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B041E5D9E1B00B2C1FF /* MobileCell.m */; };
 		63553B071E5D9E1B00B2C1FF /* MobileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553B051E5D9E1B00B2C1FF /* MobileCell.xib */; };
 		63553B151E5EEF1C00B2C1FF /* FaceIDOCRFront.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B141E5EEF1C00B2C1FF /* FaceIDOCRFront.m */; };
@@ -294,20 +290,6 @@
 		638C3F3C1CF564A4000446A7 /* SquareRepaymentResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F381CF564A4000446A7 /* SquareRepaymentResult.m */; };
 		6391F7281D3377940097C943 /* BankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 6391F7271D3377940097C943 /* BankList.m */; };
 		6391F7451D33799C0097C943 /* BankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6391F7441D33799C0097C943 /* BankModel.m */; };
-		6391F7711D348B4E0097C943 /* bank_code_10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7631D348B4E0097C943 /* bank_code_10@2x.png */; };
-		6391F7721D348B4E0097C943 /* bank_code_14@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7641D348B4E0097C943 /* bank_code_14@2x.png */; };
-		6391F7731D348B4E0097C943 /* bank_code_15@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7651D348B4E0097C943 /* bank_code_15@2x.png */; };
-		6391F7741D348B4E0097C943 /* bank_code_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7661D348B4E0097C943 /* bank_code_16@2x.png */; };
-		6391F7751D348B4E0097C943 /* bank_code_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7671D348B4E0097C943 /* bank_code_1@2x.png */; };
-		6391F7761D348B4E0097C943 /* bank_code_28@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7681D348B4E0097C943 /* bank_code_28@2x.png */; };
-		6391F7771D348B4E0097C943 /* bank_code_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7691D348B4E0097C943 /* bank_code_2@2x.png */; };
-		6391F7781D348B4E0097C943 /* bank_code_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76A1D348B4E0097C943 /* bank_code_3@2x.png */; };
-		6391F7791D348B4E0097C943 /* bank_code_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76B1D348B4E0097C943 /* bank_code_4@2x.png */; };
-		6391F77A1D348B4E0097C943 /* bank_code_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76C1D348B4E0097C943 /* bank_code_5@2x.png */; };
-		6391F77B1D348B4E0097C943 /* bank_code_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76D1D348B4E0097C943 /* bank_code_6@2x.png */; };
-		6391F77C1D348B4E0097C943 /* bank_code_7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76E1D348B4E0097C943 /* bank_code_7@2x.png */; };
-		6391F77D1D348B4E0097C943 /* bank_code_8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76F1D348B4E0097C943 /* bank_code_8@2x.png */; };
-		6391F77E1D348B4E0097C943 /* bank_code_9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7701D348B4E0097C943 /* bank_code_9@2x.png */; };
 		6395E2AA1BAFA14E00B7AFC2 /* FXDNetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6395E2A91BAFA14E00B7AFC2 /* FXDNetWorkManager.m */; };
 		639E88721CA1371800254216 /* LunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 639E886F1CA1371800254216 /* LunchViewController.m */; };
 		639E88731CA1371800254216 /* UIApplication+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 639E88711CA1371800254216 /* UIApplication+Extend.m */; };
@@ -423,7 +405,6 @@
 		63F5AD991E238736001BDF44 /* LoanSureSecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F5AD971E238736001BDF44 /* LoanSureSecondViewController.xib */; };
 		63F824AE1BFB20CA00550978 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F824AD1BFB20CA00550978 /* OpenGLES.framework */; };
 		63F824B01BFB20D000550978 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F824AF1BFB20D000550978 /* CoreMotion.framework */; };
-		63F99C671D57457400884EA1 /* bank_code_29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63F99C661D57457400884EA1 /* bank_code_29@2x.png */; };
 		63FC24ED1D98F7E9006F58F3 /* YYTextContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24BB1D98F7E9006F58F3 /* YYTextContainerView.m */; };
 		63FC24EE1D98F7E9006F58F3 /* YYTextDebugOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24BD1D98F7E9006F58F3 /* YYTextDebugOption.m */; };
 		63FC24EF1D98F7E9006F58F3 /* YYTextEffectWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24BF1D98F7E9006F58F3 /* YYTextEffectWindow.m */; };
@@ -726,8 +707,6 @@
 		CC0DF9B61EA5B1090024841A /* BankCardInfoBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1BA51C30E7B300450358 /* BankCardInfoBaseClass.m */; };
 		CC0DF9B71EA5B1090024841A /* CheckViewIng.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA915F1C589D5D008D91D2 /* CheckViewIng.m */; };
 		CC0DF9B81EA5B1090024841A /* YYTextAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24D01D98F7E9006F58F3 /* YYTextAttribute.m */; };
-		CC0DF9BA1EA5B1090024841A /* FaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553AFF1E5D9C2E00B2C1FF /* FaceCell.m */; };
-		CC0DF9BB1EA5B1090024841A /* CheckFalseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA91691C58B870008D91D2 /* CheckFalseView.m */; };
 		CC0DF9BD1EA5B1090024841A /* CheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA91641C589E25008D91D2 /* CheckViewController.m */; };
 		CC0DF9BE1EA5B1090024841A /* Custom_BaseInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50E441E666FF40035EE4F /* Custom_BaseInfoResult.m */; };
 		CC0DF9BF1EA5B1090024841A /* NSParagraphStyle+YYText.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24DB1D98F7E9006F58F3 /* NSParagraphStyle+YYText.m */; };
@@ -1022,22 +1001,21 @@
 		CC0DFB191EA5B1090024841A /* CheckViewIng.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA91611C589D76008D91D2 /* CheckViewIng.xib */; };
 		CC0DFB1A1EA5B1090024841A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6313DC161BB3F07B00EB45DE /* Images.xcassets */; };
 		CC0DFB1C1EA5B1090024841A /* AboutMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AE5E6231C1EA5240099CCA0 /* AboutMainViewController.xib */; };
-		CC0DFB1E1EA5B1090024841A /* bank_code_7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76E1D348B4E0097C943 /* bank_code_7@2x.png */; };
+		CC0DFB1D1EA5B1090024841A /* DetailRepayHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637637041D7829C800E93289 /* DetailRepayHeader.xib */; };
+		CC0DFB1F1EA5B1090024841A /* RepayDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AB442E51D782E53000459E6 /* RepayDetailViewController.xib */; };
 		CC0DFB201EA5B1090024841A /* CertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AFB1E5D9A8C00B2C1FF /* CertificationViewController.xib */; };
-		CC0DFB211EA5B1090024841A /* FaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553B001E5D9C2E00B2C1FF /* FaceCell.xib */; };
 		CC0DFB221EA5B1090024841A /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633DAC071C34D47A000DA852 /* RegViewController.xib */; };
 		CC0DFB231EA5B1090024841A /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FF48491B6F036F009E384C /* MyViewController.xib */; };
 		CC0DFB241EA5B1090024841A /* PayLoanChooseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FE3DE41E4873F2009E5B82 /* PayLoanChooseController.xib */; };
-		CC0DFB251EA5B1090024841A /* bank_code_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7691D348B4E0097C943 /* bank_code_2@2x.png */; };
 		CC0DFB261EA5B1090024841A /* QRPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63C12DD01E4978D1008119FB /* QRPopView.xib */; };
 		CC0DFB281EA5B1090024841A /* HelpViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636B1B901C2CF57500450358 /* HelpViewCell.xib */; };
 		CC0DFB291EA5B1090024841A /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F047F461C507D59002ED7C0 /* LabelCell.xib */; };
 		CC0DFB2A1EA5B1090024841A /* MoneyIngView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 635B0BD61DF11C44008EAFD1 /* MoneyIngView.xib */; };
 		CC0DFB2E1EA5B1090024841A /* fxdProductDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6386A6B71E80D4F200A181A3 /* fxdProductDev-Info.plist */; };
-		CC0DFB311EA5B1090024841A /* bank_code_29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63F99C661D57457400884EA1 /* bank_code_29@2x.png */; };
-		CC0DFB321EA5B1090024841A /* bank_code_10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7631D348B4E0097C943 /* bank_code_10@2x.png */; };
+		CC0DFB2F1EA5B1090024841A /* repay_circle_un@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 637636F51D77FB1600E93289 /* repay_circle_un@3x.png */; };
 		CC0DFB331EA5B1090024841A /* testView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA58881BE0A497007F8A6D /* testView.xib */; };
-		CC0DFB391EA5B1090024841A /* bank_code_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76B1D348B4E0097C943 /* bank_code_4@2x.png */; };
+		CC0DFB341EA5B1090024841A /* repay_circle_selt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 637636F61D77FB1600E93289 /* repay_circle_selt@2x.png */; };
+		CC0DFB371EA5B1090024841A /* RepayListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636D61D76A28700E93289 /* RepayListCell.xib */; };
 		CC0DFB3A1EA5B1090024841A /* MoneyPlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63C12DCA1E495CC9008119FB /* MoneyPlanCell.xib */; };
 		CC0DFB3D1EA5B1090024841A /* IdeaBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9E30D11BC8A70C0018A801 /* IdeaBackViewController.xib */; };
 		CC0DFB3E1EA5B1090024841A /* SumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FE3DEA1E487819009E5B82 /* SumCell.xib */; };
@@ -1045,41 +1023,37 @@
 		CC0DFB411EA5B1090024841A /* ColledgeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F099B981C1A97EB00D97BAE /* ColledgeView.xib */; };
 		CC0DFB431EA5B1090024841A /* LoanProcessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F2548C1E49CD2C00852CF1 /* LoanProcessViewController.xib */; };
 		CC0DFB441EA5B1090024841A /* DaysCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FE3DEF1E48821B009E5B82 /* DaysCell.xib */; };
-		CC0DFB451EA5B1090024841A /* bank_code_9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7701D348B4E0097C943 /* bank_code_9@2x.png */; };
 		CC0DFB461EA5B1090024841A /* MyCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6AAF381C30D8950060F137 /* MyCardCell.xib */; };
 		CC0DFB481EA5B1090024841A /* ExpressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63B65DEB1D518D8B00207231 /* ExpressViewController.xib */; };
 		CC0DFB491EA5B1090024841A /* PserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */; };
 		CC0DFB4A1EA5B1090024841A /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 636FF3481BA27C9800BB5528 /* Address.plist */; };
-		CC0DFB4B1EA5B1090024841A /* bank_code_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7661D348B4E0097C943 /* bank_code_16@2x.png */; };
-		CC0DFB4D1EA5B1090024841A /* bank_code_15@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7651D348B4E0097C943 /* bank_code_15@2x.png */; };
 		CC0DFB4E1EA5B1090024841A /* BundleForBankCard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6303C1131C1816F000CD14A7 /* BundleForBankCard.bundle */; };
 		CC0DFB4F1EA5B1090024841A /* HomeProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E1ECD91E1BA8E30079A2F8 /* HomeProductCell.xib */; };
 		CC0DFB501EA5B1090024841A /* telphoneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA91331C56059D008D91D2 /* telphoneView.xib */; };
 		CC0DFB521EA5B1090024841A /* HMScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F254781E49A45900852CF1 /* HMScanner.bundle */; };
 		CC0DFB541EA5B1090024841A /* ProfessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AF11E5D8BA200B2C1FF /* ProfessionViewController.xib */; };
-		CC0DFB561EA5B1090024841A /* CheckFalseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA916B1C58B880008D91D2 /* CheckFalseView.xib */; };
+		CC0DFB551EA5B1090024841A /* DetailRepayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636FE1D78287D00E93289 /* DetailRepayViewController.xib */; };
 		CC0DFB571EA5B1090024841A /* DataDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AD71E5D2A4200B2C1FF /* DataDisplayCell.xib */; };
 		CC0DFB581EA5B1090024841A /* CheckSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BB029A1C71C49A00C05FE7 /* CheckSuccessView.xib */; };
 		CC0DFB591EA5B1090024841A /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633DF7881BDE22BF00A3998D /* MoreViewController.xib */; };
 		CC0DFB5B1EA5B1090024841A /* TicketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AB0F5A91CF2D20E00F3DF06 /* TicketCell.xib */; };
 		CC0DFB5C1EA5B1090024841A /* ChangePWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63811B601B8EFC67008F605B /* ChangePWViewController.xib */; };
-		CC0DFB5D1EA5B1090024841A /* bank_code_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76A1D348B4E0097C943 /* bank_code_3@2x.png */; };
-		CC0DFB5E1EA5B1090024841A /* bank_code_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76C1D348B4E0097C943 /* bank_code_5@2x.png */; };
-		CC0DFB621EA5B1090024841A /* bank_code_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7671D348B4E0097C943 /* bank_code_1@2x.png */; };
 		CC0DFB631EA5B1090024841A /* LoanSureFirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F5AD921E23849C001BDF44 /* LoanSureFirstViewController.xib */; };
-		CC0DFB651EA5B1090024841A /* bank_code_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76D1D348B4E0097C943 /* bank_code_6@2x.png */; };
+
+		CC0DFB641EA5B1090024841A /* BankListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63741E371D3CD4A300C0E2F8 /* BankListCell.xib */; };
 		CC0DFB661EA5B1090024841A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636B1B2C1C216FCE00450358 /* HomeViewController.xib */; };
 		CC0DFB681EA5B1090024841A /* RepayRecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A762F6E1C1FBE4700964719 /* RepayRecordController.xib */; };
-		CC0DFB691EA5B1090024841A /* bank_code_28@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7681D348B4E0097C943 /* bank_code_28@2x.png */; };
+
+		CC0DFB6A1EA5B1090024841A /* repay_circle_un@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 637636F41D77FB1600E93289 /* repay_circle_un@2x.png */; };
 		CC0DFB6B1EA5B1090024841A /* IdentityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AEC1E5D787800B2C1FF /* IdentityCell.xib */; };
 		CC0DFB6D1EA5B1090024841A /* vcTransition1.json in Resources */ = {isa = PBXBuildFile; fileRef = 638A170C1E517E8C00AB8AB6 /* vcTransition1.json */; };
-		CC0DFB6E1EA5B1090024841A /* bank_code_8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76F1D348B4E0097C943 /* bank_code_8@2x.png */; };
 		CC0DFB701EA5B1090024841A /* wtproject.lsc in Resources */ = {isa = PBXBuildFile; fileRef = 63DCD7D81C87FDA200FAC7CE /* wtproject.lsc */; };
 		CC0DFB711EA5B1090024841A /* LoanProcessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F254911E49CFE800852CF1 /* LoanProcessCell.xib */; };
 		CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636B1B8E1C2A416500450358 /* NextViewCell.xib */; };
 		CC0DFB771EA5B1090024841A /* CycleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632DFF611E48500500E414B2 /* CycleTextCell.xib */; };
 		CC0DFB781EA5B1090024841A /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 63B65DF01D519D1600207231 /* main.js */; };
-		CC0DFB7A1EA5B1090024841A /* bank_code_14@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7641D348B4E0097C943 /* bank_code_14@2x.png */; };
+
+		CC0DFB791EA5B1090024841A /* PayMethodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636AC4321D38EA7F00599590 /* PayMethodCell.xib */; };
 		CC0DFB7B1EA5B1090024841A /* UpdateDevIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 630D46161BCCD2FB00874064 /* UpdateDevIDViewController.xib */; };
 		CC0DFB7C1EA5B1090024841A /* EditCardsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AE362F41C586060006FC276 /* EditCardsController.xib */; };
 		CC0DFB7E1EA5B1090024841A /* FindPassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633DAC051C34D46D000DA852 /* FindPassViewController.xib */; };
@@ -1161,8 +1135,6 @@
 		CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA056BB1EBB3ECB00CB5F29 /* SesameCreditViewController.xib */; };
 		CCBD8F6C1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
 		CCBD8F6D1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
-		CCC344FC1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
-		CCC344FD1F03833E006D0F83 /* JRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC344FB1F03833E006D0F83 /* JRefuseView.m */; };
 		CCCC0A8E1F677B9B007E1EB0 /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */; };
 		CCCC0A8F1F677B9B007E1EB0 /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */; };
 		CCCDA8771EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
@@ -1318,9 +1290,6 @@
 		0FFA91611C589D76008D91D2 /* CheckViewIng.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckViewIng.xib; sourceTree = "<group>"; };
 		0FFA91631C589E25008D91D2 /* CheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewController.h; sourceTree = "<group>"; };
 		0FFA91641C589E25008D91D2 /* CheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewController.m; sourceTree = "<group>"; };
-		0FFA91681C58B870008D91D2 /* CheckFalseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckFalseView.h; sourceTree = "<group>"; };
-		0FFA91691C58B870008D91D2 /* CheckFalseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckFalseView.m; sourceTree = "<group>"; };
-		0FFA916B1C58B880008D91D2 /* CheckFalseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckFalseView.xib; sourceTree = "<group>"; };
 		0FFA916D1C58BD18008D91D2 /* CheckSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckSuccessView.h; sourceTree = "<group>"; };
 		0FFA916E1C58BD18008D91D2 /* CheckSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckSuccessView.m; sourceTree = "<group>"; };
 		0FFA91721C59BE57008D91D2 /* BankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardViewController.h; sourceTree = "<group>"; };
@@ -1527,9 +1496,6 @@
 		63553AF91E5D9A8C00B2C1FF /* CertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertificationViewController.h; sourceTree = "<group>"; };
 		63553AFA1E5D9A8C00B2C1FF /* CertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertificationViewController.m; sourceTree = "<group>"; };
 		63553AFB1E5D9A8C00B2C1FF /* CertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificationViewController.xib; sourceTree = "<group>"; };
-		63553AFE1E5D9C2E00B2C1FF /* FaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceCell.h; sourceTree = "<group>"; };
-		63553AFF1E5D9C2E00B2C1FF /* FaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceCell.m; sourceTree = "<group>"; };
-		63553B001E5D9C2E00B2C1FF /* FaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceCell.xib; sourceTree = "<group>"; };
 		63553B031E5D9E1B00B2C1FF /* MobileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileCell.h; sourceTree = "<group>"; };
 		63553B041E5D9E1B00B2C1FF /* MobileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileCell.m; sourceTree = "<group>"; };
 		63553B051E5D9E1B00B2C1FF /* MobileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MobileCell.xib; sourceTree = "<group>"; };
@@ -1790,20 +1756,6 @@
 		6391F7271D3377940097C943 /* BankList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankList.m; sourceTree = "<group>"; };
 		6391F7431D33799C0097C943 /* BankModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankModel.h; sourceTree = "<group>"; };
 		6391F7441D33799C0097C943 /* BankModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankModel.m; sourceTree = "<group>"; };
-		6391F7631D348B4E0097C943 /* bank_code_10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_10@2x.png"; sourceTree = "<group>"; };
-		6391F7641D348B4E0097C943 /* bank_code_14@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_14@2x.png"; sourceTree = "<group>"; };
-		6391F7651D348B4E0097C943 /* bank_code_15@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_15@2x.png"; sourceTree = "<group>"; };
-		6391F7661D348B4E0097C943 /* bank_code_16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_16@2x.png"; sourceTree = "<group>"; };
-		6391F7671D348B4E0097C943 /* bank_code_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_1@2x.png"; sourceTree = "<group>"; };
-		6391F7681D348B4E0097C943 /* bank_code_28@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_28@2x.png"; sourceTree = "<group>"; };
-		6391F7691D348B4E0097C943 /* bank_code_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_2@2x.png"; sourceTree = "<group>"; };
-		6391F76A1D348B4E0097C943 /* bank_code_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_3@2x.png"; sourceTree = "<group>"; };
-		6391F76B1D348B4E0097C943 /* bank_code_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_4@2x.png"; sourceTree = "<group>"; };
-		6391F76C1D348B4E0097C943 /* bank_code_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_5@2x.png"; sourceTree = "<group>"; };
-		6391F76D1D348B4E0097C943 /* bank_code_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_6@2x.png"; sourceTree = "<group>"; };
-		6391F76E1D348B4E0097C943 /* bank_code_7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_7@2x.png"; sourceTree = "<group>"; };
-		6391F76F1D348B4E0097C943 /* bank_code_8@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_8@2x.png"; sourceTree = "<group>"; };
-		6391F7701D348B4E0097C943 /* bank_code_9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_9@2x.png"; sourceTree = "<group>"; };
 		6395E2A81BAFA14E00B7AFC2 /* FXDNetWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXDNetWorkManager.h; sourceTree = "<group>"; };
 		6395E2A91BAFA14E00B7AFC2 /* FXDNetWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXDNetWorkManager.m; sourceTree = "<group>"; };
 		639E886E1CA1371800254216 /* LunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunchViewController.h; sourceTree = "<group>"; };
@@ -2015,7 +1967,6 @@
 		63F5AD971E238736001BDF44 /* LoanSureSecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoanSureSecondViewController.xib; sourceTree = "<group>"; };
 		63F824AD1BFB20CA00550978 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		63F824AF1BFB20D000550978 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		63F99C661D57457400884EA1 /* bank_code_29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank_code_29@2x.png"; sourceTree = "<group>"; };
 		63FC24471D98CB19006F58F3 /* fxdProductDis.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = fxdProductDis.entitlements; sourceTree = "<group>"; };
 		63FC24BA1D98F7E9006F58F3 /* YYTextContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextContainerView.h; sourceTree = "<group>"; };
 		63FC24BB1D98F7E9006F58F3 /* YYTextContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextContainerView.m; sourceTree = "<group>"; };
@@ -2308,8 +2259,6 @@
 		CCAA8EB51F5940CC00278D16 /* RenewalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalModel.m; sourceTree = "<group>"; };
 		CCBD8F6A1F5D26BD005A980B /* RepayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayModel.h; sourceTree = "<group>"; };
 		CCBD8F6B1F5D26BD005A980B /* RepayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayModel.m; sourceTree = "<group>"; };
-		CCC344FA1F03833E006D0F83 /* JRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRefuseView.h; sourceTree = "<group>"; };
-		CCC344FB1F03833E006D0F83 /* JRefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRefuseView.m; sourceTree = "<group>"; };
 		CCCC0A8C1F677B9B007E1EB0 /* UserDataResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataResult.h; sourceTree = "<group>"; };
 		CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataResult.m; sourceTree = "<group>"; };
 		CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewModel.h; sourceTree = "<group>"; };
@@ -2565,9 +2514,6 @@
 				0FFA915E1C589D5D008D91D2 /* CheckViewIng.h */,
 				0FFA915F1C589D5D008D91D2 /* CheckViewIng.m */,
 				0FFA91611C589D76008D91D2 /* CheckViewIng.xib */,
-				0FFA91681C58B870008D91D2 /* CheckFalseView.h */,
-				0FFA91691C58B870008D91D2 /* CheckFalseView.m */,
-				0FFA916B1C58B880008D91D2 /* CheckFalseView.xib */,
 				0FFA916D1C58BD18008D91D2 /* CheckSuccessView.h */,
 				0FFA916E1C58BD18008D91D2 /* CheckSuccessView.m */,
 				63BB029A1C71C49A00C05FE7 /* CheckSuccessView.xib */,
@@ -2659,8 +2605,6 @@
 				CC31978D1ED911980083F263 /* WhiteRefuseView.h */,
 				CC31978E1ED911980083F263 /* WhiteRefuseView.m */,
 				CC31979F1ED929F10083F263 /* WhiteRefuseView.xib */,
-				CCC344FA1F03833E006D0F83 /* JRefuseView.h */,
-				CCC344FB1F03833E006D0F83 /* JRefuseView.m */,
 				84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */,
 				843C99EE1F9605510067E200 /* ApplicationConfirm */,
 				CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */,
@@ -2989,9 +2933,6 @@
 				63553AEA1E5D787800B2C1FF /* IdentityCell.h */,
 				63553AEB1E5D787800B2C1FF /* IdentityCell.m */,
 				63553AEC1E5D787800B2C1FF /* IdentityCell.xib */,
-				63553AFE1E5D9C2E00B2C1FF /* FaceCell.h */,
-				63553AFF1E5D9C2E00B2C1FF /* FaceCell.m */,
-				63553B001E5D9C2E00B2C1FF /* FaceCell.xib */,
 				63553B031E5D9E1B00B2C1FF /* MobileCell.h */,
 				63553B041E5D9E1B00B2C1FF /* MobileCell.m */,
 				63553B051E5D9E1B00B2C1FF /* MobileCell.xib */,
@@ -3314,7 +3255,6 @@
 			children = (
 				63FC24471D98CB19006F58F3 /* fxdProductDis.entitlements */,
 				636A2DD61D891F7900E087A6 /* fxdProduct.entitlements */,
-				6391F7291D3378DA0097C943 /* Receous */,
 				636EE3041B662ABB00A1A3ED /* AppDelegate.h */,
 				636EE3051B662ABB00A1A3ED /* AppDelegate.mm */,
 				63E86BB01B9ED2EB009BDB22 /* SetSome.h */,
@@ -3819,36 +3759,6 @@
 				8473F1401F31CAA1005B4933 /* SupportBankList.m */,
 			);
 			path = BankList;
-			sourceTree = "<group>";
-		};
-		6391F7291D3378DA0097C943 /* Receous */ = {
-			isa = PBXGroup;
-			children = (
-				6391F7621D348B4E0097C943 /* banklogo */,
-			);
-			path = Receous;
-			sourceTree = "<group>";
-		};
-		6391F7621D348B4E0097C943 /* banklogo */ = {
-			isa = PBXGroup;
-			children = (
-				63F99C661D57457400884EA1 /* bank_code_29@2x.png */,
-				6391F7631D348B4E0097C943 /* bank_code_10@2x.png */,
-				6391F7641D348B4E0097C943 /* bank_code_14@2x.png */,
-				6391F7651D348B4E0097C943 /* bank_code_15@2x.png */,
-				6391F7661D348B4E0097C943 /* bank_code_16@2x.png */,
-				6391F7671D348B4E0097C943 /* bank_code_1@2x.png */,
-				6391F7681D348B4E0097C943 /* bank_code_28@2x.png */,
-				6391F7691D348B4E0097C943 /* bank_code_2@2x.png */,
-				6391F76A1D348B4E0097C943 /* bank_code_3@2x.png */,
-				6391F76B1D348B4E0097C943 /* bank_code_4@2x.png */,
-				6391F76C1D348B4E0097C943 /* bank_code_5@2x.png */,
-				6391F76D1D348B4E0097C943 /* bank_code_6@2x.png */,
-				6391F76E1D348B4E0097C943 /* bank_code_7@2x.png */,
-				6391F76F1D348B4E0097C943 /* bank_code_8@2x.png */,
-				6391F7701D348B4E0097C943 /* bank_code_9@2x.png */,
-			);
-			path = banklogo;
 			sourceTree = "<group>";
 		};
 		63A24BEB1BE063A90036E8EF /* CoreNewFeatureVC */ = {
@@ -5388,13 +5298,12 @@
 				6313DC171BB3F07B00EB45DE /* Images.xcassets in Resources */,
 				84ED5B5C1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */,
 				1AE5E6251C1EA5240099CCA0 /* AboutMainViewController.xib in Resources */,
-				6391F77C1D348B4E0097C943 /* bank_code_7@2x.png in Resources */,
+				637637051D7829C800E93289 /* DetailRepayHeader.xib in Resources */,
+				1AB442E71D782E53000459E6 /* RepayDetailViewController.xib in Resources */,
 				63553AFD1E5D9A8C00B2C1FF /* CertificationViewController.xib in Resources */,
-				63553B021E5D9C2E00B2C1FF /* FaceCell.xib in Resources */,
 				633DAC081C34D47A000DA852 /* RegViewController.xib in Resources */,
 				63FF484B1B6F036F009E384C /* MyViewController.xib in Resources */,
 				63FE3DE61E4873F2009E5B82 /* PayLoanChooseController.xib in Resources */,
-				6391F7771D348B4E0097C943 /* bank_code_2@2x.png in Resources */,
 				63C12DD11E4978D1008119FB /* QRPopView.xib in Resources */,
 				636B1B911C2CF57500450358 /* HelpViewCell.xib in Resources */,
 				84ED5B6E1F4AC617004C0A59 /* SeniorCertificationView.xib in Resources */,
@@ -5402,10 +5311,11 @@
 				635B0BD71DF11C44008EAFD1 /* MoneyIngView.xib in Resources */,
 				6386A6B81E80D4F200A181A3 /* fxdProductDev-Info.plist in Resources */,
 				CC3A7F331ED52A3200F30289 /* ChangeBankCardViewController.xib in Resources */,
-				63F99C671D57457400884EA1 /* bank_code_29@2x.png in Resources */,
-				6391F7711D348B4E0097C943 /* bank_code_10@2x.png in Resources */,
+
+				637636F91D77FB1600E93289 /* repay_circle_un@3x.png in Resources */,
 				0FEA588A1BE0A497007F8A6D /* testView.xib in Resources */,
-				6391F7791D348B4E0097C943 /* bank_code_4@2x.png in Resources */,
+				637636FA1D77FB1600E93289 /* repay_circle_selt@2x.png in Resources */,
+				637636D81D76A28700E93289 /* RepayListCell.xib in Resources */,
 				63C12DCC1E495CC9008119FB /* MoneyPlanCell.xib in Resources */,
 				0F9E30D31BC8A70C0018A801 /* IdeaBackViewController.xib in Resources */,
 				63FE3DEC1E487819009E5B82 /* SumCell.xib in Resources */,
@@ -5417,39 +5327,33 @@
 				CCF803291ED4249A003B7975 /* UnbundlingBankCardViewController.xib in Resources */,
 				63F2548E1E49CD2C00852CF1 /* LoanProcessViewController.xib in Resources */,
 				63FE3DF11E48821B009E5B82 /* DaysCell.xib in Resources */,
-				6391F77E1D348B4E0097C943 /* bank_code_9@2x.png in Resources */,
 				CC0346271F3C4CB8001F6F3D /* FirstBorrowViewController.xib in Resources */,
 				0F6AAF3A1C30D8950060F137 /* MyCardCell.xib in Resources */,
 				63B65DED1D518D8B00207231 /* ExpressViewController.xib in Resources */,
 				CCD565BE1E8A46D500B6665D /* PserInfoViewController.xib in Resources */,
 				636FF3491BA27C9800BB5528 /* Address.plist in Resources */,
-				6391F7741D348B4E0097C943 /* bank_code_16@2x.png in Resources */,
-				6391F7731D348B4E0097C943 /* bank_code_15@2x.png in Resources */,
 				6303C11A1C1816F000CD14A7 /* BundleForBankCard.bundle in Resources */,
 				63E1ECDB1E1BA8E30079A2F8 /* HomeProductCell.xib in Resources */,
 				0FFA91341C56059D008D91D2 /* telphoneView.xib in Resources */,
 				63F254841E49A45900852CF1 /* HMScanner.bundle in Resources */,
 				63553AF31E5D8BA200B2C1FF /* ProfessionViewController.xib in Resources */,
-				0FFA916C1C58B880008D91D2 /* CheckFalseView.xib in Resources */,
+
+				637637001D78287D00E93289 /* DetailRepayViewController.xib in Resources */,
 				63553AD91E5D2A4200B2C1FF /* DataDisplayCell.xib in Resources */,
 				63BB029B1C71C49A00C05FE7 /* CheckSuccessView.xib in Resources */,
 				633DF78A1BDE22BF00A3998D /* MoreViewController.xib in Resources */,
 				1AB0F5AB1CF2D20E00F3DF06 /* TicketCell.xib in Resources */,
 				63811B621B8EFC67008F605B /* ChangePWViewController.xib in Resources */,
-				6391F7781D348B4E0097C943 /* bank_code_3@2x.png in Resources */,
 				84ED5B5E1F4AB9E7004C0A59 /* mx_loading@2x.png in Resources */,
 				842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */,
-				6391F77A1D348B4E0097C943 /* bank_code_5@2x.png in Resources */,
-				6391F7751D348B4E0097C943 /* bank_code_1@2x.png in Resources */,
 				63F5AD941E23849C001BDF44 /* LoanSureFirstViewController.xib in Resources */,
 				84ED5B751F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */,
-				6391F77B1D348B4E0097C943 /* bank_code_6@2x.png in Resources */,
 				636B1B2D1C216FCE00450358 /* HomeViewController.xib in Resources */,
 				1A762F701C1FBE4700964719 /* RepayRecordController.xib in Resources */,
-				6391F7761D348B4E0097C943 /* bank_code_28@2x.png in Resources */,
+
+				637636F81D77FB1600E93289 /* repay_circle_un@2x.png in Resources */,
 				63553AEE1E5D787800B2C1FF /* IdentityCell.xib in Resources */,
 				638A170D1E517E8C00AB8AB6 /* vcTransition1.json in Resources */,
-				6391F77D1D348B4E0097C943 /* bank_code_8@2x.png in Resources */,
 				63DCD7D91C87FDA200FAC7CE /* wtproject.lsc in Resources */,
 				63F254931E49CFE800852CF1 /* LoanProcessCell.xib in Resources */,
 				636B1B8F1C2A416500450358 /* NextViewCell.xib in Resources */,
@@ -5457,7 +5361,7 @@
 				632DFF631E48500500E414B2 /* CycleTextCell.xib in Resources */,
 				84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */,
 				63B65DF11D519D1600207231 /* main.js in Resources */,
-				6391F7721D348B4E0097C943 /* bank_code_14@2x.png in Resources */,
+				636AC4341D38EA7F00599590 /* PayMethodCell.xib in Resources */,
 				630D46181BCCD2FB00874064 /* UpdateDevIDViewController.xib in Resources */,
 				1AE362F61C586060006FC276 /* EditCardsController.xib in Resources */,
 				633DAC061C34D46D000DA852 /* FindPassViewController.xib in Resources */,
@@ -5495,23 +5399,23 @@
 				CC0DFB191EA5B1090024841A /* CheckViewIng.xib in Resources */,
 				CC0DFB1A1EA5B1090024841A /* Images.xcassets in Resources */,
 				CC0DFB1C1EA5B1090024841A /* AboutMainViewController.xib in Resources */,
-				CC0DFB1E1EA5B1090024841A /* bank_code_7@2x.png in Resources */,
+				CC0DFB1D1EA5B1090024841A /* DetailRepayHeader.xib in Resources */,
+				CC0DFB1F1EA5B1090024841A /* RepayDetailViewController.xib in Resources */,
 				CC0DFB201EA5B1090024841A /* CertificationViewController.xib in Resources */,
-				CC0DFB211EA5B1090024841A /* FaceCell.xib in Resources */,
 				CC0DFB221EA5B1090024841A /* RegViewController.xib in Resources */,
 				CC0DFB231EA5B1090024841A /* MyViewController.xib in Resources */,
 				CC0DFB241EA5B1090024841A /* PayLoanChooseController.xib in Resources */,
-				CC0DFB251EA5B1090024841A /* bank_code_2@2x.png in Resources */,
 				84ED5B6F1F4AC617004C0A59 /* SeniorCertificationView.xib in Resources */,
 				CC0DFB261EA5B1090024841A /* QRPopView.xib in Resources */,
 				CC0DFB281EA5B1090024841A /* HelpViewCell.xib in Resources */,
 				CC0DFB291EA5B1090024841A /* LabelCell.xib in Resources */,
 				CC0DFB2A1EA5B1090024841A /* MoneyIngView.xib in Resources */,
 				CC0DFB2E1EA5B1090024841A /* fxdProductDev-Info.plist in Resources */,
-				CC0DFB311EA5B1090024841A /* bank_code_29@2x.png in Resources */,
-				CC0DFB321EA5B1090024841A /* bank_code_10@2x.png in Resources */,
+
+				CC0DFB2F1EA5B1090024841A /* repay_circle_un@3x.png in Resources */,
 				CC0DFB331EA5B1090024841A /* testView.xib in Resources */,
-				CC0DFB391EA5B1090024841A /* bank_code_4@2x.png in Resources */,
+				CC0DFB341EA5B1090024841A /* repay_circle_selt@2x.png in Resources */,
+				CC0DFB371EA5B1090024841A /* RepayListCell.xib in Resources */,
 				CC0DFB3A1EA5B1090024841A /* MoneyPlanCell.xib in Resources */,
 				CC0DFB3D1EA5B1090024841A /* IdeaBackViewController.xib in Resources */,
 				84ED5B611F4AB9E7004C0A59 /* mx_refresh@2x.png in Resources */,
@@ -5522,39 +5426,36 @@
 				CC31979A1ED926B90083F263 /* RefuseView.xib in Resources */,
 				CC0DFB431EA5B1090024841A /* LoanProcessViewController.xib in Resources */,
 				CC0DFB441EA5B1090024841A /* DaysCell.xib in Resources */,
-				CC0DFB451EA5B1090024841A /* bank_code_9@2x.png in Resources */,
 				CC0DFB461EA5B1090024841A /* MyCardCell.xib in Resources */,
 				CC0346281F3C4CDF001F6F3D /* FirstBorrowViewController.xib in Resources */,
 				CC0DFB481EA5B1090024841A /* ExpressViewController.xib in Resources */,
 				CC0DFB491EA5B1090024841A /* PserInfoViewController.xib in Resources */,
 				CC0DFB4A1EA5B1090024841A /* Address.plist in Resources */,
-				CC0DFB4B1EA5B1090024841A /* bank_code_16@2x.png in Resources */,
-				CC0DFB4D1EA5B1090024841A /* bank_code_15@2x.png in Resources */,
 				CC0DFB4E1EA5B1090024841A /* BundleForBankCard.bundle in Resources */,
 				CC0DFB4F1EA5B1090024841A /* HomeProductCell.xib in Resources */,
 				CC0DFB501EA5B1090024841A /* telphoneView.xib in Resources */,
 				CC0DFB521EA5B1090024841A /* HMScanner.bundle in Resources */,
 				CC0DFB541EA5B1090024841A /* ProfessionViewController.xib in Resources */,
-				CC0DFB561EA5B1090024841A /* CheckFalseView.xib in Resources */,
+
+				CC0DFB551EA5B1090024841A /* DetailRepayViewController.xib in Resources */,
 				842C0B5A1ED599DE00366D11 /* LoginViewController.xib in Resources */,
 				CC0DFB571EA5B1090024841A /* DataDisplayCell.xib in Resources */,
 				CC0DFB581EA5B1090024841A /* CheckSuccessView.xib in Resources */,
 				CC0DFB591EA5B1090024841A /* MoreViewController.xib in Resources */,
 				CC0DFB5B1EA5B1090024841A /* TicketCell.xib in Resources */,
 				CC0DFB5C1EA5B1090024841A /* ChangePWViewController.xib in Resources */,
-				CC0DFB5D1EA5B1090024841A /* bank_code_3@2x.png in Resources */,
 				84ED5B5F1F4AB9E7004C0A59 /* mx_loading@2x.png in Resources */,
-				CC0DFB5E1EA5B1090024841A /* bank_code_5@2x.png in Resources */,
-				CC0DFB621EA5B1090024841A /* bank_code_1@2x.png in Resources */,
+
+				846A901B1F1F48AB00896169 /* PayDisplayCell.xib in Resources */,
 				CC0DFB631EA5B1090024841A /* LoanSureFirstViewController.xib in Resources */,
-				CC0DFB651EA5B1090024841A /* bank_code_6@2x.png in Resources */,
+				CC0DFB641EA5B1090024841A /* BankListCell.xib in Resources */,
 				84ED5B761F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */,
 				CC0DFB661EA5B1090024841A /* HomeViewController.xib in Resources */,
 				CC0DFB681EA5B1090024841A /* RepayRecordController.xib in Resources */,
-				CC0DFB691EA5B1090024841A /* bank_code_28@2x.png in Resources */,
+
+				CC0DFB6A1EA5B1090024841A /* repay_circle_un@2x.png in Resources */,
 				CC0DFB6B1EA5B1090024841A /* IdentityCell.xib in Resources */,
 				CC0DFB6D1EA5B1090024841A /* vcTransition1.json in Resources */,
-				CC0DFB6E1EA5B1090024841A /* bank_code_8@2x.png in Resources */,
 				CC3A7F341ED52A3200F30289 /* ChangeBankCardViewController.xib in Resources */,
 				CC0DFB701EA5B1090024841A /* wtproject.lsc in Resources */,
 				CC0DFB711EA5B1090024841A /* LoanProcessCell.xib in Resources */,
@@ -5562,7 +5463,8 @@
 				CC3197A11ED929F10083F263 /* WhiteRefuseView.xib in Resources */,
 				CC0DFB771EA5B1090024841A /* CycleTextCell.xib in Resources */,
 				CC0DFB781EA5B1090024841A /* main.js in Resources */,
-				CC0DFB7A1EA5B1090024841A /* bank_code_14@2x.png in Resources */,
+
+				CC0DFB791EA5B1090024841A /* PayMethodCell.xib in Resources */,
 				CC0DFB7B1EA5B1090024841A /* UpdateDevIDViewController.xib in Resources */,
 				CC0DFB7C1EA5B1090024841A /* EditCardsController.xib in Resources */,
 				CC0DFB7E1EA5B1090024841A /* FindPassViewController.xib in Resources */,
@@ -5877,8 +5779,6 @@
 				636B1BA91C30E7B300450358 /* BankCardInfoBaseClass.m in Sources */,
 				0FFA91601C589D5D008D91D2 /* CheckViewIng.m in Sources */,
 				63FC24F71D98F7E9006F58F3 /* YYTextAttribute.m in Sources */,
-				63553B011E5D9C2E00B2C1FF /* FaceCell.m in Sources */,
-				0FFA916A1C58B870008D91D2 /* CheckFalseView.m in Sources */,
 				0FFA91661C589E25008D91D2 /* CheckViewController.m in Sources */,
 				63C50E481E666FF40035EE4F /* Custom_BaseInfoResult.m in Sources */,
 				63FC24FC1D98F7E9006F58F3 /* NSParagraphStyle+YYText.m in Sources */,
@@ -6116,7 +6016,6 @@
 				63FC24F91D98F7E9006F58F3 /* YYTextRubyAnnotation.m in Sources */,
 				63C12DCF1E4978AF008119FB /* QRPopView.m in Sources */,
 				63145AB21CA2952400D04ED8 /* LoginMsgBaseClass.m in Sources */,
-				CCC344FC1F03833E006D0F83 /* JRefuseView.m in Sources */,
 				8436149D1F0CF57C0036201A /* P2PContactContenParam.m in Sources */,
 				6326C9ED1BF0B15700FD23A8 /* GetMoneyProcessUserBean.m in Sources */,
 				63553AF21E5D8BA200B2C1FF /* ProfessionViewController.m in Sources */,
@@ -6380,10 +6279,8 @@
 				CCD32B4F1F58133B0092A9CB /* CurrentInformationHeadView.swift in Sources */,
 				CC0DF9B81EA5B1090024841A /* YYTextAttribute.m in Sources */,
 				844E5F511ED94DCB00753671 /* RegParamModel.m in Sources */,
-				CC0DF9BA1EA5B1090024841A /* FaceCell.m in Sources */,
 				CC0F1B9E1EE6537700A23651 /* IdeaBackViewModel.m in Sources */,
 				CCDEDF6A1EEA9271009CEC32 /* ProductProtocolParamModel.m in Sources */,
-				CC0DF9BB1EA5B1090024841A /* CheckFalseView.m in Sources */,
 				8438F7191EE163690089E121 /* ChangePasswordViewModel.m in Sources */,
 				84A5696E1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
 				CC0DF9BD1EA5B1090024841A /* CheckViewController.m in Sources */,
@@ -6604,7 +6501,6 @@
 				CC0DFA841EA5B1090024841A /* CashResult.m in Sources */,
 				CC0DFA851EA5B1090024841A /* YYTextRubyAnnotation.m in Sources */,
 				841E66EF1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */,
-				CCC344FD1F03833E006D0F83 /* JRefuseView.m in Sources */,
 				CC0DFA861EA5B1090024841A /* QRPopView.m in Sources */,
 				CC0DFA871EA5B1090024841A /* LoginMsgBaseClass.m in Sources */,
 				CCDEDF611EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m in Sources */,

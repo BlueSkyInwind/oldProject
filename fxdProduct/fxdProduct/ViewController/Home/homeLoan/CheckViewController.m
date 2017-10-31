@@ -8,7 +8,6 @@
 
 #import "CheckViewController.h"
 #import "CheckViewIng.h"
-#import "CheckFalseView.h"
 #import "CheckSuccessView.h"
 #import "BankCardViewController.h"
 #import <ShareSDK/ShareSDK.h>
@@ -71,7 +70,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 {
     CheckViewIng *_checking;
     CheckSuccessView *checkSuccess;
-    CheckFalseView *checkFalse;
     int sectionState[20];   //标志分区的状态
     //    int textFieldstring;
     NSNumber *_userSelectNum;
@@ -233,52 +231,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
 }
 
-/**
- 导流失败的视图，展示不用
- */
--(void)loadFailedStateView{
-    
-    if (_checking) {
-        [_checking removeFromSuperview];
-    }
-    checkFalse =[[[NSBundle mainBundle] loadNibNamed:@"CheckFalseView" owner:self options:nil] lastObject];
-    checkFalse.layer.anchorPoint = CGPointMake(0.5, 2.0);
-    checkFalse.frame = CGRectMake(0, 0,_k_w, _k_h);
-    checkFalse.labelday.text = @"您的信用评分不够";
-    
-    [[checkFalse.moreInfoBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-
-    }];
-    if (_userStateModel.if_add_documents) {
-        checkFalse.moreInfoLabel.hidden = NO;
-        checkFalse.moreInfoBtn.hidden = NO;
-        checkFalse.promoteLabel.hidden = NO;
-        checkFalse.seeView.hidden = YES;
-        checkFalse.jsdView.hidden = YES;
-    }else {
-        checkFalse.moreInfoLabel.hidden = YES;
-        checkFalse.moreInfoBtn.hidden = YES;
-        checkFalse.promoteLabel.hidden = YES;
-        checkFalse.seeView.hidden = YES;
-        checkFalse.jsdView.hidden = YES;
-        if ([_userStateModel.product_id isEqualToString:SalaryLoan]||[_userStateModel.product_id isEqualToString:WhiteCollarLoan]){
-            [self getContent];
-            checkFalse.jsdView.hidden = NO;
-            [checkFalse.applyImmediatelyBtn addTarget:self action:@selector(clickApplyImmediate) forControlEvents:UIControlEventTouchUpInside];
-        }else{
-            //1表示不是渠道用户 0是渠道用户
-            if ([_userStateModel.merchant_status isEqualToString:@"1"]) {
-                checkFalse.seeView.hidden = NO;
-                checkFalse.jsdView.hidden = YES;
-                [checkFalse.seeBtn addTarget:self action:@selector(clickSeeBtn) forControlEvents:UIControlEventTouchUpInside];
-            }else{
-                checkFalse.seeView.hidden = YES;
-                checkFalse.jsdView.hidden = YES;
-            }
-        }
-    }
-    [self.view addSubview:checkFalse];
-}
 
 #pragma mark 改变实际到账和总费用的文字颜色
 -(void)changeDisplayLabelTextColor:(NSString *)feeStr{
@@ -996,69 +948,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [checkVM obtainSalaryProductFeeOfperiod:@"1"];
 }
 
-#pragma  mark - 工薪贷拒绝导流
--(void)clickSeeBtn{
 
-    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-    webView.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
-    [self.navigationController pushViewController:webView animated:true];
-
-}
-
-#pragma  mark - 白领贷拒绝导流
--(void)clickApplyImmediate{
-
-    if([_userStateModel.product_id isEqualToString:SalaryLoan]){
-        
-        [self fatchRate:^(RateModel *rate) {
-            PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-            payLoanview.product_id = RapidLoan;
-            payLoanview.userState = _userStateModel;
-            payLoanview.rateModel = rate;
-            [self.navigationController pushViewController:payLoanview animated:true];
-        }];
-    }else{
-        UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
-        userDataVC.product_id = SalaryLoan;
-        [self.navigationController pushViewController:userDataVC animated:true];
-    }
-}
-
-#pragma  mark - 白领贷拒绝导流工薪贷的详情
--(void)getContent{
-    NSString *product;
-    if ([_userStateModel.product_id isEqualToString:SalaryLoan]) {
-        product = RapidLoan;
-    }else{
-        product = SalaryLoan;
-    }
-     NSDictionary *dic = @{@"priduct_id_":product};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
-        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
-        
-        if ([rateParse.flag isEqualToString:@"0000"]) {
-            
-            checkFalse.nameLabel.text = rateParse.result.name_;
-            if ([product isEqualToString:RapidLoan]) {
-                checkFalse.nameImage.image = [UIImage imageNamed:@"home_02"];
-                checkFalse.homeImage.image = [UIImage imageNamed:@"home_05"];
-                checkFalse.quotaLabel.text = @"500-1000元";
-                checkFalse.termLabel.text = @"14天";
-            }else{
-            
-                checkFalse.homeImage.image = [UIImage imageNamed:@"home_04"];
-                checkFalse.nameImage.image = [UIImage imageNamed:@"home_01"];
-                checkFalse.quotaLabel.text = [NSString stringWithFormat:@"%ld-%ld元",rateParse.result.principal_bottom_,rateParse.result.principal_top_];
-                checkFalse.termLabel.text = [NSString stringWithFormat:@"%ld-%ld%@",rateParse.result.staging_bottom_,rateParse.result.staging_top_,rateParse.result.remark_];
-            }
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
-        }
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
  -(void)clickApplyImmediatelyBtn{
 
     [self fatchRate:^(RateModel *rate) {

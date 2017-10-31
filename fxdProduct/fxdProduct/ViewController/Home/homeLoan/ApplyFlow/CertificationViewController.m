@@ -7,7 +7,6 @@
 //
 
 #import "CertificationViewController.h"
-#import "FaceCell.h"
 #import "MobileCell.h"
 #import <MGLivenessDetection/MGLivenessDetection.h>
 #import "FaceIDLiveModel.h"
@@ -73,7 +72,6 @@ typedef enum {
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([FaceCell class]) bundle:nil] forCellReuseIdentifier:@"FaceCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MobileCell class]) bundle:nil] forCellReuseIdentifier:@"MobileCell"];
 }
 

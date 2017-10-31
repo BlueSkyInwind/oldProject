@@ -8,7 +8,6 @@
 
 #import "ChangeBankCardViewController.h"
 #import "BankModel.h"
-#import "LabelCell.h"
 #import "HomeBankCardViewController.h"
 #import "SendSmsModel.h"
 #import <MGBaseKit/MGBaseKit.h>
