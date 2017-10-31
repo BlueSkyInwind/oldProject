@@ -412,9 +412,7 @@
             [homeCell setupDefaultUI];
             break;
         case 2:
-        
             if (indexPath.section == 1) {
-            
                 [homeCell productListFirst];
                 return homeCell;
             }

@@ -33,7 +33,6 @@
 		0F920C141BCE549900AA9A31 /* MyCardsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F920C121BCE549900AA9A31 /* MyCardsViewController.xib */; };
 		0F9E30D21BC8A70C0018A801 /* IdeaBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E30D01BC8A70C0018A801 /* IdeaBackViewController.m */; };
 		0F9E30D31BC8A70C0018A801 /* IdeaBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9E30D11BC8A70C0018A801 /* IdeaBackViewController.xib */; };
-		0FBF11261BE376C9008F6393 /* HomeBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF11251BE376C9008F6393 /* HomeBankCardViewController.m */; };
 		0FEA58891BE0A497007F8A6D /* testView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA58871BE0A497007F8A6D /* testView.m */; };
 		0FEA588A1BE0A497007F8A6D /* testView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA58881BE0A497007F8A6D /* testView.xib */; };
 		0FEACE201CA0E2450027859A /* TelPhoneCompanyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEACE1E1CA0E2450027859A /* TelPhoneCompanyCell.m */; };
@@ -62,8 +61,6 @@
 		1A762F701C1FBE4700964719 /* RepayRecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A762F6E1C1FBE4700964719 /* RepayRecordController.xib */; };
 		1AB0F5AA1CF2D20E00F3DF06 /* TicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB0F5A81CF2D20E00F3DF06 /* TicketCell.m */; };
 		1AB0F5AB1CF2D20E00F3DF06 /* TicketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AB0F5A91CF2D20E00F3DF06 /* TicketCell.xib */; };
-		1AB442E61D782E53000459E6 /* RepayDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB442E41D782E53000459E6 /* RepayDetailViewController.m */; };
-		1AB442E71D782E53000459E6 /* RepayDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AB442E51D782E53000459E6 /* RepayDetailViewController.xib */; };
 		1AE362F51C586060006FC276 /* EditCardsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE362F31C586060006FC276 /* EditCardsController.m */; };
 		1AE362F61C586060006FC276 /* EditCardsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AE362F41C586060006FC276 /* EditCardsController.xib */; };
 		1AE5E6241C1EA5240099CCA0 /* AboutMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE5E6221C1EA5240099CCA0 /* AboutMainViewController.m */; };
@@ -116,7 +113,6 @@
 		6326C9D11BF08CEE00FD23A8 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9CD1BF08CEE00FD23A8 /* Model.m */; };
 		6326C9D51BF08E0B00FD23A8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6326C9D31BF08E0B00FD23A8 /* AddressBook.framework */; };
 		6326C9D61BF08E0B00FD23A8 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6326C9D41BF08E0B00FD23A8 /* AddressBookUI.framework */; };
-		6326C9E31BF097D400FD23A8 /* ContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9E21BF097D400FD23A8 /* ContactList.m */; };
 		6326C9EB1BF0B15700FD23A8 /* GetMoneyProcessBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9E61BF0B15700FD23A8 /* GetMoneyProcessBaseClass.m */; };
 		6326C9EC1BF0B15700FD23A8 /* GetMoneyProcessResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9E81BF0B15700FD23A8 /* GetMoneyProcessResult.m */; };
 		6326C9ED1BF0B15700FD23A8 /* GetMoneyProcessUserBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9EA1BF0B15700FD23A8 /* GetMoneyProcessUserBean.m */; };
@@ -187,12 +183,6 @@
 		635B0BDE1DF14B9C008EAFD1 /* AgreeMentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BDD1DF14B9C008EAFD1 /* AgreeMentListViewController.m */; };
 		635B0BE11DF157EA008EAFD1 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BE01DF157EA008EAFD1 /* DetailViewController.m */; };
 		635B2FBA1D6AEE22009CEFE0 /* GlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B2FB91D6AEE22009CEFE0 /* GlobalConfig.m */; };
-		636AC42D1D38DEBC00599590 /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 636AC42B1D38DEBC00599590 /* PayViewController.m */; };
-		636AC42E1D38DEBC00599590 /* PayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636AC42C1D38DEBC00599590 /* PayViewController.xib */; };
-		636AC4331D38EA7F00599590 /* PayMethodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 636AC4311D38EA7F00599590 /* PayMethodCell.m */; };
-		636AC4341D38EA7F00599590 /* PayMethodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636AC4321D38EA7F00599590 /* PayMethodCell.xib */; };
-		636AC4381D38EA9500599590 /* PayMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 636AC4361D38EA9500599590 /* PayMoneyCell.m */; };
-		636AC4391D38EA9500599590 /* PayMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636AC4371D38EA9500599590 /* PayMoneyCell.xib */; };
 		636B1B1E1C1FDDD100450358 /* HHAlertViewCust.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B1B1C1FDDD100450358 /* HHAlertViewCust.m */; };
 		636B1B1F1C1FDDD100450358 /* MBPAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B1D1C1FDDD100450358 /* MBPAlertView.m */; };
 		636B1B221C1FF46900450358 /* libBankCardRecogPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 636B1B211C1FF46900450358 /* libBankCardRecogPro.a */; };
@@ -215,15 +205,7 @@
 		636EE3061B662ABB00A1A3ED /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 636EE3051B662ABB00A1A3ED /* AppDelegate.mm */; };
 		636EE31D1B662ABB00A1A3ED /* fxdProductTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 636EE31C1B662ABB00A1A3ED /* fxdProductTests.m */; };
 		636FF3491BA27C9800BB5528 /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 636FF3481BA27C9800BB5528 /* Address.plist */; };
-		63741E301D3CB8B200C0E2F8 /* PayMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63741E2E1D3CB8B200C0E2F8 /* PayMethodViewController.m */; };
-		63741E311D3CB8B200C0E2F8 /* PayMethodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63741E2F1D3CB8B200C0E2F8 /* PayMethodViewController.xib */; };
 		63741E341D3CC10900C0E2F8 /* PayNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63741E331D3CC10900C0E2F8 /* PayNavigationViewController.m */; };
-		63741E381D3CD4A300C0E2F8 /* BankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63741E361D3CD4A300C0E2F8 /* BankListCell.m */; };
-		63741E391D3CD4A300C0E2F8 /* BankListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63741E371D3CD4A300C0E2F8 /* BankListCell.xib */; };
-		637636D21D768BE800E93289 /* RepayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636D01D768BE800E93289 /* RepayListViewController.m */; };
-		637636D31D768BE800E93289 /* RepayListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636D11D768BE800E93289 /* RepayListViewController.xib */; };
-		637636D71D76A28700E93289 /* RepayListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636D51D76A28700E93289 /* RepayListCell.m */; };
-		637636D81D76A28700E93289 /* RepayListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636D61D76A28700E93289 /* RepayListCell.xib */; };
 		637636E71D76A72A00E93289 /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636DB1D76A72A00E93289 /* LewPopupBackgroundView.m */; };
 		637636E81D76A72A00E93289 /* LewPopupViewAnimationDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636DD1D76A72A00E93289 /* LewPopupViewAnimationDrop.m */; };
 		637636E91D76A72A00E93289 /* LewPopupViewAnimationFade.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636DF1D76A72A00E93289 /* LewPopupViewAnimationFade.m */; };
@@ -232,14 +214,6 @@
 		637636EC1D76A72A00E93289 /* UIViewController+LewPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636E61D76A72A00E93289 /* UIViewController+LewPopupViewController.m */; };
 		637636F01D77BA0800E93289 /* HomePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636EF1D77BA0800E93289 /* HomePopView.m */; };
 		637636F21D77BA3000E93289 /* HomePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636F11D77BA3000E93289 /* HomePopView.xib */; };
-		637636F81D77FB1600E93289 /* repay_circle_un@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 637636F41D77FB1600E93289 /* repay_circle_un@2x.png */; };
-		637636F91D77FB1600E93289 /* repay_circle_un@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 637636F51D77FB1600E93289 /* repay_circle_un@3x.png */; };
-		637636FA1D77FB1600E93289 /* repay_circle_selt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 637636F61D77FB1600E93289 /* repay_circle_selt@2x.png */; };
-		637636FB1D77FB1600E93289 /* repay_circle_selt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 637636F71D77FB1600E93289 /* repay_circle_selt@3x.png */; };
-		637636FF1D78287D00E93289 /* DetailRepayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636FD1D78287D00E93289 /* DetailRepayViewController.m */; };
-		637637001D78287D00E93289 /* DetailRepayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636FE1D78287D00E93289 /* DetailRepayViewController.xib */; };
-		637637031D7829BE00E93289 /* DetailRepayHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 637637021D7829BE00E93289 /* DetailRepayHeader.m */; };
-		637637051D7829C800E93289 /* DetailRepayHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637637041D7829C800E93289 /* DetailRepayHeader.xib */; };
 		637637091D79670D00E93289 /* UILabel+FlickerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 637637081D79670D00E93289 /* UILabel+FlickerNumber.m */; };
 		637963721CAB9C9D002A5910 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637963711CAB9C9D002A5910 /* QuartzCore.framework */; };
 		637963741CAB9CB8002A5910 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637963731CAB9CB8002A5910 /* CoreGraphics.framework */; };
@@ -313,7 +287,6 @@
 		638A170D1E517E8C00AB8AB6 /* vcTransition1.json in Resources */ = {isa = PBXBuildFile; fileRef = 638A170C1E517E8C00AB8AB6 /* vcTransition1.json */; };
 		638C3F191CF2CB08000446A7 /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F181CF2CB08000446A7 /* UIViewController+KNSemiModal.m */; };
 		638C3F271CF2F470000446A7 /* PCCircleViewConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F261CF2F470000446A7 /* PCCircleViewConst.m */; };
-		638C3F2A1CF303D0000446A7 /* SelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F291CF303D0000446A7 /* SelectTableViewController.m */; };
 		638C3F2E1CF53662000446A7 /* RepayMentAvailableRedpackets.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F2D1CF53662000446A7 /* RepayMentAvailableRedpackets.m */; };
 		638C3F391CF564A4000446A7 /* SquareRepaymentAvailableRedpackets.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F321CF564A4000446A7 /* SquareRepaymentAvailableRedpackets.m */; };
 		638C3F3A1CF564A4000446A7 /* SquareRepaymentBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F341CF564A4000446A7 /* SquareRepaymentBaseClass.m */; };
@@ -547,14 +520,6 @@
 		845017321ED7D051008055E4 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
 		8451682C1F26011A0026B415 /* HGBankListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8451682B1F26011A0026B415 /* HGBankListModel.m */; };
 		8451682D1F2603BD0026B415 /* HGBankListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8451682B1F26011A0026B415 /* HGBankListModel.m */; };
-		846A90071F1F3B2700896169 /* PayVerificationCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90051F1F3B2700896169 /* PayVerificationCodeCell.m */; };
-		846A90081F1F3B2700896169 /* PayVerificationCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90061F1F3B2700896169 /* PayVerificationCodeCell.xib */; };
-		846A90091F1F3D9F00896169 /* PayVerificationCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90051F1F3B2700896169 /* PayVerificationCodeCell.m */; };
-		846A900A1F1F3DB300896169 /* PayVerificationCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90061F1F3B2700896169 /* PayVerificationCodeCell.xib */; };
-		846A90181F1F48AB00896169 /* PayDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90161F1F48AB00896169 /* PayDisplayCell.m */; };
-		846A90191F1F48AB00896169 /* PayDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 846A90161F1F48AB00896169 /* PayDisplayCell.m */; };
-		846A901A1F1F48AB00896169 /* PayDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90171F1F48AB00896169 /* PayDisplayCell.xib */; };
-		846A901B1F1F48AB00896169 /* PayDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A90171F1F48AB00896169 /* PayDisplayCell.xib */; };
 		846BB6DF1F580B6400CD3545 /* RenewalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6DE1F580B6400CD3545 /* RenewalViewController.swift */; };
 		846BB6E01F580B6400CD3545 /* RenewalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6DE1F580B6400CD3545 /* RenewalViewController.swift */; };
 		846BB6E31F5835E100CD3545 /* ApplicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */; };
@@ -575,8 +540,6 @@
 		848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
 		8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
-		8499BF871F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */; };
-		8499BF881F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */; };
 		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
 		8499BF8B1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
 		84A5696D1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */; };
@@ -585,6 +548,38 @@
 		84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635131F01096900146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
+		84C619BC1FA815A800626411 /* DetailRepayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6198F1FA8149700626411 /* DetailRepayViewController.m */; };
+		84C619BD1FA815EB00626411 /* PayMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619971FA8149700626411 /* PayMethodViewController.m */; };
+		84C619BE1FA815EB00626411 /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6199A1FA8149700626411 /* PayViewController.m */; };
+		84C619BF1FA815EB00626411 /* RepayDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6199D1FA8149700626411 /* RepayDetailViewController.m */; };
+		84C619C01FA815EB00626411 /* RepayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A01FA8149700626411 /* RepayListViewController.m */; };
+		84C619C11FA815EB00626411 /* SelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A31FA8149700626411 /* SelectTableViewController.m */; };
+		84C619C21FA815EB00626411 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A51FA8149700626411 /* UserBankCardListViewController.m */; };
+		84C619C31FA815EB00626411 /* BankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A81FA8149700626411 /* BankListCell.m */; };
+		84C619C41FA815EB00626411 /* DetailRepayHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619AB1FA8149700626411 /* DetailRepayHeader.m */; };
+		84C619C51FA815EB00626411 /* PayDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619AE1FA8149700626411 /* PayDisplayCell.m */; };
+		84C619C61FA815EB00626411 /* PayMethodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619B11FA8149700626411 /* PayMethodCell.m */; };
+		84C619C71FA815EB00626411 /* PayMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619B41FA8149700626411 /* PayMoneyCell.m */; };
+		84C619C81FA815EB00626411 /* PayVerificationCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619B71FA8149700626411 /* PayVerificationCodeCell.m */; };
+		84C619C91FA815EB00626411 /* RepayListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619BA1FA8149700626411 /* RepayListCell.m */; };
+		84C619CA1FA8161F00626411 /* DetailRepayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6198F1FA8149700626411 /* DetailRepayViewController.m */; };
+		84C619CB1FA8161F00626411 /* PayMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619971FA8149700626411 /* PayMethodViewController.m */; };
+		84C619CC1FA8161F00626411 /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6199A1FA8149700626411 /* PayViewController.m */; };
+		84C619CD1FA8161F00626411 /* RepayDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6199D1FA8149700626411 /* RepayDetailViewController.m */; };
+		84C619CE1FA8161F00626411 /* RepayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A01FA8149700626411 /* RepayListViewController.m */; };
+		84C619CF1FA8161F00626411 /* SelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A31FA8149700626411 /* SelectTableViewController.m */; };
+		84C619D01FA8161F00626411 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A51FA8149700626411 /* UserBankCardListViewController.m */; };
+		84C619D11FA8161F00626411 /* BankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A81FA8149700626411 /* BankListCell.m */; };
+		84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619AB1FA8149700626411 /* DetailRepayHeader.m */; };
+		84C619D31FA8161F00626411 /* PayDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619AE1FA8149700626411 /* PayDisplayCell.m */; };
+		84C619D41FA8161F00626411 /* PayMethodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619B11FA8149700626411 /* PayMethodCell.m */; };
+		84C619D51FA8161F00626411 /* PayMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619B41FA8149700626411 /* PayMoneyCell.m */; };
+		84C619D61FA8161F00626411 /* PayVerificationCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619B71FA8149700626411 /* PayVerificationCodeCell.m */; };
+		84C619D71FA8161F00626411 /* RepayListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619BA1FA8149700626411 /* RepayListCell.m */; };
+		84C619E31FA8173D00626411 /* ContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619DA1FA816A000626411 /* ContactList.m */; };
+		84C619E41FA8173D00626411 /* HomeBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619DC1FA816A000626411 /* HomeBankCardViewController.m */; };
+		84C619E51FA8173D00626411 /* HomeDailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619DE1FA816A000626411 /* HomeDailViewController.m */; };
+		84C619E71FA8173D00626411 /* HomeTelSecoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619E21FA816A000626411 /* HomeTelSecoryViewController.m */; };
 		84CC89991F593C1E00537910 /* ApplicaitonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC89981F593C1E00537910 /* ApplicaitonModel.m */; };
 		84CC899A1F593C1E00537910 /* ApplicaitonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC89981F593C1E00537910 /* ApplicaitonModel.m */; };
 		84CC899E1F5973D700537910 /* DrawingsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC899D1F5973D700537910 /* DrawingsInfoModel.m */; };
@@ -645,7 +640,6 @@
 		CC0346271F3C4CB8001F6F3D /* FirstBorrowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0346251F3C4CB8001F6F3D /* FirstBorrowViewController.xib */; };
 		CC0346281F3C4CDF001F6F3D /* FirstBorrowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0346251F3C4CB8001F6F3D /* FirstBorrowViewController.xib */; };
 		CC0346291F3C4FBF001F6F3D /* FirstBorrowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0346241F3C4CB8001F6F3D /* FirstBorrowViewController.m */; };
-		CC0DF9581EA5B1090024841A /* DetailRepayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636FD1D78287D00E93289 /* DetailRepayViewController.m */; };
 		CC0DF9591EA5B1090024841A /* ProductListResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6379639C1CABAFE9002A5910 /* ProductListResult.m */; };
 		CC0DF95A1EA5B1090024841A /* NSData+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 63832C871CB7513500C6F194 /* NSData+AES.m */; };
 		CC0DF95B1EA5B1090024841A /* LivenessBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 637964181CAD1BE0002A5910 /* LivenessBaseClass.m */; };
@@ -724,7 +718,6 @@
 		CC0DF9AD1EA5B1090024841A /* LOTLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C91E517D9F00AB8AB6 /* LOTLayer.m */; };
 		CC0DF9AE1EA5B1090024841A /* HMScannerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F254801E49A45900852CF1 /* HMScannerMaskView.m */; };
 		CC0DF9AF1EA5B1090024841A /* LoanMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA91781C59F641008D91D2 /* LoanMoneyViewController.m */; };
-		CC0DF9B01EA5B1090024841A /* PayMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 636AC4361D38EA9500599590 /* PayMoneyCell.m */; };
 		CC0DF9B11EA5B1090024841A /* RepayRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A762F6D1C1FBE4700964719 /* RepayRecordController.m */; };
 		CC0DF9B21EA5B1090024841A /* LOTShapeGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D21E517D9F00AB8AB6 /* LOTShapeGroup.m */; };
 		CC0DF9B31EA5B1090024841A /* HMScanerCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F254771E49A45900852CF1 /* HMScanerCardViewController.m */; };
@@ -778,7 +771,6 @@
 		CC0DF9EC1EA5B1090024841A /* GetCustomerBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 634831071CBCD4680005C4CD /* GetCustomerBaseViewModel.m */; };
 		CC0DF9ED1EA5B1090024841A /* YYTextInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24C11D98F7E9006F58F3 /* YYTextInput.m */; };
 		CC0DF9EE1EA5B1090024841A /* BankCardInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A45A3EF1CAA7002001BC841 /* BankCardInfoModel.m */; };
-		CC0DF9EF1EA5B1090024841A /* ContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9E21BF097D400FD23A8 /* ContactList.m */; };
 		CC0DF9F01EA5B1090024841A /* MyCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F920C111BCE549900AA9A31 /* MyCardsViewController.m */; };
 		CC0DF9F11EA5B1090024841A /* LOTAnimationCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16B01E517D9F00AB8AB6 /* LOTAnimationCache.m */; };
 		CC0DF9F21EA5B1090024841A /* LoginBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AA51CA294B800D04ED8 /* LoginBaseClass.m */; };
@@ -798,9 +790,7 @@
 		CC0DFA031EA5B1090024841A /* DrawService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B142AB1D9A43B000C43B3F /* DrawService.m */; };
 		CC0DFA041EA5B1090024841A /* NSString+Password.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C141BE063A90036E8EF /* NSString+Password.m */; };
 		CC0DFA051EA5B1090024841A /* BankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA91731C59BE57008D91D2 /* BankCardViewController.m */; };
-		CC0DFA061EA5B1090024841A /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 636AC42B1D38DEBC00599590 /* PayViewController.m */; };
 		CC0DFA071EA5B1090024841A /* ApprovalAmountExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 637963A41CABD0F8002A5910 /* ApprovalAmountExt.m */; };
-		CC0DFA091EA5B1090024841A /* RepayDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB442E41D782E53000459E6 /* RepayDetailViewController.m */; };
 		CC0DFA0A1EA5B1090024841A /* LabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F047F451C507D59002ED7C0 /* LabelCell.m */; };
 		CC0DFA0B1EA5B1090024841A /* RateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50E531E68390E0035EE4F /* RateModel.m */; };
 		CC0DFA0C1EA5B1090024841A /* UIPasteboard+YYText.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24DD1D98F7E9006F58F3 /* UIPasteboard+YYText.m */; };
@@ -827,7 +817,6 @@
 		CC0DFA231EA5B1090024841A /* FXDUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B142A71D9A0D7300C43B3F /* FXDUserInfo.m */; };
 		CC0DFA241EA5B1090024841A /* SquareRepaymentAvailableRedpackets.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F321CF564A4000446A7 /* SquareRepaymentAvailableRedpackets.m */; };
 		CC0DFA251EA5B1090024841A /* UILabel+FlickerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 637637081D79670D00E93289 /* UILabel+FlickerNumber.m */; };
-		CC0DFA261EA5B1090024841A /* BankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63741E361D3CD4A300C0E2F8 /* BankListCell.m */; };
 		CC0DFA271EA5B1090024841A /* RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DB3FB91E1DE41700FBE1C4 /* RTRootNavigationController.m */; };
 		CC0DFA281EA5B1090024841A /* MBPAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B1D1C1FDDD100450358 /* MBPAlertView.m */; };
 		CC0DFA291EA5B1090024841A /* testModelFmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B421C224F2000450358 /* testModelFmdb.m */; };
@@ -835,8 +824,6 @@
 		CC0DFA2B1EA5B1090024841A /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 63001A1F1BA8113000E2850A /* GTMBase64.m */; };
 		CC0DFA2C1EA5B1090024841A /* IdentityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553AEB1E5D787800B2C1FF /* IdentityCell.m */; };
 		CC0DFA2D1EA5B1090024841A /* ApprovalAmountBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 637963A21CABD0F8002A5910 /* ApprovalAmountBaseClass.m */; };
-		CC0DFA2E1EA5B1090024841A /* DetailRepayHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 637637021D7829BE00E93289 /* DetailRepayHeader.m */; };
-		CC0DFA2F1EA5B1090024841A /* PayMethodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 636AC4311D38EA7F00599590 /* PayMethodCell.m */; };
 		CC0DFA301EA5B1090024841A /* NextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A686DAE1C1E961C009227A9 /* NextViewCell.m */; };
 		CC0DFA311EA5B1090024841A /* NSString+File.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24BFE1BE063A90036E8EF /* NSString+File.m */; };
 		CC0DFA341EA5B1090024841A /* GetMoneyProcessBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9E61BF0B15700FD23A8 /* GetMoneyProcessBaseClass.m */; };
@@ -851,7 +838,6 @@
 		CC0DFA3F1EA5B1090024841A /* MLBlackTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AD1D191BFC1AA400807877 /* MLBlackTransition.m */; };
 		CC0DFA401EA5B1090024841A /* GetMoneyStateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24D2A1BE10F4A0036E8EF /* GetMoneyStateResult.m */; };
 		CC0DFA411EA5B1090024841A /* CustomerBaseInfoExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830ED1CBB82C30005C4CD /* CustomerBaseInfoExt.m */; };
-		CC0DFA421EA5B1090024841A /* PayMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63741E2E1D3CB8B200C0E2F8 /* PayMethodViewController.m */; };
 		CC0DFA431EA5B1090024841A /* LoginParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 639F73EB1E4C0099008D3475 /* LoginParse.m */; };
 		CC0DFA441EA5B1090024841A /* ShouldAlsoAmountBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7A91BE34F9F00C32919 /* ShouldAlsoAmountBaseClass.m */; };
 		CC0DFA451EA5B1090024841A /* EmptyUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BC61DEBFED0008EAFD1 /* EmptyUserData.m */; };
@@ -902,13 +888,11 @@
 		CC0DFA781EA5B1090024841A /* AddressClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 632C588B1E5ADE1A00490C14 /* AddressClass.m */; };
 		CC0DFA791EA5B1090024841A /* P2PBillDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB0401E07BD46008A760C /* P2PBillDetail.m */; };
 		CC0DFA7A1EA5B1090024841A /* YYDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D43EF11D41F76D0076AC7F /* YYDiskCache.m */; };
-		CC0DFA7B1EA5B1090024841A /* SelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F291CF303D0000446A7 /* SelectTableViewController.m */; };
 		CC0DFA7C1EA5B1090024841A /* YYTextDebugOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24BD1D98F7E9006F58F3 /* YYTextDebugOption.m */; };
 		CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C2E1BE063A90036E8EF /* UITableViewCell+Extend.m */; };
 		CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 634831041CBCCF190005C4CD /* GetCareerInfoViewModel.m */; };
 		CC0DFA801EA5B1090024841A /* CardListBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D45971BCC99DE00874064 /* CardListBaseClass.m */; };
 		CC0DFA811EA5B1090024841A /* LunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 639E886F1CA1371800254216 /* LunchViewController.m */; };
-		CC0DFA821EA5B1090024841A /* RepayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636D01D768BE800E93289 /* RepayListViewController.m */; };
 		CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E31D98F7E9006F58F3 /* YYTextTransaction.m */; };
 		CC0DFA841EA5B1090024841A /* CashResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7951BE2FE6600C32919 /* CashResult.m */; };
 		CC0DFA851EA5B1090024841A /* YYTextRubyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24D41D98F7E9006F58F3 /* YYTextRubyAnnotation.m */; };
@@ -966,7 +950,6 @@
 		CC0DFABD1EA5B1090024841A /* TelPhoneCompanyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEACE1E1CA0E2450027859A /* TelPhoneCompanyCell.m */; };
 		CC0DFABF1EA5B1090024841A /* YYTextSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24CB1D98F7E9006F58F3 /* YYTextSelectionView.m */; };
 		CC0DFAC01EA5B1090024841A /* QueryRepaymentsResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 630CC0951BC8E14200AE9690 /* QueryRepaymentsResult.m */; };
-		CC0DFAC11EA5B1090024841A /* HomeBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF11251BE376C9008F6393 /* HomeBankCardViewController.m */; };
 		CC0DFAC21EA5B1090024841A /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECCA1E1B8FAA0079A2F8 /* SDCollectionViewCell.m */; };
 		CC0DFAC31EA5B1090024841A /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 634795DA1D378CED00EC4027 /* Aspects.m */; };
 		CC0DFAC41EA5B1090024841A /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C291BE063A90036E8EF /* UIImage+FixOrientation.m */; };
@@ -988,7 +971,6 @@
 		CC0DFADA1EA5B1090024841A /* NSString+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C121BE063A90036E8EF /* NSString+Extend.m */; };
 		CC0DFADB1EA5B1090024841A /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EC5C861E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m */; };
 		CC0DFADC1EA5B1090024841A /* DES3Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313DC101BB3E48800EB45DE /* DES3Util.m */; };
-		CC0DFADD1EA5B1090024841A /* RepayListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636D51D76A28700E93289 /* RepayListCell.m */; };
 		CC0DFADE1EA5B1090024841A /* GetMoneyResultBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D462C1BD097B900874064 /* GetMoneyResultBaseClass.m */; };
 		CC0DFADF1EA5B1090024841A /* LewPopupViewAnimationDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636DD1D76A72A00E93289 /* LewPopupViewAnimationDrop.m */; };
 		CC0DFAE01EA5B1090024841A /* RepayListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 637BABF91D7D3FAB00CF8EB5 /* RepayListInfo.m */; };
@@ -1040,9 +1022,7 @@
 		CC0DFB191EA5B1090024841A /* CheckViewIng.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA91611C589D76008D91D2 /* CheckViewIng.xib */; };
 		CC0DFB1A1EA5B1090024841A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6313DC161BB3F07B00EB45DE /* Images.xcassets */; };
 		CC0DFB1C1EA5B1090024841A /* AboutMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AE5E6231C1EA5240099CCA0 /* AboutMainViewController.xib */; };
-		CC0DFB1D1EA5B1090024841A /* DetailRepayHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637637041D7829C800E93289 /* DetailRepayHeader.xib */; };
 		CC0DFB1E1EA5B1090024841A /* bank_code_7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76E1D348B4E0097C943 /* bank_code_7@2x.png */; };
-		CC0DFB1F1EA5B1090024841A /* RepayDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AB442E51D782E53000459E6 /* RepayDetailViewController.xib */; };
 		CC0DFB201EA5B1090024841A /* CertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AFB1E5D9A8C00B2C1FF /* CertificationViewController.xib */; };
 		CC0DFB211EA5B1090024841A /* FaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553B001E5D9C2E00B2C1FF /* FaceCell.xib */; };
 		CC0DFB221EA5B1090024841A /* RegViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633DAC071C34D47A000DA852 /* RegViewController.xib */; };
@@ -1054,18 +1034,14 @@
 		CC0DFB291EA5B1090024841A /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F047F461C507D59002ED7C0 /* LabelCell.xib */; };
 		CC0DFB2A1EA5B1090024841A /* MoneyIngView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 635B0BD61DF11C44008EAFD1 /* MoneyIngView.xib */; };
 		CC0DFB2E1EA5B1090024841A /* fxdProductDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6386A6B71E80D4F200A181A3 /* fxdProductDev-Info.plist */; };
-		CC0DFB2F1EA5B1090024841A /* repay_circle_un@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 637636F51D77FB1600E93289 /* repay_circle_un@3x.png */; };
 		CC0DFB311EA5B1090024841A /* bank_code_29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63F99C661D57457400884EA1 /* bank_code_29@2x.png */; };
 		CC0DFB321EA5B1090024841A /* bank_code_10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7631D348B4E0097C943 /* bank_code_10@2x.png */; };
 		CC0DFB331EA5B1090024841A /* testView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA58881BE0A497007F8A6D /* testView.xib */; };
-		CC0DFB341EA5B1090024841A /* repay_circle_selt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 637636F61D77FB1600E93289 /* repay_circle_selt@2x.png */; };
-		CC0DFB371EA5B1090024841A /* RepayListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636D61D76A28700E93289 /* RepayListCell.xib */; };
 		CC0DFB391EA5B1090024841A /* bank_code_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76B1D348B4E0097C943 /* bank_code_4@2x.png */; };
 		CC0DFB3A1EA5B1090024841A /* MoneyPlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63C12DCA1E495CC9008119FB /* MoneyPlanCell.xib */; };
 		CC0DFB3D1EA5B1090024841A /* IdeaBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9E30D11BC8A70C0018A801 /* IdeaBackViewController.xib */; };
 		CC0DFB3E1EA5B1090024841A /* SumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FE3DEA1E487819009E5B82 /* SumCell.xib */; };
 		CC0DFB3F1EA5B1090024841A /* indexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 631CB46F1B7AF5220090C94D /* indexViewController.xib */; };
-		CC0DFB401EA5B1090024841A /* repay_circle_selt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 637636F71D77FB1600E93289 /* repay_circle_selt@3x.png */; };
 		CC0DFB411EA5B1090024841A /* ColledgeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F099B981C1A97EB00D97BAE /* ColledgeView.xib */; };
 		CC0DFB431EA5B1090024841A /* LoanProcessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F2548C1E49CD2C00852CF1 /* LoanProcessViewController.xib */; };
 		CC0DFB441EA5B1090024841A /* DaysCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FE3DEF1E48821B009E5B82 /* DaysCell.xib */; };
@@ -1079,11 +1055,8 @@
 		CC0DFB4E1EA5B1090024841A /* BundleForBankCard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6303C1131C1816F000CD14A7 /* BundleForBankCard.bundle */; };
 		CC0DFB4F1EA5B1090024841A /* HomeProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E1ECD91E1BA8E30079A2F8 /* HomeProductCell.xib */; };
 		CC0DFB501EA5B1090024841A /* telphoneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA91331C56059D008D91D2 /* telphoneView.xib */; };
-		CC0DFB511EA5B1090024841A /* PayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636AC42C1D38DEBC00599590 /* PayViewController.xib */; };
 		CC0DFB521EA5B1090024841A /* HMScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F254781E49A45900852CF1 /* HMScanner.bundle */; };
-		CC0DFB531EA5B1090024841A /* PayMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636AC4371D38EA9500599590 /* PayMoneyCell.xib */; };
 		CC0DFB541EA5B1090024841A /* ProfessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AF11E5D8BA200B2C1FF /* ProfessionViewController.xib */; };
-		CC0DFB551EA5B1090024841A /* DetailRepayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636FE1D78287D00E93289 /* DetailRepayViewController.xib */; };
 		CC0DFB561EA5B1090024841A /* CheckFalseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA916B1C58B880008D91D2 /* CheckFalseView.xib */; };
 		CC0DFB571EA5B1090024841A /* DataDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AD71E5D2A4200B2C1FF /* DataDisplayCell.xib */; };
 		CC0DFB581EA5B1090024841A /* CheckSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63BB029A1C71C49A00C05FE7 /* CheckSuccessView.xib */; };
@@ -1094,13 +1067,10 @@
 		CC0DFB5E1EA5B1090024841A /* bank_code_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76C1D348B4E0097C943 /* bank_code_5@2x.png */; };
 		CC0DFB621EA5B1090024841A /* bank_code_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7671D348B4E0097C943 /* bank_code_1@2x.png */; };
 		CC0DFB631EA5B1090024841A /* LoanSureFirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F5AD921E23849C001BDF44 /* LoanSureFirstViewController.xib */; };
-		CC0DFB641EA5B1090024841A /* BankListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63741E371D3CD4A300C0E2F8 /* BankListCell.xib */; };
 		CC0DFB651EA5B1090024841A /* bank_code_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76D1D348B4E0097C943 /* bank_code_6@2x.png */; };
 		CC0DFB661EA5B1090024841A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636B1B2C1C216FCE00450358 /* HomeViewController.xib */; };
-		CC0DFB671EA5B1090024841A /* RepayListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636D11D768BE800E93289 /* RepayListViewController.xib */; };
 		CC0DFB681EA5B1090024841A /* RepayRecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A762F6E1C1FBE4700964719 /* RepayRecordController.xib */; };
 		CC0DFB691EA5B1090024841A /* bank_code_28@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7681D348B4E0097C943 /* bank_code_28@2x.png */; };
-		CC0DFB6A1EA5B1090024841A /* repay_circle_un@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 637636F41D77FB1600E93289 /* repay_circle_un@2x.png */; };
 		CC0DFB6B1EA5B1090024841A /* IdentityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AEC1E5D787800B2C1FF /* IdentityCell.xib */; };
 		CC0DFB6D1EA5B1090024841A /* vcTransition1.json in Resources */ = {isa = PBXBuildFile; fileRef = 638A170C1E517E8C00AB8AB6 /* vcTransition1.json */; };
 		CC0DFB6E1EA5B1090024841A /* bank_code_8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F76F1D348B4E0097C943 /* bank_code_8@2x.png */; };
@@ -1109,7 +1079,6 @@
 		CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636B1B8E1C2A416500450358 /* NextViewCell.xib */; };
 		CC0DFB771EA5B1090024841A /* CycleTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 632DFF611E48500500E414B2 /* CycleTextCell.xib */; };
 		CC0DFB781EA5B1090024841A /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 63B65DF01D519D1600207231 /* main.js */; };
-		CC0DFB791EA5B1090024841A /* PayMethodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636AC4321D38EA7F00599590 /* PayMethodCell.xib */; };
 		CC0DFB7A1EA5B1090024841A /* bank_code_14@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6391F7641D348B4E0097C943 /* bank_code_14@2x.png */; };
 		CC0DFB7B1EA5B1090024841A /* UpdateDevIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 630D46161BCCD2FB00874064 /* UpdateDevIDViewController.xib */; };
 		CC0DFB7C1EA5B1090024841A /* EditCardsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AE362F41C586060006FC276 /* EditCardsController.xib */; };
@@ -1123,7 +1092,6 @@
 		CC0DFB881EA5B1090024841A /* TelPhoneCompanyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FEACE1F1CA0E2450027859A /* TelPhoneCompanyCell.xib */; };
 		CC0DFB8C1EA5B1090024841A /* UserContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AF61E5D937600B2C1FF /* UserContactsViewController.xib */; };
 		CC0DFB8D1EA5B1090024841A /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F0FDAC11BC771EC00F3CF10 /* AboutViewController.xib */; };
-		CC0DFB8E1EA5B1090024841A /* PayMethodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63741E2F1D3CB8B200C0E2F8 /* PayMethodViewController.xib */; };
 		CC0DFB901EA5B1090024841A /* HomePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 637636F11D77BA3000E93289 /* HomePopView.xib */; };
 		CC0F1B991EE64A2A00A23651 /* ChangePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B981EE64A2A00A23651 /* ChangePasswordModel.m */; };
 		CC0F1B9A1EE64A2A00A23651 /* ChangePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B981EE64A2A00A23651 /* ChangePasswordModel.m */; };
@@ -1334,8 +1302,6 @@
 		0F9E30CF1BC8A70C0018A801 /* IdeaBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdeaBackViewController.h; sourceTree = "<group>"; };
 		0F9E30D01BC8A70C0018A801 /* IdeaBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaBackViewController.m; sourceTree = "<group>"; };
 		0F9E30D11BC8A70C0018A801 /* IdeaBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdeaBackViewController.xib; sourceTree = "<group>"; };
-		0FBF11241BE376C9008F6393 /* HomeBankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBankCardViewController.h; sourceTree = "<group>"; };
-		0FBF11251BE376C9008F6393 /* HomeBankCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBankCardViewController.m; sourceTree = "<group>"; };
 		0FEA58861BE0A497007F8A6D /* testView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testView.h; sourceTree = "<group>"; };
 		0FEA58871BE0A497007F8A6D /* testView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testView.m; sourceTree = "<group>"; };
 		0FEA58881BE0A497007F8A6D /* testView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = testView.xib; sourceTree = "<group>"; };
@@ -1385,9 +1351,6 @@
 		1AB0F5A71CF2D20E00F3DF06 /* TicketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketCell.h; sourceTree = "<group>"; };
 		1AB0F5A81CF2D20E00F3DF06 /* TicketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCell.m; sourceTree = "<group>"; };
 		1AB0F5A91CF2D20E00F3DF06 /* TicketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketCell.xib; sourceTree = "<group>"; };
-		1AB442E31D782E53000459E6 /* RepayDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayDetailViewController.h; sourceTree = "<group>"; };
-		1AB442E41D782E53000459E6 /* RepayDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayDetailViewController.m; sourceTree = "<group>"; };
-		1AB442E51D782E53000459E6 /* RepayDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepayDetailViewController.xib; sourceTree = "<group>"; };
 		1AE362F21C586060006FC276 /* EditCardsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCardsController.h; sourceTree = "<group>"; };
 		1AE362F31C586060006FC276 /* EditCardsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCardsController.m; sourceTree = "<group>"; };
 		1AE362F41C586060006FC276 /* EditCardsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCardsController.xib; sourceTree = "<group>"; };
@@ -1486,8 +1449,6 @@
 		6326C9D31BF08E0B00FD23A8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		6326C9D41BF08E0B00FD23A8 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		6326C9DF1BF0962E00FD23A8 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
-		6326C9E11BF097D400FD23A8 /* ContactList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactList.h; sourceTree = "<group>"; };
-		6326C9E21BF097D400FD23A8 /* ContactList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactList.m; sourceTree = "<group>"; };
 		6326C9E51BF0B15700FD23A8 /* GetMoneyProcessBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyProcessBaseClass.h; sourceTree = "<group>"; };
 		6326C9E61BF0B15700FD23A8 /* GetMoneyProcessBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyProcessBaseClass.m; sourceTree = "<group>"; };
 		6326C9E71BF0B15700FD23A8 /* GetMoneyProcessResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyProcessResult.h; sourceTree = "<group>"; };
@@ -1615,15 +1576,6 @@
 		635B2FB91D6AEE22009CEFE0 /* GlobalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalConfig.m; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 1; };
 		635B8DE11B706A2D00F840CA /* GlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConfig.h; sourceTree = "<group>"; };
 		636A2DD61D891F7900E087A6 /* fxdProduct.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fxdProduct.entitlements; sourceTree = "<group>"; };
-		636AC42A1D38DEBC00599590 /* PayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayViewController.h; sourceTree = "<group>"; };
-		636AC42B1D38DEBC00599590 /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
-		636AC42C1D38DEBC00599590 /* PayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayViewController.xib; sourceTree = "<group>"; };
-		636AC4301D38EA7F00599590 /* PayMethodCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayMethodCell.h; sourceTree = "<group>"; };
-		636AC4311D38EA7F00599590 /* PayMethodCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMethodCell.m; sourceTree = "<group>"; };
-		636AC4321D38EA7F00599590 /* PayMethodCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayMethodCell.xib; sourceTree = "<group>"; };
-		636AC4351D38EA9500599590 /* PayMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayMoneyCell.h; sourceTree = "<group>"; };
-		636AC4361D38EA9500599590 /* PayMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMoneyCell.m; sourceTree = "<group>"; };
-		636AC4371D38EA9500599590 /* PayMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayMoneyCell.xib; sourceTree = "<group>"; };
 		636B1B1A1C1FDDD100450358 /* HHAlertViewCust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHAlertViewCust.h; sourceTree = "<group>"; };
 		636B1B1B1C1FDDD100450358 /* HHAlertViewCust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHAlertViewCust.m; sourceTree = "<group>"; };
 		636B1B1C1C1FDDD100450358 /* MBPAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPAlertView.h; sourceTree = "<group>"; };
@@ -1664,20 +1616,8 @@
 		636EE31B1B662ABB00A1A3ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		636EE31C1B662ABB00A1A3ED /* fxdProductTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fxdProductTests.m; sourceTree = "<group>"; };
 		636FF3481BA27C9800BB5528 /* Address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Address.plist; sourceTree = "<group>"; };
-		63741E2D1D3CB8B200C0E2F8 /* PayMethodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayMethodViewController.h; sourceTree = "<group>"; };
-		63741E2E1D3CB8B200C0E2F8 /* PayMethodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMethodViewController.m; sourceTree = "<group>"; };
-		63741E2F1D3CB8B200C0E2F8 /* PayMethodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayMethodViewController.xib; sourceTree = "<group>"; };
 		63741E321D3CC10900C0E2F8 /* PayNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayNavigationViewController.h; sourceTree = "<group>"; };
 		63741E331D3CC10900C0E2F8 /* PayNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayNavigationViewController.m; sourceTree = "<group>"; };
-		63741E351D3CD4A300C0E2F8 /* BankListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankListCell.h; sourceTree = "<group>"; };
-		63741E361D3CD4A300C0E2F8 /* BankListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankListCell.m; sourceTree = "<group>"; };
-		63741E371D3CD4A300C0E2F8 /* BankListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankListCell.xib; sourceTree = "<group>"; };
-		637636CF1D768BE800E93289 /* RepayListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayListViewController.h; sourceTree = "<group>"; };
-		637636D01D768BE800E93289 /* RepayListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayListViewController.m; sourceTree = "<group>"; };
-		637636D11D768BE800E93289 /* RepayListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepayListViewController.xib; sourceTree = "<group>"; };
-		637636D41D76A28700E93289 /* RepayListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayListCell.h; sourceTree = "<group>"; };
-		637636D51D76A28700E93289 /* RepayListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayListCell.m; sourceTree = "<group>"; };
-		637636D61D76A28700E93289 /* RepayListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepayListCell.xib; sourceTree = "<group>"; };
 		637636DA1D76A72A00E93289 /* LewPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupBackgroundView.h; sourceTree = "<group>"; };
 		637636DB1D76A72A00E93289 /* LewPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupBackgroundView.m; sourceTree = "<group>"; };
 		637636DC1D76A72A00E93289 /* LewPopupViewAnimationDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationDrop.h; sourceTree = "<group>"; };
@@ -1694,16 +1634,6 @@
 		637636EE1D77BA0800E93289 /* HomePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePopView.h; sourceTree = "<group>"; };
 		637636EF1D77BA0800E93289 /* HomePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePopView.m; sourceTree = "<group>"; };
 		637636F11D77BA3000E93289 /* HomePopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePopView.xib; sourceTree = "<group>"; };
-		637636F41D77FB1600E93289 /* repay_circle_un@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_un@2x.png"; sourceTree = "<group>"; };
-		637636F51D77FB1600E93289 /* repay_circle_un@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_un@3x.png"; sourceTree = "<group>"; };
-		637636F61D77FB1600E93289 /* repay_circle_selt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_selt@2x.png"; sourceTree = "<group>"; };
-		637636F71D77FB1600E93289 /* repay_circle_selt@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_selt@3x.png"; sourceTree = "<group>"; };
-		637636FC1D78287D00E93289 /* DetailRepayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailRepayViewController.h; sourceTree = "<group>"; };
-		637636FD1D78287D00E93289 /* DetailRepayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailRepayViewController.m; sourceTree = "<group>"; };
-		637636FE1D78287D00E93289 /* DetailRepayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailRepayViewController.xib; sourceTree = "<group>"; };
-		637637011D7829BE00E93289 /* DetailRepayHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailRepayHeader.h; sourceTree = "<group>"; };
-		637637021D7829BE00E93289 /* DetailRepayHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailRepayHeader.m; sourceTree = "<group>"; };
-		637637041D7829C800E93289 /* DetailRepayHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailRepayHeader.xib; sourceTree = "<group>"; };
 		637637071D79670D00E93289 /* UILabel+FlickerNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FlickerNumber.h"; sourceTree = "<group>"; };
 		637637081D79670D00E93289 /* UILabel+FlickerNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FlickerNumber.m"; sourceTree = "<group>"; };
 		637963711CAB9C9D002A5910 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1846,8 +1776,6 @@
 		638C3F181CF2CB08000446A7 /* UIViewController+KNSemiModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KNSemiModal.m"; sourceTree = "<group>"; };
 		638C3F251CF2F470000446A7 /* PCCircleViewConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PCCircleViewConst.h; path = GestureUnlock/PCCircleViewConst.h; sourceTree = "<group>"; };
 		638C3F261CF2F470000446A7 /* PCCircleViewConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PCCircleViewConst.m; path = GestureUnlock/PCCircleViewConst.m; sourceTree = "<group>"; };
-		638C3F281CF303D0000446A7 /* SelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTableViewController.h; sourceTree = "<group>"; };
-		638C3F291CF303D0000446A7 /* SelectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTableViewController.m; sourceTree = "<group>"; };
 		638C3F2C1CF53662000446A7 /* RepayMentAvailableRedpackets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayMentAvailableRedpackets.h; sourceTree = "<group>"; };
 		638C3F2D1CF53662000446A7 /* RepayMentAvailableRedpackets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayMentAvailableRedpackets.m; sourceTree = "<group>"; };
 		638C3F311CF564A4000446A7 /* SquareRepaymentAvailableRedpackets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareRepaymentAvailableRedpackets.h; sourceTree = "<group>"; };
@@ -2210,12 +2138,6 @@
 		844E5F4F1ED94DCB00753671 /* RegParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegParamModel.m; sourceTree = "<group>"; };
 		8451682A1F26011A0026B415 /* HGBankListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGBankListModel.h; sourceTree = "<group>"; };
 		8451682B1F26011A0026B415 /* HGBankListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGBankListModel.m; sourceTree = "<group>"; };
-		846A90041F1F3B2700896169 /* PayVerificationCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayVerificationCodeCell.h; sourceTree = "<group>"; };
-		846A90051F1F3B2700896169 /* PayVerificationCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayVerificationCodeCell.m; sourceTree = "<group>"; };
-		846A90061F1F3B2700896169 /* PayVerificationCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayVerificationCodeCell.xib; sourceTree = "<group>"; };
-		846A90151F1F48AB00896169 /* PayDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayDisplayCell.h; sourceTree = "<group>"; };
-		846A90161F1F48AB00896169 /* PayDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayDisplayCell.m; sourceTree = "<group>"; };
-		846A90171F1F48AB00896169 /* PayDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayDisplayCell.xib; sourceTree = "<group>"; };
 		846BB6DE1F580B6400CD3545 /* RenewalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenewalViewController.swift; sourceTree = "<group>"; };
 		846BB6E11F5835E100CD3545 /* ApplicationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewModel.h; sourceTree = "<group>"; };
 		846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewModel.m; sourceTree = "<group>"; };
@@ -2231,8 +2153,6 @@
 		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
 		8496D3141F5A9E3A00CCEE72 /* BankInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankInfoViewModel.h; sourceTree = "<group>"; };
 		8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankInfoViewModel.m; sourceTree = "<group>"; };
-		8499BF851F4FFDB700F193F9 /* UserBankCardListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserBankCardListViewController.h; sourceTree = "<group>"; };
-		8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserBankCardListViewController.m; sourceTree = "<group>"; };
 		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
 		84A5696B1F983AFC003A870E /* LapseDiscountTicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LapseDiscountTicketViewController.h; sourceTree = "<group>"; };
 		84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LapseDiscountTicketViewController.m; sourceTree = "<group>"; };
@@ -2240,6 +2160,58 @@
 		84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobilePhoneOperatorParamModel.m; sourceTree = "<group>"; };
 		84A6350F1F00FCA200146A8A /* AuthenticationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewModel.h; sourceTree = "<group>"; };
 		84A635101F00FCA200146A8A /* AuthenticationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewModel.m; sourceTree = "<group>"; };
+		84C6198E1FA8149700626411 /* DetailRepayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailRepayViewController.h; sourceTree = "<group>"; };
+		84C6198F1FA8149700626411 /* DetailRepayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailRepayViewController.m; sourceTree = "<group>"; };
+		84C619901FA8149700626411 /* DetailRepayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailRepayViewController.xib; sourceTree = "<group>"; };
+		84C619921FA8149700626411 /* repay_circle_selt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_selt@2x.png"; sourceTree = "<group>"; };
+		84C619931FA8149700626411 /* repay_circle_selt@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_selt@3x.png"; sourceTree = "<group>"; };
+		84C619941FA8149700626411 /* repay_circle_un@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_un@2x.png"; sourceTree = "<group>"; };
+		84C619951FA8149700626411 /* repay_circle_un@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_un@3x.png"; sourceTree = "<group>"; };
+		84C619961FA8149700626411 /* PayMethodViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayMethodViewController.h; sourceTree = "<group>"; };
+		84C619971FA8149700626411 /* PayMethodViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayMethodViewController.m; sourceTree = "<group>"; };
+		84C619981FA8149700626411 /* PayMethodViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayMethodViewController.xib; sourceTree = "<group>"; };
+		84C619991FA8149700626411 /* PayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayViewController.h; sourceTree = "<group>"; };
+		84C6199A1FA8149700626411 /* PayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
+		84C6199B1FA8149700626411 /* PayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayViewController.xib; sourceTree = "<group>"; };
+		84C6199C1FA8149700626411 /* RepayDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RepayDetailViewController.h; sourceTree = "<group>"; };
+		84C6199D1FA8149700626411 /* RepayDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RepayDetailViewController.m; sourceTree = "<group>"; };
+		84C6199E1FA8149700626411 /* RepayDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepayDetailViewController.xib; sourceTree = "<group>"; };
+		84C6199F1FA8149700626411 /* RepayListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RepayListViewController.h; sourceTree = "<group>"; };
+		84C619A01FA8149700626411 /* RepayListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RepayListViewController.m; sourceTree = "<group>"; };
+		84C619A11FA8149700626411 /* RepayListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepayListViewController.xib; sourceTree = "<group>"; };
+		84C619A21FA8149700626411 /* SelectTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectTableViewController.h; sourceTree = "<group>"; };
+		84C619A31FA8149700626411 /* SelectTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectTableViewController.m; sourceTree = "<group>"; };
+		84C619A41FA8149700626411 /* UserBankCardListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserBankCardListViewController.h; sourceTree = "<group>"; };
+		84C619A51FA8149700626411 /* UserBankCardListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserBankCardListViewController.m; sourceTree = "<group>"; };
+		84C619A71FA8149700626411 /* BankListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankListCell.h; sourceTree = "<group>"; };
+		84C619A81FA8149700626411 /* BankListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankListCell.m; sourceTree = "<group>"; };
+		84C619A91FA8149700626411 /* BankListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankListCell.xib; sourceTree = "<group>"; };
+		84C619AA1FA8149700626411 /* DetailRepayHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailRepayHeader.h; sourceTree = "<group>"; };
+		84C619AB1FA8149700626411 /* DetailRepayHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailRepayHeader.m; sourceTree = "<group>"; };
+		84C619AC1FA8149700626411 /* DetailRepayHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailRepayHeader.xib; sourceTree = "<group>"; };
+		84C619AD1FA8149700626411 /* PayDisplayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayDisplayCell.h; sourceTree = "<group>"; };
+		84C619AE1FA8149700626411 /* PayDisplayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayDisplayCell.m; sourceTree = "<group>"; };
+		84C619AF1FA8149700626411 /* PayDisplayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayDisplayCell.xib; sourceTree = "<group>"; };
+		84C619B01FA8149700626411 /* PayMethodCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayMethodCell.h; sourceTree = "<group>"; };
+		84C619B11FA8149700626411 /* PayMethodCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayMethodCell.m; sourceTree = "<group>"; };
+		84C619B21FA8149700626411 /* PayMethodCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayMethodCell.xib; sourceTree = "<group>"; };
+		84C619B31FA8149700626411 /* PayMoneyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayMoneyCell.h; sourceTree = "<group>"; };
+		84C619B41FA8149700626411 /* PayMoneyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayMoneyCell.m; sourceTree = "<group>"; };
+		84C619B51FA8149700626411 /* PayMoneyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayMoneyCell.xib; sourceTree = "<group>"; };
+		84C619B61FA8149700626411 /* PayVerificationCodeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayVerificationCodeCell.h; sourceTree = "<group>"; };
+		84C619B71FA8149700626411 /* PayVerificationCodeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayVerificationCodeCell.m; sourceTree = "<group>"; };
+		84C619B81FA8149700626411 /* PayVerificationCodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayVerificationCodeCell.xib; sourceTree = "<group>"; };
+		84C619B91FA8149700626411 /* RepayListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RepayListCell.h; sourceTree = "<group>"; };
+		84C619BA1FA8149700626411 /* RepayListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RepayListCell.m; sourceTree = "<group>"; };
+		84C619BB1FA8149700626411 /* RepayListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepayListCell.xib; sourceTree = "<group>"; };
+		84C619D91FA816A000626411 /* ContactList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactList.h; sourceTree = "<group>"; };
+		84C619DA1FA816A000626411 /* ContactList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactList.m; sourceTree = "<group>"; };
+		84C619DB1FA816A000626411 /* HomeBankCardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeBankCardViewController.h; sourceTree = "<group>"; };
+		84C619DC1FA816A000626411 /* HomeBankCardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeBankCardViewController.m; sourceTree = "<group>"; };
+		84C619DD1FA816A000626411 /* HomeDailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDailViewController.h; sourceTree = "<group>"; };
+		84C619DE1FA816A000626411 /* HomeDailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDailViewController.m; sourceTree = "<group>"; };
+		84C619E11FA816A000626411 /* HomeTelSecoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTelSecoryViewController.h; sourceTree = "<group>"; };
+		84C619E21FA816A000626411 /* HomeTelSecoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTelSecoryViewController.m; sourceTree = "<group>"; };
 		84CC89971F593C1E00537910 /* ApplicaitonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicaitonModel.h; sourceTree = "<group>"; };
 		84CC89981F593C1E00537910 /* ApplicaitonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicaitonModel.m; sourceTree = "<group>"; };
 		84CC899C1F5973D700537910 /* DrawingsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingsInfoModel.h; sourceTree = "<group>"; };
@@ -2712,34 +2684,6 @@
 			path = MyView;
 			sourceTree = "<group>";
 		};
-		1AEDCF011C197E6100014A87 /* Repayment */ = {
-			isa = PBXGroup;
-			children = (
-				637636F31D77FB0600E93289 /* Image */,
-				636AC42F1D38EA4E00599590 /* View */,
-				637636CF1D768BE800E93289 /* RepayListViewController.h */,
-				637636D01D768BE800E93289 /* RepayListViewController.m */,
-				637636D11D768BE800E93289 /* RepayListViewController.xib */,
-				637636FC1D78287D00E93289 /* DetailRepayViewController.h */,
-				637636FD1D78287D00E93289 /* DetailRepayViewController.m */,
-				637636FE1D78287D00E93289 /* DetailRepayViewController.xib */,
-				1AB442E31D782E53000459E6 /* RepayDetailViewController.h */,
-				1AB442E41D782E53000459E6 /* RepayDetailViewController.m */,
-				1AB442E51D782E53000459E6 /* RepayDetailViewController.xib */,
-				638C3F281CF303D0000446A7 /* SelectTableViewController.h */,
-				638C3F291CF303D0000446A7 /* SelectTableViewController.m */,
-				636AC42A1D38DEBC00599590 /* PayViewController.h */,
-				636AC42B1D38DEBC00599590 /* PayViewController.m */,
-				636AC42C1D38DEBC00599590 /* PayViewController.xib */,
-				63741E2D1D3CB8B200C0E2F8 /* PayMethodViewController.h */,
-				63741E2E1D3CB8B200C0E2F8 /* PayMethodViewController.m */,
-				63741E2F1D3CB8B200C0E2F8 /* PayMethodViewController.xib */,
-				8499BF851F4FFDB700F193F9 /* UserBankCardListViewController.h */,
-				8499BF861F4FFDB700F193F9 /* UserBankCardListViewController.m */,
-			);
-			path = Repayment;
-			sourceTree = "<group>";
-		};
 		1AEDCF181C197F5000014A87 /* RepaymentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2843,13 +2787,6 @@
 				630D462E1BD097B900874064 /* GetMoneyResultResult.m */,
 			);
 			path = GetMoneyResult;
-			sourceTree = "<group>";
-		};
-		63112A6A1BDF148F002B372C /* Help */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Help;
 			sourceTree = "<group>";
 		};
 		6313DC061BB39BCC00EB45DE /* Login */ = {
@@ -3234,34 +3171,6 @@
 			path = Custom_BaseInfo;
 			sourceTree = "<group>";
 		};
-		636AC42F1D38EA4E00599590 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				636AC4301D38EA7F00599590 /* PayMethodCell.h */,
-				636AC4311D38EA7F00599590 /* PayMethodCell.m */,
-				636AC4321D38EA7F00599590 /* PayMethodCell.xib */,
-				636AC4351D38EA9500599590 /* PayMoneyCell.h */,
-				636AC4361D38EA9500599590 /* PayMoneyCell.m */,
-				636AC4371D38EA9500599590 /* PayMoneyCell.xib */,
-				846A90041F1F3B2700896169 /* PayVerificationCodeCell.h */,
-				846A90051F1F3B2700896169 /* PayVerificationCodeCell.m */,
-				846A90061F1F3B2700896169 /* PayVerificationCodeCell.xib */,
-				846A90151F1F48AB00896169 /* PayDisplayCell.h */,
-				846A90161F1F48AB00896169 /* PayDisplayCell.m */,
-				846A90171F1F48AB00896169 /* PayDisplayCell.xib */,
-				63741E351D3CD4A300C0E2F8 /* BankListCell.h */,
-				63741E361D3CD4A300C0E2F8 /* BankListCell.m */,
-				63741E371D3CD4A300C0E2F8 /* BankListCell.xib */,
-				637636D41D76A28700E93289 /* RepayListCell.h */,
-				637636D51D76A28700E93289 /* RepayListCell.m */,
-				637636D61D76A28700E93289 /* RepayListCell.xib */,
-				637637011D7829BE00E93289 /* DetailRepayHeader.h */,
-				637637021D7829BE00E93289 /* DetailRepayHeader.m */,
-				637637041D7829C800E93289 /* DetailRepayHeader.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		636B1B191C1FDDD100450358 /* CostumView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3515,17 +3424,6 @@
 				63C12DD01E4978D1008119FB /* QRPopView.xib */,
 			);
 			path = PopView;
-			sourceTree = "<group>";
-		};
-		637636F31D77FB0600E93289 /* Image */ = {
-			isa = PBXGroup;
-			children = (
-				637636F41D77FB1600E93289 /* repay_circle_un@2x.png */,
-				637636F51D77FB1600E93289 /* repay_circle_un@3x.png */,
-				637636F61D77FB1600E93289 /* repay_circle_selt@2x.png */,
-				637636F71D77FB1600E93289 /* repay_circle_selt@3x.png */,
-			);
-			path = Image;
 			sourceTree = "<group>";
 		};
 		637637061D7966FE00E93289 /* UILabel */ = {
@@ -4502,7 +4400,8 @@
 		63ED33301B6B4472008B6085 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				63112A6A1BDF148F002B372C /* Help */,
+				84C619D81FA816A000626411 /* ProcessOfGetMoney */,
+				84C6198D1FA8149700626411 /* Repayment */,
 				63A24BEB1BE063A90036E8EF /* CoreNewFeatureVC */,
 				63DE56F91DE7CC4200747AE2 /* WebViewController */,
 				84DFBED71F4D7C520009DAB9 /* AuthenticationCenter */,
@@ -4550,7 +4449,6 @@
 			children = (
 				847D52321F58021B004BB11B /* Renewal-续期 */,
 				637636ED1D77B9D200E93289 /* PopView */,
-				1AEDCF011C197E6100014A87 /* Repayment */,
 				631CB46D1B7AF5220090C94D /* indexViewController.h */,
 				631CB46E1B7AF5220090C94D /* indexViewController.m */,
 				631CB46F1B7AF5220090C94D /* indexViewController.xib */,
@@ -4561,7 +4459,6 @@
 				63B65DEA1D518D8B00207231 /* ExpressViewController.m */,
 				63B65DEB1D518D8B00207231 /* ExpressViewController.xib */,
 				0F047F3D1C4F814F002ED7C0 /* homeLoan */,
-				63F2099D1B9C19CE00EECEAF /* ProcessOfGetMoney */,
 				63F2548A1E49CD2C00852CF1 /* LoanProcessViewController.h */,
 				63F2548B1E49CD2C00852CF1 /* LoanProcessViewController.m */,
 				63F2548C1E49CD2C00852CF1 /* LoanProcessViewController.xib */,
@@ -4662,17 +4559,6 @@
 				63F1A5091BD8CD5100B83751 /* RepaySuccessResult.m */,
 			);
 			path = RepaySuccess;
-			sourceTree = "<group>";
-		};
-		63F2099D1B9C19CE00EECEAF /* ProcessOfGetMoney */ = {
-			isa = PBXGroup;
-			children = (
-				6326C9E11BF097D400FD23A8 /* ContactList.h */,
-				6326C9E21BF097D400FD23A8 /* ContactList.m */,
-				0FBF11241BE376C9008F6393 /* HomeBankCardViewController.h */,
-				0FBF11251BE376C9008F6393 /* HomeBankCardViewController.m */,
-			);
-			path = ProcessOfGetMoney;
 			sourceTree = "<group>";
 		};
 		63F254751E49A45900852CF1 /* QRCode */ = {
@@ -4966,6 +4852,88 @@
 				84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */,
 			);
 			path = MobilePhoneOperator;
+			sourceTree = "<group>";
+		};
+		84C6198D1FA8149700626411 /* Repayment */ = {
+			isa = PBXGroup;
+			children = (
+				84C6198E1FA8149700626411 /* DetailRepayViewController.h */,
+				84C6198F1FA8149700626411 /* DetailRepayViewController.m */,
+				84C619901FA8149700626411 /* DetailRepayViewController.xib */,
+				84C619911FA8149700626411 /* Image */,
+				84C619961FA8149700626411 /* PayMethodViewController.h */,
+				84C619971FA8149700626411 /* PayMethodViewController.m */,
+				84C619981FA8149700626411 /* PayMethodViewController.xib */,
+				84C619991FA8149700626411 /* PayViewController.h */,
+				84C6199A1FA8149700626411 /* PayViewController.m */,
+				84C6199B1FA8149700626411 /* PayViewController.xib */,
+				84C6199C1FA8149700626411 /* RepayDetailViewController.h */,
+				84C6199D1FA8149700626411 /* RepayDetailViewController.m */,
+				84C6199E1FA8149700626411 /* RepayDetailViewController.xib */,
+				84C6199F1FA8149700626411 /* RepayListViewController.h */,
+				84C619A01FA8149700626411 /* RepayListViewController.m */,
+				84C619A11FA8149700626411 /* RepayListViewController.xib */,
+				84C619A21FA8149700626411 /* SelectTableViewController.h */,
+				84C619A31FA8149700626411 /* SelectTableViewController.m */,
+				84C619A41FA8149700626411 /* UserBankCardListViewController.h */,
+				84C619A51FA8149700626411 /* UserBankCardListViewController.m */,
+				84C619A61FA8149700626411 /* View */,
+			);
+			path = Repayment;
+			sourceTree = "<group>";
+		};
+		84C619911FA8149700626411 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				84C619921FA8149700626411 /* repay_circle_selt@2x.png */,
+				84C619931FA8149700626411 /* repay_circle_selt@3x.png */,
+				84C619941FA8149700626411 /* repay_circle_un@2x.png */,
+				84C619951FA8149700626411 /* repay_circle_un@3x.png */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		84C619A61FA8149700626411 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84C619A71FA8149700626411 /* BankListCell.h */,
+				84C619A81FA8149700626411 /* BankListCell.m */,
+				84C619A91FA8149700626411 /* BankListCell.xib */,
+				84C619AA1FA8149700626411 /* DetailRepayHeader.h */,
+				84C619AB1FA8149700626411 /* DetailRepayHeader.m */,
+				84C619AC1FA8149700626411 /* DetailRepayHeader.xib */,
+				84C619AD1FA8149700626411 /* PayDisplayCell.h */,
+				84C619AE1FA8149700626411 /* PayDisplayCell.m */,
+				84C619AF1FA8149700626411 /* PayDisplayCell.xib */,
+				84C619B01FA8149700626411 /* PayMethodCell.h */,
+				84C619B11FA8149700626411 /* PayMethodCell.m */,
+				84C619B21FA8149700626411 /* PayMethodCell.xib */,
+				84C619B31FA8149700626411 /* PayMoneyCell.h */,
+				84C619B41FA8149700626411 /* PayMoneyCell.m */,
+				84C619B51FA8149700626411 /* PayMoneyCell.xib */,
+				84C619B61FA8149700626411 /* PayVerificationCodeCell.h */,
+				84C619B71FA8149700626411 /* PayVerificationCodeCell.m */,
+				84C619B81FA8149700626411 /* PayVerificationCodeCell.xib */,
+				84C619B91FA8149700626411 /* RepayListCell.h */,
+				84C619BA1FA8149700626411 /* RepayListCell.m */,
+				84C619BB1FA8149700626411 /* RepayListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		84C619D81FA816A000626411 /* ProcessOfGetMoney */ = {
+			isa = PBXGroup;
+			children = (
+				84C619D91FA816A000626411 /* ContactList.h */,
+				84C619DA1FA816A000626411 /* ContactList.m */,
+				84C619DB1FA816A000626411 /* HomeBankCardViewController.h */,
+				84C619DC1FA816A000626411 /* HomeBankCardViewController.m */,
+				84C619DD1FA816A000626411 /* HomeDailViewController.h */,
+				84C619DE1FA816A000626411 /* HomeDailViewController.m */,
+				84C619E11FA816A000626411 /* HomeTelSecoryViewController.h */,
+				84C619E21FA816A000626411 /* HomeTelSecoryViewController.m */,
+			);
+			path = ProcessOfGetMoney;
 			sourceTree = "<group>";
 		};
 		84CC89961F593BC500537910 /* ApplicationModel */ = {
@@ -5420,9 +5388,7 @@
 				6313DC171BB3F07B00EB45DE /* Images.xcassets in Resources */,
 				84ED5B5C1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */,
 				1AE5E6251C1EA5240099CCA0 /* AboutMainViewController.xib in Resources */,
-				637637051D7829C800E93289 /* DetailRepayHeader.xib in Resources */,
 				6391F77C1D348B4E0097C943 /* bank_code_7@2x.png in Resources */,
-				1AB442E71D782E53000459E6 /* RepayDetailViewController.xib in Resources */,
 				63553AFD1E5D9A8C00B2C1FF /* CertificationViewController.xib in Resources */,
 				63553B021E5D9C2E00B2C1FF /* FaceCell.xib in Resources */,
 				633DAC081C34D47A000DA852 /* RegViewController.xib in Resources */,
@@ -5436,24 +5402,19 @@
 				635B0BD71DF11C44008EAFD1 /* MoneyIngView.xib in Resources */,
 				6386A6B81E80D4F200A181A3 /* fxdProductDev-Info.plist in Resources */,
 				CC3A7F331ED52A3200F30289 /* ChangeBankCardViewController.xib in Resources */,
-				637636F91D77FB1600E93289 /* repay_circle_un@3x.png in Resources */,
 				63F99C671D57457400884EA1 /* bank_code_29@2x.png in Resources */,
 				6391F7711D348B4E0097C943 /* bank_code_10@2x.png in Resources */,
 				0FEA588A1BE0A497007F8A6D /* testView.xib in Resources */,
-				637636FA1D77FB1600E93289 /* repay_circle_selt@2x.png in Resources */,
-				637636D81D76A28700E93289 /* RepayListCell.xib in Resources */,
 				6391F7791D348B4E0097C943 /* bank_code_4@2x.png in Resources */,
 				63C12DCC1E495CC9008119FB /* MoneyPlanCell.xib in Resources */,
 				0F9E30D31BC8A70C0018A801 /* IdeaBackViewController.xib in Resources */,
 				63FE3DEC1E487819009E5B82 /* SumCell.xib in Resources */,
 				84ED5B601F4AB9E7004C0A59 /* mx_refresh@2x.png in Resources */,
 				631CB4711B7AF5220090C94D /* indexViewController.xib in Resources */,
-				637636FB1D77FB1600E93289 /* repay_circle_selt@3x.png in Resources */,
 				CC3197991ED926B90083F263 /* RefuseView.xib in Resources */,
 				84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */,
 				0F099B991C1A97EB00D97BAE /* ColledgeView.xib in Resources */,
 				CCF803291ED4249A003B7975 /* UnbundlingBankCardViewController.xib in Resources */,
-				846A90081F1F3B2700896169 /* PayVerificationCodeCell.xib in Resources */,
 				63F2548E1E49CD2C00852CF1 /* LoanProcessViewController.xib in Resources */,
 				63FE3DF11E48821B009E5B82 /* DaysCell.xib in Resources */,
 				6391F77E1D348B4E0097C943 /* bank_code_9@2x.png in Resources */,
@@ -5467,11 +5428,8 @@
 				6303C11A1C1816F000CD14A7 /* BundleForBankCard.bundle in Resources */,
 				63E1ECDB1E1BA8E30079A2F8 /* HomeProductCell.xib in Resources */,
 				0FFA91341C56059D008D91D2 /* telphoneView.xib in Resources */,
-				636AC42E1D38DEBC00599590 /* PayViewController.xib in Resources */,
 				63F254841E49A45900852CF1 /* HMScanner.bundle in Resources */,
-				636AC4391D38EA9500599590 /* PayMoneyCell.xib in Resources */,
 				63553AF31E5D8BA200B2C1FF /* ProfessionViewController.xib in Resources */,
-				637637001D78287D00E93289 /* DetailRepayViewController.xib in Resources */,
 				0FFA916C1C58B880008D91D2 /* CheckFalseView.xib in Resources */,
 				63553AD91E5D2A4200B2C1FF /* DataDisplayCell.xib in Resources */,
 				63BB029B1C71C49A00C05FE7 /* CheckSuccessView.xib in Resources */,
@@ -5480,19 +5438,15 @@
 				63811B621B8EFC67008F605B /* ChangePWViewController.xib in Resources */,
 				6391F7781D348B4E0097C943 /* bank_code_3@2x.png in Resources */,
 				84ED5B5E1F4AB9E7004C0A59 /* mx_loading@2x.png in Resources */,
-				846A901A1F1F48AB00896169 /* PayDisplayCell.xib in Resources */,
 				842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */,
 				6391F77A1D348B4E0097C943 /* bank_code_5@2x.png in Resources */,
 				6391F7751D348B4E0097C943 /* bank_code_1@2x.png in Resources */,
 				63F5AD941E23849C001BDF44 /* LoanSureFirstViewController.xib in Resources */,
-				63741E391D3CD4A300C0E2F8 /* BankListCell.xib in Resources */,
 				84ED5B751F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */,
 				6391F77B1D348B4E0097C943 /* bank_code_6@2x.png in Resources */,
 				636B1B2D1C216FCE00450358 /* HomeViewController.xib in Resources */,
-				637636D31D768BE800E93289 /* RepayListViewController.xib in Resources */,
 				1A762F701C1FBE4700964719 /* RepayRecordController.xib in Resources */,
 				6391F7761D348B4E0097C943 /* bank_code_28@2x.png in Resources */,
-				637636F81D77FB1600E93289 /* repay_circle_un@2x.png in Resources */,
 				63553AEE1E5D787800B2C1FF /* IdentityCell.xib in Resources */,
 				638A170D1E517E8C00AB8AB6 /* vcTransition1.json in Resources */,
 				6391F77D1D348B4E0097C943 /* bank_code_8@2x.png in Resources */,
@@ -5503,7 +5457,6 @@
 				632DFF631E48500500E414B2 /* CycleTextCell.xib in Resources */,
 				84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */,
 				63B65DF11D519D1600207231 /* main.js in Resources */,
-				636AC4341D38EA7F00599590 /* PayMethodCell.xib in Resources */,
 				6391F7721D348B4E0097C943 /* bank_code_14@2x.png in Resources */,
 				630D46181BCCD2FB00874064 /* UpdateDevIDViewController.xib in Resources */,
 				1AE362F61C586060006FC276 /* EditCardsController.xib in Resources */,
@@ -5518,7 +5471,6 @@
 				0FEACE211CA0E2450027859A /* TelPhoneCompanyCell.xib in Resources */,
 				63553AF81E5D937600B2C1FF /* UserContactsViewController.xib in Resources */,
 				0F0FDAC31BC771EC00F3CF10 /* AboutViewController.xib in Resources */,
-				63741E311D3CB8B200C0E2F8 /* PayMethodViewController.xib in Resources */,
 				637636F21D77BA3000E93289 /* HomePopView.xib in Resources */,
 				CCA056BD1EBB3ECB00CB5F29 /* SesameCreditViewController.xib in Resources */,
 			);
@@ -5538,15 +5490,12 @@
 				84D715F01F78CF6700F433E5 /* MGBankCardResource.bundle in Resources */,
 				843149861F75036700FA3678 /* MGIDCardResource.bundle in Resources */,
 				843149871F75036700FA3678 /* MGLivenessDetectionResource.bundle in Resources */,
-				846A900A1F1F3DB300896169 /* PayVerificationCodeCell.xib in Resources */,
 				845017311ED7CD88008055E4 /* LoginView.xib in Resources */,
 				84ED5B5D1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */,
 				CC0DFB191EA5B1090024841A /* CheckViewIng.xib in Resources */,
 				CC0DFB1A1EA5B1090024841A /* Images.xcassets in Resources */,
 				CC0DFB1C1EA5B1090024841A /* AboutMainViewController.xib in Resources */,
-				CC0DFB1D1EA5B1090024841A /* DetailRepayHeader.xib in Resources */,
 				CC0DFB1E1EA5B1090024841A /* bank_code_7@2x.png in Resources */,
-				CC0DFB1F1EA5B1090024841A /* RepayDetailViewController.xib in Resources */,
 				CC0DFB201EA5B1090024841A /* CertificationViewController.xib in Resources */,
 				CC0DFB211EA5B1090024841A /* FaceCell.xib in Resources */,
 				CC0DFB221EA5B1090024841A /* RegViewController.xib in Resources */,
@@ -5559,19 +5508,15 @@
 				CC0DFB291EA5B1090024841A /* LabelCell.xib in Resources */,
 				CC0DFB2A1EA5B1090024841A /* MoneyIngView.xib in Resources */,
 				CC0DFB2E1EA5B1090024841A /* fxdProductDev-Info.plist in Resources */,
-				CC0DFB2F1EA5B1090024841A /* repay_circle_un@3x.png in Resources */,
 				CC0DFB311EA5B1090024841A /* bank_code_29@2x.png in Resources */,
 				CC0DFB321EA5B1090024841A /* bank_code_10@2x.png in Resources */,
 				CC0DFB331EA5B1090024841A /* testView.xib in Resources */,
-				CC0DFB341EA5B1090024841A /* repay_circle_selt@2x.png in Resources */,
-				CC0DFB371EA5B1090024841A /* RepayListCell.xib in Resources */,
 				CC0DFB391EA5B1090024841A /* bank_code_4@2x.png in Resources */,
 				CC0DFB3A1EA5B1090024841A /* MoneyPlanCell.xib in Resources */,
 				CC0DFB3D1EA5B1090024841A /* IdeaBackViewController.xib in Resources */,
 				84ED5B611F4AB9E7004C0A59 /* mx_refresh@2x.png in Resources */,
 				CC0DFB3E1EA5B1090024841A /* SumCell.xib in Resources */,
 				CC0DFB3F1EA5B1090024841A /* indexViewController.xib in Resources */,
-				CC0DFB401EA5B1090024841A /* repay_circle_selt@3x.png in Resources */,
 				84ED5B5B1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */,
 				CC0DFB411EA5B1090024841A /* ColledgeView.xib in Resources */,
 				CC31979A1ED926B90083F263 /* RefuseView.xib in Resources */,
@@ -5588,11 +5533,8 @@
 				CC0DFB4E1EA5B1090024841A /* BundleForBankCard.bundle in Resources */,
 				CC0DFB4F1EA5B1090024841A /* HomeProductCell.xib in Resources */,
 				CC0DFB501EA5B1090024841A /* telphoneView.xib in Resources */,
-				CC0DFB511EA5B1090024841A /* PayViewController.xib in Resources */,
 				CC0DFB521EA5B1090024841A /* HMScanner.bundle in Resources */,
-				CC0DFB531EA5B1090024841A /* PayMoneyCell.xib in Resources */,
 				CC0DFB541EA5B1090024841A /* ProfessionViewController.xib in Resources */,
-				CC0DFB551EA5B1090024841A /* DetailRepayViewController.xib in Resources */,
 				CC0DFB561EA5B1090024841A /* CheckFalseView.xib in Resources */,
 				842C0B5A1ED599DE00366D11 /* LoginViewController.xib in Resources */,
 				CC0DFB571EA5B1090024841A /* DataDisplayCell.xib in Resources */,
@@ -5602,18 +5544,14 @@
 				CC0DFB5C1EA5B1090024841A /* ChangePWViewController.xib in Resources */,
 				CC0DFB5D1EA5B1090024841A /* bank_code_3@2x.png in Resources */,
 				84ED5B5F1F4AB9E7004C0A59 /* mx_loading@2x.png in Resources */,
-				846A901B1F1F48AB00896169 /* PayDisplayCell.xib in Resources */,
 				CC0DFB5E1EA5B1090024841A /* bank_code_5@2x.png in Resources */,
 				CC0DFB621EA5B1090024841A /* bank_code_1@2x.png in Resources */,
 				CC0DFB631EA5B1090024841A /* LoanSureFirstViewController.xib in Resources */,
-				CC0DFB641EA5B1090024841A /* BankListCell.xib in Resources */,
 				CC0DFB651EA5B1090024841A /* bank_code_6@2x.png in Resources */,
 				84ED5B761F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */,
 				CC0DFB661EA5B1090024841A /* HomeViewController.xib in Resources */,
-				CC0DFB671EA5B1090024841A /* RepayListViewController.xib in Resources */,
 				CC0DFB681EA5B1090024841A /* RepayRecordController.xib in Resources */,
 				CC0DFB691EA5B1090024841A /* bank_code_28@2x.png in Resources */,
-				CC0DFB6A1EA5B1090024841A /* repay_circle_un@2x.png in Resources */,
 				CC0DFB6B1EA5B1090024841A /* IdentityCell.xib in Resources */,
 				CC0DFB6D1EA5B1090024841A /* vcTransition1.json in Resources */,
 				CC0DFB6E1EA5B1090024841A /* bank_code_8@2x.png in Resources */,
@@ -5624,7 +5562,6 @@
 				CC3197A11ED929F10083F263 /* WhiteRefuseView.xib in Resources */,
 				CC0DFB771EA5B1090024841A /* CycleTextCell.xib in Resources */,
 				CC0DFB781EA5B1090024841A /* main.js in Resources */,
-				CC0DFB791EA5B1090024841A /* PayMethodCell.xib in Resources */,
 				CC0DFB7A1EA5B1090024841A /* bank_code_14@2x.png in Resources */,
 				CC0DFB7B1EA5B1090024841A /* UpdateDevIDViewController.xib in Resources */,
 				CC0DFB7C1EA5B1090024841A /* EditCardsController.xib in Resources */,
@@ -5640,7 +5577,6 @@
 				CC0DFB8C1EA5B1090024841A /* UserContactsViewController.xib in Resources */,
 				CC0DFB8D1EA5B1090024841A /* AboutViewController.xib in Resources */,
 				CCF8032A1ED4249A003B7975 /* UnbundlingBankCardViewController.xib in Resources */,
-				CC0DFB8E1EA5B1090024841A /* PayMethodViewController.xib in Resources */,
 				CC0DFB901EA5B1090024841A /* HomePopView.xib in Resources */,
 				CCB3233F1EBBFF650001D9DE /* SesameCreditViewController.xib in Resources */,
 			);
@@ -5822,7 +5758,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				637636FF1D78287D00E93289 /* DetailRepayViewController.m in Sources */,
+				84C619BD1FA815EB00626411 /* PayMethodViewController.m in Sources */,
+				84C619BE1FA815EB00626411 /* PayViewController.m in Sources */,
+				84C619BF1FA815EB00626411 /* RepayDetailViewController.m in Sources */,
+				84C619C01FA815EB00626411 /* RepayListViewController.m in Sources */,
+				84C619C11FA815EB00626411 /* SelectTableViewController.m in Sources */,
+				84C619C21FA815EB00626411 /* UserBankCardListViewController.m in Sources */,
+				84C619C31FA815EB00626411 /* BankListCell.m in Sources */,
+				84C619C41FA815EB00626411 /* DetailRepayHeader.m in Sources */,
+				84C619C51FA815EB00626411 /* PayDisplayCell.m in Sources */,
+				84C619C61FA815EB00626411 /* PayMethodCell.m in Sources */,
+				84C619C71FA815EB00626411 /* PayMoneyCell.m in Sources */,
+				84C619C81FA815EB00626411 /* PayVerificationCodeCell.m in Sources */,
+				84C619C91FA815EB00626411 /* RepayListCell.m in Sources */,
+				84C619BC1FA815A800626411 /* DetailRepayViewController.m in Sources */,
 				6379639F1CABAFE9002A5910 /* ProductListResult.m in Sources */,
 				63832C881CB7513500C6F194 /* NSData+AES.m in Sources */,
 				6379641D1CAD1BE0002A5910 /* LivenessBaseClass.m in Sources */,
@@ -5905,7 +5854,6 @@
 				634830FD1CBCA1A90005C4CD /* RegionCodeBaseClass.m in Sources */,
 				843614A11F0CF8700036201A /* P2PContactContentModel.m in Sources */,
 				638A16E81E517D9F00AB8AB6 /* LOTAnimatableLayer.m in Sources */,
-				8499BF871F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */,
 				CCBD8F6C1F5D26BD005A980B /* RepayModel.m in Sources */,
 				63F0E1C11CE4183A001251A9 /* NSNumber+YYAdd.m in Sources */,
 				636B1BA01C2D2C4300450358 /* RepayMentViewModel.m in Sources */,
@@ -5919,7 +5867,6 @@
 				638A17001E517D9F00AB8AB6 /* LOTLayer.m in Sources */,
 				63F254881E49A45900852CF1 /* HMScannerMaskView.m in Sources */,
 				0FFA91791C59F641008D91D2 /* LoanMoneyViewController.m in Sources */,
-				636AC4381D38EA9500599590 /* PayMoneyCell.m in Sources */,
 				84EC95AC1F5AC35D008656BA /* FeesDescriptionViewController.m in Sources */,
 				1A762F6F1C1FBE4700964719 /* RepayRecordController.m in Sources */,
 				CCAA8EB61F5940CC00278D16 /* RenewalModel.m in Sources */,
@@ -6000,7 +5947,6 @@
 				634831081CBCD4680005C4CD /* GetCustomerBaseViewModel.m in Sources */,
 				63FC24F01D98F7E9006F58F3 /* YYTextInput.m in Sources */,
 				1A45A3F01CAA7002001BC841 /* BankCardInfoModel.m in Sources */,
-				6326C9E31BF097D400FD23A8 /* ContactList.m in Sources */,
 				0F920C131BCE549900AA9A31 /* MyCardsViewController.m in Sources */,
 				638A16F61E517D9F00AB8AB6 /* LOTAnimationCache.m in Sources */,
 				63145AA81CA294B800D04ED8 /* LoginBaseClass.m in Sources */,
@@ -6021,10 +5967,8 @@
 				63B142AC1D9A43B000C43B3F /* DrawService.m in Sources */,
 				63A24C611BE063A90036E8EF /* NSString+Password.m in Sources */,
 				0FFA91751C59BE57008D91D2 /* BankCardViewController.m in Sources */,
-				636AC42D1D38DEBC00599590 /* PayViewController.m in Sources */,
 				848139631F568A8600CD701C /* YX_TextField.swift in Sources */,
 				637963A91CABD0F8002A5910 /* ApprovalAmountExt.m in Sources */,
-				1AB442E61D782E53000459E6 /* RepayDetailViewController.m in Sources */,
 				0F047F471C507D59002ED7C0 /* LabelCell.m in Sources */,
 				63C50E541E68390E0035EE4F /* RateModel.m in Sources */,
 				843C99F01F9606050067E200 /* DiscountCouponsView.swift in Sources */,
@@ -6063,7 +6007,6 @@
 				638C3F391CF564A4000446A7 /* SquareRepaymentAvailableRedpackets.m in Sources */,
 				CCE3BE191ED2D36E004C35A4 /* SendSmsModel.m in Sources */,
 				637637091D79670D00E93289 /* UILabel+FlickerNumber.m in Sources */,
-				63741E381D3CD4A300C0E2F8 /* BankListCell.m in Sources */,
 				63DB3FBD1E1DE41700FBE1C4 /* RTRootNavigationController.m in Sources */,
 				636B1B1F1C1FDDD100450358 /* MBPAlertView.m in Sources */,
 				636B1B431C224F2000450358 /* testModelFmdb.m in Sources */,
@@ -6074,8 +6017,6 @@
 				637963A81CABD0F8002A5910 /* ApprovalAmountBaseClass.m in Sources */,
 				843FF1F51F20860B00ECCE16 /* PaymentViewModel.m in Sources */,
 				CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */,
-				637637031D7829BE00E93289 /* DetailRepayHeader.m in Sources */,
-				636AC4331D38EA7F00599590 /* PayMethodCell.m in Sources */,
 				1A686DB01C1E961C009227A9 /* NextViewCell.m in Sources */,
 				CC6C93EA1F4A816500587C74 /* HomeDefaultCell.swift in Sources */,
 				63A24C591BE063A90036E8EF /* NSString+File.m in Sources */,
@@ -6096,7 +6037,6 @@
 				840911A21F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */,
 				63A24D2E1BE10F4A0036E8EF /* GetMoneyStateResult.m in Sources */,
 				634830F31CBB82C30005C4CD /* CustomerBaseInfoExt.m in Sources */,
-				63741E301D3CB8B200C0E2F8 /* PayMethodViewController.m in Sources */,
 				639F73EC1E4C0099008D3475 /* LoginParse.m in Sources */,
 				635AB7AC1BE34F9F00C32919 /* ShouldAlsoAmountBaseClass.m in Sources */,
 				635B0BC71DEBFED0008EAFD1 /* EmptyUserData.m in Sources */,
@@ -6142,7 +6082,6 @@
 				638A16EA1E517D9F00AB8AB6 /* LOTGroupLayerView.m in Sources */,
 				638A17031E517D9F00AB8AB6 /* LOTShapeFill.m in Sources */,
 				63C50E461E666FF40035EE4F /* Custom_BaseInfo.m in Sources */,
-				846A90181F1F48AB00896169 /* PayDisplayCell.m in Sources */,
 				638A16F71E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				636B1B9A1C2D153900450358 /* HomeViewModel.m in Sources */,
 				CC6F06891F789D7000FA889E /* CapitalLoanParam.m in Sources */,
@@ -6160,7 +6099,6 @@
 				635AB0411E07BD46008A760C /* P2PBillDetail.m in Sources */,
 				842C0B531ED5909E00366D11 /* LoginViewController.m in Sources */,
 				63D43EF71D41F76D0076AC7F /* YYDiskCache.m in Sources */,
-				638C3F2A1CF303D0000446A7 /* SelectTableViewController.m in Sources */,
 				63FC24EE1D98F7E9006F58F3 /* YYTextDebugOption.m in Sources */,
 				84E306CA1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
 				63A24C6B1BE063A90036E8EF /* UITableViewCell+Extend.m in Sources */,
@@ -6169,7 +6107,6 @@
 				CC3A7F311ED52A3200F30289 /* ChangeBankCardViewController.m in Sources */,
 				639E88721CA1371800254216 /* LunchViewController.m in Sources */,
 				CC3197971ED926B90083F263 /* RefuseView.m in Sources */,
-				637636D21D768BE800E93289 /* RepayListViewController.m in Sources */,
 				8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
 				63FC25001D98F7E9006F58F3 /* YYTextTransaction.m in Sources */,
 				CC6F06791F74F26B00FA889E /* PickView.swift in Sources */,
@@ -6245,7 +6182,6 @@
 				8438F70F1EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
 				63FC24F51D98F7E9006F58F3 /* YYTextSelectionView.m in Sources */,
 				630CC0991BC8E14200AE9690 /* QueryRepaymentsResult.m in Sources */,
-				0FBF11261BE376C9008F6393 /* HomeBankCardViewController.m in Sources */,
 				CCCDA8771EDF9F5200B48DFF /* CheckViewModel.m in Sources */,
 				63E1ECD31E1B8FAA0079A2F8 /* SDCollectionViewCell.m in Sources */,
 				634795DB1D378CED00EC4027 /* Aspects.m in Sources */,
@@ -6253,7 +6189,6 @@
 				630D46171BCCD2FB00874064 /* UpdateDevIDViewController.m in Sources */,
 				CCE3BE281ED2D655004C35A4 /* QueryCardInfo.m in Sources */,
 				637636EA1D76A72A00E93289 /* LewPopupViewAnimationSlide.m in Sources */,
-				846A90071F1F3B2700896169 /* PayVerificationCodeCell.m in Sources */,
 				63A24C6A1BE063A90036E8EF /* UIImage+Water.m in Sources */,
 				CCCE40C11EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */,
 				63A24C5F1BE063A90036E8EF /* NSObject+Extend.m in Sources */,
@@ -6278,7 +6213,6 @@
 				84EC95B21F5AC4E3008656BA /* FeeDescriptionTableViewCell.m in Sources */,
 				63EC5C871E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m in Sources */,
 				6313DC111BB3E48800EB45DE /* DES3Util.m in Sources */,
-				637636D71D76A28700E93289 /* RepayListCell.m in Sources */,
 				630D46301BD097B900874064 /* GetMoneyResultBaseClass.m in Sources */,
 				637636E81D76A72A00E93289 /* LewPopupViewAnimationDrop.m in Sources */,
 				637BABFA1D7D3FAC00CF8EB5 /* RepayListInfo.m in Sources */,
@@ -6307,11 +6241,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84C619E31FA8173D00626411 /* ContactList.m in Sources */,
+				84C619E41FA8173D00626411 /* HomeBankCardViewController.m in Sources */,
+				84C619E51FA8173D00626411 /* HomeDailViewController.m in Sources */,
+				84C619E71FA8173D00626411 /* HomeTelSecoryViewController.m in Sources */,
+				84C619CA1FA8161F00626411 /* DetailRepayViewController.m in Sources */,
+				84C619CB1FA8161F00626411 /* PayMethodViewController.m in Sources */,
+				84C619CC1FA8161F00626411 /* PayViewController.m in Sources */,
+				84C619CD1FA8161F00626411 /* RepayDetailViewController.m in Sources */,
+				84C619CE1FA8161F00626411 /* RepayListViewController.m in Sources */,
+				84C619CF1FA8161F00626411 /* SelectTableViewController.m in Sources */,
+				84C619D01FA8161F00626411 /* UserBankCardListViewController.m in Sources */,
+				84C619D11FA8161F00626411 /* BankListCell.m in Sources */,
+				84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */,
+				84C619D31FA8161F00626411 /* PayDisplayCell.m in Sources */,
+				84C619D41FA8161F00626411 /* PayMethodCell.m in Sources */,
+				84C619D51FA8161F00626411 /* PayMoneyCell.m in Sources */,
+				84C619D61FA8161F00626411 /* PayVerificationCodeCell.m in Sources */,
+				84C619D71FA8161F00626411 /* RepayListCell.m in Sources */,
 				CC0346291F3C4FBF001F6F3D /* FirstBorrowViewController.m in Sources */,
 				8451682D1F2603BD0026B415 /* HGBankListModel.m in Sources */,
 				84ED5B741F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
 				843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */,
-				846A90091F1F3D9F00896169 /* PayVerificationCodeCell.m in Sources */,
 				843614A61F0CFD4B0036201A /* P2PContactContentModel.m in Sources */,
 				84E306D01F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
 				843614A51F0CFD320036201A /* BaseResultModel.m in Sources */,
@@ -6325,7 +6276,6 @@
 				CC6F068A1F789D7000FA889E /* CapitalLoanParam.m in Sources */,
 				8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
 				CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */,
-				CC0DF9581EA5B1090024841A /* DetailRepayViewController.m in Sources */,
 				842CA0E41F453B4A00A2150B /* HomeParam.m in Sources */,
 				CC0DF9591EA5B1090024841A /* ProductListResult.m in Sources */,
 				CC0DF95A1EA5B1090024841A /* NSData+AES.m in Sources */,
@@ -6416,7 +6366,6 @@
 				CC0DF9AD1EA5B1090024841A /* LOTLayer.m in Sources */,
 				CC0DF9AE1EA5B1090024841A /* HMScannerMaskView.m in Sources */,
 				CC0DF9AF1EA5B1090024841A /* LoanMoneyViewController.m in Sources */,
-				CC0DF9B01EA5B1090024841A /* PayMoneyCell.m in Sources */,
 				CC0DF9B11EA5B1090024841A /* RepayRecordController.m in Sources */,
 				CC0DF9B21EA5B1090024841A /* LOTShapeGroup.m in Sources */,
 				CC0DF9B31EA5B1090024841A /* HMScanerCardViewController.m in Sources */,
@@ -6495,7 +6444,6 @@
 				CC0DF9EC1EA5B1090024841A /* GetCustomerBaseViewModel.m in Sources */,
 				CC0DF9ED1EA5B1090024841A /* YYTextInput.m in Sources */,
 				CC0DF9EE1EA5B1090024841A /* BankCardInfoModel.m in Sources */,
-				CC0DF9EF1EA5B1090024841A /* ContactList.m in Sources */,
 				CC0DF9F01EA5B1090024841A /* MyCardsViewController.m in Sources */,
 				CC0DF9F11EA5B1090024841A /* LOTAnimationCache.m in Sources */,
 				CC0DF9F21EA5B1090024841A /* LoginBaseClass.m in Sources */,
@@ -6520,9 +6468,7 @@
 				CCE3BE1A1ED2D36E004C35A4 /* SendSmsModel.m in Sources */,
 				CC0DFA041EA5B1090024841A /* NSString+Password.m in Sources */,
 				CC0DFA051EA5B1090024841A /* BankCardViewController.m in Sources */,
-				CC0DFA061EA5B1090024841A /* PayViewController.m in Sources */,
 				CC0DFA071EA5B1090024841A /* ApprovalAmountExt.m in Sources */,
-				CC0DFA091EA5B1090024841A /* RepayDetailViewController.m in Sources */,
 				CC0DFA0A1EA5B1090024841A /* LabelCell.m in Sources */,
 				CC0DFA0B1EA5B1090024841A /* RateModel.m in Sources */,
 				CC0DFA0C1EA5B1090024841A /* UIPasteboard+YYText.m in Sources */,
@@ -6553,7 +6499,6 @@
 				CC0DFA231EA5B1090024841A /* FXDUserInfo.m in Sources */,
 				CC0DFA241EA5B1090024841A /* SquareRepaymentAvailableRedpackets.m in Sources */,
 				CC0DFA251EA5B1090024841A /* UILabel+FlickerNumber.m in Sources */,
-				CC0DFA261EA5B1090024841A /* BankListCell.m in Sources */,
 				CC0DFA271EA5B1090024841A /* RTRootNavigationController.m in Sources */,
 				CC0DFA281EA5B1090024841A /* MBPAlertView.m in Sources */,
 				8438F7151EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */,
@@ -6563,8 +6508,6 @@
 				84DC119F1FA080630066822D /* HomeChoosePopView.swift in Sources */,
 				CC0DFA2C1EA5B1090024841A /* IdentityCell.m in Sources */,
 				CC0DFA2D1EA5B1090024841A /* ApprovalAmountBaseClass.m in Sources */,
-				CC0DFA2E1EA5B1090024841A /* DetailRepayHeader.m in Sources */,
-				CC0DFA2F1EA5B1090024841A /* PayMethodCell.m in Sources */,
 				CC0DFA301EA5B1090024841A /* NextViewCell.m in Sources */,
 				CC0DFA311EA5B1090024841A /* NSString+File.m in Sources */,
 				84E2BDE11F53F3FB00E447EB /* UserDataModel.m in Sources */,
@@ -6582,7 +6525,6 @@
 				CC0DFA3F1EA5B1090024841A /* MLBlackTransition.m in Sources */,
 				CC0DFA401EA5B1090024841A /* GetMoneyStateResult.m in Sources */,
 				CC0DFA411EA5B1090024841A /* CustomerBaseInfoExt.m in Sources */,
-				CC0DFA421EA5B1090024841A /* PayMethodViewController.m in Sources */,
 				CC0DFA431EA5B1090024841A /* LoginParse.m in Sources */,
 				CC0DFA441EA5B1090024841A /* ShouldAlsoAmountBaseClass.m in Sources */,
 				CC6F06911F7B8D4200FA889E /* ThirdWebViewController.m in Sources */,
@@ -6646,7 +6588,6 @@
 				CC0DFA781EA5B1090024841A /* AddressClass.m in Sources */,
 				CC0DFA791EA5B1090024841A /* P2PBillDetail.m in Sources */,
 				CC0DFA7A1EA5B1090024841A /* YYDiskCache.m in Sources */,
-				CC0DFA7B1EA5B1090024841A /* SelectTableViewController.m in Sources */,
 				CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */,
 				CC0DFA7C1EA5B1090024841A /* YYTextDebugOption.m in Sources */,
 				CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */,
@@ -6658,7 +6599,6 @@
 				CC0F1B9A1EE64A2A00A23651 /* ChangePasswordModel.m in Sources */,
 				848394231EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchViewController.m in Sources */,
-				CC0DFA821EA5B1090024841A /* RepayListViewController.m in Sources */,
 				8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */,
 				CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */,
 				CC0DFA841EA5B1090024841A /* CashResult.m in Sources */,
@@ -6670,7 +6610,6 @@
 				CCDEDF611EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m in Sources */,
 				CC0DFA891EA5B1090024841A /* GetMoneyProcessUserBean.m in Sources */,
 				CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */,
-				846A90191F1F48AB00896169 /* PayDisplayCell.m in Sources */,
 				CCF43AFF1EDE5D4A00CFD72C /* QryUserStatusModel.m in Sources */,
 				CC0DFA8A1EA5B1090024841A /* ProfessionViewController.m in Sources */,
 				CC0DFA8B1EA5B1090024841A /* MoneyIngView.m in Sources */,
@@ -6686,7 +6625,6 @@
 				CC0DFA941EA5B1090024841A /* LoanDoFindBaseClass.m in Sources */,
 				CC0DFA951EA5B1090024841A /* YYCache.m in Sources */,
 				CC0DFA961EA5B1090024841A /* HMScannerBorder.m in Sources */,
-				8499BF881F4FFDB700F193F9 /* UserBankCardListViewController.m in Sources */,
 				CC0DFA971EA5B1090024841A /* LOTMask.m in Sources */,
 				CC0DFA981EA5B1090024841A /* indexViewController.m in Sources */,
 				CC0DFA9A1EA5B1090024841A /* LoginMsgResult.m in Sources */,
@@ -6732,7 +6670,6 @@
 				CCCDA8781EDF9F5200B48DFF /* CheckViewModel.m in Sources */,
 				CC0DFABF1EA5B1090024841A /* YYTextSelectionView.m in Sources */,
 				CC0DFAC01EA5B1090024841A /* QueryRepaymentsResult.m in Sources */,
-				CC0DFAC11EA5B1090024841A /* HomeBankCardViewController.m in Sources */,
 				CC0DFAC21EA5B1090024841A /* SDCollectionViewCell.m in Sources */,
 				CC0DFAC31EA5B1090024841A /* Aspects.m in Sources */,
 				CC0DFAC41EA5B1090024841A /* UIImage+FixOrientation.m in Sources */,
@@ -6760,7 +6697,6 @@
 				CC0DFADB1EA5B1090024841A /* UIScrollView+EmptyDataSet.m in Sources */,
 				CC0DFADC1EA5B1090024841A /* DES3Util.m in Sources */,
 				84CC899F1F5973D700537910 /* DrawingsInfoModel.m in Sources */,
-				CC0DFADD1EA5B1090024841A /* RepayListCell.m in Sources */,
 				CC0DFADE1EA5B1090024841A /* GetMoneyResultBaseClass.m in Sources */,
 				CC0DFADF1EA5B1090024841A /* LewPopupViewAnimationDrop.m in Sources */,
 				CC0DFAE01EA5B1090024841A /* RepayListInfo.m in Sources */,

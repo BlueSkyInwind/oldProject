@@ -988,7 +988,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
-        
     }];
     if ([_drawingsInfoModel.productId isEqualToString:SalaryLoan]) {
         [checkVM obtainSalaryProductFeeOfperiod:[NSString stringWithFormat:@"%@",_userSelectNum]];
