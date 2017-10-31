@@ -33,7 +33,6 @@
 #import "DetailViewController.h"
 #import "IdeaBackViewController.h"
 #import "FXDWebViewController.h"
-#import "PayLoanChooseController.h"
 #import "RateModel.h"
 #import "FXDWebViewController.h"
 #import "DataDicParse.h"
@@ -946,18 +945,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         return;
     }
     [checkVM obtainSalaryProductFeeOfperiod:@"1"];
-}
-
-
- -(void)clickApplyImmediatelyBtn{
-
-    [self fatchRate:^(RateModel *rate) {
-        PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-        payLoanview.product_id = RapidLoan;
-        payLoanview.userState = _userStateModel;
-        payLoanview.rateModel = rate;
-        [self.navigationController pushViewController:payLoanview animated:true];
-    }];
 }
 
 - (void)fatchRate:(void(^)(RateModel *rate))finish

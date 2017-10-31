@@ -57,7 +57,6 @@ class CheckingViewController: BaseViewController {
         view.contentSize = CGSize(width:_k_w,height:_k_h)
         view.backgroundColor = UIColor.white
         view.showsVerticalScrollIndicator = false
-        
         view.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             print("下拉刷新.")
             self.refresh()
@@ -105,11 +104,9 @@ class CheckingViewController: BaseViewController {
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) { 
-            
             self.scrollView?.mj_header.endRefreshing()
         }
         userDataMV.userDataCertificationResult()
-        
     }
 
     override func didReceiveMemoryWarning() {

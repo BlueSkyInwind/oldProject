@@ -21,7 +21,6 @@
 #import "UserDefaulInfo.h"
 #import "LoanSureFirstViewController.h"
 #import "CycleTextCell.h"
-#import "PayLoanChooseController.h"
 #import "QRPopView.h"
 #import "UserDataViewController.h"
 #import "HomeProductList.h"

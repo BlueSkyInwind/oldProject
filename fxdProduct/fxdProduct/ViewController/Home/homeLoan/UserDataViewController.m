@@ -21,7 +21,6 @@
 #import "HomeViewModel.h"
 #import "UserStateModel.h"
 #import "LoanMoneyViewController.h"
-#import "PayLoanChooseController.h"
 #import "CheckViewController.h"
 #import "RateModel.h"
 #import "DataWriteAndRead.h"
@@ -139,7 +138,7 @@
     footView.backgroundColor = [UIColor whiteColor];
     _applyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [Tool setCorner:_applyBtn borderColor:[UIColor clearColor]];
-    [_applyBtn setTitle:@"资料审核" forState:UIControlStateNormal];
+    [_applyBtn setTitle:@"额度测评" forState:UIControlStateNormal];
     [_applyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_applyBtn setBackgroundColor:rgb(139, 140, 143)];
     _applyBtn.enabled = false;

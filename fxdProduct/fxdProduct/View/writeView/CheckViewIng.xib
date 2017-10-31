@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -165,23 +165,36 @@
                         <constraint firstItem="JjI-ke-mdH" firstAttribute="leading" secondItem="nKe-Bu-PLW" secondAttribute="leading" id="w3p-cD-39V"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="下拉可刷新" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6F8-9z-y96">
+                    <rect key="frame" x="143.5" y="8" width="88" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="CWG-E9-sEl"/>
+                        <constraint firstAttribute="width" constant="88" id="O76-bS-YLF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="nKe-Bu-PLW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="4sz-Sk-8g3"/>
+                <constraint firstItem="6F8-9z-y96" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="8vm-Ai-dbs"/>
                 <constraint firstItem="nKe-Bu-PLW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8yK-NV-Ssg"/>
                 <constraint firstItem="cvG-AG-GZm" firstAttribute="top" secondItem="nKe-Bu-PLW" secondAttribute="bottom" id="AtA-vj-Lx9"/>
                 <constraint firstItem="cvG-AG-GZm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ScF-yz-hNo"/>
                 <constraint firstItem="cvG-AG-GZm" firstAttribute="height" secondItem="nKe-Bu-PLW" secondAttribute="height" multiplier="0.3" id="TBI-ms-klz"/>
+                <constraint firstItem="6F8-9z-y96" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aag-Uz-VGQ"/>
                 <constraint firstAttribute="trailing" secondItem="nKe-Bu-PLW" secondAttribute="trailing" id="g2O-ul-cZ2"/>
                 <constraint firstAttribute="trailing" secondItem="cvG-AG-GZm" secondAttribute="trailing" id="nT1-SS-M3o"/>
                 <constraint firstAttribute="bottom" secondItem="cvG-AG-GZm" secondAttribute="bottom" id="xaK-jJ-mz1"/>
             </constraints>
             <connections>
+                <outlet property="promptLabel" destination="6F8-9z-y96" id="i9v-Hj-y68"/>
                 <outlet property="receiveImmediatelyBtn" destination="FK0-5A-PFB" id="7Zi-e1-Yza"/>
                 <outlet property="statusLabel" destination="1as-LT-XQ8" id="PRc-mf-GEj"/>
             </connections>
-            <point key="canvasLocation" x="294" y="368"/>
+            <point key="canvasLocation" x="293.5" y="367.5"/>
         </view>
     </objects>
     <resources>
