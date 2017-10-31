@@ -40,7 +40,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 #pragma mark - 外部启动app的处理
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation{
     
-    
     return YES;
 }
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options{

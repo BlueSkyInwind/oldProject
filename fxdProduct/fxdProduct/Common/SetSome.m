@@ -9,7 +9,6 @@
 #import "SetSome.h"
 #import "SSKeychain.h"
 
-
 @implementation SetSome
 
 + (SetSome *)shared
