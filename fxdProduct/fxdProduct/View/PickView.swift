@@ -11,7 +11,9 @@ import UIKit
 
 @objc protocol PickViewDelegate: NSObjectProtocol {
     
+    //取消按钮的代理方法
     func cancelBtn()
+    //确认按钮的代理方法
     func sureBtn(_ capitalListModel: CapitalListModel)->Void
     
 }
@@ -110,13 +112,14 @@ extension PickView{
 
 extension PickView{
     
+    //取消事件
     @objc fileprivate func cancelBtnClick(){
         
         if delegate != nil {
             delegate?.cancelBtn()
         }
     }
-    
+    //确认事件
     @objc fileprivate func sureBtnClick(){
         
         if delegate != nil {
@@ -131,6 +134,7 @@ extension PickView{
     }
 }
 
+//UIPickerView代理方法
 extension PickView{
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -175,6 +179,7 @@ extension PickView{
         return pickerLabel!
     }
     
+    //自定义选中的字体样式和颜色
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
 
         let model = dataArray[row] as? CapitalListModel

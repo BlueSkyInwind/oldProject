@@ -13,13 +13,21 @@ import SDWebImage
 
 @objc protocol HomeDefaultCellDelegate: NSObjectProtocol {
     
+    //高级认证按钮
     func advancedCertification()
+    //点击提款按钮
     func drawingBtnClick()
+    //首次借款按钮
     func applyBtnClick(_ money: String)->Void
+    //更多按钮
     func moreBtnClick()
+    //我要借款按钮
     func loanBtnClick()
+    //点击产品按钮
     func productBtnClick(_ productId: String, isOverLimit: String, approvalAmount: String)->Void
+    //其他平台按钮
     func otherBtnClick()
+    //第三方产品列表按钮
     func refuseTabClick(_ index: NSInteger)->Void
     
 }
@@ -32,19 +40,31 @@ class HomeDefaultCell: UITableViewCell ,UITableViewDelegate,UITableViewDataSourc
    @objc weak var delegate: HomeDefaultCellDelegate?
     
    @objc var tabRefuseCellClosure : tabRefuseCell?
-    
+   //进件视图的左边标题
    @objc var leftLabel: UILabel?
+    //进件视图的右边内容
    @objc var rightLabel: UILabel?
+    //默认视图的金额
    @objc var defaultHeadLabel :UILabel?
+    //产品数据
    @objc var homeProductData = HomeProductList()
+    //默认视图的背景图片
    @objc var defaultBgImage : UIImageView?
+    //拒绝导流的背景图片
    @objc var refuseBgImage : UIImageView?
+    //第三方产品列表背景图片
    @objc  var otherPlatformsBgView : UIView?
+    //进件详情的背景图片
    @objc var drawingBgImage : UIImageView?
+    //产品列表第一个产品背景图片
    @objc  var productFirstBgImage : UIImageView?
+    //产品列表第二个产品背景图片
    @objc var productSecondBgImage : UIImageView?
+    //
    @objc var refuseBgView : UIView?
+    //拒绝导流第三方的左边标题数组
    @objc var refuseLeftTitle : Array<Any>?
+    //拒绝导流第三方的右边内容数组
    @objc var refuseRightTitle : Array<Any>?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -99,14 +119,7 @@ extension HomeDefaultCell{
             make.centerX.equalTo((defaultBgImage?.snp.centerX)!)
             make.height.equalTo(30)
         })
-        
-        if UI_IS_IPONE5 {
-            defaultHeadLabel?.snp.updateConstraints({ (make) in
-                make.top.equalTo((defaultBgImage?.snp.top)!).offset(15)
-            })
-            
-            defaultHeadLabel?.font = UIFont.systemFont(ofSize: 25)
-        }
+    
         
         let label = UILabel()
         label.textAlignment = .center
@@ -136,12 +149,7 @@ extension HomeDefaultCell{
         // 设置圆点图片
         
         var imagea = setImageFrame(UIImage(named:"icon_quan")!, size: CGSize(width:28,height:28))
-        
-        if UI_IS_IPONE5{
-        
-          imagea  = setImageFrame(UIImage(named:"icon_quan")!, size: CGSize(width:24,height:24))
-            
-        }
+    
         slider.setThumbImage(imagea, for: .normal)
         
 //        slider.setThumbImage(UIImage.init(named: "icon_quan"), for: UIControlState.normal)
@@ -161,13 +169,6 @@ extension HomeDefaultCell{
             make.left.equalTo((defaultBgImage?.snp.left)!).offset(15)
             make.right.equalTo((defaultBgImage?.snp.right)!).offset(-15)
             
-        }
-        
-        if UI_IS_IPONE5{
-        
-            slider.snp.updateConstraints({ (make) in
-                make.top.equalTo(label.snp.bottom).offset(10)
-            })
         }
         
         let leftLabel = UILabel()
@@ -196,17 +197,6 @@ extension HomeDefaultCell{
             make.height.equalTo(15)
         }
         
-        if UI_IS_IPONE5{
-            
-            leftLabel.snp.updateConstraints({ (make) in
-                make.top.equalTo(slider.snp.bottom).offset(0)
-            })
-            
-            rightLabel.snp.updateConstraints({ (make) in
-                make.top.equalTo(slider.snp.bottom).offset(0)
-            })
-        }
-        
         let applyBtn = UIButton()
         applyBtn.setTitle("立即申请", for: .normal)
         applyBtn.setTitleColor(UIColor.white, for: .normal)
@@ -221,17 +211,7 @@ extension HomeDefaultCell{
             make.right.equalTo((defaultBgImage?.snp.right)!).offset(-25)
             make.height.equalTo(50)
         }
-        
-        if UI_IS_IPONE5{
-        
-            applyBtn.snp.updateConstraints({ (make) in
-                
-                make.bottom.equalTo((defaultBgImage?.snp.bottom)!).offset(-50)
-                make.height.equalTo(40)
-            })
-            applyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        }
-        
+    
         let bottomLabel = UILabel()
         bottomLabel.text = "最快2分钟审核完成"
         bottomLabel.textColor = UIColor.init(red: 153/255.0, green: 153/255.0, blue: 153/255.0, alpha: 1.0)
@@ -248,7 +228,8 @@ extension HomeDefaultCell{
             make.centerX.equalTo((defaultBgImage?.snp.centerX)!)
             make.height.equalTo(20)
         }
-        
+    
+    //适配iPhone4
         if UI_IS_IPONE4{
         
             defaultHeadLabel?.snp.updateConstraints({ (make) in
@@ -289,6 +270,37 @@ extension HomeDefaultCell{
             })
             bottomLabel.font = UIFont.systemFont(ofSize: 10)
         }
+    
+     //适配iPhone5
+        if UI_IS_IPONE5 {
+            defaultHeadLabel?.snp.updateConstraints({ (make) in
+                make.top.equalTo((defaultBgImage?.snp.top)!).offset(15)
+            })
+            
+            defaultHeadLabel?.font = UIFont.systemFont(ofSize: 25)
+            
+            imagea  = setImageFrame(UIImage(named:"icon_quan")!, size: CGSize(width:24,height:24))
+            
+            slider.snp.updateConstraints({ (make) in
+                make.top.equalTo(label.snp.bottom).offset(10)
+            })
+            
+            applyBtn.snp.updateConstraints({ (make) in
+                
+                make.bottom.equalTo((defaultBgImage?.snp.bottom)!).offset(-50)
+                make.height.equalTo(40)
+            })
+            applyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+            
+            leftLabel.snp.updateConstraints({ (make) in
+                make.top.equalTo(slider.snp.bottom).offset(0)
+            })
+            
+            rightLabel.snp.updateConstraints({ (make) in
+                make.top.equalTo(slider.snp.bottom).offset(0)
+            })
+        }
+    
     }
     //
     //MARK:不满60天被拒，升级高级认证
@@ -1108,6 +1120,13 @@ extension HomeDefaultCell{
         var isOverLimit = ""
         var approvalAmount = ""
         let tag = tapGes.view?.tag
+        //101：产品列表第一个产品
+        //102：产品列表第二个产品
+        //103：产品列表第三个产品
+        //104：拒绝导流第一个产品
+        //105：拒绝导流第二个产品
+        //106：拒绝导流第三个产品
+        
         switch tag! {
         case 101:
             productId = homeProductData.data.productList[0].productId

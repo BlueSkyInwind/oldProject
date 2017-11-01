@@ -19,7 +19,7 @@
 #import "UnbundlingBankCardViewModel.h"
 #import "RepayDetailViewController.h"
 #import "CheckViewModel.h"
-@interface ChangeBankCardViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,WTCameraDelegate,BankTableViewSelectDelegate>
+@interface ChangeBankCardViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,BankTableViewSelectDelegate>
 {
 
         NSArray *placeArray3;
@@ -429,8 +429,6 @@
 #pragma mark 点击确定按钮，更换银行卡
 -(void)changeBank{
 
-//    _ordsms_ext_ = @"666666AAAAAAAA";
-//    _sms_seq = @"AAAAAAAA";
     if ([dataListAll3[3] isEqualToString:@""] || !_sms_seq) {
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请输入正确的验证码"];
         return;
@@ -529,4 +527,8 @@
 }
 */
 
+
 @end
+
+
+

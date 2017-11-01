@@ -57,6 +57,7 @@
 
 - (YYLabel *)agreementLabel
 {
+    //协议label
     if (_agreementLabel == nil) {
         _agreementLabel = [YYLabel new];
         _agreementLabel.textAlignment = NSTextAlignmentLeft;

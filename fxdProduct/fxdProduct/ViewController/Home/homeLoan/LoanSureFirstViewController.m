@@ -15,7 +15,7 @@
 #import "ApplicationViewModel.h"
 #import "ApplicaitonModel.h"
 #import "DiscountTicketModel.h"
-
+#import "UserStateModel.h"
 @interface LoanSureFirstViewController ()<DiscountCouponsViewDelegate>{
     
     DiscountTicketModel * discountTM;
@@ -285,8 +285,8 @@
 -(void)failed{
 
     CheckViewController *checkVC = [CheckViewController new];
-    checkVC.isSecondFailed = YES;
-    checkVC.product_id = _productId;
+//    checkVC.isSecondFailed = YES;
+//    checkVC.product_id = _productId;
     [self.navigationController pushViewController:checkVC animated:YES];
     
 }
@@ -294,8 +294,8 @@
 - (void)goCheckVC:(UserStateModel *)model
 {
     CheckViewController *checkVC = [CheckViewController new];
-    checkVC.userStateModel = model;
-    checkVC.task_status = model.taskStatus;
+//    checkVC.userStateModel = model;
+//    checkVC.task_status = model.taskStatus;
     [self.navigationController pushViewController:checkVC animated:YES];
 }
 

@@ -39,6 +39,7 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"审核";
     [self addBackItemRoot];
+    //默认视图加载
     moenyViewing = [[[NSBundle mainBundle] loadNibNamed:@"MoneyIngView" owner:self options:nil] lastObject];
     moenyViewing.frame = CGRectMake(0, 0, _k_w, _k_h);
     moenyViewing.repayBtnView.hidden = YES;
@@ -55,12 +56,18 @@
     [self.view addSubview:moenyViewing];
 
     [Tool setCorner:moenyViewing.sureBtn borderColor:UI_MAIN_COLOR];
+    //添加各种事件
+    //续期点击事件
     moenyViewing.stagingView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(stagingBtnClick)];
     [moenyViewing.stagingView addGestureRecognizer:tap];
+    //续期
     [moenyViewing.stagingBtn addTarget:self action:@selector(stagingBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    //提款
     [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    //发薪贷协议
     [moenyViewing.agreementBtn addTarget:self action:@selector(agreementBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    //合规协议
     [moenyViewing.heguiBtn addTarget:self action:@selector(heguiBtnClick) forControlEvents:UIControlEventTouchUpInside];
     _isFirst = _popAlert;
 
@@ -212,6 +219,7 @@
 #pragma mark 获取协议
 -(void)fxdStatus{
 
+    //发薪贷
     if ([_repayModel.platformType isEqualToString:@"0"]) {
         
         [self postUrlMessageandDictionary:^(CardInfo *rate) {
@@ -226,6 +234,7 @@
                                 tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                                     DLog(@"授权书点击");
                                     
+                                    //《银行自动转账授权书》点击
                                     NSArray *paramArray = @[_repayModel.applyId,_repayModel.productId,@"1",rate.cardNo,rate.bankName];
                                     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
                                     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -247,6 +256,7 @@
                           backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
                               DLog(@"三方协议");
                               
+                              //《借款协议》点击
                               NSArray *paramArray = [NSArray array];
                               if ([_repayModel.productId isEqualToString:SalaryLoan]||[_repayModel.productId isEqualToString:WhiteCollarLoan]) {
                                   paramArray = @[_repayModel.applyId,_repayModel.productId,@"2",_repayModel.duration];
@@ -284,6 +294,7 @@
         }];
     }
     
+    //合规协议
     if ([_repayModel.platformType isEqualToString:@"2"]) {
     
         moenyViewing.heguiBtn.hidden = NO;
@@ -299,6 +310,7 @@
                                 tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
                                     DLog(@"《银行自动转账授权书》");
                                     
+                                    //《银行自动转账授权书》
                                     NSArray *paramArray = @[_repayModel.applyId,_repayModel.productId,@"1",rate.result.UsrCardInfolist.CardId,rate.result.UsrCardInfolist.bankName];
                                     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
                                     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -322,6 +334,7 @@
                                 tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
                                     DLog(@"《信用咨询及管理服务协议》");
                                     
+                                    //《信用咨询及管理服务协议》
                                     [self clickSecondAgreementBtn];
                                     
                                 }];
