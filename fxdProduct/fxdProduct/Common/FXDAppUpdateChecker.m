@@ -34,7 +34,6 @@
             [[HHAlertViewCust sharedHHAlertView] removeAlertView];
             [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:returnParse.msg cencelBtn:@"取消" otherBtn:@[@"好的"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
                 if (index == 1) {
-                    [Utility sharedUtility].userInfo.isUpdate = YES;
                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
                 }
             }];
