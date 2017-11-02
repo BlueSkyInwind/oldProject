@@ -75,15 +75,6 @@
     dataColor = [NSMutableArray array];
     dataListAll = [NSMutableArray array];
     _contactStatus = @"0";
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-    }else if (@available(iOS 9.0, *)) {
-        self.automaticallyAdjustsScrollViewInsets = true;
-    }else{
-        self.automaticallyAdjustsScrollViewInsets = false;
-    }
-    
     for (int i = 0; i < 6; i++) {
         [dataListAll addObject:@""];
         [dataColor addObject:UI_MAIN_COLOR];
@@ -107,7 +98,14 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
     [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DataDisplayCell class]) bundle:nil] forCellReuseIdentifier:@"DataDisplayCell"];
-
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }else if (@available(iOS 9.0, *)) {
+        self.automaticallyAdjustsScrollViewInsets = true;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = false;
+    }
 
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, 100)];
     _saveBtn = [UIButton buttonWithType:UIButtonTypeSystem];

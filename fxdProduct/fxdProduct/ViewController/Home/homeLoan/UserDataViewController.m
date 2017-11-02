@@ -117,7 +117,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([UnfoldTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"UnfoldTableViewCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
     //声明tableView的位置 添加下面代码
     if (@available(iOS 11.0, *)) {
@@ -793,7 +793,7 @@
 -(void)editSDKInfo{
     [MoxieSDK shared].navigationController.navigationBar.translucent = YES;
     [MoxieSDK shared].backImageName = @"return_white";
-    [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
+//    [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
     [MoxieSDK shared].navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [[MoxieSDK shared].navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
 }

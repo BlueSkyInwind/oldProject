@@ -336,6 +336,7 @@ typedef enum {
         }else if ([_mobileParse.flag isEqualToString:@"0006"]){
             //需要手机验证码
             _currentDisplayType = VerifyCodeViewType; //错误时 验证码显示
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
             [_tableView reloadData];
         }else{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
