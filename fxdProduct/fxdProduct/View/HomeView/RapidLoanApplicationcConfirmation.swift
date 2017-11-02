@@ -18,10 +18,15 @@ import UIKit
 
 class RapidLoanApplicationcConfirmation: UIView{
     
+    //标题
     var titleLabel : UILabel?
+    //额度
     var qutoaLabel : UILabel?
+    //期限
     var termLabel : UILabel?
+    //标题图片
     var titleImageView : UIImageView?
+    //资金方名字
     var capitalSourceLabel : UILabel?
     
     weak var delegate: RapidLoanApplicationcConfirmationDelegate?
@@ -86,7 +91,7 @@ extension RapidLoanApplicationcConfirmation{
             make.height.equalTo(20)
         })
         
-        
+        //选择资金方视图
         let capitalSourceView = UIView()
         capitalSourceView.layer.cornerRadius = 5.0
         capitalSourceView.layer.masksToBounds = true
@@ -100,6 +105,7 @@ extension RapidLoanApplicationcConfirmation{
             make.height.equalTo(50)
         }
         
+        //选择资金方按钮
         let capitalSourceBtn = UIButton()
         capitalSourceBtn.setBackgroundImage(UIImage(named:"icon_xiajiatou"), for: .normal)
         capitalSourceBtn.addTarget(self, action: #selector(capitalSourceBtnClick), for: .touchUpInside)

@@ -10,12 +10,17 @@ import UIKit
 
 class HomeRefuseThirdView: UIView {
 
-    
+    //左边的图片
     var leftImageView : UIImageView?
+    //标题
     var titleLabel: UILabel?
+    //额度
     var qutaLabel: UILabel?
+    //期限
     var termLabel: UILabel?
+    //费用
     var feeLabel: UILabel?
+    //描述
     var descBtn : UIButton?
     
     /*

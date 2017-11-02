@@ -7,7 +7,6 @@
 //
 
 #import "CheckViewController.h"
-#import "CheckViewIng.h"
 #import "CheckSuccessView.h"
 #import "BankCardViewController.h"
 #import <ShareSDK/ShareSDK.h>
@@ -40,10 +39,8 @@
 #import "AccountHSServiceModel.h"
 #import "QueryCardInfo.h"
 #import "UnbundlingBankCardViewController.h"
-#import "QryUserStatusModel.h"
 #import "CheckViewModel.h"
 #import "SaveLoanCaseModel.h"
-#import "QryUserStatusModel.h"
 #import "HGBankListModel.h"
 #import "SupportBankList.h"
 #import "DrawingsInfoModel.h"
@@ -67,30 +64,28 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 @interface CheckViewController ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,MoxieSDKDelegate>
 {
-    CheckViewIng *_checking;
+    
+    //提款视图
     CheckSuccessView *checkSuccess;
-    int sectionState[20];   //标志分区的状态
-    //    int textFieldstring;
+    //选择的周期
     NSNumber *_userSelectNum;
+    //选择的用途
     NSString *_purposeSelect;
-    //    int datalist[60];
+    //周期的数组
     NSMutableArray<NSNumber *> *_datalist;
+    //银行卡数据
     BankModel *_bankCardModel;
-    NSMutableArray *_supportBankListArr;
-//    UserCardResult *_userCardsModel;
+    //选择的银行卡
     CardInfo *_selectCard;
+    //选择银行卡的index
     NSInteger userSelectIndex;
+    //
     PromoteType _promoteType;
-    NSDictionary *_uploadP2PUserInfo;
     CustomerBaseInfoBaseClass *_customerBase;
     Approval *_approvalModel;
     //借款用途
     DataDicParse *_dataDicModel;
-    NSString *_userFlag;
-    GetCaseInfo *_caseInfo;
-    QryUserStatusModel *_qryUserStatusModel;
     NSArray * feeArray; //费用说明
-
     BOOL _isOpen;
     BOOL _isBankCard;    //用户是否有银行卡
 
@@ -99,6 +94,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, assign) NSInteger flag;
 @property (strong,nonatomic)MoxieSDK *moxieSDK;
+//用途的数组
 @property (nonatomic,strong)NSArray * dateArray;
 @property (nonatomic,strong)CardInfo *selectCard;
 
@@ -110,7 +106,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 @implementation CheckViewController
 
-
+//重置选择的银行卡
 -(void)setSelectCard:(CardInfo *)selectCard{
     _selectCard = selectCard;
     if (checkSuccess) {
@@ -131,6 +127,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self configMoxieSDK];
     DLog(@"%@",_moxieSDK.version);
 
+    //周期--区分产品
     if ([_drawingsInfoModel.productId isEqualToString:RapidLoan] || [_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
         for (int i = 1; i < 2; i++) {
             [_datalist addObject:[NSNumber numberWithInt:(i+1)]];
@@ -143,10 +140,10 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self createUI];
 
     _isOpen = NO;
-    [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
+//协议的收起和展开
 -(void)clickAgreementView{
 
     _isOpen = !_isOpen;
@@ -201,9 +198,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 {
     __weak typeof (self) weakSelf = self;
     [self obtainDrawingInformation:^(DrawingsInfoModel *drawingsInfo) {
-//        if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
-//            [weakSelf getUserStatus:drawingsInfo.applicationId];
-//        }
+
         //急速贷产品费率获取
         if ([_drawingsInfoModel.productId isEqualToString:RapidLoan] || [_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
             [self obtainProductFee];
@@ -219,34 +214,14 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self createUI];
 }
 
--(void)loadIntermediateStateView{
-    
-    _checking = [[[NSBundle mainBundle] loadNibNamed:@"CheckViewIng" owner:self options:nil] lastObject];
-    _checking.layer.anchorPoint = CGPointMake(0.5, 1.0);
-    _checking.frame =CGRectMake(0, 0,_k_w, _k_h);
-    [_checking setContentMode:UIViewContentModeScaleAspectFit];
-    [_checking.receiveImmediatelyBtn addTarget:self action:@selector(imageTap) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_checking];
-    
-}
 
 
 #pragma mark 改变实际到账和总费用的文字颜色
 -(void)changeDisplayLabelTextColor:(NSString *)feeStr{
     
-//    NSArray *strArr = [feeStr componentsSeparatedByString:@"."];
-//    NSString *str1 = strArr[0];
-    
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:checkSuccess.displayLabel.text];
     NSString *strl = [NSString stringWithFormat:@"%.2f",_drawingsInfoModel.actualAmount.floatValue];
     [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,strl.length)];
-
-//    [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(checkSuccess.displayLabel.text.length-1-str1.length,str1.length)];
-//    if (feeStr.floatValue == 0) {
-//
-//        [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(checkSuccess.displayLabel.text.length-1-1,1)];
-//    }
-
     checkSuccess.displayLabel.attributedText = str;
 }
 
@@ -255,14 +230,9 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     checkSuccess =[[[NSBundle mainBundle] loadNibNamed:@"CheckSuccessView" owner:self options:nil] lastObject];
     checkSuccess.frame = CGRectMake(0, 0,_k_w, _k_h);
-//    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.0f元",[_drawingsInfoModel.actualAmount floatValue],[_drawingsInfoModel.totalFee floatValue]];
-
     checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.2f元,费用详情见协议",[_drawingsInfoModel.actualAmount floatValue]];
-    
     [self changeDisplayLabelTextColor:_drawingsInfoModel.totalFee];
 
-//    [checkSuccess.feeBtn addTarget:self action:@selector(shareBtn:)forControlEvents:UIControlEventTouchUpInside];
-//    checkSuccess.feeBtn.tag = 107;
     //用途
     checkSuccess.purposePicker.delegate = self;
     checkSuccess.purposePicker.dataSource = self;
@@ -320,6 +290,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         checkSuccess.purposeTextField.delegate = self;
         checkSuccess.bankTextField.delegate = self;
     }
+    //添加各种点击事件
     checkSuccess.sureBtn.tag = 101;
     [checkSuccess.sureBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
     checkSuccess.weekBtn.tag = 102;
@@ -419,8 +390,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 //每周还款的视图
 -(void)refreshWeekAmount:(SalaryDrawingsFeeInfoModel *)feeInfoModel{
-    
-//    checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.0f元,总费用%.0f元",[_drawingsInfoModel.actualAmount floatValue],[feeInfoModel.totalFee floatValue]];
+
     checkSuccess.displayLabel.text = [NSString stringWithFormat:@"实际到账%.2f元,费用详情见协议",[_drawingsInfoModel.actualAmount floatValue]];
     [self changeDisplayLabelTextColor:feeInfoModel.totalFee];
     checkSuccess.textFiledWeek.text = [NSString stringWithFormat:@"%d周",_userSelectNum.intValue];
@@ -566,6 +536,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self.navigationController pushViewController:userBankCardListVC animated:true];
 }
 
+//添加银行卡
 -(void)pushAddBanckCard{
     
     EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
@@ -577,6 +548,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     BaseNavigationViewController *addCarNC = [[BaseNavigationViewController alloc] initWithRootViewController:editCard];
     [self presentViewController:addCarNC animated:YES completion:nil];
 }
+
+
 -(void)pushFeeDescription{
     
     if (!feeArray && [_drawingsInfoModel.productId isEqualToString:SalaryLoan] ) {
@@ -631,6 +604,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 #pragma mark 善林金融跳转页面
 -(void)result:(NSString *)errCode url:(NSString *)url message:(NSString *)message{
+    
+    //0 放款成功 1放款失败 2未在善林绑卡
     switch (errCode.integerValue) {
         case 0:
         {
@@ -1129,7 +1104,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }];
 }
 
-//合规
+//合规协议
 -(void)heguiAgreementRequest{
     if (_userSelectNum.integerValue == 0) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择借款周期"];

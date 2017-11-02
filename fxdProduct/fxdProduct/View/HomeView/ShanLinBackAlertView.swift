@@ -10,8 +10,9 @@ import UIKit
 
 @objc protocol ShanLinBackAlertViewDelegate: NSObjectProtocol {
     
+    //取消按钮
     @objc func cancelBtn()
-    
+    //确认按钮
     @objc func sureBtn()
     
 }
@@ -120,6 +121,7 @@ extension ShanLinBackAlertView{
     }
 }
 
+//代理方法
 extension ShanLinBackAlertView{
     
    @objc fileprivate func cancelBtnClick(){

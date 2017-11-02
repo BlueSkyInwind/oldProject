@@ -365,8 +365,6 @@
 		63E1ECD31E1B8FAA0079A2F8 /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECCA1E1B8FAA0079A2F8 /* SDCollectionViewCell.m */; };
 		63E1ECD41E1B8FAA0079A2F8 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECCC1E1B8FAA0079A2F8 /* SDCycleScrollView.m */; };
 		63E1ECD51E1B8FAA0079A2F8 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECCE1E1B8FAA0079A2F8 /* UIView+SDExtension.m */; };
-		63E1ECDA1E1BA8E30079A2F8 /* HomeProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECD81E1BA8E30079A2F8 /* HomeProductCell.m */; };
-		63E1ECDB1E1BA8E30079A2F8 /* HomeProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E1ECD91E1BA8E30079A2F8 /* HomeProductCell.xib */; };
 		63E5C75E1D4AEA8F009A633C /* UserCardResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5C75D1D4AEA8F009A633C /* UserCardResult.m */; };
 		63E5C7611D4AFDBF009A633C /* CardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5C7601D4AFDBF009A633C /* CardInfo.m */; };
 		63E8F1B11E6FDAEC00FE4BDD /* DataDicParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F1B01E6FDAEC00FE4BDD /* DataDicParse.m */; };
@@ -969,7 +967,6 @@
 		CC0DFAC91EA5B1090024841A /* NSObject+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C0F1BE063A90036E8EF /* NSObject+Extend.m */; };
 		CC0DFACA1EA5B1090024841A /* GetMoneyHistoryResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B571C23BB4100450358 /* GetMoneyHistoryResult.m */; };
 		CC0DFACB1EA5B1090024841A /* LOTAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DF1E517D9F00AB8AB6 /* LOTAnimationView.m */; };
-		CC0DFACC1EA5B1090024841A /* HomeProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECD81E1BA8E30079A2F8 /* HomeProductCell.m */; };
 		CC0DFACD1EA5B1090024841A /* YYMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D43EF51D41F76D0076AC7F /* YYMemoryCache.m */; };
 		CC0DFACE1EA5B1090024841A /* P2PRepayMent.m in Sources */ = {isa = PBXBuildFile; fileRef = 63441F951DAB767A0086D615 /* P2PRepayMent.m */; };
 		CC0DFACF1EA5B1090024841A /* CheckSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFA916E1C58BD18008D91D2 /* CheckSuccessView.m */; };
@@ -1053,7 +1050,6 @@
 		CC0DFB491EA5B1090024841A /* PserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD565BB1E8A46D500B6665D /* PserInfoViewController.xib */; };
 		CC0DFB4A1EA5B1090024841A /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 636FF3481BA27C9800BB5528 /* Address.plist */; };
 		CC0DFB4E1EA5B1090024841A /* BundleForBankCard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6303C1131C1816F000CD14A7 /* BundleForBankCard.bundle */; };
-		CC0DFB4F1EA5B1090024841A /* HomeProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E1ECD91E1BA8E30079A2F8 /* HomeProductCell.xib */; };
 		CC0DFB501EA5B1090024841A /* telphoneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA91331C56059D008D91D2 /* telphoneView.xib */; };
 		CC0DFB521EA5B1090024841A /* HMScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F254781E49A45900852CF1 /* HMScanner.bundle */; };
 		CC0DFB541EA5B1090024841A /* ProfessionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AF11E5D8BA200B2C1FF /* ProfessionViewController.xib */; };
@@ -1912,9 +1908,6 @@
 		63E1ECCC1E1B8FAA0079A2F8 /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		63E1ECCD1E1B8FAA0079A2F8 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		63E1ECCE1E1B8FAA0079A2F8 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
-		63E1ECD71E1BA8E30079A2F8 /* HomeProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeProductCell.h; sourceTree = "<group>"; };
-		63E1ECD81E1BA8E30079A2F8 /* HomeProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeProductCell.m; sourceTree = "<group>"; };
-		63E1ECD91E1BA8E30079A2F8 /* HomeProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeProductCell.xib; sourceTree = "<group>"; };
 		63E5C75C1D4AEA8F009A633C /* UserCardResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCardResult.h; sourceTree = "<group>"; };
 		63E5C75D1D4AEA8F009A633C /* UserCardResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCardResult.m; sourceTree = "<group>"; };
 		63E5C75F1D4AFDBF009A633C /* CardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardInfo.h; sourceTree = "<group>"; };
@@ -4269,9 +4262,6 @@
 			isa = PBXGroup;
 			children = (
 				CC6C93E91F4A816500587C74 /* HomeDefaultCell.swift */,
-				63E1ECD71E1BA8E30079A2F8 /* HomeProductCell.h */,
-				63E1ECD81E1BA8E30079A2F8 /* HomeProductCell.m */,
-				63E1ECD91E1BA8E30079A2F8 /* HomeProductCell.xib */,
 				632DFF5F1E48500500E414B2 /* CycleTextCell.h */,
 				632DFF601E48500500E414B2 /* CycleTextCell.m */,
 				632DFF611E48500500E414B2 /* CycleTextCell.xib */,
@@ -5339,7 +5329,6 @@
 				CCD565BE1E8A46D500B6665D /* PserInfoViewController.xib in Resources */,
 				636FF3491BA27C9800BB5528 /* Address.plist in Resources */,
 				6303C11A1C1816F000CD14A7 /* BundleForBankCard.bundle in Resources */,
-				63E1ECDB1E1BA8E30079A2F8 /* HomeProductCell.xib in Resources */,
 				0FFA91341C56059D008D91D2 /* telphoneView.xib in Resources */,
 				63F254841E49A45900852CF1 /* HMScanner.bundle in Resources */,
 				63553AF31E5D8BA200B2C1FF /* ProfessionViewController.xib in Resources */,
@@ -5441,7 +5430,6 @@
 				CC0DFB491EA5B1090024841A /* PserInfoViewController.xib in Resources */,
 				CC0DFB4A1EA5B1090024841A /* Address.plist in Resources */,
 				CC0DFB4E1EA5B1090024841A /* BundleForBankCard.bundle in Resources */,
-				CC0DFB4F1EA5B1090024841A /* HomeProductCell.xib in Resources */,
 				CC0DFB501EA5B1090024841A /* telphoneView.xib in Resources */,
 				CC0DFB521EA5B1090024841A /* HMScanner.bundle in Resources */,
 				CC0DFB541EA5B1090024841A /* ProfessionViewController.xib in Resources */,
@@ -6096,7 +6084,6 @@
 				84ED5B6B1F4AC606004C0A59 /* SeniorCertificationView.m in Sources */,
 				CCF8031C1ED3D043003B7975 /* AccountHSServiceModel.m in Sources */,
 				638A170B1E517D9F00AB8AB6 /* LOTAnimationView.m in Sources */,
-				63E1ECDA1E1BA8E30079A2F8 /* HomeProductCell.m in Sources */,
 				CCE3BE231ED2D61C004C35A4 /* OpenAccount.m in Sources */,
 				63D43EF91D41F76D0076AC7F /* YYMemoryCache.m in Sources */,
 				63441F961DAB767A0086D615 /* P2PRepayMent.m in Sources */,
@@ -6575,7 +6562,6 @@
 				CC0DFAC91EA5B1090024841A /* NSObject+Extend.m in Sources */,
 				CC0DFACA1EA5B1090024841A /* GetMoneyHistoryResult.m in Sources */,
 				CC0DFACB1EA5B1090024841A /* LOTAnimationView.m in Sources */,
-				CC0DFACC1EA5B1090024841A /* HomeProductCell.m in Sources */,
 				CC0DFACD1EA5B1090024841A /* YYMemoryCache.m in Sources */,
 				CC0DFACE1EA5B1090024841A /* P2PRepayMent.m in Sources */,
 				CC0DFACF1EA5B1090024841A /* CheckSuccessView.m in Sources */,
