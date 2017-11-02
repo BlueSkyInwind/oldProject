@@ -21,7 +21,6 @@
 #import "UserDefaulInfo.h"
 #import "LoanSureFirstViewController.h"
 #import "CycleTextCell.h"
-#import "PayLoanChooseController.h"
 #import "QRPopView.h"
 #import "UserDataViewController.h"
 #import "HomeProductList.h"
@@ -36,7 +35,7 @@
 #import "ApplicationStatusModel.h"
 #import "UserDataViewModel.h"
 
-@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
+@interface HomeViewController ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate,ShanLinBackAlertViewDelegate>
 {
    
     NSString *_advTapToUrl;
@@ -44,6 +43,7 @@
     NSString *_advImageUrl;
     NSTimer * _countdownTimer;
     HomePopView *_popView;
+
     NSInteger _count;
     HomeProductList *_homeProductList;
     SDCycleScrollView *_sdView;
@@ -56,13 +56,18 @@
 }
 
 @property (nonatomic,strong) LoadFailureView * loadFailView;
+@property (nonatomic,strong) HomeChoosePopView * popChooseView;
+
 @end
 
 @implementation HomeViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
     self.navigationItem.title = @"发薪贷";
     _count = 0;
    _dataArray = [NSMutableArray array];
@@ -102,6 +107,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+    [_popChooseView dismiss];
+    _popChooseView = nil;
     [super viewWillDisappear:animated];
 }
 
@@ -152,7 +159,6 @@
 }
 - (void)setUpTableview
 {
-    
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
     [self.tableView registerClass:[HomeDefaultCell class] forCellReuseIdentifier:@"HomeDefaultCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -168,10 +174,9 @@
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;
-    [header beginRefreshing];
+//    [header beginRefreshing];
     self.tableView.mj_header = header;
 }
-
 -(void)setUploadFailView{
     if (_loadFailView) {
         [_loadFailView removeFromSuperview];
@@ -204,51 +209,68 @@
     [qrPopView layoutIfNeeded];
     qrPopView.parentVC = self;
     [self lew_presentPopupView:qrPopView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-        
     }];
 }
 
+#pragma mark - 首页活动弹窗
+//首单活动
 - (void)popView:(HomeProductList *)model
 {
     if ([model.data.popList.firstObject.isValid isEqualToString:@"1"]) {
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         appDelegate.isShow = false;
         _popView = [HomePopView defaultPopupView];
-//        _popView.backgroundColor = [UIColor redColor];
         _popView.closeBtn.hidden = YES;
         _popView.delegate = self;
         [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.data.popList.firstObject.image]];
-//        _popView.imageView.image = [UIImage imageNamed:@"tanchuang"];
         _advImageUrl = model.data.popList.firstObject.toUrl;
         _advTapToUrl = model.data.popList.firstObject.toUrl;
-//        _shareContent = model.result.content_;
         _popView.parentVC = self;
-        
         [self lew_presentPopupView:_popView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-            
         }];
         _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onClose) userInfo:nil repeats:true];
+    }
+}
+//测评红包活动
+-(void)popChooseView:(HomeProductList *)model{
+    
+    if ([model.data.jumpBomb isEqualToString:@"1"]) {
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+        appDelegate.isHomeChooseShow = false;
+        _popChooseView = [[HomeChoosePopView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h)];
+        _popChooseView.displayLabel.text = model.data.redCollarList.collarContent;
+        [_popChooseView.cancelButton setTitle:model.data.redCollarList.cancel forState:UIControlStateNormal];
+         [_popChooseView.sureButton setTitle:model.data.redCollarList.redCollar forState:UIControlStateNormal];
+         [_popChooseView show];
+        __weak typeof (self) weakSelf = self;
+        _popChooseView.cancelClick = ^{
+            [weakSelf.popChooseView dismiss];
+            weakSelf.popChooseView = nil;
+        };
+        _popChooseView.sureClick  = ^{
+            [weakSelf.popChooseView dismiss];
+            weakSelf.popChooseView = nil;
+            weakSelf.tabBarController.selectedIndex = 1;
+        };
     }
 }
 
 - (void)imageTap
 {
     DLog(@"广告图片点击");
-//    if ([_advTapToUrl hasPrefix:@"http://"] || [_advTapToUrl hasPrefix:@"https://"]) {
-//        FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-//        webView.urlStr = _advTapToUrl;
-//        webView.shareContent = _shareContent;
-//        [self.navigationController pushViewController:webView animated:true];
-//        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
-//    }
-    
-    FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
-    firstBorrowVC.url = _advImageUrl;
-    [self.navigationController pushViewController:firstBorrowVC animated:YES];
-    [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
-    
+    if ([_advTapToUrl containsString:@".png"] || [_advTapToUrl containsString:@".jpg"]) {
+        FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
+        firstBorrowVC.url = _advImageUrl;
+        [self.navigationController pushViewController:firstBorrowVC animated:YES];
+        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+    }
+    if ([_advTapToUrl hasPrefix:@"http://"] || [_advTapToUrl hasPrefix:@"https://"]) {
+        FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+        webView.urlStr = _advTapToUrl;
+        [self.navigationController pushViewController:webView animated:true];
+        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+    }
 }
-
 
 - (void)onClose
 {
@@ -256,11 +278,11 @@
     if (_count == 2) {
         _popView.closeBtn.hidden = false;
         [_countdownTimer invalidate];
+        _countdownTimer = nil;
     }
 }
 
 #pragma mark - TableViewDelegate
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     NSInteger i=0;
@@ -277,12 +299,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
     if (_dataArray.count>0) {
         return _dataArray.count + 1;
     }
     return 2;
-
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -370,21 +390,29 @@
     [homeCell.refuseBgImage removeFromSuperview];
     [homeCell.drawingBgImage removeFromSuperview];
     [homeCell.otherPlatformsBgView removeFromSuperview];
+    [homeCell.refuseBgView removeFromSuperview];
+    
+    
     //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中 10 延期失败
     
     if (_homeProductList == nil) {
         return homeCell;
     }
     homeCell.homeProductData = _homeProductList;
+    
+    homeCell.tabRefuseCellClosure = ^(NSInteger index){
+        
+        [self refuseTabClick:index];
+        
+    };
+    
     switch (_homeProductList.data.flag.integerValue) {
            
         case 1:
             [homeCell setupDefaultUI];
             break;
         case 2:
-        
             if (indexPath.section == 1) {
-            
                 [homeCell productListFirst];
                 return homeCell;
             }
@@ -392,8 +420,8 @@
             [homeCell productListOtherWithIndex:indexPath.section];
             break;
         case 3:
-
-            [homeCell setupRefuseUI];
+//            [homeCell setupRefuseUI];
+            [homeCell refuseTab];
             break;
         case 4:
 
@@ -421,7 +449,6 @@
 {
     
 }
-
 #pragma mak - SDCycleScrollViewDelegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
@@ -483,6 +510,9 @@
         if (appDelegate.isShow) {
             [self popView:_homeProductList];
         }
+        if (appDelegate.isHomeChooseShow) {
+            [self popChooseView:_homeProductList];
+        }
     } WithFaileBlock:^{
         finish(false);
     }];
@@ -492,8 +522,8 @@
 -(void)getApplyStatus:(void(^)(BOOL isSuccess, UserStateModel *resultModel))finish{
     
 
-    
 }
+
 //- (void)fatchRate:(void(^)(RateModel *rate))finish
 //{
 //    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
@@ -525,7 +555,6 @@
 }
 
 -(void)goLoanMoneVC:(ApplicationStatus)status{
-    
     LoanMoneyViewController *loanVc = [LoanMoneyViewController new];
     loanVc.applicationStatus = status;
     [self.navigationController pushViewController:loanVc animated:YES];
@@ -605,7 +634,7 @@
         }
             break;
         case 10:{
-            //延期成功
+            //延期失败
             [self goLoanMoneVC:RepaymentNormal];
         }
             break;
@@ -622,7 +651,7 @@
         }
             break;
         case 11:{
-            //延期中
+            //合规标处理中
             applicationStatus = ComplianceProcessing;
             [self getApplicationStatus:@"6"];
         }
@@ -635,15 +664,52 @@
 #pragma mark 点击立即申请
 -(void)applyBtnClick:(NSString *)money{
     NSLog(@"点击立即申请=%@",money);
+    
+    
+//    ShanLinBackAlertView *ticket=[[ShanLinBackAlertView alloc]init];
+//    ticket.backgroundColor = [UIColor blackColor];
+//    ticket.alpha = 0.8;
+//    ticket.delegate = self;
+//    [self.view addSubview:ticket];
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
         [self userDataResult];
-        
+
     } else {
         [self presentLogin:self];
     }
 }
 
+
+//-(void)cancelBtn{
+//    for (UIView *subView in self.view.subviews) {
+//        if ([subView isKindOfClass:[ShanLinBackAlertView class]]) {
+//            [subView removeFromSuperview];
+//        }
+//    }
+//}
+//
+//-(void)sureBtn{
+//
+//
+//}
+
+-(void)refuseTabClick:(NSInteger)index{
+
+    switch (index) {
+        case 0:
+        case 1:
+            self.tabBarController.selectedIndex = 1;
+            break;
+        
+        case 2:
+            [self moreBtnClick];
+            break;
+            
+        default:
+            break;
+    }
+}
 #pragma mark 点击导流平台的更多
 -(void)moreBtnClick{
     
@@ -652,6 +718,14 @@
     [self.navigationController pushViewController:webVC animated:true];
     NSLog(@"点击导流平台的更多");
 }
+
+-(void)otherBtnClick{
+    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
+    [self.navigationController pushViewController:webVC animated:true];
+    NSLog(@"点击导流平台的更多");
+}
+
 #pragma mark 我要借款
 -(void)loanBtnClick{
     NSLog(@"我要借款");
@@ -661,14 +735,16 @@
     }
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productList[0].productId;
+        
         [self goLoanSureVC:_homeProductList.data.productList[0].productId];
+        
     } else {
         [self presentLogin:self];
     }
 }
 
 #pragma mark 点击产品列表
--(void)productBtnClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit{
+-(void)productBtnClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit approvalAmount:(NSString *)approvalAmount{
 
     if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:RapidLoan] || [productId isEqualToString:DeriveRapidLoan]) {
         
@@ -679,6 +755,7 @@
         if ([Utility sharedUtility].loginFlage) {
             [Utility sharedUtility].userInfo.pruductId = productId;
             [self goLoanSureVC:productId];
+            
         } else {
             [self presentLogin:self];
         }
@@ -789,7 +866,6 @@
                     break;
             }
         }else{
-        
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
@@ -798,4 +874,44 @@
     [userDataMV UserDataCertificationResult];
 }
 
+#pragma mark 资金平台列表
+-(void)getCapitalListData:(NSString *)productId approvalAmount:(NSString *)approvalAmount{
+    
+    ApplicationViewModel *applicationMV = [[ApplicationViewModel alloc]init];
+    [applicationMV setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        //errCode=0 跳往资金平台选择页面 errCode=4跳往发薪贷原来确认页面
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            NSMutableArray *dataArray = [NSMutableArray array];
+            NSArray * array = (NSArray *)baseResultM.data;
+            for (int  i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
+                CapitalListModel * capitalListModel = [[CapitalListModel alloc]initWithDictionary:dic error:nil];
+                [dataArray addObject:capitalListModel];
+            }
+            
+            [self goRap:productId dataArray:dataArray];
+            
+        }else if([baseResultM.errCode isEqualToString:@"4"]){
+            
+            [self goLoanSureVC:productId];
+        
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [applicationMV capitalList:productId approvalAmount:approvalAmount];
+}
+
+#pragma mark 跳转善林金融申请确认页面
+-(void)goRap:(NSString *)productId dataArray:(NSMutableArray *)dataArray{
+    RapidLoanApplicationViewController *controller = [[RapidLoanApplicationViewController alloc]init];
+    controller.productId = productId;
+    controller.dataArray = dataArray;
+    [self.navigationController pushViewController:controller animated:false];
+}
 @end

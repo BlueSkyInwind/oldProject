@@ -7,7 +7,6 @@
 //
 
 #import "UnbundlingBankCardViewController.h"
-#import "LabelCell.h"
 #import "SendSmsModel.h"
 #import "ChangeBankCardViewController.h"
 #import "QueryCardInfo.h"
@@ -16,9 +15,13 @@
 @interface UnbundlingBankCardViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
 
+    //短信序列号
     NSString *_sms_seq;
+    //短信验证码
     NSString *_sms_code;
+    //验证码按钮
     UIButton *_backTimeBtn;
+    //验证码倒计时时间
     NSInteger _countdown;
     NSTimer * _countdownTimer;
     
@@ -40,9 +43,7 @@
     self.bankTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
     [self.sureBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.bankTable registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
-
 }
-
 
 #pragma mark ->UItableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

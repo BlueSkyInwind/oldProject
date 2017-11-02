@@ -34,22 +34,33 @@ typedef void (^FailureBlock)(EnumServerStatus status, id object);
 
 + (FXDNetWorkManager *)sharedNetWorkManager;
 
+/**
+ 新的api请求
+
+ @param strURL 链接
+ @param isNeedNetStatus 是否需要检查网络状态
+ @param isNeedWait 是否需要进度条
+ @param parameters 请求参数
+ @param finished 成功回调
+ @param failure 失败回调
+ */
 - (void)DataRequestWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus isNeedWait:(BOOL)isNeedWait parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
 
+- (void)GetWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
+
+#pragma mark - 旧api使用
 - (void)POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
-
-- (void)JXLPOSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
-
+//身份证图片上传
 - (void)POSTUpLoadImage:(NSString *)strURL FilePath:(NSDictionary *)images  parameters:(id)parameters finished:(FinishedBlock)finshed failure:(FailureBlock)failure;
 
 - (void)POSTHideHUD:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
 
 - (void)CheckVersion:(NSString *)strUrl paramters:(id)paramters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
-
+//合规请求
 - (void)P2POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
 
+//手机运营商超时设置特殊处理
 - (void)TCPOSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
 
 
-- (void)GetWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus parameters:(id)parameters finished:(FinishedBlock)finished failure:(FailureBlock)failure;
 @end

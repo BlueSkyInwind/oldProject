@@ -7,7 +7,6 @@
 //
 
 #import "EditCardsController.h"
-#import "LabelCell.h"
 #import "HomeBankCardViewController.h"
 #import "WTCameraViewController.h"
 #import "ReturnMsgBaseClass.h"
@@ -51,14 +50,19 @@
     if([self.typeFlag isEqualToString:@"0"]){
         self.title=@"添加银行卡";
     }
-
+    [self license];
     supportBankListArr = [NSMutableArray array];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
-    self.automaticallyAdjustsScrollViewInsets=NO;
     [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
-
+    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
+    
     _cardFlag = 100;
     _btnStatus = false;
     UITapGestureRecognizer *tapSecory = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicksecry)];
@@ -90,6 +94,12 @@
 
 - (void)addBackItem
 {
+    if (@available(iOS 11.0, *)) {
+        UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(disMiss)];
+        //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
+        self.navigationItem.leftBarButtonItem = aBarbi;
+        return;
+    }
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [btn setImage:img forState:UIControlStateNormal];
@@ -110,7 +120,6 @@
 {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
-
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -253,7 +262,16 @@
     bankType.bankArray = supportBankListArr;
     [self.navigationController pushViewController:bankType animated:YES];
 }
-
+- (void)license
+{
+    [MGLicenseManager licenseForNetWokrFinish:^(bool License) {
+        if (License) {
+            DLog(@"授权成功");
+        } else {
+            DLog(@"授权失败");
+        }
+    }];
+}
 /**
  扫描银行卡
  */
@@ -351,13 +369,10 @@
 */
 - (void)startBankCamera
 {
-
     BOOL bankcard = [MGBankCardManager getLicense];
     
     if (!bankcard) {
-        
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"SDK授权失败，请检查"];
-
         return;
     }
     
@@ -367,15 +382,12 @@
     [cardManager CardStart:self finish:^(MGBankCardModel * _Nullable result) {
         //        weakSelf.bankImageView.image = result.image;
         //        weakSelf.bankNumView.text = result.bankCardNumber;
-        
         weakSelf.cardNum = result.bankCardNumber;
         weakSelf.cardNum = [self.cardNum stringByReplacingOccurrencesOfString:@" " withString:@""];
         weakSelf.cardNum=[self changeStr:self.cardNum];
         DLog(@"银行卡扫描可信度 -- %@",[NSString stringWithFormat:@"confidence:%.2f", result.bankCardconfidence]);
         [weakSelf.tableView reloadData];
-
     }];
-    
 }
 
 #pragma  mark Delegate
@@ -416,48 +428,50 @@
     if([_currentCardNum isEqualToString:self.intNum])
     {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您没有更换银行卡无需保存"];
+        return;
+    }
+    if([self.cardCode isEqualToString:@""] || self.cardCode == nil)
+    {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择银行卡类型"];
+    }
+    else if([self.cardNum isEqualToString:@""])
+    {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的卡号"];
+    }
+    else if([self.reservedTel isEqualToString:@""])
+    {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入手机号"];
+    }
+    else if([self.verCode isEqualToString:@""])
+    {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入验证码"];
+    }else if (!_btnStatus) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请同意转账授权书"];
     }
     else
     {
-        if([self.cardNum isEqualToString:@""])
-        {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的卡号"];
-        }
-        else if([self.reservedTel isEqualToString:@""])
-        {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入手机号"];
-        }
-        else if([self.verCode isEqualToString:@""])
-        {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入验证码"];
-        }else if (!_btnStatus) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请同意转账授权书"];
-        }
-        else
-        {
-            NSMutableArray *paramArray = [self getParamArray];
-            UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
-            [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
-                
-                if ([[returnValue objectForKey:@"flag"]  isEqual: @"0000"]) {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[returnValue objectForKey:@"msg"]];
-                    if (self.popOrdiss == true) {
-                        [self.navigationController popViewControllerAnimated:true];
-                    }else{
-                        [self dismissViewControllerAnimated:YES completion:^{
-                            self.addCarSuccess();
-                        }];
-                    }
+        NSMutableArray *paramArray = [self getParamArray];
+        UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
+        [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
+            
+            if ([[returnValue objectForKey:@"flag"]  isEqual: @"0000"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[returnValue objectForKey:@"msg"]];
+                if (self.popOrdiss == true) {
+                    [self.navigationController popViewControllerAnimated:true];
+                }else{
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        self.addCarSuccess();
+                    }];
                 }
-                else
-                {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
-                }
-            } WithFaileBlock:^{
-                
-            }];
-            [unbundlingBankCardViewModel saveAccountBankCard:paramArray];
-        }
+            }
+            else
+            {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
+            }
+        } WithFaileBlock:^{
+            
+        }];
+        [unbundlingBankCardViewModel saveAccountBankCard:paramArray];
     }
 }
 

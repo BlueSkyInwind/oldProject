@@ -12,9 +12,9 @@ import UIKit
 struct CurrentInfoCellType {
     
     enum Cell_Type {
-        case Default
-        case Renewal
-        case Payment
+        case Default    //默认的
+        case Renewal    //续期的
+        case Payment    //支付的
     }
     
     let cellType : Cell_Type?
@@ -68,7 +68,7 @@ extension CurrentInformationCell{
         case .Default:
             defaultCell()
         case .Payment:
-            renewalCell()
+            paymentCell()
         case .Renewal:
             renewalCell()
         }
@@ -77,6 +77,7 @@ extension CurrentInformationCell{
     //MARK: 默认的cell
     fileprivate func defaultCell(){
     
+        //左边的标题label
         leftLabel = UILabel()
         leftLabel?.textColor = UIColor.black
         leftLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -85,7 +86,7 @@ extension CurrentInformationCell{
             make.left.equalTo(self).offset(15)
             make.centerY.equalTo(self.snp.centerY)
         })
-        
+        //右边的内容label
         rightLabel = UILabel()
         rightLabel?.font = UIFont.systemFont(ofSize: 15)
         rightLabel?.textAlignment = .right
@@ -94,7 +95,7 @@ extension CurrentInformationCell{
             make.right.equalTo(self).offset(-15)
             make.centerY.equalTo(self.snp.centerY)
         })
-        
+        //底部的线
         let lineView = UIView()
         lineView.backgroundColor = UIColor.init(red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1.0)
         self.contentView.addSubview(lineView)
@@ -106,8 +107,10 @@ extension CurrentInformationCell{
         }
     }
     
+    //MARK: 续期的cell
     fileprivate func renewalCell(){
         
+        //右边的图片
         let rightImage = UIImageView()
         rightImage.image = UIImage(named:"icon_gengduo")
         self.contentView.addSubview(rightImage)
@@ -125,6 +128,10 @@ extension CurrentInformationCell{
             make.centerY.equalTo(self.snp.centerY)
             make.right.equalTo(rightImage.snp.left).offset(-10)
         }
+        
+    }
+    //MARK: 支付的cell
+    fileprivate func paymentCell(){
         
     }
 }

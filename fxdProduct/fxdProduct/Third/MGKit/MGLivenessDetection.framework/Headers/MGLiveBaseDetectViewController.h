@@ -2,8 +2,8 @@
 //  MGLiveBaseDetectViewController.h
 //  MGLivenessDetection
 //
-//  Created by 张英堂 on 16/8/5.
-//  Copyright © 2016年 megvii. All rights reserved.
+//  Created by megvii on 16/8/5.
+//  Copyright © 2016Year megvii. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -13,23 +13,27 @@
 #import "MGLiveBundle.h"
 #import "MGLiveDetectionManager.h"
 
-
-@interface MGLiveBaseDetectViewController : UIViewController<MGLiveDetectionDelegate, MGVideoDelegate>
+@interface MGLiveBaseDetectViewController : UIViewController <MGLiveDetectionDelegate, MGVideoDelegate>
 
 /**
- *  默认设置的初始化方法 --当你不想设置一大堆参数的时候可以使用该方法
+ *  默认设置的初始化方法
  *
  *  @return 实例化对象
  */
 - (instancetype)initWithDefauleSetting;
 
 /**
- *   视频流管理器 不使用默认配置设置的时候，必须设置该对象
+ *  视频预览layer， 通过 videoManager 来获取
+ */
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
+
+/**
+ *  视频流管理器 不使用默认配置设置的时候，必须设置该对象
  */
 @property (nonatomic, strong) MGVideoManager *videoManager;
 
 /**
- *   活体检测管理器 不使用默认配置设置的时候，必须设置该对象
+ *  活体检测管理器 不使用默认配置设置的时候，必须设置该对象
  */
 @property (nonatomic, strong) MGLiveDetectionManager *liveManager;
 
@@ -52,7 +56,6 @@
                  step:(NSInteger)step
               timeOut:(NSUInteger)timeOut;
 
-
 /**
  *  活体检测结束处理
  *  在活体检测成功或者失败时候被调用，子类需要重写
@@ -60,10 +63,12 @@
  *  @param check         活体检测是否成功，如果为 YES，则 type 参数无效
  *  @param detectionType 活体检测模式
  */
-- (void)liveDetectionFinish:(MGLivenessDetectionFailedType)type checkOK:(BOOL)check liveDetectionType:(MGLiveDetectionType)detectionType;
+- (void)liveDetectionFinish:(MGLivenessDetectionFailedType)type
+                    checkOK:(BOOL)check
+          liveDetectionType:(MGLiveDetectionType)detectionType;
 
 /**
- *  即将启动活体检测，延迟 0.2S
+ *  即将启动活体检测
  */
 - (void)willStatLiveness;
 
@@ -75,12 +80,19 @@
  */
 - (void)stopVideoWriter;
 
+/**
+ *  取消活体检测
+ */
+- (void)cancelDetect;
 
 /**
- *  视频预览layer， 通过 videoManager 来获取
+ *  活体检测过程中出现人脸过大情况
  */
-@property (nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
+- (void)detectionFaceToLarge;
 
-
+/**
+ *  活体检测过程中人脸过大情况恢复
+ */
+- (void)detectionFaceRecover;
 
 @end

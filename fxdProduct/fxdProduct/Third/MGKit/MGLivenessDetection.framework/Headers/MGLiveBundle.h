@@ -2,8 +2,8 @@
 //  MGFaceBundle.h
 //  MGFaceDetection
 //
-//  Created by 张英堂 on 15/12/23.
-//  Copyright © 2015年 megvii. All rights reserved.
+//  Created by megvii on 15/12/23.
+//  Copyright © 2015Year megvii. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -47,7 +47,5 @@ typedef NS_ENUM(NSInteger, MGBundleDirectory) {
  *  @return 图片
  */
 + (UIImage *)LiveImageWithName:(NSString *)name;
-
-
 
 @end

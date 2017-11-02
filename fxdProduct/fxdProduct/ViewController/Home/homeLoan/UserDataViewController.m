@@ -10,7 +10,6 @@
 #import "DataDisplayCell.h"
 #import "PserInfoViewController.h"
 #import "ProfessionViewController.h"
-#import "UserContactsViewController.h"
 #import "CertificationViewController.h"
 #import "GetCustomerBaseViewModel.h"
 #import "Custom_BaseInfo.h"
@@ -22,7 +21,6 @@
 #import "HomeViewModel.h"
 #import "UserStateModel.h"
 #import "LoanMoneyViewController.h"
-#import "PayLoanChooseController.h"
 #import "CheckViewController.h"
 #import "RateModel.h"
 #import "DataWriteAndRead.h"
@@ -78,48 +76,22 @@
     
     self.navigationItem.title = @"资料填写";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.automaticallyAdjustsScrollViewInsets = true;
+//    self.automaticallyAdjustsScrollViewInsets = true;
     processFlot = 0.0;
-    isOpen = YES;
+    isOpen = NO;
     _creditCardStatus = @"3";
     _socialSecurityStatus = @"3";
-
-    _subTitleArr = @[@"请完善您的身份信息",@"请完善您的个人信息",@"请完善您的职业信息",@"请完成三方认证"];
+    _subTitleArr = @[@"请完善您的身份信息",@"请完善您的个人信息",@"请完成三方认证",@"请完善您的收款信息"];
     [self addBackItemRoot];
     [self configMoxieSDK];
     [self configTableview];
-//    self.navigationController.navigationBar.barTintColor = UI_MAIN_COLOR;
-//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
     topView = [[UIView alloc] init];
     [self.view addSubview:topView];
     if (_isMine) {
         _applyBtn.enabled = NO;
         _applyBtn.hidden = YES;
     }
-}
-
-- (void)addBackItemRoot
-{
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [btn setImage:img forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0, 0, 45, 44);
-    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    
-    //    修改距离,距离边缘的
-    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spaceItem.width = -15;
-    
-    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
-    //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
-}
-
-- (void)popBack
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)setApplyBtnStatus
@@ -147,18 +119,26 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-    
+    //声明tableView的位置 添加下面代码
+    if (@available(iOS 11.0, *)) {
+        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }else if (@available(iOS 9.0, *)){
+        self.automaticallyAdjustsScrollViewInsets = true;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = false;
+    }
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshInfoStep)];
     header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;
     [header beginRefreshing];
     self.tableView.mj_header = header;
     
-    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.213)];
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.15)];
     footView.backgroundColor = [UIColor whiteColor];
     _applyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [Tool setCorner:_applyBtn borderColor:[UIColor clearColor]];
-    [_applyBtn setTitle:@"资料测评" forState:UIControlStateNormal];
+    [_applyBtn setTitle:@"额度测评" forState:UIControlStateNormal];
     [_applyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_applyBtn setBackgroundColor:rgb(139, 140, 143)];
     _applyBtn.enabled = false;
@@ -195,7 +175,6 @@
     }
     return 0;
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return _k_w*0.21f;
@@ -224,6 +203,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.titleLabel.text = @"拉起";
             cell.arrowImageView.transform = CGAffineTransformMakeRotation(M_PI);
+
             if (!isOpen) {
                 cell.titleLabel.text = @"更多";
                 cell.arrowImageView.transform = CGAffineTransformIdentity;
@@ -249,11 +229,12 @@
                 cell.subTitleLabel.text = @"完善信用卡认证信息";
                 cell.titleLable.text = @"信用卡认证";
                 cell.statusLabel.text = _creditCardHighRandM != nil ? _creditCardHighRandM.result : @"未完成";
-                cell.statusLabel.textColor = rgb(159, 160, 162);
+                cell.statusLabel.textColor = rgb(42, 155, 234);
                 if ([_creditCardStatus isEqualToString:@"2"]) {
                     cell.statusLabel.textColor = rgb(42, 155, 234);
                 }
                 if ([_creditCardStatus isEqualToString:@"3"]) {
+                    cell.statusLabel.textColor = rgb(159, 160, 162);
                     cell.statusLabel.text = @"未完成";
                 }
                 return cell;
@@ -265,11 +246,12 @@
                 cell.subTitleLabel.text = @"完善社保认证信息";
                 cell.titleLable.text = @"社保认证";
                 cell.statusLabel.text = _socialSecurityHighRandM != nil ? _socialSecurityHighRandM.result : @"未完成";;
-                cell.statusLabel.textColor = rgb(159, 160, 162);
+                cell.statusLabel.textColor =  rgb(42, 155, 234);
                 if ([_socialSecurityStatus isEqualToString:@"2"]) {
                     cell.statusLabel.textColor = rgb(42, 155, 234);
                 }
                 if ([_socialSecurityStatus isEqualToString:@"3"]) {
+                    cell.statusLabel.textColor = rgb(159, 160, 162);
                     cell.statusLabel.text = @"未完成";
                 }
                 return cell;
@@ -315,19 +297,6 @@
             break;
         case 2:
         {
-            cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
-            cell.titleLable.text = @"收款信息";
-            cell.subTitleLabel.text = @"";
-            cell.statusLabel.text = @"未完成";
-            cell.statusLabel.textColor = rgb(159, 160, 162);
-            if ([_userDataModel.gathering isEqualToString:@"1"]) {
-                cell.statusLabel.text = @"已完成";
-                cell.statusLabel.textColor = rgb(42, 155, 234);
-            }
-            return cell;
-        }             break;
-        case 3:
-        {
             cell.iconImage.image = [UIImage imageNamed:@"UserData4"];
             cell.titleLable.text = @"第三方认证";
             cell.subTitleLabel.text = @"完成第三方认证有助于通过审核";
@@ -337,6 +306,21 @@
             cell.statusLabel.text = @"未完成";
             cell.statusLabel.textColor = rgb(159, 160, 162);
             if ([_userDataModel.others isEqualToString:@"1"]) {
+                cell.statusLabel.text = @"已完成";
+                cell.statusLabel.textColor = rgb(42, 155, 234);
+            }
+            return cell;
+
+        }
+            break;
+        case 3:
+        {
+            cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
+            cell.titleLable.text = @"收款信息";
+            cell.subTitleLabel.text = @"";
+            cell.statusLabel.text = @"未完成";
+            cell.statusLabel.textColor = rgb(159, 160, 162);
+            if ([_userDataModel.gathering isEqualToString:@"1"]) {
                 cell.statusLabel.text = @"已完成";
                 cell.statusLabel.textColor = rgb(42, 155, 234);
             }
@@ -411,6 +395,16 @@
             break;
         case 2:
         {
+            if ([_userDataModel.others isEqualToString:@"1"]){
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+            }else {
+                thirdPartyAuthViewController * thirdPartyAuthVC = [[thirdPartyAuthViewController alloc]init];
+                [self.navigationController pushViewController:thirdPartyAuthVC animated:true];
+            }
+        }
+            break;
+        case 3:
+        {
             //此处需要一个返回默认卡的接口
             [self getGatheringInformation_jhtml:^(CardInfo *cardInfo) {
                 EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
@@ -424,22 +418,19 @@
             }];
         }
             break;
-        case 3:
-        {
-            if ([_userDataModel.others isEqualToString:@"1"]){
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
-            }else {
-                    thirdPartyAuthViewController * thirdPartyAuthVC = [[thirdPartyAuthViewController alloc]init];
-                    [self.navigationController pushViewController:thirdPartyAuthVC animated:true];
-            }
-        }
-            break;
         default:
             break;
     }
 }
 -(BOOL)cellStatusIsSelect:(NSInteger)row{
-    
+    if ([_userDataModel.identity isEqualToString:@"0"] && row > 0) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善身份信息！"];
+        return false;
+    }
+    if ([_userDataModel.person isEqualToString:@"0"] && row > 1) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善个人信息！"];
+        return false;
+    }
     switch (row) {
         case 0:{
             if ([_userDataModel.identityEdit isEqualToString:@"0"]) {
@@ -449,10 +440,6 @@
         }
             break;
         case 1:{
-            if ([_userDataModel.identity isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完善身份信息！"];
-                return false;
-            }
             if ([_userDataModel.personEdit isEqualToString:@"0"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
                 return false;
@@ -460,22 +447,14 @@
         }
             break;
         case 2:{
-            if ([_userDataModel.person isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完善个人信息！"];
-                return false;
-            }
-            if ([_userDataModel.gathering isEqualToString:@"1"]) {
+            if ([_userDataModel.others isEqualToString:@"1"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
                 return false;
             }
         }
             break;
         case 3:{
-            if ([_userDataModel.gathering isEqualToString:@"0"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完善收款信息！"];
-                return false;
-            }
-            if ([_userDataModel.others isEqualToString:@"1"]) {
+            if ([_userDataModel.gathering isEqualToString:@"1"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
                 return false;
             }
@@ -491,7 +470,6 @@
 //    topView.backgroundColor = UI_MAIN_COLOR;
 //    topView.frame = CGRectMake(0, 0, _k_w, -scrollView.contentOffset.y);
 }
-
 - (void)getUserInfo:(void(^)(Custom_BaseInfo *custom_baseInfo))finish
 {
     GetCustomerBaseViewModel *customerInfo = [[GetCustomerBaseViewModel alloc] init];
@@ -619,6 +597,11 @@
         if ([baseResultM.errCode isEqualToString:@"0"]){
             CheckingViewController * checkVC = [[CheckingViewController  alloc]init];
             [self.navigationController pushViewController:checkVC animated:true];
+            //首次测评发放红包提示
+            NSString * str = baseResultM.data[@"redIssuedSucce"];
+            if (str != nil && ![str isEqualToString:@""]) {
+                [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:str];
+            }
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
@@ -809,7 +792,7 @@
 
 -(void)editSDKInfo{
     [MoxieSDK shared].navigationController.navigationBar.translucent = YES;
-    [MoxieSDK shared].backImageName = @"return";
+    [MoxieSDK shared].backImageName = @"return_white";
     [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
     [MoxieSDK shared].navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [[MoxieSDK shared].navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];

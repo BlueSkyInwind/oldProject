@@ -21,6 +21,8 @@
 @property(nonatomic,strong)NSString<Optional> * status;
 //合规用户状态
 @property(nonatomic,strong)NSString<Optional> * userStatus;
+//合规处理中文本   仅当合规用户状态处理中(11,12,13)时返回，前端作弹框提示
+@property(nonatomic,strong)NSString<Optional> * userPendingMsg;
 //展示数据
 @property(nonatomic,strong)NSArray<InfoListModel,Optional> * infoList;
 

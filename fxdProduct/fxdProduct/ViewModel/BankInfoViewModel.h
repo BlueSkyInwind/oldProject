@@ -26,10 +26,11 @@
 -(void)obtainUserStagingRule;
 
 
-/**
- 获取三方支付链接
- */
 -(void)obtainTrilateralLink:(NSString * )stagingId redPacketAmount:(NSString *)redPacketAmount redPacketId:(NSString *)redPacketId  payType:(NSString *)payType stagingContinue:(BOOL)stagingContinue;
 
+/**
+ 选择模式的列表
+ */
+-(void)ChoosePatternList;
 
 @end

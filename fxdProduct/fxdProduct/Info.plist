@@ -17,11 +17,19 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.0.0</string>
+	<string>4.0.6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>h5.faxindai.com</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fxdapp</string>
+			</array>
+		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -50,7 +58,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>311</string>
+	<string>323</string>
 	<key>CompanyName</key>
 	<string>上海凡好金融信息服务有限公司</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -85,9 +93,7 @@
 		<string>mqzoneopensdkapi19</string>
 		<string>mqzoneopensdkapi</string>
 		<string>mqzoneopensdk</string>
-		<string>alipay</string>
 		<string>alipayshare</string>
-		<string>alipays</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -108,8 +114,10 @@
 	<string>用您的位置确定所在区域的门店</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>用您的位置确定所在区域的门店</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>访问您的相册</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>访问相册</string>
+	<string>访问您的相册</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

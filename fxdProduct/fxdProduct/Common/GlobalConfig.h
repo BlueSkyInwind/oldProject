@@ -38,7 +38,10 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define UI_IS_IPHONE            ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 #define UI_IS_IPHONE5           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0)
 #define UI_IS_IPHONE6P            (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 736.0)
+#define UI_IS_IPHONE6            (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 667.0)
 #define UI_IS_IPHONE4           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 480.0)
+
+#define UI_IS_IPAD           ([[UIScreen mainScreen] bounds].size.height == 768.0)
 
 #define UI_MAIN_COLOR [UIColor colorWithRed:0/255.0 green:170/255.0 blue:238/255.0 alpha:1]
 
@@ -156,8 +159,9 @@ UIKIT_EXTERN NSString * const       _Repay_url;                              //�
 UIKIT_EXTERN NSString * const       _StagingRule_url;                        //获取续期规则
 UIKIT_EXTERN NSString * const       _registerID_url;                        //上传用户的registerID
 UIKIT_EXTERN NSString * const       _UserDataCertification_url;                        //用户资料测评接口
-UIKIT_EXTERN NSString * const       _Trilateral_url;                        //三方支付链接
+UIKIT_EXTERN NSString * const       _Trilateral_url;                        //用户资料测评接口
 UIKIT_EXTERN NSString * const       _UserDataCertificationResult_url;        //得到测评结果
+UIKIT_EXTERN NSString * const       _loginOutDeleteRegisterId_url;        //退出登录删除推送id
 
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集
@@ -201,9 +205,15 @@ UIKIT_EXTERN NSString * const       _HomeState_url;                  //首页状
 UIKIT_EXTERN NSString * const       _createApplication_url;                  //用户进件接口
 UIKIT_EXTERN NSString * const       _ApplicationViewInfo_url;                  //申请确认页数据
 UIKIT_EXTERN NSString * const       _UserDrawingInfo_url;                  //申请确认页数据
+UIKIT_EXTERN NSString * const       _CapitalList_url;                  //资金平台列表
+UIKIT_EXTERN NSString * const       _CapitalLoan_url;                  //资金平台放款接口
+UIKIT_EXTERN NSString * const       _CapitalLoanBack_url;                  //联联绑卡回调地址
+UIKIT_EXTERN NSString * const       _ShanLinBack_url;                  //联联绑卡返回回调地址
+UIKIT_EXTERN NSString * const       _CapitalLoanFail_url;                  //app 连连绑卡页面用户放弃操作接口
+UIKIT_EXTERN NSString * const       _DiscountTicketList_url;                  //免息券接口
+UIKIT_EXTERN NSString * const       _ChoosePattern_url;                  //支付列表
 
-
-
+UIKIT_EXTERN NSString * const       _DiscountTicketRule_url;                  //优惠券规则
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码
 UIKIT_EXTERN NSString * const   CODE_FINDPASS;         ///密码找回验证码

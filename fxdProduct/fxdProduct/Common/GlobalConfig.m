@@ -36,12 +36,21 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 
 //测试导流 192.168.6.134
 NSString * const _main_url  =   @"http://192.168.6.134/fxd-esb/esb/";
-NSString * const _agreement_url  =   @"http://192.168.6.134:9191/fxd-esb/esb/";
+NSString * const _agreement_url  =   @"http://192.168.6.134/fxd-esb/esb/";
 NSString * const _main_new_url  =  @"http://service-apigateway.test.fxds:8005/";
 NSString * const _ValidESB_url  =   @"http://192.168.6.134/fxd-esb/";
 NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
 NSString * const _p2P_url = @"http://192.168.6.134/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+
+//UAT环境
+//NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
+//NSString * const _main_new_url  =  @"http://h5.uat.fxds/";
+//NSString * const _ValidESB_url  =   @"http://h5.uat.fxds/fxd-esb/";
+//NSString * const _H5_url    =   @"http://h5.uat.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://h5.uat.fxds/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //http://192.168.6.134:9191/fxd-esb/
 //张强本地
@@ -68,7 +77,6 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //芝麻信用测试地址
 //NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";
-
 
 #else
 #warning "未匹配环境"
@@ -230,7 +238,7 @@ NSString * const     _checkVersion_jhtml        =   @"appcommon/checkVersion.jht
 NSString * const     _drawApplyAgain_jhtml      =   @"draw/drawApplyAgain.jhtml";
 
 //红包获取
-NSString * const     _getUserRedpacket_url      =   @"userWs/getUserAvailabelRedpacketList.jhtml";
+NSString * const     _getUserRedpacket_url      =   @"userWs/getUserAvailabelRedpacketAndCouponsList.jhtml";
 
 //申请件状态更新
 NSString * const     _caseStatusUpdateApi_url   =   @"increase/caseStatusUpdateApi.jhtml";
@@ -383,7 +391,6 @@ NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.
 NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
 
 
-
 #pragma mark - 新的api
 
 //社保
@@ -451,6 +458,33 @@ NSString * const    _Trilateral_url    =    @"apigw/client/repay/third/pay";
 
 //得到测评结果
 NSString * const    _UserDataCertificationResult_url    =    @"apigw/client/user/verify/status";
+
+//退出登录删除推送id
+NSString * const    _loginOutDeleteRegisterId_url    =    @"apigw/client/center/jiguang/delete";
+
+//资金平台列表
+NSString * const    _CapitalList_url    =    @"apigw/client/capital/list";
+
+//资金平台放款接口
+NSString * const    _CapitalLoan_url    =    @"apigw/client/capital/loan";
+
+//联联绑卡回调地址
+NSString * const    _CapitalLoanBack_url    =    @"main.html";
+
+//联联绑卡返回回调地址
+NSString * const    _ShanLinBack_url    =    @"main.html#shanlinBack";
+
+//app 连连绑卡页面用户放弃操作接口
+NSString * const    _CapitalLoanFail_url    =    @"apigw/client/capital/loan/fail";
+
+//优惠券接口
+NSString * const    _DiscountTicketList_url    =    @"apigw/client/market/getuserBase";
+
+//选择模式列表
+NSString * const    _ChoosePattern_url    =    @"apigw/client/ios/expay";
+
+//优惠券规则
+NSString * const    _DiscountTicketRule_url    =    @"protocol/couponInstructions.html";
 
 #pragma mark - 合规接口
 

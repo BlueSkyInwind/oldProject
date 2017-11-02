@@ -27,8 +27,8 @@
         self = [[NSBundle mainBundle] loadNibNamed:[[self class] description] owner:self options:nil].lastObject;
         [Tool setCorner:self.wxCopyBtn borderColor:[UIColor clearColor]];
         [Tool setCorner:self.saveImageBtn borderColor:[UIColor clearColor]];
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"公众号:急速发薪"];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(53, 166, 255) range:NSMakeRange(attriStr.length-4,4)];
+        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"公众号:发薪微钱包"];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(53, 166, 255) range:NSMakeRange(attriStr.length-5,5)];
         _publicWXLabel.attributedText = attriStr;
     }
     return self;
@@ -40,7 +40,7 @@
 
 - (IBAction)wxCopyClick:(UIButton *)sender {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = @"急速发薪";
+    pasteboard.string = @"faxinwqb";
     [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"复制微信公众号成功，请在微信中搜索关注"];
 }
 
@@ -71,7 +71,6 @@
     } else {
         return [[QRPopView alloc]initWithFrame:CGRectMake(0, 0, 300, 400)];
     }
-    
 }
 
 @end

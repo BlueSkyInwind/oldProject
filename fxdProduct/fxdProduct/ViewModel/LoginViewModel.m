@@ -33,7 +33,7 @@
     if ([Utility sharedUtility].userInfo.clientId && ![[Utility sharedUtility].userInfo.clientId isEqualToString:@""]) {
         
         loginParamModel.mobile_phone_ = number;
-//        loginParamModel.password_ = @"WsTFgPoSLjxYWwZl5v5V8g==";
+//        loginParamModel.password_ = @"zHsapeQb+ds=";
         loginParamModel.password_ = [DES3Util encrypt:password];
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
@@ -45,7 +45,7 @@
     } else {
         
         loginParamModel.mobile_phone_ = number;
-//        loginParamModel.password_ = @"WsTFgPoSLjxYWwZl5v5V8g==";;
+//        loginParamModel.password_ = @"zHsapeQb+ds=";
         loginParamModel.password_ = [DES3Util encrypt:password];
         loginParamModel.last_login_device_ = [Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
@@ -53,13 +53,10 @@
         loginParamModel.last_login_ip_ = [[GetUserIP sharedUserIP] getIPAddress];
         loginParamModel.platform_type_ = PLATFORM;
         loginParamModel.BSFIT_DEVICEID =fingerPrint;
-        
     }
-    
     if (verifycode) {
         loginParamModel.verify_code_  = verifycode;
     }
-    
    NSDictionary  * paramDic =[loginParamModel toDictionary];
     [self fatchLogin:paramDic];
 }
@@ -133,11 +130,19 @@
     }];
     [customBaseViewModel fatchCustomBaseInfo:nil];
 }
-                                  
+
 -(void)uploadUserRegisterID:(NSString *)registerID{
     //@"http://192.168.12.252:8012/excenter/jiguang/register"
     NSDictionary * paramDic  = @{@"registerId":registerID};
     [[FXDNetWorkManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_registerID_url] isNeedNetStatus:false isNeedWait:false parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+    } failure:^(EnumServerStatus status, id object) {
+        DLog(@"%@",object);
+    }];
+}
+
+-(void)deleteUserRegisterID{
+    [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_loginOutDeleteRegisterId_url] isNeedNetStatus:false parameters:nil finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     } failure:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);

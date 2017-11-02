@@ -37,10 +37,22 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
 @implementation AppDelegate
 
+#pragma mark - 外部启动app的处理
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation{
+    
+    return YES;
+}
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options{
+    NSString * urlStr = [NSString stringWithFormat:@"%@",url];
+    if ([urlStr containsString:@"h5.faxindai.com"]) {
+        
+    }
+    return YES;
+}
 
+#pragma mark - 启动app
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -50,7 +62,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     self.window.rootViewController = [UIViewController new];
     
 //    [self heguiceshi];
-
     [self tripartiteInitialize];
 
     [[IQKeyboardManager sharedManager] setToolbarManageBehaviour:IQAutoToolbarByPosition];
@@ -69,6 +80,8 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     //判断屏幕尺寸适配
     AppDelegate *myDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     myDelegate.isShow = true;
+    myDelegate.isHomeChooseShow = true;
+
     if(_k_h > 480){
         myDelegate.autoSizeScaleX = _k_w/320;
         myDelegate.autoSizeScaleY = _k_h/568;
@@ -291,13 +304,14 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 }
 -(void)NotificationJump:(NSDictionary *)contentInfo{
     
-    
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];
 }
+
+
 -(void)uploadJPushID{
     
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
@@ -309,15 +323,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 }
 
 
-//数据库创建
-//if(![userTableName isEqualToString:@""])
-//{
-//    testModelFmdb *msg=[[testModelFmdb alloc]init];
-//    msg.title=@"通知";
-//    msg.date=[Tool getNowTime];
-//    msg.content = payloadMsg;
-//    [[DataBaseManager shareManager]insertWithModel:msg:userTableName];
-//}
+
 
 
 

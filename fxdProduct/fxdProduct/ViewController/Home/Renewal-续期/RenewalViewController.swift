@@ -8,16 +8,19 @@
 
 import UIKit
 
-class RenewalViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
+class RenewalViewController: BaseViewController ,UITableViewDataSource,UITableViewDelegate{
 
+    //tab左边的文字内容
     var leftTitleArr = ["逾期费用","使用溢缴金","应付金额","支付方式"]
     let cellId = "CellId"
     var headerView: CurrentInformationHeadView? = nil
+    //tab右边的内容
     var contentArr : [String] = [String]()
     var cardInfo : CardInfo?
-    var stagingId : String?
+    //当前期的分期id
+   @objc var stagingId : String?
     var currentindex : Int?
-    var paymentPattern : PatternOfPayment?
+    var patternName : String?
 
     let renewalTableView: UITableView = {
         
@@ -26,9 +29,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         tableView.showsVerticalScrollIndicator = false
         tableView.isScrollEnabled = false
-
         return tableView
-        
     }()
     
     override func viewDidLoad() {
@@ -38,26 +39,21 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         self.title = "续期费用"
         currentindex = 0
         addBackItem()
-        paymentPattern = .BankCard
+        //头部视图
         headerView = CurrentInformationHeadView()
         headerView?.moneyDescLabel?.text = "续期费用(元)"
         headerView?.backgroundColor = UI_MAIN_COLOR
         renewalTableView.tableHeaderView = headerView
         
+        //底部确认按钮视图
         let footerView = FooterBtnView()
         footerView.frame = CGRect(x:0,y:0,width:_k_w,height:50)
         footerView.footerBtn?.setTitle("确认", for: .normal)
         footerView.footerBtnClosure = {
-            if self.paymentPattern == .BankCard{
-                self.commitStaging()
-            }
-            else{
-                self.trilateralEntrance()
-            }
-//            print("确认按钮点击")
+            self.commitStaging()
+//         print("确认按钮点击")
         }
         renewalTableView.tableFooterView = footerView
-        
         
         renewalTableView.delegate = self
         renewalTableView.dataSource = self
@@ -65,19 +61,19 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         renewalTableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        getData()
+        fatchBankList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = UI_MAIN_COLOR
-        self.navigationController?.navigationBar.titleTextAttributes =
-            [NSForegroundColorAttributeName: UIColor.white]
-        self.navigationController?.navigationBar.backgroundImage(for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.titleTextAttributes =
+//            [NSForegroundColorAttributeName: UIColor.white]
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), for: UIBarMetrics.default)
+//        self.navigationController!.navigationBar.shadowImage = UIImage()
         
-       getData()
-
-       fatchBankList()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.black,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 19)]
 
     }
     
@@ -110,25 +106,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         }
         repayMentViewModel.getCurrentRenewal(withStagingId: stagingId)
     }
-    func addBackItem(){
-    
-        let btn = UIButton.init(type: .system)
-        let img = UIImage(named:"return_white")?.withRenderingMode(.alwaysOriginal)
-        btn.setImage(img, for: .normal)
-        btn.frame = CGRect(x:0,y:0,width:45,height:44)
-        btn.addTarget(self, action: #selector(backToPrevious), for: .touchUpInside)
-        let item = UIBarButtonItem.init(customView: btn)
-        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        spaceItem.width = -15
-        self.navigationItem.leftBarButtonItems = [spaceItem,item]
-        
-    }
-    
-    //返回按钮点击响应
-    func backToPrevious(){
-        self.navigationController!.popViewController(animated: true)
-    }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -178,17 +156,17 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
             cell.leftLabel?.text = leftTitleArr[indexPath.row]
             
             if indexPath.row == 3{
-                if paymentPattern == .Alipays {
-                    cell.rightLabel?.text = " 支付宝付款 "
-                }
-                else{
                     if cardInfo != nil{
                         let index = cardInfo?.cardNo.index((cardInfo?.cardNo.endIndex)!, offsetBy: -4)
                         let numStr = cardInfo?.cardNo.substring(from: index!)
                         cell.rightLabel?.text = (cardInfo?.bankName)!+" 尾号 "+"("+numStr!+")"
                     }
-                }
                 return cell
+            }
+            cell.rightLabel?.textColor = UIColor.black
+            if indexPath.row == 1 || indexPath.row == 2 {
+            
+                cell.rightLabel?.textColor = UI_MAIN_COLOR
             }
             cell.rightLabel?.text = contentArr[indexPath.row]+"元"
             return cell
@@ -201,14 +179,10 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 3{
-            
             let userBankCardListVC = UserBankCardListViewController()
-            userBankCardListVC.isHavealipay = true
             userBankCardListVC.currentIndex = currentindex!
-            userBankCardListVC.payPattern = paymentPattern!
-            userBankCardListVC.userSelectedBankCard({ [weak self] (cardInfo, currentIndex,patternOfPayment) in
+            userBankCardListVC.userSelectedBankCard({ [weak self] (cardInfo, currentIndex) in
                 self?.cardInfo = cardInfo
-                self?.paymentPattern = patternOfPayment
                 self?.currentindex = currentIndex
                 self?.renewalTableView.reloadData()
             })
@@ -219,6 +193,7 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
         }
     }
  
+    //MARK:获取用户的银行卡列表
     func fatchBankList(){
     
         let bankInfoVM = BankInfoViewModel()
@@ -264,24 +239,6 @@ class RenewalViewController: UIViewController ,UITableViewDataSource,UITableView
             
         }
         bankInfoVM.obtainUserCommitStaging(stagingId, cardId: self.cardInfo?.cardId)
-    }
-    
-    func trilateralEntrance() -> Void {
-        let bankInfoVM = BankInfoViewModel()
-        bankInfoVM.setBlockWithReturn({ (returnValue) in
-            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
-            if baseResult.errCode == "0"{
-                let webView = FXDWebViewController.init()
-                let dic = baseResult.data as! NSDictionary
-                webView.urlStr = dic.object(forKey: "callbackUrl") as! String
-                webView.payType = "2"
-                self.navigationController?.pushViewController(webView, animated: true)
-            }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
-            }
-        }) {
-        }
-        bankInfoVM.obtainTrilateralLink(stagingId, redPacketAmount: nil, redPacketId: nil, payType: "1", stagingContinue: true)
     }
     
     //MARK:获取续期规则

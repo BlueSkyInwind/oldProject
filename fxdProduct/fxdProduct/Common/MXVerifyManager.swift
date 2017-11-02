@@ -48,7 +48,7 @@ class MXVerifyManager: NSObject,MoxieSDKDelegate {
     func configureUI() {
         MoxieSDK.shared().navigationController.navigationBar.isTranslucent = true
         MoxieSDK.shared().backImageName = "return"
-        MoxieSDK.shared().navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+        MoxieSDK.shared().navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         MoxieSDK.shared().navigationController.navigationBar.tintColor = UIColor.white
         MoxieSDK.shared().navigationController.navigationBar.setBackgroundImage(UIImage.init(named: "navigation"), for: UIBarMetrics.default)
     }

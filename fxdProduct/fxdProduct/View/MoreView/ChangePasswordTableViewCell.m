@@ -35,6 +35,7 @@
         make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0);
     }];
    
+    //顶部的线
     self.topLineView = [[UIView alloc]init];
     self.topLineView.backgroundColor = rgb(153, 153, 147);
     [self.backView addSubview:self.topLineView];
@@ -44,7 +45,7 @@
         make.height.equalTo(@0.5);
         make.top.equalTo(self.backView.mas_top).offset(0);
     }];
-    
+    //左边的标题
     self.titleLabel = [[UILabel alloc]init];
     self.titleLabel.font = [UIFont systemFontOfSize:16];
     self.titleLabel.textColor = rgb(77, 77, 77);
@@ -58,7 +59,7 @@
     }];
     
 
-    
+    //右边的内容
     self.contentTextField = [[UITextField alloc]init];
     self.contentTextField.font = [UIFont systemFontOfSize:14];
     self.contentTextField.secureTextEntry = YES;
@@ -74,6 +75,7 @@
         
     }];
     
+    //底部的线
     self.lineView  = [[UIView alloc]init];
     self.lineView.backgroundColor = rgb(153, 153, 147);
     [self.backView addSubview:self.lineView];

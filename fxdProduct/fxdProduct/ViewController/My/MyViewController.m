@@ -14,8 +14,8 @@
 #import "DiscountTicketController.h"
 #import "InvitationViewController.h"
 #import "UserDataViewController.h"
-
-@interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
+#import "ThirdWebViewController.h"
+@interface MyViewController () <UITableViewDataSource,UITableViewDelegate,ShanLinBackAlertViewDelegate>
 {
     NSArray *titleAry;
     NSArray *imgAry;
@@ -30,13 +30,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    titleAry=@[@"借还记录",@"我的银行卡",@"邀请好友",@"我的红包",@"更多"];
+    titleAry=@[@"借还记录",@"我的银行卡",@"邀请好友",@"优惠券",@"更多"];
     imgAry=@[@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"6_my_icon_07",@"icon_my_setup"];
-    
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    if (@available(iOS 11.0, *)) {
+        self.MyViewTable.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
     self.MyViewTable.scrollEnabled = NO;
-    
+    if (UI_IS_IPHONE4) {
+        self.MyViewTable.scrollEnabled = YES;
+    }
     [self.MyViewTable setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     [self.MyViewTable registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"bCell"];
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -104,29 +108,27 @@
     return bCell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
-
         case 0:
         {
-    
-//            CheckingViewController *repayRecord=[[CheckingViewController alloc]init];
+//            LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
+//            loanFirstVC.productId = @"P001002";
+//            [self.navigationController pushViewController:loanFirstVC animated:true];
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-            [self.navigationController pushViewController:repayRecord animated:YES];
+            [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
-        case 1:{
+        case 1:
+        {
             MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
             [self.navigationController pushViewController:myCrad animated:YES];
         }
             break;
         case 2:
         {
-//            UserDataViewController *userDataVC = [[UserDataViewController alloc]initWithNibName:@"UserDataViewController" bundle:nil];
-//            [self.navigationController pushViewController:userDataVC animated:YES];
             InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
             [self.navigationController pushViewController:invitationVC animated:true];
         }
@@ -142,15 +144,12 @@
             
             MoreViewController *ticket=[[MoreViewController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
-            
         }
             break;
         default:
             break;
     }
 }
-
-
 
 
 - (void)didReceiveMemoryWarning {

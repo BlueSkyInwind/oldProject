@@ -10,10 +10,8 @@
 #import "AboutMainViewController.h"
 #import "AboutViewController.h"
 #import "IdeaBackViewController.h"
-#import "HelpViewController.h"
 #import "NextViewCell.h"
 #import "HelpViewCell.h"
-#import "GesturesPasswordCell.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import "PCCircleViewConst.h"
@@ -24,7 +22,7 @@
 #import "FXDWebViewController.h"
 #import "UIImage+Color.h"
 #import "ChangePasswordViewController.h"
-
+#import "LoginViewModel.h"
 
 @interface MoreViewController () <UITableViewDataSource,UITableViewDelegate,MakeSureBtnDelegate,UIViewControllerTransitioningDelegate>
 {
@@ -33,13 +31,11 @@
     UIView *lineView;
     //子功能视图
     AboutMainViewController *aboutUs;//关于视图
-    HelpViewController *helpView;//常见问题
     IdeaBackViewController *ideaBack;//反馈视图
     ReturnMsgBaseClass *_returnMsgParse;
     testView *_alertView;
 }
 @property (weak, nonatomic) IBOutlet UITableView *MyTabView;
-
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
 @end
@@ -53,7 +49,6 @@
     [_MyTabView reloadData];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -65,7 +60,6 @@
     [_MyTabView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     [_MyTabView registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"moreFunction"];
     [_MyTabView registerNib:[UINib nibWithNibName:@"HelpViewCell" bundle:nil] forCellReuseIdentifier:@"outLog"];
-    [_MyTabView registerNib:[UINib nibWithNibName:@"GesturesPasswordCell" bundle:nil] forCellReuseIdentifier:@"password"];
     NSString *app_Version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     self.versionLabel.text = [NSString stringWithFormat:@"当前版本 V%@",app_Version];
 }
@@ -158,7 +152,6 @@
             return 0.1f;
         }
     }
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -166,7 +159,6 @@
     if(indexPath.section==0)
     {
         if(indexPath.row==0){
-
             aboutUs=[[AboutMainViewController alloc]initWithNibName:@"AboutMainViewController" bundle:nil];
             [self.navigationController pushViewController:aboutUs animated:YES];
         }
@@ -184,6 +176,7 @@
             }
         }
         else if(indexPath.row==3){
+            
             UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"欢迎给出评价!" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 dispatch_after(0.2, dispatch_get_main_queue(), ^{
@@ -206,7 +199,8 @@
             [actionSheett addAction:teleAction];
             [actionSheett addAction:cancelAction];
             [self presentViewController:actionSheett animated:YES completion:nil];
-        }    else if(indexPath.row==5){
+        }
+        else if(indexPath.row==5){
             
             if ([Utility sharedUtility].loginFlage) {
                 
@@ -262,6 +256,9 @@
                                             url:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]
                                           title:@"发薪贷"
                                            type:SSDKContentTypeAuto];
+        
+        [shareParams SSDKSetupSinaWeiboShareParamsByText:[NSString stringWithFormat:@"发薪贷只专注于网络小额贷款。是一款新型网络小额贷款神器, 尽可能优化贷款申请流程，申请步骤更便捷，轻完成网上贷款。链接:http://www.faxindai.com 链接:%@",@"https://itunes.apple.com/cn/app/id1089086853"] title:@"发薪贷" image:imageArr url:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
+        
         [shareParams SSDKEnableUseClientShare];
         [ShareSDK showShareActionSheet:nil
                                  items:@[@(SSDKPlatformSubTypeWechatSession),
@@ -304,17 +301,16 @@
             [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_loginOut_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
                 _returnMsgParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
                 if ([_returnMsgParse.flag isEqualToString:@"0000"]) {
-                    
                     dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
                     dispatch_after(delayTime, dispatch_get_main_queue(), ^{
 
                         [self.navigationController popToRootViewControllerAnimated:YES];
                     });
                     
+                    [self deleteUserRegisterID];
                     LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                     [self presentViewController:nav animated:YES completion:^{
-                    
                         [_alertView hide];
                         [EmptyUserData EmptyData];
                     }];
@@ -327,11 +323,17 @@
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"参数错误"];
         }
-        
     } else {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"似乎没有连接到网络"];
     }
 }
+
+-(void)deleteUserRegisterID{
+    
+    LoginViewModel * loginVM = [[LoginViewModel alloc]init];
+    [loginVM deleteUserRegisterID];
+}
+
 
 
 @end

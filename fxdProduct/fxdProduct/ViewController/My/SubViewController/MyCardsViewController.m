@@ -42,7 +42,6 @@
     [super viewDidLoad];
     [self addBackItem];
     self.title=@"我的银行卡";
-    
     _defaultCardIndex = -1;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -56,9 +55,7 @@
     
     [self createMyCardUI];
     //请求银行卡列表信息
-    
-    self.automaticallyAdjustsScrollViewInsets=NO;
-    
+        
     if ([Utility sharedUtility].networkState) {
         [self postUrlMessageandDictionary];
     } else {

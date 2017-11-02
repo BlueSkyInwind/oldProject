@@ -10,7 +10,6 @@
 #import "BaseNavigationViewController.h"
 #import "HomeViewController.h"
 #import "MyViewController.h"
-#import "HelpViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 
@@ -42,10 +41,8 @@
 
         //将字符串转化成类
         Class vc = NSClassFromString([vcNameArr objectAtIndex:i]);
-       
         //父类指针指向子类对象
         UIViewController *viewController = [[vc alloc]init];
-        
         BaseNavigationViewController *nc = [[BaseNavigationViewController alloc]initWithRootViewController:viewController];
         viewController.navigationItem.title = [titleArr objectAtIndex:i];
         //        UITabBarItem *item = [[UITabBarItem alloc]initWithTitle:[titleArr objectAtIndex:i] image:nil selectedImage:nil];

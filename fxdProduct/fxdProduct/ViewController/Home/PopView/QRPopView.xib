@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,21 +34,21 @@
                         <constraint firstAttribute="width" secondItem="tSO-uw-rOg" secondAttribute="height" multiplier="1:1" id="yny-CX-q6Y"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关注发薪贷微信" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRR-0O-im1">
-                    <rect key="frame" x="115" y="29" width="125" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关注发薪微信钱包微信" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRR-0O-im1">
+                    <rect key="frame" x="115" y="29" width="150" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="PmZ-nP-6H0"/>
-                        <constraint firstAttribute="width" constant="125" id="WNR-kc-4IQ"/>
+                        <constraint firstAttribute="width" constant="150" id="WNR-kc-4IQ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公众号:急速发薪" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfl-lM-Xa5">
-                    <rect key="frame" x="115" y="52" width="125" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公众号:发薪微钱包" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfl-lM-Xa5">
+                    <rect key="frame" x="115" y="52" width="140" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="Nfc-bQ-pjI"/>
-                        <constraint firstAttribute="width" constant="125" id="zqz-GD-hsA"/>
+                        <constraint firstAttribute="width" constant="140" id="zqz-GD-hsA"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
@@ -72,11 +72,11 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="精彩活动 不容错过" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVK-q7-bDa">
-                    <rect key="frame" x="40" y="298" width="220" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="周期更长、费率更低、额度更高" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVK-q7-bDa">
+                    <rect key="frame" x="30" y="298" width="240" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="J7c-MF-9J1"/>
-                        <constraint firstAttribute="width" secondItem="KVK-q7-bDa" secondAttribute="height" multiplier="220:21" id="jv9-XY-NoH"/>
+                        <constraint firstAttribute="width" secondItem="KVK-q7-bDa" secondAttribute="height" multiplier="240:21" id="jv9-XY-NoH"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
@@ -150,7 +150,7 @@
     </objects>
     <resources>
         <image name="icon_qr_close_icon" width="12" height="12"/>
-        <image name="icon_qr_wxQR_icon" width="220" height="220"/>
+        <image name="icon_qr_wxQR_icon" width="495" height="494"/>
         <image name="icon_qr_wx_icon" width="52" height="52"/>
     </resources>
 </document>

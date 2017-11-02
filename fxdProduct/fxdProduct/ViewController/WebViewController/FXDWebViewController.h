@@ -10,13 +10,13 @@
 
 @interface FXDWebViewController : BaseViewController
 
-@property (nonatomic, copy)NSString *urlStr;
+@property (nonatomic, copy)NSString * urlStr;
 
-@property (nonatomic, copy) NSString *shareContent;
+@property (nonatomic, copy) NSString * loadContent;
 
 @property (nonatomic,assign)BOOL isZhima;
 
-@property (nonatomic, copy)NSString * payType;  // 1、还款   2、续期
+@property (nonatomic, copy)NSString * acceptType;  // 1、还款   2、续期
 
 
 @end

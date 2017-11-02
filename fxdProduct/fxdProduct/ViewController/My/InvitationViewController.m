@@ -34,7 +34,6 @@
     [self addBackItem];
     self.scrollView.contentSize = CGSizeMake(_k_w, _k_h*1.1);
     //    self.scrollView.backgroundColor = [UIColor redColor];
-    
 //    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(20, 30, _k_w-40, 370)];
     UIView *topView = [[UIView alloc] init];
     [Tool setCorner:topView borderColor:[UIColor clearColor]];
@@ -247,6 +246,12 @@
                                             url:[NSURL URLWithString:shareUrl]
                                           title:@"发薪贷"
                                            type:SSDKContentTypeAuto];
+        
+        [shareParams SSDKSetupSinaWeiboShareParamsByText:[NSString stringWithFormat:@"发薪贷只专注于网络小额贷款。是一款新型网络小额贷款神器, 尽可能优化贷款申请流程，申请步骤更便捷，轻完成网上贷款。 链接:%@",shareUrl] title:@"发薪贷" image:imageArr url:[NSURL URLWithString:shareUrl] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
+        
+        [shareParams SSDKSetupSMSParamsByText:[NSString stringWithFormat:@"发薪贷只专注于网络小额贷款。是一款新型网络小额贷款神器, 尽可能优化贷款申请流程，申请步骤更便捷，轻完成网上贷款。 链接:%@",shareUrl]  title:@"发薪贷" images:imageArr attachments:nil recipients:nil type:SSDKContentTypeAuto];
+        
+        
         [shareParams SSDKEnableUseClientShare];
         [ShareSDK showShareActionSheet:nil
                                  items:@[@(SSDKPlatformSubTypeWechatSession),

@@ -15,8 +15,6 @@
 #import "UserDataViewController.h"
 #import "HomeViewModel.h"
 #import "UserStateModel.h"
-#import "ExpressCreditRefuseView.h"
-#import "PayLoanChooseController.h"
 @interface LoanProcessViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIView *_noneView;
@@ -25,8 +23,6 @@
     BOOL _isRefuse;
     UserStateModel *_userStateModel;
 }
-
-@property (nonatomic,strong)ExpressCreditRefuseView *expressView;
 @end
 
 @implementation LoanProcessViewController
@@ -183,7 +179,6 @@
     return nil;
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LoanProcessCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LoanProcessCell"];
@@ -243,16 +238,8 @@
 
     if([_userStateModel.product_id isEqualToString:SalaryLoan]){
     
-        [self fatchRate:^(RateModel *rate) {
-            PayLoanChooseController *payLoanview = [[PayLoanChooseController alloc] init];
-            payLoanview.product_id = WhiteCollarLoan;
-//            payLoanview.userState = model;
-            payLoanview.rateModel = rate;
-            [self.navigationController pushViewController:payLoanview animated:true];
-        }];
-        
+
     }else{
-    
         UserDataViewController *userDataVC = [[UserDataViewController alloc] init];
         userDataVC.product_id = SalaryLoan;
         [self.navigationController pushViewController:userDataVC animated:true];

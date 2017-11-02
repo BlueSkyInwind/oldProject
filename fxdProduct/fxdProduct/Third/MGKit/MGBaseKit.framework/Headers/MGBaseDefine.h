@@ -2,8 +2,8 @@
 //  MGBaseDefine.h
 //  MGBaseAPI
 //
-//  Created by 张英堂 on 15/12/21.
-//  Copyright © 2015年 megvii. All rights reserved.
+//  Created by megvii on 15/12/21.
+//  Copyright © 2015Year megvii. All rights reserved.
 //
 
 #ifndef MGBaseDefine_h
@@ -11,7 +11,6 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-
 
 /* 屏幕宽度 （区别于viewcontroller.view.fream）*/
 #define MG_WIN_WIDTH  [UIScreen mainScreen].bounds.size.width
@@ -28,9 +27,6 @@
 /* rgba颜色 */
 #define MGColorWithRGB(R, G, B, A) [UIColor colorWithRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:A]
 
-
-
-
 #ifdef DEBUG
 #define MGLog(...) NSLog(__VA_ARGS__)
 #else
@@ -41,8 +37,5 @@ typedef void(^VoidBlock)();
 typedef void(^videoOutputBlock)(AVCaptureOutput *captureOutput,
                                 CMSampleBufferRef sampleBuffer,
                                 AVCaptureConnection *connection);
-
-
-
 
 #endif /* MGBaseDefine_h */

@@ -10,10 +10,15 @@
 
 @interface ChangePasswordTableViewCell : UITableViewCell<UITextFieldDelegate>
 
+
 @property (nonatomic,strong)UIView * backView;
+//左边的标题
 @property (nonatomic,strong)UILabel * titleLabel;
+//底部的线
 @property (nonatomic,strong)UIView * lineView;
+//右边的内容
 @property (nonatomic,strong)UITextField * contentTextField;
+//顶部的线
 @property (nonatomic,strong)UIView * topLineView;
 
 

@@ -25,6 +25,7 @@
              @"productList":[HomeProductsList class],
              @"infoList":[HomeInfoList class],
              @"thirdProductList":[HomeThirdProductList class],
+             @"redCollarList":[HomeRedCollarList class]
              };
 }
 
@@ -68,6 +69,11 @@
 @end
 
 @implementation HomeThirdExtAttr
+
+@end
+
+
+@implementation HomeRedCollarList
 
 @end
 

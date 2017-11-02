@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "MessageCenterViewController.h"
 #import "ReturnMsgBaseClass.h"
 
 @interface BaseViewController ()
@@ -46,8 +45,8 @@
 }
 
 - (void)click {
-    MessageCenterViewController *messView = [MessageCenterViewController new];
-    [self.navigationController pushViewController:messView animated:YES];
+    
+
 }
 
 - (void)setNavCallRightBar {
@@ -56,6 +55,11 @@
 
 - (void)addBackItem
 {
+    if (@available(iOS 11.0, *)) {
+        UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
+        self.navigationItem.leftBarButtonItem = aBarbi;
+        return;
+    }
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [btn setImage:img forState:UIControlStateNormal];
@@ -66,7 +70,33 @@
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = -15;
     self.navigationItem.leftBarButtonItems = @[spaceItem,item];
-//    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
+}
+
+- (void)addBackItemRoot
+{
+    if (@available(iOS 11.0, *)) {
+        UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(popRootBack)];
+        self.navigationItem.leftBarButtonItem = aBarbi;
+        return;
+    }
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [btn setImage:img forState:UIControlStateNormal];
+    btn.frame = CGRectMake(0, 0, 45, 44);
+    [btn addTarget:self action:@selector(popRootBack) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    //    修改距离,距离边缘的
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceItem.width = -15;
+    
+    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
+    //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
+}
+
+- (void)popRootBack
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)popBack

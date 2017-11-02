@@ -9,8 +9,6 @@
 #import "RegViewController.h"
 #import "ReturnMsgBaseClass.h"
 #import "LoginViewController.h"
-#import "RegDetailViewController.h"
-#import "RegSecoryViewController.h"
 #import "SMSViewModel.h"
 #import "LoginViewModel.h"
 #import "LoginMsgBaseClass.h"
@@ -218,8 +216,7 @@
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
     webVC.urlStr = [NSString stringWithFormat:@"%@%@?title=%@&type=%@",_H5_url,_loanDetial_url,@"register",@"1"];
     [self.navigationController pushViewController:webVC animated:true];
-//    RegDetailViewController *regDetail = [RegDetailViewController new];
-//    [self.navigationController pushViewController:regDetail animated:YES];
+
 }
 
 -(void)clicksecry{
@@ -228,8 +225,7 @@
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
     webVC.urlStr = [NSString stringWithFormat:@"%@%@?title=%@&type=%@",_H5_url,_loanDetial_url,@"secrecy",@"2"];
     [self.navigationController pushViewController:webVC animated:true];
-//    RegSecoryViewController *regSeVc = [RegSecoryViewController new];
-//    [self.navigationController pushViewController:regSeVc animated:YES];
+
 }
 
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {

@@ -27,6 +27,7 @@
 @property (nonatomic, copy)NSString<Optional> *cardNo;
 @property (nonatomic, copy)NSString<Optional> *cardShortName;
 @property (nonatomic, copy)NSString<Optional> *cardType;  //1:信用卡，2:借记卡
+@property (nonatomic, copy)NSString<Optional> *bankNameCode;  
 
 
 

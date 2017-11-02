@@ -10,8 +10,8 @@ import UIKit
 
 class AuthenticationCenterHeaderView: UIView {
 
-    var titleLabel : UILabel?
-    var descLabel : UILabel?
+   @objc var titleLabel : UILabel?
+   @objc var descLabel : UILabel?
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -35,6 +35,7 @@ extension AuthenticationCenterHeaderView{
 
     fileprivate func setupUI(){
     
+        //左边的标题
         titleLabel = UILabel()
         titleLabel?.textColor = UI_MAIN_COLOR
         titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -45,6 +46,7 @@ extension AuthenticationCenterHeaderView{
             make.height.equalTo(20)
         })
         
+        //右边的内容
         descLabel = UILabel()
         descLabel?.textColor = AuthenticationHeader_COLOR
         descLabel?.font = UIFont.systemFont(ofSize: 12)

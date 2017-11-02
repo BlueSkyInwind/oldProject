@@ -68,16 +68,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"个人信息";
+    self.navigationItem.title = @"身份信息";
      _placeHolderArr = @[@[@"请确保填写的均为本人真实信息",@"身份证识别"],@[@"姓名",@"身份证号"],@[@"学历",@"现居住地",@"居住地详址"]];
-
     NSString *device = [[UIDevice currentDevice] systemVersion];
-    if (device.floatValue>10) {
+    if (@available(iOS 11.0, *)) {
+         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+         self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }else if (@available(iOS 9.0, *)) {
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
-//        self.automaticallyAdjustsScrollViewInsets = false;
+        self.automaticallyAdjustsScrollViewInsets = false;
     }
-    
     index = 0;
     _pickerArray = [NSMutableArray array];
     _subPickerArray = [NSMutableArray array];
@@ -367,8 +368,7 @@
         }
             break;
         case 2:{
-            
-            ContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
+             ContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
             if (!cell) {
                 cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
             }
@@ -451,6 +451,7 @@
 #pragma mark - OCR识别结果
 - (void)checkIDCard:(MGIDCardSide)CardSide
 {
+    NSLog(@"%@",[MGIDCardManager IDCardVersion]);
     __unsafe_unretained PserInfoViewController *weakSelf = self;
     BOOL idcard = [MGIDCardManager getLicense];
     if (!idcard) {
@@ -459,7 +460,6 @@
     }
     
     MGIDCardManager *cardManager = [[MGIDCardManager alloc] init];
-    
     [cardManager IDCardStartDetection:self IdCardSide:CardSide
                                finish:^(MGIDCardModel *model) {
                                    //                                   weakSelf.cardView.image = [model croppedImageOfIDCard];
@@ -470,7 +470,6 @@
                                      //                                     DLog(@"%ld",MGIDCardError);
                                  }];
 }
-
 - (void)verifyIDCard:(UIImage *)image cardSide:(MGIDCardSide)cardSide
 {
     __unsafe_unretained PserInfoViewController *weakSelf = self;
@@ -942,7 +941,6 @@
         
     }];
 }
-
 
 //-(void)PostCustomerInfoSaveBase
 //{

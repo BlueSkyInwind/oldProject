@@ -20,10 +20,12 @@
     return sharedHHAlertInstance;
 }
 
-
 - (void)showHHalertView:(HHAlertEnterMode)Entermode leaveMode:(HHAlertLeaveMode)leaveMode disPlayMode:(HHAlertViewMode)mode title:(NSString *)titleStr detail:(NSString *)detailStr cencelBtn:(NSString *)cancelStr otherBtn:(NSArray *)otherBtnArr Onview:(UIView *) view
 {
-    HHAlertView *alertview = [[HHAlertView alloc] initWithTitle:titleStr detailText:detailStr cancelButtonTitle:cancelStr otherButtonTitles:otherBtnArr];
+    if (alertview) {
+        return;
+    }
+    alertview = [[HHAlertView alloc] initWithTitle:titleStr detailText:detailStr cancelButtonTitle:cancelStr otherButtonTitles:otherBtnArr];
     alertview.mode = mode;
     [alertview setEnterMode:Entermode];
     [alertview setLeaveMode:leaveMode];
@@ -33,14 +35,25 @@
 
 - (void)showHHalertView:(HHAlertEnterMode)Entermode leaveMode:(HHAlertLeaveMode)leaveMode disPlayMode:(HHAlertViewMode)mode title:(NSString *)titleStr detail:(NSString *)detailStr cencelBtn:(NSString *)cancelStr otherBtn:(NSArray *)otherBtnArr Onview:(UIView *) view compleBlock:(ClickBlock)clickIndexBlock
 {
-    HHAlertView *alertview = [[HHAlertView alloc] initWithTitle:titleStr detailText:detailStr cancelButtonTitle:cancelStr otherButtonTitles:otherBtnArr];
+    if (alertview) {
+        return;
+    }
+    alertview = [[HHAlertView alloc] initWithTitle:titleStr detailText:detailStr cancelButtonTitle:cancelStr otherButtonTitles:otherBtnArr];
     alertview.mode = mode;
     [alertview setEnterMode:Entermode];
     [alertview setLeaveMode:leaveMode];
     [view addSubview:alertview];
+    __weak typeof (self) weakSelf = self;
     [alertview showWithBlock:^(NSInteger index) {
         clickIndexBlock(index);
+        [weakSelf removeAlertView];
     }];
+}
+
+-(void)removeAlertView{
+    
+    [alertview removeFromSuperViewOnHide];
+    alertview = nil;
 }
 
 @end

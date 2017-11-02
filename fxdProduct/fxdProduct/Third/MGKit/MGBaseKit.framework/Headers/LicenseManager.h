@@ -3,7 +3,7 @@
 //  liveness
 //
 //  Created by 杨沐 on 15/12/23.
-//  Copyright (c) 2015年 megvii. All rights reserved.
+//  Copyright (c) 2015Year megvii. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

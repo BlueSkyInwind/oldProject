@@ -40,6 +40,12 @@
             frame.size.width = 375;
             frame.size.height = 660;
         }
+        
+        if (UI_IS_IPHONE4) {
+            
+            frame.size.width = 300;
+            frame.size.height = 430;
+        }
         self.frame = frame;
 //        _innerView.frame = frame;
 //        [self addSubview:_innerView];

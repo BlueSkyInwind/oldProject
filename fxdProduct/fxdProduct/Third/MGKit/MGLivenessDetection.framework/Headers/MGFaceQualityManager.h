@@ -3,7 +3,7 @@
 //  MGLivenessDetection
 //
 //  Created by 张英堂 on 16/3/28.
-//  Copyright © 2016年 megvii. All rights reserved.
+//  Copyright © 2016Year megvii. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,16 +15,16 @@
  */
 typedef NS_ENUM(NSInteger, MGFaceQualityErrorType) {
     MGFaceQualityErrorNone = 0,                   //没有错误
-    MGFaceQualityErrorFaceNotFound = 1,                     //没有人脸
+    MGFaceQualityErrorFaceNotFound,                     //没有人脸
     MGFaceQualityErrorFacePosDeviated,                   //yaw或pitch角度过大
     MGFaceQualityErrorFaceNonIntegrity,               //人脸的有效面积比过小
     MGFaceQualityErrorFaceTooDark,             //人脸亮度过小
-    MGFaceQualityErrorFaceTooBright = 5,           //人脸亮度过大
+    MGFaceQualityErrorFaceTooBright,           //人脸亮度过大
     MGFaceQualityErrorFaceTooSmall,               //人脸宽度过小
     MGFaceQualityErrorFaceTooLarge,               //人脸宽度过大
     MGFaceQualityErrorFaceTooBlurry,           //运动模糊度过大
     MGFaceQualityErrorFaceOutOfRect,                 //人脸偏移过大
-    MGFaceQualityErrorFrameNeedHolding = 10,                //需要连续一定帧数合格
+    MGFaceQualityErrorFrameNeedHolding,                //需要连续一定帧数合格
 };
 
 @interface MGFaceQualityManager : NSObject
@@ -87,7 +87,7 @@ typedef NS_ENUM(NSInteger, MGFaceQualityErrorType) {
 
 
 /**
- *  视频图像中的人脸宽度，相对值 默认值 0.4
+ *  视频图像中的人脸宽度，相对值 默认值 0. 4
  */
 @property (nonatomic, assign) float faceMaxSizeRatioThreshold;
 

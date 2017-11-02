@@ -66,7 +66,7 @@
     _subPickerArray = [NSMutableArray array];
     _thirdPickerArray = [NSMutableArray array];
     dataListAll = [NSMutableArray array];
-    self.navigationItem.title = @"职业信息";
+    self.navigationItem.title = @"个人信息";
     _placeHolderArr = @[@"请确保填写的均为本人真实信息",@"单位名称",@"单位电话",@"行业",@"单位所在地",@"单位详址"];
 //    _professionArray = @[@"生活/服务业",@"人力/行政/管理",@"销售/客服/采购/淘宝",
 //                         @"市场/媒介/广告/设计",@"生产/物流/质控/汽车",
@@ -75,12 +75,13 @@
     dataColor = [NSMutableArray array];
     dataListAll = [NSMutableArray array];
     _contactStatus = @"0";
-    
-    NSString *device = [[UIDevice currentDevice] systemVersion];
-    if (device.floatValue>10) {
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }else if (@available(iOS 9.0, *)) {
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{
-//        self.automaticallyAdjustsScrollViewInsets = false;
+        self.automaticallyAdjustsScrollViewInsets = false;
     }
     
     for (int i = 0; i < 6; i++) {
@@ -340,6 +341,11 @@
 - (void)saveBtnClick
 {
     DLog(@"保存");
+    if (_contactStatus.boolValue == false) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您完善联系人资料！"];
+        return;
+    }
+    
     if (![_cityCode.provinceCode isEqualToString:@""] && ![_cityCode.cityCode isEqualToString:@""] && ![_cityCode.districtCode isEqualToString:@""]) {
         //职业信息保存
         NSDictionary *dictry = [self getProfessionInfo];
@@ -353,7 +359,6 @@
                 }
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:_careerParse.msg];
                 [self.navigationController popViewControllerAnimated:true];
-                
             }else{
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
             }
@@ -596,7 +601,6 @@
 }
 
 -(void)obtainUserContactInfoStatus{
-    
     UserDataViewModel * userDataVM1 = [[UserDataViewModel alloc]init];
     [userDataVM1 setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];

@@ -28,7 +28,7 @@
     [self.immediateAuthorizationBtn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
     
 }
-#pragma mark -
+#pragma mark - 点击确认按钮
 -(void)click{
     
         DLog(@"%@",self.navigationController.viewControllers);

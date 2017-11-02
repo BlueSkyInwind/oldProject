@@ -14,11 +14,18 @@
 #import "ExpressViewController.h"
 #import "ApplicationViewModel.h"
 #import "ApplicaitonModel.h"
-
-@interface LoanSureFirstViewController ()
+#import "DiscountTicketModel.h"
+#import "UserStateModel.h"
+@interface LoanSureFirstViewController ()<DiscountCouponsViewDelegate>{
+    
+    DiscountTicketModel * discountTM;
+    DiscountTicketDetailModel * chooseDiscountTDM;
+    NSInteger chooseIndex;
+}
 
 @property (nonatomic, strong) YYTextView *textView;
 @property (nonatomic,strong) RateModel *rateModel;
+@property (nonatomic,strong) DiscountCouponsView * discountCouponsV;
 
 @end
 
@@ -28,7 +35,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"借款申请确认";
+    chooseIndex = 1;
     [self addBackItem];
+    
+    if ([_productId isEqualToString:SalaryLoan]) {
+        [self obtainDiscountTicket:^(DiscountTicketModel *discountTicketModel) {
+            if (discountTicketModel.valid != nil && discountTicketModel.valid.count != 0) {
+                [self addDiscountCoupons:discountTicketModel.valid[0]];
+            }
+        }];
+    }
+    
     [Tool setCorner:self.sureBtn borderColor:[UIColor clearColor]];
     NSString *str = self.agreementLabel.text;
     NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
@@ -38,13 +55,63 @@
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAgreement)];
     [self.agreementLabel addGestureRecognizer:tap1];
     [self.sureBtn addTarget:self action:@selector(getcreateApplication) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
--(void)viewWillAppear:(BOOL)animated{
+-(void)addDiscountCoupons:(DiscountTicketDetailModel *)discountTicketDetailM{
+    
+    chooseDiscountTDM = discountTicketDetailM;
+    float discountCouponsTop = 115;
+    if (UI_IS_IPHONE6P) {
+        discountCouponsTop = 164;
+    }else if (UI_IS_IPHONE6){
+        discountCouponsTop = 140;
+    }else if (UI_IS_IPHONE5){
+        self.headerViewHeight.constant = 190;
+        self.bottomViewBottom.constant = 60;
+    }
+    self.discountCouponsV = [[DiscountCouponsView alloc]initWithFrame:CGRectZero];
+    self.discountCouponsV.backgroundColor = kUIColorFromRGB(0xf2f2f2);
+    self.discountCouponsV.delegate = self;
+    self.discountCouponsV.amountLabel.text = [NSString stringWithFormat:@"+￥%@",chooseDiscountTDM.amount_payment_];
+     [self.view addSubview:self.discountCouponsV];
+    [self.discountCouponsV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@0);
+        make.right.equalTo(@0);
+        make.top.equalTo(self.headerView.mas_bottom).with.offset(0);
+        make.height.equalTo(@(discountCouponsTop));
+    }];
+    self.bottomViewTop.constant = discountCouponsTop;
+}
 
+#pragma DiscountCouponsDelergate
+-(void)pushChooseAmountView{
+    DiscountCouponViewController *discountCouponVC = [[DiscountCouponViewController alloc]init];
+    discountCouponVC.dataListArr = discountTM.valid;
+    discountCouponVC.currentIndex = [NSString stringWithFormat:@"%ld",chooseIndex];
+    discountCouponVC.view.frame = CGRectMake(0, 0, _k_w, _k_h * 0.6);
+    discountCouponVC.chooseDiscountTicket = ^(NSInteger index, DiscountTicketDetailModel * discountTicketDetailModel, NSString * str) {
+        chooseIndex = index;
+        chooseDiscountTDM = discountTicketDetailModel;
+        if (index != 0) {
+            self.discountCouponsV.amountLabel.text = [NSString stringWithFormat:@"+￥%@",chooseDiscountTDM.amount_payment_];
+        }else{
+            self.discountCouponsV.amountLabel.text = [NSString stringWithFormat:@"+￥0"];
+        }
+    };
+    [self presentSemiViewController:discountCouponVC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)} completion:nil dismissBlock:^{
+    }];
+}
+-(void)pushDirectionsForUse{
+    FXDWebViewController * webVC = [[FXDWebViewController alloc]init];
+    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_DiscountTicketRule_url];
+    [self.navigationController pushViewController:webVC animated:true];
+
+}
+-(void)viewWillAppear:(BOOL)animated{
     [self fatchRate];
 }
-
+#pragma 数据请求
 - (void)fatchRate
 {
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
@@ -60,56 +127,23 @@
         
     }];
     [applicationVM queryApplicationInfo:_productId];
-    
-    
-//    NSDictionary *dic = @{@"priduct_id_":_productId};
-//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) { 
-//        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
-//        _rateModel = rateParse;
-//        
-//        if ([rateParse.flag isEqualToString:@"0000"]) {
-//            if ([self.productId isEqualToString:SalaryLoan]) {
-//                [self setUpProductCredit];
-//            }
-//            if ([self.productId isEqualToString:RapidLoan]) {
-//                [self setUpProductQuickly];
-//            }
-//            if ([_productId isEqualToString:SalaryLoan]) {
-//                NSString *str = [NSString stringWithFormat:@"工薪贷产品：\n纯信用，无抵押借款，用户可提前结清不额外收费\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
-//                NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
-//                if (UI_IS_IPHONE5) {
-//                    contentText.yy_font = [UIFont systemFontOfSize:10];
-//                } else {
-//                    contentText.yy_font = [UIFont systemFontOfSize:14];
-//                }
-//                contentText.yy_color = rgb(122, 131, 139);
-//                self.textView.attributedText = contentText;
-//            }
-//            if ([_productId isEqualToString:RapidLoan]) {
-//                NSString *str = [NSString stringWithFormat:@"急速贷产品：\n5分钟申请,30分钟下款,极速体验\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
-//                NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
-//                contentText.yy_font = [UIFont systemFontOfSize:14];
-//                contentText.yy_color = rgb(122, 131, 139);
-//                self.textView.attributedText = contentText;
-//                self.specialLabel.text = @"用户在申请急速贷产品后不得同时继续申请其他产品";
-//            }
-//            if ([_productId isEqualToString:WhiteCollarLoan]) {
-//                NSString *str = [NSString stringWithFormat:@"白领贷产品：\n专为高端人群设计，超低费用，提前结清不额外收费\n利息：固定费率%.2f%%/日\n服务费：固定费率%.2f%%/日",rateParse.result.out_day_interest_fee_*100,rateParse.result.out_day_service_fee_*100];
-//                NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
-//                if (UI_IS_IPHONE5) {
-//                    contentText.yy_font = [UIFont systemFontOfSize:10];
-//                } else {
-//                    contentText.yy_font = [UIFont systemFontOfSize:14];
-//                }
-//                contentText.yy_color = rgb(122, 131, 139);
-//                self.textView.attributedText = contentText;
-//            }
-//        } else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
+}
+
+-(void)obtainDiscountTicket:(void(^)(DiscountTicketModel * discountTicketModel))finish{
+    ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
+    [applicationVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            DiscountTicketModel * discountTicketM = [[DiscountTicketModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            discountTM = discountTicketM;
+            finish(discountTicketM);
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [applicationVM obtainUserDiscountTicketList:@"1" displayType:@"1"];
 }
 
 - (YYTextView *)textView
@@ -133,8 +167,8 @@
     }
     return _textView;
 }
+
 -(void)setUpProductData:(ApplicaitonViewInfoModel *)applicationVM{
-    
 //    [self.productLogo sd_setImageWithURL:[NSURL URLWithString:applicationVM.icon] placeholderImage:[UIImage imageNamed:@"placeholderImage_Icon"] options:SDWebImageRefreshCached];
     [self.productLogo sd_setImageWithURL:[NSURL URLWithString:applicationVM.icon] placeholderImage:[UIImage imageNamed:@"placeholderImage_Icon"] options:SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
     } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
@@ -157,118 +191,27 @@
     [attriStr2 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, str.length-3)];
     [attriStr2 addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, str.length-3)];
     self.timeLabel.attributedText = attriStr2;
-     NSString * detailStr = @"";
-    for (NSString *str1  in applicationVM.detail) {
-        detailStr = [detailStr stringByAppendingString:str1];
-    } 
-    NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:detailStr];
-    if (UI_IS_IPHONE5) {
-        contentText.yy_font = [UIFont systemFontOfSize:12];
-    } else {
-        contentText.yy_font = [UIFont systemFontOfSize:14];
-    }
-    contentText.yy_color = rgb(122, 131, 139);
-    self.textView.attributedText = contentText;
-    
-    NSString * specialStr = @"";
+
+    NSString * specialStr = @" ";
     for (NSString *str2  in applicationVM.special) {
         specialStr = [specialStr stringByAppendingString:str2];
     }
     self.specialLabel.text = specialStr;
-}
-
-- (void)setUpProductCredit
-{
-    self.productLogo.image = [UIImage imageNamed:@"icon_Product1"];
-//    self.productTitle.text = @"工薪贷";
-    self.productTitle.text = _rateModel.result.name_;
-    if ([_model.applyFlag isEqualToString:@"0002"]) {
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"当前额度:"];
-        NSString *amountStr = [NSString stringWithFormat:@"%@元",_model.pre_prove_amt_];
-//     NSString *amountStr = _rateModel.result.ext_attr_.amt_desc_;
-        [attriStr yy_appendString:amountStr];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 5)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(5, amountStr.length-1)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5, amountStr.length)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
-        self.amountLabel.attributedText = attriStr;
-    }else {
-        NSString *str = [NSString stringWithFormat:@"额度:%ld-%ld元",_rateModel.result.principal_bottom_,_rateModel.result.principal_top_];
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:str];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, attriStr.length-4)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, attriStr.length-3)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
-        self.amountLabel.attributedText = attriStr;
-    }
-    self.timeLabel.text = [NSString stringWithFormat:@"期限:%ld-%ld%@",_rateModel.result.staging_bottom_,_rateModel.result.staging_top_,_rateModel.result.remark_];
-//    self.timeLabel.text = @"期限:5-50周";
-    self.specialLabel.text = @"用户在申请工薪贷产品后不得同时继续申请其他产品";
-}
-
-#pragma mark -> 白领贷页面显示
-
-- (void)setUpProductWhiteCollar
-{
-    self.productLogo.image = [UIImage imageNamed:@"home10"];
-    self.productTitle.text = _rateModel.result.name_;
-    if ([_model.applyFlag isEqualToString:@"0002"]) {
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"当前额度:"];
-        NSString *amountStr = [NSString stringWithFormat:@"%@元",_model.pre_prove_amt_];
-        [attriStr yy_appendString:amountStr];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 5)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(5, amountStr.length-1)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5, amountStr.length)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
-        self.amountLabel.attributedText = attriStr;
-    }else {
-        
-        NSString *str = [NSString stringWithFormat:@"额度:%ld-%ld元",_rateModel.result.principal_bottom_,_rateModel.result.principal_top_];
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:str];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, attriStr.length-4)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, attriStr.length-3)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
-        self.amountLabel.attributedText = attriStr;
-
-    }
     
-    self.timeLabel.text = [NSString stringWithFormat:@"期限:%ld-%ld%@",_rateModel.result.staging_bottom_,_rateModel.result.staging_top_,_rateModel.result.remark_];
-//    self.timeLabel.text = @"期限:5-52周";
-    self.specialLabel.text = @"用户在申请白领贷产品后不得同时继续申请其他产品";
-}
-
-- (void)setUpProductQuickly
-{
-    self.productLogo.image = [UIImage imageNamed:@"icon_Product2"];
-    self.productTitle.text = @"急速贷";
-    if ([_model.applyFlag isEqualToString:@"0002"]) {
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"当前额度:"];
-        NSString *amountStr = [NSString stringWithFormat:@"%@元",_model.pre_prove_amt_];
-        [attriStr yy_appendString:amountStr];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 5)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 5)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(5, amountStr.length-1)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(5, amountStr.length)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
-        self.amountLabel.attributedText = attriStr;
-    }else {
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"额度:"];
-        NSString *amountStr = [NSString stringWithFormat:@"%@元",_req_loan_amt];
-        [attriStr yy_appendString:amountStr];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(122, 131, 139) range:NSMakeRange(0, 3)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 3)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:19] range:NSMakeRange(3, amountStr.length - 1)];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, amountStr.length)];
-        [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(attriStr.length-1, 1)];
-        self.amountLabel.attributedText = attriStr;
+    NSString * detailStr = @"";
+    for (NSString *str1  in applicationVM.detail) {
+        detailStr = [detailStr stringByAppendingString:str1];
     }
-    
-    self.timeLabel.text =  [NSString stringWithFormat:@"%@天",_rateModel.result.ext_attr_.period_desc_];;
+    NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:detailStr];
+    if (UI_IS_IPHONE5) {
+        contentText.yy_font = [UIFont systemFontOfSize:12];
+        self.specialLabel.font = [UIFont systemFontOfSize:12];
+    } else {
+        contentText.yy_font = [UIFont systemFontOfSize:14];
+        self.specialLabel.font = [UIFont systemFontOfSize:14];
+    }
+    contentText.yy_color = rgb(122, 131, 139);
+    self.textView.attributedText = contentText;
 }
 
 #pragma mark -> 进件接口
@@ -287,7 +230,7 @@
     } WithFaileBlock:^{
         
     }];
-    [applicationVM userCreateApplication:_productId];
+    [applicationVM userCreateApplication:_productId platformCode:@"" baseId:chooseDiscountTDM.baseid_];
     
 }
 
@@ -342,8 +285,8 @@
 -(void)failed{
 
     CheckViewController *checkVC = [CheckViewController new];
-    checkVC.isSecondFailed = YES;
-    checkVC.product_id = _productId;
+//    checkVC.isSecondFailed = YES;
+//    checkVC.product_id = _productId;
     [self.navigationController pushViewController:checkVC animated:YES];
     
 }
@@ -351,8 +294,8 @@
 - (void)goCheckVC:(UserStateModel *)model
 {
     CheckViewController *checkVC = [CheckViewController new];
-    checkVC.userStateModel = model;
-    checkVC.task_status = model.taskStatus;
+//    checkVC.userStateModel = model;
+//    checkVC.task_status = model.taskStatus;
     [self.navigationController pushViewController:checkVC animated:YES];
 }
 

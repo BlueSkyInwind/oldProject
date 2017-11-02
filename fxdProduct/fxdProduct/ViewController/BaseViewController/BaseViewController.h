@@ -20,4 +20,6 @@
 
 - (void)addBackItem;
 
+- (void)addBackItemRoot;
+
 @end

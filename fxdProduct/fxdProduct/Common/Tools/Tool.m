@@ -12,6 +12,16 @@
 
 @implementation Tool
 
+static Tool * shareTool = nil;
++(Tool *)share{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shareTool = [[Tool alloc]init];
+    });
+    return shareTool;
+}
+
+
 //获取加密参数
 + (NSDictionary *)getParameters:(id)params
 {
@@ -20,6 +30,12 @@
 + (float)getIOSVersion
 {
     return [[[UIDevice currentDevice] systemVersion] floatValue];
+}
++ (NSString *)getAppVersion
+{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    return app_Version;
 }
 //加密json串
 + (NSString *)getEncryptStringWithParameters:(id)params
@@ -74,6 +90,7 @@
     return dateStr;
 }
 
+
 + (NSString *)getNowTime
 {
     NSDate *date = [NSDate date];
@@ -110,6 +127,7 @@
     return timeStr;
 }
 
+
 + (NSString *)timestampToTimeFormat:(NSTimeInterval)timestamp
 {
     //    NSString *longOftimesTamp = [NSString stringWithFormat:@"%.0lf", timestamp];
@@ -134,6 +152,8 @@
     formatter = nil;
     return timeStr;
 }
+
+
 
 + (UInt64)getNowTimeMS
 {
@@ -350,16 +370,12 @@
                         endStr =[NSMutableString stringWithFormat:@"%@",[endStr substringToIndex:endStr.length-1]];
                     }
                 }
-                
-                
             }else{
                 if (!zero) {
                     [endStr appendString:numArr[MyData]];
                     zero=YES;
                 }
-                
             }
-            
         }else{
             //拼接数字
             [endStr appendString:numArr[MyData]];
@@ -414,6 +430,44 @@
     [alertController addAction:action];
     [vc presentViewController:alertController animated:true completion:nil];
 }
+
++(void)ClipboardOfCopy:(NSString *)copyStr VC:(UIViewController *)vc prompt:(NSString *)str{
+    
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = copyStr;
+    [[MBPAlertView sharedMBPTextView] showTextOnly:vc.view message:str];
+    
+}
+
+
+/**
+ 获取当前视图
+ 
+ @return 返回结果
+ */
+-(UIViewController *)topViewController{
+    return [self topViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+}
+
+- (UIViewController *)topViewController:(UIViewController *)rootViewController
+{
+    if (rootViewController.presentedViewController == nil) {
+        return rootViewController;
+    }
+    if ([rootViewController.presentedViewController isMemberOfClass:[UINavigationController class]]) {
+        UINavigationController * navigationController = (UINavigationController *)rootViewController.presentedViewController;
+        UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
+        return [self topViewController:lastViewController];
+    }
+    
+    UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
+    return [self topViewController:presentedViewController];
+}
+
+
+
+
+
 
 
 @end

@@ -12,10 +12,10 @@
 
 
 #import <UIKit/UIKit.h>
+#import <MGBaseKit/MGBaseKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "LivenessEnumType.h"
-#import <MGBaseKit/MGBaseKit.h>
-
+#define MG_LANDMARK_POINTS_NUM 7
 /*!
  *  人脸属性
  */
@@ -32,6 +32,7 @@ typedef struct  {
     float blurness_gaussian  ;
     /** 人脸位置 */
     CGRect face_rect;
+    CGPoint face_landmarks[MG_LANDMARK_POINTS_NUM];
     /** 左眼睁闭程度 */
     float eye_left_hwratio  ;
     /** 右眼睁闭程度 */
@@ -71,6 +72,7 @@ typedef struct  {
     /** 综合图片质量 */
     float quality  ;
     float smooth_quality;
+    bool face_too_large;
 }MGFaceAttr;
 
 

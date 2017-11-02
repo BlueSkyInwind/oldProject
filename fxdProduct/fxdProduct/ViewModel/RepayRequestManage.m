@@ -31,7 +31,7 @@
 -(void)checkState{
     
 
-    if ([self.platform_type isEqualToString:@"0"]) {
+    if ([self.platform_type isEqualToString:@"0"]||[self.platform_type isEqualToString:@"3"]) {
         
         if ([self.product_id isEqualToString:RapidLoan] || [self.product_id isEqualToString:DeriveRapidLoan]) {
             [self post_getLastDate];

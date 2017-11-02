@@ -69,8 +69,13 @@
 
 - (void)addBack
 {
+    if (@available(iOS 11.0, *)) {
+        UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
+        //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
+        self.navigationItem.leftBarButtonItem = aBarbi;
+        return;
+    }
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    
     UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [btn setImage:img forState:UIControlStateNormal];
     btn.frame = CGRectMake(0, 0, 45, 44);
@@ -150,7 +155,7 @@
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     
     
-    
+
 }
 #pragma mark  fxd用户状态查询，viewmodel
 -(void)getUserStatus:(NSString *)applicationId{

@@ -20,6 +20,7 @@
 
 //新的api
 @property (strong,nonatomic)NSString<Optional> * gathering;
+@property (strong,nonatomic)NSString<Optional> * gatheringEdit;
 @property (strong,nonatomic)NSString<Optional> * identity;
 @property (strong,nonatomic)NSString<Optional> * identityEdit;
 @property (strong,nonatomic)NSString<Optional> * others;
@@ -29,7 +30,10 @@
 @property (strong,nonatomic)NSString<Optional> * test;
 @property (strong,nonatomic)NSString<Optional> * faceIdentity;
 @property (strong,nonatomic)NSString<Optional> * telephone;
+@property (strong,nonatomic)NSString<Optional> * telephoneEdit;
 @property (strong,nonatomic)NSString<Optional> * zmIdentity;
+@property (strong,nonatomic)NSString<Optional> * zmIdentityEdit;
+
 
 @end
 

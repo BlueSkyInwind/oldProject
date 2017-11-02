@@ -9,10 +9,11 @@
 #import "BaseViewController.h"
 
 @interface SesameCreditViewController : BaseViewController
+//确认按钮
 @property (weak, nonatomic) IBOutlet UIButton *immediateAuthorizationBtn;
-
+//真是姓名
 @property (weak, nonatomic) IBOutlet UITextField *realNameTextField;
-
+//用户id
 @property (weak, nonatomic) IBOutlet UITextField *userIDNumberTextField;
 
 @end
