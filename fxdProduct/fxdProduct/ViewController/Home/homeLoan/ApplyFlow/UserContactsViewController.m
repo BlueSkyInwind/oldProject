@@ -52,14 +52,7 @@
     _contact2 = @[@"同事",@"朋友"];
     _flagTag = 0;
     _toolbarCancelDone.hidden = true;
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-    }else if (@available(iOS 9.0, *)) {
-        self.automaticallyAdjustsScrollViewInsets = true;
-    }else{
-        self.automaticallyAdjustsScrollViewInsets = false;
-    }
+
     dataListAll = [NSMutableArray array];
     dataColor = [NSMutableArray array];
     for (int i = 0; i < 6; i++) {
@@ -78,7 +71,14 @@
     self.tableView.tableHeaderView = [self tableViewHeaderView];
     [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
-    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }else if (@available(iOS 9.0, *)) {
+        self.automaticallyAdjustsScrollViewInsets = true;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = false;
+    }
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, 100)];
     _saveBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [footView addSubview:_saveBtn];

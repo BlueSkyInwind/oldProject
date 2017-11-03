@@ -71,14 +71,6 @@
     self.navigationItem.title = @"身份信息";
      _placeHolderArr = @[@[@"请确保填写的均为本人真实信息",@"身份证识别"],@[@"姓名",@"身份证号"],@[@"学历",@"现居住地",@"居住地详址"]];
     NSString *device = [[UIDevice currentDevice] systemVersion];
-    if (@available(iOS 11.0, *)) {
-         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-         self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-    }else if (@available(iOS 9.0, *)) {
-        self.automaticallyAdjustsScrollViewInsets = true;
-    }else{
-        self.automaticallyAdjustsScrollViewInsets = false;
-    }
     index = 0;
     _pickerArray = [NSMutableArray array];
     _subPickerArray = [NSMutableArray array];
@@ -127,7 +119,14 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([IdentityCell class]) bundle:nil] forCellReuseIdentifier:@"IdentityCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
     [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
-    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    }else if (@available(iOS 9.0, *)) {
+        self.automaticallyAdjustsScrollViewInsets = true;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = false;
+    }
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, 100)];
     _saveBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [footView addSubview:_saveBtn];
