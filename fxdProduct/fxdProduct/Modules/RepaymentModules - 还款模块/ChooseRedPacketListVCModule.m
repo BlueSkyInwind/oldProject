@@ -1,23 +1,23 @@
 //
-//  SelectTableViewController.m
+//  ChooseRedPacketListVCModule.m
 //  present
 //
 //  Created by dd on 16/5/20.
 //  Copyright © 2016年 dd. All rights reserved.
 //
 
-#import "SelectTableViewController.h"
+#import "ChooseRedPacketListVCModule.h"
 #import "RepayMentAvailableRedpackets.h"
 #import "UIViewController+KNSemiModal.h"
 #import "RepayListInfo.h"
 
-@interface SelectTableViewController ()
+@interface ChooseRedPacketListVCModule ()
 
 @property (nonatomic, assign) NSInteger index;
 
 @end
 
-@implementation SelectTableViewController
+@implementation ChooseRedPacketListVCModule
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

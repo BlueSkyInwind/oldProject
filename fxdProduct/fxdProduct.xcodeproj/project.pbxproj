@@ -410,7 +410,7 @@
 		63FF48401B6F0322009E384C /* HomePageVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF483E1B6F0322009E384C /* HomePageVCModules.m */; };
 		63FF484A1B6F036F009E384C /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48481B6F036F009E384C /* MyViewController.m */; };
 		63FF484B1B6F036F009E384C /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FF48491B6F036F009E384C /* MyViewController.xib */; };
-		63FF48581B6F15DB009E384C /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */; };
+		63FF48581B6F15DB009E384C /* FXDBaseTabBarVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* FXDBaseTabBarVCModule.m */; };
 		63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */; };
 		840911A21F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */; };
 		840911A31F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */; };
@@ -542,11 +542,11 @@
 		84A635131F01096900146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
 		84C619BC1FA815A800626411 /* LoanPeriodForDetailsVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6198F1FA8149700626411 /* LoanPeriodForDetailsVCModule.m */; };
 		84C619BD1FA815EB00626411 /* PayMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619971FA8149700626411 /* PayMethodViewController.m */; };
-		84C619BE1FA815EB00626411 /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6199A1FA8149700626411 /* PayViewController.m */; };
+		84C619BE1FA815EB00626411 /* DefaultCardPopoverWindowModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6199A1FA8149700626411 /* DefaultCardPopoverWindowModule.m */; };
 		84C619BF1FA815EB00626411 /* RepayDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6199D1FA8149700626411 /* RepayDetailViewController.m */; };
 		84C619C01FA815EB00626411 /* LoanPeriodListVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A01FA8149700626411 /* LoanPeriodListVCModule.m */; };
-		84C619C11FA815EB00626411 /* SelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A31FA8149700626411 /* SelectTableViewController.m */; };
-		84C619C21FA815EB00626411 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A51FA8149700626411 /* UserBankCardListViewController.m */; };
+		84C619C11FA815EB00626411 /* ChooseRedPacketListVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A31FA8149700626411 /* ChooseRedPacketListVCModule.m */; };
+		84C619C21FA815EB00626411 /* UserBankCardListVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A51FA8149700626411 /* UserBankCardListVCModule.m */; };
 		84C619C31FA815EB00626411 /* BankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A81FA8149700626411 /* BankListCell.m */; };
 		84C619C41FA815EB00626411 /* DetailRepayHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619AB1FA8149700626411 /* DetailRepayHeader.m */; };
 		84C619C51FA815EB00626411 /* PayDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619AE1FA8149700626411 /* PayDisplayCell.m */; };
@@ -556,11 +556,11 @@
 		84C619C91FA815EB00626411 /* RepayListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619BA1FA8149700626411 /* RepayListCell.m */; };
 		84C619CA1FA8161F00626411 /* LoanPeriodForDetailsVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6198F1FA8149700626411 /* LoanPeriodForDetailsVCModule.m */; };
 		84C619CB1FA8161F00626411 /* PayMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619971FA8149700626411 /* PayMethodViewController.m */; };
-		84C619CC1FA8161F00626411 /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6199A1FA8149700626411 /* PayViewController.m */; };
+		84C619CC1FA8161F00626411 /* DefaultCardPopoverWindowModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6199A1FA8149700626411 /* DefaultCardPopoverWindowModule.m */; };
 		84C619CD1FA8161F00626411 /* RepayDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6199D1FA8149700626411 /* RepayDetailViewController.m */; };
 		84C619CE1FA8161F00626411 /* LoanPeriodListVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A01FA8149700626411 /* LoanPeriodListVCModule.m */; };
-		84C619CF1FA8161F00626411 /* SelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A31FA8149700626411 /* SelectTableViewController.m */; };
-		84C619D01FA8161F00626411 /* UserBankCardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A51FA8149700626411 /* UserBankCardListViewController.m */; };
+		84C619CF1FA8161F00626411 /* ChooseRedPacketListVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A31FA8149700626411 /* ChooseRedPacketListVCModule.m */; };
+		84C619D01FA8161F00626411 /* UserBankCardListVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A51FA8149700626411 /* UserBankCardListVCModule.m */; };
 		84C619D11FA8161F00626411 /* BankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619A81FA8149700626411 /* BankListCell.m */; };
 		84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619AB1FA8149700626411 /* DetailRepayHeader.m */; };
 		84C619D31FA8161F00626411 /* PayDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619AE1FA8149700626411 /* PayDisplayCell.m */; };
@@ -572,7 +572,7 @@
 		84C619E41FA8173D00626411 /* BankCardNameVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619DC1FA816A000626411 /* BankCardNameVCModules.m */; };
 		84C619E81FA81D3E00626411 /* LoanPeriodForDetailsVCModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C619901FA8149700626411 /* LoanPeriodForDetailsVCModule.xib */; };
 		84C619E91FA81D3E00626411 /* PayMethodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C619981FA8149700626411 /* PayMethodViewController.xib */; };
-		84C619EA1FA81D3E00626411 /* PayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6199B1FA8149700626411 /* PayViewController.xib */; };
+		84C619EA1FA81D3E00626411 /* DefaultCardPopoverWindowModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6199B1FA8149700626411 /* DefaultCardPopoverWindowModule.xib */; };
 		84C619EB1FA81D3E00626411 /* RepayDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6199E1FA8149700626411 /* RepayDetailViewController.xib */; };
 		84C619EC1FA81D3E00626411 /* LoanPeriodListVCModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C619A11FA8149700626411 /* LoanPeriodListVCModule.xib */; };
 		84C619ED1FA81D3E00626411 /* BankListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C619A91FA8149700626411 /* BankListCell.xib */; };
@@ -592,7 +592,7 @@
 		84C619FB1FA81E7000626411 /* repay_circle_un@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C619941FA8149700626411 /* repay_circle_un@2x.png */; };
 		84C619FC1FA81E7000626411 /* repay_circle_un@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C619951FA8149700626411 /* repay_circle_un@3x.png */; };
 		84C619FD1FA81E7000626411 /* PayMethodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C619981FA8149700626411 /* PayMethodViewController.xib */; };
-		84C619FE1FA81E7000626411 /* PayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6199B1FA8149700626411 /* PayViewController.xib */; };
+		84C619FE1FA81E7000626411 /* DefaultCardPopoverWindowModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6199B1FA8149700626411 /* DefaultCardPopoverWindowModule.xib */; };
 		84C619FF1FA81E7000626411 /* RepayDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6199E1FA8149700626411 /* RepayDetailViewController.xib */; };
 		84C61A001FA81E7000626411 /* LoanPeriodListVCModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C619A11FA8149700626411 /* LoanPeriodListVCModule.xib */; };
 		84C61A011FA81E7000626411 /* BankListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C619A91FA8149700626411 /* BankListCell.xib */; };
@@ -860,7 +860,7 @@
 		CC0DFA441EA5B1090024841A /* ShouldAlsoAmountBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7A91BE34F9F00C32919 /* ShouldAlsoAmountBaseClass.m */; };
 		CC0DFA451EA5B1090024841A /* EmptyUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BC61DEBFED0008EAFD1 /* EmptyUserData.m */; };
 		CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEACE231CA10B480027859A /* NSString+Validate.m */; };
-		CC0DFA471EA5B1090024841A /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */; };
+		CC0DFA471EA5B1090024841A /* FXDBaseTabBarVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* FXDBaseTabBarVCModule.m */; };
 		CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6348310D1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m */; };
 		CC0DFA4A1EA5B1090024841A /* FXDNetWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6395E2A91BAFA14E00B7AFC2 /* FXDNetWorkManager.m */; };
 		CC0DFA4C1EA5B1090024841A /* CoreArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C001BE063A90036E8EF /* CoreArchive.m */; };
@@ -1984,8 +1984,8 @@
 		63FF48471B6F036F009E384C /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		63FF48481B6F036F009E384C /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; wrapsLines = 1; };
 		63FF48491B6F036F009E384C /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
-		63FF48561B6F15DB009E384C /* BaseTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarViewController.h; sourceTree = "<group>"; };
-		63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarViewController.m; sourceTree = "<group>"; };
+		63FF48561B6F15DB009E384C /* FXDBaseTabBarVCModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXDBaseTabBarVCModule.h; sourceTree = "<group>"; };
+		63FF48571B6F15DB009E384C /* FXDBaseTabBarVCModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXDBaseTabBarVCModule.m; sourceTree = "<group>"; };
 		63FFFBEC1D86B285000E3C38 /* NSDictionary+NilSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NilSafe.h"; sourceTree = "<group>"; };
 		63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NilSafe.m"; sourceTree = "<group>"; };
 		840911A01F6F997E00DCDF03 /* JSAndOCInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAndOCInteraction.h; sourceTree = "<group>"; };
@@ -2102,19 +2102,19 @@
 		84C619961FA8149700626411 /* PayMethodViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayMethodViewController.h; sourceTree = "<group>"; };
 		84C619971FA8149700626411 /* PayMethodViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayMethodViewController.m; sourceTree = "<group>"; };
 		84C619981FA8149700626411 /* PayMethodViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayMethodViewController.xib; sourceTree = "<group>"; };
-		84C619991FA8149700626411 /* PayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayViewController.h; sourceTree = "<group>"; };
-		84C6199A1FA8149700626411 /* PayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
-		84C6199B1FA8149700626411 /* PayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayViewController.xib; sourceTree = "<group>"; };
+		84C619991FA8149700626411 /* DefaultCardPopoverWindowModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultCardPopoverWindowModule.h; sourceTree = "<group>"; };
+		84C6199A1FA8149700626411 /* DefaultCardPopoverWindowModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultCardPopoverWindowModule.m; sourceTree = "<group>"; };
+		84C6199B1FA8149700626411 /* DefaultCardPopoverWindowModule.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultCardPopoverWindowModule.xib; sourceTree = "<group>"; };
 		84C6199C1FA8149700626411 /* RepayDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RepayDetailViewController.h; sourceTree = "<group>"; };
 		84C6199D1FA8149700626411 /* RepayDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RepayDetailViewController.m; sourceTree = "<group>"; };
 		84C6199E1FA8149700626411 /* RepayDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepayDetailViewController.xib; sourceTree = "<group>"; };
 		84C6199F1FA8149700626411 /* LoanPeriodListVCModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoanPeriodListVCModule.h; sourceTree = "<group>"; };
 		84C619A01FA8149700626411 /* LoanPeriodListVCModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoanPeriodListVCModule.m; sourceTree = "<group>"; };
 		84C619A11FA8149700626411 /* LoanPeriodListVCModule.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoanPeriodListVCModule.xib; sourceTree = "<group>"; };
-		84C619A21FA8149700626411 /* SelectTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectTableViewController.h; sourceTree = "<group>"; };
-		84C619A31FA8149700626411 /* SelectTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectTableViewController.m; sourceTree = "<group>"; };
-		84C619A41FA8149700626411 /* UserBankCardListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserBankCardListViewController.h; sourceTree = "<group>"; };
-		84C619A51FA8149700626411 /* UserBankCardListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserBankCardListViewController.m; sourceTree = "<group>"; };
+		84C619A21FA8149700626411 /* ChooseRedPacketListVCModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseRedPacketListVCModule.h; sourceTree = "<group>"; };
+		84C619A31FA8149700626411 /* ChooseRedPacketListVCModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseRedPacketListVCModule.m; sourceTree = "<group>"; };
+		84C619A41FA8149700626411 /* UserBankCardListVCModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserBankCardListVCModule.h; sourceTree = "<group>"; };
+		84C619A51FA8149700626411 /* UserBankCardListVCModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserBankCardListVCModule.m; sourceTree = "<group>"; };
 		84C619A71FA8149700626411 /* BankListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankListCell.h; sourceTree = "<group>"; };
 		84C619A81FA8149700626411 /* BankListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankListCell.m; sourceTree = "<group>"; };
 		84C619A91FA8149700626411 /* BankListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BankListCell.xib; sourceTree = "<group>"; };
@@ -2532,6 +2532,7 @@
 				84EC95B01F5AC4E3008656BA /* FeeDescriptionTableViewCell.m */,
 				84EC95B11F5AC4E3008656BA /* FeeDescriptionTableViewCell.xib */,
 				CC6F06781F74F26B00FA889E /* PickView.swift */,
+				84C619A61FA8149700626411 /* RepaymentView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4015,6 +4016,8 @@
 				638A16851E5030D700AB8AB6 /* SetUpFMDevice.m */,
 				840911A01F6F997E00DCDF03 /* JSAndOCInteraction.h */,
 				840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */,
+				84C619D91FA816A000626411 /* PhoneContactsManager.h */,
+				84C619DA1FA816A000626411 /* PhoneContactsManager.m */,
 				8499BF891F50231600F193F9 /* MXVerifyManager.swift */,
 				84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */,
 				CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */,
@@ -4208,17 +4211,15 @@
 		63ED33301B6B4472008B6085 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				84C619D81FA816A000626411 /* ProcessOfGetMoney */,
 				84C6198D1FA8149700626411 /* RepaymentModules - 还款模块 */,
 				63A24BEB1BE063A90036E8EF /* LaunchModules - 启动模块 */,
 				63DE56F91DE7CC4200747AE2 /* WebVCModules - 浏览器模块 */,
 				84DFBED71F4D7C520009DAB9 /* UserAuthenticationCenterModules - 用户认证中心模块 */,
 				0F047F3D1C4F814F002ED7C0 /* LoanApplicationModule - 申请模块 */,
 				63ED333A1B6B523E008B6085 /* HomePageModules - 首页 */,
-				63ED333B1B6B523E008B6085 /* Login */,
+				63ED333B1B6B523E008B6085 /* LoginAndRegisterModules - 登录注册 */,
 				63ED333C1B6B523E008B6085 /* More */,
 				63ED333D1B6B523E008B6085 /* My */,
-				63ED333E1B6B523E008B6085 /* Register */,
 				63ED33311B6B4472008B6085 /* BaseViewController */,
 			);
 			name = Modules;
@@ -4232,8 +4233,8 @@
 				63ED33331B6B4570008B6085 /* BaseViewController.m */,
 				63ED33351B6B4593008B6085 /* BaseNavigationViewController.h */,
 				63ED33361B6B4593008B6085 /* BaseNavigationViewController.m */,
-				63FF48561B6F15DB009E384C /* BaseTabBarViewController.h */,
-				63FF48571B6F15DB009E384C /* BaseTabBarViewController.m */,
+				63FF48561B6F15DB009E384C /* FXDBaseTabBarVCModule.h */,
+				63FF48571B6F15DB009E384C /* FXDBaseTabBarVCModule.m */,
 				6313DC1E1BB512BD00EB45DE /* BaseIndexViewController.h */,
 				6313DC1F1BB512BD00EB45DE /* BaseIndexViewController.m */,
 				63741E321D3CC10900C0E2F8 /* PayNavigationViewController.h */,
@@ -4264,18 +4265,21 @@
 			path = "HomePageModules - 首页";
 			sourceTree = "<group>";
 		};
-		63ED333B1B6B523E008B6085 /* Login */ = {
+		63ED333B1B6B523E008B6085 /* LoginAndRegisterModules - 登录注册 */ = {
 			isa = PBXGroup;
 			children = (
 				84C61A101FA828D000626411 /* FindPass */,
 				842C0B511ED5909E00366D11 /* LoginViewController.h */,
 				842C0B521ED5909E00366D11 /* LoginViewController.m */,
 				842C0B581ED599DE00366D11 /* LoginViewController.xib */,
+				63ED33441B6B5569008B6085 /* RegViewController.h */,
+				63ED33451B6B5569008B6085 /* RegViewController.m */,
+				633DAC071C34D47A000DA852 /* RegViewController.xib */,
 				630D46141BCCD2FB00874064 /* UpdateDevIDViewController.h */,
 				630D46151BCCD2FB00874064 /* UpdateDevIDViewController.m */,
 				630D46161BCCD2FB00874064 /* UpdateDevIDViewController.xib */,
 			);
-			path = Login;
+			path = "LoginAndRegisterModules - 登录注册";
 			sourceTree = "<group>";
 		};
 		63ED333C1B6B523E008B6085 /* More */ = {
@@ -4311,16 +4315,6 @@
 				63F254711E499C8000852CF1 /* InvitationViewController.m */,
 			);
 			path = My;
-			sourceTree = "<group>";
-		};
-		63ED333E1B6B523E008B6085 /* Register */ = {
-			isa = PBXGroup;
-			children = (
-				63ED33441B6B5569008B6085 /* RegViewController.h */,
-				63ED33451B6B5569008B6085 /* RegViewController.m */,
-				633DAC071C34D47A000DA852 /* RegViewController.xib */,
-			);
-			path = Register;
 			sourceTree = "<group>";
 		};
 		63F0E1C21CE57B80001251A9 /* BSFinger */ = {
@@ -4700,27 +4694,24 @@
 			isa = PBXGroup;
 			children = (
 				847D52321F58021B004BB11B /* RenewalModules-续期 */,
+				84C619911FA8149700626411 /* Image */,
 				84C6198E1FA8149700626411 /* LoanPeriodForDetailsVCModule.h */,
 				84C6198F1FA8149700626411 /* LoanPeriodForDetailsVCModule.m */,
 				84C619901FA8149700626411 /* LoanPeriodForDetailsVCModule.xib */,
-				84C619911FA8149700626411 /* Image */,
-				84C619961FA8149700626411 /* PayMethodViewController.h */,
-				84C619971FA8149700626411 /* PayMethodViewController.m */,
-				84C619981FA8149700626411 /* PayMethodViewController.xib */,
-				84C619991FA8149700626411 /* PayViewController.h */,
-				84C6199A1FA8149700626411 /* PayViewController.m */,
-				84C6199B1FA8149700626411 /* PayViewController.xib */,
 				84C6199C1FA8149700626411 /* RepayDetailViewController.h */,
 				84C6199D1FA8149700626411 /* RepayDetailViewController.m */,
 				84C6199E1FA8149700626411 /* RepayDetailViewController.xib */,
 				84C6199F1FA8149700626411 /* LoanPeriodListVCModule.h */,
 				84C619A01FA8149700626411 /* LoanPeriodListVCModule.m */,
 				84C619A11FA8149700626411 /* LoanPeriodListVCModule.xib */,
-				84C619A21FA8149700626411 /* SelectTableViewController.h */,
-				84C619A31FA8149700626411 /* SelectTableViewController.m */,
-				84C619A41FA8149700626411 /* UserBankCardListViewController.h */,
-				84C619A51FA8149700626411 /* UserBankCardListViewController.m */,
-				84C619A61FA8149700626411 /* View */,
+				84C619961FA8149700626411 /* PayMethodViewController.h */,
+				84C619971FA8149700626411 /* PayMethodViewController.m */,
+				84C619981FA8149700626411 /* PayMethodViewController.xib */,
+				84C619991FA8149700626411 /* DefaultCardPopoverWindowModule.h */,
+				84C6199A1FA8149700626411 /* DefaultCardPopoverWindowModule.m */,
+				84C6199B1FA8149700626411 /* DefaultCardPopoverWindowModule.xib */,
+				84C619A21FA8149700626411 /* ChooseRedPacketListVCModule.h */,
+				84C619A31FA8149700626411 /* ChooseRedPacketListVCModule.m */,
 			);
 			path = "RepaymentModules - 还款模块";
 			sourceTree = "<group>";
@@ -4736,7 +4727,7 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
-		84C619A61FA8149700626411 /* View */ = {
+		84C619A61FA8149700626411 /* RepaymentView */ = {
 			isa = PBXGroup;
 			children = (
 				84C619A71FA8149700626411 /* BankListCell.h */,
@@ -4761,18 +4752,8 @@
 				84C619BA1FA8149700626411 /* RepayListCell.m */,
 				84C619BB1FA8149700626411 /* RepayListCell.xib */,
 			);
+			name = RepaymentView;
 			path = View;
-			sourceTree = "<group>";
-		};
-		84C619D81FA816A000626411 /* ProcessOfGetMoney */ = {
-			isa = PBXGroup;
-			children = (
-				84C619D91FA816A000626411 /* PhoneContactsManager.h */,
-				84C619DA1FA816A000626411 /* PhoneContactsManager.m */,
-				84C619DB1FA816A000626411 /* BankCardNameVCModules.h */,
-				84C619DC1FA816A000626411 /* BankCardNameVCModules.m */,
-			);
-			path = ProcessOfGetMoney;
 			sourceTree = "<group>";
 		};
 		84C61A101FA828D000626411 /* FindPass */ = {
@@ -4815,6 +4796,10 @@
 		84DFBED71F4D7C520009DAB9 /* UserAuthenticationCenterModules - 用户认证中心模块 */ = {
 			isa = PBXGroup;
 			children = (
+				84C619DB1FA816A000626411 /* BankCardNameVCModules.h */,
+				84C619DC1FA816A000626411 /* BankCardNameVCModules.m */,
+				84C619A41FA8149700626411 /* UserBankCardListVCModule.h */,
+				84C619A51FA8149700626411 /* UserBankCardListVCModule.m */,
 				CC989C2E1F4D84A9000CDACF /* AuthenticationCenterVCModules.h */,
 				CC989C2F1F4D84A9000CDACF /* AuthenticationCenterVCModules.m */,
 				84A3802C1FAC40A2008FB7AF /* UserDataEvaluationVCModules.swift */,
@@ -5242,7 +5227,7 @@
 				84C619FB1FA81E7000626411 /* repay_circle_un@2x.png in Resources */,
 				84C619FC1FA81E7000626411 /* repay_circle_un@3x.png in Resources */,
 				84C619FD1FA81E7000626411 /* PayMethodViewController.xib in Resources */,
-				84C619FE1FA81E7000626411 /* PayViewController.xib in Resources */,
+				84C619FE1FA81E7000626411 /* DefaultCardPopoverWindowModule.xib in Resources */,
 				84C619FF1FA81E7000626411 /* RepayDetailViewController.xib in Resources */,
 				84C61A001FA81E7000626411 /* LoanPeriodListVCModule.xib in Resources */,
 				84C61A011FA81E7000626411 /* BankListCell.xib in Resources */,
@@ -5341,7 +5326,7 @@
 				84C619F71FA81E2C00626411 /* repay_circle_un@3x.png in Resources */,
 				84C619E81FA81D3E00626411 /* LoanPeriodForDetailsVCModule.xib in Resources */,
 				84C619E91FA81D3E00626411 /* PayMethodViewController.xib in Resources */,
-				84C619EA1FA81D3E00626411 /* PayViewController.xib in Resources */,
+				84C619EA1FA81D3E00626411 /* DefaultCardPopoverWindowModule.xib in Resources */,
 				84C619EB1FA81D3E00626411 /* RepayDetailViewController.xib in Resources */,
 				84C619EC1FA81D3E00626411 /* LoanPeriodListVCModule.xib in Resources */,
 				84C619ED1FA81D3E00626411 /* BankListCell.xib in Resources */,
@@ -5602,11 +5587,11 @@
 				84C61A081FA81F2A00626411 /* PhoneContactsManager.m in Sources */,
 				84C61A091FA81F2A00626411 /* BankCardNameVCModules.m in Sources */,
 				84C619BD1FA815EB00626411 /* PayMethodViewController.m in Sources */,
-				84C619BE1FA815EB00626411 /* PayViewController.m in Sources */,
+				84C619BE1FA815EB00626411 /* DefaultCardPopoverWindowModule.m in Sources */,
 				84C619BF1FA815EB00626411 /* RepayDetailViewController.m in Sources */,
 				84C619C01FA815EB00626411 /* LoanPeriodListVCModule.m in Sources */,
-				84C619C11FA815EB00626411 /* SelectTableViewController.m in Sources */,
-				84C619C21FA815EB00626411 /* UserBankCardListViewController.m in Sources */,
+				84C619C11FA815EB00626411 /* ChooseRedPacketListVCModule.m in Sources */,
+				84C619C21FA815EB00626411 /* UserBankCardListVCModule.m in Sources */,
 				84C619C31FA815EB00626411 /* BankListCell.m in Sources */,
 				84C619C41FA815EB00626411 /* DetailRepayHeader.m in Sources */,
 				84C619C51FA815EB00626411 /* PayDisplayCell.m in Sources */,
@@ -5881,7 +5866,7 @@
 				635AB7AC1BE34F9F00C32919 /* ShouldAlsoAmountBaseClass.m in Sources */,
 				635B0BC71DEBFED0008EAFD1 /* EmptyUserData.m in Sources */,
 				0FEACE241CA10B480027859A /* NSString+Validate.m in Sources */,
-				63FF48581B6F15DB009E384C /* BaseTabBarViewController.m in Sources */,
+				63FF48581B6F15DB009E384C /* FXDBaseTabBarVCModule.m in Sources */,
 				6348310E1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m in Sources */,
 				CCEC9C931EE5095000452291 /* BankCardsParamModel.m in Sources */,
 				6395E2AA1BAFA14E00B7AFC2 /* FXDNetWorkManager.m in Sources */,
@@ -6080,11 +6065,11 @@
 				84C619E41FA8173D00626411 /* BankCardNameVCModules.m in Sources */,
 				84C619CA1FA8161F00626411 /* LoanPeriodForDetailsVCModule.m in Sources */,
 				84C619CB1FA8161F00626411 /* PayMethodViewController.m in Sources */,
-				84C619CC1FA8161F00626411 /* PayViewController.m in Sources */,
+				84C619CC1FA8161F00626411 /* DefaultCardPopoverWindowModule.m in Sources */,
 				84C619CD1FA8161F00626411 /* RepayDetailViewController.m in Sources */,
 				84C619CE1FA8161F00626411 /* LoanPeriodListVCModule.m in Sources */,
-				84C619CF1FA8161F00626411 /* SelectTableViewController.m in Sources */,
-				84C619D01FA8161F00626411 /* UserBankCardListViewController.m in Sources */,
+				84C619CF1FA8161F00626411 /* ChooseRedPacketListVCModule.m in Sources */,
+				84C619D01FA8161F00626411 /* UserBankCardListVCModule.m in Sources */,
 				84C619D11FA8161F00626411 /* BankListCell.m in Sources */,
 				84A380151FAC1D8D008FB7AF /* MGLiveViewController.m in Sources */,
 				84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */,
@@ -6357,7 +6342,7 @@
 				CC6F06911F7B8D4200FA889E /* ShanLinWebVCModules.m in Sources */,
 				CC0DFA451EA5B1090024841A /* EmptyUserData.m in Sources */,
 				CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */,
-				CC0DFA471EA5B1090024841A /* BaseTabBarViewController.m in Sources */,
+				CC0DFA471EA5B1090024841A /* FXDBaseTabBarVCModule.m in Sources */,
 				CCEC9C941EE5095000452291 /* BankCardsParamModel.m in Sources */,
 				84E306CB1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
 				CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */,

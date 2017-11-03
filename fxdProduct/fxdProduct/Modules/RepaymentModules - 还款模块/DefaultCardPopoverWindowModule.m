@@ -1,26 +1,26 @@
 //
-//  PayViewController.m
+//  DefaultCardPopoverWindowModule.m
 //  fxdProduct
 //
 //  Created by dd on 16/7/15.
 //  Copyright © 2016年 dd. All rights reserved.
 //
 
-#import "PayViewController.h"
+#import "DefaultCardPopoverWindowModule.h"
 #import "PayMoneyCell.h"
 #import "PayMethodCell.h"
 #import "UIViewController+KNSemiModal.h"
 #import "PayMethodViewController.h"
 #import "CardInfo.h"
 #import "HG_UnbindBankCardVCModules.h"
-@interface PayViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface DefaultCardPopoverWindowModule ()<UITableViewDelegate,UITableViewDataSource>
 {
     CardInfo *_selectCardInfo;
 }
 
 @end
 
-@implementation PayViewController
+@implementation DefaultCardPopoverWindowModule
 
 static NSString * const methodCellIdentifier = @"MethodCell";
 static NSString * const moneyCellIdentifier = @"MoneyCell";

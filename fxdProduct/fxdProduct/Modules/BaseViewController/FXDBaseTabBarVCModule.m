@@ -1,23 +1,23 @@
 //
-//  BaseTabBarViewController.m
+//  FXDBaseTabBarVCModule.m
 //  fxdProduct
 //
 //  Created by dd on 15/8/3.
 //  Copyright (c) 2015年 dd. All rights reserved.
 //
 
-#import "BaseTabBarViewController.h"
+#import "FXDBaseTabBarVCModule.h"
 #import "BaseNavigationViewController.h"
 #import "HomePageVCModules.h"
 #import "MyViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 
-@interface BaseTabBarViewController () <UITabBarControllerDelegate>
+@interface FXDBaseTabBarVCModule () <UITabBarControllerDelegate>
 
 @end
 
-@implementation BaseTabBarViewController
+@implementation FXDBaseTabBarVCModule
 
 - (void)viewDidLoad {
     [super viewDidLoad];

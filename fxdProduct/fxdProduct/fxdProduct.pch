@@ -49,7 +49,7 @@
 #import <JSONModel/JSONModel.h>
 #import "BaseResultModel.h"
 #import "FXDWebViewController.h"
-#import "BaseTabBarViewController.h"
+#import "FXDBaseTabBarVCModule.h"
 
 #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0

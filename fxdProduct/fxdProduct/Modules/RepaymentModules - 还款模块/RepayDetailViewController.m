@@ -11,7 +11,7 @@
 #import "PayMethodCell.h"
 #import "UILabel+FlickerNumber.h"
 #import "UIViewController+KNSemiModal.h"
-#import "SelectTableViewController.h"
+#import "ChooseRedPacketListVCModule.h"
 #import "PayNavigationViewController.h"
 #import "PayMethodViewController.h"
 #import "CardInfo.h"
@@ -23,7 +23,7 @@
 #import "PaymentServiceModel.h"
 #import "AccountHSServiceModel.h"
 #import "P2PViewController.h"
-#import "PayViewController.h"
+#import "DefaultCardPopoverWindowModule.h"
 #import "QueryCardInfo.h"
 #import "HG_UnbindBankCardVCModules.h"
 #import "QryUserStatusModel.h"
@@ -494,7 +494,7 @@
             if (_canUseReadPacket) {
                 DLog(@"红包");
                 if (_repayListInfo.result.available_redpackets.count > 0) {
-                    SelectTableViewController *selectVC = [[SelectTableViewController alloc] initWithStyle:UITableViewStylePlain];
+                    ChooseRedPacketListVCModule *selectVC = [[ChooseRedPacketListVCModule alloc] initWithStyle:UITableViewStylePlain];
                     selectVC.delegate = self;
                     [selectVC setData:_repayListInfo.result.available_redpackets];
                     [self presentSemiViewController:selectVC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)} completion:nil dismissBlock:^{
@@ -520,7 +520,7 @@
             if (_canUseReadPacket) {
                 DLog(@"红包");
                 if (_repayListInfo.result.available_redpackets.count > 0) {
-                    SelectTableViewController *selectVC = [[SelectTableViewController alloc] initWithStyle:UITableViewStylePlain];
+                    ChooseRedPacketListVCModule *selectVC = [[ChooseRedPacketListVCModule alloc] initWithStyle:UITableViewStylePlain];
                     selectVC.delegate = self;
                     [selectVC setData:_repayListInfo.result.available_redpackets];
                     [self presentSemiViewController:selectVC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)} completion:nil dismissBlock:^{
@@ -551,7 +551,7 @@
  */
 -(void)pushUserBankListVC{
     
-    UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
+    UserBankCardListVCModule * userBankCardListVC = [[UserBankCardListVCModule alloc]init];
     if (userSelectIndex == -1) {
         userBankCardListVC.currentIndex = defaultBankIndex;
     } else {

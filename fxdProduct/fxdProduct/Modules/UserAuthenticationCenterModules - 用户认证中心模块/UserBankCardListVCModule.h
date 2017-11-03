@@ -1,5 +1,5 @@
 //
-//  UserBankCardListViewController.h
+//  UserBankCardListVCModule.h
 //  fxdProduct
 //
 //  Created by admin on 2017/8/25.
@@ -14,7 +14,7 @@
 //typedef void(^PayPatternSelectBlock)(CardInfo * cardInfo, NSInteger currentIndex , PatternOfChoose patternOfChoose ,NSString * patternName);
 typedef void(^PayPatternSelectBlock)(CardInfo * cardInfo, NSInteger currentIndex);
 
-@interface UserBankCardListViewController : BaseViewController
+@interface UserBankCardListVCModule : BaseViewController
 
 @property (nonatomic, assign) NSInteger currentIndex;
 

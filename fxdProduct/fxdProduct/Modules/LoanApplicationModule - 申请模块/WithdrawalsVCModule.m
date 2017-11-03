@@ -15,7 +15,7 @@
 
 #import "UserCardResult.h"
 #import "MoxieSDK.h"
-#import "PayViewController.h"
+#import "DefaultCardPopoverWindowModule.h"
 #import "UIViewController+KNSemiModal.h"
 #import "PayNavigationViewController.h"
 #import "BankModel.h"
@@ -44,7 +44,7 @@
 #import "HGBankListModel.h"
 #import "SupportBankList.h"
 #import "DrawingsInfoModel.h"
-#import "UserBankCardListViewController.h"
+#import "UserBankCardListVCModule.h"
 #import "BankInfoViewModel.h"
 #import "FeesDescriptionModules.h"
 #import "EditCardsController.h"
@@ -524,7 +524,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
  */
 -(void)pushUserBankListVC{
     
-    UserBankCardListViewController * userBankCardListVC = [[UserBankCardListViewController alloc]init];
+    UserBankCardListVCModule * userBankCardListVC = [[UserBankCardListVCModule alloc]init];
     userBankCardListVC.currentIndex = userSelectIndex;
     userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
         self.selectCard = cardInfo;
@@ -1199,7 +1199,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
         NSString *bankName = model.result.UsrCardInfolist.bankName;
-        PayViewController *payVC = [[PayViewController alloc] init];
+        DefaultCardPopoverWindowModule *payVC = [[DefaultCardPopoverWindowModule alloc] init];
         payVC.payType = PayTypeGetMoneyToCard;
         payVC.isP2P = YES;
         payVC.bankName = bankName;

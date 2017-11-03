@@ -178,7 +178,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
 -(void)enter{
     
-    self.btb = [[BaseTabBarViewController alloc]init];
+    self.btb = [[FXDBaseTabBarVCModule alloc]init];
     self.window.rootViewController = self.btb;
     
     //    [self.window.layer transitionWithAnimType:TransitionAnimTypeRamdom subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:2.0f];

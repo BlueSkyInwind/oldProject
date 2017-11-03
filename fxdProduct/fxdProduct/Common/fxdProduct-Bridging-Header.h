@@ -33,7 +33,7 @@
 #import "PayMethodViewController.h"
 #import "PayNavigationViewController.h"
 #import "UIViewController+KNSemiModal.h"
-#import "UserBankCardListViewController.h"
+#import "UserBankCardListVCModule.h"
 #import "BankInfoViewModel.h"
 #import "LoanMoneyViewController.h"
 #import "DetailViewController.h"

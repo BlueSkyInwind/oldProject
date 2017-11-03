@@ -1,5 +1,5 @@
 //
-//  SelectTableViewController.h
+//  ChooseRedPacketListVCModule.h
 //  present
 //
 //  Created by dd on 16/5/20.
@@ -15,7 +15,7 @@
 
 @end
 
-@interface SelectTableViewController : UITableViewController
+@interface ChooseRedPacketListVCModule : UITableViewController
 
 @property (nonatomic ,weak) id <SelectViewDelegate>delegate;
 

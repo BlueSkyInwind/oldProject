@@ -1,5 +1,5 @@
 //
-//  BaseTabBarViewController.h
+//  FXDBaseTabBarVCModule.h
 //  fxdProduct
 //
 //  Created by dd on 15/8/3.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BaseTabBarViewController : UITabBarController
+@interface FXDBaseTabBarVCModule : UITabBarController
 
 - (void)setTabbarCon;
 

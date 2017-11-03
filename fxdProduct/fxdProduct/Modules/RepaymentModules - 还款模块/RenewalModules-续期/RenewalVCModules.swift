@@ -179,7 +179,7 @@ class RenewalVCModules: BaseViewController ,UITableViewDataSource,UITableViewDel
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 3{
-            let userBankCardListVC = UserBankCardListViewController()
+            let userBankCardListVC = UserBankCardListVCModule()
             userBankCardListVC.currentIndex = currentindex!
             userBankCardListVC.userSelectedBankCard({ [weak self] (cardInfo, currentIndex) in
                 self?.cardInfo = cardInfo

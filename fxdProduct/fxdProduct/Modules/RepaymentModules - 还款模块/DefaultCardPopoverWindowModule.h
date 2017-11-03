@@ -1,5 +1,5 @@
 //
-//  PayViewController.h
+//  DefaultCardPopoverWindowModule.h
 //  fxdProduct
 //
 //  Created by dd on 16/7/15.
@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, PayType) {
 typedef void(^MakeSurePayBlock)(PayType payType);
 
 typedef void(^ChangeBankBlock)(void);
-@interface PayViewController : UIViewController
+@interface DefaultCardPopoverWindowModule : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableview;
 

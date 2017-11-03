@@ -271,8 +271,8 @@
 -(BaseNavigationViewController *)jumpVC{
     id currentVC = [[Tool share]topViewController];
     BaseNavigationViewController * BaseNavigationVC;
-    if ([currentVC isKindOfClass:[BaseTabBarViewController class]]) {
-        BaseTabBarViewController * baseTabVC = currentVC;
+    if ([currentVC isKindOfClass:[FXDBaseTabBarVCModule class]]) {
+        FXDBaseTabBarVCModule * baseTabVC = currentVC;
         BaseNavigationVC = baseTabVC.selectedViewController;
     }
     return BaseNavigationVC;

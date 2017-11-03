@@ -1,12 +1,12 @@
 //
-//  UserBankCardListViewController.m
+//  UserBankCardListVCModule.m
 //  fxdProduct
 //
 //  Created by admin on 2017/8/25.
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import "UserBankCardListViewController.h"
+#import "UserBankCardListVCModule.h"
 #import "BankListCell.h"
 #import "EditCardsController.h"
 #import "BaseNavigationViewController.h"
@@ -14,7 +14,7 @@
 #import "CardInfo.h"
 #import "BankInfoViewModel.h"
 
-@interface UserBankCardListViewController ()<UITableViewDelegate,UITableViewDataSource>{
+@interface UserBankCardListVCModule ()<UITableViewDelegate,UITableViewDataSource>{
     
     UserCardResult *_userCardsModel;
     CardInfo *_cardInfo;
@@ -28,7 +28,7 @@
 
 static NSString * const bankListCellIdentifier = @"BankListCell";
 
-@implementation UserBankCardListViewController
+@implementation UserBankCardListVCModule
 
 - (void)viewDidLoad {
     [super viewDidLoad];

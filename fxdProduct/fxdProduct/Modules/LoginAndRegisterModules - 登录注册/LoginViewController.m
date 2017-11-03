@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import "BaseTabBarViewController.h"
+#import "FXDBaseTabBarVCModule.h"
 #import "LoginBaseClass.h"
 #import "LoginParse.h"
 #import "RegViewController.h"
