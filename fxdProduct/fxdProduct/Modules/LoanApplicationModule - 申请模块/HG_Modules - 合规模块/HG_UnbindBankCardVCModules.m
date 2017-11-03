@@ -35,7 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"解绑银行卡";
-    [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
      [self addBackItem];
     _countdown = 60;
     self.bankTable.delegate = self;
@@ -167,7 +167,7 @@
 #pragma mark  点击发送验证码
 -(void)senderBtn:(UIButton *)sender{
 
-    if (_mobile.length < 11 || ![Tool isMobileNumber:_mobile]) {
+    if (_mobile.length < 11 || ![FXD_Tool isMobileNumber:_mobile]) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效手机号！"];
         return;
     }

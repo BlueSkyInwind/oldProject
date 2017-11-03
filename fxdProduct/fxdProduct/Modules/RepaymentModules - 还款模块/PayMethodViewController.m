@@ -53,7 +53,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
     [self addBackItem];
-    [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(fatchBankList)];
     header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;

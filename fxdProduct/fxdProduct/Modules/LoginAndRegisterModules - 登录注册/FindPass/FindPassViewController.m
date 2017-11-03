@@ -33,14 +33,14 @@
     // Do any additional setup after loading the view from its nib.
     
     for (UIView *view in self.fieldView) {
-        [Tool setCorner:view borderColor:UI_MAIN_COLOR];
+        [FXD_Tool setCorner:view borderColor:UI_MAIN_COLOR];
     }
     if (_telText) {
          _phoneNumField.text = _telText;
     }
     _countdown = 60;
     
-    [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     
     [self.phoneNumField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
     [self.codeField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
@@ -77,8 +77,8 @@
 #pragma mark 发送验证码
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {
     
-    if([Tool isMobileNumber:self.phoneNumField.text]) {
-        if ([Utility sharedUtility].networkState) {
+    if([FXD_Tool isMobileNumber:self.phoneNumField.text]) {
+        if ([FXD_Utility sharedUtility].networkState) {
             self.sendCodeButton.userInteractionEnabled = NO;
             self.sendCodeButton.alpha = 0.4;
             [self.sendCodeButton setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];

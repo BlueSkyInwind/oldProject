@@ -6,9 +6,9 @@
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface AuthenticationViewModel : ViewModelClass
+@interface AuthenticationViewModel : FXD_ViewModelBaseClass
 
 /**
  手机运营商认证

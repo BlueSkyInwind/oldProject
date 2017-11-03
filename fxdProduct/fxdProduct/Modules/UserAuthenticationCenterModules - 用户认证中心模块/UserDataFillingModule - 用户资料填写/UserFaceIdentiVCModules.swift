@@ -74,16 +74,16 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
     func showErrorString(errorType: MGLivenessDetectionFailedType) -> Void {
         switch (errorType) {
         case DETECTION_FAILED_TYPE_ACTIONBLEND:
-            Tool.showMessage("请按照提示完成动作", vc: self)
+            FXD_Tool.showMessage("请按照提示完成动作", vc: self)
             break;
         case DETECTION_FAILED_TYPE_NOTVIDEO:
-            Tool.showMessage("活体检测未成功", vc: self)
+            FXD_Tool.showMessage("活体检测未成功", vc: self)
             break;
         case DETECTION_FAILED_TYPE_TIMEOUT:
-            Tool.showMessage("请在规定时间内完成动作", vc: self)
+            FXD_Tool.showMessage("请在规定时间内完成动作", vc: self)
             break;
         default:
-            Tool.showMessage("请按照提示完成动作", vc: self)
+            FXD_Tool.showMessage("请按照提示完成动作", vc: self)
             break;
         }
     }
@@ -180,7 +180,7 @@ extension UserFaceIdentiVCModules {
     statusBtn = UIButton.init(type: UIButtonType.custom)
     statusBtn?.setTitle("进入检测", for: UIControlState.normal)
     statusBtn?.backgroundColor = UI_MAIN_COLOR
-    Tool.setCorner(statusBtn, borderColor: UIColor.clear)
+    FXD_Tool.setCorner(statusBtn, borderColor: UIColor.clear)
     statusBtn?.setTitleColor(UIColor.white, for: UIControlState.normal)
     statusBtn?.addTarget(self, action: #selector(statusBtnClick), for: UIControlEvents.touchUpInside)
     self.view.addSubview(statusBtn!)

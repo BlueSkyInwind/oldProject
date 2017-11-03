@@ -6,9 +6,9 @@
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface IdeaBackViewModel : ViewModelClass
+@interface IdeaBackViewModel : FXD_ViewModelBaseClass
 
 /*
  意见反馈

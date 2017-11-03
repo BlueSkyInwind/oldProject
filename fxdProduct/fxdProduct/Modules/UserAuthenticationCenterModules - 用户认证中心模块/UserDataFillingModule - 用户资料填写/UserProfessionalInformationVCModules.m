@@ -112,7 +112,7 @@
     [footView addSubview:_saveBtn];
     [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
     [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [Tool setCorner:_saveBtn borderColor:[UIColor clearColor]];
+    [FXD_Tool setCorner:_saveBtn borderColor:[UIColor clearColor]];
     _saveBtn.enabled = false;
     [_saveBtn setBackgroundColor:rgb(139, 140, 143)];
     [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -152,7 +152,7 @@
 }
 - (void)getDataDic:(void(^)())finish
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getDicCode_url] parameters:@{@"dict_type_":@"INDUSTRY_"} finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getDicCode_url] parameters:@{@"dict_type_":@"INDUSTRY_"} finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             _dataDicModel = [DataDicParse yy_modelWithJSON:object];
             if (finish) {
@@ -170,28 +170,28 @@
     GetCustomerBaseViewModel *customerInfo = [[GetCustomerBaseViewModel alloc] init];
     [customerInfo setBlockWithReturnBlock:^(id returnValue) {
         Custom_BaseInfo *custom_model = returnValue;
-        [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+        [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
         if ([custom_model.flag isEqualToString:@"0000"]) {
             id data = [DataWriteAndRead readDataWithkey:UserInfomation];
             if (data) {
                 [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
                 if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
                     [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-                        [Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
+                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
+                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
+                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
+                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
                     }
                 }
             } else {
                 if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
                     [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-                        [Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
+                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
+                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
+                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
+                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
                     }
                 } else {
                     [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
@@ -374,7 +374,7 @@
 -(void)PostGetCity
 {
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getAllRegionList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getAllRegionList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"])
             {
@@ -631,7 +631,7 @@
                            @"cityName":city1,
                            @"districtName":city2
                            };
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getRegionCodeByName_jhtml] parameters:dict finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getRegionCodeByName_jhtml] parameters:dict finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
                 _regionCodeParse = [RegionCodeBaseClass modelObjectWithDictionary:object];

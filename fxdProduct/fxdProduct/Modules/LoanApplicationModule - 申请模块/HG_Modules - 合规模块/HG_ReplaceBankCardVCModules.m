@@ -17,7 +17,7 @@
 #import "WithdrawalsVCModule.h"
 #import "RTRootNavigationController.h"
 #import "UnbundlingBankCardViewModel.h"
-#import "RepayDetailViewController.h"
+#import "LoanPaymentDetailVCModule.h"
 #import "CheckViewModel.h"
 @interface HG_ReplaceBankCardVCModules ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,BankTableViewSelectDelegate>
 {
@@ -42,7 +42,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"更换银行卡";
-    [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     [self addBackItem];
     _countdown = 60;
     placeArray3 = @[@"接受到账的银行卡",@"卡号",@"预留手机号",@"验证码"];
@@ -153,7 +153,7 @@
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请重新选择银行卡类型"];
             }else if ([dataListAll3[1] length]<16){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的卡号"];
-            }else if (![Tool isMobileNumber:dataListAll3[2]]){
+            }else if (![FXD_Tool isMobileNumber:dataListAll3[2]]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的手机号"];
             }else{
                 [self senderSms];
@@ -439,7 +439,7 @@
     NSMutableArray * paramArray = [NSMutableArray array];
     [paramArray addObject:bankShortName];
     [paramArray addObject:bankNo];
-    [paramArray addObject:[Utility sharedUtility].userInfo.userMobilePhone];
+    [paramArray addObject:[FXD_Utility sharedUtility].userInfo.userMobilePhone];
     [paramArray addObject:dataListAll3[2]];
     [paramArray addObject:_ordsms_ext_];
     [paramArray addObject:dataListAll3[3]];
@@ -460,7 +460,7 @@
                 }
             }else{
                 for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
-                    if ([vc isKindOfClass:[RepayDetailViewController class]]) {
+                    if ([vc isKindOfClass:[LoanPaymentDetailVCModule class]]) {
                         [self.navigationController popToViewController:vc animated:YES];
                     }
                 }

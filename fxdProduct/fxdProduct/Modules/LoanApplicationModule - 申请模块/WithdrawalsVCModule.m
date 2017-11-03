@@ -258,7 +258,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         checkSuccess.textFiledWeek.hidden = true;
         //用途
         checkSuccess.purposeTextField.text = @"请选择借款用途";
-        [Tool setCorner:checkSuccess.purposeView borderColor:UI_MAIN_COLOR];
+        [FXD_Tool setCorner:checkSuccess.purposeView borderColor:UI_MAIN_COLOR];
         checkSuccess.purposeTextField.delegate = self;
         //到账银行
         checkSuccess.bankTextField.text = @"收款方式";
@@ -279,8 +279,8 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         checkSuccess.textFiledWeek.text = @"请选择借款周期";
         checkSuccess.purposeTextField.text = @"请选择借款用途";
         checkSuccess.bankTextField.text = @"收款方式";
-        [Tool setCorner:checkSuccess.bgView borderColor:UI_MAIN_COLOR];
-        [Tool setCorner:checkSuccess.purposeView borderColor:UI_MAIN_COLOR];
+        [FXD_Tool setCorner:checkSuccess.bgView borderColor:UI_MAIN_COLOR];
+        [FXD_Tool setCorner:checkSuccess.purposeView borderColor:UI_MAIN_COLOR];
         NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:@"每周还款:0元"];
         [attStr addAttribute:NSForegroundColorAttributeName value:rgb(164, 164, 164) range:NSMakeRange(0, 5)];
         [attStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(attStr.length-2, 2)];
@@ -712,7 +712,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      };
     }
     //二次提款
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_drawApplyAgain_jhtml] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_drawApplyAgain_jhtml] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
                 
@@ -829,30 +829,30 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
 - (void)getUserInfoData:(void(^)())completion
 {
-    DLog(@"%@",[Utility sharedUtility].userInfo.account_id);
+    DLog(@"%@",[FXD_Utility sharedUtility].userInfo.account_id);
     //    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
     id data = [DataWriteAndRead readDataWithkey:UserInfomation];
     if (data) {
         DLog(@"%@",data);
         _customerBase = data;
-        if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-            [Utility sharedUtility].userInfo.account_id = _customerBase.result.createBy;
+        if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
+            [FXD_Utility sharedUtility].userInfo.account_id = _customerBase.result.createBy;
         }
-        [Utility sharedUtility].userInfo.userIDNumber = _customerBase.result.idCode;
-        [Utility sharedUtility].userInfo.userMobilePhone = _customerBase.ext.mobilePhone;
-        [Utility sharedUtility].userInfo.realName = _customerBase.result.customerName;
+        [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerBase.result.idCode;
+        [FXD_Utility sharedUtility].userInfo.userMobilePhone = _customerBase.ext.mobilePhone;
+        [FXD_Utility sharedUtility].userInfo.realName = _customerBase.result.customerName;
     } else {
-        if ([Utility sharedUtility].loginFlage) {
+        if ([FXD_Utility sharedUtility].loginFlage) {
             GetCustomerBaseViewModel *customBaseViewModel = [[GetCustomerBaseViewModel alloc] init];
             [customBaseViewModel setBlockWithReturnBlock:^(id returnValue) {
                 _customerBase = returnValue;
                 if ([_customerBase.flag isEqualToString:@"0000"]) {
                     [DataWriteAndRead writeDataWithkey:UserInfomation value:_customerBase];
-                    [Utility sharedUtility].userInfo.userIDNumber = _customerBase.result.idCode;
-                    [Utility sharedUtility].userInfo.userMobilePhone = _customerBase.ext.mobilePhone;
-                    [Utility sharedUtility].userInfo.realName = _customerBase.result.customerName;
-                    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-                        [Utility sharedUtility].userInfo.account_id = _customerBase.result.createBy;
+                    [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerBase.result.idCode;
+                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = _customerBase.ext.mobilePhone;
+                    [FXD_Utility sharedUtility].userInfo.realName = _customerBase.result.customerName;
+                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
+                        [FXD_Utility sharedUtility].userInfo.account_id = _customerBase.result.createBy;
                     }
                 }
             } WithFaileBlock:^{
@@ -926,7 +926,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 - (void)fatchRate:(void(^)(RateModel *rate))finish
 {
     NSDictionary *dic = @{@"priduct_id_":RapidLoan};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         if ([rateParse.flag isEqualToString:@"0000"]) {
             finish(rateParse);
@@ -1004,7 +1004,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"periods_":@1};
     }
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
@@ -1052,7 +1052,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"periods_":@1};
     }
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
@@ -1092,7 +1092,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"protocol_type_":@"2",
                      @"periods_":@1};
     }
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
@@ -1115,7 +1115,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                @"product_id_":_drawingsInfoModel.productId,
                                @"protocol_type_":@"3",
                                @"periods_":_userSelectNum};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
@@ -1140,7 +1140,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                 [self getBankListInfo];
             }else if ([type isEqualToString:@"10"]){//待激活
             
-                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[FXD_Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 p2pVC.isCheck = YES;
                 p2pVC.applicationId = _drawingsInfoModel.applicationId;
@@ -1228,7 +1228,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 -(void)configMoxieSDK{
     /***必须配置的基本参数*/
     [MoxieSDK shared].delegate = self;
-    [MoxieSDK shared].userId = [Utility sharedUtility].userInfo.juid;
+    [MoxieSDK shared].userId = [FXD_Utility sharedUtility].userInfo.juid;
     [MoxieSDK shared].apiKey = theMoxieApiKey;
     [MoxieSDK shared].fromController = self;
     [MoxieSDK shared].useNavigationPush = NO;
@@ -1311,7 +1311,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     
     //    __weak WithdrawalsVCModule *weakSelf = self;
     @weakify(self);
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_caseStatusUpdateApi_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_caseStatusUpdateApi_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             DLog(@"%@",object);
         }

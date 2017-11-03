@@ -157,7 +157,7 @@
     [_evaluationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _evaluationBtn.backgroundColor = UI_MAIN_COLOR;
     [_evaluationBtn addTarget:self action:@selector(bottomClick) forControlEvents:UIControlEventTouchUpInside];
-    [Tool setCorner:_evaluationBtn borderColor:[UIColor clearColor]];
+    [FXD_Tool setCorner:_evaluationBtn borderColor:[UIColor clearColor]];
     [self.view addSubview:_evaluationBtn];
     __weak typeof(self) wekSelf = self;
     [_evaluationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -551,7 +551,7 @@
 -(void)configMoxieSDK{
     /***必须配置的基本参数*/
     [MoxieSDK shared].delegate = self;
-    [MoxieSDK shared].userId = [Utility sharedUtility].userInfo.juid;
+    [MoxieSDK shared].userId = [FXD_Utility sharedUtility].userInfo.juid;
     [MoxieSDK shared].apiKey = theMoxieApiKey;
     [MoxieSDK shared].fromController = self;
     [MoxieSDK shared].useNavigationPush = NO;
@@ -620,7 +620,7 @@
 //获取进度条的进度
 - (void)refreshInfoStep
 {
-    if (![Utility sharedUtility].loginFlage) {
+    if (![FXD_Utility sharedUtility].loginFlage) {
         return;
     }
     [self obtainHighRanking];
@@ -700,28 +700,28 @@
     GetCustomerBaseViewModel *customerInfo = [[GetCustomerBaseViewModel alloc] init];
     [customerInfo setBlockWithReturnBlock:^(id returnValue) {
         Custom_BaseInfo *custom_model = returnValue;
-        [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+        [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
         if ([custom_model.flag isEqualToString:@"0000"]) {
             id data = [DataWriteAndRead readDataWithkey:UserInfomation];
             if (data) {
                 [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
                 if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
                     [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-                        [Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
+                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
+                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
+                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
+                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
                     }
                 }
             } else {
                 if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
                     [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-                        [Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
+                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
+                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
+                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
+                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
                     }
                 } else {
                     [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];

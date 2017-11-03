@@ -11,7 +11,7 @@
 #import "LoanPeriodListVCModule.h"
 #import "UserStateModel.h"
 #import "RepayMentViewModel.h"
-#import "RepayDetailViewController.h"
+#import "LoanPaymentDetailVCModule.h"
 #import "RepayListInfo.h"
 #import "BankModel.h"
 #import "CheckViewModel.h"
@@ -90,7 +90,7 @@
                 [supportBankListArr addObject:bankList];
             }
             
-            RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
+            LoanPaymentDetailVCModule *repayMent=[[LoanPaymentDetailVCModule alloc]initWithNibName:[[LoanPaymentDetailVCModule class] description] bundle:nil];
             repayMent.repayType = RepayTypeClean;
             repayMent.supportBankListArr = supportBankListArr;
             CGFloat finalRepayAmount = 0.0f;

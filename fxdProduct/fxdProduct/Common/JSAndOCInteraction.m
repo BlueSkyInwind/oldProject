@@ -44,7 +44,7 @@
     
     NSString * titleName  =  title == nil ? @"发薪贷" : title;
     
-    NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
+    NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode];
 //    NSString * targetUrl = [urlStr stringByAppendingFormat:@"?merchant_code_=%@",invationCode];
     NSString * targetUrl = urlStr;
 
@@ -123,7 +123,7 @@
         return;
     }
     
-    if (![Utility sharedUtility].loginFlage || [viewControllerName isEqualToString:@"LoginViewController"]) {
+    if (![FXD_Utility sharedUtility].loginFlage || [viewControllerName isEqualToString:@"LoginViewController"]) {
         [self presentLogin:currentVC];
         return;
     }
@@ -199,10 +199,10 @@
 {
     @try{
         
-        if ([Utility sharedUtility].loginFlage) {
+        if ([FXD_Utility sharedUtility].loginFlage) {
             LoginViewModel * loginVM = [[LoginViewModel alloc]init];
             [loginVM deleteUserRegisterID];
-            [EmptyUserData EmptyData];
+            [FXD_AppEmptyUserData EmptyData];
         }
         
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
@@ -222,10 +222,10 @@
 
 -(NSString *)obtainLoginInfo{
     
-    NSString * juidStr = [Utility sharedUtility].userInfo.juid == nil ? @"" : [Utility sharedUtility].userInfo.juid;
-    NSString * tokenStr = [Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [Utility sharedUtility].userInfo.tokenStr;
-    NSString * phoneNumber = [Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [Utility sharedUtility].userInfo.userMobilePhone;
-    NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
+    NSString * juidStr = [FXD_Utility sharedUtility].userInfo.juid == nil ? @"" : [FXD_Utility sharedUtility].userInfo.juid;
+    NSString * tokenStr = [FXD_Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [FXD_Utility sharedUtility].userInfo.tokenStr;
+    NSString * phoneNumber = [FXD_Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [FXD_Utility sharedUtility].userInfo.userMobilePhone;
+    NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode];
     
     NSDictionary *paramDic = @{
                            @"juid":juidStr,
@@ -269,7 +269,7 @@
 }
 
 -(BaseNavigationViewController *)jumpVC{
-    id currentVC = [[Tool share]topViewController];
+    id currentVC = [[FXD_Tool share]topViewController];
     BaseNavigationViewController * BaseNavigationVC;
     if ([currentVC isKindOfClass:[FXDBaseTabBarVCModule class]]) {
         FXDBaseTabBarVCModule * baseTabVC = currentVC;

@@ -13,9 +13,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [Tool setCorner:self.passView borderColor:UI_MAIN_COLOR];
-    [Tool setCorner:self.smsCodeView borderColor:UI_MAIN_COLOR];
-    [Tool setCorner:self.picCodeView borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.passView borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.smsCodeView borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.picCodeView borderColor:UI_MAIN_COLOR];
     
 }
 

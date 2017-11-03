@@ -6,10 +6,10 @@
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 #import "PaymentDetailModel.h"
 
-@interface PaymentViewModel : ViewModelClass
+@interface PaymentViewModel : FXD_ViewModelBaseClass
 
 
 /**

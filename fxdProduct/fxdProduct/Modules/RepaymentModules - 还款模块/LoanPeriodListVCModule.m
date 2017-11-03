@@ -9,7 +9,7 @@
 #import "LoanPeriodListVCModule.h"
 #import "RepayListCell.h"
 #import "LoanPeriodForDetailsVCModule.h"
-#import "RepayDetailViewController.h"
+#import "LoanPaymentDetailVCModule.h"
 #import "UserStateModel.h"
 #import "RepayMentViewModel.h"
 #import "RepayListInfo.h"
@@ -399,7 +399,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                     [_supportBankListArr addObject:bankList];
                 }
                 
-                RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
+                LoanPaymentDetailVCModule *repayMent=[[LoanPaymentDetailVCModule alloc]initWithNibName:[[LoanPaymentDetailVCModule class] description] bundle:nil];
                 if (_selectAllBtn.selected) {
                     repayMent.repayType = RepayTypeClean;
                 } else {

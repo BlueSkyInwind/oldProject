@@ -9,7 +9,7 @@
 #import "LoanPeriodForDetailsVCModule.h"
 #import "DetailRepayHeader.h"
 #import "RepayListCell.h"
-#import "RepayDetailViewController.h"
+#import "LoanPaymentDetailVCModule.h"
 #import "RepayListInfo.h"
 #import "BankModel.h"
 #import "P2PBillDetail.h"
@@ -190,7 +190,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     }
     
     if (_p2pBillDetail != nil) {
-        _headerView.sigingDayLabel.text = [NSString stringWithFormat:@"借款时间%@",[Tool dateToFormatString:_p2pBillDetail.data.bid_release_time_]];
+        _headerView.sigingDayLabel.text = [NSString stringWithFormat:@"借款时间%@",[FXD_Tool dateToFormatString:_p2pBillDetail.data.bid_release_time_]];
         _headerView.principalAmountLabel.text = [NSString stringWithFormat:@"%.2f",_p2pBillDetail.data.amount_];
         _headerView.feeAmountLabel.text = [NSString stringWithFormat:@"%.2f",_p2pBillDetail.data.repay_svc_charge_ + _p2pBillDetail.data.repay_interest_];
         _headerView.repaymentAmountLabel.text = [NSString stringWithFormat:@"%.2f",_p2pBillDetail.data.repay_total_];
@@ -627,7 +627,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
             }
         }
         if (_bills.count > 0) {
-            RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
+            LoanPaymentDetailVCModule *repayMent=[[LoanPaymentDetailVCModule alloc]initWithNibName:[[LoanPaymentDetailVCModule class] description] bundle:nil];
             if (_selectAllBtn.selected) {
                 repayMent.repayType = RepayTypeClean;
             } else {
@@ -659,7 +659,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
                 [_supportBankListArr addObject:bankList];
             }
             
-            RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
+            LoanPaymentDetailVCModule *repayMent=[[LoanPaymentDetailVCModule alloc]initWithNibName:[[LoanPaymentDetailVCModule class] description] bundle:nil];
             repayMent.product_id = _product_id;
             if (_selectAllBtn.selected) {
                 repayMent.repayType = RepayTypeClean;

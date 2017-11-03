@@ -117,7 +117,7 @@ typedef enum {
     cell.passwordField.delegate = self;
     cell.veritifyCodeField.delegate = self;
     cell.picCodeTextField.delegate = self;
-    [Tool setCorner:cell.mobileBtn borderColor:[UIColor clearColor]];
+    [FXD_Tool setCorner:cell.mobileBtn borderColor:[UIColor clearColor]];
     if (![_isMobileAuth isEqualToString:@"2"]) {
         if ([self isCanEnable]) {
             [cell.mobileBtn setBackgroundColor:UI_MAIN_COLOR];
@@ -287,7 +287,7 @@ typedef enum {
                      @"verify_code_":_mobileRequArr[3]
                      };
     }
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_Certification_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_Certification_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             _mobileParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
             if ([_mobileParse.flag isEqualToString:@"0000"])
@@ -361,7 +361,7 @@ typedef enum {
     NSDictionary *dic = @{@"code":authCode};
     __weak UserMobileAuthenticationVCModules *weakself = self;
     //    __block NSMutableArray * blockDataList = dataListAll2;
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_authMobilePhone_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_authMobilePhone_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         ReturnMsgBaseClass *returnParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
         if ([returnParse.flag isEqualToString:@"0000"]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"认证成功"];
@@ -380,7 +380,7 @@ typedef enum {
 - (void)fatchMobileOpera
 {
     //获取手机运营商
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getMobileOpera_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getMobileOpera_url] parameters:nil finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
                 NSString *telNum = [[object objectForKey:@"ext"] objectForKey:@"mobile_phone_"];

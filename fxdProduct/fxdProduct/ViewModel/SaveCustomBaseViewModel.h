@@ -6,9 +6,9 @@
 //  Copyright © 2016年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface SaveCustomBaseViewModel : ViewModelClass
+@interface SaveCustomBaseViewModel : FXD_ViewModelBaseClass
 
 - (void)saveCustomBaseInfo:(NSDictionary *)paramDic;
 

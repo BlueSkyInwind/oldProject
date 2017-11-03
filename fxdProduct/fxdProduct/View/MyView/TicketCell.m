@@ -68,7 +68,7 @@
     self.lblOverTime=[[UILabel alloc]initWithFrame:CGRectMake(_k_w-34-80-15, 15, 80, 40)];
     self.lblOverTime.textAlignment=NSTextAlignmentCenter;
     self.lblOverTime.font=[UIFont systemFontOfSize:23];
-    [Tool  setCorner:self.lblOverTime borderColor:rgba(92, 93, 94, 1)];
+    [FXD_Tool  setCorner:self.lblOverTime borderColor:rgba(92, 93, 94, 1)];
     self.lblOverTime.text=@"已过期";
     self.lblOverTime.textColor=[UIColor whiteColor];
     self.lblOverTime.backgroundColor=rgba(92, 93, 94, 1);

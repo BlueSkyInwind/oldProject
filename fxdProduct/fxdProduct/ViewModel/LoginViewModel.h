@@ -6,10 +6,10 @@
 //  Copyright © 2016年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 #import "LoginParamModel.h"
 
-@interface LoginViewModel : ViewModelClass
+@interface LoginViewModel : FXD_ViewModelBaseClass
 
 /**
  登录请求

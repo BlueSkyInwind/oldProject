@@ -19,15 +19,15 @@
 
 #import "GlobalConfig.h"
 #import "pinyin.h"
-#import "Tool.h"
-#import "FXDNetWorkManager.h"
+#import "FXD_Tool.h"
+#import "FXD_NetWorkRequestManager.h"
 #import "HHAlertViewCust.h"
 #import "OpenUDID.h"
 #import <ReactiveObjC/ReactiveObjC.h>
 //#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CheckUtils.h"
 #import "NSString+MD5Encrypt.h"
-#import "Utility.h"
+#import "FXD_Utility.h"
 //#import "KeyboardManager.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "MBProgressHUD.h"
@@ -43,7 +43,7 @@
 #import <YYModel/YYModel.h>
 #import "YYCache.h"
 #import <Masonry/Masonry.h>
-#import "EmptyUserData.h"
+#import "FXD_AppEmptyUserData.h"
 #import "YYText.h"
 #import "UIDevice+YYAdd.h"
 #import <JSONModel/JSONModel.h>

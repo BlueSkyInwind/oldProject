@@ -95,7 +95,7 @@
 
 - (void)getCodeDic:(void(^)())finish
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getDicCode_url] parameters:@{@"dict_type_":@"EDUCATION_LEVEL_"} finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getDicCode_url] parameters:@{@"dict_type_":@"EDUCATION_LEVEL_"} finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         
         if (![[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
@@ -133,7 +133,7 @@
     _saveBtn.enabled = false;
     [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
     [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [Tool setCorner:_saveBtn borderColor:[UIColor clearColor]];
+    [FXD_Tool setCorner:_saveBtn borderColor:[UIColor clearColor]];
     [_saveBtn setBackgroundColor:rgb(139, 140, 143)];
     [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@20);
@@ -477,7 +477,7 @@
                                @"api_secret":FaceIDAppSecret,
                                @"legality":@1};
     NSDictionary *imageDic = @{@"image":UIImagePNGRepresentation(image)};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTUpLoadImage:_detectIDCardOCR_url FilePath:imageDic parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTUpLoadImage:_detectIDCardOCR_url FilePath:imageDic parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if (cardSide == IDCARD_SIDE_FRONT) {
             _idOCRFrontParse = [FaceIDOCRFront yy_modelWithJSON:object];
@@ -507,7 +507,7 @@
     NSDictionary *paramDic = @{@"idCardSelf":cardStr,
                                @"records":jsonStr,
                                @"side":side};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_saveIDInfo_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_saveIDInfo_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if ([side isEqualToString:@"front"]) {
             _customerFrontIDParse = [CustomerIDInfo yy_modelWithJSON:object];
@@ -537,8 +537,8 @@
 //        [dataListArr replaceObjectAtIndex:0 withObject:_customerIDParse.result.customer_name_];
         [dataListArr replaceObjectAtIndex:1 withObject:_customerFrontIDParse.result.customer_name_];
         [dataListArr replaceObjectAtIndex:2 withObject:_customerFrontIDParse.result.id_code_];
-        [Utility sharedUtility].userInfo.userIDNumber = _customerFrontIDParse.result.id_code_;
-        [Utility sharedUtility].userInfo.realName = _customerFrontIDParse.result.customer_name_;
+        [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerFrontIDParse.result.id_code_;
+        [FXD_Utility sharedUtility].userInfo.realName = _customerFrontIDParse.result.customer_name_;
     }
     [_tableView reloadData];
 }
@@ -874,7 +874,7 @@
 -(void)PostGetCity
 {
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getAllRegionList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getAllRegionList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"])
             {
@@ -926,7 +926,7 @@
                            @"cityName":city1,
                            @"districtName":city2
                            };
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getRegionCodeByName_jhtml] parameters:dict finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getRegionCodeByName_jhtml] parameters:dict finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
                 _regionCodeParse = [RegionCodeBaseClass modelObjectWithDictionary:object];

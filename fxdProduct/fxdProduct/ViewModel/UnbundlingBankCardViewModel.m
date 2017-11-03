@@ -19,10 +19,10 @@
     sendSmsParamModel.card_number_ = bankNo;
     sendSmsParamModel.mobile_ = mobile;
     sendSmsParamModel.sms_type_ = sms_type;
-    sendSmsParamModel.from_mobile_ = [Utility sharedUtility].userInfo.userMobilePhone;
+    sendSmsParamModel.from_mobile_ = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
     
     NSDictionary * paramDic  = [sendSmsParamModel toDictionary];
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]HG_POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {
             self.returnBlock(object);
@@ -46,7 +46,7 @@
     bankCardsParamModel.sms_seq_ = paramArray[6];
     bankCardsParamModel.trade_type_ = @"REBIND";
     NSDictionary * paramDic  = [bankCardsParamModel toDictionary];
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]HG_POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {
             self.returnBlock(object);
@@ -69,7 +69,7 @@
     saveAccountBankCardParamModel.verify_code_ = paramArray[4];
     
     NSDictionary *paramDic = [saveAccountBankCardParamModel toDictionary];
-    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_BankNumCheck_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_BankNumCheck_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -83,7 +83,7 @@
 -(void)getBankList{
 
     NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-    [[FXDNetWorkManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {
             self.returnBlock(object);

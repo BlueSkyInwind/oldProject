@@ -41,7 +41,7 @@ static NSString * const moneyCellIdentifier = @"MoneyCell";
         self.navigationItem.title = @"到账到银行卡";
     }
     
-    [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     [self.myTableview registerNib:[UINib nibWithNibName:NSStringFromClass([PayMethodCell class]) bundle:nil] forCellReuseIdentifier:methodCellIdentifier];
     [self.myTableview registerNib:[UINib nibWithNibName:NSStringFromClass([PayMoneyCell class]) bundle:nil] forCellReuseIdentifier:moneyCellIdentifier];
     [self.myTableview setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
