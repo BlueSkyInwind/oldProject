@@ -51,7 +51,7 @@
 //        [self addSubview:_innerView];
         self.imageView.userInteractionEnabled = true;
 //        self.imageView.contentMode = UIViewContentModeScaleToFill;
-        UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTap)];
+        UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(homeActivityPictureClick)];
         tapImage.numberOfTapsRequired = 1;
         tapImage.numberOfTouchesRequired = 1;
         [self.imageView addGestureRecognizer:tapImage];
@@ -60,9 +60,9 @@
     return self;
 }
 
-- (void)imageTap
+- (void)homeActivityPictureClick
 {
-    [self.delegate imageTap];
+    [self.delegate homeActivityPictureClick];
 }
 
 - (IBAction)closeBtn:(UIButton *)sender {

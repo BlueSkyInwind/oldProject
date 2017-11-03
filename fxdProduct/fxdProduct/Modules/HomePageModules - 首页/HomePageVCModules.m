@@ -86,14 +86,14 @@
             [self openLocationService];
         }
     }
-    [self loadViewStatus];
+    [self LoadHomeView];
 }
 
 /**
  根据数据加载视图的状况
  */
--(void)loadViewStatus{
-    [self getHomeData:^(BOOL isSuccess) {
+-(void)LoadHomeView{
+    [self getAllTheHomePageData:^(BOOL isSuccess) {
         if (_loadFailView) {
             [_loadFailView removeFromSuperview];
         }
@@ -153,10 +153,12 @@
 
 #pragma mark  - 视图布局
 - (void)setNavQRRightBar {
-    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(qrClick)];
+    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRCodePopups)];
     //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
     self.navigationItem.rightBarButtonItem = aBarbi;
 }
+
+#pragma mark tabView视图
 - (void)setUpTableview
 {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
@@ -177,6 +179,8 @@
 //    [header beginRefreshing];
     self.tableView.mj_header = header;
 }
+
+#pragma mark 首页加载失败视图
 -(void)setUploadFailView{
     if (_loadFailView) {
         [_loadFailView removeFromSuperview];
@@ -190,20 +194,22 @@
     }];
 }
 -(void)LoadFailureLoadRefreshButtonClick{
-    [self loadViewStatus];
+    [self LoadHomeView];
 }
 
+#pragma mark 下拉刷新
 -(void)headerRefreshing{
 
     __weak HomePageVCModules *weakSelf = self;
     NSLog(@"下拉刷新");
-    [self getHomeData:^(BOOL isSuccess) {
+    [self getAllTheHomePageData:^(BOOL isSuccess) {
     }];
     [weakSelf.tableView.mj_header endRefreshing];
     
 }
 
-- (void)qrClick
+#pragma mark 首页二维码弹窗
+- (void)homeQRCodePopups
 {
     QRCodePopView *qrPopView = [QRCodePopView defaultQRPopView];
     [qrPopView layoutIfNeeded];
@@ -214,7 +220,13 @@
 
 #pragma mark - 首页活动弹窗
 //首单活动
-- (void)popView:(HomeProductList *)model
+
+/**
+ 首页活动弹窗
+
+ @param model 数据model
+ */
+- (void)homeActivitiesPopups:(HomeProductList *)model
 {
     if ([model.data.popList.firstObject.isValid isEqualToString:@"1"]) {
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -228,11 +240,17 @@
         _popView.parentVC = self;
         [self lew_presentPopupView:_popView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
         }];
-        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onClose) userInfo:nil repeats:true];
+        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(homeActivitiesPopupsClose) userInfo:nil repeats:true];
     }
 }
-//测评红包活动
--(void)popChooseView:(HomeProductList *)model{
+
+
+/**
+ 测评红包活动
+
+ @param model 测评红包数据model
+ */
+-(void)homeEvaluationRedEnvelopeActivitiesPopups:(HomeProductList *)model{
     
     if ([model.data.jumpBomb isEqualToString:@"1"]) {
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -255,7 +273,11 @@
     }
 }
 
-- (void)imageTap
+
+/**
+ 首页活动图片点击
+ */
+- (void)homeActivityPictureClick
 {
     DLog(@"广告图片点击");
     if ([_advTapToUrl containsString:@".png"] || [_advTapToUrl containsString:@".jpg"]) {
@@ -272,7 +294,10 @@
     }
 }
 
-- (void)onClose
+/**
+ 首页活动弹窗关闭
+ */
+- (void)homeActivitiesPopupsClose
 {
     _count += 1;
     if (_count == 2) {
@@ -402,7 +427,7 @@
     
     homeCell.tabRefuseCellClosure = ^(NSInteger index){
         
-        [self refuseTabClick:index];
+        [self thirdPartyDiversionListClick:index];
         
     };
     
@@ -469,19 +494,19 @@
     }
 }
 
-- (void)repayRecordClick
-{
-    if ([Utility sharedUtility].loginFlage) {
-        RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-        [self.navigationController pushViewController:repayRecord animated:YES];
-    }else {
-        [self presentLogin:self];
-    }
-}
+//- (void)repayRecordClick
+//{
+//    if ([Utility sharedUtility].loginFlage) {
+//        RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+//        [self.navigationController pushViewController:repayRecord animated:YES];
+//    }else {
+//        [self presentLogin:self];
+//    }
+//}
 
 #pragma mark - 获取数据
 
--(void)getHomeData:(void(^)(BOOL isSuccess))finish{
+-(void)getAllTheHomePageData:(void(^)(BOOL isSuccess))finish{
     
     __weak typeof (self) weakSelf = self;
     HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
@@ -508,10 +533,10 @@
         
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         if (appDelegate.isShow) {
-            [self popView:_homeProductList];
+            [self homeActivitiesPopups:_homeProductList];
         }
         if (appDelegate.isHomeChooseShow) {
-            [self popChooseView:_homeProductList];
+            [self homeEvaluationRedEnvelopeActivitiesPopups:_homeProductList];
         }
     } WithFaileBlock:^{
         finish(false);
@@ -541,39 +566,65 @@
 //}
 
 #pragma mark - 页面跳转
-- (void)goCheckVC
+
+/**
+ 跳转到待提款页面
+ */
+- (void)goWithdrawalsVCModule
 {
     WithdrawalsVCModule *checkVC = [WithdrawalsVCModule new];
     [self.navigationController pushViewController:checkVC animated:YES];
 }
 
-- (void)presentLogin:(UIViewController *)vc
+
+/**
+ 跳转到登录页面
+
+ @param vc 登录的VC
+ */
+- (void)presentLoginVC:(UIViewController *)vc
 {
     LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
     [vc presentViewController:nav animated:YES completion:nil];
 }
 
+
+/**
+ 跳转到处理中、我要还款页面
+
+ @param status 进件的状态
+ */
 -(void)goLoanMoneVC:(ApplicationStatus)status{
     LoanMoneyViewController *loanVc = [LoanMoneyViewController new];
     loanVc.applicationStatus = status;
     [self.navigationController pushViewController:loanVc animated:YES];
 }
 
--(void)goLoanSureVC:(NSString *)productId{
+
+/**
+ 跳转到确认申请页面
+
+ @param productId 产品id
+ */
+-(void)goLoanApplicationForConfirmationVCModules:(NSString *)productId{
     LoanApplicationForConfirmationVCModules *loanFirstVC = [[LoanApplicationForConfirmationVCModules alloc] init];
     loanFirstVC.productId = productId;
     [self.navigationController pushViewController:loanFirstVC animated:true];
 }
 
--(void)goUserDataVC{
+
+/**
+ 跳转到个人认证信息页面
+ */
+-(void)goUserDataAuthenticationListVCModules{
     UserDataAuthenticationListVCModules *userDataVC = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
     [self.navigationController pushViewController:userDataVC animated:YES];
 }
 
 #pragma mark  首页视图的各种代理
 #pragma mark 立即添加高级认证
--(void)advancedCertification{
+-(void)addAdvancedCertificationBtnClick{
     //立即添加高级认证
     self.tabBarController.selectedIndex = 1;
 }
@@ -581,14 +632,14 @@
 -(void)drawingBtnClick{
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
-        [self PostStatuesMyLoanAmount];
+        [self accordingToTheStateJumpPage];
     } else {
-        [self presentLogin:self];
+        [self presentLoginVC:self];
     }
 }
 
 //状态判断
--(void)PostStatuesMyLoanAmount{
+-(void)accordingToTheStateJumpPage{
     
     switch (_homeProductList.data.flag.integerValue) {
         case 5:{
@@ -596,23 +647,23 @@
             if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
                 if ([_homeProductList.data.userStatus isEqualToString:@"11"] || [_homeProductList.data.userStatus isEqualToString:@"12"]) {
                     applicationStatus = ComplianceInLoan;
-                    [self getApplicationStatus:@"4"];
+                    [self intermediateStateAccess:@"4"];
                     return;
                 }
                 if ([_homeProductList.data.userStatus isEqualToString:@"2"] || [_homeProductList.data.userStatus isEqualToString:@"3"]) {
                     //合规未开户
-                    [self goCheckVC];
+                    [self goWithdrawalsVCModule];
                     return;
                 }
             }
             //发薪贷待提款
-            [self goCheckVC];
+            [self goWithdrawalsVCModule];
         }
             break;
         case 6:{
             //放款中
             applicationStatus = InLoan;
-            [self getApplicationStatus:@"1"];
+            [self intermediateStateAccess:@"1"];
         }
             break;
         case 7:{
@@ -620,7 +671,7 @@
             if ([_homeProductList.data.platformType isEqualToString:@"2"]) {
                 if ([_homeProductList.data.userStatus isEqualToString:@"11"] || [_homeProductList.data.userStatus isEqualToString:@"12"]) {
                     applicationStatus = ComplianceRepayment;
-                    [self getApplicationStatus:@"5"];
+                    [self intermediateStateAccess:@"5"];
                     return;
                 }
                 if ([_homeProductList.data.userStatus isEqualToString:@"2"] || [_homeProductList.data.userStatus isEqualToString:@"3"] || [_homeProductList.data.userStatus isEqualToString:@"6"]) {
@@ -641,19 +692,19 @@
         case 8:{
             //还款中
             applicationStatus = Repayment;
-            [self getApplicationStatus:@"2"];
+            [self intermediateStateAccess:@"2"];
         }
             break;
         case 9:{
             //延期中
             applicationStatus = Staging;
-            [self getApplicationStatus:@"3"];
+            [self intermediateStateAccess:@"3"];
         }
             break;
         case 11:{
             //合规标处理中
             applicationStatus = ComplianceProcessing;
-            [self getApplicationStatus:@"6"];
+            [self intermediateStateAccess:@"6"];
         }
             break;
         default:
@@ -662,39 +713,31 @@
 }
 
 #pragma mark 点击立即申请
--(void)applyBtnClick:(NSString *)money{
+
+/**
+ 立即申请
+
+ @param money 申请的额度
+ */
+-(void)applyImmediatelyBtnClick:(NSString *)money{
     NSLog(@"点击立即申请=%@",money);
-    
-    
-//    ShanLinBackAlertView *ticket=[[ShanLinBackAlertView alloc]init];
-//    ticket.backgroundColor = [UIColor blackColor];
-//    ticket.alpha = 0.8;
-//    ticket.delegate = self;
-//    [self.view addSubview:ticket];
+
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
-        [self userDataResult];
+        [self getTheEvaluationResults];
 
     } else {
-        [self presentLogin:self];
+        [self presentLoginVC:self];
     }
 }
 
 
-//-(void)cancelBtn{
-//    for (UIView *subView in self.view.subviews) {
-//        if ([subView isKindOfClass:[ShanLinBackAlertView class]]) {
-//            [subView removeFromSuperview];
-//        }
-//    }
-//}
-//
-//-(void)sureBtn{
-//
-//
-//}
+/**
+ 第三方导流列表点击
 
--(void)refuseTabClick:(NSInteger)index{
+ @param index 点击的index
+ */
+-(void)thirdPartyDiversionListClick:(NSInteger)index{
 
     switch (index) {
         case 0:
@@ -719,6 +762,10 @@
     NSLog(@"点击导流平台的更多");
 }
 
+
+/**
+ 点击导流平台的更多
+ */
 -(void)otherBtnClick{
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
     webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
@@ -736,15 +783,15 @@
     if ([Utility sharedUtility].loginFlage) {
         [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productList[0].productId;
         
-        [self goLoanSureVC:_homeProductList.data.productList[0].productId];
+        [self goLoanApplicationForConfirmationVCModules:_homeProductList.data.productList[0].productId];
         
     } else {
-        [self presentLogin:self];
+        [self presentLoginVC:self];
     }
 }
 
 #pragma mark 点击产品列表
--(void)productBtnClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit approvalAmount:(NSString *)approvalAmount{
+-(void)productListClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit amount:(NSString *)amount{
 
     if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:RapidLoan] || [productId isEqualToString:DeriveRapidLoan]) {
         
@@ -754,10 +801,10 @@
         }
         if ([Utility sharedUtility].loginFlage) {
             [Utility sharedUtility].userInfo.pruductId = productId;
-            [self goLoanSureVC:productId];
+            [self goLoanApplicationForConfirmationVCModules:productId];
             
         } else {
-            [self presentLogin:self];
+            [self presentLoginVC:self];
         }
         return;
     }
@@ -768,64 +815,16 @@
     NSLog(@"产品productId = %@",productId);
 }
 #pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
--(void)getApplicationStatus:(NSString *)flag{
+-(void)intermediateStateAccess:(NSString *)flag{
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
             ApplicationStatusModel *applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            if ([applicationStatusModel.platformType isEqualToString:@"2"]) {
-                if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]) {
-                    [self goLoanMoneVC:applicationStatus];
-                    return;
-                }
-                if ([applicationStatusModel.userStatus isEqualToString:@"2"] || [applicationStatusModel.userStatus isEqualToString:@"3"]) {
-                    // 未激活未开户 或者失败
-                    if (applicationStatus == ComplianceRepayment) {
-                        [self goLoanMoneVC:RepaymentNormal];
-                    }else if (applicationStatus == ComplianceInLoan) {
-                        [self goCheckVC];
-                    }
-                    return;
-                }
-                if ([applicationStatusModel.userStatus isEqualToString:@"13"]) {
-                    [self goLoanMoneVC:applicationStatus];
-                    return;
-                }
-            }
-            switch (applicationStatusModel.status.integerValue) {
-                case 1:{
-                    if (applicationStatus == ComplianceRepayment) {
-                        [self goLoanMoneVC:RepaymentNormal];
-                    }else if (applicationStatus == ComplianceInLoan){
-                        [self goLoanMoneVC:InLoan];
-                    }else{
-                        [self goLoanMoneVC:applicationStatus];
-                    }
-                }
-                    break;
-                case 2:{
-                    if (applicationStatus == Repayment) {
-                        //还款成功刷新首页
-                        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"还款成功"];
-                        [self getHomeData:^(BOOL isSuccess) {
-                        }];
-                        return;
-                    }
-                    [self goLoanMoneVC:RepaymentNormal];
-                }
-                    break;
-                case 3:
-                case 4:{
-                    //中间状态失败刷新首页
-                    [self getHomeData:^(BOOL isSuccess) {
-                    }];
-                }
-                    break;
-                default:
-                    break;
-            }
+            
+            [self hgIntermediateStateJumpPlatformType:applicationStatusModel.platformType userStatus:applicationStatusModel.userStatus];
+            [self fxdIntermediateStateJumpStatus:applicationStatusModel.status];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
@@ -835,8 +834,79 @@
     [loanMoneyViewModel getApplicationStatus:flag];
 }
 
+
+/**
+ 合规用户中间状态跳转
+
+ @param platformType 进件平台
+ @param userStatus 用户状态
+ */
+-(void)hgIntermediateStateJumpPlatformType:(NSString *)platformType userStatus:(NSString *)userStatus{
+    
+    if ([platformType isEqualToString:@"2"]) {
+        if ([userStatus isEqualToString:@"11"] || [userStatus isEqualToString:@"12"]) {
+            [self goLoanMoneVC:applicationStatus];
+            return;
+        }
+        if ([userStatus isEqualToString:@"2"] || [userStatus isEqualToString:@"3"]) {
+            // 未激活未开户 或者失败
+            if (applicationStatus == ComplianceRepayment) {
+                [self goLoanMoneVC:RepaymentNormal];
+            }else if (applicationStatus == ComplianceInLoan) {
+                [self goWithdrawalsVCModule];
+            }
+            return;
+        }
+        if ([userStatus isEqualToString:@"13"]) {
+            [self goLoanMoneVC:applicationStatus];
+            return;
+        }
+    }
+}
+
+
+/**
+ 发薪贷各种状态跳转
+
+ @param status 用户状态
+ @param applicationStatus 枚举
+ */
+-(void)fxdIntermediateStateJumpStatus:(NSString *)status{
+    switch (status.integerValue) {
+        case 1:{
+            if (applicationStatus == ComplianceRepayment) {
+                [self goLoanMoneVC:RepaymentNormal];
+            }else if (applicationStatus == ComplianceInLoan){
+                [self goLoanMoneVC:InLoan];
+            }else{
+                [self goLoanMoneVC:applicationStatus];
+            }
+        }
+            break;
+        case 2:{
+            if (applicationStatus == Repayment) {
+                //还款成功刷新首页
+                [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"还款成功"];
+                [self getAllTheHomePageData:^(BOOL isSuccess) {
+                }];
+                return;
+            }
+            [self goLoanMoneVC:RepaymentNormal];
+        }
+            break;
+        case 3:
+        case 4:{
+            //中间状态失败刷新首页
+            [self getAllTheHomePageData:^(BOOL isSuccess) {
+            }];
+        }
+            break;
+        default:
+            break;
+    }
+}
 #pragma mark 得到测评结果
--(void)userDataResult{
+-(void)getTheEvaluationResults{
 
     UserDataViewModel *userDataMV = [[UserDataViewModel alloc]init];
     [userDataMV setBlockWithReturnBlock:^(id returnValue) {
@@ -851,13 +921,13 @@
                 }
                     break;
                 case 00:
-                    [self goUserDataVC];
+                    [self goUserDataAuthenticationListVCModules];
                     break;
                 case 20:
                 case 30:
                 {
                     //中间状态失败刷新首页
-                    [self getHomeData:^(BOOL isSuccess) {
+                    [self getAllTheHomePageData:^(BOOL isSuccess) {
                     }];
                 }
                     break;
@@ -894,7 +964,7 @@
             
         }else if([baseResultM.errCode isEqualToString:@"4"]){
             
-            [self goLoanSureVC:productId];
+            [self goLoanApplicationForConfirmationVCModules:productId];
         
         }else{
             
