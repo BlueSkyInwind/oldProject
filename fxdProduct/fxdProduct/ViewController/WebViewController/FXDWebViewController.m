@@ -65,12 +65,15 @@
  h5活动拼装url
  */
 -(NSString *)assemblyUrl:(NSString *)urlStr{
-    
+    NSString * SplicingCharacter = @"?";
+    if ([urlStr containsString:@"?"]) {
+        SplicingCharacter = @"&";
+    }
     NSString * juidStr = [Utility sharedUtility].userInfo.juid == nil ? @"" : [Utility sharedUtility].userInfo.juid;
     NSString * tokenStr = [Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [Utility sharedUtility].userInfo.tokenStr;
     NSString * phoneNumber = [Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [Utility sharedUtility].userInfo.userMobilePhone;
     NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
-    NSString * resultStr = [urlStr stringByAppendingFormat:@"?type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@",@"0",juidStr,tokenStr,phoneNumber,invationCode];
+    NSString * resultStr = [urlStr stringByAppendingFormat:@"%@type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@",SplicingCharacter,@"0",juidStr,tokenStr,phoneNumber,invationCode];
     return resultStr;
 }
 
