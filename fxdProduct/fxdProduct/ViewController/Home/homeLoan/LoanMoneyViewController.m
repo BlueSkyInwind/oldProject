@@ -220,7 +220,7 @@
 -(void)fxdStatus{
 
     //发薪贷
-    if ([_repayModel.platformType isEqualToString:@"0"]) {
+    if ([_repayModel.platformType isEqualToString:@"0"]||[_repayModel.platformType isEqualToString:@"3"]) {
         
         [self postUrlMessageandDictionary:^(CardInfo *rate) {
             
