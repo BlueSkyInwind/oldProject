@@ -10,7 +10,7 @@
 
 @protocol PopViewDelegate <NSObject>
 
-- (void)imageTap;
+- (void)homeActivityPictureClick;
 
 @end
 

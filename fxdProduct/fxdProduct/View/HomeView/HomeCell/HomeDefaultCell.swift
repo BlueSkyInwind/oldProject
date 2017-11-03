@@ -14,21 +14,21 @@ import SDWebImage
 @objc protocol HomeDefaultCellDelegate: NSObjectProtocol {
     
     //高级认证按钮
-    func advancedCertification()
+    func addAdvancedCertificationBtnClick()
     //点击提款按钮
     func drawingBtnClick()
     //首次借款按钮
-    func applyBtnClick(_ money: String)->Void
+    func applyImmediatelyBtnClick(_ money: String)->Void
     //更多按钮
     func moreBtnClick()
     //我要借款按钮
     func loanBtnClick()
     //点击产品按钮
-    func productBtnClick(_ productId: String, isOverLimit: String, approvalAmount: String)->Void
+    func productListClick(_ productId: String, isOverLimit: String, amount: String)->Void
     //其他平台按钮
     func otherBtnClick()
     //第三方产品列表按钮
-    func refuseTabClick(_ index: NSInteger)->Void
+    func thirdPartyDiversionListClick(_ index: NSInteger)->Void
     
 }
 
@@ -1042,7 +1042,7 @@ extension HomeDefaultCell{
     
         if delegate != nil {
             
-            delegate?.advancedCertification()
+            delegate?.addAdvancedCertificationBtnClick()
         }
         print("立即添加高级认证")
     }
@@ -1089,7 +1089,7 @@ extension HomeDefaultCell{
             let index = moneyStr.index(moneyStr.endIndex, offsetBy: -1)
             let money = moneyStr.substring(to: index)
             
-            delegate?.applyBtnClick(money)
+            delegate?.applyImmediatelyBtnClick(money)
         }
         print("点击立即申请")
     }
@@ -1118,7 +1118,7 @@ extension HomeDefaultCell{
         
         var productId = ""
         var isOverLimit = ""
-        var approvalAmount = ""
+        var amount = ""
         let tag = tapGes.view?.tag
         //101：产品列表第一个产品
         //102：产品列表第二个产品
@@ -1131,17 +1131,17 @@ extension HomeDefaultCell{
         case 101:
             productId = homeProductData.data.productList[0].productId
             isOverLimit = homeProductData.data.productList[0].isOverLimit
-            approvalAmount = homeProductData.data.productList[0].amount
+            amount = homeProductData.data.productList[0].amount
 //            productId = "第一个View"
         case 102:
             productId = homeProductData.data.productList[1].productId
             isOverLimit = homeProductData.data.productList[1].isOverLimit
-            approvalAmount = homeProductData.data.productList[1].amount
+            amount = homeProductData.data.productList[1].amount
 //            productId = "点击第二个View"
         case 103:
             productId = homeProductData.data.productList[2].productId
             isOverLimit = homeProductData.data.productList[2].isOverLimit
-            approvalAmount = homeProductData.data.productList[2].amount
+            amount = homeProductData.data.productList[2].amount
         case 104:
             productId = homeProductData.data.thirdProductList[0].extAttr.path_
 
@@ -1154,14 +1154,14 @@ extension HomeDefaultCell{
         default:
             break
         }
-        if approvalAmount != ""{
-            let length = approvalAmount.characters.count
-            approvalAmount = approvalAmount.substring(to: approvalAmount.index(approvalAmount.startIndex, offsetBy: length - 1))
+        if amount != ""{
+            let length = amount.characters.count
+            amount = amount.substring(to: amount.index(amount.startIndex, offsetBy: length - 1))
             
         }
         if delegate != nil {
         
-            delegate?.productBtnClick(productId ,isOverLimit: isOverLimit ,approvalAmount: approvalAmount)
+            delegate?.productListClick(productId ,isOverLimit: isOverLimit ,amount: amount)
             
         }
         print("点击产品列表")
@@ -1200,10 +1200,10 @@ extension HomeDefaultCell{
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        refuseTabClick(index: indexPath.row)
+        thirdPartyDiversionListClick(index: indexPath.row)
     }
     
-    func refuseTabClick(index : NSInteger)->Void{
+    func thirdPartyDiversionListClick(index : NSInteger)->Void{
     
         if self.tabRefuseCellClosure != nil {
             
