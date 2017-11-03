@@ -10,8 +10,8 @@
 #define fxdProduct_Bridging_Header_h
 
 #import "Tool.h"
-#import "SesameCreditViewController.h"
-#import "CertificationViewController.h"
+#import "SesameCreditCertificationVCModules.h"
+#import "UserMobileAuthenticationVCModules.h"
 #import "MGLiveViewController.h"
 #import "BaseNavigationViewController.h"
 #import "GlobalConfig.h"
@@ -42,13 +42,13 @@
 #import "CheckViewIng.h"
 #import <MJRefresh/MJRefresh.h>
 #import "UserDataResult.h"
-#import "LoanSureFirstViewController.h"
+#import "LoanApplicationForConfirmationVCModules.h"
 #import "UserInfoObj.h"
 #import "FXDWebViewController.h"
 #import "ApplicationViewModel.h"
 #import "CapitalListModel.h"
 #import "ApplicaitonModel.h"
-#import "CheckViewController.h"
+#import "WithdrawalsVCModule.h"
 #import "DiscountTicketModel.h"
 
 #endif /* fxdProduct_Bridging_Header_h */

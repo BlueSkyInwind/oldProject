@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BaseNavigationViewController.h"
-#import "LunchViewController.h"
+#import "LunchVCModules.h"
 #import "CALayer+Transition.h"
 #import "DataBaseManager.h"
 #import "testModelFmdb.h"
@@ -90,10 +90,10 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 //    [self createFMDB:launchOptions];
     [self initJPush:launchOptions];
 
-    BOOL isFirst = [LunchViewController canShowNewFeature];
+    BOOL isFirst = [LunchVCModules canShowNewFeature];
 //    isFirst = true;
     if (isFirst) {
-        self.window.rootViewController = [LunchViewController newLunchVCWithModels:@[@"guide_1",@"guide_2",@"guide_3"] enterBlock:^{
+        self.window.rootViewController = [LunchVCModules newLunchVCWithModels:@[@"guide_1",@"guide_2",@"guide_3"] enterBlock:^{
             [self enter];
             [EmptyUserData EmptyData];
         }];

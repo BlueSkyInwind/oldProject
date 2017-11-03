@@ -8,7 +8,7 @@
 
 #import "RepayRequestManage.h"
 #import "HomeViewModel.h"
-#import "RepayListViewController.h"
+#import "LoanPeriodListVCModule.h"
 #import "UserStateModel.h"
 #import "RepayMentViewModel.h"
 #import "RepayDetailViewController.h"
@@ -38,7 +38,7 @@
             return;
         }
         
-        RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
+        LoanPeriodListVCModule *repayMent=[[LoanPeriodListVCModule alloc]initWithNibName:[[LoanPeriodListVCModule class] description] bundle:nil];
         repayMent.product_id = self.product_id;
         repayMent.applicationId = self.applicationId;
         repayMent.platform_type = self.platform_type;
@@ -46,7 +46,7 @@
     }
     
     if ([self.platform_type isEqualToString:@"2"]) {
-        RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
+        LoanPeriodListVCModule *repayMent=[[LoanPeriodListVCModule alloc]initWithNibName:[[LoanPeriodListVCModule class] description] bundle:nil];
         repayMent.product_id = self.product_id;
         repayMent.applicationId = self.applicationId;
         repayMent.platform_type = self.platform_type;
