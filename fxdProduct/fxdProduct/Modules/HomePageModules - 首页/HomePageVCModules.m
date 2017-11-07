@@ -788,7 +788,7 @@
         
         NSString * productId = _homeProductList.data.productList[0].productId;
         if ([productId isEqualToString:SalaryLoan]) {
-             [self goLoanSureVC:productId];
+             [self goLoanMoneVC:productId];
         }else{
             NSString *approvalAmount = [_homeProductList.data.productList[0].amount substringToIndex:_homeProductList.data.productList[0].amount.length-1];
             [self getCapitalListData:productId approvalAmount:approvalAmount];
@@ -810,17 +810,14 @@
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"额度已满"];
             return;
         }
-        if ([Utility sharedUtility].loginFlage) {
-            [Utility sharedUtility].userInfo.pruductId = productId;
+        if ([FXD_Utility sharedUtility].loginFlage) {
+            [FXD_Utility sharedUtility].userInfo.pruductId = productId;
             if ([productId isEqualToString:SalaryLoan]) {
-                [self goLoanSureVC:productId];
+                [self goLoanApplicationForConfirmationVCModules:productId];
             }else{
-                
-                [self getCapitalListData:productId approvalAmount:approvalAmount];
+                [self getCapitalListData:productId approvalAmount:amount];
             }
-            
 //            [self goLoanSureVC:productId];
-            
         } else {
             [self presentLoginVC:self];
         }
@@ -881,7 +878,6 @@
         }
     }
 }
-
 
 /**
  发薪贷各种状态跳转

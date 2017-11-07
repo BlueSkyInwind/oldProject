@@ -46,8 +46,6 @@
     [self addBackItem];
     _webView.scrollView.showsVerticalScrollIndicator = false;
     DLog(@"%@",_urlStr);
-    
-    _urlStr = @"http://192.168.9.85:8010/fxd-wxact/wxact_171001";
     _urlStr = [_urlStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
@@ -71,10 +69,10 @@
     if ([urlStr containsString:@"?"]) {
         SplicingCharacter = @"&";
     }
-    NSString * juidStr = [Utility sharedUtility].userInfo.juid == nil ? @"" : [Utility sharedUtility].userInfo.juid;
-    NSString * tokenStr = [Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [Utility sharedUtility].userInfo.tokenStr;
-    NSString * phoneNumber = [Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [Utility sharedUtility].userInfo.userMobilePhone;
-    NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
+    NSString * juidStr = [FXD_Utility sharedUtility].userInfo.juid == nil ? @"" : [FXD_Utility sharedUtility].userInfo.juid;
+    NSString * tokenStr = [FXD_Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [FXD_Utility sharedUtility].userInfo.tokenStr;
+    NSString * phoneNumber = [FXD_Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [FXD_Utility sharedUtility].userInfo.userMobilePhone;
+    NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode];
     NSString * resultStr = [urlStr stringByAppendingFormat:@"%@type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@",SplicingCharacter,@"0",juidStr,tokenStr,phoneNumber,invationCode];
     return resultStr;
 }
