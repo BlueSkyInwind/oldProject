@@ -33,8 +33,7 @@
     self.scrollView.bounces = true;
     [self addBackItem];
     self.scrollView.contentSize = CGSizeMake(_k_w, _k_h*1.1);
-    //    self.scrollView.backgroundColor = [UIColor redColor];
-//    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(20, 30, _k_w-40, 370)];
+
     UIView *topView = [[UIView alloc] init];
     [FXD_Tool setCorner:topView borderColor:[UIColor clearColor]];
     topView.clipsToBounds = true;
@@ -100,21 +99,7 @@
     UIView *qrCodeView = [[UIView alloc] init];
     [topView addSubview:qrCodeView];
     qrCodeView.backgroundColor = [UIColor whiteColor];
-//    if (UI_IS_IPHONE5) {
-//        [qrCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(@50);
-//            make.top.equalTo(invitationCode.mas_bottom).offset(10);
-//            make.right.equalTo(@(-50));
-//            make.height.equalTo(qrCodeView.mas_width).multipliedBy(1.12f);
-//        }];
-//    } else {
-//        [qrCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(@80);
-//            make.top.equalTo(invitationCode.mas_bottom).offset(10);
-//            make.right.equalTo(@(-80));
-//            make.height.equalTo(qrCodeView.mas_width).multipliedBy(1.12f);
-//        }];
-//    }
+
     [qrCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@80);
         make.top.equalTo(invitationCode.mas_bottom).offset(10);
@@ -124,13 +109,11 @@
     
     
     UIImageView *qrImageView = [[UIImageView alloc] init];
-//    qrImageView.backgroundColor = [UIColor redColor];
     [qrCodeView addSubview:qrImageView];
     [qrImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@10);
         make.left.equalTo(@10);
         make.right.equalTo(@(-10));
-//        make.height.equalTo(@165);
         make.height.equalTo(qrImageView.mas_width).multipliedBy(1.f);
     }];
     
@@ -149,7 +132,6 @@
     
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [FXD_Tool setCorner:shareBtn borderColor:[UIColor clearColor]];
-//    shareBtn.frame = CGRectMake(30, 450, _k_w-60, 60);
     [shareBtn setTitle:@"点击分享" forState:UIControlStateNormal];
     [shareBtn setTintColor:[UIColor whiteColor]];
     [shareBtn addTarget:self action:@selector(shareContent) forControlEvents:UIControlEventTouchUpInside];
@@ -162,8 +144,7 @@
         make.right.equalTo(self.view.mas_right).offset(-30);
         make.height.equalTo(shareBtn.mas_width).multipliedBy(0.16f);
     }];
-
-//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 550, _k_w, 6)];
+    
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = rgb(235, 236, 237);
     [self.scrollView addSubview:lineView];
@@ -174,8 +155,7 @@
         make.height.equalTo(lineView.mas_width).multipliedBy(0.02);
     }];
     
-    
-//    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 566, _k_w, 160)];
+
     UIView *bottomView = [[UIView alloc] init];
     [self.scrollView addSubview:bottomView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -199,8 +179,7 @@
     _textView = [YYTextView new];
     _textView.scrollEnabled = true;
     _textView.editable = false;
-//    NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:@"新用户注册时输入上方【我的邀请码】或扫描【我的邀请二维码】，注册成功后，您即可获得以下大礼：\n1 免息券******\n2 现金红包******\n3 更高额度奖励\n您也可以直接截图本页面发送至朋友圈，供好友识别二维码"];
-//    _textView.attributedText = contentText;
+
     [bottomView addSubview:_textView];
     [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@8);
@@ -218,6 +197,7 @@
     [self getrecomInfo];
 }
 
+#pragma mark 获取推荐码规则
 - (void)getrecomInfo
 {
     [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_GetRecomfrInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
@@ -235,6 +215,7 @@
     }];
 }
 
+#pragma mark 点击分享
 -(void)shareContent
 {
     NSArray *imageArr = @[[UIImage imageNamed:@"logo_60"]];

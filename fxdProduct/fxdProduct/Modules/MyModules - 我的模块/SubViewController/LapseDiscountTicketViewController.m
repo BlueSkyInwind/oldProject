@@ -25,6 +25,8 @@
     [self createTableView];
 
 }
+
+#pragma mark 初始化tableView
 -(void)createTableView
 {
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,64, _k_w, _k_h-64) style:UITableViewStyleGrouped];
@@ -40,6 +42,8 @@
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
 }
+
+#pragma mark 获取过期券列表
 -(void)obtainDiscountTicket{
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
     [applicationVM setBlockWithReturnBlock:^(id returnValue) {

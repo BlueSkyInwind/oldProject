@@ -16,9 +16,13 @@
 
 @interface DiscountTicketController ()<UITableViewDataSource,UITableViewDelegate>
 {
+    //无优惠券视图
     UIView *NoneView;
+    //底部视图
     UIView * bottomView;
+    //红包数据
     RedPacketTicketModel *_redPacketTicketM;
+    //优惠券数据
     DiscountTicketModel * discountTicketModel;
     
 }
@@ -40,6 +44,7 @@
     _invalidTicketArr = [NSMutableArray array];
 }
 
+#pragma mark 显示底部或者无优惠券视图
 -(void)isDisplayNoneViewAndBottomView{
     
     if (_invalidTicketArr.count != 0 &&  _invalidTicketArr != nil) {
@@ -57,6 +62,7 @@
     }
 }
 
+#pragma mark 刷新
 - (void)fatchRedpacket
 {
     if (self.validTicketArr.count > 0) {
@@ -66,6 +72,7 @@
         [self.invalidTicketArr removeAllObjects];
     }
     [self obtainDiscountTicket];
+#pragma mark 获取红包数据
     RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
     [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
         [self.tableView.mj_header endRefreshing];
@@ -93,6 +100,7 @@
     [repayWeeklyRecordViewModel getUserRedpacketList];
 }
 
+#pragma mark 获取优惠券数据
 -(void)obtainDiscountTicket{
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
     [applicationVM setBlockWithReturnBlock:^(id returnValue) {
@@ -116,6 +124,8 @@
     }];
     [applicationVM obtainUserDiscountTicketList:@"1" displayType:@"2"];
 }
+
+#pragma mark 初始化tableView
 -(void)createTableView
 {
     self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,64, _k_w, _k_h-64) style:UITableViewStyleGrouped];
@@ -131,6 +141,7 @@
     [header beginRefreshing];
     self.tableView.mj_header = header;
 }
+#pragma mark 初始化使用帮助按钮
 -(void)addHelpItem{
 
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithTitle:@"使用帮助" style:UIBarButtonItemStylePlain target:self action:@selector(goHelpVCClick)];
@@ -138,12 +149,14 @@
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
 }
 
+#pragma mark 点击使用帮助按钮
 -(void)goHelpVCClick{
     FXDWebViewController * webVC = [[FXDWebViewController alloc]init];
     webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_DiscountTicketRule_url];
     [self.navigationController pushViewController:webVC animated:true];
 }
 
+#pragma mark 初始化无优惠券视图
 -(void)createNoneView
 {
     NoneView =[[UIView alloc]init];
@@ -205,6 +218,8 @@
         make.width.equalTo(@130);
     }];
 }
+
+#pragma mark 初始化底部视图
 -(void)createbottomView{
     
     self.tableView.frame = CGRectMake(0, 64, _k_w, _k_h - 114);
@@ -243,12 +258,15 @@
     }];
 }
 
+#pragma mark 点击底部过期优惠券
 -(void)pushInVailDiscountTicketVC{
     
     LapseDiscountTicketViewController *lapseDiscountTicketVC = [[LapseDiscountTicketViewController alloc] init];
     lapseDiscountTicketVC.invalidTicketArr = self.invalidTicketArr;
     [self.navigationController pushViewController:lapseDiscountTicketVC animated:true];
 }
+
+#pragma mark 点击邀请好友
 -(void)pushInvationFriend{
     InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
     [self.navigationController pushViewController:invitationVC animated:true];

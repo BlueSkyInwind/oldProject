@@ -13,8 +13,9 @@
 #import "RepayWeeklyRecordViewModel.h"
 @interface RepayRecordController ()<UITableViewDataSource,UITableViewDelegate>
 {
+    //无借款记录视图
     UIView *NoneView;
-    NSArray *stateAry;
+    //借款记录数组
     NSMutableArray *_repayHistoryArr;
 }
 @end
@@ -45,6 +46,8 @@
     [self createNoneView];
     
 }
+
+#pragma mark 获取借款记录列表
 -(void)getLoadRecrod
 {
     
@@ -83,6 +86,7 @@
     
 }
 
+#pragma mark 创建无借款记录视图
 -(void)createNoneView
 {
     NoneView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h)];

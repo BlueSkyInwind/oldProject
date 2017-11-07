@@ -509,6 +509,7 @@
             
             ApplicationStatusModel *applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             
+            //处理合规中间状态的显示
             if ([applicationStatusModel.platformType isEqualToString:@"2"]) {
                 if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]||[applicationStatusModel.userStatus isEqualToString:@"13"]) {
 
@@ -532,6 +533,7 @@
                     }
                 }
             }
+            //处理中间状态的显示
             switch (applicationStatusModel.status.integerValue) {
                 case 1:
                     self.navigationItem.title = [self setTitle];

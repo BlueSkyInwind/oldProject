@@ -17,7 +17,9 @@
 #import "ShanLinWebVCModules.h"
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate,ShanLinBackAlertViewDelegate>
 {
+    //标题数组
     NSArray *titleAry;
+    //标题图片数组
     NSArray *imgAry;
    
 }
@@ -51,6 +53,7 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
 
+    //添加自定义头部
     MineHeaderView *headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
     headerView.backgroundColor = UI_MAIN_COLOR;
     headerView.nameLabel.text = @"您好!";
@@ -114,9 +117,7 @@
     switch (indexPath.row) {
         case 0:
         {
-//            LoanSureFirstViewController *loanFirstVC = [[LoanSureFirstViewController alloc] init];
-//            loanFirstVC.productId = @"P001002";
-//            [self.navigationController pushViewController:loanFirstVC animated:true];
+
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }

@@ -225,64 +225,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-
-- (void)setSwithchState:(BOOL)state
-{
-    DLog(@"%@",[FXD_Utility sharedUtility].userInfo.userName);
-    DLog(@"%@",[FXD_Utility sharedUtility].userInfo.userPass);
-    [PCCircleViewConst saveGesture:[FXD_Utility sharedUtility].userInfo.userName Key:kUserID];
-    if ([[PCCircleViewConst getGestureWithKey:kUserPass] isEqualToString:@""] && [PCCircleViewConst getGestureWithKey:kUserPass] == nil) {
-        [PCCircleViewConst saveGesture:[FXD_Utility sharedUtility].userInfo.userPass Key:kUserPass];
-    }
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
-    [self.MyTabView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-}
-
-- (void)gestureVerifyState
-{
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
-    [self.MyTabView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-}
-
-//分享函数
--(void)shareContent:(UITableView*)tableView
-{
-    NSArray *imageArr = @[[UIImage imageNamed:@"logo_60"]];
-    if (imageArr) {
-        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-        [shareParams SSDKSetupShareParamsByText:@"发薪贷只专注于网络小额贷款。是一款新型网络小额贷款神器, 尽可能优化贷款申请流程，申请步骤更便捷，轻完成网上贷款。链接:http://www.faxindai.com"
-                                         images:imageArr
-                                            url:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]
-                                          title:@"发薪贷"
-                                           type:SSDKContentTypeAuto];
-        
-        [shareParams SSDKSetupSinaWeiboShareParamsByText:[NSString stringWithFormat:@"发薪贷只专注于网络小额贷款。是一款新型网络小额贷款神器, 尽可能优化贷款申请流程，申请步骤更便捷，轻完成网上贷款。链接:http://www.faxindai.com 链接:%@",@"https://itunes.apple.com/cn/app/id1089086853"] title:@"发薪贷" image:imageArr url:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
-        
-        [shareParams SSDKEnableUseClientShare];
-        [ShareSDK showShareActionSheet:nil
-                                 items:@[@(SSDKPlatformSubTypeWechatSession),
-                                         @(SSDKPlatformSubTypeWechatTimeline),
-                                         @(SSDKPlatformTypeSinaWeibo),
-                                         @(SSDKPlatformTypeQQ),
-                                         @(SSDKPlatformSubTypeQZone),
-                                         @(SSDKPlatformTypeSMS)]
-                           shareParams:shareParams
-                   onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-                       switch (state) {
-                           case SSDKResponseStateSuccess:
-                               [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"分享成功"];
-                               break;
-                               
-                           case SSDKResponseStateFail:
-                               [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"分享失败"];
-                           default:
-                               break;
-                       }
-                   }];
-    }
-}
-
+#pragma mark 登录
 - (void)presentLogin:(UIViewController *)vc
 {
     LoginViewController *loginView = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
@@ -328,6 +271,7 @@
     }
 }
 
+#pragma mark 退出登录
 -(void)deleteUserRegisterID{
     
     LoginViewModel * loginVM = [[LoginViewModel alloc]init];

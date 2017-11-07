@@ -63,23 +63,7 @@
         webView.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_depHistory_url];
         [self.navigationController pushViewController:webView animated:YES];
     }
-//    else if (indexPath.row == 2) {
-//        FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-//        webView.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_mediaReport_url];
-//        [self.navigationController pushViewController:webView animated:YES];
-//    }
-//    else if (indexPath.row==3)
-//    {
-//        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-//        pasteboard.string =[cell.textLabel.text substringFromIndex:3];
-//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"复制微信公众号成功，请在微信中搜索关注"];
-//    }else if(indexPath.row==4)
-//    {
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[cell.textLabel.text substringFromIndex:3]]];
-//    }else
-//    {
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://m.faxindai.com"]];
-//    }
+
 }
 
 - (void)didReceiveMemoryWarning {
