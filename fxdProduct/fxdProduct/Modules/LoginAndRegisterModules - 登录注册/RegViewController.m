@@ -68,9 +68,9 @@
     [self setNav];
     [self addBackItem];
     for (UIView *view in self.fieldView) {
-        [Tool setCorner:view borderColor:UI_MAIN_COLOR];
+        [FXD_Tool setCorner:view borderColor:UI_MAIN_COLOR];
     }
-    [Tool setCorner:self.regSubmitBtn borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.regSubmitBtn borderColor:UI_MAIN_COLOR];
     _countdown = 60;
     self.navigationItem.title = @"注册";
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
@@ -294,7 +294,7 @@
 
 -(void)setVerifyCode{
     
-    if (![Tool isMobileNumber:self.phoneNumText.text]) {
+    if (![FXD_Tool isMobileNumber:self.phoneNumText.text]) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效的手机号码"];
         return;
     }
@@ -324,7 +324,7 @@
             return;
         }
         
-        if (![Utility sharedUtility].networkState) {
+        if (![FXD_Utility sharedUtility].networkState) {
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"似乎没有连接到网络"];
             return;
         }
@@ -369,7 +369,7 @@
 
 - (void)login
 {
-    if ([Utility sharedUtility].networkState == NO) {
+    if ([FXD_Utility sharedUtility].networkState == NO) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"没有连接到网络"];
         return;
     }

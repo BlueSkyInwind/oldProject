@@ -9,13 +9,13 @@
 #ifndef fxdProduct_Bridging_Header_h
 #define fxdProduct_Bridging_Header_h
 
-#import "Tool.h"
+#import "FXD_Tool.h"
 #import "SesameCreditCertificationVCModules.h"
 #import "UserMobileAuthenticationVCModules.h"
 #import "MGLiveViewController.h"
 #import "BaseNavigationViewController.h"
 #import "GlobalConfig.h"
-#import "Utility.h"
+#import "FXD_Utility.h"
 #import "UserDataViewModel.h"
 #import "MBPAlertView.h"
 #import "UIColor+Extend.h"
@@ -43,7 +43,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import "UserDataResult.h"
 #import "LoanApplicationForConfirmationVCModules.h"
-#import "UserInfoObj.h"
+#import "FXD_UserInfoConfiguration.h"
 #import "FXDWebViewController.h"
 #import "ApplicationViewModel.h"
 #import "CapitalListModel.h"

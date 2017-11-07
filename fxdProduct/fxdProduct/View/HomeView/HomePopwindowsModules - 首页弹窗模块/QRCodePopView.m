@@ -25,8 +25,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self = [[NSBundle mainBundle] loadNibNamed:[[self class] description] owner:self options:nil].lastObject;
-        [Tool setCorner:self.wxCopyBtn borderColor:[UIColor clearColor]];
-        [Tool setCorner:self.saveImageBtn borderColor:[UIColor clearColor]];
+        [FXD_Tool setCorner:self.wxCopyBtn borderColor:[UIColor clearColor]];
+        [FXD_Tool setCorner:self.saveImageBtn borderColor:[UIColor clearColor]];
         NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"公众号:发薪微钱包"];
         [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(53, 166, 255) range:NSMakeRange(attriStr.length-5,5)];
         _publicWXLabel.attributedText = attriStr;

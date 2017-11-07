@@ -23,8 +23,8 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"芝麻信用授权";
     [self addBackItem];
-    self.realNameTextField.text = [Utility sharedUtility].userInfo.realName;
-    self.userIDNumberTextField.text = [Utility sharedUtility].userInfo.userIDNumber;
+    self.realNameTextField.text = [FXD_Utility sharedUtility].userInfo.realName;
+    self.userIDNumberTextField.text = [FXD_Utility sharedUtility].userInfo.userIDNumber;
     [self.immediateAuthorizationBtn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
     if (UI_IS_IPHONEX) {
         self.headerViewHeader.constant = 88;
@@ -37,12 +37,12 @@
         DLog(@"%@",self.navigationController.viewControllers);
     
         NSDictionary *paramDic = @{
-                                   @"juid":[Utility sharedUtility].userInfo.juid,
+                                   @"juid":[FXD_Utility sharedUtility].userInfo.juid,
                                    @"id_code_":self.userIDNumberTextField.text,
                                    @"user_name_":self.realNameTextField.text
                                    };
         
-        [[FXDNetWorkManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_submitZhimaCredit_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_submitZhimaCredit_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
             DLog(@"=======%@",object);
             SubmitZhimaCreditAuthModel *model = [SubmitZhimaCreditAuthModel yy_modelWithJSON:object];
             FXDWebViewController *webview = [[FXDWebViewController alloc] init];

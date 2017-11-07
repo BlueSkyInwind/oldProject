@@ -6,9 +6,9 @@
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface LoanMoneyViewModel : ViewModelClass
+@interface LoanMoneyViewModel : FXD_ViewModelBaseClass
 
 /**
  三方协议协议内容获取接口

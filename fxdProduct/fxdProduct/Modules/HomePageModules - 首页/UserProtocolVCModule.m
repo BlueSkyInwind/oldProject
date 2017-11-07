@@ -71,7 +71,7 @@
                      @"protocol_type_":@"5"};
     }
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             
             NSString * str = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];

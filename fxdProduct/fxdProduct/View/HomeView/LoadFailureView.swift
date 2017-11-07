@@ -72,7 +72,7 @@ extension LoadFailureView {
         refreshBtn?.setTitle("点击刷新", for: .normal)
         refreshBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
         refreshBtn?.addTarget(self, action: #selector(refreshBtnClick), for: .touchUpInside)
-        Tool.setCorner(refreshBtn, borderColor: UI_MAIN_COLOR)
+        FXD_Tool.setCorner(refreshBtn, borderColor: UI_MAIN_COLOR)
         self.addSubview(refreshBtn!)
         refreshBtn?.snp.makeConstraints { (make) in
             make.top.equalTo((reminderLabel?.snp.bottom)!).offset(35)

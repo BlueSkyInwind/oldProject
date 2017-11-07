@@ -6,9 +6,9 @@
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface RepayWeeklyRecordViewModel : ViewModelClass
+@interface RepayWeeklyRecordViewModel : FXD_ViewModelBaseClass
 
 /**
  还款记录列表

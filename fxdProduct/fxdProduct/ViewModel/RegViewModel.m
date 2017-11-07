@@ -50,7 +50,7 @@
 
 -(void)registerRequest:(NSDictionary *)paramDic {
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_reg_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_reg_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         ReturnMsgBaseClass * regParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
         self.returnBlock(regParse);
     } failure:^(EnumServerStatus status, id object) {

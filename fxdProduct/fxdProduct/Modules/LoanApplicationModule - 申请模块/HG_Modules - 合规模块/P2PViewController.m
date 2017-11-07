@@ -16,7 +16,7 @@
 #import "AccountHSServiceModel.h"
 #import "QryUserStatusModel.h"
 #import "getBidStatus.h"
-#import "RepayDetailViewController.h"
+#import "LoanPaymentDetailVCModule.h"
 #import "CheckViewModel.h"
 #import "RepayRequestManage.h"
 @interface P2PViewController ()<WKUIDelegate,WKNavigationDelegate>

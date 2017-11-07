@@ -13,7 +13,7 @@
 
 - (void)fatchFindPass:(NSDictionary *)paramDic
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_forget_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_forget_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         ReturnMsgBaseClass *findParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
         self.returnBlock(findParse);
     } failure:^(EnumServerStatus status, id object) {

@@ -84,7 +84,7 @@
     [footView addSubview:_saveBtn];
     [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
     [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [Tool setCorner:_saveBtn borderColor:[UIColor clearColor]];
+    [FXD_Tool setCorner:_saveBtn borderColor:[UIColor clearColor]];
     _saveBtn.enabled = false;
     [_saveBtn setBackgroundColor:rgb(139, 140, 143)];
     [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -257,7 +257,7 @@
 {
     DLog(@"保存");
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_customerContact_url] parameters:[self getContactsInfo] finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_customerContact_url] parameters:[self getContactsInfo] finished:^(EnumServerStatus status, id object) {
         if ([[object valueForKey:@"flag"] isEqualToString:@"0000"]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow  message:[object valueForKey:@"msg"]];
             [self.navigationController popViewControllerAnimated:true];
@@ -493,7 +493,7 @@
     NSData *data = [NSJSONSerialization dataWithJSONObject:conArr options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSDictionary *dict = @{@"userContactsBaseBean":jsonStr};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_saveUserContacts_jhtml] parameters:dict finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_saveUserContacts_jhtml] parameters:dict finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
                 
@@ -531,7 +531,7 @@
             if ([phoneNum isEqualToString:dataListAll[5]]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"两个联系人号码不能一致"];
                 [dataColor replaceObjectAtIndex:2 withObject:CellBGColorRed];
-            } else if ([phoneNum isEqualToString:[Utility sharedUtility].userInfo.userMobilePhone]) {
+            } else if ([phoneNum isEqualToString:[FXD_Utility sharedUtility].userInfo.userMobilePhone]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"联系人号码不能与本人号码一致"];
                 [dataColor replaceObjectAtIndex:2 withObject:CellBGColorRed];
             }
@@ -569,7 +569,7 @@
             if ([dataListAll[2] isEqualToString:phoneNum]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"两个联系人号码不能一致"];
                 [dataColor replaceObjectAtIndex:5 withObject:CellBGColorRed];
-            }else if ([phoneNum isEqualToString:[Utility sharedUtility].userInfo.userMobilePhone]) {
+            }else if ([phoneNum isEqualToString:[FXD_Utility sharedUtility].userInfo.userMobilePhone]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"两个联系人号码不能一致"];
                 [dataColor replaceObjectAtIndex:2 withObject:CellBGColorRed];
             }
@@ -763,7 +763,7 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的联系人手机号"];
             [dataColor replaceObjectAtIndex:2 withObject:CellBGColorRed];
             
-        }else if ([telString isEqualToString:[Utility sharedUtility].userInfo.userMobilePhone]){
+        }else if ([telString isEqualToString:[FXD_Utility sharedUtility].userInfo.userMobilePhone]){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"联系人号码不能与本人一致"];
             [dataColor replaceObjectAtIndex:2 withObject:CellBGColorRed];
         }
@@ -805,7 +805,7 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的联系人手机号"];
             [dataColor replaceObjectAtIndex:5 withObject:CellBGColorRed];
             
-        }else if ([telString isEqualToString:[Utility sharedUtility].userInfo.userMobilePhone]){
+        }else if ([telString isEqualToString:[FXD_Utility sharedUtility].userInfo.userMobilePhone]){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"联系人号码不能与本人一致"];
             [dataColor replaceObjectAtIndex:5 withObject:CellBGColorRed];
         }else if ([textField.text isEqualToString:dataListAll[2]]){

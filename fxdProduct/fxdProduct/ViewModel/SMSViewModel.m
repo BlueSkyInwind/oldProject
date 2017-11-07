@@ -68,7 +68,7 @@
 
 -(void)postVerifyCode:(NSDictionary *)paramDic  urlStr:(NSString *)urlStr{
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,urlStr] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,urlStr] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         ReturnMsgBaseClass *returnModel = [ReturnMsgBaseClass modelObjectWithDictionary:object];
         self.returnBlock(returnModel);
     } failure:^(EnumServerStatus status, id object) {
@@ -80,7 +80,7 @@
 
 -(void)postPicVerifyCode{
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getPicCode_url] parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getPicCode_url] parameters:nil finished:^(EnumServerStatus status, id object) {
         self.returnBlock(object);
     } failure:^(EnumServerStatus status, id object) {
         [self faileBlock];

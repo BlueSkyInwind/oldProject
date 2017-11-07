@@ -50,7 +50,8 @@
         self.headerViewHeader.constant = 88;
         self.bottomViewBottom.constant = 100;
     }
-    [Tool setCorner:self.sureBtn borderColor:[UIColor clearColor]];
+    [FXD_Tool setCorner:self.sureBtn borderColor:[UIColor clearColor]];
+
     NSString *str = self.agreementLabel.text;
     NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
     [ssa addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,13)];
@@ -250,7 +251,7 @@
     NSDictionary *paramDic = @{@"product_id_":_productId,
                                @"third_tongd_code":blackBox};
     __weak LoanApplicationForConfirmationVCModules *weakSelf = self;
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_secondApply_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_secondApply_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             if ([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0002"]) {

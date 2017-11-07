@@ -267,7 +267,7 @@ UIKIT_EXTERN NSString * const kTopView;
 UIKIT_EXTERN NSString * const UserName;
 
 // 表名
-#define userTableName   [Utility sharedUtility].userInfo.userName
+#define userTableName   [FXD_Utility sharedUtility].userInfo.userName
 
 //通知
 UIKIT_EXTERN NSString * const  kAddMaterailNotification;

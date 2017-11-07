@@ -13,7 +13,7 @@
 
 - (void)fatchCareerInfo:(NSDictionary *)paramDic
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getCustomerCarrer_jhtml] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getCustomerCarrer_jhtml] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         CustomerCareerBaseClass *returnModel = [CustomerCareerBaseClass modelObjectWithDictionary:object];
         self.returnBlock(returnModel);
     } failure:^(EnumServerStatus status, id object) {

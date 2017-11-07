@@ -55,7 +55,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self addBackItem];
-    [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     _bankCodeNUm = @"";
     _bankNum = @"";
     defaultBankIndex = -1;
@@ -99,7 +99,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                                @"card_no_":[dataListAll3 objectAtIndex:1],
                                @"card_bank_":_bankCodeNUm};
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
@@ -173,7 +173,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
             cell.textField.tag = 202;
             [cell.textField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
         }
-        [Tool setCorner:cell.bgView borderColor:dataColorAll3[indexPath.row]];
+        [FXD_Tool setCorner:cell.bgView borderColor:dataColorAll3[indexPath.row]];
         cell.selectionStyle  = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -400,7 +400,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请重新选择银行卡类型"];
             }else if ([dataListAll3[1] length]<16){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的卡号"];
-            }else if (![Tool isMobileNumber:dataListAll3[2]]){
+            }else if (![FXD_Tool isMobileNumber:dataListAll3[2]]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的手机号"];
             }else{
                 sender.userInteractionEnabled = NO;
@@ -487,7 +487,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请重新选择银行卡类型"];
     }else if ([dataListAll3[1] length]<16){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的卡号"];
-    }else if (![Tool isMobileNumber:dataListAll3[2]]){
+    }else if (![FXD_Tool isMobileNumber:dataListAll3[2]]){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的手机号"];
     }else if ([dataListAll3[3] isEqualToString:@""] ){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
@@ -548,7 +548,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                                @"bank_reserve_phone_":dataListAll3[2]
                                };
     //银行卡四要素验证
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_BankNumCheck_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_BankNumCheck_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
                 [self PostSubmitUrl];
@@ -567,7 +567,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 {
     //提款
     NSDictionary *paramDic = [self getSubmitInfo];
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_drawApply_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_drawApply_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
                 LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
@@ -599,7 +599,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写正确的验证码"];
         return;
     }
-    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@&mobile_=%@",_P2P_url,_huifu_url,[Utility sharedUtility].userInfo.userMobilePhone,[Utility sharedUtility].userInfo.userIDNumber,[Utility sharedUtility].userInfo.realName,_transition_url,bankName,bankNo,dataListAll3[3],_sms_seq,dataListAll3[2]];
+    NSString *url = [NSString stringWithFormat:@"%@%@?from_mobile_=%@&id_number_=%@&user_name_=%@&PageType=1&ret_url_=%@&bank_id_=%@&card_number_=%@&sms_code_=%@&sms_seq_=%@&mobile_=%@",_P2P_url,_huifu_url,[FXD_Utility sharedUtility].userInfo.userMobilePhone,[FXD_Utility sharedUtility].userInfo.userIDNumber,[FXD_Utility sharedUtility].userInfo.realName,_transition_url,bankName,bankNo,dataListAll3[3],_sms_seq,dataListAll3[2]];
     NSLog(@"%@",url);
     P2PViewController *p2pVC = [[P2PViewController alloc] init];
     p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];

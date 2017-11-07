@@ -19,7 +19,7 @@
                                 @"baseId":baseId
                                 };
 
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_createApplication_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_createApplication_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -35,7 +35,7 @@
 
     NSDictionary * paramDic = @{@"productId":productId};
 
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_ApplicationViewInfo_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_ApplicationViewInfo_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -52,7 +52,7 @@
                                 @"approvalAmount":approvalAmount
                                 };
     
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_CapitalList_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_CapitalList_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -72,7 +72,7 @@
     param.periods = periods;
     NSDictionary *paramDic = [param toDictionary];
     
-    [[FXDNetWorkManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_CapitalLoan_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_CapitalLoan_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -85,7 +85,7 @@
 
 
 -(void)capitalLoanFail{
-    [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_CapitalLoanFail_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_CapitalLoanFail_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -103,7 +103,7 @@
  */
 -(void)obtainUserDiscountTicketList:(NSString *)type displayType:(NSString *)displayType{
     NSDictionary * paramDic = @{@"activityType":type,@"displayType":displayType};
-    [[FXDNetWorkManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_DiscountTicketList_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_DiscountTicketList_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }

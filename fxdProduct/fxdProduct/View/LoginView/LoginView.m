@@ -30,10 +30,10 @@
 -(void)configureView{
     
     _countdown = 60;
-    [Tool setCorner:self.userIDView borderColor:UI_MAIN_COLOR];
-    [Tool setCorner:self.passView borderColor:UI_MAIN_COLOR];
-    [Tool setCorner:self.codeView borderColor:UI_MAIN_COLOR];
-    [Tool setCorner:self.loginBtn borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.userIDView borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.passView borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.codeView borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.loginBtn borderColor:UI_MAIN_COLOR];
     self.moblieIcon.image = [[UIImage imageNamed:@"1_Signin_icon_01"] imageWithTintColor:UI_MAIN_COLOR];
     self.passIcon.image = [[UIImage imageNamed:@"1_Signin_icon_03"] imageWithTintColor:UI_MAIN_COLOR];
     self.smsIcon.image = [[UIImage imageNamed:@"1_Signin_icon_02"] imageWithTintColor:UI_MAIN_COLOR];
@@ -83,7 +83,7 @@
 - (void)setUISignal
 {
     RACSignal *validUserNameSignal = [self.userNameField.rac_textSignal map:^id(NSString *value) {
-        return @([Tool isMobileNumber:value]);
+        return @([FXD_Tool isMobileNumber:value]);
     }];
     
     RACSignal *validPassFieldSignal = [self.passField.rac_textSignal map:^id(NSString *value) {
@@ -172,7 +172,7 @@
 
 - (IBAction)snsCodeCountdownBtnClick:(id)sender {
     [self endEditing:YES];
-    if ([Tool isMobileNumber:self.userNameField.text]) {
+    if ([FXD_Tool isMobileNumber:self.userNameField.text]) {
         self.sendCodeButton.userInteractionEnabled = NO;
         self.sendCodeButton.alpha = 0.4;
         [self.sendCodeButton setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];

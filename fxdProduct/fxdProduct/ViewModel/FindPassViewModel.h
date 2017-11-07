@@ -6,9 +6,9 @@
 //  Copyright © 2016年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface FindPassViewModel : ViewModelClass
+@interface FindPassViewModel : FXD_ViewModelBaseClass
 
 - (void)fatchFindPass:(NSDictionary *)paramDic;
 

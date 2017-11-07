@@ -39,9 +39,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [Tool setCorner:self.userIDView borderColor:RGBColor(0, 170, 238, 1)];
-    [Tool setCorner:self.passView borderColor:RGBColor(0, 170, 238, 1)];
-    [Tool setCorner:self.updateBtn borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.userIDView borderColor:RGBColor(0, 170, 238, 1)];
+    [FXD_Tool setCorner:self.passView borderColor:RGBColor(0, 170, 238, 1)];
+    [FXD_Tool setCorner:self.updateBtn borderColor:UI_MAIN_COLOR];
     self.phoneNumText.text = self.phoneStr;
     self.phoneNumText.userInteractionEnabled=NO;
     _countdown = 60;
@@ -101,12 +101,12 @@
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {
     [self.view endEditing:YES];
     
-    if (![Tool isMobileNumber:self.phoneNumText.text]) {
+    if (![FXD_Tool isMobileNumber:self.phoneNumText.text]) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效的手机号码"];
         return;
     }
     
-    if (![Utility sharedUtility].networkState) {
+    if (![FXD_Utility sharedUtility].networkState) {
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"似乎没有连接到网络"];
         return;
     }
@@ -147,7 +147,7 @@
     NSDictionary *paramDic = [self getDicOfChange];
     
     [self.view endEditing:YES];
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_updateDevID_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_updateDevID_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         _updateParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
         if ([_updateParse.flag isEqualToString:@"0000"]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:_updateParse.msg];
@@ -163,7 +163,7 @@
 
 - (void)login
 {
-    if ([Utility sharedUtility].networkState) {
+    if ([FXD_Utility sharedUtility].networkState) {
             
             LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
             [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -195,7 +195,7 @@
 {
     return @{@"mobile_phone_":self.phoneNumText.text,
              @"verify_code_":self.verCodeText.text,
-             @"last_login_device_":[Utility sharedUtility].userInfo.uuidStr};
+             @"last_login_device_":[FXD_Utility sharedUtility].userInfo.uuidStr};
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

@@ -130,19 +130,19 @@
         
         _moneyLabel.text = [NSString stringWithFormat:@"%.2f元",_bill.amount_total_];
         if (_bill.status_ == 2) {
-            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 逾期",[Tool dateToFormatString:_bill.bill_date_]];
+            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 逾期",[FXD_Tool dateToFormatString:_bill.bill_date_]];
             _detailStateLabel.textColor = [UIColor redColor];
             _moneyLabel.textColor = [UIColor redColor];
         }else if (_bill.status_ == 1) {
-            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 已还",[Tool dateToFormatString:_bill.bill_date_]];
+            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 已还",[FXD_Tool dateToFormatString:_bill.bill_date_]];
             _detailStateLabel.textColor = [UIColor grayColor];
             _moneyLabel.textColor = [UIColor grayColor];
         }else if (_bill.status_ == 4) {
-            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 待还",[Tool dateToFormatString:_bill.bill_date_]];
+            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 待还",[FXD_Tool dateToFormatString:_bill.bill_date_]];
             _detailStateLabel.textColor = [UIColor grayColor];
             _moneyLabel.textColor = rgb(253, 111, 0);
         }else {
-            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 待还",[Tool dateToFormatString:_bill.bill_date_]];
+            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 待还",[FXD_Tool dateToFormatString:_bill.bill_date_]];
             _detailStateLabel.textColor = [UIColor grayColor];
             _moneyLabel.textColor = UI_MAIN_COLOR;
         }

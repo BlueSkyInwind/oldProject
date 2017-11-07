@@ -28,7 +28,7 @@
 #import "P2PViewController.h"
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "LoginViewModel.h"
-#import "FirstBorrowViewController.h"
+#import "HomepageActivityImageDisplayModule.h"
 #import "AppDelegate.h"
 #import "AuthenticationCenterVCModules.h"
 #import "LoanMoneyViewModel.h"
@@ -81,9 +81,9 @@
     [super viewDidAppear:animated];
     [UserDefaulInfo getUserInfoData];
     
-    if ([Utility sharedUtility].loginFlage) {
+    if ([FXD_Utility sharedUtility].loginFlage) {
         //获取位置信息
-        if ([Utility sharedUtility].isObtainUserLocation) {
+        if ([FXD_Utility sharedUtility].isObtainUserLocation) {
             [self openLocationService];
         }
     }
@@ -149,7 +149,7 @@
             [loginViewModel uploadLocationInfoLongitude:[NSString stringWithFormat:@"%f",_longitude] Latitude:[NSString stringWithFormat:@"%f",_latitude]];
         }
     [_locService stopUserLocationService];
-    [Utility sharedUtility].isObtainUserLocation = NO;
+    [FXD_Utility sharedUtility].isObtainUserLocation = NO;
 }
 
 #pragma mark  - 视图布局
@@ -282,7 +282,7 @@
 {
     DLog(@"广告图片点击");
     if ([_advTapToUrl containsString:@".png"] || [_advTapToUrl containsString:@".jpg"]) {
-        FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
+        HomepageActivityImageDisplayModule *firstBorrowVC = [[HomepageActivityImageDisplayModule alloc] init];
         firstBorrowVC.url = _advImageUrl;
         [self.navigationController pushViewController:firstBorrowVC animated:YES];
         [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
@@ -487,7 +487,7 @@
         HomeBannerList *files = _homeProductList.data.bannerList[index];
         if ([files.toUrl.lowercaseString hasPrefix:@"http"] || [files.toUrl.lowercaseString hasPrefix:@"https"]) {
             if ([files.toUrl.lowercaseString hasSuffix:@"sjbuy"]) {
-                FirstBorrowViewController *firstBorrowVC = [[FirstBorrowViewController alloc] init];
+                HomepageActivityImageDisplayModule *firstBorrowVC = [[HomepageActivityImageDisplayModule alloc] init];
                 firstBorrowVC.url = files.toUrl;
                 [self.navigationController pushViewController:firstBorrowVC animated:YES];
             }else{
@@ -635,8 +635,8 @@
 }
 #pragma mark 提款，还款，中间状态点击
 -(void)drawingBtnClick{
-    if ([Utility sharedUtility].loginFlage) {
-        [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
+    if ([FXD_Utility sharedUtility].loginFlage) {
+        [FXD_Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
         [self accordingToTheStateJumpPage];
     } else {
         [self presentLoginVC:self];
@@ -726,11 +726,9 @@
  */
 -(void)applyImmediatelyBtnClick:(NSString *)money{
     NSLog(@"点击立即申请=%@",money);
-
-    if ([Utility sharedUtility].loginFlage) {
-        [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
+    if ([FXD_Utility sharedUtility].loginFlage) {
+        [FXD_Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
         [self getTheEvaluationResults];
-
     } else {
         [self presentLoginVC:self];
     }
@@ -785,8 +783,8 @@
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"额度已满"];
         return;
     }
-    if ([Utility sharedUtility].loginFlage) {
-        [Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productList[0].productId;
+    if ([FXD_Utility sharedUtility].loginFlage) {
+        [FXD_Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productList[0].productId;
         
         [self goLoanApplicationForConfirmationVCModules:_homeProductList.data.productList[0].productId];
         
@@ -804,10 +802,10 @@
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"额度已满"];
             return;
         }
-        if ([Utility sharedUtility].loginFlage) {
-            [Utility sharedUtility].userInfo.pruductId = productId;
+
+        if ([FXD_Utility sharedUtility].loginFlage) {
+            [FXD_Utility sharedUtility].userInfo.pruductId = productId;
             [self goLoanApplicationForConfirmationVCModules:productId];
-            
         } else {
             [self presentLoginVC:self];
         }

@@ -55,7 +55,7 @@
     
     [self.view addSubview:moenyViewing];
 
-    [Tool setCorner:moenyViewing.sureBtn borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:moenyViewing.sureBtn borderColor:UI_MAIN_COLOR];
     //添加各种事件
     //续期点击事件
     moenyViewing.stagingView.userInteractionEnabled = YES;
@@ -113,14 +113,14 @@
 
     if (moenyViewing.agreementBtn.selected) {
         moenyViewing.sureBtn.enabled = YES;
-        [Tool setCorner:moenyViewing.sureBtn borderColor:UI_MAIN_COLOR];
+        [FXD_Tool setCorner:moenyViewing.sureBtn borderColor:UI_MAIN_COLOR];
         moenyViewing.sureBtn.backgroundColor = UI_MAIN_COLOR;
         [moenyViewing.agreementBtn setImage:[UIImage imageNamed:@"Sign-in-icon06"] forState:UIControlStateNormal];
 
     }else{
     
         moenyViewing.sureBtn.enabled = NO;
-        [Tool setCorner:moenyViewing.sureBtn borderColor:rgb(158, 158, 159)];
+        [FXD_Tool setCorner:moenyViewing.sureBtn borderColor:rgb(158, 158, 159)];
         moenyViewing.sureBtn.backgroundColor = rgb(158, 158, 159);
         [moenyViewing.agreementBtn setImage:[UIImage imageNamed:@"Sign-in-icon05"] forState:UIControlStateNormal];
     }
@@ -382,7 +382,7 @@
                      @"periods_":@1};
     }
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
@@ -425,7 +425,7 @@
         if ([_repayModel.platformType isEqualToString:@"2"]) {
             if ([_repayModel.userStatus isEqualToString:@"3"]) {//待激活用户
                 
-                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[Utility sharedUtility].userInfo.userMobilePhone];
+                NSString *url = [NSString stringWithFormat:@"%@%@?page_type_=%@&ret_url_=%@&from_mobile_=%@",_P2P_url,_bosAcctActivate_url,@"1",_transition_url,[FXD_Utility sharedUtility].userInfo.userMobilePhone];
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 //        p2pVC.isOpenAccount = NO;
                 p2pVC.urlStr = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];

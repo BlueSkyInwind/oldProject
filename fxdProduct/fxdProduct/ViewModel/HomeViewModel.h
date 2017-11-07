@@ -6,10 +6,10 @@
 //  Copyright © 2015年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 #import "HomeBannerParamModel.h"
 #import "HomePopParam.h"
-@interface HomeViewModel : ViewModelClass
+@interface HomeViewModel : FXD_ViewModelBaseClass
 
 /**
  用户装填请求
@@ -37,7 +37,7 @@
 
 
 
-@interface ProductListViewModel : ViewModelClass
+@interface ProductListViewModel : FXD_ViewModelBaseClass
 
 /**
  获取产品列表

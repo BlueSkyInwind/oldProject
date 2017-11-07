@@ -22,9 +22,9 @@
 {
     [super awakeFromNib];
     //修改按钮四周的颜色
-    [Tool setCorner:self.sureBtn borderColor:[UIColor whiteColor]];
-    [Tool setCorner:self.promote borderColor:[UIColor whiteColor]];
-    [Tool setCorner:self.bankView borderColor:UI_MAIN_COLOR];
+    [FXD_Tool setCorner:self.sureBtn borderColor:[UIColor whiteColor]];
+    [FXD_Tool setCorner:self.promote borderColor:[UIColor whiteColor]];
+    [FXD_Tool setCorner:self.bankView borderColor:UI_MAIN_COLOR];
     UIImage *btnImg = [UIImage imageNamed:@"trick"];
     UIImage *selectImg = [UIImage imageNamed:@"tricked"];
     [_userCheckBtn setImage:btnImg forState:UIControlStateNormal];

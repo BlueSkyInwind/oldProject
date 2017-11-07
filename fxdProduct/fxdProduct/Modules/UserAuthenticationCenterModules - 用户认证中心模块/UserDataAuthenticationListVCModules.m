@@ -137,7 +137,7 @@
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.15)];
     footView.backgroundColor = [UIColor whiteColor];
     _applyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [Tool setCorner:_applyBtn borderColor:[UIColor clearColor]];
+    [FXD_Tool setCorner:_applyBtn borderColor:[UIColor clearColor]];
     [_applyBtn setTitle:@"额度测评" forState:UIControlStateNormal];
     [_applyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_applyBtn setBackgroundColor:rgb(139, 140, 143)];
@@ -475,28 +475,28 @@
     GetCustomerBaseViewModel *customerInfo = [[GetCustomerBaseViewModel alloc] init];
     [customerInfo setBlockWithReturnBlock:^(id returnValue) {
         Custom_BaseInfo *custom_model = returnValue;
-        [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+        [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
         if ([custom_model.flag isEqualToString:@"0000"]) {
             id data = [DataWriteAndRead readDataWithkey:UserInfomation];
             if (data) {
                 [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
                 if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
                     [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-                        [Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
+                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
+                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
+                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
+                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
                     }
                 }
             } else {
                 if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
                     [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-                        [Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
+                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
+                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
+                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
+                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
+                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
                     }
                 } else {
                     [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
@@ -685,7 +685,7 @@
         loanFirstVC.rulesId = _rulesId;
     }
     
-    if ([[Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan]) {
+    if ([[FXD_Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan]) {
         loanFirstVC.req_loan_amt = _req_loan_amt;
     }
     [self.navigationController pushViewController:loanFirstVC animated:true];
@@ -694,7 +694,7 @@
 - (void)fatchRate:(void(^)(RateModel *rate))finish
 {
     NSDictionary *dic = @{@"priduct_id_":RapidLoan};
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
         RateModel *rateParse = [RateModel yy_modelWithJSON:object];
         if ([rateParse.flag isEqualToString:@"0000"]) {
             finish(rateParse);
@@ -744,7 +744,7 @@
 -(void)configMoxieSDK{
     /***必须配置的基本参数*/
     [MoxieSDK shared].delegate = self;
-    [MoxieSDK shared].userId = [Utility sharedUtility].userInfo.juid;
+    [MoxieSDK shared].userId = [FXD_Utility sharedUtility].userInfo.juid;
     [MoxieSDK shared].apiKey = theMoxieApiKey;
     [MoxieSDK shared].fromController = self;
     [MoxieSDK shared].useNavigationPush = NO;
