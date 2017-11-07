@@ -46,6 +46,8 @@
     [self addBackItem];
     _webView.scrollView.showsVerticalScrollIndicator = false;
     DLog(@"%@",_urlStr);
+    
+    _urlStr = @"http://192.168.9.85:8010/fxd-wxact/wxact_171001";
     _urlStr = [_urlStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];

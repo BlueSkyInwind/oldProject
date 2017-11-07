@@ -174,11 +174,12 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         
         [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:src] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+            NSLog(@"%ld,%ld",receivedSize,expectedSize);
         } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
             NSLog(@"%ld",cacheType);
-            if (data) {
-                UIImage *image = [UIImage imageWithData:data];
-                UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            if (data || image) {
+                UIImage * resultImage = data == nil ? image : [UIImage imageWithData:data];
+                UIImageWriteToSavedPhotosAlbum(resultImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
             }else{
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"保存失败"];
             }
