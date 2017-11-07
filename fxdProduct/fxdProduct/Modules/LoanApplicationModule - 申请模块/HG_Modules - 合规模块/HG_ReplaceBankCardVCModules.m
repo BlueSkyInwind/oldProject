@@ -131,6 +131,7 @@
     }
 }
 
+#pragma mark cell点击事件
 -(void)senderBtn:(UIButton *)sender
 {
     switch (sender.tag) {
@@ -166,6 +167,7 @@
 
 }
 
+//验证码倒计时
 -(void)closeGetVerifyButton
 {
     _countdown -= 1;
@@ -181,8 +183,6 @@
 }
 
 #pragma mark  点击发送验证码网络请求
-
-
 -(void)senderSms{
     
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -278,9 +278,7 @@
         if (newString.length >= 24) {
             return NO;
         }
-        //        NSMutableArray * array=[NSMutableArray arrayWithArray:[newString   componentsSeparatedByString:@" "]];
-        //        NSLog(@"%@",array);
-        //        NSString *ns=[array componentsJoinedByString:@""];
+
         [dataListAll3 replaceObjectAtIndex:1 withObject:newString];
         [textField setText:newString];
         return NO;
@@ -304,7 +302,6 @@
     {
         if ([textField.text length]<1) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的银行卡"];
-            //                [dataColorAll3 replaceObjectAtIndex:0 withObject:redColor];
         }else{
             [dataListAll3 replaceObjectAtIndex:0 withObject:textField.text];
             [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
@@ -316,7 +313,6 @@
     {
         if ([textField.text length]<19) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"银行卡位数不对"];
-            //                [dataColorAll3 replaceObjectAtIndex:1 withObject:redColor];
         }else{
             [dataListAll3 replaceObjectAtIndex:1 withObject:textField.text];
             [dataColorAll3 replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
@@ -327,7 +323,6 @@
     {
         if ([textField.text isEqualToString:@""]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
-            //                [dataColorAll3 replaceObjectAtIndex:3 withObject:redColor];
         }else{
             [dataListAll3 replaceObjectAtIndex:3 withObject:textField.text];
             [dataColorAll3 replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
@@ -340,7 +335,6 @@
 - (void)BankSelect:(SupportBankList *)bankInfo andSectionRow:(NSInteger)sectionRow
 {
     [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.bank_name_];//银行名字
-    //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
     _bankLogogram = bankInfo.bank_short_name_;
     [dataListAll3 replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%ld",(long)sectionRow]];
     [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
@@ -352,11 +346,6 @@
  */
 - (void)startBankCamera
 {
-    //    WTCameraViewController *cameraVC = [[WTCameraViewController alloc]init];
-    //    cameraVC.delegate = self;
-    //    cameraVC.devcode = Devcode; //开发码
-    //    self.navigationController.navigationBarHidden = YES;
-    //    [self.navigationController pushViewController:cameraVC animated:YES];
 
     BOOL bankcard = [MGBankCardManager getLicense];
 
@@ -371,12 +360,7 @@
     MGBankCardManager *cardManager = [[MGBankCardManager alloc] init];
     [cardManager setDebug:YES];
     [cardManager CardStart:self finish:^(MGBankCardModel * _Nullable result) {
-        //        weakSelf.bankImageView.image = result.image;
-        //        weakSelf.bankNumView.text = result.bankCardNumber;
 
-        //        _bankCodeNUm = result.bankCardNumber;
-        //        _bankCodeNUm = [_bankCodeNUm stringByReplacingOccurrencesOfString:@" " withString:@""];
-        //        _bankCodeNUm = [self changeStr:_bankCodeNUm];
         NSString *_bankNum;
         _bankNum = result.bankCardNumber;
         _bankNum = [_bankNum stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -465,7 +449,6 @@
                     }
                 }
             }
-            //  [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.appmsg];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.result.appmsg];
         }

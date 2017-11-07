@@ -15,8 +15,11 @@
 
 @interface ChangePasswordViewController ()<UITableViewDelegate,UITableViewDataSource,UIViewControllerTransitioningDelegate>{
     
+    //旧密码
     NSString * oldPassword;
+    //新密码
     NSString * newPassword;
+    //左边标题数组
     NSArray * tiitleArr;
 
 }
@@ -39,6 +42,7 @@
     [self configureview];
 
 }
+#pragma mark 初始化tableView
 -(void)configureview{
     
     self.tableView = [[UITableView alloc]init];
@@ -132,6 +136,7 @@
     return 30;
 }
 
+#pragma mark 确认提交按钮
 -(void)saveChangePassword:(id)sender{
     
     ChangePasswordViewModel * changePasswordVM = [[ChangePasswordViewModel alloc]init];
@@ -165,6 +170,8 @@
         [changePasswordVM fetchChangePassowrdCurrent:oldPassword new:newPassword];
     }
 }
+
+#pragma mark 初步检查用户输入情况
 -(BOOL)checkInputPassword{
     
     ChangePasswordTableViewCell * oldcell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
@@ -191,6 +198,8 @@
     
     return YES;
 }
+
+#pragma mark 登录
 - (void)presentLogin
 {
     LoginViewController *loginView = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];

@@ -25,7 +25,6 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title=@"意见反馈";
-//    [Tool setCorner:self.submitBtn borderColor:UI_MAIN_COLOR];
     [self addBackItem];
 }
 
@@ -34,6 +33,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark 提交事件
 - (IBAction)submitBtn:(id)sender {
     
     if (![self.foreTextview.text isEqualToString:@""] && ![self.foreTextview.text isEqualToString:@"请在此输入您的宝贵建议"]) {
@@ -61,28 +62,7 @@
                 
             }];
             [ideaBackViewModel saveFeedBackContent:self.foreTextview.text];
-            
-//            NSDictionary *paramDic = @{
-//                                       @"content_":self.foreTextview.text,
-//                                       @"feedback_way_":PLATFORM,
-//                                       };
-//            NSLog(@"%@",paramDic);
-//            [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:
-//             [NSString stringWithFormat:@"%@%@",_main_url,_feedBack_url]
-//                                                       parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//                _feedParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-//                if ([_feedParse.flag isEqualToString:@"0000"]) {
-//                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"谢谢您的反馈"];
-//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                        [self.navigationController popViewControllerAnimated:YES];
-//                    });
-//                    
-//                } else {
-//                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_feedParse.msg];
-//                }
-//            } failure:^(EnumServerStatus status, id object) {
-//                
-//            }];
+
         }
     } else {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写您宝贵的意见"];

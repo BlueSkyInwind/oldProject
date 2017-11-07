@@ -28,23 +28,32 @@
 @interface HG_OpenAccountAddBankCardModules ()<UITableViewDataSource,UITableViewDelegate,
 UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 {
+    //左边标题数组
     NSArray *placeArray3;
+    //右边内容数组
     NSMutableArray *dataListAll3;
+    //颜色数组
     NSMutableArray *dataColorAll3;
-    
+    //验证码按钮
     UIButton *_backTimeBtn;
-    
+    //倒计时时间
     NSInteger _countdown;
     NSTimer * _countdownTimer;
+    //发送短信服务返回的数据
     ReturnMsgBaseClass *_codeParse;
-    UserCardResult *_userCardModel;
+    //银行卡code
     NSString *_bankCodeNUm;
+    //bank_id_
     NSString *_bankLogogram;
+    //银行卡账号
     NSString *_bankNum;
-    NSInteger _cardFlag;
+    //选中银行卡列表的index
     NSInteger defaultBankIndex;
+    //授权同意书的状态
     BOOL _btnStatus;
+    //短信序列号
     NSString *_sms_seq;
+    //短信验证码
     NSString *_sms_code_;
 }
 @end
@@ -81,6 +90,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     }
 }
 
+#pragma mark 点击协议复选框
 - (IBAction)agreeBtnClick:(UIButton *)sender {
     if (!_btnStatus) {
         [self.agreeBtn setBackgroundImage:[UIImage imageNamed:@"tricked"] forState:UIControlStateNormal];
@@ -90,6 +100,8 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     _btnStatus = !_btnStatus;
 }
 
+
+#pragma mark 点击协议按钮获取协议内容
 - (void)clicksecry
 {
 
@@ -252,9 +264,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         if (newString.length >= 24) {
             return NO;
         }
-        //        NSMutableArray * array=[NSMutableArray arrayWithArray:[newString   componentsSeparatedByString:@" "]];
-        //        NSLog(@"%@",array);
-        //        NSString *ns=[array componentsJoinedByString:@""];
+
         [dataListAll3 replaceObjectAtIndex:1 withObject:newString];
         [textField setText:newString];
         return NO;
@@ -278,7 +288,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     {
         if ([textField.text length]<1) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的银行卡"];
-            //                [dataColorAll3 replaceObjectAtIndex:0 withObject:redColor];
+
         }else{
             [dataListAll3 replaceObjectAtIndex:0 withObject:textField.text];
             [dataColorAll3 replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
@@ -290,7 +300,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     {
         if ([textField.text length]<19) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"银行卡位数不对"];
-            //                [dataColorAll3 replaceObjectAtIndex:1 withObject:redColor];
+
         }else{
             [dataListAll3 replaceObjectAtIndex:1 withObject:textField.text];
             [dataColorAll3 replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
@@ -303,7 +313,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         NSLog(@"===%@",textField.text);
         if ([textField.text isEqualToString:@""]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码"];
-            //                [dataColorAll3 replaceObjectAtIndex:3 withObject:redColor];
+
         }else{
             [dataListAll3 replaceObjectAtIndex:3 withObject:textField.text];
             [dataColorAll3 replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
@@ -316,7 +326,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
 - (void)BankSelect:(SupportBankList *)bankInfo andSectionRow:(NSInteger)sectionRow
 {
     [dataListAll3 replaceObjectAtIndex:0 withObject:bankInfo.bank_name_];//银行名字
-    //    [dataListAll3 replaceObjectAtIndex:4 withObject:bankNum];//银行代码
     _bankNum = bankInfo.bank_code_;
     _bankCodeNUm = bankInfo.bank_code_;
     _bankLogogram = bankInfo.bank_short_name_;
@@ -366,6 +375,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     return newString;
 }
 
+#pragma mark cell点击事件
 -(void)senderBtn:(UIButton *)sender
 {
     switch (sender.tag) {
@@ -466,6 +476,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     }
 }
 
+//验证码倒计时
 -(void)closeGetVerifyButton
 {
     _countdown -= 1;
@@ -480,6 +491,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     }
 }
 
+#pragma mark 点击确认按钮
 - (IBAction)sureBtn:(id)sender {
     if ([dataListAll3[0] length] < 1) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择银行卡"];
@@ -498,14 +510,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     }
 }
 
--(BOOL)isSureInfo
-{
-    if ([[dataListAll3 objectAtIndex:0] length]>1 && [[dataListAll3 objectAtIndex:1] length]>16
-        && [CheckUtils checkTelNumber:dataListAll3[2]] && ![dataListAll3[3] isEqualToString:@""]) {
-        return YES;
-    }
-    return NO;
-}
+//获取进件信息参数
 -(NSDictionary *)getSubmitInfo
 {
     NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -571,7 +576,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         if (status == Enum_SUCCESS) {
             if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
                 LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
-//                loanVC.userStateModel = _userStateModel;
                 [self.navigationController pushViewController:loanVC animated:YES];
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
