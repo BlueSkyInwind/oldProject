@@ -21,6 +21,7 @@
 
 
 @interface LoginView : UIView
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeader;
 
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 

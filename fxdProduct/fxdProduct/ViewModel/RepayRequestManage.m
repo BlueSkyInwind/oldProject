@@ -8,10 +8,10 @@
 
 #import "RepayRequestManage.h"
 #import "HomeViewModel.h"
-#import "RepayListViewController.h"
+#import "LoanPeriodListVCModule.h"
 #import "UserStateModel.h"
 #import "RepayMentViewModel.h"
-#import "RepayDetailViewController.h"
+#import "LoanPaymentDetailVCModule.h"
 #import "RepayListInfo.h"
 #import "BankModel.h"
 #import "CheckViewModel.h"
@@ -38,7 +38,7 @@
             return;
         }
         
-        RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
+        LoanPeriodListVCModule *repayMent=[[LoanPeriodListVCModule alloc]initWithNibName:[[LoanPeriodListVCModule class] description] bundle:nil];
         repayMent.product_id = self.product_id;
         repayMent.applicationId = self.applicationId;
         repayMent.platform_type = self.platform_type;
@@ -46,7 +46,7 @@
     }
     
     if ([self.platform_type isEqualToString:@"2"]) {
-        RepayListViewController *repayMent=[[RepayListViewController alloc]initWithNibName:[[RepayListViewController class] description] bundle:nil];
+        LoanPeriodListVCModule *repayMent=[[LoanPeriodListVCModule alloc]initWithNibName:[[LoanPeriodListVCModule class] description] bundle:nil];
         repayMent.product_id = self.product_id;
         repayMent.applicationId = self.applicationId;
         repayMent.platform_type = self.platform_type;
@@ -90,7 +90,7 @@
                 [supportBankListArr addObject:bankList];
             }
             
-            RepayDetailViewController *repayMent=[[RepayDetailViewController alloc]initWithNibName:[[RepayDetailViewController class] description] bundle:nil];
+            LoanPaymentDetailVCModule *repayMent=[[LoanPaymentDetailVCModule alloc]initWithNibName:[[LoanPaymentDetailVCModule class] description] bundle:nil];
             repayMent.repayType = RepayTypeClean;
             repayMent.supportBankListArr = supportBankListArr;
             CGFloat finalRepayAmount = 0.0f;

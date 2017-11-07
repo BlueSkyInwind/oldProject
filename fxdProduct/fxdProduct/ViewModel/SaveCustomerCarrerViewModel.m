@@ -12,7 +12,7 @@
 
 - (void)saveCustomCarrer:(NSDictionary *)paramDic
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_saveCustomerCarrer_jhtml] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_saveCustomerCarrer_jhtml] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         self.returnBlock(object);
     } failure:^(EnumServerStatus status, id object) {
         [self faileBlock];

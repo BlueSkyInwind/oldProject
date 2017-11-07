@@ -28,7 +28,7 @@
 -(void)createUI
 {
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(15, 0, _k_w-30, 245)];
-    [Tool setCorner:view borderColor:RGBColor(214, 214, 214, 1)];
+    [FXD_Tool setCorner:view borderColor:RGBColor(214, 214, 214, 1)];
     [self.contentView addSubview:view];
     
     NSArray *ary=[[NSArray alloc]initWithObjects:@"产品名称",@"借款金额",@"借款周期",@"每周还款",@"总还款额",@"申请状态",@"申请时间",nil];

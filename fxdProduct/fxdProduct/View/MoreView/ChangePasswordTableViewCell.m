@@ -92,7 +92,7 @@
 
 -(void)updateTitleWidth:(NSString *)title{
     
-   CGFloat width =  [Tool widthForText:title font:17] + 5;
+   CGFloat width =  [FXD_Tool widthForText:title font:17] + 5;
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo([NSNumber numberWithFloat:width]);
     }];

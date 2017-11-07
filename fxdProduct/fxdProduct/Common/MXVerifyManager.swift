@@ -19,7 +19,7 @@ class MXVerifyManager: NSObject,MoxieSDKDelegate {
     func configMoxieSDK( viewcontroller:UIViewController,  mxResult : @escaping MXVerifyResult){
         //初始化SDK
         MoxieSDK.shared().apiKey = theMoxieApiKey
-        MoxieSDK.shared().userId = Utility.shared().userInfo.juid
+        MoxieSDK.shared().userId = FXD_Utility.shared().userInfo.juid
         MoxieSDK.shared().fromController = viewcontroller
         MoxieSDK.shared().delegate = self
 //        configureUI()

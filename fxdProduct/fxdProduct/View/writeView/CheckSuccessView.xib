@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -595,6 +595,7 @@
                 <outlet property="circleThird" destination="yhc-zA-b4Q" id="IY9-er-Iwq"/>
                 <outlet property="displayLabel" destination="TI8-7Y-Uiw" id="wAs-eK-RZW"/>
                 <outlet property="firstAgreemwntBtn" destination="45D-O8-Dvv" id="up7-B3-e2Z"/>
+                <outlet property="headerViewHeader" destination="f77-aP-qAU" id="l0R-ny-aMc"/>
                 <outlet property="jsdDescView" destination="a7t-QR-oKd" id="MZ0-TV-04b"/>
                 <outlet property="jsdMonayLabel" destination="5zI-XD-HtS" id="7aA-XQ-c9p"/>
                 <outlet property="labelFirst" destination="6ws-Yh-OIq" id="AVW-P0-GAg"/>

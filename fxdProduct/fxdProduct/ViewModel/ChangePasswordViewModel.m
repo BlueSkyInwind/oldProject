@@ -16,7 +16,7 @@
 -(void)fetchChangePassowrdCurrent:(NSString *)CurrentPassword new:(NSString *)newPassword{
     
     changePasswordParam *  changePassword = [[changePasswordParam alloc]init];
-    changePassword.mobile_phone_ = [Utility sharedUtility].userInfo.userName;
+    changePassword.mobile_phone_ = [FXD_Utility sharedUtility].userInfo.userName;
     changePassword.old_password_ = [DES3Util encrypt:CurrentPassword];
     changePassword.update_password_ = [DES3Util encrypt:newPassword];
     
@@ -28,7 +28,7 @@
 
 -(void)requestChangePassword:(NSDictionary *)paramDic{
     
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_changePassword_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_changePassword_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         ReturnMsgBaseClass *findParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
         self.returnBlock(findParse);
     } failure:^(EnumServerStatus status, id object) {
@@ -42,7 +42,7 @@
     NSDictionary *paramDic;
     if (![password isEqualToString:@""] && ![smscode isEqualToString:@""]) {
         ChangePasswordParamModel *changePasswordParamModel = [[ChangePasswordParamModel alloc]init];
-        changePasswordParamModel.token = [Utility sharedUtility].userInfo.tokenStr;
+        changePasswordParamModel.token = [FXD_Utility sharedUtility].userInfo.tokenStr;
         changePasswordParamModel.smscode = smscode;
         changePasswordParamModel.password = password;
         paramDic = [changePasswordParamModel toDictionary];
@@ -51,7 +51,7 @@
         paramDic = nil;
     }
     
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_CHANGEPASS_URL] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_CHANGEPASS_URL] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {
             self.returnBlock(object);
@@ -66,12 +66,12 @@
 -(void)changePasswordSendSMS{
 
     SendSmsParam *sendSmsParam = [[SendSmsParam alloc]init];
-    sendSmsParam.token = [Utility sharedUtility].userInfo.tokenStr;
-    sendSmsParam.phone = [Utility sharedUtility].userInfo.userName;
+    sendSmsParam.token = [FXD_Utility sharedUtility].userInfo.tokenStr;
+    sendSmsParam.phone = [FXD_Utility sharedUtility].userInfo.userName;
     sendSmsParam.type = CODE_CHANGEPASS;
     NSDictionary *paramDic = [sendSmsParam toDictionary];
     
-    [[FXDNetWorkManager sharedNetWorkManager]P2POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getCode_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getCode_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {
             self.returnBlock(object);

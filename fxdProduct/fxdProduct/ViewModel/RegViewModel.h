@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 #import "RegParamModel.h"
 #import "DES3Util.h"
 
-@interface RegViewModel : ViewModelClass
+@interface RegViewModel : FXD_ViewModelBaseClass
 
 
 /**

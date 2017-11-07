@@ -14,7 +14,7 @@
 
 - (void)fatchCustomBaseInfo:(NSDictionary *)paramDic
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getCustomerBase_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getCustomerBase_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         Custom_BaseInfo *returnModel = [Custom_BaseInfo modelObjectWithDictionary:object];
         self.returnBlock(returnModel);
     } failure:^(EnumServerStatus status, id object) {
@@ -24,7 +24,7 @@
 
 - (void)fatchCustomBaseInfoNoHud:(NSDictionary *)paramDic
 {
-    [[FXDNetWorkManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_getCustomerBase_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_getCustomerBase_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         Custom_BaseInfo *returnModel = [Custom_BaseInfo modelObjectWithDictionary:object];
         self.returnBlock(returnModel);
     } failure:^(EnumServerStatus status, id object) {

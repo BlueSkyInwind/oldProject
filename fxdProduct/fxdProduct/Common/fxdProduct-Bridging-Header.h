@@ -9,13 +9,13 @@
 #ifndef fxdProduct_Bridging_Header_h
 #define fxdProduct_Bridging_Header_h
 
-#import "Tool.h"
-#import "SesameCreditViewController.h"
-#import "CertificationViewController.h"
+#import "FXD_Tool.h"
+#import "SesameCreditCertificationVCModules.h"
+#import "UserMobileAuthenticationVCModules.h"
 #import "MGLiveViewController.h"
 #import "BaseNavigationViewController.h"
 #import "GlobalConfig.h"
-#import "Utility.h"
+#import "FXD_Utility.h"
 #import "UserDataViewModel.h"
 #import "MBPAlertView.h"
 #import "UIColor+Extend.h"
@@ -33,7 +33,7 @@
 #import "PayMethodViewController.h"
 #import "PayNavigationViewController.h"
 #import "UIViewController+KNSemiModal.h"
-#import "UserBankCardListViewController.h"
+#import "UserBankCardListVCModule.h"
 #import "BankInfoViewModel.h"
 #import "LoanMoneyViewController.h"
 #import "DetailViewController.h"
@@ -42,13 +42,13 @@
 #import "CheckViewIng.h"
 #import <MJRefresh/MJRefresh.h>
 #import "UserDataResult.h"
-#import "LoanSureFirstViewController.h"
-#import "UserInfoObj.h"
+#import "LoanApplicationForConfirmationVCModules.h"
+#import "FXD_UserInfoConfiguration.h"
 #import "FXDWebViewController.h"
 #import "ApplicationViewModel.h"
 #import "CapitalListModel.h"
 #import "ApplicaitonModel.h"
-#import "CheckViewController.h"
+#import "WithdrawalsVCModule.h"
 #import "DiscountTicketModel.h"
 
 #endif /* fxdProduct_Bridging_Header_h */
