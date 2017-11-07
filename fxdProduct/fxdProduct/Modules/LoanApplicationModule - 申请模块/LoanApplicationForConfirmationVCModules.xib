@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,6 +18,7 @@
                 <outlet property="bottomViewTop" destination="mSc-sZ-Ftl" id="UO6-gh-5tL"/>
                 <outlet property="detailView" destination="XsU-JD-Fxl" id="EG2-GR-q0o"/>
                 <outlet property="headerView" destination="ThU-hM-hwu" id="yyW-B7-bb8"/>
+                <outlet property="headerViewHeader" destination="BAn-1f-1ll" id="65Y-7S-4T9"/>
                 <outlet property="headerViewHeight" destination="oSi-5D-HKk" id="w9x-fR-n2n"/>
                 <outlet property="productLogo" destination="YaL-be-XGG" id="oVp-fg-LyH"/>
                 <outlet property="productTitle" destination="du4-7N-E8h" id="07h-Pp-Jaw"/>

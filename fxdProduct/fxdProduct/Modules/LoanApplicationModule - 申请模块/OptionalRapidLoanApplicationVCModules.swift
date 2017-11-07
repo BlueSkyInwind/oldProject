@@ -98,34 +98,6 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
         
         self.view.addSubview(rapidLoanView!)
     }
-
-//    //MARK 资金平台列表
-//    func getCapitalListData(){
-//
-//        let applicationMV = ApplicationViewModel()
-//        applicationMV.setBlockWithReturn({[weak self] (returnValue) in
-//
-//            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
-//            if baseResult.errCode == "0"{
-//                for dic in baseResult.data! as! NSArray{
-//
-//                    let capitalListModel = try! CapitalListModel.init(dictionary: dic as! [AnyHashable : Any])
-//                    self?.pickView?.dataArray.append(capitalListModel)
-//
-//                }
-//
-//                let model = self?.pickView?.dataArray[0] as! CapitalListModel
-//                self?.rapidLoanView?.capitalSourceLabel?.text = model.platformName!
-//
-//            }else{
-//                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
-//            }
-//        }) {
-//
-//        }
-//        applicationMV.capitalList(productId)
-//    }
-
     
     //MARK: 选择资金来源方按钮
     func capitalSourceBtn() {

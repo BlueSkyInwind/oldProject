@@ -26,6 +26,9 @@
     self.realNameTextField.text = [Utility sharedUtility].userInfo.realName;
     self.userIDNumberTextField.text = [Utility sharedUtility].userInfo.userIDNumber;
     [self.immediateAuthorizationBtn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
+    if (UI_IS_IPHONEX) {
+        self.headerViewHeader.constant = 88;
+    }
     
 }
 #pragma mark - 点击确认按钮

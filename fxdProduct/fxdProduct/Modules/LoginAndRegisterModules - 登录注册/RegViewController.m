@@ -93,6 +93,10 @@
     [self setLabel];
     [self setUISignal];
     
+    if (UI_IS_IPHONEX) {
+        self.headerViewHeader.constant = 95;
+    }
+    
 }
 
 -(void)changTextField:(UITextField *)textField{

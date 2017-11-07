@@ -166,6 +166,12 @@
         make.right.equalTo(wekSelf.view.mas_right).offset(-20);
         make.height.equalTo(@44);
     }];
+    
+    if (UI_IS_IPHONEX) {
+        [_evaluationBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(wekSelf.view.mas_bottom).offset(-93);
+        }];
+    }
 }
 
 -(void)bottomClick{

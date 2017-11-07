@@ -124,7 +124,7 @@ extension DiscountCouponsView{
             make.centerX.equalTo((self.backImageView?.snp.centerX)!)
         })
         
-        if UI_IS_IPONE6P {
+        if UI_IS_IPONE6P || UI_IS_IPHONEX{
             titleLabel?.font = UIFont.systemFont(ofSize: 22)
             amountLabel?.font = UIFont.systemFont(ofSize: 30)
             directionsForUseBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 17)

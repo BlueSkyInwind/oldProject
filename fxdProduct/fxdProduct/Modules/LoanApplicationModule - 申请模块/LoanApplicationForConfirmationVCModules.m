@@ -46,6 +46,10 @@
         }];
     }
     
+    if (UI_IS_IPHONEX) {
+        self.headerViewHeader.constant = 88;
+        self.bottomViewBottom.constant = 100;
+    }
     [Tool setCorner:self.sureBtn borderColor:[UIColor clearColor]];
     NSString *str = self.agreementLabel.text;
     NSMutableAttributedString *ssa = [[NSMutableAttributedString alloc] initWithString:str];
@@ -69,6 +73,8 @@
     }else if (UI_IS_IPHONE5){
         self.headerViewHeight.constant = 190;
         self.bottomViewBottom.constant = 60;
+    }else if (UI_IS_IPHONEX){
+         discountCouponsTop = 164;
     }
     self.discountCouponsV = [[DiscountCouponsView alloc]initWithFrame:CGRectZero];
     self.discountCouponsV.backgroundColor = kUIColorFromRGB(0xf2f2f2);

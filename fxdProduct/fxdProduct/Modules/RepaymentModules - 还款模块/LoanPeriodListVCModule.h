@@ -28,6 +28,7 @@
 
 //节省金额
 @property (weak, nonatomic) IBOutlet UILabel *saveUpLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeader;
 
 @property (nonatomic,strong)NSString * platform_type;
 @property (nonatomic,strong)NSString * applicationId;

@@ -26,6 +26,7 @@ let UI_IS_IPONE5 = (UI_IS_IPONE && _k_h == 568.0)
 let UI_IS_IPONE6P = (UI_IS_IPONE && _k_h == 736.0)
 let UI_IS_IPONE6 = (UI_IS_IPONE && _k_h == 667.0)
 let UI_IS_IPONE4 = (UI_IS_IPONE && _k_h == 480.0)
+let UI_IS_IPHONEX = (UI_IS_IPONE && _k_h == 812.0)
 
 let SalaryLoan = "P001002"   //工薪贷平台
 let RapidLoan = "P001004"   //急速贷平台

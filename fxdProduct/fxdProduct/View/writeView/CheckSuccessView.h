@@ -110,5 +110,6 @@ typedef void(^AgreementClickStatus)(UIButton * button);
 
 @property (copy,nonatomic)AgreementClickStatus agreementStatus;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *displayLabelLeftCons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeader;
 
 @end

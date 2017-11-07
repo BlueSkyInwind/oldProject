@@ -50,7 +50,7 @@ class RenewalVCModules: BaseViewController ,UITableViewDataSource,UITableViewDel
         footerView.frame = CGRect(x:0,y:0,width:_k_w,height:50)
         footerView.footerBtn?.setTitle("确认", for: .normal)
         footerView.footerBtnClosure = {
-            self.commitStaging()
+            self.submitRenewalRequest()
 //         print("确认按钮点击")
         }
         renewalTableView.tableFooterView = footerView
@@ -62,23 +62,18 @@ class RenewalVCModules: BaseViewController ,UITableViewDataSource,UITableViewDel
             make.edges.equalToSuperview()
         }
         
-        getData()
-        fatchBankList()
+        getRenewalInformation()
+        getBankCardsList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.navigationController?.navigationBar.titleTextAttributes =
-//            [NSForegroundColorAttributeName: UIColor.white]
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), for: UIBarMetrics.default)
-//        self.navigationController!.navigationBar.shadowImage = UIImage()
-        
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.black,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 19)]
 
     }
     
     //MARK:获取当前期的续期信息
-    func getData(){
+    func getRenewalInformation(){
     
         let repayMentViewModel = RepayMentViewModel()
         
@@ -158,8 +153,10 @@ class RenewalVCModules: BaseViewController ,UITableViewDataSource,UITableViewDel
             if indexPath.row == 3{
                     if cardInfo != nil{
                         let index = cardInfo?.cardNo.index((cardInfo?.cardNo.endIndex)!, offsetBy: -4)
-                        let numStr = cardInfo?.cardNo.substring(from: index!)
-                        cell.rightLabel?.text = (cardInfo?.bankName)!+" 尾号 "+"("+numStr!+")"
+//                        let numStr = cardInfo?.cardNo.substring(from: index!)
+                        let numStr = String(describing: cardInfo?.cardNo[index!...])
+                        
+                        cell.rightLabel?.text = (cardInfo?.bankName)!+" 尾号 "+"("+numStr+")"
                     }
                 return cell
             }
@@ -189,12 +186,12 @@ class RenewalVCModules: BaseViewController ,UITableViewDataSource,UITableViewDel
             self.navigationController?.pushViewController(userBankCardListVC, animated: true)
         }
         if indexPath.row == 4{
-            getStagingRule()
+            obtainRenewalRules()
         }
     }
  
     //MARK:获取用户的银行卡列表
-    func fatchBankList(){
+    func getBankCardsList(){
     
         let bankInfoVM = BankInfoViewModel()
         bankInfoVM.setBlockWithReturn({ (returnValue) in
@@ -220,7 +217,7 @@ class RenewalVCModules: BaseViewController ,UITableViewDataSource,UITableViewDel
     }
     
     //MARK:提交续期请求
-    func commitStaging(){
+    func submitRenewalRequest(){
         
         let bankInfoVM = BankInfoViewModel()
         bankInfoVM.setBlockWithReturn({ (returnValue) in
@@ -242,7 +239,7 @@ class RenewalVCModules: BaseViewController ,UITableViewDataSource,UITableViewDel
     }
     
     //MARK:获取续期规则
-    func getStagingRule(){
+    func obtainRenewalRules(){
     
         let bankInfoVM = BankInfoViewModel()
         bankInfoVM.setBlockWithReturn({ (returnValue) in

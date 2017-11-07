@@ -46,6 +46,9 @@
     [self.userNameField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
     [self.veriyCodeField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
     
+    if (UI_IS_IPHONEX) {
+        self.headerViewHeader.constant = 88;
+    }
 }
 /**
  适配

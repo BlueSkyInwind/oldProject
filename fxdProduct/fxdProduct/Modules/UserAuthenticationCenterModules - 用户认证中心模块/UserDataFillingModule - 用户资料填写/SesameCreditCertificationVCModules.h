@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *realNameTextField;
 //用户id
 @property (weak, nonatomic) IBOutlet UITextField *userIDNumberTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeader;
 
 @end

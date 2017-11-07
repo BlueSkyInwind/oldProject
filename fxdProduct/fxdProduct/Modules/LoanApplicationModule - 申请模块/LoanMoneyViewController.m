@@ -59,22 +59,22 @@
     //添加各种事件
     //续期点击事件
     moenyViewing.stagingView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(stagingBtnClick)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(renewalBtnClick)];
     [moenyViewing.stagingView addGestureRecognizer:tap];
     //续期
-    [moenyViewing.stagingBtn addTarget:self action:@selector(stagingBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [moenyViewing.stagingBtn addTarget:self action:@selector(renewalBtnClick) forControlEvents:UIControlEventTouchUpInside];
     //提款
-    [moenyViewing.sureBtn addTarget:self action:@selector(sureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [moenyViewing.sureBtn addTarget:self action:@selector(repaymentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     //发薪贷协议
-    [moenyViewing.agreementBtn addTarget:self action:@selector(agreementBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [moenyViewing.agreementBtn addTarget:self action:@selector(agreementCheckboxBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     //合规协议
-    [moenyViewing.heguiBtn addTarget:self action:@selector(heguiBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [moenyViewing.heguiBtn addTarget:self action:@selector(hgContractBtnClick) forControlEvents:UIControlEventTouchUpInside];
     _isFirst = _popAlert;
 
   }
 
 #pragma mark 合规查看合同
--(void)heguiBtnClick{
+-(void)hgContractBtnClick{
 
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
     [loanMoneyViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -93,7 +93,7 @@
 
 }
 #pragma mark 续借一期点击按钮
--(void)stagingBtnClick{
+-(void)renewalBtnClick{
 
     
     if (!_repayModel.continueStaging) {
@@ -109,7 +109,7 @@
 }
 
 #pragma mark 协议勾选按钮
--(void)agreementBtnClick:(UIButton *)btn{
+-(void)agreementCheckboxBtnClick:(UIButton *)btn{
 
     if (moenyViewing.agreementBtn.selected) {
         moenyViewing.sureBtn.enabled = YES;
@@ -148,10 +148,10 @@
 
 //    self.navigationItem.title = [self setTitle];
         if (_applicationStatus == RepaymentNormal) {
-            [self getRepayInfo];
+            [self getRepaymentPageInformation];
             return;
         }
-        [self getApplicationStatus];
+        [self getTheIntermediateState];
 }
 
 
@@ -172,7 +172,7 @@
 
 #pragma mark 请求银行卡列表信息
 
-- (void)postUrlMessageandDictionary:(void(^)(CardInfo *rate))finish{
+- (void)fxdBankCardListInformation:(void(^)(CardInfo *rate))finish{
     
     BankInfoViewModel *bankInfoVM = [[BankInfoViewModel alloc]init];
     [bankInfoVM setBlockWithReturnBlock:^(id returnValue) {
@@ -198,7 +198,7 @@
 
 #pragma mark 请求银行卡列表信息
 
-- (void)postUrlBank:(void(^)(QueryCardInfo *rate))finish{
+- (void)hgBankCardListInformation:(void(^)(QueryCardInfo *rate))finish{
     
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
@@ -217,12 +217,12 @@
 
 
 #pragma mark 获取协议
--(void)fxdStatus{
+-(void)initializeTheProtocolView{
 
     //发薪贷
     if ([_repayModel.platformType isEqualToString:@"0"]) {
         
-        [self postUrlMessageandDictionary:^(CardInfo *rate) {
+        [self fxdBankCardListInformation:^(CardInfo *rate) {
             
             moenyViewing.lableData.textAlignment = NSTextAlignmentLeft;
             NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并认可发薪贷《银行自动转账授权书》、《借款协议》"];
@@ -299,7 +299,7 @@
     
         moenyViewing.heguiBtn.hidden = NO;
         moenyViewing.heguiBtn.enabled = YES;
-        [self postUrlBank:^(QueryCardInfo *rate) {
+        [self hgBankCardListInformation:^(QueryCardInfo *rate) {
             NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"我已阅读《银行自动转账授权书》、《信用咨询及管理服务协议》"];
             moenyViewing.lableData.textAlignment = NSTextAlignmentLeft;
             one.yy_font = [UIFont systemFontOfSize:13];
@@ -335,7 +335,7 @@
                                     DLog(@"《信用咨询及管理服务协议》");
                                     
                                     //《信用咨询及管理服务协议》
-                                    [self clickSecondAgreementBtn];
+                                    [self creditAdvisoryAndManagementServicesAgreement];
                                     
                                 }];
             
@@ -348,7 +348,7 @@
 
 
 #pragma mark 信用咨询及管理服务协议
--(void)clickSecondAgreementBtn{
+-(void)creditAdvisoryAndManagementServicesAgreement{
     
     NSDictionary *paramDic;
     if ([_repayModel.productId isEqualToString:SalaryLoan]||[_repayModel.productId isEqualToString:WhiteCollarLoan]) {
@@ -395,7 +395,7 @@
     }];
 }
 #pragma mark 五星好评的弹框
-- (void)showAlertview
+- (void)showFiveStarPraiseAlertview
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"亲，您对发薪贷的服务满意吗？" preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"五星好评" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -419,7 +419,7 @@
 
 
 #pragma mark 我要还款按钮
--(void)sureBtnClick:(UIButton *)sender
+-(void)repaymentBtnClick:(UIButton *)sender
 {
         //platform_type 2、合规平台  0发薪贷平台
         if ([_repayModel.platformType isEqualToString:@"2"]) {
@@ -461,10 +461,10 @@
     self.navigationItem.title = [self setTitle];
     if (_applicationStatus == RepaymentNormal) {
         
-        [self getRepayInfo];
+        [self getRepaymentPageInformation];
         return;
     }
-    [self getApplicationStatus];
+    [self getTheIntermediateState];
     
 }
 
@@ -497,7 +497,7 @@
 }
 
 #pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
--(void)getApplicationStatus{
+-(void)getTheIntermediateState{
 
     __weak typeof (self) weakSelf = self;
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
@@ -512,7 +512,7 @@
             if ([applicationStatusModel.platformType isEqualToString:@"2"]) {
                 if ([applicationStatusModel.userStatus isEqualToString:@"11"] || [applicationStatusModel.userStatus isEqualToString:@"12"]||[applicationStatusModel.userStatus isEqualToString:@"13"]) {
 
-                    [weakSelf updateUI:applicationStatusModel repayModel:nil];
+                    [weakSelf initializeTheIntermediateStatusPage:applicationStatusModel repayModel:nil];
                     return;
                 }
                 if ([applicationStatusModel.userStatus isEqualToString:@"2"]||[applicationStatusModel.userStatus isEqualToString:@"3"]) {
@@ -527,7 +527,7 @@
                     if (_applicationStatus == ComplianceRepayment) {
                         _applicationStatus = RepaymentNormal;
                         self.navigationItem.title = [self setTitle];
-                        [self getRepayInfo];
+                        [self getRepaymentPageInformation];
                         return;
                     }
                 }
@@ -535,7 +535,7 @@
             switch (applicationStatusModel.status.integerValue) {
                 case 1:
                     self.navigationItem.title = [self setTitle];
-                    [weakSelf updateUI:applicationStatusModel repayModel:nil];
+                    [weakSelf initializeTheIntermediateStatusPage:applicationStatusModel repayModel:nil];
                     break;
                 case 2:
                     if (_applicationStatus == Repayment) {
@@ -546,7 +546,7 @@
                     }
                     _applicationStatus = RepaymentNormal;
                     self.navigationItem.title = [self setTitle];
-                    [self getRepayInfo];
+                    [self getRepaymentPageInformation];
                     break;
                 case 3:
                 case 4:
@@ -566,7 +566,7 @@
 }
 
 #pragma mark -> 2.22	待还款界面信息获取
--(void)getRepayInfo{
+-(void)getRepaymentPageInformation{
 
      __weak typeof (self) weakSelf = self;
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
@@ -577,12 +577,8 @@
             
             _applicationStatus = RepaymentNormal;
             _repayModel = [[RepayModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-//            if ([_repayModel.platformType isEqualToString:@"2"]) {
-//                [weakSelf getUserStatus:_repayModel.applyId repayModel:_repayModel];
-//                return;
-//            }
             
-            [weakSelf updateUI:nil repayModel:_repayModel];
+            [weakSelf initializeTheIntermediateStatusPage:nil repayModel:_repayModel];
         }else{
         
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
@@ -595,7 +591,7 @@
 
 
 #pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
--(void)updateUI:(ApplicationStatusModel *)applicationStatusModel repayModel:(RepayModel *)repayModel{
+-(void)initializeTheIntermediateStatusPage:(ApplicationStatusModel *)applicationStatusModel repayModel:(RepayModel *)repayModel{
     
     moenyViewing.repayBtnView.hidden = YES;
     moenyViewing.moneyImage.hidden = NO;
@@ -648,13 +644,12 @@
             break;
         case RepaymentNormal:
             
-            [self repayUI:repayModel];
-            [self fxdStatus];
+            [self initializeRepaymentView:repayModel];
+            [self initializeTheProtocolView];
             moenyViewing.statusBottomView.hidden = YES;
-//            moenyViewing.stagingBgView.hidden = NO;
             if (_popAlert&&_isFirst) {
                 _isFirst = NO;
-                [self showAlertview];
+                [self showFiveStarPraiseAlertview];
             }
             break;
             
@@ -675,7 +670,7 @@
 }
 
 #pragma mark 我要还款视图加载
--(void)repayUI:(RepayModel *)repayModel{
+-(void)initializeRepaymentView:(RepayModel *)repayModel{
 
     moenyViewing.overdueFeeLabel.hidden = YES;
     moenyViewing.labelProgress.text = @"正常还款";

@@ -34,5 +34,6 @@ typedef void(^AddCarBlock)();
 - (IBAction)btnSave:(id)sender;
 
 @property (nonatomic, strong) AddCarBlock addCarSuccess;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeader;
 
 @end

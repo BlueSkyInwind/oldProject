@@ -62,7 +62,9 @@
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
-    
+    if (UI_IS_IPHONEX) {
+        self.headerViewHeader.constant = 88;
+    }
     _cardFlag = 100;
     _btnStatus = false;
     UITapGestureRecognizer *tapSecory = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicksecry)];

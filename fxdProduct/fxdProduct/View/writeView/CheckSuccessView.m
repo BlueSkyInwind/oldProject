@@ -133,6 +133,11 @@
         
         self.displayLabelLeftCons.constant = 40;
     }
+    
+    if (UI_IS_IPHONEX) {
+        
+        self.headerViewHeader.constant = 88;
+    }
 }
 
 - (id)initWithFrame:(CGRect)frame

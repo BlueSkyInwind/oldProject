@@ -65,6 +65,7 @@
     [super viewDidLoad];
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+        self.tableView.contentInset = UIEdgeInsetsMake(BarHeightNew - 64, 0, 0, 0);
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
@@ -350,6 +351,8 @@
             }else{
                 if (UI_IS_IPHONE5) {
                     return (_k_h-0.5*_k_w-330);
+                }else if(UI_IS_IPHONEX){
+                    return (_k_h-0.5*_k_w-450);
                 }else{
                     return (_k_h-0.5*_k_w-360);
                 }
@@ -357,6 +360,8 @@
         }else{
             if (UI_IS_IPHONE5) {
                 return (_k_h-0.5*_k_w-155);
+            }else if(UI_IS_IPHONEX){
+                return (_k_h-0.5*_k_w-250);
             }else{
                 return (_k_h-0.5*_k_w-155);
             }

@@ -103,6 +103,7 @@
     self.title = @"支付详情";
     if (@available(iOS 11.0, *)) {
         self.PayDetailTB.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+        self.PayDetailTB.contentInset = UIEdgeInsetsMake(BarHeightNew, 0, 0, 0);
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
@@ -155,18 +156,9 @@
     header.backgroundColor=[UIColor redColor];
     header.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"navigation"]];
     
+    CGPoint headerCenter = header.center;
 #pragma mark 这个是顶部的还款金额 应该是请求完数据后
     self.lblShouldrepay=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-    _lblShouldrepay.center=CGPointMake(_k_w/2, 200-20-30);
-    //    _lblShouldrepay.text=@"937.66";
-    
-//    NSNumber *number;
-//    if ([_product_id isEqualToString:@"P001002"]) {
-//        number = [NSNumber numberWithFloat:_repayAmount];
-//    }
-//    if ([_product_id isEqualToString:@"P001004"]) {
-//        number = [NSNumber numberWithFloat:_repayListInfo.result.repayment_amount];
-//    }
     
     NSNumber *number = [NSNumber numberWithFloat:_repayAmount];
     [_lblShouldrepay fn_setNumber:number format:@"%.2f"];
@@ -176,7 +168,9 @@
     [header addSubview:_lblShouldrepay];
     
     UILabel *lblRepayTip=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
-    lblRepayTip.center=CGPointMake(_k_w/2, 200-30-40-25);
+    
+    
+    
     lblRepayTip.textColor=[UIColor whiteColor];
     lblRepayTip.text=@"应还总金额(元)";
     lblRepayTip.alpha=0.7;
@@ -185,6 +179,17 @@
     
     self.PayDetailTB.tableHeaderView = header;
     self.PayDetailTB.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    
+    if (@available(iOS 11.0, *)) {
+        _lblShouldrepay.center = CGPointMake(_k_w/2, headerCenter.y+20);
+        lblRepayTip.center=CGPointMake(_k_w/2, headerCenter.y-30);
+    }else{
+        
+        _lblShouldrepay.center=CGPointMake(_k_w/2, headerCenter.y+40);
+        lblRepayTip.center=CGPointMake(_k_w/2, headerCenter.y);
+    }
+    
 }
 
 -(void)createNoneView

@@ -45,7 +45,7 @@
     [Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     [self addBackItem];
     _countdown = 60;
-    placeArray3 = @[@"接受到账的银行卡",@"卡号",@"预留手机号",@"验证码"];
+    placeArray3 = @[@"银行卡名称",@"卡号",@"预留手机号",@"验证码"];
     dataListAll3 = [NSMutableArray new];
     dataColorAll3 = [NSMutableArray new];
     _supportBankListArr = [NSMutableArray array];

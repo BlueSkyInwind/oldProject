@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 74, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
+    _wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, BarHeightNew + 10, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     [self addBackItem];
     if (@available(iOS 11.0, *)) {
         _wkWebView.scrollView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;

@@ -38,5 +38,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeader;
 
 @end
