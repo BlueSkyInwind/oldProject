@@ -46,6 +46,7 @@
     [self addBackItem];
     _webView.scrollView.showsVerticalScrollIndicator = false;
     DLog(@"%@",_urlStr);
+//    _urlStr = @"http://h5.test.fxds/fxd-wxact/171103%dchNo=4&actNo=FXDHD00000027";
     _urlStr = [_urlStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
@@ -55,6 +56,7 @@
             _urlStr = [self assemblyUrl:_urlStr];
         }
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+//        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
@@ -75,6 +77,7 @@
     NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode];
     NSString * resultStr = [urlStr stringByAppendingFormat:@"%@type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@",SplicingCharacter,@"0",juidStr,tokenStr,phoneNumber,invationCode];
     return resultStr;
+    
 }
 
 - (void)addBackItem

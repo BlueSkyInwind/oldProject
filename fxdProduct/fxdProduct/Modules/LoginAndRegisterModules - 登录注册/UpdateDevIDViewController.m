@@ -153,8 +153,8 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:_updateParse.msg];
             [self login];
         } else {
-            [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeError title:nil detail:_updateParse.msg cencelBtn:nil otherBtn:@[@"重试"] Onview:self.view];
-            [[HHAlertViewCust sharedHHAlertView] removeAlertView];
+            [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeError title:nil detail:_updateParse.msg cencelBtn:nil otherBtn:@[@"重试"] Onview:self.view];
+            [[FXD_AlertViewCust sharedHHAlertView] removeAlertView];
         }
     } failure:^(EnumServerStatus status, id object) {
         

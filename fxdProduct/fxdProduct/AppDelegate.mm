@@ -311,7 +311,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     [JPUSHService handleRemoteNotification:userInfo];
 }
 
-
 -(void)uploadJPushID{
     
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {

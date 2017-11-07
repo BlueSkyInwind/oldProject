@@ -30,7 +30,7 @@ class HomeChoosePopView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-  @objc  func show()  {
+    @objc  func show()  {
         UIApplication.shared.keyWindow?.addSubview(self)
         self.backImageView?.transform = CGAffineTransform(scaleX: 1.21, y: 1.21);
         self.backImageView?.alpha = 0
