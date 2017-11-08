@@ -22,6 +22,7 @@
 @interface RegViewController ()<UITextFieldDelegate>
 
 {
+    //
     NSInteger _countdown;
     NSTimer * _countdownTimer;
     ReturnMsgBaseClass *_codeParse;
@@ -99,6 +100,7 @@
     
 }
 
+#pragma mark 限制手机号，验证码位数
 -(void)changTextField:(UITextField *)textField{
 
     if (textField == self.verCodeText) {
@@ -148,6 +150,8 @@
     self.regSecoryLabel.userInteractionEnabled=YES;
     [self.regSecoryLabel addGestureRecognizer:tapSecory];
 }
+
+#pragma mark 检查手机号
 -(BOOL)checkMoblieNumber:(NSString *)number{
     
     NSString * numStr = @"^\\d{5,11}$";
@@ -214,6 +218,7 @@
     }];
 }
 
+#pragma mark 点击注册协议
 -(void)clickurl:(id)sender
 {
     DLog(@"注册协议");
@@ -223,6 +228,7 @@
 
 }
 
+#pragma mark 点击意思保密协议
 -(void)clicksecry{
     
     DLog(@"隐私保密协议");
@@ -232,11 +238,13 @@
 
 }
 
+#pragma mark 点击验证码按钮
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {
     
     [self.view endEditing:YES];
     [self setVerifyCode];
 }
+
 
 - (void)setSMSBtnInvalid
 {
@@ -246,6 +254,7 @@
     _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
 }
 
+#pragma mark 验证码倒计时
 - (void)closeGetVerifyButtonUser
 {
     _countdown -= 1;
@@ -260,10 +269,12 @@
     }
 }
 
+#pragma mark - 获取图片验证码
 - (IBAction)picBtnClick:(UIButton *)sender {
     [self setPicVerifyCode];
 }
 
+#pragma mark 协议复选框按钮
 - (IBAction)agreeBtnClick:(UIButton *)sender {
     if (!self.btnStatus) {
         [self.agreeBtn setBackgroundImage:[UIImage imageNamed:@"tricked"] forState:UIControlStateNormal];
@@ -292,6 +303,7 @@
     [smsViewModel postPicVerifyCode];
 }
 
+#pragma mark 点击验证码
 -(void)setVerifyCode{
     
     if (![FXD_Tool isMobileNumber:self.phoneNumText.text]) {
@@ -367,6 +379,8 @@
     }
 }
 
+
+#pragma mark 登录
 - (void)login
 {
     if ([FXD_Utility sharedUtility].networkState == NO) {
@@ -401,6 +415,7 @@
     [self.view endEditing:YES];
 }
 
+#pragma mark 是否隐藏密码
 - (IBAction)seeText:(UIButton *)sender {
     self.passText.secureTextEntry = !self.passText.secureTextEntry;
 }

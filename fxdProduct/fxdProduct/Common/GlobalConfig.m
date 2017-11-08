@@ -534,6 +534,9 @@ NSString * const    _saveLoanCase_url    =    @"hg/saveLoanCase.jhtml";
 //首借免息
 NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
 
+//老客周末活动判断是否弹框刮奖
+NSString *const     _getDrawLottery_url     =    @"apigw/client/market/getDrawLottery";
+
 
 
 #pragma mark - 对外导流接口

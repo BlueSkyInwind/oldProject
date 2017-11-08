@@ -637,6 +637,8 @@
         [FXD_Utility sharedUtility].userInfo.pruductId = _homeProductList.data.productId;
         [self accordingToTheStateJumpPage];
     } else {
+        
+
         [self presentLoginVC:self];
     }
 }
