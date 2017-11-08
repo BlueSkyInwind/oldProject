@@ -27,20 +27,23 @@
 
 @interface LoginViewController ()<UITextFieldDelegate,HHAlertViewDelegate,BMKLocationServiceDelegate,RegDelegate,BSFingerCallBack,LoginViewDelegate>
 {
+    //倒计时时间
     NSInteger _countdown;
     NSTimer * _countdownTimer;
     LoginParse *_loginParse;
     
     ReturnMsgBaseClass *_codeParse;
     
-    NSString *_loginFlagCode;
+//    NSString *_loginFlagCode;
     NSString *_vaildCodeFlag;
-    
+    //设备指纹
     NSString *_BSFIT_DEVICEID;
     LoginView * _loginView;
-    
+    //用户手机号
     NSString * mobliePhone;
+    //用户密码
     NSString * userPassword;
+    //图片验证码
     NSString * veriyCode;
     
 }
@@ -184,6 +187,7 @@
     }
 }
 
+#pragma mark 获取验证码
 -(void)snsCodeCountdownBtnClicMoblieNumber:(NSString *)number{
     
     SMSViewModel *smsViewModel = [[SMSViewModel alloc]init];
@@ -198,6 +202,7 @@
     
 }
 
+#pragma mark 忘记密码
 -(void)forgetPassMoblieNumber:(NSString *)number{
     
     FindPassViewController *findpassView = [FindPassViewController new];
@@ -206,6 +211,7 @@
     
 }
 
+#pragma mark 用户注册
 -(void)regAction{
     
     RegViewController *regView = [RegViewController new];

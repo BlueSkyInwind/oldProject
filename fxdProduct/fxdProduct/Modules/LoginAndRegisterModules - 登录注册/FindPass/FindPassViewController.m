@@ -98,7 +98,7 @@
     }
 }
 
-
+//验证码倒计时
 - (void)closeGetVerifyButtonUser
 {
     _countdown -= 1;
@@ -148,6 +148,7 @@
     }
 }
 
+//找回密码参数
 - (NSDictionary *)getFindPass
 {
     return @{@"password_":[DES3Util encrypt:self.passField.text],

@@ -788,7 +788,7 @@
         
         NSString * productId = _homeProductList.data.productList[0].productId;
         if ([productId isEqualToString:SalaryLoan]) {
-             [self goLoanMoneVC:productId];
+             [self goLoanApplicationForConfirmationVCModules:productId];
         }else{
             NSString *approvalAmount = [_homeProductList.data.productList[0].amount substringToIndex:_homeProductList.data.productList[0].amount.length-1];
             [self getCapitalListData:productId approvalAmount:approvalAmount];
