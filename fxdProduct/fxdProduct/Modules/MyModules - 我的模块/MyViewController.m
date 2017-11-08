@@ -15,6 +15,10 @@
 #import "InvitationViewController.h"
 #import "UserDataAuthenticationListVCModules.h"
 #import "ShanLinWebVCModules.h"
+#import "LewPopupViewController.h"
+#import "ScratchAwardView.h"
+#import "LoanMoneyViewModel.h"
+#import "DrawLotteryModel.h"
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate,ShanLinBackAlertViewDelegate>
 {
     //标题数组
@@ -118,8 +122,14 @@
         case 0:
         {
 
-            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-            [self.navigationController pushViewController:repayRecord animated:true];
+            [self getDrawLottery];
+            
+//            ScratchAwardView *scratchAwardView = [[ScratchAwardView alloc]init];
+//            scratchAwardView.linkStr = @"https://www.baidu.com";
+//            [self lew_presentPopupView:scratchAwardView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
+//            }];
+//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+//            [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
         case 1:
@@ -151,7 +161,30 @@
             break;
     }
 }
-
+-(void)getDrawLottery{
+    
+    LoanMoneyViewModel *viewModel = [[LoanMoneyViewModel alloc]init];
+    [viewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([resultM.errCode isEqualToString:@"0"]) {
+            DrawLotteryModel * model = [[DrawLotteryModel alloc]initWithDictionary:(NSDictionary *)resultM.data error:nil];
+            if ([model.isActivety isEqualToString:@"1"]) {
+                
+                ScratchAwardView *scratchAwardView = [ScratchAwardView defaultPopView];
+                scratchAwardView.linkUrl = model.luckDraw;
+                [scratchAwardView loadData];
+                [self lew_presentPopupView:scratchAwardView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
+                }];
+            }
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [viewModel getDrawLottery];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

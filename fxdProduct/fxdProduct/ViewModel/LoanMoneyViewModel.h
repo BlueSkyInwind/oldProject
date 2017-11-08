@@ -47,4 +47,10 @@
 
 -(void)getRepayInfo;
 
+/**
+ 老客周末活动判断是否弹框刮奖
+ */
+
+-(void)getDrawLottery;
+
 @end

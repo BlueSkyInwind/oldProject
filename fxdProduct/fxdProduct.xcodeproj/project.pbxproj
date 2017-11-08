@@ -1135,6 +1135,10 @@
 		CCAA8EB71F5940CC00278D16 /* RenewalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EB51F5940CC00278D16 /* RenewalModel.m */; };
 		CCBD8F6C1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
 		CCBD8F6D1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
+		CCCB279C1FB2F04500412632 /* ScratchAwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB279B1FB2F04500412632 /* ScratchAwardView.m */; };
+		CCCB279D1FB2F04500412632 /* ScratchAwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB279B1FB2F04500412632 /* ScratchAwardView.m */; };
+		CCCB27A11FB2F1C100412632 /* DrawLotteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27A01FB2F1C100412632 /* DrawLotteryModel.m */; };
+		CCCB27A21FB2F1C100412632 /* DrawLotteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27A01FB2F1C100412632 /* DrawLotteryModel.m */; };
 		CCCC0A8E1F677B9B007E1EB0 /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */; };
 		CCCC0A8F1F677B9B007E1EB0 /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */; };
 		CCCDA8771EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
@@ -2239,6 +2243,10 @@
 		CCAA8EB51F5940CC00278D16 /* RenewalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalModel.m; sourceTree = "<group>"; };
 		CCBD8F6A1F5D26BD005A980B /* RepayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayModel.h; sourceTree = "<group>"; };
 		CCBD8F6B1F5D26BD005A980B /* RepayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayModel.m; sourceTree = "<group>"; };
+		CCCB279A1FB2F04500412632 /* ScratchAwardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScratchAwardView.h; sourceTree = "<group>"; };
+		CCCB279B1FB2F04500412632 /* ScratchAwardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScratchAwardView.m; sourceTree = "<group>"; };
+		CCCB279F1FB2F1C100412632 /* DrawLotteryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawLotteryModel.h; sourceTree = "<group>"; };
+		CCCB27A01FB2F1C100412632 /* DrawLotteryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawLotteryModel.m; sourceTree = "<group>"; };
 		CCCC0A8C1F677B9B007E1EB0 /* UserDataResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataResult.h; sourceTree = "<group>"; };
 		CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataResult.m; sourceTree = "<group>"; };
 		CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewModel.h; sourceTree = "<group>"; };
@@ -2475,6 +2483,8 @@
 				0FEACE1E1CA0E2450027859A /* TelPhoneCompanyCell.m */,
 				0FEACE1F1CA0E2450027859A /* TelPhoneCompanyCell.xib */,
 				CCD32B4D1F58133B0092A9CB /* CurrentInformationHeadView.swift */,
+				CCCB279A1FB2F04500412632 /* ScratchAwardView.h */,
+				CCCB279B1FB2F04500412632 /* ScratchAwardView.m */,
 			);
 			path = writeView;
 			sourceTree = "<group>";
@@ -4038,6 +4048,7 @@
 		63E076541B67114800E269F2 /* DataModelModules */ = {
 			isa = PBXGroup;
 			children = (
+				CCCB279E1FB2F19200412632 /* DrawLottery */,
 				CC6F067B1F75092C00FA889E /* Capital */,
 				CC6CBA811F5AB93C0015C92C /* ApplicationStatus */,
 				CCAA8EB01F59408C00278D16 /* Renewal */,
@@ -4975,6 +4986,15 @@
 			path = SubmitZhimaCreditAuth;
 			sourceTree = "<group>";
 		};
+		CCCB279E1FB2F19200412632 /* DrawLottery */ = {
+			isa = PBXGroup;
+			children = (
+				CCCB279F1FB2F1C100412632 /* DrawLotteryModel.h */,
+				CCCB27A01FB2F1C100412632 /* DrawLotteryModel.m */,
+			);
+			path = DrawLottery;
+			sourceTree = "<group>";
+		};
 		CCCDA8791EDFACED00B48DFF /* SaveLoanCase */ = {
 			isa = PBXGroup;
 			children = (
@@ -5770,6 +5790,7 @@
 				638A17091E517D9F00AB8AB6 /* LOTShapeTrimPath.m in Sources */,
 				63B142AF1D9A5C2800C43B3F /* P2PViewController.m in Sources */,
 				CCCE40CD1EE7D61700E3F102 /* SendSmsParam.m in Sources */,
+				CCCB27A11FB2F1C100412632 /* DrawLotteryModel.m in Sources */,
 				0F0650451BE219BF000DE94D /* UserSureRefuseBaseClass.m in Sources */,
 				63C50E581E69381B0035EE4F /* HomeBannerModel.m in Sources */,
 				6379639E1CABAFE9002A5910 /* ProductListExt.m in Sources */,
@@ -5802,6 +5823,7 @@
 				63145ABD1CA4E66100D04ED8 /* CustomerCareerBaseClass.m in Sources */,
 				63C50E471E666FF40035EE4F /* Custom_BaseInfoExt.m in Sources */,
 				63F254851E49A45900852CF1 /* HMScanner.m in Sources */,
+				CCCB279C1FB2F04500412632 /* ScratchAwardView.m in Sources */,
 				63F0E1BB1CE417FF001251A9 /* NSString+YYAdd.m in Sources */,
 				63FC24F81D98F7E9006F58F3 /* YYTextParser.m in Sources */,
 				63B142AC1D9A43B000C43B3F /* DrawService.m in Sources */,
@@ -6141,6 +6163,7 @@
 				CC0DF97C1EA5B1090024841A /* LoanApplicationForConfirmationVCModules.m in Sources */,
 				84A380311FAC40A2008FB7AF /* UserDataEvaluationVCModules.swift in Sources */,
 				CC0DF97D1EA5B1090024841A /* RegionResult.m in Sources */,
+				CCCB27A21FB2F1C100412632 /* DrawLotteryModel.m in Sources */,
 				CC0DF97E1EA5B1090024841A /* TAAnimatedDotView.m in Sources */,
 				8411DA121FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */,
 				CC0DF97F1EA5B1090024841A /* YYTextRunDelegate.m in Sources */,
@@ -6386,6 +6409,7 @@
 				CC0DFA611EA5B1090024841A /* FXD_Tool.m in Sources */,
 				CC0DFA621EA5B1090024841A /* RepayHistoryResult.m in Sources */,
 				CC0DFA631EA5B1090024841A /* UIBarButtonItem+Extend.m in Sources */,
+				CCCB279D1FB2F04500412632 /* ScratchAwardView.m in Sources */,
 				CC0DFA641EA5B1090024841A /* main.m in Sources */,
 				CC0DFA651EA5B1090024841A /* LOTMaskLayer.m in Sources */,
 				CC0DFA671EA5B1090024841A /* FXD_AlertViewCust.m in Sources */,
