@@ -7,13 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "HHAlertView.h"
-
 
 typedef void (^ClickBlock)(NSInteger index);
 
 @interface FXD_AlertViewCust : NSObject{
-    
     HHAlertView *alertview;
 }
 
@@ -26,9 +25,6 @@ typedef void (^ClickBlock)(NSInteger index);
 -(void)removeAlertView;
 
 -(void)showAppVersionUpdate:(NSString *)content isForce:(BOOL)isForce compleBlock:(ClickBlock)clickIndexBlock;
-
-
-
 
 
 @end

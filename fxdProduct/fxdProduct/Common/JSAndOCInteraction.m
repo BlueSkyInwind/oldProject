@@ -172,20 +172,32 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        
-        [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:src] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-            NSLog(@"%ld,%ld",receivedSize,expectedSize);
-        } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
-            NSLog(@"%ld",cacheType);
-            if (data || image) {
-                UIImage * resultImage = data == nil ? image : [UIImage imageWithData:data];
-                UIImageWriteToSavedPhotosAlbum(resultImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-            }else{
-                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"保存失败"];
-            }
-        }];
+        [self loadImage:src VC:currentVC];
     }]];
     [currentVC presentViewController:alert animated:YES completion:nil];
+}
+
+/**
+ 活动图片下载
+
+ @param loadUrl 下载链接
+ */
+-(void)loadImage:(NSString *)loadUrl VC:(UIViewController *)currentVC{
+    [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:loadUrl] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+        NSLog(@"%ld,%ld",receivedSize,expectedSize);
+        if (expectedSize > 0) {
+            float numper = (float)receivedSize / (float)expectedSize;
+            [[MBPAlertView sharedMBPTextView] showProgressOnly:currentVC.view Progress:numper];
+        }
+    } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+        NSLog(@"%ld",cacheType);
+        if (data || image) {
+            UIImage * resultImage = data == nil ? image : [UIImage imageWithData:data];
+            UIImageWriteToSavedPhotosAlbum(resultImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"保存失败"];
+        }
+    }];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{

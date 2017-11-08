@@ -7,6 +7,12 @@
 //
 
 #import "FXD_AlertViewCust.h"
+@interface FXD_AlertViewCust (){
+    
+}
+@property (nonatomic,strong) FXD_VersionUpdatepop * versionUpdate;
+
+@end
 
 @implementation FXD_AlertViewCust
 
@@ -57,12 +63,16 @@
 }
 
 -(void)showAppVersionUpdate:(NSString *)content isForce:(BOOL)isForce compleBlock:(ClickBlock)clickIndexBlock{
-    __block FXD_VersionUpdatepop * versionUpdate = [[FXD_VersionUpdatepop alloc] initWithContent:@"1、4.0.6版本界面大改版，流程优化； 2、全新的首页界面，更加清晰的展示当前状态；3、新增产品 ：30天急速贷；" isFroce:isForce];
-    [versionUpdate show];
-    versionUpdate.updateClick = ^(NSInteger index) {
+    if (self.versionUpdate) {
+        return;
+    }
+    self.versionUpdate = [[FXD_VersionUpdatepop alloc] initWithContent:content isFroce:isForce];
+    [self.versionUpdate show];
+    __weak typeof (self) weakSelf = self;
+    self.versionUpdate.updateClick = ^(NSInteger index) {
         clickIndexBlock(index);
-        [versionUpdate dismiss];
-        versionUpdate = nil;
+        [weakSelf.versionUpdate dismiss];
+       weakSelf.versionUpdate = nil;
     };
 }
 

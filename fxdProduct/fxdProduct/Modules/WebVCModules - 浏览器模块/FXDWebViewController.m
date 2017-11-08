@@ -46,7 +46,6 @@
     [self addBackItem];
     _webView.scrollView.showsVerticalScrollIndicator = false;
     DLog(@"%@",_urlStr);
-//    _urlStr = @"http://h5.test.fxds/fxd-wxact/171103%dchNo=4&actNo=FXDHD00000027";
     _urlStr = [_urlStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
@@ -367,11 +366,8 @@
     } else {
         
         NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        
         NSString *cookiesFolderPath = [libraryPath stringByAppendingString:@"/Cookies"];
-        
         NSError *errors;
-        
         [[NSFileManager defaultManager] removeItemAtPath:cookiesFolderPath error:&errors];
         
     }

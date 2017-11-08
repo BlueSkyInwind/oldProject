@@ -244,8 +244,6 @@
         _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(homeActivitiesPopupsClose) userInfo:nil repeats:true];
     }
 }
-
-
 /**
  测评红包活动
 
@@ -273,7 +271,6 @@
         };
     }
 }
-
 
 /**
  首页活动图片点击
@@ -305,6 +302,7 @@
         _popView.closeBtn.hidden = false;
         [_countdownTimer invalidate];
         _countdownTimer = nil;
+        _count = 0;
     }
 }
 
@@ -764,7 +762,6 @@
     [self.navigationController pushViewController:webVC animated:true];
     NSLog(@"点击导流平台的更多");
 }
-
 
 /**
  点击导流平台的更多
