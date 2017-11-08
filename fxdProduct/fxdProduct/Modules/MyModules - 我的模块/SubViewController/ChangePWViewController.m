@@ -116,7 +116,7 @@
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_changeParse.msg];
                     }
                     if ([_changeParse.flag isEqualToString:@"0000"]) {
-                        [[HHAlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeSuccess title:@"修改成功" detail:@"密码修改成功,请使用新密码登录!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+                        [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeSuccess title:@"修改成功" detail:@"密码修改成功,请使用新密码登录!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
                             if (index == 1) {
                                 LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                                 BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];

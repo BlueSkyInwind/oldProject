@@ -1,18 +1,18 @@
 //
-//  HHAlertViewCust.m
+//  FXD_AlertViewCust.m
 //  fxdProduct
 //
 //  Created by dd on 15/11/6.
 //  Copyright © 2015年 dd. All rights reserved.
 //
 
-#import "HHAlertViewCust.h"
+#import "FXD_AlertViewCust.h"
 
-@implementation HHAlertViewCust
+@implementation FXD_AlertViewCust
 
-+ (HHAlertViewCust *)sharedHHAlertView
++ (FXD_AlertViewCust *)sharedHHAlertView
 {
-    static HHAlertViewCust *sharedHHAlertInstance = nil;
+    static FXD_AlertViewCust *sharedHHAlertInstance = nil;
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         sharedHHAlertInstance = [[self alloc] init];
@@ -55,5 +55,20 @@
     [alertview removeFromSuperViewOnHide];
     alertview = nil;
 }
+
+-(void)showAppVersionUpdate:(NSString *)content isForce:(BOOL)isForce compleBlock:(ClickBlock)clickIndexBlock{
+    __block FXD_VersionUpdatepop * versionUpdate = [[FXD_VersionUpdatepop alloc] initWithContent:@"1、4.0.6版本界面大改版，流程优化； 2、全新的首页界面，更加清晰的展示当前状态；3、新增产品 ：30天急速贷；" isFroce:isForce];
+    [versionUpdate show];
+    versionUpdate.updateClick = ^(NSInteger index) {
+        clickIndexBlock(index);
+        [versionUpdate dismiss];
+        versionUpdate = nil;
+    };
+}
+
+
+
+
+
 
 @end

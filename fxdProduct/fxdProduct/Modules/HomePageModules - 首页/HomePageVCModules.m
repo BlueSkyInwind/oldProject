@@ -837,7 +837,6 @@
         if ([baseResultM.errCode isEqualToString:@"0"]){
             ApplicationStatusModel *applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             applicationStatusModel = [[ApplicationStatusModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            
             [self hgIntermediateStateJumpPlatformType:applicationStatusModel.platformType userStatus:applicationStatusModel.userStatus];
             [self fxdIntermediateStateJumpStatus:applicationStatusModel.status];
         }else{
