@@ -75,6 +75,7 @@
                 [FXD_Utility sharedUtility].userInfo.juid = loginParse.result.juid;
                 [FXD_Utility sharedUtility].loginFlage = 1;
                 [FXD_Utility sharedUtility].userInfo.userName = [paramDic objectForKey:@"mobile_phone_"];
+                [FXD_Utility sharedUtility].userInfo.userMobilePhone = [paramDic objectForKey:@"mobile_phone_"];
                 if ([FXD_Tool dicContainsKey:[object objectForKey:@"result"] keyValue:[NSString stringWithFormat:@"%@token",loginParse.result.juid]]) {
                     [FXD_Tool saveUserDefaul:[[object objectForKey:@"result"] objectForKey:[NSString stringWithFormat:@"%@token",loginParse.result.juid]] Key:Fxd_Token];
                     [FXD_Utility sharedUtility].userInfo.tokenStr = [[object objectForKey:@"result"] objectForKey:[NSString stringWithFormat:@"%@token",loginParse.result.juid]];

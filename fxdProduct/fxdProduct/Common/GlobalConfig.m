@@ -25,8 +25,8 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 //测试导流 192.168.6.134
 NSString * const _main_url  =   @"http://192.168.6.134/fxd-esb/esb/";
 NSString * const _agreement_url  =   @"http://192.168.6.134/fxd-esb/esb/";
-//NSString * const _main_new_url  =  @"http://service-apigateway.test.fxds:8005/";
-NSString * const _main_new_url  =  @"http://service-apigateway.dev.fxds:8005/";
+NSString * const _main_new_url  =  @"http://service-apigateway.test.fxds:8005/";
+//NSString * const _main_new_url  =  @"http://service-apigateway.dev.fxds:8005/";
 NSString * const _ValidESB_url  =   @"http://192.168.6.134/fxd-esb/";
 NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
 NSString * const _p2P_url = @"http://192.168.6.134/fxd-esb/p2p/";
