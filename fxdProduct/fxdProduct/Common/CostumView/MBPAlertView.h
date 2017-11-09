@@ -10,9 +10,12 @@
 #import <UIKit/UIKit.h>
 @class MBProgressHUD;
 
-@interface MBPAlertView : NSObject
+@interface MBPAlertView : NSObject{
+    
+}
 
 @property (nonatomic,strong) MBProgressHUD *progressHud;
+@property (nonatomic,strong) MBProgressHUD *waitHud;
 
 + (MBPAlertView *)sharedMBPTextView;
 
@@ -27,5 +30,14 @@
  @param progress 进度值
  */
 - (void) showProgressOnly:(UIView *)view Progress: (float)progress;
+
+/**
+ 展现等待条
+
+ @param view 父视图
+ */
+- (void) showIndeterminateOnly:(UIView *)view;
+-(void)removeWaitHud;
+
 
 @end

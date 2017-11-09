@@ -55,4 +55,22 @@
     });
 }
 
+
+- (void) showIndeterminateOnly:(UIView *)view 
+{
+    if (self.waitHud) {
+        return;
+    }
+    self.waitHud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    // Configure for text only and offset down
+    self.waitHud.mode = MBProgressHUDModeIndeterminate;
+    self.progressHud.removeFromSuperViewOnHide = YES;
+}
+
+-(void)removeWaitHud{
+    [self.waitHud hide:true];
+    self.waitHud = nil;
+}
+
+
 @end

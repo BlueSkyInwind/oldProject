@@ -436,7 +436,9 @@
 
 - (void)license:(MGIDCardSide)CardSide
 {
+    [[MBPAlertView sharedMBPTextView] showIndeterminateOnly:self.view];
     [MGLicenseManager licenseForNetWokrFinish:^(bool License) {
+        [[MBPAlertView sharedMBPTextView] removeWaitHud];
         if (License) {
             DLog(@"授权成功");
             [self checkIDCard:CardSide];

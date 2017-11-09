@@ -29,7 +29,6 @@ typedef enum {
 }CurrentDisplayType;
 
 
-
 @interface UserMobileAuthenticationVCModules ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,LiveDeteDelgate>
 {
     JXLParse *_jxlParse;
@@ -99,7 +98,6 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     MobileCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MobileCell"];
     //协议
     cell.AgreementImage.userInteractionEnabled = YES;
@@ -498,6 +496,7 @@ typedef enum {
     [self.navigationController pushViewController:controller animated:YES];
     
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

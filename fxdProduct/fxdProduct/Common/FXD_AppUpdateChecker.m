@@ -32,6 +32,7 @@
         if ([returnParse.flag isEqualToString:@"0012"]) {
             [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:returnParse.msg isForce:false compleBlock:^(NSInteger index) {
                 if (index == 1) {
+                    [FXD_Utility sharedUtility].userInfo.isUpdate = NO;
                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
                 }
             }];
@@ -42,6 +43,8 @@
                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
                 }
             }];
+        }else{
+            [FXD_Utility sharedUtility].userInfo.isUpdate = NO;
         }
     } failure:^(EnumServerStatus status, id object) {
         
