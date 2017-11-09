@@ -15,7 +15,6 @@
 {
     static dispatch_once_t predicate;
     static FXD_AppUpdateChecker *_checker = nil;
-    
     dispatch_once(&predicate, ^{
         _checker = [[FXD_AppUpdateChecker alloc] init];
     });
@@ -31,32 +30,18 @@
     [[FXD_NetWorkRequestManager sharedNetWorkManager] checkAppVersion:[NSString stringWithFormat:@"%@%@",_main_url,_checkVersion_jhtml] paramters:paramDic finished:^(EnumServerStatus status, id object) {
         ReturnMsgBaseClass *returnParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
         if ([returnParse.flag isEqualToString:@"0012"]) {
-//            [[FXD_AlertViewCust sharedHHAlertView] removeAlertView];
-//            [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:returnParse.msg cencelBtn:@"取消" otherBtn:@[@"好的"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
-//                if (index == 1) {
-//                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
-//                }
-//            }];
-            [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:returnParse.update_content_ isForce:false compleBlock:^(NSInteger index) {
+            [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:returnParse.msg isForce:false compleBlock:^(NSInteger index) {
                 if (index == 1) {
                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
                 }
             }];
         } else if ([returnParse.flag isEqualToString:@"0013"]) {
-//            [[FXD_AlertViewCust sharedHHAlertView] removeAlertView];
-//            [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:returnParse.msg cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
-//                if (index == 1) {
-//                    [FXD_Utility sharedUtility].userInfo.isUpdate = YES;
-//                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
-//                }
-//            }];
             [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:returnParse.msg isForce:true compleBlock:^(NSInteger index) {
                 if (index == 1) {
                     [FXD_Utility sharedUtility].userInfo.isUpdate = YES;
                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
                 }
             }];
-            
         }
     } failure:^(EnumServerStatus status, id object) {
         
