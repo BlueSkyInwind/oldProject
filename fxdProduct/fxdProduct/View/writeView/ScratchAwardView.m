@@ -70,19 +70,16 @@
 {
     CGFloat progressBarHeight = 0.7f;
 //    CGRect navigationBarBounds = self.bounds;
-//    CGRect navigationBarBounds = self.navigationController.navigationBar.bounds;
     CGRect barFrame = CGRectMake(0, 30, _k_w, progressBarHeight);
     progressView=[[UIProgressView alloc] initWithFrame:barFrame];
-//    progressView.tintColor = [UIColor redColor];
     progressView.tintColor=RGBColor(49, 152, 199, 1);
     progressView.trackTintColor=[UIColor whiteColor];
     [_webView addSubview:progressView];
-//    [self.navigationController.navigationBar addSubview:progressView];
+
 }
 
 -(void)loadData{
     
-//    self.linkUrl = @"https://www.baidu.com";
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.linkUrl]]];
 }
 #pragma mark -WKNavigationDelegate

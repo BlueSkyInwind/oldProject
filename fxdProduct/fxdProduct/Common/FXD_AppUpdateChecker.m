@@ -30,6 +30,7 @@
     [[FXD_NetWorkRequestManager sharedNetWorkManager] checkAppVersion:[NSString stringWithFormat:@"%@%@",_main_url,_checkVersion_jhtml] paramters:paramDic finished:^(EnumServerStatus status, id object) {
         ReturnMsgBaseClass *returnParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
         if ([returnParse.flag isEqualToString:@"0012"]) {
+
             [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:returnParse.msg isForce:false compleBlock:^(NSInteger index) {
                 if (index == 1) {
                     [FXD_Utility sharedUtility].userInfo.isUpdate = NO;
