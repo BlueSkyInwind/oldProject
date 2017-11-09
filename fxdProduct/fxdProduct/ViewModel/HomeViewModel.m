@@ -71,7 +71,6 @@
 @end
 
 
-
 @implementation ProductListViewModel
 
 -(void)fetchProductListInfo{

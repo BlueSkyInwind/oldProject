@@ -38,5 +38,21 @@
     [hud hide:YES afterDelay:2];
 }
 
+- (void) showProgressOnly:(UIView *)view Progress: (float)progress
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (progress == 0) {
+            self.progressHud= [MBProgressHUD showHUDAddedTo:view animated:YES];
+            //设置模式为进度框形的
+            self.progressHud.mode = MBProgressHUDModeDeterminate;
+        }
+        self.progressHud.progress = progress;
+        if (progress == 1.0) {
+            [self.progressHud hide:true];
+            self.progressHud = nil;
+        }
+        self.progressHud.removeFromSuperViewOnHide = YES;
+    });
+}
 
 @end

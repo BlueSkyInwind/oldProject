@@ -51,7 +51,7 @@
 //                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
 //                }
 //            }];
-            [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:returnParse.msg isForce:false compleBlock:^(NSInteger index) {
+            [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:returnParse.msg isForce:true compleBlock:^(NSInteger index) {
                 if (index == 1) {
                     [FXD_Utility sharedUtility].userInfo.isUpdate = YES;
                     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];

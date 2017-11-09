@@ -15,7 +15,7 @@ class FXD_VersionUpdatepop: UIView {
     
     @objc var  backImageView :UIImageView?
     @objc var  titleLabel :UILabel?
-    @objc var  displayLabel :UILabel?
+    @objc var  displayTextView :UITextView?
     @objc var  closeButton :UIButton?
     @objc var  updateButton :UIButton?
     @objc var  closeClick :CloseClick?
@@ -39,9 +39,10 @@ class FXD_VersionUpdatepop: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //MARK: 弹窗动画
     @objc  func show()  {
         UIApplication.shared.keyWindow?.addSubview(self)
+        UIApplication.shared.keyWindow?.bringSubview(toFront: self)
         self.backImageView?.transform = CGAffineTransform(scaleX: 1.21, y: 1.21);
         self.backImageView?.alpha = 0
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
@@ -92,7 +93,7 @@ extension FXD_VersionUpdatepop{
         self.backImageView?.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
             make.centerX.equalTo((self.backImageView?.snp.centerX)!)
-            make.top.equalTo((self.backImageView?.snp.top)!).offset(160);
+            make.top.equalTo((self.backImageView?.snp.top)!).offset(150);
             make.height.equalTo(30)
         })
         
@@ -104,20 +105,21 @@ extension FXD_VersionUpdatepop{
         updateButton?.snp.makeConstraints({ (make) in
             make.left.equalTo((self.backImageView?.snp.left)!).offset(30);
             make.right.equalTo((self.backImageView?.snp.right)!).offset(-30);
-            make.height.equalTo(45);
-            make.bottom.equalTo((self.backImageView?.snp.bottom)!).offset(-45);
+            make.height.equalTo(40);
+            make.bottom.equalTo((self.backImageView?.snp.bottom)!).offset(-35);
         })
         
-        displayLabel  = UILabel()
-        displayLabel?.numberOfLines = 0
-        displayLabel?.font = UIFont.systemFont(ofSize: 14)
-        displayLabel?.textColor = UIColor.init(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
-        self.backImageView?.addSubview(displayLabel!);
-        displayLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo((titleLabel?.snp.bottom)!).offset(19)
+        displayTextView  = UITextView()
+        displayTextView?.font = UIFont.systemFont(ofSize: 15)
+        displayTextView?.textColor = UIColor.init(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
+        displayTextView?.isEditable = false
+        displayTextView?.isSelectable = false
+        self.backImageView?.addSubview(displayTextView!);
+        displayTextView?.snp.makeConstraints({ (make) in
+            make.top.equalTo((titleLabel?.snp.bottom)!).offset(5)
             make.left.equalTo((self.backImageView?.snp.left)!).offset(20)
             make.right.equalTo((self.backImageView?.snp.right)!).offset(-20)
-//            make.bottom.equalTo((updateButton?.snp.top)!).offset(-20)
+            make.bottom.equalTo((updateButton?.snp.top)!).offset(-5)
         })
         
         closeButton = UIButton.init(type: UIButtonType.custom)
@@ -132,22 +134,34 @@ extension FXD_VersionUpdatepop{
         
         if UI_IS_IPONE5 {
             titleLabel?.snp.updateConstraints({ (make) in
-                make.top.equalTo((self.backImageView?.snp.top)!).offset(130);
+                make.top.equalTo((self.backImageView?.snp.top)!).offset(125);
             })
-            displayLabel?.snp.updateConstraints({ (make) in
+            
+            displayTextView?.font = UIFont.systemFont(ofSize: 14)
+            displayTextView?.snp.updateConstraints({ (make) in
                 make.top.equalTo((titleLabel?.snp.bottom)!).offset(2)
             })
             updateButton?.snp.updateConstraints({ (make) in
-                make.bottom.equalTo((self.backImageView?.snp.bottom)!).offset(-25);
+                make.bottom.equalTo((self.backImageView?.snp.bottom)!).offset(-20);
                 make.height.equalTo(35);
             })
         }
         
         if UI_IS_IPONE6P {
+            titleLabel?.snp.updateConstraints({ (make) in
+                make.top.equalTo((self.backImageView?.snp.top)!).offset(160);
+            })
+            displayTextView?.font = UIFont.systemFont(ofSize: 16)
+            displayTextView?.snp.updateConstraints({ (make) in
+                make.top.equalTo((titleLabel?.snp.bottom)!).offset(15)
+            })
+            updateButton?.snp.updateConstraints({ (make) in
+                make.bottom.equalTo((self.backImageView?.snp.bottom)!).offset(-45);
+                make.height.equalTo(45);
+            })
             titleLabel?.font = UIFont.boldSystemFont(ofSize: 23)
-            displayLabel?.font = UIFont.systemFont(ofSize: 16)
+            displayTextView?.font = UIFont.systemFont(ofSize: 18)
         }
-        
     }
     
     /// 设置内容格式
@@ -156,13 +170,19 @@ extension FXD_VersionUpdatepop{
     func setContentStyle(str:String)  {
         
         let paragraphStyle = NSMutableParagraphStyle.init()
-        paragraphStyle.lineSpacing = 15
+        paragraphStyle.lineSpacing = 6
+        var attarStr = NSMutableAttributedString.init(string: str, attributes: [NSAttributedStringKey.paragraphStyle : paragraphStyle ,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 15)])
         if UI_IS_IPONE5 {
-            paragraphStyle.lineSpacing = 10
+            paragraphStyle.lineSpacing = 4
+            attarStr = NSMutableAttributedString.init(string: str, attributes: [NSAttributedStringKey.paragraphStyle : paragraphStyle ,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 14)])
         }
-        let attarStr = NSMutableAttributedString.init(string: str, attributes: [NSAttributedStringKey.paragraphStyle : paragraphStyle])
-        displayLabel?.attributedText=attarStr
-        displayLabel?.sizeToFit()
+        if UI_IS_IPONE6P {
+            paragraphStyle.lineSpacing = 8
+            attarStr = NSMutableAttributedString.init(string: str, attributes: [NSAttributedStringKey.paragraphStyle : paragraphStyle ,NSAttributedStringKey.font:UIFont.systemFont(ofSize: 16)])
+        }
+
+        displayTextView?.attributedText=attarStr
+
     }
     
     @objc func appVersionUpdate(){
