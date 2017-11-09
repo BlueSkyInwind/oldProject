@@ -34,7 +34,7 @@
         
         if (UI_IS_IPHONE5) {
             frame.size.width = 300;
-            frame.size.height = 500;
+            frame.size.height = 534;
         }
         if (UI_IS_IPHONE6P) {
             frame.size.width = 375;
@@ -42,7 +42,6 @@
         }
         
         if (UI_IS_IPHONE4) {
-            
             frame.size.width = 300;
             frame.size.height = 430;
         }

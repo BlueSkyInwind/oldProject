@@ -153,10 +153,8 @@ class RenewalVCModules: BaseViewController ,UITableViewDataSource,UITableViewDel
             if indexPath.row == 3{
                     if cardInfo != nil{
                         let index = cardInfo?.cardNo.index((cardInfo?.cardNo.endIndex)!, offsetBy: -4)
-//                        let numStr = cardInfo?.cardNo.substring(from: index!)
-                        let numStr = String(describing: cardInfo?.cardNo[index!...])
-                        
-                        cell.rightLabel?.text = (cardInfo?.bankName)!+" 尾号 "+"("+numStr+")"
+                        let numStr = cardInfo?.cardNo[index!...]
+                        cell.rightLabel?.text = (cardInfo?.bankName)!+" 尾号 "+"("+numStr!+")"
                     }
                 return cell
             }

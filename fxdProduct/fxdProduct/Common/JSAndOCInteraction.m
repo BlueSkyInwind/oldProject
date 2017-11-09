@@ -166,11 +166,8 @@
  */
 - (void)savePictureToAlbum:(NSString *)src VC:(UIViewController *)currentVC
 {
-    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要保存到相册吗？" preferredStyle:UIAlertControllerStyleActionSheet];
-    
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         [self loadImage:src VC:currentVC];
     }]];

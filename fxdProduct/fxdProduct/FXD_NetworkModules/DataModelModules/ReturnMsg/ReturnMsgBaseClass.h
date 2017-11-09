@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *result;
 @property (nonatomic, strong) NSString *flag;
 @property (nonatomic, strong) NSString *msg;
+@property (nonatomic, strong) NSString *update_content_;
 @property (nonatomic, strong) NSString *ext;
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;

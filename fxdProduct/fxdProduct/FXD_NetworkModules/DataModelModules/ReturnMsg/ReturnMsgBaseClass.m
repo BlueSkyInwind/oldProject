@@ -11,6 +11,7 @@
 NSString *const kReturnMsgBaseClassResult = @"result";
 NSString *const kReturnMsgBaseClassFlag = @"flag";
 NSString *const kReturnMsgBaseClassMsg = @"msg";
+NSString *const kReturnMsgBaseClassUpdate_content_ = @"update_content_";
 
 
 @interface ReturnMsgBaseClass ()
@@ -24,6 +25,7 @@ NSString *const kReturnMsgBaseClassMsg = @"msg";
 @synthesize result = _result;
 @synthesize flag = _flag;
 @synthesize msg = _msg;
+@synthesize update_content_ = _update_content_;
 
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict
@@ -41,6 +43,8 @@ NSString *const kReturnMsgBaseClassMsg = @"msg";
             self.result = [self objectOrNilForKey:kReturnMsgBaseClassResult fromDictionary:dict];
             self.flag = [self objectOrNilForKey:kReturnMsgBaseClassFlag fromDictionary:dict];
             self.msg = [self objectOrNilForKey:kReturnMsgBaseClassMsg fromDictionary:dict];
+            self.update_content_ = [self objectOrNilForKey:kReturnMsgBaseClassUpdate_content_ fromDictionary:dict];
+
     }
     
     return self;
@@ -53,6 +57,7 @@ NSString *const kReturnMsgBaseClassMsg = @"msg";
     [mutableDict setValue:self.result forKey:kReturnMsgBaseClassResult];
     [mutableDict setValue:self.flag forKey:kReturnMsgBaseClassFlag];
     [mutableDict setValue:self.msg forKey:kReturnMsgBaseClassMsg];
+    [mutableDict setValue:self.update_content_ forKey:kReturnMsgBaseClassUpdate_content_];
 
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
@@ -79,6 +84,8 @@ NSString *const kReturnMsgBaseClassMsg = @"msg";
     self.result = [aDecoder decodeObjectForKey:kReturnMsgBaseClassResult];
     self.flag = [aDecoder decodeObjectForKey:kReturnMsgBaseClassFlag];
     self.msg = [aDecoder decodeObjectForKey:kReturnMsgBaseClassMsg];
+    self.update_content_ = [aDecoder decodeObjectForKey:kReturnMsgBaseClassUpdate_content_];
+
     return self;
 }
 
@@ -88,6 +95,8 @@ NSString *const kReturnMsgBaseClassMsg = @"msg";
     [aCoder encodeObject:_result forKey:kReturnMsgBaseClassResult];
     [aCoder encodeObject:_flag forKey:kReturnMsgBaseClassFlag];
     [aCoder encodeObject:_msg forKey:kReturnMsgBaseClassMsg];
+    [aCoder encodeObject:_update_content_ forKey:kReturnMsgBaseClassUpdate_content_];
+
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -99,6 +108,8 @@ NSString *const kReturnMsgBaseClassMsg = @"msg";
         copy.result = [self.result copyWithZone:zone];
         copy.flag = [self.flag copyWithZone:zone];
         copy.msg = [self.msg copyWithZone:zone];
+        copy.update_content_ = [self.update_content_ copyWithZone:zone];
+
     }
     
     return copy;
