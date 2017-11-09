@@ -21,11 +21,15 @@
 #import "RepayModel.h"
 #import "BankInfoViewModel.h"
 #import "QueryCardInfo.h"
+#import "DrawLotteryModel.h"
+#import "LewPopupViewController.h"
+#import "ScratchAwardView.h"
 @interface LoanMoneyViewController ()
 {
     MoneyIngView *moenyViewing;
     BOOL _isFirst;//好评只弹出一次，再次刷新时，不弹对话框
     RepayModel *_repayModel;
+    BOOL _isHidden;//老客周末活动判断是否弹框刮奖,只弹出一次，再次刷新时，不弹
 }
 
 @property (nonatomic, weak) UIScrollView *scrollView;
@@ -70,6 +74,7 @@
     //合规协议
     [moenyViewing.heguiBtn addTarget:self action:@selector(hgContractBtnClick) forControlEvents:UIControlEventTouchUpInside];
     _isFirst = _popAlert;
+    _isHidden = NO;
 
   }
 
@@ -464,10 +469,43 @@
         [self getRepaymentPageInformation];
         return;
     }
+    
+//    //如果是放款中，会判断老客周末活动是否弹框刮奖
+//    if (_applicationStatus == InLoan) {
+//
+//        [self getDrawLottery];
+//    }
     [self getTheIntermediateState];
     
 }
 
+#pragma mark  老客周末活动判断是否弹框刮奖
+-(void)getDrawLottery{
+    
+    __weak typeof(self) weakSelf = self;
+    LoanMoneyViewModel *viewModel = [[LoanMoneyViewModel alloc]init];
+    [viewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([resultM.errCode isEqualToString:@"0"]) {
+            DrawLotteryModel * model = [[DrawLotteryModel alloc]initWithDictionary:(NSDictionary *)resultM.data error:nil];
+            if ([model.isActivety isEqualToString:@"1"]) {
+                _isHidden = YES;
+                ScratchAwardView *scratchAwardView = [ScratchAwardView defaultPopView];
+                scratchAwardView.linkUrl = model.luckDraw;
+                scratchAwardView.parentVC = weakSelf;
+                [scratchAwardView loadData];
+                [weakSelf lew_presentPopupView:scratchAwardView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
+                }];
+            }
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [viewModel getDrawLottery];
+    
+}
 
 #pragma mark 设置标题
 -(NSString *)setTitle{
@@ -532,6 +570,14 @@
                         return;
                     }
                 }
+            }
+            //如果是放款中，会判断老客周末活动是否弹框刮奖
+            if (_applicationStatus == InLoan) {
+                if (!_isHidden) {
+                    
+                    [self getDrawLottery];
+                }
+                
             }
             //处理中间状态的显示
             switch (applicationStatusModel.status.integerValue) {

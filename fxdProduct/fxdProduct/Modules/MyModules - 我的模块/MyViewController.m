@@ -122,14 +122,10 @@
         case 0:
         {
 
-            [self getDrawLottery];
+//            [self getDrawLottery];
             
-//            ScratchAwardView *scratchAwardView = [[ScratchAwardView alloc]init];
-//            scratchAwardView.linkStr = @"https://www.baidu.com";
-//            [self lew_presentPopupView:scratchAwardView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-//            }];
-//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-//            [self.navigationController pushViewController:repayRecord animated:true];
+            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+            [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
         case 1:
@@ -172,6 +168,7 @@
                 
                 ScratchAwardView *scratchAwardView = [ScratchAwardView defaultPopView];
                 scratchAwardView.linkUrl = model.luckDraw;
+                scratchAwardView.parentVC = self;
                 [scratchAwardView loadData];
                 [self lew_presentPopupView:scratchAwardView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
                 }];
