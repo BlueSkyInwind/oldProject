@@ -8,6 +8,7 @@
 
 #import "ScratchAwardView.h"
 #import <WebKit/WebKit.h>
+#import "LewPopupViewAnimationSpring.h"
 
 @interface ScratchAwardView ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate>
 
@@ -39,10 +40,17 @@
 
 -(void)configureView{
     
-    _webView = [[WKWebView alloc]init];
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    config.preferences = [[WKPreferences alloc] init];
+    config.preferences.javaScriptEnabled = true;
+    config.preferences.javaScriptCanOpenWindowsAutomatically = true;
+    config.userContentController = [[WKUserContentController alloc] init];
+
+    [config.userContentController addScriptMessageHandler:self name:@"jsToNative"];
+    _webView = [[WKWebView alloc] initWithFrame:self.bounds configuration:config];
     _webView.UIDelegate = self;
     _webView.navigationDelegate = self;
-    
+    [_webView setOpaque:false];
     [self addSubview:_webView];
     [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self);
@@ -121,6 +129,36 @@
 }
 
 
+#pragma mark -WKScriptMessageHandler
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    if ([message.name isEqualToString:@"jsToNative"]) {
+        NSDictionary *dic = message.body;
+        DLog(@"%@",dic);
+        //JS交互点击返回事件
+        if ([[dic objectForKey:@"functionName"] isEqualToString:@"mxBack"]) {
+            [self cancel];
+        }
+        
+    }
+}
+#pragma mark -
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
+{
+    DLog(@"alert");
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.parentVC.view message:message];
+    completionHandler();
+}
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler
+{
+    DLog(@"confim");
+    completionHandler(true);
+}
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * _Nullable result))completionHandler
+{
+    DLog(@"inputPanel");
+    completionHandler(@"");
+}
 -(void)dealloc
 {
     [_webView removeObserver:self forKeyPath:@"estimatedProgress"];
@@ -139,4 +177,8 @@
     
 }
 
+-(void)cancel{
+    
+    [_parentVC lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+}
 @end

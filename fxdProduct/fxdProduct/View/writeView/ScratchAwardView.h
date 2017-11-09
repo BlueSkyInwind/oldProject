@@ -10,6 +10,8 @@
 
 @interface ScratchAwardView : UIView
 
+@property (nonatomic, weak) UIViewController *parentVC;
+
 @property (nonatomic,copy)NSString *linkUrl;
 
 + (instancetype)defaultPopView;

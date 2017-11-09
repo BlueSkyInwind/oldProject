@@ -154,6 +154,7 @@ class RenewalVCModules: BaseViewController ,UITableViewDataSource,UITableViewDel
                     if cardInfo != nil{
                         let index = cardInfo?.cardNo.index((cardInfo?.cardNo.endIndex)!, offsetBy: -4)
                         let numStr = cardInfo?.cardNo[index!...]
+//                        let numStr = cardInfo?.cardNo.suffix(from: index!)
                         cell.rightLabel?.text = (cardInfo?.bankName)!+" 尾号 "+"("+numStr!+")"
                     }
                 return cell
