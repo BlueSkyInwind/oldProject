@@ -48,8 +48,8 @@
     _waitView.dimBackground = YES;
     [[UIApplication sharedApplication].keyWindow addSubview:_waitView];
     return _waitView;
-    
 }
+
 -(void)removeWaitView{
     if (_requestWaitView) {
         [_requestWaitView removeFromSuperview];

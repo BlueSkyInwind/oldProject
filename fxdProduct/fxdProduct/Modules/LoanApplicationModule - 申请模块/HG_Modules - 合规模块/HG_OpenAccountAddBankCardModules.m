@@ -348,6 +348,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     __unsafe_unretained HG_OpenAccountAddBankCardModules * weakSelf = self;
     MGBankCardManager *cardManager = [[MGBankCardManager alloc] init];
     [cardManager setDebug:YES];
+    cardManager.viewType = MGBankCardViewCardBox;
     [cardManager CardStart:self finish:^(MGBankCardModel * _Nullable result) {
 
         _bankNum = result.bankCardNumber;

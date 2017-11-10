@@ -176,8 +176,7 @@ typedef enum {
             [cell.picCodeBtn setBackgroundImage:picCodeImage forState:UIControlStateNormal];
         }
             break;
-        default:
-            break;
+        default:             break;
     }
     return cell;
 }

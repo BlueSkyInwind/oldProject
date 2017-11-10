@@ -359,6 +359,7 @@
     __unsafe_unretained HG_ReplaceBankCardVCModules * weakSelf = self;
     MGBankCardManager *cardManager = [[MGBankCardManager alloc] init];
     [cardManager setDebug:YES];
+    cardManager.viewType = MGBankCardViewCardBox;
     [cardManager CardStart:self finish:^(MGBankCardModel * _Nullable result) {
 
         NSString *_bankNum;

@@ -181,7 +181,6 @@
  */
 -(void)loadImage:(NSString *)loadUrl VC:(UIViewController *)currentVC{
     [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:loadUrl] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-        NSLog(@"%ld,%ld",receivedSize,expectedSize);
         if (expectedSize > 0) {
             float numper = (float)receivedSize / (float)expectedSize;
             [[MBPAlertView sharedMBPTextView] showProgressOnly:currentVC.view Progress:numper];
@@ -203,6 +202,21 @@
     }else{
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"保存成功"];
     }
+}
+
+
+/**
+ 调用本地等待条
+ 
+ @param vc 父视图
+ */
+-(void)waitHubAnimationView:(UIViewController *)vc{
+    
+    [[MBPAlertView sharedMBPTextView]loadingWaitHUDView:vc.view];
+
+}
+-(void)removeWaitHubAnimationView{
+    [[MBPAlertView sharedMBPTextView]removeWaitHUDView];
 }
 
 - (void)presentLogin:(UIViewController *)vc
@@ -262,9 +276,7 @@
 }
 */
 
-
 #pragma mark -- app启动跳转处理
-
 
 /**
  外部启动app跳转某个页面

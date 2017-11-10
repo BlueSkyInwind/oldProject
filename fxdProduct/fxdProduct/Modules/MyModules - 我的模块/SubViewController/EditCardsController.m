@@ -381,6 +381,7 @@
     __unsafe_unretained EditCardsController * weakSelf = self;
     MGBankCardManager *cardManager = [[MGBankCardManager alloc] init];
     [cardManager setDebug:YES];
+    cardManager.viewType = MGBankCardViewCardBox;
     [cardManager CardStart:self finish:^(MGBankCardModel * _Nullable result) {
         //        weakSelf.bankImageView.image = result.image;
         //        weakSelf.bankNumView.text = result.bankCardNumber;

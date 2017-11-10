@@ -215,6 +215,22 @@
             NSString * saveImageUrl =  resultDic[@"saveImageUrl"];
             [[JSAndOCInteraction sharedInteraction] savePictureToAlbum:saveImageUrl VC:self];
         }
+        //JS交互等待条  FXDWaitHubView
+        /*
+         {
+             "FXDWaitHubView" : {
+                "ShowOrRemove" : "Show",  \  "ShowOrRemove" : "Remove",
+             }
+         }
+         */
+        if ([[dic allKeys] containsObject:@"FXDWaitHubView"]) {
+            if ([[dic objectForKey:@"ShowOrRemove"] isEqualToString:@"Show"]) {
+                [[JSAndOCInteraction sharedInteraction] waitHubAnimationView:self];
+            }
+            if ([[dic objectForKey:@"ShowOrRemove"] isEqualToString:@"Remove"]) {
+                [[JSAndOCInteraction sharedInteraction] removeWaitHubAnimationView];
+            }
+        }
     }
 }
 

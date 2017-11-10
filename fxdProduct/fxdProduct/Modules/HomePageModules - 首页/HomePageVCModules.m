@@ -792,9 +792,7 @@
             NSString *approvalAmount = [_homeProductList.data.productList[0].amount substringToIndex:_homeProductList.data.productList[0].amount.length-1];
             [self getCapitalListData:productId approvalAmount:approvalAmount];
         }
-        
 //        [self goLoanSureVC:_homeProductList.data.productList[0].productId];
-        
     } else {
         [self presentLoginVC:self];
     }
