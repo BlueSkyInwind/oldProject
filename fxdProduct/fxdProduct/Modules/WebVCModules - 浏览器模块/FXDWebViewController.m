@@ -224,10 +224,11 @@
          }
          */
         if ([[dic allKeys] containsObject:@"FXDWaitHubView"]) {
-            if ([[dic objectForKey:@"ShowOrRemove"] isEqualToString:@"Show"]) {
+            NSDictionary * resultDic = dic[@"FXDWaitHubView"];
+            if ([[resultDic objectForKey:@"ShowOrRemove"] isEqualToString:@"Show"]) {
                 [[JSAndOCInteraction sharedInteraction] waitHubAnimationView:self];
             }
-            if ([[dic objectForKey:@"ShowOrRemove"] isEqualToString:@"Remove"]) {
+            if ([[resultDic objectForKey:@"ShowOrRemove"] isEqualToString:@"Remove"]) {
                 [[JSAndOCInteraction sharedInteraction] removeWaitHubAnimationView];
             }
         }
@@ -396,6 +397,7 @@
 {
     [progressView removeFromSuperview];
     [self deleteWebCache];
+    [[JSAndOCInteraction sharedInteraction] removeWaitHubAnimationView];
 }
 
 /*

@@ -87,11 +87,12 @@
     waitImageView.animationDuration = imageArr.count/3;
     waitImageView.animationRepeatCount = 0;
     [waitImageView startAnimating];
-    _waitHudView = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].keyWindow];
+    _waitHudView = [[MBProgressHUD alloc] initWithView:view];
     _waitHudView.mode = MBProgressHUDModeCustomView;
     _waitHudView.customView = waitImageView;
     _waitHudView.dimBackground = YES;
     [view addSubview:_waitHudView];
+    [_waitHudView show:true];
 }
 -(void)removeWaitHUDView{
     [_waitHudView hide:true];

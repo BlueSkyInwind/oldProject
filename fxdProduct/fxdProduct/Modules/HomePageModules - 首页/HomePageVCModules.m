@@ -638,7 +638,6 @@
         [self accordingToTheStateJumpPage];
     } else {
         
-
         [self presentLoginVC:self];
     }
 }
