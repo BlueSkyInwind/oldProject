@@ -164,7 +164,7 @@
 {
     NSURLRequest *request = navigationAction.request;
     NSLog(@"=========%@",request.URL.absoluteString);
-    if ([request.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_H5_url,_CapitalLoanBack_url]]&&![request.URL.absoluteString containsString:@"#shanlinBack"]) {
+    if ([request.URL.absoluteString containsString:[NSString stringWithFormat:@"%@",_CapitalLoanBack_url]]) {
         decisionHandler(WKNavigationActionPolicyAllow);
         [self.navigationController popToRootViewControllerAnimated:true];
         
