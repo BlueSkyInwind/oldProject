@@ -167,9 +167,7 @@
     if ([request.URL.absoluteString containsString:[NSString stringWithFormat:@"%@",_CapitalLoanBack_url]]) {
         decisionHandler(WKNavigationActionPolicyAllow);
         [self.navigationController popToRootViewControllerAnimated:true];
-        
     }else{
-        
         decisionHandler(WKNavigationActionPolicyAllow);
     }
     
