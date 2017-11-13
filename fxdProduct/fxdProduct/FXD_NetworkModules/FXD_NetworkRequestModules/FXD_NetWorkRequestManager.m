@@ -151,7 +151,6 @@
         [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
     }];
 }
-
 - (void)POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure
 {
     DLog(@"%d",[FXD_Utility sharedUtility].userInfo.isUpdate);
@@ -186,7 +185,6 @@
                 }
             }
             DLog(@"加密后参数:---%@",paramDic);
-
             
             DLog(@"juid --- %@\n token --- %@",[FXD_Utility sharedUtility].userInfo.juid,[FXD_Utility sharedUtility].userInfo.tokenStr);
             if ([FXD_Utility sharedUtility].userInfo.juid != nil && ![[FXD_Utility sharedUtility].userInfo.juid isEqualToString:@""]) {

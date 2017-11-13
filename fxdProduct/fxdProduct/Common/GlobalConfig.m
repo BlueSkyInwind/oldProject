@@ -537,7 +537,8 @@ NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
 
 //老客周末活动判断是否弹框刮奖
 NSString *const     _getDrawLottery_url     =    @"apigw/client/market/getDrawLottery";
-
+//协议
+NSString *const     _ProductProtocol_url     =    @"apigw/client/product/getProductProtocolApi";
 
 
 #pragma mark - 对外导流接口

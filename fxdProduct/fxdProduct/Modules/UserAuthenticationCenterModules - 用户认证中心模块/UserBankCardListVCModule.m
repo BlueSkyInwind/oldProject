@@ -86,6 +86,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     spaceItem.width = -15;
     self.navigationItem.leftBarButtonItems = @[spaceItem,item];
 }
+
 - (void)popBack
 {
     if (self.payPatternSelectBlock) {

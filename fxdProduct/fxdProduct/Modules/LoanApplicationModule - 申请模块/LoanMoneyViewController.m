@@ -100,9 +100,7 @@
 #pragma mark 续借一期点击按钮
 -(void)renewalBtnClick{
 
-    
     if (!_repayModel.continueStaging) {
-        
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"一次借款最多续借三次"];
         return;
     }
@@ -677,7 +675,6 @@
         }
             break;
         case Staging:
-            
             moenyViewing.stagingBgView.hidden = YES;
             moenyViewing.labelProgress.text = @"续期处理中";
             moenyViewing.labelProgress.font = [UIFont systemFontOfSize:30];
@@ -704,8 +701,8 @@
         case ComplianceInLoan:
         case ComplianceRepayment:
         case ComplianceProcessing:
-//            moenyViewing.labelProgress.text = @"处理中";
-            moenyViewing.labelProgress.text = applicationStatusModel.userPendingMsg;
+            moenyViewing.labelProgress.text = @"处理中";
+//            moenyViewing.labelProgress.text = applicationStatusModel.userPendingMsg;
             moenyViewing.tipLabel.text = @"正在处理,请耐心等待";
             moenyViewing.middleView.hidden = YES;
             moenyViewing.repayBtnView.hidden = YES;
