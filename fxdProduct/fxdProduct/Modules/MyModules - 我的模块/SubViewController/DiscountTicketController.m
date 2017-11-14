@@ -260,7 +260,6 @@
 
 #pragma mark 点击底部过期优惠券
 -(void)pushInVailDiscountTicketVC{
-    
     LapseDiscountTicketViewController *lapseDiscountTicketVC = [[LapseDiscountTicketViewController alloc] init];
     lapseDiscountTicketVC.invalidTicketArr = self.invalidTicketArr;
     [self.navigationController pushViewController:lapseDiscountTicketVC animated:true];
@@ -303,9 +302,9 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (UI_IS_IPHONE6P) {
-        return 167;
+        return 120;
     }
-    return 142;
+    return 110;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

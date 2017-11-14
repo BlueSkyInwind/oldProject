@@ -42,7 +42,7 @@
         [self obtainDiscountTicket:^(DiscountTicketModel *discountTicketModel) {
             if (discountTicketModel.valid != nil && discountTicketModel.valid.count != 0) {
                 [self addDiscountCoupons:discountTicketModel.valid[0]];
-            }
+            } 
         }];
     }
     
@@ -147,7 +147,6 @@
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
-        
     }];
     [applicationVM obtainUserDiscountTicketList:@"1" displayType:@"1"];
 }

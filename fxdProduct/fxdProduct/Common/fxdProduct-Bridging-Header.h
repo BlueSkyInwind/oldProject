@@ -50,5 +50,4 @@
 #import "ApplicaitonModel.h"
 #import "WithdrawalsVCModule.h"
 #import "DiscountTicketModel.h"
-#import "DiscountCouponsView.h"
 #endif /* fxdProduct_Bridging_Header_h */

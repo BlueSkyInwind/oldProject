@@ -91,9 +91,9 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (UI_IS_IPHONE6P) {
-        return 167;
+        return 120;
     }
-    return 142;
+    return 110;
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {

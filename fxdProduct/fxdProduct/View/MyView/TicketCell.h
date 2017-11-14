@@ -16,6 +16,9 @@
 @property (nonatomic,strong) UILabel *lblTip;
 @property (nonatomic,strong) UILabel *lblName;
 @property (nonatomic,strong) UILabel *lblOverTime;
+@property (nonatomic,strong) UILabel *limitProduct;
+@property (nonatomic,strong) UILabel *limitconditions;
+
 @property (nonatomic,strong) UIImageView *lblOverTimeImageView;
 
 -(void)setValues:(RedPacketTicketModel *)redPacketModel;

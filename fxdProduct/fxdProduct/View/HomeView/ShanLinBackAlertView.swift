@@ -125,7 +125,6 @@ extension ShanLinBackAlertView{
 extension ShanLinBackAlertView{
     
    @objc fileprivate func cancelBtnClick(){
-    
         if delegate != nil {
             delegate?.cancelBtn()
         }

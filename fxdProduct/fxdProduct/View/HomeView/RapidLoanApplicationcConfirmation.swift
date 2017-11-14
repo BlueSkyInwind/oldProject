@@ -14,9 +14,13 @@ import UIKit
 
     func capitalSourceBtn()
     
+    func showChooseAmountView()
+    
+    func showDirectionsForUse()
+
 }
 
-class RapidLoanApplicationcConfirmation: UIView{
+class RapidLoanApplicationcConfirmation: UIView,DiscountCouponsViewDelegate{
     
     //标题
     var titleLabel : UILabel?
@@ -28,6 +32,11 @@ class RapidLoanApplicationcConfirmation: UIView{
     var titleImageView : UIImageView?
     //资金方名字
     var capitalSourceLabel : UILabel?
+    
+    var headerView : UIView?
+    var bottomView : UIView?
+    //选择资金方视图
+    var capitalSourceView : UIView?
     //提额券视图
     var discountCouponsV:DiscountCouponsView?
     
@@ -43,11 +52,57 @@ class RapidLoanApplicationcConfirmation: UIView{
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor =  APPLICATION_backgroundColor
         setupUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func addDiscountCoupons(discountTicketDetailM:DiscountTicketDetailModel)  {
+        
+        var discountCouponsTop = 115
+        if UI_IS_IPONE6P {
+            discountCouponsTop = 164
+        }else if UI_IS_IPONE6 {
+            discountCouponsTop = 140
+        }else if UI_IS_IPHONEX {
+            discountCouponsTop = 164
+        }
+        
+        discountCouponsV = DiscountCouponsView();
+        discountCouponsV?.backgroundColor = APPLICATION_backgroundColor
+        discountCouponsV?.delegate = self
+        discountCouponsV?.amountLabel?.text = "+￥" + "\(discountTicketDetailM.amount_payment_ ?? "")"
+        self.addSubview(discountCouponsV!)
+        discountCouponsV?.snp.makeConstraints({ (make) in
+            make.left.right.equalTo(0)
+            make.top.equalTo((headerView?.snp.bottom)!).offset(0)
+            make.height.equalTo(discountCouponsTop)
+        })
+        
+        bottomView?.snp.remakeConstraints({ (make) in
+            make.top.equalTo((discountCouponsV?.snp.bottom)!).offset(0)
+            make.left.equalTo((self.snp.left)).offset(0)
+            make.right.equalTo((self.snp.right)).offset(0)
+            make.bottom.equalTo(self.snp.bottom).offset(-70)
+        })
+        
+        titleImageView?.snp.updateConstraints({ (make) in
+            make.top.equalTo((headerView?.snp.top)!).offset(20)
+        })
+    }
+    
+    func pushChooseAmountView()  {
+        if delegate != nil {
+            delegate?.showChooseAmountView()
+        }
+    }
+    func pushDirectionsForUse() {
+        if delegate != nil {
+            delegate?.showDirectionsForUse()
+        }
     }
     
 }
@@ -56,54 +111,73 @@ extension RapidLoanApplicationcConfirmation{
     
     fileprivate func setupUI(){
         
+        headerView = UIView()
+        headerView?.backgroundColor = UIColor.white
+        self.addSubview(headerView!)
+        headerView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self).offset(0)
+            make.left.right.equalTo(self).offset(0)
+            make.height.equalTo(200)
+        })
+        
         titleImageView = UIImageView()
-        self.addSubview(titleImageView!)
+        headerView?.addSubview(titleImageView!)
         titleImageView?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self).offset(32)
-            make.centerX.equalTo(self.snp.centerX)
+            make.top.equalTo((headerView?.snp.top)!).offset(32)
+            make.centerX.equalTo((headerView?.snp.centerX)!)
         })
         
         titleLabel = UILabel()
         titleLabel?.font = UIFont.systemFont(ofSize: 22)
         titleLabel?.textColor = TITLE_COLOR
-        self.addSubview(titleLabel!)
+        headerView?.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo((titleImageView?.snp.bottom)!).offset(10)
-            make.centerX.equalTo(self.snp.centerX)
+            make.centerX.equalTo((headerView?.snp.centerX)!)
             make.height.equalTo(22)
         })
         
         qutoaLabel = UILabel()
         qutoaLabel?.font = UIFont.systemFont(ofSize: 14)
         qutoaLabel?.textColor = QUTOA_COLOR
-        self.addSubview(qutoaLabel!)
+        headerView?.addSubview(qutoaLabel!)
         qutoaLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo((titleLabel?.snp.bottom)!).offset(25)
-            make.centerX.equalTo(self.snp.centerX)
+            make.centerX.equalTo((headerView?.snp.centerX)!)
             make.height.equalTo(20)
         })
         
         termLabel = UILabel()
         termLabel?.font = UIFont.systemFont(ofSize: 14)
         termLabel?.textColor = QUTOA_COLOR
-        self.addSubview(termLabel!)
+        headerView?.addSubview(termLabel!)
         termLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo((qutoaLabel?.snp.bottom)!).offset(15)
+            make.top.equalTo((qutoaLabel?.snp.bottom)!).offset(5)
             make.left.equalTo((qutoaLabel?.snp.left)!).offset(0)
             make.height.equalTo(20)
         })
         
+        bottomView = UIView()
+        bottomView?.backgroundColor = UIColor.white
+        self.addSubview(bottomView!)
+        bottomView?.snp.makeConstraints({ (make) in
+            make.top.equalTo((headerView?.snp.bottom)!).offset(0)
+            make.left.equalTo((self.snp.left)).offset(0)
+            make.right.equalTo((self.snp.right)).offset(0)
+            make.bottom.equalTo(self.snp.bottom).offset(-80)
+        })
+        
         //选择资金方视图
-        let capitalSourceView = UIView()
-        capitalSourceView.layer.cornerRadius = 5.0
-        capitalSourceView.layer.masksToBounds = true
-        capitalSourceView.layer.borderWidth = 1
-        capitalSourceView.layer.borderColor = UI_MAIN_COLOR.cgColor
-        self.addSubview(capitalSourceView)
-        capitalSourceView.snp.makeConstraints { (make) in
-            make.top.equalTo((termLabel?.snp.bottom)!).offset(60)
-            make.left.equalTo(self).offset(20)
-            make.right.equalTo(self).offset(-20)
+        capitalSourceView = UIView()
+        capitalSourceView?.layer.cornerRadius = 5.0
+        capitalSourceView?.layer.masksToBounds = true
+        capitalSourceView?.layer.borderWidth = 1
+        capitalSourceView?.layer.borderColor = UI_MAIN_COLOR.cgColor
+        bottomView?.addSubview(capitalSourceView!)
+        capitalSourceView?.snp.makeConstraints { (make) in
+            make.top.equalTo((bottomView?.snp.top)!).offset(10)
+            make.left.equalTo((bottomView?.snp.left)!).offset(20)
+            make.right.equalTo((bottomView?.snp.right)!).offset(-20)
             make.height.equalTo(50)
         }
         
@@ -111,10 +185,10 @@ extension RapidLoanApplicationcConfirmation{
         let capitalSourceBtn = UIButton()
         capitalSourceBtn.setBackgroundImage(UIImage(named:"icon_xiajiatou"), for: .normal)
         capitalSourceBtn.addTarget(self, action: #selector(capitalSourceBtnClick), for: .touchUpInside)
-        capitalSourceView.addSubview(capitalSourceBtn)
+        capitalSourceView?.addSubview(capitalSourceBtn)
         capitalSourceBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(capitalSourceView.snp.top).offset(0)
-            make.right.equalTo(capitalSourceView.snp.right).offset(0)
+            make.top.equalTo((capitalSourceView?.snp.top)!).offset(0)
+            make.right.equalTo((capitalSourceView?.snp.right)!).offset(0)
             make.height.equalTo(50)
             make.width.equalTo(53)
         }
@@ -122,11 +196,11 @@ extension RapidLoanApplicationcConfirmation{
         capitalSourceLabel = UILabel()
         capitalSourceLabel?.font = UIFont.systemFont(ofSize: 16)
         capitalSourceLabel?.textColor = TITLE_COLOR
-        capitalSourceView.addSubview(capitalSourceLabel!)
+        capitalSourceView?.addSubview(capitalSourceLabel!)
         capitalSourceLabel?.snp.makeConstraints { (make) in
-            make.left.equalTo(capitalSourceView.snp.left).offset(20)
+            make.left.equalTo((capitalSourceView?.snp.left)!).offset(20)
             make.right.equalTo(capitalSourceBtn.snp.left).offset(0)
-            make.top.equalTo(capitalSourceView.snp.top).offset(0)
+            make.top.equalTo((capitalSourceView?.snp.top)!).offset(0)
             make.height.equalTo(50)
         }
         
@@ -134,11 +208,11 @@ extension RapidLoanApplicationcConfirmation{
         tipLabel.font = UIFont.systemFont(ofSize: 12)
         tipLabel.textColor = QUTOA_COLOR
         tipLabel.text = "温馨提示:账单日自动扣款,可能由资金来源方操作。"
-        self.addSubview(tipLabel)
+        bottomView?.addSubview(tipLabel)
         tipLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(capitalSourceView.snp.bottom).offset(23)
-            make.left.equalTo(self).offset(20)
-            make.right.equalTo(self).offset(0)
+            make.top.equalTo((capitalSourceView?.snp.bottom)!).offset(5)
+            make.left.equalTo((bottomView?.snp.left)!).offset(20)
+            make.right.equalTo((bottomView?.snp.right)!).offset(0)
             make.height.equalTo(20)
         }
         
@@ -151,7 +225,7 @@ extension RapidLoanApplicationcConfirmation{
         bottomBtn.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
         self.addSubview(bottomBtn)
         bottomBtn.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self).offset(-57)
+            make.bottom.equalTo(self).offset(-20)
             make.left.equalTo(self).offset(20)
             make.right.equalTo(self).offset(-20)
             make.height.equalTo(50)
