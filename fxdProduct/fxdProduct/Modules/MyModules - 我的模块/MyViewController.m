@@ -121,9 +121,11 @@
     switch (indexPath.row) {
         case 0:
         {
-
 //            [self getDrawLottery];
-            
+//            OptionalRapidLoanApplicationVCModules * optionalVC = [[OptionalRapidLoanApplicationVCModules alloc]init];
+//            optionalVC.productId = RapidLoan;
+//            [self.navigationController pushViewController:optionalVC animated:true];
+
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }

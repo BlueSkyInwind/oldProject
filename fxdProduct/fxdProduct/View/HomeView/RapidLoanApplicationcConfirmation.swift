@@ -28,6 +28,8 @@ class RapidLoanApplicationcConfirmation: UIView{
     var titleImageView : UIImageView?
     //资金方名字
     var capitalSourceLabel : UILabel?
+    //提额券视图
+    var discountCouponsV:DiscountCouponsView?
     
     weak var delegate: RapidLoanApplicationcConfirmationDelegate?
     

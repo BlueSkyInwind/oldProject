@@ -25,11 +25,9 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
         super.viewDidLoad()
     
         self.title = "选择资金方"
-
         // Do any additional setup after loading the view.
         addBackItemRoot()
         productId = RapidLoan
-
     }
     
     override func viewWillAppear(_ animated: Bool) {

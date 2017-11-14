@@ -38,7 +38,7 @@
     chooseIndex = 1;
     [self addBackItem];
     
-    if ([_productId isEqualToString:SalaryLoan]) {
+    if ([_productId isEqualToString:SalaryLoan] || [_productId isEqualToString:RapidLoan]) {
         [self obtainDiscountTicket:^(DiscountTicketModel *discountTicketModel) {
             if (discountTicketModel.valid != nil && discountTicketModel.valid.count != 0) {
                 [self addDiscountCoupons:discountTicketModel.valid[0]];
@@ -113,8 +113,8 @@
     FXDWebViewController * webVC = [[FXDWebViewController alloc]init];
     webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_DiscountTicketRule_url];
     [self.navigationController pushViewController:webVC animated:true];
-
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [self fatchRate];
 }
@@ -131,7 +131,6 @@
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
-        
     }];
     [applicationVM queryApplicationInfo:_productId];
 }
