@@ -136,7 +136,7 @@
     
     _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h) collectionViewLayout:layout];
     if (@available(iOS 11.0, *)) {
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 64, _k_w, _k_h) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, BarHeightNew, _k_w, _k_h) collectionViewLayout:layout];
         _collectionView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
     }
     _collectionView.delegate = self;

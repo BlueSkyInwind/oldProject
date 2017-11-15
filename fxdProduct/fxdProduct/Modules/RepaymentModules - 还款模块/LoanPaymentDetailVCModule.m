@@ -169,8 +169,6 @@
     
     UILabel *lblRepayTip=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
     
-    
-    
     lblRepayTip.textColor=[UIColor whiteColor];
     lblRepayTip.text=@"应还总金额(元)";
     lblRepayTip.alpha=0.7;

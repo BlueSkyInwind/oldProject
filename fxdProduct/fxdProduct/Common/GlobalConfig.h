@@ -164,6 +164,7 @@ UIKIT_EXTERN NSString * const       _Trilateral_url;                        //�
 UIKIT_EXTERN NSString * const       _UserDataCertificationResult_url;        //得到测评结果
 UIKIT_EXTERN NSString * const       _loginOutDeleteRegisterId_url;        //退出登录删除推送id
 UIKIT_EXTERN NSString * const       _getDrawLottery_url;        //老客周末活动判断是否弹框刮奖
+UIKIT_EXTERN NSString * const       _ProductProtocol_url;        //老客周末活动判断是否弹框刮奖
 
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集

@@ -20,21 +20,17 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
    @objc var rapidLoanView : RapidLoanApplicationcConfirmation?
     //资金列表数组
    @objc var dataArray : NSMutableArray?
+    var chooseIndex :NSInteger = 1
+    var  discountTM:DiscountTicketModel?
+    var chooseDiscountTDM:DiscountTicketDetailModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         self.title = "选择资金方"
-
         // Do any additional setup after loading the view.
         addBackItemRoot()
         productId = RapidLoan
-
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+ 
         if (pickView != nil){
             pickView?.removeFromSuperview()
         }
@@ -47,14 +43,26 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
         pickView?.backgroundColor = UIColor.init(red: 34/255.0, green: 34/255.0, blue: 34/255.0, alpha: 0.4)
         self.pickView?.dataArray = dataArray! as [AnyObject]
         
-         //选择资金页面视图
+        //选择资金页面视图
         rapidLoanView = RapidLoanApplicationcConfirmation()
         rapidLoanView?.delegate = self
         let model = dataArray![0] as! CapitalListModel
         self.rapidLoanView?.capitalSourceLabel?.text = model.platformName!
         platformCode = model.platformCode
         getApplicationConfirmData()
-//        getCapitalListData()
+        //        getCapitalListData()
+        
+        self.obtainDiscountTicket { (discountTicketM) in
+            if discountTicketM.valid != nil &&  discountTicketM.valid.count != 0 {
+                self.chooseDiscountTDM = (discountTicketM.valid[0] as! DiscountTicketDetailModel)
+                self.rapidLoanView?.addDiscountCoupons(discountTicketDetailM: self.chooseDiscountTDM!)
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
 
     //MARK:申请件申请确认页面数据展示
@@ -74,6 +82,23 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
             
         }
         applicationMV.queryApplicationInfo(productId)
+    }
+    //MARK:获取提额券
+    func obtainDiscountTicket(_ finish:@escaping (_ discountTicketModel:DiscountTicketModel) -> Void)  {
+        let applicationVM = ApplicationViewModel()
+        applicationVM.setBlockWithReturn({ (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                let discountTicketM = try! DiscountTicketModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self.discountTM = discountTicketM;
+                finish(discountTicketM)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        applicationVM.obtainUserDiscountTicketList("1", displayType: "1")
     }
     
     func setProductUI(model : ApplicaitonViewInfoModel){
@@ -149,12 +174,36 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
         platformCode = capitalListModel.platformCode
     }
     
+    //MARK:选择提额券
+    func showChooseAmountView(){
+        let discountCouponVC = DiscountCouponListVCModules()
+        discountCouponVC.dataListArr = (discountTM?.valid! as! NSArray)
+        discountCouponVC.currentIndex = "\(chooseIndex)" as NSString
+        discountCouponVC.view.frame = CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h * 0.6)
+        discountCouponVC.chooseDiscountTicket = ({[weak self] (index,discountTicketDetailModel,str ) in
+            self?.chooseIndex = index;
+            self?.chooseDiscountTDM = discountTicketDetailModel;
+            if index != 0 {
+                self?.rapidLoanView?.discountCouponsV?.amountLabel?.text = "+￥" + "\(self?.chooseDiscountTDM?.amount_payment_ ?? "")"
+            }else{
+                 self?.rapidLoanView?.discountCouponsV?.amountLabel?.text = "+￥0"
+            }
+        })
+        
+        self.presentSemiViewController(discountCouponVC, withOptions: [KNSemiModalOptionKeys.pushParentBack.takeUnretainedValue() : false,KNSemiModalOptionKeys.parentAlpha.takeUnretainedValue() : 0.8], completion: nil, dismiss: {
+        })
+    }
+    //MARK:使用帮助
+    func showDirectionsForUse(){
+        let  webVC = FXDWebViewController()
+        webVC.urlStr = "\(_H5_url)"+"\(_DiscountTicketRule_url)"
+        self.navigationController?.pushViewController(webVC, animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 

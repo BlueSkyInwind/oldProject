@@ -222,20 +222,40 @@
 -(void)clickurl:(id)sender
 {
     DLog(@"注册协议");
-    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = [NSString stringWithFormat:@"%@%@?title=%@&type=%@",_H5_url,_loanDetial_url,@"register",@"1"];
-    [self.navigationController pushViewController:webVC animated:true];
-
+    RegViewModel * regVM = [[RegViewModel alloc]init];
+    [regVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            NSDictionary * dic = (NSDictionary *)baseResultM.data;
+            DetailViewController *detailVC = [[DetailViewController alloc] init];
+            detailVC.content = [dic objectForKey:@"protocol_content_"];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [regVM obtainRegisterProtocol:@"user_reg" ProtocolType:@"8"];
 }
 
 #pragma mark 点击意思保密协议
 -(void)clicksecry{
     
     DLog(@"隐私保密协议");
-    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = [NSString stringWithFormat:@"%@%@?title=%@&type=%@",_H5_url,_loanDetial_url,@"secrecy",@"2"];
-    [self.navigationController pushViewController:webVC animated:true];
-
+    RegViewModel * regVM = [[RegViewModel alloc]init];
+    [regVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            NSDictionary * dic = (NSDictionary *)baseResultM.data;
+            DetailViewController *detailVC = [[DetailViewController alloc] init];
+            detailVC.content = [dic objectForKey:@"protocol_content_"];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [regVM obtainRegisterProtocol:@"user_privacy" ProtocolType:@"9"];
 }
 
 #pragma mark 点击验证码按钮
