@@ -14,12 +14,8 @@
 #import "DiscountTicketController.h"
 #import "InvitationViewController.h"
 #import "UserDataAuthenticationListVCModules.h"
-#import "ShanLinWebVCModules.h"
-#import "LewPopupViewController.h"
-#import "ScratchAwardView.h"
-#import "LoanMoneyViewModel.h"
-#import "DrawLotteryModel.h"
-@interface MyViewController () <UITableViewDataSource,UITableViewDelegate,ShanLinBackAlertViewDelegate>
+
+@interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     //标题数组
     NSArray *titleAry;
@@ -112,6 +108,11 @@
     } else {
         bCell.lineView.hidden=NO;
     }
+//    if (indexPath.row == 0) {
+//        bCell.messageLabel.hidden = false;
+//    }else{
+//        bCell.messageLabel.hidden = true;
+//    }
     return bCell;
 }
 
@@ -119,13 +120,15 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
+//        case 0:
+//        {
+//            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+//            [self.navigationController pushViewController:myMessageVC animated:true];
+//        }
+//            break;
         case 0:
         {
-//            [self getDrawLottery];
-//            OptionalRapidLoanApplicationVCModules * optionalVC = [[OptionalRapidLoanApplicationVCModules alloc]init];
-//            optionalVC.productId = RapidLoan;
-//            [self.navigationController pushViewController:optionalVC animated:true];
-
+            
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }
@@ -158,31 +161,6 @@
         default:
             break;
     }
-}
--(void)getDrawLottery{
-    
-    LoanMoneyViewModel *viewModel = [[LoanMoneyViewModel alloc]init];
-    [viewModel setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([resultM.errCode isEqualToString:@"0"]) {
-            DrawLotteryModel * model = [[DrawLotteryModel alloc]initWithDictionary:(NSDictionary *)resultM.data error:nil];
-            if ([model.isActivety isEqualToString:@"1"]) {
-                
-                ScratchAwardView *scratchAwardView = [ScratchAwardView defaultPopView];
-                scratchAwardView.linkUrl = model.luckDraw;
-                scratchAwardView.parentVC = self;
-                [scratchAwardView loadData];
-                [self lew_presentPopupView:scratchAwardView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-                }];
-            }
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.friendErrMsg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [viewModel getDrawLottery];
-    
 }
 
 - (void)didReceiveMemoryWarning {

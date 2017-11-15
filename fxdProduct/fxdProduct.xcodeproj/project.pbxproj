@@ -1093,6 +1093,10 @@
 		CC3A7F321ED52A3200F30289 /* HG_ReplaceBankCardVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3A7F2F1ED52A3200F30289 /* HG_ReplaceBankCardVCModules.m */; };
 		CC3A7F331ED52A3200F30289 /* HG_ReplaceBankCardVCModules.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC3A7F301ED52A3200F30289 /* HG_ReplaceBankCardVCModules.xib */; };
 		CC3A7F341ED52A3200F30289 /* HG_ReplaceBankCardVCModules.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC3A7F301ED52A3200F30289 /* HG_ReplaceBankCardVCModules.xib */; };
+		CC3BCC111FBABE7A0042A738 /* MyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */; };
+		CC3BCC121FBABE7A0042A738 /* MyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */; };
+		CC3BCC141FBABEC50042A738 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC131FBABEC50042A738 /* MessageCell.swift */; };
+		CC3BCC151FBABEC50042A738 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC131FBABEC50042A738 /* MessageCell.swift */; };
 		CC4BB60F1F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
 		CC4BB6101F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
 		CC5D70271ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
@@ -2214,6 +2218,8 @@
 		CC3A7F2E1ED52A3200F30289 /* HG_ReplaceBankCardVCModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HG_ReplaceBankCardVCModules.h; sourceTree = "<group>"; };
 		CC3A7F2F1ED52A3200F30289 /* HG_ReplaceBankCardVCModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HG_ReplaceBankCardVCModules.m; sourceTree = "<group>"; };
 		CC3A7F301ED52A3200F30289 /* HG_ReplaceBankCardVCModules.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HG_ReplaceBankCardVCModules.xib; sourceTree = "<group>"; };
+		CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageViewController.swift; sourceTree = "<group>"; };
+		CC3BCC131FBABEC50042A738 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelDescriptionView.h; sourceTree = "<group>"; };
 		CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelDescriptionView.m; sourceTree = "<group>"; };
 		CC5D70251ED4400600A074AF /* CashModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashModel.h; sourceTree = "<group>"; };
@@ -2589,6 +2595,7 @@
 				1AB0F5A91CF2D20E00F3DF06 /* TicketCell.xib */,
 				841BE5C71F17829D00BABD04 /* LoginStatusView.h */,
 				841BE5C81F17829D00BABD04 /* LoginStatusView.m */,
+				CC3BCC131FBABEC50042A738 /* MessageCell.swift */,
 			);
 			path = MyView;
 			sourceTree = "<group>";
@@ -3385,6 +3392,7 @@
 				1AE362F41C586060006FC276 /* EditCardsController.xib */,
 				634795EE1D38BED700EC4027 /* AuthorizationViewController.h */,
 				634795EF1D38BED700EC4027 /* AuthorizationViewController.m */,
+				CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */,
 			);
 			path = SubViewController;
 			sourceTree = "<group>";
@@ -5724,6 +5732,7 @@
 				CCBD8F6C1F5D26BD005A980B /* RepayModel.m in Sources */,
 				63F0E1C11CE4183A001251A9 /* NSNumber+YYAdd.m in Sources */,
 				636B1BA01C2D2C4300450358 /* RepayMentViewModel.m in Sources */,
+				CC3BCC111FBABE7A0042A738 /* MyMessageViewController.swift in Sources */,
 				638A16FF1E517D9F00AB8AB6 /* LOTComposition.m in Sources */,
 				638198A51CC0825400E8951E /* SSKeychainQuery.m in Sources */,
 				63145AA91CA294B800D04ED8 /* LoginResult.m in Sources */,
@@ -5911,6 +5920,7 @@
 				6348310E1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m in Sources */,
 				CCEC9C931EE5095000452291 /* BankCardsParamModel.m in Sources */,
 				6395E2AA1BAFA14E00B7AFC2 /* FXD_NetWorkRequestManager.m in Sources */,
+				CC3BCC141FBABEC50042A738 /* MessageCell.swift in Sources */,
 				63A24C5A1BE063A90036E8EF /* CoreArchive.m in Sources */,
 				636B1BAA1C30E7B300450358 /* BankCardInfoResult.m in Sources */,
 				63FC24FE1D98F7E9006F58F3 /* UIView+YYText.m in Sources */,
@@ -6439,6 +6449,7 @@
 				CC0DFA751EA5B1090024841A /* CALayer+Compat.m in Sources */,
 				CC0DFA761EA5B1090024841A /* AboutMainViewController.m in Sources */,
 				CC0DFA771EA5B1090024841A /* RepayHistoryCapitalFlowList.m in Sources */,
+				CC3BCC151FBABEC50042A738 /* MessageCell.swift in Sources */,
 				CC0DFA781EA5B1090024841A /* AddressClass.m in Sources */,
 				CC0DFA791EA5B1090024841A /* P2PBillDetail.m in Sources */,
 				CC0DFA7A1EA5B1090024841A /* YYDiskCache.m in Sources */,
@@ -6533,6 +6544,7 @@
 				CC0DFACA1EA5B1090024841A /* GetMoneyHistoryResult.m in Sources */,
 				CC0DFACB1EA5B1090024841A /* LOTAnimationView.m in Sources */,
 				CC0DFACD1EA5B1090024841A /* YYMemoryCache.m in Sources */,
+				CC3BCC121FBABE7A0042A738 /* MyMessageViewController.swift in Sources */,
 				CC0DFACE1EA5B1090024841A /* P2PRepayMent.m in Sources */,
 				CC0DFACF1EA5B1090024841A /* CheckSuccessView.m in Sources */,
 				CCCE40BE1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */,
