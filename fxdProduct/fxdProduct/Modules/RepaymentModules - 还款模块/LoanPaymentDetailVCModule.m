@@ -38,6 +38,7 @@
 #import "BaseResultModel.h"
 #import "HGBankListModel.h"
 #import "SupportBankList.h"
+#import "DiscountTicketModel.h"
 
 @interface LoanPaymentDetailVCModule ()<UITableViewDelegate,UITableViewDataSource,SelectViewDelegate>
 {
@@ -80,8 +81,12 @@
     
     NSString *verfiyCode;
     NSString *smsSeq;
-
     
+    //优惠券抵扣券
+    DiscountTicketModel * discountTM;
+    DiscountTicketDetailModel * chooseDiscountTDM;
+    NSInteger chooseIndex;
+
 }
 @property (nonatomic,strong) UILabel *lblShouldrepay;
 @end
@@ -107,6 +112,7 @@
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
+    chooseIndex = 1;
     defaultBankIndex = -1;
     userSelectIndex = 0;
     _useTotalAmount = 0.0;
@@ -570,6 +576,51 @@
     };
     [self.navigationController pushViewController:userBankCardListVC animated:true];
 }
+
+#pragma mark - 抵扣券，折扣券模块
+/**
+ 红包选择
+ */
+-(void)showChooseAmountView{
+    
+    DiscountCouponListVCModules *discountCouponVC = [[DiscountCouponListVCModules alloc]init];
+    discountCouponVC.dataListArr = discountTM.valid;
+    discountCouponVC.currentIndex = [NSString stringWithFormat:@"%ld",chooseIndex];
+    discountCouponVC.view.frame = CGRectMake(0, 0, _k_w, _k_h * 0.6);
+    discountCouponVC.chooseDiscountTicket = ^(NSInteger index, DiscountTicketDetailModel * discountTicketDetailModel, NSString * str) {
+        chooseIndex = index;
+        chooseDiscountTDM = discountTicketDetailModel;
+        if (index != 0) {
+            
+        }else{
+            
+        }
+    };
+    [self presentSemiViewController:discountCouponVC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)} completion:nil dismissBlock:^{
+    }];
+}
+
+/**
+ 获取抵扣券，折扣券数据
+
+ @param finish 结果回调
+ */
+-(void)obtainDiscountTicket:(void(^)(DiscountTicketModel * discountTicketModel))finish{
+    ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
+    [applicationVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]){
+            DiscountTicketModel * discountTicketM = [[DiscountTicketModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            discountTM = discountTicketM;
+            finish(discountTicketM);
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [applicationVM obtainUserDiscountTicketList:@"1" displayType:@"1"];
+}
+
 #pragma mark - selectVCDelegate
 
 /**
@@ -634,6 +685,7 @@
     }
     return nil;
 }
+
 /*
  #pragma mark - Navigation
  
@@ -864,7 +916,6 @@
     [checkBankViewModel getSupportBankListInfo:@"4"];
 }
 
-
 #pragma mark  fxd用户状态查询，viewmodel
 -(void)getUserStatus:(NSString  *)applicationId success:(void(^)(QryUserStatusModel *_model))finish{
     
@@ -875,7 +926,6 @@
             _userStatusModel = model;
             finish(model);
         }else{
-            
         }
     } WithFaileBlock:^{
         
