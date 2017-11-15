@@ -73,7 +73,7 @@
     _count = 0;
    _dataArray = [NSMutableArray array];
     [self setUpTableview];
-    [self setNavQRRightBar];
+//    [self setNavQRRightBar];
     [self setNavQRLeftBar];
 }
 
@@ -190,7 +190,7 @@
 -(void)setNavQRLeftBar {
     
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRCodePopups)];
-    self.navigationItem.leftBarButtonItem = aBarbi;
+    self.navigationItem.rightBarButtonItem = aBarbi;
     
 }
 
