@@ -35,7 +35,7 @@
 #import "ApplicationStatusModel.h"
 #import "UserDataViewModel.h"
 
-@interface HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate,ShanLinBackAlertViewDelegate>
+@interface HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
 {
    
     NSString *_advTapToUrl;
@@ -74,6 +74,7 @@
    _dataArray = [NSMutableArray array];
     [self setUpTableview];
     [self setNavQRRightBar];
+    [self setNavQRLeftBar];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -153,12 +154,69 @@
 }
 
 #pragma mark  - 视图布局
+
+/**
+ 我的消息视图
+ */
 - (void)setNavQRRightBar {
-    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRCodePopups)];
-    //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
-    self.navigationItem.rightBarButtonItem = aBarbi;
+    
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 23, 18)];
+    [btn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
+//    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(16, -8, 13, 13)];
+//    bgView.backgroundColor = [UIColor redColor];
+//    bgView.layer.cornerRadius = 6.5;
+//    [btn addSubview:bgView];
+//
+//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(2, 0, 10, 12)];
+//    label.text = @"3";
+//    label.textColor = [UIColor whiteColor];
+//    label.font = [UIFont systemFontOfSize:12];
+//    [bgView addSubview:label];
+    
+    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:btn];
+//    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRMessage)];
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceItem.width = 8;
+    
+    
+    self.navigationItem.rightBarButtonItems = @[spaceItem,aBarbi];
+
 }
 
+/**
+ 微信弹窗视图
+ */
+-(void)setNavQRLeftBar {
+    
+    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRCodePopups)];
+    self.navigationItem.leftBarButtonItem = aBarbi;
+    
+}
+
+
+#pragma mark 首页navigation点击事件
+
+/**
+ 首页二维码弹窗
+ */
+- (void)homeQRCodePopups
+{
+    QRCodePopView *qrPopView = [QRCodePopView defaultQRPopView];
+    [qrPopView layoutIfNeeded];
+    qrPopView.parentVC = self;
+    [self lew_presentPopupView:qrPopView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
+    }];
+}
+
+/**
+ 我的消息点击事件
+ */
+-(void)homeQRMessage{
+    
+    MyMessageViewController *myMessageCV = [[MyMessageViewController alloc]init];
+    [self.navigationController pushViewController:myMessageCV animated:true];
+}
 #pragma mark tabView视图
 - (void)setUpTableview
 {
@@ -209,15 +267,7 @@
     
 }
 
-#pragma mark 首页二维码弹窗
-- (void)homeQRCodePopups
-{
-    QRCodePopView *qrPopView = [QRCodePopView defaultQRPopView];
-    [qrPopView layoutIfNeeded];
-    qrPopView.parentVC = self;
-    [self lew_presentPopupView:qrPopView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-    }];
-}
+
 
 #pragma mark - 首页活动弹窗
 //首单活动

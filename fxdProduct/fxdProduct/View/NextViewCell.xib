@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FkX-A0-RVB">
@@ -48,9 +48,21 @@
                             <constraint firstAttribute="height" constant="27" id="toQ-TI-HVP"/>
                         </constraints>
                     </imageView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="644-AJ-wi7">
+                        <rect key="frame" x="38" y="3" width="17" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="17" id="X9V-m6-sdn"/>
+                            <constraint firstAttribute="height" constant="16" id="u6o-uj-NYz"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="1" green="0.20557207084864093" blue="0.161058835997135" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="644-AJ-wi7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="38" id="A0d-2q-pbp"/>
                     <constraint firstAttribute="trailing" secondItem="3eh-jw-YLX" secondAttribute="trailing" constant="18" id="Abh-aM-njv"/>
+                    <constraint firstItem="644-AJ-wi7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="FRX-Ve-qv7"/>
                     <constraint firstAttribute="trailing" secondItem="eCF-CU-o9L" secondAttribute="trailing" id="Fj4-Ct-yav"/>
                     <constraint firstItem="FkX-A0-RVB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="FyM-i1-aFt"/>
                     <constraint firstItem="FkX-A0-RVB" firstAttribute="leading" secondItem="glK-1L-1nK" secondAttribute="trailing" constant="8" id="PFN-uO-ifb"/>
@@ -66,6 +78,7 @@
                 <outlet property="imgView" destination="glK-1L-1nK" id="CXh-mr-Htu"/>
                 <outlet property="lblTitle" destination="FkX-A0-RVB" id="MZf-Sc-nmV"/>
                 <outlet property="lineView" destination="eCF-CU-o9L" id="xPo-il-4F3"/>
+                <outlet property="messageLabel" destination="644-AJ-wi7" id="7gP-Bd-fQ1"/>
             </connections>
             <point key="canvasLocation" x="464" y="327"/>
         </tableViewCell>

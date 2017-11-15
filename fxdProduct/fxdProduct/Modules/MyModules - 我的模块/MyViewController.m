@@ -14,12 +14,8 @@
 #import "DiscountTicketController.h"
 #import "InvitationViewController.h"
 #import "UserDataAuthenticationListVCModules.h"
-#import "ShanLinWebVCModules.h"
-#import "LewPopupViewController.h"
-#import "ScratchAwardView.h"
-#import "LoanMoneyViewModel.h"
-#import "DrawLotteryModel.h"
-@interface MyViewController () <UITableViewDataSource,UITableViewDelegate,ShanLinBackAlertViewDelegate>
+
+@interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     //标题数组
     NSArray *titleAry;
@@ -36,8 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    titleAry=@[@"借还记录",@"我的银行卡",@"邀请好友",@"优惠券",@"更多"];
-    imgAry=@[@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"6_my_icon_07",@"icon_my_setup"];
+    titleAry=@[@"我的消息",@"借还记录",@"我的银行卡",@"邀请好友",@"优惠券",@"更多"];
+    imgAry=@[@"6_my_icon_03",@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"6_my_icon_07",@"icon_my_setup"];
     if (@available(iOS 11.0, *)) {
         self.MyViewTable.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
     }else{
@@ -112,6 +108,11 @@
     } else {
         bCell.lineView.hidden=NO;
     }
+    if (indexPath.row == 0) {
+        bCell.messageLabel.hidden = false;
+    }else{
+        bCell.messageLabel.hidden = true;
+    }
     return bCell;
 }
 
@@ -121,32 +122,36 @@
     switch (indexPath.row) {
         case 0:
         {
-
-//            [self getDrawLottery];
+            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+            [self.navigationController pushViewController:myMessageVC animated:true];
+        }
+            break;
+        case 1:
+        {
             
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
-        case 1:
+        case 2:
         {
             MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
             [self.navigationController pushViewController:myCrad animated:YES];
         }
             break;
-        case 2:
+        case 3:
         {
             InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
             [self.navigationController pushViewController:invitationVC animated:true];
         }
             break;
-        case 3:
+        case 4:
         {
             DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
         }
             break;
-        case 4:
+        case 5:
         {
             
             MoreViewController *ticket=[[MoreViewController alloc]init];
@@ -156,31 +161,6 @@
         default:
             break;
     }
-}
--(void)getDrawLottery{
-    
-    LoanMoneyViewModel *viewModel = [[LoanMoneyViewModel alloc]init];
-    [viewModel setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([resultM.errCode isEqualToString:@"0"]) {
-            DrawLotteryModel * model = [[DrawLotteryModel alloc]initWithDictionary:(NSDictionary *)resultM.data error:nil];
-            if ([model.isActivety isEqualToString:@"1"]) {
-                
-                ScratchAwardView *scratchAwardView = [ScratchAwardView defaultPopView];
-                scratchAwardView.linkUrl = model.luckDraw;
-                scratchAwardView.parentVC = self;
-                [scratchAwardView loadData];
-                [self lew_presentPopupView:scratchAwardView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-                }];
-            }
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.friendErrMsg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [viewModel getDrawLottery];
-    
 }
 
 - (void)didReceiveMemoryWarning {
