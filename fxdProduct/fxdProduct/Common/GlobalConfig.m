@@ -25,8 +25,8 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 //测试导流 192.168.6.134
 NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
 NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-NSString * const _main_new_url  =  @"http://h5.test.fxds/";
-//NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
+//NSString * const _main_new_url  =  @"http://h5.test.fxds/";
+NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
 NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
 NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
 NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
@@ -474,6 +474,9 @@ NSString * const    _ChoosePattern_url    =    @"apigw/client/ios/expay";
 
 //优惠券规则
 NSString * const    _DiscountTicketRule_url    =    @"protocol/couponInstructions.html";
+
+//新优惠券规则
+NSString * const    _New_DiscountTicket_url    =    @"apigw/client/operation/client/getuse";
 
 #pragma mark - 合规接口
 

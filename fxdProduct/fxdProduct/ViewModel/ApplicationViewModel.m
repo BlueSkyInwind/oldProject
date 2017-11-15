@@ -8,7 +8,7 @@
 
 #import "ApplicationViewModel.h"
 #import "CapitalLoanParam.h"
-
+#import "DiscountTicketParam.h"
 @implementation ApplicationViewModel
 
 
@@ -113,6 +113,50 @@
         }
     }];
 }
+
+/**
+ 获取优惠券
+
+ @param type 类型
+ @param displayType 用处
+ @param pageNum 页数
+ @param pageSize 每页数量
+ */
+-(void)new_obtainUserDiscountTicketListDisplayType:(NSString *)displayType pageNum:(NSString *)pageNum pageSize:(NSString *)pageSize{
+    
+    DiscountTicketParam * discountTP = [[DiscountTicketParam alloc]init];
+    discountTP.displayType = displayType;
+    discountTP.pageNum = pageNum;
+    discountTP.pageSize = pageSize;
+    
+    NSDictionary * paramDic = [discountTP toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_New_DiscountTicket_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    }];
+    
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_DiscountTicketList_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        if (self.returnBlock) {
+//            self.returnBlock(object);
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        if (self.returnBlock) {
+//            self.returnBlock(object);
+//        }
+//    }];
+    
+    
+}
+
+
+
+
 
 
 

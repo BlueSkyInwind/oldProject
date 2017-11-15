@@ -542,6 +542,8 @@
 		84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635131F01096900146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
+		84C45C081FBC55860086E8DB /* DiscountTicketParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C45C071FBC55860086E8DB /* DiscountTicketParam.m */; };
+		84C45C091FBC55860086E8DB /* DiscountTicketParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C45C071FBC55860086E8DB /* DiscountTicketParam.m */; };
 		84C619BC1FA815A800626411 /* LoanPeriodForDetailsVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6198F1FA8149700626411 /* LoanPeriodForDetailsVCModule.m */; };
 		84C619BD1FA815EB00626411 /* PayMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C619971FA8149700626411 /* PayMethodViewController.m */; };
 		84C619BE1FA815EB00626411 /* DefaultCardPopoverWindowModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6199A1FA8149700626411 /* DefaultCardPopoverWindowModule.m */; };
@@ -2099,6 +2101,8 @@
 		84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobilePhoneOperatorParamModel.m; sourceTree = "<group>"; };
 		84A6350F1F00FCA200146A8A /* AuthenticationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewModel.h; sourceTree = "<group>"; };
 		84A635101F00FCA200146A8A /* AuthenticationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewModel.m; sourceTree = "<group>"; };
+		84C45C061FBC55860086E8DB /* DiscountTicketParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscountTicketParam.h; sourceTree = "<group>"; };
+		84C45C071FBC55860086E8DB /* DiscountTicketParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscountTicketParam.m; sourceTree = "<group>"; };
 		84C6198E1FA8149700626411 /* LoanPeriodForDetailsVCModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoanPeriodForDetailsVCModule.h; sourceTree = "<group>"; };
 		84C6198F1FA8149700626411 /* LoanPeriodForDetailsVCModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoanPeriodForDetailsVCModule.m; sourceTree = "<group>"; };
 		84C619901FA8149700626411 /* LoanPeriodForDetailsVCModule.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoanPeriodForDetailsVCModule.xib; sourceTree = "<group>"; };
@@ -4859,6 +4863,8 @@
 				84E306CE1F972C4000C97D72 /* DiscountTicketModel.m */,
 				84D1846D1F98962A00A0B25F /* RedPacketTicketModel.h */,
 				84D1846E1F98962A00A0B25F /* RedPacketTicketModel.m */,
+				84C45C061FBC55860086E8DB /* DiscountTicketParam.h */,
+				84C45C071FBC55860086E8DB /* DiscountTicketParam.m */,
 			);
 			path = DiscountTicket;
 			sourceTree = "<group>";
@@ -5941,6 +5947,7 @@
 				638A16F71E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				636B1B9A1C2D153900450358 /* HomeViewModel.m in Sources */,
 				CC6F06891F789D7000FA889E /* CapitalLoanParam.m in Sources */,
+				84C45C081FBC55860086E8DB /* DiscountTicketParam.m in Sources */,
 				638A16F41E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m in Sources */,
 				0FFA91321C56058A008D91D2 /* telphoneView.m in Sources */,
 				638A16EF1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m in Sources */,
@@ -6312,6 +6319,7 @@
 				CC0DF9FC1EA5B1090024841A /* CustomerCareerBaseClass.m in Sources */,
 				84ED5B6C1F4AC606004C0A59 /* SeniorCertificationView.m in Sources */,
 				CC0DF9FD1EA5B1090024841A /* Custom_BaseInfoExt.m in Sources */,
+				84C45C091FBC55860086E8DB /* DiscountTicketParam.m in Sources */,
 				CC0DFA001EA5B1090024841A /* HMScanner.m in Sources */,
 				CC0DFA011EA5B1090024841A /* NSString+YYAdd.m in Sources */,
 				CC0DFA021EA5B1090024841A /* YYTextParser.m in Sources */,

@@ -154,6 +154,9 @@
     }else{
         [self fatchUserCardList];
     }
+    [self obtainDiscountTicket:^(DiscountTicketModel *discountTicketModel) {
+        
+    }];
 }
 
 -(void)createHeaderView
@@ -618,7 +621,7 @@
         }
     } WithFaileBlock:^{
     }];
-    [applicationVM obtainUserDiscountTicketList:@"1" displayType:@"1"];
+    [applicationVM new_obtainUserDiscountTicketListDisplayType:@"3" pageNum:nil pageSize:nil];
 }
 
 #pragma mark - selectVCDelegate
