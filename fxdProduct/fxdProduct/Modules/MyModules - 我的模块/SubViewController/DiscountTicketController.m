@@ -66,69 +66,6 @@
     }
 }
 
-#pragma mark 刷新
-- (void)fatchRedpacket
-{
-    if (self.validTicketArr.count > 0) {
-        [self.validTicketArr removeAllObjects];
-    }
-    if (self.invalidTicketArr.count > 0) {
-        [self.invalidTicketArr removeAllObjects];
-    }
-    [self obtainDiscountTicket];
-#pragma mark 获取红包数据
-    RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
-    [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
-        [self.tableView.mj_header endRefreshing];
-         BaseResultModel *  baseModel = [[BaseResultModel alloc] initWithDictionary:(NSDictionary *)returnValue error:nil];
-        if ([baseModel.flag isEqualToString:@"0000"]) {
-            _redPacketTicketM = [[RedPacketTicketModel alloc]initWithDictionary:(NSDictionary *)baseModel.result error:nil];
-            for (RedpacketDetailModel *redpacketDetailM in _redPacketTicketM.validRedPacket) {
-                if ([redpacketDetailM.is_valid_ boolValue]) {
-                    [self.validTicketArr addObject:redpacketDetailM];
-                }
-            }
-            for (RedpacketDetailModel *redpacketDetailM in _redPacketTicketM.inValidRedPacket) {
-                if (![redpacketDetailM.is_valid_ boolValue]) {
-                    [self.invalidTicketArr addObject:redpacketDetailM];
-                }
-            }
-            [self.tableView reloadData];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseModel.msg];
-        }
-        [self isDisplayNoneViewAndBottomView];
-    } WithFaileBlock:^{
-        [self isDisplayNoneViewAndBottomView];
-    }];
-    [repayWeeklyRecordViewModel getUserRedpacketList];
-}
-
-#pragma mark 获取优惠券数据
--(void)obtainDiscountTicket{
-    ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
-    [applicationVM setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResultM.errCode isEqualToString:@"0"]){
-            DiscountTicketModel * discountTicketM = [[DiscountTicketModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            discountTicketModel = discountTicketM;
-            for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.valid) {
-                    [self.validTicketArr addObject:discountTicketDetailM];
-            }
-            for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.invalid) {
-                [self.invalidTicketArr addObject:discountTicketDetailM];
-            }
-            [self.tableView reloadData];
-        }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
-        }
-        [self isDisplayNoneViewAndBottomView];
-    } WithFaileBlock:^{
-        [self isDisplayNoneViewAndBottomView];
-    }];
-    [applicationVM obtainUserDiscountTicketList:@"1" displayType:@"2"];
-}
-
 -(void)obtainAllDiscountTicketList:(int)pageNum{
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
     [applicationVM setBlockWithReturnBlock:^(id returnValue) {
@@ -143,7 +80,7 @@
             if (self.invalidTicketArr.count > 0 && pages == 1) {
                 [self.invalidTicketArr removeAllObjects];
             }
-            
+            //增加数据
             for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.canuselist) {
                 [self.validTicketArr addObject:discountTicketDetailM];
             }
@@ -154,11 +91,20 @@
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
+        [self.tableView.mj_header endRefreshing];
+        
+        if (self.validTicketArr.count > 0 && discountTicketModel.canuselist.count == 0) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [self.tableView.mj_footer endRefreshing];
+        }
         [self isDisplayNoneViewAndBottomView];
     } WithFaileBlock:^{
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         [self isDisplayNoneViewAndBottomView];
     }];
-    [applicationVM new_obtainUserDiscountTicketListDisplayType:@"2" pageNum:[NSString stringWithFormat:@"%d",pageNum] pageSize:@"15"];
+    [applicationVM new_obtainUserDiscountTicketListDisplayType:@"2" product_id:nil pageNum:[NSString stringWithFormat:@"%d",pageNum] pageSize:@"15"];
 }
 
 #pragma mark 初始化tableView
@@ -187,12 +133,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"TicketCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     
     [self setupMJRefreshTableView];
-//    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(fatchRedpacket)];
-//    header.automaticallyChangeAlpha = YES;
-//    header.lastUpdatedTimeLabel.hidden = YES;
-//    [header beginRefreshing];
-//    self.tableView.mj_header = header;
-    
+
 }
 #pragma mark 初始化使用帮助按钮
 -(void)addHelpItem{

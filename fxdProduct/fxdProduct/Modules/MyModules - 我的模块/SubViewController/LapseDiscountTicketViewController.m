@@ -62,16 +62,20 @@
                 [self.invalidTicketArr removeAllObjects];
             }
             DiscountTicketModel * discountTicketM = [[DiscountTicketModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            self.invalidTicketArr = [discountTicketM.notuselist mutableCopy];
+            for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.notuselist) {
+                [self.invalidTicketArr addObject:discountTicketDetailM];
+            }
             [self.tableView reloadData];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
         [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     } WithFaileBlock:^{
         [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     }];
-    [applicationVM new_obtainUserDiscountTicketListDisplayType:@"2" pageNum:[NSString stringWithFormat:@"%d",pageNum] pageSize:@"15"];
+    [applicationVM new_obtainUserDiscountTicketListDisplayType:@"2" product_id:nil pageNum:[NSString stringWithFormat:@"%d",pageNum] pageSize:@"15"];
 }
 #pragma mark TableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -141,11 +145,6 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if(section==3)
-    {
-        return 20;
-    }
-    
     return CGFLOAT_MIN;
 }
 #pragma mark ----------设置列表的可刷新性----------

@@ -166,14 +166,13 @@
 
 - (void)setVailValues:(DiscountTicketDetailModel *)discountTicketDetailM
 {
-    self.lblPrice.text=[NSString stringWithFormat:@"%.0f元",[discountTicketDetailM.total_amount floatValue]];
+    self.lblPrice.text=discountTicketDetailM.total_amount;
     if ([discountTicketDetailM.voucher_type isEqualToString:@"1"]) {
         self.lblName.text = @"抵扣券";
     }else if ([discountTicketDetailM.voucher_type isEqualToString:@"2"]) {
         self.lblName.text = @"提额券";
     }else if ([discountTicketDetailM.voucher_type isEqualToString:@"3"]) {
         self.lblName.text = @"折扣券";
-        self.lblPrice.text=[NSString stringWithFormat:@"%.2f折",[discountTicketDetailM.total_amount floatValue]];
     }
     self.limitProduct.text = discountTicketDetailM.voucher_canuse_product;
     self.limitconditions.text = discountTicketDetailM.loan_limit;
@@ -184,16 +183,15 @@
 
 - (void)setInvailsValues:(DiscountTicketDetailModel *)discountTicketDetailM
 {
+    
     self.TicketImgView.image = [UIImage imageNamed:@"invail_BackIcon"];
-
-    self.lblPrice.text=[NSString stringWithFormat:@"%.0f元",[discountTicketDetailM.total_amount floatValue]];
+    self.lblPrice.text=discountTicketDetailM.total_amount;
     if ([discountTicketDetailM.voucher_type isEqualToString:@"1"]) {
         self.lblName.text = @"抵扣券";
     }else if ([discountTicketDetailM.voucher_type isEqualToString:@"2"]) {
         self.lblName.text = @"提额券";
     }else if ([discountTicketDetailM.voucher_type isEqualToString:@"3"]) {
         self.lblName.text = @"折扣券";
-        self.lblPrice.text=[NSString stringWithFormat:@"%.2f折",[discountTicketDetailM.total_amount floatValue]];
     }
     self.lblTitle.text = discountTicketDetailM.voucher_name;
     self.lblTip.text = discountTicketDetailM.use_time;

@@ -16,6 +16,7 @@ class DiscountCouponListVCModules: UIViewController,UITableViewDelegate,UITableV
     @objc var discountTicketModel:DiscountTicketDetailModel?
     @objc var currentIndex : NSString?
     @objc var chooseDiscountTicket : ChooseDiscountTicket?
+    @objc var displayType : NSString?
     var index : NSInteger?
     
     override func viewDidLoad() {
@@ -55,11 +56,18 @@ class DiscountCouponListVCModules: UIViewController,UITableViewDelegate,UITableV
         }
         if indexPath.row == 0 {
             discountcell?.titleLabel?.text = "不使用提额券"
+            if displayType == "3"{
+                discountcell?.titleLabel?.text = "不使用优惠券"
+            }
         }else{
             let discountTicketM = dataListArr![indexPath.row - 1] as! DiscountTicketDetailModel
-            discountcell?.titleLabel?.text = String(format:"+%@元:有效期至%@",discountTicketM.amount_payment_,discountTicketM.end_time_)
+            discountcell?.titleLabel?.text = String(format:"+%@:%@",discountTicketM.total_amount,discountTicketM.use_time)
+            if discountTicketM.voucher_type == "3"{
+                discountcell?.titleLabel?.text = String(format:"折扣券%@(%@)",discountTicketM.total_amount,discountTicketM.use_time)
+            }else if discountTicketM.voucher_type == "1"{
+                discountcell?.titleLabel?.text = String(format:"抵扣券%@(%@)",discountTicketM.total_amount,discountTicketM.use_time)
+            }
         }
-        
         if index == indexPath.row{
             discountcell?.chooseBtn?.setImage(UIImage.init(named: "choose_Icon"), for: UIControlState.normal);
         }else{
@@ -94,6 +102,9 @@ class DiscountCouponListVCModules: UIViewController,UITableViewDelegate,UITableV
         headerView.backgroundColor = UIColor.white
         let titleLabel = UILabel()
         titleLabel.text = "选择提额券"
+        if displayType == "3"{
+            titleLabel.text = "选择优惠券"
+        }
         titleLabel.textColor = UIColor.init(red: 0, green: 0.633, blue: 0.933, alpha: 1)
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.textAlignment = NSTextAlignment.center

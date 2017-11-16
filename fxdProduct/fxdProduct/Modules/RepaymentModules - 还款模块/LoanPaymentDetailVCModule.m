@@ -55,12 +55,14 @@
     CGFloat _selectRedPacket;
     //使用红包金额
     CGFloat _useredPacketAmount;
+    
     //所选红包ID
     NSString *_selectRedPacketID;
     //可否使用红包
     BOOL _canUseReadPacket;
     //用户最终还款金额
     CGFloat _finalyRepayAmount;
+    NSString * discountNumStr;
     
     //溢缴金
     CGFloat _useTotalAmount;
@@ -95,7 +97,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     navBarHairlineImageView.hidden=YES;
-
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -112,7 +113,7 @@
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
-    chooseIndex = 1;
+    chooseIndex = 0;
     defaultBankIndex = -1;
     userSelectIndex = 0;
     _useTotalAmount = 0.0;
@@ -129,11 +130,11 @@
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayDisplayCell" bundle:nil] forCellReuseIdentifier:@"PayDisplayCell"];
 
     if ([self.platform_Type isEqualToString:@"2"]) {
-        titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式",@"验证码",@"提示语"];
+        titleAry = @[@"使用券",@"使用溢缴金额",@"实扣金额",@"支付方式",@"验证码",@"提示语"];
     }else{
-        titleAry = @[@"使用红包",@"使用溢缴金额",@"实扣金额",@"支付方式"];
+        titleAry = @[@"使用券",@"使用溢缴金额",@"实扣金额",@"支付方式"];
     }
-    payLoanArry = @[@"使用红包",@"逾期费用",@"使用溢缴金额",@"实扣金额",@"支付方式"];
+    payLoanArry = @[@"使用券",@"逾期费用",@"使用溢缴金额",@"实扣金额",@"支付方式"];
     self.PayDetailTB.bounces=NO;
     [FXD_Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
     [self createHeaderView];
@@ -154,8 +155,13 @@
     }else{
         [self fatchUserCardList];
     }
+    discountNumStr = @"无可用券";
+    __weak typeof (self) weakSelf = self;
     [self obtainDiscountTicket:^(DiscountTicketModel *discountTicketModel) {
-        
+        if (discountTicketModel.canuselist.count > 0) {
+            discountNumStr = @"有可用券";
+            [weakSelf.PayDetailTB reloadData];
+        }
     }];
 }
 
@@ -196,7 +202,6 @@
         _lblShouldrepay.center=CGPointMake(_k_w/2, headerCenter.y+40);
         lblRepayTip.center=CGPointMake(_k_w/2, headerCenter.y);
     }
-    
 }
 
 -(void)createNoneView
@@ -359,41 +364,22 @@
                         }
                         
                         if (y > 0) {
-                            cell.payLabel.text=@"您已逾期，不可使用红包";
+                            cell.payLabel.text=@"您已逾期，不可使用券";
                             _canUseReadPacket = false;
                             cell.payLabel.textColor=rgb(255, 134, 25);
                             cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         }else{
                             if (d > 0) {
                                 _canUseReadPacket = true;
-                                if (_selectRedPacket > 0) {
-                                    cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
-                                    cell.payLabel.textColor=rgb(255, 134, 25);
-                                }else {
-                                    Situations *currentSituation = nil;
-                                    for (Situations *situation in _situations) {
-                                        if ([situation.status isEqualToString:@"4"]) {
-                                            currentSituation = situation;
-                                        }
-                                    }
-                                    if (currentSituation) {
-                                        if (currentSituation.debt_service_fee > 0) {
-                                            cell.payLabel.text = @"请选择";
-                                            cell.payLabel.textColor = [UIColor grayColor];
-                                        } else {
-                                            cell.payLabel.text=@"不可用";
-                                            _canUseReadPacket = false;
-                                            cell.payLabel.textColor=rgb(255, 134, 25);
-                                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                                        }
-                                    }
-                                }
+                                cell.payLabel.text = discountNumStr;
+                                cell.payLabel.textColor=rgb(255, 134, 25);
+  
                                 // cell.accessoryType = UITableViewCellAccessoryNone;
                                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                                 cell.selectionStyle = UITableViewCellSelectionStyleDefault;
                             } else {
                                 if (w > 0) {
-                                    cell.payLabel.text=@"不可用";
+                                    cell.payLabel.text=@"不可用券";
                                     _canUseReadPacket = false;
                                     cell.payLabel.textColor=rgb(255, 134, 25);
                                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -441,34 +427,20 @@
                             }
                         }
                         if (y > 0) {
-                            cell.payLabel.text=@"您已逾期，不可使用红包";
+                            cell.payLabel.text=@"您已逾期，不可使用券";
                             _canUseReadPacket = false;
                             cell.payLabel.textColor=rgb(255, 134, 25);
                             cell.selectionStyle = UITableViewCellSelectionStyleNone;
                         }else{
                             if (d > 0) {
                                 _canUseReadPacket = true;
-                                if (_selectRedPacket > 0) {
-                                    cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useredPacketAmount];
-                                    cell.payLabel.textColor=rgb(255, 134, 25);
-                                }else {
-                                    Situations *currentSituation = nil;
-                                    for (Situations *situation in _situations) {
-                                        if ([situation.status isEqualToString:@"4"]) {
-                                            currentSituation = situation;
-                                        }
-                                    }
-                                    if (currentSituation) {
-                                        cell.payLabel.text = @"请选择";
-                                        cell.payLabel.textColor = [UIColor grayColor];
-                                    }
-                                }
-                                //            cell.accessoryType = UITableViewCellAccessoryNone;
+                                cell.payLabel.text = discountNumStr;
+                                cell.payLabel.textColor=rgb(255, 134, 25);
                                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                                 cell.selectionStyle = UITableViewCellSelectionStyleDefault;
                             }else {
                                 if (w > 0) {
-                                    cell.payLabel.text=@"不可用";
+                                    cell.payLabel.text=@"不可用券";
                                     _canUseReadPacket = false;
                                     cell.payLabel.textColor=rgb(255, 134, 25);
                                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -505,14 +477,11 @@
         if(indexPath.row==0){//红包
             if (_canUseReadPacket) {
                 DLog(@"红包");
-                if (_repayListInfo.result.available_redpackets.count > 0) {
-                    ChooseRedPacketListVCModule *selectVC = [[ChooseRedPacketListVCModule alloc] initWithStyle:UITableViewStylePlain];
-                    selectVC.delegate = self;
-                    [selectVC setData:_repayListInfo.result.available_redpackets];
-                    [self presentSemiViewController:selectVC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)} completion:nil dismissBlock:^{
-                    }];
+
+                if (discountTM.canuselist.count > 0) {
+                    [self showChooseAmountView];
                 } else {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前没有可用红包"];
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前没有可用券"];
                 }
             }
         }
@@ -531,14 +500,10 @@
         if(indexPath.row==0){//红包
             if (_canUseReadPacket) {
                 DLog(@"红包");
-                if (_repayListInfo.result.available_redpackets.count > 0) {
-                    ChooseRedPacketListVCModule *selectVC = [[ChooseRedPacketListVCModule alloc] initWithStyle:UITableViewStylePlain];
-                    selectVC.delegate = self;
-                    [selectVC setData:_repayListInfo.result.available_redpackets];
-                    [self presentSemiViewController:selectVC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)} completion:nil dismissBlock:^{
-                    }];
+                if (discountTM.canuselist.count > 0) {
+                    [self showChooseAmountView];
                 } else {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前没有可用红包"];
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前没有可用券"];
                 }
             }
         }
@@ -579,7 +544,6 @@
     };
     [self.navigationController pushViewController:userBankCardListVC animated:true];
 }
-
 #pragma mark - 抵扣券，折扣券模块
 /**
  红包选择
@@ -587,17 +551,24 @@
 -(void)showChooseAmountView{
     
     DiscountCouponListVCModules *discountCouponVC = [[DiscountCouponListVCModules alloc]init];
-    discountCouponVC.dataListArr = discountTM.valid;
+    discountCouponVC.dataListArr = discountTM.canuselist;
     discountCouponVC.currentIndex = [NSString stringWithFormat:@"%ld",chooseIndex];
+    discountCouponVC.displayType = @"3";
     discountCouponVC.view.frame = CGRectMake(0, 0, _k_w, _k_h * 0.6);
+    __weak typeof (self) weakSelf = self;
     discountCouponVC.chooseDiscountTicket = ^(NSInteger index, DiscountTicketDetailModel * discountTicketDetailModel, NSString * str) {
         chooseIndex = index;
         chooseDiscountTDM = discountTicketDetailModel;
         if (index != 0) {
-            
+            [weakSelf eductibleAmountfDiscount:^(NSString *eductibleAmount) {
+                [weakSelf chooseDiscountAmountCalculate:eductibleAmount discountTicketDetailModel:discountTicketDetailModel];
+            }];
         }else{
-            
+            _selectRedPacketID = nil;
+            _useredPacketAmount = 0.0;
+            discountNumStr = @"有可用券";
         }
+        [weakSelf.PayDetailTB reloadData];
     };
     [self presentSemiViewController:discountCouponVC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)} completion:nil dismissBlock:^{
     }];
@@ -605,7 +576,6 @@
 
 /**
  获取抵扣券，折扣券数据
-
  @param finish 结果回调
  */
 -(void)obtainDiscountTicket:(void(^)(DiscountTicketModel * discountTicketModel))finish{
@@ -621,11 +591,58 @@
         }
     } WithFaileBlock:^{
     }];
-    [applicationVM new_obtainUserDiscountTicketListDisplayType:@"3" pageNum:nil pageSize:nil];
+    [applicationVM new_obtainUserDiscountTicketListDisplayType:@"3" product_id:nil pageNum:nil pageSize:nil];
+}
+/**
+ 获取抵扣金额
+
+ @param finish 结果回调
+ */
+-(void)eductibleAmountfDiscount:(void(^)(NSString * eductibleAmount))finish{
+    PaymentViewModel * paymentViewModel = [[PaymentViewModel alloc]init];
+    [paymentViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResultModel = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseResultModel.errCode isEqualToString:@"0"]) {
+            //得到实际抵扣金额；
+            NSString * resultStr = (NSString *)baseResultModel.data[@"discountAmount"];
+            finish(resultStr);
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [paymentViewModel obtaineductibleAmountfDiscount:chooseDiscountTDM.base_id stagingIds:[[self obtainRepayStaging_ids] copy]];
+}
+
+/**
+  选择红包逻辑计算
+
+ @param discountAmount 抵扣金额
+ @param discountTicketDetailModel 选择红包数据
+ */
+-(void)chooseDiscountAmountCalculate:(NSString *)discountAmount  discountTicketDetailModel:(DiscountTicketDetailModel * )discountTicketDetailModel{
+    
+    _selectRedPacketID = discountTicketDetailModel.base_id;
+    _useredPacketAmount = [discountAmount floatValue];
+    
+    if ([discountTicketDetailModel.voucher_type isEqualToString:@"1"]) {
+        discountNumStr = [NSString stringWithFormat:@"抵扣券%@",discountTicketDetailModel.total_amount];
+    }else if ([discountTicketDetailModel.voucher_type isEqualToString:@"3"]) {
+        discountNumStr = [NSString stringWithFormat:@"折扣券%@",discountTicketDetailModel.total_amount];
+    }
+    
+    if (_repayListInfo.result.total_amount >= (_repayAmount - _useredPacketAmount)) {
+        _useTotalAmount = fabs(_repayAmount - _useredPacketAmount);
+        _finalyRepayAmount = 0.0;
+    } else {
+        _useTotalAmount = _repayListInfo.result.total_amount;
+        _finalyRepayAmount = _repayAmount - _useredPacketAmount - _repayListInfo.result.total_amount;
+    }
+    
+    [self.PayDetailTB reloadData];
 }
 
 #pragma mark - selectVCDelegate
-
 /**
  红包选择完成后金额的计算
  
@@ -648,7 +665,7 @@
             _useredPacketAmount = _selectRedPacket;
             _discountsAmount = _selectRedPacket;
         } else {
-             // 红包大于第一期，使用服务费
+             // 红包大于第一期，使用第一期
             _useredPacketAmount = _repayListInfo.result.situations.firstObject.debt_total;
             _discountsAmount = _repayListInfo.result.situations.firstObject.debt_total;
         }
@@ -744,9 +761,9 @@
     if (_useredPacketAmount > 0) {
         paymentDetailModel.staging_ids_ =staging_ids;
         paymentDetailModel.account_card_id_ =_selectCard.cardId;
-        paymentDetailModel.total_amount_ = @(_useTotalAmount);
-        paymentDetailModel.repay_amount_ = @(_finalyRepayAmount);
-        paymentDetailModel.repay_total_ = @(_repayAmount);
+        paymentDetailModel.total_amount_ = @(_useTotalAmount);    //溢缴金
+        paymentDetailModel.repay_amount_ = @(_finalyRepayAmount);   //应还金额
+        paymentDetailModel.repay_total_ = @(_repayAmount);         //实际金额
         paymentDetailModel.save_amount_ = @(_save_amount);
         paymentDetailModel.socket = _repayListInfo.result.socket;
         paymentDetailModel.request_type_ = save_amountTemp;
@@ -870,7 +887,6 @@
     controller.queryCardInfo = _queryCardInfoModel;
     controller.isCheck = NO;
     [self.navigationController pushViewController:controller animated:YES];
-    
 }
 
 #pragma mark  银行卡查询

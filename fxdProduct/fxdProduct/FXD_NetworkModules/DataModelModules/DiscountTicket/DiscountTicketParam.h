@@ -14,6 +14,7 @@
 @property(nonatomic,strong)NSString<Optional> * displayType;
 @property(nonatomic,strong)NSString<Optional> * pageNum;
 @property(nonatomic,strong)NSString<Optional> * pageSize;
+@property(nonatomic,strong)NSString<Optional> * product_id;
 
 
 

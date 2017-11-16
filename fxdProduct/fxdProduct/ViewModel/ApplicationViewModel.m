@@ -121,14 +121,15 @@
  @param displayType 用处
  @param pageNum 页数
  @param pageSize 每页数量
+ @param product_id 产品id
  */
--(void)new_obtainUserDiscountTicketListDisplayType:(NSString *)displayType pageNum:(NSString *)pageNum pageSize:(NSString *)pageSize{
+-(void)new_obtainUserDiscountTicketListDisplayType:(NSString *)displayType product_id:(NSString *)product_id pageNum:(NSString *)pageNum pageSize:(NSString *)pageSize{
     
     DiscountTicketParam * discountTP = [[DiscountTicketParam alloc]init];
     discountTP.displayType = displayType;
     discountTP.pageNum = pageNum;
     discountTP.pageSize = pageSize;
-    
+    discountTP.product_id = product_id;
     NSDictionary * paramDic = [discountTP toDictionary];
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_New_DiscountTicket_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
