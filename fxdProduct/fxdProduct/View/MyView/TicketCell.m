@@ -202,7 +202,7 @@
      self.lblOverTimeImageView.image=[UIImage imageNamed:@"invail_Icon"];
     self.lblOverTimeImageView.hidden = NO;
     self.userInteractionEnabled = YES;
-    if ([discountTicketDetailM.is_using isEqualToString:@"3"]) {
+    if ([discountTicketDetailM.is_using isEqualToString:@"2"]) {
         self.lblOverTimeImageView.image=[UIImage imageNamed:@"Used_Icon"];
     }
 }
