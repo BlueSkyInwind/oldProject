@@ -379,7 +379,7 @@
                                 cell.selectionStyle = UITableViewCellSelectionStyleDefault;
                             } else {
                                 if (w > 0) {
-                                    cell.payLabel.text=@"不可用券";
+                                    cell.payLabel.text=@"您当前结清，不可使用券";
                                     _canUseReadPacket = false;
                                     cell.payLabel.textColor=rgb(255, 134, 25);
                                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -440,7 +440,7 @@
                                 cell.selectionStyle = UITableViewCellSelectionStyleDefault;
                             }else {
                                 if (w > 0) {
-                                    cell.payLabel.text=@"不可用券";
+                                    cell.payLabel.text=@"您当前结清，不可使用券";
                                     _canUseReadPacket = false;
                                     cell.payLabel.textColor=rgb(255, 134, 25);
                                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -477,7 +477,6 @@
         if(indexPath.row==0){//红包
             if (_canUseReadPacket) {
                 DLog(@"红包");
-
                 if (discountTM.canuselist.count > 0) {
                     [self showChooseAmountView];
                 } else {

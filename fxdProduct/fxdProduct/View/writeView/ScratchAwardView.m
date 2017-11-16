@@ -11,7 +11,6 @@
 #import "LewPopupViewAnimationSpring.h"
 
 @interface ScratchAwardView ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate>
-
 {
     UIProgressView *progressView;
 }
@@ -125,7 +124,6 @@
     }
 }
 
-
 #pragma mark -WKScriptMessageHandler
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
@@ -136,7 +134,6 @@
         if ([[dic objectForKey:@"functionName"] isEqualToString:@"mxBack"]) {
             [self cancel];
         }
-        
     }
 }
 #pragma mark -
