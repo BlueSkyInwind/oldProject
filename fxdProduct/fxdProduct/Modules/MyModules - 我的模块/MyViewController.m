@@ -15,7 +15,7 @@
 #import "InvitationViewController.h"
 #import "UserDataAuthenticationListVCModules.h"
 
-@interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate>
 {
     //标题数组
     NSArray *titleAry;
@@ -53,18 +53,49 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
 
+    UIView *headerBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 288)];
     //添加自定义头部
     MineHeaderView *headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
     headerView.backgroundColor = UI_MAIN_COLOR;
     headerView.nameLabel.text = @"您好!";
     headerView.accountLabel.text = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
-    [self.MyViewTable setTableHeaderView:headerView];
+    [headerBgView addSubview:headerView];
+    
+    MineMiddleView *middleView = [[MineMiddleView alloc]initWithFrame:CGRectZero];
+    middleView.redPacketNumLabel.text = @"3";
+    middleView.couponNumLabel.text = @"3";
+    middleView.backgroundColor = [UIColor whiteColor];
+    middleView.delegate = self;
+    [headerBgView addSubview:middleView];
+    
+    [self.MyViewTable setTableHeaderView:headerBgView];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
 
     [super viewDidDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
+
+}
+
+#pragma mark 我的页面中间部分点击事件
+-(void)redPacketViewTap{
+    
+    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:false];
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"现金红包"];
+
+}
+
+-(void)couponViewTap{
+    
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"优惠券"];
+
+}
+
+-(void)accountViewTap{
+    
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"账户余额"];
 
 }
 #pragma mark - TableView

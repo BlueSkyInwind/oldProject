@@ -17,6 +17,8 @@ let LINE_COLOR = UIColor.init(red: 242/255.0, green: 242/255.0, blue: 242/255.0,
 let QUTOA_COLOR = UIColor.init(red: 153/255.0, green: 153/255.0, blue: 153/255.0, alpha: 1)
 
 let TITLE_COLOR = UIColor.init(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
+let RedPacket_COLOR = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1)
+let RedPacketMoney_COLOR = UIColor.init(red: 126/255.0, green: 135/255.0, blue: 142/255.0, alpha: 1)
 
 let APPLICATION_backgroundColor = UIColor.init(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
 

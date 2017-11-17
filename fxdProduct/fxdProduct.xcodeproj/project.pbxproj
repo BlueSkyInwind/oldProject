@@ -1129,6 +1129,10 @@
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC85C6251FBE71E90090A7E7 /* MineMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6241FBE71E90090A7E7 /* MineMiddleView.swift */; };
 		CC85C6261FBE71E90090A7E7 /* MineMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6241FBE71E90090A7E7 /* MineMiddleView.swift */; };
+		CC85C6281FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
+		CC85C6291FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
+		CC85C62C1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */; };
+		CC85C62D1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */; };
 		CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989C301F4D84A9000CDACF /* AuthenticationCenterVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC989C2F1F4D84A9000CDACF /* AuthenticationCenterVCModules.m */; };
@@ -2246,6 +2250,8 @@
 		CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShanLinBackAlertView.swift; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC85C6241FBE71E90090A7E7 /* MineMiddleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineMiddleView.swift; sourceTree = "<group>"; };
+		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
+		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
 		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
 		CC989C2E1F4D84A9000CDACF /* AuthenticationCenterVCModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationCenterVCModules.h; sourceTree = "<group>"; };
 		CC989C2F1F4D84A9000CDACF /* AuthenticationCenterVCModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationCenterVCModules.m; sourceTree = "<group>"; };
@@ -2536,6 +2542,7 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CC85C62A1FBED2BE0090A7E7 /* RedPacketView */,
 				CC989C321F4D86E1000CDACF /* AuthenticationCenterView */,
 				CC4BB60C1F17709D0027A0AA /* MineView */,
 				8438F7111EE14D2D0089E121 /* MoreView */,
@@ -3396,6 +3403,7 @@
 				634795EE1D38BED700EC4027 /* AuthorizationViewController.h */,
 				634795EF1D38BED700EC4027 /* AuthorizationViewController.m */,
 				CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */,
+				CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */,
 			);
 			path = SubViewController;
 			sourceTree = "<group>";
@@ -4977,6 +4985,14 @@
 			path = "ShanLinWebVCModules - 善林";
 			sourceTree = "<group>";
 		};
+		CC85C62A1FBED2BE0090A7E7 /* RedPacketView */ = {
+			isa = PBXGroup;
+			children = (
+				CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */,
+			);
+			path = RedPacketView;
+			sourceTree = "<group>";
+		};
 		CC989C321F4D86E1000CDACF /* AuthenticationCenterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -5634,6 +5650,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84C61A161FA8293200626411 /* FindPassViewController.m in Sources */,
+				CC85C62C1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */,
 				84C61A081FA81F2A00626411 /* PhoneContactsManager.m in Sources */,
 				84C61A091FA81F2A00626411 /* BankCardNameVCModules.m in Sources */,
 				84C619BD1FA815EB00626411 /* PayMethodViewController.m in Sources */,
@@ -6098,6 +6115,7 @@
 				63D47FF91D9A6F8B0058315E /* GetCaseInfo.m in Sources */,
 				63C50E4C1E67F6C10035EE4F /* CustomerIDInfo.m in Sources */,
 				63E8F1B11E6FDAEC00FE4BDD /* DataDicParse.m in Sources */,
+				CC85C6281FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */,
 				635AB7AD1BE34F9F00C32919 /* ShouldAlsoAmountResult.m in Sources */,
 				84A380341FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m in Sources */,
 				CCCE40C51EE7D19C00E3F102 /* ChangePasswordParamModel.m in Sources */,
@@ -6330,6 +6348,7 @@
 				84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */,
 				CC0DF9F81EA5B1090024841A /* UIViewController+KNSemiModal.m in Sources */,
 				CC0DF9F91EA5B1090024841A /* ContactClass.m in Sources */,
+				CC85C6291FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */,
 				840911A31F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */,
 				CC0DF9FC1EA5B1090024841A /* CustomerCareerBaseClass.m in Sources */,
 				84ED5B6C1F4AC606004C0A59 /* SeniorCertificationView.m in Sources */,
@@ -6434,6 +6453,7 @@
 				CC0DFA621EA5B1090024841A /* RepayHistoryResult.m in Sources */,
 				CC0DFA631EA5B1090024841A /* UIBarButtonItem+Extend.m in Sources */,
 				CCCB279D1FB2F04500412632 /* ScratchAwardView.m in Sources */,
+				CC85C62D1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */,
 				CC0DFA641EA5B1090024841A /* main.m in Sources */,
 				CC0DFA651EA5B1090024841A /* LOTMaskLayer.m in Sources */,
 				CC0DFA671EA5B1090024841A /* FXD_AlertViewCust.m in Sources */,

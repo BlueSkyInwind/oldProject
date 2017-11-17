@@ -8,13 +8,24 @@
 
 import UIKit
 
+@objc protocol MineMiddleViewDelegate: NSObjectProtocol {
+    
+    //现金红包
+    func redPacketViewTap()
+    //优惠券
+    func couponViewTap()
+    //账户余额
+    func accountViewTap()
+    
+}
+
 class MineMiddleView: UIView {
 
-    var couponNumLabel : UILabel?
-    var redPacketNumLabel : UILabel?
-    var redPacketImageView : UIImageView?
-    var couponImageView : UIImageView?
-    
+    @objc var couponNumLabel : UILabel?
+    @objc var redPacketNumLabel : UILabel?
+    @objc var redPacketImageView : UIImageView?
+    @objc var couponImageView : UIImageView?
+    @objc weak var delegate: MineMiddleViewDelegate?
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -36,20 +47,27 @@ class MineMiddleView: UIView {
 extension MineMiddleView{
     fileprivate func setupUI(){
         
-        let redPacketImageV = UIImageView()
-        redPacketImageV.image = UIImage(named:"")
-        self.addSubview(redPacketImageV)
-        redPacketImageV.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(42)
-            make.top.equalTo(self).offset(19)
+        let redPacketView = MiddleView(imageName: "redPacket", title: "现金红包")
+        redPacketView.isUserInteractionEnabled = true
+        redPacketView.tag = 101
+        let redPacketTap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(gesture:)))
+        redPacketView.addGestureRecognizer(redPacketTap)
+        
+        self.addSubview(redPacketView)
+        redPacketView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(30)
+            make.top.equalTo(self).offset(20)
+            make.width.equalTo(60)
+            make.height.equalTo(66)
+        
         }
         
         redPacketImageView = UIImageView()
-        redPacketImageView?.image = UIImage(named:"")
-        self.addSubview(redPacketImageView!)
+        redPacketImageView?.image = UIImage(named:"dots")
+        redPacketView.addSubview(redPacketImageView!)
         redPacketImageView?.snp.makeConstraints({ (make) in
-            make.left.equalTo(self).offset(69)
-            make.top.equalTo(self).offset(15)
+            make.left.equalTo(redPacketView.snp.right).offset(-22)
+            make.top.equalTo(redPacketView.snp.top).offset(-5)
         })
         
         redPacketNumLabel = UILabel()
@@ -59,19 +77,209 @@ extension MineMiddleView{
         redPacketNumLabel?.snp.makeConstraints({ (make) in
             make.centerX.equalTo((redPacketImageView?.snp.centerX)!)
             make.centerY.equalTo((redPacketImageView?.snp.centerY)!)
+            
         })
         
+        let couponView = MiddleView(imageName: "coupon", title: "优惠券")
+        couponView.isUserInteractionEnabled = true
+        couponView.tag = 102
         
+        let couponTap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(gesture:)))
+        couponView.addGestureRecognizer(couponTap)
+        self.addSubview(couponView)
+        couponView.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.snp.centerX)
+            make.centerY.equalTo(self.snp.centerY)
+            make.width.equalTo(60)
+            make.height.equalTo(66)
+            
+        }
+        couponImageView = UIImageView()
+        couponImageView?.image = UIImage(named:"dots")
+        couponView.addSubview(couponImageView!)
+        couponImageView?.snp.makeConstraints({ (make) in
+            make.left.equalTo(couponView.snp.right).offset(-22)
+            make.top.equalTo(couponView.snp.top).offset(-5)
+        })
         
-        let redPacketLabel = UILabel()
-        redPacketLabel.text = "现金红包"
-        redPacketLabel.font = UIFont.systemFont(ofSize: 15)
-        self.addSubview(redPacketLabel)
-        redPacketLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(34)
-            make.top.equalTo(redPacketImageV.snp.bottom).offset(10)
+        couponNumLabel = UILabel()
+        couponNumLabel?.font = UIFont.systemFont(ofSize: 15)
+        couponNumLabel?.textColor = UIColor.white
+        couponImageView?.addSubview(couponNumLabel!)
+        couponNumLabel?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo((couponImageView?.snp.centerX)!)
+            make.centerY.equalTo((couponImageView?.snp.centerY)!)
+            
+        })
+        
+        let accountView = MiddleView(imageName: "account", title: "账户余额")
+        accountView.isUserInteractionEnabled = true
+        accountView.tag = 103
+        let accountTap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(gesture:)))
+        accountView.addGestureRecognizer(accountTap)
+        self.addSubview(accountView)
+        accountView.snp.makeConstraints { (make) in
+            make.right.equalTo(self).offset(-30)
+            make.top.equalTo(self).offset(20)
+            make.width.equalTo(60)
+            make.height.equalTo(66)
+            
+        }
+
+    }
+    
+    @objc func handleTapGesture(gesture: UIPanGestureRecognizer) {
+        
+        let tag = gesture.view?.tag
+        switch tag {
+        case 101?:
+            if delegate != nil {
+                
+                delegate?.redPacketViewTap()
+            }
+            print("点击了现金红包")
+        case 102?:
+            if delegate != nil {
+                
+                delegate?.couponViewTap()
+            }
+            print("点击了优惠券")
+        case 103?:
+            if delegate != nil {
+                
+                delegate?.accountViewTap()
+            }
+            print("点击账户余额")
+        default:
+            break
+        }
+    }
+
+    
+    fileprivate func MiddleView(imageName: String, title: String)->UIView{
+        
+        let bgView = UIView()
+        
+        let couponImageV = UIImageView()
+        couponImageV.image = UIImage(named:imageName)
+        bgView.addSubview(couponImageV)
+        couponImageV.snp.makeConstraints { (make) in
+            make.centerX.equalTo(bgView.snp.centerX)
+            make.top.equalTo(bgView.snp.top).offset(0)
+        }
+        
+        let couponLabel = UILabel()
+        couponLabel.text = title
+        couponLabel.font = UIFont.systemFont(ofSize: 15)
+        bgView.addSubview(couponLabel)
+        couponLabel.snp.makeConstraints { (make) in
+            make.centerX.equalTo(bgView.snp.centerX)
+            make.top.equalTo(couponImageV.snp.bottom).offset(10)
             make.height.equalTo(14)
         }
         
+        return bgView
+        
+    }
+    override var  frame:(CGRect){
+        
+        didSet{
+            let k_w = UIScreen.main.bounds.size.width
+            let newFrame = CGRect(x:0,y:180,width:k_w,height:108)
+            super.frame = newFrame
+            
+        }
+    }
+    
+    fileprivate func setU(){
+        
+        //        let redPacketImageV = UIImageView()
+        //        redPacketImageV.image = UIImage(named:"redPacket")
+        //        self.addSubview(redPacketImageV)
+        //        redPacketImageV.snp.makeConstraints { (make) in
+        //            make.left.equalTo(self).offset(42)
+        //            make.top.equalTo(self).offset(20)
+        //        }
+        //
+        //        redPacketImageView = UIImageView()
+        //        redPacketImageView?.image = UIImage(named:"dots")
+        //        self.addSubview(redPacketImageView!)
+        //        redPacketImageView?.snp.makeConstraints({ (make) in
+        //            make.left.equalTo(self).offset(69)
+        //            make.top.equalTo(self).offset(13)
+        //        })
+        //
+        //        redPacketNumLabel = UILabel()
+        //        redPacketNumLabel?.font = UIFont.systemFont(ofSize: 15)
+        //        redPacketNumLabel?.textColor = UIColor.white
+        //        redPacketImageView?.addSubview(redPacketNumLabel!)
+        //        redPacketNumLabel?.snp.makeConstraints({ (make) in
+        //            make.centerX.equalTo((redPacketImageView?.snp.centerX)!)
+        //            make.centerY.equalTo((redPacketImageView?.snp.centerY)!)
+        //        })
+        //
+        //        let redPacketLabel = UILabel()
+        //        redPacketLabel.text = "现金红包"
+        //        redPacketLabel.font = UIFont.systemFont(ofSize: 15)
+        //        self.addSubview(redPacketLabel)
+        //        redPacketLabel.snp.makeConstraints { (make) in
+        //            make.left.equalTo(self).offset(32)
+        //            make.top.equalTo(redPacketImageV.snp.bottom).offset(10)
+        //            make.height.equalTo(14)
+        //        }
+        //
+        //        let couponImageV = UIImageView()
+        //        couponImageV.image = UIImage(named:"coupon")
+        //        self.addSubview(couponImageV)
+        //        couponImageV.snp.makeConstraints { (make) in
+        //            make.centerX.equalTo(self.snp.centerX)
+        //            make.top.equalTo(self).offset(20)
+        //        }
+        //
+        //        couponImageView = UIImageView()
+        //        couponImageView?.image = UIImage(named:"dots")
+        //        couponImageV.addSubview(couponImageView!)
+        //        couponImageView?.snp.makeConstraints({ (make) in
+        //            make.left.equalTo(couponImageV.snp.right).offset(-15)
+        //            make.top.equalTo(couponImageV.snp.top).offset(-7)
+        //        })
+        //
+        //        couponNumLabel = UILabel()
+        //        couponNumLabel?.font = UIFont.systemFont(ofSize: 15)
+        //        couponNumLabel?.textColor = UIColor.white
+        //        couponImageView?.addSubview(couponNumLabel!)
+        //        couponNumLabel?.snp.makeConstraints({ (make) in
+        //            make.centerX.equalTo((couponImageView?.snp.centerX)!)
+        //            make.centerY.equalTo((couponImageView?.snp.centerY)!)
+        //
+        //        })
+        //
+        //        let couponLabel = UILabel()
+        //        couponLabel.text = "优惠券"
+        //        couponLabel.font = UIFont.systemFont(ofSize: 15)
+        //        self.addSubview(couponLabel)
+        //        couponLabel.snp.makeConstraints { (make) in
+        //            make.centerX.equalTo(self.snp.centerX)
+        //            make.top.equalTo(couponImageV.snp.bottom).offset(10)
+        //            make.height.equalTo(14)
+        //        }
+        //
+        //        let accountImageView = UIImageView()
+        //        accountImageView.image = UIImage(named:"account")
+        //        self.addSubview(accountImageView)
+        //        accountImageView.snp.makeConstraints { (make) in
+        //            make.right.equalTo(self).offset(-42)
+        //            make.top.equalTo(self).offset(20)
+        //        }
+        //
+        //        let accountLabel = UILabel()
+        //        accountLabel.text = "账户余额"
+        //        accountLabel.font = UIFont.systemFont(ofSize: 15)
+        //        self.addSubview(accountLabel)
+        //        accountLabel.snp.makeConstraints { (make) in
+        //            make.right.equalTo(self).offset(-30)
+        //            make.top.equalTo(accountImageView.snp.bottom).offset(10)
+        //            make.height.equalTo(14)
+        //        }
     }
 }
