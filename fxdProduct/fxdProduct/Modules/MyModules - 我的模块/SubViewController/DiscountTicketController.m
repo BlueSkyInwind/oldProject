@@ -89,7 +89,7 @@
             }
             [self.tableView reloadData];
         }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:baseResultM.friendErrMsg];
         }
         [self.tableView.mj_header endRefreshing];
         
