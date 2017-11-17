@@ -1127,8 +1127,6 @@
 		CC6F06941F7DF6C200FA889E /* ShanLinBackAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */; };
 		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
-		CC85C6251FBE71E90090A7E7 /* MineMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6241FBE71E90090A7E7 /* MineMiddleView.swift */; };
-		CC85C6261FBE71E90090A7E7 /* MineMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6241FBE71E90090A7E7 /* MineMiddleView.swift */; };
 		CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989C301F4D84A9000CDACF /* AuthenticationCenterVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC989C2F1F4D84A9000CDACF /* AuthenticationCenterVCModules.m */; };
@@ -2245,7 +2243,6 @@
 		CC6F068F1F7B8D3600FA889E /* ShanLinWebVCModules.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShanLinWebVCModules.m; sourceTree = "<group>"; };
 		CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShanLinBackAlertView.swift; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
-		CC85C6241FBE71E90090A7E7 /* MineMiddleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineMiddleView.swift; sourceTree = "<group>"; };
 		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
 		CC989C2E1F4D84A9000CDACF /* AuthenticationCenterVCModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationCenterVCModules.h; sourceTree = "<group>"; };
 		CC989C2F1F4D84A9000CDACF /* AuthenticationCenterVCModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationCenterVCModules.m; sourceTree = "<group>"; };
@@ -4922,7 +4919,6 @@
 				CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */,
 				CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */,
 				CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */,
-				CC85C6241FBE71E90090A7E7 /* MineMiddleView.swift */,
 			);
 			name = MineView;
 			sourceTree = "<group>";
@@ -6030,7 +6026,6 @@
 				63FC25041D98F7E9006F58F3 /* YYTextView.m in Sources */,
 				635077661DD1CC8800ED031A /* AuthStatus.m in Sources */,
 				63878FE21C1519CD008E1CF9 /* CheckUtils.m in Sources */,
-				CC85C6251FBE71E90090A7E7 /* MineMiddleView.swift in Sources */,
 				638C3F271CF2F470000446A7 /* PCCircleViewConst.m in Sources */,
 				63E1ECD11E1B8FAA0079A2F8 /* TADotView.m in Sources */,
 				63A24C641BE063A90036E8EF /* UIDevice+Extend.m in Sources */,
@@ -6374,7 +6369,6 @@
 				84A3802B1FAC1D8D008FB7AF /* UserThirdPartyAuthVCModules.swift in Sources */,
 				CC0DFA271EA5B1090024841A /* RTRootNavigationController.m in Sources */,
 				CC0DFA281EA5B1090024841A /* MBPAlertView.m in Sources */,
-				CC85C6261FBE71E90090A7E7 /* MineMiddleView.swift in Sources */,
 				8438F7151EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */,
 				CC0DFA291EA5B1090024841A /* testModelFmdb.m in Sources */,
 				CC0DFA2A1EA5B1090024841A /* QueryRepaymentsLoanApplicant.m in Sources */,
