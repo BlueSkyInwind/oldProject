@@ -781,7 +781,6 @@
             moenyViewing.overdueFeeLabel.text = [NSString stringWithFormat:@"逾期费用:%@元",repayModel.overdueFee];
             moenyViewing.overdueFeeLabel.attributedText = [self changeAtr:moenyViewing.overdueFeeLabel.text color:UI_MAIN_COLOR range:NSMakeRange(5, repayModel.overdueFee.length)];
         }
-        
     }
     moenyViewing.stagingView.hidden = YES;
     moenyViewing.stagingBgView.hidden = YES;

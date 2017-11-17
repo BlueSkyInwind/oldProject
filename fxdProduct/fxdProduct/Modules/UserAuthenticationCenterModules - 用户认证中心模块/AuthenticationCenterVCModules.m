@@ -607,7 +607,6 @@
     [MoxieSDK shared].navigationController.navigationBar.tintColor = UI_MAIN_COLOR;
     [[MoxieSDK shared].navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
     [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],NSForegroundColorAttributeName, nil];
-
 }
 -(void)obtainHighRankingClassifyStatus:(NSString *)type TaskId:(NSString *)taskId{
     if (!taskId || !type) {

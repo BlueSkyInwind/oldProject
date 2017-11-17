@@ -53,8 +53,8 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
         //        getCapitalListData()
         
         self.obtainDiscountTicket { (discountTicketM) in
-            if discountTicketM.valid != nil &&  discountTicketM.valid.count != 0 {
-                self.chooseDiscountTDM = (discountTicketM.valid[0] as! DiscountTicketDetailModel)
+            if discountTicketM.canuselist != nil &&  discountTicketM.canuselist.count != 0 {
+                self.chooseDiscountTDM = (discountTicketM.canuselist[0] as! DiscountTicketDetailModel)
                 self.rapidLoanView?.addDiscountCoupons(discountTicketDetailM: self.chooseDiscountTDM!)
             }
         }
@@ -98,7 +98,7 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
         }) {
             
         }
-        applicationVM.obtainUserDiscountTicketList("1", displayType: "1")
+        applicationVM.new_obtainUserDiscountTicketListDisplayType("1", product_id: productId, pageNum: nil, pageSize: nil)
     }
     
     func setProductUI(model : ApplicaitonViewInfoModel){
@@ -148,7 +148,7 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
         }) {
             
         }
-        applicationMV.userCreateApplication(productId, platformCode: platformCode,baseId: nil)
+        applicationMV.userCreateApplication(productId, platformCode: platformCode,baseId:chooseDiscountTDM?.base_id)
     }
     
     //MARK: 取消按钮
@@ -177,14 +177,14 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
     //MARK:选择提额券
     func showChooseAmountView(){
         let discountCouponVC = DiscountCouponListVCModules()
-        discountCouponVC.dataListArr = (discountTM?.valid! as! NSArray)
+        discountCouponVC.dataListArr = (discountTM?.canuselist! as! NSArray)
         discountCouponVC.currentIndex = "\(chooseIndex)" as NSString
         discountCouponVC.view.frame = CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h * 0.6)
         discountCouponVC.chooseDiscountTicket = ({[weak self] (index,discountTicketDetailModel,str ) in
             self?.chooseIndex = index;
             self?.chooseDiscountTDM = discountTicketDetailModel;
             if index != 0 {
-                self?.rapidLoanView?.discountCouponsV?.amountLabel?.text = "+￥" + "\(self?.chooseDiscountTDM?.amount_payment_ ?? "")"
+                self?.rapidLoanView?.discountCouponsV?.amountLabel?.text = "+￥" + "\(self?.chooseDiscountTDM?.total_amount ?? "")"
             }else{
                  self?.rapidLoanView?.discountCouponsV?.amountLabel?.text = "+￥0"
             }

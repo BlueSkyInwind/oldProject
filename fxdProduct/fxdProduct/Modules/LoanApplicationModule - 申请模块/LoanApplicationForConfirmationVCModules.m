@@ -40,8 +40,8 @@
     
     if ([_productId isEqualToString:SalaryLoan] || [_productId isEqualToString:RapidLoan]) {
         [self obtainDiscountTicket:^(DiscountTicketModel *discountTicketModel) {
-            if (discountTicketModel.valid != nil && discountTicketModel.valid.count != 0) {
-                [self addDiscountCoupons:discountTicketModel.valid[0]];
+            if (discountTicketModel.canuselist != nil && discountTicketModel.canuselist.count != 0) {
+                [self addDiscountCoupons:discountTicketModel.canuselist[0]];
             } 
         }];
     }
@@ -63,6 +63,11 @@
     
 }
 
+/**
+ 增加券视图
+
+ @param discountTicketDetailM 默认券
+ */
 -(void)addDiscountCoupons:(DiscountTicketDetailModel *)discountTicketDetailM{
     
     chooseDiscountTDM = discountTicketDetailM;
@@ -80,7 +85,7 @@
     self.discountCouponsV = [[DiscountCouponsView alloc]initWithFrame:CGRectZero];
     self.discountCouponsV.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     self.discountCouponsV.delegate = self;
-    self.discountCouponsV.amountLabel.text = [NSString stringWithFormat:@"+￥%@",chooseDiscountTDM.amount_payment_];
+    self.discountCouponsV.amountLabel.text = [NSString stringWithFormat:@"+￥%@",chooseDiscountTDM.total_amount];
      [self.view addSubview:self.discountCouponsV];
     [self.discountCouponsV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@0);
@@ -92,16 +97,19 @@
 }
 
 #pragma DiscountCouponsDelergate
+/**
+ 展现券的使用列表
+ */
 -(void)pushChooseAmountView{
     DiscountCouponListVCModules *discountCouponVC = [[DiscountCouponListVCModules alloc]init];
-    discountCouponVC.dataListArr = discountTM.valid;
+    discountCouponVC.dataListArr = discountTM.canuselist;
     discountCouponVC.currentIndex = [NSString stringWithFormat:@"%ld",chooseIndex];
     discountCouponVC.view.frame = CGRectMake(0, 0, _k_w, _k_h * 0.6);
     discountCouponVC.chooseDiscountTicket = ^(NSInteger index, DiscountTicketDetailModel * discountTicketDetailModel, NSString * str) {
         chooseIndex = index;
         chooseDiscountTDM = discountTicketDetailModel;
         if (index != 0) {
-            self.discountCouponsV.amountLabel.text = [NSString stringWithFormat:@"+￥%@",chooseDiscountTDM.amount_payment_];
+            self.discountCouponsV.amountLabel.text = [NSString stringWithFormat:@"+￥%@",chooseDiscountTDM.total_amount];
         }else{
             self.discountCouponsV.amountLabel.text = [NSString stringWithFormat:@"+￥0"];
         }
@@ -109,6 +117,7 @@
     [self presentSemiViewController:discountCouponVC withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO), KNSemiModalOptionKeys.parentAlpha : @(0.8)} completion:nil dismissBlock:^{
     }];
 }
+
 -(void)pushDirectionsForUse{
     FXDWebViewController * webVC = [[FXDWebViewController alloc]init];
     webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_DiscountTicketRule_url];
@@ -135,6 +144,11 @@
     [applicationVM queryApplicationInfo:_productId];
 }
 
+/**
+ 获取折扣券 数据
+
+ @param finish 结果回调
+ */
 -(void)obtainDiscountTicket:(void(^)(DiscountTicketModel * discountTicketModel))finish{
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
     [applicationVM setBlockWithReturnBlock:^(id returnValue) {
@@ -148,7 +162,7 @@
         }
     } WithFaileBlock:^{
     }];
-    [applicationVM obtainUserDiscountTicketList:@"1" displayType:@"1"];
+    [applicationVM new_obtainUserDiscountTicketListDisplayType:@"1" product_id:_productId  pageNum:nil pageSize:nil];
 }
 
 - (YYTextView *)textView
@@ -235,7 +249,7 @@
     } WithFaileBlock:^{
         
     }];
-    [applicationVM userCreateApplication:_productId platformCode:@"" baseId:chooseDiscountTDM.baseid_];
+    [applicationVM userCreateApplication:_productId platformCode:@"" baseId:chooseDiscountTDM.base_id];
     
 }
 

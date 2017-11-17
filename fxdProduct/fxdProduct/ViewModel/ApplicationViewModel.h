@@ -46,4 +46,16 @@
  */
 -(void)obtainUserDiscountTicketList:(NSString *)type displayType:(NSString *)displayType;
 
+/**
+ 获取优惠券
+ 
+ @param type 类型
+ @param displayType 用处
+ @param pageNum 页数
+ @param pageSize 每页数量
+ @param product_id 产品id
+ */
+-(void)new_obtainUserDiscountTicketListDisplayType:(NSString *)displayType product_id:(NSString *)product_id pageNum:(NSString *)pageNum pageSize:(NSString *)pageSize;
+
+
 @end

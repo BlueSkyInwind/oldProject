@@ -74,7 +74,7 @@ class RapidLoanApplicationcConfirmation: UIView,DiscountCouponsViewDelegate{
         discountCouponsV = DiscountCouponsView();
         discountCouponsV?.backgroundColor = APPLICATION_backgroundColor
         discountCouponsV?.delegate = self
-        discountCouponsV?.amountLabel?.text = "+￥" + "\(discountTicketDetailM.amount_payment_ ?? "")"
+        discountCouponsV?.amountLabel?.text = "+￥" + "\(discountTicketDetailM.total_amount ?? "")"
         self.addSubview(discountCouponsV!)
         discountCouponsV?.snp.makeConstraints({ (make) in
             make.left.right.equalTo(0)
@@ -91,6 +91,9 @@ class RapidLoanApplicationcConfirmation: UIView,DiscountCouponsViewDelegate{
         
         titleImageView?.snp.updateConstraints({ (make) in
             make.top.equalTo((headerView?.snp.top)!).offset(20)
+        })
+        headerView?.snp.updateConstraints({ (make) in
+            make.height.equalTo(210)
         })
     }
     
@@ -117,7 +120,7 @@ extension RapidLoanApplicationcConfirmation{
         headerView?.snp.makeConstraints({ (make) in
             make.top.equalTo(self).offset(0)
             make.left.right.equalTo(self).offset(0)
-            make.height.equalTo(200)
+            make.height.equalTo(230)
         })
         
         titleImageView = UIImageView()

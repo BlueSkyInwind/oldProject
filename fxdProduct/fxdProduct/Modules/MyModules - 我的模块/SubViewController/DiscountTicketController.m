@@ -25,6 +25,9 @@
     //优惠券数据
     DiscountTicketModel * discountTicketModel;
     
+    int  pages;
+
+    
 }
 @property (nonatomic,strong)NSMutableArray * validTicketArr;
 @property (nonatomic,strong)NSMutableArray * invalidTicketArr;
@@ -37,6 +40,7 @@
     self.title=@"优惠券";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = kUIColorFromRGB(0xf2f2f2);
+    pages = 1;
     [self addBackItem];
     [self addHelpItem];
     [self createTableView];
@@ -62,84 +66,74 @@
     }
 }
 
-#pragma mark 刷新
-- (void)fatchRedpacket
-{
-    if (self.validTicketArr.count > 0) {
-        [self.validTicketArr removeAllObjects];
-    }
-    if (self.invalidTicketArr.count > 0) {
-        [self.invalidTicketArr removeAllObjects];
-    }
-    [self obtainDiscountTicket];
-#pragma mark 获取红包数据
-    RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
-    [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
-        [self.tableView.mj_header endRefreshing];
-         BaseResultModel *  baseModel = [[BaseResultModel alloc] initWithDictionary:(NSDictionary *)returnValue error:nil];
-        if ([baseModel.flag isEqualToString:@"0000"]) {
-            _redPacketTicketM = [[RedPacketTicketModel alloc]initWithDictionary:(NSDictionary *)baseModel.result error:nil];
-            for (RedpacketDetailModel *redpacketDetailM in _redPacketTicketM.validRedPacket) {
-                if ([redpacketDetailM.is_valid_ boolValue]) {
-                    [self.validTicketArr addObject:redpacketDetailM];
-                }
-            }
-            for (RedpacketDetailModel *redpacketDetailM in _redPacketTicketM.inValidRedPacket) {
-                if (![redpacketDetailM.is_valid_ boolValue]) {
-                    [self.invalidTicketArr addObject:redpacketDetailM];
-                }
-            }
-            [self.tableView reloadData];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseModel.msg];
-        }
-        [self isDisplayNoneViewAndBottomView];
-    } WithFaileBlock:^{
-        [self isDisplayNoneViewAndBottomView];
-    }];
-    [repayWeeklyRecordViewModel getUserRedpacketList];
-}
-
-#pragma mark 获取优惠券数据
--(void)obtainDiscountTicket{
+-(void)obtainAllDiscountTicketList:(int)pageNum{
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
     [applicationVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
             DiscountTicketModel * discountTicketM = [[DiscountTicketModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             discountTicketModel = discountTicketM;
-            for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.valid) {
-                    [self.validTicketArr addObject:discountTicketDetailM];
+            //清空数据
+            if (self.validTicketArr.count > 0 && pages == 1) {
+                [self.validTicketArr removeAllObjects];
             }
-            for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.invalid) {
+            if (self.invalidTicketArr.count > 0 && pages == 1) {
+                [self.invalidTicketArr removeAllObjects];
+            }
+            //增加数据
+            for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.canuselist) {
+                [self.validTicketArr addObject:discountTicketDetailM];
+            }
+            for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.notuselist) {
                 [self.invalidTicketArr addObject:discountTicketDetailM];
             }
             [self.tableView reloadData];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
+        [self.tableView.mj_header endRefreshing];
+        
+        if (self.validTicketArr.count > 0 && discountTicketModel.canuselist.count == 0) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [self.tableView.mj_footer endRefreshing];
+        }
         [self isDisplayNoneViewAndBottomView];
     } WithFaileBlock:^{
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         [self isDisplayNoneViewAndBottomView];
     }];
-    [applicationVM obtainUserDiscountTicketList:@"1" displayType:@"2"];
+    [applicationVM new_obtainUserDiscountTicketListDisplayType:@"2" product_id:nil pageNum:[NSString stringWithFormat:@"%d",pageNum] pageSize:@"15"];
 }
 
 #pragma mark 初始化tableView
 -(void)createTableView
 {
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,64, _k_w, _k_h-64) style:UITableViewStyleGrouped];
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.backgroundColor=kUIColorFromRGB(0xf2f2f2);
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).with.offset(BarHeightNew);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).with.offset(0);
+    }];
+    
+    if (@available(iOS 11.0, *)) {
+         self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    }else if (@available(iOS 9.0, *)){
+        self.automaticallyAdjustsScrollViewInsets = false;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = false;
+    }
     [self.tableView registerNib:[UINib nibWithNibName:@"TicketCell" bundle:nil] forCellReuseIdentifier:@"cell"];
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(fatchRedpacket)];
-    header.automaticallyChangeAlpha = YES;
-    header.lastUpdatedTimeLabel.hidden = YES;
-    [header beginRefreshing];
-    self.tableView.mj_header = header;
+    
+    [self setupMJRefreshTableView];
+
 }
 #pragma mark 初始化使用帮助按钮
 -(void)addHelpItem{
@@ -147,6 +141,7 @@
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithTitle:@"使用帮助" style:UIBarButtonItemStylePlain target:self action:@selector(goHelpVCClick)];
     self.navigationItem.rightBarButtonItem = aBarbi;
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    
 }
 
 #pragma mark 点击使用帮助按钮
@@ -221,15 +216,19 @@
 
 #pragma mark 初始化底部视图
 -(void)createbottomView{
-    
-    self.tableView.frame = CGRectMake(0, 64, _k_w, _k_h - 114);
+//    self.tableView.frame = CGRectMake(0, 0, _k_w, _k_h - 50);
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).with.offset(BarHeightNew);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).with.offset(-50);
+    }];
     bottomView = [[UIView alloc]init];
     bottomView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pushInVailDiscountTicketVC)];
     [bottomView addGestureRecognizer:tap];
     [self.view addSubview:bottomView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@(-10));
+        make.bottom.equalTo(@(0));
         make.left.right.equalTo(@0);
         make.height.equalTo(@40);
     }];
@@ -350,6 +349,44 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
+
+#pragma mark ----------设置列表的可刷新性----------
+-(void)setupMJRefreshTableView
+{
+    
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+    //    header.automaticallyChangeAlpha = YES;
+    header.automaticallyChangeAlpha = YES;
+    header.lastUpdatedTimeLabel.hidden = YES;
+    [header beginRefreshing];
+    self.tableView.mj_header = header;
+    
+    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
+    footer.automaticallyChangeAlpha = YES;
+    footer.mj_origin = CGPointMake(0, _k_h);
+    self.tableView.mj_footer = footer;
+    
+}
+-(void)headerRereshing
+{
+    //以下两种方法
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView.mj_header endRefreshing];
+    });
+    pages = 1;
+    [self obtainAllDiscountTicketList:pages];
+    
+}
+
+-(void)footerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView.mj_footer endRefreshing];
+    });
+    pages += 1;
+    [self obtainAllDiscountTicketList:pages];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
