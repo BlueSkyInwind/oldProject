@@ -39,8 +39,9 @@
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
+    
     self.MyViewTable.scrollEnabled = NO;
-    if (UI_IS_IPHONE4) {
+    if (UI_IS_IPHONE4 || UI_IS_IPHONE5) {
         self.MyViewTable.scrollEnabled = YES;
     }
     [self.MyViewTable setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];

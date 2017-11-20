@@ -8,11 +8,19 @@
 
 import UIKit
 
+@objc protocol RedPacketHeaderViewDelegate: NSObjectProtocol {
+    
+    //提现按钮
+    func withdrawBtnClick()
+    
+}
+
+
 class RedPacketHeaderView: UIView {
 
     //用户名字
     @objc var moneyLabel : UILabel?
-    
+    @objc weak var delegate: RedPacketHeaderViewDelegate?
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -59,7 +67,7 @@ extension RedPacketHeaderView{
         moneyLabel?.snp.makeConstraints({ (make) in
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(name.snp.bottom).offset(26)
-            make.height.equalTo(35)
+            make.height.equalTo(40)
         })
         
         let withdrawBtn = UIButton()
@@ -75,17 +83,32 @@ extension RedPacketHeaderView{
             make.height.equalTo(50)
             make.top.equalTo((moneyLabel?.snp.bottom)!).offset(42)
         }
+        
+        if UI_IS_IPONE5 {
+            moneyLabel?.snp.updateConstraints({ (make) in
+                make.top.equalTo(name.snp.bottom).offset(15)
+            })
+            withdrawBtn.snp.makeConstraints({ (make) in
+                make.top.equalTo((moneyLabel?.snp.bottom)!).offset(20)
+            })
+        }
     }
     
     @objc func withdrawBtnClick(){
         
+        if delegate != nil {
+            delegate?.withdrawBtnClick()
+        }
     }
     
     override var  frame:(CGRect){
         
         didSet{
             let k_w = UIScreen.main.bounds.size.width
-            let newFrame = CGRect(x:0,y:0,width:k_w,height:335)
+            var newFrame = CGRect(x:0,y:0,width:k_w,height:335)
+            if UI_IS_IPONE5 {
+                newFrame = CGRect(x:0,y:0,width:k_w,height:285)
+            }
             super.frame = newFrame
             
         }

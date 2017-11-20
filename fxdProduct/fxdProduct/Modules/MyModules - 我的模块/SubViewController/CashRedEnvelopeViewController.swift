@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
+class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,RedPacketHeaderViewDelegate,RedPacketCellDelegate{
 
     var tableView : UITableView?
     
@@ -45,11 +45,19 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
         let headerView = RedPacketHeaderView()
         headerView.moneyLabel?.text = "¥180.50"
+        headerView.delegate = self
+        let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(headerView.moneyLabel?.text)!)
+        attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
+        attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 35), range: NSMakeRange(1,attrstr.length-1))
+        headerView.moneyLabel?.attributedText = attrstr
         tableView?.tableHeaderView = headerView
     }
 
     @objc func rightClick(){
-        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "收提明细")
+        
+        let controller = ReminderDetailsViewController()
+        self.navigationController?.pushViewController(controller, animated: false)
+    
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,34 +69,51 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 15
+
+        if UI_IS_IPONE5 {
+            return _k_h-285-74
         }
-        return 75
+        return _k_h-335-74
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = LINE_COLOR
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 12
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        var messageCell:MessageCell! = tableView.dequeueReusableCell(withIdentifier:"MessageCell") as? MessageCell
-        if messageCell == nil {
-            messageCell = MessageCell.init(style: .default, reuseIdentifier: "MessageCell")
+        var redPacketCell:RedPacketCell! = tableView.dequeueReusableCell(withIdentifier:"RedPacketCell") as? RedPacketCell
+        if redPacketCell == nil {
+            redPacketCell = RedPacketCell.init(style: .default, reuseIdentifier: "RedPacketCell")
         }
-        if indexPath.row == 0 {
-            
-            messageCell.cellType = MessageCellType(cellType: .Header)
-            return messageCell
-        }
-        
-        messageCell.cellType = MessageCellType(cellType: .Default)
-        messageCell.selectionStyle = .none
-        
-        return messageCell!
+
+        redPacketCell.delegate = self
+        redPacketCell.selectionStyle = .none
+        return redPacketCell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
+    }
+    
+    
+    func withdrawBtnClick(){
+        
+        let controller = WithdrawViewController()
+        self.navigationController?.pushViewController(controller, animated:false)
+        
+//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "点击提现")
+    }
+    
+    func bottomBtnClick(){
+        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "关于现金红包")
     }
     
     override func didReceiveMemoryWarning() {
