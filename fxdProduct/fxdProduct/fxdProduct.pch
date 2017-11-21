@@ -50,6 +50,7 @@
 #import "BaseResultModel.h"
 #import "FXDWebViewController.h"
 #import "FXDBaseTabBarVCModule.h"
+#import "UIFont+YX_Font.h"
 
 #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0
