@@ -8,11 +8,13 @@
 
 import UIKit
 
+typealias ValiddDCardNum = (_ idNum : String) -> Void
 class IdentitiesOfTradeTableViewCell: UITableViewCell,UITextFieldDelegate{
     
     var titleLabel : UILabel?
     var contentTextfield : UITextField?
-    
+    var validdDCardNum : ValiddDCardNum?
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,6 +53,7 @@ extension IdentitiesOfTradeTableViewCell{
         contentTextfield?.textColor = UI_MAIN_COLOR
         contentTextfield?.font = UIFont.yx_systemFont(ofSize: 14)
         contentTextfield?.delegate = self
+        contentTextfield?.textAlignment = NSTextAlignment.right
         contentTextfield?.keyboardType = UIKeyboardType.asciiCapable
         self.addSubview(contentTextfield!)
         contentTextfield?.snp.makeConstraints({ (make) in
@@ -61,14 +64,27 @@ extension IdentitiesOfTradeTableViewCell{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if CheckUtils.checkUserIdCard(textField.text) {
+        if CheckUtils.accurateVerifyIDCardNumber(textField.text) {
             textField.endEditing(true)
-        }else{
-            textField.endEditing(false)
+            if (self.validdDCardNum != nil) {
+                self.validdDCardNum!(textField.text!)
+            }
         }
     }
 
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let cs = NSCharacterSet.init(charactersIn: IDCardNum).inverted
+        let filtered = (string.components(separatedBy: cs) as NSArray ).componentsJoined(by: "")
+        let resultStr:String = "\(textField.text ?? "")" + "\(string)"
+        if resultStr.count > 18 {
+            return false
+        }else{
+            if filtered != string{
+                return false
+            }
+        }
+        return true
+    }
 }
 
 

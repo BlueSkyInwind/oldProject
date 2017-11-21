@@ -675,6 +675,8 @@
 		84F87F441FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F421FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift */; };
 		84F87F471FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F461FC3CD6600F1C5CD /* UIFont+YX_Font.m */; };
 		84F87F481FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F461FC3CD6600F1C5CD /* UIFont+YX_Font.m */; };
+		84F87F4B1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */; };
+		84F87F4C1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */; };
 		84FA3F571F53AA5D00C8ABED /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */; };
 		CC0346261F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0346241F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m */; };
 		CC0346271F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0346251F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib */; };
@@ -2226,6 +2228,8 @@
 		84F87F421FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitiesOfTradeTableViewCell.swift; sourceTree = "<group>"; };
 		84F87F451FC3CD6600F1C5CD /* UIFont+YX_Font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+YX_Font.h"; sourceTree = "<group>"; };
 		84F87F461FC3CD6600F1C5CD /* UIFont+YX_Font.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+YX_Font.m"; sourceTree = "<group>"; };
+		84F87F491FC4102500F1C5CD /* PayPasswordInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayPasswordInputView.h; sourceTree = "<group>"; };
+		84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayPasswordInputView.m; sourceTree = "<group>"; };
 		CC0346231F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageActivityImageDisplayModule.h; sourceTree = "<group>"; };
 		CC0346241F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageActivityImageDisplayModule.m; sourceTree = "<group>"; };
 		CC0346251F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomepageActivityImageDisplayModule.xib; sourceTree = "<group>"; };
@@ -5039,6 +5043,8 @@
 				CC5FC59F1FC2742700DB0D78 /* RedPacketCell.swift */,
 				84F87F421FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift */,
 				84F87F3F1FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift */,
+				84F87F491FC4102500F1C5CD /* PayPasswordInputView.h */,
+				84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */,
 			);
 			path = RedPacketWithCash;
 			sourceTree = "<group>";
@@ -6117,6 +6123,7 @@
 				63A24C5D1BE063A90036E8EF /* NSArray+Extend.m in Sources */,
 				63B65DEC1D518D8B00207231 /* UserProtocolVCModule.m in Sources */,
 				6379641E1CAD1BE0002A5910 /* LivenessIdentity.m in Sources */,
+				84F87F4B1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */,
 				638A16F11E517D9F00AB8AB6 /* LOTAnimatableColorValue.m in Sources */,
 				63E1ECD21E1B8FAA0079A2F8 /* TAPageControl.m in Sources */,
 				638A16F51E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m in Sources */,
@@ -6307,6 +6314,7 @@
 				CC0DF99F1EA5B1090024841A /* NSData+YYAdd.m in Sources */,
 				CC0DF9A01EA5B1090024841A /* LOTAnimatableBoundsValue.m in Sources */,
 				CC0DF9A11EA5B1090024841A /* RegionCodeBaseClass.m in Sources */,
+				84F87F4C1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */,
 				CC0DF9A21EA5B1090024841A /* LOTAnimatableLayer.m in Sources */,
 				CC5FC5A41FC2AF4700DB0D78 /* WithdrawViewController.swift in Sources */,
 				CC0DF9A31EA5B1090024841A /* NSNumber+YYAdd.m in Sources */,

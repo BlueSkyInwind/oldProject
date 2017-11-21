@@ -28,6 +28,8 @@ let APPLICATION_backgroundColor = UIColor.init(red: 0.95, green: 0.95, blue: 0.9
 let  _k_w = UIScreen.main.bounds.size.width
 let  _k_h = UIScreen.main.bounds.size.height
 
+let IDCardNum = "0123456789Xx"
+
 let UI_IS_IPONE = (UIDevice.current.userInterfaceIdiom == .phone)
 let UI_IS_IPONE5 = (UI_IS_IPONE && _k_h == 568.0)
 let UI_IS_IPONE6P = (UI_IS_IPONE && _k_h == 736.0)
@@ -38,3 +40,6 @@ let UI_IS_IPHONEX = (UI_IS_IPONE && _k_h == 812.0)
 let SalaryLoan = "P001002"   //工薪贷平台
 let RapidLoan = "P001004"   //急速贷平台
 let DeriveRapidLoan = "P001006"   //急速贷衍生（30天）平台
+
+
+
