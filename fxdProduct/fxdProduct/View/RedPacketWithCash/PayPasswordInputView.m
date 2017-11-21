@@ -34,6 +34,7 @@
     _pwdTextField.alpha = 0;
     _pwdTextField.delegate = self;
     _pwdTextField.keyboardType = UIKeyboardTypeNumberPad;
+    _pwdTextField.becomeFirstResponder;
     [self addSubview:_pwdTextField];
     
     CGFloat width = self.bounds.size.width/PWD_COUNT;
@@ -82,6 +83,7 @@
     if (totalString.length == 6) {
         if (_completeHandle) {
             _completeHandle(totalString);
+            [textField endEditing:true];
         }
     }
     return YES;
@@ -93,7 +95,10 @@
         UILabel * dotLabel = (UILabel*)[dataArr objectAtIndex:i];
         if (dotLabel.tag  == (count-1) + 900) {
             dotLabel.hidden = NO;
-            dotLabel.text = charStr;
+            //显示的时候，赋值
+            if (_isEnsconce) {
+                dotLabel.text = charStr;
+            }
         }
     }
 }

@@ -422,6 +422,8 @@
 		841BE5C91F17829D00BABD04 /* LoginStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C81F17829D00BABD04 /* LoginStatusView.m */; };
 		841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
 		841E66EF1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
+		84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */; };
+		84230CFE1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */; };
 		842C0B531ED5909E00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
 		842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
 		842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B581ED599DE00366D11 /* LoginViewController.xib */; };
@@ -2033,6 +2035,7 @@
 		841BE5C71F17829D00BABD04 /* LoginStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginStatusView.h; sourceTree = "<group>"; };
 		841BE5C81F17829D00BABD04 /* LoginStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginStatusView.m; sourceTree = "<group>"; };
 		841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
+		84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPayPasswordVerifyView.swift; sourceTree = "<group>"; };
 		842C0B511ED5909E00366D11 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		842C0B521ED5909E00366D11 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		842C0B581ED599DE00366D11 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -2586,8 +2589,8 @@
 				1A133F191C1AD1EA0027749B /* HelpViewCell.m */,
 				636B1B901C2CF57500450358 /* HelpViewCell.xib */,
 				1A686DAD1C1E961C009227A9 /* NextViewCell.h */,
-				1A686DAE1C1E961C009227A9 /* NextViewCell.m */,
 				636B1B8E1C2A416500450358 /* NextViewCell.xib */,
+				1A686DAE1C1E961C009227A9 /* NextViewCell.m */,
 				0F6AAF361C30D8950060F137 /* MyCardCell.h */,
 				0F6AAF371C30D8950060F137 /* MyCardCell.m */,
 				0F6AAF381C30D8950060F137 /* MyCardCell.xib */,
@@ -5045,6 +5048,7 @@
 				84F87F3F1FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift */,
 				84F87F491FC4102500F1C5CD /* PayPasswordInputView.h */,
 				84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */,
+				84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */,
 			);
 			path = RedPacketWithCash;
 			sourceTree = "<group>";
@@ -5787,6 +5791,7 @@
 				638A16F31E517D9F00AB8AB6 /* LOTAnimatablePointValue.m in Sources */,
 				63878FE51C1519CD008E1CF9 /* FXD_Utility.m in Sources */,
 				1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */,
+				84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
 				63F254921E49CFE800852CF1 /* LoanProcessCell.m in Sources */,
 				634830F41CBB82C30005C4CD /* CustomerBaseInfoResult.m in Sources */,
 				635AB7961BE2FE6600C32919 /* CashBaseClass.m in Sources */,
@@ -6433,6 +6438,7 @@
 				CCE3BE1A1ED2D36E004C35A4 /* SendSmsModel.m in Sources */,
 				CC0DFA041EA5B1090024841A /* NSString+Password.m in Sources */,
 				CC0DFA051EA5B1090024841A /* HG_OpenAccountAddBankCardModules.m in Sources */,
+				84230CFE1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
 				CC0DFA071EA5B1090024841A /* ApprovalAmountExt.m in Sources */,
 				CC0DFA0A1EA5B1090024841A /* LabelCell.m in Sources */,
 				CC0DFA0B1EA5B1090024841A /* RateModel.m in Sources */,

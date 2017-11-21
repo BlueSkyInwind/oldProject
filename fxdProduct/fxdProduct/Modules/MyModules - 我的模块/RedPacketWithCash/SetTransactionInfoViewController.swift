@@ -21,17 +21,18 @@ import UIKit
     case modificationTradePassword_Type
 }
 
-class SetTransactionInfoViewController: BaseViewController {
+class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyViewDelegate{
     
     var exhibitionType:SetExhibitionType?
     var identitiesOfTradeView:SetIdentitiesOfTradeView?
+    var payPasswordVerifyView:SetPayPasswordVerifyView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         addBackItemRoot()
         self.view.backgroundColor = UIColor.white
-        exhibitionType = .IDCardNumber_Type
+        exhibitionType = .verificationCode_Type
         configureView()
     }
     
@@ -42,6 +43,7 @@ class SetTransactionInfoViewController: BaseViewController {
             setIDCardView()
         case .verificationCode_Type?:
             self.title = "设置交易密码"
+            setVerificationCodeView()
         case .setTradePassword_Type?:
             self.title = "设置交易密码"
         case .modificationTradePassword_Type?:
@@ -61,6 +63,23 @@ class SetTransactionInfoViewController: BaseViewController {
         identitiesOfTradeView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
         })
+    }
+    
+    func setVerificationCodeView()  {
+        payPasswordVerifyView = SetPayPasswordVerifyView.init(frame: CGRect.zero)
+        payPasswordVerifyView?.delegate = self
+        self.view.addSubview(payPasswordVerifyView!)
+        let height = obtainBarHeight_New(vc: self)
+        payPasswordVerifyView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(height)
+            make.left.right.bottom.equalTo(0)
+        })
+    }
+    
+
+    //MARK: SetPayPasswordVerifyViewDelegate
+    func sendButtonClick() {
+
     }
     
     
