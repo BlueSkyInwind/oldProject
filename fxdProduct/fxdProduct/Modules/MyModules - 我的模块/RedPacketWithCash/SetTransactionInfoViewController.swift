@@ -23,13 +23,15 @@ import UIKit
 
 class SetTransactionInfoViewController: BaseViewController {
     
-     var exhibitionType:SetExhibitionType?
+    var exhibitionType:SetExhibitionType?
     var identitiesOfTradeView:SetIdentitiesOfTradeView?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        addBackItemRoot()
+        self.view.backgroundColor = UIColor.white
+        exhibitionType = .IDCardNumber_Type
         configureView()
     }
     
@@ -37,6 +39,7 @@ class SetTransactionInfoViewController: BaseViewController {
         switch exhibitionType {
         case .IDCardNumber_Type?:
             self.title = "设置交易身份"
+            setIDCardView()
         case .verificationCode_Type?:
             self.title = "设置交易密码"
         case .setTradePassword_Type?:
@@ -47,11 +50,19 @@ class SetTransactionInfoViewController: BaseViewController {
         }
     }
     
-    func SetIDCardView()  {
-        
-        identitiesOfTradeView = SetIdentitiesOfTradeView.init(frame: <#T##CGRect#>)
-        
+    /// 身份证效验界面
+    func setIDCardView()  {
+        identitiesOfTradeView = SetIdentitiesOfTradeView.init(frame: CGRect.zero)
+        identitiesOfTradeView?.nextClick = ({ () in
+            //下一个按钮点击
+            
+        })
+        self.view.addSubview(identitiesOfTradeView!)
+        identitiesOfTradeView?.snp.makeConstraints({ (make) in
+            make.edges.equalTo(self.view)
+        })
     }
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -59,7 +70,6 @@ class SetTransactionInfoViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 

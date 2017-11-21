@@ -82,8 +82,12 @@
 #pragma mark 我的页面中间部分点击事件
 -(void)redPacketViewTap{
     
-    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
-    [self.navigationController pushViewController:controller animated:false];
+//    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
+//    [self.navigationController pushViewController:controller animated:false];
+    
+    SetTransactionInfoViewController * vc =  [[SetTransactionInfoViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:true];
+
 //    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"现金红包"];
 
 }

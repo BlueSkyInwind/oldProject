@@ -38,7 +38,7 @@ class SetIdentitiesOfTradeView: UIView,UITableViewDelegate,UITableViewDataSource
 extension SetIdentitiesOfTradeView {
     
     func setUpUI() -> Void {
-        contentTableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
+        contentTableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.grouped)
         contentTableView?.delegate = self
         contentTableView?.dataSource = self
         self.addSubview(contentTableView!)
@@ -56,6 +56,7 @@ extension SetIdentitiesOfTradeView {
         let str = "填写您的身份证号码，验证身份"
         let attati : NSMutableAttributedString = NSMutableAttributedString.init(string: str, attributes: [:])
         attati.addAttributes([NSAttributedStringKey.foregroundColor:UI_MAIN_COLOR], range: NSMakeRange(4, 5))
+        headerLabel.attributedText = attati
         headerView.addSubview(headerLabel)
         headerLabel.snp.makeConstraints { (make) in
             make.center.equalTo(headerView.snp.center)
@@ -91,6 +92,7 @@ extension SetIdentitiesOfTradeView {
         nextButton?.layer.cornerRadius = 5
         nextButton?.clipsToBounds = true
         nextButton?.backgroundColor = UI_MAIN_COLOR
+        nextButton?.setTitle("下一步", for: UIControlState.normal)
         nextButton?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 18)
         nextButton?.addTarget(self, action: #selector(nextBtnClick), for: UIControlEvents.touchUpInside)
         footerView.addSubview(nextButton!)
