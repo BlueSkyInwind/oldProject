@@ -667,6 +667,8 @@
 		84ED5B741F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED5B711F4AC9F6004C0A59 /* UnfoldTableViewCell.m */; };
 		84ED5B751F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B721F4AC9F6004C0A59 /* UnfoldTableViewCell.xib */; };
 		84ED5B761F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B721F4AC9F6004C0A59 /* UnfoldTableViewCell.xib */; };
+		84F87F3D1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F3C1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift */; };
+		84F87F3E1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F3C1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift */; };
 		84FA3F571F53AA5D00C8ABED /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */; };
 		CC0346261F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0346241F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m */; };
 		CC0346271F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0346251F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib */; };
@@ -2213,6 +2215,7 @@
 		84ED5B701F4AC9F6004C0A59 /* UnfoldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnfoldTableViewCell.h; sourceTree = "<group>"; };
 		84ED5B711F4AC9F6004C0A59 /* UnfoldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnfoldTableViewCell.m; sourceTree = "<group>"; };
 		84ED5B721F4AC9F6004C0A59 /* UnfoldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnfoldTableViewCell.xib; sourceTree = "<group>"; };
+		84F87F3C1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTransactionInfoViewController.swift; sourceTree = "<group>"; };
 		CC0346231F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageActivityImageDisplayModule.h; sourceTree = "<group>"; };
 		CC0346241F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageActivityImageDisplayModule.m; sourceTree = "<group>"; };
 		CC0346251F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomepageActivityImageDisplayModule.xib; sourceTree = "<group>"; };
@@ -3416,9 +3419,6 @@
 				634795EE1D38BED700EC4027 /* AuthorizationViewController.h */,
 				634795EF1D38BED700EC4027 /* AuthorizationViewController.m */,
 				CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */,
-				CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */,
-				CC5FC5A21FC2AF4700DB0D78 /* WithdrawViewController.swift */,
-				CC5FC5AD1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift */,
 			);
 			path = SubViewController;
 			sourceTree = "<group>";
@@ -4355,6 +4355,7 @@
 			children = (
 				841BE5C31F177BDB00BABD04 /* UserLevel */,
 				63811AF71B8EB14F008F605B /* SubViewController */,
+				84F87F3B1FC3BAB100F1C5CD /* RedPacketWithCash */,
 				63FF48471B6F036F009E384C /* MyViewController.h */,
 				63FF48481B6F036F009E384C /* MyViewController.m */,
 				63FF48491B6F036F009E384C /* MyViewController.xib */,
@@ -4937,6 +4938,17 @@
 				84ED5B571F4AB9E7004C0A59 /* mx_refresh@2x.png */,
 			);
 			path = resources;
+			sourceTree = "<group>";
+		};
+		84F87F3B1FC3BAB100F1C5CD /* RedPacketWithCash */ = {
+			isa = PBXGroup;
+			children = (
+				CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */,
+				CC5FC5A21FC2AF4700DB0D78 /* WithdrawViewController.swift */,
+				CC5FC5AD1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift */,
+				84F87F3C1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift */,
+			);
+			path = RedPacketWithCash;
 			sourceTree = "<group>";
 		};
 		CC4BB60C1F17709D0027A0AA /* MineView */ = {
@@ -6098,6 +6110,7 @@
 				635B0BE11DF157EA008EAFD1 /* DetailViewController.m in Sources */,
 				63FF48401B6F0322009E384C /* HomePageVCModules.m in Sources */,
 				CC6F06901F7B8D3600FA889E /* ShanLinWebVCModules.m in Sources */,
+				84F87F3D1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift in Sources */,
 				0FEACE201CA0E2450027859A /* TelPhoneCompanyCell.m in Sources */,
 				8438F70F1EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
 				63FC24F51D98F7E9006F58F3 /* YYTextSelectionView.m in Sources */,
@@ -6395,6 +6408,7 @@
 				CC0DFA071EA5B1090024841A /* ApprovalAmountExt.m in Sources */,
 				CC0DFA0A1EA5B1090024841A /* LabelCell.m in Sources */,
 				CC0DFA0B1EA5B1090024841A /* RateModel.m in Sources */,
+				84F87F3E1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift in Sources */,
 				CC0DFA0C1EA5B1090024841A /* UIPasteboard+YYText.m in Sources */,
 				CC0DFA0D1EA5B1090024841A /* TAAbstractDotView.m in Sources */,
 				CC0DFA0E1EA5B1090024841A /* GetMoneyHistoryBaseClass.m in Sources */,

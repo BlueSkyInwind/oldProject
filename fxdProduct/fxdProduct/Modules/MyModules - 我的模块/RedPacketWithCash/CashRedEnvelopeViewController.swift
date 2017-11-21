@@ -29,7 +29,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         aBarbi.setTitleTextAttributes([NSAttributedStringKey.foregroundColor:RedPacket_COLOR,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)], for: .normal)
         self.navigationItem.rightBarButtonItem = aBarbi
        
-        
     }
    
     func configureView()  {
@@ -87,7 +86,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         var redPacketCell:RedPacketCell! = tableView.dequeueReusableCell(withIdentifier:"RedPacketCell") as? RedPacketCell
         if redPacketCell == nil {
             redPacketCell = RedPacketCell.init(style: .default, reuseIdentifier: "RedPacketCell")
@@ -102,7 +100,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
         
     }
-    
     
     func withdrawBtnClick(){
         
@@ -121,7 +118,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
