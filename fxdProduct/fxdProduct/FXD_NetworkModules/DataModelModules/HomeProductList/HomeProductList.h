@@ -105,6 +105,8 @@
 @property (nonatomic , copy) NSString              * productName;
 //产品标签
 @property (nonatomic , copy) NSArray              * tags;
+//产品提示
+@property (nonatomic , copy) NSString              * tips;
 
 @end
 
