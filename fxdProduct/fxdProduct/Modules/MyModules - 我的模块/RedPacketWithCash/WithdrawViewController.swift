@@ -117,7 +117,10 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
     }
     @objc func withdrawBtnClick(){
         
-        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "提现按钮点击")
+        let controller = WithdrawDetailsViewController()
+        self.navigationController?.pushViewController(controller, animated: false)
+        
+//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "提现按钮点击")
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
@@ -125,7 +128,19 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        return 68
+    }
+    
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = LINE_COLOR
+        return headerView
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 12
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -136,7 +151,7 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }
         cell.selectionStyle = .none
         if indexPath.row == 0 {
-             cell.cellType = CurrentInfoCellType(cellType: .Default)
+            cell.cellType = CurrentInfoCellType(cellType: .Default)
             cell.leftLabel?.text = "提现金额"
             cell.rightLabel?.text = "¥180.05"
             

@@ -47,7 +47,7 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         if indexPath.row == 0 {
             return 15
         }
-        return 75
+        return 68
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

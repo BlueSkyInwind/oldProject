@@ -42,12 +42,23 @@ extension WithdrawHeaderView{
         let titleLabel = UILabel()
         titleLabel.text = "提现申请已提交"
         titleLabel.textColor = UIColor.black
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.font = UIFont.yx_systemFont(ofSize: 16)
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(headerImage.snp.bottom).offset(18)
         }
         
+    }
+    
+    override var  frame:(CGRect){
+        didSet{
+            let k_w = UIScreen.main.bounds.size.width
+            var newFrame = CGRect(x:0,y:0,width:k_w,height:194)
+            if UI_IS_IPONE5 {
+                newFrame = CGRect(x:0,y:0,width:k_w,height:194)
+            }
+            super.frame = newFrame
+        }
     }
 }

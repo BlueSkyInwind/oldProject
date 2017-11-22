@@ -1111,6 +1111,8 @@
 		CC3BCC151FBABEC50042A738 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC131FBABEC50042A738 /* MessageCell.swift */; };
 		CC49BA031FC516D000232041 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */; };
 		CC49BA041FC516D000232041 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */; };
+		CC49BA061FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */; };
+		CC49BA071FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */; };
 		CC4BB60F1F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
 		CC4BB6101F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
 		CC5D70271ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
@@ -2257,6 +2259,7 @@
 		CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageViewController.swift; sourceTree = "<group>"; };
 		CC3BCC131FBABEC50042A738 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawHeaderView.swift; sourceTree = "<group>"; };
+		CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailsViewController.swift; sourceTree = "<group>"; };
 		CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelDescriptionView.h; sourceTree = "<group>"; };
 		CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelDescriptionView.m; sourceTree = "<group>"; };
 		CC5D70251ED4400600A074AF /* CashModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashModel.h; sourceTree = "<group>"; };
@@ -4969,6 +4972,7 @@
 				CC5FC5A21FC2AF4700DB0D78 /* WithdrawViewController.swift */,
 				CC5FC5AD1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift */,
 				84F87F3C1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift */,
+				CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */,
 			);
 			path = RedPacketWithCash;
 			sourceTree = "<group>";
@@ -5952,6 +5956,7 @@
 				63553B231E61825300B2C1FF /* JXLParse.m in Sources */,
 				638A16FC1E517D9F00AB8AB6 /* NSValue+Compat.m in Sources */,
 				CC6F06851F750A5B00FA889E /* CapitalListModel.m in Sources */,
+				CC49BA061FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */,
 				637636E91D76A72A00E93289 /* LewPopupViewAnimationFade.m in Sources */,
 				842CA0E31F453B4A00A2150B /* HomeParam.m in Sources */,
 				63553B151E5EEF1C00B2C1FF /* FaceIDOCRFront.m in Sources */,
@@ -6358,6 +6363,7 @@
 				CCDEDF6A1EEA9271009CEC32 /* ProductProtocolParamModel.m in Sources */,
 				8438F7191EE163690089E121 /* ChangePasswordViewModel.m in Sources */,
 				84A5696E1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
+				CC49BA071FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */,
 				CC0DF9BD1EA5B1090024841A /* WithdrawalsVCModule.m in Sources */,
 				CC0DF9BE1EA5B1090024841A /* Custom_BaseInfoResult.m in Sources */,
 				CC0DF9BF1EA5B1090024841A /* NSParagraphStyle+YYText.m in Sources */,

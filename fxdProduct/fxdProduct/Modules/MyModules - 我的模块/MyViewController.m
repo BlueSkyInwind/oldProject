@@ -94,7 +94,9 @@
 
 -(void)couponViewTap{
     
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"优惠券"];
+    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:false];
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"优惠券"];
 
 }
 
