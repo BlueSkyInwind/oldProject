@@ -48,14 +48,15 @@
         }else{
             dot.frame = CGRectMake(i*width + 2, 2, self.bounds.size.height - 4, self.bounds.size.height - 4);
             dot.textAlignment = NSTextAlignmentCenter;
-            dot.backgroundColor = [UIColor whiteColor];
+            dot.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1];
+            dot.textColor = UI_MAIN_COLOR
         }
         dot.hidden = true;
         [self addSubview:dot];
         [dataArr addObject:dot];
 
         UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(i*width, self.bounds.size.height - 2, width - 2, 2.0f)];
-        line.backgroundColor = [UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1.];
+        line.backgroundColor = [UIColor blackColor];
         [self addSubview:line];
     }
 }

@@ -133,7 +133,6 @@ extension SetPayPasswordVerifyView{
         })
         self.addSubview(payPasswordInputView!)
         
-        
         footerDisplayView = UIView.init(frame: CGRect.init(x: 0, y: 150, width: _k_w, height: 100))
         footerDisplayView?.backgroundColor = PayPasswordBackColor_COLOR
         self.addSubview(footerDisplayView!);
