@@ -1097,6 +1097,8 @@
 		CC3BCC121FBABE7A0042A738 /* MyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */; };
 		CC3BCC141FBABEC50042A738 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC131FBABEC50042A738 /* MessageCell.swift */; };
 		CC3BCC151FBABEC50042A738 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC131FBABEC50042A738 /* MessageCell.swift */; };
+		CC49BA031FC516D000232041 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */; };
+		CC49BA041FC516D000232041 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */; };
 		CC4BB60F1F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
 		CC4BB6101F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
 		CC5D70271ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
@@ -2234,6 +2236,7 @@
 		CC3A7F301ED52A3200F30289 /* HG_ReplaceBankCardVCModules.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HG_ReplaceBankCardVCModules.xib; sourceTree = "<group>"; };
 		CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageViewController.swift; sourceTree = "<group>"; };
 		CC3BCC131FBABEC50042A738 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawHeaderView.swift; sourceTree = "<group>"; };
 		CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelDescriptionView.h; sourceTree = "<group>"; };
 		CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelDescriptionView.m; sourceTree = "<group>"; };
 		CC5D70251ED4400600A074AF /* CashModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashModel.h; sourceTree = "<group>"; };
@@ -2554,6 +2557,7 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CC49BA011FC5166000232041 /* WithdrawView */,
 				CC5FC5A91FC2CB1800DB0D78 /* ReminderDetailsView */,
 				CC85C62A1FBED2BE0090A7E7 /* RedPacketView */,
 				CC989C321F4D86E1000CDACF /* AuthenticationCenterView */,
@@ -4939,6 +4943,15 @@
 			path = resources;
 			sourceTree = "<group>";
 		};
+		CC49BA011FC5166000232041 /* WithdrawView */ = {
+			isa = PBXGroup;
+			children = (
+				CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */,
+			);
+			name = WithdrawView;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		CC4BB60C1F17709D0027A0AA /* MineView */ = {
 			isa = PBXGroup;
 			children = (
@@ -6115,6 +6128,7 @@
 				636B1B591C23BB4100450358 /* GetMoneyHistoryResult.m in Sources */,
 				CC6F06931F7DF6C000FA889E /* ShanLinBackAlertView.swift in Sources */,
 				CC5FC5A01FC2742700DB0D78 /* RedPacketCell.swift in Sources */,
+				CC49BA031FC516D000232041 /* WithdrawHeaderView.swift in Sources */,
 				84ED5B6B1F4AC606004C0A59 /* SeniorCertificationView.m in Sources */,
 				CCF8031C1ED3D043003B7975 /* AccountHSServiceModel.m in Sources */,
 				638A170B1E517D9F00AB8AB6 /* LOTAnimationView.m in Sources */,
@@ -6476,6 +6490,7 @@
 				CC0DFA5A1EA5B1090024841A /* SMSViewModel.m in Sources */,
 				CC0DFA5B1EA5B1090024841A /* GetMoneyStateUserBean.m in Sources */,
 				CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */,
+				CC49BA041FC516D000232041 /* WithdrawHeaderView.swift in Sources */,
 				CCF43B041EDE672D00CFD72C /* getBidStatus.m in Sources */,
 				CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */,
 				CC0DFA601EA5B1090024841A /* CADisplayLink.m in Sources */,

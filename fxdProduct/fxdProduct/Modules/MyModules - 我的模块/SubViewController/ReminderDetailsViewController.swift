@@ -44,6 +44,9 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 15
+        }
         return 75
     }
     
@@ -52,6 +55,17 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         if cell == nil {
             cell = ReminderDetailsCell.init(style: .default, reuseIdentifier: "ReminderDetailsCell")
         }
+        
+        var messageCell:MessageCell! = tableView.dequeueReusableCell(withIdentifier:"MessageCell") as? MessageCell
+        if messageCell == nil {
+            messageCell = MessageCell.init(style: .default, reuseIdentifier: "MessageCell")
+        }
+        if indexPath.row == 0 {
+            
+            messageCell.cellType = MessageCellType(cellType: .Header)
+            return messageCell
+        }
+
         cell.titleLabel?.text = "提现"
         cell.timeLabel?.text = "2017-09-08 16：53"
         cell.moneyLabel?.text = "-50.00"
