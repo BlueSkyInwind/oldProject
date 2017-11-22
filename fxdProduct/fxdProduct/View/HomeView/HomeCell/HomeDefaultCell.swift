@@ -844,10 +844,10 @@ extension HomeDefaultCell{
         tipLable.textColor = UIColor.red
         productFirstBgImage?.addSubview(tipLable)
         tipLable.snp.makeConstraints { (make) in
-//            make.centerX.equalTo((productFirstBgImage?.snp.centerX)!)
             make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-19)
             make.left.equalTo((productFirstBgImage?.snp.left)!).offset(15)
             make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-15)
+            make.height.equalTo(16)
         }
     
     if UI_IS_IPONE5 {
