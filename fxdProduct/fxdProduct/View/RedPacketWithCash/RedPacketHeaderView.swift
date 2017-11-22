@@ -102,7 +102,6 @@ extension RedPacketHeaderView{
     }
     
     override var  frame:(CGRect){
-        
         didSet{
             let k_w = UIScreen.main.bounds.size.width
             var newFrame = CGRect(x:0,y:0,width:k_w,height:335)
@@ -110,7 +109,6 @@ extension RedPacketHeaderView{
                 newFrame = CGRect(x:0,y:0,width:k_w,height:285)
             }
             super.frame = newFrame
-            
         }
     }
 }

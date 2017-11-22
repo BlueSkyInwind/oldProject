@@ -422,6 +422,8 @@
 		841BE5C91F17829D00BABD04 /* LoginStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C81F17829D00BABD04 /* LoginStatusView.m */; };
 		841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
 		841E66EF1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
+		84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */; };
+		84230CFE1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */; };
 		842C0B531ED5909E00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
 		842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
 		842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C0B581ED599DE00366D11 /* LoginViewController.xib */; };
@@ -667,6 +669,16 @@
 		84ED5B741F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED5B711F4AC9F6004C0A59 /* UnfoldTableViewCell.m */; };
 		84ED5B751F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B721F4AC9F6004C0A59 /* UnfoldTableViewCell.xib */; };
 		84ED5B761F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B721F4AC9F6004C0A59 /* UnfoldTableViewCell.xib */; };
+		84F87F3D1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F3C1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift */; };
+		84F87F3E1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F3C1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift */; };
+		84F87F401FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F3F1FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift */; };
+		84F87F411FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F3F1FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift */; };
+		84F87F431FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F421FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift */; };
+		84F87F441FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F421FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift */; };
+		84F87F471FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F461FC3CD6600F1C5CD /* UIFont+YX_Font.m */; };
+		84F87F481FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F461FC3CD6600F1C5CD /* UIFont+YX_Font.m */; };
+		84F87F4B1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */; };
+		84F87F4C1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */; };
 		84FA3F571F53AA5D00C8ABED /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */; };
 		CC0346261F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0346241F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m */; };
 		CC0346271F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0346251F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib */; };
@@ -2025,6 +2037,7 @@
 		841BE5C71F17829D00BABD04 /* LoginStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginStatusView.h; sourceTree = "<group>"; };
 		841BE5C81F17829D00BABD04 /* LoginStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginStatusView.m; sourceTree = "<group>"; };
 		841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
+		84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPayPasswordVerifyView.swift; sourceTree = "<group>"; };
 		842C0B511ED5909E00366D11 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		842C0B521ED5909E00366D11 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		842C0B581ED599DE00366D11 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -2215,6 +2228,13 @@
 		84ED5B701F4AC9F6004C0A59 /* UnfoldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnfoldTableViewCell.h; sourceTree = "<group>"; };
 		84ED5B711F4AC9F6004C0A59 /* UnfoldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnfoldTableViewCell.m; sourceTree = "<group>"; };
 		84ED5B721F4AC9F6004C0A59 /* UnfoldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnfoldTableViewCell.xib; sourceTree = "<group>"; };
+		84F87F3C1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTransactionInfoViewController.swift; sourceTree = "<group>"; };
+		84F87F3F1FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetIdentitiesOfTradeView.swift; sourceTree = "<group>"; };
+		84F87F421FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentitiesOfTradeTableViewCell.swift; sourceTree = "<group>"; };
+		84F87F451FC3CD6600F1C5CD /* UIFont+YX_Font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+YX_Font.h"; sourceTree = "<group>"; };
+		84F87F461FC3CD6600F1C5CD /* UIFont+YX_Font.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+YX_Font.m"; sourceTree = "<group>"; };
+		84F87F491FC4102500F1C5CD /* PayPasswordInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayPasswordInputView.h; sourceTree = "<group>"; };
+		84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayPasswordInputView.m; sourceTree = "<group>"; };
 		CC0346231F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageActivityImageDisplayModule.h; sourceTree = "<group>"; };
 		CC0346241F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageActivityImageDisplayModule.m; sourceTree = "<group>"; };
 		CC0346251F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomepageActivityImageDisplayModule.xib; sourceTree = "<group>"; };
@@ -2557,9 +2577,8 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CC49BA011FC5166000232041 /* WithdrawView */,
 				CC5FC5A91FC2CB1800DB0D78 /* ReminderDetailsView */,
-				CC85C62A1FBED2BE0090A7E7 /* RedPacketView */,
+				CC85C62A1FBED2BE0090A7E7 /* RedPacketWithCash */,
 				CC989C321F4D86E1000CDACF /* AuthenticationCenterView */,
 				CC4BB60C1F17709D0027A0AA /* MineView */,
 				8438F7111EE14D2D0089E121 /* MoreView */,
@@ -2573,8 +2592,8 @@
 				1A133F191C1AD1EA0027749B /* HelpViewCell.m */,
 				636B1B901C2CF57500450358 /* HelpViewCell.xib */,
 				1A686DAD1C1E961C009227A9 /* NextViewCell.h */,
-				1A686DAE1C1E961C009227A9 /* NextViewCell.m */,
 				636B1B8E1C2A416500450358 /* NextViewCell.xib */,
+				1A686DAE1C1E961C009227A9 /* NextViewCell.m */,
 				0F6AAF361C30D8950060F137 /* MyCardCell.h */,
 				0F6AAF371C30D8950060F137 /* MyCardCell.m */,
 				0F6AAF381C30D8950060F137 /* MyCardCell.xib */,
@@ -3420,9 +3439,6 @@
 				634795EE1D38BED700EC4027 /* AuthorizationViewController.h */,
 				634795EF1D38BED700EC4027 /* AuthorizationViewController.m */,
 				CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */,
-				CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */,
-				CC5FC5A21FC2AF4700DB0D78 /* WithdrawViewController.swift */,
-				CC5FC5AD1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift */,
 			);
 			path = SubViewController;
 			sourceTree = "<group>";
@@ -3501,6 +3517,8 @@
 				63D43EFB1D41F8380076AC7F /* DataWriteAndRead.m */,
 				63FFFBEC1D86B285000E3C38 /* NSDictionary+NilSafe.h */,
 				63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */,
+				84F87F451FC3CD6600F1C5CD /* UIFont+YX_Font.h */,
+				84F87F461FC3CD6600F1C5CD /* UIFont+YX_Font.m */,
 			);
 			path = FXD_Tools;
 			sourceTree = "<group>";
@@ -4359,6 +4377,7 @@
 			children = (
 				841BE5C31F177BDB00BABD04 /* UserLevel */,
 				63811AF71B8EB14F008F605B /* SubViewController */,
+				84F87F3B1FC3BAB100F1C5CD /* RedPacketWithCash */,
 				63FF48471B6F036F009E384C /* MyViewController.h */,
 				63FF48481B6F036F009E384C /* MyViewController.m */,
 				63FF48491B6F036F009E384C /* MyViewController.xib */,
@@ -4943,13 +4962,15 @@
 			path = resources;
 			sourceTree = "<group>";
 		};
-		CC49BA011FC5166000232041 /* WithdrawView */ = {
+		84F87F3B1FC3BAB100F1C5CD /* RedPacketWithCash */ = {
 			isa = PBXGroup;
 			children = (
-				CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */,
+				CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */,
+				CC5FC5A21FC2AF4700DB0D78 /* WithdrawViewController.swift */,
+				CC5FC5AD1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift */,
+				84F87F3C1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift */,
 			);
-			name = WithdrawView;
-			path = "New Group";
+			path = RedPacketWithCash;
 			sourceTree = "<group>";
 		};
 		CC4BB60C1F17709D0027A0AA /* MineView */ = {
@@ -5021,13 +5042,19 @@
 			path = "ShanLinWebVCModules - 善林";
 			sourceTree = "<group>";
 		};
-		CC85C62A1FBED2BE0090A7E7 /* RedPacketView */ = {
+		CC85C62A1FBED2BE0090A7E7 /* RedPacketWithCash */ = {
 			isa = PBXGroup;
 			children = (
 				CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */,
 				CC5FC59F1FC2742700DB0D78 /* RedPacketCell.swift */,
+				84F87F421FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift */,
+				84F87F3F1FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift */,
+				84F87F491FC4102500F1C5CD /* PayPasswordInputView.h */,
+				84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */,
+				84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */,
+				CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */,
 			);
-			path = RedPacketView;
+			path = RedPacketWithCash;
 			sourceTree = "<group>";
 		};
 		CC989C321F4D86E1000CDACF /* AuthenticationCenterView */ = {
@@ -5768,6 +5795,7 @@
 				638A16F31E517D9F00AB8AB6 /* LOTAnimatablePointValue.m in Sources */,
 				63878FE51C1519CD008E1CF9 /* FXD_Utility.m in Sources */,
 				1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */,
+				84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
 				63F254921E49CFE800852CF1 /* LoanProcessCell.m in Sources */,
 				634830F41CBB82C30005C4CD /* CustomerBaseInfoResult.m in Sources */,
 				635AB7961BE2FE6600C32919 /* CashBaseClass.m in Sources */,
@@ -5793,6 +5821,7 @@
 				CC3BCC111FBABE7A0042A738 /* MyMessageViewController.swift in Sources */,
 				638A16FF1E517D9F00AB8AB6 /* LOTComposition.m in Sources */,
 				638198A51CC0825400E8951E /* SSKeychainQuery.m in Sources */,
+				84F87F401FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift in Sources */,
 				63145AA91CA294B800D04ED8 /* LoginResult.m in Sources */,
 				6313DC1A1BB4F35C00EB45DE /* FXD_UserInfoConfiguration.m in Sources */,
 				84A3801A1FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm in Sources */,
@@ -5851,6 +5880,7 @@
 				63832C8C1CB7530400C6F194 /* NSString+AES.m in Sources */,
 				CC5FC5AB1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift in Sources */,
 				848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
+				84F87F471FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */,
 				84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */,
 				63C50E501E6804950035EE4F /* ReconfrInfoModel.m in Sources */,
 				639E88731CA1371800254216 /* UIApplication+Extend.m in Sources */,
@@ -5898,6 +5928,7 @@
 				63145ABD1CA4E66100D04ED8 /* CustomerCareerBaseClass.m in Sources */,
 				63C50E471E666FF40035EE4F /* Custom_BaseInfoExt.m in Sources */,
 				63F254851E49A45900852CF1 /* HMScanner.m in Sources */,
+				84F87F431FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift in Sources */,
 				CCCB279C1FB2F04500412632 /* ScratchAwardView.m in Sources */,
 				63F0E1BB1CE417FF001251A9 /* NSString+YYAdd.m in Sources */,
 				63FC24F81D98F7E9006F58F3 /* YYTextParser.m in Sources */,
@@ -6101,6 +6132,7 @@
 				63A24C5D1BE063A90036E8EF /* NSArray+Extend.m in Sources */,
 				63B65DEC1D518D8B00207231 /* UserProtocolVCModule.m in Sources */,
 				6379641E1CAD1BE0002A5910 /* LivenessIdentity.m in Sources */,
+				84F87F4B1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */,
 				638A16F11E517D9F00AB8AB6 /* LOTAnimatableColorValue.m in Sources */,
 				63E1ECD21E1B8FAA0079A2F8 /* TAPageControl.m in Sources */,
 				638A16F51E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m in Sources */,
@@ -6111,6 +6143,7 @@
 				635B0BE11DF157EA008EAFD1 /* DetailViewController.m in Sources */,
 				63FF48401B6F0322009E384C /* HomePageVCModules.m in Sources */,
 				CC6F06901F7B8D3600FA889E /* ShanLinWebVCModules.m in Sources */,
+				84F87F3D1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift in Sources */,
 				0FEACE201CA0E2450027859A /* TelPhoneCompanyCell.m in Sources */,
 				8438F70F1EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
 				63FC24F51D98F7E9006F58F3 /* YYTextSelectionView.m in Sources */,
@@ -6190,6 +6223,7 @@
 				84C619D11FA8161F00626411 /* BankListCell.m in Sources */,
 				84A380151FAC1D8D008FB7AF /* MGLiveViewController.m in Sources */,
 				84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */,
+				84F87F481FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */,
 				84C619D31FA8161F00626411 /* PayDisplayCell.m in Sources */,
 				84C619D41FA8161F00626411 /* PayMethodCell.m in Sources */,
 				84C619D51FA8161F00626411 /* PayMoneyCell.m in Sources */,
@@ -6221,6 +6255,7 @@
 				CC0DF95F1EA5B1090024841A /* HistoryScoreModel.m in Sources */,
 				CC0DF9601EA5B1090024841A /* YYTextLayout.m in Sources */,
 				CC0DF9611EA5B1090024841A /* LoginMsgExt.m in Sources */,
+				84F87F411FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift in Sources */,
 				CC0DF9621EA5B1090024841A /* RepayWeeklyRecord.m in Sources */,
 				CC0DF9651EA5B1090024841A /* NSString+MD5Encrypt.m in Sources */,
 				CC0DF9661EA5B1090024841A /* HelpViewCell.m in Sources */,
@@ -6289,6 +6324,7 @@
 				CC0DF99F1EA5B1090024841A /* NSData+YYAdd.m in Sources */,
 				CC0DF9A01EA5B1090024841A /* LOTAnimatableBoundsValue.m in Sources */,
 				CC0DF9A11EA5B1090024841A /* RegionCodeBaseClass.m in Sources */,
+				84F87F4C1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */,
 				CC0DF9A21EA5B1090024841A /* LOTAnimatableLayer.m in Sources */,
 				CC5FC5A41FC2AF4700DB0D78 /* WithdrawViewController.swift in Sources */,
 				CC0DF9A31EA5B1090024841A /* NSNumber+YYAdd.m in Sources */,
@@ -6329,6 +6365,7 @@
 				CC0DF9C11EA5B1090024841A /* pinyin.c in Sources */,
 				CC0DF9C21EA5B1090024841A /* PayNavigationViewController.m in Sources */,
 				CC0DF9C41EA5B1090024841A /* HomePop.m in Sources */,
+				84F87F441FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift in Sources */,
 				CC0DF9C51EA5B1090024841A /* weekRepayModel.m in Sources */,
 				8438F71E1EE165460089E121 /* changePasswordParam.m in Sources */,
 				CC4BB6101F17712E0027A0AA /* LevelDescriptionView.m in Sources */,
@@ -6406,9 +6443,11 @@
 				CCE3BE1A1ED2D36E004C35A4 /* SendSmsModel.m in Sources */,
 				CC0DFA041EA5B1090024841A /* NSString+Password.m in Sources */,
 				CC0DFA051EA5B1090024841A /* HG_OpenAccountAddBankCardModules.m in Sources */,
+				84230CFE1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
 				CC0DFA071EA5B1090024841A /* ApprovalAmountExt.m in Sources */,
 				CC0DFA0A1EA5B1090024841A /* LabelCell.m in Sources */,
 				CC0DFA0B1EA5B1090024841A /* RateModel.m in Sources */,
+				84F87F3E1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift in Sources */,
 				CC0DFA0C1EA5B1090024841A /* UIPasteboard+YYText.m in Sources */,
 				CC0DFA0D1EA5B1090024841A /* TAAbstractDotView.m in Sources */,
 				CC0DFA0E1EA5B1090024841A /* GetMoneyHistoryBaseClass.m in Sources */,

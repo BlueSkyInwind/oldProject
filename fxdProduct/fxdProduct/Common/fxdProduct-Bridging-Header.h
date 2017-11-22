@@ -50,4 +50,8 @@
 #import "ApplicaitonModel.h"
 #import "WithdrawalsVCModule.h"
 #import "DiscountTicketModel.h"
+#import "UIFont+YX_Font.h"
+#import "CheckUtils.h"
+#import "PayPasswordInputView.h"
+
 #endif /* fxdProduct_Bridging_Header_h */

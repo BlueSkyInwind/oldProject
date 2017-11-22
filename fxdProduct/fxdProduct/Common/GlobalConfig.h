@@ -42,6 +42,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define UI_IS_IPHONE4           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 480.0)
 #define UI_IS_IPHONEX           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 812.0)
 #define BarHeightNew [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height
+
 #define UI_IS_IPAD           ([[UIScreen mainScreen] bounds].size.height == 768.0)
 
 #define UI_MAIN_COLOR [UIColor colorWithRed:0/255.0 green:170/255.0 blue:238/255.0 alpha:1]
