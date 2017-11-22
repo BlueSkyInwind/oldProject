@@ -627,9 +627,9 @@
     _useredPacketAmount = [discountAmount floatValue];
     
     if ([discountTicketDetailModel.voucher_type isEqualToString:@"1"]) {
-        discountNumStr = [NSString stringWithFormat:@"抵扣券%@元",discountAmount];
+        discountNumStr = [NSString stringWithFormat:@"抵扣%@元",discountAmount];
     }else if ([discountTicketDetailModel.voucher_type isEqualToString:@"3"]) {
-        discountNumStr = [NSString stringWithFormat:@"折扣券%@元",discountAmount];
+        discountNumStr = [NSString stringWithFormat:@"折扣%@元",discountAmount];
     }
     
     if (_repayListInfo.result.total_amount >= (_repayAmount - _useredPacketAmount)) {
