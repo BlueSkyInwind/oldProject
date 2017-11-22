@@ -34,6 +34,7 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         tableView?.dataSource = self
         tableView?.separatorStyle = .none
         tableView?.backgroundColor = LINE_COLOR
+        tableView?.isScrollEnabled = false
         self.view.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
