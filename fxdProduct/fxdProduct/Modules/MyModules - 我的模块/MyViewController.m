@@ -92,7 +92,6 @@
     
 //    SetTransactionInfoViewController * vc =  [[SetTransactionInfoViewController alloc]init];
 //    [self.navigationController pushViewController:vc animated:true];
-
 //    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"现金红包"];
 
 }

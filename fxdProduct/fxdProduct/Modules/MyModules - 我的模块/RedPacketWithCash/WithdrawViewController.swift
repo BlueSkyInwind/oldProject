@@ -128,14 +128,16 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "重置交易密码")
     }
     @objc func withdrawBtnClick(){
-        popImportPayPasswordView()
-        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "提现按钮点击")
+//        popImportPayPasswordView()
+        let transactionInfoVC = SetTransactionInfoViewController.init()
+        transactionInfoVC.exhibitionType = .IDCardNumber_Type
+        self.navigationController?.pushViewController(transactionInfoVC, animated: true)
+//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "提现按钮点击")
     }
     
     func popImportPayPasswordView()  {
         ImportPayPasswordView.showImportPayPasswordView(self, amountStr: "180.99")
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
