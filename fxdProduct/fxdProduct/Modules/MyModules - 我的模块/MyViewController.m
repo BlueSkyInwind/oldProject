@@ -63,7 +63,7 @@
     [headerBgView addSubview:headerView];
     
     MineMiddleView *middleView = [[MineMiddleView alloc]initWithFrame:CGRectZero];
-    middleView.redPacketNumLabel.text = @"3";
+//    middleView.redPacketNumLabel.text = @"3";
     middleView.couponNumLabel.text = @"3";
     middleView.backgroundColor = [UIColor whiteColor];
     middleView.delegate = self;

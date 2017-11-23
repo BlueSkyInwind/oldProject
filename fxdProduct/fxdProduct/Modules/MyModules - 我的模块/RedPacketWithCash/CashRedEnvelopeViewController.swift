@@ -26,8 +26,9 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     func setNavRightBar(){
         
         let aBarbi = UIBarButtonItem.init(title: "收提明细", style: .plain, target: self, action: #selector(rightClick))
-        aBarbi.setTitleTextAttributes([NSAttributedStringKey.foregroundColor:RedPacket_COLOR,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)], for: .normal)
         self.navigationItem.rightBarButtonItem = aBarbi
+        aBarbi.setTitleTextAttributes([NSAttributedStringKey.foregroundColor:RedPacket_COLOR,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)], for: .normal)
+        aBarbi.setTitleTextAttributes([NSAttributedStringKey.foregroundColor:RedPacket_COLOR,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)], for: .selected)
        
     }
    
@@ -126,12 +127,17 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     }
     
     func bottomBtnClick(){
-        if isWithdraw {
-            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "关于现金红包")
-        }else{
-            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "关于账户余额")
-        }
         
+        let webView = FXDWebViewController()
+    
+        if isWithdraw {
+            webView.urlStr = "https://www.baidu.com"
+//            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "关于现金红包")
+        }else{
+            webView.urlStr = "https://www.taobao.com"
+//            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "关于账户余额")
+        }
+        self.navigationController?.pushViewController(webView, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

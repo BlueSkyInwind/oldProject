@@ -92,7 +92,7 @@ extension CurrentInformationCell{
         rightLabel?.textAlignment = .right
         self.contentView.addSubview(rightLabel!)
         rightLabel?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self).offset(-15)
+            make.right.equalTo(self).offset(-19)
             make.centerY.equalTo(self.snp.centerY)
         })
         //底部的线

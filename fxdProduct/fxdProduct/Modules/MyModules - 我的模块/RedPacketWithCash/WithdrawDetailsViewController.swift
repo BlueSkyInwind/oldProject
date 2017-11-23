@@ -41,7 +41,6 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         tableView?.tableHeaderView = headerView
         
         let withdrawBtn = UIButton()
-//        withdrawBtn.frame = CGRect(x:18,y:56,width:_k_w-36,height:50)
         withdrawBtn.setTitle("完成", for: .normal)
         withdrawBtn.setTitleColor(UIColor.white, for: .normal)
         withdrawBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -49,7 +48,6 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         withdrawBtn.layer.cornerRadius = 5.0
         withdrawBtn.addTarget(self, action: #selector(withdrawBtnClick), for: .touchUpInside)
         self.view.addSubview(withdrawBtn)
-//        tableView?.tableFooterView = withdrawBtn
         withdrawBtn.snp.makeConstraints { (make) in
             make.left.equalTo(self.view).offset(18)
             make.right.equalTo(self.view).offset(-18)
@@ -83,6 +81,15 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         cell.cellType = CurrentInfoCellType(cellType: .Default)
         cell.leftLabel?.text = leftTitleArray?[indexPath.row] as? String
         cell.rightLabel?.text = rightTitleArray?[indexPath.row] as? String
+        cell.rightLabel?.textColor = UI_MAIN_COLOR
+        if indexPath.row == 0 {
+            let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(cell.rightLabel?.text)!)
+            attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
+            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 35), range: NSMakeRange(1,attrstr.length-1))
+            attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: RedPacketMoney_COLOR, range: NSMakeRange(0,1))
+            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 25), range: NSMakeRange(0,1))
+            cell.rightLabel?.attributedText = attrstr
+        }
         return cell
     }
     

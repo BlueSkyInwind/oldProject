@@ -66,6 +66,7 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             return messageCell
         }
 
+        cell.selectionStyle = .none
         cell.titleLabel?.text = "提现"
         cell.timeLabel?.text = "2017-09-08 16：53"
         cell.moneyLabel?.text = "-50.00"
