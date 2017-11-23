@@ -148,7 +148,7 @@ extension SetPayPasswordView {
         })
         
         payPasswordInputView = PayPasswordInputView.init(frame: CGRect.init(x: 15, y: 100, width: _k_w - 30, height: 50))
-        payPasswordInputView?.isEnsconce = true
+        payPasswordInputView?.isEnsconce = false
         payPasswordInputView?.completeHandle = ({[weak self] (inputPwd) in
             if self?.delegate != nil {
                 self?.delegate?.userInputCashPasswordCode(inputPwd!, type: (self?.type)!)
