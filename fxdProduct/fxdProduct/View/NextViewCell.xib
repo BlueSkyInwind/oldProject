@@ -48,7 +48,7 @@
                             <constraint firstAttribute="height" constant="27" id="toQ-TI-HVP"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dots" translatesAutoresizingMaskIntoConstraints="NO" id="ydy-R3-QBA">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dots" translatesAutoresizingMaskIntoConstraints="NO" id="ydy-R3-QBA">
                         <rect key="frame" x="35" y="5" width="18" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="35S-Yv-yFA"/>

@@ -103,6 +103,8 @@
  */
 -(void)couponViewTap{
     
+//    DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
+//    [self.navigationController pushViewController:ticket animated:YES];
     CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
     controller.isWithdraw = true;
     [self.navigationController pushViewController:controller animated:true];
@@ -199,13 +201,8 @@
             [self.navigationController pushViewController:invitationVC animated:true];
         }
             break;
+        
         case 4:
-        {
-            DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
-            [self.navigationController pushViewController:ticket animated:YES];
-        }
-            break;
-        case 5:
         {
             
             MoreViewController *ticket=[[MoreViewController alloc]init];
