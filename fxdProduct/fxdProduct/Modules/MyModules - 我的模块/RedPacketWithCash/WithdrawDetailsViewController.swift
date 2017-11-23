@@ -41,18 +41,19 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         tableView?.tableHeaderView = headerView
         
         let withdrawBtn = UIButton()
-        withdrawBtn.frame = CGRect(x:18,y:56,width:_k_w-36,height:50)
+//        withdrawBtn.frame = CGRect(x:18,y:56,width:_k_w-36,height:50)
         withdrawBtn.setTitle("完成", for: .normal)
         withdrawBtn.setTitleColor(UIColor.white, for: .normal)
         withdrawBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         withdrawBtn.backgroundColor = UI_MAIN_COLOR
         withdrawBtn.layer.cornerRadius = 5.0
         withdrawBtn.addTarget(self, action: #selector(withdrawBtnClick), for: .touchUpInside)
-        tableView?.tableFooterView = withdrawBtn
+        self.view.addSubview(withdrawBtn)
+//        tableView?.tableFooterView = withdrawBtn
         withdrawBtn.snp.makeConstraints { (make) in
             make.left.equalTo(self.view).offset(18)
             make.right.equalTo(self.view).offset(-18)
-            make.top.equalTo(self.view).offset(280)
+            make.top.equalTo(self.view).offset(520)
             make.height.equalTo(50)
         }
         

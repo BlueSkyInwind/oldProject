@@ -17,6 +17,7 @@ import UIKit
 
 class RedPacketCell: UITableViewCell {
 
+    @objc var bottomBtn : UIButton?
     @objc weak var delegate: RedPacketCellDelegate?
     
     override func awakeFromNib() {
@@ -82,13 +83,13 @@ extension RedPacketCell{
             make.left.equalTo(self).offset(25)
             make.top.equalTo(label2).offset(25)
         }
-        let bottomBtn = UIButton()
-        bottomBtn.setTitle("关于现金红包", for: .normal)
-        bottomBtn.setTitleColor(RedPacketBottomBtn_COLOR, for: .normal)
-        bottomBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-        bottomBtn.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
-        self.addSubview(bottomBtn)
-        bottomBtn.snp.makeConstraints { (make) in
+        bottomBtn = UIButton()
+//        bottomBtn?.setTitle("关于现金红包", for: .normal)
+        bottomBtn?.setTitleColor(RedPacketBottomBtn_COLOR, for: .normal)
+        bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        bottomBtn?.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
+        self.addSubview(bottomBtn!)
+        bottomBtn?.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)
             make.bottom.equalTo(self).offset(-20)
         }

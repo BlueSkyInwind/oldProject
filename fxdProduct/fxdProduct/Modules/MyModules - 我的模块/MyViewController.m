@@ -32,8 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    titleAry=@[@"借还记录",@"我的银行卡",@"邀请好友",@"优惠券",@"更多"];
-    imgAry=@[@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"6_my_icon_07",@"icon_my_setup"];
+    titleAry=@[@"我的消息",@"借还记录",@"我的银行卡",@"邀请好友",@"更多"];
+    imgAry=@[@"message",@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"icon_my_setup"];
     if (@available(iOS 11.0, *)) {
         self.MyViewTable.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
     }else{
@@ -80,6 +80,11 @@
 }
 
 #pragma mark 我的页面中间部分点击事件
+
+
+/**
+ 现金红包
+ */
 -(void)redPacketViewTap{
     
 //    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
@@ -92,17 +97,26 @@
 
 }
 
+
+/**
+ 优惠券
+ */
 -(void)couponViewTap{
     
     CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
-    [self.navigationController pushViewController:controller animated:false];
-//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"优惠券"];
+    controller.isWithdraw = true;
+    [self.navigationController pushViewController:controller animated:true];
 
 }
 
+
+/**
+ 账户余额
+ */
 -(void)accountViewTap{
     
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"账户余额"];
+    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:true];
 
 }
 #pragma mark - TableView
@@ -146,11 +160,13 @@
     } else {
         bCell.lineView.hidden=NO;
     }
-//    if (indexPath.row == 0) {
-//        bCell.messageLabel.hidden = false;
-//    }else{
-//        bCell.messageLabel.hidden = true;
-//    }
+    if (indexPath.row == 0) {
+        bCell.messageLabel.hidden = false;
+        bCell.messageImage.hidden = false;
+    }else{
+        bCell.messageLabel.hidden = true;
+        bCell.messageImage.hidden = true;
+    }
     return bCell;
 }
 
@@ -158,38 +174,38 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
-//        case 0:
-//        {
-//            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-//            [self.navigationController pushViewController:myMessageVC animated:true];
-//        }
-//            break;
         case 0:
+        {
+            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+            [self.navigationController pushViewController:myMessageVC animated:true];
+        }
+            break;
+        case 1:
         {
             
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
-        case 1:
+        case 2:
         {
             MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
             [self.navigationController pushViewController:myCrad animated:YES];
         }
             break;
-        case 2:
+        case 3:
         {
             InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
             [self.navigationController pushViewController:invitationVC animated:true];
         }
             break;
-        case 3:
+        case 4:
         {
             DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
         }
             break;
-        case 4:
+        case 5:
         {
             
             MoreViewController *ticket=[[MoreViewController alloc]init];

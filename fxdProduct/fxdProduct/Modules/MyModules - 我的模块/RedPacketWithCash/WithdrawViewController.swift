@@ -12,6 +12,7 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
 
     var tableView : UITableView?
     let cellId = "CellId"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -118,7 +119,7 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
     @objc func withdrawBtnClick(){
         
         let controller = WithdrawDetailsViewController()
-        self.navigationController?.pushViewController(controller, animated: false)
+        self.navigationController?.pushViewController(controller, animated: true)
         
 //        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "提现按钮点击")
     }
