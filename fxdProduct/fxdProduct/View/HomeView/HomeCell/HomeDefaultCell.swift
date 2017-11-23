@@ -831,12 +831,34 @@ extension HomeDefaultCell{
         loanBtn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         productFirstBgImage?.addSubview(loanBtn)
         loanBtn.snp.makeConstraints { (make) in
-            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-20)
-            make.left.equalTo((productFirstBgImage?.snp.left)!).offset(20)
-            make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-20)
-            make.height.equalTo(50)
+            make.top.equalTo(moneyLabel.snp.bottom).offset(18)
+            make.centerX.equalTo((productFirstBgImage?.snp.centerX)!)
+            make.width.equalTo(240)
+            make.height.equalTo(38)
         }
-
+    
+        let tipLable = UILabel()
+        tipLable.text = homeProductData.data.productList[0].tips
+        tipLable.font = UIFont.systemFont(ofSize: 12)
+        tipLable.textAlignment = .center
+        tipLable.textColor = UIColor.red
+        productFirstBgImage?.addSubview(tipLable)
+        tipLable.snp.makeConstraints { (make) in
+            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-19)
+            make.left.equalTo((productFirstBgImage?.snp.left)!).offset(15)
+            make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-15)
+            make.height.equalTo(16)
+        }
+    
+    if UI_IS_IPONE5 {
+        loanBtn.snp.updateConstraints({ (make) in
+            make.top.equalTo(moneyLabel.snp.bottom).offset(5)
+        })
+        
+        tipLable.snp.updateConstraints({ (make) in
+            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-12)
+        })
+    }
     }
     
     //MARK:产品列表，其他的

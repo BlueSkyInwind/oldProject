@@ -137,8 +137,8 @@
             self.returnBlock(object);
         }
     } failure:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            self.returnBlock(object);
+        if (self.faileBlock) {
+            self.faileBlock(object);
         }
     }];
     

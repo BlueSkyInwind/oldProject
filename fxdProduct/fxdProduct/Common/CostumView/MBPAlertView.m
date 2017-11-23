@@ -71,7 +71,6 @@
     self.waitHud = nil;
 }
 
-
 - (void)loadingWaitHUDView:(UIView *)view
 {
     if (_waitHudView) {

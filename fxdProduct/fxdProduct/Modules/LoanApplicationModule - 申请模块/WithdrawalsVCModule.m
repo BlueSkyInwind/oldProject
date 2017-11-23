@@ -1003,7 +1003,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"periods_":@2};
     }
     
-  
     if ( [_drawingsInfoModel.productId isEqualToString:DeriveRapidLoan]) {
         paramDic = @{@"apply_id_":_drawingsInfoModel.applicationId,
                      @"product_id_":_drawingsInfoModel.productId,
