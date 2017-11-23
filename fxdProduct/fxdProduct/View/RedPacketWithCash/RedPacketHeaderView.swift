@@ -18,8 +18,13 @@ import UIKit
 
 class RedPacketHeaderView: UIView {
 
-    //用户名字
+    //提现金额
     @objc var moneyLabel : UILabel?
+    //图片
+    @objc var headerImage : UIImageView?
+    //名字
+    @objc var titleLabel : UILabel?
+    
     @objc weak var delegate: RedPacketHeaderViewDelegate?
     /*
     // Only override draw() if you perform custom drawing.
@@ -43,21 +48,21 @@ class RedPacketHeaderView: UIView {
 extension RedPacketHeaderView{
     fileprivate func setupUI(){
         
-        let imageview = UIImageView()
-        imageview.image = UIImage(named:"packet")
-        self.addSubview(imageview)
-        imageview.snp.makeConstraints { (make) in
+        headerImage = UIImageView()
+//        headerImage.image = UIImage(named:"packet")
+        self.addSubview(headerImage!)
+        headerImage?.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(self).offset(42)
         }
         
-        let name = UILabel()
-        name.text = "我的现金"
-        name.font = UIFont.systemFont(ofSize: 15)
-        self.addSubview(name)
-        name.snp.makeConstraints { (make) in
+        titleLabel = UILabel()
+//        titleLabel?.text = "我的现金"
+        titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        self.addSubview(titleLabel!)
+        titleLabel?.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(imageview.snp.bottom).offset(15)
+            make.top.equalTo((headerImage?.snp.bottom)!).offset(15)
         }
         
         moneyLabel = UILabel()
@@ -66,7 +71,7 @@ extension RedPacketHeaderView{
         self.addSubview(moneyLabel!)
         moneyLabel?.snp.makeConstraints({ (make) in
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(name.snp.bottom).offset(26)
+            make.top.equalTo((titleLabel?.snp.bottom)!).offset(26)
             make.height.equalTo(40)
         })
         
@@ -86,7 +91,7 @@ extension RedPacketHeaderView{
         
         if UI_IS_IPONE5 {
             moneyLabel?.snp.updateConstraints({ (make) in
-                make.top.equalTo(name.snp.bottom).offset(15)
+                make.top.equalTo((titleLabel?.snp.bottom)!).offset(15)
             })
             withdrawBtn.snp.makeConstraints({ (make) in
                 make.top.equalTo((moneyLabel?.snp.bottom)!).offset(20)

@@ -22,8 +22,8 @@ import UIKit
 class MineMiddleView: UIView {
 
     @objc var couponNumLabel : UILabel?
-    @objc var redPacketNumLabel : UILabel?
-    @objc var redPacketImageView : UIImageView?
+//    @objc var redPacketNumLabel : UILabel?
+//    @objc var redPacketImageView : UIImageView?
     @objc var couponImageView : UIImageView?
     @objc weak var delegate: MineMiddleViewDelegate?
     /*
@@ -62,23 +62,23 @@ extension MineMiddleView{
         
         }
         
-        redPacketImageView = UIImageView()
-        redPacketImageView?.image = UIImage(named:"dots")
-        redPacketView.addSubview(redPacketImageView!)
-        redPacketImageView?.snp.makeConstraints({ (make) in
-            make.left.equalTo(redPacketView.snp.right).offset(-22)
-            make.top.equalTo(redPacketView.snp.top).offset(-5)
-        })
-        
-        redPacketNumLabel = UILabel()
-        redPacketNumLabel?.font = UIFont.systemFont(ofSize: 15)
-        redPacketNumLabel?.textColor = UIColor.white
-        redPacketImageView?.addSubview(redPacketNumLabel!)
-        redPacketNumLabel?.snp.makeConstraints({ (make) in
-            make.centerX.equalTo((redPacketImageView?.snp.centerX)!)
-            make.centerY.equalTo((redPacketImageView?.snp.centerY)!)
-            
-        })
+//        redPacketImageView = UIImageView()
+//        redPacketImageView?.image = UIImage(named:"dots")
+//        redPacketView.addSubview(redPacketImageView!)
+//        redPacketImageView?.snp.makeConstraints({ (make) in
+//            make.left.equalTo(redPacketView.snp.right).offset(-22)
+//            make.top.equalTo(redPacketView.snp.top).offset(-5)
+//        })
+//
+//        redPacketNumLabel = UILabel()
+//        redPacketNumLabel?.font = UIFont.systemFont(ofSize: 15)
+//        redPacketNumLabel?.textColor = UIColor.white
+//        redPacketImageView?.addSubview(redPacketNumLabel!)
+//        redPacketNumLabel?.snp.makeConstraints({ (make) in
+//            make.centerX.equalTo((redPacketImageView?.snp.centerX)!)
+//            make.centerY.equalTo((redPacketImageView?.snp.centerY)!)
+//
+//        })
         
         let couponView = MiddleView(imageName: "coupon", title: "优惠券")
         couponView.isUserInteractionEnabled = true
@@ -189,97 +189,5 @@ extension MineMiddleView{
             super.frame = newFrame
             
         }
-    }
-    
-    fileprivate func setU(){
-        
-        //        let redPacketImageV = UIImageView()
-        //        redPacketImageV.image = UIImage(named:"redPacket")
-        //        self.addSubview(redPacketImageV)
-        //        redPacketImageV.snp.makeConstraints { (make) in
-        //            make.left.equalTo(self).offset(42)
-        //            make.top.equalTo(self).offset(20)
-        //        }
-        //
-        //        redPacketImageView = UIImageView()
-        //        redPacketImageView?.image = UIImage(named:"dots")
-        //        self.addSubview(redPacketImageView!)
-        //        redPacketImageView?.snp.makeConstraints({ (make) in
-        //            make.left.equalTo(self).offset(69)
-        //            make.top.equalTo(self).offset(13)
-        //        })
-        //
-        //        redPacketNumLabel = UILabel()
-        //        redPacketNumLabel?.font = UIFont.systemFont(ofSize: 15)
-        //        redPacketNumLabel?.textColor = UIColor.white
-        //        redPacketImageView?.addSubview(redPacketNumLabel!)
-        //        redPacketNumLabel?.snp.makeConstraints({ (make) in
-        //            make.centerX.equalTo((redPacketImageView?.snp.centerX)!)
-        //            make.centerY.equalTo((redPacketImageView?.snp.centerY)!)
-        //        })
-        //
-        //        let redPacketLabel = UILabel()
-        //        redPacketLabel.text = "现金红包"
-        //        redPacketLabel.font = UIFont.systemFont(ofSize: 15)
-        //        self.addSubview(redPacketLabel)
-        //        redPacketLabel.snp.makeConstraints { (make) in
-        //            make.left.equalTo(self).offset(32)
-        //            make.top.equalTo(redPacketImageV.snp.bottom).offset(10)
-        //            make.height.equalTo(14)
-        //        }
-        //
-        //        let couponImageV = UIImageView()
-        //        couponImageV.image = UIImage(named:"coupon")
-        //        self.addSubview(couponImageV)
-        //        couponImageV.snp.makeConstraints { (make) in
-        //            make.centerX.equalTo(self.snp.centerX)
-        //            make.top.equalTo(self).offset(20)
-        //        }
-        //
-        //        couponImageView = UIImageView()
-        //        couponImageView?.image = UIImage(named:"dots")
-        //        couponImageV.addSubview(couponImageView!)
-        //        couponImageView?.snp.makeConstraints({ (make) in
-        //            make.left.equalTo(couponImageV.snp.right).offset(-15)
-        //            make.top.equalTo(couponImageV.snp.top).offset(-7)
-        //        })
-        //
-        //        couponNumLabel = UILabel()
-        //        couponNumLabel?.font = UIFont.systemFont(ofSize: 15)
-        //        couponNumLabel?.textColor = UIColor.white
-        //        couponImageView?.addSubview(couponNumLabel!)
-        //        couponNumLabel?.snp.makeConstraints({ (make) in
-        //            make.centerX.equalTo((couponImageView?.snp.centerX)!)
-        //            make.centerY.equalTo((couponImageView?.snp.centerY)!)
-        //
-        //        })
-        //
-        //        let couponLabel = UILabel()
-        //        couponLabel.text = "优惠券"
-        //        couponLabel.font = UIFont.systemFont(ofSize: 15)
-        //        self.addSubview(couponLabel)
-        //        couponLabel.snp.makeConstraints { (make) in
-        //            make.centerX.equalTo(self.snp.centerX)
-        //            make.top.equalTo(couponImageV.snp.bottom).offset(10)
-        //            make.height.equalTo(14)
-        //        }
-        //
-        //        let accountImageView = UIImageView()
-        //        accountImageView.image = UIImage(named:"account")
-        //        self.addSubview(accountImageView)
-        //        accountImageView.snp.makeConstraints { (make) in
-        //            make.right.equalTo(self).offset(-42)
-        //            make.top.equalTo(self).offset(20)
-        //        }
-        //
-        //        let accountLabel = UILabel()
-        //        accountLabel.text = "账户余额"
-        //        accountLabel.font = UIFont.systemFont(ofSize: 15)
-        //        self.addSubview(accountLabel)
-        //        accountLabel.snp.makeConstraints { (make) in
-        //            make.right.equalTo(self).offset(-30)
-        //            make.top.equalTo(accountImageView.snp.bottom).offset(10)
-        //            make.height.equalTo(14)
-        //        }
     }
 }

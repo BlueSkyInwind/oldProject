@@ -13,6 +13,7 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
 
     var tableView : UITableView?
     let cellId = "CellId"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,6 +47,7 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         tableView?.dataSource = self
         tableView?.separatorStyle = .none
         tableView?.backgroundColor = LINE_COLOR
+        tableView?.isScrollEnabled = false
         self.view.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
@@ -140,7 +142,19 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        return 68
+    }
+    
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = LINE_COLOR
+        return headerView
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 12
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -151,7 +165,7 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }
         cell.selectionStyle = .none
         if indexPath.row == 0 {
-             cell.cellType = CurrentInfoCellType(cellType: .Default)
+            cell.cellType = CurrentInfoCellType(cellType: .Default)
             cell.leftLabel?.text = "提现金额"
             cell.rightLabel?.text = "¥180.05"
             

@@ -11,11 +11,11 @@ import UIKit
 class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,RedPacketHeaderViewDelegate,RedPacketCellDelegate{
 
     var tableView : UITableView?
-    
+    @objc var isWithdraw = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "现金红包"
+        
         addBackItemRoot()
         setNavRightBar()
         // Do any additional setup after loading the view.
@@ -26,8 +26,9 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     func setNavRightBar(){
         
         let aBarbi = UIBarButtonItem.init(title: "收提明细", style: .plain, target: self, action: #selector(rightClick))
-        aBarbi.setTitleTextAttributes([NSAttributedStringKey.foregroundColor:RedPacket_COLOR,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)], for: .normal)
         self.navigationItem.rightBarButtonItem = aBarbi
+        aBarbi.setTitleTextAttributes([NSAttributedStringKey.foregroundColor:RedPacket_COLOR,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)], for: .normal)
+        aBarbi.setTitleTextAttributes([NSAttributedStringKey.foregroundColor:RedPacket_COLOR,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)], for: .selected)
        
     }
    
@@ -43,7 +44,19 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         })
         
         let headerView = RedPacketHeaderView()
-        headerView.moneyLabel?.text = "¥180.50"
+        if isWithdraw {
+            self.title = "现金红包"
+            headerView.moneyLabel?.text = "¥180.50"
+            headerView.headerImage?.image = UIImage(named:"packet")
+            headerView.titleLabel?.text = "我的现金"
+        }else{
+            
+            self.title = "账户余额"
+            headerView.moneyLabel?.text = "¥360.50"
+            headerView.headerImage?.image = UIImage(named:"account")
+            headerView.titleLabel?.text = "我的余额"
+        }
+        
         headerView.delegate = self
         let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(headerView.moneyLabel?.text)!)
         attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
@@ -55,7 +68,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     @objc func rightClick(){
         
         let controller = ReminderDetailsViewController()
-        self.navigationController?.pushViewController(controller, animated: false)
+        self.navigationController?.pushViewController(controller, animated: true)
     
     }
     
@@ -91,6 +104,11 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             redPacketCell = RedPacketCell.init(style: .default, reuseIdentifier: "RedPacketCell")
         }
 
+        if isWithdraw {
+            redPacketCell.bottomBtn?.setTitle("关于现金红包", for: .normal)
+        }else{
+            redPacketCell.bottomBtn?.setTitle("关于账户余额", for: .normal)
+        }
         redPacketCell.delegate = self
         redPacketCell.selectionStyle = .none
         return redPacketCell!
@@ -104,13 +122,22 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     func withdrawBtnClick(){
         
         let controller = WithdrawViewController()
-        self.navigationController?.pushViewController(controller, animated:false)
-        
-//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "点击提现")
+        self.navigationController?.pushViewController(controller, animated:true)
+
     }
     
     func bottomBtnClick(){
-        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "关于现金红包")
+        
+        let webView = FXDWebViewController()
+    
+        if isWithdraw {
+            webView.urlStr = "https://www.baidu.com"
+//            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "关于现金红包")
+        }else{
+            webView.urlStr = "https://www.taobao.com"
+//            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "关于账户余额")
+        }
+        self.navigationController?.pushViewController(webView, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
