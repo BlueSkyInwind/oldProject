@@ -558,7 +558,6 @@ NSString * const RapidLoan = @"P001004";                   //急速贷平台
 NSString * const WhiteCollarLoan = @"P001005";           //白领贷平台
 NSString * const DeriveRapidLoan = @"P001006";           //急速贷衍生（30天）平台
 
-
 #pragma Mark - 项目配置信息
 
 NSString * const PLATFORM = @"1";                   //平台

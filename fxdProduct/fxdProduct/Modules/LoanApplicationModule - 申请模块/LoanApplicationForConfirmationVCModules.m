@@ -38,7 +38,7 @@
     chooseIndex = 1;
     [self addBackItem];
     
-    if ([_productId isEqualToString:SalaryLoan] || [_productId isEqualToString:RapidLoan]) {
+    if ([_productId isEqualToString:SalaryLoan] || [_productId isEqualToString:RapidLoan] || [_productId isEqualToString:DeriveRapidLoan]) {
         [self obtainDiscountTicket:^(DiscountTicketModel *discountTicketModel) {
             if (discountTicketModel.canuselist != nil && discountTicketModel.canuselist.count != 0) {
                 [self addDiscountCoupons:discountTicketModel.canuselist[0]];

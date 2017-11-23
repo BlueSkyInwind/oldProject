@@ -15,7 +15,7 @@
 #import "InvitationViewController.h"
 #import "UserDataAuthenticationListVCModules.h"
 
-@interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate>
+@interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     //标题数组
     NSArray *titleAry;
@@ -61,13 +61,6 @@
     headerView.nameLabel.text = @"您好!";
     headerView.accountLabel.text = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
     [headerBgView addSubview:headerView];
-    
-    MineMiddleView *middleView = [[MineMiddleView alloc]initWithFrame:CGRectZero];
-//    middleView.redPacketNumLabel.text = @"3";
-    middleView.couponNumLabel.text = @"3";
-    middleView.backgroundColor = [UIColor whiteColor];
-    middleView.delegate = self;
-    [headerBgView addSubview:middleView];
     
     [self.MyViewTable setTableHeaderView:headerBgView];
 }

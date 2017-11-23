@@ -603,8 +603,10 @@
         BaseResultModel * baseResultModel = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
         if ([baseResultModel.errCode isEqualToString:@"0"]) {
             //得到实际抵扣金额；
-            NSString * resultStr = (NSString *)baseResultModel.data[@"discountAmount"];
-            finish(resultStr);
+            if ([[(NSDictionary *)baseResultModel.data allKeys] containsObject:@"discountAmount"]) {
+                NSString * resultStr = (NSString *)baseResultModel.data[@"discountAmount"];
+                finish(resultStr);
+            }
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.friendErrMsg];
         }
@@ -625,9 +627,9 @@
     _useredPacketAmount = [discountAmount floatValue];
     
     if ([discountTicketDetailModel.voucher_type isEqualToString:@"1"]) {
-        discountNumStr = [NSString stringWithFormat:@"抵扣券%@",discountTicketDetailModel.total_amount];
+        discountNumStr = [NSString stringWithFormat:@"抵扣%@元",discountAmount];
     }else if ([discountTicketDetailModel.voucher_type isEqualToString:@"3"]) {
-        discountNumStr = [NSString stringWithFormat:@"折扣券%@",discountTicketDetailModel.total_amount];
+        discountNumStr = [NSString stringWithFormat:@"折扣%@元",discountAmount];
     }
     
     if (_repayListInfo.result.total_amount >= (_repayAmount - _useredPacketAmount)) {
@@ -762,10 +764,10 @@
         paymentDetailModel.account_card_id_ =_selectCard.cardId;
         paymentDetailModel.total_amount_ = @(_useTotalAmount);    //溢缴金
         paymentDetailModel.repay_amount_ = @(_finalyRepayAmount);   //应还金额
-        paymentDetailModel.repay_total_ = @(_repayAmount);         //实际金额
-        paymentDetailModel.save_amount_ = @(_save_amount);
-        paymentDetailModel.socket = _repayListInfo.result.socket;
-        paymentDetailModel.request_type_ = save_amountTemp;
+        paymentDetailModel.repay_total_ = @(_repayAmount);           //实际金额
+        paymentDetailModel.save_amount_ = @(_save_amount);        //前端全选时节省的未还服务费
+        paymentDetailModel.socket = _repayListInfo.result.socket;     //还款标示
+        paymentDetailModel.request_type_ = save_amountTemp;      //请求类型
         paymentDetailModel.redpacket_id_ = _selectRedPacketID;
         paymentDetailModel.redpacket_cash_ = @(_useredPacketAmount);
     }else {
