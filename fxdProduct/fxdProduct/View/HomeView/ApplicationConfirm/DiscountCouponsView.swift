@@ -128,6 +128,9 @@ extension DiscountCouponsView{
             titleLabel?.font = UIFont.systemFont(ofSize: 22)
             amountLabel?.font = UIFont.systemFont(ofSize: 30)
             directionsForUseBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+            amountLabel?.snp.updateConstraints({ (make) in
+                make.width.equalTo(150)
+            })
         }
     }
     
