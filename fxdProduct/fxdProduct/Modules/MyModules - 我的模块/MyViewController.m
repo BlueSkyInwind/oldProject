@@ -15,7 +15,7 @@
 #import "InvitationViewController.h"
 #import "UserDataAuthenticationListVCModules.h"
 
-@interface MyViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate>
 {
     //标题数组
     NSArray *titleAry;
@@ -63,6 +63,14 @@
     [headerBgView addSubview:headerView];
     
     [self.MyViewTable setTableHeaderView:headerBgView];
+    
+    MineMiddleView *middleView = [[MineMiddleView alloc]initWithFrame:CGRectZero];
+    middleView.backgroundColor = [UIColor whiteColor];
+    middleView.couponNumLabel.text = @"3";
+    middleView.delegate = self;
+    [self.MyViewTable addSubview:middleView];
+    
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -80,8 +88,9 @@
  */
 -(void)redPacketViewTap{
     
-    WithdrawViewController *controller = [[WithdrawViewController alloc]init];
-    [self.navigationController pushViewController:controller animated:false];
+    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
+    controller.isWithdraw = true;
+    [self.navigationController pushViewController:controller animated:true];
     
 //    SetTransactionInfoViewController * vc =  [[SetTransactionInfoViewController alloc]init];
 //    [self.navigationController pushViewController:vc animated:true];
@@ -96,11 +105,11 @@
  */
 -(void)couponViewTap{
     
-//    DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
-//    [self.navigationController pushViewController:ticket animated:YES];
-    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
-    controller.isWithdraw = true;
-    [self.navigationController pushViewController:controller animated:true];
+    DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
+    [self.navigationController pushViewController:ticket animated:YES];
+//    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
+//    controller.isWithdraw = true;
+//    [self.navigationController pushViewController:controller animated:true];
 
 }
 

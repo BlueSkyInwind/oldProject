@@ -1155,8 +1155,6 @@
 		CC6F06941F7DF6C200FA889E /* ShanLinBackAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */; };
 		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
-		CC85C6251FBE71E90090A7E7 /* MineMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6241FBE71E90090A7E7 /* MineMiddleView.swift */; };
-		CC85C6261FBE71E90090A7E7 /* MineMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6241FBE71E90090A7E7 /* MineMiddleView.swift */; };
 		CC85C6281FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
 		CC85C6291FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
 		CC85C62C1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */; };
@@ -1167,6 +1165,8 @@
 		CC989C311F4D84A9000CDACF /* AuthenticationCenterVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC989C2F1F4D84A9000CDACF /* AuthenticationCenterVCModules.m */; };
 		CC989C341F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989C331F4D8738000CDACF /* AuthenticationCenterCell.swift */; };
 		CC989C351F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989C331F4D8738000CDACF /* AuthenticationCenterCell.swift */; };
+		CCA181941FC6CDAC0094DA58 /* MineMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA181931FC6CDAC0094DA58 /* MineMiddleView.swift */; };
+		CCA181951FC6CDAC0094DA58 /* MineMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA181931FC6CDAC0094DA58 /* MineMiddleView.swift */; };
 		CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
 		CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
 		CCAA8EAE1F5901ED00278D16 /* FooterBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EAD1F5901ED00278D16 /* FooterBtnView.swift */; };
@@ -2293,14 +2293,13 @@
 		CC6F068F1F7B8D3600FA889E /* ShanLinWebVCModules.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShanLinWebVCModules.m; sourceTree = "<group>"; };
 		CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShanLinBackAlertView.swift; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
-		CC85C6241FBE71E90090A7E7 /* MineMiddleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineMiddleView.swift; sourceTree = "<group>"; };
 		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
-
 		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
 		CC989C2E1F4D84A9000CDACF /* AuthenticationCenterVCModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationCenterVCModules.h; sourceTree = "<group>"; };
 		CC989C2F1F4D84A9000CDACF /* AuthenticationCenterVCModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationCenterVCModules.m; sourceTree = "<group>"; };
 		CC989C331F4D8738000CDACF /* AuthenticationCenterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterCell.swift; sourceTree = "<group>"; };
+		CCA181931FC6CDAC0094DA58 /* MineMiddleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineMiddleView.swift; sourceTree = "<group>"; };
 		CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterHeaderView.swift; sourceTree = "<group>"; };
 		CCAA8EAD1F5901ED00278D16 /* FooterBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterBtnView.swift; sourceTree = "<group>"; };
 		CCAA8EB41F5940CC00278D16 /* RenewalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenewalModel.h; sourceTree = "<group>"; };
@@ -4987,6 +4986,7 @@
 		CC4BB60C1F17709D0027A0AA /* MineView */ = {
 			isa = PBXGroup;
 			children = (
+				CCA181931FC6CDAC0094DA58 /* MineMiddleView.swift */,
 				CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */,
 				CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */,
 				CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */,
@@ -5971,6 +5971,7 @@
 				842CA0E31F453B4A00A2150B /* HomeParam.m in Sources */,
 				63553B151E5EEF1C00B2C1FF /* FaceIDOCRFront.m in Sources */,
 				638C3F3C1CF564A4000446A7 /* SquareRepaymentResult.m in Sources */,
+				CCA181941FC6CDAC0094DA58 /* MineMiddleView.swift in Sources */,
 				63553B191E5F0AF900B2C1FF /* FaceIDOCRBack.m in Sources */,
 				0F0FDAC21BC771EC00F3CF10 /* AboutViewController.m in Sources */,
 				635AB7B41BE3540100C32919 /* AmountMsgResult.m in Sources */,
@@ -6345,6 +6346,7 @@
 				CC0DF9A31EA5B1090024841A /* NSNumber+YYAdd.m in Sources */,
 				84D184701F98962A00A0B25F /* RedPacketTicketModel.m in Sources */,
 				CC0DF9A41EA5B1090024841A /* RepayMentViewModel.m in Sources */,
+				CCA181951FC6CDAC0094DA58 /* MineMiddleView.swift in Sources */,
 				CC0DF9A61EA5B1090024841A /* LOTComposition.m in Sources */,
 				CC0DF9A71EA5B1090024841A /* SSKeychainQuery.m in Sources */,
 				CC0DF9A91EA5B1090024841A /* LoginResult.m in Sources */,
