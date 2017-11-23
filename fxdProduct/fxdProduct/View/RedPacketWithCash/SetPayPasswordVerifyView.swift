@@ -13,6 +13,8 @@ import UIKit
     //提现按钮
     func sendButtonClick()
     
+    func userInputVerifyCode(_ code:String)
+    
 }
 
 class SetPayPasswordVerifyView: UIView {
@@ -34,6 +36,7 @@ class SetPayPasswordVerifyView: UIView {
         super.init(frame: frame)
         self.backgroundColor = PayPasswordBackColor_COLOR
         setUpUI()
+        setVerifyCount()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -59,14 +62,14 @@ class SetPayPasswordVerifyView: UIView {
         }
     }
     
-    func setVerifyCount() {
-        footerDisplayLabel?.text = "\(self.count)"+"59秒后发送"
+   @objc func setVerifyCount() {
+        footerDisplayLabel?.text = "\(self.count)"+"秒后发送"
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(verifyCountDisplay), userInfo: nil, repeats: true)
     }
     
     @objc func verifyCountDisplay(){
         count -= 1
-        footerDisplayLabel?.text = "\(self.count)"+"59秒后发送"
+        footerDisplayLabel?.text = "\(self.count)"+"秒后发送"
         if count == 0 {
             self.count = 59
             timer?.invalidate()
@@ -75,12 +78,7 @@ class SetPayPasswordVerifyView: UIView {
             showFooterSendCodeView()
         }
     }
-    
-    @objc func sendBtnClick() {
-        if (self.delegate != nil) {
-            self.delegate?.sendButtonClick()
-        }
-    }
+
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -125,11 +123,12 @@ extension SetPayPasswordVerifyView{
             make.centerY.equalTo((headerDisplayView?.snp.centerY)!).offset(15)
         })
         
-        
         payPasswordInputView = PayPasswordInputView.init(frame: CGRect.init(x: 15, y: 100, width: _k_w - 30, height: 50))
         payPasswordInputView?.isEnsconce = true
-        payPasswordInputView?.completeHandle = ({(inputPwd) in
-            
+        payPasswordInputView?.completeHandle = ({[weak self](inputPwd) in
+            if (self?.delegate != nil) {
+                self?.delegate?.userInputVerifyCode(inputPwd!)
+            }
         })
         self.addSubview(payPasswordInputView!)
         
@@ -158,14 +157,14 @@ extension SetPayPasswordVerifyView{
         footerSendCodeView?.addSubview(promortLabel)
         promortLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo((footerSendCodeView?.snp.centerY)!)
-            make.centerX.equalTo((footerSendCodeView?.snp.centerX)!).offset(-50)
+            make.centerX.equalTo((footerSendCodeView?.snp.centerX)!).offset(-40)
         }
         
         sendBtn = UIButton.init(type: UIButtonType.custom)
         sendBtn?.setTitle("重新发送", for: UIControlState.normal)
         sendBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 14)
         sendBtn?.setTitleColor(UI_MAIN_COLOR, for: UIControlState.normal)
-        sendBtn?.addTarget(sendBtn, action: #selector(sendBtnClick), for: UIControlEvents.touchUpInside)
+        sendBtn?.addTarget(self, action: #selector(sendBtnClick), for: UIControlEvents.touchUpInside)
         footerSendCodeView?.addSubview(sendBtn!)
         sendBtn?.snp.makeConstraints({ (make) in
             make.centerY.equalTo((footerSendCodeView?.snp.centerY)!)
@@ -173,8 +172,14 @@ extension SetPayPasswordVerifyView{
         })
     }
     
+    @objc func sendBtnClick() {
+        if (self.delegate != nil) {
+            showFooterDisplayView()
+            setVerifyCount()
+            self.delegate?.sendButtonClick()
+        }
+    }
 
-    
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManager
 
 class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
 
@@ -21,7 +22,18 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         configureView()
         bottomView()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared().shouldResignOnTouchOutside = false
+        IQKeyboardManager.shared().isEnabled = false
+        IQKeyboardManager.shared().keyboardDistanceFromTextField = 100
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared().shouldResignOnTouchOutside = true
+       IQKeyboardManager.shared().isEnabled = true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,7 +115,6 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
             make.height.equalTo(15)
             make.width.equalTo(100)
         }
-        
     }
     
     @objc func changePwdBtnClick(){
@@ -115,14 +126,19 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "重置交易密码")
     }
     @objc func withdrawBtnClick(){
-        
+        popImportPayPasswordView()
         MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "提现按钮点击")
     }
+    
+    func popImportPayPasswordView()  {
+        ImportPayPasswordView.showImportPayPasswordView(self, amountStr: "180.99")
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
     
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }

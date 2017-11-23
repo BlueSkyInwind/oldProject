@@ -8,21 +8,6 @@
 
 #import "UIFont+YX_Font.h"
 
-
-
-#ifdef UI_IS_IPHONE6
-#define fontScale 1.0
-#elif UI_IS_IPHONE5
-#define fontScale 0.8
-#elif UI_IS_IPHONE6P
-#define fontScale 1.2
-#elif UI_IS_IPHONEX
-#define fontScale 1.2
-#else
-#define fontScale 0.7
-#endif
-#define displayFontSize(fontSize) fontSize * fontScale
-
 @implementation NSObject (Extension)
 
 + (void)swizzleClassSelector:(SEL)originalSelector withSwizzledClassSelector:(SEL)swizzledSelector
@@ -35,6 +20,7 @@
 @end
 
 @implementation UIFont (YX_Font)
+/*
 + (void)load
 {
     static dispatch_once_t onceToken;
@@ -46,30 +32,47 @@
         [self swizzleClassSelector:@selector(fontWithName:size:) withSwizzledClassSelector:@selector(yx_fontWithName:size:)];
     });
 }
+ */
+
++(CGFloat)obtainDisplayFontSize:(CGFloat)fontSize{
+    CGFloat fontScale = 1.0;
+    if (UI_IS_IPHONE5) {
+        fontScale = 1.0;
+    }else if (UI_IS_IPHONE6){
+        fontScale = 1.0;
+    }else if (UI_IS_IPHONE6P){
+        fontScale = 1.17;
+    }else if (UI_IS_IPHONEX){
+        fontScale = 1.17;
+    }
+    return fontScale * fontSize;
+}
 
 + (UIFont *)yx_systemFontOfSize:(CGFloat)fontSize
 {
-    return [self yx_systemFontOfSize:displayFontSize(fontSize)];
+//    return [self yx_systemFontOfSize:[self obtainDisplayFontSize:fontSize]];
+    return [self systemFontOfSize:[self obtainDisplayFontSize:fontSize]];
+
 }
 
 + (UIFont *)yx_systemFontOfSize:(CGFloat)fontSize weight:(CGFloat)weight
 {
-    return [self yx_systemFontOfSize:displayFontSize(fontSize) weight:weight];
+    return [self systemFontOfSize:[self obtainDisplayFontSize:fontSize] weight:weight];
 }
 
 + (UIFont *)yx_boldSystemFontOfSize:(CGFloat)fontSize
 {
-    return [self yx_boldSystemFontOfSize:displayFontSize(fontSize)];
+    return [self boldSystemFontOfSize:[self obtainDisplayFontSize:fontSize]];
 }
 
 + (UIFont *)yx_italicSystemFontOfSize:(CGFloat)fontSize
 {
-    return [self yx_italicSystemFontOfSize:displayFontSize(fontSize)];
+    return [self italicSystemFontOfSize:[self obtainDisplayFontSize:fontSize]];
 }
 
 + (nullable UIFont *)yx_fontWithName:(NSString *)fontName size:(CGFloat)fontSize
 {
-    return [self yx_fontWithName:fontName size:displayFontSize(fontSize)];
+    return [self fontWithName:fontName size:[self obtainDisplayFontSize:fontSize]];
 }
 
 @end

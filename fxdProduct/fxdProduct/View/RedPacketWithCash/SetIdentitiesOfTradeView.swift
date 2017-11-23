@@ -46,7 +46,6 @@ extension SetIdentitiesOfTradeView {
             make.edges.equalTo(self)
         })
         contentTableView?.register(IdentitiesOfTradeTableViewCell.self, forCellReuseIdentifier: "IdentitiesOfTradeTableViewCell")
-        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

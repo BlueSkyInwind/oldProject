@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import IQKeyboardManager
 /// 页面展示类型
 ///
 /// - IDCardNumber_Type: 身份证效验
@@ -21,19 +21,29 @@ import UIKit
     case modificationTradePassword_Type
 }
 
-class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyViewDelegate{
+class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyViewDelegate,SetPayPasswordViewDelegate{
     
     var exhibitionType:SetExhibitionType?
     var identitiesOfTradeView:SetIdentitiesOfTradeView?
     var payPasswordVerifyView:SetPayPasswordVerifyView?
+    var payPasswordView:SetPayPasswordView?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         addBackItemRoot()
         self.view.backgroundColor = UIColor.white
-        exhibitionType = .verificationCode_Type
+        exhibitionType = .modificationTradePassword_Type
         configureView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared().shouldResignOnTouchOutside = false
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared().shouldResignOnTouchOutside = true
     }
     
     func configureView() -> Void {
@@ -46,8 +56,11 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
             setVerificationCodeView()
         case .setTradePassword_Type?:
             self.title = "设置交易密码"
+            setCashPasswordView()
         case .modificationTradePassword_Type?:
             self.title = "修改交易密码"
+            setCashPasswordView()
+            payPasswordView?.showHeaderFormerDisplayView()
         default:()
         }
     }
@@ -76,13 +89,36 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         })
     }
     
-
+    func setCashPasswordView()  {
+        payPasswordView = SetPayPasswordView.init(frame: CGRect.zero)
+        payPasswordView?.delegate = self
+        self.view.addSubview(payPasswordView!)
+        let height = obtainBarHeight_New(vc: self)
+        payPasswordView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(height)
+            make.left.right.bottom.equalTo(0)
+        })
+    }
+    
     //MARK: SetPayPasswordVerifyViewDelegate
+    func userInputVerifyCode(_ code: String) {
+        
+    }
     func sendButtonClick() {
 
     }
     
-    
+    //MARK: SetPayPasswordViewDelegate
+    func userInputCashPasswordCode(_ code: String, type: PasswordType) {
+        switch type {
+        case .old:
+            payPasswordView?.showHeaderDisplayView()
+        case .new:
+            payPasswordView?.showHeaderAgainDisplayView()
+        case .verifyNew:
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "确认成功")
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

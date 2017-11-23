@@ -19,7 +19,12 @@
 @property (nonatomic,assign) BOOL isEnsconce;
 
 @property (nonatomic,copy) void (^completeHandle)(NSString *inputPwd);
+@property(nonatomic,strong)UITextField * pwdTextField;
 
+/**
+ 清理数据
+ */
+-(void)cleanUpTheData;
 
 @end
 

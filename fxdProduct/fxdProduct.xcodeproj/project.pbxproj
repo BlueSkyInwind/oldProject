@@ -476,12 +476,16 @@
 		845017321ED7D051008055E4 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
 		8451682C1F26011A0026B415 /* HGBankListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8451682B1F26011A0026B415 /* HGBankListModel.m */; };
 		8451682D1F2603BD0026B415 /* HGBankListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8451682B1F26011A0026B415 /* HGBankListModel.m */; };
+		8453F5381FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */; };
+		8453F5391FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */; };
 		846BB6DF1F580B6400CD3545 /* RenewalVCModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6DE1F580B6400CD3545 /* RenewalVCModules.swift */; };
 		846BB6E01F580B6400CD3545 /* RenewalVCModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6DE1F580B6400CD3545 /* RenewalVCModules.swift */; };
 		846BB6E31F5835E100CD3545 /* ApplicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */; };
 		846BB6E41F5835E100CD3545 /* ApplicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */; };
 		8473F1411F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
 		8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
+		847DBBD11FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */; };
+		847DBBD21FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */; };
 		848139631F568A8600CD701C /* YX_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848139621F568A8600CD701C /* YX_TextField.swift */; };
 		848139641F568A8600CD701C /* YX_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848139621F568A8600CD701C /* YX_TextField.swift */; };
 		848394221EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */; };
@@ -2080,11 +2084,13 @@
 		844E5F4F1ED94DCB00753671 /* RegParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegParamModel.m; sourceTree = "<group>"; };
 		8451682A1F26011A0026B415 /* HGBankListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HGBankListModel.h; sourceTree = "<group>"; };
 		8451682B1F26011A0026B415 /* HGBankListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HGBankListModel.m; sourceTree = "<group>"; };
+		8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPayPasswordView.swift; sourceTree = "<group>"; };
 		846BB6DE1F580B6400CD3545 /* RenewalVCModules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenewalVCModules.swift; sourceTree = "<group>"; };
 		846BB6E11F5835E100CD3545 /* ApplicationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewModel.h; sourceTree = "<group>"; };
 		846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewModel.m; sourceTree = "<group>"; };
 		8473F13F1F31CAA1005B4933 /* SupportBankList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportBankList.h; sourceTree = "<group>"; };
 		8473F1401F31CAA1005B4933 /* SupportBankList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportBankList.m; sourceTree = "<group>"; };
+		847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPayPasswordView.swift; sourceTree = "<group>"; };
 		848139621F568A8600CD701C /* YX_TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YX_TextField.swift; sourceTree = "<group>"; };
 		848394201EDEB82A003EF4EC /* HomeBannerParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeBannerParamModel.h; sourceTree = "<group>"; };
 		848394211EDEB82A003EF4EC /* HomeBannerParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBannerParamModel.m; sourceTree = "<group>"; };
@@ -5049,6 +5055,8 @@
 				84F87F491FC4102500F1C5CD /* PayPasswordInputView.h */,
 				84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */,
 				84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */,
+				8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */,
+				847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */,
 			);
 			path = RedPacketWithCash;
 			sourceTree = "<group>";
@@ -5869,6 +5877,7 @@
 				CC4BB60F1F17712E0027A0AA /* LevelDescriptionView.m in Sources */,
 				84A37FF21FAC12A8008FB7AF /* HomeChoosePopView.swift in Sources */,
 				63F2548D1E49CD2C00852CF1 /* UserLoanApplicationProcessVCModule.m in Sources */,
+				8453F5381FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */,
 				63A24C661BE063A90036E8EF /* UIImage+Color.m in Sources */,
 				1AB0F5AA1CF2D20E00F3DF06 /* TicketCell.m in Sources */,
 				CCCDA8881EE028DD00B48DFF /* SendSmsParamModel.m in Sources */,
@@ -5899,6 +5908,7 @@
 				638C3F2E1CF53662000446A7 /* RepayMentAvailableRedpackets.m in Sources */,
 				635B2FBA1D6AEE22009CEFE0 /* GlobalConfig.m in Sources */,
 				CC6C93F11F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */,
+				847DBBD11FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */,
 				CC5FC5AE1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift in Sources */,
 				CC5D702C1ED4405500A074AF /* PaymentServiceModel.m in Sources */,
 				630D459B1BCC99DE00874064 /* CardListResult.m in Sources */,
@@ -6245,6 +6255,7 @@
 				CC0DF95A1EA5B1090024841A /* NSData+AES.m in Sources */,
 				84EC95B31F5AC4E3008656BA /* FeeDescriptionTableViewCell.m in Sources */,
 				CC0DF95B1EA5B1090024841A /* LivenessBaseClass.m in Sources */,
+				847DBBD21FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */,
 				CC0DF95C1EA5B1090024841A /* AmountMsgBaseClass.m in Sources */,
 				CC0DF95E1EA5B1090024841A /* WTOverView.m in Sources */,
 				CC0DF95F1EA5B1090024841A /* HistoryScoreModel.m in Sources */,
@@ -6478,6 +6489,7 @@
 				CC0DFA2A1EA5B1090024841A /* QueryRepaymentsLoanApplicant.m in Sources */,
 				CC0DFA2B1EA5B1090024841A /* GTMBase64.m in Sources */,
 				CC0DFA2C1EA5B1090024841A /* IdentityCell.m in Sources */,
+				8453F5391FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */,
 				CC0DFA2D1EA5B1090024841A /* ApprovalAmountBaseClass.m in Sources */,
 				CC0DFA301EA5B1090024841A /* NextViewCell.m in Sources */,
 				CC0DFA311EA5B1090024841A /* NSString+File.m in Sources */,

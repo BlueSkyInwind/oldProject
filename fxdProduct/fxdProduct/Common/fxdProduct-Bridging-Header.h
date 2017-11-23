@@ -53,5 +53,7 @@
 #import "UIFont+YX_Font.h"
 #import "CheckUtils.h"
 #import "PayPasswordInputView.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
+//#import "IQKeyboardManager.h"
 
 #endif /* fxdProduct_Bridging_Header_h */
