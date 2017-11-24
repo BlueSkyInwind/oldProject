@@ -24,6 +24,7 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         // Do any additional setup after loading the view.
     }
     
+    //MARK:设置tableview
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false
@@ -62,6 +63,7 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         }
     }
 
+    //MARK:点击完成按钮
     @objc func withdrawBtnClick(){
         
         MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "提现按钮点击")

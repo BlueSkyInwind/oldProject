@@ -40,6 +40,7 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK:设置tableview
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false
@@ -70,6 +71,7 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         
     }
     
+    //MARK:设置底部View
     func bottomView(){
         
         let bgView = UIView()
@@ -120,17 +122,25 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
     }
     
     
+    //MARK:各种点击事件
     
     /// 修改交易密码
     @objc func changePwdBtnClick(){
         
-        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "修改交易密码")
+        let transactionInfoVC = SetTransactionInfoViewController.init()
+        transactionInfoVC.exhibitionType = .modificationTradePassword_Type
+        self.navigationController?.pushViewController(transactionInfoVC, animated: true)
+//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "修改交易密码")
     }
     
     
     /// 重置交易密码
     @objc func resetPwdBtnClick(){
-        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "重置交易密码")
+        
+        let transactionInfoVC = SetTransactionInfoViewController.init()
+        transactionInfoVC.exhibitionType = .IDCardNumber_Type
+        self.navigationController?.pushViewController(transactionInfoVC, animated: true)
+//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "重置交易密码")
     }
     
     
