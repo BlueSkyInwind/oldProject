@@ -20,6 +20,7 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         configureView()
     }
     
+    //MARK:设置tableview
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false

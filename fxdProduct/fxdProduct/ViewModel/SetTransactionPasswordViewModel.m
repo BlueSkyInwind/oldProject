@@ -13,7 +13,7 @@
 /**
  验证身份证
 
- @param IDnum <#IDnum description#>
+ @param IDnum 身份证号
  */
 -(void)VerifyIdentityCardNumber:(NSString *)IDnum{
     
@@ -25,7 +25,7 @@
         }
     } failure:^(EnumServerStatus status, id object) {
         if (self.faileBlock) {
-            self.faileBlock(object)
+            self.faileBlock(object);
         }
     }];
     

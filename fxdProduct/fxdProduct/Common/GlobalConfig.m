@@ -471,6 +471,12 @@ NSString * const    _DeductibleAmountOfDiscountTicket_url    =    @"apigw/client
 //新优惠券规则
 NSString * const    _verifyIdentityCard_url    =    @"apigw/client/operation/passwordOperate/verifyIdentity";
 
+//个人中心（优惠券,现金红包,账户余额）
+NSString * const    _PersonalCenterWithdrawCashAPI_url    =    @"apigw/client/operation/withdrawCashAPI/personalCenter";
+
+//现金红包,账户余额（点击列表操作展示提现页）
+NSString * const    _LoadWithdrawCashInfo_url    =    @"apigw/client/operation/withdrawCashAPI/loadWithdrawCashInfo";
+
 
 #pragma mark - 合规接口
 

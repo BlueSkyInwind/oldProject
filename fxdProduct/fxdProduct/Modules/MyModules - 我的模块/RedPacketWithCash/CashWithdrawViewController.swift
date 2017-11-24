@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManager
 
-class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
+class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
 
     var tableView : UITableView?
     let cellId = "CellId"
@@ -40,6 +40,7 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK:设置tableview
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false
@@ -70,6 +71,7 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         
     }
     
+    //MARK:设置底部View
     func bottomView(){
         
         let bgView = UIView()
@@ -119,19 +121,36 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }
     }
     
+    
+    //MARK:各种点击事件
+    
+    /// 修改交易密码
     @objc func changePwdBtnClick(){
         
-        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "修改交易密码")
+        let transactionInfoVC = SetTransactionInfoViewController.init()
+        transactionInfoVC.exhibitionType = .modificationTradePassword_Type
+        self.navigationController?.pushViewController(transactionInfoVC, animated: true)
+//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "修改交易密码")
     }
     
+    
+    /// 重置交易密码
     @objc func resetPwdBtnClick(){
-        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "重置交易密码")
-    }
-    @objc func withdrawBtnClick(){
-//        popImportPayPasswordView()
+        
         let transactionInfoVC = SetTransactionInfoViewController.init()
         transactionInfoVC.exhibitionType = .IDCardNumber_Type
         self.navigationController?.pushViewController(transactionInfoVC, animated: true)
+//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "重置交易密码")
+    }
+    
+    
+    /// 提现按钮点击
+    @objc func withdrawBtnClick(){
+        popImportPayPasswordView()
+
+//        let transactionInfoVC = SetTransactionInfoViewController.init()
+//        transactionInfoVC.exhibitionType = .IDCardNumber_Type
+//        self.navigationController?.pushViewController(transactionInfoVC, animated: true)
 //        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "提现按钮点击")
     }
     
@@ -173,10 +192,11 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
             
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(cell.rightLabel?.text)!)
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
-            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 35), range: NSMakeRange(1,attrstr.length-1))
+            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.yx_systemFont(ofSize: 35) ?? 35, range: NSMakeRange(1,attrstr.length-1))
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: RedPacketMoney_COLOR, range: NSMakeRange(0,1))
-            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 25), range: NSMakeRange(0,1))
+            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.yx_systemFont(ofSize: 25) ?? 25, range: NSMakeRange(0,1))
             cell.rightLabel?.attributedText = attrstr
+            
             
             return cell
         }

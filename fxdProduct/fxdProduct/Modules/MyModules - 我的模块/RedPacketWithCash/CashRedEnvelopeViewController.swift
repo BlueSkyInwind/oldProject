@@ -23,6 +23,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
     }
 
+    //MARK:设置右上角按钮
     func setNavRightBar(){
         
         let aBarbi = UIBarButtonItem.init(title: "收提明细", style: .plain, target: self, action: #selector(rightClick))
@@ -32,6 +33,8 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
        
     }
    
+    
+    //MARK:设置tableview
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false
@@ -65,6 +68,24 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         tableView?.tableHeaderView = headerView
     }
 
+    
+    func setAlertView(){
+        let alertController = UIAlertController(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", preferredStyle: .alert)
+    
+        alertController.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: { (cancelAction) in
+            
+        }))
+        
+        alertController.addAction(UIAlertAction.init(title: "去设置", style: .default, handler: { (action) in
+            
+            let controller = CashWithdrawViewController()
+            self.navigationController?.pushViewController(controller, animated:true)
+        }))
+
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
     @objc func rightClick(){
         
         let controller = ReminderDetailsViewController()
@@ -119,13 +140,16 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
     }
     
+    //MARK:点击提现
     func withdrawBtnClick(){
         
-        let controller = WithdrawViewController()
-        self.navigationController?.pushViewController(controller, animated:true)
+        setAlertView()
+//        let controller = WithdrawViewController()
+//        self.navigationController?.pushViewController(controller, animated:true)
 
     }
     
+    //MARK:底部按钮点击
     func bottomBtnClick(){
         
         let webView = FXDWebViewController()

@@ -80,7 +80,7 @@ extension CurrentInformationCell{
         //左边的标题label
         leftLabel = UILabel()
         leftLabel?.textColor = UIColor.black
-        leftLabel?.font = UIFont.systemFont(ofSize: 15)
+        leftLabel?.font = UIFont.yx_systemFont(ofSize: 15)
         self.contentView.addSubview(leftLabel!)
         leftLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(22)
@@ -88,7 +88,7 @@ extension CurrentInformationCell{
         })
         //右边的内容label
         rightLabel = UILabel()
-        rightLabel?.font = UIFont.systemFont(ofSize: 15)
+        rightLabel?.font = UIFont.yx_systemFont(ofSize: 15)
         rightLabel?.textAlignment = .right
         self.contentView.addSubview(rightLabel!)
         rightLabel?.snp.makeConstraints({ (make) in
@@ -122,7 +122,7 @@ extension CurrentInformationCell{
         let renewalLabel = UILabel()
         renewalLabel.text = "了解续期规则"
         renewalLabel.textColor = UI_MAIN_COLOR
-        renewalLabel.font = UIFont.systemFont(ofSize: 16)
+        renewalLabel.font = UIFont.yx_systemFont(ofSize: 16)
         self.contentView.addSubview(renewalLabel)
         renewalLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.snp.centerY)
@@ -135,7 +135,7 @@ extension CurrentInformationCell{
         
         leftLabel = UILabel()
         leftLabel?.textColor = UIColor.black
-        leftLabel?.font = UIFont.systemFont(ofSize: 16)
+        leftLabel?.font = UIFont.yx_systemFont(ofSize: 16)
         self.contentView.addSubview(leftLabel!)
         leftLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(22)
@@ -152,7 +152,7 @@ extension CurrentInformationCell{
         
         rightLabel = UILabel()
         rightLabel?.textColor = UI_MAIN_COLOR
-        rightLabel?.font = UIFont.systemFont(ofSize: 14)
+        rightLabel?.font = UIFont.yx_systemFont(ofSize: 14)
         self.contentView.addSubview(rightLabel!)
         rightLabel?.snp.makeConstraints({ (make) in
             make.right.equalTo(arrowImage.snp.left).offset(-18)
