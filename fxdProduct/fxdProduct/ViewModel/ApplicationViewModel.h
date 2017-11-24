@@ -6,9 +6,9 @@
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface ApplicationViewModel : ViewModelClass
+@interface ApplicationViewModel : FXD_ViewModelBaseClass
 
 
 /**
@@ -45,5 +45,17 @@
  @param displayType 类型 1 、提额处 2、个人中心处
  */
 -(void)obtainUserDiscountTicketList:(NSString *)type displayType:(NSString *)displayType;
+
+/**
+ 获取优惠券
+ 
+ @param type 类型
+ @param displayType 用处
+ @param pageNum 页数
+ @param pageSize 每页数量
+ @param product_id 产品id
+ */
+-(void)new_obtainUserDiscountTicketListDisplayType:(NSString *)displayType product_id:(NSString *)product_id pageNum:(NSString *)pageNum pageSize:(NSString *)pageSize;
+
 
 @end

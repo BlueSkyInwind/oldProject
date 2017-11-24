@@ -40,7 +40,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define UI_IS_IPHONE6P            (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 736.0)
 #define UI_IS_IPHONE6            (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 667.0)
 #define UI_IS_IPHONE4           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 480.0)
-
+#define UI_IS_IPHONEX           (UI_IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 812.0)
+#define BarHeightNew [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height
 #define UI_IS_IPAD           ([[UIScreen mainScreen] bounds].size.height == 768.0)
 
 #define UI_MAIN_COLOR [UIColor colorWithRed:0/255.0 green:170/255.0 blue:238/255.0 alpha:1]
@@ -162,6 +163,8 @@ UIKIT_EXTERN NSString * const       _UserDataCertification_url;                 
 UIKIT_EXTERN NSString * const       _Trilateral_url;                        //用户资料测评接口
 UIKIT_EXTERN NSString * const       _UserDataCertificationResult_url;        //得到测评结果
 UIKIT_EXTERN NSString * const       _loginOutDeleteRegisterId_url;        //退出登录删除推送id
+UIKIT_EXTERN NSString * const       _getDrawLottery_url;        //老客周末活动判断是否弹框刮奖
+UIKIT_EXTERN NSString * const       _ProductProtocol_url;        //老客周末活动判断是否弹框刮奖
 
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集
@@ -214,6 +217,9 @@ UIKIT_EXTERN NSString * const       _DiscountTicketList_url;                  //
 UIKIT_EXTERN NSString * const       _ChoosePattern_url;                  //支付列表
 
 UIKIT_EXTERN NSString * const       _DiscountTicketRule_url;                  //优惠券规则
+UIKIT_EXTERN NSString * const       _New_DiscountTicket_url;                  //优惠券规则
+UIKIT_EXTERN NSString * const       _DeductibleAmountOfDiscountTicket_url;                  //优惠券规则
+
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码
 UIKIT_EXTERN NSString * const   CODE_FINDPASS;         ///密码找回验证码
@@ -266,7 +272,7 @@ UIKIT_EXTERN NSString * const kTopView;
 UIKIT_EXTERN NSString * const UserName;
 
 // 表名
-#define userTableName   [Utility sharedUtility].userInfo.userName
+#define userTableName   [FXD_Utility sharedUtility].userInfo.userName
 
 //通知
 UIKIT_EXTERN NSString * const  kAddMaterailNotification;

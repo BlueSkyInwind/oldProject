@@ -101,7 +101,7 @@ extension DiscountCouponsView{
         amountLabel = UILabel()
         amountLabel?.font = UIFont.systemFont(ofSize: 25)
         amountLabel?.textColor = UIColor.init(red: 0.93, green: 0.11, blue: 0.14, alpha: 1)
-        amountLabel?.text = "+￥200"
+        amountLabel?.text = "+￥"
         amountLabel?.textAlignment = NSTextAlignment.right
         headerView.addSubview(amountLabel!)
         amountLabel?.snp.makeConstraints({ (make) in
@@ -124,10 +124,13 @@ extension DiscountCouponsView{
             make.centerX.equalTo((self.backImageView?.snp.centerX)!)
         })
         
-        if UI_IS_IPONE6P {
+        if UI_IS_IPONE6P || UI_IS_IPHONEX{
             titleLabel?.font = UIFont.systemFont(ofSize: 22)
             amountLabel?.font = UIFont.systemFont(ofSize: 30)
             directionsForUseBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+            amountLabel?.snp.updateConstraints({ (make) in
+                make.width.equalTo(150)
+            })
         }
     }
     

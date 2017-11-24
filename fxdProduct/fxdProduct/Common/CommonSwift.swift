@@ -18,6 +18,8 @@ let QUTOA_COLOR = UIColor.init(red: 153/255.0, green: 153/255.0, blue: 153/255.0
 
 let TITLE_COLOR = UIColor.init(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
 
+let APPLICATION_backgroundColor = UIColor.init(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+
 let  _k_w = UIScreen.main.bounds.size.width
 let  _k_h = UIScreen.main.bounds.size.height
 
@@ -26,6 +28,7 @@ let UI_IS_IPONE5 = (UI_IS_IPONE && _k_h == 568.0)
 let UI_IS_IPONE6P = (UI_IS_IPONE && _k_h == 736.0)
 let UI_IS_IPONE6 = (UI_IS_IPONE && _k_h == 667.0)
 let UI_IS_IPONE4 = (UI_IS_IPONE && _k_h == 480.0)
+let UI_IS_IPHONEX = (UI_IS_IPONE && _k_h == 812.0)
 
 let SalaryLoan = "P001002"   //工薪贷平台
 let RapidLoan = "P001004"   //急速贷平台

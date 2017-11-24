@@ -6,9 +6,9 @@
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface PserInfoViewModel : ViewModelClass
+@interface PserInfoViewModel : FXD_ViewModelBaseClass
 
 /**
  获取省市区全部数据

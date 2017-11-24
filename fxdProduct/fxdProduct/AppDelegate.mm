@@ -8,19 +8,19 @@
 
 #import "AppDelegate.h"
 #import "BaseNavigationViewController.h"
-#import "LunchViewController.h"
+#import "LunchVCModules.h"
 #import "CALayer+Transition.h"
 #import "DataBaseManager.h"
 #import "testModelFmdb.h"
 #import "BSFingerSDK.h"
-#import "ShareConfig.h"
+#import "FXD_AppShareConfig.h"
 #import "JPUSHService.h"
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
-#import "FXDAppUpdateChecker.h"
+#import "FXD_AppUpdateChecker.h"
 #import "SetUpFMDevice.h"
-#import "SetSome.h"
+#import "FXD_LaunchConfiguration.h"
 #import "LoginViewModel.h"
 
 
@@ -90,12 +90,12 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 //    [self createFMDB:launchOptions];
     [self initJPush:launchOptions];
 
-    BOOL isFirst = [LunchViewController canShowNewFeature];
+    BOOL isFirst = [LunchVCModules canShowNewFeature];
 //    isFirst = true;
     if (isFirst) {
-        self.window.rootViewController = [LunchViewController newLunchVCWithModels:@[@"guide_1",@"guide_2",@"guide_3"] enterBlock:^{
+        self.window.rootViewController = [LunchVCModules newLunchVCWithModels:@[@"guide_1",@"guide_2",@"guide_3"] enterBlock:^{
             [self enter];
-            [EmptyUserData EmptyData];
+            [FXD_AppEmptyUserData EmptyData];
         }];
     } else {
         [self enter];
@@ -115,10 +115,10 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     dispatch_queue_t queue = dispatch_queue_create("trilateral_initialize", DISPATCH_QUEUE_CONCURRENT);
     dispatch_async(queue, ^{
         //shareSDK
-        [ShareConfig configDefaultShare];
+        [FXD_AppShareConfig configShareInitialSetting];
         //FMDevice
         [SetUpFMDevice configFMDevice];
-        [[SetSome shared]InitializeAppSet];
+        [[FXD_LaunchConfiguration shared]InitializeAppConfiguration];
     });
 }
 -(void)createFMDB:(NSDictionary *)launchOptions{
@@ -134,7 +134,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
             {
                 testModelFmdb *msg=[[testModelFmdb alloc]init];
                 msg.title=@"通知";
-                msg.date=[Tool getNowTime];
+                msg.date=[FXD_Tool getNowTime];
                 msg.content=payloadMsg;
                 [[DataBaseManager shareManager]insertWithModel:msg:userTableName];
             }
@@ -145,9 +145,9 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
 -(void)heguiceshi{
     
-    [Utility sharedUtility].userInfo.juid = @"ab6a0ee1ecaa48069b1af882375891c4";
-    [Utility sharedUtility].userInfo.tokenStr = [NSString stringWithFormat:@"%@token",@"ab6a0ee1ecaa48069b1af882375891c4"];
-    [Utility sharedUtility].loginFlage = YES;
+    [FXD_Utility sharedUtility].userInfo.juid = @"ab6a0ee1ecaa48069b1af882375891c4";
+    [FXD_Utility sharedUtility].userInfo.tokenStr = [NSString stringWithFormat:@"%@token",@"ab6a0ee1ecaa48069b1af882375891c4"];
+    [FXD_Utility sharedUtility].loginFlage = YES;
 }
 
 - (void)monitorNetworkState
@@ -161,13 +161,13 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
             case AFNetworkReachabilityStatusUnknown: // 未知网络
             case AFNetworkReachabilityStatusNotReachable: // 没有网络(断网)
                 DLog(@"未知网络 || 没有网络(断网)");
-                [Utility sharedUtility].networkState = NO;
+                [FXD_Utility sharedUtility].networkState = NO;
                 break;
                 
             case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络
             case AFNetworkReachabilityStatusReachableViaWiFi: // WIFI
                 DLog(@"手机自带网络 || WIFI");
-                [Utility sharedUtility].networkState = YES;
+                [FXD_Utility sharedUtility].networkState = YES;
                 break;
         }
     }];
@@ -178,7 +178,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
 -(void)enter{
     
-    self.btb = [[BaseTabBarViewController alloc]init];
+    self.btb = [[FXDBaseTabBarVCModule alloc]init];
     self.window.rootViewController = self.btb;
     
     //    [self.window.layer transitionWithAnimType:TransitionAnimTypeRamdom subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:2.0f];
@@ -204,7 +204,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     //清除激光推送JPush服务器中存储的badge值
     [JPUSHService resetBadge];
-    [[FXDAppUpdateChecker sharedUpdateChecker] checkAPPVersion];
+    [[FXD_AppUpdateChecker sharedUpdateChecker] checkAPPVersion];
 
 }
 
@@ -311,11 +311,10 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     [JPUSHService handleRemoteNotification:userInfo];
 }
 
-
 -(void)uploadJPushID{
     
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
-        if (registrationID != nil && [Utility sharedUtility].userInfo.juid) {
+        if (registrationID != nil && [FXD_Utility sharedUtility].userInfo.juid) {
             LoginViewModel * loginVM = [[LoginViewModel alloc]init];
             [loginVM uploadUserRegisterID:registrationID];
         }

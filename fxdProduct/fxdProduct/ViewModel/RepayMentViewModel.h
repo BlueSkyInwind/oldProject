@@ -6,9 +6,9 @@
 //  Copyright © 2015年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface RepayMentViewModel : ViewModelClass
+@interface RepayMentViewModel : FXD_ViewModelBaseClass
 
 - (void)fatchQueryWeekShouldAlsoAmount:(NSDictionary *)paramDic;
 

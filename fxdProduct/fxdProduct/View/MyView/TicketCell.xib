@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,12 +19,12 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6_my_icon_08" translatesAutoresizingMaskIntoConstraints="NO" id="IFx-gX-hwg">
-                        <rect key="frame" x="17" y="0.0" width="341" height="141"/>
+                        <rect key="frame" x="15" y="0.0" width="345" height="141"/>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="IFx-gX-hwg" secondAttribute="trailing" constant="17" id="Bht-Wj-fCJ"/>
-                    <constraint firstItem="IFx-gX-hwg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="CoZ-v0-aqo"/>
+                    <constraint firstAttribute="trailing" secondItem="IFx-gX-hwg" secondAttribute="trailing" constant="15" id="Bht-Wj-fCJ"/>
+                    <constraint firstItem="IFx-gX-hwg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="CoZ-v0-aqo"/>
                     <constraint firstItem="IFx-gX-hwg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ks9-2O-0Pn"/>
                     <constraint firstAttribute="bottom" secondItem="IFx-gX-hwg" secondAttribute="bottom" id="w1I-tr-eQh"/>
                 </constraints>
@@ -37,6 +37,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="6_my_icon_08" width="341" height="141"/>
+        <image name="6_my_icon_08" width="316" height="108"/>
     </resources>
 </document>

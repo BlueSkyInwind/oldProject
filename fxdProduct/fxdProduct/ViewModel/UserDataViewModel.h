@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface UserDataViewModel : ViewModelClass
+@interface UserDataViewModel : FXD_ViewModelBaseClass
 
 /**
  查询用户资料的录入进度

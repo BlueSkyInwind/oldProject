@@ -6,9 +6,9 @@
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface BankInfoViewModel : ViewModelClass
+@interface BankInfoViewModel : FXD_ViewModelBaseClass
 
 /**
  获取用户的银行卡列表

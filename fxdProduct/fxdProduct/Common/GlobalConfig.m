@@ -1,18 +1,6 @@
 
 
-//NSString * const _main_url  =   @"http://192.168.6.130:9191/fxd-esb/esb/";
-//NSString * const _main_url  =   @"http://192.168.14.18:9191/fxd-esb/esb/";
 
-//NSString * const _ValidESB_url = @"http://192.168.6.85:9090/fxd-esb/";
-//NSString * const _ValidESB_url = @"http://192.168.6.130:9191/fxd-esb/";
-//NSString * const _ValidESB_url = @"http://192.168.14.18:9191/fxd-esb/";
-
-//NSString * const _H5_url    =   @"http://192.168.6.130:9090/fxd-h5/page/";
-//NSString * const _H5_url    =   @"https://192.168.6.130:8892/fxd-h5/page/";
-
-//NSString * const _P2P_url   =   @"http://192.168.6.85:8080/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.9.254:10010/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.15.163:10010/p2p/";
 
  #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0
@@ -35,22 +23,24 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 //http://192.168.13.173:8005/ 张强本地
 
 //测试导流 192.168.6.134
-//NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-//NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-//NSString * const _main_new_url  =  @"http://h5.test.fxds/";
-//NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
-//NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+
+NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+NSString * const _main_new_url  =  @"http://h5.test.fxds/";
+//NSString * const _main_new_url  =  @"http:/ /h5.dev.fxds/";
+NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
+NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
+NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //UAT环境
-NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
-NSString * const _agreement_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
-NSString * const _main_new_url  =  @"http://h5.uat.fxds/";
-NSString * const _ValidESB_url  =   @"http://h5.uat.fxds/fxd-esb/";
-NSString * const _H5_url    =   @"http://h5.uat.fxds/fxd-h5/page/";
-NSString * const _p2P_url = @"http://h5.uat.fxds/fxd-esb/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+//NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
+//NSString * const _main_new_url  =  @"http://h5.uat.fxds/";
+//NSString * const _ValidESB_url  =   @"http://h5.uat.fxds/fxd-esb/";
+//NSString * const _H5_url    =   @"http://h5.uat.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://h5.uat.fxds/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //http://192.168.6.134:9191/fxd-esb/
 //张强本地
@@ -61,19 +51,6 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 //NSString * const _p2P_url = @"http://192.168.13.173:8005/fxd-esb/p2p/";
 //NSString * const _P2P_url   =   @"http://192.168.13.173:8005/p2p/";
 
-//彭冲本地
-//NSString * const _main_url  =   @"http://192.168.9.243:8080/fxd-esb/esb/";
-//NSString * const _ValidESB_url  =   @"http://192.168.9.243:8080/fxd-esb/";
-//NSString * const _H5_url    =   @"http://192.168.6.133/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://192.168.9.243:8080/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
-
-//张宇本地
-//NSString * const _main_url  =   @"http://192.168.12.166:9191/fxd-esb/esb/";
-//NSString * const _ValidESB_url  =   @"http://192.168.12.166:9191/fxd-esb/";
-//NSString * const _H5_url    =   @"http://192.168.12.166:9191/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://192.168.12.166:9191/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //芝麻信用测试地址
 //NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";
@@ -469,7 +446,7 @@ NSString * const    _CapitalList_url    =    @"apigw/client/capital/list";
 NSString * const    _CapitalLoan_url    =    @"apigw/client/capital/loan";
 
 //联联绑卡回调地址
-NSString * const    _CapitalLoanBack_url    =    @"main.html";
+NSString * const    _CapitalLoanBack_url    =    @"apigw/client/paidcenter/lianlian/notify";
 
 //联联绑卡返回回调地址
 NSString * const    _ShanLinBack_url    =    @"main.html#shanlinBack";
@@ -485,6 +462,13 @@ NSString * const    _ChoosePattern_url    =    @"apigw/client/ios/expay";
 
 //优惠券规则
 NSString * const    _DiscountTicketRule_url    =    @"protocol/couponInstructions.html";
+
+//新优惠券规则
+NSString * const    _New_DiscountTicket_url    =    @"apigw/client/operation/client/getuse";
+
+//新优惠券规则
+NSString * const    _DeductibleAmountOfDiscountTicket_url    =    @"apigw/client/order/voucher/money/single";
+
 
 #pragma mark - 合规接口
 
@@ -546,6 +530,10 @@ NSString * const    _saveLoanCase_url    =    @"hg/saveLoanCase.jhtml";
 //首借免息
 NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
 
+//老客周末活动判断是否弹框刮奖
+NSString *const     _getDrawLottery_url     =    @"apigw/client/market/getDrawLottery";
+//协议
+NSString *const     _ProductProtocol_url     =    @"apigw/client/product/getProductProtocolApi";
 
 
 #pragma mark - 对外导流接口
@@ -570,7 +558,6 @@ NSString * const SalaryLoan = @"P001002";                   //工薪贷平台
 NSString * const RapidLoan = @"P001004";                   //急速贷平台
 NSString * const WhiteCollarLoan = @"P001005";           //白领贷平台
 NSString * const DeriveRapidLoan = @"P001006";           //急速贷衍生（30天）平台
-
 
 #pragma Mark - 项目配置信息
 

@@ -6,9 +6,9 @@
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 #import "GetCaseInfo.h"
-@interface CheckViewModel : ViewModelClass
+@interface CheckViewModel : FXD_ViewModelBaseClass
 
 /**
  审批金额查询接口
@@ -29,7 +29,7 @@
 @end
 
 
-@interface ComplianceViewModel : ViewModelClass
+@interface ComplianceViewModel : FXD_ViewModelBaseClass
 
 /**
  获取fxd合规用户状态
@@ -52,7 +52,7 @@
 
 @end
 
-@interface CheckBankViewModel : ViewModelClass
+@interface CheckBankViewModel : FXD_ViewModelBaseClass
 
 /**
  银行卡获取接口

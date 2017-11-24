@@ -44,7 +44,7 @@
     
     NSString * titleName  =  title == nil ? @"发薪贷" : title;
     
-    NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
+    NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode];
 //    NSString * targetUrl = [urlStr stringByAppendingFormat:@"?merchant_code_=%@",invationCode];
     NSString * targetUrl = urlStr;
 
@@ -123,7 +123,7 @@
         return;
     }
     
-    if (![Utility sharedUtility].loginFlage || [viewControllerName isEqualToString:@"LoginViewController"]) {
+    if (![FXD_Utility sharedUtility].loginFlage || [viewControllerName isEqualToString:@"LoginViewController"]) {
         [self presentLogin:currentVC];
         return;
     }
@@ -166,25 +166,34 @@
  */
 - (void)savePictureToAlbum:(NSString *)src VC:(UIViewController *)currentVC
 {
-    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要保存到相册吗？" preferredStyle:UIAlertControllerStyleActionSheet];
-    
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        
-        [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:src] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-        } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
-            NSLog(@"%ld",cacheType);
-            if (data) {
-                UIImage *image = [UIImage imageWithData:data];
-                UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-            }else{
-                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"保存失败"];
-            }
-        }];
+        [self loadImage:src VC:currentVC];
     }]];
     [currentVC presentViewController:alert animated:YES completion:nil];
+}
+
+/**
+ 活动图片下载
+
+ @param loadUrl 下载链接
+ */
+-(void)loadImage:(NSString *)loadUrl VC:(UIViewController *)currentVC{
+    [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:loadUrl] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+        if (expectedSize > 0) {
+            float numper = (float)receivedSize / (float)expectedSize;
+            [[MBPAlertView sharedMBPTextView] showProgressOnly:currentVC.view Progress:numper];
+        }
+    } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+        NSLog(@"%ld",cacheType);
+        if (data || image) {
+            UIImage * resultImage = data == nil ? image : [UIImage imageWithData:data];
+            UIImageWriteToSavedPhotosAlbum(resultImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"保存失败"];
+        }
+    }];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
@@ -195,14 +204,29 @@
     }
 }
 
+
+/**
+ 调用本地等待条
+ 
+ @param vc 父视图
+ */
+-(void)waitHubAnimationView:(UIViewController *)vc{
+    
+    [[MBPAlertView sharedMBPTextView]loadingWaitHUDView:vc.view];
+
+}
+-(void)removeWaitHubAnimationView{
+    [[MBPAlertView sharedMBPTextView]removeWaitHUDView];
+}
+
 - (void)presentLogin:(UIViewController *)vc
 {
     @try{
         
-        if ([Utility sharedUtility].loginFlage) {
+        if ([FXD_Utility sharedUtility].loginFlage) {
             LoginViewModel * loginVM = [[LoginViewModel alloc]init];
             [loginVM deleteUserRegisterID];
-            [EmptyUserData EmptyData];
+            [FXD_AppEmptyUserData EmptyData];
         }
         
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
@@ -222,10 +246,10 @@
 
 -(NSString *)obtainLoginInfo{
     
-    NSString * juidStr = [Utility sharedUtility].userInfo.juid == nil ? @"" : [Utility sharedUtility].userInfo.juid;
-    NSString * tokenStr = [Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [Utility sharedUtility].userInfo.tokenStr;
-    NSString * phoneNumber = [Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [Utility sharedUtility].userInfo.userMobilePhone;
-    NSString * invationCode =  [Tool getContentWithKey:kInvitationCode];
+    NSString * juidStr = [FXD_Utility sharedUtility].userInfo.juid == nil ? @"" : [FXD_Utility sharedUtility].userInfo.juid;
+    NSString * tokenStr = [FXD_Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [FXD_Utility sharedUtility].userInfo.tokenStr;
+    NSString * phoneNumber = [FXD_Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [FXD_Utility sharedUtility].userInfo.userMobilePhone;
+    NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode];
     
     NSDictionary *paramDic = @{
                            @"juid":juidStr,
@@ -252,9 +276,7 @@
 }
 */
 
-
 #pragma mark -- app启动跳转处理
-
 
 /**
  外部启动app跳转某个页面
@@ -269,10 +291,10 @@
 }
 
 -(BaseNavigationViewController *)jumpVC{
-    id currentVC = [[Tool share]topViewController];
+    id currentVC = [[FXD_Tool share]topViewController];
     BaseNavigationViewController * BaseNavigationVC;
-    if ([currentVC isKindOfClass:[BaseTabBarViewController class]]) {
-        BaseTabBarViewController * baseTabVC = currentVC;
+    if ([currentVC isKindOfClass:[FXDBaseTabBarVCModule class]]) {
+        FXDBaseTabBarVCModule * baseTabVC = currentVC;
         BaseNavigationVC = baseTabVC.selectedViewController;
     }
     return BaseNavigationVC;

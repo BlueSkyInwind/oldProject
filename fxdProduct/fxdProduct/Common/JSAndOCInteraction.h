@@ -63,6 +63,14 @@
  */
 - (void)savePictureToAlbum:(NSString *)src VC:(UIViewController *)currentVC;
 
+/**
+ 调用本地等待条
+ @param vc 父视图
+ */
+-(void)waitHubAnimationView:(UIViewController *)vc;
+-(void)removeWaitHubAnimationView;
+
+
 
 /**
  获取app的登录信息

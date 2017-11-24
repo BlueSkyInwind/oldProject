@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 #import "changePasswordParam.h"
 
-@interface ChangePasswordViewModel : ViewModelClass
+@interface ChangePasswordViewModel : FXD_ViewModelBaseClass
 
 /**
  请求修改密码

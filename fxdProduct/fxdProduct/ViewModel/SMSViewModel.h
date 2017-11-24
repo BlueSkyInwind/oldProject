@@ -6,7 +6,7 @@
 //  Copyright © 2015年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 #import "ReturnMsgBaseClass.h"
 #import "SMSModel.h"
 
@@ -21,7 +21,7 @@ typedef enum {
     
 }VerifyCodeType;
 
-@interface SMSViewModel : ViewModelClass
+@interface SMSViewModel : FXD_ViewModelBaseClass
 
 /**
  发送验证码请求

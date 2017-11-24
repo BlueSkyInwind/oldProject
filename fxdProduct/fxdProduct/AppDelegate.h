@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseTabBarViewController.h"
+#import "FXDBaseTabBarVCModule.h"
 
 static NSString *appKey = @"ba8e9f4d543ae506db5295fb";
 static NSString *channel = @"App Store";
@@ -20,7 +20,7 @@ static BOOL isProduction = true;
 @property float autoSizeScaleX;
 @property float autoSizeScaleY;
 
-@property (nonatomic,strong)BaseTabBarViewController *btb;
+@property (nonatomic,strong)FXDBaseTabBarVCModule *btb;
 @property (nonatomic,strong)NSDictionary * notificationContentInfo;
 @property (nonatomic,assign)BOOL isShow;
 @property (nonatomic,assign)BOOL isHomeChooseShow;

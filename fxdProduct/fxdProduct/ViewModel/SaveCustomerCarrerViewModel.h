@@ -6,9 +6,9 @@
 //  Copyright © 2016年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface SaveCustomerCarrerViewModel : ViewModelClass
+@interface SaveCustomerCarrerViewModel : FXD_ViewModelBaseClass
 
 - (void)saveCustomCarrer:(NSDictionary *)paramDic;
 

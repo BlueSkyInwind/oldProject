@@ -6,9 +6,9 @@
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import "ViewModelClass.h"
+#import "FXD_ViewModelBaseClass.h"
 
-@interface UnbundlingBankCardViewModel : ViewModelClass
+@interface UnbundlingBankCardViewModel : FXD_ViewModelBaseClass
 /**
  合规发送验证码
  */
