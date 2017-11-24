@@ -82,7 +82,6 @@
 
 #pragma mark 我的页面中间部分点击事件
 
-
 /**
  现金红包
  */
@@ -97,7 +96,6 @@
 //    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"现金红包"];
 
 }
-
 
 /**
  优惠券

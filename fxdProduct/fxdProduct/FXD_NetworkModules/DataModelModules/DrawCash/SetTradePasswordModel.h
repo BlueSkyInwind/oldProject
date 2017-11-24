@@ -8,9 +8,20 @@
 
 #import <JSONModel/JSONModel.h>
 
-@interface SetTradePasswordModel : JSONModel
+@interface SetTradePasswordParam : JSONModel
 
-
-
+@property (nonatomic,strong)NSString <Optional> * firstPassword;
+@property (nonatomic,strong)NSString <Optional> * operateType;
+@property (nonatomic,strong)NSString <Optional> * secondPassword;
 
 @end
+
+@interface SetTradePasswordModel : JSONModel
+
+@property (nonatomic,strong)NSString <Optional> * amount;
+@property (nonatomic,strong)NSString <Optional> * message;
+@property (nonatomic,strong)NSString <Optional> * status;
+
+@end
+
+

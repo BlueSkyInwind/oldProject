@@ -11,8 +11,8 @@ import UIKit
 @objc protocol SetIdentitiesOfTradeViewDelegate: NSObjectProtocol {
     
     //提现按钮
-    func NextBottonClick()
-    
+    func NextBottonClick(_ code:String)
+
     func userInputIDCardCode(_ code:String)
     
 }
@@ -22,9 +22,11 @@ class SetIdentitiesOfTradeView: UIView,UITableViewDelegate,UITableViewDataSource
     var nextButton:UIButton?
     var identitiesOfTradeCell:IdentitiesOfTradeTableViewCell?
     var delegate:SetIdentitiesOfTradeViewDelegate?
+    var inputContent:String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        inputContent = ""
         setUpUI()
     }
     
@@ -86,6 +88,7 @@ extension SetIdentitiesOfTradeView {
         identitiesOfTradeCell = tableView.dequeueReusableCell(withIdentifier:  "IdentitiesOfTradeTableViewCell", for: indexPath) as? IdentitiesOfTradeTableViewCell
         identitiesOfTradeCell?.validdDCardNum = ({[weak self] (idNum) in
             if (self?.delegate != nil) {
+                 self?.inputContent = idNum
                 self?.delegate?.userInputIDCardCode(idNum)
             }
         })
@@ -117,7 +120,7 @@ extension SetIdentitiesOfTradeView {
     
     @objc func nextBtnClick()  {
         if (self.delegate != nil) {
-            self.delegate?.NextBottonClick()
+            self.delegate?.NextBottonClick(self.inputContent!)
         }
     }
 }

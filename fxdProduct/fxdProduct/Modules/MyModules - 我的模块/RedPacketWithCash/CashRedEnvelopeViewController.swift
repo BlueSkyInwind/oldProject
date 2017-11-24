@@ -75,15 +75,13 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         alertController.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: { (cancelAction) in
             
         }))
-        
         alertController.addAction(UIAlertAction.init(title: "去设置", style: .default, handler: { (action) in
-            
-            let controller = CashWithdrawViewController()
-            self.navigationController?.pushViewController(controller, animated:true)
+            let transactionInfoVC = SetTransactionInfoViewController.init()
+            transactionInfoVC.exhibitionType = .IDCardNumber_Type
+            self.navigationController?.pushViewController(transactionInfoVC, animated: true)
         }))
 
         self.present(alertController, animated: true, completion: nil)
-        
     }
     
     @objc func rightClick(){
