@@ -22,8 +22,6 @@ import UIKit
 class MineMiddleView: UIView {
 
     @objc var couponNumLabel : UILabel?
-//    @objc var redPacketNumLabel : UILabel?
-//    @objc var redPacketImageView : UIImageView?
     @objc var couponImageView : UIImageView?
     @objc weak var delegate: MineMiddleViewDelegate?
     /*
@@ -62,24 +60,6 @@ extension MineMiddleView{
         
         }
         
-//        redPacketImageView = UIImageView()
-//        redPacketImageView?.image = UIImage(named:"dots")
-//        redPacketView.addSubview(redPacketImageView!)
-//        redPacketImageView?.snp.makeConstraints({ (make) in
-//            make.left.equalTo(redPacketView.snp.right).offset(-22)
-//            make.top.equalTo(redPacketView.snp.top).offset(-5)
-//        })
-//
-//        redPacketNumLabel = UILabel()
-//        redPacketNumLabel?.font = UIFont.systemFont(ofSize: 15)
-//        redPacketNumLabel?.textColor = UIColor.white
-//        redPacketImageView?.addSubview(redPacketNumLabel!)
-//        redPacketNumLabel?.snp.makeConstraints({ (make) in
-//            make.centerX.equalTo((redPacketImageView?.snp.centerX)!)
-//            make.centerY.equalTo((redPacketImageView?.snp.centerY)!)
-//
-//        })
-        
         let couponView = MiddleView(imageName: "coupon", title: "优惠券")
         couponView.isUserInteractionEnabled = true
         couponView.tag = 102
@@ -96,6 +76,7 @@ extension MineMiddleView{
         }
         couponImageView = UIImageView()
         couponImageView?.image = UIImage(named:"dots")
+        couponImageView?.isHidden = true
         couponView.addSubview(couponImageView!)
         couponImageView?.snp.makeConstraints({ (make) in
             make.left.equalTo(couponView.snp.right).offset(-22)
@@ -105,6 +86,7 @@ extension MineMiddleView{
         couponNumLabel = UILabel()
         couponNumLabel?.font = UIFont.systemFont(ofSize: 15)
         couponNumLabel?.textColor = UIColor.white
+        couponNumLabel?.isHidden = true
         couponImageView?.addSubview(couponNumLabel!)
         couponNumLabel?.snp.makeConstraints({ (make) in
             make.centerX.equalTo((couponImageView?.snp.centerX)!)
