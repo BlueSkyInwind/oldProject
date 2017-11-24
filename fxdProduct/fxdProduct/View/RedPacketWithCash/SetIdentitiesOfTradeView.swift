@@ -8,13 +8,20 @@
 
 import UIKit
 
-typealias NextBottonClick = () -> Void
+@objc protocol SetIdentitiesOfTradeViewDelegate: NSObjectProtocol {
+    
+    //提现按钮
+    func NextBottonClick()
+    
+    func userInputIDCardCode(_ code:String)
+    
+}
 class SetIdentitiesOfTradeView: UIView,UITableViewDelegate,UITableViewDataSource{
 
     var contentTableView:UITableView?
     var nextButton:UIButton?
     var identitiesOfTradeCell:IdentitiesOfTradeTableViewCell?
-    var nextClick:NextBottonClick?
+    var delegate:SetIdentitiesOfTradeViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,7 +84,11 @@ extension SetIdentitiesOfTradeView {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         identitiesOfTradeCell = tableView.dequeueReusableCell(withIdentifier:  "IdentitiesOfTradeTableViewCell", for: indexPath) as? IdentitiesOfTradeTableViewCell
-        
+        identitiesOfTradeCell?.validdDCardNum = ({[weak self] (idNum) in
+            if (self?.delegate != nil) {
+                self?.delegate?.userInputIDCardCode(idNum)
+            }
+        })
         return identitiesOfTradeCell!
     }
     
@@ -105,8 +116,8 @@ extension SetIdentitiesOfTradeView {
     }
     
     @objc func nextBtnClick()  {
-        if (self.nextClick != nil) {
-            self.nextClick!()
+        if (self.delegate != nil) {
+            self.delegate?.NextBottonClick()
         }
     }
 }

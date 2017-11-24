@@ -21,7 +21,7 @@ import IQKeyboardManager
     case modificationTradePassword_Type
 }
 
-class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyViewDelegate,SetPayPasswordViewDelegate{
+class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyViewDelegate,SetPayPasswordViewDelegate,SetIdentitiesOfTradeViewDelegate{
     
     var exhibitionType:SetExhibitionType?
     var identitiesOfTradeView:SetIdentitiesOfTradeView?
@@ -67,12 +67,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     /// 身份证效验界面
     func setIDCardView()  {
         identitiesOfTradeView = SetIdentitiesOfTradeView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h))
-        identitiesOfTradeView?.nextClick = ({ [weak self]() in
-            //下一个按钮点击
-            self?.exhibitionType = .verificationCode_Type
-            self?.configureView()
-            self?.pushVerificationCodeView()
-        })
+        identitiesOfTradeView?.delegate = self
         self.view.addSubview(identitiesOfTradeView!)
     }
     
@@ -110,6 +105,19 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         }
     }
     
+    //MARK: SetIdentitiesOfTradeViewDelegate
+    func NextBottonClick() {
+        self.exhibitionType = .verificationCode_Type
+        self.configureView()
+        self.pushVerificationCodeView()
+    }
+    
+    func userInputIDCardCode(_ code: String) {
+        verifyIDCardNum(code) {( isSuccess ) in
+            
+        }
+    }
+    
     //MARK: SetPayPasswordVerifyViewDelegate
     func userInputVerifyCode(_ code: String) {
         self.exhibitionType = .setTradePassword_Type
@@ -118,6 +126,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     }
     
     func sendButtonClick() {
+        
         
         
     }
@@ -136,10 +145,20 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     
     
     //MARK:网络请求
-    func verifyIDCardNum(_ IDStr:String)  {
-//        SetTransactionPasswordViewModel *  transactionVC = [SetTransactionPasswordViewModel alloc]
-        
-        
+    func verifyIDCardNum(_ IDStr:String, _ result : @escaping (_ isSuccess : Bool) -> Void)  {
+        let transactionVC = SetTransactionPasswordViewModel.init()
+        transactionVC.setBlockWithReturn({ [weak self] (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                result(true)
+            }else{
+                result(false)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            result(false)
+        }
+        transactionVC.verifyIdentityCardNumber(IDStr)
     }
     
     override func didReceiveMemoryWarning() {

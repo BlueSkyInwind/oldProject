@@ -156,8 +156,6 @@
 		63553B271E63CB8C00B2C1FF /* JXLMessagePrse.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B261E63CB8C00B2C1FF /* JXLMessagePrse.m */; };
 		635AB0411E07BD46008A760C /* P2PBillDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB0401E07BD46008A760C /* P2PBillDetail.m */; };
 		635AB7901BE2FE2700C32919 /* ReturnMsgBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB78F1BE2FE2700C32919 /* ReturnMsgBaseClass.m */; };
-		635AB7961BE2FE6600C32919 /* CashBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7931BE2FE6600C32919 /* CashBaseClass.m */; };
-		635AB7971BE2FE6600C32919 /* CashResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7951BE2FE6600C32919 /* CashResult.m */; };
 		635AB7AC1BE34F9F00C32919 /* ShouldAlsoAmountBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7A91BE34F9F00C32919 /* ShouldAlsoAmountBaseClass.m */; };
 		635AB7AD1BE34F9F00C32919 /* ShouldAlsoAmountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7AB1BE34F9F00C32919 /* ShouldAlsoAmountResult.m */; };
 		635AB7B31BE3540100C32919 /* AmountMsgBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7B01BE3540100C32919 /* AmountMsgBaseClass.m */; };
@@ -496,6 +494,8 @@
 		848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
 		8492ED261FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */; };
 		8492ED271FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */; };
+		8492ED2B1FC7C68200C8D457 /* SetTradePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED2A1FC7C68200C8D457 /* SetTradePasswordModel.m */; };
+		8492ED2C1FC7C68200C8D457 /* SetTradePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED2A1FC7C68200C8D457 /* SetTradePasswordModel.m */; };
 		8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
@@ -741,7 +741,6 @@
 		CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6E69EF1C7199A000053A75 /* DiscountTicketController.m */; };
 		CC0DF9941EA5B1090024841A /* LoanProcessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F254901E49CFE800852CF1 /* LoanProcessCell.m */; };
 		CC0DF9951EA5B1090024841A /* CustomerBaseInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830EF1CBB82C30005C4CD /* CustomerBaseInfoResult.m */; };
-		CC0DF9971EA5B1090024841A /* CashBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7931BE2FE6600C32919 /* CashBaseClass.m */; };
 		CC0DF9981EA5B1090024841A /* LOTLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16971E517D9F00AB8AB6 /* LOTLayerView.m */; };
 		CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AF01CA8DBBD00D04ED8 /* RegionSub.m */; };
 		CC0DF99A1EA5B1090024841A /* RegionCodeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830FC1CBCA1A90005C4CD /* RegionCodeResult.m */; };
@@ -930,7 +929,6 @@
 		CC0DFA801EA5B1090024841A /* CardListBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D45971BCC99DE00874064 /* CardListBaseClass.m */; };
 		CC0DFA811EA5B1090024841A /* LunchVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 639E886F1CA1371800254216 /* LunchVCModules.m */; };
 		CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E31D98F7E9006F58F3 /* YYTextTransaction.m */; };
-		CC0DFA841EA5B1090024841A /* CashResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7951BE2FE6600C32919 /* CashResult.m */; };
 		CC0DFA851EA5B1090024841A /* YYTextRubyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24D41D98F7E9006F58F3 /* YYTextRubyAnnotation.m */; };
 		CC0DFA871EA5B1090024841A /* LoginMsgBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AAD1CA2952400D04ED8 /* LoginMsgBaseClass.m */; };
 		CC0DFA891EA5B1090024841A /* GetMoneyProcessUserBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9EA1BF0B15700FD23A8 /* GetMoneyProcessUserBean.m */; };
@@ -1544,10 +1542,6 @@
 		635AB0401E07BD46008A760C /* P2PBillDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PBillDetail.m; sourceTree = "<group>"; };
 		635AB78E1BE2FE2700C32919 /* ReturnMsgBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnMsgBaseClass.h; sourceTree = "<group>"; };
 		635AB78F1BE2FE2700C32919 /* ReturnMsgBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReturnMsgBaseClass.m; sourceTree = "<group>"; };
-		635AB7921BE2FE6600C32919 /* CashBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashBaseClass.h; sourceTree = "<group>"; };
-		635AB7931BE2FE6600C32919 /* CashBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashBaseClass.m; sourceTree = "<group>"; };
-		635AB7941BE2FE6600C32919 /* CashResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashResult.h; sourceTree = "<group>"; };
-		635AB7951BE2FE6600C32919 /* CashResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashResult.m; sourceTree = "<group>"; };
 		635AB7A71BE34F9F00C32919 /* DataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModels.h; sourceTree = "<group>"; };
 		635AB7A81BE34F9F00C32919 /* ShouldAlsoAmountBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShouldAlsoAmountBaseClass.h; sourceTree = "<group>"; };
 		635AB7A91BE34F9F00C32919 /* ShouldAlsoAmountBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShouldAlsoAmountBaseClass.m; sourceTree = "<group>"; };
@@ -2105,6 +2099,8 @@
 		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
 		8492ED241FC7B63F00C8D457 /* SetTransactionPasswordViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetTransactionPasswordViewModel.h; sourceTree = "<group>"; };
 		8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTransactionPasswordViewModel.m; sourceTree = "<group>"; };
+		8492ED291FC7C68200C8D457 /* SetTradePasswordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetTradePasswordModel.h; sourceTree = "<group>"; };
+		8492ED2A1FC7C68200C8D457 /* SetTradePasswordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTradePasswordModel.m; sourceTree = "<group>"; };
 		8496D3141F5A9E3A00CCEE72 /* BankInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankInfoViewModel.h; sourceTree = "<group>"; };
 		8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankInfoViewModel.m; sourceTree = "<group>"; };
 		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
@@ -3042,15 +3038,13 @@
 			path = ReturnMsg;
 			sourceTree = "<group>";
 		};
-		635AB7911BE2FE6600C32919 /* Cash */ = {
+		635AB7911BE2FE6600C32919 /* DrawCash */ = {
 			isa = PBXGroup;
 			children = (
-				635AB7921BE2FE6600C32919 /* CashBaseClass.h */,
-				635AB7931BE2FE6600C32919 /* CashBaseClass.m */,
-				635AB7941BE2FE6600C32919 /* CashResult.h */,
-				635AB7951BE2FE6600C32919 /* CashResult.m */,
+				8492ED291FC7C68200C8D457 /* SetTradePasswordModel.h */,
+				8492ED2A1FC7C68200C8D457 /* SetTradePasswordModel.m */,
 			);
-			path = Cash;
+			path = DrawCash;
 			sourceTree = "<group>";
 		};
 		635AB7A61BE34F9F00C32919 /* ShouldAmount */ = {
@@ -4195,7 +4189,6 @@
 				6383238C1BE8B7CA00DA9A7F /* BankCardInfo */,
 				635AB7AE1BE3540100C32919 /* AmountMsg */,
 				635AB7A61BE34F9F00C32919 /* ShouldAmount */,
-				635AB7911BE2FE6600C32919 /* Cash */,
 				635AB78D1BE2FE2700C32919 /* ReturnMsg */,
 				0F0650361BE219BF000DE94D /* LoanDoFindBaseClass */,
 				0F06503B1BE219BF000DE94D /* UserSureRefuseBaseClass */,
@@ -4217,6 +4210,7 @@
 				84CC899B1F59704900537910 /* Drawings */,
 				CCCC0A8C1F677B9B007E1EB0 /* UserDataResult.h */,
 				CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */,
+				635AB7911BE2FE6600C32919 /* DrawCash */,
 				84E306CC1F972BF100C97D72 /* DiscountTicket */,
 			);
 			path = DataModelModules;
@@ -5816,7 +5810,6 @@
 				84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
 				63F254921E49CFE800852CF1 /* LoanProcessCell.m in Sources */,
 				634830F41CBB82C30005C4CD /* CustomerBaseInfoResult.m in Sources */,
-				635AB7961BE2FE6600C32919 /* CashBaseClass.m in Sources */,
 				638A16EB1E517D9F00AB8AB6 /* LOTLayerView.m in Sources */,
 				63145AF41CA8DBBD00D04ED8 /* RegionSub.m in Sources */,
 				634830FF1CBCA1A90005C4CD /* RegionCodeResult.m in Sources */,
@@ -6101,7 +6094,6 @@
 				CC6F06791F74F26B00FA889E /* PickView.swift in Sources */,
 				CC0F1B991EE64A2A00A23651 /* ChangePasswordModel.m in Sources */,
 				848394221EDEB82A003EF4EC /* HomeBannerParamModel.m in Sources */,
-				635AB7971BE2FE6600C32919 /* CashResult.m in Sources */,
 				63FC24F91D98F7E9006F58F3 /* YYTextRubyAnnotation.m in Sources */,
 				63145AB21CA2952400D04ED8 /* LoginMsgBaseClass.m in Sources */,
 				8436149D1F0CF57C0036201A /* P2PContactContenParam.m in Sources */,
@@ -6143,6 +6135,7 @@
 				638C3F271CF2F470000446A7 /* PCCircleViewConst.m in Sources */,
 				63E1ECD11E1B8FAA0079A2F8 /* TADotView.m in Sources */,
 				63A24C641BE063A90036E8EF /* UIDevice+Extend.m in Sources */,
+				8492ED2B1FC7C68200C8D457 /* SetTradePasswordModel.m in Sources */,
 				638A17061E517D9F00AB8AB6 /* LOTShapeRectangle.m in Sources */,
 				034AF8301BEB4E4E001D668D /* PushParse.m in Sources */,
 				6391F7281D3377940097C943 /* BankList.m in Sources */,
@@ -6335,7 +6328,6 @@
 				CCCDA8811EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */,
 				CC0DF9941EA5B1090024841A /* LoanProcessCell.m in Sources */,
 				CC0DF9951EA5B1090024841A /* CustomerBaseInfoResult.m in Sources */,
-				CC0DF9971EA5B1090024841A /* CashBaseClass.m in Sources */,
 				CC0DF9981EA5B1090024841A /* LOTLayerView.m in Sources */,
 				CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */,
 				CC0DF99A1EA5B1090024841A /* RegionCodeResult.m in Sources */,
@@ -6603,7 +6595,6 @@
 				CC0DFA811EA5B1090024841A /* LunchVCModules.m in Sources */,
 				8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */,
 				CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */,
-				CC0DFA841EA5B1090024841A /* CashResult.m in Sources */,
 				CC0DFA851EA5B1090024841A /* YYTextRubyAnnotation.m in Sources */,
 				841E66EF1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */,
 				CC0DFA871EA5B1090024841A /* LoginMsgBaseClass.m in Sources */,
@@ -6679,6 +6670,7 @@
 				CC0DFAC71EA5B1090024841A /* LewPopupViewAnimationSlide.m in Sources */,
 				CC0DFAC81EA5B1090024841A /* UIImage+Water.m in Sources */,
 				CC0DFAC91EA5B1090024841A /* NSObject+Extend.m in Sources */,
+				8492ED2C1FC7C68200C8D457 /* SetTradePasswordModel.m in Sources */,
 				CC0DFACA1EA5B1090024841A /* GetMoneyHistoryResult.m in Sources */,
 				CC0DFACB1EA5B1090024841A /* LOTAnimationView.m in Sources */,
 				CC0DFACD1EA5B1090024841A /* YYMemoryCache.m in Sources */,
