@@ -78,7 +78,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
         alertController.addAction(UIAlertAction.init(title: "去设置", style: .default, handler: { (action) in
             
-            let controller = WithdrawViewController()
+            let controller = CashWithdrawViewController()
             self.navigationController?.pushViewController(controller, animated:true)
         }))
 

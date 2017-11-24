@@ -1125,8 +1125,8 @@
 		CC5D702D1ED4405500A074AF /* PaymentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */; };
 		CC5FC5A01FC2742700DB0D78 /* RedPacketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC59F1FC2742700DB0D78 /* RedPacketCell.swift */; };
 		CC5FC5A11FC2742700DB0D78 /* RedPacketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC59F1FC2742700DB0D78 /* RedPacketCell.swift */; };
-		CC5FC5A31FC2AF4700DB0D78 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC5A21FC2AF4700DB0D78 /* WithdrawViewController.swift */; };
-		CC5FC5A41FC2AF4700DB0D78 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC5A21FC2AF4700DB0D78 /* WithdrawViewController.swift */; };
+		CC5FC5A31FC2AF4700DB0D78 /* CashWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC5A21FC2AF4700DB0D78 /* CashWithdrawViewController.swift */; };
+		CC5FC5A41FC2AF4700DB0D78 /* CashWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC5A21FC2AF4700DB0D78 /* CashWithdrawViewController.swift */; };
 		CC5FC5AB1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC5AA1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift */; };
 		CC5FC5AC1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC5AA1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift */; };
 		CC5FC5AE1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC5AD1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift */; };
@@ -2273,7 +2273,7 @@
 		CC5D702A1ED4405500A074AF /* PaymentServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentServiceModel.h; sourceTree = "<group>"; };
 		CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentServiceModel.m; sourceTree = "<group>"; };
 		CC5FC59F1FC2742700DB0D78 /* RedPacketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketCell.swift; sourceTree = "<group>"; };
-		CC5FC5A21FC2AF4700DB0D78 /* WithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
+		CC5FC5A21FC2AF4700DB0D78 /* CashWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashWithdrawViewController.swift; sourceTree = "<group>"; };
 		CC5FC5AA1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailsCell.swift; sourceTree = "<group>"; };
 		CC5FC5AD1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailsViewController.swift; sourceTree = "<group>"; };
 		CC6C93E91F4A816500587C74 /* HomeDefaultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDefaultCell.swift; sourceTree = "<group>"; };
@@ -4975,7 +4975,7 @@
 			isa = PBXGroup;
 			children = (
 				CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */,
-				CC5FC5A21FC2AF4700DB0D78 /* WithdrawViewController.swift */,
+				CC5FC5A21FC2AF4700DB0D78 /* CashWithdrawViewController.swift */,
 				CC5FC5AD1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift */,
 				84F87F3C1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift */,
 				CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */,
@@ -5949,7 +5949,7 @@
 				63B142AC1D9A43B000C43B3F /* DrawService.m in Sources */,
 				63A24C611BE063A90036E8EF /* NSString+Password.m in Sources */,
 				0FFA91751C59BE57008D91D2 /* HG_OpenAccountAddBankCardModules.m in Sources */,
-				CC5FC5A31FC2AF4700DB0D78 /* WithdrawViewController.swift in Sources */,
+				CC5FC5A31FC2AF4700DB0D78 /* CashWithdrawViewController.swift in Sources */,
 				8411DA111FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */,
 				848139631F568A8600CD701C /* YX_TextField.swift in Sources */,
 				637963A91CABD0F8002A5910 /* ApprovalAmountExt.m in Sources */,
@@ -6342,7 +6342,7 @@
 				CC0DF9A11EA5B1090024841A /* RegionCodeBaseClass.m in Sources */,
 				84F87F4C1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */,
 				CC0DF9A21EA5B1090024841A /* LOTAnimatableLayer.m in Sources */,
-				CC5FC5A41FC2AF4700DB0D78 /* WithdrawViewController.swift in Sources */,
+				CC5FC5A41FC2AF4700DB0D78 /* CashWithdrawViewController.swift in Sources */,
 				CC0DF9A31EA5B1090024841A /* NSNumber+YYAdd.m in Sources */,
 				84D184701F98962A00A0B25F /* RedPacketTicketModel.m in Sources */,
 				CC0DF9A41EA5B1090024841A /* RepayMentViewModel.m in Sources */,

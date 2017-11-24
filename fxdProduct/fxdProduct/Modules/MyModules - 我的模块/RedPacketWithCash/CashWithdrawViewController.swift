@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManager
 
-class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
+class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
 
     var tableView : UITableView?
     let cellId = "CellId"
