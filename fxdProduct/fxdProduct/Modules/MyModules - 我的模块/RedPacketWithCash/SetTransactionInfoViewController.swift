@@ -47,6 +47,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         IQKeyboardManager.shared().shouldResignOnTouchOutside = true
     }
     
+    //MARK:视图逻辑
     func configureView() -> Void {
         switch exhibitionType {
         case .IDCardNumber_Type?:
@@ -158,16 +159,31 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
                 return
             }
             
-//            if self.exhibitionType = .modificationTradePassword_Type {
-//
-//
-//            }
+            let type = "1"
+            if self.exhibitionType == .modificationTradePassword_Type {
+                
+            }
             
             saveNewTradePassword(firstTradePassword!, secondPasswordStr: secondTradePassword!, type: "1", { (isSuccess) in
-                
+                if isSuccess {
+                    
+                }else{
+                    
+                }
             })
-            
         }
+    }
+    
+    //MRAK:流程结束 跳转逻辑
+    func SetPasswordProcessEndJump()  {
+        for  vc in self.rt_navigationController.rt_viewControllers {
+            if vc.isKind(of: CashWithdrawViewController.self) {
+                self.navigationController?.popToViewController(vc, animated: true)
+                return
+            }
+        }
+        let cashWithdrawVC = CashWithdrawViewController.init()
+        self.navigationController?.pushViewController(cashWithdrawVC, animated: true)
     }
     
     //MARK:网络请求

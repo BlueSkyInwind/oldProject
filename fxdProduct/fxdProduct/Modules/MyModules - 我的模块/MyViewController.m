@@ -48,6 +48,7 @@
     [self.MyViewTable registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"bCell"];
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame=CGRectMake(100, 100, 120, 12);
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -69,6 +70,7 @@
     middleView.couponNumLabel.text = @"3";
     middleView.delegate = self;
     [self.MyViewTable addSubview:middleView];
+    
     
     
 }
