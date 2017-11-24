@@ -118,7 +118,8 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     }
     
     func sendButtonClick() {
-
+        
+        
     }
     
     //MARK: SetPayPasswordViewDelegate
@@ -131,6 +132,14 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         case .verifyNew:
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "确认成功")
         }
+    }
+    
+    
+    //MARK:网络请求
+    func verifyIDCardNum(_ IDStr:String)  {
+//        SetTransactionPasswordViewModel *  transactionVC = [SetTransactionPasswordViewModel alloc]
+        
+        
     }
     
     override func didReceiveMemoryWarning() {

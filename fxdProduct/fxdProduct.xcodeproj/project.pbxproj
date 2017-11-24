@@ -494,6 +494,8 @@
 		848394271EDEC96C003EF4EC /* HomePopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394251EDEC96C003EF4EC /* HomePopParam.m */; };
 		848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
 		848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
+		8492ED261FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */; };
+		8492ED271FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */; };
 		8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
@@ -2101,6 +2103,8 @@
 		848394241EDEC96C003EF4EC /* HomePopParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePopParam.h; sourceTree = "<group>"; };
 		848394251EDEC96C003EF4EC /* HomePopParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePopParam.m; sourceTree = "<group>"; };
 		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
+		8492ED241FC7B63F00C8D457 /* SetTransactionPasswordViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetTransactionPasswordViewModel.h; sourceTree = "<group>"; };
+		8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTransactionPasswordViewModel.m; sourceTree = "<group>"; };
 		8496D3141F5A9E3A00CCEE72 /* BankInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankInfoViewModel.h; sourceTree = "<group>"; };
 		8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankInfoViewModel.m; sourceTree = "<group>"; };
 		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
@@ -3211,6 +3215,8 @@
 				846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */,
 				8496D3141F5A9E3A00CCEE72 /* BankInfoViewModel.h */,
 				8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */,
+				8492ED241FC7B63F00C8D457 /* SetTransactionPasswordViewModel.h */,
+				8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -6152,6 +6158,7 @@
 				63E1ECD21E1B8FAA0079A2F8 /* TAPageControl.m in Sources */,
 				638A16F51E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m in Sources */,
 				630DE72B1DDC2F6D00A2D53A /* FXD_AppUpdateChecker.m in Sources */,
+				8492ED261FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */,
 				637636E71D76A72A00E93289 /* LewPopupBackgroundView.m in Sources */,
 				CCDEDF5C1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */,
 				634830FE1CBCA1A90005C4CD /* RegionCodeExt.m in Sources */,
@@ -6422,6 +6429,7 @@
 				CC0DF9DE1EA5B1090024841A /* P2PViewController.m in Sources */,
 				848394271EDEC96C003EF4EC /* HomePopParam.m in Sources */,
 				CC0DF9E01EA5B1090024841A /* UserSureRefuseBaseClass.m in Sources */,
+				8492ED271FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */,
 				CC0DF9E21EA5B1090024841A /* HomeBannerModel.m in Sources */,
 				CC0DF9E31EA5B1090024841A /* ProductListExt.m in Sources */,
 				CC0DF9E61EA5B1090024841A /* LOTShapeLayerView.m in Sources */,

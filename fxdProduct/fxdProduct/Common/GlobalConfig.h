@@ -220,6 +220,7 @@ UIKIT_EXTERN NSString * const       _ChoosePattern_url;                  //支�
 UIKIT_EXTERN NSString * const       _DiscountTicketRule_url;                  //优惠券规则
 UIKIT_EXTERN NSString * const       _New_DiscountTicket_url;                  //优惠券规则
 UIKIT_EXTERN NSString * const       _DeductibleAmountOfDiscountTicket_url;                  //优惠券规则
+UIKIT_EXTERN NSString * const       _verifyIdentityCard_url;                  //验证身份证
 
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码

@@ -468,6 +468,9 @@ NSString * const    _New_DiscountTicket_url    =    @"apigw/client/operation/cli
 //新优惠券规则
 NSString * const    _DeductibleAmountOfDiscountTicket_url    =    @"apigw/client/order/voucher/money/single";
 
+//新优惠券规则
+NSString * const    _verifyIdentityCard_url    =    @"apigw/client/operation/passwordOperate/verifyIdentity";
+
 
 #pragma mark - 合规接口
 
