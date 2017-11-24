@@ -11,6 +11,8 @@ import UIKit
 class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,RedPacketHeaderViewDelegate,RedPacketCellDelegate{
 
     var tableView : UITableView?
+    var headerView : RedPacketHeaderView?
+    var model : WithdrawCashInfoModel?
     @objc var isWithdraw = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,46 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if isWithdraw {
+            loadWithdrawCashInfo(operateType: "1")
+        }else{
+            loadWithdrawCashInfo(operateType: "2")
+        }
+    }
+    
+    
+    /// 现金红包,账户余额（点击列表操作展示提现页）
+    ///
+    /// - Parameter operateType: 操作类型（1现金红包、2账户余额）
+    func loadWithdrawCashInfo(operateType: String){
+        
+        let cashVM = CashViewModel()
+        cashVM.setBlockWithReturn({ [weak self] (returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+                self?.model = try? WithdrawCashInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                
+                self?.headerView?.moneyLabel?.text = self?.model?.amount
+                let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(self!.headerView!.moneyLabel?.text)!)
+                attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
+                attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 35), range: NSMakeRange(1,attrstr.length-1))
+                self?.headerView?.moneyLabel?.attributedText = attrstr
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+            
+        }) {
+            
+        }
+        
+        cashVM.loadWithdrawCashInfoOperateType(operateType)
+        
+    }
     //MARK:设置右上角按钮
     func setNavRightBar(){
         
@@ -46,29 +88,24 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             make.edges.equalTo(self.view)
         })
         
-        let headerView = RedPacketHeaderView()
+        headerView = RedPacketHeaderView()
         if isWithdraw {
             self.title = "现金红包"
-            headerView.moneyLabel?.text = "¥180.50"
-            headerView.headerImage?.image = UIImage(named:"packet")
-            headerView.titleLabel?.text = "我的现金"
+//            headerView.moneyLabel?.text = "¥180.50"
+            headerView?.headerImage?.image = UIImage(named:"packet")
+            headerView?.titleLabel?.text = "我的现金"
         }else{
             
             self.title = "账户余额"
-            headerView.moneyLabel?.text = "¥360.50"
-            headerView.headerImage?.image = UIImage(named:"account")
-            headerView.titleLabel?.text = "我的余额"
+//            headerView.moneyLabel?.text = "¥360.50"
+            headerView?.headerImage?.image = UIImage(named:"account")
+            headerView?.titleLabel?.text = "我的余额"
         }
         
-        headerView.delegate = self
-        let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(headerView.moneyLabel?.text)!)
-        attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
-        attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 35), range: NSMakeRange(1,attrstr.length-1))
-        headerView.moneyLabel?.attributedText = attrstr
+        headerView?.delegate = self
         tableView?.tableHeaderView = headerView
     }
 
-    
     func setAlertView(){
         let alertController = UIAlertController(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", preferredStyle: .alert)
     
@@ -84,6 +121,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         self.present(alertController, animated: true, completion: nil)
     }
     
+
     @objc func rightClick(){
         
         let controller = ReminderDetailsViewController()
@@ -141,10 +179,53 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     //MARK:点击提现
     func withdrawBtnClick(){
         
-        setAlertView()
-//        let controller = WithdrawViewController()
-//        self.navigationController?.pushViewController(controller, animated:true)
+        //返回状态（0成功、1已逾期、2金额不足、3未设置交易密码、4身份认证和绑卡认证未完成）
+        switch self.model?.status.hashValue {
+        case 0?:
+            let controller = CashWithdrawViewController()
+            self.navigationController?.pushViewController(controller, animated: true)
+            
+        case 1?,2?:
+            
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: self.model?.message)
+            
+        case 3?:
+            
+            setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
+            
+        case 4?:
+            
+            setAlertView(title: "完善资料提示",message: "为了顺利提现，请先完成身份认证及绑卡", sureTitle: "去完善",tag: "1")
+            
+        default:
+            break
+        }
 
+    }
+
+    func setAlertView(title: String, message: String, sureTitle: String, tag: String){
+        let alertController = UIAlertController(title: title , message: message , preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: { (cancelAction) in
+            
+        }))
+        
+        alertController.addAction(UIAlertAction.init(title: sureTitle, style: .default, handler: { (action) in
+            if tag == "0"{
+                
+                let controller = CashWithdrawViewController()
+                self.navigationController?.pushViewController(controller, animated:true)
+            }else{
+                
+                let controlller = UserDataAuthenticationListVCModules()
+                self.navigationController?.pushViewController(controlller, animated: true)
+                
+            }
+            
+        }))
+        
+        self.present(alertController, animated: true, completion: nil)
+        
     }
     
     //MARK:底部按钮点击

@@ -55,6 +55,7 @@
 #import "PayPasswordInputView.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "SetTransactionPasswordViewModel.h"
-
-
+#import "CashViewModel.h"
+#import "WithdrawCashInfoModel.h"
+#import "UserDataAuthenticationListVCModules.h"
 #endif /* fxdProduct_Bridging_Header_h */

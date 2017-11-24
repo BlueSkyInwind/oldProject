@@ -14,7 +14,8 @@
 #import "DiscountTicketController.h"
 #import "InvitationViewController.h"
 #import "UserDataAuthenticationListVCModules.h"
-
+#import "CashViewModel.h"
+#import "PersonalCenterModel.h"
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate>
 {
     //标题数组
@@ -24,6 +25,7 @@
    
 }
 @property (strong, nonatomic) IBOutlet UITableView *MyViewTable;
+@property (nonatomic, strong) MineMiddleView *middleView;
 
 @end
 
@@ -62,17 +64,39 @@
     headerView.nameLabel.text = @"您好!";
     headerView.accountLabel.text = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
     [headerBgView addSubview:headerView];
-    
     [self.MyViewTable setTableHeaderView:headerBgView];
     
-    MineMiddleView *middleView = [[MineMiddleView alloc]initWithFrame:CGRectZero];
-    middleView.backgroundColor = [UIColor whiteColor];
-    middleView.couponNumLabel.text = @"3";
-    middleView.delegate = self;
-    [self.MyViewTable addSubview:middleView];
+    _middleView = [[MineMiddleView alloc]initWithFrame:CGRectZero];
+    _middleView.backgroundColor = [UIColor whiteColor];
+    _middleView.delegate = self;
+    [self.MyViewTable addSubview:_middleView];
+    [self getPersonalCenterInfo];
     
-    
-    
+}
+
+
+/**
+ 获取个人中心优惠券的个数
+ */
+-(void)getPersonalCenterInfo{
+
+    CashViewModel *cashVM = [[CashViewModel alloc]init];
+    [cashVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            PersonalCenterModel *model = [[PersonalCenterModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            _middleView.couponNumLabel.text = model.voucherNum;
+            _middleView.couponNumLabel.hidden = false;
+            _middleView.couponImageView.hidden = false;
+            
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [cashVM getPersonalCenterInfo];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -92,10 +116,6 @@
     CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
     controller.isWithdraw = true;
     [self.navigationController pushViewController:controller animated:true];
-    
-//    SetTransactionInfoViewController * vc =  [[SetTransactionInfoViewController alloc]init];
-//    [self.navigationController pushViewController:vc animated:true];
-//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"现金红包"];
 
 }
 
@@ -106,9 +126,6 @@
     
     DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
     [self.navigationController pushViewController:ticket animated:YES];
-//    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
-//    controller.isWithdraw = true;
-//    [self.navigationController pushViewController:controller animated:true];
 
 }
 
