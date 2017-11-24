@@ -28,13 +28,11 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     var payPasswordVerifyView:SetPayPasswordVerifyView?
     var payPasswordView:SetPayPasswordView?
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         addBackItemRoot()
         self.view.backgroundColor = UIColor.white
-        exhibitionType = .modificationTradePassword_Type
         configureView()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +55,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         case .setTradePassword_Type?:
             self.title = "设置交易密码"
             setCashPasswordView()
+            payPasswordView?.showHeaderDisplayView()
         case .modificationTradePassword_Type?:
             self.title = "修改交易密码"
             setCashPasswordView()
@@ -67,43 +66,57 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     
     /// 身份证效验界面
     func setIDCardView()  {
-        identitiesOfTradeView = SetIdentitiesOfTradeView.init(frame: CGRect.zero)
-        identitiesOfTradeView?.nextClick = ({ () in
+        identitiesOfTradeView = SetIdentitiesOfTradeView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h))
+        identitiesOfTradeView?.nextClick = ({ [weak self]() in
             //下一个按钮点击
-            
+            self?.exhibitionType = .verificationCode_Type
+            self?.configureView()
+            self?.pushVerificationCodeView()
         })
         self.view.addSubview(identitiesOfTradeView!)
-        identitiesOfTradeView?.snp.makeConstraints({ (make) in
-            make.edges.equalTo(self.view)
-        })
     }
     
     func setVerificationCodeView()  {
-        payPasswordVerifyView = SetPayPasswordVerifyView.init(frame: CGRect.zero)
+        let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
+        payPasswordVerifyView = SetPayPasswordVerifyView.init(frame: CGRect.init(x: _k_w, y: height, width: _k_w, height: _k_h - height))
         payPasswordVerifyView?.delegate = self
         self.view.addSubview(payPasswordVerifyView!)
-        let height = obtainBarHeight_New(vc: self)
-        payPasswordVerifyView?.snp.makeConstraints({ (make) in
-            make.top.equalTo(height)
-            make.left.right.bottom.equalTo(0)
-        })
     }
     
     func setCashPasswordView()  {
-        payPasswordView = SetPayPasswordView.init(frame: CGRect.zero)
+        let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
+        payPasswordView = SetPayPasswordView.init(frame: CGRect.init(x: _k_w, y: height, width: _k_w, height: _k_h - height))
         payPasswordView?.delegate = self
         self.view.addSubview(payPasswordView!)
-        let height = obtainBarHeight_New(vc: self)
-        payPasswordView?.snp.makeConstraints({ (make) in
-            make.top.equalTo(height)
-            make.left.right.bottom.equalTo(0)
-        })
+    }
+    
+    /// 推出验证码视图
+    func pushVerificationCodeView()  {
+        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.identitiesOfTradeView?.frame = CGRect.init(x: -_k_w, y: 0, width: _k_w, height: _k_h )
+            let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
+            self.payPasswordVerifyView?.frame = CGRect.init(x: 0, y: height, width: _k_w, height: _k_h - height)
+        }) { (result) in
+        }
+    }
+    
+    /// 推出密码视图
+    func pushCashPasswordView()  {
+        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.payPasswordVerifyView?.frame = CGRect.init(x: -_k_w, y: 0, width: _k_w, height: _k_h )
+            let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
+            self.payPasswordView?.frame = CGRect.init(x: 0, y: height, width: _k_w, height: _k_h - height)
+        }) { (result) in
+        }
     }
     
     //MARK: SetPayPasswordVerifyViewDelegate
     func userInputVerifyCode(_ code: String) {
-        
+        self.exhibitionType = .setTradePassword_Type
+        self.configureView()
+        pushCashPasswordView()
     }
+    
     func sendButtonClick() {
 
     }
