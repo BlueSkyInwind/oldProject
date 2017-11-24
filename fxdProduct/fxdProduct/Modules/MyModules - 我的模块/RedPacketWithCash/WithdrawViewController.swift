@@ -119,17 +119,28 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }
     }
     
+    
+    
+    /// 修改交易密码
     @objc func changePwdBtnClick(){
         
         MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "修改交易密码")
     }
     
+    
+    /// 重置交易密码
     @objc func resetPwdBtnClick(){
         MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "重置交易密码")
     }
+    
+    
+    /// 提现按钮点击
     @objc func withdrawBtnClick(){
-        popImportPayPasswordView()
-        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "提现按钮点击")
+//        popImportPayPasswordView()
+        
+        let cv = WithdrawDetailsViewController()
+        self.navigationController?.pushViewController(cv, animated: true)
+        
     }
     
     func popImportPayPasswordView()  {
@@ -171,10 +182,11 @@ class WithdrawViewController: BaseViewController ,UITableViewDelegate,UITableVie
             
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(cell.rightLabel?.text)!)
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
-            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 35), range: NSMakeRange(1,attrstr.length-1))
+            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.yx_systemFont(ofSize: 35) ?? 35, range: NSMakeRange(1,attrstr.length-1))
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: RedPacketMoney_COLOR, range: NSMakeRange(0,1))
-            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 25), range: NSMakeRange(0,1))
+            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.yx_systemFont(ofSize: 25) ?? 25, range: NSMakeRange(0,1))
             cell.rightLabel?.attributedText = attrstr
+            
             
             return cell
         }

@@ -138,7 +138,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return 54;
 }
 
 //创建自定义头视图

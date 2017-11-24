@@ -56,7 +56,7 @@ extension WithdrawHeaderView{
             let k_w = UIScreen.main.bounds.size.width
             var newFrame = CGRect(x:0,y:0,width:k_w,height:194)
             if UI_IS_IPONE5 {
-                newFrame = CGRect(x:0,y:0,width:k_w,height:194)
+                newFrame = CGRect(x:0,y:0,width:k_w,height:174)
             }
             super.frame = newFrame
         }

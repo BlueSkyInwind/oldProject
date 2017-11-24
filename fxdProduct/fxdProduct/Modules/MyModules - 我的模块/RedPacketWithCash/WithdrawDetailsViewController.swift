@@ -55,6 +55,11 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             make.height.equalTo(50)
         }
         
+        if UI_IS_IPONE5 {
+            withdrawBtn.snp.updateConstraints({ (make) in
+                make.top.equalTo(self.view).offset(480)
+            })
+        }
     }
 
     @objc func withdrawBtnClick(){
@@ -85,9 +90,9 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         if indexPath.row == 0 {
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(cell.rightLabel?.text)!)
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
-            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 35), range: NSMakeRange(1,attrstr.length-1))
+            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.yx_systemFont(ofSize: 35) ?? 35, range: NSMakeRange(1,attrstr.length-1))
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: RedPacketMoney_COLOR, range: NSMakeRange(0,1))
-            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 25), range: NSMakeRange(0,1))
+            attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.yx_systemFont(ofSize: 25) ?? 25, range: NSMakeRange(0,1))
             cell.rightLabel?.attributedText = attrstr
         }
         return cell
