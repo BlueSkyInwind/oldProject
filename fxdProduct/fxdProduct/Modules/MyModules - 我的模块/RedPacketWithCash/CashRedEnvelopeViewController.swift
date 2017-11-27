@@ -98,7 +98,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             
             self.title = "账户余额"
 //            headerView.moneyLabel?.text = "¥360.50"
-            headerView?.headerImage?.image = UIImage(named:"account")
+            headerView?.headerImage?.image = UIImage(named:"accountBig")
             headerView?.titleLabel?.text = "我的余额"
         }
         

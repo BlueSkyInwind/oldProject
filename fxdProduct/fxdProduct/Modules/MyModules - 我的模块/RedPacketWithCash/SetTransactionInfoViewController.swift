@@ -34,7 +34,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        addBackItemRoot()
+        addBackItem()
         self.view.backgroundColor = UIColor.white
         configureView()
     }

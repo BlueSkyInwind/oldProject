@@ -61,6 +61,11 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
                 make.top.equalTo(self.view).offset(480)
             })
         }
+        if UI_IS_IPONE6P {
+            withdrawBtn.snp.updateConstraints({ (make) in
+                make.top.equalTo(self.view).offset(570)
+            })
+        }
     }
 
     //MARK:点击完成按钮

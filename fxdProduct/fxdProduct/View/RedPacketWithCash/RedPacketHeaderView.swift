@@ -67,7 +67,7 @@ extension RedPacketHeaderView{
         
         moneyLabel = UILabel()
         moneyLabel?.textColor = RedPacketMoney_COLOR
-        moneyLabel?.font = UIFont.systemFont(ofSize: 25)
+        moneyLabel?.font = UIFont.yx_systemFont(ofSize: 25)
         self.addSubview(moneyLabel!)
         moneyLabel?.snp.makeConstraints({ (make) in
             make.centerX.equalTo(self.snp.centerX)
@@ -77,6 +77,7 @@ extension RedPacketHeaderView{
         
         let withdrawBtn = UIButton()
         withdrawBtn.setTitle("提现", for: .normal)
+        withdrawBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         withdrawBtn.backgroundColor = UI_MAIN_COLOR
         withdrawBtn.setTitleColor(UIColor.white, for: .normal)
         withdrawBtn.layer.cornerRadius = 5.0
