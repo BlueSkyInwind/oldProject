@@ -22,6 +22,7 @@ class IdentitiesOfTradeTableViewCell: UITableViewCell,UITextFieldDelegate{
     }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         setUpUI()
     }
     
@@ -55,6 +56,7 @@ extension IdentitiesOfTradeTableViewCell{
         contentTextfield?.delegate = self
         contentTextfield?.textAlignment = NSTextAlignment.right
         contentTextfield?.keyboardType = UIKeyboardType.asciiCapable
+        contentTextfield?.addTarget(self, action: #selector(textFieldChanged(textField:)), for: UIControlEvents.editingChanged)
         self.addSubview(contentTextfield!)
         contentTextfield?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.snp.centerY)
@@ -63,15 +65,19 @@ extension IdentitiesOfTradeTableViewCell{
         })
     }
     
+    @objc func textFieldChanged(textField:UITextField)  {
+            if (self.validdDCardNum != nil) {
+                self.validdDCardNum!(textField.text!)
+            }
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if CheckUtils.accurateVerifyIDCardNumber(textField.text) {
             textField.endEditing(true)
             if (self.validdDCardNum != nil) {
                 self.validdDCardNum!(textField.text!)
             }
-        }
     }
-
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let cs = NSCharacterSet.init(charactersIn: IDCardNum).inverted
         let filtered = (string.components(separatedBy: cs) as NSArray ).componentsJoined(by: "")

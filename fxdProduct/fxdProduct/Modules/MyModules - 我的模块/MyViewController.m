@@ -50,6 +50,7 @@
     [self.MyViewTable registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"bCell"];
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame=CGRectMake(100, 100, 120, 12);
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -78,7 +79,7 @@
  获取个人中心优惠券的个数
  */
 -(void)getPersonalCenterInfo{
-    
+
     CashViewModel *cashVM = [[CashViewModel alloc]init];
     [cashVM setBlockWithReturnBlock:^(id returnValue) {
         
@@ -107,7 +108,6 @@
 
 #pragma mark 我的页面中间部分点击事件
 
-
 /**
  现金红包
  */
@@ -118,7 +118,6 @@
     [self.navigationController pushViewController:controller animated:true];
 
 }
-
 
 /**
  优惠券

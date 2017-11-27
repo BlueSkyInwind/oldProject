@@ -141,7 +141,6 @@ extension ImportPayPasswordView {
             make.top.equalTo((payPasswordInputView?.snp.bottom)!).offset(10)
             make.right.equalTo(-15)
         })
-        
     }
     
    @objc func closeBtnClick()  {

@@ -48,7 +48,6 @@ extension WithdrawHeaderView{
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(headerImage.snp.bottom).offset(18)
         }
-        
     }
     
     override var  frame:(CGRect){

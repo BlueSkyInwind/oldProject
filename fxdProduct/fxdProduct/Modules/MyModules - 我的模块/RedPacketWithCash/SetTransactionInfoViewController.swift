@@ -28,6 +28,9 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     var payPasswordVerifyView:SetPayPasswordVerifyView?
     var payPasswordView:SetPayPasswordView?
 
+    var firstTradePassword:String?
+    var secondTradePassword:String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -44,6 +47,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         IQKeyboardManager.shared().shouldResignOnTouchOutside = true
     }
     
+    //MARK:视图逻辑
     func configureView() -> Void {
         switch exhibitionType {
         case .IDCardNumber_Type?:
@@ -106,16 +110,22 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     }
     
     //MARK: SetIdentitiesOfTradeViewDelegate
-    func NextBottonClick() {
-        self.exhibitionType = .verificationCode_Type
-        self.configureView()
-        self.pushVerificationCodeView()
-    }
-    
-    func userInputIDCardCode(_ code: String) {
-        verifyIDCardNum(code) {( isSuccess ) in
-            
+    func NextBottonClick(_ code: String) {
+        if !CheckUtils.accurateVerifyIDCardNumber(code) {
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请输入正确的身份证号")
+            return
         }
+        verifyIDCardNum(code) {( isSuccess ) in
+            if isSuccess {
+                self.exhibitionType = .verificationCode_Type
+                self.configureView()
+                self.pushVerificationCodeView()
+            }
+        }
+    }
+
+    func userInputIDCardCode(_ code: String) {
+
     }
     
     //MARK: SetPayPasswordVerifyViewDelegate
@@ -128,21 +138,53 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     func sendButtonClick() {
         
         
-        
     }
     
     //MARK: SetPayPasswordViewDelegate
     func userInputCashPasswordCode(_ code: String, type: PasswordType) {
         switch type {
         case .old:
-            payPasswordView?.showHeaderDisplayView()
+            verifyOldTradePassword(code, { [weak self] (isSuccess) in
+                if isSuccess {
+                    self?.payPasswordView?.showHeaderDisplayView()
+                }
+            })
         case .new:
+            firstTradePassword = code
             payPasswordView?.showHeaderAgainDisplayView()
         case .verifyNew:
-            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "确认成功")
+            secondTradePassword = code
+            if secondTradePassword != firstTradePassword{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "密码不一致，请重新输入")
+                return
+            }
+            
+            let type = "1"
+            if self.exhibitionType == .modificationTradePassword_Type {
+                
+            }
+            
+            saveNewTradePassword(firstTradePassword!, secondPasswordStr: secondTradePassword!, type: "1", { (isSuccess) in
+                if isSuccess {
+                    
+                }else{
+                    
+                }
+            })
         }
     }
     
+    //MRAK:流程结束 跳转逻辑
+    func SetPasswordProcessEndJump()  {
+        for  vc in self.rt_navigationController.rt_viewControllers {
+            if vc.isKind(of: CashWithdrawViewController.self) {
+                self.navigationController?.popToViewController(vc, animated: true)
+                return
+            }
+        }
+        let cashWithdrawVC = CashWithdrawViewController.init()
+        self.navigationController?.pushViewController(cashWithdrawVC, animated: true)
+    }
     
     //MARK:网络请求
     func verifyIDCardNum(_ IDStr:String, _ result : @escaping (_ isSuccess : Bool) -> Void)  {
@@ -160,6 +202,45 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         }
         transactionVC.verifyIdentityCardNumber(IDStr)
     }
+    
+    func verifyOldTradePassword(_ passwordStr:String , _ result : @escaping (_ isSuccess : Bool) -> Void)  {
+        let transactionVC = SetTransactionPasswordViewModel.init()
+        transactionVC.setBlockWithReturn({ [weak self] (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                result(true)
+                
+            }else{
+                result(false)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            result(false)
+        }
+        transactionVC.verifyOldTradePassword(passwordStr)
+    }
+    
+    func saveNewTradePassword(_ firstPasswordStr:String , secondPasswordStr:String, type:String ,  _ result : @escaping (_ isSuccess : Bool) -> Void)  {
+        let transactionVC = SetTransactionPasswordViewModel.init()
+        transactionVC.setBlockWithReturn({ [weak self] (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                result(true)
+                
+            }else{
+                result(false)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            result(false)
+        }
+        transactionVC.saveNewTradePasswordFirst(firstPasswordStr, second: secondPasswordStr, operateType: type)
+    }
+    
+    
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

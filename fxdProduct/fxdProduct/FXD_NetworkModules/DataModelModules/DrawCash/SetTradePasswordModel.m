@@ -8,6 +8,11 @@
 
 #import "SetTradePasswordModel.h"
 
+@implementation SetTradePasswordParam
+
+@end
+
+
 @implementation SetTradePasswordModel
 
 @end

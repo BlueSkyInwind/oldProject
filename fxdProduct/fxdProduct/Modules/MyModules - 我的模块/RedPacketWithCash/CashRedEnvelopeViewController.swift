@@ -106,7 +106,22 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         tableView?.tableHeaderView = headerView
     }
 
+    func setAlertView(){
+        let alertController = UIAlertController(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", preferredStyle: .alert)
     
+        alertController.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: { (cancelAction) in
+            
+        }))
+        alertController.addAction(UIAlertAction.init(title: "去设置", style: .default, handler: { (action) in
+            let transactionInfoVC = SetTransactionInfoViewController.init()
+            transactionInfoVC.exhibitionType = .IDCardNumber_Type
+            self.navigationController?.pushViewController(transactionInfoVC, animated: true)
+        }))
+
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+
     @objc func rightClick(){
         
         let controller = ReminderDetailsViewController()
