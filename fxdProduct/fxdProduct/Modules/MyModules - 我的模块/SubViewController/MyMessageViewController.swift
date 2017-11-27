@@ -44,16 +44,16 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
 
             self.headerRefresh()
-            
+
         })
-        
+
+
         //上拉加载相关设置,使用闭包Block
         tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-  
+
             self.footerLoad()
-            
+
         })
-        
     }
     
     //MARK: 刷新
@@ -65,7 +65,6 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         self.tableView?.reloadData()
         //结束刷新
         self.tableView?.mj_header.endRefreshing()
-      
     }
     
     /// 上拉加载
@@ -76,14 +75,11 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         self.tableView?.reloadData()
         //结束刷新
         self.tableView?.mj_footer.endRefreshing()
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return num!
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return num!+1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -101,7 +97,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
             messageCell = MessageCell.init(style: .default, reuseIdentifier: "MessageCell")
         }
         if indexPath.row == 0 {
-            
+
             messageCell.cellType = MessageCellType(cellType: .Header)
             return messageCell
         }

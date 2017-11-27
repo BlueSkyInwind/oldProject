@@ -75,6 +75,10 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if UI_IS_IPONE6P {
+            return 80
+        }
         return 68
     }
     

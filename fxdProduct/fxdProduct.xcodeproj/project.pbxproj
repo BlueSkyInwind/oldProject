@@ -1173,6 +1173,8 @@
 		CCA1819D1FC7F0320094DA58 /* WithdrawCashInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1819B1FC7F0320094DA58 /* WithdrawCashInfoModel.m */; };
 		CCA181A01FC7F1220094DA58 /* CashViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1819F1FC7F1220094DA58 /* CashViewModel.m */; };
 		CCA181A11FC7F1220094DA58 /* CashViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1819F1FC7F1220094DA58 /* CashViewModel.m */; };
+		CCA181A31FC80E1E0094DA58 /* NonePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA181A21FC80E1E0094DA58 /* NonePageView.swift */; };
+		CCA181A41FC80E1E0094DA58 /* NonePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA181A21FC80E1E0094DA58 /* NonePageView.swift */; };
 		CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
 		CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
 		CCAA8EAE1F5901ED00278D16 /* FooterBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EAD1F5901ED00278D16 /* FooterBtnView.swift */; };
@@ -2312,6 +2314,7 @@
 		CCA1819B1FC7F0320094DA58 /* WithdrawCashInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashInfoModel.m; sourceTree = "<group>"; };
 		CCA1819E1FC7F1220094DA58 /* CashViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CashViewModel.h; sourceTree = "<group>"; };
 		CCA1819F1FC7F1220094DA58 /* CashViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CashViewModel.m; sourceTree = "<group>"; };
+		CCA181A21FC80E1E0094DA58 /* NonePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonePageView.swift; sourceTree = "<group>"; };
 		CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterHeaderView.swift; sourceTree = "<group>"; };
 		CCAA8EAD1F5901ED00278D16 /* FooterBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterBtnView.swift; sourceTree = "<group>"; };
 		CCAA8EB41F5940CC00278D16 /* RenewalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenewalModel.h; sourceTree = "<group>"; };
@@ -5034,6 +5037,7 @@
 			isa = PBXGroup;
 			children = (
 				CC5FC5AA1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift */,
+				CCA181A21FC80E1E0094DA58 /* NonePageView.swift */,
 			);
 			path = ReminderDetailsView;
 			sourceTree = "<group>";
@@ -6163,6 +6167,7 @@
 				63145AF11CA8DBBD00D04ED8 /* RegionBaseClass.m in Sources */,
 				CC6F06761F74E6F900FA889E /* OptionalRapidLoanApplicationVCModules.swift in Sources */,
 				63F1A50B1BD8CD5100B83751 /* RepaySuccessResult.m in Sources */,
+				CCA181A31FC80E1E0094DA58 /* NonePageView.swift in Sources */,
 				1AEFFA7C1C50BF72003936CE /* loanRecordCell.m in Sources */,
 				63A24C5D1BE063A90036E8EF /* NSArray+Extend.m in Sources */,
 				63B65DEC1D518D8B00207231 /* UserProtocolVCModule.m in Sources */,
@@ -6547,6 +6552,7 @@
 				CC5FC5AC1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift in Sources */,
 				CC6F06911F7B8D4200FA889E /* ShanLinWebVCModules.m in Sources */,
 				CC0DFA451EA5B1090024841A /* FXD_AppEmptyUserData.m in Sources */,
+				CCA181A41FC80E1E0094DA58 /* NonePageView.swift in Sources */,
 				CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */,
 				CC0DFA471EA5B1090024841A /* FXDBaseTabBarVCModule.m in Sources */,
 				CCEC9C941EE5095000452291 /* BankCardsParamModel.m in Sources */,

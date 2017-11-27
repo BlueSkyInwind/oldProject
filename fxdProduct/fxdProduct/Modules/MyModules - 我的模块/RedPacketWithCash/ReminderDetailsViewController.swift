@@ -11,13 +11,16 @@ import UIKit
 class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
 
     var tableView : UITableView?
+    var noneView : NonePageView?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.title = "收提明细"
         addBackItem()
-        configureView()
+//        configureView()
+        
+        createNoneView()
     }
     
     //MARK:设置tableview
@@ -34,6 +37,13 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         })
         
     }
+    
+    func createNoneView(){
+        
+        noneView = NonePageView()
+        noneView?.backgroundColor = LINE_COLOR
+        self.view.addSubview(noneView!)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -47,6 +57,9 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 15
+        }
+        if UI_IS_IPONE6P {
+            return 80
         }
         return 68
     }
