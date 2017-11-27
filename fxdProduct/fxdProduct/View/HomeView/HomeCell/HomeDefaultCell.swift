@@ -770,7 +770,7 @@ extension HomeDefaultCell{
         leftImage.sd_setImage(with: url)
         productFirstBgImage?.addSubview(leftImage)
         leftImage.snp.makeConstraints { (make) in
-            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(20)
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(50)
             make.left.equalTo((productFirstBgImage?.snp.left)!).offset(25)
             make.width.equalTo(38)
             make.height.equalTo(38)
@@ -782,8 +782,8 @@ extension HomeDefaultCell{
         titleLabel.text = homeProductData.data.productList[0].productName
         productFirstBgImage?.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(30)
-            make.left.equalTo(leftImage.snp.right).offset(8)
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(60)
+            make.left.equalTo(leftImage.snp.right).offset(13)
             make.height.equalTo(20)
         }
         let rightImage = UIImageView()
@@ -795,7 +795,7 @@ extension HomeDefaultCell{
         }
         productFirstBgImage?.addSubview(rightImage)
         rightImage.snp.makeConstraints { (make) in
-            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(30)
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(58)
             make.left.equalTo(titleLabel.snp.right).offset(20)
         }
         
@@ -806,19 +806,21 @@ extension HomeDefaultCell{
         moneyLabel.text = homeProductData.data.productList[0].amount
         productFirstBgImage?.addSubview(moneyLabel)
         moneyLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(rightImage.snp.bottom).offset(10)
+            make.top.equalTo(rightImage.snp.bottom).offset(50)
             make.centerX.equalTo((productFirstBgImage?.snp.centerX)!)
             make.height.equalTo(30)
         }
         
         let termLabel = UILabel()
-        termLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
+//        termLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
+        termLabel.textColor = UI_MAIN_COLOR
         termLabel.font = UIFont.systemFont(ofSize: 14)
         termLabel.text = homeProductData.data.productList[0].period
         productFirstBgImage?.addSubview(termLabel)
         termLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(rightImage.snp.bottom).offset(20)
-            make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-30)
+            make.top.equalTo(rightImage.snp.bottom).offset(60)
+            make.left.equalTo(moneyLabel.snp.right).offset(24)
+//            make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-60)
             make.height.equalTo(20)
         }
         
@@ -831,35 +833,76 @@ extension HomeDefaultCell{
         loanBtn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         productFirstBgImage?.addSubview(loanBtn)
         loanBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(moneyLabel.snp.bottom).offset(18)
+            make.top.equalTo(moneyLabel.snp.bottom).offset(50)
             make.centerX.equalTo((productFirstBgImage?.snp.centerX)!)
-            make.width.equalTo(240)
-            make.height.equalTo(38)
+            make.width.equalTo(279)
+            make.height.equalTo(48)
         }
     
         let tipLable = UILabel()
-        tipLable.text = homeProductData.data.productList[0].tips
+//        tipLable.text = homeProductData.data.productList[0].tips
+        tipLable.text = "借款享提额，最高5000元"
         tipLable.font = UIFont.systemFont(ofSize: 12)
         tipLable.textAlignment = .center
         tipLable.textColor = UIColor.red
         productFirstBgImage?.addSubview(tipLable)
         tipLable.snp.makeConstraints { (make) in
-            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-19)
+            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-50)
             make.left.equalTo((productFirstBgImage?.snp.left)!).offset(15)
             make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-15)
             make.height.equalTo(16)
         }
     
     if UI_IS_IPONE5 {
+        
+        leftImage.snp.updateConstraints({ (make) in
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(25)
+        })
+        
+        titleLabel.snp.updateConstraints({ (make) in
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(35)
+        })
+        
+        rightImage.snp.updateConstraints({ (make) in
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(32)
+        })
+        
+        moneyLabel.snp.updateConstraints({ (make) in
+            make.top.equalTo(rightImage.snp.bottom).offset(25)
+        })
+        
+        termLabel.snp.updateConstraints({ (make) in
+            make.top.equalTo(rightImage.snp.bottom).offset(30)
+        })
         loanBtn.snp.updateConstraints({ (make) in
-            make.top.equalTo(moneyLabel.snp.bottom).offset(5)
+            make.top.equalTo(moneyLabel.snp.bottom).offset(20)
+            make.width.equalTo(220)
         })
         
         tipLable.snp.updateConstraints({ (make) in
-            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-12)
+            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-25)
         })
     }
+    
+    if UI_IS_IPONE6 {
+        moneyLabel.snp.updateConstraints({ (make) in
+            make.top.equalTo(rightImage.snp.bottom).offset(40)
+        })
+        
+        termLabel.snp.updateConstraints({ (make) in
+            make.top.equalTo(rightImage.snp.bottom).offset(50)
+        })
+        
+        loanBtn.snp.updateConstraints({ (make) in
+            make.top.equalTo(moneyLabel.snp.bottom).offset(30)
+    
+        })
+        
+        tipLable.snp.updateConstraints({ (make) in
+            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-35)
+        })
     }
+}
     
     //MARK:产品列表，其他的
    @objc func productListOther(index:NSInteger){

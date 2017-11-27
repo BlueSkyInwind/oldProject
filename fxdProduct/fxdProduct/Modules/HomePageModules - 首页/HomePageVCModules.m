@@ -359,21 +359,24 @@
 #pragma mark - TableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    NSInteger i=0;
-    if (_dataArray.count>0) {
-        i=_dataArray.count;
-    }else{
-        i=2;
+//    NSInteger i=0;
+//    if (_dataArray.count>0) {
+//        i=_dataArray.count;
+//    }else{
+//        i=2;
+//    }
+    if (section == 0) {
+        return 12.0f;
     }
-    if (section < i) {
-        return 3.0f;
-    }
+//    if (section < i) {
+//        return 12.0f;
+//    }
     return 0.1f;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (_dataArray.count>0) {
+    if (_dataArray.count>1) {
         return _dataArray.count + 1;
     }
     return 2;
@@ -389,22 +392,38 @@
     if (indexPath.section == 0) {
         return 30.f;
     }else {
-        if (_dataArray.count>0) {
-            if (indexPath.section == 1) {
-                if (UI_IS_IPHONE5) {
-                    return (180);
-                }else{
-                    return (210);
-                }
-            }else{
-                if (UI_IS_IPHONE5) {
-                    return (_k_h-0.5*_k_w-330);
-                }else if(UI_IS_IPHONEX){
-                    return (_k_h-0.5*_k_w-450);
-                }else{
-                    return (_k_h-0.5*_k_w-360);
-                }
+        
+//        if (UI_IS_IPHONE5) {
+//            return (_k_h-0.5*_k_w-155);
+//        }else if(UI_IS_IPHONEX){
+//            return (_k_h-0.5*_k_w-250);
+//        }else{
+//            return (_k_h-0.5*_k_w-155);
+//        }
+        
+        
+//        if (indexPath.section == 1) {
+//            if (UI_IS_IPHONE5) {
+//                return (180);
+//            }else{
+//                return (210);
+//            }
+//        }else{
+//            if (UI_IS_IPHONE5) {
+//                return (_k_h-0.5*_k_w-330);
+//            }else if(UI_IS_IPHONEX){
+//                return (_k_h-0.5*_k_w-450);
+//            }else{
+//                return (_k_h-0.5*_k_w-360);
+//            }
+//        }
+        if (_dataArray.count>1) {
+
+            if (_dataArray.count>2) {
+                return (_k_h-0.5*_k_w-113)/_dataArray.count;
             }
+            return 120;
+
         }else{
             if (UI_IS_IPHONE5) {
                 return (_k_h-0.5*_k_w-155);
@@ -459,7 +478,7 @@
     
     HomeDefaultCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomeDefaultCell"];
     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    homeCell.backgroundColor = rgb(245, 245, 245);
+    homeCell.backgroundColor = rgb(242, 242, 242);
     homeCell.selected = NO;
     homeCell.delegate = self;
     [homeCell.defaultBgImage removeFromSuperview];
@@ -490,15 +509,22 @@
             [homeCell setupDefaultUI];
             break;
         case 2:
-            if (indexPath.section == 1) {
+            
+            if (_dataArray.count == 1) {
+                
                 [homeCell productListFirst];
-                return homeCell;
+            }else{
+                
+                [homeCell productListOtherWithIndex:indexPath.section];
             }
+//            if (indexPath.section == 1) {
+//                [homeCell productListFirst];
+//                return homeCell;
+//            }
 
-            [homeCell productListOtherWithIndex:indexPath.section];
+            
             break;
         case 3:
-//            [homeCell setupRefuseUI];
             [homeCell refuseTab];
             break;
         case 4:
