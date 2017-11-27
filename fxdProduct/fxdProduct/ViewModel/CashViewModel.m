@@ -7,7 +7,7 @@
 //
 
 #import "CashViewModel.h"
-
+#import "WithdrawCashParamModel.h"
 @implementation CashViewModel
 
 
@@ -44,5 +44,29 @@
         }
         
     }];
+}
+
+-(void)withdrawCashAmount:(NSString *)amount bankCardId:(NSString *)bankCardId payPassword:(NSString *)payPassword{
+    
+    WithdrawCashParamModel * withdrawCashParamModel = [[WithdrawCashParamModel alloc]init];
+    withdrawCashParamModel.amount = amount;
+    withdrawCashParamModel.bankCardId = bankCardId;
+    withdrawCashParamModel.payPassword = payPassword;
+    
+    NSDictionary * paramDic  = [withdrawCashParamModel toDictionary];
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_WithdrawCash_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+        
+    }];
+    
 }
 @end
