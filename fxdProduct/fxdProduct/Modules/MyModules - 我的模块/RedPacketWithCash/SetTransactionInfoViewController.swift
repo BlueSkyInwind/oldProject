@@ -64,6 +64,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
             self.title = "修改交易密码"
             setCashPasswordView()
             payPasswordView?.showHeaderFormerDisplayView()
+            pushCashPasswordView(duration: 0)
         default:()
         }
     }
@@ -90,8 +91,8 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     }
     
     /// 推出验证码视图
-    func pushVerificationCodeView()  {
-        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+    func pushVerificationCodeView(duration: TimeInterval)  {
+        UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.identitiesOfTradeView?.frame = CGRect.init(x: -_k_w, y: 0, width: _k_w, height: _k_h )
             let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
             self.payPasswordVerifyView?.frame = CGRect.init(x: 0, y: height, width: _k_w, height: _k_h - height)
@@ -100,8 +101,8 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     }
     
     /// 推出密码视图
-    func pushCashPasswordView()  {
-        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+    func pushCashPasswordView(duration: TimeInterval)  {
+        UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.payPasswordVerifyView?.frame = CGRect.init(x: -_k_w, y: 0, width: _k_w, height: _k_h )
             let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
             self.payPasswordView?.frame = CGRect.init(x: 0, y: height, width: _k_w, height: _k_h - height)
@@ -119,7 +120,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
             if isSuccess {
                 self.exhibitionType = .verificationCode_Type
                 self.configureView()
-                self.pushVerificationCodeView()
+                self.pushVerificationCodeView(duration: 0.5)
             }
         }
     }
@@ -132,7 +133,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     func userInputVerifyCode(_ code: String) {
         self.exhibitionType = .setTradePassword_Type
         self.configureView()
-        pushCashPasswordView()
+        pushCashPasswordView(duration: 0.5)
     }
     
     func sendButtonClick() {

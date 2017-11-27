@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManager
 
-class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
+class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,ImportPayPasswordViewDelegate{
 
     var tableView : UITableView?
     let cellId = "CellId"
@@ -155,6 +155,15 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
     
     func popImportPayPasswordView()  {
         ImportPayPasswordView.showImportPayPasswordView(self, amountStr: "180.99")
+    }
+    
+    //MARK:ImportPayPasswordViewDelegate
+    func userInputCashPasswordCode(_ code: String) {
+        print(code)
+        
+    }
+    func userForgetPasswordClick() {
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

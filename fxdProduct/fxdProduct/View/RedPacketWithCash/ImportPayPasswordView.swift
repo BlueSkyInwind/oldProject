@@ -25,9 +25,9 @@ class ImportPayPasswordView: UIView {
     var payPasswordInputView:PayPasswordInputView?
     var forgetPasswordBtn:UIButton?
     var VC: UIViewController?
-    
     var delegate: ImportPayPasswordViewDelegate?
-    //提现金额展示
+    
+    //MARK:提现金额展示
     var amountDisplayStr:String?{
         didSet{
             let contentStr = "提现金额：￥" + "\(amountDisplayStr ?? "")"
@@ -47,23 +47,26 @@ class ImportPayPasswordView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK:展示输入密码视图
+   static var  payPasswordView:ImportPayPasswordView?
    class func showImportPayPasswordView(_ vc:UIViewController , amountStr:String)  {
     var heightProportion:CGFloat = 0.75
     if UI_IS_IPONE6P || UI_IS_IPHONEX {
         heightProportion = 0.6
     }
-    let  payPasswordView = ImportPayPasswordView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h * heightProportion))
-    payPasswordView.VC = vc
-    payPasswordView.amountDisplayStr = amountStr
-    payPasswordView.VC?.presentSemiView(payPasswordView, withOptions: [KNSemiModalOptionKeys.pushParentBack.takeUnretainedValue() : false,KNSemiModalOptionKeys.parentAlpha.takeUnretainedValue() : 0.8,KNSemiModalOptionKeys.animationDuration.takeUnretainedValue():0.2])
+    payPasswordView = ImportPayPasswordView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h * heightProportion))
+    payPasswordView?.VC = vc
+    payPasswordView?.delegate = (vc as! ImportPayPasswordViewDelegate)
+    payPasswordView?.amountDisplayStr = amountStr
+    payPasswordView?.VC?.presentSemiView(payPasswordView, withOptions: [KNSemiModalOptionKeys.pushParentBack.takeUnretainedValue() : false,KNSemiModalOptionKeys.parentAlpha.takeUnretainedValue() : 0.8,KNSemiModalOptionKeys.animationDuration.takeUnretainedValue():0.2])
     }
     
-    func dismissImportPayPasswordView()  {
-        payPasswordInputView?.endEditing(true)
-        VC?.dismissSemiModalView()
+   class func dismissImportPayPasswordView()  {
+        payPasswordView?.payPasswordInputView?.endEditing(true)
+        payPasswordView?.VC?.dismissSemiModalView()
+        payPasswordView = nil
     }
     
-
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -101,7 +104,8 @@ extension ImportPayPasswordView {
         headerDisplayView?.addSubview(closeBtn!)
         closeBtn?.snp.makeConstraints({ (make) in
             make.centerY.equalTo((headerDisplayView?.snp.centerY)!)
-            make.left.equalTo((headerDisplayView?.snp.left)!).offset(15)
+            make.left.equalTo((headerDisplayView?.snp.left)!).offset(5)
+            make.width.height.equalTo((headerDisplayView?.snp.height)!)
         })
         
         let sepView = UIView()
@@ -144,7 +148,7 @@ extension ImportPayPasswordView {
     }
     
    @objc func closeBtnClick()  {
-        dismissImportPayPasswordView()
+        ImportPayPasswordView.dismissImportPayPasswordView()
     }
     
     @objc func forgetPasswordBtnClick()  {
