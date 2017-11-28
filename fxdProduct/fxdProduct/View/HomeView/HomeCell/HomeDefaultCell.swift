@@ -789,9 +789,12 @@ extension HomeDefaultCell{
         let rightImage = UIImageView()
         
         rightImage.image = UIImage(named:"home_04")
-        if homeProductData.data.productList[0].productId == RapidLoan || homeProductData.data.productList[0].productId == DeriveRapidLoan{
+        if homeProductData.data.productList[0].productId == RapidLoan {
         
             rightImage.image = UIImage(named:"home_05")
+        }
+        if homeProductData.data.productList[0].productId == DeriveRapidLoan {
+            rightImage.image = UIImage(named:"home_06")
         }
         productFirstBgImage?.addSubview(rightImage)
         rightImage.snp.makeConstraints { (make) in
@@ -941,11 +944,11 @@ extension HomeDefaultCell{
         }
         let titleLabel = UILabel()
         titleLabel.textColor = UIColor.black
-        titleLabel.font = UIFont.systemFont(ofSize: 22)
+        titleLabel.font = UIFont.systemFont(ofSize: 18)
         bgView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(0)
-            make.left.equalTo(leftImage.snp.right).offset(10)
+            make.left.equalTo(leftImage.snp.right).offset(22)
             make.height.equalTo(22)
         }
         let rightImage = UIImageView()
@@ -958,20 +961,20 @@ extension HomeDefaultCell{
         }
         
         let moneyLabel = UILabel()
-        moneyLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
+        moneyLabel.textColor = TERM_COLOR
         moneyLabel.font = UIFont.systemFont(ofSize: 14)
         bgView.addSubview(moneyLabel)
         moneyLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.left.equalTo(leftImage.snp.right).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.left.equalTo(leftImage.snp.right).offset(22)
             make.height.equalTo(20)
         }
         let termLabel = UILabel()
-        termLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
+        termLabel.textColor = TERM_COLOR
         termLabel.font = UIFont.systemFont(ofSize: 14)
         bgView.addSubview(termLabel)
         termLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.left.equalTo(moneyLabel.snp.right).offset(20)
             make.height.equalTo(20)
         }
@@ -984,8 +987,19 @@ extension HomeDefaultCell{
             
             rightImage.image = UIImage(named:"home_04")
         }
+        if product.productId == DeriveRapidLoan {
+            rightImage.image = UIImage(named:"home_06")
+        }
+    
+        SDWebImageDownloader.shared().setValue("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", forHTTPHeaderField: "Accept")
         let url1 = URL(string: product.icon)
-        leftImage.sd_setImage(with: url1)
+    
+        leftImage.sd_setImage(with: url1, placeholderImage: UIImage(named:"placeholderImage_Icon"), options: .refreshCached) { (image, error, cashType, url) in
+
+        }
+    
+//    let url1 = URL(string: product.icon)
+//    leftImage.sd_setImage(with: url1)
         titleLabel.text = product.productName
         moneyLabel.text = product.amount
         termLabel.text = product.period
@@ -1010,6 +1024,31 @@ extension HomeDefaultCell{
             make.right.equalTo(jiantouImage.snp.left).offset(-8)
             make.height.equalTo(20)
         }
+    
+    if product.tips.count > 0 {
+     
+        bgView.snp.updateConstraints({ (make) in
+            make.height.equalTo(70)
+        })
+        let tipLabel = UILabel()
+        tipLabel.textColor = UIColor.red
+        tipLabel.font = UIFont.systemFont(ofSize: 12)
+        tipLabel.text = product.tips
+        bgView.addSubview(tipLabel)
+        tipLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(leftImage.snp.right).offset(22)
+            make.bottom.equalTo(bgView.snp.bottom).offset(0)
+        }
+        if UI_IS_IPONE5 {
+            tipLabel.snp.updateConstraints({ (make) in
+                
+                make.left.equalTo(leftImage.snp.right).offset(10)
+            })
+        }
+    }
+    
+
+    
         if (product.isValidate == "0"){
         
             productSecondBgImage?.isUserInteractionEnabled = false
@@ -1033,6 +1072,15 @@ extension HomeDefaultCell{
                 make.centerY.equalTo(hiddleImage.snp.centerY)
                 make.centerX.equalTo(hiddleImage.snp.centerX)
                 make.height.equalTo(20)
+            })
+        }
+    
+        if UI_IS_IPONE5 {
+            titleLabel.snp.updateConstraints({ (make) in
+                make.left.equalTo(leftImage.snp.right).offset(10)
+            })
+            moneyLabel.snp.updateConstraints({ (make) in
+                make.left.equalTo(leftImage.snp.right).offset(10)
             })
         }
     }
@@ -1220,7 +1268,9 @@ extension HomeDefaultCell{
             break
         }
         if amount != ""{
-            let length = amount.characters.count
+            
+            let length = amount.count
+//            let length = amount.characters.count
             amount = amount.substring(to: amount.index(amount.startIndex, offsetBy: length - 1))
             
         }

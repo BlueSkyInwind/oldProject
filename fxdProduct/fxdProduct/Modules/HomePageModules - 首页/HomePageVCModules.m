@@ -230,7 +230,7 @@
     //375 185
     _sdView.delegate = self;
     _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
-    
+
     self.tableView.tableHeaderView = _sdView;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     header.automaticallyChangeAlpha = YES;
@@ -418,9 +418,16 @@
 //            }
 //        }
         if (_dataArray.count>1) {
-
+            int height = 0;
+            if (UI_IS_IPHONE5) {
+                height = 113;
+            }else{
+                
+                height = 150;
+            }
+            
             if (_dataArray.count>2) {
-                return (_k_h-0.5*_k_w-113)/_dataArray.count;
+                return (_k_h-0.5*_k_w-height)/_dataArray.count;
             }
             return 120;
 
