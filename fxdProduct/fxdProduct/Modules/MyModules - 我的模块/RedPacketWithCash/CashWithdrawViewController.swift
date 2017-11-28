@@ -142,7 +142,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
 //        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "重置交易密码")
     }
     
-    
     /// 提现按钮点击
     @objc func withdrawBtnClick(){
         popImportPayPasswordView()
