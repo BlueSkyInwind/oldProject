@@ -920,8 +920,8 @@ extension HomeDefaultCell{
         
         productSecondBgImage?.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(0)
-            make.left.equalTo(self).offset(20)
-            make.right.equalTo(self).offset(-20)
+            make.left.equalTo(self).offset(15)
+            make.right.equalTo(self).offset(-15)
             make.bottom.equalTo(self).offset(0)
         }
         
@@ -951,15 +951,20 @@ extension HomeDefaultCell{
             make.left.equalTo(leftImage.snp.right).offset(22)
             make.height.equalTo(22)
         }
-        let rightImage = UIImageView()
     
-        rightImage.image = UIImage(named:"home_05")
-        bgView.addSubview(rightImage)
-        rightImage.snp.makeConstraints { (make) in
+        let rightImageBtn = UIButton()
+        rightImageBtn.layer.borderColor = UIColor.red.cgColor
+        rightImageBtn.layer.cornerRadius = 10.0
+        rightImageBtn.layer.borderWidth = 1
+        rightImageBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        rightImageBtn.setTitleColor(UIColor.red, for: .normal)
+        bgView.addSubview(rightImageBtn)
+        rightImageBtn.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(0)
             make.left.equalTo(titleLabel.snp.right).offset(15)
+            make.height.equalTo(20)
         }
-        
+    
         let moneyLabel = UILabel()
         moneyLabel.textColor = TERM_COLOR
         moneyLabel.font = UIFont.systemFont(ofSize: 14)
@@ -983,12 +988,17 @@ extension HomeDefaultCell{
         
         product = homeProductData.data.productList[index-1]
         productSecondBgImage?.tag = 100+index
-        if product.productId == SalaryLoan{
-            
-            rightImage.image = UIImage(named:"home_04")
+
+    
+        let tips = product.tags as NSArray?
+        rightImageBtn.setTitle(tips![0] as? String, for: .normal)
+        if product.productId == SalaryLoan {
+            rightImageBtn.layer.borderColor = UI_MAIN_COLOR.cgColor
+            rightImageBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
         }
-        if product.productId == DeriveRapidLoan {
-            rightImage.image = UIImage(named:"home_06")
+        if product.productId == RapidLoan {
+            rightImageBtn.layer.borderColor = UIColor.init(red: 255/255.0, green: 180/255.0, blue: 60/255.0, alpha: 1.0).cgColor
+            rightImageBtn.setTitleColor(UIColor.init(red: 255/255.0, green: 180/255.0, blue: 60/255.0, alpha: 1.0), for: .normal)
         }
     
         SDWebImageDownloader.shared().setValue("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", forHTTPHeaderField: "Accept")
@@ -1200,9 +1210,9 @@ extension HomeDefaultCell{
         
             let moneyStr = NSString(format: "%@", (defaultHeadLabel?.text)!) as String
             let index = moneyStr.index(moneyStr.endIndex, offsetBy: -1)
-            let money = moneyStr.substring(to: index)
+            let money = moneyStr[..<index]
             
-            delegate?.applyImmediatelyBtnClick(money)
+            delegate?.applyImmediatelyBtnClick(String(money))
         }
         print("点击立即申请")
     }
@@ -1269,9 +1279,9 @@ extension HomeDefaultCell{
         }
         if amount != ""{
             
-            let length = amount.count
-//            let length = amount.characters.count
-            amount = amount.substring(to: amount.index(amount.startIndex, offsetBy: length - 1))
+            let index = amount.index(amount.endIndex, offsetBy: -1)
+            let money = amount[..<index]
+            amount = String(money)
             
         }
         if delegate != nil {

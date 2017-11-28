@@ -663,7 +663,7 @@
         loanFirstVC.rulesId = _rulesId;
     }
     loanFirstVC.model = _model;
-    if ([_product_id isEqualToString:RapidLoan]) {
+    if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
         loanFirstVC.req_loan_amt = _req_loan_amt;
     }
     [self.navigationController pushViewController:loanFirstVC animated:true];
@@ -685,7 +685,7 @@
         loanFirstVC.rulesId = _rulesId;
     }
     
-    if ([[FXD_Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan]) {
+    if ([[FXD_Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan] || [[FXD_Utility sharedUtility].userInfo.pruductId isEqualToString:DeriveRapidLoan]) {
         loanFirstVC.req_loan_amt = _req_loan_amt;
     }
     [self.navigationController pushViewController:loanFirstVC animated:true];

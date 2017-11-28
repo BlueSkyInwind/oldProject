@@ -14,7 +14,6 @@
 #import "BaseNavigationViewController.h"
 #import "ActivityHomePopView.h"
 #import "LewPopupViewController.h"
-//#import "HomePop.h"
 #import "FXDWebViewController.h"
 #import "SDCycleScrollView.h"
 #import "RepayRecordController.h"
@@ -163,22 +162,21 @@
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 23, 18)];
     [btn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
-//    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(16, -8, 13, 13)];
-//    bgView.backgroundColor = [UIColor redColor];
-//    bgView.layer.cornerRadius = 6.5;
-//    [btn addSubview:bgView];
-//
-//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(2, 0, 10, 12)];
-//    label.text = @"3";
-//    label.textColor = [UIColor whiteColor];
-//    label.font = [UIFont systemFontOfSize:12];
-//    [bgView addSubview:label];
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(16, -8, 13, 13)];
+    bgView.backgroundColor = [UIColor redColor];
+    bgView.layer.cornerRadius = 6.5;
+    [btn addSubview:bgView];
+
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(2, 0, 10, 12)];
+    label.text = @"3";
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont systemFontOfSize:12];
+    [bgView addSubview:label];
     
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:btn];
-//    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRMessage)];
+
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = 8;
-    
     
     self.navigationItem.rightBarButtonItems = @[spaceItem,aBarbi];
 
@@ -359,18 +357,11 @@
 #pragma mark - TableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-//    NSInteger i=0;
-//    if (_dataArray.count>0) {
-//        i=_dataArray.count;
-//    }else{
-//        i=2;
-//    }
+
     if (section == 0) {
         return 12.0f;
     }
-//    if (section < i) {
-//        return 12.0f;
-//    }
+
     return 0.1f;
 }
 
@@ -393,30 +384,6 @@
         return 30.f;
     }else {
         
-//        if (UI_IS_IPHONE5) {
-//            return (_k_h-0.5*_k_w-155);
-//        }else if(UI_IS_IPHONEX){
-//            return (_k_h-0.5*_k_w-250);
-//        }else{
-//            return (_k_h-0.5*_k_w-155);
-//        }
-        
-        
-//        if (indexPath.section == 1) {
-//            if (UI_IS_IPHONE5) {
-//                return (180);
-//            }else{
-//                return (210);
-//            }
-//        }else{
-//            if (UI_IS_IPHONE5) {
-//                return (_k_h-0.5*_k_w-330);
-//            }else if(UI_IS_IPHONEX){
-//                return (_k_h-0.5*_k_w-450);
-//            }else{
-//                return (_k_h-0.5*_k_w-360);
-//            }
-//        }
         if (_dataArray.count>1) {
             int height = 0;
             if (UI_IS_IPHONE5) {
@@ -520,15 +487,11 @@
             if (_dataArray.count == 1) {
                 
                 [homeCell productListFirst];
+            
             }else{
                 
                 [homeCell productListOtherWithIndex:indexPath.section];
             }
-//            if (indexPath.section == 1) {
-//                [homeCell productListFirst];
-//                return homeCell;
-//            }
-
             
             break;
         case 3:
@@ -580,16 +543,6 @@
     }
 }
 
-//- (void)repayRecordClick
-//{
-//    if ([Utility sharedUtility].loginFlage) {
-//        RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-//        [self.navigationController pushViewController:repayRecord animated:YES];
-//    }else {
-//        [self presentLogin:self];
-//    }
-//}
-
 #pragma mark - 获取数据
 
 -(void)getAllTheHomePageData:(void(^)(BOOL isSuccess))finish{
@@ -634,22 +587,6 @@
     
 
 }
-
-//- (void)fatchRate:(void(^)(RateModel *rate))finish
-//{
-//    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
-//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
-//        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
-//        if ([rateParse.flag isEqualToString:@"0000"]) {
-//            [Utility sharedUtility].rateParse = rateParse;
-//            finish(rateParse);
-//        } else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
-//}
 
 #pragma mark - 页面跳转
 
