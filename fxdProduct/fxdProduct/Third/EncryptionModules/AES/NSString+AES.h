@@ -17,4 +17,15 @@
 ///解密
 - (NSString *) AES256_Decrypt:(NSString *)key;
 
+/**
+ java哈希算法
+
+ @return 返回值
+ */
+-(int)DF_hashCode;
+///JAVA服务器加密
+- (NSString *) AES256JAVA_Encrypt:(NSString *)key;
+///JAVA服务器解密
+- (NSString *) AES256JAVA_Decrypt:(NSString *)key;
+
 @end
