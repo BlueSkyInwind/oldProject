@@ -221,7 +221,9 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
     let controller = CashWithdrawViewController()
     self.navigationController?.pushViewController(controller, animated: true)
+        
     }
+    
     //MARK:点击提现
     func withdrawBtnClick(){
         
@@ -287,12 +289,9 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                 let controller = CashWithdrawViewController()
                 self.navigationController?.pushViewController(controller, animated:true)
             }else{
-                
                 let controlller = UserDataAuthenticationListVCModules()
                 self.navigationController?.pushViewController(controlller, animated: true)
-                
             }
-            
         }))
         
         self.present(alertController, animated: true, completion: nil)
