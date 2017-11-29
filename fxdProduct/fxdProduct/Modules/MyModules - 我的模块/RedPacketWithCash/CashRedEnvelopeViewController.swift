@@ -176,13 +176,15 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
     }
     
-    func withdrawBtnClick(){
+    func withdrawBtnClick1(){
         
     let controller = CashWithdrawViewController()
     self.navigationController?.pushViewController(controller, animated: true)
+        
     }
+    
     //MARK:点击提现
-    func withdrawBtnClick1(){
+    func withdrawBtnClick(){
         
         //返回状态（0成功、1已逾期、2金额不足、3未设置交易密码、4身份认证和绑卡认证未完成）
         switch self.model?.status.hashValue {
@@ -221,12 +223,9 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                 let controller = CashWithdrawViewController()
                 self.navigationController?.pushViewController(controller, animated:true)
             }else{
-                
                 let controlller = UserDataAuthenticationListVCModules()
                 self.navigationController?.pushViewController(controlller, animated: true)
-                
             }
-            
         }))
         
         self.present(alertController, animated: true, completion: nil)

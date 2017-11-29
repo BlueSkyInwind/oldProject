@@ -65,7 +65,6 @@
 
 /**
  增加券视图
-
  @param discountTicketDetailM 默认券
  */
 -(void)addDiscountCoupons:(DiscountTicketDetailModel *)discountTicketDetailM{
@@ -241,7 +240,6 @@
     [applicationVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
-
             [self checkState];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
@@ -307,7 +305,6 @@
 //    checkVC.isSecondFailed = YES;
 //    checkVC.product_id = _productId;
     [self.navigationController pushViewController:checkVC animated:YES];
-    
 }
 
 - (void)goCheckVC:(UserStateModel *)model
