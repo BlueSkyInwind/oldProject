@@ -453,7 +453,7 @@ extension HomeDefaultCell{
         titleLabel.textAlignment = .center
         otherPlatformsBgView?.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo((otherPlatformsBgView?.snp.top)!).offset(20)
+            make.top.equalTo((otherPlatformsBgView?.snp.top)!).offset(15)
             make.left.equalTo((otherPlatformsBgView?.snp.left)!).offset(0)
             make.right.equalTo((otherPlatformsBgView?.snp.right)!).offset(0)
             make.height.equalTo(13)
@@ -528,7 +528,7 @@ extension HomeDefaultCell{
         otherPlatformsBgView?.addSubview(moreBtn)
         moreBtn.snp.makeConstraints { (make) in
 
-            make.bottom.equalTo(bgView.snp.bottom).offset(25)
+            make.bottom.equalTo(bgView.snp.bottom).offset(20)
             make.centerX.equalTo((otherPlatformsBgView?.snp.centerX)!)
             make.height.equalTo(20)
         }
@@ -1030,15 +1030,13 @@ extension HomeDefaultCell{
             rightImageBtn.setTitleColor(UIColor.init(red: 255/255.0, green: 180/255.0, blue: 60/255.0, alpha: 1.0), for: .normal)
         }
     
-        SDWebImageDownloader.shared().setValue("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", forHTTPHeaderField: "Accept")
+    
         let url1 = URL(string: product.icon)
-    
-        leftImage.sd_setImage(with: url1, placeholderImage: UIImage(named:"placeholderImage_Icon"), options: .refreshCached) { (image, error, cashType, url) in
-
-        }
-    
-//    let url1 = URL(string: product.icon)
 //    leftImage.sd_setImage(with: url1)
+    
+        let data = NSData.init(contentsOf: url1!)
+        leftImage.image = UIImage.sd_image(with: data! as Data)
+    
         titleLabel.text = product.productName
         moneyLabel.text = product.amount
         termLabel.text = product.period

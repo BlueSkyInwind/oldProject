@@ -368,9 +368,22 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (_dataArray.count>1) {
-        return _dataArray.count + 1;
+        
+        return [self getAllProduct]+1;
+//        return _dataArray.count + 1;
     }
     return 2;
+}
+
+-(NSInteger)getAllProduct{
+    
+    NSInteger i = 0;
+    for (HomeProductsList *product in _homeProductList.data.productList) {
+        if ([product.isValidate isEqualToString:@"1"]) {
+            i++;
+        }
+    }
+    return i;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

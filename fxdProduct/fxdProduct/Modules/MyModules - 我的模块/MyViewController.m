@@ -129,7 +129,9 @@
         case 0:
         {
             
-            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+            
+            UserDataEvaluationVCModules *repayRecord=[[UserDataEvaluationVCModules alloc]init];
+//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
