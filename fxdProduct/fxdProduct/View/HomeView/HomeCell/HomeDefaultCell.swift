@@ -770,7 +770,7 @@ extension HomeDefaultCell{
         leftImage.sd_setImage(with: url)
         productFirstBgImage?.addSubview(leftImage)
         leftImage.snp.makeConstraints { (make) in
-            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(20)
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(50)
             make.left.equalTo((productFirstBgImage?.snp.left)!).offset(25)
             make.width.equalTo(38)
             make.height.equalTo(38)
@@ -782,23 +782,55 @@ extension HomeDefaultCell{
         titleLabel.text = homeProductData.data.productList[0].productName
         productFirstBgImage?.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(30)
-            make.left.equalTo(leftImage.snp.right).offset(8)
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(60)
+            make.left.equalTo(leftImage.snp.right).offset(13)
             make.height.equalTo(20)
         }
-        let rightImage = UIImageView()
-        
-        rightImage.image = UIImage(named:"home_04")
-        if homeProductData.data.productList[0].productId == RapidLoan || homeProductData.data.productList[0].productId == DeriveRapidLoan{
-        
-            rightImage.image = UIImage(named:"home_05")
-        }
-        productFirstBgImage?.addSubview(rightImage)
-        rightImage.snp.makeConstraints { (make) in
-            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(30)
+    
+    
+//        let rightImage = UIImageView()
+//
+//        rightImage.image = UIImage(named:"home_04")
+//        if homeProductData.data.productList[0].productId == RapidLoan {
+//
+//            rightImage.image = UIImage(named:"home_05")
+//        }
+//        if homeProductData.data.productList[0].productId == DeriveRapidLoan {
+//            rightImage.image = UIImage(named:"home_06")
+//        }
+//        productFirstBgImage?.addSubview(rightImage)
+//        rightImage.snp.makeConstraints { (make) in
+//            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(58)
+//            make.left.equalTo(titleLabel.snp.right).offset(20)
+//        }
+    
+        let rightImageBtn = UIButton()
+        rightImageBtn.layer.borderColor = UIColor.red.cgColor
+        rightImageBtn.layer.cornerRadius = 10.0
+        rightImageBtn.layer.borderWidth = 1
+        rightImageBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        rightImageBtn.setTitleColor(UIColor.red, for: .normal)
+        productFirstBgImage?.addSubview(rightImageBtn)
+        rightImageBtn.snp.makeConstraints { (make) in
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(62)
             make.left.equalTo(titleLabel.snp.right).offset(20)
+            make.height.equalTo(20)
         }
-        
+    
+        var product :HomeProductsList
+    
+        product = homeProductData.data.productList[0]
+        let tips = product.tags as NSArray?
+        rightImageBtn.setTitle(tips![0] as? String, for: .normal)
+        if product.productId == SalaryLoan {
+            rightImageBtn.layer.borderColor = UI_MAIN_COLOR.cgColor
+            rightImageBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
+        }
+        if product.productId == RapidLoan {
+            rightImageBtn.layer.borderColor = UIColor.init(red: 255/255.0, green: 180/255.0, blue: 60/255.0, alpha: 1.0).cgColor
+            rightImageBtn.setTitleColor(UIColor.init(red: 255/255.0, green: 180/255.0, blue: 60/255.0, alpha: 1.0), for: .normal)
+        }
+    
         let moneyLabel = UILabel()
         moneyLabel.textColor = UIColor.black
         moneyLabel.textAlignment = .center
@@ -806,19 +838,21 @@ extension HomeDefaultCell{
         moneyLabel.text = homeProductData.data.productList[0].amount
         productFirstBgImage?.addSubview(moneyLabel)
         moneyLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(rightImage.snp.bottom).offset(10)
+            make.top.equalTo(rightImageBtn.snp.bottom).offset(50)
             make.centerX.equalTo((productFirstBgImage?.snp.centerX)!)
             make.height.equalTo(30)
         }
         
         let termLabel = UILabel()
-        termLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
+//        termLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
+        termLabel.textColor = UI_MAIN_COLOR
         termLabel.font = UIFont.systemFont(ofSize: 14)
         termLabel.text = homeProductData.data.productList[0].period
         productFirstBgImage?.addSubview(termLabel)
         termLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(rightImage.snp.bottom).offset(20)
-            make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-30)
+            make.top.equalTo(rightImageBtn.snp.bottom).offset(60)
+            make.left.equalTo(moneyLabel.snp.right).offset(24)
+//            make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-60)
             make.height.equalTo(20)
         }
         
@@ -831,35 +865,76 @@ extension HomeDefaultCell{
         loanBtn.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         productFirstBgImage?.addSubview(loanBtn)
         loanBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(moneyLabel.snp.bottom).offset(18)
+            make.top.equalTo(moneyLabel.snp.bottom).offset(50)
             make.centerX.equalTo((productFirstBgImage?.snp.centerX)!)
-            make.width.equalTo(240)
-            make.height.equalTo(38)
+            make.width.equalTo(279)
+            make.height.equalTo(48)
         }
     
         let tipLable = UILabel()
-        tipLable.text = homeProductData.data.productList[0].tips
+//        tipLable.text = homeProductData.data.productList[0].tips
+        tipLable.text = "借款享提额，最高5000元"
         tipLable.font = UIFont.systemFont(ofSize: 12)
         tipLable.textAlignment = .center
         tipLable.textColor = UIColor.red
         productFirstBgImage?.addSubview(tipLable)
         tipLable.snp.makeConstraints { (make) in
-            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-19)
+            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-50)
             make.left.equalTo((productFirstBgImage?.snp.left)!).offset(15)
             make.right.equalTo((productFirstBgImage?.snp.right)!).offset(-15)
             make.height.equalTo(16)
         }
     
     if UI_IS_IPONE5 {
+        
+        leftImage.snp.updateConstraints({ (make) in
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(25)
+        })
+        
+        titleLabel.snp.updateConstraints({ (make) in
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(35)
+        })
+        
+        rightImageBtn.snp.updateConstraints({ (make) in
+            make.top.equalTo((productFirstBgImage?.snp.top)!).offset(32)
+        })
+        
+        moneyLabel.snp.updateConstraints({ (make) in
+            make.top.equalTo(rightImageBtn.snp.bottom).offset(25)
+        })
+        
+        termLabel.snp.updateConstraints({ (make) in
+            make.top.equalTo(rightImageBtn.snp.bottom).offset(30)
+        })
         loanBtn.snp.updateConstraints({ (make) in
-            make.top.equalTo(moneyLabel.snp.bottom).offset(5)
+            make.top.equalTo(moneyLabel.snp.bottom).offset(20)
+            make.width.equalTo(220)
         })
         
         tipLable.snp.updateConstraints({ (make) in
-            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-12)
+            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-25)
         })
     }
+    
+    if UI_IS_IPONE6 {
+        moneyLabel.snp.updateConstraints({ (make) in
+            make.top.equalTo(rightImageBtn.snp.bottom).offset(40)
+        })
+        
+        termLabel.snp.updateConstraints({ (make) in
+            make.top.equalTo(rightImageBtn.snp.bottom).offset(50)
+        })
+        
+        loanBtn.snp.updateConstraints({ (make) in
+            make.top.equalTo(moneyLabel.snp.bottom).offset(30)
+    
+        })
+        
+        tipLable.snp.updateConstraints({ (make) in
+            make.bottom.equalTo((productFirstBgImage?.snp.bottom)!).offset(-35)
+        })
     }
+}
     
     //MARK:产品列表，其他的
    @objc func productListOther(index:NSInteger){
@@ -874,8 +949,8 @@ extension HomeDefaultCell{
         
         productSecondBgImage?.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(0)
-            make.left.equalTo(self).offset(20)
-            make.right.equalTo(self).offset(-20)
+            make.left.equalTo(self).offset(15)
+            make.right.equalTo(self).offset(-15)
             make.bottom.equalTo(self).offset(0)
         }
         
@@ -898,37 +973,42 @@ extension HomeDefaultCell{
         }
         let titleLabel = UILabel()
         titleLabel.textColor = UIColor.black
-        titleLabel.font = UIFont.systemFont(ofSize: 22)
+        titleLabel.font = UIFont.systemFont(ofSize: 18)
         bgView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(0)
-            make.left.equalTo(leftImage.snp.right).offset(10)
+            make.left.equalTo(leftImage.snp.right).offset(22)
             make.height.equalTo(22)
         }
-        let rightImage = UIImageView()
     
-        rightImage.image = UIImage(named:"home_05")
-        bgView.addSubview(rightImage)
-        rightImage.snp.makeConstraints { (make) in
+        let rightImageBtn = UIButton()
+        rightImageBtn.layer.borderColor = UIColor.red.cgColor
+        rightImageBtn.layer.cornerRadius = 10.0
+        rightImageBtn.layer.borderWidth = 1
+        rightImageBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        rightImageBtn.setTitleColor(UIColor.red, for: .normal)
+        bgView.addSubview(rightImageBtn)
+        rightImageBtn.snp.makeConstraints { (make) in
             make.top.equalTo(bgView.snp.top).offset(0)
             make.left.equalTo(titleLabel.snp.right).offset(15)
+            make.height.equalTo(20)
         }
-        
+    
         let moneyLabel = UILabel()
-        moneyLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
+        moneyLabel.textColor = TERM_COLOR
         moneyLabel.font = UIFont.systemFont(ofSize: 14)
         bgView.addSubview(moneyLabel)
         moneyLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.left.equalTo(leftImage.snp.right).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.left.equalTo(leftImage.snp.right).offset(22)
             make.height.equalTo(20)
         }
         let termLabel = UILabel()
-        termLabel.textColor = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
+        termLabel.textColor = TERM_COLOR
         termLabel.font = UIFont.systemFont(ofSize: 14)
         bgView.addSubview(termLabel)
         termLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.left.equalTo(moneyLabel.snp.right).offset(20)
             make.height.equalTo(20)
         }
@@ -937,12 +1017,28 @@ extension HomeDefaultCell{
         
         product = homeProductData.data.productList[index-1]
         productSecondBgImage?.tag = 100+index
-        if product.productId == SalaryLoan{
-            
-            rightImage.image = UIImage(named:"home_04")
+
+    
+        let tips = product.tags as NSArray?
+        rightImageBtn.setTitle(tips![0] as? String, for: .normal)
+        if product.productId == SalaryLoan {
+            rightImageBtn.layer.borderColor = UI_MAIN_COLOR.cgColor
+            rightImageBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
         }
+        if product.productId == RapidLoan {
+            rightImageBtn.layer.borderColor = UIColor.init(red: 255/255.0, green: 180/255.0, blue: 60/255.0, alpha: 1.0).cgColor
+            rightImageBtn.setTitleColor(UIColor.init(red: 255/255.0, green: 180/255.0, blue: 60/255.0, alpha: 1.0), for: .normal)
+        }
+    
+        SDWebImageDownloader.shared().setValue("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", forHTTPHeaderField: "Accept")
         let url1 = URL(string: product.icon)
-        leftImage.sd_setImage(with: url1)
+    
+        leftImage.sd_setImage(with: url1, placeholderImage: UIImage(named:"placeholderImage_Icon"), options: .refreshCached) { (image, error, cashType, url) in
+
+        }
+    
+//    let url1 = URL(string: product.icon)
+//    leftImage.sd_setImage(with: url1)
         titleLabel.text = product.productName
         moneyLabel.text = product.amount
         termLabel.text = product.period
@@ -967,6 +1063,31 @@ extension HomeDefaultCell{
             make.right.equalTo(jiantouImage.snp.left).offset(-8)
             make.height.equalTo(20)
         }
+    
+    if  product.tips != nil && product.tips != ""{
+     
+        bgView.snp.updateConstraints({ (make) in
+            make.height.equalTo(70)
+        })
+        let tipLabel = UILabel()
+        tipLabel.textColor = UIColor.red
+        tipLabel.font = UIFont.systemFont(ofSize: 12)
+        tipLabel.text = product.tips
+        bgView.addSubview(tipLabel)
+        tipLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(leftImage.snp.right).offset(22)
+            make.bottom.equalTo(bgView.snp.bottom).offset(0)
+        }
+        if UI_IS_IPONE5 {
+            tipLabel.snp.updateConstraints({ (make) in
+                
+                make.left.equalTo(leftImage.snp.right).offset(10)
+            })
+        }
+    }
+    
+
+    
         if (product.isValidate == "0"){
         
             productSecondBgImage?.isUserInteractionEnabled = false
@@ -990,6 +1111,15 @@ extension HomeDefaultCell{
                 make.centerY.equalTo(hiddleImage.snp.centerY)
                 make.centerX.equalTo(hiddleImage.snp.centerX)
                 make.height.equalTo(20)
+            })
+        }
+    
+        if UI_IS_IPONE5 {
+            titleLabel.snp.updateConstraints({ (make) in
+                make.left.equalTo(leftImage.snp.right).offset(10)
+            })
+            moneyLabel.snp.updateConstraints({ (make) in
+                make.left.equalTo(leftImage.snp.right).offset(10)
             })
         }
     }
@@ -1109,9 +1239,9 @@ extension HomeDefaultCell{
         
             let moneyStr = NSString(format: "%@", (defaultHeadLabel?.text)!) as String
             let index = moneyStr.index(moneyStr.endIndex, offsetBy: -1)
-            let money = moneyStr.substring(to: index)
+            let money = moneyStr[..<index]
             
-            delegate?.applyImmediatelyBtnClick(money)
+            delegate?.applyImmediatelyBtnClick(String(money))
         }
         print("点击立即申请")
     }
@@ -1177,8 +1307,10 @@ extension HomeDefaultCell{
             break
         }
         if amount != ""{
-            let length = amount.characters.count
-            amount = amount.substring(to: amount.index(amount.startIndex, offsetBy: length - 1))
+            
+            let index = amount.index(amount.endIndex, offsetBy: -1)
+            let money = amount[..<index]
+            amount = String(money)
             
         }
         if delegate != nil {
