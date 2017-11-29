@@ -1119,6 +1119,10 @@
 		CC49BA071FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */; };
 		CC4BB60F1F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
 		CC4BB6101F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
+		CC594E631FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */; };
+		CC594E641FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */; };
+		CC594E671FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */; };
+		CC594E681FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */; };
 		CC5D70271ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
 		CC5D70281ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
 		CC5D702C1ED4405500A074AF /* PaymentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */; };
@@ -2276,6 +2280,10 @@
 		CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailsViewController.swift; sourceTree = "<group>"; };
 		CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelDescriptionView.h; sourceTree = "<group>"; };
 		CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelDescriptionView.m; sourceTree = "<group>"; };
+		CC594E611FCBFC7800D53F60 /* WithdrawCashParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashParamModel.h; sourceTree = "<group>"; };
+		CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashParamModel.m; sourceTree = "<group>"; };
+		CC594E651FCBFD0B00D53F60 /* WithdrawCashModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashModel.h; sourceTree = "<group>"; };
+		CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashModel.m; sourceTree = "<group>"; };
 		CC5D70251ED4400600A074AF /* CashModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashModel.h; sourceTree = "<group>"; };
 		CC5D70261ED4400600A074AF /* CashModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashModel.m; sourceTree = "<group>"; };
 		CC5D702A1ED4405500A074AF /* PaymentServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentServiceModel.h; sourceTree = "<group>"; };
@@ -5020,6 +5028,10 @@
 				CCA181971FC7EED70094DA58 /* PersonalCenterModel.m */,
 				CCA1819A1FC7F0320094DA58 /* WithdrawCashInfoModel.h */,
 				CCA1819B1FC7F0320094DA58 /* WithdrawCashInfoModel.m */,
+				CC594E611FCBFC7800D53F60 /* WithdrawCashParamModel.h */,
+				CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */,
+				CC594E651FCBFD0B00D53F60 /* WithdrawCashModel.h */,
+				CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */,
 			);
 			name = Cash;
 			sourceTree = "<group>";
@@ -5767,6 +5779,7 @@
 				84C619BC1FA815A800626411 /* LoanPeriodForDetailsVCModule.m in Sources */,
 				6379639F1CABAFE9002A5910 /* ProductListResult.m in Sources */,
 				63832C881CB7513500C6F194 /* NSData+AES.m in Sources */,
+				CC594E671FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */,
 				84A37FF81FAC12A8008FB7AF /* QRCodePopView.m in Sources */,
 				6379641D1CAD1BE0002A5910 /* LivenessBaseClass.m in Sources */,
 				635AB7B31BE3540100C32919 /* AmountMsgBaseClass.m in Sources */,
@@ -5794,6 +5807,7 @@
 				638A16ED1E517D9F00AB8AB6 /* LOTRectShapeLayer.m in Sources */,
 				0F9E30D21BC8A70C0018A801 /* IdeaBackViewController.m in Sources */,
 				63DE56FF1DE7CD2900747AE2 /* FXDWebViewController.m in Sources */,
+				CC594E631FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */,
 				63FC24F41D98F7E9006F58F3 /* YYTextMagnifier.m in Sources */,
 				63ED33341B6B4570008B6085 /* BaseViewController.m in Sources */,
 				63A24C671BE063A90036E8EF /* UIImage+Cut.m in Sources */,
@@ -6290,6 +6304,7 @@
 				CC0DF9591EA5B1090024841A /* ProductListResult.m in Sources */,
 				CC0DF95A1EA5B1090024841A /* NSData+AES.m in Sources */,
 				84EC95B31F5AC4E3008656BA /* FeeDescriptionTableViewCell.m in Sources */,
+				CC594E681FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */,
 				CC0DF95B1EA5B1090024841A /* LivenessBaseClass.m in Sources */,
 				847DBBD21FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */,
 				CC0DF95C1EA5B1090024841A /* AmountMsgBaseClass.m in Sources */,
@@ -6468,6 +6483,7 @@
 				CC0DF9F21EA5B1090024841A /* LoginBaseClass.m in Sources */,
 				CC0DF9F31EA5B1090024841A /* CGGeometryAdditions.m in Sources */,
 				CC0DF9F41EA5B1090024841A /* ColledgeView.m in Sources */,
+				CC594E641FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */,
 				CC0DF9F51EA5B1090024841A /* GetMoneyStateBaseClass.m in Sources */,
 				843C99F11F9606050067E200 /* DiscountCouponsView.swift in Sources */,
 				CC0DF9F61EA5B1090024841A /* ChangePWViewController.m in Sources */,

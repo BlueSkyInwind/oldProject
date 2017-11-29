@@ -481,6 +481,8 @@ NSString * const    _PersonalCenterWithdrawCashAPI_url    =    @"apigw/client/op
 //现金红包,账户余额（点击列表操作展示提现页）
 NSString * const    _LoadWithdrawCashInfo_url    =    @"apigw/client/operation/withdrawCashAPI/loadWithdrawCashInfo";
 
+//提现
+NSString * const    _WithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/withdrawCash";
 
 #pragma mark - 合规接口
 

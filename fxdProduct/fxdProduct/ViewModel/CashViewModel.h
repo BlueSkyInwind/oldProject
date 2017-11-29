@@ -24,4 +24,14 @@
  */
 -(void)loadWithdrawCashInfoOperateType:(NSString *)operateType;
 
+
+/**
+ 提现
+
+ @param amount 提现金额
+ @param bankCardId 银行卡id
+ @param payPassword 支付密码
+ */
+-(void)withdrawCashAmount:(NSString *)amount bankCardId:(NSString *)bankCardId payPassword:(NSString *)payPassword;
+
 @end

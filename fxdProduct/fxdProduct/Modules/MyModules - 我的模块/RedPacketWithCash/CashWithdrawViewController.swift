@@ -67,7 +67,11 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             make.top.equalTo(self.view).offset(280)
             make.height.equalTo(50)
         }
-        
+        if UI_IS_IPONE6P {
+            withdrawBtn.snp.updateConstraints({ (make) in
+                make.top.equalTo(self.view).offset(320)
+            })
+        }
     }
     
     //MARK:设置底部View
@@ -144,12 +148,9 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
     
     /// 提现按钮点击
     @objc func withdrawBtnClick(){
+        
         popImportPayPasswordView()
-
-//        let transactionInfoVC = SetTransactionInfoViewController.init()
-//        transactionInfoVC.exhibitionType = .IDCardNumber_Type
-//        self.navigationController?.pushViewController(transactionInfoVC, animated: true)
-//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "提现按钮点击")
+        
     }
     
     func popImportPayPasswordView()  {
@@ -160,11 +161,32 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
     func userInputCashPasswordCode(_ code: String) {
         print(code)
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            
+            ImportPayPasswordView.dismissImportPayPasswordView()
+        }
+        
+        let controller = WithdrawDetailsViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
+        
     }
     func userForgetPasswordClick() {
         
     }
     
+    
+    //提现
+    func withdrawCash(payPassword : String){
+        let cashViewModel = CashViewModel()
+        cashViewModel.setBlockWithReturn({ (returnValue) in
+            
+        }) {
+            
+        }
+        
+        cashViewModel.withdrawCashAmount("180", bankCardId: "765", payPassword: payPassword)
+        
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
