@@ -18,6 +18,7 @@ import IQKeyboardManager
     case IDCardNumber_Type
     case verificationCode_Type
     case setTradePassword_Type
+    case resetTradePassword_Type
     case modificationTradePassword_Type
 }
 
@@ -57,6 +58,10 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
             self.title = "设置交易密码"
             setVerificationCodeView()
         case .setTradePassword_Type?:
+            self.title = "设置交易密码"
+            setCashPasswordView()
+            payPasswordView?.showHeaderDisplayView()
+        case .resetTradePassword_Type?:
             self.title = "设置交易密码"
             setCashPasswordView()
             payPasswordView?.showHeaderDisplayView()
@@ -131,14 +136,21 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     
     //MARK: SetPayPasswordVerifyViewDelegate
     func userInputVerifyCode(_ code: String) {
-        self.exhibitionType = .setTradePassword_Type
-        self.configureView()
-        pushCashPasswordView(duration: 0.5)
+        verifyTradeSMS(code) { [weak self] (isSuccess) in
+            if isSuccess {
+                self?.exhibitionType = .setTradePassword_Type
+                self?.configureView()
+                self?.pushCashPasswordView(duration: 0.5)
+            }else{
+                
+            }
+        }
     }
     
     func sendButtonClick() {
         
         
+
     }
     
     //MARK: SetPayPasswordViewDelegate
@@ -238,10 +250,21 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         transactionVC.saveNewTradePasswordFirst(firstPasswordStr, second: secondPasswordStr, operateType: type)
     }
     
-    
-    
-    
-    
+    func verifyTradeSMS(_ verify_code_:String , _ result : @escaping (_ isSuccess : Bool) -> Void)  {
+        let transactionVC = SetTransactionPasswordViewModel.init()
+        transactionVC.setBlockWithReturn({ [weak self] (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                result(true)
+            }else{
+                result(false)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            result(false)
+        }
+        transactionVC.verifyTradeSMS(verify_code_)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

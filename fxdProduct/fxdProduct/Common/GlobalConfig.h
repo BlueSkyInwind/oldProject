@@ -225,8 +225,11 @@ UIKIT_EXTERN NSString * const       _PersonalCenterWithdrawCashAPI_url;      //�
 UIKIT_EXTERN NSString * const       _LoadWithdrawCashInfo_url;               //现金红包,账户余额（点击列表操作展示提现页）
 UIKIT_EXTERN NSString * const       _verifyIdentityCard_url;                 //验证身份证
 UIKIT_EXTERN NSString * const       _verifyOldPassword_url;                  //验证旧交易密码
+UIKIT_EXTERN NSString * const       _verifyTradeSMS_url;                  //验证交易呀验证码
 UIKIT_EXTERN NSString * const       _saveNewPassword_url;                    //设置新的交易密码
 UIKIT_EXTERN NSString * const       _WithdrawCash_url;                       //提现
+UIKIT_EXTERN NSString * const       _DiversionProStatics_url;                       //导流产品埋点接口
+
 
 
 UIKIT_EXTERN NSString * const   CODE_REG;                                    ///注册验证码

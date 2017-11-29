@@ -599,22 +599,6 @@
 
 }
 
-//- (void)fatchRate:(void(^)(RateModel *rate))finish
-//{
-//    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
-//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
-//        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
-//        if ([rateParse.flag isEqualToString:@"0000"]) {
-//            [Utility sharedUtility].rateParse = rateParse;
-//            finish(rateParse);
-//        } else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
-//}
-
 #pragma mark - 页面跳转
 
 /**
@@ -809,6 +793,8 @@
     webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
     [self.navigationController pushViewController:webVC animated:true];
     NSLog(@"点击导流平台的更多");
+    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
+    [homeVM statisticsDiversionPro:nil];
 }
 
 /**
@@ -819,6 +805,8 @@
     webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
     [self.navigationController pushViewController:webVC animated:true];
     NSLog(@"点击导流平台的更多");
+    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
+    [homeVM statisticsDiversionPro:nil];
 }
 
 #pragma mark 我要借款
@@ -845,7 +833,7 @@
 }
 
 #pragma mark 点击产品列表
--(void)productListClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit amount:(NSString *)amount{
+-(void)productListClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit amount:(NSString *)amount Path:(NSString *)Path{
 
     if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:RapidLoan] || [productId isEqualToString:DeriveRapidLoan]) {
         
@@ -866,12 +854,17 @@
         }
         return;
     }
+    
     //导流产品
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = productId;
+    webVC.urlStr = Path;
     [self.navigationController pushViewController:webVC animated:true];
     NSLog(@"产品productId = %@",productId);
+    
+    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
+    [homeVM statisticsDiversionPro:productId];
 }
+
 #pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
 -(void)intermediateStateAccess:(NSString *)flag{
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];

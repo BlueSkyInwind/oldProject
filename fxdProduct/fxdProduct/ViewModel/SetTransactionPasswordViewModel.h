@@ -30,5 +30,13 @@
  @param operateType 操作类型   1设置、2重置
  */
 -(void)saveNewTradePasswordFirst:(NSString *)firstPassword second:(NSString *)secondpassword operateType:(NSString *)operateType;
+/**
+ 效验交易密码
+ 
+ @param verify_code_ 验证码
+ */
+-(void)verifyTradeSMS:(NSString *)verify_code_;
+
+
 
 @end

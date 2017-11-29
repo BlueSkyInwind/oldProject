@@ -76,6 +76,28 @@
     }];
 }
 
+/**
+ 效验交易密码
+
+ @param verify_code_ 验证码
+ */
+-(void)verifyTradeSMS:(NSString *)verify_code_{
+    
+    NSDictionary * paramDic =  @{@"flag":@"MSG_SET_PAYPASSWORD",
+                            @"mobile_phone_": [FXD_Utility sharedUtility].userInfo.userMobilePhone,
+                            @"verify_code_":verify_code_};
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_verifyTradeSMS_url] isNeedNetStatus:YES isNeedWait:YES parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock(object);
+        }
+    }];
+}
+
 
 
 

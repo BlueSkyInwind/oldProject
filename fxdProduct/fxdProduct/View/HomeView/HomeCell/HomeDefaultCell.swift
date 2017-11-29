@@ -24,7 +24,7 @@ import SDWebImage
     //我要借款按钮
     func loanBtnClick()
     //点击产品按钮
-    func productListClick(_ productId: String, isOverLimit: String, amount: String)->Void
+    func productListClick(_ productId: String, isOverLimit: String, amount: String ,Path:String)->Void
     //其他平台按钮
     func otherBtnClick()
     //第三方产品列表按钮
@@ -1141,6 +1141,7 @@ extension HomeDefaultCell{
         var productId = ""
         var isOverLimit = ""
         var amount = ""
+        var path = ""
         let tag = tapGes.view?.tag
         //101：产品列表第一个产品
         //102：产品列表第二个产品
@@ -1165,14 +1166,14 @@ extension HomeDefaultCell{
             isOverLimit = homeProductData.data.productList[2].isOverLimit
             amount = homeProductData.data.productList[2].amount
         case 104:
-            productId = homeProductData.data.thirdProductList[0].extAttr.path_
-
+            path = homeProductData.data.thirdProductList[0].extAttr.path_
+            productId = homeProductData.data.thirdProductList[0].id_
         case 105:
-            productId = homeProductData.data.thirdProductList[1].extAttr.path_
-
+            path = homeProductData.data.thirdProductList[1].extAttr.path_
+            productId = homeProductData.data.thirdProductList[1].id_
         case 106:
-            productId = homeProductData.data.thirdProductList[2].extAttr.path_
-
+            path = homeProductData.data.thirdProductList[2].extAttr.path_
+            productId = homeProductData.data.thirdProductList[2].id_
         default:
             break
         }
@@ -1183,7 +1184,7 @@ extension HomeDefaultCell{
         }
         if delegate != nil {
         
-            delegate?.productListClick(productId ,isOverLimit: isOverLimit ,amount: amount)
+            delegate?.productListClick(productId ,isOverLimit: isOverLimit ,amount: amount,Path:path)
             
         }
         print("点击产品列表")

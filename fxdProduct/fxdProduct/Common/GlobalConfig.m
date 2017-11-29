@@ -365,6 +365,7 @@ NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.
 NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
 
 
+
 #pragma mark - 新的api
 
 //社保
@@ -472,6 +473,9 @@ NSString * const    _verifyIdentityCard_url    =    @"apigw/client/operation/pas
 //验证旧交易密码
 NSString * const    _verifyOldPassword_url    =    @"apigw/client/operation/passwordOperate/verifyPayPassword";
 
+//验证交易呀验证码
+NSString * const    _verifyTradeSMS_url    =    @"apigw/client/toolbox/sms/checkSMSCode";
+
 //设置新的交易密码
 NSString * const    _saveNewPassword_url    =    @"apigw/client/operation/passwordOperate/savePayPassword";
 
@@ -483,6 +487,11 @@ NSString * const    _LoadWithdrawCashInfo_url    =    @"apigw/client/operation/w
 
 //提现
 NSString * const    _WithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/withdrawCash";
+
+//导流产品埋点接口
+NSString * const    _DiversionProStatics_url    =    @"apigw/client/market/operation/ProductClickStatics";
+
+
 
 #pragma mark - 合规接口
 
@@ -552,8 +561,8 @@ NSString *const     _ProductProtocol_url     =    @"apigw/client/product/getProd
 
 #pragma mark - 对外导流接口
 
-//量子互助
-NSString * const    _liangzihuzhu_url    =    @"http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767";
+//量子互助  http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767
+NSString * const    _liangzihuzhu_url    =    @"apigw/client/quonline/link";
 
 #pragma Mark - 验证码类型
 
