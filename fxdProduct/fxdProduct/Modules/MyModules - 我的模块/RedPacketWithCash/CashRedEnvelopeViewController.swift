@@ -13,28 +13,22 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     var tableView : UITableView?
     var headerView : RedPacketHeaderView?
     var model : WithdrawCashInfoModel?
-    @objc var isWithdraw = false
+    @objc var isWithdraw = false     // 区别现金红包 和账户余额   （账户余额  ）
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        self.view.backgroundColor = UIColor.white
         addBackItemRoot()
         setNavRightBar()
         // Do any additional setup after loading the view.
-        
         
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         var flag = ""
-        
         if isWithdraw {
-            
             flag = "1"
-            
         }else{
-            
             flag = "2"
         }
         
@@ -70,43 +64,12 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             }
             
         }) {
-            
+            result(false)
         }
         
         cashVM.loadWithdrawCashInfoOperateType(operateType)
     }
     
-    /// 现金红包,账户余额（点击列表操作展示提现页）
-    ///
-    /// - Parameter operateType: 操作类型（1现金红包、2账户余额）
-    func loadWithdrawCashInfo(operateType: String){
-        
-        let cashVM = CashViewModel()
-        cashVM.setBlockWithReturn({ [weak self] (returnValue) in
-            
-            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
-            if baseResult.errCode == "0" {
-                
-                self?.model = try? WithdrawCashInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
-            
-                
-                self?.headerView?.moneyLabel?.text = "¥" + (self?.model?.amount)!
-                let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(self!.headerView!.moneyLabel?.text)!)
-                attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
-                attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 35), range: NSMakeRange(1,attrstr.length-1))
-                self?.headerView?.moneyLabel?.attributedText = attrstr
-                self?.tableView?.reloadData()
-            }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
-            }
-            
-        }) {
-            
-        }
-        
-        cashVM.loadWithdrawCashInfoOperateType(operateType)
-        
-    }
     //MARK:设置右上角按钮
     func setNavRightBar(){
         
@@ -117,7 +80,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
        
     }
    
-    
     //MARK:设置tableview
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
@@ -145,23 +107,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         headerView?.delegate = self
         tableView?.tableHeaderView = headerView
     }
-
-    func setAlertView(){
-        let alertController = UIAlertController(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", preferredStyle: .alert)
     
-        alertController.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: { (cancelAction) in
-            
-        }))
-        alertController.addAction(UIAlertAction.init(title: "去设置", style: .default, handler: { (action) in
-            let transactionInfoVC = SetTransactionInfoViewController.init()
-            transactionInfoVC.exhibitionType = .IDCardNumber_Type
-            self.navigationController?.pushViewController(transactionInfoVC, animated: true)
-        }))
-
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-
     @objc func rightClick(){
         
         let controller = ReminderDetailsViewController()
@@ -232,7 +178,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         }else{
             checkWithdrawCash(operateType: "2")
         }
-
     }
     
     

@@ -48,7 +48,6 @@
 
 
 @interface ProductListViewModel : FXD_ViewModelBaseClass
-
 /**
  获取产品列表
  */

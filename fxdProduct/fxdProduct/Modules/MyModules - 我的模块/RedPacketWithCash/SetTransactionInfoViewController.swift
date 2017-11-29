@@ -18,7 +18,6 @@ import IQKeyboardManager
     case IDCardNumber_Type
     case verificationCode_Type
     case setTradePassword_Type
-    case resetTradePassword_Type
     case modificationTradePassword_Type
 }
 
@@ -58,10 +57,6 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
             self.title = "设置交易密码"
             setVerificationCodeView()
         case .setTradePassword_Type?:
-            self.title = "设置交易密码"
-            setCashPasswordView()
-            payPasswordView?.showHeaderDisplayView()
-        case .resetTradePassword_Type?:
             self.title = "设置交易密码"
             setCashPasswordView()
             payPasswordView?.showHeaderDisplayView()
