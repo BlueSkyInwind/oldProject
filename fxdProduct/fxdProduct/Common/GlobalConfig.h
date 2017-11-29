@@ -236,6 +236,7 @@ UIKIT_EXTERN NSString * const       _CheckWithdrawCash_url;                  //�
 UIKIT_EXTERN NSString * const   CODE_REG;                                    ///注册验证码
 UIKIT_EXTERN NSString * const   CODE_FINDPASS;                               ///密码找回验证码
 UIKIT_EXTERN NSString * const   CODE_CHANGEPASS;                             ///修改密码验证码
+UIKIT_EXTERN NSString * const   CODE_TRADEPASSWORD;                             ///修改密码验证码
 UIKIT_EXTERN NSString * const   CODE_CHANGEDEVID;                            ///设备号更改
 UIKIT_EXTERN NSString * const   CODE_LOGIN;                                  ///登陆验证码
 UIKIT_EXTERN NSString * const   CODE_BANKMOBILE;                             ///银行预留手机验证码(银行卡修改)

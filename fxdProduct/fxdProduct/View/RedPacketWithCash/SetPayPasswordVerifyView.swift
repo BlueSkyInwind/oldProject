@@ -36,7 +36,7 @@ class SetPayPasswordVerifyView: UIView {
         super.init(frame: frame)
         self.backgroundColor = PayPasswordBackColor_COLOR
         setUpUI()
-        setVerifyCount()
+//        setVerifyCount()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -114,7 +114,6 @@ extension SetPayPasswordVerifyView{
         })
         
         phoneNumberLabel = UILabel()
-        phoneNumberLabel?.text = "186******1355"
         phoneNumberLabel?.font = UIFont.yx_systemFont(ofSize: 16)
         phoneNumberLabel?.textColor = UI_MAIN_COLOR
         headerDisplayView?.addSubview(phoneNumberLabel!)
@@ -174,8 +173,8 @@ extension SetPayPasswordVerifyView{
     
     @objc func sendBtnClick() {
         if (self.delegate != nil) {
-            showFooterDisplayView()
-            setVerifyCount()
+//            showFooterDisplayView()
+//            setVerifyCount()
             self.delegate?.sendButtonClick()
         }
     }

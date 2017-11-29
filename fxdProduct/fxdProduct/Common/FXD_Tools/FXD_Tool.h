@@ -98,6 +98,13 @@
 -(UIViewController *)topViewController;
 
 
+/**
+ 手机号中间变*
+
+ @param teleStr 手机号
+ @return 返回值
+ */
+-(NSString*)changeTelephone:(NSString*)teleStr;
 
 
 

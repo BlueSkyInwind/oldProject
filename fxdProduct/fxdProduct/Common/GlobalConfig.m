@@ -570,6 +570,7 @@ NSString * const    _liangzihuzhu_url    =    @"apigw/client/quonline/link";
 NSString * const  CODE_REG           =    @"MSG_REG_"; ///注册验证码
 NSString * const  CODE_FINDPASS      =    @"MSG_FIND_PASSWORD_"; ///密码找回验证码
 NSString * const  CODE_CHANGEPASS    =    @"MSG_UPDATE_PASSWORD_"; ///修改密码验证码
+NSString * const  CODE_TRADEPASSWORD    =    @"MSG_SET_PAYPASSWORD"; ///设置交易密码
 NSString * const  CODE_CHANGEDEVID   =    @"MSG_CHANGE_DEVICE_"; ///设备号更改
 NSString * const  CODE_LOGIN         =    @"MSG_LOGIN_";   ///登陆验证码
 NSString * const  CODE_BANKMOBILE    =    @"MSG_CHANGE_DEBIT_"; ///银行预留手机验证码(银行卡修改)

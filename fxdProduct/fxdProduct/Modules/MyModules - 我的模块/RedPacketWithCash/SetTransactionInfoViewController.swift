@@ -80,7 +80,17 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
         payPasswordVerifyView = SetPayPasswordVerifyView.init(frame: CGRect.init(x: _k_w, y: height, width: _k_w, height: _k_h - height))
         payPasswordVerifyView?.delegate = self
+        payPasswordVerifyView?.phoneNumberLabel?.text = FXD_Tool.share().changeTelephone(FXD_Utility.shared().userInfo.userMobilePhone)
         self.view.addSubview(payPasswordVerifyView!)
+        sendTradeSMS {[weak self] (isSuccess) in
+            self?.pushVerificationCodeView(duration: 0.5)
+            if isSuccess {
+                self?.payPasswordVerifyView?.setVerifyCount()
+                self?.payPasswordVerifyView?.showFooterDisplayView()
+            }else{
+                self?.payPasswordVerifyView?.showFooterSendCodeView()
+            }
+        }
     }
     
     func setCashPasswordView()  {
@@ -127,6 +137,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
 
     func userInputIDCardCode(_ code: String) {
 
+        
     }
     
     //MARK: SetPayPasswordVerifyViewDelegate
@@ -143,9 +154,14 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     }
     
     func sendButtonClick() {
-        
-        
-
+        sendTradeSMS {[weak self] (isSuccess) in
+            if isSuccess {
+                self?.payPasswordVerifyView?.setVerifyCount()
+                self?.payPasswordVerifyView?.showFooterDisplayView()
+            }else{
+                self?.payPasswordVerifyView?.showFooterSendCodeView()
+            }
+        }
     }
     
     //MARK: SetPayPasswordViewDelegate
@@ -244,6 +260,23 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         }
         transactionVC.saveNewTradePasswordFirst(firstPasswordStr, second: secondPasswordStr, operateType: type)
     }
+    
+    func sendTradeSMS(_ result : @escaping (_ isSuccess : Bool) -> Void)  {
+        let tradeSMS =  SMSViewModel.init()
+        tradeSMS.setBlockWithReturn({ (returnValue) in
+            let baseResult  = returnValue as! ReturnMsgBaseClass
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.msg)
+            if baseResult.flag == "0000" {
+                result(true)
+            }else{
+                result(false)
+            }
+        }) {
+            result(false)
+        }
+        tradeSMS.fatchRequestSMSParamPhoneNumber(FXD_Utility.shared().userInfo.userMobilePhone, verifyCodeType:TRADEPASSWORD_CODE)
+    }
+    
     
     func verifyTradeSMS(_ verify_code_:String , _ result : @escaping (_ isSuccess : Bool) -> Void)  {
         let transactionVC = SetTransactionPasswordViewModel.init()

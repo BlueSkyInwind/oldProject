@@ -10,7 +10,6 @@
 #import "HomeParam.h"
 @implementation HomeViewModel
 
-
 - (void)fetchUserState:(NSString *)productId
 {
     
@@ -93,7 +92,7 @@
     
     NSDictionary * dic  = @{@"productId":productId};
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_DiversionProStatics_url] isNeedNetStatus:true parameters:dic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_DiversionProStatics_url] isNeedNetStatus:false parameters:dic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if (self.returnBlock) {
             self.returnBlock(object);
@@ -103,9 +102,7 @@
             self.faileBlock();
         }
     }];
-    
 }
-
 
 @end
 

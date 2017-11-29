@@ -21,6 +21,8 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         setNavRightBar()
         // Do any additional setup after loading the view.
         
+        self.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -231,8 +233,11 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         alertController.addAction(UIAlertAction.init(title: sureTitle, style: .default, handler: { (action) in
             if tag == "0"{
                 
-                let controller = CashWithdrawViewController()
-                self.navigationController?.pushViewController(controller, animated:true)
+//                let controller = CashWithdrawViewController()
+//                self.navigationController?.pushViewController(controller, animated:true)
+                let transactionInfoVC = SetTransactionInfoViewController.init()
+                transactionInfoVC.exhibitionType = .verificationCode_Type
+                self.navigationController?.pushViewController(transactionInfoVC, animated: true)
             }else{
                 let controlller = UserDataAuthenticationListVCModules()
                 self.navigationController?.pushViewController(controlller, animated: true)

@@ -61,5 +61,7 @@
 #import "HomeViewModel.h"
 #import "ShanLinWebVCModules.h"
 #import "CheckWithdrawCashModel.h"
+#import "SMSViewModel.h"
+
 
 #endif /* fxdProduct_Bridging_Header_h */
