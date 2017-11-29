@@ -388,9 +388,14 @@
             int height = 0;
             if (UI_IS_IPHONE5) {
                 height = 113;
-            }else{
+            }else if(UI_IS_IPHONE6P){
                 
                 height = 150;
+            }else if (UI_IS_IPHONE6){
+                
+                height = 160;
+            }else if (UI_IS_IPHONEX){
+                height = 210;
             }
             
             if (_dataArray.count>2) {
