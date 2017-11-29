@@ -1123,6 +1123,8 @@
 		CC594E641FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */; };
 		CC594E671FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */; };
 		CC594E681FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */; };
+		CC594E6B1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E6A1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m */; };
+		CC594E6C1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E6A1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m */; };
 		CC5D70271ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
 		CC5D70281ED4400600A074AF /* CashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D70261ED4400600A074AF /* CashModel.m */; };
 		CC5D702C1ED4405500A074AF /* PaymentServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5D702B1ED4405500A074AF /* PaymentServiceModel.m */; };
@@ -2284,6 +2286,8 @@
 		CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashParamModel.m; sourceTree = "<group>"; };
 		CC594E651FCBFD0B00D53F60 /* WithdrawCashModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashModel.h; sourceTree = "<group>"; };
 		CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashModel.m; sourceTree = "<group>"; };
+		CC594E691FCE4FDA00D53F60 /* CheckWithdrawCashModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckWithdrawCashModel.h; sourceTree = "<group>"; };
+		CC594E6A1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckWithdrawCashModel.m; sourceTree = "<group>"; };
 		CC5D70251ED4400600A074AF /* CashModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashModel.h; sourceTree = "<group>"; };
 		CC5D70261ED4400600A074AF /* CashModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashModel.m; sourceTree = "<group>"; };
 		CC5D702A1ED4405500A074AF /* PaymentServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentServiceModel.h; sourceTree = "<group>"; };
@@ -5032,6 +5036,8 @@
 				CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */,
 				CC594E651FCBFD0B00D53F60 /* WithdrawCashModel.h */,
 				CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */,
+				CC594E691FCE4FDA00D53F60 /* CheckWithdrawCashModel.h */,
+				CC594E6A1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m */,
 			);
 			name = Cash;
 			sourceTree = "<group>";
@@ -6162,6 +6168,7 @@
 				638A16861E5030D700AB8AB6 /* SetUpFMDevice.m in Sources */,
 				846BB6DF1F580B6400CD3545 /* RenewalVCModules.swift in Sources */,
 				63145AF21CA8DBBD00D04ED8 /* RegionExt.m in Sources */,
+				CC594E6B1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */,
 				1AE362F51C586060006FC276 /* EditCardsController.m in Sources */,
 				6300CC031E4AAB870012B05A /* LoanProcessModel.m in Sources */,
 				6326C9EC1BF0B15700FD23A8 /* GetMoneyProcessResult.m in Sources */,
@@ -6573,6 +6580,7 @@
 				CC0DFA471EA5B1090024841A /* FXDBaseTabBarVCModule.m in Sources */,
 				CCEC9C941EE5095000452291 /* BankCardsParamModel.m in Sources */,
 				84E306CB1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
+				CC594E6C1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */,
 				CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */,
 				CC0DFA4A1EA5B1090024841A /* FXD_NetWorkRequestManager.m in Sources */,
 				CC0DFA4C1EA5B1090024841A /* CoreArchive.m in Sources */,

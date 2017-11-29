@@ -483,7 +483,7 @@ NSString * const    _saveNewPassword_url    =    @"apigw/client/operation/passwo
 NSString * const    _PersonalCenterWithdrawCashAPI_url    =    @"apigw/client/operation/withdrawCashAPI/personalCenter";
 
 //现金红包,账户余额（点击列表操作展示提现页）
-NSString * const    _LoadWithdrawCashInfo_url    =    @"apigw/client/operation/withdrawCashAPI/loadWithdrawCashInfo";
+NSString * const    _LoadWithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/loadWithdrawCash";
 
 //提现
 NSString * const    _WithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/withdrawCash";
@@ -491,7 +491,8 @@ NSString * const    _WithdrawCash_url    =    @"apigw/client/operation/withdrawC
 //导流产品埋点接口
 NSString * const    _DiversionProStatics_url    =    @"apigw/client/market/operation/ProductClickStatics";
 
-
+//校验提现条件
+NSString * const    _CheckWithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/checkWithdrawCash";
 
 #pragma mark - 合规接口
 

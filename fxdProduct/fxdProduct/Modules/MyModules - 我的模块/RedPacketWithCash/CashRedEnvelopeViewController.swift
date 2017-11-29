@@ -21,20 +21,60 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         addBackItemRoot()
         setNavRightBar()
         // Do any additional setup after loading the view.
-        configureView()
+        
         
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        var flag = ""
         
         if isWithdraw {
-            loadWithdrawCashInfo(operateType: "1")
+            
+            flag = "1"
+            
         }else{
-            loadWithdrawCashInfo(operateType: "2")
+            
+            flag = "2"
         }
+        
+        loadWithdrawCashInfo(flag, { (isSuccess) in
+            if isSuccess{
+                
+                self.configureView()
+                self.headerView?.moneyLabel?.text = "¥" + (self.model?.amount)!
+                let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(self.headerView!.moneyLabel?.text)!)
+                attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
+                attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 35), range: NSMakeRange(1,attrstr.length-1))
+                self.headerView?.moneyLabel?.attributedText = attrstr
+                self.tableView?.reloadData()
+            }
+        })
     }
     
+    //MARK:网络请求
+    func loadWithdrawCashInfo(_ operateType:String, _ result : @escaping (_ isSuccess : Bool) -> Void)  {
+        
+        let cashVM = CashViewModel()
+        cashVM.setBlockWithReturn({ [weak self] (returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+                self?.model = try? WithdrawCashInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                result(true)
+
+            }else{
+                result(false)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+            
+        }) {
+            
+        }
+        
+        cashVM.loadWithdrawCashInfoOperateType(operateType)
+    }
     
     /// 现金红包,账户余额（点击列表操作展示提现页）
     ///
@@ -48,12 +88,14 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             if baseResult.errCode == "0" {
                 
                 self?.model = try? WithdrawCashInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+            
                 
-                self?.headerView?.moneyLabel?.text = self?.model?.amount
+                self?.headerView?.moneyLabel?.text = "¥" + (self?.model?.amount)!
                 let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(self!.headerView!.moneyLabel?.text)!)
                 attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
                 attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 35), range: NSMakeRange(1,attrstr.length-1))
                 self?.headerView?.moneyLabel?.attributedText = attrstr
+                self?.tableView?.reloadData()
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
@@ -91,13 +133,11 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         headerView = RedPacketHeaderView()
         if isWithdraw {
             self.title = "现金红包"
-//            headerView.moneyLabel?.text = "¥180.50"
             headerView?.headerImage?.image = UIImage(named:"packet")
             headerView?.titleLabel?.text = "我的现金"
         }else{
             
             self.title = "账户余额"
-//            headerView.moneyLabel?.text = "¥360.50"
             headerView?.headerImage?.image = UIImage(named:"accountBig")
             headerView?.titleLabel?.text = "我的余额"
         }
@@ -168,6 +208,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         }
         redPacketCell.delegate = self
         redPacketCell.selectionStyle = .none
+        redPacketCell.descLabel?.text = self.model?.withdrawDesc
         return redPacketCell!
     }
     
@@ -186,28 +227,53 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     //MARK:点击提现
     func withdrawBtnClick(){
         
-        //返回状态（0成功、1已逾期、2金额不足、3未设置交易密码、4身份认证和绑卡认证未完成）
-        switch self.model?.status.hashValue {
-        case 0?:
-            let controller = CashWithdrawViewController()
-            self.navigationController?.pushViewController(controller, animated: true)
-            
-        case 1?,2?:
-            
-            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: self.model?.message)
-            
-        case 3?:
-            
-            setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
-            
-        case 4?:
-            
-            setAlertView(title: "完善资料提示",message: "为了顺利提现，请先完成身份认证及绑卡", sureTitle: "去完善",tag: "1")
-            
-        default:
-            break
+        if isWithdraw {
+            checkWithdrawCash(operateType: "1")
+        }else{
+            checkWithdrawCash(operateType: "2")
         }
 
+    }
+    
+    
+    func checkWithdrawCash(operateType: String){
+        let cashVM = CashViewModel()
+        cashVM.setBlockWithReturn({ [weak self] (returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+               let checkModel = try? CheckWithdrawCashModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                let status = Int((checkModel?.status)!)
+                
+                //返回状态（0校验通过、1校验异常、2已逾期、3金额不足、4未设置交易密码、5身份认证和绑卡认证未完成）
+                switch status {
+                case 0?:
+                    let controller = CashWithdrawViewController()
+                    self?.navigationController?.pushViewController(controller, animated: true)
+
+                case 1?,2?,3?:
+
+                    MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: checkModel?.message)
+
+                case 3?:
+
+                    self?.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
+
+                case 4?:
+
+                    self?.setAlertView(title: "完善资料提示",message: "为了顺利提现，请先完成身份认证及绑卡", sureTitle: "去完善",tag: "1")
+
+                default:
+                    break
+                }
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        cashVM.checkWithdrawCashOperateType(operateType)
     }
 
     func setAlertView(title: String, message: String, sureTitle: String, tag: String){
@@ -235,15 +301,11 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     //MARK:底部按钮点击
     func bottomBtnClick(){
         
-        let webView = FXDWebViewController()
+        let webView = ShanLinWebVCModules()
     
-        if isWithdraw {
-            webView.urlStr = "https://www.baidu.com"
-//            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "关于现金红包")
-        }else{
-            webView.urlStr = "https://www.taobao.com"
-//            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "关于账户余额")
-        }
+        webView.isHaveAlert = false
+        webView.loadContent = self.model?.problemDesc
+
         self.navigationController?.pushViewController(webView, animated: true)
     }
     

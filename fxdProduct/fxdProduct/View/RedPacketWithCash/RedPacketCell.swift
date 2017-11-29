@@ -18,6 +18,7 @@ import UIKit
 class RedPacketCell: UITableViewCell {
 
     @objc var bottomBtn : UIButton?
+    @objc var descLabel : UILabel?
     @objc weak var delegate: RedPacketCellDelegate?
     
     override func awakeFromNib() {
@@ -54,14 +55,14 @@ extension RedPacketCell{
             make.top.equalTo(self).offset(39)
         }
         
-        let label1 = UILabel()
-        label1.numberOfLines = 0
-        label1.text = "1、逾期状态无法提现。 2、累计满X元可提现。 3、提现申请成功后，3个工作日内到账。"
-        label1.textColor = RedPacketMoney_COLOR
-        label1.lineBreakMode = .byWordWrapping
-        label1.font = UIFont.systemFont(ofSize: 14)
-        self.addSubview(label1)
-        label1.snp.makeConstraints { (make) in
+        descLabel = UILabel()
+        descLabel?.numberOfLines = 0
+//        descLabel?.text = "1、逾期状态无法提现。 2、累计满X元可提现。 3、提现申请成功后，3个工作日内到账。"
+        descLabel?.textColor = RedPacketMoney_COLOR
+        descLabel?.lineBreakMode = .byWordWrapping
+        descLabel?.font = UIFont.systemFont(ofSize: 14)
+        self.addSubview(descLabel!)
+        descLabel?.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(25)
             make.right.equalTo(self).offset(-25)
             make.top.equalTo(titleLabel.snp.bottom).offset(21)

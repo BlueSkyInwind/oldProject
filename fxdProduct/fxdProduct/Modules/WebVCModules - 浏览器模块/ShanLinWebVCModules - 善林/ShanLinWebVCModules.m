@@ -95,7 +95,13 @@
         [_webView goBack];
     } else {
         
-        [self setAlert];
+        if (_isHaveAlert) {
+            
+            [self setAlert];
+        }else{
+            [self.navigationController popViewControllerAnimated:true];
+        }
+        
 //        [self.navigationController popToRootViewControllerAnimated:true];
 
     }
