@@ -13,5 +13,7 @@
 //隐藏navigationBar
 @property (nonatomic,assign) BOOL isHidden;
 
+@property (nonatomic,assign) BOOL isHaveAlert;
+
 @end
 

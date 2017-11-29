@@ -58,4 +58,7 @@
 #import "CashViewModel.h"
 #import "WithdrawCashInfoModel.h"
 #import "UserDataAuthenticationListVCModules.h"
+#import "ShanLinWebVCModules.h"
+#import "CheckWithdrawCashModel.h"
+
 #endif /* fxdProduct_Bridging_Header_h */

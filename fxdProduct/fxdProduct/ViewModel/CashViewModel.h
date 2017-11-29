@@ -34,4 +34,12 @@
  */
 -(void)withdrawCashAmount:(NSString *)amount bankCardId:(NSString *)bankCardId payPassword:(NSString *)payPassword;
 
+
+/**
+ 校验提现条件
+
+ @param operateType 操作类型（1现金红包、2账户余额）
+ */
+-(void)checkWithdrawCashOperateType:(NSString *)operateType;
+
 @end
