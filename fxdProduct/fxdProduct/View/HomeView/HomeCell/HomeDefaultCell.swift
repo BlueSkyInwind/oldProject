@@ -872,8 +872,8 @@ extension HomeDefaultCell{
         }
     
         let tipLable = UILabel()
-//        tipLable.text = homeProductData.data.productList[0].tips
-        tipLable.text = "借款享提额，最高5000元"
+        tipLable.text = homeProductData.data.productList[0].tips
+//        tipLable.text = "借款享提额，最高5000元"
         tipLable.font = UIFont.systemFont(ofSize: 12)
         tipLable.textAlignment = .center
         tipLable.textColor = UIColor.red
@@ -1019,8 +1019,8 @@ extension HomeDefaultCell{
         productSecondBgImage?.tag = 100+index
 
     
-        let tips = product.tags as NSArray?
-        rightImageBtn.setTitle(tips![0] as? String, for: .normal)
+        let desc = product.tags as NSArray?
+        rightImageBtn.setTitle(desc![0] as? String, for: .normal)
         if product.productId == SalaryLoan {
             rightImageBtn.layer.borderColor = UI_MAIN_COLOR.cgColor
             rightImageBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
