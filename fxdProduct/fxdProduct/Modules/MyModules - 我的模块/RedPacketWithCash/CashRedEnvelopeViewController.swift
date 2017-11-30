@@ -20,7 +20,11 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         addBackItemRoot()
         setNavRightBar()
         // Do any additional setup after loading the view.
-        
+        if isWithdraw {
+            self.title = "现金红包"
+        }else{
+            self.title = "账户余额"
+        }
         self.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
 
     }
@@ -38,7 +42,10 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             if isSuccess{
                 
                 self.configureView()
-                self.headerView?.moneyLabel?.text = "¥" + (self.model?.amount)!
+                let str=NSString(string:(self.model?.amount)!)
+                let amount = String(format: "%.2f", str.floatValue)
+                
+                self.headerView?.moneyLabel?.text = "¥" + amount
                 let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(self.headerView!.moneyLabel?.text)!)
                 attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
                 attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 35), range: NSMakeRange(1,attrstr.length-1))
@@ -96,12 +103,10 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
         headerView = RedPacketHeaderView()
         if isWithdraw {
-            self.title = "现金红包"
             headerView?.headerImage?.image = UIImage(named:"packet")
             headerView?.titleLabel?.text = "我的现金"
         }else{
             
-            self.title = "账户余额"
             headerView?.headerImage?.image = UIImage(named:"accountBig")
             headerView?.titleLabel?.text = "我的余额"
         }
@@ -165,7 +170,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
     }
     
-    func withdrawBtnClick1(){
+    func withdrawBtnClick(){
         
     let controller = CashWithdrawViewController()
     self.navigationController?.pushViewController(controller, animated: true)
@@ -173,7 +178,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     }
     
     //MARK:点击提现
-    func withdrawBtnClick(){
+    func withdrawBtnClick1(){
         
         if isWithdraw {
             checkWithdrawCash(operateType: "1")

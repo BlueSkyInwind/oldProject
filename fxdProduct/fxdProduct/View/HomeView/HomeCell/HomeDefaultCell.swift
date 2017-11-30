@@ -539,7 +539,14 @@ extension HomeDefaultCell{
                 make.bottom.equalTo(bgView.snp.bottom).offset(25)
             })
         }
-        
+    
+    
+    if UI_IS_IPONE6P {
+        moreBtn.snp.updateConstraints({ (make) in
+            
+            make.bottom.equalTo(bgView.snp.bottom).offset(35)
+        })
+    }
     }
     
     //进件带提款
