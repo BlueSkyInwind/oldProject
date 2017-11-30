@@ -16,11 +16,13 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.view.backgroundColor = UIColor.white
         self.title = "提现详情"
-        addBackItem()
-        configureView()
         leftTitleArray = ["提现金额","银行卡","预计到账时间"]
         rightTitleArray = ["¥180.50","中国银行(9267)","2017-11-15 14：39"]
+        addBackItem()
+        configureView()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -68,14 +70,31 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         }
     }
 
+    override func popBack(){
+        
+        PopFirstController()
+    }
+    
     //MARK:点击完成按钮
     @objc func withdrawBtnClick(){
         
-        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "提现按钮点击")
+        PopFirstController()
     }
     
+    //MRAK:返回上一级
+    func PopFirstController()  {
+        for  vc in self.rt_navigationController.rt_viewControllers {
+            if vc.isKind(of: CashRedEnvelopeViewController.self) {
+                self.navigationController?.popToViewController(vc, animated: true)
+                return
+            }
+        }
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        
+        return (leftTitleArray?.count)!
     }
     
     

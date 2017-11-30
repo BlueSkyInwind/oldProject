@@ -13,12 +13,14 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
 
     var tableView : UITableView?
     let cellId = "CellId"
-    
+    var currentindex : Int?
+    var cardInfo : CardInfo?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "提现"
         addBackItem()
+        currentindex = 0
         // Do any additional setup after loading the view.
         configureView()
         bottomView()
@@ -34,9 +36,24 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
        IQKeyboardManager.shared().isEnabled = true
     }
     
+    override func popBack(){
+        
+        PopFirstController()
+    }
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    //MRAK:返回上一级
+    func PopFirstController()  {
+        for  vc in self.rt_navigationController.rt_viewControllers {
+            if vc.isKind(of: CashRedEnvelopeViewController.self) {
+                self.navigationController?.popToViewController(vc, animated: true)
+                return
+            }
+        }
     }
     
     //MARK:设置tableview
@@ -236,12 +253,32 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         
         cell.cellType = CurrentInfoCellType(cellType: .Payment)
         cell.leftLabel?.text = "到账银行卡"
-        cell.rightLabel?.text = "中国银行(9267)"
+        
+        if cardInfo != nil {
+            
+            let index = cardInfo?.cardNo.index((cardInfo?.cardNo.endIndex)!, offsetBy: -4)
+            let numStr = cardInfo?.cardNo[index!...]
+            cell.rightLabel?.text = (cardInfo?.bankName)!+"("+numStr!+")"
+        }else{
+            cell.rightLabel?.text = "中国银行(9267)"
+        }
+        
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if indexPath.row == 1 {
+            
+            let userBankCardListVC = UserBankCardListVCModule()
+            userBankCardListVC.currentIndex = currentindex!
+            userBankCardListVC.userSelectedBankCard({ [weak self] (cardInfo, currentIndex) in
+                self?.cardInfo = cardInfo
+                self?.currentindex = currentIndex
+                self?.tableView?.reloadData()
+            })
+            self.navigationController?.pushViewController(userBankCardListVC, animated: true)
+        }
     }
     /*
     // MARK: - Navigation
