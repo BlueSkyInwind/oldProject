@@ -18,7 +18,7 @@
 - (NSString *) AES256_Decrypt:(NSString *)key;
 
 ///JAVA服务器用的hashCode
--(int)DF_hashCode;
+-(NSString *)DF_hashCode;
 
 ///JAVA服务器用的加密
 - (NSString *) AES256JAVA_Encrypt:(NSString *)key;

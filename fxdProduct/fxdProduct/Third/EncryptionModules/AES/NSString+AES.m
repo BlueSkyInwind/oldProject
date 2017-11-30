@@ -51,7 +51,7 @@
     return nil;
 }
 
--(int)DF_hashCode {
+-(NSString *)DF_hashCode {
     int hash = 0;
     for (int i = 0; i<[self length]; i++) {
         NSString *s = [self substringWithRange:NSMakeRange(i, 1)];
@@ -63,7 +63,7 @@
         }
         hash = hash * 31 + charactorUnicode;
     }
-    return hash;
+    return [NSString stringWithFormat:@"%d",hash];
 }
 
 //加密 返回base64

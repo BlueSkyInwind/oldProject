@@ -29,7 +29,7 @@
  @param secondpassword 二次密码
  @param operateType 操作类型   1设置、2重置
  */
--(void)saveNewTradePasswordFirst:(NSString *)firstPassword second:(NSString *)secondpassword operateType:(NSString *)operateType;
+-(void)saveNewTradePasswordFirst:(NSString *)firstPassword second:(NSString *)secondpassword operateType:(NSString *)operateType verify_code:(NSString *)verify_code;
 /**
  效验交易密码
  
@@ -37,6 +37,13 @@
  */
 -(void)verifyTradeSMS:(NSString *)verify_code_;
 
-
+/**
+ 修改交易密码
+ 
+ @param firstPassword 首次
+ @param secondpassword 第二次
+ @param oldPassword 旧 的
+ */
+-(void)modificationTradePasswordFirst:(NSString *)firstPassword second:(NSString *)secondpassword oldPassword:(NSString *)oldPassword;
 
 @end

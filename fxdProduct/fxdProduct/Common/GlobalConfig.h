@@ -226,7 +226,8 @@ UIKIT_EXTERN NSString * const       _LoadWithdrawCash_url;               //现�
 UIKIT_EXTERN NSString * const       _verifyIdentityCard_url;                 //验证身份证
 UIKIT_EXTERN NSString * const       _verifyOldPassword_url;                  //验证旧交易密码
 UIKIT_EXTERN NSString * const       _verifyTradeSMS_url;                  //验证交易呀验证码
-UIKIT_EXTERN NSString * const       _saveNewPassword_url;                    //设置新的交易密码
+UIKIT_EXTERN NSString * const       _saveNewPassword_url;                    //设置新的交易密码、
+UIKIT_EXTERN NSString * const       _modificationPassword_url;                    //设置新的交易密码
 UIKIT_EXTERN NSString * const       _WithdrawCash_url;                       //提现
 UIKIT_EXTERN NSString * const       _DiversionProStatics_url;                       //导流产品埋点接口
 UIKIT_EXTERN NSString * const       _CheckWithdrawCash_url;                  //校验提现条件
@@ -253,6 +254,7 @@ UIKIT_EXTERN NSString * const PLATFORM;                                      //�
 
 UIKIT_EXTERN NSString * const CHANNEL;
 UIKIT_EXTERN NSString * const Devcode;                                       //开发码
+UIKIT_EXTERN NSString * const Fxd_pw;
 
 UIKIT_EXTERN NSString * const FaceIDAppKey;                                  //FaceID
 UIKIT_EXTERN NSString * const FaceIDAppSecret;
