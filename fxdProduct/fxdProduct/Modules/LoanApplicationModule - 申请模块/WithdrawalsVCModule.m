@@ -632,7 +632,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             ShanLinWebVCModules *webView = [[ShanLinWebVCModules alloc] init];
             webView.loadContent = url;
             webView.isHidden = false;
-            webView.isHaveAlert = true;
             [self.navigationController pushViewController:webView animated:YES];
         }
             break;
