@@ -49,7 +49,6 @@ extension RedPacketHeaderView{
     fileprivate func setupUI(){
         
         headerImage = UIImageView()
-//        headerImage.image = UIImage(named:"packet")
         self.addSubview(headerImage!)
         headerImage?.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)
@@ -57,7 +56,6 @@ extension RedPacketHeaderView{
         }
         
         titleLabel = UILabel()
-//        titleLabel?.text = "我的现金"
         titleLabel?.font = UIFont.systemFont(ofSize: 15)
         self.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints { (make) in
@@ -94,7 +92,7 @@ extension RedPacketHeaderView{
             moneyLabel?.snp.updateConstraints({ (make) in
                 make.top.equalTo((titleLabel?.snp.bottom)!).offset(15)
             })
-            withdrawBtn.snp.makeConstraints({ (make) in
+            withdrawBtn.snp.updateConstraints({ (make) in
                 make.top.equalTo((moneyLabel?.snp.bottom)!).offset(20)
             })
         }

@@ -13,7 +13,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     var tableView : UITableView?
     var headerView : RedPacketHeaderView?
     var model : WithdrawCashInfoModel?
-//    @objc var isWithdraw = false     // 区别现金红包 和账户余额   （账户余额  ）
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -27,20 +27,12 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             self.title = "账户余额"
             
         }
-//        self.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        var flag = ""
-        if FXD_Utility.shared().operateType == "1" {
-            flag = "1"
-        }else{
-            flag = "2"
-        }
         
-        loadWithdrawCashInfo(flag, { (isSuccess) in
+        loadWithdrawCashInfo( { (isSuccess) in
             if isSuccess{
                 
                 self.configureView()
@@ -58,7 +50,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     }
     
     //MARK:网络请求
-    func loadWithdrawCashInfo(_ operateType:String, _ result : @escaping (_ isSuccess : Bool) -> Void)  {
+    func loadWithdrawCashInfo( _ result : @escaping (_ isSuccess : Bool) -> Void)  {
         
         let cashVM = CashViewModel()
         cashVM.setBlockWithReturn({ [weak self] (returnValue) in
@@ -78,7 +70,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             result(false)
         }
         
-        cashVM.loadWithdrawCashInfoOperateType(operateType)
+        cashVM.loadWithdrawCashInfoOperateType(FXD_Utility.shared().operateType)
     }
     
     //MARK:设置右上角按钮
@@ -175,15 +167,12 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     //MARK:点击提现
     func withdrawBtnClick(){
         
-        if FXD_Utility.shared().operateType == "1" {
-            checkWithdrawCash(operateType: "1")
-        }else{
-            checkWithdrawCash(operateType: "2")
-        }
+        checkWithdrawCash()
+        
     }
     
     
-    func checkWithdrawCash(operateType: String){
+    func checkWithdrawCash(){
         let cashVM = CashViewModel()
         cashVM.setBlockWithReturn({ [weak self] (returnValue) in
             
@@ -221,7 +210,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         }) {
             
         }
-        cashVM.checkWithdrawCashOperateType(operateType)
+        cashVM.checkWithdrawCashOperateType(FXD_Utility.shared().operateType)
     }
 
     func setAlertView(title: String, message: String, sureTitle: String, tag: String){
@@ -252,7 +241,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
         let webView = ShanLinWebVCModules()
     
-        webView.isHaveAlert = false
         webView.loadContent = self.model?.problemDesc
 
         self.navigationController?.pushViewController(webView, animated: true)
