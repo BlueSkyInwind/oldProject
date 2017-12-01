@@ -469,7 +469,6 @@ static FXD_Tool * shareTool = nil;
     return [self topViewController:presentedViewController];
 }
 
-
 -(NSString *)addShell:(NSString *)str{
     
     NSString *decodedString;
@@ -485,7 +484,8 @@ static FXD_Tool * shareTool = nil;
     return decodedString;
 }
 
--(void)openShell:(NSString *)shellStr{
+
+-(NSString *)openShell:(NSString *)shellStr{
     
     NSMutableData *data = [NSMutableData dataWithCapacity:shellStr.length / 2];
     unsigned char whole_byte;
@@ -497,8 +497,9 @@ static FXD_Tool * shareTool = nil;
         whole_byte = strtol(byte_chars, NULL, 16);
         [data appendBytes:&whole_byte length:1];
     }
+    NSString * resultStr = [data base64EncodedStringWithOptions:0];
     
-    
+    return resultStr;
 }
 
 

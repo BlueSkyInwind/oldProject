@@ -241,7 +241,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
 //                let controller = CashWithdrawViewController()
 //                self.navigationController?.pushViewController(controller, animated:true)
                 let transactionInfoVC = SetTransactionInfoViewController.init()
-                transactionInfoVC.exhibitionType = .modificationTradePassword_Type
+                transactionInfoVC.exhibitionType = .IDCardNumber_Type
                 self.navigationController?.pushViewController(transactionInfoVC, animated: true)
             }else{
                 let controlller = UserDataAuthenticationListVCModules()

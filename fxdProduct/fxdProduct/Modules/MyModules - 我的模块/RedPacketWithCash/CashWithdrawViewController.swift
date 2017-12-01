@@ -202,7 +202,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         }
         
         cashViewModel.withdrawCashAmount("180", bankCardId: "765", payPassword: payPassword)
-        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
@@ -216,7 +215,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         return 68
     }
     
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = LINE_COLOR
@@ -236,6 +234,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         }
         cell.selectionStyle = .none
         if indexPath.row == 0 {
+            
             cell.cellType = CurrentInfoCellType(cellType: .Default)
             cell.leftLabel?.text = "提现金额"
             cell.rightLabel?.text = "¥180.05"
@@ -246,7 +245,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: RedPacketMoney_COLOR, range: NSMakeRange(0,1))
             attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.yx_systemFont(ofSize: 25) ?? 25, range: NSMakeRange(0,1))
             cell.rightLabel?.attributedText = attrstr
-            
             
             return cell
         }

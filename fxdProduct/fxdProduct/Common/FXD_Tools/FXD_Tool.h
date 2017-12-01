@@ -104,9 +104,9 @@
  */
 -(NSString*)changeTelephone:(NSString*)teleStr;
 
+-(NSString *)addShell:(NSString *)str;
 
-
-
+-(NSString *)openShell:(NSString *)shellStr;
 
 
 
