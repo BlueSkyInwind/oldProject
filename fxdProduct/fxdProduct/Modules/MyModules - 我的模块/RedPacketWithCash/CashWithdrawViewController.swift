@@ -172,7 +172,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
     }
     
     func popImportPayPasswordView()  {
-        ImportPayPasswordView.showImportPayPasswordView(self, amountStr: "180.99")
+        ImportPayPasswordView.showImportPayPasswordView(self, amountStr: FXD_Utility.shared().amount)
     }
     
     //MARK:ImportPayPasswordViewDelegate
@@ -180,17 +180,19 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         print(code)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            
             ImportPayPasswordView.dismissImportPayPasswordView()
         }
         
         withdrawCash(payPassword: code)
-        
     }
     func userForgetPasswordClick() {
-        
+        ImportPayPasswordView.dismissImportPayPasswordView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            let transactionInfoVC = SetTransactionInfoViewController.init()
+            transactionInfoVC.exhibitionType = .IDCardNumber_Type
+            self.navigationController?.pushViewController(transactionInfoVC, animated: true)
+        }
     }
-    
     
     //提现
     func withdrawCash(payPassword : String){
@@ -213,17 +215,11 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
                     break
                 }
             }else{
-                
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
-            
-            
         }) {
-            
         }
-        
         cashViewModel.withdrawCashAmount(FXD_Utility.shared().amount, bankCardId: self.cardInfo?.cardId, operateType: FXD_Utility.shared().operateType, payPassword: payPassword)
-        
     }
     
     //MARK:获取用户的银行卡列表
@@ -247,7 +243,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) {
-            
         }
         bankInfoVM.obtainUserBankCardList()
     }
@@ -264,7 +259,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         return 68
     }
     
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = LINE_COLOR
@@ -284,6 +278,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         }
         cell.selectionStyle = .none
         if indexPath.row == 0 {
+            
             cell.cellType = CurrentInfoCellType(cellType: .Default)
             cell.leftLabel?.text = "提现金额"
             cell.rightLabel?.text = "¥" + FXD_Utility.shared().amount
@@ -294,7 +289,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: RedPacketMoney_COLOR, range: NSMakeRange(0,1))
             attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.yx_systemFont(ofSize: 25) ?? 25, range: NSMakeRange(0,1))
             cell.rightLabel?.attributedText = attrstr
-            
             
             return cell
         }

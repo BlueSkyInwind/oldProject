@@ -317,6 +317,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
                 result(true)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }else{
                 result(false)
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)

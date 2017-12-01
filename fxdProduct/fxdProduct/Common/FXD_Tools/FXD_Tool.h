@@ -32,7 +32,6 @@
 + (BOOL)getVariableWithClass:(Class)myClass varName:(NSString *)name;
 
 + (UInt64)getNowTimeMS;
-
 //计算时间
 + (NSString *)countDate:(NSString *)date and:(int)addDays;
 
@@ -97,7 +96,6 @@
  */
 -(UIViewController *)topViewController;
 
-
 /**
  手机号中间变*
 
@@ -106,9 +104,9 @@
  */
 -(NSString*)changeTelephone:(NSString*)teleStr;
 
+-(NSString *)addShell:(NSString *)str;
 
-
-
+-(NSString *)openShell:(NSString *)shellStr;
 
 
 

@@ -22,23 +22,15 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         // Do any additional setup after loading the view.
         if FXD_Utility.shared().operateType == "1"{
             self.title = "现金红包"
-           
         }else{
             self.title = "账户余额"
-            
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         loadWithdrawCashInfo( { (isSuccess) in
             if isSuccess{
-                
                 self.configureView()
                 let str=NSString(string:(self.model?.amount)!)
                 let amount = String(format: "%.2f", str.floatValue)
-                
                 self.headerView?.moneyLabel?.text = "¥" + amount
                 let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(self.headerView!.moneyLabel?.text)!)
                 attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
@@ -47,6 +39,12 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                 self.tableView?.reloadData()
             }
         })
+//        self.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
     }
     
     //MARK:网络请求
@@ -85,6 +83,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
    
     //MARK:设置tableview
     func configureView()  {
+        
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false
         tableView?.delegate = self
@@ -92,19 +91,27 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         tableView?.separatorStyle = .none
         self.view.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
+//            make.left.right.bottom.equalTo(self.view)
+//            make.top.equalTo(obtainBarHeight_New(vc: self))
             make.edges.equalTo(self.view)
         })
+        if #available(iOS 11.0, *){
+            tableView?.contentInsetAdjustmentBehavior = .never;
+            tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
+        }else if #available(iOS 9.0, *){
+            self.automaticallyAdjustsScrollViewInsets = true;
+        }else{
+            self.automaticallyAdjustsScrollViewInsets = false;
+        }
         
         headerView = RedPacketHeaderView()
         if FXD_Utility.shared().operateType == "1" {
             headerView?.headerImage?.image = UIImage(named:"packet")
             headerView?.titleLabel?.text = "我的现金"
         }else{
-            
             headerView?.headerImage?.image = UIImage(named:"accountBig")
             headerView?.titleLabel?.text = "我的余额"
         }
-        
         headerView?.delegate = self
         tableView?.tableHeaderView = headerView
     }
@@ -198,9 +205,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                     self?.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
 
                 case 5?:
-
                     self?.setAlertView(title: "完善资料提示",message: "为了顺利提现，请先完成身份认证及绑卡", sureTitle: "去完善",tag: "1")
-                    
                 default:
                     break
                 }
@@ -224,7 +229,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             if tag == "0"{
                 
                 let transactionInfoVC = SetTransactionInfoViewController.init()
-                transactionInfoVC.exhibitionType = .modificationTradePassword_Type
+                transactionInfoVC.exhibitionType = .IDCardNumber_Type
                 self.navigationController?.pushViewController(transactionInfoVC, animated: true)
             }else{
                 let controlller = UserDataAuthenticationListVCModules()
@@ -239,9 +244,8 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     //MARK:底部按钮点击
     func bottomBtnClick(){
         
-        let webView = ShanLinWebVCModules()
-    
-        webView.loadContent = self.model?.problemDesc
+        let webView = DetailViewController()
+        webView.content = self.model?.problemDesc
 
         self.navigationController?.pushViewController(webView, animated: true)
     }
