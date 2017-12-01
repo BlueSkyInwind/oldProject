@@ -13,28 +13,28 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     var tableView : UITableView?
     var headerView : RedPacketHeaderView?
     var model : WithdrawCashInfoModel?
-    @objc var isWithdraw = false     // 区别现金红包 和账户余额   （账户余额  ）
+//    @objc var isWithdraw = false     // 区别现金红包 和账户余额   （账户余额  ）
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         addBackItemRoot()
         setNavRightBar()
         // Do any additional setup after loading the view.
-        if isWithdraw {
+        if FXD_Utility.shared().operateType == "1"{
             self.title = "现金红包"
-            FXD_Utility.shared().operateType = "1"
+           
         }else{
             self.title = "账户余额"
-            FXD_Utility.shared().operateType = "2"
+            
         }
-        self.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
+//        self.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         var flag = ""
-        if isWithdraw {
+        if FXD_Utility.shared().operateType == "1" {
             flag = "1"
         }else{
             flag = "2"
@@ -104,7 +104,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         })
         
         headerView = RedPacketHeaderView()
-        if isWithdraw {
+        if FXD_Utility.shared().operateType == "1" {
             headerView?.headerImage?.image = UIImage(named:"packet")
             headerView?.titleLabel?.text = "我的现金"
         }else{
@@ -156,7 +156,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             redPacketCell = RedPacketCell.init(style: .default, reuseIdentifier: "RedPacketCell")
         }
 
-        if isWithdraw {
+        if FXD_Utility.shared().operateType == "1" {
             redPacketCell.bottomBtn?.setTitle("关于现金红包", for: .normal)
         }else{
             redPacketCell.bottomBtn?.setTitle("关于账户余额", for: .normal)
@@ -172,17 +172,10 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
     }
     
+    //MARK:点击提现
     func withdrawBtnClick(){
         
-    let controller = CashWithdrawViewController()
-    self.navigationController?.pushViewController(controller, animated: true)
-        
-    }
-    
-    //MARK:点击提现
-    func withdrawBtnClick1(){
-        
-        if isWithdraw {
+        if FXD_Utility.shared().operateType == "1" {
             checkWithdrawCash(operateType: "1")
         }else{
             checkWithdrawCash(operateType: "2")
@@ -197,6 +190,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
                 
+                FXD_Utility.shared().amount = self?.model?.amount
                let checkModel = try? CheckWithdrawCashModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 let status = Int((checkModel?.status)!)
                 
@@ -210,14 +204,14 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
 
                     MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: checkModel?.message)
 
-                case 3?:
+                case 4?:
 
                     self?.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
 
-                case 4?:
+                case 5?:
 
                     self?.setAlertView(title: "完善资料提示",message: "为了顺利提现，请先完成身份认证及绑卡", sureTitle: "去完善",tag: "1")
-
+                    
                 default:
                     break
                 }
@@ -240,8 +234,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         alertController.addAction(UIAlertAction.init(title: sureTitle, style: .default, handler: { (action) in
             if tag == "0"{
                 
-//                let controller = CashWithdrawViewController()
-//                self.navigationController?.pushViewController(controller, animated:true)
                 let transactionInfoVC = SetTransactionInfoViewController.init()
                 transactionInfoVC.exhibitionType = .modificationTradePassword_Type
                 self.navigationController?.pushViewController(transactionInfoVC, animated: true)

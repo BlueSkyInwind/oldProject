@@ -13,6 +13,8 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     var tableView : UITableView?
     var leftTitleArray : NSArray?
     var rightTitleArray : NSArray?
+    var withdrawCashModel : WithdrawCashModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -115,15 +117,22 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         cell.selectionStyle = .none
         cell.cellType = CurrentInfoCellType(cellType: .Default)
         cell.leftLabel?.text = leftTitleArray?[indexPath.row] as? String
-        cell.rightLabel?.text = rightTitleArray?[indexPath.row] as? String
+//        cell.rightLabel?.text = rightTitleArray?[indexPath.row] as? String
         cell.rightLabel?.textColor = UI_MAIN_COLOR
         if indexPath.row == 0 {
+            cell.rightLabel?.text = self.withdrawCashModel?.amount
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(cell.rightLabel?.text)!)
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
             attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.yx_systemFont(ofSize: 35) ?? 35, range: NSMakeRange(1,attrstr.length-1))
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: RedPacketMoney_COLOR, range: NSMakeRange(0,1))
             attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.yx_systemFont(ofSize: 25) ?? 25, range: NSMakeRange(0,1))
             cell.rightLabel?.attributedText = attrstr
+        }
+        if indexPath.row == 1 {
+            cell.rightLabel?.text = self.withdrawCashModel?.bankCard
+        }
+        if indexPath.row == 2 {
+            cell.rightLabel?.text = self.withdrawCashModel?.arriveDate
         }
         return cell
     }

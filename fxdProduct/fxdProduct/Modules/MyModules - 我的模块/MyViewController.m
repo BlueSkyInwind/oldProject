@@ -70,7 +70,7 @@
     _middleView.backgroundColor = [UIColor whiteColor];
     _middleView.delegate = self;
     [self.MyViewTable addSubview:_middleView];
-    [self getPersonalCenterInfo];
+//    [self getPersonalCenterInfo];
     
 }
 
@@ -114,7 +114,8 @@
 -(void)redPacketViewTap{
     
     CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
-    controller.isWithdraw = true;
+//    controller.isWithdraw = true;
+    [FXD_Utility sharedUtility].operateType = @"1";
     [self.navigationController pushViewController:controller animated:true];
 
 }
@@ -135,6 +136,7 @@
  */
 -(void)accountViewTap{
     
+    [FXD_Utility sharedUtility].operateType = @"2";
     CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
     [self.navigationController pushViewController:controller animated:true];
 
