@@ -482,8 +482,7 @@ static FXD_Tool * shareTool = nil;
         }
         decodedString =  [output copy];
     }
-    
-    
+    return decodedString;
 }
 
 -(void)openShell:(NSString *)shellStr{
