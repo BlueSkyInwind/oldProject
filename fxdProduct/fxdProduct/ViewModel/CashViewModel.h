@@ -30,9 +30,12 @@
 
  @param amount 提现金额
  @param bankCardId 银行卡id
+ @param operateType 操作类型（1现金红包、2账户余额）
  @param payPassword 支付密码
+ 
+ 
  */
--(void)withdrawCashAmount:(NSString *)amount bankCardId:(NSString *)bankCardId payPassword:(NSString *)payPassword;
+-(void)withdrawCashAmount:(NSString *)amount bankCardId:(NSString *)bankCardId operateType:(NSString *)operateType payPassword:(NSString *)payPassword;
 
 
 /**
