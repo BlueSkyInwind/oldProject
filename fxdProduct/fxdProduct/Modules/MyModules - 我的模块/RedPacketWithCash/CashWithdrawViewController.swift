@@ -29,6 +29,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         super.viewWillAppear(animated)
         IQKeyboardManager.shared().shouldResignOnTouchOutside = false
         IQKeyboardManager.shared().isEnabled = false
+        getBankCardsList()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -183,8 +184,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             ImportPayPasswordView.dismissImportPayPasswordView()
         }
         
-        let controller = WithdrawDetailsViewController()
-        self.navigationController?.pushViewController(controller, animated: true)
+        withdrawCash(payPassword: code)
         
     }
     func userForgetPasswordClick() {
@@ -197,12 +197,55 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         let cashViewModel = CashViewModel()
         cashViewModel.setBlockWithReturn({ (returnValue) in
             
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                let withdrawCashModel = try? WithdrawCashModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                let status = Int((withdrawCashModel?.status)!)
+                //返回状态（0提现申请已提交、1提现执行异常、2交易密码错误、3交易密码已冻结）
+                switch status {
+                case 0?:
+                    let controller = WithdrawDetailsViewController()
+                    controller.withdrawCashModel = withdrawCashModel
+                    self.navigationController?.pushViewController(controller, animated: true)
+                case 1?,2?,3?:
+                    MBPAlertView.sharedMBPText().showTextOnly(self.view, message: withdrawCashModel?.message)
+                default:
+                    break
+                }
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
         }) {
             
         }
-        
-        cashViewModel.withdrawCashAmount("180", bankCardId: "765", payPassword: payPassword)
+        cashViewModel.withdrawCashAmount(FXD_Utility.shared().amount, bankCardId: self.cardInfo?.cardId, operateType: FXD_Utility.shared().operateType, payPassword: payPassword)
     }
+    
+    //MARK:获取用户的银行卡列表
+    func getBankCardsList(){
+        
+        let bankInfoVM = BankInfoViewModel()
+        bankInfoVM.setBlockWithReturn({ (returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                for dic in baseResult.data as! NSArray{
+                    
+                    let cardInfo = try! CardInfo.init(dictionary: dic as! [AnyHashable : Any])
+                    if cardInfo.cardType == "2"{
+                        self.cardInfo = cardInfo
+                        self.tableView?.reloadData()
+                        break
+                    }
+                }
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+        }
+        bankInfoVM.obtainUserBankCardList()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -237,7 +280,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             
             cell.cellType = CurrentInfoCellType(cellType: .Default)
             cell.leftLabel?.text = "提现金额"
-            cell.rightLabel?.text = "¥180.05"
+            cell.rightLabel?.text = "¥" + FXD_Utility.shared().amount
             
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(cell.rightLabel?.text)!)
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
@@ -257,8 +300,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             let index = cardInfo?.cardNo.index((cardInfo?.cardNo.endIndex)!, offsetBy: -4)
             let numStr = cardInfo?.cardNo[index!...]
             cell.rightLabel?.text = (cardInfo?.bankName)!+"("+numStr!+")"
-        }else{
-            cell.rightLabel?.text = "中国银行(9267)"
         }
         
         return cell
