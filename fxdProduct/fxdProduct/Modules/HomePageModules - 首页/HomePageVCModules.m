@@ -367,10 +367,23 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (_dataArray.count>1) {
-        return _dataArray.count + 1;
+    if ([self getAllProduct] > 1) {
+        
+        return [self getAllProduct]+1;
+
     }
     return 2;
+}
+
+-(NSInteger)getAllProduct{
+    
+    NSInteger i = 0;
+    for (HomeProductsList *product in _homeProductList.data.productList) {
+        if ([product.isValidate isEqualToString:@"1"]) {
+            i++;
+        }
+    }
+    return i;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -384,7 +397,7 @@
         return 30.f;
     }else {
         
-        if (_dataArray.count>1) {
+        if ([self getAllProduct]>1) {
             int height = 0;
             if (UI_IS_IPHONE5) {
                 height = 113;
@@ -398,7 +411,7 @@
                 height = 210;
             }
             
-            if (_dataArray.count>2) {
+            if ([self getAllProduct]>2) {
                 return (_k_h-0.5*_k_w-height)/_dataArray.count;
             }
             return 120;
@@ -489,7 +502,7 @@
             break;
         case 2:
             
-            if (_dataArray.count == 1) {
+            if ([self getAllProduct] == 1) {
                 
                 [homeCell productListFirst];
             
@@ -1016,6 +1029,6 @@
     OptionalRapidLoanApplicationVCModules *controller = [[OptionalRapidLoanApplicationVCModules alloc]init];
     controller.productId = productId;
     controller.dataArray = dataArray;
-    [self.navigationController pushViewController:controller animated:false];
+    [self.navigationController pushViewController:controller animated:true];
 }
 @end

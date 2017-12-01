@@ -31,6 +31,7 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
         addBackItemRoot()
         productId = RapidLoan
  
+        self.view.backgroundColor = UIColor.white
         if (pickView != nil){
             pickView?.removeFromSuperview()
         }
