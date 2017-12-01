@@ -25,10 +25,15 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         }else{
             self.title = "账户余额"
         }
-        
+        self.configureView()
+
+//        self.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadWithdrawCashInfo( { (isSuccess) in
             if isSuccess{
-                self.configureView()
                 let str=NSString(string:(self.model?.amount)!)
                 let amount = String(format: "%.2f", str.floatValue)
                 self.headerView?.moneyLabel?.text = "¥" + amount
@@ -39,12 +44,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                 self.tableView?.reloadData()
             }
         })
-//        self.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
     }
     
     //MARK:网络请求
@@ -210,6 +209,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                     break
                 }
             }else{
+
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
         }) {
@@ -236,9 +236,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                 self.navigationController?.pushViewController(controlller, animated: true)
             }
         }))
-        
         self.present(alertController, animated: true, completion: nil)
-        
     }
     
     //MARK:底部按钮点击

@@ -34,12 +34,14 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     var secondTradePassword:String?
     var oldTradePassword:String?
     var userInputVerifyCode:String?
+    var isRestTradePassword:Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         addBackItem()
         self.view.backgroundColor = UIColor.white
+        isRestTradePassword = false;
         configureView()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -54,8 +56,12 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     //MARK:视图逻辑
     func configureView() -> Void {
         switch exhibitionType {
-        case .IDCardNumber_Type?,.resetTradePassword_Type?:
+        case .IDCardNumber_Type?:
             self.title = "设置交易身份"
+            setIDCardView()
+        case .resetTradePassword_Type?:
+            self.title = "设置交易身份"
+            isRestTradePassword = true;
             setIDCardView()
         case .verificationCode_Type?:
             self.title = "设置交易密码"
@@ -101,7 +107,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     func setCashPasswordView()  {
         let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
         payPasswordView = SetPayPasswordView.init(frame: CGRect.init(x: _k_w, y: height, width: _k_w, height: _k_h - height))
-         payPasswordView?.userAccountNumberLabel?.text = "请为账号" + FXD_Tool.share().changeTelephone(FXD_Utility.shared().userInfo.userMobilePhone)
+         payPasswordView?.userAccountNumberLabel?.text = "请为账号" + "\(FXD_Tool.share().changeTelephone(FXD_Utility.shared().userInfo.userMobilePhone) ?? "")"
         payPasswordView?.delegate = self
         self.view.addSubview(payPasswordView!)
     }
@@ -205,7 +211,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
             
             //设置/重置交易密码
             var type = "1"
-            if self.exhibitionType == .resetTradePassword_Type {
+            if self.exhibitionType == .resetTradePassword_Type || isRestTradePassword! {
                 type = "2"
             }
             saveNewTradePassword(firstTradePassword!, secondPasswordStr: secondTradePassword!, type: type,verify_code:userInputVerifyCode! , {[weak self] (isSuccess) in

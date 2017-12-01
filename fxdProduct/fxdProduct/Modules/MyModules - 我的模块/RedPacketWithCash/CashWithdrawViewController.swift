@@ -182,14 +182,13 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             ImportPayPasswordView.dismissImportPayPasswordView()
         }
-        
         withdrawCash(payPassword: code)
     }
     func userForgetPasswordClick() {
         ImportPayPasswordView.dismissImportPayPasswordView()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             let transactionInfoVC = SetTransactionInfoViewController.init()
-            transactionInfoVC.exhibitionType = .IDCardNumber_Type
+            transactionInfoVC.exhibitionType = .resetTradePassword_Type
             self.navigationController?.pushViewController(transactionInfoVC, animated: true)
         }
     }
@@ -281,7 +280,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             
             cell.cellType = CurrentInfoCellType(cellType: .Default)
             cell.leftLabel?.text = "提现金额"
-            cell.rightLabel?.text = "¥" + FXD_Utility.shared().amount
+            cell.rightLabel?.text = "¥" + "\( FXD_Utility.shared().amount ?? "")"
             
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(cell.rightLabel?.text)!)
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
