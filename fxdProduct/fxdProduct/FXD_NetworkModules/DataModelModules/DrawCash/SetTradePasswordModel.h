@@ -11,8 +11,10 @@
 @interface SetTradePasswordParam : JSONModel
 
 @property (nonatomic,strong)NSString <Optional> * firstPassword;
-@property (nonatomic,strong)NSString <Optional> * operateType;
+@property (nonatomic,strong)NSString <Optional> * type;
 @property (nonatomic,strong)NSString <Optional> * secondPassword;
+@property (nonatomic,strong)NSString <Optional> * oldPassword;
+@property (nonatomic,strong)NSString <Optional> * verify_code;
 
 @end
 

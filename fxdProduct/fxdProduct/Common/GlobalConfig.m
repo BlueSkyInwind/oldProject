@@ -21,14 +21,14 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 //http://192.168.13.173:8005/ 张强本地
 
 //测试导流 192.168.6.134
-NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-NSString * const _main_new_url  =  @"http://h5.test.fxds/";
-//NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
-NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
-NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
-NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+//NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+//NSString * const _main_new_url  =  @"http://h5.test.fxds/";
+////NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
+//NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
+//NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //UAT环境
 //NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
@@ -41,13 +41,13 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //http://192.168.6.134:9191/fxd-esb/
 //本地
-//NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-//NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-//NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
-//NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
-//NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
+NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
+NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
+NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //芝麻信用测试地址
 //NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";
@@ -468,16 +468,19 @@ NSString * const    _New_DiscountTicket_url    =    @"apigw/client/operation/cli
 NSString * const    _DeductibleAmountOfDiscountTicket_url    =    @"apigw/client/order/voucher/money/single";
 
 //验证身份证号
-NSString * const    _verifyIdentityCard_url    =    @"apigw/client/operation/passwordOperate/verifyIdentity";
+NSString * const    _verifyIdentityCard_url    =    @"apigw/client/operation/checkIdInfo";
 
 //验证旧交易密码
-NSString * const    _verifyOldPassword_url    =    @"apigw/client/operation/passwordOperate/verifyPayPassword";
+NSString * const    _verifyOldPassword_url    =    @"apigw/client/operation/verifyPayPassword";
 
 //验证交易呀验证码
-NSString * const    _verifyTradeSMS_url    =    @"apigw/client/toolbox/sms/checkSMSCode";
+NSString * const    _verifyTradeSMS_url    =    @"apigw/client/toolbox/sms/checkSMSCodeValid";
 
 //设置新的交易密码
-NSString * const    _saveNewPassword_url    =    @"apigw/client/operation/passwordOperate/savePayPassword";
+NSString * const    _saveNewPassword_url    =    @"apigw/client/operation/savePayPassword";
+
+//修改交易密码
+NSString * const    _modificationPassword_url    =    @"apigw/client/operation/updatePayPassword";
 
 //个人中心（优惠券,现金红包,账户余额）
 NSString * const    _PersonalCenterWithdrawCashAPI_url    =    @"apigw/client/operation/withdrawCashAPI/personalCenter";
@@ -590,6 +593,8 @@ NSString * const PLATFORM = @"1";                   //平台
 NSString * const CHANNEL = @"1";                   //平台
 
 NSString * const Devcode = @"5LIK5RW35LIT6LW";     //开发码
+
+NSString * const Fxd_pw = @"bJO03627qY52JEu4";
 
 /**
  *  @author dd

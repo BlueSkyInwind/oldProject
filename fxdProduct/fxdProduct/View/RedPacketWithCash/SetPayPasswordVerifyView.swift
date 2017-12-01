@@ -54,7 +54,7 @@ class SetPayPasswordVerifyView: UIView {
     }
     
     func showFooterSendCodeView()  {
-        UIView.animate(withDuration: 1.0, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.footerSendCodeView?.frame = CGRect.init(x: 0, y: 150, width: _k_w, height: 100)
             self.footerDisplayView?.frame = CGRect.init(x: -_k_w, y: 150, width: _k_w, height: 100)
         }) { (result) in
@@ -63,13 +63,13 @@ class SetPayPasswordVerifyView: UIView {
     }
     
    @objc func setVerifyCount() {
-        footerDisplayLabel?.text = "\(self.count)"+"秒后发送"
+        footerDisplayLabel?.attributedText = footerDisplayLabelText()
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(verifyCountDisplay), userInfo: nil, repeats: true)
     }
     
     @objc func verifyCountDisplay(){
         count -= 1
-        footerDisplayLabel?.text = "\(self.count)"+"秒后发送"
+        footerDisplayLabel?.attributedText = footerDisplayLabelText()
         if count == 0 {
             self.count = 59
             timer?.invalidate()
@@ -78,7 +78,14 @@ class SetPayPasswordVerifyView: UIView {
             showFooterSendCodeView()
         }
     }
-
+    
+    //设置秒数颜色
+    func footerDisplayLabelText() -> NSAttributedString {
+        let contentStr = "\(self.count)"+"秒后发送"
+        let attati : NSMutableAttributedString = NSMutableAttributedString.init(string: contentStr, attributes: [:])
+        attati.addAttributes([NSAttributedStringKey.foregroundColor:UI_MAIN_COLOR,NSAttributedStringKey.font:UIFont.yx_systemFont(ofSize: 14) ?? 14], range: NSMakeRange(0, contentStr.count - 4))
+        return attati
+    }
     
     /*
     // Only override draw() if you perform custom drawing.

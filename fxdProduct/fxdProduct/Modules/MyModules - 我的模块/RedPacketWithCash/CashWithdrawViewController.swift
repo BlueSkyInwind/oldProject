@@ -158,7 +158,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
     @objc func resetPwdBtnClick(){
         
         let transactionInfoVC = SetTransactionInfoViewController.init()
-        transactionInfoVC.exhibitionType = .IDCardNumber_Type
+        transactionInfoVC.exhibitionType = .resetTradePassword_Type
         self.navigationController?.pushViewController(transactionInfoVC, animated: true)
 //        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "重置交易密码")
     }

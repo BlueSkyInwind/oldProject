@@ -114,7 +114,6 @@ extension SetPayPasswordView {
         self.addSubview(headerDisplayView!);
         
         userAccountNumberLabel = UILabel()
-        userAccountNumberLabel?.text = "请为账号186******4859"
         userAccountNumberLabel?.font = UIFont.yx_systemFont(ofSize: 16)
         userAccountNumberLabel?.textColor = UIColor.black
         headerDisplayView?.addSubview(userAccountNumberLabel!)

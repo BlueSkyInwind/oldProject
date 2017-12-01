@@ -62,6 +62,7 @@
 #import "ShanLinWebVCModules.h"
 #import "CheckWithdrawCashModel.h"
 #import "SMSViewModel.h"
+#import "NSString+AES.h"
 
 
 #endif /* fxdProduct_Bridging_Header_h */

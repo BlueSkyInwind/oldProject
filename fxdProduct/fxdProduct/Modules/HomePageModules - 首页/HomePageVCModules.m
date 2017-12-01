@@ -1016,7 +1016,6 @@
             [self goLoanApplicationForConfirmationVCModules:productId];
         
         }else{
-            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
         

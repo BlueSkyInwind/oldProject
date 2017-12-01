@@ -14,10 +14,12 @@ import IQKeyboardManager
 /// - verificationCode_Type: 验证码效验
 /// - setTradePassword_Type: 交易密码效验
 /// - modificationTradePassword_Type: 修改交易密码
+/// - resetTradePassword_Type: 重置交易密码
 @objc enum SetExhibitionType : Int {
     case IDCardNumber_Type
     case verificationCode_Type
     case setTradePassword_Type
+    case resetTradePassword_Type
     case modificationTradePassword_Type
 }
 
@@ -30,6 +32,8 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
 
     var firstTradePassword:String?
     var secondTradePassword:String?
+    var oldTradePassword:String?
+    var userInputVerifyCode:String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +54,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     //MARK:视图逻辑
     func configureView() -> Void {
         switch exhibitionType {
-        case .IDCardNumber_Type?:
+        case .IDCardNumber_Type?,.resetTradePassword_Type?:
             self.title = "设置交易身份"
             setIDCardView()
         case .verificationCode_Type?:
@@ -83,6 +87,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         payPasswordVerifyView?.phoneNumberLabel?.text = FXD_Tool.share().changeTelephone(FXD_Utility.shared().userInfo.userMobilePhone)
         self.view.addSubview(payPasswordVerifyView!)
         sendTradeSMS {[weak self] (isSuccess) in
+            //调试用 test
             self?.pushVerificationCodeView(duration: 0.5)
             if isSuccess {
                 self?.payPasswordVerifyView?.setVerifyCount()
@@ -96,6 +101,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     func setCashPasswordView()  {
         let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
         payPasswordView = SetPayPasswordView.init(frame: CGRect.init(x: _k_w, y: height, width: _k_w, height: _k_h - height))
+         payPasswordView?.userAccountNumberLabel?.text = "请为账号" + FXD_Tool.share().changeTelephone(FXD_Utility.shared().userInfo.userMobilePhone)
         payPasswordView?.delegate = self
         self.view.addSubview(payPasswordView!)
     }
@@ -144,6 +150,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     func userInputVerifyCode(_ code: String) {
         verifyTradeSMS(code) { [weak self] (isSuccess) in
             if isSuccess {
+                self?.userInputVerifyCode = code
                 self?.exhibitionType = .setTradePassword_Type
                 self?.configureView()
                 self?.pushCashPasswordView(duration: 0.5)
@@ -170,6 +177,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         case .old:
             verifyOldTradePassword(code, { [weak self] (isSuccess) in
                 if isSuccess {
+                    self?.oldTradePassword = code;
                     self?.payPasswordView?.showHeaderDisplayView()
                 }
             })
@@ -183,14 +191,26 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
                 return
             }
             
-            let type = "1"
+            //修改交易密码
             if self.exhibitionType == .modificationTradePassword_Type {
-                
+                modificationTradePassword(firstTradePassword!, secondPasswordStr: secondTradePassword!, oldPassword: oldTradePassword!, {[weak self] (isSuccess) in
+                    if isSuccess {
+                        self?.SetPasswordProcessEndJump()
+                    }else{
+                        
+                    }
+                })
+                return;
             }
             
-            saveNewTradePassword(firstTradePassword!, secondPasswordStr: secondTradePassword!, type: "1", { (isSuccess) in
+            //设置/重置交易密码
+            var type = "1"
+            if self.exhibitionType == .resetTradePassword_Type {
+                type = "2"
+            }
+            saveNewTradePassword(firstTradePassword!, secondPasswordStr: secondTradePassword!, type: type,verify_code:userInputVerifyCode! , {[weak self] (isSuccess) in
                 if isSuccess {
-                    
+                    self?.SetPasswordProcessEndJump()
                 }else{
                     
                 }
@@ -233,7 +253,6 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
                 result(true)
-                
             }else{
                 result(false)
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
@@ -244,13 +263,12 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         transactionVC.verifyOldTradePassword(passwordStr)
     }
     
-    func saveNewTradePassword(_ firstPasswordStr:String , secondPasswordStr:String, type:String ,  _ result : @escaping (_ isSuccess : Bool) -> Void)  {
+    func saveNewTradePassword(_ firstPasswordStr:String , secondPasswordStr:String, type:String ,verify_code:String,  _ result : @escaping (_ isSuccess : Bool) -> Void)  {
         let transactionVC = SetTransactionPasswordViewModel.init()
         transactionVC.setBlockWithReturn({ [weak self] (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
                 result(true)
-                
             }else{
                 result(false)
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
@@ -258,7 +276,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         }) {
             result(false)
         }
-        transactionVC.saveNewTradePasswordFirst(firstPasswordStr, second: secondPasswordStr, operateType: type)
+        transactionVC.saveNewTradePasswordFirst(firstPasswordStr, second: secondPasswordStr, operateType: type, verify_code:verify_code)
     }
     
     func sendTradeSMS(_ result : @escaping (_ isSuccess : Bool) -> Void)  {
@@ -277,7 +295,6 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         tradeSMS.fatchRequestSMSParamPhoneNumber(FXD_Utility.shared().userInfo.userMobilePhone, verifyCodeType:TRADEPASSWORD_CODE)
     }
     
-    
     func verifyTradeSMS(_ verify_code_:String , _ result : @escaping (_ isSuccess : Bool) -> Void)  {
         let transactionVC = SetTransactionPasswordViewModel.init()
         transactionVC.setBlockWithReturn({ [weak self] (returnValue) in
@@ -294,6 +311,23 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         transactionVC.verifyTradeSMS(verify_code_)
     }
     
+    func modificationTradePassword(_ firstPasswordStr:String , secondPasswordStr:String, oldPassword:String ,  _ result : @escaping (_ isSuccess : Bool) -> Void) {
+        let transactionVC = SetTransactionPasswordViewModel.init()
+        transactionVC.setBlockWithReturn({ [weak self] (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                result(true)
+            }else{
+                result(false)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            result(false)
+        }
+        transactionVC.modificationTradePasswordFirst(firstPasswordStr, second: secondPasswordStr, oldPassword: oldPassword)
+    }
+    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
