@@ -254,9 +254,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
     func bottomBtnClick(){
         
         let webView = DetailViewController()
-    
         webView.content = self.model?.problemDesc
-
         self.navigationController?.pushViewController(webView, animated: true)
     }
     
