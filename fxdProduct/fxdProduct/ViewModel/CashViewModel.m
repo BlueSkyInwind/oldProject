@@ -46,7 +46,7 @@
     WithdrawCashParamModel * withdrawCashParamModel = [[WithdrawCashParamModel alloc]init];
     withdrawCashParamModel.amount = amount;
     withdrawCashParamModel.bankCardId = bankCardId;
-    withdrawCashParamModel.payPassword = payPassword;
+    withdrawCashParamModel.payPassword = [[payPassword DF_hashCode] AES256JAVA_Encrypt:Fxd_pw];
     withdrawCashParamModel.operateType = operateType;
     NSDictionary * paramDic  = [withdrawCashParamModel toDictionary];
     [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_WithdrawCash_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {

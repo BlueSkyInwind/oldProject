@@ -201,7 +201,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             
         }
         
-        cashViewModel.withdrawCashAmount("180", bankCardId: "765", operateType: "1", payPassword: payPassword)
+        cashViewModel.withdrawCashAmount("180", bankCardId: "765", operateType: FXD_Utility.shared().operateType as String!, payPassword: payPassword)
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

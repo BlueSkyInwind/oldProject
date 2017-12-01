@@ -22,8 +22,10 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         // Do any additional setup after loading the view.
         if isWithdraw {
             self.title = "现金红包"
+            FXD_Utility.shared().operateType = "1"
         }else{
             self.title = "账户余额"
+            FXD_Utility.shared().operateType = "2"
         }
         self.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
 

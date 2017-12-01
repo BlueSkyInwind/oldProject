@@ -20,6 +20,7 @@
 @property (nonatomic,assign) BOOL networkState;
 @property (nonatomic,retain) NSMutableDictionary *getMoneyParam;
 @property (nonatomic, assign) BOOL isObtainUserLocation;
+@property (nonatomic, assign) NSString *operateType;
 
 + (FXD_Utility *)sharedUtility;
 
