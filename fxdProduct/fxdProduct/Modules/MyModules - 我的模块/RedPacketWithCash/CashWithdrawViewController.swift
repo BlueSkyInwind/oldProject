@@ -172,7 +172,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
     }
     
     func popImportPayPasswordView()  {
-        ImportPayPasswordView.showImportPayPasswordView(self, amountStr: "180.99")
+        ImportPayPasswordView.showImportPayPasswordView(self, amountStr: FXD_Utility.shared().amount)
     }
     
     //MARK:ImportPayPasswordViewDelegate
@@ -180,17 +180,19 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         print(code)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            
             ImportPayPasswordView.dismissImportPayPasswordView()
         }
         
         withdrawCash(payPassword: code)
-        
     }
     func userForgetPasswordClick() {
-        
+        ImportPayPasswordView.dismissImportPayPasswordView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            let transactionInfoVC = SetTransactionInfoViewController.init()
+            transactionInfoVC.exhibitionType = .IDCardNumber_Type
+            self.navigationController?.pushViewController(transactionInfoVC, animated: true)
+        }
     }
-    
     
     //提现
     func withdrawCash(payPassword : String){
@@ -216,7 +218,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) {
-            
         }
         cashViewModel.withdrawCashAmount(FXD_Utility.shared().amount, bankCardId: self.cardInfo?.cardId, operateType: FXD_Utility.shared().operateType, payPassword: payPassword)
     }
