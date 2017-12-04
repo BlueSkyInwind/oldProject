@@ -39,7 +39,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                 self.tableView?.reloadData()
             }
         })
-//        self.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -33,7 +33,6 @@
  @param operateType 操作类型（1现金红包、2账户余额）
  @param payPassword 支付密码
  
- 
  */
 -(void)withdrawCashAmount:(NSString *)amount bankCardId:(NSString *)bankCardId operateType:(NSString *)operateType payPassword:(NSString *)payPassword;
 
@@ -44,5 +43,16 @@
  @param operateType 操作类型（1现金红包、2账户余额）
  */
 -(void)checkWithdrawCashOperateType:(NSString *)operateType;
+
+
+
+/**
+ 现金红包收提明细
+
+ @param operateType 操作类型（1现金红包、2账户余额
+ @param pageNum 当前页
+ @param pageSize 每页数量
+ */
+-(void)withdrawCashDetailOperateType:(NSString *)operateType pageNum:(NSString *)pageNum pageSize:(NSString *)pageSize;
 
 @end

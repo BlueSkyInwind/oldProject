@@ -8,6 +8,8 @@
 
 #import "CashViewModel.h"
 #import "WithdrawCashParamModel.h"
+#import "WithdrawCashDetailParamModel.h"
+
 @implementation CashViewModel
 
 
@@ -79,6 +81,26 @@
             [self faileBlock];
         }
         
+    }];
+}
+
+-(void)withdrawCashDetailOperateType:(NSString *)operateType pageNum:(NSString *)pageNum pageSize:(NSString *)pageSize{
+    
+//    WithdrawCashDetailParamModel * withdrawCashDetailParamModel = [[WithdrawCashDetailParamModel alloc]init];
+//    withdrawCashDetailParamModel.operateType = operateType;
+////    withdrawCashDetailParamModel.pageNum = pageNum;
+////    withdrawCashDetailParamModel.pageSize = pageSize;
+//    NSDictionary *paramDic = [withdrawCashDetailParamModel toDictionary];
+    
+    NSDictionary *paramDic = @{@"operateType":operateType};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_WithdrawCashDetail_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
     }];
 }
 @end

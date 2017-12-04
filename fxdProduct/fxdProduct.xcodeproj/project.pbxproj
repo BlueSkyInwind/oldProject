@@ -1159,6 +1159,8 @@
 		CC6F06911F7B8D4200FA889E /* ShanLinWebVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F068F1F7B8D3600FA889E /* ShanLinWebVCModules.m */; };
 		CC6F06931F7DF6C000FA889E /* ShanLinBackAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */; };
 		CC6F06941F7DF6C200FA889E /* ShanLinBackAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */; };
+		CC73368F1FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC73368E1FD4E48600076230 /* WithdrawCashDetailParamModel.m */; };
+		CC7336901FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC73368E1FD4E48600076230 /* WithdrawCashDetailParamModel.m */; };
 		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC85C6281FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
@@ -2312,6 +2314,8 @@
 		CC6F068E1F7B8D3600FA889E /* ShanLinWebVCModules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShanLinWebVCModules.h; sourceTree = "<group>"; };
 		CC6F068F1F7B8D3600FA889E /* ShanLinWebVCModules.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShanLinWebVCModules.m; sourceTree = "<group>"; };
 		CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShanLinBackAlertView.swift; sourceTree = "<group>"; };
+		CC73368D1FD4E48600076230 /* WithdrawCashDetailParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashDetailParamModel.h; sourceTree = "<group>"; };
+		CC73368E1FD4E48600076230 /* WithdrawCashDetailParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashDetailParamModel.m; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
@@ -5038,6 +5042,8 @@
 				CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */,
 				CC594E691FCE4FDA00D53F60 /* CheckWithdrawCashModel.h */,
 				CC594E6A1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m */,
+				CC73368D1FD4E48600076230 /* WithdrawCashDetailParamModel.h */,
+				CC73368E1FD4E48600076230 /* WithdrawCashDetailParamModel.m */,
 			);
 			name = Cash;
 			sourceTree = "<group>";
@@ -5832,6 +5838,7 @@
 				638C3F3A1CF564A4000446A7 /* SquareRepaymentBaseClass.m in Sources */,
 				638A16FE1E517D9F00AB8AB6 /* UIColor.m in Sources */,
 				63DB3FBE1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m in Sources */,
+				CC73368F1FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */,
 				633DAD301C3E59A0000DA852 /* LoginViewModel.m in Sources */,
 				63D43EF81D41F76D0076AC7F /* YYKVStorage.m in Sources */,
 				638A16891E5045BC00AB8AB6 /* RepayRequestManage.m in Sources */,
@@ -6496,6 +6503,7 @@
 				CC0DF9F61EA5B1090024841A /* ChangePWViewController.m in Sources */,
 				CC0DF9F71EA5B1090024841A /* UIView+SDExtension.m in Sources */,
 				84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */,
+				CC7336901FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */,
 				CC0DF9F81EA5B1090024841A /* UIViewController+KNSemiModal.m in Sources */,
 				CC0DF9F91EA5B1090024841A /* ContactClass.m in Sources */,
 				CC85C6291FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */,

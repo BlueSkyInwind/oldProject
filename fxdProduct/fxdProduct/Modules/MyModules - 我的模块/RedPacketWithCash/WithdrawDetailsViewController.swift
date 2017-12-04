@@ -21,7 +21,6 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         self.view.backgroundColor = UIColor.white
         self.title = "提现详情"
         leftTitleArray = ["提现金额","银行卡","预计到账时间"]
-        rightTitleArray = ["¥180.50","中国银行(9267)","2017-11-15 14：39"]
         addBackItem()
         configureView()
         
@@ -117,10 +116,9 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         cell.selectionStyle = .none
         cell.cellType = CurrentInfoCellType(cellType: .Default)
         cell.leftLabel?.text = leftTitleArray?[indexPath.row] as? String
-//        cell.rightLabel?.text = rightTitleArray?[indexPath.row] as? String
         cell.rightLabel?.textColor = UI_MAIN_COLOR
         if indexPath.row == 0 {
-            cell.rightLabel?.text = self.withdrawCashModel?.amount
+            cell.rightLabel?.text = "¥" + (self.withdrawCashModel?.amount)!
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(cell.rightLabel?.text)!)
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
             attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.yx_systemFont(ofSize: 35) ?? 35, range: NSMakeRange(1,attrstr.length-1))
@@ -129,7 +127,7 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             cell.rightLabel?.attributedText = attrstr
         }
         if indexPath.row == 1 {
-            cell.rightLabel?.text = self.withdrawCashModel?.bankCard
+            cell.rightLabel?.text = self.withdrawCashModel?.bankCode
         }
         if indexPath.row == 2 {
             cell.rightLabel?.text = self.withdrawCashModel?.arriveDate

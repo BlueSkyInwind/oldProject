@@ -24,12 +24,13 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         // Do any additional setup after loading the view.
         configureView()
         bottomView()
+        getBankCardsList()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IQKeyboardManager.shared().shouldResignOnTouchOutside = false
         IQKeyboardManager.shared().isEnabled = false
-        getBankCardsList()
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

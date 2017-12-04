@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import MJRefresh
 
 class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
 
     var tableView : UITableView?
     var noneView : NonePageView?
+    var pageNum : Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,8 +39,45 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             make.edges.equalTo(self.view)
         })
         
+//        //下拉刷新相关设置,使用闭包Block
+//        tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+//
+//            self.headerRefresh()
+//
+//        })
+//
+//
+//        //上拉加载相关设置,使用闭包Block
+//        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+//
+//            self.footerLoad()
+//
+//        })
+        
     }
     
+    //MARK: 刷新
+    /// 下拉刷新
+//    @objc func headerRefresh(){
+//
+//        pageNum = 1
+//        //重现加载表格数据
+//        getWithdrawCashDetail()
+////        self.tableView?.reloadData()
+//        //结束刷新
+////        self.tableView?.mj_header.endRefreshing()
+//    }
+//
+//    /// 上拉加载
+//    @objc func footerLoad(){
+//        pageNum = pageNum! + 1
+//        //重现加载表格数据
+//        getWithdrawCashDetail()
+////        self.tableView?.reloadData()
+//        //结束刷新
+////        self.tableView?.mj_footer.endRefreshing()
+//
+//    }
     func createNoneView(){
         
         noneView = NonePageView()
@@ -45,6 +85,29 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         self.view.addSubview(noneView!)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        pageNum = 1
+        getWithdrawCashDetail()
+    }
+    
+    func getWithdrawCashDetail(){
+        
+        let pageStr : String = String.init(format: "%d", pageNum!)
+        let cashVM = CashViewModel()
+        cashVM .setBlockWithReturn({ (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        cashVM.withdrawCashDetailOperateType(FXD_Utility.shared().operateType, pageNum: pageStr, pageSize: "15")
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

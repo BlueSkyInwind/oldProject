@@ -497,6 +497,9 @@ NSString * const    _DiversionProStatics_url    =    @"apigw/client/market/opera
 //校验提现条件
 NSString * const    _CheckWithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/checkWithdrawCash";
 
+//现金红包收提明细
+NSString * const    _WithdrawCashDetail_url    =    @"apigw/client/operation/withdrawCashAPI/queryDetail";
+
 #pragma mark - 合规接口
 
 //用户开户接口
