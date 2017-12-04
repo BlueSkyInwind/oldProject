@@ -61,7 +61,7 @@ class ImportPayPasswordView: UIView {
     payPasswordView?.VC = vc
     payPasswordView?.delegate = (vc as! ImportPayPasswordViewDelegate)
     payPasswordView?.amountDisplayStr = amountStr
-    payPasswordView?.VC?.presentSemiView(payPasswordView, withOptions: [KNSemiModalOptionKeys.pushParentBack.takeUnretainedValue() : false,KNSemiModalOptionKeys.parentAlpha.takeUnretainedValue() : 0.8,KNSemiModalOptionKeys.animationDuration.takeUnretainedValue():0.2])
+    payPasswordView?.VC?.presentSemiView(payPasswordView, withOptions: [KNSemiModalOptionKeys.pushParentBack.takeUnretainedValue() : false,KNSemiModalOptionKeys.parentAlpha.takeUnretainedValue() : 0.8,KNSemiModalOptionKeys.animationDuration.takeUnretainedValue():0.2,KNSemiModalOptionKeys.disableCancel.takeUnretainedValue():true])
     }
     
    class func dismissImportPayPasswordView()  {
