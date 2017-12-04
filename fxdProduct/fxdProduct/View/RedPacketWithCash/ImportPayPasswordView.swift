@@ -70,6 +70,10 @@ class ImportPayPasswordView: UIView {
         payPasswordView = nil
     }
     
+    class func cleanUpPayPasswordView()  {
+        payPasswordView?.payPasswordInputView?.cleanUpTheData()
+    }
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

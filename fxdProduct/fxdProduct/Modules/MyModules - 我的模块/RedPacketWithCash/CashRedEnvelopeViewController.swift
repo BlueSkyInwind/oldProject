@@ -26,14 +26,14 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             self.title = "账户余额"
         }
         self.configureView()
-
-//        self.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         loadWithdrawCashInfo( { (isSuccess) in
             if isSuccess{
+
                 let str=NSString(string:(self.model?.amount)!)
                 let amount = String(format: "%.2f", str.floatValue)
                 self.headerView?.moneyLabel?.text = "¥" + amount
@@ -189,7 +189,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                let checkModel = try? CheckWithdrawCashModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 let status = Int((checkModel?.status)!)
                 
-                //返回状态（0校验通过、1校验异常、2已逾期、3金额不足、4未设置交易密码、5身份认证和绑卡认证未完成）
+                //返回状态（0校验通过、1校验异常、2已逾期、3金额不足、4未设置交易密码、5身份认证未完成 6、绑卡认证未完成）
                 switch status {
                 case 0?:
                     let controller = CashWithdrawViewController()
@@ -203,7 +203,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
 
                     self?.setAlertView(title: "设置密码提示", message: "为了您的资金安全，提现前请先设置交易密码", sureTitle: "去设置",tag: "0")
 
-                case 5?:
+                case 5?,6?:
                     self?.setAlertView(title: "完善资料提示",message: "为了顺利提现，请先完成身份认证及绑卡", sureTitle: "去完善",tag: "1")
                 default:
                     break

@@ -114,7 +114,6 @@
 -(void)redPacketViewTap{
     
     CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
-//    controller.isWithdraw = true;
     [FXD_Utility sharedUtility].operateType = @"1";
     [self.navigationController pushViewController:controller animated:true];
 
