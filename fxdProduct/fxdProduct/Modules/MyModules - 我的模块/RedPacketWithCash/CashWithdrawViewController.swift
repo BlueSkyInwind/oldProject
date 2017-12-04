@@ -152,7 +152,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         let transactionInfoVC = SetTransactionInfoViewController.init()
         transactionInfoVC.exhibitionType = .modificationTradePassword_Type
         self.navigationController?.pushViewController(transactionInfoVC, animated: true)
-//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "修改交易密码")
+
     }
     
     
@@ -162,7 +162,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         let transactionInfoVC = SetTransactionInfoViewController.init()
         transactionInfoVC.exhibitionType = .resetTradePassword_Type
         self.navigationController?.pushViewController(transactionInfoVC, animated: true)
-//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "重置交易密码")
+
     }
     
     /// 提现按钮点击
@@ -211,7 +211,12 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
                     controller.withdrawCashModel = withdrawCashModel
                     self.navigationController?.pushViewController(controller, animated: true)
                 case 1?,2?,3?:
+                    
                     MBPAlertView.sharedMBPText().showTextOnly(self.view, message: withdrawCashModel?.message)
+                case 2?:
+                    self.setAlertView(title: "交易密码不正确", message: (withdrawCashModel?.message)!, sureTitle: "找回密码", cancelTitle: "重新输入", tag: "1")
+                case 3?:
+                    self.setAlertView(title: "交易密码冻结", message: (withdrawCashModel?.message)!, sureTitle: "取消", cancelTitle: "找回密码", tag: "2")
                 default:
                     break
                 }
@@ -221,6 +226,41 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         }) {
         }
         cashViewModel.withdrawCashAmount(FXD_Utility.shared().amount, bankCardId: self.cardInfo?.cardId, operateType: FXD_Utility.shared().operateType, payPassword: payPassword)
+    }
+    
+    func setAlertView(title: String, message: String, sureTitle: String, cancelTitle: String, tag: String){
+        let alertController = UIAlertController(title: title , message: message , preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction.init(title: cancelTitle, style: .cancel, handler: { (cancelAction) in
+            
+            if tag == "1"{
+                
+                let transactionInfoVC = SetTransactionInfoViewController.init()
+                transactionInfoVC.exhibitionType = .resetTradePassword_Type
+                self.navigationController?.pushViewController(transactionInfoVC, animated: true)
+            }else if tag == "2"{
+                ImportPayPasswordView.cleanUpPayPasswordView()
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction.init(title: sureTitle, style: .default, handler: { (action) in
+            if tag == "1"{
+                
+                ImportPayPasswordView.dismissImportPayPasswordView()
+                
+            }else if tag == "2"{
+                
+                ImportPayPasswordView.cleanUpPayPasswordView()
+                
+                let transactionInfoVC = SetTransactionInfoViewController.init()
+                transactionInfoVC.exhibitionType = .resetTradePassword_Type
+                self.navigationController?.pushViewController(transactionInfoVC, animated: true)
+                
+            }
+        }))
+        
+        self.present(alertController, animated: true, completion: nil)
+        
     }
     
     //MARK:获取用户的银行卡列表
