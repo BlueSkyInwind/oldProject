@@ -10,9 +10,7 @@
 
 
 @interface PayPasswordInputView : UIView{
-    
     NSMutableArray * dataArr;
-    
     
 }
 

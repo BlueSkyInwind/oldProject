@@ -24,12 +24,13 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         // Do any additional setup after loading the view.
         configureView()
         bottomView()
+        getBankCardsList()
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IQKeyboardManager.shared().shouldResignOnTouchOutside = false
         IQKeyboardManager.shared().isEnabled = false
-        getBankCardsList()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -154,7 +155,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
 //        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "修改交易密码")
     }
     
-    
     /// 重置交易密码
     @objc func resetPwdBtnClick(){
         
@@ -262,7 +262,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         let headerView = UIView()
         headerView.backgroundColor = LINE_COLOR
         return headerView
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -301,7 +300,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             let numStr = cardInfo?.cardNo[index!...]
             cell.rightLabel?.text = (cardInfo?.bankName)!+"("+numStr!+")"
         }
-        
         return cell
     }
 
