@@ -105,6 +105,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     
     /// 推出验证码视图
     func pushVerificationCodeView(duration: TimeInterval)  {
+        
         if payPasswordVerifyView != nil {
             payPasswordVerifyView?.removeFromSuperview()
             payPasswordVerifyView = nil
@@ -233,9 +234,11 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
                 }else{
                     //验证码失效
                     if code == "1" {
-                        self?.pushVerificationCodeView(duration: 0.5)
-                        self?.payPasswordView?.removeFromSuperview()
-                        self?.payPasswordView = nil
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            self?.pushVerificationCodeView(duration: 0.5)
+                            self?.payPasswordView?.removeFromSuperview()
+                            self?.payPasswordView = nil
+                        }
                     }else if code == "6" {
                         self?.resumeLoadNewPassword()
                     }

@@ -234,7 +234,7 @@ const struct KNSemiModalOptionKeys KNSemiModalOptionKeys = {
         
         overlay.frame = target.bounds;
         overlay.backgroundColor = [UIColor blackColor];
-        overlay.userInteractionEnabled = NO;
+        overlay.userInteractionEnabled = YES;
         overlay.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         overlay.tag = kSemiModalOverlayTag;
         
