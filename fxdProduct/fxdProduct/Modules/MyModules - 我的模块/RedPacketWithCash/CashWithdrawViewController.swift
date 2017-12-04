@@ -131,7 +131,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         
         
         let resetPwdBtn = UIButton()
-        resetPwdBtn.setTitle("重置交易密码", for: .normal)
+        resetPwdBtn.setTitle("忘记交易密码", for: .normal)
         resetPwdBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
         resetPwdBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         resetPwdBtn.addTarget(self, action: #selector(resetPwdBtnClick), for: .touchUpInside)

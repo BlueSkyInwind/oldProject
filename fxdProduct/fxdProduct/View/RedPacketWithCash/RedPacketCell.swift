@@ -57,7 +57,6 @@ extension RedPacketCell{
         
         descLabel = UILabel()
         descLabel?.numberOfLines = 0
-//        descLabel?.text = "1、逾期状态无法提现。 2、累计满X元可提现。 3、提现申请成功后，3个工作日内到账。"
         descLabel?.textColor = RedPacketMoney_COLOR
         descLabel?.lineBreakMode = .byWordWrapping
         descLabel?.font = UIFont.systemFont(ofSize: 14)
@@ -68,26 +67,6 @@ extension RedPacketCell{
             make.top.equalTo(titleLabel.snp.bottom).offset(21)
             make.height.equalTo(62)
         }
-        
-//        let label2 = UILabel()
-//        label2.text = "2、累计满X元可提现。"
-//        label2.textColor = RedPacketMoney_COLOR
-//        label2.font = UIFont.systemFont(ofSize: 14)
-//        self.addSubview(label2)
-//        label2.snp.makeConstraints { (make) in
-//            make.left.equalTo(self).offset(25)
-//            make.top.equalTo(label1).offset(25)
-//        }
-//
-//        let label3 = UILabel()
-//        label3.text = "3、提现申请成功后，3个工作日内到账。"
-//        label3.textColor = RedPacketMoney_COLOR
-//        label3.font = UIFont.systemFont(ofSize: 14)
-//        self.addSubview(label3)
-//        label3.snp.makeConstraints { (make) in
-//            make.left.equalTo(self).offset(25)
-//            make.top.equalTo(label2).offset(25)
-//        }
         
         bottomBtn = UIButton()
         bottomBtn?.setTitleColor(RedPacketBottomBtn_COLOR, for: .normal)
@@ -102,6 +81,12 @@ extension RedPacketCell{
         if UI_IS_IPONE5 {
             bottomBtn?.snp.updateConstraints({ (make) in
                 make.bottom.equalTo(self).offset(-10)
+            })
+        }
+        if UI_IS_IPHONEX {
+            
+            bottomBtn?.snp.updateConstraints({ (make) in
+                make.bottom.equalTo(self).offset(-60)
             })
         }
     }
