@@ -13,7 +13,7 @@
 //操作类型（1现金红包、2账户余额）
 @property (nonatomic,copy)NSString *operateType;
 //当前页
-//@property (nonatomic,copy)NSString *pageNum;
+@property (nonatomic,copy)NSString *pageNum;
 //每页数量
 @property (nonatomic,copy)NSString *pageSize;
 

@@ -10,6 +10,6 @@
 
 @implementation WithdrawCashDetailParamModel
 
-@synthesize operateType,pageSize;
+@synthesize operateType,pageNum,pageSize;
 
 @end

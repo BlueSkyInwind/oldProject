@@ -109,7 +109,7 @@ extension MessageCell{
         self.addSubview(contentLabel!)
         contentLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo((leftImageView?.snp.right)!).offset(13)
-            make.top.equalTo((titleLabel?.snp.bottom)!).offset(3)
+            make.top.equalTo((titleLabel?.snp.bottom)!).offset(10)
             make.height.equalTo(20)
         })
         

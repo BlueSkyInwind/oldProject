@@ -144,6 +144,9 @@ static FXD_Tool * shareTool = nil;
     return timeStr;
 }
 
+
+
+
 + (NSString *)dateToFormatString:(NSDate *)date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
