@@ -31,7 +31,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         super.viewWillAppear(animated)
         IQKeyboardManager.shared().shouldResignOnTouchOutside = false
         IQKeyboardManager.shared().isEnabled = false
-
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -128,7 +127,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             make.height.equalTo(15)
             make.width.equalTo(1)
         }
-        
         
         let resetPwdBtn = UIButton()
         resetPwdBtn.setTitle("重置交易密码", for: .normal)
