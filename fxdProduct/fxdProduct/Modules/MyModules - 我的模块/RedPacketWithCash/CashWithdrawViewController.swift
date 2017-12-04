@@ -31,6 +31,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         super.viewWillAppear(animated)
         IQKeyboardManager.shared().shouldResignOnTouchOutside = false
         IQKeyboardManager.shared().isEnabled = false
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
