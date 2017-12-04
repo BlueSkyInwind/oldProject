@@ -196,6 +196,8 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
                 if isSuccess {
                     self?.oldTradePassword = code;
                     self?.payPasswordView?.showHeaderDisplayView()
+                }else{
+                    self?.payPasswordView?.payPasswordInputView?.cleanUpTheData()
                 }
             })
         case .new:
