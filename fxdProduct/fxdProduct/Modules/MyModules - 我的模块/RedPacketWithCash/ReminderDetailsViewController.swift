@@ -14,6 +14,10 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     var tableView : UITableView?
     var noneView : NonePageView?
     var pageNum : Int?
+    var redPacketMapModel : RedPacketMapModel?
+    var withdrawCashDetailListModel : WithdrawCashDetailListModel?
+    var model : WithdrawCashDetailModel?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +25,7 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         // Do any additional setup after loading the view.
         self.title = "收提明细"
         addBackItem()
-//        configureView()
+        configureView()
         
         createNoneView()
     }
@@ -96,12 +100,27 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         
         let pageStr : String = String.init(format: "%d", pageNum!)
         let cashVM = CashViewModel()
-        cashVM .setBlockWithReturn({ (returnValue) in
+        cashVM.setBlockWithReturn({[weak self] (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
                 
+                self?.model = try? WithdrawCashDetailModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                if self?.model?.redPacketMap.count != 0 || self?.model?.withdrawCashDetailList.count  != 0{
+                    
+//                    self?.redPacketMapModel = withdrawCashDetailModel?.redPacketMap
+//                    self?.withdrawCashDetailListModel = withdrawCashDetailModel?.withdrawCashDetailList
+                    self?.noneView?.isHidden = true
+         
+                    self?.tableView?.isHidden = false
+                    self?.tableView?.reloadData()
+                    
+                }else{
+                    
+                    self?.tableView?.isHidden = true
+                    self?.noneView?.isHidden = false
+                }
             }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
         }) {
             
@@ -114,7 +133,10 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        if ((model?.redPacketMap.count) != nil || ((model?.withdrawCashDetailList.count) != nil)) {
+            return (model?.redPacketMap.count)! + (model?.withdrawCashDetailList.count)! + 1
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -143,10 +165,12 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             return messageCell
         }
 
+        let  detailModel = model?.redPacketMap[indexPath.row - 1] as? RedPacketMapModel
+        
         cell.selectionStyle = .none
-        cell.titleLabel?.text = "提现"
-        cell.timeLabel?.text = "2017-09-08 16：53"
-        cell.moneyLabel?.text = "-50.00"
+        cell.titleLabel?.text = detailModel?.redpacket_name_
+        cell.timeLabel?.text = detailModel?.get_date_
+        cell.moneyLabel?.text = detailModel?.total_amount_
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

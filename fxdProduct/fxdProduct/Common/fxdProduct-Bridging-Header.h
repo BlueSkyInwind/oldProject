@@ -64,6 +64,6 @@
 #import "SMSViewModel.h"
 #import "NSString+AES.h"
 #import "WithdrawCashModel.h"
-
+#import "WithdrawCashDetailModel.h"
 
 #endif /* fxdProduct_Bridging_Header_h */

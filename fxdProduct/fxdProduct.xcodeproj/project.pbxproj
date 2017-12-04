@@ -1113,6 +1113,8 @@
 		CC3BCC121FBABE7A0042A738 /* MyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */; };
 		CC3BCC141FBABEC50042A738 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC131FBABEC50042A738 /* MessageCell.swift */; };
 		CC3BCC151FBABEC50042A738 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC131FBABEC50042A738 /* MessageCell.swift */; };
+		CC45E7221FD55F7800DE803D /* WithdrawCashDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E7211FD55F7800DE803D /* WithdrawCashDetailModel.m */; };
+		CC45E7231FD55F7800DE803D /* WithdrawCashDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E7211FD55F7800DE803D /* WithdrawCashDetailModel.m */; };
 		CC49BA031FC516D000232041 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */; };
 		CC49BA041FC516D000232041 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */; };
 		CC49BA061FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */; };
@@ -2280,6 +2282,8 @@
 		CC3A7F301ED52A3200F30289 /* HG_ReplaceBankCardVCModules.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HG_ReplaceBankCardVCModules.xib; sourceTree = "<group>"; };
 		CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageViewController.swift; sourceTree = "<group>"; };
 		CC3BCC131FBABEC50042A738 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		CC45E7201FD55F7800DE803D /* WithdrawCashDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashDetailModel.h; sourceTree = "<group>"; };
+		CC45E7211FD55F7800DE803D /* WithdrawCashDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashDetailModel.m; sourceTree = "<group>"; };
 		CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawHeaderView.swift; sourceTree = "<group>"; };
 		CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailsViewController.swift; sourceTree = "<group>"; };
 		CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelDescriptionView.h; sourceTree = "<group>"; };
@@ -5044,6 +5048,8 @@
 				CC594E6A1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m */,
 				CC73368D1FD4E48600076230 /* WithdrawCashDetailParamModel.h */,
 				CC73368E1FD4E48600076230 /* WithdrawCashDetailParamModel.m */,
+				CC45E7201FD55F7800DE803D /* WithdrawCashDetailModel.h */,
+				CC45E7211FD55F7800DE803D /* WithdrawCashDetailModel.m */,
 			);
 			name = Cash;
 			sourceTree = "<group>";
@@ -5793,6 +5799,7 @@
 				63832C881CB7513500C6F194 /* NSData+AES.m in Sources */,
 				CC594E671FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */,
 				84A37FF81FAC12A8008FB7AF /* QRCodePopView.m in Sources */,
+				CC45E7221FD55F7800DE803D /* WithdrawCashDetailModel.m in Sources */,
 				6379641D1CAD1BE0002A5910 /* LivenessBaseClass.m in Sources */,
 				635AB7B31BE3540100C32919 /* AmountMsgBaseClass.m in Sources */,
 				6303C11D1C1816F000CD14A7 /* WTOverView.m in Sources */,
@@ -6552,6 +6559,7 @@
 				CC0DFA241EA5B1090024841A /* SquareRepaymentAvailableRedpackets.m in Sources */,
 				CC0DFA251EA5B1090024841A /* UILabel+FlickerNumber.m in Sources */,
 				84A3802B1FAC1D8D008FB7AF /* UserThirdPartyAuthVCModules.swift in Sources */,
+				CC45E7231FD55F7800DE803D /* WithdrawCashDetailModel.m in Sources */,
 				CC0DFA271EA5B1090024841A /* RTRootNavigationController.m in Sources */,
 				CC0DFA281EA5B1090024841A /* MBPAlertView.m in Sources */,
 				8438F7151EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */,

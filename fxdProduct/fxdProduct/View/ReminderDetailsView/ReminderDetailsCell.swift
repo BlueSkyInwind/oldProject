@@ -53,7 +53,7 @@ extension ReminderDetailsCell{
         self.addSubview(timeLabel!)
         timeLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(22)
-            make.top.equalTo((titleLabel?.snp.bottom)!).offset(3)
+            make.top.equalTo((titleLabel?.snp.bottom)!).offset(10)
         })
         
         moneyLabel = UILabel()

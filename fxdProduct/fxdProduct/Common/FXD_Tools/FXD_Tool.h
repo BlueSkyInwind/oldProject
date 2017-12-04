@@ -22,7 +22,7 @@
 + (NSString *)getNowTime;
 //将时间转换为时间戳
 + (NSTimeInterval)timeToTimestamp:(NSString *)timeStr;
-//时间戳转换为时间
+//时间戳转换为时间 '2017-11-10 22:30'
 + (NSString *)timestampToTime:(NSTimeInterval)timestamp;
 //时间戳转换为'年月日'
 + (NSString *)timestampToTimeFormat:(NSTimeInterval)timestamp;
