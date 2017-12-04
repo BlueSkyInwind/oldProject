@@ -130,7 +130,7 @@ class WithdrawDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             cell.rightLabel?.text = self.withdrawCashModel?.bankCode
         }
         if indexPath.row == 2 {
-            cell.rightLabel?.text = self.withdrawCashModel?.arriveDate
+            cell.rightLabel?.text = self.withdrawCashModel?.message
         }
         return cell
     }

@@ -25,12 +25,13 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         configureView()
         bottomView()
         getBankCardsList()
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IQKeyboardManager.shared().shouldResignOnTouchOutside = false
         IQKeyboardManager.shared().isEnabled = false
-        
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -155,7 +156,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
 
     }
     
-    
     /// 重置交易密码
     @objc func resetPwdBtnClick(){
         
@@ -183,14 +183,13 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             ImportPayPasswordView.dismissImportPayPasswordView()
         }
-        
         withdrawCash(payPassword: code)
     }
     func userForgetPasswordClick() {
         ImportPayPasswordView.dismissImportPayPasswordView()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             let transactionInfoVC = SetTransactionInfoViewController.init()
-            transactionInfoVC.exhibitionType = .IDCardNumber_Type
+            transactionInfoVC.exhibitionType = .resetTradePassword_Type
             self.navigationController?.pushViewController(transactionInfoVC, animated: true)
         }
     }
@@ -210,7 +209,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
                     let controller = WithdrawDetailsViewController()
                     controller.withdrawCashModel = withdrawCashModel
                     self.navigationController?.pushViewController(controller, animated: true)
-                case 1?,2?,3?:
+                case 1?:
                     
                     MBPAlertView.sharedMBPText().showTextOnly(self.view, message: withdrawCashModel?.message)
                 case 2?:
@@ -304,7 +303,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         let headerView = UIView()
         headerView.backgroundColor = LINE_COLOR
         return headerView
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -322,7 +320,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             
             cell.cellType = CurrentInfoCellType(cellType: .Default)
             cell.leftLabel?.text = "提现金额"
-            cell.rightLabel?.text = "¥" + FXD_Utility.shared().amount
+            cell.rightLabel?.text = "¥" + "\( FXD_Utility.shared().amount ?? "")"
             
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(cell.rightLabel?.text)!)
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(1,attrstr.length-1))
@@ -343,7 +341,6 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             let numStr = cardInfo?.cardNo[index!...]
             cell.rightLabel?.text = (cardInfo?.bankName)!+"("+numStr!+")"
         }
-        
         return cell
     }
 

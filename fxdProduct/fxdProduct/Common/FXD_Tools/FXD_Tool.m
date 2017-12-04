@@ -471,7 +471,7 @@ static FXD_Tool * shareTool = nil;
 
 -(NSString *)addShell:(NSString *)str{
     
-    NSString *decodedString;
+    NSString *decodedString ;
     NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:str options:0];
     if (decodedData && decodedData.length > 0) {
         Byte *datas = (Byte*)[decodedData bytes];

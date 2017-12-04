@@ -54,6 +54,9 @@ class ImportPayPasswordView: UIView {
     if UI_IS_IPONE6P || UI_IS_IPHONEX {
         heightProportion = 0.6
     }
+    if payPasswordView != nil {
+        return
+    }
     payPasswordView = ImportPayPasswordView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h * heightProportion))
     payPasswordView?.VC = vc
     payPasswordView?.delegate = (vc as! ImportPayPasswordViewDelegate)
@@ -82,7 +85,6 @@ class ImportPayPasswordView: UIView {
 }
 
 extension ImportPayPasswordView {
-    
     func setUpUI()  {
         headerDisplayView = UIView()
         headerDisplayView?.backgroundColor = PayPasswordBackColor_COLOR

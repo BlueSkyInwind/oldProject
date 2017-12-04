@@ -26,7 +26,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
             self.title = "账户余额"
         }
         self.configureView()
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -34,7 +33,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
 
         loadWithdrawCashInfo( { (isSuccess) in
             if isSuccess{
-                
+
                 let str=NSString(string:(self.model?.amount)!)
                 let amount = String(format: "%.2f", str.floatValue)
                 self.headerView?.moneyLabel?.text = "¥" + amount
@@ -210,6 +209,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                     break
                 }
             }else{
+
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
         }) {
@@ -236,9 +236,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                 self.navigationController?.pushViewController(controlller, animated: true)
             }
         }))
-        
         self.present(alertController, animated: true, completion: nil)
-        
     }
     
     //MARK:底部按钮点击
@@ -246,7 +244,6 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
         let webView = DetailViewController()
         webView.content = self.model?.problemDesc
-
         self.navigationController?.pushViewController(webView, animated: true)
     }
     
