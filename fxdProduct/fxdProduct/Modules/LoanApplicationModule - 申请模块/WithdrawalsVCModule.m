@@ -35,7 +35,7 @@
 #import "RateModel.h"
 #import "FXDWebViewController.h"
 #import "DataDicParse.h"
-#import "UserDataAuthenticationListVCModules.h"
+//#import "UserDataAuthenticationListVCModules.h"
 #import "AccountHSServiceModel.h"
 #import "QueryCardInfo.h"
 #import "HG_UnbindBankCardVCModules.h"

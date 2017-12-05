@@ -10,10 +10,10 @@
 #import <WebKit/WebKit.h>
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDKUI.h>
-#import "UserDataAuthenticationListVCModules.h"
+//#import "UserDataAuthenticationListVCModules.h"
 #import "RTRootNavigationController.h"
 #import "JSAndOCInteraction.h"
-#import "LoanMoneyViewController.h"
+//#import "LoanMoneyViewController.h"
 #import "ApplicationViewModel.h"
 @interface ShanLinWebVCModules ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate,ShanLinBackAlertViewDelegate>
 {

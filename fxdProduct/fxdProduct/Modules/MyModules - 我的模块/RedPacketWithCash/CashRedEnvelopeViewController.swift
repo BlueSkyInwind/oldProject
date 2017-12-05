@@ -233,6 +233,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                 self.navigationController?.pushViewController(transactionInfoVC, animated: true)
             }else{
                 let controlller = UserDataAuthenticationListVCModules()
+                controlller.isCash = true
                 self.navigationController?.pushViewController(controlller, animated: true)
             }
         }))

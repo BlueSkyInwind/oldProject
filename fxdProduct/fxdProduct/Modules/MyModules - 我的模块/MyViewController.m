@@ -13,7 +13,6 @@
 #import "RepayRecordController.h"
 #import "DiscountTicketController.h"
 #import "InvitationViewController.h"
-#import "UserDataAuthenticationListVCModules.h"
 #import "CashViewModel.h"
 #import "PersonalCenterModel.h"
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate>
