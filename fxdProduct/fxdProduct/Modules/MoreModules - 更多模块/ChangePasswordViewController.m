@@ -142,26 +142,19 @@
     ChangePasswordViewModel * changePasswordVM = [[ChangePasswordViewModel alloc]init];
     __weak typeof (self) weakSelf = self;
     [changePasswordVM setBlockWithReturnBlock:^(id returnValue) {
-        
-        NSLog(@"=========%@",returnValue);
-        
-        ChangePasswordModel *model = returnValue;
-        
-        if ([model.flag isEqualToString:@"0000"]) {
+        BaseResultModel *model = returnValue;
+        if ([model.errCode isEqualToString:@"0"]) {
             
             [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:model.msg];
             dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
             dispatch_after(delayTime, dispatch_get_main_queue(), ^{
-                
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
             [weakSelf presentLogin];
         }else{
             NSLog(@"%@",model.msg);
-
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.msg];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.friendErrMsg];
         }
-        
     } WithFaileBlock:^{
         
     }];

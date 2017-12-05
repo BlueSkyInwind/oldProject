@@ -44,7 +44,6 @@ NSString *const kReturnMsgBaseClassUpdate_content_ = @"update_content_";
             self.flag = [self objectOrNilForKey:kReturnMsgBaseClassFlag fromDictionary:dict];
             self.msg = [self objectOrNilForKey:kReturnMsgBaseClassMsg fromDictionary:dict];
             self.update_content_ = [self objectOrNilForKey:kReturnMsgBaseClassUpdate_content_ fromDictionary:dict];
-
     }
     
     return self;

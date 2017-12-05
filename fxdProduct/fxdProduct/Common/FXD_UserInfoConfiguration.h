@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LoginBaseClass.h"
 #import "LoginParse.h"
 
 //用户进件状态
@@ -34,7 +33,6 @@ typedef NS_ENUM(NSUInteger, ApplicationStatus) {
 @property (nonatomic,strong) NSString *clientId;
 @property (nonatomic,strong) NSString *userPass;
 @property (nonatomic, copy) NSString *userIDNumber;
-@property (nonatomic,strong) LoginBaseClass *userInfoModel;
 @property (nonatomic,strong) LoginParse *loginMsgModel;
 @property (nonatomic,assign) BOOL isUpdate;
 @property (nonatomic, copy) NSString *userMobilePhone;

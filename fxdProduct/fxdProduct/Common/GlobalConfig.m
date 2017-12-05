@@ -69,29 +69,7 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 #endif
 
 #pragma Mark - 项目URL
-//获取验证码
-NSString * const     _getCode_url                   =   @"common/sendSMS.jhtml";
 
-//注册验证码
-NSString * const    _regCode_url                    =   @"common/sendSMSH5.jhtml";
-
-//注册
-NSString * const     _reg_url                       =   @"register/register.jhtml";
-
-//登陆
-//NSString * const     _login_url                     =   @"login/login.jhtml";
-
-//退出登陆
-NSString * const     _loginOut_url                  =   @"logout/logout.jhtml";
-
-//更改设备号
-NSString * const     _updateDevID_url               =   @"updateLoginEquipment/updateLoginEquipment.jhtml";
-
-//忘记密码
-NSString * const     _forget_url                    =   @"findPasswordBack/findPasswordBack.jhtml";
-
-//更换密码
-NSString * const     _changePassword_url                    =   @"updatePassword/updatePassword.jhtml";
 
 ////首页查询用户借款状态
 NSString * const     _userState_url                 =   @"caseInfo/getApplyStatus.jhtml";
@@ -285,9 +263,6 @@ NSString * const    _doPay_url                  =    @"http/do.jhtml?router=payS
 //P2P结清
 NSString * const    _doSettle_url               =    @"http/do.jhtml?router=paySettleService.doSettle";
 
-//图形验证码
-NSString * const    _getPicCode_url             =    @"register/getPicCodeApi.jhtml";
-
 //用户QQ/支付宝认证状态查询
 NSString * const    _queryAuthStatus_url        =    @"caseInfo/queryAuthStatus.jhtml";
 
@@ -480,6 +455,29 @@ NSString * const    _DeductibleAmountOfDiscountTicket_url    =    @"apigw/client
 //登陆
 NSString * const     _login_url        =    @"apigw/client/membership/login";
 
+//注册
+NSString * const     _reg_url          =   @"apigw/client/membership/register";
+
+//获取验证码    common/sendSMS.jhtml
+NSString * const     _getCode_url                   =   @"apigw/client/toolbox/sms/sendSMS";
+
+//更改设备号
+NSString * const     _updateDevID_url            =   @"apigw/client/membership/updateLoginEquipment";
+
+//图形验证码
+NSString * const    _getPicCode_url             =    @"apigw/client/membership/getPicCodeApi";
+
+//注册验证码
+NSString * const    _regCode_url                    =   @"apigw/client/toolbox/sms/sendSMSH5Api";
+
+//忘记密码
+NSString * const     _forget_url                    =   @"apigw/client/membership/findPasswordBack";
+
+//更换密码
+NSString * const     _changePassword_url                    =   @"apigw/client/membership/updatePassword";
+
+//退出登陆
+NSString * const     _loginOut_url                  =   @"apigw/client/membership/logout";
 
 #pragma mark - 合规接口
 
@@ -574,6 +572,7 @@ NSString * const DeriveRapidLoan = @"P001006";           //急速贷衍生（30�
 NSString * const PLATFORM = @"1";                   //平台
 NSString * const CHANNEL = @"1";                   //平台
 
+NSString * const SERVICE_PLATFORM = @"0";                   //服务
 NSString * const Devcode = @"5LIK5RW35LIT6LW";     //开发码
 
 /**

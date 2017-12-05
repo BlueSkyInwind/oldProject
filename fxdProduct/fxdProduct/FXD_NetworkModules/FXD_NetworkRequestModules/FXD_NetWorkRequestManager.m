@@ -112,8 +112,9 @@
     //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
     manager.requestSerializer.timeoutInterval = 30.0;
-    DLog(@"%@",parameters);
-    
+    DLog(@"-----requestParam-----%@",parameters);
+    DLog(@"-----requestUrl-----%@",strURL);
+
     [manager POST:strURL parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -608,7 +609,10 @@
     
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/xml",@"text/html",@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"charset=UTF-8", nil];
     manager.requestSerializer.timeoutInterval = 30.0;
-    DLog(@"%@",parameters);
+    
+    DLog(@"-----requestParam-----%@",parameters);
+    DLog(@"-----requestUrl-----%@",strURL);
+    
     [manager GET:strURL parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

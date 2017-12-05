@@ -16,8 +16,6 @@
 {
     NSInteger _countdown;
     NSTimer * _countdownTimer;
-    ReturnMsgBaseClass *_codeParse;
-    ReturnMsgBaseClass *_findParse;
 }
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *fieldView;
@@ -77,24 +75,27 @@
 #pragma mark 发送验证码
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {
     
-    if([FXD_Tool isMobileNumber:self.phoneNumField.text]) {
-        if ([FXD_Utility sharedUtility].networkState) {
-            self.sendCodeButton.userInteractionEnabled = NO;
-            self.sendCodeButton.alpha = 0.4;
-            [self.sendCodeButton setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
-            _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
-
-                SMSViewModel *smsViewModel = [[SMSViewModel alloc] init];
-                [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-                    _codeParse = returnValue;
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-                } WithFaileBlock:^{
-                    
-                }];
-                [smsViewModel fatchRequestSMSParamPhoneNumber:self.phoneNumField.text verifyCodeType:FINDPASS_CODE];
-        }
-    } else {
+    if(![FXD_Tool isMobileNumber:self.phoneNumField.text]) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效的手机号码"];
+        return;
+    }
+    
+    if ([FXD_Utility sharedUtility].networkState) {
+        SMSViewModel *smsViewModel = [[SMSViewModel alloc] init];
+        [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
+            BaseResultModel * baseResultM  = returnValue;
+            if ([baseResultM.errCode isEqualToString:@"0"]) {
+                self.sendCodeButton.userInteractionEnabled = NO;
+                self.sendCodeButton.alpha = 0.4;
+                [self.sendCodeButton setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
+                _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
+            }else{
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+            }
+        } WithFaileBlock:^{
+            
+        }];
+        [smsViewModel fatchRequestSMSParamPhoneNumber:self.phoneNumField.text verifyCodeType:FINDPASS_CODE];
     }
 }
 
@@ -117,44 +118,32 @@
 
 - (IBAction)commitClick:(UIButton *)sender {
     
-    if (![self.phoneNumField.text isEqualToString:@""] && ![self.passField.text isEqualToString:@""] && ![self.codeField.text isEqualToString:@""]) {
-            if (self.passField.text.length >=6 && self.passField.text.length <=16) {
-                NSDictionary *regParam = [self getFindPass];
-                
-                FindPassViewModel *finPassViewModel = [[FindPassViewModel alloc] init];
-                [finPassViewModel setBlockWithReturnBlock:^(id returnValue) {
-                    _findParse = returnValue;
-                    if ([_findParse.flag isEqualToString:@"0000"]) {
-                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_findParse.msg];
-                        [self.navigationController popViewControllerAnimated:YES];
-                    } else {
-                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_findParse.msg];
-                    }
-                } WithFaileBlock:^{
-                    
-                }];
-                [finPassViewModel fatchFindPass:regParam];
-            } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请保持密码长度在6~16位"];
-            }
-    } else {
-        if ([_phoneNumField.text length] != 11) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号!"];
-        }else if ([_codeField.text isEqualToString:@""]){
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码!"];
-        }else if ([_passField.text length] < 6 || [_passField.text length] > 16){
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的新设置密码!"];
-        }
+    if ([_phoneNumField.text length] != 11 || [self.phoneNumField.text isEqualToString:@""]) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号!"];
+        return;
     }
-}
+    if ([_codeField.text isEqualToString:@""] || [self.codeField.text isEqualToString:@""]){
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的验证码!"];
+        return;
+    }
+    if ([_passField.text length] < 6 || [_passField.text length] > 16 || [self.passField.text isEqualToString:@""]){
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的新设置密码,密码长度在6~16位!"];
+        return;
+    }
+    
+    FindPassViewModel *finPassViewModel = [[FindPassViewModel alloc] init];
+    [finPassViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResultM = returnValue;
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [finPassViewModel fatchFindPassPhone:self.phoneNumField.text password:self.passField.text verify_code:self.codeField.text];
 
-//找回密码参数
-- (NSDictionary *)getFindPass
-{
-    return @{@"password_":[DES3Util encrypt:self.passField.text],
-             @"mobile_phone_":self.phoneNumField.text,
-             @"verify_code_":self.codeField.text
-             };
 }
 
 - (void)viewWillAppear:(BOOL)animated

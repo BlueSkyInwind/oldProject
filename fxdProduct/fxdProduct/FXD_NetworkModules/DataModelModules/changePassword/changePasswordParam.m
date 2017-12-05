@@ -10,6 +10,6 @@
 
 @implementation changePasswordParam
 
-@synthesize mobile_phone_,old_password_,update_password_;
+
 
 @end

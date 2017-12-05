@@ -13,7 +13,6 @@
 
 @implementation UserDefaulInfo
 
-
 + (void)getUserInfoData
 {
     DLog(@"%@",[FXD_Utility sharedUtility].userInfo.account_id);
@@ -47,7 +46,6 @@
                     }
                 }
             } WithFaileBlock:^{
-                
             }];
             [customBaseViewModel fatchCustomBaseInfoNoHud:nil];
         }

@@ -22,9 +22,8 @@
     [FXD_Utility sharedUtility].loginFlage = 0;
     [FXD_Utility sharedUtility].userInfo.juid = @"";
     [FXD_Utility sharedUtility].userInfo.tokenStr = @"";
-    [FXD_Utility sharedUtility].userInfo.userName = @"";
-    [FXD_Utility sharedUtility].userInfo.account_id = @"";
     [FXD_Utility sharedUtility].userInfo.userMobilePhone = @"";
+    [FXD_Utility sharedUtility].userInfo.account_id = @"";
     [FXD_Utility sharedUtility].userInfo.realName = @"";
     [FXD_Utility sharedUtility].userInfo.pruductId = @"";
     [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];

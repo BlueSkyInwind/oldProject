@@ -41,7 +41,7 @@
         if ([self.foreTextview.text length] >101) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入100字以内!"];
         }else{
-            NSLog(@"%@",[FXD_Utility sharedUtility].userInfo.userName);
+            NSLog(@"%@",[FXD_Utility sharedUtility].userInfo.userMobilePhone);
             
             
             IdeaBackViewModel *ideaBackViewModel = [[IdeaBackViewModel alloc]init];

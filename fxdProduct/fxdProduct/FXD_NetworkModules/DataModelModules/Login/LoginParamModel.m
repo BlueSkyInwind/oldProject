@@ -24,3 +24,14 @@
 
 
 @end
+@implementation LoginUpdateDeviceParamModel
+
+
+@end
+
+@implementation LoginFindParamModel
+
+
+@end
+
+

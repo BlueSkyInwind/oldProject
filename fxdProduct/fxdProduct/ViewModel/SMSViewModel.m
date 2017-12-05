@@ -20,29 +20,32 @@
 {
     SMSModel * model  = [[SMSModel alloc]init];
     model.mobile_phone_  = number;
-    
+    model.service_platform_type_ = SERVICE_PLATFORM;
+    NSString * flag = @"";
     switch (verifyCodeType) {
         case LOGIN_CODE:
-            model.flag = CODE_LOGIN;
+            flag = CODE_LOGIN;
             break;
         case CHANGEDEVID_CODE:
-            model.flag = CODE_CHANGEDEVID;
+            flag = CODE_CHANGEDEVID;
             break;
         case FINDPASS_CODE:
-            model.flag = CODE_FINDPASS;
+            flag = CODE_FINDPASS;
             break;
         case DRAW_CODE:
-            model.flag = CODE_DRAW;
+            flag = CODE_DRAW;
             break;
         case ADDCARD_CODE:
-            model.flag = CODE_ADDCARD;
+            flag = CODE_ADDCARD;
             break;
         default:
+            flag = @"";
             break;
     }
     
     NSDictionary *paramDic = [model toDictionary];
-    [self postVerifyCode:paramDic urlStr:_getCode_url];
+    NSString * splitUrl = [NSString stringWithFormat:@"%@/%@",_getCode_url,flag];
+    [self postVerifyCode:paramDic urlStr:splitUrl];
 }
 /**
  注册验证码请求
@@ -60,7 +63,7 @@
     model.flag = CODE_REG;
     model.pic_verify_code_ = picVerifyCode;
     model.pic_verify_id_ = picVerifyId;
-
+    model.service_platform_type_ = SERVICE_PLATFORM;
     NSDictionary *paramDic = [model toDictionary];
     [self postVerifyCode:paramDic urlStr:_regCode_url];
     
@@ -68,11 +71,15 @@
 
 -(void)postVerifyCode:(NSDictionary *)paramDic  urlStr:(NSString *)urlStr{
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,urlStr] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        ReturnMsgBaseClass *returnModel = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-        self.returnBlock(returnModel);
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,urlStr] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseResultM);
+        }
     } failure:^(EnumServerStatus status, id object) {
-        [self faileBlock];
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
     }];
 }
 
@@ -80,10 +87,15 @@
 
 -(void)postPicVerifyCode{
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getPicCode_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        self.returnBlock(object);
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_getPicCode_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseResultM);
+        }
     } failure:^(EnumServerStatus status, id object) {
-        [self faileBlock];
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
     }];
     
 }

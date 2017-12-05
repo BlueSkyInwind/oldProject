@@ -82,7 +82,7 @@
         [FXD_Utility sharedUtility].userInfo.juid = [FXD_Tool getContentWithKey:Fxd_JUID];
         [FXD_Utility sharedUtility].userInfo.tokenStr = [FXD_Tool getContentWithKey:Fxd_Token];
         [FXD_Utility sharedUtility].loginFlage = [[FXD_Tool getContentWithKey:kLoginFlag] integerValue];
-        [FXD_Utility sharedUtility].userInfo.userName = [FXD_Tool getContentWithKey:UserName];
+        [FXD_Utility sharedUtility].userInfo.userMobilePhone = [FXD_Tool getContentWithKey:UserName];
         [FXD_Utility sharedUtility].isObtainUserLocation = YES;
     });
 }
