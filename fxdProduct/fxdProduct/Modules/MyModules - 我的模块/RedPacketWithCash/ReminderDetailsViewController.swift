@@ -14,7 +14,7 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     var tableView : UITableView?
     var noneView : NonePageView?
     var pageNum : Int?
-    var redPacketMapModel : RedPacketMapModel?
+//    var totalNum : Int?
     var withdrawCashDetailListModel : WithdrawCashDetailListModel?
     var model : WithdrawCashDetailModel?
     
@@ -24,9 +24,9 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
 
         // Do any additional setup after loading the view.
         self.title = "收提明细"
+//        totalNum = 0
         addBackItem()
         configureView()
-        
         createNoneView()
     }
     
@@ -54,7 +54,7 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
 //        //上拉加载相关设置,使用闭包Block
 //        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
 //
-//            self.footerLoad()
+//            self.footerLoadMoreInfo()
 //
 //        })
         
@@ -62,26 +62,27 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     
     //MARK: 刷新
     /// 下拉刷新
-//    @objc func headerRefresh(){
-//
-//        pageNum = 1
-//        //重现加载表格数据
-//        getWithdrawCashDetail()
-////        self.tableView?.reloadData()
-//        //结束刷新
-////        self.tableView?.mj_header.endRefreshing()
-//    }
-//
-//    /// 上拉加载
-//    @objc func footerLoad(){
-//        pageNum = pageNum! + 1
-//        //重现加载表格数据
-//        getWithdrawCashDetail()
-////        self.tableView?.reloadData()
-//        //结束刷新
-////        self.tableView?.mj_footer.endRefreshing()
-//
-//    }
+    @objc func headerRefresh(){
+
+        pageNum = 1
+//        self.totalNum = 0
+        //重现加载表格数据
+        getWithdrawCashDetail()
+//        self.tableView?.reloadData()
+        //结束刷新
+//        self.tableView?.mj_header.endRefreshing()
+    }
+
+    /// 上拉加载
+    @objc func footerLoadMoreInfo(){
+        pageNum = pageNum! + 1
+        //重现加载表格数据
+        getWithdrawCashDetail()
+//        self.tableView?.reloadData()
+        //结束刷新
+//        self.tableView?.mj_footer.endRefreshing()
+
+    }
     func createNoneView(){
         
         noneView = NonePageView()
@@ -105,12 +106,10 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             if baseResult.errCode == "0" {
                 
                 self?.model = try? WithdrawCashDetailModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
-                if self?.model?.redPacketMap.count != 0 || self?.model?.withdrawCashDetailList.count  != 0{
-                    
-//                    self?.redPacketMapModel = withdrawCashDetailModel?.redPacketMap
-//                    self?.withdrawCashDetailListModel = withdrawCashDetailModel?.withdrawCashDetailList
+                if self?.model?.withdrawCashDetailList.count  != 0{
+
+//                    self?.totalNum = (self?.model?.withdrawCashDetailList.count)! + (self?.totalNum)!
                     self?.noneView?.isHidden = true
-         
                     self?.tableView?.isHidden = false
                     self?.tableView?.reloadData()
                     
@@ -122,8 +121,12 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
+//            self?.tableView?.mj_header.endRefreshing()
+//            self?.tableView?.mj_footer.endRefreshing()
         }) {
             
+//            self.tableView?.mj_header.endRefreshing()
+//            self.tableView?.mj_footer.endRefreshing()
         }
         cashVM.withdrawCashDetailOperateType(FXD_Utility.shared().operateType, pageNum: pageStr, pageSize: "15")
     }
@@ -133,8 +136,15 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if ((model?.redPacketMap.count) != nil || ((model?.withdrawCashDetailList.count) != nil)) {
-            return (model?.redPacketMap.count)! + (model?.withdrawCashDetailList.count)! + 1
+        
+        
+        if ((model?.withdrawCashDetailList.count) != nil) {
+            
+//            if (self.totalNum)! > 15 {
+//
+//                return (model?.withdrawCashDetailList.count)!
+//            }
+            return (model?.withdrawCashDetailList.count)! + 1
         }
         return 0
     }
@@ -165,12 +175,21 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             return messageCell
         }
 
-        let  detailModel = model?.redPacketMap[indexPath.row - 1] as? RedPacketMapModel
+//        var detailModel : WithdrawCashDetailListModel
+//        if (self.totalNum)! > 15 {
+//
+//            detailModel = model?.withdrawCashDetailList[indexPath.row] as! WithdrawCashDetailListModel
+//        }else{
+//            detailModel = model?.withdrawCashDetailList[indexPath.row - 1] as! WithdrawCashDetailListModel
+//        }
+        
+        let  detailModel = model?.withdrawCashDetailList[indexPath.row - 1] as? WithdrawCashDetailListModel
         
         cell.selectionStyle = .none
-        cell.titleLabel?.text = detailModel?.redpacket_name_
-        cell.timeLabel?.text = detailModel?.get_date_
-        cell.moneyLabel?.text = detailModel?.total_amount_
+        
+        cell.titleLabel?.text = detailModel?.detailName
+        cell.timeLabel?.text = detailModel?.transDate
+        cell.moneyLabel?.text = detailModel?.transAmount
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

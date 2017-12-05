@@ -201,19 +201,19 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             if baseResult.errCode == "0" {
                 let withdrawCashModel = try? WithdrawCashModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 let status = Int((withdrawCashModel?.status)!)
-                //返回状态（0提现申请已提交、1提现执行异常、2交易密码错误、3交易密码已冻结）
+                //返回状态（0验证通过 1解密异常 2由于密码错误次数过多,请找回密码或3小时后重试 3交易密码不正确（剩余X次） 4由于密码错误次数过多,请找回密码或(3-month)小时后重试 5提现申请已提交 6提现执行异常）
                 switch status {
-                case 0?:
+                case 0?,5?:
                     let controller = WithdrawDetailsViewController()
                     controller.withdrawCashModel = withdrawCashModel
                     self.navigationController?.pushViewController(controller, animated: true)
-                case 1?:
+                case 1?,6?:
                     
                     MBPAlertView.sharedMBPText().showTextOnly(self.view, message: withdrawCashModel?.message)
-                case 2?:
-                    self.setAlertView(title: "交易密码不正确", message: (withdrawCashModel?.message)!, sureTitle: "找回密码", cancelTitle: "重新输入", tag: "1")
                 case 3?:
-                    self.setAlertView(title: "交易密码冻结", message: (withdrawCashModel?.message)!, sureTitle: "取消", cancelTitle: "找回密码", tag: "2")
+                    self.setAlertView(title: "", message: (baseResult.friendErrMsg)!, sureTitle: "重新输入", cancelTitle: "找回密码", tag: "1")
+                case 2?,4?:
+                    self.setAlertView(title: "", message: (baseResult.friendErrMsg)!, sureTitle: "找回密码", cancelTitle: "取消", tag: "2")
                 default:
                     break
                 }
@@ -236,18 +236,16 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
                 transactionInfoVC.exhibitionType = .resetTradePassword_Type
                 self.navigationController?.pushViewController(transactionInfoVC, animated: true)
             }else if tag == "2"{
-                ImportPayPasswordView.cleanUpPayPasswordView()
+                
             }
         }))
         
         alertController.addAction(UIAlertAction.init(title: sureTitle, style: .default, handler: { (action) in
             if tag == "1"{
                 
-                ImportPayPasswordView.dismissImportPayPasswordView()
+                self.popImportPayPasswordView()
                 
             }else if tag == "2"{
-                
-                ImportPayPasswordView.cleanUpPayPasswordView()
                 
                 let transactionInfoVC = SetTransactionInfoViewController.init()
                 transactionInfoVC.exhibitionType = .resetTradePassword_Type
