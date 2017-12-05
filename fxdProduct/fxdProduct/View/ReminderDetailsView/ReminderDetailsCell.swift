@@ -40,7 +40,7 @@ extension ReminderDetailsCell{
         
         titleLabel = UILabel()
         titleLabel?.textColor = UIColor.black
-        titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        titleLabel?.font = UIFont.yx_systemFont(ofSize: 15)
         self.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(22)
@@ -49,7 +49,7 @@ extension ReminderDetailsCell{
         
         timeLabel = UILabel()
         timeLabel?.textColor = TIME_COLOR
-        timeLabel?.font = UIFont.systemFont(ofSize: 12)
+        timeLabel?.font = UIFont.yx_systemFont(ofSize: 12)
         self.addSubview(timeLabel!)
         timeLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(22)
@@ -58,7 +58,7 @@ extension ReminderDetailsCell{
         
         moneyLabel = UILabel()
         moneyLabel?.textColor = UI_MAIN_COLOR
-        moneyLabel?.font = UIFont.systemFont(ofSize: 12)
+        moneyLabel?.font = UIFont.yx_systemFont(ofSize: 12)
         self.addSubview(moneyLabel!)
         moneyLabel?.snp.makeConstraints({ (make) in
             make.right.equalTo(self).offset(-16)
