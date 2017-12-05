@@ -584,8 +584,6 @@ extension HomeDefaultCell{
             make.bottom.equalTo(self).offset(0)
         }
         
-        
-        
         var i = 0
         if homeProductData.data.warnText != "" && homeProductData.data.warnText != nil {
             let drawingTitleLabel = UILabel()
