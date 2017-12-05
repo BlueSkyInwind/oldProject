@@ -457,7 +457,7 @@
     
     HomeDefaultCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomeDefaultCell"];
     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    homeCell.backgroundColor = rgb(245, 245, 245);
+    homeCell.backgroundColor = rgb(242, 242, 242);
     homeCell.selected = NO;
     homeCell.delegate = self;
     [homeCell.defaultBgImage removeFromSuperview];

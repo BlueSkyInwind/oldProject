@@ -522,7 +522,8 @@ extension HomeDefaultCell{
         let moreBtn = UIButton()
         moreBtn.setTitle("更多", for: .normal)
         moreBtn.titleLabel?.textAlignment = .center
-        moreBtn.setTitleColor(UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
+    moreBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
+//        moreBtn.setTitleColor(UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
         moreBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         moreBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
         otherPlatformsBgView?.addSubview(moreBtn)
@@ -536,7 +537,7 @@ extension HomeDefaultCell{
         if UI_IS_IPONE5{
             
             moreBtn.snp.updateConstraints({ (make) in
-                make.bottom.equalTo(bgView.snp.bottom).offset(25)
+                make.bottom.equalTo(bgView.snp.bottom).offset(-55)
             })
         }
     
@@ -544,7 +545,7 @@ extension HomeDefaultCell{
     if UI_IS_IPONE6P {
         moreBtn.snp.updateConstraints({ (make) in
             
-            make.bottom.equalTo(bgView.snp.bottom).offset(35)
+            make.bottom.equalTo(bgView.snp.bottom).offset(45)
         })
     }
     }
