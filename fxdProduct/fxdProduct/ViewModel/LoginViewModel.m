@@ -62,7 +62,14 @@
 }
 - (void)fatchLogin:(NSDictionary *)paramDic{
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_login_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_login_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        LoginParse *loginParse = [LoginParse yy_modelWithJSON:object];
+
+    } failure:^(EnumServerStatus status, id object) {
+
+    }];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_login_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         LoginParse *loginParse = [LoginParse yy_modelWithJSON:object];
         if ([loginParse.flag isEqualToString:@"0000"]) {
             [FXD_Utility sharedUtility].userInfo.loginMsgModel = loginParse;
@@ -82,7 +89,6 @@
                 }
             }
             DLog(@"token -- %@  \n  juid -- %@",[FXD_Utility sharedUtility].userInfo.tokenStr,[FXD_Utility sharedUtility].userInfo.juid);
-            
             [self PostPersonInfoMessage];
             //上传推送id
             [self uploadUserRegisterID:[JPUSHService registrationID]];

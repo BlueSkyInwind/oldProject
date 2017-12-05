@@ -10,14 +10,8 @@
 
 @implementation LoginParse
 
-+ (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"result":[LoginParseResult class]};
-}
-
 @end
 
-@implementation LoginParseResult
 
 
 
-@end

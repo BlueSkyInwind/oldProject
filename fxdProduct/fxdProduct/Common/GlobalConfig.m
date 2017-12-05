@@ -23,13 +23,22 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 //http://192.168.13.173:8005/ 张强本地
 
 //测试导流 192.168.6.134
-NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-NSString * const _main_new_url  =  @"http://h5.test.fxds/";
-//NSString * const _main_new_url  =  @"http:/ /h5.dev.fxds/";
-NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
-NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
-NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
+//NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+//NSString * const _main_new_url  =  @"http://h5.test.fxds/";
+////NSString * const _main_new_url  =  @"http:/ /h5.dev.fxds/";
+//NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
+//NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+
+NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+//NSString * const _main_new_url  =  @"http://h5.test.fxds/";
+NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
+NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
+NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
+NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //UAT环境
@@ -70,7 +79,7 @@ NSString * const    _regCode_url                    =   @"common/sendSMSH5.jhtml
 NSString * const     _reg_url                       =   @"register/register.jhtml";
 
 //登陆
-NSString * const     _login_url                     =   @"login/login.jhtml";
+//NSString * const     _login_url                     =   @"login/login.jhtml";
 
 //退出登陆
 NSString * const     _loginOut_url                  =   @"logout/logout.jhtml";
@@ -467,6 +476,9 @@ NSString * const    _New_DiscountTicket_url    =    @"apigw/client/operation/cli
 
 //新优惠券规则
 NSString * const    _DeductibleAmountOfDiscountTicket_url    =    @"apigw/client/order/voucher/money/single";
+
+//登陆
+NSString * const     _login_url        =    @"apigw/client/membership/login";
 
 
 #pragma mark - 合规接口
