@@ -15,12 +15,15 @@
 #import "InvitationViewController.h"
 #import "CashViewModel.h"
 #import "PersonalCenterModel.h"
+#import "MessageViewModel.h"
+#import "AountStationLetterMsgModel.h"
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate>
 {
     //标题数组
     NSArray *titleAry;
     //标题图片数组
     NSArray *imgAry;
+    AountStationLetterMsgModel *model;
    
 }
 @property (strong, nonatomic) IBOutlet UITableView *MyViewTable;
@@ -69,11 +72,31 @@
     _middleView.backgroundColor = [UIColor whiteColor];
     _middleView.delegate = self;
     [self.MyViewTable addSubview:_middleView];
+    [self getMessageNumber];
 //    [self getPersonalCenterInfo];
     
 }
 
 
+-(void)getMessageNumber{
+    
+    MessageViewModel *messageVM = [[MessageViewModel alloc]init];
+    [messageVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            model = [[AountStationLetterMsgModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            
+        }else{
+           
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+            
+    } WithFaileBlock:^{
+        
+    }];
+    [messageVM countStationLetterMsg];
+}
 /**
  获取个人中心优惠券的个数
  */
@@ -203,8 +226,11 @@
 //            break;
         case 0:
         {
-            UserDataEvaluationVCModules * checkVC = [[UserDataEvaluationVCModules  alloc]init];
-            [self.navigationController pushViewController:checkVC animated:true];
+            
+            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+            [self.navigationController pushViewController:myMessageVC animated:true];
+//            UserDataEvaluationVCModules * checkVC = [[UserDataEvaluationVCModules  alloc]init];
+//            [self.navigationController pushViewController:checkVC animated:true];
 //            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
 //            [self.navigationController pushViewController:repayRecord animated:true];
         }

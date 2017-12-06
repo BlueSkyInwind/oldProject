@@ -1115,6 +1115,12 @@
 		CC3BCC151FBABEC50042A738 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC131FBABEC50042A738 /* MessageCell.swift */; };
 		CC45E7221FD55F7800DE803D /* WithdrawCashDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E7211FD55F7800DE803D /* WithdrawCashDetailModel.m */; };
 		CC45E7231FD55F7800DE803D /* WithdrawCashDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E7211FD55F7800DE803D /* WithdrawCashDetailModel.m */; };
+		CC45E7261FD78D4500DE803D /* MessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E7251FD78D4500DE803D /* MessageViewModel.m */; };
+		CC45E7271FD78D4500DE803D /* MessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E7251FD78D4500DE803D /* MessageViewModel.m */; };
+		CC45E72B1FD78FF500DE803D /* ShowMsgPreviewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E72A1FD78FF500DE803D /* ShowMsgPreviewModel.m */; };
+		CC45E72C1FD78FF500DE803D /* ShowMsgPreviewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E72A1FD78FF500DE803D /* ShowMsgPreviewModel.m */; };
+		CC45E72F1FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E72E1FD790F800DE803D /* AountStationLetterMsgModel.m */; };
+		CC45E7301FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E72E1FD790F800DE803D /* AountStationLetterMsgModel.m */; };
 		CC49BA031FC516D000232041 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */; };
 		CC49BA041FC516D000232041 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */; };
 		CC49BA061FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */; };
@@ -2284,6 +2290,12 @@
 		CC3BCC131FBABEC50042A738 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		CC45E7201FD55F7800DE803D /* WithdrawCashDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashDetailModel.h; sourceTree = "<group>"; };
 		CC45E7211FD55F7800DE803D /* WithdrawCashDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashDetailModel.m; sourceTree = "<group>"; };
+		CC45E7241FD78D4500DE803D /* MessageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageViewModel.h; sourceTree = "<group>"; };
+		CC45E7251FD78D4500DE803D /* MessageViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageViewModel.m; sourceTree = "<group>"; };
+		CC45E7291FD78FF500DE803D /* ShowMsgPreviewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowMsgPreviewModel.h; sourceTree = "<group>"; };
+		CC45E72A1FD78FF500DE803D /* ShowMsgPreviewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowMsgPreviewModel.m; sourceTree = "<group>"; };
+		CC45E72D1FD790F800DE803D /* AountStationLetterMsgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AountStationLetterMsgModel.h; sourceTree = "<group>"; };
+		CC45E72E1FD790F800DE803D /* AountStationLetterMsgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AountStationLetterMsgModel.m; sourceTree = "<group>"; };
 		CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawHeaderView.swift; sourceTree = "<group>"; };
 		CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailsViewController.swift; sourceTree = "<group>"; };
 		CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelDescriptionView.h; sourceTree = "<group>"; };
@@ -3248,6 +3260,8 @@
 				8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */,
 				CCA1819E1FC7F1220094DA58 /* CashViewModel.h */,
 				CCA1819F1FC7F1220094DA58 /* CashViewModel.m */,
+				CC45E7241FD78D4500DE803D /* MessageViewModel.h */,
+				CC45E7251FD78D4500DE803D /* MessageViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4154,6 +4168,7 @@
 		63E076541B67114800E269F2 /* DataModelModules */ = {
 			isa = PBXGroup;
 			children = (
+				CC45E7281FD78FC600DE803D /* Message */,
 				CCCB279E1FB2F19200412632 /* DrawLottery */,
 				CC6F067B1F75092C00FA889E /* Capital */,
 				CC6CBA811F5AB93C0015C92C /* ApplicationStatus */,
@@ -5020,6 +5035,17 @@
 			path = RedPacketWithCash;
 			sourceTree = "<group>";
 		};
+		CC45E7281FD78FC600DE803D /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				CC45E7291FD78FF500DE803D /* ShowMsgPreviewModel.h */,
+				CC45E72A1FD78FF500DE803D /* ShowMsgPreviewModel.m */,
+				CC45E72D1FD790F800DE803D /* AountStationLetterMsgModel.h */,
+				CC45E72E1FD790F800DE803D /* AountStationLetterMsgModel.m */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		CC4BB60C1F17709D0027A0AA /* MineView */ = {
 			isa = PBXGroup;
 			children = (
@@ -5861,6 +5887,7 @@
 				638198A41CC0825400E8951E /* SSKeychain.m in Sources */,
 				63E1ECD41E1B8FAA0079A2F8 /* SDCycleScrollView.m in Sources */,
 				638A16F31E517D9F00AB8AB6 /* LOTAnimatablePointValue.m in Sources */,
+				CC45E7261FD78D4500DE803D /* MessageViewModel.m in Sources */,
 				63878FE51C1519CD008E1CF9 /* FXD_Utility.m in Sources */,
 				1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */,
 				84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
@@ -5916,6 +5943,7 @@
 				63FC24FB1D98F7E9006F58F3 /* NSAttributedString+YYText.m in Sources */,
 				6326CAAC1BF1CA5F00FD23A8 /* pinyin.c in Sources */,
 				841BE5C61F177C4F00BABD04 /* UserLevelViewController.m in Sources */,
+				CC45E72B1FD78FF500DE803D /* ShowMsgPreviewModel.m in Sources */,
 				CC0F1B9D1EE6537700A23651 /* IdeaBackViewModel.m in Sources */,
 				CCDEDF691EEA9271009CEC32 /* ProductProtocolParamModel.m in Sources */,
 				63741E341D3CC10900C0E2F8 /* PayNavigationViewController.m in Sources */,
@@ -6167,6 +6195,7 @@
 				CC6F06731F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift in Sources */,
 				638A16F91E517D9F00AB8AB6 /* UIColor+Expanded.m in Sources */,
 				63F1A50A1BD8CD5100B83751 /* RepaySuccessBaseClass.m in Sources */,
+				CC45E72F1FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
 				63A24C681BE063A90036E8EF /* UIImage+Extend.m in Sources */,
 				CCDEDF641EEA912A009CEC32 /* LoanMoneyViewModel.m in Sources */,
 				63A24C5E1BE063A90036E8EF /* NSDate+Extend.m in Sources */,
@@ -6341,6 +6370,7 @@
 				CC0DF9681EA5B1090024841A /* UIFont+Extend.m in Sources */,
 				CC0DF96A1EA5B1090024841A /* ProductListBaseClass.m in Sources */,
 				CC0DF96B1EA5B1090024841A /* RegViewController.m in Sources */,
+				CC45E7301FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
 				CC0DF96C1EA5B1090024841A /* HMScannerController.m in Sources */,
 				CC3A7F321ED52A3200F30289 /* HG_ReplaceBankCardVCModules.m in Sources */,
 				CC0DF96E1EA5B1090024841A /* GetMoneyResultAuditRecordBean.m in Sources */,
@@ -6555,6 +6585,7 @@
 				CC0DFA1E1EA5B1090024841A /* GetMoneyInfo.m in Sources */,
 				CC0DFA1F1EA5B1090024841A /* UIColor+Extend.m in Sources */,
 				CC0DFA221EA5B1090024841A /* UIViewController+LewPopupViewController.m in Sources */,
+				CC45E7271FD78D4500DE803D /* MessageViewModel.m in Sources */,
 				CC0DFA231EA5B1090024841A /* FXDUserInfo.m in Sources */,
 				CC0DFA241EA5B1090024841A /* SquareRepaymentAvailableRedpackets.m in Sources */,
 				CC0DFA251EA5B1090024841A /* UILabel+FlickerNumber.m in Sources */,
@@ -6676,6 +6707,7 @@
 				CC0DFA8B1EA5B1090024841A /* MoneyIngView.m in Sources */,
 				CC0DFA8C1EA5B1090024841A /* DataDisplayCell.m in Sources */,
 				CC0DFA8D1EA5B1090024841A /* ApprovalAmountResult.m in Sources */,
+				CC45E72C1FD78FF500DE803D /* ShowMsgPreviewModel.m in Sources */,
 				CC0DFA8E1EA5B1090024841A /* P2PSettleRepay.m in Sources */,
 				CC0DFA8F1EA5B1090024841A /* UIWindow+Launch.m in Sources */,
 				CCDEDF651EEA912A009CEC32 /* LoanMoneyViewModel.m in Sources */,

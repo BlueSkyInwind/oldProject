@@ -21,14 +21,14 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 //http://192.168.13.173:8005/ 张强本地
 
 //测试导流 192.168.6.134
-NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-NSString * const _main_new_url  =  @"http://h5.test.fxds/";
-//NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
-NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
-NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
-NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+//NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+//NSString * const _main_new_url  =  @"http://h5.test.fxds/";
+////NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
+//NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
+//NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //UAT环境
 //NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
@@ -41,13 +41,13 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //http://192.168.6.134:9191/fxd-esb/
 //本地
-//NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-//NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-//NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
-//NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
-//NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
+NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
+NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
+NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //芝麻信用测试地址
 //NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";
@@ -499,6 +499,12 @@ NSString * const    _CheckWithdrawCash_url    =    @"apigw/client/operation/with
 
 //现金红包收提明细
 NSString * const    _WithdrawCashDetail_url    =    @"apigw/client/operation/withdrawCashAPI/queryDetail";
+
+//站内信用户未读信息统计接口
+NSString * const    _CountStationLetterMsg_url    =    @"apigw/client/countStationLetterMsg";
+
+//站内信未读已读列表
+NSString * const    _ShowMsgPreview_url    =    @"apigw/client/operation/showMsgPreview";
 
 #pragma mark - 合规接口
 
