@@ -156,8 +156,6 @@ NSString * const     _getFristRepaymentDate         =   @"appLoanAppLicant/getFr
 //获取手机运营商
 NSString * const     _getMobileOpera_url            =   @"getCarrierNameByMobile/getCarrierNameByMobile.jhtml";
 
-//客户所有信息获取接口
-NSString * const     _getCustomerBase_url           =   @"customer/getCustomerBase.jhtml";
 
 //客户基本信息保存接口
 NSString * const     _saveCustomerBase_url          =   @"customerAuth/saveCustomerBaseInfo.jhtml";
@@ -168,8 +166,6 @@ NSString * const     _getAllRegionList_url          =    @"getRegionList/getAllR
 //客户职业信息保存接口
 NSString * const     _saveCustomerCarrer_jhtml      =   @"customer/saveCustomerCarrer.jhtml";
 
-//客户职业信息获取接口
-NSString * const     _getCustomerCarrer_jhtml       =   @"customer/getCustomerCarrer.jhtml";
 //进件接口
 NSString * const     _createApplication_jhtml       =   @"applicant/createApplication.jhtml";
 
@@ -475,6 +471,12 @@ NSString * const     _changePassword_url                    =   @"apigw/client/m
 
 //退出登陆
 NSString * const     _loginOut_url                  =   @"apigw/client/membership/logout";
+
+//客户所有信息获取接口
+NSString * const     _getCustomerBase_url           =   @"apigw/client/membership/customer/getCustomerBase";
+
+//客户职业信息获取接口
+NSString * const     _getCustomerCarrer_jhtml       =   @"apigw/client/membership/customer/getCustomerCarrer";
 
 #pragma mark - 合规接口
 
