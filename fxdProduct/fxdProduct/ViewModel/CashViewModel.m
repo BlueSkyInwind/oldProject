@@ -52,18 +52,14 @@
     withdrawCashParamModel.operateType = operateType;
     NSDictionary * paramDic  = [withdrawCashParamModel toDictionary];
     [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_WithdrawCash_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        
         if (self.returnBlock) {
             self.returnBlock(object);
         }
-        
     } failure:^(EnumServerStatus status, id object) {
-        
         if (self.faileBlock) {
             [self faileBlock];
         }
     }];
-    
 }
 
 -(void)checkWithdrawCashOperateType:(NSString *)operateType{
