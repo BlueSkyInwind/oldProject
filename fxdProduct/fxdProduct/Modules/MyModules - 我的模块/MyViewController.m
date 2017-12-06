@@ -72,7 +72,7 @@
     _middleView.backgroundColor = [UIColor whiteColor];
     _middleView.delegate = self;
     [self.MyViewTable addSubview:_middleView];
-    [self getMessageNumber];
+//    [self getMessageNumber];
 //    [self getPersonalCenterInfo];
     
 }
@@ -157,9 +157,10 @@
  */
 -(void)accountViewTap{
     
-    [FXD_Utility sharedUtility].operateType = @"2";
-    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
-    [self.navigationController pushViewController:controller animated:true];
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"敬请期待"];
+//    [FXD_Utility sharedUtility].operateType = @"2";
+//    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
+//    [self.navigationController pushViewController:controller animated:true];
 
 }
 #pragma mark - TableView
@@ -227,12 +228,12 @@
         case 0:
         {
             
-            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-            [self.navigationController pushViewController:myMessageVC animated:true];
+//            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+//            [self.navigationController pushViewController:myMessageVC animated:true];
 //            UserDataEvaluationVCModules * checkVC = [[UserDataEvaluationVCModules  alloc]init];
 //            [self.navigationController pushViewController:checkVC animated:true];
-//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-//            [self.navigationController pushViewController:repayRecord animated:true];
+            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+            [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
         case 1:

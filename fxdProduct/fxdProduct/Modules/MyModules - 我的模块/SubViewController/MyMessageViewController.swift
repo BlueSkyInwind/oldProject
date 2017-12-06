@@ -14,7 +14,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     var tableView : UITableView?
     var page : Int?
     var noneView : NonePageView?
-    var items:[String] = []
+    var items:[OperUserMassgeModel] = []
     var messageModel : ShowMsgPreviewModel?
 //    var headView : UIView?
     
@@ -22,12 +22,10 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         super.viewDidLoad()
 
         self.title = "我的消息"
-        page = 0
         addBackItemRoot()
         //随机生成一些初始化数据
-        loadItemData()
         configureView()
-//        createNoneView()
+        createNoneView()
         // Do any additional setup after loading the view.
     }
 
@@ -38,8 +36,8 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.page = 1
-//        getData()
+        self.page = 0
+        getData()
     }
     
     func createNoneView(){
@@ -89,39 +87,31 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     /// 下拉刷新
     @objc func headerRefresh(){
 
-//        self.page = 1
-//        getData()
-        
         self.items.removeAll()
-        loadItemData()
-        //重现加载表格数据
-        self.tableView?.reloadData()
-        //结束刷新
-        self.tableView?.mj_header.endRefreshing()
+        self.page = 0
+        getData()
+
+//        //重现加载表格数据
+//        self.tableView?.reloadData()
+//        //结束刷新
+//        self.tableView?.mj_header.endRefreshing()
     }
     
     /// 上拉加载
     @objc func footerLoad(){
        
-//        let offset = Int((self.messageModel?.offset)!)
+        let offset = Int((self.messageModel?.offset)!)
         
-//        self.page = offset! + 1
-//        getData()
+        self.page = offset! + 1
+        getData()
         
-        loadItemData()
-        
-        //重现加载表格数据
-        self.tableView?.reloadData()
-        //结束刷新
-        self.tableView?.mj_footer.endRefreshing()
+//        //重现加载表格数据
+//        self.tableView?.reloadData()
+//        //结束刷新
+//        self.tableView?.mj_footer.endRefreshing()
         
     }
-    //初始化数据
-    func loadItemData() {
-        for _ in 0...20 {
-            items.append("条目\(Int(arc4random()%100))")
-        }
-    }
+
     func getData(){
         
         let pageStr = String.init(format: "%d", self.page!)
@@ -134,6 +124,11 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
                 self?.messageModel = try! ShowMsgPreviewModel.init(dictionary: baseResult.data as! [AnyHashable : Any]!)
                 if self?.messageModel?.operUserMassge.count != 0{
                     
+                    for index in 0 ..< (self?.messageModel?.operUserMassge.count)!{
+                        
+                        let model = self?.messageModel?.operUserMassge[index] as? OperUserMassgeModel
+                        self?.items.append(model!)
+                    }
                     self?.tableView?.isHidden = false
                     self?.noneView?.isHidden = true
                     self?.tableView?.reloadData()
@@ -141,7 +136,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
                 }else{
                     self?.tableView?.isHidden = true
                     self?.noneView?.isHidden = false
-//                    self?.tableView?.reloadData()
+
                 }
                 
             }else{
@@ -160,13 +155,8 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if self.messageModel?.operUserMassge.count != nil {
-//
-//            return (self.messageModel?.operUserMassge.count)!
-//        }
-//        return 20
         
-        return self.items.count
+        return self.items.count + 1
         
     }
     
@@ -193,17 +183,14 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         messageCell.cellType = MessageCellType(cellType: .Default)
         messageCell.selectionStyle = .none
 //        let model = self.messageModel?.operUserMassge[indexPath.row - 1 ] as? OperUserMassgeModel
-//        messageCell.titleLabel?.text = model?.msgName
-//        messageCell.timeLabel?.text = model?.createDate
-//        messageCell.contentLabel?.text = model?.msgText
-//        messageCell.leftImageView?.isHidden = false
-//
-//        if ((model?.isRead) != nil) {
-//            messageCell.leftImageView?.isHidden = true
-//        }
-
-        messageCell.titleLabel?.text = self.items[indexPath.row]
+        messageCell.titleLabel?.text = items[indexPath.row - 1].msgName
+        messageCell.timeLabel?.text = items[indexPath.row - 1].createDate
+        messageCell.contentLabel?.text = items[indexPath.row - 1].msgText
         messageCell.leftImageView?.isHidden = false
+
+        if items[indexPath.row - 1].isRead == "1" {
+            messageCell.leftImageView?.isHidden = true
+        }
         
         return messageCell!
     }
