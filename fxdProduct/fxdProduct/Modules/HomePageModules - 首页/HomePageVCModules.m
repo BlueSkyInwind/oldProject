@@ -788,27 +788,35 @@
 }
 #pragma mark 点击导流平台的更多
 -(void)moreBtnClick{
-    
-    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
-    [self.navigationController pushViewController:webVC animated:true];
-    NSLog(@"点击导流平台的更多");
-    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
-    [homeVM statisticsDiversionPro:nil];
+    DLog(@"点击导流平台的更多");
+    [self pushMoreProductPlatform];
 }
-
 /**
  点击导流平台的更多
  */
 -(void)otherBtnClick{
-    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
-    [self.navigationController pushViewController:webVC animated:true];
-    NSLog(@"点击导流平台的更多");
+    DLog(@"点击导流平台的更多");
+    [self pushMoreProductPlatform];
+}
+-(void)pushMoreProductPlatform{
     HomeViewModel * homeVM = [[HomeViewModel alloc]init];
+    [homeVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseVM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseVM.errCode isEqualToString:@"0"]) {
+            NSDictionary *  dic = (NSDictionary *)baseVM.data;
+            if ([dic.allKeys containsObject:@"url"]) {
+                FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+                webVC.urlStr = baseVM.data[@"url"];
+                [self.navigationController pushViewController:webVC animated:true];
+            }
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseVM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
     [homeVM statisticsDiversionPro:nil];
 }
-
 #pragma mark 我要借款
 -(void)loanBtnClick{
     NSLog(@"我要借款");
