@@ -116,9 +116,6 @@ NSString * const     _updateAvatar_url              =   @"customer/saveAuthIdent
 //银行卡列表查询
 NSString * const     _cardList_url                  =   @"getAccountCardList/getAccountCardList.jhtml";
 
-//更改密码
-NSString * const     _CHANGEPASS_URL                =   @"userWs/updatePassword";
-
 //意见反馈
 NSString * const     _feedBack_url                  =   @"common/saveFeedBack.jhtml";
 

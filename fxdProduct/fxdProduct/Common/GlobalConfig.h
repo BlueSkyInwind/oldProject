@@ -81,7 +81,6 @@ UIKIT_EXTERN NSString * const       _WeekUserShouldAlsoAmount_url;           //�
 UIKIT_EXTERN NSString * const       _WeekUserRepayment_url;                  //用户还款(按周)
 UIKIT_EXTERN NSString * const       _updateAvatar_url;                       //上传照片
 UIKIT_EXTERN NSString * const       _cardList_url;                           //银行卡列表查询
-UIKIT_EXTERN NSString * const       _CHANGEPASS_URL;                         //更改密码
 UIKIT_EXTERN NSString * const       _feedBack_url;                           //意见反馈
 UIKIT_EXTERN NSString * const       _getMoneyHistory_url;                    //借款记录
 UIKIT_EXTERN NSString * const       _getRepayHistory_url;                    //还款记录
