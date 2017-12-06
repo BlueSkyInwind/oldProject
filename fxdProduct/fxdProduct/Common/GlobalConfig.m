@@ -501,7 +501,7 @@ NSString * const    _CheckWithdrawCash_url    =    @"apigw/client/operation/with
 NSString * const    _WithdrawCashDetail_url    =    @"apigw/client/operation/withdrawCashAPI/queryDetail";
 
 //站内信用户未读信息统计接口
-NSString * const    _CountStationLetterMsg_url    =    @"apigw/client/countStationLetterMsg";
+NSString * const    _CountStationLetterMsg_url    =    @"apigw/client/operation/countStationLetterMsg";
 
 //站内信未读已读列表
 NSString * const    _ShowMsgPreview_url    =    @"apigw/client/operation/showMsgPreview";
