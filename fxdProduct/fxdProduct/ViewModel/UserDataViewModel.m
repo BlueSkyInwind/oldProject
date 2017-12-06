@@ -121,8 +121,6 @@
         [self uploadLiveInfo:@"" isSuccess:^(id object) {
             
         }];
-        //        NSError *error = object;
-        //        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"Error-%ld",(long)error.code]];
     }];
 }
 
