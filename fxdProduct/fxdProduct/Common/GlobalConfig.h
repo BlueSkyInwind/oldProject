@@ -231,6 +231,8 @@ UIKIT_EXTERN NSString * const       _WithdrawCash_url;                       //�
 UIKIT_EXTERN NSString * const       _DiversionProStatics_url;                //导流产品埋点接口
 UIKIT_EXTERN NSString * const       _CheckWithdrawCash_url;                  //校验提现条件
 UIKIT_EXTERN NSString * const       _WithdrawCashDetail_url;                 //现金红包收提明细
+UIKIT_EXTERN NSString * const       _CountStationLetterMsg_url;              //站内信用户未读信息统计接口
+UIKIT_EXTERN NSString * const       _ShowMsgPreview_url;                     //站内信未读已读列表
 
 
 UIKIT_EXTERN NSString * const   CODE_REG;                                    ///注册验证码
