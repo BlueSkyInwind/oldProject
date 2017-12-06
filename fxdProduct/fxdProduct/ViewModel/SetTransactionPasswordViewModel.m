@@ -37,7 +37,7 @@
  */
 -(void)VerifyOldTradePassword:(NSString *)password{
     
-    NSDictionary *paramDic = @{@"oldPassword": [[password DF_hashCode] AES256JAVA_Encrypt:Fxd_pw]};
+    NSDictionary *paramDic = @{@"oldPassword": [[password DF_hashCode] AES256JAVA_Encrypt:[Fxd_pw openpf]]};
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_verifyOldPassword_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
@@ -60,8 +60,8 @@
 -(void)saveNewTradePasswordFirst:(NSString *)firstPassword second:(NSString *)secondpassword operateType:(NSString *)operateType verify_code:(NSString *)verify_code{
     
     SetTradePasswordParam * tradePasswordP = [[SetTradePasswordParam  alloc]init];
-    tradePasswordP.firstPassword = [[firstPassword DF_hashCode] AES256JAVA_Encrypt:Fxd_pw];
-    tradePasswordP.secondPassword =  [[secondpassword DF_hashCode] AES256JAVA_Encrypt:Fxd_pw];
+    tradePasswordP.firstPassword = [[firstPassword DF_hashCode] AES256JAVA_Encrypt:[Fxd_pw openpf]];
+    tradePasswordP.secondPassword =  [[secondpassword DF_hashCode] AES256JAVA_Encrypt:[Fxd_pw openpf]];
     tradePasswordP.type = operateType;
     tradePasswordP.verify_code = verify_code;
     NSDictionary *paramDic = [tradePasswordP toDictionary];
@@ -87,9 +87,9 @@
 -(void)modificationTradePasswordFirst:(NSString *)firstPassword second:(NSString *)secondpassword oldPassword:(NSString *)oldPassword{
     
     SetTradePasswordParam * tradePasswordP = [[SetTradePasswordParam  alloc]init];
-    tradePasswordP.firstPassword = [[firstPassword DF_hashCode] AES256JAVA_Encrypt:Fxd_pw];
-    tradePasswordP.secondPassword =  [[secondpassword DF_hashCode] AES256JAVA_Encrypt:Fxd_pw];
-    tradePasswordP.oldPassword =  [[oldPassword DF_hashCode] AES256JAVA_Encrypt:Fxd_pw];;
+    tradePasswordP.firstPassword = [[firstPassword DF_hashCode] AES256JAVA_Encrypt:[Fxd_pw openpf]];
+    tradePasswordP.secondPassword =  [[secondpassword DF_hashCode] AES256JAVA_Encrypt:[Fxd_pw openpf]];
+    tradePasswordP.oldPassword =  [[oldPassword DF_hashCode] AES256JAVA_Encrypt:[Fxd_pw openpf]];;
     NSDictionary *paramDic = [tradePasswordP toDictionary];
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_modificationPassword_url] isNeedNetStatus:YES isNeedWait:YES parameters:paramDic finished:^(EnumServerStatus status, id object) {

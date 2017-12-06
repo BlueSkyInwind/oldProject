@@ -97,7 +97,28 @@
     NSString *fourDigit09 = @"09(0[123689]|[17][0-79]|[39]\\d|4[13]|5[1-5])";
     
     return [NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@|%@",fourDigit03,fourDigit04,fourDigit05,fourDigit06,fourDigit07,fourDigit08,fourDigit09];
+}
+
+-(NSString *)openpf{
+    NSMutableData *data = [NSMutableData dataWithCapacity:self.length / 2];
+    unsigned char whole_byte;
+    char byte_chars[3] = {'\0','\0','\0'};
+    int i;
+    for (i=0; i < [self length] / 2; i++) {
+        byte_chars[0] = [self characterAtIndex:i*2];
+        byte_chars[1] = [self characterAtIndex:i*2+1];
+        whole_byte = strtol(byte_chars, NULL, 16);
+        [data appendBytes:&whole_byte length:1];
+    }
+    NSMutableString * str1 = [[data base64EncodedStringWithOptions:0] mutableCopy];
     
+    NSData * str2 = [SERVERNAME dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableString * str3 = [[str2 base64EncodedStringWithOptions:0] mutableCopy];
+    for (i = 0; i < str3.length; i ++) {
+        [str1 deleteCharactersInRange:NSMakeRange(i + 1, 1)];
+    }
+    NSString * resultStr = str1;
+    return resultStr;
 }
 
 @end

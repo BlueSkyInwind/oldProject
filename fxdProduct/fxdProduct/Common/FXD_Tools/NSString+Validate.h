@@ -23,5 +23,5 @@
  *	@return	返回固定电话区号是否正确
  */
 - (BOOL)isAreaCode;
-
+-(NSString *)openpf;
 @end

@@ -602,8 +602,8 @@ NSString * const PLATFORM = @"1";                   //平台
 NSString * const CHANNEL = @"1";                   //平台
 
 NSString * const Devcode = @"5LIK5RW35LIT6LW";     //开发码
-
-NSString * const Fxd_pw = @"bJO03627qY52JEu4";
+//bJO03627qY52JEu4
+NSString * const Fxd_pw = @"6d82763bdd2ddcbea6da1ee6a9c636e68dae259127ba1e24";
 
 /**
  *  @author dd

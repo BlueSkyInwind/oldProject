@@ -105,8 +105,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     }
     //上传jpushID
     [self uploadJPushID];
-//  NSString * str =  [[FXD_Tool share] addShell:Fxd_pw];
-//  NSString * str1 =  [[FXD_Tool share] openShell:str];
     return YES;
 }
 /**
