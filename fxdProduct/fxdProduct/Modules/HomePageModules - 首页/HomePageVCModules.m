@@ -34,7 +34,8 @@
 #import "LoanMoneyViewModel.h"
 #import "ApplicationStatusModel.h"
 #import "UserDataViewModel.h"
-
+#import "MessageViewModel.h"
+#import "AountStationLetterMsgModel.h"
 @interface HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
 {
    
@@ -53,6 +54,7 @@
     double _longitude;
 
     ApplicationStatus applicationStatus;
+    AountStationLetterMsgModel *model;
 }
 
 @property (nonatomic,strong) LoadFailureView * loadFailView;
@@ -73,7 +75,7 @@
     _count = 0;
    _dataArray = [NSMutableArray array];
     [self setUpTableview];
-//    [self setNavQRRightBar];
+    [self setNavQRRightBar];
     [self setNavQRLeftBar];
 }
 
@@ -89,6 +91,8 @@
         }
     }
     [self LoadHomeView];
+    
+    [self getMessageNumber];
 }
 
 /**
@@ -161,7 +165,7 @@
 - (void)setNavQRRightBar {
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 23, 18)];
-    [btn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"homeMessage"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
 //    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(16, -8, 13, 13)];
 //    bgView.backgroundColor = [UIColor redColor];
@@ -188,10 +192,31 @@
 -(void)setNavQRLeftBar {
     
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRCodePopups)];
-    self.navigationItem.rightBarButtonItem = aBarbi;
+    self.navigationItem.leftBarButtonItem = aBarbi;
     
 }
-
+/**
+ 站内信用户未读信息统计接口
+ */
+-(void)getMessageNumber{
+    
+    MessageViewModel *messageVM = [[MessageViewModel alloc]init];
+    [messageVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            model = [[AountStationLetterMsgModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [messageVM countStationLetterMsg];
+}
 
 #pragma mark 首页navigation点击事件
 

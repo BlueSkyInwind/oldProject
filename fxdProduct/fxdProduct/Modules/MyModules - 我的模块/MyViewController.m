@@ -36,8 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    titleAry=@[@"借还记录",@"我的银行卡",@"邀请好友",@"更多"];
-    imgAry=@[@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"icon_my_setup"];
+    titleAry=@[@"我的消息",@"借还记录",@"我的银行卡",@"邀请好友",@"更多"];
+    imgAry=@[@"message",@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"icon_my_setup"];
     if (@available(iOS 11.0, *)) {
         self.MyViewTable.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
     }else{
@@ -72,7 +72,7 @@
     _middleView.backgroundColor = [UIColor whiteColor];
     _middleView.delegate = self;
     [self.MyViewTable addSubview:_middleView];
-//    [self getMessageNumber];
+    [self getMessageNumber];
 //    [self getPersonalCenterInfo];
     
 }
@@ -205,13 +205,13 @@
     } else {
         bCell.lineView.hidden=NO;
     }
-//    if (indexPath.row == 0) {
-//        bCell.messageLabel.hidden = false;
-//        bCell.messageImage.hidden = false;
-//    }else{
-//        bCell.messageLabel.hidden = true;
-//        bCell.messageImage.hidden = true;
-//    }
+    if (indexPath.row == 0) {
+        bCell.messageLabel.hidden = false;
+        bCell.messageImage.hidden = false;
+    }else{
+        bCell.messageLabel.hidden = true;
+        bCell.messageImage.hidden = true;
+    }
     return bCell;
 }
 
@@ -219,37 +219,33 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
-//        case 0:
-//        {
-//            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-//            [self.navigationController pushViewController:myMessageVC animated:true];
-//        }
-//            break;
         case 0:
         {
-            
-//            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-//            [self.navigationController pushViewController:myMessageVC animated:true];
-//            UserDataEvaluationVCModules * checkVC = [[UserDataEvaluationVCModules  alloc]init];
-//            [self.navigationController pushViewController:checkVC animated:true];
+            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+            [self.navigationController pushViewController:myMessageVC animated:true];
+        }
+            break;
+        case 1:
+        {
+        
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
-        case 1:
+        case 2:
         {
             MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
             [self.navigationController pushViewController:myCrad animated:YES];
         }
             break;
-        case 2:
+        case 3:
         {
             InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
             [self.navigationController pushViewController:invitationVC animated:true];
         }
             break;
         
-        case 3:
+        case 4:
         {
             
             MoreViewController *ticket=[[MoreViewController alloc]init];
