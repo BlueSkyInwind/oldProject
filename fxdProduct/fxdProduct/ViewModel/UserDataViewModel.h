@@ -72,7 +72,23 @@
 /**
  得到测评结果
  */
-
 -(void)UserDataCertificationResult;
 
+#pragma  mark - 公共接口
+/**
+ 获取列表数据的公共接口
+ 
+ @param str 数据类型
+ */
+-(void)getCommonDictCodeListTypeStr:(NSString *)str;
+/**
+ 获取对应城市代码
+ 
+ @param areaNamestr 城市名
+ */
+-(void)getRegionCodeByAreaName:(NSString *)areaNamestr;
+/**
+ 获取所有省市区
+ */
+-(void)getAllRegionList;
 @end

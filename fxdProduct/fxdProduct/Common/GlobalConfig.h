@@ -74,11 +74,6 @@ UIKIT_EXTERN NSString * const       _updateUserById_url;                     //�
 UIKIT_EXTERN NSString * const       _saveLoanApplicant_url;                  //进件
 UIKIT_EXTERN NSString * const       _findLoanAuditProgress_url;              //进度审核
 UIKIT_EXTERN NSString * const       _userSureRefuseLoanAction_url;           //用户拒绝与接收
-UIKIT_EXTERN NSString * const       _userLoan_url;                           //提款
-UIKIT_EXTERN NSString * const       _AllUserShouldAlsoAmount_url;            //查询用户还款的额(一次结清)
-UIKIT_EXTERN NSString * const       _AlluserRepayment_url;                   //用户还款(一次结清)
-UIKIT_EXTERN NSString * const       _WeekUserShouldAlsoAmount_url;           //查询用户周还款额(周)
-UIKIT_EXTERN NSString * const       _WeekUserRepayment_url;                  //用户还款(按周)
 UIKIT_EXTERN NSString * const       _updateAvatar_url;                       //上传照片
 UIKIT_EXTERN NSString * const       _cardList_url;                           //银行卡列表查询
 UIKIT_EXTERN NSString * const       _feedBack_url;                           //意见反馈
@@ -88,7 +83,6 @@ UIKIT_EXTERN NSString * const       _schoolList_url;                         //�
 UIKIT_EXTERN NSString * const       _BankNumCheck_url;                       //银行卡校验
 UIKIT_EXTERN NSString * const       _Certification_url;                      //手机认证信息
 UIKIT_EXTERN NSString * const       _getCustomerAuth_jhtml;                  //获取手机认证信息
-UIKIT_EXTERN NSString * const       _drawApply_url;                          //提款
 UIKIT_EXTERN NSString * const       _getFristRepaymentDate;                  //提款获取第一个还款日
 UIKIT_EXTERN NSString * const       _getMobileOpera_url;                     //获取手机运营商
 UIKIT_EXTERN NSString * const       _getTianChuangCertification_url;                     //手机号认证 (天创)
@@ -99,7 +93,6 @@ UIKIT_EXTERN NSString * const       _getAllRegionList_url;                   //�
 UIKIT_EXTERN NSString * const       _saveCustomerCarrer_jhtml;               //客户职业信息保存接口
 UIKIT_EXTERN NSString * const       _getCustomerCarrer_jhtml;                //客户职业信息获取接口
 UIKIT_EXTERN NSString * const       _createApplication_jhtml;                //进件接口
-UIKIT_EXTERN NSString * const       _approvalAmount_jhtml;                   //审批金额查询接口
 UIKIT_EXTERN NSString * const       _getProductList_jhtml;                   //产品列表获取接口
 UIKIT_EXTERN NSString * const       _saveFaceId_url;                         //人脸识别结果保存
 UIKIT_EXTERN NSString * const       _saveUserContacts_jhtml;                 //用户通讯录保存接口
@@ -107,7 +100,6 @@ UIKIT_EXTERN NSString * const       _updateLoginLatitude_url;                //�
 UIKIT_EXTERN NSString * const       _getRegionCodeByName_jhtml;              //获取省市区编码
 UIKIT_EXTERN NSString * const       _checkVersion_jhtml;                     //版本检测
 UIKIT_EXTERN NSString * const       _drawApplyAgain_jhtml;                   //二次提款
-UIKIT_EXTERN NSString * const       _getUserRedpacket_url;                   //红包获取
 UIKIT_EXTERN NSString * const       _caseStatusUpdateApi_url;                //申请件状态更新
 UIKIT_EXTERN NSString * const       _getBankList_url;                        //银行卡获取接口   _getSupportBankList_url
 UIKIT_EXTERN NSString * const       _getSupportBankList_url;                        //获取银行卡支持列表
@@ -149,7 +141,6 @@ UIKIT_EXTERN NSString * const       _customerAuthInfo_url;                   //�
 UIKIT_EXTERN NSString * const       _JXLGetToken_url;                        //聚信力TOKEN获取
 UIKIT_EXTERN NSString * const       _customerContact_url;                    //联系人信息上传
 UIKIT_EXTERN NSString * const       _saveIDInfo_url;
-UIKIT_EXTERN NSString * const       _getLimitProductlist_url;                //首页产品列表路径
 UIKIT_EXTERN NSString * const       _repayment_url;                          //获取当前期的续期信息
 UIKIT_EXTERN NSString * const       _ApplicationStatus_url;                  //放款中 还款中 展期中 状态实时获取
 UIKIT_EXTERN NSString * const       _BankCardList_url;                       //银行卡列表信息
@@ -169,7 +160,6 @@ UIKIT_EXTERN NSString * const       _ProductProtocol_url;        //老客周末�
 UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集
 UIKIT_EXTERN NSString * const       _detectInfo_url;                         //活体检测信息上传
 UIKIT_EXTERN NSString * const       _GetRecomfrInfo_url;                     //推荐码规则
-UIKIT_EXTERN NSString * const       _fatchRate_url;                          //费率查询
 UIKIT_EXTERN NSString * const       _topBanner_url;                          //Banner广告获取
 UIKIT_EXTERN NSString * const       _question_url;                           //常见问题
 UIKIT_EXTERN NSString * const       _getDicCode_url;                         //数据字典获取

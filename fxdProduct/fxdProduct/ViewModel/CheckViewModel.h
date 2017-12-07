@@ -10,11 +10,6 @@
 #import "GetCaseInfo.h"
 @interface CheckViewModel : FXD_ViewModelBaseClass
 
-/**
- 审批金额查询接口
- */
-
--(void)approvalAmount;
 
 #pragma mark - 新API
 //提款信息页面

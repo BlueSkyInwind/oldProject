@@ -7,12 +7,11 @@
 //
 
 #import "BaseViewController.h"
-@class Custom_BaseInfo;
 
 @interface UserIdentityInformationVCModules : BaseViewController
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbarCancelDone;
 
-@property (nonatomic, strong) Custom_BaseInfo *custom_baseInfo;
+@property (nonatomic, strong) UserDataInformationModel *userDataIformationM;
 
 @end

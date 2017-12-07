@@ -20,10 +20,6 @@
  */
 -(void)getMoneyHistoryList;
 
-/**
- 我的红包列表
- */
--(void)getUserRedpacketList;
 
 /**
  我的银行卡列表

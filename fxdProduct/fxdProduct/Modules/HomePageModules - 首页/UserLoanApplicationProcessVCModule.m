@@ -246,23 +246,6 @@
     }
 }
 
-- (void)fatchRate:(void(^)(RateModel *rate))finish
-{
-    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
-        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
-        if ([rateParse.flag isEqualToString:@"0000"]) {
-            [FXD_Utility sharedUtility].rateParse = rateParse;
-            finish(rateParse);
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-
-    }];
-}
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

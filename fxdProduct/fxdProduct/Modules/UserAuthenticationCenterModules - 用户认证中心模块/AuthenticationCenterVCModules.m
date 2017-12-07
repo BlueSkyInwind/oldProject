@@ -317,9 +317,9 @@
             }
             switch (indexPath.row) {
                 case 0:{
-                    [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
+                    [self getUserInfo:^(UserDataInformationModel * userDataInformationM) {
                         UserIdentityInformationVCModules *perInfoVC = [[UserIdentityInformationVCModules alloc] init];
-                        perInfoVC.custom_baseInfo = custom_baseInfo;
+                        perInfoVC.userDataIformationM = userDataInformationM;
                         [self.navigationController pushViewController:perInfoVC animated:true];
                     }];
                 }
@@ -339,9 +339,9 @@
                         return;
                     }
                     __weak typeof (self) weakSelf = self;
-                    [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
+                    [self getUserInfo:^(UserDataInformationModel * userDataInformationM) {
                         UserFaceIdentiVCModules * faceIdentiCreditVC = [[UserFaceIdentiVCModules alloc]init];
-                        faceIdentiCreditVC.verifyStatus = [NSString stringWithFormat:@"%.0lf",custom_baseInfo.result.verifyStatus];
+                        faceIdentiCreditVC.verifyStatus = [NSString stringWithFormat:@"%.0lf",userDataInformationM.verifyStatus];
                         [weakSelf.navigationController pushViewController:faceIdentiCreditVC animated:true];
                         faceIdentiCreditVC.identifyResultStatus = ^(NSString * status) {
                             weakSelf.verifyStatus = status;
@@ -700,46 +700,26 @@
     }];
     [userDataVM obtainhighRankingStatus];
 }
-- (void)getUserInfo:(void(^)(Custom_BaseInfo *custom_baseInfo))finish
+- (void)getUserInfo:(void(^)(UserDataInformationModel * userDataInformationM))finish
 {
     GetCustomerBaseViewModel *customerInfo = [[GetCustomerBaseViewModel alloc] init];
     [customerInfo setBlockWithReturnBlock:^(id returnValue) {
-        Custom_BaseInfo *custom_model = returnValue;
-        [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-        if ([custom_model.flag isEqualToString:@"0000"]) {
-            id data = [DataWriteAndRead readDataWithkey:UserInfomation];
-            if (data) {
-                [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
-                if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
-                    [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
-                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
-                    }
-                }
-            } else {
-                if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
-                    [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
-                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
-                    }
-                } else {
-                    [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
-                }
-            }
-            finish(custom_model);
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:custom_model.msg];
+        BaseResultModel * baseVM = returnValue;
+        if ([baseVM.errCode isEqualToString:@"0"]) {
+            UserDataInformationModel * userDataIM = [[UserDataInformationModel alloc]initWithDictionary:(NSDictionary *)baseVM.data error:nil];
+            [DataWriteAndRead writeDataWithkey:UserInfomation value:userDataIM];
+            [FXD_Utility sharedUtility].userInfo.userIDNumber = userDataIM.id_code_;
+            [FXD_Utility sharedUtility].userInfo.realName = userDataIM.customer_name_;
+            [FXD_Utility sharedUtility].userInfo.account_id = userDataIM.create_by_;
+            finish(userDataIM);
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseVM.friendErrMsg];
         }
     } WithFaileBlock:^{
     }];
     [customerInfo fatchCustomBaseInfo:nil];
 }
+
 -(void)getCustomerCarrer_jhtml:(void(^)(CustomerCareerBaseClass *careerInfo))finish
 {
     GetCareerInfoViewModel *getCareerInfoViewModel = [[GetCareerInfoViewModel alloc] init];

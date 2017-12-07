@@ -377,7 +377,7 @@
         {
             [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
                 UserIdentityInformationVCModules *perInfoVC = [[UserIdentityInformationVCModules alloc] init];
-                perInfoVC.custom_baseInfo = custom_baseInfo;
+//                perInfoVC.custom_baseInfo = custom_baseInfo;
                 [self.navigationController pushViewController:perInfoVC animated:true];
             }];
         }

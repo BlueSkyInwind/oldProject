@@ -79,7 +79,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [UserDefaulInfo getUserInfoData];
+//    [UserDefaulInfo getUserInfoData];
     
     if ([FXD_Utility sharedUtility].loginFlage) {
         //获取位置信息

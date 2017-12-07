@@ -77,29 +77,7 @@
 
 @implementation ProductListViewModel
 
--(void)fetchProductListInfo{
-    
-    NSDictionary *paramDic = @{@"juid":[FXD_Utility sharedUtility].userInfo.juid,
-                               @"token":[FXD_Utility sharedUtility].userInfo.tokenStr
-                               };
-    [self postProductListParam:paramDic];
-    
-}
 
--(void)postProductListParam:(NSDictionary *)paramDic{
-    
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_getLimitProductlist_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"=========%@",object);
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
 
 @end
 

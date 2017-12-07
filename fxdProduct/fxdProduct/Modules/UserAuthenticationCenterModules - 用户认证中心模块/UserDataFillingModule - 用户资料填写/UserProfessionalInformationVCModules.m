@@ -46,9 +46,8 @@
     //职业信息返回信息
     CareerParse *_careerParse;
     NSString *add;
-    
-    DataDicParse *_dataDicModel;
-    
+    NSMutableArray *_industyList;
+
     NSString * _contactStatus;
 }
 
@@ -65,6 +64,7 @@
     _pickerArray = [NSMutableArray array];
     _subPickerArray = [NSMutableArray array];
     _thirdPickerArray = [NSMutableArray array];
+    _industyList =[NSMutableArray array];
     dataListAll = [NSMutableArray array];
     self.navigationItem.title = @"个人信息";
     _placeHolderArr = @[@"请确保填写的均为本人真实信息",@"单位名称",@"单位电话",@"行业",@"单位所在地",@"单位详址"];
@@ -152,18 +152,47 @@
 }
 - (void)getDataDic:(void(^)())finish
 {
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getDicCode_url] parameters:@{@"dict_type_":@"INDUSTRY_"} finished:^(EnumServerStatus status, id object) {
-        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-            _dataDicModel = [DataDicParse yy_modelWithJSON:object];
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getDicCode_url] parameters:@{@"dict_type_":@"INDUSTRY_"} finished:^(EnumServerStatus status, id object) {
+//        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
+//            _dataDicModel = [DataDicParse yy_modelWithJSON:object];
+//            if (finish) {
+//                finish();
+//            }
+//        } else {
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//
+//    }];
+    
+    if (_industyList.count != 0 && _industyList != nil) {
+        if (finish) {
+            finish();
+            return;
+        }
+    }
+    
+    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
+    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            [_industyList removeAllObjects];
+            NSArray * tempArr = (NSArray *)baseRM.data;
+            for (NSDictionary * dic in tempArr) {
+                DataDicParse * dataParse = [[DataDicParse alloc]initWithDictionary:dic error:nil];
+                [_industyList addObject:dataParse];
+            }
             if (finish) {
                 finish();
             }
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    [userDataVM getCommonDictCodeListTypeStr:@"INDUSTRY_"];
+    
 }
 - (void)getUserInfo:(void(^)(Custom_BaseInfo *custom_baseInfo))finish
 {
@@ -243,29 +272,14 @@
     //行业
     if (_careerInfo.result.industry) {
         NSInteger tagflag = [_careerInfo.result.industry integerValue];
-        if (_dataDicModel) {
-            [_dataDicModel.result enumerateObjectsUsingBlock:^(DataDicResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if (tagflag == obj.code_.integerValue) {
-                    [dataListAll replaceObjectAtIndex:2 withObject:obj.desc_];
-                    [_tableView reloadData];
-                }
-            }];
-        } else {
             [self getDataDic:^{
-                [_dataDicModel.result enumerateObjectsUsingBlock:^(DataDicResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [_industyList enumerateObjectsUsingBlock:^(DataDicParse * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     if (tagflag == obj.code_.integerValue) {
                         [dataListAll replaceObjectAtIndex:2 withObject:obj.desc_];
                         [_tableView reloadData];
                     }
                 }];
             }];
-        }
-        
-//        for (int i = 1; i< 11; i++) {
-//            if (i == tagflag) {
-//                [dataListAll replaceObjectAtIndex:2 withObject:_professionArray[i-1]];
-//            }
-//        }
     }
     if (_careerInfo.result.cityName && _careerInfo.result.provinceName && _careerInfo.result.countryName){
         NSString  *addree = @"";
@@ -305,23 +319,15 @@
     
     NSString *telString =[NSString stringWithFormat:@"%@-%@",dataListAll.lastObject,dataListAll[1]];
     __block NSString *profefssiontag = @"";
-    if (_dataDicModel) {
-        [_dataDicModel.result enumerateObjectsUsingBlock:^(DataDicResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+
+    [self getDataDic:^{
+        [_industyList enumerateObjectsUsingBlock:^(DataDicParse * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([dataListAll[2] isEqualToString:obj.desc_]) {
                 profefssiontag = obj.code_;
             }
         }];
-    } else {
-        [self getDataDic:^{
-            [_dataDicModel.result enumerateObjectsUsingBlock:^(DataDicResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([dataListAll[2] isEqualToString:obj.desc_]) {
-                    profefssiontag = obj.code_;
-                }
-            }];
-        }];
-    }
+    }];
     
-
     NSString *cityDetail = [dataListAll[4] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *companyString  = [dataListAll[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
     return @{@"organization_name_":companyString,
@@ -521,13 +527,9 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 2) {
-            if (_dataDicModel) {
+            [self getDataDic:^{
                 [self createPickViewShowWithTag:202];
-            } else {
-                [self getDataDic:^{
-                    [self createPickViewShowWithTag:202];
-                }];
-            }
+            }];
         }
         if (indexPath.row == 3) {
             if (_pickerArray.count != 34) {
@@ -579,7 +581,8 @@
         [self PostGetCityCode:loString];
     }else {
         if ([dataListAll[2] isEqualToString:@""]) {
-            [dataListAll replaceObjectAtIndex:2 withObject:_dataDicModel.result.firstObject.desc_];
+            DataDicParse * dataParse = _industyList.firstObject;
+            [dataListAll replaceObjectAtIndex:2 withObject:dataParse.desc_];
         }
         [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
     }
@@ -719,7 +722,7 @@
 {
     if (_pickerTag == 202)
     {
-        return _dataDicModel.result.count;
+        return _industyList.count;
     }else {
         if (component == FirstComponent) {
             return [_pickerArray count];
@@ -740,7 +743,8 @@
 {
     if (_pickerTag == 202)
     {
-        return _dataDicModel.result[row].desc_;
+        DataDicParse * dataParse = _industyList[row];
+        return dataParse.desc_;
     }else{
         
         if (component==FirstComponent) {
@@ -765,7 +769,8 @@
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (_pickerTag == 202) {
-        [dataListAll replaceObjectAtIndex:2 withObject:_dataDicModel.result[row].desc_];
+        DataDicParse * dataParse = _industyList[row];
+        [dataListAll replaceObjectAtIndex:2 withObject:dataParse.desc_];
     }else{
         if (component == 0) {
             //第一个省的所有区

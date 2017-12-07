@@ -98,18 +98,6 @@ NSString * const     _userSureRefuseLoanAction_url  =   @"appLoanAppLicant/userS
 //提款
 NSString * const     _userLoan_url                  =   @"appLoanAppLicant/userLoan";
 
-//查询用户还款的额(一次结清)
-NSString * const     _AllUserShouldAlsoAmount_url   =   @"repay/getSettleRepayAmount.jhtml";
-
-//用户还款(一次结清)
-NSString * const     _AlluserRepayment_url          =    @"repay/settleRepay.jhtml";
-
-//查询用户周还款额(周)
-NSString * const     _WeekUserShouldAlsoAmount_url  =   @"repay/getCommonRepayAmount.jhtml";
-
-//用户还款(按周)
-NSString * const     _WeekUserRepayment_url         =   @"repay/commonRepay.jhtml";
-
 //上传照片
 NSString * const     _updateAvatar_url              =   @"customer/saveAuthIdentify.jhtml";
 
@@ -147,30 +135,17 @@ NSString * const    _checkMobilePhoneAuth_url       =   @"customer/checkMobilePh
 //手机认证信息保存
 NSString * const    _authMobilePhone_url            =   @"customer/authMobilePhone.jhtml";
 
-//提款
-NSString * const     _drawApply_url                 =   @"draw/drawApply.jhtml";
-
 //提款获取第一个还款日
 NSString * const     _getFristRepaymentDate         =   @"appLoanAppLicant/getFristRepaymentDate";
 
 //获取手机运营商
 NSString * const     _getMobileOpera_url            =   @"getCarrierNameByMobile/getCarrierNameByMobile.jhtml";
 
-
-//客户基本信息保存接口
-NSString * const     _saveCustomerBase_url          =   @"customerAuth/saveCustomerBaseInfo.jhtml";
-
-//获取省市区全部数据接口
-NSString * const     _getAllRegionList_url          =    @"getRegionList/getAllRegionByOrderList.jhtml";
-
 //客户职业信息保存接口
 NSString * const     _saveCustomerCarrer_jhtml      =   @"customer/saveCustomerCarrer.jhtml";
 
 //进件接口
 NSString * const     _createApplication_jhtml       =   @"applicant/createApplication.jhtml";
-
-//审批金额查询接口
-NSString * const     _approvalAmount_jhtml          =   @"caseInfo/approvalAmount.jhtml";
 
 //产品列表获取接口
 NSString * const     _getProductList_jhtml          =   @"getProductList/getProductList.jhtml";
@@ -184,17 +159,11 @@ NSString * const     _saveUserContacts_jhtml        =   @"userContact/saveUserCo
 //登陆更新经纬度
 NSString * const     _updateLoginLatitude_url       =   @"updateLastLongitudeAndLatitude/updateLastLongitudeAndLatitude.jhtml";
 
-//获取省市区编码
-NSString * const     _getRegionCodeByName_jhtml     =  @"getRegionList/getRegionCodeByName.jhtml";
-
 //版本检测
 NSString * const     _checkVersion_jhtml        =   @"appcommon/checkVersion.jhtml";
 
 //二次提款
 NSString * const     _drawApplyAgain_jhtml      =   @"draw/drawApplyAgain.jhtml";
-
-//红包获取
-NSString * const     _getUserRedpacket_url      =   @"userWs/getUserAvailabelRedpacketAndCouponsList.jhtml";
 
 //申请件状态更新
 NSString * const     _caseStatusUpdateApi_url   =   @"increase/caseStatusUpdateApi.jhtml";
@@ -298,9 +267,6 @@ NSString * const    _customerAuthInfo_url       =    @"customerAuth/getCustomerA
 //联系人信息上传
 NSString * const    _customerContact_url        =    @"customerAuth/saveCustomerContactInfo.jhtml";
 
-//用户身份证图片上传
-NSString * const    _saveIDInfo_url             =    @"customerAuth/saveCustomerIDInfo.jhtml";
-
 //聚信力TOKEN获取
 NSString * const    _JXLGetToken_url            =    @"https://www.juxinli.com/orgApi/rest/v2/applications/chinazyjr";
 
@@ -313,26 +279,17 @@ NSString * const    _detectInfo_url             =    @"customerAuth/saveCustomer
 //推荐码规则
 NSString * const    _GetRecomfrInfo_url         =    @"ProductProtocol/GetRecomfrInfoApi.jhtml";
 
-//费率查询
-NSString * const    _fatchRate_url              =    @"product/getProductInfo.jhtml";
-
 //Banner广告获取
 NSString * const    _topBanner_url              =    @"event/topBanner.jhtml";
 
 //常见问题
 NSString * const    _question_url               =    @"more/question.html";
 
-//数据字典获取
-NSString * const    _getDicCode_url             =    @"getDictCode/getDictCodeList.jhtml";
-
 //手机认证
 NSString * const    _mobileAuthentication_url    =    @"case/case_main_phone.html";
 
 //审核被拒，去看看
 NSString * const    _selectPlatform_url    =    @"case/select_platform.html";
-
-//首页产品列表路径
-NSString * const    _getLimitProductlist_url    =    @"product/getLimitProductlistApi.jhtml";
 
 //芝麻信用授权查询
 NSString * const    _findZhimaCredit_url    =    @"zmxy/findZhimaCreditAuthStatus.jhtml";
@@ -478,6 +435,22 @@ NSString * const     _getCustomerBase_url           =   @"apigw/client/membershi
 //客户职业信息获取接口
 NSString * const     _getCustomerCarrer_jhtml       =   @"apigw/client/membership/customer/getCustomerCarrer";
 
+//用户身份证图片上传
+NSString * const    _saveIDInfo_url             =    @"apigw/client/membership/customerAuth/saveCustomerIDInfo";
+
+//客户基本信息保存接口
+NSString * const     _saveCustomerBase_url          =   @"apigw/client/membership/customerAuth/saveCustomerBaseInfo";
+
+//数据字典获取
+NSString * const    _getDicCode_url             =    @"apigw/client/dict/getDictCodeList";
+
+//获取省市区编码
+NSString * const     _getRegionCodeByName_jhtml     =  @"apigw/client/region/getRegionCodeByName";
+
+//获取省市区全部数据接口
+NSString * const     _getAllRegionList_url          =    @"apigw/client/region/getAllRegionByOrderList";
+
+
 #pragma mark - 合规接口
 
 //用户开户接口
@@ -537,7 +510,6 @@ NSString * const    _getBidStatus_url    =    @"hg/getBidStatus";
 NSString * const    _saveLoanCase_url    =    @"hg/saveLoanCase.jhtml";
 //首借免息
 NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
-
 //老客周末活动判断是否弹框刮奖
 NSString *const     _getDrawLottery_url     =    @"apigw/client/market/getDrawLottery";
 //协议

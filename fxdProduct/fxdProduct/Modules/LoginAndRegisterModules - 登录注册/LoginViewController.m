@@ -189,17 +189,18 @@
 
 #pragma mark 获取验证码
 -(void)snsCodeCountdownBtnClicMoblieNumber:(NSString *)number{
-    
     SMSViewModel *smsViewModel = [[SMSViewModel alloc]init];
     [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _codeParse = returnValue;
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-        DLog(@"---%@",_codeParse.msg);
+        BaseResultModel * baseM = returnValue;
+        if ([baseM.errCode isEqualToString:@"0"]) {
+                 
+         }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseM.friendErrMsg];
+        }
     } WithFaileBlock:^{
         
     }];
     [smsViewModel fatchRequestSMSParamPhoneNumber:number verifyCodeType:LOGIN_CODE];
-    
 }
 
 #pragma mark 忘记密码

@@ -10,14 +10,12 @@
 
 @implementation CustomerIDInfo
 
-+ (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"result":[CustomerIDInfoResult class]};
-}
+
 
 @end
 
 
-@implementation CustomerIDInfoResult
+@implementation CustomerIDInfoParam
 
 
 

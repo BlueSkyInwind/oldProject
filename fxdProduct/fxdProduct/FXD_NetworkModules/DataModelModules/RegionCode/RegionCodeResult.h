@@ -7,16 +7,11 @@
 
 #import <Foundation/Foundation.h>
 
+@interface RegionCodeResult : JSONModel
 
+@property (nonatomic, strong)NSString<Optional> *provinceCode;
+@property (nonatomic, strong)NSString<Optional>  *cityCode;
+@property (nonatomic, strong)NSString<Optional> *districtCode;
 
-@interface RegionCodeResult : NSObject <NSCoding, NSCopying>
-
-@property (nonatomic, strong) NSString *provinceCode;
-@property (nonatomic, strong) NSString *cityCode;
-@property (nonatomic, strong) NSString *districtCode;
-
-+ (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
-- (instancetype)initWithDictionary:(NSDictionary *)dict;
-- (NSDictionary *)dictionaryRepresentation;
 
 @end

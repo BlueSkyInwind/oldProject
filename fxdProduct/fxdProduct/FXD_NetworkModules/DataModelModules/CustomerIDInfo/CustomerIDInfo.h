@@ -7,25 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
-@class CustomerIDInfoResult;
 
-@interface CustomerIDInfo : NSObject
+@interface CustomerIDInfo : JSONModel
 
-@property (nonatomic , copy) NSString  *msg;
+@property (nonatomic , strong) NSString<Optional>  *customer_name_;
 
-@property (nonatomic , copy) NSString  *flag;
+@property (nonatomic , strong) NSString<Optional>   *editable_field_;
 
-@property (nonatomic , strong)CustomerIDInfoResult *result;
+@property (nonatomic , strong) NSString<Optional>   *id_code_;
+
+@end
+
+@interface CustomerIDInfoParam : JSONModel
+
+@property (nonatomic , copy) NSString<Optional>   *idCardSelf;
+
+@property (nonatomic , copy) NSString<Optional>   *records;
+
+@property (nonatomic , copy) NSString<Optional>   *side;
 
 @end
 
-@interface CustomerIDInfoResult : NSObject
 
-@property (nonatomic , copy) NSString  *customer_name_;
 
-@property (nonatomic , copy) NSString  *editable_field_;
-
-@property (nonatomic , copy) NSString  *id_code_;
-
-@end
 

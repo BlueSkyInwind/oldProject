@@ -539,53 +539,6 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
     return paramDic;
 }
 
-#pragma mark -> 银行卡保存接口
--(void)PostBankCardCheck
-{
-    //    [_sureBtn setEnabled:YES];
-    NSString *bankNo =[dataListAll3[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    NSDictionary *paramDic = @{
-                               @"card_id_":@"",
-                               @"card_bank_":_bankCodeNUm,
-                               @"card_type_":@"2",
-                               @"card_no_":bankNo,
-                               @"reques_type_":@"2",
-                               @"bank_reserve_phone_":dataListAll3[2]
-                               };
-    //银行卡四要素验证
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_BankNumCheck_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
-                [self PostSubmitUrl];
-                //                [_sureBtn setEnabled:YES];
-            } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-            }
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
-#pragma mark ->进件信息
--(void)PostSubmitUrl
-{
-    //提款
-    NSDictionary *paramDic = [self getSubmitInfo];
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_drawApply_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
-                LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
-                [self.navigationController pushViewController:loanVC animated:YES];
-            } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-            }
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {

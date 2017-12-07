@@ -9,6 +9,8 @@
 #import "UserDataViewModel.h"
 #import "FaceIDLiveModel.h"
 #import "UserCardResult.h"
+#import "RegionCodeParam.h"
+
 @implementation UserDataViewModel
 
 -(void)obtainCustomerAuthInfoProgress:(NSString *)product_id_{
@@ -193,12 +195,85 @@
     }];
 }
 
-
 -(void)UserDataCertificationResult{
 
     [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserDataCertificationResult_url] isNeedNetStatus:YES parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+#pragma  mark - 公共接口
+/**
+ 获取列表数据的公共接口
+
+ @param str 数据类型
+ */
+-(void)getCommonDictCodeListTypeStr:(NSString *)str{
+    
+    NSDictionary * paramDic = @{@"dict_type_":str};
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_getDicCode_url] isNeedNetStatus:YES parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseVM  = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseVM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
+/**
+ 获取对应城市代码
+
+ @param areaNamestr 城市名
+ */
+-(void)getRegionCodeByAreaName:(NSString *)areaNamestr{
+    
+    //获取省市区代码
+    NSArray *cityArray = [areaNamestr componentsSeparatedByString:@"/"];
+    NSString *city0 = @"";
+    NSString *city1 = @"";
+    NSString *city2 = @"";
+    if (cityArray.count > 2) {
+        city0 = cityArray[0];
+        city1 = cityArray[1];
+        city2 = cityArray[2];
+    }
+    RegionCodeParam * regionCodeP = [[RegionCodeParam alloc]init];
+    regionCodeP.provinceName =city0;
+    regionCodeP.cityName = city1;
+    regionCodeP.districtName = city2;
+
+    NSDictionary * paramDic = [regionCodeP toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]  GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_getRegionCodeByName_jhtml] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseVM  = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseVM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
+/**
+ 获取所有省市区
+ */
+-(void)getAllRegionList{
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]  GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_getAllRegionList_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseVM  = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseVM);
         }
     } failure:^(EnumServerStatus status, id object) {
         if (self.faileBlock) {

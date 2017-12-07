@@ -12,7 +12,6 @@
 #import "DES3Util.h"
 #import "GetCustomerBaseViewModel.h"
 #import "DataWriteAndRead.h"
-#import "CustomerBaseInfoBaseClass.h"
 #import "JPUSHService.h"
 @implementation LoginViewModel
 /**
@@ -128,12 +127,12 @@
 {
     GetCustomerBaseViewModel *customBaseViewModel = [[GetCustomerBaseViewModel alloc] init];
     [customBaseViewModel setBlockWithReturnBlock:^(id returnValue) {
-      CustomerBaseInfoBaseClass  * customerBase = returnValue;
-        if ([customerBase.flag isEqualToString:@"0000"]) {
-            [DataWriteAndRead writeDataWithkey:UserInfomation value:customerBase];
+      BaseResultModel  * baseResultM = returnValue;
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            UserDataInformationModel * userDataInfoM = [[UserDataInformationModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            [DataWriteAndRead writeDataWithkey:UserInfomation value:userDataInfoM];
         }
     } WithFaileBlock:^{
-        
     }];
     [customBaseViewModel fatchCustomBaseInfo:nil];
 }

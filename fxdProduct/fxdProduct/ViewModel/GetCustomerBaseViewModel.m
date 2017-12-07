@@ -14,12 +14,7 @@
 
 - (void)fatchCustomBaseInfo:(NSDictionary *)paramDic
 {
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getCustomerBase_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//        Custom_BaseInfo *returnModel = [Custom_BaseInfo modelObjectWithDictionary:object];
-//        self.returnBlock(returnModel);
-//    } failure:^(EnumServerStatus status, id object) {
-//        [self faileBlock];
-//    }];
+
     [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_getCustomerBase_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             BaseResultModel * baseVM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
