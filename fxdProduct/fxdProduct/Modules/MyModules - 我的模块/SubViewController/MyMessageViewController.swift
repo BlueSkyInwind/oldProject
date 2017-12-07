@@ -86,10 +86,20 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     @objc func footerLoad(){
        
         let offset = Int((self.messageModel?.offset)!)
-        
         self.page = offset! + 1
-        getData()
-        
+        var allPage = Int((self.messageModel?.pageCount)!)! / 15
+        let all = Int((self.messageModel?.pageCount)!)! % 15
+        if all > 0 {
+            allPage = allPage + 1
+        }
+        if allPage == self.page! || allPage < self.page! {
+            
+            self.tableView?.mj_footer.endRefreshing()
+            
+        }else{
+            
+            getData()
+        }
     }
 
     func getData(){
@@ -167,8 +177,8 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         messageCell.timeLabel?.text = items[indexPath.row - 1].createDate
         messageCell.contentLabel?.text = items[indexPath.row - 1].msgText
         messageCell.leftImageView?.isHidden = false
-
         messageCell.titleLabel?.textColor = TITLE_COLOR
+        
         if items[indexPath.row - 1].isRead == "2" {
             messageCell.leftImageView?.isHidden = true
             messageCell.titleLabel?.textColor = QUTOA_COLOR;
@@ -180,8 +190,9 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let webView = FXDWebViewController()
-        webView.urlStr = _H5_url+_aboutus_url;
+        webView.urlStr = (messageModel?.requestUrl)! + items[indexPath.row - 1].id_
         self.navigationController?.pushViewController(webView, animated: true)
+        
     }
     
 
