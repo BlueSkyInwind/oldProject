@@ -227,11 +227,6 @@
 //            break;
         case 0:
         {
-            
-//            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-//            [self.navigationController pushViewController:myMessageVC animated:true];
-//            UserDataEvaluationVCModules * checkVC = [[UserDataEvaluationVCModules  alloc]init];
-//            [self.navigationController pushViewController:checkVC animated:true];
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }
@@ -251,7 +246,6 @@
         
         case 3:
         {
-            
             MoreViewController *ticket=[[MoreViewController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
         }
