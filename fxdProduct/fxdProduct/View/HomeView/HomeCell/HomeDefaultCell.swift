@@ -328,7 +328,7 @@ extension HomeDefaultCell{
         titleLabel.textColor = UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0)
         refuseBgImage?.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo((refuseBgImage?.snp.top)!).offset(43)
+            make.top.equalTo((refuseBgImage?.snp.top)!).offset(3)
             make.left.equalTo((refuseBgImage?.snp.left)!).offset(25)
             make.right.equalTo((refuseBgImage?.snp.right)!).offset(0)
             make.height.equalTo(20)
@@ -453,7 +453,7 @@ extension HomeDefaultCell{
         titleLabel.textAlignment = .center
         otherPlatformsBgView?.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo((otherPlatformsBgView?.snp.top)!).offset(15)
+            make.top.equalTo((otherPlatformsBgView?.snp.top)!).offset(3)
             make.left.equalTo((otherPlatformsBgView?.snp.left)!).offset(0)
             make.right.equalTo((otherPlatformsBgView?.snp.right)!).offset(0)
             make.height.equalTo(13)
@@ -529,7 +529,7 @@ extension HomeDefaultCell{
         otherPlatformsBgView?.addSubview(moreBtn)
         moreBtn.snp.makeConstraints { (make) in
 
-            make.bottom.equalTo(bgView.snp.bottom).offset(20)
+            make.bottom.equalTo(bgView.snp.bottom).offset(23)
             make.centerX.equalTo((otherPlatformsBgView?.snp.centerX)!)
             make.height.equalTo(20)
         }
