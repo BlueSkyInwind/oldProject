@@ -36,6 +36,8 @@
 #import "UserDataViewModel.h"
 #import "MessageViewModel.h"
 #import "AountStationLetterMsgModel.h"
+#import "MyViewController.h"
+#import "FXDBaseTabBarVCModule.h"
 @interface HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
 {
    
@@ -54,11 +56,12 @@
     double _longitude;
 
     ApplicationStatus applicationStatus;
-    AountStationLetterMsgModel *model;
 }
 
 @property (nonatomic,strong) LoadFailureView * loadFailView;
 @property (nonatomic,strong) HomeChoosePopView * popChooseView;
+@property (nonatomic,strong) UIView *bgView;
+@property (nonatomic,strong) UILabel *messageNumLabel;
 
 @end
 
@@ -82,6 +85,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [self getMessageNumber];
+    [self changeTuBiao];
     [UserDefaulInfo getUserInfoData];
     
     if ([FXD_Utility sharedUtility].loginFlage) {
@@ -92,7 +98,14 @@
     }
     [self LoadHomeView];
     
-    [self getMessageNumber];
+    
+}
+
+-(void)changeTuBiao{
+    
+    NSNotification *notification =[NSNotification notificationWithName:@"InfoNotification" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
 }
 
 /**
@@ -167,16 +180,17 @@
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 23, 18)];
     [btn setImage:[UIImage imageNamed:@"homeMessage"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
-//    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(16, -8, 13, 13)];
-//    bgView.backgroundColor = [UIColor redColor];
-//    bgView.layer.cornerRadius = 6.5;
-//    [btn addSubview:bgView];
-//
-//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(2, 0, 10, 12)];
-//    label.text = @"3";
-//    label.textColor = [UIColor whiteColor];
-//    label.font = [UIFont systemFontOfSize:12];
-//    [bgView addSubview:label];
+    _bgView = [[UIView alloc]initWithFrame:CGRectMake(16, -6, 13, 13)];
+    _bgView.backgroundColor = [UIColor redColor];
+    _bgView.layer.cornerRadius = 6.5;
+    _bgView.hidden = true;
+    [btn addSubview:_bgView];
+
+    _messageNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(2, 0, 10, 13)];
+//    _messageNumLabel.text = @"3";
+    _messageNumLabel.textColor = [UIColor whiteColor];
+    _messageNumLabel.font = [UIFont systemFontOfSize:8];
+    [_bgView addSubview:_messageNumLabel];
     
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:btn];
 //    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRMessage)];
@@ -205,8 +219,20 @@
         
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
-            model = [[AountStationLetterMsgModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+             AountStationLetterMsgModel *model = [[AountStationLetterMsgModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            if ([model.isDisplay isEqualToString:@"1"]) {
+                _bgView.hidden = false;
+                _messageNumLabel.text = model.countNum;
+                if (model.countNum.integerValue > 9) {
+                    _messageNumLabel.font = [UIFont systemFontOfSize:8];
+                }else{
+                    _messageNumLabel.font = [UIFont systemFontOfSize:12];
+                }
             
+            }else{
+                _bgView.hidden = true;
+            }
+        
         }else{
             
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
@@ -1064,5 +1090,10 @@
     controller.productId = productId;
     controller.dataArray = dataArray;
     [self.navigationController pushViewController:controller animated:false];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:@"" name:nil object:self];
+    
 }
 @end

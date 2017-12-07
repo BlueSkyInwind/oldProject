@@ -86,7 +86,7 @@
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             model = [[AountStationLetterMsgModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            
+            [self.MyViewTable reloadData];
         }else{
            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
@@ -206,8 +206,21 @@
         bCell.lineView.hidden=NO;
     }
     if (indexPath.row == 0) {
-        bCell.messageLabel.hidden = false;
-        bCell.messageImage.hidden = false;
+        if ([model.isDisplay isEqualToString:@"1"]) {
+            bCell.messageLabel.text = model.countNum;
+            bCell.messageLabel.hidden = false;
+            bCell.messageImage.hidden = false;
+            if (model.countNum.integerValue > 9) {
+                bCell.messageLabel.font = [UIFont systemFontOfSize:8];
+            }else{
+                bCell.messageLabel.font = [UIFont systemFontOfSize:12];
+            }
+        }else{
+            
+            bCell.messageLabel.hidden = true;
+            bCell.messageImage.hidden = true;
+        }
+        
     }else{
         bCell.messageLabel.hidden = true;
         bCell.messageImage.hidden = true;

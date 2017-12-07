@@ -188,8 +188,10 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         messageCell.contentLabel?.text = items[indexPath.row - 1].msgText
         messageCell.leftImageView?.isHidden = false
 
-        if items[indexPath.row - 1].isRead == "1" {
+        messageCell.titleLabel?.textColor = TITLE_COLOR
+        if items[indexPath.row - 1].isRead == "2" {
             messageCell.leftImageView?.isHidden = true
+            messageCell.titleLabel?.textColor = QUTOA_COLOR;
         }
         
         return messageCell!
