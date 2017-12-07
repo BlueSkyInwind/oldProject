@@ -37,10 +37,12 @@
         case ADDCARD_CODE:
             model.flag = CODE_ADDCARD;
             break;
+        case TRADEPASSWORD_CODE:
+            model.flag = CODE_TRADEPASSWORD;
+            break;
         default:
             break;
     }
-    
     NSDictionary *paramDic = [model toDictionary];
     [self postVerifyCode:paramDic urlStr:_getCode_url];
 }

@@ -1,7 +1,5 @@
 
 
-
-
  #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0
 
@@ -26,7 +24,6 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
 NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
 NSString * const _main_new_url  =  @"http://h5.test.fxds/";
-//NSString * const _main_new_url  =  @"http:/ /h5.dev.fxds/";
 NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
 NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
 NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
@@ -42,14 +39,14 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 //NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //http://192.168.6.134:9191/fxd-esb/
-//张强本地
-//NSString * const _main_url  =   @"http://192.168.13.173:8005/fxd-esb/esb/";
-//NSString * const _ValidESB_url  =   @"http://192.168.13.173:8005/fxd-esb/";
-//NSString * const _main_new_url  =  @"http://192.168.13.173:8005/";
-//NSString * const _H5_url    =   @"http://192.168.13.173:8005/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://192.168.13.173:8005/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.13.173:8005/p2p/";
-
+//本地
+//NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+//NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
+//NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
+//NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //芝麻信用测试地址
 //NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";
@@ -367,6 +364,7 @@ NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.
 NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
 
 
+
 #pragma mark - 新的api
 
 //社保
@@ -468,6 +466,44 @@ NSString * const    _New_DiscountTicket_url    =    @"apigw/client/operation/cli
 //新优惠券规则
 NSString * const    _DeductibleAmountOfDiscountTicket_url    =    @"apigw/client/order/voucher/money/single";
 
+//验证身份证号
+NSString * const    _verifyIdentityCard_url    =    @"apigw/client/operation/checkIdInfo";
+
+//验证旧交易密码
+NSString * const    _verifyOldPassword_url    =    @"apigw/client/operation/verifyPayPassword";
+
+//验证交易呀验证码
+NSString * const    _verifyTradeSMS_url    =    @"apigw/client/toolbox/sms/checkSMSCodeValid";
+
+//设置新的交易密码
+NSString * const    _saveNewPassword_url    =    @"apigw/client/operation/savePayPassword";
+
+//修改交易密码
+NSString * const    _modificationPassword_url    =    @"apigw/client/operation/updatePayPassword";
+
+//个人中心（优惠券,现金红包,账户余额）
+NSString * const    _PersonalCenterWithdrawCashAPI_url    =    @"apigw/client/operation/withdrawCashAPI/personalCenter";
+
+//现金红包,账户余额（点击列表操作展示提现页）
+NSString * const    _LoadWithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/loadWithdrawCash";
+
+//提现
+NSString * const    _WithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/withdrawCash";
+
+//导流产品埋点接口
+NSString * const    _DiversionProStatics_url    =    @"apigw/client/market/operation/ProductClickStatics";
+
+//校验提现条件
+NSString * const    _CheckWithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/checkWithdrawCash";
+
+//现金红包收提明细
+NSString * const    _WithdrawCashDetail_url    =    @"apigw/client/operation/withdrawCashAPI/queryDetail";
+
+//站内信用户未读信息统计接口
+NSString * const    _CountStationLetterMsg_url    =    @"apigw/client/operation/countStationLetterMsg";
+
+//站内信未读已读列表
+NSString * const    _ShowMsgPreview_url    =    @"apigw/client/operation/showMsgPreview";
 
 #pragma mark - 合规接口
 
@@ -536,14 +572,15 @@ NSString *const     _ProductProtocol_url     =    @"apigw/client/product/getProd
 
 #pragma mark - 对外导流接口
 
-//量子互助
-NSString * const    _liangzihuzhu_url    =    @"http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767";
+//量子互助  http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767
+NSString * const    _liangzihuzhu_url    =    @"apigw/client/quonline/link";
 
 #pragma Mark - 验证码类型
 
 NSString * const  CODE_REG           =    @"MSG_REG_"; ///注册验证码
 NSString * const  CODE_FINDPASS      =    @"MSG_FIND_PASSWORD_"; ///密码找回验证码
 NSString * const  CODE_CHANGEPASS    =    @"MSG_UPDATE_PASSWORD_"; ///修改密码验证码
+NSString * const  CODE_TRADEPASSWORD    =    @"MSG_SET_PAYPASSWORD"; ///设置交易密码
 NSString * const  CODE_CHANGEDEVID   =    @"MSG_CHANGE_DEVICE_"; ///设备号更改
 NSString * const  CODE_LOGIN         =    @"MSG_LOGIN_";   ///登陆验证码
 NSString * const  CODE_BANKMOBILE    =    @"MSG_CHANGE_DEBIT_"; ///银行预留手机验证码(银行卡修改)
@@ -563,6 +600,8 @@ NSString * const PLATFORM = @"1";                   //平台
 NSString * const CHANNEL = @"1";                   //平台
 
 NSString * const Devcode = @"5LIK5RW35LIT6LW";     //开发码
+//bJO03627qY52JEu4
+NSString * const Fxd_pw = @"6d82763bdd2ddcbea6da1ee6a9c636e68dae259127ba1e24";
 
 /**
  *  @author dd

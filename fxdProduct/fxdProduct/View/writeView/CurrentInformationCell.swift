@@ -80,24 +80,24 @@ extension CurrentInformationCell{
         //左边的标题label
         leftLabel = UILabel()
         leftLabel?.textColor = UIColor.black
-        leftLabel?.font = UIFont.systemFont(ofSize: 15)
+        leftLabel?.font = UIFont.yx_systemFont(ofSize: 15)
         self.contentView.addSubview(leftLabel!)
         leftLabel?.snp.makeConstraints({ (make) in
-            make.left.equalTo(self).offset(15)
+            make.left.equalTo(self).offset(22)
             make.centerY.equalTo(self.snp.centerY)
         })
         //右边的内容label
         rightLabel = UILabel()
-        rightLabel?.font = UIFont.systemFont(ofSize: 15)
+        rightLabel?.font = UIFont.yx_systemFont(ofSize: 15)
         rightLabel?.textAlignment = .right
         self.contentView.addSubview(rightLabel!)
         rightLabel?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self).offset(-15)
+            make.right.equalTo(self).offset(-19)
             make.centerY.equalTo(self.snp.centerY)
         })
         //底部的线
         let lineView = UIView()
-        lineView.backgroundColor = UIColor.init(red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1.0)
+        lineView.backgroundColor = LINE_COLOR
         self.contentView.addSubview(lineView)
         lineView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(15)
@@ -122,7 +122,7 @@ extension CurrentInformationCell{
         let renewalLabel = UILabel()
         renewalLabel.text = "了解续期规则"
         renewalLabel.textColor = UI_MAIN_COLOR
-        renewalLabel.font = UIFont.systemFont(ofSize: 16)
+        renewalLabel.font = UIFont.yx_systemFont(ofSize: 16)
         self.contentView.addSubview(renewalLabel)
         renewalLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.snp.centerY)
@@ -133,9 +133,42 @@ extension CurrentInformationCell{
     //MARK: 支付的cell
     fileprivate func paymentCell(){
         
+        leftLabel = UILabel()
+        leftLabel?.textColor = UIColor.black
+        leftLabel?.font = UIFont.yx_systemFont(ofSize: 16)
+        self.contentView.addSubview(leftLabel!)
+        leftLabel?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self).offset(22)
+            make.centerY.equalTo(self.snp.centerY)
+        })
+        
+        let arrowImage = UIImageView()
+        arrowImage.image = UIImage(named:"icon_arrowRight")
+        self.contentView.addSubview(arrowImage)
+        arrowImage.snp.makeConstraints { (make) in
+            make.right.equalTo(self).offset(-13)
+            make.centerY.equalTo(self.snp.centerY)
+        }
+        
+        rightLabel = UILabel()
+        rightLabel?.textColor = UI_MAIN_COLOR
+        rightLabel?.font = UIFont.yx_systemFont(ofSize: 14)
+        self.contentView.addSubview(rightLabel!)
+        rightLabel?.snp.makeConstraints({ (make) in
+            make.right.equalTo(arrowImage.snp.left).offset(-18)
+            make.centerY.equalTo(self.snp.centerY)
+        })
+        
+        let lineView = UIView()
+        lineView.backgroundColor = LINE_COLOR
+        self.contentView.addSubview(lineView)
+        lineView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(0)
+            make.right.equalTo(self)
+            make.height.equalTo(1)
+        }
+        
     }
 }
 
-extension CurrentInformationCell{
-
-}

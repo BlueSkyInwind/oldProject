@@ -24,7 +24,7 @@ import SDWebImage
     //我要借款按钮
     func loanBtnClick()
     //点击产品按钮
-    func productListClick(_ productId: String, isOverLimit: String, amount: String)->Void
+    func productListClick(_ productId: String, isOverLimit: String, amount: String ,Path:String)->Void
     //其他平台按钮
     func otherBtnClick()
     //第三方产品列表按钮
@@ -522,7 +522,8 @@ extension HomeDefaultCell{
         let moreBtn = UIButton()
         moreBtn.setTitle("更多", for: .normal)
         moreBtn.titleLabel?.textAlignment = .center
-        moreBtn.setTitleColor(UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
+    moreBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
+//        moreBtn.setTitleColor(UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
         moreBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         moreBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
         otherPlatformsBgView?.addSubview(moreBtn)
@@ -536,10 +537,17 @@ extension HomeDefaultCell{
         if UI_IS_IPONE5{
             
             moreBtn.snp.updateConstraints({ (make) in
-                make.bottom.equalTo(bgView.snp.bottom).offset(25)
+                make.bottom.equalTo(bgView.snp.bottom).offset(-55)
             })
         }
-        
+    
+    
+    if UI_IS_IPONE6P {
+        moreBtn.snp.updateConstraints({ (make) in
+            
+            make.bottom.equalTo(bgView.snp.bottom).offset(45)
+        })
+    }
     }
     
     //进件带提款
@@ -576,8 +584,6 @@ extension HomeDefaultCell{
             make.right.equalTo(self).offset(-20)
             make.bottom.equalTo(self).offset(0)
         }
-        
-        
         
         var i = 0
         if homeProductData.data.warnText != "" && homeProductData.data.warnText != nil {
@@ -739,7 +745,6 @@ extension HomeDefaultCell{
                     })
                     
                     contentView.snp.updateConstraints({ (make) in
-                        
                         make.bottom.equalTo((drawingBgImage?.snp.bottom)!).offset(-70)
                     })
                 }
@@ -1256,6 +1261,7 @@ extension HomeDefaultCell{
         var productId = ""
         var isOverLimit = ""
         var amount = ""
+        var path = ""
         let tag = tapGes.view?.tag
         //101：产品列表第一个产品
         //102：产品列表第二个产品
@@ -1280,14 +1286,14 @@ extension HomeDefaultCell{
             isOverLimit = homeProductData.data.productList[2].isOverLimit
             amount = homeProductData.data.productList[2].amount
         case 104:
-            productId = homeProductData.data.thirdProductList[0].extAttr.path_
-
+            path = homeProductData.data.thirdProductList[0].extAttr.path_
+            productId = homeProductData.data.thirdProductList[0].id_
         case 105:
-            productId = homeProductData.data.thirdProductList[1].extAttr.path_
-
+            path = homeProductData.data.thirdProductList[1].extAttr.path_
+            productId = homeProductData.data.thirdProductList[1].id_
         case 106:
-            productId = homeProductData.data.thirdProductList[2].extAttr.path_
-
+            path = homeProductData.data.thirdProductList[2].extAttr.path_
+            productId = homeProductData.data.thirdProductList[2].id_
         default:
             break
         }
@@ -1300,7 +1306,7 @@ extension HomeDefaultCell{
         }
         if delegate != nil {
         
-            delegate?.productListClick(productId ,isOverLimit: isOverLimit ,amount: amount)
+            delegate?.productListClick(productId ,isOverLimit: isOverLimit ,amount: amount,Path:path)
             
         }
         print("点击产品列表")

@@ -17,12 +17,22 @@ let LINE_COLOR = UIColor.init(red: 242/255.0, green: 242/255.0, blue: 242/255.0,
 let QUTOA_COLOR = UIColor.init(red: 153/255.0, green: 153/255.0, blue: 153/255.0, alpha: 1)
 
 let TITLE_COLOR = UIColor.init(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
+let RedPacket_COLOR = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1)
+let RedPacketMoney_COLOR = UIColor.init(red: 126/255.0, green: 135/255.0, blue: 142/255.0, alpha: 1)
+let RedPacketBottomBtn_COLOR = UIColor.init(red: 128/255.0, green: 128/255.0, blue: 128/255.0, alpha: 1)
 
+let PayPasswordBackColor_COLOR = UIColor.init(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1)
+
+let MIDDLE_LINE_COLOR = UIColor.init(red: 179/255.0, green: 179/255.0, blue: 179/255.0, alpha: 1)
+
+let TIME_COLOR = UIColor.init(red: 204/255.0, green: 204/255.0, blue: 204/255.0, alpha: 1)
 let APPLICATION_backgroundColor = UIColor.init(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
 let TERM_COLOR = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1)
 
 let  _k_w = UIScreen.main.bounds.size.width
 let  _k_h = UIScreen.main.bounds.size.height
+
+let IDCardNum = "0123456789Xx"
 
 let UI_IS_IPONE = (UIDevice.current.userInterfaceIdiom == .phone)
 let UI_IS_IPONE5 = (UI_IS_IPONE && _k_h == 568.0)
@@ -34,3 +44,11 @@ let UI_IS_IPHONEX = (UI_IS_IPONE && _k_h == 812.0)
 let SalaryLoan = "P001002"   //工薪贷平台
 let RapidLoan = "P001004"   //急速贷平台
 let DeriveRapidLoan = "P001006"   //急速贷衍生（30天）平台
+
+
+func obtainBarHeight_New(vc:UIViewController) -> Int{
+    return Int(UIApplication.shared.statusBarFrame.size.height + (vc.navigationController?.navigationBar.frame.size.height)!)
+}
+
+
+

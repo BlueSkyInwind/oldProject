@@ -563,8 +563,13 @@
                 [weakSelf chooseDiscountAmountCalculate:eductibleAmount discountTicketDetailModel:discountTicketDetailModel];
             }];
         }else{
+            //不使用优惠券
             _selectRedPacketID = nil;
             _useredPacketAmount = 0.0;
+            if (_repayListInfo.result.total_amount > 0) {
+                _finalyRepayAmount = (_repayAmount - _repayListInfo.result.total_amount) > 0  ? (_repayAmount - _repayListInfo.result.total_amount) : 0;
+                _useTotalAmount = (_repayAmount - _repayListInfo.result.total_amount)  > 0 ? _repayListInfo.result.total_amount :  _repayAmount;
+            }
             discountNumStr = @"有可用券";
         }
         [weakSelf.PayDetailTB reloadData];

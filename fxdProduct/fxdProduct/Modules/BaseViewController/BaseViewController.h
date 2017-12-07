@@ -22,4 +22,6 @@
 
 - (void)addBackItemRoot;
 
+- (void)popBack;
+
 @end

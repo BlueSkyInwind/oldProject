@@ -23,7 +23,7 @@ class UserDataEvaluationVCModules: BaseViewController {
             NSAttributedStringKey.font: UIFont.systemFont(ofSize: 19)
             ]}()
         
-        let checkingView = Bundle.main.loadNibNamed("CheckViewIng", owner: nil, options: nil)?.first as? CheckViewIng
+        let checkingView = Bundle.main.loadNibNamed("CheckViewIng", owner: self, options: nil)?.first as? CheckViewIng
         checkingView?.frame = CGRect(x:0, y:0, width:_k_w, height:_k_h-64);
         checkingView?.receiveImmediatelyBtn.addTarget(self, action: #selector(applyImmediatelyBtnClick), for: .touchUpInside)
         self.view.addSubview(checkingView!)
@@ -43,13 +43,24 @@ class UserDataEvaluationVCModules: BaseViewController {
     
     //MARK:量子互助
     @objc func applyImmediatelyBtnClick(){
-    
-        let webView = FXDWebViewController()
-        webView.urlStr = "http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767"
-        self.navigationController?.pushViewController(webView, animated: true)
-   
+        let homeVM = HomeViewModel.init()
+        homeVM.setBlockWithReturn({ (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                let dic = baseResult.data as! NSDictionary
+                if dic["url"] != nil {
+                    let webView = FXDWebViewController()
+                    webView.urlStr = dic["url"]  as! String
+                    self.navigationController?.pushViewController(webView, animated: true)
+                }
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        homeVM.obtainDiversionUrl()
     }
-    
     
     override func loadView() {
         super.loadView()
