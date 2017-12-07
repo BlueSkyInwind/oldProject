@@ -17,6 +17,8 @@
 #import "PersonalCenterModel.h"
 #import "MessageViewModel.h"
 #import "AountStationLetterMsgModel.h"
+#import "UITabBar+badge.h"
+
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate>
 {
     //标题数组
@@ -86,6 +88,11 @@
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             model = [[AountStationLetterMsgModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            if ([model.isDisplay isEqualToString:@"1"]) {
+                [self.tabBarController.tabBar showBadgeOnItemIndex:2];
+            }else{
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
+            }
             [self.MyViewTable reloadData];
         }else{
            
@@ -214,6 +221,9 @@
                 bCell.messageLabel.font = [UIFont systemFontOfSize:8];
             }else{
                 bCell.messageLabel.font = [UIFont systemFontOfSize:12];
+            }
+            if (model.countNum.integerValue > 99) {
+                bCell.messageLabel.text = @"99+";
             }
         }else{
             

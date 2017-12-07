@@ -26,26 +26,25 @@
     [self setTabbarCon];
     self.delegate = self;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"InfoNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"InfoNotification" object:nil];
     
 
 }
 
-- (void)InfoNotificationAction:(NSNotification *)notification{
-    
-    NSLog(@"%@",notification.userInfo);
-    
-    NSLog(@"---接收到通知---");
-    
-//    //将字符串转化成类
-//    Class vc = NSClassFromString(@"MyViewController");
-//    //父类指针指向子类对象
-//    UIViewController *viewController = [[vc alloc]init];
-    
-    UITabBarItem * item = [self.tabBar.items objectAtIndex:2];
-    item.badgeValue = @" ";
-//    item = [self tabBarItemWithName:@"我的" image:@"mine_tab_message_default" selectedImage:@"mine_tab_message_select"];
-}
+//- (void)InfoNotificationAction:(NSNotification *)notification{
+//
+//    NSLog(@"%@",notification.userInfo);
+//
+//    NSLog(@"---接收到通知---");
+//    NSDictionary  *dic = [notification userInfo];
+//    NSString *info = [dic objectForKey:@"isDisplay"];
+////    UITabBarItem * item = [self.tabBar.items objectAtIndex:2];
+////    item.badgeValue = @" ";
+//    [self.tabBarController.tabBar showBadgeOnItemIndex:2];
+//
+////    item.badgeValue = nil;
+//
+//}
 
 - (void)setTabbarCon
 {

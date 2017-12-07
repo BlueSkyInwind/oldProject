@@ -12,7 +12,7 @@
 
 -(void)countStationLetterMsg{
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_CountStationLetterMsg_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_CountStationLetterMsg_url] isNeedNetStatus:false parameters:nil finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {
             self.returnBlock(object);

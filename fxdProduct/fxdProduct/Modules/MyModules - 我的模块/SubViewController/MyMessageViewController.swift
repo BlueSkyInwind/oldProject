@@ -16,7 +16,6 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     var noneView : NonePageView?
     var items:[OperUserMassgeModel] = []
     var messageModel : ShowMsgPreviewModel?
-//    var headView : UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,16 +70,6 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
             self.footerLoad()
 
         })
-        
-//        headView = UIView()
-//        headView?.backgroundColor = UIColor.blue
-//        self.view.addSubview(headView!)
-//        headView?.snp.makeConstraints({ (make) in
-//            make.left.equalTo(self.view).offset(0)
-//            make.right.equalTo(self.view).offset(0)
-//            make.top.equalTo(self.view).offset(64)
-//            make.height.equalTo(15)
-//        })
     }
     
     //MARK: 刷新
@@ -91,10 +80,6 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         self.page = 0
         getData()
 
-//        //重现加载表格数据
-//        self.tableView?.reloadData()
-//        //结束刷新
-//        self.tableView?.mj_header.endRefreshing()
     }
     
     /// 上拉加载
@@ -104,11 +89,6 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         
         self.page = offset! + 1
         getData()
-        
-//        //重现加载表格数据
-//        self.tableView?.reloadData()
-//        //结束刷新
-//        self.tableView?.mj_footer.endRefreshing()
         
     }
 

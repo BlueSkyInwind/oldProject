@@ -38,6 +38,9 @@
 #import "AountStationLetterMsgModel.h"
 #import "MyViewController.h"
 #import "FXDBaseTabBarVCModule.h"
+#import "UITabBar+badge.h"
+
+
 @interface HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
 {
    
@@ -86,8 +89,8 @@
 {
     [super viewDidAppear:animated];
     
-    [self getMessageNumber];
-    [self changeTuBiao];
+//    [self getMessageNumber];
+//    [self changeTuBiao];
     [UserDefaulInfo getUserInfoData];
     
     if ([FXD_Utility sharedUtility].loginFlage) {
@@ -98,20 +101,24 @@
     }
     [self LoadHomeView];
     
-    
 }
 
--(void)changeTuBiao{
-    
-    NSNotification *notification =[NSNotification notificationWithName:@"InfoNotification" object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
-    
-}
+//-(void)changeTuBiao{
+//
+//    [self.tabBarController.tabBar showBadgeOnItemIndex:2];
+////    NSDictionary *dic = [NSDictionary dictionaryWithObject:@"1" forKey:@"isDisplay"];
+////
+////    NSNotification *notification =[NSNotification notificationWithName:@"InfoNotification" object:nil userInfo:dic];
+////    [[NSNotificationCenter defaultCenter] postNotification:notification];
+//
+//}
 
 /**
  根据数据加载视图的状况
  */
 -(void)LoadHomeView{
+    
+    [self getMessageNumber];
     [self getAllTheHomePageData:^(BOOL isSuccess) {
         if (_loadFailView) {
             [_loadFailView removeFromSuperview];
@@ -121,6 +128,8 @@
             [self setUploadFailView];
         }
     }];
+    
+   
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -212,6 +221,7 @@
 /**
  站内信用户未读信息统计接口
  */
+
 -(void)getMessageNumber{
     
     MessageViewModel *messageVM = [[MessageViewModel alloc]init];
@@ -219,7 +229,8 @@
         
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
-             AountStationLetterMsgModel *model = [[AountStationLetterMsgModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            AountStationLetterMsgModel *model = [[AountStationLetterMsgModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+        
             if ([model.isDisplay isEqualToString:@"1"]) {
                 _bgView.hidden = false;
                 _messageNumLabel.text = model.countNum;
@@ -228,14 +239,19 @@
                 }else{
                     _messageNumLabel.font = [UIFont systemFontOfSize:12];
                 }
-            
+                if (model.countNum.integerValue > 99) {
+                    _messageNumLabel.text = @"99+";
+                }
+                [self.tabBarController.tabBar showBadgeOnItemIndex:2];
             }else{
                 _bgView.hidden = true;
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
             }
-        
-        }else{
             
+        }else{
+        
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+    
         }
         
     } WithFaileBlock:^{
@@ -243,6 +259,7 @@
     }];
     [messageVM countStationLetterMsg];
 }
+
 
 #pragma mark 首页navigation点击事件
 
@@ -1092,8 +1109,9 @@
     [self.navigationController pushViewController:controller animated:false];
 }
 
--(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:@"" name:nil object:self];
-    
-}
+//-(void)dealloc{
+//
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//
+//}
 @end
