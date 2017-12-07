@@ -157,7 +157,7 @@
  */
 -(void)accountViewTap{
     
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"敬请期待"];
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"暂未开放，敬请期待"];
 //    [FXD_Utility sharedUtility].operateType = @"2";
 //    CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
 //    [self.navigationController pushViewController:controller animated:true];
