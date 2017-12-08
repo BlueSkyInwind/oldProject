@@ -87,6 +87,8 @@ extension MessageCell{
         leftImageView?.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
             make.centerY.equalTo(self.snp.centerY)
+            make.width.equalTo(28)
+            make.height.equalTo(23)
         }
         
         titleLabel = UILabel()
@@ -98,6 +100,7 @@ extension MessageCell{
             make.left.equalTo((leftImageView?.snp.right)!).offset(13)
             make.top.equalTo(self).offset(15)
             make.height.equalTo(21)
+            make.width.equalTo(230)
         })
         
         contentLabel = UILabel()
@@ -108,8 +111,8 @@ extension MessageCell{
         contentLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo((leftImageView?.snp.right)!).offset(13)
             make.top.equalTo((titleLabel?.snp.bottom)!).offset(3)
+            make.right.equalTo(self).offset(-30)
             make.height.equalTo(20)
-            make.width.equalTo(230)
         })
         
         timeLabel = UILabel()

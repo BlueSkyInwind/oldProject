@@ -16,7 +16,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     var noneView : NonePageView?
     var items:[OperUserMassgeModel] = []
     var messageModel : ShowMsgPreviewModel?
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +25,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         //随机生成一些初始化数据
         configureView()
         createNoneView()
+     
         // Do any additional setup after loading the view.
     }
 
@@ -35,6 +36,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         self.page = 0
         getData(isHeaderFresh: true)
     }
@@ -42,9 +44,13 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     func createNoneView(){
         
         noneView = NonePageView()
+        noneView?.DefaultUI()
         noneView?.backgroundColor = LINE_COLOR
+        noneView?.isHidden = true
         self.view.addSubview(noneView!)
+        
     }
+    
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false
@@ -71,13 +77,20 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         })
 
 
-        //上拉加载相关设置,使用闭包Block
-        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-
-            self.footerLoad()
-
-        })
-        
+//        //上拉加载相关设置,使用闭包Block
+//        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+//
+//            self.footerLoad()
+//
+//        })
+//        tableView?.mj_footer.isAutomaticallyHidden = true
+    
+        // 底部加载
+        let footer = MJRefreshAutoNormalFooter()
+        footer.setRefreshingTarget(self, refreshingAction: #selector(footerLoad))
+        //是否自动加载（默认为true，即表格滑到底部就自动加载）
+        footer.isAutomaticallyRefresh = false
+         self.tableView!.mj_footer = footer
     }
     
     //MARK: 刷新
@@ -93,41 +106,15 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     @objc func footerLoad(){
        
         self.page = (self.page)! + 15
-//        if (self.page)! < Int((self.messageModel?.pageCount)!)! {
-//
-//            getData(isHeaderFresh: false)
-//
-//        }else{
-//            self.tableView?.mj_footer.state = MJRefreshState(rawValue: 4)!
-//            self.tableView?.mj_footer.endRefreshing()
-//
-//        }
         
         if (self.messageModel?.operUserMassge.count)! < 15 {
             self.tableView?.mj_footer.endRefreshingWithNoMoreData()
-//            self.tableView?.mj_footer.state = MJRefreshState(rawValue: 4)!
-//            self.tableView?.mj_footer.endRefreshing()
-            
-            
+
         }else{
-            
+    
             getData(isHeaderFresh: false)
+           
         }
-        
-//        let offset = Int((self.messageModel?.offset)!)
-//        var allPage = Int((self.messageModel?.pageCount)!)! / 15
-//        let all = Int((self.messageModel?.pageCount)!)! % 15
-//        if all > 0 {
-//            allPage = allPage + 1
-//        }
-//        if allPage == self.page! || allPage < self.page! {
-//
-//            self.tableView?.mj_footer.endRefreshing()
-//
-//        }else{
-//
-//            getData(isHeaderFresh: false)
-//        }
     }
 
     func getData(isHeaderFresh : Bool){
@@ -154,11 +141,12 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
                     self?.tableView?.isHidden = false
                     self?.noneView?.isHidden = true
                     self?.tableView?.reloadData()
+                    self?.tableView?.mj_header.endRefreshing()
+                    self?.tableView?.mj_footer.endRefreshing()
                     
                 }else{
                     self?.tableView?.isHidden = true
                     self?.noneView?.isHidden = false
-
                 }
                 
             }else{
@@ -204,7 +192,6 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         
         messageCell.cellType = MessageCellType(cellType: .Default)
         messageCell.selectionStyle = .none
-//        let model = self.messageModel?.operUserMassge[indexPath.row - 1 ] as? OperUserMassgeModel
         messageCell.titleLabel?.text = items[indexPath.row - 1].msgName
         messageCell.timeLabel?.text = items[indexPath.row - 1].createDate
         messageCell.contentLabel?.text = items[indexPath.row - 1].msgText
@@ -212,6 +199,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         messageCell.titleLabel?.textColor = TITLE_COLOR
 
         if items[indexPath.row - 1].isRead == "2" {
+
             messageCell.leftImageView?.isHidden = true
             messageCell.titleLabel?.textColor = QUTOA_COLOR;
         }

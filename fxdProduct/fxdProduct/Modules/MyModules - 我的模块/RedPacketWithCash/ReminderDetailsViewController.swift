@@ -55,7 +55,9 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     func createNoneView(){
         
         noneView = NonePageView()
+        noneView?.ReminderUI()
         noneView?.backgroundColor = LINE_COLOR
+        noneView?.isHidden = true
         self.view.addSubview(noneView!)
     }
 

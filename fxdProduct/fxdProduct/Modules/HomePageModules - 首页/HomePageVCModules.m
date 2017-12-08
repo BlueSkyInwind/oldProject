@@ -177,7 +177,7 @@
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 23, 18)];
     [btn setImage:[UIImage imageNamed:@"homeMessage"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
-    _bgView = [[UIView alloc]initWithFrame:CGRectMake(16, -6, 13, 13)];
+    _bgView = [[UIView alloc]initWithFrame:CGRectMake(16, -4, 13, 13)];
     _bgView.backgroundColor = [UIColor redColor];
     _bgView.layer.cornerRadius = 6.5;
     _bgView.hidden = true;
@@ -220,9 +220,10 @@
         
             if ([model.isDisplay isEqualToString:@"1"]) {
                 _bgView.hidden = false;
-                _messageNumLabel.text = model.countNum;
+//                _messageNumLabel.text = model.countNum;
+                _messageNumLabel.text = @"99+";
                 if (model.countNum.integerValue > 9) {
-                    _messageNumLabel.font = [UIFont systemFontOfSize:8];
+                    _messageNumLabel.font = [UIFont systemFontOfSize:7];
                 }else{
                     _messageNumLabel.font = [UIFont systemFontOfSize:12];
                 }
@@ -267,8 +268,13 @@
  */
 -(void)homeQRMessage{
     
-    MyMessageViewController *myMessageCV = [[MyMessageViewController alloc]init];
-    [self.navigationController pushViewController:myMessageCV animated:true];
+    if ([FXD_Utility sharedUtility].loginFlage) {
+        MyMessageViewController *myMessageCV = [[MyMessageViewController alloc]init];
+        [self.navigationController pushViewController:myMessageCV animated:true];
+    } else {
+        [self presentLoginVC:self];
+    }
+    
 }
 #pragma mark tabView视图
 - (void)setUpTableview
@@ -1096,9 +1102,5 @@
     [self.navigationController pushViewController:controller animated:false];
 }
 
-//-(void)dealloc{
-//
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
-//
-//}
+
 @end
