@@ -7,7 +7,6 @@
 //
 
 #import "GetCareerInfoViewModel.h"
-#import "CustomerCareerBaseClass.h"
 
 @implementation GetCareerInfoViewModel
 

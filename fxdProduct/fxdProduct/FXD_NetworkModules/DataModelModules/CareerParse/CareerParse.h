@@ -7,25 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-@class CareerExt,CareerResult;
 
-@interface CareerParse : NSObject
+@interface CareerParse : JSONModel
 
-@property (nonatomic ,copy) NSString *flag;
-@property (nonatomic ,strong) CareerExt *ext;
-@property (nonatomic ,strong) CareerResult *result;
-@property (nonatomic ,copy) NSString *msg;
+@property (nonatomic ,strong) NSString<Optional> *rulesid;
+@property (nonatomic ,strong) NSString<Optional> *resultcode;
 
 @end
 
-@interface CareerExt :NSObject
-
-@property (nonatomic ,copy) NSString *mobile_phone_;
-
-@end
-
-@interface CareerResult :NSObject
-@property (nonatomic ,copy) NSString *rulesid;
-@property (nonatomic ,copy) NSString *resultcode;
-
-@end

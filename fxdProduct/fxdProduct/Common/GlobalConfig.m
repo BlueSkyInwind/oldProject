@@ -26,7 +26,7 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 //NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
 //NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
 //NSString * const _main_new_url  =  @"http://h5.test.fxds/";
-////NSString * const _main_new_url  =  @"http:/ /h5.dev.fxds/";
+////NSString * const _main_new_url  =  @"http:/ /h5.dev.fxds/apigw/client/";
 //NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
 //NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
 //NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
@@ -34,8 +34,7 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 
 NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
 NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-//NSString * const _main_new_url  =  @"http://h5.test.fxds/";
-NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
+NSString * const _main_new_url  =  @"http://h5.dev.fxds/apigw/client/";
 NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
 NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
 NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
@@ -141,9 +140,6 @@ NSString * const     _getFristRepaymentDate         =   @"appLoanAppLicant/getFr
 //获取手机运营商
 NSString * const     _getMobileOpera_url            =   @"getCarrierNameByMobile/getCarrierNameByMobile.jhtml";
 
-//客户职业信息保存接口
-NSString * const     _saveCustomerCarrer_jhtml      =   @"customer/saveCustomerCarrer.jhtml";
-
 //进件接口
 NSString * const     _createApplication_jhtml       =   @"applicant/createApplication.jhtml";
 
@@ -152,9 +148,6 @@ NSString * const     _getProductList_jhtml          =   @"getProductList/getProd
 
 //人脸识别结果保存
 NSString * const     _saveFaceId_url    =   @"faceid/saveFaceId.jhtml";
-
-//用户通讯录保存接口
-NSString * const     _saveUserContacts_jhtml        =   @"userContact/saveUserContacts.jhtml";
 
 //登陆更新经纬度
 NSString * const     _updateLoginLatitude_url       =   @"updateLastLongitudeAndLatitude/updateLastLongitudeAndLatitude.jhtml";
@@ -264,17 +257,11 @@ NSString * const    _verifyLive_url             =    @"https://api.megvii.com/fa
 //查询用户信息录入进度
 NSString * const    _customerAuthInfo_url       =    @"customerAuth/getCustomerAuthInfoSchedule.jhtml";
 
-//联系人信息上传
-NSString * const    _customerContact_url        =    @"customerAuth/saveCustomerContactInfo.jhtml";
-
 //聚信力TOKEN获取
 NSString * const    _JXLGetToken_url            =    @"https://www.juxinli.com/orgApi/rest/v2/applications/chinazyjr";
 
 //聚信力信息采集
 NSString * const    _messagesReq_url            =    @"https://www.juxinli.com/orgApi/rest/v2/messages/collect/req";
-
-//活体检测信息上传
-NSString * const    _detectInfo_url             =    @"customerAuth/saveCustomerDetectInfo.jhtml";
 
 //推荐码规则
 NSString * const    _GetRecomfrInfo_url         =    @"ProductProtocol/GetRecomfrInfoApi.jhtml";
@@ -304,152 +291,163 @@ NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackA
 #pragma mark - 新的api
 
 //社保
-NSString * const    _shebaoupload_url    =    @"apigw/client/resource/mxsbtask_create";
+NSString * const    _shebaoupload_url    =    @"resource/mxsbtask_create";
 
 //信用卡
-NSString * const    _TheCreditCardupload_url    =    @"apigw/client/resource/mxmailtask_create";
+NSString * const    _TheCreditCardupload_url    =    @"resource/mxmailtask_create";
 
 //高级认证状态查询
-NSString * const    _HighRankingStatus_url    =    @"apigw/client/resource/fundtask";
+NSString * const    _HighRankingStatus_url    =    @"resource/fundtask";
 
 //基础信息状态查询接口
-NSString * const    _UserBasicInformation_url    =    @"apigw/client/user/info/base";
+NSString * const    _UserBasicInformation_url    =    @"user/info/base";
 
 //三方信息状态查询接口
-NSString * const    _UserThirdPartCertification_url    =    @"apigw/client/user/other/info";
+NSString * const    _UserThirdPartCertification_url    =    @"user/other/info";
 
 //三方信息状态查询接口
-NSString * const    _AuthenticationCenterBasicInformation_url    =    @"apigw/client/user/base/complete/info";
+NSString * const    _AuthenticationCenterBasicInformation_url    =    @"user/base/complete/info";
 
 //联系人信息的完成状态
-NSString * const    _UserContactInfo_url    =    @"apigw/client/user/contact/info";
+NSString * const    _UserContactInfo_url    =    @"user/contact/info";
 
 //首页状态查询
-NSString * const    _HomeState_url    =    @"apigw/client/summary";
+NSString * const    _HomeState_url    =    @"summary";
 
 //申请进件
-NSString * const    _createApplication_url    =    @"apigw/client/application/create";
+NSString * const    _createApplication_url    =    @"application/create";
 
 //申请确认页数据
-NSString * const    _ApplicationViewInfo_url    =    @"apigw/client/application/confirm";
+NSString * const    _ApplicationViewInfo_url    =    @"application/confirm";
 
 //提款页数据
-NSString * const    _UserDrawingInfo_url    =    @"apigw/client/application/loan";
+NSString * const    _UserDrawingInfo_url    =    @"application/loan";
 
 //获取当前期的续期信息
-NSString * const    _repayment_url    =    @"apigw/client/repayment/staging/continue/info";
+NSString * const    _repayment_url    =    @"repayment/staging/continue/info";
 
 //银行卡列表信息
-NSString * const    _BankCardList_url    =    @"apigw/client/bank/card/list";
+NSString * const    _BankCardList_url    =    @"bank/card/list";
 
 //放款中 还款中 展期中 状态实时获取
-NSString * const    _ApplicationStatus_url    =    @"apigw/client/application/status";
+NSString * const    _ApplicationStatus_url    =    @"application/status";
 
 //工薪贷根据周期获取费用
-NSString * const    _SalaryProductFee_url    =    @"apigw/client/fee/calc";
+NSString * const    _SalaryProductFee_url    =    @"fee/calc";
 
 //提交续期请求
-NSString * const    _Staging_url    =    @"apigw/client/staging/continue/add";
+NSString * const    _Staging_url    =    @"staging/continue/add";
 
 //待还款界面信息获取
-NSString * const    _Repay_url    =    @"apigw/client/ready/to/repay";
+NSString * const    _Repay_url    =    @"ready/to/repay";
 
 //获取续期规则
-NSString * const    _StagingRule_url    =    @"apigw/client/continue/rule/detail";
+NSString * const    _StagingRule_url    =    @"continue/rule/detail";
 
 //上传用户的registerID
-NSString * const    _registerID_url    =    @"apigw/client/center/jiguang/register";
+NSString * const    _registerID_url    =    @"center/jiguang/register";
 
 //用户资料测评接口
-NSString * const    _UserDataCertification_url    =    @"apigw/client/user/measurement/info";
+NSString * const    _UserDataCertification_url    =    @"user/measurement/info";
 
 //用户资料测评接口
-NSString * const    _Trilateral_url    =    @"apigw/client/repay/third/pay";
+NSString * const    _Trilateral_url    =    @"repay/third/pay";
 
 //得到测评结果
-NSString * const    _UserDataCertificationResult_url    =    @"apigw/client/user/verify/status";
+NSString * const    _UserDataCertificationResult_url    =    @"user/verify/status";
 
 //退出登录删除推送id
-NSString * const    _loginOutDeleteRegisterId_url    =    @"apigw/client/center/jiguang/delete";
+NSString * const    _loginOutDeleteRegisterId_url    =    @"center/jiguang/delete";
 
 //资金平台列表
-NSString * const    _CapitalList_url    =    @"apigw/client/capital/list";
+NSString * const    _CapitalList_url    =    @"capital/list";
 
 //资金平台放款接口
-NSString * const    _CapitalLoan_url    =    @"apigw/client/capital/loan";
+NSString * const    _CapitalLoan_url    =    @"capital/loan";
 
 //联联绑卡回调地址
-NSString * const    _CapitalLoanBack_url    =    @"apigw/client/paidcenter/lianlian/notify";
+NSString * const    _CapitalLoanBack_url    =    @"paidcenter/lianlian/notify";
 
 //联联绑卡返回回调地址
 NSString * const    _ShanLinBack_url    =    @"main.html#shanlinBack";
 
 //app 连连绑卡页面用户放弃操作接口
-NSString * const    _CapitalLoanFail_url    =    @"apigw/client/capital/loan/fail";
+NSString * const    _CapitalLoanFail_url    =    @"capital/loan/fail";
 
 //优惠券接口
-NSString * const    _DiscountTicketList_url    =    @"apigw/client/market/getuserBase";
+NSString * const    _DiscountTicketList_url    =    @"market/getuserBase";
 
 //选择模式列表
-NSString * const    _ChoosePattern_url    =    @"apigw/client/ios/expay";
+NSString * const    _ChoosePattern_url    =    @"ios/expay";
 
 //优惠券规则
 NSString * const    _DiscountTicketRule_url    =    @"protocol/couponInstructions.html";
 
 //新优惠券规则
-NSString * const    _New_DiscountTicket_url    =    @"apigw/client/operation/client/getuse";
+NSString * const    _New_DiscountTicket_url    =    @"operation/client/getuse";
 
 //新优惠券规则
-NSString * const    _DeductibleAmountOfDiscountTicket_url    =    @"apigw/client/order/voucher/money/single";
+NSString * const    _DeductibleAmountOfDiscountTicket_url    =    @"order/voucher/money/single";
 
 //登陆
-NSString * const     _login_url        =    @"apigw/client/membership/login";
+NSString * const     _login_url        =    @"membership/login";
 
 //注册
-NSString * const     _reg_url          =   @"apigw/client/membership/register";
+NSString * const     _reg_url          =   @"membership/register";
 
 //获取验证码    common/sendSMS.jhtml
-NSString * const     _getCode_url                   =   @"apigw/client/toolbox/sms/sendSMS";
+NSString * const     _getCode_url                   =   @"toolbox/sms/sendSMS";
 
 //更改设备号
-NSString * const     _updateDevID_url            =   @"apigw/client/membership/updateLoginEquipment";
+NSString * const     _updateDevID_url            =   @"membership/updateLoginEquipment";
 
 //图形验证码
-NSString * const    _getPicCode_url             =    @"apigw/client/membership/getPicCodeApi";
+NSString * const    _getPicCode_url             =    @"membership/getPicCodeApi";
 
 //注册验证码
-NSString * const    _regCode_url                    =   @"apigw/client/toolbox/sms/sendSMSH5Api";
+NSString * const    _regCode_url                    =   @"toolbox/sms/sendSMSH5Api";
 
 //忘记密码
-NSString * const     _forget_url                    =   @"apigw/client/membership/findPasswordBack";
+NSString * const     _forget_url                    =   @"membership/findPasswordBack";
 
 //更换密码
-NSString * const     _changePassword_url                    =   @"apigw/client/membership/updatePassword";
+NSString * const     _changePassword_url                    =   @"membership/updatePassword";
 
 //退出登陆
-NSString * const     _loginOut_url                  =   @"apigw/client/membership/logout";
+NSString * const     _loginOut_url                  =   @"membership/logout";
 
 //客户所有信息获取接口
-NSString * const     _getCustomerBase_url           =   @"apigw/client/membership/customer/getCustomerBase";
+NSString * const     _getCustomerBase_url           =   @"membership/customer/getCustomerBase";
 
 //客户职业信息获取接口
-NSString * const     _getCustomerCarrer_jhtml       =   @"apigw/client/membership/customer/getCustomerCarrer";
+NSString * const     _getCustomerCarrer_jhtml       =   @"membership/customer/getCustomerCarrer";
 
 //用户身份证图片上传
-NSString * const    _saveIDInfo_url             =    @"apigw/client/membership/customerAuth/saveCustomerIDInfo";
+NSString * const    _saveIDInfo_url             =    @"membership/customerAuth/saveCustomerIDInfo";
 
 //客户基本信息保存接口
-NSString * const     _saveCustomerBase_url          =   @"apigw/client/membership/customerAuth/saveCustomerBaseInfo";
+NSString * const     _saveCustomerBase_url          =   @"membership/customerAuth/saveCustomerBaseInfo";
 
 //数据字典获取
-NSString * const    _getDicCode_url             =    @"apigw/client/dict/getDictCodeList";
+NSString * const    _getDicCode_url             =    @"dict/getDictCodeList";
 
 //获取省市区编码
-NSString * const     _getRegionCodeByName_jhtml     =  @"apigw/client/region/getRegionCodeByName";
+NSString * const     _getRegionCodeByName_jhtml     =  @"region/getRegionCodeByName";
 
 //获取省市区全部数据接口
-NSString * const     _getAllRegionList_url          =    @"apigw/client/region/getAllRegionByOrderList";
+NSString * const     _getAllRegionList_url          =    @"region/getAllRegionByOrderList";
 
+//客户职业信息保存接口
+NSString * const     _saveCustomerCarrer_jhtml      =   @"membership/customer/saveCustomerCarrer";
+
+//联系人信息上传
+NSString * const    _customerContact_url        =    @"membership/customerAuth/saveCustomerContactInfo";
+
+//用户通讯录保存接口
+NSString * const     _saveUserContacts_jhtml        =   @"membership/saveUserContacts";
+
+//活体检测信息上传
+NSString * const    _detectInfo_url             =    @"membership/saveCustomerDetectInfo";
 
 #pragma mark - 合规接口
 
@@ -511,9 +509,9 @@ NSString * const    _saveLoanCase_url    =    @"hg/saveLoanCase.jhtml";
 //首借免息
 NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
 //老客周末活动判断是否弹框刮奖
-NSString *const     _getDrawLottery_url     =    @"apigw/client/market/getDrawLottery";
+NSString *const     _getDrawLottery_url     =    @"market/getDrawLottery";
 //协议
-NSString *const     _ProductProtocol_url     =    @"apigw/client/product/getProductProtocolApi";
+NSString *const     _ProductProtocol_url     =    @"product/getProductProtocolApi";
 
 #pragma mark - 对外导流接口
 

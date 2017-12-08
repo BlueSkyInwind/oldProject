@@ -128,14 +128,28 @@
 
 - (void)uploadLiveInfo:(NSString *)resultJSONStr isSuccess:(void(^)(id object))success
 {
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_detectInfo_url] parameters:@{@"records":resultJSONStr} finished:^(EnumServerStatus status, id object) {
+    
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_detectInfo_url] parameters:@{@"records":resultJSONStr} finished:^(EnumServerStatus status, id object) {
+//        if (self.returnBlock) {
+//            self.returnBlock(object);
+//        }
+//        success(object);
+//    } failure:^(EnumServerStatus status, id object) {
+//
+//    }];
+    
+    NSDictionary * paramDic = @{@"records":resultJSONStr};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_detectInfo_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
-            self.returnBlock(object);
+            BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseResultM);
         }
-        success(object);
     } failure:^(EnumServerStatus status, id object) {
-        
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
     }];
+    
 }
 #pragma  mark - 社保  公积金
 /**

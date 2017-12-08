@@ -14,7 +14,6 @@
 #import "GetCustomerBaseViewModel.h"
 #import "Custom_BaseInfo.h"
 #import "GetCareerInfoViewModel.h"
-#import "CustomerCareerBaseClass.h"
 #import "LoanApplicationForConfirmationVCModules.h"
 #import "CareerParse.h"
 #import "testView.h"
@@ -37,6 +36,7 @@
 #import "CardInfo.h"
 #import "CheckViewModel.h"
 #import "SupportBankList.h"
+#import "CustomerCareerResult.h"
 
 @interface UserDataAuthenticationListVCModules ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
 {
@@ -375,16 +375,16 @@
     switch (indexPath.row) {
         case 0:
         {
-            [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
+            [self getUserInfo:^(UserDataInformationModel * userDataInformationM) {
                 UserIdentityInformationVCModules *perInfoVC = [[UserIdentityInformationVCModules alloc] init];
-//                perInfoVC.custom_baseInfo = custom_baseInfo;
+                 perInfoVC.userDataIformationM = userDataInformationM;
                 [self.navigationController pushViewController:perInfoVC animated:true];
             }];
         }
             break;
         case 1:
         {
-            [self getCustomerCarrer_jhtml:^(CustomerCareerBaseClass *careerInfo) {
+            [self getCustomerCarrer_jhtml:^(CustomerCareerResult *careerInfo) {
                 UserProfessionalInformationVCModules *professVC = [[UserProfessionalInformationVCModules alloc] init];
                 professVC.delegate = self;
                 professVC.product_id = _product_id;
@@ -470,57 +470,35 @@
 //    topView.backgroundColor = UI_MAIN_COLOR;
 //    topView.frame = CGRectMake(0, 0, _k_w, -scrollView.contentOffset.y);
 }
-- (void)getUserInfo:(void(^)(Custom_BaseInfo *custom_baseInfo))finish
+- (void)getUserInfo:(void(^)(UserDataInformationModel * userDataInformationM))finish
 {
     GetCustomerBaseViewModel *customerInfo = [[GetCustomerBaseViewModel alloc] init];
     [customerInfo setBlockWithReturnBlock:^(id returnValue) {
-        Custom_BaseInfo *custom_model = returnValue;
-        [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-        if ([custom_model.flag isEqualToString:@"0000"]) {
-            id data = [DataWriteAndRead readDataWithkey:UserInfomation];
-            if (data) {
-                [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
-                if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
-                    [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
-                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
-                    }
-                }
-            } else {
-                if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
-                    [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
-                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
-                    }
-                } else {
-                    [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
-                }
-            }
-            finish(custom_model);
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:custom_model.msg];
+        BaseResultModel * baseVM = returnValue;
+        if ([baseVM.errCode isEqualToString:@"0"]) {
+            UserDataInformationModel * userDataIM = [[UserDataInformationModel alloc]initWithDictionary:(NSDictionary *)baseVM.data error:nil];
+            [DataWriteAndRead writeDataWithkey:UserInfomation value:userDataIM];
+            [FXD_Utility sharedUtility].userInfo.userIDNumber = userDataIM.id_code_;
+            [FXD_Utility sharedUtility].userInfo.realName = userDataIM.customer_name_;
+            [FXD_Utility sharedUtility].userInfo.account_id = userDataIM.create_by_;
+            finish(userDataIM);
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseVM.friendErrMsg];
         }
-        
     } WithFaileBlock:^{
-        
     }];
     [customerInfo fatchCustomBaseInfo:nil];
 }
--(void)getCustomerCarrer_jhtml:(void(^)(CustomerCareerBaseClass *careerInfo))finish
+-(void)getCustomerCarrer_jhtml:(void(^)(CustomerCareerResult *careerInfo))finish
 {
     GetCareerInfoViewModel *getCareerInfoViewModel = [[GetCareerInfoViewModel alloc] init];
     [getCareerInfoViewModel setBlockWithReturnBlock:^(id returnValue) {
-        CustomerCareerBaseClass *carrerInfoModel = returnValue;
-        if ([carrerInfoModel.flag isEqualToString:@"0000"]) {
-            finish(carrerInfoModel);
-        }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:carrerInfoModel.msg];
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            CustomerCareerResult * customerCareerR = [[CustomerCareerResult alloc]initWithDictionary:(NSDictionary *)baseRM.data error:nil];
+            finish(customerCareerR);
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
     } WithFaileBlock:^{
     }];
@@ -529,7 +507,6 @@
 /**
  发薪贷银行卡信息
  */
-
 -(void)getGatheringInformation_jhtml:(void(^)(CardInfo *cardInfo))finish{
     
     BankInfoViewModel * bankInfoVM = [[BankInfoViewModel alloc]init];
@@ -632,14 +609,12 @@
         case 10:
         {
             [_alertView hide];
-            //            [self goLoanMoneyVC:@"0"];
             [self goVC:@"0"];
         }
             break;
         case 11:
         {
             [_alertView hide];
-            //            [self goLoanMoneyVC:@"1"];
             [self goVC:@"1"];
         }
             break;
@@ -655,8 +630,8 @@
     loanFirstVC.productId = _product_id;
     loanFirstVC.if_family_know = is_know;
     if (_careerParse != nil) {
-        loanFirstVC.resultCode = _careerParse.result.resultcode;
-        loanFirstVC.rulesId = _careerParse.result.rulesid;
+        loanFirstVC.resultCode = _careerParse.resultcode;
+        loanFirstVC.rulesId = _careerParse.rulesid;
     } else {
         loanFirstVC.resultCode = _resultCode;
         loanFirstVC.rulesId = _rulesId;
@@ -675,10 +650,10 @@
     LoanApplicationForConfirmationVCModules *loanFirstVC = [[LoanApplicationForConfirmationVCModules alloc] init];
     loanFirstVC.productId = _product_id;
     loanFirstVC.if_family_know = is_know;
-    DLog(@"%@-------%@",_careerParse.result.resultcode,_careerParse.result.rulesid);
+    DLog(@"%@-------%@",_careerParse.resultcode,_careerParse.rulesid);
     if (_careerParse != nil) {
-        loanFirstVC.resultCode = _careerParse.result.resultcode;
-        loanFirstVC.rulesId = _careerParse.result.rulesid;
+        loanFirstVC.resultCode = _careerParse.resultcode;
+        loanFirstVC.rulesId = _careerParse.rulesid;
     } else {
         loanFirstVC.resultCode = _resultCode;
         loanFirstVC.rulesId = _rulesId;
@@ -693,8 +668,8 @@
 - (void)setProfessRule:(CareerParse *)careerParse
 {
     _careerParse = careerParse;
-    _resultCode = careerParse.result.resultcode;
-    _rulesId = careerParse.result.rulesid;
+    _resultCode = careerParse.resultcode;
+    _rulesId = careerParse.rulesid;
 }
 
 - (void)setCornerWithoutRadius:(UIView *)view

@@ -346,8 +346,6 @@ typedef enum {
 }
 -(UIImage *)returnPicCodeImage:(NSString *)imageStr{
     
-//    NSRange range = [imageStr rangeOfString:@","];
-//    NSString * str = [imageStr substringFromIndex:range.location + 1];
     NSData *decodedImageData   = [[NSData alloc]initWithBase64EncodedString:imageStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
     UIImage *  image = [UIImage imageWithData:decodedImageData];
     return image;

@@ -19,12 +19,12 @@
 #import "Custom_BaseInfo.h"
 #import "DataWriteAndRead.h"
 #import "GetCareerInfoViewModel.h"
-#import "CustomerCareerBaseClass.h"
 #import "UserMobileAuthenticationVCModules.h"
 #import "UserCardResult.h"
 #import "CardInfo.h"
 #import "CheckViewModel.h"
 #import "SupportBankList.h"
+#import "CustomerCareerResult.h"
 
 @interface AuthenticationCenterVCModules ()<UICollectionViewDelegate,UICollectionViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
 {
@@ -325,7 +325,7 @@
                 }
                     break;
                 case 1:{
-                    [self getCustomerCarrer_jhtml:^(CustomerCareerBaseClass *careerInfo) {
+                    [self getCustomerCarrer_jhtml:^(CustomerCareerResult *careerInfo) {
                         UserProfessionalInformationVCModules *professVC = [[UserProfessionalInformationVCModules alloc] init];
                         professVC.delegate = self;
                         professVC.careerInfo = careerInfo;
@@ -341,7 +341,7 @@
                     __weak typeof (self) weakSelf = self;
                     [self getUserInfo:^(UserDataInformationModel * userDataInformationM) {
                         UserFaceIdentiVCModules * faceIdentiCreditVC = [[UserFaceIdentiVCModules alloc]init];
-                        faceIdentiCreditVC.verifyStatus = [NSString stringWithFormat:@"%.0lf",userDataInformationM.verifyStatus];
+                        faceIdentiCreditVC.verifyStatus = userDataInformationM.verify_status_;
                         [weakSelf.navigationController pushViewController:faceIdentiCreditVC animated:true];
                         faceIdentiCreditVC.identifyResultStatus = ^(NSString * status) {
                             weakSelf.verifyStatus = status;
@@ -720,18 +720,18 @@
     [customerInfo fatchCustomBaseInfo:nil];
 }
 
--(void)getCustomerCarrer_jhtml:(void(^)(CustomerCareerBaseClass *careerInfo))finish
+-(void)getCustomerCarrer_jhtml:(void(^)(CustomerCareerResult *careerInfo))finish
 {
     GetCareerInfoViewModel *getCareerInfoViewModel = [[GetCareerInfoViewModel alloc] init];
     [getCareerInfoViewModel setBlockWithReturnBlock:^(id returnValue) {
-        CustomerCareerBaseClass *carrerInfoModel = returnValue;
-        if ([carrerInfoModel.flag isEqualToString:@"0000"]) {
-            finish(carrerInfoModel);
-        }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:carrerInfoModel.msg];
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            CustomerCareerResult * customerCareerR = [[CustomerCareerResult alloc]initWithDictionary:(NSDictionary *)baseRM.data error:nil];
+            finish(customerCareerR);
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
     } WithFaileBlock:^{
-        
     }];
     [getCareerInfoViewModel fatchCareerInfo:nil];
 }

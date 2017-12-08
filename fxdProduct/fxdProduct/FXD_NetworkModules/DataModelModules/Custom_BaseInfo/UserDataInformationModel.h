@@ -25,7 +25,7 @@
 @property (nonatomic, assign) NSString<Optional> *ocr_status_;
 @property (nonatomic, strong) NSString<Optional> *account_base_id_;
 @property (nonatomic, strong) NSString<Optional> *customer_name_;
-@property (nonatomic, assign) NSString<Optional> *verifyStatus;
+@property (nonatomic, assign) NSString<Optional> *verify_status_;
 @property (nonatomic, strong) NSString<Optional> *id_code_;
 @property (nonatomic, strong) NSString<Optional> *id_type_;
 @property (nonatomic, strong) NSString<Optional> *binding_mobilephone_;

@@ -112,8 +112,7 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
             faceIdentiCreditVC.verifyStatus = verifyStatus
             self.navigationController?.pushViewController(faceIdentiCreditVC, animated: true)
             faceIdentiCreditVC.identifyResultStatus = { [weak self] (status) -> () in
-//                self?.verifyStatus  = status
-//                self?.tableView?.reloadData()
+
             }
             break
         case 1:

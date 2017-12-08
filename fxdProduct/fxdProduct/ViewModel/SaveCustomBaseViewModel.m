@@ -7,15 +7,44 @@
 //
 
 #import "SaveCustomBaseViewModel.h"
-
+#import "SaveUserInfoParam.h"
 @implementation SaveCustomBaseViewModel
 
-- (void)saveCustomBaseInfo:(NSDictionary *)paramDic
+- (void)saveCustomBaseInfoName:(NSString *)customer_name
+                      ID_code_:(NSString *)id_code_
+                      EduLevel:(NSString *)education_level
+                  home_address:(NSString *)home_address
+                      province:(NSString *)province
+                          city:(NSString *)city
+                        county:(NSString *)county
 {
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_saveCustomerBase_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        self.returnBlock(object);
+    
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_saveCustomerBase_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        self.returnBlock(object);
+//    } failure:^(EnumServerStatus status, id object) {
+//        [self faileBlock];
+//    }];
+    
+    SaveUserInfoParam * saveUserInfoP = [[SaveUserInfoParam alloc]init];
+    saveUserInfoP.customer_name_ = customer_name;
+    saveUserInfoP.id_code_ = id_code_;
+    saveUserInfoP.education_level_ = education_level;
+    saveUserInfoP.home_address_ = home_address;
+    saveUserInfoP.province_ = province;
+    saveUserInfoP.city_ = city;
+    saveUserInfoP.county_ = county;
+
+    NSDictionary *paramDic = [saveUserInfoP toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_saveCustomerBase_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseResultM);
+        }
     } failure:^(EnumServerStatus status, id object) {
-        [self faileBlock];
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
     }];
 }
 

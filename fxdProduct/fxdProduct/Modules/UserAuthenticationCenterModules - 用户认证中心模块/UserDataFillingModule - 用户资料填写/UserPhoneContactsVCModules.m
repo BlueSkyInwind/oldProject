@@ -19,6 +19,7 @@
 #import "PhoneContactsManager.h"
 #import "ContactClass.h"
 #import "Custom_BaseInfo.h"
+#import "CustomerContactsInfoViewModel.h"
 
 #define CellBGColorRed rgb(252, 0, 6)
 
@@ -52,14 +53,12 @@
     _contact2 = @[@"同事",@"朋友"];
     _flagTag = 0;
     _toolbarCancelDone.hidden = true;
-
     dataListAll = [NSMutableArray array];
     dataColor = [NSMutableArray array];
     for (int i = 0; i < 6; i++) {
         [dataColor addObject:UI_MAIN_COLOR];
         [dataListAll addObject:@""];
     }
-    
     [self configTableView];
     [self setDataInfo];
 }
@@ -125,76 +124,76 @@
 }
 - (void)setDataInfo
 {
-    if (_custom_baseInfo.result.contactBean.count > 1) {
-        ContactBean *contact1 = _custom_baseInfo.result.contactBean[0];
-        ContactBean *contact2 = _custom_baseInfo.result.contactBean[1];
-        if ([contact1.relationship isEqualToString:@"1"] || [contact1.relationship isEqualToString:@"2"]) {
-            if (contact1.relationship) {
-                if ([contact1.relationship isEqualToString:@"1"]) {
+    if (_custom_baseInfo.contactBean.count > 1) {
+        ContactBeanModel *contact1 = _custom_baseInfo.contactBean[0];
+        ContactBeanModel *contact2 = _custom_baseInfo.contactBean[1];
+        if ([contact1.relationship_ isEqualToString:@"1"] || [contact1.relationship_ isEqualToString:@"2"]) {
+            if (contact1.relationship_) {
+                if ([contact1.relationship_ isEqualToString:@"1"]) {
                     [dataListAll replaceObjectAtIndex:0 withObject:@"父母"];
                 }
-                if ([contact1.relationship isEqualToString:@"2"]) {
+                if ([contact1.relationship_ isEqualToString:@"2"]) {
                     [dataListAll replaceObjectAtIndex:0 withObject:@"配偶"];
                 }
             }
             //姓名
-            if (contact1.contactName && ![contact1.contactName isEqualToString:_custom_baseInfo.result.customerName]) {
-                [dataListAll replaceObjectAtIndex:1 withObject:contact1.contactName];
+            if (contact1.contact_name_ && ![contact1.contact_name_ isEqualToString:_custom_baseInfo.customer_name_]) {
+                [dataListAll replaceObjectAtIndex:1 withObject:contact1.contact_name_];
             }
             //电话
-            if (contact1.contactPhone && ![_custom_baseInfo.ext.mobilePhone isEqualToString:contact1.contactPhone]) {
-                [dataListAll replaceObjectAtIndex:2 withObject:[self formatString:contact1.contactPhone]];
+            if (contact1.contact_phone_ && ![[FXD_Utility sharedUtility].userInfo.userMobilePhone isEqualToString:contact1.contact_phone_]) {
+                [dataListAll replaceObjectAtIndex:2 withObject:[self formatString:contact1.contact_phone_]];
             }
             
-            if (contact2.relationship) {
-                if ([contact2.relationship isEqualToString:@"4"]) {
+            if (contact2.relationship_) {
+                if ([contact2.relationship_ isEqualToString:@"4"]) {
                     [dataListAll replaceObjectAtIndex:3 withObject:@"同事"];
                 }
-                if ([contact2.relationship isEqualToString:@"8"]) {
+                if ([contact2.relationship_ isEqualToString:@"8"]) {
                     [dataListAll replaceObjectAtIndex:3 withObject:@"朋友"];
                 }
             }
             //姓名
-            if (contact2.contactName && ![contact2.contactName isEqualToString:_custom_baseInfo.result.customerName] && ![contact1.contactName isEqualToString:contact2.contactName]) {
-                [dataListAll replaceObjectAtIndex:4 withObject:contact2.contactName];
+            if (contact2.contact_name_ && ![contact2.contact_name_ isEqualToString:_custom_baseInfo.customer_name_] && ![contact1.contact_name_ isEqualToString:contact2.contact_name_]) {
+                [dataListAll replaceObjectAtIndex:4 withObject:contact2.contact_name_];
             }
             //电话
-            if (contact2.contactPhone && ![contact2.contactPhone isEqualToString:contact1.contactPhone] && ![_custom_baseInfo.ext.mobilePhone isEqualToString:contact2.contactPhone]) {
-                [dataListAll replaceObjectAtIndex:5 withObject:[self formatString: contact2.contactPhone]];
+            if (contact2.contact_phone_ && ![contact2.contact_phone_ isEqualToString:contact1.contact_phone_] && ![[FXD_Utility sharedUtility].userInfo.userMobilePhone isEqualToString:contact2.contact_phone_]) {
+                [dataListAll replaceObjectAtIndex:5 withObject:[self formatString: contact2.contact_phone_]];
             }
         }else {
-            if (contact2.relationship) {
-                if ([contact2.relationship isEqualToString:@"1"]) {
+            if (contact2.relationship_) {
+                if ([contact2.relationship_ isEqualToString:@"1"]) {
                     [dataListAll replaceObjectAtIndex:0 withObject:@"父母"];
                 }
-                if ([contact2.relationship isEqualToString:@"2"]) {
+                if ([contact2.relationship_ isEqualToString:@"2"]) {
                     [dataListAll replaceObjectAtIndex:0 withObject:@"配偶"];
                 }
             }
             //姓名
-            if (contact2.contactName && ![_custom_baseInfo.result.countyName isEqualToString:contact2.contactName]) {
-                [dataListAll replaceObjectAtIndex:1 withObject:contact2.contactName];
+            if (contact2.contact_name_ && ![_custom_baseInfo.county_name_ isEqualToString:contact2.contact_name_]) {
+                [dataListAll replaceObjectAtIndex:1 withObject:contact2.contact_name_];
             }
             //电话
-            if (contact2.contactPhone && ![_custom_baseInfo.ext.mobilePhone isEqualToString:contact2.contactPhone]) {
-                [dataListAll replaceObjectAtIndex:2 withObject:[self formatString:contact2.contactPhone]];
+            if (contact2.contact_phone_ && ![[FXD_Utility sharedUtility].userInfo.userMobilePhone isEqualToString:contact2.contact_phone_]) {
+                [dataListAll replaceObjectAtIndex:2 withObject:[self formatString:contact2.contact_phone_]];
             }
             
-            if (contact1.relationship) {
-                if ([contact1.relationship isEqualToString:@"4"]) {
+            if (contact1.relationship_) {
+                if ([contact1.relationship_ isEqualToString:@"4"]) {
                     [dataListAll replaceObjectAtIndex:3 withObject:@"同事"];
                 }
-                if ([contact1.relationship isEqualToString:@"8"]) {
+                if ([contact1.relationship_ isEqualToString:@"8"]) {
                     [dataListAll replaceObjectAtIndex:3 withObject:@"朋友"];
                 }
             }
             //姓名
-            if (contact1.contactName && ![contact1.contactName isEqualToString:_custom_baseInfo.result.customerName] && ![contact1.contactName isEqualToString:contact2.contactName]) {
-                [dataListAll replaceObjectAtIndex:4 withObject:contact1.contactName];
+            if (contact1.contact_name_ && ![contact1.contact_name_ isEqualToString:_custom_baseInfo.customer_name_] && ![contact1.contact_name_ isEqualToString:contact2.contact_name_]) {
+                [dataListAll replaceObjectAtIndex:4 withObject:contact1.contact_name_];
             }
             //电话
-            if (contact1.contactPhone && ![_custom_baseInfo.ext.mobilePhone isEqualToString:contact1.contactPhone] && ![contact2.contactPhone isEqualToString:contact1.contactPhone]) {
-                [dataListAll replaceObjectAtIndex:5 withObject:[self formatString: contact1.contactPhone]];
+            if (contact1.contact_phone_ && ![[FXD_Utility sharedUtility].userInfo.userMobilePhone isEqualToString:contact1.contact_phone_] && ![contact2.contact_phone_ isEqualToString:contact1.contact_phone_]) {
+                [dataListAll replaceObjectAtIndex:5 withObject:[self formatString: contact1.contact_phone_]];
             }
         }
     }
@@ -220,11 +219,11 @@
             [zbc appendFormat:@"%C",c];
         }
     }
-    
     return zbc;
 }
 
-- (NSDictionary *)getContactsInfo
+#pragma mark - 联系人保存
+- (void)saveBtnClick
 {
     NSString *contactShip =@"";
     if ([dataListAll[0] isEqualToString:@"父母"]) {
@@ -241,32 +240,18 @@
     NSString *tel = [dataListAll[2] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *tel1 = [dataListAll[5] stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    NSDictionary *paramDic = @{@"relationship_":contactShip,
-                               @"contact_name_":dataListAll[1],
-                               @"contact_phone_":tel,
-                               @"relationship1_":contactShip1,
-                               @"contact_name1_":dataListAll[4],
-                               @"contact_phone1_":tel1};
-    
-    return paramDic;
-}
-
-
-#pragma mark - 联系人保存
-- (void)saveBtnClick
-{
-    DLog(@"保存");
-    
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_customerContact_url] parameters:[self getContactsInfo] finished:^(EnumServerStatus status, id object) {
-        if ([[object valueForKey:@"flag"] isEqualToString:@"0000"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow  message:[object valueForKey:@"msg"]];
+    CustomerContactsInfoViewModel * customerContactsInfoVM  = [[CustomerContactsInfoViewModel alloc]init];
+    [customerContactsInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
             [self.navigationController popViewControllerAnimated:true];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object valueForKey:@"msg"]];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    [customerContactsInfoVM saveCustomerContactsInfoRelationship:contactShip contact_name:dataListAll[1] contact_phone:tel Relationship1:contactShip1 contact_name1:dataListAll[4] contact_phone1:tel1];
 }
 
 #pragma mark - TableView
@@ -277,7 +262,6 @@
 {
     return 3;
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60.f;
@@ -389,12 +373,10 @@
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         
                          self.localPicker.hidden = YES;
                          self.toolbarCancelDone.hidden = YES;
                      }
                      completion:^(BOOL finished){
-                         
                      }];
 }
 
@@ -490,20 +472,15 @@
 
 - (void)uploadUserContact:(NSArray *)conArr
 {
-    NSData *data = [NSJSONSerialization dataWithJSONObject:conArr options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSDictionary *dict = @{@"userContactsBaseBean":jsonStr};
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_saveUserContacts_jhtml] parameters:dict finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
-                
-            } else {
-                
-            }
+    CustomerContactsInfoViewModel * customerContactsInfoVM  = [[CustomerContactsInfoViewModel alloc]init];
+    [customerContactsInfoVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    [customerContactsInfoVM uploadUserContacts:conArr];
 }
 
 
@@ -518,7 +495,6 @@
                 [dataListAll replaceObjectAtIndex:1 withObject:name];
                 [dataColor replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
             }
-            
         } else {
             [dataListAll replaceObjectAtIndex:1 withObject:@""];
             [dataColor replaceObjectAtIndex:1 withObject:CellBGColorRed];
@@ -539,7 +515,6 @@
                 [dataListAll replaceObjectAtIndex:2 withObject:phoneNum];
                 [dataColor replaceObjectAtIndex:2 withObject:UI_MAIN_COLOR];
             }
-            
         } else {
             [dataListAll replaceObjectAtIndex:2 withObject:@""];
             [dataColor replaceObjectAtIndex:2 withObject:CellBGColorRed];
@@ -586,7 +561,6 @@
         [_tableView reloadData];
     }
 }
-
 
 #pragma mark - 创建PIckView --UIPickerViewDelegate
 -(void)createPickViewShowWithTag:(NSInteger)tag

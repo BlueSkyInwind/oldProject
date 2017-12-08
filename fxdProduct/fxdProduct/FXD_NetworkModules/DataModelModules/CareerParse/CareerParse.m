@@ -10,18 +10,7 @@
 
 @implementation CareerParse
 
-+ (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"ext":[CareerExt class],
-             @"result":[CareerResult class]};
-}
 
 @end
 
 
-@implementation CareerExt
-
-@end
-
-@implementation CareerResult
-
-@end
