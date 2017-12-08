@@ -13,8 +13,6 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
 
     var tableView : UITableView?
     var noneView : NonePageView?
-    var pageNum : Int?
-//    var totalNum : Int?
     var withdrawCashDetailListModel : WithdrawCashDetailListModel?
     var model : WithdrawCashDetailModel?
     
@@ -24,7 +22,6 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
 
         // Do any additional setup after loading the view.
         self.title = "收提明细"
-//        totalNum = 0
         addBackItem()
         configureView()
         createNoneView()
@@ -43,46 +40,18 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             make.edges.equalTo(self.view)
         })
         
-//        //下拉刷新相关设置,使用闭包Block
-//        tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-//
-//            self.headerRefresh()
-//
-//        })
-//
-//
-//        //上拉加载相关设置,使用闭包Block
-//        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-//
-//            self.footerLoadMoreInfo()
-//
-//        })
+        if #available(iOS 11.0, *){
+            tableView?.contentInsetAdjustmentBehavior = .never;
+            tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
+        }else if #available(iOS 9.0, *){
+            self.automaticallyAdjustsScrollViewInsets = true;
+        }else{
+            self.automaticallyAdjustsScrollViewInsets = false;
+        }
         
     }
     
-    //MARK: 刷新
-    /// 下拉刷新
-    @objc func headerRefresh(){
-
-        pageNum = 1
-//        self.totalNum = 0
-        //重现加载表格数据
-        getWithdrawCashDetail()
-//        self.tableView?.reloadData()
-        //结束刷新
-//        self.tableView?.mj_header.endRefreshing()
-    }
-
-    /// 上拉加载
-    @objc func footerLoadMoreInfo(){
-        pageNum = pageNum! + 1
-        //重现加载表格数据
-        getWithdrawCashDetail()
-//        self.tableView?.reloadData()
-        //结束刷新
-//        self.tableView?.mj_footer.endRefreshing()
-
-    }
+    
     func createNoneView(){
         
         noneView = NonePageView()
@@ -93,13 +62,11 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        pageNum = 1
         getWithdrawCashDetail()
     }
     
     func getWithdrawCashDetail(){
-        
-        let pageStr : String = String.init(format: "%d", pageNum!)
+    
         let cashVM = CashViewModel()
         cashVM.setBlockWithReturn({[weak self] (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
@@ -108,7 +75,6 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
                 self?.model = try? WithdrawCashDetailModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 if self?.model?.withdrawCashDetailList.count  != 0{
 
-//                    self?.totalNum = (self?.model?.withdrawCashDetailList.count)! + (self?.totalNum)!
                     self?.noneView?.isHidden = true
                     self?.tableView?.isHidden = false
                     self?.tableView?.reloadData()
@@ -121,14 +87,11 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
-//            self?.tableView?.mj_header.endRefreshing()
-//            self?.tableView?.mj_footer.endRefreshing()
+
         }) {
             
-//            self.tableView?.mj_header.endRefreshing()
-//            self.tableView?.mj_footer.endRefreshing()
         }
-        cashVM.withdrawCashDetailOperateType(FXD_Utility.shared().operateType, pageNum: pageStr, pageSize: "15")
+        cashVM.withdrawCashDetailOperateType(FXD_Utility.shared().operateType, pageNum: "1", pageSize: "15")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -140,10 +103,6 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         
         if ((model?.withdrawCashDetailList.count) != nil) {
             
-//            if (self.totalNum)! > 15 {
-//
-//                return (model?.withdrawCashDetailList.count)!
-//            }
             return (model?.withdrawCashDetailList.count)! + 1
         }
         return 0
@@ -175,14 +134,6 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             return messageCell
         }
 
-//        var detailModel : WithdrawCashDetailListModel
-//        if (self.totalNum)! > 15 {
-//
-//            detailModel = model?.withdrawCashDetailList[indexPath.row] as! WithdrawCashDetailListModel
-//        }else{
-//            detailModel = model?.withdrawCashDetailList[indexPath.row - 1] as! WithdrawCashDetailListModel
-//        }
-        
         let  detailModel = model?.withdrawCashDetailList[indexPath.row - 1] as? WithdrawCashDetailListModel
         
         cell.selectionStyle = .none

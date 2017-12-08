@@ -36,7 +36,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.page = 0
-        getData()
+        getData(isHeaderFresh: true)
     }
     
     func createNoneView(){
@@ -55,7 +55,14 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
         })
-        
+        if #available(iOS 11.0, *){
+            tableView?.contentInsetAdjustmentBehavior = .never;
+            tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
+        }else if #available(iOS 9.0, *){
+            self.automaticallyAdjustsScrollViewInsets = true;
+        }else{
+            self.automaticallyAdjustsScrollViewInsets = false;
+        }
         //下拉刷新相关设置,使用闭包Block
         tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
 
@@ -70,39 +77,60 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
             self.footerLoad()
 
         })
+        
     }
     
     //MARK: 刷新
     /// 下拉刷新
     @objc func headerRefresh(){
 
-        self.items.removeAll()
         self.page = 0
-        getData()
+        getData(isHeaderFresh: true)
 
     }
     
     /// 上拉加载
     @objc func footerLoad(){
        
-        let offset = Int((self.messageModel?.offset)!)
-        self.page = offset! + 1
-        var allPage = Int((self.messageModel?.pageCount)!)! / 15
-        let all = Int((self.messageModel?.pageCount)!)! % 15
-        if all > 0 {
-            allPage = allPage + 1
-        }
-        if allPage == self.page! || allPage < self.page! {
+        self.page = (self.page)! + 15
+//        if (self.page)! < Int((self.messageModel?.pageCount)!)! {
+//
+//            getData(isHeaderFresh: false)
+//
+//        }else{
+//            self.tableView?.mj_footer.state = MJRefreshState(rawValue: 4)!
+//            self.tableView?.mj_footer.endRefreshing()
+//
+//        }
+        
+        if (self.messageModel?.operUserMassge.count)! < 15 {
+            self.tableView?.mj_footer.endRefreshingWithNoMoreData()
+//            self.tableView?.mj_footer.state = MJRefreshState(rawValue: 4)!
+//            self.tableView?.mj_footer.endRefreshing()
             
-            self.tableView?.mj_footer.endRefreshing()
             
         }else{
             
-            getData()
+            getData(isHeaderFresh: false)
         }
+        
+//        let offset = Int((self.messageModel?.offset)!)
+//        var allPage = Int((self.messageModel?.pageCount)!)! / 15
+//        let all = Int((self.messageModel?.pageCount)!)! % 15
+//        if all > 0 {
+//            allPage = allPage + 1
+//        }
+//        if allPage == self.page! || allPage < self.page! {
+//
+//            self.tableView?.mj_footer.endRefreshing()
+//
+//        }else{
+//
+//            getData(isHeaderFresh: false)
+//        }
     }
 
-    func getData(){
+    func getData(isHeaderFresh : Bool){
         
         let pageStr = String.init(format: "%d", self.page!)
         
@@ -110,7 +138,11 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         messageVM.setBlockWithReturn({ [weak self](returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
-                self?.page = 1
+                if isHeaderFresh{
+                    
+                    self?.items.removeAll()
+                }
+            
                 self?.messageModel = try! ShowMsgPreviewModel.init(dictionary: baseResult.data as! [AnyHashable : Any]!)
                 if self?.messageModel?.operUserMassge.count != 0{
                     
@@ -178,7 +210,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         messageCell.contentLabel?.text = items[indexPath.row - 1].msgText
         messageCell.leftImageView?.isHidden = false
         messageCell.titleLabel?.textColor = TITLE_COLOR
-        
+
         if items[indexPath.row - 1].isRead == "2" {
             messageCell.leftImageView?.isHidden = true
             messageCell.titleLabel?.textColor = QUTOA_COLOR;

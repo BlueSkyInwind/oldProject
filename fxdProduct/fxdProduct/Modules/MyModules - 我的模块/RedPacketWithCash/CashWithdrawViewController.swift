@@ -72,6 +72,15 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             make.edges.equalTo(self.view)
         })
         
+        if #available(iOS 11.0, *){
+            tableView?.contentInsetAdjustmentBehavior = .never;
+            tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
+        }else if #available(iOS 9.0, *){
+            self.automaticallyAdjustsScrollViewInsets = true;
+        }else{
+            self.automaticallyAdjustsScrollViewInsets = false;
+        }
+        
         let withdrawBtn = UIButton()
         withdrawBtn.setTitle("提现", for: .normal)
         withdrawBtn.setTitleColor(UIColor.white, for: .normal)

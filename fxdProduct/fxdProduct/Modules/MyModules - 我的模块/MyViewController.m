@@ -218,7 +218,7 @@
             bCell.messageLabel.hidden = false;
             bCell.messageImage.hidden = false;
             if (model.countNum.integerValue > 9) {
-                bCell.messageLabel.font = [UIFont systemFontOfSize:8];
+                bCell.messageLabel.font = [UIFont systemFontOfSize:10];
             }else{
                 bCell.messageLabel.font = [UIFont systemFontOfSize:12];
             }

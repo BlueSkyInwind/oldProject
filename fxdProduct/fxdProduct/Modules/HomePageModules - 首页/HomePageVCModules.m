@@ -88,9 +88,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-//    [self getMessageNumber];
-//    [self changeTuBiao];
+
     [UserDefaulInfo getUserInfoData];
     
     if ([FXD_Utility sharedUtility].loginFlage) {
@@ -102,16 +100,6 @@
     [self LoadHomeView];
     
 }
-
-//-(void)changeTuBiao{
-//
-//    [self.tabBarController.tabBar showBadgeOnItemIndex:2];
-////    NSDictionary *dic = [NSDictionary dictionaryWithObject:@"1" forKey:@"isDisplay"];
-////
-////    NSNotification *notification =[NSNotification notificationWithName:@"InfoNotification" object:nil userInfo:dic];
-////    [[NSNotificationCenter defaultCenter] postNotification:notification];
-//
-//}
 
 /**
  根据数据加载视图的状况
@@ -195,14 +183,13 @@
     _bgView.hidden = true;
     [btn addSubview:_bgView];
 
-    _messageNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(2, 0, 10, 13)];
-//    _messageNumLabel.text = @"3";
+    _messageNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 13, 13)];
+    _messageNumLabel.textAlignment = NSTextAlignmentCenter;
     _messageNumLabel.textColor = [UIColor whiteColor];
     _messageNumLabel.font = [UIFont systemFontOfSize:8];
     [_bgView addSubview:_messageNumLabel];
     
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:btn];
-//    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRMessage)];
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = 8;
     self.navigationItem.rightBarButtonItems = @[spaceItem,aBarbi];
