@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *messageImage;
+@property (weak, nonatomic) IBOutlet UIView *messageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageViewX;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageViewWidth;
 
 @end

@@ -215,25 +215,30 @@
     if (indexPath.row == 0) {
         if ([model.isDisplay isEqualToString:@"1"]) {
             bCell.messageLabel.text = model.countNum;
-            bCell.messageLabel.hidden = false;
-            bCell.messageImage.hidden = false;
+            bCell.messageView.hidden = false;
+
             if (model.countNum.integerValue > 9) {
-                bCell.messageLabel.font = [UIFont systemFontOfSize:10];
+                
+                bCell.messageViewX.constant = 30;
+                bCell.messageViewWidth.constant = 19;
+
             }else{
-                bCell.messageLabel.font = [UIFont systemFontOfSize:12];
+                
+                bCell.messageViewX.constant = 33;
+                bCell.messageViewWidth.constant = 13;
+
             }
             if (model.countNum.integerValue > 99) {
                 bCell.messageLabel.text = @"99+";
             }
         }else{
-            
-            bCell.messageLabel.hidden = true;
-            bCell.messageImage.hidden = true;
+            bCell.messageView.hidden = true;
+
         }
         
     }else{
-        bCell.messageLabel.hidden = true;
-        bCell.messageImage.hidden = true;
+        bCell.messageView.hidden = true;
+
     }
     return bCell;
 }

@@ -65,6 +65,7 @@
 @property (nonatomic,strong) HomeChoosePopView * popChooseView;
 @property (nonatomic,strong) UIView *bgView;
 @property (nonatomic,strong) UILabel *messageNumLabel;
+@property (nonatomic,strong) UIButton *messageBtn;
 
 @end
 
@@ -174,22 +175,36 @@
  */
 - (void)setNavQRRightBar {
     
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 23, 18)];
-    [btn setImage:[UIImage imageNamed:@"homeMessage"] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
-    _bgView = [[UIView alloc]initWithFrame:CGRectMake(16, -4, 13, 13)];
+    _messageBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 23, 18)];
+    [_messageBtn setImage:[UIImage imageNamed:@"homeMessage"] forState:UIControlStateNormal];
+    [_messageBtn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
+    _bgView = [[UIView alloc]init];
     _bgView.backgroundColor = [UIColor redColor];
     _bgView.layer.cornerRadius = 6.5;
     _bgView.hidden = true;
-    [btn addSubview:_bgView];
+    [_messageBtn addSubview:_bgView];
 
-    _messageNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 13, 13)];
+    [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_messageBtn.mas_left).offset(16);
+        make.top.equalTo(_messageBtn.mas_top).offset(-4);
+        make.width.equalTo(@13);
+        make.height.equalTo(@13);
+        
+    }];
+
+    _messageNumLabel = [[UILabel alloc]init];
     _messageNumLabel.textAlignment = NSTextAlignmentCenter;
     _messageNumLabel.textColor = [UIColor whiteColor];
-    _messageNumLabel.font = [UIFont systemFontOfSize:8];
+    _messageNumLabel.font = [UIFont systemFontOfSize:12];
     [_bgView addSubview:_messageNumLabel];
+    [_messageNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_bgView.mas_left).offset(0);
+        make.top.equalTo(_bgView.mas_top).offset(0);
+        make.right.equalTo(_bgView.mas_right).offset(0);
+        make.height.equalTo(@13);
+    }];
     
-    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:_messageBtn];
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = 8;
     self.navigationItem.rightBarButtonItems = @[spaceItem,aBarbi];
@@ -220,12 +235,22 @@
         
             if ([model.isDisplay isEqualToString:@"1"]) {
                 _bgView.hidden = false;
-//                _messageNumLabel.text = model.countNum;
-                _messageNumLabel.text = @"99+";
+                _messageNumLabel.text = model.countNum;
+
                 if (model.countNum.integerValue > 9) {
-                    _messageNumLabel.font = [UIFont systemFontOfSize:7];
+
+                    [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.left.equalTo(_messageBtn.mas_left).offset(10);
+                        make.width.equalTo(@19);
+                    }];
+
                 }else{
-                    _messageNumLabel.font = [UIFont systemFontOfSize:12];
+                    
+                    [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.left.equalTo(_messageBtn.mas_left).offset(16);
+                        make.width.equalTo(@13);
+                    }];
+            
                 }
                 if (model.countNum.integerValue > 99) {
                     _messageNumLabel.text = @"99+";
