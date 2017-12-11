@@ -218,9 +218,9 @@
             bCell.messageView.hidden = false;
 
             if (model.countNum.integerValue > 9) {
-                
-                bCell.messageViewX.constant = 30;
-                bCell.messageViewWidth.constant = 19;
+               
+                bCell.messageViewX.constant = 25;
+                bCell.messageViewWidth.constant = 24;
 
             }else{
                 

@@ -240,8 +240,8 @@
                 if (model.countNum.integerValue > 9) {
 
                     [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.left.equalTo(_messageBtn.mas_left).offset(10);
-                        make.width.equalTo(@19);
+                        make.left.equalTo(_messageBtn.mas_left).offset(6);
+                        make.width.equalTo(@24);
                     }];
 
                 }else{
