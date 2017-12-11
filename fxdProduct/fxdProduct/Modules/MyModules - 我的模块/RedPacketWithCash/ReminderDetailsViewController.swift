@@ -15,8 +15,6 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     var noneView : NonePageView?
     var withdrawCashDetailListModel : WithdrawCashDetailListModel?
     var model : WithdrawCashDetailModel?
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,8 +48,8 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
         }
         
     }
-    
-    
+
+
     func createNoneView(){
         
         noneView = NonePageView()
@@ -68,7 +66,7 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     }
     
     func getWithdrawCashDetail(){
-    
+
         let cashVM = CashViewModel()
         cashVM.setBlockWithReturn({[weak self] (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])

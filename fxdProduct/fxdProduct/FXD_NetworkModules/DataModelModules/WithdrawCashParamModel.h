@@ -18,5 +18,7 @@
 @property (nonatomic,copy)NSString *operateType;
 //支付密码
 @property (nonatomic,copy)NSString *payPassword;
+//提现红包id
+@property (nonatomic,copy)NSString *redpacketId;
 
 @end

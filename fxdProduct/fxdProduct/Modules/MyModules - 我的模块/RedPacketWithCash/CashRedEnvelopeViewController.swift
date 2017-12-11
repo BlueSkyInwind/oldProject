@@ -90,8 +90,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         tableView?.separatorStyle = .none
         self.view.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
-//            make.left.right.bottom.equalTo(self.view)
-//            make.top.equalTo(obtainBarHeight_New(vc: self))
+
             make.edges.equalTo(self.view)
         })
         if #available(iOS 11.0, *){
@@ -193,6 +192,7 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
                 switch status {
                 case 0?:
                     let controller = CashWithdrawViewController()
+                    controller.redpacketId = self?.model?.redpacketId
                     self?.navigationController?.pushViewController(controller, animated: true)
 
                 case 1?,2?,3?:

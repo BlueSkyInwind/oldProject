@@ -10,6 +10,6 @@
 
 @implementation WithdrawCashParamModel
 
-@synthesize amount,bankCardId,operateType,payPassword;
+@synthesize amount,bankCardId,operateType,payPassword,redpacketId;
 
 @end

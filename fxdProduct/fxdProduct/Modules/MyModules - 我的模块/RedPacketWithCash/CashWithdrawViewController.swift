@@ -15,6 +15,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
     let cellId = "CellId"
     var currentindex : Int?
     var cardInfo : CardInfo?
+    var redpacketId : String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -210,13 +211,13 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             if baseResult.errCode == "0" {
                 let withdrawCashModel = try? WithdrawCashModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 let status = Int((withdrawCashModel?.status)!)
-                //返回状态（0验证通过 1解密异常 2由于密码错误次数过多,请找回密码或3小时后重试 3交易密码不正确（剩余X次） 4由于密码错误次数过多,请找回密码或(3-month)小时后重试 5提现申请已提交 6提现执行异常 7金额不匹配）
+                //返回状态（0验证通过 1解密异常 2由于密码错误次数过多,请找回密码或3小时后重试 3交易密码不正确（剩余X次） 4由于密码错误次数过多,请找回密码或(3-month)小时后重试 5提现申请已提交 6提现执行异常 7红包账户余额不足，提现失败 8非法操作，不允许重复提现）
                 switch status {
                 case 0?,5?:
                     let controller = WithdrawDetailsViewController()
                     controller.withdrawCashModel = withdrawCashModel
                     self.navigationController?.pushViewController(controller, animated: true)
-                case 1?,6?,7?:
+                case 1?,6?,7?,8?:
                     
                     MBPAlertView.sharedMBPText().showTextOnly(self.view, message: withdrawCashModel?.message)
                 case 3?:
@@ -231,7 +232,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             }
         }) {
         }
-        cashViewModel.withdrawCashAmount(FXD_Utility.shared().amount, bankCardId: self.cardInfo?.cardId, operateType: FXD_Utility.shared().operateType, payPassword: payPassword)
+        cashViewModel.withdrawCashAmount(FXD_Utility.shared().amount, bankCardId: self.cardInfo?.cardId, operateType: FXD_Utility.shared().operateType, payPassword: payPassword, redpacketId: redpacketId)
     }
     
     func setAlertView(title: String, message: String, sureTitle: String, cancelTitle: String, tag: String){

@@ -14,7 +14,6 @@
 #import "BaseNavigationViewController.h"
 #import "ActivityHomePopView.h"
 #import "LewPopupViewController.h"
-//#import "HomePop.h"
 #import "FXDWebViewController.h"
 #import "SDCycleScrollView.h"
 #import "RepayRecordController.h"
@@ -205,10 +204,10 @@
     }];
     
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:_messageBtn];
+
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = 8;
     self.navigationItem.rightBarButtonItems = @[spaceItem,aBarbi];
-
 }
 
 /**
@@ -314,7 +313,7 @@
     //375 185
     _sdView.delegate = self;
     _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
-    
+
     self.tableView.tableHeaderView = _sdView;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     header.automaticallyChangeAlpha = YES;
@@ -443,24 +442,33 @@
 #pragma mark - TableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    NSInteger i=0;
-    if (_dataArray.count>0) {
-        i=_dataArray.count;
-    }else{
-        i=2;
+
+    if (section == 0) {
+        return 12.0f;
     }
-    if (section < i) {
-        return 3.0f;
-    }
+
     return 0.1f;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (_dataArray.count>0) {
-        return _dataArray.count + 1;
+    if ([self getAllProduct] > 1) {
+        
+        return [self getAllProduct]+1;
+
     }
     return 2;
+}
+
+-(NSInteger)getAllProduct{
+    
+    NSInteger i = 0;
+    for (HomeProductsList *product in _homeProductList.data.productList) {
+        if ([product.isValidate isEqualToString:@"1"]) {
+            i++;
+        }
+    }
+    return i;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -473,22 +481,26 @@
     if (indexPath.section == 0) {
         return 30.f;
     }else {
-        if (_dataArray.count>0) {
-            if (indexPath.section == 1) {
-                if (UI_IS_IPHONE5) {
-                    return (180);
-                }else{
-                    return (210);
-                }
-            }else{
-                if (UI_IS_IPHONE5) {
-                    return (_k_h-0.5*_k_w-330);
-                }else if(UI_IS_IPHONEX){
-                    return (_k_h-0.5*_k_w-450);
-                }else{
-                    return (_k_h-0.5*_k_w-360);
-                }
+        
+        if ([self getAllProduct]>1) {
+            int height = 0;
+            if (UI_IS_IPHONE5) {
+                height = 113;
+            }else if(UI_IS_IPHONE6P){
+                
+                height = 150;
+            }else if (UI_IS_IPHONE6){
+                
+                height = 160;
+            }else if (UI_IS_IPHONEX){
+                height = 210;
             }
+            
+            if ([self getAllProduct]>2) {
+                return (_k_h-0.5*_k_w-height)/_dataArray.count;
+            }
+            return 120;
+
         }else{
             if (UI_IS_IPHONE5) {
                 return (_k_h-0.5*_k_w-155);
@@ -574,15 +586,18 @@
             [homeCell setupDefaultUI];
             break;
         case 2:
-            if (indexPath.section == 1) {
+            
+            if ([self getAllProduct] == 1) {
+                
                 [homeCell productListFirst];
-                return homeCell;
+            
+            }else{
+                
+                [homeCell productListOtherWithIndex:indexPath.section];
             }
-
-            [homeCell productListOtherWithIndex:indexPath.section];
+            
             break;
         case 3:
-//            [homeCell setupRefuseUI];
             [homeCell refuseTab];
             break;
         case 4:
@@ -629,16 +644,6 @@
         }
     }
 }
-
-//- (void)repayRecordClick
-//{
-//    if ([Utility sharedUtility].loginFlage) {
-//        RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-//        [self.navigationController pushViewController:repayRecord animated:YES];
-//    }else {
-//        [self presentLogin:self];
-//    }
-//}
 
 #pragma mark - 获取数据
 
@@ -1124,7 +1129,7 @@
     OptionalRapidLoanApplicationVCModules *controller = [[OptionalRapidLoanApplicationVCModules alloc]init];
     controller.productId = productId;
     controller.dataArray = dataArray;
-    [self.navigationController pushViewController:controller animated:false];
+    [self.navigationController pushViewController:controller animated:true];
 }
 
 
