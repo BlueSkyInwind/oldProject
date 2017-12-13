@@ -1026,8 +1026,12 @@ extension HomeDefaultCell{
         let url1 = URL(string: product.icon)
 //    leftImage.sd_setImage(with: url1)
        if url1 != nil {
-           let data = NSData.init(contentsOf: url1!)
-           leftImage.image = UIImage.sd_image(with: data! as Data)
+            do{
+                let data = try NSData.init(contentsOf: url1!, options: NSData.ReadingOptions.mappedIfSafe)
+                leftImage.image = UIImage.sd_image(with: data as Data)
+            }catch{
+                leftImage.image = UIImage.init(named: "placeholderImage_Icon")
+            }
         }
         titleLabel.text = product.productName
         moneyLabel.text = product.amount
