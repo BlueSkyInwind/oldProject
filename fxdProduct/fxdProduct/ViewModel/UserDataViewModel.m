@@ -13,20 +13,6 @@
 
 @implementation UserDataViewModel
 
--(void)obtainCustomerAuthInfoProgress:(NSString *)product_id_{
-    
-    NSDictionary *paramDic = @{@"product_id_":product_id_,};
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_customerAuthInfo_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
-
 -(void)obtainBasicInformationStatus{
     
 //    NSDictionary *paramDic = @{@"userId":[FXD_Utility sharedUtility].userInfo.juid,};

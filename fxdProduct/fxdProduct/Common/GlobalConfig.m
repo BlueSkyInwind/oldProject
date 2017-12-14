@@ -72,65 +72,17 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 #pragma Mark - 项目URL
 
 
-//人脸识别结果保存
-NSString * const     _saveFaceId_url    =   @"faceid/saveFaceId.jhtml";
-
-//二次提款
-NSString * const     _drawApplyAgain_jhtml      =   @"draw/drawApplyAgain.jhtml";
-
 //申请件状态更新
 NSString * const     _caseStatusUpdateApi_url   =   @"increase/caseStatusUpdateApi.jhtml";
 
 //银行卡获取接口
 NSString * const     _getBankList_url           =   @"getDictCode/getDictCodeList.jhtml";
 
-//输入框埋点
-NSString * const     _saveInputBackInfo_url     =   @"userWs/saveInputBackInfo.jhtml";
-
-//还款结清接口
-NSString * const     _doRepayOrSettle_url       =   @"repayorsettle/doRepayOrSettle.jhtml";
-
-//P2P获取用户基本信息
-NSString * const    _getFXDUserInfo_url          =  @"p2p/hg/getFXDUserInfo.jhtml";
-
-//P2P客户基本信息录入
-NSString * const    _drawService_url            =   @"http/do.jhtml?router=drawService.take";
-
-//P2P开户接口
-NSString * const    _register_url               =   @"http/huifu/toRegister.jhtml";
-
-//P2P绑卡
-NSString * const    _bindCard_url               =   @"http/huifu/toBindCard.jhtml";
-
 //发标前查询进件
 NSString * const    _getFXDCaseInfo_url         =   @"p2p/hg/getFXDCaseInfo.jhtml";
 
-//P2P发标
-NSString * const    _addBidInfo_url             =   @"http/do.jhtml?router=addBidInfoService.addBidInfo";
-
-//P2P还款余额查询
-NSString * const    _memberService_url          =   @"http/do.jhtml?router=memberService.accountInfo";
-
-//P2P还款充值
-NSString * const    _netSave_url                =   @"http/huifu/toNetSave.jhtml";
-
 //开户返回URL
 NSString * const    _transition_url     =  @"https://h5.faxindai.com:8028/fxd-h5/page/case/app_transition.html";
-
-//取现返回URL
-NSString * const    _toCash_url     =  @"https://h5.faxindai.com:8028/fxd-h5/page/case/app_cash.html";
-
-//充值返回URL
-NSString * const    _rechargeing_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/mine/rechargeing.html";
-
-//P2P正常还款
-NSString * const    _doPay_url                  =    @"http/do.jhtml?router=paySettleService.doPay";
-
-//P2P结清
-NSString * const    _doSettle_url               =    @"http/do.jhtml?router=paySettleService.doSettle";
-
-//用户QQ/支付宝认证状态查询
-NSString * const    _queryAuthStatus_url        =    @"caseInfo/queryAuthStatus.jhtml";
 
 //关于我们H5
 NSString * const    _aboutus_url                =    @"more/about_us.html";
@@ -138,47 +90,20 @@ NSString * const    _aboutus_url                =    @"more/about_us.html";
 //发展历程H5
 NSString * const    _depHistory_url             =    @"more/depHistory.html";
 
-//媒体报道H5
-NSString * const    _mediaReport_url            =    @"more/mediaReport.html";
-
-//首页广告
-NSString * const    _adv_url                    =    @"event/pop_up.jhtml";
-
 //协议内容获取接口
 NSString * const    _productProtocol_url        =    @"ProductProtocol/getProductProtocol.jhtml";
-
-//首页借款记录
-NSString * const    _queryLoanRecord_url        =    @"caseInfo/queryLoanRecordApi.jhtml";
-
-//借款进度
-NSString * const    _queryLoanStatus_url        =    @"caseInfo/queryLoanStatus.jhtml";
 
 //H5注册
 NSString * const    _h5register_url             =    @"register.html";
 
-//H5费用说明
-//NSString * const    _loanDetial_url             =    @"protocol/loanDetial.html";
-NSString * const    _loanDetial_url             =    @"protocol/protocol.html";
 //FaceIDOCR
 NSString * const    _detectIDCardOCR_url        =    @"https://api.faceid.com/faceid/v1/ocridcard";
 
 //FaceID人脸对比身份核实
 NSString * const    _verifyLive_url             =    @"https://api.megvii.com/faceid/v2/verify";
 
-//查询用户信息录入进度
-NSString * const    _customerAuthInfo_url       =    @"customerAuth/getCustomerAuthInfoSchedule.jhtml";
-
-//聚信力TOKEN获取
-NSString * const    _JXLGetToken_url            =    @"https://www.juxinli.com/orgApi/rest/v2/applications/chinazyjr";
-
-//聚信力信息采集
-NSString * const    _messagesReq_url            =    @"https://www.juxinli.com/orgApi/rest/v2/messages/collect/req";
-
 //推荐码规则
 NSString * const    _GetRecomfrInfo_url         =    @"ProductProtocol/GetRecomfrInfoApi.jhtml";
-
-//Banner广告获取
-NSString * const    _topBanner_url              =    @"event/topBanner.jhtml";
 
 //常见问题
 NSString * const    _question_url               =    @"more/question.html";
@@ -393,7 +318,8 @@ NSString * const     _getMoneyHistory_url           =   @"order/user/loanList";
 //登陆更新经纬度
 NSString * const     _updateLoginLatitude_url       =   @"user/common/updateLastLongitudeAndLatitude";
 
-
+//二次提款
+NSString * const     _drawApplyAgain_jhtml      =   @"draw/drawApply";
 #pragma mark - 合规接口
 
 //用户开户接口

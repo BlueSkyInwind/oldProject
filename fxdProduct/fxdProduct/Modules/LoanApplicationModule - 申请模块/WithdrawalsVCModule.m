@@ -136,7 +136,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     _purposeSelect = @"0";
     //    [self createScroll];
     [self createUI];
-
     _isOpen = NO;
 
 }
@@ -221,6 +220,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSString *strl = [NSString stringWithFormat:@"%.2f",_drawingsInfoModel.actualAmount.floatValue];
     [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,strl.length)];
     checkSuccess.displayLabel.attributedText = str;
+    
 }
 
 #pragma mark - 提款视图

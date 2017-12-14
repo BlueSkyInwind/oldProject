@@ -11,19 +11,6 @@
 @implementation HomeViewModel
 
 
--(void)fetchLoanProcess{
-    
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
 
 -(void)homeDataRequest{
     

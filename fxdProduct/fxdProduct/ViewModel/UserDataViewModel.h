@@ -12,13 +12,6 @@
 @interface UserDataViewModel : FXD_ViewModelBaseClass
 
 /**
- 查询用户资料的录入进度
-
- @param product_id_ 产品
- */
--(void)obtainCustomerAuthInfoProgress:(NSString *)product_id_;
-
-/**
   基础信息状态
  */
 -(void)obtainBasicInformationStatus;

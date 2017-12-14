@@ -46,12 +46,6 @@
 
 -(void)saveLoanCase:(NSString *)type ApplicationID:(NSString *)applicationId Period:(NSString *)period PurposeSelect:(NSString *)purposeSelect;
 
-/**
- 发标前查询进件
- */
--(void)getFXDCaseInfo;
-
-
 
 @end
 
@@ -74,10 +68,6 @@
  */
 -(void)queryCardInfo;
 
-/**
- 合规银行卡列表
- */
-//-(void)queryCardListInfo;
 
 
 @end

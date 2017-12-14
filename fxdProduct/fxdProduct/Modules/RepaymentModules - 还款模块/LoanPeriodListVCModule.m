@@ -122,17 +122,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     _repayStateFlag=@0;
     [self post_getLastDate];
     
-//    switch ([self.userStateParse.applyStatus intValue]) {
-//        case 7:    //正常放款->开始有记录
-//        case 8:    //逾期
-//            _repayStateFlag=@0;
-//            [self post_getLastDate];
-//            break;
-//        default:
-//            _repayStateFlag=@100;
-//            [self loadViewWithState];
-//            break;
-//    }
 }
 
 /**
@@ -291,7 +280,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             if ([_vaildSituations.firstObject.status_ isEqualToString:@"2"] && [_vaildSituations.lastObject.status_ isEqualToString:@"2"]) {
                 _save_amount = 0;
             }else {
-                if (_repayListModel.situations_.count < [_repayListModel.service_fee_min_period_ integerValue]) {
+                if (_repayListModel.situations_.count <=  [_repayListModel.service_fee_min_period_ integerValue]) {
                     if (_currenPeriod <= _repayListModel.situations_.count) {
                         _save_amount = 0.0;
                     }
@@ -353,7 +342,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         
     }]];
     [self presentViewController:alert animated:YES completion:nil];
-    
 }
 
 #pragma mrak - 还款点击处理
@@ -510,7 +498,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     }
     [self updateUserNeedPayAmount];
     [self.repayTableView reloadData];
-    
 }
 
 - (void)updateUserNeedPayAmount

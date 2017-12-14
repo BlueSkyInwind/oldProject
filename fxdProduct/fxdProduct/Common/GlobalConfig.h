@@ -93,7 +93,6 @@ UIKIT_EXTERN NSString * const       _saveCustomerCarrer_jhtml;               //�
 UIKIT_EXTERN NSString * const       _getCustomerCarrer_jhtml;                //客户职业信息获取接口
 UIKIT_EXTERN NSString * const       _createApplication_jhtml;                //进件接口
 UIKIT_EXTERN NSString * const       _getProductList_jhtml;                   //产品列表获取接口
-UIKIT_EXTERN NSString * const       _saveFaceId_url;                         //人脸识别结果保存
 UIKIT_EXTERN NSString * const       _saveUserContacts_jhtml;                 //用户通讯录保存接口
 UIKIT_EXTERN NSString * const       _updateLoginLatitude_url;                //登陆更新经纬度
 UIKIT_EXTERN NSString * const       _getRegionCodeByName_jhtml;              //获取省市区编码
@@ -102,42 +101,21 @@ UIKIT_EXTERN NSString * const       _drawApplyAgain_jhtml;                   //�
 UIKIT_EXTERN NSString * const       _caseStatusUpdateApi_url;                //申请件状态更新
 UIKIT_EXTERN NSString * const       _getBankList_url;                        //银行卡获取接口   _getSupportBankList_url
 UIKIT_EXTERN NSString * const       _getSupportBankList_url;                        //获取银行卡支持列表
-UIKIT_EXTERN NSString * const       _saveInputBackInfo_url;                  //输入框埋点
 UIKIT_EXTERN NSString * const       _getContractStagingInfo_url;             //合同及期供信息查询接口
-UIKIT_EXTERN NSString * const       _doRepayOrSettle_url;                    //还款结清接口
 UIKIT_EXTERN NSString * const       _RepayOrSettleWithPeriod_url;            //还款结清接口(新)
-UIKIT_EXTERN NSString * const       _getFXDUserInfo_url;                     //P2P获取用户信息
-UIKIT_EXTERN NSString * const       _drawService_url;                        //P2P客户信息录入
-UIKIT_EXTERN NSString * const       _register_url;                           //P2P开户
-UIKIT_EXTERN NSString * const       _bindCard_url;                           //P2P绑卡
-UIKIT_EXTERN NSString * const       _getFXDCaseInfo_url;                     //发标前查询进件
-UIKIT_EXTERN NSString * const       _addBidInfo_url;                         //发标
-UIKIT_EXTERN NSString * const       _memberService_url;                      //P2P余额查询
 UIKIT_EXTERN NSString * const       _transition_url;                         //开户返回URL
-UIKIT_EXTERN NSString * const       _netSave_url;                            //P2P还款充值
-UIKIT_EXTERN NSString * const       _doPay_url;                              //P2P正常还款
-UIKIT_EXTERN NSString * const       _rechargeing_url;                        //P2P充值回调
-UIKIT_EXTERN NSString * const       _doSettle_url;                           //P2P结清
 UIKIT_EXTERN NSString * const       _getPicCode_url;                         //图形验证码获取
 UIKIT_EXTERN NSString * const       _checkMobilePhoneAuth_url;               //手机认证有效性检查
 UIKIT_EXTERN NSString * const       _authMobilePhone_url;                    //手机认证信息保存
-UIKIT_EXTERN NSString * const       _queryAuthStatus_url;                    //用户QQ/支付宝认证状态查询
 UIKIT_EXTERN NSString * const       _aboutus_url;                            //关于我们H5
 UIKIT_EXTERN NSString * const       _depHistory_url;                         //发展历程H5
-UIKIT_EXTERN NSString * const       _mediaReport_url;                        //媒体报道H5
-UIKIT_EXTERN NSString * const       _adv_url;                                //首页广告
 UIKIT_EXTERN NSString * const       _contractList_url;                       //平台合同列表
 UIKIT_EXTERN NSString * const       _contractStr_url;                        //合同内容
 UIKIT_EXTERN NSString * const       _querybillDetails_url;                   //P2P平台账单期供查询
 UIKIT_EXTERN NSString * const       _productProtocol_url;                    //协议内容获取接口
-UIKIT_EXTERN NSString * const       _queryLoanRecord_url;                    //首页借款记录
-UIKIT_EXTERN NSString * const       _queryLoanStatus_url;                    //借款进度
 UIKIT_EXTERN NSString * const       _h5register_url;                         //H5注册
-UIKIT_EXTERN NSString * const       _loanDetial_url;                         //H5费用说明
 UIKIT_EXTERN NSString * const       _detectIDCardOCR_url;                    //FaceID
 UIKIT_EXTERN NSString * const       _verifyLive_url;                         //FaceID人脸对比身份核实
-UIKIT_EXTERN NSString * const       _customerAuthInfo_url;                   //查询用户信息录入进度
-UIKIT_EXTERN NSString * const       _JXLGetToken_url;                        //聚信力TOKEN获取
 UIKIT_EXTERN NSString * const       _customerContact_url;                    //联系人信息上传
 UIKIT_EXTERN NSString * const       _saveIDInfo_url;
 UIKIT_EXTERN NSString * const       _repayment_url;                          //获取当前期的续期信息
@@ -156,7 +134,6 @@ UIKIT_EXTERN NSString * const       _getDrawLottery_url;        //老客周末�
 UIKIT_EXTERN NSString * const       _ProductProtocol_url;        //老客周末活动判断是否弹框刮奖
 
 //用户身份证图片上传
-UIKIT_EXTERN NSString * const       _messagesReq_url;                        //聚信力信息采集
 UIKIT_EXTERN NSString * const       _detectInfo_url;                         //活体检测信息上传
 UIKIT_EXTERN NSString * const       _GetRecomfrInfo_url;                     //推荐码规则
 UIKIT_EXTERN NSString * const       _topBanner_url;                          //Banner广告获取
@@ -175,7 +152,6 @@ UIKIT_EXTERN NSString * const       _queryCardListInfo_url;                    /
 UIKIT_EXTERN NSString * const       _accountHSService_url;                    //用户状态查询接口
 UIKIT_EXTERN NSString * const       _paymentService_url;                    //主动还款接口
 UIKIT_EXTERN NSString * const       _cash_url;                    //取现
-UIKIT_EXTERN NSString * const       _toCash_url;                  //取现返回url
 UIKIT_EXTERN NSString * const       _bosAcctActivate_url;                  //激活老账户
 UIKIT_EXTERN NSString * const       _queryBidStatus_url;                  //标的状态查询接口
 UIKIT_EXTERN NSString * const       _bosAcctActivateRet_url;                  //激活老账户返回url

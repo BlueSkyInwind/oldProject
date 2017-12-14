@@ -648,9 +648,9 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
 {
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResult.flag isEqualToString:@"0000"]) {
-            NSArray * array  = (NSArray *)baseResult.result;
+        BaseResultModel * baseResult = returnValue;
+        if ([baseResult.errCode isEqualToString:@"0"]) {
+            NSArray * array  = (NSArray *)baseResult.data;
             _supportBankListArr = [NSMutableArray array];
             for (int i = 0; i < array.count; i++) {
                 SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
@@ -675,8 +675,8 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
             repayMent.applicationID = self.applicationId;
             [self.navigationController pushViewController:repayMent animated:YES];
             
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.friendErrMsg];
         }
     } WithFaileBlock:^{
         

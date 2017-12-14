@@ -17,11 +17,6 @@
 -(void)fetchLoanRecord;
 
 /**
- 获取借款进度
- */
--(void)fetchLoanProcess;
-
-/**
  首页用户请求
  */
 -(void)homeDataRequest;
