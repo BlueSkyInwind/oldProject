@@ -67,10 +67,10 @@
 
 @interface WithDrawalsParamModel : JSONModel
 
-@property(nonatomic,strong)NSString<Optional> * periods_;
-@property(nonatomic,strong)NSString<Optional> * loan_for_;
-@property(nonatomic,strong)NSString<Optional> * drawing_amount_;
-@property(nonatomic,strong)NSString<Optional> * account_card_id_;
+@property(nonatomic,strong)NSString<Optional> * periods;
+@property(nonatomic,strong)NSString<Optional> * loanFor;
+//@property(nonatomic,strong)NSString<Optional> * drawing_amount_;
+@property(nonatomic,strong)NSString<Optional> * accountCardId;
 
 @end
 

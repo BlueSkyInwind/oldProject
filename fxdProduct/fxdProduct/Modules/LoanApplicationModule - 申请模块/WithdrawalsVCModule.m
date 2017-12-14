@@ -545,7 +545,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self presentViewController:addCarNC animated:YES completion:nil];
 }
 
-
 -(void)pushFeeDescription{
     
     if (!feeArray && [_drawingsInfoModel.productId isEqualToString:SalaryLoan] ) {
@@ -623,7 +622,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [self.navigationController popToRootViewControllerAnimated:YES];
             break;
         case 2:
-            
         {
             ShanLinWebVCModules *webView = [[ShanLinWebVCModules alloc] init];
             webView.loadContent = url;

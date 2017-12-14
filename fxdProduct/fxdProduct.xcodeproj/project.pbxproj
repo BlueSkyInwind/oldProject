@@ -401,6 +401,8 @@
 		63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */; };
 		840911A21F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */; };
 		840911A31F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */; };
+		840DFF6F1FE27DEC00148DEE /* InvationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */; };
+		840DFF701FE27DEC00148DEE /* InvationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */; };
 		84117F561F60F6A700B7EAA9 /* LoadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */; };
 		84117F571F60F6A700B7EAA9 /* LoadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */; };
 		8411DA111FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */; };
@@ -1966,6 +1968,8 @@
 		63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NilSafe.m"; sourceTree = "<group>"; };
 		840911A01F6F997E00DCDF03 /* JSAndOCInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAndOCInteraction.h; sourceTree = "<group>"; };
 		840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAndOCInteraction.m; sourceTree = "<group>"; };
+		840DFF6D1FE27DEC00148DEE /* InvationViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvationViewModel.h; sourceTree = "<group>"; };
+		840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvationViewModel.m; sourceTree = "<group>"; };
 		84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadFailureView.swift; sourceTree = "<group>"; };
 		8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_VersionUpdatepop.swift; sourceTree = "<group>"; };
 		841BE5C41F177C4F00BABD04 /* UserLevelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLevelViewController.h; sourceTree = "<group>"; };
@@ -3125,6 +3129,8 @@
 				846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */,
 				8496D3141F5A9E3A00CCEE72 /* BankInfoViewModel.h */,
 				8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */,
+				840DFF6D1FE27DEC00148DEE /* InvationViewModel.h */,
+				840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -6011,6 +6017,7 @@
 				CC6F06931F7DF6C000FA889E /* ShanLinBackAlertView.swift in Sources */,
 				84ED5B6B1F4AC606004C0A59 /* SeniorCertificationView.m in Sources */,
 				CCF8031C1ED3D043003B7975 /* AccountHSServiceModel.m in Sources */,
+				840DFF6F1FE27DEC00148DEE /* InvationViewModel.m in Sources */,
 				638A170B1E517D9F00AB8AB6 /* LOTAnimationView.m in Sources */,
 				CCE3BE231ED2D61C004C35A4 /* OpenAccount.m in Sources */,
 				63D43EF91D41F76D0076AC7F /* YYMemoryCache.m in Sources */,
@@ -6437,6 +6444,7 @@
 				CC0DFAA01EA5B1090024841A /* GetMoneyProcessResult.m in Sources */,
 				CC0DFAA21EA5B1090024841A /* LOTShapePath.m in Sources */,
 				CCE3BE1F1ED2D424004C35A4 /* BankCardsModel.m in Sources */,
+				840DFF701FE27DEC00148DEE /* InvationViewModel.m in Sources */,
 				CC0DFAA31EA5B1090024841A /* YYTextView.m in Sources */,
 				CC0DFAA41EA5B1090024841A /* AuthStatus.m in Sources */,
 				CC0DFAA51EA5B1090024841A /* CheckUtils.m in Sources */,

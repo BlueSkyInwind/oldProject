@@ -102,9 +102,6 @@ NSString * const    _detectIDCardOCR_url        =    @"https://api.faceid.com/fa
 //FaceID人脸对比身份核实
 NSString * const    _verifyLive_url             =    @"https://api.megvii.com/faceid/v2/verify";
 
-//推荐码规则
-NSString * const    _GetRecomfrInfo_url         =    @"ProductProtocol/GetRecomfrInfoApi.jhtml";
-
 //常见问题
 NSString * const    _question_url               =    @"more/question.html";
 
@@ -319,7 +316,13 @@ NSString * const     _getMoneyHistory_url           =   @"order/user/loanList";
 NSString * const     _updateLoginLatitude_url       =   @"user/common/updateLastLongitudeAndLatitude";
 
 //二次提款
-NSString * const     _drawApplyAgain_jhtml      =   @"draw/drawApply";
+NSString * const     _drawApplyAgain_jhtml      =   @"coregw/draw/drawApply";
+
+//推荐码规则
+NSString * const    _GetRecomfrInfo_url         =    @"product/getRecomfrInfo";
+
+
+
 #pragma mark - 合规接口
 
 //用户开户接口

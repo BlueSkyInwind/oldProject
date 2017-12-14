@@ -53,14 +53,13 @@
 -(void)withDrawalsApplyPeriod:(NSString *)period_ loan_for:(NSString *)loan_for_ DrawAmount:(NSString *)drawAmount  card_id:(NSString *)card_id{
     
     WithDrawalsParamModel * withDrawalsM = [[WithDrawalsParamModel alloc]init];
-    withDrawalsM.periods_ = period_;
-    withDrawalsM.loan_for_ = loan_for_;
-    withDrawalsM.drawing_amount_ = drawAmount;
-    withDrawalsM.account_card_id_ = card_id;
+    withDrawalsM.periods = period_;
+    withDrawalsM.loanFor = loan_for_;
+    withDrawalsM.accountCardId = card_id;
     
     NSDictionary * paramDic = [withDrawalsM toDictionary];
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_mainTwo_new_url,_drawApplyAgain_jhtml] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_drawApplyAgain_jhtml] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             BaseResultModel * baseRm = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
             self.returnBlock(baseRm);
@@ -87,13 +86,10 @@
     NSDictionary *param = @{@"client_":@"1",@"from_case_id_":applicationId};
 
     [[FXD_NetWorkRequestManager sharedNetWorkManager]HG_POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_qryUserStatus_url] parameters:param finished:^(EnumServerStatus status, id object) {
-        
         if (self.returnBlock) {
             self.returnBlock(object);
         }
-        
     } failure:^(EnumServerStatus status, id object) {
-        
         if (self.faileBlock) {
             [self faileBlock];
         }
