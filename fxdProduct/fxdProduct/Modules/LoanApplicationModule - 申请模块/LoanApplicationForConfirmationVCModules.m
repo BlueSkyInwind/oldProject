@@ -8,7 +8,6 @@
 
 #import "LoanApplicationForConfirmationVCModules.h"
 #import "WithdrawalsVCModule.h"
-#import "HomeViewModel.h"
 #import "FMDeviceManager.h"
 #import "RateModel.h"
 #import "UserProtocolVCModule.h"
@@ -238,11 +237,11 @@
 {
     DLog(@"首次进件")
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
+    __weak LoanApplicationForConfirmationVCModules *weakSelf = self;
     [applicationVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
-
-            [self checkState];
+            [weakSelf goCheckVC:nil];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
@@ -253,59 +252,10 @@
     
 }
 
-- (void)secondLoanMoney
-{
-    DLog(@"二次进件");
-    
-    FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
-    NSString *blackBox = manager->getDeviceInfo();
-    
-    NSDictionary *paramDic = @{@"product_id_":_productId,
-                               @"third_tongd_code":blackBox};
-    __weak LoanApplicationForConfirmationVCModules *weakSelf = self;
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_secondApply_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-            if ([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0002"]) {
-                [weakSelf checkState];
-            }else if([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0001"]){
-                [weakSelf checkState];
-            }else if([[[object objectForKey:@"result"] objectForKey:@"apply_flag_"] isEqualToString:@"0003"]){
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-            }else{
-                [weakSelf checkState];
-            }
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
-- (void)checkState
-{
-    HomeViewModel *homeViewModel = [[HomeViewModel alloc] init];
-    __weak LoanApplicationForConfirmationVCModules *weakSelf = self;
-    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
-        if([returnValue[@"flag"] isEqualToString:@"0000"])
-        {
-            UserStateModel *model=[UserStateModel yy_modelWithJSON:returnValue[@"result"]];
-            [weakSelf goCheckVC:model];
-        }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
-        } 
-    } WithFaileBlock:^{
-        
-    }];
-    [homeViewModel fetchUserState:_model.product_id];
-}
-
 -(void)failed{
 
     WithdrawalsVCModule *checkVC = [WithdrawalsVCModule new];
-//    checkVC.isSecondFailed = YES;
-//    checkVC.product_id = _productId;
+
     [self.navigationController pushViewController:checkVC animated:YES];
     
 }
@@ -313,8 +263,7 @@
 - (void)goCheckVC:(UserStateModel *)model
 {
     WithdrawalsVCModule *checkVC = [WithdrawalsVCModule new];
-//    checkVC.userStateModel = model;
-//    checkVC.task_status = model.taskStatus;
+
     [self.navigationController pushViewController:checkVC animated:YES];
 }
 

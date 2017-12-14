@@ -64,11 +64,12 @@
 {
     RepayMentViewModel *repayMentViewModel = [[RepayMentViewModel alloc] init];
     [repayMentViewModel setBlockWithReturnBlock:^(id returnValue) {
-        RepayListInfo *_repayListModel = [RepayListInfo yy_modelWithJSON:returnValue];
-        if ([_repayListModel.flag isEqualToString:@"0000"]) {
+        BaseResultModel *baseRM =returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            RepayListInfo * _repayListModel = [[RepayListInfo alloc]initWithDictionary:(NSDictionary *)baseRM.data error:nil];
             [self fatchCardInfo:_repayListModel];
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:_targetVC.view message:_repayListModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:_targetVC.view message:baseRM.friendErrMsg];
         }
     } WithFaileBlock:^{
         
@@ -94,8 +95,8 @@
             repayMent.repayType = RepayTypeClean;
             repayMent.supportBankListArr = supportBankListArr;
             CGFloat finalRepayAmount = 0.0f;
-            for (Situations *situation in repayListInfo.result.situations) {
-                finalRepayAmount += situation.debt_total;
+            for (Situations *situation in repayListInfo.situations_) {
+                finalRepayAmount += [situation.debt_total_ floatValue];
             }
             repayMent.isPopRoot = _isPopRoot;
             repayMent.repayAmount = finalRepayAmount;
@@ -106,7 +107,7 @@
             //            repayMent.cellSelectArr = _cellSelectArr;
             //            repayMent.save_amount = _save_amount;
             repayMent.repayListInfo = repayListInfo;
-            repayMent.situations = repayListInfo.result.situations.copy;
+            repayMent.situations = repayListInfo.situations_;
             repayMent.platform_Type = self.platform_type;
             repayMent.applicationID = self.applicationId;
             [_targetVC.navigationController pushViewController:repayMent animated:YES];

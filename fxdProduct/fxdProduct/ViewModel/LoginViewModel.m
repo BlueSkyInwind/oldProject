@@ -99,7 +99,6 @@
     } failure:^(EnumServerStatus status, id object) {
         self.faileBlock();
     }];
-
 }
 
 -(void)uploadLocationInfoLongitude:(NSString *)longitude Latitude:(NSString *)latitude{
@@ -115,7 +114,13 @@
 
 -(void)postUserLoginLocationInfo:(NSDictionary *)paramDic{
 
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_updateLoginLatitude_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_updateLoginLatitude_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        DLog(@"%@",object);
+//    } failure:^(EnumServerStatus status, id object) {
+//        DLog(@"%@",object);
+//    }];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_updateLoginLatitude_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     } failure:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);

@@ -43,26 +43,21 @@
         }else{
             NSLog(@"%@",[FXD_Utility sharedUtility].userInfo.userMobilePhone);
             
-            
             IdeaBackViewModel *ideaBackViewModel = [[IdeaBackViewModel alloc]init];
             [ideaBackViewModel setBlockWithReturnBlock:^(id returnValue) {
-                
-                _feedParse = [ReturnMsgBaseClass modelObjectWithDictionary:returnValue];
-                if ([_feedParse.flag isEqualToString:@"0000"]) {
+                BaseResultModel * baseRM = returnValue;
+                if ([baseRM.errCode isEqualToString:@"0"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"谢谢您的反馈"];
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [self.navigationController popViewControllerAnimated:YES];
                     });
-                    
                 } else {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_feedParse.msg];
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
                 }
-                
             } WithFaileBlock:^{
                 
             }];
             [ideaBackViewModel saveFeedBackContent:self.foreTextview.text];
-
         }
     } else {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写您宝贵的意见"];

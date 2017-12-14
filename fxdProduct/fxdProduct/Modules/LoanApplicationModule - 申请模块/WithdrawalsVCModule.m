@@ -699,38 +699,26 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 #pragma mrak - 提款
 -(void)PostGetdrawApplyAgain
 {
-    NSDictionary *paramDic;
-    if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan] || [_drawingsInfoModel.productId  isEqualToString:DeriveRapidLoan]) {
-        paramDic = @{@"periods_":@1,
-                     @"loan_for_":_purposeSelect,
-                     @"drawing_amount_":_drawingsInfoModel.repayAmount,
-                     @"account_card_id_":_selectCard.cardId
-                     };
-    }
-    if ([_drawingsInfoModel.productId  isEqualToString:SalaryLoan]||[_drawingsInfoModel.productId  isEqualToString:WhiteCollarLoan]) {
-        paramDic = @{@"periods_":[NSString stringWithFormat:@"%d",_userSelectNum.intValue],
-                     @"drawing_amount_":_drawingsInfoModel.repayAmount,
-                     @"account_card_id_":_selectCard.cardId,
-                     @"loan_for_":_purposeSelect,
-                     };
-    }
-    //二次提款
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_drawApplyAgain_jhtml] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
-                
-                LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
-                loanVC.applicationStatus = InLoan;
-                loanVC.popAlert = true;
-                [self.navigationController pushViewController:loanVC animated:YES];
-                
-            } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-            }
+    CheckViewModel * checkVM = [[CheckViewModel alloc]init];
+    [checkVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
+            loanVC.applicationStatus = InLoan;
+            loanVC.popAlert = true;
+            [self.navigationController pushViewController:loanVC animated:YES];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan] || [_drawingsInfoModel.productId  isEqualToString:DeriveRapidLoan]) {
+        [checkVM withDrawalsApplyPeriod:@"1" loan_for:_purposeSelect DrawAmount:_drawingsInfoModel.repayAmount card_id:_selectCard.cardId];
+    }
+    if ([_drawingsInfoModel.productId  isEqualToString:SalaryLoan]||[_drawingsInfoModel.productId  isEqualToString:WhiteCollarLoan]) {
+        [checkVM withDrawalsApplyPeriod:[NSString stringWithFormat:@"%d",_userSelectNum.intValue] loan_for:_purposeSelect DrawAmount:_drawingsInfoModel.repayAmount card_id:_selectCard.cardId];
+    }
 }
 
 #pragma mark->UIPickerViewDataSource

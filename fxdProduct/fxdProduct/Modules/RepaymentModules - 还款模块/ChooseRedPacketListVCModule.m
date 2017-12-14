@@ -108,8 +108,8 @@
     }
 //    RepayMentAvailableRedpackets *redPacket = [self.dataArr objectAtIndex:indexPath.row];
     Available_Redpackets *redPacket = [_dataArr objectAtIndex:indexPath.row];
-    NSString *strValidPeriod = [redPacket.validity_period_to substringToIndex:10];
-    cell.textLabel.text = [NSString stringWithFormat:@"红包%.2f元   有效期至:%@",redPacket.residual_amount,strValidPeriod];
+    NSString *strValidPeriod = [redPacket.validity_period_to_ substringToIndex:10];
+    cell.textLabel.text = [NSString stringWithFormat:@"红包%.2f元   有效期至:%@",[redPacket.residual_amount_ floatValue],strValidPeriod];
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textAlignment = NSTextAlignmentCenter;

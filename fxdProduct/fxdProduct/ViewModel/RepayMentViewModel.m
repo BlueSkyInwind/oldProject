@@ -11,11 +11,24 @@
 
 - (void)fatchQueryWeekShouldAlsoAmount:(NSDictionary *)paramDic
 {
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getContractStagingInfo_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        self.returnBlock(object);
+    
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getContractStagingInfo_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        self.returnBlock(object);
+//    } failure:^(EnumServerStatus status, id object) {
+//        [self faileBlock];
+//    }];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_getContractStagingInfo_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseResultM);
+        }
     } failure:^(EnumServerStatus status, id object) {
-        [self faileBlock];
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
     }];
+
 }
 
 

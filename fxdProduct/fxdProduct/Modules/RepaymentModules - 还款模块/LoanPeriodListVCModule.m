@@ -145,35 +145,40 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
 {
     RepayMentViewModel *repayMentViewModel = [[RepayMentViewModel alloc] init];
     [repayMentViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _repayListModel = [RepayListInfo yy_modelWithJSON:returnValue];
-        for (int i = 0; i < _repayListModel.result.situations.count; i++) {
-            Situations *situation = [_repayListModel.result.situations objectAtIndex:i];
-            if (![situation.status isEqualToString:@"1"]) {
-                if ([situation.status isEqualToString:@"2"] || [situation.status isEqualToString:@"4"]) {
-                    if ([situation.status isEqualToString:@"4"]) {
-                        _currenPeriod = situation.no;
+        BaseResultModel * baseRM= returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            _repayListModel = [[RepayListInfo alloc]initWithDictionary:(NSDictionary *)baseRM.data error:nil];
+            for (int i = 0; i < _repayListModel.situations_.count; i++) {
+                Situations *situation = [_repayListModel.situations_ objectAtIndex:i];
+                if (![situation.status_ isEqualToString:@"1"]) {
+                    if ([situation.status_ isEqualToString:@"2"] || [situation.status_ isEqualToString:@"4"]) {
+                        if ([situation.status_ isEqualToString:@"4"]) {
+                            _currenPeriod = [situation.no_ integerValue];
+                        }
+                        [_cellSelectArr addObject:[NSNumber numberWithBool:true]];
+                        _readyPayAmount += [situation.debt_total_ floatValue];
+                        _clickMax++;
+                    }else {
+                        [_cellSelectArr addObject:[NSNumber numberWithBool:false]];
                     }
-                    [_cellSelectArr addObject:[NSNumber numberWithBool:true]];
-                    _readyPayAmount += situation.debt_total;
-                    _clickMax++;
-                }else {
-                    [_cellSelectArr addObject:[NSNumber numberWithBool:false]];
-                }
-                [_vaildSituations addObject:situation];
-            }
-        }
-        if (_currenPeriod == 0) {
-            for (int i = 0; i < _repayListModel.result.situations.count; i++) {
-                Situations *situation = [_repayListModel.result.situations objectAtIndex:i];
-                if ([situation.status isEqualToString:@"3"]) {
-                    _currenPeriod = situation.no - 1;
-                    break;
+                    [_vaildSituations addObject:situation];
                 }
             }
+            if (_currenPeriod == 0) {
+                for (int i = 0; i < _repayListModel.situations_.count; i++) {
+                    Situations *situation = [_repayListModel.situations_ objectAtIndex:i];
+                    if ([situation.status_ isEqualToString:@"3"]) {
+                        _currenPeriod = [situation.no_ integerValue] - 1;
+                        break;
+                    }
+                }
+            }
+            _lastClick = _clickMax;
+            [self updateUserNeedPayAmount];
+            [self.repayTableView reloadData];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
-        _lastClick = _clickMax;
-        [self updateUserNeedPayAmount];
-        [self.repayTableView reloadData];
     } WithFaileBlock:^{
         
     }];
@@ -224,25 +229,25 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     for (int i = 0; i < _cellSelectArr.count; i++) {
         [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
         Situations *situation = [_vaildSituations objectAtIndex:i];
-        _readyPayAmount += situation.debt_total;
-        if ([situation.status isEqualToString:@"3"]) {
-            _save_amount += situation.debt_service_fee;
+        _readyPayAmount += [situation.debt_total_ floatValue];
+        if ([situation.status_ isEqualToString:@"3"]) {
+            _save_amount += [situation.debt_service_fee_ floatValue];
         }
     }
     
     if ([self.platform_type isEqualToString:@"0"]|| [self.platform_type isEqualToString:@"2"]||[self.platform_type isEqualToString:@"3"]) {
-        if ([_vaildSituations.firstObject.status isEqualToString:@"2"] && [_vaildSituations.lastObject.status isEqualToString:@"2"]) {
+        if ([_vaildSituations.firstObject.status_ isEqualToString:@"2"] && [_vaildSituations.lastObject.status_ isEqualToString:@"2"]) {
             _save_amount = 0;
         }else {
-            if (_repayListModel.result.situations.count < _repayListModel.result.service_fee_min_period) {
-                if (_currenPeriod <= _repayListModel.result.situations.count) {
+            if (_repayListModel.situations_.count < [_repayListModel.service_fee_min_period_ integerValue]) {
+                if (_currenPeriod <= _repayListModel.situations_.count) {
                     _save_amount = 0.0;
                 }
             } else {
-                if (_currenPeriod < _repayListModel.result.service_fee_min_period) {
-
-                    for (NSInteger i = _currenPeriod; i < _repayListModel.result.service_fee_min_period; i++) {
-                        _save_amount -= _repayListModel.result.situations[i].debt_service_fee;
+                if (_currenPeriod < [_repayListModel.service_fee_min_period_ integerValue]) {
+                    for (NSInteger i = _currenPeriod; i < [_repayListModel.service_fee_min_period_ integerValue]; i++) {
+                        Situations * situations = _repayListModel.situations_[i];
+                        _save_amount -= [situations.debt_service_fee_ floatValue];
                     }
                 }
             }
@@ -275,33 +280,26 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
             [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
             if ([self.platform_type isEqualToString:@"0"] ||[self.platform_type isEqualToString:@"2"]||[self.platform_type isEqualToString:@"3"]) {
                 Situations *situation = [_vaildSituations objectAtIndex:i];
-                _readyPayAmount += situation.debt_total;
-                if ([situation.status isEqualToString:@"3"]) {
-                    _save_amount += situation.debt_service_fee;
+                _readyPayAmount += [situation.debt_total_ floatValue];
+                if ([situation.status_ isEqualToString:@"3"]) {
+                    _save_amount += [situation.debt_service_fee_ floatValue];
                 }
             }
         }
         
         if ([self.platform_type isEqualToString:@"0"] || [self.platform_type isEqualToString:@"2"]||[self.platform_type isEqualToString:@"3"]) {
-            if ([_vaildSituations.firstObject.status isEqualToString:@"2"] && [_vaildSituations.lastObject.status isEqualToString:@"2"]) {
+            if ([_vaildSituations.firstObject.status_ isEqualToString:@"2"] && [_vaildSituations.lastObject.status_ isEqualToString:@"2"]) {
                 _save_amount = 0;
             }else {
-                if (_repayListModel.result.situations.count < _repayListModel.result.service_fee_min_period) {
-                    if (_currenPeriod <= _repayListModel.result.situations.count) {
+                if (_repayListModel.situations_.count < [_repayListModel.service_fee_min_period_ integerValue]) {
+                    if (_currenPeriod <= _repayListModel.situations_.count) {
                         _save_amount = 0.0;
                     }
                 } else {
-                    if (_currenPeriod < _repayListModel.result.service_fee_min_period) {
-//                        _save_amount -= (_repayListModel.result.service_fee_min_period - _currenPeriod) * (_repayListModel.result.fee_amount / _repayListModel.result.situations.count);
-//                        NSInteger k = _repayListModel.result.service_fee_min_period - _currenPeriod;
-//                        NSInteger count = _repayListModel.result.situations.count - 1;
-//                        while (k > 0 && count >= 0 && count < _repayListModel.result.situations.count) {
-//                            _save_amount -= _repayListModel.result.situations[count].debt_service_fee;
-//                            k--;
-//                            count--;
-//                        }
-                        for (NSInteger i = _currenPeriod; i < _repayListModel.result.service_fee_min_period; i++) {
-                            _save_amount -= _repayListModel.result.situations[i].debt_service_fee;
+                    if (_currenPeriod < [_repayListModel.service_fee_min_period_ integerValue]) {
+                        for (NSInteger i = _currenPeriod; i < [_repayListModel.service_fee_min_period_ integerValue]; i++) {
+                            Situations * situations = _repayListModel.situations_[i];
+                            _save_amount -= [situations.debt_service_fee_ floatValue];
                         }
                     }
                 }
@@ -332,7 +330,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         for (int i = 0; i < _cellSelectArr.count; i++) {
             if([_cellSelectArr objectAtIndex:i].boolValue){
                 Situations *situation = [_vaildSituations objectAtIndex:i];
-                _readyPayAmount += situation.debt_total;
+                _readyPayAmount += [situation.debt_total_ floatValue];
             }
         }
         if ([self.product_id isEqualToString:SalaryLoan]||[self.product_id isEqualToString:WhiteCollarLoan]) {
@@ -394,9 +392,9 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     if (i > 0) {
         CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
         [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-            BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-            if ([baseResult.flag isEqualToString:@"0000"]) {
-                NSArray * array  = (NSArray *)baseResult.result;
+            BaseResultModel * baseResult = returnValue;
+            if ([baseResult.errCode isEqualToString:@"0"]) {
+                NSArray * array  = (NSArray *)baseResult.data;
                 _supportBankListArr = [NSMutableArray array];
                 for (int i = 0; i < array.count; i++) {
                     SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
@@ -507,7 +505,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     for (int i = 0; i < _cellSelectArr.count; i++) {
         if([_cellSelectArr objectAtIndex:i].boolValue){
             Situations *situation = [_vaildSituations objectAtIndex:i];
-            _readyPayAmount += situation.debt_total;
+            _readyPayAmount += [situation.debt_total_ floatValue];
         }
     }
     [self updateUserNeedPayAmount];

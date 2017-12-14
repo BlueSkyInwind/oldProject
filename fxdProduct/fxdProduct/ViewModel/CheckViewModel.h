@@ -19,7 +19,15 @@
  工薪贷获取费用
  */
 -(void)obtainSalaryProductFeeOfperiod:(NSString *)periods;
-
+/**
+ 提款
+ 
+ @param period_ 期数
+ @param loan_for_ 用途
+ @param drawAmount 金额
+ @param card_id 卡id
+ */
+-(void)withDrawalsApplyPeriod:(NSString *)period_ loan_for:(NSString *)loan_for_ DrawAmount:(NSString *)drawAmount  card_id:(NSString *)card_id;
 
 @end
 

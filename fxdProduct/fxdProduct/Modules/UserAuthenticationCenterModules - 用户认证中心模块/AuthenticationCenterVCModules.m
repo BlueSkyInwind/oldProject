@@ -370,8 +370,10 @@
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您正在认证中，请勿重复认证!"];
                         return;
                     }
-                    SesameCreditCertificationVCModules *controller = [[SesameCreditCertificationVCModules alloc]initWithNibName:@"SesameCreditCertificationVCModules" bundle:nil];
-                    [self.navigationController pushViewController:controller animated:YES];
+                    [self getUserInfo:^(UserDataInformationModel * userDataInformationM) {
+                        SesameCreditCertificationVCModules *controller = [[SesameCreditCertificationVCModules alloc]initWithNibName:@"SesameCreditCertificationVCModules" bundle:nil];
+                        [self.navigationController pushViewController:controller animated:YES];
+                    }];
                 }
                     break;
                 case 5:
@@ -468,14 +470,14 @@
         case 3:{
             if ([userDataModel.telephone isEqualToString:@"2"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已认证"];
-                return false;
+                return true;
             }
         }
             break;
         case 4:{
             if ([userDataModel.zmIdentity isEqualToString:@"2"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已认证"];
-                return false;
+                return true;
             }
         }
             break;
@@ -740,9 +742,9 @@
     
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResult.flag isEqualToString:@"0000"]) {
-            NSArray * array  = (NSArray *)baseResult.result;
+        BaseResultModel * baseResult = returnValue;
+        if ([baseResult.errCode isEqualToString:@"0"]) {
+            NSArray * array  = (NSArray *)baseResult.data;
             _supportBankListArr = [NSMutableArray array];
             for (int i = 0; i < array.count; i++) {
                 SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
@@ -752,7 +754,7 @@
                 finish(cardInfo);
             }];
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.friendErrMsg];
         }
     } WithFaileBlock:^{
         
@@ -786,7 +788,7 @@
             }
             finish(resultCardInfo);
         }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         

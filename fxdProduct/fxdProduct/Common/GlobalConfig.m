@@ -11,7 +11,8 @@ NSString * const _ValidESB_url = @"https://h5.faxindai.com:8028/fxd-esb/";
 NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/"; //生产
 NSString * const _p2P_url = @"https://h5.faxindai.com:8028/fxd-esb/p2p/";
 NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
-NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
+NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/apigw/client/";
+NSString * const _mainTwo_new_url  =  @"http://h5.faxindai.com:8028/coregw/client/";
 
 #elif FXD_Environment_Mode == 1
 
@@ -34,8 +35,9 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/";
 
 NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
 NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-NSString * const _main_new_url  =  @"http://h5.dev.fxds/apigw/client/";
 NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
+NSString * const _main_new_url  =  @"http://h5.dev.fxds/apigw/client/";
+NSString * const _mainTwo_new_url  =  @"http://h5.dev.fxds/coregw/client/";
 NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
 NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
@@ -70,90 +72,8 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 #pragma Mark - 项目URL
 
 
-////首页查询用户借款状态
-NSString * const     _userState_url                 =   @"caseInfo/getApplyStatus.jhtml";
-
-//首页查询用户借款状态
-//NSString * const     _userState_url                 =   @"caseInfo/getApplyStatusTemp.jhtml";
-
-//二次进件
-NSString * const     _secondApply_url               =   @"caseInfo/secondApply.jhtml";
-
-//二次进件
-//NSString * const     _secondApply_url               =   @"caseInfo/secondApplyTemp.jhtml";
-
-//提交用户信息
-NSString * const     _updateUserById_url            =   @"userWs/updateUserById";
-
-//进件
-NSString * const     _saveLoanApplicant_url         =   @"appLoanAppLicant/saveLoanApplicant";
-
-//进度审核
-NSString * const     _findLoanAuditProgress_url     =   @"appLoanAppLicant/findAuditProgressByUid";
-
-//用户拒绝与接收
-NSString * const     _userSureRefuseLoanAction_url  =   @"appLoanAppLicant/userSureRefuseLoanAction";
-
-//提款
-NSString * const     _userLoan_url                  =   @"appLoanAppLicant/userLoan";
-
-//上传照片
-NSString * const     _updateAvatar_url              =   @"customer/saveAuthIdentify.jhtml";
-
-//银行卡列表查询
-NSString * const     _cardList_url                  =   @"getAccountCardList/getAccountCardList.jhtml";
-
-//意见反馈
-NSString * const     _feedBack_url                  =   @"common/saveFeedBack.jhtml";
-
-//借款记录
-NSString * const     _getMoneyHistory_url           =   @"account/loanList.jhtml";
-
-//还款记录
-NSString * const     _getRepayHistory_url           =   @"account/repayList.jhtml";
-
-//学校列表
-NSString * const     _schoolList_url                =   @"schoolWs/getSchoolByName";
-
-//银行卡校验
-NSString * const     _BankNumCheck_url              =   @"saveAccountBankCard/saveAccountBankCard.jhtml";
-
-//手机认证信息
-NSString * const     _Certification_url             =   @"customer/saveCustomerAuthMobile.jhtml";
-//NSString * const     _Certification_url             =   @"customer/saveCustomerAuthTcMobile.jhtml";
-
-//获取手机运营商天创
-NSString * const     _getTianChuangCertification_url          =   @"customer/saveCustomerAuthTcMobile.jhtml";
-
-//获取手机认证信息
-NSString * const     _getCustomerAuth_jhtml         =   @"customer/getCustomerAuth.jhtml";
-
-//手机认证有效性检查
-NSString * const    _checkMobilePhoneAuth_url       =   @"customer/checkMobilePhoneAuth.jhtml";
-
-//手机认证信息保存
-NSString * const    _authMobilePhone_url            =   @"customer/authMobilePhone.jhtml";
-
-//提款获取第一个还款日
-NSString * const     _getFristRepaymentDate         =   @"appLoanAppLicant/getFristRepaymentDate";
-
-//获取手机运营商
-NSString * const     _getMobileOpera_url            =   @"getCarrierNameByMobile/getCarrierNameByMobile.jhtml";
-
-//进件接口
-NSString * const     _createApplication_jhtml       =   @"applicant/createApplication.jhtml";
-
-//产品列表获取接口
-NSString * const     _getProductList_jhtml          =   @"getProductList/getProductList.jhtml";
-
 //人脸识别结果保存
 NSString * const     _saveFaceId_url    =   @"faceid/saveFaceId.jhtml";
-
-//登陆更新经纬度
-NSString * const     _updateLoginLatitude_url       =   @"updateLastLongitudeAndLatitude/updateLastLongitudeAndLatitude.jhtml";
-
-//版本检测
-NSString * const     _checkVersion_jhtml        =   @"appcommon/checkVersion.jhtml";
 
 //二次提款
 NSString * const     _drawApplyAgain_jhtml      =   @"draw/drawApplyAgain.jhtml";
@@ -164,20 +84,11 @@ NSString * const     _caseStatusUpdateApi_url   =   @"increase/caseStatusUpdateA
 //银行卡获取接口
 NSString * const     _getBankList_url           =   @"getDictCode/getDictCodeList.jhtml";
 
-//获取银行卡类型接口
-NSString * const     _getSupportBankList_url           =   @"getAccountCardList/getSupportBankListApi.jhtml";
-
 //输入框埋点
 NSString * const     _saveInputBackInfo_url     =   @"userWs/saveInputBackInfo.jhtml";
 
-//合同及期供信息查询
-NSString * const     _getContractStagingInfo_url   =   @"contractStaging/getContractStagingInfo.jhtml";
-
 //还款结清接口
 NSString * const     _doRepayOrSettle_url       =   @"repayorsettle/doRepayOrSettle.jhtml";
-
-//还款接口(新)
-NSString * const    _RepayOrSettleWithPeriod_url = @"repayorsettle/doRepayOrSettleWithPeriod.jhtml";
 
 //P2P获取用户基本信息
 NSString * const    _getFXDUserInfo_url          =  @"p2p/hg/getFXDUserInfo.jhtml";
@@ -280,12 +191,6 @@ NSString * const    _selectPlatform_url    =    @"case/select_platform.html";
 
 //芝麻信用授权查询
 NSString * const    _findZhimaCredit_url    =    @"zmxy/findZhimaCreditAuthStatus.jhtml";
-
-//芝麻信用授权提交
-NSString * const    _submitZhimaCredit_url    =    @"zmxy/submitZhimaCreditAuth.jhtml";
-
-//芝麻信用回调地址
-NSString * const    _zhimaCreditCallBack_url    =    @"zmxy/zhimaCreditCallBackApi.jhtml";
 
 
 #pragma mark - 新的api
@@ -449,6 +354,46 @@ NSString * const     _saveUserContacts_jhtml        =   @"membership/saveUserCon
 //活体检测信息上传
 NSString * const    _detectInfo_url             =    @"membership/saveCustomerDetectInfo";
 
+//芝麻信用授权提交
+NSString * const    _submitZhimaCredit_url    =    @"customerSesameCreditAuth";
+
+//获取手机运营商天创
+NSString * const     _getTianChuangCertification_url          =   @"saveCustomerAuthTcMobile";
+
+//芝麻信用回调地址
+NSString * const    _zhimaCreditCallBack_url    =    @"zhimaCreditCallBackApi";
+
+//获取手机运营商
+NSString * const     _getMobileOpera_url            =   @"getCarrierNameByMobile";
+
+//手机认证信息保存
+NSString * const    _authMobilePhone_url            =   @"user/common/authMobilePhone";
+
+//合同及期供信息查询
+NSString * const     _getContractStagingInfo_url   =   @"order/contractStaging/getContractStagingInfo";
+
+//还款接口(新)
+NSString * const    _RepayOrSettleWithPeriod_url = @"order/doRepayOrSettleWithPeriod";
+
+//意见反馈
+NSString * const     _feedBack_url                  =   @"user/common/saveFeedBack";
+
+//获取银行卡类型接口
+NSString * const     _getSupportBankList_url           =   @"card/getSupportBankListApi";
+
+//银行卡校验
+NSString * const     _BankNumCheck_url              =   @"membership/saveAccountBankCard";
+
+//版本检测
+NSString * const     _checkVersion_jhtml        =   @"user/common/checkVersion";
+
+//借款记录
+NSString * const     _getMoneyHistory_url           =   @"order/user/loanList";
+
+//登陆更新经纬度
+NSString * const     _updateLoginLatitude_url       =   @"user/common/updateLastLongitudeAndLatitude";
+
+
 #pragma mark - 合规接口
 
 //用户开户接口
@@ -512,6 +457,7 @@ NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
 NSString *const     _getDrawLottery_url     =    @"market/getDrawLottery";
 //协议
 NSString *const     _ProductProtocol_url     =    @"product/getProductProtocolApi";
+
 
 #pragma mark - 对外导流接口
 

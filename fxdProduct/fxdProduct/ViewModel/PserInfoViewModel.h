@@ -10,10 +10,7 @@
 
 @interface PserInfoViewModel : FXD_ViewModelBaseClass
 
-/**
- 获取省市区全部数据
- */
--(void)getAllRegionList;
+
 
 /**
  保存身份证识别信息

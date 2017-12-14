@@ -6,124 +6,114 @@
 //  Copyright © 2016年 dd. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <JSONModel/JSONModel.h>
 
-@class RepayListInfoExt,Result,Situations,Available_Redpackets;
-@interface RepayListInfo : NSObject
-
-
-@property (nonatomic, copy) NSString *flag;
-
-@property (nonatomic, strong) RepayListInfoExt *ext;
-
-@property (nonatomic, strong) Result *result;
-
-@property (nonatomic, copy) NSString *msg;
+@protocol Situations <NSObject>
 
 
 @end
 
-@interface RepayListInfoExt : NSObject
+@protocol Available_Redpackets <NSObject>
 
-@property (nonatomic, copy) NSString *mobile_phone_;
-
-@end
-
-@interface Result : NSObject
-
-@property (nonatomic, assign) NSInteger periods_repayed;
-
-@property (nonatomic, copy) NSString *socket;
-
-@property (nonatomic, assign) CGFloat total_amount;
-
-@property (nonatomic, assign) NSInteger periods_repaying;
-
-@property (nonatomic, strong) NSArray<Situations *> *situations;
-
-@property (nonatomic, assign) CGFloat repayment_amount;
-
-@property (nonatomic, copy) NSString *contract_status;
-
-@property (nonatomic, assign) CGFloat principal_amount;
-
-@property (nonatomic, assign) CGFloat overdue_total_;  //逾期费用(急速贷)
-
-@property (nonatomic, copy) NSString *siging_day;
-
-@property (nonatomic, assign) CGFloat fee_amount;
-
-@property (nonatomic, assign) NSInteger service_fee_min_period;
-
-@property (nonatomic, strong) NSArray<Available_Redpackets *> *available_redpackets;
 
 @end
 
-@interface Situations : NSObject
+@interface RepayListInfo : JSONModel
 
-@property (nonatomic, copy) NSString *status;
+@property (nonatomic, strong) NSNumber<Optional> *periods_repayed_;
 
-@property (nonatomic, assign) CGFloat debt_principal;
+@property (nonatomic, strong) NSString<Optional> *socket_;
 
-@property (nonatomic, assign) CGFloat debt_liquidatetimed_damages;
+@property (nonatomic, strong) NSNumber<Optional> * total_amount_;
 
-@property (nonatomic, copy) NSString *staging_id;
+@property (nonatomic, strong) NSNumber<Optional> * periods_repaying_;
 
-@property (nonatomic, assign) CGFloat debt_total;
+@property (nonatomic, strong) NSArray<Situations,Optional> *situations_;
 
-@property (nonatomic, assign) NSInteger days;
+@property (nonatomic, strong) NSNumber<Optional> * repayment_amount_;
 
-@property (nonatomic, assign) NSInteger no;
+@property (nonatomic, strong) NSString<Optional> *contract_status_;
 
-@property (nonatomic, assign) CGFloat debt_service_fee;
+@property (nonatomic, strong) NSNumber<Optional> * principal_amount_;
 
-@property (nonatomic, copy) NSString *start_time;
+@property (nonatomic, strong) NSNumber<Optional> * overdue_total_;  //逾期费用(急速贷)
 
-@property (nonatomic, copy) NSString *end_time;
+@property (nonatomic, strong) NSString<Optional> *siging_day_;
 
-@property (nonatomic, assign) CGFloat debt_penalty_interest;
+@property (nonatomic, strong) NSNumber<Optional> * fee_amount_;
+
+@property (nonatomic, strong) NSNumber<Optional> * service_fee_min_period_;
+
+@property (nonatomic, strong) NSArray<Available_Redpackets,Optional> *available_redpackets_;
 
 @end
 
-@interface Available_Redpackets : NSObject
 
-@property (nonatomic, copy) NSString *available_means;
+@interface Situations : JSONModel
 
-@property (nonatomic, copy) NSString *account_base_id;
+@property (nonatomic, strong) NSString<Optional> *status_;
 
-@property (nonatomic, copy) NSString *type;
+@property (nonatomic, strong) NSString<Optional> * debt_principal_;
 
-@property (nonatomic, copy) NSString *source;
+@property (nonatomic, strong) NSString<Optional> * debt_liquidatetimed_damages_;
 
-@property (nonatomic, copy) NSString *create_date;
+@property (nonatomic, strong) NSString<Optional> *staging_id_;
 
-@property (nonatomic, copy) NSString *RedpacketID;
+@property (nonatomic, strong) NSString<Optional> *debt_total_;
 
-@property (nonatomic, copy) NSString *modify_by;
+@property (nonatomic, strong) NSString<Optional> *days_;
 
-@property (nonatomic, assign) CGFloat residual_amount;
+@property (nonatomic, strong) NSString<Optional> *no_;
 
-@property (nonatomic, copy) NSString *validity_period_from;
+@property (nonatomic, strong) NSString<Optional> * debt_service_fee_;
 
-@property (nonatomic, copy) NSString *get_date;
+@property (nonatomic, strong) NSString<Optional> *start_time_;
 
-@property (nonatomic, copy) NSString *use_conditions;
+@property (nonatomic, strong) NSString<Optional> *end_time_;
 
-@property (nonatomic, copy) NSString *modify_date;
+@property (nonatomic, strong) NSString<Optional> * debt_penalty_interest_;
 
-@property (nonatomic, copy) NSString *is_split_use;
+@end
 
-@property (nonatomic, assign) NSInteger used_amount;
+@interface Available_Redpackets : JSONModel
 
-@property (nonatomic, assign) NSInteger total_amount;
+@property (nonatomic, strong) NSString<Optional> *available_means_;
 
-@property (nonatomic, copy) NSString *redpacket_name;
+@property (nonatomic, strong) NSString<Optional> *account_base_id_;
 
-@property (nonatomic, assign) NSInteger is_using;
+@property (nonatomic, strong) NSString<Optional> *type_;
 
-@property (nonatomic, copy) NSString *validity_period_to;
+@property (nonatomic, strong) NSString<Optional> *source_;
 
-@property (nonatomic, copy) NSString *create_by;
+@property (nonatomic, strong) NSString<Optional> *create_date_;
+
+@property (nonatomic, strong) NSString<Optional> *RedpacketID_;
+
+@property (nonatomic, strong) NSString<Optional> *modify_by_;
+
+@property (nonatomic, strong) NSNumber<Optional> * residual_amount_;
+
+@property (nonatomic, strong) NSString<Optional> *validity_period_from_;
+
+@property (nonatomic, strong) NSString<Optional> *get_date_;
+
+@property (nonatomic, strong) NSString<Optional> *use_conditions_;
+
+@property (nonatomic, strong) NSString<Optional> *modify_date_;
+
+@property (nonatomic, strong) NSString<Optional> *is_split_use_;
+
+@property (nonatomic, strong) NSNumber<Optional> *used_amount_;
+
+@property (nonatomic, strong) NSNumber<Optional> *total_amount_;
+
+@property (nonatomic, strong) NSString<Optional> *redpacket_name_;
+
+@property (nonatomic, strong) NSNumber<Optional> * is_using_;
+
+@property (nonatomic, strong) NSString<Optional> *validity_period_to_;
+
+@property (nonatomic, strong) NSString<Optional> *create_by_;
 
 @end
 

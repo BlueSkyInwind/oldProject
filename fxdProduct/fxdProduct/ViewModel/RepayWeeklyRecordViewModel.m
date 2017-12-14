@@ -10,42 +10,21 @@
 
 @implementation RepayWeeklyRecordViewModel
 
--(void)getRepayHistoryList{
 
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getRepayHistory_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
 -(void)getMoneyHistoryList{
 
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getMoneyHistory_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_getMoneyHistory_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
-            self.returnBlock(object);
+            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
         }
     } failure:^(EnumServerStatus status, id object) {
         if (self.faileBlock) {
             [self faileBlock];
         }
     }];
+    
 }
 
--(void)bankCardList{
 
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
 @end

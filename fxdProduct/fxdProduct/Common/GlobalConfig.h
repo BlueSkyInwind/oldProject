@@ -50,6 +50,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 UIKIT_EXTERN NSString * const _main_url;
 UIKIT_EXTERN NSString * const _main_new_url;
+UIKIT_EXTERN NSString * const _mainTwo_new_url;
 UIKIT_EXTERN NSString * const _ValidESB_url;
 UIKIT_EXTERN NSString * const _P2P_url;
 UIKIT_EXTERN NSString * const _H5_url;
@@ -75,13 +76,11 @@ UIKIT_EXTERN NSString * const       _saveLoanApplicant_url;                  //�
 UIKIT_EXTERN NSString * const       _findLoanAuditProgress_url;              //进度审核
 UIKIT_EXTERN NSString * const       _userSureRefuseLoanAction_url;           //用户拒绝与接收
 UIKIT_EXTERN NSString * const       _updateAvatar_url;                       //上传照片
-UIKIT_EXTERN NSString * const       _cardList_url;                           //银行卡列表查询
 UIKIT_EXTERN NSString * const       _feedBack_url;                           //意见反馈
 UIKIT_EXTERN NSString * const       _getMoneyHistory_url;                    //借款记录
 UIKIT_EXTERN NSString * const       _getRepayHistory_url;                    //还款记录
 UIKIT_EXTERN NSString * const       _schoolList_url;                         //学校列表
 UIKIT_EXTERN NSString * const       _BankNumCheck_url;                       //银行卡校验
-UIKIT_EXTERN NSString * const       _Certification_url;                      //手机认证信息
 UIKIT_EXTERN NSString * const       _getCustomerAuth_jhtml;                  //获取手机认证信息
 UIKIT_EXTERN NSString * const       _getFristRepaymentDate;                  //提款获取第一个还款日
 UIKIT_EXTERN NSString * const       _getMobileOpera_url;                     //获取手机运营商

@@ -9,8 +9,5 @@
 #import "RepayRecord.h"
 
 @implementation RepayRecord
--(void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    
-}
+
 @end

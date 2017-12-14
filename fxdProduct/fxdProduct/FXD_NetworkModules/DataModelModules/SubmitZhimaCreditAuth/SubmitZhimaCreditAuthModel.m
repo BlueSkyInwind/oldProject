@@ -10,15 +10,5 @@
 
 @implementation SubmitZhimaCreditAuthModel
 
-
-+ (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"result":[SubmitResult class]};
-}
-
 @end
 
-@implementation SubmitResult
-
-
-
-@end

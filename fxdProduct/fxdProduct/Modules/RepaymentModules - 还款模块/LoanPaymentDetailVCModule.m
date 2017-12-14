@@ -259,10 +259,10 @@
 - (void)updateTotalAmount
 {
     if (_repayListInfo != nil) {
-        if (_repayListInfo.result.total_amount > 0) {
-            if (_repayListInfo.result.total_amount <= _repayAmount) {
-                _useTotalAmount = _repayListInfo.result.total_amount;
-                _finalyRepayAmount = _repayAmount - _repayListInfo.result.total_amount;
+        if ([_repayListInfo.total_amount_ floatValue] > 0) {
+            if ([_repayListInfo.total_amount_ floatValue] <= _repayAmount) {
+                _useTotalAmount = [_repayListInfo.total_amount_ floatValue];
+                _finalyRepayAmount = _repayAmount - [_repayListInfo.total_amount_ floatValue];
             } else {
                 _useTotalAmount = _repayAmount;
                 _finalyRepayAmount = 0.0;
@@ -354,9 +354,9 @@
                         int w = 0;  //未来
                         int d = 0;  //当期
                         for (int i = 0; i < _situations.count; i++) {
-                            if ([[_situations objectAtIndex:i].status isEqualToString:@"2"]) {
+                            if ([[_situations objectAtIndex:i].status_ isEqualToString:@"2"]) {
                                 y++;
-                            } else if ([[_situations objectAtIndex:i].status isEqualToString:@"3"]) {
+                            } else if ([[_situations objectAtIndex:i].status_ isEqualToString:@"3"]) {
                                 w++;
                             } else  {
                                 d++;
@@ -418,9 +418,9 @@
                         int w = 0;  //未来
                         int d = 0;  //当期
                         for (int i = 0; i < _situations.count; i++) {
-                            if ([[_situations objectAtIndex:i].status isEqualToString:@"2"]) {
+                            if ([[_situations objectAtIndex:i].status_ isEqualToString:@"2"]) {
                                 y++;
-                            } else if ([[_situations objectAtIndex:i].status isEqualToString:@"3"]) {
+                            } else if ([[_situations objectAtIndex:i].status_ isEqualToString:@"3"]) {
                                 w++;
                             } else  {
                                 d++;
@@ -450,7 +450,7 @@
                     }
                 }
                 else if(indexPath.row == 1 ){//逾期费用
-                    cell.payLabel.text = [NSString stringWithFormat:@"%.2f元",_repayListInfo.result.overdue_total_];
+                    cell.payLabel.text = [NSString stringWithFormat:@"%.2f元",[_repayListInfo.overdue_total_ floatValue]];
                 }else if (indexPath.row == 2){//溢缴金额
                     cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useTotalAmount];
                 }else{                //应付金额
@@ -632,12 +632,12 @@
         discountNumStr = [NSString stringWithFormat:@"折扣%@元",discountAmount];
     }
     
-    if (_repayListInfo.result.total_amount >= (_repayAmount - _useredPacketAmount)) {
+    if ([_repayListInfo.total_amount_ floatValue] >= (_repayAmount - _useredPacketAmount)) {
         _useTotalAmount = fabs(_repayAmount - _useredPacketAmount);
         _finalyRepayAmount = 0.0;
     } else {
-        _useTotalAmount = _repayListInfo.result.total_amount;
-        _finalyRepayAmount = _repayAmount - _useredPacketAmount - _repayListInfo.result.total_amount;
+        _useTotalAmount = [_repayListInfo.total_amount_ floatValue];
+        _finalyRepayAmount = _repayAmount - _useredPacketAmount - [_repayListInfo.total_amount_ floatValue];
     }
     
     [self.PayDetailTB reloadData];
@@ -649,26 +649,27 @@
  
  @param index 所选红包标识
  */
+/*
 - (void)selectIndex:(NSInteger)index
 {
     [self dismissSemiModalViewWithCompletion:^{
-        Available_Redpackets *redPacket = [_repayListInfo.result.available_redpackets objectAtIndex:index];
-        _selectRedPacket = redPacket.residual_amount;   //所选红包金额
-        _selectRedPacketID = redPacket.RedpacketID;     //红包id
-        _finalyRepayAmount = _repayAmount - _repayListInfo.result.situations.firstObject.debt_service_fee;
+        Available_Redpackets *redPacket = [_repayListInfo.available_redpackets_ objectAtIndex:index];
+        _selectRedPacket = [redPacket.residual_amount_ floatValue];   //所选红包金额
+        _selectRedPacketID = redPacket.RedpacketID_;     //红包id
+        _finalyRepayAmount = _repayAmount - [_repayListInfo.situations_.firstObject.debt_service_fee_ floatValue];
         // 折扣金额
         CGFloat _discountsAmount = 0;   // 红包 或者 利息
         _useredPacketAmount = _selectRedPacket;
         _discountsAmount = _selectRedPacket;
         
         // 红包小于第一期，使用红包
-        if (_selectRedPacket <= _repayListInfo.result.situations.firstObject.debt_total) {
+        if (_selectRedPacket <= [_repayListInfo.situations_.firstObject.debt_total_ floatValue]) {
             _useredPacketAmount = _selectRedPacket;
             _discountsAmount = _selectRedPacket;
         } else {
              // 红包大于第一期，使用第一期
-            _useredPacketAmount = _repayListInfo.result.situations.firstObject.debt_total;
-            _discountsAmount = _repayListInfo.result.situations.firstObject.debt_total;
+            _useredPacketAmount = [_repayListInfo.situations_.firstObject.debt_total_ floatValue];
+            _discountsAmount = [_repayListInfo.situations_.firstObject.debt_total_ floatValue];
         }
     
         if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
@@ -677,17 +678,17 @@
         }
         
         // 溢缴金  大于  本金减折息金额
-        if (_repayListInfo.result.total_amount >= (_repayAmount - _discountsAmount)) {
+        if ([_repayListInfo.total_amount_ floatValue] >= (_repayAmount - _discountsAmount)) {
             _useTotalAmount = fabs(_repayAmount - _discountsAmount);
             _finalyRepayAmount = 0.0;
         } else {
-            _useTotalAmount = _repayListInfo.result.total_amount;
-            _finalyRepayAmount = _repayAmount - _discountsAmount - _repayListInfo.result.total_amount;
+            _useTotalAmount = [_repayListInfo.total_amount floatValue];
+            _finalyRepayAmount = _repayAmount - _discountsAmount - [_repayListInfo.total_amount floatValue];
         }
         [self.PayDetailTB reloadData];
     }];
 }
-
+*/
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -738,7 +739,7 @@
     
     NSMutableString *staging_ids = [NSMutableString string];
     for (int i = 0; i < _situations.count; i++) {
-        NSString *str = [NSString stringWithFormat:@"%@,",[_situations objectAtIndex:i].staging_id];
+        NSString *str = [NSString stringWithFormat:@"%@,",[_situations objectAtIndex:i].staging_id_];
         [staging_ids appendString:str];
     }
     [staging_ids deleteCharactersInRange:NSMakeRange(staging_ids.length - 1, 1)];
@@ -766,7 +767,7 @@
         paymentDetailModel.repay_amount_ = @(_finalyRepayAmount);   //应还金额
         paymentDetailModel.repay_total_ = @(_repayAmount);           //实际金额
         paymentDetailModel.save_amount_ = @(_save_amount);        //前端全选时节省的未还服务费
-        paymentDetailModel.socket = _repayListInfo.result.socket;     //还款标示
+        paymentDetailModel.socket = _repayListInfo.socket_;     //还款标示
         paymentDetailModel.request_type_ = save_amountTemp;      //请求类型
         paymentDetailModel.redpacket_id_ = _selectRedPacketID;
         paymentDetailModel.redpacket_cash_ = @(_useredPacketAmount);
@@ -777,7 +778,7 @@
         paymentDetailModel.repay_amount_ = @(_finalyRepayAmount);
         paymentDetailModel.repay_total_ = @(_repayAmount);
         paymentDetailModel.save_amount_ = @(_save_amount);
-        paymentDetailModel.socket = _repayListInfo.result.socket;
+        paymentDetailModel.socket = _repayListInfo.socket_;
         paymentDetailModel.request_type_ = save_amountTemp;
     }
     
@@ -797,16 +798,15 @@
     }
     PaymentViewModel * paymentViewModel = [[PaymentViewModel alloc]init];
     [paymentViewModel setBlockWithReturnBlock:^(id returnValue) {
-        DLog(@"%@",returnValue[@"msg"]);
-        BaseResultModel * baseResultModel = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
-        if ([baseResultModel.flag isEqualToString:@"0000"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.msg];
+        BaseResultModel * baseResultModel = returnValue;
+        if ([baseResultModel.errCode isEqualToString:@"0"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.friendErrMsg];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
         }else {
             self.sureBtn.enabled = YES;
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.friendErrMsg];
         }
     } WithFaileBlock:^{
         self.sureBtn.enabled = YES;
@@ -814,56 +814,7 @@
     [paymentViewModel FXDpaymentDetail:paymentDetailModel];
 }
 
-#pragma mark 正常扣款
-- (void)repaySure
-{
-    NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
-                          @"bid_id_":_p2pBillModel.data.bid_id_,
-                          @"amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
-                          @"method_":@"doPay",
-                          @"max_bill_date_":[FXD_Tool dateToFormatString:_bills.lastObject.bill_date_],
-                          @"from_mobile_":[FXD_Utility sharedUtility].userInfo.userMobilePhone};
-    NSString *url = [NSString stringWithFormat:@"%@%@",_P2P_url,_paymentService_url];
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:url parameters:dic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if ([[object objectForKey:@"appcode"] isEqualToString:@"1"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"appmsg"]];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
-//#pragma mark P2P结清  全部还款
-- (void)paySettle
-{
-
-    NSDictionary *dic = @{@"bill_id_":_p2pBillModel.data.bill_id_,
-                          @"bid_id_":_p2pBillModel.data.bid_id_,
-                          @"amount_":[NSString stringWithFormat:@"%.2f",_finalyRepayAmount],
-                          @"method_":@"doSettle",
-                          @"max_bill_date_":[FXD_Tool dateToFormatString:_bills.lastObject.bill_date_],
-                          @"from_mobile_":[FXD_Utility sharedUtility].userInfo.userMobilePhone};
-    
-    NSString *url = [NSString stringWithFormat:@"%@%@",_P2P_url,_paymentService_url];
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] HG_POSTWithURL:url parameters:dic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if ([[object objectForKey:@"appcode"] isEqualToString:@"1"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[object objectForKey:@"appmsg"]];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
-}
-
 #pragma mark 查询用户状态
-
 -(void)getMoney{
     
     [self getUserStatus:self.applicationID success:^(QryUserStatusModel *_model) {
@@ -895,7 +846,6 @@
 
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-//        NSArray *array = @[@"BOC",@"ICBC",@"CCB",@"ABC",@"CITIC",@"CIB",@"CEB"];
         QueryCardInfo *model = [QueryCardInfo yy_modelWithJSON:returnValue];
         if ([model.flag isEqualToString:@"0000"]) {
             _queryCardInfoModel = model;

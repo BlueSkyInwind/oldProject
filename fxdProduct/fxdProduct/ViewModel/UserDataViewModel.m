@@ -78,18 +78,6 @@
     }];
 }
 
--(void)obtainGatheringInformation{
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
-
 -(void)uploadLiveIdentiInfo:(FaceIDData *)imagesDic{
     
     NSDictionary *paramDic = @{@"api_key":FaceIDAppKey,
@@ -129,15 +117,6 @@
 - (void)uploadLiveInfo:(NSString *)resultJSONStr isSuccess:(void(^)(id object))success
 {
     
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_detectInfo_url] parameters:@{@"records":resultJSONStr} finished:^(EnumServerStatus status, id object) {
-//        if (self.returnBlock) {
-//            self.returnBlock(object);
-//        }
-//        success(object);
-//    } failure:^(EnumServerStatus status, id object) {
-//
-//    }];
-    
     NSDictionary * paramDic = @{@"records":resultJSONStr};
     [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_detectInfo_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
@@ -149,8 +128,33 @@
             self.faileBlock();
         }
     }];
-    
 }
+
+/**
+芝麻信用信息提交
+
+ @param id_code 身份证idr
+ @param user_name 用户名
+ */
+-(void)SubmitZhimaCreditID_code:(NSString *)id_code user_name:(NSString *)user_name{
+    
+    CustomerSesameCreditModel * customerCM = [[CustomerSesameCreditModel alloc]init];
+    customerCM.id_code_ = id_code;
+    customerCM.user_name_ = user_name;
+    NSDictionary * paramDic = [customerCM toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_submitZhimaCredit_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseResultM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
 #pragma  mark - 社保  公积金
 /**
  社保

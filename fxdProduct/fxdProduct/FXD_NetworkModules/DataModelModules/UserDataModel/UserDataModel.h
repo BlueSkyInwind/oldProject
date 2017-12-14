@@ -46,6 +46,13 @@
 
 @end
 
+@interface CustomerSesameCreditModel : JSONModel
+
+@property (strong,nonatomic)NSString<Optional> * id_code_;
+@property (strong,nonatomic)NSString<Optional> * user_name_;
+
+@end
+
 
 
 

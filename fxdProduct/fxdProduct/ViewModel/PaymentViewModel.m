@@ -14,13 +14,14 @@
     
     NSDictionary * paramDic = [paymentDetailModel toDictionary];
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_RepayOrSettleWithPeriod_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_RepayOrSettleWithPeriod_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
-            self.returnBlock(object);
+            BaseResultModel *baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
         }
     } failure:^(EnumServerStatus status, id object) {
         if (self.faileBlock) {
-            [self faileBlock];
+            self.faileBlock();
         }
     }];
 }

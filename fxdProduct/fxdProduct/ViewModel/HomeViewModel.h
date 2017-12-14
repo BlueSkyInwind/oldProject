@@ -12,13 +12,6 @@
 @interface HomeViewModel : FXD_ViewModelBaseClass
 
 /**
- 用户装填请求
-
- @param productId 产品id
- */
-- (void)fetchUserState:(NSString *)productId;
-
-/**
  获取借款滚动记录
  */
 -(void)fetchLoanRecord;

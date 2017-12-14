@@ -52,6 +52,7 @@
 #import "FXDBaseTabBarVCModule.h"
 #import "UserDataInformationModel.h"
 #import "GTMBase64.h"
+#import "CommonViewModel.h"
 
 #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0

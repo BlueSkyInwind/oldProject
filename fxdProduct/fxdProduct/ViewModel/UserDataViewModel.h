@@ -37,10 +37,14 @@
  用户联系人信息的状态
  */
 -(void)obtainContactInfoStatus;
+
 /**
- 获取收款信息
+ 芝麻信用信息提交
+ 
+ @param id_code 身份证id
+ @param user_name 用户名
  */
--(void)obtainGatheringInformation;
+-(void)SubmitZhimaCreditID_code:(NSString *)id_code user_name:(NSString *)user_name;
 
 
 #pragma  mark - 社保  公积金

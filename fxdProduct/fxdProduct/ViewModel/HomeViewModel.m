@@ -11,31 +11,6 @@
 @implementation HomeViewModel
 
 
-- (void)fetchUserState:(NSString *)productId
-{
-    
-//    NSParameterAssert(productId);
-
-    NSDictionary *dicParam = @{@"product_id_":productId};
-    [self postUserStateParam:dicParam];
-
-}
-
--(void)postUserStateParam:(NSDictionary *)paramDic{
-    
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_userState_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }        //        [self fetchValueSuccessWithDic:object];
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
-
-
-
 -(void)fetchLoanProcess{
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_queryLoanStatus_url] parameters:nil finished:^(EnumServerStatus status, id object) {

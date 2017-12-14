@@ -41,7 +41,7 @@
     } else {
         [_numberOfIdentifier setHidden:NO];
         if (_displayStyle == RepayCellDetail) {
-            if (![_situation.status isEqualToString:@"1"]) {
+            if (![_situation.status_ isEqualToString:@"1"]) {
                 NSString *path = [[NSBundle mainBundle] pathForResource:@"repay_circle_un@2x" ofType:@"png"];
                 UIImage *image = [UIImage imageWithContentsOfFile:path];
                 _identifierView.layer.contents = (id)image.CGImage;
@@ -68,15 +68,15 @@
 {
     _situation = situation;
     if (_displayStyle == RepayCellNormal) {
-        _numberOfIdentifier.text = [NSString stringWithFormat:@"%ld",_situation.no];
-        _moneyLabel.text = [NSString stringWithFormat:@"%.2f元",_situation.debt_total];
-        if ([_situation.status isEqualToString:@"2"]) {
-            _overTime.text = [NSString stringWithFormat:@"逾期%ld天",labs(_situation.days)];
+        _numberOfIdentifier.text = [NSString stringWithFormat:@"%ld",[_situation.no_ integerValue]];
+        _moneyLabel.text = [NSString stringWithFormat:@"%.2f元",[_situation.debt_total_ floatValue]];
+        if ([_situation.status_ isEqualToString:@"2"]) {
+            _overTime.text = [NSString stringWithFormat:@"逾期%ld天",labs([_situation.days_ integerValue])];
             _moneyLabel.textColor = [UIColor redColor];
             _overTime.textColor = [UIColor redColor];
         }else {
-            _overTime.text = [NSString stringWithFormat:@"剩余%ld天",_situation.days];
-            if ([_situation.status isEqualToString:@"4"]) {
+            _overTime.text = [NSString stringWithFormat:@"剩余%ld天",[_situation.days_ integerValue]];
+            if ([_situation.status_ isEqualToString:@"4"]) {
                 _moneyLabel.textColor = rgb(253, 111, 0);
             }else {
                 _moneyLabel.textColor = UI_MAIN_COLOR;
@@ -85,21 +85,21 @@
         }
     }else {
         
-        _moneyLabel.text = [NSString stringWithFormat:@"%.2f元",_situation.debt_total];
-        if ([_situation.status isEqualToString:@"2"]) {
-            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 逾期",_situation.end_time];
+        _moneyLabel.text = [NSString stringWithFormat:@"%.2f元",[_situation.debt_total_ floatValue]];
+        if ([_situation.status_ isEqualToString:@"2"]) {
+            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 逾期",_situation.end_time_];
             _detailStateLabel.textColor = [UIColor redColor];
             _moneyLabel.textColor = [UIColor redColor];
-        }else if ([_situation.status isEqualToString:@"1"]) {
-            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 已还",_situation.end_time];
+        }else if ([_situation.status_ isEqualToString:@"1"]) {
+            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 已还",_situation.end_time_];
             _detailStateLabel.textColor = [UIColor grayColor];
             _moneyLabel.textColor = [UIColor grayColor];
-        }else if ([situation.status isEqualToString:@"4"]) {
-            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 待还",_situation.end_time];
+        }else if ([situation.status_ isEqualToString:@"4"]) {
+            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 待还",_situation.end_time_];
             _detailStateLabel.textColor = [UIColor grayColor];
             _moneyLabel.textColor = rgb(253, 111, 0);
         }else {
-            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 待还",_situation.end_time];
+            _detailStateLabel.text = [NSString stringWithFormat:@"%@ 待还",_situation.end_time_];
             _detailStateLabel.textColor = [UIColor grayColor];
             _moneyLabel.textColor = UI_MAIN_COLOR;
         }
@@ -161,7 +161,7 @@
         }
     } else {
         if (_situation != nil) {
-            if ([_situation.status isEqualToString:@"2"] || [_situation.status isEqualToString:@"4"]) {
+            if ([_situation.status_ isEqualToString:@"2"] || [_situation.status_ isEqualToString:@"4"]) {
                 if (_row != _clickMinIndex) {
                     _identifierSelect = !_identifierSelect;
                     BOOL seletState = _identifierSelect;
