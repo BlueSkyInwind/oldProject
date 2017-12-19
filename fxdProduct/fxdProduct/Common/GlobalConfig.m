@@ -114,7 +114,6 @@ NSString * const    _selectPlatform_url    =    @"case/select_platform.html";
 //芝麻信用授权查询
 NSString * const    _findZhimaCredit_url    =    @"zmxy/findZhimaCreditAuthStatus.jhtml";
 
-
 #pragma mark - 新的api
 
 //社保
