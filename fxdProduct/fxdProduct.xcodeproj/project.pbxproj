@@ -1121,6 +1121,8 @@
 		CC45E72C1FD78FF500DE803D /* ShowMsgPreviewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E72A1FD78FF500DE803D /* ShowMsgPreviewModel.m */; };
 		CC45E72F1FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E72E1FD790F800DE803D /* AountStationLetterMsgModel.m */; };
 		CC45E7301FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E72E1FD790F800DE803D /* AountStationLetterMsgModel.m */; };
+		CC45E7371FD915A300DE803D /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E7361FD915A300DE803D /* UITabBar+badge.m */; };
+		CC45E7381FD915A300DE803D /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = CC45E7361FD915A300DE803D /* UITabBar+badge.m */; };
 		CC49BA031FC516D000232041 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */; };
 		CC49BA041FC516D000232041 /* WithdrawHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */; };
 		CC49BA061FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */; };
@@ -2296,6 +2298,8 @@
 		CC45E72A1FD78FF500DE803D /* ShowMsgPreviewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowMsgPreviewModel.m; sourceTree = "<group>"; };
 		CC45E72D1FD790F800DE803D /* AountStationLetterMsgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AountStationLetterMsgModel.h; sourceTree = "<group>"; };
 		CC45E72E1FD790F800DE803D /* AountStationLetterMsgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AountStationLetterMsgModel.m; sourceTree = "<group>"; };
+		CC45E7351FD915A300DE803D /* UITabBar+badge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITabBar+badge.h"; sourceTree = "<group>"; };
+		CC45E7361FD915A300DE803D /* UITabBar+badge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+badge.m"; sourceTree = "<group>"; };
 		CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawHeaderView.swift; sourceTree = "<group>"; };
 		CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailsViewController.swift; sourceTree = "<group>"; };
 		CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelDescriptionView.h; sourceTree = "<group>"; };
@@ -3579,6 +3583,8 @@
 				63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */,
 				84F87F451FC3CD6600F1C5CD /* UIFont+YX_Font.h */,
 				84F87F461FC3CD6600F1C5CD /* UIFont+YX_Font.m */,
+				CC45E7351FD915A300DE803D /* UITabBar+badge.h */,
+				CC45E7361FD915A300DE803D /* UITabBar+badge.m */,
 			);
 			path = FXD_Tools;
 			sourceTree = "<group>";
@@ -6243,6 +6249,7 @@
 				630DE72B1DDC2F6D00A2D53A /* FXD_AppUpdateChecker.m in Sources */,
 				8492ED261FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */,
 				637636E71D76A72A00E93289 /* LewPopupBackgroundView.m in Sources */,
+				CC45E7371FD915A300DE803D /* UITabBar+badge.m in Sources */,
 				CCDEDF5C1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */,
 				634830FE1CBCA1A90005C4CD /* RegionCodeExt.m in Sources */,
 				635B0BE11DF157EA008EAFD1 /* DetailViewController.m in Sources */,
@@ -6605,6 +6612,7 @@
 				84E2BDE11F53F3FB00E447EB /* UserDataModel.m in Sources */,
 				CC0DFA341EA5B1090024841A /* GetMoneyProcessBaseClass.m in Sources */,
 				CC0DFA351EA5B1090024841A /* NSDictionary+NilSafe.m in Sources */,
+				CC45E7381FD915A300DE803D /* UITabBar+badge.m in Sources */,
 				CC0DFA361EA5B1090024841A /* YYLabel.m in Sources */,
 				CC0DFA371EA5B1090024841A /* CycleTextCell.m in Sources */,
 				846BB6E01F580B6400CD3545 /* RenewalVCModules.swift in Sources */,
@@ -7188,7 +7196,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7302,7 +7310,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -33,6 +33,12 @@
 #import "LoanMoneyViewModel.h"
 #import "ApplicationStatusModel.h"
 #import "UserDataViewModel.h"
+#import "MessageViewModel.h"
+#import "AountStationLetterMsgModel.h"
+#import "MyViewController.h"
+#import "FXDBaseTabBarVCModule.h"
+#import "UITabBar+badge.h"
+
 
 @interface HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
 {
@@ -56,6 +62,9 @@
 
 @property (nonatomic,strong) LoadFailureView * loadFailView;
 @property (nonatomic,strong) HomeChoosePopView * popChooseView;
+@property (nonatomic,strong) UIView *bgView;
+@property (nonatomic,strong) UILabel *messageNumLabel;
+@property (nonatomic,strong) UIButton *messageBtn;
 
 @end
 
@@ -72,13 +81,14 @@
     _count = 0;
    _dataArray = [NSMutableArray array];
     [self setUpTableview];
-//    [self setNavQRRightBar];
+    [self setNavQRRightBar];
     [self setNavQRLeftBar];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+
     [UserDefaulInfo getUserInfoData];
     
     if ([FXD_Utility sharedUtility].loginFlage) {
@@ -88,12 +98,15 @@
         }
     }
     [self LoadHomeView];
+    
 }
 
 /**
  根据数据加载视图的状况
  */
 -(void)LoadHomeView{
+    
+    [self getMessageNumber];
     [self getAllTheHomePageData:^(BOOL isSuccess) {
         if (_loadFailView) {
             [_loadFailView removeFromSuperview];
@@ -103,6 +116,8 @@
             [self setUploadFailView];
         }
     }];
+    
+   
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -159,21 +174,36 @@
  */
 - (void)setNavQRRightBar {
     
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 23, 18)];
-    [btn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(16, -8, 13, 13)];
-    bgView.backgroundColor = [UIColor redColor];
-    bgView.layer.cornerRadius = 6.5;
-    [btn addSubview:bgView];
+    _messageBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 23, 18)];
+    [_messageBtn setImage:[UIImage imageNamed:@"homeMessage"] forState:UIControlStateNormal];
+    [_messageBtn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
+    _bgView = [[UIView alloc]init];
+    _bgView.backgroundColor = [UIColor redColor];
+    _bgView.layer.cornerRadius = 6.5;
+    _bgView.hidden = true;
+    [_messageBtn addSubview:_bgView];
 
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(2, 0, 10, 12)];
-    label.text = @"3";
-    label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:12];
-    [bgView addSubview:label];
+    [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_messageBtn.mas_left).offset(16);
+        make.top.equalTo(_messageBtn.mas_top).offset(-4);
+        make.width.equalTo(@13);
+        make.height.equalTo(@13);
+        
+    }];
+
+    _messageNumLabel = [[UILabel alloc]init];
+    _messageNumLabel.textAlignment = NSTextAlignmentCenter;
+    _messageNumLabel.textColor = [UIColor whiteColor];
+    _messageNumLabel.font = [UIFont systemFontOfSize:12];
+    [_bgView addSubview:_messageNumLabel];
+    [_messageNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_bgView.mas_left).offset(0);
+        make.top.equalTo(_bgView.mas_top).offset(0);
+        make.right.equalTo(_bgView.mas_right).offset(0);
+        make.height.equalTo(@13);
+    }];
     
-    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:_messageBtn];
 
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = 8;
@@ -186,8 +216,60 @@
 -(void)setNavQRLeftBar {
     
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRCodePopups)];
-    self.navigationItem.rightBarButtonItem = aBarbi;
+    self.navigationItem.leftBarButtonItem = aBarbi;
     
+}
+/**
+ 站内信用户未读信息统计接口
+ */
+
+-(void)getMessageNumber{
+    
+    MessageViewModel *messageVM = [[MessageViewModel alloc]init];
+    [messageVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            AountStationLetterMsgModel *model = [[AountStationLetterMsgModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+        
+            if ([model.isDisplay isEqualToString:@"1"]) {
+                _bgView.hidden = false;
+                _messageNumLabel.text = model.countNum;
+
+                if (model.countNum.integerValue > 9) {
+
+                    [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.left.equalTo(_messageBtn.mas_left).offset(6);
+                        make.width.equalTo(@24);
+                    }];
+
+                }else{
+                    
+                    [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.left.equalTo(_messageBtn.mas_left).offset(16);
+                        make.width.equalTo(@13);
+                    }];
+            
+                }
+                if (model.countNum.integerValue > 99) {
+                    _messageNumLabel.text = @"99+";
+                }
+                [self.tabBarController.tabBar showBadgeOnItemIndex:2];
+            }else{
+                _bgView.hidden = true;
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
+            }
+            
+        }else{
+        
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+    
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [messageVM countStationLetterMsg];
 }
 
 
@@ -210,8 +292,13 @@
  */
 -(void)homeQRMessage{
     
-    MyMessageViewController *myMessageCV = [[MyMessageViewController alloc]init];
-    [self.navigationController pushViewController:myMessageCV animated:true];
+    if ([FXD_Utility sharedUtility].loginFlage) {
+        MyMessageViewController *myMessageCV = [[MyMessageViewController alloc]init];
+        [self.navigationController pushViewController:myMessageCV animated:true];
+    } else {
+        [self presentLoginVC:self];
+    }
+    
 }
 #pragma mark tabView视图
 - (void)setUpTableview
@@ -1044,4 +1131,6 @@
     controller.dataArray = dataArray;
     [self.navigationController pushViewController:controller animated:true];
 }
+
+
 @end

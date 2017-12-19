@@ -38,11 +38,22 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             make.edges.equalTo(self.view)
         })
         
+        if #available(iOS 11.0, *){
+            tableView?.contentInsetAdjustmentBehavior = .never;
+            tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
+        }else if #available(iOS 9.0, *){
+            self.automaticallyAdjustsScrollViewInsets = true;
+        }else{
+            self.automaticallyAdjustsScrollViewInsets = false;
+        }
+        
     }
-    
+
+
     func createNoneView(){
         
         noneView = NonePageView()
+        noneView?.ReminderUI()
         noneView?.backgroundColor = LINE_COLOR
         noneView?.isHidden = true
         self.view.addSubview(noneView!)
@@ -55,7 +66,7 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
     }
     
     func getWithdrawCashDetail(){
-        
+
         let cashVM = CashViewModel()
         cashVM.setBlockWithReturn({[weak self] (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
@@ -122,7 +133,7 @@ class ReminderDetailsViewController: BaseViewController ,UITableViewDelegate,UIT
             messageCell.cellType = MessageCellType(cellType: .Header)
             return messageCell
         }
-        
+
         let  detailModel = model?.withdrawCashDetailList[indexPath.row - 1] as? WithdrawCashDetailListModel
         
         cell.selectionStyle = .none
