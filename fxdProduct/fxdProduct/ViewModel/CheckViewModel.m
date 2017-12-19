@@ -9,22 +9,9 @@
 #import "CheckViewModel.h"
 #import "SaveLoanCaseParamModel.h"
 #import "HGBankListModel.h"
+#import "DrawingsInfoModel.h"
 
 @implementation CheckViewModel
-
--(void)approvalAmount{
-
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_approvalAmount_jhtml] parameters:nil finished:^(EnumServerStatus status, id object) {
-        
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
 
 #pragma mark - 新API
 //提款信息页面
@@ -55,6 +42,39 @@
     }];
 }
 
+/**
+ 提款
+
+ @param period_ 期数
+ @param loan_for_ 用途
+ @param drawAmount 金额
+ @param card_id 卡id
+ */
+-(void)withDrawalsApplyPeriod:(NSString *)period_ loan_for:(NSString *)loan_for_ DrawAmount:(NSString *)drawAmount  card_id:(NSString *)card_id{
+    
+    WithDrawalsParamModel * withDrawalsM = [[WithDrawalsParamModel alloc]init];
+    withDrawalsM.periods = period_;
+    withDrawalsM.loanFor = loan_for_;
+    withDrawalsM.accountCardId = card_id;
+    
+    NSDictionary * paramDic = [withDrawalsM toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_drawApplyAgain_jhtml] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseRm = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRm);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+
+}
+
+
+
+
 
 @end
 
@@ -66,13 +86,10 @@
     NSDictionary *param = @{@"client_":@"1",@"from_case_id_":applicationId};
 
     [[FXD_NetWorkRequestManager sharedNetWorkManager]HG_POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_qryUserStatus_url] parameters:param finished:^(EnumServerStatus status, id object) {
-        
         if (self.returnBlock) {
             self.returnBlock(object);
         }
-        
     } failure:^(EnumServerStatus status, id object) {
-        
         if (self.faileBlock) {
             [self faileBlock];
         }
@@ -101,19 +118,6 @@
 }
 
 
--(void)getFXDCaseInfo{
-
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_ValidESB_url,_getFXDCaseInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
-
 @end
 
 
@@ -139,10 +143,11 @@
  @param platform 平台     2 - 银生宝   4 - 汇付
  */
 -(void)getSupportBankListInfo:(NSString *)platform{
-    
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getSupportBankList_url] parameters:@{@"pay_platform_id_":platform} finished:^(EnumServerStatus status, id object) {
+
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_getSupportBankList_url] isNeedNetStatus:true parameters:@{@"pay_platform_id_":platform} finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
-            self.returnBlock(object);
+            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
         }
     } failure:^(EnumServerStatus status, id object) {
         if (self.faileBlock) {
@@ -166,19 +171,7 @@
     }];
 }
 
--(void)queryCardListInfo{
-    
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]HG_POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:@{@"dict_type_":@"__HG_CARD_BANK_"} finished:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
+
 
 
 

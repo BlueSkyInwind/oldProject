@@ -8,23 +8,6 @@
 
 #import "ReconfrInfoModel.h"
 
-@implementation ReconfrInfoModel
-
-+ (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"result":[ReconfrInfoModelResult class]};
-}
-
-@end
-
-
-@implementation ReconfrInfoModelResult
-
-+ (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"list":[ReconfrList class]};
-}
-
-@end
-
 @implementation ReconfrList
 
 

@@ -22,6 +22,7 @@
 #import "Custom_BaseInfo.h"
 #import "CustomerIDInfo.h"
 #import "DataDicParse.h"
+#import "PserInfoViewModel.h"
 
 
 #define FirstComponent 0
@@ -34,7 +35,7 @@
     NSArray *_placeHolderArr;
     NSMutableArray *dataColor;
     NSMutableArray *dataListArr;
-    RegionBaseClass *_reginBase;
+    NSMutableArray *_reginListArr;
     RegionSub *_regionSub;
     RegionResult *_regionResult;
     NSMutableArray *_pickerArray;
@@ -47,11 +48,11 @@
     UIButton *_saveBtn;
     FaceIDOCRFront *_idOCRFrontParse;
     FaceIDOCRBack *_idOCRBackParse;
-    NSDictionary *_eduLevelDic;
     NSString *_poro;
     CustomerIDInfo *_customerFrontIDParse;
     CustomerIDInfo *_customerBackIDParse;
     DataDicParse *_dataDicEduLevel;
+    NSMutableArray * _edudataList;
 }
 
 
@@ -77,11 +78,8 @@
     _thirdPickerArray = [NSMutableArray array];
     dataListArr = [NSMutableArray array];
     dataColor = [NSMutableArray array];
-    _eduLevelDic = @{@"博士及以上":@"1",
-                     @"硕士":@"2",
-                     @"本科":@"3",
-                     @"大专":@"4",
-                     @"高中":@"5"};
+    _edudataList = [NSMutableArray array];
+    _reginListArr = [NSMutableArray array];
     for (int i = 0; i < 6; i++) {
         [dataColor addObject:UI_MAIN_COLOR];
         [dataListArr addObject:@""];
@@ -93,28 +91,42 @@
     [self setValueOfDataArr];
 }
 
-- (void)getCodeDic:(void(^)())finish
+- (void)getEduLevelListInfo:(void(^)())finish
 {
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getDicCode_url] parameters:@{@"dict_type_":@"EDUCATION_LEVEL_"} finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        
-        if (![[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-        }else {
-            _dataDicEduLevel = [DataDicParse yy_modelWithJSON:object];
+    //教育等级列表信息
+    if (_edudataList.count != 0) {
+        if (finish) {
+            finish();
+            return;
+        }
+    }
+    
+    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
+    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            [_edudataList removeAllObjects];
+            NSArray * tempArr = (NSArray *)baseRM.data;
+            for (NSDictionary * dic in tempArr) {
+                DataDicParse * dataParse = [[DataDicParse alloc]initWithDictionary:dic error:nil];
+                [_edudataList addObject:dataParse];
+            }
             if (finish) {
                 finish();
             }
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
+        
     }];
+    [userDataVM getCommonDictCodeListTypeStr:@"EDUCATION_LEVEL_"];
 }
 
 - (void)configTableView
 {
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.tableView.showsVerticalScrollIndicator = NO;
-// self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0.0001)];
     self.tableView.tableHeaderView = [self tableViewHeaderView];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([IdentityCell class]) bundle:nil] forCellReuseIdentifier:@"IdentityCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
@@ -164,131 +176,85 @@
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(iconView.mas_right).offset(4);
         make.centerY.equalTo(backView.mas_centerY);
-        //                make.bottom.equalTo(cell.contentView);
         make.height.equalTo(@30);
         make.right.equalTo(backView);
     }];
     return backView;
 }
 
-
 //拉取用户信息
 - (void)setValueOfDataArr
 {
-    NSString *eduLevel = _custom_baseInfo.result.educationLevel;
+    NSString *eduLevel = self.userDataIformationM.education_level_;
     if (eduLevel) {
-//        [_eduLevelDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-//            if ([eduLevel isEqualToString:obj]) {
-//                [dataListArr replaceObjectAtIndex:3 withObject:key];
-//            }
-//        }];
-        if (_dataDicEduLevel) {
-            [_dataDicEduLevel.result enumerateObjectsUsingBlock:^(DataDicResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self getEduLevelListInfo:^{
+            [_edudataList enumerateObjectsUsingBlock:^(DataDicParse * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([eduLevel isEqualToString:obj.code_]) {
                     [dataListArr replaceObjectAtIndex:3 withObject:obj.desc_];
                     [_tableView reloadData];
                 }
             }];
-        } else {
-            [self getCodeDic:^{
-                [_dataDicEduLevel.result enumerateObjectsUsingBlock:^(DataDicResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if ([eduLevel isEqualToString:obj.code_]) {
-                        [dataListArr replaceObjectAtIndex:3 withObject:obj.desc_];
-                        [_tableView reloadData];
-                    }
-                }];
-            }];
-        }
+        }];
     }
-    if (_custom_baseInfo.result.province != nil && _custom_baseInfo.result.city != nil && _custom_baseInfo.result.county != nil) {
+    
+    if (_userDataIformationM.province_ != nil && _userDataIformationM.city_ != nil && _userDataIformationM.county_ != nil) {
         NSString *proviece_city = @"";
-        _poro = [NSString stringWithFormat:@"%@/%@/%@",_custom_baseInfo.result.provinceName,_custom_baseInfo.result.cityName,_custom_baseInfo.result.countyName];
+        _poro = [NSString stringWithFormat:@"%@/%@/%@",_userDataIformationM.province_name_,_userDataIformationM.city_name_,_userDataIformationM.county_name_];
         
-        if ([_custom_baseInfo.result.provinceName isEqualToString: _custom_baseInfo.result.cityName]) {
-            proviece_city = [NSString stringWithFormat:@"%@/%@",_custom_baseInfo.result.cityName,_custom_baseInfo.result.countyName];
-        }else if ([_custom_baseInfo.result.countyName isEqualToString: _custom_baseInfo.result.cityName]){
-            proviece_city = [NSString stringWithFormat:@"%@/%@",_custom_baseInfo.result.provinceName,_custom_baseInfo.result.cityName];
+        if ([_userDataIformationM.province_name_ isEqualToString: _userDataIformationM.city_name_]) {
+            proviece_city = [NSString stringWithFormat:@"%@/%@",_userDataIformationM.city_name_,_userDataIformationM.county_name_];
+        }else if ([_userDataIformationM.county_name_ isEqualToString: _userDataIformationM.city_name_]){
+            proviece_city = [NSString stringWithFormat:@"%@/%@",_userDataIformationM.province_name_,_userDataIformationM.city_name_];
         }else{
-            proviece_city = [NSString stringWithFormat:@"%@/%@/%@",_custom_baseInfo.result.provinceName,_custom_baseInfo.result.cityName,_custom_baseInfo.result.countyName];
+            proviece_city = [NSString stringWithFormat:@"%@/%@/%@",_userDataIformationM.province_name_,_userDataIformationM.city_name_,_userDataIformationM.county_name_];
         }
         [dataListArr replaceObjectAtIndex:4 withObject:proviece_city];
     }
-    if (_custom_baseInfo.result.homeAddress) {
-        [dataListArr replaceObjectAtIndex:5 withObject:_custom_baseInfo.result.homeAddress];
+    if (_userDataIformationM.home_address_) {
+        [dataListArr replaceObjectAtIndex:5 withObject:_userDataIformationM.home_address_];
     }
     
-    if (_custom_baseInfo.result.ocrStatus == 2) {
-//        [dataListArr replaceObjectAtIndex:0 withObject:_custom_baseInfo.result.customerName];
-        [dataListArr replaceObjectAtIndex:1 withObject:_custom_baseInfo.result.customerName];
-        [dataListArr replaceObjectAtIndex:2 withObject:_custom_baseInfo.result.idCode];
+    if ([_userDataIformationM.ocr_status_ integerValue] == 2) {
+        [dataListArr replaceObjectAtIndex:1 withObject:_userDataIformationM.customer_name_];
+        [dataListArr replaceObjectAtIndex:2 withObject:_userDataIformationM.id_code_];
     }
     if (_poro.length > 3) {
         [self PostGetCityCode:_poro];
     }
+    
     [_tableView reloadData];
-    
-}
-
-- (NSDictionary *)getPersonInfo
-{
-    __block NSString *degree = @"";
-    if (_dataDicEduLevel) {
-        [_dataDicEduLevel.result enumerateObjectsUsingBlock:^(DataDicResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj.desc_ isEqualToString:dataListArr[3]]) {
-                degree = obj.code_;
-            }
-        }];
-    } else {
-        [self getCodeDic:^{
-            [_dataDicEduLevel.result enumerateObjectsUsingBlock:^(DataDicResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([obj.desc_ isEqualToString:dataListArr[3]]) {
-                    degree = obj.code_;
-                }
-            }];
-        }];
-    }
-//    [_eduLevelDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-//        if ([key isEqualToString:dataListArr[3]]) {
-//            degree = obj;
-//        }
-//    }];
-    NSString *addressDetail = [dataListArr[5] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-//    [Utility sharedUtility].userInfo.userIDNumber = dataListArr[0];
-//    [Utility sharedUtility].userInfo.realName = dataListArr[2];
-    NSDictionary *paramDic = @{@"customer_name_":dataListArr[1],
-                               @"id_code_":dataListArr[2],
-                               @"education_level_":degree,
-                               @"home_address_":addressDetail,
-                               @"province_":_cityCode.provinceCode,
-                               @"city_":_cityCode.cityCode,
-                               @"county_":_cityCode.districtCode
-                               };
-    
-    return paramDic;
 }
 
 #pragma mark -> 个人信息保存接口
 - (void)saveBtnClick
 {
     DLog(@"保存");
-    if (![_cityCode.provinceCode isEqualToString:@""] && ![_cityCode.cityCode isEqualToString:@""] && ![_cityCode.districtCode isEqualToString:@""]) {
-        NSDictionary *paramDic = [self getPersonInfo];
-        SaveCustomBaseViewModel *saveCustomBaseViewModel = [[SaveCustomBaseViewModel alloc] init];
-        [saveCustomBaseViewModel setBlockWithReturnBlock:^(id returnValue) {
-            if ([[returnValue valueForKey:@"flag"] isEqualToString:@"0000"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[returnValue objectForKey:@"msg"]];
-                [self.navigationController popViewControllerAnimated:true];
-            } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
-            }
-        } WithFaileBlock:^{
-            
-        }];
-        [saveCustomBaseViewModel saveCustomBaseInfo:paramDic];
-    } else {
+    if ([_cityCode.provinceCode isEqualToString:@""] || [_cityCode.cityCode isEqualToString:@""] || [_cityCode.districtCode isEqualToString:@""]) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请重新选择现居地址"];
+        return;
     }
+    
+    __block NSString *degree = @"";
+    [self getEduLevelListInfo:^{
+        [_edudataList enumerateObjectsUsingBlock:^(DataDicParse * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj.desc_ isEqualToString:dataListArr[3]]) {
+                degree = obj.code_;
+            }
+        }];
+    }];
+    
+    NSString *addressDetail = [dataListArr[5] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    SaveCustomBaseViewModel *saveCustomBaseViewModel = [[SaveCustomBaseViewModel alloc] init];
+    [saveCustomBaseViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            [self.navigationController popViewControllerAnimated:true];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [saveCustomBaseViewModel saveCustomBaseInfoName:dataListArr[1] ID_code_:dataListArr[2] EduLevel:degree home_address:addressDetail province:_cityCode.provinceCode city:_cityCode.cityCode county:_cityCode.districtCode];
 }
 
 #pragma mark - TableViewDelegate
@@ -331,14 +297,14 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [cell.identityUpBtn addTarget:self action:@selector(identityUpBtnClick) forControlEvents:UIControlEventTouchUpInside];
                 [cell.identityBackBtn addTarget:self action:@selector(identityBackBtnClick) forControlEvents:UIControlEventTouchUpInside];
-                if (_idOCRFrontParse != nil || _custom_baseInfo.result.ocrStatus == 2) {
+                if (_idOCRFrontParse != nil || [_userDataIformationM.ocr_status_ integerValue] == 2) {
                     [cell.identityUpBtn setBackgroundImage:[UIImage imageNamed:@"identitySelUp"] forState:UIControlStateNormal];
                     cell.identityUpBtn.enabled = false;
                 }else {
                     [cell.identityUpBtn setBackgroundImage:[UIImage imageNamed:@"identityUpUn"] forState:UIControlStateNormal];
                     cell.identityUpBtn.enabled = true;
                 }
-                if (_idOCRBackParse != nil || _custom_baseInfo.result.ocrStatus == 2) {
+                if (_idOCRBackParse != nil || [_userDataIformationM.ocr_status_ integerValue] == 2) {
                     [cell.identityBackBtn setBackgroundImage:[UIImage imageNamed:@"identitySelBack"] forState:UIControlStateNormal];
                     cell.identityBackBtn.enabled = false;
                 } else {
@@ -348,7 +314,6 @@
                 if (!cell.identityUpBtn.isEnabled && !cell.identityBackBtn.isEnabled) {
                     cell.identityLabel.textColor = UI_MAIN_COLOR;
                 }
-                //        [Tool setCorner:cell.bgView borderColor:dataColor[indexPath.row-1]];
                 return cell;
         }
             break;
@@ -399,21 +364,13 @@
     }
     if (indexPath.row == 0) {
         [self.view endEditing:YES];
-        if (_dataDicEduLevel) {
+        [self getEduLevelListInfo:^{
             _colledgeView = [[[NSBundle mainBundle] loadNibNamed:@"ColledgeView" owner:self options:nil] lastObject];
             _colledgeView.frame = CGRectMake(0, 0, _k_w, _k_h);
-            _colledgeView.dataDic = _dataDicEduLevel;
+            _colledgeView.edudataList = [_edudataList copy];
             _colledgeView.delegate = self;
             [_colledgeView show];
-        } else {
-            [self getCodeDic:^{
-                _colledgeView = [[[NSBundle mainBundle] loadNibNamed:@"ColledgeView" owner:self options:nil] lastObject];
-                _colledgeView.frame = CGRectMake(0, 0, _k_w, _k_h);
-                _colledgeView.dataDic = _dataDicEduLevel;
-                _colledgeView.delegate = self;
-                [_colledgeView show];
-            }];
-        }
+        }];
     }else if (indexPath.row == 1){
         DLog(@"现居地址");
         if (_pickerArray.count != 34) {
@@ -467,14 +424,12 @@
                                    [weakSelf verifyIDCard:[model croppedImageOfIDCard] cardSide:CardSide];
                                }
                                  errr:^(MGIDCardError) {
-                                     //                                     weakSelf.cardView.image = nil;
-                                     //                                     DLog(@"%ld",MGIDCardError);
+ 
                                  }];
 }
 - (void)verifyIDCard:(UIImage *)image cardSide:(MGIDCardSide)cardSide
 {
     __unsafe_unretained UserIdentityInformationVCModules *weakSelf = self;
-    //    UIImageJPEGRepresentation(image, 0.2)
     NSDictionary *paramDic = @{@"api_key":FaceIDAppKey,
                                @"api_secret":FaceIDAppSecret,
                                @"legality":@1};
@@ -489,7 +444,6 @@
             _idOCRBackParse = [FaceIDOCRBack yy_modelWithJSON:object];
             [weakSelf saveUserIDCardImage:image carSide:@"back" faceResult:object];
         }
-        
     } failure:^(EnumServerStatus status, id object) {
         NSError *error = object;
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"Error-%ld",(long)error.code]];
@@ -499,48 +453,34 @@
 - (void)saveUserIDCardImage:(UIImage *)image carSide:(NSString *)side faceResult:(id)result
 {
     __unsafe_unretained UserIdentityInformationVCModules *weakSelf = self;
-    NSData *data = UIImageJPEGRepresentation(image, 0.2);
-    NSString *cardStr = [GTMBase64 stringByEncodingData:data];
-    
-    NSDictionary *dic = [NSDictionary dictionaryWithDictionary:result];
-    NSData *resultData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *jsonStr = [[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding];
-    
-    NSDictionary *paramDic = @{@"idCardSelf":cardStr,
-                               @"records":jsonStr,
-                               @"side":side};
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_saveIDInfo_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if ([side isEqualToString:@"front"]) {
-            _customerFrontIDParse = [CustomerIDInfo yy_modelWithJSON:object];
-            if ([_customerFrontIDParse.flag isEqualToString:@"0000"]) {
-                [weakSelf setUserIDCardInfo];
-            } else {
-                [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_customerFrontIDParse.msg];
+    PserInfoViewModel * pserInfoM = [[PserInfoViewModel alloc]init];
+    [pserInfoM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM =returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            CustomerIDInfo * customerIDInfo = [[CustomerIDInfo alloc]initWithDictionary:(NSDictionary *)baseRM.data error:nil];
+            if ([side isEqualToString:@"front"]) {
+                _customerFrontIDParse = customerIDInfo;
             }
-        }
-        if ([side isEqualToString:@"back"]) {
-            _customerBackIDParse = [CustomerIDInfo yy_modelWithJSON:object];
-            if ([_customerBackIDParse.flag isEqualToString:@"0000"]) {
-                [weakSelf setUserIDCardInfo];
-            } else {
-                [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:_customerBackIDParse.msg];
+            if ([side isEqualToString:@"back"]){
+                _customerBackIDParse = customerIDInfo;
             }
+            [weakSelf setUserIDCardInfo];
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseRM.friendErrMsg];
         }
-        
-    } failure:^(EnumServerStatus status, id object) {
-        
+    } WithFaileBlock:^{
     }];
+    [pserInfoM saveUserIDCardImage:image carSide:side faceResult:result];
+    
 }
 
 - (void)setUserIDCardInfo
 {
     if (_idOCRFrontParse != nil && _idOCRBackParse != nil) {
-//        [dataListArr replaceObjectAtIndex:0 withObject:_customerIDParse.result.customer_name_];
-        [dataListArr replaceObjectAtIndex:1 withObject:_customerFrontIDParse.result.customer_name_];
-        [dataListArr replaceObjectAtIndex:2 withObject:_customerFrontIDParse.result.id_code_];
-        [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerFrontIDParse.result.id_code_;
-        [FXD_Utility sharedUtility].userInfo.realName = _customerFrontIDParse.result.customer_name_;
+        [dataListArr replaceObjectAtIndex:1 withObject:_customerFrontIDParse.customer_name_];
+        [dataListArr replaceObjectAtIndex:2 withObject:_customerFrontIDParse.id_code_];
+        [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerFrontIDParse.id_code_;
+        [FXD_Utility sharedUtility].userInfo.realName = _customerFrontIDParse.customer_name_;
     }
     [_tableView reloadData];
 }
@@ -556,8 +496,8 @@
     }
     
     if (textField.tag == 100) {
-        if (_customerFrontIDParse.result.editable_field_ && _customerFrontIDParse.result.editable_field_.length > 2) {
-            if ([_customerFrontIDParse.result.editable_field_ containsString:@"customer_name_"]) {
+        if (_customerFrontIDParse.editable_field_ && _customerFrontIDParse.editable_field_.length > 2) {
+            if ([_customerFrontIDParse.editable_field_ containsString:@"customer_name_"]) {
                 return true;
             }else {
                 return false;
@@ -567,8 +507,8 @@
         }
     }
     if (textField.tag == 101) {
-        if (_customerFrontIDParse.result.editable_field_ && _customerFrontIDParse.result.editable_field_.length > 2) {
-            if ([_customerFrontIDParse.result.editable_field_ containsString:@"id_code_"]) {
+        if (_customerFrontIDParse.editable_field_ && _customerFrontIDParse.editable_field_.length > 2) {
+            if ([_customerFrontIDParse.editable_field_ containsString:@"id_code_"]) {
                 return true;
             }else {
                 return false;
@@ -663,10 +603,8 @@
         for (int i=1; i<5; i++) {
             [dataColor replaceObjectAtIndex:i withObject:UI_MAIN_COLOR];
         }
-        
         return YES;
     }else {
-        
         return NO;
     }
 }
@@ -677,22 +615,13 @@
         case 14:
         {
             [self.view endEditing:YES];
-            if (_dataDicEduLevel) {
+            [self getEduLevelListInfo:^{
                 _colledgeView = [[[NSBundle mainBundle] loadNibNamed:@"ColledgeView" owner:self options:nil] lastObject];
                 _colledgeView.frame = CGRectMake(0, 0, _k_w, _k_h);
-                _colledgeView.dataDic = _dataDicEduLevel;
+                _colledgeView.edudataList = [_edudataList copy];
                 _colledgeView.delegate = self;
                 [_colledgeView show];
-            } else {
-                [self getCodeDic:^{
-                    _colledgeView = [[[NSBundle mainBundle] loadNibNamed:@"ColledgeView" owner:self options:nil] lastObject];
-                    _colledgeView.frame = CGRectMake(0, 0, _k_w, _k_h);
-                    _colledgeView.dataDic = _dataDicEduLevel;
-                    _colledgeView.delegate = self;
-                    [_colledgeView show];
-                }];
-            }
-           
+            }];
         }
             break;
         case 15:
@@ -704,7 +633,6 @@
             [self createPickViewShowWithTag];
         }
             break;
-            
         default:
             break;
     }
@@ -722,15 +650,7 @@
     _localPicker.dataSource = self;
     _localPicker.delegate = self;
     [self.view addSubview:_localPicker];
-    //        case 208://现在居住地址
-    //        {
-    //            _pickerTag = tag;
-    //            _localPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, _k_h-183, _k_w, 183)];
-    //            _localPicker.backgroundColor = [UIColor whiteColor];
-    //            _localPicker.dataSource = self;
-    //            _localPicker.delegate = self;
-    //            [self.view addSubview:_localPicker];
-    //        }
+
 }
 
 -(void)setRomovePickView
@@ -796,55 +716,51 @@
         //第一个省的所有区
         index = row;
         [_subPickerArray removeAllObjects];
-        _regionSub = _reginBase.result[row];
+        _regionSub = _reginListArr[row];
         
-        for (int j = 0; j < _regionSub.sub.count; j++) {
-            RegionResult *regionResultModel = _regionSub.sub[j];
-            [_subPickerArray addObject:regionResultModel.name];
+        for (NSDictionary * dic  in _regionSub.sub) {
+            RegionSub * regisonSub = [[RegionSub alloc]initWithDictionary:dic error:nil];
+            [_subPickerArray addObject:regisonSub.name];
         }
         
         //第一个区的县的所有县
         [_thirdPickerArray removeAllObjects];
-        RegionResult *regionResultModel = _regionSub.sub[0];
-        for (int j = 0; j < regionResultModel.sub.count; j++) {
+        RegionSub * thirdRegisonSub = [[RegionSub alloc]initWithDictionary:_regionSub.sub[0] error:nil];
+        for (NSDictionary * dic  in thirdRegisonSub.sub) {
             //取出市
-            [_thirdPickerArray addObject:[regionResultModel.sub[j] objectForKey:@"name"]];
-            
+            RegionSub * regisonSub = [[RegionSub alloc]initWithDictionary:dic error:nil];
+            [_thirdPickerArray addObject:regisonSub.name];
         }
-        
         [pickerView selectedRowInComponent:1];
         [pickerView reloadComponent:0];
         [pickerView reloadComponent:1];
         [pickerView selectedRowInComponent:2];
     }
+    
     if (component==1) {
         
         [_subPickerArray removeAllObjects];
-        _regionSub = _reginBase.result[index];
-        for (int j = 0; j < _regionSub.sub.count; j++) {
-            RegionResult *regionResultModel = _regionSub.sub[j];
-            [_subPickerArray addObject:regionResultModel.name];
+        _regionSub = _reginListArr[index];
+        for (NSDictionary * dic  in _regionSub.sub) {
+            RegionSub * regisonSub = [[RegionSub alloc]initWithDictionary:dic error:nil];
+            [_subPickerArray addObject:regisonSub.name];
         }
         //第一个区的县的所有县
         [_thirdPickerArray removeAllObjects];
-        RegionResult *regionResultModel = [[RegionResult alloc] init];
+        RegionSub *regionResultModel;
         if (row > _regionSub.sub.count - 1) {
-            regionResultModel = _regionSub.sub[0];
+            regionResultModel = [[RegionSub alloc]initWithDictionary:_regionSub.sub[0] error:nil];
         }else{
-            regionResultModel = _regionSub.sub[row];
+            regionResultModel = [[RegionSub alloc]initWithDictionary:_regionSub.sub[row] error:nil];
         }
-        
-        for (int j = 0; j < regionResultModel.sub.count; j++) {
+        for (NSDictionary * dic in regionResultModel.sub) {
             //取出市
-            [_thirdPickerArray addObject:[regionResultModel.sub[j] objectForKey:@"name"]];
-            
+            RegionSub * regisonSub = [[RegionSub alloc]initWithDictionary:dic error:nil];
+            [_thirdPickerArray addObject:regisonSub.name];
         }
-        
         [pickerView selectRow:0 inComponent:2 animated:YES];
     }
-    
     [pickerView reloadComponent:2];
-    
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
@@ -860,8 +776,6 @@
     }
     return 0;
 }
-
-
 #pragma mark->colledgeViewDelegate
 -(void)ColledgeDelegateNString:(NSString *)CollString andIndex:(NSIndexPath *)indexPath
 {
@@ -869,113 +783,69 @@
     [dataColor replaceObjectAtIndex:3 withObject:UI_MAIN_COLOR];
     [_tableView reloadData];
 }
-
-
 #pragma mark->获取省市区
 
 -(void)PostGetCity
 {
-    
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getAllRegionList_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"]isEqualToString:@"0000"])
-            {
-                _reginBase = [RegionBaseClass modelObjectWithDictionary:object];
-                for (int i = 0; i < _reginBase.result.count; i++) {
-                    //取出省
-                    _regionSub = _reginBase.result[i];
-                    [_pickerArray addObject:_regionSub.name];
-                }
-                
-                //第一个省的所有区
-                RegionSub *regisonSubModel = _reginBase.result[0];
-                for (int j = 0; j < regisonSubModel.sub.count; j++) {
-                    RegionResult *regionResultModel = regisonSubModel.sub[j];
-                    [_subPickerArray addObject:regionResultModel.name];
-                }
-                
-                //第一个区的县的所有县
-                RegionResult *regionResultModel = regisonSubModel.sub[0];
-                for (int j = 0; j < regionResultModel.sub.count; j++) {
-                    //取出市
-                    [_thirdPickerArray addObject:[regionResultModel.sub[j] objectForKey:@"name"]];
-                    
-                }
-                
-                [_localPicker reloadAllComponents];
+    UserDataViewModel * userDataVM  = [[UserDataViewModel alloc]init];
+    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            NSArray *array  = (NSArray *)baseRM.data ;
+            for (NSDictionary * dic  in array) {
+                //取出省
+                _regionSub = [[RegionSub alloc]initWithDictionary:dic error:nil];
+                [_reginListArr addObject:_regionSub];
+                [_pickerArray addObject:_regionSub.name];
             }
+            
+            //第一个省的所有区
+            RegionSub *regisonSubModel = _reginListArr[0];
+            for (NSDictionary * dic  in regisonSubModel.sub) {
+                RegionSub * regisonSub = [[RegionSub alloc]initWithDictionary:dic error:nil];
+                [_subPickerArray addObject:regisonSub.name];
+            }
+            
+            //第一个区的县的所有县
+            RegionSub *regionResultModel = [[RegionSub alloc]initWithDictionary:regisonSubModel.sub[0] error:nil];
+            for (NSDictionary * dic  in regionResultModel.sub) {
+                //取出市
+                RegionSub * regisonSub = [[RegionSub alloc]initWithDictionary:dic error:nil];
+                [_thirdPickerArray addObject:regisonSub.name];
+            }
+            [_localPicker reloadAllComponents];
+            
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请求失败"];
+    } WithFaileBlock:^{
+        
     }];
+    [userDataVM getAllRegionList]; 
 }
 
 #pragma mark ->获取省市区代码
 -(void)PostGetCityCode:(NSString *)datalisCity
 {
-    //获取省市区代码
-    NSArray *cityArray = [datalisCity componentsSeparatedByString:@"/"];
-    NSString *city0 = @"";
-    NSString *city1 = @"";
-    NSString *city2 = @"";
-    if (cityArray.count > 2) {
-        city0 = cityArray[0];
-        city1 = cityArray[1];
-        city2 = cityArray[2];
-    }
-    
-    NSDictionary *dict = @{@"provinceName":city0,
-                           @"cityName":city1,
-                           @"districtName":city2
-                           };
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getRegionCodeByName_jhtml] parameters:dict finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-                _regionCodeParse = [RegionCodeBaseClass modelObjectWithDictionary:object];
-                _cityCode = _regionCodeParse.result;
-                //                    [self PostCustomerInfoSaveBase];
-            } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请重新选择省市区"];
-            }
+    UserDataViewModel * userDataVM  = [[UserDataViewModel alloc]init];
+    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            _cityCode = [[RegionCodeResult alloc]initWithDictionary:(NSDictionary *)baseRM.data error:nil];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    [userDataVM getRegionCodeByAreaName:datalisCity];
 }
-
-//-(void)PostCustomerInfoSaveBase
-//{
-////    DLog(@"%@---%@",dataListAll[3],dataListAll1[6]);
-//    if (![_cityCode.provinceCode isEqualToString:@""] && ![_cityCode.cityCode isEqualToString:@""] && ![_cityCode.districtCode isEqualToString:@""]) {
-//        NSDictionary *dicParam = [self getInfoMsg];
-//        SaveCustomBaseViewModel *saveCustomBaseViewModel = [[SaveCustomBaseViewModel alloc] init];
-//        [saveCustomBaseViewModel setBlockWithReturnBlock:^(id returnValue) {
-//            if ([[returnValue objectForKey:@"flag"]isEqualToString:@"0000"]) {
-//                [UserDefaulInfo getUserInfoData];
-//                _segment.selectedSegmentIndex =1;
-//                [dataListAll1 replaceObjectAtIndex:3 withObject:dataListAll[3]];
-//                [dataListAll1 replaceObjectAtIndex:7 withObject:dataListAll1[6]];
-//                [self createUIWith:_segment.selectedSegmentIndex];
-//            } else {
-//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
-//            }
-//        } WithFaileBlock:^{
-//
-//        }];
-//        [saveCustomBaseViewModel saveCustomBaseInfo:dicParam];
-//    } else {
-//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请重新选择现居地址"];
-//    }
-//}
-
-
 
 - (IBAction)cancelAction:(id)sender {
     [UIView animateWithDuration:0.5
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         
                          self.localPicker.hidden = YES;
                          self.toolbarCancelDone.hidden = YES;
                      }
@@ -990,7 +860,6 @@
     if (_pickerArray.count > 0 && _subPickerArray.count > 0 && _thirdPickerArray.count > 0) {
         if ([[_pickerArray objectAtIndex:[self.localPicker selectedRowInComponent:0]] isEqualToString:[_subPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:1]]]) {
             localString = [NSString stringWithFormat:@"%@/%@",[_subPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:1]],[_thirdPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:2]]];
-            
             loString = [NSString stringWithFormat:@"%@/%@/%@",[_pickerArray objectAtIndex:[self.localPicker selectedRowInComponent:0]],[_subPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:1]],[_thirdPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:2]]];
         }else if ([[_subPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:1]] isEqualToString:[_thirdPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:2]]]){
             localString = [NSString stringWithFormat:@"%@/%@",[_pickerArray objectAtIndex:[self.localPicker selectedRowInComponent:0]],[_subPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:1]]];
@@ -999,50 +868,14 @@
             localString = [NSString stringWithFormat:@"%@/%@/%@",[_pickerArray objectAtIndex:[self.localPicker selectedRowInComponent:0]],[_subPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:1]],[_thirdPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:2]]];
             loString = [NSString stringWithFormat:@"%@/%@/%@",[_pickerArray objectAtIndex:[self.localPicker selectedRowInComponent:0]],[_subPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:1]],[_thirdPickerArray objectAtIndex:[self.localPicker selectedRowInComponent:2]]];
         }
-        
     }
     DLog(@"%@---%@",loString,localString);
     [dataListArr replaceObjectAtIndex:4 withObject:localString];
     [dataColor replaceObjectAtIndex:4 withObject:UI_MAIN_COLOR];
     //第一个省的所有区
     [_subPickerArray removeAllObjects];
-    //    RegionSub *regisonSubModel = _reginBase.result[0];
-    //    for (int j = 0; j < regisonSubModel.sub.count; j++) {
-    //        RegionResult *regionResultModel = regisonSubModel.sub[j];
-    //        [_subPickerArray addObject:regionResultModel.name];
-    //    }
-    //
-    //    //第一个区的县的所有县
-    //    [_thirdPickerArray removeAllObjects];
-    //    RegionResult *regionResultModel = regisonSubModel.sub[0];
-    //    for (int j = 0; j < regionResultModel.sub.count; j++) {
-    //        //取出市
-    //        [_thirdPickerArray addObject:[regionResultModel.sub[j] objectForKey:@"name"]];
-    //
-    //    }
-    
-    //    [dataListAll1 replaceObjectAtIndex:7 withObject:loString];
-    //    [dataListAll1 replaceObjectAtIndex:3 withObject:localString];
-    //    [datacolor1 replaceObjectAtIndex:3 withObject:cyancColor];
-    //第一个省的所有区
-    //    [_subPickerArray removeAllObjects];
-    //    RegionSub *regisonSubModel = _reginBase.result[0];
-    //    for (int j = 0; j < regisonSubModel.sub.count; j++) {
-    //        RegionResult *regionResultModel = regisonSubModel.sub[j];
-    //        [_subPickerArray addObject:regionResultModel.name];
-    //    }
-    
-    //    //第一个区的县的所有县
-    //    [_thirdPickerArray removeAllObjects];
-    //    RegionResult *regionResultModel = regisonSubModel.sub[0];
-    //    for (int j = 0; j < regionResultModel.sub.count; j++) {
-    //        //取出市
-    //        [_thirdPickerArray addObject:[regionResultModel.sub[j] objectForKey:@"name"]];
-    //
-    //    }
     [self PostGetCityCode:loString];
     [_tableView reloadData];
-    //    [_tableView0 reloadData];
     [UIView animateWithDuration:0.5
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseIn

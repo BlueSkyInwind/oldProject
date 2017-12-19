@@ -44,11 +44,11 @@ NSString *const kRegionResultType = @"type";
     if ([receivedRegionSub isKindOfClass:[NSArray class]]) {
         for (NSDictionary *item in (NSArray *)receivedRegionSub) {
             if ([item isKindOfClass:[NSDictionary class]]) {
-                [parsedRegionSub addObject:[RegionSub modelObjectWithDictionary:item]];
+//                [parsedRegionSub addObject:[RegionSub modelObjectWithDictionary:item]];
             }
        }
     } else if ([receivedRegionSub isKindOfClass:[NSDictionary class]]) {
-       [parsedRegionSub addObject:[RegionSub modelObjectWithDictionary:(NSDictionary *)receivedRegionSub]];
+//       [parsedRegionSub addObject:[RegionSub modelObjectWithDictionary:(NSDictionary *)receivedRegionSub]];
     }
 
     self.sub = [NSArray arrayWithArray:parsedRegionSub];

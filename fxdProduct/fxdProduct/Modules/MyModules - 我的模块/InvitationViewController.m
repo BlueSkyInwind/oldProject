@@ -11,6 +11,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import "ReconfrInfoModel.h"
+#import "InvationViewModel.h"
 
 @interface InvitationViewController ()
 {
@@ -200,19 +201,27 @@
 #pragma mark 获取推荐码规则
 - (void)getrecomInfo
 {
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_GetRecomfrInfo_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        ReconfrInfoModel *reconfrInfo = [ReconfrInfoModel yy_modelWithJSON:object];
-        NSMutableString *str = [[NSMutableString alloc] init];
-        for (ReconfrList *list in reconfrInfo.result.list) {
-            [str appendFormat:@"%@\n",list.protocol_content_];
+    InvationViewModel * invationM = [[InvationViewModel alloc]init];
+    [invationM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            NSMutableString *str = [[NSMutableString alloc] init];
+            for (NSDictionary * dic in (NSArray *)baseRM.data) {
+                ReconfrList *reconfrInfo = [[ReconfrList alloc]initWithDictionary:dic error:nil];
+                [str appendFormat:@"%@\n",reconfrInfo.protocol_content_];
+            }
+            NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
+            contentText.yy_font = [UIFont systemFontOfSize:14];
+            contentText.yy_color = rgb(139, 139, 140);
+            _textView.attributedText = contentText;
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseRM.friendErrMsg];
         }
-        NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
-        contentText.yy_font = [UIFont systemFontOfSize:14];
-        contentText.yy_color = rgb(139, 139, 140);
-        _textView.attributedText = contentText;
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    [invationM obtainInvationRecomInfoList];
+
 }
 
 #pragma mark 点击分享

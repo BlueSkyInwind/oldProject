@@ -26,7 +26,6 @@
 #import "P2PViewController.h"
 #import "GetCaseInfo.h"
 #import "DataWriteAndRead.h"
-#import "CustomerBaseInfoBaseClass.h"
 #import "GetCustomerBaseViewModel.h"
 #import "Approval.h"
 #import "DetailViewController.h"
@@ -81,7 +80,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSInteger userSelectIndex;
     //
     PromoteType _promoteType;
-    CustomerBaseInfoBaseClass *_customerBase;
     Approval *_approvalModel;
     //借款用途
     DataDicParse *_dataDicModel;
@@ -138,7 +136,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     _purposeSelect = @"0";
     //    [self createScroll];
     [self createUI];
-
     _isOpen = NO;
 
 }
@@ -223,6 +220,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSString *strl = [NSString stringWithFormat:@"%.2f",_drawingsInfoModel.actualAmount.floatValue];
     [str addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(4,strl.length)];
     checkSuccess.displayLabel.attributedText = str;
+    
 }
 
 #pragma mark - 提款视图
@@ -376,14 +374,12 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 
     [attributeStr yy_setTextHighlightRange:range color:UI_MAIN_COLOR backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
         //协议点击
-        [self getUserInfoData:^{
-            if ([_drawingsInfoModel.platformType isEqualToString:@"0"]||[_drawingsInfoModel.platformType isEqualToString:@"3"]) {
-                [self LoanAgreementRequest];
-            }
-            if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
-                [self heguiAgreementRequest];
-            }
-        }];
+        if ([_drawingsInfoModel.platformType isEqualToString:@"0"]||[_drawingsInfoModel.platformType isEqualToString:@"3"]) {
+            [self LoanAgreementRequest];
+        }
+        if ([_drawingsInfoModel.platformType isEqualToString:@"2"]) {
+            [self heguiAgreementRequest];
+        }
     }];
     checkSuccess.agreementLabel.attributedText = attributeStr;
 }
@@ -549,7 +545,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     [self presentViewController:addCarNC animated:YES completion:nil];
 }
 
-
 -(void)pushFeeDescription{
     
     if (!feeArray && [_drawingsInfoModel.productId isEqualToString:SalaryLoan] ) {
@@ -627,7 +622,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
             [self.navigationController popToRootViewControllerAnimated:YES];
             break;
         case 2:
-            
         {
             ShanLinWebVCModules *webView = [[ShanLinWebVCModules alloc] init];
             webView.loadContent = url;
@@ -703,38 +697,26 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 #pragma mrak - 提款
 -(void)PostGetdrawApplyAgain
 {
-    NSDictionary *paramDic;
-    if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan] || [_drawingsInfoModel.productId  isEqualToString:DeriveRapidLoan]) {
-        paramDic = @{@"periods_":@1,
-                     @"loan_for_":_purposeSelect,
-                     @"drawing_amount_":_drawingsInfoModel.repayAmount,
-                     @"account_card_id_":_selectCard.cardId
-                     };
-    }
-    if ([_drawingsInfoModel.productId  isEqualToString:SalaryLoan]||[_drawingsInfoModel.productId  isEqualToString:WhiteCollarLoan]) {
-        paramDic = @{@"periods_":[NSString stringWithFormat:@"%d",_userSelectNum.intValue],
-                     @"drawing_amount_":_drawingsInfoModel.repayAmount,
-                     @"account_card_id_":_selectCard.cardId,
-                     @"loan_for_":_purposeSelect,
-                     };
-    }
-    //二次提款
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_drawApplyAgain_jhtml] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"]isEqualToString:@"0000"]) {
-                
-                LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
-                loanVC.applicationStatus = InLoan;
-                loanVC.popAlert = true;
-                [self.navigationController pushViewController:loanVC animated:YES];
-                
-            } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[object objectForKey:@"msg"]];
-            }
+    CheckViewModel * checkVM = [[CheckViewModel alloc]init];
+    [checkVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            LoanMoneyViewController *loanVC =[LoanMoneyViewController new];
+            loanVC.applicationStatus = InLoan;
+            loanVC.popAlert = true;
+            [self.navigationController pushViewController:loanVC animated:YES];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    if ([_drawingsInfoModel.productId  isEqualToString:RapidLoan] || [_drawingsInfoModel.productId  isEqualToString:DeriveRapidLoan]) {
+        [checkVM withDrawalsApplyPeriod:@"1" loan_for:_purposeSelect DrawAmount:_drawingsInfoModel.repayAmount card_id:_selectCard.cardId];
+    }
+    if ([_drawingsInfoModel.productId  isEqualToString:SalaryLoan]||[_drawingsInfoModel.productId  isEqualToString:WhiteCollarLoan]) {
+        [checkVM withDrawalsApplyPeriod:[NSString stringWithFormat:@"%d",_userSelectNum.intValue] loan_for:_purposeSelect DrawAmount:_drawingsInfoModel.repayAmount card_id:_selectCard.cardId];
+    }
 }
 
 #pragma mark->UIPickerViewDataSource
@@ -834,43 +816,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     return NO;
 }
 
-- (void)getUserInfoData:(void(^)())completion
-{
-    DLog(@"%@",[FXD_Utility sharedUtility].userInfo.account_id);
-    //    if ([[Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [Utility sharedUtility].userInfo.account_id == nil) {
-    id data = [DataWriteAndRead readDataWithkey:UserInfomation];
-    if (data) {
-        DLog(@"%@",data);
-        _customerBase = data;
-        if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
-            [FXD_Utility sharedUtility].userInfo.account_id = _customerBase.result.createBy;
-        }
-        [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerBase.result.idCode;
-        [FXD_Utility sharedUtility].userInfo.userMobilePhone = _customerBase.ext.mobilePhone;
-        [FXD_Utility sharedUtility].userInfo.realName = _customerBase.result.customerName;
-    } else {
-        if ([FXD_Utility sharedUtility].loginFlage) {
-            GetCustomerBaseViewModel *customBaseViewModel = [[GetCustomerBaseViewModel alloc] init];
-            [customBaseViewModel setBlockWithReturnBlock:^(id returnValue) {
-                _customerBase = returnValue;
-                if ([_customerBase.flag isEqualToString:@"0000"]) {
-                    [DataWriteAndRead writeDataWithkey:UserInfomation value:_customerBase];
-                    [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerBase.result.idCode;
-                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = _customerBase.ext.mobilePhone;
-                    [FXD_Utility sharedUtility].userInfo.realName = _customerBase.result.customerName;
-                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
-                        [FXD_Utility sharedUtility].userInfo.account_id = _customerBase.result.createBy;
-                    }
-                }
-            } WithFaileBlock:^{
-                
-            }];
-            [customBaseViewModel fatchCustomBaseInfo:nil];
-        }
-    }
-    completion();
-}
-
 #pragma mark 更改工薪贷和白领贷的周期
 -(void)getCycle:(CGFloat)money{
 
@@ -929,21 +874,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     }
     [checkVM obtainSalaryProductFeeOfperiod:@"1"];
 }
-
-//- (void)fatchRate:(void(^)(RateModel *rate))finish
-//{
-//    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
-//        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
-//        if ([rateParse.flag isEqualToString:@"0000"]) {
-//            finish(rateParse);
-//        } else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//
-//    }];
-//}
 
 #pragma  mark - 获取提款页信息
 -(void)obtainDrawingInformation:(void(^)(DrawingsInfoModel * drawingsInfo))finish{

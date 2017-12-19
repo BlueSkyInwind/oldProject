@@ -10,11 +10,6 @@
 #import "GetCaseInfo.h"
 @interface CheckViewModel : FXD_ViewModelBaseClass
 
-/**
- 审批金额查询接口
- */
-
--(void)approvalAmount;
 
 #pragma mark - 新API
 //提款信息页面
@@ -24,7 +19,15 @@
  工薪贷获取费用
  */
 -(void)obtainSalaryProductFeeOfperiod:(NSString *)periods;
-
+/**
+ 提款
+ 
+ @param period_ 期数
+ @param loan_for_ 用途
+ @param drawAmount 金额
+ @param card_id 卡id
+ */
+-(void)withDrawalsApplyPeriod:(NSString *)period_ loan_for:(NSString *)loan_for_ DrawAmount:(NSString *)drawAmount  card_id:(NSString *)card_id;
 
 @end
 
@@ -43,10 +46,6 @@
 
 -(void)saveLoanCase:(NSString *)type ApplicationID:(NSString *)applicationId Period:(NSString *)period PurposeSelect:(NSString *)purposeSelect;
 
-/**
- 发标前查询进件
- */
--(void)getFXDCaseInfo;
 
 @end
 
@@ -69,10 +68,6 @@
  */
 -(void)queryCardInfo;
 
-/**
- 合规银行卡列表
- */
-//-(void)queryCardListInfo;
 
 
 @end

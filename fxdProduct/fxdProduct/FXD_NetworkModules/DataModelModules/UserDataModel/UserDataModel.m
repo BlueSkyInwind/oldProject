@@ -15,3 +15,9 @@
 @implementation UserThirdPartCertificationModel
 
 @end
+
+@implementation CustomerSesameCreditModel
+
+@end
+
+

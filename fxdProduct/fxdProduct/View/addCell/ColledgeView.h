@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-@class DataDicParse;
 
 @protocol ColledgeViewDelegate <NSObject>
 
@@ -24,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *secondView;
 @property (weak, nonatomic) IBOutlet UITableView *CollTableView;
 
-@property (nonatomic, strong)DataDicParse *dataDic;
+@property (nonatomic, strong)NSArray * edudataList;
 
 @property (weak, nonatomic)id <ColledgeViewDelegate>delegate;
 

@@ -27,3 +27,11 @@
 @implementation SalaryDrawingsFeeInfoModel
 
 @end
+
+@implementation WithDrawalsParamModel
+
+@end
+
+
+
+

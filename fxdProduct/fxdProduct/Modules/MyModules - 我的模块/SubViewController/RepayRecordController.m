@@ -53,17 +53,12 @@
     
     RepayWeeklyRecordViewModel *repayWeeklyRecordViewModel = [[RepayWeeklyRecordViewModel alloc]init];
     [repayWeeklyRecordViewModel setBlockWithReturnBlock:^(id returnValue) {
-        
-        if ([[returnValue objectForKey:@"flag"]  isEqual: @"0000"]) {
-            if(returnValue[@"result"])
-            {
-                for (NSDictionary *dic in returnValue[@"result"]) {
-                    RepayRecord *repayModel=[RepayRecord new];
-                    NSLog(@"%@",dic);
-                    [repayModel setValuesForKeysWithDictionary:dic];
-                    //                GetMoneyHistoryResult *result = [GetMoneyHistoryResult modelObjectWithDictionary:dic];
-                    [_repayHistoryArr addObject:repayModel];
-                }
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            NSArray * array = (NSArray *)baseRM.data;
+            for (NSDictionary *dic in array) {
+                RepayRecord * repayModel = [[RepayRecord alloc] initWithDictionary:dic error:nil];
+                [_repayHistoryArr addObject:repayModel];
             }
             if (_repayHistoryArr.count > 0) {
                 NoneView.hidden = YES;
@@ -71,19 +66,14 @@
             } else {
                 NoneView.hidden = NO;
             }
-        }
-        else
-        {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:returnValue[@"msg"]];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
             NoneView.hidden=NO;
         }
-        
     } WithFaileBlock:^{
-         NoneView.hidden=NO;
+        NoneView.hidden=NO;
     }];
-    
     [repayWeeklyRecordViewModel getMoneyHistoryList];
-    
 }
 
 #pragma mark 创建无借款记录视图

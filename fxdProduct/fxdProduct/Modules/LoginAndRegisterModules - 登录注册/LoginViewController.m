@@ -8,7 +8,6 @@
 
 #import "LoginViewController.h"
 #import "FXDBaseTabBarVCModule.h"
-#import "LoginBaseClass.h"
 #import "LoginParse.h"
 #import "RegViewController.h"
 #import "FindPassViewController.h"
@@ -31,10 +30,10 @@
     NSInteger _countdown;
     NSTimer * _countdownTimer;
     LoginParse *_loginParse;
+    BaseResultModel * _loginResultM;
     
     ReturnMsgBaseClass *_codeParse;
     
-//    NSString *_loginFlagCode;
     NSString *_vaildCodeFlag;
     //设备指纹
     NSString *_BSFIT_DEVICEID;
@@ -90,7 +89,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    _loginParse = nil;
+    _loginResultM = nil;
     [_loginView initialLoginButtonState];
 }
 
@@ -114,9 +113,9 @@
 {
     LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
     [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _loginParse = returnValue;
-        if ([_loginParse.flag isEqualToString: @"0000"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_loginParse.msg];
+        _loginResultM = returnValue;
+        if ([_loginResultM.errCode isEqualToString: @"0"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_loginResultM.friendErrMsg];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self dismissViewControllerAnimated:YES completion:^{
                     _vaildCodeFlag = @"";
@@ -125,7 +124,7 @@
                 }];
             });
        } else {
-            if ([_loginParse.flag isEqualToString:@"0004"]) {
+            if ([_loginResultM.errCode isEqualToString:@"4"]) {
                 [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前尝试在新设备上登录,确定要继续?" cencelBtn:@"取消" otherBtn:@[@"确定"] Onview:self.view compleBlock:^(NSInteger index) {
                     if (index == 1) {
                         UpdateDevIDViewController *updateView = [UpdateDevIDViewController new];
@@ -136,13 +135,14 @@
                         [self.navigationController pushViewController:updateView animated:YES];
                     }
                 }];
-            } else if ([_loginParse.flag isEqualToString:@"0005"]) {
-                _vaildCodeFlag = _loginParse.flag;
+            } else if ([_loginResultM.errCode isEqualToString:@"5"]) {
+                _vaildCodeFlag = _loginResultM.errCode;
                 //                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您当前的版本太低,为了您的使用体验请升级版本后再来体验^_^"];
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginParse.msg]];
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginResultM.friendErrMsg]];
                 _loginView.codeView.hidden = NO;
+
             } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginParse.msg]];
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginResultM.friendErrMsg]];
             }
         }
     } WithFaileBlock:^{
@@ -158,8 +158,8 @@
  */
 - (void)postLoginRequest:(LoginViewModel*)loginViewModel
 {
-    if (_loginParse) {
-        if ([_loginParse.flag isEqualToString:@"0005"] || [_vaildCodeFlag isEqualToString:@"0005"]) {
+    if (_loginResultM) {
+        if ([_loginResultM.errCode isEqualToString:@"5"] || [_vaildCodeFlag isEqualToString:@"5"]) {
             [loginViewModel fatchLoginMoblieNumber:mobliePhone password:userPassword fingerPrint:_BSFIT_DEVICEID verifyCode:veriyCode];
         } else {
             [loginViewModel fatchLoginMoblieNumber:mobliePhone password:userPassword fingerPrint:_BSFIT_DEVICEID verifyCode:nil];
@@ -176,7 +176,7 @@
     userPassword = serect;
     veriyCode = code;
     
-    if (_loginParse && [_loginParse.flag isEqualToString:@"0005"]) {
+    if (_loginResultM && [_loginResultM.errCode isEqualToString:@"5"]) {
         if (code && (![code isEqualToString:@""] ||code ==nil)) {
             [self startLogin];
         } else {
@@ -189,17 +189,18 @@
 
 #pragma mark 获取验证码
 -(void)snsCodeCountdownBtnClicMoblieNumber:(NSString *)number{
-    
     SMSViewModel *smsViewModel = [[SMSViewModel alloc]init];
     [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _codeParse = returnValue;
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-        DLog(@"---%@",_codeParse.msg);
+        BaseResultModel * baseM = returnValue;
+        if ([baseM.errCode isEqualToString:@"0"]) {
+                 
+         }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseM.friendErrMsg];
+        }
     } WithFaileBlock:^{
         
     }];
     [smsViewModel fatchRequestSMSParamPhoneNumber:number verifyCodeType:LOGIN_CODE];
-    
 }
 
 #pragma mark 忘记密码

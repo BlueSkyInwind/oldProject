@@ -10,6 +10,13 @@
 
 @interface FindPassViewModel : FXD_ViewModelBaseClass
 
-- (void)fatchFindPass:(NSDictionary *)paramDic;
+/**
+ 找回密码
+
+ @param phone 手机号
+ @param password 密码
+ @param verify_code 验证码
+ */
+- (void)fatchFindPassPhone:(NSString *)phone password:(NSString *)password verify_code:(NSString *)verify_code;
 
 @end

@@ -476,7 +476,7 @@ extension HomeDefaultCell{
             make.top.equalTo(label.snp.bottom).offset(10)
             make.left.equalTo((otherPlatformsBgView?.snp.left)!).offset(0)
             make.right.equalTo((otherPlatformsBgView?.snp.right)!).offset(0)
-            make.height.equalTo(homeProductData.data.thirdProductList.count * 82)
+            make.height.equalTo((homeProductData.data.thirdProductList.count > 0 ? homeProductData.data.thirdProductList.count : 0) * 82)
         }
         
         for index in 0..<homeProductData.data.thirdProductList.count {

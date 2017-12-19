@@ -78,21 +78,6 @@
     }];
 }
 
--(void)getApprovalAmount{
-
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_approvalAmount_jhtml] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-    
-}
-
-
 -(void)getApplicationStatus:(NSString *)flag{
 
     NSDictionary *paramDic = @{@"flag":flag};

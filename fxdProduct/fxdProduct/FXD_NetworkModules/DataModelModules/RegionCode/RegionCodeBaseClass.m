@@ -42,8 +42,7 @@ NSString *const kRegionCodeBaseClassResult = @"result";
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
             self.flag = [self objectOrNilForKey:kRegionCodeBaseClassFlag fromDictionary:dict];
             self.ext = [RegionCodeExt modelObjectWithDictionary:[dict objectForKey:kRegionCodeBaseClassExt]];
-            self.result = [RegionCodeResult modelObjectWithDictionary:[dict objectForKey:kRegionCodeBaseClassResult]];
-
+//            self.result = [RegionCodeResult modelObjectWithDictionary:[dict objectForKey:kRegionCodeBaseClassResult]];
     }
     
     return self;
@@ -55,7 +54,7 @@ NSString *const kRegionCodeBaseClassResult = @"result";
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
     [mutableDict setValue:self.flag forKey:kRegionCodeBaseClassFlag];
     [mutableDict setValue:[self.ext dictionaryRepresentation] forKey:kRegionCodeBaseClassExt];
-    [mutableDict setValue:[self.result dictionaryRepresentation] forKey:kRegionCodeBaseClassResult];
+//    [mutableDict setValue:[self.result dictionaryRepresentation] forKey:kRegionCodeBaseClassResult];
 
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }

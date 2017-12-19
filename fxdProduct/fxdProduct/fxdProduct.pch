@@ -51,6 +51,9 @@
 #import "FXDBaseTabBarVCModule.h"
 #import "UIFont+YX_Font.h"
 #import "NSString+Validate.h"
+#import "UserDataInformationModel.h"
+#import "GTMBase64.h"
+#import "CommonViewModel.h"
 
 #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0

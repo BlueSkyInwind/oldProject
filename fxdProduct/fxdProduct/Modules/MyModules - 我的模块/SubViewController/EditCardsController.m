@@ -78,15 +78,15 @@
 {
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResult.flag isEqualToString:@"0000"]) {
-            NSArray * array  = (NSArray *)baseResult.result;
+        BaseResultModel * baseResult = returnValue;
+        if ([baseResult.errCode isEqualToString:@"0"]) {
+            NSArray * array  = (NSArray *)baseResult.data;
             for (int i = 0; i < array.count; i++) {
                 SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
                 [supportBankListArr addObject:bankList];
             }
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.friendErrMsg];
         }
     } WithFaileBlock:^{
         
@@ -295,16 +295,15 @@
         
             SMSViewModel *smsViewModel = [[SMSViewModel alloc]init];
             [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-                _codeParse = returnValue;
-                
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-                
-                DLog(@"---%@",_codeParse.msg);
+                BaseResultModel * baseRM = returnValue;
+                if ([baseRM.errCode isEqualToString:@"0"]) {
+                    
+                }else{
+                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
+                }
             } WithFaileBlock:^{
-                
             }];
             [smsViewModel fatchRequestSMSParamPhoneNumber:self.reservedTel verifyCodeType:ADDCARD_CODE];
-            
             DLog(@"发送验证码");
     }
     else
@@ -456,9 +455,8 @@
         NSMutableArray *paramArray = [self getParamArray];
         UnbundlingBankCardViewModel *unbundlingBankCardViewModel = [[UnbundlingBankCardViewModel alloc]init];
         [unbundlingBankCardViewModel setBlockWithReturnBlock:^(id returnValue) {
-            
-            if ([[returnValue objectForKey:@"flag"]  isEqual: @"0000"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:[returnValue objectForKey:@"msg"]];
+            BaseResultModel *baseRM  = returnValue;
+            if ([baseRM.errCode  isEqualToString:@"0"]) {
                 if (self.popOrdiss == true) {
                     [self.navigationController popViewControllerAnimated:true];
                 }else{
@@ -469,7 +467,7 @@
             }
             else
             {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[returnValue objectForKey:@"msg"]];
+                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:baseRM.friendErrMsg];
             }
         } WithFaileBlock:^{
             

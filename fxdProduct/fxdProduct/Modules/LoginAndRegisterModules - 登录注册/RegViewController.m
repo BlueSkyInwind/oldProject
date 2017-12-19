@@ -25,9 +25,6 @@
     //
     NSInteger _countdown;
     NSTimer * _countdownTimer;
-    ReturnMsgBaseClass *_codeParse;
-    ReturnMsgBaseClass *_regParse;
-    LoginMsgBaseClass *_loginParse;
     
     NSString *_currendId;
     NSString *_oldId;
@@ -309,14 +306,18 @@
 {
     SMSViewModel *smsViewModel = [[SMSViewModel alloc]init];
     [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-        DLog(@"%@",returnValue);
-        DLog(@"%@ --  %@",_currendId,_oldId);
-        _pic_verify_url = [returnValue objectForKey:@"pic_verify_url_"];
-        _oldId = _currendId;
-        _currendId = [returnValue objectForKey:@"id_"];
-        DLog(@"%@",[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_ValidESB_url,[returnValue objectForKey:@"pic_verify_url_"],_currendId,_oldId]);
-        [_picCodeBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_ValidESB_url,[returnValue objectForKey:@"pic_verify_url_"],_currendId,_oldId]] forState:UIControlStateNormal placeholderImage:nil options:SDWebImageRefreshCached];
-        
+        BaseResultModel * baseM = returnValue;
+        if ([baseM.errCode isEqualToString:@"0"]) {
+            PicSMSModel * picSMSM = [[PicSMSModel alloc]initWithDictionary:(NSDictionary *)baseM.data error:nil];
+            DLog(@"%@ --  %@",_currendId,_oldId);
+            _pic_verify_url = picSMSM.pic_verify_url_;
+            _oldId = _currendId;
+            _currendId = picSMSM.id_;
+            DLog(@"%@",[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_main_new_url,picSMSM.pic_verify_url_,_currendId,_oldId]);
+            [_picCodeBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@?id_=%@&oldId_=%@",_main_new_url,_pic_verify_url,_currendId,_oldId]] forState:UIControlStateNormal placeholderImage:nil options:SDWebImageRefreshCached];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseM.friendErrMsg];
+        }
     } WithFaileBlock:^{
         
     }];
@@ -330,16 +331,14 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入有效的手机号码"];
         return;
     }
-    DLog(@"%@",_picCodeText.text);
     SMSViewModel * smsViewModel = [[SMSViewModel alloc]init];
     [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _codeParse = returnValue;
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-        if ([_codeParse.flag isEqualToString:@"0000"]) {
+        BaseResultModel * baseM = returnValue;
+        if ([baseM.errCode isEqualToString:@"0"]) {
             [self setSMSBtnInvalid];
-        }
-        if ([_codeParse.flag isEqualToString:@"0017"]) {
+        }else{
             [self setPicVerifyCode];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseM.friendErrMsg];
         }
     } WithFaileBlock:^{
         
@@ -362,26 +361,24 @@
         }
         RegViewModel * regViewModel = [[RegViewModel alloc]init];
         [regViewModel setBlockWithReturnBlock:^(id returnValue) {
-            
-            _regParse = returnValue;
-            DLog(@"%@",_regParse.msg);
-            if ([_regParse.flag isEqualToString:@"0000"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
+            BaseResultModel * baseVM = returnValue;
+            if ([baseVM.errCode isEqualToString:@"0"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseVM.friendErrMsg];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self login];
                 });
-            } else if ([_regParse.flag isEqualToString:@"0001"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
+            } else if ([baseVM.errCode isEqualToString:@"1"]) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseVM.friendErrMsg];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self.delegate setUserName:self.phoneNumText.text];
                     [self.navigationController popViewControllerAnimated:YES];
                 });
             } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_regParse.msg];
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseVM.friendErrMsg];
             }
         } WithFaileBlock:^{
-            
         }];
+        
         //发起请求
         [regViewModel fatchRegMoblieNumber:self.phoneNumText.text password:self.passText.text verifyCode:self.verCodeText.text invitationCode:_invitationText.text picVerifyId:_currendId picVerifyCode:_picCodeText.text];
         
@@ -410,18 +407,18 @@
     
     LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
     [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _loginParse = returnValue;
-        if ([_loginParse.flag isEqualToString: @"0000"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_loginParse.msg];
+        BaseResultModel * baseVM = returnValue;
+        if ([baseVM.errCode isEqualToString: @"0"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseVM.friendErrMsg];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self dismissViewControllerAnimated:YES completion:^{
                 }];
             });
         } else {
-            if ([_loginParse.flag isEqualToString:@"0005"]) {
+            if ([baseVM.errCode isEqualToString:@"5"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您当前的版本太低,为了您的使用体验请升级版本后再来体验^_^"];
             } else {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginParse.msg]];
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",baseVM.friendErrMsg]];
             }
         }
     } WithFaileBlock:^{

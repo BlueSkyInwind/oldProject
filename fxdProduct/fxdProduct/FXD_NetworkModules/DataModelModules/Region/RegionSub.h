@@ -9,14 +9,12 @@
 
 
 
-@interface RegionSub : NSObject <NSCoding, NSCopying>
+@interface RegionSub : JSONModel
 
-@property (nonatomic, strong) NSArray *sub;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, assign) double type;
+@property (nonatomic, strong) NSArray<Optional> *sub;
+@property (nonatomic, strong) NSString<Optional> *name;
+@property (nonatomic, strong) NSString<Optional> *type;
 
-+ (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
-- (instancetype)initWithDictionary:(NSDictionary *)dict;
-- (NSDictionary *)dictionaryRepresentation;
+
 
 @end

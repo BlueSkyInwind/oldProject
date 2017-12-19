@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-@class CustomerCareerBaseClass,CareerParse;
+@class CustomerCareerResult,CareerParse;
 
 @protocol ProfessionDataDelegate <NSObject>
 
@@ -24,7 +24,7 @@
 
 @property (nonatomic, copy) NSString *product_id;
 
-@property (nonatomic, strong) CustomerCareerBaseClass *careerInfo;
+@property (nonatomic, strong) CustomerCareerResult *careerInfo;
 
 @property (nonatomic, weak)id <ProfessionDataDelegate>delegate;
 

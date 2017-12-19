@@ -75,15 +75,45 @@
                 DLog(@"存储失败");
             }
         }
-        
         //        [Tool saveUserDefaul:nil Key:Fxd_JUID];
         //        [Tool saveUserDefaul:nil Key:kLoginFlag];
         //        [Tool saveUserDefaul:nil Key:UserName];
         [FXD_Utility sharedUtility].userInfo.juid = [FXD_Tool getContentWithKey:Fxd_JUID];
         [FXD_Utility sharedUtility].userInfo.tokenStr = [FXD_Tool getContentWithKey:Fxd_Token];
         [FXD_Utility sharedUtility].loginFlage = [[FXD_Tool getContentWithKey:kLoginFlag] integerValue];
-        [FXD_Utility sharedUtility].userInfo.userName = [FXD_Tool getContentWithKey:UserName];
+        [FXD_Utility sharedUtility].userInfo.userMobilePhone = [FXD_Tool getContentWithKey:UserName];
         [FXD_Utility sharedUtility].isObtainUserLocation = YES;
     });
 }
+
+- (void)checkAPPVersion
+{
+    CommonViewModel * commonVM = [[CommonViewModel alloc]init];
+    [commonVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM= returnValue;
+        if ([baseRM.errCode isEqualToString:@"12"]) {
+            [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:baseRM.friendErrMsg isForce:false compleBlock:^(NSInteger index) {
+                if (index == 1) {
+                    [FXD_Utility sharedUtility].userInfo.isUpdate = NO;
+                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
+                }
+            }];
+        }else if([baseRM.errCode isEqualToString:@"13"]) {
+            [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:baseRM.friendErrMsg isForce:true compleBlock:^(NSInteger index) {
+                if (index == 1) {
+                    [FXD_Utility sharedUtility].userInfo.isUpdate = YES;
+                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
+                }
+            }];
+        }else{
+            [FXD_Utility sharedUtility].userInfo.isUpdate = NO;
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [commonVM appVersionChecker];
+    
+}
+
+
 @end

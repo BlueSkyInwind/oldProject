@@ -14,7 +14,18 @@
 @property (strong, nonatomic)NSString * flag;
 @property (strong, nonatomic)NSString<Optional> * pic_verify_id_;
 @property (strong, nonatomic)NSString<Optional> * pic_verify_code_;
-
+@property (strong, nonatomic)NSString<Optional> * service_platform_type_;
 
 
 @end
+
+@interface PicSMSModel : JSONModel
+
+@property (strong, nonatomic)NSString * id_;
+@property (strong, nonatomic)NSString * pic_verify_url_;
+
+@end
+
+
+
+

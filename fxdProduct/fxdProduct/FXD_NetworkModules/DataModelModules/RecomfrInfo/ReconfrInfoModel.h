@@ -6,33 +6,16 @@
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-@class ReconfrInfoModelResult,ReconfrList;
+#import <JSONModel/JSONModel.h>
 
-@interface ReconfrInfoModel : NSObject
+@interface ReconfrList : JSONModel
 
-@property (nonatomic, copy) NSString *flag;
+@property (nonatomic, strong) NSString<Optional> *id_;
 
-@property (nonatomic, copy) NSString *msg;
+@property (nonatomic, copy) NSString<Optional> *product_id_;
 
-@property (nonatomic, strong) ReconfrInfoModelResult *result;
+@property (nonatomic, copy) NSString<Optional> *protocol_content_;
 
-@end
-
-@interface ReconfrInfoModelResult : NSObject
-
-@property (nonatomic, strong) NSArray <ReconfrList*> *list;
-
-@end
-
-@interface ReconfrList : NSObject
-
-@property (nonatomic, copy) NSString *id_;
-
-@property (nonatomic, copy) NSString *product_id_;
-
-@property (nonatomic, copy) NSString *protocol_content_;
-
-@property (nonatomic, copy) NSString *protocol_type_;
+@property (nonatomic, copy) NSString<Optional> *protocol_type_;
 
 @end

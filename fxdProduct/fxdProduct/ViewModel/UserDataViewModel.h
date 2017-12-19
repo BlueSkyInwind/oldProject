@@ -12,13 +12,6 @@
 @interface UserDataViewModel : FXD_ViewModelBaseClass
 
 /**
- 查询用户资料的录入进度
-
- @param product_id_ 产品
- */
--(void)obtainCustomerAuthInfoProgress:(NSString *)product_id_;
-
-/**
   基础信息状态
  */
 -(void)obtainBasicInformationStatus;
@@ -29,20 +22,22 @@
 
 //上传活体认证信息
 -(void)uploadLiveIdentiInfo:(FaceIDData *)imagesDic;
-
 /**
  认证中心获取基础资料接口
  */
 -(void)obtainBasicInformationStatusOfAuthenticationCenter;
-
 /**
  用户联系人信息的状态
  */
 -(void)obtainContactInfoStatus;
+
 /**
- 获取收款信息
+ 芝麻信用信息提交
+ 
+ @param id_code 身份证id
+ @param user_name 用户名
  */
--(void)obtainGatheringInformation;
+-(void)SubmitZhimaCreditID_code:(NSString *)id_code user_name:(NSString *)user_name;
 
 
 #pragma  mark - 社保  公积金
@@ -74,7 +69,23 @@
 /**
  得到测评结果
  */
-
 -(void)UserDataCertificationResult;
 
+#pragma  mark - 公共接口
+/**
+ 获取列表数据的公共接口
+ 
+ @param str 数据类型
+ */
+-(void)getCommonDictCodeListTypeStr:(NSString *)str;
+/**
+ 获取对应城市代码
+ 
+ @param areaNamestr 城市名
+ */
+-(void)getRegionCodeByAreaName:(NSString *)areaNamestr;
+/**
+ 获取所有省市区
+ */
+-(void)getAllRegionList;
 @end

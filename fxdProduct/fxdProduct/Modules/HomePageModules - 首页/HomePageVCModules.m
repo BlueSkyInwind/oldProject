@@ -89,8 +89,6 @@
 {
     [super viewDidAppear:animated];
 
-    [UserDefaulInfo getUserInfoData];
-    
     if ([FXD_Utility sharedUtility].loginFlage) {
         //获取位置信息
         if ([FXD_Utility sharedUtility].isObtainUserLocation) {

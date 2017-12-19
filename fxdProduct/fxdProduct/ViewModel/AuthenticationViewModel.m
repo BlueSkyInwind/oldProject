@@ -11,6 +11,23 @@
 @implementation AuthenticationViewModel
 
 
+/**
+ 获取手机运营商
+ */
+-(void)obtainUserPhoneCarrierName{
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_getMobileOpera_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
 -(void)TCphoneAuthenticationPhoneNum:(NSString *)number password:(NSString *)password smsCode:(NSString *)smsCode picCode:(NSString *)picCode{
     
     TCMobilePhoneOperatorParamModel * tcOperatorModel = [[TCMobilePhoneOperatorParamModel alloc]init];
@@ -23,13 +40,31 @@
         tcOperatorModel.picCode = picCode;
     }
     NSDictionary * paramDic = [tcOperatorModel toDictionary];
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]TCPOSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getTianChuangCertification_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]TCPOSTWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_getTianChuangCertification_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
             if (self.returnBlock) {
-                self.returnBlock(object);
+                BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+                self.returnBlock(baseRM);
             }
-        }else{
-            
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+/**
+ 保存手机认证信息
+
+ @param code 状态码
+ */
+-(void)SaveMobileAuth:(NSString *)code{
+    
+    NSDictionary *dic = @{@"code":code};
+
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_authMobilePhone_url] isNeedNetStatus:true parameters:dic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
         }
     } failure:^(EnumServerStatus status, id object) {
         if (self.faileBlock) {

@@ -279,7 +279,7 @@
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
     self.navigationItem.title = @"加载中...";
-    if([webView.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_main_url,_zhimaCreditCallBack_url]]){
+    if([webView.URL.absoluteString containsString:[NSString stringWithFormat:@"%@%@",_main_new_url,_zhimaCreditCallBack_url]]){
         for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
             if ([vc isKindOfClass:[UserDataAuthenticationListVCModules class]]) {
                 [self.navigationController popToViewController:vc animated:YES];

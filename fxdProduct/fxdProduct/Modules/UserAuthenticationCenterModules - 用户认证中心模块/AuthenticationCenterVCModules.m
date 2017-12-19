@@ -19,12 +19,12 @@
 #import "Custom_BaseInfo.h"
 #import "DataWriteAndRead.h"
 #import "GetCareerInfoViewModel.h"
-#import "CustomerCareerBaseClass.h"
 #import "UserMobileAuthenticationVCModules.h"
 #import "UserCardResult.h"
 #import "CardInfo.h"
 #import "CheckViewModel.h"
 #import "SupportBankList.h"
+#import "CustomerCareerResult.h"
 
 @interface AuthenticationCenterVCModules ()<UICollectionViewDelegate,UICollectionViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
 {
@@ -317,15 +317,15 @@
             }
             switch (indexPath.row) {
                 case 0:{
-                    [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
+                    [self getUserInfo:^(UserDataInformationModel * userDataInformationM) {
                         UserIdentityInformationVCModules *perInfoVC = [[UserIdentityInformationVCModules alloc] init];
-                        perInfoVC.custom_baseInfo = custom_baseInfo;
+                        perInfoVC.userDataIformationM = userDataInformationM;
                         [self.navigationController pushViewController:perInfoVC animated:true];
                     }];
                 }
                     break;
                 case 1:{
-                    [self getCustomerCarrer_jhtml:^(CustomerCareerBaseClass *careerInfo) {
+                    [self getCustomerCarrer_jhtml:^(CustomerCareerResult *careerInfo) {
                         UserProfessionalInformationVCModules *professVC = [[UserProfessionalInformationVCModules alloc] init];
                         professVC.delegate = self;
                         professVC.careerInfo = careerInfo;
@@ -339,9 +339,9 @@
                         return;
                     }
                     __weak typeof (self) weakSelf = self;
-                    [self getUserInfo:^(Custom_BaseInfo *custom_baseInfo) {
+                    [self getUserInfo:^(UserDataInformationModel * userDataInformationM) {
                         UserFaceIdentiVCModules * faceIdentiCreditVC = [[UserFaceIdentiVCModules alloc]init];
-                        faceIdentiCreditVC.verifyStatus = [NSString stringWithFormat:@"%.0lf",custom_baseInfo.result.verifyStatus];
+                        faceIdentiCreditVC.verifyStatus = userDataInformationM.verify_status_;
                         [weakSelf.navigationController pushViewController:faceIdentiCreditVC animated:true];
                         faceIdentiCreditVC.identifyResultStatus = ^(NSString * status) {
                             weakSelf.verifyStatus = status;
@@ -370,8 +370,10 @@
                         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您正在认证中，请勿重复认证!"];
                         return;
                     }
-                    SesameCreditCertificationVCModules *controller = [[SesameCreditCertificationVCModules alloc]initWithNibName:@"SesameCreditCertificationVCModules" bundle:nil];
-                    [self.navigationController pushViewController:controller animated:YES];
+                    [self getUserInfo:^(UserDataInformationModel * userDataInformationM) {
+                        SesameCreditCertificationVCModules *controller = [[SesameCreditCertificationVCModules alloc]initWithNibName:@"SesameCreditCertificationVCModules" bundle:nil];
+                        [self.navigationController pushViewController:controller animated:YES];
+                    }];
                 }
                     break;
                 case 5:
@@ -468,14 +470,14 @@
         case 3:{
             if ([userDataModel.telephone isEqualToString:@"2"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已认证"];
-                return false;
+                return true;
             }
         }
             break;
         case 4:{
             if ([userDataModel.zmIdentity isEqualToString:@"2"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"已认证"];
-                return false;
+                return true;
             }
         }
             break;
@@ -700,58 +702,38 @@
     }];
     [userDataVM obtainhighRankingStatus];
 }
-- (void)getUserInfo:(void(^)(Custom_BaseInfo *custom_baseInfo))finish
+- (void)getUserInfo:(void(^)(UserDataInformationModel * userDataInformationM))finish
 {
     GetCustomerBaseViewModel *customerInfo = [[GetCustomerBaseViewModel alloc] init];
     [customerInfo setBlockWithReturnBlock:^(id returnValue) {
-        Custom_BaseInfo *custom_model = returnValue;
-        [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-        if ([custom_model.flag isEqualToString:@"0000"]) {
-            id data = [DataWriteAndRead readDataWithkey:UserInfomation];
-            if (data) {
-                [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
-                if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
-                    [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
-                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
-                    }
-                }
-            } else {
-                if (![custom_model.result.idCode isEqualToString:@""] && custom_model.result.idCode != nil) {
-                    [DataWriteAndRead writeDataWithkey:UserInfomation value:custom_model];
-                    [FXD_Utility sharedUtility].userInfo.userIDNumber = custom_model.result.idCode;
-                    [FXD_Utility sharedUtility].userInfo.userMobilePhone = custom_model.ext.mobilePhone;
-                    [FXD_Utility sharedUtility].userInfo.realName = custom_model.result.customerName;
-                    if ([[FXD_Utility sharedUtility].userInfo.account_id isEqualToString:@""] || [FXD_Utility sharedUtility].userInfo.account_id == nil) {
-                        [FXD_Utility sharedUtility].userInfo.account_id = custom_model.result.createBy;
-                    }
-                } else {
-                    [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
-                }
-            }
-            finish(custom_model);
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:custom_model.msg];
+        BaseResultModel * baseVM = returnValue;
+        if ([baseVM.errCode isEqualToString:@"0"]) {
+            UserDataInformationModel * userDataIM = [[UserDataInformationModel alloc]initWithDictionary:(NSDictionary *)baseVM.data error:nil];
+            [DataWriteAndRead writeDataWithkey:UserInfomation value:userDataIM];
+            [FXD_Utility sharedUtility].userInfo.userIDNumber = userDataIM.id_code_;
+            [FXD_Utility sharedUtility].userInfo.realName = userDataIM.customer_name_;
+            [FXD_Utility sharedUtility].userInfo.account_id = userDataIM.create_by_;
+            finish(userDataIM);
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseVM.friendErrMsg];
         }
     } WithFaileBlock:^{
     }];
     [customerInfo fatchCustomBaseInfo:nil];
 }
--(void)getCustomerCarrer_jhtml:(void(^)(CustomerCareerBaseClass *careerInfo))finish
+
+-(void)getCustomerCarrer_jhtml:(void(^)(CustomerCareerResult *careerInfo))finish
 {
     GetCareerInfoViewModel *getCareerInfoViewModel = [[GetCareerInfoViewModel alloc] init];
     [getCareerInfoViewModel setBlockWithReturnBlock:^(id returnValue) {
-        CustomerCareerBaseClass *carrerInfoModel = returnValue;
-        if ([carrerInfoModel.flag isEqualToString:@"0000"]) {
-            finish(carrerInfoModel);
-        }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:carrerInfoModel.msg];
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            CustomerCareerResult * customerCareerR = [[CustomerCareerResult alloc]initWithDictionary:(NSDictionary *)baseRM.data error:nil];
+            finish(customerCareerR);
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
     } WithFaileBlock:^{
-        
     }];
     [getCareerInfoViewModel fatchCareerInfo:nil];
 }
@@ -760,9 +742,9 @@
     
     CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
     [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResult.flag isEqualToString:@"0000"]) {
-            NSArray * array  = (NSArray *)baseResult.result;
+        BaseResultModel * baseResult = returnValue;
+        if ([baseResult.errCode isEqualToString:@"0"]) {
+            NSArray * array  = (NSArray *)baseResult.data;
             _supportBankListArr = [NSMutableArray array];
             for (int i = 0; i < array.count; i++) {
                 SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
@@ -772,7 +754,7 @@
                 finish(cardInfo);
             }];
         } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.friendErrMsg];
         }
     } WithFaileBlock:^{
         
@@ -806,7 +788,7 @@
             }
             finish(resultCardInfo);
         }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         

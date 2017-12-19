@@ -32,7 +32,6 @@
     //子功能视图
     AboutMainViewController *aboutUs;//关于视图
     IdeaBackViewController *ideaBack;//反馈视图
-    ReturnMsgBaseClass *_returnMsgParse;
     testView *_alertView;
 }
 @property (weak, nonatomic) IBOutlet UITableView *MyTabView;
@@ -239,37 +238,34 @@
 - (void)MakeSureBtn:(NSInteger)tag
 {
     [_alertView hide];
-    if ([FXD_Utility sharedUtility].networkState) {
-        if ([FXD_Utility sharedUtility].userInfo.juid != nil && ![[FXD_Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
-            NSDictionary *paramDic = @{@"juid":[FXD_Utility sharedUtility].userInfo.juid};
-            [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_loginOut_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-                _returnMsgParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-                if ([_returnMsgParse.flag isEqualToString:@"0000"]) {
-                    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
-                    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
-
-                        [self.navigationController popToRootViewControllerAnimated:YES];
-                    });
-                    
-                    [self deleteUserRegisterID];
-                    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-                    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-                    [self presentViewController:nav animated:YES completion:^{
-                        [_alertView hide];
-                        [FXD_AppEmptyUserData EmptyData];
-                    }];
-                } else {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view.window message:_returnMsgParse.msg];
-                }
-            } failure:^(EnumServerStatus status, id object) {
-                
-            }];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"参数错误"];
-        }
-    } else {
+    if (![FXD_Utility sharedUtility].networkState) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"似乎没有连接到网络"];
+        return;
     }
+    
+    LoginViewModel * loginVM = [[LoginViewModel alloc]init];
+    [loginVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseVM = returnValue;
+        if ([baseVM.errCode isEqualToString:@"0"]) {
+            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
+            dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            });
+            
+            [self deleteUserRegisterID];
+            LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
+            [self presentViewController:nav animated:YES completion:^{
+                [_alertView hide];
+                [FXD_AppEmptyUserData EmptyData];
+            }];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view.window message:baseVM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [loginVM userLoginOut];
 }
 
 #pragma mark 退出登录

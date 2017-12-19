@@ -58,7 +58,6 @@
     }];
 }
 
-
 -(void)saveAccountBankCard:(NSMutableArray *)paramArray{
 
     SaveAccountBankCardParamModel *saveAccountBankCardParamModel = [[SaveAccountBankCardParamModel alloc]init];
@@ -69,9 +68,19 @@
     saveAccountBankCardParamModel.verify_code_ = paramArray[4];
     
     NSDictionary *paramDic = [saveAccountBankCardParamModel toDictionary];
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_BankNumCheck_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_BankNumCheck_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        if (self.returnBlock) {
+//            self.returnBlock(object);
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        if (self.faileBlock) {
+//            [self faileBlock];
+//        }
+//    }];
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_BankNumCheck_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
-            self.returnBlock(object);
+            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
         }
     } failure:^(EnumServerStatus status, id object) {
         if (self.faileBlock) {

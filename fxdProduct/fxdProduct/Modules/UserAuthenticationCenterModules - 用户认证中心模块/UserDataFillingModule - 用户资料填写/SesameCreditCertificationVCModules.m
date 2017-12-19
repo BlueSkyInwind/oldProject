@@ -36,23 +36,24 @@
     
         DLog(@"%@",self.navigationController.viewControllers);
     
-        NSDictionary *paramDic = @{
-                                   @"juid":[FXD_Utility sharedUtility].userInfo.juid,
-                                   @"id_code_":self.userIDNumberTextField.text,
-                                   @"user_name_":self.realNameTextField.text
-                                   };
-        
-        [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTHideHUD:[NSString stringWithFormat:@"%@%@",_main_url,_submitZhimaCredit_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-            DLog(@"=======%@",object);
-            SubmitZhimaCreditAuthModel *model = [SubmitZhimaCreditAuthModel yy_modelWithJSON:object];
+    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
+    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            SubmitZhimaCreditAuthModel *model = [[SubmitZhimaCreditAuthModel alloc]initWithDictionary:(NSDictionary *)baseRM.data error:nil];
             FXDWebViewController *webview = [[FXDWebViewController alloc] init];
-            NSLog(@"%@",model.result.auth_url);
-            webview.urlStr = model.result.auth_url;
+            NSLog(@"%@",model.auth_url);
+            webview.urlStr = model.auth_url;
             webview.isZhima = YES;
             [self.navigationController pushViewController:webview animated:true];
-        } failure:^(EnumServerStatus status, id object) {
-            DLog(@"%@",object);
-        }];
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseRM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [userDataVM SubmitZhimaCreditID_code:self.userIDNumberTextField.text user_name:self.realNameTextField.text];
+    
 }
 
 - (void)didReceiveMemoryWarning {

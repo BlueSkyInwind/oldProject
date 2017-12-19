@@ -41,5 +41,17 @@
  */
 -(void)deleteUserRegisterID;
 
+/**
+ 更新设备
+ 
+ @param mobliePhone 手机号
+ @param verify_code_ 验证码
+ */
+-(void)updateDeviceID:(NSString *)mobliePhone verify_code:(NSString *)verify_code_;
+
+/**
+ 退出登录
+ */
+-(void)userLoginOut;
 
 @end

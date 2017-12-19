@@ -9,27 +9,24 @@
 
 
 
-@interface CustomerCareerResult : NSObject <NSCoding, NSCopying>
+@interface CustomerCareerResult : JSONModel
 
-@property (nonatomic, strong) NSString *createBy;
-@property (nonatomic, strong) NSString *createDate;
-@property (nonatomic, strong) NSString *modifyBy;
-@property (nonatomic, strong) NSString *resultIdentifier;
-@property (nonatomic, strong) NSString *city;
-@property (nonatomic, strong) NSString *organizationTelephone;
-@property (nonatomic, strong) NSString *organizationAddress;
-@property (nonatomic, strong) NSString *country;
-@property (nonatomic, strong) NSString *modifyDate;
-@property (nonatomic, strong) NSString *provinceName;
-@property (nonatomic, strong) NSString *organizationName;
-@property (nonatomic, strong) NSString *customerBaseId;
-@property (nonatomic, strong) NSString *countryName;
-@property (nonatomic, strong) NSString *province;
-@property (nonatomic, strong) NSString *cityName;
-@property (nonatomic, strong) NSString *industry;
+@property (nonatomic, strong) NSString<Optional> *create_by_;
+@property (nonatomic, strong) NSString<Optional> *create_date_;
+@property (nonatomic, strong) NSString<Optional> *modify_by_;
+@property (nonatomic, strong) NSString<Optional> *id_;
+@property (nonatomic, strong) NSString<Optional> *city_;
+@property (nonatomic, strong) NSString<Optional> *organization_telephone_;
+@property (nonatomic, strong) NSString<Optional> *organization_address_;
+@property (nonatomic, strong) NSString<Optional> *country_;
+@property (nonatomic, strong) NSString<Optional> *modify_date_;
+@property (nonatomic, strong) NSString<Optional> *province_name_;
+@property (nonatomic, strong) NSString<Optional> *organization_name_;
+@property (nonatomic, strong) NSString<Optional> *customer_base_id_;
+@property (nonatomic, strong) NSString<Optional> *country_name_;
+@property (nonatomic, strong) NSString<Optional> *province_;
+@property (nonatomic, strong) NSString<Optional> *city_name_;
+@property (nonatomic, strong) NSString<Optional> *industry_;
 
-+ (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
-- (instancetype)initWithDictionary:(NSDictionary *)dict;
-- (NSDictionary *)dictionaryRepresentation;
 
 @end

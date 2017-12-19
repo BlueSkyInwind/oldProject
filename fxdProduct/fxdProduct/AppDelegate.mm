@@ -18,7 +18,6 @@
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
-#import "FXD_AppUpdateChecker.h"
 #import "SetUpFMDevice.h"
 #import "FXD_LaunchConfiguration.h"
 #import "LoginViewModel.h"
@@ -201,8 +200,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     //清除激光推送JPush服务器中存储的badge值
     [JPUSHService resetBadge];
-    [[FXD_AppUpdateChecker sharedUpdateChecker] checkAPPVersion];
-
+    [[FXD_LaunchConfiguration shared] checkAPPVersion];
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings

@@ -10,18 +10,6 @@
 
 @implementation DataDicParse
 
-+ (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"result":[DataDicResult class],
-             @"ext":[DataDicExt class]};
-}
 
 @end
 
-
-@implementation DataDicResult
-
-@end
-
-@implementation DataDicExt
-
-@end

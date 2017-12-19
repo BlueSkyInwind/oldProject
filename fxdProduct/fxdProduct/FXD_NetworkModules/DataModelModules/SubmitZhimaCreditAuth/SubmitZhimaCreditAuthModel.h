@@ -7,17 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-@class SubmitResult;
-@interface SubmitZhimaCreditAuthModel : NSObject
 
+@interface SubmitZhimaCreditAuthModel : JSONModel
 
-@property (nonatomic,strong)SubmitResult *result;
-
+@property (nonatomic,strong)NSString<Optional> *auth_url;
 
 @end
 
-@interface SubmitResult : NSObject
 
-@property (nonatomic,strong)NSString *auth_url;
-
-@end

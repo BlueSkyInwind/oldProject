@@ -75,7 +75,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _dataDic.result.count;
+    return _edudataList.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,7 +85,8 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellindex];
     }
-    cell.textLabel.text = _dataDic.result[indexPath.row].desc_;
+    DataDicParse * dataPares = _edudataList[indexPath.row];
+    cell.textLabel.text = dataPares.desc_;
 
     return cell;
 
@@ -95,7 +96,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.delegate respondsToSelector:@selector(ColledgeDelegateNString:andIndex:)]) {
-        [self.delegate ColledgeDelegateNString:_dataDic.result[indexPath.row].desc_ andIndex:indexPath];
+        DataDicParse * dataPares = _edudataList[indexPath.row];
+        [self.delegate ColledgeDelegateNString:dataPares.desc_ andIndex:indexPath];
     }
     [self hide];
 }

@@ -284,29 +284,29 @@ typedef enum {
                      @"verify_code_":_mobileRequArr[3]
                      };
     }
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_Certification_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            _mobileParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-            if ([_mobileParse.flag isEqualToString:@"0000"])
-            {
-                //                [dataListAll2 replaceObjectAtIndex:13 withObject:@"2"];
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
-                //                _segment.selectedSegmentIndex = 1;
-                //                [self createUIWith:_segment.selectedSegmentIndex];
-                [self saveMobileAuth:@"1"];
-            }else if ([_mobileParse.flag isEqualToString:@"0006"]) {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
-                //                [dataListAll2 replaceObjectAtIndex:12 withObject:@"flag"];
-                _currentDisplayType = VerifyCodeViewType;//错误时 验证码显示
-                [_tableView reloadData];
-            }else{
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
-                [self saveMobileAuth:@"-1"];
-            }
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-    }];
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_Certification_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        if (status == Enum_SUCCESS) {
+//            _mobileParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
+//            if ([_mobileParse.flag isEqualToString:@"0000"])
+//            {
+//                //                [dataListAll2 replaceObjectAtIndex:13 withObject:@"2"];
+//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
+//                //                _segment.selectedSegmentIndex = 1;
+//                //                [self createUIWith:_segment.selectedSegmentIndex];
+//                [self saveMobileAuth:@"1"];
+//            }else if ([_mobileParse.flag isEqualToString:@"0006"]) {
+//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
+//                //                [dataListAll2 replaceObjectAtIndex:12 withObject:@"flag"];
+//                _currentDisplayType = VerifyCodeViewType;//错误时 验证码显示
+//                [_tableView reloadData];
+//            }else{
+//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
+//                [self saveMobileAuth:@"-1"];
+//            }
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//
+//    }];
 }
 #pragma mark - 天创手机号认证
 
@@ -316,27 +316,27 @@ typedef enum {
 
     AuthenticationViewModel * authenticationViewModel = [[AuthenticationViewModel alloc]init];
     [authenticationViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _mobileParse = [ReturnMsgBaseClass modelObjectWithDictionary:returnValue];
-        if ([_mobileParse.flag isEqualToString:@"0000"]){
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]){
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
             [self saveMobileAuth:@"1"];
-        }else if ([_mobileParse.flag isEqualToString:@"0019"]){
+        }else if ([baseRM.errCode isEqualToString:@"19"]){
             //需要图片验证码
             picCodeImage = [self returnPicCodeImage:[[returnValue objectForKey:@"result"] objectForKey:@"picContent"]];
             _currentDisplayType = PicCodeViewType;
             [_tableView reloadData];
-        }else if ([_mobileParse.flag isEqualToString:@"0020"]){
+        }else if ([baseRM.errCode isEqualToString:@"20"]){
             //需要图片和手机验证码
             picCodeImage = [self returnPicCodeImage:[[returnValue objectForKey:@"result"] objectForKey:@"picContent"]];
             _currentDisplayType = verifyCodeAndPicCodeViewType;
             [_tableView reloadData];
-        }else if ([_mobileParse.flag isEqualToString:@"0006"]){
+        }else if ([baseRM.errCode isEqualToString:@"6"]){
             //需要手机验证码
             _currentDisplayType = VerifyCodeViewType; //错误时 验证码显示
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
             [_tableView reloadData];
         }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
             [self saveMobileAuth:@"-1"];
         }
     } WithFaileBlock:^{
@@ -346,8 +346,6 @@ typedef enum {
 }
 -(UIImage *)returnPicCodeImage:(NSString *)imageStr{
     
-//    NSRange range = [imageStr rangeOfString:@","];
-//    NSString * str = [imageStr substringFromIndex:range.location + 1];
     NSData *decodedImageData   = [[NSData alloc]initWithBase64EncodedString:imageStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
     UIImage *  image = [UIImage imageWithData:decodedImageData];
     return image;
@@ -355,64 +353,60 @@ typedef enum {
 
 - (void)saveMobileAuth:(NSString *)authCode
 {
-    NSDictionary *dic = @{@"code":authCode};
     __weak UserMobileAuthenticationVCModules *weakself = self;
-    //    __block NSMutableArray * blockDataList = dataListAll2;
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_authMobilePhone_url] parameters:dic finished:^(EnumServerStatus status, id object) {
-        ReturnMsgBaseClass *returnParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-        if ([returnParse.flag isEqualToString:@"0000"]) {
+    AuthenticationViewModel * authenticationViewModel = [[AuthenticationViewModel alloc]init];
+    [authenticationViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRm = returnValue;
+        if ([baseRm.errCode isEqualToString:@"0"]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"认证成功"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakself.navigationController popViewControllerAnimated:YES];
             });
         }else{
-//                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:returnParse.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:baseRm.friendErrMsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
-        
+    } WithFaileBlock:^{
     }];
+    [authenticationViewModel SaveMobileAuth:authCode];
+    
+//    NSDictionary *dic = @{@"code":authCode};
+//    __weak UserMobileAuthenticationVCModules *weakself = self;
+//    //    __block NSMutableArray * blockDataList = dataListAll2;
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_authMobilePhone_url] parameters:dic finished:^(EnumServerStatus status, id object) {
+//        ReturnMsgBaseClass *returnParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
+//        if ([returnParse.flag isEqualToString:@"0000"]) {
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"认证成功"];
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [weakself.navigationController popViewControllerAnimated:YES];
+//            });
+//        }else{
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//
+//    }];
 }
 
 #pragma mark - 获取手机运营商
 - (void)fatchMobileOpera
 {
-    //获取手机运营商
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getMobileOpera_url] parameters:nil finished:^(EnumServerStatus status, id object) {
-        if (status == Enum_SUCCESS) {
-            if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
-                NSString *telNum = [[object objectForKey:@"ext"] objectForKey:@"mobile_phone_"];
-                [_mobileRequArr replaceObjectAtIndex:0 withObject:[self formatString:telNum]];
-                NSString *result = [object objectForKey:@"result"];
-                [_mobileRequArr replaceObjectAtIndex:1 withObject:result];
-                [_tableView reloadData];
-            }else{
-                DLog(@"获取失败");
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"运营商信息获取失败"];
-            }
+    AuthenticationViewModel * authenticationViewModel = [[AuthenticationViewModel alloc]init];
+    [authenticationViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            NSString *telNum = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
+            [_mobileRequArr replaceObjectAtIndex:0 withObject:[self formatString:telNum]];
+            NSString *result = (NSString *)baseRM.data;
+            [_mobileRequArr replaceObjectAtIndex:1 withObject:result];
+            [_tableView reloadData];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    [authenticationViewModel obtainUserPhoneCarrierName];
+
 }
-//- (void)mobileCheck
-//{
-//    if (_mobileRequArr[0].length<5 || _mobileRequArr[1].length < 3) {
-//        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入服务密码或验证码"];
-//    }
-//
-//    __weak UserMobileAuthenticationVCModules *weakSelf = self;
-//    if (_jxlParse &&![_jxlParse.data.token isEqualToString:@""] && ![_jxlParse.data.datasource.website isEqualToString:@""]) {
-//        [self startRequMessage:_jxlParse.data.token finsh:^(JXLMessagePrse *messageParse) {
-//            [weakSelf setUIUpdate:messageParse];
-//        }];
-//    } else {
-//        [weakSelf fatchJXLToken:^{
-//            [weakSelf startRequMessage:_jxlParse.data.token finsh:^(JXLMessagePrse *messageParse) {
-//                [weakSelf setUIUpdate:messageParse];
-//            }];
-//        }];
-//    }
-//}
 
 - (void)setUIUpdate:(JXLMessagePrse *)messageParse
 {

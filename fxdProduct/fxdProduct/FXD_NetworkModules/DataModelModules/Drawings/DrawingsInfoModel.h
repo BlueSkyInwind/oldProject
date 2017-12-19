@@ -18,8 +18,8 @@
 @property(nonatomic,strong)NSString<Optional> * code;
 @property(nonatomic,strong)NSString<Optional> * desc;
 
-
 @end
+
 
 @interface DrawingsInfoModel : JSONModel
 
@@ -57,7 +57,6 @@
 
 @end
 
-
 @interface SalaryDrawingsFeeInfoModel : JSONModel
 
 @property(nonatomic,strong)NSArray<SalaryFeeDetailModel,Optional> * feeInfo;
@@ -66,6 +65,14 @@
 
 @end
 
+@interface WithDrawalsParamModel : JSONModel
+
+@property(nonatomic,strong)NSString<Optional> * periods;
+@property(nonatomic,strong)NSString<Optional> * loanFor;
+//@property(nonatomic,strong)NSString<Optional> * drawing_amount_;
+@property(nonatomic,strong)NSString<Optional> * accountCardId;
+
+@end
 
 
 

@@ -11,7 +11,6 @@
 #import "LoginViewController.h"
 #import "BaseNavigationViewController.h"
 #import "AppDelegate.h"
-#import "LoginBaseClass.h"
 #import "DataBaseManager.h"
 #import "SMSViewModel.h"
 #import "LoginViewModel.h"
@@ -22,9 +21,8 @@
 {
     NSInteger _countdown;
     NSTimer * _countdownTimer;
-    ReturnMsgBaseClass *_codeParse;
     ReturnMsgBaseClass *_updateParse;
-    LoginBaseClass *_loginParse;
+    BaseResultModel *_loginResultModel;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *userIDView;
@@ -111,21 +109,21 @@
         return;
     }
     
-    self.sendCodeButton.userInteractionEnabled = NO;
-    self.sendCodeButton.alpha = 0.4;
-    [self.sendCodeButton setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
-    _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
-    
     SMSViewModel *smsViewModel = [[SMSViewModel alloc] init];
     [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-        _codeParse = returnValue;
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_codeParse.msg];
-        DLog(@"---%@",_codeParse.msg);
+        BaseResultModel * baseResultM  = returnValue;
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            self.sendCodeButton.userInteractionEnabled = NO;
+            self.sendCodeButton.alpha = 0.4;
+            [self.sendCodeButton setTitle:[NSString stringWithFormat:@"还剩%ld秒",(long)(_countdown - 1)] forState:UIControlStateNormal];
+            _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
     } WithFaileBlock:^{
         
     }];
     [smsViewModel fatchRequestSMSParamPhoneNumber:self.phoneNumText.text verifyCodeType:CHANGEDEVID_CODE];
-    
 }
 
 - (void)closeGetVerifyButtonUser
@@ -144,50 +142,61 @@
 
 //确认更改点击事件
 - (IBAction)submitChange:(UIButton *)sender {
-    NSDictionary *paramDic = [self getDicOfChange];
-    
     [self.view endEditing:YES];
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_updateDevID_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        _updateParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-        if ([_updateParse.flag isEqualToString:@"0000"]) {
+    
+    LoginViewModel * loginVM = [[LoginViewModel alloc]init];
+    [loginVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * resultM = returnValue;
+        if ([resultM.errCode  isEqualToString:@"0"]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:_updateParse.msg];
             [self login];
-        } else {
+        }else{
             [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeError title:nil detail:_updateParse.msg cencelBtn:nil otherBtn:@[@"重试"] Onview:self.view];
             [[FXD_AlertViewCust sharedHHAlertView] removeAlertView];
         }
-    } failure:^(EnumServerStatus status, id object) {
+    } WithFaileBlock:^{
         
     }];
+    [loginVM updateDeviceID:self.phoneNumText.text verify_code:self.verCodeText.text];
+    
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_updateDevID_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        _updateParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
+//        if ([_updateParse.flag isEqualToString:@"0000"]) {
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:_updateParse.msg];
+//            [self login];
+//        } else {
+//            [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeError title:nil detail:_updateParse.msg cencelBtn:nil otherBtn:@[@"重试"] Onview:self.view];
+//            [[FXD_AlertViewCust sharedHHAlertView] removeAlertView];
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//
+//    }];
+    
 }
-
 - (void)login
 {
-    if ([FXD_Utility sharedUtility].networkState) {
-            
-            LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
-            [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
-                _loginParse = returnValue;
-                if ([_loginParse.flag isEqualToString: @"0000"]) {
-                    
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_loginParse.msg];
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [self dismissViewControllerAnimated:YES completion:^{
-                        }];
-                    });
-                    
-                } else if ([_loginParse.flag isEqualToString:@"0005"]) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                } else {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginParse.msg]];
-                }
-            } WithFaileBlock:^{
-                
-            }];
-             [loginViewModel fatchLoginMoblieNumber:self.phoneNumText.text password:self.passStr fingerPrint:nil verifyCode:nil];
-    }else{
+    if (![FXD_Utility sharedUtility].networkState) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"没有连接到网络"];
+        return;
     }
+    LoginViewModel *loginViewModel = [[LoginViewModel alloc] init];
+    [loginViewModel setBlockWithReturnBlock:^(id returnValue) {
+        _loginResultModel = returnValue;
+        if ([_loginResultModel.errCode isEqualToString: @"0"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_loginResultModel.friendErrMsg];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self dismissViewControllerAnimated:YES completion:^{
+                }];
+            });
+        } else if ([_loginResultModel.errCode isEqualToString:@"5"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginResultModel.friendErrMsg]];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [loginViewModel fatchLoginMoblieNumber:self.phoneNumText.text password:self.passStr fingerPrint:nil verifyCode:nil];
 }
 
 

@@ -7,17 +7,29 @@
 //
 
 #import "FindPassViewModel.h"
-#import "ReturnMsgBaseClass.h"
+#import "LoginParamModel.h"
+#import "DES3Util.h"
 
 @implementation FindPassViewModel
 
-- (void)fatchFindPass:(NSDictionary *)paramDic
+- (void)fatchFindPassPhone:(NSString *)phone password:(NSString *)password verify_code:(NSString *)verify_code
 {
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_forget_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        ReturnMsgBaseClass *findParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-        self.returnBlock(findParse);
+    LoginFindParamModel * findM =  [[LoginFindParamModel alloc]init];
+    findM.mobile_phone_ = phone;
+    findM.password_ =  [DES3Util encrypt:password];
+    findM.verify_code_ = verify_code;
+    findM.service_platform_type_ = SERVICE_PLATFORM;
+    NSDictionary * paramDic = [findM toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_forget_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseResultM);
+        }
     } failure:^(EnumServerStatus status, id object) {
-        [self faileBlock];
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
     }];
 }
 
