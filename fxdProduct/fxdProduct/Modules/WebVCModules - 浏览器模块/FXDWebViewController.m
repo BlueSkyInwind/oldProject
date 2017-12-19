@@ -58,11 +58,14 @@
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
 
     }
+
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
     
+    
 }
+
 
 /**
  h5活动拼装url
@@ -301,6 +304,8 @@
             DLog(@"value: %@ error: %@", response, error);
         }];
     }
+    
+    
 }
 
 #pragma mark -
@@ -412,6 +417,7 @@
     }
     return nil;
 }
+
 /*
  #pragma mark - Navigation
  
