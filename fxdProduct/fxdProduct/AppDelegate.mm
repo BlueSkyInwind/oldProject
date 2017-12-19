@@ -105,7 +105,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     }
     //上传jpushID
     [self uploadJPushID];
-    
     return YES;
 }
 /**
@@ -144,7 +143,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 }
 
 -(void)heguiceshi{
-    
     [FXD_Utility sharedUtility].userInfo.juid = @"ab6a0ee1ecaa48069b1af882375891c4";
     [FXD_Utility sharedUtility].userInfo.tokenStr = [NSString stringWithFormat:@"%@token",@"ab6a0ee1ecaa48069b1af882375891c4"];
     [FXD_Utility sharedUtility].loginFlage = YES;
@@ -174,7 +172,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     // 3.开始监控
     [mgr startMonitoring];
 }
-
 
 -(void)enter{
     

@@ -24,6 +24,7 @@
 + (BOOL)checkUserDetail : (NSString *) userName;
 #pragma 正则匹配用户身份证号
 + (BOOL)checkUserIdCard: (NSString *) idCard;
++ (BOOL)accurateVerifyIDCardNumber:(NSString *)value;
 #pragma 正则匹员工号,12位的数字
 + (BOOL)checkEmployeeNumber : (NSString *) number;
 #pragma 正则判断数字,1到30位的数字

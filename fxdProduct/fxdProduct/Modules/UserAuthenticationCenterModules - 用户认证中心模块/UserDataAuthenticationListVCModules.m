@@ -82,7 +82,14 @@
     _creditCardStatus = @"3";
     _socialSecurityStatus = @"3";
     _subTitleArr = @[@"请完善您的身份信息",@"请完善您的个人信息",@"请完成三方认证",@"请完善您的收款信息"];
-    [self addBackItemRoot];
+    if (_isCash) {
+        
+        [self addBackItem];
+    }else{
+        
+        [self addBackItemRoot];
+    }
+    
     [self configMoxieSDK];
     [self configTableview];
     
@@ -663,7 +670,7 @@
         loanFirstVC.rulesId = _rulesId;
     }
     loanFirstVC.model = _model;
-    if ([_product_id isEqualToString:RapidLoan]) {
+    if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
         loanFirstVC.req_loan_amt = _req_loan_amt;
     }
     [self.navigationController pushViewController:loanFirstVC animated:true];
@@ -685,7 +692,7 @@
         loanFirstVC.rulesId = _rulesId;
     }
     
-    if ([[FXD_Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan]) {
+    if ([[FXD_Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan] || [[FXD_Utility sharedUtility].userInfo.pruductId isEqualToString:DeriveRapidLoan]) {
         loanFirstVC.req_loan_amt = _req_loan_amt;
     }
     [self.navigationController pushViewController:loanFirstVC animated:true];

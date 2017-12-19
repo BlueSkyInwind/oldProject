@@ -122,6 +122,7 @@
         {
             cell.lineView.hidden=NO;
         }
+
     }
     
     else{

@@ -12,13 +12,20 @@ import MJRefresh
 class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
     var tableView : UITableView?
-    var num : Int?
+    var page : Int?
+    var noneView : NonePageView?
+    var items:[OperUserMassgeModel] = []
+    var messageModel : ShowMsgPreviewModel?
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "我的消息"
         addBackItemRoot()
+        //随机生成一些初始化数据
         configureView()
+        createNoneView()
+     
         // Do any additional setup after loading the view.
     }
 
@@ -27,6 +34,22 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.page = 0
+        getData(isHeaderFresh: true)
+    }
+    
+    func createNoneView(){
+        
+        noneView = NonePageView()
+        noneView?.DefaultUI()
+        noneView?.backgroundColor = LINE_COLOR
+        noneView?.isHidden = true
+        self.view.addSubview(noneView!)
+        
+    }
     
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
@@ -38,52 +61,113 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
         })
-       num = 15
-        
+        if #available(iOS 11.0, *){
+            tableView?.contentInsetAdjustmentBehavior = .never;
+            tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
+        }else if #available(iOS 9.0, *){
+            self.automaticallyAdjustsScrollViewInsets = true;
+        }else{
+            self.automaticallyAdjustsScrollViewInsets = false;
+        }
         //下拉刷新相关设置,使用闭包Block
         tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
 
             self.headerRefresh()
-            
+
         })
-        
-        //上拉加载相关设置,使用闭包Block
-        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-  
-            self.footerLoad()
-            
-        })
-        
+
+
+//        //上拉加载相关设置,使用闭包Block
+//        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+//
+//            self.footerLoad()
+//
+//        })
+//        tableView?.mj_footer.isAutomaticallyHidden = true
+    
+        // 底部加载
+        let footer = MJRefreshAutoNormalFooter()
+        footer.setRefreshingTarget(self, refreshingAction: #selector(footerLoad))
+        //是否自动加载（默认为true，即表格滑到底部就自动加载）
+        footer.isAutomaticallyRefresh = false
+         self.tableView!.mj_footer = footer
     }
     
     //MARK: 刷新
     /// 下拉刷新
     @objc func headerRefresh(){
-        
-        num = 15
-        //重现加载表格数据
-        self.tableView?.reloadData()
-        //结束刷新
-        self.tableView?.mj_header.endRefreshing()
-      
+
+        self.page = 0
+        getData(isHeaderFresh: true)
+
     }
     
     /// 上拉加载
     @objc func footerLoad(){
-        num = 30
        
-        //重现加载表格数据
-        self.tableView?.reloadData()
-        //结束刷新
-        self.tableView?.mj_footer.endRefreshing()
+        self.page = (self.page)! + 15
+        
+        if (self.messageModel?.operUserMassge.count)! < 15 {
+            self.tableView?.mj_footer.endRefreshingWithNoMoreData()
+
+        }else{
+    
+            getData(isHeaderFresh: false)
+           
+        }
+    }
+
+    func getData(isHeaderFresh : Bool){
+        
+        let pageStr = String.init(format: "%d", self.page!)
+        
+        let messageVM = MessageViewModel()
+        messageVM.setBlockWithReturn({ [weak self](returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                if isHeaderFresh{
+                    
+                    self?.items.removeAll()
+                }
+            
+                self?.messageModel = try! ShowMsgPreviewModel.init(dictionary: baseResult.data as! [AnyHashable : Any]!)
+                if self?.messageModel?.operUserMassge.count != 0{
+                    
+                    for index in 0 ..< (self?.messageModel?.operUserMassge.count)!{
+                        
+                        let model = self?.messageModel?.operUserMassge[index] as? OperUserMassgeModel
+                        self?.items.append(model!)
+                    }
+                    self?.tableView?.isHidden = false
+                    self?.noneView?.isHidden = true
+                    self?.tableView?.reloadData()
+                    self?.tableView?.mj_header.endRefreshing()
+                    self?.tableView?.mj_footer.endRefreshing()
+                    
+                }else{
+                    self?.tableView?.isHidden = true
+                    self?.noneView?.isHidden = false
+                }
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+            
+            self?.tableView?.mj_header.endRefreshing()
+            self?.tableView?.mj_footer.endRefreshing()
+        }) {
+            
+            self.tableView?.mj_header.endRefreshing()
+            self.tableView?.mj_footer.endRefreshing()
+        }
+        messageVM.showMsgPreviewPageNum(pageStr, pageSize: "15")
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return num!
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        
+        return self.items.count + 1
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -101,13 +185,24 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
             messageCell = MessageCell.init(style: .default, reuseIdentifier: "MessageCell")
         }
         if indexPath.row == 0 {
-            
+
             messageCell.cellType = MessageCellType(cellType: .Header)
             return messageCell
         }
         
         messageCell.cellType = MessageCellType(cellType: .Default)
         messageCell.selectionStyle = .none
+        messageCell.titleLabel?.text = items[indexPath.row - 1].msgName
+        messageCell.timeLabel?.text = items[indexPath.row - 1].createDate
+        messageCell.contentLabel?.text = items[indexPath.row - 1].msgText
+        messageCell.leftImageView?.isHidden = false
+        messageCell.titleLabel?.textColor = TITLE_COLOR
+
+        if items[indexPath.row - 1].isRead == "2" {
+
+            messageCell.leftImageView?.isHidden = true
+            messageCell.titleLabel?.textColor = QUTOA_COLOR;
+        }
         
         return messageCell!
     }
@@ -115,8 +210,9 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let webView = FXDWebViewController()
-        webView.urlStr = _H5_url+_aboutus_url;
+        webView.urlStr = (messageModel?.requestUrl)! + items[indexPath.row - 1].id_
         self.navigationController?.pushViewController(webView, animated: true)
+        
     }
     
 

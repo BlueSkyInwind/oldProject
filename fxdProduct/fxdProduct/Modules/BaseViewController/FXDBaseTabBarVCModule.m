@@ -25,7 +25,26 @@
     
     [self setTabbarCon];
     self.delegate = self;
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"InfoNotification" object:nil];
+    
+
 }
+
+//- (void)InfoNotificationAction:(NSNotification *)notification{
+//
+//    NSLog(@"%@",notification.userInfo);
+//
+//    NSLog(@"---接收到通知---");
+//    NSDictionary  *dic = [notification userInfo];
+//    NSString *info = [dic objectForKey:@"isDisplay"];
+////    UITabBarItem * item = [self.tabBar.items objectAtIndex:2];
+////    item.badgeValue = @" ";
+//    [self.tabBarController.tabBar showBadgeOnItemIndex:2];
+//
+////    item.badgeValue = nil;
+//
+//}
 
 - (void)setTabbarCon
 {
@@ -65,6 +84,7 @@
     [item setTitlePositionAdjustment:UIOffsetMake(0, -3)];
     return item;
 }
+
 
 -(void)makeTabBarHidden:(BOOL)hide { // Custom code to hide TabBar
     if ( [self.view.subviews count] < 2 ) { return;

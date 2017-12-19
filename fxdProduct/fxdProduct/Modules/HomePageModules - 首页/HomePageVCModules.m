@@ -14,7 +14,6 @@
 #import "BaseNavigationViewController.h"
 #import "ActivityHomePopView.h"
 #import "LewPopupViewController.h"
-//#import "HomePop.h"
 #import "FXDWebViewController.h"
 #import "SDCycleScrollView.h"
 #import "RepayRecordController.h"
@@ -34,6 +33,12 @@
 #import "LoanMoneyViewModel.h"
 #import "ApplicationStatusModel.h"
 #import "UserDataViewModel.h"
+#import "MessageViewModel.h"
+#import "AountStationLetterMsgModel.h"
+#import "MyViewController.h"
+#import "FXDBaseTabBarVCModule.h"
+#import "UITabBar+badge.h"
+
 
 @interface HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,HomeDefaultCellDelegate,LoadFailureDelegate>
 {
@@ -57,6 +62,9 @@
 
 @property (nonatomic,strong) LoadFailureView * loadFailView;
 @property (nonatomic,strong) HomeChoosePopView * popChooseView;
+@property (nonatomic,strong) UIView *bgView;
+@property (nonatomic,strong) UILabel *messageNumLabel;
+@property (nonatomic,strong) UIButton *messageBtn;
 
 @end
 
@@ -73,13 +81,14 @@
     _count = 0;
    _dataArray = [NSMutableArray array];
     [self setUpTableview];
-//    [self setNavQRRightBar];
+    [self setNavQRRightBar];
     [self setNavQRLeftBar];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+
     [UserDefaulInfo getUserInfoData];
     
     if ([FXD_Utility sharedUtility].loginFlage) {
@@ -89,12 +98,15 @@
         }
     }
     [self LoadHomeView];
+    
 }
 
 /**
  根据数据加载视图的状况
  */
 -(void)LoadHomeView{
+    
+    [self getMessageNumber];
     [self getAllTheHomePageData:^(BOOL isSuccess) {
         if (_loadFailView) {
             [_loadFailView removeFromSuperview];
@@ -104,6 +116,8 @@
             [self setUploadFailView];
         }
     }];
+    
+   
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -160,28 +174,40 @@
  */
 - (void)setNavQRRightBar {
     
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 23, 18)];
-    [btn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
-//    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(16, -8, 13, 13)];
-//    bgView.backgroundColor = [UIColor redColor];
-//    bgView.layer.cornerRadius = 6.5;
-//    [btn addSubview:bgView];
-//
-//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(2, 0, 10, 12)];
-//    label.text = @"3";
-//    label.textColor = [UIColor whiteColor];
-//    label.font = [UIFont systemFontOfSize:12];
-//    [bgView addSubview:label];
+    _messageBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 23, 18)];
+    [_messageBtn setImage:[UIImage imageNamed:@"homeMessage"] forState:UIControlStateNormal];
+    [_messageBtn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
+    _bgView = [[UIView alloc]init];
+    _bgView.backgroundColor = [UIColor redColor];
+    _bgView.layer.cornerRadius = 6.5;
+    _bgView.hidden = true;
+    [_messageBtn addSubview:_bgView];
+
+    [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_messageBtn.mas_left).offset(16);
+        make.top.equalTo(_messageBtn.mas_top).offset(-4);
+        make.width.equalTo(@13);
+        make.height.equalTo(@13);
+        
+    }];
+
+    _messageNumLabel = [[UILabel alloc]init];
+    _messageNumLabel.textAlignment = NSTextAlignmentCenter;
+    _messageNumLabel.textColor = [UIColor whiteColor];
+    _messageNumLabel.font = [UIFont systemFontOfSize:12];
+    [_bgView addSubview:_messageNumLabel];
+    [_messageNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_bgView.mas_left).offset(0);
+        make.top.equalTo(_bgView.mas_top).offset(0);
+        make.right.equalTo(_bgView.mas_right).offset(0);
+        make.height.equalTo(@13);
+    }];
     
-    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:btn];
-//    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRMessage)];
+    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:_messageBtn];
+
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = 8;
-    
-    
     self.navigationItem.rightBarButtonItems = @[spaceItem,aBarbi];
-
 }
 
 /**
@@ -190,8 +216,60 @@
 -(void)setNavQRLeftBar {
     
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(homeQRCodePopups)];
-    self.navigationItem.rightBarButtonItem = aBarbi;
+    self.navigationItem.leftBarButtonItem = aBarbi;
     
+}
+/**
+ 站内信用户未读信息统计接口
+ */
+
+-(void)getMessageNumber{
+    
+    MessageViewModel *messageVM = [[MessageViewModel alloc]init];
+    [messageVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            AountStationLetterMsgModel *model = [[AountStationLetterMsgModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+        
+            if ([model.isDisplay isEqualToString:@"1"]) {
+                _bgView.hidden = false;
+                _messageNumLabel.text = model.countNum;
+
+                if (model.countNum.integerValue > 9) {
+
+                    [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.left.equalTo(_messageBtn.mas_left).offset(6);
+                        make.width.equalTo(@24);
+                    }];
+
+                }else{
+                    
+                    [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.left.equalTo(_messageBtn.mas_left).offset(16);
+                        make.width.equalTo(@13);
+                    }];
+            
+                }
+                if (model.countNum.integerValue > 99) {
+                    _messageNumLabel.text = @"99+";
+                }
+                [self.tabBarController.tabBar showBadgeOnItemIndex:2];
+            }else{
+                _bgView.hidden = true;
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
+            }
+            
+        }else{
+        
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+    
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [messageVM countStationLetterMsg];
 }
 
 
@@ -214,8 +292,13 @@
  */
 -(void)homeQRMessage{
     
-    MyMessageViewController *myMessageCV = [[MyMessageViewController alloc]init];
-    [self.navigationController pushViewController:myMessageCV animated:true];
+    if ([FXD_Utility sharedUtility].loginFlage) {
+        MyMessageViewController *myMessageCV = [[MyMessageViewController alloc]init];
+        [self.navigationController pushViewController:myMessageCV animated:true];
+    } else {
+        [self presentLoginVC:self];
+    }
+    
 }
 #pragma mark tabView视图
 - (void)setUpTableview
@@ -230,7 +313,7 @@
     //375 185
     _sdView.delegate = self;
     _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
-    
+
     self.tableView.tableHeaderView = _sdView;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     header.automaticallyChangeAlpha = YES;
@@ -359,24 +442,33 @@
 #pragma mark - TableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    NSInteger i=0;
-    if (_dataArray.count>0) {
-        i=_dataArray.count;
-    }else{
-        i=2;
+
+    if (section == 0) {
+        return 12.0f;
     }
-    if (section < i) {
-        return 3.0f;
-    }
+
     return 0.1f;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (_dataArray.count>0) {
-        return _dataArray.count + 1;
+    if ([self getAllProduct] > 1) {
+        
+        return [self getAllProduct]+1;
+
     }
     return 2;
+}
+
+-(NSInteger)getAllProduct{
+    
+    NSInteger i = 0;
+    for (HomeProductsList *product in _homeProductList.data.productList) {
+        if ([product.isValidate isEqualToString:@"1"]) {
+            i++;
+        }
+    }
+    return i;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -389,22 +481,26 @@
     if (indexPath.section == 0) {
         return 30.f;
     }else {
-        if (_dataArray.count>0) {
-            if (indexPath.section == 1) {
-                if (UI_IS_IPHONE5) {
-                    return (180);
-                }else{
-                    return (210);
-                }
-            }else{
-                if (UI_IS_IPHONE5) {
-                    return (_k_h-0.5*_k_w-330);
-                }else if(UI_IS_IPHONEX){
-                    return (_k_h-0.5*_k_w-450);
-                }else{
-                    return (_k_h-0.5*_k_w-360);
-                }
+        
+        if ([self getAllProduct]>1) {
+            int height = 0;
+            if (UI_IS_IPHONE5) {
+                height = 113;
+            }else if(UI_IS_IPHONE6P){
+                
+                height = 150;
+            }else if (UI_IS_IPHONE6){
+                
+                height = 160;
+            }else if (UI_IS_IPHONEX){
+                height = 210;
             }
+            
+            if ([self getAllProduct]>2) {
+                return (_k_h-0.5*_k_w-height)/_dataArray.count;
+            }
+            return 120;
+
         }else{
             if (UI_IS_IPHONE5) {
                 return (_k_h-0.5*_k_w-155);
@@ -459,7 +555,7 @@
     
     HomeDefaultCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomeDefaultCell"];
     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    homeCell.backgroundColor = rgb(245, 245, 245);
+    homeCell.backgroundColor = rgb(242, 242, 242);
     homeCell.selected = NO;
     homeCell.delegate = self;
     [homeCell.defaultBgImage removeFromSuperview];
@@ -490,15 +586,18 @@
             [homeCell setupDefaultUI];
             break;
         case 2:
-            if (indexPath.section == 1) {
+            
+            if ([self getAllProduct] == 1) {
+                
                 [homeCell productListFirst];
-                return homeCell;
+            
+            }else{
+                
+                [homeCell productListOtherWithIndex:indexPath.section];
             }
-
-            [homeCell productListOtherWithIndex:indexPath.section];
+            
             break;
         case 3:
-//            [homeCell setupRefuseUI];
             [homeCell refuseTab];
             break;
         case 4:
@@ -521,7 +620,6 @@
     return homeCell;
 
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -546,16 +644,6 @@
         }
     }
 }
-
-//- (void)repayRecordClick
-//{
-//    if ([Utility sharedUtility].loginFlage) {
-//        RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-//        [self.navigationController pushViewController:repayRecord animated:YES];
-//    }else {
-//        [self presentLogin:self];
-//    }
-//}
 
 #pragma mark - 获取数据
 
@@ -601,22 +689,6 @@
     
 
 }
-
-//- (void)fatchRate:(void(^)(RateModel *rate))finish
-//{
-//    NSDictionary *dic = @{@"priduct_id_":RapidLoan};
-//    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_fatchRate_url] parameters:dic finished:^(EnumServerStatus status, id object) {
-//        RateModel *rateParse = [RateModel yy_modelWithJSON:object];
-//        if ([rateParse.flag isEqualToString:@"0000"]) {
-//            [Utility sharedUtility].rateParse = rateParse;
-//            finish(rateParse);
-//        } else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:rateParse.msg];
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        
-//    }];
-//}
 
 #pragma mark - 页面跳转
 
@@ -807,23 +879,35 @@
 }
 #pragma mark 点击导流平台的更多
 -(void)moreBtnClick{
-    
-    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
-    [self.navigationController pushViewController:webVC animated:true];
-    NSLog(@"点击导流平台的更多");
+    DLog(@"点击导流平台的更多");
+    [self pushMoreProductPlatform];
 }
-
 /**
  点击导流平台的更多
  */
 -(void)otherBtnClick{
-    FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_selectPlatform_url];
-    [self.navigationController pushViewController:webVC animated:true];
-    NSLog(@"点击导流平台的更多");
+    DLog(@"点击导流平台的更多");
+    [self pushMoreProductPlatform];
 }
-
+-(void)pushMoreProductPlatform{
+    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
+    [homeVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseVM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseVM.errCode isEqualToString:@"0"]) {
+            NSDictionary *  dic = (NSDictionary *)baseVM.data;
+            if ([dic.allKeys containsObject:@"url"]) {
+                FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
+                webVC.urlStr = baseVM.data[@"url"];
+                [self.navigationController pushViewController:webVC animated:true];
+            }
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseVM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [homeVM statisticsDiversionPro:nil];
+}
 #pragma mark 我要借款
 -(void)loanBtnClick{
     NSLog(@"我要借款");
@@ -848,7 +932,7 @@
 }
 
 #pragma mark 点击产品列表
--(void)productListClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit amount:(NSString *)amount{
+-(void)productListClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit amount:(NSString *)amount Path:(NSString *)Path{
 
     if ([productId isEqualToString:SalaryLoan]||[productId isEqualToString:RapidLoan] || [productId isEqualToString:DeriveRapidLoan]) {
         
@@ -869,12 +953,17 @@
         }
         return;
     }
+    
     //导流产品
     FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-    webVC.urlStr = productId;
+    webVC.urlStr = Path;
     [self.navigationController pushViewController:webVC animated:true];
     NSLog(@"产品productId = %@",productId);
+    
+    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
+    [homeVM statisticsDiversionPro:productId];
 }
+
 #pragma mark -> 2.22	放款中 还款中 展期中 状态实时获取
 -(void)intermediateStateAccess:(NSString *)flag{
     LoanMoneyViewModel *loanMoneyViewModel = [[LoanMoneyViewModel alloc]init];
@@ -1026,7 +1115,6 @@
             [self goLoanApplicationForConfirmationVCModules:productId];
         
         }else{
-            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
         
@@ -1041,6 +1129,8 @@
     OptionalRapidLoanApplicationVCModules *controller = [[OptionalRapidLoanApplicationVCModules alloc]init];
     controller.productId = productId;
     controller.dataArray = dataArray;
-    [self.navigationController pushViewController:controller animated:false];
+    [self.navigationController pushViewController:controller animated:true];
 }
+
+
 @end

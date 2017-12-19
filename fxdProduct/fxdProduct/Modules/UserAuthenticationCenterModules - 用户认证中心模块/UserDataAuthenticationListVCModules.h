@@ -19,4 +19,6 @@
 
 @property (nonatomic,assign) BOOL isMine;
 
+@property (nonatomic,assign) BOOL isCash;
+
 @end

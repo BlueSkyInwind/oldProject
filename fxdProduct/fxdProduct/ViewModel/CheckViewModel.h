@@ -48,8 +48,6 @@
  */
 -(void)getFXDCaseInfo;
 
-
-
 @end
 
 @interface CheckBankViewModel : FXD_ViewModelBaseClass

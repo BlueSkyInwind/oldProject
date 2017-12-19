@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     // Initialization code
     [super awakeFromNib];
+    
+    self.messageView.layer.cornerRadius = 6.5;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

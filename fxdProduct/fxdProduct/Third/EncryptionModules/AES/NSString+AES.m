@@ -52,7 +52,7 @@
 }
 
 
--(int)DF_hashCode {
+-(NSString *)DF_hashCode {
     int hash = 0;
     for (int i = 0; i<[self length]; i++) {
         NSString *s = [self substringWithRange:NSMakeRange(i, 1)];
@@ -64,7 +64,7 @@
         }
         hash = hash * 31 + charactorUnicode;
     }
-    return hash;
+    return [NSString stringWithFormat:@"%d",hash];
 }
 
 //加密 返回base64
@@ -79,6 +79,7 @@
 
 //解密
 - (NSString *) AES256JAVA_Decrypt:(NSString *)key{
+
     NSString *decodedString;
     NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:self options:0];
     if (decodedData && decodedData.length > 0) {
@@ -109,7 +110,6 @@
     }
     return nil;
 }
-
 
 
 @end

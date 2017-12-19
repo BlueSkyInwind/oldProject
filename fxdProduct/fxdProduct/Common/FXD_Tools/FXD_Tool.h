@@ -22,7 +22,7 @@
 + (NSString *)getNowTime;
 //将时间转换为时间戳
 + (NSTimeInterval)timeToTimestamp:(NSString *)timeStr;
-//时间戳转换为时间
+//时间戳转换为时间 '2017-11-10 22:30'
 + (NSString *)timestampToTime:(NSTimeInterval)timestamp;
 //时间戳转换为'年月日'
 + (NSString *)timestampToTimeFormat:(NSTimeInterval)timestamp;
@@ -32,7 +32,6 @@
 + (BOOL)getVariableWithClass:(Class)myClass varName:(NSString *)name;
 
 + (UInt64)getNowTimeMS;
-
 //计算时间
 + (NSString *)countDate:(NSString *)date and:(int)addDays;
 
@@ -97,18 +96,13 @@
  */
 -(UIViewController *)topViewController;
 
+/**
+ 手机号中间变*
 
-
-
-
-
-
-
-
-
-
-
-
+ @param teleStr 手机号
+ @return 返回值
+ */
+-(NSString*)changeTelephone:(NSString*)teleStr;
 
 
 

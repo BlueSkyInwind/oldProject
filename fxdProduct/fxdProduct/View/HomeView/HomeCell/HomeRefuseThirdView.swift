@@ -104,14 +104,24 @@ extension HomeRefuseThirdView{
             make.height.equalTo(20)
         })
         
-        let lineImage = UIImageView()
-        lineImage.image = UIImage(named:"line")
-        view.addSubview(lineImage)
-        lineImage.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self).offset(0)
+        let lineView = UIView()
+        lineView.backgroundColor = LINE_COLOR
+        view.addSubview(lineView)
+        lineView.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self).offset(-0.5)
             make.left.equalTo(self).offset(15)
             make.right.equalTo(self).offset(-15)
+            make.height.equalTo(0.5)
         }
+        
+//        let lineImage = UIImageView()
+//        lineImage.image = UIImage(named:"line")
+//        view.addSubview(lineImage)
+//        lineImage.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(self).offset(0)
+//            make.left.equalTo(self).offset(15)
+//            make.right.equalTo(self).offset(-15)
+//        }
         
         let rightImage = UIImageView()
         rightImage.image = UIImage(named:"icon_youjiantou")

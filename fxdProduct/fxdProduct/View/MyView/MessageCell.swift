@@ -87,29 +87,31 @@ extension MessageCell{
         leftImageView?.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
             make.centerY.equalTo(self.snp.centerY)
+            make.width.equalTo(28)
+            make.height.equalTo(23)
         }
         
         titleLabel = UILabel()
         titleLabel?.font = UIFont.systemFont(ofSize: 15)
         titleLabel?.textColor = TITLE_COLOR
         titleLabel?.textAlignment = .left
-        titleLabel?.text = "新功能上线"
         self.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo((leftImageView?.snp.right)!).offset(13)
             make.top.equalTo(self).offset(15)
             make.height.equalTo(21)
+            make.width.equalTo(230)
         })
         
         contentLabel = UILabel()
         contentLabel?.font = UIFont.systemFont(ofSize: 14)
         contentLabel?.textColor = QUTOA_COLOR
         contentLabel?.textAlignment = .left
-        contentLabel?.text = "亲爱的用户您好"
         self.addSubview(contentLabel!)
         contentLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo((leftImageView?.snp.right)!).offset(13)
             make.top.equalTo((titleLabel?.snp.bottom)!).offset(3)
+            make.right.equalTo(self).offset(-30)
             make.height.equalTo(20)
         })
         
@@ -117,7 +119,6 @@ extension MessageCell{
         timeLabel?.font = UIFont.systemFont(ofSize: 12)
         timeLabel?.textColor = QUTOA_COLOR
         timeLabel?.textAlignment = .right
-        timeLabel?.text = "2017-10-12"
         self.addSubview(timeLabel!)
         timeLabel?.snp.makeConstraints({ (make) in
             make.right.equalTo(self).offset(-20)

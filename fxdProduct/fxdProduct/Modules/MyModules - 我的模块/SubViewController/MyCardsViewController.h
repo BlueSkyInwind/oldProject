@@ -7,13 +7,11 @@
 //
 
 #import "BaseViewController.h"
-#import "CashBaseClass.h"
 @class BankModel;
 
 @interface MyCardsViewController : BaseViewController
 @property(nonatomic,assign)NSInteger cardMethodTag;
 @property(nonatomic,strong)NSString *actualReayAmount;
-@property(nonatomic,weak)CashBaseClass *cashBCModel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) BankModel *bankModel;

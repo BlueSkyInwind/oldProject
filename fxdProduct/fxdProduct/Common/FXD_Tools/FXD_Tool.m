@@ -144,6 +144,9 @@ static FXD_Tool * shareTool = nil;
     return timeStr;
 }
 
+
+
+
 + (NSString *)dateToFormatString:(NSDate *)date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -439,6 +442,11 @@ static FXD_Tool * shareTool = nil;
     
 }
 
+-(NSString*)changeTelephone:(NSString*)teleStr{
+    
+    NSString *string=[teleStr stringByReplacingOccurrencesOfString:[teleStr substringWithRange:NSMakeRange(3,4)]withString:@"****"];
+    return string;
+}
 
 /**
  获取当前视图
