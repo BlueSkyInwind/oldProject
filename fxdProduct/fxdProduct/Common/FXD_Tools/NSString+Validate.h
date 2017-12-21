@@ -32,5 +32,12 @@
  @return 新的字符串
  */
 -(NSString*)noneSpaseString;
+/**
+ 手机插入空格
+ 
+ @return 新的字符串
+ */
+- (NSString*)parseString;
+
 
 @end

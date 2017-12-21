@@ -24,7 +24,7 @@ NSString * const _mainTwo_new_url  =  @"http://h5.faxindai.com:8028/coregw/clien
 //测试导流 192.168.6.134
 //NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
 //NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-//NSString * const _main_new_url  =  @"http://h5.test.fxds/";
+//NSString * const _main_new_url  =  @"http://h5.test.fxds/apigw/client/";
 //NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
 //NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
 //NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
@@ -471,10 +471,8 @@ NSString * const GeTuiAppSecret    =   @"rPvgHctJ9m7odkglAm1Xx5";
 // NSString * const GeTuiAppKey      =    @"FnvN7OWMwk91k3z3iqCT33";
 // NSString * const GeTuiAppSecret    =   @"QPJUggTYMo6RfMM70s54V3";
 
-
 NSString * const FaceIDAppKey   = @"nTKWn6a5PUVZ0Lsf2AU8mThnL2esjfJl";
 NSString * const FaceIDAppSecret = @"pAnTrgzEZnrjo6kUciE9AkNa8Je2FwCu";
-
 
 //NSString * const UmengKey      =   @"56497dd267e58ea0470009aa";
 NSString * const UmengKey      =   @"58d9b5a299f0c72cc5001347";
@@ -511,6 +509,11 @@ NSString * const FirstLunch = @"FirstLunch";
 
 NSString * const theMoxieApiKey = @"54adcefe02314a44b82dca9b470c4bad";  //生产
 //NSString * const theMoxieApiKey = @"8190142167af4b30b898827623d57b4d";
+
+//提示语
+NSString * const IDOCRMarkeords = @"务必确认系统识别的以上身份信息无误，否则无法借款成功";
+NSString * const obtainUserContactMarkeords = @"当前信息填写，需要获取您的通讯录授权。您需要在设置中打开“通讯录”权限开关";
+
 
 
 

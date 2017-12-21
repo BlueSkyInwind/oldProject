@@ -261,7 +261,6 @@ UIKIT_EXTERN NSString * const UserName;
 //通知
 UIKIT_EXTERN NSString * const  kAddMaterailNotification;
 
-
 UIKIT_EXTERN NSString * const isLoginFlag;
 
 UIKIT_EXTERN NSString * const SERVERNAME;
@@ -270,9 +269,11 @@ UIKIT_EXTERN NSString * const UserInfomation;
 
 UIKIT_EXTERN NSString * const FirstLunch;
 
-
 UIKIT_EXTERN NSString * const theMoxieApiKey;            //魔蝎key
 
+//提示语
+UIKIT_EXTERN NSString * const IDOCRMarkeords;
+UIKIT_EXTERN NSString * const obtainUserContactMarkeords;
 
 #define MAS_SHORTHAND_GLOBALS
 

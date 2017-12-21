@@ -8,7 +8,6 @@
 
 #import "UserPhoneContactsVCModules.h"
 #import "LabelCell.h"
-#import "ContactClass.h"
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
 #import <Contacts/Contacts.h>
 #import <ContactsUI/ContactsUI.h>
@@ -16,10 +15,9 @@
 #import <AddressBookUI/ABPeoplePickerNavigationController.h>
 #import <AddressBook/ABPerson.h>
 #import <AddressBookUI/ABPersonViewController.h>
-#import "PhoneContactsManager.h"
-#import "ContactClass.h"
 #import "Custom_BaseInfo.h"
 #import "CustomerContactsInfoViewModel.h"
+#import "FXD_AppPhoneContactStoreConfig.h"
 
 #define CellBGColorRed rgb(252, 0, 6)
 
@@ -332,37 +330,27 @@
         {
             DLog(@"选择通讯录");
             _flagTag = 1000;
-            if (kiOS9Later) {
-                CNContactPickerViewController * con = [[CNContactPickerViewController alloc] init];
-                con.delegate = self;
-                [self presentViewController:con animated:true completion:nil];
-            } else {
-                ABPeoplePickerNavigationController *nav = [[ABPeoplePickerNavigationController alloc] init];
-                nav.peoplePickerDelegate = self;
-                nav.predicateForSelectionOfPerson = [NSPredicate predicateWithValue:false];
-                [self presentViewController:nav animated:YES completion:nil];
-            }
+            [self goPushContactVC];
         }
             break;
         case 1001:
         {
             DLog(@"选择通讯录");
             _flagTag = 1001;
-            if (kiOS9Later) {
-                CNContactPickerViewController * con = [[CNContactPickerViewController alloc] init];
-                con.delegate = self;
-                [self presentViewController:con animated:true completion:nil];
-            } else {
-                ABPeoplePickerNavigationController *nav = [[ABPeoplePickerNavigationController alloc] init];
-                nav.peoplePickerDelegate = self;
-                nav.predicateForSelectionOfPerson = [NSPredicate predicateWithValue:false];
-                [self presentViewController:nav animated:YES completion:nil];
-            }
+            [self goPushContactVC];
         }
             break;
         default:
             break;
     }
+}
+-(void)goPushContactVC{
+    __weak typeof (self) weakSelf  = self;
+    FXD_AppPhoneContactStoreConfig * config = [FXD_AppPhoneContactStoreConfig shared];
+    [config pushContactStoreForm:self Complitioner:^(NSString *fullName, NSString *phoneNum) {
+        [weakSelf contactSelect:fullName phone:phoneNum];
+        [weakSelf uploadUserContact:[config getAllContact]];
+    }];
 }
 
 - (IBAction)cancelAction:(id)sender {
@@ -404,69 +392,6 @@
                      }];
 }
 
-#pragma mark - CNContactPickerDelegate
-- (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty
-{
-    CNContact *contact = contactProperty.contact;
-    CNPhoneNumber *phoneNumber = contactProperty.value;
-    NSString *fullName = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
-    if (!fullName || [fullName isEqualToString:@""]) {
-        fullName = @"";
-    }
-    NSString *phoneNumStr = @"";
-    if (phoneNumber && ![phoneNumber isEqual:@""]) {
-        phoneNumStr = [phoneNumber.stringValue stringByReplacingOccurrencesOfString:@"-" withString:@""];
-        if ([phoneNumStr hasPrefix:@"+"]) {
-            phoneNumStr = [phoneNumStr substringFromIndex:3];
-        }
-    }
-    [picker dismissViewControllerAnimated:true completion:^{
-        [self contactSelect:fullName phone:phoneNumStr];
-        ContactClass *contact = [[ContactClass alloc] init];
-        [self uploadUserContact:[contact getAllContact]];
-    }];
-}
-
-#pragma mark - ABPeoplePickerNavigationControllerDelegate
-
-- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
-{
-    [peoplePicker dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    ABMultiValueRef phone = ABRecordCopyValue(person, kABPersonPhoneProperty);
-    long index = ABMultiValueGetIndexForIdentifier(phone,identifier);
-    NSString *firstName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
-    
-    NSString *lastName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
-    NSString *phoneNO = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phone, index);
-    
-    NSString *fullName = [NSString stringWithFormat:@"%@%@",lastName==nil?@"":lastName,firstName==nil?@"":firstName];
-    
-    if ([phoneNO hasPrefix:@"+"]) {
-        phoneNO = [phoneNO substringFromIndex:3];
-    }
-    
-    phoneNO = [phoneNO stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    DLog(@"%@", phoneNO);
-    if (phone && fullName) {
-        [peoplePicker dismissViewControllerAnimated:YES completion:^{
-            [self contactSelect:fullName phone:phoneNO];
-            PhoneContactsManager *contact = [[PhoneContactsManager alloc] init];
-            [self uploadUserContact:[contact getContactList]];
-        }];
-        return;
-    }
-}
-
-- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person
-{
-    ABPersonViewController *personViewController = [[ABPersonViewController alloc] init];
-    personViewController.displayedPerson = person;
-    [peoplePicker pushViewController:personViewController animated:YES];
-}
-
 - (void)uploadUserContact:(NSArray *)conArr
 {
     CustomerContactsInfoViewModel * customerContactsInfoVM  = [[CustomerContactsInfoViewModel alloc]init];
@@ -479,7 +404,6 @@
     }];
     [customerContactsInfoVM uploadUserContacts:conArr];
 }
-
 
 - (void)contactSelect:(NSString *)name phone:(NSString *)phoneNum
 {
@@ -654,7 +578,7 @@
                         offset --;
                     }
                     [textField deleteBackward];
-                    textField.text = [self parseString:textField.text];
+                    textField.text = [textField.text parseString];
                     UITextPosition *newPos = [textField positionFromPosition:textField.beginningOfDocument offset:offset];
                     textField.selectedTextRange = [textField textRangeFromPosition:newPos toPosition:newPos];
                     return NO;
@@ -666,7 +590,7 @@
                     isLast = YES;
                 }
                 [textField deleteBackward];
-                textField.text = [self parseString:textField.text];
+                textField.text = [textField.text parseString];
                 NSInteger offset = range.location;
                 if (range.location == 3 || range.location == 8) {
                     offset ++;
@@ -682,11 +606,11 @@
             }
         } else if(string.length >0){
             //限制输入字符个数
-            if (([self noneSpaseString:textField.text].length + string.length - range.length > 11) ) {
+            if (([textField.text noneSpaseString].length + string.length - range.length > 11) ) {
                 return NO;
             }
             [textField insertText:string];
-            textField.text = [self parseString:textField.text];
+            textField.text = [textField.text parseString];
             NSInteger offset = range.location + string.length;
             if (range.location == 3 || range.location == 8) {
                 offset ++;
@@ -799,8 +723,8 @@
  */
 - (BOOL)isCanSelectBtn
 {
-    NSString *tel1 = [dataListAll[2] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *tel2 = [dataListAll[5] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *tel1 = [dataListAll[2] noneSpaseString];
+    NSString *tel2 = [dataListAll[5] noneSpaseString];
     
     if (![CheckUtils checkTelNumber:tel1]  || ![CheckUtils checkTelNumber:tel2]) {
         return false;
@@ -814,23 +738,6 @@
         return false;
     }
     return true;
-}
-
--(NSString*)noneSpaseString:(NSString*)string {
-    return [string stringByReplacingOccurrencesOfString:@" " withString:@""];
-}
-
-- (NSString*)parseString:(NSString*)string {
-    if (!string) {
-        return nil;
-    }
-    NSMutableString* mStr = [NSMutableString stringWithString:[string stringByReplacingOccurrencesOfString:@" " withString:@""]];
-    if (mStr.length >3) {
-        [mStr insertString:@" " atIndex:3];
-    }if(mStr.length > 8) {
-        [mStr insertString:@" " atIndex:8];
-    }
-    return mStr;
 }
 
 - (void)didReceiveMemoryWarning {

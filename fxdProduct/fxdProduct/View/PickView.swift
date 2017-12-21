@@ -190,8 +190,6 @@ extension PickView{
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(0,attrstr.length))
             attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 23), range: NSMakeRange(0, attrstr.length))
         }
-        
         return attrstr
-
     }
 }

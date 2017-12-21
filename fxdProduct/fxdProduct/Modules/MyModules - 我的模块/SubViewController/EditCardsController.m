@@ -12,7 +12,6 @@
 #import "ReturnMsgBaseClass.h"
 #import "SMSViewModel.h"
 #import "BankModel.h"
-#import "PhoneContactsManager.h"
 #import "AuthorizationViewController.h"
 #import <MGBaseKit/MGBaseKit.h>
 #import <MGBankCard/MGBankCard.h>

@@ -478,7 +478,7 @@
 - (void)setUserIDCardInfo
 {
     if (_idOCRFrontParse != nil && _idOCRBackParse != nil) {
-        NSString * prometStr = @"务必确认系统识别的以上身份信息无误，否则无法借款成功";
+        NSString * prometStr = IDOCRMarkeords;
         NSString * alertContent = [NSString stringWithFormat:@"姓名：%@\n身份证号：%@\n%@",_customerFrontIDParse.customer_name_,_customerFrontIDParse.id_code_,prometStr];
         [[FXD_AlertViewCust sharedHHAlertView] showIdentiFXDAlertViewTitle:@"身份信息确认" content:alertContent cancelTitle:@"存在错误" sureTitle:@"确认无误" compleBlock:^(NSInteger index) {
             if (index == 0) {

@@ -131,7 +131,23 @@
     return [self stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
 
+/**
+ 手机插入空格
 
+ @return 新的字符串
+ */
+- (NSString*)parseString{
+    if (!self) {
+        return nil;
+    }
+    NSMutableString* mStr = [NSMutableString stringWithString:[self stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    if (mStr.length >3) {
+        [mStr insertString:@" " atIndex:3];
+    }if(mStr.length > 8) {
+        [mStr insertString:@" " atIndex:8];
+    }
+    return mStr;
+}
 
 
 @end

@@ -87,6 +87,9 @@
     if (self.fxdAlertView) {
         return;
     }
+    if (attributeDic == nil) {
+        attributeDic =@{NSFontAttributeName:[UIFont yx_systemFontOfSize:14],NSForegroundColorAttributeName:kUIColorFromRGB(0x808080)};
+    }
     self.fxdAlertView = [[FXDAlertView alloc]init:title content:contentAttri attributes:attributeDic cancelTitle:cancelTitle sureTitle:sureTitle];
     [self.fxdAlertView show];
     __weak typeof (self) weakSelf = self;
