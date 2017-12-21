@@ -489,6 +489,10 @@
 		849459CB1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 849459C91FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m */; };
 		849459CD1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459CC1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift */; };
 		849459CE1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459CC1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift */; };
+		849459D01FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459CF1FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift */; };
+		849459D11FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459CF1FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift */; };
+		849459D31FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459D21FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift */; };
+		849459D41FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459D21FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift */; };
 		8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
@@ -2107,6 +2111,8 @@
 		849459C81FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_AppPhoneContactStoreConfig.h; sourceTree = "<group>"; };
 		849459C91FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_AppPhoneContactStoreConfig.m; sourceTree = "<group>"; };
 		849459CC1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_LoanApplicationViewController.swift; sourceTree = "<group>"; };
+		849459CF1FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_LoanApplicationHeaderView.swift; sourceTree = "<group>"; };
+		849459D21FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_LoanApplicationCellTableViewCell.swift; sourceTree = "<group>"; };
 		8496D3141F5A9E3A00CCEE72 /* BankInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankInfoViewModel.h; sourceTree = "<group>"; };
 		8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankInfoViewModel.m; sourceTree = "<group>"; };
 		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
@@ -3249,7 +3255,6 @@
 				840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */,
 				CC8BC95A1FEB586F008E135E /* MineViewModel.h */,
 				CC8BC95B1FEB586F008E135E /* MineViewModel.m */,
-
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4703,6 +4708,8 @@
 				CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */,
 				843C99EF1F9606050067E200 /* DiscountCouponsView.swift */,
 				84E306C91F97256400C97D72 /* ChooseDiscountTableViewCell.swift */,
+				849459CF1FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift */,
+				849459D21FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift */,
 			);
 			path = ApplicationConfirm;
 			sourceTree = "<group>";
@@ -6047,6 +6054,7 @@
 				637636E91D76A72A00E93289 /* LewPopupViewAnimationFade.m in Sources */,
 				842CA0E31F453B4A00A2150B /* HomeParam.m in Sources */,
 				63553B151E5EEF1C00B2C1FF /* FaceIDOCRFront.m in Sources */,
+				849459D31FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift in Sources */,
 				638C3F3C1CF564A4000446A7 /* SquareRepaymentResult.m in Sources */,
 				CCA181941FC6CDAC0094DA58 /* MineMiddleView.swift in Sources */,
 				63553B191E5F0AF900B2C1FF /* FaceIDOCRBack.m in Sources */,
@@ -6129,6 +6137,7 @@
 				63F1A5031BD8CB1C00B83751 /* RepayHistoryResult.m in Sources */,
 				CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
 				63A24C621BE063A90036E8EF /* UIBarButtonItem+Extend.m in Sources */,
+				849459D01FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift in Sources */,
 				636EE3031B662ABB00A1A3ED /* main.m in Sources */,
 				638A16EC1E517D9F00AB8AB6 /* LOTMaskLayer.m in Sources */,
 				636B1B1E1C1FDDD100450358 /* FXD_AlertViewCust.m in Sources */,
@@ -6561,6 +6570,7 @@
 				CC0DFA0D1EA5B1090024841A /* TAAbstractDotView.m in Sources */,
 				CC0DFA0E1EA5B1090024841A /* GetMoneyHistoryBaseClass.m in Sources */,
 				84F1E2A41FD94B39007D3381 /* RegionCodeParam.m in Sources */,
+				849459D41FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift in Sources */,
 				CC0DFA0F1EA5B1090024841A /* MyCardCell.m in Sources */,
 				CC0DFA101EA5B1090024841A /* ReturnMsgBaseClass.m in Sources */,
 				CC0DFA111EA5B1090024841A /* CALayer+Anim.m in Sources */,
@@ -6643,6 +6653,7 @@
 				CC0DFA5B1EA5B1090024841A /* GetMoneyStateUserBean.m in Sources */,
 				CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */,
 				CC49BA041FC516D000232041 /* WithdrawHeaderView.swift in Sources */,
+				849459D11FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift in Sources */,
 				CCF43B041EDE672D00CFD72C /* getBidStatus.m in Sources */,
 				CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */,
 				CC0DFA601EA5B1090024841A /* CADisplayLink.m in Sources */,
