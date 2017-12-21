@@ -24,4 +24,13 @@
  */
 - (BOOL)isAreaCode;
 -(NSString *)openpf;
+
+/**
+ 删除字符串中的空格
+ 
+ @param string 旧字符串
+ @return 新的字符串
+ */
+-(NSString*)noneSpaseString;
+
 @end

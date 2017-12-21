@@ -26,5 +26,37 @@ typedef void (^ClickBlock)(NSInteger index);
 
 -(void)showAppVersionUpdate:(NSString *)content isForce:(BOOL)isForce compleBlock:(ClickBlock)clickIndexBlock;
 
+/**
+ 提示弹窗
+
+ @param title 标题
+ @param contentAttri 内容
+ @param attributeDic 样式
+ @param cancelTitle 取消按钮
+ @param sureTitle 确定按钮
+ @param clickIndexBlock 点击事件
+ */
+-(void)showFXDAlertViewTitle:(NSString *)title
+                     content:(NSString *)contentAttri
+                attributeDic:(NSDictionary<NSAttributedStringKey,id> *)attributeDic
+                 cancelTitle:(NSString *)cancelTitle
+                   sureTitle:(NSString *)sureTitle
+                 compleBlock:(ClickBlock)clickIndexBlock;
+
+
+/**
+ 身份证认证结果提示处理
+
+ @param title 标题
+ @param content 内容
+ @param cancelTitle 取消按钮
+ @param sureTitle 确定按钮
+ @param clickIndexBlock 点击事件
+ */
+-(void)showIdentiFXDAlertViewTitle:(NSString *)title
+                     content:(NSString *)content
+                 cancelTitle:(NSString *)cancelTitle
+                   sureTitle:(NSString *)sureTitle
+                 compleBlock:(ClickBlock)clickIndexBlock;
 
 @end

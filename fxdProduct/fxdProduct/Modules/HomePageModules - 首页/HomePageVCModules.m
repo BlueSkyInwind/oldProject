@@ -186,7 +186,6 @@
         make.top.equalTo(_messageBtn.mas_top).offset(-4);
         make.width.equalTo(@13);
         make.height.equalTo(@13);
-        
     }];
 
     _messageNumLabel = [[UILabel alloc]init];
@@ -348,8 +347,6 @@
     [weakSelf.tableView.mj_header endRefreshing];
     
 }
-
-
 
 #pragma mark - 首页活动弹窗
 //首单活动

@@ -258,7 +258,6 @@
                 tip = 1;
             }
             dispatch_semaphore_signal(sema);});
-        
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
     }else{
         CFErrorRef* error=nil;

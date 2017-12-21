@@ -487,6 +487,8 @@
 		8492ED271FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */; };
 		8492ED2B1FC7C68200C8D457 /* SetTradePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED2A1FC7C68200C8D457 /* SetTradePasswordModel.m */; };
 		8492ED2C1FC7C68200C8D457 /* SetTradePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED2A1FC7C68200C8D457 /* SetTradePasswordModel.m */; };
+		849459CA1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 849459C91FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m */; };
+		849459CB1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 849459C91FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m */; };
 		8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
@@ -613,6 +615,8 @@
 		84C61A151FA8290200626411 /* FindPassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C61A131FA828D000626411 /* FindPassViewController.xib */; };
 		84C61A161FA8293200626411 /* FindPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C61A121FA828D000626411 /* FindPassViewController.m */; };
 		84C61A171FA8294500626411 /* FindPassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C61A131FA828D000626411 /* FindPassViewController.xib */; };
+		84CACBAB1FEA388000523BDA /* FXDAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CACBAA1FEA388000523BDA /* FXDAlertView.swift */; };
+		84CACBAC1FEA388000523BDA /* FXDAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CACBAA1FEA388000523BDA /* FXDAlertView.swift */; };
 		84CC89991F593C1E00537910 /* ApplicaitonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC89981F593C1E00537910 /* ApplicaitonModel.m */; };
 		84CC899A1F593C1E00537910 /* ApplicaitonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC89981F593C1E00537910 /* ApplicaitonModel.m */; };
 		84CC899E1F5973D700537910 /* DrawingsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC899D1F5973D700537910 /* DrawingsInfoModel.m */; };
@@ -2107,6 +2111,8 @@
 		8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTransactionPasswordViewModel.m; sourceTree = "<group>"; };
 		8492ED291FC7C68200C8D457 /* SetTradePasswordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetTradePasswordModel.h; sourceTree = "<group>"; };
 		8492ED2A1FC7C68200C8D457 /* SetTradePasswordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTradePasswordModel.m; sourceTree = "<group>"; };
+		849459C81FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_AppPhoneContactStoreConfig.h; sourceTree = "<group>"; };
+		849459C91FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_AppPhoneContactStoreConfig.m; sourceTree = "<group>"; };
 		8496D3141F5A9E3A00CCEE72 /* BankInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankInfoViewModel.h; sourceTree = "<group>"; };
 		8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankInfoViewModel.m; sourceTree = "<group>"; };
 		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
@@ -2203,6 +2209,7 @@
 		84C61A111FA828D000626411 /* FindPassViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindPassViewController.h; sourceTree = "<group>"; };
 		84C61A121FA828D000626411 /* FindPassViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindPassViewController.m; sourceTree = "<group>"; };
 		84C61A131FA828D000626411 /* FindPassViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindPassViewController.xib; sourceTree = "<group>"; };
+		84CACBAA1FEA388000523BDA /* FXDAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXDAlertView.swift; sourceTree = "<group>"; };
 		84CC89971F593C1E00537910 /* ApplicaitonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicaitonModel.h; sourceTree = "<group>"; };
 		84CC89981F593C1E00537910 /* ApplicaitonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicaitonModel.m; sourceTree = "<group>"; };
 		84CC899C1F5973D700537910 /* DrawingsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingsInfoModel.h; sourceTree = "<group>"; };
@@ -2647,6 +2654,7 @@
 				1A762F711C1FBFB800964719 /* MyView */,
 				0F0443AA1C17D54F0026CAD9 /* addCell */,
 				0FEA58521BE08EE3007F8A6D /* HomeView */,
+				84CACBA91FEA383700523BDA /* FXDPopView */,
 				1A133F181C1AD1EA0027749B /* HelpViewCell.h */,
 				1A133F191C1AD1EA0027749B /* HelpViewCell.m */,
 				636B1B901C2CF57500450358 /* HelpViewCell.xib */,
@@ -2659,7 +2667,6 @@
 				84EC95AF1F5AC4E3008656BA /* FeeDescriptionTableViewCell.h */,
 				84EC95B01F5AC4E3008656BA /* FeeDescriptionTableViewCell.m */,
 				84EC95B11F5AC4E3008656BA /* FeeDescriptionTableViewCell.xib */,
-				8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */,
 				CC6F06781F74F26B00FA889E /* PickView.swift */,
 				84C619A61FA8149700626411 /* RepaymentView */,
 			);
@@ -3260,6 +3267,7 @@
 				840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */,
 				CC8BC95A1FEB586F008E135E /* MineViewModel.h */,
 				CC8BC95B1FEB586F008E135E /* MineViewModel.m */,
+
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4131,6 +4139,8 @@
 				635B0BC61DEBFED0008EAFD1 /* FXD_AppEmptyUserData.m */,
 				63117FB51DFFC42600635BB3 /* FXD_AppShareConfig.h */,
 				63117FB61DFFC42600635BB3 /* FXD_AppShareConfig.m */,
+				849459C81FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.h */,
+				849459C91FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m */,
 				638A16841E5030D700AB8AB6 /* SetUpFMDevice.h */,
 				638A16851E5030D700AB8AB6 /* SetUpFMDevice.m */,
 				840911A01F6F997E00DCDF03 /* JSAndOCInteraction.h */,
@@ -4896,6 +4906,15 @@
 				84C61A131FA828D000626411 /* FindPassViewController.xib */,
 			);
 			path = FindPass;
+			sourceTree = "<group>";
+		};
+		84CACBA91FEA383700523BDA /* FXDPopView */ = {
+			isa = PBXGroup;
+			children = (
+				8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */,
+				84CACBAA1FEA388000523BDA /* FXDAlertView.swift */,
+			);
+			path = FXDPopView;
 			sourceTree = "<group>";
 		};
 		84CC89961F593BC500537910 /* ApplicationModel */ = {
@@ -5839,6 +5858,7 @@
 				63ED33371B6B4593008B6085 /* BaseNavigationViewController.m in Sources */,
 				CC989C301F4D84A9000CDACF /* AuthenticationCenterVCModules.m in Sources */,
 				CC6CBA841F5AB9620015C92C /* ApplicationStatusModel.m in Sources */,
+				849459CA1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
 				63FF484A1B6F036F009E384C /* MyViewController.m in Sources */,
 				63878FE31C1519CD008E1CF9 /* GetUserIP.m in Sources */,
 				638A16ED1E517D9F00AB8AB6 /* LOTRectShapeLayer.m in Sources */,
@@ -6269,6 +6289,7 @@
 				0FFA916F1C58BD18008D91D2 /* CheckSuccessView.m in Sources */,
 				CCCE40BD1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */,
 				6303C11C1C1816F000CD14A7 /* WTCameraViewController.m in Sources */,
+				84CACBAB1FEA388000523BDA /* FXDAlertView.swift in Sources */,
 				84D1846F1F98962A00A0B25F /* RedPacketTicketModel.m in Sources */,
 				636B1B641C2790F400450358 /* RepayRecord.m in Sources */,
 				63FC24ED1D98F7E9006F58F3 /* YYTextContainerView.m in Sources */,
@@ -6352,6 +6373,7 @@
 				CC0DF95B1EA5B1090024841A /* LivenessBaseClass.m in Sources */,
 				847DBBD21FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */,
 				CC0DF95C1EA5B1090024841A /* AmountMsgBaseClass.m in Sources */,
+				849459CB1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
 				CC0DF95E1EA5B1090024841A /* WTOverView.m in Sources */,
 				CC0DF95F1EA5B1090024841A /* HistoryScoreModel.m in Sources */,
 				CC0DF9601EA5B1090024841A /* YYTextLayout.m in Sources */,
@@ -6782,6 +6804,7 @@
 				84A380351FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m in Sources */,
 				84E62D181FDA6D2500B7F870 /* SaveCustomerCareerInfoParam.m in Sources */,
 				CC0DFAD41EA5B1090024841A /* QueryRepaymentsData.m in Sources */,
+				84CACBAC1FEA388000523BDA /* FXDAlertView.swift in Sources */,
 				CC6C93EF1F4AB58C00587C74 /* TrackRect.swift in Sources */,
 				CC0DFAD81EA5B1090024841A /* FXD_AppShareConfig.m in Sources */,
 				CC6F067A1F74F26B00FA889E /* PickView.swift in Sources */,

@@ -178,7 +178,6 @@
             if (contact2.contact_phone_ && ![[FXD_Utility sharedUtility].userInfo.userMobilePhone isEqualToString:contact2.contact_phone_]) {
                 [dataListAll replaceObjectAtIndex:2 withObject:[self formatString:contact2.contact_phone_]];
             }
-            
             if (contact1.relationship_) {
                 if ([contact1.relationship_ isEqualToString:@"4"]) {
                     [dataListAll replaceObjectAtIndex:3 withObject:@"同事"];
@@ -202,14 +201,12 @@
 - (NSString *)formatString:(NSString *)str
 {
     NSMutableString *returnStr = [NSMutableString stringWithString:str];
-    
     NSMutableString *zbc = [NSMutableString string];
     for (NSInteger i = 0; i < returnStr.length; i++) {
         unichar c = [returnStr characterAtIndex:i];
         if (i > 0) {
             if (i == 2) {
                 [zbc appendFormat:@"%C ",c];
-                
             }else if (i == 6){
                 [zbc appendFormat:@"%C ",c];
             }else {
@@ -715,11 +712,11 @@
             [dataColor replaceObjectAtIndex:0 withObject:UI_MAIN_COLOR];
         }
     }
+    
     if (textField.tag == 11) {
         if (![CheckUtils checkUserNameHanzi:textField.text]) {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的联系人姓名"];
             [dataColor replaceObjectAtIndex:1 withObject:CellBGColorRed];
-            
         }
         else if ([textField.text isEqualToString:dataListAll[4]]){
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"联系人名称不能与本人一致"];
@@ -728,9 +725,9 @@
         else{
             [dataListAll replaceObjectAtIndex:1 withObject:textField.text];
             [dataColor replaceObjectAtIndex:1 withObject:UI_MAIN_COLOR];
-            
         }
     }
+    
     if (textField.tag == 12) {
         NSString *telString = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
         if (![CheckUtils checkTelNumber:telString]) {
@@ -795,6 +792,11 @@
     }
 }
 
+/**
+ 保存按钮的点击状态
+
+ @return 是否可点击
+ */
 - (BOOL)isCanSelectBtn
 {
     NSString *tel1 = [dataListAll[2] stringByReplacingOccurrencesOfString:@" " withString:@""];
