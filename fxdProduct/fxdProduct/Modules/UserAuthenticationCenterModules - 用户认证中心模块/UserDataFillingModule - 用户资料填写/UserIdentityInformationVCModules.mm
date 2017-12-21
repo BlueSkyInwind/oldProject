@@ -53,9 +53,9 @@
     CustomerIDInfo *_customerBackIDParse;
     DataDicParse *_dataDicEduLevel;
     NSMutableArray * _edudataList;
+    
+    BOOL isEdit;
 }
-
-
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -85,6 +85,7 @@
         [dataListArr addObject:@""];
     }
     _toolbarCancelDone.hidden = true;
+    isEdit = false;
     
     [self configTableView];
     [self addBackItem];
@@ -200,7 +201,6 @@
     if (_userDataIformationM.province_ != nil && _userDataIformationM.city_ != nil && _userDataIformationM.county_ != nil) {
         NSString *proviece_city = @"";
         _poro = [NSString stringWithFormat:@"%@/%@/%@",_userDataIformationM.province_name_,_userDataIformationM.city_name_,_userDataIformationM.county_name_];
-        
         if ([_userDataIformationM.province_name_ isEqualToString: _userDataIformationM.city_name_]) {
             proviece_city = [NSString stringWithFormat:@"%@/%@",_userDataIformationM.city_name_,_userDataIformationM.county_name_];
         }else if ([_userDataIformationM.county_name_ isEqualToString: _userDataIformationM.city_name_]){
@@ -233,7 +233,6 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请重新选择现居地址"];
         return;
     }
-    
     __block NSString *degree = @"";
     [self getEduLevelListInfo:^{
         [_edudataList enumerateObjectsUsingBlock:^(DataDicParse * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -471,12 +470,23 @@
     } WithFaileBlock:^{
     }];
     [pserInfoM saveUserIDCardImage:image carSide:side faceResult:result];
-    
 }
 
+/**
+ OCR识别结果处理
+ */
 - (void)setUserIDCardInfo
 {
     if (_idOCRFrontParse != nil && _idOCRBackParse != nil) {
+        NSString * prometStr = @"务必确认系统识别的以上身份信息无误，否则无法借款成功";
+        NSString * alertContent = [NSString stringWithFormat:@"姓名：%@\n身份证号：%@\n%@",_customerFrontIDParse.customer_name_,_customerFrontIDParse.id_code_,prometStr];
+        [[FXD_AlertViewCust sharedHHAlertView] showIdentiFXDAlertViewTitle:@"身份信息确认" content:alertContent cancelTitle:@"存在错误" sureTitle:@"确认无误" compleBlock:^(NSInteger index) {
+            if (index == 0) {
+                isEdit = true;
+                ContentTableViewCell *cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:0 inSection:1]];
+                [cell.contentTextField becomeFirstResponder];
+            }
+        }];
         [dataListArr replaceObjectAtIndex:1 withObject:_customerFrontIDParse.customer_name_];
         [dataListArr replaceObjectAtIndex:2 withObject:_customerFrontIDParse.id_code_];
         [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerFrontIDParse.id_code_;
@@ -490,11 +500,16 @@
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     DLog(@"%ld",textField.tag);
-    
     if (textField.tag == 200 || textField.tag == 201) {
         return NO;
     }
-    
+    if (textField.tag == 100) {
+        return isEdit;
+    }
+    if (textField.tag == 101) {
+        return isEdit;
+    }
+    /*
     if (textField.tag == 100) {
         if (_customerFrontIDParse.editable_field_ && _customerFrontIDParse.editable_field_.length > 2) {
             if ([_customerFrontIDParse.editable_field_ containsString:@"customer_name_"]) {
@@ -517,12 +532,14 @@
             return false;
         }
     }
+    */
     return YES;
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *stringLength=[NSString stringWithFormat:@"%@%@",textField.text,string];
+    //身份证号可编辑时 限制
     if(textField.tag == 101)
     {
         if ([stringLength length]>18) {
@@ -662,6 +679,7 @@
 }
 
 #pragma mark--UIPickerViewDataSource
+
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 3;
@@ -687,7 +705,8 @@
     return 0;
 }
 
-#pragma mark--UIPickerViewDelegate
+#pragma mark--UIPickerViewDelegate  省市区选择
+
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     

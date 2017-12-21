@@ -40,7 +40,6 @@
 - (void) showIndeterminateOnly:(UIView *)view;
 -(void)removeWaitHud;
 
-
 /**
  动画等待条
 

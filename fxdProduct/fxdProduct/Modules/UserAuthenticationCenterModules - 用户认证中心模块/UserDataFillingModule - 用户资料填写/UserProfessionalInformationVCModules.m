@@ -539,7 +539,7 @@
     [userDataVM1 setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * resultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([resultM.errCode isEqualToString:@"0"]) {
-            _contactStatus = (NSString *)resultM.data;
+            _contactStatus = resultM.data[@"complete"];
             [self.tableView reloadData];
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.msg];
