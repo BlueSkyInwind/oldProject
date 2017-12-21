@@ -18,8 +18,9 @@
 #import "MessageViewModel.h"
 #import "AountStationLetterMsgModel.h"
 #import "UITabBar+badge.h"
-
-@interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate>
+#import "MineViewModel.h"
+#import "ExperienceValueGradeModel.h"
+@interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate,MineHeaderViewDelegate>
 {
     //标题数组
     NSArray *titleAry;
@@ -30,6 +31,7 @@
 }
 @property (strong, nonatomic) IBOutlet UITableView *MyViewTable;
 @property (nonatomic, strong) MineMiddleView *middleView;
+@property (nonatomic, strong) MineHeaderView *headerView;
 
 @end
 
@@ -63,11 +65,12 @@
 
     UIView *headerBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 288)];
     //添加自定义头部
-    MineHeaderView *headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
-    headerView.backgroundColor = UI_MAIN_COLOR;
-    headerView.nameLabel.text = @"您好!";
-    headerView.accountLabel.text = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
-    [headerBgView addSubview:headerView];
+    _headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
+    _headerView.backgroundColor = RGBColor(242, 242, 242, 1);
+    _headerView.delegate = self;
+//    headerView.nameLabel.text = @"您好!";
+//    _headerView.accountLabel.text = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
+    [headerBgView addSubview:_headerView];
     [self.MyViewTable setTableHeaderView:headerBgView];
     
     _middleView = [[MineMiddleView alloc]initWithFrame:CGRectZero];
@@ -75,11 +78,37 @@
     _middleView.delegate = self;
     [self.MyViewTable addSubview:_middleView];
     [self getMessageNumber];
+    [self getExperienceValueGrade];
 //    [self getPersonalCenterInfo];
     
 }
 
+-(void)getExperienceValueGrade{
+    
+    MineViewModel *mineMV = [[MineViewModel alloc]init];
+    [mineMV setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = returnValue;
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            ExperienceValueGradeModel *model = [[ExperienceValueGradeModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            [_headerView.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.gradeLogo] placeholderImage:[UIImage imageNamed:@""] options:SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+            } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            }];
+//            _headerView.leftImageView.image = [UIImage imageNamed:model.gradeLogo];
+            _headerView.accountLabel.text = model.mobilePhone;
+            _headerView.nameLabel.text = model.gradeName;
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [mineMV getExperienceValueGrad];
+}
 
+
+-(void)shadowImageViewClick{
+    
+    NSLog(@"点击了等级");
+}
 -(void)getMessageNumber{
     
     MessageViewModel *messageVM = [[MessageViewModel alloc]init];

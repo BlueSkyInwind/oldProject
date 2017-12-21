@@ -28,6 +28,11 @@ let MIDDLE_LINE_COLOR = UIColor.init(red: 179/255.0, green: 179/255.0, blue: 179
 let TIME_COLOR = UIColor.init(red: 204/255.0, green: 204/255.0, blue: 204/255.0, alpha: 1)
 let APPLICATION_backgroundColor = UIColor.init(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
 let TERM_COLOR = UIColor.init(red: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1)
+let LOAN_LINE_COLOR = UIColor.init(red: 227/255.0, green: 227/255.0, blue: 227/255.0, alpha: 1)
+let ORANGE_COLOR = UIColor.init(red: 252/255.0, green: 120/255.0, blue: 3/255.0, alpha: 1)
+let LOAN_QUOTA_COLOR = UIColor.init(red: 20/255.0, green: 40/255.0, blue: 65/255.0, alpha: 1)
+let SLIDER_CLOLR = UIColor.init(red: 223/255.0, green: 219/255.0, blue: 219/255.0, alpha: 1)
+let PAY_LINE_CLOLR = UIColor.init(red: 240/255.0, green: 238/255.0, blue: 238/255.0, alpha: 1)
 
 let  _k_w = UIScreen.main.bounds.size.width
 let  _k_h = UIScreen.main.bounds.size.height

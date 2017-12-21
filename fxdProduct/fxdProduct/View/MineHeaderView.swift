@@ -8,13 +8,24 @@
 
 import UIKit
 
+
+@objc protocol MineHeaderViewDelegate: NSObjectProtocol {
+    
+    //
+    func shadowImageViewClick()
+    
+}
 class MineHeaderView: UIView {
 
     //用户名字
    @objc var nameLabel : UILabel?
     //用户账号
    @objc var accountLabel : UILabel?
+
+    //最左边的等级图片
+   @objc var leftImageView : UIImageView?
     
+    @objc weak var delegate: MineHeaderViewDelegate?
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -25,7 +36,8 @@ class MineHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+//        setupUI()
+        setupNewUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -79,6 +91,83 @@ extension MineHeaderView{
             make.height.equalTo(15)
         })
         
+    }
+    
+    fileprivate func setupNewUI(){
+        
+        let bgView = UIView()
+        bgView.isUserInteractionEnabled = true
+        bgView.backgroundColor = UI_MAIN_COLOR
+        self.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(-10)
+        }
+        
+        let bgImageView = UIImageView()
+        bgImageView.image = UIImage(named:"kongbai")
+        bgView.addSubview(bgImageView)
+        bgImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(30)
+            make.top.equalTo(self).offset(70)
+        }
+        
+        leftImageView = UIImageView()
+        bgImageView.addSubview(leftImageView!)
+        leftImageView?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(bgImageView.snp.centerX)
+            make.centerY.equalTo(bgImageView.snp.centerY)
+            make.width.equalTo(67)
+            make.height.equalTo(67)
+        })
+        
+        accountLabel = UILabel()
+        accountLabel?.textColor = UIColor.white
+        accountLabel?.font = UIFont.systemFont(ofSize: 14)
+        bgView.addSubview(accountLabel!)
+        accountLabel?.snp.makeConstraints({ (make) in
+            make.left.equalTo(bgImageView.snp.right).offset(57)
+            make.top.equalTo(bgView.snp.top).offset(80)
+            make.height.equalTo(20)
+        })
+        
+        let shadowImageView = UIImageView()
+        shadowImageView.isUserInteractionEnabled = true
+        let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
+        shadowImageView.addGestureRecognizer(tapGest)
+        shadowImageView.image = UIImage(named:"levelshadow")
+        bgView.addSubview(shadowImageView)
+        shadowImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(bgImageView.snp.right).offset(57)
+            make.top.equalTo((accountLabel?.snp.bottom)!).offset(15)
+        }
+        
+        nameLabel = UILabel()
+        nameLabel?.textColor = UIColor.white
+        nameLabel?.font = UIFont.systemFont(ofSize: 14)
+        shadowImageView.addSubview(nameLabel!)
+        nameLabel?.snp.makeConstraints({ (make) in
+            make.left.equalTo(shadowImageView.snp.left).offset(11)
+            make.centerY.equalTo(shadowImageView.snp.centerY)
+            make.height.equalTo(20)
+        })
+        
+        let rightImageView = UIImageView()
+        rightImageView.image = UIImage(named:"arrow")
+        shadowImageView.addSubview(rightImageView)
+        rightImageView.snp.makeConstraints { (make) in
+            make.right.equalTo(shadowImageView.snp.right).offset(-7)
+            make.centerY.equalTo(shadowImageView.snp.centerY)
+        }
+    }
+    
+    @objc func clickFirstView(_ tapGes : UITapGestureRecognizer){
+        
+        if delegate != nil {
+            delegate?.shadowImageViewClick()
+        }
     }
     
     override var  frame:(CGRect){
