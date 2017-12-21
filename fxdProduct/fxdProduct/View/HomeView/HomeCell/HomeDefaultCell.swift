@@ -1216,7 +1216,7 @@ extension HomeDefaultCell{
     //MARK:UISlider滑动事件
     @objc func changed(slider:UISlider){
 //        print("slider.value = %d",slider.value)
-
+        
         let money = Int(slider.value)
 //        print("整除后的数字=%d",(money/500)*500)
         defaultHeadLabel?.text = NSString(format: "%d元", (money/500)*500) as String

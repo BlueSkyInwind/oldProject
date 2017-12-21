@@ -1171,6 +1171,14 @@
 		CC85C6291FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
 		CC85C62C1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */; };
 		CC85C62D1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */; };
+		CC8BC9541FEA0374008E135E /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9531FEA0374008E135E /* HomePageCell.swift */; };
+		CC8BC9551FEA0374008E135E /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9531FEA0374008E135E /* HomePageCell.swift */; };
+		CC8BC9581FEA394C008E135E /* FXD_HomePageVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9571FEA394C008E135E /* FXD_HomePageVCModules.m */; };
+		CC8BC9591FEA394C008E135E /* FXD_HomePageVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9571FEA394C008E135E /* FXD_HomePageVCModules.m */; };
+		CC8BC95C1FEB5871008E135E /* MineViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC95B1FEB586F008E135E /* MineViewModel.m */; };
+		CC8BC95D1FEB5873008E135E /* MineViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC95B1FEB586F008E135E /* MineViewModel.m */; };
+		CC8BC9611FEB59D9008E135E /* ExperienceValueGradeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9601FEB59D9008E135E /* ExperienceValueGradeModel.m */; };
+		CC8BC9621FEB59D9008E135E /* ExperienceValueGradeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9601FEB59D9008E135E /* ExperienceValueGradeModel.m */; };
 		CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989C301F4D84A9000CDACF /* AuthenticationCenterVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC989C2F1F4D84A9000CDACF /* AuthenticationCenterVCModules.m */; };
@@ -2324,6 +2332,13 @@
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
+		CC8BC9531FEA0374008E135E /* HomePageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCell.swift; sourceTree = "<group>"; };
+		CC8BC9561FEA394C008E135E /* FXD_HomePageVCModules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_HomePageVCModules.h; sourceTree = "<group>"; };
+		CC8BC9571FEA394C008E135E /* FXD_HomePageVCModules.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_HomePageVCModules.m; sourceTree = "<group>"; };
+		CC8BC95A1FEB586F008E135E /* MineViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineViewModel.h; sourceTree = "<group>"; };
+		CC8BC95B1FEB586F008E135E /* MineViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineViewModel.m; sourceTree = "<group>"; };
+		CC8BC95F1FEB59D9008E135E /* ExperienceValueGradeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExperienceValueGradeModel.h; sourceTree = "<group>"; };
+		CC8BC9601FEB59D9008E135E /* ExperienceValueGradeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExperienceValueGradeModel.m; sourceTree = "<group>"; };
 		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
 		CC989C2E1F4D84A9000CDACF /* AuthenticationCenterVCModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationCenterVCModules.h; sourceTree = "<group>"; };
 		CC989C2F1F4D84A9000CDACF /* AuthenticationCenterVCModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationCenterVCModules.m; sourceTree = "<group>"; };
@@ -3232,6 +3247,9 @@
 				CC45E7251FD78D4500DE803D /* MessageViewModel.m */,
 				840DFF6D1FE27DEC00148DEE /* InvationViewModel.h */,
 				840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */,
+				CC8BC95A1FEB586F008E135E /* MineViewModel.h */,
+				CC8BC95B1FEB586F008E135E /* MineViewModel.m */,
+
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -4129,6 +4147,7 @@
 		63E076541B67114800E269F2 /* DataModelModules */ = {
 			isa = PBXGroup;
 			children = (
+				CC8BC95E1FEB5994008E135E /* Mine */,
 				CC45E7281FD78FC600DE803D /* Message */,
 				CCCB279E1FB2F19200412632 /* DrawLottery */,
 				CC6F067B1F75092C00FA889E /* Capital */,
@@ -4278,6 +4297,7 @@
 				CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */,
 				CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */,
 				CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */,
+				CC8BC9531FEA0374008E135E /* HomePageCell.swift */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -4350,6 +4370,8 @@
 				CC0346231F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.h */,
 				CC0346241F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m */,
 				CC0346251F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib */,
+				CC8BC9561FEA394C008E135E /* FXD_HomePageVCModules.h */,
+				CC8BC9571FEA394C008E135E /* FXD_HomePageVCModules.m */,
 			);
 			path = "HomePageModules - 首页";
 			sourceTree = "<group>";
@@ -5113,6 +5135,15 @@
 			path = RedPacketWithCash;
 			sourceTree = "<group>";
 		};
+		CC8BC95E1FEB5994008E135E /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				CC8BC95F1FEB59D9008E135E /* ExperienceValueGradeModel.h */,
+				CC8BC9601FEB59D9008E135E /* ExperienceValueGradeModel.m */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
 		CC989C321F4D86E1000CDACF /* AuthenticationCenterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -5825,6 +5856,7 @@
 				63145AF31CA8DBBD00D04ED8 /* RegionResult.m in Sources */,
 				8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */,
 				63E1ECD01E1B8FAA0079A2F8 /* TAAnimatedDotView.m in Sources */,
+				CC8BC9611FEB59D9008E135E /* ExperienceValueGradeModel.m in Sources */,
 				63FC24FA1D98F7E9006F58F3 /* YYTextRunDelegate.m in Sources */,
 				63D43EFC1D41F8380076AC7F /* DataWriteAndRead.m in Sources */,
 				84A6350E1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m in Sources */,
@@ -6100,6 +6132,7 @@
 				636EE3031B662ABB00A1A3ED /* main.m in Sources */,
 				638A16EC1E517D9F00AB8AB6 /* LOTMaskLayer.m in Sources */,
 				636B1B1E1C1FDDD100450358 /* FXD_AlertViewCust.m in Sources */,
+				CC8BC95C1FEB5871008E135E /* MineViewModel.m in Sources */,
 				633DF7891BDE22BF00A3998D /* MoreViewController.m in Sources */,
 				638A16EA1E517D9F00AB8AB6 /* LOTGroupLayerView.m in Sources */,
 				638A17031E517D9F00AB8AB6 /* LOTShapeFill.m in Sources */,
@@ -6203,6 +6236,7 @@
 				CCDEDF5C1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */,
 				849459CD1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */,
 				634830FE1CBCA1A90005C4CD /* RegionCodeExt.m in Sources */,
+				CC8BC9541FEA0374008E135E /* HomePageCell.swift in Sources */,
 				635B0BE11DF157EA008EAFD1 /* DetailViewController.m in Sources */,
 				63FF48401B6F0322009E384C /* HomePageVCModules.m in Sources */,
 				CC6F06901F7B8D3600FA889E /* ShanLinWebVCModules.m in Sources */,
@@ -6240,6 +6274,7 @@
 				84D1846F1F98962A00A0B25F /* RedPacketTicketModel.m in Sources */,
 				636B1B641C2790F400450358 /* RepayRecord.m in Sources */,
 				63FC24ED1D98F7E9006F58F3 /* YYTextContainerView.m in Sources */,
+				CC8BC9581FEA394C008E135E /* FXD_HomePageVCModules.m in Sources */,
 				630CC0971BC8E14200AE9690 /* QueryRepaymentsData.m in Sources */,
 				63117FB71DFFC42600635BB3 /* FXD_AppShareConfig.m in Sources */,
 				63A24C601BE063A90036E8EF /* NSString+Extend.m in Sources */,
@@ -6335,6 +6370,7 @@
 				CC45E7301FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
 				CC0DF96C1EA5B1090024841A /* HMScannerController.m in Sources */,
 				CC3A7F321ED52A3200F30289 /* HG_ReplaceBankCardVCModules.m in Sources */,
+				CC8BC9621FEB59D9008E135E /* ExperienceValueGradeModel.m in Sources */,
 				CC0DF96E1EA5B1090024841A /* GetMoneyResultAuditRecordBean.m in Sources */,
 				CC0DF9701EA5B1090024841A /* BaseNavigationViewController.m in Sources */,
 				CC0DF9711EA5B1090024841A /* MyViewController.m in Sources */,
@@ -6610,6 +6646,7 @@
 				CCF43B041EDE672D00CFD72C /* getBidStatus.m in Sources */,
 				CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */,
 				CC0DFA601EA5B1090024841A /* CADisplayLink.m in Sources */,
+				CC8BC95D1FEB5873008E135E /* MineViewModel.m in Sources */,
 				844E5F4C1ED94C9C00753671 /* RegViewModel.m in Sources */,
 				843FF1F91F20863600ECCE16 /* PaymentDetailModel.m in Sources */,
 				CC0DFA611EA5B1090024841A /* FXD_Tool.m in Sources */,
@@ -6713,6 +6750,7 @@
 				CC0DFAB51EA5B1090024841A /* LOTAnimatableShapeValue.m in Sources */,
 				849459CE1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */,
 				CC0DFAB61EA5B1090024841A /* FXD_AppUpdateChecker.m in Sources */,
+				CC8BC9551FEA0374008E135E /* HomePageCell.swift in Sources */,
 				CC0DFAB71EA5B1090024841A /* LewPopupBackgroundView.m in Sources */,
 				CC0DFAB91EA5B1090024841A /* RegionCodeExt.m in Sources */,
 				8438F7101EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
@@ -6750,6 +6788,7 @@
 				CC6C93EF1F4AB58C00587C74 /* TrackRect.swift in Sources */,
 				CC0DFAD81EA5B1090024841A /* FXD_AppShareConfig.m in Sources */,
 				CC6F067A1F74F26B00FA889E /* PickView.swift in Sources */,
+				CC8BC9591FEA394C008E135E /* FXD_HomePageVCModules.m in Sources */,
 				CC0DFADA1EA5B1090024841A /* NSString+Extend.m in Sources */,
 				CC0DFADB1EA5B1090024841A /* UIScrollView+EmptyDataSet.m in Sources */,
 				CC0DFADC1EA5B1090024841A /* DES3Util.m in Sources */,

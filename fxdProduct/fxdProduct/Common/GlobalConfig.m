@@ -421,7 +421,8 @@ NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
 NSString *const     _getDrawLottery_url     =    @"market/getDrawLottery";
 //协议
 NSString *const     _ProductProtocol_url     =    @"product/getProductProtocolApi";
-
+//经验值体系-展示等级
+NSString *const     _ExperienceValue_url     =    @"operation/experienceValueGradeAPI/displayGrade";
 
 #pragma mark - 对外导流接口
 

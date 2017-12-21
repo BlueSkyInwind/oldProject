@@ -49,7 +49,7 @@
 - (void)setTabbarCon
 {
     
-    NSArray *vcNameArr = @[@"HomePageVCModules",@"AuthenticationCenterVCModules",@"MyViewController"];
+    NSArray *vcNameArr = @[@"FXD_HomePageVCModules",@"AuthenticationCenterVCModules",@"MyViewController"];
     NSArray *titleArr = @[@"首页",@"认证",@"我的"];
     NSArray *imageArr = @[@"home_tab_default",@"icon_2-2",@"mine_tab_default"];
     NSArray *seleteimageArr = @[@"home_tab_select",@"icon_2-1",@"mine_tab_select"];
