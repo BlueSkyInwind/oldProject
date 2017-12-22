@@ -62,13 +62,14 @@
     DLog(@"%d",[FXD_Utility sharedUtility].userInfo.isUpdate);
     //版本强制更新
     if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前使用版本太低,请前往APP Store更新后再使用!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
             if (index == 1) {
                 return;
             }
         }];
     }
-    // 网络判断
+    
+        // 网络判断
     if (![FXD_Utility sharedUtility].networkState && isNeedNetStatus) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
         return;
@@ -130,7 +131,8 @@
         if ([[resultDic objectForKey:@"errCode"] isEqualToString:@"3"] ) {
             UIViewController *vc = [self getCurrentVC];
             [vc.navigationController popToRootViewControllerAnimated:YES];
-            [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[resultDic objectForKey:@"friendErrMsg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+            
+            [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[resultDic objectForKey:@"friendErrMsg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                 if (index == 1) {
                     [FXD_AppEmptyUserData EmptyData];
                     LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
@@ -157,7 +159,7 @@
 {
     DLog(@"%d",[FXD_Utility sharedUtility].userInfo.isUpdate);
     if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前使用版本太低,请前往APP Store更新后再使用!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
             if (index == 1) {
                 return;
             }
@@ -206,7 +208,7 @@
                 if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {
                     UIViewController *vc = [self getCurrentVC];
                     [vc.navigationController popToRootViewControllerAnimated:YES];
-                    [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+                    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[responseObject objectForKey:@"msg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                         if (index == 1) {
                             [FXD_AppEmptyUserData EmptyData];
                             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
@@ -278,7 +280,7 @@
 {
     DLog(@"%d",[FXD_Utility sharedUtility].userInfo.isUpdate);
     if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前使用版本太低,请前往APP Store更新后再使用!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
             if (index == 1) {
                 return;
             }
@@ -320,7 +322,7 @@
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
             if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {
-                [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+                [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[responseObject objectForKey:@"msg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                     if (index == 1) {
                         [FXD_AppEmptyUserData EmptyData];
                         LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
@@ -350,8 +352,10 @@
 - (void)POSTUpLoadImage:(NSString *)strURL FilePath:(NSDictionary *)images  parameters:(id)parameters finished:(SuccessFinishedBlock)finshed failure:(FailureBlock)failure
 {
     if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前使用版本太低,请前往APP Store更新后再使用!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
-            return;
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
+            if (index == 1) {
+                return;
+            }
         }];
     } else {
         MBProgressHUD *_waitView = [self loadingHUD];
@@ -410,7 +414,7 @@
 {
     DLog(@"%d",[FXD_Utility sharedUtility].userInfo.isUpdate);
     if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前使用版本太低,请前往APP Store更新后再使用!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
             if (index == 1) {
                 return;
             }
@@ -455,11 +459,9 @@
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
-                //            if ([Tool dicContainsKey:[operation.response allHeaderFields] keyValue:@"token"]) {
-                //                [Utility sharedUtility].userInfo.tokenStr = [[operation.response allHeaderFields] objectForKey:@"token"];
-                //            }
+
                 if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {
-                    [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[responseObject objectForKey:@"msg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+                    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[responseObject objectForKey:@"msg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                         if (index == 1) {
                             [FXD_AppEmptyUserData EmptyData];
                             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
@@ -493,7 +495,7 @@
 {
     DLog(@"%d",[FXD_Utility sharedUtility].userInfo.isUpdate);
     if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前使用版本太低,请前往APP Store更新后再使用!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
             if (index == 1) {
                 return;
             }
@@ -555,7 +557,7 @@
                 if ([[resultDic objectForKey:@"errCode"] isEqualToString:@"3"] ) {
                     UIViewController *vc = [self getCurrentVC];
                     [vc.navigationController popToRootViewControllerAnimated:YES];
-                    [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[resultDic objectForKey:@"friendErrMsg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+                    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[responseObject objectForKey:@"msg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                         if (index == 1) {
                             [FXD_AppEmptyUserData EmptyData];
                             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
@@ -585,7 +587,7 @@
 {
     DLog(@"%d",[FXD_Utility sharedUtility].userInfo.isUpdate);
     if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:@"您当前使用版本太低,请前往APP Store更新后再使用!" cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
             if (index == 1) {
                 return;
             }
@@ -644,7 +646,7 @@
         if ([[resultDic objectForKey:@"errCode"] isEqualToString:@"3"] ) {
             UIViewController *vc = [self getCurrentVC];
             [vc.navigationController popToRootViewControllerAnimated:YES];
-            [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeFadeIn leaveMode:HHAlertLeaveModeFadeOut disPlayMode:HHAlertViewModeWarning title:nil detail:[resultDic objectForKey:@"friendErrMsg"] cencelBtn:nil otherBtn:@[@"确定"] Onview:[UIApplication sharedApplication].keyWindow compleBlock:^(NSInteger index) {
+            [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[responseObject objectForKey:@"msg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                 if (index == 1) {
                     [FXD_AppEmptyUserData EmptyData];
                     LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];

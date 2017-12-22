@@ -514,6 +514,7 @@ NSString * const theMoxieApiKey = @"54adcefe02314a44b82dca9b470c4bad";  //生产
 //提示语
 NSString * const IDOCRMarkeords = @"务必确认系统识别的以上身份信息无误，否则无法借款成功";
 NSString * const obtainUserContactMarkeords = @"当前信息填写，需要获取您的通讯录授权。您需要在设置中打开“通讯录”权限开关";
+NSString * const IncreaseAmountLimitMarkeords = @"良好的借还款记录，有助于快速提额";
 
 
 

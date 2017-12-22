@@ -283,9 +283,11 @@
     switch (indexPath.row) {
         case 0:
         {
+            FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
+            [self.navigationController pushViewController:loanApplicationVC animated:true];
 
-            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-            [self.navigationController pushViewController:myMessageVC animated:true];
+//            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+//            [self.navigationController pushViewController:myMessageVC animated:true];
         }
             break;
         case 1:

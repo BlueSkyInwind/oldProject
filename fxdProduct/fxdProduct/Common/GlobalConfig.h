@@ -277,6 +277,8 @@ UIKIT_EXTERN NSString * const theMoxieApiKey;            //魔蝎key
 //提示语
 UIKIT_EXTERN NSString * const IDOCRMarkeords;
 UIKIT_EXTERN NSString * const obtainUserContactMarkeords;
+UIKIT_EXTERN NSString * const IncreaseAmountLimitMarkeords;
+
 
 #define MAS_SHORTHAND_GLOBALS
 

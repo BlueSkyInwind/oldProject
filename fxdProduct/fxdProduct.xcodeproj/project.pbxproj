@@ -469,6 +469,10 @@
 		846BB6E01F580B6400CD3545 /* RenewalVCModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6DE1F580B6400CD3545 /* RenewalVCModules.swift */; };
 		846BB6E31F5835E100CD3545 /* ApplicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */; };
 		846BB6E41F5835E100CD3545 /* ApplicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */; };
+		847298341FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847298331FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift */; };
+		847298351FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847298331FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift */; };
+		847298371FECF4AB0082F196 /* IncreaseAmountLimitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847298361FECF4AB0082F196 /* IncreaseAmountLimitViewController.swift */; };
+		847298381FECF4AB0082F196 /* IncreaseAmountLimitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847298361FECF4AB0082F196 /* IncreaseAmountLimitViewController.swift */; };
 		8473F1411F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
 		8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
 		847DBBD11FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */; };
@@ -489,12 +493,14 @@
 		849459CB1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 849459C91FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m */; };
 		849459CD1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459CC1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift */; };
 		849459CE1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459CC1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift */; };
-		849459D01FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459CF1FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift */; };
-		849459D11FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459CF1FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift */; };
+		849459D01FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459CF1FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift */; };
+		849459D11FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459CF1FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift */; };
 		849459D31FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459D21FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift */; };
 		849459D41FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849459D21FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift */; };
 		8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
+		849842001FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849841FE1FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift */; };
+		849842011FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849841FE1FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift */; };
 		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
 		8499BF8B1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
 		84A37FF21FAC12A8008FB7AF /* HomeChoosePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A37FEB1FAC12A8008FB7AF /* HomeChoosePopView.swift */; };
@@ -2095,6 +2101,8 @@
 		846BB6DE1F580B6400CD3545 /* RenewalVCModules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenewalVCModules.swift; sourceTree = "<group>"; };
 		846BB6E11F5835E100CD3545 /* ApplicationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewModel.h; sourceTree = "<group>"; };
 		846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewModel.m; sourceTree = "<group>"; };
+		847298331FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_ApplicationChoosePickerView.swift; sourceTree = "<group>"; };
+		847298361FECF4AB0082F196 /* IncreaseAmountLimitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncreaseAmountLimitViewController.swift; sourceTree = "<group>"; };
 		8473F13F1F31CAA1005B4933 /* SupportBankList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportBankList.h; sourceTree = "<group>"; };
 		8473F1401F31CAA1005B4933 /* SupportBankList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportBankList.m; sourceTree = "<group>"; };
 		847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPayPasswordView.swift; sourceTree = "<group>"; };
@@ -2111,10 +2119,11 @@
 		849459C81FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_AppPhoneContactStoreConfig.h; sourceTree = "<group>"; };
 		849459C91FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_AppPhoneContactStoreConfig.m; sourceTree = "<group>"; };
 		849459CC1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_LoanApplicationViewController.swift; sourceTree = "<group>"; };
-		849459CF1FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_LoanApplicationHeaderView.swift; sourceTree = "<group>"; };
+		849459CF1FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_displayAmountCommonHeaderView.swift; sourceTree = "<group>"; };
 		849459D21FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_LoanApplicationCellTableViewCell.swift; sourceTree = "<group>"; };
 		8496D3141F5A9E3A00CCEE72 /* BankInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankInfoViewModel.h; sourceTree = "<group>"; };
 		8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankInfoViewModel.m; sourceTree = "<group>"; };
+		849841FE1FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_LoanApplicationDisplayTableViewCell.swift; sourceTree = "<group>"; };
 		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
 		84A37FEB1FAC12A8008FB7AF /* HomeChoosePopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeChoosePopView.swift; sourceTree = "<group>"; };
 		84A37FEC1FAC12A8008FB7AF /* ActivityHomePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityHomePopView.h; sourceTree = "<group>"; };
@@ -4708,8 +4717,10 @@
 				CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */,
 				843C99EF1F9606050067E200 /* DiscountCouponsView.swift */,
 				84E306C91F97256400C97D72 /* ChooseDiscountTableViewCell.swift */,
-				849459CF1FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift */,
+				849459CF1FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift */,
 				849459D21FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift */,
+				849841FE1FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift */,
+				847298331FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift */,
 			);
 			path = ApplicationConfirm;
 			sourceTree = "<group>";
@@ -4946,6 +4957,7 @@
 				84A3802D1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.h */,
 				84A3802F1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m */,
 				84A3802E1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib */,
+				847298361FECF4AB0082F196 /* IncreaseAmountLimitViewController.swift */,
 				84A380011FAC1D8D008FB7AF /* UserDataFillingModule - 用户资料填写 */,
 			);
 			path = "UserAuthenticationCenterModules - 用户认证中心模块";
@@ -5849,6 +5861,7 @@
 				CC6CBA841F5AB9620015C92C /* ApplicationStatusModel.m in Sources */,
 				849459CA1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
 				63FF484A1B6F036F009E384C /* MyViewController.m in Sources */,
+				847298371FECF4AB0082F196 /* IncreaseAmountLimitViewController.swift in Sources */,
 				63878FE31C1519CD008E1CF9 /* GetUserIP.m in Sources */,
 				638A16ED1E517D9F00AB8AB6 /* LOTRectShapeLayer.m in Sources */,
 				0F9E30D21BC8A70C0018A801 /* IdeaBackViewController.m in Sources */,
@@ -6137,7 +6150,7 @@
 				63F1A5031BD8CB1C00B83751 /* RepayHistoryResult.m in Sources */,
 				CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
 				63A24C621BE063A90036E8EF /* UIBarButtonItem+Extend.m in Sources */,
-				849459D01FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift in Sources */,
+				849459D01FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift in Sources */,
 				636EE3031B662ABB00A1A3ED /* main.m in Sources */,
 				638A16EC1E517D9F00AB8AB6 /* LOTMaskLayer.m in Sources */,
 				636B1B1E1C1FDDD100450358 /* FXD_AlertViewCust.m in Sources */,
@@ -6215,6 +6228,7 @@
 				6326C9EC1BF0B15700FD23A8 /* GetMoneyProcessResult.m in Sources */,
 				841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */,
 				638A17051E517D9F00AB8AB6 /* LOTShapePath.m in Sources */,
+				849842001FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
 				63FC25041D98F7E9006F58F3 /* YYTextView.m in Sources */,
 				635077661DD1CC8800ED031A /* AuthStatus.m in Sources */,
 				63878FE21C1519CD008E1CF9 /* CheckUtils.m in Sources */,
@@ -6236,6 +6250,7 @@
 				6379641E1CAD1BE0002A5910 /* LivenessIdentity.m in Sources */,
 				84F87F4B1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */,
 				638A16F11E517D9F00AB8AB6 /* LOTAnimatableColorValue.m in Sources */,
+				847298341FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */,
 				63E1ECD21E1B8FAA0079A2F8 /* TAPageControl.m in Sources */,
 				638A16F51E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m in Sources */,
 				630DE72B1DDC2F6D00A2D53A /* FXD_AppUpdateChecker.m in Sources */,
@@ -6365,6 +6380,7 @@
 				CC0DF95C1EA5B1090024841A /* AmountMsgBaseClass.m in Sources */,
 				849459CB1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
 				CC0DF95E1EA5B1090024841A /* WTOverView.m in Sources */,
+				847298381FECF4AB0082F196 /* IncreaseAmountLimitViewController.swift in Sources */,
 				CC0DF95F1EA5B1090024841A /* HistoryScoreModel.m in Sources */,
 				CC0DF9601EA5B1090024841A /* YYTextLayout.m in Sources */,
 				CC0DF9611EA5B1090024841A /* LoginMsgExt.m in Sources */,
@@ -6653,7 +6669,7 @@
 				CC0DFA5B1EA5B1090024841A /* GetMoneyStateUserBean.m in Sources */,
 				CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */,
 				CC49BA041FC516D000232041 /* WithdrawHeaderView.swift in Sources */,
-				849459D11FEBAF8E007EF067 /* FXD_LoanApplicationHeaderView.swift in Sources */,
+				849459D11FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift in Sources */,
 				CCF43B041EDE672D00CFD72C /* getBidStatus.m in Sources */,
 				CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */,
 				CC0DFA601EA5B1090024841A /* CADisplayLink.m in Sources */,
@@ -6731,6 +6747,7 @@
 				CC0DFA9C1EA5B1090024841A /* SetUpFMDevice.m in Sources */,
 				CC0DFA9D1EA5B1090024841A /* RegionExt.m in Sources */,
 				CC0DFA9E1EA5B1090024841A /* EditCardsController.m in Sources */,
+				849842011FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
 				CC0DFA9F1EA5B1090024841A /* LoanProcessModel.m in Sources */,
 				CC0DFAA01EA5B1090024841A /* GetMoneyProcessResult.m in Sources */,
 				CC0DFAA21EA5B1090024841A /* LOTShapePath.m in Sources */,
@@ -6752,6 +6769,7 @@
 				CC989C311F4D84A9000CDACF /* AuthenticationCenterVCModules.m in Sources */,
 				84A380171FAC1D8D008FB7AF /* MyBottomView.mm in Sources */,
 				CC0DFAAF1EA5B1090024841A /* loanRecordCell.m in Sources */,
+				847298351FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */,
 				CC0DFAB01EA5B1090024841A /* NSArray+Extend.m in Sources */,
 				CC0DFAB11EA5B1090024841A /* UserProtocolVCModule.m in Sources */,
 				CC0DFAB21EA5B1090024841A /* LivenessIdentity.m in Sources */,
@@ -7291,7 +7309,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -7391,7 +7409,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}";

@@ -16,6 +16,7 @@ class FXD_LoanApplicationCellTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         setUpUI()
     }
     
@@ -54,6 +55,8 @@ extension FXD_LoanApplicationCellTableViewCell {
         iconImageView?.snp.makeConstraints({ (make) in
             make.right.equalTo(self.snp.right).offset(-15)
             make.centerY.equalTo(self.snp.centerY)
+            make.width.equalTo(15)
+            make.height.equalTo(9)
         })
         
         contentLabel = UILabel()

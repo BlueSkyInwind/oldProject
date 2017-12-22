@@ -151,26 +151,12 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:_updateParse.msg];
             [self login];
         }else{
-            [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeError title:nil detail:_updateParse.msg cencelBtn:nil otherBtn:@[@"重试"] Onview:self.view];
-            [[FXD_AlertViewCust sharedHHAlertView] removeAlertView];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:resultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         
     }];
     [loginVM updateDeviceID:self.phoneNumText.text verify_code:self.verCodeText.text];
-    
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_updateDevID_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//        _updateParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-//        if ([_updateParse.flag isEqualToString:@"0000"]) {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:_updateParse.msg];
-//            [self login];
-//        } else {
-//            [[FXD_AlertViewCust sharedHHAlertView] showHHalertView:HHAlertEnterModeTop leaveMode:HHAlertLeaveModeBottom disPlayMode:HHAlertViewModeError title:nil detail:_updateParse.msg cencelBtn:nil otherBtn:@[@"重试"] Onview:self.view];
-//            [[FXD_AlertViewCust sharedHHAlertView] removeAlertView];
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//
-//    }];
     
 }
 - (void)login

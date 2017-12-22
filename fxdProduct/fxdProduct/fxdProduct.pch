@@ -54,6 +54,7 @@
 #import "UserDataInformationModel.h"
 #import "GTMBase64.h"
 #import "CommonViewModel.h"
+#import <HHAlertView/HHAlertView.h>
 
 #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0
