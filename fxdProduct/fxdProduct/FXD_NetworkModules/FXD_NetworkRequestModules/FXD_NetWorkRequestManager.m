@@ -106,6 +106,7 @@
             [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
             [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
             [manager.requestSerializer setValue:[FXD_Tool getAppVersion] forHTTPHeaderField:@"version"];
+            [manager.requestSerializer setValue:SERVICE_PLATFORM forHTTPHeaderField:@"platformType"];
         }
     }
     
@@ -192,6 +193,7 @@
                 if ([FXD_Utility sharedUtility].userInfo.tokenStr != nil && ![[FXD_Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
                     [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[FXD_Utility sharedUtility].userInfo.juid]];
                     [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
+                    [manager.requestSerializer setValue:SERVICE_PLATFORM forHTTPHeaderField:@"platformType"];
                 }
             }
             [manager.requestSerializer setValue:[FXD_Tool getAppVersion] forHTTPHeaderField:@"version"];
@@ -305,6 +307,7 @@
             if ([FXD_Utility sharedUtility].userInfo.tokenStr != nil && ![[FXD_Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
                 [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[FXD_Utility sharedUtility].userInfo.juid]];
                 [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
+                [manager.requestSerializer setValue:SERVICE_PLATFORM forHTTPHeaderField:@"platformType"];
             }
         }
         
@@ -363,6 +366,7 @@
             if ([FXD_Utility sharedUtility].userInfo.tokenStr != nil && ![[FXD_Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
                 [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[FXD_Utility sharedUtility].userInfo.juid]];
                 [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
+                [manager.requestSerializer setValue:SERVICE_PLATFORM forHTTPHeaderField:@"platformType"];
             }
         }
         
@@ -442,6 +446,7 @@
                 }
             }
             [manager.requestSerializer setValue:[FXD_Tool getAppVersion] forHTTPHeaderField:@"version"];
+            [manager.requestSerializer setValue:SERVICE_PLATFORM forHTTPHeaderField:@"platformType"];
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/xml",@"text/html",@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"charset=UTF-8", nil];
             
             manager.requestSerializer.timeoutInterval = 30.0;
@@ -526,6 +531,7 @@
                     [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
                     [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
                     [manager.requestSerializer setValue:[FXD_Tool getAppVersion] forHTTPHeaderField:@"version"];
+                    [manager.requestSerializer setValue:SERVICE_PLATFORM forHTTPHeaderField:@"platformType"];
                 }
             }
             
@@ -615,6 +621,7 @@
     }
     [manager.requestSerializer setValue:[FXD_Tool getAppVersion] forHTTPHeaderField:@"version"];
     [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
+    [manager.requestSerializer setValue:SERVICE_PLATFORM forHTTPHeaderField:@"platformType"];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/xml",@"text/html",@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"charset=UTF-8", nil];
     manager.requestSerializer.timeoutInterval = 30.0;
     

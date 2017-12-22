@@ -40,7 +40,7 @@
 #import "UITabBar+badge.h"
 #import "NextViewCell.h"
 #import "CycleTextCell.h"
-@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate>
+@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate>
 {
     NSString *_advTapToUrl;
     NSString *_shareContent;
@@ -580,6 +580,7 @@
     homeCell.backgroundColor = rgb(242, 242, 242);
 //    homeCell.backgroundColor = [UIColor redColor];
     homeCell.selected = NO;
+    homeCell.delegate = self;
     homeCell.defaultMoneyLabel.text = @"8000元";
     homeCell.defaultTimeLabel.text = @"180天";
     homeCell.quotaLabel.text = @"3000";
@@ -616,6 +617,50 @@
         }
     }
 }
+
+-(void)helpBtnClick{
+    NSLog(@"点击帮助中心");
+}
+
+-(void)daoliuBtnClick{
+    NSLog(@"量子互助");
+}
+
+-(void)withdrawMoneyImmediatelyBtnClick{
+    NSLog(@"立即提款");
+}
+
+-(void)loanBtnClick{
+    NSLog(@"我要借款");
+}
+
+-(void)productListClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit amount:(NSString *)amount Path:(NSString *)Path{
+    NSLog(@"===%@,===%@,===%@,===%@==",productId,isOverLimit,amount,Path);
+}
+
+-(void)moreBtnClick{
+    NSLog(@"更多按钮");
+}
+
+-(void)questionDescBtnClick{
+    NSLog(@"帮助图标按钮");
+}
+
+-(void)repayImmediatelyBtnClick:(BOOL)isSelected{
+    if (!isSelected) {
+        
+        NSLog(@"立即还款");
+    }else{
+        NSLog(@"勾选框");
+    }
+}
+
+-(void)applyImmediatelyBtnClick:(NSString *)money :(NSString *)time{
+    
+    NSLog(@"===%@===%@==",money,time);
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

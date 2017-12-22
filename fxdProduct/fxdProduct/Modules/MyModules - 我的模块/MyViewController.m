@@ -27,6 +27,7 @@
     //标题图片数组
     NSArray *imgAry;
     AountStationLetterMsgModel *model;
+    NSString *_h5_url_;
    
 }
 @property (strong, nonatomic) IBOutlet UITableView *MyViewTable;
@@ -63,10 +64,10 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
 
-    UIView *headerBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 288)];
+    UIView *headerBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 238)];
     //添加自定义头部
     _headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
-    _headerView.backgroundColor = RGBColor(242, 242, 242, 1);
+    _headerView.backgroundColor = UI_MAIN_COLOR;
     _headerView.delegate = self;
 //    headerView.nameLabel.text = @"您好!";
 //    _headerView.accountLabel.text = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
@@ -94,9 +95,10 @@
             [_headerView.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.gradeLogo] placeholderImage:[UIImage imageNamed:@""] options:SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
             } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             }];
-//            _headerView.leftImageView.image = [UIImage imageNamed:model.gradeLogo];
+
             _headerView.accountLabel.text = model.mobilePhone;
             _headerView.nameLabel.text = model.gradeName;
+            _h5_url_ = model.h5_url_;
         }
     } WithFaileBlock:^{
         
@@ -107,7 +109,10 @@
 
 -(void)shadowImageViewClick{
     
-    NSLog(@"点击了等级");
+    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+    webView.urlStr = _h5_url_;
+    [self.navigationController pushViewController:webView animated:YES];
+//    NSLog(@"点击了等级");
 }
 -(void)getMessageNumber{
     

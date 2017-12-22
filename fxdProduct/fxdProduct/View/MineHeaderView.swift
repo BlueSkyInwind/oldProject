@@ -95,23 +95,23 @@ extension MineHeaderView{
     
     fileprivate func setupNewUI(){
         
-        let bgView = UIView()
-        bgView.isUserInteractionEnabled = true
-        bgView.backgroundColor = UI_MAIN_COLOR
-        self.addSubview(bgView)
-        bgView.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(0)
-            make.top.equalTo(self).offset(0)
-            make.right.equalTo(self).offset(0)
-            make.bottom.equalTo(self).offset(-10)
-        }
+//        let bgView = UIView()
+//        bgView.isUserInteractionEnabled = true
+//        bgView.backgroundColor = UI_MAIN_COLOR
+//        self.addSubview(bgView)
+//        bgView.snp.makeConstraints { (make) in
+//            make.left.equalTo(self).offset(0)
+//            make.top.equalTo(self).offset(0)
+//            make.right.equalTo(self).offset(0)
+//            make.bottom.equalTo(self).offset(-10)
+//        }
         
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named:"kongbai")
-        bgView.addSubview(bgImageView)
+        self.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(30)
-            make.top.equalTo(self).offset(70)
+            make.top.equalTo(self).offset(45)
         }
         
         leftImageView = UIImageView()
@@ -126,10 +126,10 @@ extension MineHeaderView{
         accountLabel = UILabel()
         accountLabel?.textColor = UIColor.white
         accountLabel?.font = UIFont.systemFont(ofSize: 14)
-        bgView.addSubview(accountLabel!)
+        self.addSubview(accountLabel!)
         accountLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(bgImageView.snp.right).offset(57)
-            make.top.equalTo(bgView.snp.top).offset(80)
+            make.top.equalTo(self).offset(52)
             make.height.equalTo(20)
         })
         
@@ -138,7 +138,7 @@ extension MineHeaderView{
         let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
         shadowImageView.addGestureRecognizer(tapGest)
         shadowImageView.image = UIImage(named:"levelshadow")
-        bgView.addSubview(shadowImageView)
+        self.addSubview(shadowImageView)
         shadowImageView.snp.makeConstraints { (make) in
             make.left.equalTo(bgImageView.snp.right).offset(57)
             make.top.equalTo((accountLabel?.snp.bottom)!).offset(15)
@@ -174,7 +174,7 @@ extension MineHeaderView{
         
         didSet{
             let k_w = UIScreen.main.bounds.size.width
-            let newFrame = CGRect(x:0,y:0,width:k_w,height:180)
+            let newFrame = CGRect(x:0,y:0,width:k_w,height:130)
             super.frame = newFrame
             
         }
