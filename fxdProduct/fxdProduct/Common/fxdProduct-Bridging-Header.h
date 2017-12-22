@@ -67,4 +67,6 @@
 #import "WithdrawCashDetailModel.h"
 #import "MessageViewModel.h"
 #import "ShowMsgPreviewModel.h"
+#import "FXD_AlertViewCust.h"
+
 #endif /* fxdProduct_Bridging_Header_h */

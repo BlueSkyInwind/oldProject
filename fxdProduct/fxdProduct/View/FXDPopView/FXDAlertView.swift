@@ -50,12 +50,20 @@ class FXDAlertView: UIView {
     @objc convenience init(_ titleStr:String, contentAttri:NSAttributedString, cancelTitle:String,  sureTitle:String) {
         self.init(frame: UIScreen.main.bounds)
         self.titleLabel?.text = titleStr
-        self.cancelBtn?.setTitle(cancelTitle, for: UIControlState.normal)
-        self.sureBtn?.setTitle(sureTitle, for: UIControlState.normal)
         self.contentLabel?.attributedText = contentAttri
-        //        adaptHeightContent()
+        
+        if cancelTitle == "" ||  sureTitle == "" {
+            updateViewLayout()
+            self.sureBtn?.setTitle(sureTitle, for: UIControlState.normal)
+        }else{
+            self.cancelBtn?.setTitle(cancelTitle, for: UIControlState.normal)
+            self.sureBtn?.setTitle(sureTitle, for: UIControlState.normal)
+        }
+        
+        if titleStr == "" {
+            updateNoTitleViewLayout()
+        }
     }
-    
     
     func adaptHeightContent() {
         let height = self.contentLabel?.attributedText?.boundingRect(with:CGSize.init(width: Alert_width - 30, height: UIScreen.main.bounds.size.height), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.RawValue(UInt8(NSStringDrawingOptions.usesLineFragmentOrigin.rawValue) | UInt8(NSStringDrawingOptions.usesFontLeading.rawValue))), context: nil).height
@@ -223,6 +231,29 @@ extension FXDAlertView {
             })
         }
     }
+    
+    func updateViewLayout() {
+        lineThree?.removeFromSuperview()
+        cancelBtn?.removeFromSuperview()
+        sureBtn?.snp.remakeConstraints({ (make) in
+            make.left.equalTo((bottomView?.snp.left)!).offset(0)
+            make.right.equalTo((bottomView?.snp.right)!).offset(0)
+            make.top.equalTo((bottomView?.snp.top)!).offset(0);
+            make.bottom.equalTo((bottomView?.snp.bottom)!).offset(0);
+        })
+    }
+    
+    func updateNoTitleViewLayout() {
+        lineOne?.removeFromSuperview()
+        titleLabel?.removeFromSuperview()
+        contentLabel?.snp.remakeConstraints({ (make) in
+            make.top.equalTo((backGroundView?.snp.top)!).offset(10)
+            make.bottom.equalTo((bottomView?.snp.top)!).offset(-10)
+            make.left.equalTo((backGroundView?.snp.left)!).offset(15)
+            make.right.equalTo((backGroundView?.snp.right)!).offset(-15)
+        })
+    }
+    
 }
 
 

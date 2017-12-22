@@ -68,5 +68,6 @@ let SLIDER_CLOLR = UIColor.init(red: 223/255.0, green: 219/255.0, blue: 219/255.
 let PAY_LINE_CLOLR = UIColor.init(red: 240/255.0, green: 238/255.0, blue: 238/255.0, alpha: 1)
 //新的金额颜色
 let AMOUNT_COLOR = UIColor.init(red: 255/255.0, green: 222/255.0, blue: 0/255.0, alpha: 1)
-
+//申请确认背景色
+let LOAN_APPLICATION_COLOR = UIColor.init(red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1)
 

@@ -1,26 +1,78 @@
 //
-//  PickView.swift
+//  FXD_ApplicationChoosePickerView.swift
 //  fxdProduct
 //
-//  Created by sxp on 2017/9/22.
+//  Created by admin on 2017/12/22.
 //  Copyright © 2017年 dd. All rights reserved.
 //
 
 import UIKit
 
-
-@objc protocol PickViewDelegate: NSObjectProtocol {
+@objc protocol ApplicationChoosePickViewDelegate: NSObjectProtocol {
     
     //取消按钮的代理方法
-    func cancelBtn()
+    func chooseCancelBtn()
     //确认按钮的代理方法
-    func sureBtn(_ capitalListModel: CapitalListModel)->Void
+    func chooseSureBtn(_ content: String)->Void
     
 }
+class FXD_ApplicationChoosePickerView: UIView ,UIPickerViewDelegate,UIPickerViewDataSource{
 
-class PickView: UIView ,UIPickerViewDelegate,UIPickerViewDataSource{
+    var dataArray = [String]()
+    weak var delegate: ApplicationChoosePickViewDelegate?
+    var selectRow : NSInteger?
+    var VC:UIViewController?
     
-
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        selectRow = 0
+        setUpUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    @objc func cancelBtnClick() {
+        if self.delegate != nil {
+            self.delegate?.chooseCancelBtn()
+            dismiss()
+        }
+    }
+    
+    @objc func sureBtnClick() {
+        if self.delegate != nil {
+            let content = dataArray[selectRow!]
+            self.delegate?.chooseSureBtn(content )
+            dismiss()
+        }
+    }
+    
+    convenience init (vc:UIViewController,dataArr:[String]) {
+        self.init(frame: CGRect.init(x: 0, y: _k_h, width: _k_w, height: 200))
+        VC = vc
+        dataArray = dataArr 
+    }
+    
+    //MARK: 弹窗动画
+    @objc func show()  {
+        VC?.view.addSubview(self)
+        UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.frame = CGRect.init(x: 0, y: _k_h - 200, width: _k_w, height: 200)
+        }) { (complication) in
+            
+        }
+    }
+    
+    @objc  func dismiss()  {
+        UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.frame = CGRect.init(x: 0, y: _k_h, width: _k_w, height: 200)
+        }) { (complication) in
+            self.removeFromSuperview()
+        }
+    }
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -28,29 +80,11 @@ class PickView: UIView ,UIPickerViewDelegate,UIPickerViewDataSource{
         // Drawing code
     }
     */
-
-    var dataArray  = [AnyObject]()
-    var model : CapitalListModel?
-    weak var delegate: PickViewDelegate?
-    var selectRow : NSInteger?
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        selectRow = 0
-        setupUI()
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
-extension PickView{
+extension  FXD_ApplicationChoosePickerView {
     
-    fileprivate func setupUI(){
-        
+    func setUpUI()  {
         let btnView = UIView()
         btnView.backgroundColor = LINE_COLOR
         self.addSubview(btnView)
@@ -98,44 +132,13 @@ extension PickView{
             make.height.equalTo(185)
         }
     }
-    
-    override var  frame:(CGRect){
-        didSet{
-            let newFrame = CGRect(x:0,y:0,width:_k_w,height:_k_h)
-            super.frame = newFrame
-        }
-    }
-}
-
-extension PickView{
-    
-    //取消事件
-    @objc fileprivate func cancelBtnClick(){
-        
-        if delegate != nil {
-            delegate?.cancelBtn()
-        }
-    }
-    //确认事件
-    @objc fileprivate func sureBtnClick(){
-        
-        if delegate != nil {
-            if model == nil
-            {
-
-                model = dataArray[0] as? CapitalListModel
-
-            }
-            delegate?.sureBtn(model!)
-        }
-    }
 }
 
 //UIPickerView代理方法
-extension PickView{
+extension FXD_ApplicationChoosePickerView{
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-       return 1
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -144,9 +147,9 @@ extension PickView{
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-        let model = dataArray[row] as? CapitalListModel
-        return model?.platformName
-    
+        let contentStr = dataArray[row] as? String
+        return contentStr
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -155,13 +158,13 @@ extension PickView{
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-          model = dataArray[row] as? CapitalListModel
-          selectRow = row
-          pickerView.reloadAllComponents()
+        let contentStr = dataArray[row] as? String
+        selectRow = row
+        pickerView.reloadAllComponents()
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
         var pickerLabel = view as? UILabel
         if (pickerLabel == nil){
             pickerLabel = UILabel()
@@ -175,9 +178,9 @@ extension PickView{
     
     //自定义选中的字体样式和颜色
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-
-        let model = dataArray[row] as? CapitalListModel
-        let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(model?.platformName)!)
+        
+        let content = dataArray[row]
+        let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:content)
         attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: QUTOA_COLOR, range: NSMakeRange(0,attrstr.length))
         attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, attrstr.length))
         if row == selectRow{
@@ -187,3 +190,4 @@ extension PickView{
         return attrstr
     }
 }
+

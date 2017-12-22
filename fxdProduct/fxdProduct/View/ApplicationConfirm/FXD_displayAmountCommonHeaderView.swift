@@ -1,5 +1,5 @@
 //
-//  FXD_LoanApplicationHeaderView.swift
+//  FXD_displayAmountCommonHeaderView.swift
 //  fxdProduct
 //
 //  Created by admin on 2017/12/21.
@@ -8,7 +8,8 @@
 
 import UIKit
 
-class FXD_LoanApplicationHeaderView: UIView {
+typealias GOBackACtion = () -> Void
+class FXD_displayAmountCommonHeaderView: UIView {
     
     var backGroundImage:UIImageView?
     var centerImage:UIImageView?
@@ -16,6 +17,9 @@ class FXD_LoanApplicationHeaderView: UIView {
     var hintWordBackImage:UIImageView?
     var hintWordLabel:UILabel?
     
+    var goBackBtn:UIButton?
+    var titleLabel:UILabel?
+    var goBack:GOBackACtion?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,6 +36,12 @@ class FXD_LoanApplicationHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func goBackAction()  {
+        if goBack != nil {
+            goBack!()
+        }
+    }
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -42,15 +52,37 @@ class FXD_LoanApplicationHeaderView: UIView {
 
 }
 
-extension FXD_LoanApplicationHeaderView{
+extension FXD_displayAmountCommonHeaderView{
     
     func setUpUI()  {
         
         backGroundImage = UIImageView()
         backGroundImage?.image = UIImage.init(named: "header_Back_Image")
+        backGroundImage?.isUserInteractionEnabled = true
         self.addSubview(backGroundImage!)
         backGroundImage?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self)
+        })
+
+        
+        titleLabel = UILabel()
+        titleLabel?.textColor = UIColor.white
+        titleLabel?.textAlignment = NSTextAlignment.center
+        titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
+        backGroundImage?.addSubview(titleLabel!)
+        titleLabel?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo((backGroundImage?.snp.centerX)!)
+            make.centerY.equalTo((backGroundImage?.snp.top)!).offset(44)
+        })
+        
+        goBackBtn = UIButton.init(type: UIButtonType.custom)
+        goBackBtn?.setBackgroundImage(UIImage.init(named: "return_white"), for: UIControlState.normal)
+        goBackBtn?.addTarget(self, action: #selector(goBackAction), for: UIControlEvents.touchUpInside)
+        backGroundImage?.addSubview(goBackBtn!)
+        goBackBtn?.snp.makeConstraints({ (make) in
+            make.left.equalTo((backGroundImage?.snp.left)!).offset(15)
+            make.width.height.equalTo(23)
+            make.centerY.equalTo((backGroundImage?.snp.top)!).offset(44)
         })
         
         centerImage = UIImageView()
@@ -58,7 +90,7 @@ extension FXD_LoanApplicationHeaderView{
         backGroundImage?.addSubview(centerImage!)
         centerImage?.snp.makeConstraints({ (make) in
             make.centerX.equalTo((backGroundImage?.snp.centerX)!)
-            make.centerY.equalTo((backGroundImage?.snp.centerY)!).offset(50)
+            make.centerY.equalTo((backGroundImage?.snp.centerY)!).offset(10)
         })
         
         amountLabel = UILabel()
@@ -76,7 +108,9 @@ extension FXD_LoanApplicationHeaderView{
         backGroundImage?.addSubview(hintWordBackImage!)
         hintWordBackImage?.snp.makeConstraints({ (make) in
             make.centerX.equalTo((backGroundImage?.snp.centerX)!)
-            make.bottom.equalTo((backGroundImage?.snp.top)!).offset(-8)
+            make.bottom.equalTo((backGroundImage?.snp.bottom)!).offset(-8)
+            make.left.equalTo((backGroundImage?.snp.left)!).offset(20)
+            make.right.equalTo((backGroundImage?.snp.right)!).offset(-20)
         })
         
         hintWordLabel = UILabel()
