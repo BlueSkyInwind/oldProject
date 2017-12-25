@@ -115,8 +115,10 @@ extension MineHeaderView{
         }
         
         leftImageView = UIImageView()
-        bgImageView.addSubview(leftImageView!)
+        self.addSubview(leftImageView!)
         leftImageView?.snp.makeConstraints({ (make) in
+//            make.left.equalTo(self).offset(30)
+//            make.top.equalTo(self).offset(45)
             make.centerX.equalTo(bgImageView.snp.centerX)
             make.centerY.equalTo(bgImageView.snp.centerY)
             make.width.equalTo(67)
@@ -128,7 +130,7 @@ extension MineHeaderView{
         accountLabel?.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(accountLabel!)
         accountLabel?.snp.makeConstraints({ (make) in
-            make.left.equalTo(bgImageView.snp.right).offset(57)
+            make.left.equalTo((leftImageView?.snp.right)!).offset(57)
             make.top.equalTo(self).offset(52)
             make.height.equalTo(20)
         })
@@ -140,7 +142,7 @@ extension MineHeaderView{
         shadowImageView.image = UIImage(named:"levelshadow")
         self.addSubview(shadowImageView)
         shadowImageView.snp.makeConstraints { (make) in
-            make.left.equalTo(bgImageView.snp.right).offset(57)
+            make.left.equalTo((leftImageView?.snp.right)!).offset(57)
             make.top.equalTo((accountLabel?.snp.bottom)!).offset(15)
         }
         

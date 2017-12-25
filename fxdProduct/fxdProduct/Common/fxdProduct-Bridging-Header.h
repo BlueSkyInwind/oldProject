@@ -70,5 +70,5 @@
 #import "FXD_AlertViewCust.h"
 #import "DataDisplayCell.h"
 #import "FXD_MXVerifyManager.h"
-
+#import "FXD_HomeProductListModel.h"
 #endif /* fxdProduct_Bridging_Header_h */

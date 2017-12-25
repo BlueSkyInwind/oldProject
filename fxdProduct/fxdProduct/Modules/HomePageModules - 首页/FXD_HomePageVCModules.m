@@ -40,6 +40,7 @@
 #import "UITabBar+badge.h"
 #import "NextViewCell.h"
 #import "CycleTextCell.h"
+#import "FXD_HomeProductListModel.h"
 @interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate>
 {
     NSString *_advTapToUrl;
@@ -49,7 +50,8 @@
     ActivityHomePopView *_popView;
     
     NSInteger _count;
-    HomeProductList *_homeProductList;
+//    HomeProductList *_homeProductList;
+    FXD_HomeProductListModel *_homeProductList;
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
     BMKLocationService *_locService;
@@ -323,7 +325,7 @@
             [_loadFailView removeFromSuperview];
         }
         self.tableView.hidden = false;
-        if (_homeProductList == nil || _homeProductList.data == nil) {
+        if (_homeProductList == nil ) {
             [self setUploadFailView];
         }
     }];
@@ -367,28 +369,36 @@
     HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
     [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
         
-        _homeProductList = [HomeProductList yy_modelWithJSON:returnValue];
-        if (![_homeProductList.errCode isEqualToString:@"0"]) {
-            [[MBPAlertView sharedMBPTextView]showTextOnly:weakSelf.view message:_homeProductList.friendErrMsg];
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        
+        _homeProductList = [[FXD_HomeProductListModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+        if (![baseResultM.errCode isEqualToString:@"0"]) {
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:weakSelf.view message:baseResultM.friendErrMsg];
             finish(false);
-            return;
-        }
-        finish(true);
-        [_dataArray removeAllObjects];
-        for (HomeProductList *product in _homeProductList.data.productList) {
-            [_dataArray addObject:product];
+            return ;
         }
         
+        finish(true);
+        
         NSMutableArray *filesArr = [NSMutableArray array];
-        for (HomeBannerList *file in _homeProductList.data.bannerList) {
+        NSArray * array = (NSArray *)_homeProductList.bannerList;
+        
+        for (NSDictionary * dic  in array) {
+            
+            BannerListModel *file = (BannerListModel *)dic;
             [filesArr addObject:file.image];
         }
+
         _sdView.imageURLStringsGroup = filesArr.copy;
         [_tableView reloadData];
         
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         if (appDelegate.isShow) {
-            [self homeActivitiesPopups:_homeProductList];
+            
+            NSArray * popArray = (NSArray *)_homeProductList.popList;
+            PopListModel *model = (PopListModel *)popArray[0];
+            [self homeActivitiesPopups:model];
         }
         if (appDelegate.isHomeChooseShow) {
             [self homeEvaluationRedEnvelopeActivitiesPopups:_homeProductList];
@@ -407,17 +417,17 @@
  
  @param model 数据model
  */
-- (void)homeActivitiesPopups:(HomeProductList *)model
+- (void)homeActivitiesPopups:(PopListModel *)model
 {
-    if ([model.data.popList.firstObject.isValid isEqualToString:@"1"]) {
+    if ([model.isValid isEqualToString:@"1"]) {
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         appDelegate.isShow = false;
         _popView = [ActivityHomePopView defaultPopupView];
         _popView.closeBtn.hidden = YES;
         _popView.delegate = self;
-        [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.data.popList.firstObject.image]];
-        _advImageUrl = model.data.popList.firstObject.toUrl;
-        _advTapToUrl = model.data.popList.firstObject.toUrl;
+        [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.image]];
+        _advImageUrl = model.toUrl;
+        _advTapToUrl = model.toUrl;
         _popView.parentVC = self;
         [self lew_presentPopupView:_popView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
         }];
@@ -430,15 +440,18 @@
  
  @param model 测评红包数据model
  */
--(void)homeEvaluationRedEnvelopeActivitiesPopups:(HomeProductList *)model{
+-(void)homeEvaluationRedEnvelopeActivitiesPopups:(FXD_HomeProductListModel *)model{
     
-    if ([model.data.jumpBomb isEqualToString:@"1"]) {
+    if ([model.jumpBomb isEqualToString:@"1"]) {
+        
+        RedCollarListModel *redCollarList = [[RedCollarListModel alloc]initWithDictionary:(NSDictionary *)_homeProductList.redCollarList error:nil];
+       
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         appDelegate.isHomeChooseShow = false;
         _popChooseView = [[HomeChoosePopView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h)];
-        _popChooseView.displayLabel.text = model.data.redCollarList.collarContent;
-        [_popChooseView.cancelButton setTitle:model.data.redCollarList.cancel forState:UIControlStateNormal];
-        [_popChooseView.sureButton setTitle:model.data.redCollarList.redCollar forState:UIControlStateNormal];
+        _popChooseView.displayLabel.text = redCollarList.collarContent;
+        [_popChooseView.cancelButton setTitle:redCollarList.cancel forState:UIControlStateNormal];
+        [_popChooseView.sureButton setTitle:redCollarList.redCollar forState:UIControlStateNormal];
         [_popChooseView show];
         __weak typeof (self) weakSelf = self;
         _popChooseView.cancelClick = ^{
@@ -511,16 +524,16 @@
     return 1;
 }
 
--(NSInteger)getAllProduct{
-    
-    NSInteger i = 0;
-    for (HomeProductsList *product in _homeProductList.data.productList) {
-        if ([product.isValidate isEqualToString:@"1"]) {
-            i++;
-        }
-    }
-    return i;
-}
+//-(NSInteger)getAllProduct{
+//
+//    NSInteger i = 0;
+//    for (HomeProductsList *product in _homeProductList.data.productList) {
+//        if ([product.isValidate isEqualToString:@"1"]) {
+//            i++;
+//        }
+//    }
+//    return i;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -578,16 +591,23 @@
     HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     homeCell.backgroundColor = rgb(242, 242, 242);
-//    homeCell.backgroundColor = [UIColor redColor];
     homeCell.selected = NO;
     homeCell.delegate = self;
     homeCell.defaultMoneyLabel.text = @"8000元";
     homeCell.defaultTimeLabel.text = @"180天";
-    homeCell.quotaLabel.text = @"3000";
-    homeCell.loanTopLabel.text = @"资料测评中";
-    homeCell.loanTopContentLabel.text = @"系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,";
-    homeCell.loanBottomLabel.text = @"资料提交成功";
-    homeCell.loanTimeLabel.text = @"12-12 15:35";
+//    homeCell.quotaLabel.text = @"3000";
+    homeCell.homeProductListModel = _homeProductList;
+    if (_homeProductList != nil) {
+        
+//        homeCell.type = _homeProductList.flag;
+        homeCell.type = @"4";
+    }
+    
+//    homeCell.loanTopLabel.text = @"资料测评中";
+//    homeCell.loanTopContentLabel.text = @"系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,";
+//    homeCell.loanBottomLabel.text = @"资料提交成功";
+//    homeCell.loanTimeLabel.text = @"12-12 15:35";
+    
 //    homeCell.delegate = self;
 //    homeCell.cellType = HomePageCellType(cellType: .Default);
     return homeCell;
@@ -602,16 +622,20 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     DLog(@"点击");
-    if (_homeProductList.data.bannerList && _homeProductList.data.bannerList.count > 0) {
-        HomeBannerList *files = _homeProductList.data.bannerList[index];
-        if ([files.toUrl.lowercaseString hasPrefix:@"http"] || [files.toUrl.lowercaseString hasPrefix:@"https"]) {
-            if ([files.toUrl.lowercaseString hasSuffix:@"sjbuy"]) {
+    
+    NSArray * array = (NSArray *)_homeProductList.bannerList;
+    BannerListModel *model = (BannerListModel *)array[index];
+
+    if (model) {
+
+        if ([model.toUrl.lowercaseString hasPrefix:@"http"] || [model.toUrl.lowercaseString hasPrefix:@"https"]) {
+            if ([model.toUrl.lowercaseString hasSuffix:@"sjbuy"]) {
                 HomepageActivityImageDisplayModule *firstBorrowVC = [[HomepageActivityImageDisplayModule alloc] init];
-                firstBorrowVC.url = files.toUrl;
+                firstBorrowVC.url = model.toUrl;
                 [self.navigationController pushViewController:firstBorrowVC animated:YES];
             }else{
                 FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-                webView.urlStr = files.toUrl;
+                webView.urlStr = model.toUrl;
                 [self.navigationController pushViewController:webView animated:true];
             }
         }

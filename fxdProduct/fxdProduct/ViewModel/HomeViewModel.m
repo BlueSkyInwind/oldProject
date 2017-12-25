@@ -16,7 +16,7 @@
 //    homeParam.channel = PLATFORM;
     NSDictionary * paramDic = [homeParam toDictionary];
     //http://192.168.12.109:8005/summary?
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_HomeState_url] isNeedNetStatus:false parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_NewSummary_url] isNeedNetStatus:false parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if (self.returnBlock) {
             self.returnBlock(object);
