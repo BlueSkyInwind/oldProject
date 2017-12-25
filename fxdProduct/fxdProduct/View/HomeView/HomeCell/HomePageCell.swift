@@ -11,21 +11,62 @@ import SnapKit
 import SDWebImage
 import Masonry
 
+@objc protocol HomePageCellDelegate: NSObjectProtocol {
+    
+    //首次借款按钮
+    func applyImmediatelyBtnClick(_ money: String , _ time: String)->Void
+    //帮助中心
+    func helpBtnClick()
+    //量子互助
+    func daoliuBtnClick()
+    //立即提款
+    func withdrawMoneyImmediatelyBtnClick()
+    //更多按钮
+    func moreBtnClick()
+    //我要借款按钮
+    func loanBtnClick()
+    //点击产品按钮
+    func productListClick(_ productId: String, isOverLimit: String, amount: String ,Path:String)->Void
+    //帮助图标按钮
+    func questionDescBtnClick()
+    //立即还款按钮
+    func repayImmediatelyBtnClick(_ isSelected: Bool)
+    
+}
 
 class HomePageCell: UITableViewCell {
     
+    @objc weak var delegate: HomePageCellDelegate?
+    
+    //滑动标识的钱
     @objc var defaultMoneyLabel : UILabel?
+    //滑动标识的时间
     @objc var defaultTimeLabel : UILabel?
+    //中间状态第一条状态标题
     @objc var loanTopLabel : UILabel?
+    //中间状态第一条状态内容
     @objc var loanTopContentLabel : UILabel?
+    //中间状态第二条状态标题
     @objc var loanBottomLabel : UILabel?
+    //中间状态时间
     @objc var loanTimeLabel : UILabel?
+    //量子互助导流View
     @objc var loanBottomBgView : UIView?
+    //可借额度
     @objc var quotaLabel : UILabel?
+    
     @objc var payTipLabel : UILabel?
+    //还款的月份
     @objc var monthLabel : UILabel?
+    //还款的日期
     @objc var dayLabel : UILabel?
+    //还款的money
     @objc var payMoneyLabel : UILabel?
+    //逾期money
+    @objc var overdueMoneyLabel : UILabel?
+    //复选框
+    @objc var checkBoxBtn : UIButton?
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -79,7 +120,6 @@ extension HomePageCell {
         defaultMoneyLabel = UILabel()
         defaultMoneyLabel?.textColor = UI_MAIN_COLOR
         defaultMoneyLabel?.textAlignment = .center
-        defaultMoneyLabel?.text = "0元"
         defaultMoneyLabel?.font = UIFont.systemFont(ofSize: 20)
         self.addSubview(defaultMoneyLabel!)
         defaultMoneyLabel?.snp.makeConstraints({ (make) in
@@ -163,7 +203,7 @@ extension HomePageCell {
 //        let imagea1 = setImageFrame(UIImage(named:"icon_quan")!, size: CGSize(width:46,height:46))
 //        sliderTime.setThumbImage(imagea1, for: .normal)
         
-        slider.setThumbImage(UIImage.init(named: "icon_quan"), for: .normal)
+        sliderTime.setThumbImage(UIImage.init(named: "icon_quan"), for: .normal)
         // 设置滑动过的颜色
         sliderTime.minimumTrackTintColor = UI_MAIN_COLOR
         // 设置未滑动过的颜色
@@ -231,6 +271,45 @@ extension HomePageCell {
                 make.top.equalTo(timeRightLabel.snp.bottom).offset(20)
             })
         }
+        
+        if UI_IS_IPONE5 {
+            defaultMoneyLabel?.snp.updateConstraints({ (make) in
+                make.top.equalTo(self).offset(9)
+            })
+            
+            slider.snp.updateConstraints({ (make) in
+                make.top.equalTo((defaultMoneyLabel?.snp.bottom)!).offset(14)
+            })
+            
+            moneyLeftLabel.snp.updateConstraints({ (make) in
+                make.top.equalTo(slider.snp.bottom).offset(0)
+            })
+            
+            moneyRightLabel.snp.updateConstraints({ (make) in
+                make.top.equalTo(slider.snp.bottom).offset(0)
+            })
+            
+            defaultTimeLabel?.snp.updateConstraints({ (make) in
+                make.top.equalTo(slider.snp.bottom).offset(10)
+            })
+            
+            sliderTime.snp.updateConstraints({ (make) in
+                make.top.equalTo((defaultTimeLabel?.snp.bottom)!).offset(14)
+            })
+            timeLeftLable.snp.updateConstraints({ (make) in
+                make.top.equalTo(sliderTime.snp.bottom).offset(0)
+            })
+            timeRightLabel.snp.updateConstraints({ (make) in
+                make.top.equalTo(sliderTime.snp.bottom).offset(0)
+            })
+            applayBtn.snp.updateConstraints({ (make) in
+                make.top.equalTo(timeRightLabel.snp.bottom).offset(20)
+            })
+            
+            helpBtn.snp.updateConstraints({ (make) in
+                make.top.equalTo(applayBtn.snp.bottom).offset(9)
+            })
+        }
     }
     
     //借款的各种中间状态
@@ -278,7 +357,7 @@ extension HomePageCell {
         loanTopLabel?.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(loanTopLabel!)
         loanTopLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self).offset(88)
+            make.top.equalTo(topImageView.snp.top).offset(0)
             make.left.equalTo(topImageView.snp.right).offset(20)
             make.height.equalTo(14)
         })
@@ -321,7 +400,7 @@ extension HomePageCell {
         loanBottomBgView?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(0)
             make.right.equalTo(self).offset(0)
-            make.height.equalTo(150)
+            make.height.equalTo(100)
             make.bottom.equalTo(self).offset(-50)
         })
         
@@ -353,6 +432,18 @@ extension HomePageCell {
             loanBottomBgView?.snp.updateConstraints({ (make) in
                 make.bottom.equalTo(self).offset(-10)
             })
+        }
+        
+        if UI_IS_IPONE5 {
+            
+            loanBottomBgView?.snp.updateConstraints({ (make) in
+                make.bottom.equalTo(self).offset(-15)
+            })
+            
+            topImageView.snp.updateConstraints({ (make) in
+                make.top.equalTo(self).offset(55)
+            })
+            
         }
     }
     
@@ -410,6 +501,13 @@ extension HomePageCell {
         if UI_IS_IPONE6 {
             loanBtn.snp.updateConstraints({ (make) in
                 make.bottom.equalTo(bgView.snp.bottom).offset(-20)
+            })
+        }
+        
+        if UI_IS_IPONE5 {
+            
+            loanBtn.snp.updateConstraints({ (make) in
+                make.bottom.equalTo(bgView.snp.bottom).offset(-50)
             })
         }
     }
@@ -472,7 +570,7 @@ extension HomePageCell {
         }
         
         for index in 0..<2 {
-            if index >= 2{
+            if index > 0{
                 if UI_IS_IPONE5{
                     continue
                 }
@@ -514,7 +612,6 @@ extension HomePageCell {
         moreBtn.setTitle("更多", for: .normal)
         moreBtn.titleLabel?.textAlignment = .center
         moreBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
-        //        moreBtn.setTitleColor(UIColor.init(red: 63/255.0, green: 169/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
         moreBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         moreBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
         self.addSubview(moreBtn)
@@ -527,8 +624,17 @@ extension HomePageCell {
         
         if UI_IS_IPONE5{
             
+            
+            firstLabel.snp.updateConstraints({ (make) in
+                make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            })
+            
+            bgView.snp.updateConstraints({ (make) in
+                make.top.equalTo(thirdLabel.snp.bottom).offset(10)
+            })
+            
             moreBtn.snp.updateConstraints({ (make) in
-                make.bottom.equalTo(bgView.snp.bottom).offset(-55)
+                make.bottom.equalTo(bgView.snp.bottom).offset(-75)
             })
         }
         
@@ -581,7 +687,7 @@ extension HomePageCell {
             make.centerX.equalTo(self.snp.centerX)
         }
         
-        let middleView = setNormalView()
+        let middleView = setOverdueView()
         self.addSubview(middleView)
         middleView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(0)
@@ -589,6 +695,17 @@ extension HomePageCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(14)
             make.height.equalTo(170)
         }
+        
+        
+        
+//        let middleView = setNormalView()()
+//        self.addSubview(middleView)
+//        middleView.snp.makeConstraints { (make) in
+//            make.left.equalTo(self).offset(0)
+//            make.right.equalTo(self).offset(0)
+//            make.top.equalTo(titleLabel.snp.bottom).offset(14)
+//            make.height.equalTo(170)
+//        }
         
         let repayImmediatelyBtn = UIButton()
         repayImmediatelyBtn.setTitle("立即还款", for: .normal)
@@ -603,7 +720,113 @@ extension HomePageCell {
             make.height.equalTo(50)
         }
         
+        
+        checkBoxBtn = UIButton()
+        checkBoxBtn?.setImage(UIImage(named:"checkBox"), for: .normal)
+        checkBoxBtn?.addTarget(self, action: #selector(checkBoxBtnClick(_:)), for: .touchUpInside)
+        self.addSubview(checkBoxBtn!)
+        checkBoxBtn?.snp.makeConstraints({ (make) in
+            make.left.equalTo(30)
+            make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(20)
+        })
+        
+        
+        let protocolLabel = UILabel()
+        protocolLabel.text = "我已阅读并认可发薪贷《银行走动转账授权书》、《三方借款协议》"
+        protocolLabel.font = UIFont.systemFont(ofSize: 12)
+        protocolLabel.numberOfLines = 0
+        protocolLabel.textColor = QUTOA_COLOR
+        self.addSubview(protocolLabel)
+        protocolLabel.snp.makeConstraints { (make) in
+            make.left.equalTo((checkBoxBtn?.snp.right)!).offset(5)
+            make.right.equalTo(self).offset(-25)
+            make.height.equalTo(40)
+            make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(17)
+        }
+        
+        if UI_IS_IPONE5 {
+            
+            titleLabel.snp.updateConstraints({ (make) in
+                
+                make.top.equalTo(tipImageView.snp.bottom).offset(5)
+            })
+            
+            middleView.snp.updateConstraints { (make) in
+                make.top.equalTo(titleLabel.snp.bottom).offset(0)
+                make.height.equalTo(140)
+            }
+            
+            repayImmediatelyBtn.snp.updateConstraints { (make) in
+                make.top.equalTo(middleView.snp.bottom).offset(5)
+            }
+            
+            checkBoxBtn?.snp.updateConstraints({ (make) in
+                make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(8)
+            })
+            
+            protocolLabel.snp.updateConstraints({ (make) in
+                make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(6)
+            })
+        }
     }
+    
+    //立即提款
+    fileprivate func withdrawMoneyImmediatelyView(){
+        
+        let tipLabel = UILabel()
+        tipLabel.text = "温馨提示: 您当前有一笔借款可以立即提款"
+        tipLabel.font = UIFont.systemFont(ofSize: 12)
+        tipLabel.textColor = UI_MAIN_COLOR
+        tipLabel.textAlignment = .center
+        self.addSubview(tipLabel)
+        tipLabel.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.snp.centerX)
+            make.top.equalTo(self).offset(18)
+        }
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "借款金额(元)"
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = UI_MAIN_COLOR
+        titleLabel.font = UIFont.systemFont(ofSize: 17)
+        self.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.snp.centerX)
+            make.top.equalTo(tipLabel.snp.bottom).offset(47)
+        }
+        
+        quotaLabel = UILabel()
+        quotaLabel?.textAlignment = .center
+        quotaLabel?.textColor = UIColor.black
+        quotaLabel?.font = UIFont.systemFont(ofSize: 25)
+        self.addSubview(quotaLabel!)
+        quotaLabel?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(self.snp.centerX)
+            make.top.equalTo(titleLabel.snp.bottom).offset(28)
+        })
+        
+        let withdrawMoneyImmediatelyBtn = UIButton()
+        withdrawMoneyImmediatelyBtn.setTitle("立即提款", for: .normal)
+        withdrawMoneyImmediatelyBtn.setTitleColor(UIColor.white, for: .normal)
+        withdrawMoneyImmediatelyBtn.setBackgroundImage(UIImage(named:"applayBtnImage"), for: .normal)
+        withdrawMoneyImmediatelyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        withdrawMoneyImmediatelyBtn.addTarget(self, action: #selector(withdrawMoneyImmediatelyBtnClick), for: .touchUpInside)
+        self.addSubview(withdrawMoneyImmediatelyBtn)
+        withdrawMoneyImmediatelyBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(28)
+            make.right.equalTo(self).offset(-28)
+            make.top.equalTo((quotaLabel?.snp.bottom)!).offset(47)
+            make.height.equalTo(55)
+        }
+        
+        
+        if UI_IS_IPONE6P {
+            titleLabel.snp.updateConstraints({ (make) in
+                make.top.equalTo(tipLabel.snp.bottom).offset(70)
+            })
+        }
+    }
+    
 }
 
 extension HomePageCell{
@@ -730,6 +953,143 @@ extension HomePageCell{
         return view
         
     }
+    
+    fileprivate func setOverdueView() -> UIView{
+        
+        let view = UIView()
+        self.addSubview(view)
+        
+        let timeView = UIView()
+        view.addSubview(timeView)
+        timeView.snp.makeConstraints { (make) in
+            make.top.equalTo(view).offset(14)
+            make.centerX.equalTo(view.snp.centerX)
+            make.height.equalTo(50)
+            make.width.equalTo(90)
+        }
+        
+        let dayImageView = UIImageView()
+        dayImageView.image = UIImage(named:"rili")
+        timeView.addSubview(dayImageView)
+        dayImageView.snp.makeConstraints { (make) in
+            make.centerY.equalTo(timeView.snp.centerY)
+            make.left.equalTo(timeView.snp.left).offset(5)
+        }
+        
+        dayLabel = UILabel()
+        dayLabel?.textColor = UI_MAIN_COLOR
+        dayLabel?.text = "13"
+        dayLabel?.font = UIFont.systemFont(ofSize: 20)
+        dayImageView.addSubview(dayLabel!)
+        dayLabel?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(dayImageView.snp.centerX)
+            make.top.equalTo(dayImageView.snp.top).offset(21)
+        })
+        
+        let label2 = UILabel()
+        label2.textColor = UIColor.black
+        label2.text = "日"
+        label2.font = UIFont.systemFont(ofSize: 17)
+        timeView.addSubview(label2)
+        label2.snp.makeConstraints { (make) in
+            make.left.equalTo(dayImageView.snp.right).offset(11)
+            make.top.equalTo(timeView.snp.top).offset(20)
+        }
+        
+        let lineView = UIView()
+        lineView.backgroundColor = PAY_LINE_CLOLR
+        view.addSubview(lineView)
+        lineView.snp.makeConstraints { (make) in
+            make.left.equalTo(view.snp.left).offset(46)
+            make.right.equalTo(view.snp.right).offset(-46)
+            make.top.equalTo(timeView.snp.bottom).offset(17)
+            make.height.equalTo(2)
+        }
+        
+        overdueMoneyLabel = UILabel()
+        overdueMoneyLabel?.text = "700 + 35.55 = 735.5元"
+        overdueMoneyLabel?.textColor = UIColor.black
+        overdueMoneyLabel?.font = UIFont.systemFont(ofSize: 17)
+        overdueMoneyLabel?.textAlignment = .center
+        view.addSubview(overdueMoneyLabel!)
+        overdueMoneyLabel?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(view.snp.centerX)
+            make.top.equalTo(lineView.snp.bottom).offset(26)
+        })
+        
+        
+        let overdueView = UIView()
+        overdueView.backgroundColor = UIColor.clear
+        view.addSubview(overdueView)
+        overdueView.snp.makeConstraints { (make) in
+            make.centerX.equalTo(view.snp.centerX)
+            make.top.equalTo((overdueMoneyLabel?.snp.bottom)!).offset(23)
+            make.height.equalTo(20)
+            make.width.equalTo(80)
+        }
+        
+        
+        let overdueLabel = UILabel()
+        overdueLabel.textAlignment = .center
+        overdueLabel.textColor = RedPacketBottomBtn_COLOR
+        overdueLabel.text = "逾期罚金"
+        overdueLabel.font = UIFont.systemFont(ofSize: 15)
+        overdueView.addSubview(overdueLabel)
+        overdueLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(overdueView.snp.left).offset(0)
+            make.centerY.equalTo(overdueView.snp.centerY)
+        }
+        
+        let questionDescBtn = UIButton()
+        questionDescBtn.setImage(UIImage(named:"home_03"), for: .normal)
+        questionDescBtn.addTarget(self, action: #selector(questionDescBtnClick), for: .touchUpInside)
+        overdueView.addSubview(questionDescBtn)
+        questionDescBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(overdueLabel.snp.right).offset(2)
+            make.centerY.equalTo(overdueView.snp.centerY)
+        }
+        
+        let leftDescLabel = UILabel()
+        leftDescLabel.text = "期供金额"
+        leftDescLabel.textColor = RedPacketBottomBtn_COLOR
+        leftDescLabel.font = UIFont.systemFont(ofSize: 15)
+        view.addSubview(leftDescLabel)
+        leftDescLabel.snp.makeConstraints { (make) in
+            make.right.equalTo(overdueView.snp.left).offset(-40)
+            make.top.equalTo(overdueView.snp.top)
+        }
+        
+        let rightDescLabel = UILabel()
+        rightDescLabel.textColor = RedPacketBottomBtn_COLOR
+        rightDescLabel.text = "待还金额"
+        rightDescLabel.font = UIFont.systemFont(ofSize: 15)
+        view.addSubview(rightDescLabel)
+        rightDescLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(overdueView.snp.right).offset(40)
+            make.top.equalTo(overdueView.snp.top)
+        }
+        
+        if UI_IS_IPONE5 {
+            
+            timeView.snp.updateConstraints({ (make) in
+                make.top.equalTo(view).offset(7)
+            })
+            
+            lineView.snp.updateConstraints { (make) in
+                make.top.equalTo(timeView.snp.bottom).offset(8)
+            }
+            
+            overdueMoneyLabel?.snp.updateConstraints({ (make) in
+                make.top.equalTo(lineView.snp.bottom).offset(13)
+            })
+            
+            overdueView.snp.updateConstraints { (make) in
+                make.top.equalTo((overdueMoneyLabel?.snp.bottom)!).offset(12)
+            }
+            
+        }
+        return view
+    }
 }
 
 //MARK:各种点击事件
@@ -737,8 +1097,21 @@ extension HomePageCell{
     //MARK:UISlider滑动事件
     @objc func changed(slider:UISlider){
         //        print("slider.value = %d",slider.value)
+        let tag = slider.tag
+        let num = Int(slider.value)
+        switch tag {
+        case 101:
+            
+            defaultMoneyLabel?.text = NSString(format: "%d元", (num/1000)*1000) as String
+            
+        case 102:
+            
+            defaultTimeLabel?.text = NSString(format: "%d元", (num/30)*30) as String
+            
+        default:
+            break
+        }
         
-        let money = Int(slider.value)
         //        print("整除后的数字=%d",(money/500)*500)
 //        defaultHeadLabel?.text = NSString(format: "%d元", (money/500)*500) as String
         
@@ -750,32 +1123,107 @@ extension HomePageCell{
     //立即申请
     @objc func applyBtnClick(){
         
+        if delegate != nil {
+            
+            let moneyStr = NSString(format: "%@", (defaultMoneyLabel?.text)!) as String
+            let index = moneyStr.index(moneyStr.endIndex, offsetBy: -1)
+            let money = moneyStr[..<index]
+            let timeStr = NSString(format: "%@", (defaultTimeLabel?.text)!) as String
+            let index1 = timeStr.index(timeStr.endIndex, offsetBy: -1)
+            let time = timeStr[..<index1]
+            
+            delegate?.applyImmediatelyBtnClick(String(money), String(time))
+        }
     }
     //帮助中心
     @objc func helpBtnClick(){
         
+        if delegate != nil {
+            
+            delegate?.helpBtnClick()
+        }
     }
     
     //量子互助
     @objc func bottomClick(){
         
+        if delegate != nil {
+            delegate?.daoliuBtnClick()
+        }
     }
     //我要借款
     @objc func loanBtnClick(){
-        
+        if delegate != nil {
+            delegate?.loanBtnClick()
+        }
     }
     //拒绝导流
     @objc func clickFirstView(_ tapGes : UITapGestureRecognizer){
+        
+        let tag = tapGes.view?.tag
+//        switch tag! {
+//        case 104:
+//            path = homeProductData.data.thirdProductList[0].extAttr.path_
+//            productId = homeProductData.data.thirdProductList[0].id_
+//        case 105:
+//            path = homeProductData.data.thirdProductList[1].extAttr.path_
+//            productId = homeProductData.data.thirdProductList[1].id_
+//        case 106:
+//            path = homeProductData.data.thirdProductList[2].extAttr.path_
+//            productId = homeProductData.data.thirdProductList[2].id_
+//        default:
+//            break
+//        }
+        
+        if delegate != nil {
+            
+            delegate?.productListClick("productId" ,isOverLimit: "isOverLimit" ,amount: "amount",Path:"path")
+            
+        }
+        print("点击产品列表")
         
     }
     
     //拒绝导流更多按钮
     @objc func moreBtnClick(){
         
+        if delegate != nil {
+            delegate?.moreBtnClick()
+        }
     }
     
+    //立即还款按钮
     @objc func repayImmediatelyBtnClick(){
         
+        if delegate != nil {
+            delegate?.repayImmediatelyBtnClick((checkBoxBtn?.isSelected)!)
+        }
+    }
+    
+    //帮助图标
+    @objc func questionDescBtnClick(){
+        
+        if delegate != nil {
+            delegate?.questionDescBtnClick()
+        }
+    }
+    
+    //勾选协议的复选框按钮
+    @objc func checkBoxBtnClick(_ sender : UIButton){
+        
+        if sender.isSelected {
+            sender.setImage(UIImage(named:"checkBox"), for: .normal)
+        }else{
+            sender.setImage(UIImage(named:"checkBox_normal"), for: .normal)
+        }
+        sender.isSelected = !sender.isSelected
+    }
+    
+    //立即提款按钮
+    @objc func withdrawMoneyImmediatelyBtnClick(){
+        if delegate != nil {
+            delegate?.withdrawMoneyImmediatelyBtnClick()
+        }
     }
 }
 

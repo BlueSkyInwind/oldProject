@@ -167,7 +167,7 @@ extension MineMiddleView{
         
         didSet{
             let k_w = UIScreen.main.bounds.size.width
-            let newFrame = CGRect(x:0,y:180,width:k_w,height:108)
+            let newFrame = CGRect(x:0,y:130,width:k_w,height:108)
             super.frame = newFrame
             
         }

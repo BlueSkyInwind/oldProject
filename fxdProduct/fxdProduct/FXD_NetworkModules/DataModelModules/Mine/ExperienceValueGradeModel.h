@@ -16,5 +16,7 @@
 @property (nonatomic, strong)NSString<Optional> * gradeName;
 //手机号
 @property (nonatomic, strong)NSString<Optional> *mobilePhone;
+//跳转页面url
+@property (nonatomic, strong)NSString<Optional> *h5_url_;
 
 @end
