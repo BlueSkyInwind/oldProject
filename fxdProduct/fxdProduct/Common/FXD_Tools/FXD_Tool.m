@@ -37,6 +37,12 @@ static FXD_Tool * shareTool = nil;
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     return app_Version;
 }
++ (NSString *)getProjectName{
+    
+    NSString *executableFile = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleExecutableKey];
+    return executableFile;
+}
+
 //加密json串
 + (NSString *)getEncryptStringWithParameters:(id)params
 {

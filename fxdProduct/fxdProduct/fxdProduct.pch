@@ -55,6 +55,7 @@
 #import "GTMBase64.h"
 #import "CommonViewModel.h"
 #import <HHAlertView/HHAlertView.h>
+#import "FXD_MXVerifyManager.h"
 
 #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0

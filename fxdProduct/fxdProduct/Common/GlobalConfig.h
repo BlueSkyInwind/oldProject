@@ -165,6 +165,7 @@ UIKIT_EXTERN NSString * const       _sjRecord_url;                  //首借免�
 
 UIKIT_EXTERN NSString * const       _shebaoupload_url;                  //社保认证信息提交
 UIKIT_EXTERN NSString * const       _TheCreditCardupload_url;                  //信用卡信息提交
+UIKIT_EXTERN NSString * const       _TheInternetbank_url;                  //网银信息提交
 
 UIKIT_EXTERN NSString * const       _HighRankingStatus_url;                  //高级认证状态查询
 UIKIT_EXTERN NSString * const       _UserBasicInformation_url;               //基础认证状态查询

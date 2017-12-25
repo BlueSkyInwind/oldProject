@@ -171,6 +171,23 @@
         
     }];
 }
+/**
+ 网银接口
+
+ @param taskid 任务id
+ */
+-(void)TheInternetbankUpload:(NSString *)taskid{
+    NSDictionary * paramDic = @{@"task_id_":taskid};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_TheInternetbank_url]  isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
 
 -(void)obtainhighRankingStatus{
     

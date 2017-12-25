@@ -54,7 +54,10 @@
         return;
     }
     if (attributeDic == nil) {
-        attributeDic =@{NSFontAttributeName:[UIFont yx_systemFontOfSize:14],NSForegroundColorAttributeName:kUIColorFromRGB(0x808080)};
+        NSMutableParagraphStyle *ornamentParagraph = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        //设置text文字垂直居中
+        ornamentParagraph.alignment = NSTextAlignmentCenter;
+        attributeDic =@{NSFontAttributeName:[UIFont yx_systemFontOfSize:14],NSForegroundColorAttributeName:kUIColorFromRGB(0x808080),NSParagraphStyleAttributeName:ornamentParagraph};
     }
     self.fxdAlertView = [[FXDAlertView alloc]init:title content:contentAttri attributes:attributeDic cancelTitle:cancelTitle sureTitle:sureTitle];
     [self.fxdAlertView show];

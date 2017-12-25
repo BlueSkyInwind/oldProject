@@ -5,24 +5,40 @@
 //  Created by shenzw on 6/23/16.
 //  Copyright © 2016 shenzw. All rights reserved.
 //
-//  MXSDKVersion @"1.3.4"
+//  MXSDKVersion @"1.3.5.6"
 
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 @protocol MoxieSDKDelegate<NSObject>
-#pragma mark - SDK 代理回调接口
+#pragma mark - SDK 结果代理回调接口
+@required
 /**
  *  结果回调函数
  */
-@required
 -(void)receiveMoxieSDKResult:(NSDictionary*)resultDictionary;
 @optional
 /**
  *  自定义接口情况下，参数可加密自定义，默认情况不需要实现
  */
 -(NSString*)postWithBodyString:(NSString*)bodyString;
+@end
+
+#pragma mark - SDK 进度回调接口
+@protocol MoxieSDKProgressDelegate<NSObject>
+/**
+ *  进度回调
+ */
+-(void)updateProgress:(NSDictionary*)progressDictionary;
+@end
+
+#pragma mark - SDK 界面数据源接口
+@protocol MoxieSDKDataSource<NSObject>
+/**
+ *  自定义statusView
+ */
+-(UIView *)statusViewForMoxieSDK;
 @end
 
 
@@ -33,9 +49,17 @@
  */
 +(MoxieSDK*)shared;
 /**
+ *  打开SDK功能函数，同start
+ */
+-(void)startFunction __attribute__((deprecated("请使用start函数替代")));
+/**
  *  打开SDK功能函数，如果需要自定义登录，请设置loginCustom参数
  */
--(void)startFunction;
+-(void)start;
+/**
+ *  退出SDK
+ */
+-(void)finish;
 #pragma mark - SDK 基本参数（只读）
 /**
  * SDK版本号
@@ -47,6 +71,14 @@
  * 接受回调的代理
  */
 @property (nonatomic,weak) id <MoxieSDKDelegate> delegate;
+/**
+ * 自定义数据源，目前可自定义的有：statusView
+ */
+@property (nonatomic,weak) id <MoxieSDKDataSource> dataSource;
+/**
+ * 进度回调的代理
+ */
+@property (nonatomic,weak) id <MoxieSDKProgressDelegate> progressDelegate;
 /**
  * 来自controller，用来做push或present
  */
@@ -107,6 +139,10 @@
  */
 @property (nonatomic,assign) UIRectEdge edgesForExtendedLayout;
 /**
+ *  第一页的title
+ */
+@property (nonatomic,copy) NSString *title;
+/**
  *  返回按钮图片名
  */
 @property (nonatomic,copy) NSString *backImageName;
@@ -114,7 +150,6 @@
  *  刷新按钮图片名
  */
 @property (nonatomic,copy) NSString *refreshImageName;
-
 /**
  *  自定义图片加载路径（图片名请依旧保持目前的图片名）
  imagePath示例如下：[[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"MXResources"]
@@ -204,6 +239,10 @@
 @property (nonatomic,assign) BOOL carrier_editable;
 
 #pragma mark - SDK 自定义接口（默认不需要定制）
+/**
+ *  根据图片大小设置navBarButtonItem，默认为NO
+ */
+@property (nonatomic,assign) BOOL barButtonItemDisplayWithImageSize;
 /**
  * 打开SDK效果，是否使用Push（PUSH方式需要fromController包含navigationController）
  * 默认为YES

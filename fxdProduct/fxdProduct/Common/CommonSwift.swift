@@ -26,6 +26,9 @@ let SalaryLoan = "P001002"   //工薪贷平台
 let RapidLoan = "P001004"   //急速贷平台
 let DeriveRapidLoan = "P001006"   //急速贷衍生（30天）平台
 
+let WebView_Style = "<header><meta name='viewport' content='width=device-width, initial-scale=0.8, maximum-scale=0.8, minimum-scale=0.8, user-scalable=no'></header>"
+
+
 
 func obtainBarHeight_New(vc:UIViewController) -> Int{
     return Int(UIApplication.shared.statusBarFrame.size.height + (vc.navigationController?.navigationBar.frame.size.height)!)

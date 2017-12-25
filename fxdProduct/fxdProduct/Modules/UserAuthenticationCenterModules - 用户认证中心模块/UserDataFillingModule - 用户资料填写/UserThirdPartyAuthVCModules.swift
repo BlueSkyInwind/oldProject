@@ -16,26 +16,30 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
     var verifyStatus : String?
     var isMobileAuth : String?
     var isPhoneAuthType : Bool?
-
+    
     var tableView : UITableView?
     var thirdPartyAuthCell :ThirdPartyAuthTableViewCell?
-    let dataArr : Array<String> = ["人脸识别","手机认证","芝麻信用"]
+    let dataArr : Array<String> = ["人脸识别","手机认证","芝麻信用","工资流水"]
+
+    var userThirdPartCM:UserThirdPartCertificationModel?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.navigationItem.title = "三方认证"
+        userThirdPartCM = UserThirdPartCertificationModel.init()
         isZmxyAuth = "3"
         isMobileAuth = "0"
         verifyStatus = "0"
         addBackItem()
         setupUI()
-        
      }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ThirdPartCertification()
+        self.MXTask()
     }
     
     func setupUI() -> Void {
@@ -47,6 +51,21 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
             make.edges.equalTo(self.view)
         })
         tableView?.register(ThirdPartyAuthTableViewCell.self, forCellReuseIdentifier: "ThirdPartyAuthTableViewCell")
+    }
+    
+    func MXTask()  {
+        FXD_MXVerifyManager.sharedInteraction().configMoxieSDKViewcontroller(self) { (result) in
+            print(result ?? "")
+            let code = (result as! [String : String])["code"]
+            let taskType = (result as! [String : String])["taskType"]
+            let taskId = (result as! [String : String])["taskId"]
+            let loginDone = (result as! [String : String])["loginDone"]
+            if code == "2" && loginDone == "1" {
+                self.TheInternetBankupload(taskid: taskId!)
+            }else if code == "1" {
+                self.TheInternetBankupload(taskid: taskId!)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,63 +85,78 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
         switch indexPath.row {
         case 0:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
-            if verifyStatus == "2" || verifyStatus == "3"{
-                thirdPartyAuthCell?.statusLabel?.text = "已完成"
-            }else{
-                thirdPartyAuthCell?.statusLabel?.text = "未完成"
-            }
+            thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.faceIdentityDesc == nil ? "未完成":userThirdPartCM?.faceIdentityDesc
+//            if verifyStatus == "2" || verifyStatus == "3"{
+//                thirdPartyAuthCell?.statusLabel?.text = "已完成"
+//            }else{
+//                thirdPartyAuthCell?.statusLabel?.text = "未完成"
+//            }
             break
         case 1:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
-            if isMobileAuth == "2" {
-                thirdPartyAuthCell?.statusLabel?.text = "已完成"
-            }else{
-                thirdPartyAuthCell?.statusLabel?.text = "未完成"
-            }
+            thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.telephoneDesc == nil ? "未完成":userThirdPartCM?.telephoneDesc
+
+//            if isMobileAuth == "2" {
+//                thirdPartyAuthCell?.statusLabel?.text = "已完成"
+//            }else{
+//                thirdPartyAuthCell?.statusLabel?.text = "未完成"
+//            }
             break
         case 2:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
-            if isZmxyAuth == "2" {
-                thirdPartyAuthCell?.statusLabel?.text = "已完成"
-            }else if isZmxyAuth == "1" {
-                thirdPartyAuthCell?.statusLabel?.text = "认证中"
-            }else if isZmxyAuth == "3" {
-                thirdPartyAuthCell?.statusLabel?.text = "未完成"
-            }
+            thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.zmIdentityDesc == nil ? "未完成":userThirdPartCM?.zmIdentityDesc
+
+//            if isZmxyAuth == "2" {
+//                thirdPartyAuthCell?.statusLabel?.text = "已完成"
+//            }else if isZmxyAuth == "1" {
+//                thirdPartyAuthCell?.statusLabel?.text = "认证中"
+//            }else if isZmxyAuth == "3" {
+//                thirdPartyAuthCell?.statusLabel?.text = "未完成"
+//            }
             break
+        case 3:
+            thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
+            thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.salaryDesc == nil ? "未完成":userThirdPartCM?.salaryDesc
+//            if isZmxyAuth == "2" {
+//                thirdPartyAuthCell?.statusLabel?.text = "已完成"
+//            }else if isZmxyAuth == "1" {
+//                thirdPartyAuthCell?.statusLabel?.text = "认证中"
+//            }else if isZmxyAuth == "3" {
+//                thirdPartyAuthCell?.statusLabel?.text = "未完成"
+//            }
+            break
+            
         default:
             break
         }
-        if thirdPartyAuthCell?.statusLabel?.text == "已完成" {
+        
+        if thirdPartyAuthCell?.statusLabel?.text == "已认证" {
             thirdPartyAuthCell?.statusLabel?.textColor = UIColor.init(red: 42/255, green: 155/255, blue: 234/255, alpha: 1)
         }else{
             thirdPartyAuthCell?.statusLabel?.textColor = UIColor.init(red: 159/255, green: 160/255, blue: 162/255, alpha: 1)
         }
         return thirdPartyAuthCell!
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row{
         case 0:
-            if verifyStatus == "2" || verifyStatus == "3"{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "您已完成认证")
+            if userThirdPartCM?.faceIdentity == "2" || userThirdPartCM?.faceIdentity == "3"{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.faceIdentityDesc)
                 return;
             }
             let faceIdentiCreditVC  = UserFaceIdentiVCModules.init()
-            faceIdentiCreditVC.verifyStatus = verifyStatus
+            faceIdentiCreditVC.verifyStatus = userThirdPartCM?.faceIdentity
             self.navigationController?.pushViewController(faceIdentiCreditVC, animated: true)
             faceIdentiCreditVC.identifyResultStatus = { [weak self] (status) -> () in
 
             }
             break
         case 1:
-            /*
-            guard mobilePhoneOperatorChannels() else {
-                return
-            }
-            */
-            if isMobileAuth == "2" {
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "您已完成认证")
+
+            if userThirdPartCM?.telephone == "2" || userThirdPartCM?.telephone == "3"{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.telephoneDesc)
                 return;
             }
             let certificationVC = UserMobileAuthenticationVCModules.init()
@@ -131,16 +165,19 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
             self.navigationController?.pushViewController(certificationVC, animated: true)
             break
         case 2:
-            if isZmxyAuth == "2" {
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "您已完成认证")
+            if userThirdPartCM?.zmIdentityEdit == "1" {
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.zmIdentityDesc)
                 return;
-            }
-            if isZmxyAuth == "1" {
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "您正在认证中，请勿重复认证!")
-                return
             }
             let sesameCreditVC  = SesameCreditCertificationVCModules.init()
             self.navigationController?.pushViewController(sesameCreditVC, animated: true)
+            break
+        case 3:
+            if userThirdPartCM?.salaryEdit == "1" {
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.salaryDesc)
+                return;
+            }
+             FXD_MXVerifyManager.sharedInteraction().internetbank()
             break
         default:
             break
@@ -179,21 +216,39 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
     //MARK: 三方认证状态
     func ThirdPartCertification() -> Void{
         let  userDataVM =  UserDataViewModel()
-        userDataVM.setBlockWithReturn({ (result) in
+        userDataVM.setBlockWithReturn({[weak self] (result) in
            let baseResult = try! BaseResultModel.init(dictionary: result as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
                  let userThirdPartCertificationModel = try! UserThirdPartCertificationModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
-                self.verifyStatus = userThirdPartCertificationModel.faceIdentity;
-                self.isMobileAuth = userThirdPartCertificationModel.telephone;
-                self.isZmxyAuth = userThirdPartCertificationModel.zmIdentity;
-                self.tableView?.reloadData()
+                self?.userThirdPartCM = userThirdPartCertificationModel
+//                self.verifyStatus = userThirdPartCertificationModel.faceIdentity;
+//                self.isMobileAuth = userThirdPartCertificationModel.telephone;
+//                self.isZmxyAuth = userThirdPartCertificationModel.zmIdentity;
+                self?.tableView?.reloadData()
             }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
         }) {
         }
         userDataVM.obtainthirdPartCertificationStatus()
     }
+    
+    func TheInternetBankupload(taskid : String)  {
+        let  userDataVM = UserDataViewModel.init()
+        userDataVM.setBlockWithReturn({[weak self] (result) in
+            let baseResult = try! BaseResultModel.init(dictionary: result as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                self?.ThirdPartCertification()
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        userDataVM.theInternetbankUpload(taskid)
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

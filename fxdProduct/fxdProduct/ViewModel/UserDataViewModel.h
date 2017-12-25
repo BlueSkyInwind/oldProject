@@ -57,6 +57,13 @@
 -(void)TheCreditCardInfoUpload:(NSString *)taskid;
 
 /**
+ 网银接口
+ 
+ @param taskid 任务id
+ */
+-(void)TheInternetbankUpload:(NSString *)taskid;
+
+/**
  获取状态
  */
 -(void)obtainhighRankingStatus;
