@@ -287,9 +287,11 @@
             break;
         case 1:
         {
-        
-            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-            [self.navigationController pushViewController:repayRecord animated:true];
+            UserDataAuthenticationListVCModules *userDataVC = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
+            [self.navigationController pushViewController:userDataVC animated:YES];
+//
+//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+//            [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
         case 2:

@@ -68,5 +68,5 @@
 #import "MessageViewModel.h"
 #import "ShowMsgPreviewModel.h"
 #import "FXD_AlertViewCust.h"
-
+#import "DataDisplayCell.h"
 #endif /* fxdProduct_Bridging_Header_h */
