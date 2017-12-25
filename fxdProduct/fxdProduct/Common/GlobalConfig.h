@@ -202,7 +202,7 @@ UIKIT_EXTERN NSString * const       _CountStationLetterMsg_url;              //�
 UIKIT_EXTERN NSString * const       _ShowMsgPreview_url;                     //站内信未读已读列表
 UIKIT_EXTERN NSString * const       _DiversionProStatics_url;                //导流产品埋点接口
 UIKIT_EXTERN NSString * const       _ExperienceValue_url;                    //经验值体系-展示等级
-
+UIKIT_EXTERN NSString * const       _NewSummary_url;                         //新版首页接口
 
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码

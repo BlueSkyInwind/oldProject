@@ -1159,6 +1159,8 @@
 		CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
 		CC6CBA841F5AB9620015C92C /* ApplicationStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */; };
 		CC6CBA851F5AB9620015C92C /* ApplicationStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */; };
+		CC6E0F171FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
+		CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
 		CC6F06731F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */; };
 		CC6F06741F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */; };
 		CC6F06761F74E6F900FA889E /* OptionalRapidLoanApplicationVCModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06751F74E6F900FA889E /* OptionalRapidLoanApplicationVCModules.swift */; };
@@ -2332,6 +2334,8 @@
 		CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseThirdView.swift; sourceTree = "<group>"; };
 		CC6CBA821F5AB9620015C92C /* ApplicationStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationStatusModel.h; sourceTree = "<group>"; };
 		CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationStatusModel.m; sourceTree = "<group>"; };
+		CC6E0F151FF0942400D32773 /* FXD_HomeProductListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_HomeProductListModel.h; sourceTree = "<group>"; };
+		CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_HomeProductListModel.m; sourceTree = "<group>"; };
 		CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidLoanApplicationcConfirmation.swift; sourceTree = "<group>"; };
 		CC6F06751F74E6F900FA889E /* OptionalRapidLoanApplicationVCModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalRapidLoanApplicationVCModules.swift; sourceTree = "<group>"; };
 		CC6F06781F74F26B00FA889E /* PickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickView.swift; sourceTree = "<group>"; };
@@ -5322,6 +5326,8 @@
 			children = (
 				CCFA2DC81EB02FFE0071F46B /* HomeProductList.h */,
 				CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */,
+				CC6E0F151FF0942400D32773 /* FXD_HomeProductListModel.h */,
+				CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */,
 			);
 			path = HomeProductList;
 			sourceTree = "<group>";
@@ -6260,6 +6266,7 @@
 				CCDEDF5C1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */,
 				849459CD1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */,
 				634830FE1CBCA1A90005C4CD /* RegionCodeExt.m in Sources */,
+				CC6E0F171FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */,
 				CC8BC9541FEA0374008E135E /* HomePageCell.swift in Sources */,
 				635B0BE11DF157EA008EAFD1 /* DetailViewController.m in Sources */,
 				63FF48401B6F0322009E384C /* HomePageVCModules.m in Sources */,
@@ -6779,6 +6786,7 @@
 				CC0DFAB51EA5B1090024841A /* LOTAnimatableShapeValue.m in Sources */,
 				849459CE1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */,
 				CC0DFAB61EA5B1090024841A /* FXD_AppUpdateChecker.m in Sources */,
+				CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */,
 				CC8BC9551FEA0374008E135E /* HomePageCell.swift in Sources */,
 				CC0DFAB71EA5B1090024841A /* LewPopupBackgroundView.m in Sources */,
 				CC0DFAB91EA5B1090024841A /* RegionCodeExt.m in Sources */,

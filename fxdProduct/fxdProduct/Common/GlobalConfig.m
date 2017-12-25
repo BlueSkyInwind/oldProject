@@ -335,28 +335,31 @@ NSString * const    _saveNewPassword_url    =    @"apigw/client/operation/savePa
 NSString * const    _modificationPassword_url    =    @"apigw/client/operation/updatePayPassword";
 
 //个人中心（优惠券,现金红包,账户余额）
-NSString * const    _PersonalCenterWithdrawCashAPI_url    =    @"apigw/client/operation/withdrawCashAPI/personalCenter";
+NSString * const    _PersonalCenterWithdrawCashAPI_url    =    @"operation/withdrawCashAPI/personalCenter";
 
 //现金红包,账户余额（点击列表操作展示提现页）
-NSString * const    _LoadWithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/loadWithdrawCash";
+NSString * const    _LoadWithdrawCash_url    =    @"operation/withdrawCashAPI/loadWithdrawCash";
 
 //提现
-NSString * const    _WithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/withdrawCash";
+NSString * const    _WithdrawCash_url    =    @"operation/withdrawCashAPI/withdrawCash";
 
 //导流产品埋点接口
-NSString * const    _DiversionProStatics_url    =    @"apigw/client/market/operation/ProductClickStatics";
+NSString * const    _DiversionProStatics_url    =    @"market/operation/ProductClickStatics";
 
 //校验提现条件
-NSString * const    _CheckWithdrawCash_url    =    @"apigw/client/operation/withdrawCashAPI/checkWithdrawCash";
+NSString * const    _CheckWithdrawCash_url    =    @"operation/withdrawCashAPI/checkWithdrawCash";
 
 //现金红包收提明细
-NSString * const    _WithdrawCashDetail_url    =    @"apigw/client/operation/withdrawCashAPI/queryDetail";
+NSString * const    _WithdrawCashDetail_url    =    @"operation/withdrawCashAPI/queryDetail";
 
 //站内信用户未读信息统计接口
 NSString * const    _CountStationLetterMsg_url    =    @"operation/countStationLetterMsg";
 
 //站内信未读已读列表
-NSString * const    _ShowMsgPreview_url    =    @"apigw/client/operation/showMsgPreview";
+NSString * const    _ShowMsgPreview_url    =    @"operation/showMsgPreview";
+
+//新版首页接口
+NSString * const    _NewSummary_url    =    @"new/summary";
 
 #pragma mark - 合规接口
 

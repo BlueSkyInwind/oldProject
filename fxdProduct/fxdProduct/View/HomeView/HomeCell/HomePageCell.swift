@@ -34,36 +34,45 @@ import Masonry
     
 }
 
+
 class HomePageCell: UITableViewCell {
     
     @objc weak var delegate: HomePageCellDelegate?
-    
+
+    @objc var type : String?{
+        didSet(newValue){
+            
+            setCellType(type: type!)
+        }
+    }
+    //产品数据
+    @objc var homeProductListModel = FXD_HomeProductListModel()
     //滑动标识的钱
     @objc var defaultMoneyLabel : UILabel?
     //滑动标识的时间
     @objc var defaultTimeLabel : UILabel?
-    //中间状态第一条状态标题
-    @objc var loanTopLabel : UILabel?
-    //中间状态第一条状态内容
-    @objc var loanTopContentLabel : UILabel?
-    //中间状态第二条状态标题
-    @objc var loanBottomLabel : UILabel?
-    //中间状态时间
-    @objc var loanTimeLabel : UILabel?
-    //量子互助导流View
-    @objc var loanBottomBgView : UIView?
-    //可借额度
-    @objc var quotaLabel : UILabel?
-    
-    @objc var payTipLabel : UILabel?
-    //还款的月份
-    @objc var monthLabel : UILabel?
-    //还款的日期
-    @objc var dayLabel : UILabel?
-    //还款的money
-    @objc var payMoneyLabel : UILabel?
-    //逾期money
-    @objc var overdueMoneyLabel : UILabel?
+//    //中间状态第一条状态标题
+//    @objc var loanTopLabel : UILabel?
+//    //中间状态第一条状态内容
+//    @objc var loanTopContentLabel : UILabel?
+//    //中间状态第二条状态标题
+//    @objc var loanBottomLabel : UILabel?
+//    //中间状态时间
+//    @objc var loanTimeLabel : UILabel?
+//    //量子互助导流View
+//    @objc var loanBottomBgView : UIView?
+//    //可借额度
+//    @objc var quotaLabel : UILabel?
+//
+//    @objc var payTipLabel : UILabel?
+//    //还款的月份
+//    @objc var monthLabel : UILabel?
+//    //还款的日期
+//    @objc var dayLabel : UILabel?
+//    //还款的money
+//    @objc var payMoneyLabel : UILabel?
+//    //逾期money
+//    @objc var overdueMoneyLabel : UILabel?
     //复选框
     @objc var checkBoxBtn : UIButton?
     
@@ -82,7 +91,8 @@ class HomePageCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        repayImmediatelyView()
+        type = "1"
+//        repayImmediatelyView()
         
     }
     required init?(coder aDecoder: NSCoder) {
@@ -93,23 +103,29 @@ class HomePageCell: UITableViewCell {
 
 extension HomePageCell {
     
-//    //默认的cell
-//    fileprivate func setCellType(CellType : HomePageCellType){
-//
-//        for view in self.subviews {
-//            view.removeFromSuperview()
-//        }
-//
-//        let type = CellType.cellType
-//        switch type! {
-//        case .Default:
-//            defaultCell()
-//        case .Quota:
-//            quotaCell()
-//        case .LoanProcessCell:
-//            loanProcessCell()
-//        }
-//    }
+    //默认的cell
+    fileprivate func setCellType(type : String){
+
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+
+        let type = Int(type)
+        switch type {
+        case 1?:
+            defaultCell()
+        case 2?:
+            quotaCell()
+        case 3?:
+            loanProcessCell()
+        case 4?:
+            repayImmediatelyView()
+        case .none:
+            break
+        case .some(_):
+            break
+        }
+    }
 }
 
 extension HomePageCell {
@@ -352,93 +368,102 @@ extension HomePageCell {
             make.left.equalTo(self).offset(20)
         }
         
-        loanTopLabel = UILabel()
-        loanTopLabel?.textColor = UI_MAIN_COLOR
-        loanTopLabel?.font = UIFont.systemFont(ofSize: 14)
-        self.addSubview(loanTopLabel!)
-        loanTopLabel?.snp.makeConstraints({ (make) in
+        let loanTopLabel = UILabel()
+        loanTopLabel.text = homeProductListModel.handingAndFailText.currentStatus
+        loanTopLabel.textColor = UI_MAIN_COLOR
+        loanTopLabel.font = UIFont.systemFont(ofSize: 14)
+        self.addSubview(loanTopLabel)
+        loanTopLabel.snp.makeConstraints({ (make) in
             make.top.equalTo(topImageView.snp.top).offset(0)
             make.left.equalTo(topImageView.snp.right).offset(20)
             make.height.equalTo(14)
         })
         
-        loanTopContentLabel = UILabel()
-        loanTopContentLabel?.textColor = MIDDLE_LINE_COLOR
-        loanTopContentLabel?.numberOfLines = 0
-        loanTopContentLabel?.font = UIFont.systemFont(ofSize: 12)
-        self.addSubview(loanTopContentLabel!)
-        loanTopContentLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo((loanTopLabel?.snp.bottom)!).offset(10)
+        let loanTopContentLabel = UILabel()
+        loanTopContentLabel.text = homeProductListModel.handingAndFailText.currentStatusTips
+        loanTopContentLabel.textColor = MIDDLE_LINE_COLOR
+        loanTopContentLabel.numberOfLines = 0
+        loanTopContentLabel.font = UIFont.systemFont(ofSize: 12)
+        self.addSubview(loanTopContentLabel)
+        loanTopContentLabel.snp.makeConstraints({ (make) in
+            make.top.equalTo(loanTopLabel.snp.bottom).offset(10)
             make.left.equalTo(lineView.snp.right).offset(25)
             make.height.equalTo(60)
             make.right.equalTo(-22)
         })
         
-        loanBottomLabel = UILabel()
-        loanBottomLabel?.textColor = RedPacketBottomBtn_COLOR
-        loanBottomLabel?.font = UIFont.systemFont(ofSize: 13)
-        self.addSubview(loanBottomLabel!)
-        loanBottomLabel?.snp.makeConstraints({ (make) in
+        let loanBottomLabel = UILabel()
+        loanBottomLabel.text = homeProductListModel.handingAndFailText.preStatus
+        loanBottomLabel.textColor = RedPacketBottomBtn_COLOR
+        loanBottomLabel.font = UIFont.systemFont(ofSize: 13)
+        self.addSubview(loanBottomLabel)
+        loanBottomLabel.snp.makeConstraints({ (make) in
             make.top.equalTo(bottomImageView.snp.top).offset(0)
             make.left.equalTo(bottomImageView.snp.right).offset(20)
             make.height.equalTo(20)
         })
         
-        loanTimeLabel = UILabel()
-        loanTimeLabel?.textColor = MIDDLE_LINE_COLOR
-        loanTimeLabel?.font = UIFont.systemFont(ofSize: 12)
-        loanTimeLabel?.textAlignment = .right
-        self.addSubview(loanTimeLabel!)
-        loanTimeLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo((loanBottomLabel?.snp.top)!).offset(0)
+        let loanTimeLabel = UILabel()
+        loanTimeLabel.text = homeProductListModel.handingAndFailText.createDate
+        loanTimeLabel.textColor = MIDDLE_LINE_COLOR
+        loanTimeLabel.font = UIFont.systemFont(ofSize: 12)
+        loanTimeLabel.textAlignment = .right
+        self.addSubview(loanTimeLabel)
+        loanTimeLabel.snp.makeConstraints({ (make) in
+            make.top.equalTo(loanBottomLabel.snp.top).offset(0)
             make.right.equalTo(self).offset(-22)
             make.height.equalTo(20)
         })
         
-        loanBottomBgView = UIView()
-        self.addSubview(loanBottomBgView!)
-        loanBottomBgView?.snp.makeConstraints({ (make) in
-            make.left.equalTo(self).offset(0)
-            make.right.equalTo(self).offset(0)
-            make.height.equalTo(100)
-            make.bottom.equalTo(self).offset(-50)
-        })
-        
-        let bottomDesclabel = UILabel()
-        bottomDesclabel.textColor = ORANGE_COLOR
-        bottomDesclabel.font = UIFont.systemFont(ofSize: 14)
-        bottomDesclabel.textAlignment = .center
-        bottomDesclabel.text = "30万大病保障,100万人的共同之选"
-        loanBottomBgView?.addSubview(bottomDesclabel)
-        bottomDesclabel.snp.makeConstraints { (make) in
-            make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo((loanBottomBgView?.snp.top)!).offset(10)
-            make.height.equalTo(20)
-        }
-        
-        let bottomBtn = UIButton()
-        bottomBtn.setTitle("点击立即领取", for: .normal)
-        bottomBtn.setTitleColor(UIColor.white, for: .normal)
-        bottomBtn.setBackgroundImage(UIImage(named:"liangzihuzhu"), for: .normal)
-        bottomBtn.addTarget(self, action: #selector(bottomClick), for: .touchUpInside)
-        loanBottomBgView?.addSubview(bottomBtn)
-        bottomBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(bottomDesclabel.snp.bottom).offset(14)
-            make.width.equalTo(205)
-            make.centerX.equalTo(self.snp.centerX)
-        }
-        
-        if UI_IS_IPONE6 {
-            loanBottomBgView?.snp.updateConstraints({ (make) in
-                make.bottom.equalTo(self).offset(-10)
-            })
-        }
-        
-        if UI_IS_IPONE5 {
+        if homeProductListModel.flag != "12" {
             
-            loanBottomBgView?.snp.updateConstraints({ (make) in
-                make.bottom.equalTo(self).offset(-15)
+            let loanBottomBgView = UIView()
+            self.addSubview(loanBottomBgView)
+            loanBottomBgView.snp.makeConstraints({ (make) in
+                make.left.equalTo(self).offset(0)
+                make.right.equalTo(self).offset(0)
+                make.height.equalTo(100)
+                make.bottom.equalTo(self).offset(-50)
             })
+            
+            let bottomDesclabel = UILabel()
+            bottomDesclabel.textColor = ORANGE_COLOR
+            bottomDesclabel.font = UIFont.systemFont(ofSize: 14)
+            bottomDesclabel.textAlignment = .center
+            bottomDesclabel.text = "30万大病保障,100万人的共同之选"
+            loanBottomBgView.addSubview(bottomDesclabel)
+            bottomDesclabel.snp.makeConstraints { (make) in
+                make.centerX.equalTo(self.snp.centerX)
+                make.top.equalTo(loanBottomBgView.snp.top).offset(10)
+                make.height.equalTo(20)
+            }
+            
+            let bottomBtn = UIButton()
+            bottomBtn.setTitle("点击立即领取", for: .normal)
+            bottomBtn.setTitleColor(UIColor.white, for: .normal)
+            bottomBtn.setBackgroundImage(UIImage(named:"liangzihuzhu"), for: .normal)
+            bottomBtn.addTarget(self, action: #selector(bottomClick), for: .touchUpInside)
+            loanBottomBgView.addSubview(bottomBtn)
+            bottomBtn.snp.makeConstraints { (make) in
+                make.top.equalTo(bottomDesclabel.snp.bottom).offset(14)
+                make.width.equalTo(205)
+                make.centerX.equalTo(self.snp.centerX)
+            }
+            if UI_IS_IPONE6 {
+                loanBottomBgView.snp.updateConstraints({ (make) in
+                    make.bottom.equalTo(self).offset(-10)
+                })
+            }
+            
+            if UI_IS_IPONE5 {
+                loanBottomBgView.snp.updateConstraints({ (make) in
+                    make.bottom.equalTo(self).offset(-15)
+                })
+            }
+            
+        }
+    
+        if UI_IS_IPONE5 {
             
             topImageView.snp.updateConstraints({ (make) in
                 make.top.equalTo(self).offset(55)
@@ -450,7 +475,7 @@ extension HomePageCell {
     //可借额度，我要借款
     
     fileprivate func quotaCell(){
-        
+
         let bgView = UIView()
         self.addSubview(bgView)
         bgView.snp.makeConstraints { (make) in
@@ -472,15 +497,15 @@ extension HomePageCell {
             make.height.equalTo(20)
         }
         
-        quotaLabel = UILabel()
-        quotaLabel?.textColor = LOAN_QUOTA_COLOR
-        quotaLabel?.font = UIFont.systemFont(ofSize: 25)
-        quotaLabel?.textAlignment = .center
-        bgView.addSubview(quotaLabel!)
-        quotaLabel?.snp.makeConstraints({ (make) in
+        let quotaLabel = UILabel()
+        quotaLabel.text = homeProductListModel.drawInfo.amount
+        quotaLabel.textColor = LOAN_QUOTA_COLOR
+        quotaLabel.font = UIFont.systemFont(ofSize: 25)
+        quotaLabel.textAlignment = .center
+        bgView.addSubview(quotaLabel)
+        quotaLabel.snp.makeConstraints({ (make) in
             make.top.equalTo(topLabel.snp.bottom).offset(41)
             make.centerX.equalTo(bgView.snp.centerX)
-//            make.centerY.equalTo(bgView.snp.centerY)
             make.height.equalTo(25)
         })
         
@@ -656,6 +681,7 @@ extension HomePageCell {
     //立即还款
     fileprivate func repayImmediatelyView(){
         
+        
         let tipImageView = UIImageView()
         tipImageView.image = UIImage(named:"paytip")
         self.addSubview(tipImageView)
@@ -665,12 +691,12 @@ extension HomePageCell {
             make.right.equalTo(self).offset(0)
         }
         
-        payTipLabel = UILabel()
-        payTipLabel?.text = "借款到账: 2017-12-12,建设银行尾号5439,成功借款3000元"
-        payTipLabel?.textColor = UI_MAIN_COLOR
-        payTipLabel?.font = UIFont.systemFont(ofSize: 12)
-        tipImageView.addSubview(payTipLabel!)
-        payTipLabel?.snp.makeConstraints({ (make) in
+        let payTipLabel = UILabel()
+        payTipLabel.text = "借款到账: 2017-12-12,建设银行尾号5439,成功借款3000元"
+        payTipLabel.textColor = UI_MAIN_COLOR
+        payTipLabel.font = UIFont.systemFont(ofSize: 12)
+        tipImageView.addSubview(payTipLabel)
+        payTipLabel.snp.makeConstraints({ (make) in
             make.left.equalTo(tipImageView.snp.left).offset(22)
             make.centerY.equalTo(tipImageView.snp.centerY)
             make.right.equalTo(tipImageView.snp.right).offset(-22)
@@ -795,12 +821,12 @@ extension HomePageCell {
             make.top.equalTo(tipLabel.snp.bottom).offset(47)
         }
         
-        quotaLabel = UILabel()
-        quotaLabel?.textAlignment = .center
-        quotaLabel?.textColor = UIColor.black
-        quotaLabel?.font = UIFont.systemFont(ofSize: 25)
-        self.addSubview(quotaLabel!)
-        quotaLabel?.snp.makeConstraints({ (make) in
+        let quotaLabel = UILabel()
+        quotaLabel.textAlignment = .center
+        quotaLabel.textColor = UIColor.black
+        quotaLabel.font = UIFont.systemFont(ofSize: 25)
+        self.addSubview(quotaLabel)
+        quotaLabel.snp.makeConstraints({ (make) in
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(titleLabel.snp.bottom).offset(28)
         })
@@ -815,7 +841,7 @@ extension HomePageCell {
         withdrawMoneyImmediatelyBtn.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(28)
             make.right.equalTo(self).offset(-28)
-            make.top.equalTo((quotaLabel?.snp.bottom)!).offset(47)
+            make.top.equalTo(quotaLabel.snp.bottom).offset(47)
             make.height.equalTo(55)
         }
         
@@ -870,12 +896,12 @@ extension HomePageCell{
             make.centerY.equalTo(timeView.snp.centerY)
         }
         
-        monthLabel = UILabel()
-        monthLabel?.text = "1"
-        monthLabel?.textColor = UI_MAIN_COLOR
-        monthLabel?.font = UIFont.systemFont(ofSize: 20)
-        monthImageView.addSubview(monthLabel!)
-        monthLabel?.snp.makeConstraints({ (make) in
+        let monthLabel = UILabel()
+        monthLabel.text = "1"
+        monthLabel.textColor = UI_MAIN_COLOR
+        monthLabel.font = UIFont.systemFont(ofSize: 20)
+        monthImageView.addSubview(monthLabel)
+        monthLabel.snp.makeConstraints({ (make) in
             make.centerX.equalTo(monthImageView.snp.centerX)
             make.top.equalTo(monthImageView.snp.top).offset(21)
         })
@@ -898,12 +924,12 @@ extension HomePageCell{
             make.left.equalTo(label1.snp.right).offset(16)
         }
         
-        dayLabel = UILabel()
-        dayLabel?.textColor = UI_MAIN_COLOR
-        dayLabel?.text = "13"
-        dayLabel?.font = UIFont.systemFont(ofSize: 20)
-        dayImageView.addSubview(dayLabel!)
-        dayLabel?.snp.makeConstraints({ (make) in
+        let dayLabel = UILabel()
+        dayLabel.textColor = UI_MAIN_COLOR
+        dayLabel.text = "13"
+        dayLabel.font = UIFont.systemFont(ofSize: 20)
+        dayImageView.addSubview(dayLabel)
+        dayLabel.snp.makeConstraints({ (make) in
             make.centerX.equalTo(dayImageView.snp.centerX)
             make.top.equalTo(dayImageView.snp.top).offset(21)
         })
@@ -928,13 +954,13 @@ extension HomePageCell{
             make.height.equalTo(2)
         }
         
-        payMoneyLabel = UILabel()
-        payMoneyLabel?.text = "700元"
-        payMoneyLabel?.textColor = UI_MAIN_COLOR
-        payMoneyLabel?.font = UIFont.systemFont(ofSize: 25)
-        payMoneyLabel?.textAlignment = .center
-        view.addSubview(payMoneyLabel!)
-        payMoneyLabel?.snp.makeConstraints({ (make) in
+        let payMoneyLabel = UILabel()
+        payMoneyLabel.text = "700元"
+        payMoneyLabel.textColor = UI_MAIN_COLOR
+        payMoneyLabel.font = UIFont.systemFont(ofSize: 25)
+        payMoneyLabel.textAlignment = .center
+        view.addSubview(payMoneyLabel)
+        payMoneyLabel.snp.makeConstraints({ (make) in
             make.centerX.equalTo(view.snp.centerX)
             make.top.equalTo(lineView.snp.bottom).offset(22)
         })
@@ -947,7 +973,7 @@ extension HomePageCell{
         view.addSubview(payMoneyDesc)
         payMoneyDesc.snp.makeConstraints { (make) in
             make.centerX.equalTo(view.snp.centerX)
-            make.top.equalTo((payMoneyLabel?.snp.bottom)!).offset(14)
+            make.top.equalTo(payMoneyLabel.snp.bottom).offset(14)
         }
         
         return view
@@ -976,12 +1002,12 @@ extension HomePageCell{
             make.left.equalTo(timeView.snp.left).offset(5)
         }
         
-        dayLabel = UILabel()
-        dayLabel?.textColor = UI_MAIN_COLOR
-        dayLabel?.text = "13"
-        dayLabel?.font = UIFont.systemFont(ofSize: 20)
-        dayImageView.addSubview(dayLabel!)
-        dayLabel?.snp.makeConstraints({ (make) in
+        let dayLabel = UILabel()
+        dayLabel.textColor = UI_MAIN_COLOR
+        dayLabel.text = "13"
+        dayLabel.font = UIFont.systemFont(ofSize: 20)
+        dayImageView.addSubview(dayLabel)
+        dayLabel.snp.makeConstraints({ (make) in
             make.centerX.equalTo(dayImageView.snp.centerX)
             make.top.equalTo(dayImageView.snp.top).offset(21)
         })
@@ -1005,17 +1031,89 @@ extension HomePageCell{
             make.top.equalTo(timeView.snp.bottom).offset(17)
             make.height.equalTo(2)
         }
-        
-        overdueMoneyLabel = UILabel()
-        overdueMoneyLabel?.text = "700 + 35.55 = 735.5元"
-        overdueMoneyLabel?.textColor = UIColor.black
-        overdueMoneyLabel?.font = UIFont.systemFont(ofSize: 17)
-        overdueMoneyLabel?.textAlignment = .center
-        view.addSubview(overdueMoneyLabel!)
-        overdueMoneyLabel?.snp.makeConstraints({ (make) in
+    
+        let moneyView = UIView()
+//        moneyView.backgroundColor = UIColor.red
+        moneyView.backgroundColor = UIColor.clear
+        view.addSubview(moneyView)
+        moneyView.snp.makeConstraints { (make) in
             make.centerX.equalTo(view.snp.centerX)
-            make.top.equalTo(lineView.snp.bottom).offset(26)
-        })
+            make.width.equalTo(260)
+            make.height.equalTo(20)
+            make.top.equalTo(lineView.snp.bottom).offset(40)
+        }
+        
+        let leftMoneyLabel = UILabel()
+        //        leftMoneyLabel.text = homeProductListModel.overdueInfo.stagingAmount
+        leftMoneyLabel.text = "700"
+        leftMoneyLabel.textColor = TITLE_COLOR
+        leftMoneyLabel.font = UIFont.systemFont(ofSize: 17)
+        leftMoneyLabel.textAlignment = .left
+        moneyView.addSubview(leftMoneyLabel)
+        leftMoneyLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(moneyView.snp.left).offset(0)
+            make.centerY.equalTo(moneyView.snp.centerY)
+//            make.top.equalTo(overMoneyLabel.snp.top).offset(0)
+        }
+        
+        let symbolLabel = UILabel()
+        symbolLabel.text = "+"
+        symbolLabel.textColor = TITLE_COLOR
+        symbolLabel.font = UIFont.systemFont(ofSize: 17)
+        moneyView.addSubview(symbolLabel)
+        symbolLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(leftMoneyLabel.snp.right).offset(10)
+//            make.top.equalTo(leftMoneyLabel.snp.top).offset(0)
+            make.centerY.equalTo(moneyView.snp.centerY)
+        }
+        
+        
+        let overMoneyLabel = UILabel()
+        //        overMoneyLabel.text = homeProductListModel.overdueInfo.feeAmount
+        overMoneyLabel.text = "35.55"
+        overMoneyLabel.textColor = TITLE_COLOR
+        overMoneyLabel.font = UIFont.systemFont(ofSize: 17)
+        overMoneyLabel.textAlignment = .left
+        moneyView.addSubview(overMoneyLabel)
+//        view.addSubview(overMoneyLabel)
+        overMoneyLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(moneyView.snp.centerY)
+            make.left.equalTo(symbolLabel.snp.right).offset(20)
+//            make.top.equalTo(lineView.snp.bottom).offset(40)
+//            make.centerX.equalTo(view.snp.centerX)
+//            make.width.equalTo(70)
+        }
+        
+
+        let equalLabel = UILabel()
+        equalLabel.textColor = TITLE_COLOR
+        equalLabel.text = "="
+        equalLabel.font = UIFont.systemFont(ofSize: 17)
+        moneyView.addSubview(equalLabel)
+        equalLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(overMoneyLabel.snp.right).offset(10)
+//            make.top.equalTo(symbolLabel.snp.top).offset(0)
+            make.centerY.equalTo(moneyView.snp.centerY)
+        }
+        
+        
+        let rightMoneyLabel = UILabel()
+//        rightMoneyLabel.text = homeProductListModel.overdueInfo.repayAmount
+        rightMoneyLabel.text = "735.55元"
+        rightMoneyLabel.textColor = UI_MAIN_COLOR
+        rightMoneyLabel.font = UIFont.systemFont(ofSize: 25)
+        rightMoneyLabel.textAlignment = .center
+        moneyView.addSubview(rightMoneyLabel)
+        rightMoneyLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(equalLabel.snp.right).offset(20)
+            make.centerY.equalTo(moneyView.snp.centerY)
+//            make.centerY.equalTo(overMoneyLabel.snp.top).offset(12)
+        }
+        
+        let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(rightMoneyLabel.text)!)
+        attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: TITLE_COLOR, range: NSMakeRange(attrstr.length-1,1))
+        attrstr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 17), range: NSMakeRange(attrstr.length-1,1))
+        rightMoneyLabel.attributedText = attrstr
         
         
         let overdueView = UIView()
@@ -1023,7 +1121,7 @@ extension HomePageCell{
         view.addSubview(overdueView)
         overdueView.snp.makeConstraints { (make) in
             make.centerX.equalTo(view.snp.centerX)
-            make.top.equalTo((overdueMoneyLabel?.snp.bottom)!).offset(23)
+            make.top.equalTo(moneyView.snp.bottom).offset(23)
             make.height.equalTo(20)
             make.width.equalTo(80)
         }
@@ -1079,13 +1177,13 @@ extension HomePageCell{
                 make.top.equalTo(timeView.snp.bottom).offset(8)
             }
             
-            overdueMoneyLabel?.snp.updateConstraints({ (make) in
-                make.top.equalTo(lineView.snp.bottom).offset(13)
-            })
-            
-            overdueView.snp.updateConstraints { (make) in
-                make.top.equalTo((overdueMoneyLabel?.snp.bottom)!).offset(12)
-            }
+//            overdueMoneyLabel.snp.updateConstraints({ (make) in
+//                make.top.equalTo(lineView.snp.bottom).offset(13)
+//            })
+//
+//            overdueView.snp.updateConstraints { (make) in
+//                make.top.equalTo(overdueMoneyLabel.snp.bottom).offset(12)
+//            }
             
         }
         return view
