@@ -268,7 +268,7 @@ extension FXD_LoanApplicationViewController {
             if baseResult.errCode == "0" {
                 let applicaitonViewInfoM = try! ApplicaitonViewInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 self.applicaitonViewIM = applicaitonViewInfoM
-                self.getPeriodArr(minStr: (self.applicaitonViewIM?.maxPeriod)!, maxStr: (self.applicaitonViewIM?.minPeriod)!)
+                self.getPeriodArr(minStr: (self.applicaitonViewIM?.minPeriod)!, maxStr: (self.applicaitonViewIM?.maxPeriod)!)
                 self.getLoanForArr()
                 success(true)
             }else{
@@ -283,11 +283,11 @@ extension FXD_LoanApplicationViewController {
     
     /// 周期数组
     func getPeriodArr(minStr:String , maxStr:String) {
-        let min = Int(minStr)
-        let max = Int(maxStr)
-//        let dur = max-min
-        for i  in 0...2 {
-            periodArrs?.append(String.init(format: "%d", (min! + 1)))
+        let min = Int(minStr)!
+        let max = Int(maxStr)!
+//        let dur = max - min
+        for i  in min...max {
+            periodArrs?.append(String.init(format: "%d", (min + 1)))
         }
     }
     
