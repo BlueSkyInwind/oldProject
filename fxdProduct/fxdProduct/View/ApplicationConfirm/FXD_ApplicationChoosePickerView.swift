@@ -13,7 +13,7 @@ import UIKit
     //取消按钮的代理方法
     func chooseCancelBtn()
     //确认按钮的代理方法
-    func chooseSureBtn(_ content: String)->Void
+    func chooseSureBtn(_ content: String , row:NSInteger)->Void
     
 }
 class FXD_ApplicationChoosePickerView: UIView ,UIPickerViewDelegate,UIPickerViewDataSource{
@@ -44,7 +44,7 @@ class FXD_ApplicationChoosePickerView: UIView ,UIPickerViewDelegate,UIPickerView
     @objc func sureBtnClick() {
         if self.delegate != nil {
             let content = dataArray[selectRow!]
-            self.delegate?.chooseSureBtn(content )
+            self.delegate?.chooseSureBtn(content ,row: selectRow!)
             dismiss()
         }
     }

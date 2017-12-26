@@ -21,6 +21,10 @@
  申请确认页信息
  */
 -(void)queryApplicationInfo:(NSString *)productId;
+/**
+ 新的申请确认页信息
+ */
+-(void)obtainNewApplicationInfo:(NSString *)productId;
 
 /**
  资金平台列表

@@ -149,5 +149,9 @@
     return mStr;
 }
 
+- (NSString *)formatTailNumber
+{
+    return [self substringWithRange:NSMakeRange(self.length - 4, 4)];
+}
 
 @end

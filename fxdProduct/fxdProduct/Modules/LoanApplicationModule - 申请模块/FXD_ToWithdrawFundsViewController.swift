@@ -8,19 +8,33 @@
 
 import UIKit
 
-class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,WithdrawFundsFooterViewDelegate {
 
     var headerView:FXD_displayAmountCommonHeaderView?
     var tableView:UITableView?
-    var applyForBtn:UIButton?
-    var isBankCard:Bool?
+    var withdrawFundsFooterView:FXD_ToWithdrawFundsFooterView?
+    var drawingsInfoModel:DrawingsInfoModel?
     
+    
+    var drawAmount:String? = ""
+    var period:String? = ""
+    var periodAmount:String? = ""
+    var displayContent:[String]? = [""]
+    
+    var isKeepProtocol : Bool? = false
+    var isdispalyCard : Bool? = false
+
+    var userSelectIndex:Int? = 0
+    var selectedCard:CardInfo?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = LOAN_APPLICATION_COLOR
+        self.obtainWithDrawFundsInfo {[weak self] (isSuccess) in
+            self?.configureView()
+        }
         // Do any additional setup after loading the view.
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,15 +49,16 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     
     func configureView()  {
         
-        self.view.backgroundColor = LOAN_APPLICATION_COLOR
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
         self.tableView?.backgroundColor = LOAN_APPLICATION_COLOR
         tableView?.delegate = self
         tableView?.dataSource = self
+        tableView?.bounces = false
         self.view.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
         })
+        tableView?.register(UINib.init(nibName: "FXD_ToWithDrawFundsTableViewCell", bundle: nil), forCellReuseIdentifier: "FXD_ToWithDrawFundsTableViewCell")
         
         if #available(iOS 11.0, *){
             tableView?.contentInsetAdjustmentBehavior = .never;
@@ -54,27 +69,26 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
             self.automaticallyAdjustsScrollViewInsets = false;
         }
         
-        headerView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 205), amount: "3000")
+        headerView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 205), amount: drawAmount!, periodNum: String.init(format: "借款期数：%@期", period!), periodAmount: String.init(format: "每期还款：%@元", periodAmount!))
         headerView?.titleLabel?.text = "待提款"
         tableView?.tableHeaderView = headerView
         headerView?.goBack = {
             self.navigationController?.popViewController(animated: true)
         }
-    }
-    
-    @objc func applyForBottonClick(){
         
+        withdrawFundsFooterView = FXD_ToWithdrawFundsFooterView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h - 205 - 70), htmlContentArr: displayContent!, protocolName: "《借款协议》")
+        withdrawFundsFooterView?.delegate = self
+        tableView?.tableFooterView = withdrawFundsFooterView
         
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -85,28 +99,32 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HighRankingAuthTableViewCell", for: indexPath) as! HighRankingAuthTableViewCell
-        cell.accessoryType = .disclosureIndicator
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FXD_ToWithDrawFundsTableViewCell", for: indexPath) as! FXD_ToWithDrawFundsTableViewCell
         cell.selectionStyle  = .none
-        cell.titleLabel.text = "信用卡认证";
+        cell.titleLabel.text = "请选择绑卡";
+        if  selectedCard != nil {
+            cell.contentLabel.text = String.init(format: "%@ 尾号(%@)", (selectedCard?.bankName)!,((selectedCard?.cardNo! as NSString?)?.formatTailNumber())!)
+        }
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            MXVerifyManager.shareInstance.creditCard()
-            break
-        case 1:
-            MXVerifyManager.shareInstance.socialSecurity()
-            break
-        default:
-            break
+        fatchCardInfo {[weak self] (isSuccess,isBankCard) in
+            guard  isSuccess else {
+                return
+            }
+            
+            if !isBankCard {
+                self?.pushAddBanckCard()
+            }else{
+                self?.pushUserBankListVC()
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 42
+        return 22
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -114,26 +132,49 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 150
+
+    //MARK:WithdrawFundsFooterViewDelegate
+    func keepProtocolClick(_ isKeep: Bool) {
+        isKeepProtocol = isKeep
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 150))
-        footerView.backgroundColor = LOAN_APPLICATION_COLOR
-        applyForBtn = UIButton.init(type: UIButtonType.custom)
-        applyForBtn?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
-        applyForBtn?.setTitle("确认申请", for: UIControlState.normal)
-        applyForBtn?.addTarget(self, action: #selector(applyForBottonClick), for: UIControlEvents.touchUpInside)
-        footerView.addSubview(applyForBtn!)
-        applyForBtn?.snp.makeConstraints({ (make) in
-            make.top.equalTo(footerView.snp.top).offset(40)
-            make.left.equalTo(footerView.snp.left).offset(25)
-            make.right.equalTo(footerView.snp.right).offset(-25)
-        })
-        return footerView
+    func protocolNameClick() {
+        
     }
-
+    
+    func WithdrawFundsClick() {
+        if !isKeepProtocol! {
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请勾选借款协议")
+            return
+        }
+    }
+    
+    func pushUserBankListVC()  {
+        let userBankCardListVC = UserBankCardListVCModule.init()
+        userBankCardListVC.currentIndex = userSelectIndex!
+        userBankCardListVC.payPatternSelectBlock = {[weak self] (cardInfo,currentIndex) in
+            self?.isdispalyCard = true
+            self?.selectedCard = cardInfo
+             self?.userSelectIndex = currentIndex
+            if cardInfo == nil {
+                self?.fatchCardInfo({ (isSuccess, isBankCard) in
+                })
+            }
+        }
+    }
+    
+    func pushAddBanckCard()  {
+        let editCard = EditCardsController.init(nibName: "EditCardsController", bundle: nil)
+        editCard.typeFlag = "0";
+        editCard.addCarSuccess = {
+            self.isdispalyCard = true
+            self.fatchCardInfo({ (isSuccess, isBankCard) in
+            })
+        }
+        let addCarNC = BaseNavigationViewController.init(rootViewController: editCard)
+        self.present(addCarNC, animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -149,28 +190,61 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
 extension FXD_ToWithdrawFundsViewController {
     
     /// 获取发薪贷银行卡信息
-    func fatchCardInfo()  {
+    func fatchCardInfo(_ success:@escaping ((_ isSuccess:Bool,_ isBankCard:Bool) -> Void))  {
         let bankInfoVM = BankInfoViewModel.init()
         bankInfoVM.setBlockWithReturn({[weak self] (resultObject) in
             let baseResult = try! BaseResultModel.init(dictionary: resultObject as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
                 let cardArr = baseResult.data as! NSArray
                 if cardArr.count <= 0{
-                    self?.isBankCard = false
+                    success(true,false)
                     return
                 }
-//                for  dic in cardArr{
-//                    let cardInfo = try! CardInfo.init(dictionary: dic as! [AnyHashable : Any])
-//                    if cardInfo.cardType == "2" {
-//
-//                    }
-//                }
+                guard (self?.isdispalyCard!)! else {
+                    return
+                }
+                //获取默认卡  或者选择的卡 （第一张卡）
+                for  dic in cardArr{
+                    let cardInfo = try! CardInfo.init(dictionary: dic as! [AnyHashable : Any])
+                    if cardInfo.cardType == "2" {
+                        self?.selectedCard = cardInfo
+                        break
+                    }
+                }
+                self?.tableView?.reloadData()
+                success(true,true)
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+                success(false,false)
             }
         }) {
+            success(false,false)
         }
         bankInfoVM.obtainUserBankCardList()
+    }
+    
+    /// 提款信息
+    func obtainWithDrawFundsInfo(_ complication:@escaping ((_ isSuccess:Bool) -> Void))  {
+        let checkVM = CheckViewModel.init()
+        checkVM.setBlockWithReturn({ (resultObject) in
+            let baseRM = resultObject as! BaseResultModel
+            if baseRM.errCode == "0" {
+                let drawingsInfoM = try! DrawingsInfoModel.init(dictionary: baseRM.data as! [AnyHashable : Any])
+                self.drawingsInfoModel = drawingsInfoM
+                self.drawAmount = drawingsInfoM.actualAmount
+                self.period = drawingsInfoM.period
+                self.periodAmount = drawingsInfoM.repaymentAmount
+                self.displayContent = drawingsInfoM.text as? [String]
+                complication(true)
+                self.tableView?.reloadData()
+            }else{
+                complication(false)
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseRM.friendErrMsg)
+            }
+        }) {
+            complication(false)
+        }
+        checkVM.withDrawFundsInfoApply()
     }
 }
 

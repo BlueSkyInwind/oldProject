@@ -71,4 +71,11 @@
 #import "DataDisplayCell.h"
 #import "FXD_MXVerifyManager.h"
 #import "FXD_HomeProductListModel.h"
+#import "YYText.h"
+#import "CheckViewModel.h"
+#import "DrawingsInfoModel.h"
+#import "NSString+Validate.h"
+#import "EditCardsController.h"
+#import "HighRandingModel.h"
+
 #endif /* fxdProduct_Bridging_Header_h */

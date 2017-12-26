@@ -38,6 +38,10 @@
  @return 新的字符串
  */
 - (NSString*)parseString;
+/**
+ 展示卡号后4位
+ */
+- (NSString *)formatTailNumber;
 
 
 @end
