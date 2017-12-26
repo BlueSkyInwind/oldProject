@@ -646,7 +646,7 @@
         if ([[resultDic objectForKey:@"errCode"] isEqualToString:@"3"] ) {
             UIViewController *vc = [self getCurrentVC];
             [vc.navigationController popToRootViewControllerAnimated:YES];
-            [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[responseObject objectForKey:@"msg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
+            [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[resultDic objectForKey:@"friendErrMsg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                 if (index == 1) {
                     [FXD_AppEmptyUserData EmptyData];
                     LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];

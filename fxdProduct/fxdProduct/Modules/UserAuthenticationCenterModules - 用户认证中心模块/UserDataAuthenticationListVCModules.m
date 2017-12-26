@@ -38,7 +38,7 @@
 #import "SupportBankList.h"
 #import "CustomerCareerResult.h"
 
-@interface UserDataAuthenticationListVCModules ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate,MoxieSDKDelegate>
+@interface UserDataAuthenticationListVCModules ()<UITableViewDelegate,UITableViewDataSource,ProfessionDataDelegate>
 {
     CGFloat processFlot;
     UIView *processView;
@@ -317,7 +317,6 @@
                 cell.statusLabel.textColor = rgb(42, 155, 234);
             }
             return cell;
-
         }
             break;
         case 3:
@@ -357,7 +356,7 @@
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证中，请稍后！"];
                     return;
                 }
-                [self mailImportClick];
+                [[FXD_MXVerifyManager sharedInteraction]mailImportClick];
                 break;
             case 1:
                 if ([_socialSecurityStatus isEqualToString:@"2"]) {
@@ -368,7 +367,7 @@
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证中，请稍后！"];
                     return;
                 }
-                [self securityImportClick];
+                [[FXD_MXVerifyManager sharedInteraction]securityImportClick];
                 break;
             default:
                 break;
@@ -432,11 +431,11 @@
 -(BOOL)cellStatusIsSelect:(NSInteger)row{
     if ([_userDataModel.identity isEqualToString:@"0"] && row > 0) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善身份信息！"];
-        return false;
+        return true;
     }
     if ([_userDataModel.person isEqualToString:@"0"] && row > 1) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善个人信息！"];
-        return false;
+        return true;
     }
     switch (row) {
         case 0:{
@@ -686,82 +685,20 @@
 }
 
 #pragma mark - 魔蝎信用卡以及社保集成
-//邮箱导入
-- (void)mailImportClick{
-    @try {
-        [MoxieSDK shared].taskType = @"email";
-        [[MoxieSDK shared] startFunction];
-    } @catch (NSException *exception) {
-        DLog(@"%s\n%@", __FUNCTION__, exception);
-    } @finally {
-    }
-}
-//社保导入
--(void)securityImportClick{
-    @try {
-        [MoxieSDK shared].taskType = @"security";
-        [[MoxieSDK shared] startFunction];
-    } @catch (NSException *exception) {
-        DLog(@"%s\n%@", __FUNCTION__, exception);
-    } @finally {
-    }
-}
 -(void)configMoxieSDK{
-    /***必须配置的基本参数*/
-    [MoxieSDK shared].delegate = self;
-    [MoxieSDK shared].userId = [FXD_Utility sharedUtility].userInfo.juid;
-    [MoxieSDK shared].apiKey = theMoxieApiKey;
-    [MoxieSDK shared].fromController = self;
-    [MoxieSDK shared].useNavigationPush = NO;
-    [self editSDKInfo];
+    [[FXD_MXVerifyManager sharedInteraction]configMoxieSDKViewcontroller:self mxResult:^(NSDictionary *resultDic) {
+        int code = [resultDic[@"code"] intValue];
+        NSString *taskType = resultDic[@"taskType"];
+        NSString *taskId = resultDic[@"taskId"];
+        BOOL loginDone = [resultDic[@"loginDone"] boolValue];
+        if(code == 2 && loginDone == true){
+            [self obtainHighRankingClassifyStatus:taskType TaskId:taskId];
+        }
+        else if(code == 1){
+            [self obtainHighRankingClassifyStatus:taskType TaskId:taskId];
+        }
+    }];
 };
-
-#pragma MoxieSDK Result Delegate
--(void)receiveMoxieSDKResult:(NSDictionary*)resultDictionary{
-    int code = [resultDictionary[@"code"] intValue];
-    NSString *taskType = resultDictionary[@"taskType"];
-    NSString *taskId = resultDictionary[@"taskId"];
-    NSString *message = resultDictionary[@"message"];
-    NSString *account = resultDictionary[@"account"];
-    BOOL loginDone = [resultDictionary[@"loginDone"] boolValue];
-    NSLog(@"get import result---code:%d,taskType:%@,taskId:%@,message:%@,account:%@,loginDone:%d",code,taskType,taskId,message,account,loginDone);
-    //【登录中】假如code是2且loginDone为false，表示正在登录中
-    if(code == 2 && loginDone == false){
-        NSLog(@"任务正在登录中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
-    }
-    //【采集中】假如code是2且loginDone为true，已经登录成功，正在采集中
-    else if(code == 2 && loginDone == true){
-        NSLog(@"任务已经登录成功，正在采集中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
-        [self obtainHighRankingClassifyStatus:taskType TaskId:taskId];
-
-    }
-    //【采集成功】假如code是1则采集成功（不代表回调成功）
-    else if(code == 1){
-        NSLog(@"任务采集成功，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");
-
-        [self obtainHighRankingClassifyStatus:taskType TaskId:taskId];
-    }
-    //【未登录】假如code是-1则用户未登录
-    else if(code == -1){
-        NSLog(@"用户未登录");
-    }
-    //【任务失败】该任务按失败处理，可能的code为0，-2，-3，-4
-    //0 其他失败原因
-    //-2平台方不可用（如中国移动维护等）
-    //-3魔蝎数据服务异常
-    //-4用户输入出错（密码、验证码等输错后退出）
-    else{
-        NSLog(@"任务失败");
-    }
-}
-
--(void)editSDKInfo{
-    [MoxieSDK shared].navigationController.navigationBar.translucent = YES;
-    [MoxieSDK shared].backImageName = @"return_white";
-//    [MoxieSDK shared].navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
-    [MoxieSDK shared].navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [[MoxieSDK shared].navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
-}
 
 -(void)TheCreditCardInfoupload:(NSString *)taskid {
     

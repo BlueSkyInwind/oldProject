@@ -13,8 +13,12 @@
 +(FXD_Tool *)share;
 
 #pragma mark- 时间处理
+//系统版本号
 + (float)getIOSVersion;
+//app版本号
 + (NSString *)getAppVersion;
+//工程名字
++ (NSString *)getProjectName;
 
 //获取今天日期
 + (NSString *)getToday;

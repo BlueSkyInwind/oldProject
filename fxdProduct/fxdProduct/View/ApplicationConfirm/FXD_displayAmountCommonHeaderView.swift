@@ -64,7 +64,6 @@ extension FXD_displayAmountCommonHeaderView{
             make.edges.equalTo(self)
         })
 
-        
         titleLabel = UILabel()
         titleLabel?.textColor = UIColor.white
         titleLabel?.textAlignment = NSTextAlignment.center
@@ -107,12 +106,11 @@ extension FXD_displayAmountCommonHeaderView{
         hintWordBackImage?.image = UIImage.init(named: "hintWord_Back_Image")
         backGroundImage?.addSubview(hintWordBackImage!)
         hintWordBackImage?.snp.makeConstraints({ (make) in
-            make.centerX.equalTo((backGroundImage?.snp.centerX)!)
             make.bottom.equalTo((backGroundImage?.snp.bottom)!).offset(-8)
             make.left.equalTo((backGroundImage?.snp.left)!).offset(20)
             make.right.equalTo((backGroundImage?.snp.right)!).offset(-20)
         })
-        
+ 
         hintWordLabel = UILabel()
         hintWordLabel?.text = "您当前有3000元可借额度"
         hintWordLabel?.textAlignment = NSTextAlignment.center

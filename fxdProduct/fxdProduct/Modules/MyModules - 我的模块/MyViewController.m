@@ -81,7 +81,6 @@
     [self getMessageNumber];
     [self getExperienceValueGrade];
 //    [self getPersonalCenterInfo];
-    
 }
 
 -(void)getExperienceValueGrade{
@@ -267,12 +266,9 @@
             }
         }else{
             bCell.messageView.hidden = true;
-
         }
-        
     }else{
         bCell.messageView.hidden = true;
-
     }
     return bCell;
 }
@@ -292,9 +288,9 @@
             break;
         case 1:
         {
+
             UserDataAuthenticationListVCModules *userDataVC = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
             [self.navigationController pushViewController:userDataVC animated:YES];
-//
 //            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
 //            [self.navigationController pushViewController:repayRecord animated:true];
         }

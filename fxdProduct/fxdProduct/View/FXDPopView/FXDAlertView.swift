@@ -216,6 +216,7 @@ extension FXDAlertView {
         contentLabel?.isEditable = false
         contentLabel?.isSelectable = false
         contentLabel?.isUserInteractionEnabled = false
+        contentLabel?.textAlignment  = NSTextAlignment.center
         backGroundView?.addSubview(contentLabel!)
         contentLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo((lineOne?.snp.bottom)!).offset(10)

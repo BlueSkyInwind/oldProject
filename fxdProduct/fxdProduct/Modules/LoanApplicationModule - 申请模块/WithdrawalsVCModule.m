@@ -686,7 +686,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
         
     }];
     [bankInfoVM obtainUserBankCardList];
-    
 }
 
 - (NSString *)formatTailNumber:(NSString *)str
@@ -1180,7 +1179,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
 - (void)promote
 {
     [MoxieSDK shared].taskType = @"bank";
-    [[MoxieSDK shared] startFunction];
+    [[MoxieSDK shared] start];
 }
 #pragma MoxieSDK Result Delegate
 -(void)receiveMoxieSDKResult:(NSDictionary*)resultDictionary{

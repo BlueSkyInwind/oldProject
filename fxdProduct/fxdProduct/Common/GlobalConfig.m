@@ -87,9 +87,6 @@ NSString * const    _aboutus_url                =    @"more/about_us.html";
 //发展历程H5
 NSString * const    _depHistory_url             =    @"more/depHistory.html";
 
-//协议内容获取接口
-NSString * const    _productProtocol_url        =    @"ProductProtocol/getProductProtocol.jhtml";
-
 //H5注册
 NSString * const    _h5register_url             =    @"register.html";
 
@@ -119,6 +116,9 @@ NSString * const    _shebaoupload_url    =    @"resource/mxsbtask_create";
 
 //信用卡
 NSString * const    _TheCreditCardupload_url    =    @"resource/mxmailtask_create";
+
+//信用卡
+NSString * const    _TheInternetbank_url    =    @"auth/ebank/ebankTaskSubmit";
 
 //高级认证状态查询
 NSString * const    _HighRankingStatus_url    =    @"resource/fundtask";
@@ -360,6 +360,10 @@ NSString * const    _ShowMsgPreview_url    =    @"operation/showMsgPreview";
 
 //新版首页接口
 NSString * const    _NewSummary_url    =    @"new/summary";
+
+//协议内容获取接口
+NSString * const    _productProtocol_url        =    @"product/getProductProtocolApi";
+
 
 #pragma mark - 合规接口
 

@@ -41,8 +41,21 @@
 @interface UserThirdPartCertificationModel : JSONModel
 
 @property (strong,nonatomic)NSString<Optional> * faceIdentity;
+@property (strong,nonatomic)NSString<Optional> * faceIdentityDesc;
+@property (strong,nonatomic)NSString<Optional> * faceIdentityEdit;
+@property (strong,nonatomic)NSString<Optional> * salary;
+@property (strong,nonatomic)NSString<Optional> * salaryDesc;
+@property (strong,nonatomic)NSString<Optional> * salaryEdit;
 @property (strong,nonatomic)NSString<Optional> * telephone;
+@property (strong,nonatomic)NSString<Optional> * telephoneDesc;
+@property (strong,nonatomic)NSString<Optional> * telephoneEdit;
+@property (strong,nonatomic)NSString<Optional> * video;
+@property (strong,nonatomic)NSString<Optional> * videoDesc;
+@property (strong,nonatomic)NSString<Optional> * videoEdit;
 @property (strong,nonatomic)NSString<Optional> * zmIdentity;
+@property (strong,nonatomic)NSString<Optional> * zmIdentityDesc;
+@property (strong,nonatomic)NSString<Optional> * zmIdentityEdit;
+
 
 @end
 

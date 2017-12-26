@@ -96,12 +96,12 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
             if baseResult.errCode == "0"{
                 let dic = baseResult.data as! NSDictionary
                 let statusMsg = dic["verify_msg_"] as! String
-                let status = dic["verify_status_"] as! String
-                self?.verifyStatus = status
+                let status = dic["verify_status_"]
+                self?.verifyStatus = String.init(format: "%@", status as! CVarArg)
                 self?.changeStatus()
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: statusMsg)
                 if ((self?.identifyResultStatus) != nil) {
-                    self?.identifyResultStatus!(status)
+                    self?.identifyResultStatus!((self?.verifyStatus)!)
                 }
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message:baseResult.friendErrMsg)

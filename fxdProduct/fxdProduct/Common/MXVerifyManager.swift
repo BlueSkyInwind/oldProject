@@ -22,7 +22,7 @@ class MXVerifyManager: NSObject,MoxieSDKDelegate {
         MoxieSDK.shared().userId = FXD_Utility.shared().userInfo.juid
         MoxieSDK.shared().fromController = viewcontroller
         MoxieSDK.shared().delegate = self
-//        configureUI()
+        configureUI()
         mxVerifyResult = { (result) -> () in
             mxResult(result)
         }
@@ -32,25 +32,26 @@ class MXVerifyManager: NSObject,MoxieSDKDelegate {
     //网银
     func Internetbank() -> Void {
         MoxieSDK.shared().taskType = "bank"
-        MoxieSDK.shared().startFunction()
+        MoxieSDK.shared().start()
     }
+    
     //社保
     func socialSecurity() -> Void {
         MoxieSDK.shared().taskType = "security"
-        MoxieSDK.shared().startFunction()
+        MoxieSDK.shared().start()
     }
     //信用卡
     func creditCard() -> Void {
         MoxieSDK.shared().taskType = "email"
-        MoxieSDK.shared().startFunction()
+        MoxieSDK.shared().start()
     }
     
     func configureUI() {
         MoxieSDK.shared().navigationController.navigationBar.isTranslucent = true
-        MoxieSDK.shared().backImageName = "return"
-        MoxieSDK.shared().navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
-        MoxieSDK.shared().navigationController.navigationBar.tintColor = UIColor.white
-        MoxieSDK.shared().navigationController.navigationBar.setBackgroundImage(UIImage.init(named: "navigation"), for: UIBarMetrics.default)
+        MoxieSDK.shared().backImageName = "return_white"
+        MoxieSDK.shared().navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.black]
+        MoxieSDK.shared().navigationController.navigationBar.tintColor = UI_MAIN_COLOR
+        MoxieSDK.shared().navigationController.navigationBar.backgroundColor = UIColor.white
     }
     
     func receiveMoxieSDKResult(_ resultDictionary: [AnyHashable : Any]!) {

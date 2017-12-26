@@ -25,31 +25,15 @@
     
     [self setTabbarCon];
     self.delegate = self;
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"InfoNotification" object:nil];
-    
 
 }
 
-//- (void)InfoNotificationAction:(NSNotification *)notification{
-//
-//    NSLog(@"%@",notification.userInfo);
-//
-//    NSLog(@"---接收到通知---");
-//    NSDictionary  *dic = [notification userInfo];
-//    NSString *info = [dic objectForKey:@"isDisplay"];
-////    UITabBarItem * item = [self.tabBar.items objectAtIndex:2];
-////    item.badgeValue = @" ";
-//    [self.tabBarController.tabBar showBadgeOnItemIndex:2];
-//
-////    item.badgeValue = nil;
-//
-//}
-
 - (void)setTabbarCon
 {
+//    IncreaseAmountLimitViewController * loanApplicationVC = [[IncreaseAmountLimitViewController alloc]init];
+//    [self.navigationController pushViewController:loanApplicationVC animated:true];
     
-    NSArray *vcNameArr = @[@"FXD_HomePageVCModules",@"AuthenticationCenterVCModules",@"MyViewController"];
+    NSArray *vcNameArr = @[@"FXD_HomePageVCModules",@".FXD_IncreaseAmountLimitViewController",@"MyViewController"];
     NSArray *titleArr = @[@"首页",@"认证",@"我的"];
     NSArray *imageArr = @[@"home_tab_default",@"icon_2-2",@"mine_tab_default"];
     NSArray *seleteimageArr = @[@"home_tab_select",@"icon_2-1",@"mine_tab_select"];
@@ -57,14 +41,16 @@
     NSMutableArray *ncArr = [NSMutableArray array];
     
     for (int i = 0; i < vcNameArr.count; i++) {
-
         //将字符串转化成类
         Class vc = NSClassFromString([vcNameArr objectAtIndex:i]);
+        if (vc == nil) {
+            //swift通过类名获取的方法
+           vc = NSClassFromString([[FXD_Tool getProjectName] stringByAppendingString:[vcNameArr objectAtIndex:i]]);
+        }
         //父类指针指向子类对象
         UIViewController *viewController = [[vc alloc]init];
         BaseNavigationViewController *nc = [[BaseNavigationViewController alloc]initWithRootViewController:viewController];
         viewController.navigationItem.title = [titleArr objectAtIndex:i];
-        //        UITabBarItem *item = [[UITabBarItem alloc]initWithTitle:[titleArr objectAtIndex:i] image:nil selectedImage:nil];
         nc.tabBarItem = [self tabBarItemWithName:[titleArr objectAtIndex:i] image:[imageArr objectAtIndex:i] selectedImage:[seleteimageArr objectAtIndex:i]];
         [ncArr addObject:nc];
     }
