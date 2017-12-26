@@ -64,6 +64,7 @@ class RenewalVCModules: BaseViewController ,UITableViewDataSource,UITableViewDel
         
         getRenewalInformation()
         getBankCardsList()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
