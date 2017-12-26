@@ -122,7 +122,7 @@ extension HomePageCell {
         case 3?:
             refuseView()
         case 4?:
-            repayImmediatelyView()
+            refuseView()
         case 5?:
             withdrawMoneyImmediatelyView()
         case 6?,8?,9?,12?,15?,10?,13?:
@@ -583,7 +583,7 @@ extension HomePageCell {
     fileprivate func refuseView(){
         
         let titleLabel = UILabel()
-        titleLabel.text = "信用评分不足"
+        titleLabel.text = homeProductListModel.testFailInfo.tips
         titleLabel.textColor = UI_MAIN_COLOR
         titleLabel.font = UIFont.systemFont(ofSize: 17)
         self.addSubview(titleLabel)
@@ -593,9 +593,13 @@ extension HomePageCell {
             make.height.equalTo(20)
         }
         
+        var array : NSArray
+        
+        array = homeProductListModel.testFailInfo.text! as NSArray
+        
         let firstLabel = UILabel()
         firstLabel.textColor = RedPacket_COLOR
-        firstLabel.text = "方法一: 添加提额资料,重新测评"
+        firstLabel.text = array[0] as? String
         firstLabel.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(firstLabel)
         firstLabel.snp.makeConstraints { (make) in
@@ -606,7 +610,7 @@ extension HomePageCell {
         
         let secondLabel = UILabel()
         secondLabel.textColor = RedPacket_COLOR
-        secondLabel.text = "方法二: 30天后更新基础资料,重新测评"
+        secondLabel.text = array[1] as? String
         secondLabel.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(secondLabel)
         secondLabel.snp.makeConstraints { (make) in
@@ -616,7 +620,7 @@ extension HomePageCell {
         }
         
         let thirdLabel = UILabel()
-        thirdLabel.text = "方法三: 试试以下推荐平台"
+        thirdLabel.text = array[2] as? String
         thirdLabel.textColor = RedPacket_COLOR
         thirdLabel.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(thirdLabel)
@@ -627,7 +631,7 @@ extension HomePageCell {
         }
         
         let bgView = UIView()
-        bgView.backgroundColor = LINE_COLOR
+        bgView.backgroundColor = UIColor.clear
         self.addSubview(bgView)
         bgView.snp.makeConstraints { (make) in
             make.top.equalTo(thirdLabel.snp.bottom).offset(20)
@@ -643,7 +647,6 @@ extension HomePageCell {
                 }
             }
             let thirdRefuseView = HomeRefuseThirdView()
-//            thirdRefuseView.backgroundColor = UIColor.white
             thirdRefuseView.isUserInteractionEnabled = true
             thirdRefuseView.tag = index + 104
             let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
@@ -656,21 +659,29 @@ extension HomePageCell {
                 make.height.equalTo(103)
             })
             
-            let url = URL(string: "http://192.168.6.137/fxd/M00/00/00/wKgGiVlxnkGEOlsJAAAAADqL7FU975.png")
+            let thirdProduct = homeProductListModel.testFailInfo.thirdProductList[index] as! ThirdProductListModel
+            let tags = thirdProduct.extAttr.tags as NSArray
+            
+            
+            let url = URL(string: thirdProduct.extAttr.icon_)
             thirdRefuseView.leftImageView?.sd_setImage(with: url)
 
-            thirdRefuseView.titleLabel?.text = "贷嘛"
-            thirdRefuseView.qutaLabel?.text = "额度:最高5000元"
-//            thirdRefuseView.termLabel?.text = ""
-            thirdRefuseView.termLabel?.text = "期限:"+"1"+"-"+"60"+"天"
-            thirdRefuseView.feeLabel?.text = "费用：" + "0.3%/日"
+            thirdRefuseView.titleLabel?.text = thirdProduct.name
+            thirdRefuseView.qutaLabel?.text = "额度:最高" + thirdProduct.principalTop + "元"
+            thirdRefuseView.termLabel?.text = "期限:" + thirdProduct.stagingDuration + "-" + thirdProduct.stagingBottom + "天"
+            if (thirdProduct.extAttr.charge_desc_ != nil){
+                
+                thirdRefuseView.feeLabel?.text = "费用：" + thirdProduct.extAttr.charge_desc_
+                let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.feeLabel?.text)!)
+                attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-5))
+                thirdRefuseView.feeLabel?.attributedText = attrstr1
+            }
+            
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.termLabel?.text)!)
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-4))
             thirdRefuseView.termLabel?.attributedText = attrstr
-            let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.feeLabel?.text)!)
-            attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-5))
-            thirdRefuseView.feeLabel?.attributedText = attrstr1
-            thirdRefuseView.descBtn?.setTitle("30家借款机构,0抵押当天放款", for: .normal)
+            
+            thirdRefuseView.descBtn?.setTitle(tags[0] as? String, for: .normal)
             thirdRefuseView.descBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
             setCornerBorder(view: thirdRefuseView.descBtn!, borderColor: UI_MAIN_COLOR)
         }
@@ -1345,23 +1356,16 @@ extension HomePageCell{
     @objc func clickFirstView(_ tapGes : UITapGestureRecognizer){
         
         let tag = tapGes.view?.tag
-//        switch tag! {
-//        case 104:
-//            path = homeProductData.data.thirdProductList[0].extAttr.path_
-//            productId = homeProductData.data.thirdProductList[0].id_
-//        case 105:
-//            path = homeProductData.data.thirdProductList[1].extAttr.path_
-//            productId = homeProductData.data.thirdProductList[1].id_
-//        case 106:
-//            path = homeProductData.data.thirdProductList[2].extAttr.path_
-//            productId = homeProductData.data.thirdProductList[2].id_
-//        default:
-//            break
-//        }
+        
+        let thirdProduct = homeProductListModel.testFailInfo.thirdProductList[tag! - 104] as! ThirdProductListModel
+        
+        let path = thirdProduct.extAttr.path_
+        let productId = thirdProduct.id_
+        let isOverLimit = thirdProduct.isOverLimit
         
         if delegate != nil {
             
-            delegate?.productListClick("productId" ,isOverLimit: "isOverLimit" ,amount: "amount",Path:"path")
+            delegate?.productListClick(productId! ,isOverLimit: isOverLimit! ,amount: "amount",Path:path!)
             
         }
         print("点击产品列表")

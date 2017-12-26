@@ -50,7 +50,6 @@
     ActivityHomePopView *_popView;
     
     NSInteger _count;
-//    HomeProductList *_homeProductList;
     FXD_HomeProductListModel *_homeProductList;
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
@@ -601,7 +600,7 @@
     if (_homeProductList != nil) {
         
         homeCell.type = _homeProductList.flag;
-//        homeCell.type = @"4";
+
     }
 
     return homeCell;
@@ -654,6 +653,9 @@
 
 -(void)productListClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit amount:(NSString *)amount Path:(NSString *)Path{
     NSLog(@"===%@,===%@,===%@,===%@==",productId,isOverLimit,amount,Path);
+    FXDWebViewController *webView = [[FXDWebViewController alloc]init];
+    webView.urlStr = Path;
+    [self.navigationController pushViewController:webView animated:true];
 }
 
 -(void)moreBtnClick{

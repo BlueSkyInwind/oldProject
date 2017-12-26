@@ -44,4 +44,17 @@
 
 @end
 
+@implementation ThirdProductListModel
+
++(JSONKeyMapper *)keyMapper{
+    
+    return [[JSONKeyMapper alloc]initWithModelToJSONDictionary:@{@"id_":@"id"}];
+}
+@end
+
+@implementation ExtAttrModel
+
+@end
+
+
 

@@ -20,6 +20,10 @@
 
 @end
 
+@protocol ThirdProductListModel <NSObject>
+
+@end
+
 
 @interface DrawInfoModel : JSONModel
 
@@ -79,9 +83,9 @@
 @interface TestFailInfoModel : JSONModel
 
 //三条方法文字
-@property (nonatomic, strong)NSString<Optional> *text;
+@property (nonatomic, strong)NSArray<Optional> *text;
 //第三方产品列表
-@property (nonatomic, strong)NSString<Optional> *thirdProductList;
+@property (nonatomic, strong)NSArray<ThirdProductListModel,Optional> *thirdProductList;
 //信用评分不足蓝色提示
 @property (nonatomic, strong)NSString<Optional> *tips;
 
@@ -147,6 +151,55 @@
 @property (nonatomic, strong)NSString<Optional> *collarContent;
 //评测领红包按钮
 @property (nonatomic, strong)NSString<Optional> *redCollar;
+
+@end
+
+@interface ExtAttrModel : JSONModel
+
+//取消按钮
+@property (nonatomic, strong)NSString<Optional> *amt_desc_;
+//评测领红包文案
+@property (nonatomic, strong)NSString<Optional> *charge_desc_;
+//评测领红包按钮
+@property (nonatomic, strong)NSString<Optional> *icon_;
+//取消按钮
+@property (nonatomic, strong)NSString<Optional> *pass_level_;
+//评测领红包文案
+@property (nonatomic, strong)NSString<Optional> *path_;
+//评测领红包按钮
+@property (nonatomic, strong)NSString<Optional> *period_desc_;
+//评测领红包按钮
+@property (nonatomic, strong)NSArray<Optional> *tags;
+
+@end
+
+
+@interface ThirdProductListModel : JSONModel
+
+//取消按钮
+@property (nonatomic, strong)NSString<Optional> *dayServiceFeeRate;
+//评测领红包文案
+@property (nonatomic, strong)ExtAttrModel<Optional> *extAttr;
+//评测领红包按钮
+@property (nonatomic, strong)NSString<Optional> *id_;
+//取消按钮
+@property (nonatomic, strong)NSString<Optional> *isOverLimit;
+//评测领红包文案
+@property (nonatomic, strong)NSString<Optional> *liquidatedDamages;
+//评测领红包按钮
+@property (nonatomic, strong)NSString<Optional> *name;
+//取消按钮
+@property (nonatomic, strong)NSString<Optional> *platformType;
+//评测领红包文案
+@property (nonatomic, strong)NSString<Optional> *principalBottom;
+//评测领红包按钮
+@property (nonatomic, strong)NSString<Optional> *principalTop;
+//取消按钮
+@property (nonatomic, strong)NSString<Optional> *stagingBottom;
+//评测领红包文案
+@property (nonatomic, strong)NSString<Optional> *stagingDuration;
+//评测领红包按钮
+@property (nonatomic, strong)NSString<Optional> *stagingTop;
 
 @end
 
