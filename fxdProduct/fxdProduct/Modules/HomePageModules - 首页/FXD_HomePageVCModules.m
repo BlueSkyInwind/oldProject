@@ -102,6 +102,8 @@
     }
     [self LoadHomeView];
     
+    
+    
 }
 
 
@@ -111,7 +113,7 @@
     [self.tableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"HomePageCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.backgroundColor = rgb(242, 242, 242);
+    self.tableView.backgroundColor = rgb(250, 250, 250);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -145,7 +147,7 @@
     [_messageBtn addSubview:_bgView];
     
     [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_messageBtn.mas_left).offset(16);
+        make.left.equalTo(_messageBtn.mas_left).offset(13);
         make.top.equalTo(_messageBtn.mas_top).offset(-4);
         make.width.equalTo(@13);
         make.height.equalTo(@13);
@@ -207,7 +209,7 @@
                 }else{
                     
                     [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.left.equalTo(_messageBtn.mas_left).offset(16);
+                        make.left.equalTo(_messageBtn.mas_left).offset(11);
                         make.width.equalTo(@13);
                     }];
                     
@@ -590,26 +592,18 @@
     
     HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    homeCell.backgroundColor = rgb(242, 242, 242);
+    homeCell.backgroundColor = rgb(250, 250, 250);
     homeCell.selected = NO;
     homeCell.delegate = self;
     homeCell.defaultMoneyLabel.text = @"8000元";
     homeCell.defaultTimeLabel.text = @"180天";
-//    homeCell.quotaLabel.text = @"3000";
     homeCell.homeProductListModel = _homeProductList;
     if (_homeProductList != nil) {
         
-//        homeCell.type = _homeProductList.flag;
-        homeCell.type = @"4";
+        homeCell.type = _homeProductList.flag;
+//        homeCell.type = @"4";
     }
-    
-//    homeCell.loanTopLabel.text = @"资料测评中";
-//    homeCell.loanTopContentLabel.text = @"系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,系统正为您疯狂测评中,过程大概需要5-10分钟,";
-//    homeCell.loanBottomLabel.text = @"资料提交成功";
-//    homeCell.loanTimeLabel.text = @"12-12 15:35";
-    
-//    homeCell.delegate = self;
-//    homeCell.cellType = HomePageCellType(cellType: .Default);
+
     return homeCell;
     
 }
@@ -685,6 +679,15 @@
 }
 
 
+-(void)bankProtocolClick{
+   
+    NSLog(@"bankProtocolClick");
+}
+
+-(void)loanProtocolClick{
+    
+    NSLog(@"loanProtocolClick");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
