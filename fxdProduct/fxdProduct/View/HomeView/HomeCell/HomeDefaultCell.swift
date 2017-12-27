@@ -572,7 +572,8 @@ extension HomeDefaultCell{
                 }
             }
         }
-        
+    
+    
         
         drawingBgImage = UIImageView()
         drawingBgImage?.image = UIImage(named:"beijing big")

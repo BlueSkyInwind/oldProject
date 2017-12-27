@@ -687,10 +687,13 @@ extension HomePageCell {
             let thirdProduct = homeProductListModel.testFailInfo.thirdProductList[index] as! ThirdProductListModel
             let tags = thirdProduct.extAttr.tags as NSArray
             
-            
             let url = URL(string: thirdProduct.extAttr.icon_)
-            thirdRefuseView.leftImageView?.sd_setImage(with: url)
+            //placeholderImage_Icon
+//            thirdRefuseView.leftImageView?.sd_setImage(with: url)
 
+            thirdRefuseView.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named:"placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
+                
+            })
             thirdRefuseView.titleLabel?.text = thirdProduct.name
             thirdRefuseView.qutaLabel?.text = "额度:最高" + thirdProduct.principalTop + "元"
             thirdRefuseView.termLabel?.text = "期限:" + thirdProduct.stagingDuration + "-" + thirdProduct.stagingBottom + "天"

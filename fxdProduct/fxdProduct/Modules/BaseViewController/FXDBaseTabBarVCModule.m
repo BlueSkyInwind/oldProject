@@ -22,11 +22,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"tabbarBgImage"]];
+
     [[UITabBar appearance] setShadowImage:[UIImage new]];
-//    [self.tabBarController.tabBar setShadowImage:[UIImage new]];
-    
+    [[UITabBar appearance] setBackgroundImage:[UIImage new]];
+    UIImageView *bgImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tabbarBgImage"]];
+    [[UITabBar appearance]insertSubview:bgImageView atIndex:0];
+
     [self setTabbarCon];
     self.delegate = self;
 

@@ -50,13 +50,11 @@
     }
     
     self.MyViewTable.scrollEnabled = NO;
-    if (UI_IS_IPHONE4 || UI_IS_IPHONE5) {
+    if (UI_IS_IPHONE4 ) {
         self.MyViewTable.scrollEnabled = YES;
     }
-    [self.MyViewTable setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+
     [self.MyViewTable registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"bCell"];
-    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame=CGRectMake(100, 100, 120, 12);
     
 }
 
@@ -96,9 +94,10 @@
         BaseResultModel *  baseResultM = returnValue;
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             ExperienceValueGradeModel *model = [[ExperienceValueGradeModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            [_headerView.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.gradeLogo] placeholderImage:[UIImage imageNamed:@""] options:SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-            } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            }];
+            [_headerView.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.gradeLogo]];
+//            [_headerView.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.gradeLogo] placeholderImage:[UIImage imageNamed:@"placeholderImage_Icon"] options:SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+//            } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+//            }];
 
             if ([model.gradeName isEqualToString:@"薪薪人类"]) {
                 _headerView.isFirstLevel = @"2";
@@ -241,7 +240,7 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 10)];
-    view.backgroundColor=RGBColor(245, 245, 245, 1);
+    view.backgroundColor=RGBColor(242, 242, 242, 1);
     return view;
 }
 
