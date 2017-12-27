@@ -44,6 +44,26 @@
 }
 
 -(void)showFXDAlertViewTitle:(NSString *)title
+                     content:(NSString *)content
+                 cancelTitle:(NSString *)cancelTitle
+                   sureTitle:(NSString *)sureTitle
+                 compleBlock:(ClickBlock)clickIndexBlock{
+    
+    if (self.fxdAlertView) {
+        return;
+    }
+
+    self.fxdAlertView = [[FXDAlertView alloc]init:title content:content cancelTitle:cancelTitle sureTitle:sureTitle];
+    [self.fxdAlertView show];
+    __weak typeof (self) weakSelf = self;
+    self.fxdAlertView.clickButtonIndex = ^(NSInteger index) {
+        clickIndexBlock(index);
+        [weakSelf.fxdAlertView dismiss];
+        weakSelf.fxdAlertView = nil;
+    };
+}
+
+-(void)showFXDAlertViewTitle:(NSString *)title
                      content:(NSString *)contentAttri
                 attributeDic:(NSDictionary<NSAttributedStringKey,id> *)attributeDic
                      cancelTitle:(NSString *)cancelTitle

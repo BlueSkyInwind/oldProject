@@ -30,6 +30,36 @@
     }];
 }
 
+-(void)newUserCreateApplication:(NSString *)productId
+                   platformCode:(NSString *)platformCode
+                         baseId:(NSString *)baseId
+                        loanFor:(NSString *)loanFor
+                        periods:(NSString *)periods
+                     loanAmount:(NSString *)loanAmount{
+    
+    ApplicaitonModel * applicationM = [[ApplicaitonModel alloc]init];
+    applicationM.baseId= baseId;
+    applicationM.productId= baseId;
+    applicationM.loanFor= baseId;
+    applicationM.periods= baseId;
+    applicationM.loanAmount= baseId;
+    applicationM.platformCode= platformCode;
+    NSDictionary * paramDic = [applicationM toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_createApplication_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
+
+
 
 -(void)queryApplicationInfo:(NSString *)productId{
 

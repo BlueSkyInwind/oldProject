@@ -174,6 +174,7 @@ UIKIT_EXTERN NSString * const       _AuthenticationCenterBasicInformation_url;//
 UIKIT_EXTERN NSString * const       _UserContactInfo_url;                    //用户联系人信息
 UIKIT_EXTERN NSString * const       _HomeState_url;                          //首页状态查询
 UIKIT_EXTERN NSString * const       _createApplication_url;                  //用户进件接口
+UIKIT_EXTERN NSString * const       _new_CreateApplication_url;                  //新版用户进件接口
 
 UIKIT_EXTERN NSString * const       _ApplicationViewInfo_url;                  //申请确认页数据
 UIKIT_EXTERN NSString * const       _newApplicationViewInfo_url;                  //申请确认页数据

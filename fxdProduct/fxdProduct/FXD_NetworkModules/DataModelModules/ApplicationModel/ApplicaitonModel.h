@@ -16,7 +16,12 @@
 
 @interface ApplicaitonModel : JSONModel
 
-
+@property(nonatomic,strong)NSString<Optional> * baseId;
+@property(nonatomic,strong)NSString<Optional> * loanAmount;
+@property(nonatomic,strong)NSString<Optional> * loanFor;
+@property(nonatomic,strong)NSString<Optional> * periods;
+@property(nonatomic,strong)NSString<Optional> * platformCode;
+@property(nonatomic,strong)NSString<Optional> * productId;
 
 @end
 

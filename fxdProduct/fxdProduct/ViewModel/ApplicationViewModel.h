@@ -15,7 +15,15 @@
  用户创建进件
  */
 -(void)userCreateApplication:(NSString *)productId platformCode:(NSString *)platformCode baseId:(NSString *)baseId;
-
+/**
+ 新版用户创建进件
+ */
+-(void)newUserCreateApplication:(NSString *)productId
+                   platformCode:(NSString *)platformCode
+                         baseId:(NSString *)baseId
+                        loanFor:(NSString *)loanFor
+                        periods:(NSString *)periods
+                     loanAmount:(NSString *)loanAmount;
 
 /**
  申请确认页信息

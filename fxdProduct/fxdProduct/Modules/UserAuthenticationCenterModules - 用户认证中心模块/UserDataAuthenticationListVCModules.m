@@ -242,7 +242,6 @@
                 }
                 if ([_creditCardStatus isEqualToString:@"3"]) {
                     cell.statusLabel.textColor = rgb(159, 160, 162);
-                    cell.statusLabel.text = @"未完成";
                 }
                 return cell;
             }
@@ -259,7 +258,6 @@
                 }
                 if ([_socialSecurityStatus isEqualToString:@"3"]) {
                     cell.statusLabel.textColor = rgb(159, 160, 162);
-                    cell.statusLabel.text = @"未完成";
                 }
                 return cell;
             }
@@ -279,11 +277,10 @@
             cell.iconImage.image = [UIImage imageNamed:@"UserData2"];
             cell.titleLable.text = @"身份信息";
             cell.subTitleLabel.text = @"完善您的个人信息";
-            cell.statusLabel.text = @"未完成";
+            cell.statusLabel.text = _userDataModel.identityDesc;
             cell.statusLabel.textColor = rgb(159, 160, 162);
-            if ([_userDataModel.identity isEqualToString:@"1"]) {
-                cell.statusLabel.text = @"已完成";
-                cell.statusLabel.textColor = rgb(42, 155, 234);
+            if ([_userDataModel.identity isEqualToString:@"3"]) {
+                cell.statusLabel.textColor = UI_MAIN_COLOR;
             }
             return cell;
         }
@@ -293,11 +290,10 @@
             cell.iconImage.image = [UIImage imageNamed:@"UserData1"];
             cell.titleLable.text = @"个人信息";
             cell.subTitleLabel.text = @"完善您的联系人信息";
-            cell.statusLabel.text = @"未完成";
+            cell.statusLabel.text = _userDataModel.personDesc;
             cell.statusLabel.textColor = rgb(159, 160, 162);
-            if ([_userDataModel.person isEqualToString:@"1"]) {
-                cell.statusLabel.text = @"已完成";
-                cell.statusLabel.textColor = rgb(42, 155, 234);
+            if ([_userDataModel.person isEqualToString:@"3"]) {
+                cell.statusLabel.textColor = UI_MAIN_COLOR;
             }
             return cell;
         }
@@ -310,11 +306,10 @@
             if (UI_IS_IPHONE5) {
                 cell.subTitleLabel.font = [UIFont systemFontOfSize:10.f];
             }
-            cell.statusLabel.text = @"未完成";
+            cell.statusLabel.text = _userDataModel.othersDesc;
             cell.statusLabel.textColor = rgb(159, 160, 162);
-            if ([_userDataModel.others isEqualToString:@"1"]) {
-                cell.statusLabel.text = @"已完成";
-                cell.statusLabel.textColor = rgb(42, 155, 234);
+            if ([_userDataModel.others isEqualToString:@"3"]) {
+                cell.statusLabel.textColor = UI_MAIN_COLOR;
             }
             return cell;
         }
@@ -324,11 +319,10 @@
             cell.iconImage.image = [UIImage imageNamed:@"UserData3"];
             cell.titleLable.text = @"收款信息";
             cell.subTitleLabel.text = @"";
-            cell.statusLabel.text = @"未完成";
+            cell.statusLabel.text = _userDataModel.gatheringDesc;
             cell.statusLabel.textColor = rgb(159, 160, 162);
-            if ([_userDataModel.gathering isEqualToString:@"1"]) {
-                cell.statusLabel.text = @"已完成";
-                cell.statusLabel.textColor = rgb(42, 155, 234);
+            if ([_userDataModel.gathering isEqualToString:@"3"]) {
+                cell.statusLabel.textColor = UI_MAIN_COLOR;
             }
             return cell;
         }
@@ -401,7 +395,7 @@
             break;
         case 2:
         {
-            if ([_userDataModel.others isEqualToString:@"1"]){
+            if ([_userDataModel.others isEqualToString:@"3"]){
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
             }else {
                 UserThirdPartyAuthVCModules * thirdPartyAuthVC = [[UserThirdPartyAuthVCModules alloc]init];
@@ -429,11 +423,11 @@
     }
 }
 -(BOOL)cellStatusIsSelect:(NSInteger)row{
-    if ([_userDataModel.identity isEqualToString:@"0"] && row > 0) {
+    if ([_userDataModel.identity isEqualToString:@"1"] && row > 0) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善身份信息！"];
         return true;
     }
-    if ([_userDataModel.person isEqualToString:@"0"] && row > 1) {
+    if ([_userDataModel.person isEqualToString:@"1"] && row > 1) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善个人信息！"];
         return true;
     }
@@ -453,14 +447,14 @@
         }
             break;
         case 2:{
-            if ([_userDataModel.others isEqualToString:@"1"]) {
+            if ([_userDataModel.others isEqualToString:@"3"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
                 return false;
             }
         }
             break;
         case 3:{
-            if ([_userDataModel.gathering isEqualToString:@"1"]) {
+            if ([_userDataModel.gathering isEqualToString:@"3"]) {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"当前状态无法修改资料"];
                 return false;
             }

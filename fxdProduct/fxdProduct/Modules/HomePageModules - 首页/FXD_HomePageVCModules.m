@@ -668,7 +668,6 @@
 
 -(void)repayImmediatelyBtnClick:(BOOL)isSelected{
     if (!isSelected) {
-        
         NSLog(@"立即还款");
     }else{
         NSLog(@"勾选框");

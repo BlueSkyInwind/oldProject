@@ -75,7 +75,11 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
             self.automaticallyAdjustsScrollViewInsets = false;
         }
         
-        headerView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 205), amount: "3000")
+        var rect =  CGRect.init(x: 0, y: 0, width: _k_w, height: 205)
+        if UI_IS_IPONE6P || UI_IS_IPHONEX{
+            rect =  CGRect.init(x: 0, y: 0, width: _k_w, height: 256)
+        }
+        headerView = FXD_displayAmountCommonHeaderView.init(frame: rect, amount: "3000")
         headerView?.titleLabel?.text = "提额"
         headerView?.hintWordLabel?.text = IncreaseAmountLimitMarkeords
         headerView?.goBackBtn?.isHidden = true

@@ -141,6 +141,9 @@ NSString * const    _HomeState_url    =    @"summary";
 //申请进件
 NSString * const    _createApplication_url    =    @"application/create";
 
+//申请进件
+NSString * const    _new_CreateApplication_url    =    @"application/new/create";
+
 //申请确认页数据
 NSString * const    _ApplicationViewInfo_url    =    @"application/confirm";
 
