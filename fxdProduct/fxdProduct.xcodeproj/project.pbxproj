@@ -1173,6 +1173,8 @@
 		CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
 		CC6E0F241FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F231FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift */; };
 		CC6E0F251FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F231FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift */; };
+		CC6E0F271FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F261FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift */; };
+		CC6E0F281FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F261FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift */; };
 		CC6F06731F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */; };
 		CC6F06741F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */; };
 		CC6F06761F74E6F900FA889E /* OptionalRapidLoanApplicationVCModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06751F74E6F900FA889E /* OptionalRapidLoanApplicationVCModules.swift */; };
@@ -2355,6 +2357,7 @@
 		CC6E0F151FF0942400D32773 /* FXD_HomeProductListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_HomeProductListModel.h; sourceTree = "<group>"; };
 		CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_HomeProductListModel.m; sourceTree = "<group>"; };
 		CC6E0F231FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBAttributeTextTapForSwfit.swift; sourceTree = "<group>"; };
+		CC6E0F261FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOverdueFeesRulesPopView.swift; sourceTree = "<group>"; };
 		CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidLoanApplicationcConfirmation.swift; sourceTree = "<group>"; };
 		CC6F06751F74E6F900FA889E /* OptionalRapidLoanApplicationVCModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalRapidLoanApplicationVCModules.swift; sourceTree = "<group>"; };
 		CC6F06781F74F26B00FA889E /* PickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickView.swift; sourceTree = "<group>"; };
@@ -4825,6 +4828,7 @@
 				84A37FEF1FAC12A8008FB7AF /* QRCodePopView.h */,
 				84A37FF01FAC12A8008FB7AF /* QRCodePopView.m */,
 				84A37FF11FAC12A8008FB7AF /* QRCodePopView.xib */,
+				CC6E0F261FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift */,
 			);
 			path = "HomePopwindowsModules - 首页弹窗模块";
 			sourceTree = "<group>";
@@ -6085,6 +6089,7 @@
 				849AC2601FF0DCA6005E435F /* FXD_ToWithdrawFundsFooterView.swift in Sources */,
 				63F254851E49A45900852CF1 /* HMScanner.m in Sources */,
 				84F87F431FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift in Sources */,
+				CC6E0F271FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift in Sources */,
 				CCCB279C1FB2F04500412632 /* ScratchAwardView.m in Sources */,
 				63F0E1BB1CE417FF001251A9 /* NSString+YYAdd.m in Sources */,
 				63FC24F81D98F7E9006F58F3 /* YYTextParser.m in Sources */,
@@ -6610,6 +6615,7 @@
 				849AC2611FF0DCA6005E435F /* FXD_ToWithdrawFundsFooterView.swift in Sources */,
 				CC0DF9F51EA5B1090024841A /* GetMoneyStateBaseClass.m in Sources */,
 				843C99F11F9606050067E200 /* DiscountCouponsView.swift in Sources */,
+				CC6E0F281FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift in Sources */,
 				CC0DF9F71EA5B1090024841A /* UIView+SDExtension.m in Sources */,
 				84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */,
 				CC7336901FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */,

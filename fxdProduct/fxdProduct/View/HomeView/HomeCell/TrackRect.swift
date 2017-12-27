@@ -18,6 +18,11 @@ class TrackRect: UISlider {
     }
     */
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
+        if UI_IS_IPONE5 || UI_IS_IPONE6{
+            
+            return CGRect(x:0,y:0,width:self.frame.size.width,height:10)
+        }
+        
         return CGRect(x:10,y:0,width:self.frame.size.width-20,height:13)
     }
 

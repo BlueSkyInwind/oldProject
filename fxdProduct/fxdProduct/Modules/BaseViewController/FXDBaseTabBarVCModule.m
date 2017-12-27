@@ -23,6 +23,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"tabbarBgImage"]];
+    [[UITabBar appearance] setShadowImage:[UIImage new]];
+//    [self.tabBarController.tabBar setShadowImage:[UIImage new]];
+    
     [self setTabbarCon];
     self.delegate = self;
 
@@ -34,9 +38,9 @@
 //    [self.navigationController pushViewController:loanApplicationVC animated:true];
     
     NSArray *vcNameArr = @[@"FXD_HomePageVCModules",@".FXD_IncreaseAmountLimitViewController",@"MyViewController"];
-    NSArray *titleArr = @[@"首页",@"认证",@"我的"];
-    NSArray *imageArr = @[@"home_tab_default",@"icon_2-2",@"mine_tab_default"];
-    NSArray *seleteimageArr = @[@"home_tab_select",@"icon_2-1",@"mine_tab_select"];
+    NSArray *titleArr = @[@"首页",@"提额",@"我的"];
+    NSArray *imageArr = @[@"home_tab_default",@"raise_tab_default",@"mine_tab_default"];
+    NSArray *seleteimageArr = @[@"home_tab_select",@"raise_tab_select",@"mine_tab_select"];
     
     NSMutableArray *ncArr = [NSMutableArray array];
     

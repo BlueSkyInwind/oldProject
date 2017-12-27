@@ -83,6 +83,11 @@
 //    [self getPersonalCenterInfo];
 }
 
+
+/**
+ 经验值体系-展示等级
+ */
+
 -(void)getExperienceValueGrade{
     
     MineViewModel *mineMV = [[MineViewModel alloc]init];
@@ -95,6 +100,9 @@
             } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             }];
 
+            if ([model.gradeName isEqualToString:@"薪薪人类"]) {
+                _headerView.isFirstLevel = @"2";
+            }
             _headerView.accountLabel.text = model.mobilePhone;
             _headerView.nameLabel.text = model.gradeName;
             _h5_url_ = model.h5_url_;
@@ -105,6 +113,9 @@
     [mineMV getExperienceValueGrad];
 }
 
+/**
+ 点击等级跳转
+ */
 
 -(void)shadowImageViewClick{
     
@@ -113,6 +124,11 @@
     [self.navigationController pushViewController:webView animated:YES];
 //    NSLog(@"点击了等级");
 }
+
+/**
+ 获取个人中心消息的个数
+ */
+
 -(void)getMessageNumber{
     
     MessageViewModel *messageVM = [[MessageViewModel alloc]init];

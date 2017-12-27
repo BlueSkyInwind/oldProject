@@ -135,5 +135,12 @@ extension HomeRefuseThirdView{
             make.width.equalTo(6)
             make.height.equalTo(13)
         }
+        
+        if UI_IS_IPONE5 {
+            rightImage.snp.updateConstraints({ (make) in
+                
+                make.right.equalTo(self).offset(-10)
+            })
+        }
     }
 }

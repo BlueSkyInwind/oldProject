@@ -41,6 +41,7 @@
 #import "NextViewCell.h"
 #import "CycleTextCell.h"
 #import "FXD_HomeProductListModel.h"
+#import "LoanPeriodListVCModule.h"
 @interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate>
 {
     NSString *_advTapToUrl;
@@ -121,7 +122,10 @@
     _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 165) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
     //375 185
     _sdView.delegate = self;
-    _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
+//    _sdView.showPageControl = true;
+    _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
+    _sdView.currentPageDotColor = UI_MAIN_COLOR;
+    _sdView.pageDotColor = RGBColor(214, 213, 213, 1.0);
     
     self.tableView.tableHeaderView = _sdView;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
@@ -594,8 +598,6 @@
     homeCell.backgroundColor = rgb(250, 250, 250);
     homeCell.selected = NO;
     homeCell.delegate = self;
-    homeCell.defaultMoneyLabel.text = @"8000元";
-    homeCell.defaultTimeLabel.text = @"180天";
     homeCell.homeProductListModel = _homeProductList;
     if (_homeProductList != nil) {
         
@@ -644,10 +646,27 @@
 }
 
 -(void)withdrawMoneyImmediatelyBtnClick{
+    
+    if ([_homeProductList.flag isEqualToString:@"15"]) {
+        
+        LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+        controller.product_id = @"";
+        controller.platform_type = @"";
+        controller.applicationId = @"";
+        [self.navigationController pushViewController:controller animated:true];
+        
+    }else{
+        
+        WithdrawalsVCModule *controller = [[WithdrawalsVCModule alloc]init];
+        [self.navigationController pushViewController:controller animated:true];
+    }
+    
     NSLog(@"立即提款");
 }
 
 -(void)loanBtnClick{
+    
+    
     NSLog(@"我要借款");
 }
 
@@ -669,14 +688,23 @@
 -(void)repayImmediatelyBtnClick:(BOOL)isSelected{
     if (!isSelected) {
         
+        LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+        controller.product_id = @"";
+        controller.platform_type = @"";
+        controller.applicationId = @"";
+        [self.navigationController pushViewController:controller animated:true];
         NSLog(@"立即还款");
     }else{
+        
+        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请勾选协议"];
         NSLog(@"勾选框");
     }
 }
 
 -(void)applyImmediatelyBtnClick:(NSString *)money :(NSString *)time{
     
+    UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
+    [self.navigationController pushViewController:controller animated:true];
     NSLog(@"===%@===%@==",money,time);
 }
 
