@@ -25,6 +25,16 @@ class MineHeaderView: UIView {
     //最左边的等级图片
    @objc var leftImageView : UIImageView?
     
+    var bgImageView : UIImageView?
+    
+   @objc var isFirstLevel : String?{
+        didSet(newValue){
+            
+            changeLeftImageViewLocation()
+            
+        }
+    }
+    
     @objc weak var delegate: MineHeaderViewDelegate?
     /*
     // Only override draw() if you perform custom drawing.
@@ -37,7 +47,9 @@ class MineHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 //        setupUI()
+        isFirstLevel = "1"
         setupNewUI()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -95,21 +107,10 @@ extension MineHeaderView{
     
     fileprivate func setupNewUI(){
         
-//        let bgView = UIView()
-//        bgView.isUserInteractionEnabled = true
-//        bgView.backgroundColor = UI_MAIN_COLOR
-//        self.addSubview(bgView)
-//        bgView.snp.makeConstraints { (make) in
-//            make.left.equalTo(self).offset(0)
-//            make.top.equalTo(self).offset(0)
-//            make.right.equalTo(self).offset(0)
-//            make.bottom.equalTo(self).offset(-10)
-//        }
-        
-        let bgImageView = UIImageView()
-        bgImageView.image = UIImage(named:"kongbai")
-        self.addSubview(bgImageView)
-        bgImageView.snp.makeConstraints { (make) in
+        bgImageView = UIImageView()
+        bgImageView?.image = UIImage(named:"kongbai")
+        self.addSubview(bgImageView!)
+        bgImageView?.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(30)
             make.top.equalTo(self).offset(45)
         }
@@ -117,10 +118,10 @@ extension MineHeaderView{
         leftImageView = UIImageView()
         self.addSubview(leftImageView!)
         leftImageView?.snp.makeConstraints({ (make) in
-//            make.left.equalTo(self).offset(30)
-//            make.top.equalTo(self).offset(45)
-            make.centerX.equalTo(bgImageView.snp.centerX)
-            make.centerY.equalTo(bgImageView.snp.centerY)
+            
+            make.centerX.equalTo((bgImageView?.snp.centerX)!)
+            make.top.equalTo((bgImageView?.snp.top)!).offset(5)
+//            make.centerY.equalTo((bgImageView?.snp.centerY)!)
             make.width.equalTo(67)
             make.height.equalTo(67)
         })
@@ -182,4 +183,11 @@ extension MineHeaderView{
         }
     }
     
+    fileprivate func changeLeftImageViewLocation(){
+        
+        leftImageView?.snp.updateConstraints({ (make) in
+    
+            make.top.equalTo((bgImageView?.snp.top)!).offset(-5)
+        })
+    }
 }
