@@ -871,18 +871,18 @@ extension HomePageCell {
         attStr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(20, 10))
         
         protocolLabel.attributedText = attStr
-        protocolLabel.yb_addAttributeTapAction(["《银行自动转账授权书》","、《三方借款协议》"]) { (string, range, int) in
-            print("点击了\(string)标签 - {\(range.location) , \(range.length)} - \(int)")
-            
-            if int == 0{
-                self.bankProtocolClick()
-            }else{
-                self.loanProtocolClick()
-            }
-        }
+//        protocolLabel.yb_addAttributeTapAction(["《银行自动转账授权书》","、《三方借款协议》"]) { (string, range, int) in
+//            print("点击了\(string)标签 - {\(range.location) , \(range.length)} - \(int)")
+//
+//            if int == 0{
+//                self.bankProtocolClick()
+//            }else{
+//                self.loanProtocolClick()
+//            }
+//        }
         
         // MARK: 关闭点击效果 默认是开启的
-        protocolLabel.enabledTapEffect = false
+//        protocolLabel.enabledTapEffect = false
         
         if UI_IS_IPONE6 {
             repayImmediatelyBtn.snp.updateConstraints({ (make) in

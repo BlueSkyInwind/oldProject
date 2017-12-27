@@ -27,6 +27,10 @@
 @implementation LoanMoneyFor
 
 
+@end
+
+
+@implementation ApplicaitonCalculateParamModel
 
 
 @end

@@ -144,6 +144,9 @@ NSString * const    _createApplication_url    =    @"application/create";
 //申请进件
 NSString * const    _new_CreateApplication_url    =    @"application/new/create";
 
+//申请信息计算
+NSString * const    _calculateApplicationInfo_url    =    @"application/repayAmount/calc";
+
 //申请确认页数据
 NSString * const    _ApplicationViewInfo_url    =    @"application/confirm";
 
@@ -374,6 +377,8 @@ NSString * const    _withDrawFunds_url        =    @"application/new/loan";
 
 //协议内容获取接口
 NSString * const    _newproductProtocol_url        =    @"product/getProductNewProtocolApi";
+
+
 
 #pragma mark - 合规接口
 

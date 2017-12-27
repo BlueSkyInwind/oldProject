@@ -37,6 +37,8 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     var chooseDiscountTDM:DiscountTicketDetailModel?
     var applicaitonViewIM:ApplicaitonViewInfoModel?
     var loanForCode:String?
+    var actualAmount:String?
+    var repaymentAmount:String?
     //MRAK:状态
     var chooseType:ApplicationChooseType?
     var disCountChooseIndex :NSInteger = 1
@@ -185,8 +187,8 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
                 }
             }
             
-            displayCell?.amountLabel?.text = applicaitonViewIM?.actualAmount == nil ? "": (applicaitonViewIM?.actualAmount)!
-            displayCell?.everyAmountLabel?.text = applicaitonViewIM?.repayAmount == nil ? "": (applicaitonViewIM?.repayAmount)!
+            displayCell?.amountLabel?.text = actualAmount == nil ? "": actualAmount
+            displayCell?.everyAmountLabel?.text = repaymentAmount == nil ? "": repaymentAmount
             displayCell?.dateLabel?.text =  applicaitonViewIM?.period == nil ? "": (applicaitonViewIM?.period)!
             tableViewCell = displayCell
         }
@@ -309,6 +311,16 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             break
         default: break
         }
+        
+        if isDisplayDiscount! {
+            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![2], productId: EliteLoan, voucherAmount: contentArrs![3]) { (isSuccess) in
+                self.tableView?.reloadData()
+            }
+        }else{
+            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![1], productId: EliteLoan, voucherAmount: "") { (isSuccess) in
+                self.tableView?.reloadData()
+            }
+        }
         self.tableView?.reloadData()
         choosePV = nil
     }
@@ -352,6 +364,8 @@ extension FXD_LoanApplicationViewController {
             if baseResult.errCode == "0" {
                 let applicaitonViewInfoM = try! ApplicaitonViewInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 self.applicaitonViewIM = applicaitonViewInfoM
+                self.actualAmount = applicaitonViewInfoM.actualAmount
+                self.repaymentAmount = applicaitonViewInfoM.repayAmount
                 if self.applicaitonViewIM?.voucher.count != 0 && self.applicaitonViewIM?.voucher != nil{
                     self.isDisplayDiscount = true
                 }
@@ -382,6 +396,26 @@ extension FXD_LoanApplicationViewController {
             let loanFors = dic as! LoanMoneyFor
             loanForArrs?.append(loanFors.desc_)
         }
+    }
+    
+    
+    func obtainSelectedCalculateInfo(loanAmount:String, periods: String, productId: String, voucherAmount: String,_ success:@escaping ((_ isSuccess:Bool) -> Void))  {
+        let applicationVM = ApplicationViewModel.init()
+        applicationVM.setBlockWithReturn({ (result) in
+            let baseResult = result as! BaseResultModel
+            if baseResult.errCode == "0" {
+                let applicaitonViewInfoM = try! ApplicaitonViewInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self.actualAmount = applicaitonViewInfoM.actualAmount
+                self.repaymentAmount = applicaitonViewInfoM.repaymentAmount
+                success(true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                success(false)
+            }
+        }) {
+            success(false)
+        }
+        applicationVM.obtainapplicationInfoCalculate(loanAmount, periods: periods, productId: productId, voucherAmount: voucherAmount)
     }
 }
 

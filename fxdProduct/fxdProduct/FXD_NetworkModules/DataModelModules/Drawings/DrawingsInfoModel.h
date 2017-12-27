@@ -42,6 +42,8 @@
 @property(nonatomic,strong)NSString<Optional> * userAgain;
 @property(nonatomic,strong)NSString<Optional> * userStatus;
 @property(nonatomic,strong)NSString<Optional> * taskStatus;
+@property(nonatomic,strong)NSString<Optional> * title;
+
 
 
 @end

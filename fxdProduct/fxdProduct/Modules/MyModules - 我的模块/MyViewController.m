@@ -304,10 +304,10 @@
         case 1:
         {
             
-            FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
-            [self.navigationController pushViewController:loanApplicationVC animated:true];
-//            UserDataAuthenticationListVCModules *userDataVC = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
-//            [self.navigationController pushViewController:userDataVC animated:YES];
+//            FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
+//            [self.navigationController pushViewController:loanApplicationVC animated:true];
+            UserDataAuthenticationListVCModules *userDataVC = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
+            [self.navigationController pushViewController:userDataVC animated:YES];
 //            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
 //            [self.navigationController pushViewController:repayRecord animated:true];
         }

@@ -24,7 +24,6 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
 
     var userThirdPartCM:UserThirdPartCertificationModel?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -58,14 +57,16 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
     func MXTask()  {
         FXD_MXVerifyManager.sharedInteraction().configMoxieSDKViewcontroller(self) { (result) in
             print(result ?? "")
-            let code = (result as! [String : String])["code"]
-            let taskType = (result as! [String : String])["taskType"]
-            let taskId = (result as! [String : String])["taskId"]
-            let loginDone = (result as! [String : String])["loginDone"]
-            if code == "2" && loginDone == "1" {
-                self.TheInternetBankupload(taskid: taskId!)
+            let  dic = result! as NSDictionary
+            let code = dic["code"] as! NSString
+            let taskType = dic["taskType"] as! NSString
+            let taskId = dic["taskId"] as! NSString
+            let loginDone = dic["loginDone"] as! NSNumber
+            
+            if code == "2" && loginDone.boolValue == true {
+                self.TheInternetBankupload(taskid: taskId as String)
             }else if code == "1" {
-                self.TheInternetBankupload(taskid: taskId!)
+                self.TheInternetBankupload(taskid: taskId as String)
             }
         }
     }

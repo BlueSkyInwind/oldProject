@@ -44,6 +44,8 @@
 @property(nonatomic,strong)NSString<Optional> * repayAmount;
 @property(nonatomic,strong)NSString<Optional> * tips;
 @property(nonatomic,strong)NSArray<DiscountTicketDetailModel,Optional> * voucher;
+//计算模型结果
+@property(nonatomic,strong)NSString<Optional> * repaymentAmount;
 
 @end
 
@@ -52,6 +54,16 @@
 
 @property(nonatomic,strong)NSString<Optional> * code_;
 @property(nonatomic,strong)NSString<Optional> * desc_;
+
+@end
+
+@interface ApplicaitonCalculateParamModel : JSONModel
+
+@property(nonatomic,strong)NSString<Optional> * loanAmount;
+@property(nonatomic,strong)NSString<Optional> * periods;
+@property(nonatomic,strong)NSString<Optional> * productId;
+@property(nonatomic,strong)NSString<Optional> * voucherAmount;
+
 
 @end
 

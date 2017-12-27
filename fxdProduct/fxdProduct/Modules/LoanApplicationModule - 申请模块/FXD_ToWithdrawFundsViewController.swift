@@ -19,7 +19,8 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     var period:String? = ""
     var periodAmount:String? = ""
     var displayContent:[String]? = [""]
-    
+    var displayTitle:String? = ""
+
     var isKeepProtocol : Bool? = false
     var isdispalyCard : Bool? = false
 
@@ -79,7 +80,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
             self.navigationController?.popViewController(animated: true)
         }
         
-        withdrawFundsFooterView = FXD_ToWithdrawFundsFooterView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h - 205 - 70), htmlContentArr: displayContent!, protocolNames: ["《借款协议》","《技术服务协议》","\n《风险管理与数据服务》"])
+        withdrawFundsFooterView = FXD_ToWithdrawFundsFooterView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h - 205 - 70), htmlContentArr: displayContent!, protocolNames: ["《借款协议》","《技术服务协议》","\n《风险管理与数据服务》"],titleStr:displayTitle!)
         withdrawFundsFooterView?.delegate = self
         tableView?.tableFooterView = withdrawFundsFooterView
         
@@ -144,21 +145,21 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     func protocolNameClick(_ index: Int) {
         switch index {
         case 0:
-            obtainProductProtocol("fewf", periods: "2", productId: EliteLoan, protocolType: "2", complication: {[weak self] (isSuccess, content) in
+            obtainProductProtocol("fewf", periods: self.period!, productId: EliteLoan, protocolType: "2", complication: {[weak self] (isSuccess, content) in
                 if isSuccess {
                     self?.pushDetailWebView(content: content)
                 }
             })
            break
         case 1:
-            obtainProductProtocol("fewf", periods: "2", productId: EliteLoan, protocolType: "6", complication: {[weak self] (isSuccess, content) in
+            obtainProductProtocol("fewf", periods: self.period!, productId: EliteLoan, protocolType: "6", complication: {[weak self] (isSuccess, content) in
                 if isSuccess {
                     self?.pushDetailWebView(content: content)
                 }
             })
             break
         case 2:
-            obtainProductProtocol("fewf", periods: "2", productId: EliteLoan, protocolType: "7", complication: {[weak self] (isSuccess, content) in
+            obtainProductProtocol("fewf", periods: self.period!, productId: EliteLoan, protocolType: "7", complication: {[weak self] (isSuccess, content) in
                 if isSuccess {
                     self?.pushDetailWebView(content: content)
                 }
@@ -187,7 +188,9 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         }
         
         requestWithDraw((self.selectedCard?.cardId)!) { (isSuccess) in
-            self.navigationController?.popToRootViewController(animated: true)
+            if isSuccess {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
     
@@ -202,7 +205,9 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
                 self?.fatchCardInfo({ (isSuccess, isBankCard) in
                 })
             }
+            self?.tableView?.reloadData()
         }
+        self.navigationController?.pushViewController(userBankCardListVC, animated: true)
     }
     
     func pushAddBanckCard()  {
@@ -243,6 +248,7 @@ extension FXD_ToWithdrawFundsViewController {
                     return
                 }
                 guard (self?.isdispalyCard!)! else {
+                    success(true,true)
                     return
                 }
                 //获取默认卡  或者选择的卡 （第一张卡）
@@ -277,6 +283,7 @@ extension FXD_ToWithdrawFundsViewController {
                 self.period = drawingsInfoM.period
                 self.periodAmount = drawingsInfoM.repaymentAmount
                 self.displayContent = drawingsInfoM.text as? [String]
+                self.displayTitle = drawingsInfoM.title
                 complication(true)
                 self.tableView?.reloadData()
             }else{
@@ -323,6 +330,9 @@ extension FXD_ToWithdrawFundsViewController {
         }
         commonVM.obtainProductProtocolType(productId, typeCode: protocolType, apply_id: applyId, periods: periods)
     }
+    
+    
+    
 }
 
 

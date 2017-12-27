@@ -1177,8 +1177,6 @@
 		CC6CBA851F5AB9620015C92C /* ApplicationStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */; };
 		CC6E0F171FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
 		CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
-		CC6E0F241FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F231FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift */; };
-		CC6E0F251FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F231FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift */; };
 		CC6E0F271FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F261FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift */; };
 		CC6E0F281FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F261FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift */; };
 		CC6F06731F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */; };
@@ -2366,7 +2364,6 @@
 		CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationStatusModel.m; sourceTree = "<group>"; };
 		CC6E0F151FF0942400D32773 /* FXD_HomeProductListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_HomeProductListModel.h; sourceTree = "<group>"; };
 		CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_HomeProductListModel.m; sourceTree = "<group>"; };
-		CC6E0F231FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBAttributeTextTapForSwfit.swift; sourceTree = "<group>"; };
 		CC6E0F261FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOverdueFeesRulesPopView.swift; sourceTree = "<group>"; };
 		CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidLoanApplicationcConfirmation.swift; sourceTree = "<group>"; };
 		CC6F06751F74E6F900FA889E /* OptionalRapidLoanApplicationVCModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalRapidLoanApplicationVCModules.swift; sourceTree = "<group>"; };
@@ -4341,7 +4338,6 @@
 		63E1ECD61E1BA88F0079A2F8 /* HomeCell */ = {
 			isa = PBXGroup;
 			children = (
-				CC6E0F231FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift */,
 				CC6C93E91F4A816500587C74 /* HomeDefaultCell.swift */,
 				632DFF5F1E48500500E414B2 /* CycleTextCell.h */,
 				632DFF601E48500500E414B2 /* CycleTextCell.m */,
@@ -6321,7 +6317,6 @@
 				63F1A50B1BD8CD5100B83751 /* RepaySuccessResult.m in Sources */,
 				CCA181A31FC80E1E0094DA58 /* NonePageView.swift in Sources */,
 				1AEFFA7C1C50BF72003936CE /* loanRecordCell.m in Sources */,
-				CC6E0F241FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift in Sources */,
 				63A24C5D1BE063A90036E8EF /* NSArray+Extend.m in Sources */,
 				63B65DEC1D518D8B00207231 /* UserProtocolVCModule.m in Sources */,
 				6379641E1CAD1BE0002A5910 /* LivenessIdentity.m in Sources */,
@@ -6849,7 +6844,6 @@
 				CC0DFAAB1EA5B1090024841A /* PushParse.m in Sources */,
 				84A3801B1FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm in Sources */,
 				CC0DFAAC1EA5B1090024841A /* BankList.m in Sources */,
-				CC6E0F251FF1EA6C00D32773 /* YBAttributeTextTapForSwfit.swift in Sources */,
 				CC0DFAAD1EA5B1090024841A /* RegionBaseClass.m in Sources */,
 				CC0DFAAE1EA5B1090024841A /* RepaySuccessResult.m in Sources */,
 				CC989C311F4D84A9000CDACF /* AuthenticationCenterVCModules.m in Sources */,

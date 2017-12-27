@@ -35,18 +35,18 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     }
     func MXTask()  {
         FXD_MXVerifyManager.sharedInteraction().configMoxieSDKViewcontroller(self) { (result) in
-            let  dic = result! as! [String:String]
-            let code = dic["code"]
-            let taskType = dic["taskType"]
-            let taskId = dic["taskId"]
-            let loginDone = dic["loginDone"]
+            let  dic = result! as NSDictionary
+            let code = dic["code"] as! NSString
+            let taskType = dic["taskType"] as! NSString
+            let taskId = dic["taskId"] as! NSString
+            let loginDone = dic["loginDone"] as! NSNumber
             
-            if (code == "2" && Bool(loginDone!) == true) ||  code == "1" {
+            if (code == "2" && loginDone.boolValue == true) ||  code == "1" {
                 if taskType == "email" {
-                    self.TheCreditCardInfoupload(taskId!)
+                    self.TheCreditCardInfoupload(taskId as String)
                 }
                 if taskType == "security" {
-                    self.TheSocialSecurityupload(taskId!)
+                    self.TheSocialSecurityupload(taskId as String)
                 }
             }
         }

@@ -84,7 +84,8 @@ extension FXD_displayAmountCommonHeaderView{
         })
         
         goBackBtn = UIButton.init(type: UIButtonType.custom)
-        goBackBtn?.setBackgroundImage(UIImage.init(named: "return_white"), for: UIControlState.normal)
+//        goBackBtn?.setBackgroundImage(UIImage.init(named: "return_white"), for: UIControlState.normal)
+        goBackBtn?.setImage(UIImage.init(named: "return_white"), for: UIControlState.normal)
         goBackBtn?.addTarget(self, action: #selector(goBackAction), for: UIControlEvents.touchUpInside)
         backGroundImage?.addSubview(goBackBtn!)
         goBackBtn?.snp.makeConstraints({ (make) in

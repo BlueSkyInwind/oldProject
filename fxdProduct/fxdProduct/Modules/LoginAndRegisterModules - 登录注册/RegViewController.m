@@ -219,9 +219,9 @@
 -(void)clickurl:(id)sender
 {
     DLog(@"注册协议");
-    RegViewModel * regVM = [[RegViewModel alloc]init];
-    [regVM setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+    CommonViewModel * commonVM = [[CommonViewModel alloc]init];
+    [commonVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = returnValue;
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             NSDictionary * dic = (NSDictionary *)baseResultM.data;
             DetailViewController *detailVC = [[DetailViewController alloc] init];
@@ -231,17 +231,17 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
+        
     }];
-    [regVM obtainRegisterProtocol:@"user_reg" ProtocolType:@"8"];
+    [commonVM obtainProductProtocolType:@"user_reg" typeCode:@"8" apply_id:nil periods:nil];
 }
 
 #pragma mark 点击意思保密协议
 -(void)clicksecry{
-    
     DLog(@"隐私保密协议");
-    RegViewModel * regVM = [[RegViewModel alloc]init];
-    [regVM setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+    CommonViewModel * commonVM = [[CommonViewModel alloc]init];
+    [commonVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = returnValue;
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             NSDictionary * dic = (NSDictionary *)baseResultM.data;
             DetailViewController *detailVC = [[DetailViewController alloc] init];
@@ -252,7 +252,7 @@
         }
     } WithFaileBlock:^{
     }];
-    [regVM obtainRegisterProtocol:@"user_privacy" ProtocolType:@"9"];
+    [commonVM obtainProductProtocolType:@"user_privacy" typeCode:@"9" apply_id:nil periods:nil];
 }
 
 #pragma mark 点击验证码按钮

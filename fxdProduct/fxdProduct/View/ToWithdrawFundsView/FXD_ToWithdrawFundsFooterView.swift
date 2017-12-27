@@ -44,18 +44,18 @@ class FXD_ToWithdrawFundsFooterView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(frame:CGRect,htmlContentArr:[String],protocolNames:[String]){
+    convenience init(frame:CGRect,htmlContentArr:[String],protocolNames:[String],titleStr:String){
         self.init(frame: frame)
-        setProtocolcontent(htmlContentArr)
+        setProtocolcontent(htmlContentArr,titleStr: titleStr)
         addProtocolClick(protocolNames)
     }
     
-    func setProtocolcontent(_ htmlContentArr:[String])  {
+    func setProtocolcontent(_ htmlContentArr:[String],titleStr:String)  {
         var contentStr:String? = ""
         for str in htmlContentArr {
             contentStr = contentStr! + "\n" + str
         }
-        displayTitle?.text = "保证金收取提示"
+        displayTitle?.text = titleStr
         contentStr?.removeFirst()
         let  contentAttri = NSMutableAttributedString.init(string: contentStr!)
         let contentPara = NSMutableParagraphStyle.init()

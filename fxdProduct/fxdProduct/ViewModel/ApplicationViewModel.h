@@ -69,5 +69,13 @@
  */
 -(void)new_obtainUserDiscountTicketListDisplayType:(NSString *)displayType product_id:(NSString *)product_id pageNum:(NSString *)pageNum pageSize:(NSString *)pageSize;
 
+/**
+ 申请也信息计算
 
+ @param loanAmount 金额
+ @param periods 期数
+ @param productId 产品id
+ @param voucherAmount 提额金额
+ */
+-(void)obtainapplicationInfoCalculate:(NSString *)loanAmount periods:(NSString *)periods productId:(NSString *)productId voucherAmount:(NSString *)voucherAmount;
 @end

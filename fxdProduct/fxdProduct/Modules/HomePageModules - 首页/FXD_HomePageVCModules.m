@@ -660,9 +660,8 @@
         [self.navigationController pushViewController:controller animated:true];
         
     }else{
-        
-        WithdrawalsVCModule *controller = [[WithdrawalsVCModule alloc]init];
-        [self.navigationController pushViewController:controller animated:true];
+        FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
+        [self.navigationController pushViewController:loanApplicationVC animated:true];
     }
     
     NSLog(@"立即提款");
@@ -670,7 +669,8 @@
 
 -(void)loanBtnClick{
     
-    
+    FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
+    [self.navigationController pushViewController:loanApplicationVC animated:true];
     NSLog(@"我要借款");
 }
 

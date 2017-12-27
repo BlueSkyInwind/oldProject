@@ -25,6 +25,7 @@ class FXD_ApplicationChoosePickerView: UIView ,UIPickerViewDelegate,UIPickerView
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = UIColor.white
         selectRow = 0
         setUpUI()
     }
@@ -129,7 +130,7 @@ extension  FXD_ApplicationChoosePickerView {
         pickView.backgroundColor = UIColor.white
         self.addSubview(pickView)
         pickView.snp.makeConstraints { (make) in
-            make.top.equalTo(btnView.snp.bottom).offset(0)
+            make.top.equalTo(btnView.snp.bottom).offset(10)
             make.left.equalTo(self).offset(0)
             make.right.equalTo(self).offset(0)
             make.height.equalTo(185)

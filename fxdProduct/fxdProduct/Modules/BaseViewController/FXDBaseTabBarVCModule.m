@@ -30,7 +30,6 @@
 
     [self setTabbarCon];
     self.delegate = self;
-
 }
 
 - (void)setTabbarCon
