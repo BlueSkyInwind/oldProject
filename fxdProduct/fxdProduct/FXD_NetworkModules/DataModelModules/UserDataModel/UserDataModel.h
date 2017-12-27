@@ -21,13 +21,20 @@
 //新的api
 @property (strong,nonatomic)NSString<Optional> * gathering;
 @property (strong,nonatomic)NSString<Optional> * gatheringEdit;
+@property (strong,nonatomic)NSString<Optional> * gatheringDesc;
 @property (strong,nonatomic)NSString<Optional> * identity;
 @property (strong,nonatomic)NSString<Optional> * identityEdit;
+@property (strong,nonatomic)NSString<Optional> * identityDesc;
 @property (strong,nonatomic)NSString<Optional> * others;
+@property (strong,nonatomic)NSString<Optional> * othersDesc;
 @property (strong,nonatomic)NSString<Optional> * person;
 @property (strong,nonatomic)NSString<Optional> * personEdit;
-@property (strong,nonatomic)NSString<Optional> * edit;
+@property (strong,nonatomic)NSString<Optional> * personDesc;
 @property (strong,nonatomic)NSString<Optional> * test;
+
+
+//废弃
+@property (strong,nonatomic)NSString<Optional> * edit;
 @property (strong,nonatomic)NSString<Optional> * faceIdentity;
 @property (strong,nonatomic)NSString<Optional> * telephone;
 @property (strong,nonatomic)NSString<Optional> * telephoneEdit;

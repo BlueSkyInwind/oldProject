@@ -693,6 +693,7 @@
         controller.platform_type = @"";
         controller.applicationId = @"";
         [self.navigationController pushViewController:controller animated:true];
+
         NSLog(@"立即还款");
     }else{
         

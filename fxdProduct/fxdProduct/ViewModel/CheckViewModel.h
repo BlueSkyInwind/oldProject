@@ -30,7 +30,10 @@
 -(void)withDrawalsApplyPeriod:(NSString *)period_ loan_for:(NSString *)loan_for_ DrawAmount:(NSString *)drawAmount  card_id:(NSString *)card_id;
 
 
-
+/**
+ 新的提款信息获取
+ */
+-(void)withDrawFundsInfoApply;
 
 @end
 

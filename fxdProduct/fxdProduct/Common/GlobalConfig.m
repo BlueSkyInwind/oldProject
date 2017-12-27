@@ -141,8 +141,14 @@ NSString * const    _HomeState_url    =    @"summary";
 //申请进件
 NSString * const    _createApplication_url    =    @"application/create";
 
+//申请进件
+NSString * const    _new_CreateApplication_url    =    @"application/new/create";
+
 //申请确认页数据
 NSString * const    _ApplicationViewInfo_url    =    @"application/confirm";
+
+//新版代申请确认页数据
+NSString * const    _newApplicationViewInfo_url        =    @"application/confirmApply";
 
 //提款页数据
 NSString * const    _UserDrawingInfo_url    =    @"application/loan";
@@ -318,7 +324,6 @@ NSString * const     _drawApplyAgain_jhtml      =   @"coregw/draw/drawApply";
 //推荐码规则
 NSString * const    _GetRecomfrInfo_url         =    @"product/getRecomfrInfo";
 
-
 //验证身份证号
 NSString * const    _verifyIdentityCard_url    =    @"apigw/client/operation/checkIdInfo";
 
@@ -363,6 +368,11 @@ NSString * const    _NewSummary_url    =    @"new/summary";
 
 //协议内容获取接口
 NSString * const    _productProtocol_url        =    @"product/getProductProtocolApi";
+
+//新版代提款
+NSString * const    _withDrawFunds_url        =    @"application/new/loan";
+
+
 
 
 #pragma mark - 合规接口
@@ -454,6 +464,7 @@ NSString * const SalaryLoan = @"P001002";                   //工薪贷平台
 NSString * const RapidLoan = @"P001004";                   //急速贷平台
 NSString * const WhiteCollarLoan = @"P001005";           //白领贷平台
 NSString * const DeriveRapidLoan = @"P001006";           //急速贷衍生（30天）平台
+NSString * const liteLoan = @"P001007";           //精英贷
 
 #pragma Mark - 项目配置信息
 

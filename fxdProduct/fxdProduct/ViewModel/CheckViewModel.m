@@ -69,12 +69,21 @@
             self.faileBlock();
         }
     }];
-
 }
 
-
-
-
+-(void)withDrawFundsInfoApply{
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_withDrawFunds_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseRm = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRm);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
 
 @end
 
@@ -117,9 +126,7 @@
     }];
 }
 
-
 @end
-
 
 @implementation CheckBankViewModel
 

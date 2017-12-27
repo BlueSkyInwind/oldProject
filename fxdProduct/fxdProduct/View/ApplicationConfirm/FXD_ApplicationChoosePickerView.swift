@@ -13,7 +13,7 @@ import UIKit
     //取消按钮的代理方法
     func chooseCancelBtn()
     //确认按钮的代理方法
-    func chooseSureBtn(_ content: String)->Void
+    func chooseSureBtn(_ content: String , row:NSInteger)->Void
     
 }
 class FXD_ApplicationChoosePickerView: UIView ,UIPickerViewDelegate,UIPickerViewDataSource{
@@ -44,7 +44,7 @@ class FXD_ApplicationChoosePickerView: UIView ,UIPickerViewDelegate,UIPickerView
     @objc func sureBtnClick() {
         if self.delegate != nil {
             let content = dataArray[selectRow!]
-            self.delegate?.chooseSureBtn(content )
+            self.delegate?.chooseSureBtn(content ,row: selectRow!)
             dismiss()
         }
     }
@@ -85,6 +85,7 @@ class FXD_ApplicationChoosePickerView: UIView ,UIPickerViewDelegate,UIPickerView
 extension  FXD_ApplicationChoosePickerView {
     
     func setUpUI()  {
+        
         let btnView = UIView()
         btnView.backgroundColor = LINE_COLOR
         self.addSubview(btnView)
@@ -92,7 +93,7 @@ extension  FXD_ApplicationChoosePickerView {
             make.bottom.equalTo(self).offset(-185)
             make.left.equalTo(self).offset(0)
             make.right.equalTo(self).offset(0)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         
         let cancelBtn = UIButton()
@@ -102,9 +103,10 @@ extension  FXD_ApplicationChoosePickerView {
         cancelBtn.addTarget(self, action: #selector(cancelBtnClick), for: .touchUpInside)
         btnView.addSubview(cancelBtn)
         cancelBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(btnView.snp.left).offset(23)
+            make.left.equalTo(btnView.snp.left).offset(15)
             make.centerY.equalTo(btnView.snp.centerY)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
+            make.width.equalTo(60)
         }
         
         let sureBtn = UIButton()
@@ -114,9 +116,10 @@ extension  FXD_ApplicationChoosePickerView {
         sureBtn.addTarget(self, action: #selector(sureBtnClick), for: .touchUpInside)
         btnView.addSubview(sureBtn)
         sureBtn.snp.makeConstraints { (make) in
-            make.right.equalTo(btnView.snp.right).offset(-23)
+            make.right.equalTo(btnView.snp.right).offset(-15)
             make.centerY.equalTo(btnView.snp.centerY)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
+            make.width.equalTo(60)
         }
         
         

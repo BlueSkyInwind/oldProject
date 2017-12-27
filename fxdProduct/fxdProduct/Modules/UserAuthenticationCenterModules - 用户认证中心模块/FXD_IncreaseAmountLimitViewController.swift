@@ -13,6 +13,10 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     var tableView:UITableView?
     var headerView:FXD_displayAmountCommonHeaderView?
     var appraisalBtn:UIButton?
+    
+    var creditCardStatus:String? = ""
+    var socialSecurityStatus:String? = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -31,7 +35,20 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     }
     func MXTask()  {
         FXD_MXVerifyManager.sharedInteraction().configMoxieSDKViewcontroller(self) { (result) in
-            print(result ?? "")
+            let  dic = result! as! [String:String]
+            let code = dic["code"]
+            let taskType = dic["taskType"]
+            let taskId = dic["taskId"]
+            let loginDone = dic["loginDone"]
+            
+            if (code == "2" && Bool(loginDone!) == true) ||  code == "1" {
+                if taskType == "email" {
+                    self.TheCreditCardInfoupload(taskId!)
+                }
+                if taskType == "security" {
+                    self.TheSocialSecurityupload(taskId!)
+                }
+            }
         }
     }
     
@@ -58,7 +75,11 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
             self.automaticallyAdjustsScrollViewInsets = false;
         }
         
-        headerView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 205), amount: "3000")
+        var rect =  CGRect.init(x: 0, y: 0, width: _k_w, height: 205)
+        if UI_IS_IPONE6P || UI_IS_IPHONEX{
+            rect =  CGRect.init(x: 0, y: 0, width: _k_w, height: 256)
+        }
+        headerView = FXD_displayAmountCommonHeaderView.init(frame: rect, amount: "3000")
         headerView?.titleLabel?.text = "提额"
         headerView?.hintWordLabel?.text = IncreaseAmountLimitMarkeords
         headerView?.goBackBtn?.isHidden = true
@@ -94,9 +115,25 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
         switch indexPath.row {
         case 0:
             cell.titleLabel.text = "信用卡认证";
+            if creditCardStatus == "1" {
+                cell.statusLabel.textColor = UI_MAIN_COLOR
+                cell.statusLabel.text = "已完成"
+            }
+            
+            if creditCardStatus == "2" {
+                cell.statusLabel.text = "认证中"
+            }
+            
             break
         case 1:
             cell.titleLabel.text = "社保认证";
+            if socialSecurityStatus == "1" {
+                cell.statusLabel.textColor = UI_MAIN_COLOR
+                cell.statusLabel.text = "已完成"
+            }
+            if socialSecurityStatus == "2" {
+                cell.statusLabel.text = "认证中"
+            }
             break
         default:
             break
@@ -107,9 +144,15 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
+            if creditCardStatus == "2" || creditCardStatus == "3"{
+                break
+            }
               FXD_MXVerifyManager.sharedInteraction().mailImportClick()
             break
         case 1:
+            if socialSecurityStatus == "2" || socialSecurityStatus == "3"{
+                break
+            }
              FXD_MXVerifyManager.sharedInteraction().securityImportClick()
             break
         default:
@@ -163,5 +206,64 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+
+extension FXD_IncreaseAmountLimitViewController {
+    
+    func TheCreditCardInfoupload(_ taskid:String) {
+        let userDataVM = UserDataViewModel.init()
+        userDataVM.setBlockWithReturn({ (resultObject) in
+            let baseResult = try! BaseResultModel.init(dictionary: resultObject as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                self.obtainHighRanking()
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        userDataVM.theCreditCardInfoUpload(taskid)
+    }
+    
+    func TheSocialSecurityupload(_ taskid:String) {
+        let userDataVM = UserDataViewModel.init()
+        userDataVM.setBlockWithReturn({ (resultObject) in
+            let baseResult = try! BaseResultModel.init(dictionary: resultObject as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                self.obtainHighRanking()
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+        }
+        userDataVM.socialSecurityInfoUpload(taskid)
+    }
+
+    func obtainHighRanking()  {
+        let userDataVM = UserDataViewModel.init()
+        userDataVM.setBlockWithReturn({ (resultObject) in
+            let baseResult = try! BaseResultModel.init(dictionary: resultObject as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                let array = baseResult.data as! NSArray
+                for dic in array {
+                    let highRandM = try! HighRandingModel.init(dictionary: dic as! [AnyHashable : Any])
+                    if highRandM.tasktypeid == "1" {
+                        self.creditCardStatus = highRandM.resultid
+                    }
+                    if highRandM.tasktypeid == "2" {
+                        self.socialSecurityStatus = highRandM.resultid
+                    }
+                }
+                self.tableView?.reloadData()
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+        }
+        userDataVM.obtainhighRankingStatus()
+    }
+}
+
+
+
+

@@ -16,7 +16,7 @@ typealias ClickButtonIndex = (_ currentIndex:Int) -> Void
 class FXDAlertView: UIView {
     
     @objc var  titleLabel:UILabel?
-    @objc var  contentLabel:UITextView?
+    @objc var  contentLabel:UILabel?
     @objc var  cancelBtn:UIButton?
     @objc var  sureBtn:UIButton?
     
@@ -37,14 +37,25 @@ class FXDAlertView: UIView {
     @objc convenience init(_ titleStr:String, content:String , cancelTitle:String, sureTitle:String) {
         self.init(frame: UIScreen.main.bounds)
         self.titleLabel?.text = titleStr
-        self.cancelBtn?.setTitle(cancelTitle, for: UIControlState.normal)
-        self.sureBtn?.setTitle(sureTitle, for: UIControlState.normal)
         self.contentLabel?.text = content
+
+        if cancelTitle == "" ||  sureTitle == "" {
+            updateViewLayout()
+            self.sureBtn?.setTitle(sureTitle, for: UIControlState.normal)
+        }else{
+            self.cancelBtn?.setTitle(cancelTitle, for: UIControlState.normal)
+            self.sureBtn?.setTitle(sureTitle, for: UIControlState.normal)
+        }
+        
+        if titleStr == "" {
+            updateNoTitleViewLayout()
+        }
     }
     
     @objc convenience init(_ titleStr:String, content:String ,attributes:[NSAttributedStringKey : Any], cancelTitle:String,  sureTitle:String) {
         let  contentAttri = NSMutableAttributedString.init(string: content, attributes:attributes)
         self.init(titleStr, contentAttri: contentAttri, cancelTitle: cancelTitle, sureTitle: sureTitle)
+        adaptHeightContent(contentAttri)
     }
     
     @objc convenience init(_ titleStr:String, contentAttri:NSAttributedString, cancelTitle:String,  sureTitle:String) {
@@ -65,9 +76,11 @@ class FXDAlertView: UIView {
         }
     }
     
-    func adaptHeightContent() {
-        let height = self.contentLabel?.attributedText?.boundingRect(with:CGSize.init(width: Alert_width - 30, height: UIScreen.main.bounds.size.height), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.RawValue(UInt8(NSStringDrawingOptions.usesLineFragmentOrigin.rawValue) | UInt8(NSStringDrawingOptions.usesFontLeading.rawValue))), context: nil).height
-        let backHeight = height! + header_Height + bottom_Height
+    ///根据提示框内容自适应高度
+    func adaptHeightContent(_ contentAttri:NSAttributedString) {
+        let height = contentAttri.boundingRect(with:CGSize.init(width: Alert_width - 30, height: UIScreen.main.bounds.size.height), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.RawValue(UInt8(NSStringDrawingOptions.usesLineFragmentOrigin.rawValue) | UInt8(NSStringDrawingOptions.usesFontLeading.rawValue))), context: nil).height
+        var backHeight = height + header_Height + bottom_Height + 20
+        backHeight  = backHeight < 150.0 ? 150.0 : backHeight
         backGroundView?.snp.updateConstraints({ (make) in
             make.height.equalTo(backHeight)
         })
@@ -210,13 +223,11 @@ extension FXDAlertView {
             make.bottom.equalTo((bottomView?.snp.bottom)!).offset(0);
         })
         
-        contentLabel = UITextView()
+        contentLabel = UILabel()
         contentLabel?.font = UIFont.yx_boldSystemFont(ofSize: 14)
         contentLabel?.textColor = UIColor.init(red: 127/255.0, green: 127/255.0, blue: 127/255.0, alpha: 1)
-        contentLabel?.isEditable = false
-        contentLabel?.isSelectable = false
-        contentLabel?.isUserInteractionEnabled = false
         contentLabel?.textAlignment  = NSTextAlignment.center
+        contentLabel?.numberOfLines = 0
         backGroundView?.addSubview(contentLabel!)
         contentLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo((lineOne?.snp.bottom)!).offset(10)

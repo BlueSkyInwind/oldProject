@@ -54,7 +54,7 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
         //        getCapitalListData()
         
         self.obtainDiscountTicket { (discountTicketM) in
-            if discountTicketM.canuselist != nil &&  discountTicketM.canuselist.count != 0 {
+            if discountTicketM.canuselist != nil && discountTicketM.canuselist.count != 0 {
                 self.chooseDiscountTDM = (discountTicketM.canuselist[0] as! DiscountTicketDetailModel)
                 self.rapidLoanView?.addDiscountCoupons(discountTicketDetailM: self.chooseDiscountTDM!)
             }

@@ -174,8 +174,10 @@ UIKIT_EXTERN NSString * const       _AuthenticationCenterBasicInformation_url;//
 UIKIT_EXTERN NSString * const       _UserContactInfo_url;                    //用户联系人信息
 UIKIT_EXTERN NSString * const       _HomeState_url;                          //首页状态查询
 UIKIT_EXTERN NSString * const       _createApplication_url;                  //用户进件接口
+UIKIT_EXTERN NSString * const       _new_CreateApplication_url;                  //新版用户进件接口
 
 UIKIT_EXTERN NSString * const       _ApplicationViewInfo_url;                  //申请确认页数据
+UIKIT_EXTERN NSString * const       _newApplicationViewInfo_url;                  //申请确认页数据
 UIKIT_EXTERN NSString * const       _UserDrawingInfo_url;                  //申请确认页数据
 UIKIT_EXTERN NSString * const       _CapitalList_url;                  //资金平台列表
 UIKIT_EXTERN NSString * const       _CapitalLoan_url;                  //资金平台放款接口
@@ -192,6 +194,9 @@ UIKIT_EXTERN NSString * const       _DeductibleAmountOfDiscountTicket_url;      
 UIKIT_EXTERN NSString * const       _PersonalCenterWithdrawCashAPI_url;      //个人中心（优惠券,现金红包,账户余额）
 UIKIT_EXTERN NSString * const       _LoadWithdrawCash_url;                   //现金红包,账户余额（点击列表操作展示提现页）
 UIKIT_EXTERN NSString * const       _WithdrawCash_url;                       //提现
+UIKIT_EXTERN NSString * const       _withDrawFunds_url;                       //新版提现
+
+
 UIKIT_EXTERN NSString * const       _CheckWithdrawCash_url;                  //校验提现条件
 UIKIT_EXTERN NSString * const       _WithdrawCashDetail_url;                 //现金红包收提明细
 UIKIT_EXTERN NSString * const       _verifyIdentityCard_url;                 //验证身份证
@@ -220,6 +225,7 @@ UIKIT_EXTERN NSString * const SalaryLoan;          //工薪贷平台
 UIKIT_EXTERN NSString * const RapidLoan;         //急速贷平台
 UIKIT_EXTERN NSString * const WhiteCollarLoan;       //白领贷平台
 UIKIT_EXTERN NSString * const DeriveRapidLoan;       //急速贷衍生（30天）平台
+UIKIT_EXTERN NSString * const EliteLoan;       //精英贷
 
 UIKIT_EXTERN NSString * const PLATFORM;                 //平台
 UIKIT_EXTERN NSString * const CHANNEL;

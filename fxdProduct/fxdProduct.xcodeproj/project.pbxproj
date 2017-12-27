@@ -403,6 +403,10 @@
 		84117F571F60F6A700B7EAA9 /* LoadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */; };
 		8411DA111FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */; };
 		8411DA121FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */; };
+		841A48E01FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A48DE1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift */; };
+		841A48E11FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A48DE1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift */; };
+		841A48E21FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841A48DF1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib */; };
+		841A48E31FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841A48DF1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib */; };
 		841BE5C61F177C4F00BABD04 /* UserLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */; };
 		841BE5C91F17829D00BABD04 /* LoginStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C81F17829D00BABD04 /* LoginStatusView.m */; };
 		841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
@@ -2061,6 +2065,8 @@
 		840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvationViewModel.m; sourceTree = "<group>"; };
 		84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadFailureView.swift; sourceTree = "<group>"; };
 		8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_VersionUpdatepop.swift; sourceTree = "<group>"; };
+		841A48DE1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_ToWithDrawFundsTableViewCell.swift; sourceTree = "<group>"; };
+		841A48DF1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FXD_ToWithDrawFundsTableViewCell.xib; sourceTree = "<group>"; };
 		841BE5C41F177C4F00BABD04 /* UserLevelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLevelViewController.h; sourceTree = "<group>"; };
 		841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLevelViewController.m; sourceTree = "<group>"; };
 		841BE5C71F17829D00BABD04 /* LoginStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginStatusView.h; sourceTree = "<group>"; };
@@ -4798,6 +4804,8 @@
 				84EC95B01F5AC4E3008656BA /* FeeDescriptionTableViewCell.m */,
 				84EC95B11F5AC4E3008656BA /* FeeDescriptionTableViewCell.xib */,
 				849AC25F1FF0DCA6005E435F /* FXD_ToWithdrawFundsFooterView.swift */,
+				841A48DE1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift */,
+				841A48DF1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib */,
 			);
 			path = ToWithdrawFundsView;
 			sourceTree = "<group>";
@@ -5519,6 +5527,7 @@
 				84C61A051FA81E7000626411 /* PayMoneyCell.xib in Resources */,
 				84C61A061FA81E7000626411 /* PayVerificationCodeCell.xib in Resources */,
 				84C61A071FA81E7000626411 /* RepayListCell.xib in Resources */,
+				841A48E21FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib in Resources */,
 				84D715F21F78CF8800F433E5 /* MGBankCardResource.bundle in Resources */,
 				8431498A1F75038D00FA3678 /* MGIDCardResource.bundle in Resources */,
 				8431498B1F75038D00FA3678 /* MGLivenessDetectionResource.bundle in Resources */,
@@ -5617,6 +5626,7 @@
 				84C619F11FA81D3E00626411 /* PayMoneyCell.xib in Resources */,
 				84C619F21FA81D3E00626411 /* PayVerificationCodeCell.xib in Resources */,
 				84C619F31FA81D3E00626411 /* RepayListCell.xib in Resources */,
+				841A48E31FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib in Resources */,
 				84D715F01F78CF6700F433E5 /* MGBankCardResource.bundle in Resources */,
 				843149861F75036700FA3678 /* MGIDCardResource.bundle in Resources */,
 				843149871F75036700FA3678 /* MGLivenessDetectionResource.bundle in Resources */,
@@ -6188,6 +6198,7 @@
 				638A16FD1E517D9F00AB8AB6 /* UIBezierPath.m in Sources */,
 				636B30E91DD41B330014DB7B /* Approval.m in Sources */,
 				636B1BA31C30DBCB00450358 /* SMSViewModel.m in Sources */,
+				841A48E01FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift in Sources */,
 				63A24D2F1BE10F4A0036E8EF /* GetMoneyStateUserBean.m in Sources */,
 				638A170A1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m in Sources */,
 				84A5696D1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
@@ -6714,6 +6725,7 @@
 				CC0DFA4F1EA5B1090024841A /* UIView+YYText.m in Sources */,
 				CC0DFA511EA5B1090024841A /* LOTEllipseShapeLayer.m in Sources */,
 				CC0DFA521EA5B1090024841A /* JXLMessagePrse.m in Sources */,
+				841A48E11FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift in Sources */,
 				CC0DFA531EA5B1090024841A /* YYTextAsyncLayer.m in Sources */,
 				84A380231FAC1D8D008FB7AF /* UserPhoneContactsVCModules.m in Sources */,
 				CC2A4D0A1EE13260000A38DC /* QryUserStatusParamModel.m in Sources */,

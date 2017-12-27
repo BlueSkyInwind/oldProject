@@ -18,19 +18,30 @@ enum ApplicationChooseType {
     case Application_LoanFor
 }
 
-
 class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,ApplicationChoosePickViewDelegate {
 
     var tableView:UITableView?
+    
+    var productId:String?
+    //MRAK:视图
     var headerView:FXD_displayAmountCommonHeaderView?
     var applicationCell:FXD_LoanApplicationCellTableViewCell?
     var displayCell:FXD_LoanApplicationDisplayTableViewCell?
-    let titleArrs = ["选择额度（元）","临时提额劵","分期期数","借款用途"]
-    var contentArrs:[String]?
     var applicationBtn:UIButton?
     var choosePV:FXD_ApplicationChoosePickerView?
-    
+    //MRAK:数据
+    var  titleArrs = ["选择额度（元）","临时提额劵","分期期数","借款用途"]
+    var contentArrs:[String]?
+    var periodArrs:[String]? = []
+    var loanForArrs:[String]? =  []
+    var chooseDiscountTDM:DiscountTicketDetailModel?
+    var applicaitonViewIM:ApplicaitonViewInfoModel?
+    var loanForCode:String?
+    //MRAK:状态
     var chooseType:ApplicationChooseType?
+    var disCountChooseIndex :NSInteger = 1
+
+    var isDisplayDiscount:Bool? = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +49,27 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         self.title = "申请确认"
         self.addBackItem()
         chooseType = .Application_Amount
-        contentArrs = ["2500","+200","12","得分解"]
-        configureView()
+        contentArrs = ["2500","+200","12","点击选择"]
+        obtainApplicationInfo(EliteLoan) {[weak self] (isSuccess) in
+            self?.dataInitialize()
+            self?.configureView()
+        }
     }
-
+    
+    /// 页面数据初始化
+    func dataInitialize()  {
+        if (self.isDisplayDiscount!) {
+            self.titleArrs = ["选择额度（元）","临时提额劵","分期期数","借款用途"]
+            self.chooseDiscountTDM = ((self.applicaitonViewIM?.voucher! as! NSArray)[0] as! DiscountTicketDetailModel)
+            let discountAmount = "+￥" + "\(self.chooseDiscountTDM?.total_amount ?? "")"
+            self.contentArrs = [(self.applicaitonViewIM?.maxAmount)!,discountAmount,(self.applicaitonViewIM?.minPeriod)!,"点击选择"]
+        }else{
+            self.titleArrs = ["选择额度（元）","分期期数","借款用途"]
+            self.contentArrs = [(self.applicaitonViewIM?.maxAmount)!,(self.applicaitonViewIM?.minPeriod)!,"点击选择"]
+        }
+    }
+    
+    /// 页面视图
     func configureView()  {
         
         self.view.backgroundColor = LOAN_APPLICATION_COLOR
@@ -63,13 +91,16 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             self.automaticallyAdjustsScrollViewInsets = false;
         }
         
-        headerView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 205), amount: "3000")
+        var rect =  CGRect.init(x: 0, y: 0, width: _k_w, height: 205)
+        if UI_IS_IPONE6P || UI_IS_IPHONEX{
+            rect =  CGRect.init(x: 0, y: 0, width: _k_w, height: 256)
+        }
+        headerView = FXD_displayAmountCommonHeaderView.init(frame: rect, amount: (applicaitonViewIM?.maxAmount == nil ? "": (applicaitonViewIM?.maxAmount)!))
         headerView?.titleLabel?.text = "申请确认"
         tableView?.tableHeaderView = headerView
         headerView?.goBack = {
             self.navigationController?.popViewController(animated: true)
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,7 +115,27 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     }
     
     @objc func applicationBottonClick() {
-
+        if loanForCode == nil || loanForCode == ""{
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请选择借款用途")
+            return
+        }
+        
+        let applicationMV = ApplicationViewModel()
+        applicationMV.setBlockWithReturn({ [weak self](returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                let checkVC = FXD_ToWithdrawFundsViewController()
+                self?.navigationController?.pushViewController(checkVC, animated: true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+        }
+        if isDisplayDiscount! {
+            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: chooseDiscountTDM?.base_id, loanFor: loanForCode, periods: contentArrs![2], loanAmount: contentArrs![0])
+        }else{
+            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: nil, loanFor: loanForCode, periods: contentArrs![2], loanAmount: contentArrs![0])
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -93,7 +144,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 4
+            return self.titleArrs.count
         }else{
             return 1
         }
@@ -134,34 +185,47 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
                 }
             }
             
-            displayCell?.amountLabel?.text = "3000"
-            displayCell?.everyAmountLabel?.text = "1100"
-            displayCell?.dateLabel?.text = "30天"
+            displayCell?.amountLabel?.text = applicaitonViewIM?.actualAmount == nil ? "": (applicaitonViewIM?.actualAmount)!
+            displayCell?.everyAmountLabel?.text = applicaitonViewIM?.repayAmount == nil ? "": (applicaitonViewIM?.repayAmount)!
+            displayCell?.dateLabel?.text =  applicaitonViewIM?.period == nil ? "": (applicaitonViewIM?.period)!
             tableViewCell = displayCell
         }
         return tableViewCell!
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            return
+        }
+        
         switch indexPath.row {
         case 0:
             chooseType = .Application_Amount
-            addChoosePickerView(["1000","2000","3000","4000",])
+            addChoosePickerView(applicaitonViewIM?.amountList as! [String])
             break
         case 1:
+            if !isDisplayDiscount! {
+                chooseType = .Application_Period
+                addChoosePickerView(periodArrs!)
+                break
+            }
             chooseType = .Application_Discount
+            showChooseAmountView()
             break
         case 2:
+            if !isDisplayDiscount! {
+                chooseType = .Application_LoanFor
+                addChoosePickerView(loanForArrs!)
+                break
+            }
             chooseType = .Application_Period
-            addChoosePickerView(["1","2","3","4",])
+            addChoosePickerView(periodArrs!)
             break
         case 3:
             chooseType = .Application_LoanFor
-            addChoosePickerView(["的恐怕我","的我跑酷","的我看来看","的沃尔克",])
+            addChoosePickerView(loanForArrs!)
             break
-            
         default: break
-            
         }
     }
     
@@ -209,7 +273,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    //MRAK:选择框视图
     func addChoosePickerView(_ array:[String])  {
         if choosePV != nil {
             return
@@ -222,23 +286,51 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     func chooseCancelBtn() {
         choosePV = nil
     }
-    func chooseSureBtn(_ content: String) {
-        
+    func chooseSureBtn(_ content: String,row:NSInteger) {
         switch chooseType {
         case .Application_Amount?:
             contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 0, length: 1))!, with: [content])
             break
         case .Application_Period?:
+            if !isDisplayDiscount! {
+                contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 1, length: 1))!, with: [content])
+                break
+            }
             contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 2, length: 1))!, with: [content])
             break
         case .Application_LoanFor?:
+            let loanFors = self.applicaitonViewIM?.loanFor[0] as! LoanMoneyFor
+            loanForCode = loanFors.code_
+            if !isDisplayDiscount! {
+                contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 2, length: 1))!, with: [content])
+                break
+            }
             contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 3, length: 1))!, with: [content])
             break
         default: break
-            
         }
         self.tableView?.reloadData()
         choosePV = nil
+    }
+    
+    //MARK:选择提额券
+    func showChooseAmountView(){
+        let discountCouponVC = DiscountCouponListVCModules()
+        discountCouponVC.dataListArr = (applicaitonViewIM?.voucher! as NSArray?)
+        discountCouponVC.currentIndex = "\(disCountChooseIndex)" as NSString
+        discountCouponVC.view.frame = CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h * 0.6)
+        discountCouponVC.chooseDiscountTicket = ({[weak self] (index,discountTicketDetailModel,str ) in
+            self?.disCountChooseIndex = index;
+            self?.chooseDiscountTDM = discountTicketDetailModel;
+            if index != 0 {
+                self?.contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 1, length: 1))!, with: ["+￥" + "\(self?.chooseDiscountTDM?.total_amount ?? "")"])
+            }else{
+                self?.contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 1, length: 1))!, with: ["+￥0"])
+            }
+        })
+        
+        self.presentSemiViewController(discountCouponVC, withOptions: [KNSemiModalOptionKeys.pushParentBack.takeUnretainedValue() : false,KNSemiModalOptionKeys.parentAlpha.takeUnretainedValue() : 0.8], completion: nil, dismiss: {
+        })
     }
     
     /*
@@ -250,5 +342,46 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+extension FXD_LoanApplicationViewController {
+    
+    func obtainApplicationInfo(_ productId:String ,_ success:@escaping ((_ isSuccess:Bool) -> Void))  {
+        let applicationVM = ApplicationViewModel.init()
+        applicationVM.setBlockWithReturn({ (result) in
+            let baseResult = try! BaseResultModel.init(dictionary: result as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                let applicaitonViewInfoM = try! ApplicaitonViewInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self.applicaitonViewIM = applicaitonViewInfoM
+                if self.applicaitonViewIM?.voucher.count != 0 && self.applicaitonViewIM?.voucher != nil{
+                    self.isDisplayDiscount = true
+                }
+                self.getPeriodArr(minStr: (self.applicaitonViewIM?.minPeriod)!, maxStr: (self.applicaitonViewIM?.maxPeriod)!)
+                self.getLoanForArr()
+                success(true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                success(false)
+            }
+        }) {
+            success(false)
+        }
+        applicationVM.obtainNewApplicationInfo(productId)
+    }
+    
+    /// 周期数组
+    func getPeriodArr(minStr:String , maxStr:String) {
+        let min = Int(minStr)!
+        let max = Int(maxStr)!
+        for i  in min...max {
+            periodArrs?.append(String.init(format: "%d", i))
+        }
+    }
+    /// 用途数组
+    func getLoanForArr() {
+        for dic in (self.applicaitonViewIM?.loanFor)! {
+            let loanFors = dic as! LoanMoneyFor
+            loanForArrs?.append(loanFors.desc_)
+        }
+    }
+}
+

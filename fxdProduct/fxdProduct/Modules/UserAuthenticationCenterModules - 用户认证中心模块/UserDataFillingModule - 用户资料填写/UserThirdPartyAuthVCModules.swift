@@ -19,7 +19,8 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
     
     var tableView : UITableView?
     var thirdPartyAuthCell :ThirdPartyAuthTableViewCell?
-    let dataArr : Array<String> = ["人脸识别","手机认证","芝麻信用","工资流水"]
+//    let dataArr : Array<String> = ["人脸识别","手机认证","芝麻信用","工资流水"]
+    let dataArr : Array<String> = ["人脸识别","手机认证","工资流水"]
 
     var userThirdPartCM:UserThirdPartCertificationModel?
     
@@ -53,6 +54,7 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
         tableView?.register(ThirdPartyAuthTableViewCell.self, forCellReuseIdentifier: "ThirdPartyAuthTableViewCell")
     }
     
+    ///魔蝎三方认证
     func MXTask()  {
         FXD_MXVerifyManager.sharedInteraction().configMoxieSDKViewcontroller(self) { (result) in
             print(result ?? "")
@@ -77,53 +79,28 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
         }
         return 44
     }
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
-    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         thirdPartyAuthCell = tableView.dequeueReusableCell(withIdentifier:  "ThirdPartyAuthTableViewCell", for: indexPath) as? ThirdPartyAuthTableViewCell
         switch indexPath.row {
         case 0:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
             thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.faceIdentityDesc == nil ? "未完成":userThirdPartCM?.faceIdentityDesc
-//            if verifyStatus == "2" || verifyStatus == "3"{
-//                thirdPartyAuthCell?.statusLabel?.text = "已完成"
-//            }else{
-//                thirdPartyAuthCell?.statusLabel?.text = "未完成"
-//            }
+
             break
         case 1:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
             thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.telephoneDesc == nil ? "未完成":userThirdPartCM?.telephoneDesc
 
-//            if isMobileAuth == "2" {
-//                thirdPartyAuthCell?.statusLabel?.text = "已完成"
-//            }else{
-//                thirdPartyAuthCell?.statusLabel?.text = "未完成"
-//            }
             break
+//        case 2:
+//            thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
+//            thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.zmIdentityDesc == nil ? "未完成":userThirdPartCM?.zmIdentityDesc
+//            break
         case 2:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
-            thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.zmIdentityDesc == nil ? "未完成":userThirdPartCM?.zmIdentityDesc
-
-//            if isZmxyAuth == "2" {
-//                thirdPartyAuthCell?.statusLabel?.text = "已完成"
-//            }else if isZmxyAuth == "1" {
-//                thirdPartyAuthCell?.statusLabel?.text = "认证中"
-//            }else if isZmxyAuth == "3" {
-//                thirdPartyAuthCell?.statusLabel?.text = "未完成"
-//            }
-            break
-        case 3:
-            thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
             thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.salaryDesc == nil ? "未完成":userThirdPartCM?.salaryDesc
-//            if isZmxyAuth == "2" {
-//                thirdPartyAuthCell?.statusLabel?.text = "已完成"
-//            }else if isZmxyAuth == "1" {
-//                thirdPartyAuthCell?.statusLabel?.text = "认证中"
-//            }else if isZmxyAuth == "3" {
-//                thirdPartyAuthCell?.statusLabel?.text = "未完成"
-//            }
+
             break
             
         default:
@@ -150,7 +127,6 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
             faceIdentiCreditVC.verifyStatus = userThirdPartCM?.faceIdentity
             self.navigationController?.pushViewController(faceIdentiCreditVC, animated: true)
             faceIdentiCreditVC.identifyResultStatus = { [weak self] (status) -> () in
-
             }
             break
         case 1:
@@ -164,15 +140,15 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
             certificationVC.isMobileAuth = isMobileAuth
             self.navigationController?.pushViewController(certificationVC, animated: true)
             break
+//        case 2:
+//            if userThirdPartCM?.zmIdentityEdit == "1" {
+//                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.zmIdentityDesc)
+//                return;
+//            }
+//            let sesameCreditVC  = SesameCreditCertificationVCModules.init()
+//            self.navigationController?.pushViewController(sesameCreditVC, animated: true)
+//            break
         case 2:
-            if userThirdPartCM?.zmIdentityEdit == "1" {
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.zmIdentityDesc)
-                return;
-            }
-            let sesameCreditVC  = SesameCreditCertificationVCModules.init()
-            self.navigationController?.pushViewController(sesameCreditVC, animated: true)
-            break
-        case 3:
             if userThirdPartCM?.salaryEdit == "1" {
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.salaryDesc)
                 return;
@@ -182,6 +158,16 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 150))
+        footerView.backgroundColor = LOAN_APPLICATION_COLOR
+        return footerView
     }
     
     func mobilePhoneOperatorChannels() -> Bool {
@@ -247,9 +233,6 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
         }
         userDataVM.theInternetbankUpload(taskid)
     }
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

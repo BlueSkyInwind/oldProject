@@ -16,7 +16,9 @@ class FXD_displayAmountCommonHeaderView: UIView {
     var amountLabel:UILabel?
     var hintWordBackImage:UIImageView?
     var hintWordLabel:UILabel?
-    
+    var periodLabel:UILabel?
+    var periodAmountLabel:UILabel?
+
     var goBackBtn:UIButton?
     var titleLabel:UILabel?
     var goBack:GOBackACtion?
@@ -30,6 +32,13 @@ class FXD_displayAmountCommonHeaderView: UIView {
         self.init(frame: frame)
         self.amountLabel?.text = amount
         self.hintWordLabel?.text = String.init(format: "您当前有%@元可借额度", amount)
+    }
+    
+    convenience init(frame: CGRect,amount:String,periodNum:String,periodAmount:String) {
+        self.init(frame: frame)
+        self.amountLabel?.text = amount
+        self.periodLabel?.text = periodNum
+        self.periodAmountLabel?.text = periodAmount
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -112,7 +121,6 @@ extension FXD_displayAmountCommonHeaderView{
         })
  
         hintWordLabel = UILabel()
-        hintWordLabel?.text = "您当前有3000元可借额度"
         hintWordLabel?.textAlignment = NSTextAlignment.center
         hintWordLabel?.font = UIFont.yx_systemFont(ofSize: 14)
         hintWordBackImage?.addSubview(hintWordLabel!)
@@ -120,6 +128,23 @@ extension FXD_displayAmountCommonHeaderView{
             make.center.equalTo((hintWordBackImage?.snp.center)!)
         })
         
+        periodLabel = UILabel()
+        periodLabel?.textAlignment = NSTextAlignment.left
+        periodLabel?.font = UIFont.yx_systemFont(ofSize: 14)
+        hintWordBackImage?.addSubview(periodLabel!)
+        periodLabel?.snp.makeConstraints({ (make) in
+            make.left.equalTo((hintWordBackImage?.snp.left)!).offset(10)
+            make.centerY.equalTo((hintWordBackImage?.snp.centerY)!)
+        })
+        
+        periodAmountLabel = UILabel()
+        periodAmountLabel?.textAlignment = NSTextAlignment.right
+        periodAmountLabel?.font = UIFont.yx_systemFont(ofSize: 14)
+        hintWordBackImage?.addSubview(periodAmountLabel!)
+        periodAmountLabel?.snp.makeConstraints({ (make) in
+            make.right.equalTo((hintWordBackImage?.snp.right)!).offset(-10)
+            make.centerY.equalTo((hintWordBackImage?.snp.centerY)!)
+        })
     }
 }
 

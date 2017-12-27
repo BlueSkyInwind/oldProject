@@ -24,13 +24,17 @@
 @interface DrawingsInfoModel : JSONModel
 
 @property(nonatomic,strong)NSString<Optional> * actualAmount;
+@property(nonatomic,strong)NSString<Optional> * repaymentAmount;     //到期还款
+@property(nonatomic,strong)NSString<Optional> * period;
+@property(nonatomic,strong)NSArray<Optional> * text;
+
+
 @property(nonatomic,strong)NSString<Optional> * applicationId;
 @property(nonatomic,strong)NSString<Optional> * dayServiceFeeRate;
 @property(nonatomic,strong)NSString<Optional> * totalFee;
-@property(nonatomic,strong)NSArray<LoanForModel> * loanFor;
+@property(nonatomic,strong)NSArray<LoanForModel,Optional> * loanFor;
 @property(nonatomic,strong)NSString<Optional> * maxPeriod;
 @property(nonatomic,strong)NSString<Optional> * minPeriod;
-@property(nonatomic,strong)NSString<Optional> * period;
 @property(nonatomic,strong)NSString<Optional> * numDaysPerPeriod;
 @property(nonatomic,strong)NSString<Optional> * platformType;
 @property(nonatomic,strong)NSString<Optional> * productId;
@@ -38,7 +42,6 @@
 @property(nonatomic,strong)NSString<Optional> * userAgain;
 @property(nonatomic,strong)NSString<Optional> * userStatus;
 @property(nonatomic,strong)NSString<Optional> * taskStatus;
-@property(nonatomic,strong)NSString<Optional> * repaymentAmount;     //急速贷到期还款
 
 
 @end

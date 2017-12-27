@@ -822,7 +822,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     int j = 0;
     int k = 0;
     if ([_drawingsInfoModel.productId isEqualToString:SalaryLoan]) {
-        
         if (money>=0&&money<=1999) {
             j=11;
             k=0;

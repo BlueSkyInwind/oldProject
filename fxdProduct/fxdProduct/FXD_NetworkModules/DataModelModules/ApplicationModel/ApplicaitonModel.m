@@ -23,3 +23,11 @@
 
 
 @end
+
+@implementation LoanMoneyFor
+
+
+
+
+@end
+
