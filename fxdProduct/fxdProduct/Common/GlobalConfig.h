@@ -98,6 +98,8 @@ UIKIT_EXTERN NSString * const       _updateLoginLatitude_url;                //�
 UIKIT_EXTERN NSString * const       _getRegionCodeByName_jhtml;              //获取省市区编码
 UIKIT_EXTERN NSString * const       _checkVersion_jhtml;                     //版本检测
 UIKIT_EXTERN NSString * const       _drawApplyAgain_jhtml;                   //二次提款
+UIKIT_EXTERN NSString * const       _newDrawApply_jhtml;                   //二次提款
+
 UIKIT_EXTERN NSString * const       _caseStatusUpdateApi_url;                //申请件状态更新
 UIKIT_EXTERN NSString * const       _getBankList_url;                        //银行卡获取接口   _getSupportBankList_url
 
@@ -113,7 +115,7 @@ UIKIT_EXTERN NSString * const       _depHistory_url;                         //�
 UIKIT_EXTERN NSString * const       _contractList_url;                       //平台合同列表
 UIKIT_EXTERN NSString * const       _contractStr_url;                        //合同内容
 UIKIT_EXTERN NSString * const       _querybillDetails_url;                   //P2P平台账单期供查询
-UIKIT_EXTERN NSString * const       _productProtocol_url;                    //协议内容获取接口
+UIKIT_EXTERN NSString * const       _newproductProtocol_url;                    //协议内容获取接口
 UIKIT_EXTERN NSString * const       _h5register_url;                         //H5注册
 UIKIT_EXTERN NSString * const       _detectIDCardOCR_url;                    //FaceID
 UIKIT_EXTERN NSString * const       _verifyLive_url;                         //FaceID人脸对比身份核实

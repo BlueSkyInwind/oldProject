@@ -15,7 +15,6 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     var withdrawFundsFooterView:FXD_ToWithdrawFundsFooterView?
     var drawingsInfoModel:DrawingsInfoModel?
     
-    
     var drawAmount:String? = ""
     var period:String? = ""
     var periodAmount:String? = ""
@@ -80,7 +79,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
             self.navigationController?.popViewController(animated: true)
         }
         
-        withdrawFundsFooterView = FXD_ToWithdrawFundsFooterView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h - 205 - 70), htmlContentArr: displayContent!, protocolName: "《借款协议》")
+        withdrawFundsFooterView = FXD_ToWithdrawFundsFooterView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h - 205 - 70), htmlContentArr: displayContent!, protocolNames: ["《借款协议》","《技术服务协议》","\n《风险管理与数据服务》"])
         withdrawFundsFooterView?.delegate = self
         tableView?.tableFooterView = withdrawFundsFooterView
         
@@ -142,14 +141,53 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         isKeepProtocol = isKeep
     }
     
-    func protocolNameClick() {
-        
+    func protocolNameClick(_ index: Int) {
+        switch index {
+        case 0:
+            obtainProductProtocol("fewf", periods: "2", productId: EliteLoan, protocolType: "2", complication: {[weak self] (isSuccess, content) in
+                if isSuccess {
+                    self?.pushDetailWebView(content: content)
+                }
+            })
+           break
+        case 1:
+            obtainProductProtocol("fewf", periods: "2", productId: EliteLoan, protocolType: "6", complication: {[weak self] (isSuccess, content) in
+                if isSuccess {
+                    self?.pushDetailWebView(content: content)
+                }
+            })
+            break
+        case 2:
+            obtainProductProtocol("fewf", periods: "2", productId: EliteLoan, protocolType: "7", complication: {[weak self] (isSuccess, content) in
+                if isSuccess {
+                    self?.pushDetailWebView(content: content)
+                }
+            })
+            break
+        default:
+            break
+        }
+    }
+    
+    func pushDetailWebView(content:String)  {
+        let detailWeb = DetailViewController.init()
+        detailWeb.content = content
+        self.navigationController?.pushViewController(detailWeb, animated: true)
     }
     
     func WithdrawFundsClick() {
+        if !isdispalyCard! {
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请添加收款方式")
+            return
+        }
+        
         if !isKeepProtocol! {
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请勾选借款协议")
             return
+        }
+        
+        requestWithDraw((self.selectedCard?.cardId)!) { (isSuccess) in
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
@@ -249,6 +287,41 @@ extension FXD_ToWithdrawFundsViewController {
             complication(false)
         }
         checkVM.withDrawFundsInfoApply()
+    }
+    
+    func  requestWithDraw(_ cardId:String,_ complication:@escaping ((_ isSuccess:Bool) -> Void)) {
+        
+        let checkVM = CheckViewModel.init()
+        checkVM.setBlockWithReturn({ (result) in
+            let baseRM = result as! BaseResultModel
+            if baseRM.errCode == "0" {
+                complication(true)
+            }else{
+                complication(false)
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseRM.friendErrMsg)
+            }
+        }) {
+            complication(false)
+        }
+        checkVM.new(withDrawalsApplyCard_id:cardId)
+    }
+    
+    func obtainProductProtocol(_ applyId:String,periods:String,productId:String,protocolType:String, complication:@escaping ((_ isSuccess:Bool,_ content:String) -> Void))  {
+        
+        let commonVM = CommonViewModel.init()
+        commonVM.setBlockWithReturn({ (result) in
+            let baseRM = result as! BaseResultModel
+            if baseRM.errCode == "0" {
+                let content =  (baseRM.data as! [String:String])["protocol_content_"]
+                complication(true,content!)
+            }else{
+                complication(false,"")
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseRM.friendErrMsg)
+            }
+        }) {
+            complication(false,"")
+        }
+        commonVM.obtainProductProtocolType(productId, typeCode: protocolType, apply_id: applyId, periods: periods)
     }
 }
 

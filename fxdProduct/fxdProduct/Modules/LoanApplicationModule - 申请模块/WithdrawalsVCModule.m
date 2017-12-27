@@ -938,7 +938,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"periods_":@1};
     }
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_ProductProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
@@ -986,7 +986,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"periods_":@1};
     }
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_ProductProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
@@ -1026,7 +1026,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                      @"protocol_type_":@"2",
                      @"periods_":@1};
     }
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_ProductProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];
@@ -1049,7 +1049,7 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
                                @"product_id_":_drawingsInfoModel.productId,
                                @"protocol_type_":@"3",
                                @"periods_":_userSelectNum};
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_ProductProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];

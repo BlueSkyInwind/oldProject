@@ -32,7 +32,7 @@
     }
     NSDictionary *paramDic = [productProtocolParamModel toDictionary];
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_ProductProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }

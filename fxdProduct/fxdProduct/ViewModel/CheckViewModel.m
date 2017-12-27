@@ -71,6 +71,28 @@
     }];
 }
 
+-(void)newWithDrawalsApplyCard_id:(NSString *)card_id{
+    
+    WithDrawalsParamModel * withDrawalsM = [[WithDrawalsParamModel alloc]init];
+    withDrawalsM.accountCardId = card_id;
+    
+    NSDictionary * paramDic = [withDrawalsM toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newDrawApply_jhtml] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseRm = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRm);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
+
+
+
 -(void)withDrawFundsInfoApply{
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_withDrawFunds_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {

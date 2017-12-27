@@ -385,7 +385,7 @@
                      @"periods_":@1};
     }
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_agreement_url,_ProductProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];

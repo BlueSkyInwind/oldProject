@@ -14,7 +14,7 @@ import WebKit
 @objc protocol WithdrawFundsFooterViewDelegate: NSObjectProtocol {
     
     //协议点击
-    func protocolNameClick()
+    func protocolNameClick(_ index:Int)
     //遵守协议点击
     func keepProtocolClick(_ isKeep:Bool)
     //提款按钮点击
@@ -44,10 +44,10 @@ class FXD_ToWithdrawFundsFooterView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(frame:CGRect,htmlContentArr:[String],protocolName:String){
+    convenience init(frame:CGRect,htmlContentArr:[String],protocolNames:[String]){
         self.init(frame: frame)
         setProtocolcontent(htmlContentArr)
-        addProtocolClick(protocolName)
+        addProtocolClick(protocolNames)
     }
     
     func setProtocolcontent(_ htmlContentArr:[String])  {
@@ -64,13 +64,21 @@ class FXD_ToWithdrawFundsFooterView: UIView{
         displayContent?.attributedText = contentAttri
     }
     
-    func addProtocolClick(_ protocolName:String)  {
-        let protocolContent = "我已阅读并认可发薪贷" + protocolName
-        let attributeStr = NSMutableAttributedString.init(string: protocolContent)
-        let range = (protocolContent as NSString).range(of: protocolName)
-        attributeStr.yy_setTextHighlight(range, color: UI_MAIN_COLOR, backgroundColor: UIColor.init(white: 0, alpha: 0.22)) {[weak self] (view, arrtiText, range, rect) in
-            if self?.delegate != nil  {
-                self?.delegate?.protocolNameClick()
+    func addProtocolClick(_ protocolNames:[String])  {
+        var protocolContent:String = "我已阅读并认可发薪贷"
+        var rangeArr:[NSRange] = []
+        for proName in protocolNames {
+             protocolContent = protocolContent + proName + "、"
+        }
+        let index = protocolContent.index(protocolContent.endIndex, offsetBy: -1)
+        let attributeStr = NSMutableAttributedString.init(string: String(protocolContent[..<index]))
+        for proName in protocolNames {
+            let range = (protocolContent as NSString).range(of: proName)
+            rangeArr.append(range)
+            attributeStr.yy_setTextHighlight(range, color: UI_MAIN_COLOR, backgroundColor: UIColor.init(white: 0, alpha: 0.22)) {[weak self] (view, arrtiText, range, rect) in
+                if self?.delegate != nil  {
+                    self?.delegate?.protocolNameClick(rangeArr.index(of: range)!)
+                }
             }
         }
         protocolLabel?.attributedText = attributeStr
@@ -135,7 +143,7 @@ extension FXD_ToWithdrawFundsFooterView {
             make.left.equalTo(self.snp.left).offset(20)
             make.right.equalTo(self.snp.right).offset(-20)
             make.top.equalTo((displayContent?.snp.bottom)!).offset(10)
-            make.height.equalTo(27)
+            make.height.equalTo(40)
         })
         
         applyForBtn = UIButton.init(type: UIButtonType.custom)

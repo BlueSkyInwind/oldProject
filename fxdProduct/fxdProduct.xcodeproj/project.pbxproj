@@ -403,6 +403,8 @@
 		84117F571F60F6A700B7EAA9 /* LoadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */; };
 		8411DA111FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */; };
 		8411DA121FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */; };
+		84139DF21FF3A0A0000DA896 /* ProtocolParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84139DF11FF3A0A0000DA896 /* ProtocolParamModel.m */; };
+		84139DF31FF3A0A0000DA896 /* ProtocolParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84139DF11FF3A0A0000DA896 /* ProtocolParamModel.m */; };
 		841A48E01FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A48DE1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift */; };
 		841A48E11FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A48DE1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift */; };
 		841A48E21FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841A48DF1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib */; };
@@ -2063,6 +2065,8 @@
 		840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvationViewModel.m; sourceTree = "<group>"; };
 		84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadFailureView.swift; sourceTree = "<group>"; };
 		8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_VersionUpdatepop.swift; sourceTree = "<group>"; };
+		84139DF01FF3A0A0000DA896 /* ProtocolParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProtocolParamModel.h; sourceTree = "<group>"; };
+		84139DF11FF3A0A0000DA896 /* ProtocolParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProtocolParamModel.m; sourceTree = "<group>"; };
 		841A48DE1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_ToWithDrawFundsTableViewCell.swift; sourceTree = "<group>"; };
 		841A48DF1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FXD_ToWithDrawFundsTableViewCell.xib; sourceTree = "<group>"; };
 		841BE5C41F177C4F00BABD04 /* UserLevelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLevelViewController.h; sourceTree = "<group>"; };
@@ -4288,6 +4292,7 @@
 				CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */,
 				635AB7911BE2FE6600C32919 /* DrawCash */,
 				84E306CC1F972BF100C97D72 /* DiscountTicket */,
+				84139DEF1FF3A071000DA896 /* ProtocolModel */,
 			);
 			path = DataModelModules;
 			sourceTree = "<group>";
@@ -4672,6 +4677,15 @@
 				EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		84139DEF1FF3A071000DA896 /* ProtocolModel */ = {
+			isa = PBXGroup;
+			children = (
+				84139DF01FF3A0A0000DA896 /* ProtocolParamModel.h */,
+				84139DF11FF3A0A0000DA896 /* ProtocolParamModel.m */,
+			);
+			path = ProtocolModel;
 			sourceTree = "<group>";
 		};
 		841BE5C31F177BDB00BABD04 /* UserLevel */ = {
@@ -6350,6 +6364,7 @@
 				CCE3BE231ED2D61C004C35A4 /* OpenAccount.m in Sources */,
 				63D43EF91D41F76D0076AC7F /* YYMemoryCache.m in Sources */,
 				63441F961DAB767A0086D615 /* P2PRepayMent.m in Sources */,
+				84139DF21FF3A0A0000DA896 /* ProtocolParamModel.m in Sources */,
 				0FFA916F1C58BD18008D91D2 /* CheckSuccessView.m in Sources */,
 				CCCE40BD1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */,
 				6303C11C1C1816F000CD14A7 /* WTCameraViewController.m in Sources */,
@@ -6876,6 +6891,7 @@
 				CC0DFAD01EA5B1090024841A /* WTCameraViewController.m in Sources */,
 				CC0DFAD11EA5B1090024841A /* RepayRecord.m in Sources */,
 				CC0DFAD21EA5B1090024841A /* YYTextContainerView.m in Sources */,
+				84139DF31FF3A0A0000DA896 /* ProtocolParamModel.m in Sources */,
 				84A380351FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m in Sources */,
 				84E62D181FDA6D2500B7F870 /* SaveCustomerCareerInfoParam.m in Sources */,
 				CC0DFAD41EA5B1090024841A /* QueryRepaymentsData.m in Sources */,

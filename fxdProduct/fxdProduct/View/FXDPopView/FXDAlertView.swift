@@ -27,7 +27,8 @@ class FXDAlertView: UIView {
     var bottomView:UIView?
     var backGroundView:UIView?
     @objc var clickButtonIndex:ClickButtonIndex?
-
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.8)
@@ -52,6 +53,7 @@ class FXDAlertView: UIView {
         }
     }
     
+    ///MARK: 富文本  通用全局弹窗初始化
     @objc convenience init(_ titleStr:String, content:String ,attributes:[NSAttributedStringKey : Any], cancelTitle:String,  sureTitle:String) {
         let  contentAttri = NSMutableAttributedString.init(string: content, attributes:attributes)
         self.init(titleStr, contentAttri: contentAttri, cancelTitle: cancelTitle, sureTitle: sureTitle)
@@ -266,7 +268,13 @@ extension FXDAlertView {
         })
     }
     
+    func homePageOverdueViewLayout()  {
+        
+        
+    }
 }
+
+
 
 
 

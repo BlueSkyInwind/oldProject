@@ -321,6 +321,9 @@ NSString * const     _updateLoginLatitude_url       =   @"user/common/updateLast
 //二次提款
 NSString * const     _drawApplyAgain_jhtml      =   @"coregw/draw/drawApply";
 
+//新版提款
+NSString * const     _newDrawApply_jhtml      =   @"coregw/draw/new/drawApply";
+
 //推荐码规则
 NSString * const    _GetRecomfrInfo_url         =    @"product/getRecomfrInfo";
 
@@ -366,14 +369,11 @@ NSString * const    _ShowMsgPreview_url    =    @"operation/showMsgPreview";
 //新版首页接口
 NSString * const    _NewSummary_url    =    @"new/summary";
 
-//协议内容获取接口
-NSString * const    _productProtocol_url        =    @"product/getProductProtocolApi";
-
 //新版代提款
 NSString * const    _withDrawFunds_url        =    @"application/new/loan";
 
-
-
+//协议内容获取接口
+NSString * const    _newproductProtocol_url        =    @"product/getProductNewProtocolApi";
 
 #pragma mark - 合规接口
 

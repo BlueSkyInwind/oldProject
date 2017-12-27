@@ -29,7 +29,12 @@
  */
 -(void)withDrawalsApplyPeriod:(NSString *)period_ loan_for:(NSString *)loan_for_ DrawAmount:(NSString *)drawAmount  card_id:(NSString *)card_id;
 
+/**
+ 新版提款
 
+ @param card_id 卡id
+ */
+-(void)newWithDrawalsApplyCard_id:(NSString *)card_id;
 /**
  新的提款信息获取
  */

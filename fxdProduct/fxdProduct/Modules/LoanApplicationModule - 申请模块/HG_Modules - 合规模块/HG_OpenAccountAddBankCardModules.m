@@ -111,7 +111,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
                                @"card_no_":[dataListAll3 objectAtIndex:1],
                                @"card_bank_":_bankCodeNUm};
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_productProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_ProductProtocol_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if ([[object objectForKey:@"flag"] isEqualToString:@"0000"]) {
             DetailViewController *detailVC = [[DetailViewController alloc] init];
             detailVC.content = [[object objectForKey:@"result"] objectForKey:@"protocol_content_"];

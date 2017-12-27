@@ -77,5 +77,7 @@
 #import "NSString+Validate.h"
 #import "EditCardsController.h"
 #import "HighRandingModel.h"
+#import "CommonViewModel.h"
+#import "DetailViewController.h"
 
 #endif /* fxdProduct_Bridging_Header_h */
