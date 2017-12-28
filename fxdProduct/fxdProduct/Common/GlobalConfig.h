@@ -268,8 +268,6 @@ UIKIT_EXTERN NSString * const kTopView;
 //用户
 UIKIT_EXTERN NSString * const UserName;
 
-// 表名
-#define userTableName   [FXD_Utility sharedUtility].userInfo.userMobilePhone
 
 //通知
 UIKIT_EXTERN NSString * const  kAddMaterailNotification;

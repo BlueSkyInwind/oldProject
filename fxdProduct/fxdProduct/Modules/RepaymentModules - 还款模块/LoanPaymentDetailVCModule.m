@@ -11,7 +11,7 @@
 #import "PayMethodCell.h"
 #import "UILabel+FlickerNumber.h"
 #import "UIViewController+KNSemiModal.h"
-#import "ChooseRedPacketListVCModule.h"
+//#import "ChooseRedPacketListVCModule.h"
 #import "PayNavigationViewController.h"
 #import "PayMethodViewController.h"
 #import "CardInfo.h"
@@ -20,7 +20,6 @@
 #import "RepayListInfo.h"
 #import "P2PBillDetail.h"
 #import "P2PAccountInfo.h"
-#import "PaymentServiceModel.h"
 #import "AccountHSServiceModel.h"
 #import "P2PViewController.h"
 #import "DefaultCardPopoverWindowModule.h"
@@ -40,7 +39,7 @@
 #import "SupportBankList.h"
 #import "DiscountTicketModel.h"
 
-@interface LoanPaymentDetailVCModule ()<UITableViewDelegate,UITableViewDataSource,SelectViewDelegate>
+@interface LoanPaymentDetailVCModule ()<UITableViewDelegate,UITableViewDataSource>
 {
     UIImageView*navBarHairlineImageView;
     NSArray *titleAry;

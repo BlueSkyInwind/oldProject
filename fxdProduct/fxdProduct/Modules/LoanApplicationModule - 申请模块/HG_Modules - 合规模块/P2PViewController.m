@@ -15,7 +15,6 @@
 #import "WithdrawalsVCModule.h"
 #import "AccountHSServiceModel.h"
 #import "QryUserStatusModel.h"
-#import "getBidStatus.h"
 #import "LoanPaymentDetailVCModule.h"
 #import "CheckViewModel.h"
 #import "RepayRequestManage.h"
