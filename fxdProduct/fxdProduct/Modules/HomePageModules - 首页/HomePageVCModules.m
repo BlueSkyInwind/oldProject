@@ -17,7 +17,6 @@
 #import "FXDWebViewController.h"
 #import "SDCycleScrollView.h"
 #import "RepayRecordController.h"
-#import "UserDefaulInfo.h"
 #import "LoanApplicationForConfirmationVCModules.h"
 #import "CycleTextCell.h"
 #import "QRCodePopView.h"

@@ -16,8 +16,7 @@
 #import "LewPopupViewController.h"
 #import "FXDWebViewController.h"
 #import "SDCycleScrollView.h"
-#import "RepayRecordController.h"
-#import "UserDefaulInfo.h"
+#import "RepayRecordController.h" 
 #import "LoanApplicationForConfirmationVCModules.h"
 #import "CycleTextCell.h"
 #import "QRCodePopView.h"
@@ -620,9 +619,7 @@
     
     NSArray * array = (NSArray *)_homeProductList.bannerList;
     BannerListModel *model = (BannerListModel *)array[index];
-
     if (model) {
-
         if ([model.toUrl.lowercaseString hasPrefix:@"http"] || [model.toUrl.lowercaseString hasPrefix:@"https"]) {
             if ([model.toUrl.lowercaseString hasSuffix:@"sjbuy"]) {
                 HomepageActivityImageDisplayModule *firstBorrowVC = [[HomepageActivityImageDisplayModule alloc] init];
@@ -652,26 +649,21 @@
 -(void)withdrawMoneyImmediatelyBtnClick{
     
     if ([_homeProductList.flag isEqualToString:@"15"]) {
-        
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
         controller.product_id = @"";
         controller.platform_type = @"";
         controller.applicationId = @"";
         [self.navigationController pushViewController:controller animated:true];
-        
     }else{
         FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
         [self.navigationController pushViewController:loanApplicationVC animated:true];
     }
-    
-    NSLog(@"立即提款");
 }
 
 -(void)loanBtnClick{
-    
     FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
+    loanApplicationVC.productId = EliteLoan;
     [self.navigationController pushViewController:loanApplicationVC animated:true];
-    NSLog(@"我要借款");
 }
 
 -(void)productListClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit amount:(NSString *)amount Path:(NSString *)Path{
@@ -682,7 +674,6 @@
 }
 
 -(void)moreBtnClick{
-    NSLog(@"更多按钮");
     [self pushMoreProductPlatform];
 }
 
@@ -718,7 +709,6 @@
         controller.platform_type = @"";
         controller.applicationId = @"";
         [self.navigationController pushViewController:controller animated:true];
-
         NSLog(@"立即还款");
     }else{
         
@@ -728,12 +718,9 @@
 }
 
 -(void)applyImmediatelyBtnClick:(NSString *)money :(NSString *)time{
-    
     UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
     [self.navigationController pushViewController:controller animated:true];
-    NSLog(@"===%@===%@==",money,time);
 }
-
 
 -(void)bankProtocolClick{
    

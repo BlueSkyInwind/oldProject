@@ -85,7 +85,6 @@
 		630D462F1BD097B900874064 /* GetMoneyResultAuditRecordBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D462A1BD097B900874064 /* GetMoneyResultAuditRecordBean.m */; };
 		630D46301BD097B900874064 /* GetMoneyResultBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D462C1BD097B900874064 /* GetMoneyResultBaseClass.m */; };
 		630D46311BD097B900874064 /* GetMoneyResultResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D462E1BD097B900874064 /* GetMoneyResultResult.m */; };
-		630DE72B1DDC2F6D00A2D53A /* FXD_AppUpdateChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 630DE72A1DDC2F6D00A2D53A /* FXD_AppUpdateChecker.m */; };
 		63117FB71DFFC42600635BB3 /* FXD_AppShareConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 63117FB61DFFC42600635BB3 /* FXD_AppShareConfig.m */; };
 		6313DC111BB3E48800EB45DE /* DES3Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313DC101BB3E48800EB45DE /* DES3Util.m */; };
 		6313DC151BB3E52B00EB45DE /* NSString+MD5Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313DC141BB3E52B00EB45DE /* NSString+MD5Encrypt.m */; };
@@ -324,7 +323,6 @@
 		63D47FF91D9A6F8B0058315E /* GetCaseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D47FF81D9A6F8B0058315E /* GetCaseInfo.m */; };
 		63DB3FBD1E1DE41700FBE1C4 /* RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DB3FB91E1DE41700FBE1C4 /* RTRootNavigationController.m */; };
 		63DB3FBE1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DB3FBB1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m */; };
-		63DB3FC11E1DEE0600FBE1C4 /* UserDefaulInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DB3FC01E1DEE0600FBE1C4 /* UserDefaulInfo.m */; };
 		63DCD7D91C87FDA200FAC7CE /* wtproject.lsc in Resources */ = {isa = PBXBuildFile; fileRef = 63DCD7D81C87FDA200FAC7CE /* wtproject.lsc */; };
 		63DE56FF1DE7CD2900747AE2 /* FXDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DE56FE1DE7CD2900747AE2 /* FXDWebViewController.m */; };
 		63E1ECCF1E1B8FAA0079A2F8 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECC21E1B8FAA0079A2F8 /* TAAbstractDotView.m */; };
@@ -815,7 +813,6 @@
 		CC0DF9C71EA5B1090024841A /* UserStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0703331CA52259001DEE43 /* UserStateModel.m */; };
 		CC0DF9C81EA5B1090024841A /* YYTextKeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24C31D98F7E9006F58F3 /* YYTextKeyboardManager.m */; };
 		CC0DF9CA1EA5B1090024841A /* LOTShapeStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D81E517D9F00AB8AB6 /* LOTShapeStroke.m */; };
-		CC0DF9CB1EA5B1090024841A /* UserDefaulInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DB3FC01E1DEE0600FBE1C4 /* UserDefaulInfo.m */; };
 		CC0DF9CC1EA5B1090024841A /* UIDevice+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F0E1B61CE4166E001251A9 /* UIDevice+YYAdd.m */; };
 		CC0DF9CD1EA5B1090024841A /* YYTextEffectWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24BF1D98F7E9006F58F3 /* YYTextEffectWindow.m */; };
 		CC0DF9CE1EA5B1090024841A /* GetMoneyResultResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D462E1BD097B900874064 /* GetMoneyResultResult.m */; };
@@ -994,7 +991,6 @@
 		CC0DFAB31EA5B1090024841A /* LOTAnimatableColorValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16A41E517D9F00AB8AB6 /* LOTAnimatableColorValue.m */; };
 		CC0DFAB41EA5B1090024841A /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECC81E1B8FAA0079A2F8 /* TAPageControl.m */; };
 		CC0DFAB51EA5B1090024841A /* LOTAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16AC1E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m */; };
-		CC0DFAB61EA5B1090024841A /* FXD_AppUpdateChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 630DE72A1DDC2F6D00A2D53A /* FXD_AppUpdateChecker.m */; };
 		CC0DFAB71EA5B1090024841A /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636DB1D76A72A00E93289 /* LewPopupBackgroundView.m */; };
 		CC0DFAB91EA5B1090024841A /* RegionCodeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830FA1CBCA1A90005C4CD /* RegionCodeExt.m */; };
 		CC0DFABB1EA5B1090024841A /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BE01DF157EA008EAFD1 /* DetailViewController.m */; };
@@ -1471,8 +1467,6 @@
 		630D462C1BD097B900874064 /* GetMoneyResultBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyResultBaseClass.m; sourceTree = "<group>"; };
 		630D462D1BD097B900874064 /* GetMoneyResultResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyResultResult.h; sourceTree = "<group>"; };
 		630D462E1BD097B900874064 /* GetMoneyResultResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyResultResult.m; sourceTree = "<group>"; };
-		630DE7291DDC2F6D00A2D53A /* FXD_AppUpdateChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXD_AppUpdateChecker.h; sourceTree = "<group>"; };
-		630DE72A1DDC2F6D00A2D53A /* FXD_AppUpdateChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXD_AppUpdateChecker.m; sourceTree = "<group>"; };
 		63117FB51DFFC42600635BB3 /* FXD_AppShareConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXD_AppShareConfig.h; sourceTree = "<group>"; };
 		63117FB61DFFC42600635BB3 /* FXD_AppShareConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXD_AppShareConfig.m; sourceTree = "<group>"; };
 		6313DC0F1BB3E48800EB45DE /* DES3Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DES3Util.h; sourceTree = "<group>"; };
@@ -1921,8 +1915,6 @@
 		63DB3FB91E1DE41700FBE1C4 /* RTRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTRootNavigationController.m; sourceTree = "<group>"; };
 		63DB3FBA1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RTRootNavigationController.h"; sourceTree = "<group>"; };
 		63DB3FBB1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RTRootNavigationController.m"; sourceTree = "<group>"; };
-		63DB3FBF1E1DEE0600FBE1C4 /* UserDefaulInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaulInfo.h; sourceTree = "<group>"; };
-		63DB3FC01E1DEE0600FBE1C4 /* UserDefaulInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaulInfo.m; sourceTree = "<group>"; };
 		63DCD7D81C87FDA200FAC7CE /* wtproject.lsc */ = {isa = PBXFileReference; lastKnownFileType = file; path = wtproject.lsc; sourceTree = "<group>"; };
 		63DE56FD1DE7CD2900747AE2 /* FXDWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXDWebViewController.h; sourceTree = "<group>"; };
 		63DE56FE1DE7CD2900747AE2 /* FXDWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXDWebViewController.m; sourceTree = "<group>"; };
@@ -3260,8 +3252,6 @@
 				6348310C1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.h */,
 				84E62D191FDA7CA900B7F870 /* CustomerContactsInfoViewModel.h */,
 				84E62D1A1FDA7CA900B7F870 /* CustomerContactsInfoViewModel.m */,
-				63DB3FBF1E1DEE0600FBE1C4 /* UserDefaulInfo.h */,
-				63DB3FC01E1DEE0600FBE1C4 /* UserDefaulInfo.m */,
 				638A16871E5045BC00AB8AB6 /* RepayRequestManage.h */,
 				638A16881E5045BC00AB8AB6 /* RepayRequestManage.m */,
 				CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */,
@@ -4162,8 +4152,6 @@
 				6313DC191BB4F35C00EB45DE /* FXD_UserInfoConfiguration.m */,
 				1A5A69C11BF1ED7700250317 /* DataBaseManager.h */,
 				1A5A69C21BF1ED7700250317 /* DataBaseManager.m */,
-				630DE7291DDC2F6D00A2D53A /* FXD_AppUpdateChecker.h */,
-				630DE72A1DDC2F6D00A2D53A /* FXD_AppUpdateChecker.m */,
 				635B0BC51DEBFED0008EAFD1 /* FXD_AppEmptyUserData.h */,
 				635B0BC61DEBFED0008EAFD1 /* FXD_AppEmptyUserData.m */,
 				63117FB51DFFC42600635BB3 /* FXD_AppShareConfig.h */,
@@ -6046,7 +6034,6 @@
 				84E62D131FDA3DD500B7F870 /* SaveUserInfoParam.m in Sources */,
 				8438F71D1EE165460089E121 /* changePasswordParam.m in Sources */,
 				84E306C71F97224E00C97D72 /* DiscountCouponListVCModules.swift in Sources */,
-				63DB3FC11E1DEE0600FBE1C4 /* UserDefaulInfo.m in Sources */,
 				63F0E1B71CE4166E001251A9 /* UIDevice+YYAdd.m in Sources */,
 				63FC24EF1D98F7E9006F58F3 /* YYTextEffectWindow.m in Sources */,
 				630D46311BD097B900874064 /* GetMoneyResultResult.m in Sources */,
@@ -6325,7 +6312,6 @@
 				847298341FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */,
 				63E1ECD21E1B8FAA0079A2F8 /* TAPageControl.m in Sources */,
 				638A16F51E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m in Sources */,
-				630DE72B1DDC2F6D00A2D53A /* FXD_AppUpdateChecker.m in Sources */,
 				8492ED261FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */,
 				637636E71D76A72A00E93289 /* LewPopupBackgroundView.m in Sources */,
 				CC45E7371FD915A300DE803D /* UITabBar+badge.m in Sources */,
@@ -6586,7 +6572,6 @@
 				84E306C81F97224E00C97D72 /* DiscountCouponListVCModules.swift in Sources */,
 				CC0DF9C81EA5B1090024841A /* YYTextKeyboardManager.m in Sources */,
 				CC0DF9CA1EA5B1090024841A /* LOTShapeStroke.m in Sources */,
-				CC0DF9CB1EA5B1090024841A /* UserDefaulInfo.m in Sources */,
 				84A380271FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.m in Sources */,
 				CCCDA8891EE028DD00B48DFF /* SendSmsParamModel.m in Sources */,
 				CC0DF9CC1EA5B1090024841A /* UIDevice+YYAdd.m in Sources */,
@@ -6858,7 +6843,6 @@
 				CCDEDF5D1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */,
 				CC0DFAB51EA5B1090024841A /* LOTAnimatableShapeValue.m in Sources */,
 				849459CE1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */,
-				CC0DFAB61EA5B1090024841A /* FXD_AppUpdateChecker.m in Sources */,
 				CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */,
 				CC8BC9551FEA0374008E135E /* HomePageCell.swift in Sources */,
 				CC0DFAB71EA5B1090024841A /* LewPopupBackgroundView.m in Sources */,

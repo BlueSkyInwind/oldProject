@@ -212,15 +212,13 @@
             }
         }
     }
-  
     else {
-        _alertView = [[[NSBundle mainBundle] loadNibNamed:@"testView" owner:self options:nil] objectAtIndex:0];
-        _alertView.frame=CGRectMake(0, 0, _k_w, _k_h);
-        _alertView.delegat = self;
-        _alertView.lbltitle.text = @"\n您确定要退出登录吗？";
-        _alertView.lbltitle.textColor = [UIColor blackColor];
-        [_alertView.sureBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
-        [_alertView show];
+
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您确定要退出登录吗？" attributeDic:nil cancelTitle:@"取消" sureTitle:@"确定" compleBlock:^(NSInteger index) {
+            if (index == 1) {
+                [self userLoginOut];
+            }
+        }];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -233,9 +231,8 @@
     nav.transitioningDelegate = self;
     [self presentViewController:nav animated:YES completion:nil];
 }
-
-#pragma mark arertViewDelegate
-- (void)MakeSureBtn:(NSInteger)tag
+#pragma mark 退出登录
+- (void)userLoginOut
 {
     [_alertView hide];
     if (![FXD_Utility sharedUtility].networkState) {
@@ -251,7 +248,6 @@
             dispatch_after(delayTime, dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
-            
             [self deleteUserRegisterID];
             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
