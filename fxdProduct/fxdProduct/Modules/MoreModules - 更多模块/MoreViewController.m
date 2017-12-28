@@ -14,7 +14,6 @@
 #import "HelpViewCell.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
-#import "PCCircleViewConst.h"
 #import "LoginViewController.h"
 #import "BaseNavigationViewController.h"
 #import "ReturnMsgBaseClass.h"

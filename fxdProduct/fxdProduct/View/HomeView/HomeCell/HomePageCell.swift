@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import SDWebImage
 import Masonry
+import WebKit
 
 @objc protocol HomePageCellDelegate: NSObjectProtocol {
     
@@ -58,7 +59,7 @@ class HomePageCell: UITableViewCell {
     @objc var defaultTimeLabel : UILabel?
     //复选框
     @objc var checkBoxBtn : UIButton?
-    @objc var protocolLabel : UILabel?
+    @objc var protocolLabel : YYLabel?
     
 
     override func awakeFromNib() {
@@ -317,10 +318,6 @@ extension HomePageCell {
         
         if UI_IS_IPONE6 {
             
-//            slider.snp.updateConstraints({ (make) in
-//                make.top.equalTo((defaultMoneyLabel?.snp.bottom)!).offset(14)
-//            })
-            
             moneyLeftLabel.snp.updateConstraints({ (make) in
                 make.top.equalTo(slider.snp.bottom).offset(0)
             })
@@ -333,9 +330,6 @@ extension HomePageCell {
                 make.top.equalTo(slider.snp.bottom).offset(15)
             })
             
-//            sliderTime.snp.updateConstraints({ (make) in
-//                make.top.equalTo((defaultTimeLabel?.snp.bottom)!).offset(14)
-//            })
             timeLeftLable.snp.updateConstraints({ (make) in
                 make.top.equalTo(sliderTime.snp.bottom).offset(0)
             })
@@ -372,10 +366,9 @@ extension HomePageCell {
         tipLabel.textAlignment = .center
         tipImageView.addSubview(tipLabel)
         tipLabel.snp.makeConstraints { (make) in
-//            make.top.equalTo(self).offset(19)
             make.centerY.equalTo(tipImageView.snp.centerY)
             make.centerX.equalTo(tipImageView.snp.centerX)
-//            make.height.equalTo(20)
+
         }
         
         let topImageView = UIImageView()
@@ -426,7 +419,6 @@ extension HomePageCell {
         loanTopContentLabel.snp.makeConstraints({ (make) in
             make.top.equalTo(loanTopLabel.snp.bottom).offset(5)
             make.left.equalTo(lineView.snp.right).offset(25)
-//            make.height.equalTo(60)
             make.right.equalTo(self).offset(-22)
         })
         
@@ -453,7 +445,6 @@ extension HomePageCell {
                 make.top.equalTo(loanBottomLabel.snp.bottom).offset(2)
                 make.left.equalTo(bottomImageView.snp.right).offset(20)
                 make.right.equalTo(self).offset(-22)
-//                make.height.equalTo(20)
             }
         }
         
@@ -846,8 +837,7 @@ extension HomePageCell {
         })
         
         
-        protocolLabel = UILabel()
-//        protocolLabel.text = "我已阅读并认可发薪贷《银行自动转账授权书》、《三方借款协议》"
+        protocolLabel = YYLabel.init()
         protocolLabel?.font = UIFont.systemFont(ofSize: 12)
         protocolLabel?.numberOfLines = 0
         protocolLabel?.textColor = QUTOA_COLOR
@@ -859,34 +849,8 @@ extension HomePageCell {
             make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(17)
         }
         
-//        let attStr = NSMutableAttributedString.init(string: protocolLabel.text!)
-//
-//        let sty = NSMutableParagraphStyle()
-//        sty.alignment = NSTextAlignment.left
-//        attStr.addAttribute(NSAttributedStringKey.paragraphStyle, value: sty, range: NSMakeRange(0, attStr.length))
-//        attStr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 12), range: NSMakeRange(0, attStr.length))
-//        attStr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(10, 11))
-//        attStr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(20, 10))
-//
-//        protocolLabel.attributedText = attStr
-        
         let nsArray = ["《银行自动转账授权书》","《三方借款协议》"]
-        
         addProtocolClick(nsArray)
-        
-        
-//        protocolLabel.yb_addAttributeTapAction(["《银行自动转账授权书》","、《三方借款协议》"]) { (string, range, int) in
-//            print("点击了\(string)标签 - {\(range.location) , \(range.length)} - \(int)")
-//
-//            if int == 0{
-//                self.bankProtocolClick()
-//            }else{
-//                self.loanProtocolClick()
-//            }
-//        }
-        
-        // MARK: 关闭点击效果 默认是开启的
-//        protocolLabel.enabledTapEffect = false
         
         if UI_IS_IPONE6 {
             repayImmediatelyBtn.snp.updateConstraints({ (make) in
@@ -950,7 +914,6 @@ extension HomePageCell {
         tipLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(tipImageView.snp.centerX)
             make.centerY.equalTo(tipImageView.snp.centerY)
-//            make.top.equalTo(self).offset(18)
         }
         
         let titleLabel = UILabel()
@@ -1527,19 +1490,19 @@ extension HomePageCell{
         }
     }
     
-    //银行自动转账授权书
-    
-    @objc func bankProtocolClick(){
-        if delegate != nil {
-            delegate?.bankProtocolClick()
-        }
-    }
-    //三方借款协议
-    
-    @objc func loanProtocolClick(){
-        if delegate != nil {
-            delegate?.loanProtocolClick()
-        }
-    }
+//    //银行自动转账授权书
+//
+//    @objc func bankProtocolClick(){
+//        if delegate != nil {
+//            delegate?.bankProtocolClick()
+//        }
+//    }
+//    //三方借款协议
+//
+//    @objc func loanProtocolClick(){
+//        if delegate != nil {
+//            delegate?.loanProtocolClick()
+//        }
+//    }
 }
 

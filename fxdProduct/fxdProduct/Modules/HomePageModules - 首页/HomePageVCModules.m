@@ -18,7 +18,6 @@
 #import "SDCycleScrollView.h"
 #import "RepayRecordController.h"
 #import "LoanApplicationForConfirmationVCModules.h"
-#import "CycleTextCell.h"
 #import "QRCodePopView.h"
 #import "UserDataAuthenticationListVCModules.h"
 #import "HomeProductList.h"
@@ -299,7 +298,7 @@
 #pragma mark tabView视图
 - (void)setUpTableview
 {
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
+//    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CycleTextCell class]) bundle:nil] forCellReuseIdentifier:@"CycleTextCell"];
     [self.tableView registerClass:[HomeDefaultCell class] forCellReuseIdentifier:@"HomeDefaultCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -516,37 +515,37 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    if (indexPath.section == 0) {
-        CycleTextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CycleTextCell"];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_cycleICON"]];
-        [cell.contentView addSubview:imageView];
-        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(cell.mas_centerY);
-            make.left.equalTo(@20);
-            make.height.equalTo(@20);
-            make.width.equalTo(@20);
-        }];
-        SDCycleScrollView *sdCycleScrollview = [[SDCycleScrollView alloc] init];
-        sdCycleScrollview.userInteractionEnabled = false;
-        sdCycleScrollview.delegate = self;
-        sdCycleScrollview.onlyDisplayText = true;
-        sdCycleScrollview.titleLabelBackgroundColor = [UIColor whiteColor];
-        sdCycleScrollview.titleLabelTextColor = rgb(82, 82, 82);
-        sdCycleScrollview.scrollDirection = UICollectionViewScrollDirectionVertical;
-        sdCycleScrollview.titlesGroup = _homeProductList.data.paidList;
-        if (UI_IS_IPHONE5) {
-            sdCycleScrollview.titleLabelTextFont = [UIFont systemFontOfSize:13.f];
-        }
-        [cell.contentView addSubview:sdCycleScrollview];
-        [sdCycleScrollview mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(imageView.mas_right).offset(5);
-            make.right.equalTo(@(-10));
-            make.centerY.equalTo(cell.mas_centerY);
-            make.height.equalTo(@20);
-        }];
-        
-        return cell;
-    }
+//    if (indexPath.section == 0) {
+//        CycleTextCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CycleTextCell"];
+//        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_cycleICON"]];
+//        [cell.contentView addSubview:imageView];
+//        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.equalTo(cell.mas_centerY);
+//            make.left.equalTo(@20);
+//            make.height.equalTo(@20);
+//            make.width.equalTo(@20);
+//        }];
+//        SDCycleScrollView *sdCycleScrollview = [[SDCycleScrollView alloc] init];
+//        sdCycleScrollview.userInteractionEnabled = false;
+//        sdCycleScrollview.delegate = self;
+//        sdCycleScrollview.onlyDisplayText = true;
+//        sdCycleScrollview.titleLabelBackgroundColor = [UIColor whiteColor];
+//        sdCycleScrollview.titleLabelTextColor = rgb(82, 82, 82);
+//        sdCycleScrollview.scrollDirection = UICollectionViewScrollDirectionVertical;
+//        sdCycleScrollview.titlesGroup = _homeProductList.data.paidList;
+//        if (UI_IS_IPHONE5) {
+//            sdCycleScrollview.titleLabelTextFont = [UIFont systemFontOfSize:13.f];
+//        }
+//        [cell.contentView addSubview:sdCycleScrollview];
+//        [sdCycleScrollview mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(imageView.mas_right).offset(5);
+//            make.right.equalTo(@(-10));
+//            make.centerY.equalTo(cell.mas_centerY);
+//            make.height.equalTo(@20);
+//        }];
+//
+//        return cell;
+//    }
     
     HomeDefaultCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomeDefaultCell"];
     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];

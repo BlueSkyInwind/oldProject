@@ -24,6 +24,13 @@
 
 @end
 
+@protocol RuleTextModel <NSObject>
+
+@end
+
+@protocol FeeTextModel <NSObject>
+
+@end
 
 @interface DrawInfoModel : JSONModel
 
@@ -70,6 +77,10 @@
 @property (nonatomic, strong)NSString<Optional> *applicationId;
 //产品id
 @property (nonatomic, strong)NSString<Optional> *productId;
+//逾期弹窗当前费用标题
+@property (nonatomic, strong)NSString<Optional> *currentFeeTitle;
+//逾期弹窗规则标题
+@property (nonatomic, strong)NSString<Optional> *ruleTitle;
 
 @end
 
@@ -85,8 +96,31 @@
 @property (nonatomic, strong)NSString<Optional> *applicationId;
 //产品id
 @property (nonatomic, strong)NSString<Optional> *productId;
+//进件id
+@property (nonatomic, strong)NSArray<FeeTextModel,Optional> *feeText;
+//产品id
+@property (nonatomic, strong)NSArray<RuleTextModel,Optional> *ruleText;
 
 @end
+
+@interface FeeTextModel : JSONModel
+
+//左边文字
+@property (nonatomic, strong)NSString<Optional> *label;
+//右边具体值
+@property (nonatomic, strong)NSString<Optional> *value;
+
+@end
+
+@interface RuleTextModel : JSONModel
+
+//左边文字
+@property (nonatomic, strong)NSString<Optional> *label_;
+//右边具体值
+@property (nonatomic, strong)NSString<Optional> *value_;
+
+@end
+
 
 @interface TestFailInfoModel : JSONModel
 
