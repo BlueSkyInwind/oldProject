@@ -2,7 +2,7 @@
 //  FXD_AlertViewCust.h
 //  fxdProduct
 //
-//  Created by dd on 15/11/6.
+//  Created by admin on 17/12/24.
 //  Copyright © 2015年 dd. All rights reserved.
 //
 
@@ -51,5 +51,29 @@ typedef void (^ClickBlock)(NSInteger index);
                  cancelTitle:(NSString *)cancelTitle
                    sureTitle:(NSString *)sureTitle
                  compleBlock:(ClickBlock)clickIndexBlock;
+
+
+/**
+ 首页逾期弹窗
+
+ @param title 标题
+ @param twotitle 二级标题
+ @param contentAttri 内容
+ @param deditTitle 逾期
+ @param deditAmount 逾期费用
+ @param defaultInterestLabel 罚息
+ @param defaultInterestTitle 罚息
+ @param sureTitle 按钮标题
+ @param clickIndexBlock 点击触发
+ */
+-(void)showFXDOverdueViewAlertViewTitle:(NSString *)title
+                               TwoTitle:(NSString *)twotitle
+                                content:(NSString *)contentAttri
+                            deditAmount:(NSString *)deditAmount
+                             deditTitle:(NSString *)deditTitle
+                   defaultInterestLabel:(NSString *)defaultInterestLabel
+                   defaultInterestTitle:(NSString *)defaultInterestTitle
+                              sureTitle:(NSString *)sureTitle
+                            compleBlock:(ClickBlock)clickIndexBlock;
 
 @end

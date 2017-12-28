@@ -51,7 +51,7 @@ class FXD_ApplicationChoosePickerView: UIView ,UIPickerViewDelegate,UIPickerView
     }
     
     convenience init (vc:UIViewController,dataArr:[String]) {
-        self.init(frame: CGRect.init(x: 0, y: _k_h, width: _k_w, height: 200))
+        self.init(frame: CGRect.init(x: 0, y: _k_h, width: _k_w, height: 240))
         VC = vc
         dataArray = dataArr 
     }
@@ -60,15 +60,14 @@ class FXD_ApplicationChoosePickerView: UIView ,UIPickerViewDelegate,UIPickerView
     @objc func show()  {
         VC?.view.addSubview(self)
         UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.frame = CGRect.init(x: 0, y: _k_h - 200, width: _k_w, height: 200)
+            self.frame = CGRect.init(x: 0, y: _k_h - 240, width: _k_w, height: 240)
         }) { (complication) in
-            
         }
     }
     
     @objc  func dismiss()  {
         UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.frame = CGRect.init(x: 0, y: _k_h, width: _k_w, height: 200)
+            self.frame = CGRect.init(x: 0, y: _k_h, width: _k_w, height: 240)
         }) { (complication) in
             self.removeFromSuperview()
         }
@@ -88,14 +87,15 @@ extension  FXD_ApplicationChoosePickerView {
     func setUpUI()  {
         
         let btnView = UIView()
-        btnView.backgroundColor = LINE_COLOR
+        btnView.backgroundColor = LOAN_APPLICATION_TitleBACK_COLOR
         self.addSubview(btnView)
         btnView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self).offset(-185)
+            make.bottom.equalTo(self).offset(-190)
             make.left.equalTo(self).offset(0)
             make.right.equalTo(self).offset(0)
             make.height.equalTo(50)
         }
+
         
         let cancelBtn = UIButton()
         cancelBtn.setTitle("取消", for: .normal)
@@ -133,7 +133,7 @@ extension  FXD_ApplicationChoosePickerView {
             make.top.equalTo(btnView.snp.bottom).offset(10)
             make.left.equalTo(self).offset(0)
             make.right.equalTo(self).offset(0)
-            make.height.equalTo(185)
+            make.height.equalTo(190)
         }
     }
 }

@@ -19,6 +19,7 @@ class FXDAlertView: UIView {
     @objc var  contentLabel:UILabel?
     @objc var  cancelBtn:UIButton?
     @objc var  sureBtn:UIButton?
+    var overdueView:OverdueInfoPopView?
     
     var lineOne:UIView?
     var lineTwo:UIView?
@@ -35,6 +36,7 @@ class FXDAlertView: UIView {
         setUpUI()
     }
     
+    //MARK:  通用全局弹窗初始化
     @objc convenience init(_ titleStr:String, content:String , cancelTitle:String, sureTitle:String) {
         self.init(frame: UIScreen.main.bounds)
         self.titleLabel?.text = titleStr
@@ -53,7 +55,7 @@ class FXDAlertView: UIView {
         }
     }
     
-    ///MARK: 富文本  通用全局弹窗初始化
+    //MARK: (富文本)  通用全局弹窗初始化
     @objc convenience init(_ titleStr:String, content:String ,attributes:[NSAttributedStringKey : Any], cancelTitle:String,  sureTitle:String) {
         let  contentAttri = NSMutableAttributedString.init(string: content, attributes:attributes)
         self.init(titleStr, contentAttri: contentAttri, cancelTitle: cancelTitle, sureTitle: sureTitle)
@@ -83,6 +85,27 @@ class FXDAlertView: UIView {
         let height = contentAttri.boundingRect(with:CGSize.init(width: Alert_width - 30, height: UIScreen.main.bounds.size.height), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.RawValue(UInt8(NSStringDrawingOptions.usesLineFragmentOrigin.rawValue) | UInt8(NSStringDrawingOptions.usesFontLeading.rawValue))), context: nil).height
         var backHeight = height + header_Height + bottom_Height + 20
         backHeight  = backHeight < 150.0 ? 150.0 : backHeight
+        backGroundView?.snp.updateConstraints({ (make) in
+            make.height.equalTo(backHeight)
+        })
+    }
+    
+    //MARK: (富文本)  首页逾期弹窗
+    @objc convenience init(_ titleStrOne:String, titleStrTwo:String,content:String ,attributes:[NSAttributedStringKey : Any], deditTitle:String,deditAmount:String,defaultInterestTitle:String, defaultInterestLabel:String, btnTitle:String) {
+        let  contentAttri = NSMutableAttributedString.init(string: content, attributes:attributes)
+        self.init(titleStrOne, contentAttri: contentAttri, cancelTitle: "", sureTitle: btnTitle)
+        homePageOverdueViewLayout()
+        overdueView?.titleLabel.text = titleStrTwo
+        overdueView?.deditAmountLabel.text = deditAmount
+        overdueView?.defaultInterestLabel.text = defaultInterestLabel
+        overdueView?.deditTitle.text = deditTitle
+        overdueView?.defaultInserestTitle.text = defaultInterestTitle
+        adaptOverdueViewHeightContent(contentAttri)
+    }
+    
+    func adaptOverdueViewHeightContent(_ contentAttri:NSAttributedString) {
+        let height = contentAttri.boundingRect(with:CGSize.init(width: Alert_width - 30, height: UIScreen.main.bounds.size.height), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.RawValue(UInt8(NSStringDrawingOptions.usesLineFragmentOrigin.rawValue) | UInt8(NSStringDrawingOptions.usesFontLeading.rawValue))), context: nil).height
+        let backHeight = height + header_Height + bottom_Height + 160
         backGroundView?.snp.updateConstraints({ (make) in
             make.height.equalTo(backHeight)
         })
@@ -270,7 +293,28 @@ extension FXDAlertView {
     
     func homePageOverdueViewLayout()  {
         
+        overdueView = OverdueInfoPopView.loadNib("OverdueInfoPopView")
+        backGroundView?.addSubview(overdueView!)
+        overdueView?.snp.makeConstraints { (make) in
+            make.bottom.equalTo((bottomView?.snp.top)!).offset(0)
+            make.left.right.equalTo(0)
+            make.height.equalTo(120)
+        }
         
+        contentLabel?.snp.remakeConstraints({ (make) in
+            make.top.equalTo((lineOne?.snp.bottom)!).offset(10)
+            make.bottom.equalTo((overdueView?.snp.top)!).offset(-10)
+            make.left.equalTo((backGroundView?.snp.left)!).offset(15)
+            make.right.equalTo((backGroundView?.snp.right)!).offset(-15)
+        })
+        
+        titleLabel?.backgroundColor = UIColor.init(red: 223/255.0, green: 227/255.0, blue: 230/255.0, alpha: 1)
+        titleLabel?.snp.remakeConstraints({ (make) in
+            make.top.equalTo((backGroundView?.snp.top)!).offset(0);
+            make.height.equalTo(40)
+            make.left.right.equalTo(0)
+        })
+        lineOne?.removeFromSuperview()
     }
 }
 

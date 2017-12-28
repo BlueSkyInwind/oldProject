@@ -246,11 +246,13 @@
  */
 - (void)homeQRCodePopups
 {
-    QRCodePopView *qrPopView = [QRCodePopView defaultQRPopView];
-    [qrPopView layoutIfNeeded];
-    qrPopView.parentVC = self;
-    [self lew_presentPopupView:qrPopView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-    }];
+    
+    [self OverdueInfoPopView];
+//    QRCodePopView *qrPopView = [QRCodePopView defaultQRPopView];
+//    [qrPopView layoutIfNeeded];
+//    qrPopView.parentVC = self;
+//    [self lew_presentPopupView:qrPopView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
+//    }];
 }
 
 /**
@@ -732,6 +734,16 @@
     
     NSLog(@"loanProtocolClick");
 }
+
+/**
+ 逾期弹窗
+ */
+-(void)OverdueInfoPopView{
+    [[FXD_AlertViewCust sharedHHAlertView] showFXDOverdueViewAlertViewTitle:@"逾期费用收取规则" TwoTitle:@"当前逾期费用" content:@"1、违约金：10%\n2、罚息：5%/天（逾期1-30天），1%/天（逾期30天以上）" deditAmount:@"10元" deditTitle:@"违约金"  defaultInterestLabel:@"25.5元" defaultInterestTitle:@"罚金" sureTitle:@"我知道了" compleBlock:^(NSInteger index) {
+        
+    }];
+}
+
 
 -(void)protocolNameClick:(NSInteger)index{
     

@@ -569,6 +569,12 @@
 		84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635131F01096900146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
+		84BC53D31FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */; };
+		84BC53D41FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */; };
+		84BC53D61FF4C43B00FE58E8 /* OverdueInfoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */; };
+		84BC53D71FF4C43B00FE58E8 /* OverdueInfoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */; };
+		84BC53D91FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */; };
+		84BC53DA1FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */; };
 		84C45C081FBC55860086E8DB /* DiscountTicketParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C45C071FBC55860086E8DB /* DiscountTicketParam.m */; };
 		84C45C091FBC55860086E8DB /* DiscountTicketParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C45C071FBC55860086E8DB /* DiscountTicketParam.m */; };
 		84C619BC1FA815A800626411 /* LoanPeriodForDetailsVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6198F1FA8149700626411 /* LoanPeriodForDetailsVCModule.m */; };
@@ -2189,6 +2195,9 @@
 		84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobilePhoneOperatorParamModel.m; sourceTree = "<group>"; };
 		84A6350F1F00FCA200146A8A /* AuthenticationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewModel.h; sourceTree = "<group>"; };
 		84A635101F00FCA200146A8A /* AuthenticationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewModel.m; sourceTree = "<group>"; };
+		84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueInfoPopView.swift; sourceTree = "<group>"; };
+		84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OverdueInfoPopView.xib; sourceTree = "<group>"; };
+		84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonProtocol .swift"; sourceTree = "<group>"; };
 		84C45C061FBC55860086E8DB /* DiscountTicketParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscountTicketParam.h; sourceTree = "<group>"; };
 		84C45C071FBC55860086E8DB /* DiscountTicketParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscountTicketParam.m; sourceTree = "<group>"; };
 		84C6198E1FA8149700626411 /* LoanPeriodForDetailsVCModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoanPeriodForDetailsVCModule.h; sourceTree = "<group>"; };
@@ -2718,6 +2727,8 @@
 				CC31979F1ED929F10083F263 /* WhiteRefuseView.xib */,
 				84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */,
 				CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */,
+				84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */,
+				84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -4171,6 +4182,7 @@
 				849AC26C1FF0FABE005E435F /* FXD_MXVerifyManager.h */,
 				849AC26D1FF0FABE005E435F /* FXD_MXVerifyManager.m */,
 				84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */,
+				84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */,
 				CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */,
 			);
 			path = Common;
@@ -5573,6 +5585,7 @@
 				842C0B591ED599DE00366D11 /* LoginViewController.xib in Resources */,
 				63F5AD941E23849C001BDF44 /* LoanApplicationForConfirmationVCModules.xib in Resources */,
 				84A380281FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.xib in Resources */,
+				84BC53D61FF4C43B00FE58E8 /* OverdueInfoPopView.xib in Resources */,
 				84ED5B751F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */,
 				636B1B2D1C216FCE00450358 /* HomePageVCModules.xib in Resources */,
 				1A762F701C1FBE4700964719 /* RepayRecordController.xib in Resources */,
@@ -5672,6 +5685,7 @@
 				CC0DFB631EA5B1090024841A /* LoanApplicationForConfirmationVCModules.xib in Resources */,
 				84ED5B761F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */,
 				84A380291FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.xib in Resources */,
+				84BC53D71FF4C43B00FE58E8 /* OverdueInfoPopView.xib in Resources */,
 				CC0DFB661EA5B1090024841A /* HomePageVCModules.xib in Resources */,
 				CC0DFB681EA5B1090024841A /* RepayRecordController.xib in Resources */,
 				CC0DFB6B1EA5B1090024841A /* IdentityCell.xib in Resources */,
@@ -5909,6 +5923,7 @@
 				638A17021E517D9F00AB8AB6 /* LOTShapeCircle.m in Sources */,
 				63A24C651BE063A90036E8EF /* UIFont+Extend.m in Sources */,
 				6379639D1CABAFE9002A5910 /* ProductListBaseClass.m in Sources */,
+				84BC53D31FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */,
 				63ED33471B6B5569008B6085 /* RegViewController.m in Sources */,
 				63F254871E49A45900852CF1 /* HMScannerController.m in Sources */,
 				84A380391FAC41D7008FB7AF /* SesameCreditCertificationVCModules.m in Sources */,
@@ -6204,6 +6219,7 @@
 				63A24D2F1BE10F4A0036E8EF /* GetMoneyStateUserBean.m in Sources */,
 				638A170A1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m in Sources */,
 				84A5696D1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
+				84BC53D91FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */,
 				638A16F21E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m in Sources */,
 				CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */,
 				CCF43B031EDE672D00CFD72C /* getBidStatus.m in Sources */,
@@ -6435,6 +6451,7 @@
 				CC6F068A1F789D7000FA889E /* CapitalLoanParam.m in Sources */,
 				8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
 				CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */,
+				84BC53D41FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */,
 				842CA0E41F453B4A00A2150B /* HomeParam.m in Sources */,
 				CC0DF9591EA5B1090024841A /* ProductListResult.m in Sources */,
 				CC0DF95A1EA5B1090024841A /* NSData+AES.m in Sources */,
@@ -6730,6 +6747,7 @@
 				CC0DFA531EA5B1090024841A /* YYTextAsyncLayer.m in Sources */,
 				84A380231FAC1D8D008FB7AF /* UserPhoneContactsVCModules.m in Sources */,
 				CC2A4D0A1EE13260000A38DC /* QryUserStatusParamModel.m in Sources */,
+				84BC53DA1FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */,
 				CC0DFA551EA5B1090024841A /* CareerParse.m in Sources */,
 				CC0DFA561EA5B1090024841A /* YYTextArchiver.m in Sources */,
 				CC6F06861F750A5B00FA889E /* CapitalListModel.m in Sources */,

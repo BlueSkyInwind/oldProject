@@ -72,4 +72,6 @@ let PAY_LINE_CLOLR = UIColor.init(red: 240/255.0, green: 238/255.0, blue: 238/25
 let AMOUNT_COLOR = UIColor.init(red: 255/255.0, green: 222/255.0, blue: 0/255.0, alpha: 1)
 //申请确认背景色
 let LOAN_APPLICATION_COLOR = UIColor.init(red: 242/255.0, green: 242/255.0, blue: 242/255.0, alpha: 1)
+//
+let LOAN_APPLICATION_TitleBACK_COLOR = UIColor.init(red: 190/255.0, green: 190/255.0, blue: 190/255.0, alpha: 1)
 
