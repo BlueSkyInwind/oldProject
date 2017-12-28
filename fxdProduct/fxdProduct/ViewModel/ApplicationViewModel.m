@@ -59,8 +59,6 @@
 }
 
 
-
-
 -(void)queryApplicationInfo:(NSString *)productId{
 
     NSDictionary * paramDic = @{@"productId":productId};

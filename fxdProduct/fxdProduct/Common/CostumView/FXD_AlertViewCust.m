@@ -28,7 +28,6 @@
     return sharedHHAlertInstance;
 }
 
-
 -(void)showAppVersionUpdate:(NSString *)content isForce:(BOOL)isForce compleBlock:(ClickBlock)clickIndexBlock{
     if (self.versionUpdate) {
         return;
@@ -76,7 +75,7 @@
     if (attributeDic == nil) {
         NSMutableParagraphStyle *ornamentParagraph = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         //设置text文字垂直居中
-        ornamentParagraph.alignment = NSTextAlignmentCenter;
+//        ornamentParagraph.alignment = NSTextAlignmentCenter;
         attributeDic =@{NSFontAttributeName:[UIFont yx_systemFontOfSize:14],NSForegroundColorAttributeName:kUIColorFromRGB(0x808080),NSParagraphStyleAttributeName:ornamentParagraph};
     }
     self.fxdAlertView = [[FXDAlertView alloc]init:title content:contentAttri attributes:attributeDic cancelTitle:cancelTitle sureTitle:sureTitle];
@@ -87,8 +86,6 @@
         [weakSelf.fxdAlertView dismiss];
         weakSelf.fxdAlertView = nil;
     };
-//    CGSize attSize = [attriStr boundingRectWithSize:CGSizeMake(220, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
-//    CGSize attSize2 = [alertContent boundingRectWithSize:CGSizeMake(220, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:nil context:nil].size;
 }
 
 -(void)showIdentiFXDAlertViewTitle:(NSString *)title
@@ -115,7 +112,30 @@
     };
 }
 
-
+-(void)showFXDOverdueViewAlertViewTitle:(NSString *)title
+                                  TwoTitle:(NSString *)twotitle
+                     content:(NSString *)contentAttri
+                deditAmount:(NSString *)deditAmount
+                     deditTitle:(NSString *)deditTitle
+                 defaultInterestLabel:(NSString *)defaultInterestLabel
+                   defaultInterestTitle:(NSString *)defaultInterestTitle
+                   sureTitle:(NSString *)sureTitle
+                 compleBlock:(ClickBlock)clickIndexBlock{
+    
+    if (self.fxdAlertView) {
+        return;
+    }
+    NSMutableParagraphStyle *ornamentParagraph = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    NSDictionary * attributeDic =@{NSFontAttributeName:[UIFont yx_systemFontOfSize:14],NSForegroundColorAttributeName:kUIColorFromRGB(0x808080),NSParagraphStyleAttributeName:ornamentParagraph};
+    self.fxdAlertView = [[FXDAlertView alloc]init:title titleStrTwo:twotitle content:contentAttri attributes:attributeDic deditTitle:deditTitle deditAmount:deditAmount defaultInterestTitle:defaultInterestTitle defaultInterestLabel:defaultInterestLabel btnTitle:sureTitle];
+    [self.fxdAlertView show];
+    __weak typeof (self) weakSelf = self;
+    self.fxdAlertView.clickButtonIndex = ^(NSInteger index) {
+        clickIndexBlock(index);
+        [weakSelf.fxdAlertView dismiss];
+        weakSelf.fxdAlertView = nil;
+    };
+}
 
 
 
