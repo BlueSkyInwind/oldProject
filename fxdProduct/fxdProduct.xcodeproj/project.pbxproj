@@ -1175,6 +1175,8 @@
 		CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
 		CC6E0F271FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F261FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift */; };
 		CC6E0F281FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F261FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift */; };
+		CC6E0F2A1FF4CAE700D32773 /* DataUpdatePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F291FF4CAE700D32773 /* DataUpdatePopView.swift */; };
+		CC6E0F2B1FF4CAE700D32773 /* DataUpdatePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F291FF4CAE700D32773 /* DataUpdatePopView.swift */; };
 		CC6F06731F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */; };
 		CC6F06741F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */; };
 		CC6F06761F74E6F900FA889E /* OptionalRapidLoanApplicationVCModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06751F74E6F900FA889E /* OptionalRapidLoanApplicationVCModules.swift */; };
@@ -2357,6 +2359,7 @@
 		CC6E0F151FF0942400D32773 /* FXD_HomeProductListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_HomeProductListModel.h; sourceTree = "<group>"; };
 		CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_HomeProductListModel.m; sourceTree = "<group>"; };
 		CC6E0F261FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeOverdueFeesRulesPopView.swift; sourceTree = "<group>"; };
+		CC6E0F291FF4CAE700D32773 /* DataUpdatePopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUpdatePopView.swift; sourceTree = "<group>"; };
 		CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidLoanApplicationcConfirmation.swift; sourceTree = "<group>"; };
 		CC6F06751F74E6F900FA889E /* OptionalRapidLoanApplicationVCModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalRapidLoanApplicationVCModules.swift; sourceTree = "<group>"; };
 		CC6F06781F74F26B00FA889E /* PickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickView.swift; sourceTree = "<group>"; };
@@ -4835,6 +4838,7 @@
 				84A37FF01FAC12A8008FB7AF /* QRCodePopView.m */,
 				84A37FF11FAC12A8008FB7AF /* QRCodePopView.xib */,
 				CC6E0F261FF36CF500D32773 /* HomeOverdueFeesRulesPopView.swift */,
+				CC6E0F291FF4CAE700D32773 /* DataUpdatePopView.swift */,
 			);
 			path = "HomePopwindowsModules - 首页弹窗模块";
 			sourceTree = "<group>";
@@ -5989,6 +5993,7 @@
 				84F1E2A31FD94B39007D3381 /* RegionCodeParam.m in Sources */,
 				84A3801A1FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm in Sources */,
 				630CC0961BC8E14200AE9690 /* QueryRepaymentsBaseClass.m in Sources */,
+				CC6E0F2A1FF4CAE700D32773 /* DataUpdatePopView.swift in Sources */,
 				CCEEB41C1ED6EA6800588B6A /* QueryBidStatusModel.m in Sources */,
 				63F254731E499C8000852CF1 /* InvitationViewController.m in Sources */,
 				638A17001E517D9F00AB8AB6 /* LOTLayer.m in Sources */,
@@ -6514,6 +6519,7 @@
 				CC0DF99C1EA5B1090024841A /* LOTShapeTransform.m in Sources */,
 				CC0DF99D1EA5B1090024841A /* LoanRecordParse.m in Sources */,
 				848139641F568A8600CD701C /* YX_TextField.swift in Sources */,
+				CC6E0F2B1FF4CAE700D32773 /* DataUpdatePopView.swift in Sources */,
 				CC0DF99E1EA5B1090024841A /* YYTextWeakProxy.m in Sources */,
 				CC0DF99F1EA5B1090024841A /* NSData+YYAdd.m in Sources */,
 				CC0DF9A01EA5B1090024841A /* LOTAnimatableBoundsValue.m in Sources */,

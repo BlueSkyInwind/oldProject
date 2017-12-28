@@ -661,8 +661,8 @@
 }
 
 -(void)loanBtnClick{
+    
     FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
-
     loanApplicationVC.productId = _homeProductList.drawInfo.productId;
     [self.navigationController pushViewController:loanApplicationVC animated:true];
 }
