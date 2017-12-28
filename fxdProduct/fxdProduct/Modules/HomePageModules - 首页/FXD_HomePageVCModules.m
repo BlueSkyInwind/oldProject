@@ -18,7 +18,6 @@
 #import "SDCycleScrollView.h"
 #import "RepayRecordController.h" 
 #import "LoanApplicationForConfirmationVCModules.h"
-#import "CycleTextCell.h"
 #import "QRCodePopView.h"
 #import "UserDataAuthenticationListVCModules.h"
 #import "HomeProductList.h"
@@ -38,7 +37,6 @@
 #import "FXDBaseTabBarVCModule.h"
 #import "UITabBar+badge.h"
 #import "NextViewCell.h"
-#import "CycleTextCell.h"
 #import "FXD_HomeProductListModel.h"
 #import "LoanPeriodListVCModule.h"
 @interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate>
@@ -101,8 +99,6 @@
     }
     [self LoadHomeView];
     
-    
-    
 }
 
 
@@ -121,7 +117,6 @@
     _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.44) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
     //375 185
     _sdView.delegate = self;
-//    _sdView.showPageControl = true;
     _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
     _sdView.currentPageDotColor = UI_MAIN_COLOR;
     _sdView.pageDotColor = RGBColor(214, 213, 213, 1.0);
@@ -247,12 +242,11 @@
 - (void)homeQRCodePopups
 {
     
-    [self OverdueInfoPopView];
-//    QRCodePopView *qrPopView = [QRCodePopView defaultQRPopView];
-//    [qrPopView layoutIfNeeded];
-//    qrPopView.parentVC = self;
-//    [self lew_presentPopupView:qrPopView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-//    }];
+    QRCodePopView *qrPopView = [QRCodePopView defaultQRPopView];
+    [qrPopView layoutIfNeeded];
+    qrPopView.parentVC = self;
+    [self lew_presentPopupView:qrPopView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
+    }];
 }
 
 /**
@@ -508,38 +502,12 @@
 
 
 #pragma mark - TableViewDelegate
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//
-//    if (section == 0) {
-//        return 12.0f;
-//    }
-//
-//    return 0.1f;
-//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    if ([self getAllProduct] > 1) {
-//
-//        return [self getAllProduct]+1;
-//
-//    }
-//    return 2;
     
     return 1;
 }
-
-//-(NSInteger)getAllProduct{
-//
-//    NSInteger i = 0;
-//    for (HomeProductsList *product in _homeProductList.data.productList) {
-//        if ([product.isValidate isEqualToString:@"1"]) {
-//            i++;
-//        }
-//    }
-//    return i;
-//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -548,41 +516,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-//    if (indexPath.section == 0) {
-//        return 30.f;
-//    }else {
-//
-//        if ([self getAllProduct]>1) {
-//            int height = 0;
-//            if (UI_IS_IPHONE5) {
-//                height = 113;
-//            }else if(UI_IS_IPHONE6P){
-//
-//                height = 150;
-//            }else if (UI_IS_IPHONE6){
-//
-//                height = 160;
-//            }else if (UI_IS_IPHONEX){
-//                height = 210;
-//            }
-//
-//            if ([self getAllProduct]>2) {
-//                return (_k_h-0.5*_k_w-height)/_dataArray.count;
-//            }
-//            return 120;
-//
-//        }else{
-//            if (UI_IS_IPHONE5) {
-//                return (_k_h-0.5*_k_w-155);
-//            }else if(UI_IS_IPHONEX){
-//                return (_k_h-0.5*_k_w-250);
-//            }else{
-//                return (_k_h-0.5*_k_w-155);
-//            }
-//        }
-//    }
-    
+
     return _k_h-_k_w*0.44-113;
 }
 
@@ -663,8 +597,14 @@
 }
 
 -(void)loanBtnClick{
+    
+//    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:@"资料更新提示" content:@"亲爱的用户：\n由于距上次提交资料时间较长，你有部分资料需更新提交。\n我们会依据您的最新资料信息及历史还款记录，给你最新的借款额度。" attributeDic:nil cancelTitle:@"取消" sureTitle:@"前去更新" compleBlock:^(NSInteger index) {
+//
+//        UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]init];
+//        [self.navigationController pushViewController:controller animated:true];
+//        NSLog(@"前去更新");
+//    }];
     FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
-
     loanApplicationVC.productId = _homeProductList.drawInfo.productId;
     [self.navigationController pushViewController:loanApplicationVC animated:true];
 }
@@ -702,6 +642,7 @@
 
 -(void)questionDescBtnClick{
     NSLog(@"帮助图标按钮");
+    [self OverdueInfoPopView];
 }
 
 -(void)repayImmediatelyBtnClick:(BOOL)isSelected{
@@ -725,20 +666,13 @@
     [self.navigationController pushViewController:controller animated:true];
 }
 
--(void)bankProtocolClick{
-   
-    NSLog(@"bankProtocolClick");
-}
-
--(void)loanProtocolClick{
-    
-    NSLog(@"loanProtocolClick");
-}
 
 /**
  逾期弹窗
  */
 -(void)OverdueInfoPopView{
+    
+    
     [[FXD_AlertViewCust sharedHHAlertView] showFXDOverdueViewAlertViewTitle:@"逾期费用收取规则" TwoTitle:@"当前逾期费用" content:@"1、违约金：10%\n2、罚息：5%/天（逾期1-30天），1%/天（逾期30天以上）" deditAmount:@"10元" deditTitle:@"违约金"  defaultInterestLabel:@"25.5元" defaultInterestTitle:@"罚金" sureTitle:@"我知道了" compleBlock:^(NSInteger index) {
         
     }];
