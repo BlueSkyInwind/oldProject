@@ -22,7 +22,8 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
 
     var tableView:UITableView?
     
-   @objc  var productId:String?
+    @objc var productId:String?
+
     //MRAK:视图
     var headerView:FXD_displayAmountCommonHeaderView?
     var applicationCell:FXD_LoanApplicationCellTableViewCell?

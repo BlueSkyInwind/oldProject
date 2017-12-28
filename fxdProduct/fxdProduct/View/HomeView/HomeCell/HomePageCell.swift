@@ -35,6 +35,8 @@ import Masonry
     func bankProtocolClick()
     //三方借款协议
     func loanProtocolClick()
+    //协议点击
+    func protocolNameClick(_ index:Int)
 }
 
 
@@ -56,6 +58,7 @@ class HomePageCell: UITableViewCell {
     @objc var defaultTimeLabel : UILabel?
     //复选框
     @objc var checkBoxBtn : UIButton?
+    @objc var protocolLabel : UILabel?
     
 
     override func awakeFromNib() {
@@ -730,17 +733,12 @@ extension HomePageCell {
         
         if UI_IS_IPONE5{
             
-            
-            firstLabel.snp.updateConstraints({ (make) in
-                make.top.equalTo(titleLabel.snp.bottom).offset(12)
-            })
-            
             bgView.snp.updateConstraints({ (make) in
                 make.top.equalTo(thirdLabel.snp.bottom).offset(10)
             })
             
             moreBtn.snp.updateConstraints({ (make) in
-                make.bottom.equalTo(bgView.snp.bottom).offset(-75)
+                make.bottom.equalTo(bgView.snp.bottom).offset(-65)
             })
         }
         
@@ -848,29 +846,35 @@ extension HomePageCell {
         })
         
         
-        let protocolLabel = UILabel()
-        protocolLabel.text = "我已阅读并认可发薪贷《银行自动转账授权书》、《三方借款协议》"
-        protocolLabel.font = UIFont.systemFont(ofSize: 12)
-        protocolLabel.numberOfLines = 0
-        protocolLabel.textColor = QUTOA_COLOR
-        self.addSubview(protocolLabel)
-        protocolLabel.snp.makeConstraints { (make) in
+        protocolLabel = UILabel()
+//        protocolLabel.text = "我已阅读并认可发薪贷《银行自动转账授权书》、《三方借款协议》"
+        protocolLabel?.font = UIFont.systemFont(ofSize: 12)
+        protocolLabel?.numberOfLines = 0
+        protocolLabel?.textColor = QUTOA_COLOR
+        self.addSubview(protocolLabel!)
+        protocolLabel?.snp.makeConstraints { (make) in
             make.left.equalTo((checkBoxBtn?.snp.right)!).offset(5)
             make.right.equalTo(self).offset(-25)
             make.height.equalTo(40)
             make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(17)
         }
         
-        let attStr = NSMutableAttributedString.init(string: protocolLabel.text!)
+//        let attStr = NSMutableAttributedString.init(string: protocolLabel.text!)
+//
+//        let sty = NSMutableParagraphStyle()
+//        sty.alignment = NSTextAlignment.left
+//        attStr.addAttribute(NSAttributedStringKey.paragraphStyle, value: sty, range: NSMakeRange(0, attStr.length))
+//        attStr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 12), range: NSMakeRange(0, attStr.length))
+//        attStr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(10, 11))
+//        attStr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(20, 10))
+//
+//        protocolLabel.attributedText = attStr
         
-        let sty = NSMutableParagraphStyle()
-        sty.alignment = NSTextAlignment.left
-        attStr.addAttribute(NSAttributedStringKey.paragraphStyle, value: sty, range: NSMakeRange(0, attStr.length))
-        attStr.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 12), range: NSMakeRange(0, attStr.length))
-        attStr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(10, 11))
-        attStr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(20, 10))
+        let nsArray = ["《银行自动转账授权书》","《三方借款协议》"]
         
-        protocolLabel.attributedText = attStr
+        addProtocolClick(nsArray)
+        
+        
 //        protocolLabel.yb_addAttributeTapAction(["《银行自动转账授权书》","、《三方借款协议》"]) { (string, range, int) in
 //            print("点击了\(string)标签 - {\(range.location) , \(range.length)} - \(int)")
 //
@@ -893,7 +897,7 @@ extension HomePageCell {
                 make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(10)
             })
             
-            protocolLabel.snp.updateConstraints({ (make) in
+            protocolLabel?.snp.updateConstraints({ (make) in
                 make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(5)
             })
             
@@ -919,7 +923,7 @@ extension HomePageCell {
                 make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(6)
             })
             
-            protocolLabel.snp.updateConstraints({ (make) in
+            protocolLabel?.snp.updateConstraints({ (make) in
                 make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(4)
             })
         }
@@ -1373,7 +1377,27 @@ extension HomePageCell{
         }
         return view
     }
-    
+  
+    //协议
+    func addProtocolClick(_ protocolNames:[String])  {
+        var protocolContent:String = "我已阅读并认可发薪贷"
+        var rangeArr:[NSRange] = []
+        for proName in protocolNames {
+            protocolContent = protocolContent + proName + "、"
+        }
+        let index = protocolContent.index(protocolContent.endIndex, offsetBy: -1)
+        let attributeStr = NSMutableAttributedString.init(string: String(protocolContent[..<index]))
+        for proName in protocolNames {
+            let range = (protocolContent as NSString).range(of: proName)
+            rangeArr.append(range)
+            attributeStr.yy_setTextHighlight(range, color: UI_MAIN_COLOR, backgroundColor: UI_MAIN_COLOR) {[weak self] (view, arrtiText, range, rect) in
+                if self?.delegate != nil  {
+                    self?.delegate?.protocolNameClick(rangeArr.index(of: range)!)
+                }
+            }
+        }
+        protocolLabel?.attributedText = attributeStr
+    }
 }
 
 //MARK:各种点击事件
