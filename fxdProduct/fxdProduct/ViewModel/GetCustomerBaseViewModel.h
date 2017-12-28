@@ -12,6 +12,4 @@
 
 - (void)fatchCustomBaseInfo:(NSDictionary *)paramDic;
 
-- (void)fatchCustomBaseInfoNoHud:(NSDictionary *)paramDic;
-
 @end

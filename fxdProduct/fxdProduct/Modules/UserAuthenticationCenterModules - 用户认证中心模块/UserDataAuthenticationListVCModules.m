@@ -236,12 +236,9 @@
                 cell.subTitleLabel.text = @"完善信用卡认证信息";
                 cell.titleLable.text = @"信用卡认证";
                 cell.statusLabel.text = _creditCardHighRandM != nil ? _creditCardHighRandM.result : @"未完成";
-                cell.statusLabel.textColor = rgb(42, 155, 234);
-                if ([_creditCardStatus isEqualToString:@"2"]) {
-                    cell.statusLabel.textColor = rgb(42, 155, 234);
-                }
+                cell.statusLabel.textColor = rgb(159, 160, 162);
                 if ([_creditCardStatus isEqualToString:@"3"]) {
-                    cell.statusLabel.textColor = rgb(159, 160, 162);
+                    cell.statusLabel.textColor = UI_MAIN_COLOR;
                 }
                 return cell;
             }
@@ -252,12 +249,9 @@
                 cell.subTitleLabel.text = @"完善社保认证信息";
                 cell.titleLable.text = @"社保认证";
                 cell.statusLabel.text = _socialSecurityHighRandM != nil ? _socialSecurityHighRandM.result : @"未完成";;
-                cell.statusLabel.textColor =  rgb(42, 155, 234);
-                if ([_socialSecurityStatus isEqualToString:@"2"]) {
-                    cell.statusLabel.textColor = rgb(42, 155, 234);
-                }
+                cell.statusLabel.textColor =  rgb(159, 160, 162);
                 if ([_socialSecurityStatus isEqualToString:@"3"]) {
-                    cell.statusLabel.textColor = rgb(159, 160, 162);
+                    cell.statusLabel.textColor = UI_MAIN_COLOR;
                 }
                 return cell;
             }

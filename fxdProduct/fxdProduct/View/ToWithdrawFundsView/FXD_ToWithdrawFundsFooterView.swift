@@ -25,7 +25,7 @@ import WebKit
 class FXD_ToWithdrawFundsFooterView: UIView{
     
     var displayTitle:UILabel?
-    var displayContent:UILabel?
+    var displayContent:UITextView?
     var protocolBackView:UIView?
     var applyForBtn:UIButton?
     var protocolBtn:UIButton?
@@ -60,8 +60,24 @@ class FXD_ToWithdrawFundsFooterView: UIView{
         let  contentAttri = NSMutableAttributedString.init(string: contentStr!)
         let contentPara = NSMutableParagraphStyle.init()
         contentPara.paragraphSpacing = 8
-        contentAttri.addAttributes([NSAttributedStringKey.font:UIFont.yx_systemFont(ofSize: 14) ?? 14,NSAttributedStringKey.paragraphStyle:contentPara], range: NSMakeRange(0, (contentStr?.count)!))
+        contentAttri.addAttributes([NSAttributedStringKey.font:UIFont.yx_systemFont(ofSize: 14) ?? 14,NSAttributedStringKey.paragraphStyle:contentPara,NSAttributedStringKey.foregroundColor:UIColor.init(red: 127/255.0, green: 127/255.0, blue: 127/255.0, alpha: 1)], range: NSMakeRange(0, (contentStr?.count)!))
         displayContent?.attributedText = contentAttri
+        adaptHeightContent(contentAttri)
+    }
+    
+    ///根据提示框内容自适应高度
+    func adaptHeightContent(_ contentAttri:NSAttributedString) {
+        var height = contentAttri.boundingRect(with:CGSize.init(width: _k_w - 40, height: UIScreen.main.bounds.size.height), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.RawValue(UInt8(NSStringDrawingOptions.usesLineFragmentOrigin.rawValue) | UInt8(NSStringDrawingOptions.usesFontLeading.rawValue))), context: nil).height + 30
+        height  = height < 150.0 ? 150.0 : height
+        if UI_IS_IPONE5 {
+            height = 150
+        }
+        displayContent?.snp.remakeConstraints({ (make) in
+            make.top.equalTo((displayTitle?.snp.bottom)!).offset(8)
+            make.left.equalTo(self.snp.left).offset(20)
+            make.right.equalTo(self.snp.right).offset(-20)
+            make.height.equalTo(height)
+        })
     }
     
     func addProtocolClick(_ protocolNames:[String])  {
@@ -125,14 +141,17 @@ extension FXD_ToWithdrawFundsFooterView {
             make.right.equalTo(self.snp.right).offset(-20)
         })
         
-        displayContent = UILabel()
+        displayContent = UITextView()
         displayContent?.font = UIFont.yx_boldSystemFont(ofSize: 14)
         displayContent?.textColor = UIColor.init(red: 127/255.0, green: 127/255.0, blue: 127/255.0, alpha: 1)
+        displayContent?.backgroundColor = LOAN_APPLICATION_COLOR
         displayContent?.textAlignment  = NSTextAlignment.left
-        displayContent?.numberOfLines = 0
+        displayContent?.isEditable = false
+        displayContent?.isSelectable = false
+//        displayContent?.numberOfLines = 0
         self.addSubview(displayContent!)
         displayContent?.snp.makeConstraints({ (make) in
-            make.top.equalTo((displayTitle?.snp.bottom)!).offset(15)
+            make.top.equalTo((displayTitle?.snp.bottom)!).offset(8)
             make.left.equalTo(self.snp.left).offset(20)
             make.right.equalTo(self.snp.right).offset(-20)
         })
@@ -148,7 +167,7 @@ extension FXD_ToWithdrawFundsFooterView {
         
         applyForBtn = UIButton.init(type: UIButtonType.custom)
         applyForBtn?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
-        applyForBtn?.setTitle("确认申请", for: UIControlState.normal)
+        applyForBtn?.setTitle("提款", for: UIControlState.normal)
         applyForBtn?.addTarget(self, action: #selector(applyForBottonClick), for: UIControlEvents.touchUpInside)
         self.addSubview(applyForBtn!)
         applyForBtn?.snp.makeConstraints({ (make) in
@@ -177,8 +196,6 @@ extension FXD_ToWithdrawFundsFooterView {
             make.left.equalTo((protocolBtn?.snp.right)!).offset(4)
             make.top.equalTo((protocolBackView?.snp.top)!).offset(2)
         })
-
-
     }
 }
 

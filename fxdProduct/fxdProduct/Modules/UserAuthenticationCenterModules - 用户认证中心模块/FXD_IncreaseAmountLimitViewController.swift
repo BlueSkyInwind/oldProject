@@ -16,16 +16,21 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     
     var creditCardStatus:String? = ""
     var socialSecurityStatus:String? = ""
+    
+    var creditCardhighRandingM:HighRandingModel?
+    var socialSecurityhighRandingM:HighRandingModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         // Do any additional setup after loading the view.
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
         self.MXTask()
+        obtainHighRanking()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -111,28 +116,20 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: "HighRankingAuthTableViewCell", for: indexPath) as! HighRankingAuthTableViewCell
         cell.accessoryType = .disclosureIndicator
         cell.selectionStyle  = .none
-        cell.statusLabel.text = "未完成"
         switch indexPath.row {
         case 0:
+            cell.statusLabel.text = creditCardhighRandingM == nil ? "未完成" : creditCardhighRandingM?.result
             cell.titleLabel.text = "信用卡认证";
-            if creditCardStatus == "1" {
+            if creditCardStatus == "3" {
                 cell.statusLabel.textColor = UI_MAIN_COLOR
-                cell.statusLabel.text = "已完成"
             }
-            
-            if creditCardStatus == "2" {
-                cell.statusLabel.text = "认证中"
-            }
-            
+
             break
         case 1:
+            cell.statusLabel.text = socialSecurityhighRandingM == nil ? "未完成" : socialSecurityhighRandingM?.result
             cell.titleLabel.text = "社保认证";
-            if socialSecurityStatus == "1" {
+            if socialSecurityStatus == "3" {
                 cell.statusLabel.textColor = UI_MAIN_COLOR
-                cell.statusLabel.text = "已完成"
-            }
-            if socialSecurityStatus == "2" {
-                cell.statusLabel.text = "认证中"
             }
             break
         default:
@@ -248,9 +245,11 @@ extension FXD_IncreaseAmountLimitViewController {
                 for dic in array {
                     let highRandM = try! HighRandingModel.init(dictionary: dic as! [AnyHashable : Any])
                     if highRandM.tasktypeid == "1" {
+                        self.creditCardhighRandingM = highRandM
                         self.creditCardStatus = highRandM.resultid
                     }
                     if highRandM.tasktypeid == "2" {
+                        self.socialSecurityhighRandingM = highRandM
                         self.socialSecurityStatus = highRandM.resultid
                     }
                 }

@@ -23,6 +23,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     var tableView:UITableView?
     
     @objc var productId:String?
+
     //MRAK:视图
     var headerView:FXD_displayAmountCommonHeaderView?
     var applicationCell:FXD_LoanApplicationCellTableViewCell?
@@ -50,6 +51,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         // Do any additional setup after loading the view.
         self.title = "申请确认"
         self.addBackItem()
+        self.view.backgroundColor = LOAN_APPLICATION_COLOR
         chooseType = .Application_Amount
         contentArrs = ["2500","+200","12","点击选择"]
         obtainApplicationInfo(EliteLoan) {[weak self] (isSuccess) in
@@ -74,7 +76,6 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     /// 页面视图
     func configureView()  {
         
-        self.view.backgroundColor = LOAN_APPLICATION_COLOR
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
         self.tableView?.backgroundColor = LOAN_APPLICATION_COLOR
         tableView?.delegate = self
@@ -124,7 +125,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         
         let applicationMV = ApplicationViewModel()
         applicationMV.setBlockWithReturn({ [weak self](returnValue) in
-            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            let baseResult = returnValue as! BaseResultModel
             if baseResult.errCode == "0" {
                 let checkVC = FXD_ToWithdrawFundsViewController()
                 self?.navigationController?.pushViewController(checkVC, animated: true)
@@ -136,7 +137,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         if isDisplayDiscount! {
             applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: chooseDiscountTDM?.base_id, loanFor: loanForCode, periods: contentArrs![2], loanAmount: contentArrs![0])
         }else{
-            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: nil, loanFor: loanForCode, periods: contentArrs![2], loanAmount: contentArrs![0])
+            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: nil, loanFor: loanForCode, periods: contentArrs![1], loanAmount: contentArrs![0])
         }
     }
     
@@ -397,7 +398,6 @@ extension FXD_LoanApplicationViewController {
             loanForArrs?.append(loanFors.desc_)
         }
     }
-    
     
     func obtainSelectedCalculateInfo(loanAmount:String, periods: String, productId: String, voucherAmount: String,_ success:@escaping ((_ isSuccess:Bool) -> Void))  {
         let applicationVM = ApplicationViewModel.init()

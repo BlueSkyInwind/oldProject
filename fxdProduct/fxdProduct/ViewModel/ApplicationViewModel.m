@@ -39,10 +39,10 @@
     
     ApplicaitonModel * applicationM = [[ApplicaitonModel alloc]init];
     applicationM.baseId= baseId;
-    applicationM.productId= baseId;
-    applicationM.loanFor= baseId;
-    applicationM.periods= baseId;
-    applicationM.loanAmount= baseId;
+    applicationM.productId= productId;
+    applicationM.loanFor= loanFor;
+    applicationM.periods= periods;
+    applicationM.loanAmount= loanAmount;
     applicationM.platformCode= platformCode;
     NSDictionary * paramDic = [applicationM toDictionary];
     

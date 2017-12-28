@@ -52,15 +52,9 @@ typedef void (^FailureBlock)(EnumServerStatus status, id object);
 - (void)POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure;
 //身份证图片上传
 - (void)POSTUpLoadImage:(NSString *)strURL FilePath:(NSDictionary *)images  parameters:(id)parameters finished:(SuccessFinishedBlock)finshed failure:(FailureBlock)failure;
-
-- (void)POSTHideHUD:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure;
-
-- (void)checkAppVersion:(NSString *)strUrl paramters:(id)paramters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure;
 //合规请求
 - (void)HG_POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure;
-
 //手机运营商超时设置特殊处理
 - (void)TCPOSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure;
-
 
 @end
