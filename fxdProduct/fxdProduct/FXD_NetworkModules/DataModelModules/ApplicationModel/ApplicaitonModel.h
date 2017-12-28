@@ -43,6 +43,9 @@
 @property(nonatomic,strong)NSString<Optional> * period;
 @property(nonatomic,strong)NSString<Optional> * repayAmount;
 @property(nonatomic,strong)NSString<Optional> * tips;
+@property(nonatomic,strong)NSString<Optional> * answer;
+@property(nonatomic,strong)NSString<Optional> * example;
+@property(nonatomic,strong)NSString<Optional> * question;
 @property(nonatomic,strong)NSArray<DiscountTicketDetailModel,Optional> * voucher;
 //计算模型结果
 @property(nonatomic,strong)NSString<Optional> * repaymentAmount;

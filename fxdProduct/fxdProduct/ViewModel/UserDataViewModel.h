@@ -78,6 +78,10 @@
  */
 -(void)UserDataCertificationResult;
 
+/**
+ 获取提额信息页面接口
+ */
+-(void)obtainUserCreditLimit;
 #pragma  mark - 公共接口
 /**
  获取列表数据的公共接口

@@ -73,7 +73,13 @@
 
 @end
 
+@interface CustomerMeasureAmountInfo : JSONModel
 
+@property (strong,nonatomic)NSString<Optional> * amount;
+@property (strong,nonatomic)NSString<Optional> * completeFlag;
+@property (strong,nonatomic)NSString<Optional> * testFlag;
+
+@end
 
 
 
