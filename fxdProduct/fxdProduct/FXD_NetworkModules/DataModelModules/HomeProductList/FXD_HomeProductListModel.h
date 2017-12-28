@@ -66,6 +66,10 @@
 @property (nonatomic, strong)NSString<Optional> *repayTips;
 //期供金额
 @property (nonatomic, strong)NSString<Optional> *stagingAmount;
+//进件id
+@property (nonatomic, strong)NSString<Optional> *applicationId;
+//产品id
+@property (nonatomic, strong)NSString<Optional> *productId;
 
 @end
 
@@ -77,6 +81,10 @@
 @property (nonatomic, strong)NSString<Optional> *repayDate;
 //顶部蓝色借款提示
 @property (nonatomic, strong)NSString<Optional> *repayTips;
+//进件id
+@property (nonatomic, strong)NSString<Optional> *applicationId;
+//产品id
+@property (nonatomic, strong)NSString<Optional> *productId;
 
 @end
 

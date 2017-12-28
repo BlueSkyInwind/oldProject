@@ -119,7 +119,7 @@
     [self.view addSubview:self.tableView];
     
     DLog(@"%lf",_k_w);
-    _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, 165) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
+    _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.44) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
     //375 185
     _sdView.delegate = self;
 //    _sdView.showPageControl = true;
@@ -582,7 +582,7 @@
 //        }
 //    }
     
-    return _k_h-265;
+    return _k_h-_k_w*0.44-113;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -654,9 +654,9 @@
     if ([_homeProductList.flag isEqualToString:@"15"]) {
         
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-        controller.product_id = @"";
+        controller.product_id = _homeProductList.repayInfo.productId;
         controller.platform_type = @"";
-        controller.applicationId = @"";
+        controller.applicationId = _homeProductList.repayInfo.applicationId;
         [self.navigationController pushViewController:controller animated:true];
         
     }else{
@@ -670,6 +670,7 @@
 -(void)loanBtnClick{
     
     FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
+    loanApplicationVC.productId = _homeProductList.drawInfo.productId;
     [self.navigationController pushViewController:loanApplicationVC animated:true];
     NSLog(@"我要借款");
 }
@@ -714,9 +715,9 @@
     if (!isSelected) {
         
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-        controller.product_id = @"";
+        controller.product_id = _homeProductList.repayInfo.productId;
         controller.platform_type = @"";
-        controller.applicationId = @"";
+        controller.applicationId = _homeProductList.repayInfo.applicationId;
         [self.navigationController pushViewController:controller animated:true];
 
         NSLog(@"立即还款");
@@ -743,6 +744,11 @@
 -(void)loanProtocolClick{
     
     NSLog(@"loanProtocolClick");
+}
+
+-(void)protocolNameClick:(NSInteger)index{
+    
+    NSLog(@"%ld",index);
 }
 
 - (void)didReceiveMemoryWarning {
