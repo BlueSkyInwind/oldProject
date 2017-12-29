@@ -44,6 +44,11 @@
 
 @property (nonatomic, strong) NSNumber<Optional> * service_fee_min_period_;
 
+@property (nonatomic, strong) NSString<Optional> * quickOmit;    //立省
+
+@property (nonatomic, strong) NSString<Optional> * settleRepayAmount;  //提前结清金额
+
+
 @property (nonatomic, strong) NSArray<Available_Redpackets,Optional> *available_redpackets_;
 
 @end

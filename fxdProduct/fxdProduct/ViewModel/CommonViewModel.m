@@ -40,18 +40,7 @@
     protocolM.periods_  = periods;
     
     NSDictionary *paramDic = [protocolM toDictionary];
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocol_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
-            self.returnBlock(baseRM);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            self.faileBlock();
-        }
-    }];
-    
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocol_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocol_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
 //        if (self.returnBlock) {
 //            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
 //            self.returnBlock(baseRM);
@@ -61,6 +50,17 @@
 //            self.faileBlock();
 //        }
 //    }];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocol_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
 }
 
 

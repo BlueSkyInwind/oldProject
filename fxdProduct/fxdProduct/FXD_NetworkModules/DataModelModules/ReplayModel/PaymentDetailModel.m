@@ -11,3 +11,10 @@
 @implementation PaymentDetailModel
 
 @end
+
+@implementation PaymentDetailAmountParam
+
+@end
+@implementation PaymentDetailAmountInfoModel
+
+@end

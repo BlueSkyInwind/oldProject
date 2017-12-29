@@ -100,16 +100,12 @@
             }
             repayMent.isPopRoot = _isPopRoot;
             repayMent.repayAmount = finalRepayAmount;
-            repayMent.product_id = RapidLoan;
-            if ([self.product_id isEqualToString:DeriveRapidLoan]) {
-                repayMent.product_id = DeriveRapidLoan;
-            }
-            //            repayMent.cellSelectArr = _cellSelectArr;
-            //            repayMent.save_amount = _save_amount;
+//            repayMent.product_id = RapidLoan;
+//            if ([self.product_id isEqualToString:DeriveRapidLoan]) {
+//                repayMent.product_id = DeriveRapidLoan;
+//            }
             repayMent.repayListInfo = repayListInfo;
             repayMent.situations = repayListInfo.situations_;
-            repayMent.platform_Type = self.platform_type;
-            repayMent.applicationID = self.applicationId;
             [_targetVC.navigationController pushViewController:repayMent animated:YES];
             
         } else {

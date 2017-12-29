@@ -40,11 +40,6 @@ typedef NS_ENUM(NSUInteger, RepayType) {
 
 @property (nonatomic, strong) NSArray<BillList *> *bills;
 
-//页面必须信息
-@property (nonatomic, copy) NSString *product_id;
-@property (nonatomic, copy) NSString *applicationID;
-@property (nonatomic, copy) NSString *platform_Type;
-
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 
 @property (nonatomic,assign)BOOL isPopRoot;

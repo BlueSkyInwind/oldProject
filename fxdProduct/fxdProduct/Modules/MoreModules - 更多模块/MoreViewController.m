@@ -22,6 +22,7 @@
 #import "UIImage+Color.h"
 #import "ChangePasswordViewController.h"
 #import "LoginViewModel.h"
+#import "MineViewModel.h"
 
 @interface MoreViewController () <UITableViewDataSource,UITableViewDelegate,MakeSureBtnDelegate,UIViewControllerTransitioningDelegate>
 {
@@ -120,9 +121,7 @@
         {
             cell.lineView.hidden=NO;
         }
-
     }
-    
     else{
         HelpViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"outLog"];
         cell.lblContent.text=@"退出登录";
@@ -263,12 +262,31 @@
     [loginVM userLoginOut];
 }
 
-#pragma mark 退出登录
 -(void)deleteUserRegisterID{
     
     LoginViewModel * loginVM = [[LoginViewModel alloc]init];
     [loginVM deleteUserRegisterID];
 }
+
+-(void)obtainCommonQuestion{
+    MineViewModel *mineMV = [[MineViewModel alloc]init];
+    [mineMV setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = returnValue;
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+//            FXDWebViewController *webview = [[FXDWebViewController alloc] init];
+//            webview.loadContent =
+//            [self.navigationController pushViewController:webview animated:true];
+        }else{
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view.window message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [mineMV obtainCommonProblems];
+}
+
+
+
 
 
 

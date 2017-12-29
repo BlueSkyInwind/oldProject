@@ -96,9 +96,6 @@ NSString * const    _detectIDCardOCR_url        =    @"https://api.faceid.com/fa
 //FaceID人脸对比身份核实
 NSString * const    _verifyLive_url             =    @"https://api.megvii.com/faceid/v2/verify";
 
-//常见问题
-NSString * const    _question_url               =    @"more/question.html";
-
 //手机认证
 NSString * const    _mobileAuthentication_url    =    @"case/case_main_phone.html";
 
@@ -221,6 +218,9 @@ NSString * const    _New_DiscountTicket_url    =    @"operation/client/getuse";
 
 //新优惠券规则
 NSString * const    _DeductibleAmountOfDiscountTicket_url    =    @"order/voucher/money/single";
+
+//还款详情页金额获取
+NSString * const    _repayDetailAmountInfo_url    =    @"order/calculate/show/repay/amount";
 
 //登陆
 NSString * const     _login_url        =    @"membership/login";
@@ -380,6 +380,11 @@ NSString * const    _newproductProtocol_url        =    @"product/getProductNewP
 
 //额度页面信息获取
 NSString * const    _creditLimitInfo_url        =    @"user/verify/amount";
+
+//常见问题
+NSString * const    _question_url               =    @"product/getCommonProblemApi";
+
+
 
 #pragma mark - 合规接口
 

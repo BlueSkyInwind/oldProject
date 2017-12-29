@@ -196,6 +196,8 @@ UIKIT_EXTERN NSString * const       _ChoosePattern_url;                  //支�
 UIKIT_EXTERN NSString * const       _DiscountTicketRule_url;                  //优惠券规则
 UIKIT_EXTERN NSString * const       _New_DiscountTicket_url;                  //优惠券规则
 UIKIT_EXTERN NSString * const       _DeductibleAmountOfDiscountTicket_url;                  //优惠券规则
+UIKIT_EXTERN NSString * const       _repayDetailAmountInfo_url;                  //获取还款金额信息
+
 
 UIKIT_EXTERN NSString * const       _PersonalCenterWithdrawCashAPI_url;      //个人中心（优惠券,现金红包,账户余额）
 UIKIT_EXTERN NSString * const       _LoadWithdrawCash_url;                   //现金红包,账户余额（点击列表操作展示提现页）

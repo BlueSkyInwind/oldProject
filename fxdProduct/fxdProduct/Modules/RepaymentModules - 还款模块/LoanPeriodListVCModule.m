@@ -204,96 +204,40 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     [self.view addSubview:noneView];
 }
 
-/**
- *  @author dd
- *
- *  查询用户账单信息
- *  status: 1->已还   2->逾期   3->未来期   4->当期
- */
--(void)selectAll{
 
-    _readyPayAmount = 0.0;
-    _save_amount = 0.0;
-    for (int i = 0; i < _cellSelectArr.count; i++) {
-        [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
-        Situations *situation = [_vaildSituations objectAtIndex:i];
-        _readyPayAmount += [situation.debt_total_ floatValue];
-        if ([situation.status_ isEqualToString:@"3"]) {
-            _save_amount += [situation.debt_service_fee_ floatValue];
-        }
-    }
-    
-    if ([self.platform_type isEqualToString:@"0"]|| [self.platform_type isEqualToString:@"2"]||[self.platform_type isEqualToString:@"3"]) {
-        if ([_vaildSituations.firstObject.status_ isEqualToString:@"2"] && [_vaildSituations.lastObject.status_ isEqualToString:@"2"]) {
-            _save_amount = 0;
-        }else {
-            if (_repayListModel.situations_.count < [_repayListModel.service_fee_min_period_ integerValue]) {
-                if (_currenPeriod <= _repayListModel.situations_.count) {
-                    _save_amount = 0.0;
-                }
-            } else {
-                if (_currenPeriod < [_repayListModel.service_fee_min_period_ integerValue]) {
-                    for (NSInteger i = _currenPeriod; i < [_repayListModel.service_fee_min_period_ integerValue]; i++) {
-                        Situations * situations = _repayListModel.situations_[i];
-                        _save_amount -= [situations.debt_service_fee_ floatValue];
-                    }
-                }
-            }
-        }
-    }
-    
-    _readyPayAmount = _readyPayAmount - _save_amount;
-
-    if ([self.product_id isEqualToString:EliteLoan]) {
-        NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, saveAmount.length)];
-        self.saveUpLabel.attributedText = attriStr;
-        self.saveUpLabel.hidden = NO;
-        _payNumberTop.constant = 5;
-        _payNumberBottom.constant = 15;
-        [_payNumberLabel updateConstraintsIfNeeded];
-        [_payNumberLabel updateConstraints];
-    }
-}
 
 #pragma mark 全部还款
 - (IBAction)checkAll:(UIButton *)sender {
     _selectAllBtn.selected = !_selectAllBtn.selected;
     _readyPayAmount = 0.0;
-    _save_amount = 0.0;
+    _save_amount = _repayListModel.quickOmit != nil ? _repayListModel.quickOmit.floatValue : 0.0;
     if (_selectAllBtn.selected) {
-//        [self showAlert];
         for (int i = 0; i < _cellSelectArr.count; i++) {
             [_cellSelectArr replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:true]];
-            if ([self.platform_type isEqualToString:@"0"] ||[self.platform_type isEqualToString:@"2"]||[self.platform_type isEqualToString:@"3"]) {
-                Situations *situation = [_vaildSituations objectAtIndex:i];
-                _readyPayAmount += [situation.debt_total_ floatValue];
-                if ([situation.status_ isEqualToString:@"3"]) {
-                    _save_amount += [situation.debt_service_fee_ floatValue];
-                }
-            }
+            Situations *situation = [_vaildSituations objectAtIndex:i];
+            _readyPayAmount += [situation.debt_total_ floatValue];
+//            if ([situation.status_ isEqualToString:@"3"]) {
+//                _save_amount += [situation.debt_service_fee_ floatValue];
+//            }
         }
+//        if ([_vaildSituations.firstObject.status_ isEqualToString:@"2"] && [_vaildSituations.lastObject.status_ isEqualToString:@"2"]) {
+//            _save_amount = 0;
+//        }else {
+//            if (_repayListModel.situations_.count <=  [_repayListModel.service_fee_min_period_ integerValue]) {
+//                if (_currenPeriod <= _repayListModel.situations_.count) {
+//                    _save_amount = 0.0;
+//                }
+//            } else {
+//                if (_currenPeriod < [_repayListModel.service_fee_min_period_ integerValue]) {
+//                    for (NSInteger i = _currenPeriod; i < [_repayListModel.service_fee_min_period_ integerValue]; i++) {
+//                        Situations * situations = _repayListModel.situations_[i];
+//                        _save_amount -= [situations.debt_service_fee_ floatValue];
+//                    }
+//                }
+//            }
+//        }
         
-        if ([self.platform_type isEqualToString:@"0"] || [self.platform_type isEqualToString:@"2"]||[self.platform_type isEqualToString:@"3"]) {
-            if ([_vaildSituations.firstObject.status_ isEqualToString:@"2"] && [_vaildSituations.lastObject.status_ isEqualToString:@"2"]) {
-                _save_amount = 0;
-            }else {
-                if (_repayListModel.situations_.count <=  [_repayListModel.service_fee_min_period_ integerValue]) {
-                    if (_currenPeriod <= _repayListModel.situations_.count) {
-                        _save_amount = 0.0;
-                    }
-                } else {
-                    if (_currenPeriod < [_repayListModel.service_fee_min_period_ integerValue]) {
-                        for (NSInteger i = _currenPeriod; i < [_repayListModel.service_fee_min_period_ integerValue]; i++) {
-                            Situations * situations = _repayListModel.situations_[i];
-                            _save_amount -= [situations.debt_service_fee_ floatValue];
-                        }
-                    }
-                }
-            }
-        }
-        _readyPayAmount = _readyPayAmount - _save_amount;
+        _readyPayAmount = _repayListModel.settleRepayAmount != nil ? _repayListModel.settleRepayAmount.floatValue : 0.0;
 
         if ([self.product_id isEqualToString:EliteLoan]){
             NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
@@ -351,7 +295,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
  *
  */
 - (IBAction)repayClick:(UIButton *)sender {
-    if ([self.platform_type isEqualToString:@"0"] || [self.platform_type isEqualToString:@"2"]||[self.platform_type isEqualToString:@"3"]) {
         if (_situations.count > 0) {
             [_situations removeAllObjects];
         }
@@ -365,7 +308,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         } else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请至少选择一期"];
         }
-    }
 }
 
 - (void)fatchCardInfo
@@ -395,14 +337,11 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                     repayMent.repayType = RepayTypeOption;
                 }
                 repayMent.supportBankListArr = _supportBankListArr;
-                repayMent.repayAmount = _readyPayAmount;
                 repayMent.repayListInfo = _repayListModel;
                 repayMent.cellSelectArr = _cellSelectArr;
                 repayMent.save_amount = _save_amount;
                 repayMent.situations = _situations;
-                repayMent.product_id = self.product_id;
-                repayMent.platform_Type = self.platform_type;
-                repayMent.applicationID = self.applicationId;
+
                 [self.navigationController pushViewController:repayMent animated:YES];
                 
             } else {
@@ -411,12 +350,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         } WithFaileBlock:^{
             
         }];
-        
-        if ([self.platform_type isEqualToString:@"2"]) {
-            [checkBankViewModel getSupportBankListInfo:@"4"];
-        }else if ([self.platform_type isEqualToString:@"0"]||[self.platform_type isEqualToString:@"3"]){
-            [checkBankViewModel getSupportBankListInfo:@"2"];
-        }
+        [checkBankViewModel getSupportBankListInfo:@"2"];
     } else {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请至少选择一期"];
     }    

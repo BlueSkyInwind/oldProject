@@ -594,7 +594,7 @@
             controller.product_id = _homeProductList.overdueInfo.productId;
         }
         
-        controller.platform_type = @"";
+        controller.platform_type = @"0";
         controller.applicationId = _homeProductList.repayInfo.applicationId;
         [self.navigationController pushViewController:controller animated:true];
     }else{
@@ -664,7 +664,7 @@
         
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
         controller.product_id = productId;
-        controller.platform_type = @"";
+        controller.platform_type = @"0";
         controller.applicationId = _homeProductList.repayInfo.applicationId;
         [self.navigationController pushViewController:controller animated:true];
         NSLog(@"立即还款");

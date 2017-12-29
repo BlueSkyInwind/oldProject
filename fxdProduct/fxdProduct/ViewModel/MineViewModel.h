@@ -13,4 +13,8 @@
 //经验值体系-展示等级
 -(void)getExperienceValueGrad;
 
+/**
+ 常见问题
+ */
+-(void)obtainCommonProblems;
 @end

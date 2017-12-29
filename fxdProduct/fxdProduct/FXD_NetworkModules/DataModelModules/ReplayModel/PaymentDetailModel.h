@@ -26,3 +26,24 @@
 
 
 @end
+
+@interface PaymentDetailAmountParam : JSONModel
+
+@property(nonatomic,strong)NSString<Optional> * redpacketId;       //券id（可选）
+@property(nonatomic,strong)NSString<Optional> * stagingId;             //分期id集合，逗号隔开
+
+@end
+
+
+@interface PaymentDetailAmountInfoModel : JSONModel
+
+@property(nonatomic,strong)NSString<Optional> * overpaidAmount;       //溢缴金
+@property(nonatomic,strong)NSString<Optional> * payAmount;             //实际支付金额
+@property(nonatomic,strong)NSString<Optional> * redPacketRepayAmount;    //使用的红包金额
+@property(nonatomic,strong)NSString<Optional> * repayTotal;               //应还款总额
+@property(nonatomic,strong)NSString<Optional> * debtOverdueTotal;    //逾期费用
+@property(nonatomic,strong)NSString<Optional> * couponUsageDesc;   //券可用描述
+@property(nonatomic,strong)NSString<Optional> * couponUsageStatus;    //可用券状态  0，可用，1，逾期不能用，2，结清不能用
+
+@end
+

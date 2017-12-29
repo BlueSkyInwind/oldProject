@@ -37,7 +37,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     var loanForArrs:[String]? =  []
     var chooseDiscountTDM:DiscountTicketDetailModel?
     var applicaitonViewIM:ApplicaitonViewInfoModel?
-    var loanForCode:String?
+    var loanForCode:String? = ""
     var actualAmount:String?
     var repaymentAmount:String?
     //MRAK:状态
@@ -317,11 +317,11 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         }
         
         if isDisplayDiscount! {
-            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![2], productId: EliteLoan, voucherAmount: contentArrs![3]) { (isSuccess) in
+            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![2], productId: EliteLoan, voucherAmount: loanForCode!) { (isSuccess) in
                 self.tableView?.reloadData()
             }
         }else{
-            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![1], productId: EliteLoan, voucherAmount: "") { (isSuccess) in
+            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![1], productId: EliteLoan, voucherAmount: loanForCode!) { (isSuccess) in
                 self.tableView?.reloadData()
             }
         }
