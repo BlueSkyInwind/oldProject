@@ -19,6 +19,15 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     
     var creditCardhighRandingM:HighRandingModel?
     var socialSecurityhighRandingM:HighRandingModel?
+    
+    var isTestFlag:Bool = false
+    var isCompleteFlag:Bool = false
+    
+    var amount:String? {
+        didSet{
+            headerView?.amountStr = amount
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +40,7 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
         self.navigationController?.isNavigationBarHidden = true
         self.MXTask()
         obtainHighRanking()
+        obtainViewConInfo()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,15 +94,20 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
         if UI_IS_IPONE6P || UI_IS_IPHONEX{
             rect =  CGRect.init(x: 0, y: 0, width: _k_w, height: 256)
         }
-        headerView = FXD_displayAmountCommonHeaderView.init(frame: rect, amount: "3000")
+        headerView = FXD_displayAmountCommonHeaderView.init(frame: rect, amount: "")
         headerView?.titleLabel?.text = "提额"
         headerView?.hintWordLabel?.text = IncreaseAmountLimitMarkeords
         headerView?.goBackBtn?.isHidden = true
         tableView?.tableHeaderView = headerView
     
     }
+    
     @objc func appraisalBottonClick(){
-        
+        guard isCompleteFlag else {
+            let userDataVC = UserDataAuthenticationListVCModules.init(nibName: "UserDataAuthenticationListVCModules", bundle: nil)
+            self.navigationController?.pushViewController(userDataVC, animated: true)
+            return
+        }
         
     }
     
@@ -261,6 +276,27 @@ extension FXD_IncreaseAmountLimitViewController {
         }
         userDataVM.obtainhighRankingStatus()
     }
+    
+    func obtainViewConInfo()  {
+        let userDataVM = UserDataViewModel.init()
+        userDataVM.setBlockWithReturn({ (resultObject) in
+            let baseResult = resultObject as! BaseResultModel
+            if baseResult.errCode == "0"{
+                let customerMeasureAmountInfo = try! CustomerMeasureAmountInfo.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self.amount = customerMeasureAmountInfo.amount
+                self.isTestFlag = (customerMeasureAmountInfo.testFlag as NSString).boolValue
+                self.isCompleteFlag =  (customerMeasureAmountInfo.completeFlag as NSString).boolValue
+                if !self.isTestFlag {
+//                    MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                }
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+        }
+        userDataVM.obtainUserCreditLimit()
+    }
+    
 }
 
 

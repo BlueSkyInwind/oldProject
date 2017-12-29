@@ -22,6 +22,12 @@ class FXD_displayAmountCommonHeaderView: UIView {
     var goBackBtn:UIButton?
     var titleLabel:UILabel?
     var goBack:GOBackACtion?
+    
+    var amountStr:String?{
+        didSet{
+            self.amountLabel?.text = amountStr
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,6 +36,7 @@ class FXD_displayAmountCommonHeaderView: UIView {
     
     convenience init(frame: CGRect,amount:String) {
         self.init(frame: frame)
+        self.amountStr = amount
         self.amountLabel?.text = amount
         self.hintWordLabel?.text = String.init(format: "您当前有%@元可借额度", amount)
     }

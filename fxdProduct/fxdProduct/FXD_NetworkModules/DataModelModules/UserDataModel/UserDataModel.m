@@ -19,5 +19,8 @@
 @implementation CustomerSesameCreditModel
 
 @end
+@implementation CustomerMeasureAmountInfo
+
+@end
 
 

@@ -378,7 +378,8 @@ NSString * const    _withDrawFunds_url        =    @"application/new/loan";
 //协议内容获取接口
 NSString * const    _newproductProtocol_url        =    @"product/getProductNewProtocolApi";
 
-
+//额度页面信息获取
+NSString * const    _creditLimitInfo_url        =    @"user/verify/amount";
 
 #pragma mark - 合规接口
 

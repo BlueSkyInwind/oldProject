@@ -695,7 +695,6 @@
     }];
 }
 
-
 -(void)protocolNameClick:(NSInteger)index{
     
     NSString *productId;

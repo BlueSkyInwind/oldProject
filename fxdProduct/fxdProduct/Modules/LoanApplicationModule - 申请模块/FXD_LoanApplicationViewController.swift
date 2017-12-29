@@ -62,14 +62,16 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     
     /// 页面数据初始化
     func dataInitialize()  {
+        let maxAmount = self.applicaitonViewIM?.maxAmount != nil ?  self.applicaitonViewIM?.maxAmount : ""
+        let defaultPeriod = self.applicaitonViewIM?.minPeriod != nil ?  self.applicaitonViewIM?.minPeriod : ""
         if (self.isDisplayDiscount!) {
             self.titleArrs = ["选择额度（元）","临时提额劵","分期期数","借款用途"]
             self.chooseDiscountTDM = ((self.applicaitonViewIM?.voucher! as! NSArray)[0] as! DiscountTicketDetailModel)
             let discountAmount = "+￥" + "\(self.chooseDiscountTDM?.total_amount ?? "")"
-            self.contentArrs = [(self.applicaitonViewIM?.maxAmount)!,discountAmount,(self.applicaitonViewIM?.minPeriod)!,"点击选择"]
+            self.contentArrs = [maxAmount!,discountAmount,defaultPeriod!,"点击选择"]
         }else{
             self.titleArrs = ["选择额度（元）","分期期数","借款用途"]
-            self.contentArrs = [(self.applicaitonViewIM?.maxAmount)!,(self.applicaitonViewIM?.minPeriod)!,"点击选择"]
+            self.contentArrs = [maxAmount!,defaultPeriod!,"点击选择"]
         }
     }
     
@@ -184,7 +186,8 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             }
             
             displayCell?.explainButtonClick = {
-                FXD_AlertViewCust.sharedHHAlertView().showFXDAlertViewTitle("从何时开始算借款的第一天？", content: "答：借款到账后，次日为开始计费的借款第一天。\n例如：2018.1.1日借款到账；则，2018.1.2为借款第一天2018.1.3为第一期最后还款日；", attributeDic: nil, cancelTitle: nil, sureTitle: "我知道了") { (index) in
+                
+                FXD_AlertViewCust.sharedHHAlertView().showFXDAlertViewTitle(self.applicaitonViewIM?.question, content: (self.applicaitonViewIM?.answer)! + "\n" + (self.applicaitonViewIM?.example)!, attributeDic: nil, cancelTitle: nil, sureTitle: "我知道了") { (index) in
                 }
             }
             

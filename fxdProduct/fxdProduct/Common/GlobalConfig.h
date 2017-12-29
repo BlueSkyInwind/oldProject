@@ -135,6 +135,9 @@ UIKIT_EXTERN NSString * const       _UserDataCertificationResult_url;        //�
 UIKIT_EXTERN NSString * const       _loginOutDeleteRegisterId_url;           //退出登录删除推送id
 UIKIT_EXTERN NSString * const       _getDrawLottery_url;                     //老客周末活动判断是否弹框刮奖
 UIKIT_EXTERN NSString * const       _ProductProtocol_url;                    //老客周末活动判断是否弹框刮奖
+UIKIT_EXTERN NSString * const       _creditLimitInfo_url;                    //额度页面信息获取
+
+
 
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _detectInfo_url;                         //活体检测信息上传
@@ -268,8 +271,6 @@ UIKIT_EXTERN NSString * const kTopView;
 //用户
 UIKIT_EXTERN NSString * const UserName;
 
-// 表名
-#define userTableName   [FXD_Utility sharedUtility].userInfo.userMobilePhone
 
 //通知
 UIKIT_EXTERN NSString * const  kAddMaterailNotification;

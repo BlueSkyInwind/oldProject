@@ -15,7 +15,6 @@
 #import "ReturnMsgBaseClass.h"
 #import "MGLiveViewController.h"
 #import "BaseNavigationViewController.h"
-#import "UserProtocolVCModule.h"
 #import "FXDWebViewController.h"
 #import "AuthenticationViewModel.h"
 
@@ -258,55 +257,13 @@ typedef enum {
     if (_whetherPhoneAuth) {
         [self saveMobileAuth:@"1"];
     }else {
-        if ([self.phoneAuthChannel isEqualToString:@"JXL"]) {
-            // 手机号认证  （聚立信）
-            [self mibileAuth];
-        }else if([self.phoneAuthChannel isEqualToString:@"TC"]){
+       if([self.phoneAuthChannel isEqualToString:@"TC"]){
             //手机号认证  （天创）
             [self TCmobileAuth];
         }else{
             [self TCmobileAuth];
         }
     }
-}
-#pragma mark - 聚信立手机号认证
-- (void)mibileAuth
-{
-    NSDictionary *paramDic;
-    NSString *mobileStr = [_mobileRequArr[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if (_currentDisplayType == DeafultViewType) {
-        paramDic = @{@"mobile_phone_":mobileStr,
-                     @"service_password_":_mobileRequArr[2]
-                     };
-    } else if(_currentDisplayType == VerifyCodeViewType){
-        paramDic = @{@"mobile_phone_":mobileStr,
-                     @"service_password_":_mobileRequArr[2],
-                     @"verify_code_":_mobileRequArr[3]
-                     };
-    }
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_Certification_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//        if (status == Enum_SUCCESS) {
-//            _mobileParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-//            if ([_mobileParse.flag isEqualToString:@"0000"])
-//            {
-//                //                [dataListAll2 replaceObjectAtIndex:13 withObject:@"2"];
-//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
-//                //                _segment.selectedSegmentIndex = 1;
-//                //                [self createUIWith:_segment.selectedSegmentIndex];
-//                [self saveMobileAuth:@"1"];
-//            }else if ([_mobileParse.flag isEqualToString:@"0006"]) {
-//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
-//                //                [dataListAll2 replaceObjectAtIndex:12 withObject:@"flag"];
-//                _currentDisplayType = VerifyCodeViewType;//错误时 验证码显示
-//                [_tableView reloadData];
-//            }else{
-//                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:_mobileParse.msg];
-//                [self saveMobileAuth:@"-1"];
-//            }
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//
-//    }];
 }
 #pragma mark - 天创手机号认证
 
@@ -369,21 +326,6 @@ typedef enum {
     }];
     [authenticationViewModel SaveMobileAuth:authCode];
     
-//    NSDictionary *dic = @{@"code":authCode};
-//    __weak UserMobileAuthenticationVCModules *weakself = self;
-//    //    __block NSMutableArray * blockDataList = dataListAll2;
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_authMobilePhone_url] parameters:dic finished:^(EnumServerStatus status, id object) {
-//        ReturnMsgBaseClass *returnParse = [ReturnMsgBaseClass modelObjectWithDictionary:object];
-//        if ([returnParse.flag isEqualToString:@"0000"]) {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"认证成功"];
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                [weakself.navigationController popViewControllerAnimated:YES];
-//            });
-//        }else{
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//
-//    }];
 }
 
 #pragma mark - 获取手机运营商
@@ -405,46 +347,6 @@ typedef enum {
         
     }];
     [authenticationViewModel obtainUserPhoneCarrierName];
-
-}
-
-- (void)setUIUpdate:(JXLMessagePrse *)messageParse
-{
-    if (messageParse.success) {
-        switch (messageParse.data.process_code) {
-            case 10002:
-            case 10004:
-            case 10006:
-            {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:messageParse.data.content];
-                _captchaHidenDisplay = false;
-                [_tableView reloadData];
-            }
-                break;
-            case 10003:
-            case 10007:
-            case 10009:
-            case 10010:
-            case 30000:
-            {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:messageParse.data.content];
-            }
-                break;
-            case 10008:
-            {
-                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证成功"];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self.navigationController popViewControllerAnimated:true];
-                });
-            }
-                break;
-                
-            default:
-                break;
-        }
-    } else {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:messageParse.data.content];
-    }
 }
 
 - (NSString *)formatString:(NSString *)str
@@ -484,10 +386,20 @@ typedef enum {
 
 -(void)clickAgreement{
     
-    UserProtocolVCModule *controller = [[UserProtocolVCModule alloc]init];
-    controller.productId = @"operInfo";
-    [self.navigationController pushViewController:controller animated:YES];
-    
+    CommonViewModel * commonVM = [[CommonViewModel alloc]init];
+    [commonVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = returnValue;
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            NSDictionary * dic = (NSDictionary *)baseResultM.data;
+            DetailViewController *detailVC = [[DetailViewController alloc] init];
+            detailVC.content = [dic objectForKey:@"protocol_content_"];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [commonVM obtainProductProtocolType:@"operInfo" typeCode:@"4" apply_id:nil periods:nil];
 }
 
 - (void)didReceiveMemoryWarning {

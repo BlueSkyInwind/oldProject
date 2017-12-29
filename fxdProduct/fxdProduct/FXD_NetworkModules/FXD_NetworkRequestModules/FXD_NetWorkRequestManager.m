@@ -72,6 +72,38 @@
 }
 
 #pragma mark - 发起请求
+-(void)obtainDataWithUrl:(NSString *)strURL method:(NSString *)method requestTime:(NSTimeInterval)requestTime isNeedNetStatus:(BOOL)isNeedNetStatus isNeedWait:(BOOL)isNeedWait parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure{
+    
+    // 网络判断
+    if (![FXD_Utility sharedUtility].networkState && isNeedNetStatus) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
+        return;
+    }
+    
+    //版本强制更新
+    if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
+            if (index == 1) {
+                return;
+            }
+        }];
+    }
+    
+    //进度条
+    MBProgressHUD *_waitView = [self loadingHUD];
+    if (isNeedWait) {
+        [_waitView show:YES];
+        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
+    }
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSError *serializationError = nil;
+//    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&serializationError];
+    
+
+}
+
+
 - (void)DataRequestWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus isNeedWait:(BOOL)isNeedWait parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure
 {
     //版本强制更新
@@ -102,7 +134,7 @@
 
     //请求头
     [self setHttpHeaderInfo:manager];
-
+    
     //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
     manager.requestSerializer.timeoutInterval = 30.0;
@@ -137,6 +169,7 @@
                 }
             }];
         }
+        
         finished(Enum_SUCCESS,resultDic);
          [_waitView removeFromSuperview];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;

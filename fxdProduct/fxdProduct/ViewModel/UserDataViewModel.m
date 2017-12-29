@@ -228,6 +228,21 @@
         }
     }];
 }
+
+-(void)obtainUserCreditLimit{
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_creditLimitInfo_url] isNeedNetStatus:YES parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseResultM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
 #pragma  mark - 公共接口
 /**
  获取列表数据的公共接口

@@ -10,7 +10,6 @@
 #import "WithdrawalsVCModule.h"
 #import "FMDeviceManager.h"
 #import "RateModel.h"
-#import "UserProtocolVCModule.h"
 #import "ApplicationViewModel.h"
 #import "ApplicaitonModel.h"
 #import "DiscountTicketModel.h"
@@ -269,9 +268,7 @@
 #pragma mark -> 跳转到用户信息授权服务协议
 -(void)clickAgreement{
 
-    UserProtocolVCModule *controller = [[UserProtocolVCModule alloc]init];
-    controller.productId = @"agreement";
-    [self.navigationController pushViewController:controller animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {

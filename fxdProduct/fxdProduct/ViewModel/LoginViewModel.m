@@ -8,7 +8,6 @@
 
 #import "LoginViewModel.h"
 #import "LoginParse.h"
-#import "DataBaseManager.h"
 #import "DES3Util.h"
 #import "GetCustomerBaseViewModel.h"
 #import "DataWriteAndRead.h"
@@ -90,10 +89,8 @@
             [self PostPersonInfoMessage];
             //上传推送id
             [self uploadUserRegisterID:[JPUSHService registrationID]];
-            //登录统计(账号)
-            [MobClick profileSignInWithPUID:userTableName];
-            //打开数据库
-            [[DataBaseManager shareManager] dbOpen:userTableName];
+
+
         }
         self.returnBlock(baseResultM);
     } failure:^(EnumServerStatus status, id object) {

@@ -10,7 +10,6 @@
 #import "BaseNavigationViewController.h"
 #import "LunchVCModules.h"
 #import "CALayer+Transition.h"
-#import "DataBaseManager.h"
 #import "testModelFmdb.h"
 #import "BSFingerSDK.h"
 #import "FXD_AppShareConfig.h"
@@ -99,9 +98,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     } else {
         [self enter];
     }
-    if (userTableName) {
-        [[DataBaseManager shareManager] dbOpen:userTableName];
-    }
+
     //上传jpushID
     [self uploadJPushID];
     return YES;
@@ -118,27 +115,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
         [SetUpFMDevice configFMDevice];
         [[FXD_LaunchConfiguration shared]InitializeAppConfiguration];
     });
-}
--(void)createFMDB:(NSDictionary *)launchOptions{
-    
-    // [2-EXT]: 获取启动时收到的APN数据
-    NSDictionary* message = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if (message) {
-        NSString *payloadMsg = [message objectForKey:@"payload"];
-        NSString *record = [NSString stringWithFormat:@"[APN]%@, %@", [NSDate date], payloadMsg];
-        if (payloadMsg && ![payloadMsg isEqualToString:@""]) {
-            //数据库创建
-            if(![userTableName isEqualToString:@""])
-            {
-                testModelFmdb *msg=[[testModelFmdb alloc]init];
-                msg.title=@"通知";
-                msg.date=[FXD_Tool getNowTime];
-                msg.content=payloadMsg;
-                [[DataBaseManager shareManager]insertWithModel:msg:userTableName];
-            }
-        }
-        DLog(@"%@",record);
-    }
 }
 
 -(void)heguiceshi{
@@ -213,7 +189,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     
     AppDelegate *myDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     myDelegate.isShow = false;
-    [[DataBaseManager shareManager] dbClose];
     [[BSFingerSDK sharedInstance] cancelAll];
 }
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
