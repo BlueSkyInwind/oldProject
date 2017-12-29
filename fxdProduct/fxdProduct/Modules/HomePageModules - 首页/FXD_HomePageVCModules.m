@@ -39,6 +39,7 @@
 #import "NextViewCell.h"
 #import "FXD_HomeProductListModel.h"
 #import "LoanPeriodListVCModule.h"
+#import "CommonViewModel.h"
 @interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate>
 {
     NSString *_advTapToUrl;
@@ -396,9 +397,7 @@
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         if (appDelegate.isShow) {
             
-            NSArray * popArray = (NSArray *)_homeProductList.popList;
-            PopListModel *model = (PopListModel *)popArray[0];
-            [self homeActivitiesPopups:model];
+            [self homeActivitiesPopups:_homeProductList.popList];
         }
         if (appDelegate.isHomeChooseShow) {
             [self homeEvaluationRedEnvelopeActivitiesPopups:_homeProductList];
@@ -443,15 +442,13 @@
 -(void)homeEvaluationRedEnvelopeActivitiesPopups:(FXD_HomeProductListModel *)model{
     
     if ([model.jumpBomb isEqualToString:@"1"]) {
-        
-        RedCollarListModel *redCollarList = [[RedCollarListModel alloc]initWithDictionary:(NSDictionary *)_homeProductList.redCollarList error:nil];
        
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         appDelegate.isHomeChooseShow = false;
         _popChooseView = [[HomeChoosePopView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h)];
-        _popChooseView.displayLabel.text = redCollarList.collarContent;
-        [_popChooseView.cancelButton setTitle:redCollarList.cancel forState:UIControlStateNormal];
-        [_popChooseView.sureButton setTitle:redCollarList.redCollar forState:UIControlStateNormal];
+        _popChooseView.displayLabel.text = _homeProductList.redCollarList.collarContent;
+        [_popChooseView.cancelButton setTitle:_homeProductList.redCollarList.cancel forState:UIControlStateNormal];
+        [_popChooseView.sureButton setTitle:_homeProductList.redCollarList.redCollar forState:UIControlStateNormal];
         [_popChooseView show];
         __weak typeof (self) weakSelf = self;
         _popChooseView.cancelClick = ^{
@@ -572,6 +569,9 @@
 
 -(void)helpBtnClick{
     NSLog(@"点击帮助中心");
+    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+    webView.urlStr = _homeProductList.qaUrl;
+    [self.navigationController pushViewController:webView animated:true];
 }
 
 -(void)daoliuBtnClick{
@@ -586,7 +586,14 @@
     
     if ([_homeProductList.flag isEqualToString:@"15"]) {
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-        controller.product_id = _homeProductList.repayInfo.productId;
+        if (_homeProductList.repayInfo.productId != nil) {
+            
+            controller.product_id = _homeProductList.repayInfo.productId;
+            
+        }else{
+            controller.product_id = _homeProductList.overdueInfo.productId;
+        }
+        
         controller.platform_type = @"";
         controller.applicationId = _homeProductList.repayInfo.applicationId;
         [self.navigationController pushViewController:controller animated:true];
@@ -648,8 +655,15 @@
 -(void)repayImmediatelyBtnClick:(BOOL)isSelected{
     if (!isSelected) {
         
+        NSString *productId;
+        if ([_homeProductList.flag isEqualToString:@"7"]) {
+            productId = _homeProductList.repayInfo.productId;
+        }else{
+            productId = _homeProductList.overdueInfo.productId;
+        }
+        
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-        controller.product_id = _homeProductList.repayInfo.productId;
+        controller.product_id = productId;
         controller.platform_type = @"";
         controller.applicationId = _homeProductList.repayInfo.applicationId;
         [self.navigationController pushViewController:controller animated:true];
@@ -672,8 +686,11 @@
  */
 -(void)OverdueInfoPopView{
     
+    FeeTextModel *firstModel = _homeProductList.overdueInfo.feeText[0];
+    FeeTextModel *secondModel = _homeProductList.overdueInfo.feeText[1];
     
-    [[FXD_AlertViewCust sharedHHAlertView] showFXDOverdueViewAlertViewTitle:@"逾期费用收取规则" TwoTitle:@"当前逾期费用" content:@"1、违约金：10%\n2、罚息：5%/天（逾期1-30天），1%/天（逾期30天以上）" deditAmount:@"10元" deditTitle:@"违约金"  defaultInterestLabel:@"25.5元" defaultInterestTitle:@"罚金" sureTitle:@"我知道了" compleBlock:^(NSInteger index) {
+    NSString *content = [NSString stringWithFormat:@"%@\n%@",_homeProductList.overdueInfo.ruleText[0],_homeProductList.overdueInfo.ruleText[1]];
+    [[FXD_AlertViewCust sharedHHAlertView] showFXDOverdueViewAlertViewTitle:_homeProductList.overdueInfo.ruleTitle TwoTitle:_homeProductList.overdueInfo.currentFeeTitle content:content deditAmount:firstModel.value deditTitle:[NSString stringWithFormat:@"%@:",firstModel.label]  defaultInterestLabel:secondModel.value defaultInterestTitle:[NSString stringWithFormat:@"%@:",secondModel.label] sureTitle:@"我知道了" compleBlock:^(NSInteger index) {
         
     }];
 }
@@ -681,7 +698,52 @@
 
 -(void)protocolNameClick:(NSInteger)index{
     
+    NSString *productId;
+    NSString *applicationId;
+    
+    if ([_homeProductList.flag isEqualToString:@"7"]) {
+        productId = _homeProductList.repayInfo.productId;
+        applicationId = _homeProductList.repayInfo.applicationId;
+    }else{
+        productId = _homeProductList.overdueInfo.productId;
+        applicationId = _homeProductList.overdueInfo.applicationId;
+    }
     NSLog(@"%ld",index);
+    switch (index) {
+        case 0:
+            
+            [self getProtocolContentProtocolType:productId typeCode:@"1" applicationId:applicationId periods:nil];
+            break;
+        case 1:
+            [self getProtocolContentProtocolType:productId typeCode:@"2" applicationId:applicationId periods:@""];
+            break;
+
+        default:
+            break;
+    }
+
+}
+
+-(void)getProtocolContentProtocolType:(NSString *)productId typeCode:(NSString *)typeCode applicationId:(NSString *)applicationId periods:(NSString *)periods{
+    
+    CommonViewModel *commonVM = [[CommonViewModel alloc]init];
+    [commonVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = returnValue;
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            NSDictionary * dic = (NSDictionary *)baseResultM.data;
+            DetailViewController *detailVC = [[DetailViewController alloc] init];
+            detailVC.content = [dic objectForKey:@"protocol_content_"];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [commonVM obtainProductProtocolType:productId typeCode:typeCode apply_id:applicationId periods:periods];
+    
 }
 
 - (void)didReceiveMemoryWarning {

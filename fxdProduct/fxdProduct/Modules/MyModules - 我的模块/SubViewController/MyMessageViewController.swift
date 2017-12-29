@@ -138,6 +138,11 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
                         let model = self?.messageModel?.operUserMassge[index] as? OperUserMassgeModel
                         self?.items.append(model!)
                     }
+                    if (self?.messageModel?.operUserMassge.count)! < 15 {
+                        self?.tableView?.mj_footer.isHidden = true
+                    }else{
+                        self?.tableView?.mj_footer.isHidden = false
+                    }
                     self?.tableView?.isHidden = false
                     self?.noneView?.isHidden = true
                     self?.tableView?.reloadData()

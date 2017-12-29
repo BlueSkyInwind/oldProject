@@ -32,7 +32,7 @@ class HomeChoosePopView: UIView {
     
     @objc  func show()  {
         UIApplication.shared.keyWindow?.addSubview(self)
-        UIApplication.shared.keyWindow?.sendSubview(toBack: self)
+//        UIApplication.shared.keyWindow?.sendSubview(toBack: self)
         self.backImageView?.transform = CGAffineTransform(scaleX: 1.21, y: 1.21);
         self.backImageView?.alpha = 0
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {

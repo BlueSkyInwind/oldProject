@@ -24,9 +24,6 @@
 
 @end
 
-@protocol RuleTextModel <NSObject>
-
-@end
 
 @protocol FeeTextModel <NSObject>
 
@@ -81,6 +78,10 @@
 @property (nonatomic, strong)NSString<Optional> *currentFeeTitle;
 //逾期弹窗规则标题
 @property (nonatomic, strong)NSString<Optional> *ruleTitle;
+//产品id
+@property (nonatomic, strong)NSArray<Optional> *ruleText;
+//进件id
+@property (nonatomic, strong)NSArray<FeeTextModel,Optional> *feeText;
 
 @end
 
@@ -96,10 +97,7 @@
 @property (nonatomic, strong)NSString<Optional> *applicationId;
 //产品id
 @property (nonatomic, strong)NSString<Optional> *productId;
-//进件id
-@property (nonatomic, strong)NSArray<FeeTextModel,Optional> *feeText;
-//产品id
-@property (nonatomic, strong)NSArray<RuleTextModel,Optional> *ruleText;
+
 
 @end
 
@@ -109,15 +107,6 @@
 @property (nonatomic, strong)NSString<Optional> *label;
 //右边具体值
 @property (nonatomic, strong)NSString<Optional> *value;
-
-@end
-
-@interface RuleTextModel : JSONModel
-
-//左边文字
-@property (nonatomic, strong)NSString<Optional> *label_;
-//右边具体值
-@property (nonatomic, strong)NSString<Optional> *value_;
 
 @end
 
@@ -133,6 +122,28 @@
 
 @end
 
+@interface RedCollarListModel : JSONModel
+
+//取消按钮
+@property (nonatomic, strong)NSString<Optional> *cancel;
+//评测领红包文案
+@property (nonatomic, strong)NSString<Optional> *collarContent;
+//评测领红包按钮
+@property (nonatomic, strong)NSString<Optional> *redCollar;
+
+@end
+
+@interface PopListModel : JSONModel
+
+//图片url
+@property (nonatomic, strong)NSString<Optional> *image;
+//是否有效
+@property (nonatomic, strong)NSString<Optional> *isValid;
+//跳转url
+@property (nonatomic, strong)NSString<Optional> *toUrl;
+
+
+@end
 
 @interface FXD_HomeProductListModel : JSONModel
 
@@ -146,18 +157,20 @@
 @property (nonatomic, strong)NSString<Optional> *flag;
 //中间状态（测评中、放款中、还款中） 和失败状态（放款失败、还款失败）数据
 @property(nonatomic,strong)HandingAndFailModel<Optional> * handingAndFailText;
-//跳转弹窗
+//跳转弹窗1跳转资料补全页
 @property (nonatomic, strong)NSString<Optional> *jumpBomb;
 //逾期信息
 @property(nonatomic,strong)OverdueInfoModel<Optional> * overdueInfo;
 //弹窗广告列表
-@property(nonatomic,strong)NSArray<PopListModel,Optional> * popList;
+@property(nonatomic,strong)PopListModel<Optional> * popList;
 //评测领红包活动内容
-@property(nonatomic,strong)NSArray<RedCollarListModel,Optional> * redCollarList;
+@property(nonatomic,strong)RedCollarListModel<Optional> * redCollarList;
 //正常还款信息
 @property(nonatomic,strong)RepayInfoModel<Optional> * repayInfo;
 //测评失败信息
 @property(nonatomic,strong)TestFailInfoModel<Optional> * testFailInfo;
+//帮助中心url
+@property (nonatomic, strong)NSString<Optional> *qaUrl;
 
 @end
 
@@ -172,29 +185,6 @@
 
 @end
 
-
-@interface PopListModel : JSONModel
-
-//图片url
-@property (nonatomic, strong)NSString<Optional> *image;
-//是否有效
-@property (nonatomic, strong)NSString<Optional> *isValid;
-//跳转url
-@property (nonatomic, strong)NSString<Optional> *toUrl;
-
-
-@end
-
-@interface RedCollarListModel : JSONModel
-
-//取消按钮
-@property (nonatomic, strong)NSString<Optional> *cancel;
-//评测领红包文案
-@property (nonatomic, strong)NSString<Optional> *collarContent;
-//评测领红包按钮
-@property (nonatomic, strong)NSString<Optional> *redCollar;
-
-@end
 
 @interface ExtAttrModel : JSONModel
 

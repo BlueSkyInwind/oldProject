@@ -304,19 +304,20 @@ extension FXDAlertView {
             make.height.equalTo(120)
         }
         
-        contentLabel?.snp.remakeConstraints({ (make) in
-            make.top.equalTo((lineOne?.snp.bottom)!).offset(10)
-            make.bottom.equalTo((overdueView?.snp.top)!).offset(-10)
-            make.left.equalTo((backGroundView?.snp.left)!).offset(15)
-            make.right.equalTo((backGroundView?.snp.right)!).offset(-15)
-        })
-        
         titleLabel?.backgroundColor = UIColor.init(red: 223/255.0, green: 227/255.0, blue: 230/255.0, alpha: 1)
         titleLabel?.snp.remakeConstraints({ (make) in
             make.top.equalTo((backGroundView?.snp.top)!).offset(0);
             make.height.equalTo(40)
             make.left.right.equalTo(0)
         })
+        
+        contentLabel?.snp.remakeConstraints({ (make) in
+            make.top.equalTo((titleLabel?.snp.bottom)!).offset(10)
+            make.bottom.equalTo((overdueView?.snp.top)!).offset(-10)
+            make.left.equalTo((backGroundView?.snp.left)!).offset(15)
+            make.right.equalTo((backGroundView?.snp.right)!).offset(-15)
+        })
+    
         lineOne?.removeFromSuperview()
     }
 }

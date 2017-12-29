@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 import SDWebImage
 import Masonry
-import WebKit
 
 @objc protocol HomePageCellDelegate: NSObjectProtocol {
     
@@ -802,6 +801,7 @@ extension HomePageCell {
             titleLabel.text = "逾期时间"
             payTipLabel.text = homeProductListModel.overdueInfo.repayTips
             middleView = setOverdueView()
+            middleView?.isUserInteractionEnabled = true
             self.addSubview(middleView!)
             middleView?.snp.makeConstraints { (make) in
                 make.left.equalTo(self).offset(0)
@@ -1136,6 +1136,7 @@ extension HomePageCell{
     fileprivate func setOverdueView() -> UIView{
         
         let view = UIView()
+        view.isUserInteractionEnabled = true
         self.addSubview(view)
         
         let timeView = UIView()
@@ -1259,6 +1260,7 @@ extension HomePageCell{
         
         
         let overdueView = UIView()
+//        overdueView.isUserInteractionEnabled = true
         overdueView.backgroundColor = UIColor.clear
         view.addSubview(overdueView)
         overdueView.snp.makeConstraints { (make) in
@@ -1269,6 +1271,10 @@ extension HomePageCell{
         }
         
         let overdueLabel = UILabel()
+//        overdueLabel.isUserInteractionEnabled = true
+//        overdueLabel.tag = 201
+//        let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
+//        overdueLabel.addGestureRecognizer(tapGest)
         overdueLabel.textAlignment = .center
         overdueLabel.textColor = RedPacketBottomBtn_COLOR
         overdueLabel.text = "逾期罚金"
@@ -1279,14 +1285,50 @@ extension HomePageCell{
             make.centerY.equalTo(overdueView.snp.centerY)
         }
         
-        let questionDescBtn = UIButton()
-        questionDescBtn.setImage(UIImage(named:"application_Explication_Image"), for: .normal)
-        questionDescBtn.addTarget(self, action: #selector(questionDescBtnClick), for: .touchUpInside)
-        overdueView.addSubview(questionDescBtn)
-        questionDescBtn.snp.makeConstraints { (make) in
+        let questionImage = UIImageView()
+//        questionImage.isUserInteractionEnabled = true
+        questionImage.image = UIImage(named:"application_Explication_Image")
+//        questionImage.tag = 201
+//        let tapGest1 = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
+//        questionImage.addGestureRecognizer(tapGest1)
+        overdueView.addSubview(questionImage)
+        questionImage.snp.makeConstraints { (make) in
             make.left.equalTo(overdueLabel.snp.right).offset(2)
             make.centerY.equalTo(overdueView.snp.centerY)
         }
+        
+//        let questionDescBtn = UIButton()
+//        questionDescBtn.setImage(UIImage(named:"application_Explication_Image"), for: .normal)
+//        questionDescBtn.addTarget(self, action: #selector(questionDescBtnClick), for: .touchUpInside)
+//        overdueView.addSubview(questionDescBtn)
+//        questionDescBtn.snp.makeConstraints { (make) in
+//            make.left.equalTo(overdueLabel.snp.right).offset(2)
+//            make.centerY.equalTo(overdueView.snp.centerY)
+//        }
+        
+        let quesBtn = UIButton()
+        quesBtn.addTarget(self, action: #selector(questionDescBtnClick), for: .touchUpInside)
+//        quesBtn.backgroundColor = UIColor.red
+        overdueView.addSubview(quesBtn)
+        quesBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(overdueLabel.snp.left).offset(0)
+            make.centerY.equalTo(overdueView.snp.centerY)
+            make.right.equalTo(overdueLabel.snp.right).offset(25)
+            make.height.equalTo(20)
+        }
+//        let tapView = UIView()
+//        tapView.backgroundColor = UIColor.red
+//        tapView.isUserInteractionEnabled = true
+//        tapView.tag = 201
+//        let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
+//        tapView.addGestureRecognizer(tapGest)
+//        overdueView.addSubview(tapView)
+//        tapView.snp.makeConstraints { (make) in
+//            make.left.equalTo(questionDescBtn.snp.left).offset(-5)
+//            make.centerY.equalTo(overdueView.snp.centerY)
+//            make.right.equalTo(questionDescBtn.snp.right).offset(5)
+//            make.height.equalTo(20)
+//        }
         
         let leftDescLabel = UILabel()
         leftDescLabel.text = "期供金额"
@@ -1431,21 +1473,28 @@ extension HomePageCell{
     //拒绝导流
     @objc func clickFirstView(_ tapGes : UITapGestureRecognizer){
         
+        print("tap帮助图标")
         let tag = tapGes.view?.tag
         
-        let thirdProduct = homeProductListModel.testFailInfo.thirdProductList[tag! - 104] as! ThirdProductListModel
-        
-        let path = thirdProduct.extAttr.path_
-        let productId = thirdProduct.id_
-        let isOverLimit = thirdProduct.isOverLimit
-        
-        if delegate != nil {
+        if tag == 201 {
             
-            delegate?.productListClick(productId! ,isOverLimit: isOverLimit! ,amount: "amount",Path:path!)
+            if delegate != nil{
+                delegate?.questionDescBtnClick()
+            }
+        }else{
             
+            let thirdProduct = homeProductListModel.testFailInfo.thirdProductList[tag! - 104] as! ThirdProductListModel
+            let path = thirdProduct.extAttr.path_
+            let productId = thirdProduct.id_
+            let isOverLimit = thirdProduct.isOverLimit
+            
+            if delegate != nil {
+                
+                delegate?.productListClick(productId! ,isOverLimit: isOverLimit! ,amount: "amount",Path:path!)
+                
+            }
+            print("点击产品列表")
         }
-        print("点击产品列表")
-        
     }
     
     //拒绝导流更多按钮
