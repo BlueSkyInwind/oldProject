@@ -586,16 +586,6 @@
     
     if ([_homeProductList.flag isEqualToString:@"15"]) {
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-        if (_homeProductList.repayInfo.productId != nil) {
-            
-            controller.product_id = _homeProductList.repayInfo.productId;
-            
-        }else{
-            controller.product_id = _homeProductList.overdueInfo.productId;
-        }
-        
-        controller.platform_type = @"";
-        controller.applicationId = _homeProductList.repayInfo.applicationId;
         [self.navigationController pushViewController:controller animated:true];
     }else{
         FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
@@ -655,17 +645,7 @@
 -(void)repayImmediatelyBtnClick:(BOOL)isSelected{
     if (!isSelected) {
         
-        NSString *productId;
-        if ([_homeProductList.flag isEqualToString:@"7"]) {
-            productId = _homeProductList.repayInfo.productId;
-        }else{
-            productId = _homeProductList.overdueInfo.productId;
-        }
-        
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-        controller.product_id = productId;
-        controller.platform_type = @"";
-        controller.applicationId = _homeProductList.repayInfo.applicationId;
         [self.navigationController pushViewController:controller animated:true];
         NSLog(@"立即还款");
     }else{

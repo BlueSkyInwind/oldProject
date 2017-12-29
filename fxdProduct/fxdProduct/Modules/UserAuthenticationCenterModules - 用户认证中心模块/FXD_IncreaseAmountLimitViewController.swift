@@ -103,14 +103,39 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     }
     
     @objc func appraisalBottonClick(){
-        guard isCompleteFlag else {
-            let userDataVC = UserDataAuthenticationListVCModules.init(nibName: "UserDataAuthenticationListVCModules", bundle: nil)
-            self.navigationController?.pushViewController(userDataVC, animated: true)
-            return
-        }
         
+        if isTestFlag {
+            
+            let userDataVM = UserDataViewModel.init()
+            userDataVM.setBlockWithReturn({ (returnValue) in
+                
+                let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+                if baseResult.errCode == "0"{
+                    
+                    self.tabBarController?.selectedIndex = 0;
+                    
+                }else{
+                    MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                }
+                
+            }, withFaileBlock: {
+                
+            })
+            
+            userDataVM.userDataCertification()
+            
+            
+        }else{
+        
+            guard isCompleteFlag else {
+                let userDataVC = UserDataAuthenticationListVCModules.init(nibName: "UserDataAuthenticationListVCModules", bundle: nil)
+                self.navigationController?.pushViewController(userDataVC, animated: true)
+                return
+            }
+        }
     }
     
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -199,7 +224,7 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
         appraisalBtn = UIButton.init(type: UIButtonType.custom)
         appraisalBtn?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
         appraisalBtn?.setTitle("测评提额", for: UIControlState.normal)
-        appraisalBtn?.addTarget(self, action: #selector(appraisalBottonClick), for: UIControlEvents.touchUpInside)
+        appraisalBtn?.addTarget(self, action: #selector(appraisalBottonClick), for: .touchUpInside)
         footerView.addSubview(appraisalBtn!)
         appraisalBtn?.snp.makeConstraints({ (make) in
             make.top.equalTo(footerView.snp.top).offset(40)
