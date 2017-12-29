@@ -213,7 +213,7 @@
     }
     else {
 
-        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您确定要退出登录吗？" attributeDic:nil cancelTitle:@"取消" sureTitle:@"确定" compleBlock:^(NSInteger index) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您确定要退出登录吗？" attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:@"取消" sureTitle:@"确定" compleBlock:^(NSInteger index) {
             if (index == 1) {
                 [self userLoginOut];
             }

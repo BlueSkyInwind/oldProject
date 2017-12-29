@@ -125,7 +125,7 @@
        } else {
             if ([_loginResultM.errCode isEqualToString:@"4"]) {
                 
-                [[FXD_AlertViewCust sharedHHAlertView]showFXDAlertViewTitle:nil content:@"您当前尝试在新设备上登录,确定要继续?" attributeDic:nil cancelTitle:@"取消" sureTitle:@"确定" compleBlock:^(NSInteger index) {
+                [[FXD_AlertViewCust sharedHHAlertView]showFXDAlertViewTitle:nil content:@"您当前尝试在新设备上登录,确定要继续?" attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:@"取消" sureTitle:@"确定" compleBlock:^(NSInteger index) {
                     if (index == 1) {
                         UpdateDevIDViewController *updateView = [UpdateDevIDViewController new];
                         updateView.state = Push_Dis;

@@ -65,6 +65,7 @@
 -(void)showFXDAlertViewTitle:(NSString *)title
                      content:(NSString *)contentAttri
                 attributeDic:(NSDictionary<NSAttributedStringKey,id> *)attributeDic
+               TextAlignment:(NSTextAlignment)textAlignment
                      cancelTitle:(NSString *)cancelTitle
                      sureTitle:(NSString *)sureTitle
                  compleBlock:(ClickBlock)clickIndexBlock{
@@ -75,7 +76,7 @@
     if (attributeDic == nil) {
         NSMutableParagraphStyle *ornamentParagraph = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         //设置text文字垂直居中
-//        ornamentParagraph.alignment = NSTextAlignmentCenter;
+        ornamentParagraph.alignment = textAlignment;
         attributeDic =@{NSFontAttributeName:[UIFont yx_systemFontOfSize:14],NSForegroundColorAttributeName:kUIColorFromRGB(0x808080),NSParagraphStyleAttributeName:ornamentParagraph};
     }
     self.fxdAlertView = [[FXDAlertView alloc]init:title content:contentAttri attributes:attributeDic cancelTitle:cancelTitle sureTitle:sureTitle];

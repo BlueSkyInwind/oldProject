@@ -19,12 +19,18 @@ typedef void (^ClickBlock)(NSInteger index);
 
 -(void)showAppVersionUpdate:(NSString *)content isForce:(BOOL)isForce compleBlock:(ClickBlock)clickIndexBlock;
 
+-(void)showFXDAlertViewTitle:(NSString *)title
+                     content:(NSString *)content
+                 cancelTitle:(NSString *)cancelTitle
+                   sureTitle:(NSString *)sureTitle
+                 compleBlock:(ClickBlock)clickIndexBlock;
 /**
  提示弹窗
 
  @param title 标题
  @param contentAttri 内容
  @param attributeDic 样式
+ @param TextAlignment 文字位置 （可选、样式为空）
  @param cancelTitle 取消按钮
  @param sureTitle 确定按钮
  @param clickIndexBlock 点击事件
@@ -32,6 +38,7 @@ typedef void (^ClickBlock)(NSInteger index);
 -(void)showFXDAlertViewTitle:(NSString *)title
                      content:(NSString *)contentAttri
                 attributeDic:(NSDictionary<NSAttributedStringKey,id> *)attributeDic
+               TextAlignment:(NSTextAlignment)textAlignment
                  cancelTitle:(NSString *)cancelTitle
                    sureTitle:(NSString *)sureTitle
                  compleBlock:(ClickBlock)clickIndexBlock;

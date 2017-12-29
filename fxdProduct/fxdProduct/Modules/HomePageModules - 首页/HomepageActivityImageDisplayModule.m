@@ -30,7 +30,7 @@
         
         NSDictionary *paramDic =@{@"juid":[FXD_Utility sharedUtility].userInfo.juid,
                                   @"mobile":[FXD_Utility sharedUtility].userInfo.userMobilePhone};
-        [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_sjRecord_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_sjRecord_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
             
         } failure:^(EnumServerStatus status, id object) {
             

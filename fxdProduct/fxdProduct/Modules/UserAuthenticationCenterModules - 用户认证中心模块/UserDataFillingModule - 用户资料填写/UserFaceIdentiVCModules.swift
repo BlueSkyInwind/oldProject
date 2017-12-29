@@ -92,9 +92,9 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
     func verifyLive( faceIDData : FaceIDData) -> Void {
        let userDataVM =  UserDataViewModel.init()
         userDataVM.setBlockWithReturn({[weak self] (object) in
-            let baseResult = object as! BaseResultModel
-            if baseResult.errCode == "0"{
-                let dic = baseResult.data as! NSDictionary
+            let baseResult = object as? BaseResultModel
+            if baseResult?.errCode == "0"{
+                let dic = baseResult?.data as! NSDictionary
                 let statusMsg = dic["verify_msg_"] as! String
                 let status = dic["verify_status_"]
                 self?.verifyStatus = String.init(format: "%@", status as! CVarArg)
@@ -104,7 +104,7 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
                     self?.identifyResultStatus!((self?.verifyStatus)!)
                 }
             }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message:baseResult.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message:baseResult?.friendErrMsg)
             }
         }) {
         }

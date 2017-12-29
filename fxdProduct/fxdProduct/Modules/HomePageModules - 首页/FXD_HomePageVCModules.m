@@ -647,7 +647,6 @@
 
 -(void)repayImmediatelyBtnClick:(BOOL)isSelected{
     if (!isSelected) {
-        
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
         controller.product_id = _homeProductList.repayInfo.productId;
         controller.platform_type = @"";

@@ -275,9 +275,9 @@ extension FXD_ToWithdrawFundsViewController {
     func obtainWithDrawFundsInfo(_ complication:@escaping ((_ isSuccess:Bool) -> Void))  {
         let checkVM = CheckViewModel.init()
         checkVM.setBlockWithReturn({ (resultObject) in
-            let baseRM = resultObject as! BaseResultModel
-            if baseRM.errCode == "0" {
-                let drawingsInfoM = try! DrawingsInfoModel.init(dictionary: baseRM.data as! [AnyHashable : Any])
+            let baseRM = resultObject as? BaseResultModel
+            if baseRM?.errCode == "0" {
+                let drawingsInfoM = try! DrawingsInfoModel.init(dictionary: baseRM?.data as! [AnyHashable : Any])
                 self.drawingsInfoModel = drawingsInfoM
                 self.drawAmount = drawingsInfoM.actualAmount
                 self.period = drawingsInfoM.period
@@ -288,7 +288,7 @@ extension FXD_ToWithdrawFundsViewController {
                 self.tableView?.reloadData()
             }else{
                 complication(false)
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseRM.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseRM?.friendErrMsg)
             }
         }) {
             complication(false)
@@ -300,12 +300,12 @@ extension FXD_ToWithdrawFundsViewController {
         
         let checkVM = CheckViewModel.init()
         checkVM.setBlockWithReturn({ (result) in
-            let baseRM = result as! BaseResultModel
-            if baseRM.errCode == "0" {
+            let baseRM = result as? BaseResultModel
+            if baseRM?.errCode == "0" {
                 complication(true)
             }else{
                 complication(false)
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseRM.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseRM?.friendErrMsg)
             }
         }) {
             complication(false)
@@ -317,13 +317,13 @@ extension FXD_ToWithdrawFundsViewController {
         
         let commonVM = CommonViewModel.init()
         commonVM.setBlockWithReturn({ (result) in
-            let baseRM = result as! BaseResultModel
-            if baseRM.errCode == "0" {
-                let content =  (baseRM.data as! [String:String])["protocol_content_"]
+            let baseRM = result as? BaseResultModel
+            if baseRM?.errCode == "0" {
+                let content =  (baseRM?.data as! [String:String])["protocol_content_"]
                 complication(true,content!)
             }else{
                 complication(false,"")
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseRM.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseRM?.friendErrMsg)
             }
         }) {
             complication(false,"")
