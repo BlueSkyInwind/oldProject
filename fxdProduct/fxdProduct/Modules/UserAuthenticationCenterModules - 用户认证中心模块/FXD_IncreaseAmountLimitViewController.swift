@@ -305,9 +305,9 @@ extension FXD_IncreaseAmountLimitViewController {
     func obtainViewConInfo()  {
         let userDataVM = UserDataViewModel.init()
         userDataVM.setBlockWithReturn({ (resultObject) in
-            let baseResult = resultObject as! BaseResultModel
-            if baseResult.errCode == "0"{
-                let customerMeasureAmountInfo = try! CustomerMeasureAmountInfo.init(dictionary: baseResult.data as! [AnyHashable : Any])
+            let baseResult = resultObject as? BaseResultModel
+            if baseResult?.errCode == "0"{
+                let customerMeasureAmountInfo = try! CustomerMeasureAmountInfo.init(dictionary: baseResult?.data as! [AnyHashable : Any])
                 self.amount = customerMeasureAmountInfo.amount
                 self.isTestFlag = (customerMeasureAmountInfo.testFlag as NSString).boolValue
                 self.isCompleteFlag =  (customerMeasureAmountInfo.completeFlag as NSString).boolValue
@@ -315,7 +315,7 @@ extension FXD_IncreaseAmountLimitViewController {
 //                    MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
                 }
             }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult?.friendErrMsg)
             }
         }) {
         }

@@ -180,7 +180,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         case 0:
             [self post_getLastDate];
             break;
-            
         default:
             noneView.hidden = NO;
             break;
@@ -245,7 +244,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
     
     _readyPayAmount = _readyPayAmount - _save_amount;
 
-    if ([self.product_id isEqualToString:SalaryLoan]||[self.product_id isEqualToString:WhiteCollarLoan]) {
+    if ([self.product_id isEqualToString:EliteLoan]) {
         NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
         NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
         [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, saveAmount.length)];
@@ -296,7 +295,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         }
         _readyPayAmount = _readyPayAmount - _save_amount;
 
-        if ([self.product_id isEqualToString:SalaryLoan]||[self.product_id isEqualToString:WhiteCollarLoan]) {
+        if ([self.product_id isEqualToString:EliteLoan]){
             NSString *saveAmount = [NSString stringWithFormat:@"%.2f",_save_amount];
             NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"立省%@元",saveAmount]];
             [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(2, saveAmount.length)];
@@ -322,7 +321,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                 _readyPayAmount += [situation.debt_total_ floatValue];
             }
         }
-        if ([self.product_id isEqualToString:SalaryLoan]||[self.product_id isEqualToString:WhiteCollarLoan]) {
+        if ([self.product_id isEqualToString:EliteLoan]) {
             self.saveUpLabel.hidden = YES;
             _payNumberTop.constant = 10;
             _payNumberBottom.constant = 10;

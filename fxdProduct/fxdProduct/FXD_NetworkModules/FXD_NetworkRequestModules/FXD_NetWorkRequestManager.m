@@ -72,62 +72,53 @@
 }
 
 #pragma mark - 发起请求
--(void)obtainDataWithUrl:(NSString *)strURL method:(NSString *)method requestTime:(NSTimeInterval)requestTime isNeedNetStatus:(BOOL)isNeedNetStatus isNeedWait:(BOOL)isNeedWait parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure{
-    
-    // 网络判断
-    if (![FXD_Utility sharedUtility].networkState && isNeedNetStatus) {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
-        return;
-    }
-    
-    //版本强制更新
-    if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
-            if (index == 1) {
-                return;
-            }
-        }];
-    }
-    
-    //进度条
-    MBProgressHUD *_waitView = [self loadingHUD];
-    if (isNeedWait) {
-        [_waitView show:YES];
-        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
-    }
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSError *serializationError = nil;
-//    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&serializationError];
-    
-
-}
-
 
 - (void)DataRequestWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus isNeedWait:(BOOL)isNeedWait parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure
 {
-    //版本强制更新
-    if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
-            if (index == 1) {
-                return;
-            }
-        }];
-    }
+    [self obtainDataWithUrl:strURL method:@"POST" parameters:parameters requestTime:30 isNeedNetStatus:isNeedNetStatus isNeedWait:isNeedWait uploadProgress:nil downloadProgress:nil finished:finished failure:failure];
+}
+- (void)GetWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus isNeedWait:(BOOL)isNeedWait parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure
+{
+    [self obtainDataWithUrl:strURL method:@"GET" parameters:parameters requestTime:30 isNeedNetStatus:isNeedNetStatus isNeedWait:isNeedWait uploadProgress:nil downloadProgress:nil finished:finished failure:failure];
+}
+- (void)TCPOSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure
+{
+    [self obtainDataWithUrl:strURL method:@"POST" parameters:parameters requestTime:360.0 isNeedNetStatus:true isNeedWait:true uploadProgress:nil downloadProgress:nil finished:finished failure:failure];
+}
+
+-(void)obtainDataWithUrl:(NSString *)strURL
+                  method:(NSString *)method
+              parameters:(id)parameters
+             requestTime:(NSTimeInterval)requestTime
+         isNeedNetStatus:(BOOL)isNeedNetStatus
+              isNeedWait:(BOOL)isNeedWait
+          uploadProgress:(nullable void (^)(NSProgress *uploadProgress)) uploadProgress
+        downloadProgress:(nullable void (^)(NSProgress *downloadProgress)) downloadProgress
+                finished:(SuccessFinishedBlock)finished
+                 failure:(FailureBlock)failure{
     
     // 网络判断
     if (![FXD_Utility sharedUtility].networkState && isNeedNetStatus) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
         return;
     }
+    
+    //版本强制更新
+    if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
+            if (index == 1) {
+                return;
+            }
+        }];
+    }
+    
     //进度条
     MBProgressHUD *_waitView = [self loadingHUD];
     if (isNeedWait) {
         [_waitView show:YES];
         [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
     }
-
-    NSDictionary *paramDic = [NSDictionary dictionary];
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -135,178 +126,39 @@
     //请求头
     [self setHttpHeaderInfo:manager];
     
-    //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
-    manager.requestSerializer.timeoutInterval = 30.0;
-    
-    DLog(@"参数:---%@",paramDic);
-    DLog(@"-----requestParam-----%@",parameters);
-    DLog(@"-----requestUrl-----%@",strURL);
-
-    [manager POST:strURL parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary * resultDic = [NSDictionary dictionary];
-        if ([responseObject isKindOfClass:[NSData class]]) {
-            resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"%@",resultDic);
-        }else{
-            resultDic = [NSDictionary dictionaryWithDictionary:responseObject];
-            DLog(@"response json --- %@",resultDic);
-        }
-        if ([[resultDic objectForKey:@"errCode"] isEqualToString:@"3"] ) {
-            UIViewController *vc = [self getCurrentVC];
-            [vc.navigationController popToRootViewControllerAnimated:YES];
-            
-            [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[resultDic objectForKey:@"friendErrMsg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
-                if (index == 1) {
-                    [FXD_AppEmptyUserData EmptyData];
-                    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-                    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-                    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
-                        [_waitView removeFromSuperview];
-                    }];
-                }
-            }];
-        }
-        
-        finished(Enum_SUCCESS,resultDic);
-         [_waitView removeFromSuperview];
-        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failure(Enum_FAIL,error);
-        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
-        DLog(@"error---%@",error.description);
-         [_waitView removeFromSuperview];
-        [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
-    }];
-}
-- (void)GetWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure
-{
-    DLog(@"%d",[FXD_Utility sharedUtility].userInfo.isUpdate);
-    if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
-            if (index == 1) {
-                return;
-            }
-        }];
-    }
-    if (![FXD_Utility sharedUtility].networkState && isNeedNetStatus) {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
-        failure(Enum_FAIL,nil);
-        return;
-    }
-    MBProgressHUD *_waitView = [self loadingHUD];
-    [_waitView show:YES];
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    //设置请求头
-    [self setHttpHeaderInfo:manager];
-    
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/xml",@"text/html",@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"charset=UTF-8", nil];
-    manager.requestSerializer.timeoutInterval = 30.0;
+    manager.requestSerializer.timeoutInterval = requestTime;
     
     DLog(@"-----requestParam-----%@",parameters);
     DLog(@"-----requestUrl-----%@",strURL);
     
-    [manager GET:strURL parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary * resultDic = [NSDictionary dictionary];
-        if ([responseObject isKindOfClass:[NSData class]]) {
-            resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"%@",resultDic);
-        }else{
-            resultDic = [NSDictionary dictionaryWithDictionary:responseObject];
-            NSData *data = [NSJSONSerialization dataWithJSONObject:resultDic options:NSJSONWritingPrettyPrinted error:nil];
-            NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            DLog(@"response json --- %@",jsonStr);
-        }
-        if ([[resultDic objectForKey:@"errCode"] isEqualToString:@"3"] ) {
-            UIViewController *vc = [self getCurrentVC];
-            [vc.navigationController popToRootViewControllerAnimated:YES];
-            [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[resultDic objectForKey:@"friendErrMsg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
-                if (index == 1) {
-                    [FXD_AppEmptyUserData EmptyData];
-                    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-                    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-                    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
-                        [_waitView removeFromSuperview];
-                    }];
-                }
-            }];
-        }
-        finished(Enum_SUCCESS,resultDic);
-        [_waitView removeFromSuperview];
-        [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        DLog(@"error---%@",error.description);
-        failure(Enum_FAIL,error);
-        [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
-        [_waitView removeFromSuperview];
-        [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
-    }];
-}
-
-
-
-- (void)POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure
-{
-    DLog(@"%d",[FXD_Utility sharedUtility].userInfo.isUpdate);
-    if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
-            if (index == 1) {
-                return;
+    
+   NSError *serializationError = nil;
+  NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:strURL relativeToURL:nil] absoluteString] parameters:parameters error:&serializationError];
+    
+  NSURLSessionDataTask *dataTask =  [manager dataTaskWithRequest:request uploadProgress:uploadProgress downloadProgress:downloadProgress completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            if (failure) {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
+                [_waitView removeFromSuperview];
+                [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
+                failure(Enum_FAIL,error);
             }
-        }];
-    } else {
-        if (![FXD_Utility sharedUtility].networkState) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"请确认您的手机是否连接到网络!"];
-            return;
         } else {
-            MBProgressHUD *_waitView = [self loadingHUD];
-            [_waitView show:YES];
-            [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-            
-            NSDictionary *paramDic = [NSDictionary dictionary];
-            DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
-            
-            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-            manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-            
-            if (parameters) {
-                if ([FXD_Tool dicContainsKey:parameters keyValue:@"Encrypt"]) {
-                    NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
-                    [muDic removeObjectForKey:@"Encrypt"];
-                    paramDic = [muDic copy];
-                } else {
-                    paramDic = [FXD_Tool getParameters:parameters];
+            if (finished) {
+                NSDictionary * resultDic = [NSDictionary dictionary];
+                if ([responseObject isKindOfClass:[NSData class]]) {
+                    resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+                }else{
+                    resultDic = [NSDictionary dictionaryWithDictionary:responseObject];
+                    NSData *data = [NSJSONSerialization dataWithJSONObject:resultDic options:NSJSONWritingPrettyPrinted error:nil];
+                    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 }
-            }
-            DLog(@"加密后参数:---%@",paramDic);
-            
-            DLog(@"juid --- %@\n token --- %@",[FXD_Utility sharedUtility].userInfo.juid,[FXD_Utility sharedUtility].userInfo.tokenStr);
-            if ([FXD_Utility sharedUtility].userInfo.juid != nil && ![[FXD_Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
-                if ([FXD_Utility sharedUtility].userInfo.tokenStr != nil && ![[FXD_Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
-                    [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[FXD_Utility sharedUtility].userInfo.juid]];
-                    [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
-                    [manager.requestSerializer setValue:SERVICE_PLATFORM forHTTPHeaderField:@"platformType"];
-                }
-            }
-            [manager.requestSerializer setValue:[FXD_Tool getAppVersion] forHTTPHeaderField:@"version"];
-            manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
-            manager.requestSerializer.timeoutInterval = 30.0;
-            DLog(@"%@",parameters);
-            [manager POST:strURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
-                
-            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {
+                DLog(@"response json --- %@",resultDic);
+                if ([[resultDic objectForKey:@"errCode"] isEqualToString:@"3"] ) {
                     UIViewController *vc = [self getCurrentVC];
                     [vc.navigationController popToRootViewControllerAnimated:YES];
-                    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[responseObject objectForKey:@"msg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
+                    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil  content:[resultDic objectForKey:@"friendErrMsg"] attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                         if (index == 1) {
                             [FXD_AppEmptyUserData EmptyData];
                             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
@@ -317,30 +169,19 @@
                         }
                     }];
                 }
-                
-                NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
-                NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-                NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                DLog(@"response json --- %@",jsonStr);
-                //            [Tool dataToDictionary:responseObject]
+                [_waitView removeFromSuperview];
+                [AFNetworkActivityIndicatorManager sharedManager].enabled = isNeedWait;
                 finished(Enum_SUCCESS,responseObject);
-                [_waitView removeFromSuperview];
-                [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                failure(Enum_FAIL,error);
-                [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
-                DLog(@"error---%@",error.description);
-                [_waitView removeFromSuperview];
-                [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
-            }];
+            }
         }
-    }
+    }];
+    [dataTask resume];
 }
 
 - (void)POSTUpLoadImage:(NSString *)strURL FilePath:(NSDictionary *)images  parameters:(id)parameters finished:(SuccessFinishedBlock)finshed failure:(FailureBlock)failure
 {
     if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
             if (index == 1) {
                 return;
             }
@@ -402,7 +243,7 @@
 {
     DLog(@"%d",[FXD_Utility sharedUtility].userInfo.isUpdate);
     if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
             if (index == 1) {
                 return;
             }
@@ -437,7 +278,7 @@
                 [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
 
                 if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {
-                    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[responseObject objectForKey:@"msg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
+                    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil  content:[responseObject objectForKey:@"msg"] attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                         if (index == 1) {
                             [FXD_AppEmptyUserData EmptyData];
                             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
@@ -467,11 +308,12 @@
         }
     }
 }
-- (void)TCPOSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure
+
+- (void)POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure
 {
     DLog(@"%d",[FXD_Utility sharedUtility].userInfo.isUpdate);
     if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您当前使用版本太低,请前往APP Store更新后再使用!" attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:nil  sureTitle:@"确定" compleBlock:^(NSInteger index) {
             if (index == 1) {
                 return;
             }
@@ -484,45 +326,43 @@
             MBProgressHUD *_waitView = [self loadingHUD];
             [_waitView show:YES];
             [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+            
             NSDictionary *paramDic = [NSDictionary dictionary];
             DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
             
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-            manager.requestSerializer = [AFJSONRequestSerializer serializer];
-            manager.responseSerializer = [AFJSONResponseSerializer serializer];
-
-            //请求头
+            manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+            
+            if (parameters) {
+                if ([FXD_Tool dicContainsKey:parameters keyValue:@"Encrypt"]) {
+                    NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
+                    [muDic removeObjectForKey:@"Encrypt"];
+                    paramDic = [muDic copy];
+                } else {
+                    paramDic = [FXD_Tool getParameters:parameters];
+                }
+            }
+            DLog(@"加密后参数:---%@",paramDic);
+            
+            DLog(@"juid --- %@\n token --- %@",[FXD_Utility sharedUtility].userInfo.juid,[FXD_Utility sharedUtility].userInfo.tokenStr);
             if ([FXD_Utility sharedUtility].userInfo.juid != nil && ![[FXD_Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
                 if ([FXD_Utility sharedUtility].userInfo.tokenStr != nil && ![[FXD_Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
                     [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[FXD_Utility sharedUtility].userInfo.juid]];
                     [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
-                    [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
-                    [manager.requestSerializer setValue:[FXD_Tool getAppVersion] forHTTPHeaderField:@"version"];
                     [manager.requestSerializer setValue:SERVICE_PLATFORM forHTTPHeaderField:@"platformType"];
                 }
             }
-            
-            //@"text/plain",@"text/xml",@"text/html",, @"text/json", @"text/javascript"
+            [manager.requestSerializer setValue:[FXD_Tool getAppVersion] forHTTPHeaderField:@"version"];
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
-            manager.requestSerializer.timeoutInterval = 360.0;
-            DLog(@"-----requestParam-----%@",parameters);
-            DLog(@"-----requestUrl-----%@",strURL);
-            
-            [manager POST:strURL parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+            manager.requestSerializer.timeoutInterval = 30.0;
+            DLog(@"%@",parameters);
+            [manager POST:strURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                NSDictionary * resultDic = [NSDictionary dictionary];
-                if ([responseObject isKindOfClass:[NSData class]]) {
-                    resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
-                    NSLog(@"%@",resultDic);
-                }else{
-                    resultDic = [NSDictionary dictionaryWithDictionary:responseObject];
-                    DLog(@"response json --- %@",resultDic);
-                }
-                if ([[resultDic objectForKey:@"errCode"] isEqualToString:@"3"] ) {
+                if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {
                     UIViewController *vc = [self getCurrentVC];
                     [vc.navigationController popToRootViewControllerAnimated:YES];
-                    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[responseObject objectForKey:@"msg"] attributeDic:nil cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
+                    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[responseObject objectForKey:@"msg"] attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                         if (index == 1) {
                             [FXD_AppEmptyUserData EmptyData];
                             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
@@ -533,21 +373,25 @@
                         }
                     }];
                 }
-                finished(Enum_SUCCESS,resultDic);
+                
+                NSDictionary *dic = [NSDictionary dictionaryWithDictionary:responseObject];
+                NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+                NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                DLog(@"response json --- %@",jsonStr);
+                //            [Tool dataToDictionary:responseObject]
+                finished(Enum_SUCCESS,responseObject);
                 [_waitView removeFromSuperview];
                 [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 failure(Enum_FAIL,error);
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
                 DLog(@"error---%@",error.description);
-                //        [self removeWaitView];
                 [_waitView removeFromSuperview];
                 [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
             }];
         }
     }
 }
-
 
 
 #pragma mark - 获取当前视图

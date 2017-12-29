@@ -111,7 +111,7 @@
 
 -(void)postUserLoginLocationInfo:(NSDictionary *)paramDic{
 
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_updateLoginLatitude_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_updateLoginLatitude_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     } failure:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
@@ -144,7 +144,7 @@
 }
 
 -(void)deleteUserRegisterID{
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_loginOutDeleteRegisterId_url] isNeedNetStatus:false parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_loginOutDeleteRegisterId_url] isNeedNetStatus:false isNeedWait:true parameters:nil finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
     } failure:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
@@ -180,7 +180,7 @@
 
 -(void)userLoginOut{
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_loginOut_url] isNeedNetStatus:true parameters:nil finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_loginOut_url] isNeedNetStatus:true isNeedWait:true parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
             self.returnBlock(baseResultM);

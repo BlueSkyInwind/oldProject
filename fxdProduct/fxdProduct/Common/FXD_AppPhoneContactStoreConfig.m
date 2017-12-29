@@ -112,7 +112,7 @@
 }
 
 -(void)popuserAuthAlert{
-    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:@"通讯录授权" content:obtainUserContactMarkeords attributeDic:nil cancelTitle:@"取消" sureTitle:@"去设置" compleBlock:^(NSInteger index) {
+    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:@"通讯录授权" content:obtainUserContactMarkeords attributeDic:nil TextAlignment:NSTextAlignmentLeft cancelTitle:@"取消" sureTitle:@"去设置" compleBlock:^(NSInteger index) {
         if (index == 1) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         }

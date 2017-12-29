@@ -20,7 +20,7 @@
                                @"app_version_":app_Version,
                                @"service_platform_type_":@"0"
                                };
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_checkVersion_jhtml] isNeedNetStatus:false parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_checkVersion_jhtml] isNeedNetStatus:false isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
             self.returnBlock(baseRM);
@@ -50,6 +50,17 @@
             self.faileBlock();
         }
     }];
+    
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocol_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        if (self.returnBlock) {
+//            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+//            self.returnBlock(baseRM);
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        if (self.faileBlock) {
+//            self.faileBlock();
+//        }
+//    }];
 }
 
 

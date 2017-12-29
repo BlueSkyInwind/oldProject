@@ -83,7 +83,7 @@ class FXDAlertView: UIView {
     ///根据提示框内容自适应高度
     func adaptHeightContent(_ contentAttri:NSAttributedString) {
         let height = contentAttri.boundingRect(with:CGSize.init(width: Alert_width - 30, height: UIScreen.main.bounds.size.height), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.RawValue(UInt8(NSStringDrawingOptions.usesLineFragmentOrigin.rawValue) | UInt8(NSStringDrawingOptions.usesFontLeading.rawValue))), context: nil).height
-        var backHeight = height + header_Height + bottom_Height + 20
+        var backHeight = height + header_Height + bottom_Height + 40
         backHeight  = backHeight < 150.0 ? 150.0 : backHeight
         backGroundView?.snp.updateConstraints({ (make) in
             make.height.equalTo(backHeight)
@@ -102,8 +102,6 @@ class FXDAlertView: UIView {
         overdueView?.defaultInserestTitle.text = defaultInterestTitle
         adaptOverdueViewHeightContent(contentAttri)
     }
-    
-    
     
     
     func adaptOverdueViewHeightContent(_ contentAttri:NSAttributedString) {

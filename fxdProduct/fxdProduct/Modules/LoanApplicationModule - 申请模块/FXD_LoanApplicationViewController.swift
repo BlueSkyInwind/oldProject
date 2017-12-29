@@ -127,12 +127,12 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         
         let applicationMV = ApplicationViewModel()
         applicationMV.setBlockWithReturn({ [weak self](returnValue) in
-            let baseResult = returnValue as! BaseResultModel
-            if baseResult.errCode == "0" {
+            let baseResult = returnValue as? BaseResultModel
+            if baseResult?.errCode == "0" {
                 let checkVC = FXD_ToWithdrawFundsViewController()
                 self?.navigationController?.pushViewController(checkVC, animated: true)
             }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult?.friendErrMsg)
             }
         }) {
         }
@@ -187,7 +187,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             
             displayCell?.explainButtonClick = {
                 
-                FXD_AlertViewCust.sharedHHAlertView().showFXDAlertViewTitle(self.applicaitonViewIM?.question, content: (self.applicaitonViewIM?.answer)! + "\n" + (self.applicaitonViewIM?.example)!, attributeDic: nil, cancelTitle: nil, sureTitle: "我知道了") { (index) in
+                FXD_AlertViewCust.sharedHHAlertView().showFXDAlertViewTitle(self.applicaitonViewIM?.question, content: (self.applicaitonViewIM?.answer)! + "\n" + (self.applicaitonViewIM?.example)!, attributeDic: nil, textAlignment:NSTextAlignment.left, cancelTitle: nil, sureTitle: "我知道了") { (index) in
                 }
             }
             
@@ -405,14 +405,14 @@ extension FXD_LoanApplicationViewController {
     func obtainSelectedCalculateInfo(loanAmount:String, periods: String, productId: String, voucherAmount: String,_ success:@escaping ((_ isSuccess:Bool) -> Void))  {
         let applicationVM = ApplicationViewModel.init()
         applicationVM.setBlockWithReturn({ (result) in
-            let baseResult = result as! BaseResultModel
-            if baseResult.errCode == "0" {
-                let applicaitonViewInfoM = try! ApplicaitonViewInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+            let baseResult = result as? BaseResultModel
+            if baseResult?.errCode == "0" {
+                let applicaitonViewInfoM = try! ApplicaitonViewInfoModel.init(dictionary: baseResult?.data as! [AnyHashable : Any])
                 self.actualAmount = applicaitonViewInfoM.actualAmount
                 self.repaymentAmount = applicaitonViewInfoM.repaymentAmount
                 success(true)
             }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult?.friendErrMsg)
                 success(false)
             }
         }) {

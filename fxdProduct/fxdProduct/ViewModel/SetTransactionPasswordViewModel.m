@@ -39,7 +39,7 @@
     
     NSDictionary *paramDic = @{@"oldPassword": [[password DF_hashCode] AES256JAVA_Encrypt:[Fxd_pw openpf]]};
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_verifyOldPassword_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_verifyOldPassword_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -116,7 +116,7 @@
                             @"mobile_phone_": [FXD_Utility sharedUtility].userInfo.userMobilePhone,
                             @"verify_code_":verify_code_};
 
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_verifyTradeSMS_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_verifyTradeSMS_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
