@@ -91,8 +91,6 @@
 }
 
 
-
-
 -(void)withDrawFundsInfoApply{
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_withDrawFunds_url] isNeedNetStatus:true isNeedWait:true parameters:nil finished:^(EnumServerStatus status, id object) {

@@ -57,7 +57,6 @@ class UserDataEvaluationVCModules: BaseViewController {
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) {
-            
         }
         homeVM.obtainDiversionUrl()
     }

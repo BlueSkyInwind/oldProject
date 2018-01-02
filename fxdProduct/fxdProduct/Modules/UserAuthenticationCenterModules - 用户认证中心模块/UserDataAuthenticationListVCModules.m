@@ -235,7 +235,7 @@
                 cell.iconImage.image = [UIImage imageNamed:@"creditCard_icon"];
                 cell.subTitleLabel.text = @"完善信用卡认证信息";
                 cell.titleLable.text = @"信用卡认证";
-                cell.statusLabel.text = _creditCardHighRandM != nil ? _creditCardHighRandM.result : @"未完成";
+                cell.statusLabel.text = _userDataModel != nil ? _userDataModel.creditMailDesc : @"未完成";
                 cell.statusLabel.textColor = rgb(159, 160, 162);
                 if ([_creditCardStatus isEqualToString:@"3"]) {
                     cell.statusLabel.textColor = UI_MAIN_COLOR;
@@ -248,7 +248,7 @@
                 cell.iconImage.image = [UIImage imageNamed:@"shebao_icon"];
                 cell.subTitleLabel.text = @"完善社保认证信息";
                 cell.titleLable.text = @"社保认证";
-                cell.statusLabel.text = _socialSecurityHighRandM != nil ? _socialSecurityHighRandM.result : @"未完成";;
+                cell.statusLabel.text = _userDataModel != nil ? _userDataModel.socialDesc : @"未完成";;
                 cell.statusLabel.textColor =  rgb(159, 160, 162);
                 if ([_socialSecurityStatus isEqualToString:@"3"]) {
                     cell.statusLabel.textColor = UI_MAIN_COLOR;
@@ -336,22 +336,22 @@
         }
         switch (indexPath.row) {
             case 0:
-                if ([_creditCardStatus isEqualToString:@"2"]) {
+                if ([_creditCardStatus isEqualToString:@"3"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                     return;
                 }
-                if ([_creditCardStatus isEqualToString:@"1"]) {
+                if ([_creditCardStatus isEqualToString:@"2"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证中，请稍后！"];
                     return;
                 }
                 [[FXD_MXVerifyManager sharedInteraction]mailImportClick];
                 break;
             case 1:
-                if ([_socialSecurityStatus isEqualToString:@"2"]) {
+                if ([_socialSecurityStatus isEqualToString:@"3"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                     return;
                 }
-                if ([_socialSecurityStatus isEqualToString:@"1"]) {
+                if ([_socialSecurityStatus isEqualToString:@"2"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证中，请稍后！"];
                     return;
                 }
@@ -537,8 +537,8 @@
 #pragma mark -获取进度条的进度
 - (void)refreshInfoStep
 {
-    //高级认证状态查询
-    [self obtainHighRanking];
+//    //高级认证状态查询
+//    [self obtainHighRanking];
     
     UserDataViewModel * userDataVM1 = [[UserDataViewModel alloc]init];
     [userDataVM1 setBlockWithReturnBlock:^(id returnValue) {
@@ -546,6 +546,8 @@
         if ([resultM.errCode isEqualToString:@"0"]) {
             UserDataModel * userDataM = [[UserDataModel alloc]initWithDictionary:(NSDictionary *)resultM.data error:nil];
             _userDataModel = userDataM;
+            _socialSecurityStatus = userDataM.social;
+            _creditCardStatus = userDataM.creditMail;
             [self setApplyBtnStatus];
             [self.tableView reloadData];
         }else {
@@ -581,97 +583,6 @@
     }];
     [userDataVM UserDataCertification];
 }
-- (void)popViewFamily
-{
-    _alertView = [[[NSBundle mainBundle] loadNibNamed:@"testView" owner:self options:nil] lastObject];
-    _alertView.frame = CGRectMake(0, 0, _k_w, _k_h);
-    _alertView.lbltitle.text = @"\n是否愿意家人知晓";
-    _alertView.lbltitle.textColor = rgb(95, 95, 95);
-    [_alertView.DisSureBtn setTitleColor:rgb(142, 142, 142) forState:UIControlStateNormal];
-    [_alertView.sureBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
-    _alertView.DisSureBtn.tag = 11;
-    _alertView.sureBtn.tag = 10;
-    [_alertView.DisSureBtn setTitle:@"否" forState:UIControlStateNormal];
-    [_alertView.sureBtn setTitle:@"是" forState:UIControlStateNormal];
-    [_alertView.DisSureBtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
-    [_alertView.sureBtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
-    [_alertView show];
-}
-
-- (void)click:(UIButton *)sender
-{
-    switch (sender.tag) {
-        case 10:
-        {
-            [_alertView hide];
-            [self goVC:@"0"];
-        }
-            break;
-        case 11:
-        {
-            [_alertView hide];
-            [self goVC:@"1"];
-        }
-            break;
-        default:
-            break;
-    }
-}
-
-- (void)goVC:(NSString *)is_know
-{
-    
-    LoanApplicationForConfirmationVCModules *loanFirstVC = [[LoanApplicationForConfirmationVCModules alloc] init];
-    loanFirstVC.productId = _product_id;
-    loanFirstVC.if_family_know = is_know;
-    if (_careerParse != nil) {
-        loanFirstVC.resultCode = _careerParse.resultcode;
-        loanFirstVC.rulesId = _careerParse.rulesid;
-    } else {
-        loanFirstVC.resultCode = _resultCode;
-        loanFirstVC.rulesId = _rulesId;
-    }
-    loanFirstVC.model = _model;
-    if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
-        loanFirstVC.req_loan_amt = _req_loan_amt;
-    }
-    [self.navigationController pushViewController:loanFirstVC animated:true];
-    
-}
-
-#pragma mark - 借款确认页面
-- (void)goLoanMoneyVC:(NSString *)is_know
-{
-    LoanApplicationForConfirmationVCModules *loanFirstVC = [[LoanApplicationForConfirmationVCModules alloc] init];
-    loanFirstVC.productId = _product_id;
-    loanFirstVC.if_family_know = is_know;
-    DLog(@"%@-------%@",_careerParse.resultcode,_careerParse.rulesid);
-    if (_careerParse != nil) {
-        loanFirstVC.resultCode = _careerParse.resultcode;
-        loanFirstVC.rulesId = _careerParse.rulesid;
-    } else {
-        loanFirstVC.resultCode = _resultCode;
-        loanFirstVC.rulesId = _rulesId;
-    }
-    
-    if ([[FXD_Utility sharedUtility].userInfo.pruductId isEqualToString:RapidLoan] || [[FXD_Utility sharedUtility].userInfo.pruductId isEqualToString:DeriveRapidLoan]) {
-        loanFirstVC.req_loan_amt = _req_loan_amt;
-    }
-    [self.navigationController pushViewController:loanFirstVC animated:true];
-}
-
-- (void)setProfessRule:(CareerParse *)careerParse
-{
-    _careerParse = careerParse;
-    _resultCode = careerParse.resultcode;
-    _rulesId = careerParse.rulesid;
-}
-
-- (void)setCornerWithoutRadius:(UIView *)view
-{
-    view.layer.cornerRadius = 10;
-    view.layer.masksToBounds = YES;
-}
 
 #pragma mark - 魔蝎信用卡以及社保集成
 -(void)configMoxieSDK{
@@ -696,7 +607,7 @@
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if (baseResultM.errCode.integerValue == 0) {
             //高级认证状态查询
-            [self obtainHighRanking];
+            [self refreshInfoStep];
         }
     } WithFaileBlock:^{
         
@@ -710,7 +621,7 @@
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if (baseResultM.errCode.integerValue == 0) {
             //高级认证状态查询
-            [self obtainHighRanking];
+            [self refreshInfoStep];
         }
     } WithFaileBlock:^{
         
@@ -731,31 +642,6 @@
     }
 }
 
--(void)obtainHighRanking{
-    
-    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
-    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResultM.errCode isEqualToString:@"0"]) {
-            NSArray * array = (NSArray *)baseResultM.data;
-            for (NSDictionary * dic  in array) {
-                HighRandingModel * highRandM  = [[HighRandingModel alloc]initWithDictionary:dic error:nil];
-                if ([highRandM.tasktypeid isEqualToString:@"1"]) {
-                    _socialSecurityHighRandM = highRandM;
-                    _socialSecurityStatus = highRandM.resultid;
-                }
-                if ([highRandM.tasktypeid isEqualToString:@"2"]) {
-                    _creditCardHighRandM = highRandM;
-                    _creditCardStatus = highRandM.resultid;
-                }
-            }
-            [self.tableView reloadData];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [userDataVM obtainhighRankingStatus];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -769,6 +655,79 @@
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
+ }
+ */
+
+/*
+ - (void)popViewFamily
+ {
+ _alertView = [[[NSBundle mainBundle] loadNibNamed:@"testView" owner:self options:nil] lastObject];
+ _alertView.frame = CGRectMake(0, 0, _k_w, _k_h);
+ _alertView.lbltitle.text = @"\n是否愿意家人知晓";
+ _alertView.lbltitle.textColor = rgb(95, 95, 95);
+ [_alertView.DisSureBtn setTitleColor:rgb(142, 142, 142) forState:UIControlStateNormal];
+ [_alertView.sureBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+ _alertView.DisSureBtn.tag = 11;
+ _alertView.sureBtn.tag = 10;
+ [_alertView.DisSureBtn setTitle:@"否" forState:UIControlStateNormal];
+ [_alertView.sureBtn setTitle:@"是" forState:UIControlStateNormal];
+ [_alertView.DisSureBtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
+ [_alertView.sureBtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
+ [_alertView show];
+ }
+ 
+ - (void)click:(UIButton *)sender
+ {
+ switch (sender.tag) {
+ case 10:
+ {
+ [_alertView hide];
+ [self goVC:@"0"];
+ }
+ break;
+ case 11:
+ {
+ [_alertView hide];
+ [self goVC:@"1"];
+ }
+ break;
+ default:
+ break;
+ }
+ }
+ 
+ - (void)goVC:(NSString *)is_know
+ {
+ 
+ LoanApplicationForConfirmationVCModules *loanFirstVC = [[LoanApplicationForConfirmationVCModules alloc] init];
+ loanFirstVC.productId = _product_id;
+ loanFirstVC.if_family_know = is_know;
+ if (_careerParse != nil) {
+ loanFirstVC.resultCode = _careerParse.resultcode;
+ loanFirstVC.rulesId = _careerParse.rulesid;
+ } else {
+ loanFirstVC.resultCode = _resultCode;
+ loanFirstVC.rulesId = _rulesId;
+ }
+ loanFirstVC.model = _model;
+ if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
+ loanFirstVC.req_loan_amt = _req_loan_amt;
+ }
+ [self.navigationController pushViewController:loanFirstVC animated:true];
+ 
+ }
+ 
+ - (void)setProfessRule:(CareerParse *)careerParse
+ {
+ _careerParse = careerParse;
+ _resultCode = careerParse.resultcode;
+ _rulesId = careerParse.rulesid;
+ }
+ 
+ - (void)setCornerWithoutRadius:(UIView *)view
+ {
+ view.layer.cornerRadius = 10;
+ view.layer.masksToBounds = YES;
  }
  */
 

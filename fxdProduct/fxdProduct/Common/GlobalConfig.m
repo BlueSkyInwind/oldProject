@@ -118,7 +118,7 @@ NSString * const    _TheCreditCardupload_url    =    @"resource/mxmailtask_creat
 NSString * const    _TheInternetbank_url    =    @"auth/ebank/ebankTaskSubmit";
 
 //高级认证状态查询
-NSString * const    _HighRankingStatus_url    =    @"resource/fundtask";
+NSString * const    _HighRankingStatus_url    =    @"user/senior/info";
 
 //基础信息状态查询接口
 NSString * const    _UserBasicInformation_url    =    @"user/info/base";

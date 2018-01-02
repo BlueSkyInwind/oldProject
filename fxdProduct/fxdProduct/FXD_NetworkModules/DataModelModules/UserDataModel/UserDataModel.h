@@ -31,7 +31,12 @@
 @property (strong,nonatomic)NSString<Optional> * personEdit;
 @property (strong,nonatomic)NSString<Optional> * personDesc;
 @property (strong,nonatomic)NSString<Optional> * test;
-
+@property(nonatomic,strong)NSString<Optional> * creditMail;
+@property(nonatomic,strong)NSString<Optional> * creditMailDesc;
+@property(nonatomic,strong)NSString<Optional> * creditMailEdit;
+@property(nonatomic,strong)NSString<Optional> * social;
+@property(nonatomic,strong)NSString<Optional> * socialDesc;
+@property(nonatomic,strong)NSString<Optional> * socialEdit;
 
 //废弃
 @property (strong,nonatomic)NSString<Optional> * edit;

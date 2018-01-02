@@ -1095,16 +1095,7 @@
 		CC0F1B9A1EE64A2A00A23651 /* ChangePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B981EE64A2A00A23651 /* ChangePasswordModel.m */; };
 		CC0F1B9D1EE6537700A23651 /* IdeaBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */; };
 		CC0F1B9E1EE6537700A23651 /* IdeaBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */; };
-		CC31978F1ED911980083F263 /* WhiteRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC31978E1ED911980083F263 /* WhiteRefuseView.m */; };
-		CC3197901ED911980083F263 /* WhiteRefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC31978E1ED911980083F263 /* WhiteRefuseView.m */; };
-		CC3197971ED926B90083F263 /* RefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3197951ED926B90083F263 /* RefuseView.m */; };
-		CC3197981ED926B90083F263 /* RefuseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3197951ED926B90083F263 /* RefuseView.m */; };
 		CC3197991ED926B90083F263 /* RefuseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC3197961ED926B90083F263 /* RefuseView.xib */; };
-		CC31979A1ED926B90083F263 /* RefuseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC3197961ED926B90083F263 /* RefuseView.xib */; };
-		CC3197A01ED929F10083F263 /* WhiteRefuseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC31979F1ED929F10083F263 /* WhiteRefuseView.xib */; };
-		CC3197A11ED929F10083F263 /* WhiteRefuseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC31979F1ED929F10083F263 /* WhiteRefuseView.xib */; };
-		CC2A4D091EE13260000A38DC /* QryUserStatusParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2A4D081EE13260000A38DC /* QryUserStatusParamModel.m */; };
-		CC2A4D0A1EE13260000A38DC /* QryUserStatusParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2A4D081EE13260000A38DC /* QryUserStatusParamModel.m */; };
 		CC3A7F311ED52A3200F30289 /* HG_ReplaceBankCardVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3A7F2F1ED52A3200F30289 /* HG_ReplaceBankCardVCModules.m */; };
 		CC3A7F321ED52A3200F30289 /* HG_ReplaceBankCardVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC3A7F2F1ED52A3200F30289 /* HG_ReplaceBankCardVCModules.m */; };
 		CC3A7F331ED52A3200F30289 /* HG_ReplaceBankCardVCModules.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC3A7F301ED52A3200F30289 /* HG_ReplaceBankCardVCModules.xib */; };
@@ -2266,14 +2257,7 @@
 		CC0F1B981EE64A2A00A23651 /* ChangePasswordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordModel.m; sourceTree = "<group>"; };
 		CC0F1B9B1EE6537700A23651 /* IdeaBackViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdeaBackViewModel.h; sourceTree = "<group>"; };
 		CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaBackViewModel.m; sourceTree = "<group>"; };
-		CC31978D1ED911980083F263 /* WhiteRefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteRefuseView.h; sourceTree = "<group>"; };
-		CC31978E1ED911980083F263 /* WhiteRefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteRefuseView.m; sourceTree = "<group>"; };
-		CC3197941ED926B90083F263 /* RefuseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefuseView.h; sourceTree = "<group>"; };
-		CC3197951ED926B90083F263 /* RefuseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefuseView.m; sourceTree = "<group>"; };
 		CC3197961ED926B90083F263 /* RefuseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefuseView.xib; sourceTree = "<group>"; };
-		CC31979F1ED929F10083F263 /* WhiteRefuseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WhiteRefuseView.xib; sourceTree = "<group>"; };
-		CC2A4D071EE13260000A38DC /* QryUserStatusParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QryUserStatusParamModel.h; sourceTree = "<group>"; };
-		CC2A4D081EE13260000A38DC /* QryUserStatusParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QryUserStatusParamModel.m; sourceTree = "<group>"; };
 		CC3A7F2E1ED52A3200F30289 /* HG_ReplaceBankCardVCModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HG_ReplaceBankCardVCModules.h; sourceTree = "<group>"; };
 		CC3A7F2F1ED52A3200F30289 /* HG_ReplaceBankCardVCModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HG_ReplaceBankCardVCModules.m; sourceTree = "<group>"; };
 		CC3A7F301ED52A3200F30289 /* HG_ReplaceBankCardVCModules.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HG_ReplaceBankCardVCModules.xib; sourceTree = "<group>"; };
@@ -3242,6 +3226,7 @@
 				636EE2FE1B662ABB00A1A3ED /* Products */,
 				6B6506B109713370F7296334 /* Frameworks */,
 				840873AA7B6D4EC2DE56514A /* Pods */,
+				84237E8A1FFB2A6F0080BF88 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -4600,6 +4585,14 @@
 			path = UserLevel;
 			sourceTree = "<group>";
 		};
+		84237E8A1FFB2A6F0080BF88 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				CC3197961ED926B90083F263 /* RefuseView.xib */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		842CA0E01F453B0700A2150B /* homeParam */ = {
 			isa = PBXGroup;
 			children = (
@@ -5433,9 +5426,7 @@
 				0FEA588A1BE0A497007F8A6D /* testView.xib in Resources */,
 				0F9E30D31BC8A70C0018A801 /* IdeaBackViewController.xib in Resources */,
 				84ED5B601F4AB9E7004C0A59 /* mx_refresh@2x.png in Resources */,
-
 				CC3197991ED926B90083F263 /* RefuseView.xib in Resources */,
-
 				84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */,
 				0F099B991C1A97EB00D97BAE /* ColledgeView.xib in Resources */,
 				CCF803291ED4249A003B7975 /* HG_UnbindBankCardVCModules.xib in Resources */,

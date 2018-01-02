@@ -17,9 +17,8 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     var creditCardStatus:String? = ""
     var socialSecurityStatus:String? = ""
     
-    var creditCardhighRandingM:HighRandingModel?
-    var socialSecurityhighRandingM:HighRandingModel?
-    
+    var highRandingM:HighRandingModel?
+
     var isTestFlag:Bool = false
     var isCompleteFlag:Bool = false
     
@@ -105,28 +104,12 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     @objc func appraisalBottonClick(){
         
         if isTestFlag {
-            
-            let userDataVM = UserDataViewModel.init()
-            userDataVM.setBlockWithReturn({ (returnValue) in
-                
-                let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
-                if baseResult.errCode == "0"{
-                    
+            userRequestEvaluation({ (isSuccess) in
+                if isSuccess {
                     self.tabBarController?.selectedIndex = 0;
-                    
-                }else{
-                    MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
                 }
-                
-            }, withFaileBlock: {
-                
             })
-            
-            userDataVM.userDataCertification()
-            
-            
         }else{
-        
             guard isCompleteFlag else {
                 let userDataVC = UserDataAuthenticationListVCModules.init(nibName: "UserDataAuthenticationListVCModules", bundle: nil)
                 self.navigationController?.pushViewController(userDataVC, animated: true)
@@ -158,7 +141,7 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
         cell.selectionStyle  = .none
         switch indexPath.row {
         case 0:
-            cell.statusLabel.text = creditCardhighRandingM == nil ? "未完成" : creditCardhighRandingM?.result
+            cell.statusLabel.text = highRandingM == nil ? "未完成" : highRandingM?.creditMailDesc
             cell.titleLabel.text = "信用卡认证";
             if creditCardStatus == "3" {
                 cell.statusLabel.textColor = UI_MAIN_COLOR
@@ -166,7 +149,7 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
 
             break
         case 1:
-            cell.statusLabel.text = socialSecurityhighRandingM == nil ? "未完成" : socialSecurityhighRandingM?.result
+            cell.statusLabel.text = highRandingM == nil ? "未完成" : highRandingM?.socialDesc
             cell.titleLabel.text = "社保认证";
             if socialSecurityStatus == "3" {
                 cell.statusLabel.textColor = UI_MAIN_COLOR
@@ -281,18 +264,11 @@ extension FXD_IncreaseAmountLimitViewController {
         userDataVM.setBlockWithReturn({ (resultObject) in
             let baseResult = try! BaseResultModel.init(dictionary: resultObject as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
-                let array = baseResult.data as! NSArray
-                for dic in array {
-                    let highRandM = try! HighRandingModel.init(dictionary: dic as! [AnyHashable : Any])
-                    if highRandM.tasktypeid == "1" {
-                        self.creditCardhighRandingM = highRandM
-                        self.creditCardStatus = highRandM.resultid
-                    }
-                    if highRandM.tasktypeid == "2" {
-                        self.socialSecurityhighRandingM = highRandM
-                        self.socialSecurityStatus = highRandM.resultid
-                    }
-                }
+                let highRandM = try! HighRandingModel.init(dictionary:baseResult.data as! [AnyHashable : Any])
+                self.creditCardStatus = highRandM.creditMail
+                self.socialSecurityStatus = highRandM.social
+                self.highRandingM = highRandM
+
                 self.tableView?.reloadData()
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
@@ -322,8 +298,21 @@ extension FXD_IncreaseAmountLimitViewController {
         userDataVM.obtainUserCreditLimit()
     }
     
+    func userRequestEvaluation(_ isFinish:@escaping (_ success:Bool) -> Void)  {
+        let userDataVM = UserDataViewModel.init()
+        userDataVM.setBlockWithReturn({ (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                isFinish(true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                isFinish(false)
+            }
+        }, withFaileBlock: {
+            isFinish(false)
+        })
+        userDataVM.userDataCertification()
+    }
 }
-
-
 
 

@@ -20,6 +20,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     var periodAmount:String? = ""
     var displayContent:[String]? = [""]
     var displayTitle:String? = ""
+    var applicationId:String? = ""
 
     var isKeepProtocol : Bool? = false
     var isdispalyCard : Bool? = false
@@ -145,21 +146,21 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     func protocolNameClick(_ index: Int) {
         switch index {
         case 0:
-            obtainProductProtocol("fewf", periods: self.period!, productId: EliteLoan, protocolType: "2", complication: {[weak self] (isSuccess, content) in
+            obtainProductProtocol(self.applicationId!, periods: self.period!, productId: EliteLoan, protocolType: "2", complication: {[weak self] (isSuccess, content) in
                 if isSuccess {
                     self?.pushDetailWebView(content: content)
                 }
             })
            break
         case 1:
-            obtainProductProtocol("fewf", periods: self.period!, productId: EliteLoan, protocolType: "6", complication: {[weak self] (isSuccess, content) in
+            obtainProductProtocol(self.applicationId!, periods: self.period!, productId: EliteLoan, protocolType: "6", complication: {[weak self] (isSuccess, content) in
                 if isSuccess {
                     self?.pushDetailWebView(content: content)
                 }
             })
             break
         case 2:
-            obtainProductProtocol("fewf", periods: self.period!, productId: EliteLoan, protocolType: "7", complication: {[weak self] (isSuccess, content) in
+            obtainProductProtocol(self.applicationId!, periods: self.period!, productId: EliteLoan, protocolType: "7", complication: {[weak self] (isSuccess, content) in
                 if isSuccess {
                     self?.pushDetailWebView(content: content)
                 }
@@ -284,6 +285,7 @@ extension FXD_ToWithdrawFundsViewController {
                 self.periodAmount = drawingsInfoM.repaymentAmount
                 self.displayContent = drawingsInfoM.text as? [String]
                 self.displayTitle = drawingsInfoM.title
+                self.applicationId = drawingsInfoM.applicationId
                 complication(true)
                 self.tableView?.reloadData()
             }else{
@@ -319,8 +321,8 @@ extension FXD_ToWithdrawFundsViewController {
         commonVM.setBlockWithReturn({ (result) in
             let baseRM = result as? BaseResultModel
             if baseRM?.errCode == "0" {
-                let content =  (baseRM?.data as! [String:String])["protocol_content_"]
-                complication(true,content!)
+                var content =  (baseRM?.data as! [String:String])["protocol_content_"]
+                complication(true,(content == nil ? "" : content!))
             }else{
                 complication(false,"")
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseRM?.friendErrMsg)
@@ -330,9 +332,6 @@ extension FXD_ToWithdrawFundsViewController {
         }
         commonVM.obtainProductProtocolType(productId, typeCode: protocolType, apply_id: applyId, periods: periods)
     }
-    
-    
-    
 }
 
 

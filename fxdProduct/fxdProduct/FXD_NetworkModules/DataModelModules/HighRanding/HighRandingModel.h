@@ -18,5 +18,12 @@
 @property(nonatomic,strong)NSString<Optional> * result;
 @property(nonatomic,strong)NSString<Optional> * resultid;  //1成功2评测中3失败
 
+@property(nonatomic,strong)NSString<Optional> * creditMail;
+@property(nonatomic,strong)NSString<Optional> * creditMailDesc;
+@property(nonatomic,strong)NSString<Optional> * creditMailEdit;
+@property(nonatomic,strong)NSString<Optional> * social;
+@property(nonatomic,strong)NSString<Optional> * socialDesc;
+@property(nonatomic,strong)NSString<Optional> * socialEdit;  
+
 
 @end
