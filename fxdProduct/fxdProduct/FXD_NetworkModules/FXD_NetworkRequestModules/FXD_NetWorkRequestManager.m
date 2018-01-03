@@ -139,6 +139,7 @@
   NSURLSessionDataTask *dataTask =  [manager dataTaskWithRequest:request uploadProgress:uploadProgress downloadProgress:downloadProgress completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {
             if (failure) {
+                DLog(@"response error --- %@",error);
                 [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:@"服务器请求失败,请重试!"];
                 [_waitView removeFromSuperview];
                 [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;

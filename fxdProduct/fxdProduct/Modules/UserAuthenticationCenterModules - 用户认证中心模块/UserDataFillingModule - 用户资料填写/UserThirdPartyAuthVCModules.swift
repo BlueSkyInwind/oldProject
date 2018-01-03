@@ -150,7 +150,7 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
 //            self.navigationController?.pushViewController(sesameCreditVC, animated: true)
 //            break
         case 2:
-            if userThirdPartCM?.salaryEdit == "1" {
+            if userThirdPartCM?.salaryEdit == "0" {
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.salaryDesc)
                 return;
             }
@@ -162,7 +162,7 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -208,9 +208,7 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
             if baseResult.errCode == "0" {
                  let userThirdPartCertificationModel = try! UserThirdPartCertificationModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 self?.userThirdPartCM = userThirdPartCertificationModel
-//                self.verifyStatus = userThirdPartCertificationModel.faceIdentity;
-//                self.isMobileAuth = userThirdPartCertificationModel.telephone;
-//                self.isZmxyAuth = userThirdPartCertificationModel.zmIdentity;
+
                 self?.tableView?.reloadData()
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)

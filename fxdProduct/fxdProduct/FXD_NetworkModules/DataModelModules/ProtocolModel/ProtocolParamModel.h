@@ -15,4 +15,7 @@
 @property(nonatomic,strong)NSString<Optional> * product_id_;
 @property(nonatomic,strong)NSString<Optional> * protocol_type_;
 
+@property(nonatomic,strong)NSString<Optional> * applicationId;
+@property(nonatomic,strong)NSString<Optional> * productId;
+@property(nonatomic,strong)NSString<Optional> * protocolType;
 @end

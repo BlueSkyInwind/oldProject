@@ -35,15 +35,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.navigationItem.title = @"重新验证";
+
     [FXD_Tool setCorner:self.userIDView borderColor:RGBColor(0, 170, 238, 1)];
     [FXD_Tool setCorner:self.passView borderColor:RGBColor(0, 170, 238, 1)];
     [FXD_Tool setCorner:self.updateBtn borderColor:UI_MAIN_COLOR];
     self.phoneNumText.text = self.phoneStr;
     self.phoneNumText.userInteractionEnabled=NO;
     _countdown = 60;
-    self.navigationItem.title = @"重新验证";
-    [self setNav];
     if([self.pushWayFlag isEqualToString:@"1"])
     {
         [self addBackItemTwo];
@@ -51,7 +50,6 @@
     else {
         [self addBackItem];
     }
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
     
     self.verCodeText.delegate = self;
     [self.verCodeText addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];

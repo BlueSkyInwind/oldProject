@@ -55,6 +55,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.bounces = false
+        tableView?.isScrollEnabled = false
         self.view.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
@@ -72,7 +73,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         
         var rect =  CGRect.init(x: 0, y: 0, width: _k_w, height: 205)
         if UI_IS_IPONE6P || UI_IS_IPHONEX{
-            rect =  CGRect.init(x: 0, y: 0, width: _k_w, height: 256)
+            rect =  CGRect.init(x: 0, y: 0, width: _k_w, height: 250)
         }
         headerView = FXD_displayAmountCommonHeaderView.init(frame: rect, amount: drawAmount!, periodNum: String.init(format: "借款期数：%@期", period!), periodAmount: String.init(format: "每期还款：%@元", periodAmount!))
         headerView?.titleLabel?.text = "待提款"
@@ -172,9 +173,9 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     }
     
     func pushDetailWebView(content:String)  {
-        let detailWeb = DetailViewController.init()
-        detailWeb.content = content
-        self.navigationController?.pushViewController(detailWeb, animated: true)
+        let fxdWeb = FXDWebViewController.init()
+        fxdWeb.urlStr = content
+        self.navigationController?.pushViewController(fxdWeb, animated: true)
     }
     
     func WithdrawFundsClick() {
@@ -321,7 +322,7 @@ extension FXD_ToWithdrawFundsViewController {
         commonVM.setBlockWithReturn({ (result) in
             let baseRM = result as? BaseResultModel
             if baseRM?.errCode == "0" {
-                var content =  (baseRM?.data as! [String:String])["protocol_content_"]
+                var content =  (baseRM?.data as! [String:String])["productProURL"]
                 complication(true,(content == nil ? "" : content!))
             }else{
                 complication(false,"")

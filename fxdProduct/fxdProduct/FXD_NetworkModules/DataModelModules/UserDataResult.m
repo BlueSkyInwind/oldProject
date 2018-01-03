@@ -11,3 +11,8 @@
 @implementation UserDataResult
 
 @end
+
+@implementation UserDataMeatureParam
+
+@end
+

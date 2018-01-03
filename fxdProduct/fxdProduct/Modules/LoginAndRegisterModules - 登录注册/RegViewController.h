@@ -14,7 +14,7 @@
 
 @end
 
-@interface RegViewController : BaseIndexViewController
+@interface RegViewController : BaseViewController
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeader;
 
 @property (strong, nonatomic) IBOutlet UITextField *phoneNumText;

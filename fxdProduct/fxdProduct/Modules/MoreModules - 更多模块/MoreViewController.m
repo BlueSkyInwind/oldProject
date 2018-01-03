@@ -161,9 +161,7 @@
             [self.navigationController pushViewController:aboutUs animated:YES];
         }
         else if(indexPath.row==1){
-            FXDWebViewController *webview = [[FXDWebViewController alloc] init];
-            webview.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_question_url];
-            [self.navigationController pushViewController:webview animated:true];
+            [self obtainQuestionWebUrl];
         }
         else if(indexPath.row==2){
             if ([FXD_Utility sharedUtility].loginFlage) {
@@ -246,7 +244,7 @@
             dispatch_after(delayTime, dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
-            [self deleteUserRegisterID];
+//            [self deleteUserRegisterID];
             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
             [self presentViewController:nav animated:YES completion:^{
@@ -257,7 +255,6 @@
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view.window message:baseVM.friendErrMsg];
         }
     } WithFaileBlock:^{
-        
     }];
     [loginVM userLoginOut];
 }
@@ -285,9 +282,22 @@
     [mineMV obtainCommonProblems];
 }
 
-
-
-
-
+-(void)obtainQuestionWebUrl{
+    
+    CommonViewModel * commonVM = [[CommonViewModel alloc]init];
+    [commonVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = returnValue;
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            NSDictionary * dic = (NSDictionary *)baseResultM.data;
+            FXDWebViewController * fxdwebVC = [[FXDWebViewController alloc]init];
+            fxdwebVC.urlStr =  [dic objectForKey:@"productProURL"];
+            [self.navigationController pushViewController:fxdwebVC animated:YES];
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [commonVM obtainProductProtocolType:nil typeCode:@"10" apply_id:nil periods:nil];
+}
 
 @end

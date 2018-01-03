@@ -71,7 +71,7 @@
 /**
  用户资料认证
  */
--(void)UserDataCertification;
+-(void)UserDataCertification:(NSString *)product_id;
 
 /**
  得到测评结果

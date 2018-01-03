@@ -104,9 +104,10 @@
 - (void)setApplyBtnStatus
 {
     if ([_userDataModel.test isEqualToString:@"1"]) {
-        [_applyBtn setBackgroundColor:UI_MAIN_COLOR];
+        [_applyBtn setBackgroundImage:[UIImage imageNamed:@"applicationBtn_Image"] forState:UIControlStateNormal];
         _applyBtn.enabled = true;
     }else{
+        [_applyBtn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
         [_applyBtn setBackgroundColor:rgb(139, 140, 143)];
         _applyBtn.enabled = false;
     }
@@ -147,9 +148,8 @@
     [FXD_Tool setCorner:_applyBtn borderColor:[UIColor clearColor]];
     [_applyBtn setTitle:@"额度测评" forState:UIControlStateNormal];
     [_applyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_applyBtn setBackgroundColor:rgb(139, 140, 143)];
+    [_applyBtn setBackgroundImage:[UIImage imageNamed:@"applicationBtn_Image"] forState:UIControlStateNormal];
     _applyBtn.enabled = false;
-    //    rgb(16, 129, 249)
     [footView addSubview:_applyBtn];
     [_applyBtn addTarget:self action:@selector(applyBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [_applyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -419,11 +419,11 @@
 -(BOOL)cellStatusIsSelect:(NSInteger)row{
     if ([_userDataModel.identity isEqualToString:@"1"] && row > 0) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善身份信息！"];
-        return true;
+        return false;
     }
     if ([_userDataModel.person isEqualToString:@"1"] && row > 1) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请您先完善个人信息！"];
-        return true;
+        return false;
     }
     switch (row) {
         case 0:{
@@ -581,7 +581,7 @@
     } WithFaileBlock:^{
         
     }];
-    [userDataVM UserDataCertification];
+    [userDataVM UserDataCertification:EliteLoan];
 }
 
 #pragma mark - 魔蝎信用卡以及社保集成

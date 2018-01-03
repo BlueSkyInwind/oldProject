@@ -763,7 +763,7 @@
     } WithFaileBlock:^{
         
     }];
-    [userDataVM UserDataCertification];
+    [userDataVM UserDataCertification:EliteLoan];
 }
 
 - (void)didReceiveMemoryWarning {

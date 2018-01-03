@@ -54,8 +54,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"登录";
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
-    
+
     //视图加载
     _loginView =  [[NSBundle mainBundle ]loadNibNamed:@"LoginView" owner:self options:nil].lastObject;
     _loginView.delegate = self;
@@ -69,7 +68,7 @@
     _BSFIT_DEVICEID = @"";
     [[BSFingerSDK sharedInstance] getFingerPrint:self withKey:@"com.hfsj.fxd"];
     
-    [self setNav];
+//    [self setNav];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -221,10 +220,10 @@
     
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
+//- (UIStatusBarStyle)preferredStatusBarStyle
+//{
+//    return UIStatusBarStyleLightContent;
+//}
 
 - (void)setUserName:(NSString *)str
 {

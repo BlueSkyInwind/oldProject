@@ -67,7 +67,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         if (self.isDisplayDiscount!) {
             self.titleArrs = ["选择额度（元）","临时提额劵","分期期数","借款用途"]
             self.chooseDiscountTDM = ((self.applicaitonViewIM?.voucher! as! NSArray)[0] as! DiscountTicketDetailModel)
-            let discountAmount = "+￥" + "\(self.chooseDiscountTDM?.total_amount ?? "")"
+            let discountAmount = "\(self.chooseDiscountTDM?.total_amount ?? "")"
             self.contentArrs = [maxAmount!,discountAmount,defaultPeriod!,"点击选择"]
         }else{
             self.titleArrs = ["选择额度（元）","分期期数","借款用途"]
@@ -116,7 +116,6 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
-
     }
     
     @objc func applicationBottonClick() {
@@ -178,6 +177,10 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             }
             applicationCell?.titleLabel?.text = titleArrs[indexPath.row]
             applicationCell?.contentLabel?.text = contentArrs?[indexPath.row]
+            if isDisplayDiscount! && indexPath.row == 1 {
+                applicationCell?.contentLabel?.text = "+￥" + "\(contentArrs?[indexPath.row] ?? "")"
+            }
+            
             tableViewCell = applicationCell
         }else if indexPath.section == 1{
             displayCell = tableView.dequeueReusableCell(withIdentifier:"FXD_LoanApplicationDisplayTableViewCell") as? FXD_LoanApplicationDisplayTableViewCell
@@ -274,7 +277,6 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         return nil
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -316,15 +318,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         default: break
         }
         
-        if isDisplayDiscount! {
-            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![2], productId: EliteLoan, voucherAmount: loanForCode!) { (isSuccess) in
-                self.tableView?.reloadData()
-            }
-        }else{
-            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![1], productId: EliteLoan, voucherAmount: loanForCode!) { (isSuccess) in
-                self.tableView?.reloadData()
-            }
-        }
+        reqSelectedCalculateInfo()
         self.tableView?.reloadData()
         choosePV = nil
     }
@@ -339,14 +333,29 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             self?.disCountChooseIndex = index;
             self?.chooseDiscountTDM = discountTicketDetailModel;
             if index != 0 {
-                self?.contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 1, length: 1))!, with: ["+￥" + "\(self?.chooseDiscountTDM?.total_amount ?? "")"])
+                self?.contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 1, length: 1))!, with: ["\(self?.chooseDiscountTDM?.total_amount ?? "")"])
             }else{
-                self?.contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 1, length: 1))!, with: ["+￥0"])
+                self?.contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 1, length: 1))!, with: ["0"])
             }
+            self?.reqSelectedCalculateInfo()
+            self?.tableView?.reloadData()
         })
         
         self.presentSemiViewController(discountCouponVC, withOptions: [KNSemiModalOptionKeys.pushParentBack.takeUnretainedValue() : false,KNSemiModalOptionKeys.parentAlpha.takeUnretainedValue() : 0.8], completion: nil, dismiss: {
         })
+    }
+    
+    /// 选择后请求信息
+    func reqSelectedCalculateInfo()  {
+        if isDisplayDiscount! {
+            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![2], productId: EliteLoan, voucherAmount: contentArrs![1]) { (isSuccess) in
+                self.tableView?.reloadData()
+            }
+        }else{
+            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![1], productId: EliteLoan, voucherAmount: "0") { (isSuccess) in
+                self.tableView?.reloadData()
+            }
+        }
     }
     
     /*
@@ -403,6 +412,11 @@ extension FXD_LoanApplicationViewController {
     }
     
     func obtainSelectedCalculateInfo(loanAmount:String, periods: String, productId: String, voucherAmount: String,_ success:@escaping ((_ isSuccess:Bool) -> Void))  {
+        var discountAmount = voucherAmount
+        if voucherAmount.contains("元") {
+           let index = discountAmount.index(voucherAmount.endIndex, offsetBy: -1)
+           discountAmount = String(discountAmount[..<index])
+        }
         let applicationVM = ApplicationViewModel.init()
         applicationVM.setBlockWithReturn({ (result) in
             let baseResult = result as? BaseResultModel
@@ -418,7 +432,7 @@ extension FXD_LoanApplicationViewController {
         }) {
             success(false)
         }
-        applicationVM.obtainapplicationInfoCalculate(loanAmount, periods: periods, productId: productId, voucherAmount: voucherAmount)
+        applicationVM.obtainapplicationInfoCalculate(loanAmount, periods: periods, productId: productId, voucherAmount: discountAmount)
     }
 }
 

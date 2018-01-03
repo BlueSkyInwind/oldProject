@@ -103,6 +103,7 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
                 if ((self?.identifyResultStatus) != nil) {
                     self?.identifyResultStatus!((self?.verifyStatus)!)
                 }
+                self?.navigationController?.popViewController(animated: true)
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message:baseResult?.friendErrMsg)
             }

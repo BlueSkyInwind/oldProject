@@ -252,12 +252,13 @@ extension FXDAlertView {
         contentLabel = UILabel()
         contentLabel?.font = UIFont.yx_boldSystemFont(ofSize: 14)
         contentLabel?.textColor = UIColor.init(red: 127/255.0, green: 127/255.0, blue: 127/255.0, alpha: 1)
-        contentLabel?.textAlignment  = NSTextAlignment.center
+        contentLabel?.textAlignment  = NSTextAlignment.left
+        contentLabel?.lineBreakMode = NSLineBreakMode.byCharWrapping
         contentLabel?.numberOfLines = 0
         backGroundView?.addSubview(contentLabel!)
         contentLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo((lineOne?.snp.bottom)!).offset(10)
-            make.bottom.equalTo((bottomView?.snp.top)!).offset(-10)
+            make.top.equalTo((lineOne?.snp.bottom)!).offset(8)
+            make.bottom.equalTo((bottomView?.snp.top)!).offset(-8)
             make.left.equalTo((backGroundView?.snp.left)!).offset(15)
             make.right.equalTo((backGroundView?.snp.right)!).offset(-15)
         })

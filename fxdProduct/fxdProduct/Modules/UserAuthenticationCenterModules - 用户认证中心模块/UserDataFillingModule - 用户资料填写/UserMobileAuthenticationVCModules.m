@@ -391,9 +391,9 @@ typedef enum {
         BaseResultModel *  baseResultM = returnValue;
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             NSDictionary * dic = (NSDictionary *)baseResultM.data;
-            DetailViewController *detailVC = [[DetailViewController alloc] init];
-            detailVC.content = [dic objectForKey:@"protocol_content_"];
-            [self.navigationController pushViewController:detailVC animated:YES];
+            FXDWebViewController * fxdwebVC = [[FXDWebViewController alloc]init];
+            fxdwebVC.urlStr =  [dic objectForKey:@"productProURL"];
+            [self.navigationController pushViewController:fxdwebVC animated:YES];
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }

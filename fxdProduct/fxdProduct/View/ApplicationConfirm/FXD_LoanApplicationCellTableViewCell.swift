@@ -60,7 +60,7 @@ extension FXD_LoanApplicationCellTableViewCell {
         })
         
         contentLabel = UILabel()
-        contentLabel?.textColor = UIColor.init(red: 167/255.0, green: 167/255.0, blue: 167/255.0, alpha: 1)
+        contentLabel?.textColor = UIColor.init(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1)
         contentLabel?.textAlignment = NSTextAlignment.right
         contentLabel?.font = UIFont.yx_systemFont(ofSize: 14)
         self.addSubview(contentLabel!)

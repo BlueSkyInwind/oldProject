@@ -29,7 +29,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [self addBackItem];
+    self.navigationItem.title = @"找回密码";
+
     for (UIView *view in self.fieldView) {
         [FXD_Tool setCorner:view borderColor:UI_MAIN_COLOR];
     }
@@ -43,7 +45,6 @@
     [self.phoneNumField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
     [self.codeField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
     
-    [self setSome];
 }
 
 
@@ -66,11 +67,7 @@
         }
     }
 }
-- (void)setSome
-{
-    self.navigationItem.title = @"找回密码";
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
-}
+
 
 #pragma mark 发送验证码
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {
@@ -149,8 +146,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setNav];
-    [self addBackItem];
 }
 
 

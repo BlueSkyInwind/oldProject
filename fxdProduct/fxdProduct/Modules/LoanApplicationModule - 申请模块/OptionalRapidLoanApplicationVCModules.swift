@@ -200,6 +200,7 @@ class OptionalRapidLoanApplicationVCModules: BaseViewController ,RapidLoanApplic
         webVC.urlStr = "\(_H5_url)"+"\(_DiscountTicketRule_url)"
         self.navigationController?.pushViewController(webVC, animated: true)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

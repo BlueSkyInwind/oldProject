@@ -73,6 +73,7 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
         self.tableView?.backgroundColor = LOAN_APPLICATION_COLOR
         tableView?.delegate = self
         tableView?.dataSource = self
+        tableView?.isScrollEnabled = true
         self.view.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
@@ -240,7 +241,6 @@ extension FXD_IncreaseAmountLimitViewController {
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) {
-            
         }
         userDataVM.theCreditCardInfoUpload(taskid)
     }
@@ -311,7 +311,7 @@ extension FXD_IncreaseAmountLimitViewController {
         }, withFaileBlock: {
             isFinish(false)
         })
-        userDataVM.userDataCertification()
+        userDataVM.userDataCertification(EliteLoan)
     }
 }
 

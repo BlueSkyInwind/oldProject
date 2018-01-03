@@ -204,8 +204,15 @@
     }];
 }
 
--(void)UserDataCertification{
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserDataCertification_url] isNeedNetStatus:true isNeedWait:true parameters:nil finished:^(EnumServerStatus status, id object) {
+-(void)UserDataCertification:(NSString *)product_id{
+    
+    UserDataMeatureParam * userDataMeatureP = [[UserDataMeatureParam alloc]init];
+    userDataMeatureP.product_id = product_id;
+    userDataMeatureP.service_platform_flag = @"2020";
+    
+    NSDictionary * paramDic = [userDataMeatureP toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserDataCertification_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }

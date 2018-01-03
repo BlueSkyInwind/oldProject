@@ -59,7 +59,7 @@
  */
 -(void)SaveMobileAuth:(NSString *)code{
     
-    NSDictionary *dic = @{@"code":code};
+    NSDictionary *dic = @{@"code_":code};
 
     [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_authMobilePhone_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {

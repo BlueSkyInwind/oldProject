@@ -62,15 +62,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _btnStatus = NO;
-    [self setNav];
     [self addBackItem];
+    self.navigationItem.title = @"注册";
+
     for (UIView *view in self.fieldView) {
         [FXD_Tool setCorner:view borderColor:UI_MAIN_COLOR];
     }
     [FXD_Tool setCorner:self.regSubmitBtn borderColor:UI_MAIN_COLOR];
     _countdown = 60;
-    self.navigationItem.title = @"注册";
-    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
+    
     [self.agreeBtn setBackgroundImage:[UIImage imageNamed:@"trick"] forState:UIControlStateNormal];
     for (UIImageView *imageView in _lineView) {
         imageView.image = [[UIImage imageNamed:@"login_line"] imageWithTintColor:UI_MAIN_COLOR];
@@ -223,9 +223,9 @@
         BaseResultModel *  baseResultM = returnValue;
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             NSDictionary * dic = (NSDictionary *)baseResultM.data;
-            DetailViewController *detailVC = [[DetailViewController alloc] init];
-            detailVC.content = [dic objectForKey:@"protocol_content_"];
-            [self.navigationController pushViewController:detailVC animated:YES];
+            FXDWebViewController * fxdwebVC = [[FXDWebViewController alloc]init];
+            fxdwebVC.urlStr =  [dic objectForKey:@"productProURL"];
+            [self.navigationController pushViewController:fxdwebVC animated:YES];
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
@@ -243,9 +243,9 @@
         BaseResultModel *  baseResultM = returnValue;
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             NSDictionary * dic = (NSDictionary *)baseResultM.data;
-            DetailViewController *detailVC = [[DetailViewController alloc] init];
-            detailVC.content = [dic objectForKey:@"protocol_content_"];
-            [self.navigationController pushViewController:detailVC animated:YES];
+            FXDWebViewController * fxdwebVC = [[FXDWebViewController alloc]init];
+            fxdwebVC.urlStr =  [dic objectForKey:@"productProURL"];
+            [self.navigationController pushViewController:fxdwebVC animated:YES];
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
