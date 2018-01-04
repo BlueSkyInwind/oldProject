@@ -8,7 +8,6 @@
 
 #import "CheckViewModel.h"
 #import "SaveLoanCaseParamModel.h"
-#import "HGBankListModel.h"
 #import "DrawingsInfoModel.h"
 
 @implementation CheckViewModel

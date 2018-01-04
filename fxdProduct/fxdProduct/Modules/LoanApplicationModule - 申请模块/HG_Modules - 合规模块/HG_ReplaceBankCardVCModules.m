@@ -7,7 +7,6 @@
 //
 
 #import "HG_ReplaceBankCardVCModules.h"
-#import "BankModel.h"
 #import "BankCardNameVCModules.h"
 #import "SendSmsModel.h"
 #import <MGBaseKit/MGBaseKit.h>
@@ -28,7 +27,6 @@
         NSString *_bankLogogram;
         NSInteger _countdown;
         NSTimer * _countdownTimer;
-        BankModel *_bankModel;
         NSMutableArray * _supportBankListArr;
         UIButton *_backTimeBtn;
         NSString *_sms_seq;

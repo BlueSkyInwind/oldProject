@@ -12,35 +12,26 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDKUI.h>
 #import "HomeViewModel.h"
-
-#import "UserCardResult.h"
 #import "MoxieSDK.h"
 #import "DefaultCardPopoverWindowModule.h"
 #import "UIViewController+KNSemiModal.h"
 #import "PayNavigationViewController.h"
-#import "BankModel.h"
 #import "CardInfo.h"
 #import "LoanMoneyViewController.h"
 #import "YYText.h"
-#import "DrawService.h"
 #import "P2PViewController.h"
-#import "GetCaseInfo.h"
 #import "DataWriteAndRead.h"
 #import "GetCustomerBaseViewModel.h"
 #import "Approval.h"
 #import "DetailViewController.h"
 #import "IdeaBackViewController.h"
 #import "FXDWebViewController.h"
-#import "RateModel.h"
 #import "FXDWebViewController.h"
 #import "DataDicParse.h"
-//#import "UserDataAuthenticationListVCModules.h"
-#import "AccountHSServiceModel.h"
 #import "QueryCardInfo.h"
 #import "HG_UnbindBankCardVCModules.h"
 #import "CheckViewModel.h"
 #import "SaveLoanCaseModel.h"
-#import "HGBankListModel.h"
 #import "SupportBankList.h"
 #import "DrawingsInfoModel.h"
 #import "UserBankCardListVCModule.h"
@@ -72,8 +63,6 @@ typedef NS_ENUM(NSUInteger, PromoteType) {
     NSString *_purposeSelect;
     //周期的数组
     NSMutableArray<NSNumber *> *_datalist;
-    //银行卡数据
-    BankModel *_bankCardModel;
     //选择的银行卡
     CardInfo *_selectCard;
     //选择银行卡的index

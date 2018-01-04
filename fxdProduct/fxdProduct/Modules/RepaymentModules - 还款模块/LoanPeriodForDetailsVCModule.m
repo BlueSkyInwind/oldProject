@@ -11,7 +11,6 @@
 #import "RepayListCell.h"
 #import "LoanPaymentDetailVCModule.h"
 #import "RepayListInfo.h"
-#import "BankModel.h"
 #import "P2PBillDetail.h"
 #import "CheckViewModel.h"
 #import "SupportBankList.h"
@@ -35,8 +34,6 @@
     NSInteger _lastClick;
     
     CGFloat _save_amount;
-    
-    BankModel *_bankCardModel;
     
     NSMutableArray * _supportBankListArr;
     

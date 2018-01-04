@@ -9,7 +9,6 @@
 #import "DiscountTicketController.h"
 #import "TicketCell.h"
 #import "RedPacketTicketModel.h"
-#import "RepayWeeklyRecordViewModel.h"
 #import "InvitationViewController.h"
 #import "DiscountTicketModel.h"
 #import "LapseDiscountTicketViewController.h"

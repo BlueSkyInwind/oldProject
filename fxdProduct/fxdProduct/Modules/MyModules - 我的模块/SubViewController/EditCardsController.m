@@ -11,7 +11,6 @@
 #import "WTCameraViewController.h"
 #import "ReturnMsgBaseClass.h"
 #import "SMSViewModel.h"
-#import "BankModel.h"
 #import "AuthorizationViewController.h"
 #import <MGBaseKit/MGBaseKit.h>
 #import <MGBankCard/MGBankCard.h>
@@ -29,7 +28,6 @@
     //原卡号
     NSString *_currentCardNum;
     NSInteger _cardFlag;
-    BankModel *_bankCardModel;
     NSMutableArray * supportBankListArr;
     BOOL _btnStatus;
 }

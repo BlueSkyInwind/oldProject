@@ -22,7 +22,6 @@
 #import "UserDataAuthenticationListVCModules.h"
 #import "HomeProductList.h"
 #import "CheckViewModel.h"
-#import "P2PViewController.h"
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "LoginViewModel.h"
 #import "HomepageActivityImageDisplayModule.h"
@@ -727,7 +726,6 @@
         default:
             break;
     }
-
 }
 
 -(void)getProtocolContentProtocolType:(NSString *)productId typeCode:(NSString *)typeCode applicationId:(NSString *)applicationId periods:(NSString *)periods{

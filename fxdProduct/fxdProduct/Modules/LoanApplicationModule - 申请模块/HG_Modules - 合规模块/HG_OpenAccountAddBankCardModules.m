@@ -12,8 +12,6 @@
 #import "WTCameraViewController.h"
 #import "LoanMoneyViewController.h"
 #import "SMSViewModel.h"
-#import "UserCardResult.h"
-#import "BankModel.h"
 #import "UserStateModel.h"
 #import "DetailViewController.h"
 #import <MGBaseKit/MGBaseKit.h>
@@ -22,7 +20,6 @@
 #import "P2PViewController.h"
 #import "UnbundlingBankCardViewModel.h"
 #import "CheckViewModel.h"
-#import "SaveLoanCaseModel.h"
 #define redColor rgb(252, 0, 6)
 
 @interface HG_OpenAccountAddBankCardModules ()<UITableViewDataSource,UITableViewDelegate,
@@ -383,9 +380,7 @@ UITextFieldDelegate,WTCameraDelegate,BankTableViewSelectDelegate>
         case 200:
         {
             DLog(@"%@",placeArray3[0]);
-            DLog(@"%@",_bankModel);
             BankCardNameVCModules *homebankVC = [BankCardNameVCModules new];
-            homebankVC.bankModel = _bankModel;
             homebankVC.bankArray = _bankArray;
             homebankVC.isP2P = true;
             homebankVC.delegate = self;

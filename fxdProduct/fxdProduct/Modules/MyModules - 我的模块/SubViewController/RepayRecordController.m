@@ -7,7 +7,6 @@
 //
 
 #import "RepayRecordController.h"
-#import "GetMoneyHistoryBaseClass.h"
 #import "RepayRecord.h"
 #import "loanRecordCell.h"
 #import "RepayWeeklyRecordViewModel.h"

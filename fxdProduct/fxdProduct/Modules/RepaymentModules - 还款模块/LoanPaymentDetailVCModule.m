@@ -16,18 +16,11 @@
 #import "PayMethodViewController.h"
 #import "CardInfo.h"
 #import "UserCardResult.h"
-#import "BankModel.h"
 #import "RepayListInfo.h"
 #import "P2PBillDetail.h"
-#import "P2PAccountInfo.h"
-#import "AccountHSServiceModel.h"
-#import "P2PViewController.h"
 #import "DefaultCardPopoverWindowModule.h"
-#import "QueryCardInfo.h"
 #import "HG_UnbindBankCardVCModules.h"
-#import "QryUserStatusModel.h"
 #import "CheckViewModel.h"
-#import "SaveLoanCaseModel.h"
 #import "HomeViewModel.h"
 #import "UserStateModel.h"
 #import "PayVerificationCodeCell.h"
@@ -35,7 +28,6 @@
 #import "PaymentViewModel.h"
 #import "PaymentDetailModel.h"
 #import "BaseResultModel.h"
-#import "HGBankListModel.h"
 #import "SupportBankList.h"
 #import "DiscountTicketModel.h"
 
@@ -74,9 +66,6 @@
     NSString *_patternName;
     // 银行卡尾数号
     NSString *_bankNo;
-    
-    QueryCardInfo *_queryCardInfoModel;
-    QryUserStatusModel *_userStatusModel;
     
     NSString *verfiyCode;
     NSString *smsSeq;

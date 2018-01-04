@@ -11,7 +11,6 @@
 #import "LoginViewController.h"
 #import "SMSViewModel.h"
 #import "LoginViewModel.h"
-#import "LoginMsgBaseClass.h"
 #import "DES3Util.h"
 #import <SDWebImage/UIButton+WebCache.h>
 #import "FMDeviceManager.h"

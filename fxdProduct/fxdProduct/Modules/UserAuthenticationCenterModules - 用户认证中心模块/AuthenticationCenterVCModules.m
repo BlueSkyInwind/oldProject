@@ -20,7 +20,6 @@
 #import "DataWriteAndRead.h"
 #import "GetCareerInfoViewModel.h"
 #import "UserMobileAuthenticationVCModules.h"
-#import "UserCardResult.h"
 #import "CardInfo.h"
 #import "CheckViewModel.h"
 #import "SupportBankList.h"

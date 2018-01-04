@@ -9,11 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "FXD_UserInfoConfiguration.h"
 #import "GetMoneyInfo.h"
-#import "RateModel.h"
 
 @interface FXD_Utility : NSObject
 
-@property (nonatomic,strong) RateModel *rateParse;
 @property (nonatomic,strong) FXD_UserInfoConfiguration *userInfo;
 @property (nonatomic,strong) GetMoneyInfo *getMineyInfo;
 @property (nonatomic,assign) BOOL loginFlage;

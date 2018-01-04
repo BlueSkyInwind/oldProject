@@ -7,7 +7,6 @@
 //
 
 #import "FXD_ViewModelBaseClass.h"
-#import "GetCaseInfo.h"
 @interface CheckViewModel : FXD_ViewModelBaseClass
 
 
