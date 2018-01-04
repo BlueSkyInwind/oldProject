@@ -157,11 +157,12 @@
     if(indexPath.section==0)
     {
         if(indexPath.row==0){
-            aboutUs=[[AboutMainViewController alloc]initWithNibName:@"AboutMainViewController" bundle:nil];
-            [self.navigationController pushViewController:aboutUs animated:YES];
+            [self obtainQuestionWebUrl:@"11"];
+//            aboutUs=[[AboutMainViewController alloc]initWithNibName:@"AboutMainViewController" bundle:nil];
+//            [self.navigationController pushViewController:aboutUs animated:YES];
         }
         else if(indexPath.row==1){
-            [self obtainQuestionWebUrl];
+            [self obtainQuestionWebUrl:@"10"];
         }
         else if(indexPath.row==2){
             if ([FXD_Utility sharedUtility].loginFlage) {
@@ -199,10 +200,8 @@
         else if(indexPath.row==5){
             
             if ([FXD_Utility sharedUtility].loginFlage) {
-                
                 ChangePasswordViewController *   changePassVC =[[ChangePasswordViewController alloc]init];
                 [self.navigationController pushViewController:changePassVC animated:YES];
-            
             } else {
                 [self presentLogin:self];
             }
@@ -282,7 +281,7 @@
     [mineMV obtainCommonProblems];
 }
 
--(void)obtainQuestionWebUrl{
+-(void)obtainQuestionWebUrl:(NSString *)typeCode{
     
     CommonViewModel * commonVM = [[CommonViewModel alloc]init];
     [commonVM setBlockWithReturnBlock:^(id returnValue) {
@@ -297,7 +296,7 @@
         }
     } WithFaileBlock:^{
     }];
-    [commonVM obtainProductProtocolType:nil typeCode:@"10" apply_id:nil periods:nil];
+    [commonVM obtainProductProtocolType:nil typeCode:typeCode apply_id:nil periods:nil];
 }
 
 @end

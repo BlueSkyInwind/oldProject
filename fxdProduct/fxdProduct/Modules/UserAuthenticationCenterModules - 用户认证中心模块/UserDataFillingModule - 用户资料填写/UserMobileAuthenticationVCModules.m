@@ -27,12 +27,11 @@ typedef enum {
 
 @interface UserMobileAuthenticationVCModules ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,LiveDeteDelgate>
 {
- 
+
     BOOL _captchaHidenDisplay;
     BOOL _picCodeHidenDisplay;
     
     NSMutableArray <NSString *>*_mobileRequArr;
-    ReturnMsgBaseClass *_mobileParse;
     
     UIImage * picCodeImage;
 }
@@ -210,10 +209,7 @@ typedef enum {
 
 - (void)showMobileHelp{
     
-    FXDWebViewController *controller = [[FXDWebViewController alloc]init];
-    controller.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_mobileAuthentication_url];
-    [self.navigationController pushViewController:controller animated:YES];
-
+    [self obtainUseHelp];
 }
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -322,7 +318,6 @@ typedef enum {
     } WithFaileBlock:^{
     }];
     [authenticationViewModel SaveMobileAuth:authCode];
-    
 }
 
 #pragma mark - 获取手机运营商
@@ -398,6 +393,26 @@ typedef enum {
     }];
     [commonVM obtainProductProtocolType:@"operInfo" typeCode:@"4" apply_id:nil periods:nil];
 }
+
+-(void)obtainUseHelp{
+    
+    CommonViewModel * commonVM = [[CommonViewModel alloc]init];
+    [commonVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = returnValue;
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            NSDictionary * dic = (NSDictionary *)baseResultM.data;
+            FXDWebViewController * fxdwebVC = [[FXDWebViewController alloc]init];
+            fxdwebVC.urlStr =  [dic objectForKey:@"productProURL"];
+            [self.navigationController pushViewController:fxdwebVC animated:YES];
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [commonVM obtainProductProtocolType:nil typeCode:@"12" apply_id:nil periods:nil];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

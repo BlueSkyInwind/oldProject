@@ -742,12 +742,9 @@
         }else {
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
-        
     } WithFaileBlock:^{
-        
     }];
     [commonVM obtainProductProtocolType:productId typeCode:typeCode apply_id:applicationId periods:periods];
-    
 }
 
 - (void)didReceiveMemoryWarning {
