@@ -93,7 +93,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     if (isFirst) {
         self.window.rootViewController = [LunchVCModules newLunchVCWithModels:@[@"guide_1",@"guide_2",@"guide_3"] enterBlock:^{
             [self enter];
-            [FXD_AppEmptyUserData EmptyData];
+            [FXD_UserInfoConfiguration EmptyData];
         }];
     } else {
         [self enter];

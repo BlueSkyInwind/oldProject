@@ -39,6 +39,6 @@ typedef NS_ENUM(NSUInteger, ApplicationStatus) {
 @property (nonatomic, copy) NSString *account_id;
 @property (nonatomic, copy) NSString *pruductId;
 
-
++ (void)EmptyData;
 
 @end

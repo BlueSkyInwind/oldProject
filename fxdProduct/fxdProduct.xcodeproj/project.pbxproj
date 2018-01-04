@@ -142,7 +142,6 @@
 		635AB7AD1BE34F9F00C32919 /* ShouldAlsoAmountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7AB1BE34F9F00C32919 /* ShouldAlsoAmountResult.m */; };
 		635AB7B31BE3540100C32919 /* AmountMsgBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7B01BE3540100C32919 /* AmountMsgBaseClass.m */; };
 		635AB7B41BE3540100C32919 /* AmountMsgResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7B21BE3540100C32919 /* AmountMsgResult.m */; };
-		635B0BC71DEBFED0008EAFD1 /* FXD_AppEmptyUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BC61DEBFED0008EAFD1 /* FXD_AppEmptyUserData.m */; };
 		635B0BD01DEEB187008EAFD1 /* HomePop.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BCF1DEEB187008EAFD1 /* HomePop.m */; };
 		635B0BD41DF01706008EAFD1 /* MoneyIngView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BD21DF01706008EAFD1 /* MoneyIngView.m */; };
 		635B0BD71DF11C44008EAFD1 /* MoneyIngView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 635B0BD61DF11C44008EAFD1 /* MoneyIngView.xib */; };
@@ -204,7 +203,6 @@
 		63832C8C1CB7530400C6F194 /* NSString+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 63832C8B1CB7530400C6F194 /* NSString+AES.m */; };
 		6386A6B81E80D4F200A181A3 /* fxdProductDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6386A6B71E80D4F200A181A3 /* fxdProductDev-Info.plist */; };
 		63878FE21C1519CD008E1CF9 /* CheckUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FDB1C1519CD008E1CF9 /* CheckUtils.m */; };
-		63878FE31C1519CD008E1CF9 /* GetUserIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FDD1C1519CD008E1CF9 /* GetUserIP.m */; };
 		63878FE41C1519CD008E1CF9 /* FXD_Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FDF1C1519CD008E1CF9 /* FXD_Tool.m */; };
 		63878FE51C1519CD008E1CF9 /* FXD_Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FE11C1519CD008E1CF9 /* FXD_Utility.m */; };
 		638A16811E5018FE00AB8AB6 /* libFMDeviceManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 638A16801E5018FE00AB8AB6 /* libFMDeviceManager.a */; };
@@ -478,6 +476,10 @@
 		848394271EDEC96C003EF4EC /* HomePopParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 848394251EDEC96C003EF4EC /* HomePopParam.m */; };
 		848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
 		848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
+		848FC6471FFE132500918CE9 /* CommonTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FC6461FFE132500918CE9 /* CommonTool.swift */; };
+		848FC6481FFE132500918CE9 /* CommonTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FC6461FFE132500918CE9 /* CommonTool.swift */; };
+		848FC64A1FFE137000918CE9 /* CommonExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FC6491FFE137000918CE9 /* CommonExtention.swift */; };
+		848FC64B1FFE137000918CE9 /* CommonExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FC6491FFE137000918CE9 /* CommonExtention.swift */; };
 		8492ED261FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */; };
 		8492ED271FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */; };
 		8492ED2B1FC7C68200C8D457 /* SetTradePasswordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492ED2A1FC7C68200C8D457 /* SetTradePasswordModel.m */; };
@@ -494,8 +496,6 @@
 		8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */; };
 		849842001FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849841FE1FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift */; };
 		849842011FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849841FE1FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift */; };
-		8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
-		8499BF8B1F50231600F193F9 /* MXVerifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499BF891F50231600F193F9 /* MXVerifyManager.swift */; };
 		849AC2571FF09721005E435F /* HighRankingAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849AC2551FF09721005E435F /* HighRankingAuthTableViewCell.swift */; };
 		849AC2581FF09721005E435F /* HighRankingAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849AC2551FF09721005E435F /* HighRankingAuthTableViewCell.swift */; };
 		849AC2591FF09721005E435F /* HighRankingAuthTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849AC2561FF09721005E435F /* HighRankingAuthTableViewCell.xib */; };
@@ -734,7 +734,6 @@
 		CC0DF96E1EA5B1090024841A /* GetMoneyResultAuditRecordBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D462A1BD097B900874064 /* GetMoneyResultAuditRecordBean.m */; };
 		CC0DF9701EA5B1090024841A /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED33361B6B4593008B6085 /* BaseNavigationViewController.m */; };
 		CC0DF9711EA5B1090024841A /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48481B6F036F009E384C /* MyViewController.m */; };
-		CC0DF9721EA5B1090024841A /* GetUserIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FDD1C1519CD008E1CF9 /* GetUserIP.m */; };
 		CC0DF9751EA5B1090024841A /* LOTRectShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A169B1E517D9F00AB8AB6 /* LOTRectShapeLayer.m */; };
 		CC0DF9771EA5B1090024841A /* IdeaBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E30D01BC8A70C0018A801 /* IdeaBackViewController.m */; };
 		CC0DF9781EA5B1090024841A /* FXDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DE56FE1DE7CD2900747AE2 /* FXDWebViewController.m */; };
@@ -890,7 +889,6 @@
 		CC0DFA401EA5B1090024841A /* GetMoneyStateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24D2A1BE10F4A0036E8EF /* GetMoneyStateResult.m */; };
 		CC0DFA431EA5B1090024841A /* LoginParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 639F73EB1E4C0099008D3475 /* LoginParse.m */; };
 		CC0DFA441EA5B1090024841A /* ShouldAlsoAmountBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB7A91BE34F9F00C32919 /* ShouldAlsoAmountBaseClass.m */; };
-		CC0DFA451EA5B1090024841A /* FXD_AppEmptyUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BC61DEBFED0008EAFD1 /* FXD_AppEmptyUserData.m */; };
 		CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEACE231CA10B480027859A /* NSString+Validate.m */; };
 		CC0DFA471EA5B1090024841A /* FXDBaseTabBarVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* FXDBaseTabBarVCModule.m */; };
 		CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6348310D1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m */; };
@@ -1535,8 +1533,6 @@
 		635AB7B01BE3540100C32919 /* AmountMsgBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmountMsgBaseClass.m; sourceTree = "<group>"; };
 		635AB7B11BE3540100C32919 /* AmountMsgResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmountMsgResult.h; sourceTree = "<group>"; };
 		635AB7B21BE3540100C32919 /* AmountMsgResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmountMsgResult.m; sourceTree = "<group>"; };
-		635B0BC51DEBFED0008EAFD1 /* FXD_AppEmptyUserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXD_AppEmptyUserData.h; sourceTree = "<group>"; };
-		635B0BC61DEBFED0008EAFD1 /* FXD_AppEmptyUserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXD_AppEmptyUserData.m; sourceTree = "<group>"; };
 		635B0BCE1DEEB187008EAFD1 /* HomePop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePop.h; sourceTree = "<group>"; };
 		635B0BCF1DEEB187008EAFD1 /* HomePop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePop.m; sourceTree = "<group>"; };
 		635B0BD11DF01706008EAFD1 /* MoneyIngView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyIngView.h; sourceTree = "<group>"; };
@@ -1648,8 +1644,6 @@
 		638774451D10F03F00B6A4A2 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = "../../../../Library/Developer/Xcode/DerivedData/fxdProduct-dozfzzrslgqvqlbjewxjgyjcrcga/Build/Products/Debug-iphoneos/AFNetworking/AFNetworking.framework"; sourceTree = "<group>"; };
 		63878FDA1C1519CD008E1CF9 /* CheckUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUtils.h; sourceTree = "<group>"; };
 		63878FDB1C1519CD008E1CF9 /* CheckUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUtils.m; sourceTree = "<group>"; };
-		63878FDC1C1519CD008E1CF9 /* GetUserIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetUserIP.h; sourceTree = "<group>"; };
-		63878FDD1C1519CD008E1CF9 /* GetUserIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetUserIP.m; sourceTree = "<group>"; };
 		63878FDE1C1519CD008E1CF9 /* FXD_Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXD_Tool.h; sourceTree = "<group>"; };
 		63878FDF1C1519CD008E1CF9 /* FXD_Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXD_Tool.m; sourceTree = "<group>"; };
 		63878FE01C1519CD008E1CF9 /* FXD_Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXD_Utility.h; sourceTree = "<group>"; };
@@ -2075,6 +2069,8 @@
 		848394241EDEC96C003EF4EC /* HomePopParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePopParam.h; sourceTree = "<group>"; };
 		848394251EDEC96C003EF4EC /* HomePopParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePopParam.m; sourceTree = "<group>"; };
 		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
+		848FC6461FFE132500918CE9 /* CommonTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTool.swift; sourceTree = "<group>"; };
+		848FC6491FFE137000918CE9 /* CommonExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtention.swift; sourceTree = "<group>"; };
 		8492ED241FC7B63F00C8D457 /* SetTransactionPasswordViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetTransactionPasswordViewModel.h; sourceTree = "<group>"; };
 		8492ED251FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTransactionPasswordViewModel.m; sourceTree = "<group>"; };
 		8492ED291FC7C68200C8D457 /* SetTradePasswordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetTradePasswordModel.h; sourceTree = "<group>"; };
@@ -2087,7 +2083,6 @@
 		8496D3141F5A9E3A00CCEE72 /* BankInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankInfoViewModel.h; sourceTree = "<group>"; };
 		8496D3151F5A9E3A00CCEE72 /* BankInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankInfoViewModel.m; sourceTree = "<group>"; };
 		849841FE1FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_LoanApplicationDisplayTableViewCell.swift; sourceTree = "<group>"; };
-		8499BF891F50231600F193F9 /* MXVerifyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXVerifyManager.swift; sourceTree = "<group>"; };
 		849AC2551FF09721005E435F /* HighRankingAuthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighRankingAuthTableViewCell.swift; sourceTree = "<group>"; };
 		849AC2561FF09721005E435F /* HighRankingAuthTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HighRankingAuthTableViewCell.xib; sourceTree = "<group>"; };
 		849AC25B1FF0C816005E435F /* FXD_ToWithdrawFundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_ToWithdrawFundsViewController.swift; sourceTree = "<group>"; };
@@ -3497,8 +3492,6 @@
 			children = (
 				63878FDA1C1519CD008E1CF9 /* CheckUtils.h */,
 				63878FDB1C1519CD008E1CF9 /* CheckUtils.m */,
-				63878FDC1C1519CD008E1CF9 /* GetUserIP.h */,
-				63878FDD1C1519CD008E1CF9 /* GetUserIP.m */,
 				63878FDE1C1519CD008E1CF9 /* FXD_Tool.h */,
 				63878FDF1C1519CD008E1CF9 /* FXD_Tool.m */,
 				63878FE01C1519CD008E1CF9 /* FXD_Utility.h */,
@@ -4070,8 +4063,6 @@
 				84C61A0D1FA8241200626411 /* FXD_LaunchConfiguration.m */,
 				6313DC181BB4F35C00EB45DE /* FXD_UserInfoConfiguration.h */,
 				6313DC191BB4F35C00EB45DE /* FXD_UserInfoConfiguration.m */,
-				635B0BC51DEBFED0008EAFD1 /* FXD_AppEmptyUserData.h */,
-				635B0BC61DEBFED0008EAFD1 /* FXD_AppEmptyUserData.m */,
 				63117FB51DFFC42600635BB3 /* FXD_AppShareConfig.h */,
 				63117FB61DFFC42600635BB3 /* FXD_AppShareConfig.m */,
 				849459C81FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.h */,
@@ -4080,11 +4071,12 @@
 				638A16851E5030D700AB8AB6 /* SetUpFMDevice.m */,
 				840911A01F6F997E00DCDF03 /* JSAndOCInteraction.h */,
 				840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */,
-				8499BF891F50231600F193F9 /* MXVerifyManager.swift */,
 				849AC26C1FF0FABE005E435F /* FXD_MXVerifyManager.h */,
 				849AC26D1FF0FABE005E435F /* FXD_MXVerifyManager.m */,
 				84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */,
 				84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */,
+				848FC6461FFE132500918CE9 /* CommonTool.swift */,
+				848FC6491FFE137000918CE9 /* CommonExtention.swift */,
 				CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */,
 			);
 			path = Common;
@@ -5356,7 +5348,7 @@
 					};
 					CC0DF9531EA5B1090024841A = {
 						DevelopmentTeam = B4V533E2T3;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -5784,7 +5776,6 @@
 				849459CA1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
 				63FF484A1B6F036F009E384C /* MyViewController.m in Sources */,
 				847298371FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */,
-				63878FE31C1519CD008E1CF9 /* GetUserIP.m in Sources */,
 				638A16ED1E517D9F00AB8AB6 /* LOTRectShapeLayer.m in Sources */,
 				0F9E30D21BC8A70C0018A801 /* IdeaBackViewController.m in Sources */,
 				63DE56FF1DE7CD2900747AE2 /* FXDWebViewController.m in Sources */,
@@ -5796,7 +5787,6 @@
 				84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */,
 				63F5AD931E23849C001BDF44 /* LoanApplicationForConfirmationVCModules.m in Sources */,
 				63145AF31CA8DBBD00D04ED8 /* RegionResult.m in Sources */,
-				8499BF8A1F50231600F193F9 /* MXVerifyManager.swift in Sources */,
 				63E1ECD01E1B8FAA0079A2F8 /* TAAnimatedDotView.m in Sources */,
 				CC8BC9611FEB59D9008E135E /* ExperienceValueGradeModel.m in Sources */,
 				63FC24FA1D98F7E9006F58F3 /* YYTextRunDelegate.m in Sources */,
@@ -5961,6 +5951,7 @@
 				84F87F431FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift in Sources */,
 				CCCB279C1FB2F04500412632 /* ScratchAwardView.m in Sources */,
 				63F0E1BB1CE417FF001251A9 /* NSString+YYAdd.m in Sources */,
+				848FC6471FFE132500918CE9 /* CommonTool.swift in Sources */,
 				63FC24F81D98F7E9006F58F3 /* YYTextParser.m in Sources */,
 				63B142AC1D9A43B000C43B3F /* DrawService.m in Sources */,
 				63A24C611BE063A90036E8EF /* NSString+Password.m in Sources */,
@@ -6037,7 +6028,6 @@
 				63A24D2E1BE10F4A0036E8EF /* GetMoneyStateResult.m in Sources */,
 				639F73EC1E4C0099008D3475 /* LoginParse.m in Sources */,
 				635AB7AC1BE34F9F00C32919 /* ShouldAlsoAmountBaseClass.m in Sources */,
-				635B0BC71DEBFED0008EAFD1 /* FXD_AppEmptyUserData.m in Sources */,
 				0FEACE241CA10B480027859A /* NSString+Validate.m in Sources */,
 				63FF48581B6F15DB009E384C /* FXDBaseTabBarVCModule.m in Sources */,
 				6348310E1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m in Sources */,
@@ -6180,6 +6170,7 @@
 				635B0BE11DF157EA008EAFD1 /* DetailViewController.m in Sources */,
 				63FF48401B6F0322009E384C /* HomePageVCModules.m in Sources */,
 				CC6F06901F7B8D3600FA889E /* ShanLinWebVCModules.m in Sources */,
+				848FC64A1FFE137000918CE9 /* CommonExtention.swift in Sources */,
 				84F87F3D1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift in Sources */,
 				0FEACE201CA0E2450027859A /* TelPhoneCompanyCell.m in Sources */,
 				8438F70F1EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
@@ -6314,7 +6305,6 @@
 				CC0DF96E1EA5B1090024841A /* GetMoneyResultAuditRecordBean.m in Sources */,
 				CC0DF9701EA5B1090024841A /* BaseNavigationViewController.m in Sources */,
 				CC0DF9711EA5B1090024841A /* MyViewController.m in Sources */,
-				CC0DF9721EA5B1090024841A /* GetUserIP.m in Sources */,
 				CC0DF9751EA5B1090024841A /* LOTRectShapeLayer.m in Sources */,
 				CC0DF9771EA5B1090024841A /* IdeaBackViewController.m in Sources */,
 				CC0DF9781EA5B1090024841A /* FXDWebViewController.m in Sources */,
@@ -6472,6 +6462,7 @@
 				849AC2611FF0DCA6005E435F /* FXD_ToWithdrawFundsFooterView.swift in Sources */,
 				CC0DF9F51EA5B1090024841A /* GetMoneyStateBaseClass.m in Sources */,
 				843C99F11F9606050067E200 /* DiscountCouponsView.swift in Sources */,
+				848FC6481FFE132500918CE9 /* CommonTool.swift in Sources */,
 				CC0DF9F71EA5B1090024841A /* UIView+SDExtension.m in Sources */,
 				84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */,
 				CC7336901FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */,
@@ -6555,7 +6546,6 @@
 				CC0DFA441EA5B1090024841A /* ShouldAlsoAmountBaseClass.m in Sources */,
 				CC5FC5AC1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift in Sources */,
 				CC6F06911F7B8D4200FA889E /* ShanLinWebVCModules.m in Sources */,
-				CC0DFA451EA5B1090024841A /* FXD_AppEmptyUserData.m in Sources */,
 				CCA181A41FC80E1E0094DA58 /* NonePageView.swift in Sources */,
 				CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */,
 				CC0DFA471EA5B1090024841A /* FXDBaseTabBarVCModule.m in Sources */,
@@ -6606,7 +6596,6 @@
 				CC0DFA6F1EA5B1090024841A /* HomeViewModel.m in Sources */,
 				CC0DFA701EA5B1090024841A /* LOTAnimatableScaleValue.m in Sources */,
 				CCA1819D1FC7F0320094DA58 /* WithdrawCashInfoModel.m in Sources */,
-				8499BF8B1F50231600F193F9 /* MXVerifyManager.swift in Sources */,
 				CC0DFA711EA5B1090024841A /* telphoneView.m in Sources */,
 				CC0DFA721EA5B1090024841A /* LOTStrokeShapeLayer.m in Sources */,
 				CC0DFA731EA5B1090024841A /* CardInfo.m in Sources */,
@@ -6692,6 +6681,7 @@
 				CC0DFAB71EA5B1090024841A /* LewPopupBackgroundView.m in Sources */,
 				CC0DFAB91EA5B1090024841A /* RegionCodeExt.m in Sources */,
 				8438F7101EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
+				848FC64B1FFE137000918CE9 /* CommonExtention.swift in Sources */,
 				CC0DFABB1EA5B1090024841A /* DetailViewController.m in Sources */,
 				CC0DFABC1EA5B1090024841A /* HomePageVCModules.m in Sources */,
 				84117F571F60F6A700B7EAA9 /* LoadFailureView.swift in Sources */,
@@ -7125,10 +7115,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = B4V533E2T3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7215,10 +7205,11 @@
 					"\"SystemConfiguration\"",
 					"-lstdc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "85d136f9-76c3-41af-b468-350b743b4235";
-				PROVISIONING_PROFILE_SPECIFIER = FXD_Test_Pro;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -7239,10 +7230,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = B4V533E2T3;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7315,10 +7306,11 @@
 					"\"SystemConfiguration\"",
 					"-lstdc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "85d136f9-76c3-41af-b468-350b743b4235";
-				PROVISIONING_PROFILE_SPECIFIER = FXD_Test_Pro;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

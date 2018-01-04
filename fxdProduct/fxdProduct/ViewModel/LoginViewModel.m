@@ -35,7 +35,7 @@
         loginParamModel.last_login_device_ = [FXD_Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
         loginParamModel.last_login_from_ = PLATFORM;
-        loginParamModel.last_login_ip_ = [[GetUserIP sharedUserIP] getIPAddress];
+        loginParamModel.last_login_ip_ = [[FXD_Tool share] getIPAddress];
         loginParamModel.platform_type_ = PLATFORM;
         loginParamModel.BSFIT_DEVICEID = fingerPrint;
         
@@ -47,7 +47,7 @@
         loginParamModel.last_login_device_ = [FXD_Utility sharedUtility].userInfo.uuidStr;
         loginParamModel.app_version_ = app_Version;
         loginParamModel.last_login_from_ = PLATFORM;
-        loginParamModel.last_login_ip_ = [[GetUserIP sharedUserIP] getIPAddress];
+        loginParamModel.last_login_ip_ = [[FXD_Tool share] getIPAddress];;
         loginParamModel.platform_type_ = PLATFORM;
         loginParamModel.BSFIT_DEVICEID =fingerPrint;
     }

@@ -226,7 +226,7 @@
         if ([FXD_Utility sharedUtility].loginFlage) {
             LoginViewModel * loginVM = [[LoginViewModel alloc]init];
             [loginVM deleteUserRegisterID];
-            [FXD_AppEmptyUserData EmptyData];
+            [FXD_UserInfoConfiguration EmptyData];
         }
         
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
