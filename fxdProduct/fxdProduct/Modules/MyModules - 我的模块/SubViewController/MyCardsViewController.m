@@ -10,14 +10,9 @@
 #import "MyCardCell.h"
 #import "BankCardInfoBaseClass.h"
 #import "EditCardsController.h"
-#import "BankModel.h"
-#import "UserCardResult.h"
-#import "RepayWeeklyRecordViewModel.h"
 #import "SupportBankList.h"
 @interface MyCardsViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
-    //    BankCardInfoBaseClass
-    UserCardResult *_userCardModel;
     
     NSMutableArray *_dataImageListBank;
     NSMutableArray *_dataliat;

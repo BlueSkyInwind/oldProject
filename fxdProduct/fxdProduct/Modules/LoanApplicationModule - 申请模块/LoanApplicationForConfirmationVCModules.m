@@ -9,7 +9,6 @@
 #import "LoanApplicationForConfirmationVCModules.h"
 #import "WithdrawalsVCModule.h"
 #import "FMDeviceManager.h"
-#import "RateModel.h"
 #import "ApplicationViewModel.h"
 #import "ApplicaitonModel.h"
 #import "DiscountTicketModel.h"
@@ -22,7 +21,6 @@
 }
 
 @property (nonatomic, strong) YYTextView *textView;
-@property (nonatomic,strong) RateModel *rateModel;
 @property (nonatomic,strong) DiscountCouponsView * discountCouponsV;
 
 @end

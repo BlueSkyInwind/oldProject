@@ -9,9 +9,6 @@
 #import "UserMobileAuthenticationVCModules.h"
 #import "MobileCell.h"
 #import <MGLivenessDetection/MGLivenessDetection.h>
-#import "FaceIDLiveModel.h"
-#import "JXLParse.h"
-#import "JXLMessagePrse.h"
 #import "ReturnMsgBaseClass.h"
 #import "MGLiveViewController.h"
 #import "BaseNavigationViewController.h"
@@ -30,6 +27,7 @@ typedef enum {
 
 @interface UserMobileAuthenticationVCModules ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,LiveDeteDelgate>
 {
+
     BOOL _captchaHidenDisplay;
     BOOL _picCodeHidenDisplay;
     

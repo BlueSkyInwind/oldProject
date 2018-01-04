@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GetMoneyHistoryBaseClass.h"
 #import "RepayRecord.h"
 @interface loanRecordCell : UITableViewCell
 -(void)setCellValue:(RepayRecord*)result;

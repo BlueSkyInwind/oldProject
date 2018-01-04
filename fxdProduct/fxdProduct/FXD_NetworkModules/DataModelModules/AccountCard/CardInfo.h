@@ -10,7 +10,6 @@
 
 @interface CardInfo : JSONModel
 
-
 @property (nonatomic, copy)NSString<Optional> *cardIdentifier;
 
 @property (nonatomic, copy)NSString<Optional> *tailNumber;
@@ -27,14 +26,7 @@
 @property (nonatomic, copy)NSString<Optional> *cardNo;
 @property (nonatomic, copy)NSString<Optional> *cardShortName;
 @property (nonatomic, copy)NSString<Optional> *cardType;  //1:信用卡，2:借记卡
-@property (nonatomic, copy)NSString<Optional> *bankNameCode;  
-
-
-
-
-
-
-
+@property (nonatomic, copy)NSString<Optional> *bankNameCode;
 
 
 @end

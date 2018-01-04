@@ -7,7 +7,6 @@
 //
 
 #import "PayMethodViewController.h"
-#import "BankModel.h"
 #import "BankListCell.h"
 #import "EditCardsController.h"
 #import "BaseNavigationViewController.h"

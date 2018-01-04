@@ -8,7 +8,6 @@
 #import <Foundation/Foundation.h>
 #import "SquareRepaymentResult.h"
 #import "SquareRepaymentExt.h"
-#import "SquareRepaymentAvailableRedpackets.h"
 #import "SquareRepaymentBaseClass.h"
 
 @class SquareRepaymentExt, SquareRepaymentResult;

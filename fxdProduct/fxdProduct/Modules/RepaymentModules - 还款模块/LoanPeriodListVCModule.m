@@ -13,7 +13,6 @@
 #import "UserStateModel.h"
 #import "RepayMentViewModel.h"
 #import "RepayListInfo.h"
-#import "BankModel.h"
 #import "P2PBillDetail.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "CheckViewModel.h"
@@ -33,7 +32,6 @@
     //可点击最大范围
     NSInteger _clickMax;
     
-    BankModel *_bankCardModel;
     NSMutableArray *_supportBankListArr;
     
     //最后一次点击坐标

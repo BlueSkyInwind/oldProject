@@ -8,7 +8,6 @@
 
 #import "UserDataViewModel.h"
 #import "FaceIDLiveModel.h"
-#import "UserCardResult.h"
 #import "RegionCodeParam.h"
 
 @implementation UserDataViewModel

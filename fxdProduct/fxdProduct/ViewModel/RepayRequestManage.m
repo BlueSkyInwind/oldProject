@@ -13,7 +13,6 @@
 #import "RepayMentViewModel.h"
 #import "LoanPaymentDetailVCModule.h"
 #import "RepayListInfo.h"
-#import "BankModel.h"
 #import "CheckViewModel.h"
 #import "SupportBankList.h"
 
