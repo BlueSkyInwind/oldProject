@@ -39,6 +39,12 @@
 @property (nonatomic, strong)NSString<Optional> *productId;
 //温馨提示
 @property (nonatomic, strong)NSString<Optional> *warn;
+//基础资料是否完整
+@property (nonatomic, strong)NSString<Optional> *isComplete;
+//弹窗提示内容
+@property (nonatomic, strong)NSArray<Optional> *tipsContent;
+//弹窗提示标题
+@property (nonatomic, strong)NSString<Optional> *tipsTitle;
 
 @end
 

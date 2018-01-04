@@ -73,7 +73,13 @@
  */
 -(void)addHeaderView{
     
-    UIView *headerBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 238)];
+    int height;
+    height = 238;
+    if (UI_IS_IPHONE6P) {
+        
+        height = 268;
+    }
+    UIView *headerBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, height)];
     //添加自定义头部
     _headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
     _headerView.backgroundColor = UI_MAIN_COLOR;
