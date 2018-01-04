@@ -146,9 +146,21 @@
 
 #pragma mark 点击使用帮助按钮
 -(void)goHelpVCClick{
-    FXDWebViewController * webVC = [[FXDWebViewController alloc]init];
-    webVC.urlStr = [NSString stringWithFormat:@"%@%@",_H5_url,_DiscountTicketRule_url];
-    [self.navigationController pushViewController:webVC animated:true];
+    
+        CommonViewModel * commonVM = [[CommonViewModel alloc]init];
+        [commonVM setBlockWithReturnBlock:^(id returnValue) {
+            BaseResultModel *  baseResultM = returnValue;
+            if ([baseResultM.errCode isEqualToString:@"0"]) {
+                NSDictionary * dic = (NSDictionary *)baseResultM.data;
+                FXDWebViewController * fxdwebVC = [[FXDWebViewController alloc]init];
+                fxdwebVC.urlStr =  [dic objectForKey:@"productProURL"];
+                [self.navigationController pushViewController:fxdwebVC animated:YES];
+            }else {
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+            }
+        } WithFaileBlock:^{
+        }];
+        [commonVM obtainProductProtocolType:nil typeCode:@"13" apply_id:nil periods:nil];
 }
 
 #pragma mark 初始化无优惠券视图

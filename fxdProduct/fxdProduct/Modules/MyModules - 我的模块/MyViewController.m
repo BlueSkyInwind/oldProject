@@ -289,11 +289,11 @@
     switch (indexPath.row) {
         case 0:
         {
-            FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
-            [self.navigationController pushViewController:loanApplicationVC animated:true];
+//            FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
+//            [self.navigationController pushViewController:loanApplicationVC animated:true];
 
-//            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-//            [self.navigationController pushViewController:myMessageVC animated:true];
+            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+            [self.navigationController pushViewController:myMessageVC animated:true];
         }
             break;
         case 1:
@@ -301,10 +301,10 @@
             
 //            FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
 //            [self.navigationController pushViewController:loanApplicationVC animated:true];
-            UserDataAuthenticationListVCModules *userDataVC = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
-            [self.navigationController pushViewController:userDataVC animated:YES];
-//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-//            [self.navigationController pushViewController:repayRecord animated:true];
+//            UserDataAuthenticationListVCModules *userDataVC = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
+//            [self.navigationController pushViewController:userDataVC animated:YES];
+            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+            [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;
         case 2:
