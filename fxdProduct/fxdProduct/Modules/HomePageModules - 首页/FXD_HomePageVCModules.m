@@ -596,15 +596,34 @@
 
 -(void)loanBtnClick{
     
-//    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:@"资料更新提示" content:@"亲爱的用户：\n由于距上次提交资料时间较长，你有部分资料需更新提交。\n我们会依据您的最新资料信息及历史还款记录，给你最新的借款额度。" attributeDic:nil cancelTitle:@"取消" sureTitle:@"前去更新" compleBlock:^(NSInteger index) {
-//
-//        UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]init];
-//        [self.navigationController pushViewController:controller animated:true];
-//        NSLog(@"前去更新");
-//    }];
-    FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
-    loanApplicationVC.productId = _homeProductList.drawInfo.productId;
-    [self.navigationController pushViewController:loanApplicationVC animated:true];
+
+    
+    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"0"]) {
+        
+        FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
+        loanApplicationVC.productId = _homeProductList.drawInfo.productId;
+        [self.navigationController pushViewController:loanApplicationVC animated:true];
+    }else{
+        
+        NSMutableString *content = [[NSMutableString alloc]initWithCapacity:100] ;
+        
+        for (int i = 0; i<_homeProductList.drawInfo.tipsContent.count; i++) {
+            
+            [content appendString:_homeProductList.drawInfo.tipsContent[i]];
+            if (i != _homeProductList.drawInfo.tipsContent.count-1) {
+                
+                [content appendString:@"\n"];
+            }
+        }
+
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:_homeProductList.drawInfo.tipsTitle content:content attributeDic:nil TextAlignment:NSTextAlignmentLeft cancelTitle:@"取消" sureTitle:@"前去更新" compleBlock:^(NSInteger index) {
+            if (index == 1) {
+                UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]init];
+                [self.navigationController pushViewController:controller animated:true];
+            }
+        }];
+    }
+    
 }
 
 -(void)productListClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit amount:(NSString *)amount Path:(NSString *)Path{
@@ -670,7 +689,14 @@
     FeeTextModel *firstModel = _homeProductList.overdueInfo.feeText[0];
     FeeTextModel *secondModel = _homeProductList.overdueInfo.feeText[1];
     
-    NSString *content = [NSString stringWithFormat:@"%@\n%@",_homeProductList.overdueInfo.ruleText[0],_homeProductList.overdueInfo.ruleText[1]];
+    NSMutableString *content;
+    for (int i = 0; i<_homeProductList.overdueInfo.ruleText.count; i++) {
+        
+        [content appendString:_homeProductList.overdueInfo.ruleText[i]];
+        if (i != _homeProductList.overdueInfo.ruleText.count-1) {
+            [content appendString:@"\n"];
+        }
+    }
     [[FXD_AlertViewCust sharedHHAlertView] showFXDOverdueViewAlertViewTitle:_homeProductList.overdueInfo.ruleTitle TwoTitle:_homeProductList.overdueInfo.currentFeeTitle content:content deditAmount:firstModel.value deditTitle:[NSString stringWithFormat:@"%@:",firstModel.label]  defaultInterestLabel:secondModel.value defaultInterestTitle:[NSString stringWithFormat:@"%@:",secondModel.label] sureTitle:@"我知道了" compleBlock:^(NSInteger index) {
         
     }];

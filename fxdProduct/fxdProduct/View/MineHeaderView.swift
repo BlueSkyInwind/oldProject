@@ -112,7 +112,7 @@ extension MineHeaderView{
         self.addSubview(bgImageView!)
         bgImageView?.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(30)
-            make.top.equalTo(self).offset(45)
+            make.bottom.equalTo(self).offset(-15)
         }
         
         leftImageView = UIImageView()
@@ -121,7 +121,6 @@ extension MineHeaderView{
             
             make.centerX.equalTo((bgImageView?.snp.centerX)!)
             make.top.equalTo((bgImageView?.snp.top)!).offset(5)
-//            make.centerY.equalTo((bgImageView?.snp.centerY)!)
             make.width.equalTo(67)
             make.height.equalTo(67)
         })
@@ -136,6 +135,11 @@ extension MineHeaderView{
             make.height.equalTo(20)
         })
         
+        if UI_IS_IPONE6P {
+            accountLabel?.snp.updateConstraints({ (make) in
+                make.top.equalTo(self).offset(82)
+            })
+        }
         let shadowImageView = UIImageView()
         shadowImageView.isUserInteractionEnabled = true
         let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
@@ -177,7 +181,12 @@ extension MineHeaderView{
         
         didSet{
             let k_w = UIScreen.main.bounds.size.width
-            let newFrame = CGRect(x:0,y:0,width:k_w,height:130)
+            var height = 130
+            
+            if UI_IS_IPONE6P {
+                height = 160
+            }
+            let newFrame = CGRect(x:0,y:0,width:Int(k_w),height:height)
             super.frame = newFrame
             
         }
