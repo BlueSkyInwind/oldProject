@@ -17,7 +17,6 @@
     self = [super init];
     if (self) {
         self.userInfo = [[FXD_UserInfoConfiguration alloc] init];
-        self.getMineyInfo = [[GetMoneyInfo alloc] init];
     }
     return self;
 }

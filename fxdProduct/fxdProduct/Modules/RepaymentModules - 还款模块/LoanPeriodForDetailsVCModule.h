@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "UserStateModel.h"
 @class RepayListInfo,P2PBillDetail;
 
 @interface LoanPeriodForDetailsVCModule : BaseViewController
@@ -34,8 +33,6 @@
 @property (nonatomic, strong) RepayListInfo *repayListModel;
 
 @property (nonatomic, strong) P2PBillDetail *p2pBillDetail;
-
-@property(strong,nonatomic)UserStateModel *userStateM;
 
 @property (nonatomic,strong)NSString * platform_type;
 @property (nonatomic,strong)NSString * applicationId;

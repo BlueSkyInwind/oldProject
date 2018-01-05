@@ -17,7 +17,6 @@
 #import "FXDWebViewController.h"
 #import "SDCycleScrollView.h"
 #import "RepayRecordController.h" 
-#import "LoanApplicationForConfirmationVCModules.h"
 #import "QRCodePopView.h"
 #import "UserDataAuthenticationListVCModules.h"
 #import "HomeProductList.h"

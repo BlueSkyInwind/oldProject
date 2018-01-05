@@ -9,7 +9,6 @@
 #import "RepayRequestManage.h"
 #import "HomeViewModel.h"
 #import "LoanPeriodListVCModule.h"
-#import "UserStateModel.h"
 #import "RepayMentViewModel.h"
 #import "LoanPaymentDetailVCModule.h"
 #import "RepayListInfo.h"
@@ -17,9 +16,6 @@
 #import "SupportBankList.h"
 
 @implementation RepayRequestManage
-{
-    UserStateModel *_model;
-}
 
 - (void)repayRequest
 {

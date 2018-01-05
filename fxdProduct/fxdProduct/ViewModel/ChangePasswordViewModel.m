@@ -7,9 +7,6 @@
 //
 
 #import "ChangePasswordViewModel.h"
-#import "ReturnMsgBaseClass.h"
-#import "ChangePasswordParamModel.h"
-#import "SendSmsParam.h"
 #import "DES3Util.h"
 @implementation ChangePasswordViewModel
 

@@ -8,12 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "FXD_UserInfoConfiguration.h"
-#import "GetMoneyInfo.h"
 
 @interface FXD_Utility : NSObject
 
 @property (nonatomic,strong) FXD_UserInfoConfiguration *userInfo;
-@property (nonatomic,strong) GetMoneyInfo *getMineyInfo;
 @property (nonatomic,assign) BOOL loginFlage;
 @property (nonatomic,assign) BOOL networkState;
 @property (nonatomic,retain) NSMutableDictionary *getMoneyParam;
