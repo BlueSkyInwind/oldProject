@@ -77,7 +77,7 @@ extension NonePageView{
         didSet{
             
             super.frame = CGRect(x:0,y:0,width:_k_w,height:_k_h)
-            
+        
         }
     }
 }

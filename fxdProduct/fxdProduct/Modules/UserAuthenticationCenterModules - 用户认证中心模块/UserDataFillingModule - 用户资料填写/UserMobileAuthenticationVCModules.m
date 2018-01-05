@@ -268,7 +268,7 @@ typedef enum {
     [authenticationViewModel setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * baseRM = returnValue;
         if ([baseRM.errCode isEqualToString:@"0"]){
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
             [self saveMobileAuth:@"1"];
         }else if ([baseRM.errCode isEqualToString:@"19"]){
             //需要图片验证码
