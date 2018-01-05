@@ -10,6 +10,10 @@
 #import <UIKit/UIKit.h>
 
 @interface FXD_Tool : NSObject
+
+
+
+
 +(FXD_Tool *)share;
 
 #pragma mark- 时间处理
@@ -82,7 +86,6 @@
 
 + (void)showMessage:(NSString *)msg vc:(UIViewController *)vc;
 
-
  /**
  启动粘贴板
 
@@ -91,7 +94,6 @@
  @param str 提示内容
  */
 +(void)ClipboardOfCopy:(NSString *)copyStr VC:(UIViewController *)vc prompt:(NSString *)str;
-
 
 /**
  获取当前视图
@@ -108,6 +110,11 @@
  */
 -(NSString*)changeTelephone:(NSString*)teleStr;
 
+/**
+ 获取用户的ip
 
+ @return ip地址
+ */
+- (NSString *)getIPAddress;
 
 @end

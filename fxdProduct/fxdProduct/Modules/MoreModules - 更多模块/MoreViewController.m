@@ -248,7 +248,7 @@
             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
             [self presentViewController:nav animated:YES completion:^{
                 [_alertView hide];
-                [FXD_AppEmptyUserData EmptyData];
+                [FXD_UserInfoConfiguration EmptyData];
             }];
         }else{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view.window message:baseVM.friendErrMsg];

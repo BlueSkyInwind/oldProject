@@ -10,11 +10,10 @@
 #define fxdProduct_GlobalConfig_h
 
 #ifdef DEBUG
-#define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define DLog(fmt, ...) NSLog((@"File_name:%s\nFuntion_Name:%s\nlines:%d \n" fmt), [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String] , __FUNCTION__, __LINE__, ##__VA_ARGS__);
 #else
 #define DLog(...)
 #endif
-
 
 typedef void(^ReturnValueBlock)(id returnValue);
 typedef void(^FaileBlock)();

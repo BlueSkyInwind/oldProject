@@ -37,7 +37,7 @@
     regParamModel.password_ = [DES3Util encrypt:password];;
     regParamModel.register_from_ = PLATFORM;
     regParamModel.verify_code_ = verifycode;
-    regParamModel.register_ip_ = [[GetUserIP sharedUserIP] getIPAddress];
+    regParamModel.register_ip_ = [[FXD_Tool share] getIPAddress];
     regParamModel.register_device_ = @"";
     regParamModel.pic_verify_id_ = picVerifyId;
     regParamModel.pic_verify_code_ = picVerifyCode;

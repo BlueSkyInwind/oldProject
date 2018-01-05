@@ -32,7 +32,6 @@
 #import "MBProgressHUD.h"
 #import "MBPAlertView.h"
 #import <AdSupport/AdSupport.h>
-#import "GetUserIP.h"
 #import "FMDatabase.h"
 #import <UMMobClick/MobClick.h>
 #import <MOBFoundation/MOBFoundation.h>
@@ -42,7 +41,6 @@
 #import <YYModel/YYModel.h>
 #import "YYCache.h"
 #import <Masonry/Masonry.h>
-#import "FXD_AppEmptyUserData.h"
 #import "YYText.h"
 #import "UIDevice+YYAdd.h"
 #import <JSONModel/JSONModel.h>

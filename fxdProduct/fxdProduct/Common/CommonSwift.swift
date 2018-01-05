@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 let  _k_w = UIScreen.main.bounds.size.width
 let  _k_h = UIScreen.main.bounds.size.height
 
@@ -31,6 +29,19 @@ let WebView_Style = "<header><meta name='viewport' content='width=device-width, 
 
 func obtainBarHeight_New(vc:UIViewController) -> Int{
     return Int(UIApplication.shared.statusBarFrame.size.height + (vc.navigationController?.navigationBar.frame.size.height)!)
+}
+
+// 这里 T 表示不指定 message参数类型
+func DLog<T>(message : T, file : String = #file, funcName : String = #function, lineNum : Int = #line) {
+    
+    #if DEBUG
+        // 需要在 buildSetting 中配置 swift flags的参数为:-D DEBUG, DEBUG可以自定义, 一般用 DEBUG
+        // 搜 swift flags-->other swift flags-->DEBUG-->点+号-->输入上面的配置参数
+        // 1.对文件进行处理
+        let fileName = (file as NSString).lastPathComponent
+        // 2.打印内容
+        print("[\(fileName)][\(funcName)](\(lineNum)):\(message)")
+    #endif
 }
 
 let UI_MAIN_COLOR = UIColor.init(red: 0, green: 170/255, blue: 238/255, alpha: 1)
