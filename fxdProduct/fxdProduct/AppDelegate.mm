@@ -10,7 +10,6 @@
 #import "BaseNavigationViewController.h"
 #import "LunchVCModules.h"
 #import "CALayer+Transition.h"
-#import "testModelFmdb.h"
 #import "BSFingerSDK.h"
 #import "FXD_AppShareConfig.h"
 #import "JPUSHService.h"

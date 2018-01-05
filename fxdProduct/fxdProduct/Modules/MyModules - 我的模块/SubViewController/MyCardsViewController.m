@@ -8,7 +8,6 @@
 
 #import "MyCardsViewController.h"
 #import "MyCardCell.h"
-#import "BankCardInfoBaseClass.h"
 #import "EditCardsController.h"
 #import "SupportBankList.h"
 @interface MyCardsViewController ()<UITableViewDataSource,UITableViewDelegate>
