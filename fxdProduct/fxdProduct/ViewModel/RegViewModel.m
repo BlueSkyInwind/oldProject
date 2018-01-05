@@ -7,7 +7,6 @@
 //
 
 #import "RegViewModel.h"
-#import "ReturnMsgBaseClass.h"
 #import "FMDeviceManager.h"
 @implementation RegViewModel
 

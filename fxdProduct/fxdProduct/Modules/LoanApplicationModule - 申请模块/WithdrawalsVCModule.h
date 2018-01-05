@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-//#import "UserStateModel.h"
 
 
 @interface WithdrawalsVCModule : BaseViewController

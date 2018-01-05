@@ -14,11 +14,9 @@
 #import "GetCustomerBaseViewModel.h"
 #import "Custom_BaseInfo.h"
 #import "GetCareerInfoViewModel.h"
-#import "LoanApplicationForConfirmationVCModules.h"
 #import "CareerParse.h"
 #import "testView.h"
 #import "HomeViewModel.h"
-#import "UserStateModel.h"
 #import "LoanMoneyViewController.h"
 #import "WithdrawalsVCModule.h"
 #import "DataWriteAndRead.h"
@@ -29,7 +27,6 @@
 #import "MoxieSDK.h"
 #import "EditCardsController.h"
 #import "UserDataViewModel.h"
-#import "HighRandingModel.h"
 #import "UserDataModel.h"
 #import "CardInfo.h"
 #import "CheckViewModel.h"
@@ -55,9 +52,6 @@
     NSString *_phoneAuthChannel;
     NSString *_creditCardStatus;
     NSString *_socialSecurityStatus;
-    HighRandingModel * _creditCardHighRandM;
-    HighRandingModel * _socialSecurityHighRandM;
-    UserStateModel *_model;
     UserDataModel * _userDataModel;
     BOOL isOpen;
     
@@ -646,87 +640,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
-/*
- - (void)popViewFamily
- {
- _alertView = [[[NSBundle mainBundle] loadNibNamed:@"testView" owner:self options:nil] lastObject];
- _alertView.frame = CGRectMake(0, 0, _k_w, _k_h);
- _alertView.lbltitle.text = @"\n是否愿意家人知晓";
- _alertView.lbltitle.textColor = rgb(95, 95, 95);
- [_alertView.DisSureBtn setTitleColor:rgb(142, 142, 142) forState:UIControlStateNormal];
- [_alertView.sureBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
- _alertView.DisSureBtn.tag = 11;
- _alertView.sureBtn.tag = 10;
- [_alertView.DisSureBtn setTitle:@"否" forState:UIControlStateNormal];
- [_alertView.sureBtn setTitle:@"是" forState:UIControlStateNormal];
- [_alertView.DisSureBtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
- [_alertView.sureBtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
- [_alertView show];
- }
- 
- - (void)click:(UIButton *)sender
- {
- switch (sender.tag) {
- case 10:
- {
- [_alertView hide];
- [self goVC:@"0"];
- }
- break;
- case 11:
- {
- [_alertView hide];
- [self goVC:@"1"];
- }
- break;
- default:
- break;
- }
- }
- 
- - (void)goVC:(NSString *)is_know
- {
- 
- LoanApplicationForConfirmationVCModules *loanFirstVC = [[LoanApplicationForConfirmationVCModules alloc] init];
- loanFirstVC.productId = _product_id;
- loanFirstVC.if_family_know = is_know;
- if (_careerParse != nil) {
- loanFirstVC.resultCode = _careerParse.resultcode;
- loanFirstVC.rulesId = _careerParse.rulesid;
- } else {
- loanFirstVC.resultCode = _resultCode;
- loanFirstVC.rulesId = _rulesId;
- }
- loanFirstVC.model = _model;
- if ([_product_id isEqualToString:RapidLoan] || [_product_id isEqualToString:DeriveRapidLoan]) {
- loanFirstVC.req_loan_amt = _req_loan_amt;
- }
- [self.navigationController pushViewController:loanFirstVC animated:true];
- 
- }
- 
- - (void)setProfessRule:(CareerParse *)careerParse
- {
- _careerParse = careerParse;
- _resultCode = careerParse.resultcode;
- _rulesId = careerParse.rulesid;
- }
- 
- - (void)setCornerWithoutRadius:(UIView *)view
- {
- view.layer.cornerRadius = 10;
- view.layer.masksToBounds = YES;
- }
- */
 
 @end

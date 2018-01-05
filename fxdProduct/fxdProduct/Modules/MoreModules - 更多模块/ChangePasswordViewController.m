@@ -11,7 +11,6 @@
 #import "ChangePasswordViewModel.h"
 #import "BaseNavigationViewController.h"
 #import "LoginViewController.h"
-#import "ChangePasswordModel.h"
 
 @interface ChangePasswordViewController ()<UITableViewDelegate,UITableViewDataSource,UIViewControllerTransitioningDelegate>{
     

@@ -8,7 +8,6 @@
 
 #import "LoginViewController.h"
 #import "FXDBaseTabBarVCModule.h"
-#import "LoginParse.h"
 #import "RegViewController.h"
 #import "FindPassViewController.h"
 #import "UpdateDevIDViewController.h"
@@ -28,7 +27,6 @@
     //倒计时时间
     NSInteger _countdown;
     NSTimer * _countdownTimer;
-    LoginParse *_loginParse;
     BaseResultModel * _loginResultM;
     
     ReturnMsgBaseClass *_codeParse;

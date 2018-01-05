@@ -42,7 +42,6 @@
 #import "CheckViewIng.h"
 #import <MJRefresh/MJRefresh.h>
 #import "UserDataResult.h"
-#import "LoanApplicationForConfirmationVCModules.h"
 #import "FXD_UserInfoConfiguration.h"
 #import "FXDWebViewController.h"
 #import "ApplicationViewModel.h"

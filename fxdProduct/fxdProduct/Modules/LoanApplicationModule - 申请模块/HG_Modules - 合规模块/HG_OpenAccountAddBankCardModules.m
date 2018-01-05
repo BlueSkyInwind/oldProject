@@ -12,7 +12,6 @@
 #import "WTCameraViewController.h"
 #import "LoanMoneyViewController.h"
 #import "SMSViewModel.h"
-#import "UserStateModel.h"
 #import "DetailViewController.h"
 #import <MGBaseKit/MGBaseKit.h>
 #import <MGBankCard/MGBankCard.h>

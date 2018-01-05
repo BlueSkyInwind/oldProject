@@ -8,7 +8,6 @@
 
 #import "BaseViewController.h"
 #import "DrawingsInfoModel.h"
-@class UserStateModel;
 
 @interface HG_OpenAccountAddBankCardModules : BaseViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -27,10 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *agreeBtn;
 
-
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
-
-@property (nonatomic, strong) UserStateModel *userStateModel;
 
 @property (nonatomic, strong) DrawingsInfoModel * drawingsInfoModel;
 

@@ -10,7 +10,6 @@
 #import "RepayListCell.h"
 #import "LoanPeriodForDetailsVCModule.h"
 #import "LoanPaymentDetailVCModule.h"
-#import "UserStateModel.h"
 #import "RepayMentViewModel.h"
 #import "RepayListInfo.h"
 #import "P2PBillDetail.h"

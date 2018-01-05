@@ -16,7 +16,6 @@
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import "LoginViewController.h"
 #import "BaseNavigationViewController.h"
-#import "ReturnMsgBaseClass.h"
 #import "testView.h"
 #import "FXDWebViewController.h"
 #import "UIImage+Color.h"

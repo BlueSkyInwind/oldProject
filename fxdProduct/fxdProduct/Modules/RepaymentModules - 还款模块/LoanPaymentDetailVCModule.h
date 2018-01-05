@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
-@class BankModel,RepayListInfo,Situations,BillList,P2PBillDetail,UserStateModel;
+@class BankModel,RepayListInfo,Situations,BillList,P2PBillDetail;
 
 typedef NS_ENUM(NSUInteger, RepayType) {
     RepayTypeOption = 0,

@@ -22,7 +22,6 @@
 #import "HG_UnbindBankCardVCModules.h"
 #import "CheckViewModel.h"
 #import "HomeViewModel.h"
-#import "UserStateModel.h"
 #import "PayVerificationCodeCell.h"
 #import "PayDisplayCell.h"
 #import "PaymentViewModel.h"
