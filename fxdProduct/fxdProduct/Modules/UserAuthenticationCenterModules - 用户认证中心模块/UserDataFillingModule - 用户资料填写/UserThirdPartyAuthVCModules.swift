@@ -232,6 +232,9 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
         }
         userDataVM.theInternetbankUpload(taskid)
     }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

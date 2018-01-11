@@ -114,7 +114,7 @@ NSString * const    _shebaoupload_url    =    @"resource/mxsbtask_create";
 //信用卡
 NSString * const    _TheCreditCardupload_url    =    @"resource/mxmailtask_create";
 
-//信用卡
+//网银
 NSString * const    _TheInternetbank_url    =    @"auth/ebank/ebankTaskSubmit";
 
 //高级认证状态查询
@@ -386,7 +386,6 @@ NSString * const    _creditLimitInfo_url        =    @"user/verify/amount";
 
 //常见问题
 NSString * const    _question_url               =    @"product/getCommonProblemApi";
-
 
 
 #pragma mark - 合规接口
