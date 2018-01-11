@@ -67,7 +67,6 @@ NSString *const NewFeatureVersionKey = @"NewFeatureVersionKey";
     _scrollView.delegate = self;
     _scrollView.showsHorizontalScrollIndicator = NO;
     
-    
     [self.view addSubview:_scrollView];
 }
 

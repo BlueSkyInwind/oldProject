@@ -19,7 +19,6 @@
 #import "RepayListInfo.h"
 #import "P2PBillDetail.h"
 #import "DefaultCardPopoverWindowModule.h"
-#import "HG_UnbindBankCardVCModules.h"
 #import "CheckViewModel.h"
 #import "HomeViewModel.h"
 #import "PayVerificationCodeCell.h"

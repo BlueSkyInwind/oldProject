@@ -23,7 +23,6 @@ typedef enum {
 
 }CurrentDisplayType;
 
-
 @interface UserMobileAuthenticationVCModules ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,LiveDeteDelgate>
 {
 

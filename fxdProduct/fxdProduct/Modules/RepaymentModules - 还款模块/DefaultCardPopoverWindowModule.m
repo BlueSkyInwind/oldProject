@@ -12,7 +12,6 @@
 #import "UIViewController+KNSemiModal.h"
 #import "PayMethodViewController.h"
 #import "CardInfo.h"
-#import "HG_UnbindBankCardVCModules.h"
 @interface DefaultCardPopoverWindowModule ()<UITableViewDelegate,UITableViewDataSource>
 {
     CardInfo *_selectCardInfo;
