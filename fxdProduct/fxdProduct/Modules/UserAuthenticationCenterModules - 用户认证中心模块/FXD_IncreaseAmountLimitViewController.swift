@@ -105,7 +105,7 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     @objc func appraisalBottonClick(){
         
         if isTestFlag {
-            userRequestEvaluation({ (isSuccess) in
+            userRequestImproveAmount({ (isSuccess) in
                 if isSuccess {
                     self.tabBarController?.selectedIndex = 0;
                 }
@@ -298,7 +298,7 @@ extension FXD_IncreaseAmountLimitViewController {
         userDataVM.obtainUserCreditLimit()
     }
     
-    func userRequestEvaluation(_ isFinish:@escaping (_ success:Bool) -> Void)  {
+    func userRequestImproveAmount(_ isFinish:@escaping (_ success:Bool) -> Void)  {
         let userDataVM = UserDataViewModel.init()
         userDataVM.setBlockWithReturn({ (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
@@ -311,7 +311,8 @@ extension FXD_IncreaseAmountLimitViewController {
         }, withFaileBlock: {
             isFinish(false)
         })
-        userDataVM.userDataCertification(EliteLoan)
+//        userDataVM.userDataCertification(EliteLoan)
+        userDataVM.user(toImproveAmount: EliteLoan)
     }
 }
 

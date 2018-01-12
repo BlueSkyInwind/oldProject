@@ -248,6 +248,26 @@
         }
     }];
 }
+-(void)userToImproveAmount:(NSString *)productId{
+    
+    UserDataMeatureParam * userDataMeatureP = [[UserDataMeatureParam alloc]init];
+    userDataMeatureP.product_id = productId;
+    userDataMeatureP.service_platform_flag = @"2020";
+    
+    NSDictionary * paramDic = [userDataMeatureP toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_increaseAmount_url] isNeedNetStatus:true isNeedWait:true parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseResultM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
 
 #pragma  mark - 公共接口
 /**

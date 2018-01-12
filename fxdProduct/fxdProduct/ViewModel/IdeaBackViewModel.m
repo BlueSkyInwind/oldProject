@@ -18,7 +18,7 @@
     
     NSDictionary * paramDic  = [ideaBackParamModel toDictionary];
 
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_feedBack_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_feedBack_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             BaseResultModel * baserRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
             self.returnBlock(baserRM);
@@ -29,4 +29,5 @@
         }
     }];
 }
+
 @end

@@ -82,6 +82,11 @@
  获取提额信息页面接口
  */
 -(void)obtainUserCreditLimit;
+
+/**
+ 用户申请提额接口
+ */
+-(void)userToImproveAmount:(NSString *)productId;
 #pragma  mark - 公共接口
 /**
  获取列表数据的公共接口
