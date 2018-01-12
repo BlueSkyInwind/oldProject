@@ -722,6 +722,9 @@
             [self getProtocolContentProtocolType:productId typeCode:@"2" applicationId:applicationId periods:@""];
             break;
 
+        case 2:
+            [self getProtocolContentProtocolType:productId typeCode:@"2" applicationId:applicationId periods:@""];
+            break;
         default:
             break;
     }

@@ -200,12 +200,12 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         messageCell.titleLabel?.text = items[indexPath.row - 1].msgName
         messageCell.timeLabel?.text = items[indexPath.row - 1].createDate
         messageCell.contentLabel?.text = items[indexPath.row - 1].msgText
-        messageCell.leftImageView?.isHidden = false
+        messageCell.leftImageView?.image = UIImage(named:"speaker")
         messageCell.titleLabel?.textColor = TITLE_COLOR
 
         if items[indexPath.row - 1].isRead == "2" {
 
-            messageCell.leftImageView?.isHidden = true
+            messageCell.leftImageView?.image = UIImage(named:"speaker_select")
             messageCell.titleLabel?.textColor = QUTOA_COLOR;
         }
         
