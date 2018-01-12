@@ -63,6 +63,7 @@
     for(int i=0;i<7;i++)
     {
         UILabel *lbl=[self.contentView viewWithTag:i+100];
+        lbl.text = @"";
         if (i == 0) {
             if ([result.product_id_ isEqualToString:RapidLoan]||[result.product_id_ isEqualToString:DeriveRapidLoan]) {
                 lbl.text = @"急速贷";
@@ -75,23 +76,24 @@
             }
         }else if(i==1)
         {
-            lbl.text=[NSString stringWithFormat:@"%.2f元",result.principal_amount_];
+            
+            lbl.text=[NSString stringWithFormat:@"%.2f元",result.principal_amount_.floatValue];
         }else if(i==2)
         {
             if ([result.loan_staging_duration_ isEqualToString:@"1"]) {
-                lbl.text=[NSString stringWithFormat:@"%.0f周",result.loan_staging_amount_];
+                lbl.text=[NSString stringWithFormat:@"%.0f周",result.loan_staging_amount_.floatValue];
             }
             if ([result.loan_staging_duration_ isEqualToString:@"5"]) {
-                lbl.text=[NSString stringWithFormat:@"%.0f天",result.loan_staging_amount_];
+                lbl.text=[NSString stringWithFormat:@"%.0f天",result.loan_staging_amount_.floatValue];
             }
             
         }else if(i==3)
         {
-            lbl.text=[NSString stringWithFormat:@"%.2f元",result.staging_repayment_amount_];
+            lbl.text=[NSString stringWithFormat:@"%.2f元",result.staging_repayment_amount_.floatValue];
         }
         else if(i==4)
         {
-            lbl.text=[NSString stringWithFormat:@"%.2f元",result.repayment_amount_];
+            lbl.text=[NSString stringWithFormat:@"%.2f元",result.repayment_amount_.floatValue];
         }
         else if (i==5)
         {
