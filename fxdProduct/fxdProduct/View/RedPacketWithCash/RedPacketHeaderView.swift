@@ -76,9 +76,10 @@ extension RedPacketHeaderView{
         let withdrawBtn = UIButton()
         withdrawBtn.setTitle("提现", for: .normal)
         withdrawBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        withdrawBtn.backgroundColor = UI_MAIN_COLOR
+        withdrawBtn.setBackgroundImage(UIImage(named:"applayBtnImage"), for: .normal)
+//        withdrawBtn.backgroundColor = UI_MAIN_COLOR
         withdrawBtn.setTitleColor(UIColor.white, for: .normal)
-        withdrawBtn.layer.cornerRadius = 5.0
+//        withdrawBtn.layer.cornerRadius = 5.0
         withdrawBtn.addTarget(self, action: #selector(withdrawBtnClick), for: .touchUpInside)
         self.addSubview(withdrawBtn)
         withdrawBtn.snp.makeConstraints { (make) in

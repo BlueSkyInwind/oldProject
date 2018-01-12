@@ -591,8 +591,6 @@
 
 -(void)loanBtnClick{
     
-
-    
     if ([_homeProductList.drawInfo.isComplete isEqualToString:@"0"]) {
         
         FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
@@ -701,13 +699,15 @@
     
     NSString *productId;
     NSString *applicationId;
-    
+    NSString *periods;
     if ([_homeProductList.flag isEqualToString:@"7"]) {
         productId = _homeProductList.repayInfo.productId;
         applicationId = _homeProductList.repayInfo.applicationId;
+        periods = _homeProductList.repayInfo.periods;
     }else{
         productId = _homeProductList.overdueInfo.productId;
         applicationId = _homeProductList.overdueInfo.applicationId;
+        periods = _homeProductList.overdueInfo.periods;
     }
     NSLog(@"%ld",index);
     switch (index) {
@@ -716,9 +716,12 @@
             [self getProtocolContentProtocolType:productId typeCode:@"1" applicationId:applicationId periods:nil];
             break;
         case 1:
-            [self getProtocolContentProtocolType:productId typeCode:@"2" applicationId:applicationId periods:@""];
+            [self getProtocolContentProtocolType:productId typeCode:@"1" applicationId:applicationId periods:nil];
             break;
 
+        case 2:
+            [self getProtocolContentProtocolType:productId typeCode:@"2" applicationId:applicationId periods:periods];
+            break;
         default:
             break;
     }

@@ -69,7 +69,7 @@ extension RedPacketCell{
         }
         
         bottomBtn = UIButton()
-        bottomBtn?.setTitleColor(RedPacketBottomBtn_COLOR, for: .normal)
+        bottomBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
         bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         bottomBtn?.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
         self.addSubview(bottomBtn!)

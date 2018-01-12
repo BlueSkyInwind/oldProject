@@ -11,7 +11,7 @@
 @interface ProtocolParamModel : JSONModel
 
 @property(nonatomic,strong)NSString<Optional> * apply_id_;
-@property(nonatomic,strong)NSString<Optional> * periods_;
+@property(nonatomic,strong)NSString<Optional> * periods;
 @property(nonatomic,strong)NSString<Optional> * product_id_;
 @property(nonatomic,strong)NSString<Optional> * protocol_type_;
 

@@ -37,6 +37,7 @@
     protocolM.productId  = Type_id;
     protocolM.protocolType  = typeCode;
     protocolM.applicationId  = apply_id;
+    protocolM.periods = periods;
     
     NSDictionary *paramDic = [protocolM toDictionary];
 

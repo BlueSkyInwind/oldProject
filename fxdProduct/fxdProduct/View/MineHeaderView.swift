@@ -194,9 +194,19 @@ extension MineHeaderView{
     
     fileprivate func changeLeftImageViewLocation(){
         
-        leftImageView?.snp.updateConstraints({ (make) in
-    
-            make.top.equalTo((bgImageView?.snp.top)!).offset(-5)
-        })
+        if UI_IS_IPONE6 {
+            
+            leftImageView?.snp.updateConstraints({ (make) in
+                
+                make.top.equalTo((bgImageView?.snp.top)!).offset(2)
+            })
+        }else{
+            
+            leftImageView?.snp.updateConstraints({ (make) in
+                
+                make.top.equalTo((bgImageView?.snp.top)!).offset(-5)
+            })
+        }
+        
     }
 }

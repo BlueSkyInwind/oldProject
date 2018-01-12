@@ -548,7 +548,8 @@ extension HomePageCell {
         
         let topLabel = UILabel()
         topLabel.textColor = UI_MAIN_COLOR
-        topLabel.text = "可借额度 (元)"
+        topLabel.text = homeProductListModel.drawInfo.label
+        topLabel.font = UIFont.systemFont(ofSize: 17)
         topLabel.textAlignment = .center
         bgView.addSubview(topLabel)
         topLabel.snp.makeConstraints { (make) in
@@ -849,7 +850,7 @@ extension HomePageCell {
             make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(17)
         }
         
-        let nsArray = ["《银行自动转账授权书》","《三方借款协议》"]
+        let nsArray = ["《银行自动转账授权书》","、","《三方借款协议》"]
         addProtocolClick(nsArray)
         
         if UI_IS_IPONE6 {
@@ -919,7 +920,7 @@ extension HomePageCell {
         let titleLabel = UILabel()
         titleLabel.text = homeProductListModel.drawInfo.label
         titleLabel.textAlignment = .center
-        titleLabel.textColor = UI_MAIN_COLOR
+        titleLabel.textColor = RedPacketBottomBtn_COLOR
         titleLabel.font = UIFont.systemFont(ofSize: 17)
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
@@ -929,9 +930,9 @@ extension HomePageCell {
         
         let quotaLabel = UILabel()
         quotaLabel.textAlignment = .center
-        quotaLabel.textColor = UIColor.black
+        quotaLabel.textColor = UI_MAIN_COLOR
         quotaLabel.text = homeProductListModel.drawInfo.amount
-        quotaLabel.font = UIFont.systemFont(ofSize: 25)
+        quotaLabel.font = UIFont.systemFont(ofSize: 40)
         self.addSubview(quotaLabel)
         quotaLabel.snp.makeConstraints({ (make) in
             make.centerX.equalTo(self.snp.centerX)
@@ -1386,11 +1387,15 @@ extension HomePageCell{
     //协议
     func addProtocolClick(_ protocolNames:[String])  {
         var protocolContent:String = "我已阅读并认可发薪贷"
+        
+        let length = protocolContent.count
+        
         var rangeArr:[NSRange] = []
+        
         for proName in protocolNames {
-            protocolContent = protocolContent + proName + "、"
+            protocolContent = protocolContent + proName
         }
-        let index = protocolContent.index(protocolContent.endIndex, offsetBy: -1)
+        let index = protocolContent.index(protocolContent.endIndex, offsetBy: 0)
         let attributeStr = NSMutableAttributedString.init(string: String(protocolContent[..<index]))
         for proName in protocolNames {
             let range = (protocolContent as NSString).range(of: proName)
@@ -1401,6 +1406,9 @@ extension HomePageCell{
                 }
             }
         }
+        
+        let range1 = NSMakeRange(0, length)
+        attributeStr.yy_setColor(QUTOA_COLOR, range: range1)
         protocolLabel?.attributedText = attributeStr
     }
 }

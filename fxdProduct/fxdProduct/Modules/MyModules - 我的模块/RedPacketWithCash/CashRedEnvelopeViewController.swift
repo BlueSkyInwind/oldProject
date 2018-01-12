@@ -75,8 +75,8 @@ class CashRedEnvelopeViewController: BaseViewController ,UITableViewDelegate,UIT
         
         let aBarbi = UIBarButtonItem.init(title: "收提明细", style: .plain, target: self, action: #selector(rightClick))
         self.navigationItem.rightBarButtonItem = aBarbi
-        aBarbi.setTitleTextAttributes([NSAttributedStringKey.foregroundColor:RedPacket_COLOR,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)], for: .normal)
-        aBarbi.setTitleTextAttributes([NSAttributedStringKey.foregroundColor:RedPacket_COLOR,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)], for: .selected)
+        aBarbi.setTitleTextAttributes([NSAttributedStringKey.foregroundColor:UI_MAIN_COLOR,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)], for: .normal)
+        aBarbi.setTitleTextAttributes([NSAttributedStringKey.foregroundColor:UI_MAIN_COLOR,NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)], for: .selected)
        
     }
    
