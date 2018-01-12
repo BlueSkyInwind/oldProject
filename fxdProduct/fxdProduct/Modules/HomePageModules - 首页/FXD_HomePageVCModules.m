@@ -594,7 +594,8 @@
     if ([_homeProductList.drawInfo.isComplete isEqualToString:@"0"]) {
         
         FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
-        loanApplicationVC.productId = _homeProductList.drawInfo.productId;
+        loanApplicationVC.productId = _homeProductList.productId;
+//        loanApplicationVC.productId = _homeProductList.drawInfo.productId;
         [self.navigationController pushViewController:loanApplicationVC animated:true];
     }else{
         
@@ -695,32 +696,24 @@
     }];
 }
 
+//还款协议点击事件
 -(void)protocolNameClick:(NSInteger)index{
     
-    NSString *productId;
-    NSString *applicationId;
-    NSString *periods;
-    if ([_homeProductList.flag isEqualToString:@"7"]) {
-        productId = _homeProductList.repayInfo.productId;
-        applicationId = _homeProductList.repayInfo.applicationId;
-        periods = _homeProductList.repayInfo.periods;
-    }else{
-        productId = _homeProductList.overdueInfo.productId;
-        applicationId = _homeProductList.overdueInfo.applicationId;
-        periods = _homeProductList.overdueInfo.periods;
-    }
     NSLog(@"%ld",index);
     switch (index) {
         case 0:
             
-            [self getProtocolContentProtocolType:productId typeCode:@"1" applicationId:applicationId periods:nil];
+            //银行自动转账授权书
+            [self getProtocolContentProtocolType:_homeProductList.productId typeCode:@"1" applicationId:_homeProductList.applicationId periods:nil];
             break;
         case 1:
-            [self getProtocolContentProtocolType:productId typeCode:@"1" applicationId:applicationId periods:nil];
+            //银行自动转账授权书
+            [self getProtocolContentProtocolType:_homeProductList.productId typeCode:@"1" applicationId:_homeProductList.applicationId periods:nil];
             break;
 
         case 2:
-            [self getProtocolContentProtocolType:productId typeCode:@"2" applicationId:applicationId periods:periods];
+            //三方借款协议
+            [self getProtocolContentProtocolType:_homeProductList.productId typeCode:@"2" applicationId:_homeProductList.applicationId periods:_homeProductList.periods];
             break;
         default:
             break;

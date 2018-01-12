@@ -35,8 +35,6 @@
 @property (nonatomic, strong)NSString<Optional> *amount;
 //蓝色文字
 @property (nonatomic, strong)NSString<Optional> *label;
-//产品id
-@property (nonatomic, strong)NSString<Optional> *productId;
 //温馨提示
 @property (nonatomic, strong)NSString<Optional> *warn;
 //基础资料是否完整
@@ -76,12 +74,6 @@
 @property (nonatomic, strong)NSString<Optional> *repayTips;
 //期供金额
 @property (nonatomic, strong)NSString<Optional> *stagingAmount;
-//进件id
-@property (nonatomic, strong)NSString<Optional> *applicationId;
-//产品id
-@property (nonatomic, strong)NSString<Optional> *productId;
-//借款期数
-@property (nonatomic, strong)NSString<Optional> *periods;
 //逾期弹窗当前费用标题
 @property (nonatomic, strong)NSString<Optional> *currentFeeTitle;
 //逾期弹窗规则标题
@@ -101,12 +93,6 @@
 @property (nonatomic, strong)NSString<Optional> *repayDate;
 //顶部蓝色借款提示
 @property (nonatomic, strong)NSString<Optional> *repayTips;
-//进件id
-@property (nonatomic, strong)NSString<Optional> *applicationId;
-//产品id
-@property (nonatomic, strong)NSString<Optional> *productId;
-//借款期数
-@property (nonatomic, strong)NSString<Optional> *periods;
 
 @end
 
@@ -164,6 +150,12 @@
 @property(nonatomic,strong)DrawInfoModel<Optional> * drawInfo;
 //首页不同标识  1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中 9 延期中 10 延期失败 11合规标的处理中 12测评中 13提款失败 14逾期 15还款失败
 @property (nonatomic, strong)NSString<Optional> *flag;
+//产品id
+@property (nonatomic, strong)NSString<Optional> *productId;
+//进件id
+@property (nonatomic, strong)NSString<Optional> *applicationId;
+//借款期数
+@property (nonatomic, strong)NSString<Optional> *periods;
 //中间状态（测评中、放款中、还款中） 和失败状态（放款失败、还款失败）数据
 @property(nonatomic,strong)HandingAndFailModel<Optional> * handingAndFailText;
 //跳转弹窗1跳转资料补全页
