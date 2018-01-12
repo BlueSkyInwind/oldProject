@@ -2,15 +2,15 @@
 
  #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0
-
-NSString * const _main_url  =   @"https://h5.faxindai.com:8028/fxd-esb/esb/"; //生产
-NSString * const _agreement_url  =   @"https://h5.faxindai.com:8028/fxd-esb/esb/";
-NSString * const _ValidESB_url = @"https://h5.faxindai.com:8028/fxd-esb/";
+//h5.faxindai.com:8028
+NSString * const _main_url  =   @"https://api.faxindai.com/fxd-esb/esb/"; //生产
+NSString * const _agreement_url  =   @"https://api.faxindai.com/fxd-esb/esb/";
+NSString * const _ValidESB_url = @"https://api.faxindai.com/fxd-esb/";
 NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/"; //生产
-NSString * const _p2P_url = @"https://h5.faxindai.com:8028/fxd-esb/p2p/";
-NSString * const _H5_url    =   @"https://h5.faxindai.com:8028/fxd-h5/page/";
-NSString * const _main_new_url  =  @"https://h5.faxindai.com:8028/apigw/client/";
-NSString * const _mainTwo_new_url  =  @"http://h5.faxindai.com:8028/coregw/client/";
+NSString * const _p2P_url = @"https://api.faxindai.com/fxd-esb/p2p/";
+NSString * const _H5_url    =   @"https://api.faxindai.com/fxd-h5/page/";
+NSString * const _main_new_url  =  @"https://api.faxindai.com/apigw/client/";
+NSString * const _mainTwo_new_url  =  @"http://api.faxindai.com/coregw/client/";
 
 #elif FXD_Environment_Mode == 1
 
@@ -114,7 +114,7 @@ NSString * const    _shebaoupload_url    =    @"resource/mxsbtask_create";
 //信用卡
 NSString * const    _TheCreditCardupload_url    =    @"resource/mxmailtask_create";
 
-//信用卡
+//网银
 NSString * const    _TheInternetbank_url    =    @"auth/ebank/ebankTaskSubmit";
 
 //高级认证状态查询
@@ -386,7 +386,6 @@ NSString * const    _creditLimitInfo_url        =    @"user/verify/amount";
 
 //常见问题
 NSString * const    _question_url               =    @"product/getCommonProblemApi";
-
 
 
 #pragma mark - 合规接口

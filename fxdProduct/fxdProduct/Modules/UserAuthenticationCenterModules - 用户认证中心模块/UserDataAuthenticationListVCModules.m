@@ -17,8 +17,6 @@
 #import "CareerParse.h"
 #import "testView.h"
 #import "HomeViewModel.h"
-#import "LoanMoneyViewController.h"
-#import "WithdrawalsVCModule.h"
 #import "DataWriteAndRead.h"
 #import "SesameCreditCertificationVCModules.h"
 #import "HomeProductList.h"
@@ -322,10 +320,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        if ([_userDataModel.others isEqualToString:@"0"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请先完成基础资料认证"];
-            return;
-        }
         switch (indexPath.row) {
             case 0:
                 if ([_creditCardStatus isEqualToString:@"3"]) {

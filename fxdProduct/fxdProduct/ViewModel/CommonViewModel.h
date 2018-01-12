@@ -24,4 +24,13 @@
  @param periods 期数
  */
 -(void)obtainProductProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode apply_id:(NSString *)apply_id periods:(NSString *)periods;
+/**
+ 获取银行自动转账授权书
+
+ @param Type_id 产品id
+ @param typeCode 类型
+ @param cardBankCode 银行编码
+ @param cardNo 银行卡号
+ */
+-(void)obtainTransferAuthProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode cardBankCode:(NSString *)cardBankCode cardNo:(NSString *)cardNo;
 @end

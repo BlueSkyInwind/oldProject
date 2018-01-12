@@ -239,23 +239,6 @@
     }
 }
 
-/**
- h5交互结果返回处理
- */
--(void)payOverpopBack{
-    
-    for (UIViewController* vc in self.rt_navigationController.rt_viewControllers) {
-        if ([vc isKindOfClass:[LoanMoneyViewController class]]) {
-            LoanMoneyViewController *  loanMoneyVC  =(LoanMoneyViewController *) vc;
-            if ([self.acceptType isEqualToString:@"1"]) {
-                loanMoneyVC.applicationStatus = Repayment;
-            }else if ([self.acceptType isEqualToString:@"2"]){
-                loanMoneyVC.applicationStatus = Staging;
-            }
-            [self.navigationController popToViewController:loanMoneyVC animated:YES];
-        }
-    }
-}
 
 #pragma mark -WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler

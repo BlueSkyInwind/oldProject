@@ -84,7 +84,6 @@
     if (self.mxVerifyResult != nil) {
         self.mxVerifyResult(resultDictionary);
     }
-    
     //【登录中】假如code是2且loginDone为false，表示正在登录中
     if(code == 2 && loginDone == false){
         DLog(@"任务正在登录中，SDK退出后不会再回调任务状态，任务最终状态会从服务端回调，建议轮询APP服务端接口查询任务/业务最新状态");

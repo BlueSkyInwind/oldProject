@@ -18,4 +18,8 @@
 @property(nonatomic,strong)NSString<Optional> * applicationId;
 @property(nonatomic,strong)NSString<Optional> * productId;
 @property(nonatomic,strong)NSString<Optional> * protocolType;
+@property(nonatomic,strong)NSString<Optional> * cardBank;
+@property(nonatomic,strong)NSString<Optional> * cardNo;
+
+
 @end

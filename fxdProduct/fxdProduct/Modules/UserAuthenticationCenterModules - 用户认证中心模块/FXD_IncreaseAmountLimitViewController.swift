@@ -188,9 +188,9 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 42))
         let label = UILabel()
-        label.textColor = UI_MAIN_COLOR
+        label.textColor = UIColor.init(red: 175/255, green: 177/255, blue: 179/255, alpha: 1)
         label.text = "快速提额任务"
-        label.font = UIFont.yx_systemFont(ofSize: 14)
+        label.font = UIFont.yx_systemFont(ofSize: 13)
         headerView.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.center.equalTo(headerView.snp.center)

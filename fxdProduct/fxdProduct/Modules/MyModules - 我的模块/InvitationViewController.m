@@ -210,9 +210,11 @@
                 ReconfrList *reconfrInfo = [[ReconfrList alloc]initWithDictionary:dic error:nil];
                 [str appendFormat:@"%@\n",reconfrInfo.protocol_content_];
             }
+            
             NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:str];
             contentText.yy_font = [UIFont systemFontOfSize:14];
             contentText.yy_color = rgb(139, 139, 140);
+            contentText.yy_lineSpacing = 5;
             _textView.attributedText = contentText;
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseRM.friendErrMsg];
