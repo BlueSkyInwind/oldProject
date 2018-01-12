@@ -80,6 +80,8 @@
 @property (nonatomic, strong)NSString<Optional> *applicationId;
 //产品id
 @property (nonatomic, strong)NSString<Optional> *productId;
+//借款期数
+@property (nonatomic, strong)NSString<Optional> *periods;
 //逾期弹窗当前费用标题
 @property (nonatomic, strong)NSString<Optional> *currentFeeTitle;
 //逾期弹窗规则标题
@@ -103,7 +105,8 @@
 @property (nonatomic, strong)NSString<Optional> *applicationId;
 //产品id
 @property (nonatomic, strong)NSString<Optional> *productId;
-
+//借款期数
+@property (nonatomic, strong)NSString<Optional> *periods;
 
 @end
 

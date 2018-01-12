@@ -86,8 +86,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         withdrawBtn.setTitle("提现", for: .normal)
         withdrawBtn.setTitleColor(UIColor.white, for: .normal)
         withdrawBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        withdrawBtn.backgroundColor = UI_MAIN_COLOR
-        withdrawBtn.layer.cornerRadius = 5.0
+        withdrawBtn.setBackgroundImage(UIImage(named:"applayBtnImage"), for: .normal)
         withdrawBtn.addTarget(self, action: #selector(withdrawBtnClick), for: .touchUpInside)
         tableView?.addSubview(withdrawBtn)
         withdrawBtn.snp.makeConstraints { (make) in
