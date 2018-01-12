@@ -114,6 +114,8 @@
             _headerView.accountLabel.text = model.mobilePhone;
             _headerView.nameLabel.text = model.gradeName;
             _h5_url_ = model.h5_url_;
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         
@@ -295,9 +297,6 @@
     switch (indexPath.row) {
         case 0:
         {
-//            FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
-//            [self.navigationController pushViewController:loanApplicationVC animated:true];
-
             MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
             [self.navigationController pushViewController:myMessageVC animated:true];
         }
@@ -305,10 +304,6 @@
         case 1:
         {
             
-//            FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
-//            [self.navigationController pushViewController:loanApplicationVC animated:true];
-//            UserDataAuthenticationListVCModules *userDataVC = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
-//            [self.navigationController pushViewController:userDataVC animated:YES];
             RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }
