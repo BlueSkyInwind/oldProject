@@ -124,10 +124,17 @@
 
 - (void)clicksecry
 {
-    AuthorizationViewController *authVC = [[AuthorizationViewController alloc] init];
-    authVC.cardNum = self.cardNum;
-    authVC.bankName = self.cardName;
-    [self.navigationController pushViewController:authVC animated:YES];
+    if([self.cardCode isEqualToString:@""] || self.cardCode == nil)
+    {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请选择银行卡类型"];
+        return;
+    }
+    if([self.cardNum isEqualToString:@""])
+    {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的卡号"];
+        return;
+    }
+    [self obtainTransferAuth:self.cardCode cardNo:self.cardNum];
 }
 
 - (IBAction)agreeClick:(UIButton *)sender {
@@ -257,7 +264,6 @@
     //    bankType.bankFlag = 100;
     bankType.delegate=self;
     bankType.cardTag = _cardFlag;
-
     bankType.bankArray = supportBankListArr;
     [self.navigationController pushViewController:bankType animated:YES];
 }
@@ -373,7 +379,6 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"SDK授权失败，请检查"];
         return;
     }
-    
     __unsafe_unretained EditCardsController * weakSelf = self;
     MGBankCardManager *cardManager = [[MGBankCardManager alloc] init];
     [cardManager setDebug:YES];
@@ -487,4 +492,23 @@
     return array;
     
 }
+
+-(void)obtainTransferAuth:(NSString *)cardBank cardNo:(NSString *)cardNo{
+    CommonViewModel * commonVM = [[CommonViewModel alloc]init];
+    [commonVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel *  baseResultM = returnValue;
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            NSDictionary * dic = (NSDictionary *)baseResultM.data;
+            FXDWebViewController * fxdwebVC = [[FXDWebViewController alloc]init];
+            fxdwebVC.urlStr =  [dic objectForKey:@"productProURL"];
+            [self.navigationController pushViewController:fxdwebVC animated:YES];
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [commonVM obtainTransferAuthProtocolType:EliteLoan typeCode:@"1" cardBankCode:cardBank cardNo:cardNo];
+
+}
+
 @end
