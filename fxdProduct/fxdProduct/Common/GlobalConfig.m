@@ -387,6 +387,9 @@ NSString * const    _creditLimitInfo_url        =    @"user/verify/amount";
 //常见问题
 NSString * const    _question_url               =    @"product/getCommonProblemApi";
 
+//用户提额
+NSString * const    _increaseAmount_url               =    @"increaseQuotaApply";
+
 
 #pragma mark - 合规接口
 

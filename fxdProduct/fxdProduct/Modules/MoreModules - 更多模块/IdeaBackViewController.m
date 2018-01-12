@@ -38,30 +38,30 @@
 - (IBAction)submitBtn:(id)sender {
     
     if (![self.foreTextview.text isEqualToString:@""] && ![self.foreTextview.text isEqualToString:@"请在此输入您的宝贵建议"]) {
-        if ([self.foreTextview.text length] >101) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入100字以内!"];
-        }else{
-            NSLog(@"%@",[FXD_Utility sharedUtility].userInfo.userMobilePhone);
-            
-            IdeaBackViewModel *ideaBackViewModel = [[IdeaBackViewModel alloc]init];
-            [ideaBackViewModel setBlockWithReturnBlock:^(id returnValue) {
-                BaseResultModel * baseRM = returnValue;
-                if ([baseRM.errCode isEqualToString:@"0"]) {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"谢谢您的反馈"];
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [self.navigationController popViewControllerAnimated:YES];
-                    });
-                } else {
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
-                }
-            } WithFaileBlock:^{
-                
-            }];
-            [ideaBackViewModel saveFeedBackContent:self.foreTextview.text];
-        }
-    } else {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写您宝贵的意见"];
+        return;
     }
+    
+    if ([self.foreTextview.text length] >101) {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入100字以内!"];
+        return;
+    }
+    
+    IdeaBackViewModel *ideaBackViewModel = [[IdeaBackViewModel alloc]init];
+    [ideaBackViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseRM = returnValue;
+        if ([baseRM.errCode isEqualToString:@"0"]) {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"谢谢您的反馈"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [ideaBackViewModel saveFeedBackContent:self.foreTextview.text];
 }
 
 //通过判断表层TextView的内容来实现底层TextView的显示于隐藏
@@ -71,12 +71,19 @@
         self.foreTextview.textColor=RGBColor(74.0, 74.0, 74.0, 1);
         self.foreTextview.font=[UIFont boldSystemFontOfSize:15];
     }
+    
+    if ([[FXD_Tool share] stringContainsEmoji:text] || [[FXD_Tool share] hasEmoji:text]) {
+        return NO;
+    }
+    
     if ([self.foreTextview.text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         return NO;
     }
+    
     return YES;
 }
+
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     if([self.foreTextview.text isEqualToString:@"请在此输入您的宝贵建议"])
@@ -90,7 +97,6 @@
     {
         self.foreTextview.text=@"请在此输入您的宝贵建议";
         self.foreTextview.textColor=RGBColor(214.0, 214.0, 214.0, 1);
-        
     }
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

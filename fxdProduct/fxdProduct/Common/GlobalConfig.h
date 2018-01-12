@@ -136,6 +136,8 @@ UIKIT_EXTERN NSString * const       _loginOutDeleteRegisterId_url;           //�
 UIKIT_EXTERN NSString * const       _getDrawLottery_url;                     //老客周末活动判断是否弹框刮奖
 UIKIT_EXTERN NSString * const       _ProductProtocol_url;                    //老客周末活动判断是否弹框刮奖
 UIKIT_EXTERN NSString * const       _creditLimitInfo_url;                    //额度页面信息获取
+UIKIT_EXTERN NSString * const       _increaseAmount_url;                    //用户提额接口
+
 
 
 
