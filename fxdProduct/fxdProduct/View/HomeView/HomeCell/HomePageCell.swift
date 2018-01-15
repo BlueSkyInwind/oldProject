@@ -31,10 +31,6 @@ import Masonry
     func questionDescBtnClick()
     //立即还款按钮
     func repayImmediatelyBtnClick(_ isSelected: Bool)
-    //银行自动转账授权书
-    func bankProtocolClick()
-    //三方借款协议
-    func loanProtocolClick()
     //协议点击
     func protocolNameClick(_ index:Int)
 }
@@ -1546,20 +1542,5 @@ extension HomePageCell{
             delegate?.withdrawMoneyImmediatelyBtnClick()
         }
     }
-    
-//    //银行自动转账授权书
-//
-//    @objc func bankProtocolClick(){
-//        if delegate != nil {
-//            delegate?.bankProtocolClick()
-//        }
-//    }
-//    //三方借款协议
-//
-//    @objc func loanProtocolClick(){
-//        if delegate != nil {
-//            delegate?.loanProtocolClick()
-//        }
-//    }
 }
 
