@@ -69,7 +69,6 @@
 }
 
 + (instancetype)defaultPopupView{
-    
     return [[ActivityHomePopView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];;
 }
 
