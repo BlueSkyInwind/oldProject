@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     self.view.backgroundColor = [UIColor whiteColor];
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     config.preferences = [[WKPreferences alloc] init];
@@ -40,12 +41,20 @@
     _webView.navigationDelegate = self;
     _webView.UIDelegate = self;
     _webView.scrollView.contentSize = self.view.bounds.size;
-    DLog(@"%@  --- %@",NSStringFromCGRect(_webView.frame),NSStringFromCGSize(_webView.scrollView.contentSize));
     [self.view addSubview:_webView];
     [self createProUI];
     [self addBackItem];
-    _webView.scrollView.showsVerticalScrollIndicator = false;
+    
+    DLog(@"%@  --- %@",NSStringFromCGRect(_webView.frame),NSStringFromCGSize(_webView.scrollView.contentSize))
     DLog(@"%@",_urlStr);
+    
+    if (@available(iOS 11.0, *)) {
+        self.webView.scrollView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+        self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    }else{
+        self.automaticallyAdjustsScrollViewInsets=NO;
+    }
+    _webView.scrollView.showsVerticalScrollIndicator = false;
     _urlStr = [_urlStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (_isZhima) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
@@ -54,17 +63,15 @@
         if([_urlStr containsString:@"wxact"]){
             _urlStr = [self assemblyUrl:_urlStr];
         }
-//        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+       // [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }
-
+    //webview添加KVO监听属性
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
     
-    
 }
-
 
 /**
  h5活动拼装url
@@ -112,6 +119,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
     if (object == _webView && [keyPath isEqualToString:@"estimatedProgress"]) {
@@ -138,6 +146,7 @@
     }
 }
 
+#pragma mark - 顶部进度UI
 -(void)createProUI
 {
     CGFloat progressBarHeight = 0.7f;
@@ -239,7 +248,6 @@
     }
 }
 
-
 #pragma mark -WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
@@ -285,8 +293,6 @@
             DLog(@"value: %@ error: %@", response, error);
         }];
     }
-    
-    
 }
 
 #pragma mark -
@@ -306,6 +312,14 @@
     DLog(@"inputPanel");
     completionHandler(@"");
 }
+-(WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
+    
+    if (!navigationAction.targetFrame.isMainFrame) {
+        [webView loadRequest:navigationAction.request];
+    }
+    return nil;
+}
+
 -(void)dealloc
 {
     [_webView removeObserver:self forKeyPath:@"estimatedProgress"];
@@ -387,16 +401,6 @@
     [progressView removeFromSuperview];
     [self deleteWebCache];
     [[JSAndOCInteraction sharedInteraction] removeWaitHubAnimationView];
-}
-
-
-
--(WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
-    
-    if (!navigationAction.targetFrame.isMainFrame) {
-        [webView loadRequest:navigationAction.request];
-    }
-    return nil;
 }
 
 /*

@@ -3,14 +3,14 @@
  #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0
 //h5.faxindai.com:8028
-NSString * const _main_url  =   @"https://api.faxindai.com/fxd-esb/esb/"; //生产
-NSString * const _agreement_url  =   @"https://api.faxindai.com/fxd-esb/esb/";
-NSString * const _ValidESB_url = @"https://api.faxindai.com/fxd-esb/";
+NSString * const _main_url  =   @"https://h5.faxindai.com/fxd-esb/esb/"; //生产
+NSString * const _agreement_url  =   @"https://h5.faxindai.com/fxd-esb/esb/";
+NSString * const _ValidESB_url = @"https://h5.faxindai.com/fxd-esb/";
 NSString * const _P2P_url = @"https://fintech.chinazyjr.com/p2p/"; //生产
-NSString * const _p2P_url = @"https://api.faxindai.com/fxd-esb/p2p/";
-NSString * const _H5_url    =   @"https://api.faxindai.com/fxd-h5/page/";
-NSString * const _main_new_url  =  @"https://api.faxindai.com/apigw/client/";
-NSString * const _mainTwo_new_url  =  @"http://api.faxindai.com/coregw/client/";
+NSString * const _p2P_url = @"https://h5.faxindai.com/fxd-esb/p2p/";
+NSString * const _H5_url    =   @"https://h5.faxindai.com/fxd-h5/page/";
+NSString * const _main_new_url  =  @"https://h5.faxindai.com/apigw/client/";
+NSString * const _mainTwo_new_url  =  @"http://h5.faxindai.com/coregw/client/";
 
 #elif FXD_Environment_Mode == 1
 
