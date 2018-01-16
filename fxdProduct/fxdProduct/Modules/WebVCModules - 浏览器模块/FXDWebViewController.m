@@ -50,9 +50,7 @@
     
     if (@available(iOS 11.0, *)) {
         self.webView.scrollView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
-        self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    }else{
-        self.automaticallyAdjustsScrollViewInsets=NO;
+        self.webView.scrollView.contentInset = UIEdgeInsetsMake(BarHeightNew, 0, 0, 0);
     }
     _webView.scrollView.showsVerticalScrollIndicator = false;
     _urlStr = [_urlStr stringByReplacingOccurrencesOfString:@" " withString:@""];
