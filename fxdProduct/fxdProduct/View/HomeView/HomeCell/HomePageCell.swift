@@ -543,7 +543,7 @@ extension HomePageCell {
         }
         
         let topLabel = UILabel()
-        topLabel.textColor = UI_MAIN_COLOR
+        topLabel.textColor = RedPacketBottomBtn_COLOR
         topLabel.text = homeProductListModel.drawInfo.label
         topLabel.font = UIFont.systemFont(ofSize: 17)
         topLabel.textAlignment = .center
@@ -556,7 +556,7 @@ extension HomePageCell {
         
         let quotaLabel = UILabel()
         quotaLabel.text = homeProductListModel.drawInfo.amount
-        quotaLabel.textColor = LOAN_QUOTA_COLOR
+        quotaLabel.textColor = UI_MAIN_COLOR
         quotaLabel.font = UIFont.systemFont(ofSize: 25)
         quotaLabel.textAlignment = .center
         bgView.addSubview(quotaLabel)
