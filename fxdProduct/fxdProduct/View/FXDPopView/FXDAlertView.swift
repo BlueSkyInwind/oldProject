@@ -103,7 +103,6 @@ class FXDAlertView: UIView {
         adaptOverdueViewHeightContent(contentAttri)
     }
     
-    
     func adaptOverdueViewHeightContent(_ contentAttri:NSAttributedString) {
         let height = contentAttri.boundingRect(with:CGSize.init(width: Alert_width - 30, height: UIScreen.main.bounds.size.height), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.RawValue(UInt8(NSStringDrawingOptions.usesLineFragmentOrigin.rawValue) | UInt8(NSStringDrawingOptions.usesFontLeading.rawValue))), context: nil).height
         let backHeight = height + header_Height + bottom_Height + 160
