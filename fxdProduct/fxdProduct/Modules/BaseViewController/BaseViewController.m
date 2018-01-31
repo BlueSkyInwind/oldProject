@@ -115,7 +115,7 @@
 //    DLog(@"%@------->disAppear",NSStringFromClass([self class]));
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
-
+ 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

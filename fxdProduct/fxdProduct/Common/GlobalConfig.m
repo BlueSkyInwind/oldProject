@@ -280,6 +280,7 @@ NSString * const    _customerContact_url        =    @"membership/customerAuth/s
 NSString * const     _saveUserContacts_jhtml        =   @"membership/saveUserContacts";
 
 //活体检测信息上传
+//membership/customerAuth/saveCustomerDetectDetail
 NSString * const    _detectInfo_url             =    @"membership/saveCustomerDetectInfo";
 
 //芝麻信用授权提交
