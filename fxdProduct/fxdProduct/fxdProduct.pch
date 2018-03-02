@@ -24,7 +24,6 @@
 #import "FXD_AlertViewCust.h"
 #import "OpenUDID.h"
 #import <ReactiveObjC/ReactiveObjC.h>
-//#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CheckUtils.h"
 #import "NSString+MD5Encrypt.h"
 #import "FXD_Utility.h"
@@ -54,6 +53,7 @@
 #import "CommonViewModel.h"
 #import <HHAlertView/HHAlertView.h>
 #import "FXD_MXVerifyManager.h"
+#import "FXD_LaunchConfiguration.h"
 
 #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0

@@ -72,7 +72,6 @@
         self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
         self.tableView.contentInset = UIEdgeInsetsMake(BarHeightNew - 64, 0, 0, 0);
     }else{
-
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
     self.navigationItem.title = @"发薪贷";
@@ -144,7 +143,6 @@
         make.top.equalTo(_messageBtn.mas_top).offset(-4);
         make.width.equalTo(@13);
         make.height.equalTo(@13);
-        
     }];
     
     _messageNumLabel = [[UILabel alloc]init];
@@ -237,7 +235,6 @@
  */
 - (void)homeQRCodePopups
 {
-    
     QRCodePopView *qrPopView = [QRCodePopView defaultQRPopView];
     [qrPopView layoutIfNeeded];
     qrPopView.parentVC = self;
@@ -269,7 +266,6 @@
     BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
     [vc presentViewController:nav animated:YES completion:nil];
 }
-
 
 #pragma mark -  定位服务迁移
 /**
@@ -389,12 +385,10 @@
         _sdView.imageURLStringsGroup = filesArr.copy;
         [_tableView reloadData];
         
-        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-        if (appDelegate.isShow) {
-            
+        if ([FXD_Utility sharedUtility].isActivityShow) {
             [self homeActivitiesPopups:_homeProductList.popList];
         }
-        if (appDelegate.isHomeChooseShow) {
+        if ([FXD_Utility sharedUtility].isHomeChooseShow) {
             [self homeEvaluationRedEnvelopeActivitiesPopups:_homeProductList];
         }
     } WithFaileBlock:^{
@@ -414,18 +408,24 @@
 - (void)homeActivitiesPopups:(PopListModel *)model
 {
     if ([model.isValid isEqualToString:@"1"]) {
-        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-        appDelegate.isShow = false;
-        _popView = [ActivityHomePopView defaultPopupView];
-        _popView.closeBtn.hidden = YES;
-        _popView.delegate = self;
-        [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.image]];
         _advImageUrl = model.toUrl;
         _advTapToUrl = model.toUrl;
-        _popView.parentVC = self;
-        [self lew_presentPopupView:_popView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
+        [FXD_Utility sharedUtility].isActivityShow = false;
+        __weak typeof (self) weakSelf = self;
+        [[FXD_AlertViewCust sharedHHAlertView] homeActivityPopLoadImageUrl:model.image ParentVC:self compleBlock:^(NSInteger index) {
+            if (index == 1) {
+                [weakSelf homeActivityPictureClick];
+            }
         }];
-        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(homeActivitiesPopupsClose) userInfo:nil repeats:true];
+        
+//        _popView = [ActivityHomePopView defaultPopupView];
+//        _popView.closeBtn.hidden = YES;
+//        _popView.delegate = self;
+//        [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.image]];
+//        _popView.parentVC = self;
+//        [self lew_presentPopupView:_popView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
+//        }];
+//        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(homeActivitiesPopupsClose) userInfo:nil repeats:true];
     }
 }
 
@@ -438,8 +438,7 @@
     
     if ([model.jumpBomb isEqualToString:@"1"]) {
        
-        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-        appDelegate.isHomeChooseShow = false;
+        [FXD_Utility sharedUtility].isHomeChooseShow = false;
         _popChooseView = [[HomeChoosePopView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h)];
         _popChooseView.displayLabel.text = _homeProductList.redCollarList.collarContent;
         [_popChooseView.cancelButton setTitle:_homeProductList.redCollarList.cancel forState:UIControlStateNormal];
@@ -468,13 +467,13 @@
         HomepageActivityImageDisplayModule *firstBorrowVC = [[HomepageActivityImageDisplayModule alloc] init];
         firstBorrowVC.url = _advImageUrl;
         [self.navigationController pushViewController:firstBorrowVC animated:YES];
-        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+//        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
     }
     if ([_advTapToUrl hasPrefix:@"http://"] || [_advTapToUrl hasPrefix:@"https://"]) {
         FXDWebViewController *webView = [[FXDWebViewController alloc] init];
         webView.urlStr = _advTapToUrl;
         [self.navigationController pushViewController:webView animated:true];
-        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+//        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
     }
 }
 
@@ -491,7 +490,6 @@
         _count = 0;
     }
 }
-
 
 #pragma mark - TableViewDelegate
 

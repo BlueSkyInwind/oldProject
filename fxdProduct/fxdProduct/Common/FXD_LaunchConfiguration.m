@@ -33,7 +33,6 @@
     [MobClick setLogEnabled:YES];
     
     AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];
-    
     // 2.设置网络状态改变后的处理
     [mgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         // 当网络状态改变了, 就会调用这个block
@@ -75,9 +74,6 @@
                 DLog(@"存储失败");
             }
         }
-        //        [Tool saveUserDefaul:nil Key:Fxd_JUID];
-        //        [Tool saveUserDefaul:nil Key:kLoginFlag];
-        //        [Tool saveUserDefaul:nil Key:UserName];
         [FXD_Utility sharedUtility].userInfo.juid = [FXD_Tool getContentWithKey:Fxd_JUID];
         [FXD_Utility sharedUtility].userInfo.tokenStr = [FXD_Tool getContentWithKey:Fxd_Token];
         [FXD_Utility sharedUtility].loginFlage = [[FXD_Tool getContentWithKey:kLoginFlag] integerValue];
@@ -92,6 +88,8 @@
     [commonVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * baseRM= returnValue;
         if ([baseRM.errCode isEqualToString:@"12"]) {
+            [FXD_Utility sharedUtility].userInfo.isUpdate = NO;
+
             [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:baseRM.friendErrMsg isForce:false compleBlock:^(NSInteger index) {
                 if (index == 1) {
                     [FXD_Utility sharedUtility].userInfo.isUpdate = NO;
@@ -99,6 +97,8 @@
                 }
             }];
         }else if([baseRM.errCode isEqualToString:@"13"]) {
+            [FXD_Utility sharedUtility].userInfo.isUpdate = YES;
+
             [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:baseRM.friendErrMsg isForce:true compleBlock:^(NSInteger index) {
                 if (index == 1) {
                     [FXD_Utility sharedUtility].userInfo.isUpdate = YES;

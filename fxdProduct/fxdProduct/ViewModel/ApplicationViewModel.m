@@ -34,6 +34,7 @@
                    platformCode:(NSString *)platformCode
                          baseId:(NSString *)baseId
                         loanFor:(NSString *)loanFor
+                    stagingType:(NSString *)stagingType
                         periods:(NSString *)periods
                      loanAmount:(NSString *)loanAmount{
     
@@ -44,6 +45,7 @@
     applicationM.periods= periods;
     applicationM.loanAmount= loanAmount;
     applicationM.platformCode= platformCode;
+    applicationM.stagingType = stagingType;
     NSDictionary * paramDic = [applicationM toDictionary];
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_new_CreateApplication_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {

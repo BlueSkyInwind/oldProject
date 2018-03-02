@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+//app弹窗类型
+typedef NS_ENUM(NSUInteger, PopViewType) {
+    VersionUpdate = 1,
+    Activities,
+    AbnormalLogin,
+    Other
+};
+
 @interface FXD_LaunchConfiguration : NSObject
 + (FXD_LaunchConfiguration *)shared;
 /**

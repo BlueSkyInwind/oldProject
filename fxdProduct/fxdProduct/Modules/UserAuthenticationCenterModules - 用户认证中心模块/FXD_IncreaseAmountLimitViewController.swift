@@ -301,7 +301,8 @@ extension FXD_IncreaseAmountLimitViewController {
     func userRequestImproveAmount(_ isFinish:@escaping (_ success:Bool) -> Void)  {
         let userDataVM = UserDataViewModel.init()
         userDataVM.setBlockWithReturn({ (returnValue) in
-            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+//            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            let baseResult = returnValue  as! BaseResultModel
             if baseResult.errCode == "0"{
                 isFinish(true)
             }else{

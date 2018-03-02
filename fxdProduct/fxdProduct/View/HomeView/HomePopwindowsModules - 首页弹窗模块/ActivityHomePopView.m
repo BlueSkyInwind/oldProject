@@ -61,11 +61,16 @@
 
 - (void)homeActivityPictureClick
 {
-    [self.delegate homeActivityPictureClick];
+    if (self.activityTap != nil) {
+        self.activityTap(1);
+    }
+//    [self.delegate homeActivityPictureClick];
 }
 
 - (IBAction)closeBtn:(UIButton *)sender {
-    [_parentVC lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+    if (self.activityTap != nil) {
+        self.activityTap(0);
+    }
 }
 
 + (instancetype)defaultPopupView{

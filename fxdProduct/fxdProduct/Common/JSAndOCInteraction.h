@@ -35,7 +35,6 @@
  */
 -(void)ClipboardOfCopy:(NSString *)copyStr VC:(UIViewController *)vc prompt:(NSString *)str;
 
-
 /**
  前往某个固定页面
  
@@ -69,8 +68,6 @@
  */
 -(void)waitHubAnimationView:(UIViewController *)vc;
 -(void)removeWaitHubAnimationView;
-
-
 
 /**
  获取app的登录信息

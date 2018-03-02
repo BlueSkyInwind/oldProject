@@ -18,7 +18,13 @@
 @property (nonatomic, assign) BOOL isObtainUserLocation;
 @property (nonatomic,strong) NSString *amount;
 @property (nonatomic,strong) NSString *operateType;
+@property (nonatomic,strong) NSMutableArray *popArray;    //全局弹窗缓存数组
+@property (nonatomic,assign) BOOL isActivityShow;  //活动弹窗标识
+@property (nonatomic,assign) BOOL isHomeChooseShow;  
+
 
 + (FXD_Utility *)sharedUtility;
+
++ (void)EmptyData;
 
 @end

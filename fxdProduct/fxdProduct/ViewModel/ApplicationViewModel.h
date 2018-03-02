@@ -22,6 +22,7 @@
                    platformCode:(NSString *)platformCode
                          baseId:(NSString *)baseId
                         loanFor:(NSString *)loanFor
+                    stagingType:(NSString *)stagingType
                         periods:(NSString *)periods
                      loanAmount:(NSString *)loanAmount;
 

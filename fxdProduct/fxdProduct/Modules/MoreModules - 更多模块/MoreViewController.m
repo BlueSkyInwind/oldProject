@@ -248,7 +248,7 @@
             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
             [self presentViewController:nav animated:YES completion:^{
                 [_alertView hide];
-                [FXD_UserInfoConfiguration EmptyData];
+                [FXD_Utility EmptyData];
             }];
         }else{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view.window message:baseVM.friendErrMsg];
@@ -262,6 +262,7 @@
     
     LoginViewModel * loginVM = [[LoginViewModel alloc]init];
     [loginVM deleteUserRegisterID];
+    
 }
 
 -(void)obtainCommonQuestion{
