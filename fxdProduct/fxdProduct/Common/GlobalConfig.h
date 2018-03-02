@@ -275,7 +275,6 @@ UIKIT_EXTERN NSString * const kTopView;
 //用户
 UIKIT_EXTERN NSString * const UserName;
 
-
 //通知
 UIKIT_EXTERN NSString * const  kAddMaterailNotification;
 

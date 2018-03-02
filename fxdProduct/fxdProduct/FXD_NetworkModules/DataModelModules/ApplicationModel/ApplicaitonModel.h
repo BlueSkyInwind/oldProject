@@ -13,6 +13,9 @@
 @end
 @protocol DiscountTicketDetailModel<NSObject>
 @end
+@protocol ReimbursementWayModel<NSObject>
+@end
+
 
 @interface ApplicaitonModel : JSONModel
 
@@ -22,6 +25,7 @@
 @property(nonatomic,strong)NSString<Optional> * periods;
 @property(nonatomic,strong)NSString<Optional> * platformCode;
 @property(nonatomic,strong)NSString<Optional> * productId;
+@property(nonatomic,strong)NSString<Optional> * stagingType;
 
 @end
 
@@ -47,11 +51,11 @@
 @property(nonatomic,strong)NSString<Optional> * example;
 @property(nonatomic,strong)NSString<Optional> * question;
 @property(nonatomic,strong)NSArray<DiscountTicketDetailModel,Optional> * voucher;
+@property(nonatomic,strong)NSArray<ReimbursementWayModel,Optional> * stagingTypeList;
 //计算模型结果
 @property(nonatomic,strong)NSString<Optional> * repaymentAmount;
 
 @end
-
 
 @interface LoanMoneyFor : JSONModel
 
@@ -59,6 +63,16 @@
 @property(nonatomic,strong)NSString<Optional> * desc_;
 
 @end
+
+@interface ReimbursementWayModel: JSONModel
+
+@property(nonatomic,strong)NSString<Optional> * stagingType;
+@property(nonatomic,strong)NSString<Optional> * typeText;
+@property(nonatomic,strong)NSArray<Optional> * validStagingList;
+
+@end
+
+
 
 @interface ApplicaitonCalculateParamModel : JSONModel
 

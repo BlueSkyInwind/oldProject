@@ -22,8 +22,8 @@
             [self faileBlock];
         }
     }];
-    
 }
+
 -(void)obtainCommonProblems{
     [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_question_url] isNeedNetStatus:true isNeedWait:true parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {

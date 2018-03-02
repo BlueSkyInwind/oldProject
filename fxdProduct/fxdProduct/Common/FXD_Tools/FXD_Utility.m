@@ -7,6 +7,9 @@
 //
 
 #import "FXD_Utility.h"
+#import "DataWriteAndRead.h"
+#import "AppDelegate.h"
+
 
 @implementation FXD_Utility
 
@@ -17,6 +20,9 @@
     self = [super init];
     if (self) {
         self.userInfo = [[FXD_UserInfoConfiguration alloc] init];
+        self.popArray = [NSMutableArray array];
+        self.isActivityShow = true;
+        self.isHomeChooseShow = true;
     }
     return self;
 }
@@ -31,6 +37,24 @@
     return sharedUtilityInstance;
 }
 
-
++ (void)EmptyData
+{
+    [FXD_Tool saveUserDefaul:nil Key:Fxd_JUID];
+    [FXD_Tool saveUserDefaul:nil Key:kLoginFlag];
+    [FXD_Tool saveUserDefaul:nil Key:Fxd_Token];
+    [FXD_Tool saveUserDefaul:nil Key:UserName];
+    [FXD_Tool saveUserDefaul:nil Key:kInvitationCode];
+    [FXD_Utility sharedUtility].loginFlage = 0;
+    [FXD_Utility sharedUtility].userInfo.juid = @"";
+    [FXD_Utility sharedUtility].userInfo.tokenStr = @"";
+    [FXD_Utility sharedUtility].userInfo.userMobilePhone = @"";
+    [FXD_Utility sharedUtility].userInfo.account_id = @"";
+    [FXD_Utility sharedUtility].userInfo.realName = @"";
+    [FXD_Utility sharedUtility].userInfo.pruductId = @"";
+    [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
+    [FXD_Utility sharedUtility].isActivityShow = true;
+    [FXD_Utility sharedUtility].isHomeChooseShow = true;
+    
+}
 
 @end

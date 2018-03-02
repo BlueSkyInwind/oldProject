@@ -73,10 +73,8 @@
     _socialSecurityStatus = @"3";
     _subTitleArr = @[@"请完善您的身份信息",@"请完善您的个人信息",@"请完成三方认证",@"请完善您的收款信息"];
     if (_isCash) {
-        
         [self addBackItem];
     }else{
-        
         [self addBackItemRoot];
     }
     
@@ -627,7 +625,6 @@
         [self TheSocialSecurityupload:taskId];
     }
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

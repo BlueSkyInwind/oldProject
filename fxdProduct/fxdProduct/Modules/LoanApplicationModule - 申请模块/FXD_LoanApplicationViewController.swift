@@ -31,9 +31,10 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     var applicationBtn:UIButton?
     var choosePV:FXD_ApplicationChoosePickerView?
     //MRAK:数据
-    var  titleArrs = ["选择额度（元）","临时提额劵","分期期数","借款用途"]
+    var  titleArrs = ["选择额度（元）","临时提额劵","还款方式","借款期数","借款用途"]
     var contentArrs:[String]?
     var periodArrs:[String]? = []
+    var periodWayArrs:[String]? = []
     var loanForArrs:[String]? =  []
     var chooseDiscountTDM:DiscountTicketDetailModel?
     var applicaitonViewIM:ApplicaitonViewInfoModel?
@@ -53,7 +54,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         self.addBackItem()
         self.view.backgroundColor = LOAN_APPLICATION_COLOR
         chooseType = .Application_Amount
-        contentArrs = ["2500","+200","12","点击选择"]
+        contentArrs = ["2500","+200","按周还款","4周","点击选择"]
         obtainApplicationInfo(EliteLoan) {[weak self] (isSuccess) in
             self?.dataInitialize()
             self?.configureView()
@@ -65,12 +66,12 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         let maxAmount = self.applicaitonViewIM?.maxAmount != nil ?  self.applicaitonViewIM?.maxAmount : ""
         let defaultPeriod = self.applicaitonViewIM?.minPeriod != nil ?  self.applicaitonViewIM?.minPeriod : ""
         if (self.isDisplayDiscount!) {
-            self.titleArrs = ["选择额度（元）","临时提额劵","分期期数","借款用途"]
+            self.titleArrs = ["选择额度（元）","临时提额劵","还款方式","借款期数","借款用途"]
             self.chooseDiscountTDM = ((self.applicaitonViewIM?.voucher! as! NSArray)[0] as! DiscountTicketDetailModel)
             let discountAmount = "\(self.chooseDiscountTDM?.total_amount ?? "")"
             self.contentArrs = [maxAmount!,discountAmount,defaultPeriod!,"点击选择"]
         }else{
-            self.titleArrs = ["选择额度（元）","分期期数","借款用途"]
+            self.titleArrs = ["选择额度（元）","还款方式","借款期数","借款用途"]
             self.contentArrs = [maxAmount!,defaultPeriod!,"点击选择"]
         }
     }
@@ -136,9 +137,9 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         }) {
         }
         if isDisplayDiscount! {
-            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: chooseDiscountTDM?.base_id, loanFor: loanForCode, periods: contentArrs![2], loanAmount: contentArrs![0])
+            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: chooseDiscountTDM?.base_id, loanFor: loanForCode, stagingType: "", periods: contentArrs![2], loanAmount: contentArrs![0])
         }else{
-            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: nil, loanFor: loanForCode, periods: contentArrs![1], loanAmount: contentArrs![0])
+            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: nil, loanFor: loanForCode, stagingType: "", periods: contentArrs![1], loanAmount: contentArrs![0])
         }
     }
     
@@ -317,7 +318,6 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             break
         default: break
         }
-        
         reqSelectedCalculateInfo()
         self.tableView?.reloadData()
         choosePV = nil

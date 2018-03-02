@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "ActivityHomePopView.h"
 
 typedef void (^ClickBlock)(NSInteger index);
 
@@ -18,6 +19,7 @@ typedef void (^ClickBlock)(NSInteger index);
 + (FXD_AlertViewCust *)sharedHHAlertView;
 
 -(void)showAppVersionUpdate:(NSString *)content isForce:(BOOL)isForce compleBlock:(ClickBlock)clickIndexBlock;
+-(void)homeActivityPopLoadImageUrl:(NSString *)urlStr ParentVC:(UIViewController*)vc  compleBlock:(ClickBlock)clickIndexBlock;
 
 -(void)showFXDAlertViewTitle:(NSString *)title
                      content:(NSString *)content

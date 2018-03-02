@@ -47,6 +47,12 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     return YES;
 }
 
+-(BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler{
+    
+    return YES;
+}
+
+
 #pragma mark - 启动app
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -74,17 +80,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
         [self.window.rootViewController presentViewController:alertControl animated:YES completion:nil];
     }
     
-    //判断屏幕尺寸适配
-    AppDelegate *myDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    myDelegate.isShow = true;
-    myDelegate.isHomeChooseShow = true;
-
-    if(_k_h > 480){
-        myDelegate.autoSizeScaleX = _k_w/320;
-        myDelegate.autoSizeScaleY = _k_h/568;
-    }
-    
-//    [self createFMDB:launchOptions];
     [self initJPush:launchOptions];
 
     BOOL isFirst = [LunchVCModules canShowNewFeature];
@@ -92,7 +87,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     if (isFirst) {
         self.window.rootViewController = [LunchVCModules newLunchVCWithModels:@[@"guide_1",@"guide_2",@"guide_3"] enterBlock:^{
             [self enter];
-            [FXD_UserInfoConfiguration EmptyData];
+            [FXD_Utility EmptyData];
         }];
     } else {
         [self enter];
@@ -185,9 +180,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    
-    AppDelegate *myDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    myDelegate.isShow = false;
+
     [[BSFingerSDK sharedInstance] cancelAll];
 }
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {

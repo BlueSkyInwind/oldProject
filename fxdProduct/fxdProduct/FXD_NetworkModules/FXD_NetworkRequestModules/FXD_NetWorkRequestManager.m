@@ -162,7 +162,7 @@
                     [vc.navigationController popToRootViewControllerAnimated:YES];
                     [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil  content:[resultDic objectForKey:@"friendErrMsg"] attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                         if (index == 1) {
-                            [FXD_UserInfoConfiguration EmptyData];
+                            [FXD_Utility EmptyData];
                             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
@@ -282,7 +282,7 @@
                 if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {
                     [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil  content:[responseObject objectForKey:@"msg"] attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                         if (index == 1) {
-                            [FXD_UserInfoConfiguration EmptyData];
+                            [FXD_Utility EmptyData];
                             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
@@ -366,7 +366,7 @@
                     [vc.navigationController popToRootViewControllerAnimated:YES];
                     [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:[responseObject objectForKey:@"msg"] attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:nil sureTitle:@"确定" compleBlock:^(NSInteger index) {
                         if (index == 1) {
-                            [FXD_UserInfoConfiguration EmptyData];
+                            [FXD_Utility EmptyData];
                             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
                             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{

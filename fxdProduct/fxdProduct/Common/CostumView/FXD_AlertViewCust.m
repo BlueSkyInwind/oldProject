@@ -7,12 +7,15 @@
 //
 
 #import "FXD_AlertViewCust.h"
+#import "LewPopupViewController.h"
 
 @interface FXD_AlertViewCust (){
     
 }
+
 @property (nonatomic,strong) FXD_VersionUpdatepop * versionUpdate;
 @property (nonatomic,strong) FXDAlertView * fxdAlertView;
+@property (nonatomic,strong) ActivityHomePopView * popView;
 
 @end
 
@@ -28,6 +31,50 @@
     return sharedHHAlertInstance;
 }
 
+-(void)popOverCenter:(PopViewType)type info:(id)info{
+    
+    id result = info;
+    PopViewType popType = type;
+    
+//    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:info,[NSNumber numberWithInteger:type], nil];
+//    [[FXD_Utility sharedUtility].popArray addObject:dic];
+//    NSDictionary * resultDic = [FXD_Utility sharedUtility].popArray.firstObject;
+//    NSNumber * index = resultDic.allKeys.firstObject;
+//    popType = index.integerValue;
+//    result = [resultDic objectForKey:index];
+    
+    if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
+        if (self.fxdAlertView != nil) {
+            [self.fxdAlertView dismiss];
+            self.fxdAlertView = nil;
+        }
+        if (self.popView != nil) {
+//            [self.popView lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+            self.popView = nil;
+        }
+
+    }
+        
+    switch (popType) {
+        case VersionUpdate:{
+            NSString * msg = result;
+            [self showAppVersionUpdate:msg isForce:[FXD_Utility sharedUtility].userInfo.isUpdate compleBlock:^(NSInteger index) {
+                if (index == 1) {
+                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
+                }
+            }];
+        }
+            break;
+        case Activities:{
+            
+        }
+            break;
+
+        default:
+            break;
+    }
+}
+
 -(void)showAppVersionUpdate:(NSString *)content isForce:(BOOL)isForce compleBlock:(ClickBlock)clickIndexBlock{
     if (self.versionUpdate) {
         return;
@@ -40,6 +87,32 @@
         [weakSelf.versionUpdate dismiss];
        weakSelf.versionUpdate = nil;
     };
+}
+
+-(void)homeActivityPopLoadImageUrl:(NSString *)urlStr ParentVC:(UIViewController*)vc  compleBlock:(ClickBlock)clickIndexBlock{
+    if (self.popView) {
+        return;
+    }
+    self.popView = [ActivityHomePopView defaultPopupView];
+    self.popView.closeBtn.hidden = YES;
+    [self.popView.imageView sd_setImageWithURL:[NSURL URLWithString:urlStr]];
+    self.popView.parentVC = vc;
+    __weak typeof (self) weakSelf = self;
+    self.popView.activityTap = ^(NSInteger index) {
+        clickIndexBlock(index);
+        [vc lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
+        weakSelf.popView = nil;
+    };
+    [vc lew_presentPopupView:_popView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
+    }];
+    [self performSelector:@selector(homeActivitiesPopupsClose) withObject:self afterDelay:2];
+}
+/**
+ 首页活动弹窗关闭
+ */
+- (void)homeActivitiesPopupsClose
+{
+    self.popView.closeBtn.hidden = false;
 }
 
 -(void)showFXDAlertViewTitle:(NSString *)title

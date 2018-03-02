@@ -28,7 +28,10 @@
 
 
 @end
+@implementation ReimbursementWayModel
 
+
+@end
 
 @implementation ApplicaitonCalculateParamModel
 

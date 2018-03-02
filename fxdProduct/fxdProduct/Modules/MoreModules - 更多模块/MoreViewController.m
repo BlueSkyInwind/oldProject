@@ -52,7 +52,7 @@
 
     self.title = @"设置";
     [self addBackItem];
-    imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09",@"changeP_icon"];
+  imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09",@"changeP_icon"];
     titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"给个好评",@"客服热线",@"修改密码"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [_MyTabView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
@@ -112,7 +112,8 @@
     NextViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (indexPath.section == 0) {
         
-        cell.imgView.image=[[UIImage imageNamed:imgAry[indexPath.row]] imageWithTintColor:UI_MAIN_COLOR];      cell.lblTitle.text=titleAry[indexPath.row];
+        cell.imgView.image=[[UIImage imageNamed:imgAry[indexPath.row]] imageWithTintColor:UI_MAIN_COLOR];
+        cell.lblTitle.text=titleAry[indexPath.row];
         if (indexPath.row==imgAry.count-1) {
             cell.lineView.hidden=YES;
         }
@@ -247,7 +248,7 @@
             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
             [self presentViewController:nav animated:YES completion:^{
                 [_alertView hide];
-                [FXD_UserInfoConfiguration EmptyData];
+                [FXD_Utility EmptyData];
             }];
         }else{
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view.window message:baseVM.friendErrMsg];
@@ -261,6 +262,7 @@
     
     LoginViewModel * loginVM = [[LoginViewModel alloc]init];
     [loginVM deleteUserRegisterID];
+    
 }
 
 -(void)obtainCommonQuestion{
