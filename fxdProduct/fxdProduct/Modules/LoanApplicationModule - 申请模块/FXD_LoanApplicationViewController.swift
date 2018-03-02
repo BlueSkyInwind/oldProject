@@ -14,6 +14,7 @@ let Application_displayCell_height:CGFloat = 60
 enum ApplicationChooseType {
     case Application_Amount
     case Application_Discount
+    case Application_StagingType
     case Application_Period
     case Application_LoanFor
 }
@@ -39,6 +40,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     var chooseDiscountTDM:DiscountTicketDetailModel?
     var applicaitonViewIM:ApplicaitonViewInfoModel?
     var loanForCode:String? = ""
+    var periodStagingType:String? = ""
     var actualAmount:String?
     var repaymentAmount:String?
     //MRAK:状态
@@ -64,15 +66,19 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     /// 页面数据初始化
     func dataInitialize()  {
         let maxAmount = self.applicaitonViewIM?.maxAmount != nil ?  self.applicaitonViewIM?.maxAmount : ""
-        let defaultPeriod = self.applicaitonViewIM?.minPeriod != nil ?  self.applicaitonViewIM?.minPeriod : ""
+        let reimbursementWay = self.applicaitonViewIM?.stagingTypeList?.first as! ReimbursementWayModel
+        periodArrs = reimbursementWay.validStagingList as! [String]
+        periodStagingType = reimbursementWay.stagingType
+        let defaultPeriod = reimbursementWay.validStagingList.first as! String
+        let defaultTypeText = reimbursementWay.typeText != nil ?  reimbursementWay.typeText :  ""
         if (self.isDisplayDiscount!) {
             self.titleArrs = ["选择额度（元）","临时提额劵","还款方式","借款期数","借款用途"]
             self.chooseDiscountTDM = ((self.applicaitonViewIM?.voucher! as! NSArray)[0] as! DiscountTicketDetailModel)
             let discountAmount = "\(self.chooseDiscountTDM?.total_amount ?? "")"
-            self.contentArrs = [maxAmount!,discountAmount,defaultPeriod!,"点击选择"]
+            self.contentArrs = [maxAmount!,discountAmount,defaultTypeText!,defaultPeriod,"点击选择"]
         }else{
             self.titleArrs = ["选择额度（元）","还款方式","借款期数","借款用途"]
-            self.contentArrs = [maxAmount!,defaultPeriod!,"点击选择"]
+            self.contentArrs = [maxAmount!,defaultTypeText!,defaultPeriod,"点击选择"]
         }
     }
     
@@ -181,23 +187,25 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             if isDisplayDiscount! && indexPath.row == 1 {
                 applicationCell?.contentLabel?.text = "+￥" + "\(contentArrs?[indexPath.row] ?? "")"
             }
-            
             tableViewCell = applicationCell
         }else if indexPath.section == 1{
+            
             displayCell = tableView.dequeueReusableCell(withIdentifier:"FXD_LoanApplicationDisplayTableViewCell") as? FXD_LoanApplicationDisplayTableViewCell
             if displayCell == nil {
                 displayCell = FXD_LoanApplicationDisplayTableViewCell.init(style: .default, reuseIdentifier: "FXD_LoanApplicationDisplayTableViewCell")
             }
-            
             displayCell?.explainButtonClick = {
-                
                 FXD_AlertViewCust.sharedHHAlertView().showFXDAlertViewTitle(self.applicaitonViewIM?.question, content: (self.applicaitonViewIM?.answer)! + "\n" + (self.applicaitonViewIM?.example)!, attributeDic: nil, textAlignment:NSTextAlignment.left, cancelTitle: nil, sureTitle: "我知道了") { (index) in
                 }
             }
             
             displayCell?.amountLabel?.text = actualAmount == nil ? "": actualAmount
             displayCell?.everyAmountLabel?.text = repaymentAmount == nil ? "": repaymentAmount
-            displayCell?.dateLabel?.text =  applicaitonViewIM?.period == nil ? "": (applicaitonViewIM?.period)!
+            if isDisplayDiscount!{
+                displayCell?.dateLabel?.text =  contentArrs?[3]
+            }else{
+                displayCell?.dateLabel?.text =  contentArrs?[2]
+            }
             tableViewCell = displayCell
         }
         return tableViewCell!
@@ -215,14 +223,23 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             break
         case 1:
             if !isDisplayDiscount! {
-                chooseType = .Application_Period
-                addChoosePickerView(periodArrs!)
+                chooseType = .Application_StagingType
+                addChoosePickerView(periodWayArrs!)
                 break
             }
             chooseType = .Application_Discount
             showChooseAmountView()
             break
         case 2:
+            if !isDisplayDiscount! {
+                chooseType = .Application_Period
+                addChoosePickerView(periodArrs!)
+                break
+            }
+            chooseType = .Application_StagingType
+            addChoosePickerView(periodWayArrs!)
+            break
+        case 3:
             if !isDisplayDiscount! {
                 chooseType = .Application_LoanFor
                 addChoosePickerView(loanForArrs!)
@@ -231,7 +248,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             chooseType = .Application_Period
             addChoosePickerView(periodArrs!)
             break
-        case 3:
+        case 4:
             chooseType = .Application_LoanFor
             addChoosePickerView(loanForArrs!)
             break
@@ -300,21 +317,33 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         case .Application_Amount?:
             contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 0, length: 1))!, with: [content])
             break
-        case .Application_Period?:
+        case .Application_StagingType?:
+            let reimbursementWay = self.applicaitonViewIM?.stagingTypeList[row] as! ReimbursementWayModel
+            periodStagingType = reimbursementWay.stagingType
+            periodArrs = (reimbursementWay.validStagingList as! [String])
             if !isDisplayDiscount! {
                 contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 1, length: 1))!, with: [content])
+                contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 2, length: 1))!, with: [(periodArrs?.first)!])
                 break
             }
             contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 2, length: 1))!, with: [content])
+            contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 3, length: 1))!, with: [(periodArrs?.first)!])
             break
-        case .Application_LoanFor?:
-            let loanFors = self.applicaitonViewIM?.loanFor[0] as! LoanMoneyFor
-            loanForCode = loanFors.code_
+        case .Application_Period?:
             if !isDisplayDiscount! {
                 contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 2, length: 1))!, with: [content])
                 break
             }
             contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 3, length: 1))!, with: [content])
+            break
+        case .Application_LoanFor?:
+            let loanFors = self.applicaitonViewIM?.loanFor[row] as! LoanMoneyFor
+            loanForCode = loanFors.code_
+            if !isDisplayDiscount! {
+                contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 3, length: 1))!, with: [content])
+                break
+            }
+            contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 4, length: 1))!, with: [content])
             break
         default: break
         }
@@ -348,11 +377,11 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     /// 选择后请求信息
     func reqSelectedCalculateInfo()  {
         if isDisplayDiscount! {
-            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![2], productId: EliteLoan, voucherAmount: contentArrs![1]) { (isSuccess) in
+            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], stagingType: periodStagingType!, periods: contentArrs![3], productId: EliteLoan, voucherAmount: contentArrs![1]) { (isSuccess) in
                 self.tableView?.reloadData()
             }
         }else{
-            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], periods: contentArrs![1], productId: EliteLoan, voucherAmount: "0") { (isSuccess) in
+            obtainSelectedCalculateInfo(loanAmount: contentArrs![0], stagingType: periodStagingType!, periods: contentArrs![2], productId: EliteLoan, voucherAmount: "0") { (isSuccess) in
                 self.tableView?.reloadData()
             }
         }
@@ -379,10 +408,11 @@ extension FXD_LoanApplicationViewController {
                 self.applicaitonViewIM = applicaitonViewInfoM
                 self.actualAmount = applicaitonViewInfoM.actualAmount
                 self.repaymentAmount = applicaitonViewInfoM.repayAmount
-                if self.applicaitonViewIM?.voucher.count != 0 && self.applicaitonViewIM?.voucher != nil{
+                if  self.applicaitonViewIM?.voucher != nil && self.applicaitonViewIM?.voucher.count != 0{
                     self.isDisplayDiscount = true
                 }
-                self.getPeriodArr(minStr: (self.applicaitonViewIM?.minPeriod)!, maxStr: (self.applicaitonViewIM?.maxPeriod)!)
+                self.getperiodWayArr()
+//                self.getPeriodArr(minStr: (self.applicaitonViewIM?.minPeriod)!, maxStr: (self.applicaitonViewIM?.maxPeriod)!)
                 self.getLoanForArr()
                 success(true)
             }else{
@@ -410,8 +440,15 @@ extension FXD_LoanApplicationViewController {
             loanForArrs?.append(loanFors.desc_)
         }
     }
+    /// 还款方式数组
+    func getperiodWayArr() {
+        for dic in (self.applicaitonViewIM?.stagingTypeList)! {
+            let periodWay = dic as! ReimbursementWayModel
+            periodWayArrs?.append(periodWay.typeText)
+        }
+    }
     
-    func obtainSelectedCalculateInfo(loanAmount:String, periods: String, productId: String, voucherAmount: String,_ success:@escaping ((_ isSuccess:Bool) -> Void))  {
+    func obtainSelectedCalculateInfo(loanAmount:String, stagingType:String, periods: String, productId: String, voucherAmount: String,_ success:@escaping ((_ isSuccess:Bool) -> Void))  {
         var discountAmount = voucherAmount
         if voucherAmount.contains("元") {
            let index = discountAmount.index(voucherAmount.endIndex, offsetBy: -1)
@@ -432,7 +469,7 @@ extension FXD_LoanApplicationViewController {
         }) {
             success(false)
         }
-        applicationVM.obtainapplicationInfoCalculate(loanAmount, periods: periods, productId: productId, voucherAmount: discountAmount)
+        applicationVM.obtainapplicationInfoCalculate(loanAmount, stagingType: stagingType, periods: periods, productId: productId, voucherAmount: discountAmount)
     }
 }
 

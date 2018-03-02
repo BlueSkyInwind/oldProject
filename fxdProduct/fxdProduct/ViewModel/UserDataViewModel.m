@@ -211,7 +211,7 @@
     
     NSDictionary * paramDic = [userDataMeatureP toDictionary];
     
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserDataCertification_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserDataCertification_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
@@ -220,6 +220,7 @@
             self.faileBlock();
         }
     }];
+    
 }
 
 -(void)UserDataCertificationResult{
