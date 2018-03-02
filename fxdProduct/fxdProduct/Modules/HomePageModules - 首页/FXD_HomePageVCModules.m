@@ -560,21 +560,36 @@
     }
 }
 
+
+#pragma mark -  HomePageCellDelegate
+
+
+/**
+ 帮助中心
+ */
 -(void)helpBtnClick{
-    NSLog(@"点击帮助中心");
+
     FXDWebViewController *webView = [[FXDWebViewController alloc] init];
     webView.urlStr = _homeProductList.qaUrl;
     [self.navigationController pushViewController:webView animated:true];
 }
 
+/**
+ 量子互助
+ */
+
 -(void)daoliuBtnClick{
-    NSLog(@"量子互助");
+
     FXDWebViewController *webView = [[FXDWebViewController alloc] init];
     webView.urlStr = _liangzihuzhu_url;
     [self.navigationController pushViewController:webView animated:true];
     
 }
 
+
+/**
+ 提款
+ */
 -(void)withdrawMoneyImmediatelyBtnClick{
     
     if ([_homeProductList.flag isEqualToString:@"15"]) {
@@ -587,13 +602,17 @@
     }
 }
 
+
+/**
+ 我要借款
+ */
 -(void)loanBtnClick{
     
-    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"1"]) {
-        
+    //isComplete  基础资料是否完整
+    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"0"]) {
+
         FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
         loanApplicationVC.productId = _homeProductList.productId;
-//        loanApplicationVC.productId = _homeProductList.drawInfo.productId;
         [self.navigationController pushViewController:loanApplicationVC animated:true];
     }else{
         
@@ -613,13 +632,26 @@
     }
 }
 
+
+/**
+ 第三方借款
+
+ @param productId 产品id
+ @param isOverLimit
+ @param amount 产品额度
+ @param Path 第三方产品path
+ */
 -(void)productListClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit amount:(NSString *)amount Path:(NSString *)Path{
-    NSLog(@"===%@,===%@,===%@,===%@==",productId,isOverLimit,amount,Path);
+    
     FXDWebViewController *webView = [[FXDWebViewController alloc]init];
     webView.urlStr = Path;
     [self.navigationController pushViewController:webView animated:true];
 }
 
+
+/**
+ 更多按钮
+ */
 -(void)moreBtnClick{
     [self pushMoreProductPlatform];
 }
@@ -644,33 +676,48 @@
     [homeVM statisticsDiversionPro:nil];
 }
 
+
+
+/**
+ 帮助图标按钮
+ */
 -(void)questionDescBtnClick{
-    NSLog(@"帮助图标按钮");
+   
     [self OverdueInfoPopView];
 }
 
+
+/**
+ 立即还款
+
+ @param isSelected 协议勾选框
+ */
 -(void)repayImmediatelyBtnClick:(BOOL)isSelected{
     if (!isSelected) {
         
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
         [self.navigationController pushViewController:controller animated:true];
-        NSLog(@"立即还款");
+        
     }else{
         
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请勾选协议"];
-        NSLog(@"勾选框");
+      
     }
 }
 
+
+/**
+ 立即借款
+
+ @param money 借款额度
+ @param time 借款周期时间
+ */
 -(void)applyImmediatelyBtnClick:(NSString *)money :(NSString *)time{
     UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
     [self.navigationController pushViewController:controller animated:true];
 }
 
-
-/**
- 逾期弹窗
- */
+#pragma mark -  逾期弹窗
 -(void)OverdueInfoPopView{
     
     FeeTextModel *firstModel = _homeProductList.overdueInfo.feeText[0];
@@ -689,6 +736,7 @@
     }];
 }
 
+#pragma mark -  还款协议点击事件
 //还款协议点击事件
 -(void)protocolNameClick:(NSInteger)index{
     

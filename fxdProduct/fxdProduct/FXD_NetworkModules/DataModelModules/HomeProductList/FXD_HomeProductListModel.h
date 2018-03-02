@@ -172,6 +172,8 @@
 @property(nonatomic,strong)TestFailInfoModel<Optional> * testFailInfo;
 //帮助中心url
 @property (nonatomic, strong)NSString<Optional> *qaUrl;
+//还款方式
+@property (nonatomic, strong)NSString<Optional> *stagingType;
 
 @end
 
