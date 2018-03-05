@@ -608,26 +608,21 @@
  */
 -(void)loanBtnClick{
     
-    
     //isComplete  基础资料是否完整
     if ([_homeProductList.drawInfo.isComplete isEqualToString:@"0"]) {
-        
+
         FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
         loanApplicationVC.productId = _homeProductList.productId;
         [self.navigationController pushViewController:loanApplicationVC animated:true];
     }else{
         
         NSMutableString *content = [[NSMutableString alloc]initWithCapacity:100] ;
-        
         for (int i = 0; i<_homeProductList.drawInfo.tipsContent.count; i++) {
-            
             [content appendString:_homeProductList.drawInfo.tipsContent[i]];
             if (i != _homeProductList.drawInfo.tipsContent.count-1) {
-                
                 [content appendString:@"\n"];
             }
         }
-
         [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:_homeProductList.drawInfo.tipsTitle content:content attributeDic:nil TextAlignment:NSTextAlignmentLeft cancelTitle:@"取消" sureTitle:@"前去更新" compleBlock:^(NSInteger index) {
             if (index == 1) {
                 UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]init];
@@ -635,7 +630,6 @@
             }
         }];
     }
-    
 }
 
 

@@ -72,14 +72,14 @@
 
 @end
 
-
-
 @interface ApplicaitonCalculateParamModel : JSONModel
 
 @property(nonatomic,strong)NSString<Optional> * loanAmount;
 @property(nonatomic,strong)NSString<Optional> * periods;
 @property(nonatomic,strong)NSString<Optional> * productId;
 @property(nonatomic,strong)NSString<Optional> * voucherAmount;
+@property(nonatomic,strong)NSString<Optional> * stagingType;
+
 
 
 @end

@@ -74,9 +74,10 @@
  申请也信息计算
 
  @param loanAmount 金额
+ @param stagingType 还款方式
  @param periods 期数
  @param productId 产品id
  @param voucherAmount 提额金额
  */
--(void)obtainapplicationInfoCalculate:(NSString *)loanAmount periods:(NSString *)periods productId:(NSString *)productId voucherAmount:(NSString *)voucherAmount;
+-(void)obtainapplicationInfoCalculate:(NSString *)loanAmount stagingType:(NSString *)stagingType periods:(NSString *)periods productId:(NSString *)productId voucherAmount:(NSString *)voucherAmount;
 @end
