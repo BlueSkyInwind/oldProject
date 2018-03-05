@@ -266,12 +266,6 @@ extension HomePageCell {
             make.height.equalTo(20)
         }
         
-        if UI_IS_IPONE6 {
-            applayBtn.snp.updateConstraints({ (make) in
-                make.top.equalTo(timeRightLabel.snp.bottom).offset(20)
-            })
-        }
-        
         if UI_IS_IPONE5 {
             defaultMoneyLabel?.snp.updateConstraints({ (make) in
                 make.top.equalTo(self).offset(9)
@@ -332,7 +326,7 @@ extension HomePageCell {
                 make.top.equalTo(sliderTime.snp.bottom).offset(0)
             })
             applayBtn.snp.updateConstraints({ (make) in
-                make.top.equalTo(timeRightLabel.snp.bottom).offset(20)
+                make.top.equalTo(timeRightLabel.snp.bottom).offset(40)
             })
             
             helpBtn.snp.updateConstraints({ (make) in

@@ -163,7 +163,7 @@
 //逾期信息
 @property(nonatomic,strong)OverdueInfoModel<Optional> * overdueInfo;
 //弹窗广告列表
-@property(nonatomic,strong)PopListModel<Optional> * popList;
+@property(nonatomic,strong)NSArray<PopListModel,Optional> * popList;
 //评测领红包活动内容
 @property(nonatomic,strong)RedCollarListModel<Optional> * redCollarList;
 //正常还款信息

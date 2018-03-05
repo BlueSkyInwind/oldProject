@@ -386,7 +386,7 @@
         [_tableView reloadData];
         
         if ([FXD_Utility sharedUtility].isActivityShow) {
-            [self homeActivitiesPopups:_homeProductList.popList];
+            [self homeActivitiesPopups:_homeProductList.popList.firstObject];
         }
         if ([FXD_Utility sharedUtility].isHomeChooseShow) {
             [self homeEvaluationRedEnvelopeActivitiesPopups:_homeProductList];
