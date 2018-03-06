@@ -22,8 +22,9 @@
  @param typeCode 协议类型
  @param apply_id 申请件id
  @param periods 期数
+ @param stagingType 1、按周还款、2、按每2周还款、3、按月还款
  */
--(void)obtainProductProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode apply_id:(NSString *)apply_id periods:(NSString *)periods;
+-(void)obtainProductProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode apply_id:(NSString *)apply_id periods:(NSString *)periods stagingType:(NSString *)stagingType;
 /**
  获取银行自动转账授权书
 
@@ -32,5 +33,5 @@
  @param cardBankCode 银行编码
  @param cardNo 银行卡号
  */
--(void)obtainTransferAuthProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode cardBankCode:(NSString *)cardBankCode cardNo:(NSString *)cardNo;
+-(void)obtainTransferAuthProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode cardBankCode:(NSString *)cardBankCode cardNo:(NSString *)cardNo stagingType:(NSString *)stagingType;
 @end

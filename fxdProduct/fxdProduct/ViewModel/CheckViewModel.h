@@ -41,24 +41,6 @@
 
 @end
 
-
-@interface ComplianceViewModel : FXD_ViewModelBaseClass
-
-/**
- 获取fxd合规用户状态
- */
-
--(void)getUserStatus:(NSString *)applicationId;
-
-/**
- 提款申请件记录
- */
-
--(void)saveLoanCase:(NSString *)type ApplicationID:(NSString *)applicationId Period:(NSString *)period PurposeSelect:(NSString *)purposeSelect;
-
-
-@end
-
 @interface CheckBankViewModel : FXD_ViewModelBaseClass
 
 /**

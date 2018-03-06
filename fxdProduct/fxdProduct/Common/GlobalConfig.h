@@ -156,6 +156,7 @@ UIKIT_EXTERN NSString * const       _zhimaCreditCallBack_url;                   
 UIKIT_EXTERN NSString * const       _sendSms_url;                     //发送短信接口
 UIKIT_EXTERN NSString * const       _bankCards_url;                     //换绑银行卡
 UIKIT_EXTERN NSString * const       _huifu_url;                    //用户开户接口
+UIKIT_EXTERN NSString * const       _account_url;                    //获取合规开户信息
 UIKIT_EXTERN NSString * const       _queryCardInfo_url;                    //银行卡查询接口
 UIKIT_EXTERN NSString * const       _queryCardListInfo_url;                    //合规银行卡列表信息
 UIKIT_EXTERN NSString * const       _accountHSService_url;                    //用户状态查询接口

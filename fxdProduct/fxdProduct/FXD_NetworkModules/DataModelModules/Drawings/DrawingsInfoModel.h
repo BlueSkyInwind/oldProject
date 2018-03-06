@@ -43,7 +43,7 @@
 @property(nonatomic,strong)NSString<Optional> * userStatus;
 @property(nonatomic,strong)NSString<Optional> * taskStatus;
 @property(nonatomic,strong)NSString<Optional> * title;
-
+@property(nonatomic,strong)NSString<Optional> * stagingType;  //还款方式
 
 
 @end

@@ -76,5 +76,8 @@
 #import "HighRandingModel.h"
 #import "CommonViewModel.h"
 #import "DetailViewController.h"
+#import "ComplianceViewModel.h"
+#import "AccountModel.h"
+
 
 #endif /* fxdProduct_Bridging_Header_h */

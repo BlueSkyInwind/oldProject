@@ -609,7 +609,7 @@
 -(void)loanBtnClick{
     
     //isComplete  基础资料是否完整
-    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"0"]) {
+    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"1"]) {
 
         FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
         loanApplicationVC.productId = _homeProductList.productId;
@@ -777,7 +777,7 @@
         }
     } WithFaileBlock:^{
     }];
-    [commonVM obtainProductProtocolType:productId typeCode:typeCode apply_id:applicationId periods:periods];
+    [commonVM obtainProductProtocolType:productId typeCode:typeCode apply_id:applicationId periods:periods stagingType:_homeProductList.stagingType];
 }
 
 - (void)didReceiveMemoryWarning {

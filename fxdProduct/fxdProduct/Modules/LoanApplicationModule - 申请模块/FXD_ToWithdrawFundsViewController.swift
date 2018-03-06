@@ -21,7 +21,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     var displayContent:[String]? = [""]
     var displayTitle:String? = ""
     var applicationId:String? = ""
-
+    var stagingType:String? = ""
     var isKeepProtocol : Bool? = false
     var isdispalyCard : Bool? = false
 
@@ -287,6 +287,7 @@ extension FXD_ToWithdrawFundsViewController {
                 self.displayContent = drawingsInfoM.text as? [String]
                 self.displayTitle = drawingsInfoM.title
                 self.applicationId = drawingsInfoM.applicationId
+            
                 complication(true)
                 self.tableView?.reloadData()
             }else{
@@ -331,7 +332,7 @@ extension FXD_ToWithdrawFundsViewController {
         }) {
             complication(false,"")
         }
-        commonVM.obtainProductProtocolType(productId, typeCode: protocolType, apply_id: applyId, periods: periods)
+        commonVM.obtainProductProtocolType(productId, typeCode: protocolType, apply_id: applyId, periods: periods, stagingType: self.drawingsInfoModel?.stagingType)
     }
 }
 

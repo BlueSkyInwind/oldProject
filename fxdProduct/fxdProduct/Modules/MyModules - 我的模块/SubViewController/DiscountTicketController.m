@@ -159,7 +159,7 @@
             }
         } WithFaileBlock:^{
         }];
-        [commonVM obtainProductProtocolType:nil typeCode:@"13" apply_id:nil periods:nil];
+        [commonVM obtainProductProtocolType:nil typeCode:@"13" apply_id:nil periods:nil stagingType:nil];
 }
 
 #pragma mark 初始化无优惠券视图

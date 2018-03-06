@@ -394,6 +394,14 @@ NSString * const    _increaseAmount_url               =    @"increaseQuotaApply"
 
 #pragma mark - 合规接口
 
+
+//获取合规开户信息
+NSString * const    _account_url    =    @"membership/hg/account/info";
+
+//对接合规平台，换绑卡发送短信验证码
+NSString * const    _sendSmsCode_url    =    @"paidcenter/hg/sendSmsCode";
+
+
 //用户开户接口
 NSString * const    _huifu_url    =    @"http/huifush/toRegister.jhtml";
 

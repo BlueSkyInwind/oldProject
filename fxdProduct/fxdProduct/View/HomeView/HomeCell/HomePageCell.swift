@@ -672,8 +672,6 @@ extension HomePageCell {
             let tags = thirdProduct.extAttr.tags as NSArray
             
             let url = URL(string: thirdProduct.extAttr.icon_)
-            //placeholderImage_Icon
-//            thirdRefuseView.leftImageView?.sd_setImage(with: url)
 
             thirdRefuseView.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named:"placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
                 
@@ -1251,7 +1249,6 @@ extension HomePageCell{
         
         
         let overdueView = UIView()
-//        overdueView.isUserInteractionEnabled = true
         overdueView.backgroundColor = UIColor.clear
         view.addSubview(overdueView)
         overdueView.snp.makeConstraints { (make) in
@@ -1262,10 +1259,6 @@ extension HomePageCell{
         }
         
         let overdueLabel = UILabel()
-//        overdueLabel.isUserInteractionEnabled = true
-//        overdueLabel.tag = 201
-//        let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
-//        overdueLabel.addGestureRecognizer(tapGest)
         overdueLabel.textAlignment = .center
         overdueLabel.textColor = RedPacketBottomBtn_COLOR
         overdueLabel.text = "逾期罚金"
@@ -1277,29 +1270,15 @@ extension HomePageCell{
         }
         
         let questionImage = UIImageView()
-//        questionImage.isUserInteractionEnabled = true
         questionImage.image = UIImage(named:"application_Explication_Image")
-//        questionImage.tag = 201
-//        let tapGest1 = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
-//        questionImage.addGestureRecognizer(tapGest1)
         overdueView.addSubview(questionImage)
         questionImage.snp.makeConstraints { (make) in
             make.left.equalTo(overdueLabel.snp.right).offset(2)
             make.centerY.equalTo(overdueView.snp.centerY)
         }
         
-//        let questionDescBtn = UIButton()
-//        questionDescBtn.setImage(UIImage(named:"application_Explication_Image"), for: .normal)
-//        questionDescBtn.addTarget(self, action: #selector(questionDescBtnClick), for: .touchUpInside)
-//        overdueView.addSubview(questionDescBtn)
-//        questionDescBtn.snp.makeConstraints { (make) in
-//            make.left.equalTo(overdueLabel.snp.right).offset(2)
-//            make.centerY.equalTo(overdueView.snp.centerY)
-//        }
-        
         let quesBtn = UIButton()
         quesBtn.addTarget(self, action: #selector(questionDescBtnClick), for: .touchUpInside)
-//        quesBtn.backgroundColor = UIColor.red
         overdueView.addSubview(quesBtn)
         quesBtn.snp.makeConstraints { (make) in
             make.left.equalTo(overdueLabel.snp.left).offset(0)
@@ -1307,19 +1286,6 @@ extension HomePageCell{
             make.right.equalTo(overdueLabel.snp.right).offset(25)
             make.height.equalTo(20)
         }
-//        let tapView = UIView()
-//        tapView.backgroundColor = UIColor.red
-//        tapView.isUserInteractionEnabled = true
-//        tapView.tag = 201
-//        let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
-//        tapView.addGestureRecognizer(tapGest)
-//        overdueView.addSubview(tapView)
-//        tapView.snp.makeConstraints { (make) in
-//            make.left.equalTo(questionDescBtn.snp.left).offset(-5)
-//            make.centerY.equalTo(overdueView.snp.centerY)
-//            make.right.equalTo(questionDescBtn.snp.right).offset(5)
-//            make.height.equalTo(20)
-//        }
         
         let leftDescLabel = UILabel()
         leftDescLabel.text = "期供金额"
@@ -1422,12 +1388,6 @@ extension HomePageCell{
         default:
             break
         }
-        
-        //        print("整除后的数字=%d",(money/500)*500)
-//        defaultHeadLabel?.text = NSString(format: "%d元", (money/500)*500) as String
-        
-        //        print("整除后的数字=%d",(money/100)*100)
-        //        defaultHeadLabel?.text = NSString(format: "%d元", (money/100)*100) as String
         
     }
     

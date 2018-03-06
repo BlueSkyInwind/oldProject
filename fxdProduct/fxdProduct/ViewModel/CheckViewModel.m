@@ -107,45 +107,6 @@
 @end
 
 
-@implementation ComplianceViewModel
-
--(void)getUserStatus:(NSString *)applicationId{
-
-    NSDictionary *param = @{@"client_":@"1",@"from_case_id_":applicationId};
-
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]HG_POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_qryUserStatus_url] parameters:param finished:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
-
--(void)saveLoanCase:(NSString *)type ApplicationID:(NSString *)applicationId Period:(NSString *)period PurposeSelect:(NSString *)purposeSelect{
-
-    SaveLoanCaseParamModel * saveLoanCaseParamModel = [[SaveLoanCaseParamModel alloc]init];
-    saveLoanCaseParamModel.case_id_ = applicationId;
-    saveLoanCaseParamModel.type_ = type;
-    saveLoanCaseParamModel.client_ = @"1";
-    saveLoanCaseParamModel.description_ = purposeSelect;
-    saveLoanCaseParamModel.period_ = period;
-    NSDictionary * paramDic  = [saveLoanCaseParamModel toDictionary];
-    
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]HG_POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_saveLoanCase_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
-
-@end
 
 @implementation CheckBankViewModel
 
