@@ -25,7 +25,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         super.viewDidLoad()
 
         titleArray = ["姓名:","身份证号:","开户银行:","银行卡号:","预留手机号:","验证码:"]
-//        cntentArray = ["黄渤","459503850073456","招商银行","4594 0385 0073 656","16789404903","167894"]
+        contentArray = ["黄渤","459503850073456","招商银行","459403850073656","16789404903","167894"]
         self.title = "平台开户"
         configureView()
         addBackItem()
@@ -86,7 +86,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getHGAccountInfo()
+//        getHGAccountInfo()
     }
     
     func getHGAccountInfo(){
@@ -180,16 +180,22 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         cell.delegate = self
         cell.contentTextField?.delegate = self
         cell.titleLabel?.text = titleArray?[indexPath.row] as? String
+        cell.contentTextField?.keyboardType = .numberPad
 //        cell.contentLabel?.text = cntentArray?[indexPath.row] as? String
         if contentArray.count > 1{
             
             cell.contentTextField?.text = contentArray[indexPath.row] as? String
             cell.contentTextField?.tag = indexPath.row + 1
-            cell.contentTextField?.isEnabled = true
+            cell.contentTextField?.isEnabled = false
             cell.contentTextField?.addTarget(self, action: #selector(contentTextFieldEdit(textField:)), for: .editingChanged)
+            
+            if indexPath.row == 3{
+
+                cell.contentTextField?.text = bankCardNo(bankNo: (contentArray[indexPath.row] as? String)!)
+            }
         }
         
-        if indexPath.row == 4 || indexPath.row == 5 {
+        if indexPath.row == 4 || indexPath.row == 5{
             cell.contentTextField?.isEnabled = true
         }
         if indexPath.row == 2 {
@@ -206,13 +212,13 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 2 {
-            
-            pushUserBankListVC()
-
-        }
-//        let controller = BankCardViewController()
-//        self.navigationController?.pushViewController(controller, animated: true)
+//        if indexPath.row == 2 {
+//
+//            pushUserBankListVC()
+//
+//        }
+        let controller = BankCardViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
         
     }
     
@@ -308,30 +314,48 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         complianceVM.hgSendSmsCodeBusiType("user_register", smsTempType: nil, bankCardNo: contentArray[3] as! String, capitalPlatform: "1", mobile: contentArray[4] as! String, userCode: nil)
     }
     
+    func bankCardNo(bankNo : String) -> String{
+        
+        let newBankNo = NSMutableString.init(string: bankNo)
+        var index = 0
+        var j = 0
+        for str in bankNo{
+            index += 1
+            j += 1
+            if index % 4 == 0 {
+                
+                newBankNo.insert(" ", at: j)
+                j += 1
+    
+            }
+        }
+        return newBankNo as String
+        
+    }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        let returnValue = true
-//        let newText = NSMutableString.init(capacity: 0)
-//        newText.append(textField.text!)
-//        let noBlankStr = textField.text?.replacingOccurrences(of: " ", with: "")
-//        let textLength = noBlankStr?.count
-//        if string.count > 0{
-//            if textLength! < 25 {
-//                if textLength! > 0 && textLength! % 4 == 0 {
-//                    newText = NSMutableString.
-//                }
-//            }
-//        }
-//        if string == "" {
-//            if ((textField.text?.count)! - 2) % 5 == 0{
-//                textField.text = textField.text?.prefix(upTo: (textField.text?.count)! - 1)
-//            }
-//            return true
-//        }else{
-//            if (textField.text?.count)! % 5 == 0{
-//                textField.text = textField.text! + ""
-//            }
-//        }
-        return true
+        var returnValue = true
+        let newText = NSMutableString.init(capacity: 0)
+        newText.append(textField.text!)
+        let noBlankStr = textField.text?.replacingOccurrences(of: " ", with: "")
+        let textLength = noBlankStr?.count
+        if string.count > 0{
+            if textLength! < 18 {
+                if textLength! > 0 && textLength! % 4 == 0 {
+//                    newText = newText.trimmingCharacters(in: NSCharacterSet.whitespaces) as! NSMutableString
+                    newText.append(" ")
+                    newText.append(string)
+                    textField.text = newText as String
+                    returnValue = false
+                }else{
+                    newText.append(string)
+                }
+            }else{
+                returnValue = false
+            }
+        }else{
+            newText.replaceCharacters(in: range, with: string)
+        }
+        return returnValue
         
     }
     override func didReceiveMemoryWarning() {

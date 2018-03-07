@@ -1032,6 +1032,10 @@
 		CC742DAD204E730700D645CC /* SubmitAccountParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DAB204E730700D645CC /* SubmitAccountParamModel.m */; };
 		CC742DB0204E74AF00D645CC /* SmsCodeParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DAF204E74AF00D645CC /* SmsCodeParamModel.m */; };
 		CC742DB1204E74AF00D645CC /* SmsCodeParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DAF204E74AF00D645CC /* SmsCodeParamModel.m */; };
+		CC742DB3204FB90500D645CC /* BankListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB2204FB90500D645CC /* BankListViewController.swift */; };
+		CC742DB4204FB90500D645CC /* BankListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB2204FB90500D645CC /* BankListViewController.swift */; };
+		CC742DB6204FB9C700D645CC /* BankListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB5204FB9C700D645CC /* BankListCell.swift */; };
+		CC742DB7204FB9C700D645CC /* BankListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB5204FB9C700D645CC /* BankListCell.swift */; };
 		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC85C6281FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
@@ -2038,6 +2042,8 @@
 		CC742DAB204E730700D645CC /* SubmitAccountParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubmitAccountParamModel.m; sourceTree = "<group>"; };
 		CC742DAE204E74AF00D645CC /* SmsCodeParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmsCodeParamModel.h; sourceTree = "<group>"; };
 		CC742DAF204E74AF00D645CC /* SmsCodeParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmsCodeParamModel.m; sourceTree = "<group>"; };
+		CC742DB2204FB90500D645CC /* BankListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankListViewController.swift; sourceTree = "<group>"; };
+		CC742DB5204FB9C700D645CC /* BankListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankListCell.swift; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
@@ -4422,6 +4428,7 @@
 			children = (
 				CC742D91204D42E100D645CC /* OpenAccountViewController.swift */,
 				CC742D94204E46D800D645CC /* BankCardViewController.swift */,
+				CC742DB2204FB90500D645CC /* BankListViewController.swift */,
 			);
 			name = "ComplianceModule - 合规模块";
 			path = "fxdProduct/Modules/ComplianceModule - 合规模块";
@@ -4432,6 +4439,7 @@
 			children = (
 				CC742D8E204D3A3800D645CC /* OpenAccountCell.swift */,
 				CC742D97204E470100D645CC /* BankCardCell.swift */,
+				CC742DB5204FB9C700D645CC /* BankListCell.swift */,
 			);
 			path = ComplianceView;
 			sourceTree = "<group>";
@@ -5289,6 +5297,7 @@
 				CCA181941FC6CDAC0094DA58 /* MineMiddleView.swift in Sources */,
 				63553B191E5F0AF900B2C1FF /* FaceIDOCRBack.m in Sources */,
 				0F0FDAC21BC771EC00F3CF10 /* AboutViewController.m in Sources */,
+				CC742DB3204FB90500D645CC /* BankListViewController.swift in Sources */,
 				84E62D1F1FDA7E3100B7F870 /* CustomerContactsInfoParam.m in Sources */,
 				CCCDA8841EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
 				CCAA8EAE1F5901ED00278D16 /* FooterBtnView.swift in Sources */,
@@ -5424,6 +5433,7 @@
 				638A17051E517D9F00AB8AB6 /* LOTShapePath.m in Sources */,
 				849842001FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
 				63FC25041D98F7E9006F58F3 /* YYTextView.m in Sources */,
+				CC742DB6204FB9C700D645CC /* BankListCell.swift in Sources */,
 				63878FE21C1519CD008E1CF9 /* CheckUtils.m in Sources */,
 				638C3F271CF2F470000446A7 /* PCCircleViewConst.m in Sources */,
 				63E1ECD11E1B8FAA0079A2F8 /* TADotView.m in Sources */,
@@ -5735,6 +5745,7 @@
 				CC0DFA101EA5B1090024841A /* ReturnMsgBaseClass.m in Sources */,
 				CC0DFA111EA5B1090024841A /* CALayer+Anim.m in Sources */,
 				CC0DFA131EA5B1090024841A /* NSValue+Compat.m in Sources */,
+				CC742DB4204FB90500D645CC /* BankListViewController.swift in Sources */,
 				CCCDA8851EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
 				CC0DFA141EA5B1090024841A /* LewPopupViewAnimationFade.m in Sources */,
 				CC0DFA151EA5B1090024841A /* FaceIDOCRFront.m in Sources */,
@@ -5870,6 +5881,7 @@
 				849842011FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
 				CC0DFAA01EA5B1090024841A /* GetMoneyProcessResult.m in Sources */,
 				CC0DFAA21EA5B1090024841A /* LOTShapePath.m in Sources */,
+				CC742DB7204FB9C700D645CC /* BankListCell.swift in Sources */,
 				CCE3BE1F1ED2D424004C35A4 /* BankCardsModel.m in Sources */,
 				840DFF701FE27DEC00148DEE /* InvationViewModel.m in Sources */,
 				CC0DFAA31EA5B1090024841A /* YYTextView.m in Sources */,

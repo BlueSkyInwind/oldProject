@@ -1,25 +1,24 @@
 //
-//  BankCardViewController.swift
+//  BankListViewController.swift
 //  fxdProduct
 //
-//  Created by sxp on 2018/3/6.
+//  Created by sxp on 2018/3/7.
 //  Copyright © 2018年 dd. All rights reserved.
 //
 
 import UIKit
 
-class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
+class BankListViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
 
     var tableView : UITableView?
     var titleArray : NSArray?
-    
+    var selectedTag : Int = -1
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = "更换绑卡-解卡"
+        self.title = "银行卡列表"
+        titleArray = ["上海银行","中信银行","中国交通银行","中国光大银行","中国农业银行","中国工商银行"]
         configureView()
         addBackItem()
-        titleArray = ["预留手机号:","验证码:"]
         // Do any additional setup after loading the view.
     }
 
@@ -48,7 +47,7 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
         let nextBtn = UIButton()
         nextBtn.setTitle("下一步", for: .normal)
         nextBtn.setTitleColor(UIColor.white, for: .normal)
-        nextBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        nextBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         nextBtn.setBackgroundImage(UIImage(named:"applayBtnImage"), for: .normal)
         nextBtn.addTarget(self, action: #selector(nextBtnBtnClick), for: .touchUpInside)
         self.view.addSubview(nextBtn)
@@ -71,38 +70,27 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }
     }
     
+    
     @objc fileprivate func nextBtnBtnClick(){
-        
-        let controller = BankListViewController()
-        self.navigationController?.pushViewController(controller, animated: true)
         print("点击下一步按钮")
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 2
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
-            return 1
-        }
-        return 2
+        return (titleArray?.count)!
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 {
-            return 110
+        if UI_IS_IPONE6P {
+            return 60
         }
-        
-        return 47
-        
+        return 46
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15
+        return 30
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -114,74 +102,26 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
-            
-            var cell:BankCardCell! = tableView.dequeueReusableCell(withIdentifier:"BankCardCellId") as? BankCardCell
-            if cell == nil {
-                cell = BankCardCell.init(style: .default, reuseIdentifier: "BankCardCellId")
-            }
-            cell.selectionStyle = .none
-            cell.cardImageView?.image = UIImage.init(named: "<#T##String#>")
-            cell.cardNameLabel?.text = "工商银行"
-            cell.cardSpeciesLabel?.text = "储蓄卡"
-            cell.cardNumLabel?.text = "6*************8490"
-            return cell
-        }else{
-            
-            var cell:OpenAccountCell! = tableView.dequeueReusableCell(withIdentifier:"CellId") as? OpenAccountCell
-            if cell == nil {
-                cell = OpenAccountCell.init(style: .default, reuseIdentifier: "CellId")
-            }
-            cell.selectionStyle = .none
-            
-            cell.titleLabel?.text = titleArray?[indexPath.row] as? String
-//            cell.contentTextField?.text = cntentArray?[indexPath.row] as? String
-            cell.contentTextField?.tag = indexPath.row + 1
-            cell.contentTextField?.isEnabled = true
-            cell.contentTextField?.addTarget(self, action: #selector(contentTextFieldEdit(textField:)), for: .editingChanged)
-
-            if indexPath.row == 1 {
-                cell.verificationCodeBtn?.isHidden = false
-            }
-            if indexPath.row == (titleArray?.count)! - 1 {
-                cell.lineView?.isHidden = true
-            }
-            return cell
+        var cell:HGBankListCell! = tableView.dequeueReusableCell(withIdentifier:"CellId") as? HGBankListCell
+        if cell == nil {
+            cell = HGBankListCell.init(style: .default, reuseIdentifier: "CellId")
         }
+        cell.selectionStyle = .none
+        cell.bankNameLabel?.text = titleArray?[indexPath.row] as? String
+        cell.bankImageView?.image = UIImage.init(named: "UserData1")
+
+        if selectedTag == indexPath.row {
+            cell.accessoryType = .checkmark
+        }else{
+            cell.accessoryType = .none
+        }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-    }
-    
-    @objc fileprivate func contentTextFieldEdit(textField:UITextField){
-        
-        let tag = textField.tag
-        
-        switch tag {
-        case 3:
-            print("开户银行")
-        case 4:
-            print("银行卡号")
-        case 5:
-            if (textField.text?.count)! > 11
-            {
-                let str1 = textField.text?.prefix(11)
-                textField.text = String(str1!)
-            }
-            
-        case 6:
-            if (textField.text?.count)! > 6
-            {
-                
-                let str1 = textField.text?.prefix(6)
-                textField.text = String(str1!)
-                
-            }
-            
-        default:
-            break
-        }
+        self.selectedTag = indexPath.row
+        self.tableView?.reloadData()
         
     }
     
