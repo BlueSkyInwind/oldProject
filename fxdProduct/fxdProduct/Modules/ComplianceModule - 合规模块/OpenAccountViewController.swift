@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,OpenAccountCellDelegate{
+class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,OpenAccountCellDelegate,UITextFieldDelegate{
 
     var tableView : UITableView?
     var titleArray : NSArray?
@@ -178,6 +178,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         }
         cell.selectionStyle = .none
         cell.delegate = self
+        cell.contentTextField?.delegate = self
         cell.titleLabel?.text = titleArray?[indexPath.row] as? String
 //        cell.contentLabel?.text = cntentArray?[indexPath.row] as? String
         if contentArray.count > 1{
@@ -305,6 +306,33 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         }
         
         complianceVM.hgSendSmsCodeBusiType("user_register", smsTempType: nil, bankCardNo: contentArray[3] as! String, capitalPlatform: "1", mobile: contentArray[4] as! String, userCode: nil)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        let returnValue = true
+//        let newText = NSMutableString.init(capacity: 0)
+//        newText.append(textField.text!)
+//        let noBlankStr = textField.text?.replacingOccurrences(of: " ", with: "")
+//        let textLength = noBlankStr?.count
+//        if string.count > 0{
+//            if textLength! < 25 {
+//                if textLength! > 0 && textLength! % 4 == 0 {
+//                    newText = NSMutableString.
+//                }
+//            }
+//        }
+//        if string == "" {
+//            if ((textField.text?.count)! - 2) % 5 == 0{
+//                textField.text = textField.text?.prefix(upTo: (textField.text?.count)! - 1)
+//            }
+//            return true
+//        }else{
+//            if (textField.text?.count)! % 5 == 0{
+//                textField.text = textField.text! + ""
+//            }
+//        }
+        return true
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
