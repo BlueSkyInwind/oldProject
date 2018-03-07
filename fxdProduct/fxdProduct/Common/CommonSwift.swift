@@ -87,3 +87,6 @@ let LOAN_APPLICATION_COLOR = UIColor.init(red: 242/255.0, green: 242/255.0, blue
 let LOAN_APPLICATION_TitleBACK_COLOR = UIColor.init(red: 190/255.0, green: 190/255.0, blue: 190/255.0, alpha: 1)
 
 let COMMPLIANCE_LINE_COLOR = UIColor.init(red: 19/255.0, green: 136/255.0, blue: 356/255.0, alpha: 1)
+
+let REFRESH_TITLE_COLOR = UIColor.init(red: 167/255.0, green: 167/255.0, blue: 167/255.0, alpha: 1)
+

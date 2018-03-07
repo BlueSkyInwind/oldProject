@@ -1036,6 +1036,10 @@
 		CC742DB4204FB90500D645CC /* BankListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB2204FB90500D645CC /* BankListViewController.swift */; };
 		CC742DB6204FB9C700D645CC /* BankListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB5204FB9C700D645CC /* BankListCell.swift */; };
 		CC742DB7204FB9C700D645CC /* BankListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB5204FB9C700D645CC /* BankListCell.swift */; };
+		CC742DB9204FD7FE00D645CC /* IntermediateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB8204FD7FE00D645CC /* IntermediateViewController.swift */; };
+		CC742DBA204FD7FE00D645CC /* IntermediateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB8204FD7FE00D645CC /* IntermediateViewController.swift */; };
+		CC742DBC204FD88A00D645CC /* IntermediateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBB204FD88A00D645CC /* IntermediateCell.swift */; };
+		CC742DBD204FD88A00D645CC /* IntermediateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBB204FD88A00D645CC /* IntermediateCell.swift */; };
 		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC85C6281FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
@@ -2044,6 +2048,8 @@
 		CC742DAF204E74AF00D645CC /* SmsCodeParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmsCodeParamModel.m; sourceTree = "<group>"; };
 		CC742DB2204FB90500D645CC /* BankListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankListViewController.swift; sourceTree = "<group>"; };
 		CC742DB5204FB9C700D645CC /* BankListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankListCell.swift; sourceTree = "<group>"; };
+		CC742DB8204FD7FE00D645CC /* IntermediateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntermediateViewController.swift; sourceTree = "<group>"; };
+		CC742DBB204FD88A00D645CC /* IntermediateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntermediateCell.swift; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
@@ -2748,8 +2754,8 @@
 				636A2DD61D891F7900E087A6 /* fxdProduct.entitlements */,
 				636EE3041B662ABB00A1A3ED /* AppDelegate.h */,
 				636EE3051B662ABB00A1A3ED /* AppDelegate.mm */,
-				0FEA58481BE08EE3007F8A6D /* View */,
 				63E076521B67114800E269F2 /* Common */,
+				0FEA58481BE08EE3007F8A6D /* View */,
 				63E076531B67114800E269F2 /* FXD_NetworkModules */,
 				636EE32A1B662E5C00A1A3ED /* Third */,
 				63ED33301B6B4472008B6085 /* Modules */,
@@ -4429,6 +4435,7 @@
 				CC742D91204D42E100D645CC /* OpenAccountViewController.swift */,
 				CC742D94204E46D800D645CC /* BankCardViewController.swift */,
 				CC742DB2204FB90500D645CC /* BankListViewController.swift */,
+				CC742DB8204FD7FE00D645CC /* IntermediateViewController.swift */,
 			);
 			name = "ComplianceModule - 合规模块";
 			path = "fxdProduct/Modules/ComplianceModule - 合规模块";
@@ -4440,6 +4447,7 @@
 				CC742D8E204D3A3800D645CC /* OpenAccountCell.swift */,
 				CC742D97204E470100D645CC /* BankCardCell.swift */,
 				CC742DB5204FB9C700D645CC /* BankListCell.swift */,
+				CC742DBB204FD88A00D645CC /* IntermediateCell.swift */,
 			);
 			path = ComplianceView;
 			sourceTree = "<group>";
@@ -5397,6 +5405,7 @@
 				CC742D95204E46D800D645CC /* BankCardViewController.swift in Sources */,
 				639E88721CA1371800254216 /* LunchVCModules.m in Sources */,
 				8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
+				CC742DB9204FD7FE00D645CC /* IntermediateViewController.swift in Sources */,
 				63FC25001D98F7E9006F58F3 /* YYTextTransaction.m in Sources */,
 				CC6F06791F74F26B00FA889E /* PickView.swift in Sources */,
 				63FC24F91D98F7E9006F58F3 /* YYTextRubyAnnotation.m in Sources */,
@@ -5451,6 +5460,7 @@
 				847298341FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */,
 				63E1ECD21E1B8FAA0079A2F8 /* TAPageControl.m in Sources */,
 				638A16F51E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m in Sources */,
+				CC742DBC204FD88A00D645CC /* IntermediateCell.swift in Sources */,
 				8492ED261FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */,
 				637636E71D76A72A00E93289 /* LewPopupBackgroundView.m in Sources */,
 				CC45E7371FD915A300DE803D /* UITabBar+badge.m in Sources */,
@@ -5845,6 +5855,7 @@
 				CC742D96204E46D800D645CC /* BankCardViewController.swift in Sources */,
 				CC0DFA7A1EA5B1090024841A /* YYDiskCache.m in Sources */,
 				CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */,
+				CC742DBA204FD7FE00D645CC /* IntermediateViewController.swift in Sources */,
 				CC0DFA7C1EA5B1090024841A /* YYTextDebugOption.m in Sources */,
 				CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */,
 				CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
@@ -5899,6 +5910,7 @@
 				CC0DFAB01EA5B1090024841A /* NSArray+Extend.m in Sources */,
 				CC0DFAB21EA5B1090024841A /* LivenessIdentity.m in Sources */,
 				CC0DFAB31EA5B1090024841A /* LOTAnimatableColorValue.m in Sources */,
+				CC742DBD204FD88A00D645CC /* IntermediateCell.swift in Sources */,
 				CC0DFAB41EA5B1090024841A /* TAPageControl.m in Sources */,
 				CCDEDF5D1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */,
 				CC0DFAB51EA5B1090024841A /* LOTAnimatableShapeValue.m in Sources */,

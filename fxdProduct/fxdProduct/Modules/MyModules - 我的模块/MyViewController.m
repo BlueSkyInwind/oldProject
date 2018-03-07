@@ -307,7 +307,9 @@
         case 1:
         {
             
-            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+            
+            IntermediateViewController *repayRecord=[[IntermediateViewController alloc]init];
+//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;

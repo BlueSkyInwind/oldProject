@@ -12,6 +12,14 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
 
     var tableView : UITableView?
     var titleArray : NSArray?
+//    var bankNameStr : String?
+//
+//    var index : Int = -1{
+//        didSet{
+//
+//            self.tableView?.reloadData()
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,8 +80,14 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
     }
     
     @objc fileprivate func nextBtnBtnClick(){
+        let controller = OpenAccountViewController()
         
-        let controller = BankListViewController()
+//        let controller = BankListViewController()
+//        controller.selectedTag = index
+//        controller.selectedBankClosure = {(bankName: String, selectedTag : NSInteger) -> Void in
+//            self.index = selectedTag
+//            self.bankNameStr = bankName
+//        }
         self.navigationController?.pushViewController(controller, animated: true)
         print("点击下一步按钮")
     }
@@ -135,7 +149,6 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
             cell.selectionStyle = .none
             
             cell.titleLabel?.text = titleArray?[indexPath.row] as? String
-//            cell.contentTextField?.text = cntentArray?[indexPath.row] as? String
             cell.contentTextField?.tag = indexPath.row + 1
             cell.contentTextField?.isEnabled = true
             cell.contentTextField?.addTarget(self, action: #selector(contentTextFieldEdit(textField:)), for: .editingChanged)

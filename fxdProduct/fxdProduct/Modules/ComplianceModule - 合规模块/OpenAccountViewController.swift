@@ -16,10 +16,17 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     private var countdownTimer: Timer?
     private var remainingSeconds: Int = 0
     var codeBtn: UIButton?
-    var isdispalyCard : Bool? = false
-    
-    var userSelectIndex:Int? = 0
-    var selectedCard:CardInfo?
+//    var bankNameStr : String?
+    var index : Int = -1{
+        didSet{
+            
+            self.tableView?.reloadData()
+        }
+    }
+//    var isdispalyCard : Bool? = false
+//
+//    var userSelectIndex:Int? = 0
+//    var selectedCard:CardInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +89,9 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     
     
     @objc fileprivate func nextBtnBtnClick(){
+        
+        let controller = BankCardViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
         print("点击下一步按钮")
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -212,31 +222,39 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        if indexPath.row == 2 {
-//
+        if indexPath.row == 2 {
+
+            let controller = BankListViewController()
+            controller.selectedTag = index
+            controller.selectedBankClosure = {(bankName: String, selectedTag : NSInteger) -> Void in
+                self.index = selectedTag
+                self.contentArray.replaceObject(at: 2, with: bankName)
+//                self.bankNameStr = bankName
+            }
+            
+            self.navigationController?.pushViewController(controller, animated: true)
+            
 //            pushUserBankListVC()
-//
-//        }
-        let controller = BankCardViewController()
-        self.navigationController?.pushViewController(controller, animated: true)
+
+        }
         
     }
     
-    func pushUserBankListVC()  {
-        let userBankCardListVC = UserBankCardListVCModule.init()
-        userBankCardListVC.currentIndex = userSelectIndex!
-        userBankCardListVC.payPatternSelectBlock = {[weak self] (cardInfo,currentIndex) in
-            self?.isdispalyCard = true
-            self?.selectedCard = cardInfo
-            self?.userSelectIndex = currentIndex
-            if cardInfo == nil {
-//                self?.fatchCardInfo({ (isSuccess, isBankCard) in
-//                })
-            }
-            self?.tableView?.reloadData()
-        }
-        self.navigationController?.pushViewController(userBankCardListVC, animated: true)
-    }
+//    func pushUserBankListVC()  {
+//        let userBankCardListVC = UserBankCardListVCModule.init()
+//        userBankCardListVC.currentIndex = userSelectIndex!
+//        userBankCardListVC.payPatternSelectBlock = {[weak self] (cardInfo,currentIndex) in
+//            self?.isdispalyCard = true
+//            self?.selectedCard = cardInfo
+//            self?.userSelectIndex = currentIndex
+//            if cardInfo == nil {
+////                self?.fatchCardInfo({ (isSuccess, isBankCard) in
+////                })
+//            }
+//            self?.tableView?.reloadData()
+//        }
+//        self.navigationController?.pushViewController(userBankCardListVC, animated: true)
+//    }
     
     @objc fileprivate func contentTextFieldEdit(textField:UITextField){
         

@@ -8,11 +8,15 @@
 
 import UIKit
 
+typealias selectedBankClosure = (_ bankName: String, _ selectedTag: NSInteger)->Void
+
 class BankListViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
 
     var tableView : UITableView?
     var titleArray : NSArray?
     var selectedTag : Int = -1
+    var selectedBankClosure : selectedBankClosure?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "银行卡列表"
@@ -122,7 +126,12 @@ class BankListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         
         self.selectedTag = indexPath.row
         self.tableView?.reloadData()
-        
+        if selectedBankClosure != nil {
+            
+            selectedBankClosure!(titleArray![indexPath.row] as! String,indexPath.row)
+        }
+        self.navigationController?.popViewController(animated: true)
+
     }
     
     override func didReceiveMemoryWarning() {
