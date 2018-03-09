@@ -18,12 +18,13 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     var codeBtn: UIButton?
     var openAccountModel : AccountModel?
     var submitArray : NSMutableArray?
-//    var bankNameStr : String?
     var index : Int = -1{
         didSet{
             
             contentArray.replaceObject(at: 3, with: "")
             contentArray.replaceObject(at: 4, with: "")
+            submitArray?.replaceObject(at: 1, with: "")
+            submitArray?.replaceObject(at: 2, with: "")
             self.tableView?.reloadData()
         }
     }
@@ -37,6 +38,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
 
         titleArray = ["姓名:","身份证号:","开户银行:","银行卡号:","预留手机号:","验证码:"]
         self.title = "平台开户"
+        submitArray = NSMutableArray.init()
         configureView()
         addBackItem()
         getHGAccountInfo()
@@ -94,19 +96,29 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     
     @objc fileprivate func nextBtnBtnClick(){
         
-        let controller = BankCardViewController()
-        self.navigationController?.pushViewController(controller, animated: true)
+        if (submitArray![0] as! String).count < 3 {
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请选择开户银行")
+            return
+        }
+        if (submitArray![1] as! String).count < 18 {
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请输入银行卡号")
+            return
+        }
+        if (submitArray![2] as! String).count < 11 {
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请输入预留手机号")
+            return
+        }
+        if (submitArray![3] as! String).count < 6 {
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请输入验证码")
+            return
+        }
+        submitAccount()
         print("点击下一步按钮")
     }
     
     fileprivate func submitAccount(){
-        let complianceVM = ComplianceViewModel()
-        complianceVM.setBlockWithReturn({ (retrunValue) in
-            
-        }) {
-            
-        }
-        complianceVM.hgSubmitAccountInfoBankNo(<#T##bankNo: String!##String!#>, bankReservePhone: <#T##String!#>, cardNo: <#T##String!#>, retUrl: <#T##String!#>, smsSeq: <#T##String!#>, verifyCode: <#T##String!#>)
+        HG_Manager.sharedHG().hgUserRegJumpP2pCtrlBankNo("<#T##bankNo: String!##String!#>", bankReservePhone: "<#T##String!#>", bankShortName: "<#T##String!#>", cardNo: "<#T##String!#>", smsSeq: "<#T##String!#>", userCode: "<#T##String!#>", verifyCode: "<#T##String!#>", vc: self)
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -131,11 +143,13 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
                 self?.contentArray.add("")
                 
                 self?.submitArray?.add(self?.openAccountModel?.bankShortName as Any)
+                self?.submitArray?.add(self?.openAccountModel?.bankNum as Any)
                 self?.submitArray?.add(self?.openAccountModel?.telephone as Any)
-                self?.submitArray?.add(self?.openAccountModel?.bankShortName as Any)
+                self?.submitArray?.add("")
                 self?.submitArray?.add(self?.openAccountModel?.cardId as Any)
                 self?.submitArray?.add(self?.openAccountModel?.bankNum as Any)
                 self?.submitArray?.add(self?.openAccountModel?.userCode as Any)
+                
                 self?.tableView?.reloadData()
                 
             }else{
@@ -256,7 +270,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
             controller.selectedBankClosure = {(bankModel: BankListModel, selectedTag : NSInteger) -> Void in
                 self.index = selectedTag
                 self.contentArray.replaceObject(at: 2, with: bankModel.bankName)
-                self.submitArray?.replaceObject(at: 2, with: bankModel.bankCode)
+                self.submitArray?.replaceObject(at: 5, with: bankModel.bankCode)
                 
 
             }
@@ -295,15 +309,15 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
                 let str1 = textField.text?.prefix(11)
                 textField.text = String(str1!)
             }
-            
+            submitArray?.replaceObject(at: 2, with: textField.text as Any)
         case 6:
             if (textField.text?.count)! > 6
             {
                 
                 let str1 = textField.text?.prefix(6)
                 textField.text = String(str1!)
-            
             }
+            submitArray?.replaceObject(at: 3, with: textField.text as Any)
             
         default:
             break
@@ -376,13 +390,19 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField.tag == 5 || textField.tag == 6{
+            return true
+        }
         var returnValue = true
         let newText = NSMutableString.init(capacity: 0)
         newText.append(textField.text!)
         let noBlankStr = textField.text?.replacingOccurrences(of: " ", with: "")
+        submitArray?.replaceObject(at: 1, with: noBlankStr)
         let textLength = noBlankStr?.count
         if string.count > 0{
             if textLength! < 18 {
+                
                 if textLength! > 0 && textLength! % 4 == 0 {
 //                    newText = newText.trimmingCharacters(in: NSCharacterSet.whitespaces) as! NSMutableString
                     newText.append(" ")
@@ -401,6 +421,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         return returnValue
         
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

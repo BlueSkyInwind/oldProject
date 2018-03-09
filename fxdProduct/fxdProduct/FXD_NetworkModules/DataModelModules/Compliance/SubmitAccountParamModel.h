@@ -22,5 +22,8 @@
 @property (nonatomic, strong)NSString<Optional> *smsSeq;
 //短信验证码
 @property (nonatomic, strong)NSString<Optional> *verifyCode;
-
+//银行名称缩写
+@property (nonatomic, strong)NSString<Optional> *bankShortName;
+//合规用户编号
+@property (nonatomic, strong)NSString<Optional> *userCode;
 @end

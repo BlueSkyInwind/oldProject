@@ -1042,6 +1042,14 @@
 		CC742DBD204FD88A00D645CC /* IntermediateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBB204FD88A00D645CC /* IntermediateCell.swift */; };
 		CC742DC020521FA700D645CC /* ApplicationNewCreateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */; };
 		CC742DC120521FA700D645CC /* ApplicationNewCreateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */; };
+		CC742DC720526FD900D645CC /* HG_Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DC420526FD800D645CC /* HG_Manager.m */; };
+		CC742DC820526FD900D645CC /* HG_Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DC420526FD800D645CC /* HG_Manager.m */; };
+		CC742DC920526FD900D645CC /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = CC742DC520526FD800D645CC /* test.html */; };
+		CC742DCA20526FD900D645CC /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = CC742DC520526FD800D645CC /* test.html */; };
+		CC742DCB20526FD900D645CC /* test1.html in Resources */ = {isa = PBXBuildFile; fileRef = CC742DC620526FD800D645CC /* test1.html */; };
+		CC742DCC20526FD900D645CC /* test1.html in Resources */ = {isa = PBXBuildFile; fileRef = CC742DC620526FD800D645CC /* test1.html */; };
+		CC742DCF2052704B00D645CC /* P2PViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DCE2052704B00D645CC /* P2PViewController.m */; };
+		CC742DD02052704B00D645CC /* P2PViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DCE2052704B00D645CC /* P2PViewController.m */; };
 		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC85C6281FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
@@ -2054,6 +2062,12 @@
 		CC742DBB204FD88A00D645CC /* IntermediateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntermediateCell.swift; sourceTree = "<group>"; };
 		CC742DBE20521FA700D645CC /* ApplicationNewCreateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationNewCreateModel.h; sourceTree = "<group>"; };
 		CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationNewCreateModel.m; sourceTree = "<group>"; };
+		CC742DC320526FD800D645CC /* HG_Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HG_Manager.h; sourceTree = "<group>"; };
+		CC742DC420526FD800D645CC /* HG_Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HG_Manager.m; sourceTree = "<group>"; };
+		CC742DC520526FD800D645CC /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
+		CC742DC620526FD800D645CC /* test1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test1.html; sourceTree = "<group>"; };
+		CC742DCD2052704A00D645CC /* P2PViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PViewController.h; sourceTree = "<group>"; };
+		CC742DCE2052704B00D645CC /* P2PViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PViewController.m; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
@@ -3232,6 +3246,8 @@
 		63A24BFA1BE063A90036E8EF /* FrameWorks */ = {
 			isa = PBXGroup;
 			children = (
+				CC742DCD2052704A00D645CC /* P2PViewController.h */,
+				CC742DCE2052704B00D645CC /* P2PViewController.m */,
 				63A24BFB1BE063A90036E8EF /* CoreArchive */,
 				63A24C011BE063A90036E8EF /* CoreCategory */,
 				63A24C351BE063A90036E8EF /* CoreExtend */,
@@ -3494,6 +3510,7 @@
 		63E076521B67114800E269F2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CC742DC220526FD800D645CC /* HGManager */,
 				636B1B191C1FDDD100450358 /* CostumView */,
 				63878FD91C1519CD008E1CF9 /* FXD_Tools */,
 				635B8DE11B706A2D00F840CA /* GlobalConfig.h */,
@@ -4471,6 +4488,17 @@
 			path = Compliance;
 			sourceTree = "<group>";
 		};
+		CC742DC220526FD800D645CC /* HGManager */ = {
+			isa = PBXGroup;
+			children = (
+				CC742DC320526FD800D645CC /* HG_Manager.h */,
+				CC742DC420526FD800D645CC /* HG_Manager.m */,
+				CC742DC520526FD800D645CC /* test.html */,
+				CC742DC620526FD800D645CC /* test1.html */,
+			);
+			path = HGManager;
+			sourceTree = "<group>";
+		};
 		CC85C62A1FBED2BE0090A7E7 /* RedPacketWithCash */ = {
 			isa = PBXGroup;
 			children = (
@@ -4756,6 +4784,7 @@
 				84C619FD1FA81E7000626411 /* PayMethodViewController.xib in Resources */,
 				84C619FE1FA81E7000626411 /* DefaultCardPopoverWindowModule.xib in Resources */,
 				84C619FF1FA81E7000626411 /* LoanPaymentDetailVCModule.xib in Resources */,
+				CC742DCB20526FD900D645CC /* test1.html in Resources */,
 				84C61A001FA81E7000626411 /* LoanPeriodListVCModule.xib in Resources */,
 				84C61A011FA81E7000626411 /* BankListCell.xib in Resources */,
 				84C61A021FA81E7000626411 /* DetailRepayHeader.xib in Resources */,
@@ -4806,6 +4835,7 @@
 				84BC53D61FF4C43B00FE58E8 /* OverdueInfoPopView.xib in Resources */,
 				84ED5B751F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */,
 				1A762F701C1FBE4700964719 /* RepayRecordController.xib in Resources */,
+				CC742DC920526FD900D645CC /* test.html in Resources */,
 				84A37FFA1FAC12A8008FB7AF /* QRCodePopView.xib in Resources */,
 				63553AEE1E5D787800B2C1FF /* IdentityCell.xib in Resources */,
 				638A170D1E517E8C00AB8AB6 /* vcTransition1.json in Resources */,
@@ -4845,6 +4875,7 @@
 				84C619E91FA81D3E00626411 /* PayMethodViewController.xib in Resources */,
 				84C619EA1FA81D3E00626411 /* DefaultCardPopoverWindowModule.xib in Resources */,
 				84C619EB1FA81D3E00626411 /* LoanPaymentDetailVCModule.xib in Resources */,
+				CC742DCC20526FD900D645CC /* test1.html in Resources */,
 				84C619EC1FA81D3E00626411 /* LoanPeriodListVCModule.xib in Resources */,
 				84C619ED1FA81D3E00626411 /* BankListCell.xib in Resources */,
 				84C619EE1FA81D3E00626411 /* DetailRepayHeader.xib in Resources */,
@@ -4895,6 +4926,7 @@
 				84ED5B761F4AC9F6004C0A59 /* UnfoldTableViewCell.xib in Resources */,
 				84A380291FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.xib in Resources */,
 				84BC53D71FF4C43B00FE58E8 /* OverdueInfoPopView.xib in Resources */,
+				CC742DCA20526FD900D645CC /* test.html in Resources */,
 				CC0DFB681EA5B1090024841A /* RepayRecordController.xib in Resources */,
 				CC0DFB6B1EA5B1090024841A /* IdentityCell.xib in Resources */,
 				84A37FFB1FAC12A8008FB7AF /* QRCodePopView.xib in Resources */,
@@ -5153,6 +5185,7 @@
 				63DB3FBE1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m in Sources */,
 				CC73368F1FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */,
 				633DAD301C3E59A0000DA852 /* LoginViewModel.m in Sources */,
+				CC742DC720526FD900D645CC /* HG_Manager.m in Sources */,
 				63D43EF81D41F76D0076AC7F /* YYKVStorage.m in Sources */,
 				638A16891E5045BC00AB8AB6 /* RepayRequestManage.m in Sources */,
 				849AC2571FF09721005E435F /* HighRankingAuthTableViewCell.swift in Sources */,
@@ -5487,6 +5520,7 @@
 				63E1ECD31E1B8FAA0079A2F8 /* SDCollectionViewCell.m in Sources */,
 				634795DB1D378CED00EC4027 /* Aspects.m in Sources */,
 				63A24C691BE063A90036E8EF /* UIImage+FixOrientation.m in Sources */,
+				CC742DCF2052704B00D645CC /* P2PViewController.m in Sources */,
 				630D46171BCCD2FB00874064 /* UpdateDevIDViewController.m in Sources */,
 				CCE3BE281ED2D655004C35A4 /* QueryCardInfo.m in Sources */,
 				637636EA1D76A72A00E93289 /* LewPopupViewAnimationSlide.m in Sources */,
@@ -5604,6 +5638,7 @@
 				CC0DF9791EA5B1090024841A /* YYTextMagnifier.m in Sources */,
 				CC0DF97A1EA5B1090024841A /* BaseViewController.m in Sources */,
 				CC0DF97B1EA5B1090024841A /* UIImage+Cut.m in Sources */,
+				CC742DC820526FD900D645CC /* HG_Manager.m in Sources */,
 				CCCDA87D1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */,
 				84CC899A1F593C1E00537910 /* ApplicaitonModel.m in Sources */,
 				849AC2581FF09721005E435F /* HighRankingAuthTableViewCell.swift in Sources */,
@@ -5938,6 +5973,7 @@
 				CC0DFAC31EA5B1090024841A /* Aspects.m in Sources */,
 				CC0DFAC41EA5B1090024841A /* UIImage+FixOrientation.m in Sources */,
 				CCD32B531F5819980092A9CB /* CurrentInformationCell.swift in Sources */,
+				CC742DD02052704B00D645CC /* P2PViewController.m in Sources */,
 				CC0DFAC61EA5B1090024841A /* UpdateDevIDViewController.m in Sources */,
 				CCCE40C21EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */,
 				CC0DFAC71EA5B1090024841A /* LewPopupViewAnimationSlide.m in Sources */,

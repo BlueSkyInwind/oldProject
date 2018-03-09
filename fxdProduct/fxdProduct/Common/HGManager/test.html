@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+            <title>test</title>
+            <script>
+                function my_post(path, params) {
+                    var method = "POST";
+                    var form = document.createElement("form");
+                    form.setAttribute("method", method);
+                    form.setAttribute("action", path);
+                    
+                    for(var key in params){
+                        
+                        if (params.hasOwnProperty(key)) {
+                            
+                            var hiddenFild = document.createElement("input");
+                            hiddenFild.setAttribute("type", "hidden");
+                            hiddenFild.setAttribute("name", key);
+                            hiddenFild.setAttribute("class", "hidden");
+                            hiddenFild.setAttribute("value", params[key]);
+                            
+                        }
+                        
+                        form.appendChild(hiddenFild);
+                    }
+                    
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            </script>
+    </head>
+    <body>
+        <div>  </div>
+    </body>
+</html>
+
+
+

@@ -79,6 +79,7 @@
 #import "ComplianceViewModel.h"
 #import "AccountModel.h"
 #import "ApplicationNewCreateModel.h"
+#import "HG_Manager.h"
 
 
 #endif /* fxdProduct_Bridging_Header_h */

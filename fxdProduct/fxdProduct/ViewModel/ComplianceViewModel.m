@@ -27,14 +27,16 @@
     }];
 }
 
--(void)hgSubmitAccountInfoBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone cardNo:(NSString *)cardNo retUrl:(NSString *)retUrl smsSeq:(NSString *)smsSeq verifyCode:(NSString *)verifyCode{
+-(void)hgSubmitAccountInfoBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo retUrl:(NSString *)retUrl smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode{
     
     SubmitAccountParamModel *paramModel = [[SubmitAccountParamModel alloc]init];
     paramModel.bankNo = bankNo;
     paramModel.bankReservePhone = bankReservePhone;
+    paramModel.bankShortName = bankShortName;
     paramModel.cardNo = cardNo;
     paramModel.retUrl = retUrl;
     paramModel.smsSeq = smsSeq;
+    paramModel.userCode = userCode;
     paramModel.verifyCode = verifyCode;
     NSDictionary *paramDic = [paramModel toDictionary];
     
