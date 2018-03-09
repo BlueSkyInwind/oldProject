@@ -78,6 +78,7 @@
 #import "DetailViewController.h"
 #import "ComplianceViewModel.h"
 #import "AccountModel.h"
+#import "ApplicationNewCreateModel.h"
 
 
 #endif /* fxdProduct_Bridging_Header_h */

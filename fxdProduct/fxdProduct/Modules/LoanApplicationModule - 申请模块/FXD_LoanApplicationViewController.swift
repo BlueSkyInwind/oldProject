@@ -135,20 +135,50 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         applicationMV.setBlockWithReturn({ [weak self](returnValue) in
             let baseResult = returnValue as? BaseResultModel
             if baseResult?.errCode == "0" {
-                let checkVC = FXD_ToWithdrawFundsViewController()
-                self?.navigationController?.pushViewController(checkVC, animated: true)
+                let model = try! ApplicationNewCreateModel.init(dictionary: baseResult?.data as! [AnyHashable : Any])
+                
+                if model.platformCode == "0"{
+                    let checkVC = FXD_ToWithdrawFundsViewController()
+                    self?.navigationController?.pushViewController(checkVC, animated: true)
+                }else{
+                    self?.jumpController(model: model)
+                }
+                
+                
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult?.friendErrMsg)
             }
         }) {
         }
         if isDisplayDiscount! {
-            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: chooseDiscountTDM?.base_id, loanFor: loanForCode, stagingType: "", periods: contentArrs![2], loanAmount: contentArrs![0])
+            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: chooseDiscountTDM?.base_id, loanFor: loanForCode, stagingType: periodStagingType, periods: contentArrs![3], loanAmount: contentArrs![0])
         }else{
-            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: nil, loanFor: loanForCode, stagingType: "", periods: contentArrs![1], loanAmount: contentArrs![0])
+            applicationMV.newUserCreateApplication(productId, platformCode: "0", baseId: nil, loanFor: loanForCode, stagingType: periodStagingType, periods: contentArrs![2], loanAmount: contentArrs![0])
         }
     }
     
+    func jumpController(model : ApplicationNewCreateModel){
+        
+        switch Int(model.userStatus) {
+        case 1?:
+            print("未开户")
+            let controller = OpenAccountViewController()
+            self.navigationController?.pushViewController(controller, animated: true)
+        case 2?:
+            let controller = IntermediateViewController()
+            self.navigationController?.pushViewController(controller, animated: true)
+            
+            print("开户中")
+        case 3?:
+            print("已开户")
+            let checkVC = FXD_ToWithdrawFundsViewController()
+            self.navigationController?.pushViewController(checkVC, animated: true)
+        case 4?:
+            print("待激活")
+        default:
+            break
+        }
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }

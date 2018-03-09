@@ -16,10 +16,14 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     private var countdownTimer: Timer?
     private var remainingSeconds: Int = 0
     var codeBtn: UIButton?
+    var openAccountModel : AccountModel?
+    var submitArray : NSMutableArray?
 //    var bankNameStr : String?
     var index : Int = -1{
         didSet{
             
+            contentArray.replaceObject(at: 3, with: "")
+            contentArray.replaceObject(at: 4, with: "")
             self.tableView?.reloadData()
         }
     }
@@ -32,10 +36,10 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         super.viewDidLoad()
 
         titleArray = ["姓名:","身份证号:","开户银行:","银行卡号:","预留手机号:","验证码:"]
-        contentArray = ["黄渤","459503850073456","招商银行","459403850073656","16789404903","167894"]
         self.title = "平台开户"
         configureView()
         addBackItem()
+        getHGAccountInfo()
         // Do any additional setup after loading the view.
     }
 
@@ -94,9 +98,19 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         self.navigationController?.pushViewController(controller, animated: true)
         print("点击下一步按钮")
     }
+    
+    fileprivate func submitAccount(){
+        let complianceVM = ComplianceViewModel()
+        complianceVM.setBlockWithReturn({ (retrunValue) in
+            
+        }) {
+            
+        }
+        complianceVM.hgSubmitAccountInfoBankNo(<#T##bankNo: String!##String!#>, bankReservePhone: <#T##String!#>, cardNo: <#T##String!#>, retUrl: <#T##String!#>, smsSeq: <#T##String!#>, verifyCode: <#T##String!#>)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        getHGAccountInfo()
+        
     }
     
     func getHGAccountInfo(){
@@ -106,12 +120,22 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
            
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
-                let model = try? AccountModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
-                self?.contentArray.add(model?.name as Any)
-                self?.contentArray.add(model?.idCode as Any)
-                self?.contentArray.add(model?.bankName as Any)
-                self?.contentArray.add(model?.bankNum as Any)
-                self?.contentArray.add(model?.telephone as Any)
+                
+                self?.contentArray.removeAllObjects()
+                self?.openAccountModel = try? AccountModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self?.contentArray.add(self?.openAccountModel?.name as Any)
+                self?.contentArray.add(self?.openAccountModel?.idCode as Any)
+                self?.contentArray.add(self?.openAccountModel?.bankName as Any)
+                self?.contentArray.add(self?.openAccountModel?.bankNum as Any)
+                self?.contentArray.add(self?.openAccountModel?.telephone as Any)
+                self?.contentArray.add("")
+                
+                self?.submitArray?.add(self?.openAccountModel?.bankShortName as Any)
+                self?.submitArray?.add(self?.openAccountModel?.telephone as Any)
+                self?.submitArray?.add(self?.openAccountModel?.bankShortName as Any)
+                self?.submitArray?.add(self?.openAccountModel?.cardId as Any)
+                self?.submitArray?.add(self?.openAccountModel?.bankNum as Any)
+                self?.submitArray?.add(self?.openAccountModel?.userCode as Any)
                 self?.tableView?.reloadData()
                 
             }else{
@@ -191,7 +215,6 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         cell.contentTextField?.delegate = self
         cell.titleLabel?.text = titleArray?[indexPath.row] as? String
         cell.contentTextField?.keyboardType = .numberPad
-//        cell.contentLabel?.text = cntentArray?[indexPath.row] as? String
         if contentArray.count > 1{
             
             cell.contentTextField?.text = contentArray[indexPath.row] as? String
@@ -206,6 +229,9 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         }
         
         if indexPath.row == 4 || indexPath.row == 5{
+            cell.contentTextField?.isEnabled = true
+        }
+        if index > 0 && indexPath.row == 3 {
             cell.contentTextField?.isEnabled = true
         }
         if indexPath.row == 2 {
@@ -225,19 +251,19 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         if indexPath.row == 2 {
 
             let controller = BankListViewController()
+            controller.bankListArray = openAccountModel?.bankList as! NSArray
             controller.selectedTag = index
-            controller.selectedBankClosure = {(bankName: String, selectedTag : NSInteger) -> Void in
+            controller.selectedBankClosure = {(bankModel: BankListModel, selectedTag : NSInteger) -> Void in
                 self.index = selectedTag
-                self.contentArray.replaceObject(at: 2, with: bankName)
-//                self.bankNameStr = bankName
+                self.contentArray.replaceObject(at: 2, with: bankModel.bankName)
+                self.submitArray?.replaceObject(at: 2, with: bankModel.bankCode)
+                
+
             }
             
             self.navigationController?.pushViewController(controller, animated: true)
-            
-//            pushUserBankListVC()
 
         }
-        
     }
     
 //    func pushUserBankListVC()  {
@@ -261,8 +287,6 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         let tag = textField.tag
         
         switch tag {
-        case 3:
-            print("开户银行")
         case 4:
             print("银行卡号")
         case 5:
@@ -288,10 +312,8 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     }
     
     func codeBtnClick(sender:UIButton) {
-        remainingSeconds = 60
         codeBtn = sender
-        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-//        sendSmsCode()
+        sendSmsCode()
 
     }
     
@@ -316,14 +338,17 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     fileprivate func sendSmsCode(){
         
         let complianceVM = ComplianceViewModel()
-        complianceVM.setBlockWithReturn({ (returnValue) in
+        complianceVM.setBlockWithReturn({ [weak self](returnValue) in
             
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
                 
+                self?.remainingSeconds = 60
+                self?.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self as Any, selector: #selector(self?.updateTime), userInfo: nil, repeats: true)
+                
             }else{
                 
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
         }) {
             

@@ -11,3 +11,12 @@
 @implementation AccountModel
 
 @end
+
+@implementation BankListModel
+
++(JSONKeyMapper *)keyMapper{
+    
+    return [[JSONKeyMapper alloc]initWithModelToJSONDictionary:@{@"id_":@"id"}];
+}
+
+@end

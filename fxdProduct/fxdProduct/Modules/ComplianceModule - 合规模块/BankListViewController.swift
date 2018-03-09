@@ -8,19 +8,19 @@
 
 import UIKit
 
-typealias selectedBankClosure = (_ bankName: String, _ selectedTag: NSInteger)->Void
+typealias selectedBankClosure = (_ bankModel: BankListModel, _ selectedTag: NSInteger)->Void
 
 class BankListViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
 
     var tableView : UITableView?
-    var titleArray : NSArray?
+    var bankListArray : NSArray?
     var selectedTag : Int = -1
     var selectedBankClosure : selectedBankClosure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "银行卡列表"
-        titleArray = ["上海银行","中信银行","中国交通银行","中国光大银行","中国农业银行","中国工商银行"]
+//        titleArray = ["上海银行","中信银行","中国交通银行","中国光大银行","中国农业银行","中国工商银行"]
         configureView()
         addBackItem()
         // Do any additional setup after loading the view.
@@ -47,41 +47,11 @@ class BankListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }else{
             self.automaticallyAdjustsScrollViewInsets = false;
         }
-        
-        let nextBtn = UIButton()
-        nextBtn.setTitle("下一步", for: .normal)
-        nextBtn.setTitleColor(UIColor.white, for: .normal)
-        nextBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        nextBtn.setBackgroundImage(UIImage(named:"applayBtnImage"), for: .normal)
-        nextBtn.addTarget(self, action: #selector(nextBtnBtnClick), for: .touchUpInside)
-        self.view.addSubview(nextBtn)
-        nextBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(self.view).offset(18)
-            make.right.equalTo(self.view).offset(-18)
-            make.top.equalTo(self.view).offset(520)
-            make.height.equalTo(50)
-        }
-        
-        if UI_IS_IPONE5 {
-            nextBtn.snp.updateConstraints({ (make) in
-                make.top.equalTo(self.view).offset(480)
-            })
-        }
-        if UI_IS_IPONE6P {
-            nextBtn.snp.updateConstraints({ (make) in
-                make.top.equalTo(self.view).offset(570)
-            })
-        }
-    }
-    
-    
-    @objc fileprivate func nextBtnBtnClick(){
-        print("点击下一步按钮")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return (titleArray?.count)!
+        return (bankListArray?.count)!
     }
     
     
@@ -94,7 +64,7 @@ class BankListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 20
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -111,8 +81,15 @@ class BankListViewController: BaseViewController ,UITableViewDelegate,UITableVie
             cell = HGBankListCell.init(style: .default, reuseIdentifier: "CellId")
         }
         cell.selectionStyle = .none
-        cell.bankNameLabel?.text = titleArray?[indexPath.row] as? String
-        cell.bankImageView?.image = UIImage.init(named: "UserData1")
+        let model = bankListArray?[indexPath.row] as! BankListModel
+        
+        cell.bankNameLabel?.text = model.bankName
+        let url = URL(string: model.imgUrl)
+//        let url = URL(string: "http://192.168.5.26/fxd/M00/09/F7/wKgFGlowglSER8BxAAAAAOVyU4Y166.png")
+        
+        cell.bankImageView?.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
+        
+        })
 
         if selectedTag == indexPath.row {
             cell.accessoryType = .checkmark
@@ -124,11 +101,13 @@ class BankListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let model = bankListArray![indexPath.row] as! BankListModel
+        
         self.selectedTag = indexPath.row
         self.tableView?.reloadData()
         if selectedBankClosure != nil {
             
-            selectedBankClosure!(titleArray![indexPath.row] as! String,indexPath.row)
+            selectedBankClosure!(model,indexPath.row)
         }
         self.navigationController?.popViewController(animated: true)
 

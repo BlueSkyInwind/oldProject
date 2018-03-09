@@ -1040,6 +1040,8 @@
 		CC742DBA204FD7FE00D645CC /* IntermediateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB8204FD7FE00D645CC /* IntermediateViewController.swift */; };
 		CC742DBC204FD88A00D645CC /* IntermediateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBB204FD88A00D645CC /* IntermediateCell.swift */; };
 		CC742DBD204FD88A00D645CC /* IntermediateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBB204FD88A00D645CC /* IntermediateCell.swift */; };
+		CC742DC020521FA700D645CC /* ApplicationNewCreateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */; };
+		CC742DC120521FA700D645CC /* ApplicationNewCreateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */; };
 		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC85C6281FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
@@ -2050,6 +2052,8 @@
 		CC742DB5204FB9C700D645CC /* BankListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankListCell.swift; sourceTree = "<group>"; };
 		CC742DB8204FD7FE00D645CC /* IntermediateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntermediateViewController.swift; sourceTree = "<group>"; };
 		CC742DBB204FD88A00D645CC /* IntermediateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntermediateCell.swift; sourceTree = "<group>"; };
+		CC742DBE20521FA700D645CC /* ApplicationNewCreateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationNewCreateModel.h; sourceTree = "<group>"; };
+		CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationNewCreateModel.m; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
@@ -4404,6 +4408,8 @@
 				CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */,
 				CCBD8F6A1F5D26BD005A980B /* RepayModel.h */,
 				CCBD8F6B1F5D26BD005A980B /* RepayModel.m */,
+				CC742DBE20521FA700D645CC /* ApplicationNewCreateModel.h */,
+				CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */,
 			);
 			name = ApplicationStatus;
 			sourceTree = "<group>";
@@ -5164,6 +5170,7 @@
 				63878FE51C1519CD008E1CF9 /* FXD_Utility.m in Sources */,
 				1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */,
 				84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
+				CC742DC020521FA700D645CC /* ApplicationNewCreateModel.m in Sources */,
 				638A16EB1E517D9F00AB8AB6 /* LOTLayerView.m in Sources */,
 				63145AF41CA8DBBD00D04ED8 /* RegionSub.m in Sources */,
 				634830FF1CBCA1A90005C4CD /* RegionCodeResult.m in Sources */,
@@ -5614,6 +5621,7 @@
 				CC0DF9851EA5B1090024841A /* UIViewController+RTRootNavigationController.m in Sources */,
 				CC0DF9861EA5B1090024841A /* LoginViewModel.m in Sources */,
 				CC0DF9871EA5B1090024841A /* YYKVStorage.m in Sources */,
+				CC742DC120521FA700D645CC /* ApplicationNewCreateModel.m in Sources */,
 				CC0DF9881EA5B1090024841A /* RepayRequestManage.m in Sources */,
 				CC0DF98B1EA5B1090024841A /* CALayer+Transition.m in Sources */,
 				CC0DF98C1EA5B1090024841A /* AppDelegate.mm in Sources */,

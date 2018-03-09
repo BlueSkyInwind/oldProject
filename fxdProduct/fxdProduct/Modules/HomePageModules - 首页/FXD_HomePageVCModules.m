@@ -592,17 +592,58 @@
  */
 -(void)withdrawMoneyImmediatelyBtnClick{
     
-    if ([_homeProductList.flag isEqualToString:@"15"]) {
-        LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-
-        [self.navigationController pushViewController:controller animated:true];
+    if ([_homeProductList.platfromType isEqualToString:@"0"]) {
+        if ([_homeProductList.flag isEqualToString:@"15"]) {
+            LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+            
+            [self.navigationController pushViewController:controller animated:true];
+        }else{
+            FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
+            [self.navigationController pushViewController:loanApplicationVC animated:true];
+        }
     }else{
-        FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
-        [self.navigationController pushViewController:loanApplicationVC animated:true];
+        [self jumpControllerUserStatus:_homeProductList.userStatus];
     }
 }
 
-
+//根据合规状态跳转页面
+-(void)jumpControllerUserStatus:(NSString *)userStatus{
+    
+    switch (userStatus.integerValue) {
+        case 1:
+        {
+            OpenAccountViewController * controller = [[OpenAccountViewController alloc]init];
+            [self.navigationController pushViewController:controller animated:true];
+        }
+            
+            break;
+        case 2:
+        {
+            IntermediateViewController * controller = [[IntermediateViewController alloc]init];
+            [self.navigationController pushViewController:controller animated:true];
+        }
+            
+            break;
+        case 3:
+        {
+            if ([_homeProductList.flag isEqualToString:@"15"]) {
+                LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+                
+                [self.navigationController pushViewController:controller animated:true];
+            }else{
+                FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
+                [self.navigationController pushViewController:loanApplicationVC animated:true];
+            }
+        }
+            break;
+        case 4:
+            
+            break;
+        
+        default:
+            break;
+    }
+}
 /**
  我要借款
  */
