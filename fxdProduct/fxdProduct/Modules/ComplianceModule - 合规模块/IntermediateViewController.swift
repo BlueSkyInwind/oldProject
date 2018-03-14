@@ -12,14 +12,36 @@ import MJRefresh
 class IntermediateViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,IntermediateCellDelegate{
     
     var tableView : UITableView?
-    var type : String = "1"
+   @objc var type : String = "1"
+    private var countdownTimer: Timer?
+    private var remainingSeconds: Int = 6
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "开户中"
         configureView()
-        addBackItem()
+    
+        if type == "2" {
+        
+            addBackItem()
+            
+            self.title = "开户失败"
+            self.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self as Any, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
+        }else{
+            
+            addBackItemRoot()
+        }
         // Do any additional setup after loading the view.
+    }
+    
+    @objc fileprivate func updateTime(){
+        
+        remainingSeconds -= 1
+        if remainingSeconds == 0 {
+            countdownTimer?.invalidate()
+            countdownTimer = nil
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func configureView()  {

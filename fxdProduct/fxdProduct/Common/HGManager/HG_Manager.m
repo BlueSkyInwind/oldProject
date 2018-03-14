@@ -8,6 +8,7 @@
 
 #import "HG_Manager.h"
 #import "ComplianceViewModel.h"
+#import "P2PViewController.h"
 @implementation HG_Manager
 
 + (HG_Manager *)sharedHGManager
@@ -96,45 +97,37 @@
 }
 
 #pragma mark - 合规改造新用户开户
--(void)hgUserRegJumpP2pCtrlBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc{
+-(void)hgUserRegJumpP2pCtrlBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardId:(NSString *)cardId cardNo:(NSString *)cardNo smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc{
     
-//    UIViewController *topRootViewController;
-//    if ([vc isKindOfClass: [BankCardViewController class]]) {
-//        topRootViewController = (BankCardViewController *)vc;
-//    }
-//
-//    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
-//    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
-//        BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
-//        if ([baseResultM.errCode isEqualToString:@"0"]) {
-//            HgUserRegModel * hgUserRegModel = [[HgUserRegModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-//
-//            NSString *url = [self buildForm:hgUserRegModel.huifu_url params:hgUserRegModel.msgParamDto];
-//            P2PViewController *p2pVC = [[P2PViewController alloc] init];
-//            p2pVC.applicationId = applicationId;
-//            p2pVC.jsContent = url;
-//            [topRootViewController.navigationController pushViewController:p2pVC animated:YES];
-//        }else{
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:topRootViewController.view message:baseResultM.friendErrMsg];
-//        }
-//    } WithFaileBlock:^{
-//
-//    }];
-//    [complianceVM hgUserRegFormParamsBank_id:bank_id_ card_number:card_number_ mobile:mobile_ ret_url:_transition_url sms_code:sms_code_ sms_seq:sms_seq_ user_name:[Utility sharedUtility].userInfo.userMobilePhone];
-    
+    UIViewController *topRootViewController;
+    if ([vc isKindOfClass: [OpenAccountViewController class]]) {
+        topRootViewController = (OpenAccountViewController *)vc;
+    }
     ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
     [complianceVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
+            SubmitInfoModel * hgUserRegModel = [[SubmitInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            NSString *url = [self buildForm:hgUserRegModel.ServiceUrl params:hgUserRegModel.InMap];
+            P2PViewController *p2pVC = [[P2PViewController alloc] init];
+            p2pVC.jsContent = url;
+            p2pVC.urlStr = hgUserRegModel.ServiceUrl;
+            [topRootViewController.navigationController pushViewController:p2pVC animated:YES];
+        }else if ([baseResultM.errCode isEqualToString:@"2"]){
+            
+            IntermediateViewController *controller = [[IntermediateViewController alloc]init];
+            controller.type = @"2";
+            [topRootViewController.navigationController pushViewController:controller animated:YES];
             
         }else{
-            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:topRootViewController.view message:baseResultM.friendErrMsg];
         }
+        
     } WithFaileBlock:^{
         
     }];
+    [complianceVM hgSubmitAccountInfoBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardId:cardId cardNo:cardNo retUrl:_transition_url smsSeq:smsSeq userCode:userCode verifyCode:verifyCode];
     
-    [complianceVM hgSubmitAccountInfoBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardNo:cardNo retUrl:_transition_url smsSeq:smsSeq userCode:userCode verifyCode:verifyCode];
 }
 
 #pragma mark - 合规改造提款
@@ -163,6 +156,37 @@
 }
 
 
+-(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone cardNo:(NSString *)cardNo orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc{
+    
+    UIViewController *topRootViewController;
+    if ([vc isKindOfClass: [OpenAccountViewController class]]) {
+        topRootViewController = (OpenAccountViewController *)vc;
+    }
+    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
+    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            SubmitInfoModel * hgUserRegModel = [[SubmitInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            NSString *url = [self buildForm:hgUserRegModel.ServiceUrl params:hgUserRegModel.InMap];
+            P2PViewController *p2pVC = [[P2PViewController alloc] init];
+            p2pVC.jsContent = url;
+            for (UIViewController* vc1 in topRootViewController.rt_navigationController.rt_viewControllers) {
+                if ([vc1 isKindOfClass:[FXD_ToWithdrawFundsViewController class]]) {
+                    FXD_ToWithdrawFundsViewController *controller = (FXD_ToWithdrawFundsViewController *)vc1;
+                    [topRootViewController.navigationController popToViewController:controller animated:YES];
+                }
+            }
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:topRootViewController.view message:baseResultM.friendErrMsg];
+            [topRootViewController.navigationController popViewControllerAnimated:YES];
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceVM hgChangeBankCardBankNo:bankNo bankReservePhone:bankReservePhone cardNo:cardNo orgSmsCode:orgSmsCode orgSmsSeq:orgSmsSeq smsSeq:smsSeq userCode:userCode verifyCode:verifyCode];
+}
 -(NSString *)buildForm:(NSString *)path params:(NSDictionary *)params{
     
     NSMutableString * metaStr = [[NSMutableString alloc]initWithString:@"<form name=\"kun_form\" method=\"post\" action=\""];

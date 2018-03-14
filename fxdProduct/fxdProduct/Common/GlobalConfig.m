@@ -424,7 +424,11 @@ NSString * const    _contractStr_url            =    @"hg/contractStr.jhtml";
 
 //发送短信接口
 //NSString * const    _sendSms_url    =    @"h ttp/do.jhtml?router=sendSmsSHService.send";
-NSString * const    _sendSms_url    =    @"hg/sendSms.jhtml";
+//NSString * const    _sendSms_url    =    @"hg/sendSms.jhtml";
+NSString * const    _sendSms_url    =    @"paidcenter/hg/sendSmsCodeApi";
+
+//提交合规换绑银行卡信息
+NSString * const    _change_BankCards_url    =    @"membership/hg/change/bank/card";
 
 //换绑银行卡
 //NSString * const    _bankCards_url    =    @"http/do.jhtml?router=bankCardsSHService.quickChangeBindingCard";

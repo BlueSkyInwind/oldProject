@@ -141,6 +141,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
                     let checkVC = FXD_ToWithdrawFundsViewController()
                     self?.navigationController?.pushViewController(checkVC, animated: true)
                 }else{
+                    
                     self?.jumpController(model: model)
                 }
                 

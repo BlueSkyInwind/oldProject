@@ -22,5 +22,7 @@
 @property (nonatomic, strong)NSString<Optional> *mobile;
 //用户平台编号
 @property (nonatomic, strong)NSString<Optional> *userCode;
+//客户端  1:PC,2:微信,3:苹果,4:安卓
+@property (nonatomic, strong)NSString<Optional> *client;
 
 @end

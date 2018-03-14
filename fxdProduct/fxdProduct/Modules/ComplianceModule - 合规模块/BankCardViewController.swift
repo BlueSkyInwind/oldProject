@@ -8,10 +8,17 @@
 
 import UIKit
 
-class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
+class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,OpenAccountCellDelegate,UITextFieldDelegate{
 
     var tableView : UITableView?
     var titleArray : NSArray?
+    private var countdownTimer: Timer?
+    private var remainingSeconds: Int = 0
+    var codeBtn: UIButton?
+    var smsSeq : String?
+    var smsCode : String?
+    var cardInfo : CardInfo?
+    
 //    var bankNameStr : String?
 //
 //    var index : Int = -1{
@@ -79,9 +86,25 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        codeBtn?.isEnabled = true
+        codeBtn?.setBackgroundImage(UIImage.init(named: "code_icon"), for: .normal)
+        codeBtn?.setTitle("发送验证码", for: .normal)
+        countdownTimer?.invalidate()
+        countdownTimer = nil
+        tableView?.reloadData()
+    }
+    
+    //MARK:下一步按钮
     @objc fileprivate func nextBtnBtnClick(){
         let controller = OpenAccountViewController()
-        
+        controller.isOPenAccount = false
+        smsSeq = "AAAAAAAA"
+        controller.orgSmsSeq = String(format:"%@%@",smsCode!,smsSeq!)
+        controller.orgSmsCode = smsCode
+//        controller.orgSmsSeq = "\(smsCode)" + "\(smsSeq)"
 //        let controller = BankListViewController()
 //        controller.selectedTag = index
 //        controller.selectedBankClosure = {(bankName: String, selectedTag : NSInteger) -> Void in
@@ -90,6 +113,56 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
 //        }
         self.navigationController?.pushViewController(controller, animated: true)
         print("点击下一步按钮")
+    }
+    
+    
+    //MARK:验证码按钮事件
+    func codeBtnClick(sender: UIButton) {
+        
+        codeBtn = sender
+        sendSmsCode()
+        
+    }
+    
+    
+    fileprivate func sendSmsCode(){
+        
+        let complianceVM = ComplianceViewModel()
+        complianceVM.setBlockWithReturn({ [weak self](returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                let model = try? SmsCodeModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self?.smsSeq = model?.smsSeq
+                self?.remainingSeconds = 60
+                self?.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self as Any, selector: #selector(self?.updateTime), userInfo: nil, repeats: true)
+                
+            }else{
+                
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        
+        complianceVM.hgSendSmsCodeBusiType("rebind", smsTempType: "O", bankCardNo: cardInfo?.cardNo, capitalPlatform: "2", mobile: cardInfo?.bankPhone, userCode: "")
+    }
+    
+    @objc fileprivate func updateTime(){
+        
+        remainingSeconds -= 1
+        if remainingSeconds > 0 {
+            codeBtn?.setBackgroundImage(UIImage.init(named: "selected_icon"), for: .normal)
+            codeBtn?.setTitle("还剩" + "\(remainingSeconds)" + "s", for: .normal)
+            codeBtn?.isEnabled = false
+            
+        }else{
+            codeBtn?.isEnabled = true
+            codeBtn?.setBackgroundImage(UIImage.init(named: "code_icon"), for: .normal)
+            codeBtn?.setTitle("发送验证码", for: .normal)
+            countdownTimer?.invalidate()
+            countdownTimer = nil
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -135,10 +208,15 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
                 cell = BankCardCell.init(style: .default, reuseIdentifier: "BankCardCellId")
             }
             cell.selectionStyle = .none
-            cell.cardImageView?.image = UIImage.init(named: "<#T##String#>")
-            cell.cardNameLabel?.text = "工商银行"
-            cell.cardSpeciesLabel?.text = "储蓄卡"
-            cell.cardNumLabel?.text = "6*************8490"
+            let url = URL(string: (cardInfo?.cardIcon)!)
+            
+            cell.cardImageView?.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
+                
+            })
+
+            cell.cardNameLabel?.text = cardInfo?.bankName
+            cell.cardSpeciesLabel?.text = cardInfo?.cardShortName
+            cell.cardNumLabel?.text = cardInfo?.cardNo
             return cell
         }else{
             
@@ -147,14 +225,19 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
                 cell = OpenAccountCell.init(style: .default, reuseIdentifier: "CellId")
             }
             cell.selectionStyle = .none
-            
+            cell.delegate = self
             cell.titleLabel?.text = titleArray?[indexPath.row] as? String
             cell.contentTextField?.tag = indexPath.row + 1
             cell.contentTextField?.isEnabled = true
+            cell.contentTextField?.delegate = self
             cell.contentTextField?.addTarget(self, action: #selector(contentTextFieldEdit(textField:)), for: .editingChanged)
 
             if indexPath.row == 1 {
                 cell.verificationCodeBtn?.isHidden = false
+                cell.contentTextField?.text = ""
+            }else{
+                
+                cell.contentTextField?.text = cardInfo?.bankPhone
             }
             if indexPath.row == (titleArray?.count)! - 1 {
                 cell.lineView?.isHidden = true
@@ -172,18 +255,14 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
         let tag = textField.tag
         
         switch tag {
-        case 3:
-            print("开户银行")
-        case 4:
-            print("银行卡号")
-        case 5:
+        case 1:
             if (textField.text?.count)! > 11
             {
                 let str1 = textField.text?.prefix(11)
                 textField.text = String(str1!)
             }
             
-        case 6:
+        case 2:
             if (textField.text?.count)! > 6
             {
                 
@@ -192,6 +271,7 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
                 
             }
             
+            self.smsCode = textField.text
         default:
             break
         }

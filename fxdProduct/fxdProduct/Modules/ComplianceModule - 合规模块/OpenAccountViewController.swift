@@ -15,9 +15,12 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     var contentArray : NSMutableArray = [""]
     private var countdownTimer: Timer?
     private var remainingSeconds: Int = 0
+    var orgSmsSeq : String?
+    var orgSmsCode : String?
     var codeBtn: UIButton?
+    var isOPenAccount : Bool = true
     var openAccountModel : AccountModel?
-    var submitArray : NSMutableArray?
+    var submitArray : NSMutableArray?//0、开户银行  1、银行卡号  2、预留手机号  3、验证码  4、carId  5、SmsSeq  6、userCode  7、银行编号
     var index : Int = -1{
         didSet{
             
@@ -41,7 +44,15 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         submitArray = NSMutableArray.init()
         configureView()
         addBackItem()
-        getHGAccountInfo()
+        if isOPenAccount {
+            
+            getHGAccountInfo()
+            
+        }else{
+            
+            getChangeBankCardInfo()
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -68,7 +79,10 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         }
         
         let nextBtn = UIButton()
-        nextBtn.setTitle("下一步", for: .normal)
+        nextBtn.setTitle("点击新增", for: .normal)
+        if isOPenAccount {
+            nextBtn.setTitle("下一步", for: .normal)
+        }
         nextBtn.setTitleColor(UIColor.white, for: .normal)
         nextBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         nextBtn.setBackgroundImage(UIImage(named:"applayBtnImage"), for: .normal)
@@ -94,6 +108,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     }
     
     
+    //MARK:下一步按钮点击事件
     @objc fileprivate func nextBtnBtnClick(){
         
         if (submitArray![0] as! String).count < 3 {
@@ -112,19 +127,66 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请输入验证码")
             return
         }
-        submitAccount()
+        
+        if isOPenAccount {
+            submitAccount()
+        }else{
+            changeBankCardSubmit()
+        }
+        
         print("点击下一步按钮")
     }
     
+    //MARK:提交绑定银行卡
+    fileprivate func changeBankCardSubmit(){
+        HG_Manager.sharedHG().hgChangeBankCardBankNo(submitArray![7] as! String, bankReservePhone: submitArray![2] as! String, cardNo: submitArray![1] as! String, orgSmsCode: orgSmsCode, orgSmsSeq: orgSmsSeq, smsSeq: submitArray![5] as! String, userCode: submitArray![6] as! String, verifyCode: submitArray![3] as! String, vc: self)
+    }
+    
+    //MARK:提交开户
     fileprivate func submitAccount(){
-        HG_Manager.sharedHG().hgUserRegJumpP2pCtrlBankNo("<#T##bankNo: String!##String!#>", bankReservePhone: "<#T##String!#>", bankShortName: "<#T##String!#>", cardNo: "<#T##String!#>", smsSeq: "<#T##String!#>", userCode: "<#T##String!#>", verifyCode: "<#T##String!#>", vc: self)
+        
+        HG_Manager.sharedHG().hgUserRegJumpP2pCtrlBankNo(submitArray![7] as! String, bankReservePhone: submitArray![2] as! String, bankShortName:submitArray![0] as! String, cardId: submitArray![4] as! String, cardNo: submitArray![1] as! String, smsSeq: submitArray![5] as! String, userCode: submitArray![6] as! String, verifyCode: submitArray![3] as! String, vc: self)
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        remainingSeconds = 0
+        codeBtn?.isEnabled = true
+        codeBtn?.setBackgroundImage(UIImage.init(named: "code_icon"), for: .normal)
+        codeBtn?.setTitle("发送验证码", for: .normal)
+        countdownTimer?.invalidate()
+        countdownTimer = nil
         
+        if (submitArray?.count)! > 4 {
+            
+            submitArray?.replaceObject(at: 3, with: "")
+            contentArray.replaceObject(at: 5, with: "")
+            tableView?.reloadData()
+        }
     }
     
+    //MARK:获取换绑卡信息
+    func getChangeBankCardInfo(){
+        let complianceVM = ComplianceViewModel()
+        complianceVM.setBlockWithReturn({ [weak self] (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+                self?.contentArray.removeAllObjects()
+                self?.openAccountModel = try? AccountModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self?.dataProcessing()
+                
+            }else{
+                
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        complianceVM.hgChangeBankCardInfo()
+    }
+    
+    //MARK:获取开户信息
     func getHGAccountInfo(){
     
         let complianceVM = ComplianceViewModel()
@@ -135,22 +197,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
                 
                 self?.contentArray.removeAllObjects()
                 self?.openAccountModel = try? AccountModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
-                self?.contentArray.add(self?.openAccountModel?.name as Any)
-                self?.contentArray.add(self?.openAccountModel?.idCode as Any)
-                self?.contentArray.add(self?.openAccountModel?.bankName as Any)
-                self?.contentArray.add(self?.openAccountModel?.bankNum as Any)
-                self?.contentArray.add(self?.openAccountModel?.telephone as Any)
-                self?.contentArray.add("")
-                
-                self?.submitArray?.add(self?.openAccountModel?.bankShortName as Any)
-                self?.submitArray?.add(self?.openAccountModel?.bankNum as Any)
-                self?.submitArray?.add(self?.openAccountModel?.telephone as Any)
-                self?.submitArray?.add("")
-                self?.submitArray?.add(self?.openAccountModel?.cardId as Any)
-                self?.submitArray?.add(self?.openAccountModel?.bankNum as Any)
-                self?.submitArray?.add(self?.openAccountModel?.userCode as Any)
-                
-                self?.tableView?.reloadData()
+                self?.dataProcessing()
                 
             }else{
                 
@@ -162,6 +209,28 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         }
         
         complianceVM.hgAccountInfo()
+        
+    }
+    
+    //MARK:处理获取数据
+    func dataProcessing(){
+        
+        self.contentArray.add(self.openAccountModel?.name != nil ? self.openAccountModel?.name as Any : "" as Any)
+        self.contentArray.add(self.openAccountModel?.idCode != nil ? self.openAccountModel?.idCode as Any : "" as Any)
+        self.contentArray.add(self.openAccountModel?.bankName != nil ? self.openAccountModel?.bankName as Any : "" as Any)
+        self.contentArray.add(self.openAccountModel?.bankNum != nil ? self.openAccountModel?.bankNum as Any : "" as Any)
+        self.contentArray.add(self.openAccountModel?.telephone != nil ? self.openAccountModel?.telephone as Any : "" as Any)
+        self.contentArray.add("")
+        
+        self.submitArray?.add(self.openAccountModel?.bankShortName != nil ? self.openAccountModel?.bankShortName as Any : "" as Any)
+        self.submitArray?.add(self.openAccountModel?.bankNum != nil ? self.openAccountModel?.bankNum as Any : "" as Any)
+        self.submitArray?.add(self.openAccountModel?.telephone != nil ? self.openAccountModel?.telephone as Any : "" as Any)
+        self.submitArray?.add("")
+        self.submitArray?.add(self.openAccountModel?.cardId != nil ? self.openAccountModel?.cardId as Any : "" as Any)
+        self.submitArray?.add("")
+        self.submitArray?.add(self.openAccountModel?.userCode != nil ? self.openAccountModel?.userCode as Any : "" as Any)
+        self.submitArray?.add(self.openAccountModel?.bankNo != nil ? self.openAccountModel?.bankNo as Any : "" as Any)
+        self.tableView?.reloadData()
         
     }
     
@@ -228,7 +297,8 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         cell.delegate = self
         cell.contentTextField?.delegate = self
         cell.titleLabel?.text = titleArray?[indexPath.row] as? String
-        cell.contentTextField?.keyboardType = .numberPad
+//        cell.contentTextField?.keyboardType = .numberPad
+        
         if contentArray.count > 1{
             
             cell.contentTextField?.text = contentArray[indexPath.row] as? String
@@ -236,13 +306,18 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
             cell.contentTextField?.isEnabled = false
             cell.contentTextField?.addTarget(self, action: #selector(contentTextFieldEdit(textField:)), for: .editingChanged)
             
-            if indexPath.row == 3{
-
+            if indexPath.row == 3 {
+                
                 cell.contentTextField?.text = bankCardNo(bankNo: (contentArray[indexPath.row] as? String)!)
             }
         }
+        if !isOPenAccount {
+            if indexPath.row == 3{
+                cell.contentTextField?.isEnabled = true
+            }
+        }
         
-        if indexPath.row == 4 || indexPath.row == 5{
+        if indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 0 || indexPath.row == 1{
             cell.contentTextField?.isEnabled = true
         }
         if index > 0 && indexPath.row == 3 {
@@ -270,7 +345,8 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
             controller.selectedBankClosure = {(bankModel: BankListModel, selectedTag : NSInteger) -> Void in
                 self.index = selectedTag
                 self.contentArray.replaceObject(at: 2, with: bankModel.bankName)
-                self.submitArray?.replaceObject(at: 5, with: bankModel.bankCode)
+                self.submitArray?.replaceObject(at: 7, with: bankModel.bankNo)
+                self.submitArray?.replaceObject(at: 0, with: bankModel.bankCode)
                 
 
             }
@@ -280,22 +356,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         }
     }
     
-//    func pushUserBankListVC()  {
-//        let userBankCardListVC = UserBankCardListVCModule.init()
-//        userBankCardListVC.currentIndex = userSelectIndex!
-//        userBankCardListVC.payPatternSelectBlock = {[weak self] (cardInfo,currentIndex) in
-//            self?.isdispalyCard = true
-//            self?.selectedCard = cardInfo
-//            self?.userSelectIndex = currentIndex
-//            if cardInfo == nil {
-////                self?.fatchCardInfo({ (isSuccess, isBankCard) in
-////                })
-//            }
-//            self?.tableView?.reloadData()
-//        }
-//        self.navigationController?.pushViewController(userBankCardListVC, animated: true)
-//    }
-    
+    //MARK:UITextFieldDelegate
     @objc fileprivate func contentTextFieldEdit(textField:UITextField){
         
         let tag = textField.tag
@@ -325,38 +386,46 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         
     }
     
+    //MARK:验证码按钮点击事件
     func codeBtnClick(sender:UIButton) {
         codeBtn = sender
-        sendSmsCode()
-
+        
+        if isOPenAccount {
+            sendSmsCode()
+        }else{
+            changeBankSendSmsCode()
+        }
     }
     
 
+    //MARK:验证码倒计时
     @objc fileprivate func updateTime(){
         
         remainingSeconds -= 1
         if remainingSeconds > 0 {
             codeBtn?.setBackgroundImage(UIImage.init(named: "selected_icon"), for: .normal)
-            codeBtn?.setTitle("\(remainingSeconds)", for: .normal)
+            codeBtn?.setTitle("还剩" + "\(remainingSeconds)" + "s", for: .normal)
             codeBtn?.isEnabled = false
             
         }else{
             codeBtn?.isEnabled = true
             codeBtn?.setBackgroundImage(UIImage.init(named: "code_icon"), for: .normal)
-            codeBtn?.setTitle("验证码", for: .normal)
+            codeBtn?.setTitle("发送验证码", for: .normal)
             countdownTimer?.invalidate()
             countdownTimer = nil
         }
     }
     
-    fileprivate func sendSmsCode(){
-        
+    //MARK:绑定银行卡发送短信请求
+    fileprivate func changeBankSendSmsCode(){
         let complianceVM = ComplianceViewModel()
         complianceVM.setBlockWithReturn({ [weak self](returnValue) in
             
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
-                
+                let model = try? SmsCodeModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self?.submitArray?.replaceObject(at: 5, with: model?.smsSeq as Any)
+                self?.submitArray?.replaceObject(at: 5, with: "AAAAAAAA")
                 self?.remainingSeconds = 60
                 self?.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self as Any, selector: #selector(self?.updateTime), userInfo: nil, repeats: true)
                 
@@ -368,15 +437,41 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
             
         }
         
-        complianceVM.hgSendSmsCodeBusiType("user_register", smsTempType: nil, bankCardNo: contentArray[3] as! String, capitalPlatform: "1", mobile: contentArray[4] as! String, userCode: nil)
+        complianceVM.hgSendSmsCodeBusiType("rebind", smsTempType: "N", bankCardNo: submitArray![1] as! String, capitalPlatform: "2", mobile: submitArray![2] as! String, userCode: "")
     }
     
+    //MARK:开户发送短信请求
+    fileprivate func sendSmsCode(){
+        
+        let complianceVM = ComplianceViewModel()
+        complianceVM.setBlockWithReturn({ [weak self](returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                let model = try? SmsCodeModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self?.submitArray?.replaceObject(at: 5, with: model?.smsSeq as Any)
+                self?.submitArray?.replaceObject(at: 5, with: "AAAAAAAA")
+                self?.remainingSeconds = 60
+                self?.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self as Any, selector: #selector(self?.updateTime), userInfo: nil, repeats: true)
+                
+            }else{
+                
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        
+        complianceVM.hgSendSmsCodeBusiType("user_register", smsTempType: nil, bankCardNo: submitArray![1] as! String, capitalPlatform: "2", mobile: submitArray![2] as! String, userCode: submitArray![6] as! String)
+    }
+    
+    //MARK:处理银行卡号位数空格
     func bankCardNo(bankNo : String) -> String{
         
         let newBankNo = NSMutableString.init(string: bankNo)
         var index = 0
         var j = 0
-        for str in bankNo{
+        for _ in bankNo{
             index += 1
             j += 1
             if index % 4 == 0 {
@@ -389,22 +484,25 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         return newBankNo as String
         
     }
+    
+    //MARK:UITextFieldDelegate处理银行卡输入
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if textField.tag == 5 || textField.tag == 6{
+        if textField.tag == 5 || textField.tag == 6 || textField.tag == 1 || textField.tag == 2{
             return true
         }
         var returnValue = true
         let newText = NSMutableString.init(capacity: 0)
         newText.append(textField.text!)
         let noBlankStr = textField.text?.replacingOccurrences(of: " ", with: "")
-        submitArray?.replaceObject(at: 1, with: noBlankStr)
+        let banNo = noBlankStr! + string
+        
+        submitArray?.replaceObject(at: 1, with: banNo as Any)
         let textLength = noBlankStr?.count
         if string.count > 0{
-            if textLength! < 18 {
+            if textLength! < 20 {
                 
                 if textLength! > 0 && textLength! % 4 == 0 {
-//                    newText = newText.trimmingCharacters(in: NSCharacterSet.whitespaces) as! NSMutableString
                     newText.append(" ")
                     newText.append(string)
                     textField.text = newText as String
@@ -418,6 +516,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         }else{
             newText.replaceCharacters(in: range, with: string)
         }
+        
         return returnValue
         
     }

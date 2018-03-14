@@ -51,6 +51,8 @@
 @property (nonatomic, strong)NSString<Optional> *telephone;
 //银行预留手机号
 @property (nonatomic, strong)NSString<Optional> *userCode;
+//银行编号
+@property (nonatomic, strong)NSString<Optional> *bankNo;
 //支持银行列表
 @property(nonatomic,strong)NSArray<BankListModel,Optional> * bankList;
 

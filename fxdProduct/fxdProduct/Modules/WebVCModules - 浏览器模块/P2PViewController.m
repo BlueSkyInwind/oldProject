@@ -8,17 +8,7 @@
 
 #import "P2PViewController.h"
 #import <WebKit/WebKit.h>
-//#import "DrawService.h"
-//#import "LoanMoneyViewController.h"
-//#import "RTRootNavigationController.h"
-//#import "CheckViewController.h"
-//#import "AccountHSServiceModel.h"
-//#import "QryUserStatusModel.h"
-//#import "getBidStatus.h"
-//#import "RepayDetailViewController.h"
-//#import "CheckViewModel.h"
-//#import "RepayRequestManage.h"
-//#import "HomeViewController.h"
+
 @interface P2PViewController ()<WKScriptMessageHandler,WKUIDelegate,WKNavigationDelegate>
 {
     UIProgressView *progressView;
@@ -105,7 +95,7 @@
 {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self.navigationController popToRootViewControllerAnimated:true];
-//    [self getUserStatus:self.applicationId];
+
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
@@ -158,22 +148,31 @@
     DLog(@"%@",request.URL.absoluteString);
     DLog(@"=======%@",webView.URL.absoluteString);
 
-    
-    if([request.URL.absoluteString containsString:@"app_transition"]){
-        if ([request.URL.absoluteString containsString:@"type"]) {
-            decisionHandler(WKNavigationActionPolicyAllow);
-        }else{
-            NSString *str = [NSString stringWithFormat:@"%@",request.URL];
-            NSString *urlStr = [self assemblyUrl:str];
-            NSURL *url = [NSURL URLWithString:urlStr];
-            [_webview loadRequest:[NSURLRequest requestWithURL:url]];
-            
-            decisionHandler(WKNavigationActionPolicyCancel);
-        }
-    }else{
+    if ([request.URL.absoluteString hasPrefix:_transition_url]&&![request.URL.absoluteString isEqualToString:self.urlStr]) {
+        decisionHandler(WKNavigationActionPolicyAllow);
         
+        IntermediateViewController *controller = [[IntermediateViewController alloc]init];
+        [self.navigationController pushViewController:controller animated:true];
+        
+    }else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
+    
+//    if([request.URL.absoluteString containsString:@"app_transition"]){
+//        if ([request.URL.absoluteString containsString:@"type"]) {
+//            decisionHandler(WKNavigationActionPolicyAllow);
+//        }else{
+//            NSString *str = [NSString stringWithFormat:@"%@",request.URL];
+//            NSString *urlStr = [self assemblyUrl:str];
+//            NSURL *url = [NSURL URLWithString:urlStr];
+//            [_webview loadRequest:[NSURLRequest requestWithURL:url]];
+//
+//            decisionHandler(WKNavigationActionPolicyCancel);
+//        }
+//    }else{
+//        
+//        decisionHandler(WKNavigationActionPolicyAllow);
+//    }
     
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{

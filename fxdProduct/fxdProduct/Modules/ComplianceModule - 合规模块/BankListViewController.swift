@@ -20,7 +20,6 @@ class BankListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "银行卡列表"
-//        titleArray = ["上海银行","中信银行","中国交通银行","中国光大银行","中国农业银行","中国工商银行"]
         configureView()
         addBackItem()
         // Do any additional setup after loading the view.

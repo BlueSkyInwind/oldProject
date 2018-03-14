@@ -259,7 +259,10 @@
             [_waitView show:YES];
             [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-            manager.requestSerializer=[AFHTTPRequestSerializer serializer];
+//            manager.requestSerializer=[AFHTTPRequestSerializer serializer];
+            
+            manager.requestSerializer = [AFJSONRequestSerializer serializer];
+            manager.responseSerializer = [AFJSONResponseSerializer serializer];
             //            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
             DLog(@"juid --- %@\n token --- %@",[FXD_Utility sharedUtility].userInfo.juid,[FXD_Utility sharedUtility].userInfo.tokenStr);
             if ([FXD_Utility sharedUtility].userInfo.juid != nil && ![[FXD_Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
@@ -270,6 +273,8 @@
             }
             [manager.requestSerializer setValue:[FXD_Tool getAppVersion] forHTTPHeaderField:@"version"];
             [manager.requestSerializer setValue:SERVICE_PLATFORM forHTTPHeaderField:@"platformType"];
+            [manager.requestSerializer setValue:CHANNEL forHTTPHeaderField:@"channel"];
+            [manager.requestSerializer setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/xml",@"text/html",@"application/x-www-form-urlencoded",@"application/json", @"text/json", @"text/javascript",@"charset=UTF-8", nil];
             
             manager.requestSerializer.timeoutInterval = 30.0;
