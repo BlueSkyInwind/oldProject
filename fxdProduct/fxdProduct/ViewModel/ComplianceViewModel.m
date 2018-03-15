@@ -117,4 +117,40 @@
         }
     }];
 }
+
+-(void)hgUserActiveCapitalPlatform:(NSString *)capitalPlatform{
+    NSDictionary *paramDic = @{@"capitalPlatform":capitalPlatform,@"retUrl":_transition_url};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_hgUser_Active_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+    
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_hgUser_Active_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        if (self.returnBlock) {
+//            self.returnBlock(object);
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        if (self.faileBlock) {
+//            [self faileBlock];
+//        }
+//    }];
+}
+
+-(void)hgQueryUserStatus{
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_queryUserStatus_url] isNeedNetStatus:true isNeedWait:true parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
 @end

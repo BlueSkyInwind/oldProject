@@ -637,7 +637,9 @@
         }
             break;
         case 4:
-            
+        {
+            [[HG_Manager sharedHGManager]hgUserActiveJumpP2pCtrlCapitalPlatform:@"2" vc:self];
+        }
             break;
         
         default:
@@ -736,9 +738,13 @@
 -(void)repayImmediatelyBtnClick:(BOOL)isSelected{
     if (!isSelected) {
         
-        LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-        [self.navigationController pushViewController:controller animated:true];
-        
+        if ([_homeProductList.platfromType isEqualToString:@"0"]) {
+            LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+            [self.navigationController pushViewController:controller animated:true];
+        }else{
+            [self jumpControllerUserStatus:_homeProductList.userStatus];
+        }
+    
     }else{
         
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请勾选协议"];

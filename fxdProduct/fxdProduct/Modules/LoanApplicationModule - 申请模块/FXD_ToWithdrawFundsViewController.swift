@@ -33,18 +33,27 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         self.view.backgroundColor = LOAN_APPLICATION_COLOR
         self.obtainWithDrawFundsInfo {[weak self] (isSuccess) in
             self?.configureView()
-          if self?.drawingsInfoModel?.platformType == "2" {
+            if self?.drawingsInfoModel?.platformType == "2" {
                 self?.isdispalyCard = true
                 self?.changeBankCard()
             }
         }
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
-        
+        if self.drawingsInfoModel?.platformType == "2" {
+            self.obtainWithDrawFundsInfo {[weak self] (isSuccess) in
+                
+                if self?.drawingsInfoModel?.platformType == "2" {
+                    self?.isdispalyCard = true
+                    self?.changeBankCard()
+                }
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -234,6 +243,9 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         case 3?:
             print("已开户")
         case 4?:
+        
+            HG_Manager.sharedHG().hgUserActiveJumpP2pCtrlCapitalPlatform("2", vc: self)
+        
             print("待激活")
         default:
             break

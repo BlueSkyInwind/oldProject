@@ -298,18 +298,14 @@
         case 0:
         {
             
-            
-            OpenAccountViewController *myMessageVC=[[OpenAccountViewController alloc]init];
-//            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
             [self.navigationController pushViewController:myMessageVC animated:true];
         }
             break;
         case 1:
         {
             
-            
-            IntermediateViewController *repayRecord=[[IntermediateViewController alloc]init];
-//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
             [self.navigationController pushViewController:repayRecord animated:true];
         }
             break;

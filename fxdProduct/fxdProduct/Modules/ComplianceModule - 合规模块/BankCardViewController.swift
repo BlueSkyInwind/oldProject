@@ -94,16 +94,23 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
         codeBtn?.setTitle("发送验证码", for: .normal)
         countdownTimer?.invalidate()
         countdownTimer = nil
+        smsCode = nil
         tableView?.reloadData()
     }
     
     //MARK:下一步按钮
     @objc fileprivate func nextBtnBtnClick(){
+        
+        if smsCode == nil {
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请输入验证码")
+            return
+        }
         let controller = OpenAccountViewController()
         controller.isOPenAccount = false
         smsSeq = "AAAAAAAA"
-        controller.orgSmsSeq = String(format:"%@%@",smsCode!,smsSeq!)
+//        controller.orgSmsSeq = String(format:"%@%@",smsCode!,smsSeq!)
         controller.orgSmsCode = smsCode
+        controller.orgSmsSeq = smsSeq
 //        controller.orgSmsSeq = "\(smsCode)" + "\(smsSeq)"
 //        let controller = BankListViewController()
 //        controller.selectedTag = index

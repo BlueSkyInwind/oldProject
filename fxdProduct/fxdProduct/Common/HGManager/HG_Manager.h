@@ -28,7 +28,7 @@
  @param applicationId 用户申请件id
  @param vc 跳转的controller
  */
--(void)hgUserActiveJumpP2pCtrlApplicationId:(NSString *)applicationId vc:(id)vc;
+-(void)hgUserActiveJumpP2pCtrlCapitalPlatform:(NSString *)capitalPlatform vc:(id)vc;
 
 
 /**
@@ -58,4 +58,5 @@
 
 
 -(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone cardNo:(NSString *)cardNo orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc;
+
 @end

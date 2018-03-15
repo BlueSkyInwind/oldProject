@@ -9,6 +9,9 @@
 #import "HG_Manager.h"
 #import "ComplianceViewModel.h"
 #import "P2PViewController.h"
+#import "FXD_HomePageVCModules.h"
+#import "ActiveModel.h"
+
 @implementation HG_Manager
 
 + (HG_Manager *)sharedHGManager
@@ -60,37 +63,43 @@
 }
 #pragma mark - 合规改造老用户激活
 
--(void)hgUserActiveJumpP2pCtrlApplicationId:(NSString *)applicationId vc:(id)vc{
+-(void)hgUserActiveJumpP2pCtrlCapitalPlatform:(NSString *)capitalPlatform vc:(id)vc{
     
     UIViewController *topRootViewController;
     
-//    if ([vc isKindOfClass: [HomeViewController class]]) {
-//        topRootViewController = (HomeViewController *)vc;
-//    }
-//    if ([vc isKindOfClass: [LoanSureFirstViewController class]]) {
-//        topRootViewController = (LoanSureFirstViewController *)vc;
-//    }
+    if ([vc isKindOfClass: [FXD_HomePageVCModules class]]) {
+        topRootViewController = (FXD_HomePageVCModules *)vc;
+    }
+    if ([vc isKindOfClass: [FXD_ToWithdrawFundsViewController class]]) {
+        topRootViewController = (FXD_ToWithdrawFundsViewController *)vc;
+    }
 //    if ([vc isKindOfClass: [LoanMoneyViewController class]]) {
 //        topRootViewController = (LoanMoneyViewController *)vc;
 //    }
-//    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
-//    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
-//        BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
-//        if ([baseResultM.errCode isEqualToString:@"0"]) {
-//            HgUserActiveModel * hgUserActiveModel = [[HgUserActiveModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-//
-//            NSString *url = [self buildForm:hgUserActiveModel.huifu_url params:hgUserActiveModel.msgParamDto];
-//            P2PViewController *p2pVC = [[P2PViewController alloc] init];
-//            p2pVC.applicationId = applicationId;
-//            p2pVC.jsContent = url;
-//            [topRootViewController.navigationController pushViewController:p2pVC animated:YES];
-//        }else{
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:topRootViewController.view message:baseResultM.friendErrMsg];
-//        }
-//    } WithFaileBlock:^{
-//
-//    }];
-//    [complianceVM hgUserActiveFormParamsFrom_mobile:[Utility sharedUtility].userInfo.userMobilePhone page_type:@"1" ret_url:_transition_url];
+    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
+    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            ActiveModel * hgUserActiveModel = [[ActiveModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+
+            NSString *url = [self buildForm:hgUserActiveModel.ServiceUrl params:hgUserActiveModel.InMap];
+            P2PViewController *p2pVC = [[P2PViewController alloc] init];
+            p2pVC.urlStr = hgUserActiveModel.ServiceUrl;
+            p2pVC.jsContent = url;
+            [topRootViewController.navigationController pushViewController:p2pVC animated:YES];
+        }else if ([baseResultM.errCode isEqualToString:@"2"]){
+            
+            IntermediateViewController *controller = [[IntermediateViewController alloc]init];
+            controller.type = @"2";
+            [topRootViewController.navigationController pushViewController:controller animated:YES];
+            
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:topRootViewController.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+
+    }];
+    [complianceVM hgUserActiveCapitalPlatform:capitalPlatform];
     
     
 

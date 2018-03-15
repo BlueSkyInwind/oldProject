@@ -1088,6 +1088,8 @@
 		CCBD8F6D1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
 		CCC1E4062057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */; };
 		CCC1E4072057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */; };
+		CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
+		CCC1E40F205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
 		CCCB279C1FB2F04500412632 /* ScratchAwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB279B1FB2F04500412632 /* ScratchAwardView.m */; };
 		CCCB279D1FB2F04500412632 /* ScratchAwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB279B1FB2F04500412632 /* ScratchAwardView.m */; };
 		CCCB27A11FB2F1C100412632 /* DrawLotteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27A01FB2F1C100412632 /* DrawLotteryModel.m */; };
@@ -2100,6 +2102,8 @@
 		CCBD8F6B1F5D26BD005A980B /* RepayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayModel.m; sourceTree = "<group>"; };
 		CCC1E4042057EC7D007C9C07 /* ChangeBankCardParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeBankCardParamModel.h; sourceTree = "<group>"; };
 		CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeBankCardParamModel.m; sourceTree = "<group>"; };
+		CCC1E40C205A595F007C9C07 /* ActiveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveModel.h; sourceTree = "<group>"; };
+		CCC1E40D205A595F007C9C07 /* ActiveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveModel.m; sourceTree = "<group>"; };
 		CCCB279A1FB2F04500412632 /* ScratchAwardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScratchAwardView.h; sourceTree = "<group>"; };
 		CCCB279B1FB2F04500412632 /* ScratchAwardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScratchAwardView.m; sourceTree = "<group>"; };
 		CCCB279F1FB2F1C100412632 /* DrawLotteryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawLotteryModel.h; sourceTree = "<group>"; };
@@ -4496,6 +4500,8 @@
 				CC6E696620562D10005853BB /* SubmitInfoModel.m */,
 				CCC1E4042057EC7D007C9C07 /* ChangeBankCardParamModel.h */,
 				CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */,
+				CCC1E40C205A595F007C9C07 /* ActiveModel.h */,
+				CCC1E40D205A595F007C9C07 /* ActiveModel.m */,
 			);
 			path = Compliance;
 			sourceTree = "<group>";
@@ -5296,6 +5302,7 @@
 				637636EB1D76A72A00E93289 /* LewPopupViewAnimationSpring.m in Sources */,
 				63FC25011D98F7E9006F58F3 /* YYTextUtilities.m in Sources */,
 				638A17091E517D9F00AB8AB6 /* LOTShapeTrimPath.m in Sources */,
+				CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */,
 				CCCB27A11FB2F1C100412632 /* DrawLotteryModel.m in Sources */,
 				84F1E29F1FD90EE0007D3381 /* UserDataInformationModel.m in Sources */,
 				638A16EE1E517D9F00AB8AB6 /* LOTShapeLayerView.m in Sources */,
@@ -5752,6 +5759,7 @@
 				CCCC0A8F1F677B9B007E1EB0 /* UserDataResult.m in Sources */,
 				CC0DF9D01EA5B1090024841A /* UIImage+Color.m in Sources */,
 				84E62D1C1FDA7CA900B7F870 /* CustomerContactsInfoViewModel.m in Sources */,
+				CCC1E40F205A595F007C9C07 /* ActiveModel.m in Sources */,
 				CC0DF9D21EA5B1090024841A /* TicketCell.m in Sources */,
 				CC0DF9D41EA5B1090024841A /* NSString+AES.m in Sources */,
 				CC0DF9D61EA5B1090024841A /* ReconfrInfoModel.m in Sources */,

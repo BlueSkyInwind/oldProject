@@ -433,6 +433,10 @@ NSString * const    _change_BankCards_url    =    @"membership/hg/change/bank/ca
 //换绑银行卡
 //NSString * const    _bankCards_url    =    @"http/do.jhtml?router=bankCardsSHService.quickChangeBindingCard";
 NSString * const    _bankCards_url    =    @"hg/quickChangeBindingCard.jhtml";
+//合规获取老用户激活跳转页面参数
+NSString * const    _hgUser_Active_url    =    @"paidcenter/user/active";
+//合规用户状态查询
+NSString * const    _queryUserStatus_url    =    @"membership/paid/queryUserStatus";
 
 //银行卡查询接口
 //NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsSHService.queryCardInfo";

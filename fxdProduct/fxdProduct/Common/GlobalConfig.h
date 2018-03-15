@@ -164,6 +164,8 @@ UIKIT_EXTERN NSString * const       _paymentService_url;                    //�
 UIKIT_EXTERN NSString * const       _cash_url;                    //取现
 UIKIT_EXTERN NSString * const       _bosAcctActivate_url;                  //激活老账户
 UIKIT_EXTERN NSString * const       _change_BankCards_url;                  //提交合规换绑银行卡信息
+UIKIT_EXTERN NSString * const       _hgUser_Active_url;                  //合规获取老用户激活跳转页面参数
+UIKIT_EXTERN NSString * const       _queryUserStatus_url;                  //合规用户状态查询
 UIKIT_EXTERN NSString * const       _queryBidStatus_url;                  //标的状态查询接口
 UIKIT_EXTERN NSString * const       _bosAcctActivateRet_url;                  //激活老账户返回url
 UIKIT_EXTERN NSString * const       _qryUserStatus_url;                  //用户状态查询

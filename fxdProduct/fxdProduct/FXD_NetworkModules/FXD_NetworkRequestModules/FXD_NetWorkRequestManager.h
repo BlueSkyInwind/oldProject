@@ -60,5 +60,5 @@ typedef void (^FailureBlock)(EnumServerStatus status, id object);
 //合规请求
 - (void)HG_POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure;
 
-
+- (void)GetWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure;
 @end

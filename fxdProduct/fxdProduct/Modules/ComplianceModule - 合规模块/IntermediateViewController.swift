@@ -24,7 +24,7 @@ class IntermediateViewController: BaseViewController ,UITableViewDelegate,UITabl
         if type == "2" {
         
             addBackItem()
-            
+            tableView?.isScrollEnabled = false
             self.title = "开户失败"
             self.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self as Any, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
         }else{
@@ -65,23 +65,59 @@ class IntermediateViewController: BaseViewController ,UITableViewDelegate,UITabl
             self.automaticallyAdjustsScrollViewInsets = false;
         }
         
-        //下拉刷新相关设置,使用闭包Block
-        tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            
-            self.headerRefresh()
-            
-        })
+        if type == "1" {
+            //下拉刷新相关设置,使用闭包Block
+            tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+                
+                self.headerRefresh()
+                
+            })
+        }
     }
     
     //MARK: 刷新
     /// 下拉刷新
     @objc func headerRefresh(){
         
-        type = "2"
-        self.tableView?.reloadData()
-        self.tableView?.mj_header.endRefreshing()
+        let complianceMV = ComplianceViewModel()
+        complianceMV.setBlockWithReturn({ [weak self] (returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+                let  dic = returnValue! as! NSDictionary
+                let data = dic["data"] as! NSString
+                self?.jumpController(userstatus:data as String)
+                self?.tableView?.mj_header.endRefreshing()
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        complianceMV.hgQueryUserStatus()
+        
     }
 
+    func jumpController(userstatus : String){
+        
+        let tag = Int(userstatus)
+        
+        switch tag {
+        case 1?:
+            print("未开户")
+        case 2?:
+            self.tableView?.reloadData()
+            print("开户中")
+        case 3?: 
+            self.navigationController?.popToRootViewController(animated: true)
+            print("已开户")
+        case 4?:
+            print(":待激活")
+        default:
+            break
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 1

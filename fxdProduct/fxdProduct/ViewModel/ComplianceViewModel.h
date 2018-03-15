@@ -24,4 +24,10 @@
 
 //获取合规换绑卡信息
 -(void)hgChangeBankCardInfo;
+
+//合规获取老用户激活跳转页面参数
+-(void)hgUserActiveCapitalPlatform:(NSString *)capitalPlatform;
+//合规用户状态查询
+-(void)hgQueryUserStatus;
+
 @end
