@@ -139,7 +139,9 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     
     //MARK:提交绑定银行卡
     fileprivate func changeBankCardSubmit(){
-        HG_Manager.sharedHG().hgChangeBankCardBankNo(submitArray![7] as! String, bankReservePhone: submitArray![2] as! String, cardNo: submitArray![1] as! String, orgSmsCode: orgSmsCode, orgSmsSeq: orgSmsSeq, smsSeq: submitArray![5] as! String, userCode: submitArray![6] as! String, verifyCode: submitArray![3] as! String, vc: self)
+        
+        HG_Manager.sharedHG().hgChangeBankCardBankNo(submitArray![7] as! String, bankReservePhone: submitArray![2] as! String, bankShortName: submitArray![0] as! String, cardNo: submitArray![1] as! String, orgSmsCode: orgSmsCode, orgSmsSeq: orgSmsSeq, smsSeq: submitArray![5] as! String, userCode: submitArray![6] as! String, verifyCode: submitArray![3] as! String, vc: self)
+        
     }
     
     //MARK:提交开户
@@ -437,7 +439,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
             
         }
         
-        complianceVM.hgSendSmsCodeBusiType("rebind", smsTempType: "N", bankCardNo: submitArray![1] as! String, capitalPlatform: "2", mobile: submitArray![2] as! String, userCode: "")
+        complianceVM.hgSendSmsCodeBusiType("rebind", smsTempType: "N", bankCardNo: submitArray![1] as! String, capitalPlatform: "2", mobile: submitArray![2] as! String, userCode: submitArray![6] as! String)
     }
     
     //MARK:开户发送短信请求

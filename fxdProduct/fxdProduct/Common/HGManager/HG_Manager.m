@@ -23,44 +23,7 @@
     });
     return sharedMBPInstance;
 }
-#pragma mark - 获取银行卡列表，并跳转
--(void)jumpBankCtrlApplicationId:(NSString *)applicationId productId:(NSString *)productId vc:(id)vc{
-    
-    UIViewController *topRootViewController;
-    
-//    if ([vc isKindOfClass: [HomeViewController class]]) {
-//        topRootViewController = (HomeViewController *)vc;
-//    }
-//    if ([vc isKindOfClass: [LoanSureFirstViewController class]]) {
-//        topRootViewController = (LoanSureFirstViewController *)vc;
-//    }
-//    NSLog(@"%@",topRootViewController);
-//    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
-//    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-//        BaseResultModel * baseResult = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-//        if ([baseResult.flag isEqualToString:@"0000"]) {
-//            NSMutableArray * bankArr = [NSMutableArray array];
-//            NSArray * array  = (NSArray *)baseResult.result;
-//            for (int i = 0; i < array.count; i++) {
-//                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
-//                [bankArr addObject:bankList];
-//            }
-//
-//            BankCardViewController *bankVC = [BankCardViewController new];
-//            bankVC.bankArray = bankArr;
-//            bankVC.applicationId = applicationId;
-//            bankVC.productId = productId;
-//
-//            [topRootViewController.navigationController pushViewController:bankVC animated:YES];
-//
-//        } else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:topRootViewController.view message:baseResult.msg];
-//        }
-//    } WithFaileBlock:^{
-//
-//    }];
-//    [checkBankViewModel getSupportBankListInfo:@"4"];
-}
+
 #pragma mark - 合规改造老用户激活
 
 -(void)hgUserActiveJumpP2pCtrlCapitalPlatform:(NSString *)capitalPlatform vc:(id)vc{
@@ -139,33 +102,7 @@
     
 }
 
-#pragma mark - 合规改造提款
--(void)hgUserBidDrawApplyCardId:(NSString *)cardId loanFor:(NSString *)loanFor periods:(NSString *)periods vc:(id)vc{
-    
-    UIViewController *topRootViewController;
-
-//    if ([vc isKindOfClass: [CheckViewController class]]) {
-//        topRootViewController = (CheckViewController *)vc;
-//    }
-//    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
-//    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
-//        BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
-//        if ([baseResultM.errCode isEqualToString:@"0"]) {
-//            LoanMoneyViewController *controller = [LoanMoneyViewController new];
-//            controller.applicationStatus = ComplianceProcessing;
-//            controller.popAlert = true;
-//            [topRootViewController.navigationController pushViewController:controller animated:YES];
-//        }else{
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:topRootViewController.view message:baseResultM.friendErrMsg];
-//        }
-//    } WithFaileBlock:^{
-//
-//    }];
-//    [complianceVM hgUserBidDrawApplyCardId:cardId loanfor:loanFor periods:periods];
-}
-
-
--(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone cardNo:(NSString *)cardNo orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc{
+-(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc{
     
     UIViewController *topRootViewController;
     if ([vc isKindOfClass: [OpenAccountViewController class]]) {
@@ -175,10 +112,7 @@
     [complianceVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
-            SubmitInfoModel * hgUserRegModel = [[SubmitInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            NSString *url = [self buildForm:hgUserRegModel.ServiceUrl params:hgUserRegModel.InMap];
-            P2PViewController *p2pVC = [[P2PViewController alloc] init];
-            p2pVC.jsContent = url;
+            
             for (UIViewController* vc1 in topRootViewController.rt_navigationController.rt_viewControllers) {
                 if ([vc1 isKindOfClass:[FXD_ToWithdrawFundsViewController class]]) {
                     FXD_ToWithdrawFundsViewController *controller = (FXD_ToWithdrawFundsViewController *)vc1;
@@ -194,7 +128,7 @@
     } WithFaileBlock:^{
         
     }];
-    [complianceVM hgChangeBankCardBankNo:bankNo bankReservePhone:bankReservePhone cardNo:cardNo orgSmsCode:orgSmsCode orgSmsSeq:orgSmsSeq smsSeq:smsSeq userCode:userCode verifyCode:verifyCode];
+    [complianceVM hgChangeBankCardBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardNo:cardNo orgSmsCode:orgSmsCode orgSmsSeq:orgSmsSeq smsSeq:smsSeq userCode:userCode verifyCode:verifyCode];
 }
 -(NSString *)buildForm:(NSString *)path params:(NSDictionary *)params{
     

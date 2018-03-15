@@ -14,29 +14,21 @@
 
 
 /**
- 合规未开户跳转到银行卡页面
+ 合规获取老用户激活跳转页面参数
 
- @param applicationId 用户申请件id
- @param productId 用户产品id
- @param vc 跳转的controller
- */
--(void)jumpBankCtrlApplicationId:(NSString *)applicationId productId:(NSString *)productId vc:(id)vc;
-
-/**
- 合规激活用户，跳转到激活页面
-
- @param applicationId 用户申请件id
+ @param capitalPlatform 资金平台类型
  @param vc 跳转的controller
  */
 -(void)hgUserActiveJumpP2pCtrlCapitalPlatform:(NSString *)capitalPlatform vc:(id)vc;
 
 
 /**
- 合规未开户用户，跳转到激活页面
+ 提交合规开户信息
 
  @param bankNo 银行代号
  @param bankReservePhone 预留手机号
  @param bankShortName 银行名称缩写
+ @param cardId 绑定的银行卡id，没有不传
  @param cardNo 银行卡号
  @param smsSeq 短信验证序列号
  @param userCode 合规用户编号
@@ -47,16 +39,20 @@
 
 
 /**
- 合规正常用户，提款
-
- @param cardId 银行卡id
- @param loanFor 借款用途
- @param periods 借款周期
+ 提交合规换绑银行卡信息
+ 
+ @param bankNo 银行编号
+ @param bankReservePhone 银行预留手机
+ @param bankShortName 银行名称缩写
+ @param cardNo 银行卡号
+ @param orgSmsCode 旧绑定银行卡短信验证码
+ @param orgSmsSeq 旧绑定银行卡短信序号
+ @param retUrl 页面返回地址
+ @param smsSeq 短信验证序列号
+ @param userCode 合规用户编号
+ @param verifyCode 短信验证码
  @param vc 跳转的controller
  */
--(void)hgUserBidDrawApplyCardId:(NSString *)cardId loanFor:(NSString *)loanFor periods:(NSString *)periods vc:(id)vc;
-
-
--(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone cardNo:(NSString *)cardNo orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc;
+-(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc;
 
 @end

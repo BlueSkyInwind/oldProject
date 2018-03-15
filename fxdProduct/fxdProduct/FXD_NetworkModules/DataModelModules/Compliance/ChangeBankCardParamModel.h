@@ -14,6 +14,8 @@
 @property(nonatomic,strong)NSString<Optional> * bankNo;
 //银行预留手机
 @property(nonatomic,strong)NSString<Optional> * bankReservePhone;
+//银行缩写
+@property(nonatomic,strong)NSString<Optional> * bankShortName;
 //银行卡号
 @property(nonatomic,strong)NSString<Optional> * cardNo;
 //旧绑定银行卡短信验证码
@@ -26,6 +28,7 @@
 @property(nonatomic,strong)NSString<Optional> * userCode;
 //短信验证码
 @property(nonatomic,strong)NSString<Optional> * verifyCode;
-
+//页面返回地址
+@property (nonatomic, strong)NSString<Optional> *retUrl;
 
 @end

@@ -78,11 +78,13 @@
     }];
 }
 
--(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone cardNo:(NSString *)cardNo orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode{
+-(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode{
     
     ChangeBankCardParamModel *paramModel = [[ChangeBankCardParamModel alloc]init];
     paramModel.bankNo = bankNo;
     paramModel.bankReservePhone = bankReservePhone;
+    paramModel.bankShortName = bankShortName;
+    paramModel.retUrl = _transition_url;
     paramModel.cardNo = cardNo;
     paramModel.orgSmsCode = orgSmsCode;
     paramModel.orgSmsSeq = orgSmsSeq;
