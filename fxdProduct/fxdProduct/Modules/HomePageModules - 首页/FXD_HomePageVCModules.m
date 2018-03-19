@@ -226,10 +226,7 @@
     [messageVM countStationLetterMsg];
 }
 
-
-
 #pragma mark 首页navigation点击事件
-
 /**
  首页二维码弹窗
  */
