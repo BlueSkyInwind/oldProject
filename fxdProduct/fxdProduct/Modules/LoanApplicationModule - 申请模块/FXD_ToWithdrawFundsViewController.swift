@@ -21,7 +21,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     var displayContent:[String]? = [""]
     var displayTitle:String? = ""
     var applicationId:String? = ""
-
+    var stagingType:String? = ""
     var isKeepProtocol : Bool? = false
     var isdispalyCard : Bool? = false
 
@@ -33,13 +33,27 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         self.view.backgroundColor = LOAN_APPLICATION_COLOR
         self.obtainWithDrawFundsInfo {[weak self] (isSuccess) in
             self?.configureView()
+            if self?.drawingsInfoModel?.platformType == "2" {
+                self?.isdispalyCard = true
+                self?.changeBankCard()
+            }
         }
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        if self.drawingsInfoModel?.platformType == "2" {
+            self.obtainWithDrawFundsInfo {[weak self] (isSuccess) in
+                
+                if self?.drawingsInfoModel?.platformType == "2" {
+                    self?.isdispalyCard = true
+                    self?.changeBankCard()
+                }
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -107,6 +121,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FXD_ToWithDrawFundsTableViewCell", for: indexPath) as! FXD_ToWithDrawFundsTableViewCell
         cell.selectionStyle  = .none
+    
         cell.titleLabel.text = "请选择绑卡";
         if  selectedCard != nil {
             cell.contentLabel.text = String.init(format: "%@ 尾号(%@)", (selectedCard?.bankName)!,((selectedCard?.cardNo! as NSString?)?.formatTailNumber())!)
@@ -115,19 +130,38 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func changeBankCard(){
+        
         fatchCardInfo {[weak self] (isSuccess,isBankCard) in
             guard  isSuccess else {
                 return
             }
+            self?.tableView?.reloadData()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if self.drawingsInfoModel?.platformType == "2" {
+            let controller = BankCardViewController()
+            controller.cardInfo = self.selectedCard
+            self.navigationController?.pushViewController(controller, animated: true)
+        }else{
             
-            if !isBankCard {
-                self?.pushAddBanckCard()
-            }else{
-                self?.pushUserBankListVC()
+            fatchCardInfo {[weak self] (isSuccess,isBankCard) in
+                guard  isSuccess else {
+                    return
+                }
+                
+                if !isBankCard {
+                    self?.pushAddBanckCard()
+                }else{
+                    self?.pushUserBankListVC()
+                }
             }
         }
     }
+    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 22
@@ -178,6 +212,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         self.navigationController?.pushViewController(fxdWeb, animated: true)
     }
     
+    //MARK: 提款按钮
     func WithdrawFundsClick() {
         if !isdispalyCard! {
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请添加收款方式")
@@ -189,10 +224,31 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
             return
         }
         
-        requestWithDraw((self.selectedCard?.cardId)!) { (isSuccess) in
-            if isSuccess {
-                self.navigationController?.popToRootViewController(animated: true)
+        if self.drawingsInfoModel?.platformType == "2" {
+            complianceJump()
+        }else{
+            
+            requestWithDraw((self.selectedCard?.cardId)!) { (isSuccess) in
+                if isSuccess {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
             }
+        }
+    }
+    
+    func complianceJump(){
+        
+        let userStatusTag = Int((self.drawingsInfoModel?.userStatus)!)
+        switch userStatusTag {
+        case 3?:
+            print("已开户")
+        case 4?:
+        
+            HG_Manager.sharedHG().hgUserActiveJumpP2pCtrlCapitalPlatform("2", vc: self)
+        
+            print("待激活")
+        default:
+            break
         }
     }
     
@@ -287,6 +343,7 @@ extension FXD_ToWithdrawFundsViewController {
                 self.displayContent = drawingsInfoM.text as? [String]
                 self.displayTitle = drawingsInfoM.title
                 self.applicationId = drawingsInfoM.applicationId
+            
                 complication(true)
                 self.tableView?.reloadData()
             }else{
@@ -331,7 +388,7 @@ extension FXD_ToWithdrawFundsViewController {
         }) {
             complication(false,"")
         }
-        commonVM.obtainProductProtocolType(productId, typeCode: protocolType, apply_id: applyId, periods: periods)
+        commonVM.obtainProductProtocolType(productId, typeCode: protocolType, apply_id: applyId, periods: periods, stagingType: self.drawingsInfoModel?.stagingType)
     }
 }
 

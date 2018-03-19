@@ -230,7 +230,7 @@
     } WithFaileBlock:^{
         
     }];
-    [commonVM obtainProductProtocolType:@"user_reg" typeCode:@"8" apply_id:nil periods:nil];
+    [commonVM obtainProductProtocolType:@"user_reg" typeCode:@"8" apply_id:nil periods:nil stagingType:nil];
 }
 
 #pragma mark 点击意思保密协议
@@ -249,7 +249,7 @@
         }
     } WithFaileBlock:^{
     }];
-    [commonVM obtainProductProtocolType:@"user_privacy" typeCode:@"9" apply_id:nil periods:nil];
+    [commonVM obtainProductProtocolType:@"user_privacy" typeCode:@"9" apply_id:nil periods:nil stagingType:nil];
 }
 
 #pragma mark 点击验证码按钮

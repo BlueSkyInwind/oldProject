@@ -389,7 +389,7 @@ typedef enum {
         }
     } WithFaileBlock:^{
     }];
-    [commonVM obtainProductProtocolType:@"operInfo" typeCode:@"4" apply_id:nil periods:nil];
+    [commonVM obtainProductProtocolType:@"operInfo" typeCode:@"4" apply_id:nil periods:nil stagingType:nil];
 }
 
 -(void)obtainUseHelp{
@@ -407,7 +407,7 @@ typedef enum {
         }
     } WithFaileBlock:^{
     }];
-    [commonVM obtainProductProtocolType:nil typeCode:@"12" apply_id:nil periods:nil];
+    [commonVM obtainProductProtocolType:nil typeCode:@"12" apply_id:nil periods:nil stagingType:nil];
     
 }
 

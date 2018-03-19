@@ -22,22 +22,22 @@ NSString * const _mainTwo_new_url  =  @"http://h5.faxindai.com/coregw/client/";
 //http://192.168.13.173:8005/ 张强本地
 
 //测试导流 192.168.6.134
-//NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-//NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-//NSString * const _main_new_url  =  @"http://h5.test.fxds/apigw/client/";
-//NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
-//NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
-
-NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
-NSString * const _main_new_url  =  @"http://h5.dev.fxds/apigw/client/";
-NSString * const _mainTwo_new_url  =  @"http://h5.dev.fxds/coregw/client/";
-NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
-NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
+NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+NSString * const _main_new_url  =  @"http://h5.test.fxds/apigw/client/";
+NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
+NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
+NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+
+//NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+//NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
+//NSString * const _main_new_url  =  @"http://h5.dev.fxds/apigw/client/";
+//NSString * const _mainTwo_new_url  =  @"http://h5.dev.fxds/coregw/client/";
+//NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //UAT环境
 //NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
@@ -394,6 +394,14 @@ NSString * const    _increaseAmount_url               =    @"increaseQuotaApply"
 
 #pragma mark - 合规接口
 
+
+//获取合规开户信息
+NSString * const    _account_url    =    @"membership/hg/account/info";
+
+//对接合规平台，换绑卡发送短信验证码
+NSString * const    _sendSmsCode_url    =    @"paidcenter/hg/sendSmsCode";
+
+
 //用户开户接口
 NSString * const    _huifu_url    =    @"http/huifush/toRegister.jhtml";
 
@@ -416,11 +424,19 @@ NSString * const    _contractStr_url            =    @"hg/contractStr.jhtml";
 
 //发送短信接口
 //NSString * const    _sendSms_url    =    @"h ttp/do.jhtml?router=sendSmsSHService.send";
-NSString * const    _sendSms_url    =    @"hg/sendSms.jhtml";
+//NSString * const    _sendSms_url    =    @"hg/sendSms.jhtml";
+NSString * const    _sendSms_url    =    @"paidcenter/hg/sendSmsCodeApi";
+
+//提交合规换绑银行卡信息
+NSString * const    _change_BankCards_url    =    @"membership/hg/change/bank/card";
 
 //换绑银行卡
 //NSString * const    _bankCards_url    =    @"http/do.jhtml?router=bankCardsSHService.quickChangeBindingCard";
 NSString * const    _bankCards_url    =    @"hg/quickChangeBindingCard.jhtml";
+//合规获取老用户激活跳转页面参数
+NSString * const    _hgUser_Active_url    =    @"paidcenter/user/active";
+//合规用户状态查询
+NSString * const    _queryUserStatus_url    =    @"membership/paid/queryUserStatus";
 
 //银行卡查询接口
 //NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsSHService.queryCardInfo";

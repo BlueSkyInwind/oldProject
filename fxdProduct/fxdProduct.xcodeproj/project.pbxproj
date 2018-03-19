@@ -1002,6 +1002,10 @@
 		CC6CBA851F5AB9620015C92C /* ApplicationStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */; };
 		CC6E0F171FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
 		CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
+		CC6E696320561565005853BB /* SmsCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E696220561565005853BB /* SmsCodeModel.m */; };
+		CC6E696420561565005853BB /* SmsCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E696220561565005853BB /* SmsCodeModel.m */; };
+		CC6E696720562D10005853BB /* SubmitInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E696620562D10005853BB /* SubmitInfoModel.m */; };
+		CC6E696820562D10005853BB /* SubmitInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E696620562D10005853BB /* SubmitInfoModel.m */; };
 		CC6F06731F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */; };
 		CC6F06741F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */; };
 		CC6F06791F74F26B00FA889E /* PickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06781F74F26B00FA889E /* PickView.swift */; };
@@ -1016,6 +1020,36 @@
 		CC6F06941F7DF6C200FA889E /* ShanLinBackAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */; };
 		CC73368F1FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC73368E1FD4E48600076230 /* WithdrawCashDetailParamModel.m */; };
 		CC7336901FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC73368E1FD4E48600076230 /* WithdrawCashDetailParamModel.m */; };
+		CC742D8F204D3A3800D645CC /* OpenAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742D8E204D3A3800D645CC /* OpenAccountCell.swift */; };
+		CC742D90204D3A3B00D645CC /* OpenAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742D8E204D3A3800D645CC /* OpenAccountCell.swift */; };
+		CC742D92204D42E100D645CC /* OpenAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742D91204D42E100D645CC /* OpenAccountViewController.swift */; };
+		CC742D93204D42E100D645CC /* OpenAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742D91204D42E100D645CC /* OpenAccountViewController.swift */; };
+		CC742D95204E46D800D645CC /* BankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742D94204E46D800D645CC /* BankCardViewController.swift */; };
+		CC742D96204E46D800D645CC /* BankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742D94204E46D800D645CC /* BankCardViewController.swift */; };
+		CC742D98204E470100D645CC /* BankCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742D97204E470100D645CC /* BankCardCell.swift */; };
+		CC742D99204E470100D645CC /* BankCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742D97204E470100D645CC /* BankCardCell.swift */; };
+		CC742DA3204E6E1A00D645CC /* ComplianceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DA2204E6E1A00D645CC /* ComplianceViewModel.m */; };
+		CC742DA4204E6E1A00D645CC /* ComplianceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DA2204E6E1A00D645CC /* ComplianceViewModel.m */; };
+		CC742DA8204E704D00D645CC /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DA7204E704D00D645CC /* AccountModel.m */; };
+		CC742DA9204E704D00D645CC /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DA7204E704D00D645CC /* AccountModel.m */; };
+		CC742DAC204E730700D645CC /* SubmitAccountParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DAB204E730700D645CC /* SubmitAccountParamModel.m */; };
+		CC742DAD204E730700D645CC /* SubmitAccountParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DAB204E730700D645CC /* SubmitAccountParamModel.m */; };
+		CC742DB0204E74AF00D645CC /* SmsCodeParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DAF204E74AF00D645CC /* SmsCodeParamModel.m */; };
+		CC742DB1204E74AF00D645CC /* SmsCodeParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DAF204E74AF00D645CC /* SmsCodeParamModel.m */; };
+		CC742DB3204FB90500D645CC /* BankListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB2204FB90500D645CC /* BankListViewController.swift */; };
+		CC742DB4204FB90500D645CC /* BankListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB2204FB90500D645CC /* BankListViewController.swift */; };
+		CC742DB6204FB9C700D645CC /* BankListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB5204FB9C700D645CC /* BankListCell.swift */; };
+		CC742DB7204FB9C700D645CC /* BankListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB5204FB9C700D645CC /* BankListCell.swift */; };
+		CC742DB9204FD7FE00D645CC /* IntermediateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB8204FD7FE00D645CC /* IntermediateViewController.swift */; };
+		CC742DBA204FD7FE00D645CC /* IntermediateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DB8204FD7FE00D645CC /* IntermediateViewController.swift */; };
+		CC742DBC204FD88A00D645CC /* IntermediateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBB204FD88A00D645CC /* IntermediateCell.swift */; };
+		CC742DBD204FD88A00D645CC /* IntermediateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBB204FD88A00D645CC /* IntermediateCell.swift */; };
+		CC742DC020521FA700D645CC /* ApplicationNewCreateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */; };
+		CC742DC120521FA700D645CC /* ApplicationNewCreateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */; };
+		CC742DC720526FD900D645CC /* HG_Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DC420526FD800D645CC /* HG_Manager.m */; };
+		CC742DC820526FD900D645CC /* HG_Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DC420526FD800D645CC /* HG_Manager.m */; };
+		CC742DCF2052704B00D645CC /* P2PViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DCE2052704B00D645CC /* P2PViewController.m */; };
+		CC742DD02052704B00D645CC /* P2PViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DCE2052704B00D645CC /* P2PViewController.m */; };
 		CC78CB0F1F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC78CB101F7113C40002253B /* HomeRefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */; };
 		CC85C6281FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
@@ -1052,6 +1086,10 @@
 		CCAA8EB71F5940CC00278D16 /* RenewalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EB51F5940CC00278D16 /* RenewalModel.m */; };
 		CCBD8F6C1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
 		CCBD8F6D1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
+		CCC1E4062057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */; };
+		CCC1E4072057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */; };
+		CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
+		CCC1E40F205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
 		CCCB279C1FB2F04500412632 /* ScratchAwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB279B1FB2F04500412632 /* ScratchAwardView.m */; };
 		CCCB279D1FB2F04500412632 /* ScratchAwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB279B1FB2F04500412632 /* ScratchAwardView.m */; };
 		CCCB27A11FB2F1C100412632 /* DrawLotteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27A01FB2F1C100412632 /* DrawLotteryModel.m */; };
@@ -1999,6 +2037,10 @@
 		CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationStatusModel.m; sourceTree = "<group>"; };
 		CC6E0F151FF0942400D32773 /* FXD_HomeProductListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_HomeProductListModel.h; sourceTree = "<group>"; };
 		CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_HomeProductListModel.m; sourceTree = "<group>"; };
+		CC6E696120561565005853BB /* SmsCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmsCodeModel.h; sourceTree = "<group>"; };
+		CC6E696220561565005853BB /* SmsCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmsCodeModel.m; sourceTree = "<group>"; };
+		CC6E696520562D10005853BB /* SubmitInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubmitInfoModel.h; sourceTree = "<group>"; };
+		CC6E696620562D10005853BB /* SubmitInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubmitInfoModel.m; sourceTree = "<group>"; };
 		CC6F06721F74DBD100FA889E /* RapidLoanApplicationcConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidLoanApplicationcConfirmation.swift; sourceTree = "<group>"; };
 		CC6F06781F74F26B00FA889E /* PickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickView.swift; sourceTree = "<group>"; };
 		CC6F06831F750A5B00FA889E /* CapitalListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapitalListModel.h; sourceTree = "<group>"; };
@@ -2010,6 +2052,28 @@
 		CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShanLinBackAlertView.swift; sourceTree = "<group>"; };
 		CC73368D1FD4E48600076230 /* WithdrawCashDetailParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashDetailParamModel.h; sourceTree = "<group>"; };
 		CC73368E1FD4E48600076230 /* WithdrawCashDetailParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashDetailParamModel.m; sourceTree = "<group>"; };
+		CC742D8E204D3A3800D645CC /* OpenAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAccountCell.swift; sourceTree = "<group>"; };
+		CC742D91204D42E100D645CC /* OpenAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAccountViewController.swift; sourceTree = "<group>"; };
+		CC742D94204E46D800D645CC /* BankCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardViewController.swift; sourceTree = "<group>"; };
+		CC742D97204E470100D645CC /* BankCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardCell.swift; sourceTree = "<group>"; };
+		CC742DA1204E6E1A00D645CC /* ComplianceViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComplianceViewModel.h; sourceTree = "<group>"; };
+		CC742DA2204E6E1A00D645CC /* ComplianceViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComplianceViewModel.m; sourceTree = "<group>"; };
+		CC742DA6204E704D00D645CC /* AccountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountModel.h; sourceTree = "<group>"; };
+		CC742DA7204E704D00D645CC /* AccountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountModel.m; sourceTree = "<group>"; };
+		CC742DAA204E730700D645CC /* SubmitAccountParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubmitAccountParamModel.h; sourceTree = "<group>"; };
+		CC742DAB204E730700D645CC /* SubmitAccountParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubmitAccountParamModel.m; sourceTree = "<group>"; };
+		CC742DAE204E74AF00D645CC /* SmsCodeParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmsCodeParamModel.h; sourceTree = "<group>"; };
+		CC742DAF204E74AF00D645CC /* SmsCodeParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmsCodeParamModel.m; sourceTree = "<group>"; };
+		CC742DB2204FB90500D645CC /* BankListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankListViewController.swift; sourceTree = "<group>"; };
+		CC742DB5204FB9C700D645CC /* BankListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankListCell.swift; sourceTree = "<group>"; };
+		CC742DB8204FD7FE00D645CC /* IntermediateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntermediateViewController.swift; sourceTree = "<group>"; };
+		CC742DBB204FD88A00D645CC /* IntermediateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntermediateCell.swift; sourceTree = "<group>"; };
+		CC742DBE20521FA700D645CC /* ApplicationNewCreateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationNewCreateModel.h; sourceTree = "<group>"; };
+		CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationNewCreateModel.m; sourceTree = "<group>"; };
+		CC742DC320526FD800D645CC /* HG_Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HG_Manager.h; sourceTree = "<group>"; };
+		CC742DC420526FD800D645CC /* HG_Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HG_Manager.m; sourceTree = "<group>"; };
+		CC742DCD2052704A00D645CC /* P2PViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PViewController.h; sourceTree = "<group>"; };
+		CC742DCE2052704B00D645CC /* P2PViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PViewController.m; sourceTree = "<group>"; };
 		CC78CB0E1F7113C40002253B /* HomeRefuseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseCell.swift; sourceTree = "<group>"; };
 		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
@@ -2036,6 +2100,10 @@
 		CCAA8EB51F5940CC00278D16 /* RenewalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalModel.m; sourceTree = "<group>"; };
 		CCBD8F6A1F5D26BD005A980B /* RepayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayModel.h; sourceTree = "<group>"; };
 		CCBD8F6B1F5D26BD005A980B /* RepayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayModel.m; sourceTree = "<group>"; };
+		CCC1E4042057EC7D007C9C07 /* ChangeBankCardParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeBankCardParamModel.h; sourceTree = "<group>"; };
+		CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeBankCardParamModel.m; sourceTree = "<group>"; };
+		CCC1E40C205A595F007C9C07 /* ActiveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveModel.h; sourceTree = "<group>"; };
+		CCC1E40D205A595F007C9C07 /* ActiveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveModel.m; sourceTree = "<group>"; };
 		CCCB279A1FB2F04500412632 /* ScratchAwardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScratchAwardView.h; sourceTree = "<group>"; };
 		CCCB279B1FB2F04500412632 /* ScratchAwardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScratchAwardView.m; sourceTree = "<group>"; };
 		CCCB279F1FB2F1C100412632 /* DrawLotteryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawLotteryModel.h; sourceTree = "<group>"; };
@@ -2250,6 +2318,7 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CC742D8D204D39C600D645CC /* ComplianceView */,
 				CC5FC5A91FC2CB1800DB0D78 /* ReminderDetailsView */,
 				CC85C62A1FBED2BE0090A7E7 /* RedPacketWithCash */,
 				CC989C321F4D86E1000CDACF /* AuthenticationCenterView */,
@@ -2669,6 +2738,8 @@
 				840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */,
 				CC8BC95A1FEB586F008E135E /* MineViewModel.h */,
 				CC8BC95B1FEB586F008E135E /* MineViewModel.m */,
+				CC742DA1204E6E1A00D645CC /* ComplianceViewModel.h */,
+				CC742DA2204E6E1A00D645CC /* ComplianceViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2711,8 +2782,8 @@
 				636A2DD61D891F7900E087A6 /* fxdProduct.entitlements */,
 				636EE3041B662ABB00A1A3ED /* AppDelegate.h */,
 				636EE3051B662ABB00A1A3ED /* AppDelegate.mm */,
-				0FEA58481BE08EE3007F8A6D /* View */,
 				63E076521B67114800E269F2 /* Common */,
+				0FEA58481BE08EE3007F8A6D /* View */,
 				63E076531B67114800E269F2 /* FXD_NetworkModules */,
 				636EE32A1B662E5C00A1A3ED /* Third */,
 				63ED33301B6B4472008B6085 /* Modules */,
@@ -3434,6 +3505,8 @@
 		63DE56F91DE7CC4200747AE2 /* WebVCModules - 浏览器模块 */ = {
 			isa = PBXGroup;
 			children = (
+				CC742DCD2052704A00D645CC /* P2PViewController.h */,
+				CC742DCE2052704B00D645CC /* P2PViewController.m */,
 				CC6F068D1F7B8CA800FA889E /* ShanLinWebVCModules - 善林 */,
 				63A24BFA1BE063A90036E8EF /* FrameWorks */,
 				63DE56FD1DE7CD2900747AE2 /* FXDWebViewController.h */,
@@ -3447,6 +3520,7 @@
 		63E076521B67114800E269F2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CC742DC220526FD800D645CC /* HGManager */,
 				636B1B191C1FDDD100450358 /* CostumView */,
 				63878FD91C1519CD008E1CF9 /* FXD_Tools */,
 				635B8DE11B706A2D00F840CA /* GlobalConfig.h */,
@@ -3486,6 +3560,7 @@
 		63E076541B67114800E269F2 /* DataModelModules */ = {
 			isa = PBXGroup;
 			children = (
+				CC742DA5204E702400D645CC /* Compliance */,
 				CC8BC95E1FEB5994008E135E /* Mine */,
 				CC45E7281FD78FC600DE803D /* Message */,
 				CCCB279E1FB2F19200412632 /* DrawLottery */,
@@ -3622,6 +3697,7 @@
 		63ED33301B6B4472008B6085 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CC742D8C204D38BB00D645CC /* ComplianceModule - 合规模块 */,
 				84C6198D1FA8149700626411 /* RepaymentModules - 还款模块 */,
 				63A24BEB1BE063A90036E8EF /* LaunchModules - 启动模块 */,
 				63DE56F91DE7CC4200747AE2 /* WebVCModules - 浏览器模块 */,
@@ -4359,6 +4435,8 @@
 				CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */,
 				CCBD8F6A1F5D26BD005A980B /* RepayModel.h */,
 				CCBD8F6B1F5D26BD005A980B /* RepayModel.m */,
+				CC742DBE20521FA700D645CC /* ApplicationNewCreateModel.h */,
+				CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */,
 			);
 			name = ApplicationStatus;
 			sourceTree = "<group>";
@@ -4382,6 +4460,59 @@
 				CC6F068F1F7B8D3600FA889E /* ShanLinWebVCModules.m */,
 			);
 			path = "ShanLinWebVCModules - 善林";
+			sourceTree = "<group>";
+		};
+		CC742D8C204D38BB00D645CC /* ComplianceModule - 合规模块 */ = {
+			isa = PBXGroup;
+			children = (
+				CC742D91204D42E100D645CC /* OpenAccountViewController.swift */,
+				CC742D94204E46D800D645CC /* BankCardViewController.swift */,
+				CC742DB2204FB90500D645CC /* BankListViewController.swift */,
+				CC742DB8204FD7FE00D645CC /* IntermediateViewController.swift */,
+			);
+			name = "ComplianceModule - 合规模块";
+			path = "fxdProduct/Modules/ComplianceModule - 合规模块";
+			sourceTree = SOURCE_ROOT;
+		};
+		CC742D8D204D39C600D645CC /* ComplianceView */ = {
+			isa = PBXGroup;
+			children = (
+				CC742D8E204D3A3800D645CC /* OpenAccountCell.swift */,
+				CC742D97204E470100D645CC /* BankCardCell.swift */,
+				CC742DB5204FB9C700D645CC /* BankListCell.swift */,
+				CC742DBB204FD88A00D645CC /* IntermediateCell.swift */,
+			);
+			path = ComplianceView;
+			sourceTree = "<group>";
+		};
+		CC742DA5204E702400D645CC /* Compliance */ = {
+			isa = PBXGroup;
+			children = (
+				CC742DA6204E704D00D645CC /* AccountModel.h */,
+				CC742DA7204E704D00D645CC /* AccountModel.m */,
+				CC742DAA204E730700D645CC /* SubmitAccountParamModel.h */,
+				CC742DAB204E730700D645CC /* SubmitAccountParamModel.m */,
+				CC742DAE204E74AF00D645CC /* SmsCodeParamModel.h */,
+				CC742DAF204E74AF00D645CC /* SmsCodeParamModel.m */,
+				CC6E696120561565005853BB /* SmsCodeModel.h */,
+				CC6E696220561565005853BB /* SmsCodeModel.m */,
+				CC6E696520562D10005853BB /* SubmitInfoModel.h */,
+				CC6E696620562D10005853BB /* SubmitInfoModel.m */,
+				CCC1E4042057EC7D007C9C07 /* ChangeBankCardParamModel.h */,
+				CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */,
+				CCC1E40C205A595F007C9C07 /* ActiveModel.h */,
+				CCC1E40D205A595F007C9C07 /* ActiveModel.m */,
+			);
+			path = Compliance;
+			sourceTree = "<group>";
+		};
+		CC742DC220526FD800D645CC /* HGManager */ = {
+			isa = PBXGroup;
+			children = (
+				CC742DC320526FD800D645CC /* HG_Manager.h */,
+				CC742DC420526FD800D645CC /* HG_Manager.m */,
+			);
+			path = HGManager;
 			sourceTree = "<group>";
 		};
 		CC85C62A1FBED2BE0090A7E7 /* RedPacketWithCash */ = {
@@ -5014,6 +5145,7 @@
 				84C619C41FA815EB00626411 /* DetailRepayHeader.m in Sources */,
 				84C619C51FA815EB00626411 /* PayDisplayCell.m in Sources */,
 				84C619C61FA815EB00626411 /* PayMethodCell.m in Sources */,
+				CCC1E4062057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */,
 				84C619C71FA815EB00626411 /* PayMoneyCell.m in Sources */,
 				84C619C81FA815EB00626411 /* PayVerificationCodeCell.m in Sources */,
 				84C619C91FA815EB00626411 /* RepayListCell.m in Sources */,
@@ -5039,11 +5171,13 @@
 				63ED33371B6B4593008B6085 /* BaseNavigationViewController.m in Sources */,
 				CC6CBA841F5AB9620015C92C /* ApplicationStatusModel.m in Sources */,
 				849459CA1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
+				CC742DAC204E730700D645CC /* SubmitAccountParamModel.m in Sources */,
 				63FF484A1B6F036F009E384C /* MyViewController.m in Sources */,
 				847298371FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */,
 				638A16ED1E517D9F00AB8AB6 /* LOTRectShapeLayer.m in Sources */,
 				0F9E30D21BC8A70C0018A801 /* IdeaBackViewController.m in Sources */,
 				63DE56FF1DE7CD2900747AE2 /* FXDWebViewController.m in Sources */,
+				CC742D98204E470100D645CC /* BankCardCell.swift in Sources */,
 				CC594E631FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */,
 				63FC24F41D98F7E9006F58F3 /* YYTextMagnifier.m in Sources */,
 				63ED33341B6B4570008B6085 /* BaseViewController.m in Sources */,
@@ -5064,6 +5198,7 @@
 				63DB3FBE1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m in Sources */,
 				CC73368F1FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */,
 				633DAD301C3E59A0000DA852 /* LoginViewModel.m in Sources */,
+				CC742DC720526FD900D645CC /* HG_Manager.m in Sources */,
 				63D43EF81D41F76D0076AC7F /* YYKVStorage.m in Sources */,
 				638A16891E5045BC00AB8AB6 /* RepayRequestManage.m in Sources */,
 				849AC2571FF09721005E435F /* HighRankingAuthTableViewCell.swift in Sources */,
@@ -5081,6 +5216,7 @@
 				63878FE51C1519CD008E1CF9 /* FXD_Utility.m in Sources */,
 				1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */,
 				84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
+				CC742DC020521FA700D645CC /* ApplicationNewCreateModel.m in Sources */,
 				638A16EB1E517D9F00AB8AB6 /* LOTLayerView.m in Sources */,
 				63145AF41CA8DBBD00D04ED8 /* RegionSub.m in Sources */,
 				634830FF1CBCA1A90005C4CD /* RegionCodeResult.m in Sources */,
@@ -5089,6 +5225,7 @@
 				84CC899E1F5973D700537910 /* DrawingsInfoModel.m in Sources */,
 				CCCDA8801EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */,
 				638A17081E517D9F00AB8AB6 /* LOTShapeTransform.m in Sources */,
+				CC742D8F204D3A3800D645CC /* OpenAccountCell.swift in Sources */,
 				84DFBED31F4D72050009DAB9 /* UserDataViewModel.m in Sources */,
 				63FC25021D98F7E9006F58F3 /* YYTextWeakProxy.m in Sources */,
 				63F0E1BE1CE41821001251A9 /* NSData+YYAdd.m in Sources */,
@@ -5136,6 +5273,7 @@
 				84DFBEDE1F4D97D50009DAB9 /* HighRandingModel.m in Sources */,
 				8446AC031EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */,
 				63FC24F11D98F7E9006F58F3 /* YYTextKeyboardManager.m in Sources */,
+				CC742DB0204E74AF00D645CC /* SmsCodeParamModel.m in Sources */,
 				638A17071E517D9F00AB8AB6 /* LOTShapeStroke.m in Sources */,
 				849AC25C1FF0C816005E435F /* FXD_ToWithdrawFundsViewController.swift in Sources */,
 				842C4A061FE0D1F400D3D199 /* CommonViewModel.m in Sources */,
@@ -5164,6 +5302,7 @@
 				637636EB1D76A72A00E93289 /* LewPopupViewAnimationSpring.m in Sources */,
 				63FC25011D98F7E9006F58F3 /* YYTextUtilities.m in Sources */,
 				638A17091E517D9F00AB8AB6 /* LOTShapeTrimPath.m in Sources */,
+				CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */,
 				CCCB27A11FB2F1C100412632 /* DrawLotteryModel.m in Sources */,
 				84F1E29F1FD90EE0007D3381 /* UserDataInformationModel.m in Sources */,
 				638A16EE1E517D9F00AB8AB6 /* LOTShapeLayerView.m in Sources */,
@@ -5220,6 +5359,7 @@
 				CCA181941FC6CDAC0094DA58 /* MineMiddleView.swift in Sources */,
 				63553B191E5F0AF900B2C1FF /* FaceIDOCRBack.m in Sources */,
 				0F0FDAC21BC771EC00F3CF10 /* AboutViewController.m in Sources */,
+				CC742DB3204FB90500D645CC /* BankListViewController.swift in Sources */,
 				84E62D1F1FDA7E3100B7F870 /* CustomerContactsInfoParam.m in Sources */,
 				CCCDA8841EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
 				CCAA8EAE1F5901ED00278D16 /* FooterBtnView.swift in Sources */,
@@ -5264,6 +5404,7 @@
 				CC3BCC141FBABEC50042A738 /* MessageCell.swift in Sources */,
 				63A24C5A1BE063A90036E8EF /* CoreArchive.m in Sources */,
 				63FC24FE1D98F7E9006F58F3 /* UIView+YYText.m in Sources */,
+				CC6E696720562D10005853BB /* SubmitInfoModel.m in Sources */,
 				638A16E91E517D9F00AB8AB6 /* LOTEllipseShapeLayer.m in Sources */,
 				63FC24FF1D98F7E9006F58F3 /* YYTextAsyncLayer.m in Sources */,
 				6300CC0B1E4AE5FD0012B05A /* CareerParse.m in Sources */,
@@ -5291,6 +5432,7 @@
 				633DF7891BDE22BF00A3998D /* MoreViewController.m in Sources */,
 				638A16EA1E517D9F00AB8AB6 /* LOTGroupLayerView.m in Sources */,
 				638A17031E517D9F00AB8AB6 /* LOTShapeFill.m in Sources */,
+				CC742D92204D42E100D645CC /* OpenAccountViewController.swift in Sources */,
 				63C50E461E666FF40035EE4F /* Custom_BaseInfo.m in Sources */,
 				638A16F71E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				636B1B9A1C2D153900450358 /* HomeViewModel.m in Sources */,
@@ -5306,6 +5448,7 @@
 				84A37FF41FAC12A8008FB7AF /* ActivityHomePopView.m in Sources */,
 				638A16FB1E517D9F00AB8AB6 /* CALayer+Compat.m in Sources */,
 				1AE5E6241C1EA5240099CCA0 /* AboutMainViewController.m in Sources */,
+				CC742DA3204E6E1A00D645CC /* ComplianceViewModel.m in Sources */,
 				635AB0411E07BD46008A760C /* P2PBillDetail.m in Sources */,
 				84A380221FAC1D8D008FB7AF /* UserPhoneContactsVCModules.m in Sources */,
 				842C0B531ED5909E00366D11 /* LoginViewController.m in Sources */,
@@ -5314,10 +5457,13 @@
 				84E306CA1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
 				63A24C6B1BE063A90036E8EF /* UITableViewCell+Extend.m in Sources */,
 				634831051CBCCF190005C4CD /* GetCareerInfoViewModel.m in Sources */,
+				CC742D95204E46D800D645CC /* BankCardViewController.swift in Sources */,
 				639E88721CA1371800254216 /* LunchVCModules.m in Sources */,
 				8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
+				CC742DB9204FD7FE00D645CC /* IntermediateViewController.swift in Sources */,
 				63FC25001D98F7E9006F58F3 /* YYTextTransaction.m in Sources */,
 				CC6F06791F74F26B00FA889E /* PickView.swift in Sources */,
+				CC6E696320561565005853BB /* SmsCodeModel.m in Sources */,
 				63FC24F91D98F7E9006F58F3 /* YYTextRubyAnnotation.m in Sources */,
 				63145AB21CA2952400D04ED8 /* LoginMsgBaseClass.m in Sources */,
 				8436149D1F0CF57C0036201A /* P2PContactContenParam.m in Sources */,
@@ -5333,6 +5479,7 @@
 				CC45E72F1FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
 				63A24C681BE063A90036E8EF /* UIImage+Extend.m in Sources */,
 				CCDEDF641EEA912A009CEC32 /* LoanMoneyViewModel.m in Sources */,
+				CC742DA8204E704D00D645CC /* AccountModel.m in Sources */,
 				63A24C5E1BE063A90036E8EF /* NSDate+Extend.m in Sources */,
 				63D43EF61D41F76D0076AC7F /* YYCache.m in Sources */,
 				84E2BDE01F53F3FB00E447EB /* UserDataModel.m in Sources */,
@@ -5351,6 +5498,7 @@
 				638A17051E517D9F00AB8AB6 /* LOTShapePath.m in Sources */,
 				849842001FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
 				63FC25041D98F7E9006F58F3 /* YYTextView.m in Sources */,
+				CC742DB6204FB9C700D645CC /* BankListCell.swift in Sources */,
 				63878FE21C1519CD008E1CF9 /* CheckUtils.m in Sources */,
 				638C3F271CF2F470000446A7 /* PCCircleViewConst.m in Sources */,
 				63E1ECD11E1B8FAA0079A2F8 /* TADotView.m in Sources */,
@@ -5368,6 +5516,7 @@
 				847298341FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */,
 				63E1ECD21E1B8FAA0079A2F8 /* TAPageControl.m in Sources */,
 				638A16F51E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m in Sources */,
+				CC742DBC204FD88A00D645CC /* IntermediateCell.swift in Sources */,
 				8492ED261FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */,
 				637636E71D76A72A00E93289 /* LewPopupBackgroundView.m in Sources */,
 				CC45E7371FD915A300DE803D /* UITabBar+badge.m in Sources */,
@@ -5387,6 +5536,7 @@
 				63E1ECD31E1B8FAA0079A2F8 /* SDCollectionViewCell.m in Sources */,
 				634795DB1D378CED00EC4027 /* Aspects.m in Sources */,
 				63A24C691BE063A90036E8EF /* UIImage+FixOrientation.m in Sources */,
+				CC742DCF2052704B00D645CC /* P2PViewController.m in Sources */,
 				630D46171BCCD2FB00874064 /* UpdateDevIDViewController.m in Sources */,
 				CCE3BE281ED2D655004C35A4 /* QueryCardInfo.m in Sources */,
 				637636EA1D76A72A00E93289 /* LewPopupViewAnimationSlide.m in Sources */,
@@ -5452,6 +5602,7 @@
 				84C619D11FA8161F00626411 /* BankListCell.m in Sources */,
 				84A380151FAC1D8D008FB7AF /* MGLiveViewController.m in Sources */,
 				84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */,
+				CCC1E4072057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */,
 				84F87F481FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */,
 				84C619D31FA8161F00626411 /* PayDisplayCell.m in Sources */,
 				84C619D41FA8161F00626411 /* PayMethodCell.m in Sources */,
@@ -5477,11 +5628,13 @@
 				CC0DF95A1EA5B1090024841A /* NSData+AES.m in Sources */,
 				84EC95B31F5AC4E3008656BA /* FeeDescriptionTableViewCell.m in Sources */,
 				CC594E681FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */,
+				CC742DAD204E730700D645CC /* SubmitAccountParamModel.m in Sources */,
 				CC0DF95B1EA5B1090024841A /* LivenessBaseClass.m in Sources */,
 				847DBBD21FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */,
 				849459CB1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
 				CC0DF95E1EA5B1090024841A /* WTOverView.m in Sources */,
 				847298381FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */,
+				CC742D99204E470100D645CC /* BankCardCell.swift in Sources */,
 				CC0DF9601EA5B1090024841A /* YYTextLayout.m in Sources */,
 				CC0DF9611EA5B1090024841A /* LoginMsgExt.m in Sources */,
 				84F87F411FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift in Sources */,
@@ -5502,6 +5655,7 @@
 				CC0DF9791EA5B1090024841A /* YYTextMagnifier.m in Sources */,
 				CC0DF97A1EA5B1090024841A /* BaseViewController.m in Sources */,
 				CC0DF97B1EA5B1090024841A /* UIImage+Cut.m in Sources */,
+				CC742DC820526FD900D645CC /* HG_Manager.m in Sources */,
 				CCCDA87D1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */,
 				84CC899A1F593C1E00537910 /* ApplicaitonModel.m in Sources */,
 				849AC2581FF09721005E435F /* HighRankingAuthTableViewCell.swift in Sources */,
@@ -5519,6 +5673,7 @@
 				CC0DF9851EA5B1090024841A /* UIViewController+RTRootNavigationController.m in Sources */,
 				CC0DF9861EA5B1090024841A /* LoginViewModel.m in Sources */,
 				CC0DF9871EA5B1090024841A /* YYKVStorage.m in Sources */,
+				CC742DC120521FA700D645CC /* ApplicationNewCreateModel.m in Sources */,
 				CC0DF9881EA5B1090024841A /* RepayRequestManage.m in Sources */,
 				CC0DF98B1EA5B1090024841A /* CALayer+Transition.m in Sources */,
 				CC0DF98C1EA5B1090024841A /* AppDelegate.mm in Sources */,
@@ -5527,6 +5682,7 @@
 				CC5FC5A11FC2742700DB0D78 /* RedPacketCell.swift in Sources */,
 				CC0DF98E1EA5B1090024841A /* UIView+Extend.m in Sources */,
 				CC0DF98F1EA5B1090024841A /* SSKeychain.m in Sources */,
+				CC742D90204D3A3B00D645CC /* OpenAccountCell.swift in Sources */,
 				842C0B5E1ED59C7A00366D11 /* LoginParamModel.m in Sources */,
 				CC0DF9901EA5B1090024841A /* SDCycleScrollView.m in Sources */,
 				CC0DF9911EA5B1090024841A /* LOTAnimatablePointValue.m in Sources */,
@@ -5574,6 +5730,7 @@
 				CC0DF9B81EA5B1090024841A /* YYTextAttribute.m in Sources */,
 				844E5F511ED94DCB00753671 /* RegParamModel.m in Sources */,
 				CC0F1B9E1EE6537700A23651 /* IdeaBackViewModel.m in Sources */,
+				CC742DB1204E74AF00D645CC /* SmsCodeParamModel.m in Sources */,
 				CCDEDF6A1EEA9271009CEC32 /* ProductProtocolParamModel.m in Sources */,
 				8438F7191EE163690089E121 /* ChangePasswordViewModel.m in Sources */,
 				84A5696E1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
@@ -5602,6 +5759,7 @@
 				CCCC0A8F1F677B9B007E1EB0 /* UserDataResult.m in Sources */,
 				CC0DF9D01EA5B1090024841A /* UIImage+Color.m in Sources */,
 				84E62D1C1FDA7CA900B7F870 /* CustomerContactsInfoViewModel.m in Sources */,
+				CCC1E40F205A595F007C9C07 /* ActiveModel.m in Sources */,
 				CC0DF9D21EA5B1090024841A /* TicketCell.m in Sources */,
 				CC0DF9D41EA5B1090024841A /* NSString+AES.m in Sources */,
 				CC0DF9D61EA5B1090024841A /* ReconfrInfoModel.m in Sources */,
@@ -5658,6 +5816,7 @@
 				CC0DFA101EA5B1090024841A /* ReturnMsgBaseClass.m in Sources */,
 				CC0DFA111EA5B1090024841A /* CALayer+Anim.m in Sources */,
 				CC0DFA131EA5B1090024841A /* NSValue+Compat.m in Sources */,
+				CC742DB4204FB90500D645CC /* BankListViewController.swift in Sources */,
 				CCCDA8851EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
 				CC0DFA141EA5B1090024841A /* LewPopupViewAnimationFade.m in Sources */,
 				CC0DFA151EA5B1090024841A /* FaceIDOCRFront.m in Sources */,
@@ -5702,6 +5861,7 @@
 				CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */,
 				CC0DFA471EA5B1090024841A /* FXDBaseTabBarVCModule.m in Sources */,
 				CCEC9C941EE5095000452291 /* BankCardsParamModel.m in Sources */,
+				CC6E696820562D10005853BB /* SubmitInfoModel.m in Sources */,
 				84E306CB1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
 				CC594E6C1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */,
 				CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */,
@@ -5729,6 +5889,7 @@
 				843FF1F91F20863600ECCE16 /* PaymentDetailModel.m in Sources */,
 				CC0DFA611EA5B1090024841A /* FXD_Tool.m in Sources */,
 				CC0DFA631EA5B1090024841A /* UIBarButtonItem+Extend.m in Sources */,
+				CC742D93204D42E100D645CC /* OpenAccountViewController.swift in Sources */,
 				CCCB279D1FB2F04500412632 /* ScratchAwardView.m in Sources */,
 				CC85C62D1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */,
 				CC0DFA641EA5B1090024841A /* main.m in Sources */,
@@ -5744,6 +5905,7 @@
 				CC0DFA701EA5B1090024841A /* LOTAnimatableScaleValue.m in Sources */,
 				CCA1819D1FC7F0320094DA58 /* WithdrawCashInfoModel.m in Sources */,
 				CC0DFA711EA5B1090024841A /* telphoneView.m in Sources */,
+				CC742DA4204E6E1A00D645CC /* ComplianceViewModel.m in Sources */,
 				CC0DFA721EA5B1090024841A /* LOTStrokeShapeLayer.m in Sources */,
 				CC0DFA731EA5B1090024841A /* CardInfo.m in Sources */,
 				CC0DFA741EA5B1090024841A /* MobileCell.m in Sources */,
@@ -5752,10 +5914,13 @@
 				842C4A071FE0D1F400D3D199 /* CommonViewModel.m in Sources */,
 				CC3BCC151FBABEC50042A738 /* MessageCell.swift in Sources */,
 				CC0DFA791EA5B1090024841A /* P2PBillDetail.m in Sources */,
+				CC742D96204E46D800D645CC /* BankCardViewController.swift in Sources */,
 				CC0DFA7A1EA5B1090024841A /* YYDiskCache.m in Sources */,
 				CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */,
+				CC742DBA204FD7FE00D645CC /* IntermediateViewController.swift in Sources */,
 				CC0DFA7C1EA5B1090024841A /* YYTextDebugOption.m in Sources */,
 				CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */,
+				CC6E696420561565005853BB /* SmsCodeModel.m in Sources */,
 				CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
 				CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchVCModules.m in Sources */,
@@ -5771,6 +5936,7 @@
 				CC0DFA8B1EA5B1090024841A /* MoneyIngView.m in Sources */,
 				CC0DFA8C1EA5B1090024841A /* DataDisplayCell.m in Sources */,
 				CC0DFA8D1EA5B1090024841A /* ApprovalAmountResult.m in Sources */,
+				CC742DA9204E704D00D645CC /* AccountModel.m in Sources */,
 				CC45E72C1FD78FF500DE803D /* ShowMsgPreviewModel.m in Sources */,
 				CC0DFA8F1EA5B1090024841A /* UIWindow+Launch.m in Sources */,
 				CCDEDF651EEA912A009CEC32 /* LoanMoneyViewModel.m in Sources */,
@@ -5789,6 +5955,7 @@
 				849842011FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
 				CC0DFAA01EA5B1090024841A /* GetMoneyProcessResult.m in Sources */,
 				CC0DFAA21EA5B1090024841A /* LOTShapePath.m in Sources */,
+				CC742DB7204FB9C700D645CC /* BankListCell.swift in Sources */,
 				CCE3BE1F1ED2D424004C35A4 /* BankCardsModel.m in Sources */,
 				840DFF701FE27DEC00148DEE /* InvationViewModel.m in Sources */,
 				CC0DFAA31EA5B1090024841A /* YYTextView.m in Sources */,
@@ -5806,6 +5973,7 @@
 				CC0DFAB01EA5B1090024841A /* NSArray+Extend.m in Sources */,
 				CC0DFAB21EA5B1090024841A /* LivenessIdentity.m in Sources */,
 				CC0DFAB31EA5B1090024841A /* LOTAnimatableColorValue.m in Sources */,
+				CC742DBD204FD88A00D645CC /* IntermediateCell.swift in Sources */,
 				CC0DFAB41EA5B1090024841A /* TAPageControl.m in Sources */,
 				CCDEDF5D1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */,
 				CC0DFAB51EA5B1090024841A /* LOTAnimatableShapeValue.m in Sources */,
@@ -5825,6 +5993,7 @@
 				CC0DFAC31EA5B1090024841A /* Aspects.m in Sources */,
 				CC0DFAC41EA5B1090024841A /* UIImage+FixOrientation.m in Sources */,
 				CCD32B531F5819980092A9CB /* CurrentInformationCell.swift in Sources */,
+				CC742DD02052704B00D645CC /* P2PViewController.m in Sources */,
 				CC0DFAC61EA5B1090024841A /* UpdateDevIDViewController.m in Sources */,
 				CCCE40C21EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */,
 				CC0DFAC71EA5B1090024841A /* LewPopupViewAnimationSlide.m in Sources */,

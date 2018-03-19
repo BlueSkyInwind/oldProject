@@ -383,7 +383,7 @@
         [_tableView reloadData];
         
         if ([FXD_Utility sharedUtility].isActivityShow) {
-            [self homeActivitiesPopups:_homeProductList.popList];
+            [self homeActivitiesPopups:_homeProductList.popList.firstObject];
         }
         if ([FXD_Utility sharedUtility].isHomeChooseShow) {
             [self homeEvaluationRedEnvelopeActivitiesPopups:_homeProductList];
@@ -589,24 +589,67 @@
  */
 -(void)withdrawMoneyImmediatelyBtnClick{
     
-    if ([_homeProductList.flag isEqualToString:@"15"]) {
-        LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-
-        [self.navigationController pushViewController:controller animated:true];
+    if ([_homeProductList.platfromType isEqualToString:@"0"]) {
+        if ([_homeProductList.flag isEqualToString:@"15"]) {
+            LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+            
+            [self.navigationController pushViewController:controller animated:true];
+        }else{
+            FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
+            [self.navigationController pushViewController:loanApplicationVC animated:true];
+        }
     }else{
-        FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
-        [self.navigationController pushViewController:loanApplicationVC animated:true];
+        [self jumpControllerUserStatus:_homeProductList.userStatus];
     }
 }
 
-
+//根据合规状态跳转页面
+-(void)jumpControllerUserStatus:(NSString *)userStatus{
+    
+    switch (userStatus.integerValue) {
+        case 1:
+        {
+            OpenAccountViewController * controller = [[OpenAccountViewController alloc]init];
+            [self.navigationController pushViewController:controller animated:true];
+        }
+            
+            break;
+        case 2:
+        {
+            IntermediateViewController * controller = [[IntermediateViewController alloc]init];
+            [self.navigationController pushViewController:controller animated:true];
+        }
+            
+            break;
+        case 3:
+        {
+            if ([_homeProductList.flag isEqualToString:@"15"]) {
+                LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+                
+                [self.navigationController pushViewController:controller animated:true];
+            }else{
+                FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
+                [self.navigationController pushViewController:loanApplicationVC animated:true];
+            }
+        }
+            break;
+        case 4:
+        {
+            [[HG_Manager sharedHGManager]hgUserActiveJumpP2pCtrlCapitalPlatform:@"2" vc:self];
+        }
+            break;
+        
+        default:
+            break;
+    }
+}
 /**
  我要借款
  */
 -(void)loanBtnClick{
     
     //isComplete  基础资料是否完整
-    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"0"]) {
+    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"1"]) {
 
         FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
         loanApplicationVC.productId = _homeProductList.productId;
@@ -692,9 +735,13 @@
 -(void)repayImmediatelyBtnClick:(BOOL)isSelected{
     if (!isSelected) {
         
-        LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-        [self.navigationController pushViewController:controller animated:true];
-        
+        if ([_homeProductList.platfromType isEqualToString:@"0"]) {
+            LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+            [self.navigationController pushViewController:controller animated:true];
+        }else{
+            [self jumpControllerUserStatus:_homeProductList.userStatus];
+        }
+    
     }else{
         
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请勾选协议"];
@@ -774,7 +821,7 @@
         }
     } WithFaileBlock:^{
     }];
-    [commonVM obtainProductProtocolType:productId typeCode:typeCode apply_id:applicationId periods:periods];
+    [commonVM obtainProductProtocolType:productId typeCode:typeCode apply_id:applicationId periods:periods stagingType:_homeProductList.stagingType];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -152,6 +152,10 @@
 @property (nonatomic, strong)NSString<Optional> *flag;
 //产品id
 @property (nonatomic, strong)NSString<Optional> *productId;
+//0 发薪贷 2 合规
+@property (nonatomic, strong)NSString<Optional> *platfromType;
+//1:未开户 2：开户中 3:已开户 4:待激活
+@property (nonatomic, strong)NSString<Optional> *userStatus;
 //进件id
 @property (nonatomic, strong)NSString<Optional> *applicationId;
 //借款期数
@@ -163,7 +167,7 @@
 //逾期信息
 @property(nonatomic,strong)OverdueInfoModel<Optional> * overdueInfo;
 //弹窗广告列表
-@property(nonatomic,strong)PopListModel<Optional> * popList;
+@property(nonatomic,strong)NSArray<PopListModel,Optional> * popList;
 //评测领红包活动内容
 @property(nonatomic,strong)RedCollarListModel<Optional> * redCollarList;
 //正常还款信息

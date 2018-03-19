@@ -32,13 +32,13 @@
     }];
 }
 
--(void)obtainProductProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode apply_id:(NSString *)apply_id periods:(NSString *)periods{
+-(void)obtainProductProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode apply_id:(NSString *)apply_id periods:(NSString *)periods stagingType:(NSString *)stagingType{
     ProtocolParamModel * protocolM = [[ProtocolParamModel alloc]init];
     protocolM.productId  = Type_id;
     protocolM.protocolType  = typeCode;
     protocolM.applicationId  = apply_id;
     protocolM.periods = periods;
-    
+    protocolM.stagingType = stagingType;
     NSDictionary *paramDic = [protocolM toDictionary];
 
     [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocolH5_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
@@ -53,13 +53,14 @@
     }];
 }
 
--(void)obtainTransferAuthProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode cardBankCode:(NSString *)cardBankCode cardNo:(NSString *)cardNo{
+-(void)obtainTransferAuthProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode cardBankCode:(NSString *)cardBankCode cardNo:(NSString *)cardNo stagingType:(NSString *)stagingType{
     ProtocolParamModel * protocolM = [[ProtocolParamModel alloc]init];
     protocolM.productId  = Type_id;
     protocolM.protocolType  = typeCode;
     protocolM.cardBank = cardBankCode;
     protocolM.cardNo = cardNo;
-
+    protocolM.stagingType = stagingType;
+    
     NSDictionary *paramDic = [protocolM toDictionary];
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocolH5_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {

@@ -507,7 +507,7 @@
         }
     } WithFaileBlock:^{
     }];
-    [commonVM obtainTransferAuthProtocolType:EliteLoan typeCode:@"1" cardBankCode:cardBank cardNo:cardNo];
+    [commonVM obtainTransferAuthProtocolType:EliteLoan typeCode:@"1" cardBankCode:cardBank cardNo:cardNo stagingType:nil];
 
 }
 
