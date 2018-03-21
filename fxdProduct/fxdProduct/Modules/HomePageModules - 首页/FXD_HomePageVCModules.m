@@ -213,13 +213,9 @@
                 _bgView.hidden = true;
                 [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
             }
-            
         }else{
-            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
-            
         }
-        
     } WithFaileBlock:^{
         
     }];
