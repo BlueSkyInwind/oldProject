@@ -485,6 +485,8 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
             repayMent.save_amount = _save_amount;
             repayMent.situations = _situations;
 
+            repayMent.platform_type = _platform_type;
+            
             [self.navigationController pushViewController:repayMent animated:YES];
             
         }else{

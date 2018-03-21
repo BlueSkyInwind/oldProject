@@ -35,6 +35,8 @@
 #import "FXD_HomeProductListModel.h"
 #import "LoanPeriodListVCModule.h"
 #import "CommonViewModel.h"
+#import "ComplianceViewModel.h"
+#import "HgLoanProtoolListModel.h"
 @interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate>
 {
     NSString *_advTapToUrl;
@@ -45,6 +47,7 @@
     
     NSInteger _count;
     FXD_HomeProductListModel *_homeProductList;
+    NSMutableArray *_protocolArray ;
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
     BMKLocationService *_locService;
@@ -77,6 +80,7 @@
     self.navigationItem.title = @"发薪贷";
     _count = 0;
     _dataArray = [NSMutableArray array];
+    _protocolArray = [NSMutableArray array];
     [self setNavQRRightBar];
     [self setNavQRLeftBar];
     [self createTab];
@@ -96,13 +100,13 @@
     
 }
 
-
 -(void)createTab{
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, _k_w, _k_h-64) style:UITableViewStylePlain];
     [self.tableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"HomePageCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.scrollEnabled = true;
     self.tableView.backgroundColor = rgb(250, 250, 250);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -316,11 +320,43 @@
         if (_loadFailView) {
             [_loadFailView removeFromSuperview];
         }
+        
+        if (isSuccess) {
+            
+            [self getHgLoanProtoolList];
+        }
+        
         self.tableView.hidden = false;
         if (_homeProductList == nil ) {
             [self setUploadFailView];
         }
     }];
+}
+
+//根据申请件id返回投资人列表
+-(void)getHgLoanProtoolList{
+
+    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
+    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            [_protocolArray removeAllObjects];
+            for (int i = 0; i<((NSArray *)baseResultM.data).count; i++) {
+                
+                 HgLoanProtoolListModel *model = [[HgLoanProtoolListModel alloc]initWithDictionary:baseResultM.data[i] error:nil];
+                [_protocolArray addObject:model];
+            }
+            [self.tableView reloadData];
+        }else{
+           
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceVM hgLoanProtoolListApplicationId:_homeProductList.applicationId];
 }
 
 #pragma mark 首页加载失败视图
@@ -507,6 +543,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
+    if ([_homeProductList.flag isEqualToString:@"7"] || [_homeProductList.flag isEqualToString:@"14"]) {
+        return _k_h-_k_w*0.44-113+110;
+    }
     return _k_h-_k_w*0.44-113;
 }
 
@@ -527,6 +566,7 @@
     if (_homeProductList != nil) {
         
         homeCell.type = _homeProductList.flag;
+        homeCell.protocolArray = _protocolArray;
 
     }
 
@@ -785,14 +825,26 @@
 
 #pragma mark -  还款协议点击事件
 //还款协议点击事件
--(void)protocolNameClick:(NSInteger)index{
+-(void)protocolNameClick:(NSInteger)index protocoalName:(NSString *)protocoalName{
     
     NSLog(@"%ld",index);
+    
+    HgLoanProtoolListModel *model = _protocolArray[0];
+    NSString *inverBorrowId = @"";
+    if ([protocoalName containsString:@"借款协议"]) {
+        inverBorrowId = model.inverBorrowId;
+    }
+    NSString *periods = _homeProductList.periods;
+    if ([_homeProductList.productId isEqualToString:EliteLoan]) {
+        periods = @"";
+    }
     switch (index) {
         case 0:
             
             //银行自动转账授权书
-            [self getProtocolContentProtocolType:_homeProductList.productId typeCode:@"1" applicationId:_homeProductList.applicationId periods:nil];
+            
+            [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:@"2" stagingType:_homeProductList.stagingType];
+//            [self getProtocolContentProtocolType:_homeProductList.productId typeCode:@"1" applicationId:_homeProductList.applicationId periods:nil];
             break;
         case 1:
             //银行自动转账授权书
@@ -825,6 +877,55 @@
     } WithFaileBlock:^{
     }];
     [commonVM obtainProductProtocolType:productId typeCode:typeCode apply_id:applicationId periods:periods stagingType:_homeProductList.stagingType];
+}
+
+//获取协议
+-(void)getProductNewProtocolInverBorrowId:(NSString *)inverBorrowId periods:(NSString *)periods productType:(NSString *)productType protocolType:(NSString *)protocolType stagingType:(NSString *)stagingType{
+    
+    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
+    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            
+            NSString *protocolContent = baseResultM.data[@"protocolContent"];
+            NSString *navTitle = baseResultM.data[@"title"];
+            DetailViewController *webController = [[DetailViewController alloc]init];
+            webController.content = protocolContent;
+            webController.navTitle = navTitle;
+            [self.navigationController pushViewController:webController animated:true];
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message: baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceVM hgGetProductNewProtocolApplicationId:_homeProductList.applicationId inverBorrowId:inverBorrowId periods:periods productId:_homeProductList.productId productType:productType protocolType:protocolType stagingType:stagingType];
+}
+
+-(void)protocolListClick:(UIButton *)sender{
+    NSInteger tag = sender.tag;
+    
+    HgLoanProtoolListModel *model = _protocolArray[0];
+    NSString *inverBorrowId = @"";
+    if ([sender.titleLabel.text containsString:@"借款协议"]) {
+        inverBorrowId = model.inverBorrowId;
+    }
+    NSString *periods = _homeProductList.periods;
+    if ([_homeProductList.productId isEqualToString:EliteLoan]) {
+        periods = @"";
+    }
+    switch (tag) {
+        case 1:
+            [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:@"2" stagingType:_homeProductList.stagingType];
+            break;
+        case 2:
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"第二个"];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

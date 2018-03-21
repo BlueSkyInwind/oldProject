@@ -106,7 +106,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     } WithFaileBlock:^{
         [self.tableView.mj_header endRefreshing];
     }];
-    [bankInfoVM obtainUserBankCardList];
+    [bankInfoVM obtainUserBankCardListPlatformType:@""];
     
     
 //    [[FXDNetWorkManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_cardList_url] parameters:nil finished:^(EnumServerStatus status, id object) {

@@ -13,7 +13,7 @@
 /**
  获取用户的银行卡列表
  */
--(void)obtainUserBankCardList;
+-(void)obtainUserBankCardListPlatformType:(NSString *)platformType;
 
 /**
  提交续期请求

@@ -442,6 +442,9 @@ NSString * const    _queryUserStatus_url    =    @"membership/paid/queryUserStat
 //NSString * const    _queryCardInfo_url    =    @"http/do.jhtml?router=bankCardsSHService.queryCardInfo";
 NSString * const    _queryCardInfo_url    =    @"hg/queryCardInfo.jhtml";
 
+//合规的件 调用此接口 用于获取借款协议列表
+NSString * const    _hgLoanProtoolList_url    =    @"product/getHgLoanProtoolListApi";
+
 //合规银行卡列表信息
 NSString * const    _queryCardListInfo_url    =    @"bankCardsSHService.queryCardInfo.jhtml";
 

@@ -115,6 +115,7 @@ UIKIT_EXTERN NSString * const       _contractList_url;                       //�
 UIKIT_EXTERN NSString * const       _contractStr_url;                        //合同内容
 UIKIT_EXTERN NSString * const       _querybillDetails_url;                   //P2P平台账单期供查询
 UIKIT_EXTERN NSString * const       _newproductProtocol_url;                    //协议内容获取接口
+UIKIT_EXTERN NSString * const       _hgLoanProtoolList_url;                    //合规的件 调用此接口 用于获取借款协议列表
 UIKIT_EXTERN NSString * const       _newproductProtocolH5_url;                    //协议的h5地址
 UIKIT_EXTERN NSString * const       _h5register_url;                         //H5注册
 UIKIT_EXTERN NSString * const       _detectIDCardOCR_url;                    //FaceID

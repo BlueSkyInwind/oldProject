@@ -130,6 +130,34 @@
     }];
     [complianceVM hgChangeBankCardBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardNo:cardNo orgSmsCode:orgSmsCode orgSmsSeq:orgSmsSeq smsSeq:smsSeq userCode:userCode verifyCode:verifyCode];
 }
+
+
+-(void)hgGetProductNewProtocolApplicationId:(NSString *)applicationId inverBorrowId:(NSString *)inverBorrowId periods:(NSString *)periods productId:(NSString *)productId productType:(NSString *)productType protocolType:(NSString *)protocolType stagingType:(NSString *)stagingType vc:(id)vc{
+    
+    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
+    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        UIViewController *topRootViewController;
+        if ([vc isKindOfClass: [OpenAccountViewController class]]) {
+            topRootViewController = (OpenAccountViewController *)vc;
+        }
+        
+        BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:topRootViewController.view message:baseResultM.friendErrMsg];
+            
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceVM hgGetProductNewProtocolApplicationId:applicationId inverBorrowId:inverBorrowId periods:periods productId:productId productType:productType protocolType:protocolType stagingType:stagingType];
+    
+}
+
+
 -(NSString *)buildForm:(NSString *)path params:(NSDictionary *)params{
     
     NSMutableString * metaStr = [[NSMutableString alloc]initWithString:@"<form name=\"kun_form\" method=\"post\" action=\""];

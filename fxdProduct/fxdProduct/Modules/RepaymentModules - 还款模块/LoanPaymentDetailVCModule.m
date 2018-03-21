@@ -11,14 +11,11 @@
 #import "PayMethodCell.h"
 #import "UILabel+FlickerNumber.h"
 #import "UIViewController+KNSemiModal.h"
-//#import "ChooseRedPacketListVCModule.h"
 #import "PayNavigationViewController.h"
-#import "PayMethodViewController.h"
 #import "CardInfo.h"
 #import "UserCardResult.h"
 #import "RepayListInfo.h"
 #import "P2PBillDetail.h"
-#import "DefaultCardPopoverWindowModule.h"
 #import "CheckViewModel.h"
 #import "HomeViewModel.h"
 #import "PayVerificationCodeCell.h"
@@ -230,7 +227,7 @@
         }
     } WithFaileBlock:^{
     }];
-    [bankInfoVM obtainUserBankCardList];
+    [bankInfoVM obtainUserBankCardListPlatformType:_platform_type];
 }
 
 - (NSString *)formatTailNumber:(NSString *)str

@@ -506,7 +506,7 @@
     } WithFaileBlock:^{
         
     }];
-    [bankInfoVM obtainUserBankCardList];
+    [bankInfoVM obtainUserBankCardListPlatformType:@""];
 }
 
 - (BOOL)checkUserAuth:(NSInteger)selectRow

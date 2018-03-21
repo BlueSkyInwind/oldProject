@@ -10,7 +10,7 @@
 #import "SubmitAccountParamModel.h"
 #import "SmsCodeParamModel.h"
 #import "ChangeBankCardParamModel.h"
-
+#import "NewProtocolParamModel.h"
 @implementation ComplianceViewModel
 
 -(void)hgAccountInfo{
@@ -132,15 +132,6 @@
         }
     }];
     
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_hgUser_Active_url] isNeedNetStatus:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//        if (self.returnBlock) {
-//            self.returnBlock(object);
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        if (self.faileBlock) {
-//            [self faileBlock];
-//        }
-//    }];
 }
 
 -(void)hgQueryUserStatus{
@@ -153,6 +144,52 @@
         if (self.faileBlock) {
             [self faileBlock];
         }
+    }];
+}
+
+
+-(void)hgGetProductNewProtocolApplicationId:(NSString *)applicationId inverBorrowId:(NSString *)inverBorrowId periods:(NSString *)periods productId:(NSString *)productId productType:(NSString *)productType protocolType:(NSString *)protocolType stagingType:(NSString *)stagingTyp{
+    
+    NewProtocolParamModel *paramModel = [[NewProtocolParamModel alloc]init];
+    paramModel.applicationId = applicationId;
+    paramModel.inverBorrowId = inverBorrowId;
+    paramModel.periods = periods;
+    paramModel.productId = productId;
+    paramModel.productType = productType;
+    paramModel.protocolType = protocolType;
+    paramModel.stagingType = stagingTyp;
+    NSDictionary *paramDic = [paramModel toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocol_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+        
+    }];
+}
+
+-(void)hgLoanProtoolListApplicationId:(NSString *)applicationId{
+    
+    NSDictionary *paramDic = @{@"applicationId":applicationId};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_hgLoanProtoolList_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+        
     }];
 }
 @end

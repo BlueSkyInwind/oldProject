@@ -29,5 +29,9 @@
 -(void)hgUserActiveCapitalPlatform:(NSString *)capitalPlatform;
 //合规用户状态查询
 -(void)hgQueryUserStatus;
+//获取产品协议（新产品）
+-(void)hgGetProductNewProtocolApplicationId:(NSString *)applicationId inverBorrowId:(NSString *)inverBorrowId periods:(NSString *)periods productId:(NSString *)productId productType:(NSString *)productType protocolType:(NSString *)protocolType stagingType:(NSString *)stagingType;
 
+//合规的件 调用此接口 用于获取借款协议列表
+-(void)hgLoanProtoolListApplicationId:(NSString *)applicationId;
 @end

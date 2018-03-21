@@ -139,7 +139,7 @@
     } WithFaileBlock:^{
         NoneView.hidden=NO;
     }];
-    [bankInfoVM obtainUserBankCardList];
+    [bankInfoVM obtainUserBankCardListPlatformType:@""];
     
 }
 

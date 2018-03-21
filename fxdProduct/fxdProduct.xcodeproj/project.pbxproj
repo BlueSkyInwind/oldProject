@@ -1110,6 +1110,10 @@
 		CCCE40BE1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40BC1EE7CCB300E3F102 /* IdeaBackParamModel.m */; };
 		CCCE40C11EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40C01EE7CDF900E3F102 /* PserInfoViewModel.m */; };
 		CCCE40C21EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40C01EE7CDF900E3F102 /* PserInfoViewModel.m */; };
+		CCCFFADD20609D5E008556D2 /* NewProtocolParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCFFADC20609D5E008556D2 /* NewProtocolParamModel.m */; };
+		CCCFFADE20609D5E008556D2 /* NewProtocolParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCFFADC20609D5E008556D2 /* NewProtocolParamModel.m */; };
+		CCCFFAE12060B6EE008556D2 /* HgLoanProtoolListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCFFAE02060B6EE008556D2 /* HgLoanProtoolListModel.m */; };
+		CCCFFAE22060B6EE008556D2 /* HgLoanProtoolListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCFFAE02060B6EE008556D2 /* HgLoanProtoolListModel.m */; };
 		CCD32B4E1F58133B0092A9CB /* CurrentInformationHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD32B4D1F58133B0092A9CB /* CurrentInformationHeadView.swift */; };
 		CCD32B4F1F58133B0092A9CB /* CurrentInformationHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD32B4D1F58133B0092A9CB /* CurrentInformationHeadView.swift */; };
 		CCD32B521F5819980092A9CB /* CurrentInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD32B511F5819980092A9CB /* CurrentInformationCell.swift */; };
@@ -2124,6 +2128,10 @@
 		CCCE40BC1EE7CCB300E3F102 /* IdeaBackParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaBackParamModel.m; sourceTree = "<group>"; };
 		CCCE40BF1EE7CDF900E3F102 /* PserInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PserInfoViewModel.h; sourceTree = "<group>"; };
 		CCCE40C01EE7CDF900E3F102 /* PserInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PserInfoViewModel.m; sourceTree = "<group>"; };
+		CCCFFADB20609D5E008556D2 /* NewProtocolParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewProtocolParamModel.h; sourceTree = "<group>"; };
+		CCCFFADC20609D5E008556D2 /* NewProtocolParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewProtocolParamModel.m; sourceTree = "<group>"; };
+		CCCFFADF2060B6EE008556D2 /* HgLoanProtoolListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HgLoanProtoolListModel.h; sourceTree = "<group>"; };
+		CCCFFAE02060B6EE008556D2 /* HgLoanProtoolListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HgLoanProtoolListModel.m; sourceTree = "<group>"; };
 		CCD32B4D1F58133B0092A9CB /* CurrentInformationHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentInformationHeadView.swift; sourceTree = "<group>"; };
 		CCD32B511F5819980092A9CB /* CurrentInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentInformationCell.swift; sourceTree = "<group>"; };
 		CCDEDF5A1EEA387D009CEC32 /* SaveAccountBankCardParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveAccountBankCardParamModel.h; sourceTree = "<group>"; };
@@ -4502,6 +4510,10 @@
 				CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */,
 				CCC1E40C205A595F007C9C07 /* ActiveModel.h */,
 				CCC1E40D205A595F007C9C07 /* ActiveModel.m */,
+				CCCFFADB20609D5E008556D2 /* NewProtocolParamModel.h */,
+				CCCFFADC20609D5E008556D2 /* NewProtocolParamModel.m */,
+				CCCFFADF2060B6EE008556D2 /* HgLoanProtoolListModel.h */,
+				CCCFFAE02060B6EE008556D2 /* HgLoanProtoolListModel.m */,
 			);
 			path = Compliance;
 			sourceTree = "<group>";
@@ -5487,7 +5499,9 @@
 				638A17011E517D9F00AB8AB6 /* LOTMask.m in Sources */,
 				843FF1F81F20863600ECCE16 /* PaymentDetailModel.m in Sources */,
 				84BC53E01FF4DA1400FE58E8 /* QryUserStatusParamModel.m in Sources */,
+				CCCFFADD20609D5E008556D2 /* NewProtocolParamModel.m in Sources */,
 				63145AB41CA2952400D04ED8 /* LoginMsgResult.m in Sources */,
+				CCCFFAE12060B6EE008556D2 /* HgLoanProtoolListModel.m in Sources */,
 				633DAD2D1C3E47D0000DA852 /* FindPassViewModel.m in Sources */,
 				638A16861E5030D700AB8AB6 /* SetUpFMDevice.m in Sources */,
 				63145AF21CA8DBBD00D04ED8 /* RegionExt.m in Sources */,
@@ -5944,7 +5958,9 @@
 				84BC53E11FF4DA1400FE58E8 /* QryUserStatusParamModel.m in Sources */,
 				CC0DFA921EA5B1090024841A /* UIImage+Extend.m in Sources */,
 				CC0DFA931EA5B1090024841A /* NSDate+Extend.m in Sources */,
+				CCCFFADE20609D5E008556D2 /* NewProtocolParamModel.m in Sources */,
 				CC0DFA951EA5B1090024841A /* YYCache.m in Sources */,
+				CCCFFAE22060B6EE008556D2 /* HgLoanProtoolListModel.m in Sources */,
 				CC0DFA961EA5B1090024841A /* HMScannerBorder.m in Sources */,
 				CC0DFA971EA5B1090024841A /* LOTMask.m in Sources */,
 				CC0DFA9A1EA5B1090024841A /* LoginMsgResult.m in Sources */,

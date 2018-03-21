@@ -138,7 +138,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     } WithFaileBlock:^{
         [self.tableView.mj_header endRefreshing];
     }];
-    [bankInfoVM obtainUserBankCardList];
+    [bankInfoVM obtainUserBankCardListPlatformType:@""];
 }
 - (NSString *)formatTailNumber:(NSString *)str
 {
