@@ -78,13 +78,13 @@
     }];
 }
 
--(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode{
+-(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo retUrl:(NSString *)retUrl orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode{
     
     ChangeBankCardParamModel *paramModel = [[ChangeBankCardParamModel alloc]init];
     paramModel.bankNo = bankNo;
     paramModel.bankReservePhone = bankReservePhone;
     paramModel.bankShortName = bankShortName;
-    paramModel.retUrl = _transition_url;
+    paramModel.retUrl = retUrl;
     paramModel.cardNo = cardNo;
     paramModel.orgSmsCode = orgSmsCode;
     paramModel.orgSmsSeq = orgSmsSeq;
@@ -120,8 +120,8 @@
     }];
 }
 
--(void)hgUserActiveCapitalPlatform:(NSString *)capitalPlatform{
-    NSDictionary *paramDic = @{@"capitalPlatform":capitalPlatform,@"retUrl":_transition_url};
+-(void)hgUserActiveCapitalPlatform:(NSString *)capitalPlatform retUrl:(NSString *)retUrl{
+    NSDictionary *paramDic = @{@"capitalPlatform":capitalPlatform,@"retUrl":retUrl};
     [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_hgUser_Active_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);

@@ -14,5 +14,6 @@
 
 @property (nonatomic, assign) NSString *applicationId;
 @property (nonatomic, copy) NSString *jsContent;
+@property (nonatomic, copy) NSString *retUrl;
 
 @end

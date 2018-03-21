@@ -37,12 +37,17 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
     var periodArrs:[String]? = []
     var periodWayArrs:[String]? = []
     var loanForArrs:[String]? =  []
+    var durationArrs:[String]? = []
+    var durationUnitArrs:[String]? = []
+    var exampleArrs:[String]? =  []
     var chooseDiscountTDM:DiscountTicketDetailModel?
     var applicaitonViewIM:ApplicaitonViewInfoModel?
     var loanForCode:String? = ""
     var periodStagingType:String? = ""
     var actualAmount:String?
     var repaymentAmount:String?
+    
+    var index:NSInteger?
     //MRAK:状态
     var chooseType:ApplicationChooseType?
     var disCountChooseIndex :NSInteger = 1
@@ -54,6 +59,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         // Do any additional setup after loading the view.
         self.title = "申请确认"
         self.addBackItem()
+        index = 0
         self.view.backgroundColor = LOAN_APPLICATION_COLOR
         chooseType = .Application_Amount
         contentArrs = ["2500","+200","按周还款","4周","点击选择"]
@@ -233,9 +239,12 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             displayCell?.amountLabel?.text = actualAmount == nil ? "": actualAmount
             displayCell?.everyAmountLabel?.text = repaymentAmount == nil ? "": repaymentAmount
             if isDisplayDiscount!{
-                displayCell?.dateLabel?.text =  contentArrs?[3]
+                displayCell?.dateLabel?.text =  "\(durationArrs![index!])" + "\(durationUnitArrs![index!])"
+//                displayCell?.dateLabel?.text =  contentArrs?[3]
             }else{
-                displayCell?.dateLabel?.text =  contentArrs?[2]
+                
+                displayCell?.dateLabel?.text =  "\(durationArrs![index!])" + "\(durationUnitArrs![index!])"
+//                displayCell?.dateLabel?.text =  contentArrs?[2]
             }
             tableViewCell = displayCell
         }
@@ -344,11 +353,13 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         choosePV = nil
     }
     func chooseSureBtn(_ content: String,row:NSInteger) {
+        
         switch chooseType {
         case .Application_Amount?:
             contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 0, length: 1))!, with: [content])
             break
         case .Application_StagingType?:
+            index = row
             let reimbursementWay = self.applicaitonViewIM?.stagingTypeList[row] as! ReimbursementWayModel
             periodStagingType = reimbursementWay.stagingType
             periodArrs = (reimbursementWay.validStagingList as! [String])
@@ -361,6 +372,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 3, length: 1))!, with: [(periodArrs?.first)!])
             break
         case .Application_Period?:
+            
             if !isDisplayDiscount! {
                 contentArrs?.replaceSubrange(Range.init(NSRange.init(location: 2, length: 1))!, with: [content])
                 break
@@ -476,6 +488,8 @@ extension FXD_LoanApplicationViewController {
         for dic in (self.applicaitonViewIM?.stagingTypeList)! {
             let periodWay = dic as! ReimbursementWayModel
             periodWayArrs?.append(periodWay.typeText)
+            durationArrs?.append(periodWay.duration)
+            durationUnitArrs?.append(periodWay.durationUnit)
         }
     }
     

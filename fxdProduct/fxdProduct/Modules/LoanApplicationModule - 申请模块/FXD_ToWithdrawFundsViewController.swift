@@ -290,7 +290,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
             print("已开户")
         case 4?:
         
-            HG_Manager.sharedHG().hgUserActiveJumpP2pCtrlCapitalPlatform("2", vc: self)
+            HG_Manager.sharedHG().hgUserActiveJumpP2pCtrlCapitalPlatform("2", retUrl: _transition_url, vc: self)
         
             print("待激活")
         default:
@@ -349,51 +349,6 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
             break
         }
     }
-    
-    fileprivate func getProductNewProtocol(inverBorrowId :String ,periods:String ,productType:String ,protocolType:String,stagingType:String){
-        
-        let complianceVM = ComplianceViewModel()
-        complianceVM.setBlockWithReturn({ [weak self](returnValue) in
-            
-            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
-            if baseResult.errCode == "0" {
-//                let protocolContent = baseResult.data!["protocolContent"]
-//                let navTitle = baseResult.data["title"]
-                
-                
-            }else{
-                
-                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
-            }
-        }) {
-            
-        }
-        
-        complianceVM.hgGetProductNewProtocolApplicationId(self.applicationId, inverBorrowId: inverBorrowId, periods: periods, productId: self.drawingsInfoModel?.productId, productType: productType, protocolType: protocolType, stagingType: stagingType)
-    }
-//    //获取协议
-//    -(void)getProductNewProtocolInverBorrowId:(NSString *)inverBorrowId periods:(NSString *)periods productType:(NSString *)productType protocolType:(NSString *)protocolType stagingType:(NSString *)stagingType{
-//
-//    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
-//    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
-//
-//    BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-//    if ([baseResultM.errCode isEqualToString:@"0"]) {
-//
-//    NSString *protocolContent = baseResultM.data[@"protocolContent"];
-//    NSString *navTitle = baseResultM.data[@"title"];
-//    DetailViewController *webController = [[DetailViewController alloc]init];
-//    webController.content = protocolContent;
-//    webController.navTitle = navTitle;
-//    [self.navigationController pushViewController:webController animated:true];
-//    }else{
-//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message: baseResultM.friendErrMsg];
-//    }
-//    } WithFaileBlock:^{
-//
-//    }];
-//    [complianceVM hgGetProductNewProtocolApplicationId:_homeProductList.applicationId inverBorrowId:inverBorrowId periods:periods productId:_homeProductList.productId productType:productType protocolType:protocolType stagingType:stagingType];
-//    }
 
     /*
     // MARK: - Navigation
@@ -473,6 +428,33 @@ extension FXD_ToWithdrawFundsViewController {
         }
         complianceVM.hgLoanProtoolListApplicationId(self.applicationId)
         
+    }
+    
+    //获取协议内容并跳转
+    fileprivate func getProductNewProtocol(inverBorrowId :String ,periods:String ,productType:String ,protocolType:String,stagingType:String){
+        
+        let complianceVM = ComplianceViewModel()
+        complianceVM.setBlockWithReturn({ [weak self](returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+                let protocolContent = (baseResult.data as! [String:String])["protocolContent"]
+                let navTitle = (baseResult.data as! [String:String])["title"]
+                let webController = DetailViewController()
+                webController.content = protocolContent;
+                webController.navTitle = navTitle;
+                self?.navigationController?.pushViewController(webController, animated: true)
+                
+            }else{
+                
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        
+        complianceVM.hgGetProductNewProtocolApplicationId(self.applicationId, inverBorrowId: inverBorrowId, periods: periods, productId: self.drawingsInfoModel?.productId, productType: productType, protocolType: protocolType, stagingType: stagingType)
     }
     /// 提款信息
     func obtainWithDrawFundsInfo(_ complication:@escaping ((_ isSuccess:Bool) -> Void))  {

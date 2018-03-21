@@ -678,7 +678,8 @@
             break;
         case 4:
         {
-            [[HG_Manager sharedHGManager]hgUserActiveJumpP2pCtrlCapitalPlatform:@"2" vc:self];
+            [[HG_Manager sharedHGManager]hgUserActiveJumpP2pCtrlCapitalPlatform:@"2" retUrl:_transition_url vc:self];
+            
         }
             break;
         
