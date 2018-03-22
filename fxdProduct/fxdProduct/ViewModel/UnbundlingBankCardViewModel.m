@@ -12,52 +12,6 @@
 #import "SaveAccountBankCardParamModel.h"
 @implementation UnbundlingBankCardViewModel
 
--(void)sendSmsSHServiceBankNo:(NSString *)bankNo BusiType:(NSString *)busi_type SmsType:(NSString *)sms_type Mobile:(NSString *)mobile{
-
-    SendSmsParamModel *sendSmsParamModel = [[SendSmsParamModel alloc]init];
-    sendSmsParamModel.busi_type_ = busi_type;
-    sendSmsParamModel.card_number_ = bankNo;
-    sendSmsParamModel.mobile_ = mobile;
-    sendSmsParamModel.sms_type_ = sms_type;
-    sendSmsParamModel.from_mobile_ = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
-    
-    NSDictionary * paramDic  = [sendSmsParamModel toDictionary];
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]HG_POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_sendSms_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
-
--(void)bankCardsSHServiceParamArray:(NSMutableArray *)paramArray{
-
-    BankCardsParamModel *bankCardsParamModel = [[BankCardsParamModel alloc]init];
-    bankCardsParamModel.bank_code_ = paramArray[0];
-    bankCardsParamModel.card_number_ = paramArray[1];
-    bankCardsParamModel.from_mobile_ = paramArray[2];
-    bankCardsParamModel.mobile_ = paramArray[3];
-    bankCardsParamModel.ordsms_ext_ = paramArray[4];
-    bankCardsParamModel.sms_code_ = paramArray[5];
-    bankCardsParamModel.sms_seq_ = paramArray[6];
-    bankCardsParamModel.trade_type_ = @"REBIND";
-    NSDictionary * paramDic  = [bankCardsParamModel toDictionary];
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]HG_POSTWithURL:[NSString stringWithFormat:@"%@%@",_p2P_url,_bankCards_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
-
 -(void)saveAccountBankCard:(NSMutableArray *)paramArray{
 
     SaveAccountBankCardParamModel *saveAccountBankCardParamModel = [[SaveAccountBankCardParamModel alloc]init];
@@ -68,15 +22,7 @@
     saveAccountBankCardParamModel.verify_code_ = paramArray[4];
     
     NSDictionary *paramDic = [saveAccountBankCardParamModel toDictionary];
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_BankNumCheck_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//        if (self.returnBlock) {
-//            self.returnBlock(object);
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        if (self.faileBlock) {
-//            [self faileBlock];
-//        }
-//    }];
+
     [[FXD_NetWorkRequestManager sharedNetWorkManager] DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_BankNumCheck_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
@@ -89,19 +35,4 @@
     }];
 }
 
--(void)getBankList{
-
-    NSDictionary *paramDic = @{@"dict_type_":@"CARD_BANK_"};
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_getBankList_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        
-        if (self.returnBlock) {
-            self.returnBlock(object);
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        
-        if (self.faileBlock) {
-            [self faileBlock];
-        }
-    }];
-}
 @end

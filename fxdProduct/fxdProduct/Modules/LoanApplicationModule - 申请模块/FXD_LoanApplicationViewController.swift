@@ -60,6 +60,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         self.title = "申请确认"
         self.addBackItem()
         index = 0
+        
         self.view.backgroundColor = LOAN_APPLICATION_COLOR
         chooseType = .Application_Amount
         contentArrs = ["2500","+200","按周还款","4周","点击选择"]
@@ -232,7 +233,10 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
                 displayCell = FXD_LoanApplicationDisplayTableViewCell.init(style: .default, reuseIdentifier: "FXD_LoanApplicationDisplayTableViewCell")
             }
             displayCell?.explainButtonClick = {
-                FXD_AlertViewCust.sharedHHAlertView().showFXDAlertViewTitle(self.applicaitonViewIM?.question, content: (self.applicaitonViewIM?.answer)! + "\n" + (self.applicaitonViewIM?.example)!, attributeDic: nil, textAlignment:NSTextAlignment.left, cancelTitle: nil, sureTitle: "我知道了") { (index) in
+//                FXD_AlertViewCust.sharedHHAlertView().showFXDAlertViewTitle(self.applicaitonViewIM?.question, content: (self.applicaitonViewIM?.answer)! + "\n" + (self.applicaitonViewIM?.example)!, attributeDic: nil, textAlignment:NSTextAlignment.left, cancelTitle: nil, sureTitle: "我知道了") { (index) in
+//                }
+                
+                FXD_AlertViewCust.sharedHHAlertView().showFXDAlertViewTitle(self.applicaitonViewIM?.question, content: (self.applicaitonViewIM?.answer)! + "\n" + self.exampleArrs![self.index!], attributeDic: nil, textAlignment:NSTextAlignment.left, cancelTitle: nil, sureTitle: "我知道了") { (index) in
                 }
             }
             
@@ -490,6 +494,7 @@ extension FXD_LoanApplicationViewController {
             periodWayArrs?.append(periodWay.typeText)
             durationArrs?.append(periodWay.duration)
             durationUnitArrs?.append(periodWay.durationUnit)
+            exampleArrs?.append(periodWay.example)
         }
     }
     

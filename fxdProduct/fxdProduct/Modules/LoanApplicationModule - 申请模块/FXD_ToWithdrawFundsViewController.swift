@@ -506,7 +506,7 @@ extension FXD_ToWithdrawFundsViewController {
         commonVM.setBlockWithReturn({ (result) in
             let baseRM = result as? BaseResultModel
             if baseRM?.errCode == "0" {
-                var content =  (baseRM?.data as! [String:String])["productProURL"]
+                let content =  (baseRM?.data as! [String:String])["productProURL"]
                 complication(true,(content == nil ? "" : content!))
             }else{
                 complication(false,"")

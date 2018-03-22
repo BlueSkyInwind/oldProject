@@ -26,10 +26,6 @@
 
 @end
 
-@interface ProductListViewModel : FXD_ViewModelBaseClass
-
-
-@end
 
 
 

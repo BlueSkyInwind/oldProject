@@ -96,11 +96,7 @@ UIKIT_EXTERN NSString * const       _saveUserContacts_jhtml;                 //�
 UIKIT_EXTERN NSString * const       _updateLoginLatitude_url;                //登陆更新经纬度
 UIKIT_EXTERN NSString * const       _getRegionCodeByName_jhtml;              //获取省市区编码
 UIKIT_EXTERN NSString * const       _checkVersion_jhtml;                     //版本检测
-UIKIT_EXTERN NSString * const       _drawApplyAgain_jhtml;                   //二次提款
 UIKIT_EXTERN NSString * const       _newDrawApply_jhtml;                   //二次提款
-
-UIKIT_EXTERN NSString * const       _caseStatusUpdateApi_url;                //申请件状态更新
-UIKIT_EXTERN NSString * const       _getBankList_url;                        //银行卡获取接口   _getSupportBankList_url
 
 UIKIT_EXTERN NSString * const       _getSupportBankList_url;                        //获取银行卡支持列表
 UIKIT_EXTERN NSString * const       _getContractStagingInfo_url;             //合同及期供信息查询接口
@@ -111,9 +107,6 @@ UIKIT_EXTERN NSString * const       _checkMobilePhoneAuth_url;               //�
 UIKIT_EXTERN NSString * const       _authMobilePhone_url;                    //手机认证信息保存
 UIKIT_EXTERN NSString * const       _aboutus_url;                            //关于我们H5
 UIKIT_EXTERN NSString * const       _depHistory_url;                         //发展历程H5
-UIKIT_EXTERN NSString * const       _contractList_url;                       //平台合同列表
-UIKIT_EXTERN NSString * const       _contractStr_url;                        //合同内容
-UIKIT_EXTERN NSString * const       _querybillDetails_url;                   //P2P平台账单期供查询
 UIKIT_EXTERN NSString * const       _newproductProtocol_url;                    //协议内容获取接口
 UIKIT_EXTERN NSString * const       _hgLoanProtoolList_url;                    //合规的件 调用此接口 用于获取借款协议列表
 UIKIT_EXTERN NSString * const       _newproductProtocolH5_url;                    //协议的h5地址
@@ -122,20 +115,11 @@ UIKIT_EXTERN NSString * const       _detectIDCardOCR_url;                    //F
 UIKIT_EXTERN NSString * const       _verifyLive_url;                         //FaceID人脸对比身份核实
 UIKIT_EXTERN NSString * const       _customerContact_url;                    //联系人信息上传
 UIKIT_EXTERN NSString * const       _saveIDInfo_url;
-UIKIT_EXTERN NSString * const       _repayment_url;                          //获取当前期的续期信息
-UIKIT_EXTERN NSString * const       _ApplicationStatus_url;                  //放款中 还款中 展期中 状态实时获取
 UIKIT_EXTERN NSString * const       _BankCardList_url;                       //银行卡列表信息
-UIKIT_EXTERN NSString * const       _SalaryProductFee_url;                   //工薪贷根据周期获取费用
-UIKIT_EXTERN NSString * const       _Staging_url;                            //提交续期请求
-UIKIT_EXTERN NSString * const       _Repay_url;                              //待还款界面信息获取
-UIKIT_EXTERN NSString * const       _StagingRule_url;                        //获取续期规则
 UIKIT_EXTERN NSString * const       _registerID_url;                         //上传用户的registerID
 UIKIT_EXTERN NSString * const       _UserDataCertification_url;              //用户资料测评接口
-UIKIT_EXTERN NSString * const       _Trilateral_url;                         //用户资料测评接口
 UIKIT_EXTERN NSString * const       _UserDataCertificationResult_url;        //得到测评结果
 UIKIT_EXTERN NSString * const       _loginOutDeleteRegisterId_url;           //退出登录删除推送id
-UIKIT_EXTERN NSString * const       _getDrawLottery_url;                     //老客周末活动判断是否弹框刮奖
-UIKIT_EXTERN NSString * const       _ProductProtocol_url;                    //老客周末活动判断是否弹框刮奖
 UIKIT_EXTERN NSString * const       _creditLimitInfo_url;                    //额度页面信息获取
 UIKIT_EXTERN NSString * const       _increaseAmount_url;                    //用户提额接口
 
@@ -148,61 +132,28 @@ UIKIT_EXTERN NSString * const       _GetRecomfrInfo_url;                     //�
 UIKIT_EXTERN NSString * const       _topBanner_url;                          //Banner广告获取
 UIKIT_EXTERN NSString * const       _question_url;                           //常见问题
 UIKIT_EXTERN NSString * const       _getDicCode_url;                         //数据字典获取
-UIKIT_EXTERN NSString * const       _mobileAuthentication_url;               //手机认证
-UIKIT_EXTERN NSString * const       _selectPlatform_url;                     //审核被拒，去看看
-
-UIKIT_EXTERN NSString * const       _findZhimaCredit_url;                     //芝麻信用授权查询
 UIKIT_EXTERN NSString * const       _submitZhimaCredit_url;                    //芝麻信用授权提交
 UIKIT_EXTERN NSString * const       _zhimaCreditCallBack_url;                    //芝麻信用回调地址
 UIKIT_EXTERN NSString * const       _sendSms_url;                     //发送短信接口
-UIKIT_EXTERN NSString * const       _bankCards_url;                     //换绑银行卡
-UIKIT_EXTERN NSString * const       _huifu_url;                    //用户开户接口
 UIKIT_EXTERN NSString * const       _account_url;                    //获取合规开户信息
-UIKIT_EXTERN NSString * const       _queryCardInfo_url;                    //银行卡查询接口
-UIKIT_EXTERN NSString * const       _queryCardListInfo_url;                    //合规银行卡列表信息
-UIKIT_EXTERN NSString * const       _accountHSService_url;                    //用户状态查询接口
-UIKIT_EXTERN NSString * const       _paymentService_url;                    //主动还款接口
-UIKIT_EXTERN NSString * const       _cash_url;                    //取现
-UIKIT_EXTERN NSString * const       _bosAcctActivate_url;                  //激活老账户
 UIKIT_EXTERN NSString * const       _change_BankCards_url;                  //提交合规换绑银行卡信息
 UIKIT_EXTERN NSString * const       _hgUser_Active_url;                  //合规获取老用户激活跳转页面参数
 UIKIT_EXTERN NSString * const       _queryUserStatus_url;                  //合规用户状态查询
-UIKIT_EXTERN NSString * const       _queryBidStatus_url;                  //标的状态查询接口
-UIKIT_EXTERN NSString * const       _bosAcctActivateRet_url;                  //激活老账户返回url
-UIKIT_EXTERN NSString * const       _qryUserStatus_url;                  //用户状态查询
-UIKIT_EXTERN NSString * const       _getBidStatus_url;                  //用户标的状态查询
-UIKIT_EXTERN NSString * const       _saveLoanCase_url;                  //提款申请件记录
 UIKIT_EXTERN NSString * const       _liangzihuzhu_url;                  //量子互助
 UIKIT_EXTERN NSString * const       _sjRecord_url;                  //首借免息
-
 UIKIT_EXTERN NSString * const       _shebaoupload_url;                  //社保认证信息提交
 UIKIT_EXTERN NSString * const       _TheCreditCardupload_url;                  //信用卡信息提交
 UIKIT_EXTERN NSString * const       _TheInternetbank_url;                  //网银信息提交
-
 UIKIT_EXTERN NSString * const       _HighRankingStatus_url;                  //高级认证状态查询
 UIKIT_EXTERN NSString * const       _UserBasicInformation_url;               //基础认证状态查询
 UIKIT_EXTERN NSString * const       _UserThirdPartCertification_url;         //三方认证状态查询
-UIKIT_EXTERN NSString * const       _AuthenticationCenterBasicInformation_url;//认证中心基础认证
 UIKIT_EXTERN NSString * const       _UserContactInfo_url;                    //用户联系人信息
-UIKIT_EXTERN NSString * const       _HomeState_url;                          //首页状态查询
-UIKIT_EXTERN NSString * const       _createApplication_url;                  //用户进件接口
 UIKIT_EXTERN NSString * const       _new_CreateApplication_url;                  //新版用户进件接口
 UIKIT_EXTERN NSString * const       _calculateApplicationInfo_url;                  //申请信息计算
-
-UIKIT_EXTERN NSString * const       _ApplicationViewInfo_url;                  //申请确认页数据
 UIKIT_EXTERN NSString * const       _newApplicationViewInfo_url;                  //申请确认页数据
-UIKIT_EXTERN NSString * const       _UserDrawingInfo_url;                  //申请确认页数据
-UIKIT_EXTERN NSString * const       _CapitalList_url;                  //资金平台列表
-UIKIT_EXTERN NSString * const       _CapitalLoan_url;                  //资金平台放款接口
 UIKIT_EXTERN NSString * const       _CapitalLoanBack_url;                  //联联绑卡回调地址
-UIKIT_EXTERN NSString * const       _ShanLinBack_url;                  //联联绑卡返回回调地址
 UIKIT_EXTERN NSString * const       _CapitalLoanFail_url;                  //app 连连绑卡页面用户放弃操作接口
-UIKIT_EXTERN NSString * const       _DiscountTicketList_url;                  //免息券接口
-UIKIT_EXTERN NSString * const       _ChoosePattern_url;                  //支付列表
-
-UIKIT_EXTERN NSString * const       _DiscountTicketRule_url;                  //优惠券规则
 UIKIT_EXTERN NSString * const       _New_DiscountTicket_url;                  //优惠券规则
-UIKIT_EXTERN NSString * const       _DeductibleAmountOfDiscountTicket_url;                  //优惠券规则
 UIKIT_EXTERN NSString * const       _repayDetailAmountInfo_url;                  //获取还款金额信息
 
 
@@ -228,10 +179,8 @@ UIKIT_EXTERN NSString * const       _NewSummary_url;                         //�
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码
 UIKIT_EXTERN NSString * const   CODE_FINDPASS;         ///密码找回验证码
-UIKIT_EXTERN NSString * const   CODE_CHANGEPASS;      ///修改密码验证码
 UIKIT_EXTERN NSString * const   CODE_CHANGEDEVID;       ///设备号更改
 UIKIT_EXTERN NSString * const   CODE_LOGIN;              ///登陆验证码
-UIKIT_EXTERN NSString * const   CODE_BANKMOBILE;         ///银行预留手机验证码(银行卡修改)
 UIKIT_EXTERN NSString * const   CODE_DRAW;              ///提款
 UIKIT_EXTERN NSString * const   CODE_ADDCARD;          //新增卡
 UIKIT_EXTERN NSString * const   CODE_TRADEPASSWORD;                             ///修改密码验证码

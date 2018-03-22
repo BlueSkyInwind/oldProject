@@ -243,7 +243,7 @@
             dispatch_after(delayTime, dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
-//            [self deleteUserRegisterID];
+
             LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
             [self presentViewController:nav animated:YES completion:^{

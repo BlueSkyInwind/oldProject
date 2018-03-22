@@ -11,7 +11,6 @@
 #import "WTCameraViewController.h"
 #import "ReturnMsgBaseClass.h"
 #import "SMSViewModel.h"
-#import "AuthorizationViewController.h"
 #import <MGBaseKit/MGBaseKit.h>
 #import <MGBankCard/MGBankCard.h>
 #import "UnbundlingBankCardViewModel.h"

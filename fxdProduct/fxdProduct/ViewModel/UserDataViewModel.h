@@ -22,10 +22,7 @@
 
 //上传活体认证信息
 -(void)uploadLiveIdentiInfo:(FaceIDData *)imagesDic;
-/**
- 认证中心获取基础资料接口
- */
--(void)obtainBasicInformationStatusOfAuthenticationCenter;
+
 /**
  用户联系人信息的状态
  */

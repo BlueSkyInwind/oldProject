@@ -23,7 +23,6 @@
 #import "LoginViewModel.h"
 #import "HomepageActivityImageDisplayModule.h"
 #import "AppDelegate.h"
-#import "LoanMoneyViewModel.h"
 #import "ApplicationStatusModel.h"
 #import "UserDataViewModel.h"
 #import "MessageViewModel.h"

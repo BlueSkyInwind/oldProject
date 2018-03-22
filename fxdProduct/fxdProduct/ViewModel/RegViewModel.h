@@ -31,5 +31,5 @@
                    picVerifyId:(NSString *)picVerifyId
                  picVerifyCode:(NSString *)picVerifyCode;
 
--(void)obtainRegisterProtocol:(NSString *)ProtocolId ProtocolType:(NSString *)protocolType;
+
 @end

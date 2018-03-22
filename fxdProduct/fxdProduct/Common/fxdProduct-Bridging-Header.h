@@ -30,7 +30,6 @@
 #import "UserCardResult.h"
 #import <YYModel/YYModel.h>
 #import "CardInfo.h"
-#import "PayMethodViewController.h"
 #import "PayNavigationViewController.h"
 #import "UIViewController+KNSemiModal.h"
 #import "UserBankCardListVCModule.h"

@@ -27,14 +27,14 @@
 }
 
 
-- (void)getCurrentRenewalWithStagingId:(NSString *)stagingId{
-
-    NSDictionary *paramDic = @{@"stagingId":stagingId};
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_repayment_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        self.returnBlock(object);
-    } failure:^(EnumServerStatus status, id object) {
-        [self faileBlock];
-    }];
-}
+//- (void)getCurrentRenewalWithStagingId:(NSString *)stagingId{
+//
+//    NSDictionary *paramDic = @{@"stagingId":stagingId};
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_repayment_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+//        self.returnBlock(object);
+//    } failure:^(EnumServerStatus status, id object) {
+//        [self faileBlock];
+//    }];
+//}
 
 @end
