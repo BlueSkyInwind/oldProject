@@ -138,8 +138,9 @@ UIKIT_EXTERN NSString * const       _ProductProtocol_url;                    //�
 UIKIT_EXTERN NSString * const       _creditLimitInfo_url;                    //额度页面信息获取
 UIKIT_EXTERN NSString * const       _increaseAmount_url;                    //用户提额接口
 
-
-
+#pragma mark - 视频认证接口
+UIKIT_EXTERN NSString * const       _VideoVerify_url;                    //获取视频认证信息
+UIKIT_EXTERN NSString * const       _uploadVideoVideo_url;                    //上传视频
 
 //用户身份证图片上传
 UIKIT_EXTERN NSString * const       _detectInfo_url;                         //活体检测信息上传
@@ -270,7 +271,6 @@ UIKIT_EXTERN NSString * const Fxd_Token;
 
 //登陆标识
 UIKIT_EXTERN NSString * const kLoginFlag;
-
 //邀请码
 UIKIT_EXTERN NSString * const kInvitationCode;
 

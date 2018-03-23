@@ -12,7 +12,6 @@
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
-
 //连接状态
 typedef enum {
     ///返回数据正确

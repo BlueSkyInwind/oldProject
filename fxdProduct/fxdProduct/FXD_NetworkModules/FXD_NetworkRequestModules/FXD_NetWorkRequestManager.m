@@ -55,7 +55,6 @@
         [_requestWaitView removeFromSuperview];
     }
 }
-
 /**
  添加请求头
  */
@@ -219,7 +218,7 @@
             //添加准备上传的图片
             //将UIimage 转换成NSData
             //            NSData *data=UIImageJPEGRepresentation(image,0.2);
-//                        [GTMBase64 encodeData:data];
+            //            [GTMBase64 encodeData:data];
             //            [formData appendPartWithFileData:data name:@"image" fileName:@"image" mimeType:@"image/png"];
         } progress:^(NSProgress * _Nonnull uploadProgress) {
             
@@ -334,22 +333,35 @@
             [_waitView show:YES];
             [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
             
-            NSDictionary *paramDic = [NSDictionary dictionary];
-            DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
+//            NSDictionary *paramDic = [NSDictionary dictionary];
+//            DLog(@"请求url:---%@\n加密前参数:----%@",strURL,parameters);
             
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.requestSerializer = [AFHTTPRequestSerializer serializer];
             
-            if (parameters) {
-                if ([FXD_Tool dicContainsKey:parameters keyValue:@"Encrypt"]) {
-                    NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
-                    [muDic removeObjectForKey:@"Encrypt"];
-                    paramDic = [muDic copy];
-                } else {
-                    paramDic = [FXD_Tool getParameters:parameters];
-                }
-            }
-            DLog(@"加密后参数:---%@",paramDic);
+//            if (parameters) {
+//                if ([FXD_Tool dicContainsKey:parameters keyValue:@"Encrypt"]) {
+//                    NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:parameters];
+//                    [muDic removeObjectForKey:@"Encrypt"];
+//                    paramDic = [muDic copy];
+//                } else {
+//                    paramDic = [FXD_Tool getParameters:parameters];
+//                }
+//            }
+//            DLog(@"加密后参数:---%@",paramDic);
+            
+//            NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+//                                                                                                 (CFStringRef)parameters,
+//                                                                                                 NULL,
+//                                                                                                 CFSTR(":/?#[]@!$&’()*+,;="),
+//                                                                                                 kCFStringEncodingUTF8);
+            NSString *encodedString = (NSString *)
+            CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                      (CFStringRef)parameters,
+                                                                      (CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",
+                                                                      NULL,
+                                                                      kCFStringEncodingUTF8));
+    
             
             DLog(@"juid --- %@\n token --- %@",[FXD_Utility sharedUtility].userInfo.juid,[FXD_Utility sharedUtility].userInfo.tokenStr);
             if ([FXD_Utility sharedUtility].userInfo.juid != nil && ![[FXD_Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
@@ -357,13 +369,14 @@
                     [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[FXD_Utility sharedUtility].userInfo.juid]];
                     [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
                     [manager.requestSerializer setValue:SERVICE_PLATFORM forHTTPHeaderField:@"platformType"];
+                    [manager.requestSerializer setValue:@"text/plain;charset=utf-8"forHTTPHeaderField:@"Content-Type"];
                 }
             }
             [manager.requestSerializer setValue:[FXD_Tool getAppVersion] forHTTPHeaderField:@"version"];
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/json",@"text/html",@"application/x-www-form-urlencoded",@"application/json",@"charset=UTF-8",@"text/plain", nil];
             manager.requestSerializer.timeoutInterval = 30.0;
             DLog(@"%@",parameters);
-            [manager POST:strURL parameters:paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
+            [manager POST:strURL parameters:encodedString progress:^(NSProgress * _Nonnull uploadProgress) {
                 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 if ([[responseObject objectForKey:@"flag"] isEqualToString:@"0003"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0016"] || [[responseObject objectForKey:@"flag"] isEqualToString:@"0015"]) {

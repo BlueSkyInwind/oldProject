@@ -345,6 +345,44 @@
     }];
 }
 
+#pragma  mark - 视频认证相关
+-(void)obtainVideoVerifyContent{
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]  GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_VideoVerify_url] isNeedNetStatus:true isNeedWait:true parameters:nil finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseVM  = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseVM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
+-(void)uploadVerifyVideo:(NSString *)videoBase64Str {
+    
+    NSDictionary * paramDic = @{@"b64video":videoBase64Str};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_uploadVideoVideo_url] isNeedNetStatus:true isNeedWait:false parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseVM  = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseVM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+    
+//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@",@"http://192.168.8.200:8200/user/auth/userRegisterVideoVerify"] parameters:videoBase64Str finished:^(EnumServerStatus status, id object) {
+//        if (self.returnBlock) {
+//            self.returnBlock(object);
+//        }
+//    } failure:^(EnumServerStatus status, id object) {
+//        if (self.faileBlock) {
+//            self.faileBlock();
+//        }
+//    }];
+}
 
 
 @end

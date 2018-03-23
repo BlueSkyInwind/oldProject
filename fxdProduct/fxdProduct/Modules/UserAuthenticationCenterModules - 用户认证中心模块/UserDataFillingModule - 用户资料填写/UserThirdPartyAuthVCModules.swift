@@ -120,10 +120,10 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row{
         case 0:
-            if userThirdPartCM?.faceIdentity == "2" || userThirdPartCM?.faceIdentity == "3"{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.faceIdentityDesc)
-                return;
-            }
+//            if userThirdPartCM?.faceIdentity == "2" || userThirdPartCM?.faceIdentity == "3"{
+//                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.faceIdentityDesc)
+//                return;
+//            }
             let faceIdentiCreditVC  = UserFaceIdentiVCModules.init()
             faceIdentiCreditVC.verifyStatus = userThirdPartCM?.faceIdentity
             self.navigationController?.pushViewController(faceIdentiCreditVC, animated: true)

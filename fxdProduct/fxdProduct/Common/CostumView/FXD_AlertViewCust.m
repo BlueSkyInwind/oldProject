@@ -150,7 +150,7 @@
         NSMutableParagraphStyle *ornamentParagraph = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         //设置text文字垂直居中
         ornamentParagraph.alignment = textAlignment;
-        attributeDic =@{NSFontAttributeName:[UIFont yx_systemFontOfSize:14],NSForegroundColorAttributeName:kUIColorFromRGB(0x808080),NSParagraphStyleAttributeName:ornamentParagraph};
+        attributeDic =@{NSFontAttributeName:[UIFont yx_systemFontOfSize:13],NSForegroundColorAttributeName:kUIColorFromRGB(0x808080),NSParagraphStyleAttributeName:ornamentParagraph};
     }
     self.fxdAlertView = [[FXDAlertView alloc]init:title content:contentAttri attributes:attributeDic cancelTitle:cancelTitle sureTitle:sureTitle];
     [self.fxdAlertView show];
@@ -161,6 +161,13 @@
         weakSelf.fxdAlertView = nil;
     };
 }
+
+-(void)dismissFXDAlertView{
+    [self.fxdAlertView dismiss];
+    self.fxdAlertView = nil;
+}
+
+
 
 -(void)showIdentiFXDAlertViewTitle:(NSString *)title
                      content:(NSString *)content

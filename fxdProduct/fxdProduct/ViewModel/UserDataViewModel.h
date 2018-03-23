@@ -104,4 +104,15 @@
  获取所有省市区
  */
 -(void)getAllRegionList;
+
+/**
+ 获取视频录制信息
+ */
+-(void)obtainVideoVerifyContent;
+/**
+ 上传视频
+
+ @param videoBase64Str 视频编码
+ */
+-(void)uploadVerifyVideo:(NSString *)videoBase64Str;
 @end

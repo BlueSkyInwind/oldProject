@@ -300,4 +300,5 @@
     [commonVM obtainProductProtocolType:nil typeCode:typeCode apply_id:nil periods:nil stagingType:nil];
 }
 
+
 @end

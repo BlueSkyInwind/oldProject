@@ -37,7 +37,7 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
             statusBtn?.backgroundColor = UI_MAIN_COLOR
             statusBtn?.setTitle("进入检测", for: UIControlState.normal)
         }else {
-            statusBtn?.isEnabled = false
+            statusBtn?.isEnabled = true
             statusBtn?.backgroundColor = UIColor.init(red: 139/255, green: 140/255, blue: 143/255, alpha: 1)
             statusBtn?.setTitle("已认证", for: UIControlState.normal)
         }
@@ -53,14 +53,23 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
     }
     
     func startFaceDetection() -> Void {
-        MGLicenseManager.license { (License) in
-            if License {
-                let mGLiveVC = MGLiveViewController.init(defauleSetting: ())
-                mGLiveVC?.delagate  = self
-                let baseVC = BaseNavigationViewController.init(rootViewController: mGLiveVC!)
-                self.present(baseVC, animated: true, completion: nil)
+        obtainVideoVerifyInfo { (isSuccess, content) in
+            guard !isSuccess else {
+                let videoVerifyVC = VideoVerifyViewController.init()
+                videoVerifyVC.displaystr = content
+                self.present(videoVerifyVC, animated: true, completion: nil)
+                return
             }
         }
+        
+//        MGLicenseManager.license { (License) in
+//            if License {
+//                let mGLiveVC = MGLiveViewController.init(defauleSetting: ())
+//                mGLiveVC?.delagate  = self
+//                let baseVC = BaseNavigationViewController.init(rootViewController: mGLiveVC!)
+//                self.present(baseVC, animated: true, completion: nil)
+//            }
+//        }
     }
     
     //MARK:  LiveDeteDelgate 事件
@@ -110,6 +119,23 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
         }) {
         }
         userDataVM.uploadLiveIdentiInfo(faceIDData)
+    }
+    
+    /// 获取视频信息
+    func obtainVideoVerifyInfo(finish:@escaping (_ isSuccess:Bool,_ content:String) -> Void)  {
+        let  userDataVM = UserDataViewModel.init()
+        userDataVM.setBlockWithReturn({[weak self] (result) in
+            let baseResult = result as? BaseResultModel
+            if baseResult?.errCode == "0" {
+                finish(true,baseResult?.data as! String)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message:baseResult?.friendErrMsg)
+                finish(false,"")
+            }
+        }) {
+            finish(false,"")
+        }
+        userDataVM.obtainVideoVerifyContent()
     }
     
     /*
