@@ -51,8 +51,4 @@ typedef enum {
 -(void)postPicVerifyCode;
 
 
-
-
-
-
 @end

@@ -69,6 +69,9 @@
 @property(nonatomic,strong)NSString<Optional> * stagingType;
 @property(nonatomic,strong)NSString<Optional> * typeText;
 @property(nonatomic,strong)NSArray<Optional> * validStagingList;
+@property(nonatomic,strong)NSString<Optional> * duration;
+@property(nonatomic,strong)NSString<Optional> * durationUnit;
+@property(nonatomic,strong)NSString<Optional> * example;
 
 @end
 

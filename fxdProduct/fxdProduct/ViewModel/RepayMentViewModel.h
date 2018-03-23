@@ -12,6 +12,6 @@
 
 - (void)fatchQueryWeekShouldAlsoAmount:(NSDictionary *)paramDic;
 
-- (void)getCurrentRenewalWithStagingId:(NSString *)stagingId;
+//- (void)getCurrentRenewalWithStagingId:(NSString *)stagingId;
 
 @end

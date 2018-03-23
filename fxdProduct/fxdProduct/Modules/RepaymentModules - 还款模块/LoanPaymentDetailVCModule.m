@@ -11,18 +11,13 @@
 #import "PayMethodCell.h"
 #import "UILabel+FlickerNumber.h"
 #import "UIViewController+KNSemiModal.h"
-//#import "ChooseRedPacketListVCModule.h"
 #import "PayNavigationViewController.h"
-#import "PayMethodViewController.h"
 #import "CardInfo.h"
 #import "UserCardResult.h"
 #import "RepayListInfo.h"
 #import "P2PBillDetail.h"
-#import "DefaultCardPopoverWindowModule.h"
 #import "CheckViewModel.h"
 #import "HomeViewModel.h"
-#import "PayVerificationCodeCell.h"
-#import "PayDisplayCell.h"
 #import "PaymentViewModel.h"
 #import "PaymentDetailModel.h"
 #import "BaseResultModel.h"
@@ -109,8 +104,6 @@
     self.PayDetailTB.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMoneyCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMethodCell" bundle:nil] forCellReuseIdentifier:@"paycell"];
-    [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayVerificationCodeCell" bundle:nil] forCellReuseIdentifier:@"PayVerificationCodeCell"];
-    [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayDisplayCell" bundle:nil] forCellReuseIdentifier:@"PayDisplayCell"];
 
     payLoanArry = @[@"使用券",@"逾期费用",@"使用溢缴金额",@"实扣金额",@"支付方式"];
     self.PayDetailTB.bounces=NO;
@@ -230,7 +223,7 @@
         }
     } WithFaileBlock:^{
     }];
-    [bankInfoVM obtainUserBankCardList];
+    [bankInfoVM obtainUserBankCardListPlatformType:_platform_type];
 }
 
 - (NSString *)formatTailNumber:(NSString *)str

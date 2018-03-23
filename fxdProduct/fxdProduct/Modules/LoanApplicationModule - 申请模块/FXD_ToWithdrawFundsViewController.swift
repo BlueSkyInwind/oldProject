@@ -9,7 +9,7 @@
 import UIKit
 
 class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,WithdrawFundsFooterViewDelegate {
-
+    
     var headerView:FXD_displayAmountCommonHeaderView?
     var tableView:UITableView?
     var withdrawFundsFooterView:FXD_ToWithdrawFundsFooterView?
@@ -27,16 +27,30 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
 
     var userSelectIndex:Int? = 0
     var selectedCard:CardInfo?
+    var protocolArray : NSMutableArray?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = LOAN_APPLICATION_COLOR
+        protocolArray = NSMutableArray.init()
+        
         self.obtainWithDrawFundsInfo {[weak self] (isSuccess) in
+            
             self?.configureView()
+            
+            if isSuccess{
+                
+                self?.getHgLoanProtoolList { [weak self] (isSuccess) in
+                    
+                    self?.configureView()
+                }
+            }
+            
             if self?.drawingsInfoModel?.platformType == "2" {
                 self?.isdispalyCard = true
                 self?.changeBankCard()
             }
+//            self?.getHgLoanProtoolList()
         }
         
         // Do any additional setup after loading the view.
@@ -52,6 +66,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
                     self?.isdispalyCard = true
                     self?.changeBankCard()
                 }
+                
             }
         }
     }
@@ -96,11 +111,17 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
             self.navigationController?.popViewController(animated: true)
         }
         
-        withdrawFundsFooterView = FXD_ToWithdrawFundsFooterView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h - 205 - 70), htmlContentArr: displayContent!, protocolNames: ["《借款协议》","《技术服务协议》","\n《风险管理与数据服务》"],titleStr:displayTitle!)
+//        withdrawFundsFooterView = FXD_ToWithdrawFundsFooterView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h - 205 - 60), htmlContentArr: displayContent!, protocolNames: ["《借款协议》","《技术服务协议》","\n《风险管理与数据服务》"],titleStr:displayTitle!)
+        
+        let protocolNameArray :[HgLoanProtoolListModel] = NSMutableArray.init(array: protocolArray!) as! [HgLoanProtoolListModel]
+        withdrawFundsFooterView = FXD_ToWithdrawFundsFooterView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h - 205 - 60), htmlContentArr: displayContent!, protocolNames: protocolNameArray,titleStr:displayTitle!)
         withdrawFundsFooterView?.delegate = self
         tableView?.tableFooterView = withdrawFundsFooterView
         
     }
+    
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -179,13 +200,38 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     }
     
     func protocolNameClick(_ index: Int) {
+        
+        let model = protocolArray![0] as! HgLoanProtoolListModel
+        var inverBorrowId = ""
+        if model.protocolName == "借款协议" {
+            inverBorrowId = model.inverBorrowId
+        }
+        var periods = self.period
+        if  self.drawingsInfoModel?.productId == EliteLoan {
+            periods = ""
+        }
+        
+        
+        
+//        HgLoanProtoolListModel *model = _protocolArray[0];
+//        NSString *inverBorrowId = @"";
+//        if ([protocoalName containsString:@"借款协议"]) {
+//            inverBorrowId = model.inverBorrowId;
+//        }
+//        NSString *periods = _homeProductList.periods;
+//        if ([_homeProductList.productId isEqualToString:EliteLoan]) {
+//            periods = @"";
+//        }
         switch index {
         case 0:
-            obtainProductProtocol(self.applicationId!, periods: self.period!, productId: EliteLoan, protocolType: "2", complication: {[weak self] (isSuccess, content) in
-                if isSuccess {
-                    self?.pushDetailWebView(content: content)
-                }
-            })
+            
+            getProductNewProtocol(inverBorrowId: inverBorrowId, periods: periods!, productType: "", protocolType: "2", stagingType: (self.drawingsInfoModel?.stagingType)!)
+//            [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:@"2" stagingType:_homeProductList.stagingType];
+//            obtainProductProtocol(self.applicationId!, periods: self.period!, productId: EliteLoan, protocolType: "2", complication: {[weak self] (isSuccess, content) in
+//                if isSuccess {
+//                    self?.pushDetailWebView(content: content)
+//                }
+//            })
            break
         case 1:
             obtainProductProtocol(self.applicationId!, periods: self.period!, productId: EliteLoan, protocolType: "6", complication: {[weak self] (isSuccess, content) in
@@ -244,7 +290,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
             print("已开户")
         case 4?:
         
-            HG_Manager.sharedHG().hgUserActiveJumpP2pCtrlCapitalPlatform("2", vc: self)
+            HG_Manager.sharedHG().hgUserActiveJumpP2pCtrlCapitalPlatform("2", retUrl: _transition_url, vc: self)
         
             print("待激活")
         default:
@@ -280,6 +326,30 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         self.present(addCarNC, animated: true, completion: nil)
     }
     
+    func protocolListClick(_ sender: UIButton) {
+        
+        let tag = sender.tag
+        let model = protocolArray![0] as! HgLoanProtoolListModel
+        var inverBorrowId = ""
+        if (sender.titleLabel?.text?.contains("借款协议"))! {
+            inverBorrowId = model.inverBorrowId
+        }
+        var periods = ""
+        if (sender.titleLabel?.text?.contains("借款协议"))! {
+            periods = ""
+        }
+        switch tag {
+        case 1:
+            
+            getProductNewProtocol(inverBorrowId: inverBorrowId, periods: periods, productType: "", protocolType: "", stagingType: "")
+            
+            break
+            
+        default:
+            break
+        }
+    }
+
     /*
     // MARK: - Navigation
 
@@ -326,9 +396,66 @@ extension FXD_ToWithdrawFundsViewController {
         }) {
             success(false,false)
         }
-        bankInfoVM.obtainUserBankCardList()
+        
+        bankInfoVM.obtainUserBankCardListPlatformType(self.drawingsInfoModel?.platformType)
+        
     }
     
+    /// 协议列表信息
+    func getHgLoanProtoolList(_ complication:@escaping ((_ isSuccess:Bool) -> Void))  {
+        
+        let complianceVM = ComplianceViewModel()
+        complianceVM.setBlockWithReturn({ (returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                self.protocolArray?.removeAllObjects()
+                let array = baseResult.data as! NSArray
+                
+                for  dic in array{
+                    let model = try! HgLoanProtoolListModel.init(dictionary: dic as! [AnyHashable : Any])
+                    self.protocolArray?.add(model)
+                }
+                complication(true)
+                self.tableView?.reloadData()
+                
+            }else{
+                complication(false)
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            complication(false)
+        }
+        complianceVM.hgLoanProtoolListApplicationId(self.applicationId)
+        
+    }
+    
+    //获取协议内容并跳转
+    fileprivate func getProductNewProtocol(inverBorrowId :String ,periods:String ,productType:String ,protocolType:String,stagingType:String){
+        
+        let complianceVM = ComplianceViewModel()
+        complianceVM.setBlockWithReturn({ [weak self](returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+                let protocolContent = (baseResult.data as! [String:String])["protocolContent"]
+                let navTitle = (baseResult.data as! [String:String])["title"]
+                let webController = DetailViewController()
+                webController.content = protocolContent;
+                webController.navTitle = navTitle;
+                self?.navigationController?.pushViewController(webController, animated: true)
+                
+            }else{
+                
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        
+        complianceVM.hgGetProductNewProtocolApplicationId(self.applicationId, inverBorrowId: inverBorrowId, periods: periods, productId: self.drawingsInfoModel?.productId, productType: productType, protocolType: protocolType, stagingType: stagingType)
+    }
     /// 提款信息
     func obtainWithDrawFundsInfo(_ complication:@escaping ((_ isSuccess:Bool) -> Void))  {
         let checkVM = CheckViewModel.init()
@@ -379,7 +506,7 @@ extension FXD_ToWithdrawFundsViewController {
         commonVM.setBlockWithReturn({ (result) in
             let baseRM = result as? BaseResultModel
             if baseRM?.errCode == "0" {
-                var content =  (baseRM?.data as! [String:String])["productProURL"]
+                let content =  (baseRM?.data as! [String:String])["productProURL"]
                 complication(true,(content == nil ? "" : content!))
             }else{
                 complication(false,"")

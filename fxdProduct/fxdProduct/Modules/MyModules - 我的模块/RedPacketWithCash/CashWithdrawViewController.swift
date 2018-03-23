@@ -289,7 +289,7 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
             }
         }) {
         }
-        bankInfoVM.obtainUserBankCardList()
+        bankInfoVM.obtainUserBankCardListPlatformType("")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

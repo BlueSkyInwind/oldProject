@@ -26,7 +26,7 @@
 
 #pragma mark - 合规改造老用户激活
 
--(void)hgUserActiveJumpP2pCtrlCapitalPlatform:(NSString *)capitalPlatform vc:(id)vc{
+-(void)hgUserActiveJumpP2pCtrlCapitalPlatform:(NSString *)capitalPlatform retUrl:(NSString *)retUrl vc:(id)vc{
     
     UIViewController *topRootViewController;
     
@@ -49,6 +49,7 @@
             P2PViewController *p2pVC = [[P2PViewController alloc] init];
             p2pVC.urlStr = hgUserActiveModel.ServiceUrl;
             p2pVC.jsContent = url;
+            p2pVC.retUrl = retUrl;
             [topRootViewController.navigationController pushViewController:p2pVC animated:YES];
         }else if ([baseResultM.errCode isEqualToString:@"2"]){
             
@@ -62,14 +63,14 @@
     } WithFaileBlock:^{
 
     }];
-    [complianceVM hgUserActiveCapitalPlatform:capitalPlatform];
+    [complianceVM hgUserActiveCapitalPlatform:capitalPlatform retUrl:retUrl];
     
     
 
 }
 
 #pragma mark - 合规改造新用户开户
--(void)hgUserRegJumpP2pCtrlBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardId:(NSString *)cardId cardNo:(NSString *)cardNo smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc{
+-(void)hgUserRegJumpP2pCtrlBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardId:(NSString *)cardId cardNo:(NSString *)cardNo retUrl:(NSString *)retUrl smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc{
     
     UIViewController *topRootViewController;
     if ([vc isKindOfClass: [OpenAccountViewController class]]) {
@@ -84,6 +85,8 @@
             P2PViewController *p2pVC = [[P2PViewController alloc] init];
             p2pVC.jsContent = url;
             p2pVC.urlStr = hgUserRegModel.ServiceUrl;
+            p2pVC.retUrl = retUrl;
+            
             [topRootViewController.navigationController pushViewController:p2pVC animated:YES];
         }else if ([baseResultM.errCode isEqualToString:@"2"]){
             
@@ -98,11 +101,11 @@
     } WithFaileBlock:^{
         
     }];
-    [complianceVM hgSubmitAccountInfoBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardId:cardId cardNo:cardNo retUrl:_transition_url smsSeq:smsSeq userCode:userCode verifyCode:verifyCode];
+    [complianceVM hgSubmitAccountInfoBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardId:cardId cardNo:cardNo retUrl:retUrl smsSeq:smsSeq userCode:userCode verifyCode:verifyCode];
     
 }
 
--(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc{
+-(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo retUrl:(NSString *)retUrl orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc{
     
     UIViewController *topRootViewController;
     if ([vc isKindOfClass: [OpenAccountViewController class]]) {
@@ -128,8 +131,36 @@
     } WithFaileBlock:^{
         
     }];
-    [complianceVM hgChangeBankCardBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardNo:cardNo orgSmsCode:orgSmsCode orgSmsSeq:orgSmsSeq smsSeq:smsSeq userCode:userCode verifyCode:verifyCode];
+    [complianceVM hgChangeBankCardBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardNo:cardNo retUrl:retUrl orgSmsCode:orgSmsCode orgSmsSeq:orgSmsSeq smsSeq:smsSeq userCode:userCode verifyCode:verifyCode];
 }
+
+
+-(void)hgGetProductNewProtocolApplicationId:(NSString *)applicationId inverBorrowId:(NSString *)inverBorrowId periods:(NSString *)periods productId:(NSString *)productId productType:(NSString *)productType protocolType:(NSString *)protocolType stagingType:(NSString *)stagingType vc:(id)vc{
+    
+    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
+    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        UIViewController *topRootViewController;
+        if ([vc isKindOfClass: [OpenAccountViewController class]]) {
+            topRootViewController = (OpenAccountViewController *)vc;
+        }
+        
+        BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:topRootViewController.view message:baseResultM.friendErrMsg];
+            
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [complianceVM hgGetProductNewProtocolApplicationId:applicationId inverBorrowId:inverBorrowId periods:periods productId:productId productType:productType protocolType:protocolType stagingType:stagingType];
+    
+}
+
+
 -(NSString *)buildForm:(NSString *)path params:(NSDictionary *)params{
     
     NSMutableString * metaStr = [[NSMutableString alloc]initWithString:@"<form name=\"kun_form\" method=\"post\" action=\""];

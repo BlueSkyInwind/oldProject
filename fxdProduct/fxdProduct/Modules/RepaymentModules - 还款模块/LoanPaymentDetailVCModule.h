@@ -44,4 +44,6 @@ typedef NS_ENUM(NSUInteger, RepayType) {
 
 @property (nonatomic,assign)BOOL isPopRoot;
 
+@property (nonatomic,strong)NSString *platform_type;
+
 @end

@@ -242,19 +242,6 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
 }
 
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 175;
-//}
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    DetailRepayHeader *headerView = [[NSBundle mainBundle] loadNibNamed:[[DetailRepayHeader class] description] owner:self options:nil].lastObject;
-//    headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"navigation"]];
-//    headerView.alpha = 0.9;
-//    return headerView;
-//}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -375,32 +362,11 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
                 if([_cellSelectArr objectAtIndex:i].boolValue){
                     Situations *situation = [_repayListModel.situations_ objectAtIndex:i];
                     _readyPayAmount += [situation.debt_total_ floatValue];
-//                    if ([situation.status_ isEqualToString:@"3"]) {
-//                        _save_amount += [situation.debt_service_fee_ floatValue];
-//                    }
+
                 }
             }
         }
-        
-//        if (_repayListModel != nil) {
-//            Situations * situations = _repayListModel.situations_.lastObject;
-//            if ([situations.status_ isEqualToString:@"2"]) {
-//                _save_amount = 0;
-//            }else {
-//                if (_repayListModel.situations_.count < [_repayListModel.service_fee_min_period_ integerValue]) {
-//                    if (_currenPeriod <= _repayListModel.situations_.count) {
-//                        _save_amount = 0.0;
-//                    }
-//                } else {
-//                    if (_currenPeriod < [_repayListModel.service_fee_min_period_ integerValue]) {
-//                        for (NSInteger i = _currenPeriod; i < [_repayListModel.service_fee_min_period_ integerValue]; i++) {
-//                            Situations * situations = _repayListModel.situations_[i];
-//                            _save_amount -= [situations.debt_service_fee_ floatValue];
-//                        }
-//                    }
-//                }
-//            }
-//        }
+
         
         _readyPayAmount = _repayListModel.settleRepayAmount != nil ? _repayListModel.settleRepayAmount.floatValue : 0.0;
 
@@ -479,12 +445,13 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
                 repayMent.repayType = RepayTypeOption;
             }
             repayMent.supportBankListArr = _supportBankListArr;
-//            repayMent.repayAmount = _readyPayAmount;
             repayMent.repayListInfo = _repayListModel;
             repayMent.cellSelectArr = _cellSelectArr;
             repayMent.save_amount = _save_amount;
             repayMent.situations = _situations;
 
+            repayMent.platform_type = _platform_type;
+            
             [self.navigationController pushViewController:repayMent animated:YES];
             
         }else{

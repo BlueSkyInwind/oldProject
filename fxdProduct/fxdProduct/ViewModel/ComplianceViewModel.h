@@ -20,14 +20,18 @@
 -(void)hgSendSmsCodeBusiType:(NSString *)busiType smsTempType:(NSString *)smsTempType bankCardNo:(NSString *)bankCardNo capitalPlatform:(NSString *)capitalPlatform mobile:(NSString *)mobile userCode:(NSString *)userCode;
 
 //提交合规换绑银行卡信息
--(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode;
+-(void)hgChangeBankCardBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo retUrl:(NSString *)retUrl orgSmsCode:(NSString *)orgSmsCode orgSmsSeq:(NSString *)orgSmsSeq smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode;
 
 //获取合规换绑卡信息
 -(void)hgChangeBankCardInfo;
 
 //合规获取老用户激活跳转页面参数
--(void)hgUserActiveCapitalPlatform:(NSString *)capitalPlatform;
+-(void)hgUserActiveCapitalPlatform:(NSString *)capitalPlatform retUrl:(NSString *)retUrl;
 //合规用户状态查询
 -(void)hgQueryUserStatus;
+//获取产品协议（新产品）
+-(void)hgGetProductNewProtocolApplicationId:(NSString *)applicationId inverBorrowId:(NSString *)inverBorrowId periods:(NSString *)periods productId:(NSString *)productId productType:(NSString *)productType protocolType:(NSString *)protocolType stagingType:(NSString *)stagingType;
 
+//合规的件 调用此接口 用于获取借款协议列表
+-(void)hgLoanProtoolListApplicationId:(NSString *)applicationId;
 @end

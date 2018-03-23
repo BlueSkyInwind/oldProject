@@ -68,11 +68,6 @@
 @end
 
 
-@implementation ProductListViewModel
-
-
-
-@end
 
 
 

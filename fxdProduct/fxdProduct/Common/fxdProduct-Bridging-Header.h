@@ -30,7 +30,6 @@
 #import "UserCardResult.h"
 #import <YYModel/YYModel.h>
 #import "CardInfo.h"
-#import "PayMethodViewController.h"
 #import "PayNavigationViewController.h"
 #import "UIViewController+KNSemiModal.h"
 #import "UserBankCardListVCModule.h"
@@ -82,6 +81,8 @@
 #import "HG_Manager.h"
 #import "SmsCodeModel.h"
 #import "SubmitInfoModel.h"
+
+#import "HgLoanProtoolListModel.h"
 
 
 #endif /* fxdProduct_Bridging_Header_h */

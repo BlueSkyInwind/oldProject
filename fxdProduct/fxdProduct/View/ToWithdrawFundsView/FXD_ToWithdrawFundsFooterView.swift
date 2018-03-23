@@ -19,6 +19,8 @@ import WebKit
     func keepProtocolClick(_ isKeep:Bool)
     //提款按钮点击
     func WithdrawFundsClick()
+    //协议列表点击
+    func protocolListClick(_ sender: UIButton)
     
 }
 
@@ -30,6 +32,8 @@ class FXD_ToWithdrawFundsFooterView: UIView{
     var applyForBtn:UIButton?
     var protocolBtn:UIButton?
     var protocolLabel:YYLabel?
+    @objc var arrowDescLabel : UILabel?
+    @objc var protocolListView : UIView?
     
     var delegate:WithdrawFundsFooterViewDelegate?
     var isClick:Bool = false
@@ -44,10 +48,24 @@ class FXD_ToWithdrawFundsFooterView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(frame:CGRect,htmlContentArr:[String],protocolNames:[String],titleStr:String){
+    convenience init(frame:CGRect,htmlContentArr:[String],protocolNames:[HgLoanProtoolListModel],titleStr:String){
         self.init(frame: frame)
+        
         setProtocolcontent(htmlContentArr,titleStr: titleStr)
-        addProtocolClick(protocolNames)
+        
+        var protocolName = ""
+        
+        if protocolNames.count > 0 {
+            
+            protocolName = protocolNames[0].protocolName
+        
+        }
+        addProtocolClick([protocolName])
+        
+        if protocolNames.count > 1 {
+            
+            createProtocolUI(array: protocolNames)
+        }
     }
     
     func setProtocolcontent(_ htmlContentArr:[String],titleStr:String)  {
@@ -118,6 +136,31 @@ class FXD_ToWithdrawFundsFooterView: UIView{
         }
     }
     
+    //协议列表点击事件
+    @objc func protocolListClick(_ sender : UIButton){
+        if delegate != nil {
+            delegate?.protocolListClick(sender)
+        }
+    }
+    
+    //展开收回协议按钮
+    @objc func arrowBtnClick(_ sender : UIButton){
+        
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            sender.setImage(UIImage(named:"up_icon"), for: .normal)
+            arrowDescLabel?.text = "收回"
+        
+            protocolListView?.isHidden = false
+            
+        }else{
+            sender.setImage(UIImage(named:"down_icon"), for: .normal)
+            arrowDescLabel?.text = "展开"
+            protocolListView?.isHidden = true
+
+        }
+        
+    }
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -129,6 +172,10 @@ class FXD_ToWithdrawFundsFooterView: UIView{
 extension FXD_ToWithdrawFundsFooterView {
     
     func setUpUI()  {
+        
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
         
         displayTitle = UILabel()
         displayTitle?.font = UIFont.yx_systemFont(ofSize: 16)
@@ -173,7 +220,8 @@ extension FXD_ToWithdrawFundsFooterView {
         applyForBtn?.snp.makeConstraints({ (make) in
             make.left.equalTo(self.snp.left).offset(20)
             make.right.equalTo(self.snp.right).offset(-20)
-            make.top.equalTo((protocolBackView?.snp.bottom)!).offset(5)
+            make.bottom.equalTo(self.snp.bottom).offset(-15)
+//            make.top.equalTo((protocolBackView?.snp.bottom)!).offset(5)
         })
         
         protocolBtn = UIButton.init(type: UIButtonType.custom)
@@ -197,6 +245,70 @@ extension FXD_ToWithdrawFundsFooterView {
             make.top.equalTo((protocolBackView?.snp.top)!).offset(2)
         })
     }
+    
+    
+    func createProtocolUI(array:[HgLoanProtoolListModel]) {
+        
+        arrowDescLabel = UILabel()
+        arrowDescLabel?.text = "展开"
+        arrowDescLabel?.textColor = HOME_ARROW_COLOR
+        arrowDescLabel?.font = UIFont.yx_systemFont(ofSize: 12)
+        self.addSubview(arrowDescLabel!)
+        arrowDescLabel?.snp.makeConstraints({ (make) in
+            make.right.equalTo(self).offset(-30)
+            make.top.equalTo((protocolLabel?.snp.top)!).offset(-10)
+            make.height.equalTo(40)
+        })
+        
+        let arrowBtn = UIButton()
+        arrowBtn.setImage(UIImage.init(named: "down_icon"), for: .normal)
+        arrowBtn.addTarget(self, action: #selector(arrowBtnClick(_:)), for: .touchUpInside)
+        self.addSubview(arrowBtn)
+        arrowBtn.snp.makeConstraints { (make) in
+            make.right.equalTo((arrowDescLabel?.snp.left)!).offset(-5)
+            make.top.equalTo((arrowDescLabel?.snp.top)!).offset(10)
+        }
+        
+        protocolView(array: array)
+        
+    }
+    
+    func createProtocolBtn()->(UIButton){
+        let btn = UIButton()
+        btn.titleLabel?.font = UIFont.yx_systemFont(ofSize: 12)
+        btn.setTitleColor(UI_MAIN_COLOR, for: .normal)
+        return btn
+    }
+    
+    func protocolView(array:[HgLoanProtoolListModel]){
+        
+        protocolListView = UIView()
+        protocolListView?.backgroundColor = .clear
+        self.addSubview(protocolListView!)
+        protocolListView?.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.top.equalTo((protocolLabel?.snp.bottom)!).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.height.equalTo(array.count * 30)
+//            make.height.equalTo(30)
+        }
+        
+        for index in 0..<array.count{
+            let model = array[index]
+            
+            let btn = createProtocolBtn()
+            btn.setTitle(model.protocolName, for: .normal)
+            btn.titleLabel?.textAlignment = .left
+            btn.tag = index + 1
+            btn.addTarget(self, action: #selector(protocolListClick(_:)), for: .touchUpInside)
+            protocolListView?.addSubview(btn)
+            btn.snp.makeConstraints({ (make) in
+                make.left.equalTo((protocolListView?.snp.left)!).offset(40)
+                make.top.equalTo((protocolListView?.snp.top)!).offset(index * 30)
+            })
+        }
+    }
+    
 }
 
 

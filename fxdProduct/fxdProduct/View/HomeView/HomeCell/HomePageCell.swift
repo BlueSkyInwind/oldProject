@@ -32,7 +32,9 @@ import Masonry
     //立即还款按钮
     func repayImmediatelyBtnClick(_ isSelected: Bool)
     //协议点击
-    func protocolNameClick(_ index:Int)
+    func protocolNameClick(_ index:Int, protocoalName: String)
+    //协议列表点击
+    func protocolListClick(_ sender: UIButton)
 }
 
 
@@ -55,6 +57,9 @@ class HomePageCell: UITableViewCell {
     //复选框
     @objc var checkBoxBtn : UIButton?
     @objc var protocolLabel : YYLabel?
+    @objc var arrowDescLabel : UILabel?
+    @objc var protocolListView : UIView?
+    @objc var protocolArray : NSMutableArray?
     
 
     override func awakeFromNib() {
@@ -838,8 +843,37 @@ extension HomePageCell {
             make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(17)
         }
         
-        let nsArray = ["《银行自动转账授权书》","、","《三方借款协议》"]
-        addProtocolClick(nsArray)
+//        let nsArray = ["《银行自动转账授权书》","、","《三方借款协议》"]
+        if protocolArray != nil {
+            let model = protocolArray![0] as! HgLoanProtoolListModel
+            let nsArray = [model.protocolName]
+            addProtocolClick(nsArray as! [String])
+            
+            if (protocolArray?.count)! > 1 && protocolArray != nil {
+                
+                arrowDescLabel = UILabel()
+                arrowDescLabel?.text = "展开"
+                arrowDescLabel?.textColor = HOME_ARROW_COLOR
+                arrowDescLabel?.font = UIFont.yx_systemFont(ofSize: 12)
+                self.addSubview(arrowDescLabel!)
+                arrowDescLabel?.snp.makeConstraints({ (make) in
+                    make.right.equalTo(self).offset(-30)
+                    make.top.equalTo((protocolLabel?.snp.top)!).offset(0)
+                    make.height.equalTo(40)
+                })
+                
+                let arrowBtn = UIButton()
+                arrowBtn.setImage(UIImage.init(named: "down_icon"), for: .normal)
+                arrowBtn.addTarget(self, action: #selector(arrowBtnClick(_:)), for: .touchUpInside)
+                self.addSubview(arrowBtn)
+                arrowBtn.snp.makeConstraints { (make) in
+                    make.right.equalTo((arrowDescLabel?.snp.left)!).offset(-5)
+                    make.top.equalTo((arrowDescLabel?.snp.top)!).offset(10)
+                }
+            }
+        }
+        
+        
         
         if UI_IS_IPONE6 {
             repayImmediatelyBtn.snp.updateConstraints({ (make) in
@@ -847,7 +881,7 @@ extension HomePageCell {
             })
             
             checkBoxBtn?.snp.updateConstraints({ (make) in
-                make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(10)
+                make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(18)
             })
             
             protocolLabel?.snp.updateConstraints({ (make) in
@@ -1358,7 +1392,7 @@ extension HomePageCell{
             rangeArr.append(range)
             attributeStr.yy_setTextHighlight(range, color: UI_MAIN_COLOR, backgroundColor: UI_MAIN_COLOR) {[weak self] (view, arrtiText, range, rect) in
                 if self?.delegate != nil  {
-                    self?.delegate?.protocolNameClick(rangeArr.index(of: range)!)
+                    self?.delegate?.protocolNameClick(rangeArr.index(of: range)!, protocoalName: proName)
                 }
             }
         }
@@ -1366,6 +1400,41 @@ extension HomePageCell{
         let range1 = NSMakeRange(0, length)
         attributeStr.yy_setColor(QUTOA_COLOR, range: range1)
         protocolLabel?.attributedText = attributeStr
+    }
+    
+    func protocolBtn()->(UIButton){
+        let btn = UIButton()
+        btn.titleLabel?.font = UIFont.yx_systemFont(ofSize: 12)
+        btn.setTitleColor(UI_MAIN_COLOR, for: .normal)
+        return btn
+    }
+    
+    func protocolView(){
+        
+        protocolListView = UIView()
+        protocolListView?.backgroundColor = .clear
+        self.addSubview(protocolListView!)
+        protocolListView?.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.top.equalTo((protocolLabel?.snp.bottom)!).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.height.equalTo((protocolArray?.count)! * 30)
+        }
+        
+        for index in 0..<(protocolArray?.count)!{
+            let model = protocolArray![index] as! HgLoanProtoolListModel
+            
+            let btn = protocolBtn()
+            btn.setTitle(model.protocolName, for: .normal)
+            btn.titleLabel?.textAlignment = .left
+            btn.tag = index + 1
+            btn.addTarget(self, action: #selector(protocolListClick(_:)), for: .touchUpInside)
+            protocolListView?.addSubview(btn)
+            btn.snp.makeConstraints({ (make) in
+                make.left.equalTo((protocolListView?.snp.left)!).offset(40)
+                make.top.equalTo((protocolListView?.snp.top)!).offset(index * 30)
+            })
+        }
     }
 }
 
@@ -1494,6 +1563,32 @@ extension HomePageCell{
     @objc func withdrawMoneyImmediatelyBtnClick(){
         if delegate != nil {
             delegate?.withdrawMoneyImmediatelyBtnClick()
+        }
+    }
+    
+    //展开收回协议按钮
+    @objc func arrowBtnClick(_ sender : UIButton){
+
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            sender.setImage(UIImage(named:"up_icon"), for: .normal)
+            arrowDescLabel?.text = "收回"
+            protocolView()
+            
+            
+            
+        }else{
+            sender.setImage(UIImage(named:"down_icon"), for: .normal)
+            arrowDescLabel?.text = "展开"
+            protocolListView?.removeFromSuperview()
+        }
+        
+    }
+    
+    //协议列表点击事件
+    @objc func protocolListClick(_ sender : UIButton){
+        if delegate != nil {
+            delegate?.protocolListClick(sender)
         }
     }
 }

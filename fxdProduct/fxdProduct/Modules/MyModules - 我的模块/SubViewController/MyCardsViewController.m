@@ -17,7 +17,6 @@
     NSMutableArray *_dataliat;
     NSMutableArray *_dataNumList;
     NSMutableArray *_bankWitch;
-    //    NSIndexPath *_lastIndexPath;
     NSMutableArray *_bankWitchArray;
     
     //空白界面
@@ -139,7 +138,7 @@
     } WithFaileBlock:^{
         NoneView.hidden=NO;
     }];
-    [bankInfoVM obtainUserBankCardList];
+    [bankInfoVM obtainUserBankCardListPlatformType:@""];
     
 }
 
@@ -177,7 +176,6 @@
 #pragma mark-----UItableview--delegete---
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //    return _cardListParse.result.count+1;
     return _dataliat.count;
 }
 
@@ -185,7 +183,6 @@
 {
     
     MyCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCardCell"];
-//    cell.iconImage.image = [UIImage imageNamed:[_dataImageListBank objectAtIndex:indexPath.row]];
     [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[_dataImageListBank objectAtIndex:indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
     cell.bankCompanyLabel.text = _bankWitchArray[indexPath.row];
     cell.bankNum.text =_dataliat[indexPath.row];
@@ -206,31 +203,7 @@
     }
     cell.selected = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    //    cell.myBlock=^(int flag)
-    //    {
-    //        EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
-    //        AccountCardResult *accountCardResult = _bankCardParse.result[indexPath.row];
-    //        if(flag==0)
-    //        {
-    //
-    //            editCard.typeFlag=@"0";
-    //            editCard.cardName=_bankWitchArray[indexPath.row];
-    //            editCard.cardNum=accountCardResult.cardNo;
-    //            editCard.cardCode=accountCardResult.cardBank;
-    //            editCard.accountId=accountCardResult.resultIdentifier;
-    //            NSLog(@"%@ %@ %@",editCard.cardName,editCard.cardNum,editCard.cardCode);
-    //        }
-    //        else
-    //        {
-    //            editCard.typeFlag=@"1";
-    //            editCard.cardName=_bankWitchArray[indexPath.row];
-    //            editCard.cardNum=accountCardResult.cardNo;
-    //            editCard.cardCode=accountCardResult.cardBank;
-    //            editCard.accountId=accountCardResult.resultIdentifier;
-    //        }
-    //        [self.navigationController pushViewController:editCard animated:YES];
-    //    };
+
     return cell;
 }
 

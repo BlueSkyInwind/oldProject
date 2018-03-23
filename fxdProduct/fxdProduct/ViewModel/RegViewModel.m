@@ -61,22 +61,5 @@
     }];
 }
 
--(void)obtainRegisterProtocol:(NSString *)ProtocolId ProtocolType:(NSString *)protocolType{
-    
-   NSDictionary * paramDic = @{@"product_id_":ProtocolId,
-                     @"protocol_type_":protocolType};
-
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_ProductProtocol_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        self.returnBlock(object);
-    } failure:^(EnumServerStatus status, id object) {
-        [self faileBlock];
-    }];
-}
-
-
-
-
-
-
 
 @end
