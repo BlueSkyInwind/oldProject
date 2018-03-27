@@ -232,7 +232,6 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     navBarHairlineImageView.hidden = NO;
 }
 
-
 - (void)setUpTableview
 {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([RepayListCell class]) bundle:nil] forCellReuseIdentifier:repayCellIdentifier];
@@ -240,7 +239,6 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.showsVerticalScrollIndicator = NO;
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
