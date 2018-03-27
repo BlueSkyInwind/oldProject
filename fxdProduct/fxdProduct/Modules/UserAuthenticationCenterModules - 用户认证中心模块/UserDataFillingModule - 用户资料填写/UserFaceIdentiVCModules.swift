@@ -12,7 +12,7 @@ import MGLivenessDetection
 typealias IdentifyResultStatus = (_ status : String) ->Void
 class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
     
-   @objc var verifyStatus : String?
+   @objc var verifyStatus : String? 
 
    @objc var iconImage : UIImageView?
    @objc var titleLabel : UILabel?
@@ -25,7 +25,7 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
-        self.navigationItem.title = "人脸识别"
+        self.navigationItem.title = "视频认证"
         addBackItem()
         setupUI()
         changeStatus()
@@ -35,7 +35,7 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
         if verifyStatus == "1" {
             statusBtn?.isEnabled = true
             statusBtn?.backgroundColor = UI_MAIN_COLOR
-            statusBtn?.setTitle("进入检测", for: UIControlState.normal)
+            statusBtn?.setTitle("进入认证", for: UIControlState.normal)
         }else {
             statusBtn?.isEnabled = true
             statusBtn?.backgroundColor = UIColor.init(red: 139/255, green: 140/255, blue: 143/255, alpha: 1)
@@ -53,10 +53,11 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
     }
     
     func startFaceDetection() -> Void {
-        obtainVideoVerifyInfo { (isSuccess, content) in
+        obtainVideoVerifyInfo { (isSuccess, content,time) in
             guard !isSuccess else {
                 let videoVerifyVC = VideoVerifyViewController.init()
                 videoVerifyVC.displaystr = content
+                videoVerifyVC.RecordsTimeMax = Int(time)!
                 self.present(videoVerifyVC, animated: true, completion: nil)
                 return
             }
@@ -122,18 +123,21 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
     }
     
     /// 获取视频信息
-    func obtainVideoVerifyInfo(finish:@escaping (_ isSuccess:Bool,_ content:String) -> Void)  {
+    func obtainVideoVerifyInfo(finish:@escaping (_ isSuccess:Bool,_ content:String,_ time:String) -> Void)  {
         let  userDataVM = UserDataViewModel.init()
         userDataVM.setBlockWithReturn({[weak self] (result) in
             let baseResult = result as? BaseResultModel
             if baseResult?.errCode == "0" {
-                finish(true,baseResult?.data as! String)
+                let dic = baseResult?.data as! Dictionary<String,Any>
+                if let contentStr = dic["content"], let time = dic["time"] {
+                    finish(true,contentStr as! String,time as! String)
+                }
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message:baseResult?.friendErrMsg)
-                finish(false,"")
+                finish(false,"","")
             }
         }) {
-            finish(false,"")
+            finish(false,"","")
         }
         userDataVM.obtainVideoVerifyContent()
     }
@@ -165,7 +169,7 @@ extension UserFaceIdentiVCModules {
     
     titleLabel = UILabel()
     titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
-    titleLabel?.text = "人脸识别"
+    titleLabel?.text = "视频认证"
     titleLabel?.textAlignment = NSTextAlignment.center
     self.view.addSubview(titleLabel!)
     titleLabel?.snp.makeConstraints({ (make) in

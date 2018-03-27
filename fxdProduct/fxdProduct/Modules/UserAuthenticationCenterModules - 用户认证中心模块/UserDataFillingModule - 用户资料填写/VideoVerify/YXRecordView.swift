@@ -43,7 +43,6 @@ class YXRecordView: UIView {
     var playButtonClick:PlayButtonClick?
     var backButtonClick:BackButtonClick?
 
-
     //最大的时间值
     var timeMax:Double{
         didSet {
@@ -95,6 +94,21 @@ class YXRecordView: UIView {
         }) { (isCom) in
         }
     }
+    
+    func startWillRecordingAnimation() {
+        UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.afreshBtn?.isHidden = true
+            self.ensureBtn?.isHidden = true
+            self.timingLabel?.isHidden = true
+            self.playView?.isHidden = true
+            self.startRecordBtn?.isHidden = false
+            self.afreshBtn?.center = Click_CenterPoint
+            self.ensureBtn?.center = Click_CenterPoint
+        }) { (isCom) in
+            
+        }
+    }
+    
     
     func startRecordingAnimation() {
         UIView.animate(withDuration: 0.5, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
@@ -211,7 +225,11 @@ extension YXRecordView {
         timingLabel?.textColor = UIColor.white
         maskBackView?.addSubview(timingLabel!)
         timingLabel?.snp.makeConstraints({ (make) in
-            make.bottom.equalTo((startRecordBtn?.snp.top)!).offset(-40)
+            if UI_IS_IPONE6 || UI_IS_IPONE5 {
+                make.bottom.equalTo((startRecordBtn?.snp.top)!).offset(-20)
+            }else{
+                make.bottom.equalTo((startRecordBtn?.snp.top)!).offset(-40)
+            }
             make.centerX.equalTo((maskBackView?.snp.centerX)!)
         })
         

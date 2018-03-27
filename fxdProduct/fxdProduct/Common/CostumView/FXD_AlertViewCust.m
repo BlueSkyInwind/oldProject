@@ -35,7 +35,6 @@
     
     id result = info;
     PopViewType popType = type;
-    
 //    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:info,[NSNumber numberWithInteger:type], nil];
 //    [[FXD_Utility sharedUtility].popArray addObject:dic];
 //    NSDictionary * resultDic = [FXD_Utility sharedUtility].popArray.firstObject;
@@ -52,7 +51,6 @@
 //            [self.popView lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
             self.popView = nil;
         }
-
     }
         
     switch (popType) {

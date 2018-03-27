@@ -19,8 +19,8 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
     
     var tableView : UITableView?
     var thirdPartyAuthCell :ThirdPartyAuthTableViewCell?
-//    let dataArr : Array<String> = ["人脸识别","手机认证","芝麻信用","工资流水"]
-    let dataArr : Array<String> = ["人脸识别","手机认证","工资流水"]
+//    let dataArr : Array<String> = ["视频认证","手机认证","芝麻信用","工资流水"]
+    let dataArr : Array<String> = ["视频认证","手机认证","工资流水"]
 
     var userThirdPartCM:UserThirdPartCertificationModel?
     
@@ -183,7 +183,7 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
             isPhoneAuthType = true
             result(true)
         }else if verifyStatus == "1"{
-            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请先进行人脸识别")
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请先进行视频认证")
             result(false)
         }else{
             //模拟的运营商认证

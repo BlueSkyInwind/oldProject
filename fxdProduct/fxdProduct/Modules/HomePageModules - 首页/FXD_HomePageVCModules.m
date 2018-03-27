@@ -86,7 +86,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     if ([FXD_Utility sharedUtility].loginFlage) {
         //获取位置信息
         if ([FXD_Utility sharedUtility].isObtainUserLocation) {
@@ -159,7 +158,6 @@
     }];
     
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:_messageBtn];
-    
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = 8;
     self.navigationItem.rightBarButtonItems = @[spaceItem,aBarbi];

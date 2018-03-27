@@ -36,9 +36,6 @@ class YXMoviesRecordManager: YXBaseRecordManager,AVCaptureFileOutputRecordingDel
     }
     
     func startRecordingToOutputFileURL()  {
-        if self.moviesDataOutput.isRecording {
-            self.moviesDataOutput.stopRecording()
-        }
         // 2、直接开始写入文件
         //let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! + self.getUploadFileName("/abc", type: ".mp4")
          let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! + "/abc.mp4"

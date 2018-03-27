@@ -11,10 +11,11 @@ import AVFoundation
 
 class VideoVerifyViewController: UIViewController {
     
-    let RecordsTimeMax = 6   //录制最大时间
+    @objc var RecordsTimeMax = 6   //录制最大时间
     let RecordsTimeMin = 0  //录制最小时间
     var keepTime:Int = 0
     var isVideoRecording:Bool = false
+    var isVideoRerecording:Bool = false
     
     var recordView:YXRecordView?
     var recordManager:YXMoviesRecordManager?
@@ -50,8 +51,9 @@ class VideoVerifyViewController: UIViewController {
         recordView?.afreshButtonClick = {
             self.player?.isHidden = true
             self.player?.stopPlaye()
-            self.recordView?.startRecordingAnimation()
-            self.recordManager?.startRecordingToOutputFileURL()
+            self.stopOutputRecording()
+            self.isVideoRerecording = true
+            self.recordView?.startWillRecordingAnimation()
         }
         //上传录制信息
         recordView?.ensureButtonClick = {
@@ -85,12 +87,16 @@ class VideoVerifyViewController: UIViewController {
         
         //MARK:开始写入录制
         recordManager?.startRecordConnections = {[weak self](captureOutput) in
+            self?.isVideoRerecording = false
             self?.keepTime = (self?.RecordsTimeMax)!;
             self?.perform(#selector(self?.onStartTranscribe(output:)), with: captureOutput, afterDelay: 0)
         }
         
         //MARK:拍摄完成是调用  结束写入录制
         recordManager?.endRecordConnecions = {[weak self](captureOutput,outputFileURL) in
+            if (self?.isVideoRerecording)! {
+                return
+            }
             self?.endRecordChange()
             //增加录制播放预览层
             if self?.player == nil {
