@@ -10,7 +10,6 @@
 #define fxdProduct_Bridging_Header_h
 
 #import "FXD_Tool.h"
-#import "SesameCreditCertificationVCModules.h"
 #import "UserMobileAuthenticationVCModules.h"
 #import "MGLiveViewController.h"
 #import "BaseNavigationViewController.h"
@@ -20,11 +19,9 @@
 #import "MBPAlertView.h"
 #import "UIColor+Extend.h"
 #import "MoxieSDK.h"
-#import "HomeProductList.h"
 #import "UserDataModel.h"
 #import "BaseResultModel.h"
 #import "RepayMentViewModel.h"
-#import "RenewalModel.h"
 #import "CheckViewModel.h"
 #import "SupportBankList.h"
 #import "UserCardResult.h"
@@ -35,7 +32,6 @@
 #import "UserBankCardListVCModule.h"
 #import "BankInfoViewModel.h"
 #import "DetailViewController.h"
-#import "P2PContactContentModel.h"
 #import "UILabel+FlickerNumber.h"
 #import "CheckViewIng.h"
 #import <MJRefresh/MJRefresh.h>
@@ -43,7 +39,6 @@
 #import "FXD_UserInfoConfiguration.h"
 #import "FXDWebViewController.h"
 #import "ApplicationViewModel.h"
-#import "CapitalListModel.h"
 #import "ApplicaitonModel.h"
 #import "DiscountTicketModel.h"
 #import "UIFont+YX_Font.h"

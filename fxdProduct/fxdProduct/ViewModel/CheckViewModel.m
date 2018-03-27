@@ -7,7 +7,6 @@
 //
 
 #import "CheckViewModel.h"
-#import "SaveLoanCaseParamModel.h"
 #import "DrawingsInfoModel.h"
 
 @implementation CheckViewModel

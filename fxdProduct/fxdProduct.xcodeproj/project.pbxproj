@@ -103,7 +103,6 @@
 		63553B1F1E600D0D00B2C1FF /* FaceIDLiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B1E1E600D0D00B2C1FF /* FaceIDLiveModel.m */; };
 		635AB0411E07BD46008A760C /* P2PBillDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB0401E07BD46008A760C /* P2PBillDetail.m */; };
 		635AB7901BE2FE2700C32919 /* ReturnMsgBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB78F1BE2FE2700C32919 /* ReturnMsgBaseClass.m */; };
-		635B0BDB1DF14A31008EAFD1 /* P2PAgreeMentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BDA1DF14A31008EAFD1 /* P2PAgreeMentModel.m */; };
 		635B0BE11DF157EA008EAFD1 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BE01DF157EA008EAFD1 /* DetailViewController.m */; };
 		635B2FBA1D6AEE22009CEFE0 /* GlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B2FB91D6AEE22009CEFE0 /* GlobalConfig.m */; };
 		636B1B1E1C1FDDD100450358 /* FXD_AlertViewCust.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B1B1C1FDDD100450358 /* FXD_AlertViewCust.m */; };
@@ -119,7 +118,6 @@
 		636B1B9A1C2D153900450358 /* HomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B991C2D153900450358 /* HomeViewModel.m */; };
 		636B1BA01C2D2C4300450358 /* RepayMentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B9F1C2D2C4300450358 /* RepayMentViewModel.m */; };
 		636B1BA31C30DBCB00450358 /* SMSViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1BA21C30DBCB00450358 /* SMSViewModel.m */; };
-		636B30E91DD41B330014DB7B /* Approval.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B30E81DD41B330014DB7B /* Approval.m */; };
 		636EE3031B662ABB00A1A3ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 636EE3021B662ABB00A1A3ED /* main.m */; };
 		636EE3061B662ABB00A1A3ED /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 636EE3051B662ABB00A1A3ED /* AppDelegate.mm */; };
 		636EE31D1B662ABB00A1A3ED /* fxdProductTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 636EE31C1B662ABB00A1A3ED /* fxdProductTests.m */; };
@@ -337,8 +335,6 @@
 		842C0B5E1ED59C7A00366D11 /* LoginParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */; };
 		842C4A061FE0D1F400D3D199 /* CommonViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C4A051FE0D1F400D3D199 /* CommonViewModel.m */; };
 		842C4A071FE0D1F400D3D199 /* CommonViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C4A051FE0D1F400D3D199 /* CommonViewModel.m */; };
-		842CA0E31F453B4A00A2150B /* HomeParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 842CA0E21F453B4A00A2150B /* HomeParam.m */; };
-		842CA0E41F453B4A00A2150B /* HomeParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 842CA0E21F453B4A00A2150B /* HomeParam.m */; };
 		842CA0E91F45492000A2150B /* jcore-ios-1.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842CA0E61F45492000A2150B /* jcore-ios-1.1.5.a */; };
 		842CA0EA1F45492000A2150B /* jcore-ios-1.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842CA0E61F45492000A2150B /* jcore-ios-1.1.5.a */; };
 		842CA0EB1F45492000A2150B /* jpush-ios-3.0.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842CA0E71F45492000A2150B /* jpush-ios-3.0.6.a */; };
@@ -351,12 +347,8 @@
 		8431498B1F75038D00FA3678 /* MGLivenessDetectionResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */; };
 		8431498C1F75039F00FA3678 /* MGIDCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149831F75035100FA3678 /* MGIDCard.framework */; };
 		8431498D1F75039F00FA3678 /* MGLivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149841F75035100FA3678 /* MGLivenessDetection.framework */; };
-		8436149D1F0CF57C0036201A /* P2PContactContenParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436149C1F0CF57C0036201A /* P2PContactContenParam.m */; };
-		8436149E1F0CF7440036201A /* P2PContactContenParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436149C1F0CF57C0036201A /* P2PContactContenParam.m */; };
-		843614A11F0CF8700036201A /* P2PContactContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843614A01F0CF8700036201A /* P2PContactContentModel.m */; };
 		843614A41F0CF9130036201A /* BaseResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843614A31F0CF9130036201A /* BaseResultModel.m */; };
 		843614A51F0CFD320036201A /* BaseResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843614A31F0CF9130036201A /* BaseResultModel.m */; };
-		843614A61F0CFD4B0036201A /* P2PContactContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843614A01F0CF8700036201A /* P2PContactContentModel.m */; };
 		8438F70F1EE14BD40089E121 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F70E1EE14BD40089E121 /* ChangePasswordViewController.m */; };
 		8438F7101EE14BD40089E121 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F70E1EE14BD40089E121 /* ChangePasswordViewController.m */; };
 		8438F7141EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F7131EE14DA00089E121 /* ChangePasswordTableViewCell.m */; };
@@ -371,8 +363,6 @@
 		843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843FF1F41F20860B00ECCE16 /* PaymentViewModel.m */; };
 		84420A611ED678E200DFBFE0 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
 		84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84420A601ED678E200DFBFE0 /* LoginView.xib */; };
-		8446AC031EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */; };
-		8446AC041EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */; };
 		844E5F4B1ED94C9C00753671 /* RegViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4A1ED94C9C00753671 /* RegViewModel.m */; };
 		844E5F4C1ED94C9C00753671 /* RegViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4A1ED94C9C00753671 /* RegViewModel.m */; };
 		844E5F501ED94DCB00753671 /* RegParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4F1ED94DCB00753671 /* RegParamModel.m */; };
@@ -467,10 +457,6 @@
 		84A380331FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A3802E1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib */; };
 		84A380341FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3802F1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m */; };
 		84A380351FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3802F1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m */; };
-		84A380391FAC41D7008FB7AF /* SesameCreditCertificationVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A380371FAC41D7008FB7AF /* SesameCreditCertificationVCModules.m */; };
-		84A3803A1FAC41D7008FB7AF /* SesameCreditCertificationVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A380371FAC41D7008FB7AF /* SesameCreditCertificationVCModules.m */; };
-		84A3803B1FAC41D7008FB7AF /* SesameCreditCertificationVCModules.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A380381FAC41D7008FB7AF /* SesameCreditCertificationVCModules.xib */; };
-		84A3803C1FAC41D7008FB7AF /* SesameCreditCertificationVCModules.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A380381FAC41D7008FB7AF /* SesameCreditCertificationVCModules.xib */; };
 		84A5696D1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */; };
 		84A5696E1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */; };
 		84A6350E1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
@@ -483,10 +469,6 @@
 		84BC53D71FF4C43B00FE58E8 /* OverdueInfoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */; };
 		84BC53D91FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */; };
 		84BC53DA1FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */; };
-		84BC53E01FF4DA1400FE58E8 /* QryUserStatusParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53DD1FF4DA1300FE58E8 /* QryUserStatusParamModel.m */; };
-		84BC53E11FF4DA1400FE58E8 /* QryUserStatusParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53DD1FF4DA1300FE58E8 /* QryUserStatusParamModel.m */; };
-		84BC53E21FF4DA1400FE58E8 /* QryUserStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53DE1FF4DA1400FE58E8 /* QryUserStatusModel.m */; };
-		84BC53E31FF4DA1400FE58E8 /* QryUserStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53DE1FF4DA1400FE58E8 /* QryUserStatusModel.m */; };
 		84C45C081FBC55860086E8DB /* DiscountTicketParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C45C071FBC55860086E8DB /* DiscountTicketParam.m */; };
 		84C45C091FBC55860086E8DB /* DiscountTicketParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C45C071FBC55860086E8DB /* DiscountTicketParam.m */; };
 		84C619BC1FA815A800626411 /* LoanPeriodForDetailsVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6198F1FA8149700626411 /* LoanPeriodForDetailsVCModule.m */; };
@@ -697,7 +679,6 @@
 		CC0DF9E61EA5B1090024841A /* LOTShapeLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A169D1E517D9F00AB8AB6 /* LOTShapeLayerView.m */; };
 		CC0DF9E71EA5B1090024841A /* RepayMentAvailableRedpackets.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F2D1CF53662000446A7 /* RepayMentAvailableRedpackets.m */; };
 		CC0DF9E81EA5B1090024841A /* GlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B2FB91D6AEE22009CEFE0 /* GlobalConfig.m */; };
-		CC0DF9EB1EA5B1090024841A /* P2PAgreeMentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BDA1DF14A31008EAFD1 /* P2PAgreeMentModel.m */; };
 		CC0DF9EC1EA5B1090024841A /* GetCustomerBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 634831071CBCD4680005C4CD /* GetCustomerBaseViewModel.m */; };
 		CC0DF9ED1EA5B1090024841A /* YYTextInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24C11D98F7E9006F58F3 /* YYTextInput.m */; };
 		CC0DF9F01EA5B1090024841A /* MyCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F920C111BCE549900AA9A31 /* MyCardsViewController.m */; };
@@ -757,7 +738,6 @@
 		CC0DFA551EA5B1090024841A /* CareerParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6300CC0A1E4AE5FD0012B05A /* CareerParse.m */; };
 		CC0DFA561EA5B1090024841A /* YYTextArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24CE1D98F7E9006F58F3 /* YYTextArchiver.m */; };
 		CC0DFA571EA5B1090024841A /* UIBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C21E517D9F00AB8AB6 /* UIBezierPath.m */; };
-		CC0DFA581EA5B1090024841A /* Approval.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B30E81DD41B330014DB7B /* Approval.m */; };
 		CC0DFA5A1EA5B1090024841A /* SMSViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1BA21C30DBCB00450358 /* SMSViewModel.m */; };
 		CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DE1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m */; };
 		CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16A61E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m */; };
@@ -955,16 +935,12 @@
 		CC6C93EF1F4AB58C00587C74 /* TrackRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */; };
 		CC6C93F11F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
 		CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
-		CC6CBA841F5AB9620015C92C /* ApplicationStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */; };
-		CC6CBA851F5AB9620015C92C /* ApplicationStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */; };
 		CC6E0F171FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
 		CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
 		CC6E696320561565005853BB /* SmsCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E696220561565005853BB /* SmsCodeModel.m */; };
 		CC6E696420561565005853BB /* SmsCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E696220561565005853BB /* SmsCodeModel.m */; };
 		CC6E696720562D10005853BB /* SubmitInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E696620562D10005853BB /* SubmitInfoModel.m */; };
 		CC6E696820562D10005853BB /* SubmitInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E696620562D10005853BB /* SubmitInfoModel.m */; };
-		CC6F06851F750A5B00FA889E /* CapitalListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06841F750A5B00FA889E /* CapitalListModel.m */; };
-		CC6F06861F750A5B00FA889E /* CapitalListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06841F750A5B00FA889E /* CapitalListModel.m */; };
 		CC6F06901F7B8D3600FA889E /* ShanLinWebVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F068F1F7B8D3600FA889E /* ShanLinWebVCModules.m */; };
 		CC6F06911F7B8D4200FA889E /* ShanLinWebVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6F068F1F7B8D3600FA889E /* ShanLinWebVCModules.m */; };
 		CC6F06931F7DF6C000FA889E /* ShanLinBackAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */; };
@@ -1029,28 +1005,18 @@
 		CCA181A41FC80E1E0094DA58 /* NonePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA181A21FC80E1E0094DA58 /* NonePageView.swift */; };
 		CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
 		CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
-		CCAA8EB61F5940CC00278D16 /* RenewalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EB51F5940CC00278D16 /* RenewalModel.m */; };
-		CCAA8EB71F5940CC00278D16 /* RenewalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCAA8EB51F5940CC00278D16 /* RenewalModel.m */; };
 		CCBD8F6C1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
 		CCBD8F6D1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
 		CCC1E4062057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */; };
 		CCC1E4072057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */; };
 		CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
 		CCC1E40F205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
-		CCCB27A11FB2F1C100412632 /* DrawLotteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27A01FB2F1C100412632 /* DrawLotteryModel.m */; };
-		CCCB27A21FB2F1C100412632 /* DrawLotteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB27A01FB2F1C100412632 /* DrawLotteryModel.m */; };
 		CCCC0A8E1F677B9B007E1EB0 /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */; };
 		CCCC0A8F1F677B9B007E1EB0 /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */; };
 		CCCDA8771EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
 		CCCDA8781EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
-		CCCDA87C1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA87B1EDFAD0B00B48DFF /* SaveLoanCaseModel.m */; };
-		CCCDA87D1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA87B1EDFAD0B00B48DFF /* SaveLoanCaseModel.m */; };
-		CCCDA8801EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA87F1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m */; };
-		CCCDA8811EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA87F1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m */; };
 		CCCDA8841EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */; };
 		CCCDA8851EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */; };
-		CCCDA8881EE028DD00B48DFF /* SendSmsParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8871EE028DD00B48DFF /* SendSmsParamModel.m */; };
-		CCCDA8891EE028DD00B48DFF /* SendSmsParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8871EE028DD00B48DFF /* SendSmsParamModel.m */; };
 		CCCE40BD1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40BC1EE7CCB300E3F102 /* IdeaBackParamModel.m */; };
 		CCCE40BE1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40BC1EE7CCB300E3F102 /* IdeaBackParamModel.m */; };
 		CCCE40C11EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40C01EE7CDF900E3F102 /* PserInfoViewModel.m */; };
@@ -1065,16 +1031,6 @@
 		CCDEDF5D1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDEDF5B1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m */; };
 		CCDEDF601EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDEDF5F1EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m */; };
 		CCDEDF611EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDEDF5F1EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m */; };
-		CCE3BE191ED2D36E004C35A4 /* SendSmsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE181ED2D36E004C35A4 /* SendSmsModel.m */; };
-		CCE3BE1A1ED2D36E004C35A4 /* SendSmsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE181ED2D36E004C35A4 /* SendSmsModel.m */; };
-		CCE3BE1E1ED2D424004C35A4 /* BankCardsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE1D1ED2D424004C35A4 /* BankCardsModel.m */; };
-		CCE3BE1F1ED2D424004C35A4 /* BankCardsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE1D1ED2D424004C35A4 /* BankCardsModel.m */; };
-		CCE3BE281ED2D655004C35A4 /* QueryCardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE271ED2D655004C35A4 /* QueryCardInfo.m */; };
-		CCE3BE291ED2D655004C35A4 /* QueryCardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE3BE271ED2D655004C35A4 /* QueryCardInfo.m */; };
-		CCEC9C931EE5095000452291 /* BankCardsParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEC9C921EE5095000452291 /* BankCardsParamModel.m */; };
-		CCEC9C941EE5095000452291 /* BankCardsParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEC9C921EE5095000452291 /* BankCardsParamModel.m */; };
-		CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
-		CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1280,8 +1236,6 @@
 		635AB0401E07BD46008A760C /* P2PBillDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PBillDetail.m; sourceTree = "<group>"; };
 		635AB78E1BE2FE2700C32919 /* ReturnMsgBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnMsgBaseClass.h; sourceTree = "<group>"; };
 		635AB78F1BE2FE2700C32919 /* ReturnMsgBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReturnMsgBaseClass.m; sourceTree = "<group>"; };
-		635B0BD91DF14A31008EAFD1 /* P2PAgreeMentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PAgreeMentModel.h; sourceTree = "<group>"; };
-		635B0BDA1DF14A31008EAFD1 /* P2PAgreeMentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PAgreeMentModel.m; sourceTree = "<group>"; };
 		635B0BDF1DF157EA008EAFD1 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		635B0BE01DF157EA008EAFD1 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		635B2FB91D6AEE22009CEFE0 /* GlobalConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalConfig.m; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 1; };
@@ -1309,8 +1263,6 @@
 		636B1B9F1C2D2C4300450358 /* RepayMentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayMentViewModel.m; sourceTree = "<group>"; };
 		636B1BA11C30DBCB00450358 /* SMSViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSViewModel.h; sourceTree = "<group>"; };
 		636B1BA21C30DBCB00450358 /* SMSViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSViewModel.m; sourceTree = "<group>"; };
-		636B30E71DD41B330014DB7B /* Approval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Approval.h; sourceTree = "<group>"; };
-		636B30E81DD41B330014DB7B /* Approval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Approval.m; sourceTree = "<group>"; };
 		636EE2FD1B662ABB00A1A3ED /* fxdProduct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fxdProduct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		636EE3011B662ABB00A1A3ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		636EE3021B662ABB00A1A3ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1702,8 +1654,6 @@
 		842C0B5C1ED59C7A00366D11 /* LoginParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginParamModel.m; sourceTree = "<group>"; };
 		842C4A041FE0D1F400D3D199 /* CommonViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonViewModel.h; sourceTree = "<group>"; };
 		842C4A051FE0D1F400D3D199 /* CommonViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonViewModel.m; sourceTree = "<group>"; };
-		842CA0E11F453B4A00A2150B /* HomeParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeParam.h; sourceTree = "<group>"; };
-		842CA0E21F453B4A00A2150B /* HomeParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeParam.m; sourceTree = "<group>"; };
 		842CA0E61F45492000A2150B /* jcore-ios-1.1.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.5.a"; sourceTree = "<group>"; };
 		842CA0E71F45492000A2150B /* jpush-ios-3.0.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.6.a"; sourceTree = "<group>"; };
 		842CA0E81F45492000A2150B /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
@@ -1711,10 +1661,6 @@
 		843149831F75035100FA3678 /* MGIDCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGIDCard.framework; sourceTree = "<group>"; };
 		843149841F75035100FA3678 /* MGLivenessDetection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGLivenessDetection.framework; sourceTree = "<group>"; };
 		843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGLivenessDetectionResource.bundle; sourceTree = "<group>"; };
-		8436149B1F0CF57C0036201A /* P2PContactContenParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PContactContenParam.h; sourceTree = "<group>"; };
-		8436149C1F0CF57C0036201A /* P2PContactContenParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PContactContenParam.m; sourceTree = "<group>"; };
-		8436149F1F0CF8700036201A /* P2PContactContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PContactContentModel.h; sourceTree = "<group>"; };
-		843614A01F0CF8700036201A /* P2PContactContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PContactContentModel.m; sourceTree = "<group>"; };
 		843614A21F0CF9130036201A /* BaseResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseResultModel.h; sourceTree = "<group>"; };
 		843614A31F0CF9130036201A /* BaseResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseResultModel.m; sourceTree = "<group>"; };
 		8438F70D1EE14BD40089E121 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
@@ -1732,8 +1678,6 @@
 		84420A5E1ED678E200DFBFE0 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		84420A5F1ED678E200DFBFE0 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		84420A601ED678E200DFBFE0 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
-		8446AC011EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitZhimaCreditAuthModel.h; sourceTree = "<group>"; };
-		8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitZhimaCreditAuthModel.m; sourceTree = "<group>"; };
 		844E5F491ED94C9C00753671 /* RegViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewModel.h; sourceTree = "<group>"; };
 		844E5F4A1ED94C9C00753671 /* RegViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewModel.m; sourceTree = "<group>"; };
 		844E5F4E1ED94DCB00753671 /* RegParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegParamModel.h; sourceTree = "<group>"; };
@@ -1799,9 +1743,6 @@
 		84A3802D1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataAuthenticationListVCModules.h; sourceTree = "<group>"; };
 		84A3802E1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDataAuthenticationListVCModules.xib; sourceTree = "<group>"; };
 		84A3802F1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataAuthenticationListVCModules.m; sourceTree = "<group>"; };
-		84A380361FAC41D6008FB7AF /* SesameCreditCertificationVCModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SesameCreditCertificationVCModules.h; sourceTree = "<group>"; };
-		84A380371FAC41D7008FB7AF /* SesameCreditCertificationVCModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SesameCreditCertificationVCModules.m; sourceTree = "<group>"; };
-		84A380381FAC41D7008FB7AF /* SesameCreditCertificationVCModules.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SesameCreditCertificationVCModules.xib; sourceTree = "<group>"; };
 		84A5696B1F983AFC003A870E /* LapseDiscountTicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LapseDiscountTicketViewController.h; sourceTree = "<group>"; };
 		84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LapseDiscountTicketViewController.m; sourceTree = "<group>"; };
 		84A6350C1F00F8B800146A8A /* MobilePhoneOperatorParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobilePhoneOperatorParamModel.h; sourceTree = "<group>"; };
@@ -1811,10 +1752,6 @@
 		84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueInfoPopView.swift; sourceTree = "<group>"; };
 		84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OverdueInfoPopView.xib; sourceTree = "<group>"; };
 		84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonProtocol .swift"; sourceTree = "<group>"; };
-		84BC53DC1FF4DA1300FE58E8 /* QryUserStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QryUserStatusModel.h; sourceTree = "<group>"; };
-		84BC53DD1FF4DA1300FE58E8 /* QryUserStatusParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QryUserStatusParamModel.m; sourceTree = "<group>"; };
-		84BC53DE1FF4DA1400FE58E8 /* QryUserStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QryUserStatusModel.m; sourceTree = "<group>"; };
-		84BC53DF1FF4DA1400FE58E8 /* QryUserStatusParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QryUserStatusParamModel.h; sourceTree = "<group>"; };
 		84C45C061FBC55860086E8DB /* DiscountTicketParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscountTicketParam.h; sourceTree = "<group>"; };
 		84C45C071FBC55860086E8DB /* DiscountTicketParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscountTicketParam.m; sourceTree = "<group>"; };
 		84C6198E1FA8149700626411 /* LoanPeriodForDetailsVCModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoanPeriodForDetailsVCModule.h; sourceTree = "<group>"; };
@@ -1942,16 +1879,12 @@
 		CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "fxdProduct-Bridging-Header.h"; sourceTree = "<group>"; };
 		CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackRect.swift; sourceTree = "<group>"; };
 		CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseThirdView.swift; sourceTree = "<group>"; };
-		CC6CBA821F5AB9620015C92C /* ApplicationStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationStatusModel.h; sourceTree = "<group>"; };
-		CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationStatusModel.m; sourceTree = "<group>"; };
 		CC6E0F151FF0942400D32773 /* FXD_HomeProductListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_HomeProductListModel.h; sourceTree = "<group>"; };
 		CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_HomeProductListModel.m; sourceTree = "<group>"; };
 		CC6E696120561565005853BB /* SmsCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmsCodeModel.h; sourceTree = "<group>"; };
 		CC6E696220561565005853BB /* SmsCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmsCodeModel.m; sourceTree = "<group>"; };
 		CC6E696520562D10005853BB /* SubmitInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubmitInfoModel.h; sourceTree = "<group>"; };
 		CC6E696620562D10005853BB /* SubmitInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubmitInfoModel.m; sourceTree = "<group>"; };
-		CC6F06831F750A5B00FA889E /* CapitalListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapitalListModel.h; sourceTree = "<group>"; };
-		CC6F06841F750A5B00FA889E /* CapitalListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CapitalListModel.m; sourceTree = "<group>"; };
 		CC6F068E1F7B8D3600FA889E /* ShanLinWebVCModules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShanLinWebVCModules.h; sourceTree = "<group>"; };
 		CC6F068F1F7B8D3600FA889E /* ShanLinWebVCModules.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShanLinWebVCModules.m; sourceTree = "<group>"; };
 		CC6F06921F7DF6BB00FA889E /* ShanLinBackAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShanLinBackAlertView.swift; sourceTree = "<group>"; };
@@ -1999,28 +1932,18 @@
 		CCA1819F1FC7F1220094DA58 /* CashViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CashViewModel.m; sourceTree = "<group>"; };
 		CCA181A21FC80E1E0094DA58 /* NonePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonePageView.swift; sourceTree = "<group>"; };
 		CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterHeaderView.swift; sourceTree = "<group>"; };
-		CCAA8EB41F5940CC00278D16 /* RenewalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenewalModel.h; sourceTree = "<group>"; };
-		CCAA8EB51F5940CC00278D16 /* RenewalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenewalModel.m; sourceTree = "<group>"; };
 		CCBD8F6A1F5D26BD005A980B /* RepayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayModel.h; sourceTree = "<group>"; };
 		CCBD8F6B1F5D26BD005A980B /* RepayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayModel.m; sourceTree = "<group>"; };
 		CCC1E4042057EC7D007C9C07 /* ChangeBankCardParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeBankCardParamModel.h; sourceTree = "<group>"; };
 		CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeBankCardParamModel.m; sourceTree = "<group>"; };
 		CCC1E40C205A595F007C9C07 /* ActiveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveModel.h; sourceTree = "<group>"; };
 		CCC1E40D205A595F007C9C07 /* ActiveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveModel.m; sourceTree = "<group>"; };
-		CCCB279F1FB2F1C100412632 /* DrawLotteryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawLotteryModel.h; sourceTree = "<group>"; };
-		CCCB27A01FB2F1C100412632 /* DrawLotteryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawLotteryModel.m; sourceTree = "<group>"; };
 		CCCC0A8C1F677B9B007E1EB0 /* UserDataResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataResult.h; sourceTree = "<group>"; };
 		CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataResult.m; sourceTree = "<group>"; };
 		CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewModel.h; sourceTree = "<group>"; };
 		CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewModel.m; sourceTree = "<group>"; };
-		CCCDA87A1EDFAD0B00B48DFF /* SaveLoanCaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveLoanCaseModel.h; sourceTree = "<group>"; };
-		CCCDA87B1EDFAD0B00B48DFF /* SaveLoanCaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveLoanCaseModel.m; sourceTree = "<group>"; };
-		CCCDA87E1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveLoanCaseParamModel.h; sourceTree = "<group>"; };
-		CCCDA87F1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveLoanCaseParamModel.m; sourceTree = "<group>"; };
 		CCCDA8821EE028A200B48DFF /* UnbundlingBankCardViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnbundlingBankCardViewModel.h; sourceTree = "<group>"; };
 		CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnbundlingBankCardViewModel.m; sourceTree = "<group>"; };
-		CCCDA8861EE028DD00B48DFF /* SendSmsParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendSmsParamModel.h; sourceTree = "<group>"; };
-		CCCDA8871EE028DD00B48DFF /* SendSmsParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendSmsParamModel.m; sourceTree = "<group>"; };
 		CCCE40BB1EE7CCB300E3F102 /* IdeaBackParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdeaBackParamModel.h; sourceTree = "<group>"; };
 		CCCE40BC1EE7CCB300E3F102 /* IdeaBackParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaBackParamModel.m; sourceTree = "<group>"; };
 		CCCE40BF1EE7CDF900E3F102 /* PserInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PserInfoViewModel.h; sourceTree = "<group>"; };
@@ -2034,16 +1957,6 @@
 		CCDEDF5B1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveAccountBankCardParamModel.m; sourceTree = "<group>"; };
 		CCDEDF5E1EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayWeeklyRecordViewModel.h; sourceTree = "<group>"; };
 		CCDEDF5F1EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayWeeklyRecordViewModel.m; sourceTree = "<group>"; };
-		CCE3BE171ED2D36E004C35A4 /* SendSmsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendSmsModel.h; sourceTree = "<group>"; };
-		CCE3BE181ED2D36E004C35A4 /* SendSmsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendSmsModel.m; sourceTree = "<group>"; };
-		CCE3BE1C1ED2D424004C35A4 /* BankCardsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardsModel.h; sourceTree = "<group>"; };
-		CCE3BE1D1ED2D424004C35A4 /* BankCardsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardsModel.m; sourceTree = "<group>"; };
-		CCE3BE261ED2D655004C35A4 /* QueryCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCardInfo.h; sourceTree = "<group>"; };
-		CCE3BE271ED2D655004C35A4 /* QueryCardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryCardInfo.m; sourceTree = "<group>"; };
-		CCEC9C911EE5095000452291 /* BankCardsParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardsParamModel.h; sourceTree = "<group>"; };
-		CCEC9C921EE5095000452291 /* BankCardsParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardsParamModel.m; sourceTree = "<group>"; };
-		CCFA2DC81EB02FFE0071F46B /* HomeProductList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeProductList.h; sourceTree = "<group>"; };
-		CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeProductList.m; sourceTree = "<group>"; };
 		DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64833171B0C1433C0C2116C /* Pods-fxd-fxdProductDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProductDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev.release.xcconfig"; sourceTree = "<group>"; };
 		EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
@@ -2498,15 +2411,6 @@
 			path = DrawCash;
 			sourceTree = "<group>";
 		};
-		635B0BD81DF14A1C008EAFD1 /* P2PAgreeMent */ = {
-			isa = PBXGroup;
-			children = (
-				635B0BD91DF14A31008EAFD1 /* P2PAgreeMentModel.h */,
-				635B0BDA1DF14A31008EAFD1 /* P2PAgreeMentModel.m */,
-			);
-			path = P2PAgreeMent;
-			sourceTree = "<group>";
-		};
 		6360F8A91E655938002CDE44 /* Custom_BaseInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -2622,15 +2526,6 @@
 				CC742DA2204E6E1A00D645CC /* ComplianceViewModel.m */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		636B30E61DD41B140014DB7B /* Approval */ = {
-			isa = PBXGroup;
-			children = (
-				636B30E71DD41B330014DB7B /* Approval.h */,
-				636B30E81DD41B330014DB7B /* Approval.m */,
-			);
-			path = Approval;
 			sourceTree = "<group>";
 		};
 		636EE2F41B662ABB00A1A3ED = {
@@ -3441,25 +3336,14 @@
 				CC742DA5204E702400D645CC /* Compliance */,
 				CC8BC95E1FEB5994008E135E /* Mine */,
 				CC45E7281FD78FC600DE803D /* Message */,
-				CCCB279E1FB2F19200412632 /* DrawLottery */,
-				CC6F067B1F75092C00FA889E /* Capital */,
 				CC6CBA811F5AB93C0015C92C /* ApplicationStatus */,
-				CCAA8EB01F59408C00278D16 /* Renewal */,
 				843614A21F0CF9130036201A /* BaseResultModel.h */,
 				843614A31F0CF9130036201A /* BaseResultModel.m */,
-				842CA0E01F453B0700A2150B /* homeParam */,
 				843FF1EC1F2083F800ECCE16 /* ReplayModel */,
-				84BC53DB1FF4D9F700FE58E8 /* QryUserStatus */,
-				8436149A1F0CF4A50036201A /* contract */,
 				84A6350B1F00F85700146A8A /* MobilePhoneOperator */,
 				CCDEDF591EEA3863009CEC32 /* SaveAccountBankCard */,
-				CCCDA8791EDFACED00B48DFF /* SaveLoanCase */,
 				84DD36361ED57DEE0057F19A /* SMS */,
 				CC5D70241ED43FE500A074AF /* Cash */,
-				CCE3BE251ED2D632004C35A4 /* QueryCardInfo */,
-				CCE3BE1B1ED2D40E004C35A4 /* BankCards */,
-				CCE3BE161ED2D321004C35A4 /* SendSms */,
-				CCB323401EBC5A7B0001D9DE /* SubmitZhimaCreditAuth */,
 				CCFA2DC71EB02FC20071F46B /* HomeProductList */,
 				63E8F1AE1E6FDACD00FE4BDD /* DataDic */,
 				63C50E4D1E68047F0035EE4F /* RecomfrInfo */,
@@ -3470,8 +3354,6 @@
 				63553B121E5EEF1C00B2C1FF /* FaceIDOCRFront */,
 				6300CC081E4AE5EC0012B05A /* CareerParse */,
 				635AB03E1E07BD0E008A760C /* P2PBillDetail */,
-				635B0BD81DF14A1C008EAFD1 /* P2PAgreeMent */,
-				636B30E61DD41B140014DB7B /* Approval */,
 				637BABF71D7D3F7F00CF8EB5 /* RepayList */,
 				6391F7251D3377830097C943 /* BankList */,
 				638C3F2F1CF564A4000446A7 /* SquareRepayment */,
@@ -3870,15 +3752,6 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		842CA0E01F453B0700A2150B /* homeParam */ = {
-			isa = PBXGroup;
-			children = (
-				842CA0E11F453B4A00A2150B /* HomeParam.h */,
-				842CA0E21F453B4A00A2150B /* HomeParam.m */,
-			);
-			path = homeParam;
-			sourceTree = "<group>";
-		};
 		842CA0E51F4548D000A2150B /* JPush */ = {
 			isa = PBXGroup;
 			children = (
@@ -3898,17 +3771,6 @@
 				6313DC0E1BB3E48800EB45DE /* DES */,
 			);
 			path = EncryptionModules;
-			sourceTree = "<group>";
-		};
-		8436149A1F0CF4A50036201A /* contract */ = {
-			isa = PBXGroup;
-			children = (
-				8436149B1F0CF57C0036201A /* P2PContactContenParam.h */,
-				8436149C1F0CF57C0036201A /* P2PContactContenParam.m */,
-				8436149F1F0CF8700036201A /* P2PContactContentModel.h */,
-				843614A01F0CF8700036201A /* P2PContactContentModel.m */,
-			);
-			path = contract;
 			sourceTree = "<group>";
 		};
 		8438F7111EE14D2D0089E121 /* MoreView */ = {
@@ -4030,9 +3892,6 @@
 				84A380111FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.m */,
 				84A380121FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.xib */,
 				84A380131FAC1D8D008FB7AF /* UserThirdPartyAuthVCModules.swift */,
-				84A380361FAC41D6008FB7AF /* SesameCreditCertificationVCModules.h */,
-				84A380371FAC41D7008FB7AF /* SesameCreditCertificationVCModules.m */,
-				84A380381FAC41D7008FB7AF /* SesameCreditCertificationVCModules.xib */,
 			);
 			path = "UserDataFillingModule - 用户资料填写";
 			sourceTree = "<group>";
@@ -4044,17 +3903,6 @@
 				84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */,
 			);
 			path = MobilePhoneOperator;
-			sourceTree = "<group>";
-		};
-		84BC53DB1FF4D9F700FE58E8 /* QryUserStatus */ = {
-			isa = PBXGroup;
-			children = (
-				84BC53DC1FF4DA1300FE58E8 /* QryUserStatusModel.h */,
-				84BC53DE1FF4DA1400FE58E8 /* QryUserStatusModel.m */,
-				84BC53DF1FF4DA1400FE58E8 /* QryUserStatusParamModel.h */,
-				84BC53DD1FF4DA1300FE58E8 /* QryUserStatusParamModel.m */,
-			);
-			path = QryUserStatus;
 			sourceTree = "<group>";
 		};
 		84C6198D1FA8149700626411 /* RepaymentModules - 还款模块 */ = {
@@ -4280,24 +4128,12 @@
 		CC6CBA811F5AB93C0015C92C /* ApplicationStatus */ = {
 			isa = PBXGroup;
 			children = (
-				CC6CBA821F5AB9620015C92C /* ApplicationStatusModel.h */,
-				CC6CBA831F5AB9620015C92C /* ApplicationStatusModel.m */,
 				CCBD8F6A1F5D26BD005A980B /* RepayModel.h */,
 				CCBD8F6B1F5D26BD005A980B /* RepayModel.m */,
 				CC742DBE20521FA700D645CC /* ApplicationNewCreateModel.h */,
 				CC742DBF20521FA700D645CC /* ApplicationNewCreateModel.m */,
 			);
 			name = ApplicationStatus;
-			sourceTree = "<group>";
-		};
-		CC6F067B1F75092C00FA889E /* Capital */ = {
-			isa = PBXGroup;
-			children = (
-				CC6F06831F750A5B00FA889E /* CapitalListModel.h */,
-				CC6F06841F750A5B00FA889E /* CapitalListModel.m */,
-			);
-			name = Capital;
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		CC6F068D1F7B8CA800FA889E /* ShanLinWebVCModules - 善林 */ = {
@@ -4401,44 +4237,6 @@
 			name = AuthenticationCenterView;
 			sourceTree = "<group>";
 		};
-		CCAA8EB01F59408C00278D16 /* Renewal */ = {
-			isa = PBXGroup;
-			children = (
-				CCAA8EB41F5940CC00278D16 /* RenewalModel.h */,
-				CCAA8EB51F5940CC00278D16 /* RenewalModel.m */,
-			);
-			name = Renewal;
-			sourceTree = "<group>";
-		};
-		CCB323401EBC5A7B0001D9DE /* SubmitZhimaCreditAuth */ = {
-			isa = PBXGroup;
-			children = (
-				8446AC011EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.h */,
-				8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */,
-			);
-			path = SubmitZhimaCreditAuth;
-			sourceTree = "<group>";
-		};
-		CCCB279E1FB2F19200412632 /* DrawLottery */ = {
-			isa = PBXGroup;
-			children = (
-				CCCB279F1FB2F1C100412632 /* DrawLotteryModel.h */,
-				CCCB27A01FB2F1C100412632 /* DrawLotteryModel.m */,
-			);
-			path = DrawLottery;
-			sourceTree = "<group>";
-		};
-		CCCDA8791EDFACED00B48DFF /* SaveLoanCase */ = {
-			isa = PBXGroup;
-			children = (
-				CCCDA87A1EDFAD0B00B48DFF /* SaveLoanCaseModel.h */,
-				CCCDA87B1EDFAD0B00B48DFF /* SaveLoanCaseModel.m */,
-				CCCDA87E1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.h */,
-				CCCDA87F1EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m */,
-			);
-			name = SaveLoanCase;
-			sourceTree = "<group>";
-		};
 		CCD32B501F58195D0092A9CB /* CurrentInformation */ = {
 			isa = PBXGroup;
 			children = (
@@ -4456,42 +4254,9 @@
 			name = SaveAccountBankCard;
 			sourceTree = "<group>";
 		};
-		CCE3BE161ED2D321004C35A4 /* SendSms */ = {
-			isa = PBXGroup;
-			children = (
-				CCE3BE171ED2D36E004C35A4 /* SendSmsModel.h */,
-				CCE3BE181ED2D36E004C35A4 /* SendSmsModel.m */,
-				CCCDA8861EE028DD00B48DFF /* SendSmsParamModel.h */,
-				CCCDA8871EE028DD00B48DFF /* SendSmsParamModel.m */,
-			);
-			name = SendSms;
-			sourceTree = "<group>";
-		};
-		CCE3BE1B1ED2D40E004C35A4 /* BankCards */ = {
-			isa = PBXGroup;
-			children = (
-				CCE3BE1C1ED2D424004C35A4 /* BankCardsModel.h */,
-				CCE3BE1D1ED2D424004C35A4 /* BankCardsModel.m */,
-				CCEC9C911EE5095000452291 /* BankCardsParamModel.h */,
-				CCEC9C921EE5095000452291 /* BankCardsParamModel.m */,
-			);
-			name = BankCards;
-			sourceTree = "<group>";
-		};
-		CCE3BE251ED2D632004C35A4 /* QueryCardInfo */ = {
-			isa = PBXGroup;
-			children = (
-				CCE3BE261ED2D655004C35A4 /* QueryCardInfo.h */,
-				CCE3BE271ED2D655004C35A4 /* QueryCardInfo.m */,
-			);
-			name = QueryCardInfo;
-			sourceTree = "<group>";
-		};
 		CCFA2DC71EB02FC20071F46B /* HomeProductList */ = {
 			isa = PBXGroup;
 			children = (
-				CCFA2DC81EB02FFE0071F46B /* HomeProductList.h */,
-				CCFA2DC91EB02FFE0071F46B /* HomeProductList.m */,
 				CC6E0F151FF0942400D32773 /* FXD_HomeProductListModel.h */,
 				CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */,
 			);
@@ -4650,7 +4415,6 @@
 				84D715F21F78CF8800F433E5 /* MGBankCardResource.bundle in Resources */,
 				8431498A1F75038D00FA3678 /* MGIDCardResource.bundle in Resources */,
 				8431498B1F75038D00FA3678 /* MGLivenessDetectionResource.bundle in Resources */,
-				84A3803B1FAC41D7008FB7AF /* SesameCreditCertificationVCModules.xib in Resources */,
 				0FFA91621C589D76008D91D2 /* CheckViewIng.xib in Resources */,
 				6313DC171BB3F07B00EB45DE /* Images.xcassets in Resources */,
 				84A380321FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib in Resources */,
@@ -4731,7 +4495,6 @@
 				84D715F01F78CF6700F433E5 /* MGBankCardResource.bundle in Resources */,
 				843149861F75036700FA3678 /* MGIDCardResource.bundle in Resources */,
 				843149871F75036700FA3678 /* MGLivenessDetectionResource.bundle in Resources */,
-				84A3803C1FAC41D7008FB7AF /* SesameCreditCertificationVCModules.xib in Resources */,
 				845017311ED7CD88008055E4 /* LoginView.xib in Resources */,
 				84ED5B5D1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */,
 				84A380331FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib in Resources */,
@@ -4987,10 +4750,8 @@
 				84BC53D31FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */,
 				63ED33471B6B5569008B6085 /* RegViewController.m in Sources */,
 				63F254871E49A45900852CF1 /* HMScannerController.m in Sources */,
-				84A380391FAC41D7008FB7AF /* SesameCreditCertificationVCModules.m in Sources */,
 				CCD32B521F5819980092A9CB /* CurrentInformationCell.swift in Sources */,
 				63ED33371B6B4593008B6085 /* BaseNavigationViewController.m in Sources */,
-				CC6CBA841F5AB9620015C92C /* ApplicationStatusModel.m in Sources */,
 				849459CA1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
 				CC742DAC204E730700D645CC /* SubmitAccountParamModel.m in Sources */,
 				63FF484A1B6F036F009E384C /* MyViewController.m in Sources */,
@@ -5011,7 +4772,6 @@
 				63FC24FA1D98F7E9006F58F3 /* YYTextRunDelegate.m in Sources */,
 				63D43EFC1D41F8380076AC7F /* DataWriteAndRead.m in Sources */,
 				84A6350E1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m in Sources */,
-				CCCDA87C1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */,
 				638C3F3B1CF564A4000446A7 /* SquareRepaymentExt.m in Sources */,
 				63553B1F1E600D0D00B2C1FF /* FaceIDLiveModel.m in Sources */,
 				638C3F3A1CF564A4000446A7 /* SquareRepaymentBaseClass.m in Sources */,
@@ -5042,7 +4802,6 @@
 				634830FF1CBCA1A90005C4CD /* RegionCodeResult.m in Sources */,
 				84A380261FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.m in Sources */,
 				84CC899E1F5973D700537910 /* DrawingsInfoModel.m in Sources */,
-				CCCDA8801EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */,
 				638A17081E517D9F00AB8AB6 /* LOTShapeTransform.m in Sources */,
 				CC742D8F204D3A3800D645CC /* OpenAccountCell.swift in Sources */,
 				84DFBED31F4D72050009DAB9 /* UserDataViewModel.m in Sources */,
@@ -5050,7 +4809,6 @@
 				63F0E1BE1CE41821001251A9 /* NSData+YYAdd.m in Sources */,
 				638A16F01E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.m in Sources */,
 				634830FD1CBCA1A90005C4CD /* RegionCodeBaseClass.m in Sources */,
-				843614A11F0CF8700036201A /* P2PContactContentModel.m in Sources */,
 				638A16E81E517D9F00AB8AB6 /* LOTAnimatableLayer.m in Sources */,
 				CCBD8F6C1F5D26BD005A980B /* RepayModel.m in Sources */,
 				63F0E1C11CE4183A001251A9 /* NSNumber+YYAdd.m in Sources */,
@@ -5066,7 +4824,6 @@
 				638A17001E517D9F00AB8AB6 /* LOTLayer.m in Sources */,
 				63F254881E49A45900852CF1 /* HMScannerMaskView.m in Sources */,
 				1A762F6F1C1FBE4700964719 /* RepayRecordController.m in Sources */,
-				CCAA8EB61F5940CC00278D16 /* RenewalModel.m in Sources */,
 				638A17041E517D9F00AB8AB6 /* LOTShapeGroup.m in Sources */,
 				63F254831E49A45900852CF1 /* HMScanerCardViewController.m in Sources */,
 				0FEA58891BE0A497007F8A6D /* testView.m in Sources */,
@@ -5088,7 +4845,6 @@
 				CCA181A01FC7F1220094DA58 /* CashViewModel.m in Sources */,
 				CCA181981FC7EED70094DA58 /* PersonalCenterModel.m in Sources */,
 				84DFBEDE1F4D97D50009DAB9 /* HighRandingModel.m in Sources */,
-				8446AC031EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */,
 				63FC24F11D98F7E9006F58F3 /* YYTextKeyboardManager.m in Sources */,
 				CC742DB0204E74AF00D645CC /* SmsCodeParamModel.m in Sources */,
 				638A17071E517D9F00AB8AB6 /* LOTShapeStroke.m in Sources */,
@@ -5106,7 +4862,6 @@
 				8453F5381FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */,
 				63A24C661BE063A90036E8EF /* UIImage+Color.m in Sources */,
 				1AB0F5AA1CF2D20E00F3DF06 /* TicketCell.m in Sources */,
-				CCCDA8881EE028DD00B48DFF /* SendSmsParamModel.m in Sources */,
 				63832C8C1CB7530400C6F194 /* NSString+AES.m in Sources */,
 				CC5FC5AB1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift in Sources */,
 				848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
@@ -5119,7 +4874,6 @@
 				63FC25011D98F7E9006F58F3 /* YYTextUtilities.m in Sources */,
 				638A17091E517D9F00AB8AB6 /* LOTShapeTrimPath.m in Sources */,
 				CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */,
-				CCCB27A11FB2F1C100412632 /* DrawLotteryModel.m in Sources */,
 				84F1E29F1FD90EE0007D3381 /* UserDataInformationModel.m in Sources */,
 				638A16EE1E517D9F00AB8AB6 /* LOTShapeLayerView.m in Sources */,
 				638C3F2E1CF53662000446A7 /* RepayMentAvailableRedpackets.m in Sources */,
@@ -5129,7 +4883,6 @@
 				CC5FC5AE1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift in Sources */,
 				84CC89991F593C1E00537910 /* ApplicaitonModel.m in Sources */,
 				84E306CF1F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
-				635B0BDB1DF14A31008EAFD1 /* P2PAgreeMentModel.m in Sources */,
 				634831081CBCD4680005C4CD /* GetCustomerBaseViewModel.m in Sources */,
 				84A3802A1FAC1D8D008FB7AF /* UserThirdPartyAuthVCModules.swift in Sources */,
 				63FC24F01D98F7E9006F58F3 /* YYTextInput.m in Sources */,
@@ -5150,7 +4903,6 @@
 				CC5FC5A31FC2AF4700DB0D78 /* CashWithdrawViewController.swift in Sources */,
 				8411DA111FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */,
 				848139631F568A8600CD701C /* YX_TextField.swift in Sources */,
-				84BC53E21FF4DA1400FE58E8 /* QryUserStatusModel.m in Sources */,
 				637963A91CABD0F8002A5910 /* ApprovalAmountExt.m in Sources */,
 				0F047F471C507D59002ED7C0 /* LabelCell.m in Sources */,
 				63FC24FD1D98F7E9006F58F3 /* UIPasteboard+YYText.m in Sources */,
@@ -5160,10 +4912,8 @@
 				635AB7901BE2FE2700C32919 /* ReturnMsgBaseClass.m in Sources */,
 				63A24C5B1BE063A90036E8EF /* CALayer+Anim.m in Sources */,
 				638A16FC1E517D9F00AB8AB6 /* NSValue+Compat.m in Sources */,
-				CC6F06851F750A5B00FA889E /* CapitalListModel.m in Sources */,
 				CC49BA061FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */,
 				637636E91D76A72A00E93289 /* LewPopupViewAnimationFade.m in Sources */,
-				842CA0E31F453B4A00A2150B /* HomeParam.m in Sources */,
 				849AC26E1FF0FABE005E435F /* FXD_MXVerifyManager.m in Sources */,
 				63553B151E5EEF1C00B2C1FF /* FaceIDOCRFront.m in Sources */,
 				849459D31FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift in Sources */,
@@ -5180,7 +4930,6 @@
 				84420A611ED678E200DFBFE0 /* LoginView.m in Sources */,
 				637636EC1D76A72A00E93289 /* UIViewController+LewPopupViewController.m in Sources */,
 				638C3F391CF564A4000446A7 /* SquareRepaymentAvailableRedpackets.m in Sources */,
-				CCE3BE191ED2D36E004C35A4 /* SendSmsModel.m in Sources */,
 				637637091D79670D00E93289 /* UILabel+FlickerNumber.m in Sources */,
 				63DB3FBD1E1DE41700FBE1C4 /* RTRootNavigationController.m in Sources */,
 				636B1B1F1C1FDDD100450358 /* MBPAlertView.m in Sources */,
@@ -5189,7 +4938,6 @@
 				8438F7141EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */,
 				637963A81CABD0F8002A5910 /* ApprovalAmountBaseClass.m in Sources */,
 				843FF1F51F20860B00ECCE16 /* PaymentViewModel.m in Sources */,
-				CCFA2DCA1EB02FFE0071F46B /* HomeProductList.m in Sources */,
 				1A686DB01C1E961C009227A9 /* NextViewCell.m in Sources */,
 				63A24C591BE063A90036E8EF /* NSString+File.m in Sources */,
 				843614A41F0CF9130036201A /* BaseResultModel.m in Sources */,
@@ -5209,7 +4957,6 @@
 				0FEACE241CA10B480027859A /* NSString+Validate.m in Sources */,
 				63FF48581B6F15DB009E384C /* FXDBaseTabBarVCModule.m in Sources */,
 				6348310E1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m in Sources */,
-				CCEC9C931EE5095000452291 /* BankCardsParamModel.m in Sources */,
 				6395E2AA1BAFA14E00B7AFC2 /* FXD_NetWorkRequestManager.m in Sources */,
 				CC3BCC141FBABEC50042A738 /* MessageCell.swift in Sources */,
 				63A24C5A1BE063A90036E8EF /* CoreArchive.m in Sources */,
@@ -5220,7 +4967,6 @@
 				6300CC0B1E4AE5FD0012B05A /* CareerParse.m in Sources */,
 				63FC24F61D98F7E9006F58F3 /* YYTextArchiver.m in Sources */,
 				638A16FD1E517D9F00AB8AB6 /* UIBezierPath.m in Sources */,
-				636B30E91DD41B330014DB7B /* Approval.m in Sources */,
 				636B1BA31C30DBCB00450358 /* SMSViewModel.m in Sources */,
 				841A48E01FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift in Sources */,
 				638A170A1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m in Sources */,
@@ -5229,7 +4975,6 @@
 				638A16F21E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m in Sources */,
 				CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */,
 				638A16FA1E517D9F00AB8AB6 /* CADisplayLink.m in Sources */,
-				CCE3BE1E1ED2D424004C35A4 /* BankCardsModel.m in Sources */,
 				63878FE41C1519CD008E1CF9 /* FXD_Tool.m in Sources */,
 				CCCC0A8E1F677B9B007E1EB0 /* UserDataResult.m in Sources */,
 				CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
@@ -5273,7 +5018,6 @@
 				CC6E696320561565005853BB /* SmsCodeModel.m in Sources */,
 				63FC24F91D98F7E9006F58F3 /* YYTextRubyAnnotation.m in Sources */,
 				63145AB21CA2952400D04ED8 /* LoginMsgBaseClass.m in Sources */,
-				8436149D1F0CF57C0036201A /* P2PContactContenParam.m in Sources */,
 				6326C9ED1BF0B15700FD23A8 /* GetMoneyProcessUserBean.m in Sources */,
 				CCDEDF601EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m in Sources */,
 				63553AD81E5D2A4200B2C1FF /* DataDisplayCell.m in Sources */,
@@ -5290,7 +5034,6 @@
 				63F254861E49A45900852CF1 /* HMScannerBorder.m in Sources */,
 				638A17011E517D9F00AB8AB6 /* LOTMask.m in Sources */,
 				843FF1F81F20863600ECCE16 /* PaymentDetailModel.m in Sources */,
-				84BC53E01FF4DA1400FE58E8 /* QryUserStatusParamModel.m in Sources */,
 				CCCFFADD20609D5E008556D2 /* NewProtocolParamModel.m in Sources */,
 				63145AB41CA2952400D04ED8 /* LoginMsgResult.m in Sources */,
 				CCCFFAE12060B6EE008556D2 /* HgLoanProtoolListModel.m in Sources */,
@@ -5344,7 +5087,6 @@
 				63A24C691BE063A90036E8EF /* UIImage+FixOrientation.m in Sources */,
 				CC742DCF2052704B00D645CC /* P2PViewController.m in Sources */,
 				630D46171BCCD2FB00874064 /* UpdateDevIDViewController.m in Sources */,
-				CCE3BE281ED2D655004C35A4 /* QueryCardInfo.m in Sources */,
 				637636EA1D76A72A00E93289 /* LewPopupViewAnimationSlide.m in Sources */,
 				63A24C6A1BE063A90036E8EF /* UIImage+Water.m in Sources */,
 				84E62D171FDA6D2500B7F870 /* SaveCustomerCareerInfoParam.m in Sources */,
@@ -5412,18 +5154,14 @@
 				CC0346291F3C4FBF001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */,
 				84ED5B741F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
 				843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */,
-				843614A61F0CFD4B0036201A /* P2PContactContentModel.m in Sources */,
 				84E306D01F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
 				843614A51F0CFD320036201A /* BaseResultModel.m in Sources */,
-				8436149E1F0CF7440036201A /* P2PContactContenParam.m in Sources */,
 				84A635131F01096900146A8A /* MobilePhoneOperatorParamModel.m in Sources */,
 				84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */,
 				845017321ED7D051008055E4 /* LoginView.m in Sources */,
 				842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */,
 				8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
-				CCFA2DCB1EB043C70071F46B /* HomeProductList.m in Sources */,
 				84BC53D41FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */,
-				842CA0E41F453B4A00A2150B /* HomeParam.m in Sources */,
 				CC0DF95A1EA5B1090024841A /* NSData+AES.m in Sources */,
 				CC594E681FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */,
 				CC742DAD204E730700D645CC /* SubmitAccountParamModel.m in Sources */,
@@ -5454,12 +5192,10 @@
 				CC0DF97A1EA5B1090024841A /* BaseViewController.m in Sources */,
 				CC0DF97B1EA5B1090024841A /* UIImage+Cut.m in Sources */,
 				CC742DC820526FD900D645CC /* HG_Manager.m in Sources */,
-				CCCDA87D1EDFAD0B00B48DFF /* SaveLoanCaseModel.m in Sources */,
 				84CC899A1F593C1E00537910 /* ApplicaitonModel.m in Sources */,
 				849AC2581FF09721005E435F /* HighRankingAuthTableViewCell.swift in Sources */,
 				84A380311FAC40A2008FB7AF /* UserDataEvaluationVCModules.swift in Sources */,
 				CC0DF97D1EA5B1090024841A /* RegionResult.m in Sources */,
-				CCCB27A21FB2F1C100412632 /* DrawLotteryModel.m in Sources */,
 				CC0DF97E1EA5B1090024841A /* TAAnimatedDotView.m in Sources */,
 				8411DA121FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */,
 				CC0DF97F1EA5B1090024841A /* YYTextRunDelegate.m in Sources */,
@@ -5486,8 +5222,6 @@
 				CC0DF9921EA5B1090024841A /* FXD_Utility.m in Sources */,
 				CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */,
 				848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
-				84A3803A1FAC41D7008FB7AF /* SesameCreditCertificationVCModules.m in Sources */,
-				CCCDA8811EDFAEAE00B48DFF /* SaveLoanCaseParamModel.m in Sources */,
 				CC0DF9951EA5B1090024841A /* (null) in Sources */,
 				CC0DF9971EA5B1090024841A /* (null) in Sources */,
 				CC0DF9981EA5B1090024841A /* LOTLayerView.m in Sources */,
@@ -5538,13 +5272,11 @@
 				84F87F441FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift in Sources */,
 				8438F71E1EE165460089E121 /* changePasswordParam.m in Sources */,
 				CC4BB6101F17712E0027A0AA /* LevelDescriptionView.m in Sources */,
-				8446AC041EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */,
 				84F1E2A01FD90EE0007D3381 /* UserDataInformationModel.m in Sources */,
 				84E306C81F97224E00C97D72 /* DiscountCouponListVCModules.swift in Sources */,
 				CC0DF9C81EA5B1090024841A /* YYTextKeyboardManager.m in Sources */,
 				CC0DF9CA1EA5B1090024841A /* LOTShapeStroke.m in Sources */,
 				84A380271FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.m in Sources */,
-				CCCDA8891EE028DD00B48DFF /* SendSmsParamModel.m in Sources */,
 				CC0DF9CC1EA5B1090024841A /* UIDevice+YYAdd.m in Sources */,
 				84A37FF91FAC12A8008FB7AF /* QRCodePopView.m in Sources */,
 				CC6F06941F7DF6C200FA889E /* ShanLinBackAlertView.swift in Sources */,
@@ -5558,7 +5290,6 @@
 				CC0DF9D41EA5B1090024841A /* NSString+AES.m in Sources */,
 				CC0DF9D61EA5B1090024841A /* ReconfrInfoModel.m in Sources */,
 				CC0DF9D71EA5B1090024841A /* UIApplication+Extend.m in Sources */,
-				CC6CBA851F5AB9620015C92C /* ApplicationStatusModel.m in Sources */,
 				CC0DF9DB1EA5B1090024841A /* LewPopupViewAnimationSpring.m in Sources */,
 				CC0DF9DC1EA5B1090024841A /* YYTextUtilities.m in Sources */,
 				CC0DF9DD1EA5B1090024841A /* LOTShapeTrimPath.m in Sources */,
@@ -5566,8 +5297,6 @@
 				CC0DF9E61EA5B1090024841A /* LOTShapeLayerView.m in Sources */,
 				CC0DF9E71EA5B1090024841A /* RepayMentAvailableRedpackets.m in Sources */,
 				CC0DF9E81EA5B1090024841A /* GlobalConfig.m in Sources */,
-				CCAA8EB71F5940CC00278D16 /* RenewalModel.m in Sources */,
-				CC0DF9EB1EA5B1090024841A /* P2PAgreeMentModel.m in Sources */,
 				CC0DF9EC1EA5B1090024841A /* GetCustomerBaseViewModel.m in Sources */,
 				CC0DF9ED1EA5B1090024841A /* YYTextInput.m in Sources */,
 				CC0DF9F01EA5B1090024841A /* MyCardsViewController.m in Sources */,
@@ -5586,13 +5315,11 @@
 				CC5FC5AF1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift in Sources */,
 				840911A31F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */,
 				84ED5B6C1F4AC606004C0A59 /* SeniorCertificationView.m in Sources */,
-				84BC53E31FF4DA1400FE58E8 /* QryUserStatusModel.m in Sources */,
 				CC0DF9FD1EA5B1090024841A /* Custom_BaseInfoExt.m in Sources */,
 				84C45C091FBC55860086E8DB /* DiscountTicketParam.m in Sources */,
 				CC0DFA001EA5B1090024841A /* HMScanner.m in Sources */,
 				CC0DFA011EA5B1090024841A /* NSString+YYAdd.m in Sources */,
 				CC0DFA021EA5B1090024841A /* YYTextParser.m in Sources */,
-				CCE3BE1A1ED2D36E004C35A4 /* SendSmsModel.m in Sources */,
 				CC0DFA041EA5B1090024841A /* NSString+Password.m in Sources */,
 				84230CFE1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
 				CC0DFA071EA5B1090024841A /* ApprovalAmountExt.m in Sources */,
@@ -5615,7 +5342,6 @@
 				CC0DFA161EA5B1090024841A /* SquareRepaymentResult.m in Sources */,
 				CC0DFA171EA5B1090024841A /* FaceIDOCRBack.m in Sources */,
 				CC0DFA181EA5B1090024841A /* AboutViewController.m in Sources */,
-				CCE3BE291ED2D655004C35A4 /* QueryCardInfo.m in Sources */,
 				CC0DFA1C1EA5B1090024841A /* HMScannerViewController.m in Sources */,
 				CC0DFA1D1EA5B1090024841A /* Model.m in Sources */,
 				84DFBED01F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */,
@@ -5651,7 +5377,6 @@
 				CCA181A41FC80E1E0094DA58 /* NonePageView.swift in Sources */,
 				CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */,
 				CC0DFA471EA5B1090024841A /* FXDBaseTabBarVCModule.m in Sources */,
-				CCEC9C941EE5095000452291 /* BankCardsParamModel.m in Sources */,
 				CC6E696820562D10005853BB /* SubmitInfoModel.m in Sources */,
 				84E306CB1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
 				CC594E6C1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */,
@@ -5666,9 +5391,7 @@
 				84BC53DA1FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */,
 				CC0DFA551EA5B1090024841A /* CareerParse.m in Sources */,
 				CC0DFA561EA5B1090024841A /* YYTextArchiver.m in Sources */,
-				CC6F06861F750A5B00FA889E /* CapitalListModel.m in Sources */,
 				CC0DFA571EA5B1090024841A /* UIBezierPath.m in Sources */,
-				CC0DFA581EA5B1090024841A /* Approval.m in Sources */,
 				CC0DFA5A1EA5B1090024841A /* SMSViewModel.m in Sources */,
 				CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */,
 				CC49BA041FC516D000232041 /* WithdrawHeaderView.swift in Sources */,
@@ -5727,7 +5450,6 @@
 				CC45E72C1FD78FF500DE803D /* ShowMsgPreviewModel.m in Sources */,
 				CC0DFA8F1EA5B1090024841A /* UIWindow+Launch.m in Sources */,
 				CC0DFA901EA5B1090024841A /* UIColor+Expanded.m in Sources */,
-				84BC53E11FF4DA1400FE58E8 /* QryUserStatusParamModel.m in Sources */,
 				CC0DFA921EA5B1090024841A /* UIImage+Extend.m in Sources */,
 				CC0DFA931EA5B1090024841A /* NSDate+Extend.m in Sources */,
 				CCCFFADE20609D5E008556D2 /* NewProtocolParamModel.m in Sources */,
@@ -5744,7 +5466,6 @@
 				CC0DFAA01EA5B1090024841A /* GetMoneyProcessResult.m in Sources */,
 				CC0DFAA21EA5B1090024841A /* LOTShapePath.m in Sources */,
 				CC742DB7204FB9C700D645CC /* BankListCell.swift in Sources */,
-				CCE3BE1F1ED2D424004C35A4 /* BankCardsModel.m in Sources */,
 				840DFF701FE27DEC00148DEE /* InvationViewModel.m in Sources */,
 				CC0DFAA31EA5B1090024841A /* YYTextView.m in Sources */,
 				CC0DFAA51EA5B1090024841A /* CheckUtils.m in Sources */,

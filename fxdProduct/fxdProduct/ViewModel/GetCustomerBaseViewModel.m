@@ -7,7 +7,6 @@
 //
 
 #import "GetCustomerBaseViewModel.h"
-#import "Custom_BaseInfo.h"
 
 
 @implementation GetCustomerBaseViewModel

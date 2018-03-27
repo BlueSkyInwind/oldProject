@@ -7,16 +7,13 @@
 //
 
 #import "HomeViewModel.h"
-#import "HomeParam.h"
+
 @implementation HomeViewModel
 
 -(void)homeDataRequest{
     
-    HomeParam * homeParam = [[HomeParam alloc]init];
-//    homeParam.channel = PLATFORM;
-    NSDictionary * paramDic = [homeParam toDictionary];
     //http://192.168.12.109:8005/summary?
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_NewSummary_url] isNeedNetStatus:false isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_NewSummary_url] isNeedNetStatus:false isNeedWait:true parameters:nil finished:^(EnumServerStatus status, id object) {
         DLog(@"%@",object);
         if (self.returnBlock) {
             self.returnBlock(object);
