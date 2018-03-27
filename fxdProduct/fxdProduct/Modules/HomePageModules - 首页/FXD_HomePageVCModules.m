@@ -214,23 +214,16 @@
                 _bgView.hidden = true;
                 [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
             }
-            
         }else{
-            
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
-            
         }
-        
     } WithFaileBlock:^{
         
     }];
     [messageVM countStationLetterMsg];
 }
 
-
-
 #pragma mark 首页navigation点击事件
-
 /**
  首页二维码弹窗
  */
@@ -930,6 +923,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+
+
 
 /*
 #pragma mark - Navigation

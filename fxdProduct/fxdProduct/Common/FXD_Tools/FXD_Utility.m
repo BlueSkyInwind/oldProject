@@ -54,7 +54,6 @@
     [DataWriteAndRead writeDataWithkey:UserInfomation value:nil];
     [FXD_Utility sharedUtility].isActivityShow = true;
     [FXD_Utility sharedUtility].isHomeChooseShow = true;
-    
 }
 
 @end

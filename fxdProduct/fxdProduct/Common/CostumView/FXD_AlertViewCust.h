@@ -45,6 +45,10 @@ typedef void (^ClickBlock)(NSInteger index);
                    sureTitle:(NSString *)sureTitle
                  compleBlock:(ClickBlock)clickIndexBlock;
 
+/**
+ 手动取消
+ */
+-(void)dismissFXDAlertView;
 
 /**
  身份证认证结果提示处理

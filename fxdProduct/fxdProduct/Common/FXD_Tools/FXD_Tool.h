@@ -23,7 +23,6 @@
 + (NSString *)getAppVersion;
 //工程名字
 + (NSString *)getProjectName;
-
 //获取今天日期
 + (NSString *)getToday;
 //获取现在的时间

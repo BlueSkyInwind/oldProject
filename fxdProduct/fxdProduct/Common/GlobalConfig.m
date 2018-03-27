@@ -21,22 +21,22 @@ NSString * const _mainTwo_new_url  =  @"http://h5.faxindai.com/coregw/client/";
 //http://192.168.13.173:8005/ 张强本地
 
 //测试导流 192.168.6.134
-NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-NSString * const _main_new_url  =  @"http://h5.test.fxds/apigw/client/";
-NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
-NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
-NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
-
-//NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-//NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-//NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
-//NSString * const _main_new_url  =  @"http://h5.dev.fxds/apigw/client/";
-//NSString * const _mainTwo_new_url  =  @"http://h5.dev.fxds/coregw/client/";
-//NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
+//NSString * const _main_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+//NSString * const _main_new_url  =  @"http://h5.test.fxds/apigw/client/";
+//NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
+//NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
 //NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+
+NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
+NSString * const _main_new_url  =  @"http://h5.dev.fxds/apigw/client/";
+NSString * const _mainTwo_new_url  =  @"http://h5.dev.fxds/coregw/client/";
+NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
+NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //UAT环境
 //NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
@@ -237,6 +237,30 @@ NSString * const    _increaseAmount_url               =    @"increaseQuotaApply"
 
 //获取合规开户信息
 NSString * const    _account_url    =    @"membership/hg/account/info";
+
+//对接合规平台，换绑卡发送短信验证码
+NSString * const    _sendSmsCode_url    =    @"paidcenter/hg/sendSmsCode";
+
+//用户开户接口
+NSString * const    _huifu_url    =    @"http/huifush/toRegister.jhtml";
+
+//激活老账户
+NSString * const    _bosAcctActivate_url    =    @"http/huifush/toBosAcctActivate.jhtml";
+
+//P2P平台账单期供查询 （还款账单）
+NSString * const    _querybillDetails_url       =    @"http/do.jhtml?router=prematurityService.querybillDetails";
+
+//主动还款接口 （自动划扣）
+NSString * const    _paymentService_url    =    @"http/do.jhtml?router=activrePaymentService.activrePayment";
+
+//平台合同列表
+//NSString * const    _contractList_url           =    @"http/do.jhtml?router=contractService.contractList";
+NSString * const    _contractList_url           =    @"hg/contractList.jhtml";
+
+//合同内容
+//NSString * const    _contractStr_url            =    @"http/do.jhtml?router=contractService.contractStr";
+NSString * const    _contractStr_url            =    @"hg/contractStr.jhtml";
+
 //发送短信接口
 NSString * const    _sendSms_url    =    @"paidcenter/hg/sendSmsCodeApi";
 //提交合规换绑银行卡信息
@@ -256,6 +280,15 @@ NSString *const     _ExperienceValue_url     =    @"operation/experienceValueGra
 
 //量子互助  http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767
 NSString * const    _liangzihuzhu_url    =    @"apigw/client/quonline/link";
+
+#pragma mark - 视频认证接口
+
+//获取认证视频信息
+NSString * const    _VideoVerify_url    =    @"membership/customerAuth/getUserRegisterVideoVerifyText";
+
+//上传视频
+NSString * const    _uploadVideoVideo_url    =    @"membership/customerAuth/userRegisterVideoVerify";
+
 
 #pragma Mark - 验证码类型
 

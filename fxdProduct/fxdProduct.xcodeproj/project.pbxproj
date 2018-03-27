@@ -363,6 +363,20 @@
 		843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843FF1F41F20860B00ECCE16 /* PaymentViewModel.m */; };
 		84420A611ED678E200DFBFE0 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
 		84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84420A601ED678E200DFBFE0 /* LoginView.xib */; };
+		8446AC031EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */; };
+		8446AC041EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */; };
+		8449AC232062457A00526935 /* YXAVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC1D2062457800526935 /* YXAVPlayer.swift */; };
+		8449AC242062457A00526935 /* YXAVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC1D2062457800526935 /* YXAVPlayer.swift */; };
+		8449AC252062457A00526935 /* YXBaseRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC1E2062457900526935 /* YXBaseRecordManager.swift */; };
+		8449AC262062457A00526935 /* YXBaseRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC1E2062457900526935 /* YXBaseRecordManager.swift */; };
+		8449AC272062457A00526935 /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC1F2062457900526935 /* YXMoviesRecordManager.swift */; };
+		8449AC282062457A00526935 /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC1F2062457900526935 /* YXMoviesRecordManager.swift */; };
+		8449AC292062457A00526935 /* YXRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC202062457900526935 /* YXRecordView.swift */; };
+		8449AC2A2062457A00526935 /* YXRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC202062457900526935 /* YXRecordView.swift */; };
+		8449AC2B2062457A00526935 /* YXRoundProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC212062457A00526935 /* YXRoundProgressView.swift */; };
+		8449AC2C2062457A00526935 /* YXRoundProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC212062457A00526935 /* YXRoundProgressView.swift */; };
+		8449AC2D2062457A00526935 /* VideoVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC222062457A00526935 /* VideoVerifyViewController.swift */; };
+		8449AC2E2062457A00526935 /* VideoVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC222062457A00526935 /* VideoVerifyViewController.swift */; };
 		844E5F4B1ED94C9C00753671 /* RegViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4A1ED94C9C00753671 /* RegViewModel.m */; };
 		844E5F4C1ED94C9C00753671 /* RegViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4A1ED94C9C00753671 /* RegViewModel.m */; };
 		844E5F501ED94DCB00753671 /* RegParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 844E5F4F1ED94DCB00753671 /* RegParamModel.m */; };
@@ -1678,6 +1692,14 @@
 		84420A5E1ED678E200DFBFE0 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		84420A5F1ED678E200DFBFE0 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		84420A601ED678E200DFBFE0 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		8446AC011EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitZhimaCreditAuthModel.h; sourceTree = "<group>"; };
+		8446AC021EBDCE67009E3551 /* SubmitZhimaCreditAuthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitZhimaCreditAuthModel.m; sourceTree = "<group>"; };
+		8449AC1D2062457800526935 /* YXAVPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXAVPlayer.swift; sourceTree = "<group>"; };
+		8449AC1E2062457900526935 /* YXBaseRecordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXBaseRecordManager.swift; sourceTree = "<group>"; };
+		8449AC1F2062457900526935 /* YXMoviesRecordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXMoviesRecordManager.swift; sourceTree = "<group>"; };
+		8449AC202062457900526935 /* YXRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXRecordView.swift; sourceTree = "<group>"; };
+		8449AC212062457A00526935 /* YXRoundProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXRoundProgressView.swift; sourceTree = "<group>"; };
+		8449AC222062457A00526935 /* VideoVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoVerifyViewController.swift; sourceTree = "<group>"; };
 		844E5F491ED94C9C00753671 /* RegViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewModel.h; sourceTree = "<group>"; };
 		844E5F4A1ED94C9C00753671 /* RegViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewModel.m; sourceTree = "<group>"; };
 		844E5F4E1ED94DCB00753671 /* RegParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegParamModel.h; sourceTree = "<group>"; };
@@ -3822,6 +3844,19 @@
 			path = LoginView;
 			sourceTree = "<group>";
 		};
+		8449AC1C2062455E00526935 /* VideoVerify */ = {
+			isa = PBXGroup;
+			children = (
+				8449AC222062457A00526935 /* VideoVerifyViewController.swift */,
+				8449AC212062457A00526935 /* YXRoundProgressView.swift */,
+				8449AC202062457900526935 /* YXRecordView.swift */,
+				8449AC1D2062457800526935 /* YXAVPlayer.swift */,
+				8449AC1E2062457900526935 /* YXBaseRecordManager.swift */,
+				8449AC1F2062457900526935 /* YXMoviesRecordManager.swift */,
+			);
+			path = VideoVerify;
+			sourceTree = "<group>";
+		};
 		844E5F4D1ED94D7E00753671 /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -3874,6 +3909,7 @@
 		84A380011FAC1D8D008FB7AF /* UserDataFillingModule - 用户资料填写 */ = {
 			isa = PBXGroup;
 			children = (
+				8449AC1C2062455E00526935 /* VideoVerify */,
 				84A380021FAC1D8D008FB7AF /* MGLiveViewController.h */,
 				84A380031FAC1D8D008FB7AF /* MGLiveViewController.m */,
 				84A380041FAC1D8D008FB7AF /* MyBottomView.h */,
@@ -4761,8 +4797,10 @@
 				63DE56FF1DE7CD2900747AE2 /* FXDWebViewController.m in Sources */,
 				CC742D98204E470100D645CC /* BankCardCell.swift in Sources */,
 				CC594E631FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */,
+				8449AC2D2062457A00526935 /* VideoVerifyViewController.swift in Sources */,
 				63FC24F41D98F7E9006F58F3 /* YYTextMagnifier.m in Sources */,
 				63ED33341B6B4570008B6085 /* BaseViewController.m in Sources */,
+				8449AC232062457A00526935 /* YXAVPlayer.swift in Sources */,
 				63A24C671BE063A90036E8EF /* UIImage+Cut.m in Sources */,
 				84A380141FAC1D8D008FB7AF /* MGLiveViewController.m in Sources */,
 				84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */,
@@ -4868,6 +4906,7 @@
 				84F87F471FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */,
 				84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */,
 				63C50E501E6804950035EE4F /* ReconfrInfoModel.m in Sources */,
+				8449AC292062457A00526935 /* YXRecordView.swift in Sources */,
 				639E88731CA1371800254216 /* UIApplication+Extend.m in Sources */,
 				CC6C93EE1F4AB58C00587C74 /* TrackRect.swift in Sources */,
 				637636EB1D76A72A00E93289 /* LewPopupViewAnimationSpring.m in Sources */,
@@ -4913,6 +4952,8 @@
 				63A24C5B1BE063A90036E8EF /* CALayer+Anim.m in Sources */,
 				638A16FC1E517D9F00AB8AB6 /* NSValue+Compat.m in Sources */,
 				CC49BA061FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */,
+				8449AC252062457A00526935 /* YXBaseRecordManager.swift in Sources */,
+				8449AC2B2062457A00526935 /* YXRoundProgressView.swift in Sources */,
 				637636E91D76A72A00E93289 /* LewPopupViewAnimationFade.m in Sources */,
 				849AC26E1FF0FABE005E435F /* FXD_MXVerifyManager.m in Sources */,
 				63553B151E5EEF1C00B2C1FF /* FaceIDOCRFront.m in Sources */,
@@ -4993,6 +5034,8 @@
 				636B1B9A1C2D153900450358 /* HomeViewModel.m in Sources */,
 				84C45C081FBC55860086E8DB /* DiscountTicketParam.m in Sources */,
 				638A16F41E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m in Sources */,
+				8449AC272062457A00526935 /* YXMoviesRecordManager.swift in Sources */,
+				0FFA91321C56058A008D91D2 /* telphoneView.m in Sources */,
 				638A16EF1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m in Sources */,
 				63E5C7611D4AFDBF009A633C /* CardInfo.m in Sources */,
 				84DFBECF1F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */,
@@ -5172,8 +5215,10 @@
 				847298381FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */,
 				CC742D99204E470100D645CC /* BankCardCell.swift in Sources */,
 				CC0DF9601EA5B1090024841A /* YYTextLayout.m in Sources */,
+				8449AC2E2062457A00526935 /* VideoVerifyViewController.swift in Sources */,
 				CC0DF9611EA5B1090024841A /* LoginMsgExt.m in Sources */,
 				84F87F411FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift in Sources */,
+				8449AC242062457A00526935 /* YXAVPlayer.swift in Sources */,
 				CC0DF9651EA5B1090024841A /* NSString+MD5Encrypt.m in Sources */,
 				CC0DF9661EA5B1090024841A /* HelpViewCell.m in Sources */,
 				CC0DF9671EA5B1090024841A /* LOTShapeCircle.m in Sources */,
@@ -5279,6 +5324,7 @@
 				84A380271FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.m in Sources */,
 				CC0DF9CC1EA5B1090024841A /* UIDevice+YYAdd.m in Sources */,
 				84A37FF91FAC12A8008FB7AF /* QRCodePopView.m in Sources */,
+				8449AC2A2062457A00526935 /* YXRecordView.swift in Sources */,
 				CC6F06941F7DF6C200FA889E /* ShanLinBackAlertView.swift in Sources */,
 				CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */,
 				CC0DF9CD1EA5B1090024841A /* YYTextEffectWindow.m in Sources */,
@@ -5326,6 +5372,8 @@
 				CC0DFA0A1EA5B1090024841A /* LabelCell.m in Sources */,
 				84F87F3E1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift in Sources */,
 				CC0DFA0C1EA5B1090024841A /* UIPasteboard+YYText.m in Sources */,
+				8449AC262062457A00526935 /* YXBaseRecordManager.swift in Sources */,
+				8449AC2C2062457A00526935 /* YXRoundProgressView.swift in Sources */,
 				CC0DFA0D1EA5B1090024841A /* TAAbstractDotView.m in Sources */,
 				CC0DFA0E1EA5B1090024841A /* GetMoneyHistoryBaseClass.m in Sources */,
 				849AC26F1FF0FABE005E435F /* FXD_MXVerifyManager.m in Sources */,
@@ -5409,6 +5457,7 @@
 				CC0DFA651EA5B1090024841A /* LOTMaskLayer.m in Sources */,
 				CC0DFA671EA5B1090024841A /* FXD_AlertViewCust.m in Sources */,
 				CC0DFA691EA5B1090024841A /* MoreViewController.m in Sources */,
+				8449AC282062457A00526935 /* YXMoviesRecordManager.swift in Sources */,
 				CC0DFA6A1EA5B1090024841A /* LOTGroupLayerView.m in Sources */,
 				CC0DFA6C1EA5B1090024841A /* LOTShapeFill.m in Sources */,
 				CC0DFA6D1EA5B1090024841A /* Custom_BaseInfo.m in Sources */,

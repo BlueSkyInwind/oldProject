@@ -78,13 +78,17 @@ class FXDAlertView: UIView {
         if titleStr == "" {
             updateNoTitleViewLayout()
         }
+        if cancelTitle == "" &&  sureTitle == "" {
+            updateNoBtnViewLayout()
+        }
+        
     }
     
     ///根据提示框内容自适应高度
     func adaptHeightContent(_ contentAttri:NSAttributedString) {
         let height = contentAttri.boundingRect(with:CGSize.init(width: Alert_width - 30, height: UIScreen.main.bounds.size.height), options: NSStringDrawingOptions(rawValue: NSStringDrawingOptions.RawValue(UInt8(NSStringDrawingOptions.usesLineFragmentOrigin.rawValue) | UInt8(NSStringDrawingOptions.usesFontLeading.rawValue))), context: nil).height
         var backHeight = height + header_Height + bottom_Height + 40
-        backHeight  = backHeight < 150.0 ? 150.0 : backHeight
+        backHeight  = backHeight < 180.0 ? 180.0 : backHeight
         backGroundView?.snp.updateConstraints({ (make) in
             make.height.equalTo(backHeight)
         })
@@ -289,6 +293,20 @@ extension FXDAlertView {
             make.bottom.equalTo((bottomView?.snp.top)!).offset(-10)
             make.left.equalTo((backGroundView?.snp.left)!).offset(15)
             make.right.equalTo((backGroundView?.snp.right)!).offset(-15)
+        })
+    }
+    
+    func updateNoBtnViewLayout() {
+        lineThree?.removeFromSuperview()
+        cancelBtn?.removeFromSuperview()
+        sureBtn?.removeFromSuperview()
+        bottomView?.removeFromSuperview()
+        contentLabel?.snp.remakeConstraints({ (make) in
+            make.top.equalTo((lineOne?.snp.bottom)!).offset(10)
+            make.bottom.equalTo((backGroundView?.snp.bottom)!).offset(-10)
+            make.left.equalTo((backGroundView?.snp.left)!).offset(15)
+            make.right.equalTo((backGroundView?.snp.right)!).offset(-15)
+
         })
     }
     
