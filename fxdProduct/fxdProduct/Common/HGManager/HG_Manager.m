@@ -56,6 +56,7 @@
             IntermediateViewController *controller = [[IntermediateViewController alloc]init];
             controller.type = @"2";
             [topRootViewController.navigationController pushViewController:controller animated:YES];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:baseResultM.friendErrMsg];
             
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:topRootViewController.view message:baseResultM.friendErrMsg];
@@ -93,6 +94,7 @@
             IntermediateViewController *controller = [[IntermediateViewController alloc]init];
             controller.type = @"2";
             [topRootViewController.navigationController pushViewController:controller animated:YES];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:baseResultM.friendErrMsg];
             
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:topRootViewController.view message:baseResultM.friendErrMsg];

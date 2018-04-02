@@ -278,6 +278,11 @@ NSString * const    _hgLoanProtoolList_url    =    @"product/getHgLoanProtoolLis
 NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
 //经验值体系-展示等级
 NSString *const     _ExperienceValue_url     =    @"operation/experienceValueGradeAPI/displayGrade";
+//首页贷超接口
+NSString *const     _compQuery_url     =    @"dc/compQuery";
+//导流平台跳转接口
+NSString *const     _getCompLink_url     =    @"dc/operation/user/getCompLink";
+
 
 #pragma mark - 对外导流接口
 

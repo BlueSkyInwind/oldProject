@@ -12,9 +12,6 @@
 
 @end
 
-//@implementation RedPacketMapModel
-//
-//@end
 
 @implementation WithdrawCashDetailListModel
 

@@ -141,14 +141,6 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
             certificationVC.isMobileAuth = isMobileAuth
             self.navigationController?.pushViewController(certificationVC, animated: true)
             break
-//        case 2:
-//            if userThirdPartCM?.zmIdentityEdit == "1" {
-//                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.zmIdentityDesc)
-//                return;
-//            }
-//            let sesameCreditVC  = SesameCreditCertificationVCModules.init()
-//            self.navigationController?.pushViewController(sesameCreditVC, animated: true)
-//            break
         case 2:
             if userThirdPartCM?.salaryEdit == "0" {
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.salaryDesc)

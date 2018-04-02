@@ -19,7 +19,6 @@
 #import <MGIDCard/MGIDCard.h>
 #import "SaveCustomBaseViewModel.h"
 #import "GTMBase64.h"
-#import "Custom_BaseInfo.h"
 #import "CustomerIDInfo.h"
 #import "DataDicParse.h"
 #import "PserInfoViewModel.h"

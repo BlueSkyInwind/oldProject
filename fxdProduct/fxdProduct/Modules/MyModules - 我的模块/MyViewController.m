@@ -41,8 +41,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    titleAry=@[@"我的消息",@"借还记录",@"我的银行卡",@"邀请好友",@"更多"];
-    imgAry=@[@"message",@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"icon_my_setup"];
+    titleAry=@[@"我的消息",@"借还记录",@"我的银行卡",@"邀请好友",@"提额中心",@"更多"];
+    imgAry=@[@"message",@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"quota_icon",@"icon_my_setup"];
     if (@available(iOS 11.0, *)) {
         self.MyViewTable.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
     }else{
@@ -324,10 +324,18 @@
         
         case 4:
         {
+            FXD_IncreaseAmountLimitViewController *increaseAmountLimit=[[FXD_IncreaseAmountLimitViewController alloc]init];
+            [self.navigationController pushViewController:increaseAmountLimit animated:YES];
+        }
+            break;
+            
+        case 5:
+        {
             MoreViewController *ticket=[[MoreViewController alloc]init];
             [self.navigationController pushViewController:ticket animated:YES];
         }
             break;
+            
         default:
             break;
     }

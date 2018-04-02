@@ -299,13 +299,13 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         cell.delegate = self
         cell.contentTextField?.delegate = self
         cell.titleLabel?.text = titleArray?[indexPath.row] as? String
-//        cell.contentTextField?.keyboardType = .numberPad
+        cell.contentTextField?.keyboardType = .numberPad
         
         if contentArray.count > 1{
             
             cell.contentTextField?.text = contentArray[indexPath.row] as? String
             cell.contentTextField?.tag = indexPath.row + 1
-            cell.contentTextField?.isEnabled = false
+//            cell.contentTextField?.isEnabled = false
             cell.contentTextField?.addTarget(self, action: #selector(contentTextFieldEdit(textField:)), for: .editingChanged)
             
             if indexPath.row == 3 {
@@ -319,7 +319,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
             }
         }
         
-        if indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 0 || indexPath.row == 1{
+        if indexPath.row == 4 || indexPath.row == 5 {
             cell.contentTextField?.isEnabled = true
         }
         if index > 0 && indexPath.row == 3 {
@@ -342,6 +342,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         if indexPath.row == 2 {
 
             let controller = BankListViewController()
+//            controller.bankListArray = openAccountModel?.bankList! as NSArray?
             controller.bankListArray = openAccountModel?.bankList as! NSArray
             controller.selectedTag = index
             controller.selectedBankClosure = {(bankModel: BankListModel, selectedTag : NSInteger) -> Void in
@@ -427,7 +428,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
             if baseResult.errCode == "0" {
                 let model = try? SmsCodeModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 self?.submitArray?.replaceObject(at: 5, with: model?.smsSeq as Any)
-                self?.submitArray?.replaceObject(at: 5, with: "AAAAAAAA")
+//                self?.submitArray?.replaceObject(at: 5, with: "AAAAAAAA")
                 self?.remainingSeconds = 60
                 self?.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self as Any, selector: #selector(self?.updateTime), userInfo: nil, repeats: true)
                 
@@ -452,7 +453,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
             if baseResult.errCode == "0" {
                 let model = try? SmsCodeModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 self?.submitArray?.replaceObject(at: 5, with: model?.smsSeq as Any)
-                self?.submitArray?.replaceObject(at: 5, with: "AAAAAAAA")
+//                self?.submitArray?.replaceObject(at: 5, with: "AAAAAAAA")
                 self?.remainingSeconds = 60
                 self?.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self as Any, selector: #selector(self?.updateTime), userInfo: nil, repeats: true)
                 

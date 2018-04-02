@@ -19,15 +19,6 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
     var smsCode : String?
     var cardInfo : CardInfo?
     
-//    var bankNameStr : String?
-//
-//    var index : Int = -1{
-//        didSet{
-//
-//            self.tableView?.reloadData()
-//        }
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -107,17 +98,12 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }
         let controller = OpenAccountViewController()
         controller.isOPenAccount = false
-        smsSeq = "AAAAAAAA"
+//        smsSeq = "AAAAAAAA"
 //        controller.orgSmsSeq = String(format:"%@%@",smsCode!,smsSeq!)
         controller.orgSmsCode = smsCode
         controller.orgSmsSeq = smsSeq
 //        controller.orgSmsSeq = "\(smsCode)" + "\(smsSeq)"
-//        let controller = BankListViewController()
-//        controller.selectedTag = index
-//        controller.selectedBankClosure = {(bankName: String, selectedTag : NSInteger) -> Void in
-//            self.index = selectedTag
-//            self.bankNameStr = bankName
-//        }
+
         self.navigationController?.pushViewController(controller, animated: true)
         print("点击下一步按钮")
     }

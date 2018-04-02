@@ -40,6 +40,7 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
         self.MXTask()
         obtainHighRanking()
         obtainViewConInfo()
+        addBackItem()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -97,7 +98,10 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
         headerView = FXD_displayAmountCommonHeaderView.init(frame: rect, amount: "")
         headerView?.titleLabel?.text = "提额"
         headerView?.hintWordLabel?.text = IncreaseAmountLimitMarkeords
-        headerView?.goBackBtn?.isHidden = true
+        headerView?.goBackBtn?.isHidden = false
+        headerView?.goBack = {
+            self.navigationController?.popViewController(animated: true)
+        }
         tableView?.tableHeaderView = headerView
     
     }
