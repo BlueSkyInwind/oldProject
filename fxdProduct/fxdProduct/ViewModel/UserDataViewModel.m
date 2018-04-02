@@ -9,6 +9,7 @@
 #import "UserDataViewModel.h"
 #import "FaceIDLiveModel.h"
 #import "RegionCodeParam.h"
+#import "IDCardUploadParam.h"
 
 @implementation UserDataViewModel
 
@@ -368,6 +369,41 @@
 //        }
 //    }];
 }
+
+#pragma mark - 用户身份证上传
+/**
+ 身份证图片上传
+
+ @param imageBase64Str  图片的base64
+ @param frontOfBack 正面或者反面
+ @param imageType 图片后缀名
+ */
+-(void)userIDCardUpload:(NSString *)imageBase64Str frontOfBack:(NSString *)frontOfBack imageType:(NSString *)imageType{
+    
+    IDCardUploadParam * param = [[IDCardUploadParam alloc]init];
+    param.idCardSelf = imageBase64Str;
+    param.side = frontOfBack;
+    param.suffix = imageType;
+    NSDictionary * dic = [param toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_UserIDCardUpload_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseVM  = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseVM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
+
+
+
+
+
+
 
 
 @end

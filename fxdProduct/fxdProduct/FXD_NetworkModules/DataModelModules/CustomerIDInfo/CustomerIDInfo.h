@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface CustomerIDInfo : JSONModel
 
 @property (nonatomic , strong) NSString<Optional>  *customer_name_;
@@ -15,6 +16,9 @@
 @property (nonatomic , strong) NSString<Optional>   *editable_field_;
 
 @property (nonatomic , strong) NSString<Optional>   *id_code_;
+
+@property (nonatomic , strong) NSString<Optional>   *idCardSelfUrl;
+
 
 @end
 

@@ -314,6 +314,10 @@
 		840911A31F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */; };
 		840DFF6F1FE27DEC00148DEE /* InvationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */; };
 		840DFF701FE27DEC00148DEE /* InvationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */; };
+		84114B3A20721743005A1DC9 /* libYX_BankCardScanLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84114B3920721743005A1DC9 /* libYX_BankCardScanLib.a */; };
+		84114B3B20721743005A1DC9 /* libYX_BankCardScanLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84114B3920721743005A1DC9 /* libYX_BankCardScanLib.a */; };
+		84114B3D20721923005A1DC9 /* YXLibraryResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84114B3C20721923005A1DC9 /* YXLibraryResource.bundle */; };
+		84114B3E20721923005A1DC9 /* YXLibraryResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84114B3C20721923005A1DC9 /* YXLibraryResource.bundle */; };
 		84117F561F60F6A700B7EAA9 /* LoadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */; };
 		84117F571F60F6A700B7EAA9 /* LoadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */; };
 		8411DA111FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */; };
@@ -343,6 +347,8 @@
 		842CA0EA1F45492000A2150B /* jcore-ios-1.1.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842CA0E61F45492000A2150B /* jcore-ios-1.1.5.a */; };
 		842CA0EB1F45492000A2150B /* jpush-ios-3.0.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842CA0E71F45492000A2150B /* jpush-ios-3.0.6.a */; };
 		842CA0EC1F45492000A2150B /* jpush-ios-3.0.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842CA0E71F45492000A2150B /* jpush-ios-3.0.6.a */; };
+		842D9CE7206B77940020C3C2 /* IDCardUploadParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D9CE6206B77940020C3C2 /* IDCardUploadParam.m */; };
+		842D9CEA206B832F0020C3C2 /* IDCardUploadParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D9CE6206B77940020C3C2 /* IDCardUploadParam.m */; };
 		843149861F75036700FA3678 /* MGIDCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149821F75035000FA3678 /* MGIDCardResource.bundle */; };
 		843149871F75036700FA3678 /* MGLivenessDetectionResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */; };
 		843149881F75037E00FA3678 /* MGIDCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149831F75035100FA3678 /* MGIDCard.framework */; };
@@ -351,6 +357,8 @@
 		8431498B1F75038D00FA3678 /* MGLivenessDetectionResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */; };
 		8431498C1F75039F00FA3678 /* MGIDCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149831F75035100FA3678 /* MGIDCard.framework */; };
 		8431498D1F75039F00FA3678 /* MGLivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149841F75035100FA3678 /* MGLivenessDetection.framework */; };
+		84332C89206CCCE8009A9121 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84332C88206CCCE8009A9121 /* CameraManager.swift */; };
+		84332C8A206CCD87009A9121 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84332C88206CCCE8009A9121 /* CameraManager.swift */; };
 		8436149D1F0CF57C0036201A /* P2PContactContenParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436149C1F0CF57C0036201A /* P2PContactContenParam.m */; };
 		8436149E1F0CF7440036201A /* P2PContactContenParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436149C1F0CF57C0036201A /* P2PContactContenParam.m */; };
 		843614A11F0CF8700036201A /* P2PContactContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843614A01F0CF8700036201A /* P2PContactContentModel.m */; };
@@ -1697,6 +1705,11 @@
 		840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAndOCInteraction.m; sourceTree = "<group>"; };
 		840DFF6D1FE27DEC00148DEE /* InvationViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvationViewModel.h; sourceTree = "<group>"; };
 		840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvationViewModel.m; sourceTree = "<group>"; };
+		84114B3320720FB2005A1DC9 /* YX_BankCardScanManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YX_BankCardScanManager.h; sourceTree = "<group>"; };
+		84114B3420720FC3005A1DC9 /* YXBankCardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXBankCardModel.h; sourceTree = "<group>"; };
+		84114B3520720FDA005A1DC9 /* YX_NagavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YX_NagavigationViewController.h; sourceTree = "<group>"; };
+		84114B3920721743005A1DC9 /* libYX_BankCardScanLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYX_BankCardScanLib.a; sourceTree = "<group>"; };
+		84114B3C20721923005A1DC9 /* YXLibraryResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YXLibraryResource.bundle; sourceTree = "<group>"; };
 		84117F551F60F6A700B7EAA9 /* LoadFailureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadFailureView.swift; sourceTree = "<group>"; };
 		8411DA101FB1927E008C571A /* FXD_VersionUpdatepop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_VersionUpdatepop.swift; sourceTree = "<group>"; };
 		84139DF01FF3A0A0000DA896 /* ProtocolParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProtocolParamModel.h; sourceTree = "<group>"; };
@@ -1719,10 +1732,13 @@
 		842CA0E61F45492000A2150B /* jcore-ios-1.1.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.5.a"; sourceTree = "<group>"; };
 		842CA0E71F45492000A2150B /* jpush-ios-3.0.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.6.a"; sourceTree = "<group>"; };
 		842CA0E81F45492000A2150B /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		842D9CE5206B77940020C3C2 /* IDCardUploadParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDCardUploadParam.h; sourceTree = "<group>"; };
+		842D9CE6206B77940020C3C2 /* IDCardUploadParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IDCardUploadParam.m; sourceTree = "<group>"; };
 		843149821F75035000FA3678 /* MGIDCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGIDCardResource.bundle; sourceTree = "<group>"; };
 		843149831F75035100FA3678 /* MGIDCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGIDCard.framework; sourceTree = "<group>"; };
 		843149841F75035100FA3678 /* MGLivenessDetection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGLivenessDetection.framework; sourceTree = "<group>"; };
 		843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGLivenessDetectionResource.bundle; sourceTree = "<group>"; };
+		84332C88206CCCE8009A9121 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		8436149B1F0CF57C0036201A /* P2PContactContenParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PContactContenParam.h; sourceTree = "<group>"; };
 		8436149C1F0CF57C0036201A /* P2PContactContenParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PContactContenParam.m; sourceTree = "<group>"; };
 		8436149F1F0CF8700036201A /* P2PContactContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PContactContentModel.h; sourceTree = "<group>"; };
@@ -2098,6 +2114,7 @@
 				032FA7DF1BE1BB3F00CF2D21 /* Security.framework in Frameworks */,
 				637963741CAB9CB8002A5910 /* CoreGraphics.framework in Frameworks */,
 				032FA7E11BE1BB4400CF2D21 /* SystemConfiguration.framework in Frameworks */,
+				84114B3A20721743005A1DC9 /* libYX_BankCardScanLib.a in Frameworks */,
 				63F824AE1BFB20CA00550978 /* OpenGLES.framework in Frameworks */,
 				849AC2661FF0EF56005E435F /* libMoxieSDK.a in Frameworks */,
 				637963721CAB9C9D002A5910 /* QuartzCore.framework in Frameworks */,
@@ -2157,6 +2174,7 @@
 				CC0DFAFE1EA5B1090024841A /* libsqlite3.0.tbd in Frameworks */,
 				CC0DFAFF1EA5B1090024841A /* Security.framework in Frameworks */,
 				CC0DFB001EA5B1090024841A /* CoreGraphics.framework in Frameworks */,
+				84114B3B20721743005A1DC9 /* libYX_BankCardScanLib.a in Frameworks */,
 				CC0DFB011EA5B1090024841A /* SystemConfiguration.framework in Frameworks */,
 				849AC2671FF0EF56005E435F /* libMoxieSDK.a in Frameworks */,
 				CC0DFB021EA5B1090024841A /* OpenGLES.framework in Frameworks */,
@@ -2726,6 +2744,7 @@
 		636EE32A1B662E5C00A1A3ED /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				84332C8B206CDD11009A9121 /* YXBankScan */,
 				842D46F91FAC722A0046A97A /* EncryptionModules */,
 				842CA0E51F4548D000A2150B /* JPush */,
 				632C587B1E5A933F00490C14 /* MGKit */,
@@ -3351,6 +3370,8 @@
 			children = (
 				63C50E4A1E67F6C10035EE4F /* CustomerIDInfo.h */,
 				63C50E4B1E67F6C10035EE4F /* CustomerIDInfo.m */,
+				842D9CE5206B77940020C3C2 /* IDCardUploadParam.h */,
+				842D9CE6206B77940020C3C2 /* IDCardUploadParam.m */,
 			);
 			path = CustomerIDInfo;
 			sourceTree = "<group>";
@@ -3439,6 +3460,7 @@
 				84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */,
 				848FC6461FFE132500918CE9 /* CommonTool.swift */,
 				848FC6491FFE137000918CE9 /* CommonExtention.swift */,
+				84332C88206CCCE8009A9121 /* CameraManager.swift */,
 				CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */,
 			);
 			path = Common;
@@ -3916,6 +3938,18 @@
 				6313DC0E1BB3E48800EB45DE /* DES */,
 			);
 			path = EncryptionModules;
+			sourceTree = "<group>";
+		};
+		84332C8B206CDD11009A9121 /* YXBankScan */ = {
+			isa = PBXGroup;
+			children = (
+				84114B3520720FDA005A1DC9 /* YX_NagavigationViewController.h */,
+				84114B3420720FC3005A1DC9 /* YXBankCardModel.h */,
+				84114B3320720FB2005A1DC9 /* YX_BankCardScanManager.h */,
+				84114B3920721743005A1DC9 /* libYX_BankCardScanLib.a */,
+				84114B3C20721923005A1DC9 /* YXLibraryResource.bundle */,
+			);
+			path = YXBankScan;
 			sourceTree = "<group>";
 		};
 		8436149A1F0CF4A50036201A /* contract */ = {
@@ -4685,6 +4719,7 @@
 				84A3803B1FAC41D7008FB7AF /* SesameCreditCertificationVCModules.xib in Resources */,
 				0FFA91621C589D76008D91D2 /* CheckViewIng.xib in Resources */,
 				6313DC171BB3F07B00EB45DE /* Images.xcassets in Resources */,
+				84114B3D20721923005A1DC9 /* YXLibraryResource.bundle in Resources */,
 				84A380321FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib in Resources */,
 				84ED5B5C1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */,
 				1AE5E6251C1EA5240099CCA0 /* AboutMainViewController.xib in Resources */,
@@ -4766,6 +4801,7 @@
 				84A3803C1FAC41D7008FB7AF /* SesameCreditCertificationVCModules.xib in Resources */,
 				845017311ED7CD88008055E4 /* LoginView.xib in Resources */,
 				84ED5B5D1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */,
+				84114B3E20721923005A1DC9 /* YXLibraryResource.bundle in Resources */,
 				84A380331FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib in Resources */,
 				CC0DFB191EA5B1090024841A /* CheckViewIng.xib in Resources */,
 				CC0DFB1A1EA5B1090024841A /* Images.xcassets in Resources */,
@@ -5264,6 +5300,7 @@
 				84A5696D1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
 				84BC53D91FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */,
 				638A16F21E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m in Sources */,
+				84332C89206CCCE8009A9121 /* CameraManager.swift in Sources */,
 				CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */,
 				638A16FA1E517D9F00AB8AB6 /* CADisplayLink.m in Sources */,
 				CCE3BE1E1ED2D424004C35A4 /* BankCardsModel.m in Sources */,
@@ -5277,6 +5314,7 @@
 				636B1B1E1C1FDDD100450358 /* FXD_AlertViewCust.m in Sources */,
 				CC8BC95C1FEB5871008E135E /* MineViewModel.m in Sources */,
 				633DF7891BDE22BF00A3998D /* MoreViewController.m in Sources */,
+				842D9CE7206B77940020C3C2 /* IDCardUploadParam.m in Sources */,
 				638A16EA1E517D9F00AB8AB6 /* LOTGroupLayerView.m in Sources */,
 				638A17031E517D9F00AB8AB6 /* LOTShapeFill.m in Sources */,
 				CC742D92204D42E100D645CC /* OpenAccountViewController.swift in Sources */,
@@ -5286,7 +5324,6 @@
 				84C45C081FBC55860086E8DB /* DiscountTicketParam.m in Sources */,
 				638A16F41E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m in Sources */,
 				8449AC272062457A00526935 /* YXMoviesRecordManager.swift in Sources */,
-				0FFA91321C56058A008D91D2 /* telphoneView.m in Sources */,
 				638A16EF1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m in Sources */,
 				63E5C7611D4AFDBF009A633C /* CardInfo.m in Sources */,
 				84DFBECF1F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */,
@@ -5433,6 +5470,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84332C8A206CCD87009A9121 /* CameraManager.swift in Sources */,
+				842D9CEA206B832F0020C3C2 /* IDCardUploadParam.m in Sources */,
 				84C61A141FA828F000626411 /* FindPassViewController.m in Sources */,
 				84C61A0F1FA8243200626411 /* FXD_LaunchConfiguration.m in Sources */,
 				84C619E41FA8173D00626411 /* BankCardNameVCModules.m in Sources */,
@@ -6027,6 +6066,8 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
+					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
+					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
 				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -6141,6 +6182,8 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
+					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
+					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -6234,6 +6277,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
@@ -6244,6 +6288,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
@@ -6279,7 +6324,10 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
+					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
+					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-isystem",
@@ -6350,6 +6398,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
@@ -6360,6 +6409,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
@@ -6395,7 +6445,10 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
+					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
+					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

@@ -92,6 +92,9 @@ NSString * const    _TheInternetbank_url    =    @"auth/ebank/ebankTaskSubmit";
 NSString * const    _HighRankingStatus_url    =    @"user/senior/info";
 //基础信息状态查询接口
 NSString * const    _UserBasicInformation_url    =    @"user/info/base";
+//身份证识别
+NSString * const    _UserIDCardUpload_url    =    @"membership/customerAuth/saveCustomerIDInfo2";
+
 //三方信息状态查询接口
 NSString * const    _UserThirdPartCertification_url    =    @"user/other/info";
 //联系人信息的完成状态
