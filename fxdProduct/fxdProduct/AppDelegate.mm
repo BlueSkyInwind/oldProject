@@ -184,7 +184,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     [[BSFingerSDK sharedInstance] cancelAll];
 }
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    
     completionHandler(UIBackgroundFetchResultNewData);
 }
 -(void)initJPush:(NSDictionary *)launchOptions{
@@ -256,9 +255,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
         
     }else if(application.applicationState == UIApplicationStateBackground){
         
-        
     }else if(application.applicationState == UIApplicationStateInactive){
-        
         
     }
     [JPUSHService handleRemoteNotification:userInfo];
@@ -266,8 +263,10 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 }
 -(void)NotificationJump:(NSDictionary *)contentInfo{
     
+    
+    
+    
 }
-
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];

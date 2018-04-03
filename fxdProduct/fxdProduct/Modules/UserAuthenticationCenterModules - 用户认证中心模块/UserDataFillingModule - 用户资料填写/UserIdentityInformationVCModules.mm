@@ -23,7 +23,6 @@
 #import "DataDicParse.h"
 #import "PserInfoViewModel.h"
 
-
 #define FirstComponent 0
 #define SubComponent 1
 #define ThirdComponent 2
