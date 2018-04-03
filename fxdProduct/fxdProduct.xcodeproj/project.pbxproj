@@ -355,9 +355,6 @@
 		8431498D1F75039F00FA3678 /* MGLivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149841F75035100FA3678 /* MGLivenessDetection.framework */; };
 		84332C89206CCCE8009A9121 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84332C88206CCCE8009A9121 /* CameraManager.swift */; };
 		84332C8A206CCD87009A9121 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84332C88206CCCE8009A9121 /* CameraManager.swift */; };
-		8436149D1F0CF57C0036201A /* P2PContactContenParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436149C1F0CF57C0036201A /* P2PContactContenParam.m */; };
-		8436149E1F0CF7440036201A /* P2PContactContenParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 8436149C1F0CF57C0036201A /* P2PContactContenParam.m */; };
-		843614A11F0CF8700036201A /* P2PContactContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843614A01F0CF8700036201A /* P2PContactContentModel.m */; };
 		843614A41F0CF9130036201A /* BaseResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843614A31F0CF9130036201A /* BaseResultModel.m */; };
 		843614A51F0CFD320036201A /* BaseResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843614A31F0CF9130036201A /* BaseResultModel.m */; };
 		8438F70F1EE14BD40089E121 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438F70E1EE14BD40089E121 /* ChangePasswordViewController.m */; };
@@ -1710,11 +1707,6 @@
 		843149841F75035100FA3678 /* MGLivenessDetection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGLivenessDetection.framework; sourceTree = "<group>"; };
 		843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGLivenessDetectionResource.bundle; sourceTree = "<group>"; };
 		84332C88206CCCE8009A9121 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
-		8436149B1F0CF57C0036201A /* P2PContactContenParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PContactContenParam.h; sourceTree = "<group>"; };
-		8436149C1F0CF57C0036201A /* P2PContactContenParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PContactContenParam.m; sourceTree = "<group>"; };
-		8436149F1F0CF8700036201A /* P2PContactContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PContactContentModel.h; sourceTree = "<group>"; };
-		843614A01F0CF8700036201A /* P2PContactContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PContactContentModel.m; sourceTree = "<group>"; };
-
 		843614A21F0CF9130036201A /* BaseResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseResultModel.h; sourceTree = "<group>"; };
 		843614A31F0CF9130036201A /* BaseResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseResultModel.m; sourceTree = "<group>"; };
 		8438F70D1EE14BD40089E121 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
@@ -3867,17 +3859,6 @@
 				84114B3C20721923005A1DC9 /* YXLibraryResource.bundle */,
 			);
 			path = YXBankScan;
-			sourceTree = "<group>";
-		};
-		8436149A1F0CF4A50036201A /* contract */ = {
-			isa = PBXGroup;
-			children = (
-				8436149B1F0CF57C0036201A /* P2PContactContenParam.h */,
-				8436149C1F0CF57C0036201A /* P2PContactContenParam.m */,
-				8436149F1F0CF8700036201A /* P2PContactContentModel.h */,
-				843614A01F0CF8700036201A /* P2PContactContentModel.m */,
-			);
-			path = contract;
 			sourceTree = "<group>";
 		};
 		8438F7111EE14D2D0089E121 /* MoreView */ = {

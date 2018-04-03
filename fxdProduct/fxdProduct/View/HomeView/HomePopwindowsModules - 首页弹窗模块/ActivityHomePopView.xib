@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,11 +17,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qDU-I0-SEc">
-                    <rect key="frame" x="0.0" y="0.0" width="300" height="510"/>
+                    <rect key="frame" x="35" y="60" width="230" height="390"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </imageView>
                 <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cua-JS-8FQ">
-                    <rect key="frame" x="274" y="0.0" width="26" height="26"/>
+                    <rect key="frame" x="239" y="0.0" width="26" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Cua-JS-8FQ" secondAttribute="height" multiplier="1:1" id="S8L-bc-UAb"/>
                     </constraints>
@@ -33,11 +33,11 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="qDU-I0-SEc" secondAttribute="trailing" id="EmR-js-V8D"/>
-                <constraint firstItem="qDU-I0-SEc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FkY-iu-hTV"/>
-                <constraint firstAttribute="bottom" secondItem="qDU-I0-SEc" secondAttribute="bottom" id="LfJ-Gz-bHv"/>
-                <constraint firstAttribute="trailing" secondItem="Cua-JS-8FQ" secondAttribute="trailing" id="OlE-q2-XUO"/>
-                <constraint firstItem="qDU-I0-SEc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pyq-Ku-unI"/>
+                <constraint firstAttribute="trailing" secondItem="qDU-I0-SEc" secondAttribute="trailing" constant="35" id="EmR-js-V8D"/>
+                <constraint firstItem="qDU-I0-SEc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="FkY-iu-hTV"/>
+                <constraint firstAttribute="bottom" secondItem="qDU-I0-SEc" secondAttribute="bottom" constant="60" id="LfJ-Gz-bHv"/>
+                <constraint firstAttribute="trailing" secondItem="Cua-JS-8FQ" secondAttribute="trailing" constant="35" id="OlE-q2-XUO"/>
+                <constraint firstItem="qDU-I0-SEc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="35" id="pyq-Ku-unI"/>
                 <constraint firstItem="Cua-JS-8FQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rSJ-Fp-E7O"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -48,7 +48,7 @@
                 <outlet property="closeBtn" destination="Cua-JS-8FQ" id="Cq0-jb-WV1"/>
                 <outlet property="imageView" destination="qDU-I0-SEc" id="A6f-D8-iUA"/>
             </connections>
-            <point key="canvasLocation" x="314" y="368.5"/>
+            <point key="canvasLocation" x="314" y="368"/>
         </view>
     </objects>
     <resources>

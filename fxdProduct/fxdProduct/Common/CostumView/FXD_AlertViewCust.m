@@ -31,50 +31,34 @@
     return sharedHHAlertInstance;
 }
 
--(void)popOverCenter:(PopViewType)type info:(id)info{
-    
-    id result = info;
+-(BOOL)popOverCenter:(PopViewType)type{
+    BOOL isPop = true;
     PopViewType popType = type;
-//    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:info,[NSNumber numberWithInteger:type], nil];
-//    [[FXD_Utility sharedUtility].popArray addObject:dic];
-//    NSDictionary * resultDic = [FXD_Utility sharedUtility].popArray.firstObject;
-//    NSNumber * index = resultDic.allKeys.firstObject;
-//    popType = index.integerValue;
-//    result = [resultDic objectForKey:index];
-    
-    if ([FXD_Utility sharedUtility].userInfo.isUpdate) {
-        if (self.fxdAlertView != nil) {
-            [self.fxdAlertView dismiss];
-            self.fxdAlertView = nil;
-        }
-        if (self.popView != nil) {
-//            [self.popView lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
-            self.popView = nil;
-        }
-    }
-        
     switch (popType) {
         case VersionUpdate:{
-            NSString * msg = result;
-            [self showAppVersionUpdate:msg isForce:[FXD_Utility sharedUtility].userInfo.isUpdate compleBlock:^(NSInteger index) {
-                if (index == 1) {
-                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
-                }
-            }];
+            isPop = true;
+        }
+            break;
+        case AbnormalLogin:{
+            isPop = true;
         }
             break;
         case Activities:{
-            
+            if ([FXD_Utility sharedUtility].userInfo.isUpdate || self.fxdAlertView) {
+                isPop = false;
+            }else{
+                isPop = true;
+            }
         }
             break;
-
         default:
             break;
     }
+    return isPop;
 }
 
 -(void)showAppVersionUpdate:(NSString *)content isForce:(BOOL)isForce compleBlock:(ClickBlock)clickIndexBlock{
-    if (self.versionUpdate) {
+    if (self.versionUpdate || ![self popOverCenter:VersionUpdate]) {
         return;
     }
     self.versionUpdate = [[FXD_VersionUpdatepop alloc] initWithContent:content isFroce:isForce];
@@ -88,7 +72,7 @@
 }
 
 -(void)homeActivityPopLoadImageUrl:(NSString *)urlStr ParentVC:(UIViewController*)vc  compleBlock:(ClickBlock)clickIndexBlock{
-    if (self.popView) {
+    if (self.popView || ![self popOverCenter:Activities]) {
         return;
     }
     self.popView = [ActivityHomePopView defaultPopupView];
@@ -105,6 +89,7 @@
     }];
     [self performSelector:@selector(homeActivitiesPopupsClose) withObject:self afterDelay:2];
 }
+
 /**
  首页活动弹窗关闭
  */
@@ -119,7 +104,7 @@
                    sureTitle:(NSString *)sureTitle
                  compleBlock:(ClickBlock)clickIndexBlock{
     
-    if (self.fxdAlertView) {
+    if (self.fxdAlertView || ![self popOverCenter:AbnormalLogin]) {
         return;
     }
 
@@ -141,7 +126,7 @@
                      sureTitle:(NSString *)sureTitle
                  compleBlock:(ClickBlock)clickIndexBlock{
     
-    if (self.fxdAlertView) {
+    if (self.fxdAlertView || ![self popOverCenter:AbnormalLogin]) {
         return;
     }
     if (attributeDic == nil) {
@@ -203,7 +188,7 @@
                    sureTitle:(NSString *)sureTitle
                  compleBlock:(ClickBlock)clickIndexBlock{
     
-    if (self.fxdAlertView) {
+    if (self.fxdAlertView || [self popOverCenter:AbnormalLogin]) {
         return;
     }
     NSMutableParagraphStyle *ornamentParagraph = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
