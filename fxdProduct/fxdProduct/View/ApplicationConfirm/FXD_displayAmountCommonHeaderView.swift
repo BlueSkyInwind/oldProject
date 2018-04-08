@@ -14,6 +14,7 @@ class FXD_displayAmountCommonHeaderView: UIView {
     var backGroundImage:UIImageView?
     var centerImage:UIImageView?
     var amountLabel:UILabel?
+    var amountTitleLabel:UILabel?
     var hintWordBackImage:UIImageView?
     var hintWordLabel:UILabel?
     var periodLabel:UILabel?
@@ -46,6 +47,15 @@ class FXD_displayAmountCommonHeaderView: UIView {
         self.amountLabel?.text = amount
         self.periodLabel?.text = periodNum
         self.periodAmountLabel?.text = periodAmount
+    }
+    
+    convenience init(frame: CGRect,amount:String,amountTitle:String) {
+        self.init(frame: frame)
+        self.amountLabel?.text = amount
+        if amountTitle != "" {
+            resetUI()
+            self.amountTitleLabel?.text = amountTitle
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -91,7 +101,7 @@ extension FXD_displayAmountCommonHeaderView{
         })
         
         goBackBtn = UIButton.init(type: UIButtonType.custom)
-//        goBackBtn?.setBackgroundImage(UIImage.init(named: "return_white"), for: UIControlState.normal)
+//     goBackBtn?.setBackgroundImage(UIImage.init(named: "return_white"), for: UIControlState.normal)
         goBackBtn?.setImage(UIImage.init(named: "return_white"), for: UIControlState.normal)
         goBackBtn?.addTarget(self, action: #selector(goBackAction), for: UIControlEvents.touchUpInside)
         backGroundImage?.addSubview(goBackBtn!)
@@ -127,7 +137,7 @@ extension FXD_displayAmountCommonHeaderView{
             make.left.equalTo((backGroundImage?.snp.left)!).offset(20)
             make.right.equalTo((backGroundImage?.snp.right)!).offset(-20)
         })
- 
+        
         hintWordLabel = UILabel()
         hintWordLabel?.textAlignment = NSTextAlignment.center
         hintWordLabel?.font = UIFont.yx_systemFont(ofSize: 14)
@@ -152,6 +162,24 @@ extension FXD_displayAmountCommonHeaderView{
         periodAmountLabel?.snp.makeConstraints({ (make) in
             make.right.equalTo((hintWordBackImage?.snp.right)!).offset(-10)
             make.centerY.equalTo((hintWordBackImage?.snp.centerY)!)
+        })
+    }
+    
+    func resetUI()  {
+        
+        amountTitleLabel = UILabel()
+        amountTitleLabel?.textColor = UIColor.black
+        amountTitleLabel?.textAlignment = NSTextAlignment.center
+        amountTitleLabel?.font = UIFont.yx_boldSystemFont(ofSize: 14)
+        centerImage?.addSubview(amountTitleLabel!)
+        amountTitleLabel?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo((centerImage?.snp.centerX)!)
+            make.centerY.equalTo((centerImage?.snp.centerY)!).offset(-15)
+        })
+        
+        amountLabel?.snp.remakeConstraints({ (make) in
+            make.centerX.equalTo((centerImage?.snp.centerX)!)
+            make.centerY.equalTo((centerImage?.snp.centerY)!).offset(10)
         })
     }
 }

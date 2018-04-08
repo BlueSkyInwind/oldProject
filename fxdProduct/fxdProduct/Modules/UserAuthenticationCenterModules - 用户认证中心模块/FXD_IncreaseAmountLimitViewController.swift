@@ -46,8 +46,8 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        
     }
+    
     func MXTask()  {
         FXD_MXVerifyManager.sharedInteraction().configMoxieSDKViewcontroller(self) { (result) in
             let  dic = result! as NSDictionary
@@ -103,7 +103,6 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
             self.navigationController?.popViewController(animated: true)
         }
         tableView?.tableHeaderView = headerView
-    
     }
     
     @objc func appraisalBottonClick(){
@@ -123,7 +122,6 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
         }
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

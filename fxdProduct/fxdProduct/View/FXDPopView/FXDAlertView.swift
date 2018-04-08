@@ -306,7 +306,6 @@ extension FXDAlertView {
             make.bottom.equalTo((backGroundView?.snp.bottom)!).offset(-10)
             make.left.equalTo((backGroundView?.snp.left)!).offset(15)
             make.right.equalTo((backGroundView?.snp.right)!).offset(-15)
-
         })
     }
     
