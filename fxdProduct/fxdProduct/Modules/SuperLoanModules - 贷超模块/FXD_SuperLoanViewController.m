@@ -111,6 +111,9 @@
             [_tableView.mj_footer endRefreshing];
             [_tableView reloadData];
         }else{
+            
+            [_tableView.mj_header endRefreshing];
+            [_tableView.mj_footer endRefreshing];
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
@@ -136,7 +139,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        return 60;
+        return 80;
     }
     return 110;
 }
@@ -314,6 +317,33 @@
             [_filterView removeFromSuperview];
             
         }];
+    }
+}
+
+-(void)tabBtnClick:(UIButton *)sender{
+    
+    NSInteger tag = sender.tag;
+    switch (tag) {
+        case 101:
+            [_superLoanHeaderCell.loanBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+            [_superLoanHeaderCell.gameBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.tourismBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"贷款"];
+            break;
+        case 102:
+            [_superLoanHeaderCell.loanBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.gameBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+            [_superLoanHeaderCell.tourismBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"游戏"];
+            break;
+        case 103:
+            [_superLoanHeaderCell.loanBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.gameBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.tourismBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"旅游"];
+            break;
+        default:
+            break;
     }
 }
 

@@ -100,6 +100,7 @@
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, _k_w, _k_h-64) style:UITableViewStylePlain];
     [self.tableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"HomePageCell"];
+    [self.tableView registerClass:[SDCycleScrollCell class] forCellReuseIdentifier:@"SDCycleScrollCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.scrollEnabled = true;
@@ -520,7 +521,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -531,10 +532,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    if ([_homeProductList.flag isEqualToString:@"7"] || [_homeProductList.flag isEqualToString:@"14"]) {
-        return _k_h-_k_w*0.44-113+110;
+    if (indexPath.section == 0) {
+        return 35;
     }
-    return _k_h-_k_w*0.44-113;
+    if ([_homeProductList.flag isEqualToString:@"7"] || [_homeProductList.flag isEqualToString:@"14"]) {
+        return _k_h-_k_w*0.44-113+110-35;
+    }
+    return _k_h-_k_w*0.44-113-35;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -545,6 +549,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    if (indexPath.section == 0) {
+        
+        SDCycleScrollCell *sdcycleScrollCell = [tableView dequeueReusableCellWithIdentifier:@"SDCycleScrollCell"];
+        sdcycleScrollCell.sdCycleScrollview.delegate = self;
+        sdcycleScrollCell.sdCycleScrollview.titlesGroup = _homeProductList.paidList;
+        return sdcycleScrollCell;
+        
+    }
     HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     homeCell.backgroundColor = rgb(250, 250, 250);
@@ -725,7 +737,8 @@
  更多按钮
  */
 -(void)moreBtnClick{
-    [self pushMoreProductPlatform];
+    self.tabBarController.selectedIndex = 1;
+//    [self pushMoreProductPlatform];
 }
 
 -(void)pushMoreProductPlatform{
@@ -916,6 +929,17 @@
             break;
     }
 }
+
+
+-(void)bottomBtnClick{
+    
+    
+}
+
+-(void)withdrawBtnClick{
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

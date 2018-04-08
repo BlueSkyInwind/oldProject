@@ -91,3 +91,5 @@ let COMMPLIANCE_LINE_COLOR = UIColor.init(red: 19/255.0, green: 136/255.0, blue:
 let REFRESH_TITLE_COLOR = UIColor.init(red: 167/255.0, green: 167/255.0, blue: 167/255.0, alpha: 1)
 
 let HOME_ARROW_COLOR = UIColor.init(red: 178.5/255.0, green: 178.5/255.0, blue: 178.5/255.0, alpha: 1)
+
+let GAME_COLOR = UIColor.init(red: 25.5/255.0, green: 25.5/255.0, blue: 25.5/255.0, alpha: 1)

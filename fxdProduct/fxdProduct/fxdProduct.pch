@@ -55,6 +55,7 @@
 #import "FXD_MXVerifyManager.h"
 #import "FXD_LaunchConfiguration.h"
 #import "HG_Manager.h"
+#import "SDCycleScrollView.h"
 #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0
 

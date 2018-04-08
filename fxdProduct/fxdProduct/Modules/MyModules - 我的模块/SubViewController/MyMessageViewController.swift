@@ -25,6 +25,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         //随机生成一些初始化数据
         configureView()
         createNoneView()
+        setNavQRRightBar()
      
         // Do any additional setup after loading the view.
     }
@@ -40,6 +41,24 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         self.page = 0
         getData(isHeaderFresh: true)
     }
+    
+    func setNavQRRightBar(){
+        
+        let clearBtn = UIButton.init(frame: CGRect(x:0,y:0,width:23,height:18))
+        clearBtn.setTitle("清空", for: .normal)
+        clearBtn.setTitleColor(UIColor.white, for: .normal)
+        clearBtn.addTarget(self, action: #selector(clearBtnClick), for: .touchUpInside)
+        let aBarbi = UIBarButtonItem.init(customView: clearBtn)
+        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        spaceItem.width = 8
+        self.navigationItem.rightBarButtonItems = [spaceItem,aBarbi]
+        
+    }
+    
+    @objc func clearBtnClick(){
+        
+    }
+
     
     func createNoneView(){
         
@@ -220,7 +239,20 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         
     }
     
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        items.remove(at: indexPath.row - 1)
+        tableView.reloadData()
+    }
+    
 
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "删除"
+    }
     /*
     // MARK: - Navigation
 

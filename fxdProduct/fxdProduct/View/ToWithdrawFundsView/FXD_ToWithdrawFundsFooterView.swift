@@ -51,7 +51,7 @@ class FXD_ToWithdrawFundsFooterView: UIView{
     convenience init(frame:CGRect,htmlContentArr:[String],protocolNames:[HgLoanProtoolListModel],titleStr:String){
         self.init(frame: frame)
         
-        setProtocolcontent(htmlContentArr,titleStr: titleStr)
+//        setProtocolcontent(htmlContentArr,titleStr: titleStr)
         
         var protocolName = ""
         
@@ -171,7 +171,7 @@ class FXD_ToWithdrawFundsFooterView: UIView{
 }
 extension FXD_ToWithdrawFundsFooterView {
     
-    func setUpUI()  {
+    func setOldUpUI()  {
         
         for view in self.subviews {
             view.removeFromSuperview()
@@ -222,6 +222,55 @@ extension FXD_ToWithdrawFundsFooterView {
             make.right.equalTo(self.snp.right).offset(-20)
             make.bottom.equalTo(self.snp.bottom).offset(-15)
 //            make.top.equalTo((protocolBackView?.snp.bottom)!).offset(5)
+        })
+        
+        protocolBtn = UIButton.init(type: UIButtonType.custom)
+        protocolBtn?.setBackgroundImage(UIImage.init(named: "trick"), for: UIControlState.normal)
+        protocolBtn?.addTarget(self, action: #selector(protocolBottonClick), for: UIControlEvents.touchUpInside)
+        protocolBackView?.addSubview(protocolBtn!)
+        protocolBtn?.snp.makeConstraints({ (make) in
+            make.left.equalTo((protocolBackView?.snp.left)!).offset(2)
+            make.top.equalTo((protocolBackView?.snp.top)!).offset(2)
+            make.width.height.equalTo(16)
+        })
+        
+        protocolLabel = YYLabel.init()
+        protocolLabel?.textAlignment = NSTextAlignment.left
+        protocolLabel?.textVerticalAlignment = YYTextVerticalAlignment.center
+        protocolLabel?.numberOfLines = 0
+        protocolLabel?.font = UIFont.yx_systemFont(ofSize: 13)
+        protocolBackView?.addSubview(protocolLabel!)
+        protocolLabel?.snp.makeConstraints({ (make) in
+            make.left.equalTo((protocolBtn?.snp.right)!).offset(4)
+            make.top.equalTo((protocolBackView?.snp.top)!).offset(2)
+        })
+    }
+    
+    func setUpUI()  {
+        
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+        
+        protocolBackView = UIView.init()
+        self.addSubview(protocolBackView!)
+        protocolBackView?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self.snp.left).offset(20)
+            make.right.equalTo(self.snp.right).offset(-20)
+            make.top.equalTo(self).offset(20)
+            make.height.equalTo(40)
+        })
+        
+        applyForBtn = UIButton.init(type: UIButtonType.custom)
+        applyForBtn?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
+        applyForBtn?.setTitle("提款", for: UIControlState.normal)
+        applyForBtn?.addTarget(self, action: #selector(applyForBottonClick), for: UIControlEvents.touchUpInside)
+        self.addSubview(applyForBtn!)
+        applyForBtn?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self.snp.left).offset(20)
+            make.right.equalTo(self.snp.right).offset(-20)
+            make.bottom.equalTo(self.snp.bottom).offset(-15)
+            //            make.top.equalTo((protocolBackView?.snp.bottom)!).offset(5)
         })
         
         protocolBtn = UIButton.init(type: UIButtonType.custom)

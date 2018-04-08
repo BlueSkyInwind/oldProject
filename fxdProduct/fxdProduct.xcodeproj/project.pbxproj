@@ -935,6 +935,8 @@
 		CC594E681FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */; };
 		CC594E6B1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E6A1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m */; };
 		CC594E6C1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E6A1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m */; };
+		CC5F9AB020735D990042DFDA /* SDCycleScrollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5F9AAF20735D990042DFDA /* SDCycleScrollCell.swift */; };
+		CC5F9AB120735D990042DFDA /* SDCycleScrollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5F9AAF20735D990042DFDA /* SDCycleScrollCell.swift */; };
 		CC5FC5A01FC2742700DB0D78 /* RedPacketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC59F1FC2742700DB0D78 /* RedPacketCell.swift */; };
 		CC5FC5A11FC2742700DB0D78 /* RedPacketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC59F1FC2742700DB0D78 /* RedPacketCell.swift */; };
 		CC5FC5A31FC2AF4700DB0D78 /* CashWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5FC5A21FC2AF4700DB0D78 /* CashWithdrawViewController.swift */; };
@@ -1041,6 +1043,8 @@
 		CCC1E4072057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */; };
 		CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
 		CCC1E40F205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
+		CCC9FB65207A140C00B952BD /* SuperLoanHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9FB64207A140C00B952BD /* SuperLoanHeaderView.swift */; };
+		CCC9FB66207A140C00B952BD /* SuperLoanHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9FB64207A140C00B952BD /* SuperLoanHeaderView.swift */; };
 		CCCC0A8E1F677B9B007E1EB0 /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */; };
 		CCCC0A8F1F677B9B007E1EB0 /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */; };
 		CCCDA8771EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
@@ -1908,6 +1912,7 @@
 		CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashModel.m; sourceTree = "<group>"; };
 		CC594E691FCE4FDA00D53F60 /* CheckWithdrawCashModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckWithdrawCashModel.h; sourceTree = "<group>"; };
 		CC594E6A1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckWithdrawCashModel.m; sourceTree = "<group>"; };
+		CC5F9AAF20735D990042DFDA /* SDCycleScrollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDCycleScrollCell.swift; sourceTree = "<group>"; };
 		CC5FC59F1FC2742700DB0D78 /* RedPacketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketCell.swift; sourceTree = "<group>"; };
 		CC5FC5A21FC2AF4700DB0D78 /* CashWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashWithdrawViewController.swift; sourceTree = "<group>"; };
 		CC5FC5AA1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailsCell.swift; sourceTree = "<group>"; };
@@ -1987,6 +1992,7 @@
 		CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeBankCardParamModel.m; sourceTree = "<group>"; };
 		CCC1E40C205A595F007C9C07 /* ActiveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveModel.h; sourceTree = "<group>"; };
 		CCC1E40D205A595F007C9C07 /* ActiveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveModel.m; sourceTree = "<group>"; };
+		CCC9FB64207A140C00B952BD /* SuperLoanHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLoanHeaderView.swift; sourceTree = "<group>"; };
 		CCCC0A8C1F677B9B007E1EB0 /* UserDataResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataResult.h; sourceTree = "<group>"; };
 		CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataResult.m; sourceTree = "<group>"; };
 		CCCDA8751EDF9F5200B48DFF /* CheckViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewModel.h; sourceTree = "<group>"; };
@@ -3482,6 +3488,7 @@
 				CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */,
 				CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */,
 				CC8BC9531FEA0374008E135E /* HomePageCell.swift */,
+				CC5F9AAF20735D990042DFDA /* SDCycleScrollCell.swift */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -4288,6 +4295,7 @@
 				CC80DFF5206B3DD1000F9BAC /* SortView.swift */,
 				CC80DFF8206B4124000F9BAC /* SortCell.swift */,
 				CC80DFFB206B70A6000F9BAC /* FilterView.swift */,
+				CCC9FB64207A140C00B952BD /* SuperLoanHeaderView.swift */,
 			);
 			path = SuperLoanView;
 			sourceTree = "<group>";
@@ -5054,6 +5062,7 @@
 				6326C9EB1BF0B15700FD23A8 /* GetMoneyProcessBaseClass.m in Sources */,
 				63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */,
 				63FC25031D98F7E9006F58F3 /* YYLabel.m in Sources */,
+				CC5F9AB020735D990042DFDA /* SDCycleScrollCell.swift in Sources */,
 				CC0346261F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */,
 				636B1B971C2D118000450358 /* FXD_ViewModelBaseClass.m in Sources */,
 				63E5C75E1D4AEA8F009A633C /* UserCardResult.m in Sources */,
@@ -5150,6 +5159,7 @@
 				63145AB41CA2952400D04ED8 /* LoginMsgResult.m in Sources */,
 				CC80DFFC206B70A6000F9BAC /* FilterView.swift in Sources */,
 				CCCFFAE12060B6EE008556D2 /* HgLoanProtoolListModel.m in Sources */,
+				CCC9FB65207A140C00B952BD /* SuperLoanHeaderView.swift in Sources */,
 				633DAD2D1C3E47D0000DA852 /* FindPassViewModel.m in Sources */,
 				638A16861E5030D700AB8AB6 /* SetUpFMDevice.m in Sources */,
 				63145AF21CA8DBBD00D04ED8 /* RegionExt.m in Sources */,
@@ -5289,6 +5299,7 @@
 				847DBBD21FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */,
 				849459CB1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
 				CC0DF95E1EA5B1090024841A /* WTOverView.m in Sources */,
+				CCC9FB66207A140C00B952BD /* SuperLoanHeaderView.swift in Sources */,
 				847298381FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */,
 				CC742D99204E470100D645CC /* BankCardCell.swift in Sources */,
 				CC0DF9601EA5B1090024841A /* YYTextLayout.m in Sources */,
@@ -5301,6 +5312,7 @@
 				CC0DF9671EA5B1090024841A /* LOTShapeCircle.m in Sources */,
 				CC0DF9681EA5B1090024841A /* UIFont+Extend.m in Sources */,
 				CC0DF96B1EA5B1090024841A /* RegViewController.m in Sources */,
+				CC5F9AB120735D990042DFDA /* SDCycleScrollCell.swift in Sources */,
 				CC45E7301FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
 				CC0DF96C1EA5B1090024841A /* HMScannerController.m in Sources */,
 				CC8BC9621FEB59D9008E135E /* ExperienceValueGradeModel.m in Sources */,
@@ -5824,7 +5836,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
 				);
 				INFOPLIST_FILE = fxdProduct/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5938,7 +5950,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
 				);
 				INFOPLIST_FILE = fxdProduct/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

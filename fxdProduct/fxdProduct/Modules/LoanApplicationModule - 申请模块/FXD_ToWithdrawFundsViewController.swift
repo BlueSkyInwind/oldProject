@@ -90,6 +90,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
             make.edges.equalTo(self.view)
         })
         tableView?.register(UINib.init(nibName: "FXD_ToWithDrawFundsTableViewCell", bundle: nil), forCellReuseIdentifier: "FXD_ToWithDrawFundsTableViewCell")
+        tableView?.register(UINib.init(nibName: "FXD_LoanApplicationCellTableViewCell", bundle: nil), forCellReuseIdentifier: "FXD_LoanApplicationCellTableViewCell")
         
         if #available(iOS 11.0, *){
             tableView?.contentInsetAdjustmentBehavior = .never;
@@ -129,7 +130,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -140,6 +141,16 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == 0 {
+            
+            let periodCell = tableView.dequeueReusableCell(withIdentifier: "FXD_LoanApplicationCellTableViewCell", for: indexPath) as! FXD_LoanApplicationCellTableViewCell
+            periodCell.selectionStyle  = .none
+            periodCell.titleLabel?.text = "还款方式"
+            periodCell.contentLabel?.text = "按周还款"
+            return periodCell
+            
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "FXD_ToWithDrawFundsTableViewCell", for: indexPath) as! FXD_ToWithDrawFundsTableViewCell
         cell.selectionStyle  = .none
     
