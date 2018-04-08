@@ -89,7 +89,6 @@
         BaseResultModel * baseRM= returnValue;
         if ([baseRM.errCode isEqualToString:@"12"]) {
             [FXD_Utility sharedUtility].userInfo.isUpdate = NO;
-
             [[FXD_AlertViewCust sharedHHAlertView] showAppVersionUpdate:baseRM.friendErrMsg isForce:false compleBlock:^(NSInteger index) {
                 if (index == 1) {
                     [FXD_Utility sharedUtility].userInfo.isUpdate = NO;

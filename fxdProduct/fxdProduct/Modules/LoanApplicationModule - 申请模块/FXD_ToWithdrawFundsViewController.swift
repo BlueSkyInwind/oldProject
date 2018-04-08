@@ -458,7 +458,6 @@ extension FXD_ToWithdrawFundsViewController {
                 self?.navigationController?.pushViewController(webController, animated: true)
                 
             }else{
-                
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
         }) {

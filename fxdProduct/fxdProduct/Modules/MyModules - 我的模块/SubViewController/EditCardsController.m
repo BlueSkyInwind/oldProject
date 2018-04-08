@@ -15,6 +15,9 @@
 #import <MGBankCard/MGBankCard.h>
 #import "UnbundlingBankCardViewModel.h"
 #import "CheckViewModel.h"
+#import "YX_BankCardScanManager.h"
+#import "YXBankCardModel.h"
+
 @interface EditCardsController ()<UITableViewDataSource,UITableViewDelegate,BankTableViewSelectDelegate,WTCameraDelegate,UITextFieldDelegate>
 {
     NSInteger _countdown;
@@ -46,7 +49,7 @@
     if([self.typeFlag isEqualToString:@"0"]){
         self.title=@"添加银行卡";
     }
-    [self license];
+//    [self license];
     supportBankListArr = [NSMutableArray array];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
@@ -161,7 +164,6 @@
         }
         str = [str substringFromIndex:MIN(str.length, 4)];
     }
-    
     return newString;
 }
 
@@ -265,6 +267,7 @@
     bankType.cardTag = _cardFlag;
     bankType.bankArray = supportBankListArr;
     [self.navigationController pushViewController:bankType animated:YES];
+    
 }
 - (void)license
 {
@@ -315,87 +318,39 @@
 }
 
 
-#pragma mark TextfileDelegate
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if (textField.tag == 1001) {
-        NSString *text = [textField text];
-        NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789\b"];
-        string = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
-        if ([string rangeOfCharacterFromSet:[characterSet invertedSet]].location != NSNotFound) {
-            return NO;
-        }
-        
-        text = [text stringByReplacingCharactersInRange:range withString:string];
-        text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
-        NSString *newString = @"";
-        while (text.length > 0) {
-            NSString *subString = [text substringToIndex:MIN(text.length, 4)];
-            newString = [newString stringByAppendingString:subString];
-            if (subString.length == 4) {
-                newString = [newString stringByAppendingString:@" "];
-            }
-            text = [text substringFromIndex:MIN(text.length, 4)];
-        }
-        
-        newString = [newString stringByTrimmingCharactersInSet:[characterSet invertedSet]];
-        self.cardNum=newString;
-        if (newString.length >= 24) {
-            return NO;
-        }
-        [textField setText:newString];
-        return NO;
-        
-    }
-    else if(textField.tag==1002)
-    {
-        NSString *stringLength=[NSString stringWithFormat:@"%@%@",textField.text,string];
-        if ([stringLength length]>11) {
-            self.reservedTel=textField.text;
-            return NO;
-        }
-        self.reservedTel=stringLength;
-    }
-    else if(textField.tag==1003)
-    {
-        NSString *stringLength=[NSString stringWithFormat:@"%@%@",textField.text,string];
-        if ([stringLength length]>6) {
-            self.verCode=textField.text;
-            return NO;
-        }
-        self.verCode=stringLength;
-    }
-    return YES;
-}
+
 /**
  开始银行卡扫描  author wangyongxin  2017.4.17
 */
 - (void)startBankCamera
 {
-    BOOL bankcard = [MGBankCardManager getLicense];
-    
-    if (!bankcard) {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"SDK授权失败，请检查"];
-        return;
-    }
-    __unsafe_unretained EditCardsController * weakSelf = self;
-    MGBankCardManager *cardManager = [[MGBankCardManager alloc] init];
-    [cardManager setDebug:YES];
-    cardManager.viewType = MGBankCardViewCardBox;
-    [cardManager CardStart:self finish:^(MGBankCardModel * _Nullable result) {
-        //        weakSelf.bankImageView.image = result.image;
-        //        weakSelf.bankNumView.text = result.bankCardNumber;
-        weakSelf.cardNum = result.bankCardNumber;
-        weakSelf.cardNum = [self.cardNum stringByReplacingOccurrencesOfString:@" " withString:@""];
-        weakSelf.cardNum=[self changeStr:self.cardNum];
-        DLog(@"银行卡扫描可信度 -- %@",[NSString stringWithFormat:@"confidence:%.2f", result.bankCardconfidence]);
-        [weakSelf.tableView reloadData];
+    [YX_BankCardScanManager shareInstance].isPush = false;
+    [YX_BankCardScanManager shareInstance].backImageName = @"return";
+    [YX_BankCardScanManager shareInstance].nagavigationVC.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil];
+    [[YX_BankCardScanManager shareInstance] CardStart:self finish:^(YXBankCardModel * _Nullable result) {
+        if ([self isContainCurrentScan:result.bankName]) {
+            self.cardName = result.bankName;
+            self.cardNum = result.bankNumber;
+            [self.tableView reloadData];
+        }
+        //结果出来释放一下
+        [YX_BankCardScanManager relaseSelf];
     }];
 }
-
+-(BOOL)isContainCurrentScan:(NSString *)bankname{
+    if (supportBankListArr.count > 0) {
+        for (int i = 0; i < supportBankListArr.count; i++) {
+            SupportBankList * bankList = supportBankListArr[i];
+            if ([bankList.bank_name_ isEqualToString:bankname]) {
+                self.cardCode = bankList.bank_code_;
+                _cardFlag = i;
+                return true;
+            }
+        }
+    }
+    return false;
+}
 #pragma  mark Delegate
-
-
 - (void)BankSelect:(SupportBankList *)bankInfo andSectionRow:(NSInteger)sectionRow
 {
     self.cardName = bankInfo.bank_name_;//银行名字
@@ -509,5 +464,56 @@
     [commonVM obtainTransferAuthProtocolType:EliteLoan typeCode:@"1" cardBankCode:cardBank cardNo:cardNo stagingType:nil];
 
 }
-
+#pragma mark TextfileDelegate
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 1001) {
+        NSString *text = [textField text];
+        NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789\b"];
+        string = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if ([string rangeOfCharacterFromSet:[characterSet invertedSet]].location != NSNotFound) {
+            return NO;
+        }
+        
+        text = [text stringByReplacingCharactersInRange:range withString:string];
+        text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSString *newString = @"";
+        while (text.length > 0) {
+            NSString *subString = [text substringToIndex:MIN(text.length, 4)];
+            newString = [newString stringByAppendingString:subString];
+            if (subString.length == 4) {
+                newString = [newString stringByAppendingString:@" "];
+            }
+            text = [text substringFromIndex:MIN(text.length, 4)];
+        }
+        
+        newString = [newString stringByTrimmingCharactersInSet:[characterSet invertedSet]];
+        self.cardNum=newString;
+        if (newString.length >= 24) {
+            return NO;
+        }
+        [textField setText:newString];
+        return NO;
+        
+    }
+    else if(textField.tag==1002)
+    {
+        NSString *stringLength=[NSString stringWithFormat:@"%@%@",textField.text,string];
+        if ([stringLength length]>11) {
+            self.reservedTel=textField.text;
+            return NO;
+        }
+        self.reservedTel=stringLength;
+    }
+    else if(textField.tag==1003)
+    {
+        NSString *stringLength=[NSString stringWithFormat:@"%@%@",textField.text,string];
+        if ([stringLength length]>6) {
+            self.verCode=textField.text;
+            return NO;
+        }
+        self.verCode=stringLength;
+    }
+    return YES;
+}
 @end

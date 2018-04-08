@@ -147,6 +147,7 @@ UIKIT_EXTERN NSString * const       _TheCreditCardupload_url;                  /
 UIKIT_EXTERN NSString * const       _TheInternetbank_url;                  //网银信息提交
 UIKIT_EXTERN NSString * const       _HighRankingStatus_url;                  //高级认证状态查询
 UIKIT_EXTERN NSString * const       _UserBasicInformation_url;               //基础认证状态查询
+UIKIT_EXTERN NSString * const       _UserIDCardUpload_url;       //用户身份证上传
 UIKIT_EXTERN NSString * const       _UserThirdPartCertification_url;         //三方认证状态查询
 UIKIT_EXTERN NSString * const       _UserContactInfo_url;                    //用户联系人信息
 UIKIT_EXTERN NSString * const       _new_CreateApplication_url;                  //新版用户进件接口

@@ -76,7 +76,6 @@
     int height;
     height = 238;
     if (UI_IS_IPHONE6P) {
-        
         height = 268;
     }
     UIView *headerBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, height)];
@@ -297,9 +296,11 @@
     switch (indexPath.row) {
         case 0:
         {
+            MemberCenterViewController * memberCenterVC = [[MemberCenterViewController alloc]init];
+            [self.navigationController pushViewController:memberCenterVC animated:true];
             
-            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-            [self.navigationController pushViewController:myMessageVC animated:true];
+//            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+//            [self.navigationController pushViewController:myMessageVC animated:true];
         }
             break;
         case 1:

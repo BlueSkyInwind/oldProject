@@ -23,7 +23,6 @@
 #import "DataDicParse.h"
 #import "PserInfoViewModel.h"
 
-
 #define FirstComponent 0
 #define SubComponent 1
 #define ThirdComponent 2
@@ -84,7 +83,7 @@
         [dataListArr addObject:@""];
     }
     _toolbarCancelDone.hidden = true;
-    isEdit = false;
+    isEdit = true;
     
     [self configTableView];
     [self addBackItem];
@@ -380,95 +379,46 @@
 - (void)identityUpBtnClick
 {
     DLog(@"正面");
-    [self license:IDCARD_SIDE_FRONT];
+//    [self license:IDCARD_SIDE_FRONT];
+    [self pushcaremaVC:@"front"];
 }
 
 - (void)identityBackBtnClick
 {
     DLog(@"反面");
-    [self license:IDCARD_SIDE_BACK];
+//    [self license:IDCARD_SIDE_BACK];
+     [self pushcaremaVC:@"back"];
 }
 
-- (void)license:(MGIDCardSide)CardSide
-{
-    [[MBPAlertView sharedMBPTextView] showIndeterminateOnly:self.view];
-    [MGLicenseManager licenseForNetWokrFinish:^(bool License) {
-        [[MBPAlertView sharedMBPTextView] removeWaitHud];
-        if (License) {
-            DLog(@"授权成功");
-            [self checkIDCard:CardSide];
-        } else {
-            DLog(@"授权失败");
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"授权失败"];
-        }
-    }];
-}
-
-#pragma mark - OCR识别结果
-- (void)checkIDCard:(MGIDCardSide)CardSide
-{
-    NSLog(@"%@",[MGIDCardManager IDCardVersion]);
-    __unsafe_unretained UserIdentityInformationVCModules *weakSelf = self;
-    BOOL idcard = [MGIDCardManager getLicense];
-    if (!idcard) {
-        [[[UIAlertView alloc] initWithTitle:@"提示" message:@"SDK授权失败，请检查" delegate:self cancelButtonTitle:@"完成" otherButtonTitles:nil, nil] show];
-        return;
+-(void)pushcaremaVC:(NSString *)side{
+    if ([side isEqualToString:@"front"]) {
+        [[CameraManager shareInstance] pushCameraVC:self :^(UIImage * _Nonnull img) {
+            [self uploadIDCardImage:img fronrOrBack:side];
+        }];
+    }else if ([side isEqualToString:@"back"]){
+        [[CameraManager shareInstance] pushCameraVC:self :^(UIImage * _Nonnull img) {
+                 [self uploadIDCardImage:img fronrOrBack:side];
+        }];
     }
-    
-    MGIDCardManager *cardManager = [[MGIDCardManager alloc] init];
-    [cardManager IDCardStartDetection:self IdCardSide:CardSide
-                               finish:^(MGIDCardModel *model) {
-                                   //                                   weakSelf.cardView.image = [model croppedImageOfIDCard];
-                                   [weakSelf verifyIDCard:[model croppedImageOfIDCard] cardSide:CardSide];
-                               }
-                                 errr:^(MGIDCardError) {
- 
-                                 }];
-}
-- (void)verifyIDCard:(UIImage *)image cardSide:(MGIDCardSide)cardSide
-{
-    __unsafe_unretained UserIdentityInformationVCModules *weakSelf = self;
-    NSDictionary *paramDic = @{@"api_key":FaceIDAppKey,
-                               @"api_secret":FaceIDAppSecret,
-                               @"legality":@1};
-    NSDictionary *imageDic = @{@"image":UIImagePNGRepresentation(image)};
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTUpLoadImage:_detectIDCardOCR_url FilePath:imageDic parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        if (cardSide == IDCARD_SIDE_FRONT) {
-            _idOCRFrontParse = [FaceIDOCRFront yy_modelWithJSON:object];
-            [weakSelf saveUserIDCardImage:image carSide:@"front" faceResult:object];
-        }
-        if (cardSide == IDCARD_SIDE_BACK) {
-            _idOCRBackParse = [FaceIDOCRBack yy_modelWithJSON:object];
-            [weakSelf saveUserIDCardImage:image carSide:@"back" faceResult:object];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        NSError *error = object;
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"Error-%ld",(long)error.code]];
-    }];
 }
 
-- (void)saveUserIDCardImage:(UIImage *)image carSide:(NSString *)side faceResult:(id)result
-{
-    __unsafe_unretained UserIdentityInformationVCModules *weakSelf = self;
-    PserInfoViewModel * pserInfoM = [[PserInfoViewModel alloc]init];
-    [pserInfoM setBlockWithReturnBlock:^(id returnValue) {
+-(void)uploadIDCardImage:(UIImage *)image fronrOrBack:(NSString *)fronrOrBack {
+    __weak typeof (self) weakSelf = self;
+    NSData * data = UIImageJPEGRepresentation(image,0.1);
+    NSString * base64Str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    UserDataViewModel * userDataVM = [[UserDataViewModel alloc]init];
+    [userDataVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * baseRM =returnValue;
         if ([baseRM.errCode isEqualToString:@"0"]) {
             CustomerIDInfo * customerIDInfo = [[CustomerIDInfo alloc]initWithDictionary:(NSDictionary *)baseRM.data error:nil];
-            if ([side isEqualToString:@"front"]) {
-                _customerFrontIDParse = customerIDInfo;
-            }
-            if ([side isEqualToString:@"back"]){
-                _customerBackIDParse = customerIDInfo;
-            }
+            _customerFrontIDParse = customerIDInfo;
             [weakSelf setUserIDCardInfo];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseRM.friendErrMsg];
         }
     } WithFaileBlock:^{
     }];
-    [pserInfoM saveUserIDCardImage:image carSide:side faceResult:result];
+    [userDataVM userIDCardUpload:base64Str frontOfBack:fronrOrBack imageType:@".jpeg"];
 }
 
 /**
@@ -476,21 +426,22 @@
  */
 - (void)setUserIDCardInfo
 {
-    if (_idOCRFrontParse != nil && _idOCRBackParse != nil) {
-        NSString * prometStr = IDOCRMarkeords;
-        NSString * alertContent = [NSString stringWithFormat:@"姓名：%@\n身份证号：%@\n%@",_customerFrontIDParse.customer_name_,_customerFrontIDParse.id_code_,prometStr];
-        [[FXD_AlertViewCust sharedHHAlertView] showIdentiFXDAlertViewTitle:@"身份信息确认" content:alertContent cancelTitle:@"存在错误" sureTitle:@"确认无误" compleBlock:^(NSInteger index) {
-            if (index == 0) {
-                isEdit = true;
-                ContentTableViewCell *cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:0 inSection:1]];
-                [cell.contentTextField becomeFirstResponder];
-            }
-        }];
-        [dataListArr replaceObjectAtIndex:1 withObject:_customerFrontIDParse.customer_name_];
-        [dataListArr replaceObjectAtIndex:2 withObject:_customerFrontIDParse.id_code_];
-        [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerFrontIDParse.id_code_;
-        [FXD_Utility sharedUtility].userInfo.realName = _customerFrontIDParse.customer_name_;
-    }
+    // 弹框暂时去掉
+    /*
+    NSString * prometStr = IDOCRMarkeords;
+    NSString * alertContent = [NSString stringWithFormat:@"姓名：%@\n身份证号：%@\n%@",_customerFrontIDParse.customer_name_,_customerFrontIDParse.id_code_,prometStr];
+    [[FXD_AlertViewCust sharedHHAlertView] showIdentiFXDAlertViewTitle:@"身份信息确认" content:alertContent cancelTitle:@"存在错误" sureTitle:@"确认无误" compleBlock:^(NSInteger index) {
+        if (index == 0) {
+            isEdit = true;
+            ContentTableViewCell *cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:0 inSection:1]];
+            [cell.contentTextField becomeFirstResponder];
+        }
+    }];
+     */
+    [dataListArr replaceObjectAtIndex:1 withObject:_customerFrontIDParse.customer_name_];
+    [dataListArr replaceObjectAtIndex:2 withObject:_customerFrontIDParse.id_code_];
+    [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerFrontIDParse.id_code_;
+    [FXD_Utility sharedUtility].userInfo.realName = _customerFrontIDParse.customer_name_;
     [_tableView reloadData];
 }
 
@@ -912,6 +863,90 @@
     // Dispose of any resources that can be recreated.
 }
 
+//face ++ 三方识别待用
+/*
+ - (void)license:(MGIDCardSide)CardSide
+ {
+ [[MBPAlertView sharedMBPTextView] showIndeterminateOnly:self.view];
+ [MGLicenseManager licenseForNetWokrFinish:^(bool License) {
+ [[MBPAlertView sharedMBPTextView] removeWaitHud];
+ if (License) {
+ DLog(@"授权成功");
+ [self checkIDCard:CardSide];
+ } else {
+ DLog(@"授权失败");
+ [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"授权失败"];
+ }
+ }];
+ }
+ 
+ #pragma mark - OCR识别结果
+ - (void)checkIDCard:(MGIDCardSide)CardSide
+ {
+ NSLog(@"%@",[MGIDCardManager IDCardVersion]);
+ __unsafe_unretained UserIdentityInformationVCModules *weakSelf = self;
+ BOOL idcard = [MGIDCardManager getLicense];
+ if (!idcard) {
+ [[[UIAlertView alloc] initWithTitle:@"提示" message:@"SDK授权失败，请检查" delegate:self cancelButtonTitle:@"完成" otherButtonTitles:nil, nil] show];
+ return;
+ }
+ 
+ MGIDCardManager *cardManager = [[MGIDCardManager alloc] init];
+ [cardManager IDCardStartDetection:self IdCardSide:CardSide
+ finish:^(MGIDCardModel *model) {
+ //                                   weakSelf.cardView.image = [model croppedImageOfIDCard];
+ [weakSelf verifyIDCard:[model croppedImageOfIDCard] cardSide:CardSide];
+ }
+ errr:^(MGIDCardError) {
+ 
+ }];
+ }
+ - (void)verifyIDCard:(UIImage *)image cardSide:(MGIDCardSide)cardSide
+ {
+ __unsafe_unretained UserIdentityInformationVCModules *weakSelf = self;
+ NSDictionary *paramDic = @{@"api_key":FaceIDAppKey,
+ @"api_secret":FaceIDAppSecret,
+ @"legality":@1};
+ NSDictionary *imageDic = @{@"image":UIImagePNGRepresentation(image)};
+ [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTUpLoadImage:_detectIDCardOCR_url FilePath:imageDic parameters:paramDic finished:^(EnumServerStatus status, id object) {
+ DLog(@"%@",object);
+ if (cardSide == IDCARD_SIDE_FRONT) {
+ _idOCRFrontParse = [FaceIDOCRFront yy_modelWithJSON:object];
+ [weakSelf saveUserIDCardImage:image carSide:@"front" faceResult:object];
+ }
+ if (cardSide == IDCARD_SIDE_BACK) {
+ _idOCRBackParse = [FaceIDOCRBack yy_modelWithJSON:object];
+ [weakSelf saveUserIDCardImage:image carSide:@"back" faceResult:object];
+ }
+ } failure:^(EnumServerStatus status, id object) {
+ NSError *error = object;
+ [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"Error-%ld",(long)error.code]];
+ }];
+ }
+ 
+ - (void)saveUserIDCardImage:(UIImage *)image carSide:(NSString *)side faceResult:(id)result
+ {
+ __unsafe_unretained UserIdentityInformationVCModules *weakSelf = self;
+ PserInfoViewModel * pserInfoM = [[PserInfoViewModel alloc]init];
+ [pserInfoM setBlockWithReturnBlock:^(id returnValue) {
+ BaseResultModel * baseRM =returnValue;
+ if ([baseRM.errCode isEqualToString:@"0"]) {
+ CustomerIDInfo * customerIDInfo = [[CustomerIDInfo alloc]initWithDictionary:(NSDictionary *)baseRM.data error:nil];
+ if ([side isEqualToString:@"front"]) {
+ _customerFrontIDParse = customerIDInfo;
+ }
+ if ([side isEqualToString:@"back"]){
+ _customerBackIDParse = customerIDInfo;
+ }
+ [weakSelf setUserIDCardInfo];
+ }else{
+ [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseRM.friendErrMsg];
+ }
+ } WithFaileBlock:^{
+ }];
+ [pserInfoM saveUserIDCardImage:image carSide:side faceResult:result];
+ }
+ */
 /*
  #pragma mark - Navigation
  

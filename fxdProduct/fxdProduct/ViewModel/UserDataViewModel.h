@@ -112,4 +112,13 @@
  @param videoBase64Str 视频编码
  */
 -(void)uploadVerifyVideo:(NSString *)videoBase64Str;
+#pragma mark - 用户身份证上传
+/**
+ 身份证图片上传
+ 
+ @param imageBase64Str  图片的base64
+ @param frontOfBack 正面或者反面
+ @param imageType 图片后缀名
+ */
+-(void)userIDCardUpload:(NSString *)imageBase64Str frontOfBack:(NSString *)frontOfBack imageType:(NSString *)imageType;
 @end

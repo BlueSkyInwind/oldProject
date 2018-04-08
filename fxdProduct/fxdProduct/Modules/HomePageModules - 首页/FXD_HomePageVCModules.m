@@ -332,9 +332,9 @@
         
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             [_protocolArray removeAllObjects];
-            for (int i = 0; i<((NSArray *)baseResultM.data).count; i++) {
-                
-                 HgLoanProtoolListModel *model = [[HgLoanProtoolListModel alloc]initWithDictionary:baseResultM.data[i] error:nil];
+            NSArray * arr = (NSArray *)baseResultM.data;
+            for (int i = 0; i<arr.count; i++) {
+                 HgLoanProtoolListModel *model = [[HgLoanProtoolListModel alloc]initWithDictionary:arr[i] error:nil];
                 [_protocolArray addObject:model];
             }
             [self.tableView reloadData];
@@ -749,7 +749,7 @@
             NSDictionary *  dic = (NSDictionary *)baseVM.data;
             if ([dic.allKeys containsObject:@"url"]) {
                 FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-                webVC.urlStr = baseVM.data[@"url"];
+                webVC.urlStr = dic[@"url"];
                 [self.navigationController pushViewController:webVC animated:true];
             }
         }else{
@@ -886,16 +886,17 @@
     
     ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
     [complianceVM setBlockWithReturnBlock:^(id returnValue) {
-        
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
-            
-            NSString *protocolContent = baseResultM.data[@"protocolContent"];
-            NSString *navTitle = baseResultM.data[@"title"];
-            DetailViewController *webController = [[DetailViewController alloc]init];
-            webController.content = protocolContent;
-            webController.navTitle = navTitle;
-            [self.navigationController pushViewController:webController animated:true];
+            NSDictionary * dic = (NSDictionary *)baseResultM.data;
+            if ([dic.allKeys containsObject:@"protocolContent"]) {
+                NSString *protocolContent = dic[@"protocolContent"];
+                NSString *navTitle = dic[@"title"];
+                DetailViewController *webController = [[DetailViewController alloc]init];
+                webController.content = protocolContent;
+                webController.navTitle = navTitle;
+                [self.navigationController pushViewController:webController animated:true];
+            }
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message: baseResultM.friendErrMsg];
         }

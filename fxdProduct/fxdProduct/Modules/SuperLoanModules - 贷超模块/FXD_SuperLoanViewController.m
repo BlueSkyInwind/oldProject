@@ -231,15 +231,15 @@
     
     CompQueryViewModel *viewModel = [[CompQueryViewModel alloc]init];
     [viewModel setBlockWithReturnBlock:^(id returnValue) {
-        
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
-            
-            NSString *linkUrl = baseResultM.data[@"url"];;
-            FXDWebViewController *controller = [[FXDWebViewController alloc]init];
-            controller.urlStr = linkUrl;
-            [self.navigationController pushViewController:controller animated:true];
-    
+            NSDictionary * dic =  (NSDictionary *)baseResultM.data;
+            if ([dic.allKeys containsObject:@"url"]) {
+                NSString *linkUrl = dic[@"url"];
+                FXDWebViewController *controller = [[FXDWebViewController alloc]init];
+                controller.urlStr = linkUrl;
+                [self.navigationController pushViewController:controller animated:true];
+            }
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message: baseResultM.friendErrMsg];
         }
