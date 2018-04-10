@@ -23,6 +23,13 @@
  @param productId 产品id
  */
 -(void)statisticsDiversionPro:(NSString *)productId;
+/**
+ 钱爸爸提现申请
+ 
+ @param capitalPlatform 资金平台 2 合规 5 钱爸爸
+ */
+-(void)paidcenterQbbWithDrawCapitalPlatform:(NSString *)capitalPlatform;
+
 
 @end
 

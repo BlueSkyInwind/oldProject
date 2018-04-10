@@ -44,4 +44,22 @@
         
     }];
 }
+
+-(void)delMsgDelType:(NSString *)delType operUserMassgeId:(NSString *)operUserMassgeId{
+    
+    NSDictionary *paramDic = @{@"delType":delType,@"operUserMassgeId":operUserMassgeId};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_delMsg_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+        
+    }];
+}
 @end

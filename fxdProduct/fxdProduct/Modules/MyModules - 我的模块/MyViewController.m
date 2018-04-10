@@ -41,15 +41,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    titleAry=@[@"我的消息",@"借还记录",@"我的银行卡",@"邀请好友",@"提额中心",@"更多"];
-    imgAry=@[@"message",@"6_my_icon_03",@"6_my_icon_05",@"6_my_icon_11",@"quota_icon",@"icon_my_setup"];
+    titleAry=@[@"我的消息",@"收藏",@"我的银行卡",@"借还记录",@"提额中心",@"邀请好友",@"更多"];
+    imgAry=@[@"message",@"6_my_icon_2",@"6_my_icon_05",@"6_my_icon_03",@"quota_icon",@"6_my_icon_11",@"icon_my_setup"];
     if (@available(iOS 11.0, *)) {
         self.MyViewTable.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
     
-    self.MyViewTable.scrollEnabled = NO;
+    self.MyViewTable.scrollEnabled = YES;
     if (UI_IS_IPHONE4 ) {
         self.MyViewTable.scrollEnabled = YES;
     }
@@ -224,13 +224,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return titleAry.count;
+    if (section == 0) {
+        return 2;
+    }
+    if (section == 1) {
+        return 3;
+    }
+    
+    return 2;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -241,9 +249,13 @@
 //创建自定义头视图
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 10)];
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 5)];
     view.backgroundColor=RGBColor(242, 242, 242, 1);
     return view;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -254,15 +266,29 @@
     if (!bCell) {
         bCell = [[[NSBundle mainBundle]loadNibNamed:@"MyViewBCell" owner:self options:nil] lastObject];
     }
-    bCell.lblTitle.text=titleAry[indexPath.row];
-    bCell.imgView.image=[UIImage imageNamed:imgAry[indexPath.row]];
+    
+    NSInteger index = 0;
+    if (indexPath.section == 0) {
+        index = indexPath.row;
+    }
+    if (indexPath.section == 1) {
+        
+        index = indexPath.row + 2;
+    }
+    
+    if (indexPath.section == 2) {
+        index = indexPath.row + 5;
+    }
+    
+    bCell.lblTitle.text=titleAry[index];
+    bCell.imgView.image=[UIImage imageNamed:imgAry[index]];
     bCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if(indexPath.row == titleAry.count-1) {
+    if((indexPath.section == 0 && indexPath.row == 1)||(indexPath.section == 1 && indexPath.row == 2) || (indexPath.section == 2 && indexPath.row == 1)) {
         bCell.lineView.hidden=YES;
     } else {
         bCell.lineView.hidden=NO;
     }
-    if (indexPath.row == 0) {
+    if (indexPath.row == 0 && indexPath.section == 0) {
         if ([model.isDisplay isEqualToString:@"1"]) {
             bCell.messageLabel.text = model.countNum;
             bCell.messageView.hidden = false;
@@ -293,53 +319,119 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    switch (indexPath.row) {
+    
+    switch (indexPath.section) {
         case 0:
-        {
-            MemberCenterViewController * memberCenterVC = [[MemberCenterViewController alloc]init];
-            [self.navigationController pushViewController:memberCenterVC animated:true];
-            
-//            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-//            [self.navigationController pushViewController:myMessageVC animated:true];
-        }
+            switch (indexPath.row) {
+                case 0:
+                {
+                    MemberCenterViewController * memberCenterVC = [[MemberCenterViewController alloc]init];
+                    [self.navigationController pushViewController:memberCenterVC animated:true];
+                }
+                    break;
+                case 1:
+                {
+                    CollectionViewController * controller = [[CollectionViewController alloc]init];
+                    [self.navigationController pushViewController:controller animated:true];
+                }
+                    break;
+                default:
+                    break;
+            }
             break;
         case 1:
-        {
-            
-            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-            [self.navigationController pushViewController:repayRecord animated:true];
-        }
+            switch (indexPath.row) {
+                case 0:
+                    {
+                        MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
+                        [self.navigationController pushViewController:myCrad animated:YES];
+                    }
+                    break;
+                case 1:
+                    {
+                        RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+                        [self.navigationController pushViewController:repayRecord animated:true];
+                    }
+                    break;
+                case 2:
+                    {
+                        FXD_IncreaseAmountLimitViewController *increaseAmountLimit=[[FXD_IncreaseAmountLimitViewController alloc]init];
+                        [self.navigationController pushViewController:increaseAmountLimit animated:YES];
+                    }
+                    break;
+                default:
+                    break;
+            }
             break;
+            
         case 2:
-        {
-            MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
-            [self.navigationController pushViewController:myCrad animated:YES];
-        }
+            switch (indexPath.row) {
+                case 0:
+                    {
+                        InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
+                        [self.navigationController pushViewController:invitationVC animated:true];
+                    }
+                    break;
+                case 1:
+                    {
+                        MoreViewController *ticket=[[MoreViewController alloc]init];
+                        [self.navigationController pushViewController:ticket animated:YES];
+                    }
+                    break;
+                default:
+                    break;
+            }
             break;
-        case 3:
-        {
-            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
-            [self.navigationController pushViewController:invitationVC animated:true];
-        }
-            break;
-        
-        case 4:
-        {
-            FXD_IncreaseAmountLimitViewController *increaseAmountLimit=[[FXD_IncreaseAmountLimitViewController alloc]init];
-            [self.navigationController pushViewController:increaseAmountLimit animated:YES];
-        }
-            break;
-            
-        case 5:
-        {
-            MoreViewController *ticket=[[MoreViewController alloc]init];
-            [self.navigationController pushViewController:ticket animated:YES];
-        }
-            break;
-            
         default:
             break;
     }
+//    switch (indexPath.row) {
+//        case 0:
+//        {
+//            MemberCenterViewController * memberCenterVC = [[MemberCenterViewController alloc]init];
+//            [self.navigationController pushViewController:memberCenterVC animated:true];
+//
+////            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+////            [self.navigationController pushViewController:myMessageVC animated:true];
+//        }
+//            break;
+//        case 1:
+//        {
+//
+//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
+//            [self.navigationController pushViewController:repayRecord animated:true];
+//        }
+//            break;
+//        case 2:
+//        {
+//            MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
+//            [self.navigationController pushViewController:myCrad animated:YES];
+//        }
+//            break;
+//        case 3:
+//        {
+//            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
+//            [self.navigationController pushViewController:invitationVC animated:true];
+//        }
+//            break;
+//
+//        case 4:
+//        {
+//            FXD_IncreaseAmountLimitViewController *increaseAmountLimit=[[FXD_IncreaseAmountLimitViewController alloc]init];
+//            [self.navigationController pushViewController:increaseAmountLimit animated:YES];
+//        }
+//            break;
+//
+//        case 5:
+//        {
+//            MoreViewController *ticket=[[MoreViewController alloc]init];
+//            [self.navigationController pushViewController:ticket animated:YES];
+//        }
+//            break;
+//
+//        default:
+//            break;
+//    }
 }
 
 

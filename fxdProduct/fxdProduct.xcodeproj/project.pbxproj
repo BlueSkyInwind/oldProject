@@ -951,6 +951,14 @@
 		CC49BA071FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */; };
 		CC4BB60F1F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
 		CC4BB6101F17712E0027A0AA /* LevelDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */; };
+		CC4F0629207C4E410030A12A /* SuperLoanNoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F0628207C4E410030A12A /* SuperLoanNoneCell.swift */; };
+		CC4F062A207C4E410030A12A /* SuperLoanNoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F0628207C4E410030A12A /* SuperLoanNoneCell.swift */; };
+		CC4F062C207C557E0030A12A /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F062B207C557E0030A12A /* RecentViewController.swift */; };
+		CC4F062D207C557E0030A12A /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F062B207C557E0030A12A /* RecentViewController.swift */; };
+		CC4F062F207C65770030A12A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F062E207C65770030A12A /* CollectionViewController.swift */; };
+		CC4F0630207C65770030A12A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F062E207C65770030A12A /* CollectionViewController.swift */; };
+		CC4F0634207C6B200030A12A /* QBBWitnDrawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4F0633207C6B200030A12A /* QBBWitnDrawModel.m */; };
+		CC4F0635207C6B200030A12A /* QBBWitnDrawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4F0633207C6B200030A12A /* QBBWitnDrawModel.m */; };
 		CC594E631FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */; };
 		CC594E641FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */; };
 		CC594E671FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */; };
@@ -1943,6 +1951,11 @@
 		CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailsViewController.swift; sourceTree = "<group>"; };
 		CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelDescriptionView.h; sourceTree = "<group>"; };
 		CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelDescriptionView.m; sourceTree = "<group>"; };
+		CC4F0628207C4E410030A12A /* SuperLoanNoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLoanNoneCell.swift; sourceTree = "<group>"; };
+		CC4F062B207C557E0030A12A /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
+		CC4F062E207C65770030A12A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		CC4F0632207C6B200030A12A /* QBBWitnDrawModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QBBWitnDrawModel.h; sourceTree = "<group>"; };
+		CC4F0633207C6B200030A12A /* QBBWitnDrawModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QBBWitnDrawModel.m; sourceTree = "<group>"; };
 		CC594E611FCBFC7800D53F60 /* WithdrawCashParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashParamModel.h; sourceTree = "<group>"; };
 		CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashParamModel.m; sourceTree = "<group>"; };
 		CC594E651FCBFD0B00D53F60 /* WithdrawCashModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashModel.h; sourceTree = "<group>"; };
@@ -2834,6 +2847,7 @@
 				1AE362F31C586060006FC276 /* EditCardsController.m */,
 				1AE362F41C586060006FC276 /* EditCardsController.xib */,
 				CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */,
+				CC4F062E207C65770030A12A /* CollectionViewController.swift */,
 			);
 			path = SubViewController;
 			sourceTree = "<group>";
@@ -3435,6 +3449,7 @@
 		63E076541B67114800E269F2 /* DataModelModules */ = {
 			isa = PBXGroup;
 			children = (
+				CC4F0631207C6AE40030A12A /* QBBWithDraw */,
 				CC80DFFE206B8831000F9BAC /* SperLoan */,
 				CC742DA5204E702400D645CC /* Compliance */,
 				CC8BC95E1FEB5994008E135E /* Mine */,
@@ -4248,6 +4263,15 @@
 			name = MineView;
 			sourceTree = "<group>";
 		};
+		CC4F0631207C6AE40030A12A /* QBBWithDraw */ = {
+			isa = PBXGroup;
+			children = (
+				CC4F0632207C6B200030A12A /* QBBWitnDrawModel.h */,
+				CC4F0633207C6B200030A12A /* QBBWitnDrawModel.m */,
+			);
+			path = QBBWithDraw;
+			sourceTree = "<group>";
+		};
 		CC5D70241ED43FE500A074AF /* Cash */ = {
 			isa = PBXGroup;
 			children = (
@@ -4360,6 +4384,7 @@
 			children = (
 				CC80DFEA206A4924000F9BAC /* FXD_SuperLoanViewController.h */,
 				CC80DFEB206A4924000F9BAC /* FXD_SuperLoanViewController.m */,
+				CC4F062B207C557E0030A12A /* RecentViewController.swift */,
 			);
 			name = "SuperLoanModule - 贷超模块";
 			path = "fxdProduct/Modules/SuperLoanModules - 贷超模块";
@@ -4374,6 +4399,7 @@
 				CC80DFF8206B4124000F9BAC /* SortCell.swift */,
 				CC80DFFB206B70A6000F9BAC /* FilterView.swift */,
 				CCC9FB64207A140C00B952BD /* SuperLoanHeaderView.swift */,
+				CC4F0628207C4E410030A12A /* SuperLoanNoneCell.swift */,
 			);
 			path = SuperLoanView;
 			sourceTree = "<group>";
@@ -5055,6 +5081,7 @@
 				84E306C71F97224E00C97D72 /* DiscountCouponListVCModules.swift in Sources */,
 				63F0E1B71CE4166E001251A9 /* UIDevice+YYAdd.m in Sources */,
 				63FC24EF1D98F7E9006F58F3 /* YYTextEffectWindow.m in Sources */,
+				CC4F062C207C557E0030A12A /* RecentViewController.swift in Sources */,
 				84E62D1B1FDA7CA900B7F870 /* CustomerContactsInfoViewModel.m in Sources */,
 				CC4BB60F1F17712E0027A0AA /* LevelDescriptionView.m in Sources */,
 				84A37FF21FAC12A8008FB7AF /* HomeChoosePopView.swift in Sources */,
@@ -5075,6 +5102,7 @@
 				638A17091E517D9F00AB8AB6 /* LOTShapeTrimPath.m in Sources */,
 				CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */,
 				84F1E29F1FD90EE0007D3381 /* UserDataInformationModel.m in Sources */,
+				CC4F0629207C4E410030A12A /* SuperLoanNoneCell.swift in Sources */,
 				638A16EE1E517D9F00AB8AB6 /* LOTShapeLayerView.m in Sources */,
 				638C3F2E1CF53662000446A7 /* RepayMentAvailableRedpackets.m in Sources */,
 				635B2FBA1D6AEE22009CEFE0 /* GlobalConfig.m in Sources */,
@@ -5127,6 +5155,7 @@
 				0F0FDAC21BC771EC00F3CF10 /* AboutViewController.m in Sources */,
 				CC742DB3204FB90500D645CC /* BankListViewController.swift in Sources */,
 				84E62D1F1FDA7E3100B7F870 /* CustomerContactsInfoParam.m in Sources */,
+				CC4F0634207C6B200030A12A /* QBBWitnDrawModel.m in Sources */,
 				CCCDA8841EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
 				63F254891E49A45900852CF1 /* HMScannerViewController.m in Sources */,
 				6326C9D11BF08CEE00FD23A8 /* Model.m in Sources */,
@@ -5154,6 +5183,7 @@
 				636B1B971C2D118000450358 /* FXD_ViewModelBaseClass.m in Sources */,
 				63E5C75E1D4AEA8F009A633C /* UserCardResult.m in Sources */,
 				6379641F1CAD1BE0002A5910 /* LivenessSelfie.m in Sources */,
+				CC4F062F207C65770030A12A /* CollectionViewController.swift in Sources */,
 				8473F1411F31CAA1005B4933 /* SupportBankList.m in Sources */,
 				63AD1D1A1BFC1AA400807877 /* MLBlackTransition.m in Sources */,
 				840911A21F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */,
@@ -5529,7 +5559,9 @@
 				CC0DF9E61EA5B1090024841A /* LOTShapeLayerView.m in Sources */,
 				CC0DF9E71EA5B1090024841A /* RepayMentAvailableRedpackets.m in Sources */,
 				CC0DF9E81EA5B1090024841A /* GlobalConfig.m in Sources */,
+				CC4F062D207C557E0030A12A /* RecentViewController.swift in Sources */,
 				CC0DF9EC1EA5B1090024841A /* GetCustomerBaseViewModel.m in Sources */,
+				CC4F0635207C6B200030A12A /* QBBWitnDrawModel.m in Sources */,
 				CC0DF9ED1EA5B1090024841A /* YYTextInput.m in Sources */,
 				CC0DF9F01EA5B1090024841A /* MyCardsViewController.m in Sources */,
 				CC0DF9F11EA5B1090024841A /* LOTAnimationCache.m in Sources */,
@@ -5630,6 +5662,7 @@
 				CC0DFA571EA5B1090024841A /* UIBezierPath.m in Sources */,
 				CC0DFA5A1EA5B1090024841A /* SMSViewModel.m in Sources */,
 				CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */,
+				CC4F062A207C4E410030A12A /* SuperLoanNoneCell.swift in Sources */,
 				CC49BA041FC516D000232041 /* WithdrawHeaderView.swift in Sources */,
 				849459D11FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift in Sources */,
 				CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */,
@@ -5703,6 +5736,7 @@
 				CC0DFA9D1EA5B1090024841A /* RegionExt.m in Sources */,
 				CC0DFA9E1EA5B1090024841A /* EditCardsController.m in Sources */,
 				849842011FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
+				CC4F0630207C65770030A12A /* CollectionViewController.swift in Sources */,
 				CC0DFAA01EA5B1090024841A /* GetMoneyProcessResult.m in Sources */,
 				CC0DFAA21EA5B1090024841A /* LOTShapePath.m in Sources */,
 				CC742DB7204FB9C700D645CC /* BankListCell.swift in Sources */,

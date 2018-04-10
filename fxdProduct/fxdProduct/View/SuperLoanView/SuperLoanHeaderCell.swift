@@ -22,10 +22,10 @@ import UIKit
 class SuperLoanHeaderCell: UITableViewCell {
 
     @objc weak var delegate: SuperLoanHeaderCellDelegate?
+    @objc var sortImageBtn : UIButton?
+    @objc var filterImageBtn : UIButton?
     @objc var sortBtn : UIButton?
     @objc var filterBtn : UIButton?
-    @objc var sortLabel : UILabel?
-    @objc var filterLabel : UILabel?
     @objc var tabLineView : UIView?
     @objc var loanBtn : UIButton?
     @objc var gameBtn : UIButton?
@@ -151,21 +151,22 @@ extension SuperLoanHeaderCell{
             make.width.equalTo(50)
         }
         
-        sortLabel = UILabel()
-        sortLabel?.text = "排序"
-        sortLabel?.font = UIFont.yx_systemFont(ofSize: 12)
-        sortLabel?.textColor = TITLE_COLOR
-        sortView.addSubview(sortLabel!)
-        sortLabel?.snp.makeConstraints { (make) in
+        sortBtn = UIButton()
+        sortBtn?.setTitle("排序", for: .normal)
+        sortBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 12)
+        sortBtn?.setTitleColor(TITLE_COLOR, for: .normal)
+        sortBtn?.addTarget(self, action: #selector(sortBtnClick(_:)), for: .touchUpInside)
+        sortView.addSubview(sortBtn!)
+        sortBtn?.snp.makeConstraints { (make) in
             make.left.equalTo(sortView.snp.left).offset(5)
             make.centerY.equalTo(sortView.snp.centerY)
         }
         
-        sortBtn = UIButton()
-        sortBtn?.setImage(UIImage.init(named: "sort_icon"), for: .normal)
-        sortBtn?.addTarget(self, action: #selector(sortBtnClick(_:)), for: .touchUpInside)
-        sortView.addSubview(sortBtn!)
-        sortBtn?.snp.makeConstraints { (make) in
+        sortImageBtn = UIButton()
+        sortImageBtn?.setImage(UIImage.init(named: "sort_icon"), for: .normal)
+        sortImageBtn?.addTarget(self, action: #selector(sortBtnClick(_:)), for: .touchUpInside)
+        sortView.addSubview(sortImageBtn!)
+        sortImageBtn?.snp.makeConstraints { (make) in
             make.right.equalTo(sortView.snp.right).offset(-5)
             make.centerY.equalTo(sortView.snp.centerY)
         }
@@ -209,21 +210,22 @@ extension SuperLoanHeaderCell{
             make.width.equalTo(50)
         }
         
-        filterLabel = UILabel()
-        filterLabel?.text = "筛选"
-        filterLabel?.font = UIFont.yx_systemFont(ofSize: 12)
-        filterLabel?.textColor = TITLE_COLOR
-        filterView.addSubview(filterLabel!)
-        filterLabel?.snp.makeConstraints { (make) in
+        filterBtn = UIButton()
+        filterBtn?.setTitleColor(TITLE_COLOR, for: .normal)
+        filterBtn?.setTitle("筛选", for: .normal)
+        filterBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 12)
+        filterBtn?.addTarget(self, action: #selector(filterBtnClick(_:)), for: .touchUpInside)
+        filterView.addSubview(filterBtn!)
+        filterBtn?.snp.makeConstraints { (make) in
             make.left.equalTo(filterView.snp.left).offset(5)
             make.centerY.equalTo(filterView.snp.centerY)
         }
         
-        filterBtn = UIButton()
-        filterBtn?.setImage(UIImage.init(named: "filter_icon"), for: .normal)
-        filterBtn?.addTarget(self, action: #selector(filterBtnClick(_:)), for: .touchUpInside)
-        filterView.addSubview(filterBtn!)
-        filterBtn?.snp.makeConstraints { (make) in
+        filterImageBtn = UIButton()
+        filterImageBtn?.setImage(UIImage.init(named: "filter_icon"), for: .normal)
+        filterImageBtn?.addTarget(self, action: #selector(filterBtnClick(_:)), for: .touchUpInside)
+        filterView.addSubview(filterImageBtn!)
+        filterImageBtn?.snp.makeConstraints { (make) in
             make.right.equalTo(filterView.snp.right).offset(-5)
             make.centerY.equalTo(filterView.snp.centerY)
         }

@@ -38,20 +38,20 @@ class FXD_displayAmountCommonHeaderView: UIView {
     convenience init(frame: CGRect,amount:String) {
         self.init(frame: frame)
         self.amountStr = amount
-        self.amountLabel?.text = amount
+        self.amountLabel?.text = "¥" + amount
         self.hintWordLabel?.text = String.init(format: "您当前有%@元可借额度", amount)
     }
     
     convenience init(frame: CGRect,amount:String,periodNum:String,periodAmount:String) {
         self.init(frame: frame)
-        self.amountLabel?.text = amount
+        self.amountLabel?.text = "¥" + amount
         self.periodLabel?.text = periodNum
         self.periodAmountLabel?.text = periodAmount
     }
     
     convenience init(frame: CGRect,amount:String,amountTitle:String) {
         self.init(frame: frame)
-        self.amountLabel?.text = amount
+        self.amountLabel?.text = "¥" + amount
         if amountTitle != "" {
             resetUI()
             self.amountTitleLabel?.text = amountTitle
@@ -119,14 +119,27 @@ extension FXD_displayAmountCommonHeaderView{
             make.centerY.equalTo((backGroundImage?.snp.centerY)!).offset(10)
         })
         
+        
+        let centerLabel = UILabel()
+        centerLabel.text = "到账金额"
+        centerLabel.textColor = UIColor.black
+        centerLabel.font = UIFont.yx_systemFont(ofSize: 14)
+        centerImage?.addSubview(centerLabel)
+        centerLabel.snp.makeConstraints { (make) in
+            make.centerX.equalTo((centerImage?.snp.centerX)!)
+            make.top.equalTo((centerImage?.snp.top)!).offset(20)
+        }
+        
         amountLabel = UILabel()
-        amountLabel?.text = "3000"
+        amountLabel?.text = "¥3000"
         amountLabel?.textColor = AMOUNT_COLOR
         amountLabel?.textAlignment = NSTextAlignment.center
         amountLabel?.font = UIFont.yx_systemFont(ofSize: 25)
         centerImage?.addSubview(amountLabel!)
         amountLabel?.snp.makeConstraints({ (make) in
-            make.center.equalTo((centerImage?.snp.center)!)
+            make.centerX.equalTo((centerImage?.snp.centerX)!)
+            make.top.equalTo(centerLabel.snp.bottom).offset(3)
+//            make.center.equalTo((centerImage?.snp.center)!)
         })
         
         hintWordBackImage = UIImageView()

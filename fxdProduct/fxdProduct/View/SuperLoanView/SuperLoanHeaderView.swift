@@ -8,10 +8,21 @@
 
 import UIKit
 
+@objc protocol SuperLoanHeaderViewDelegate: NSObjectProtocol {
+    
+    //热门推荐
+    func hotBtnClick(_ sender: UIButton)
+    //最近使用
+    func recentBtnClcik(_ sender: UIButton)
+    //更多按钮
+    func moreBtnClcik()
+
+}
+
 class SuperLoanHeaderView: UIView {
 
-    
-    @objc var sdCycleScrollview : SDCycleScrollView?
+    @objc weak var delegate: SuperLoanHeaderViewDelegate?
+    @objc var recentImageNameArray : NSArray?
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -24,6 +35,7 @@ class SuperLoanHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        recentImageNameArray = ["http://192.168.5.26/fxd/M00/09/F7/wKgFGlowglSER8BxAAAAAOVyU4Y166.png","http://192.168.5.26/fxd/M00/09/F7/wKgFGlowglSER8BxAAAAAOVyU4Y166.png","http://192.168.5.26/fxd/M00/09/F7/wKgFGlowglSER8BxAAAAAOVyU4Y166.png","http://192.168.5.26/fxd/M00/09/F7/wKgFGlowglSER8BxAAAAAOVyU4Y166.png"]
         setupUI()
     }
     
@@ -51,7 +63,7 @@ extension SuperLoanHeaderView{
         hotRecommendationView.addSubview(hotLineView)
         hotLineView.snp.makeConstraints { (make) in
             make.left.equalTo(hotRecommendationView.snp.left).offset(20)
-            make.top.equalTo(hotRecommendationView.snp.top).offset(20)
+            make.top.equalTo(hotRecommendationView.snp.top).offset(10)
             make.height.equalTo(16)
             make.width.equalTo(3)
         }
@@ -66,20 +78,34 @@ extension SuperLoanHeaderView{
             make.top.equalTo(hotLineView.snp.top).offset(0)
         }
         
-        sdCycleScrollview = SDCycleScrollView()
-        sdCycleScrollview?.isUserInteractionEnabled = false
-        sdCycleScrollview?.onlyDisplayText = true
-        sdCycleScrollview?.titleLabelBackgroundColor = UIColor.white
-        sdCycleScrollview?.titleLabelTextColor = RedPacket_COLOR
-        sdCycleScrollview?.scrollDirection = .vertical
-        sdCycleScrollview?.titleLabelTextFont = UIFont.yx_systemFont(ofSize: 12)
-        hotRecommendationView.addSubview(sdCycleScrollview!)
-        sdCycleScrollview?.snp.makeConstraints({ (make) in
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.contentSize = CGSize(width: 120 * 4 + 20 * 3 ,height: 80)
+        hotRecommendationView.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
             make.left.equalTo(hotRecommendationView.snp.left).offset(20)
             make.top.equalTo(hotTitleLabel.snp.bottom).offset(10)
             make.height.equalTo(80)
             make.right.equalTo(hotRecommendationView.snp.right).offset(-20)
-        })
+        }
+        
+        for index in 0..<4 {
+            let btn = UIButton()
+            btn.tag = 101 + index
+            let url = URL(string: recentImageNameArray![index] as! String)
+            btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
+                
+            })
+            btn.addTarget(self, action: #selector(hotBtnClick(_:)), for: .touchUpInside)
+            scrollView.addSubview(btn)
+            btn.snp.makeConstraints({ (make) in
+                make.left.equalTo(scrollView.snp.left).offset(index * 140)
+                make.top.equalTo(scrollView.snp.top).offset(0)
+                make.width.equalTo(120)
+                make.height.equalTo(80)
+            })
+        }
+        
         
         let recentView = UIView()
         recentView.backgroundColor = UIColor.white
@@ -110,5 +136,93 @@ extension SuperLoanHeaderView{
             make.top.equalTo(recentLineView.snp.top).offset(0)
         }
         
+        for index in 0..<5 {
+            let btn = UIButton()
+            btn.tag = 101 + index
+            btn.layer.cornerRadius = 5.0
+            if index > (recentImageNameArray?.count)! - 1{
+                btn.setImage(UIImage.init(named: "btn_image_icon"), for: .normal)
+            }else{
+                
+                let url = URL(string: recentImageNameArray![index] as! String)
+                btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
+                    
+                })
+            }
+            btn.addTarget(self, action:#selector(recentBtnClcik(_:)), for: .touchUpInside)
+            recentView.addSubview(btn)
+            btn.snp.makeConstraints({ (make) in
+                make.left.equalTo(recentTitle.snp.right).offset(17 + 34 * index)
+                make.centerY.equalTo(recentView.snp.centerY)
+                make.height.equalTo(24)
+                make.width.equalTo(24)
+            })
+            
+        }
+        
+        
+        let rightBtn = UIButton()
+        rightBtn.setImage(UIImage.init(named: "more_btn_icon"), for: .normal)
+        rightBtn.addTarget(self, action: #selector(moreBtnClcik), for: .touchUpInside)
+        recentView.addSubview(rightBtn)
+        rightBtn.snp.makeConstraints { (make) in
+            make.right.equalTo(recentView.snp.right).offset(-20)
+            make.centerY.equalTo(recentView.snp.centerY)
+        }
+        
+        let moreBtn = UIButton()
+        moreBtn.setTitle("更多", for: .normal)
+        moreBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
+        moreBtn.titleLabel?.font = UIFont.yx_systemFont(ofSize: 15)
+        moreBtn.addTarget(self, action: #selector(moreBtnClcik), for: .touchUpInside)
+        recentView.addSubview(moreBtn)
+        moreBtn.snp.makeConstraints { (make) in
+            make.right.equalTo(rightBtn.snp.left).offset(-8)
+            make.centerY.equalTo(recentView.snp.centerY)
+        }
+        
+        let label = UILabel()
+        label.text = "..."
+        label.textColor = TITLE_COLOR
+        label.font = UIFont.yx_systemFont(ofSize: 15)
+        recentView.addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.right.equalTo(moreBtn.snp.left).offset(-14)
+            make.top.equalTo(recentView.snp.top).offset(8)
+        }
+    }
+}
+
+extension SuperLoanHeaderView{
+    
+    @objc fileprivate func recentBtnClcik(_ sender : UIButton){
+        
+        if delegate != nil {
+            delegate?.recentBtnClcik(sender)
+        }
+    }
+    
+    @objc fileprivate func moreBtnClcik(){
+        
+        if delegate != nil {
+            delegate?.moreBtnClcik()
+        }
+    }
+    
+    @objc fileprivate func hotBtnClick(_ sender : UIButton){
+        
+        if delegate != nil {
+            delegate?.hotBtnClick(sender)
+        }
+    }
+    
+    override var  frame:(CGRect){
+        
+        didSet{
+            
+            let newFrame = CGRect(x:0,y:0,width:_k_w,height:215)
+            super.frame = newFrame
+            
+        }
     }
 }

@@ -62,6 +62,24 @@
     }];
 }
 
+
+-(void)paidcenterQbbWithDrawCapitalPlatform:(NSString *)capitalPlatform{
+    
+    NSDictionary * dic  = @{@"capitalPlatform":capitalPlatform};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_paidcenter_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
+        
+        if (self.returnBlock) {
+            self.returnBlock(object);
+        }
+        
+    } failure:^(EnumServerStatus status, id object) {
+        
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+        
+    }];
+}
 @end
 
 

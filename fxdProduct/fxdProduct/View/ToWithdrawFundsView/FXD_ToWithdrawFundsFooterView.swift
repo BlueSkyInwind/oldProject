@@ -269,7 +269,7 @@ extension FXD_ToWithdrawFundsFooterView {
         applyForBtn?.snp.makeConstraints({ (make) in
             make.left.equalTo(self.snp.left).offset(20)
             make.right.equalTo(self.snp.right).offset(-20)
-            make.bottom.equalTo(self.snp.bottom).offset(-15)
+            make.bottom.equalTo(self.snp.bottom).offset(-150)
             //            make.top.equalTo((protocolBackView?.snp.bottom)!).offset(5)
         })
         

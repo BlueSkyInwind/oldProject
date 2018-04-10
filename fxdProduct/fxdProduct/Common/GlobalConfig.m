@@ -282,6 +282,10 @@ NSString *const     _ExperienceValue_url     =    @"operation/experienceValueGra
 NSString *const     _compQuery_url     =    @"dc/compQuery";
 //导流平台跳转接口
 NSString *const     _getCompLink_url     =    @"dc/operation/user/getCompLink";
+//钱爸爸提现申请
+NSString *const     _paidcenter_url     =    @"paidcenter/qbbWithDraw";
+//站内信删除、清空
+NSString *const     _delMsg_url     =    @"market/operation/delMsg";
 
 
 #pragma mark - 对外导流接口

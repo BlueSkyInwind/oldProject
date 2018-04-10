@@ -245,10 +245,28 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        items.remove(at: indexPath.row - 1)
-        tableView.reloadData()
+        delMessage(delType: "1", operUserMassgeId: items[indexPath.row - 1].id_)
+
     }
     
+    
+    func delMessage(delType:String,operUserMassgeId:String){
+        let messageVM = MessageViewModel()
+        messageVM .setBlockWithReturn({ (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                
+                self.getData(isHeaderFresh: true)
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+
+        }
+        
+        messageVM.delMsgDelType(delType, operUserMassgeId: operUserMassgeId)
+    }
 
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"
