@@ -80,6 +80,6 @@
 #import "MemberShipInfoModel.h"
 
 #import "HgLoanProtoolListModel.h"
-
+#import "SDCycleScrollView.h"
 
 #endif /* fxdProduct_Bridging_Header_h */

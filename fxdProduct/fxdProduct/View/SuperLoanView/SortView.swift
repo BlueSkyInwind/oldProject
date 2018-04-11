@@ -70,7 +70,7 @@ extension SortView{
         
         didSet{
             
-            let newFrame = CGRect(x:0,y:110,width:_k_w,height:_k_h - 110)
+            let newFrame = CGRect(x:0,y:360,width:_k_w,height:_k_h - 360)
             super.frame = newFrame
             
         }

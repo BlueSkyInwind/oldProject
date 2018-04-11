@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,WithdrawFundsFooterViewDelegate {
+class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,WithdrawFundsFooterViewDelegate ,ApplicationChoosePickViewDelegate{
     
     var headerView:FXD_displayAmountCommonHeaderView?
     var tableView:UITableView?
@@ -28,12 +28,15 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     var userSelectIndex:Int? = 0
     var selectedCard:CardInfo?
     var protocolArray : NSMutableArray?
+    var periodArray : NSMutableArray? = ["按周还款","按月还款","按日还款"]
+    var choosePV:FXD_ApplicationChoosePickerView?
+    var periodIndex : NSInteger?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = LOAN_APPLICATION_COLOR
         protocolArray = NSMutableArray.init()
-        
+        periodIndex = 0
         self.obtainWithDrawFundsInfo {[weak self] (isSuccess) in
             
             self?.configureView()
@@ -106,6 +109,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         }
         headerView = FXD_displayAmountCommonHeaderView.init(frame: rect, amount: drawAmount!, periodNum: String.init(format: "借款期数：%@期", period!), periodAmount: String.init(format: "每期还款：%@元", periodAmount!))
         headerView?.titleLabel?.text = "待提款"
+        
         tableView?.tableHeaderView = headerView
         headerView?.goBack = {
             self.navigationController?.popViewController(animated: true)
@@ -129,7 +133,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -140,6 +144,19 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == 0 {
+
+            var periodCell = tableView.dequeueReusableCell(withIdentifier:"FXD_LoanApplicationCellTableViewCell") as? FXD_LoanApplicationCellTableViewCell
+            if periodCell == nil {
+                periodCell = FXD_LoanApplicationCellTableViewCell.init(style: .default, reuseIdentifier: "FXD_LoanApplicationCellTableViewCell")
+            }
+            periodCell?.selectionStyle  = .none
+            periodCell?.titleLabel?.text = "还款方式"
+            periodCell?.contentLabel?.text = (periodArray?[periodIndex!] as! String)
+            return periodCell!
+
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "FXD_ToWithDrawFundsTableViewCell", for: indexPath) as! FXD_ToWithDrawFundsTableViewCell
         cell.selectionStyle  = .none
     
@@ -163,24 +180,34 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if self.drawingsInfoModel?.platformType == "2" {
-            let controller = BankCardViewController()
-            controller.cardInfo = self.selectedCard
-            self.navigationController?.pushViewController(controller, animated: true)
-        }else{
+        switch indexPath.row {
+        case 0:
             
-            fatchCardInfo {[weak self] (isSuccess,isBankCard) in
-                guard  isSuccess else {
-                    return
-                }
+            self.addChoosePickerView(["按周还款","按月还款","按日还款"])
+            
+        case 1:
+            if self.drawingsInfoModel?.platformType == "2" {
+                let controller = BankCardViewController()
+                controller.cardInfo = self.selectedCard
+                self.navigationController?.pushViewController(controller, animated: true)
+            }else{
                 
-                if !isBankCard {
-                    self?.pushAddBanckCard()
-                }else{
-                    self?.pushUserBankListVC()
+                self.fatchCardInfo {[weak self] (isSuccess,isBankCard) in
+                    guard  isSuccess else {
+                        return
+                    }
+                    
+                    if !isBankCard {
+                        self?.pushAddBanckCard()
+                    }else{
+                        self?.pushUserBankListVC()
+                    }
                 }
             }
+        default:
+            break
         }
+        
     }
     
     
@@ -515,6 +542,28 @@ extension FXD_ToWithdrawFundsViewController {
             complication(false,"")
         }
         commonVM.obtainProductProtocolType(productId, typeCode: protocolType, apply_id: applyId, periods: periods, stagingType: self.drawingsInfoModel?.stagingType)
+    }
+}
+
+extension FXD_ToWithdrawFundsViewController{
+    //MRAK:选择框视图
+    func addChoosePickerView(_ array:[String])  {
+        if choosePV != nil {
+            return
+        }
+        choosePV = FXD_ApplicationChoosePickerView.init(vc: self, dataArr:array)
+        choosePV?.delegate = self
+        choosePV?.show()
+    }
+    
+    func chooseCancelBtn() {
+        choosePV = nil
+    }
+    func chooseSureBtn(_ content: String,row:NSInteger) {
+        
+        periodIndex = row
+        self.tableView?.reloadData()
+        choosePV = nil
     }
 }
 

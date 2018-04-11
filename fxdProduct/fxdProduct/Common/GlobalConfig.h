@@ -181,6 +181,9 @@ UIKIT_EXTERN NSString * const       _ExperienceValue_url;                    //�
 UIKIT_EXTERN NSString * const       _NewSummary_url;                         //新版首页接口
 UIKIT_EXTERN NSString * const       _compQuery_url;                          //首页贷超接口
 UIKIT_EXTERN NSString * const       _getCompLink_url;                          //导流平台跳转接口
+UIKIT_EXTERN NSString * const       _paidcenter_url;                          //钱爸爸提现申请
+UIKIT_EXTERN NSString * const       _delMsg_url;                          //站内信删除、清空
+
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码
 UIKIT_EXTERN NSString * const   CODE_FINDPASS;         ///密码找回验证码

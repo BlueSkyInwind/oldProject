@@ -9,7 +9,7 @@
 #import "FXD_SuperLoanViewController.h"
 #import "CompQueryViewModel.h"
 #import "CompQueryModel.h"
-@interface FXD_SuperLoanViewController ()<UITableViewDelegate,UITableViewDataSource,SuperLoanHeaderCellDelegate,SortViewDelegate,FilterViewDelegate>{
+@interface FXD_SuperLoanViewController ()<UITableViewDelegate,UITableViewDataSource,SuperLoanHeaderCellDelegate,SortViewDelegate,FilterViewDelegate,SuperLoanHeaderViewDelegate,SuperLoanCellDelegate>{
     
     SuperLoanHeaderCell *_superLoanHeaderCell;
     SortView *_sortView;
@@ -21,6 +21,7 @@
     NSString *_maxDays;
     NSString *_minAmount;
     NSString *_minDays;
+    NSString *_type;
 }
 
 @property(nonatomic,strong)UITableView *tableView;
@@ -33,7 +34,7 @@
     [super viewDidLoad];
     _index = 0;
     _dataArray = [NSMutableArray arrayWithCapacity:100];
-    
+    _type = @"1";
     [self createTab];
     
     // Do any additional setup after loading the view.
@@ -44,13 +45,19 @@
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, _k_w, _k_h-64-49) style:UITableViewStylePlain];
     [self.tableView registerClass:[SuperLoanCell class] forCellReuseIdentifier:@"SuperLoanCell"];
     [self.tableView registerClass:[SuperLoanHeaderCell class] forCellReuseIdentifier:@"SuperLoanHeaderCell"];
+    [self.tableView registerClass:[SuperLoanNoneCell class] forCellReuseIdentifier:@"SuperLoanNoneCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.scrollEnabled = true;
-    self.tableView.backgroundColor = rgb(250, 250, 250);
+    self.tableView.backgroundColor = rgb(242, 242, 242);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
+    
+    
+    SuperLoanHeaderView *headerView = [[SuperLoanHeaderView alloc]init];
+    headerView.delegate = self;
+    self.tableView.tableHeaderView = headerView;
     
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     header.automaticallyChangeAlpha = YES;
@@ -106,15 +113,20 @@
             for (RowsModel *rowModel in model.rows) {
                 [_dataArray addObject:rowModel];
             }
-            
+        
             [_tableView.mj_header endRefreshing];
             [_tableView.mj_footer endRefreshing];
             [_tableView reloadData];
         }else{
+            
+            [_tableView.mj_header endRefreshing];
+            [_tableView.mj_footer endRefreshing];
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
     }];
     
     [viewModel compQueryLimit:@"15" maxAmount:maxAmount maxDays:maxDays minAmount:minAmount minDays:minDays offset:offset order:order sort:sort];
@@ -130,15 +142,29 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return _dataArray.count + 1;
+    if (_dataArray.count > 0) {
+        
+        return _dataArray.count + 1;
+    }
+    
+    return  2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        return 60;
+        return 80;
     }
-    return 110;
+    
+    if (_dataArray.count <= 0) {
+        
+        return _k_h - 215 - 80 - 64 - 49;
+    }
+    if ([_type isEqualToString:@"1"]) {
+        
+        return 110;
+    }
+    return 75;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -160,36 +186,64 @@
         
     }
     
+    if (_dataArray.count <= 0) {
+        
+        SuperLoanNoneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SuperLoanNoneCell"];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.selected = NO;
+        return cell;
+    }
+    
     SuperLoanCell *superLoanCell = [tableView dequeueReusableCellWithIdentifier:@"SuperLoanCell"];
     [superLoanCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    superLoanCell.backgroundColor = rgb(242, 242, 242);
+    superLoanCell.backgroundColor = [UIColor whiteColor];
     superLoanCell.selected = NO;
-    
+    superLoanCell.delegate = self;
+    superLoanCell.type = _type;
+    superLoanCell.collectionBtn.tag = indexPath.row - 1;
     RowsModel *model = _dataArray[indexPath.row-1];
     [superLoanCell.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.plantLogo] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
     superLoanCell.titleLabel.text = model.plantName;
-    superLoanCell.qutaLabel.text = [NSString stringWithFormat:@"额度:最高%@%@",model.maximumAmount,model.maximumAmountUnit];
+
+    NSString *maximumAmount = model.maximumAmount != nil?model.maximumAmount:@"";
+    superLoanCell.qutaLabel.text = [NSString stringWithFormat:@"额度:最高%@%@",maximumAmount,model.maximumAmountUnit];
+    NSString *term = model.unitStr != nil?model.unitStr:@"";
+    superLoanCell.termLabel.text = [NSString stringWithFormat:@"期限:%@",term];
+    if (![term isEqualToString:@""]) {
+        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:superLoanCell.termLabel.text];
+        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,attriStr.length-4)];
+        superLoanCell.termLabel.attributedText = attriStr;
+    }
     
-    superLoanCell.termLabel.text = [NSString stringWithFormat:@"期限:%@",model.unitStr];
-    NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:superLoanCell.termLabel.text];
-    [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,attriStr.length-4)];
-    superLoanCell.termLabel.attributedText = attriStr;
+    NSString *referenceRate = model.referenceRate != nil?model.referenceRate:@"";
+    superLoanCell.feeLabel.text = [NSString stringWithFormat:@"费用:%%%@/%@",referenceRate,[self rateUnit: model.referenceMode]];
     
-    superLoanCell.feeLabel.text = [NSString stringWithFormat:@"费用:%%%@/%@",model.referenceRate,[self rateUnit: model.referenceMode]];
-    NSMutableAttributedString *attriStr1 = [[NSMutableAttributedString alloc] initWithString:superLoanCell.feeLabel.text];
-    [attriStr1 addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,attriStr1.length-4)];
-    superLoanCell.feeLabel.attributedText = attriStr1;
-    
+    if (![referenceRate isEqualToString:@""]) {
+        NSMutableAttributedString *attriStr1 = [[NSMutableAttributedString alloc] initWithString:superLoanCell.feeLabel.text];
+        [attriStr1 addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,attriStr1.length-4)];
+        superLoanCell.feeLabel.attributedText = attriStr1;
+    }
     [superLoanCell.descBtn setTitle:model.platformIntroduction forState:UIControlStateNormal];
     
     [superLoanCell.descBtn setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
     superLoanCell.descBtn.layer.borderColor = [UIColor purpleColor].CGColor;
+    NSDictionary *dic = @{NSFontAttributeName : [UIFont yx_systemFontOfSize:12]};
+    CGFloat width = [model.platformIntroduction boundingRectWithSize:CGSizeMake(_k_h, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size.width + 20;
+    
+    [superLoanCell.descBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo([NSNumber numberWithFloat:width]);
+    }];
     if (indexPath.row % 2 == 0){
         
         [superLoanCell.descBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         superLoanCell.descBtn.layer.borderColor = [UIColor blueColor].CGColor;
     }
     
+    [superLoanCell.collectionBtn setImage:[UIImage imageNamed:@"collection_icon"] forState:UIControlStateNormal];
+    if ([model.collection isEqualToString:@"1"]) {
+        [superLoanCell.collectionBtn setImage:[UIImage imageNamed:@"collection_selected_icon"] forState:UIControlStateNormal];
+    }
     return superLoanCell;
     
 }
@@ -251,17 +305,21 @@
         [_filterView removeFromSuperview];
     }
     
-    if (_superLoanHeaderCell.filterBtn.selected) {
+    if (_superLoanHeaderCell.filterBtn.selected || _superLoanHeaderCell.filterImageBtn.selected) {
         
         _superLoanHeaderCell.filterBtn.selected = NO;
-        _superLoanHeaderCell.filterLabel.textColor = rgb(77, 77, 77);
-        [_superLoanHeaderCell.filterBtn setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
+        _superLoanHeaderCell.filterImageBtn.selected = NO;
+        [_superLoanHeaderCell.filterBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
+        [_superLoanHeaderCell.filterImageBtn setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
     }
-    sender.selected = !sender.selected;
-    if (sender.selected) {
+    
+    _superLoanHeaderCell.sortBtn.selected = !_superLoanHeaderCell.sortBtn.selected;
+    _superLoanHeaderCell.sortImageBtn.selected = !_superLoanHeaderCell.sortImageBtn.selected;
+
+    if (_superLoanHeaderCell.sortBtn.selected || _superLoanHeaderCell.sortImageBtn.selected) {
         
-        _superLoanHeaderCell.sortLabel.textColor = UI_MAIN_COLOR;
-        [sender setImage:[UIImage imageNamed:@"sort_selected_icon"] forState:UIControlStateNormal];
+        [_superLoanHeaderCell.sortBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+        [_superLoanHeaderCell.sortImageBtn setImage:[UIImage imageNamed:@"sort_selected_icon"] forState:UIControlStateNormal];
         
         [UIView animateWithDuration:1 animations:^{
             _sortView = [[SortView alloc]init];
@@ -272,8 +330,9 @@
         }];
         
     }else{
-        _superLoanHeaderCell.sortLabel.textColor = rgb(77, 77, 77);
-        [sender setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
+        
+        [_superLoanHeaderCell.sortBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
+        [_superLoanHeaderCell.sortImageBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
         [UIView animateWithDuration:1 animations:^{
             [_sortView removeFromSuperview];
             
@@ -288,18 +347,22 @@
         [_sortView removeFromSuperview];
     }
     
-    if (_superLoanHeaderCell.sortBtn.selected) {
+    if (_superLoanHeaderCell.sortBtn.selected || _superLoanHeaderCell.sortImageBtn.selected) {
         
         _superLoanHeaderCell.sortBtn.selected = NO;
-        _superLoanHeaderCell.sortLabel.textColor = rgb(77, 77, 77);
-        [_superLoanHeaderCell.sortBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
+        _superLoanHeaderCell.sortImageBtn.selected = NO;
+        [_superLoanHeaderCell.sortBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
+        [_superLoanHeaderCell.sortImageBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
         
     }
     
-    sender.selected = !sender.selected;
-    if (sender.selected) {
-        _superLoanHeaderCell.filterLabel.textColor = UI_MAIN_COLOR;
-        [sender setImage:[UIImage imageNamed:@"filter_selected_icon"] forState:UIControlStateNormal];
+    _superLoanHeaderCell.filterBtn.selected = !_superLoanHeaderCell.filterBtn.selected;
+    _superLoanHeaderCell.filterImageBtn.selected = !_superLoanHeaderCell.filterImageBtn.selected;
+
+    if (_superLoanHeaderCell.filterBtn.selected || _superLoanHeaderCell.filterImageBtn.selected) {
+        
+        [_superLoanHeaderCell.filterBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+        [_superLoanHeaderCell.filterImageBtn setImage:[UIImage imageNamed:@"filter_selected_icon"] forState:UIControlStateNormal];
         [UIView animateWithDuration:1 animations:^{
             _filterView = [[FilterView alloc]init];
             _filterView.delegate = self;
@@ -308,8 +371,9 @@
         }];
         
     }else{
-        _superLoanHeaderCell.filterLabel.textColor = rgb(77, 77, 77);
-        [sender setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
+        
+        [_superLoanHeaderCell.filterBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
+        [_superLoanHeaderCell.filterImageBtn setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
         [UIView animateWithDuration:1 animations:^{
             [_filterView removeFromSuperview];
             
@@ -317,13 +381,43 @@
     }
 }
 
+-(void)tabBtnClick:(UIButton *)sender{
+    
+    NSInteger tag = sender.tag;
+    _type = [NSString stringWithFormat:@"%ld",tag - 100];
+    [_tableView reloadData];
+    switch (tag) {
+        case 101:
+            [_superLoanHeaderCell.loanBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+            [_superLoanHeaderCell.gameBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.tourismBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"贷款"];
+            break;
+        case 102:
+            [_superLoanHeaderCell.loanBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.gameBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+            [_superLoanHeaderCell.tourismBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"游戏"];
+            break;
+        case 103:
+            [_superLoanHeaderCell.loanBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.gameBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.tourismBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"旅游"];
+            break;
+        default:
+            break;
+    }
+}
+
 -(void)sortTabSelected:(NSInteger)selectedIndex{
     
     _index = selectedIndex;
     
-    _superLoanHeaderCell.sortLabel.textColor = rgb(77, 77, 77);
-    [_superLoanHeaderCell.sortBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
+    [_superLoanHeaderCell.sortBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
+    [_superLoanHeaderCell.sortImageBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
     _superLoanHeaderCell.sortBtn.selected = NO;
+    _superLoanHeaderCell.sortImageBtn.selected = NO;
     [self getDataMaxAmount:@"10000" maxDays:@"25" minAmount:@"100" minDays:@"3" offset:@"0" order:@"ASC" sort:[NSString stringWithFormat:@"%ld",selectedIndex]];
     [UIView animateWithDuration:1 animations:^{
         [_sortView removeFromSuperview];
@@ -333,9 +427,10 @@
 
 -(void)sureBtnClick:(NSString *)minLoanMoney maxLoanMoney:(NSString *)maxLoanMoney minLoanPeriod:(NSString *)minLoanPeriod maxLoanPeriod:(NSString *)maxLoanPeriod{
     
-    _superLoanHeaderCell.filterLabel.textColor = rgb(77, 77, 77);
-    [_superLoanHeaderCell.filterBtn setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
+    [_superLoanHeaderCell.filterBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
+    [_superLoanHeaderCell.filterImageBtn setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
     _superLoanHeaderCell.filterBtn.selected = NO;
+    _superLoanHeaderCell.filterImageBtn.selected = NO;
     
     NSLog(@"%@==%@==%@==%@==",minLoanMoney,maxLoanMoney,minLoanPeriod,maxLoanPeriod);
     if (maxLoanMoney.integerValue < minLoanMoney.integerValue) {
@@ -361,6 +456,48 @@
     }];
     
 }
+
+
+-(void)hotBtnClick:(UIButton *)sender{
+    
+    NSInteger tag = sender.tag;
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:[NSString stringWithFormat:@"热门推荐第%ld个按钮",tag]];
+}
+
+-(void)recentBtnClcik:(UIButton *)sender{
+    
+    NSInteger tag = sender.tag;
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:[NSString stringWithFormat:@"最近使用第%ld个按钮",tag]];
+}
+
+-(void)moreBtnClcik{
+    
+    RecentViewController *controller = [[RecentViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:true];
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"更多按钮"];
+}
+
+-(void)collectionBtn:(UIButton *)sender{
+    
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:[NSString stringWithFormat:@"%ld",sender.tag]];
+    sender.selected = !sender.selected;
+    
+    RowsModel *model = _dataArray[sender.tag];
+    if (sender.selected) {
+    
+        model.collection = @"1";
+        [sender setImage:[UIImage imageNamed:@"collection_selected_icon"] forState:UIControlStateNormal];
+        
+    }else{
+        
+        model.collection = nil;
+        [sender setImage:[UIImage imageNamed:@"collection_icon"] forState:UIControlStateNormal];
+    }
+    
+    [self.tableView reloadData];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

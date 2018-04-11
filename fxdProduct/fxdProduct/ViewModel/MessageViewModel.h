@@ -25,4 +25,12 @@
  */
 -(void)showMsgPreviewPageNum:(NSString *)pageNum pageSize:(NSString *)pageSize;
 
+/**
+ 站内信删除、清空
+ 
+ @param delType 类型：1：删除，2：清空
+ @param operUserMassgeId 站内信ID 删除时必要，清空时非必要
+ */
+-(void)delMsgDelType:(NSString *)delType operUserMassgeId:(NSString *)operUserMassgeId;
+
 @end
