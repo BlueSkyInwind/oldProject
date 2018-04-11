@@ -76,6 +76,8 @@
 #import "HG_Manager.h"
 #import "SmsCodeModel.h"
 #import "SubmitInfoModel.h"
+#import "UserMemberShipViewModel.h"
+#import "MemberShipInfoModel.h"
 
 #import "HgLoanProtoolListModel.h"
 

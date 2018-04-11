@@ -451,6 +451,7 @@
 		849AC2671FF0EF56005E435F /* libMoxieSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 849AC2651FF0EF55005E435F /* libMoxieSDK.a */; };
 		849AC26E1FF0FABE005E435F /* FXD_MXVerifyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AC26D1FF0FABE005E435F /* FXD_MXVerifyManager.m */; };
 		849AC26F1FF0FABE005E435F /* FXD_MXVerifyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AC26D1FF0FABE005E435F /* FXD_MXVerifyManager.m */; };
+		849BD269207B070700DD47C6 /* MemberShipPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BD268207B070700DD47C6 /* MemberShipPayViewController.swift */; };
 		84A37FF21FAC12A8008FB7AF /* HomeChoosePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A37FEB1FAC12A8008FB7AF /* HomeChoosePopView.swift */; };
 		84A37FF31FAC12A8008FB7AF /* HomeChoosePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A37FEB1FAC12A8008FB7AF /* HomeChoosePopView.swift */; };
 		84A37FF41FAC12A8008FB7AF /* ActivityHomePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A37FED1FAC12A8008FB7AF /* ActivityHomePopView.m */; };
@@ -491,6 +492,10 @@
 		84A380331FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A3802E1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib */; };
 		84A380341FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3802F1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m */; };
 		84A380351FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A3802F1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m */; };
+		84A52E9B207DF2AA000BF3E8 /* UserMemberShipViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A52E9A207DF2AA000BF3E8 /* UserMemberShipViewModel.m */; };
+		84A52E9C207DF2AA000BF3E8 /* UserMemberShipViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A52E9A207DF2AA000BF3E8 /* UserMemberShipViewModel.m */; };
+		84A52EA0207DFA72000BF3E8 /* MemberShipInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A52E9F207DFA72000BF3E8 /* MemberShipInfoModel.m */; };
+		84A52EA1207DFA72000BF3E8 /* MemberShipInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A52E9F207DFA72000BF3E8 /* MemberShipInfoModel.m */; };
 		84A5696D1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */; };
 		84A5696E1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */; };
 		84A6350E1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
@@ -1787,6 +1792,7 @@
 		849AC2651FF0EF55005E435F /* libMoxieSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMoxieSDK.a; sourceTree = "<group>"; };
 		849AC26C1FF0FABE005E435F /* FXD_MXVerifyManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_MXVerifyManager.h; sourceTree = "<group>"; };
 		849AC26D1FF0FABE005E435F /* FXD_MXVerifyManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_MXVerifyManager.m; sourceTree = "<group>"; };
+		849BD268207B070700DD47C6 /* MemberShipPayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberShipPayViewController.swift; sourceTree = "<group>"; };
 		84A37FEB1FAC12A8008FB7AF /* HomeChoosePopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeChoosePopView.swift; sourceTree = "<group>"; };
 		84A37FEC1FAC12A8008FB7AF /* ActivityHomePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityHomePopView.h; sourceTree = "<group>"; };
 		84A37FED1FAC12A8008FB7AF /* ActivityHomePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityHomePopView.m; sourceTree = "<group>"; };
@@ -1816,6 +1822,10 @@
 		84A3802D1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataAuthenticationListVCModules.h; sourceTree = "<group>"; };
 		84A3802E1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDataAuthenticationListVCModules.xib; sourceTree = "<group>"; };
 		84A3802F1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataAuthenticationListVCModules.m; sourceTree = "<group>"; };
+		84A52E99207DF2AA000BF3E8 /* UserMemberShipViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserMemberShipViewModel.h; sourceTree = "<group>"; };
+		84A52E9A207DF2AA000BF3E8 /* UserMemberShipViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserMemberShipViewModel.m; sourceTree = "<group>"; };
+		84A52E9E207DFA72000BF3E8 /* MemberShipInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemberShipInfoModel.h; sourceTree = "<group>"; };
+		84A52E9F207DFA72000BF3E8 /* MemberShipInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemberShipInfoModel.m; sourceTree = "<group>"; };
 		84A5696B1F983AFC003A870E /* LapseDiscountTicketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LapseDiscountTicketViewController.h; sourceTree = "<group>"; };
 		84A5696C1F983AFC003A870E /* LapseDiscountTicketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LapseDiscountTicketViewController.m; sourceTree = "<group>"; };
 		84A6350C1F00F8B800146A8A /* MobilePhoneOperatorParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobilePhoneOperatorParamModel.h; sourceTree = "<group>"; };
@@ -2616,6 +2626,8 @@
 				CC742DA2204E6E1A00D645CC /* ComplianceViewModel.m */,
 				CC80E00A206B8A70000F9BAC /* CompQueryViewModel.h */,
 				CC80E00B206B8A70000F9BAC /* CompQueryViewModel.m */,
+				84A52E99207DF2AA000BF3E8 /* UserMemberShipViewModel.h */,
+				84A52E9A207DF2AA000BF3E8 /* UserMemberShipViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3478,6 +3490,7 @@
 				635AB7911BE2FE6600C32919 /* DrawCash */,
 				84E306CC1F972BF100C97D72 /* DiscountTicket */,
 				84139DEF1FF3A071000DA896 /* ProtocolModel */,
+				84A52E9D207DFA32000BF3E8 /* MemberShip */,
 			);
 			path = DataModelModules;
 			sourceTree = "<group>";
@@ -3839,6 +3852,7 @@
 			children = (
 				84192A942079AE4C0042E8F8 /* MemberCenterViewController.swift */,
 				84192A9E2079F5BA0042E8F8 /* MembershipFeeRechargedViewController.swift */,
+				849BD268207B070700DD47C6 /* MemberShipPayViewController.swift */,
 			);
 			path = MemberCenter;
 			sourceTree = "<group>";
@@ -4040,6 +4054,15 @@
 				84A380131FAC1D8D008FB7AF /* UserThirdPartyAuthVCModules.swift */,
 			);
 			path = "UserDataFillingModule - 用户资料填写";
+			sourceTree = "<group>";
+		};
+		84A52E9D207DFA32000BF3E8 /* MemberShip */ = {
+			isa = PBXGroup;
+			children = (
+				84A52E9E207DFA72000BF3E8 /* MemberShipInfoModel.h */,
+				84A52E9F207DFA72000BF3E8 /* MemberShipInfoModel.m */,
+			);
+			path = MemberShip;
 			sourceTree = "<group>";
 		};
 		84A6350B1F00F85700146A8A /* MobilePhoneOperator */ = {
@@ -4981,6 +5004,7 @@
 				63E1ECD41E1B8FAA0079A2F8 /* SDCycleScrollView.m in Sources */,
 				638A16F31E517D9F00AB8AB6 /* LOTAnimatablePointValue.m in Sources */,
 				CC45E7261FD78D4500DE803D /* MessageViewModel.m in Sources */,
+				84A52E9B207DF2AA000BF3E8 /* UserMemberShipViewModel.m in Sources */,
 				63878FE51C1519CD008E1CF9 /* FXD_Utility.m in Sources */,
 				1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */,
 				84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
@@ -5036,6 +5060,7 @@
 				CCA181A01FC7F1220094DA58 /* CashViewModel.m in Sources */,
 				CCA181981FC7EED70094DA58 /* PersonalCenterModel.m in Sources */,
 				84DFBEDE1F4D97D50009DAB9 /* HighRandingModel.m in Sources */,
+				849BD269207B070700DD47C6 /* MemberShipPayViewController.swift in Sources */,
 				63FC24F11D98F7E9006F58F3 /* YYTextKeyboardManager.m in Sources */,
 				CC742DB0204E74AF00D645CC /* SmsCodeParamModel.m in Sources */,
 				638A17071E517D9F00AB8AB6 /* LOTShapeStroke.m in Sources */,
@@ -5067,6 +5092,7 @@
 				638A17091E517D9F00AB8AB6 /* LOTShapeTrimPath.m in Sources */,
 				CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */,
 				84F1E29F1FD90EE0007D3381 /* UserDataInformationModel.m in Sources */,
+				84A52EA0207DFA72000BF3E8 /* MemberShipInfoModel.m in Sources */,
 				638A16EE1E517D9F00AB8AB6 /* LOTShapeLayerView.m in Sources */,
 				638C3F2E1CF53662000446A7 /* RepayMentAvailableRedpackets.m in Sources */,
 				635B2FBA1D6AEE22009CEFE0 /* GlobalConfig.m in Sources */,
@@ -5418,6 +5444,7 @@
 				CC0DF9801EA5B1090024841A /* DataWriteAndRead.m in Sources */,
 				CC0DF9811EA5B1090024841A /* SquareRepaymentExt.m in Sources */,
 				84192AA7207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */,
+				84A52E9C207DF2AA000BF3E8 /* UserMemberShipViewModel.m in Sources */,
 				CC0DF9821EA5B1090024841A /* FaceIDLiveModel.m in Sources */,
 				CC0DF9831EA5B1090024841A /* SquareRepaymentBaseClass.m in Sources */,
 				CC0DF9841EA5B1090024841A /* UIColor.m in Sources */,
@@ -5505,6 +5532,7 @@
 				CCCC0A8F1F677B9B007E1EB0 /* UserDataResult.m in Sources */,
 				CC0DF9D01EA5B1090024841A /* UIImage+Color.m in Sources */,
 				84E62D1C1FDA7CA900B7F870 /* CustomerContactsInfoViewModel.m in Sources */,
+				84A52EA1207DFA72000BF3E8 /* MemberShipInfoModel.m in Sources */,
 				CCC1E40F205A595F007C9C07 /* ActiveModel.m in Sources */,
 				CC0DF9D21EA5B1090024841A /* TicketCell.m in Sources */,
 				CC0DF9D41EA5B1090024841A /* NSString+AES.m in Sources */,

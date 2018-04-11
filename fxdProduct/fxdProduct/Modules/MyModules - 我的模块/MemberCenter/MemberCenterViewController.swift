@@ -13,7 +13,7 @@ import UIKit
     case measuring            //测评中
     case measureNotPass    // 测评未通过
     case recharge            //充值
-    case recharging           //充值
+    case recharging           //充值中
     case refund                // 退款
     case refunding            //退款中
     case rechargeAndRefund     //退款加充值
@@ -26,33 +26,73 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
     var tableView:UITableView?
     var statusButton:UIButton?
     var memberStatus:UserMemberCenterStatus?
+    var footViewHeight:Int?
+    var memberShipInfoModel:MemberShipInfoModel?
+    var centerHeaderView:MemberCenterHeaderView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.title = "会员中心"
         addBackItem()
-        configureView()
+        self.view.backgroundColor = UIColor.white
         memberStatus = .notMeasure
-        UserMemberInStatus()
+        obtainMemberShipInfo { [weak self] (isSuccess) in
+            if isSuccess{
+                self?.navigationController?.isNavigationBarHidden = true
+                self?.configureView()
+                self?.UserMemberInStatus()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = true
-        
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
-
     }
     
     @objc func statusButtonClick()  {
-       let membershipFeeRechargedVC = MembershipFeeRechargedViewController.init()
+        switch memberStatus {
+        case .notMeasure?:
+            
+            break;
+        case .measureNotPass?:
+            
+            break;
+        case .recharge?:
+            let membershipFeeRechargedVC = MembershipFeeRechargedViewController.init()
+            self.navigationController?.pushViewController(membershipFeeRechargedVC, animated: true)
+            break;
+        case .refund?:
+            let memberShipPayViewController = MemberCenterViewController.init()
+            self.navigationController?.pushViewController(memberShipPayViewController, animated: true)
+            break;
+        default: break
+        }
+    }
+    
+    @objc func rechargeButtonClick()  {
+        let membershipFeeRechargedVC = MembershipFeeRechargedViewController.init()
         self.navigationController?.pushViewController(membershipFeeRechargedVC, animated: true)
     }
     
+    @objc func refundButtonClick()  {
+        let memberShipPayViewController = MemberCenterViewController.init()
+        self.navigationController?.pushViewController(memberShipPayViewController, animated: true)
+    }
+    
     func UserMemberInStatus()  {
+        footViewHeight = 150
+        self.titleHeaderView?.amountStr = (memberShipInfoModel?.availableCredit)!
+        self.centerHeaderView?.payAmountLabel.text = "\((memberShipInfoModel?.requestAmount)!)元"
+        self.centerHeaderView?.payBackAmountLabel.text = "\((memberShipInfoModel?.chargeAmount)!)元"
+        self.centerHeaderView?.returnAmountLabel.text = "\((memberShipInfoModel?.refundAmount)!)元"
+        self.centerHeaderView?.settleAmountLabel.text = "\((memberShipInfoModel?.settleCount)!)次"
+        tableView?.reloadData()
         switch memberStatus {
         case .notMeasure?:
             setStatusButtonType("前往测评", imageName: "applicationBtn_Image", enable: true)
@@ -76,10 +116,11 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
             setStatusButtonType("退款中...", imageName: "applicationBtn_unselect_Image", enable: true)
             break;
         case .rechargeAndRefund?:
-            
+            tableView?.reloadData()
             break;
         case .noStatus?:
-            
+            footViewHeight = 0;
+            tableView?.reloadData()
             break;
         default: break
         }
@@ -143,7 +184,32 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
         
         if memberStatus == .rechargeAndRefund {
             
+            let rechargeButton = UIButton.init(type: UIButtonType.custom)
+            rechargeButton.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
+            rechargeButton.setTitle("充值", for: UIControlState.normal)
+            rechargeButton.addTarget(self, action: #selector(rechargeButtonClick), for: .touchUpInside)
+            footerView.addSubview(rechargeButton)
+            rechargeButton.snp.makeConstraints({ (make) in
+                make.top.equalTo(footerView.snp.top).offset(40)
+                make.centerX.equalTo(footerView.snp.centerX).offset(-80)
+                make.height.equalTo(footerView.snp.right).offset(30)
+                make.width.equalTo(footerView.snp.right).offset(100)
+            })
+            
+            let refundButton = UIButton.init(type: UIButtonType.custom)
+            refundButton.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
+            refundButton.setTitle("充值", for: UIControlState.normal)
+            refundButton.addTarget(self, action: #selector(refundButtonClick), for: .touchUpInside)
+            footerView.addSubview(refundButton)
+            refundButton.snp.makeConstraints({ (make) in
+                make.top.equalTo(footerView.snp.top).offset(40)
+                make.centerX.equalTo(footerView.snp.centerX).offset(80)
+                make.height.equalTo(footerView.snp.right).offset(30)
+                make.width.equalTo(footerView.snp.right).offset(100)
+            })
+            
         }else{
+            
             statusButton = UIButton.init(type: UIButtonType.custom)
             statusButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
             statusButton?.setTitle("前往测评", for: UIControlState.normal)
@@ -178,6 +244,7 @@ extension MemberCenterViewController {
     
     func configureView()  {
         
+        footViewHeight = 150
         self.view.backgroundColor = LOAN_APPLICATION_COLOR
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
         self.tableView?.backgroundColor = LOAN_APPLICATION_COLOR
@@ -204,7 +271,7 @@ extension MemberCenterViewController {
         }
         let rect =  CGRect.init(x: 0, y: 0, width: Int(_k_w), height: heaerViewHeight + 74)
         let headerView = UIView.init(frame: rect)
-        titleHeaderView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.zero, amount: "3000", amountTitle: "可借额度")
+        titleHeaderView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.zero, amount: (memberShipInfoModel?.availableCredit)!, amountTitle: "可借额度")
         titleHeaderView?.titleLabel?.text = "会员中心"
         titleHeaderView?.goBackBtn?.isHidden = false
         titleHeaderView?.hintWordBackImage?.isHidden = true
@@ -217,9 +284,9 @@ extension MemberCenterViewController {
             make.height.equalTo(heaerViewHeight)
         })
         
-        let centerHeaderView = MemberCenterHeaderView.loadNib("MemberCenterHeaderView")
-        headerView.addSubview(centerHeaderView)
-        centerHeaderView.snp.makeConstraints { (make) in
+        centerHeaderView = MemberCenterHeaderView.loadNib("MemberCenterHeaderView")
+        headerView.addSubview(centerHeaderView!)
+        centerHeaderView?.snp.makeConstraints { (make) in
             make.top.equalTo((titleHeaderView?.snp.bottom)!).offset(0)
             make.left.right.equalTo(headerView)
             make.height.equalTo(74)
@@ -228,5 +295,64 @@ extension MemberCenterViewController {
     }
 
 }
+extension MemberCenterViewController {
+    
+    func obtainMemberShipInfo(_ finish:@escaping (_ success:Bool) -> Void)  {
+       let viewModel = UserMemberShipViewModel.init()
+        viewModel.setBlockWithReturn({ (returnValue) in
+            let baseResult = returnValue  as! BaseResultModel
+            if baseResult.errCode == "0"{
+                let memberShipInfo = try! MemberShipInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                self.memberShipInfoModel = memberShipInfo
+                self.judgeUserStatus(memberShipInfo)
+                finish(true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                finish(false)
+            }
+        }) {
+            finish(false)
+        }
+        viewModel.obtainMemberShipInfo()
+    }
+    
+    func judgeUserStatus(_ infoModel:MemberShipInfoModel)  {
+        if infoModel.status == "1" {
+            //会员未开通
+            if infoModel.credit == nil {
+                memberStatus = .notMeasure
+            }else{
+                let credit = Int(infoModel.credit)
+                if credit! <= 0{
+                    memberStatus = .measuring
+                }else{
+                    memberStatus = .measureNotPass
+                }
+            }
+        }else if infoModel.status == "2"{
+            //会员已开通
+            memberStatus = .recharge
+            if infoModel.isNeedRequest == "0" && infoModel.isRefundAble == "1" {
+                memberStatus = .refund
+                
+            }
+            if infoModel.isNeedRequest == "1" && infoModel.isRefundAble == "1" {
+                memberStatus = .rechargeAndRefund
 
+            }
+            if infoModel.isNeedRequest == "0" && infoModel.isRefundAble == "0" {
+                memberStatus = .noStatus
+                
+            }
+        }else if infoModel.status == "3"{
+            //会员充值中
+            memberStatus = .recharging
+            
+        }else if infoModel.status == "4"{
+            //会员退款中
+            memberStatus = .refunding
+            
+        }
+    }
+}
 

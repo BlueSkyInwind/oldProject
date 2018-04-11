@@ -1,42 +1,28 @@
 //
-//  MembershipFeeRechargedViewController.swift
+//  MemberShipPayViewController.swift
 //  fxdProduct
 //
-//  Created by admin on 2018/4/8.
+//  Created by admin on 2018/4/9.
 //  Copyright © 2018年 dd. All rights reserved.
 //
 
 import UIKit
 
-class MembershipFeeRechargedViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class MemberShipPayViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
-    var titleHeaderView:FXD_displayAmountCommonHeaderView?
     var tableView:UITableView?
-    var isAgreement:Bool?
-    let titleArr:[String] = ["支付金额","使用账户余额","银行卡"]
+    var titleHeaderView:FXD_displayAmountCommonHeaderView?
+    var titleArr:[String] = ["应付金额","使用券","使用账户余额","支付方式"]
     var  bottomButton:UIButton?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        addBackItem()
-        configureView()
+        self.configureView()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = false
-    }
-    
+
     @objc func bottomButtonClick()  {
-        
-        let memberShipPayVC = MemberCenterViewController.init()
-        self.navigationController?.pushViewController(memberShipPayVC, animated: true)
+
         
     }
     
@@ -62,7 +48,7 @@ class MembershipFeeRechargedViewController: BaseViewController,UITableViewDelega
             cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: "MembershipRechargeTableViewCell") as! MembershipRechargeTableViewCell
         }
         cell.titleLabel.text = titleArr[indexPath.row]
-        if indexPath.row == 2 {
+        if indexPath.row == 3 || indexPath.row == 1 {
             cell.accessoryType = .disclosureIndicator
         }
         return cell
@@ -73,41 +59,22 @@ class MembershipFeeRechargedViewController: BaseViewController,UITableViewDelega
         
         
     }
-
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 150
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = self.addfooterView()
-        return footerView
-    }
-    
-    func addfooterView() -> UIView {
-        let footerView = addFooterView()
+        let footerView = self.addFooterView()
         return footerView
     }
     
     func addFooterView() -> UIView {
         let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 150))
         footerView.backgroundColor = LOAN_APPLICATION_COLOR
-        let agreementView = MembershipAgreementView.init(CGRect.zero, protocolNameArr: ["《会员协议》"])
-        agreementView.isAgreementClick = {[weak self] (isClick) in
-            self?.isAgreement = isClick
-        }
-        agreementView.agreementClick = {
-            
-        }
-        footerView.addSubview(agreementView)
-        agreementView.snp.makeConstraints { (make) in
-            make.top.equalTo(footerView.snp.top).offset(13)
-            make.left.right.equalTo(footerView)
-            make.height.equalTo(20)
-        }
-        
         bottomButton = UIButton.init(type: UIButtonType.custom)
         bottomButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
-        bottomButton?.setTitle("确认支付", for: UIControlState.normal)
+        bottomButton?.setTitle("确认", for: UIControlState.normal)
         bottomButton?.addTarget(self, action: #selector(bottomButtonClick), for: .touchUpInside)
         footerView.addSubview(bottomButton!)
         bottomButton?.snp.makeConstraints({ (make) in
@@ -117,10 +84,10 @@ class MembershipFeeRechargedViewController: BaseViewController,UITableViewDelega
         })
         return footerView
     }
-
+    
+    
     /*
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
@@ -129,7 +96,9 @@ class MembershipFeeRechargedViewController: BaseViewController,UITableViewDelega
     */
 }
 
-extension MembershipFeeRechargedViewController{
+
+
+extension MemberShipPayViewController {
     
     func configureView()  {
         
@@ -159,13 +128,20 @@ extension MembershipFeeRechargedViewController{
             heaerViewHeight = 256
         }
         titleHeaderView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: Int(_k_w), height: heaerViewHeight), amount: "3000", amountTitle: "实付金额(元)")
-        titleHeaderView?.titleLabel?.text = "会员费充值"
-        titleHeaderView?.hintWordLabel?.text = "温馨提示：确保银行卡余额充足"
+        titleHeaderView?.titleLabel?.text = "支付详情"
+        titleHeaderView?.hintWordBackImage?.isHidden = true
         titleHeaderView?.goBackBtn?.isHidden = false
         titleHeaderView?.goBack = {
             self.navigationController?.popViewController(animated: true)
         }
         self.tableView?.tableHeaderView = titleHeaderView
     }
+    
+}
+
+extension MemberShipPayViewController {
+
+
+    
     
 }

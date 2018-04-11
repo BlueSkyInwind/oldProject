@@ -23,4 +23,11 @@
 //1、按周还款、2、按每2周还款、3、按月还款
 @property(nonatomic,strong)NSString<Optional> * stagingType;
 
+
 @end
+
+
+
+
+
+
