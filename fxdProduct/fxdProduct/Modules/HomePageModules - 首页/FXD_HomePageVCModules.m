@@ -34,6 +34,8 @@
 #import "CommonViewModel.h"
 #import "ComplianceViewModel.h"
 #import "HgLoanProtoolListModel.h"
+#import "QBBWitnDrawModel.h"
+
 @interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate>
 {
     NSString *_advTapToUrl;
@@ -962,6 +964,19 @@
 
 -(void)withdrawBtnClick{
     
+    HomeViewModel *homeVM = [[HomeViewModel alloc]init];
+    [homeVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            QBBWitnDrawModel *model = [[QBBWitnDrawModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [homeVM paidcenterQbbWithDrawCapitalPlatform:@"5"];
 }
 
 

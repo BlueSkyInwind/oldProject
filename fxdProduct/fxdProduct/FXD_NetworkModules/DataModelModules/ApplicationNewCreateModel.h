@@ -11,7 +11,7 @@
 @interface ApplicationNewCreateModel : JSONModel
 
 //进件平台类型
-@property(nonatomic,strong)NSString<Optional> * platformCode;
+@property(nonatomic,strong)NSString<Optional> * platformType;
 //状态 1:未开户 2：开户中 3:已开户 4:待激活
 @property(nonatomic,strong)NSString<Optional> * userStatus;
 

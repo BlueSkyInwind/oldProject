@@ -49,7 +49,14 @@
             P2PViewController *p2pVC = [[P2PViewController alloc] init];
             p2pVC.urlStr = hgUserActiveModel.ServiceUrl;
             p2pVC.jsContent = url;
-            p2pVC.retUrl = retUrl;
+            NSArray * array = hgUserActiveModel.InMap.allKeys;
+            for (NSString * key  in array) {
+                if ([key isEqualToString:@"RetUrl"]) {
+                    p2pVC.retUrl = hgUserActiveModel.InMap[key];
+                    break;
+                }
+            }
+//            p2pVC.retUrl = retUrl;
             [topRootViewController.navigationController pushViewController:p2pVC animated:YES];
         }else if ([baseResultM.errCode isEqualToString:@"2"]){
             
@@ -103,7 +110,15 @@
                 P2PViewController *p2pVC = [[P2PViewController alloc] init];
                 p2pVC.jsContent = url;
                 p2pVC.urlStr = hgUserRegModel.ServiceUrl;
-                p2pVC.retUrl = retUrl;
+                
+                NSArray * array = hgUserRegModel.InMap.allKeys;
+                for (NSString * key  in array) {
+                    if ([key isEqualToString:@"RetUrl"]) {
+                        p2pVC.retUrl = hgUserRegModel.InMap[key];
+                        break;
+                    }
+                }
+                
                 [topRootViewController.navigationController pushViewController:p2pVC animated:YES];
             }
             

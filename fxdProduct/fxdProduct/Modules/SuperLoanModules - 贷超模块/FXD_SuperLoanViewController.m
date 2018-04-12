@@ -308,7 +308,7 @@
     }
     
     [superLoanCell.collectionBtn setImage:[UIImage imageNamed:@"collection_icon"] forState:UIControlStateNormal];
-    if ([model.collection isEqualToString:@"1"]) {
+    if ([model.isCollect isEqualToString:@"0"]) {
         [superLoanCell.collectionBtn setImage:[UIImage imageNamed:@"collection_selected_icon"] forState:UIControlStateNormal];
     }
     return superLoanCell;
@@ -544,6 +544,7 @@
 -(void)moreBtnClcik{
     
     RecentViewController *controller = [[RecentViewController alloc]init];
+    controller.dataArray = _recentDataArray;
     [self.navigationController pushViewController:controller animated:true];
 //    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"更多按钮"];
 }
@@ -556,12 +557,12 @@
     RowsModel *model = _dataArray[sender.tag];
     if (sender.selected) {
     
-        model.collection = @"1";
+        model.isCollect = @"0";
         [sender setImage:[UIImage imageNamed:@"collection_selected_icon"] forState:UIControlStateNormal];
         
     }else{
         
-        model.collection = nil;
+        model.isCollect = @"1";
         [sender setImage:[UIImage imageNamed:@"collection_icon"] forState:UIControlStateNormal];
     }
     

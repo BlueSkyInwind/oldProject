@@ -148,13 +148,13 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             if baseResult?.errCode == "0" {
                 let model = try! ApplicationNewCreateModel.init(dictionary: baseResult?.data as! [AnyHashable : Any])
                 
-                if model.platformCode == "0"{
+                if model.platformType == "0"{
                     let checkVC = FXD_ToWithdrawFundsViewController()
                     self?.navigationController?.pushViewController(checkVC, animated: true)
-                }else if model.platformCode == "2"{
+                }else if model.platformType == "2"{
                     
                     self?.jumpController(model: model)
-                }else if model.platformCode == "5"{
+                }else if model.platformType == "5"{
                     self?.qBBjumpController(model: model)
                 }
                 
@@ -202,8 +202,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             print("未开户")
             
             HG_Manager.sharedHG().hgUserRegJumpP2pCtrlBankNo("", bankReservePhone: "", bankShortName: "", cardId: "", cardNo: "", retUrl: "", smsSeq: "", userCode: "", verifyCode: "", capitalPlatform: "5", vc: self)
-//            let controller = OpenAccountViewController()
-//            self.navigationController?.pushViewController(controller, animated: true)
+            
         case 2?:
             let controller = IntermediateViewController()
             self.navigationController?.pushViewController(controller, animated: true)
