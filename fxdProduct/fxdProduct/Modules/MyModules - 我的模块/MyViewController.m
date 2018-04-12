@@ -54,7 +54,7 @@
         self.MyViewTable.scrollEnabled = YES;
     }
     
-    [self addHeaderView];
+    
     [self.MyViewTable registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"bCell"];
     
 }
@@ -62,9 +62,9 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-
+    [self addHeaderView];
     [self getMessageNumber];
-    [self getExperienceValueGrade];
+//    [self getExperienceValueGrade];
 //    [self getPersonalCenterInfo];
 }
 
@@ -83,6 +83,7 @@
     _headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
     _headerView.backgroundColor = UI_MAIN_COLOR;
     _headerView.delegate = self;
+    _headerView.accountLabel.text = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
     [headerBgView addSubview:_headerView];
     [self.MyViewTable setTableHeaderView:headerBgView];
     
@@ -92,6 +93,11 @@
     [headerBgView addSubview:_middleView];
 }
 
+-(void)memberBtnClick{
+    
+    MemberCenterViewController * memberCenterVC = [[MemberCenterViewController alloc]init];
+    [self.navigationController pushViewController:memberCenterVC animated:true];
+}
 /**
  经验值体系-展示等级
  */
@@ -104,11 +110,9 @@
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             ExperienceValueGradeModel *model = [[ExperienceValueGradeModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             [_headerView.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.gradeLogo]];
-//            [_headerView.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.gradeLogo] placeholderImage:[UIImage imageNamed:@"placeholderImage_Icon"] options:SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-//            } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-//            }];
+
             if ([model.gradeName isEqualToString:@"薪薪人类"]) {
-                _headerView.isFirstLevel = @"2";
+//                _headerView.isFirstLevel = @"2";
             }
             _headerView.accountLabel.text = model.mobilePhone;
             _headerView.nameLabel.text = model.gradeName;
@@ -327,6 +331,9 @@
                 {
                     MemberCenterViewController * memberCenterVC = [[MemberCenterViewController alloc]init];
                     [self.navigationController pushViewController:memberCenterVC animated:true];
+                    
+//                    MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+//                    [self.navigationController pushViewController:myMessageVC animated:true];
                 }
                     break;
                 case 1:
@@ -385,53 +392,6 @@
         default:
             break;
     }
-//    switch (indexPath.row) {
-//        case 0:
-//        {
-//            MemberCenterViewController * memberCenterVC = [[MemberCenterViewController alloc]init];
-//            [self.navigationController pushViewController:memberCenterVC animated:true];
-//
-////            MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-////            [self.navigationController pushViewController:myMessageVC animated:true];
-//        }
-//            break;
-//        case 1:
-//        {
-//
-//            RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-//            [self.navigationController pushViewController:repayRecord animated:true];
-//        }
-//            break;
-//        case 2:
-//        {
-//            MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
-//            [self.navigationController pushViewController:myCrad animated:YES];
-//        }
-//            break;
-//        case 3:
-//        {
-//            InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
-//            [self.navigationController pushViewController:invitationVC animated:true];
-//        }
-//            break;
-//
-//        case 4:
-//        {
-//            FXD_IncreaseAmountLimitViewController *increaseAmountLimit=[[FXD_IncreaseAmountLimitViewController alloc]init];
-//            [self.navigationController pushViewController:increaseAmountLimit animated:YES];
-//        }
-//            break;
-//
-//        case 5:
-//        {
-//            MoreViewController *ticket=[[MoreViewController alloc]init];
-//            [self.navigationController pushViewController:ticket animated:YES];
-//        }
-//            break;
-//
-//        default:
-//            break;
-//    }
 }
 
 

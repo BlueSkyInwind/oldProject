@@ -28,4 +28,7 @@
 @property (nonatomic, strong)NSString<Optional> *bankShortName;
 //合规用户编号
 @property (nonatomic, strong)NSString<Optional> *userCode;
+//钱爸爸提现申请
+@property (nonatomic, strong)NSString<Optional> *platformType;
+
 @end

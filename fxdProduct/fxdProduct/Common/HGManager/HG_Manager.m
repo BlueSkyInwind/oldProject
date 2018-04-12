@@ -11,7 +11,7 @@
 #import "P2PViewController.h"
 #import "FXD_HomePageVCModules.h"
 #import "ActiveModel.h"
-
+#import "QbbSubmitInfoModel.h"
 @implementation HG_Manager
 
 + (HG_Manager *)sharedHGManager
@@ -71,24 +71,42 @@
 }
 
 #pragma mark - 合规改造新用户开户
--(void)hgUserRegJumpP2pCtrlBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardId:(NSString *)cardId cardNo:(NSString *)cardNo retUrl:(NSString *)retUrl smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode vc:(id)vc{
+-(void)hgUserRegJumpP2pCtrlBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardId:(NSString *)cardId cardNo:(NSString *)cardNo retUrl:(NSString *)retUrl smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode capitalPlatform:(NSString *)capitalPlatform vc:(id)vc{
     
     UIViewController *topRootViewController;
     if ([vc isKindOfClass: [OpenAccountViewController class]]) {
         topRootViewController = (OpenAccountViewController *)vc;
     }
+    if ([vc isKindOfClass:[FXD_HomePageVCModules class]]) {
+        topRootViewController = (FXD_HomePageVCModules *)vc;
+    }
     ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
     [complianceVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
-            SubmitInfoModel * hgUserRegModel = [[SubmitInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            NSString *url = [self buildForm:hgUserRegModel.ServiceUrl params:hgUserRegModel.InMap];
-            P2PViewController *p2pVC = [[P2PViewController alloc] init];
-            p2pVC.jsContent = url;
-            p2pVC.urlStr = hgUserRegModel.ServiceUrl;
-            p2pVC.retUrl = retUrl;
             
-            [topRootViewController.navigationController pushViewController:p2pVC animated:YES];
+            if ([capitalPlatform isEqualToString:@"5"]) {
+                
+                QbbSubmitInfoModel * hgUserRegModel = [[QbbSubmitInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+                NSDictionary *dic = [hgUserRegModel toDictionary];
+                NSString *url = [self buildForm:hgUserRegModel.actionUrl params:dic];
+                P2PViewController *p2pVC = [[P2PViewController alloc] init];
+                p2pVC.jsContent = url;
+                p2pVC.urlStr = hgUserRegModel.actionUrl;
+                p2pVC.retUrl = hgUserRegModel.returnurl;
+                [topRootViewController.navigationController pushViewController:p2pVC animated:YES];
+                
+            }else{
+                
+                SubmitInfoModel * hgUserRegModel = [[SubmitInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+                NSString *url = [self buildForm:hgUserRegModel.ServiceUrl params:hgUserRegModel.InMap];
+                P2PViewController *p2pVC = [[P2PViewController alloc] init];
+                p2pVC.jsContent = url;
+                p2pVC.urlStr = hgUserRegModel.ServiceUrl;
+                p2pVC.retUrl = retUrl;
+                [topRootViewController.navigationController pushViewController:p2pVC animated:YES];
+            }
+            
         }else if ([baseResultM.errCode isEqualToString:@"2"]){
             
             IntermediateViewController *controller = [[IntermediateViewController alloc]init];
@@ -103,7 +121,8 @@
     } WithFaileBlock:^{
         
     }];
-    [complianceVM hgSubmitAccountInfoBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardId:cardId cardNo:cardNo retUrl:retUrl smsSeq:smsSeq userCode:userCode verifyCode:verifyCode];
+    
+    [complianceVM hgSubmitAccountInfoBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardId:cardId cardNo:cardNo retUrl:retUrl smsSeq:smsSeq userCode:userCode verifyCode:verifyCode capitalPlatform:capitalPlatform];
     
 }
 
@@ -180,11 +199,12 @@
         return @"";
     }
 
-    NSMutableString * metaStr = [[NSMutableString alloc]initWithString:@""];
+    
+    NSMutableString * metaStr = [[NSMutableString alloc]initWithString:@"actionUrl"];
     NSArray * array = dic.allKeys;
     for (NSString * key  in array) {
         NSString * value = dic[key];
-        if (key == nil || value == nil) {
+        if (key == nil || value == nil || [key  isEqual: @"actionUrl"]) {
             continue;
         }
         [metaStr appendString:[self buildHiddenField:key value:value]];

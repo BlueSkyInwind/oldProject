@@ -29,7 +29,7 @@
     }];
 }
 
--(void)hgSubmitAccountInfoBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardId: (NSString *)cardId cardNo:(NSString *)cardNo retUrl:(NSString *)retUrl smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode{
+-(void)hgSubmitAccountInfoBankNo:(NSString *)bankNo bankReservePhone:(NSString *)bankReservePhone bankShortName:(NSString *)bankShortName cardId: (NSString *)cardId cardNo:(NSString *)cardNo retUrl:(NSString *)retUrl smsSeq:(NSString *)smsSeq userCode:(NSString *)userCode verifyCode:(NSString *)verifyCode capitalPlatform:(NSString *)capitalPlatform{
     
     SubmitAccountParamModel *paramModel = [[SubmitAccountParamModel alloc]init];
     paramModel.bankNo = bankNo;
@@ -41,6 +41,7 @@
     paramModel.smsSeq = smsSeq;
     paramModel.userCode = userCode;
     paramModel.verifyCode = verifyCode;
+    paramModel.platformType = capitalPlatform;
     NSDictionary *paramDic = [paramModel toDictionary];
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager]HG_POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_account_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {

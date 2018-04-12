@@ -13,6 +13,8 @@ import UIKit
     
     //
     func shadowImageViewClick()
+    func memberBtnClick()
+    
     
 }
 class MineHeaderView: UIView {
@@ -27,13 +29,13 @@ class MineHeaderView: UIView {
     
     var bgImageView : UIImageView?
     
-   @objc var isFirstLevel : String?{
-        didSet(newValue){
-            
-            changeLeftImageViewLocation()
-            
-        }
-    }
+//   @objc var isFirstLevel : String?{
+//        didSet(newValue){
+//
+//            changeLeftImageViewLocation()
+//
+//        }
+//    }
     
     @objc weak var delegate: MineHeaderViewDelegate?
     /*
@@ -47,7 +49,7 @@ class MineHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 //        setupUI()
-        isFirstLevel = "1"
+//        isFirstLevel = "1"
         setupNewUI()
         
     }
@@ -105,25 +107,107 @@ extension MineHeaderView{
         
     }
     
+//    fileprivate func setupNewUI(){
+//
+//        bgImageView = UIImageView()
+//        bgImageView?.image = UIImage(named:"kongbai")
+//        self.addSubview(bgImageView!)
+//        bgImageView?.snp.makeConstraints { (make) in
+//            make.left.equalTo(self).offset(30)
+//            make.bottom.equalTo(self).offset(-15)
+//        }
+//
+//        leftImageView = UIImageView()
+//        self.addSubview(leftImageView!)
+//        leftImageView?.snp.makeConstraints({ (make) in
+//
+//            make.centerX.equalTo((bgImageView?.snp.centerX)!)
+//            make.top.equalTo((bgImageView?.snp.top)!).offset(5)
+//            make.width.equalTo(67)
+//            make.height.equalTo(67)
+//        })
+//
+//        accountLabel = UILabel()
+//        accountLabel?.textColor = UIColor.white
+//        accountLabel?.font = UIFont.systemFont(ofSize: 14)
+//        self.addSubview(accountLabel!)
+//        accountLabel?.snp.makeConstraints({ (make) in
+//            make.left.equalTo((leftImageView?.snp.right)!).offset(57)
+//            make.top.equalTo(self).offset(52)
+//            make.height.equalTo(20)
+//        })
+//
+//        if UI_IS_IPONE6P {
+//            accountLabel?.snp.updateConstraints({ (make) in
+//                make.top.equalTo(self).offset(82)
+//            })
+//        }
+//        let shadowImageView = UIImageView()
+//        shadowImageView.isUserInteractionEnabled = true
+//        let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
+//        shadowImageView.addGestureRecognizer(tapGest)
+//        shadowImageView.image = UIImage(named:"levelshadow")
+//        self.addSubview(shadowImageView)
+//        shadowImageView.snp.makeConstraints { (make) in
+//            make.left.equalTo((leftImageView?.snp.right)!).offset(57)
+//            make.top.equalTo((accountLabel?.snp.bottom)!).offset(15)
+//        }
+//
+//        nameLabel = UILabel()
+//        nameLabel?.textColor = UIColor.white
+//        nameLabel?.font = UIFont.systemFont(ofSize: 14)
+//        shadowImageView.addSubview(nameLabel!)
+//        nameLabel?.snp.makeConstraints({ (make) in
+//            make.left.equalTo(shadowImageView.snp.left).offset(11)
+//            make.centerY.equalTo(shadowImageView.snp.centerY)
+//            make.height.equalTo(20)
+//        })
+//
+//        let rightImageView = UIImageView()
+//        rightImageView.image = UIImage(named:"arrow")
+//        shadowImageView.addSubview(rightImageView)
+//        rightImageView.snp.makeConstraints { (make) in
+//            make.right.equalTo(shadowImageView.snp.right).offset(-7)
+//            make.centerY.equalTo(shadowImageView.snp.centerY)
+//        }
+//    }
+    
     fileprivate func setupNewUI(){
         
-        bgImageView = UIImageView()
-        bgImageView?.image = UIImage(named:"kongbai")
-        self.addSubview(bgImageView!)
-        bgImageView?.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(30)
-            make.bottom.equalTo(self).offset(-15)
-        }
+//        bgImageView = UIImageView()
+//        bgImageView?.image = UIImage(named:"kongbai")
+//        self.addSubview(bgImageView!)
+//        bgImageView?.snp.makeConstraints { (make) in
+//            make.left.equalTo(self).offset(30)
+//            make.bottom.equalTo(self).offset(-15)
+//        }
         
         leftImageView = UIImageView()
+        leftImageView?.image = UIImage.init(named: "left_image_icon")
         self.addSubview(leftImageView!)
         leftImageView?.snp.makeConstraints({ (make) in
             
-            make.centerX.equalTo((bgImageView?.snp.centerX)!)
-            make.top.equalTo((bgImageView?.snp.top)!).offset(5)
-            make.width.equalTo(67)
-            make.height.equalTo(67)
+            make.left.equalTo(self).offset(30)
+            make.top.equalTo(self).offset(40)
+//            make.width.equalTo(67)
+//            make.height.equalTo(67)
         })
+        
+        let memberBtn = UIButton()
+        memberBtn.backgroundColor = UIColor.white
+        memberBtn.layer.cornerRadius = 5.0
+        memberBtn.setTitle("会员中心 >", for: .normal)
+        memberBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
+        memberBtn.addTarget(self, action: #selector(memberBtnClick), for: .touchUpInside)
+        memberBtn.titleLabel?.font = UIFont.yx_systemFont(ofSize: 14)
+        self.addSubview(memberBtn)
+        memberBtn.snp.makeConstraints { (make) in
+            make.left.equalTo((leftImageView?.snp.right)!).offset(57)
+            make.top.equalTo(self).offset(57)
+            make.width.equalTo(95)
+            make.height.equalTo(24)
+        }
+        
         
         accountLabel = UILabel()
         accountLabel?.textColor = UIColor.white
@@ -131,43 +215,44 @@ extension MineHeaderView{
         self.addSubview(accountLabel!)
         accountLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo((leftImageView?.snp.right)!).offset(57)
-            make.top.equalTo(self).offset(52)
+            make.top.equalTo(memberBtn.snp.bottom).offset(8)
             make.height.equalTo(20)
         })
         
-        if UI_IS_IPONE6P {
-            accountLabel?.snp.updateConstraints({ (make) in
-                make.top.equalTo(self).offset(82)
-            })
-        }
-        let shadowImageView = UIImageView()
-        shadowImageView.isUserInteractionEnabled = true
-        let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
-        shadowImageView.addGestureRecognizer(tapGest)
-        shadowImageView.image = UIImage(named:"levelshadow")
-        self.addSubview(shadowImageView)
-        shadowImageView.snp.makeConstraints { (make) in
-            make.left.equalTo((leftImageView?.snp.right)!).offset(57)
-            make.top.equalTo((accountLabel?.snp.bottom)!).offset(15)
-        }
+//        if UI_IS_IPONE6P {
+//            accountLabel?.snp.updateConstraints({ (make) in
+//                make.top.equalTo(self).offset(82)
+//            })
+//        }
         
-        nameLabel = UILabel()
-        nameLabel?.textColor = UIColor.white
-        nameLabel?.font = UIFont.systemFont(ofSize: 14)
-        shadowImageView.addSubview(nameLabel!)
-        nameLabel?.snp.makeConstraints({ (make) in
-            make.left.equalTo(shadowImageView.snp.left).offset(11)
-            make.centerY.equalTo(shadowImageView.snp.centerY)
-            make.height.equalTo(20)
-        })
-        
-        let rightImageView = UIImageView()
-        rightImageView.image = UIImage(named:"arrow")
-        shadowImageView.addSubview(rightImageView)
-        rightImageView.snp.makeConstraints { (make) in
-            make.right.equalTo(shadowImageView.snp.right).offset(-7)
-            make.centerY.equalTo(shadowImageView.snp.centerY)
-        }
+//        let shadowImageView = UIImageView()
+//        shadowImageView.isUserInteractionEnabled = true
+//        let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
+//        shadowImageView.addGestureRecognizer(tapGest)
+//        shadowImageView.image = UIImage(named:"levelshadow")
+//        self.addSubview(shadowImageView)
+//        shadowImageView.snp.makeConstraints { (make) in
+//            make.left.equalTo((leftImageView?.snp.right)!).offset(57)
+//            make.top.equalTo((accountLabel?.snp.bottom)!).offset(15)
+//        }
+//
+//        nameLabel = UILabel()
+//        nameLabel?.textColor = UIColor.white
+//        nameLabel?.font = UIFont.systemFont(ofSize: 14)
+//        shadowImageView.addSubview(nameLabel!)
+//        nameLabel?.snp.makeConstraints({ (make) in
+//            make.left.equalTo(shadowImageView.snp.left).offset(11)
+//            make.centerY.equalTo(shadowImageView.snp.centerY)
+//            make.height.equalTo(20)
+//        })
+//
+//        let rightImageView = UIImageView()
+//        rightImageView.image = UIImage(named:"arrow")
+//        shadowImageView.addSubview(rightImageView)
+//        rightImageView.snp.makeConstraints { (make) in
+//            make.right.equalTo(shadowImageView.snp.right).offset(-7)
+//            make.centerY.equalTo(shadowImageView.snp.centerY)
+//        }
     }
     
     @objc func clickFirstView(_ tapGes : UITapGestureRecognizer){
@@ -208,5 +293,12 @@ extension MineHeaderView{
             })
         }
         
+    }
+    
+    @objc fileprivate func memberBtnClick(){
+        
+        if delegate != nil {
+            delegate?.memberBtnClick()
+        }
     }
 }

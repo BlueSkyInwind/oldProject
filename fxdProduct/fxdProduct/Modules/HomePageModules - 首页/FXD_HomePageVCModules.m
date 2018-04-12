@@ -641,8 +641,31 @@
             FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
             [self.navigationController pushViewController:loanApplicationVC animated:true];
         }
-    }else{
+    }else if ([_homeProductList.platfromType isEqualToString:@"2"]){
         [self jumpControllerUserStatus:_homeProductList.userStatus];
+    }else if ([_homeProductList.platfromType isEqualToString:@"5"]){
+        
+        switch (_homeProductList.userStatus.integerValue) {
+            case 1:
+                
+                [[HG_Manager sharedHGManager]hgUserRegJumpP2pCtrlBankNo:@"" bankReservePhone:@"" bankShortName:@"" cardId:@"" cardNo:@"" retUrl:@"" smsSeq:@"" userCode:@"" verifyCode:@"" capitalPlatform:@"5" vc:self];
+                break;
+            case 3:
+            {
+                if ([_homeProductList.flag isEqualToString:@"15"]) {
+                    LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+                    
+                    [self.navigationController pushViewController:controller animated:true];
+                }else{
+                    FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
+                    [self.navigationController pushViewController:loanApplicationVC animated:true];
+                }
+            }
+                break;
+                
+            default:
+                break;
+        }
     }
 }
 

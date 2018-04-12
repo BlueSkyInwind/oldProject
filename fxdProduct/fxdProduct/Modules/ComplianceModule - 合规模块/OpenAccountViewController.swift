@@ -147,7 +147,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
     //MARK:提交开户
     fileprivate func submitAccount(){
         
-        HG_Manager.sharedHG().hgUserRegJumpP2pCtrlBankNo(submitArray![7] as! String, bankReservePhone: submitArray![2] as! String, bankShortName:submitArray![0] as! String, cardId: submitArray![4] as! String, cardNo: submitArray![1] as! String, retUrl: _transition_url, smsSeq: submitArray![5] as! String, userCode: submitArray![6] as! String, verifyCode: submitArray![3] as! String, vc: self)
+        HG_Manager.sharedHG().hgUserRegJumpP2pCtrlBankNo(submitArray![7] as! String, bankReservePhone: submitArray![2] as! String, bankShortName:submitArray![0] as! String, cardId: submitArray![4] as! String, cardNo: submitArray![1] as! String, retUrl: _transition_url, smsSeq: submitArray![5] as! String, userCode: submitArray![6] as! String, verifyCode: submitArray![3] as! String,capitalPlatform:"2", vc: self)
         
     }
     override func viewWillAppear(_ animated: Bool) {
