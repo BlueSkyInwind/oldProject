@@ -119,7 +119,6 @@ extension FXD_displayAmountCommonHeaderView{
             make.centerY.equalTo((backGroundImage?.snp.centerY)!).offset(10)
         })
         
-        
         let centerLabel = UILabel()
         centerLabel.text = "到账金额"
         centerLabel.textColor = UIColor.black
