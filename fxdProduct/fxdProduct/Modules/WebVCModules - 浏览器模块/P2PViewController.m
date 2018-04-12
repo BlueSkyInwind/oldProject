@@ -147,7 +147,7 @@
     NSURLRequest *request = navigationAction.request;
     DLog(@"%@",request.URL.absoluteString);
     DLog(@"=======%@",webView.URL.absoluteString);
-
+    
     if ([request.URL.absoluteString hasPrefix:_retUrl]&&![request.URL.absoluteString isEqualToString:self.urlStr]) {
         decisionHandler(WKNavigationActionPolicyAllow);
         

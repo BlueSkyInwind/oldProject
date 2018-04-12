@@ -65,8 +65,12 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         chooseType = .Application_Amount
         contentArrs = ["2500","+200","按周还款","4周","点击选择"]
         obtainApplicationInfo(EliteLoan) {[weak self] (isSuccess) in
-            self?.dataInitialize()
+            
             self?.configureView()
+            if isSuccess{
+                self?.dataInitialize()
+                
+            }
         }
     }
     
@@ -147,9 +151,11 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
                 if model.platformCode == "0"{
                     let checkVC = FXD_ToWithdrawFundsViewController()
                     self?.navigationController?.pushViewController(checkVC, animated: true)
-                }else{
+                }else if model.platformCode == "2"{
                     
                     self?.jumpController(model: model)
+                }else if model.platformCode == "5"{
+                    self?.qBBjumpController(model: model)
                 }
                 
                 
@@ -172,6 +178,32 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             print("未开户")
             let controller = OpenAccountViewController()
             self.navigationController?.pushViewController(controller, animated: true)
+        case 2?:
+            let controller = IntermediateViewController()
+            self.navigationController?.pushViewController(controller, animated: true)
+            
+            print("开户中")
+        case 3?:
+            print("已开户")
+            let checkVC = FXD_ToWithdrawFundsViewController()
+            self.navigationController?.pushViewController(checkVC, animated: true)
+        case 4?:
+            print("待激活")
+        default:
+            break
+        }
+    }
+    
+    //钱爸爸
+    func qBBjumpController(model : ApplicationNewCreateModel){
+        
+        switch Int(model.userStatus) {
+        case 1?:
+            print("未开户")
+            
+            HG_Manager.sharedHG().hgUserRegJumpP2pCtrlBankNo("", bankReservePhone: "", bankShortName: "", cardId: "", cardNo: "", retUrl: "", smsSeq: "", userCode: "", verifyCode: "", capitalPlatform: "5", vc: self)
+//            let controller = OpenAccountViewController()
+//            self.navigationController?.pushViewController(controller, animated: true)
         case 2?:
             let controller = IntermediateViewController()
             self.navigationController?.pushViewController(controller, animated: true)
@@ -242,14 +274,18 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
             
             displayCell?.amountLabel?.text = actualAmount == nil ? "": actualAmount
             displayCell?.everyAmountLabel?.text = repaymentAmount == nil ? "": repaymentAmount
-            if isDisplayDiscount!{
-                displayCell?.dateLabel?.text =  "\(durationArrs![index!])" + "\(durationUnitArrs![index!])"
-//                displayCell?.dateLabel?.text =  contentArrs?[3]
-            }else{
+            if durationUnitArrs != nil && (durationUnitArrs?.count)! > 0{
                 
-                displayCell?.dateLabel?.text =  "\(durationArrs![index!])" + "\(durationUnitArrs![index!])"
-//                displayCell?.dateLabel?.text =  contentArrs?[2]
+                if isDisplayDiscount!{
+                    displayCell?.dateLabel?.text =  "\(durationArrs![index!])" + "\(durationUnitArrs![index!])"
+                    //                displayCell?.dateLabel?.text =  contentArrs?[3]
+                }else{
+                    
+                    displayCell?.dateLabel?.text =  "\(durationArrs![index!])" + "\(durationUnitArrs![index!])"
+                    //                displayCell?.dateLabel?.text =  contentArrs?[2]
+                }
             }
+            
             tableViewCell = displayCell
         }
         return tableViewCell!
@@ -259,13 +295,19 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         if indexPath.section == 1 {
             return
         }
-        
+    
         switch indexPath.row {
         case 0:
+            
+            if applicaitonViewIM == nil{
+                break
+            }
             chooseType = .Application_Amount
             addChoosePickerView(applicaitonViewIM?.amountList as! [String])
             break
         case 1:
+            
+            
             if !isDisplayDiscount! {
                 chooseType = .Application_StagingType
                 addChoosePickerView(periodWayArrs!)

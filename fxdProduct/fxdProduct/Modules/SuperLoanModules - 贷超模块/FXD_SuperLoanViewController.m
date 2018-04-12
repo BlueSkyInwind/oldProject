@@ -9,6 +9,9 @@
 #import "FXD_SuperLoanViewController.h"
 #import "CompQueryViewModel.h"
 #import "CompQueryModel.h"
+#import "FindViewModel.h"
+#import "HotRecommendModel.h"
+#import "FXDWebViewController.h"
 @interface FXD_SuperLoanViewController ()<UITableViewDelegate,UITableViewDataSource,SuperLoanHeaderCellDelegate,SortViewDelegate,FilterViewDelegate,SuperLoanHeaderViewDelegate,SuperLoanCellDelegate>{
     
     SuperLoanHeaderCell *_superLoanHeaderCell;
@@ -22,6 +25,9 @@
     NSString *_minAmount;
     NSString *_minDays;
     NSString *_type;
+    NSMutableArray *_hotDataArray;
+    SuperLoanHeaderView *_headerView;
+    NSMutableArray *_recentDataArray;
 }
 
 @property(nonatomic,strong)UITableView *tableView;
@@ -34,8 +40,12 @@
     [super viewDidLoad];
     _index = 0;
     _dataArray = [NSMutableArray arrayWithCapacity:100];
+    _hotDataArray = [NSMutableArray arrayWithCapacity:100];
+    _recentDataArray = [NSMutableArray arrayWithCapacity:100];
     _type = @"1";
     [self createTab];
+    
+    
     
     // Do any additional setup after loading the view.
 }
@@ -55,9 +65,9 @@
     [self.view addSubview:self.tableView];
     
     
-    SuperLoanHeaderView *headerView = [[SuperLoanHeaderView alloc]init];
-    headerView.delegate = self;
-    self.tableView.tableHeaderView = headerView;
+    _headerView = [[SuperLoanHeaderView alloc]init];
+    _headerView.delegate = self;
+    self.tableView.tableHeaderView = _headerView;
     
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     header.automaticallyChangeAlpha = YES;
@@ -80,6 +90,59 @@
 }
 
 
+-(void)getRecentData{
+    
+    FindViewModel *findVM = [[FindViewModel alloc]init];
+    [findVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            [_recentDataArray removeAllObjects];
+            NSArray * array = (NSArray *)baseResultM.data;
+            for (int  i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
+                HotRecommendModel * model = [[HotRecommendModel alloc]initWithDictionary:dic error:nil];
+                [_recentDataArray addObject:model];
+            }
+            
+            _headerView.recentImageNameArray = _recentDataArray;
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    
+    [findVM recent];
+}
+
+-(void)hotRecommendData{
+    
+    FindViewModel *findVM = [[FindViewModel alloc]init];
+    [findVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            [_hotDataArray removeAllObjects];
+            NSArray * array = (NSArray *)baseResultM.data;
+            for (int  i = 0; i < array.count; i++) {
+                NSDictionary *dic = array[i];
+                HotRecommendModel * model = [[HotRecommendModel alloc]initWithDictionary:dic error:nil];
+                [_hotDataArray addObject:model];
+            }
+            
+            _headerView.hotImageNameArray = _hotDataArray;
+            
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    
+    [findVM hotRecommend];
+}
+
 -(void)headerRefreshing{
     
     _pages = 0;
@@ -91,11 +154,15 @@
     _pages++;
     [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_maxDays offset:[NSString stringWithFormat:@"%d",_pages] order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
 }
-//-(void)viewWillAppear:(BOOL)animated{
-//
-//    [super viewWillAppear:animated];
+-(void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
 //    [self getDataMaxAmount:@"10000" maxDays:@"25" minAmount:@"100" minDays:@"3" offset:@"0" order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
-//}
+    
+    [self getRecentData];
+    
+    [self hotRecommendData];
+}
 
 -(void)getDataMaxAmount:(NSString *)maxAmount maxDays:(NSString *)maxDays minAmount:(NSString *)minAmount minDays:(NSString *)minDays offset:(NSString *)offset order:(NSString *)order sort:(NSString *)sort{
     
@@ -461,7 +528,11 @@
 -(void)hotBtnClick:(UIButton *)sender{
     
     NSInteger tag = sender.tag;
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:[NSString stringWithFormat:@"热门推荐第%ld个按钮",tag]];
+    HotRecommendModel *model = _hotDataArray[tag - 101];
+    FXDWebViewController *webView = [[FXDWebViewController alloc]init];
+    webView.urlStr = model.linkAddress;
+    [self.navigationController pushViewController:webView animated:true];
+
 }
 
 -(void)recentBtnClcik:(UIButton *)sender{

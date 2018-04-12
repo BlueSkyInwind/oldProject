@@ -964,6 +964,8 @@
 		CC4F0630207C65770030A12A /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F062E207C65770030A12A /* CollectionViewController.swift */; };
 		CC4F0634207C6B200030A12A /* QBBWitnDrawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4F0633207C6B200030A12A /* QBBWitnDrawModel.m */; };
 		CC4F0635207C6B200030A12A /* QBBWitnDrawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4F0633207C6B200030A12A /* QBBWitnDrawModel.m */; };
+		CC4F0638207DE90B0030A12A /* FindViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4F0637207DE90B0030A12A /* FindViewModel.m */; };
+		CC4F0639207DE90B0030A12A /* FindViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4F0637207DE90B0030A12A /* FindViewModel.m */; };
 		CC594E631FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */; };
 		CC594E641FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */; };
 		CC594E671FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */; };
@@ -1100,6 +1102,10 @@
 		CCDEDF5D1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDEDF5B1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m */; };
 		CCDEDF601EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDEDF5F1EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m */; };
 		CCDEDF611EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDEDF5F1EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m */; };
+		CCEFC6E5207DEE480006D731 /* HotRecommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6E4207DEE480006D731 /* HotRecommendModel.m */; };
+		CCEFC6E6207DEE480006D731 /* HotRecommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6E4207DEE480006D731 /* HotRecommendModel.m */; };
+		CCEFC6E9207E0B610006D731 /* QbbSubmitInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6E8207E0B610006D731 /* QbbSubmitInfoModel.m */; };
+		CCEFC6EA207E0B610006D731 /* QbbSubmitInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6E8207E0B610006D731 /* QbbSubmitInfoModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1966,6 +1972,8 @@
 		CC4F062E207C65770030A12A /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		CC4F0632207C6B200030A12A /* QBBWitnDrawModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QBBWitnDrawModel.h; sourceTree = "<group>"; };
 		CC4F0633207C6B200030A12A /* QBBWitnDrawModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QBBWitnDrawModel.m; sourceTree = "<group>"; };
+		CC4F0636207DE90B0030A12A /* FindViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindViewModel.h; sourceTree = "<group>"; };
+		CC4F0637207DE90B0030A12A /* FindViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindViewModel.m; sourceTree = "<group>"; };
 		CC594E611FCBFC7800D53F60 /* WithdrawCashParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashParamModel.h; sourceTree = "<group>"; };
 		CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashParamModel.m; sourceTree = "<group>"; };
 		CC594E651FCBFD0B00D53F60 /* WithdrawCashModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashModel.h; sourceTree = "<group>"; };
@@ -2072,6 +2080,10 @@
 		CCDEDF5B1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveAccountBankCardParamModel.m; sourceTree = "<group>"; };
 		CCDEDF5E1EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayWeeklyRecordViewModel.h; sourceTree = "<group>"; };
 		CCDEDF5F1EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayWeeklyRecordViewModel.m; sourceTree = "<group>"; };
+		CCEFC6E3207DEE480006D731 /* HotRecommendModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotRecommendModel.h; sourceTree = "<group>"; };
+		CCEFC6E4207DEE480006D731 /* HotRecommendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotRecommendModel.m; sourceTree = "<group>"; };
+		CCEFC6E7207E0B610006D731 /* QbbSubmitInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QbbSubmitInfoModel.h; sourceTree = "<group>"; };
+		CCEFC6E8207E0B610006D731 /* QbbSubmitInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QbbSubmitInfoModel.m; sourceTree = "<group>"; };
 		DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64833171B0C1433C0C2116C /* Pods-fxd-fxdProductDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProductDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev.release.xcconfig"; sourceTree = "<group>"; };
 		EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
@@ -2645,6 +2657,8 @@
 				CC742DA2204E6E1A00D645CC /* ComplianceViewModel.m */,
 				CC80E00A206B8A70000F9BAC /* CompQueryViewModel.h */,
 				CC80E00B206B8A70000F9BAC /* CompQueryViewModel.m */,
+				CC4F0636207DE90B0030A12A /* FindViewModel.h */,
+				CC4F0637207DE90B0030A12A /* FindViewModel.m */,
 				84A52E99207DF2AA000BF3E8 /* UserMemberShipViewModel.h */,
 				84A52E9A207DF2AA000BF3E8 /* UserMemberShipViewModel.m */,
 			);
@@ -3461,6 +3475,7 @@
 		63E076541B67114800E269F2 /* DataModelModules */ = {
 			isa = PBXGroup;
 			children = (
+				CCEFC6E2207DEE1B0006D731 /* HotRecommend */,
 				CC4F0631207C6AE40030A12A /* QBBWithDraw */,
 				CC80DFFE206B8831000F9BAC /* SperLoan */,
 				CC742DA5204E702400D645CC /* Compliance */,
@@ -4291,6 +4306,8 @@
 			children = (
 				CC4F0632207C6B200030A12A /* QBBWitnDrawModel.h */,
 				CC4F0633207C6B200030A12A /* QBBWitnDrawModel.m */,
+				CCEFC6E7207E0B610006D731 /* QbbSubmitInfoModel.h */,
+				CCEFC6E8207E0B610006D731 /* QbbSubmitInfoModel.m */,
 			);
 			path = QBBWithDraw;
 			sourceTree = "<group>";
@@ -4488,6 +4505,15 @@
 				CCDEDF5B1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m */,
 			);
 			name = SaveAccountBankCard;
+			sourceTree = "<group>";
+		};
+		CCEFC6E2207DEE1B0006D731 /* HotRecommend */ = {
+			isa = PBXGroup;
+			children = (
+				CCEFC6E3207DEE480006D731 /* HotRecommendModel.h */,
+				CCEFC6E4207DEE480006D731 /* HotRecommendModel.m */,
+			);
+			path = HotRecommend;
 			sourceTree = "<group>";
 		};
 		CCFA2DC71EB02FC20071F46B /* HomeProductList */ = {
@@ -5018,6 +5044,7 @@
 				63D43EFC1D41F8380076AC7F /* DataWriteAndRead.m in Sources */,
 				84A6350E1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m in Sources */,
 				638C3F3B1CF564A4000446A7 /* SquareRepaymentExt.m in Sources */,
+				CCEFC6E9207E0B610006D731 /* QbbSubmitInfoModel.m in Sources */,
 				63553B1F1E600D0D00B2C1FF /* FaceIDLiveModel.m in Sources */,
 				638C3F3A1CF564A4000446A7 /* SquareRepaymentBaseClass.m in Sources */,
 				638A16FE1E517D9F00AB8AB6 /* UIColor.m in Sources */,
@@ -5168,6 +5195,7 @@
 				635AB7901BE2FE2700C32919 /* ReturnMsgBaseClass.m in Sources */,
 				63A24C5B1BE063A90036E8EF /* CALayer+Anim.m in Sources */,
 				638A16FC1E517D9F00AB8AB6 /* NSValue+Compat.m in Sources */,
+				CCEFC6E5207DEE480006D731 /* HotRecommendModel.m in Sources */,
 				CC49BA061FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */,
 				8449AC252062457A00526935 /* YXBaseRecordManager.swift in Sources */,
 				8449AC2B2062457A00526935 /* YXRoundProgressView.swift in Sources */,
@@ -5391,6 +5419,7 @@
 				6313DC201BB512BD00EB45DE /* BaseIndexViewController.m in Sources */,
 				63FC24F31D98F7E9006F58F3 /* YYTextLine.m in Sources */,
 				63C50E4C1E67F6C10035EE4F /* CustomerIDInfo.m in Sources */,
+				CC4F0638207DE90B0030A12A /* FindViewModel.m in Sources */,
 				63E8F1B11E6FDAEC00FE4BDD /* DataDicParse.m in Sources */,
 				CC85C6281FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */,
 				84A380341FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m in Sources */,
@@ -5422,6 +5451,7 @@
 				84C619D11FA8161F00626411 /* BankListCell.m in Sources */,
 				84A380151FAC1D8D008FB7AF /* MGLiveViewController.m in Sources */,
 				84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */,
+				CC4F0639207DE90B0030A12A /* FindViewModel.m in Sources */,
 				CCC1E4072057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */,
 				84F87F481FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */,
 				84C619D41FA8161F00626411 /* PayMethodCell.m in Sources */,
@@ -5429,6 +5459,7 @@
 				84C619D71FA8161F00626411 /* RepayListCell.m in Sources */,
 				CC0346291F3C4FBF001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */,
 				84ED5B741F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
+				CCEFC6EA207E0B610006D731 /* QbbSubmitInfoModel.m in Sources */,
 				CC80DFED206A4924000F9BAC /* FXD_SuperLoanViewController.m in Sources */,
 				843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */,
 				84E306D01F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
@@ -5771,6 +5802,7 @@
 				840DFF701FE27DEC00148DEE /* InvationViewModel.m in Sources */,
 				CC0DFAA31EA5B1090024841A /* YYTextView.m in Sources */,
 				CC0DFAA51EA5B1090024841A /* CheckUtils.m in Sources */,
+				CCEFC6E6207DEE480006D731 /* HotRecommendModel.m in Sources */,
 				CC0DFAA61EA5B1090024841A /* PCCircleViewConst.m in Sources */,
 				CC0DFAA81EA5B1090024841A /* TADotView.m in Sources */,
 				CC0DFAA91EA5B1090024841A /* UIDevice+Extend.m in Sources */,

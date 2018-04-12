@@ -234,11 +234,24 @@ NSString * const    _creditLimitInfo_url        =    @"user/verify/amount";
 NSString * const    _question_url               =    @"product/getCommonProblemApi";
 //用户提额
 NSString * const    _increaseAmount_url               =    @"increaseQuotaApply";
+//最近浏览
+NSString * const    _recent_url               =    @"dc/recentView";
+//首借免息
+NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
+//经验值体系-展示等级
+NSString *const     _ExperienceValue_url     =    @"operation/experienceValueGradeAPI/displayGrade";
+//首页贷超接口
+NSString *const     _compQuery_url     =    @"dc/compQuery";
+//导流平台跳转接口
+NSString *const     _getCompLink_url     =    @"dc/operation/user/getCompLink";
+//钱爸爸提现申请
+NSString *const     _paidcenter_url     =    @"paidcenter/qbbWithDraw";
+//站内信删除、清空
+NSString *const     _delMsg_url     =    @"market/operation/delMsg";
+//热门推荐
+NSString *const     _hotRecommend_url     =    @"dc/hotRecommend";
 //会员页面信息
 NSString * const    _memberShipInfo_url               =    @"user/member";
-
-
-
 
 #pragma mark - 合规接口
 
@@ -278,18 +291,7 @@ NSString * const    _hgUser_Active_url    =    @"paidcenter/user/active";
 NSString * const    _queryUserStatus_url    =    @"membership/paid/queryUserStatus";
 //合规的件 调用此接口 用于获取借款协议列表
 NSString * const    _hgLoanProtoolList_url    =    @"product/getHgLoanProtoolListApi";
-//首借免息
-NSString *const     _sjRecord_url     =    @"sj/record.jhtml";
-//经验值体系-展示等级
-NSString *const     _ExperienceValue_url     =    @"operation/experienceValueGradeAPI/displayGrade";
-//首页贷超接口
-NSString *const     _compQuery_url     =    @"dc/compQuery";
-//导流平台跳转接口
-NSString *const     _getCompLink_url     =    @"dc/operation/user/getCompLink";
-//钱爸爸提现申请
-NSString *const     _paidcenter_url     =    @"paidcenter/qbbWithDraw";
-//站内信删除、清空
-NSString *const     _delMsg_url     =    @"market/operation/delMsg";
+
 
 
 #pragma mark - 对外导流接口

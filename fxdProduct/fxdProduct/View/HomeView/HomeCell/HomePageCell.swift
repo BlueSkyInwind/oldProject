@@ -756,52 +756,57 @@ extension HomePageCell {
             make.height.equalTo(2*103)
         }
         
-        for index in 0..<2 {
-            if index > 0{
-                if UI_IS_IPONE5{
-                    continue
+        if homeProductListModel.testFailInfo.thirdProductList != nil{
+            
+            for index in 0..<2 {
+                if index > 0{
+                    if UI_IS_IPONE5{
+                        continue
+                    }
                 }
-            }
-            let thirdRefuseView = HomeRefuseThirdView()
-            thirdRefuseView.isUserInteractionEnabled = true
-            thirdRefuseView.tag = index + 104
-            let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
-            thirdRefuseView.addGestureRecognizer(tapGest)
-            bgView.addSubview(thirdRefuseView)
-            thirdRefuseView.snp.makeConstraints({ (make) in
-                make.top.equalTo(bgView.snp.top).offset(index * 103)
-                make.left.equalTo(bgView.snp.left).offset(14)
-                make.right.equalTo(bgView.snp.right).offset(-14)
-                make.height.equalTo(103)
-            })
-            
-            let thirdProduct = homeProductListModel.testFailInfo.thirdProductList[index] as! ThirdProductListModel
-            let tags = thirdProduct.extAttr.tags as NSArray
-            
-            let url = URL(string: thirdProduct.extAttr.icon_)
-
-            thirdRefuseView.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named:"placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
+                let thirdRefuseView = HomeRefuseThirdView()
+                thirdRefuseView.isUserInteractionEnabled = true
+                thirdRefuseView.tag = index + 104
+                let tapGest = UITapGestureRecognizer(target: self, action: #selector(clickFirstView(_:)))
+                thirdRefuseView.addGestureRecognizer(tapGest)
+                bgView.addSubview(thirdRefuseView)
+                thirdRefuseView.snp.makeConstraints({ (make) in
+                    make.top.equalTo(bgView.snp.top).offset(index * 103)
+                    make.left.equalTo(bgView.snp.left).offset(14)
+                    make.right.equalTo(bgView.snp.right).offset(-14)
+                    make.height.equalTo(103)
+                })
                 
-            })
-            thirdRefuseView.titleLabel?.text = thirdProduct.name
-            thirdRefuseView.qutaLabel?.text = "额度:最高" + thirdProduct.principalTop + "元"
-            thirdRefuseView.termLabel?.text = "期限:" + thirdProduct.stagingDuration + "-" + thirdProduct.stagingBottom + "天"
-            if (thirdProduct.extAttr.charge_desc_ != nil){
                 
-                thirdRefuseView.feeLabel?.text = "费用：" + thirdProduct.extAttr.charge_desc_
-                let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.feeLabel?.text)!)
-                attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-5))
-                thirdRefuseView.feeLabel?.attributedText = attrstr1
+                let thirdProduct = homeProductListModel.testFailInfo.thirdProductList[index] as! ThirdProductListModel
+                let tags = thirdProduct.extAttr.tags as NSArray
+                
+                let url = URL(string: thirdProduct.extAttr.icon_)
+                
+                thirdRefuseView.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named:"placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
+                    
+                })
+                thirdRefuseView.titleLabel?.text = thirdProduct.name
+                thirdRefuseView.qutaLabel?.text = "额度:最高" + thirdProduct.principalTop + "元"
+                thirdRefuseView.termLabel?.text = "期限:" + thirdProduct.stagingDuration + "-" + thirdProduct.stagingBottom + "天"
+                if (thirdProduct.extAttr.charge_desc_ != nil){
+                    
+                    thirdRefuseView.feeLabel?.text = "费用：" + thirdProduct.extAttr.charge_desc_
+                    let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.feeLabel?.text)!)
+                    attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-5))
+                    thirdRefuseView.feeLabel?.attributedText = attrstr1
+                }
+                
+                let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.termLabel?.text)!)
+                attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-4))
+                thirdRefuseView.termLabel?.attributedText = attrstr
+                
+                thirdRefuseView.descBtn?.setTitle(tags[0] as? String, for: .normal)
+                thirdRefuseView.descBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
+                setCornerBorder(view: thirdRefuseView.descBtn!, borderColor: UI_MAIN_COLOR)
             }
-            
-            let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(thirdRefuseView.termLabel?.text)!)
-            attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-4))
-            thirdRefuseView.termLabel?.attributedText = attrstr
-            
-            thirdRefuseView.descBtn?.setTitle(tags[0] as? String, for: .normal)
-            thirdRefuseView.descBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
-            setCornerBorder(view: thirdRefuseView.descBtn!, borderColor: UI_MAIN_COLOR)
         }
+        
         
         let moreBtn = UIButton()
         moreBtn.setTitle("更多", for: .normal)
@@ -812,7 +817,7 @@ extension HomePageCell {
         self.addSubview(moreBtn)
         moreBtn.snp.makeConstraints { (make) in
             
-            make.bottom.equalTo(bgView.snp.bottom).offset(23)
+            make.bottom.equalTo(bgView.snp.bottom).offset(5)
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(20)
         }
@@ -892,7 +897,7 @@ extension HomePageCell {
         
         var middleView:UIView?
         if homeProductListModel.flag == "7" {
-            titleLabel.text = "下一期还款日期"
+            titleLabel.text = "下一期还款截止日期"
             payTipLabel.text = homeProductListModel.repayInfo.repayTips
             middleView = setNormalView()
             self.addSubview(middleView!)
@@ -1054,7 +1059,7 @@ extension HomePageCell {
         let tipLabel = UILabel()
         tipLabel.text = homeProductListModel.drawInfo.warn
         tipLabel.font = UIFont.systemFont(ofSize: 12)
-        tipLabel.textColor = UI_MAIN_COLOR
+        tipLabel.textColor = UIColor.red
         tipLabel.textAlignment = .center
         self.addSubview(tipLabel)
         tipLabel.snp.makeConstraints { (make) in
