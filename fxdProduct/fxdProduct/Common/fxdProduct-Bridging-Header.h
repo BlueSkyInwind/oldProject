@@ -77,6 +77,8 @@
 #import "SmsCodeModel.h"
 #import "SubmitInfoModel.h"
 #import "FindViewModel.h"
+#import "UserMemberShipViewModel.h"
+#import "MemberShipInfoModel.h"
 #import "HgLoanProtoolListModel.h"
 #import "SDCycleScrollView.h"
 #import "HotRecommendModel.h"

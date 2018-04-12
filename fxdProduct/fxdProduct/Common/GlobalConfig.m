@@ -250,6 +250,8 @@ NSString *const     _paidcenter_url     =    @"paidcenter/qbbWithDraw";
 NSString *const     _delMsg_url     =    @"market/operation/delMsg";
 //热门推荐
 NSString *const     _hotRecommend_url     =    @"dc/hotRecommend";
+//会员页面信息
+NSString * const    _memberShipInfo_url               =    @"user/member";
 
 #pragma mark - 合规接口
 

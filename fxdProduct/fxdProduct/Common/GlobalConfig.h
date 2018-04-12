@@ -123,6 +123,8 @@ UIKIT_EXTERN NSString * const       _loginOutDeleteRegisterId_url;           //�
 UIKIT_EXTERN NSString * const       _creditLimitInfo_url;                    //额度页面信息获取
 UIKIT_EXTERN NSString * const       _increaseAmount_url;                    //用户提额接口
 
+UIKIT_EXTERN NSString * const       _memberShipInfo_url;                    //会员页面信息
+
 #pragma mark - 视频认证接口
 UIKIT_EXTERN NSString * const       _VideoVerify_url;                    //获取视频认证信息
 UIKIT_EXTERN NSString * const       _uploadVideoVideo_url;                    //上传视频

@@ -79,7 +79,7 @@ extension MembershipAgreementView {
         protocolBtn?.addTarget(self, action: #selector(protocolBottonClick(sender:)), for: UIControlEvents.touchUpInside)
         self.addSubview(protocolBtn!)
         protocolBtn?.snp.makeConstraints({ (make) in
-            make.left.equalTo(self.snp.left).offset(15)
+            make.left.equalTo(self.snp.left).offset(20)
             make.centerY.equalTo(self.snp.centerY).offset(0)
             make.width.height.equalTo(16)
         })
