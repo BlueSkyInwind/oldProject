@@ -24,6 +24,12 @@
 @property (nonatomic, strong)NSString<Optional> *referenceRate;
 //0已收藏 1 未收藏
 @property (nonatomic, strong)NSString<Optional> *isCollect;
+//最高额度
+@property (nonatomic, strong)NSString<Optional> *maximumAmountUnit;
+//期限
+@property (nonatomic, strong)NSString<Optional> *unitStr;
+//最高额度
+@property (nonatomic, strong)NSString<Optional> *maximumAmount;
 
 
 

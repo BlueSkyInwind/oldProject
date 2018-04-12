@@ -17,6 +17,8 @@
 @property (nonatomic, strong)NSString<Optional> *borrowMoney;
 //平台id
 @property (nonatomic, strong)NSString<Optional> *id_;
+//0已收藏 1 未收藏
+@property (nonatomic, strong)NSString<Optional> *isCollect;
 //标签
 @property (nonatomic, strong)NSString<Optional> *label;
 //最大放款金额
@@ -49,8 +51,6 @@
 @property (nonatomic, strong)NSString<Optional> *referenceRate;
 //期限
 @property (nonatomic, strong)NSString<Optional> *unitStr;
-//期限
-@property (nonatomic, strong)NSString<Optional> *collection;
 
 @end
 
