@@ -21,4 +21,6 @@
 @property(nonatomic,strong)NSString<Optional> * settleCount;
 @property(nonatomic,strong)NSString<Optional> * status;  //会员状态（1-未开通；2-已开通；3-充值中；4-退款中）
 
+
 @end
+

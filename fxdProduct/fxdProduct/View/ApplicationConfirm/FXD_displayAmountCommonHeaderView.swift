@@ -173,7 +173,7 @@ extension FXD_displayAmountCommonHeaderView{
         amountTitleLabel = UILabel()
         amountTitleLabel?.textColor = UIColor.black
         amountTitleLabel?.textAlignment = NSTextAlignment.center
-        amountTitleLabel?.font = UIFont.yx_boldSystemFont(ofSize: 14)
+        amountTitleLabel?.font = UIFont.yx_boldSystemFont(ofSize: 13)
         centerImage?.addSubview(amountTitleLabel!)
         amountTitleLabel?.snp.makeConstraints({ (make) in
             make.centerX.equalTo((centerImage?.snp.centerX)!)
@@ -184,6 +184,14 @@ extension FXD_displayAmountCommonHeaderView{
             make.centerX.equalTo((centerImage?.snp.centerX)!)
             make.centerY.equalTo((centerImage?.snp.centerY)!).offset(10)
         })
+        
+        if UI_IS_IPONE6P {
+            centerImage?.snp.remakeConstraints({ (make) in
+                make.centerX.equalTo((backGroundImage?.snp.centerX)!)
+                make.centerY.equalTo((backGroundImage?.snp.centerY)!).offset(10)
+                make.width.height.equalTo(110)
+            })
+        }
     }
 }
 

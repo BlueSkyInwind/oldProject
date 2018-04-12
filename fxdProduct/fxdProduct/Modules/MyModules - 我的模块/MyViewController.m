@@ -54,7 +54,6 @@
         self.MyViewTable.scrollEnabled = YES;
     }
     
-    
     [self.MyViewTable registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"bCell"];
     
 }
@@ -215,7 +214,6 @@
 
 }
 
-
 /**
  账户余额
  */
@@ -240,9 +238,7 @@
     if (section == 1) {
         return 3;
     }
-    
     return 2;
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -329,11 +325,8 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                    MemberCenterViewController * memberCenterVC = [[MemberCenterViewController alloc]init];
-                    [self.navigationController pushViewController:memberCenterVC animated:true];
-                    
-//                    MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-//                    [self.navigationController pushViewController:myMessageVC animated:true];
+                    MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+                    [self.navigationController pushViewController:myMessageVC animated:true];
                 }
                     break;
                 case 1:
@@ -393,6 +386,7 @@
             break;
     }
 }
+
 
 
 

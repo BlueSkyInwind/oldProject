@@ -328,8 +328,8 @@
 		84192A9A2079B1E10042E8F8 /* MemberCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192A982079B1E10042E8F8 /* MemberCenterHeaderView.swift */; };
 		84192A9C2079B3290042E8F8 /* MemberCenterHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84192A9B2079B3290042E8F8 /* MemberCenterHeaderView.xib */; };
 		84192A9D2079B3290042E8F8 /* MemberCenterHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84192A9B2079B3290042E8F8 /* MemberCenterHeaderView.xib */; };
-		84192A9F2079F5BA0042E8F8 /* MembershipFeeRechargedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192A9E2079F5BA0042E8F8 /* MembershipFeeRechargedViewController.swift */; };
-		84192AA02079F5BA0042E8F8 /* MembershipFeeRechargedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192A9E2079F5BA0042E8F8 /* MembershipFeeRechargedViewController.swift */; };
+		84192A9F2079F5BA0042E8F8 /* MembershipFeePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192A9E2079F5BA0042E8F8 /* MembershipFeePayViewController.swift */; };
+		84192AA02079F5BA0042E8F8 /* MembershipFeePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192A9E2079F5BA0042E8F8 /* MembershipFeePayViewController.swift */; };
 		84192AA22079F8A80042E8F8 /* MembershipAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA12079F8A80042E8F8 /* MembershipAgreementView.swift */; };
 		84192AA32079F8A80042E8F8 /* MembershipAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA12079F8A80042E8F8 /* MembershipAgreementView.swift */; };
 		84192AA6207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA4207A03110042E8F8 /* MembershipRechargeTableViewCell.swift */; };
@@ -1724,7 +1724,7 @@
 		84192A942079AE4C0042E8F8 /* MemberCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCenterViewController.swift; sourceTree = "<group>"; };
 		84192A982079B1E10042E8F8 /* MemberCenterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCenterHeaderView.swift; sourceTree = "<group>"; };
 		84192A9B2079B3290042E8F8 /* MemberCenterHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCenterHeaderView.xib; sourceTree = "<group>"; };
-		84192A9E2079F5BA0042E8F8 /* MembershipFeeRechargedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipFeeRechargedViewController.swift; sourceTree = "<group>"; };
+		84192A9E2079F5BA0042E8F8 /* MembershipFeePayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipFeePayViewController.swift; sourceTree = "<group>"; };
 		84192AA12079F8A80042E8F8 /* MembershipAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipAgreementView.swift; sourceTree = "<group>"; };
 		84192AA4207A03110042E8F8 /* MembershipRechargeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipRechargeTableViewCell.swift; sourceTree = "<group>"; };
 		84192AA5207A03110042E8F8 /* MembershipRechargeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MembershipRechargeTableViewCell.xib; sourceTree = "<group>"; };
@@ -3888,7 +3888,7 @@
 			isa = PBXGroup;
 			children = (
 				84192A942079AE4C0042E8F8 /* MemberCenterViewController.swift */,
-				84192A9E2079F5BA0042E8F8 /* MembershipFeeRechargedViewController.swift */,
+				84192A9E2079F5BA0042E8F8 /* MembershipFeePayViewController.swift */,
 				849BD268207B070700DD47C6 /* MemberShipPayViewController.swift */,
 			);
 			path = MemberCenter;
@@ -5278,7 +5278,7 @@
 				633DF7891BDE22BF00A3998D /* MoreViewController.m in Sources */,
 				842D9CE7206B77940020C3C2 /* IDCardUploadParam.m in Sources */,
 				638A16EA1E517D9F00AB8AB6 /* LOTGroupLayerView.m in Sources */,
-				84192A9F2079F5BA0042E8F8 /* MembershipFeeRechargedViewController.swift in Sources */,
+				84192A9F2079F5BA0042E8F8 /* MembershipFeePayViewController.swift in Sources */,
 				638A17031E517D9F00AB8AB6 /* LOTShapeFill.m in Sources */,
 				CC742D92204D42E100D645CC /* OpenAccountViewController.swift in Sources */,
 				63C50E461E666FF40035EE4F /* Custom_BaseInfo.m in Sources */,
@@ -5465,7 +5465,7 @@
 				84E306D01F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
 				843614A51F0CFD320036201A /* BaseResultModel.m in Sources */,
 				84A635131F01096900146A8A /* MobilePhoneOperatorParamModel.m in Sources */,
-				84192AA02079F5BA0042E8F8 /* MembershipFeeRechargedViewController.swift in Sources */,
+				84192AA02079F5BA0042E8F8 /* MembershipFeePayViewController.swift in Sources */,
 				CC80E005206B8882000F9BAC /* CompQueryParamModel.m in Sources */,
 				84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */,
 				845017321ED7D051008055E4 /* LoginView.m in Sources */,
