@@ -61,6 +61,9 @@
 -(void)setHttpHeaderInfo:(AFHTTPSessionManager *)manager{
     if ([FXD_Utility sharedUtility].userInfo.juid != nil && ![[FXD_Utility sharedUtility].userInfo.juid isEqualToString:@""]) {
         if ([FXD_Utility sharedUtility].userInfo.tokenStr != nil && ![[FXD_Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
+            DLog(@"juid -- %@",[FXD_Utility sharedUtility].userInfo.juid);
+            DLog(@"token -- %@",[FXD_Utility sharedUtility].userInfo.tokenStr);
+
             [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[FXD_Utility sharedUtility].userInfo.juid]];
             [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
         }

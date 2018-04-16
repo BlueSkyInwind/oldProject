@@ -256,7 +256,10 @@ NSString * const    _memberShipInfo_url               =    @"user/member";
 NSString * const    _getMyCollectionList_url               =    @"jyd/getMyCollectionList";
 //添加或者取消收藏记录
 NSString * const    _addMyCollectionInfo_url               =    @"jyd/addMyCollectionInfo";
-
+//会员费退费
+NSString * const    _memberRefund_url               =    @"repaycenter/insurance/refund";
+//会员费扣费
+NSString * const    _memberRecharge_url               =    @"repaycenter/insurance/request";
 
 #pragma mark - 合规接口
 

@@ -124,6 +124,9 @@ UIKIT_EXTERN NSString * const       _creditLimitInfo_url;                    //�
 UIKIT_EXTERN NSString * const       _increaseAmount_url;                    //用户提额接口
 
 UIKIT_EXTERN NSString * const       _memberShipInfo_url;                    //会员页面信息
+UIKIT_EXTERN NSString * const       _memberRefund_url;                    //会员费退费
+UIKIT_EXTERN NSString * const       _memberRecharge_url;                    //会员扣费
+
 
 #pragma mark - 视频认证接口
 UIKIT_EXTERN NSString * const       _VideoVerify_url;                    //获取视频认证信息

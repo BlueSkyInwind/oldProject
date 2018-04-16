@@ -23,6 +23,39 @@
     }];
 }
 
+-(void)requestMemberCenterRecharge:(NSString *)bankCardID rechargeAmount:(NSString *)rechargeAmount {
+    
+    NSDictionary * dic = @{@"accountCardId":bankCardID,@"amount":rechargeAmount};
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_memberRecharge_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel *baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+-(void)requestMemberCenterRefund:(NSString *)bankCardID refundAmount:(NSString *)refundAmount {
+    
+    NSDictionary * dic = @{@"cardId":bankCardID,@"amount":refundAmount};
+
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_memberRefund_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel *baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            [self faileBlock];
+        }
+    }];
+}
+
+
 
 
 

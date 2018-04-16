@@ -15,6 +15,15 @@
  */
 -(void)obtainMemberShipInfo;
 
+/**
+ 充值接口
+ */
+-(void)requestMemberCenterRecharge:(NSString *)bankCardID rechargeAmount:(NSString *)rechargeAmount;
+
+/**
+ 扣费接口
+ */
+-(void)requestMemberCenterRefund:(NSString *)bankCardID refundAmount:(NSString *)refundAmount;
 
 
 
