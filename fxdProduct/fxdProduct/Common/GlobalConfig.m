@@ -252,6 +252,11 @@ NSString *const     _delMsg_url     =    @"market/operation/delMsg";
 NSString *const     _hotRecommend_url     =    @"dc/hotRecommend";
 //会员页面信息
 NSString * const    _memberShipInfo_url               =    @"user/member";
+//获取我的收藏记录列表
+NSString * const    _getMyCollectionList_url               =    @"jyd/getMyCollectionList";
+//添加或者取消收藏记录
+NSString * const    _addMyCollectionInfo_url               =    @"jyd/addMyCollectionInfo";
+
 
 #pragma mark - 合规接口
 

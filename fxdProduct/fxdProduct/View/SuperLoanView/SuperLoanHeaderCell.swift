@@ -259,7 +259,11 @@ extension SuperLoanHeaderCell{
     
     fileprivate func updateTabLineViewFrame(tag : Int){
         
-        let x = 20 + 33 * tag + 46 * tag
+//        let x = 20 + 33 * tag + 46 * tag
+        var x = 20 + 79 * tag
+        if UI_IS_IPONE6P {
+            x = 20 + 85 * tag
+        }
         tabLineView?.snp.updateConstraints({ (make) in
             make.left.equalTo(self).offset(x)
         })

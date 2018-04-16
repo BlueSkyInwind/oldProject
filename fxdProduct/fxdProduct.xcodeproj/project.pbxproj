@@ -1106,6 +1106,10 @@
 		CCEFC6E6207DEE480006D731 /* HotRecommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6E4207DEE480006D731 /* HotRecommendModel.m */; };
 		CCEFC6E9207E0B610006D731 /* QbbSubmitInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6E8207E0B610006D731 /* QbbSubmitInfoModel.m */; };
 		CCEFC6EA207E0B610006D731 /* QbbSubmitInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6E8207E0B610006D731 /* QbbSubmitInfoModel.m */; };
+		CCEFC6EE207F65430006D731 /* CollectionListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6ED207F65430006D731 /* CollectionListModel.m */; };
+		CCEFC6EF207F65430006D731 /* CollectionListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6ED207F65430006D731 /* CollectionListModel.m */; };
+		CCEFC6F2207F66100006D731 /* CollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6F1207F66100006D731 /* CollectionViewModel.m */; };
+		CCEFC6F3207F66100006D731 /* CollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6F1207F66100006D731 /* CollectionViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2084,6 +2088,10 @@
 		CCEFC6E4207DEE480006D731 /* HotRecommendModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotRecommendModel.m; sourceTree = "<group>"; };
 		CCEFC6E7207E0B610006D731 /* QbbSubmitInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QbbSubmitInfoModel.h; sourceTree = "<group>"; };
 		CCEFC6E8207E0B610006D731 /* QbbSubmitInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QbbSubmitInfoModel.m; sourceTree = "<group>"; };
+		CCEFC6EC207F65430006D731 /* CollectionListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionListModel.h; sourceTree = "<group>"; };
+		CCEFC6ED207F65430006D731 /* CollectionListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionListModel.m; sourceTree = "<group>"; };
+		CCEFC6F0207F66100006D731 /* CollectionViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewModel.h; sourceTree = "<group>"; };
+		CCEFC6F1207F66100006D731 /* CollectionViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewModel.m; sourceTree = "<group>"; };
 		DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64833171B0C1433C0C2116C /* Pods-fxd-fxdProductDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProductDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev.release.xcconfig"; sourceTree = "<group>"; };
 		EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
@@ -2661,6 +2669,8 @@
 				CC4F0637207DE90B0030A12A /* FindViewModel.m */,
 				84A52E99207DF2AA000BF3E8 /* UserMemberShipViewModel.h */,
 				84A52E9A207DF2AA000BF3E8 /* UserMemberShipViewModel.m */,
+				CCEFC6F0207F66100006D731 /* CollectionViewModel.h */,
+				CCEFC6F1207F66100006D731 /* CollectionViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3475,6 +3485,7 @@
 		63E076541B67114800E269F2 /* DataModelModules */ = {
 			isa = PBXGroup;
 			children = (
+				CCEFC6EB207F651C0006D731 /* Collection */,
 				CCEFC6E2207DEE1B0006D731 /* HotRecommend */,
 				CC4F0631207C6AE40030A12A /* QBBWithDraw */,
 				CC80DFFE206B8831000F9BAC /* SperLoan */,
@@ -4516,6 +4527,15 @@
 			path = HotRecommend;
 			sourceTree = "<group>";
 		};
+		CCEFC6EB207F651C0006D731 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				CCEFC6EC207F65430006D731 /* CollectionListModel.h */,
+				CCEFC6ED207F65430006D731 /* CollectionListModel.m */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
 		CCFA2DC71EB02FC20071F46B /* HomeProductList */ = {
 			isa = PBXGroup;
 			children = (
@@ -5081,6 +5101,7 @@
 				63FC25021D98F7E9006F58F3 /* YYTextWeakProxy.m in Sources */,
 				84192AA22079F8A80042E8F8 /* MembershipAgreementView.swift in Sources */,
 				63F0E1BE1CE41821001251A9 /* NSData+YYAdd.m in Sources */,
+				CCEFC6F2207F66100006D731 /* CollectionViewModel.m in Sources */,
 				638A16F01E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.m in Sources */,
 				634830FD1CBCA1A90005C4CD /* RegionCodeBaseClass.m in Sources */,
 				638A16E81E517D9F00AB8AB6 /* LOTAnimatableLayer.m in Sources */,
@@ -5345,6 +5366,7 @@
 				638A17051E517D9F00AB8AB6 /* LOTShapePath.m in Sources */,
 				849842001FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
 				63FC25041D98F7E9006F58F3 /* YYTextView.m in Sources */,
+				CCEFC6EE207F65430006D731 /* CollectionListModel.m in Sources */,
 				CC742DB6204FB9C700D645CC /* BankListCell.swift in Sources */,
 				63878FE21C1519CD008E1CF9 /* CheckUtils.m in Sources */,
 				638C3F271CF2F470000446A7 /* PCCircleViewConst.m in Sources */,
@@ -5530,6 +5552,7 @@
 				CC0DF98C1EA5B1090024841A /* AppDelegate.mm in Sources */,
 				CCA181991FC7EED70094DA58 /* PersonalCenterModel.m in Sources */,
 				CC0DF98D1EA5B1090024841A /* CustomerCareerResult.m in Sources */,
+				CCEFC6F3207F66100006D731 /* CollectionViewModel.m in Sources */,
 				CC5FC5A11FC2742700DB0D78 /* RedPacketCell.swift in Sources */,
 				CC80DFFA206B4124000F9BAC /* SortCell.swift in Sources */,
 				CC0DF98E1EA5B1090024841A /* UIView+Extend.m in Sources */,
@@ -5794,6 +5817,7 @@
 				CC0DFA9C1EA5B1090024841A /* SetUpFMDevice.m in Sources */,
 				CC0DFA9D1EA5B1090024841A /* RegionExt.m in Sources */,
 				CC0DFA9E1EA5B1090024841A /* EditCardsController.m in Sources */,
+				CCEFC6EF207F65430006D731 /* CollectionListModel.m in Sources */,
 				849842011FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
 				CC4F0630207C65770030A12A /* CollectionViewController.swift in Sources */,
 				CC0DFAA01EA5B1090024841A /* GetMoneyProcessResult.m in Sources */,
