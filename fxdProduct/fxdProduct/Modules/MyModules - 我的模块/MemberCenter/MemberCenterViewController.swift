@@ -107,7 +107,6 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
     }
     
     func initUserMemberInfo()  {
-        footViewHeight = 150
         self.titleHeaderView?.amountStr = (memberShipInfoModel?.availableCredit)!
         self.centerHeaderView?.payAmountLabel.text = "\((memberShipInfoModel?.requestAmount)!)元"
         self.centerHeaderView?.payBackAmountLabel.text = "\((memberShipInfoModel?.chargeAmount)!)元"
@@ -186,7 +185,7 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 200
+        return CGFloat(footViewHeight!)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -258,10 +257,7 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
 extension MemberCenterViewController {
     
     func configureView()  {
-        
-        footViewHeight = 150
         self.view.backgroundColor = LOAN_APPLICATION_COLOR
-        
         if tableView != nil {
             return
         }
@@ -336,6 +332,7 @@ extension MemberCenterViewController {
     }
     
     func judgeUserStatus(_ infoModel:MemberShipInfoModel)  {
+        footViewHeight = 200
         if infoModel.status == "1" {															    	
             //会员未开通
             if infoModel.credit == nil {
