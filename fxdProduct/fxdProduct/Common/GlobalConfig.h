@@ -188,6 +188,8 @@ UIKIT_EXTERN NSString * const       _paidcenter_url;                          //
 UIKIT_EXTERN NSString * const       _delMsg_url;                              //站内信删除、清空
 UIKIT_EXTERN NSString * const       _hotRecommend_url;                         //热门推荐
 UIKIT_EXTERN NSString * const       _recent_url;                              //最近浏览
+UIKIT_EXTERN NSString * const       _getMyCollectionList_url;                  //获取我的收藏记录列表
+UIKIT_EXTERN NSString * const       _addMyCollectionInfo_url;                  //添加或者取消收藏记录
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码
 UIKIT_EXTERN NSString * const   CODE_FINDPASS;         ///密码找回验证码

@@ -82,4 +82,7 @@
 #import "HgLoanProtoolListModel.h"
 #import "SDCycleScrollView.h"
 #import "HotRecommendModel.h"
+#import "CollectionListModel.h"
+#import "CollectionViewModel.h"
+
 #endif /* fxdProduct_Bridging_Header_h */

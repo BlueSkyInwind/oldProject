@@ -137,7 +137,7 @@
         
     }];
     
-    [complianceVM hgSubmitAccountInfoBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardId:cardId cardNo:cardNo retUrl:retUrl smsSeq:smsSeq userCode:userCode verifyCode:verifyCode capitalPlatform:capitalPlatform];
+    [complianceVM hgSubmitAccountInfoBankNo:bankNo bankReservePhone:bankReservePhone bankShortName:bankShortName cardId:cardId cardNo:cardNo retUrl:@"" smsSeq:smsSeq userCode:userCode verifyCode:verifyCode capitalPlatform:capitalPlatform];
     
 }
 

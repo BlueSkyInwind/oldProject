@@ -215,6 +215,7 @@ extension SuperLoanCell{
             make.bottom.equalTo(self).offset(-15)
             make.left.equalTo((leftImageView?.snp.right)!).offset(20)
             make.height.equalTo(20)
+            make.width.equalTo(150)
 //            make.width.equalTo(30)
         })
         

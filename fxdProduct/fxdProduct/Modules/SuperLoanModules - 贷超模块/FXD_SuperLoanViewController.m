@@ -12,6 +12,8 @@
 #import "FindViewModel.h"
 #import "HotRecommendModel.h"
 #import "FXDWebViewController.h"
+#import "CollectionViewModel.h"
+
 @interface FXD_SuperLoanViewController ()<UITableViewDelegate,UITableViewDataSource,SuperLoanHeaderCellDelegate,SortViewDelegate,FilterViewDelegate,SuperLoanHeaderViewDelegate,SuperLoanCellDelegate>{
     
     SuperLoanHeaderCell *_superLoanHeaderCell;
@@ -28,6 +30,7 @@
     NSMutableArray *_hotDataArray;
     SuperLoanHeaderView *_headerView;
     NSMutableArray *_recentDataArray;
+
 }
 
 @property(nonatomic,strong)UITableView *tableView;
@@ -89,7 +92,7 @@
     
 }
 
-
+#pragma mark 最流浏览数据
 -(void)getRecentData{
     
     FindViewModel *findVM = [[FindViewModel alloc]init];
@@ -116,6 +119,7 @@
     [findVM recent];
 }
 
+#pragma mark 热门推荐数据
 -(void)hotRecommendData{
     
     FindViewModel *findVM = [[FindViewModel alloc]init];
@@ -552,21 +556,39 @@
 -(void)collectionBtn:(UIButton *)sender{
     
     [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:[NSString stringWithFormat:@"%ld",sender.tag]];
-    sender.selected = !sender.selected;
-    
     RowsModel *model = _dataArray[sender.tag];
-    if (sender.selected) {
-    
-        model.isCollect = @"0";
-        [sender setImage:[UIImage imageNamed:@"collection_selected_icon"] forState:UIControlStateNormal];
+
+    CollectionViewModel *collectionVM = [[CollectionViewModel alloc]init];
+    [collectionVM setBlockWithReturnBlock:^(id returnValue) {
         
-    }else{
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            
+            [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
         
-        model.isCollect = @"1";
-        [sender setImage:[UIImage imageNamed:@"collection_icon"] forState:UIControlStateNormal];
-    }
+    } WithFaileBlock:^{
+        
+    }];
     
-    [self.tableView reloadData];
+    [collectionVM addMyCollectionInfocollectionType:_type platformId:model.id_];
+    
+//    sender.selected = !sender.selected;
+//    RowsModel *model = _dataArray[sender.tag];
+//    if (sender.selected) {
+//
+//        model.isCollect = @"0";
+//        [sender setImage:[UIImage imageNamed:@"collection_selected_icon"] forState:UIControlStateNormal];
+//
+//    }else{
+//
+//        model.isCollect = @"1";
+//        [sender setImage:[UIImage imageNamed:@"collection_icon"] forState:UIControlStateNormal];
+//    }
+    
+//    [self.tableView reloadData];
 }
 
 
