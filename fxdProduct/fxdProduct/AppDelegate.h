@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "FXDBaseTabBarVCModule.h"
+#import "PushInfoModel.h"
 
 static NSString *appKey = @"ba8e9f4d543ae506db5295fb";
 static NSString *channel = @"App Store";
-static BOOL isProduction = true;
+static BOOL isProduction = false;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

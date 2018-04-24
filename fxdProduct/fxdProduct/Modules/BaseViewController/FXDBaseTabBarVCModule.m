@@ -91,13 +91,15 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
+    /*
     if (tabBarController.selectedIndex == 1 || tabBarController.selectedIndex == 2) {
         if ([FXD_Utility sharedUtility].loginFlage) {
-            
+
         } else {
             [self presentLogin:self];
         }
     }
+     */
 }
 
 - (void)presentLogin:(UIViewController *)vc

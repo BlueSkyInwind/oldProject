@@ -51,6 +51,17 @@
     } @finally {
     }
 }
+//公积金导入
+- (void)accumulationFundImportClick{
+    @try {
+        [MoxieSDK shared].taskType = @"fund";
+        [[MoxieSDK shared] start];
+    } @catch (NSException *exception) {
+        DLog(@"%@", exception);
+        return;
+    } @finally {
+    }
+}
 //社保导入
 -(void)securityImportClick{
     @try {

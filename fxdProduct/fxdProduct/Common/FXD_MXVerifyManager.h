@@ -27,6 +27,8 @@ typedef void(^MXVerifyResult)(NSDictionary * resultDic);
 - (void)mailImportClick;
 //社保导入
 -(void)securityImportClick;
+//公积金导入
+-(void)accumulationFundImportClick;
 
 
 @end

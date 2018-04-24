@@ -137,7 +137,6 @@
                 //                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您当前的版本太低,为了您的使用体验请升级版本后再来体验^_^"];
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginResultM.friendErrMsg]];
                 _loginView.codeView.hidden = NO;
-
             } else {
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginResultM.friendErrMsg]];
             }
@@ -217,11 +216,6 @@
     [self.navigationController pushViewController:regView animated:YES];
     
 }
-
-//- (UIStatusBarStyle)preferredStatusBarStyle
-//{
-//    return UIStatusBarStyleLightContent;
-//}
 
 - (void)setUserName:(NSString *)str
 {

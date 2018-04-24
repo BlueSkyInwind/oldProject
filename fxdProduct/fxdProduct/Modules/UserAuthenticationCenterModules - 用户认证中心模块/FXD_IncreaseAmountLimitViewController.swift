@@ -106,7 +106,6 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     }
     
     @objc func appraisalBottonClick(){
-        
         if isTestFlag {
             userRequestImproveAmount({ (isSuccess) in
                 if isSuccess {
@@ -128,7 +127,7 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -149,11 +148,17 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
             if creditCardStatus == "3" {
                 cell.statusLabel.textColor = UI_MAIN_COLOR
             }
-
             break
         case 1:
             cell.statusLabel.text = highRandingM == nil ? "未完成" : highRandingM?.socialDesc
             cell.titleLabel.text = "社保认证";
+            if socialSecurityStatus == "3" {
+                cell.statusLabel.textColor = UI_MAIN_COLOR
+            }
+            break
+        case 2:
+            cell.statusLabel.text = highRandingM == nil ? "未完成" : highRandingM?.socialDesc
+            cell.titleLabel.text = "公积金认证";
             if socialSecurityStatus == "3" {
                 cell.statusLabel.textColor = UI_MAIN_COLOR
             }
@@ -177,6 +182,12 @@ class FXD_IncreaseAmountLimitViewController: BaseViewController,UITableViewDeleg
                 break
             }
              FXD_MXVerifyManager.sharedInteraction().securityImportClick()
+            break
+        case 2:
+            if socialSecurityStatus == "2" || socialSecurityStatus == "3"{
+                break
+            }
+            FXD_MXVerifyManager.sharedInteraction().accumulationFundImportClick()
             break
         default:
             break
@@ -270,7 +281,6 @@ extension FXD_IncreaseAmountLimitViewController {
                 self.creditCardStatus = highRandM.creditMail
                 self.socialSecurityStatus = highRandM.social
                 self.highRandingM = highRandM
-
                 self.tableView?.reloadData()
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
