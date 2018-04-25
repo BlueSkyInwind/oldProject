@@ -629,6 +629,8 @@
 		84F87F4B1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */; };
 		84F87F4C1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */; };
 		84FA3F571F53AA5D00C8ABED /* Pods_fxd_fxdProductDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */; };
+		84FF95B9208F03CE0032BF5D /* PushInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF95B8208F03CE0032BF5D /* PushInfoModel.m */; };
+		84FF95BA208F0A8C0032BF5D /* PushInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF95B8208F03CE0032BF5D /* PushInfoModel.m */; };
 		CC0346261F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0346241F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m */; };
 		CC0346271F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0346251F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib */; };
 		CC0346281F3C4CDF001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0346251F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib */; };
@@ -1950,6 +1952,8 @@
 		84F87F461FC3CD6600F1C5CD /* UIFont+YX_Font.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+YX_Font.m"; sourceTree = "<group>"; };
 		84F87F491FC4102500F1C5CD /* PayPasswordInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayPasswordInputView.h; sourceTree = "<group>"; };
 		84F87F4A1FC4102500F1C5CD /* PayPasswordInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayPasswordInputView.m; sourceTree = "<group>"; };
+		84FF95B7208F03CE0032BF5D /* PushInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushInfoModel.h; sourceTree = "<group>"; };
+		84FF95B8208F03CE0032BF5D /* PushInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushInfoModel.m; sourceTree = "<group>"; };
 		CC0346231F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageActivityImageDisplayModule.h; sourceTree = "<group>"; };
 		CC0346241F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageActivityImageDisplayModule.m; sourceTree = "<group>"; };
 		CC0346251F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomepageActivityImageDisplayModule.xib; sourceTree = "<group>"; };
@@ -3541,6 +3545,7 @@
 				84E306CC1F972BF100C97D72 /* DiscountTicket */,
 				84139DEF1FF3A071000DA896 /* ProtocolModel */,
 				84A52E9D207DFA32000BF3E8 /* MemberShip */,
+				84FF95B6208EE00F0032BF5D /* PushInfo */,
 			);
 			path = DataModelModules;
 			sourceTree = "<group>";
@@ -4292,6 +4297,15 @@
 				CC49BA051FC51B7400232041 /* WithdrawDetailsViewController.swift */,
 			);
 			path = RedPacketWithCash;
+			sourceTree = "<group>";
+		};
+		84FF95B6208EE00F0032BF5D /* PushInfo */ = {
+			isa = PBXGroup;
+			children = (
+				84FF95B7208F03CE0032BF5D /* PushInfoModel.h */,
+				84FF95B8208F03CE0032BF5D /* PushInfoModel.m */,
+			);
+			path = PushInfo;
 			sourceTree = "<group>";
 		};
 		CC45E7281FD78FC600DE803D /* Message */ = {
@@ -5399,6 +5413,7 @@
 				634830FE1CBCA1A90005C4CD /* RegionCodeExt.m in Sources */,
 				CC6E0F171FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */,
 				CC8BC9541FEA0374008E135E /* HomePageCell.swift in Sources */,
+				84FF95B9208F03CE0032BF5D /* PushInfoModel.m in Sources */,
 				635B0BE11DF157EA008EAFD1 /* DetailViewController.m in Sources */,
 				CC6F06901F7B8D3600FA889E /* ShanLinWebVCModules.m in Sources */,
 				848FC64A1FFE137000918CE9 /* CommonExtention.swift in Sources */,
@@ -5465,6 +5480,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FF95BA208F0A8C0032BF5D /* PushInfoModel.m in Sources */,
 				84332C8A206CCD87009A9121 /* CameraManager.swift in Sources */,
 				842D9CEA206B832F0020C3C2 /* IDCardUploadParam.m in Sources */,
 				84C61A141FA828F000626411 /* FindPassViewController.m in Sources */,

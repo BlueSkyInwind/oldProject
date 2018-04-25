@@ -20,6 +20,8 @@
 #import "UITabBar+badge.h"
 #import "MineViewModel.h"
 #import "ExperienceValueGradeModel.h"
+#import "LoginViewController.h"
+
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate,MineHeaderViewDelegate>
 {
     //标题数组
@@ -48,12 +50,10 @@
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
-    
     self.MyViewTable.scrollEnabled = YES;
     if (UI_IS_IPHONE4 ) {
         self.MyViewTable.scrollEnabled = YES;
     }
-    
     [self.MyViewTable registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"bCell"];
     
 }
@@ -62,7 +62,10 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     [self addHeaderView];
-    [self getMessageNumber];
+    //检测登录
+    if ([FXD_Utility sharedUtility].loginFlage) {
+        [self getMessageNumber];
+    }
 //    [self getExperienceValueGrade];
 //    [self getPersonalCenterInfo];
 }
@@ -82,10 +85,13 @@
     _headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
     _headerView.backgroundColor = UI_MAIN_COLOR;
     _headerView.delegate = self;
-    _headerView.accountLabel.text = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
     [headerBgView addSubview:_headerView];
+    if ([FXD_Utility sharedUtility].loginFlage) {
+        _headerView.accountLabel.text = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
+    } else {
+        _headerView.accountLabel.text = @"未登录，请登录";
+    }
     [self.MyViewTable setTableHeaderView:headerBgView];
-    
     _middleView = [[MineMiddleView alloc]initWithFrame:CGRectZero];
     _middleView.backgroundColor = [UIColor whiteColor];
     _middleView.delegate = self;
@@ -93,7 +99,11 @@
 }
 
 -(void)memberBtnClick{
-    
+    //检测登录
+    if (![FXD_Utility sharedUtility].loginFlage) {
+        [self presentLogin:self];
+        return;
+    }
     MemberCenterViewController * memberCenterVC = [[MemberCenterViewController alloc]init];
     [self.navigationController pushViewController:memberCenterVC animated:true];
 }
@@ -128,7 +138,6 @@
 /**
  点击等级跳转
  */
-
 -(void)shadowImageViewClick{
     
     FXDWebViewController *webView = [[FXDWebViewController alloc] init];
@@ -168,7 +177,6 @@
 
     CashViewModel *cashVM = [[CashViewModel alloc]init];
     [cashVM setBlockWithReturnBlock:^(id returnValue) {
-        
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             PersonalCenterModel *model = [[PersonalCenterModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
@@ -188,7 +196,7 @@
 
     [super viewDidDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
-
+ 
 }
 
 #pragma mark 我的页面中间部分点击事件
@@ -197,18 +205,25 @@
  现金红包
  */
 -(void)redPacketViewTap{
-    
+    //检测登录
+    if (![FXD_Utility sharedUtility].loginFlage) {
+        [self presentLogin:self];
+        return;
+    }
     CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
     [FXD_Utility sharedUtility].operateType = @"1";
     [self.navigationController pushViewController:controller animated:true];
-
 }
 
 /**
  优惠券
  */
 -(void)couponViewTap{
-    
+    //检测登录
+    if (![FXD_Utility sharedUtility].loginFlage) {
+        [self presentLogin:self];
+        return;
+    }
     DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
     [self.navigationController pushViewController:ticket animated:YES];
 
@@ -218,9 +233,12 @@
  账户余额
  */
 -(void)accountViewTap{
-    
+    //检测登录
+    if (![FXD_Utility sharedUtility].loginFlage) {
+        [self presentLogin:self];
+        return;
+    }
     [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"暂未开放，敬请期待"];
-
 }
 #pragma mark - TableView
 
@@ -231,7 +249,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     if (section == 0) {
         return 2;
     }
@@ -275,7 +292,6 @@
         
         index = indexPath.row + 2;
     }
-    
     if (indexPath.section == 2) {
         index = indexPath.row + 5;
     }
@@ -319,6 +335,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //检测登录
+    if (![FXD_Utility sharedUtility].loginFlage) {
+        [self presentLogin:self];
+        return;
+    }
     
     switch (indexPath.section) {
         case 0:
@@ -387,6 +408,12 @@
     }
 }
 
+- (void)presentLogin:(UIViewController *)vc
+{
+    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
+    [vc presentViewController:nav animated:YES completion:nil];
+}
 
 
 

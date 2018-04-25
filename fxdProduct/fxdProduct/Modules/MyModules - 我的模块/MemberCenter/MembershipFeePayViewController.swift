@@ -72,7 +72,7 @@ class MembershipFeePayViewController: BaseViewController,UITableViewDelegate,UIT
         case .refund?:
             let num = Int(settleCount!)
             if num! > 8 {
-                FXD_AlertViewCust.sharedHHAlertView().showFXDAlertViewTitle("", content: "退款后将不能借款，确认退款", attributeDic: [:], textAlignment: NSTextAlignment.center, cancelTitle: "确认", sureTitle: "取消") { (index) in
+                FXD_AlertViewCust.sharedHHAlertView().showFXDAlertViewTitle("", content: "退款后将不能借款，确认退款", attributeDic: nil, textAlignment: NSTextAlignment.center, cancelTitle: "确认", sureTitle: "取消") { (index) in
                     if index == 0 {
                         self.InitiateArefund()
                     }
@@ -176,8 +176,8 @@ class MembershipFeePayViewController: BaseViewController,UITableViewDelegate,UIT
                 self?.bottomButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_unselect_Image"), for: UIControlState.normal)
             }
         }
-        agreementView.agreementClick = {
-            
+        agreementView.agreementClick = { [weak self] in
+            self?.getMemberCenterProtocol()
         }
         footerView.addSubview(agreementView)
         agreementView.snp.makeConstraints { (make) in
@@ -287,7 +287,6 @@ extension MembershipFeePayViewController{
         self.tableView?.tableHeaderView = titleHeaderView
         self.tableView?.tableFooterView = self.addFooterView()
     }
-    
 }
 
 
@@ -354,6 +353,28 @@ extension MembershipFeePayViewController {
             success(false,false)
         }
         bankInfoVM.obtainUserBankCardListPlatformType("")
+    }
+    
+    func getMemberCenterProtocol()  {
+        let complianceViewModel = ComplianceViewModel.init()
+        complianceViewModel.setBlockWithReturn({ (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                if let content = (baseResult.data as! [String:String])["protocolContent"] {
+                    let protocolContent = content
+                    let navTitle = (baseResult.data as! [String:String])["title"]
+                    let webController = DetailViewController()
+                    webController.content = protocolContent;
+                    webController.navTitle = navTitle;
+                    self.navigationController?.pushViewController(webController, animated: true)
+                }
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        complianceViewModel.hgGetProductNewProtocolApplicationId(nil, inverBorrowId: nil, periods: nil, productId: "fxd_member", productType: nil, protocolType: "19", stagingType: nil)
     }
     
 }

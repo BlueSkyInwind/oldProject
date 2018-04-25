@@ -20,7 +20,6 @@
 #import "FXD_LaunchConfiguration.h"
 #import "LoginViewModel.h"
 
-
 NSString* const NotificationCategoryIdent  = @"ACTIONABLE";
 NSString* const NotificationActionOneIdent = @"ACTION_ONE";
 NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
@@ -28,6 +27,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 @interface AppDelegate () <JPUSHRegisterDelegate,UNUserNotificationCenterDelegate>
 {
     NSString *_deviceToken;
+    id currentVC;
 }
 
 @end
@@ -51,7 +51,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     
     return YES;
 }
-
 
 #pragma mark - 启动app
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -165,7 +164,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     //清除激光推送JPush服务器中存储的badge值
@@ -204,8 +202,8 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
-    
 }
+
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     
     //    NSDictionary * userInfo = [notification userInfo];
@@ -230,7 +228,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     // Required
     NSDictionary * userInfo = notification.request.content.userInfo;
     _notificationContentInfo = notification.request.content.userInfo;
-    //    [self NotificationJump:notificationContentInfo];
+//    [self NotificationJump:_notificationContentInfo];
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
@@ -254,19 +252,54 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     if (application.applicationState == UIApplicationStateActive ){
         
     }else if(application.applicationState == UIApplicationStateBackground){
-        
+        [self NotificationJump:_notificationContentInfo];
     }else if(application.applicationState == UIApplicationStateInactive){
-        
+        [self NotificationJump:_notificationContentInfo];
     }
     [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }
 -(void)NotificationJump:(NSDictionary *)contentInfo{
     
-    
-    
-    
+    PushInfoModel * model = [[PushInfoModel alloc]initWithDictionary:contentInfo error:nil];
+    currentVC = [[FXD_Tool share]topViewController];
+    BaseNavigationViewController * BaseNavigationVC;
+    if ([currentVC isKindOfClass:[FXDBaseTabBarVCModule class]]) {
+        FXDBaseTabBarVCModule * baseTabVC = currentVC;
+        BaseNavigationVC = baseTabVC.selectedViewController;
+    }
+    if (model) {
+        switch ([model.type integerValue]) {
+            case 1:{
+                //发现
+                self.btb.selectedIndex = 1;
+            }
+                break;
+            case 2:{
+                 //我的
+                self.btb.selectedIndex = 2;
+            }
+                break;
+            case 3:{
+                //活动页面
+                FXDWebViewController * messageVC = [[FXDWebViewController alloc]init];
+                messageVC.urlStr = model.url;
+                [BaseNavigationVC pushViewController:messageVC animated:true];
+            }
+                break;
+            case 4:{
+                //站内信页面
+                FXDWebViewController * messageVC = [[FXDWebViewController alloc]init];
+                messageVC.urlStr = [NSString stringWithFormat:@"%@%@",model.url,model.messageID];
+                [BaseNavigationVC pushViewController:messageVC animated:true];
+            }
+                break;
+            default:
+                break;
+        }
+    }
 }
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];

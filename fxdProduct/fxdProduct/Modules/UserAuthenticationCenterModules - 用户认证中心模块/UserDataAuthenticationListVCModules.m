@@ -161,7 +161,7 @@
         return 4;
     }else if(section == 1){
         if (isOpen) {
-            return 3;
+            return 4;
         }
         return 1;
     }
@@ -186,7 +186,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        NSInteger  unfoldBtnIndex = 2;
+        NSInteger  unfoldBtnIndex = 3;
         if (!isOpen) {
             unfoldBtnIndex = 0;
         }
@@ -195,7 +195,6 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.titleLabel.text = @"拉起";
             cell.arrowImageView.transform = CGAffineTransformMakeRotation(M_PI);
-
             if (!isOpen) {
                 cell.titleLabel.text = @"更多";
                 cell.arrowImageView.transform = CGAffineTransformIdentity;
@@ -215,7 +214,7 @@
         cell.statusLabel.text = @"未完成";
         cell.statusLabel.textColor = rgb(159, 160, 162);
         switch (indexPath.row) {
-            case 0:
+            case 1:
             {
                 cell.iconImage.image = [UIImage imageNamed:@"creditCard_icon"];
                 cell.subTitleLabel.text = @"完善信用卡认证信息";
@@ -228,11 +227,24 @@
                 return cell;
             }
                 break;
-            case 1:
+            case 0:
             {
                 cell.iconImage.image = [UIImage imageNamed:@"shebao_icon"];
                 cell.subTitleLabel.text = @"完善社保认证信息";
                 cell.titleLable.text = @"社保认证";
+                cell.statusLabel.text = _userDataModel != nil ? _userDataModel.socialDesc : @"未完成";;
+                cell.statusLabel.textColor =  rgb(159, 160, 162);
+                if ([_socialSecurityStatus isEqualToString:@"3"]) {
+                    cell.statusLabel.textColor = UI_MAIN_COLOR;
+                }
+                return cell;
+            }
+                break;
+            case 2:
+            {
+                cell.iconImage.image = [UIImage imageNamed:@"shebao_icon"];
+                cell.subTitleLabel.text = @"完善社保认证信息";
+                cell.titleLable.text = @"公积金认证";
                 cell.statusLabel.text = _userDataModel != nil ? _userDataModel.socialDesc : @"未完成";;
                 cell.statusLabel.textColor =  rgb(159, 160, 162);
                 if ([_socialSecurityStatus isEqualToString:@"3"]) {
@@ -316,7 +328,7 @@
 {
     if (indexPath.section == 1) {
         switch (indexPath.row) {
-            case 0:
+            case 1:
                 if ([_creditCardStatus isEqualToString:@"3"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                     return;
@@ -327,7 +339,7 @@
                 }
                 [[FXD_MXVerifyManager sharedInteraction]mailImportClick];
                 break;
-            case 1:
+            case 0:
                 if ([_socialSecurityStatus isEqualToString:@"3"]) {
                     [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
                     return;
@@ -337,6 +349,17 @@
                     return;
                 }
                 [[FXD_MXVerifyManager sharedInteraction]securityImportClick];
+                break;
+            case 2:
+//                if ([_socialSecurityStatus isEqualToString:@"3"]) {
+//                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您已完成认证"];
+//                    return;
+//                }
+//                if ([_socialSecurityStatus isEqualToString:@"2"]) {
+//                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"认证中，请稍后！"];
+//                    return;
+//                }
+                [[FXD_MXVerifyManager sharedInteraction]accumulationFundImportClick];
                 break;
             default:
                 break;
