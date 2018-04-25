@@ -18,5 +18,6 @@
 @property (nonatomic,strong)NSString<Optional> *create_date_;      //申请时间
 @property (nonatomic, strong) NSString<Optional> *product_id_;
 @property (nonatomic, strong) NSString<Optional> *loan_staging_duration_;  // 1：天    5：周
+@property (nonatomic, strong) NSString<Optional> *staging_type_;  // 单位 汉字
 
 @end

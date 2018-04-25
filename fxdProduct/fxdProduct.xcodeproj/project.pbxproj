@@ -1054,6 +1054,8 @@
 		CC85C6291FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
 		CC85C62C1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */; };
 		CC85C62D1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */; };
+		CC8BB752208F174600ADA647 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BB751208F174600ADA647 /* RecentCell.swift */; };
+		CC8BB753208F174600ADA647 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BB751208F174600ADA647 /* RecentCell.swift */; };
 		CC8BC9541FEA0374008E135E /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9531FEA0374008E135E /* HomePageCell.swift */; };
 		CC8BC9551FEA0374008E135E /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9531FEA0374008E135E /* HomePageCell.swift */; };
 		CC8BC9581FEA394C008E135E /* FXD_HomePageVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9571FEA394C008E135E /* FXD_HomePageVCModules.m */; };
@@ -2047,6 +2049,7 @@
 		CC80E00B206B8A70000F9BAC /* CompQueryViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompQueryViewModel.m; sourceTree = "<group>"; };
 		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
+		CC8BB751208F174600ADA647 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
 		CC8BC9531FEA0374008E135E /* HomePageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCell.swift; sourceTree = "<group>"; };
 		CC8BC9561FEA394C008E135E /* FXD_HomePageVCModules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_HomePageVCModules.h; sourceTree = "<group>"; };
 		CC8BC9571FEA394C008E135E /* FXD_HomePageVCModules.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_HomePageVCModules.m; sourceTree = "<group>"; };
@@ -3595,6 +3598,7 @@
 				CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */,
 				CC8BC9531FEA0374008E135E /* HomePageCell.swift */,
 				CC5F9AAF20735D990042DFDA /* SDCycleScrollCell.swift */,
+				CC8BB751208F174600ADA647 /* RecentCell.swift */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -5297,6 +5301,7 @@
 				6300CC0B1E4AE5FD0012B05A /* CareerParse.m in Sources */,
 				63FC24F61D98F7E9006F58F3 /* YYTextArchiver.m in Sources */,
 				638A16FD1E517D9F00AB8AB6 /* UIBezierPath.m in Sources */,
+				CC8BB752208F174600ADA647 /* RecentCell.swift in Sources */,
 				636B1BA31C30DBCB00450358 /* SMSViewModel.m in Sources */,
 				841A48E01FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift in Sources */,
 				638A170A1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m in Sources */,
@@ -5751,6 +5756,7 @@
 				CC0DFA471EA5B1090024841A /* FXDBaseTabBarVCModule.m in Sources */,
 				CC6E696820562D10005853BB /* SubmitInfoModel.m in Sources */,
 				84E306CB1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
+				CC8BB753208F174600ADA647 /* RecentCell.swift in Sources */,
 				CC594E6C1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */,
 				CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */,
 				CC0DFA4A1EA5B1090024841A /* FXD_NetWorkRequestManager.m in Sources */,
