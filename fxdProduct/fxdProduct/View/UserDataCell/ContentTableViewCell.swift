@@ -56,9 +56,9 @@ extension ContentTableViewCell {
         self.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.snp.centerY)
-            make.width.equalTo(90)
+            make.width.equalTo(100)
             make.height.equalTo(21)
-            make.left.equalTo(15)
+            make.left.equalTo(20)
         })
         
         arrowsImageBtn = UIButton.init(type: UIButtonType.custom)
@@ -129,6 +129,20 @@ extension ContentTableViewCell {
             make.height.equalTo(30)
             make.width.equalTo((arrowsImageBtn?.snp.height)!).multipliedBy(3.37)
             make.right.equalTo(self.snp.right).offset(-10)
+        })
+    }
+    
+    // 星号
+    @objc func  updateStarLabelLayout() {
+        let starLabel = UILabel()
+        starLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        starLabel.textAlignment = NSTextAlignment.left
+        starLabel.text = "*"
+        starLabel.textColor = UIColor.red
+        self.addSubview(starLabel)
+        starLabel.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(self.snp.centerY)
+            make.right.equalTo((titleLabel?.snp.left)!).offset(-3)
         })
     }
     

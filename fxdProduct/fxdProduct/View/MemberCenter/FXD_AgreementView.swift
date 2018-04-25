@@ -1,5 +1,5 @@
 //
-//  MembershipAgreementView.swift
+//  FXD_AgreementView.swift
 //  fxdProduct
 //
 //  Created by admin on 2018/4/8.
@@ -11,7 +11,7 @@ import UIKit
 typealias MembershipAgreementClick = () -> Void
 typealias AgreeMembershipAgreementClick = (_ isClick:Bool) -> Void
 
-class MembershipAgreementView: UIView {
+class FXD_AgreementView: UIView {
     
     var protocolBtn:UIButton?
     var protocolLabel:YYLabel?
@@ -23,9 +23,9 @@ class MembershipAgreementView: UIView {
         configureView()
     }
     
-    convenience init(_ frame: CGRect,protocolNameArr:[String]) {
+    convenience init(_ frame: CGRect,content:String,protocolNameArr:[String]) {
         self.init(frame: frame)
-        addProtocolClick(protocolNameArr)
+        addProtocolClick(content, protocolNameArr)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,8 +40,9 @@ class MembershipAgreementView: UIView {
         }
     }
     
-    func addProtocolClick(_ protocolNames:[String])  {
-        var protocolContent:String = "我已阅读并同意"
+    func addProtocolClick(_ explain:String,_ protocolNames:[String])  {
+        //
+        var protocolContent:String = explain
         var rangeArr:[NSRange] = []
         for proName in protocolNames {
             protocolContent = protocolContent + proName + "、"
@@ -70,7 +71,7 @@ class MembershipAgreementView: UIView {
 
 }
 
-extension MembershipAgreementView {
+extension FXD_AgreementView {
     
     func configureView()  {
         protocolBtn = UIButton.init(type: UIButtonType.custom)

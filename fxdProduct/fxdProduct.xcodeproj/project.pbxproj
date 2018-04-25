@@ -330,8 +330,8 @@
 		84192A9D2079B3290042E8F8 /* MemberCenterHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84192A9B2079B3290042E8F8 /* MemberCenterHeaderView.xib */; };
 		84192A9F2079F5BA0042E8F8 /* MembershipFeePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192A9E2079F5BA0042E8F8 /* MembershipFeePayViewController.swift */; };
 		84192AA02079F5BA0042E8F8 /* MembershipFeePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192A9E2079F5BA0042E8F8 /* MembershipFeePayViewController.swift */; };
-		84192AA22079F8A80042E8F8 /* MembershipAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA12079F8A80042E8F8 /* MembershipAgreementView.swift */; };
-		84192AA32079F8A80042E8F8 /* MembershipAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA12079F8A80042E8F8 /* MembershipAgreementView.swift */; };
+		84192AA22079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA12079F8A80042E8F8 /* FXD_AgreementView.swift */; };
+		84192AA32079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA12079F8A80042E8F8 /* FXD_AgreementView.swift */; };
 		84192AA6207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA4207A03110042E8F8 /* MembershipRechargeTableViewCell.swift */; };
 		84192AA7207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA4207A03110042E8F8 /* MembershipRechargeTableViewCell.swift */; };
 		84192AA8207A03110042E8F8 /* MembershipRechargeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84192AA5207A03110042E8F8 /* MembershipRechargeTableViewCell.xib */; };
@@ -407,6 +407,8 @@
 		8453F5391FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */; };
 		846BB6E31F5835E100CD3545 /* ApplicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */; };
 		846BB6E41F5835E100CD3545 /* ApplicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */; };
+		846D58CD20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */; };
+		846D58CE20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */; };
 		847298341FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847298331FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift */; };
 		847298351FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847298331FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift */; };
 		847298371FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847298361FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift */; };
@@ -1731,7 +1733,7 @@
 		84192A982079B1E10042E8F8 /* MemberCenterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCenterHeaderView.swift; sourceTree = "<group>"; };
 		84192A9B2079B3290042E8F8 /* MemberCenterHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCenterHeaderView.xib; sourceTree = "<group>"; };
 		84192A9E2079F5BA0042E8F8 /* MembershipFeePayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipFeePayViewController.swift; sourceTree = "<group>"; };
-		84192AA12079F8A80042E8F8 /* MembershipAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipAgreementView.swift; sourceTree = "<group>"; };
+		84192AA12079F8A80042E8F8 /* FXD_AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_AgreementView.swift; sourceTree = "<group>"; };
 		84192AA4207A03110042E8F8 /* MembershipRechargeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipRechargeTableViewCell.swift; sourceTree = "<group>"; };
 		84192AA5207A03110042E8F8 /* MembershipRechargeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MembershipRechargeTableViewCell.xib; sourceTree = "<group>"; };
 		841A48DE1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_ToWithDrawFundsTableViewCell.swift; sourceTree = "<group>"; };
@@ -1787,6 +1789,7 @@
 		8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPayPasswordView.swift; sourceTree = "<group>"; };
 		846BB6E11F5835E100CD3545 /* ApplicationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewModel.h; sourceTree = "<group>"; };
 		846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewModel.m; sourceTree = "<group>"; };
+		846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_WithholdAuthViewController.swift; sourceTree = "<group>"; };
 		847298331FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_ApplicationChoosePickerView.swift; sourceTree = "<group>"; };
 		847298361FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_IncreaseAmountLimitViewController.swift; sourceTree = "<group>"; };
 		8473F13F1F31CAA1005B4933 /* SupportBankList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportBankList.h; sourceTree = "<group>"; };
@@ -3915,7 +3918,7 @@
 			children = (
 				84192A982079B1E10042E8F8 /* MemberCenterHeaderView.swift */,
 				84192A9B2079B3290042E8F8 /* MemberCenterHeaderView.xib */,
-				84192AA12079F8A80042E8F8 /* MembershipAgreementView.swift */,
+				84192AA12079F8A80042E8F8 /* FXD_AgreementView.swift */,
 				84192AA4207A03110042E8F8 /* MembershipRechargeTableViewCell.swift */,
 				84192AA5207A03110042E8F8 /* MembershipRechargeTableViewCell.xib */,
 			);
@@ -4236,6 +4239,7 @@
 				84A3802F1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.m */,
 				84A3802E1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib */,
 				847298361FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift */,
+				846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */,
 				84A380011FAC1D8D008FB7AF /* UserDataFillingModule - 用户资料填写 */,
 			);
 			path = "UserAuthenticationCenterModules - 用户认证中心模块";
@@ -5025,6 +5029,7 @@
 			files = (
 				84C61A161FA8293200626411 /* FindPassViewController.m in Sources */,
 				CC85C62C1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */,
+				846D58CD20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */,
 				84C61A091FA81F2A00626411 /* BankCardNameVCModules.m in Sources */,
 				84C619BF1FA815EB00626411 /* LoanPaymentDetailVCModule.m in Sources */,
 				84C619C01FA815EB00626411 /* LoanPeriodListVCModule.m in Sources */,
@@ -5113,7 +5118,7 @@
 				CC742D8F204D3A3800D645CC /* OpenAccountCell.swift in Sources */,
 				84DFBED31F4D72050009DAB9 /* UserDataViewModel.m in Sources */,
 				63FC25021D98F7E9006F58F3 /* YYTextWeakProxy.m in Sources */,
-				84192AA22079F8A80042E8F8 /* MembershipAgreementView.swift in Sources */,
+				84192AA22079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */,
 				63F0E1BE1CE41821001251A9 /* NSData+YYAdd.m in Sources */,
 				CCEFC6F2207F66100006D731 /* CollectionViewModel.m in Sources */,
 				638A16F01E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.m in Sources */,
@@ -5477,6 +5482,7 @@
 			files = (
 				84FF95BA208F0A8C0032BF5D /* PushInfoModel.m in Sources */,
 				84332C8A206CCD87009A9121 /* CameraManager.swift in Sources */,
+				846D58CE20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */,
 				842D9CEA206B832F0020C3C2 /* IDCardUploadParam.m in Sources */,
 				84C61A141FA828F000626411 /* FindPassViewController.m in Sources */,
 				84C61A0F1FA8243200626411 /* FXD_LaunchConfiguration.m in Sources */,
@@ -5806,7 +5812,7 @@
 				CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchVCModules.m in Sources */,
 				8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */,
-				84192AA32079F8A80042E8F8 /* MembershipAgreementView.swift in Sources */,
+				84192AA32079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */,
 				CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */,
 				CC0DFA851EA5B1090024841A /* YYTextRubyAnnotation.m in Sources */,
 				841E66EF1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */,

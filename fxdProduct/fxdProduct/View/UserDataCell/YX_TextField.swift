@@ -20,11 +20,8 @@ class YX_TextField: UITextField {
     */
 
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        
         let rect = CGRect.init(x: bounds.width - 100, y: bounds.origin.y, width: 100, height: bounds.height)
-        
         return rect
-        
     }
 
 }

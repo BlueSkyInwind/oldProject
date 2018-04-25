@@ -156,7 +156,7 @@ class MembershipFeePayViewController: BaseViewController,UITableViewDelegate,UIT
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return 300
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -167,7 +167,7 @@ class MembershipFeePayViewController: BaseViewController,UITableViewDelegate,UIT
     func addFooterView() -> UIView {
         let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 250))
         footerView.backgroundColor = LOAN_APPLICATION_COLOR
-        let agreementView = MembershipAgreementView.init(CGRect.zero, protocolNameArr: ["《会员协议》"])
+        let agreementView = FXD_AgreementView.init(CGRect.zero,content:"我已阅读并同意",protocolNameArr: ["《会员协议》"])
         agreementView.isAgreementClick = {[weak self] (isClick) in
             self?.isAgreement = isClick
             if isClick {

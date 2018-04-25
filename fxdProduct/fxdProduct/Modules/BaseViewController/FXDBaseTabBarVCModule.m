@@ -32,6 +32,7 @@
 
 - (void)setTabbarCon
 {
+    
 //    IncreaseAmountLimitViewController * loanApplicationVC = [[IncreaseAmountLimitViewController alloc]init];
 //    [self.navigationController pushViewController:loanApplicationVC animated:true];
     
@@ -72,7 +73,6 @@
     [item setTitlePositionAdjustment:UIOffsetMake(0, -3)];
     return item;
 }
-
 
 -(void)makeTabBarHidden:(BOOL)hide { // Custom code to hide TabBar
     if ( [self.view.subviews count] < 2 ) { return;
