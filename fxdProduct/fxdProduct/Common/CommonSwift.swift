@@ -93,3 +93,7 @@ let REFRESH_TITLE_COLOR = UIColor.init(red: 167/255.0, green: 167/255.0, blue: 1
 let HOME_ARROW_COLOR = UIColor.init(red: 178.5/255.0, green: 178.5/255.0, blue: 178.5/255.0, alpha: 1)
 
 let GAME_COLOR = UIColor.init(red: 25.5/255.0, green: 25.5/255.0, blue: 25.5/255.0, alpha: 1)
+
+let TIP_TITLE_COLOR = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
+
+let TIP_LINE_COLOR = UIColor.init(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1)

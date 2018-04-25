@@ -106,7 +106,7 @@ extension SuperLoanCell{
         titleLabel?.font = UIFont.systemFont(ofSize: 15)
         self.contentView.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self).offset(20)
+            make.top.equalTo(self).offset(10)
             make.left.equalTo((leftImageView?.snp.right)!).offset(20)
             make.height.equalTo(20)
         })
@@ -115,7 +115,7 @@ extension SuperLoanCell{
         qutaLabel?.font = UIFont.systemFont(ofSize: 12)
         self.contentView.addSubview(qutaLabel!)
         qutaLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self).offset(20)
+            make.top.equalTo(self).offset(10)
             make.left.equalTo((titleLabel?.snp.left)!).offset(100)
             make.height.equalTo(20)
         })
@@ -148,7 +148,7 @@ extension SuperLoanCell{
         
         self.contentView.addSubview(descBtn!)
         descBtn?.snp.makeConstraints({ (make) in
-            make.bottom.equalTo(self).offset(-15)
+            make.bottom.equalTo(self).offset(-10)
             make.left.equalTo((leftImageView?.snp.right)!).offset(20)
             make.height.equalTo(20)
             make.width.equalTo(150)

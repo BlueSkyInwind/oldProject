@@ -36,7 +36,7 @@
 #import "HgLoanProtoolListModel.h"
 #import "QBBWitnDrawModel.h"
 
-@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate>
+@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate,SDCycleScrollCellDelegate>
 {
     NSString *_advTapToUrl;
     NSString *_shareContent;
@@ -100,9 +100,11 @@
 
 -(void)createTab{
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, _k_w, _k_h-64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, _k_w, _k_h-64-49) style:UITableViewStylePlain];
     [self.tableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"HomePageCell"];
     [self.tableView registerClass:[SDCycleScrollCell class] forCellReuseIdentifier:@"SDCycleScrollCell"];
+    [self.tableView registerClass:[RecentCell class] forCellReuseIdentifier:@"RecentCell"];
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.scrollEnabled = true;
@@ -523,7 +525,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return 2;
+//    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]){
+//        return 3;
+//    }
+//    return 2;
+    
+
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -535,17 +543,34 @@
 {
 
     if (indexPath.section == 0) {
-        return 35;
+        return 113;
+    }
+    
+    //flag==1、3、4   85*6+30
+    if (indexPath.section == 2){
+        return 85*6+30;
+    }
+    
+    //flag==1   _k_h-_k_w*0.44-113-113-40
+    //flag==3、4 _k_h-_k_w*0.44-113-113-120
+    if (indexPath.section == 1){
+        return _k_h-_k_w*0.44-113-113-120;
     }
     if ([_homeProductList.flag isEqualToString:@"7"] || [_homeProductList.flag isEqualToString:@"14"]) {
-        return _k_h-_k_w*0.44-113+110-35;
+        return _k_h-_k_w*0.44-113+110-113;
     }
-    return _k_h-_k_w*0.44-113-35;
+    if ([_homeProductList.flag isEqualToString:@"1"]) {
+        return _k_h-_k_w*0.44-113-113-40;
+    }
+    if ([_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]) {
+        _k_h-_k_w*0.44-113-113-120;
+    }
+    return _k_h-_k_w*0.44-113-113-30;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.1f;
+    return 5.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -554,25 +579,36 @@
     if (indexPath.section == 0) {
         
         SDCycleScrollCell *sdcycleScrollCell = [tableView dequeueReusableCellWithIdentifier:@"SDCycleScrollCell"];
+        sdcycleScrollCell.selected = NO;
         sdcycleScrollCell.sdCycleScrollview.delegate = self;
+        sdcycleScrollCell.delegate = self;
         sdcycleScrollCell.sdCycleScrollview.titlesGroup = _homeProductList.paidList;
         return sdcycleScrollCell;
         
-    }
-    HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
-    [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    homeCell.backgroundColor = rgb(250, 250, 250);
-    homeCell.selected = NO;
-    homeCell.delegate = self;
-    homeCell.homeProductListModel = _homeProductList;
-    if (_homeProductList != nil) {
+    }else if (indexPath.section == 1){
         
-        homeCell.type = _homeProductList.flag;
-        homeCell.protocolArray = _protocolArray;
-
+        HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
+        [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        homeCell.backgroundColor = [UIColor whiteColor];
+        homeCell.selected = NO;
+        homeCell.delegate = self;
+        homeCell.homeProductListModel = _homeProductList;
+        if (_homeProductList != nil) {
+            
+            //        homeCell.type = _homeProductList.flag;
+            homeCell.type = @"3";
+            homeCell.protocolArray = _protocolArray;
+            
+        }
+        
+        return homeCell;
     }
-
-    return homeCell;
+    
+     RecentCell *recentCell = [tableView dequeueReusableCellWithIdentifier:@"RecentCell"];
+    [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    recentCell.backgroundColor = [UIColor whiteColor];
+    recentCell.selected = NO;
+    return recentCell;
     
 }
 
@@ -979,6 +1015,20 @@
     [homeVM paidcenterQbbWithDrawCapitalPlatform:@"5"];
 }
 
+-(void)loanClick{
+    
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"贷款"];
+}
+
+-(void)gameBtnClick{
+    
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"游戏"];
+}
+
+-(void)tourismBtnClcik{
+    
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"旅游"];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

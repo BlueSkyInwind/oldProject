@@ -80,12 +80,13 @@
             lbl.text=[NSString stringWithFormat:@"%.2f元",result.principal_amount_.floatValue];
         }else if(i==2)
         {
-            if ([result.loan_staging_duration_ isEqualToString:@"1"]) {
-                lbl.text=[NSString stringWithFormat:@"%.0f周",result.loan_staging_amount_.floatValue];
-            }
-            if ([result.loan_staging_duration_ isEqualToString:@"5"]) {
-                lbl.text=[NSString stringWithFormat:@"%.0f天",result.loan_staging_amount_.floatValue];
-            }
+            lbl.text = [NSString stringWithFormat:@"%.0f%@",result.loan_staging_amount_.floatValue,result.staging_type_];
+//            if ([result.loan_staging_duration_ isEqualToString:@"1"]) {
+//                lbl.text=[NSString stringWithFormat:@"%.0f周",result.loan_staging_amount_.floatValue];
+//            }
+//            if ([result.loan_staging_duration_ isEqualToString:@"5"]) {
+//                lbl.text=[NSString stringWithFormat:@"%.0f天",result.loan_staging_amount_.floatValue];
+//            }
             
         }else if(i==3)
         {
