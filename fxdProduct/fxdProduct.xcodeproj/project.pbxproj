@@ -938,6 +938,12 @@
 		CC0DFB8D1EA5B1090024841A /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F0FDAC11BC771EC00F3CF10 /* AboutViewController.xib */; };
 		CC0F1B9D1EE6537700A23651 /* IdeaBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */; };
 		CC0F1B9E1EE6537700A23651 /* IdeaBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */; };
+		CC1AC8D9209078F2009B5BD4 /* CardAuthSmsSendParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8D8209078F2009B5BD4 /* CardAuthSmsSendParamModel.m */; };
+		CC1AC8DA209078F2009B5BD4 /* CardAuthSmsSendParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8D8209078F2009B5BD4 /* CardAuthSmsSendParamModel.m */; };
+		CC1AC8DD2090798F009B5BD4 /* CardAuthAuthParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8DC2090798F009B5BD4 /* CardAuthAuthParamModel.m */; };
+		CC1AC8DE2090798F009B5BD4 /* CardAuthAuthParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8DC2090798F009B5BD4 /* CardAuthAuthParamModel.m */; };
+		CC1AC8E120907A43009B5BD4 /* BankCardAuthorizationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8E020907A43009B5BD4 /* BankCardAuthorizationViewModel.m */; };
+		CC1AC8E220907A43009B5BD4 /* BankCardAuthorizationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8E020907A43009B5BD4 /* BankCardAuthorizationViewModel.m */; };
 		CC3BCC111FBABE7A0042A738 /* MyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */; };
 		CC3BCC121FBABE7A0042A738 /* MyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */; };
 		CC3BCC141FBABEC50042A738 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC131FBABEC50042A738 /* MessageCell.swift */; };
@@ -1054,6 +1060,10 @@
 		CC85C62D1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */; };
 		CC8BB752208F174600ADA647 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BB751208F174600ADA647 /* RecentCell.swift */; };
 		CC8BB753208F174600ADA647 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BB751208F174600ADA647 /* RecentCell.swift */; };
+		CC8BB75520901C7D00ADA647 /* BillingMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BB75420901C7D00ADA647 /* BillingMessageViewController.swift */; };
+		CC8BB75620901C7D00ADA647 /* BillingMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BB75420901C7D00ADA647 /* BillingMessageViewController.swift */; };
+		CC8BB75A2090776100ADA647 /* BankCardAuthorizationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BB7592090776100ADA647 /* BankCardAuthorizationModel.m */; };
+		CC8BB75B2090776100ADA647 /* BankCardAuthorizationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BB7592090776100ADA647 /* BankCardAuthorizationModel.m */; };
 		CC8BC9541FEA0374008E135E /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9531FEA0374008E135E /* HomePageCell.swift */; };
 		CC8BC9551FEA0374008E135E /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9531FEA0374008E135E /* HomePageCell.swift */; };
 		CC8BC9581FEA394C008E135E /* FXD_HomePageVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9571FEA394C008E135E /* FXD_HomePageVCModules.m */; };
@@ -1960,6 +1970,12 @@
 		CC0DFB971EA5B1090024841A /* fxdProductDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fxdProductDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0F1B9B1EE6537700A23651 /* IdeaBackViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdeaBackViewModel.h; sourceTree = "<group>"; };
 		CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaBackViewModel.m; sourceTree = "<group>"; };
+		CC1AC8D7209078F2009B5BD4 /* CardAuthSmsSendParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardAuthSmsSendParamModel.h; sourceTree = "<group>"; };
+		CC1AC8D8209078F2009B5BD4 /* CardAuthSmsSendParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardAuthSmsSendParamModel.m; sourceTree = "<group>"; };
+		CC1AC8DB2090798F009B5BD4 /* CardAuthAuthParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardAuthAuthParamModel.h; sourceTree = "<group>"; };
+		CC1AC8DC2090798F009B5BD4 /* CardAuthAuthParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardAuthAuthParamModel.m; sourceTree = "<group>"; };
+		CC1AC8DF20907A43009B5BD4 /* BankCardAuthorizationViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankCardAuthorizationViewModel.h; sourceTree = "<group>"; };
+		CC1AC8E020907A43009B5BD4 /* BankCardAuthorizationViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankCardAuthorizationViewModel.m; sourceTree = "<group>"; };
 		CC3197961ED926B90083F263 /* RefuseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefuseView.xib; sourceTree = "<group>"; };
 		CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageViewController.swift; sourceTree = "<group>"; };
 		CC3BCC131FBABEC50042A738 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
@@ -2047,6 +2063,9 @@
 		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
 		CC8BB751208F174600ADA647 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
+		CC8BB75420901C7D00ADA647 /* BillingMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingMessageViewController.swift; sourceTree = "<group>"; };
+		CC8BB7582090776100ADA647 /* BankCardAuthorizationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankCardAuthorizationModel.h; sourceTree = "<group>"; };
+		CC8BB7592090776100ADA647 /* BankCardAuthorizationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankCardAuthorizationModel.m; sourceTree = "<group>"; };
 		CC8BC9531FEA0374008E135E /* HomePageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCell.swift; sourceTree = "<group>"; };
 		CC8BC9561FEA394C008E135E /* FXD_HomePageVCModules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_HomePageVCModules.h; sourceTree = "<group>"; };
 		CC8BC9571FEA394C008E135E /* FXD_HomePageVCModules.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_HomePageVCModules.m; sourceTree = "<group>"; };
@@ -2678,6 +2697,8 @@
 				84A52E9A207DF2AA000BF3E8 /* UserMemberShipViewModel.m */,
 				CCEFC6F0207F66100006D731 /* CollectionViewModel.h */,
 				CCEFC6F1207F66100006D731 /* CollectionViewModel.m */,
+				CC1AC8DF20907A43009B5BD4 /* BankCardAuthorizationViewModel.h */,
+				CC1AC8E020907A43009B5BD4 /* BankCardAuthorizationViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3492,6 +3513,7 @@
 		63E076541B67114800E269F2 /* DataModelModules */ = {
 			isa = PBXGroup;
 			children = (
+				CC8BB7572090771500ADA647 /* BankCardAuthorization */,
 				CCEFC6EB207F651C0006D731 /* Collection */,
 				CCEFC6E2207DEE1B0006D731 /* HotRecommend */,
 				CC4F0631207C6AE40030A12A /* QBBWithDraw */,
@@ -4241,6 +4263,7 @@
 				84A3802E1FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib */,
 				847298361FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift */,
 				84A380011FAC1D8D008FB7AF /* UserDataFillingModule - 用户资料填写 */,
+				CC8BB75420901C7D00ADA647 /* BillingMessageViewController.swift */,
 			);
 			path = "UserAuthenticationCenterModules - 用户认证中心模块";
 			sourceTree = "<group>";
@@ -4499,6 +4522,19 @@
 				CC49BA021FC516D000232041 /* WithdrawHeaderView.swift */,
 			);
 			path = RedPacketWithCash;
+			sourceTree = "<group>";
+		};
+		CC8BB7572090771500ADA647 /* BankCardAuthorization */ = {
+			isa = PBXGroup;
+			children = (
+				CC8BB7582090776100ADA647 /* BankCardAuthorizationModel.h */,
+				CC8BB7592090776100ADA647 /* BankCardAuthorizationModel.m */,
+				CC1AC8D7209078F2009B5BD4 /* CardAuthSmsSendParamModel.h */,
+				CC1AC8D8209078F2009B5BD4 /* CardAuthSmsSendParamModel.m */,
+				CC1AC8DB2090798F009B5BD4 /* CardAuthAuthParamModel.h */,
+				CC1AC8DC2090798F009B5BD4 /* CardAuthAuthParamModel.m */,
+			);
+			path = BankCardAuthorization;
 			sourceTree = "<group>";
 		};
 		CC8BC95E1FEB5994008E135E /* Mine */ = {
@@ -5042,6 +5078,7 @@
 				84C619C91FA815EB00626411 /* RepayListCell.m in Sources */,
 				84C619BC1FA815A800626411 /* LoanPeriodForDetailsVCModule.m in Sources */,
 				63832C881CB7513500C6F194 /* NSData+AES.m in Sources */,
+				CC1AC8E120907A43009B5BD4 /* BankCardAuthorizationViewModel.m in Sources */,
 				CC594E671FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */,
 				84A37FF81FAC12A8008FB7AF /* QRCodePopView.m in Sources */,
 				CC45E7221FD55F7800DE803D /* WithdrawCashDetailModel.m in Sources */,
@@ -5058,6 +5095,7 @@
 				63ED33471B6B5569008B6085 /* RegViewController.m in Sources */,
 				63F254871E49A45900852CF1 /* HMScannerController.m in Sources */,
 				CCD32B521F5819980092A9CB /* CurrentInformationCell.swift in Sources */,
+				CC8BB75A2090776100ADA647 /* BankCardAuthorizationModel.m in Sources */,
 				63ED33371B6B4593008B6085 /* BaseNavigationViewController.m in Sources */,
 				849459CA1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
 				CC742DAC204E730700D645CC /* SubmitAccountParamModel.m in Sources */,
@@ -5136,6 +5174,7 @@
 				84A3801A1FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm in Sources */,
 				63F254731E499C8000852CF1 /* InvitationViewController.m in Sources */,
 				638A17001E517D9F00AB8AB6 /* LOTLayer.m in Sources */,
+				CC8BB75520901C7D00ADA647 /* BillingMessageViewController.swift in Sources */,
 				63F254881E49A45900852CF1 /* HMScannerMaskView.m in Sources */,
 				1A762F6F1C1FBE4700964719 /* RepayRecordController.m in Sources */,
 				638A17041E517D9F00AB8AB6 /* LOTShapeGroup.m in Sources */,
@@ -5376,10 +5415,12 @@
 				CCCFFAE12060B6EE008556D2 /* HgLoanProtoolListModel.m in Sources */,
 				CCC9FB65207A140C00B952BD /* SuperLoanHeaderView.swift in Sources */,
 				633DAD2D1C3E47D0000DA852 /* FindPassViewModel.m in Sources */,
+				CC1AC8DD2090798F009B5BD4 /* CardAuthAuthParamModel.m in Sources */,
 				638A16861E5030D700AB8AB6 /* SetUpFMDevice.m in Sources */,
 				63145AF21CA8DBBD00D04ED8 /* RegionExt.m in Sources */,
 				CC594E6B1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */,
 				1AE362F51C586060006FC276 /* EditCardsController.m in Sources */,
+				CC1AC8D9209078F2009B5BD4 /* CardAuthSmsSendParamModel.m in Sources */,
 				6326C9EC1BF0B15700FD23A8 /* GetMoneyProcessResult.m in Sources */,
 				841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */,
 				638A17051E517D9F00AB8AB6 /* LOTShapePath.m in Sources */,
@@ -5495,6 +5536,7 @@
 				84A380151FAC1D8D008FB7AF /* MGLiveViewController.m in Sources */,
 				84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */,
 				CC4F0639207DE90B0030A12A /* FindViewModel.m in Sources */,
+				CC1AC8E220907A43009B5BD4 /* BankCardAuthorizationViewModel.m in Sources */,
 				CCC1E4072057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */,
 				84F87F481FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */,
 				84C619D41FA8161F00626411 /* PayMethodCell.m in Sources */,
@@ -5511,6 +5553,7 @@
 				84192AA02079F5BA0042E8F8 /* MembershipFeePayViewController.swift in Sources */,
 				CC80E005206B8882000F9BAC /* CompQueryParamModel.m in Sources */,
 				84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */,
+				CC8BB75B2090776100ADA647 /* BankCardAuthorizationModel.m in Sources */,
 				845017321ED7D051008055E4 /* LoginView.m in Sources */,
 				842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */,
 				8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
@@ -5589,6 +5632,7 @@
 				CC0DF9971EA5B1090024841A /* (null) in Sources */,
 				CC0DF9981EA5B1090024841A /* LOTLayerView.m in Sources */,
 				CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */,
+				CC8BB75620901C7D00ADA647 /* BillingMessageViewController.swift in Sources */,
 				CC0DF99A1EA5B1090024841A /* RegionCodeResult.m in Sources */,
 				CC0DF99C1EA5B1090024841A /* LOTShapeTransform.m in Sources */,
 				848139641F568A8600CD701C /* YX_TextField.swift in Sources */,
@@ -5829,10 +5873,12 @@
 				CC0DFA921EA5B1090024841A /* UIImage+Extend.m in Sources */,
 				CC0DFA931EA5B1090024841A /* NSDate+Extend.m in Sources */,
 				CCCFFADE20609D5E008556D2 /* NewProtocolParamModel.m in Sources */,
+				CC1AC8DE2090798F009B5BD4 /* CardAuthAuthParamModel.m in Sources */,
 				CC0DFA951EA5B1090024841A /* YYCache.m in Sources */,
 				CCCFFAE22060B6EE008556D2 /* HgLoanProtoolListModel.m in Sources */,
 				84192A9A2079B1E10042E8F8 /* MemberCenterHeaderView.swift in Sources */,
 				CC0DFA961EA5B1090024841A /* HMScannerBorder.m in Sources */,
+				CC1AC8DA209078F2009B5BD4 /* CardAuthSmsSendParamModel.m in Sources */,
 				CC0DFA971EA5B1090024841A /* LOTMask.m in Sources */,
 				CC0DFA9A1EA5B1090024841A /* LoginMsgResult.m in Sources */,
 				CC0DFA9B1EA5B1090024841A /* FindPassViewModel.m in Sources */,

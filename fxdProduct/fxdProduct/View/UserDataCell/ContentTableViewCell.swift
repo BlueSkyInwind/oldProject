@@ -15,7 +15,7 @@ class ContentTableViewCell: UITableViewCell{
     @objc var promptLabel : UILabel?
     @objc  var contentTextField : YX_TextField?
     @objc var arrowsImageBtn : UIButton?
-    
+    @objc var lineView : UIView?
     @objc var btnClick : ArrowImageBtnClick?
     
     override func awakeFromNib() {
@@ -94,6 +94,17 @@ extension ContentTableViewCell {
             make.centerY.equalTo(self.snp.centerY)
             make.width.equalTo(60)
             make.height.equalTo(21)
+        })
+        
+        lineView = UIView()
+        lineView?.backgroundColor = PayPasswordBackColor_COLOR
+        lineView?.isHidden = true
+        self.addSubview(lineView!)
+        lineView?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self).offset(15)
+            make.right.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(-1)
+            make.height.equalTo(1)
         })
     }
     

@@ -518,6 +518,9 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
             }
         }else{
             newText.replaceCharacters(in: range, with: string)
+            let str = newText.replacingOccurrences(of: " ", with: "")
+            
+            submitArray?.replaceObject(at: 1, with: str)
         }
         
         return returnValue
