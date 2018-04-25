@@ -147,6 +147,7 @@
     }
     _btnStatus = !_btnStatus;
 }
+
 - (BOOL)isValidCode:(NSString *)passWord
 {
     return passWord.length > 5;
@@ -231,10 +232,12 @@
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == 0) {
@@ -279,6 +282,7 @@
         }
     }];
 }
+
 /**
  扫描银行卡
  */
@@ -316,9 +320,6 @@
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号"];
     }
 }
-
-
-
 /**
  开始银行卡扫描  author wangyongxin  2017.4.17
 */
@@ -337,6 +338,7 @@
         [YX_BankCardScanManager relaseSelf];
     }];
 }
+
 -(BOOL)isContainCurrentScan:(NSString *)bankname{
     if (supportBankListArr.count > 0) {
         for (int i = 0; i < supportBankListArr.count; i++) {
@@ -350,6 +352,7 @@
     }
     return false;
 }
+
 #pragma  mark Delegate
 - (void)BankSelect:(SupportBankList *)bankInfo andSectionRow:(NSInteger)sectionRow
 {
@@ -360,6 +363,7 @@
     DLog(@"%@ %@",self.cardName,self.cardCode);
     [self.tableView reloadData];
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -474,7 +478,6 @@
         if ([string rangeOfCharacterFromSet:[characterSet invertedSet]].location != NSNotFound) {
             return NO;
         }
-        
         text = [text stringByReplacingCharactersInRange:range withString:string];
         text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
         NSString *newString = @"";
