@@ -403,17 +403,23 @@
             break;
         case 3:
         {
+            
+            BillingMessageViewController *controller=[[BillingMessageViewController alloc]init];
+            controller.type = @"1";
+            [self.navigationController pushViewController:controller animated:true];
             //此处需要一个返回默认卡的接口
-            [self getGatheringInformation_jhtml:^(CardInfo *cardInfo) {
-                EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
-                editCard.typeFlag = @"0";
-                editCard.cardName = cardInfo.bankName;
-                editCard.cardNum = cardInfo.cardNo;
-                editCard.reservedTel = cardInfo.bankPhone;
-                editCard.cardCode = cardInfo.cardId;
-                editCard.popOrdiss  = true;
-                [self.navigationController pushViewController:editCard animated:YES];
-            }];
+//            [self getGatheringInformation_jhtml:^(CardInfo *cardInfo) {
+//
+//                EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
+//                editCard.typeFlag = @"0";
+//                editCard.cardName = cardInfo.bankName;
+//                editCard.cardNum = cardInfo.cardNo;
+//                editCard.reservedTel = cardInfo.bankPhone;
+//                editCard.cardCode = cardInfo.cardId;
+//                editCard.popOrdiss  = true;
+//                [self.navigationController pushViewController:editCard animated:YES];
+//
+//            }];
         }
             break;
         default:

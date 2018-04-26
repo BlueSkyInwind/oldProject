@@ -8,13 +8,20 @@
 
 import UIKit
 
+@objc protocol RecentCellDelegate: NSObjectProtocol {
+    
+    func recentMoreBtnClick()
+}
+
 class RecentCell: UITableViewCell ,UITableViewDelegate,UITableViewDataSource,SuperLoanCellDelegate{
+    //SuperLoanCellDelegate  点击收藏按钮的代理方法
     func collectionBtn(_ sender: UIButton) {
-        
+
     }
     
 
     var superLoanCell : SuperLoanCell?
+    @objc var delegate : RecentCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -202,5 +209,8 @@ extension RecentCell{
 extension RecentCell{
     @objc fileprivate func moreBtnClick(){
         
+        if delegate != nil {
+            delegate?.recentMoreBtnClick()
+        }
     }
 }

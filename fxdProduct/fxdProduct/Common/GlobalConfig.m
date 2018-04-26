@@ -260,6 +260,13 @@ NSString * const    _addMyCollectionInfo_url               =    @"jyd/addMyColle
 NSString * const    _memberRefund_url               =    @"repaycenter/insurance/refund";
 //会员费扣费
 NSString * const    _memberRecharge_url               =    @"repaycenter/insurance/request";
+//银行卡授权查询页面
+NSString * const    _cardAuthQuery_url               =    @"cardAuth/query";
+//银行卡授权短信发送
+NSString * const    _cardAuthSmsSend_url               =    @"cardAuth/sms/send";
+//银行卡授权接口
+NSString * const    _cardAuthAuth_url               =    @"cardAuth/auth";
+
 
 #pragma mark - 合规接口
 

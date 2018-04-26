@@ -31,6 +31,8 @@ class SuperLoanHeaderCell: UITableViewCell {
     @objc var gameBtn : UIButton?
     @objc var tourismBtn : UIButton?
 
+    @objc var bottomLineView : UIView?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -229,6 +231,18 @@ extension SuperLoanHeaderCell{
             make.right.equalTo(filterView.snp.right).offset(-5)
             make.centerY.equalTo(filterView.snp.centerY)
         }
+        
+        bottomLineView = UIView()
+        bottomLineView?.backgroundColor = TERM_COLOR
+        bottomLineView?.isHidden = true
+        self.addSubview(bottomLineView!)
+        bottomLineView?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(-1)
+            make.height.equalTo(1)
+        })
+        
     }
 }
 

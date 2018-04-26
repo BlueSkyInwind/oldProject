@@ -1,0 +1,405 @@
+//
+//  HotRecommendationViewController.swift
+//  fxdProduct
+//
+//  Created by sxp on 2018/4/26.
+//  Copyright © 2018年 dd. All rights reserved.
+//
+
+import UIKit
+
+class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource,SuperLoanCellDelegate,SuperLoanHeaderCellDelegate,SortViewDelegate,FilterViewDelegate{
+    
+    var tableView : UITableView?
+    @objc var dataArray : NSMutableArray?
+    var superLoanCell : SuperLoanCell?
+    var superLoanHeaderCell : SuperLoanHeaderCell?
+    var pages : Int?
+    var _sortView : SortView?
+    var _filterView : FilterView?
+    var _index : NSInteger?
+    var type : String?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.title = "热门推荐"
+        type = "0"
+        _index = 0
+        dataArray = NSMutableArray.init(capacity: 100)
+        pages = 0
+        addBackItem()
+        configureView()
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        pages = 0;
+        let offset = String(format:"%d",pages!)
+        
+        getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: offset, order: "ASC", sort: "0")
+        
+    }
+    func configureView()  {
+        tableView = UITableView.init(frame: CGRect.zero, style: .plain)
+        tableView?.showsHorizontalScrollIndicator = false
+        tableView?.delegate = self
+        tableView?.dataSource = self
+        tableView?.separatorStyle = .none
+        tableView?.backgroundColor = PayPasswordBackColor_COLOR
+        self.view.addSubview(tableView!)
+        tableView?.snp.makeConstraints({ (make) in
+            make.edges.equalTo(self.view)
+        })
+        if #available(iOS 11.0, *){
+            tableView?.contentInsetAdjustmentBehavior = .never;
+            tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
+        }else if #available(iOS 9.0, *){
+            self.automaticallyAdjustsScrollViewInsets = true;
+        }else{
+            self.automaticallyAdjustsScrollViewInsets = false;
+        }
+    }
+    
+    
+    func getData(maxAmount:String,maxDays:String,minAmount:String,minDays:String,offset:String,order:String,sort:String){
+        
+        let viewModel = CompQueryViewModel()
+        viewModel.setBlockWithReturn({ [weak self] (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                
+                if self?.pages == 0{
+                    self?.dataArray?.removeAllObjects()
+                }
+                
+                let compQueryModel = try! CompQueryModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                for index in 0 ..< compQueryModel.rows.count{
+                    
+                    let model = compQueryModel.rows[index] as! RowsModel
+                    self?.dataArray?.add(model)
+                }
+                self?.tableView?.reloadData()
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+            
+        }) {
+            
+        }
+        viewModel.compQueryLimit("15", maxAmount: maxAmount, maxDays: maxDays, minAmount: minAmount, minDays: minDays, offset: offset, order: order, sort: sort)
+    
+    }
+    
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return (dataArray?.count)!
+//    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return (dataArray?.count)! + 1
+    }
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView = UIView()
+//        headerView.backgroundColor = LINE_COLOR
+//        return headerView
+//
+//    }
+    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 8
+//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 100
+        }
+        return 90
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == 0 {
+            superLoanHeaderCell = tableView.dequeueReusableCell(withIdentifier:"SuperLoanHeaderCell") as? SuperLoanHeaderCell
+            if superLoanHeaderCell == nil {
+                superLoanHeaderCell = SuperLoanHeaderCell.init(style: .default, reuseIdentifier: "SuperLoanHeaderCell")
+            }
+            superLoanHeaderCell?.bottomLineView?.isHidden = false
+            superLoanHeaderCell?.isSelected = false
+            superLoanHeaderCell?.selectionStyle = .none
+            superLoanHeaderCell?.delegate = self
+            return superLoanHeaderCell!
+        }
+        superLoanCell = tableView.dequeueReusableCell(withIdentifier:"SuperLoanCell") as? SuperLoanCell
+        if superLoanCell == nil {
+            superLoanCell = SuperLoanCell.init(style: .default, reuseIdentifier: "SuperLoanCell")
+        }
+        
+        superLoanCell?.delegate = self
+        superLoanCell?.isSelected = false
+        superLoanCell?.selectionStyle = .none
+        superLoanCell?.type = "1"
+        superLoanCell?.collectionBtn?.tag = indexPath.section
+        let model = dataArray![indexPath.row - 1] as! RowsModel
+        
+        let url = URL(string: model.plantLogo)
+        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiImage, error, cachType, url) in
+            
+        })
+        superLoanCell?.titleLabel?.text = model.plantName
+        let maximumAmount = model.maximumAmount != nil ? model.maximumAmount : ""
+        let maximumAmountUnit = model.maximumAmountUnit != nil ? model.maximumAmountUnit : ""
+        superLoanCell?.qutaLabel?.text = "额度:最高" + maximumAmount! + maximumAmountUnit!
+        let term = model.unitStr != nil ? model.unitStr : ""
+        superLoanCell?.termLabel?.text = "期限:" + term!
+        if term != "" {
+            
+            let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.termLabel?.text)!)
+            attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-4))
+            superLoanCell?.termLabel?.attributedText = attrstr1
+        }
+        let referenceRate = model.referenceRate != nil ? model.referenceRate : ""
+        if model.referenceMode == nil {
+            
+            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate!
+        }else{
+            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate! + "/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
+        }
+        
+        
+        if referenceRate != nil && model.referenceMode != nil {
+            
+            let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.feeLabel?.text)!)
+            attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-4))
+            superLoanCell?.feeLabel?.attributedText = attrstr
+        }
+        
+        superLoanCell?.descBtn?.setTitle(model.platformIntroduction, for: .normal)
+        superLoanCell?.descBtn?.setTitleColor(UIColor.purple, for: .normal)
+        superLoanCell?.descBtn?.layer.borderColor = UIColor.purple.cgColor
+        
+        if indexPath.row % 2 == 0 {
+            superLoanCell?.descBtn?.setTitleColor(UIColor.blue, for: .normal)
+            superLoanCell?.descBtn?.layer.borderColor = UIColor.blue.cgColor
+        }
+        
+        let str : NSString = model.platformIntroduction! as NSString
+        let dic = NSDictionary(object: UIFont.yx_systemFont(ofSize: 12) as Any, forKey: NSAttributedStringKey.font as NSCopying)
+        let width = str.boundingRect(with: CGSize(width:_k_w,height:20), options: .usesLineFragmentOrigin, attributes:(dic as! [NSAttributedStringKey : Any]), context: nil).size.width + 20
+        
+        superLoanCell?.descBtn?.snp.updateConstraints({ (make) in
+            make.width.equalTo(width)
+        })
+        
+        superLoanCell?.collectionBtn?.setImage(UIImage.init(named: "collection_icon"), for: .normal)
+        if model.isCollect == "0" {
+            superLoanCell?.collectionBtn?.setImage(UIImage.init(named: "collection_selected_icon"), for: .normal)
+        }
+        return superLoanCell!
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+    }
+    
+    func collectionBtn(_ sender: UIButton) {
+        
+    }
+    
+    func rateUnit(referenceMode : NSString) -> (NSString){
+        switch referenceMode.integerValue {
+        case 1:
+            return "日"
+        case 2:
+            return "月"
+        case 3:
+            return "年"
+        default:
+            break
+        }
+        
+        return ""
+    }
+    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    //MARK:SuperLoanHeaderCellDelegate
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
+extension HotRecommendationViewController{
+    func sortBtnClick(_ sender: UIButton) {
+        
+        if (_filterView != nil) {
+            _filterView?.removeFromSuperview()
+        }
+        
+        
+        if ((superLoanHeaderCell?.filterBtn?.isSelected)! || (superLoanHeaderCell?.filterImageBtn?.isSelected)!) {
+            
+            superLoanHeaderCell?.filterBtn?.isSelected = false
+            superLoanHeaderCell?.filterImageBtn?.isSelected = false
+            superLoanHeaderCell?.filterBtn?.setTitleColor(TITLE_COLOR, for: .normal)
+            superLoanHeaderCell?.filterImageBtn?.setImage(UIImage.init(named: "filter_icon"), for: .normal)
+            
+        }
+        
+        superLoanHeaderCell?.sortBtn?.isSelected = !(superLoanHeaderCell?.sortBtn?.isSelected)!
+        superLoanHeaderCell?.sortImageBtn?.isSelected = !(superLoanHeaderCell?.sortImageBtn?.isSelected)!
+        
+        if ((superLoanHeaderCell?.sortBtn?.isSelected)! || (superLoanHeaderCell?.sortImageBtn?.isSelected)!) {
+            
+            superLoanHeaderCell?.sortBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
+            superLoanHeaderCell?.sortImageBtn?.setImage(UIImage.init(named: "sort_selected_icon"), for: .normal)
+            
+            UIView.animate(withDuration: 1) {
+                self._sortView = SortView()
+                self._sortView?.delegate = self
+                self._sortView?.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.7)
+                self._sortView?.index = self._index!
+                self.view.addSubview(self._sortView!)
+            }
+            
+        }else{
+            
+            superLoanHeaderCell?.sortBtn?.setTitleColor(TITLE_COLOR, for: .normal)
+            superLoanHeaderCell?.sortImageBtn?.setImage(UIImage.init(named: "sort_icon"), for: .normal)
+            UIView.animate(withDuration: 1) {
+                self._sortView?.removeFromSuperview()
+            }
+        }
+        
+    }
+    
+    func filterBtnClick(_ sender: UIButton) {
+        
+        
+        if (_sortView != nil) {
+            _sortView?.removeFromSuperview()
+        }
+        
+        
+        if ((superLoanHeaderCell?.sortBtn?.isSelected)! || (superLoanHeaderCell?.sortImageBtn?.isSelected)!) {
+            
+            superLoanHeaderCell?.sortBtn?.isSelected = false
+            superLoanHeaderCell?.sortImageBtn?.isSelected = false
+            superLoanHeaderCell?.sortBtn?.setTitleColor(TITLE_COLOR, for: .normal)
+            superLoanHeaderCell?.sortImageBtn?.setImage(UIImage.init(named: "sort_icon"), for: .normal)
+            
+        }
+        
+        superLoanHeaderCell?.filterBtn?.isSelected = !(superLoanHeaderCell?.sortBtn?.isSelected)!
+        superLoanHeaderCell?.filterImageBtn?.isSelected = !(superLoanHeaderCell?.sortImageBtn?.isSelected)!
+        
+        if ((superLoanHeaderCell?.filterBtn?.isSelected)! || (superLoanHeaderCell?.filterImageBtn?.isSelected)!) {
+            
+            superLoanHeaderCell?.filterBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
+            superLoanHeaderCell?.filterImageBtn?.setImage(UIImage.init(named: "filter_selected_icon"), for: .normal)
+            
+            UIView.animate(withDuration: 1) {
+                self._filterView = FilterView()
+                self._filterView?.delegate = self
+                self._filterView?.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.7)
+                self.view.addSubview(self._filterView!)
+            }
+            
+        }else{
+            
+            superLoanHeaderCell?.filterBtn?.setTitleColor(TITLE_COLOR, for: .normal)
+            superLoanHeaderCell?.filterImageBtn?.setImage(UIImage.init(named: "sort_icon"), for: .normal)
+            UIView.animate(withDuration: 1) {
+                self._filterView?.removeFromSuperview()
+            }
+        }
+        
+    }
+    
+    func tabBtnClick(_ sender: UIButton) {
+        
+        let tag = sender.tag
+
+        type = String(format:"%ld",tag - 100)
+    
+        self.tableView?.reloadData()
+
+        switch tag {
+        case 101:
+            superLoanHeaderCell?.loanBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
+            superLoanHeaderCell?.gameBtn?.setTitleColor(UIColor.init(red: 25.5/255, green: 25.5/255, blue: 25.5/255, alpha: 1.0), for: .normal)
+            superLoanHeaderCell?.tourismBtn?.setTitleColor(UIColor.init(red: 25.5/255, green: 25.5/255, blue: 25.5/255, alpha: 1.0), for: .normal)
+        case 102:
+            superLoanHeaderCell?.loanBtn?.setTitleColor(UIColor.init(red: 25.5/255, green: 25.5/255, blue: 25.5/255, alpha: 1.0), for: .normal)
+            superLoanHeaderCell?.gameBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
+            superLoanHeaderCell?.tourismBtn?.setTitleColor(UIColor.init(red: 25.5/255, green: 25.5/255, blue: 25.5/255, alpha: 1.0), for: .normal)
+        case 103:
+            superLoanHeaderCell?.loanBtn?.setTitleColor(UIColor.init(red: 25.5/255, green: 25.5/255, blue: 25.5/255, alpha: 1.0), for: .normal)
+            superLoanHeaderCell?.gameBtn?.setTitleColor(UIColor.init(red: 25.5/255, green: 25.5/255, blue: 25.5/255, alpha: 1.0), for: .normal)
+            superLoanHeaderCell?.tourismBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
+        default:
+            break;
+        }
+    }
+    func sortTabSelected(_ index: NSInteger) {
+        _index = index
+        superLoanHeaderCell?.sortBtn?.setTitleColor(TITLE_COLOR, for: .normal)
+        superLoanHeaderCell?.sortImageBtn?.setImage(UIImage.init(named: "sort_icon"), for: .normal)
+        superLoanHeaderCell?.sortBtn?.isSelected = false
+        superLoanHeaderCell?.sortImageBtn?.isSelected = false
+        let sortIndex = String(format:"%ld",index)
+        
+        getData(maxAmount: "1000", maxDays: "25", minAmount: "100", minDays: "3", offset: "0", order: "ASC", sort: sortIndex)
+        
+        UIView.animate(withDuration: 1) {
+            self._sortView?.removeFromSuperview()
+        }
+    }
+    
+    func sureBtnClick(_ minLoanMoney: String, maxLoanMoney: String, minLoanPeriod: String, maxLoanPeriod: String) {
+        
+        let sortIndex = String(format:"%ld",self._index!)
+        superLoanHeaderCell?.filterBtn?.setTitleColor(TITLE_COLOR, for: .normal)
+        superLoanHeaderCell?.filterImageBtn?.setImage(UIImage.init(named: "filter_icon"), for: .normal)
+        superLoanHeaderCell?.filterBtn?.isSelected = false
+        superLoanHeaderCell?.filterImageBtn?.isSelected = false
+        if Int(maxLoanMoney)! < Int(minLoanMoney)! {
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "借款金额输入不合法")
+            return
+        }
+        
+        if Int(maxLoanPeriod)! < Int(minLoanPeriod)! {
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "借款周期输入不合法")
+            return
+        }
+        
+        
+//        _maxAmount = maxLoanMoney;
+//        _maxDays = maxLoanPeriod;
+//        _minAmount = minLoanMoney;
+//        _minDays = minLoanPeriod;
+        
+        getData(maxAmount: maxLoanMoney, maxDays: maxLoanPeriod, minAmount: minLoanMoney, minDays: minLoanPeriod, offset: "0", order: "ASC", sort: sortIndex)
+        
+        UIView.animate(withDuration: 1) {
+            self._filterView?.removeFromSuperview()
+        }
+        
+    }
+}

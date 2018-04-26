@@ -36,7 +36,7 @@
 #import "HgLoanProtoolListModel.h"
 #import "QBBWitnDrawModel.h"
 
-@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate,SDCycleScrollCellDelegate>
+@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate,SDCycleScrollCellDelegate,RecentCellDelegate>
 {
     NSString *_advTapToUrl;
     NSString *_shareContent;
@@ -525,13 +525,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-//    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]){
-//        return 3;
-//    }
-//    return 2;
+    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]){
+        return 3;
+    }
+    return 2;
     
 
-    return 3;
+//    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -553,9 +553,9 @@
     
     //flag==1   _k_h-_k_w*0.44-113-113-40
     //flag==3、4 _k_h-_k_w*0.44-113-113-120
-    if (indexPath.section == 1){
-        return _k_h-_k_w*0.44-113-113-120;
-    }
+//    if (indexPath.section == 1){
+//        return _k_h-_k_w*0.44-113-113-120;
+//    }
     if ([_homeProductList.flag isEqualToString:@"7"] || [_homeProductList.flag isEqualToString:@"14"]) {
         return _k_h-_k_w*0.44-113+110-113;
     }
@@ -565,12 +565,18 @@
     if ([_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]) {
         _k_h-_k_w*0.44-113-113-120;
     }
-    return _k_h-_k_w*0.44-113-113-30;
+    return _k_h-_k_w*0.44-113-113;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 5.0f;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    UIView *headerView = [[UIView alloc]init];
+    return headerView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -607,6 +613,7 @@
      RecentCell *recentCell = [tableView dequeueReusableCellWithIdentifier:@"RecentCell"];
     [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     recentCell.backgroundColor = [UIColor whiteColor];
+    recentCell.delegate = self;
     recentCell.selected = NO;
     return recentCell;
     
@@ -753,28 +760,34 @@
  */
 -(void)loanBtnClick{
     
-    //isComplete  基础资料是否完整
-    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"1"]) {
-
-        FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
-        loanApplicationVC.productId = _homeProductList.productId;
-        [self.navigationController pushViewController:loanApplicationVC animated:true];
-    }else{
-        
-        NSMutableString *content = [[NSMutableString alloc]initWithCapacity:100] ;
-        for (int i = 0; i<_homeProductList.drawInfo.tipsContent.count; i++) {
-            [content appendString:_homeProductList.drawInfo.tipsContent[i]];
-            if (i != _homeProductList.drawInfo.tipsContent.count-1) {
-                [content appendString:@"\n"];
-            }
-        }
-        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:_homeProductList.drawInfo.tipsTitle content:content attributeDic:nil TextAlignment:NSTextAlignmentLeft cancelTitle:@"取消" sureTitle:@"前去更新" compleBlock:^(NSInteger index) {
-            if (index == 1) {
-                UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]init];
-                [self.navigationController pushViewController:controller animated:true];
-            }
-        }];
-    }
+//    //isComplete  基础资料是否完整
+//    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"1"]) {
+//
+//        FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
+//        loanApplicationVC.productId = _homeProductList.productId;
+//        [self.navigationController pushViewController:loanApplicationVC animated:true];
+//    }else{
+//
+//        NSMutableString *content = [[NSMutableString alloc]initWithCapacity:100] ;
+//        for (int i = 0; i<_homeProductList.drawInfo.tipsContent.count; i++) {
+//            [content appendString:_homeProductList.drawInfo.tipsContent[i]];
+//            if (i != _homeProductList.drawInfo.tipsContent.count-1) {
+//                [content appendString:@"\n"];
+//            }
+//        }
+//        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:_homeProductList.drawInfo.tipsTitle content:content attributeDic:nil TextAlignment:NSTextAlignmentLeft cancelTitle:@"取消" sureTitle:@"前去更新" compleBlock:^(NSInteger index) {
+//            if (index == 1) {
+//                UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]init];
+//                [self.navigationController pushViewController:controller animated:true];
+//            }
+//        }];
+//    }
+//    
+    HotRecommendationViewController *controller = [[HotRecommendationViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:true];
+    //收款信息
+//    BillingMessageViewController * controller = [[BillingMessageViewController alloc]init];
+//    [self.navigationController pushViewController:controller animated:true];
 }
 
 
@@ -1028,6 +1041,14 @@
 -(void)tourismBtnClcik{
     
     [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"旅游"];
+}
+
+#pragma mark 查看更多
+-(void)recentMoreBtnClick{
+    
+    HotRecommendationViewController *controller = [[HotRecommendationViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:true];
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"查看更多"];
 }
 
 - (void)didReceiveMemoryWarning {
