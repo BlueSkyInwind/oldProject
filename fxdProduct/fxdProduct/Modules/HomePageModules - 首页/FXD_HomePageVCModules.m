@@ -595,8 +595,8 @@
         homeCell.homeProductListModel = _homeProductList;
         if (_homeProductList != nil) {
             
-            //        homeCell.type = _homeProductList.flag;
-            homeCell.type = @"3";
+            homeCell.type = _homeProductList.flag;
+//            homeCell.type = @"3";
             homeCell.protocolArray = _protocolArray;
             
         }

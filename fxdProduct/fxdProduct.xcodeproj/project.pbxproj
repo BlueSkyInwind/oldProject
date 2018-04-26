@@ -600,6 +600,8 @@
 		84E62D1C1FDA7CA900B7F870 /* CustomerContactsInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E62D1A1FDA7CA900B7F870 /* CustomerContactsInfoViewModel.m */; };
 		84E62D1F1FDA7E3100B7F870 /* CustomerContactsInfoParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E62D1E1FDA7E3100B7F870 /* CustomerContactsInfoParam.m */; };
 		84E62D201FDA7E3100B7F870 /* CustomerContactsInfoParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E62D1E1FDA7E3100B7F870 /* CustomerContactsInfoParam.m */; };
+		84E810FB2091A7F5009226B5 /* ChooseCreditDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E810FA2091A7F5009226B5 /* ChooseCreditDateView.swift */; };
+		84E810FC2091A7F5009226B5 /* ChooseCreditDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E810FA2091A7F5009226B5 /* ChooseCreditDateView.swift */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5B1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5C1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */; };
@@ -1934,6 +1936,7 @@
 		84E62D1A1FDA7CA900B7F870 /* CustomerContactsInfoViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerContactsInfoViewModel.m; sourceTree = "<group>"; };
 		84E62D1D1FDA7E3100B7F870 /* CustomerContactsInfoParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerContactsInfoParam.h; sourceTree = "<group>"; };
 		84E62D1E1FDA7E3100B7F870 /* CustomerContactsInfoParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerContactsInfoParam.m; sourceTree = "<group>"; };
+		84E810FA2091A7F5009226B5 /* ChooseCreditDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCreditDateView.swift; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
 		84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_finish@2x.png"; sourceTree = "<group>"; };
 		84ED5B561F4AB9E7004C0A59 /* mx_loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_loading@2x.png"; sourceTree = "<group>"; };
@@ -2500,6 +2503,7 @@
 				848139621F568A8600CD701C /* YX_TextField.swift */,
 				841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */,
 				848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */,
+				84E810FA2091A7F5009226B5 /* ChooseCreditDateView.swift */,
 			);
 			path = UserDataCell;
 			sourceTree = "<group>";
@@ -5401,6 +5405,7 @@
 				638A17061E517D9F00AB8AB6 /* LOTShapeRectangle.m in Sources */,
 				63145AF11CA8DBBD00D04ED8 /* RegionBaseClass.m in Sources */,
 				CCA181A31FC80E1E0094DA58 /* NonePageView.swift in Sources */,
+				84E810FB2091A7F5009226B5 /* ChooseCreditDateView.swift in Sources */,
 				1AEFFA7C1C50BF72003936CE /* loanRecordCell.m in Sources */,
 				63A24C5D1BE063A90036E8EF /* NSArray+Extend.m in Sources */,
 				6379641E1CAD1BE0002A5910 /* LivenessIdentity.m in Sources */,
@@ -5855,6 +5860,7 @@
 				CC0DFAA31EA5B1090024841A /* YYTextView.m in Sources */,
 				CC0DFAA51EA5B1090024841A /* CheckUtils.m in Sources */,
 				CCEFC6E6207DEE480006D731 /* HotRecommendModel.m in Sources */,
+				84E810FC2091A7F5009226B5 /* ChooseCreditDateView.swift in Sources */,
 				CC0DFAA61EA5B1090024841A /* PCCircleViewConst.m in Sources */,
 				CC0DFAA81EA5B1090024841A /* TADotView.m in Sources */,
 				CC0DFAA91EA5B1090024841A /* UIDevice+Extend.m in Sources */,

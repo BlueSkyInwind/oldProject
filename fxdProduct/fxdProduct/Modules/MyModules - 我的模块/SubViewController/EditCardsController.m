@@ -29,10 +29,14 @@
     //    NSDictionary *_createBankDict;
     //原卡号
     NSString *_currentCardNum;
+    NSString *_cutOffDate;
     NSInteger _cardFlag;
     NSMutableArray * supportBankListArr;
     BOOL _btnStatus;
+    
 }
+/**<#Description#>*/
+@property (nonatomic,strong)ChooseCreditDateView  * chooseCreditDateView;
 @end
 
 @implementation EditCardsController
@@ -46,10 +50,7 @@
     _currentCardNum=self.cardNum;
     self.cardNum=[self changeStr:self.cardNum];
     self.verCode=@"";
-    if([self.typeFlag isEqualToString:@"0"]){
-        self.title=@"添加银行卡";
-    }
-//    [self license];
+    self.title=@"信用卡认证";
     supportBankListArr = [NSMutableArray array];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
@@ -61,6 +62,7 @@
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
+    
     if (UI_IS_IPHONEX) {
         self.headerViewHeader.constant = 88;
     }
@@ -71,26 +73,6 @@
     [self.userReadLabel addGestureRecognizer:tapSecory];
     [self.agreeBtn setBackgroundImage:[UIImage imageNamed:@"trick"] forState:UIControlStateNormal];
     [self fatchCardInfo];
-}
-
-- (void)fatchCardInfo
-{
-    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
-    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel * baseResult = returnValue;
-        if ([baseResult.errCode isEqualToString:@"0"]) {
-            NSArray * array  = (NSArray *)baseResult.data;
-            for (int i = 0; i < array.count; i++) {
-                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
-                [supportBankListArr addObject:bankList];
-            }
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.friendErrMsg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [checkBankViewModel getSupportBankListInfo:@"2"];
 }
 
 - (void)addBackItem
@@ -170,11 +152,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if([self.typeFlag isEqualToString:@"0"])
-    {
-        return 4;
-    }
-    return 2;
+    return 6;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -183,13 +161,11 @@
     if (!cell) {
         cell = [[ContentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
     }
-    
-//    cell.contentTextField.textColor=UI_MAIN_COLOR;
-    if(indexPath.row==0)
+        if(indexPath.row==0)
     {
         cell.contentTextField.enabled=false;
         cell.contentTextField.text=self.cardName;
-        cell.titleLabel.text=@"银行卡类型";
+        cell.titleLabel.text=@"开户银行";
     }
     else if(indexPath.row==1)
     {
@@ -197,15 +173,34 @@
         cell.contentTextField.delegate=self;
         cell.contentTextField.text=self.cardNum;
         cell.contentTextField.keyboardType=UIKeyboardTypeNumberPad;
-        cell.titleLabel.text=@"银行卡号";
+        cell.titleLabel.text=@"信用卡号";
         [cell.arrowsImageBtn setBackgroundImage:[UIImage imageNamed:@"3_lc_icon_26"] forState:UIControlStateNormal];
         [cell updateScanCardImageBtnLayout];
         __weak typeof (self) weakSelf = self;
         cell.btnClick = ^(UIButton * button) {
             [weakSelf GetNum];
         };
+    } else if(indexPath.row== 2)
+    {
+        cell.contentTextField.tag=1004;
+        cell.contentTextField.delegate=self;
+        cell.contentTextField.keyboardType=UIKeyboardTypeNumberPad;
+        cell.titleLabel.text=@"信用卡安全码";
+        cell.arrowsImageBtn.hidden = YES;
+    } else if(indexPath.row== 3)
+    {
+        cell.contentTextField.enabled=false;
+        cell.titleLabel.text=@"信用卡截止日期";
+        cell.contentTextField.text = _cutOffDate != nil ? _cutOffDate : @"";
+        [cell.arrowsImageBtn setBackgroundImage:[UIImage imageNamed:@"application_Explication_Image"] forState:UIControlStateNormal];
+        [cell updateScanCardImageBtnLayout];
+        [cell updateTitleLabelLayout];
+        __weak typeof (self) weakSelf = self;
+        cell.btnClick = ^(UIButton * button) {
+            
+        };
     }
-    else if(indexPath.row==2)
+    else if(indexPath.row==4)
     {
         cell.contentTextField.tag=1002;
         cell.contentTextField.delegate=self;
@@ -242,6 +237,8 @@
     
     if (indexPath.row == 0) {
         [self bankChoose];
+    }else if (indexPath.row == 3){
+        [self popChooseDateView];
     }
 }
 
@@ -261,6 +258,26 @@
 }
 
 #pragma mark BtnClick
+-(void)popChooseDateView
+{
+    if (_chooseCreditDateView) {
+        return;
+    }
+    __weak typeof (self) weakSelf = self;
+    _chooseCreditDateView = [[ChooseCreditDateView alloc] init:self.view];
+    [_chooseCreditDateView show];
+    _chooseCreditDateView.sureChooseDate = ^(NSString * date) {
+        _cutOffDate = date;
+        [weakSelf.tableView reloadData];
+        [weakSelf.chooseCreditDateView dismiss];
+        weakSelf.chooseCreditDateView = nil;
+    };
+    _chooseCreditDateView.cancelChooseDate = ^{
+        [weakSelf.chooseCreditDateView dismiss];
+        weakSelf.chooseCreditDateView = nil;
+    };
+}
+
 -(void)bankChoose
 {
     BankCardNameVCModules *bankType=[BankCardNameVCModules new];
@@ -270,17 +287,6 @@
     bankType.cardTag = _cardFlag;
     bankType.bankArray = supportBankListArr;
     [self.navigationController pushViewController:bankType animated:YES];
-    
-}
-- (void)license
-{
-    [MGLicenseManager licenseForNetWokrFinish:^(bool License) {
-        if (License) {
-            DLog(@"授权成功");
-        } else {
-            DLog(@"授权失败");
-        }
-    }];
 }
 
 /**
@@ -290,35 +296,6 @@
 {
     [self startBankCamera];
     DLog(@"银行卡扫描");
-}
-
--(void)getSecory
-{
-    //    UITextField *textField=(UITextField*)[self.view viewWithTag:1002];
-    
-    if([FXD_Tool isMobileNumber:self.reservedTel]){
-        UIButton *btn=(UIButton*)[self.view viewWithTag:1111];
-        btn.userInteractionEnabled=NO;
-        btn.alpha = 0.4;
-        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
-        
-            SMSViewModel *smsViewModel = [[SMSViewModel alloc]init];
-            [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
-                BaseResultModel * baseRM = returnValue;
-                if ([baseRM.errCode isEqualToString:@"0"]) {
-                    
-                }else{
-                    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
-                }
-            } WithFaileBlock:^{
-            }];
-            [smsViewModel fatchRequestSMSParamPhoneNumber:self.reservedTel verifyCodeType:ADDCARD_CODE];
-            DLog(@"发送验证码");
-    }
-    else
-    {
-        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号"];
-    }
 }
 /**
  开始银行卡扫描  author wangyongxin  2017.4.17
@@ -435,7 +412,32 @@
         [unbundlingBankCardViewModel saveAccountBankCard:paramArray];
     }
 }
-
+-(void)getSecory
+{
+    if([FXD_Tool isMobileNumber:self.reservedTel]){
+        UIButton *btn=(UIButton*)[self.view viewWithTag:1111];
+        btn.userInteractionEnabled=NO;
+        btn.alpha = 0.4;
+        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(closeGetVerifyButtonUser) userInfo:nil repeats:YES];
+        
+        SMSViewModel *smsViewModel = [[SMSViewModel alloc]init];
+        [smsViewModel setBlockWithReturnBlock:^(id returnValue) {
+            BaseResultModel * baseRM = returnValue;
+            if ([baseRM.errCode isEqualToString:@"0"]) {
+                
+            }else{
+                [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseRM.friendErrMsg];
+            }
+        } WithFaileBlock:^{
+        }];
+        [smsViewModel fatchRequestSMSParamPhoneNumber:self.reservedTel verifyCodeType:ADDCARD_CODE];
+        DLog(@"发送验证码");
+    }
+    else
+    {
+        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请输入正确的手机号"];
+    }
+}
 /**
  获取更换银行卡参数数组
  */
@@ -448,7 +450,6 @@
     [array addObject:self.reservedTel];
     [array addObject:self.verCode];
     return array;
-    
 }
 
 -(void)obtainTransferAuth:(NSString *)cardBank cardNo:(NSString *)cardNo{
@@ -466,7 +467,26 @@
     } WithFaileBlock:^{
     }];
     [commonVM obtainTransferAuthProtocolType:EliteLoan typeCode:@"1" cardBankCode:cardBank cardNo:cardNo stagingType:nil];
+}
 
+- (void)fatchCardInfo
+{
+    CheckBankViewModel *checkBankViewModel = [[CheckBankViewModel alloc]init];
+    [checkBankViewModel setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * baseResult = returnValue;
+        if ([baseResult.errCode isEqualToString:@"0"]) {
+            NSArray * array  = (NSArray *)baseResult.data;
+            for (int i = 0; i < array.count; i++) {
+                SupportBankList * bankList = [[SupportBankList alloc]initWithDictionary:array[i] error:nil];
+                [supportBankListArr addObject:bankList];
+            }
+        } else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResult.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+        
+    }];
+    [checkBankViewModel getSupportBankListInfo:@"2"];
 }
 #pragma mark TextfileDelegate
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
