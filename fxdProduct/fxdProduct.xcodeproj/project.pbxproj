@@ -2917,9 +2917,6 @@
 				1A762F6C1C1FBE4700964719 /* RepayRecordController.h */,
 				1A762F6D1C1FBE4700964719 /* RepayRecordController.m */,
 				1A762F6E1C1FBE4700964719 /* RepayRecordController.xib */,
-				1AE362F21C586060006FC276 /* EditCardsController.h */,
-				1AE362F31C586060006FC276 /* EditCardsController.m */,
-				1AE362F41C586060006FC276 /* EditCardsController.xib */,
 				CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */,
 				CC4F062E207C65770030A12A /* CollectionViewController.swift */,
 			);
@@ -4275,6 +4272,9 @@
 				846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */,
 				84A380011FAC1D8D008FB7AF /* UserDataFillingModule - 用户资料填写 */,
 				CC8BB75420901C7D00ADA647 /* BillingMessageViewController.swift */,
+				1AE362F21C586060006FC276 /* EditCardsController.h */,
+				1AE362F31C586060006FC276 /* EditCardsController.m */,
+				1AE362F41C586060006FC276 /* EditCardsController.xib */,
 			);
 			path = "UserAuthenticationCenterModules - 用户认证中心模块";
 			sourceTree = "<group>";
