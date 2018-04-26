@@ -9,21 +9,19 @@
 #import "BankCardAuthorizationViewModel.h"
 #import "CardAuthAuthParamModel.h"
 #import "CardAuthSmsSendParamModel.h"
+#import "BankCardAuthorizationModel.h"
 @implementation BankCardAuthorizationViewModel
 
--(void)cardAuthauthAuthPlatCode:(NSString *)authPlatCode authSmsCode:(NSString *)authSmsCode bankCode:(NSString *)bankCode cardNo:(NSString *)cardNo phone:(NSString *)phone{
+-(void)cardAuthauthCodeListArr:(NSArray *)authCodeListArr smsCodeArray:(NSArray *)smsCodeArray bankCode:(NSString *)bankCode cardNo:(NSString *)cardNo phone:(NSString *)phone{
 
-    CardAuthAuthParamModel *paramModel = [[CardAuthAuthParamModel alloc]init];
-    paramModel.bankCode = bankCode;
-    paramModel.cardNo = cardNo;
-    paramModel.phone = phone;
-    CardAuthAuthAuthCodeListParamModel *model = [[CardAuthAuthAuthCodeListParamModel alloc]init];
-    model.authPlatCode = authPlatCode;
-    model.authSmsCode = authSmsCode;
-    NSMutableArray *arr = [NSMutableArray array];
-    [arr addObject:model];
-    paramModel.authCodeList = arr;
-    NSDictionary *dic = [paramModel toDictionary];
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:100];
+    for (int i = 0; i<authCodeListArr.count; i++) {
+        BankCardAuthorizationAuthListModel *model = (BankCardAuthorizationAuthListModel *)authCodeListArr[i];
+        NSDictionary *modelDic = @{@"authPlatCode":model.authPlatCode,@"authSmsCode":smsCodeArray[i]};
+        [arr addObject:modelDic];
+    }
+    NSDictionary *dic = @{@"authCodeList":arr, @"bankCode":bankCode,@"cardNo":cardNo,@"phone":phone};
+    
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_cardAuthAuth_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
@@ -57,9 +55,9 @@
 }
 
 
--(void)cardAuthQueryBankShortName:(NSString *)bankShortName{
+-(void)cardAuthQueryBankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo{
     
-    NSDictionary *dic = @{@"bankShortName" : bankShortName};
+    NSDictionary *dic = @{@"bankShortName" : bankShortName,@"cardNo":cardNo};
     [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_cardAuthQuery_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);

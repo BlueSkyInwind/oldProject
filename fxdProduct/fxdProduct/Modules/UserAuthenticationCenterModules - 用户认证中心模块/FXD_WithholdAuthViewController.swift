@@ -17,17 +17,23 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
     var bankName:String?
     var cardNum:String?
     var telNum:String?
+    var bankCode:String?
+    var bankShortName:String?
     var isAgreement:Bool = false
     var  bottomButton:UIButton?
     var xinyanTimer:Timer?
     var yinshengbaoTimer:Timer?
     var xinyantimeNum = 60
     var yinshengbaotimeNum = 60
+    var bankCardQueryArray : NSMutableArray?
+    var smsCodeArray : NSMutableArray?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.title = "代扣授权"
+        bankCardQueryArray = NSMutableArray.init(capacity: 100)
+        smsCodeArray = ["",""]
         addBackItem()
         configureView()
     }
@@ -46,9 +52,50 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
         tableView?.tableFooterView = addFooterView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getInfo()
+    }
+    func getInfo(){
+        let bankCardAuthorizationVM = BankCardAuthorizationViewModel()
+        bankCardAuthorizationVM.setBlockWithReturn({ (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+                self.bankCardQueryArray?.removeAllObjects()
+                let model = try! BankCardAuthorizationModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                for index in 0 ..< model.authList.count{
+                    
+                    let model = model.authList[index] as! BankCardAuthorizationAuthListModel
+                    self.bankCardQueryArray?.add(model)
+                }
+                
+                self.tableView?.reloadData()
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        
+        bankCardAuthorizationVM.cardAuthQueryBankShortName(bankShortName, cardNo: cardNum)
+        
+    }
     @objc func bottomButtonClick()  {
         
+        let bankCardAuthorizationVM = BankCardAuthorizationViewModel()
+        bankCardAuthorizationVM.setBlockWithReturn({ (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
         
+        bankCardAuthorizationVM.cardAuthauthCodeListArr(bankCardQueryArray as! [Any], smsCodeArray: smsCodeArray as! [Any] , bankCode: bankCode, cardNo: cardNum, phone: telNum)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -62,7 +109,7 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
             num = titleArr[section].count
             break
         case 1:
-            num = titleArr[section].count
+            num = (bankCardQueryArray?.count)!
             break
         default:
             break
@@ -97,8 +144,12 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
             }
             break
         case 1:
-            contentTableViewCell?.titleLabel?.text = titleArr[indexPath.section][indexPath.row]
+
+            let model = bankCardQueryArray![indexPath.row] as! BankCardAuthorizationAuthListModel
+            contentTableViewCell?.titleLabel?.text = model.authPlatName
             contentTableViewCell?.contentTextField?.delegate = self
+            contentTableViewCell?.contentTextField?.tag = indexPath.row + 101
+            contentTableViewCell?.contentTextField?.addTarget(self, action: #selector(contentTextFieldEdit(textField:)), for: UIControlEvents.editingChanged)
             contentTableViewCell?.contentTextField?.keyboardType = .numberPad
             contentTableViewCell?.updateVerfiyCodeImageBtnLayout()
             contentTableViewCell?.updateStarLabelLayout()
@@ -132,7 +183,7 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = addFooterView()
+        let footer = UIView()
         return footer
     }
     
@@ -153,7 +204,8 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
         button.isUserInteractionEnabled = false
         button.alpha = 0.4;
         //调用发送验证码
-        
+        let tag = button.tag - 1001
+        sendSms(tag: tag)
         
     }
     
@@ -176,8 +228,28 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
         button.isUserInteractionEnabled = false
         button.alpha = 0.4;
         //调用发送验证码
+       
+        let tag = button.tag - 1001
+        sendSms(tag: tag)
         
+    }
+    
+    func sendSms(tag:Int){
+        let model = bankCardQueryArray![tag] as! BankCardAuthorizationAuthListModel
         
+        let bankCardAuthorizationVM = BankCardAuthorizationViewModel()
+        bankCardAuthorizationVM.setBlockWithReturn({ (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        bankCardAuthorizationVM.cardAuthSmsSendAuthPlatCode(model.authPlatCode, bankCode: bankCode, cardNo: cardNum, phone: telNum)
     }
     
     @objc func yinshengbaoKeepTime()  {
@@ -266,6 +338,28 @@ extension FXD_WithholdAuthViewController {
             make.left.equalTo(imageView.snp.right).offset(13)
         }
         return headerView
+    }
+    
+    //MARK:UITextFieldDelegate
+    @objc fileprivate func contentTextFieldEdit(textField:UITextField){
+        
+        let tag = textField.tag
+        
+        if (textField.text?.count)! > 6{
+            
+            let str1 = textField.text?.prefix(6)
+            textField.text = String(str1!)
+        }
+        switch tag {
+        case 101:
+            
+            smsCodeArray?.replaceObject(at: 0, with: textField.text as Any)
+        case 102:
+            
+            smsCodeArray?.replaceObject(at: 1, with: textField.text as Any)
+        default:
+            break;
+        }
     }
 }
 

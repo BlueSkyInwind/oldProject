@@ -8,24 +8,65 @@
 
 import UIKit
 
-class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource ,UITextFieldDelegate{
-
+class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource ,UITextFieldDelegate,BankTableViewSelectDelegate{
+    
     var tableView : UITableView?
     var titleArray : [String] = ["所属银行","卡号","预留手机号"]
     var dataArray : NSMutableArray?
     var footBtn : UIButton?
+    var supportBankListArray : NSMutableArray?
+    
+    var cardCode : NSString?
+    var cardFlag : Int?
+    var type : Int? = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "收款信息"
+        supportBankListArray = NSMutableArray.init(capacity: 100)
+        
+        self.title = "添加银行卡"
+        if type == 0 {
+           self.title = "收款信息"
+        }
         addBackItem()
         configureView()
-        dataArray = ["","",""]
-        
+        dataArray = ["","","","",""]
+        cardCode = ""
+        cardFlag = 0
+//        getInfo()
+        fatchCardInfo()
         // Do any additional setup after loading the view.
     }
 
+    
+    func fatchCardInfo(){
+        
+        let checkBankViewModel = CheckBankViewModel()
+        checkBankViewModel.setBlockWithReturn({ (returnValue) in
+            
+            let baseResult = returnValue as! BaseResultModel
+            if baseResult.errCode == "0" {
+                
+                self.supportBankListArray?.removeAllObjects()
+                let array = baseResult.data as! NSArray
+
+                for index in 0 ..< array.count{
+                    
+                    let model = try! SupportBankList.init(dictionary: array[index] as! [AnyHashable : Any])
+                    
+                    self.supportBankListArray?.add(model)
+                }
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        checkBankViewModel.getSupportBankListInfo("2")
+    }
+   
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false
@@ -65,9 +106,11 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
             make.centerY.equalTo(headerView.snp.centerY)
         }
         
-        tableView?.tableHeaderView = headerView
-        
-        
+        if type == 0 {
+            
+            tableView?.tableHeaderView = headerView
+        }
+    
         let footView = UIView.init(frame: CGRect(x:0,y:0,width:_k_w,height:100))
         
         footBtn = UIButton()
@@ -93,10 +136,10 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         
         if (dataArray![0] as! String).count < 0 {
             
-            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请选择开户银行")
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请选择银行")
             return
         }
-        if (dataArray![1] as! String).count < 18 {
+        if (dataArray![1] as! String).count < 16 {
             
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请输入正确的卡号")
             return
@@ -107,7 +150,14 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
             return
         }
         
-        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "点击下一步按钮")
+        let controller = FXD_WithholdAuthViewController()
+        controller.bankName = (dataArray?[0] as! String)
+        controller.cardNum = (dataArray?[1] as! String)
+        controller.telNum = (dataArray?[2] as! String)
+        controller.bankCode = (dataArray?[3] as! String)
+        controller.bankShortName = (dataArray?[4] as! String)
+        self.navigationController?.pushViewController(controller, animated: true)
+//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "点击下一步按钮")
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -126,10 +176,10 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
             cell = ContentTableViewCell.init(style: .default, reuseIdentifier: "ContentTableViewCell")
         }
         
-        cell.btnClick = ({[weak self] (sender) in
-        
-            MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: "选择银行卡")
-        })
+//        cell.btnClick = ({[weak self] (sender) in
+//
+//            MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: "选择银行卡")
+//        })
         cell.selectionStyle = .none
         cell.titleLabel?.text = titleArray[indexPath.row]
         cell.lineView?.isHidden = false
@@ -137,6 +187,8 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         cell.contentTextField?.isEnabled = true
         cell.contentTextField?.delegate = self
         cell.contentTextField?.tag = indexPath.row + 100
+        cell.contentTextField?.keyboardType = .numberPad
+        cell.contentTextField?.text = (dataArray?[indexPath.row] as! String)
         cell.contentTextField?.addTarget(self, action: #selector(contentTextFieldEdit(textField:)), for: .editingChanged)
         if indexPath.row == 0 {
             cell.arrowsImageBtn?.isHidden = false
@@ -150,19 +202,12 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         
         if indexPath.row == 0 {
             
-//            let controller = BankListViewController()
-////            controller.bankListArray = openAccountModel?.bankList as! NSArray
-////            controller.selectedTag = index
-//            controller.selectedBankClosure = {(bankModel: BankListModel, selectedTag : NSInteger) -> Void in
-////                self.index = selectedTag
-////                self.contentArray.replaceObject(at: 2, with: bankModel.bankName)
-////                self.submitArray?.replaceObject(at: 7, with: bankModel.bankNo)
-////                self.submitArray?.replaceObject(at: 0, with: bankModel.bankCode)
-//
-//                self.dataArray?.replaceObject(at: 0, with: "1234")
-//            }
-//            
-//            self.navigationController?.pushViewController(controller, animated: true)
+            let controller = BankCardNameVCModules()
+            controller.bankArray = supportBankListArray
+            controller.cardTag = (cardCode?.integerValue)!
+            controller.cardTag = cardFlag!
+            controller.delegate = self
+            self.navigationController?.pushViewController(controller, animated: true)
             
         }
     }
@@ -266,6 +311,23 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         }
         
         return isEnabled
+    }
+    
+    func bankSelect(_ bankInfo: SupportBankList!, andSectionRow sectionRow: Int) {
+        
+        cardFlag = sectionRow
+        dataArray?.replaceObject(at: 0, with: bankInfo.bank_name_)
+        dataArray?.replaceObject(at: 3, with: bankInfo.bank_code_)
+        dataArray?.replaceObject(at: 4, with: bankInfo.bank_short_name_)
+        self.tableView?.reloadData()
+        if footerBtnEnabled() {
+            
+            footBtn?.backgroundColor = UI_MAIN_COLOR
+        }else{
+            footBtn?.backgroundColor = QUTOA_COLOR
+        }
+        footBtn?.isEnabled = footerBtnEnabled()
+        
     }
     
     override func didReceiveMemoryWarning() {

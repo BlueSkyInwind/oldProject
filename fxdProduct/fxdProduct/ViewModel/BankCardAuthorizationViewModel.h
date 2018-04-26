@@ -11,11 +11,11 @@
 @interface BankCardAuthorizationViewModel : FXD_ViewModelBaseClass
 
 //银行卡授权接口
--(void)cardAuthauthAuthPlatCode:(NSString *)authPlatCode authSmsCode:(NSString *)authSmsCode bankCode:(NSString *)bankCode cardNo:(NSString *)cardNo phone:(NSString *)phone;
+-(void)cardAuthauthCodeListArr:(NSArray *)authCodeListArr smsCodeArray:(NSArray *)smsCodeArray bankCode:(NSString *)bankCode cardNo:(NSString *)cardNo phone:(NSString *)phone;
 
 //银行卡授权短信发送
 -(void)cardAuthSmsSendAuthPlatCode:(NSString *)authPlatCode bankCode:(NSString *)bankCode cardNo:(NSString *)cardNo phone:(NSString *)phone;
 
 //银行卡授权查询页面
--(void)cardAuthQueryBankShortName:(NSString *)bankShortName;
+-(void)cardAuthQueryBankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo;
 @end
