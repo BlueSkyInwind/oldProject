@@ -87,5 +87,6 @@
 #import "BankCardAuthorizationViewModel.h"
 #import "BankCardAuthorizationModel.h"
 #import "BankCardNameVCModules.h"
-
+#import "CompQueryViewModel.h"
+#import "CompQueryModel.h"
 #endif /* fxdProduct_Bridging_Header_h */

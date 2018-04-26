@@ -36,7 +36,7 @@
 #import "HgLoanProtoolListModel.h"
 #import "QBBWitnDrawModel.h"
 
-@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate,SDCycleScrollCellDelegate>
+@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate,SDCycleScrollCellDelegate,RecentCellDelegate>
 {
     NSString *_advTapToUrl;
     NSString *_shareContent;
@@ -613,6 +613,7 @@
      RecentCell *recentCell = [tableView dequeueReusableCellWithIdentifier:@"RecentCell"];
     [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     recentCell.backgroundColor = [UIColor whiteColor];
+    recentCell.delegate = self;
     recentCell.selected = NO;
     return recentCell;
     
@@ -781,10 +782,12 @@
 //            }
 //        }];
 //    }
-    
-    
-    BillingMessageViewController * controller = [[BillingMessageViewController alloc]init];
+//    
+    HotRecommendationViewController *controller = [[HotRecommendationViewController alloc]init];
     [self.navigationController pushViewController:controller animated:true];
+    //收款信息
+//    BillingMessageViewController * controller = [[BillingMessageViewController alloc]init];
+//    [self.navigationController pushViewController:controller animated:true];
 }
 
 
@@ -1038,6 +1041,14 @@
 -(void)tourismBtnClcik{
     
     [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"旅游"];
+}
+
+#pragma mark 查看更多
+-(void)recentMoreBtnClick{
+    
+    HotRecommendationViewController *controller = [[HotRecommendationViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:true];
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"查看更多"];
 }
 
 - (void)didReceiveMemoryWarning {

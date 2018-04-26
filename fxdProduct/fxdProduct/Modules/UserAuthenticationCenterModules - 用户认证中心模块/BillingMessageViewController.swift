@@ -18,15 +18,14 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
     
     var cardCode : NSString?
     var cardFlag : Int?
-    var type : Int? = 0
-    
+    @objc var type = "0"
     override func viewDidLoad() {
         super.viewDidLoad()
 
         supportBankListArray = NSMutableArray.init(capacity: 100)
         
         self.title = "添加银行卡"
-        if type == 0 {
+        if type == "0" {
            self.title = "收款信息"
         }
         addBackItem()
@@ -106,7 +105,7 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
             make.centerY.equalTo(headerView.snp.centerY)
         }
         
-        if type == 0 {
+        if type == "0" {
             
             tableView?.tableHeaderView = headerView
         }
@@ -150,6 +149,7 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
             return
         }
         
+      
         let controller = FXD_WithholdAuthViewController()
         controller.bankName = (dataArray?[0] as! String)
         controller.cardNum = (dataArray?[1] as! String)
@@ -157,6 +157,8 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         controller.bankCode = (dataArray?[3] as! String)
         controller.bankShortName = (dataArray?[4] as! String)
         self.navigationController?.pushViewController(controller, animated: true)
+       
+        
 //        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "点击下一步按钮")
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

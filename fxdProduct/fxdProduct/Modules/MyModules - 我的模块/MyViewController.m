@@ -395,14 +395,9 @@
                     break;
                 case 1:
                     {
-                        FXD_WithholdAuthViewController * vc = [[FXD_WithholdAuthViewController alloc] init];
-                        [self.navigationController pushViewController:vc animated:YES];
-//                        EditCardsController * vc = [[EditCardsController alloc] init];
-//                        vc.typeFlag = @"0";
-//                        [self.navigationController pushViewController:vc animated:YES];
                         
-//                        MoreViewController *ticket=[[MoreViewController alloc]init];
-//                        [self.navigationController pushViewController:ticket animated:YES];
+                        MoreViewController *ticket=[[MoreViewController alloc]init];
+                        [self.navigationController pushViewController:ticket animated:YES];
                     }
                     break;
                 default:

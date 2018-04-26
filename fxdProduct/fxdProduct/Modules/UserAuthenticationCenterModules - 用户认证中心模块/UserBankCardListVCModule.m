@@ -97,15 +97,18 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
 }
 -(void)addCardClick{
     
-    EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:NSStringFromClass([EditCardsController class]) bundle:nil];
-    editCard.typeFlag = @"0";
-    editCard.addCarSuccess = ^{
-        DLog(@"添加卡成功");
-        _currentIndex = 0;
-        [self.tableView.mj_header beginRefreshing];
-    };
-    BaseNavigationViewController *addCarNC = [[BaseNavigationViewController alloc] initWithRootViewController:editCard];
-    [self presentViewController:addCarNC animated:YES completion:nil];
+    BillingMessageViewController *controller = [[BillingMessageViewController alloc]init];
+    controller.type = @"1";
+    [self.navigationController pushViewController:controller animated:true];
+//    EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:NSStringFromClass([EditCardsController class]) bundle:nil];
+//    editCard.typeFlag = @"0";
+//    editCard.addCarSuccess = ^{
+//        DLog(@"添加卡成功");
+//        _currentIndex = 0;
+//        [self.tableView.mj_header beginRefreshing];
+//    };
+//    BaseNavigationViewController *addCarNC = [[BaseNavigationViewController alloc] initWithRootViewController:editCard];
+//    [self presentViewController:addCarNC animated:YES completion:nil];
 }
 - (void)goBack
 {

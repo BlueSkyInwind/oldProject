@@ -71,9 +71,13 @@
 
 - (void)addCard
 {
-    EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
-    editCard.typeFlag = @"0";
-    [self.navigationController pushViewController:editCard animated:YES];
+    BillingMessageViewController *controller=[[BillingMessageViewController alloc]init];
+    controller.type = @"1";
+    [self.navigationController pushViewController:controller animated:true];
+    
+//    EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
+//    editCard.typeFlag = @"0";
+//    [self.navigationController pushViewController:editCard animated:YES];
 }
 
 -(void)createMyCardUI{
