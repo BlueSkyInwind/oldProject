@@ -395,7 +395,6 @@
                     break;
                 case 1:
                     {
-                        
                         MoreViewController *ticket=[[MoreViewController alloc]init];
                         [self.navigationController pushViewController:ticket animated:YES];
                     }
