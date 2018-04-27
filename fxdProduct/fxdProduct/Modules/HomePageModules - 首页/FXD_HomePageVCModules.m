@@ -588,6 +588,28 @@
         sdcycleScrollCell.selected = NO;
         sdcycleScrollCell.sdCycleScrollview.delegate = self;
         sdcycleScrollCell.delegate = self;
+        
+        for (int i = 0; i<_homeProductList.platType.count; i++) {
+            PlatTypeModel *model = _homeProductList.platType[i];
+            switch (model.code_.integerValue) {
+                case 1:
+                    [sdcycleScrollCell.loanBtn setTitle:model.desc_ forState:UIControlStateNormal];
+                    [sdcycleScrollCell.loanBtnImage setImage:[UIImage imageNamed:@"loan_icon"] forState:UIControlStateNormal];
+                    break;
+                case 2:
+                    [sdcycleScrollCell.gameBtn setTitle:model.desc_ forState:UIControlStateNormal];
+                    [sdcycleScrollCell.gameBtnImage setImage:[UIImage imageNamed:@"game_icon"] forState:UIControlStateNormal];
+                    break;
+                case 3:
+                    [sdcycleScrollCell.tourismBtn setTitle:model.desc_ forState:UIControlStateNormal];
+                    [sdcycleScrollCell.tourismBtnImage setImage:[UIImage imageNamed:@"tourism_icon"] forState:UIControlStateNormal];
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        
         sdcycleScrollCell.sdCycleScrollview.titlesGroup = _homeProductList.paidList;
         return sdcycleScrollCell;
         
@@ -601,8 +623,8 @@
         homeCell.homeProductListModel = _homeProductList;
         if (_homeProductList != nil) {
             
-            homeCell.type = _homeProductList.flag;
-//            homeCell.type = @"3";
+//            homeCell.type = _homeProductList.flag;
+            homeCell.type = @"1";
             homeCell.protocolArray = _protocolArray;
             
         }

@@ -29,6 +29,15 @@
 
 @end
 
+@protocol HomeHotRecommendModel <NSObject>
+
+@end
+
+@protocol PlatTypeModel <NSObject>
+
+@end
+
+
 @interface DrawInfoModel : JSONModel
 
 //金额
@@ -180,6 +189,51 @@
 @property (nonatomic, strong)NSString<Optional> *qaUrl;
 //还款方式
 @property (nonatomic, strong)NSString<Optional> *stagingType;
+
+//热门推荐
+@property(nonatomic,strong)NSArray<HomeHotRecommendModel,Optional> * hotRecommend;
+
+//贷款、热门
+@property(nonatomic,strong)NSArray<PlatTypeModel,Optional> * platType;
+
+@end
+
+
+@interface HomeHotRecommendModel : JSONModel
+
+//链接地址
+@property (nonatomic, strong)NSString<Optional> *linkAddress;
+//平台LOGO
+@property (nonatomic, strong)NSString<Optional> *plantLogo;
+//平台名称
+@property (nonatomic, strong)NSString<Optional> *plantName;
+//平台简介
+@property (nonatomic, strong)NSString<Optional> *platformIntroduction;
+//1 日利率 2 月利率 3 年利率
+@property (nonatomic, strong)NSString<Optional> *referenceMode;
+//借款利率
+@property (nonatomic, strong)NSString<Optional> *referenceRate;
+//0已收藏 1 未收藏
+@property (nonatomic, strong)NSString<Optional> *isCollect;
+//最高额度
+@property (nonatomic, strong)NSString<Optional> *maximumAmountUnit;
+//期限
+@property (nonatomic, strong)NSString<Optional> *unitStr;
+//最高额度
+@property (nonatomic, strong)NSString<Optional> *maximumAmount;
+
+@end
+
+@interface PlatTypeModel : JSONModel
+
+//图片url
+@property (nonatomic, strong)NSString<Optional> *code_;
+//是否有效
+@property (nonatomic, strong)NSString<Optional> *desc_;
+//跳转url
+@property (nonatomic, strong)NSString<Optional> *key_;
+//跳转url
+@property (nonatomic, strong)NSString<Optional> *name_;
 
 @end
 

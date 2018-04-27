@@ -34,6 +34,10 @@ class SortView: UIView,UITableViewDelegate,UITableViewDataSource {
         setupUI()
     }
     
+    convenience init(_ frame: CGRect) {
+        self.init(frame: frame)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -66,15 +70,15 @@ extension SortView{
         }
     }
     
-    override var  frame:(CGRect){
-        
-        didSet{
-            
-            let newFrame = CGRect(x:0,y:360,width:_k_w,height:_k_h - 360)
-            super.frame = newFrame
-            
-        }
-    }
+//    override var  frame:(CGRect){
+//
+//        didSet{
+//
+//            let newFrame = CGRect(x:0,y:360,width:_k_w,height:_k_h - 360)
+//            super.frame = newFrame
+//
+//        }
+//    }
 }
 
 

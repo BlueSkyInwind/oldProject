@@ -56,17 +56,18 @@
 
 @end
 
-//@implementation RuleTextModel
-//
-//+(JSONKeyMapper *)keyMapper{
-//    
-//    return [[JSONKeyMapper alloc]initWithModelToJSONDictionary:@{@"label_":@"label",@"value_":@"value"}];
-//}
-//
-//@end
 
 @implementation FeeTextModel
 
 @end
+
+@implementation HomeHotRecommendModel
+
+@end
+
+@implementation PlatTypeModel
+
+@end
+
 
 

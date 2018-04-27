@@ -393,7 +393,7 @@
         [_superLoanHeaderCell.sortImageBtn setImage:[UIImage imageNamed:@"sort_selected_icon"] forState:UIControlStateNormal];
         
         [UIView animateWithDuration:1 animations:^{
-            _sortView = [[SortView alloc]init];
+            _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 360, _k_w, _k_h-360)];
             _sortView.delegate = self;
             _sortView.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7];
             _sortView.index = _index;
@@ -435,7 +435,7 @@
         [_superLoanHeaderCell.filterBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
         [_superLoanHeaderCell.filterImageBtn setImage:[UIImage imageNamed:@"filter_selected_icon"] forState:UIControlStateNormal];
         [UIView animateWithDuration:1 animations:^{
-            _filterView = [[FilterView alloc]init];
+            _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 360, _k_w, _k_h - 360)];
             _filterView.delegate = self;
             _filterView.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7];
             [self.view addSubview:_filterView];

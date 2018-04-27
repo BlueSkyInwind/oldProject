@@ -19,7 +19,7 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
     var _filterView : FilterView?
     var _index : NSInteger?
     var type : String?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -271,7 +271,7 @@ extension HotRecommendationViewController{
             superLoanHeaderCell?.sortImageBtn?.setImage(UIImage.init(named: "sort_selected_icon"), for: .normal)
             
             UIView.animate(withDuration: 1) {
-                self._sortView = SortView()
+                self._sortView = SortView.init(frame: CGRect(x:0,y:163,width:_k_w,height:_k_h-163))
                 self._sortView?.delegate = self
                 self._sortView?.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.7)
                 self._sortView?.index = self._index!
@@ -306,8 +306,8 @@ extension HotRecommendationViewController{
             
         }
         
-        superLoanHeaderCell?.filterBtn?.isSelected = !(superLoanHeaderCell?.sortBtn?.isSelected)!
-        superLoanHeaderCell?.filterImageBtn?.isSelected = !(superLoanHeaderCell?.sortImageBtn?.isSelected)!
+        superLoanHeaderCell?.filterBtn?.isSelected = !(superLoanHeaderCell?.filterBtn?.isSelected)!
+        superLoanHeaderCell?.filterImageBtn?.isSelected = !(superLoanHeaderCell?.filterImageBtn?.isSelected)!
         
         if ((superLoanHeaderCell?.filterBtn?.isSelected)! || (superLoanHeaderCell?.filterImageBtn?.isSelected)!) {
             
@@ -315,7 +315,7 @@ extension HotRecommendationViewController{
             superLoanHeaderCell?.filterImageBtn?.setImage(UIImage.init(named: "filter_selected_icon"), for: .normal)
             
             UIView.animate(withDuration: 1) {
-                self._filterView = FilterView()
+                self._filterView = FilterView.init(frame: CGRect(x:0,y:163,width:_k_w,height:_k_h-163))
                 self._filterView?.delegate = self
                 self._filterView?.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.7)
                 self.view.addSubview(self._filterView!)
@@ -324,7 +324,7 @@ extension HotRecommendationViewController{
         }else{
             
             superLoanHeaderCell?.filterBtn?.setTitleColor(TITLE_COLOR, for: .normal)
-            superLoanHeaderCell?.filterImageBtn?.setImage(UIImage.init(named: "sort_icon"), for: .normal)
+            superLoanHeaderCell?.filterImageBtn?.setImage(UIImage.init(named: "filter_icon"), for: .normal)
             UIView.animate(withDuration: 1) {
                 self._filterView?.removeFromSuperview()
             }

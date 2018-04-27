@@ -33,8 +33,12 @@ class FilterView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         setupUI()
+    }
+    
+    convenience init(_ frame: CGRect) {
+        self.init(frame: frame)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -279,15 +283,23 @@ extension FilterView{
         }
     }
     
-    override var  frame:(CGRect){
-        
-        didSet{
-            
-            let newFrame = CGRect(x:0,y:360,width:_k_w,height:_k_h - 360)
-            super.frame = newFrame
-            
-        }
-    }
+//    override var  frame:(CGRect){
+//
+//        didSet{
+//
+//            let newFrame = CGRect(x:0,y:360,width:_k_w,height:_k_h - 360)
+//            super.frame = newFrame
+//
+//        }
+//    }
+//
+//    func setViewFrame(type : String){
+//
+//        if type == "2" {
+//            let newFrame = CGRect(x:0,y:163,width:_k_w,height:_k_h - 163)
+//            super.frame = newFrame
+//        }
+//    }
 }
 
 extension FilterView{
