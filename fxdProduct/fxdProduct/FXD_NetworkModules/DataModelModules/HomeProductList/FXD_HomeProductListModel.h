@@ -202,6 +202,8 @@
 @interface HomeHotRecommendModel : JSONModel
 
 //链接地址
+@property (nonatomic, strong)NSString<Optional> *id_;
+//链接地址
 @property (nonatomic, strong)NSString<Optional> *linkAddress;
 //平台LOGO
 @property (nonatomic, strong)NSString<Optional> *plantLogo;
@@ -221,6 +223,9 @@
 @property (nonatomic, strong)NSString<Optional> *unitStr;
 //最高额度
 @property (nonatomic, strong)NSString<Optional> *maximumAmount;
+//1:贷款、2:游戏、3:旅游
+@property (nonatomic, strong)NSString<Optional> *moduletype;
+
 
 @end
 

@@ -125,7 +125,7 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         
         let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
         if model.moduletype == "1" {
-            return 100
+            return 90
         }
         return 75
     }
@@ -222,7 +222,7 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         }) {
             
         }
-        collectionVM.addMyCollectionInfocollectionType("1", platformId: model.id_)
+        collectionVM.addMyCollectionInfocollectionType(model.moduletype, platformId: model.id_)
         tableView.reloadData()
     }
     

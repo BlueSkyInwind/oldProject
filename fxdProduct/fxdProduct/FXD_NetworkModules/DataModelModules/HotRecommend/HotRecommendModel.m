@@ -10,4 +10,8 @@
 
 @implementation HotRecommendModel
 
++(JSONKeyMapper *)keyMapper{
+    
+    return [[JSONKeyMapper alloc]initWithModelToJSONDictionary:@{@"id_":@"id"}];
+}
 @end

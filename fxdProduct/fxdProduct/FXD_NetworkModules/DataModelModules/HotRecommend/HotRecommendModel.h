@@ -10,6 +10,8 @@
 
 @interface HotRecommendModel : JSONModel
 
+//id
+@property (nonatomic, strong)NSString<Optional> *id_;
 //链接地址
 @property (nonatomic, strong)NSString<Optional> *linkAddress;
 //平台LOGO
@@ -30,6 +32,9 @@
 @property (nonatomic, strong)NSString<Optional> *unitStr;
 //最高额度
 @property (nonatomic, strong)NSString<Optional> *maximumAmount;
+//平台类型
+@property (nonatomic, strong)NSString<Optional> *moduletype;
+
 
 
 

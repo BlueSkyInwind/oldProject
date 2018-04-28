@@ -21,7 +21,8 @@ NSString * const _mainTwo_new_url  =  @"http://h5.faxindai.com/coregw/client/";
 //http://192.168.13.173:8005/ 张强本地
 
 //测试导流 192.168.6.134
-//NSString * const _maintourism_icon_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+////NSString * const _maintourism_icon_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+//NSString * const _main_url  =   @"http://h5.dev.test/fxd-esb/esb/";
 //NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
 //NSString * const _main_new_url  =  @"http://h5.test.fxds/apigw/client/";
 //NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";

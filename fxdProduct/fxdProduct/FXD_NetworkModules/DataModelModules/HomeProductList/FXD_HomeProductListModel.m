@@ -63,6 +63,10 @@
 
 @implementation HomeHotRecommendModel
 
++(JSONKeyMapper *)keyMapper{
+    
+    return [[JSONKeyMapper alloc]initWithModelToJSONDictionary:@{@"id_":@"id"}];
+}
 @end
 
 @implementation PlatTypeModel

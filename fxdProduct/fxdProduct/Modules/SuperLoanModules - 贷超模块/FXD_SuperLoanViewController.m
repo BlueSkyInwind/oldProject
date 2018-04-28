@@ -200,7 +200,8 @@
         [_tableView.mj_footer endRefreshing];
     }];
     
-    [viewModel compQueryLimit:@"15" maxAmount:maxAmount maxDays:maxDays minAmount:minAmount minDays:minDays offset:offset order:order sort:sort];
+    [viewModel compQueryLimit:@"15" maxAmount:maxAmount maxDays:maxDays minAmount:minAmount minDays:minDays offset:offset order:order sort:sort moduleType:_type];
+
 }
 #pragma mark - TableViewDelegate
 
@@ -253,6 +254,7 @@
         _superLoanHeaderCell.backgroundColor = rgb(242, 242, 242);
         _superLoanHeaderCell.selected = NO;
         _superLoanHeaderCell.delegate = self;
+        
         return _superLoanHeaderCell;
         
     }
@@ -489,7 +491,7 @@
     [_superLoanHeaderCell.sortImageBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
     _superLoanHeaderCell.sortBtn.selected = NO;
     _superLoanHeaderCell.sortImageBtn.selected = NO;
-    [self getDataMaxAmount:@"10000" maxDays:@"25" minAmount:@"100" minDays:@"3" offset:@"0" order:@"ASC" sort:[NSString stringWithFormat:@"%ld",selectedIndex]];
+    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:@"ASC" sort:[NSString stringWithFormat:@"%ld",selectedIndex]];
     [UIView animateWithDuration:1 animations:^{
         [_sortView removeFromSuperview];
         
@@ -497,6 +499,9 @@
 }
 
 -(void)sureBtnClick:(NSString *)minLoanMoney maxLoanMoney:(NSString *)maxLoanMoney minLoanPeriod:(NSString *)minLoanPeriod maxLoanPeriod:(NSString *)maxLoanPeriod{
+    
+    
+    
     
     [_superLoanHeaderCell.filterBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
     [_superLoanHeaderCell.filterImageBtn setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
@@ -555,7 +560,7 @@
 
 -(void)collectionBtn:(UIButton *)sender{
     
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:[NSString stringWithFormat:@"%ld",sender.tag]];
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:[NSString stringWithFormat:@"%ld",sender.tag]];
     RowsModel *model = _dataArray[sender.tag];
 
     CollectionViewModel *collectionVM = [[CollectionViewModel alloc]init];
@@ -574,21 +579,7 @@
     }];
     
     [collectionVM addMyCollectionInfocollectionType:_type platformId:model.id_];
-    
-//    sender.selected = !sender.selected;
-//    RowsModel *model = _dataArray[sender.tag];
-//    if (sender.selected) {
-//
-//        model.isCollect = @"0";
-//        [sender setImage:[UIImage imageNamed:@"collection_selected_icon"] forState:UIControlStateNormal];
-//
-//    }else{
-//
-//        model.isCollect = @"1";
-//        [sender setImage:[UIImage imageNamed:@"collection_icon"] forState:UIControlStateNormal];
-//    }
-    
-//    [self.tableView reloadData];
+
 }
 
 

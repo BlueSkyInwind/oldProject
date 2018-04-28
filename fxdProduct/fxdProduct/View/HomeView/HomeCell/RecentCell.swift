@@ -11,12 +11,28 @@ import UIKit
 @objc protocol RecentCellDelegate: NSObjectProtocol {
     
     func recentMoreBtnClick()
+    func collectionBtnClick(_ sender: UIButton)
 }
 
 class RecentCell: UITableViewCell ,UITableViewDelegate,UITableViewDataSource,SuperLoanCellDelegate{
+    
+    @objc var type : String?{
+        didSet(newValue){
+            
+            setCellType(type: type!)
+        }
+    }
+    
+    //产品数据
+    @objc var homeProductListModel = FXD_HomeProductListModel()
+    var tableView : UITableView?
+    
     //SuperLoanCellDelegate  点击收藏按钮的代理方法
     func collectionBtn(_ sender: UIButton) {
 
+        if delegate != nil {
+            delegate?.collectionBtnClick(sender)
+        }
     }
     
 
@@ -36,7 +52,7 @@ class RecentCell: UITableViewCell ,UITableViewDelegate,UITableViewDataSource,Sup
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        type = "0"
         setUpUI()
     }
     required init?(coder aDecoder: NSCoder) {
@@ -106,12 +122,12 @@ extension RecentCell{
             make.right.equalTo(arrowBtn.snp.left).offset(-8)
             make.centerY.equalTo(tipView.snp.centerY)
         }
-        let tabView = UITableView()
-        tabView.isScrollEnabled = false
-        tabView.delegate = self
-        tabView.dataSource = self
-        self.addSubview(tabView)
-        tabView.snp.makeConstraints { (make) in
+        tableView = UITableView()
+        tableView?.isScrollEnabled = false
+        tableView?.delegate = self
+        tableView?.dataSource = self
+        self.addSubview(tableView!)
+        tableView?.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(0)
             make.right.equalTo(self).offset(0)
             make.top.equalTo(tipView.snp.bottom).offset(0)
@@ -124,7 +140,7 @@ extension RecentCell{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 6
+        return homeProductListModel.hotRecommend.count
         
     }
     
@@ -141,40 +157,50 @@ extension RecentCell{
         }
         
         superLoanCell?.delegate = self
-        superLoanCell?.isSelected = false
-        superLoanCell?.collectionBtn?.tag = indexPath.section
+//        superLoanCell?.isSelected = false
+        superLoanCell?.selectionStyle = .none
+        superLoanCell?.collectionBtn?.tag = indexPath.row
+
+        if homeProductListModel.hotRecommend.count <= 0 {
+            return superLoanCell!
+        }
         
         
-        let url = URL(string: "placeholderImage_Icon")
+        let model = homeProductListModel.hotRecommend[indexPath.row] as! HomeHotRecommendModel
+        superLoanCell?.type = model.moduletype
+        let url = URL(string: model.plantLogo)
         superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiImage, error, cachType, url) in
             
         })
-        superLoanCell?.titleLabel?.text = "贷嘛"
-        superLoanCell?.qutaLabel?.text = "额度:最高500元"
-        superLoanCell?.termLabel?.text = "期限:1-60月"
-//        if term != "" {
-        
+        superLoanCell?.titleLabel?.text = model.plantName
+        let maximumAmount = model.maximumAmount != nil ? model.maximumAmount : ""
+        let maximumAmountUnit = model.maximumAmountUnit != nil ? model.maximumAmountUnit : ""
+        superLoanCell?.qutaLabel?.text = "额度:最高" + maximumAmount! + maximumAmountUnit!
+        let term = model.unitStr != nil ? model.unitStr : ""
+        superLoanCell?.termLabel?.text = "期限:" + term!
+        if term != "" {
+            
             let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.termLabel?.text)!)
             attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-4))
             superLoanCell?.termLabel?.attributedText = attrstr1
-//        }
-//        let referenceRate = model.referenceRate != nil ? model.referenceRate : ""
-//        if model.referenceMode == nil {
+        }
+        let referenceRate = model.referenceRate != nil ? model.referenceRate : ""
+        if model.referenceMode == nil {
+            
+            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate!
+        }else{
+            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate! + "/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
+        }
         
-//            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate!
-//        }else{
-            superLoanCell?.feeLabel?.text = "费用:0.3%/日"
-//        }
         
-        
-//        if referenceRate != nil && model.referenceMode != nil {
-        
+        if referenceRate != nil && model.referenceMode != nil {
+            
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.feeLabel?.text)!)
             attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-4))
             superLoanCell?.feeLabel?.attributedText = attrstr
-//        }
+        }
         
-        superLoanCell?.descBtn?.setTitle("30家借款机构，0抵押当天放款", for: .normal)
+        superLoanCell?.descBtn?.setTitle(model.platformIntroduction, for: .normal)
         superLoanCell?.descBtn?.setTitleColor(UIColor.purple, for: .normal)
         superLoanCell?.descBtn?.layer.borderColor = UIColor.purple.cgColor
         
@@ -184,8 +210,7 @@ extension RecentCell{
         }
         
         superLoanCell?.lineView?.isHidden = true
-//        let str : NSString = model.platformIntroduction! as NSString
-        let str : NSString = (superLoanCell?.descBtn?.titleLabel?.text)! as NSString
+        let str : NSString = model.platformIntroduction! as NSString
         let dic = NSDictionary(object: UIFont.yx_systemFont(ofSize: 12) as Any, forKey: NSAttributedStringKey.font as NSCopying)
         let width = str.boundingRect(with: CGSize(width:_k_w,height:20), options: .usesLineFragmentOrigin, attributes:(dic as! [NSAttributedStringKey : Any]), context: nil).size.width + 20
         
@@ -194,14 +219,20 @@ extension RecentCell{
         })
         
         superLoanCell?.collectionBtn?.setImage(UIImage.init(named: "collection_icon"), for: .normal)
-//        if model.isCollect == "0" {
-//            superLoanCell?.collectionBtn?.setImage(UIImage.init(named: "collection_selected_icon"), for: .normal)
-//        }
+        if model.isCollect == "0" {
+            superLoanCell?.collectionBtn?.setImage(UIImage.init(named: "collection_selected_icon"), for: .normal)
+        }
+        
         return superLoanCell!
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let model = homeProductListModel.hotRecommend[indexPath.row] as! HomeHotRecommendModel
+        let webView = FXDWebViewController()
+        webView.urlStr = model.linkAddress
+        self.viewController?.navigationController?.pushViewController(webView, animated: true)
         
     }
 }
@@ -213,4 +244,27 @@ extension RecentCell{
             delegate?.recentMoreBtnClick()
         }
     }
+    
+    fileprivate func setCellType(type : String){
+        
+        if homeProductListModel.hotRecommend.count > 0 {
+            tableView?.reloadData()
+        }
+    }
+    
+    fileprivate func rateUnit(referenceMode : NSString) -> (NSString){
+        switch referenceMode.integerValue {
+        case 1:
+            return "日"
+        case 2:
+            return "月"
+        case 3:
+            return "年"
+        default:
+            break
+        }
+        
+        return ""
+    }
+    
 }

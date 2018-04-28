@@ -525,13 +525,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]){
-        return 3;
-    }
-    return 2;
+//    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]){
+//        return 3;
+//    }
+//    return 2;
     
 
-//    return 3;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -548,7 +548,7 @@
     
     //flag==1、3、4   85*6+30
     if (indexPath.section == 2){
-        return 85*6+30;
+        return 85*_homeProductList.hotRecommend.count+30;
     }
     
     //flag==1   _k_h-_k_w*0.44-113-113-40
@@ -635,8 +635,10 @@
      RecentCell *recentCell = [tableView dequeueReusableCellWithIdentifier:@"RecentCell"];
     [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     recentCell.backgroundColor = [UIColor whiteColor];
+    recentCell.homeProductListModel = _homeProductList;
     recentCell.delegate = self;
-    recentCell.selected = NO;
+    [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//    recentCell.selected = NO;
     return recentCell;
     
 }
@@ -1052,17 +1054,29 @@
 
 -(void)loanClick{
     
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"贷款"];
+    LoanListViewController *controller = [[LoanListViewController alloc]init];
+    controller.titleStr = @"贷款";
+    controller.moduleType = @"1";
+    [self.navigationController pushViewController:controller animated:true];
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"贷款"];
 }
 
 -(void)gameBtnClick{
     
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"游戏"];
+    LoanListViewController *controller = [[LoanListViewController alloc]init];
+    controller.titleStr = @"游戏";
+    controller.moduleType = @"2";
+    [self.navigationController pushViewController:controller animated:true];
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"游戏"];
 }
 
 -(void)tourismBtnClcik{
     
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"旅游"];
+    LoanListViewController *controller = [[LoanListViewController alloc]init];
+    controller.titleStr = @"旅游";
+    controller.moduleType = @"3";
+    [self.navigationController pushViewController:controller animated:true];
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"旅游"];
 }
 
 #pragma mark 查看更多
@@ -1071,6 +1085,45 @@
     HotRecommendationViewController *controller = [[HotRecommendationViewController alloc]init];
     [self.navigationController pushViewController:controller animated:true];
 //    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"查看更多"];
+}
+
+#pragma mark 收藏
+-(void)collectionBtnClick:(UIButton *)sender{
+    
+    HomeHotRecommendModel *model = _homeProductList.hotRecommend[sender.tag];
+    
+    CollectionViewModel *collectionVM = [[CollectionViewModel alloc]init];
+    [collectionVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            
+            
+            [self getAllTheHomePageData:^(BOOL isSuccess) {
+                if (_loadFailView) {
+                    [_loadFailView removeFromSuperview];
+                }
+                
+                if (isSuccess) {
+                    
+                    [self getHgLoanProtoolList];
+                }
+                
+                self.tableView.hidden = false;
+                if (_homeProductList == nil ) {
+                    [self setUploadFailView];
+                }
+            }];
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    
+    [collectionVM addMyCollectionInfocollectionType:model.moduletype platformId:model.id_];
+    
 }
 
 - (void)didReceiveMemoryWarning {

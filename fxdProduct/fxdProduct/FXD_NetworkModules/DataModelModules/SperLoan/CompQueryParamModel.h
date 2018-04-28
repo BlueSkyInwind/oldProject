@@ -26,5 +26,8 @@
 @property (nonatomic, strong)NSString<Optional> *minAmount;
 //筛选条件最小天数
 @property (nonatomic, strong)NSString<Optional> *minDays;
+//平台类型
+@property (nonatomic, strong)NSString<Optional> *moduleType;
+
 
 @end

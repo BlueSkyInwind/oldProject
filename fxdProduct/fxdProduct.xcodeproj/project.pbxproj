@@ -950,6 +950,8 @@
 		CC1AC8E220907A43009B5BD4 /* BankCardAuthorizationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8E020907A43009B5BD4 /* BankCardAuthorizationViewModel.m */; };
 		CC1AC8E42091B7A7009B5BD4 /* HotRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8E32091B7A7009B5BD4 /* HotRecommendationViewController.swift */; };
 		CC1AC8E52091B7A8009B5BD4 /* HotRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8E32091B7A7009B5BD4 /* HotRecommendationViewController.swift */; };
+		CC1AC8E720931E1B009B5BD4 /* LoanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8E620931E1A009B5BD4 /* LoanListViewController.swift */; };
+		CC1AC8E820931E1B009B5BD4 /* LoanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8E620931E1A009B5BD4 /* LoanListViewController.swift */; };
 		CC3BCC111FBABE7A0042A738 /* MyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */; };
 		CC3BCC121FBABE7A0042A738 /* MyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */; };
 		CC3BCC141FBABEC50042A738 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC131FBABEC50042A738 /* MessageCell.swift */; };
@@ -1985,6 +1987,7 @@
 		CC1AC8DF20907A43009B5BD4 /* BankCardAuthorizationViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankCardAuthorizationViewModel.h; sourceTree = "<group>"; };
 		CC1AC8E020907A43009B5BD4 /* BankCardAuthorizationViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BankCardAuthorizationViewModel.m; sourceTree = "<group>"; };
 		CC1AC8E32091B7A7009B5BD4 /* HotRecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotRecommendationViewController.swift; sourceTree = "<group>"; };
+		CC1AC8E620931E1A009B5BD4 /* LoanListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListViewController.swift; sourceTree = "<group>"; };
 		CC3197961ED926B90083F263 /* RefuseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefuseView.xib; sourceTree = "<group>"; };
 		CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageViewController.swift; sourceTree = "<group>"; };
 		CC3BCC131FBABEC50042A738 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
@@ -4489,6 +4492,7 @@
 				CC80DFEB206A4924000F9BAC /* FXD_SuperLoanViewController.m */,
 				CC4F062B207C557E0030A12A /* RecentViewController.swift */,
 				CC1AC8E32091B7A7009B5BD4 /* HotRecommendationViewController.swift */,
+				CC1AC8E620931E1A009B5BD4 /* LoanListViewController.swift */,
 			);
 			name = "SuperLoanModule - 贷超模块";
 			path = "fxdProduct/Modules/SuperLoanModules - 贷超模块";
@@ -5080,6 +5084,7 @@
 				846D58CD20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */,
 				84C61A091FA81F2A00626411 /* BankCardNameVCModules.m in Sources */,
 				84C619BF1FA815EB00626411 /* LoanPaymentDetailVCModule.m in Sources */,
+				CC1AC8E720931E1B009B5BD4 /* LoanListViewController.swift in Sources */,
 				84C619C01FA815EB00626411 /* LoanPeriodListVCModule.m in Sources */,
 				84C619C21FA815EB00626411 /* UserBankCardListVCModule.m in Sources */,
 				84C619C31FA815EB00626411 /* BankListCell.m in Sources */,
@@ -5541,6 +5546,7 @@
 				846D58CE20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */,
 				842D9CEA206B832F0020C3C2 /* IDCardUploadParam.m in Sources */,
 				84C61A141FA828F000626411 /* FindPassViewController.m in Sources */,
+				CC1AC8E820931E1B009B5BD4 /* LoanListViewController.swift in Sources */,
 				84C61A0F1FA8243200626411 /* FXD_LaunchConfiguration.m in Sources */,
 				84C619E41FA8173D00626411 /* BankCardNameVCModules.m in Sources */,
 				84C619CA1FA8161F00626411 /* LoanPeriodForDetailsVCModule.m in Sources */,

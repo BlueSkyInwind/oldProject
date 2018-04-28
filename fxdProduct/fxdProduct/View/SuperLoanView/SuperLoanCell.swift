@@ -165,7 +165,7 @@ extension SuperLoanCell{
         })
         
         lineView = UIView()
-        lineView?.backgroundColor = TERM_COLOR
+        lineView?.backgroundColor = LINE_COLOR
         lineView?.isHidden = false
         self.contentView.addSubview(lineView!)
         lineView?.snp.makeConstraints { (make) in
@@ -230,7 +230,7 @@ extension SuperLoanCell{
         })
         
         lineView = UIView()
-        lineView?.backgroundColor = TERM_COLOR
+        lineView?.backgroundColor = LINE_COLOR
         lineView?.isHidden = false
         self.contentView.addSubview(lineView!)
         lineView?.snp.makeConstraints { (make) in
