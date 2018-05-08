@@ -31,6 +31,7 @@
                             <subviews>
                                 <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="您的手机号码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pde-kc-VXu">
                                     <rect key="frame" x="58" y="6" width="315" height="35"/>
+                                    <color key="textColor" red="0.83137254901960778" green="0.6705882352941176" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 </textField>
