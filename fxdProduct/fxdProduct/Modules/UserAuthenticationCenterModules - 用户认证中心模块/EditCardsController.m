@@ -29,7 +29,10 @@
     //    NSDictionary *_createBankDict;
     //原卡号
     NSString *_currentCardNum;
+    //截止时间
     NSString *_cutOffDate;
+    //安全码
+    NSString *_securityCode;
     NSInteger _cardFlag;
     NSMutableArray * supportBankListArr;
     BOOL _btnStatus;
@@ -185,6 +188,7 @@
         cell.contentTextField.tag=1004;
         cell.contentTextField.delegate=self;
         cell.contentTextField.keyboardType=UIKeyboardTypeNumberPad;
+        cell.contentTextField.text = _securityCode != nil ? _cutOffDate : @"";
         cell.titleLabel.text=@"信用卡安全码";
         cell.arrowsImageBtn.hidden = YES;
     } else if(indexPath.row== 3)
@@ -449,6 +453,9 @@
     [array addObject:self.intNum];
     [array addObject:self.reservedTel];
     [array addObject:self.verCode];
+    [array addObject:_securityCode];
+    [array addObject:_cutOffDate];
+    [array addObject:@"请求类型"];
     return array;
 }
 

@@ -15,7 +15,7 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
     var dataArray : NSMutableArray?
     var footBtn : UIButton?
     var supportBankListArray : NSMutableArray?
-    
+    @objc var requestType:String?
     var cardCode : NSString?
     var cardFlag : Int?
     @objc var type = "0"
@@ -156,6 +156,7 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         controller.telNum = (dataArray?[2] as! String)
         controller.bankCode = (dataArray?[3] as! String)
         controller.bankShortName = (dataArray?[4] as! String)
+        controller.requestType = requestType
         self.navigationController?.pushViewController(controller, animated: true)
        
         

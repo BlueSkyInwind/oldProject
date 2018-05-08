@@ -12,12 +12,12 @@
 #import "BankCardAuthorizationModel.h"
 @implementation BankCardAuthorizationViewModel
 
--(void)cardAuthauthCodeListArr:(NSArray *)authCodeListArr smsCodeArray:(NSArray *)smsCodeArray bankCode:(NSString *)bankCode cardNo:(NSString *)cardNo phone:(NSString *)phone{
+-(void)cardAuthauthCodeListArr:(NSArray *)authCodeListArr smsCodeArray:(NSArray *)smsCodeArray bankCode:(NSString *)bankCode cardNo:(NSString *)cardNo phone:(NSString *)phone requestType:(NSString *)requestType{
 
     NSMutableArray *arr = [NSMutableArray arrayWithCapacity:100];
     for (int i = 0; i<authCodeListArr.count; i++) {
         BankCardAuthorizationAuthListModel *model = (BankCardAuthorizationAuthListModel *)authCodeListArr[i];
-        NSDictionary *modelDic = @{@"authPlatCode":model.authPlatCode,@"authSmsCode":smsCodeArray[i]};
+        NSDictionary *modelDic = @{@"authPlatCode":model.authPlatCode,@"authSmsCode":smsCodeArray[i],@"requestType":requestType};
         [arr addObject:modelDic];
     }
     NSDictionary *dic = @{@"authCodeList":arr, @"bankCode":bankCode,@"cardNo":cardNo,@"phone":phone};

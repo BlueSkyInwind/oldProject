@@ -301,10 +301,20 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
             complianceJump()
         }else{
             
-            requestWithDraw((self.selectedCard?.cardId)!) { (isSuccess) in
-                if isSuccess {
-                    self.navigationController?.popToRootViewController(animated: true)
+            let isShouQuan = false
+            
+            if isShouQuan{
+                
+                requestWithDraw((self.selectedCard?.cardId)!) { (isSuccess) in
+                    if isSuccess {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
                 }
+            }else{
+                
+                let controller = BillingMessageViewController()
+                controller.requestType = "2"
+                self.navigationController?.pushViewController(controller, animated: true)
             }
         }
     }
@@ -345,6 +355,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         
         let controller = BillingMessageViewController()
         controller.type = "1";
+        controller.requestType = "2"
         self.navigationController?.pushViewController(controller, animated: true)
         
 //        let editCard = EditCardsController.init(nibName: "EditCardsController", bundle: nil)

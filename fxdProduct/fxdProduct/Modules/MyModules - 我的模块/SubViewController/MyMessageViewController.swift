@@ -233,6 +233,12 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        
+//        let controller = BillingMessageViewController()
+//        controller.requestType = "1"
+//        controller.type = "1"
+//        self.navigationController?.pushViewController(controller, animated: true)
+        
         let webView = FXDWebViewController()
         webView.urlStr = (messageModel?.requestUrl)! + items[indexPath.row - 1].id_
         self.navigationController?.pushViewController(webView, animated: true)

@@ -346,7 +346,10 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                    MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+                    VideoVerifyViewController *myMessageVC=[[VideoVerifyViewController alloc]init];
+                    myMessageVC.displaystr = @"视频";
+                    myMessageVC.RecordsTimeMax = 6;
+//                    MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
                     [self.navigationController pushViewController:myMessageVC animated:true];
                 }
                     break;

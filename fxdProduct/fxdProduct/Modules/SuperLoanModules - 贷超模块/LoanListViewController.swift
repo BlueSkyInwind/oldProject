@@ -295,11 +295,12 @@ extension LoanListViewController{
             superLoanHeaderCell?.sortImageBtn?.setImage(UIImage.init(named: "sort_selected_icon"), for: .normal)
             
             UIView.animate(withDuration: 1) {
-                self.sortView = SortView.init(frame: CGRect(x:0,y:105,width:_k_w,height:_k_h-105))
+                self.sortView = SortView.init(frame: CGRect(x:0,y:108,width:_k_w,height:_k_h-108))
                 self.sortView?.delegate = self
                 self.sortView?.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.7)
                 self.sortView?.index = self._index!
                 self.view.addSubview(self.sortView!)
+                self.tableView?.isScrollEnabled = false
             }
             
         }else{
@@ -308,6 +309,7 @@ extension LoanListViewController{
             superLoanHeaderCell?.sortImageBtn?.setImage(UIImage.init(named: "sort_icon"), for: .normal)
             UIView.animate(withDuration: 1) {
                 self.sortView?.removeFromSuperview()
+                self.tableView?.isScrollEnabled = true
             }
         }
     }
@@ -337,10 +339,11 @@ extension LoanListViewController{
             superLoanHeaderCell?.filterImageBtn?.setImage(UIImage.init(named: "filter_selected_icon"), for: .normal)
             
             UIView.animate(withDuration: 1) {
-                self.filterView = FilterView.init(frame: CGRect(x:0,y:105,width:_k_w,height:_k_h-105))
+                self.filterView = FilterView.init(frame: CGRect(x:0,y:108,width:_k_w,height:_k_h-108))
                 self.filterView?.delegate = self
                 self.filterView?.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.7)
                 self.view.addSubview(self.filterView!)
+                self.tableView?.isScrollEnabled = false
             }
             
         }else{
@@ -349,6 +352,7 @@ extension LoanListViewController{
             superLoanHeaderCell?.filterImageBtn?.setImage(UIImage.init(named: "filter_icon"), for: .normal)
             UIView.animate(withDuration: 1) {
                 self.filterView?.removeFromSuperview()
+                self.tableView?.isScrollEnabled = true
             }
         }
         

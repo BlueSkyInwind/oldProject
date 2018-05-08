@@ -525,13 +525,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-//    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]){
-//        return 3;
-//    }
-//    return 2;
+    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]){
+        return 3;
+    }
+    return 2;
     
 
-    return 3;
+//    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -623,8 +623,8 @@
         homeCell.homeProductListModel = _homeProductList;
         if (_homeProductList != nil) {
             
-//            homeCell.type = _homeProductList.flag;
-            homeCell.type = @"1";
+            homeCell.type = _homeProductList.flag;
+//            homeCell.type = @"1";
             homeCell.protocolArray = _protocolArray;
             
         }
@@ -784,31 +784,31 @@
  */
 -(void)loanBtnClick{
     
-//    //isComplete  基础资料是否完整
-//    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"1"]) {
+    //isComplete  基础资料是否完整
+    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"1"]) {
+
+        FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
+        loanApplicationVC.productId = _homeProductList.productId;
+        [self.navigationController pushViewController:loanApplicationVC animated:true];
+    }else{
+
+        NSMutableString *content = [[NSMutableString alloc]initWithCapacity:100] ;
+        for (int i = 0; i<_homeProductList.drawInfo.tipsContent.count; i++) {
+            [content appendString:_homeProductList.drawInfo.tipsContent[i]];
+            if (i != _homeProductList.drawInfo.tipsContent.count-1) {
+                [content appendString:@"\n"];
+            }
+        }
+        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:_homeProductList.drawInfo.tipsTitle content:content attributeDic:nil TextAlignment:NSTextAlignmentLeft cancelTitle:@"取消" sureTitle:@"前去更新" compleBlock:^(NSInteger index) {
+            if (index == 1) {
+                UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]init];
+                [self.navigationController pushViewController:controller animated:true];
+            }
+        }];
+    }
 //
-//        FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
-//        loanApplicationVC.productId = _homeProductList.productId;
-//        [self.navigationController pushViewController:loanApplicationVC animated:true];
-//    }else{
-//
-//        NSMutableString *content = [[NSMutableString alloc]initWithCapacity:100] ;
-//        for (int i = 0; i<_homeProductList.drawInfo.tipsContent.count; i++) {
-//            [content appendString:_homeProductList.drawInfo.tipsContent[i]];
-//            if (i != _homeProductList.drawInfo.tipsContent.count-1) {
-//                [content appendString:@"\n"];
-//            }
-//        }
-//        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:_homeProductList.drawInfo.tipsTitle content:content attributeDic:nil TextAlignment:NSTextAlignmentLeft cancelTitle:@"取消" sureTitle:@"前去更新" compleBlock:^(NSInteger index) {
-//            if (index == 1) {
-//                UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]init];
-//                [self.navigationController pushViewController:controller animated:true];
-//            }
-//        }];
-//    }
-//    
-    HotRecommendationViewController *controller = [[HotRecommendationViewController alloc]init];
-    [self.navigationController pushViewController:controller animated:true];
+//    HotRecommendationViewController *controller = [[HotRecommendationViewController alloc]init];
+//    [self.navigationController pushViewController:controller animated:true];
     //收款信息
 //    BillingMessageViewController * controller = [[BillingMessageViewController alloc]init];
 //    [self.navigationController pushViewController:controller animated:true];

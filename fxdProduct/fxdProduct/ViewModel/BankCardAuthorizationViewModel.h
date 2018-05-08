@@ -11,7 +11,7 @@
 @interface BankCardAuthorizationViewModel : FXD_ViewModelBaseClass
 
 //银行卡授权接口
--(void)cardAuthauthCodeListArr:(NSArray *)authCodeListArr smsCodeArray:(NSArray *)smsCodeArray bankCode:(NSString *)bankCode cardNo:(NSString *)cardNo phone:(NSString *)phone;
+-(void)cardAuthauthCodeListArr:(NSArray *)authCodeListArr smsCodeArray:(NSArray *)smsCodeArray bankCode:(NSString *)bankCode cardNo:(NSString *)cardNo phone:(NSString *)phone requestType:(NSString *)requestType;
 
 //银行卡授权短信发送
 -(void)cardAuthSmsSendAuthPlatCode:(NSString *)authPlatCode bankCode:(NSString *)bankCode cardNo:(NSString *)cardNo phone:(NSString *)phone;

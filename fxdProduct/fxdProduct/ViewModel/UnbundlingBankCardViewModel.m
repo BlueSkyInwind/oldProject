@@ -18,6 +18,9 @@
     saveAccountBankCardParamModel.card_no_ = paramArray[2];
     saveAccountBankCardParamModel.bank_reserve_phone_ = paramArray[3];
     saveAccountBankCardParamModel.verify_code_ = paramArray[4];
+    saveAccountBankCardParamModel.card_cvv2_ = paramArray[5];
+    saveAccountBankCardParamModel.card_date_ = paramArray[6];
+    saveAccountBankCardParamModel.reques_type_ = paramArray[7];
     
     NSDictionary *paramDic = [saveAccountBankCardParamModel toDictionary];
 

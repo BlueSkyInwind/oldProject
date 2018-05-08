@@ -406,6 +406,7 @@
             
             BillingMessageViewController *controller=[[BillingMessageViewController alloc]init];
             controller.type = @"1";
+            controller.requestType = @"1";
             [self.navigationController pushViewController:controller animated:true];
             //此处需要一个返回默认卡的接口
 //            [self getGatheringInformation_jhtml:^(CardInfo *cardInfo) {

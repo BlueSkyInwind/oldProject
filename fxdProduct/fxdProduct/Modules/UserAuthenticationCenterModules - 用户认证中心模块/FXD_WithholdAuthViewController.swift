@@ -13,7 +13,7 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
     var tableView:UITableView?
     var contentTableViewCell:ContentTableViewCell?
     let titleArr = [["所属银行:","卡号:","预留手机号:"],["新颜授权码:","银生宝授权码:"]]
-    
+    @objc var requestType:String?
     var bankName:String?
     var cardNum:String?
     var telNum:String?
@@ -56,6 +56,8 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
         super.viewWillAppear(animated)
         getInfo()
     }
+    
+    //MARK: 银行卡授权查询页面
     func getInfo(){
         let bankCardAuthorizationVM = BankCardAuthorizationViewModel()
         bankCardAuthorizationVM.setBlockWithReturn({ (returnValue) in
@@ -88,6 +90,11 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
                 
+                //银行卡授权成功跳回页面
+                let count = self.rt_navigationController.rt_viewControllers.count
+                let controller = self.rt_navigationController.rt_viewControllers[count - 3]
+                self.navigationController?.popToViewController(controller, animated: true)
+        
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
@@ -95,7 +102,7 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
             
         }
         
-        bankCardAuthorizationVM.cardAuthauthCodeListArr(bankCardQueryArray as! [Any], smsCodeArray: smsCodeArray as! [Any] , bankCode: bankCode, cardNo: cardNum, phone: telNum)
+        bankCardAuthorizationVM.cardAuthauthCodeListArr(bankCardQueryArray as! [Any], smsCodeArray: smsCodeArray as! [Any] , bankCode: bankCode, cardNo: cardNum, phone: telNum, requestType: requestType)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

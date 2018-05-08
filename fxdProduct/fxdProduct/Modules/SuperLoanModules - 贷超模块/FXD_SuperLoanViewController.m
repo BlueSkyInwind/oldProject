@@ -163,6 +163,23 @@
     [super viewWillAppear:animated];
 //    [self getDataMaxAmount:@"10000" maxDays:@"25" minAmount:@"100" minDays:@"3" offset:@"0" order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
     
+    if (_filterView) {
+        [_filterView removeFromSuperview];
+    }
+    if (_sortView) {
+        [_sortView removeFromSuperview];
+    }
+    
+    _superLoanHeaderCell.sortBtn.selected = NO;
+    _superLoanHeaderCell.sortImageBtn.selected = NO;
+    [_superLoanHeaderCell.sortBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
+    [_superLoanHeaderCell.sortImageBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
+    
+    _superLoanHeaderCell.filterBtn.selected = NO;
+    _superLoanHeaderCell.filterImageBtn.selected = NO;
+    [_superLoanHeaderCell.filterBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
+    [_superLoanHeaderCell.filterImageBtn setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
+    
     [self getRecentData];
     
     [self hotRecommendData];
@@ -395,11 +412,12 @@
         [_superLoanHeaderCell.sortImageBtn setImage:[UIImage imageNamed:@"sort_selected_icon"] forState:UIControlStateNormal];
         
         [UIView animateWithDuration:1 animations:^{
-            _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 360, _k_w, _k_h-360)];
+            _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 360-self.tableView.contentOffset.y, _k_w, _k_h)];
             _sortView.delegate = self;
             _sortView.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7];
             _sortView.index = _index;
             [self.view addSubview:_sortView];
+            self.tableView.scrollEnabled = false;
         }];
         
     }else{
@@ -408,6 +426,7 @@
         [_superLoanHeaderCell.sortImageBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
         [UIView animateWithDuration:1 animations:^{
             [_sortView removeFromSuperview];
+            self.tableView.scrollEnabled = true;
             
         }];
     }
@@ -437,10 +456,11 @@
         [_superLoanHeaderCell.filterBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
         [_superLoanHeaderCell.filterImageBtn setImage:[UIImage imageNamed:@"filter_selected_icon"] forState:UIControlStateNormal];
         [UIView animateWithDuration:1 animations:^{
-            _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 360, _k_w, _k_h - 360)];
+            _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 360-self.tableView.contentOffset.y, _k_w, _k_h)];
             _filterView.delegate = self;
             _filterView.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7];
             [self.view addSubview:_filterView];
+            self.tableView.scrollEnabled = false;
         }];
         
     }else{
@@ -449,6 +469,7 @@
         [_superLoanHeaderCell.filterImageBtn setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
         [UIView animateWithDuration:1 animations:^{
             [_filterView removeFromSuperview];
+            self.tableView.scrollEnabled = true;
             
         }];
     }
