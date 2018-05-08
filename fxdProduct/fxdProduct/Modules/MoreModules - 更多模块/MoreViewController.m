@@ -52,8 +52,8 @@
 
     self.title = @"设置";
     [self addBackItem];
-  imgAry=@[@"7_gd_icon_04",@"7_gd_icon_05",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09",@"changeP_icon"];
-    titleAry=@[@"关于我们",@"常见问题",@"意见反馈",@"给个好评",@"客服热线",@"修改密码"];
+  imgAry=@[@"7_gd_icon_04",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09",@"changeP_icon"];
+    titleAry=@[@"关于我们",@"意见反馈",@"给个好评",@"客服热线",@"修改密码"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [_MyTabView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     [_MyTabView registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"moreFunction"];
@@ -162,9 +162,6 @@
 //            [self.navigationController pushViewController:aboutUs animated:YES];
         }
         else if(indexPath.row==1){
-            [self obtainQuestionWebUrl:@"10"];
-        }
-        else if(indexPath.row==2){
             if ([FXD_Utility sharedUtility].loginFlage) {
                 ideaBack=[[IdeaBackViewController alloc]initWithNibName:@"IdeaBackViewController" bundle:nil];
                 [self.navigationController pushViewController:ideaBack animated:YES];
@@ -172,7 +169,7 @@
                 [self presentLogin:self];
             }
         }
-        else if(indexPath.row==3){
+        else if(indexPath.row==2){
             
             UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"欢迎给出评价!" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -186,7 +183,7 @@
             [self presentViewController:alertView animated:YES completion:nil];
             
         }
-        else if(indexPath.row==4){
+        else if(indexPath.row==3){
             UIAlertController *actionSheett = [UIAlertController alertControllerWithTitle:@"热线服务时间:9:00-17:30(工作日)" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
             UIAlertAction *teleAction = [UIAlertAction actionWithTitle:@"4008-678-655" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", @"4008-678-655"]];
@@ -197,7 +194,7 @@
             [actionSheett addAction:cancelAction];
             [self presentViewController:actionSheett animated:YES completion:nil];
         }
-        else if(indexPath.row==5){
+        else if(indexPath.row==4){
             
             if ([FXD_Utility sharedUtility].loginFlage) {
                 ChangePasswordViewController *   changePassVC =[[ChangePasswordViewController alloc]init];

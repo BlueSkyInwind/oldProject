@@ -196,33 +196,33 @@
         make.width.equalTo(@150);
     }];
     
-    UILabel *prometLabel=[[UILabel alloc]init];
-    prometLabel.numberOfLines = 0;
-    prometLabel.text = @"邀请好友，可领优惠券";
-    prometLabel.textAlignment = NSTextAlignmentCenter;
-    prometLabel.font = [UIFont systemFontOfSize:20];
-    prometLabel.textColor = kUIColorFromRGB(0x00AAEE);
-    [NoneView addSubview:prometLabel];
-    [prometLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lblNone.mas_bottom).with.offset(50);
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.height.equalTo(@30);
-        make.width.equalTo(@250);
-    }];
-    
-    UIButton * invationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [invationBtn setTitle:@"立即邀请" forState:UIControlStateNormal];
-    invationBtn.titleLabel.font = [UIFont systemFontOfSize:18];
-    [invationBtn setTitleColor:kUIColorFromRGB(0x00AAee) forState:UIControlStateNormal];
-    [FXD_Tool setCorner:invationBtn borderColor:kUIColorFromRGB(0x00AAee)];
-    [invationBtn addTarget:self action:@selector(pushInvationFriend) forControlEvents:UIControlEventTouchUpInside];
-    [NoneView addSubview:invationBtn];
-    [invationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(prometLabel.mas_bottom).with.offset(30);
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.height.equalTo(@40);
-        make.width.equalTo(@130);
-    }];
+//    UILabel *prometLabel=[[UILabel alloc]init];
+//    prometLabel.numberOfLines = 0;
+//    prometLabel.text = @"邀请好友，可领优惠券";
+//    prometLabel.textAlignment = NSTextAlignmentCenter;
+//    prometLabel.font = [UIFont systemFontOfSize:20];
+//    prometLabel.textColor = kUIColorFromRGB(0x00AAEE);
+//    [NoneView addSubview:prometLabel];
+//    [prometLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(lblNone.mas_bottom).with.offset(50);
+//        make.centerX.equalTo(self.view.mas_centerX);
+//        make.height.equalTo(@30);
+//        make.width.equalTo(@250);
+//    }];
+//    
+//    UIButton * invationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [invationBtn setTitle:@"立即邀请" forState:UIControlStateNormal];
+//    invationBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+//    [invationBtn setTitleColor:kUIColorFromRGB(0x00AAee) forState:UIControlStateNormal];
+//    [FXD_Tool setCorner:invationBtn borderColor:kUIColorFromRGB(0x00AAee)];
+//    [invationBtn addTarget:self action:@selector(pushInvationFriend) forControlEvents:UIControlEventTouchUpInside];
+//    [NoneView addSubview:invationBtn];
+//    [invationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(prometLabel.mas_bottom).with.offset(30);
+//        make.centerX.equalTo(self.view.mas_centerX);
+//        make.height.equalTo(@40);
+//        make.width.equalTo(@130);
+//    }];
 }
 
 #pragma mark 初始化底部视图
