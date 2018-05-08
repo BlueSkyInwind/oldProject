@@ -2750,8 +2750,8 @@
 				63E076531B67114800E269F2 /* FXD_NetworkModules */,
 				636EE32A1B662E5C00A1A3ED /* Third */,
 				63ED33301B6B4472008B6085 /* Modules */,
-				636B1B941C2D113C00450358 /* ViewModel */,
 				6313DC161BB3F07B00EB45DE /* Images.xcassets */,
+				636B1B941C2D113C00450358 /* ViewModel */,
 				636EE3001B662ABB00A1A3ED /* Supporting Files */,
 			);
 			path = fxdProduct;

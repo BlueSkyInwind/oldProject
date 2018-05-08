@@ -49,7 +49,8 @@ extension SuperLoanNoneCell{
         bgView.addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
             make.centerX.equalTo(bgView.snp.centerX)
-            make.centerY.equalTo(bgView.snp.centerY)
+            make.top.equalTo(bgView.snp.top).offset(40)
+//            make.centerY.equalTo(bgView.snp.centerY)
             make.height.equalTo(127)
             make.width.equalTo(86)
         }

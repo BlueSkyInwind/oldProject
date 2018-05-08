@@ -161,7 +161,6 @@
 -(void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
-//    [self getDataMaxAmount:@"10000" maxDays:@"25" minAmount:@"100" minDays:@"3" offset:@"0" order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
     
     if (_filterView) {
         [_filterView removeFromSuperview];
@@ -520,8 +519,6 @@
 }
 
 -(void)sureBtnClick:(NSString *)minLoanMoney maxLoanMoney:(NSString *)maxLoanMoney minLoanPeriod:(NSString *)minLoanPeriod maxLoanPeriod:(NSString *)maxLoanPeriod{
-    
-    
     
     
     [_superLoanHeaderCell.filterBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];

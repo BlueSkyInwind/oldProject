@@ -101,7 +101,6 @@ extension SDCycleScrollCell{
         })
         
         loanBtnImage = UIButton()
-//        loanBtnImage?.setImage(UIImage.init(named: "loan_icon"), for: .normal)
         loanBtnImage?.addTarget(self, action: #selector(loanBtnClick), for: .touchUpInside)
         self.addSubview(loanBtnImage!)
         loanBtnImage?.snp.makeConstraints { (make) in
@@ -110,18 +109,16 @@ extension SDCycleScrollCell{
         }
         
         loanBtn = UIButton()
-//        loanBtn?.setTitle("贷款", for: .normal)
         loanBtn?.setTitleColor(RedPacket_COLOR, for: .normal)
         loanBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 14)
         loanBtn?.addTarget(self, action: #selector(loanBtnClick), for: .touchUpInside)
         self.addSubview(loanBtn!)
         loanBtn?.snp.makeConstraints { (make) in
             make.left.equalTo((loanBtnImage?.snp.left)!).offset(0)
-            make.top.equalTo((loanBtnImage?.snp.bottom)!).offset(5)
+            make.top.equalTo((loanBtnImage?.snp.bottom)!).offset(0)
         }
         
         gameBtnImage = UIButton()
-//        gameBtnImage?.setImage(UIImage.init(named: "game_icon"), for: .normal)
         gameBtnImage?.addTarget(self, action: #selector(gameBtnClick), for: .touchUpInside)
         self.addSubview(gameBtnImage!)
         gameBtnImage?.snp.makeConstraints { (make) in
@@ -130,18 +127,16 @@ extension SDCycleScrollCell{
         }
         
         gameBtn = UIButton()
-//        gameBtn?.setTitle("游戏", for: .normal)
         gameBtn?.setTitleColor(RedPacket_COLOR, for: .normal)
         gameBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 14)
         gameBtn?.addTarget(self, action: #selector(gameBtnClick), for: .touchUpInside)
         self.addSubview(gameBtn!)
         gameBtn?.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo((gameBtnImage?.snp.bottom)!).offset(5)
+            make.top.equalTo((gameBtnImage?.snp.bottom)!).offset(0)
         }
         
         tourismBtnImage = UIButton()
-//        tourismBtnImage?.setImage(UIImage.init(named: "tourism_icon"), for: .normal)
         tourismBtnImage?.addTarget(self, action: #selector(tourismBtnClcik), for: .touchUpInside)
         self.addSubview(tourismBtnImage!)
         tourismBtnImage?.snp.makeConstraints { (make) in
@@ -150,18 +145,14 @@ extension SDCycleScrollCell{
         }
         
         tourismBtn = UIButton()
-//        tourismBtn?.setTitle("旅游", for: .normal)
         tourismBtn?.setTitleColor(RedPacket_COLOR, for: .normal)
         tourismBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 14)
         tourismBtn?.addTarget(self, action: #selector(tourismBtnClcik), for: .touchUpInside)
         self.addSubview(tourismBtn!)
         tourismBtn?.snp.makeConstraints { (make) in
             make.right.equalTo((tourismBtnImage?.snp.right)!).offset(0)
-            make.top.equalTo((tourismBtnImage?.snp.bottom)!).offset(5)
+            make.top.equalTo((tourismBtnImage?.snp.bottom)!).offset(0)
         }
-        
-        
-        
     }
 }
 

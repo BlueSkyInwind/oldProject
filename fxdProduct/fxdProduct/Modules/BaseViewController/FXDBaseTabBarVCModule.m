@@ -37,7 +37,7 @@
 //    [self.navigationController pushViewController:loanApplicationVC animated:true];
     
     NSArray *vcNameArr = @[@"FXD_HomePageVCModules",@"FXD_SuperLoanViewController",@"MyViewController"];
-    NSArray *titleArr = @[@"首页",@"贷超",@"我的"];
+    NSArray *titleArr = @[@"首页",@"发现",@"我的"];
     NSArray *imageArr = @[@"home_tab_default",@"superLoan_tab_default",@"mine_tab_default"];
     NSArray *seleteimageArr = @[@"home_tab_select",@"superLoan_tab_select",@"mine_tab_select"];
     

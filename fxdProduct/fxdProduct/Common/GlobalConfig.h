@@ -43,7 +43,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 #define UI_IS_IPAD           ([[UIScreen mainScreen] bounds].size.height == 768.0)
 
-#define UI_MAIN_COLOR [UIColor colorWithRed:0/255.0 green:170/255.0 blue:238/255.0 alpha:1]
+#define UI_MAIN_COLOR [UIColor colorWithRed:212/255.0 green:171/255.0 blue:68/255.0 alpha:1]
 
 #define KCharacterNumber @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 

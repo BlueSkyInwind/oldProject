@@ -76,7 +76,7 @@
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
-    self.navigationItem.title = @"发薪贷";
+    self.navigationItem.title = @"憨分";
     _count = 0;
     _dataArray = [NSMutableArray array];
     _protocolArray = [NSMutableArray array];
@@ -524,9 +524,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    //7、8、9、10、13、14、15
     
-    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]){
-        return 3;
+//    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]){
+//        return 3;
+//    }
+    
+    if (_homeProductList == nil) {
+        return 0;
     }
     return 2;
     
@@ -543,34 +548,39 @@
 {
 
     if (indexPath.section == 0) {
-        return 113;
+        return 103;
     }
+    
+    if ([_homeProductList.flag isEqualToString:@"7"] ||[_homeProductList.flag isEqualToString:@"8"] ||[_homeProductList.flag isEqualToString:@"9"] ||[_homeProductList.flag isEqualToString:@"10"] ||[_homeProductList.flag isEqualToString:@"13"] ||[_homeProductList.flag isEqualToString:@"14"]||[_homeProductList.flag isEqualToString:@"15"]) {
+        
+        return _k_h-_k_w*0.44-113-113;
+    }
+    
+    return 85*_homeProductList.hotRecommend.count+30;
     
     //flag==1、3、4   85*6+30
-    if (indexPath.section == 2){
-        return 85*_homeProductList.hotRecommend.count+30;
-    }
-    
-    //flag==1   _k_h-_k_w*0.44-113-113-40
-    //flag==3、4 _k_h-_k_w*0.44-113-113-120
-//    if (indexPath.section == 1){
-//        return _k_h-_k_w*0.44-113-113-120;
+//    if (indexPath.section == 2){
+//        return 85*_homeProductList.hotRecommend.count+30;
 //    }
-    if ([_homeProductList.flag isEqualToString:@"7"] || [_homeProductList.flag isEqualToString:@"14"]) {
-        return _k_h-_k_w*0.44-113+110-113;
-    }
-    if ([_homeProductList.flag isEqualToString:@"1"]) {
-        return _k_h-_k_w*0.44-113-113-40;
-    }
-    if ([_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]) {
-        _k_h-_k_w*0.44-113-113-120;
-    }
-    return _k_h-_k_w*0.44-113-113;
+//
+//    if ([_homeProductList.flag isEqualToString:@"7"] || [_homeProductList.flag isEqualToString:@"14"]) {
+//        return _k_h-_k_w*0.44-113+110-113;
+//    }
+//    if ([_homeProductList.flag isEqualToString:@"1"]) {
+//        return _k_h-_k_w*0.44-113-113-40;
+//    }
+//    if ([_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]) {
+//        _k_h-_k_w*0.44-113-113-120;
+//    }
+//    return _k_h-_k_w*0.44-113-113;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 5.0f;
+    if (section == 1) {
+        return 5.0f;
+    }
+    return 0.0f;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -613,7 +623,7 @@
         sdcycleScrollCell.sdCycleScrollview.titlesGroup = _homeProductList.paidList;
         return sdcycleScrollCell;
         
-    }else if (indexPath.section == 1){
+    }else if ([_homeProductList.flag isEqualToString:@"7"] ||[_homeProductList.flag isEqualToString:@"8"] ||[_homeProductList.flag isEqualToString:@"9"] ||[_homeProductList.flag isEqualToString:@"10"] ||[_homeProductList.flag isEqualToString:@"13"] ||[_homeProductList.flag isEqualToString:@"14"]||[_homeProductList.flag isEqualToString:@"15"]){
         
         HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
         [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -624,7 +634,6 @@
         if (_homeProductList != nil) {
             
             homeCell.type = _homeProductList.flag;
-//            homeCell.type = @"1";
             homeCell.protocolArray = _protocolArray;
             
         }
@@ -638,7 +647,6 @@
     recentCell.homeProductListModel = _homeProductList;
     recentCell.delegate = self;
     [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//    recentCell.selected = NO;
     return recentCell;
     
 }

@@ -43,8 +43,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    titleAry=@[@"我的消息",@"收藏",@"我的银行卡",@"借还记录",@"提额中心",@"邀请好友",@"更多"];
-    imgAry=@[@"message",@"6_my_icon_2",@"6_my_icon_05",@"6_my_icon_03",@"quota_icon",@"6_my_icon_11",@"icon_my_setup"];
+    titleAry=@[@"我的消息",@"收藏",@"我的银行卡",@"提额中心",@"更多"];
+    imgAry=@[@"message",@"6_my_icon_2",@"6_my_icon_05",@"quota_icon",@"icon_my_setup"];
     if (@available(iOS 11.0, *)) {
         self.MyViewTable.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
     }else{
@@ -253,9 +253,9 @@
         return 2;
     }
     if (section == 1) {
-        return 3;
+        return 2;
     }
-    return 2;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -293,7 +293,7 @@
         index = indexPath.row + 2;
     }
     if (indexPath.section == 2) {
-        index = indexPath.row + 5;
+        index = indexPath.row + 4;
     }
     
     bCell.lblTitle.text=titleAry[index];
@@ -346,10 +346,7 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                    VideoVerifyViewController *myMessageVC=[[VideoVerifyViewController alloc]init];
-                    myMessageVC.displaystr = @"视频";
-                    myMessageVC.RecordsTimeMax = 6;
-//                    MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+                    MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
                     [self.navigationController pushViewController:myMessageVC animated:true];
                 }
                     break;
@@ -373,12 +370,6 @@
                     break;
                 case 1:
                     {
-                        RepayRecordController *repayRecord=[[RepayRecordController alloc]initWithNibName:@"RepayRecordController" bundle:nil];
-                        [self.navigationController pushViewController:repayRecord animated:true];
-                    }
-                    break;
-                case 2:
-                    {
                         FXD_IncreaseAmountLimitViewController *increaseAmountLimit=[[FXD_IncreaseAmountLimitViewController alloc]init];
                         [self.navigationController pushViewController:increaseAmountLimit animated:YES];
                     }
@@ -391,12 +382,6 @@
         case 2:
             switch (indexPath.row) {
                 case 0:
-                    {
-                        InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
-                        [self.navigationController pushViewController:invitationVC animated:true];
-                    }
-                    break;
-                case 1:
                     {
                         MoreViewController *ticket=[[MoreViewController alloc]init];
                         [self.navigationController pushViewController:ticket animated:YES];
