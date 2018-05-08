@@ -428,7 +428,6 @@
 {
     [self.view endEditing:YES];
 }
-
 #pragma mark 是否隐藏密码
 - (IBAction)seeText:(UIButton *)sender {
     self.passText.secureTextEntry = !self.passText.secureTextEntry;

@@ -119,5 +119,5 @@
 //判断字符串中是否包含Emoji
 - (BOOL)stringContainsEmoji:(NSString *)string;
 - (BOOL)hasEmoji:(NSString*)string;
-
+-(UIImage *)imageWithColor:(UIColor *)color;
 @end

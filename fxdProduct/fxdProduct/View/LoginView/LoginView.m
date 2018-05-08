@@ -59,7 +59,6 @@
     }
 }
 
-
 /**
  限制账号、验证码位数
  */
@@ -109,7 +108,7 @@
  */
 -(void)loginAnimation{
     self.codeView.hidden = YES;
-
+    self.forgetBtnTopCons.constant = 20;
     [UIView animateWithDuration:1 animations:^{
         self.logoImage.alpha = 0.3;
     } completion:^(BOOL finished) {
@@ -119,6 +118,7 @@
     }];
     
     self.loginBtn.alpha = 0;
+    self.bottomView.alpha = 0;
     const CGFloat offset = CGRectGetWidth([UIScreen mainScreen].bounds);
     
     CGPoint accountCenter = self.userIDView.center;
@@ -139,12 +139,19 @@
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.2 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:0 animations:^{
             self.loginBtn.alpha = 1;
+            self.bottomView.alpha = 1;
             CGPoint center = self.loginBtn.center;
             center.y -= 100;
             self.loginBtn.center = center;
             self.loginBtnTop.constant = 30;
             [self.loginBtn layoutIfNeeded];
             [self.loginBtn updateConstraints];
+            
+            CGPoint bottomViewCenter = self.bottomView.center;
+            bottomViewCenter.y -= 100;
+            self.bottomView.center = bottomViewCenter;
+            [self.bottomView layoutIfNeeded];
+            [self.bottomView updateConstraints];
         } completion:nil];
     }];
 
@@ -156,7 +163,6 @@
     [self.loginBtn updateConstraints];
     
 }
-
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -194,7 +200,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(forgetPassMoblieNumber:)]) {
         [self.delegate forgetPassMoblieNumber:self.userNameField.text];
     }
-    
 }
 
 - (IBAction)regAction:(id)sender {
@@ -203,7 +208,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(regAction)]) {
         [self.delegate regAction];
     }
-    
 }
 
 - (void)closeGetVerifyButtonUser
