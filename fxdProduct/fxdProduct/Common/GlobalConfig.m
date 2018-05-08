@@ -345,10 +345,10 @@ NSString * const EliteLoan = @"P001007";           //精英贷
 
 #pragma Mark - 项目配置信息
 
-NSString * const PLATFORM = @"1";                   //平台
+NSString * const PLATFORM = @"16";                   //平台
 NSString * const CHANNEL = @"1";                   //平台
 
-NSString * const SERVICE_PLATFORM = @"0";                   //服务
+NSString * const SERVICE_PLATFORM = @"16";                   //服务
 NSString * const Devcode = @"5LIK5RW35LIT6LW";     //开发码
 //bJO03627qY52JEu4
 NSString * const Fxd_pw = @"6d82763bdd2ddcbea6da1ee6a9c636e68dae259127ba1e24";
