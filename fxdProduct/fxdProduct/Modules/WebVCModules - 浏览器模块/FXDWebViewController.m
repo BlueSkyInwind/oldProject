@@ -49,7 +49,7 @@
     DLog(@"%@",_urlStr);
     
     if (@available(iOS 11.0, *)) {
-        self.webView.scrollView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+       self.webView.scrollView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
         self.webView.scrollView.contentInset = UIEdgeInsetsMake(BarHeightNew, 0, 0, 0);
     }
     _webView.scrollView.showsVerticalScrollIndicator = false;
@@ -151,7 +151,7 @@
     CGRect navigationBarBounds = self.navigationController.navigationBar.bounds;
     CGRect barFrame = CGRectMake(0, navigationBarBounds.size.height - progressBarHeight, navigationBarBounds.size.width, progressBarHeight);
     progressView=[[UIProgressView alloc] initWithFrame:barFrame];
-    progressView.tintColor=RGBColor(49, 152, 199, 1);
+    progressView.tintColor=UI_MAIN_COLOR;
     progressView.trackTintColor=[UIColor whiteColor];
     [self.navigationController.navigationBar addSubview:progressView];
 }

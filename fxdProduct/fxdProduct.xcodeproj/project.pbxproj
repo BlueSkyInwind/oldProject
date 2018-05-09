@@ -1805,6 +1805,7 @@
 		844E5F4E1ED94DCB00753671 /* RegParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegParamModel.h; sourceTree = "<group>"; };
 		844E5F4F1ED94DCB00753671 /* RegParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegParamModel.m; sourceTree = "<group>"; };
 		8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPayPasswordView.swift; sourceTree = "<group>"; };
+		8459831220A2FAFD00CAB5F6 /* fxdProductDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fxdProductDev.entitlements; sourceTree = "<group>"; };
 		846BB6E11F5835E100CD3545 /* ApplicationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewModel.h; sourceTree = "<group>"; };
 		846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewModel.m; sourceTree = "<group>"; };
 		846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_WithholdAuthViewController.swift; sourceTree = "<group>"; };
@@ -2719,6 +2720,7 @@
 		636EE2F41B662ABB00A1A3ED = {
 			isa = PBXGroup;
 			children = (
+				8459831220A2FAFD00CAB5F6 /* fxdProductDev.entitlements */,
 				636EE2FF1B662ABB00A1A3ED /* fxdProduct */,
 				636EE3191B662ABB00A1A3ED /* fxdProductTests */,
 				636EE2FE1B662ABB00A1A3ED /* Products */,
@@ -4693,7 +4695,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = B4V533E2T3;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -4720,6 +4722,11 @@
 					CC0DF9531EA5B1090024841A = {
 						DevelopmentTeam = B4V533E2T3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -6112,9 +6119,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = B4V533E2T3;
@@ -6208,8 +6215,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "268ceef2-0193-4c6e-a52d-ab6db8173b7e";
+				PROVISIONING_PROFILE_SPECIFIER = FXD.PRODUCT;
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -6228,9 +6235,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = B4V533E2T3;
@@ -6310,8 +6317,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "268ceef2-0193-4c6e-a52d-ab6db8173b7e";
+				PROVISIONING_PROFILE_SPECIFIER = FXD.PRODUCT;
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6368,7 +6375,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
+				CODE_SIGN_ENTITLEMENTS = fxdProductDev.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -6489,7 +6496,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
+				CODE_SIGN_ENTITLEMENTS = fxdProductDev.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

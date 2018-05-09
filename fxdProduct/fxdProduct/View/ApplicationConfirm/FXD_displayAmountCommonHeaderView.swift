@@ -114,7 +114,7 @@ extension FXD_displayAmountCommonHeaderView{
         })
         
         centerImage = UIImageView()
-        centerImage?.image = UIImage.init(named: "circle_center_Image")
+        centerImage?.image = UIImage.init(named: "memberShip_header")
         backGroundImage?.addSubview(centerImage!)
         centerImage?.snp.makeConstraints({ (make) in
             make.centerX.equalTo((backGroundImage?.snp.centerX)!)
