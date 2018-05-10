@@ -199,16 +199,16 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
         
         switch memberStatus {
         case .rechargeAndRefund?:
-            let rechargeButton = UIButton.init(type: UIButtonType.custom)
-            rechargeButton.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
-            rechargeButton.setTitle("充值", for: UIControlState.normal)
-            rechargeButton.addTarget(self, action: #selector(rechargeButtonClick), for: .touchUpInside)
-            footerView.addSubview(rechargeButton)
-            rechargeButton.snp.makeConstraints({ (make) in
-                make.top.equalTo(footerView.snp.top).offset(120)
-                make.centerX.equalTo(footerView.snp.centerX).offset(-80)
-                make.width.equalTo(_k_w / 2 * 0.8)
-            })
+//            let rechargeButton = UIButton.init(type: UIButtonType.custom)
+//            rechargeButton.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
+//            rechargeButton.setTitle("充值", for: UIControlState.normal)
+//            rechargeButton.addTarget(self, action: #selector(rechargeButtonClick), for: .touchUpInside)
+//            footerView.addSubview(rechargeButton)
+//            rechargeButton.snp.makeConstraints({ (make) in
+//                make.top.equalTo(footerView.snp.top).offset(120)
+//                make.centerX.equalTo(footerView.snp.centerX).offset(-80)
+//                make.width.equalTo(_k_w / 2 * 0.8)
+//            })
             
             let refundButton = UIButton.init(type: UIButtonType.custom)
             refundButton.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
@@ -217,8 +217,8 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
             footerView.addSubview(refundButton)
             refundButton.snp.makeConstraints({ (make) in
                 make.top.equalTo(footerView.snp.top).offset(120)
-                make.centerX.equalTo(footerView.snp.centerX).offset(80)
-                make.width.equalTo(_k_w / 2 * 0.8)
+                make.left.equalTo(footerView.snp.left).offset(25)
+                make.right.equalTo(footerView.snp.right).offset(-25)
             })
             break
         case .recharge?,.recharging?,.refund?,.refunding?:
