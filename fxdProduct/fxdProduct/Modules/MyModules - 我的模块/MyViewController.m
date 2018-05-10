@@ -253,7 +253,7 @@
         return 2;
     }
     if (section == 1) {
-        return 2;
+        return 1;
     }
     return 1;
 }
@@ -364,11 +364,10 @@
             switch (indexPath.row) {
                 case 0:
                     {
-                        UserDataAuthenticationListVCModules * vc = [[UserDataAuthenticationListVCModules  alloc]init];
-                        [self.navigationController pushViewController:vc animated:YES];
-
-//                        MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
-//                        [self.navigationController pushViewController:myCrad animated:YES];
+//                        UserDataAuthenticationListVCModules * vc = [[UserDataAuthenticationListVCModules  alloc]init];
+//                        [self.navigationController pushViewController:vc animated:YES];
+                        MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
+                        [self.navigationController pushViewController:myCrad animated:YES];
                     }
                     break;
                 case 1:

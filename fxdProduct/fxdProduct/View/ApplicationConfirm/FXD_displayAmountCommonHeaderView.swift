@@ -51,9 +51,10 @@ class FXD_displayAmountCommonHeaderView: UIView {
         self.amountTitleLabel?.text = "到账金额"
     }
     
-    convenience init(frame: CGRect,amount:String,amountTitle:String) {
+    convenience init(frame: CGRect,amount:String,amountTitle:String,centerImage:String) {
         self.init(frame: frame)
         self.amountLabel?.text = amount
+        self.centerImage?.image = UIImage.init(named: centerImage)
         if amountTitle != "" {
             resetUI()
             self.amountTitleLabel?.text = amountTitle
@@ -114,7 +115,7 @@ extension FXD_displayAmountCommonHeaderView{
         })
         
         centerImage = UIImageView()
-        centerImage?.image = UIImage.init(named: "memberShip_header")
+        centerImage?.image = UIImage.init(named: "circle_center_Image")
         backGroundImage?.addSubview(centerImage!)
         centerImage?.snp.makeConstraints({ (make) in
             make.centerX.equalTo((backGroundImage?.snp.centerX)!)
@@ -128,7 +129,6 @@ extension FXD_displayAmountCommonHeaderView{
         amountLabel?.font = UIFont.yx_systemFont(ofSize: 25)
         centerImage?.addSubview(amountLabel!)
         amountLabel?.snp.makeConstraints({ (make) in
-            
             make.center.equalTo((centerImage?.snp.center)!)
         })
         

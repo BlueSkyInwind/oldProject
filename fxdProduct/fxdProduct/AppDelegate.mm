@@ -81,8 +81,8 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     
     [self initJPush:launchOptions];
 
-    BOOL isFirst = [LunchVCModules canShowNewFeature];
-//    isFirst = true;
+//    BOOL isFirst = [LunchVCModules canShowNewFeature];
+    BOOL isFirst = false;
     if (isFirst) {
         self.window.rootViewController = [LunchVCModules newLunchVCWithModels:@[@"guide_1",@"guide_2",@"guide_3"] enterBlock:^{
             [self enter];

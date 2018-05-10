@@ -18,13 +18,12 @@
 -(void)VerifyIdentityCardNumber:(NSString *)IDnum{
     
     NSDictionary *paramDic = @{@"idcode":IDnum};
-    
     [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_verifyIdentityCard_url] isNeedNetStatus:YES isNeedWait:YES parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
         }
     } failure:^(EnumServerStatus status, id object) {
-        if (self.faileBlock) {
+         if (self.faileBlock) {
             self.faileBlock(object);
         }
     }];

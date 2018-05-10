@@ -37,7 +37,7 @@
 #pragma mark 提交事件
 - (IBAction)submitBtn:(id)sender {
     
-    if (![self.foreTextview.text isEqualToString:@""] && ![self.foreTextview.text isEqualToString:@"请在此输入您的宝贵建议"]) {
+    if ([self.foreTextview.text isEqualToString:@""] || [self.foreTextview.text isEqualToString:@"请在此输入您的宝贵建议"]) {
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请填写您宝贵的意见"];
         return;
     }

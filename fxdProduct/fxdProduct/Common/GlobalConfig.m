@@ -197,15 +197,15 @@ NSString * const     _newDrawApply_jhtml      =   @"coregw/draw/new/drawApply";
 //推荐码规则
 NSString * const    _GetRecomfrInfo_url         =    @"product/getRecomfrInfo";
 //验证身份证号
-NSString * const    _verifyIdentityCard_url    =    @"apigw/client/operation/checkIdInfo";
+NSString * const    _verifyIdentityCard_url    =    @"operation/checkIdInfo";
 //验证旧交易密码
-NSString * const    _verifyOldPassword_url    =    @"apigw/client/operation/verifyPayPassword";
+NSString * const    _verifyOldPassword_url    =    @"operation/verifyPayPassword";
 //验证交易呀验证码
-NSString * const    _verifyTradeSMS_url    =    @"apigw/client/toolbox/sms/checkSMSCodeValid";
+NSString * const    _verifyTradeSMS_url    =    @"toolbox/sms/checkSMSCodeValid";
 //设置新的交易密码
-NSString * const    _saveNewPassword_url    =    @"apigw/client/operation/savePayPassword";
+NSString * const    _saveNewPassword_url    =    @"operation/savePayPassword";
 //修改交易密码
-NSString * const    _modificationPassword_url    =    @"apigw/client/operation/updatePayPassword";
+NSString * const    _modificationPassword_url    =    @"operation/updatePayPassword";
 //个人中心（优惠券,现金红包,账户余额）
 NSString * const    _PersonalCenterWithdrawCashAPI_url    =    @"operation/withdrawCashAPI/personalCenter";
 //现金红包,账户余额（点击列表操作展示提现页）

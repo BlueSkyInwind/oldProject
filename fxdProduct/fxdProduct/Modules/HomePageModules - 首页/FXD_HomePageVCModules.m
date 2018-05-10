@@ -81,7 +81,7 @@
     _dataArray = [NSMutableArray array];
     _protocolArray = [NSMutableArray array];
     [self setNavQRRightBar];
-    [self setNavQRLeftBar];
+//    [self setNavQRLeftBar];
     [self createTab];
 }
 
