@@ -526,7 +526,7 @@
     _superLoanHeaderCell.filterBtn.selected = NO;
     _superLoanHeaderCell.filterImageBtn.selected = NO;
     
-    NSLog(@"%@==%@==%@==%@==",minLoanMoney,maxLoanMoney,minLoanPeriod,maxLoanPeriod);
+//    NSLog(@"%@==%@==%@==%@==",minLoanMoney,maxLoanMoney,minLoanPeriod,maxLoanPeriod);
     if (maxLoanMoney.integerValue < minLoanMoney.integerValue) {
         [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"借款金额输入不合法"];
         return;
@@ -565,7 +565,15 @@
 -(void)recentBtnClcik:(UIButton *)sender{
     
     NSInteger tag = sender.tag;
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:[NSString stringWithFormat:@"最近使用第%ld个按钮",tag]];
+    if (((_recentDataArray.count - 1) == (tag - 101)) && _recentDataArray.count > 0) {
+        
+        HotRecommendModel *model = _recentDataArray[tag - 101];
+        FXDWebViewController *webView = [[FXDWebViewController alloc]init];
+        webView.urlStr = model.linkAddress;
+        [self.navigationController pushViewController:webView animated:true];
+    }
+    
+//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:[NSString stringWithFormat:@"最近使用第%ld个按钮",tag]];
 }
 
 -(void)moreBtnClcik{

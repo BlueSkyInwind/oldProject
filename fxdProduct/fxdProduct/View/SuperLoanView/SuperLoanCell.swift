@@ -141,7 +141,7 @@ extension SuperLoanCell{
         })
         
         descBtn = UIButton()
-        descBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        descBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 12)
         descBtn?.setTitleColor(UIColor.red, for: .normal)
         descBtn?.layer.borderWidth = 1.0
         descBtn?.layer.cornerRadius = 10.0
@@ -151,7 +151,7 @@ extension SuperLoanCell{
             make.bottom.equalTo(self).offset(-10)
             make.left.equalTo((leftImageView?.snp.right)!).offset(20)
             make.height.equalTo(20)
-            make.width.equalTo(150)
+            make.width.equalTo(300)
         })
         
         
@@ -206,7 +206,7 @@ extension SuperLoanCell{
         })
         
         descBtn = UIButton()
-        descBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        descBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 12)
         descBtn?.setTitleColor(UIColor.red, for: .normal)
         descBtn?.layer.borderWidth = 1.0
         descBtn?.layer.cornerRadius = 10.0
@@ -215,7 +215,7 @@ extension SuperLoanCell{
             make.bottom.equalTo(self).offset(-15)
             make.left.equalTo((leftImageView?.snp.right)!).offset(20)
             make.height.equalTo(20)
-            make.width.equalTo(150)
+            make.width.equalTo(300)
 //            make.width.equalTo(30)
         })
         

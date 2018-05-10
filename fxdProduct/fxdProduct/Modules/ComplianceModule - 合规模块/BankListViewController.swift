@@ -86,7 +86,7 @@ class BankListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         let url = URL(string: model.imgUrl)
 //        let url = URL(string: "http://192.168.5.26/fxd/M00/09/F7/wKgFGlowglSER8BxAAAAAOVyU4Y166.png")
         
-        cell.bankImageView?.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
+        cell.bankImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
         
         })
 

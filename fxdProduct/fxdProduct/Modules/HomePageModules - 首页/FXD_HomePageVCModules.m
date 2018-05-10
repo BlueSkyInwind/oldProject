@@ -889,12 +889,14 @@
 -(void)repayImmediatelyBtnClick:(BOOL)isSelected{
     if (!isSelected) {
         
-        if ([_homeProductList.platfromType isEqualToString:@"0"]) {
-            LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-            [self.navigationController pushViewController:controller animated:true];
-        }else{
-            [self jumpControllerUserStatus:_homeProductList.userStatus];
-        }
+        LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+        [self.navigationController pushViewController:controller animated:true];
+//        if ([_homeProductList.platfromType isEqualToString:@"0"]) {
+//            LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+//            [self.navigationController pushViewController:controller animated:true];
+//        }else{
+//            [self jumpControllerUserStatus:_homeProductList.userStatus];
+//        }
     
     }else{
         
@@ -1066,8 +1068,9 @@
 -(void)loanClick{
     
     LoanListViewController *controller = [[LoanListViewController alloc]init];
-    controller.titleStr = @"贷款";
-    controller.moduleType = @"1";
+    PlatTypeModel *model = [self getPlatFlag:1];
+    controller.titleStr = model.desc_;
+    controller.moduleType = model.code_;
     [self.navigationController pushViewController:controller animated:true];
 //    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"贷款"];
 }
@@ -1075,8 +1078,9 @@
 -(void)gameBtnClick{
     
     LoanListViewController *controller = [[LoanListViewController alloc]init];
-    controller.titleStr = @"游戏";
-    controller.moduleType = @"2";
+    PlatTypeModel *model = [self getPlatFlag:2];
+    controller.titleStr = model.desc_;
+    controller.moduleType = model.code_;
     [self.navigationController pushViewController:controller animated:true];
 //    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"游戏"];
 }
@@ -1084,12 +1088,26 @@
 -(void)tourismBtnClcik{
     
     LoanListViewController *controller = [[LoanListViewController alloc]init];
-    controller.titleStr = @"旅游";
-    controller.moduleType = @"3";
+    PlatTypeModel *model = [self getPlatFlag:3];
+    controller.titleStr = model.desc_;
+    controller.moduleType = model.code_;
     [self.navigationController pushViewController:controller animated:true];
 //    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"旅游"];
 }
 
+-(PlatTypeModel *)getPlatFlag:(NSInteger)flag{
+    
+    for (int i = 0; i<_homeProductList.platType.count; i++) {
+        
+        PlatTypeModel *model = _homeProductList.platType[i];
+        if (flag == model.code_.integerValue) {
+            return model;
+        }
+        
+    }
+    
+    return nil;
+}
 #pragma mark 查看更多
 -(void)recentMoreBtnClick{
     

@@ -203,7 +203,7 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
             cell.selectionStyle = .none
             let url = URL(string: (cardInfo?.cardIcon)!)
             
-            cell.cardImageView?.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
+            cell.cardImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
                 
             })
 
