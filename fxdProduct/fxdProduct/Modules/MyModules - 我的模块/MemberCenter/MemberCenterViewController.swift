@@ -26,7 +26,7 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
     var tableView:UITableView?
     var statusButton:UIButton?
     var memberStatus:UserMemberCenterStatus?
-    var footViewHeight:Int?
+    var footViewHeight:CGFloat?
     var memberShipInfoModel:MemberShipInfoModel?
     var centerHeaderView:MemberCenterHeaderView?
     var noData:Bool?
@@ -197,8 +197,8 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
         let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 150))
         footerView.backgroundColor = LOAN_APPLICATION_COLOR
         
-        if memberStatus == .rechargeAndRefund {
-            
+        switch memberStatus {
+        case .rechargeAndRefund?:
             let rechargeButton = UIButton.init(type: UIButtonType.custom)
             rechargeButton.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
             rechargeButton.setTitle("充值", for: UIControlState.normal)
@@ -207,8 +207,7 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
             rechargeButton.snp.makeConstraints({ (make) in
                 make.top.equalTo(footerView.snp.top).offset(120)
                 make.centerX.equalTo(footerView.snp.centerX).offset(-80)
-                make.height.equalTo(footerView.snp.right).offset(30)
-                make.width.equalTo(footerView.snp.right).offset(100)
+                make.width.equalTo(_k_w / 2 * 0.8)
             })
             
             let refundButton = UIButton.init(type: UIButtonType.custom)
@@ -219,10 +218,10 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
             refundButton.snp.makeConstraints({ (make) in
                 make.top.equalTo(footerView.snp.top).offset(120)
                 make.centerX.equalTo(footerView.snp.centerX).offset(80)
-                make.height.equalTo(footerView.snp.right).offset(30)
-                make.width.equalTo(footerView.snp.right).offset(100)
+                make.width.equalTo(_k_w / 2 * 0.8)
             })
-        }else{
+            break
+        case .recharge?,.recharging?,.refund?,.refunding?:
             statusButton = UIButton.init(type: UIButtonType.custom)
             statusButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
             statusButton?.setTitle("前往测评", for: UIControlState.normal)
@@ -234,6 +233,9 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
                 make.left.equalTo(footerView.snp.left).offset(25)
                 make.right.equalTo(footerView.snp.right).offset(-25)
             })
+            break
+        default:
+            break
         }
         return footerView
     }
@@ -286,7 +288,7 @@ extension MemberCenterViewController {
         }
         let rect =  CGRect.init(x: 0, y: 0, width: Int(_k_w), height: heaerViewHeight + 74)
         let headerView = UIView.init(frame: rect)
-        titleHeaderView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.zero, amount: (memberShipInfoModel?.availableCredit)!, amountTitle: "可借额度")
+        titleHeaderView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.zero, amount: (memberShipInfoModel?.availableCredit)!, amountTitle: "可借额度",centerImage:"memberShip_header")
         titleHeaderView?.titleLabel?.text = "会员中心"
         titleHeaderView?.goBackBtn?.isHidden = false
         titleHeaderView?.hintWordBackImage?.isHidden = true
@@ -339,6 +341,7 @@ extension MemberCenterViewController {
             //会员未开通
             if infoModel.credit == nil {
                 memberStatus = .notMeasure
+                footViewHeight = 0.01;
             }else{
                 let credit = Int(infoModel.credit)
                 if credit! == 0{
@@ -362,7 +365,7 @@ extension MemberCenterViewController {
             
             if infoModel.isNeedRequest == "0" && infoModel.isRefundAble == "0" {
                 memberStatus = .noStatus
-                footViewHeight = 0;
+                footViewHeight = 0.01;
             }
             
         }else if infoModel.status == "3"{

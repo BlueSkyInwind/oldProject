@@ -53,11 +53,12 @@ class MembershipFeePayViewController: BaseViewController,UITableViewDelegate,UIT
     }
     
     @objc func bottomButtonClick()  {
+        /*
         if !self.isAgreement {
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请点击同意会员协议")
             return
         }
-        
+        */
         switch payType {
         case .recharge?:
             self.requestMemberCenterRecharge { (isSuccess) in
@@ -180,7 +181,7 @@ class MembershipFeePayViewController: BaseViewController,UITableViewDelegate,UIT
         agreementView.agreementClick = { [weak self] in
             self?.getMemberCenterProtocol()
         }
-        footerView.isHidden = true
+        agreementView.isHidden = true
         footerView.addSubview(agreementView)
         agreementView.snp.makeConstraints { (make) in
             make.top.equalTo(footerView.snp.top).offset(13)
@@ -189,8 +190,8 @@ class MembershipFeePayViewController: BaseViewController,UITableViewDelegate,UIT
         }
         
         bottomButton = UIButton.init(type: UIButtonType.custom)
-        bottomButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_unselect_Image"), for: UIControlState.normal)
-//      bottomButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
+//        bottomButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_unselect_Image"), for: UIControlState.normal)
+      bottomButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
         if payType == .recharge {
             bottomButton?.setTitle("确认支付", for: UIControlState.normal)
         }else{
@@ -279,7 +280,7 @@ extension MembershipFeePayViewController{
         if UI_IS_IPONE6P || UI_IS_IPHONEX{
             heaerViewHeight = 256
         }
-        titleHeaderView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: Int(_k_w), height: heaerViewHeight), amount: self.amount!, amountTitle: amountTitle)
+        titleHeaderView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: Int(_k_w), height: heaerViewHeight), amount: self.amount!, amountTitle: amountTitle,centerImage:"circle_center_Image")
         titleHeaderView?.titleLabel?.text = title
         titleHeaderView?.hintWordLabel?.text = hintTitle
         titleHeaderView?.hintWordBackImage?.isHidden = true
