@@ -16,11 +16,10 @@
 -(void)forgetPassMoblieNumber:(NSString *)number;
 -(void)regAction;
 
-
 @end
 
-
 @interface LoginView : UIView
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeader;
 
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
@@ -51,7 +50,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginBtnTop;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *forgetBtnTopCons;
 
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 
 @property (assign, nonatomic)id<LoginViewDelegate>delegate;

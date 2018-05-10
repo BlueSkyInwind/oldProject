@@ -19,8 +19,6 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *fieldView;
 
-
-
 @end
 
 @implementation FindPassViewController
@@ -30,7 +28,6 @@
     // Do any additional setup after loading the view from its nib.
     [self addBackItem];
     self.navigationItem.title = @"找回密码";
-
     for (UIView *view in self.fieldView) {
         [FXD_Tool setCorner:view borderColor:UI_MAIN_COLOR];
     }
@@ -45,8 +42,6 @@
     [self.codeField addTarget:self action:@selector(changeTextField:) forControlEvents:UIControlEventEditingChanged];
     
 }
-
-
 
 /**
  手机号、验证码位数限制
@@ -66,7 +61,6 @@
         }
     }
 }
-
 
 #pragma mark 发送验证码
 - (IBAction)snsCodeCountdownBtnClick:(UIButton *)sender {

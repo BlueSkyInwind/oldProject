@@ -364,8 +364,11 @@
             switch (indexPath.row) {
                 case 0:
                     {
-                        MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
-                        [self.navigationController pushViewController:myCrad animated:YES];
+                        UserDataAuthenticationListVCModules * vc = [[UserDataAuthenticationListVCModules  alloc]init];
+                        [self.navigationController pushViewController:vc animated:YES];
+
+//                        MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
+//                        [self.navigationController pushViewController:myCrad animated:YES];
                     }
                     break;
                 case 1:

@@ -8,7 +8,7 @@
 
 #import "BaseIndexViewController.h"
 
-@interface FindPassViewController : BaseViewController
+@interface FindPassViewController : BaseIndexViewController
 //手机号码控件
 @property (strong, nonatomic) IBOutlet UITextField *phoneNumField;
 //验证码控件

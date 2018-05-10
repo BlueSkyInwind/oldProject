@@ -539,13 +539,9 @@
 		84C619F01FA81D3E00626411 /* PayMethodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C619B21FA8149700626411 /* PayMethodCell.xib */; };
 		84C619F11FA81D3E00626411 /* PayMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C619B51FA8149700626411 /* PayMoneyCell.xib */; };
 		84C619F31FA81D3E00626411 /* RepayListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C619BB1FA8149700626411 /* RepayListCell.xib */; };
-		84C619F41FA81E2C00626411 /* repay_circle_selt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C619921FA8149700626411 /* repay_circle_selt@2x.png */; };
-		84C619F51FA81E2C00626411 /* repay_circle_selt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C619931FA8149700626411 /* repay_circle_selt@3x.png */; };
 		84C619F61FA81E2C00626411 /* repay_circle_un@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C619941FA8149700626411 /* repay_circle_un@2x.png */; };
 		84C619F71FA81E2C00626411 /* repay_circle_un@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C619951FA8149700626411 /* repay_circle_un@3x.png */; };
 		84C619F81FA81E7000626411 /* LoanPeriodForDetailsVCModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C619901FA8149700626411 /* LoanPeriodForDetailsVCModule.xib */; };
-		84C619F91FA81E7000626411 /* repay_circle_selt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C619921FA8149700626411 /* repay_circle_selt@2x.png */; };
-		84C619FA1FA81E7000626411 /* repay_circle_selt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C619931FA8149700626411 /* repay_circle_selt@3x.png */; };
 		84C619FB1FA81E7000626411 /* repay_circle_un@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C619941FA8149700626411 /* repay_circle_un@2x.png */; };
 		84C619FC1FA81E7000626411 /* repay_circle_un@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C619951FA8149700626411 /* repay_circle_un@3x.png */; };
 		84C619FF1FA81E7000626411 /* LoanPaymentDetailVCModule.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C6199E1FA8149700626411 /* LoanPaymentDetailVCModule.xib */; };
@@ -570,6 +566,10 @@
 		84CC899F1F5973D700537910 /* DrawingsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC899D1F5973D700537910 /* DrawingsInfoModel.m */; };
 		84D1846F1F98962A00A0B25F /* RedPacketTicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D1846E1F98962A00A0B25F /* RedPacketTicketModel.m */; };
 		84D184701F98962A00A0B25F /* RedPacketTicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D1846E1F98962A00A0B25F /* RedPacketTicketModel.m */; };
+		84D2B80A20A1B4A800142206 /* repay_circle_selt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D2B80920A1B4A800142206 /* repay_circle_selt@2x.png */; };
+		84D2B80B20A1B4A800142206 /* repay_circle_selt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D2B80920A1B4A800142206 /* repay_circle_selt@2x.png */; };
+		84D2B80D20A1B4AF00142206 /* repay_circle_selt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D2B80C20A1B4AE00142206 /* repay_circle_selt@3x.png */; };
+		84D2B80E20A1B4AF00142206 /* repay_circle_selt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D2B80C20A1B4AE00142206 /* repay_circle_selt@3x.png */; };
 		84D715B41F7894B200F433E5 /* MGBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715A91F78936D00F433E5 /* MGBaseKit.framework */; };
 		84D715B61F7894C800F433E5 /* MGBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715A91F78936D00F433E5 /* MGBaseKit.framework */; };
 		84D715EF1F78CF5A00F433E5 /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715ED1F78CF3700F433E5 /* MGBankCard.framework */; };
@@ -1805,6 +1805,7 @@
 		844E5F4E1ED94DCB00753671 /* RegParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegParamModel.h; sourceTree = "<group>"; };
 		844E5F4F1ED94DCB00753671 /* RegParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegParamModel.m; sourceTree = "<group>"; };
 		8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPayPasswordView.swift; sourceTree = "<group>"; };
+		8459831220A2FAFD00CAB5F6 /* fxdProductDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fxdProductDev.entitlements; sourceTree = "<group>"; };
 		846BB6E11F5835E100CD3545 /* ApplicationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewModel.h; sourceTree = "<group>"; };
 		846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewModel.m; sourceTree = "<group>"; };
 		846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_WithholdAuthViewController.swift; sourceTree = "<group>"; };
@@ -1885,8 +1886,6 @@
 		84C6198E1FA8149700626411 /* LoanPeriodForDetailsVCModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoanPeriodForDetailsVCModule.h; sourceTree = "<group>"; };
 		84C6198F1FA8149700626411 /* LoanPeriodForDetailsVCModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoanPeriodForDetailsVCModule.m; sourceTree = "<group>"; };
 		84C619901FA8149700626411 /* LoanPeriodForDetailsVCModule.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoanPeriodForDetailsVCModule.xib; sourceTree = "<group>"; };
-		84C619921FA8149700626411 /* repay_circle_selt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_selt@2x.png"; sourceTree = "<group>"; };
-		84C619931FA8149700626411 /* repay_circle_selt@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_selt@3x.png"; sourceTree = "<group>"; };
 		84C619941FA8149700626411 /* repay_circle_un@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_un@2x.png"; sourceTree = "<group>"; };
 		84C619951FA8149700626411 /* repay_circle_un@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_un@3x.png"; sourceTree = "<group>"; };
 		84C6199C1FA8149700626411 /* LoanPaymentDetailVCModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoanPaymentDetailVCModule.h; sourceTree = "<group>"; };
@@ -1926,6 +1925,8 @@
 		84CC899D1F5973D700537910 /* DrawingsInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingsInfoModel.m; sourceTree = "<group>"; };
 		84D1846D1F98962A00A0B25F /* RedPacketTicketModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedPacketTicketModel.h; sourceTree = "<group>"; };
 		84D1846E1F98962A00A0B25F /* RedPacketTicketModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedPacketTicketModel.m; sourceTree = "<group>"; };
+		84D2B80920A1B4A800142206 /* repay_circle_selt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_selt@2x.png"; sourceTree = "<group>"; };
+		84D2B80C20A1B4AE00142206 /* repay_circle_selt@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_selt@3x.png"; sourceTree = "<group>"; };
 		84D715A91F78936D00F433E5 /* MGBaseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBaseKit.framework; sourceTree = "<group>"; };
 		84D715ED1F78CF3700F433E5 /* MGBankCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBankCard.framework; sourceTree = "<group>"; };
 		84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGBankCardResource.bundle; sourceTree = "<group>"; };
@@ -2719,6 +2720,7 @@
 		636EE2F41B662ABB00A1A3ED = {
 			isa = PBXGroup;
 			children = (
+				8459831220A2FAFD00CAB5F6 /* fxdProductDev.entitlements */,
 				636EE2FF1B662ABB00A1A3ED /* fxdProduct */,
 				636EE3191B662ABB00A1A3ED /* fxdProductTests */,
 				636EE2FE1B662ABB00A1A3ED /* Products */,
@@ -4183,8 +4185,8 @@
 		84C619911FA8149700626411 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				84C619921FA8149700626411 /* repay_circle_selt@2x.png */,
-				84C619931FA8149700626411 /* repay_circle_selt@3x.png */,
+				84D2B80920A1B4A800142206 /* repay_circle_selt@2x.png */,
+				84D2B80C20A1B4AE00142206 /* repay_circle_selt@3x.png */,
 				84C619941FA8149700626411 /* repay_circle_un@2x.png */,
 				84C619951FA8149700626411 /* repay_circle_un@3x.png */,
 			);
@@ -4693,7 +4695,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = B4V533E2T3;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -4720,6 +4722,11 @@
 					CC0DF9531EA5B1090024841A = {
 						DevelopmentTeam = B4V533E2T3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -4750,8 +4757,6 @@
 			files = (
 				84C61A171FA8294500626411 /* FindPassViewController.xib in Resources */,
 				84C619F81FA81E7000626411 /* LoanPeriodForDetailsVCModule.xib in Resources */,
-				84C619F91FA81E7000626411 /* repay_circle_selt@2x.png in Resources */,
-				84C619FA1FA81E7000626411 /* repay_circle_selt@3x.png in Resources */,
 				849AC2591FF09721005E435F /* HighRankingAuthTableViewCell.xib in Resources */,
 				84C619FB1FA81E7000626411 /* repay_circle_un@2x.png in Resources */,
 				84C619FC1FA81E7000626411 /* repay_circle_un@3x.png in Resources */,
@@ -4784,6 +4789,7 @@
 				6386A6B81E80D4F200A181A3 /* fxdProductDev-Info.plist in Resources */,
 				0FEA588A1BE0A497007F8A6D /* testView.xib in Resources */,
 				0F9E30D31BC8A70C0018A801 /* IdeaBackViewController.xib in Resources */,
+				84D2B80D20A1B4AF00142206 /* repay_circle_selt@3x.png in Resources */,
 				84ED5B601F4AB9E7004C0A59 /* mx_refresh@2x.png in Resources */,
 				84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */,
 				0F099B991C1A97EB00D97BAE /* ColledgeView.xib in Resources */,
@@ -4812,6 +4818,7 @@
 				63B65DF11D519D1600207231 /* main.js in Resources */,
 				630D46181BCCD2FB00874064 /* UpdateDevIDViewController.xib in Resources */,
 				1AE362F61C586060006FC276 /* EditCardsController.xib in Resources */,
+				84D2B80A20A1B4A800142206 /* repay_circle_selt@2x.png in Resources */,
 				0F920C141BCE549900AA9A31 /* MyCardsViewController.xib in Resources */,
 				63553B071E5D9E1B00B2C1FF /* MobileCell.xib in Resources */,
 				63F0E1C61CE57B80001251A9 /* BSFingerResource.bundle in Resources */,
@@ -4832,8 +4839,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				84C61A151FA8290200626411 /* FindPassViewController.xib in Resources */,
-				84C619F41FA81E2C00626411 /* repay_circle_selt@2x.png in Resources */,
-				84C619F51FA81E2C00626411 /* repay_circle_selt@3x.png in Resources */,
 				84C619F61FA81E2C00626411 /* repay_circle_un@2x.png in Resources */,
 				849AC25A1FF09721005E435F /* HighRankingAuthTableViewCell.xib in Resources */,
 				84C619F71FA81E2C00626411 /* repay_circle_un@3x.png in Resources */,
@@ -4867,6 +4872,7 @@
 				84A380211FAC1D8D008FB7AF /* UserMobileAuthenticationVCModules.xib in Resources */,
 				CC0DFB2E1EA5B1090024841A /* fxdProductDev-Info.plist in Resources */,
 				CC0DFB331EA5B1090024841A /* testView.xib in Resources */,
+				84D2B80E20A1B4AF00142206 /* repay_circle_selt@3x.png in Resources */,
 				CC0DFB3D1EA5B1090024841A /* IdeaBackViewController.xib in Resources */,
 				84ED5B611F4AB9E7004C0A59 /* mx_refresh@2x.png in Resources */,
 				84ED5B5B1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */,
@@ -4895,6 +4901,7 @@
 				CC0DFB781EA5B1090024841A /* main.js in Resources */,
 				CC0DFB7B1EA5B1090024841A /* UpdateDevIDViewController.xib in Resources */,
 				CC0DFB7C1EA5B1090024841A /* EditCardsController.xib in Resources */,
+				84D2B80B20A1B4A800142206 /* repay_circle_selt@2x.png in Resources */,
 				CC0DFB7F1EA5B1090024841A /* MyCardsViewController.xib in Resources */,
 				CC0DFB831EA5B1090024841A /* MobileCell.xib in Resources */,
 				CC0DFB861EA5B1090024841A /* BSFingerResource.bundle in Resources */,
@@ -6112,9 +6119,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = B4V533E2T3;
@@ -6208,8 +6215,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "268ceef2-0193-4c6e-a52d-ab6db8173b7e";
+				PROVISIONING_PROFILE_SPECIFIER = FXD.PRODUCT;
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -6228,9 +6235,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = B4V533E2T3;
@@ -6310,8 +6317,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hfsj.fxd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "268ceef2-0193-4c6e-a52d-ab6db8173b7e";
+				PROVISIONING_PROFILE_SPECIFIER = FXD.PRODUCT;
 				SWIFT_OBJC_BRIDGING_HEADER = "fxdProduct/Common/fxdProduct-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6368,13 +6375,13 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
+				CODE_SIGN_ENTITLEMENTS = fxdProductDev.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6489,13 +6496,13 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = fxdProductDev.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (

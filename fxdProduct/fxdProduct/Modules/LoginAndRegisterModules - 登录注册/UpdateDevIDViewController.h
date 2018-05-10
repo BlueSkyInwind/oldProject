@@ -19,7 +19,7 @@ typedef enum {
     Present_Dis
 } DisplayWay;
 
-@interface UpdateDevIDViewController : BaseViewController
+@interface UpdateDevIDViewController : BaseIndexViewController
 
 @property (strong, nonatomic) IBOutlet UITextField *phoneNumText;
 

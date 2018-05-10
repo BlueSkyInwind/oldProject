@@ -305,7 +305,22 @@ static FXD_Tool * shareTool = nil;
     return [[NSUserDefaults standardUserDefaults] objectForKey:key];
 }
 
-
+/**
+ 生成对应颜色的图片
+ @param color 色值
+ @return 图片
+ */
+-(UIImage *)imageWithColor:(UIColor *)color {
+    
+    CGRect rect = CGRectMake(0.0, 0.0, 1.0, 1.0);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef  context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, rect);
+    UIImage * image =  UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 //圆角设置
 +(void)setCorner:(UIView *)view borderColor:(UIColor *)color
 {
