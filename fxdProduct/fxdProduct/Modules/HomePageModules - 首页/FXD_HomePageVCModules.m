@@ -308,7 +308,10 @@
  */
 -(void)LoadHomeView{
     
-    [self getMessageNumber];
+    if ([FXD_Utility sharedUtility].loginFlage){
+        
+        [self getMessageNumber];
+    }
     [self getAllTheHomePageData:^(BOOL isSuccess) {
         if (_loadFailView) {
             [_loadFailView removeFromSuperview];
