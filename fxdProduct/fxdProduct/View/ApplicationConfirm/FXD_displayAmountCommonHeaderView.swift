@@ -128,7 +128,6 @@ extension FXD_displayAmountCommonHeaderView{
         amountLabel?.font = UIFont.yx_systemFont(ofSize: 25)
         centerImage?.addSubview(amountLabel!)
         amountLabel?.snp.makeConstraints({ (make) in
-            
             make.center.equalTo((centerImage?.snp.center)!)
         })
         

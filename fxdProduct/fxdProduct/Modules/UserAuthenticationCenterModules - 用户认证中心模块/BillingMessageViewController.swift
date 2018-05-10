@@ -88,6 +88,7 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         
         let headerView = UIView.init(frame: CGRect(x:0,y:64,width:_k_w,height:30))
         headerView.backgroundColor = UIColor.clear
+        
         let leftImageView = UIImageView()
         leftImageView.image = UIImage.init(named: "topCellIcon")
         headerView.addSubview(leftImageView)
@@ -105,13 +106,14 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
             make.centerY.equalTo(headerView.snp.centerY)
         }
         
+        leftImageView.isHidden = true;
+        tipLabel.isHidden = true;
+        
         if type == "0" {
-            
             tableView?.tableHeaderView = headerView
         }
-    
-        let footView = UIView.init(frame: CGRect(x:0,y:0,width:_k_w,height:100))
         
+        let footView = UIView.init(frame: CGRect(x:0,y:0,width:_k_w,height:100))
         footBtn = UIButton()
         footBtn?.setTitle("下一步", for: .normal)
         footBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
@@ -134,22 +136,18 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
     @objc func footBtnClick(){
         
         if (dataArray![0] as! String).count < 0 {
-            
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请选择银行")
             return
         }
         if (dataArray![1] as! String).count < 16 {
-            
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请输入正确的卡号")
             return
         }
         if (dataArray![2] as! String).count < 11 {
-            
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请输入正确的预留手机号")
             return
         }
         
-      
         let controller = FXD_WithholdAuthViewController()
         controller.bankName = (dataArray?[0] as! String)
         controller.cardNum = (dataArray?[1] as! String)

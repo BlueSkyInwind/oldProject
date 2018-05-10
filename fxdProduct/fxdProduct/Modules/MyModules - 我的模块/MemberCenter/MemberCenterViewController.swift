@@ -148,7 +148,7 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -290,6 +290,8 @@ extension MemberCenterViewController {
         titleHeaderView?.titleLabel?.text = "会员中心"
         titleHeaderView?.goBackBtn?.isHidden = false
         titleHeaderView?.hintWordBackImage?.isHidden = true
+        titleHeaderView?.amountLabel?.isHidden = true
+        titleHeaderView?.amountTitleLabel?.isHidden = true
         titleHeaderView?.goBack = {
             self.navigationController?.popViewController(animated: true)
         }
