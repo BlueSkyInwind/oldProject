@@ -99,7 +99,7 @@ class FXD_ToWithdrawFundsFooterView: UIView{
     }
     
     func addProtocolClick(_ protocolNames:[String])  {
-        var protocolContent:String = "我已阅读并认可发薪贷"
+        var protocolContent:String = "我已阅读并认可憨分"
         var rangeArr:[NSRange] = []
         for proName in protocolNames {
              protocolContent = protocolContent + proName + "、"

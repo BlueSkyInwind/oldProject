@@ -224,14 +224,12 @@ extension SuperLoanHeaderView{
             btn.tag = 101 + index
             let model = hotImageNameArray![index] as! HotRecommendModel
             let url = URL(string: model.plantLogo)
-            btn.setImage(UIImage(named: "placeholderImage_Icon"), for: .normal)
-            btn.sd_setImage(with: url, for: .normal) { (uiimage, erroe, cachType, url) in
-                
-            }
-//            btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, error, cachType, url) in
-//
-//            })
             
+            btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiimage, error, cachType, url) in
+                print(error as Any)
+
+            })
+        
             btn.addTarget(self, action: #selector(hotBtnClick(_:)), for: .touchUpInside)
             scrollView?.addSubview(btn)
             btn.snp.makeConstraints({ (make) in
@@ -245,25 +243,26 @@ extension SuperLoanHeaderView{
     
     fileprivate func changerecentImageView(){
         
-        for index in 0..<5 {
+        for index in 0..<(recentImageNameArray?.count)! {
+            
+            if index > 4{
+                return
+            }
             let btn = UIButton()
             btn.tag = 101 + index
             btn.layer.cornerRadius = 5.0
-            if index > (recentImageNameArray?.count)! - 1{
-                btn.setImage(UIImage(named: "btn_image_icon"), for: .normal)
-            }else{
+            
+//            if index > (recentImageNameArray?.count)! - 1{
+//                btn.setImage(UIImage(named: "btn_image_icon"), for: .normal)
+//            }else{
 
                 let model = recentImageNameArray![index] as! HotRecommendModel
                 let url = URL(string: model.plantLogo)
-                
-                btn.setImage(UIImage(named: "placeholderImage_Icon"), for: .normal)
-                btn.sd_setImage(with: url, for: .normal) { (uiimage, erroe, cachType, url) in
-                    
-                }
-//                btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
-//
-//                })
-            }
+            
+                btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiimage, erroe, cachType, url) in
+
+                })
+    
             btn.addTarget(self, action:#selector(recentBtnClcik(_:)), for: .touchUpInside)
             recentView?.addSubview(btn)
             btn.snp.makeConstraints({ (make) in

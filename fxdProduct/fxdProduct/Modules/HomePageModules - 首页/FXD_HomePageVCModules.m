@@ -554,9 +554,13 @@
         return 103;
     }
     
-    if ([_homeProductList.flag isEqualToString:@"7"] ||[_homeProductList.flag isEqualToString:@"8"] ||[_homeProductList.flag isEqualToString:@"9"] ||[_homeProductList.flag isEqualToString:@"10"] ||[_homeProductList.flag isEqualToString:@"13"] ||[_homeProductList.flag isEqualToString:@"14"]||[_homeProductList.flag isEqualToString:@"15"]) {
+    if ([_homeProductList.flag isEqualToString:@"8"] ||[_homeProductList.flag isEqualToString:@"9"] ||[_homeProductList.flag isEqualToString:@"10"] ||[_homeProductList.flag isEqualToString:@"13"] ||[_homeProductList.flag isEqualToString:@"14"]||[_homeProductList.flag isEqualToString:@"15"]) {
         
         return _k_h-_k_w*0.44-113-113;
+    }
+    if ([_homeProductList.flag isEqualToString:@"7"]) {
+        
+        return _k_h-_k_w*0.44-113-80;
     }
     
     return 85*_homeProductList.hotRecommend.count+30;
@@ -649,6 +653,7 @@
     recentCell.backgroundColor = [UIColor whiteColor];
     recentCell.homeProductListModel = _homeProductList;
     recentCell.delegate = self;
+    [recentCell.tableView reloadData];
     [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return recentCell;
     
@@ -1119,6 +1124,8 @@
 #pragma mark 收藏
 -(void)collectionBtnClick:(UIButton *)sender{
     
+    NSInteger tag = sender.tag;
+    NSLog(@"%ld====",tag);
     HomeHotRecommendModel *model = _homeProductList.hotRecommend[sender.tag];
     
     CollectionViewModel *collectionVM = [[CollectionViewModel alloc]init];

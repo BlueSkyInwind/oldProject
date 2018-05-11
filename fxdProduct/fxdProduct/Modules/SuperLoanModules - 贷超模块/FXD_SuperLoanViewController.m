@@ -75,7 +75,7 @@
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;
-    [header beginRefreshing];
+//    [header beginRefreshing];
     self.tableView.mj_header = header;
     
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
@@ -182,6 +182,8 @@
     [self getRecentData];
     
     [self hotRecommendData];
+    
+    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
 }
 
 -(void)getDataMaxAmount:(NSString *)maxAmount maxDays:(NSString *)maxDays minAmount:(NSString *)minAmount minDays:(NSString *)minDays offset:(NSString *)offset order:(NSString *)order sort:(NSString *)sort{
@@ -290,7 +292,7 @@
     superLoanCell.selected = NO;
     superLoanCell.delegate = self;
     superLoanCell.type = _type;
-    superLoanCell.collectionBtn.tag = indexPath.row - 1;
+    
     RowsModel *model = _dataArray[indexPath.row-1];
     [superLoanCell.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.plantLogo] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
     superLoanCell.titleLabel.text = model.plantName;
@@ -329,6 +331,7 @@
         superLoanCell.descBtn.layer.borderColor = [UIColor blueColor].CGColor;
     }
     
+    superLoanCell.collectionBtn.tag = indexPath.row - 1;
     [superLoanCell.collectionBtn setImage:[UIImage imageNamed:@"collection_icon"] forState:UIControlStateNormal];
     if ([model.isCollect isEqualToString:@"0"]) {
         [superLoanCell.collectionBtn setImage:[UIImage imageNamed:@"collection_selected_icon"] forState:UIControlStateNormal];
@@ -478,7 +481,8 @@
     
     NSInteger tag = sender.tag;
     _type = [NSString stringWithFormat:@"%ld",tag - 100];
-    [_tableView reloadData];
+    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
+//    [_tableView reloadData];
     switch (tag) {
         case 101:
             [_superLoanHeaderCell.loanBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];

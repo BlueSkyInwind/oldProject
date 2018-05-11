@@ -1515,7 +1515,7 @@ extension HomePageCell{
   
     //协议
     func addProtocolClick(_ protocolNames:[String])  {
-        var protocolContent:String = "我已阅读并认可发薪贷"
+        var protocolContent:String = "我已阅读并认可憨分"
         
         let length = protocolContent.count
         
