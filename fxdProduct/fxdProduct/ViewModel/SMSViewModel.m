@@ -39,6 +39,7 @@
             flag = CODE_ADDCARD;
             break;
         case TRADEPASSWORD_CODE:
+            flag = CODE_TRADEPASSWORD;
             model.flag = CODE_TRADEPASSWORD;
             break;
         default:

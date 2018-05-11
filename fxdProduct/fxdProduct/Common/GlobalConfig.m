@@ -345,7 +345,7 @@ NSString * const EliteLoan = @"P001007";           //精英贷
 
 #pragma Mark - 项目配置信息
 
-NSString * const PLATFORM = @"16";                   //平台
+NSString * const PLATFORM = @"1";                   //平台
 NSString * const CHANNEL = @"1";                   //平台
 
 NSString * const SERVICE_PLATFORM = @"16";                   //服务
