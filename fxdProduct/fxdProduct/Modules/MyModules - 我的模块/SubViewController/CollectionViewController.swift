@@ -144,7 +144,7 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
         superLoanCell.type = model.moduletype
         let url = URL(string: model.plantLogo)
-        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiImage, error, cachType, url) in
+        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiImage, error, cachType, url) in
             
         })
         

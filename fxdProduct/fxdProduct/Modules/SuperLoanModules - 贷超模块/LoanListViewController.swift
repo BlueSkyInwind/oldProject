@@ -151,7 +151,7 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         let model = dataArray![indexPath.row - 1] as! RowsModel
         
         let url = URL(string: model.plantLogo)
-        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiImage, error, cachType, url) in
+        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiImage, error, cachType, url) in
             
         })
         superLoanCell?.titleLabel?.text = model.plantName

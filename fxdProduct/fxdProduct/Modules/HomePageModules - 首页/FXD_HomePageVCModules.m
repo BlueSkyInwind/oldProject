@@ -560,7 +560,7 @@
     }
     if ([_homeProductList.flag isEqualToString:@"7"]) {
         
-        return _k_h-_k_w*0.44-113-80;
+        return _k_h-_k_w*0.44-113-40;
     }
     
     return 85*_homeProductList.hotRecommend.count+30;
@@ -1027,24 +1027,44 @@
     
     HgLoanProtoolListModel *model = _protocolArray[0];
     NSString *inverBorrowId = @"";
+    NSString *protocolType = @"";
     if ([sender.titleLabel.text containsString:@"借款协议"]) {
         inverBorrowId = model.inverBorrowId;
+        protocolType = @"2";
+    }else if ([sender.titleLabel.text containsString:@"转账授权书"]){
+        protocolType = @"1";
+    }else if ([sender.titleLabel.text containsString:@"信用咨询及管理服务协议"]){
+        protocolType = @"3";
+    }else if ([sender.titleLabel.text containsString:@"运营商信息授权协议"]){
+        protocolType = @"4";
+    }else if ([sender.titleLabel.text containsString:@"用户信息授权服务协议"]){
+        protocolType = @"5";
+    }else if ([sender.titleLabel.text containsString:@"技术服务协议"]){
+        protocolType = @"6";
+    }else if ([sender.titleLabel.text containsString:@"风险管理与数据服务协议"]){
+        protocolType = @"7";
+    }else if ([sender.titleLabel.text containsString:@"电子签章授权委托协议"]){
+        protocolType = @"18";
+    }else if ([sender.titleLabel.text containsString:@"会员服务协议"]){
+        protocolType = @"19";
     }
     NSString *periods = _homeProductList.periods;
     if ([_homeProductList.productId isEqualToString:EliteLoan]) {
         periods = @"";
     }
-    switch (tag) {
-        case 1:
-            [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:@"2" stagingType:_homeProductList.stagingType];
-            break;
-        case 2:
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"第二个"];
-            break;
-            
-        default:
-            break;
-    }
+    
+    [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:protocolType stagingType:_homeProductList.stagingType];
+//    switch (tag) {
+//        case 1:
+//            [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:@"2" stagingType:_homeProductList.stagingType];
+//            break;
+//        case 2:
+//            [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:@"2" stagingType:_homeProductList.stagingType];
+//            break;
+//
+//        default:
+//            break;
+//    }
 }
 
 
@@ -1077,7 +1097,7 @@
     controller.titleStr = model.desc_;
     controller.moduleType = model.code_;
     [self.navigationController pushViewController:controller animated:true];
-//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"贷款"];
+
 }
 
 -(void)gameBtnClick{
@@ -1087,7 +1107,7 @@
     controller.titleStr = model.desc_;
     controller.moduleType = model.code_;
     [self.navigationController pushViewController:controller animated:true];
-//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"游戏"];
+
 }
 
 -(void)tourismBtnClcik{
@@ -1097,7 +1117,7 @@
     controller.titleStr = model.desc_;
     controller.moduleType = model.code_;
     [self.navigationController pushViewController:controller animated:true];
-//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"旅游"];
+
 }
 
 -(PlatTypeModel *)getPlatFlag:(NSInteger)flag{
@@ -1118,14 +1138,12 @@
     
     HotRecommendationViewController *controller = [[HotRecommendationViewController alloc]init];
     [self.navigationController pushViewController:controller animated:true];
-//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view  message:@"查看更多"];
+
 }
 
 #pragma mark 收藏
 -(void)collectionBtnClick:(UIButton *)sender{
     
-    NSInteger tag = sender.tag;
-    NSLog(@"%ld====",tag);
     HomeHotRecommendModel *model = _homeProductList.hotRecommend[sender.tag];
     
     CollectionViewModel *collectionVM = [[CollectionViewModel alloc]init];

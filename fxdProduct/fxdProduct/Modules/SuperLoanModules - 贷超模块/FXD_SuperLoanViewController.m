@@ -294,7 +294,7 @@
     superLoanCell.type = _type;
     
     RowsModel *model = _dataArray[indexPath.row-1];
-    [superLoanCell.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.plantLogo] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
+    [superLoanCell.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.plantLogo] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRetryFailed];
     superLoanCell.titleLabel.text = model.plantName;
 
     NSString *maximumAmount = model.maximumAmount != nil?model.maximumAmount:@"";

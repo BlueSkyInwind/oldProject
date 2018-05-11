@@ -65,7 +65,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         noneView = NonePageView()
         noneView?.DefaultUI()
         noneView?.backgroundColor = LINE_COLOR
-        noneView?.isHidden = true
+        noneView?.isHidden = false
         self.view.addSubview(noneView!)
         
     }
@@ -149,7 +149,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
                     self?.items.removeAll()
                 }
             
-                self?.messageModel = try! ShowMsgPreviewModel.init(dictionary: baseResult.data as! [AnyHashable : Any]!)
+                self?.messageModel = try! ShowMsgPreviewModel.init(dictionary: baseResult.data as! [AnyHashable : Any]?)
                 if self?.messageModel?.operUserMassge.count != 0{
                     
                     for index in 0 ..< (self?.messageModel?.operUserMassge.count)!{

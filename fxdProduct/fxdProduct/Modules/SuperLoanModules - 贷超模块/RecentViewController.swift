@@ -138,7 +138,7 @@ class RecentViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         let model = dataArray![indexPath.section] as! HotRecommendModel
         
         let url = URL(string: model.plantLogo)
-        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiImage, error, cachType, url) in
+        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiImage, error, cachType, url) in
             
         })
         superLoanCell?.titleLabel?.text = model.plantName

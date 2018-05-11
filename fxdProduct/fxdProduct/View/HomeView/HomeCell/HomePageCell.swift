@@ -979,7 +979,7 @@ extension HomePageCell {
             make.left.equalTo((checkBoxBtn?.snp.right)!).offset(5)
             make.right.equalTo(self).offset(-25)
             make.height.equalTo(40)
-            make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(17)
+            make.top.equalTo(repayImmediatelyBtn.snp.bottom).offset(10)
         }
         
 //        let nsArray = ["《银行自动转账授权书》","、","《三方借款协议》"]
