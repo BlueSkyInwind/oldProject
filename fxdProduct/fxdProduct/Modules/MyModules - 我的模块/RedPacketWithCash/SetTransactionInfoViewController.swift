@@ -339,9 +339,9 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     func sendTradeSMS(_ result : @escaping (_ isSuccess : Bool) -> Void)  {
         let tradeSMS =  SMSViewModel.init()
         tradeSMS.setBlockWithReturn({ (returnValue) in
-            let baseResult  = returnValue as! ReturnMsgBaseClass
+            let baseResult  = returnValue as! BaseResultModel
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.msg)
-            if baseResult.flag == "0000" {
+            if baseResult.errCode == "0" {
                 result(true)
             }else{
                 result(false)
