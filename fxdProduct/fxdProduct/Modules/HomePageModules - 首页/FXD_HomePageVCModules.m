@@ -88,12 +88,14 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    /*
     if ([FXD_Utility sharedUtility].loginFlage) {
         //获取位置信息
         if ([FXD_Utility sharedUtility].isObtainUserLocation) {
             [self openLocationService];
         }
     }
+     */
     [self LoadHomeView];
     
 }
