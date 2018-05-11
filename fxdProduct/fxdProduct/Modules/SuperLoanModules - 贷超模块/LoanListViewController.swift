@@ -53,6 +53,7 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         tableView?.showsHorizontalScrollIndicator = false
         tableView?.delegate = self
         tableView?.dataSource = self
+        tableView?.isScrollEnabled = true
         tableView?.separatorStyle = .none
         tableView?.backgroundColor = PayPasswordBackColor_COLOR
         self.view.addSubview(tableView!)
@@ -97,6 +98,7 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
                     let model = compQueryModel.rows[index] as! RowsModel
                     self?.dataArray?.add(model)
                 }
+                self?.tableView?.isScrollEnabled = true
                 self?.tableView?.reloadData()
                 
             }else{
@@ -112,12 +114,16 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return (dataArray?.count)! + 1
+        if moduleType == "1" {
+            
+            return (dataArray?.count)! + 1
+        }
+        return (dataArray?.count)!
     }
     
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+        if indexPath.row == 0 && moduleType == "1"{
             return 48
         }
         return 90
@@ -125,7 +131,7 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 {
+        if indexPath.row == 0 && moduleType == "1"{
             superLoanHeaderCell = tableView.dequeueReusableCell(withIdentifier:"SuperLoanHeaderCell") as? SuperLoanHeaderCell
             if superLoanHeaderCell == nil {
                 superLoanHeaderCell = SuperLoanHeaderCell.init(style: .default, reuseIdentifier: "SuperLoanHeaderCell")
@@ -147,8 +153,16 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         superLoanCell?.delegate = self
         superLoanCell?.selectionStyle = .none
         superLoanCell?.type = moduleType
-        superLoanCell?.collectionBtn?.tag = indexPath.row
-        let model = dataArray![indexPath.row - 1] as! RowsModel
+        
+        var model : RowsModel
+        if moduleType == "1" {
+            superLoanCell?.collectionBtn?.tag = indexPath.row
+            model = dataArray![indexPath.row - 1] as! RowsModel
+        }else{
+            superLoanCell?.collectionBtn?.tag = indexPath.row + 1
+            model = dataArray![indexPath.row] as! RowsModel
+        }
+//        let model = dataArray![indexPath.row - 1] as! RowsModel
         
         let url = URL(string: model.plantLogo)
         superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiImage, error, cachType, url) in
@@ -209,12 +223,18 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 0{
+        if indexPath.row == 0 && moduleType == "1"{
             return
         }
-        let model = dataArray![indexPath.row - 1] as! RowsModel
-        getCompLink(thirdPlatformId: model.id_)
-        
+        if moduleType == "1"{
+            
+            let model = dataArray![indexPath.row - 1] as! RowsModel
+            getCompLink(thirdPlatformId: model.id_)
+        }else{
+            
+            let model = dataArray![indexPath.row] as! RowsModel
+            getCompLink(thirdPlatformId: model.id_)
+        }
     }
     
     

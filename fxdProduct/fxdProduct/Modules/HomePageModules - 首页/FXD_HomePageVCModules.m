@@ -562,7 +562,7 @@
     }
     if ([_homeProductList.flag isEqualToString:@"7"]) {
         
-        return _k_h-_k_w*0.44-113-40;
+        return _k_h-_k_w*0.44-113-40 + (_protocolArray.count - 1)*30;
     }
     
     return 85*_homeProductList.hotRecommend.count+30;
@@ -605,6 +605,7 @@
         
         SDCycleScrollCell *sdcycleScrollCell = [tableView dequeueReusableCellWithIdentifier:@"SDCycleScrollCell"];
         sdcycleScrollCell.selected = NO;
+        sdcycleScrollCell.selectionStyle = UITableViewCellSelectionStyleNone;
         sdcycleScrollCell.sdCycleScrollview.delegate = self;
         sdcycleScrollCell.delegate = self;
         
@@ -1025,7 +1026,7 @@
 }
 
 -(void)protocolListClick:(UIButton *)sender{
-    NSInteger tag = sender.tag;
+//    NSInteger tag = sender.tag;
     
     HgLoanProtoolListModel *model = _protocolArray[0];
     NSString *inverBorrowId = @"";

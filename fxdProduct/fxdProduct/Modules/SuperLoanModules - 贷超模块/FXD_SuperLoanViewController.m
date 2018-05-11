@@ -242,8 +242,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (indexPath.row == 0 && [_type isEqualToString:@"1"]) {
         return 80;
+    }
+    if (indexPath.row == 0 && ![_type isEqualToString:@"1"]) {
+        return 50;
     }
     
     if (_dataArray.count <= 0) {
@@ -272,7 +275,17 @@
         _superLoanHeaderCell.backgroundColor = rgb(242, 242, 242);
         _superLoanHeaderCell.selected = NO;
         _superLoanHeaderCell.delegate = self;
+        _superLoanHeaderCell.status = @"2";
+        if (![_type isEqualToString:@"1"]) {
+            _superLoanHeaderCell.type = @"3";
+            
+        }else{
+            _superLoanHeaderCell.type = @"0";
+        }
         
+        _superLoanHeaderCell.index = _type;
+    
+        [self tabBtnEnabled:_type.intValue];
         return _superLoanHeaderCell;
         
     }
@@ -338,6 +351,28 @@
     }
     return superLoanCell;
     
+}
+
+-(void)tabBtnEnabled:(int)tag{
+    switch (tag) {
+        case 1:
+            [_superLoanHeaderCell.loanBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+            [_superLoanHeaderCell.gameBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.tourismBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            break;
+        case 2:
+            [_superLoanHeaderCell.loanBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.gameBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+            [_superLoanHeaderCell.tourismBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            break;
+        case 3:
+            [_superLoanHeaderCell.loanBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.gameBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
+            [_superLoanHeaderCell.tourismBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+            break;
+        default:
+            break;
+    }
 }
 
 -(NSString *)rateUnit:(NSString *)referenceMode{
@@ -481,29 +516,11 @@
     
     NSInteger tag = sender.tag;
     _type = [NSString stringWithFormat:@"%ld",tag - 100];
-    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
-//    [_tableView reloadData];
-    switch (tag) {
-        case 101:
-            [_superLoanHeaderCell.loanBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
-            [_superLoanHeaderCell.gameBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
-            [_superLoanHeaderCell.tourismBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"贷款"];
-            break;
-        case 102:
-            [_superLoanHeaderCell.loanBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
-            [_superLoanHeaderCell.gameBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
-            [_superLoanHeaderCell.tourismBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"游戏"];
-            break;
-        case 103:
-            [_superLoanHeaderCell.loanBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
-            [_superLoanHeaderCell.gameBtn setTitleColor:rgb(25.5, 25.5, 25.5) forState:UIControlStateNormal];
-            [_superLoanHeaderCell.tourismBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"旅游"];
-            break;
-        default:
-            break;
+    if ([_type isEqualToString:@"1"]) {
+        [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
+    }else{
+        _pages = 0;
+        [self getDataMaxAmount:@"" maxDays:@"" minAmount:@"" minDays:@"" offset:[NSString stringWithFormat:@"%d",_pages] order:@"ASC" sort:@"0"];
     }
 }
 

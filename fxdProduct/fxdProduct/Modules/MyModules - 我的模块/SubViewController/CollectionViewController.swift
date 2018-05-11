@@ -200,6 +200,9 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let model = dataArray![indexPath.section] as! CollectionListRowsModel
+        getCompLink(thirdPlatformId: model.id_)
+        
     }
     
     
@@ -208,7 +211,7 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        let model = self.dataArray![indexPath.row] as! CollectionListRowsModel
+        let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
         
         let collectionVM = CollectionViewModel()
         collectionVM.setBlockWithReturn({ (returnValue) in
@@ -246,6 +249,31 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         
         return ""
     }
+    
+    func getCompLink(thirdPlatformId : String){
+        let viewModel = CompQueryViewModel()
+        viewModel.setBlockWithReturn({ [weak self](returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                
+                let dic = baseResult.data as! NSDictionary
+                if dic["url"] != nil {
+                    let webView = FXDWebViewController()
+                    webView.urlStr = dic["url"]  as! String
+                    self?.navigationController?.pushViewController(webView, animated: true)
+                }
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+            
+        }) {
+            
+        }
+        viewModel.getCompLinkThirdPlatformId(thirdPlatformId)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

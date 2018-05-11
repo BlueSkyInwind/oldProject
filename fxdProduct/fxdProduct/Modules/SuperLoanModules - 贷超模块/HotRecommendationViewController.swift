@@ -119,6 +119,11 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+//        if type == "1" {
+//
+//            return (dataArray?.count)! + 1
+//        }
+//        return (dataArray?.count)!
         return (dataArray?.count)! + 1
     }
     
@@ -133,15 +138,18 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
 //        return 8
 //    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+        if indexPath.row == 0 && type == "1"  {
             return 97
+        }
+        if indexPath.row == 0 && type != "1" {
+            return 60
         }
         return 90
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 {
+        if indexPath.row == 0{
             superLoanHeaderCell = tableView.dequeueReusableCell(withIdentifier:"SuperLoanHeaderCell") as? SuperLoanHeaderCell
             if superLoanHeaderCell == nil {
                 superLoanHeaderCell = SuperLoanHeaderCell.init(style: .default, reuseIdentifier: "SuperLoanHeaderCell")
@@ -150,7 +158,12 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
             superLoanHeaderCell?.isSelected = false
             superLoanHeaderCell?.selectionStyle = .none
             superLoanHeaderCell?.backgroundColor = LINE_COLOR
-            superLoanHeaderCell?.type = "1"
+//            _superLoanHeaderCell.status = "1";
+            if type == "1"{
+                superLoanHeaderCell?.type = "1"
+            }else{
+                superLoanHeaderCell?.type = "3"
+            }
             superLoanHeaderCell?.delegate = self
             superLoanHeaderCell?.index = type
             tabBtn(tag: Int(type!)!)
@@ -166,6 +179,15 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
         superLoanCell?.type = type
         superLoanCell?.collectionBtn?.tag = indexPath.row
         let model = dataArray![indexPath.row - 1] as! RowsModel
+        
+//        var model : RowsModel
+//        if type == "1" {
+//            superLoanCell?.collectionBtn?.tag = indexPath.row
+//            model = dataArray![indexPath.row - 1] as! RowsModel
+//        }else{
+//            superLoanCell?.collectionBtn?.tag = indexPath.row + 1
+//            model = dataArray![indexPath.row] as! RowsModel
+//        }
         
         let url = URL(string: model.plantLogo)
         superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiImage, error, cachType, url) in
@@ -229,6 +251,16 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
         if (indexPath.row == 0) {
             return;
         }
+        
+//        if type == "1"{
+//
+//            let model = dataArray![indexPath.row - 1] as! RowsModel
+//            getCompLink(thirdPlatformId: model.id_)
+//        }else{
+//
+//            let model = dataArray![indexPath.row] as! RowsModel
+//            getCompLink(thirdPlatformId: model.id_)
+//        }
         
         let model = dataArray![indexPath.row - 1] as! RowsModel
         getCompLink(thirdPlatformId: model.id_)
@@ -389,8 +421,18 @@ extension HotRecommendationViewController{
         let tag = sender.tag
 
         type = String(format:"%ld",tag - 100)
-    
-        self.tableView?.reloadData()
+        let sortIndex = String(format:"%ld",self._index!)
+        let xAmount = maxAmount == nil ? "" : maxAmount
+        let iAmount = minAmount == nil ? "" : minAmount
+        let xDays = maxDays == nil ? "" : maxDays
+        let iDays = minDays == nil ? "" : minDays
+        if type == "1" {
+            getData(maxAmount: xAmount!, maxDays: xDays!, minAmount: iAmount!, minDays: iDays!, offset: "0", order: "ASC", sort: sortIndex)
+        }else{
+            getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: "ASC", sort: "0")
+        }
+//        getData(maxAmount: xAmount!, maxDays: xDays!, minAmount: iAmount!, minDays: iDays!, offset: "0", order: "ASC", sort: sortIndex)
+//        self.tableView?.reloadData()
 
     }
     

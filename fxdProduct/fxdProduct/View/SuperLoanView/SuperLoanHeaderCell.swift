@@ -30,6 +30,8 @@ class SuperLoanHeaderCell: UITableViewCell {
     @objc var loanBtn : UIButton?
     @objc var gameBtn : UIButton?
     @objc var tourismBtn : UIButton?
+    @objc var status : String?
+    
 //    @objc var index : String?
 //    @objc var bottomLineView : UIView?
     
@@ -83,6 +85,8 @@ class SuperLoanHeaderCell: UITableViewCell {
             setHotHeader()
         case 2?:
             setLoanHeader()
+        case 3?:
+            setHotGameHeader()
         case .none:
             break
         case .some(_):
@@ -419,6 +423,81 @@ extension SuperLoanHeaderCell{
             make.height.equalTo(1)
         })
         
+    }
+    
+    fileprivate func setHotGameHeader(){
+        
+        let bgView = UIView()
+        bgView.backgroundColor = UIColor.clear
+        self.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(0)
+        }
+        
+        let tabBgView = UIView()
+        tabBgView.backgroundColor = UIColor.white
+        bgView.addSubview(tabBgView)
+        tabBgView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.top.equalTo(bgView.snp.top).offset(10)
+            make.right.equalTo(self).offset(0)
+            make.height.equalTo(40)
+        }
+        if status == "2" {
+            tabBgView.snp.updateConstraints { (make) in
+                make.top.equalTo(bgView.snp.top).offset(0)
+            }
+        }
+        
+        loanBtn = UIButton()
+        loanBtn?.setTitle("贷款", for: .normal)
+        loanBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
+        loanBtn?.tag = 101
+        loanBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 16)
+        loanBtn?.addTarget(self, action: #selector(loanBtnClick(_:)), for: .touchUpInside)
+        tabBgView.addSubview(loanBtn!)
+        loanBtn?.snp.makeConstraints { (make) in
+            make.left.equalTo(tabBgView.snp.left).offset(20)
+            make.centerY.equalTo(tabBgView.snp.centerY)
+        }
+        
+        gameBtn = UIButton()
+        gameBtn?.setTitle("游戏", for: .normal)
+        gameBtn?.setTitleColor(GAME_COLOR, for: .normal)
+        gameBtn?.tag = 102
+        gameBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 16)
+        gameBtn?.addTarget(self, action: #selector(loanBtnClick(_:)), for: .touchUpInside)
+        tabBgView.addSubview(gameBtn!)
+        gameBtn?.snp.makeConstraints { (make) in
+            make.left.equalTo((loanBtn?.snp.right)!).offset(46)
+            make.centerY.equalTo(tabBgView.snp.centerY)
+        }
+        
+        tourismBtn = UIButton()
+        tourismBtn?.setTitle("旅游", for: .normal)
+        tourismBtn?.setTitleColor(GAME_COLOR, for: .normal)
+        tourismBtn?.tag = 103
+        tourismBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 16)
+        tourismBtn?.addTarget(self, action: #selector(loanBtnClick(_:)), for: .touchUpInside)
+        tabBgView.addSubview(tourismBtn!)
+        tourismBtn?.snp.makeConstraints { (make) in
+            make.left.equalTo((gameBtn?.snp.right)!).offset(46)
+            make.centerY.equalTo(tabBgView.snp.centerY)
+        }
+        
+        tabLineView = UIView()
+        tabLineView?.backgroundColor = UI_MAIN_COLOR
+        tabBgView.addSubview(tabLineView!)
+        tabLineView?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self).offset(20)
+            //            make.right.equalTo(loanBtn.snp.right).offset(0)
+            make.top.equalTo(tabBgView.snp.bottom).offset(0)
+            make.height.equalTo(2)
+            make.width.equalTo(35)
+        })
     }
     
     fileprivate func setLoanHeader(){
