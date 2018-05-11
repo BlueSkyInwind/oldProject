@@ -25,7 +25,7 @@ class RecentCell: UITableViewCell ,UITableViewDelegate,UITableViewDataSource,Sup
     
     //产品数据
     @objc var homeProductListModel = FXD_HomeProductListModel()
-    var tableView : UITableView?
+    @objc var tableView : UITableView?
     
     //SuperLoanCellDelegate  点击收藏按钮的代理方法
     func collectionBtn(_ sender: UIButton) {
@@ -159,7 +159,6 @@ extension RecentCell{
         superLoanCell?.delegate = self
 //        superLoanCell?.isSelected = false
         superLoanCell?.selectionStyle = .none
-        superLoanCell?.collectionBtn?.tag = indexPath.row
 
         if homeProductListModel.hotRecommend.count <= 0 {
             return superLoanCell!
@@ -169,7 +168,7 @@ extension RecentCell{
         let model = homeProductListModel.hotRecommend[indexPath.row] as! HomeHotRecommendModel
         superLoanCell?.type = model.moduletype
         let url = URL(string: model.plantLogo)
-        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiImage, error, cachType, url) in
+        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiImage, error, cachType, url) in
             
         })
         superLoanCell?.titleLabel?.text = model.plantName
@@ -218,6 +217,7 @@ extension RecentCell{
             make.width.equalTo(width)
         })
         
+        superLoanCell?.collectionBtn?.tag = indexPath.row
         superLoanCell?.collectionBtn?.setImage(UIImage.init(named: "collection_icon"), for: .normal)
         if model.isCollect == "0" {
             superLoanCell?.collectionBtn?.setImage(UIImage.init(named: "collection_selected_icon"), for: .normal)

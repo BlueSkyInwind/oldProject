@@ -172,14 +172,14 @@ extension HomePageCell {
     
     fileprivate func withdrawCell(){
         
-        let view = tipView(titleStr: "信用借款")
-        self.addSubview(view)
-        view.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(0)
-            make.top.equalTo(self).offset(0)
-            make.right.equalTo(self).offset(0)
-            make.height.equalTo(30)
-        }
+//        let view = tipView(titleStr: "信用借款")
+//        self.addSubview(view)
+//        view.snp.makeConstraints { (make) in
+//            make.left.equalTo(self).offset(0)
+//            make.top.equalTo(self).offset(0)
+//            make.right.equalTo(self).offset(0)
+//            make.height.equalTo(30)
+//        }
         
         let tipLabel = UILabel()
         tipLabel.text = "温馨提示：需将金额从存管银行提现到您的银行卡"
@@ -461,14 +461,14 @@ extension HomePageCell {
     //借款的各种中间状态
     fileprivate func loanProcessCell(){
         
-        let view = tipView(titleStr: "信用借款")
-        self.addSubview(view)
-        view.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(0)
-            make.top.equalTo(self).offset(0)
-            make.right.equalTo(self).offset(0)
-            make.height.equalTo(30)
-        }
+//        let view = tipView(titleStr: "信用借款")
+//        self.addSubview(view)
+//        view.snp.makeConstraints { (make) in
+//            make.left.equalTo(self).offset(0)
+//            make.top.equalTo(self).offset(0)
+//            make.right.equalTo(self).offset(0)
+//            make.height.equalTo(30)
+//        }
         
         let tipLabel = UILabel()
         tipLabel.textColor = UIColor.red
@@ -888,14 +888,14 @@ extension HomePageCell {
     
     //立即还款
     fileprivate func repayImmediatelyView(){
-        let view = tipView(titleStr: "信用借款")
-        self.addSubview(view)
-        view.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(0)
-            make.top.equalTo(self).offset(0)
-            make.right.equalTo(self).offset(0)
-            make.height.equalTo(30)
-        }
+//        let view = tipView(titleStr: "信用借款")
+//        self.addSubview(view)
+//        view.snp.makeConstraints { (make) in
+//            make.left.equalTo(self).offset(0)
+//            make.top.equalTo(self).offset(0)
+//            make.right.equalTo(self).offset(0)
+//            make.height.equalTo(30)
+//        }
         
         let payTipLabel = UILabel()
         payTipLabel.textColor = UIColor.red
@@ -1058,14 +1058,14 @@ extension HomePageCell {
     //立即提款
     fileprivate func withdrawMoneyImmediatelyView(){
         
-        let view = tipView(titleStr: "信用借款")
-        self.addSubview(view)
-        view.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(0)
-            make.top.equalTo(self).offset(0)
-            make.right.equalTo(self).offset(0)
-            make.height.equalTo(30)
-        }
+//        let view = tipView(titleStr: "信用借款")
+//        self.addSubview(view)
+//        view.snp.makeConstraints { (make) in
+//            make.left.equalTo(self).offset(0)
+//            make.top.equalTo(self).offset(0)
+//            make.right.equalTo(self).offset(0)
+//            make.height.equalTo(30)
+//        }
         
         let tipLabel = UILabel()
         tipLabel.text = homeProductListModel.drawInfo.warn
@@ -1515,7 +1515,7 @@ extension HomePageCell{
   
     //协议
     func addProtocolClick(_ protocolNames:[String])  {
-        var protocolContent:String = "我已阅读并认可发薪贷"
+        var protocolContent:String = "我已阅读并认可憨分"
         
         let length = protocolContent.count
         

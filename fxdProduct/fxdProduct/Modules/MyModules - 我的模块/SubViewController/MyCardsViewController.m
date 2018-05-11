@@ -99,7 +99,7 @@
     NoneView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h)];
     NoneView.backgroundColor=RGBColor(245, 245, 245, 1);
     UIImageView *logoImg=[[UIImageView alloc]initWithFrame:CGRectMake((_k_w-130)/2, 132, 130, 130)];
-    logoImg.image=[UIImage imageNamed:@"my-logo"];
+    logoImg.image=[UIImage imageNamed:@"none_icon"];
     UILabel *lblNone=[[UILabel alloc]initWithFrame:CGRectMake((_k_w-180)/2, logoImg.frame.origin.y+logoImg.frame.size.height+25, 180, 25)];
     lblNone.numberOfLines=0;
     lblNone.text=@"您当前尚未添加银行卡";

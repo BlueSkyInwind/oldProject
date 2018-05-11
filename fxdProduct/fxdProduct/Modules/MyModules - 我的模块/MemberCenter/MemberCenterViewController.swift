@@ -110,7 +110,7 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
         self.titleHeaderView?.amountStr = (memberShipInfoModel?.availableCredit)!
         self.centerHeaderView?.payAmountLabel.text = "\((memberShipInfoModel?.requestAmount)!)元"
         self.centerHeaderView?.payBackAmountLabel.text = "\((memberShipInfoModel?.chargeAmount)!)元"
-        self.centerHeaderView?.returnAmountLabel.text = "\((memberShipInfoModel?.refundAmount)!)元"
+        self.centerHeaderView?.returnAmountLabel.text = "\((memberShipInfoModel?.availableRefundAmount)!)元"
         self.centerHeaderView?.settleAmountLabel.text = "\((memberShipInfoModel?.settleCount)!)次"
         tableView?.reloadData()
     }

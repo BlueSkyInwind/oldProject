@@ -24,11 +24,14 @@ class SuperLoanHeaderView: UIView {
     @objc weak var delegate: SuperLoanHeaderViewDelegate?
     var scrollView : UIScrollView?
     var recentView : UIView?
-//    @objc var recentImageNameArray : NSArray?
+
     @objc var hotImageNameArray : NSArray?{
         
         didSet(newValue){
             
+            for view in (self.scrollView?.subviews)! {
+                view.removeFromSuperview()
+            }
             changeHotImageView()
         }
     }
@@ -37,6 +40,16 @@ class SuperLoanHeaderView: UIView {
         
         didSet(newValue){
             
+            for view in (self.recentView?.subviews)! {
+                if view.isKind(of: UIButton.self){
+                    
+                    let btn = view as! UIButton
+                    if (!(btn.titleLabel?.text == "更多") || !(btn.tag == 107)){
+                        view.removeFromSuperview()
+                    }
+                }
+                
+            }
             changerecentImageView()
         }
     }
@@ -106,25 +119,7 @@ extension SuperLoanHeaderView{
             make.right.equalTo(hotRecommendationView.snp.right).offset(-20)
         }
         
-//        for index in 0..<(hotImageNameArray?.count)! {
-//            let btn = UIButton()
-//            btn.tag = 101 + index
-//            let model = hotImageNameArray![index] as! HotRecommendModel
-//            let url = URL(string: model.plantLogo)
-//            btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
-//
-//            })
-//            btn.addTarget(self, action: #selector(hotBtnClick(_:)), for: .touchUpInside)
-//            scrollView?.addSubview(btn)
-//            btn.snp.makeConstraints({ (make) in
-//                make.left.equalTo((scrollView?.snp.left)!).offset(index * 140)
-//                make.top.equalTo((scrollView?.snp.top)!).offset(0)
-//                make.width.equalTo(120)
-//                make.height.equalTo(80)
-//            })
-//        }
-        
-        
+
         recentView = UIView()
         recentView?.backgroundColor = UIColor.white
         self.addSubview(recentView!)
@@ -153,38 +148,15 @@ extension SuperLoanHeaderView{
             make.left.equalTo(recentLineView.snp.right).offset(7)
             make.top.equalTo(recentLineView.snp.top).offset(0)
         }
-        
-//        for index in 0..<(recentImageNameArray?.count)! {
-//            let btn = UIButton()
-//            btn.tag = 101 + index
-//            btn.layer.cornerRadius = 5.0
-//            if index > (recentImageNameArray?.count)! - 1{
-//                btn.setImage(UIImage.init(named: "btn_image_icon"), for: .normal)
-//            }else{
-//
-//                let url = URL(string: recentImageNameArray![index] as! String)
-//                btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
-//
-//                })
-//            }
-//            btn.addTarget(self, action:#selector(recentBtnClcik(_:)), for: .touchUpInside)
-//            recentView?.addSubview(btn)
-//            btn.snp.makeConstraints({ (make) in
-//                make.left.equalTo(recentTitle.snp.right).offset(17 + 34 * index)
-//                make.centerY.equalTo((recentView?.snp.centerY)!)
-//                make.height.equalTo(24)
-//                make.width.equalTo(24)
-//            })
-//
-//        }
-        
+
         
         let rightBtn = UIButton()
+        rightBtn.tag = 107
         rightBtn.setImage(UIImage.init(named: "more_btn_icon"), for: .normal)
         rightBtn.addTarget(self, action: #selector(moreBtnClcik), for: .touchUpInside)
-        recentView?.addSubview(rightBtn)
+        self.addSubview(rightBtn)
         rightBtn.snp.makeConstraints { (make) in
-            make.right.equalTo((recentView?.snp.right)!).offset(-20)
+            make.right.equalTo(self.snp.right).offset(-20)
             make.centerY.equalTo((recentView?.snp.centerY)!)
         }
         
@@ -193,7 +165,7 @@ extension SuperLoanHeaderView{
         moreBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
         moreBtn.titleLabel?.font = UIFont.yx_systemFont(ofSize: 15)
         moreBtn.addTarget(self, action: #selector(moreBtnClcik), for: .touchUpInside)
-        recentView?.addSubview(moreBtn)
+        self.addSubview(moreBtn)
         moreBtn.snp.makeConstraints { (make) in
             make.right.equalTo(rightBtn.snp.left).offset(-8)
             make.centerY.equalTo((recentView?.snp.centerY)!)
@@ -252,9 +224,12 @@ extension SuperLoanHeaderView{
             btn.tag = 101 + index
             let model = hotImageNameArray![index] as! HotRecommendModel
             let url = URL(string: model.plantLogo)
-            btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
-                
+            
+            btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiimage, error, cachType, url) in
+                print(error as Any)
+
             })
+        
             btn.addTarget(self, action: #selector(hotBtnClick(_:)), for: .touchUpInside)
             scrollView?.addSubview(btn)
             btn.snp.makeConstraints({ (make) in
@@ -268,20 +243,26 @@ extension SuperLoanHeaderView{
     
     fileprivate func changerecentImageView(){
         
-        for index in 0..<5 {
+        for index in 0..<(recentImageNameArray?.count)! {
+            
+            if index > 4{
+                return
+            }
             let btn = UIButton()
             btn.tag = 101 + index
             btn.layer.cornerRadius = 5.0
-            if index > (recentImageNameArray?.count)! - 1{
-                btn.setImage(UIImage.init(named: "btn_image_icon"), for: .normal)
-            }else{
+            
+//            if index > (recentImageNameArray?.count)! - 1{
+//                btn.setImage(UIImage(named: "btn_image_icon"), for: .normal)
+//            }else{
 
                 let model = recentImageNameArray![index] as! HotRecommendModel
                 let url = URL(string: model.plantLogo)
-                btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: { (uiimage, erroe, cachType, url) in
+            
+                btn.sd_setImage(with: url, for: .normal, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiimage, erroe, cachType, url) in
 
                 })
-            }
+    
             btn.addTarget(self, action:#selector(recentBtnClcik(_:)), for: .touchUpInside)
             recentView?.addSubview(btn)
             btn.snp.makeConstraints({ (make) in
