@@ -99,7 +99,6 @@
     _selectRedPacket = 0.0;
     _useredPacketAmount = 0.0;
     _canUseReadPacket = false;
-    
     navBarHairlineImageView= [self findHairlineImageViewUnder:self.navigationController.navigationBar];
     self.PayDetailTB.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMoneyCell" bundle:nil] forCellReuseIdentifier:@"cell"];
@@ -358,6 +357,7 @@
     } else {
         userBankCardListVC.currentIndex  = userSelectIndex;
     }
+    userBankCardListVC.applicationId = _applicationId;
     userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
         _selectCard = cardInfo;
         if (cardInfo == nil) {

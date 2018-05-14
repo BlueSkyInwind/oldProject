@@ -99,6 +99,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     
     BillingMessageViewController *controller = [[BillingMessageViewController alloc]init];
     controller.type = @"1";
+    controller.applicationId = _applicationId;
     [self.navigationController pushViewController:controller animated:true];
 //    EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:NSStringFromClass([EditCardsController class]) bundle:nil];
 //    editCard.typeFlag = @"0";

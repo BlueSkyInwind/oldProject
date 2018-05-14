@@ -23,4 +23,5 @@ typedef void(^PayPatternSelectBlock)(CardInfo * cardInfo, NSInteger currentIndex
 //swift调用
 -(void)userSelectedBankCard:(PayPatternSelectBlock)block;
 
+@property (nonatomic,strong)NSString *applicationId;
 @end

@@ -46,4 +46,6 @@ typedef NS_ENUM(NSUInteger, RepayType) {
 
 @property (nonatomic,strong)NSString *platform_type;
 
+@property (nonatomic,strong)NSString *applicationId;
+
 @end

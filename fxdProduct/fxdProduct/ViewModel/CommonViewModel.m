@@ -53,13 +53,15 @@
     }];
 }
 
--(void)obtainTransferAuthProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode cardBankCode:(NSString *)cardBankCode cardNo:(NSString *)cardNo stagingType:(NSString *)stagingType{
+-(void)obtainTransferAuthProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode cardBankCode:(NSString *)cardBankCode cardNo:(NSString *)cardNo stagingType:(NSString *)stagingType applicationId:(NSString *)applicationId{
     ProtocolParamModel * protocolM = [[ProtocolParamModel alloc]init];
     protocolM.productId  = Type_id;
     protocolM.protocolType  = typeCode;
     protocolM.cardBank = cardBankCode;
     protocolM.cardNo = cardNo;
     protocolM.stagingType = stagingType;
+    protocolM.applicationId = applicationId;
+    
     
     NSDictionary *paramDic = [protocolM toDictionary];
     

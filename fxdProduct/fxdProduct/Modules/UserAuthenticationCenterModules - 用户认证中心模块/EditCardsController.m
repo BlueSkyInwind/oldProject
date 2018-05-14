@@ -473,7 +473,8 @@
         }
     } WithFaileBlock:^{
     }];
-    [commonVM obtainTransferAuthProtocolType:EliteLoan typeCode:@"1" cardBankCode:cardBank cardNo:cardNo stagingType:nil];
+//    [commonVM obtainTransferAuthProtocolType:EliteLoan typeCode:@"1" cardBankCode:cardBank cardNo:cardNo stagingType:nil];
+    [commonVM obtainTransferAuthProtocolType:EliteLoan typeCode:@"1" cardBankCode:cardBank cardNo:cardNo stagingType:nil applicationId:nil];
 }
 
 - (void)fatchCardInfo
