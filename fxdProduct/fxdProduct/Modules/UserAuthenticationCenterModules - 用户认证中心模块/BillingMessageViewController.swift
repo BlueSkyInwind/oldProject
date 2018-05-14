@@ -19,6 +19,9 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
     var cardCode : NSString?
     var cardFlag : Int?
     @objc var type = "0"
+    @objc var applicationId = ""
+//    @objc var stagingType = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -155,6 +158,8 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         controller.bankCode = (dataArray?[3] as! String)
         controller.bankShortName = (dataArray?[4] as! String)
         controller.requestType = requestType
+        controller.applicationId = applicationId
+//        controller.stagingType = stagingType
         self.navigationController?.pushViewController(controller, animated: true)
        
         

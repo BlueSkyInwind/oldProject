@@ -689,7 +689,7 @@
     if ([_homeProductList.platfromType isEqualToString:@"0"]) {
         if ([_homeProductList.flag isEqualToString:@"15"]) {
             LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-            
+            controller.applicationId = _homeProductList.applicationId;
             [self.navigationController pushViewController:controller animated:true];
         }else{
             FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
@@ -708,7 +708,7 @@
             {
                 if ([_homeProductList.flag isEqualToString:@"15"]) {
                     LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-                    
+                    controller.applicationId = _homeProductList.applicationId;
                     [self.navigationController pushViewController:controller animated:true];
                 }else{
                     FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
@@ -745,7 +745,7 @@
         {
             if ([_homeProductList.flag isEqualToString:@"15"]) {
                 LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-                
+                controller.applicationId = _homeProductList.applicationId;
                 [self.navigationController pushViewController:controller animated:true];
             }else{
                 FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
@@ -858,6 +858,7 @@
     if (!isSelected) {
         
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+        controller.applicationId = _homeProductList.applicationId;
         [self.navigationController pushViewController:controller animated:true];
     
     }else{

@@ -27,7 +27,8 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
     var yinshengbaotimeNum = 60
     var bankCardQueryArray : NSMutableArray?
     var smsCodeArray : NSMutableArray?
-    
+    @objc var applicationId = ""
+    @objc var stagingType = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -302,7 +303,7 @@ extension FXD_WithholdAuthViewController {
         }
         agreementView.agreementClick = { [weak self] in
             //协议点击
-            self?.getProtocolContentProtocolType(productId: "", typeCode: "", applicationId: "", periods: "")
+            self?.getProtocolContentProtocolType(productId: "", typeCode: "1", applicationId: (self?.applicationId)!, periods: "")
             
         }
         footerView.addSubview(agreementView)
@@ -345,7 +346,7 @@ extension FXD_WithholdAuthViewController {
         }) {
             
         }
-        commonVM.obtainTransferAuthProtocolType(productId, typeCode: typeCode, cardBankCode: bankCode, cardNo: cardNum, stagingType: "1")
+        commonVM.obtainTransferAuthProtocolType(productId, typeCode: typeCode, cardBankCode: bankCode, cardNo: cardNum, stagingType: stagingType, applicationId: applicationId)
 
     }
 

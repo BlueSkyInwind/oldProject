@@ -340,7 +340,7 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
                 repayMent.situations = _situations;
 
                 repayMent.platform_type = _platform_type;
-                
+                repayMent.applicationId = _applicationId;
                 [self.navigationController pushViewController:repayMent animated:YES];
                 
             } else {
