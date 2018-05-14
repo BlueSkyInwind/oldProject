@@ -168,65 +168,7 @@ extension HomePageCell {
             make.height.equalTo(50)
         }
     }
-    
-    
-    fileprivate func withdrawCell(){
-        
-//        let view = tipView(titleStr: "信用借款")
-//        self.addSubview(view)
-//        view.snp.makeConstraints { (make) in
-//            make.left.equalTo(self).offset(0)
-//            make.top.equalTo(self).offset(0)
-//            make.right.equalTo(self).offset(0)
-//            make.height.equalTo(30)
-//        }
-        
-        let tipLabel = UILabel()
-        tipLabel.text = "温馨提示：需将金额从存管银行提现到您的银行卡"
-        tipLabel.font = UIFont.yx_systemFont(ofSize: 12)
-        tipLabel.textColor = UIColor.red
-        self.addSubview(tipLabel)
-        tipLabel.snp.makeConstraints { (make) in
-            make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self).offset(8)
-        }
-        
-        let descLabel = UILabel()
-        descLabel.text = "提现金额(元)"
-        descLabel.font = UIFont.yx_systemFont(ofSize: 17)
-        descLabel.textColor = RedPacketBottomBtn_COLOR
-        self.addSubview(descLabel)
-        descLabel.snp.makeConstraints { (make) in
-            make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(tipLabel.snp.bottom).offset(44)
-        }
-        
-        let moneyLabel = UILabel()
-        moneyLabel.textColor = UI_MAIN_COLOR
-        moneyLabel.text = "3000"
-        moneyLabel.font = UIFont.yx_systemFont(ofSize: 40)
-        self.addSubview(moneyLabel)
-        moneyLabel.snp.makeConstraints { (make) in
-            make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(descLabel.snp.bottom).offset(24)
-            make.height.equalTo(30)
-        }
-        
-        let bottomBtn = UIButton()
-        bottomBtn.setTitle("立即提现", for: .normal)
-        bottomBtn.setTitleColor(UIColor.white, for: .normal)
-        bottomBtn.setBackgroundImage(UIImage.init(named: "applayBtnImage"), for: .normal)
-        bottomBtn.titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
-        bottomBtn.addTarget(self, action: #selector(withdrawBtnClick), for: .touchUpInside)
-        self.addSubview(bottomBtn)
-        bottomBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(26)
-            make.right.equalTo(self).offset(-26)
-            make.bottom.equalTo(self).offset(-82)
-            make.height.equalTo(50)
-        }
-        
-    }
+
     //默认的
     fileprivate func defaultCell(){
         
@@ -1761,10 +1703,6 @@ extension HomePageCell{
     
     //重新测评
     @objc func bottomBtnClick(){
-        
-    }
-    //立即提测
-    @objc func withdrawBtnClick(){
         
     }
 

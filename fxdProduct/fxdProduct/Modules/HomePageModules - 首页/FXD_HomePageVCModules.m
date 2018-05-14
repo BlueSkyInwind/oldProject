@@ -451,15 +451,7 @@
                 [weakSelf homeActivityPictureClick];
             }
         }];
-        
-//        _popView = [ActivityHomePopView defaultPopupView];
-//        _popView.closeBtn.hidden = YES;
-//        _popView.delegate = self;
-//        [_popView.imageView sd_setImageWithURL:[NSURL URLWithString:model.image]];
-//        _popView.parentVC = self;
-//        [self lew_presentPopupView:_popView animation:[LewPopupViewAnimationSpring new] backgroundClickable:NO dismissed:^{
-//        }];
-//        _countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(homeActivitiesPopupsClose) userInfo:nil repeats:true];
+
     }
 }
 
@@ -501,13 +493,11 @@
         HomepageActivityImageDisplayModule *firstBorrowVC = [[HomepageActivityImageDisplayModule alloc] init];
         firstBorrowVC.url = _advImageUrl;
         [self.navigationController pushViewController:firstBorrowVC animated:YES];
-//        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
     }
     if ([_advTapToUrl hasPrefix:@"http://"] || [_advTapToUrl hasPrefix:@"https://"]) {
         FXDWebViewController *webView = [[FXDWebViewController alloc] init];
         webView.urlStr = _advTapToUrl;
         [self.navigationController pushViewController:webView animated:true];
-//        [self lew_dismissPopupViewWithanimation:[LewPopupViewAnimationSpring new]];
     }
 }
 
@@ -529,19 +519,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    //7、8、9、10、13、14、15
-    
-//    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]){
-//        return 3;
-//    }
-    
     if (_homeProductList == nil) {
         return 0;
     }
     return 2;
-    
-
-//    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -567,21 +548,6 @@
     
     return 85*_homeProductList.hotRecommend.count+30;
     
-    //flag==1、3、4   85*6+30
-//    if (indexPath.section == 2){
-//        return 85*_homeProductList.hotRecommend.count+30;
-//    }
-//
-//    if ([_homeProductList.flag isEqualToString:@"7"] || [_homeProductList.flag isEqualToString:@"14"]) {
-//        return _k_h-_k_w*0.44-113+110-113;
-//    }
-//    if ([_homeProductList.flag isEqualToString:@"1"]) {
-//        return _k_h-_k_w*0.44-113-113-40;
-//    }
-//    if ([_homeProductList.flag isEqualToString:@"3"]||[_homeProductList.flag isEqualToString:@"4"]) {
-//        _k_h-_k_w*0.44-113-113-120;
-//    }
-//    return _k_h-_k_w*0.44-113-113;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -940,33 +906,20 @@
     
     HgLoanProtoolListModel *model = _protocolArray[0];
     NSString *inverBorrowId = @"";
+    NSString *typeCode = @"";
     if ([protocoalName containsString:@"借款协议"]) {
         inverBorrowId = model.inverBorrowId;
+        typeCode = @"2";
+    }else if([protocoalName containsString:@"转账授权书"]){
+        typeCode = @"1";
     }
     NSString *periods = _homeProductList.periods;
     if ([_homeProductList.productId isEqualToString:EliteLoan]) {
         periods = @"";
     }
-    switch (index) {
-        case 0:
-            
-            //银行自动转账授权书
-            
-            [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:@"2" stagingType:_homeProductList.stagingType];
-//            [self getProtocolContentProtocolType:_homeProductList.productId typeCode:@"1" applicationId:_homeProductList.applicationId periods:nil];
-            break;
-        case 1:
-            //银行自动转账授权书
-            [self getProtocolContentProtocolType:_homeProductList.productId typeCode:@"1" applicationId:_homeProductList.applicationId periods:nil];
-            break;
+    
+    [self getProtocolContentProtocolType:_homeProductList.productId typeCode:typeCode applicationId:_homeProductList.applicationId periods:periods];
 
-        case 2:
-            //三方借款协议
-            [self getProtocolContentProtocolType:_homeProductList.productId typeCode:@"2" applicationId:_homeProductList.applicationId periods:_homeProductList.periods];
-            break;
-        default:
-            break;
-    }
 }
 
 -(void)getProtocolContentProtocolType:(NSString *)productId typeCode:(NSString *)typeCode applicationId:(NSString *)applicationId periods:(NSString *)periods{
@@ -986,31 +939,6 @@
     } WithFaileBlock:^{
     }];
     [commonVM obtainProductProtocolType:productId typeCode:typeCode apply_id:applicationId periods:periods stagingType:_homeProductList.stagingType];
-}
-
-//获取协议
--(void)getProductNewProtocolInverBorrowId:(NSString *)inverBorrowId periods:(NSString *)periods productType:(NSString *)productType protocolType:(NSString *)protocolType stagingType:(NSString *)stagingType{
-    
-    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
-    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResultM.errCode isEqualToString:@"0"]) {
-            NSDictionary * dic = (NSDictionary *)baseResultM.data;
-            if ([dic.allKeys containsObject:@"protocolContent"]) {
-                NSString *protocolContent = dic[@"protocolContent"];
-                NSString *navTitle = dic[@"title"];
-                DetailViewController *webController = [[DetailViewController alloc]init];
-                webController.content = protocolContent;
-                webController.navTitle = navTitle;
-                [self.navigationController pushViewController:webController animated:true];
-            }
-        }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message: baseResultM.friendErrMsg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceVM hgGetProductNewProtocolApplicationId:_homeProductList.applicationId inverBorrowId:inverBorrowId periods:periods productId:_homeProductList.productId productType:productType protocolType:protocolType stagingType:stagingType];
 }
 
 -(void)protocolListClick:(UIButton *)sender{
@@ -1042,8 +970,7 @@
     if ([_homeProductList.productId isEqualToString:EliteLoan]) {
         periods = @"";
     }
-    
-    [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:protocolType stagingType:_homeProductList.stagingType];
+    [self getProtocolContentProtocolType:_homeProductList.productId typeCode:protocolType applicationId:_homeProductList.applicationId periods:periods];
 
 }
 
@@ -1051,23 +978,6 @@
 -(void)bottomBtnClick{
     
     
-}
-
--(void)withdrawBtnClick{
-    
-    HomeViewModel *homeVM = [[HomeViewModel alloc]init];
-    [homeVM setBlockWithReturnBlock:^(id returnValue) {
-        
-        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResultM.errCode isEqualToString:@"0"]) {
-            QBBWitnDrawModel *model = [[QBBWitnDrawModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-        }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [homeVM paidcenterQbbWithDrawCapitalPlatform:@"5"];
 }
 
 -(void)loanClick{
