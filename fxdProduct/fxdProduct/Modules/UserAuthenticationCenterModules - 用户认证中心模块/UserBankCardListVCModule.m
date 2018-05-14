@@ -173,6 +173,10 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
         cell.bankCardInfoLabel.textColor = [UIColor grayColor];
         if (_currentIndex == indexPath.row) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            UIImage *imageBlue = [UIImage imageNamed:@"sort_right_icon"];
+            UIImageView* accessoryViewOrg = [[UIImageView alloc] initWithImage:imageBlue];
+            accessoryViewOrg.frame = CGRectMake(0, 0, imageBlue.size.width, imageBlue.size.height);
+            cell.accessoryView = accessoryViewOrg;
             cell.bankCardInfoLabel.textColor = [UIColor blackColor];
         }
     }

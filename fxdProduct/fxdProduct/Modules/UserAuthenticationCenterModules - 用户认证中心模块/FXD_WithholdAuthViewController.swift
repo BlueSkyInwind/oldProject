@@ -302,6 +302,7 @@ extension FXD_WithholdAuthViewController {
         }
         agreementView.agreementClick = { [weak self] in
             //协议点击
+            self?.getProtocolContentProtocolType(productId: "", typeCode: "", applicationId: "", periods: "")
             
         }
         footerView.addSubview(agreementView)
@@ -324,6 +325,30 @@ extension FXD_WithholdAuthViewController {
         })
         return footerView
     }
+    
+    
+    func getProtocolContentProtocolType(productId:String, typeCode:String,applicationId:String,periods:String){
+        let commonVM = CommonViewModel()
+        commonVM.setBlockWithReturn({ (retrunValue) in
+    
+            let baseResult = retrunValue as! BaseResultModel
+            if baseResult.errCode == "0"{
+                
+                let content =  (baseResult.data as! [String:String])["productProURL"]
+                let fxdWeb = FXDWebViewController.init()
+                fxdWeb.urlStr = content
+                self.navigationController?.pushViewController(fxdWeb, animated: true)
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        commonVM.obtainTransferAuthProtocolType(productId, typeCode: typeCode, cardBankCode: bankCode, cardNo: cardNum, stagingType: "1")
+
+    }
+
     
     func addHeaderView() -> UIView {
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 30))

@@ -825,12 +825,6 @@
             }
         }];
     }
-//
-//    HotRecommendationViewController *controller = [[HotRecommendationViewController alloc]init];
-//    [self.navigationController pushViewController:controller animated:true];
-    //收款信息
-//    BillingMessageViewController * controller = [[BillingMessageViewController alloc]init];
-//    [self.navigationController pushViewController:controller animated:true];
 }
 
 
@@ -899,12 +893,6 @@
         
         LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
         [self.navigationController pushViewController:controller animated:true];
-//        if ([_homeProductList.platfromType isEqualToString:@"0"]) {
-//            LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-//            [self.navigationController pushViewController:controller animated:true];
-//        }else{
-//            [self jumpControllerUserStatus:_homeProductList.userStatus];
-//        }
     
     }else{
         
@@ -1026,7 +1014,6 @@
 }
 
 -(void)protocolListClick:(UIButton *)sender{
-//    NSInteger tag = sender.tag;
     
     HgLoanProtoolListModel *model = _protocolArray[0];
     NSString *inverBorrowId = @"";
@@ -1057,17 +1044,7 @@
     }
     
     [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:protocolType stagingType:_homeProductList.stagingType];
-//    switch (tag) {
-//        case 1:
-//            [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:@"2" stagingType:_homeProductList.stagingType];
-//            break;
-//        case 2:
-//            [self getProductNewProtocolInverBorrowId:inverBorrowId periods:periods productType:@"" protocolType:@"2" stagingType:_homeProductList.stagingType];
-//            break;
-//
-//        default:
-//            break;
-//    }
+
 }
 
 

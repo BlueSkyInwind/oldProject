@@ -66,8 +66,13 @@
     SupportBankList * supportBankList = [_bankArray objectAtIndex:indexPath.row];
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:supportBankList.icon_url_] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
     cell.textLabel.text = supportBankList.bank_name_;
+    
     if (self.cardTag == indexPath.row) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        UIImage *imageBlue = [UIImage imageNamed:@"sort_right_icon"];
+        UIImageView* accessoryViewOrg = [[UIImageView alloc] initWithImage:imageBlue];
+        accessoryViewOrg.frame = CGRectMake(0, 0, imageBlue.size.width, imageBlue.size.height);
+        cell.accessoryView = accessoryViewOrg;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
