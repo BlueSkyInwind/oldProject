@@ -37,6 +37,8 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
     var minDays : String?
     //是否第一次进来 借款金额周期没有值，为收藏做处理
     var isFirst : Bool?
+    //排序方式
+    var order : String?
 
 
     override func viewDidLoad() {
@@ -48,6 +50,7 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
         _index = 0
         dataArray = NSMutableArray.init(capacity: 100)
         pages = 0
+        order = "ASC"
         addBackItem()
         configureView()
         // Do any additional setup after loading the view.
@@ -58,7 +61,7 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
         pages = 0;
         let offset = String(format:"%d",pages!)
         
-        getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: offset, order: "ASC", sort: "0")
+        getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: offset, order: order!, sort: "0")
         
     }
     func configureView()  {
@@ -109,34 +112,17 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
         }) {
             
         }
-        viewModel.compQueryLimit("15", maxAmount: maxAmount, maxDays: maxDays, minAmount: minAmount, minDays: minDays, offset: offset, order: order, sort: sort, moduleType: type)
+        viewModel.compQueryLimit("15", maxAmount: maxAmount, maxDays: maxDays, minAmount: minAmount, minDays: minDays, offset: offset, order: order, sort: sort, moduleType: type, location: "7")
     
     }
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return (dataArray?.count)!
-//    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-//        if type == "1" {
-//
-//            return (dataArray?.count)! + 1
-//        }
-//        return (dataArray?.count)!
         return (dataArray?.count)! + 1
     }
-    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = UIView()
-//        headerView.backgroundColor = LINE_COLOR
-//        return headerView
-//
-//    }
-    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 8
-//    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 && type == "1"  {
             return 97
@@ -179,15 +165,6 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
         superLoanCell?.type = type
         superLoanCell?.collectionBtn?.tag = indexPath.row
         let model = dataArray![indexPath.row - 1] as! RowsModel
-        
-//        var model : RowsModel
-//        if type == "1" {
-//            superLoanCell?.collectionBtn?.tag = indexPath.row
-//            model = dataArray![indexPath.row - 1] as! RowsModel
-//        }else{
-//            superLoanCell?.collectionBtn?.tag = indexPath.row + 1
-//            model = dataArray![indexPath.row] as! RowsModel
-//        }
         
         let url = URL(string: model.plantLogo)
         superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiImage, error, cachType, url) in
@@ -251,16 +228,6 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
         if (indexPath.row == 0) {
             return;
         }
-        
-//        if type == "1"{
-//
-//            let model = dataArray![indexPath.row - 1] as! RowsModel
-//            getCompLink(thirdPlatformId: model.id_)
-//        }else{
-//
-//            let model = dataArray![indexPath.row] as! RowsModel
-//            getCompLink(thirdPlatformId: model.id_)
-//        }
         
         let model = dataArray![indexPath.row - 1] as! RowsModel
         getCompLink(thirdPlatformId: model.id_)
@@ -330,6 +297,7 @@ class HotRecommendationViewController: BaseViewController ,UITableViewDelegate,U
 
 }
 extension HotRecommendationViewController{
+    
     func sortBtnClick(_ sender: UIButton) {
         
         if (_filterView != nil) {
@@ -418,6 +386,7 @@ extension HotRecommendationViewController{
     
     func tabBtnClick(_ sender: UIButton) {
         
+        order = "ASC"
         let tag = sender.tag
 
         type = String(format:"%ld",tag - 100)
@@ -427,12 +396,11 @@ extension HotRecommendationViewController{
         let xDays = maxDays == nil ? "" : maxDays
         let iDays = minDays == nil ? "" : minDays
         if type == "1" {
-            getData(maxAmount: xAmount!, maxDays: xDays!, minAmount: iAmount!, minDays: iDays!, offset: "0", order: "ASC", sort: sortIndex)
+            
+            getData(maxAmount: xAmount!, maxDays: xDays!, minAmount: iAmount!, minDays: iDays!, offset: "0", order: order!, sort: sortIndex)
         }else{
-            getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: "ASC", sort: "0")
+            getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: order!, sort: "0")
         }
-//        getData(maxAmount: xAmount!, maxDays: xDays!, minAmount: iAmount!, minDays: iDays!, offset: "0", order: "ASC", sort: sortIndex)
-//        self.tableView?.reloadData()
 
     }
     
@@ -456,6 +424,19 @@ extension HotRecommendationViewController{
     }
     func sortTabSelected(_ index: NSInteger) {
         _index = index
+        
+        switch _index {
+        case 0:
+            order = "ASC"
+        case 1:
+            order = "DESC"
+        case 2:
+            order = "ASC"
+        case 3:
+            order = "ASC"
+        default:
+            break;
+        }
         superLoanHeaderCell?.sortBtn?.setTitleColor(TITLE_COLOR, for: .normal)
         superLoanHeaderCell?.sortImageBtn?.setImage(UIImage.init(named: "sort_icon"), for: .normal)
         superLoanHeaderCell?.sortBtn?.isSelected = false
@@ -463,12 +444,11 @@ extension HotRecommendationViewController{
         let sortIndex = String(format:"%ld",index)
         
         if isFirst! {
-            getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: "ASC", sort: sortIndex)
+            getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: order!, sort: sortIndex)
         }else{
             
-            getData(maxAmount: maxAmount!, maxDays: maxDays!, minAmount: minAmount!, minDays: minDays!, offset: "0", order: "ASC", sort: sortIndex)
+            getData(maxAmount: maxAmount!, maxDays: maxDays!, minAmount: minAmount!, minDays: minDays!, offset: "0", order: order!, sort: sortIndex)
         }
-//        getData(maxAmount: maxAmount!, maxDays: maxDays!, minAmount: minAmount!, minDays: minDays!, offset: "0", order: "ASC", sort: sortIndex)
         
         UIView.animate(withDuration: 1) {
             self._sortView?.removeFromSuperview()
@@ -476,7 +456,7 @@ extension HotRecommendationViewController{
     }
     
     func sureBtnClick(_ minLoanMoney: String, maxLoanMoney: String, minLoanPeriod: String, maxLoanPeriod: String) {
-        
+        order = "ASC"
         isFirst = false
         let sortIndex = String(format:"%ld",self._index!)
         
@@ -531,9 +511,9 @@ extension HotRecommendationViewController{
                 
                 if (self?.isFirst!)!{
                     
-                    self?.getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: "ASC", sort: sortIndex)
+                    self?.getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: (self?.order!)!, sort: sortIndex)
                 }else{
-                    self?.getData(maxAmount: (self?.maxAmount!)!, maxDays: (self?.maxDays!)!, minAmount: (self?.minAmount!)!, minDays: (self?.minDays!)!, offset: "0", order: "ASC", sort: sortIndex)
+                    self?.getData(maxAmount: (self?.maxAmount!)!, maxDays: (self?.maxDays!)!, minAmount: (self?.minAmount!)!, minDays: (self?.minDays!)!, offset: "0", order: (self?.order!)!, sort: sortIndex)
                 }
                 
             }

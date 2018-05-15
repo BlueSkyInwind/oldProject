@@ -30,6 +30,7 @@
     NSMutableArray *_hotDataArray;
     SuperLoanHeaderView *_headerView;
     NSMutableArray *_recentDataArray;
+    NSString *_order;
 
 }
 
@@ -46,6 +47,7 @@
     _hotDataArray = [NSMutableArray arrayWithCapacity:100];
     _recentDataArray = [NSMutableArray arrayWithCapacity:100];
     _type = @"1";
+    _order = @"ASC";
     [self createTab];
     
     
@@ -150,13 +152,13 @@
 -(void)headerRefreshing{
     
     _pages = 0;
-    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
+    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
 }
 
 -(void)footerRereshing{
     
     _pages++;
-    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_maxDays offset:[NSString stringWithFormat:@"%d",_pages] order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
+    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_maxDays offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
 }
 -(void)viewWillAppear:(BOOL)animated{
 
@@ -183,7 +185,7 @@
     
     [self hotRecommendData];
     
-    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
+    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
 }
 
 -(void)getDataMaxAmount:(NSString *)maxAmount maxDays:(NSString *)maxDays minAmount:(NSString *)minAmount minDays:(NSString *)minDays offset:(NSString *)offset order:(NSString *)order sort:(NSString *)sort{
@@ -203,6 +205,7 @@
                 [_dataArray addObject:rowModel];
             }
         
+            self.tableView.scrollEnabled = true;
             [_tableView.mj_header endRefreshing];
             [_tableView.mj_footer endRefreshing];
             [_tableView reloadData];
@@ -218,7 +221,7 @@
         [_tableView.mj_footer endRefreshing];
     }];
     
-    [viewModel compQueryLimit:@"15" maxAmount:maxAmount maxDays:maxDays minAmount:minAmount minDays:minDays offset:offset order:order sort:sort moduleType:_type];
+    [viewModel compQueryLimit:@"15" maxAmount:maxAmount maxDays:maxDays minAmount:minAmount minDays:minDays offset:offset order:order sort:sort moduleType:_type location:@"5"];
 
 }
 #pragma mark - TableViewDelegate
@@ -426,6 +429,8 @@
     }];
     [viewModel getCompLinkThirdPlatformId:third_platform_id];
 }
+
+#pragma mark 排序
 -(void)sortBtnClick:(UIButton *)sender{
     
     if (_filterView) {
@@ -469,7 +474,7 @@
     }
 }
 
-
+#pragma mark 筛选
 -(void)filterBtnClick:(UIButton *)sender{
     
     if (_sortView) {
@@ -517,31 +522,51 @@
     NSInteger tag = sender.tag;
     _type = [NSString stringWithFormat:@"%ld",tag - 100];
     if ([_type isEqualToString:@"1"]) {
-        [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
+        _order = @"ASC";
+        [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
     }else{
         _pages = 0;
-        [self getDataMaxAmount:@"" maxDays:@"" minAmount:@"" minDays:@"" offset:[NSString stringWithFormat:@"%d",_pages] order:@"ASC" sort:@"0"];
+        [self getDataMaxAmount:@"" maxDays:@"" minAmount:@"" minDays:@"" offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:@"0"];
     }
 }
+
 
 -(void)sortTabSelected:(NSInteger)selectedIndex{
     
     _index = selectedIndex;
+    switch (_index) {
+        case 0:
+            _order = @"ASC";
+            break;
+        case 1:
+            _order = @"DESC";
+            break;
+        case 2:
+            _order = @"ASC";
+            break;
+        case 3:
+            _order = @"ASC";
+            break;
+        default:
+            break;
+    }
     
     [_superLoanHeaderCell.sortBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
     [_superLoanHeaderCell.sortImageBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
     _superLoanHeaderCell.sortBtn.selected = NO;
     _superLoanHeaderCell.sortImageBtn.selected = NO;
-    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:@"ASC" sort:[NSString stringWithFormat:@"%ld",selectedIndex]];
+    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",selectedIndex]];
     [UIView animateWithDuration:1 animations:^{
         [_sortView removeFromSuperview];
         
     }];
 }
 
+
+#pragma mark 筛选确认按钮
 -(void)sureBtnClick:(NSString *)minLoanMoney maxLoanMoney:(NSString *)maxLoanMoney minLoanPeriod:(NSString *)minLoanPeriod maxLoanPeriod:(NSString *)maxLoanPeriod{
     
-    
+    _order = @"ASC";
     [_superLoanHeaderCell.filterBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
     [_superLoanHeaderCell.filterImageBtn setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
     _superLoanHeaderCell.filterBtn.selected = NO;
@@ -563,7 +588,7 @@
     _minAmount = minLoanMoney;
     _minDays = minLoanPeriod;
     
-    [self getDataMaxAmount:maxLoanMoney maxDays:maxLoanPeriod minAmount:minLoanMoney minDays:minLoanPeriod offset:@"0" order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
+    [self getDataMaxAmount:maxLoanMoney maxDays:maxLoanPeriod minAmount:minLoanMoney minDays:minLoanPeriod offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
     [UIView animateWithDuration:1 animations:^{
         
         [_filterView removeFromSuperview];
@@ -616,7 +641,7 @@
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             
-            [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:@"ASC" sort:[NSString stringWithFormat:@"%ld",_index]];
+            [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }

@@ -34,6 +34,9 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     var minAmount : String?
     //最小周期
     var minDays : String?
+    //排序方式
+    var order : String?
+    var page : Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +45,8 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         _index = 0
         pages = 0
         isFirst = true
+        order = "ASC"
+        page = 0
         self.title = titleStr
         addBackItem()
         configureView()
@@ -68,7 +73,60 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }else{
             self.automaticallyAdjustsScrollViewInsets = false;
         }
+        
+//        //下拉刷新相关设置,使用闭包Block
+//        tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+//
+//            self.headerRefresh()
+//
+//        })
+//
+//
+//        //        //上拉加载相关设置,使用闭包Block
+//        //        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+//        //
+//        //            self.footerLoad()
+//        //
+//        //        })
+//        //        tableView?.mj_footer.isAutomaticallyHidden = true
+//
+//        // 底部加载
+//        let footer = MJRefreshAutoNormalFooter()
+//        footer.setRefreshingTarget(self, refreshingAction: #selector(footerLoad))
+//        //是否自动加载（默认为true，即表格滑到底部就自动加载）
+//        footer.isAutomaticallyRefresh = false
+//        self.tableView!.mj_footer = footer
     }
+    
+    //MARK: 刷新
+    /// 下拉刷新
+    @objc func headerRefresh(){
+        
+        self.page = 0
+        let sortIndex = String(format:"%ld",_index!)
+        getData(maxAmount: maxAmount!, maxDays: maxDays!, minAmount: minAmount!, minDays: minDays!, offset: "15", order: order!, sort: sortIndex, moduleType: moduleType!)
+//        getData(isHeaderFresh: true)
+        
+    }
+    
+    /// 上拉加载
+    @objc func footerLoad(){
+        
+        let sortIndex = String(format:"%ld",_index!)
+        getData(maxAmount: maxAmount!, maxDays: maxDays!, minAmount: minAmount!, minDays: minDays!, offset: "15", order: order!, sort: sortIndex, moduleType: moduleType!)
+        
+//        self.page = (self.page)! + 15
+//
+//        if (self.messageModel?.operUserMassge.count)! < 15 {
+//            self.tableView?.mj_footer.endRefreshingWithNoMoreData()
+//
+//        }else{
+//
+//            getData(isHeaderFresh: false)
+//
+//        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -77,7 +135,7 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: "ASC", sort: "0", moduleType: moduleType!)
+        getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: order!, sort: "0", moduleType: moduleType!)
     }
 
     
@@ -108,7 +166,7 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }) {
             
         }
-        viewModel.compQueryLimit("15", maxAmount: maxAmount, maxDays: maxDays, minAmount: minAmount, minDays: minDays, offset: offset, order: order, sort: sort, moduleType: moduleType)
+        viewModel.compQueryLimit("15", maxAmount: maxAmount, maxDays: maxDays, minAmount: minAmount, minDays: minDays, offset: offset, order: order, sort: sort, moduleType: moduleType, location: "1")
         
     }
     
@@ -290,6 +348,8 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
 
 //MARK : delegate
 extension LoanListViewController{
+    
+    //MARK : 弹出排序view
     func sortBtnClick(_ sender: UIButton) {
         
         if (filterView != nil) {
@@ -334,6 +394,7 @@ extension LoanListViewController{
         }
     }
     
+    //MARK : 弹出筛选view
     func filterBtnClick(_ sender: UIButton) {
         
         if (sortView != nil) {
@@ -378,12 +439,26 @@ extension LoanListViewController{
         
     }
     
+    //MARK : 切换贷款、游戏、旅游按钮
     func tabBtnClick(_ sender: UIButton) {
         
     }
     
+    //MARK : 选择排序
     func sortTabSelected(_ index: NSInteger) {
         _index = index
+        switch _index {
+        case 0:
+            order = "ASC"
+        case 1:
+            order = "DESC"
+        case 2:
+            order = "ASC"
+        case 3:
+            order = "ASC"
+        default:
+            break;
+        }
         superLoanHeaderCell?.sortBtn?.setTitleColor(TITLE_COLOR, for: .normal)
         superLoanHeaderCell?.sortImageBtn?.setImage(UIImage.init(named: "sort_icon"), for: .normal)
         superLoanHeaderCell?.sortBtn?.isSelected = false
@@ -391,10 +466,10 @@ extension LoanListViewController{
         let sortIndex = String(format:"%ld",index)
         
         if isFirst! {
-            getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: "ASC", sort: sortIndex, moduleType: moduleType!)
+            getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: order!, sort: sortIndex, moduleType: moduleType!)
         }else{
             
-            getData(maxAmount: maxAmount!, maxDays: maxDays!, minAmount: minAmount!, minDays: minDays!, offset: "0", order: "ASC", sort: sortIndex, moduleType: moduleType!)
+            getData(maxAmount: maxAmount!, maxDays: maxDays!, minAmount: minAmount!, minDays: minDays!, offset: "0", order: order!, sort: sortIndex, moduleType: moduleType!)
         }
         
         
@@ -403,10 +478,12 @@ extension LoanListViewController{
         }
     }
     
+    
+    //MARK : 筛选确认按钮
     func sureBtnClick(_ minLoanMoney: String, maxLoanMoney: String, minLoanPeriod: String, maxLoanPeriod: String) {
         isFirst = false
         let sortIndex = String(format:"%ld",self._index!)
-        
+        order = "ASC"
         if maxLoanMoney == "" || minLoanMoney == "" {
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请输入借款金额")
             return
@@ -436,13 +513,14 @@ extension LoanListViewController{
         minAmount = minLoanMoney;
         minDays = minLoanPeriod;
         
-        getData(maxAmount: maxLoanMoney, maxDays: maxLoanPeriod, minAmount: minLoanMoney, minDays: minLoanPeriod, offset: "0", order: "ASC", sort: sortIndex, moduleType: moduleType!)
+        getData(maxAmount: maxLoanMoney, maxDays: maxLoanPeriod, minAmount: minLoanMoney, minDays: minLoanPeriod, offset: "0", order: order!, sort: sortIndex, moduleType: moduleType!)
         
         UIView.animate(withDuration: 1) {
             self.filterView?.removeFromSuperview()
         }
     }
     
+    //MARK : 收藏
     func collectionBtn(_ sender: UIButton) {
         let model = dataArray![sender.tag - 1] as! RowsModel
         let collectionVM = CollectionViewModel()
@@ -455,9 +533,9 @@ extension LoanListViewController{
                 
                 if (self?.isFirst!)!{
                     
-                    self?.getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: "ASC", sort: sortIndex, moduleType:(self?.moduleType)! )
+                    self?.getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: (self?.order!)!, sort: sortIndex, moduleType:(self?.moduleType)! )
                 }else{
-                    self?.getData(maxAmount: (self?.maxAmount!)!, maxDays: (self?.maxDays!)!, minAmount: (self?.minAmount!)!, minDays: (self?.minDays!)!, offset: "0", order: "ASC", sort: sortIndex, moduleType: (self?.moduleType)!)
+                    self?.getData(maxAmount: (self?.maxAmount!)!, maxDays: (self?.maxDays!)!, minAmount: (self?.minAmount!)!, minDays: (self?.minDays!)!, offset: "0", order: (self?.order!)!, sort: sortIndex, moduleType: (self?.moduleType)!)
                 }
                 
             }

@@ -11,7 +11,7 @@
 
 @implementation CompQueryViewModel
 
--(void)compQueryLimit:(NSString *)limit maxAmount:(NSString *)maxAmount maxDays:(NSString *)maxDays minAmount:(NSString *)minAmount minDays:(NSString *)minDays offset:(NSString *)offset order:(NSString *)order sort:(NSString *)sort moduleType:(NSString *)moduleType{
+-(void)compQueryLimit:(NSString *)limit maxAmount:(NSString *)maxAmount maxDays:(NSString *)maxDays minAmount:(NSString *)minAmount minDays:(NSString *)minDays offset:(NSString *)offset order:(NSString *)order sort:(NSString *)sort moduleType:(NSString *)moduleType location:(NSString *)location{
     
     CompQueryParamModel *paramModel = [[CompQueryParamModel alloc]init];
     paramModel.limit = limit;
@@ -23,6 +23,7 @@
     paramModel.order = order;
     paramModel.sort = sort;
     paramModel.moduleType = moduleType;
+    paramModel.location = location;
     
     NSDictionary *paramDic = [paramModel toDictionary];
     

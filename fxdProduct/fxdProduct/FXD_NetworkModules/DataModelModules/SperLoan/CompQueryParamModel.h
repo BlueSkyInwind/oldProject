@@ -28,6 +28,7 @@
 @property (nonatomic, strong)NSString<Optional> *minDays;
 //平台类型
 @property (nonatomic, strong)NSString<Optional> *moduleType;
-
+//1 首页 5 发现页 7-首页热门推荐（更多））
+@property (nonatomic, strong)NSString<Optional> *location;
 
 @end
