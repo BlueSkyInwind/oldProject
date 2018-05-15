@@ -376,7 +376,7 @@
 {
     if ([self isCanSelectBtn]) {
         _saveBtn.enabled = true;
-        [_saveBtn setBackgroundColor:rgb(16, 129, 249)];
+        [_saveBtn setBackgroundColor:UI_MAIN_COLOR];
     } else {
         _saveBtn.enabled = false;
         [_saveBtn setBackgroundColor:rgb(139, 140, 143)];
