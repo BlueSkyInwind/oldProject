@@ -52,6 +52,9 @@
     DataDicParse *_dataDicEduLevel;
     NSMutableArray * _edudataList;
     
+    BOOL isFront;
+    BOOL isBack;
+    
     BOOL isEdit;
 }
 
@@ -294,14 +297,14 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [cell.identityUpBtn addTarget:self action:@selector(identityUpBtnClick) forControlEvents:UIControlEventTouchUpInside];
                 [cell.identityBackBtn addTarget:self action:@selector(identityBackBtnClick) forControlEvents:UIControlEventTouchUpInside];
-                if (_idOCRFrontParse != nil || [_userDataIformationM.ocr_status_ integerValue] == 2) {
+                if (isFront || [_userDataIformationM.ocr_status_ integerValue] == 2) {
                     [cell.identityUpBtn setBackgroundImage:[UIImage imageNamed:@"identitySelUp"] forState:UIControlStateNormal];
                     cell.identityUpBtn.enabled = false;
                 }else {
                     [cell.identityUpBtn setBackgroundImage:[UIImage imageNamed:@"identityUpUn"] forState:UIControlStateNormal];
                     cell.identityUpBtn.enabled = true;
                 }
-                if (_idOCRBackParse != nil || [_userDataIformationM.ocr_status_ integerValue] == 2) {
+                if (isBack || [_userDataIformationM.ocr_status_ integerValue] == 2) {
                     [cell.identityBackBtn setBackgroundImage:[UIImage imageNamed:@"identitySelBack"] forState:UIControlStateNormal];
                     cell.identityBackBtn.enabled = false;
                 } else {
@@ -412,7 +415,7 @@
         if ([baseRM.errCode isEqualToString:@"0"]) {
             CustomerIDInfo * customerIDInfo = [[CustomerIDInfo alloc]initWithDictionary:(NSDictionary *)baseRM.data error:nil];
             _customerFrontIDParse = customerIDInfo;
-            [weakSelf setUserIDCardInfo];
+            [weakSelf setUserIDCardInfoFronrOrBack:fronrOrBack];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseRM.friendErrMsg];
         }
@@ -424,7 +427,7 @@
 /**
  OCR识别结果处理
  */
-- (void)setUserIDCardInfo
+- (void)setUserIDCardInfoFronrOrBack:(NSString *)fronrOrBack
 {
     // 弹框暂时去掉
     /*
@@ -438,11 +441,19 @@
         }
     }];
      */
-    [dataListArr replaceObjectAtIndex:1 withObject:_customerFrontIDParse.customer_name_];
-    [dataListArr replaceObjectAtIndex:2 withObject:_customerFrontIDParse.id_code_];
-    [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerFrontIDParse.id_code_;
-    [FXD_Utility sharedUtility].userInfo.realName = _customerFrontIDParse.customer_name_;
-    [_tableView reloadData];
+    if ([fronrOrBack isEqualToString:@"front"]) {
+        isFront = true;
+        [dataListArr replaceObjectAtIndex:1 withObject:_customerFrontIDParse.customer_name_];
+        [dataListArr replaceObjectAtIndex:2 withObject:_customerFrontIDParse.id_code_];
+        [FXD_Utility sharedUtility].userInfo.userIDNumber = _customerFrontIDParse.id_code_;
+        [FXD_Utility sharedUtility].userInfo.realName = _customerFrontIDParse.customer_name_;
+    }else if ([fronrOrBack isEqualToString:@"back"]) {
+        isBack = true;
+    }
+    
+    if (isFront && isBack) {
+        [_tableView reloadData];
+    }
 }
 
 #pragma mark - UITextFieldDelegate

@@ -108,7 +108,8 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
     
     func initUserMemberInfo()  {
         self.titleHeaderView?.amountStr = (memberShipInfoModel?.availableCredit)!
-        self.centerHeaderView?.payAmountLabel.text = "\((memberShipInfoModel?.requestAmount)!)元"
+        let payAmount = Float((memberShipInfoModel?.requestAmount)!)! - Float((memberShipInfoModel?.requestAmount)!)!
+        self.centerHeaderView?.payAmountLabel.text = String.init(format: "%.0f元", payAmount)
         self.centerHeaderView?.payBackAmountLabel.text = "\((memberShipInfoModel?.chargeAmount)!)元"
         self.centerHeaderView?.returnAmountLabel.text = "\((memberShipInfoModel?.availableRefundAmount)!)元"
         self.centerHeaderView?.settleAmountLabel.text = "\((memberShipInfoModel?.settleCount)!)次"
@@ -221,7 +222,7 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
                 make.right.equalTo(footerView.snp.right).offset(-25)
             })
             break
-        case .recharge?,.recharging?,.refund?,.refunding?:
+        case .refund?,.refunding?:
             statusButton = UIButton.init(type: UIButtonType.custom)
             statusButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
             statusButton?.setTitle("前往测评", for: UIControlState.normal)
