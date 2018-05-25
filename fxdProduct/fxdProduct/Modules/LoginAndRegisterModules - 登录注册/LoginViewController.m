@@ -52,6 +52,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"登录";
+    [self addBackItem];
 
     //视图加载
     _loginView =  [[NSBundle mainBundle ]loadNibNamed:@"LoginView" owner:self options:nil].lastObject;
@@ -88,7 +89,13 @@
     _loginResultM = nil;
     [_loginView initialLoginButtonState];
 }
-
+- (void)popBack
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        _vaildCodeFlag = @"";
+        ((AppDelegate *)[UIApplication sharedApplication].delegate).btb.selectedIndex = 0;
+    }];
+}
 #pragma mark
 #pragma mark -- BSFinger
 - (void)generateOnSuccess:(NSString *)fingerPrint andTraceId:(NSString *)traceId

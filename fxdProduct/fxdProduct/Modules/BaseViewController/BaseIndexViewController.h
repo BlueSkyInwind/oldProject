@@ -12,5 +12,6 @@
 
 - (void)setNav;
 - (void)addBackItem;
+- (void)popBack;
 
 @end
