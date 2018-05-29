@@ -186,9 +186,9 @@ extension RecentCell{
         let referenceRate = model.referenceRate != nil ? model.referenceRate : ""
         if model.referenceMode == nil {
             
-            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate!
+            superLoanCell?.feeLabel?.text = "费用:" + referenceRate! + "%"
         }else{
-            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate! + "/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
+            superLoanCell?.feeLabel?.text = "费用:" + referenceRate! + "%/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
         }
         
         
@@ -230,10 +230,33 @@ extension RecentCell{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let model = homeProductListModel.hotRecommend[indexPath.row] as! HomeHotRecommendModel
-        let webView = FXDWebViewController()
-        webView.urlStr = model.linkAddress
-        self.viewController?.navigationController?.pushViewController(webView, animated: true)
+        getCompLink(thirdPlatformId: model.id_)
         
+    }
+    
+    func getCompLink(thirdPlatformId : String){
+        let viewModel = CompQueryViewModel()
+        viewModel.setBlockWithReturn({ [weak self](returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                
+                let dic = baseResult.data as! NSDictionary
+                if dic["url"] != nil {
+                    let webView = FXDWebViewController()
+                    webView.urlStr = dic["url"]  as! String
+                    self?.viewController?.navigationController?.pushViewController(webView, animated: true)
+                }
+                
+            }else{
+
+                MBPAlertView.sharedMBPText().showTextOnly(self, message: baseResult.friendErrMsg)
+            }
+            
+        }) {
+            
+        }
+        viewModel.getCompLinkThirdPlatformId(thirdPlatformId, location: "1")
     }
 }
 

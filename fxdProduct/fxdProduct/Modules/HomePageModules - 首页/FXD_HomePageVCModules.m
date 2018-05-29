@@ -987,6 +987,7 @@
     PlatTypeModel *model = [self getPlatFlag:1];
     controller.titleStr = model.desc_;
     controller.moduleType = model.code_;
+    controller.location = @"1";
     [self.navigationController pushViewController:controller animated:true];
 
 }
@@ -997,6 +998,7 @@
     PlatTypeModel *model = [self getPlatFlag:2];
     controller.titleStr = model.desc_;
     controller.moduleType = model.code_;
+    controller.location = @"";
     [self.navigationController pushViewController:controller animated:true];
 
 }
@@ -1007,6 +1009,7 @@
     PlatTypeModel *model = [self getPlatFlag:3];
     controller.titleStr = model.desc_;
     controller.moduleType = model.code_;
+    controller.location = @"";
     [self.navigationController pushViewController:controller animated:true];
 
 }

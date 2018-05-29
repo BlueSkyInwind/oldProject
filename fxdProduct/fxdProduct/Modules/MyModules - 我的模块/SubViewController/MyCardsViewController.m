@@ -44,7 +44,7 @@
     _bankWitch = [[NSMutableArray alloc] init];
     _bankWitchArray = [[NSMutableArray alloc] init];
     [_tableView registerNib:[UINib nibWithNibName:@"MyCardCell" bundle:nil] forCellReuseIdentifier:@"MyCardCell"];
-    //    [self addCardBtn];
+//        [self addCardBtn];
     
     [self createMyCardUI];
     //请求银行卡列表信息
@@ -71,6 +71,7 @@
 
 - (void)addCard
 {
+    
     BillingMessageViewController *controller=[[BillingMessageViewController alloc]init];
     controller.type = @"1";
     [self.navigationController pushViewController:controller animated:true];
@@ -79,6 +80,7 @@
 //    editCard.typeFlag = @"0";
 //    [self.navigationController pushViewController:editCard animated:YES];
 }
+
 
 -(void)createMyCardUI{
     

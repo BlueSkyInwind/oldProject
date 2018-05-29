@@ -830,15 +830,10 @@ extension HomePageCell {
     
     //立即还款
     fileprivate func repayImmediatelyView(){
-//        let view = tipView(titleStr: "信用借款")
-//        self.addSubview(view)
-//        view.snp.makeConstraints { (make) in
-//            make.left.equalTo(self).offset(0)
-//            make.top.equalTo(self).offset(0)
-//            make.right.equalTo(self).offset(0)
-//            make.height.equalTo(30)
-//        }
         
+        if homeProductListModel.repayInfo == nil || homeProductListModel.overdueInfo == nil{
+            return
+        }
         let payTipLabel = UILabel()
         payTipLabel.textColor = UIColor.red
         payTipLabel.font = UIFont.systemFont(ofSize: 12)
@@ -1000,14 +995,9 @@ extension HomePageCell {
     //立即提款
     fileprivate func withdrawMoneyImmediatelyView(){
         
-//        let view = tipView(titleStr: "信用借款")
-//        self.addSubview(view)
-//        view.snp.makeConstraints { (make) in
-//            make.left.equalTo(self).offset(0)
-//            make.top.equalTo(self).offset(0)
-//            make.right.equalTo(self).offset(0)
-//            make.height.equalTo(30)
-//        }
+        if homeProductListModel.drawInfo == nil {
+            return
+        }
         
         let tipLabel = UILabel()
         tipLabel.text = homeProductListModel.drawInfo.warn

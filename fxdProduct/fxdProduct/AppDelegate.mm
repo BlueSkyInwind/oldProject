@@ -271,7 +271,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     if (model) {
         switch ([model.type integerValue]) {
             case 1:{
-                //发现
+                //超市
                 self.btb.selectedIndex = 1;
             }
                 break;
