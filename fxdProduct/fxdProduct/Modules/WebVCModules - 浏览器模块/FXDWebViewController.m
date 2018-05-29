@@ -40,7 +40,7 @@
     _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
     _webView.navigationDelegate = self;
     _webView.UIDelegate = self;
-    _webView.scrollView.contentSize = self.view.bounds.size;
+    _webView.scrollView.contentSize = CGSizeMake(_k_w, self.view.bounds.size.height - BarHeightNew);
     [self.view addSubview:_webView];
     [self createProUI];
     [self addBackItem];
