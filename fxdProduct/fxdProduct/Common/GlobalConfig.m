@@ -43,7 +43,7 @@ NSString * const _mainTwo_new_url  =  @"http://h5.faxindai.com/coregw/client/";
 //UAT环境
 NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
 NSString * const _agreement_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
-NSString * const _main_new_url  =  @"http://h5.uat.fxds/";
+NSString * const _main_new_url  =  @"http://h5.uat.fxds/apigw/client/";
 NSString * const _ValidESB_url  =   @"http://h5.uat.fxds/fxd-esb/";
 NSString * const _H5_url    =   @"http://h5.uat.fxds/fxd-h5/page/";
 NSString * const _p2P_url = @"http://h5.uat.fxds/fxd-esb/p2p/";

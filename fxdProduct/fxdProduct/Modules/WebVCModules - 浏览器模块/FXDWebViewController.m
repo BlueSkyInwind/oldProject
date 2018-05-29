@@ -32,26 +32,27 @@
     config.preferences.javaScriptEnabled = true;
     config.preferences.javaScriptCanOpenWindowsAutomatically = true;
     config.userContentController = [[WKUserContentController alloc] init];
-    // 添加JS到HTML中，可以直接在JS中调用添加的JS方法
-    //    WKUserScript *script = [[WKUserScript alloc] initWithSource:@"function showAlert() { alert('在载入webview时通过OC注入的JS方法'); }" injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:true];
-    //   [config.userContentController addUserScript:script];
-    //   window.webkit.messageHandlers.FXDNative.postMessage({body: 'nativeShare'})
     [config.userContentController addScriptMessageHandler:self name:@"jsToNative"];
-    _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
+    CGFloat height = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height;
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, height, _k_w, _k_h - height) configuration:config];
     _webView.navigationDelegate = self;
     _webView.UIDelegate = self;
-    _webView.scrollView.contentSize = CGSizeMake(_k_w, self.view.bounds.size.height - BarHeightNew);
+    _webView.scrollView.contentSize = CGSizeMake(_k_w, _webView.frame.size.height);
     [self.view addSubview:_webView];
+    if (@available(iOS 11.0, *)) {
+        _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        _webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    }else if (@available(iOS 9.0, *)) {
+        self.automaticallyAdjustsScrollViewInsets = true;
+    }else{
+       self.automaticallyAdjustsScrollViewInsets = false;
+    }
     [self createProUI];
     [self addBackItem];
     
     DLog(@"%@  --- %@",NSStringFromCGRect(_webView.frame),NSStringFromCGSize(_webView.scrollView.contentSize))
     DLog(@"%@",_urlStr);
-    
-    if (@available(iOS 11.0, *)) {
-       self.webView.scrollView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
-        self.webView.scrollView.contentInset = UIEdgeInsetsMake(BarHeightNew, 0, 0, 0);
-    }
+
     _webView.scrollView.showsVerticalScrollIndicator = false;
     _urlStr = [_urlStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (_isZhima) {
