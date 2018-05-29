@@ -165,10 +165,10 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
                     self?.tableView?.isHidden = false
                     self?.noneView?.isHidden = true
                     self?.tableView?.reloadData()
-                    self?.tableView?.mj_header.endRefreshing()
-                    self?.tableView?.mj_footer.endRefreshing()
+//                    self?.tableView?.mj_header.endRefreshing()
+//                    self?.tableView?.mj_footer.endRefreshing()
                     
-                }else{
+                }else if(isHeaderFresh){
                     self?.tableView?.isHidden = true
                     self?.noneView?.isHidden = false
                 }
