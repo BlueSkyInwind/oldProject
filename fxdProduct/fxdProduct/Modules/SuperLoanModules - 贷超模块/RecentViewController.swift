@@ -63,42 +63,6 @@ class RecentViewController: BaseViewController ,UITableViewDelegate,UITableViewD
 //        footer.isAutomaticallyRefresh = false
 //        self.tableView!.mj_footer = footer
     }
-
-//    func getRecentData(){
-//        let findVM = FindViewModel()
-//        findVM.setBlockWithReturn({ (returnValue) in
-//
-//        }) {
-//
-//        }
-//
-//    }
-//    #pragma mark 最流浏览数据
-//    -(void)getRecentData{
-//
-//    FindViewModel *findVM = [[FindViewModel alloc]init];
-//    [findVM setBlockWithReturnBlock:^(id returnValue) {
-//
-//    BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-//    if ([baseResultM.errCode isEqualToString:@"0"]) {
-//    [_recentDataArray removeAllObjects];
-//    NSArray * array = (NSArray *)baseResultM.data;
-//    for (int  i = 0; i < array.count; i++) {
-//    NSDictionary *dic = array[i];
-//    HotRecommendModel * model = [[HotRecommendModel alloc]initWithDictionary:dic error:nil];
-//    [_recentDataArray addObject:model];
-//    }
-//
-//    _headerView.recentImageNameArray = _recentDataArray;
-//    }else{
-//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
-//    }
-//    } WithFaileBlock:^{
-//
-//    }];
-//
-//    [findVM recent];
-//    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return (dataArray?.count)!
@@ -156,9 +120,9 @@ class RecentViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         let referenceRate = model.referenceRate != nil ? model.referenceRate : ""
         if model.referenceMode == nil {
             
-            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate!
+            superLoanCell?.feeLabel?.text = "费用:" + referenceRate! + "%"
         }else{
-            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate! + "/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
+            superLoanCell?.feeLabel?.text = "费用:" + referenceRate! + "%/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
         }
         
 
@@ -208,19 +172,13 @@ class RecentViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             
             let baseResult = try! BaseResultModel.init(dictionary: retrunValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
-                
-//                if (model.isCollect == "0"){
-//                    model.isCollect = "1"
-//                }else{
-//                    model.isCollect = "0"
-//                }
-                
+
                 model.isCollect = model.isCollect == "0" ? "1" : "0"
-//                model.isCollect = "0"
                 self?.dataArray?.replaceObject(at: sender.tag, with: model)
                 self?.tableView?.reloadData()
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
-            
         }) {
             
         }

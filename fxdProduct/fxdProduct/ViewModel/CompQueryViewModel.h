@@ -12,6 +12,6 @@
 
 -(void)compQueryLimit:(NSString *)limit maxAmount:(NSString *)maxAmount maxDays:(NSString *)maxDays minAmount:(NSString *)minAmount minDays:(NSString *)minDays offset:(NSString *)offset order:(NSString *)order sort:(NSString *)sort moduleType:(NSString *)moduleType location:(NSString *)location;
 
--(void)getCompLinkThirdPlatformId:(NSString *)third_platform_id;
+-(void)getCompLinkThirdPlatformId:(NSString *)third_platform_id location:(NSString *)location;
 
 @end

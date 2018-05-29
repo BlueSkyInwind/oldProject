@@ -942,6 +942,8 @@
 		CC0DFB8D1EA5B1090024841A /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F0FDAC11BC771EC00F3CF10 /* AboutViewController.xib */; };
 		CC0F1B9D1EE6537700A23651 /* IdeaBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */; };
 		CC0F1B9E1EE6537700A23651 /* IdeaBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */; };
+		CC1415D820B806D500D87A26 /* SupermarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1415D720B806D500D87A26 /* SupermarketViewController.m */; };
+		CC1415D920B806D500D87A26 /* SupermarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1415D720B806D500D87A26 /* SupermarketViewController.m */; };
 		CC1AC8D9209078F2009B5BD4 /* CardAuthSmsSendParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8D8209078F2009B5BD4 /* CardAuthSmsSendParamModel.m */; };
 		CC1AC8DA209078F2009B5BD4 /* CardAuthSmsSendParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8D8209078F2009B5BD4 /* CardAuthSmsSendParamModel.m */; };
 		CC1AC8DD2090798F009B5BD4 /* CardAuthAuthParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8DC2090798F009B5BD4 /* CardAuthAuthParamModel.m */; };
@@ -1066,6 +1068,8 @@
 		CC85C6291FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */; };
 		CC85C62C1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */; };
 		CC85C62D1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */; };
+		CC872C4F20BB94DB00FBF10C /* SupermarketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC872C4E20BB94DB00FBF10C /* SupermarketHeaderView.swift */; };
+		CC872C5020BB94DB00FBF10C /* SupermarketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC872C4E20BB94DB00FBF10C /* SupermarketHeaderView.swift */; };
 		CC8BB752208F174600ADA647 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BB751208F174600ADA647 /* RecentCell.swift */; };
 		CC8BB753208F174600ADA647 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BB751208F174600ADA647 /* RecentCell.swift */; };
 		CC8BB75520901C7D00ADA647 /* BillingMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8BB75420901C7D00ADA647 /* BillingMessageViewController.swift */; };
@@ -1096,6 +1100,8 @@
 		CCA181A41FC80E1E0094DA58 /* NonePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA181A21FC80E1E0094DA58 /* NonePageView.swift */; };
 		CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
 		CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */; };
+		CCB2513B20B7FC53007E20C6 /* SupermarketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2513A20B7FC53007E20C6 /* SupermarketCell.swift */; };
+		CCB2513C20B7FC53007E20C6 /* SupermarketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2513A20B7FC53007E20C6 /* SupermarketCell.swift */; };
 		CCBD8F6C1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
 		CCBD8F6D1F5D26BD005A980B /* RepayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBD8F6B1F5D26BD005A980B /* RepayModel.m */; };
 		CCC1E4062057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */; };
@@ -1981,6 +1987,8 @@
 		CC0DFB971EA5B1090024841A /* fxdProductDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fxdProductDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0F1B9B1EE6537700A23651 /* IdeaBackViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdeaBackViewModel.h; sourceTree = "<group>"; };
 		CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaBackViewModel.m; sourceTree = "<group>"; };
+		CC1415D620B806D500D87A26 /* SupermarketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupermarketViewController.h; sourceTree = "<group>"; };
+		CC1415D720B806D500D87A26 /* SupermarketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupermarketViewController.m; sourceTree = "<group>"; };
 		CC1AC8D7209078F2009B5BD4 /* CardAuthSmsSendParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardAuthSmsSendParamModel.h; sourceTree = "<group>"; };
 		CC1AC8D8209078F2009B5BD4 /* CardAuthSmsSendParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardAuthSmsSendParamModel.m; sourceTree = "<group>"; };
 		CC1AC8DB2090798F009B5BD4 /* CardAuthAuthParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardAuthAuthParamModel.h; sourceTree = "<group>"; };
@@ -2075,6 +2083,7 @@
 		CC80E00B206B8A70000F9BAC /* CompQueryViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompQueryViewModel.m; sourceTree = "<group>"; };
 		CC85C6271FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashRedEnvelopeViewController.swift; sourceTree = "<group>"; };
 		CC85C62B1FBED2E50090A7E7 /* RedPacketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedPacketHeaderView.swift; sourceTree = "<group>"; };
+		CC872C4E20BB94DB00FBF10C /* SupermarketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupermarketHeaderView.swift; sourceTree = "<group>"; };
 		CC8BB751208F174600ADA647 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
 		CC8BB75420901C7D00ADA647 /* BillingMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingMessageViewController.swift; sourceTree = "<group>"; };
 		CC8BB7582090776100ADA647 /* BankCardAuthorizationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BankCardAuthorizationModel.h; sourceTree = "<group>"; };
@@ -2097,6 +2106,7 @@
 		CCA1819F1FC7F1220094DA58 /* CashViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CashViewModel.m; sourceTree = "<group>"; };
 		CCA181A21FC80E1E0094DA58 /* NonePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonePageView.swift; sourceTree = "<group>"; };
 		CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterHeaderView.swift; sourceTree = "<group>"; };
+		CCB2513A20B7FC53007E20C6 /* SupermarketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupermarketCell.swift; sourceTree = "<group>"; };
 		CCBD8F6A1F5D26BD005A980B /* RepayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayModel.h; sourceTree = "<group>"; };
 		CCBD8F6B1F5D26BD005A980B /* RepayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepayModel.m; sourceTree = "<group>"; };
 		CCC1E4042057EC7D007C9C07 /* ChangeBankCardParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeBankCardParamModel.h; sourceTree = "<group>"; };
@@ -4495,6 +4505,8 @@
 				CC4F062B207C557E0030A12A /* RecentViewController.swift */,
 				CC1AC8E32091B7A7009B5BD4 /* HotRecommendationViewController.swift */,
 				CC1AC8E620931E1A009B5BD4 /* LoanListViewController.swift */,
+				CC1415D620B806D500D87A26 /* SupermarketViewController.h */,
+				CC1415D720B806D500D87A26 /* SupermarketViewController.m */,
 			);
 			name = "SuperLoanModule - 贷超模块";
 			path = "fxdProduct/Modules/SuperLoanModules - 贷超模块";
@@ -4510,6 +4522,8 @@
 				CC80DFFB206B70A6000F9BAC /* FilterView.swift */,
 				CCC9FB64207A140C00B952BD /* SuperLoanHeaderView.swift */,
 				CC4F0628207C4E410030A12A /* SuperLoanNoneCell.swift */,
+				CCB2513A20B7FC53007E20C6 /* SupermarketCell.swift */,
+				CC872C4E20BB94DB00FBF10C /* SupermarketHeaderView.swift */,
 			);
 			path = SuperLoanView;
 			sourceTree = "<group>";
@@ -5089,6 +5103,7 @@
 				84C61A161FA8293200626411 /* FindPassViewController.m in Sources */,
 				CC85C62C1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */,
 				846D58CD20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */,
+				CCB2513B20B7FC53007E20C6 /* SupermarketCell.swift in Sources */,
 				84C61A091FA81F2A00626411 /* BankCardNameVCModules.m in Sources */,
 				84C619BF1FA815EB00626411 /* LoanPaymentDetailVCModule.m in Sources */,
 				CC1AC8E720931E1B009B5BD4 /* LoanListViewController.swift in Sources */,
@@ -5169,6 +5184,7 @@
 				CC45E7261FD78D4500DE803D /* MessageViewModel.m in Sources */,
 				84A52E9B207DF2AA000BF3E8 /* UserMemberShipViewModel.m in Sources */,
 				63878FE51C1519CD008E1CF9 /* FXD_Utility.m in Sources */,
+				CC1415D820B806D500D87A26 /* SupermarketViewController.m in Sources */,
 				1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */,
 				84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
 				CC742DC020521FA700D645CC /* ApplicationNewCreateModel.m in Sources */,
@@ -5479,6 +5495,7 @@
 				CCDEDF5C1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */,
 				849459CD1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */,
 				634830FE1CBCA1A90005C4CD /* RegionCodeExt.m in Sources */,
+				CC872C4F20BB94DB00FBF10C /* SupermarketHeaderView.swift in Sources */,
 				CC6E0F171FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */,
 				CC8BC9541FEA0374008E135E /* HomePageCell.swift in Sources */,
 				84FF95B9208F03CE0032BF5D /* PushInfoModel.m in Sources */,
@@ -5551,6 +5568,7 @@
 				84FF95BA208F0A8C0032BF5D /* PushInfoModel.m in Sources */,
 				84332C8A206CCD87009A9121 /* CameraManager.swift in Sources */,
 				846D58CE20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */,
+				CCB2513C20B7FC53007E20C6 /* SupermarketCell.swift in Sources */,
 				842D9CEA206B832F0020C3C2 /* IDCardUploadParam.m in Sources */,
 				84C61A141FA828F000626411 /* FindPassViewController.m in Sources */,
 				CC1AC8E820931E1B009B5BD4 /* LoanListViewController.swift in Sources */,
@@ -5631,6 +5649,7 @@
 				8411DA121FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */,
 				CC0DF97F1EA5B1090024841A /* YYTextRunDelegate.m in Sources */,
 				CC0DF9801EA5B1090024841A /* DataWriteAndRead.m in Sources */,
+				CC1415D920B806D500D87A26 /* SupermarketViewController.m in Sources */,
 				CC0DF9811EA5B1090024841A /* SquareRepaymentExt.m in Sources */,
 				84192AA7207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */,
 				84A52E9C207DF2AA000BF3E8 /* UserMemberShipViewModel.m in Sources */,
@@ -5941,6 +5960,7 @@
 				CC742DBD204FD88A00D645CC /* IntermediateCell.swift in Sources */,
 				CC0DFAB41EA5B1090024841A /* TAPageControl.m in Sources */,
 				CCDEDF5D1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */,
+				CC872C5020BB94DB00FBF10C /* SupermarketHeaderView.swift in Sources */,
 				CC0DFAB51EA5B1090024841A /* LOTAnimatableShapeValue.m in Sources */,
 				849459CE1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */,
 				CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */,

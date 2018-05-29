@@ -16,7 +16,7 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     var superLoanCell : SuperLoanCell?
     //头部cell
     var superLoanHeaderCell : SuperLoanHeaderCell?
-    var pages : Int?
+//    var pages : Int?
     @objc var moduleType : String?
     //是否第一次进来 借款金额周期没有值，为收藏做处理
     var isFirst : Bool?
@@ -36,18 +36,24 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     var minDays : String?
     //排序方式
     var order : String?
-    var page : Int?
+    //查询位置
+    @objc var location : String?
+//    //是否点击收藏
+//    var isCollection : Bool?
+//
+//    var row : Int?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         dataArray = NSMutableArray.init(capacity: 100)
         _index = 0
-        pages = 0
+//        pages = 0
         isFirst = true
         order = "ASC"
-        page = 0
         self.title = titleStr
+//        isCollection = false
         addBackItem()
         configureView()
         // Do any additional setup after loading the view.
@@ -74,21 +80,12 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
             self.automaticallyAdjustsScrollViewInsets = false;
         }
         
-//        //下拉刷新相关设置,使用闭包Block
+////        //下拉刷新相关设置,使用闭包Block
 //        tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
 //
 //            self.headerRefresh()
 //
 //        })
-//
-//
-//        //        //上拉加载相关设置,使用闭包Block
-//        //        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-//        //
-//        //            self.footerLoad()
-//        //
-//        //        })
-//        //        tableView?.mj_footer.isAutomaticallyHidden = true
 //
 //        // 底部加载
 //        let footer = MJRefreshAutoNormalFooter()
@@ -98,34 +95,40 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
 //        self.tableView!.mj_footer = footer
     }
     
-    //MARK: 刷新
-    /// 下拉刷新
-    @objc func headerRefresh(){
-        
-        self.page = 0
-        let sortIndex = String(format:"%ld",_index!)
-        getData(maxAmount: maxAmount!, maxDays: maxDays!, minAmount: minAmount!, minDays: minDays!, offset: "15", order: order!, sort: sortIndex, moduleType: moduleType!)
-//        getData(isHeaderFresh: true)
-        
-    }
-    
-    /// 上拉加载
-    @objc func footerLoad(){
-        
-        let sortIndex = String(format:"%ld",_index!)
-        getData(maxAmount: maxAmount!, maxDays: maxDays!, minAmount: minAmount!, minDays: minDays!, offset: "15", order: order!, sort: sortIndex, moduleType: moduleType!)
-        
-//        self.page = (self.page)! + 15
+//    //MARK: 刷新
+//    /// 下拉刷新
+//    @objc func headerRefresh(){
 //
-//        if (self.messageModel?.operUserMassge.count)! < 15 {
+//        pages = 0
+//        let sortIndex = String(format:"%ld",_index!)
+//        let xAmount = maxAmount == nil ? "" : maxAmount
+//        let iAmount = minAmount == nil ? "" : minAmount
+//        let xDays = maxDays == nil ? "" : maxDays
+//        let iDays = minDays == nil ? "" : minDays
+//
+//        getData(maxAmount: xAmount!, maxDays: xDays!, minAmount: iAmount!, minDays: iDays!, offset: "", order: order!, sort: sortIndex, moduleType: moduleType!)
+//
+//    }
+//
+//    /// 上拉加载
+//    @objc func footerLoad(){
+//        pages = pages! + 1
+//        let pageIndex = String(format:"%d",pages!)
+//        let sortIndex = String(format:"%ld",_index!)
+//        let totalMessage = pages! * 15
+//
+//        if (dataArray?.count)! < totalMessage {
 //            self.tableView?.mj_footer.endRefreshingWithNoMoreData()
-//
 //        }else{
 //
-//            getData(isHeaderFresh: false)
+//            let xAmount = maxAmount == nil ? "" : maxAmount
+//            let iAmount = minAmount == nil ? "" : minAmount
+//            let xDays = maxDays == nil ? "" : maxDays
+//            let iDays = minDays == nil ? "" : minDays
 //
+//            getData(maxAmount: xAmount!, maxDays: xDays!, minAmount: iAmount!, minDays: iDays!, offset: pageIndex, order: order!, sort: sortIndex, moduleType: moduleType!)
 //        }
-    }
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -134,7 +137,7 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+//        let pageIndex = String(format:"%d",pages!)
         getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: order!, sort: "0", moduleType: moduleType!)
     }
 
@@ -146,9 +149,10 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
                 
-                if self?.pages == 0{
-                    self?.dataArray?.removeAllObjects()
-                }
+                self?.dataArray?.removeAllObjects()
+//                if self?.pages == 0{
+//                    self?.dataArray?.removeAllObjects()
+//                }
                 
                 let compQueryModel = try! CompQueryModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 for index in 0 ..< compQueryModel.rows.count{
@@ -157,16 +161,33 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
                     self?.dataArray?.add(model)
                 }
                 self?.tableView?.isScrollEnabled = true
+//                self?.tableView?.mj_header.endRefreshing()
+//                self?.tableView?.mj_footer.endRefreshing()
+//                if (self?.isCollection!)!{
+//
+//                    let indexPath: IndexPath = IndexPath.init(row: (self?.row)!, section: 0)
+//                    self?.tableView?.reloadRows(at: [indexPath], with: .fade)
+//                    self?.isCollection = false
+//                }else{
+                
                 self?.tableView?.reloadData()
+//                }
+                
+//                if ((self?.dataArray?.count)! < 15) && self?.pages == 0 {
+//                    self?.tableView?.mj_footer.endRefreshingWithNoMoreData()
+//                }
                 
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+//                self?.tableView?.mj_header.endRefreshing()
+//                self?.tableView?.mj_footer.endRefreshing()
             }
             
         }) {
-            
+//            self.tableView?.mj_header.endRefreshing()
+//            self.tableView?.mj_footer.endRefreshing()
         }
-        viewModel.compQueryLimit("15", maxAmount: maxAmount, maxDays: maxDays, minAmount: minAmount, minDays: minDays, offset: offset, order: order, sort: sort, moduleType: moduleType, location: "1")
+        viewModel.compQueryLimit("100", maxAmount: maxAmount, maxDays: maxDays, minAmount: minAmount, minDays: minDays, offset: offset, order: order, sort: sort, moduleType: moduleType, location: location)
         
     }
     
@@ -241,9 +262,9 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         let referenceRate = model.referenceRate != nil ? model.referenceRate : ""
         if model.referenceMode == nil {
             
-            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate!
+            superLoanCell?.feeLabel?.text = "费用:" + referenceRate! + "%"
         }else{
-            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate! + "/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
+            superLoanCell?.feeLabel?.text = "费用:" + referenceRate! + "%/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
         }
         
         
@@ -317,7 +338,7 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }) {
             
         }
-        viewModel.getCompLinkThirdPlatformId(thirdPlatformId)
+        viewModel.getCompLinkThirdPlatformId(thirdPlatformId, location: "1")
     }
     
     func rateUnit(referenceMode : NSString) -> (NSString){
@@ -447,6 +468,7 @@ extension LoanListViewController{
     //MARK : 选择排序
     func sortTabSelected(_ index: NSInteger) {
         _index = index
+//        pages = 0
         switch _index {
         case 0:
             order = "ASC"
@@ -463,7 +485,7 @@ extension LoanListViewController{
         superLoanHeaderCell?.sortImageBtn?.setImage(UIImage.init(named: "sort_icon"), for: .normal)
         superLoanHeaderCell?.sortBtn?.isSelected = false
         superLoanHeaderCell?.sortImageBtn?.isSelected = false
-        let sortIndex = String(format:"%ld",index)
+        let sortIndex = String(format:"%ld",_index!)
         
         if isFirst! {
             getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: order!, sort: sortIndex, moduleType: moduleType!)
@@ -484,6 +506,7 @@ extension LoanListViewController{
         isFirst = false
         let sortIndex = String(format:"%ld",self._index!)
         order = "ASC"
+//        pages = 0
         if maxLoanMoney == "" || minLoanMoney == "" {
             MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "请输入借款金额")
             return
@@ -523,21 +546,27 @@ extension LoanListViewController{
     //MARK : 收藏
     func collectionBtn(_ sender: UIButton) {
         let model = dataArray![sender.tag - 1] as! RowsModel
+        
         let collectionVM = CollectionViewModel()
         collectionVM.setBlockWithReturn({ [weak self](retrunValue) in
             
             let baseResult = try! BaseResultModel.init(dictionary: retrunValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
                 
+
                 let sortIndex = String(format:"%ld",(self?._index!)!)
-                
                 if (self?.isFirst!)!{
-                    
+
                     self?.getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: (self?.order!)!, sort: sortIndex, moduleType:(self?.moduleType)! )
                 }else{
                     self?.getData(maxAmount: (self?.maxAmount!)!, maxDays: (self?.maxDays!)!, minAmount: (self?.minAmount!)!, minDays: (self?.minDays!)!, offset: "0", order: (self?.order!)!, sort: sortIndex, moduleType: (self?.moduleType)!)
                 }
-                
+//                model.isCollect = model.isCollect == "0" ? "1" : "0"
+//                //                model.isCollect = "0"
+//                self?.dataArray?.replaceObject(at: sender.tag, with: model)
+//                self?.tableView?.reloadData()
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
             
         }) {

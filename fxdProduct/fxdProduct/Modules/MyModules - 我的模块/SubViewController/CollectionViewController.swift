@@ -271,7 +271,7 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         }) {
             
         }
-        viewModel.getCompLinkThirdPlatformId(thirdPlatformId)
+        viewModel.getCompLinkThirdPlatformId(thirdPlatformId, location: "7")
     }
     
     override func didReceiveMemoryWarning() {

@@ -21,7 +21,7 @@
     FilterView *_filterView;
     NSInteger _index;
     NSMutableArray *_dataArray;
-    int  _pages;
+//    int  _pages;
     NSString *_maxAmount;
     NSString *_maxDays;
     NSString *_minAmount;
@@ -31,6 +31,7 @@
     SuperLoanHeaderView *_headerView;
     NSMutableArray *_recentDataArray;
     NSString *_order;
+//    NSInteger _row;
 
 }
 
@@ -74,16 +75,16 @@
     _headerView.delegate = self;
     self.tableView.tableHeaderView = _headerView;
     
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
-    header.automaticallyChangeAlpha = YES;
-    header.lastUpdatedTimeLabel.hidden = YES;
-//    [header beginRefreshing];
-    self.tableView.mj_header = header;
+//    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
+//    header.automaticallyChangeAlpha = YES;
+//    header.lastUpdatedTimeLabel.hidden = YES;
+////    [header beginRefreshing];
+//    self.tableView.mj_header = header;
     
-    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
-    footer.automaticallyChangeAlpha = YES;
-    footer.mj_origin = CGPointMake(0, _k_h);
-    self.tableView.mj_footer = footer;
+//    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
+//    footer.automaticallyChangeAlpha = YES;
+//    footer.mj_origin = CGPointMake(0, _k_h);
+//    self.tableView.mj_footer = footer;
     
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
@@ -149,17 +150,17 @@
     [findVM hotRecommend];
 }
 
--(void)headerRefreshing{
-    
-    _pages = 0;
-    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
-}
-
--(void)footerRereshing{
-    
-    _pages++;
-    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_maxDays offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
-}
+//-(void)headerRefreshing{
+//
+//    _pages = 0;
+//    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
+//}
+//
+//-(void)footerRereshing{
+//
+//    _pages++;
+//    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_maxDays offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
+//}
 -(void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
@@ -185,7 +186,7 @@
     
     [self hotRecommendData];
     
-    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
+    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
 }
 
 -(void)getDataMaxAmount:(NSString *)maxAmount maxDays:(NSString *)maxDays minAmount:(NSString *)minAmount minDays:(NSString *)minDays offset:(NSString *)offset order:(NSString *)order sort:(NSString *)sort{
@@ -193,35 +194,35 @@
     CompQueryViewModel *viewModel = [[CompQueryViewModel alloc]init];
     [viewModel setBlockWithReturnBlock:^(id returnValue) {
         
-        if (_pages == 0) {
-            [_dataArray removeAllObjects];
-        }
+//        if (_pages == 0) {
+//            [_dataArray removeAllObjects];
+//        }
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             
-//            [_dataArray removeAllObjects];
+            [_dataArray removeAllObjects];
             CompQueryModel *model = [[CompQueryModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
             for (RowsModel *rowModel in model.rows) {
                 [_dataArray addObject:rowModel];
             }
         
             self.tableView.scrollEnabled = true;
-            [_tableView.mj_header endRefreshing];
-            [_tableView.mj_footer endRefreshing];
+//            [_tableView.mj_header endRefreshing];
+//            [_tableView.mj_footer endRefreshing];
             [_tableView reloadData];
         }else{
             
-            [_tableView.mj_header endRefreshing];
-            [_tableView.mj_footer endRefreshing];
+//            [_tableView.mj_header endRefreshing];
+//            [_tableView.mj_footer endRefreshing];
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
     } WithFaileBlock:^{
         
-        [_tableView.mj_header endRefreshing];
-        [_tableView.mj_footer endRefreshing];
+//        [_tableView.mj_header endRefreshing];
+//        [_tableView.mj_footer endRefreshing];
     }];
     
-    [viewModel compQueryLimit:@"15" maxAmount:maxAmount maxDays:maxDays minAmount:minAmount minDays:minDays offset:offset order:order sort:sort moduleType:_type location:@"5"];
+    [viewModel compQueryLimit:@"100" maxAmount:maxAmount maxDays:maxDays minAmount:minAmount minDays:minDays offset:offset order:order sort:sort moduleType:_type location:@"5"];
 
 }
 #pragma mark - TableViewDelegate
@@ -324,7 +325,7 @@
     }
     
     NSString *referenceRate = model.referenceRate != nil?model.referenceRate:@"";
-    superLoanCell.feeLabel.text = [NSString stringWithFormat:@"费用:%%%@/%@",referenceRate,[self rateUnit: model.referenceMode]];
+    superLoanCell.feeLabel.text = [NSString stringWithFormat:@"费用:%@%%/%@",referenceRate,[self rateUnit: model.referenceMode]];
     
     if (![referenceRate isEqualToString:@""]) {
         NSMutableAttributedString *attriStr1 = [[NSMutableAttributedString alloc] initWithString:superLoanCell.feeLabel.text];
@@ -427,7 +428,7 @@
     } WithFaileBlock:^{
         
     }];
-    [viewModel getCompLinkThirdPlatformId:third_platform_id];
+    [viewModel getCompLinkThirdPlatformId:third_platform_id location:@"5"];
 }
 
 #pragma mark 排序
@@ -523,10 +524,10 @@
     _type = [NSString stringWithFormat:@"%ld",tag - 100];
     if ([_type isEqualToString:@"1"]) {
         _order = @"ASC";
-        [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
+        [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
     }else{
-        _pages = 0;
-        [self getDataMaxAmount:@"" maxDays:@"" minAmount:@"" minDays:@"" offset:[NSString stringWithFormat:@"%d",_pages] order:_order sort:@"0"];
+//        _pages = 0;
+        [self getDataMaxAmount:@"" maxDays:@"" minAmount:@"" minDays:@"" offset:@"0" order:_order sort:@"0"];
     }
 }
 
@@ -632,7 +633,6 @@
 
 -(void)collectionBtn:(UIButton *)sender{
     
-//    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:[NSString stringWithFormat:@"%ld",sender.tag]];
     RowsModel *model = _dataArray[sender.tag];
 
     CollectionViewModel *collectionVM = [[CollectionViewModel alloc]init];
@@ -641,6 +641,10 @@
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             
+//            model.isCollect = [model.isCollect  isEqual: @"0"] ? @"1" : @"0";
+//            //                model.isCollect = "0"
+//            [_dataArray replaceObjectAtIndex:sender.tag withObject:model];
+//            self.tableView.reloadData;
             [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
