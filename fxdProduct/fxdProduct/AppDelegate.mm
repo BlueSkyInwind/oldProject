@@ -41,9 +41,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 }
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options{
     NSString * urlStr = [NSString stringWithFormat:@"%@",url];
-    if ([urlStr containsString:@"h5.faxindai.com"]) {
-        
-    }
+
     return YES;
 }
 
