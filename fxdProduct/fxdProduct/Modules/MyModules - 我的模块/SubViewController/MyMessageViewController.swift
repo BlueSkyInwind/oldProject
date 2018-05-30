@@ -165,20 +165,27 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
                     self?.tableView?.isHidden = false
                     self?.noneView?.isHidden = true
                     self?.tableView?.reloadData()
-//                    self?.tableView?.mj_header.endRefreshing()
-//                    self?.tableView?.mj_footer.endRefreshing()
+                    self?.tableView?.mj_header.endRefreshing()
+                    self?.tableView?.mj_footer.endRefreshing()
                     
                 }else if(isHeaderFresh){
                     self?.tableView?.isHidden = true
                     self?.noneView?.isHidden = false
+                    self?.tableView?.mj_header.endRefreshing()
+                    self?.tableView?.mj_footer.endRefreshing()
+                }else{
+                    
+                    self?.tableView?.isHidden = false
+                    self?.noneView?.isHidden = true
+                    self?.tableView?.mj_footer.endRefreshingWithNoMoreData()
                 }
                 
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
             
-            self?.tableView?.mj_header.endRefreshing()
-            self?.tableView?.mj_footer.endRefreshing()
+//            self?.tableView?.mj_header.endRefreshing()
+//            self?.tableView?.mj_footer.endRefreshing()
         }) {
             
             self.tableView?.mj_header.endRefreshing()

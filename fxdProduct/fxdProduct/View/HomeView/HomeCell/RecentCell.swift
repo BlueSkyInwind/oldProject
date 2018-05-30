@@ -140,8 +140,12 @@ extension RecentCell{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return homeProductListModel.hotRecommend.count
+        if homeProductListModel.hotRecommend.count > 0 {
+            
+            return homeProductListModel.hotRecommend.count
+        }
         
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -157,7 +161,6 @@ extension RecentCell{
         }
         
         superLoanCell?.delegate = self
-//        superLoanCell?.isSelected = false
         superLoanCell?.selectionStyle = .none
 
         if homeProductListModel.hotRecommend.count <= 0 {

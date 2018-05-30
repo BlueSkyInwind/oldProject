@@ -165,7 +165,7 @@ extension CurrentInformationCell{
         lineView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(0)
             make.bottom.equalTo(self).offset(0)
-            make.right.equalTo(self)
+            make.right.equalTo(self).offset(0)
             make.height.equalTo(1)
         }
         
