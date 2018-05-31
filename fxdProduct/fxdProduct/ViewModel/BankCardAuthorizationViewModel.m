@@ -55,9 +55,9 @@
 }
 
 
--(void)cardAuthQueryBankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo{
+-(void)cardAuthQueryBankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo type:(NSString *)type{
     
-    NSDictionary *dic = @{@"bankShortName" : bankShortName,@"cardNo":cardNo};
+    NSDictionary *dic = @{@"bankShortName" : bankShortName,@"cardNo":cardNo,@"type":type};
     [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_cardAuthQuery_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);

@@ -301,22 +301,65 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
             complianceJump()
         }else{
             
-            let isShouQuan = false
-            
-            if isShouQuan{
+            getInfo()
+//            let isShouQuan = false
+//
+//            if isShouQuan{
+//
+//                requestWithDraw((self.selectedCard?.cardId)!) { (isSuccess) in
+//                    if isSuccess {
+//                        self.navigationController?.popToRootViewController(animated: true)
+//                    }
+//                }
+//            }else{
+//
+//
+//                let controller = BillingMessageViewController()
+//                controller.requestType = "2"
+//                self.navigationController?.pushViewController(controller, animated: true)
+//            }
+        }
+    }
+    
+    //MARK: 银行卡授权查询页面
+    func getInfo(){
+        let bankCardAuthorizationVM = BankCardAuthorizationViewModel()
+        bankCardAuthorizationVM.setBlockWithReturn({[weak self] (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
                 
-                requestWithDraw((self.selectedCard?.cardId)!) { (isSuccess) in
-                    if isSuccess {
-                        self.navigationController?.popToRootViewController(animated: true)
+                let model = try! BankCardAuthorizationModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                if model.authList.count > 0{
+                    
+                    let controller = FXD_WithholdAuthViewController()
+                    controller.bankName = self?.selectedCard?.bankName
+                    controller.cardNum = self?.selectedCard?.cardNo
+                    controller.telNum = self?.selectedCard?.bankPhone
+                    controller.bankCode = self?.selectedCard?.cardShortName
+                    controller.bankShortName = self?.selectedCard?.bankName
+                    controller.requestType = ""
+                    controller.applicationId = (self?.applicationId)!
+                    controller.type = .drawing
+                    self?.navigationController?.pushViewController(controller, animated: true)
+                    
+                }else{
+                    
+                    self?.requestWithDraw((self?.selectedCard?.cardId)!) { (isSuccess) in
+                        if isSuccess {
+                            self?.navigationController?.popToRootViewController(animated: true)
+                        }
                     }
                 }
-            }else{
                 
-                let controller = BillingMessageViewController()
-                controller.requestType = "2"
-                self.navigationController?.pushViewController(controller, animated: true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
+        }) {
+            
         }
+        
+        bankCardAuthorizationVM.cardAuthQueryBankShortName(selectedCard?.cardShortName, cardNo: selectedCard?.cardNo,type:"2")
+        
     }
     
     func complianceJump(){

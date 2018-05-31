@@ -171,6 +171,7 @@ class FXD_LoanApplicationViewController: BaseViewController,UITableViewDelegate,
         }
     }
     
+    
     func jumpController(model : ApplicationNewCreateModel){
         
         switch Int(model.userStatus) {

@@ -512,7 +512,8 @@
     if (_repayListInfo == nil) {
         return;
     }
-    [self fxdRepay];
+//    [self fxdRepay];
+    [self getInfo];
 }
 
 /**
@@ -585,7 +586,38 @@
     [paymentViewModel FXDpaymentDetail:paymentDetailModel];
 }
 
-
+-(void)getInfo{
+    BankCardAuthorizationViewModel *bankCardAuthorizationVM = [[BankCardAuthorizationViewModel alloc]init];
+    [bankCardAuthorizationVM setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            BankCardAuthorizationModel * model = [[BankCardAuthorizationModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            if (model.authList.count > 0) {
+                FXD_WithholdAuthViewController *controller = [[FXD_WithholdAuthViewController alloc]init];
+                controller.bankName = _selectCard.bankName;
+                controller.cardNum = _selectCard.cardNo;
+                controller.telNum = _selectCard.bankPhone;
+                controller.bankCode = _selectCard.cardShortName;
+                controller.bankShortName = _selectCard.bankName;
+                controller.requestType = @"";
+                controller.applicationId = _applicationId;
+                controller.type = Enum_queryRepay;
+                [self.navigationController pushViewController:controller animated:true];
+                
+            }else{
+                [self fxdRepay];
+            }
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+        
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [bankCardAuthorizationVM cardAuthQueryBankShortName:_selectCard.cardShortName cardNo:_selectCard.cardNo type:@"2"];
+}
 
 
 @end

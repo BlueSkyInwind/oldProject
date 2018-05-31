@@ -8,17 +8,28 @@
 
 import UIKit
 
+
+@objc enum Enum_query:Int{
+    
+    case personCenter
+    case drawing
+    case applySale
+    case repay
+    case addBankCard
+    
+}
+
 class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
     
     var tableView:UITableView?
     var contentTableViewCell:ContentTableViewCell?
     let titleArr = [["所属银行:","卡号:","预留手机号:"],["新颜授权码:","银生宝授权码:"]]
     @objc var requestType:String?
-    var bankName:String?
-    var cardNum:String?
-    var telNum:String?
-    var bankCode:String?
-    var bankShortName:String?
+    @objc var bankName:String?
+    @objc var cardNum:String?
+    @objc var telNum:String?
+    @objc var bankCode:String?
+    @objc var bankShortName:String?
     var isAgreement:Bool = false
     var  bottomButton:UIButton?
     var xinyanTimer:Timer?
@@ -29,6 +40,7 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
     var smsCodeArray : NSMutableArray?
     @objc var applicationId = ""
     @objc var stagingType = ""
+    @objc var type:Enum_query = .personCenter
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -60,6 +72,12 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
     
     //MARK: 银行卡授权查询页面
     func getInfo(){
+        
+        var paramType = "1"
+        if self.type != .personCenter{
+            paramType = ""
+        }
+        
         let bankCardAuthorizationVM = BankCardAuthorizationViewModel()
         bankCardAuthorizationVM.setBlockWithReturn({ (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
@@ -81,7 +99,7 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
             
         }
         
-        bankCardAuthorizationVM.cardAuthQueryBankShortName(bankShortName, cardNo: cardNum)
+        bankCardAuthorizationVM.cardAuthQueryBankShortName(bankShortName, cardNo: cardNum,type:paramType)
         
     }
     @objc func bottomButtonClick()  {

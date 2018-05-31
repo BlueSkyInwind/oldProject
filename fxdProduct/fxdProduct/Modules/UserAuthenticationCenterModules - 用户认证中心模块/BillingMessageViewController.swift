@@ -151,19 +151,64 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
             return
         }
         
-        let controller = FXD_WithholdAuthViewController()
-        controller.bankName = (dataArray?[0] as! String)
-        controller.cardNum = (dataArray?[1] as! String)
-        controller.telNum = (dataArray?[2] as! String)
-        controller.bankCode = (dataArray?[3] as! String)
-        controller.bankShortName = (dataArray?[4] as! String)
-        controller.requestType = requestType
-        controller.applicationId = applicationId
-//        controller.stagingType = stagingType
-        self.navigationController?.pushViewController(controller, animated: true)
+        if type == "0" {
+            
+            getInfo(type: "1")
+        }else{
+            getInfo(type: "")
+        }
+//        let controller = FXD_WithholdAuthViewController()
+//        controller.bankName = (dataArray?[0] as! String)
+//        controller.cardNum = (dataArray?[1] as! String)
+//        controller.telNum = (dataArray?[2] as! String)
+//        controller.bankCode = (dataArray?[3] as! String)
+//        controller.bankShortName = (dataArray?[4] as! String)
+//        controller.requestType = requestType
+//        controller.applicationId = applicationId
+////        controller.stagingType = stagingType
+//        self.navigationController?.pushViewController(controller, animated: true)
        
         
 //        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "点击下一步按钮")
+    }
+    
+    func getInfo(type : String){
+        let bankCardAuthorizationVM = BankCardAuthorizationViewModel()
+        bankCardAuthorizationVM.setBlockWithReturn({[weak self] (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                
+                let model = try! BankCardAuthorizationModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                if model.authList.count > 0{
+                    
+                    let controller = FXD_WithholdAuthViewController()
+                    controller.bankName = (self?.dataArray?[0] as! String)
+                    controller.cardNum = (self?.dataArray?[1] as! String)
+                    controller.telNum = (self?.dataArray?[2] as! String)
+                    controller.bankCode = (self?.dataArray?[3] as! String)
+                    controller.bankShortName = (self?.dataArray?[4] as! String)
+                    controller.requestType = self?.requestType
+                    controller.applicationId = (self?.applicationId)!
+                    if type == "0" {
+                        controller.type = .personCenter
+                    }else{
+                        controller.type = .addBankCard
+                    }
+                    self?.navigationController?.pushViewController(controller, animated: true)
+                    
+                }else{
+                    
+                }
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+            
+        }
+        
+        bankCardAuthorizationVM.cardAuthQueryBankShortName((dataArray?[3] as! String), cardNo: (dataArray?[1] as! String),type:type)
+        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -273,7 +318,11 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         let newText = NSMutableString.init(capacity: 0)
         newText.append(textField.text!)
         let noBlankStr = textField.text?.replacingOccurrences(of: " ", with: "")
-        let banNo = noBlankStr! + string
+//        let banNo = noBlankStr! + string
+        var banNo = noBlankStr!
+        if (noBlankStr?.count)! < 20 {
+            banNo = noBlankStr! + string
+        }
         dataArray?.replaceObject(at: 1, with: banNo as Any)
         let textLength = noBlankStr?.count
         if string.count > 0{
