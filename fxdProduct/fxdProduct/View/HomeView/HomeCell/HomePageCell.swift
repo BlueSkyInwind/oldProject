@@ -412,6 +412,10 @@ extension HomePageCell {
 //            make.height.equalTo(30)
 //        }
         
+        if homeProductListModel.handingAndFailText == nil {
+            return
+        }
+        
         let tipLabel = UILabel()
         tipLabel.textColor = UIColor.red
         tipLabel.text = "温馨提示:下拉可刷新结果"
@@ -609,6 +613,9 @@ extension HomePageCell {
             make.height.equalTo(200)
         }
         
+        if homeProductListModel.drawInfo == nil {
+            return
+        }
         let topLabel = UILabel()
         topLabel.textColor = RedPacketBottomBtn_COLOR
         topLabel.text = homeProductListModel.drawInfo.label
@@ -673,9 +680,11 @@ extension HomePageCell {
             make.height.equalTo(30)
         }
         
+        if homeProductListModel.testFailInfo == nil {
+            return
+        }
         let titleLabel = UILabel()
         titleLabel.text = homeProductListModel.testFailInfo.tips
-//        titleLabel.text = "信用评分不足"
         titleLabel.textColor = UI_MAIN_COLOR
         titleLabel.font = UIFont.systemFont(ofSize: 17)
         self.addSubview(titleLabel)

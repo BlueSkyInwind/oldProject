@@ -876,8 +876,13 @@
  @param time 借款周期时间
  */
 -(void)applyImmediatelyBtnClick:(NSString *)money :(NSString *)time{
-    UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
-    [self.navigationController pushViewController:controller animated:true];
+    
+    if ([FXD_Utility sharedUtility].loginFlage) {
+            UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
+            [self.navigationController pushViewController:controller animated:true];
+    } else {
+        [self presentLoginVC:self];
+    }
 }
 
 #pragma mark -  逾期弹窗
@@ -1038,7 +1043,17 @@
 #pragma mark 收藏
 -(void)collectionBtnClick:(UIButton *)sender{
     
-    HomeHotRecommendModel *model = _homeProductList.hotRecommend[sender.tag];
+    if ([FXD_Utility sharedUtility].loginFlage) {
+        
+        [self collectionRequest:sender.tag];
+        
+    } else {
+        [self presentLoginVC:self];
+    }
+}
+
+-(void)collectionRequest:(NSInteger)tag{
+    HomeHotRecommendModel *model = _homeProductList.hotRecommend[tag];
     
     CollectionViewModel *collectionVM = [[CollectionViewModel alloc]init];
     [collectionVM setBlockWithReturnBlock:^(id returnValue) {
@@ -1071,17 +1086,11 @@
     }];
     
     [collectionVM addMyCollectionInfocollectionType:model.moduletype platformId:model.id_];
-    
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-
 
 
 /*

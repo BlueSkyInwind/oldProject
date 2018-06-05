@@ -212,6 +212,7 @@ UIKIT_EXTERN NSString * const EliteLoan;       //精英贷
 UIKIT_EXTERN NSString * const PLATFORM;                 //平台
 UIKIT_EXTERN NSString * const CHANNEL;
 UIKIT_EXTERN NSString * const SERVICE_PLATFORM;
+UIKIT_EXTERN NSString * const CODE_SERVICE_PLATFORM;
 UIKIT_EXTERN NSString * const Devcode;      //开发码
 
 UIKIT_EXTERN NSString * const FaceIDAppKey; //FaceID

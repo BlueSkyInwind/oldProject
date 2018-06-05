@@ -17,5 +17,5 @@
 -(void)cardAuthSmsSendAuthPlatCode:(NSString *)authPlatCode bankCode:(NSString *)bankCode cardNo:(NSString *)cardNo phone:(NSString *)phone;
 
 //银行卡授权查询页面
--(void)cardAuthQueryBankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo;
+-(void)cardAuthQueryBankShortName:(NSString *)bankShortName cardNo:(NSString *)cardNo type:(NSString *)type;
 @end

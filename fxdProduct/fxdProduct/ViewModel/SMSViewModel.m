@@ -20,7 +20,7 @@
 {
     SMSModel * model  = [[SMSModel alloc]init];
     model.mobile_phone_  = number;
-    model.service_platform_type_ = SERVICE_PLATFORM;
+    model.service_platform_type_ = CODE_SERVICE_PLATFORM;
     NSString * flag = @"";
     switch (verifyCodeType) {
         case LOGIN_CODE:
@@ -66,7 +66,7 @@
     model.flag = CODE_REG;
     model.pic_verify_code_ = picVerifyCode;
     model.pic_verify_id_ = picVerifyId;
-    model.service_platform_type_ = SERVICE_PLATFORM;
+    model.service_platform_type_ = CODE_SERVICE_PLATFORM;
     NSDictionary *paramDic = [model toDictionary];
     [self postVerifyCode:paramDic urlStr:_regCode_url];
     

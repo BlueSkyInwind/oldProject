@@ -21,7 +21,7 @@ NSString * const _mainTwo_new_url  =  @"http://h5.faxindai.com/coregw/client/";
 //http://192.168.13.173:8005/ 张强本地
 
 //测试导流 192.168.6.134
-////NSString * const _maintourism_icon_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+//NSString * const _maintourism_icon_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
 //NSString * const _main_url  =   @"http://h5.dev.test/fxd-esb/esb/";
 //NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
 //NSString * const _main_new_url  =  @"http://h5.test.fxds/apigw/client/";
@@ -348,7 +348,8 @@ NSString * const EliteLoan = @"P001007";           //精英贷
 NSString * const PLATFORM = @"1";                   //平台
 NSString * const CHANNEL = @"1";                   //平台
 
-NSString * const SERVICE_PLATFORM = @"16";                   //服务
+NSString * const SERVICE_PLATFORM = @"0";                   //服务
+NSString * const CODE_SERVICE_PLATFORM = @"16";                   //服务
 NSString * const Devcode = @"5LIK5RW35LIT6LW";     //开发码
 //bJO03627qY52JEu4
 NSString * const Fxd_pw = @"6d82763bdd2ddcbea6da1ee6a9c636e68dae259127ba1e24";
