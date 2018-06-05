@@ -55,6 +55,16 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = LINE_COLOR
+        let contentLabel = UILabel()
+        contentLabel.textColor = TITLE_COLOR
+        contentLabel.font = UIFont.systemFont(ofSize: 14)
+        contentLabel.text = "共3笔"
+        headerView.addSubview(contentLabel)
+        contentLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(headerView.snp.left).offset(22)
+            make.centerY.equalTo(headerView.snp.centerY)
+        }
+        
         return headerView
         
     }
@@ -69,16 +79,19 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var superLoanCell:SuperLoanCell! = tableView.dequeueReusableCell(withIdentifier:"SuperLoanCell") as? SuperLoanCell
-        if superLoanCell == nil {
-            superLoanCell = SuperLoanCell.init(style: .default, reuseIdentifier: "SuperLoanCell")
+        var cell:MyOrdersCell! = tableView.dequeueReusableCell(withIdentifier:"MyOrdersCell") as? MyOrdersCell
+        if cell == nil {
+            cell = MyOrdersCell.init(style: .default, reuseIdentifier: "MyOrdersCell")
         }
-        superLoanCell.selectionStyle = .none
-        superLoanCell.backgroundColor = UIColor.white
-        superLoanCell.isSelected = false
+        cell.selectionStyle = .none
+        cell.backgroundColor = UIColor.white
+        cell.isSelected = false
+        cell.titleLabel?.text = "手机充值卡-面值100元"
+        cell.timeLabel?.text = "2018.03.23 15:32:23"
+        cell.moneyLabel?.text = "¥1150.00"
+        cell.quantityLabel?.text = "¥115.00*10"
         
-        
-        return superLoanCell!
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

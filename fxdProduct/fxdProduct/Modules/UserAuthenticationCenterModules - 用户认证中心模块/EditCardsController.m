@@ -8,17 +8,14 @@
 
 #import "EditCardsController.h"
 #import "BankCardNameVCModules.h"
-#import "WTCameraViewController.h"
 #import "ReturnMsgBaseClass.h"
 #import "SMSViewModel.h"
-#import <MGBaseKit/MGBaseKit.h>
-#import <MGBankCard/MGBankCard.h>
 #import "UnbundlingBankCardViewModel.h"
 #import "CheckViewModel.h"
 #import "YX_BankCardScanManager.h"
 #import "YXBankCardModel.h"
 
-@interface EditCardsController ()<UITableViewDataSource,UITableViewDelegate,BankTableViewSelectDelegate,WTCameraDelegate,UITextFieldDelegate>
+@interface EditCardsController ()<UITableViewDataSource,UITableViewDelegate,BankTableViewSelectDelegate,UITextFieldDelegate>
 {
     NSInteger _countdown;
     NSTimer * _countdownTimer;

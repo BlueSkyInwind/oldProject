@@ -60,5 +60,26 @@ extension MyOrdersCell{
         moneyLabel?.textColor = TITLE_COLOR
         moneyLabel?.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(moneyLabel!)
+        moneyLabel?.snp.makeConstraints({ (make) in
+            make.right.equalTo(self).offset(-50)
+            make.top.equalTo(self).offset(25)
+        })
+        
+        quantityLabel = UILabel()
+        quantityLabel?.textColor = HOME_ARROW_COLOR
+        quantityLabel?.font = UIFont.systemFont(ofSize: 15)
+        self.addSubview(quantityLabel!)
+        quantityLabel?.snp.makeConstraints({ (make) in
+            make.right.equalTo(self).offset(-50)
+            make.bottom.equalTo(self).offset(-26)
+        })
+        
+        let arrowImageView = UIImageView()
+        arrowImageView.image = UIImage.init(named: "arrow_icon")
+        self.addSubview(arrowImageView)
+        arrowImageView.snp.makeConstraints { (make) in
+            make.right.equalTo(self).offset(-23)
+            make.centerY.equalTo(self.snp.centerY)
+        }
     }
 }

@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import MGLivenessDetection
 
 typealias IdentifyResultStatus = (_ status : String) ->Void
-class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
+class UserFaceIdentiVCModules: BaseViewController{
     
    @objc var verifyStatus : String? 
 
@@ -62,64 +61,6 @@ class UserFaceIdentiVCModules: BaseViewController,LiveDeteDelgate{
                 return
             }
         }
-        
-//        MGLicenseManager.license { (License) in
-//            if License {
-//                let mGLiveVC = MGLiveViewController.init(defauleSetting: ())
-//                mGLiveVC?.delagate  = self
-//                let baseVC = BaseNavigationViewController.init(rootViewController: mGLiveVC!)
-//                self.present(baseVC, animated: true, completion: nil)
-//            }
-//        }
-    }
-    
-    //MARK:  LiveDeteDelgate 事件
-    func liveDateSuccess(_ faceIDData: FaceIDData!) {
-        verifyLive(faceIDData: faceIDData)
-    }
-    func liveDateFaile(_ errorType: MGLivenessDetectionFailedType) {
-        showErrorString(errorType: errorType)
-    }
-
-    func showErrorString(errorType: MGLivenessDetectionFailedType) -> Void {
-        switch (errorType) {
-        case DETECTION_FAILED_TYPE_ACTIONBLEND:
-            FXD_Tool.showMessage("请按照提示完成动作", vc: self)
-            break;
-        case DETECTION_FAILED_TYPE_NOTVIDEO:
-            FXD_Tool.showMessage("活体检测未成功", vc: self)
-            break;
-        case DETECTION_FAILED_TYPE_TIMEOUT:
-            FXD_Tool.showMessage("请在规定时间内完成动作", vc: self)
-            break;
-        default:
-            FXD_Tool.showMessage("请按照提示完成动作", vc: self)
-            break;
-        }
-    }
-    
-    //MARK: 网络请求
-    func verifyLive( faceIDData : FaceIDData) -> Void {
-       let userDataVM =  UserDataViewModel.init()
-        userDataVM.setBlockWithReturn({[weak self] (object) in
-            let baseResult = object as? BaseResultModel
-            if baseResult?.errCode == "0"{
-                let dic = baseResult?.data as! NSDictionary
-                let statusMsg = dic["verify_msg_"] as! String
-                let status = dic["verify_status_"]
-                self?.verifyStatus = String.init(format: "%@", status as! CVarArg)
-                self?.changeStatus()
-                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: statusMsg)
-                if ((self?.identifyResultStatus) != nil) {
-                    self?.identifyResultStatus!((self?.verifyStatus)!)
-                }
-                self?.navigationController?.popViewController(animated: true)
-            }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message:baseResult?.friendErrMsg)
-            }
-        }) {
-        }
-        userDataVM.uploadLiveIdentiInfo(faceIDData)
     }
     
     /// 获取视频信息

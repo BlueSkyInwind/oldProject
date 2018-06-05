@@ -11,7 +11,6 @@
 
 #import "FXD_Tool.h"
 #import "UserMobileAuthenticationVCModules.h"
-#import "MGLiveViewController.h"
 #import "BaseNavigationViewController.h"
 #import "GlobalConfig.h"
 #import "FXD_Utility.h"

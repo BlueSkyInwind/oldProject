@@ -20,8 +20,7 @@
  */
 -(void)obtainthirdPartCertificationStatus;
 
-//上传活体认证信息
--(void)uploadLiveIdentiInfo:(FaceIDData *)imagesDic;
+
 
 /**
  用户联系人信息的状态
