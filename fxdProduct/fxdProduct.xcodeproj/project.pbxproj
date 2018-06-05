@@ -2316,7 +2316,7 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CC6D1B2720C633ED007446E7 /* MyOrdersView */,
+				CC6D1B2720C633ED007446E7 /* PhonerechargeCardService */,
 				84192A972079B1AC0042E8F8 /* MemberCenter */,
 				CC80DFEE206A50E0000F9BAC /* SuperLoanView */,
 				CC742D8D204D39C600D645CC /* ComplianceView */,
@@ -3764,7 +3764,6 @@
 		63ED333D1B6B523E008B6085 /* MyModules - 我的模块 */ = {
 			isa = PBXGroup;
 			children = (
-				CCC5DE3320C63708002A7553 /* PhoneRechargeCard - 手机充值卡模块 */,
 				84192A932079AD520042E8F8 /* MemberCenter */,
 				841BE5C31F177BDB00BABD04 /* UserLevel */,
 				63811AF71B8EB14F008F605B /* SubViewController */,
@@ -4110,6 +4109,7 @@
 		8466936620C6354B00F47A24 /* PhonerechargeCardService - 手机充值卡业务 */ = {
 			isa = PBXGroup;
 			children = (
+				CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */,
 				8466936720C637E300F47A24 /* ShoppingMallModules.swift */,
 			);
 			path = "PhonerechargeCardService - 手机充值卡业务";
@@ -4455,12 +4455,12 @@
 			name = ApplicationStatus;
 			sourceTree = "<group>";
 		};
-		CC6D1B2720C633ED007446E7 /* MyOrdersView */ = {
+		CC6D1B2720C633ED007446E7 /* PhonerechargeCardService */ = {
 			isa = PBXGroup;
 			children = (
 				CC6D1B2820C6341E007446E7 /* MyOrdersCell.swift */,
 			);
-			path = MyOrdersView;
+			path = PhonerechargeCardService;
 			sourceTree = "<group>";
 		};
 		CC6F068D1F7B8CA800FA889E /* ShanLinWebVCModules - 善林 */ = {
@@ -4617,14 +4617,6 @@
 				CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */,
 			);
 			name = AuthenticationCenterView;
-			sourceTree = "<group>";
-		};
-		CCC5DE3320C63708002A7553 /* PhoneRechargeCard - 手机充值卡模块 */ = {
-			isa = PBXGroup;
-			children = (
-				CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */,
-			);
-			path = "PhoneRechargeCard - 手机充值卡模块";
 			sourceTree = "<group>";
 		};
 		CCD32B501F58195D0092A9CB /* CurrentInformation */ = {

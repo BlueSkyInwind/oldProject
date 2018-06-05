@@ -42,7 +42,23 @@ extension MyOrdersCell{
         titleLabel?.textColor = TITLE_COLOR
         titleLabel?.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(titleLabel!)
+        titleLabel?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self).offset(22)
+            make.top.equalTo(self).offset(25)
+        })
         
+        timeLabel = UILabel()
+        timeLabel?.textColor = HOME_ARROW_COLOR
+        timeLabel?.font = UIFont.systemFont(ofSize: 15)
+        self.addSubview(timeLabel!)
+        timeLabel?.snp.makeConstraints({ (make) in
+            make.left.equalTo(self).offset(22)
+            make.bottom.equalTo(self).offset(-26)
+        })
         
+        moneyLabel = UILabel()
+        moneyLabel?.textColor = TITLE_COLOR
+        moneyLabel?.font = UIFont.systemFont(ofSize: 14)
+        self.addSubview(moneyLabel!)
     }
 }
