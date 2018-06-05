@@ -405,6 +405,8 @@
 		845017321ED7D051008055E4 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
 		8453F5381FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */; };
 		8453F5391FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */; };
+		8466936820C637E300F47A24 /* ShoppingMallModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936720C637E300F47A24 /* ShoppingMallModules.swift */; };
+		8466936920C637E300F47A24 /* ShoppingMallModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936720C637E300F47A24 /* ShoppingMallModules.swift */; };
 		846BB6E31F5835E100CD3545 /* ApplicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */; };
 		846BB6E41F5835E100CD3545 /* ApplicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */; };
 		846D58CD20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */; };
@@ -1818,6 +1820,7 @@
 		844E5F4F1ED94DCB00753671 /* RegParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegParamModel.m; sourceTree = "<group>"; };
 		8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPayPasswordView.swift; sourceTree = "<group>"; };
 		8459831220A2FAFD00CAB5F6 /* fxdProductDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fxdProductDev.entitlements; sourceTree = "<group>"; };
+		8466936720C637E300F47A24 /* ShoppingMallModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingMallModules.swift; sourceTree = "<group>"; };
 		846BB6E11F5835E100CD3545 /* ApplicationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewModel.h; sourceTree = "<group>"; };
 		846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewModel.m; sourceTree = "<group>"; };
 		846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_WithholdAuthViewController.swift; sourceTree = "<group>"; };
@@ -3676,6 +3679,7 @@
 		63ED33301B6B4472008B6085 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8466936620C6354B00F47A24 /* PhonerechargeCardService - 手机充值卡业务 */,
 				CC80DFE9206A487E000F9BAC /* SuperLoanModule - 贷超模块 */,
 				CC742D8C204D38BB00D645CC /* ComplianceModule - 合规模块 */,
 				84C6198D1FA8149700626411 /* RepaymentModules - 还款模块 */,
@@ -4101,6 +4105,14 @@
 				844E5F4F1ED94DCB00753671 /* RegParamModel.m */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		8466936620C6354B00F47A24 /* PhonerechargeCardService - 手机充值卡业务 */ = {
+			isa = PBXGroup;
+			children = (
+				8466936720C637E300F47A24 /* ShoppingMallModules.swift */,
+			);
+			path = "PhonerechargeCardService - 手机充值卡业务";
 			sourceTree = "<group>";
 		};
 		849AC25E1FF0DBBD005E435F /* ToWithdrawFundsView */ = {
@@ -5242,6 +5254,7 @@
 				CC80E008206B88CD000F9BAC /* CompQueryModel.m in Sources */,
 				84F87F401FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift in Sources */,
 				6313DC1A1BB4F35C00EB45DE /* FXD_UserInfoConfiguration.m in Sources */,
+				8466936820C637E300F47A24 /* ShoppingMallModules.swift in Sources */,
 				84F1E2A31FD94B39007D3381 /* RegionCodeParam.m in Sources */,
 				84A3801A1FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm in Sources */,
 				63F254731E499C8000852CF1 /* InvitationViewController.m in Sources */,
@@ -5710,6 +5723,7 @@
 				CC0DF9921EA5B1090024841A /* FXD_Utility.m in Sources */,
 				CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */,
 				848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
+				8466936920C637E300F47A24 /* ShoppingMallModules.swift in Sources */,
 				CC0DF9951EA5B1090024841A /* (null) in Sources */,
 				CC0DF9971EA5B1090024841A /* (null) in Sources */,
 				CC0DF9981EA5B1090024841A /* LOTLayerView.m in Sources */,
@@ -6434,7 +6448,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6555,7 +6569,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
