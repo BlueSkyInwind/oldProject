@@ -338,8 +338,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //检测登录
     if (![FXD_Utility sharedUtility].loginFlage) {
-        [self presentLogin:self];
-        return;
+//        [self presentLogin:self];
+//        return;
     }
     
     switch (indexPath.section) {
@@ -365,8 +365,12 @@
             switch (indexPath.row) {
                 case 0:
                     {
-                        MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-                        [self.navigationController pushViewController:myMessageVC animated:true];
+                        VideoVerifyViewController *controller = [[VideoVerifyViewController alloc]init];
+                        controller.displaystr = @"fafawfwaef";
+                        controller.RecordsTimeMax = 6;
+                        [self.navigationController pushViewController:controller animated:true];
+//                        MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+//                        [self.navigationController pushViewController:myMessageVC animated:true];
                         
                     }
                     break;
@@ -389,7 +393,6 @@
                     {
                         MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
                         [self.navigationController pushViewController:myCrad animated:YES];
-                        
                     }
                     break;
                 case 1:

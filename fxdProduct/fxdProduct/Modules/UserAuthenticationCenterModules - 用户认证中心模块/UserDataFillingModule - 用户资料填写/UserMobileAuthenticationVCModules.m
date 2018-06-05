@@ -8,7 +8,6 @@
 
 #import "UserMobileAuthenticationVCModules.h"
 #import "MobileCell.h"
-#import <MGLivenessDetection/MGLivenessDetection.h>
 #import "BaseNavigationViewController.h"
 #import "FXDWebViewController.h"
 #import "AuthenticationViewModel.h"
@@ -22,7 +21,7 @@ typedef enum {
 
 }CurrentDisplayType;
 
-@interface UserMobileAuthenticationVCModules ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,LiveDeteDelgate>
+@interface UserMobileAuthenticationVCModules ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
 
     BOOL _captchaHidenDisplay;

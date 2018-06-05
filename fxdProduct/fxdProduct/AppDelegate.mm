@@ -10,7 +10,6 @@
 #import "BaseNavigationViewController.h"
 #import "LunchVCModules.h"
 #import "CALayer+Transition.h"
-#import "BSFingerSDK.h"
 #import "FXD_AppShareConfig.h"
 #import "JPUSHService.h"
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
@@ -177,7 +176,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 
-    [[BSFingerSDK sharedInstance] cancelAll];
 }
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     completionHandler(UIBackgroundFetchResultNewData);

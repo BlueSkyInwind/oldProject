@@ -15,8 +15,6 @@
 #import "ColledgeView.h"
 #import "FaceIDOCRFront.h"
 #import "FaceIDOCRBack.h"
-#import <MGBaseKit/MGBaseKit.h>
-#import <MGIDCard/MGIDCard.h>
 #import "SaveCustomBaseViewModel.h"
 #import "GTMBase64.h"
 #import "CustomerIDInfo.h"

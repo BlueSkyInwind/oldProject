@@ -40,8 +40,6 @@
 		1A762F701C1FBE4700964719 /* RepayRecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A762F6E1C1FBE4700964719 /* RepayRecordController.xib */; };
 		1AB0F5AA1CF2D20E00F3DF06 /* TicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB0F5A81CF2D20E00F3DF06 /* TicketCell.m */; };
 		1AB0F5AB1CF2D20E00F3DF06 /* TicketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AB0F5A91CF2D20E00F3DF06 /* TicketCell.xib */; };
-		1AE362F51C586060006FC276 /* EditCardsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE362F31C586060006FC276 /* EditCardsController.m */; };
-		1AE362F61C586060006FC276 /* EditCardsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AE362F41C586060006FC276 /* EditCardsController.xib */; };
 		1AE5E6241C1EA5240099CCA0 /* AboutMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE5E6221C1EA5240099CCA0 /* AboutMainViewController.m */; };
 		1AE5E6251C1EA5240099CCA0 /* AboutMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AE5E6231C1EA5240099CCA0 /* AboutMainViewController.xib */; };
 		1AEFFA7C1C50BF72003936CE /* loanRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEFFA7B1C50BF72003936CE /* loanRecordCell.m */; };
@@ -263,8 +261,6 @@
 		63F0E1BB1CE417FF001251A9 /* NSString+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F0E1BA1CE417FF001251A9 /* NSString+YYAdd.m */; };
 		63F0E1BE1CE41821001251A9 /* NSData+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F0E1BD1CE41821001251A9 /* NSData+YYAdd.m */; };
 		63F0E1C11CE4183A001251A9 /* NSNumber+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F0E1C01CE4183A001251A9 /* NSNumber+YYAdd.m */; };
-		63F0E1C61CE57B80001251A9 /* BSFingerResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F0E1C31CE57B80001251A9 /* BSFingerResource.bundle */; };
-		63F0E1C71CE57B80001251A9 /* libBSFingerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F0E1C51CE57B80001251A9 /* libBSFingerSDK.a */; };
 		63F254731E499C8000852CF1 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F254711E499C8000852CF1 /* InvitationViewController.m */; };
 		63F254831E49A45900852CF1 /* HMScanerCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F254771E49A45900852CF1 /* HMScanerCardViewController.m */; };
 		63F254841E49A45900852CF1 /* HMScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F254781E49A45900852CF1 /* HMScanner.bundle */; };
@@ -392,6 +388,8 @@
 		8453F5391FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */; };
 		8466936820C637E300F47A24 /* ShoppingMallModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936720C637E300F47A24 /* ShoppingMallModules.swift */; };
 		8466936920C637E300F47A24 /* ShoppingMallModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936720C637E300F47A24 /* ShoppingMallModules.swift */; };
+		8466936B20C6792800F47A24 /* RechargeCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */; };
+		8466936C20C6792800F47A24 /* RechargeCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */; };
 		846BB6E31F5835E100CD3545 /* ApplicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */; };
 		846BB6E41F5835E100CD3545 /* ApplicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */; };
 		846D58CD20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */; };
@@ -579,6 +577,10 @@
 		84E62D201FDA7E3100B7F870 /* CustomerContactsInfoParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E62D1E1FDA7E3100B7F870 /* CustomerContactsInfoParam.m */; };
 		84E810FB2091A7F5009226B5 /* ChooseCreditDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E810FA2091A7F5009226B5 /* ChooseCreditDateView.swift */; };
 		84E810FC2091A7F5009226B5 /* ChooseCreditDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E810FA2091A7F5009226B5 /* ChooseCreditDateView.swift */; };
+		84EBE9C420C691000045F538 /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9C320C691000045F538 /* YXMoviesRecordManager.swift */; };
+		84EBE9C520C691000045F538 /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9C320C691000045F538 /* YXMoviesRecordManager.swift */; };
+		84EBE9C720C692FB0045F538 /* RechargeBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9C620C692FB0045F538 /* RechargeBottomView.swift */; };
+		84EBE9C820C692FB0045F538 /* RechargeBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9C620C692FB0045F538 /* RechargeBottomView.swift */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5B1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5C1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */; };
@@ -803,7 +805,6 @@
 		CC0DFA9B1EA5B1090024841A /* FindPassViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 633DAD2C1C3E47D0000DA852 /* FindPassViewModel.m */; };
 		CC0DFA9C1EA5B1090024841A /* SetUpFMDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16851E5030D700AB8AB6 /* SetUpFMDevice.m */; };
 		CC0DFA9D1EA5B1090024841A /* RegionExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AEC1CA8DBBD00D04ED8 /* RegionExt.m */; };
-		CC0DFA9E1EA5B1090024841A /* EditCardsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE362F31C586060006FC276 /* EditCardsController.m */; };
 		CC0DFAA01EA5B1090024841A /* GetMoneyProcessResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9E81BF0B15700FD23A8 /* GetMoneyProcessResult.m */; };
 		CC0DFAA21EA5B1090024841A /* LOTShapePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D41E517D9F00AB8AB6 /* LOTShapePath.m */; };
 		CC0DFAA31EA5B1090024841A /* YYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24EC1D98F7E9006F58F3 /* YYTextView.m */; };
@@ -880,7 +881,6 @@
 		CC0DFB0F1EA5B1090024841A /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B311561BD75D30002C4B98 /* libxml2.tbd */; };
 		CC0DFB101EA5B1090024841A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6326C9D31BF08E0B00FD23A8 /* AddressBook.framework */; };
 		CC0DFB111EA5B1090024841A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6326C9D41BF08E0B00FD23A8 /* AddressBookUI.framework */; };
-		CC0DFB131EA5B1090024841A /* libBSFingerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F0E1C51CE57B80001251A9 /* libBSFingerSDK.a */; };
 		CC0DFB141EA5B1090024841A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6326C9CA1BF040A600FD23A8 /* AdSupport.framework */; };
 		CC0DFB151EA5B1090024841A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032FA7E21BE1BB4900CF2D21 /* CFNetwork.framework */; };
 		CC0DFB191EA5B1090024841A /* CheckViewIng.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA91611C589D76008D91D2 /* CheckViewIng.xib */; };
@@ -906,10 +906,8 @@
 		CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636B1B8E1C2A416500450358 /* NextViewCell.xib */; };
 		CC0DFB781EA5B1090024841A /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 63B65DF01D519D1600207231 /* main.js */; };
 		CC0DFB7B1EA5B1090024841A /* UpdateDevIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 630D46161BCCD2FB00874064 /* UpdateDevIDViewController.xib */; };
-		CC0DFB7C1EA5B1090024841A /* EditCardsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AE362F41C586060006FC276 /* EditCardsController.xib */; };
 		CC0DFB7F1EA5B1090024841A /* MyCardsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F920C121BCE549900AA9A31 /* MyCardsViewController.xib */; };
 		CC0DFB831EA5B1090024841A /* MobileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553B051E5D9E1B00B2C1FF /* MobileCell.xib */; };
-		CC0DFB861EA5B1090024841A /* BSFingerResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F0E1C31CE57B80001251A9 /* BSFingerResource.bundle */; };
 		CC0DFB881EA5B1090024841A /* TelPhoneCompanyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FEACE1F1CA0E2450027859A /* TelPhoneCompanyCell.xib */; };
 		CC0DFB8D1EA5B1090024841A /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F0FDAC11BC771EC00F3CF10 /* AboutViewController.xib */; };
 		CC0F1B9D1EE6537700A23651 /* IdeaBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0F1B9C1EE6537700A23651 /* IdeaBackViewModel.m */; };
@@ -1128,6 +1126,7 @@
 		CCF97E5A20C67FD3009E7ECC /* MyBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */; };
 		CCF97E5C20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
 		CCF97E5D20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1220,9 +1219,6 @@
 		1AB0F5A71CF2D20E00F3DF06 /* TicketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketCell.h; sourceTree = "<group>"; };
 		1AB0F5A81CF2D20E00F3DF06 /* TicketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCell.m; sourceTree = "<group>"; };
 		1AB0F5A91CF2D20E00F3DF06 /* TicketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketCell.xib; sourceTree = "<group>"; };
-		1AE362F21C586060006FC276 /* EditCardsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCardsController.h; sourceTree = "<group>"; };
-		1AE362F31C586060006FC276 /* EditCardsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCardsController.m; sourceTree = "<group>"; };
-		1AE362F41C586060006FC276 /* EditCardsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCardsController.xib; sourceTree = "<group>"; };
 		1AE5E6211C1EA5240099CCA0 /* AboutMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMainViewController.h; sourceTree = "<group>"; };
 		1AE5E6221C1EA5240099CCA0 /* AboutMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMainViewController.m; sourceTree = "<group>"; };
 		1AE5E6231C1EA5240099CCA0 /* AboutMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutMainViewController.xib; sourceTree = "<group>"; };
@@ -1644,9 +1640,6 @@
 		63F0E1BD1CE41821001251A9 /* NSData+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+YYAdd.m"; sourceTree = "<group>"; };
 		63F0E1BF1CE4183A001251A9 /* NSNumber+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+YYAdd.h"; sourceTree = "<group>"; };
 		63F0E1C01CE4183A001251A9 /* NSNumber+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+YYAdd.m"; sourceTree = "<group>"; };
-		63F0E1C31CE57B80001251A9 /* BSFingerResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BSFingerResource.bundle; sourceTree = "<group>"; };
-		63F0E1C41CE57B80001251A9 /* BSFingerSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSFingerSDK.h; sourceTree = "<group>"; };
-		63F0E1C51CE57B80001251A9 /* libBSFingerSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBSFingerSDK.a; sourceTree = "<group>"; };
 		63F254701E499C8000852CF1 /* InvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationViewController.h; sourceTree = "<group>"; };
 		63F254711E499C8000852CF1 /* InvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationViewController.m; sourceTree = "<group>"; };
 		63F254761E49A45900852CF1 /* HMScanerCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMScanerCardViewController.h; sourceTree = "<group>"; };
@@ -1789,6 +1782,7 @@
 		8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPayPasswordView.swift; sourceTree = "<group>"; };
 		8459831220A2FAFD00CAB5F6 /* fxdProductDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fxdProductDev.entitlements; sourceTree = "<group>"; };
 		8466936720C637E300F47A24 /* ShoppingMallModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingMallModules.swift; sourceTree = "<group>"; };
+		8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCardTableViewCell.swift; sourceTree = "<group>"; };
 		846BB6E11F5835E100CD3545 /* ApplicationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewModel.h; sourceTree = "<group>"; };
 		846BB6E21F5835E100CD3545 /* ApplicationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewModel.m; sourceTree = "<group>"; };
 		846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_WithholdAuthViewController.swift; sourceTree = "<group>"; };
@@ -1928,6 +1922,8 @@
 		84E62D1D1FDA7E3100B7F870 /* CustomerContactsInfoParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerContactsInfoParam.h; sourceTree = "<group>"; };
 		84E62D1E1FDA7E3100B7F870 /* CustomerContactsInfoParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerContactsInfoParam.m; sourceTree = "<group>"; };
 		84E810FA2091A7F5009226B5 /* ChooseCreditDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCreditDateView.swift; sourceTree = "<group>"; };
+		84EBE9C320C691000045F538 /* YXMoviesRecordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXMoviesRecordManager.swift; sourceTree = "<group>"; };
+		84EBE9C620C692FB0045F538 /* RechargeBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeBottomView.swift; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
 		84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_finish@2x.png"; sourceTree = "<group>"; };
 		84ED5B561F4AB9E7004C0A59 /* mx_loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_loading@2x.png"; sourceTree = "<group>"; };
@@ -2168,7 +2164,6 @@
 				63B311571BD75D30002C4B98 /* libxml2.tbd in Frameworks */,
 				6326C9D51BF08E0B00FD23A8 /* AddressBook.framework in Frameworks */,
 				6326C9D61BF08E0B00FD23A8 /* AddressBookUI.framework in Frameworks */,
-				63F0E1C71CE57B80001251A9 /* libBSFingerSDK.a in Frameworks */,
 				6326C9CB1BF040A600FD23A8 /* AdSupport.framework in Frameworks */,
 				032FA7E31BE1BB4900CF2D21 /* CFNetwork.framework in Frameworks */,
 				3E2B09C36E24E9E9316FAC1B /* Pods_fxd_fxdProduct.framework in Frameworks */,
@@ -2224,7 +2219,6 @@
 				CC0DFB0F1EA5B1090024841A /* libxml2.tbd in Frameworks */,
 				CC0DFB101EA5B1090024841A /* AddressBook.framework in Frameworks */,
 				CC0DFB111EA5B1090024841A /* AddressBookUI.framework in Frameworks */,
-				CC0DFB131EA5B1090024841A /* libBSFingerSDK.a in Frameworks */,
 				CC0DFB141EA5B1090024841A /* AdSupport.framework in Frameworks */,
 				CC0DFB151EA5B1090024841A /* CFNetwork.framework in Frameworks */,
 			);
@@ -2760,7 +2754,6 @@
 				638C3F251CF2F470000446A7 /* PCCircleViewConst.h */,
 				638C3F261CF2F470000446A7 /* PCCircleViewConst.m */,
 				638C3F161CF2CAFD000446A7 /* source */,
-				63F0E1C21CE57B80001251A9 /* BSFinger */,
 				6381989F1CC0825400E8951E /* SSKeychain */,
 				637963791CAB9E77002A5910 /* BaiduMap */,
 				63AD1D171BFC1AA400807877 /* MLBlackTransition */,
@@ -3705,16 +3698,6 @@
 			path = "MyModules - 我的模块";
 			sourceTree = "<group>";
 		};
-		63F0E1C21CE57B80001251A9 /* BSFinger */ = {
-			isa = PBXGroup;
-			children = (
-				63F0E1C31CE57B80001251A9 /* BSFingerResource.bundle */,
-				63F0E1C41CE57B80001251A9 /* BSFingerSDK.h */,
-				63F0E1C51CE57B80001251A9 /* libBSFingerSDK.a */,
-			);
-			path = BSFinger;
-			sourceTree = "<group>";
-		};
 		63F254751E49A45900852CF1 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -4012,7 +3995,7 @@
 		8449AC1C2062455E00526935 /* VideoVerify */ = {
 			isa = PBXGroup;
 			children = (
-				CCF97E5220C667BC009E7ECC /* YXMoviesRecordManager.swift */,
+				84EBE9C320C691000045F538 /* YXMoviesRecordManager.swift */,
 				8449AC222062457A00526935 /* VideoVerifyViewController.swift */,
 				8449AC212062457A00526935 /* YXRoundProgressView.swift */,
 				8449AC202062457900526935 /* YXRecordView.swift */,
@@ -4235,9 +4218,6 @@
 				846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */,
 				84A380011FAC1D8D008FB7AF /* UserDataFillingModule - 用户资料填写 */,
 				CC8BB75420901C7D00ADA647 /* BillingMessageViewController.swift */,
-				1AE362F21C586060006FC276 /* EditCardsController.h */,
-				1AE362F31C586060006FC276 /* EditCardsController.m */,
-				1AE362F41C586060006FC276 /* EditCardsController.xib */,
 			);
 			path = "UserAuthenticationCenterModules - 用户认证中心模块";
 			sourceTree = "<group>";
@@ -4385,6 +4365,8 @@
 				CC6D1B2820C6341E007446E7 /* MyOrdersCell.swift */,
 				CCC5DE3720C65CF3002A7553 /* MyBillAmountCell.swift */,
 				CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */,
+				8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */,
+				84EBE9C620C692FB0045F538 /* RechargeBottomView.swift */,
 			);
 			path = PhonerechargeCardService;
 			sourceTree = "<group>";
@@ -4784,11 +4766,9 @@
 				84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */,
 				63B65DF11D519D1600207231 /* main.js in Resources */,
 				630D46181BCCD2FB00874064 /* UpdateDevIDViewController.xib in Resources */,
-				1AE362F61C586060006FC276 /* EditCardsController.xib in Resources */,
 				84D2B80A20A1B4A800142206 /* repay_circle_selt@2x.png in Resources */,
 				0F920C141BCE549900AA9A31 /* MyCardsViewController.xib in Resources */,
 				63553B071E5D9E1B00B2C1FF /* MobileCell.xib in Resources */,
-				63F0E1C61CE57B80001251A9 /* BSFingerResource.bundle in Resources */,
 				0FEACE211CA0E2450027859A /* TelPhoneCompanyCell.xib in Resources */,
 				0F0FDAC31BC771EC00F3CF10 /* AboutViewController.xib in Resources */,
 			);
@@ -4862,11 +4842,9 @@
 				CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */,
 				CC0DFB781EA5B1090024841A /* main.js in Resources */,
 				CC0DFB7B1EA5B1090024841A /* UpdateDevIDViewController.xib in Resources */,
-				CC0DFB7C1EA5B1090024841A /* EditCardsController.xib in Resources */,
 				84D2B80B20A1B4A800142206 /* repay_circle_selt@2x.png in Resources */,
 				CC0DFB7F1EA5B1090024841A /* MyCardsViewController.xib in Resources */,
 				CC0DFB831EA5B1090024841A /* MobileCell.xib in Resources */,
-				CC0DFB861EA5B1090024841A /* BSFingerResource.bundle in Resources */,
 				CC0DFB881EA5B1090024841A /* TelPhoneCompanyCell.xib in Resources */,
 				CC0DFB8D1EA5B1090024841A /* AboutViewController.xib in Resources */,
 			);
@@ -5064,6 +5042,7 @@
 				84192AA6207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */,
 				CC6D1B2920C6341E007446E7 /* MyOrdersCell.swift in Sources */,
 				84C619C71FA815EB00626411 /* PayMoneyCell.m in Sources */,
+				84EBE9C720C692FB0045F538 /* RechargeBottomView.swift in Sources */,
 				84C619C91FA815EB00626411 /* RepayListCell.m in Sources */,
 				84C619BC1FA815A800626411 /* LoanPeriodForDetailsVCModule.m in Sources */,
 				63832C881CB7513500C6F194 /* NSData+AES.m in Sources */,
@@ -5235,7 +5214,7 @@
 				CC5FC5AE1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift in Sources */,
 				84CC89991F593C1E00537910 /* ApplicaitonModel.m in Sources */,
 				84E306CF1F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
-				CCF97E5320C667BD009E7ECC /* YXMoviesRecordManager.swift in Sources */,
+				84EBE9C420C691000045F538 /* YXMoviesRecordManager.swift in Sources */,
 				634831081CBCD4680005C4CD /* GetCustomerBaseViewModel.m in Sources */,
 				84A3802A1FAC1D8D008FB7AF /* UserThirdPartyAuthVCModules.swift in Sources */,
 				63FC24F01D98F7E9006F58F3 /* YYTextInput.m in Sources */,
@@ -5391,6 +5370,7 @@
 				63553AD81E5D2A4200B2C1FF /* DataDisplayCell.m in Sources */,
 				637963AA1CABD0F8002A5910 /* ApprovalAmountResult.m in Sources */,
 				63A24C6D1BE063A90036E8EF /* UIWindow+Launch.m in Sources */,
+				8466936B20C6792800F47A24 /* RechargeCardTableViewCell.swift in Sources */,
 				84C61A0E1FA8241200626411 /* FXD_LaunchConfiguration.m in Sources */,
 				638A16F91E517D9F00AB8AB6 /* UIColor+Expanded.m in Sources */,
 				CC45E72F1FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
@@ -5415,7 +5395,6 @@
 				638A16861E5030D700AB8AB6 /* SetUpFMDevice.m in Sources */,
 				63145AF21CA8DBBD00D04ED8 /* RegionExt.m in Sources */,
 				CC594E6B1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */,
-				1AE362F51C586060006FC276 /* EditCardsController.m in Sources */,
 				CC1AC8D9209078F2009B5BD4 /* CardAuthSmsSendParamModel.m in Sources */,
 				6326C9EC1BF0B15700FD23A8 /* GetMoneyProcessResult.m in Sources */,
 				841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */,
@@ -5534,6 +5513,7 @@
 				84C619D01FA8161F00626411 /* UserBankCardListVCModule.m in Sources */,
 				CC6D1B2A20C6341E007446E7 /* MyOrdersCell.swift in Sources */,
 				84C619D11FA8161F00626411 /* BankListCell.m in Sources */,
+				84EBE9C820C692FB0045F538 /* RechargeBottomView.swift in Sources */,
 				84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */,
 				CC4F0639207DE90B0030A12A /* FindViewModel.m in Sources */,
 				CC1AC8E220907A43009B5BD4 /* BankCardAuthorizationViewModel.m in Sources */,
@@ -5705,7 +5685,7 @@
 				CC0DF9D41EA5B1090024841A /* NSString+AES.m in Sources */,
 				CC0DF9D61EA5B1090024841A /* ReconfrInfoModel.m in Sources */,
 				CC0DF9D71EA5B1090024841A /* UIApplication+Extend.m in Sources */,
-				CCF97E5420C667BD009E7ECC /* YXMoviesRecordManager.swift in Sources */,
+				84EBE9C520C691000045F538 /* YXMoviesRecordManager.swift in Sources */,
 				CC0DF9DB1EA5B1090024841A /* LewPopupViewAnimationSpring.m in Sources */,
 				CC0DF9DC1EA5B1090024841A /* YYTextUtilities.m in Sources */,
 				CC0DF9DD1EA5B1090024841A /* LOTShapeTrimPath.m in Sources */,
@@ -5861,6 +5841,7 @@
 				CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */,
 				CC6E696420561565005853BB /* SmsCodeModel.m in Sources */,
 				CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
+				8466936C20C6792800F47A24 /* RechargeCardTableViewCell.swift in Sources */,
 				CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchVCModules.m in Sources */,
 				8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */,
@@ -5893,7 +5874,6 @@
 				CC0DFA9B1EA5B1090024841A /* FindPassViewModel.m in Sources */,
 				CC0DFA9C1EA5B1090024841A /* SetUpFMDevice.m in Sources */,
 				CC0DFA9D1EA5B1090024841A /* RegionExt.m in Sources */,
-				CC0DFA9E1EA5B1090024841A /* EditCardsController.m in Sources */,
 				CCEFC6EF207F65430006D731 /* CollectionListModel.m in Sources */,
 				849842011FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
 				CC4F0630207C65770030A12A /* CollectionViewController.swift in Sources */,
@@ -6104,6 +6084,7 @@
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
@@ -6220,6 +6201,7 @@
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = B4V533E2T3;
 				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/fxdProduct/Third/BaiduMap",
@@ -6390,9 +6372,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/fxdProduct/Third/BankCardRecogPro",
 					"$(PROJECT_DIR)/fxdProduct/Third/libSTLivenessController",
-					"$(PROJECT_DIR)/fxdProduct/Third/BSFinger",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
@@ -6511,9 +6491,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/fxdProduct/Third/BankCardRecogPro",
 					"$(PROJECT_DIR)/fxdProduct/Third/libSTLivenessController",
-					"$(PROJECT_DIR)/fxdProduct/Third/BSFinger",
 					"$(PROJECT_DIR)/fxdProduct/Third/MoxieSDK",
 					"$(PROJECT_DIR)/fxdProduct/Third/FMDeviceManager",
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",

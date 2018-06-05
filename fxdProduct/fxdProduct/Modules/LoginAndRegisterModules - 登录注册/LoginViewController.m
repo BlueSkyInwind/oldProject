@@ -18,11 +18,10 @@
 #import "ReturnMsgBaseClass.h"
 #import "DES3Util.h"
 #import "LunchVCModules.h"
-#import "BSFingerSDK.h"
 #import "UIImage+Color.h"
 #import "LoginView.h"
 
-@interface LoginViewController ()<UITextFieldDelegate,HHAlertViewDelegate,BMKLocationServiceDelegate,RegDelegate,BSFingerCallBack,LoginViewDelegate>
+@interface LoginViewController ()<UITextFieldDelegate,HHAlertViewDelegate,BMKLocationServiceDelegate,RegDelegate,LoginViewDelegate>
 {
     //倒计时时间
     NSInteger _countdown;
@@ -65,7 +64,6 @@
     DLog(@"%d",[LunchVCModules canShowNewFeature]);
     //设备指纹
     _BSFIT_DEVICEID = @"";
-    [[BSFingerSDK sharedInstance] getFingerPrint:self withKey:@"com.hfsj.fxd"];
     
 //    [self setNav];
 }

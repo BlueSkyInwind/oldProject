@@ -8,7 +8,6 @@
 
 #import "UserBankCardListVCModule.h"
 #import "BankListCell.h"
-#import "EditCardsController.h"
 #import "BaseNavigationViewController.h"
 #import "UserCardResult.h"
 #import "CardInfo.h"
@@ -101,15 +100,7 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     controller.type = @"1";
     controller.applicationId = _applicationId;
     [self.navigationController pushViewController:controller animated:true];
-//    EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:NSStringFromClass([EditCardsController class]) bundle:nil];
-//    editCard.typeFlag = @"0";
-//    editCard.addCarSuccess = ^{
-//        DLog(@"添加卡成功");
-//        _currentIndex = 0;
-//        [self.tableView.mj_header beginRefreshing];
-//    };
-//    BaseNavigationViewController *addCarNC = [[BaseNavigationViewController alloc] initWithRootViewController:editCard];
-//    [self presentViewController:addCarNC animated:YES completion:nil];
+
 }
 - (void)goBack
 {

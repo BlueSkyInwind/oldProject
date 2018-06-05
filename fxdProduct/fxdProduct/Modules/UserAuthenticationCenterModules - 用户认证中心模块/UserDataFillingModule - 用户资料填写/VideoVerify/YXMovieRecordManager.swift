@@ -12,8 +12,9 @@ import AVFoundation
 typealias StartRecordConnecions = (_ captureOutput:AVCaptureFileOutput) -> Void
 typealias EndRecordConnecions = (_ captureOutput:AVCaptureFileOutput,_ outputFileURL:NSURL) -> Void
 
-class YXMoviesRecordManager: YXBaseRecordManager,AVCaptureFileOutputRecordingDelegate{
+class YXMovieRecordManager: YXBaseRecordManager,AVCaptureFileOutputRecordingDelegate {
     
+
     var recordTimer:Timer?
     var startRecordConnections:StartRecordConnecions?
     var endRecordConnecions:EndRecordConnecions?
@@ -40,27 +41,35 @@ class YXMoviesRecordManager: YXBaseRecordManager,AVCaptureFileOutputRecordingDel
         //let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! + self.getUploadFileName("/abc", type: ".mp4")
          let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! + "/abc.mp4"
         let fileUrl = URL(fileURLWithPath: filePath)
-        self.moviesDataOutput.startRecording(to: fileUrl, recordingDelegate: self)
+        self.moviesDataOutput.startRecording(to: fileUrl, recordingDelegate: self as! AVCaptureFileOutputRecordingDelegate)
     }
     
     func stopRecordingToOutputFileURL()  {
         self.moviesDataOutput.stopRecording()
     }
     
-    func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
+    func captureOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
         print("开始录制")
+
+     }
+    
+    func captureOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        print("停止录制");
+
+    }
+    
+    func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
         if (self.startRecordConnections != nil) {
             self.startRecordConnections!(output)
         }
-     }
+    }
     
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        print("停止录制");
         if (self.endRecordConnecions != nil) {
             self.endRecordConnecions!(output,outputFileURL as NSURL)
         }
     }
-    
+
     func convertVideoQuailtyWithInputURL(_ inputPath:String,outputPath:String) -> Void {
         let avAsset = AVURLAsset.init(url: URL.init(string: inputPath)!, options: [:])
         let exportSession = AVAssetExportSession.init(asset: avAsset, presetName: AVAssetExportPreset640x480)
