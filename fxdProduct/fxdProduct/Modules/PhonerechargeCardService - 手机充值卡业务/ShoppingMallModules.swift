@@ -8,13 +8,41 @@
 
 import UIKit
 
-class ShoppingMallModules: BaseViewController {
+class ShoppingMallModules: BaseViewController,UITableViewDelegate {
+
+    
+    
+    var cardTableView:UITableView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        self.title = "商城"
+        self.addBackItem()
+        
     }
+    
+    func configureView()  {
+        cardTableView = UITableView()
+//        cardTableView?.delegate = self;
+//        cardTableView?.dataSource = self;
+        self.view.addSubview(cardTableView!)
+        cardTableView?.snp.makeConstraints({ (make) in
+            make.edges.equalTo(self.view)
+        })
+        
+    }
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        
+//    }
+//    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
