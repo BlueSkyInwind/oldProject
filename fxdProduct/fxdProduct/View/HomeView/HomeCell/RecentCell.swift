@@ -140,7 +140,7 @@ extension RecentCell{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if homeProductListModel.hotRecommend.count > 0 {
+        if homeProductListModel.hotRecommend != nil {
             
             return homeProductListModel.hotRecommend.count
         }

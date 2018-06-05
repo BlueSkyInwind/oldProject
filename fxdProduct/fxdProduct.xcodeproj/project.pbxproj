@@ -1006,6 +1006,10 @@
 		CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
 		CC6D1B2220C4E5B6007446E7 /* QuotaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D1B2120C4E5B6007446E7 /* QuotaCell.swift */; };
 		CC6D1B2320C4E5B6007446E7 /* QuotaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D1B2120C4E5B6007446E7 /* QuotaCell.swift */; };
+		CC6D1B2520C632B2007446E7 /* MyOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */; };
+		CC6D1B2620C632B2007446E7 /* MyOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */; };
+		CC6D1B2920C6341E007446E7 /* MyOrdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D1B2820C6341E007446E7 /* MyOrdersCell.swift */; };
+		CC6D1B2A20C6341E007446E7 /* MyOrdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D1B2820C6341E007446E7 /* MyOrdersCell.swift */; };
 		CC6E0F171FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
 		CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */; };
 		CC6E696320561565005853BB /* SmsCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6E696220561565005853BB /* SmsCodeModel.m */; };
@@ -2038,6 +2042,8 @@
 		CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackRect.swift; sourceTree = "<group>"; };
 		CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseThirdView.swift; sourceTree = "<group>"; };
 		CC6D1B2120C4E5B6007446E7 /* QuotaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotaCell.swift; sourceTree = "<group>"; };
+		CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersViewController.swift; sourceTree = "<group>"; };
+		CC6D1B2820C6341E007446E7 /* MyOrdersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersCell.swift; sourceTree = "<group>"; };
 		CC6E0F151FF0942400D32773 /* FXD_HomeProductListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_HomeProductListModel.h; sourceTree = "<group>"; };
 		CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_HomeProductListModel.m; sourceTree = "<group>"; };
 		CC6E696120561565005853BB /* SmsCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmsCodeModel.h; sourceTree = "<group>"; };
@@ -2307,6 +2313,7 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CC6D1B2720C633ED007446E7 /* MyOrdersView */,
 				84192A972079B1AC0042E8F8 /* MemberCenter */,
 				CC80DFEE206A50E0000F9BAC /* SuperLoanView */,
 				CC742D8D204D39C600D645CC /* ComplianceView */,
@@ -3753,6 +3760,7 @@
 		63ED333D1B6B523E008B6085 /* MyModules - 我的模块 */ = {
 			isa = PBXGroup;
 			children = (
+				CCC5DE3320C63708002A7553 /* PhoneRechargeCard - 手机充值卡模块 */,
 				84192A932079AD520042E8F8 /* MemberCenter */,
 				841BE5C31F177BDB00BABD04 /* UserLevel */,
 				63811AF71B8EB14F008F605B /* SubViewController */,
@@ -4435,6 +4443,14 @@
 			name = ApplicationStatus;
 			sourceTree = "<group>";
 		};
+		CC6D1B2720C633ED007446E7 /* MyOrdersView */ = {
+			isa = PBXGroup;
+			children = (
+				CC6D1B2820C6341E007446E7 /* MyOrdersCell.swift */,
+			);
+			path = MyOrdersView;
+			sourceTree = "<group>";
+		};
 		CC6F068D1F7B8CA800FA889E /* ShanLinWebVCModules - 善林 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4589,6 +4605,14 @@
 				CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */,
 			);
 			name = AuthenticationCenterView;
+			sourceTree = "<group>";
+		};
+		CCC5DE3320C63708002A7553 /* PhoneRechargeCard - 手机充值卡模块 */ = {
+			isa = PBXGroup;
+			children = (
+				CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */,
+			);
+			path = "PhoneRechargeCard - 手机充值卡模块";
 			sourceTree = "<group>";
 		};
 		CCD32B501F58195D0092A9CB /* CurrentInformation */ = {
@@ -5118,6 +5142,7 @@
 				84C619C61FA815EB00626411 /* PayMethodCell.m in Sources */,
 				CCC1E4062057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */,
 				84192AA6207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */,
+				CC6D1B2920C6341E007446E7 /* MyOrdersCell.swift in Sources */,
 				84C619C71FA815EB00626411 /* PayMoneyCell.m in Sources */,
 				84C619C91FA815EB00626411 /* RepayListCell.m in Sources */,
 				84C619BC1FA815A800626411 /* LoanPeriodForDetailsVCModule.m in Sources */,
@@ -5419,6 +5444,7 @@
 				84ED5B731F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
 				63553B061E5D9E1B00B2C1FF /* MobileCell.m in Sources */,
 				84A37FF41FAC12A8008FB7AF /* ActivityHomePopView.m in Sources */,
+				CC6D1B2520C632B2007446E7 /* MyOrdersViewController.swift in Sources */,
 				638A16FB1E517D9F00AB8AB6 /* CALayer+Compat.m in Sources */,
 				1AE5E6241C1EA5240099CCA0 /* AboutMainViewController.m in Sources */,
 				CC742DA3204E6E1A00D645CC /* ComplianceViewModel.m in Sources */,
@@ -5584,6 +5610,7 @@
 				84C619CD1FA8161F00626411 /* LoanPaymentDetailVCModule.m in Sources */,
 				84C619CE1FA8161F00626411 /* LoanPeriodListVCModule.m in Sources */,
 				84C619D01FA8161F00626411 /* UserBankCardListVCModule.m in Sources */,
+				CC6D1B2A20C6341E007446E7 /* MyOrdersCell.swift in Sources */,
 				84C619D11FA8161F00626411 /* BankListCell.m in Sources */,
 				84A380151FAC1D8D008FB7AF /* MGLiveViewController.m in Sources */,
 				84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */,
@@ -5885,6 +5912,7 @@
 				CC0DFA6A1EA5B1090024841A /* LOTGroupLayerView.m in Sources */,
 				CC0DFA6C1EA5B1090024841A /* LOTShapeFill.m in Sources */,
 				CC0DFA6D1EA5B1090024841A /* Custom_BaseInfo.m in Sources */,
+				CC6D1B2620C632B2007446E7 /* MyOrdersViewController.swift in Sources */,
 				CC989C351F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */,
 				CC0DFA6E1EA5B1090024841A /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				CC0DFA6F1EA5B1090024841A /* HomeViewModel.m in Sources */,

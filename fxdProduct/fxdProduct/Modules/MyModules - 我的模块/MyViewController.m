@@ -43,8 +43,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    titleAry=@[@"我的消息",@"收藏",@"我的银行卡",@"提额中心",@"更多"];
-    imgAry=@[@"message",@"6_my_icon_2",@"6_my_icon_05",@"quota_icon",@"icon_my_setup"];
+    titleAry=@[@"我的账单",@"我的订单",@"我的消息",@"收藏",@"我的银行卡",@"更多"];
+    imgAry=@[@"bill",@"order",@"message",@"6_my_icon_2",@"6_my_icon_05",@"icon_my_setup"];
     if (@available(iOS 11.0, *)) {
         self.MyViewTable.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
     }else{
@@ -253,9 +253,9 @@
         return 2;
     }
     if (section == 1) {
-        return 1;
+        return 2;
     }
-    return 1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -299,12 +299,12 @@
     bCell.lblTitle.text=titleAry[index];
     bCell.imgView.image=[UIImage imageNamed:imgAry[index]];
     bCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if((indexPath.section == 0 && indexPath.row == 1)||(indexPath.section == 1 && indexPath.row == 2) || (indexPath.section == 2 && indexPath.row == 1)) {
+    if((indexPath.section == 0 && indexPath.row == 1)||(indexPath.section == 1 && indexPath.row == 1) || (indexPath.section == 2 && indexPath.row == 1)) {
         bCell.lineView.hidden=YES;
     } else {
         bCell.lineView.hidden=NO;
     }
-    if (indexPath.row == 0 && indexPath.section == 0) {
+    if (indexPath.row == 0 && indexPath.section == 1) {
         if ([model.isDisplay isEqualToString:@"1"]) {
             bCell.messageLabel.text = model.countNum;
             bCell.messageView.hidden = false;
@@ -353,7 +353,7 @@
                     break;
                 case 1:
                 {
-                    CollectionViewController * controller = [[CollectionViewController alloc]init];
+                    MyOrdersViewController * controller = [[MyOrdersViewController alloc]init];
                     [self.navigationController pushViewController:controller animated:true];
                 }
                     break;
@@ -365,16 +365,17 @@
             switch (indexPath.row) {
                 case 0:
                     {
-//                        UserDataAuthenticationListVCModules * vc = [[UserDataAuthenticationListVCModules  alloc]init];
-//                        [self.navigationController pushViewController:vc animated:YES];
-                        MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
-                        [self.navigationController pushViewController:myCrad animated:YES];
+                        MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+                        [self.navigationController pushViewController:myMessageVC animated:true];
+                        
                     }
                     break;
                 case 1:
                     {
-                        FXD_IncreaseAmountLimitViewController *increaseAmountLimit=[[FXD_IncreaseAmountLimitViewController alloc]init];
-                        [self.navigationController pushViewController:increaseAmountLimit animated:YES];
+                        CollectionViewController * controller = [[CollectionViewController alloc]init];
+                        [self.navigationController pushViewController:controller animated:true];
+//                        FXD_IncreaseAmountLimitViewController *increaseAmountLimit=[[FXD_IncreaseAmountLimitViewController alloc]init];
+//                        [self.navigationController pushViewController:increaseAmountLimit animated:YES];
                     }
                     break;
                 default:
@@ -385,6 +386,13 @@
         case 2:
             switch (indexPath.row) {
                 case 0:
+                    {
+                        MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
+                        [self.navigationController pushViewController:myCrad animated:YES];
+                        
+                    }
+                    break;
+                case 1:
                     {
                         MoreViewController *ticket=[[MoreViewController alloc]init];
                         [self.navigationController pushViewController:ticket animated:YES];

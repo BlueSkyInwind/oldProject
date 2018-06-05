@@ -8,10 +8,15 @@
 
 import UIKit
 
+@objc protocol QuotaCellDelegate: NSObjectProtocol {
+    
+    func quotaBtnBtnClick()
+}
 class QuotaCell: UITableViewCell {
 
     @objc var titleLabel : UILabel?
     @objc var quotaBtn : UIButton?
+    @objc var delegate : QuotaCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,16 +47,30 @@ extension QuotaCell{
         titleLabel?.textColor = UI_MAIN_COLOR
         self.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self).offset(20)
+            make.top.equalTo(self).offset(30)
             make.centerX.equalTo(self.snp.centerX)
         })
         
         quotaBtn = UIButton()
-        quotaBtn?.setTitleColor(UI_MAIN_COLOR, for: .normal)
-        quotaBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 20)
+        quotaBtn?.setTitleColor(UIColor.white, for: .normal)
+        quotaBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
+        quotaBtn?.setBackgroundImage(UIImage.init(named: "quota_icon"), for: .normal)
+        quotaBtn?.addTarget(self, action: #selector(quotaBtnClick), for: .touchUpInside)
         self.addSubview(quotaBtn!)
         quotaBtn?.snp.makeConstraints({ (make) in
-            make.top.equalTo((titleLabel?.snp.bottom)!).offset(30)
+            make.top.equalTo((titleLabel?.snp.bottom)!).offset(22)
+            make.centerX.equalTo(self.snp.centerX)
+            make.width.equalTo(150)
+            make.height.equalTo(45)
         })
+    }
+}
+
+extension QuotaCell{
+    @objc fileprivate func quotaBtnClick(){
+    
+        if delegate != nil {
+            self.quotaBtnClick()
+        }
     }
 }
