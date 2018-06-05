@@ -8,7 +8,6 @@
 
 #import "MyCardsViewController.h"
 #import "MyCardCell.h"
-#import "EditCardsController.h"
 #import "SupportBankList.h"
 @interface MyCardsViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -76,9 +75,6 @@
     controller.type = @"1";
     [self.navigationController pushViewController:controller animated:true];
     
-//    EditCardsController *editCard=[[EditCardsController alloc]initWithNibName:@"EditCardsController" bundle:nil];
-//    editCard.typeFlag = @"0";
-//    [self.navigationController pushViewController:editCard animated:YES];
 }
 
 

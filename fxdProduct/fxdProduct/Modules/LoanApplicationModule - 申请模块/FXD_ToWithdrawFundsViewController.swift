@@ -401,15 +401,7 @@ class FXD_ToWithdrawFundsViewController: UIViewController,UITableViewDelegate,UI
         controller.requestType = "2"
         self.navigationController?.pushViewController(controller, animated: true)
         
-//        let editCard = EditCardsController.init(nibName: "EditCardsController", bundle: nil)
-//        editCard.typeFlag = "0";
-//        editCard.addCarSuccess = {
-//            self.isdispalyCard = true
-//            self.fatchCardInfo({ (isSuccess, isBankCard) in
-//            })
-//        }
-//        let addCarNC = BaseNavigationViewController.init(rootViewController: editCard)
-//        self.present(addCarNC, animated: true, completion: nil)
+
     }
     
     func protocolListClick(_ sender: UIButton) {

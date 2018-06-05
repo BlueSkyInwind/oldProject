@@ -12,7 +12,6 @@ typealias IdentifyResultStatus = (_ status : String) ->Void
 class UserFaceIdentiVCModules: BaseViewController{
     
    @objc var verifyStatus : String? 
-
    @objc var iconImage : UIImageView?
    @objc var titleLabel : UILabel?
    @objc var explainLabel : UILabel?
