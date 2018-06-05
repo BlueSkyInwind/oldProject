@@ -48,9 +48,6 @@
 		3E2B09C36E24E9E9316FAC1B /* Pods_fxd_fxdProduct.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 556C177616476C4A424DFF82 /* Pods_fxd_fxdProduct.framework */; };
 		63001A231BA8113000E2850A /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 63001A1F1BA8113000E2850A /* GTMBase64.m */; };
 		6300CC0B1E4AE5FD0012B05A /* CareerParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6300CC0A1E4AE5FD0012B05A /* CareerParse.m */; };
-		6303C11A1C1816F000CD14A7 /* BundleForBankCard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6303C1131C1816F000CD14A7 /* BundleForBankCard.bundle */; };
-		6303C11C1C1816F000CD14A7 /* WTCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6303C1161C1816F000CD14A7 /* WTCameraViewController.m */; };
-		6303C11D1C1816F000CD14A7 /* WTOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6303C1181C1816F000CD14A7 /* WTOverView.m */; };
 		630D46171BCCD2FB00874064 /* UpdateDevIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D46151BCCD2FB00874064 /* UpdateDevIDViewController.m */; };
 		630D46181BCCD2FB00874064 /* UpdateDevIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 630D46161BCCD2FB00874064 /* UpdateDevIDViewController.xib */; };
 		63117FB71DFFC42600635BB3 /* FXD_AppShareConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 63117FB61DFFC42600635BB3 /* FXD_AppShareConfig.m */; };
@@ -107,7 +104,6 @@
 		635B2FBA1D6AEE22009CEFE0 /* GlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B2FB91D6AEE22009CEFE0 /* GlobalConfig.m */; };
 		636B1B1E1C1FDDD100450358 /* FXD_AlertViewCust.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B1B1C1FDDD100450358 /* FXD_AlertViewCust.m */; };
 		636B1B1F1C1FDDD100450358 /* MBPAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B1D1C1FDDD100450358 /* MBPAlertView.m */; };
-		636B1B221C1FF46900450358 /* libBankCardRecogPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 636B1B211C1FF46900450358 /* libBankCardRecogPro.a */; };
 		636B1B261C2000E900450358 /* UIColor+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B251C2000E900450358 /* UIColor+Extend.m */; };
 		636B1B581C23BB4100450358 /* GetMoneyHistoryBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B551C23BB4100450358 /* GetMoneyHistoryBaseClass.m */; };
 		636B1B591C23BB4100450358 /* GetMoneyHistoryResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B571C23BB4100450358 /* GetMoneyHistoryResult.m */; };
@@ -248,7 +244,6 @@
 		63D43EFC1D41F8380076AC7F /* DataWriteAndRead.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D43EFB1D41F8380076AC7F /* DataWriteAndRead.m */; };
 		63DB3FBD1E1DE41700FBE1C4 /* RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DB3FB91E1DE41700FBE1C4 /* RTRootNavigationController.m */; };
 		63DB3FBE1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DB3FBB1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m */; };
-		63DCD7D91C87FDA200FAC7CE /* wtproject.lsc in Resources */ = {isa = PBXBuildFile; fileRef = 63DCD7D81C87FDA200FAC7CE /* wtproject.lsc */; };
 		63DE56FF1DE7CD2900747AE2 /* FXDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DE56FE1DE7CD2900747AE2 /* FXDWebViewController.m */; };
 		63E1ECCF1E1B8FAA0079A2F8 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECC21E1B8FAA0079A2F8 /* TAAbstractDotView.m */; };
 		63E1ECD01E1B8FAA0079A2F8 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECC41E1B8FAA0079A2F8 /* TAAnimatedDotView.m */; };
@@ -359,14 +354,6 @@
 		842CA0EC1F45492000A2150B /* jpush-ios-3.0.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842CA0E71F45492000A2150B /* jpush-ios-3.0.6.a */; };
 		842D9CE7206B77940020C3C2 /* IDCardUploadParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D9CE6206B77940020C3C2 /* IDCardUploadParam.m */; };
 		842D9CEA206B832F0020C3C2 /* IDCardUploadParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 842D9CE6206B77940020C3C2 /* IDCardUploadParam.m */; };
-		843149861F75036700FA3678 /* MGIDCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149821F75035000FA3678 /* MGIDCardResource.bundle */; };
-		843149871F75036700FA3678 /* MGLivenessDetectionResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */; };
-		843149881F75037E00FA3678 /* MGIDCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149831F75035100FA3678 /* MGIDCard.framework */; };
-		843149891F75037E00FA3678 /* MGLivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149841F75035100FA3678 /* MGLivenessDetection.framework */; };
-		8431498A1F75038D00FA3678 /* MGIDCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149821F75035000FA3678 /* MGIDCardResource.bundle */; };
-		8431498B1F75038D00FA3678 /* MGLivenessDetectionResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */; };
-		8431498C1F75039F00FA3678 /* MGIDCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149831F75035100FA3678 /* MGIDCard.framework */; };
-		8431498D1F75039F00FA3678 /* MGLivenessDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843149841F75035100FA3678 /* MGLivenessDetection.framework */; };
 		84332C89206CCCE8009A9121 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84332C88206CCCE8009A9121 /* CameraManager.swift */; };
 		84332C8A206CCD87009A9121 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84332C88206CCCE8009A9121 /* CameraManager.swift */; };
 		843614A41F0CF9130036201A /* BaseResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843614A31F0CF9130036201A /* BaseResultModel.m */; };
@@ -389,8 +376,6 @@
 		8449AC242062457A00526935 /* YXAVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC1D2062457800526935 /* YXAVPlayer.swift */; };
 		8449AC252062457A00526935 /* YXBaseRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC1E2062457900526935 /* YXBaseRecordManager.swift */; };
 		8449AC262062457A00526935 /* YXBaseRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC1E2062457900526935 /* YXBaseRecordManager.swift */; };
-		8449AC272062457A00526935 /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC1F2062457900526935 /* YXMoviesRecordManager.swift */; };
-		8449AC282062457A00526935 /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC1F2062457900526935 /* YXMoviesRecordManager.swift */; };
 		8449AC292062457A00526935 /* YXRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC202062457900526935 /* YXRecordView.swift */; };
 		8449AC2A2062457A00526935 /* YXRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC202062457900526935 /* YXRecordView.swift */; };
 		8449AC2B2062457A00526935 /* YXRoundProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449AC212062457A00526935 /* YXRoundProgressView.swift */; };
@@ -466,10 +451,6 @@
 		84A37FF91FAC12A8008FB7AF /* QRCodePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A37FF01FAC12A8008FB7AF /* QRCodePopView.m */; };
 		84A37FFA1FAC12A8008FB7AF /* QRCodePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A37FF11FAC12A8008FB7AF /* QRCodePopView.xib */; };
 		84A37FFB1FAC12A8008FB7AF /* QRCodePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A37FF11FAC12A8008FB7AF /* QRCodePopView.xib */; };
-		84A380141FAC1D8D008FB7AF /* MGLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A380031FAC1D8D008FB7AF /* MGLiveViewController.m */; };
-		84A380151FAC1D8D008FB7AF /* MGLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A380031FAC1D8D008FB7AF /* MGLiveViewController.m */; };
-		84A380161FAC1D8D008FB7AF /* MyBottomView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84A380051FAC1D8D008FB7AF /* MyBottomView.mm */; };
-		84A380171FAC1D8D008FB7AF /* MyBottomView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84A380051FAC1D8D008FB7AF /* MyBottomView.mm */; };
 		84A380181FAC1D8D008FB7AF /* UserFaceIdentiVCModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A380061FAC1D8D008FB7AF /* UserFaceIdentiVCModules.swift */; };
 		84A380191FAC1D8D008FB7AF /* UserFaceIdentiVCModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A380061FAC1D8D008FB7AF /* UserFaceIdentiVCModules.swift */; };
 		84A3801A1FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84A380081FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm */; };
@@ -572,12 +553,6 @@
 		84D2B80B20A1B4A800142206 /* repay_circle_selt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D2B80920A1B4A800142206 /* repay_circle_selt@2x.png */; };
 		84D2B80D20A1B4AF00142206 /* repay_circle_selt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D2B80C20A1B4AE00142206 /* repay_circle_selt@3x.png */; };
 		84D2B80E20A1B4AF00142206 /* repay_circle_selt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D2B80C20A1B4AE00142206 /* repay_circle_selt@3x.png */; };
-		84D715B41F7894B200F433E5 /* MGBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715A91F78936D00F433E5 /* MGBaseKit.framework */; };
-		84D715B61F7894C800F433E5 /* MGBaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715A91F78936D00F433E5 /* MGBaseKit.framework */; };
-		84D715EF1F78CF5A00F433E5 /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715ED1F78CF3700F433E5 /* MGBankCard.framework */; };
-		84D715F01F78CF6700F433E5 /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */; };
-		84D715F11F78CF7C00F433E5 /* MGBankCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D715ED1F78CF3700F433E5 /* MGBankCard.framework */; };
-		84D715F21F78CF8800F433E5 /* MGBankCardResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */; };
 		84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD36381ED57DEE0057F19A /* SMSModel.m */; };
 		84DFBECF1F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */; };
@@ -643,7 +618,6 @@
 		CC0346291F3C4FBF001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0346241F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m */; };
 		CC0DF95A1EA5B1090024841A /* NSData+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 63832C871CB7513500C6F194 /* NSData+AES.m */; };
 		CC0DF95B1EA5B1090024841A /* LivenessBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 637964181CAD1BE0002A5910 /* LivenessBaseClass.m */; };
-		CC0DF95E1EA5B1090024841A /* WTOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6303C1181C1816F000CD14A7 /* WTOverView.m */; };
 		CC0DF9601EA5B1090024841A /* YYTextLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24C51D98F7E9006F58F3 /* YYTextLayout.m */; };
 		CC0DF9611EA5B1090024841A /* LoginMsgExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AAF1CA2952400D04ED8 /* LoginMsgExt.m */; };
 		CC0DF9651EA5B1090024841A /* NSString+MD5Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313DC141BB3E52B00EB45DE /* NSString+MD5Encrypt.m */; };
@@ -860,7 +834,6 @@
 		CC0DFACA1EA5B1090024841A /* GetMoneyHistoryResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B571C23BB4100450358 /* GetMoneyHistoryResult.m */; };
 		CC0DFACB1EA5B1090024841A /* LOTAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DF1E517D9F00AB8AB6 /* LOTAnimationView.m */; };
 		CC0DFACD1EA5B1090024841A /* YYMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D43EF51D41F76D0076AC7F /* YYMemoryCache.m */; };
-		CC0DFAD01EA5B1090024841A /* WTCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6303C1161C1816F000CD14A7 /* WTCameraViewController.m */; };
 		CC0DFAD11EA5B1090024841A /* RepayRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B631C2790F400450358 /* RepayRecord.m */; };
 		CC0DFAD21EA5B1090024841A /* YYTextContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24BB1D98F7E9006F58F3 /* YYTextContainerView.m */; };
 		CC0DFAD81EA5B1090024841A /* FXD_AppShareConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 63117FB61DFFC42600635BB3 /* FXD_AppShareConfig.m */; };
@@ -903,7 +876,6 @@
 		CC0DFB0A1EA5B1090024841A /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6379638D1CABA266002A5910 /* BaiduMapAPI_Base.framework */; };
 		CC0DFB0B1EA5B1090024841A /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6326CA491BF1B29800FD23A8 /* CoreVideo.framework */; };
 		CC0DFB0C1EA5B1090024841A /* libFMDeviceManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 638A16801E5018FE00AB8AB6 /* libFMDeviceManager.a */; };
-		CC0DFB0D1EA5B1090024841A /* libBankCardRecogPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 636B1B211C1FF46900450358 /* libBankCardRecogPro.a */; };
 		CC0DFB0E1EA5B1090024841A /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 631B98851BE8550D00999A1E /* libiconv.2.4.0.tbd */; };
 		CC0DFB0F1EA5B1090024841A /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B311561BD75D30002C4B98 /* libxml2.tbd */; };
 		CC0DFB101EA5B1090024841A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6326C9D31BF08E0B00FD23A8 /* AddressBook.framework */; };
@@ -924,7 +896,6 @@
 		CC0DFB411EA5B1090024841A /* ColledgeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F099B981C1A97EB00D97BAE /* ColledgeView.xib */; };
 		CC0DFB461EA5B1090024841A /* MyCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6AAF381C30D8950060F137 /* MyCardCell.xib */; };
 		CC0DFB4A1EA5B1090024841A /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 636FF3481BA27C9800BB5528 /* Address.plist */; };
-		CC0DFB4E1EA5B1090024841A /* BundleForBankCard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6303C1131C1816F000CD14A7 /* BundleForBankCard.bundle */; };
 		CC0DFB521EA5B1090024841A /* HMScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 63F254781E49A45900852CF1 /* HMScanner.bundle */; };
 		CC0DFB571EA5B1090024841A /* DataDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AD71E5D2A4200B2C1FF /* DataDisplayCell.xib */; };
 		CC0DFB591EA5B1090024841A /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633DF7881BDE22BF00A3998D /* MoreViewController.xib */; };
@@ -932,7 +903,6 @@
 		CC0DFB681EA5B1090024841A /* RepayRecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A762F6E1C1FBE4700964719 /* RepayRecordController.xib */; };
 		CC0DFB6B1EA5B1090024841A /* IdentityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63553AEC1E5D787800B2C1FF /* IdentityCell.xib */; };
 		CC0DFB6D1EA5B1090024841A /* vcTransition1.json in Resources */ = {isa = PBXBuildFile; fileRef = 638A170C1E517E8C00AB8AB6 /* vcTransition1.json */; };
-		CC0DFB701EA5B1090024841A /* wtproject.lsc in Resources */ = {isa = PBXBuildFile; fileRef = 63DCD7D81C87FDA200FAC7CE /* wtproject.lsc */; };
 		CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636B1B8E1C2A416500450358 /* NextViewCell.xib */; };
 		CC0DFB781EA5B1090024841A /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 63B65DF01D519D1600207231 /* main.js */; };
 		CC0DFB7B1EA5B1090024841A /* UpdateDevIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 630D46161BCCD2FB00874064 /* UpdateDevIDViewController.xib */; };
@@ -1116,6 +1086,10 @@
 		CCC1E4072057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */; };
 		CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
 		CCC1E40F205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
+		CCC5DE3520C65C38002A7553 /* MyBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC5DE3420C65C38002A7553 /* MyBillViewController.swift */; };
+		CCC5DE3620C65C38002A7553 /* MyBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC5DE3420C65C38002A7553 /* MyBillViewController.swift */; };
+		CCC5DE3820C65CF3002A7553 /* MyBillAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC5DE3720C65CF3002A7553 /* MyBillAmountCell.swift */; };
+		CCC5DE3920C65CF3002A7553 /* MyBillAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC5DE3720C65CF3002A7553 /* MyBillAmountCell.swift */; };
 		CCC9FB65207A140C00B952BD /* SuperLoanHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9FB64207A140C00B952BD /* SuperLoanHeaderView.swift */; };
 		CCC9FB66207A140C00B952BD /* SuperLoanHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9FB64207A140C00B952BD /* SuperLoanHeaderView.swift */; };
 		CCCC0A8E1F677B9B007E1EB0 /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */; };
@@ -1146,6 +1120,8 @@
 		CCEFC6EF207F65430006D731 /* CollectionListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6ED207F65430006D731 /* CollectionListModel.m */; };
 		CCEFC6F2207F66100006D731 /* CollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6F1207F66100006D731 /* CollectionViewModel.m */; };
 		CCEFC6F3207F66100006D731 /* CollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6F1207F66100006D731 /* CollectionViewModel.m */; };
+		CCF97E5320C667BD009E7ECC /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5220C667BC009E7ECC /* YXMoviesRecordManager.swift */; };
+		CCF97E5420C667BD009E7ECC /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5220C667BC009E7ECC /* YXMoviesRecordManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1253,13 +1229,6 @@
 		63001A201BA8113000E2850A /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		6300CC091E4AE5FD0012B05A /* CareerParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CareerParse.h; sourceTree = "<group>"; };
 		6300CC0A1E4AE5FD0012B05A /* CareerParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CareerParse.m; sourceTree = "<group>"; };
-		6303C1121C1816F000CD14A7 /* BankCardRecogPro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardRecogPro.h; sourceTree = "<group>"; };
-		6303C1131C1816F000CD14A7 /* BundleForBankCard.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BundleForBankCard.bundle; sourceTree = "<group>"; };
-		6303C1151C1816F000CD14A7 /* WTCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTCameraViewController.h; sourceTree = "<group>"; };
-		6303C1161C1816F000CD14A7 /* WTCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTCameraViewController.m; sourceTree = "<group>"; };
-		6303C1171C1816F000CD14A7 /* WTOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTOverView.h; sourceTree = "<group>"; };
-		6303C1181C1816F000CD14A7 /* WTOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTOverView.m; sourceTree = "<group>"; };
-		6303C1191C1816F000CD14A7 /* WTSlideLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTSlideLine.h; sourceTree = "<group>"; };
 		630D46141BCCD2FB00874064 /* UpdateDevIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateDevIDViewController.h; sourceTree = "<group>"; };
 		630D46151BCCD2FB00874064 /* UpdateDevIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateDevIDViewController.m; sourceTree = "<group>"; };
 		630D46161BCCD2FB00874064 /* UpdateDevIDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateDevIDViewController.xib; sourceTree = "<group>"; };
@@ -1360,7 +1329,6 @@
 		636B1B1B1C1FDDD100450358 /* FXD_AlertViewCust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXD_AlertViewCust.m; sourceTree = "<group>"; };
 		636B1B1C1C1FDDD100450358 /* MBPAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPAlertView.h; sourceTree = "<group>"; };
 		636B1B1D1C1FDDD100450358 /* MBPAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPAlertView.m; sourceTree = "<group>"; };
-		636B1B211C1FF46900450358 /* libBankCardRecogPro.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBankCardRecogPro.a; sourceTree = "<group>"; };
 		636B1B251C2000E900450358 /* UIColor+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extend.m"; sourceTree = "<group>"; };
 		636B1B541C23BB4100450358 /* GetMoneyHistoryBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyHistoryBaseClass.h; sourceTree = "<group>"; };
 		636B1B551C23BB4100450358 /* GetMoneyHistoryBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyHistoryBaseClass.m; sourceTree = "<group>"; };
@@ -1630,7 +1598,6 @@
 		63DB3FB91E1DE41700FBE1C4 /* RTRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTRootNavigationController.m; sourceTree = "<group>"; };
 		63DB3FBA1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RTRootNavigationController.h"; sourceTree = "<group>"; };
 		63DB3FBB1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RTRootNavigationController.m"; sourceTree = "<group>"; };
-		63DCD7D81C87FDA200FAC7CE /* wtproject.lsc */ = {isa = PBXFileReference; lastKnownFileType = file; path = wtproject.lsc; sourceTree = "<group>"; };
 		63DE56FD1DE7CD2900747AE2 /* FXDWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXDWebViewController.h; sourceTree = "<group>"; };
 		63DE56FE1DE7CD2900747AE2 /* FXDWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXDWebViewController.m; sourceTree = "<group>"; };
 		63E076561B67125900E269F2 /* fxdProduct.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fxdProduct.pch; sourceTree = "<group>"; };
@@ -1786,10 +1753,6 @@
 		842CA0E81F45492000A2150B /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		842D9CE5206B77940020C3C2 /* IDCardUploadParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IDCardUploadParam.h; sourceTree = "<group>"; };
 		842D9CE6206B77940020C3C2 /* IDCardUploadParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IDCardUploadParam.m; sourceTree = "<group>"; };
-		843149821F75035000FA3678 /* MGIDCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGIDCardResource.bundle; sourceTree = "<group>"; };
-		843149831F75035100FA3678 /* MGIDCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGIDCard.framework; sourceTree = "<group>"; };
-		843149841F75035100FA3678 /* MGLivenessDetection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGLivenessDetection.framework; sourceTree = "<group>"; };
-		843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGLivenessDetectionResource.bundle; sourceTree = "<group>"; };
 		84332C88206CCCE8009A9121 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		843614A21F0CF9130036201A /* BaseResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseResultModel.h; sourceTree = "<group>"; };
 		843614A31F0CF9130036201A /* BaseResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseResultModel.m; sourceTree = "<group>"; };
@@ -1810,7 +1773,6 @@
 		84420A601ED678E200DFBFE0 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		8449AC1D2062457800526935 /* YXAVPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXAVPlayer.swift; sourceTree = "<group>"; };
 		8449AC1E2062457900526935 /* YXBaseRecordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXBaseRecordManager.swift; sourceTree = "<group>"; };
-		8449AC1F2062457900526935 /* YXMoviesRecordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXMoviesRecordManager.swift; sourceTree = "<group>"; };
 		8449AC202062457900526935 /* YXRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXRecordView.swift; sourceTree = "<group>"; };
 		8449AC212062457A00526935 /* YXRoundProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXRoundProgressView.swift; sourceTree = "<group>"; };
 		8449AC222062457A00526935 /* VideoVerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoVerifyViewController.swift; sourceTree = "<group>"; };
@@ -1861,10 +1823,6 @@
 		84A37FEF1FAC12A8008FB7AF /* QRCodePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodePopView.h; sourceTree = "<group>"; };
 		84A37FF01FAC12A8008FB7AF /* QRCodePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodePopView.m; sourceTree = "<group>"; };
 		84A37FF11FAC12A8008FB7AF /* QRCodePopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRCodePopView.xib; sourceTree = "<group>"; };
-		84A380021FAC1D8D008FB7AF /* MGLiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGLiveViewController.h; sourceTree = "<group>"; };
-		84A380031FAC1D8D008FB7AF /* MGLiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGLiveViewController.m; sourceTree = "<group>"; };
-		84A380041FAC1D8D008FB7AF /* MyBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBottomView.h; sourceTree = "<group>"; };
-		84A380051FAC1D8D008FB7AF /* MyBottomView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyBottomView.mm; sourceTree = "<group>"; };
 		84A380061FAC1D8D008FB7AF /* UserFaceIdentiVCModules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFaceIdentiVCModules.swift; sourceTree = "<group>"; };
 		84A380071FAC1D8D008FB7AF /* UserIdentityInformationVCModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIdentityInformationVCModules.h; sourceTree = "<group>"; };
 		84A380081FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UserIdentityInformationVCModules.mm; sourceTree = "<group>"; };
@@ -1942,9 +1900,6 @@
 		84D1846E1F98962A00A0B25F /* RedPacketTicketModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedPacketTicketModel.m; sourceTree = "<group>"; };
 		84D2B80920A1B4A800142206 /* repay_circle_selt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_selt@2x.png"; sourceTree = "<group>"; };
 		84D2B80C20A1B4AE00142206 /* repay_circle_selt@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_circle_selt@3x.png"; sourceTree = "<group>"; };
-		84D715A91F78936D00F433E5 /* MGBaseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBaseKit.framework; sourceTree = "<group>"; };
-		84D715ED1F78CF3700F433E5 /* MGBankCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGBankCard.framework; sourceTree = "<group>"; };
-		84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MGBankCardResource.bundle; sourceTree = "<group>"; };
 		84DD36371ED57DEE0057F19A /* SMSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSModel.h; sourceTree = "<group>"; };
 		84DD36381ED57DEE0057F19A /* SMSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSModel.m; sourceTree = "<group>"; };
 		84DFBECE1F4D6B5A0009DAB9 /* CommonSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSwift.swift; sourceTree = "<group>"; };
@@ -2125,6 +2080,8 @@
 		CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeBankCardParamModel.m; sourceTree = "<group>"; };
 		CCC1E40C205A595F007C9C07 /* ActiveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveModel.h; sourceTree = "<group>"; };
 		CCC1E40D205A595F007C9C07 /* ActiveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveModel.m; sourceTree = "<group>"; };
+		CCC5DE3420C65C38002A7553 /* MyBillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillViewController.swift; sourceTree = "<group>"; };
+		CCC5DE3720C65CF3002A7553 /* MyBillAmountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillAmountCell.swift; sourceTree = "<group>"; };
 		CCC9FB64207A140C00B952BD /* SuperLoanHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLoanHeaderView.swift; sourceTree = "<group>"; };
 		CCCC0A8C1F677B9B007E1EB0 /* UserDataResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataResult.h; sourceTree = "<group>"; };
 		CCCC0A8D1F677B9B007E1EB0 /* UserDataResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataResult.m; sourceTree = "<group>"; };
@@ -2153,6 +2110,7 @@
 		CCEFC6ED207F65430006D731 /* CollectionListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionListModel.m; sourceTree = "<group>"; };
 		CCEFC6F0207F66100006D731 /* CollectionViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewModel.h; sourceTree = "<group>"; };
 		CCEFC6F1207F66100006D731 /* CollectionViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewModel.m; sourceTree = "<group>"; };
+		CCF97E5220C667BC009E7ECC /* YXMoviesRecordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXMoviesRecordManager.swift; sourceTree = "<group>"; };
 		DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64833171B0C1433C0C2116C /* Pods-fxd-fxdProductDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProductDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev.release.xcconfig"; sourceTree = "<group>"; };
 		EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
@@ -2164,10 +2122,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84D715F11F78CF7C00F433E5 /* MGBankCard.framework in Frameworks */,
-				84D715B41F7894B200F433E5 /* MGBaseKit.framework in Frameworks */,
-				8431498C1F75039F00FA3678 /* MGIDCard.framework in Frameworks */,
-				8431498D1F75039F00FA3678 /* MGLivenessDetection.framework in Frameworks */,
 				63BDF8AB1E768215008C4E10 /* UserNotifications.framework in Frameworks */,
 				032FA7E51BE1BB4D00CF2D21 /* CoreTelephony.framework in Frameworks */,
 				63BDF8AA1E762B0E008C4E10 /* MobileCoreServices.framework in Frameworks */,
@@ -2201,7 +2155,6 @@
 				6326CA4A1BF1B29800FD23A8 /* CoreVideo.framework in Frameworks */,
 				638A16811E5018FE00AB8AB6 /* libFMDeviceManager.a in Frameworks */,
 				842CA0EB1F45492000A2150B /* jpush-ios-3.0.6.a in Frameworks */,
-				636B1B221C1FF46900450358 /* libBankCardRecogPro.a in Frameworks */,
 				631B98861BE8550D00999A1E /* libiconv.2.4.0.tbd in Frameworks */,
 				63B311571BD75D30002C4B98 /* libxml2.tbd in Frameworks */,
 				6326C9D51BF08E0B00FD23A8 /* AddressBook.framework in Frameworks */,
@@ -2224,10 +2177,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84D715EF1F78CF5A00F433E5 /* MGBankCard.framework in Frameworks */,
-				84D715B61F7894C800F433E5 /* MGBaseKit.framework in Frameworks */,
-				843149881F75037E00FA3678 /* MGIDCard.framework in Frameworks */,
-				843149891F75037E00FA3678 /* MGLivenessDetection.framework in Frameworks */,
 				84FA3F571F53AA5D00C8ABED /* Pods_fxd_fxdProductDev.framework in Frameworks */,
 				CC0DFAEA1EA5B1090024841A /* UserNotifications.framework in Frameworks */,
 				CC0DFAEB1EA5B1090024841A /* CoreTelephony.framework in Frameworks */,
@@ -2262,7 +2211,6 @@
 				CC0DFB0B1EA5B1090024841A /* CoreVideo.framework in Frameworks */,
 				CC0DFB0C1EA5B1090024841A /* libFMDeviceManager.a in Frameworks */,
 				842CA0EC1F45492000A2150B /* jpush-ios-3.0.6.a in Frameworks */,
-				CC0DFB0D1EA5B1090024841A /* libBankCardRecogPro.a in Frameworks */,
 				CC0DFB0E1EA5B1090024841A /* libiconv.2.4.0.tbd in Frameworks */,
 				CC0DFB0F1EA5B1090024841A /* libxml2.tbd in Frameworks */,
 				CC0DFB101EA5B1090024841A /* AddressBook.framework in Frameworks */,
@@ -2316,7 +2264,7 @@
 		0FEA58481BE08EE3007F8A6D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CC6D1B2720C633ED007446E7 /* MyOrdersView */,
+				CC6D1B2720C633ED007446E7 /* PhonerechargeCardService */,
 				84192A972079B1AC0042E8F8 /* MemberCenter */,
 				CC80DFEE206A50E0000F9BAC /* SuperLoanView */,
 				CC742D8D204D39C600D645CC /* ComplianceView */,
@@ -2473,36 +2421,6 @@
 				6326C9DF1BF0962E00FD23A8 /* pinyin.h */,
 			);
 			path = pinyin;
-			sourceTree = "<group>";
-		};
-		6326CA771BF1BAA000FD23A8 /* BankCardRecogPro */ = {
-			isa = PBXGroup;
-			children = (
-				63DCD7D81C87FDA200FAC7CE /* wtproject.lsc */,
-				636B1B211C1FF46900450358 /* libBankCardRecogPro.a */,
-				6303C1121C1816F000CD14A7 /* BankCardRecogPro.h */,
-				6303C1131C1816F000CD14A7 /* BundleForBankCard.bundle */,
-				6303C1151C1816F000CD14A7 /* WTCameraViewController.h */,
-				6303C1161C1816F000CD14A7 /* WTCameraViewController.m */,
-				6303C1171C1816F000CD14A7 /* WTOverView.h */,
-				6303C1181C1816F000CD14A7 /* WTOverView.m */,
-				6303C1191C1816F000CD14A7 /* WTSlideLine.h */,
-			);
-			path = BankCardRecogPro;
-			sourceTree = "<group>";
-		};
-		632C587B1E5A933F00490C14 /* MGKit */ = {
-			isa = PBXGroup;
-			children = (
-				84D715EE1F78CF4200F433E5 /* MGBankCardResource.bundle */,
-				84D715ED1F78CF3700F433E5 /* MGBankCard.framework */,
-				84D715A91F78936D00F433E5 /* MGBaseKit.framework */,
-				843149831F75035100FA3678 /* MGIDCard.framework */,
-				843149821F75035000FA3678 /* MGIDCardResource.bundle */,
-				843149841F75035100FA3678 /* MGLivenessDetection.framework */,
-				843149851F75035200FA3678 /* MGLivenessDetectionResource.bundle */,
-			);
-			path = MGKit;
 			sourceTree = "<group>";
 		};
 		634795D81D378CED00EC4027 /* Aspects */ = {
@@ -2819,7 +2737,6 @@
 				84332C8B206CDD11009A9121 /* YXBankScan */,
 				842D46F91FAC722A0046A97A /* EncryptionModules */,
 				842CA0E51F4548D000A2150B /* JPush */,
-				632C587B1E5A933F00490C14 /* MGKit */,
 				638A168A1E517D9F00AB8AB6 /* lottie-ios */,
 				638A167E1E5018FE00AB8AB6 /* FMDeviceManager */,
 				63EC5C841E4D5B070070AFEB /* DZNEmptyDataSet */,
@@ -2838,7 +2755,6 @@
 				6381989F1CC0825400E8951E /* SSKeychain */,
 				637963791CAB9E77002A5910 /* BaiduMap */,
 				63AD1D171BFC1AA400807877 /* MLBlackTransition */,
-				6326CA771BF1BAA000FD23A8 /* BankCardRecogPro */,
 				6326C9DD1BF0962E00FD23A8 /* pinyin */,
 				6326C9CC1BF08CEE00FD23A8 /* Model.h */,
 				6326C9CD1BF08CEE00FD23A8 /* Model.m */,
@@ -3764,7 +3680,6 @@
 		63ED333D1B6B523E008B6085 /* MyModules - 我的模块 */ = {
 			isa = PBXGroup;
 			children = (
-				CCC5DE3320C63708002A7553 /* PhoneRechargeCard - 手机充值卡模块 */,
 				84192A932079AD520042E8F8 /* MemberCenter */,
 				841BE5C31F177BDB00BABD04 /* UserLevel */,
 				63811AF71B8EB14F008F605B /* SubViewController */,
@@ -4088,12 +4003,12 @@
 		8449AC1C2062455E00526935 /* VideoVerify */ = {
 			isa = PBXGroup;
 			children = (
+				CCF97E5220C667BC009E7ECC /* YXMoviesRecordManager.swift */,
 				8449AC222062457A00526935 /* VideoVerifyViewController.swift */,
 				8449AC212062457A00526935 /* YXRoundProgressView.swift */,
 				8449AC202062457900526935 /* YXRecordView.swift */,
 				8449AC1D2062457800526935 /* YXAVPlayer.swift */,
 				8449AC1E2062457900526935 /* YXBaseRecordManager.swift */,
-				8449AC1F2062457900526935 /* YXMoviesRecordManager.swift */,
 			);
 			path = VideoVerify;
 			sourceTree = "<group>";
@@ -4110,7 +4025,9 @@
 		8466936620C6354B00F47A24 /* PhonerechargeCardService - 手机充值卡业务 */ = {
 			isa = PBXGroup;
 			children = (
+				CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */,
 				8466936720C637E300F47A24 /* ShoppingMallModules.swift */,
+				CCC5DE3420C65C38002A7553 /* MyBillViewController.swift */,
 			);
 			path = "PhonerechargeCardService - 手机充值卡业务";
 			sourceTree = "<group>";
@@ -4159,10 +4076,6 @@
 			isa = PBXGroup;
 			children = (
 				8449AC1C2062455E00526935 /* VideoVerify */,
-				84A380021FAC1D8D008FB7AF /* MGLiveViewController.h */,
-				84A380031FAC1D8D008FB7AF /* MGLiveViewController.m */,
-				84A380041FAC1D8D008FB7AF /* MyBottomView.h */,
-				84A380051FAC1D8D008FB7AF /* MyBottomView.mm */,
 				84A380061FAC1D8D008FB7AF /* UserFaceIdentiVCModules.swift */,
 				84A380071FAC1D8D008FB7AF /* UserIdentityInformationVCModules.h */,
 				84A380081FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm */,
@@ -4455,12 +4368,13 @@
 			name = ApplicationStatus;
 			sourceTree = "<group>";
 		};
-		CC6D1B2720C633ED007446E7 /* MyOrdersView */ = {
+		CC6D1B2720C633ED007446E7 /* PhonerechargeCardService */ = {
 			isa = PBXGroup;
 			children = (
 				CC6D1B2820C6341E007446E7 /* MyOrdersCell.swift */,
+				CCC5DE3720C65CF3002A7553 /* MyBillAmountCell.swift */,
 			);
-			path = MyOrdersView;
+			path = PhonerechargeCardService;
 			sourceTree = "<group>";
 		};
 		CC6F068D1F7B8CA800FA889E /* ShanLinWebVCModules - 善林 */ = {
@@ -4617,14 +4531,6 @@
 				CCA7A3341F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift */,
 			);
 			name = AuthenticationCenterView;
-			sourceTree = "<group>";
-		};
-		CCC5DE3320C63708002A7553 /* PhoneRechargeCard - 手机充值卡模块 */ = {
-			isa = PBXGroup;
-			children = (
-				CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */,
-			);
-			path = "PhoneRechargeCard - 手机充值卡模块";
 			sourceTree = "<group>";
 		};
 		CCD32B501F58195D0092A9CB /* CurrentInformation */ = {
@@ -4825,9 +4731,6 @@
 				84C61A071FA81E7000626411 /* RepayListCell.xib in Resources */,
 				841A48E21FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib in Resources */,
 				84192A9C2079B3290042E8F8 /* MemberCenterHeaderView.xib in Resources */,
-				84D715F21F78CF8800F433E5 /* MGBankCardResource.bundle in Resources */,
-				8431498A1F75038D00FA3678 /* MGIDCardResource.bundle in Resources */,
-				8431498B1F75038D00FA3678 /* MGLivenessDetectionResource.bundle in Resources */,
 				0FFA91621C589D76008D91D2 /* CheckViewIng.xib in Resources */,
 				6313DC171BB3F07B00EB45DE /* Images.xcassets in Resources */,
 				84114B3D20721923005A1DC9 /* YXLibraryResource.bundle in Resources */,
@@ -4851,7 +4754,6 @@
 				CC0346271F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */,
 				0F6AAF3A1C30D8950060F137 /* MyCardCell.xib in Resources */,
 				636FF3491BA27C9800BB5528 /* Address.plist in Resources */,
-				6303C11A1C1816F000CD14A7 /* BundleForBankCard.bundle in Resources */,
 				63F254841E49A45900852CF1 /* HMScanner.bundle in Resources */,
 				63553AD91E5D2A4200B2C1FF /* DataDisplayCell.xib in Resources */,
 				633DF78A1BDE22BF00A3998D /* MoreViewController.xib in Resources */,
@@ -4866,7 +4768,6 @@
 				84A37FFA1FAC12A8008FB7AF /* QRCodePopView.xib in Resources */,
 				63553AEE1E5D787800B2C1FF /* IdentityCell.xib in Resources */,
 				638A170D1E517E8C00AB8AB6 /* vcTransition1.json in Resources */,
-				63DCD7D91C87FDA200FAC7CE /* wtproject.lsc in Resources */,
 				636B1B8F1C2A416500450358 /* NextViewCell.xib in Resources */,
 				84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */,
 				63B65DF11D519D1600207231 /* main.js in Resources */,
@@ -4908,9 +4809,6 @@
 				84C619F31FA81D3E00626411 /* RepayListCell.xib in Resources */,
 				841A48E31FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib in Resources */,
 				84192A9D2079B3290042E8F8 /* MemberCenterHeaderView.xib in Resources */,
-				84D715F01F78CF6700F433E5 /* MGBankCardResource.bundle in Resources */,
-				843149861F75036700FA3678 /* MGIDCardResource.bundle in Resources */,
-				843149871F75036700FA3678 /* MGLivenessDetectionResource.bundle in Resources */,
 				845017311ED7CD88008055E4 /* LoginView.xib in Resources */,
 				84ED5B5D1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */,
 				84114B3E20721923005A1DC9 /* YXLibraryResource.bundle in Resources */,
@@ -4935,7 +4833,6 @@
 				CC0DFB461EA5B1090024841A /* MyCardCell.xib in Resources */,
 				CC0346281F3C4CDF001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */,
 				CC0DFB4A1EA5B1090024841A /* Address.plist in Resources */,
-				CC0DFB4E1EA5B1090024841A /* BundleForBankCard.bundle in Resources */,
 				CC0DFB521EA5B1090024841A /* HMScanner.bundle in Resources */,
 				842C0B5A1ED599DE00366D11 /* LoginViewController.xib in Resources */,
 				CC0DFB571EA5B1090024841A /* DataDisplayCell.xib in Resources */,
@@ -4950,7 +4847,6 @@
 				CC0DFB6B1EA5B1090024841A /* IdentityCell.xib in Resources */,
 				84A37FFB1FAC12A8008FB7AF /* QRCodePopView.xib in Resources */,
 				CC0DFB6D1EA5B1090024841A /* vcTransition1.json in Resources */,
-				CC0DFB701EA5B1090024841A /* wtproject.lsc in Resources */,
 				CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */,
 				CC0DFB781EA5B1090024841A /* main.js in Resources */,
 				CC0DFB7B1EA5B1090024841A /* UpdateDevIDViewController.xib in Resources */,
@@ -5165,7 +5061,6 @@
 				CC45E7221FD55F7800DE803D /* WithdrawCashDetailModel.m in Sources */,
 				6379641D1CAD1BE0002A5910 /* LivenessBaseClass.m in Sources */,
 				CC1AC8E42091B7A7009B5BD4 /* HotRecommendationViewController.swift in Sources */,
-				6303C11D1C1816F000CD14A7 /* WTOverView.m in Sources */,
 				63FC24F21D98F7E9006F58F3 /* YYTextLayout.m in Sources */,
 				63145AB31CA2952400D04ED8 /* LoginMsgExt.m in Sources */,
 				CC989C341F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */,
@@ -5193,7 +5088,6 @@
 				63ED33341B6B4570008B6085 /* BaseViewController.m in Sources */,
 				8449AC232062457A00526935 /* YXAVPlayer.swift in Sources */,
 				63A24C671BE063A90036E8EF /* UIImage+Cut.m in Sources */,
-				84A380141FAC1D8D008FB7AF /* MGLiveViewController.m in Sources */,
 				84DD36391ED57DEE0057F19A /* SMSModel.m in Sources */,
 				63145AF31CA8DBBD00D04ED8 /* RegionResult.m in Sources */,
 				63E1ECD01E1B8FAA0079A2F8 /* TAAnimatedDotView.m in Sources */,
@@ -5217,7 +5111,6 @@
 				63A24C5C1BE063A90036E8EF /* CALayer+Transition.m in Sources */,
 				636EE3061B662ABB00A1A3ED /* AppDelegate.mm in Sources */,
 				63145ABF1CA4E66100D04ED8 /* CustomerCareerResult.m in Sources */,
-				84A380161FAC1D8D008FB7AF /* MyBottomView.mm in Sources */,
 				63A24C6C1BE063A90036E8EF /* UIView+Extend.m in Sources */,
 				844E5F4B1ED94C9C00753671 /* RegViewModel.m in Sources */,
 				638198A41CC0825400E8951E /* SSKeychain.m in Sources */,
@@ -5327,6 +5220,7 @@
 				CC5FC5AE1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift in Sources */,
 				84CC89991F593C1E00537910 /* ApplicaitonModel.m in Sources */,
 				84E306CF1F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
+				CCF97E5320C667BD009E7ECC /* YXMoviesRecordManager.swift in Sources */,
 				634831081CBCD4680005C4CD /* GetCustomerBaseViewModel.m in Sources */,
 				84A3802A1FAC1D8D008FB7AF /* UserThirdPartyAuthVCModules.swift in Sources */,
 				63FC24F01D98F7E9006F58F3 /* YYTextInput.m in Sources */,
@@ -5434,6 +5328,7 @@
 				CCCC0A8E1F677B9B007E1EB0 /* UserDataResult.m in Sources */,
 				CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
 				63A24C621BE063A90036E8EF /* UIBarButtonItem+Extend.m in Sources */,
+				CCC5DE3820C65CF3002A7553 /* MyBillAmountCell.swift in Sources */,
 				849459D01FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift in Sources */,
 				636EE3031B662ABB00A1A3ED /* main.m in Sources */,
 				638A16EC1E517D9F00AB8AB6 /* LOTMaskLayer.m in Sources */,
@@ -5450,7 +5345,6 @@
 				636B1B9A1C2D153900450358 /* HomeViewModel.m in Sources */,
 				84C45C081FBC55860086E8DB /* DiscountTicketParam.m in Sources */,
 				638A16F41E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m in Sources */,
-				8449AC272062457A00526935 /* YXMoviesRecordManager.swift in Sources */,
 				638A16EF1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m in Sources */,
 				63E5C7611D4AFDBF009A633C /* CardInfo.m in Sources */,
 				84DFBECF1F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */,
@@ -5489,6 +5383,7 @@
 				CC742DA8204E704D00D645CC /* AccountModel.m in Sources */,
 				63A24C5E1BE063A90036E8EF /* NSDate+Extend.m in Sources */,
 				63D43EF61D41F76D0076AC7F /* YYCache.m in Sources */,
+				CCC5DE3520C65C38002A7553 /* MyBillViewController.swift in Sources */,
 				CC80DFEC206A4924000F9BAC /* FXD_SuperLoanViewController.m in Sources */,
 				84E2BDE01F53F3FB00E447EB /* UserDataModel.m in Sources */,
 				63F254861E49A45900852CF1 /* HMScannerBorder.m in Sources */,
@@ -5574,7 +5469,6 @@
 				84139DF21FF3A0A0000DA896 /* ProtocolParamModel.m in Sources */,
 				CCCE40BD1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */,
 				CC80DFF3206B291D000F9BAC /* SuperLoanHeaderCell.swift in Sources */,
-				6303C11C1C1816F000CD14A7 /* WTCameraViewController.m in Sources */,
 				84CACBAB1FEA388000523BDA /* FXDAlertView.swift in Sources */,
 				84D1846F1F98962A00A0B25F /* RedPacketTicketModel.m in Sources */,
 				636B1B641C2790F400450358 /* RepayRecord.m in Sources */,
@@ -5625,7 +5519,6 @@
 				84C619D01FA8161F00626411 /* UserBankCardListVCModule.m in Sources */,
 				CC6D1B2A20C6341E007446E7 /* MyOrdersCell.swift in Sources */,
 				84C619D11FA8161F00626411 /* BankListCell.m in Sources */,
-				84A380151FAC1D8D008FB7AF /* MGLiveViewController.m in Sources */,
 				84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */,
 				CC4F0639207DE90B0030A12A /* FindViewModel.m in Sources */,
 				CC1AC8E220907A43009B5BD4 /* BankCardAuthorizationViewModel.m in Sources */,
@@ -5658,7 +5551,6 @@
 				CC0DF95B1EA5B1090024841A /* LivenessBaseClass.m in Sources */,
 				847DBBD21FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */,
 				849459CB1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
-				CC0DF95E1EA5B1090024841A /* WTOverView.m in Sources */,
 				CCC9FB66207A140C00B952BD /* SuperLoanHeaderView.swift in Sources */,
 				847298381FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */,
 				CC742D99204E470100D645CC /* BankCardCell.swift in Sources */,
@@ -5795,6 +5687,7 @@
 				CC0DF9D41EA5B1090024841A /* NSString+AES.m in Sources */,
 				CC0DF9D61EA5B1090024841A /* ReconfrInfoModel.m in Sources */,
 				CC0DF9D71EA5B1090024841A /* UIApplication+Extend.m in Sources */,
+				CCF97E5420C667BD009E7ECC /* YXMoviesRecordManager.swift in Sources */,
 				CC0DF9DB1EA5B1090024841A /* LewPopupViewAnimationSpring.m in Sources */,
 				CC0DF9DC1EA5B1090024841A /* YYTextUtilities.m in Sources */,
 				CC0DF9DD1EA5B1090024841A /* LOTShapeTrimPath.m in Sources */,
@@ -5903,6 +5796,7 @@
 				84BC53DA1FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */,
 				CC0DFA551EA5B1090024841A /* CareerParse.m in Sources */,
 				CC0DFA561EA5B1090024841A /* YYTextArchiver.m in Sources */,
+				CCC5DE3920C65CF3002A7553 /* MyBillAmountCell.swift in Sources */,
 				CC0DFA571EA5B1090024841A /* UIBezierPath.m in Sources */,
 				CC0DFA5A1EA5B1090024841A /* SMSViewModel.m in Sources */,
 				CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */,
@@ -5922,7 +5816,6 @@
 				CC0DFA651EA5B1090024841A /* LOTMaskLayer.m in Sources */,
 				CC0DFA671EA5B1090024841A /* FXD_AlertViewCust.m in Sources */,
 				CC0DFA691EA5B1090024841A /* MoreViewController.m in Sources */,
-				8449AC282062457A00526935 /* YXMoviesRecordManager.swift in Sources */,
 				CC0DFA6A1EA5B1090024841A /* LOTGroupLayerView.m in Sources */,
 				CC0DFA6C1EA5B1090024841A /* LOTShapeFill.m in Sources */,
 				CC0DFA6D1EA5B1090024841A /* Custom_BaseInfo.m in Sources */,
@@ -5958,6 +5851,7 @@
 				CC0DFA851EA5B1090024841A /* YYTextRubyAnnotation.m in Sources */,
 				841E66EF1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */,
 				CC0DFA871EA5B1090024841A /* LoginMsgBaseClass.m in Sources */,
+				CCC5DE3620C65C38002A7553 /* MyBillViewController.swift in Sources */,
 				CCDEDF611EEA42C2009CEC32 /* RepayWeeklyRecordViewModel.m in Sources */,
 				CC0DFA891EA5B1090024841A /* GetMoneyProcessUserBean.m in Sources */,
 				84A380191FAC1D8D008FB7AF /* UserFaceIdentiVCModules.swift in Sources */,
@@ -5999,7 +5893,6 @@
 				CC0DFAAA1EA5B1090024841A /* LOTShapeRectangle.m in Sources */,
 				84A3801B1FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm in Sources */,
 				CC0DFAAD1EA5B1090024841A /* RegionBaseClass.m in Sources */,
-				84A380171FAC1D8D008FB7AF /* MyBottomView.mm in Sources */,
 				CC0DFAAF1EA5B1090024841A /* loanRecordCell.m in Sources */,
 				847298351FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */,
 				CC0DFAB01EA5B1090024841A /* NSArray+Extend.m in Sources */,
@@ -6039,7 +5932,6 @@
 				CC3BCC121FBABE7A0042A738 /* MyMessageViewController.swift in Sources */,
 				CC80DFF4206B291D000F9BAC /* SuperLoanHeaderCell.swift in Sources */,
 				CCCE40BE1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */,
-				CC0DFAD01EA5B1090024841A /* WTCameraViewController.m in Sources */,
 				CC0DFAD11EA5B1090024841A /* RepayRecord.m in Sources */,
 				CC0DFAD21EA5B1090024841A /* YYTextContainerView.m in Sources */,
 				84139DF31FF3A0A0000DA896 /* ProtocolParamModel.m in Sources */,

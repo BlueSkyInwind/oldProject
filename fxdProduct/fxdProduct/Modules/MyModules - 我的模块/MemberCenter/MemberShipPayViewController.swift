@@ -124,7 +124,7 @@ extension MemberShipPayViewController {
         if UI_IS_IPONE6P || UI_IS_IPHONEX{
             heaerViewHeight = 256
         }
-        titleHeaderView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: Int(_k_w), height: heaerViewHeight), amount: "3000", amountTitle: "实付金额(元)")
+        titleHeaderView = FXD_displayAmountCommonHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: Int(_k_w), height: heaerViewHeight), amount: "3000", amountTitle: "实付金额(元)",centerImage:"circle_center_Image")
         titleHeaderView?.titleLabel?.text = "支付详情"
         titleHeaderView?.hintWordBackImage?.isHidden = true
         titleHeaderView?.goBackBtn?.isHidden = false

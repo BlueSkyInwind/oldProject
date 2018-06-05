@@ -9,7 +9,6 @@
 #import "UserMobileAuthenticationVCModules.h"
 #import "MobileCell.h"
 #import <MGLivenessDetection/MGLivenessDetection.h>
-#import "MGLiveViewController.h"
 #import "BaseNavigationViewController.h"
 #import "FXDWebViewController.h"
 #import "AuthenticationViewModel.h"

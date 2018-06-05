@@ -50,7 +50,7 @@
         }
     }];
 }
-
+/*
 -(void)uploadLiveIdentiInfo:(FaceIDData *)imagesDic{
     
     NSDictionary *paramDic = @{@"api_key":FaceIDAppKey,
@@ -86,7 +86,7 @@
         }];
     }];
 }
-
+*/
 - (void)uploadLiveInfo:(NSString *)resultJSONStr isSuccess:(void(^)(id object))success
 {
     

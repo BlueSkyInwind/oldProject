@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MGLivenessDetection
 
 typealias IdentifyResultStatus = (_ status : String) ->Void
 class UserFaceIdentiVCModules: BaseViewController{
