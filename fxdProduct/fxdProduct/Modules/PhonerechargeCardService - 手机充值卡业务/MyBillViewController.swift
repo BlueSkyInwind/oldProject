@@ -43,12 +43,12 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return (dataArray?.count)!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return (dataArray?.count)!
+        return 1
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -57,7 +57,7 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         let contentLabel = UILabel()
         contentLabel.textColor = TITLE_COLOR
         contentLabel.font = UIFont.systemFont(ofSize: 14)
-        contentLabel.text = "共3笔"
+        contentLabel.text = "关联订单"
         headerView.addSubview(contentLabel)
         contentLabel.snp.makeConstraints { (make) in
             make.left.equalTo(headerView.snp.left).offset(22)
@@ -77,6 +77,19 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            var cell:MyBillAmountCell! = tableView.dequeueReusableCell(withIdentifier:"MyBillAmountCell") as? MyBillAmountCell
+            if cell == nil {
+                cell = MyBillAmountCell.init(style: .default, reuseIdentifier: "MyBillAmountCell")
+            }
+            cell.selectionStyle = .none
+            cell.backgroundColor = UIColor.white
+            cell.isSelected = false
+            cell.moneyLabel?.text = "¥1166.10"
+            cell.dateLabel?.text = "最后还款日:2018.03.23"
+            return cell!
+        }
         
         var cell:MyOrdersCell! = tableView.dequeueReusableCell(withIdentifier:"MyOrdersCell") as? MyOrdersCell
         if cell == nil {
