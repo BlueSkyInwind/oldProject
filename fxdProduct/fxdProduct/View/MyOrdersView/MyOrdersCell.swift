@@ -10,6 +10,11 @@ import UIKit
 
 class MyOrdersCell: UITableViewCell {
 
+    @objc var titleLabel : UILabel?
+    @objc var timeLabel : UILabel?
+    @objc var moneyLabel : UILabel?
+    @objc var quantityLabel : UILabel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,9 +28,21 @@ class MyOrdersCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        setupUI()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension MyOrdersCell{
+    fileprivate func setupUI(){
+        
+        titleLabel = UILabel()
+        titleLabel?.textColor = TITLE_COLOR
+        titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        self.addSubview(titleLabel!)
+        
+        
     }
 }
