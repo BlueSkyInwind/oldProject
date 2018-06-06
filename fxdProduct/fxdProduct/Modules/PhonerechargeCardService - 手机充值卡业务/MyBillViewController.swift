@@ -27,7 +27,7 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.separatorStyle = .none
-        tableView?.backgroundColor = LINE_COLOR
+        tableView?.backgroundColor = UIColor.clear
         self.view.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
@@ -43,7 +43,8 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return (dataArray?.count)!
+//        return (dataArray?.count)!
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -52,26 +53,45 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = LINE_COLOR
-        let contentLabel = UILabel()
-        contentLabel.textColor = TITLE_COLOR
-        contentLabel.font = UIFont.systemFont(ofSize: 14)
-        contentLabel.text = "关联订单"
-        headerView.addSubview(contentLabel)
-        contentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(headerView.snp.left).offset(22)
-            make.centerY.equalTo(headerView.snp.centerY)
+        
+        if section == 1 {
+            
+            let headerView = UIView()
+            headerView.backgroundColor = LINE_COLOR
+            let contentLabel = UILabel()
+            contentLabel.textColor = TITLE_COLOR
+            contentLabel.font = UIFont.systemFont(ofSize: 14)
+            contentLabel.text = "关联订单"
+            headerView.addSubview(contentLabel)
+            contentLabel.snp.makeConstraints { (make) in
+                make.left.equalTo(headerView.snp.left).offset(22)
+                make.centerY.equalTo(headerView.snp.centerY)
+            }
+            
+            return headerView
         }
         
-        return headerView
+        let view = UIView()
+        view.backgroundColor = LINE_COLOR
+        return view
         
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 33
+        
+        if section == 1 {
+            
+            return 33
+        }
+        return 12
+        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.section == 0 {
+            
+            return 155
+        }
         
         return 100
     }
@@ -96,8 +116,8 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             cell = MyOrdersCell.init(style: .default, reuseIdentifier: "MyOrdersCell")
         }
         cell.selectionStyle = .none
-        cell.backgroundColor = UIColor.white
         cell.isSelected = false
+        cell.backgroundColor = UIColor.clear
         cell.titleLabel?.text = "手机充值卡-面值100元"
         cell.timeLabel?.text = "2018.03.23 15:32:23"
         cell.moneyLabel?.text = "¥1150.00"
@@ -108,6 +128,44 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let footView = UIView()
+        footView.backgroundColor = UIColor.clear
+        
+        let repayBtn = UIButton()
+        repayBtn.setTitle("还款", for: .normal)
+        repayBtn.setTitleColor(UIColor.white, for: .normal)
+        repayBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        repayBtn.setBackgroundImage(UIImage.init(named: "applayBtnImage"), for: .normal)
+        repayBtn.addTarget(self, action: #selector(repayBtnClic), for: .touchUpInside)
+        footView.addSubview(repayBtn)
+        repayBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(footView.snp.top).offset(100)
+            make.left.equalTo(footView.snp.left).offset(20)
+            make.right.equalTo(footView.snp.right).offset(-20)
+            make.height.equalTo(45)
+        }
+        return footView
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        if section == 1 {
+            return 150
+        }
+        
+        return 0
+    }
+    
+    @objc func repayBtnClic(){
+        
+        let controller = MyBillDetailViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
         
     }
     override func didReceiveMemoryWarning() {

@@ -12,8 +12,12 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
 
     var tableView : UITableView?
     var dataArray : NSMutableArray?
-    
+    var titleArray = ["赊销金额","服务费","违约金","逾期罚息","使用券","使用账余额","支付方式"]
     var moneyLabel : UILabel?
+    var isdispalyCard : Bool? = false
+    
+    var userSelectIndex:Int? = 0
+    var selectedCard:CardInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +25,7 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         self.title = "我的账单"
         addBackItem()
         configureView()
-//        headerView()
-        dataArray = ["赊销金额","服务费","违约金","逾期罚息","使用券","使用账余额","支付方式"]
+        headerView()
         // Do any additional setup after loading the view.
     }
 
@@ -45,14 +48,6 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         }else{
             self.automaticallyAdjustsScrollViewInsets = false;
         }
-        
-        let confirmBtn = UIButton.init(frame: CGRect(x:0,y:0,width:_k_w - 40,height:45))
-        confirmBtn.setTitle("确认", for: .normal)
-        confirmBtn.setTitleColor(UIColor.white, for: .normal)
-        confirmBtn.setBackgroundImage(UIImage.init(named: "applayBtnImage"), for: .normal)
-        confirmBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        confirmBtn.addTarget(self, action: #selector(confirmBtnClick), for: .touchUpInside)
-        tableView?.tableFooterView = confirmBtn
     }
     
     fileprivate func headerView(){
@@ -84,6 +79,7 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         moneyLabel = UILabel()
         moneyLabel?.textColor = UI_MAIN_COLOR
         moneyLabel?.font = UIFont.systemFont(ofSize: 30)
+        moneyLabel?.text = "¥1166.10"
         headerView.addSubview(moneyLabel!)
         moneyLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo(headerTitle.snp.bottom).offset(20)
@@ -91,13 +87,40 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         })
         
     }
+    
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let footView = UIView()
+        footView.backgroundColor = UIColor.clear
+        
+        let confirmBtn = UIButton()
+        confirmBtn.setTitle("确认", for: .normal)
+        confirmBtn.setTitleColor(UIColor.white, for: .normal)
+        confirmBtn.setBackgroundImage(UIImage.init(named: "applayBtnImage"), for: .normal)
+        confirmBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        confirmBtn.addTarget(self, action: #selector(confirmBtnClick), for: .touchUpInside)
+        footView.addSubview(confirmBtn)
+        confirmBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(footView.snp.left).offset(20)
+            make.right.equalTo(footView.snp.right).offset(-20)
+            make.top.equalTo(footView.snp.top).offset(40)
+            make.height.equalTo(45)
+        }
+        return footView
+        
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        return 100
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return (dataArray?.count)!
+        return (titleArray.count)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -114,18 +137,94 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         cell.selectionStyle = .none
         cell.backgroundColor = UIColor.white
         cell.isSelected = false
-        cell.leftLabel?.text = (dataArray?[indexPath.row] as! String)
-        cell.rightLabel?.text = "2018.03.23 15:32:23"
+        cell.leftLabel?.text = titleArray[indexPath.row]
         
         cell.arrowImage?.isHidden = true
         if indexPath.row == 4 || indexPath.row == 6 {
             cell.arrowImage?.isHidden = false
+        }
+        
+        switch indexPath.row {
+        case 0:
+            cell.rightLabel?.text = "¥150.00"
+        case 1:
+            cell.rightLabel?.text = "¥16.10"
+        case 2:
+            cell.rightLabel?.text = "¥10.10"
+        case 3:
+            cell.rightLabel?.text = "¥30.00"
+        case 4:
+            cell.rightLabel?.text = "请选择"
+        case 5:
+            cell.rightLabel?.text = "¥0"
+        case 6:
+            cell.rightLabel?.text = "中国银行(尾号9485)"
+        default:
+            break
         }
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        switch indexPath.row {
+        case 6:
+            pushUserBankListVC()
+        default:
+            break
+        }
+    }
+    
+    func pushUserBankListVC()  {
+        let userBankCardListVC = UserBankCardListVCModule.init()
+        userBankCardListVC.currentIndex = userSelectIndex!
+        userBankCardListVC.payPatternSelectBlock = {[weak self] (cardInfo,currentIndex) in
+            self?.isdispalyCard = true
+            self?.selectedCard = cardInfo
+            self?.userSelectIndex = currentIndex
+            if cardInfo == nil {
+                self?.fatchCardInfo({ (isSuccess, isBankCard) in
+                })
+            }
+            self?.tableView?.reloadData()
+        }
+        self.navigationController?.pushViewController(userBankCardListVC, animated: true)
+    }
+    
+    /// 获取发薪贷银行卡信息
+    func fatchCardInfo(_ success:@escaping ((_ isSuccess:Bool,_ isBankCard:Bool) -> Void))  {
+        let bankInfoVM = BankInfoViewModel.init()
+        bankInfoVM.setBlockWithReturn({[weak self] (resultObject) in
+            let baseResult = try! BaseResultModel.init(dictionary: resultObject as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+                let cardArr = baseResult.data as! NSArray
+                if cardArr.count <= 0{
+                    success(true,false)
+                    return
+                }
+                guard (self?.isdispalyCard!)! else {
+                    success(true,true)
+                    return
+                }
+                //获取默认卡  或者选择的卡 （第一张卡）
+                for  dic in cardArr{
+                    let cardInfo = try! CardInfo.init(dictionary: dic as! [AnyHashable : Any])
+                    if cardInfo.cardType == "2" {
+                        self?.selectedCard = cardInfo
+                        break
+                    }
+                }
+                self?.tableView?.reloadData()
+                success(true,true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+                success(false,false)
+            }
+        }) {
+            success(false,false)
+        }
+        
+        bankInfoVM.obtainUserBankCardListPlatformType("")
         
     }
     
@@ -133,9 +232,6 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         
         let controller = RepaymentResultViewController()
         controller.state = .intermediate
-//        controller.titleStr = "还款确认中"
-//        controller.tipStr = "还款结果确认中"
-//        controller.imageStr = "fail"
         self.navigationController?.pushViewController(controller, animated: true)
         
     }

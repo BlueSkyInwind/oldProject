@@ -18,9 +18,6 @@ import UIKit
 
 class RepaymentResultViewController: BaseViewController {
 
-//    @objc var titleStr : String?
-//    @objc var imageStr : String?
-//    @objc var tipStr : String?
     var state:Enum_Result?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +33,7 @@ class RepaymentResultViewController: BaseViewController {
         default:
             break
         }
-//        self.title = titleStr
+
         resultView()
         // Do any additional setup after loading the view.
     }
@@ -62,7 +59,7 @@ class RepaymentResultViewController: BaseViewController {
         imageView.image = UIImage.init(named: imageStr)
         self.view.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view).offset(60)
+            make.top.equalTo(self.view).offset(110)
             make.centerX.equalTo(self.view.snp.centerX)
         }
         

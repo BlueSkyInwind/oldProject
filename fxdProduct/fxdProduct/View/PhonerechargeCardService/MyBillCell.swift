@@ -51,7 +51,7 @@ extension MyBillCell{
         rightLabel?.font = UIFont.systemFont(ofSize: 12)
         self.addSubview(rightLabel!)
         rightLabel?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self).offset(40)
+            make.right.equalTo(self).offset(-40)
             make.centerY.equalTo(self.snp.centerY)
         })
         
@@ -59,8 +59,18 @@ extension MyBillCell{
         arrowImage?.image = UIImage.init(named: "arrow_icon")
         self.addSubview(arrowImage!)
         arrowImage?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self).offset(20)
+            make.right.equalTo(self).offset(-20)
             make.centerY.equalTo(self.snp.centerY)
         })
+        
+        let lineView = UIView()
+        lineView.backgroundColor = LINE_COLOR
+        self.addSubview(lineView)
+        lineView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(-1)
+            make.height.equalTo(1)
+        }
     }
 }

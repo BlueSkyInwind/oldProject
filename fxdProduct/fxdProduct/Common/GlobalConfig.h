@@ -193,7 +193,7 @@ UIKIT_EXTERN NSString * const       _addMyCollectionInfo_url;                  /
 UIKIT_EXTERN NSString * const       _cardAuthQuery_url;                       //银行卡授权查询页面
 UIKIT_EXTERN NSString * const       _cardAuthSmsSend_url;                       //银行卡授权短信发送
 UIKIT_EXTERN NSString * const       _cardAuthAuth_url;                       //银行卡授权接口
-
+UIKIT_EXTERN NSString * const       _handataSummary_url;                       //憨分首页接口
 
 UIKIT_EXTERN NSString * const   CODE_REG;          ///注册验证码
 UIKIT_EXTERN NSString * const   CODE_FINDPASS;         ///密码找回验证码
