@@ -8,14 +8,15 @@
 
 import UIKit
 
+let FooterView_Height = 130
+
 class ShoppingMallModules: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     var cardTableView:UITableView?
     var cardimgs = ["mobile_card","unicom_card","telecom_card"]
     var cardimgsUnused = ["mobile_card_unused","unicom_card_unused","telecom_card_unused"]
     var cardTitle = ["移动手机充值卡-面值","联通手机充值卡-面值","电信手机充值卡-面值"]
-    var rechargeBtn:UIButton?
-    var rechargeTransferBtn:UIButton?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,33 +26,41 @@ class ShoppingMallModules: BaseViewController,UITableViewDelegate,UITableViewDat
         configureView()
     }
     
-    
-    @objc func rechargeBtnClick() {
-    
-    }
-    @objc func rechargeTransferBtnClick() {
-        
-    }
-    
-
     func configureView()  {
         cardTableView = UITableView()
         cardTableView?.delegate = self;
         cardTableView?.dataSource = self;
+        cardTableView?.separatorStyle = .none
         self.view.addSubview(cardTableView!)
         cardTableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
         })
         
         cardTableView?.register(RechargeCardTableViewCell.self, forCellReuseIdentifier: "RechargeCardTableViewCell")
-        cardTableView?.tableFooterView = setTableViewFooter()
+        let footerView = RechargeBottomView.init(frame: CGRect.init(x: 0, y: 0, width:_k_w, height: CGFloat(FooterView_Height)))
+        cardTableView?.tableFooterView = footerView
+        footerView.rechargeClick = {[weak self] in
+            FXD_AlertViewCust.sharedHHAlertView().showPhoneRechargeCompleBlock({ (index) in
+                
+            })
+        }
+        footerView.rechargeTransferClick = {[weak self] in
+            FXD_AlertViewCust.sharedHHAlertView().showPhoneRechargeTitle("提示", content: "充值卡转让服务由第三方平台提供，与本平台无关", attributeDic: nil, textAlignment: NSTextAlignment.left, sureTitle: "我已知晓", compleBlock: { (index) in
+                
+            })
+        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return obtainCellHeight()
+    }
+    
+    func obtainCellHeight() -> CGFloat {
+        let height = FooterView_Height + obtainBarHeight_New(vc: self)
+        return (_k_h - CGFloat(height)) / 3
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,44 +72,33 @@ class ShoppingMallModules: BaseViewController,UITableViewDelegate,UITableViewDat
         cell.titileLabel?.text = cardTitle[indexPath.row];
         cell.amountLabel?.text = "115"
         return cell
+    
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        switch indexPath.row {
+        case 0:
+            pushOrderConfirmationVC(.moblieCard)
+            break
+        case 1:
+            pushOrderConfirmationVC(.unicomCard)
+            break
+        case 2:
+            pushOrderConfirmationVC(.telecomCard)
+            break
+        default:
+            break
+        }
     }
     
-    func setTableViewFooter() -> UIView {
-        
-        let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 150))
-        footerView.backgroundColor = "f2f2f2".uiColor()
-
-        rechargeBtn = UIButton.init(type: UIButtonType.custom)
-        rechargeBtn?.setBackgroundImage(UIImage.init(named: "recharge_button_card"), for: UIControlState.normal)
-        rechargeBtn?.setTitleColor(UIColor.black, for: UIControlState.normal)
-        rechargeBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
-        rechargeBtn?.addTarget(self, action: #selector(rechargeBtnClick), for: UIControlEvents.touchUpInside)
-        footerView.addSubview(rechargeBtn!)
-        rechargeBtn?.snp.makeConstraints({ (make) in
-            make.centerX.equalTo(footerView.snp.centerX).offset(-90)
-            make.centerY.equalTo(footerView.snp.centerY)
-        })
-        
-        
-        rechargeTransferBtn = UIButton.init(type: UIButtonType.custom)
-        rechargeTransferBtn?.setBackgroundImage(UIImage.init(named: "recharge_button_card"), for: UIControlState.normal)
-        rechargeTransferBtn?.setTitleColor(UIColor.black, for: UIControlState.normal)
-        rechargeTransferBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
-        rechargeTransferBtn?.addTarget(self, action: #selector(rechargeTransferBtnClick), for: UIControlEvents.touchUpInside)
-        footerView.addSubview(rechargeTransferBtn!)
-        rechargeTransferBtn?.snp.makeConstraints({ (make) in
-            make.centerX.equalTo(footerView.snp.centerX).offset(90)
-            make.centerY.equalTo(footerView.snp.centerY)
-        })
-        return footerView
+    func pushOrderConfirmationVC(_ cardType:PhoneCardType)  {
+        let orderVC = OrderConfirmationViewController.init()
+        orderVC.cardType = cardType
+        self.navigationController?.pushViewController(orderVC, animated: true)
     }
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

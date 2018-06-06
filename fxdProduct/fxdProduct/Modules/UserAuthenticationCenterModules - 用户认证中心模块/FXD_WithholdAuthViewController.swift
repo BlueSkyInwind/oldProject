@@ -232,7 +232,6 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
         //调用发送验证码
         let tag = button.tag - 1001
         sendSms(tag: tag)
-        
     }
     
     @objc func xinyanKeepTime()  {

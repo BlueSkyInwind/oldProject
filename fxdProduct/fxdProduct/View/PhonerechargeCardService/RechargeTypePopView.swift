@@ -1,0 +1,28 @@
+//
+//  RechargeTypePopView.swift
+//  fxdProduct
+//
+//  Created by admin on 2018/6/5.
+//  Copyright © 2018年 dd. All rights reserved.
+//
+
+import UIKit
+
+class RechargeTypePopView: UIView,NibLoadProtocol  {
+    
+    override func awakeFromNib() {
+        
+        self.layer.cornerRadius = 5
+        self.clipsToBounds = true
+        
+    }
+    
+    /*
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
+    }
+    */
+
+}

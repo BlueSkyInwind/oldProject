@@ -132,7 +132,7 @@ extension ImportPayPasswordView {
             make.centerX.equalTo((self.snp.centerX))
         }
         
-        payPasswordInputView = PayPasswordInputView.init(frame: CGRect.init(x: 15, y: 100, width: _k_w - 30, height: 50))
+        payPasswordInputView = PayPasswordInputView.initFrame(CGRect.init(x: 15, y: 100, width: 240, height: 50), inputTypw: .BoxTypeInput) as! PayPasswordInputView
         payPasswordInputView?.isEnsconce = false
         payPasswordInputView?.completeHandle = ({[weak self] (inputPwd) in
             if self?.delegate != nil {

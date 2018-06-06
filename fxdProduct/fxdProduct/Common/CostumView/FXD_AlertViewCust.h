@@ -89,6 +89,29 @@ typedef void (^ClickBlock)(NSInteger index);
                               sureTitle:(NSString *)sureTitle
                             compleBlock:(ClickBlock)clickIndexBlock;
 
+/**
+ 手机充值弹窗
+
+ @param title 标题
+ @param contentAttri 内容
+ @param attributeDic 格式
+ @param textAlignment 位置
+ @param sureTitle 按钮
+ @param clickIndexBlock 点击事件
+ */
+-(void)showPhoneRechargeTitle:(NSString *)title
+                      content:(NSString *)contentAttri
+                 attributeDic:(NSDictionary<NSAttributedStringKey,id> *)attributeDic
+                TextAlignment:(NSTextAlignment)textAlignment
+                    sureTitle:(NSString *)sureTitle
+                  compleBlock:(ClickBlock)clickIndexBlock;
+
+/**
+ 运营商提示
+
+ @param clickIndexBlock 点击事件
+ */
+-(void)showPhoneRechargeCompleBlock:(ClickBlock)clickIndexBlock;
 
 
 @end
