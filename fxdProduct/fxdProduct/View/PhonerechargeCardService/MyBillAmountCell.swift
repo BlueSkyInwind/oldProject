@@ -41,6 +41,29 @@ extension MyBillAmountCell{
         let titleLabel = UILabel()
         titleLabel.text = "待还金额"
         titleLabel.textColor = TITLE_COLOR
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        self.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self).offset(20)
+            make.centerX.equalTo(self.snp.centerX)
+        }
         
+        moneyLabel = UILabel()
+        moneyLabel?.textColor = UI_MAIN_COLOR
+        moneyLabel?.font = UIFont.systemFont(ofSize: 30)
+        self.addSubview(moneyLabel!)
+        moneyLabel?.snp.makeConstraints({ (make) in
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.centerX.equalTo(self.snp.centerX)
+        })
+        
+        dateLabel = UILabel()
+        dateLabel?.textColor = RedPacketBottomBtn_COLOR
+        dateLabel?.font = UIFont.systemFont(ofSize: 15)
+        self.addSubview(dateLabel!)
+        dateLabel?.snp.makeConstraints({ (make) in
+            make.top.equalTo((moneyLabel?.snp.bottom)!).offset(24)
+            make.centerX.equalTo(self.snp.centerX)
+        })
     }
 }

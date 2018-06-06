@@ -96,6 +96,10 @@
         }
     }
      */
+    
+    _bgView.hidden = true;
+    _messageNumLabel.text = @"";
+    [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
     [self LoadHomeView];
     
 }
@@ -106,6 +110,7 @@
     [self.tableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"HomePageCell"];
     [self.tableView registerClass:[SDCycleScrollCell class] forCellReuseIdentifier:@"SDCycleScrollCell"];
     [self.tableView registerClass:[RecentCell class] forCellReuseIdentifier:@"RecentCell"];
+    [self.tableView registerClass:[QuotaCell class] forCellReuseIdentifier:@"QuotaCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -162,6 +167,16 @@
         make.top.equalTo(_bgView.mas_top).offset(0);
         make.right.equalTo(_bgView.mas_right).offset(0);
         make.height.equalTo(@13);
+    }];
+    
+    UIButton *btn = [[UIButton alloc]init];
+    [btn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
+    [_messageBtn addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_messageBtn.mas_left).offset(-10);
+        make.top.equalTo(_messageBtn.mas_top).offset(-4);
+        make.width.equalTo(@30);
+        make.height.equalTo(@30);
     }];
     
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithCustomView:_messageBtn];
@@ -519,9 +534,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+//    _homeProductList.flag = @"17";
     if (_homeProductList == nil) {
         return 0;
     }
+    
+    if ([_homeProductList.flag isEqualToString:@"17"]) {
+        
+        return 3;
+    }
+    
     return 2;
 }
 
@@ -533,26 +555,62 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    if (indexPath.section == 0) {
-        return 103;
+    switch (indexPath.section) {
+        case 0:
+            return 103;
+            break;
+        case 1:
+            switch (_homeProductList.flag.integerValue) {
+                case 8:
+                case 9:
+                case 10:
+                case 13:
+                case 14:
+                case 15:
+                    
+                    return _k_h-_k_w*0.44-113-113;
+                    break;
+                case 17:
+                    return 130;
+                    break;
+                case 7:
+                    return _k_h-_k_w*0.44-113-40 + (_protocolArray.count - 1)*30;
+                    break;
+                default:
+                    return 85*_homeProductList.hotRecommend.count+30;
+                    break;
+            }
+            break;
+        case 2:
+            return 85*_homeProductList.hotRecommend.count+30;
+            break;
+        default:
+            break;
     }
-    
-    if ([_homeProductList.flag isEqualToString:@"8"] ||[_homeProductList.flag isEqualToString:@"9"] ||[_homeProductList.flag isEqualToString:@"10"] ||[_homeProductList.flag isEqualToString:@"13"] ||[_homeProductList.flag isEqualToString:@"14"]||[_homeProductList.flag isEqualToString:@"15"]) {
-        
-        return _k_h-_k_w*0.44-113-113;
-    }
-    if ([_homeProductList.flag isEqualToString:@"7"]) {
-        
-        return _k_h-_k_w*0.44-113-40 + (_protocolArray.count - 1)*30;
-    }
-    
-    return 85*_homeProductList.hotRecommend.count+30;
+    return 0;
+//    if (indexPath.section == 0) {
+//        return 103;
+//    }
+//
+//    if ([_homeProductList.flag isEqualToString:@"8"] ||[_homeProductList.flag isEqualToString:@"9"] ||[_homeProductList.flag isEqualToString:@"10"] ||[_homeProductList.flag isEqualToString:@"13"] ||[_homeProductList.flag isEqualToString:@"14"]||[_homeProductList.flag isEqualToString:@"15"] ) {
+//
+//        return _k_h-_k_w*0.44-113-113;
+//    }
+//    if ([_homeProductList.flag isEqualToString:@"17"]) {
+//        return 130;
+//    }
+//    if ([_homeProductList.flag isEqualToString:@"7"]) {
+//
+//        return _k_h-_k_w*0.44-113-40 + (_protocolArray.count - 1)*30;
+//    }
+//
+//    return 85*_homeProductList.hotRecommend.count+30;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 1) {
+    if (section == 1 || section == 2) {
         return 5.0f;
     }
     return 0.0f;
@@ -567,65 +625,167 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (indexPath.section == 0) {
-        
-        SDCycleScrollCell *sdcycleScrollCell = [tableView dequeueReusableCellWithIdentifier:@"SDCycleScrollCell"];
-        sdcycleScrollCell.selected = NO;
-        sdcycleScrollCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        sdcycleScrollCell.sdCycleScrollview.delegate = self;
-        sdcycleScrollCell.delegate = self;
-        
-        for (int i = 0; i<_homeProductList.platType.count; i++) {
-            PlatTypeModel *model = _homeProductList.platType[i];
-            switch (model.code_.integerValue) {
-                case 1:
-                    [sdcycleScrollCell.loanBtn setTitle:model.desc_ forState:UIControlStateNormal];
-                    [sdcycleScrollCell.loanBtnImage setImage:[UIImage imageNamed:@"loan_icon"] forState:UIControlStateNormal];
+    switch (indexPath.section) {
+        case 0:
+        {
+            SDCycleScrollCell *sdcycleScrollCell = [tableView dequeueReusableCellWithIdentifier:@"SDCycleScrollCell"];
+            sdcycleScrollCell.selected = NO;
+            sdcycleScrollCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            sdcycleScrollCell.sdCycleScrollview.delegate = self;
+            sdcycleScrollCell.delegate = self;
+            
+            for (int i = 0; i<_homeProductList.platType.count; i++) {
+                PlatTypeModel *model = _homeProductList.platType[i];
+                switch (model.code_.integerValue) {
+                    case 1:
+                        [sdcycleScrollCell.loanBtn setTitle:model.desc_ forState:UIControlStateNormal];
+                        [sdcycleScrollCell.loanBtnImage setImage:[UIImage imageNamed:@"loan_icon"] forState:UIControlStateNormal];
+                        break;
+                    case 2:
+                        [sdcycleScrollCell.gameBtn setTitle:model.desc_ forState:UIControlStateNormal];
+                        [sdcycleScrollCell.gameBtnImage setImage:[UIImage imageNamed:@"game_icon"] forState:UIControlStateNormal];
+                        break;
+                    case 3:
+                        [sdcycleScrollCell.tourismBtn setTitle:model.desc_ forState:UIControlStateNormal];
+                        [sdcycleScrollCell.tourismBtnImage setImage:[UIImage imageNamed:@"tourism_icon"] forState:UIControlStateNormal];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            
+            sdcycleScrollCell.sdCycleScrollview.titlesGroup = _homeProductList.paidList;
+            return sdcycleScrollCell;
+        }
+            break;
+        case 1:
+            switch (_homeProductList.flag.integerValue) {
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 13:
+                case 14:
+                case 15:
+                case 17:
+                {
+                    HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
+                    [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    homeCell.backgroundColor = [UIColor whiteColor];
+                    homeCell.selected = NO;
+                    homeCell.delegate = self;
+                    homeCell.homeProductListModel = _homeProductList;
+                    if (_homeProductList != nil) {
+                        
+                        homeCell.type = _homeProductList.flag;
+                        homeCell.protocolArray = _protocolArray;
+                        homeCell.titleLabel.text = @"最高额度2000元";
+                        [homeCell.quotaBtn setTitle:@"极速申请" forState:UIControlStateNormal];
+                        if (![homeCell.titleLabel.text isEqualToString:@""]) {
+                            NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:homeCell.titleLabel.text];
+                            [attriStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,4)];
+                            [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:NSMakeRange(0,4)];
+                            homeCell.titleLabel.attributedText = attriStr;
+                        }
+                    }
+                    
+                    return homeCell;
+                }
                     break;
-                case 2:
-                    [sdcycleScrollCell.gameBtn setTitle:model.desc_ forState:UIControlStateNormal];
-                    [sdcycleScrollCell.gameBtnImage setImage:[UIImage imageNamed:@"game_icon"] forState:UIControlStateNormal];
-                    break;
-                case 3:
-                    [sdcycleScrollCell.tourismBtn setTitle:model.desc_ forState:UIControlStateNormal];
-                    [sdcycleScrollCell.tourismBtnImage setImage:[UIImage imageNamed:@"tourism_icon"] forState:UIControlStateNormal];
-                    break;
+                    
                 default:
+                {
+                    RecentCell *recentCell = [tableView dequeueReusableCellWithIdentifier:@"RecentCell"];
+                    [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    recentCell.backgroundColor = [UIColor whiteColor];
+                    recentCell.homeProductListModel = _homeProductList;
+                    recentCell.delegate = self;
+                    [recentCell.tableView reloadData];
+                    [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    return recentCell;
+                }
+                
                     break;
             }
+            break;
+        case 2:
+        {
+            RecentCell *recentCell = [tableView dequeueReusableCellWithIdentifier:@"RecentCell"];
+            [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            recentCell.backgroundColor = [UIColor whiteColor];
+            recentCell.homeProductListModel = _homeProductList;
+            recentCell.delegate = self;
+            [recentCell.tableView reloadData];
+            [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            return recentCell;
         }
-
-        
-        sdcycleScrollCell.sdCycleScrollview.titlesGroup = _homeProductList.paidList;
-        return sdcycleScrollCell;
-        
-    }else if ([_homeProductList.flag isEqualToString:@"7"] ||[_homeProductList.flag isEqualToString:@"8"] ||[_homeProductList.flag isEqualToString:@"9"] ||[_homeProductList.flag isEqualToString:@"10"] ||[_homeProductList.flag isEqualToString:@"13"] ||[_homeProductList.flag isEqualToString:@"14"]||[_homeProductList.flag isEqualToString:@"15"]){
-        
-        HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
-        [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        homeCell.backgroundColor = [UIColor whiteColor];
-        homeCell.selected = NO;
-        homeCell.delegate = self;
-        homeCell.homeProductListModel = _homeProductList;
-        if (_homeProductList != nil) {
-            
-            homeCell.type = _homeProductList.flag;
-            homeCell.protocolArray = _protocolArray;
-            
-        }
-        
-        return homeCell;
+            break;
+        default:
+            break;
     }
     
-     RecentCell *recentCell = [tableView dequeueReusableCellWithIdentifier:@"RecentCell"];
-    [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    recentCell.backgroundColor = [UIColor whiteColor];
-    recentCell.homeProductListModel = _homeProductList;
-    recentCell.delegate = self;
-    [recentCell.tableView reloadData];
-    [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    return recentCell;
-    
+//    if (indexPath.section == 0) {
+//
+//        SDCycleScrollCell *sdcycleScrollCell = [tableView dequeueReusableCellWithIdentifier:@"SDCycleScrollCell"];
+//        sdcycleScrollCell.selected = NO;
+//        sdcycleScrollCell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        sdcycleScrollCell.sdCycleScrollview.delegate = self;
+//        sdcycleScrollCell.delegate = self;
+//
+//        for (int i = 0; i<_homeProductList.platType.count; i++) {
+//            PlatTypeModel *model = _homeProductList.platType[i];
+//            switch (model.code_.integerValue) {
+//                case 1:
+//                    [sdcycleScrollCell.loanBtn setTitle:model.desc_ forState:UIControlStateNormal];
+//                    [sdcycleScrollCell.loanBtnImage setImage:[UIImage imageNamed:@"loan_icon"] forState:UIControlStateNormal];
+//                    break;
+//                case 2:
+//                    [sdcycleScrollCell.gameBtn setTitle:model.desc_ forState:UIControlStateNormal];
+//                    [sdcycleScrollCell.gameBtnImage setImage:[UIImage imageNamed:@"game_icon"] forState:UIControlStateNormal];
+//                    break;
+//                case 3:
+//                    [sdcycleScrollCell.tourismBtn setTitle:model.desc_ forState:UIControlStateNormal];
+//                    [sdcycleScrollCell.tourismBtnImage setImage:[UIImage imageNamed:@"tourism_icon"] forState:UIControlStateNormal];
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//
+//
+//        sdcycleScrollCell.sdCycleScrollview.titlesGroup = _homeProductList.paidList;
+//        return sdcycleScrollCell;
+//
+//    }else if ([_homeProductList.flag isEqualToString:@"7"] ||[_homeProductList.flag isEqualToString:@"8"] ||[_homeProductList.flag isEqualToString:@"9"] ||[_homeProductList.flag isEqualToString:@"10"] ||[_homeProductList.flag isEqualToString:@"13"] ||[_homeProductList.flag isEqualToString:@"14"]||[_homeProductList.flag isEqualToString:@"15"] ||[_homeProductList.flag isEqualToString:@"17"]){
+//
+//        HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
+//        [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//        homeCell.backgroundColor = [UIColor whiteColor];
+//        homeCell.selected = NO;
+//        homeCell.delegate = self;
+//        homeCell.homeProductListModel = _homeProductList;
+//        if (_homeProductList != nil) {
+//
+//            homeCell.type = _homeProductList.flag;
+//            homeCell.protocolArray = _protocolArray;
+//            homeCell.titleLabel.text = @"最高额度2000元";
+//            [homeCell.quotaBtn setTitle:@"极速申请" forState:UIControlStateNormal];
+//
+//        }
+//
+//        return homeCell;
+//    }
+//
+//     RecentCell *recentCell = [tableView dequeueReusableCellWithIdentifier:@"RecentCell"];
+//    [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//    recentCell.backgroundColor = [UIColor whiteColor];
+//    recentCell.homeProductListModel = _homeProductList;
+//    recentCell.delegate = self;
+//    [recentCell.tableView reloadData];
+//    [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//    return recentCell;
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1086,6 +1246,13 @@
     }];
     
     [collectionVM addMyCollectionInfocollectionType:model.moduletype platformId:model.id_];
+}
+
+
+#pragma mark 极速申请 -- 手机卡充值
+-(void)quotaBtnClick{
+    
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"极速申请"];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

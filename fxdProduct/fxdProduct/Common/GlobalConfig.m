@@ -268,6 +268,8 @@ NSString * const    _cardAuthQuery_url               =    @"cardAuth/query";
 NSString * const    _cardAuthSmsSend_url               =    @"cardAuth/sms/send";
 //银行卡授权接口
 NSString * const    _cardAuthAuth_url               =    @"cardAuth/auth";
+//憨分首页接口
+NSString * const    _handataSummary_url               =    @"handata/summary";
 
 
 #pragma mark - 合规接口

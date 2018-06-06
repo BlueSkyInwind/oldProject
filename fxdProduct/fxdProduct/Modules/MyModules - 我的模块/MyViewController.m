@@ -62,13 +62,21 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     [self addHeaderView];
+    
     //检测登录
     if ([FXD_Utility sharedUtility].loginFlage) {
         [self getMessageNumber];
+    }else{
+        model.isDisplay = @"0";
+        [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
+        [self.MyViewTable reloadData];
     }
 //    [self getExperienceValueGrade];
 //    [self getPersonalCenterInfo];
+    
 }
+
+
 
 /**
  增加headerview
@@ -347,8 +355,8 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                    MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
-                    [self.navigationController pushViewController:myMessageVC animated:true];
+                    MyBillViewController *controller=[[MyBillViewController alloc]init];
+                    [self.navigationController pushViewController:controller animated:true];
                 }
                     break;
                 case 1:
@@ -365,12 +373,10 @@
             switch (indexPath.row) {
                 case 0:
                     {
-                        
                         ShoppingMallModules *myMessageVC=[[ShoppingMallModules alloc]init];
                         [self.navigationController pushViewController:myMessageVC animated:true];
 //                        MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
 //                        [self.navigationController pushViewController:myMessageVC animated:true];
-                        
                     }
                     break;
                 case 1:

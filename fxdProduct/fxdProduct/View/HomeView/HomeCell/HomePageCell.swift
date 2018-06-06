@@ -1,3 +1,4 @@
+
 //
 //  HomePageCell.swift
 //  fxdProduct
@@ -35,6 +36,7 @@ import Masonry
     func protocolNameClick(_ index:Int, protocoalName: String)
     //协议列表点击
     func protocolListClick(_ sender: UIButton)
+    func quotaBtnClick()
 }
 
 
@@ -60,7 +62,8 @@ class HomePageCell: UITableViewCell {
     @objc var arrowDescLabel : UILabel?
     @objc var protocolListView : UIView?
     @objc var protocolArray : NSMutableArray?
-    
+    @objc var titleLabel : UILabel?
+    @objc var quotaBtn : UIButton?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -112,6 +115,8 @@ extension HomePageCell {
             repayImmediatelyView()
         case 16?:
             reassessCell()
+        case 17?:
+            PhonerechargeCardServiceCell()
         case .none:
             break
         case .some(_):
@@ -1063,6 +1068,30 @@ extension HomePageCell {
         }
     }
     
+    fileprivate func PhonerechargeCardServiceCell(){
+        
+        titleLabel = UILabel()
+        titleLabel?.font = UIFont.systemFont(ofSize: 25)
+        titleLabel?.textColor = UI_MAIN_COLOR
+        self.addSubview(titleLabel!)
+        titleLabel?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self).offset(25)
+            make.centerX.equalTo(self.snp.centerX)
+        })
+        
+        quotaBtn = UIButton()
+        quotaBtn?.setTitleColor(UIColor.white, for: .normal)
+        quotaBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
+        quotaBtn?.setBackgroundImage(UIImage.init(named: "quota_bg_icon"), for: .normal)
+        quotaBtn?.addTarget(self, action: #selector(quotaBtnClick), for: .touchUpInside)
+        self.addSubview(quotaBtn!)
+        quotaBtn?.snp.makeConstraints({ (make) in
+            make.top.equalTo((titleLabel?.snp.bottom)!).offset(20)
+            make.centerX.equalTo(self.snp.centerX)
+            make.width.equalTo(150)
+            make.height.equalTo(45)
+        })
+    }
 }
 
 extension HomePageCell{
@@ -1705,5 +1734,12 @@ extension HomePageCell{
         
     }
 
+    //极速申请
+    @objc fileprivate func quotaBtnClick(){
+        
+        if delegate != nil {
+            delegate?.quotaBtnClick()
+        }
+    }
 }
 

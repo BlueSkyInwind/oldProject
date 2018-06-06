@@ -38,6 +38,16 @@ class MyOrdersCell: UITableViewCell {
 extension MyOrdersCell{
     fileprivate func setupUI(){
         
+        let bgImageView = UIImageView()
+        bgImageView.image = UIImage.init(named: "order_bg_icon")
+        self.addSubview(bgImageView)
+        bgImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(0)
+        }
+        
         titleLabel = UILabel()
         titleLabel?.textColor = TITLE_COLOR
         titleLabel?.font = UIFont.systemFont(ofSize: 14)

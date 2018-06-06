@@ -49,7 +49,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return (dataArray?.count)!
+        return 3
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -84,7 +84,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
             cell = MyOrdersCell.init(style: .default, reuseIdentifier: "MyOrdersCell")
         }
         cell.selectionStyle = .none
-        cell.backgroundColor = UIColor.white
+        cell.backgroundColor = UIColor.clear
         cell.isSelected = false
         cell.titleLabel?.text = "手机充值卡-面值100元"
         cell.timeLabel?.text = "2018.03.23 15:32:23"
