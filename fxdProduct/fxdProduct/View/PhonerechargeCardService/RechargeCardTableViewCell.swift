@@ -10,11 +10,10 @@ import UIKit
 
 class RechargeCardTableViewCell: UITableViewCell {
 
-//    var backImage:UIImage {
+//   @objc var backImage:UIImage {
 //        didSet{
-//            
-//            
-//            
+//            let
+//
 //        }
 //    }
     var backImageView:UIImageView?
@@ -48,10 +47,13 @@ extension RechargeCardTableViewCell {
         
         backImageView = UIImageView()
         backImageView?.isUserInteractionEnabled = true;
-        backImageView?.contentMode = .center
+//        backImageView?.contentMode = .center
         self.addSubview(backImageView!)
         backImageView?.snp.makeConstraints({ (make) in
             make.center.equalTo(self.snp.center)
+            make.top.equalTo(self.snp.top).offset(8)
+            make.bottom.equalTo(self.snp.bottom).offset(-8)
+            make.width.equalTo((backImageView?.snp.height)!).multipliedBy(2.16)
         })
         
         titileLabel = UILabel()
@@ -81,10 +83,6 @@ extension RechargeCardTableViewCell {
             make.centerY.equalTo((backImageView?.snp.centerY)!).offset(15)
         })
     }
-    
-
-    
-    
 }
 
 

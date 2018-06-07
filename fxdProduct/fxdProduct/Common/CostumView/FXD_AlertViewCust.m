@@ -12,7 +12,7 @@
 @interface FXD_AlertViewCust (){
     
 }
-
+@property (nonatomic,strong) PhoneRechargePopView * phoneRechargePopView;
 @property (nonatomic,strong) FXD_VersionUpdatepop * versionUpdate;
 @property (nonatomic,strong) FXDAlertView * fxdAlertView;
 @property (nonatomic,strong) ActivityHomePopView * popView;
@@ -203,8 +203,54 @@
     };
 }
 
+-(void)showPhoneRechargeTitle:(NSString *)title
+                     content:(NSString *)contentAttri
+                attributeDic:(NSDictionary<NSAttributedStringKey,id> *)attributeDic
+               TextAlignment:(NSTextAlignment)textAlignment
+                   sureTitle:(NSString *)sureTitle
+                 compleBlock:(ClickBlock)clickIndexBlock{
+    
+    if (self.phoneRechargePopView) {
+        return;
+    }
+    
+    if (attributeDic == nil) {
+        NSMutableParagraphStyle *ornamentParagraph = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        //设置text文字垂直居中
+        ornamentParagraph.alignment = textAlignment;
+        attributeDic =@{NSFontAttributeName:[UIFont yx_systemFontOfSize:15],NSForegroundColorAttributeName:kUIColorFromRGB(0x4D4D4D),NSParagraphStyleAttributeName:ornamentParagraph};
+    }
+    NSMutableAttributedString * attari = [[NSMutableAttributedString alloc]initWithString:contentAttri attributes:attributeDic];
+    self.phoneRechargePopView = [[PhoneRechargePopView alloc] init:title contentAttri:attari sureTitle:sureTitle];
+    [self.phoneRechargePopView show];
+    __weak typeof (self) weakSelf = self;
+    self.phoneRechargePopView.popClick = ^{
+        clickIndexBlock(1);
+        [weakSelf.phoneRechargePopView dismiss];
+        weakSelf.phoneRechargePopView = nil;
+    };
+}
 
+-(void)showPhoneRechargeCompleBlock:(ClickBlock)clickIndexBlock{
+    
+    if (self.phoneRechargePopView) {
+        return;
+    }
 
+    self.phoneRechargePopView = [[PhoneRechargePopView alloc] init];
+    [self.phoneRechargePopView show];
+    __weak typeof (self) weakSelf = self;
+    self.phoneRechargePopView.popClick = ^{
+        clickIndexBlock(1);
+        [weakSelf.phoneRechargePopView dismiss];
+        weakSelf.phoneRechargePopView = nil;
+    };
+}
+
+-(void)dismissphoneRechargeView{
+    [self.phoneRechargePopView dismiss];
+    self.phoneRechargePopView = nil;
+}
 
 
 

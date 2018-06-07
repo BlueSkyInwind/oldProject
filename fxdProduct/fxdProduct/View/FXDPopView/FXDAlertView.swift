@@ -184,8 +184,8 @@ extension FXDAlertView {
         backGroundView?.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
             make.centerX.equalTo((backGroundView?.snp.centerX)!)
-            make.top.equalTo((backGroundView?.snp.top)!).offset(15);
-            make.height.equalTo(header_Height - 5)
+            make.top.equalTo((backGroundView?.snp.top)!).offset(20);
+            make.height.equalTo(20)
             make.left.right.equalTo(0)
         })
         

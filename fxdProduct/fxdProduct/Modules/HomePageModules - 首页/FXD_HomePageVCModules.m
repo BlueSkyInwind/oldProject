@@ -1260,14 +1260,12 @@
     
     switch (_homeProductList.flag.integerValue) {
         case 1:
-        {
             if ([FXD_Utility sharedUtility].loginFlage) {
                 UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
                 [self.navigationController pushViewController:controller animated:true];
             } else {
                 [self presentLoginVC:self];
             }
-        }
             
 //            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"资料测评前"];
             break;

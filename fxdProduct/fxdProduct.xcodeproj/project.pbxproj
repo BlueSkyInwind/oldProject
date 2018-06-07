@@ -581,6 +581,34 @@
 		84EBE9C520C691000045F538 /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9C320C691000045F538 /* YXMoviesRecordManager.swift */; };
 		84EBE9C720C692FB0045F538 /* RechargeBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9C620C692FB0045F538 /* RechargeBottomView.swift */; };
 		84EBE9C820C692FB0045F538 /* RechargeBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9C620C692FB0045F538 /* RechargeBottomView.swift */; };
+		84EBE9CA20C696FA0045F538 /* RechargeTypePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9C920C696FA0045F538 /* RechargeTypePopView.swift */; };
+		84EBE9CB20C696FA0045F538 /* RechargeTypePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9C920C696FA0045F538 /* RechargeTypePopView.swift */; };
+		84EBE9CD20C6970C0045F538 /* RechargeTypePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9CC20C6970C0045F538 /* RechargeTypePopView.xib */; };
+		84EBE9CE20C6970C0045F538 /* RechargeTypePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9CC20C6970C0045F538 /* RechargeTypePopView.xib */; };
+		84EBE9D020C69E410045F538 /* PhoneRechargePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9CF20C69E410045F538 /* PhoneRechargePopView.swift */; };
+		84EBE9D120C69E410045F538 /* PhoneRechargePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9CF20C69E410045F538 /* PhoneRechargePopView.swift */; };
+		84EBE9D320C78E560045F538 /* OrderConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9D220C78E560045F538 /* OrderConfirmationViewController.swift */; };
+		84EBE9D420C78E560045F538 /* OrderConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9D220C78E560045F538 /* OrderConfirmationViewController.swift */; };
+		84EBE9D720C7900B0045F538 /* OrderConfirmInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9D520C7900B0045F538 /* OrderConfirmInfoCell.swift */; };
+		84EBE9D820C7900B0045F538 /* OrderConfirmInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9D520C7900B0045F538 /* OrderConfirmInfoCell.swift */; };
+		84EBE9D920C7900B0045F538 /* OrderConfirmInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9D620C7900B0045F538 /* OrderConfirmInfoCell.xib */; };
+		84EBE9DA20C7900B0045F538 /* OrderConfirmInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9D620C7900B0045F538 /* OrderConfirmInfoCell.xib */; };
+		84EBE9DD20C7B1210045F538 /* OrderConfirmDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9DB20C7B1210045F538 /* OrderConfirmDetailCell.swift */; };
+		84EBE9DE20C7B1210045F538 /* OrderConfirmDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9DB20C7B1210045F538 /* OrderConfirmDetailCell.swift */; };
+		84EBE9DF20C7B1210045F538 /* OrderConfirmDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9DC20C7B1210045F538 /* OrderConfirmDetailCell.xib */; };
+		84EBE9E020C7B1210045F538 /* OrderConfirmDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9DC20C7B1210045F538 /* OrderConfirmDetailCell.xib */; };
+		84EBE9E220C7B5E30045F538 /* HeaderInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9E120C7B5E30045F538 /* HeaderInstructionsView.swift */; };
+		84EBE9E320C7B5E30045F538 /* HeaderInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9E120C7B5E30045F538 /* HeaderInstructionsView.swift */; };
+		84EBE9E520C7B75C0045F538 /* OrderConfirmBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9E420C7B75C0045F538 /* OrderConfirmBottomView.swift */; };
+		84EBE9E620C7B75C0045F538 /* OrderConfirmBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9E420C7B75C0045F538 /* OrderConfirmBottomView.swift */; };
+		84EBE9E820C7C9110045F538 /* OrderVerifyCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9E720C7C9110045F538 /* OrderVerifyCodeView.swift */; };
+		84EBE9E920C7C9110045F538 /* OrderVerifyCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9E720C7C9110045F538 /* OrderVerifyCodeView.swift */; };
+		84EBE9EB20C7E7C40045F538 /* OrderConfirmDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9EA20C7E7C40045F538 /* OrderConfirmDetailViewController.swift */; };
+		84EBE9EC20C7E7C40045F538 /* OrderConfirmDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9EA20C7E7C40045F538 /* OrderConfirmDetailViewController.swift */; };
+		84EBE9F220C7E9330045F538 /* OrderConfirmDetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9F020C7E9330045F538 /* OrderConfirmDetailInfoCell.swift */; };
+		84EBE9F320C7E9330045F538 /* OrderConfirmDetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9F020C7E9330045F538 /* OrderConfirmDetailInfoCell.swift */; };
+		84EBE9F420C7E9330045F538 /* OrderConfirmDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9F120C7E9330045F538 /* OrderConfirmDetailInfoCell.xib */; };
+		84EBE9F520C7E9330045F538 /* OrderConfirmDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9F120C7E9330045F538 /* OrderConfirmDetailInfoCell.xib */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5B1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5C1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */; };
@@ -1923,6 +1951,20 @@
 		84E810FA2091A7F5009226B5 /* ChooseCreditDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCreditDateView.swift; sourceTree = "<group>"; };
 		84EBE9C320C691000045F538 /* YXMoviesRecordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXMoviesRecordManager.swift; sourceTree = "<group>"; };
 		84EBE9C620C692FB0045F538 /* RechargeBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeBottomView.swift; sourceTree = "<group>"; };
+		84EBE9C920C696FA0045F538 /* RechargeTypePopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeTypePopView.swift; sourceTree = "<group>"; };
+		84EBE9CC20C6970C0045F538 /* RechargeTypePopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RechargeTypePopView.xib; sourceTree = "<group>"; };
+		84EBE9CF20C69E410045F538 /* PhoneRechargePopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneRechargePopView.swift; sourceTree = "<group>"; };
+		84EBE9D220C78E560045F538 /* OrderConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationViewController.swift; sourceTree = "<group>"; };
+		84EBE9D520C7900B0045F538 /* OrderConfirmInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmInfoCell.swift; sourceTree = "<group>"; };
+		84EBE9D620C7900B0045F538 /* OrderConfirmInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderConfirmInfoCell.xib; sourceTree = "<group>"; };
+		84EBE9DB20C7B1210045F538 /* OrderConfirmDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmDetailCell.swift; sourceTree = "<group>"; };
+		84EBE9DC20C7B1210045F538 /* OrderConfirmDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderConfirmDetailCell.xib; sourceTree = "<group>"; };
+		84EBE9E120C7B5E30045F538 /* HeaderInstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderInstructionsView.swift; sourceTree = "<group>"; };
+		84EBE9E420C7B75C0045F538 /* OrderConfirmBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmBottomView.swift; sourceTree = "<group>"; };
+		84EBE9E720C7C9110045F538 /* OrderVerifyCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVerifyCodeView.swift; sourceTree = "<group>"; };
+		84EBE9EA20C7E7C40045F538 /* OrderConfirmDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmDetailViewController.swift; sourceTree = "<group>"; };
+		84EBE9F020C7E9330045F538 /* OrderConfirmDetailInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmDetailInfoCell.swift; sourceTree = "<group>"; };
+		84EBE9F120C7E9330045F538 /* OrderConfirmDetailInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderConfirmDetailInfoCell.xib; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
 		84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_finish@2x.png"; sourceTree = "<group>"; };
 		84ED5B561F4AB9E7004C0A59 /* mx_loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_loading@2x.png"; sourceTree = "<group>"; };
@@ -4018,6 +4060,8 @@
 			children = (
 				CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */,
 				8466936720C637E300F47A24 /* ShoppingMallModules.swift */,
+				84EBE9D220C78E560045F538 /* OrderConfirmationViewController.swift */,
+				84EBE9EA20C7E7C40045F538 /* OrderConfirmDetailViewController.swift */,
 				CCC5DE3420C65C38002A7553 /* MyBillViewController.swift */,
 				CCF97E5520C673B6009E7ECC /* RepaymentResultViewController.swift */,
 				CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */,
@@ -4367,6 +4411,18 @@
 				8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */,
 				84EBE9C620C692FB0045F538 /* RechargeBottomView.swift */,
 				CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */,
+				84EBE9C920C696FA0045F538 /* RechargeTypePopView.swift */,
+				84EBE9CC20C6970C0045F538 /* RechargeTypePopView.xib */,
+				84EBE9CF20C69E410045F538 /* PhoneRechargePopView.swift */,
+				84EBE9D520C7900B0045F538 /* OrderConfirmInfoCell.swift */,
+				84EBE9D620C7900B0045F538 /* OrderConfirmInfoCell.xib */,
+				84EBE9DB20C7B1210045F538 /* OrderConfirmDetailCell.swift */,
+				84EBE9DC20C7B1210045F538 /* OrderConfirmDetailCell.xib */,
+				84EBE9E120C7B5E30045F538 /* HeaderInstructionsView.swift */,
+				84EBE9E420C7B75C0045F538 /* OrderConfirmBottomView.swift */,
+				84EBE9E720C7C9110045F538 /* OrderVerifyCodeView.swift */,
+				84EBE9F020C7E9330045F538 /* OrderConfirmDetailInfoCell.swift */,
+				84EBE9F120C7E9330045F538 /* OrderConfirmDetailInfoCell.xib */,
 			);
 			path = PhonerechargeCardService;
 			sourceTree = "<group>";
@@ -4715,6 +4771,7 @@
 				84C619FB1FA81E7000626411 /* repay_circle_un@2x.png in Resources */,
 				84C619FC1FA81E7000626411 /* repay_circle_un@3x.png in Resources */,
 				84C619FF1FA81E7000626411 /* LoanPaymentDetailVCModule.xib in Resources */,
+				84EBE9F420C7E9330045F538 /* OrderConfirmDetailInfoCell.xib in Resources */,
 				84192AA8207A03110042E8F8 /* MembershipRechargeTableViewCell.xib in Resources */,
 				84C61A001FA81E7000626411 /* LoanPeriodListVCModule.xib in Resources */,
 				84C61A011FA81E7000626411 /* BankListCell.xib in Resources */,
@@ -4740,11 +4797,13 @@
 				6386A6B81E80D4F200A181A3 /* fxdProductDev-Info.plist in Resources */,
 				0FEA588A1BE0A497007F8A6D /* testView.xib in Resources */,
 				0F9E30D31BC8A70C0018A801 /* IdeaBackViewController.xib in Resources */,
+				84EBE9D920C7900B0045F538 /* OrderConfirmInfoCell.xib in Resources */,
 				84D2B80D20A1B4AF00142206 /* repay_circle_selt@3x.png in Resources */,
 				84ED5B601F4AB9E7004C0A59 /* mx_refresh@2x.png in Resources */,
 				84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */,
 				0F099B991C1A97EB00D97BAE /* ColledgeView.xib in Resources */,
 				84A37FF61FAC12A8008FB7AF /* ActivityHomePopView.xib in Resources */,
+				84EBE9DF20C7B1210045F538 /* OrderConfirmDetailCell.xib in Resources */,
 				CC0346271F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */,
 				0F6AAF3A1C30D8950060F137 /* MyCardCell.xib in Resources */,
 				636FF3491BA27C9800BB5528 /* Address.plist in Resources */,
@@ -4764,6 +4823,7 @@
 				638A170D1E517E8C00AB8AB6 /* vcTransition1.json in Resources */,
 				636B1B8F1C2A416500450358 /* NextViewCell.xib in Resources */,
 				84420A621ED678E200DFBFE0 /* LoginView.xib in Resources */,
+				84EBE9CD20C6970C0045F538 /* RechargeTypePopView.xib in Resources */,
 				63B65DF11D519D1600207231 /* main.js in Resources */,
 				630D46181BCCD2FB00874064 /* UpdateDevIDViewController.xib in Resources */,
 				84D2B80A20A1B4A800142206 /* repay_circle_selt@2x.png in Resources */,
@@ -4791,6 +4851,7 @@
 				84C619F71FA81E2C00626411 /* repay_circle_un@3x.png in Resources */,
 				84C619E81FA81D3E00626411 /* LoanPeriodForDetailsVCModule.xib in Resources */,
 				84C619EB1FA81D3E00626411 /* LoanPaymentDetailVCModule.xib in Resources */,
+				84EBE9F520C7E9330045F538 /* OrderConfirmDetailInfoCell.xib in Resources */,
 				84192AA9207A03110042E8F8 /* MembershipRechargeTableViewCell.xib in Resources */,
 				84C619EC1FA81D3E00626411 /* LoanPeriodListVCModule.xib in Resources */,
 				84C619ED1FA81D3E00626411 /* BankListCell.xib in Resources */,
@@ -4816,11 +4877,13 @@
 				84A380211FAC1D8D008FB7AF /* UserMobileAuthenticationVCModules.xib in Resources */,
 				CC0DFB2E1EA5B1090024841A /* fxdProductDev-Info.plist in Resources */,
 				CC0DFB331EA5B1090024841A /* testView.xib in Resources */,
+				84EBE9DA20C7900B0045F538 /* OrderConfirmInfoCell.xib in Resources */,
 				84D2B80E20A1B4AF00142206 /* repay_circle_selt@3x.png in Resources */,
 				CC0DFB3D1EA5B1090024841A /* IdeaBackViewController.xib in Resources */,
 				84ED5B611F4AB9E7004C0A59 /* mx_refresh@2x.png in Resources */,
 				84ED5B5B1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */,
 				CC0DFB411EA5B1090024841A /* ColledgeView.xib in Resources */,
+				84EBE9E020C7B1210045F538 /* OrderConfirmDetailCell.xib in Resources */,
 				84A37FF71FAC12A8008FB7AF /* ActivityHomePopView.xib in Resources */,
 				CC0DFB461EA5B1090024841A /* MyCardCell.xib in Resources */,
 				CC0346281F3C4CDF001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */,
@@ -4840,6 +4903,7 @@
 				84A37FFB1FAC12A8008FB7AF /* QRCodePopView.xib in Resources */,
 				CC0DFB6D1EA5B1090024841A /* vcTransition1.json in Resources */,
 				CC0DFB731EA5B1090024841A /* NextViewCell.xib in Resources */,
+				84EBE9CE20C6970C0045F538 /* RechargeTypePopView.xib in Resources */,
 				CC0DFB781EA5B1090024841A /* main.js in Resources */,
 				CC0DFB7B1EA5B1090024841A /* UpdateDevIDViewController.xib in Resources */,
 				84D2B80B20A1B4A800142206 /* repay_circle_selt@2x.png in Resources */,
@@ -5030,6 +5094,7 @@
 				CC85C62C1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */,
 				846D58CD20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */,
 				CCB2513B20B7FC53007E20C6 /* SupermarketCell.swift in Sources */,
+				84EBE9DD20C7B1210045F538 /* OrderConfirmDetailCell.swift in Sources */,
 				84C61A091FA81F2A00626411 /* BankCardNameVCModules.m in Sources */,
 				84C619BF1FA815EB00626411 /* LoanPaymentDetailVCModule.m in Sources */,
 				CC1AC8E720931E1B009B5BD4 /* LoanListViewController.swift in Sources */,
@@ -5067,6 +5132,8 @@
 				CC8BB75A2090776100ADA647 /* BankCardAuthorizationModel.m in Sources */,
 				63ED33371B6B4593008B6085 /* BaseNavigationViewController.m in Sources */,
 				849459CA1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
+				84EBE9E520C7B75C0045F538 /* OrderConfirmBottomView.swift in Sources */,
+				84EBE9F220C7E9330045F538 /* OrderConfirmDetailInfoCell.swift in Sources */,
 				CC742DAC204E730700D645CC /* SubmitAccountParamModel.m in Sources */,
 				63FF484A1B6F036F009E384C /* MyViewController.m in Sources */,
 				847298371FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */,
@@ -5225,6 +5292,7 @@
 				63E1ECD51E1B8FAA0079A2F8 /* UIView+SDExtension.m in Sources */,
 				638C3F191CF2CB08000446A7 /* UIViewController+KNSemiModal.m in Sources */,
 				63C50E471E666FF40035EE4F /* Custom_BaseInfoExt.m in Sources */,
+				84EBE9E220C7B5E30045F538 /* HeaderInstructionsView.swift in Sources */,
 				849AC2601FF0DCA6005E435F /* FXD_ToWithdrawFundsFooterView.swift in Sources */,
 				63F254851E49A45900852CF1 /* HMScanner.m in Sources */,
 				84F87F431FC3CA3600F1C5CD /* IdentitiesOfTradeTableViewCell.swift in Sources */,
@@ -5241,6 +5309,7 @@
 				63FC24FD1D98F7E9006F58F3 /* UIPasteboard+YYText.m in Sources */,
 				63E1ECCF1E1B8FAA0079A2F8 /* TAAbstractDotView.m in Sources */,
 				636B1B581C23BB4100450358 /* GetMoneyHistoryBaseClass.m in Sources */,
+				84EBE9D320C78E560045F538 /* OrderConfirmationViewController.swift in Sources */,
 				CC80DFF9206B4124000F9BAC /* SortCell.swift in Sources */,
 				0F6AAF391C30D8950060F137 /* MyCardCell.m in Sources */,
 				635AB7901BE2FE2700C32919 /* ReturnMsgBaseClass.m in Sources */,
@@ -5357,7 +5426,9 @@
 				84E306CA1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
 				CCF97E6120C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */,
 				63A24C6B1BE063A90036E8EF /* UITableViewCell+Extend.m in Sources */,
+				84EBE9E820C7C9110045F538 /* OrderVerifyCodeView.swift in Sources */,
 				634831051CBCCF190005C4CD /* GetCareerInfoViewModel.m in Sources */,
+				84EBE9EB20C7E7C40045F538 /* OrderConfirmDetailViewController.swift in Sources */,
 				CC742D95204E46D800D645CC /* BankCardViewController.swift in Sources */,
 				639E88721CA1371800254216 /* LunchVCModules.m in Sources */,
 				8496D3161F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
@@ -5375,6 +5446,8 @@
 				84C61A0E1FA8241200626411 /* FXD_LaunchConfiguration.m in Sources */,
 				638A16F91E517D9F00AB8AB6 /* UIColor+Expanded.m in Sources */,
 				CC45E72F1FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
+				84EBE9D020C69E410045F538 /* PhoneRechargePopView.swift in Sources */,
+				84EBE9CA20C696FA0045F538 /* RechargeTypePopView.swift in Sources */,
 				63A24C681BE063A90036E8EF /* UIImage+Extend.m in Sources */,
 				CC742DA8204E704D00D645CC /* AccountModel.m in Sources */,
 				63A24C5E1BE063A90036E8EF /* NSDate+Extend.m in Sources */,
@@ -5467,6 +5540,7 @@
 				84CACBAB1FEA388000523BDA /* FXDAlertView.swift in Sources */,
 				84D1846F1F98962A00A0B25F /* RedPacketTicketModel.m in Sources */,
 				636B1B641C2790F400450358 /* RepayRecord.m in Sources */,
+				84EBE9D720C7900B0045F538 /* OrderConfirmInfoCell.swift in Sources */,
 				63FC24ED1D98F7E9006F58F3 /* YYTextContainerView.m in Sources */,
 				CC8BC9581FEA394C008E135E /* FXD_HomePageVCModules.m in Sources */,
 				63117FB71DFFC42600635BB3 /* FXD_AppShareConfig.m in Sources */,
@@ -5502,6 +5576,7 @@
 				84332C8A206CCD87009A9121 /* CameraManager.swift in Sources */,
 				846D58CE20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */,
 				CCB2513C20B7FC53007E20C6 /* SupermarketCell.swift in Sources */,
+				84EBE9DE20C7B1210045F538 /* OrderConfirmDetailCell.swift in Sources */,
 				842D9CEA206B832F0020C3C2 /* IDCardUploadParam.m in Sources */,
 				84C61A141FA828F000626411 /* FindPassViewController.m in Sources */,
 				CC1AC8E820931E1B009B5BD4 /* LoanListViewController.swift in Sources */,
@@ -5539,6 +5614,8 @@
 				CC8BB75B2090776100ADA647 /* BankCardAuthorizationModel.m in Sources */,
 				845017321ED7D051008055E4 /* LoginView.m in Sources */,
 				842C0B541ED5912B00366D11 /* LoginViewController.m in Sources */,
+				84EBE9E620C7B75C0045F538 /* OrderConfirmBottomView.swift in Sources */,
+				84EBE9F320C7E9330045F538 /* OrderConfirmDetailInfoCell.swift in Sources */,
 				8496D3171F5A9E3A00CCEE72 /* BankInfoViewModel.m in Sources */,
 				84BC53D41FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */,
 				CC0DF95A1EA5B1090024841A /* NSData+AES.m in Sources */,
@@ -5697,6 +5774,7 @@
 				CC4F062D207C557E0030A12A /* RecentViewController.swift in Sources */,
 				CC0DF9EC1EA5B1090024841A /* GetCustomerBaseViewModel.m in Sources */,
 				CC4F0635207C6B200030A12A /* QBBWitnDrawModel.m in Sources */,
+				84EBE9E320C7B5E30045F538 /* HeaderInstructionsView.swift in Sources */,
 				CC0DF9ED1EA5B1090024841A /* YYTextInput.m in Sources */,
 				CC0DF9F01EA5B1090024841A /* MyCardsViewController.m in Sources */,
 				CC0DF9F11EA5B1090024841A /* LOTAnimationCache.m in Sources */,
@@ -5713,6 +5791,7 @@
 				CC85C6291FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */,
 				CC5FC5AF1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift in Sources */,
 				840911A31F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */,
+				84EBE9D420C78E560045F538 /* OrderConfirmationViewController.swift in Sources */,
 				84ED5B6C1F4AC606004C0A59 /* SeniorCertificationView.m in Sources */,
 				CC0DF9FD1EA5B1090024841A /* Custom_BaseInfoExt.m in Sources */,
 				84C45C091FBC55860086E8DB /* DiscountTicketParam.m in Sources */,
@@ -5829,7 +5908,9 @@
 				CC80DFF7206B3DD1000F9BAC /* SortView.swift in Sources */,
 				CCF97E6220C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */,
 				CC0DFA731EA5B1090024841A /* CardInfo.m in Sources */,
+				84EBE9E920C7C9110045F538 /* OrderVerifyCodeView.swift in Sources */,
 				CC0DFA741EA5B1090024841A /* MobileCell.m in Sources */,
+				84EBE9EC20C7E7C40045F538 /* OrderConfirmDetailViewController.swift in Sources */,
 				CC0DFA751EA5B1090024841A /* CALayer+Compat.m in Sources */,
 				CC0DFA761EA5B1090024841A /* AboutMainViewController.m in Sources */,
 				842C4A071FE0D1F400D3D199 /* CommonViewModel.m in Sources */,
@@ -5847,6 +5928,8 @@
 				CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchVCModules.m in Sources */,
 				8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */,
+				84EBE9D120C69E410045F538 /* PhoneRechargePopView.swift in Sources */,
+				84EBE9CB20C696FA0045F538 /* RechargeTypePopView.swift in Sources */,
 				84192AA32079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */,
 				CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */,
 				CC0DFA851EA5B1090024841A /* YYTextRubyAnnotation.m in Sources */,
@@ -5939,6 +6022,7 @@
 				84E62D181FDA6D2500B7F870 /* SaveCustomerCareerInfoParam.m in Sources */,
 				84CACBAC1FEA388000523BDA /* FXDAlertView.swift in Sources */,
 				CC6C93EF1F4AB58C00587C74 /* TrackRect.swift in Sources */,
+				84EBE9D820C7900B0045F538 /* OrderConfirmInfoCell.swift in Sources */,
 				CC0DFAD81EA5B1090024841A /* FXD_AppShareConfig.m in Sources */,
 				CC8BC9591FEA394C008E135E /* FXD_HomePageVCModules.m in Sources */,
 				CC0DFADA1EA5B1090024841A /* NSString+Extend.m in Sources */,
