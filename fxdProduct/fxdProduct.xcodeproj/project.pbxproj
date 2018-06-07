@@ -609,6 +609,12 @@
 		84EBE9F320C7E9330045F538 /* OrderConfirmDetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9F020C7E9330045F538 /* OrderConfirmDetailInfoCell.swift */; };
 		84EBE9F420C7E9330045F538 /* OrderConfirmDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9F120C7E9330045F538 /* OrderConfirmDetailInfoCell.xib */; };
 		84EBE9F520C7E9330045F538 /* OrderConfirmDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9F120C7E9330045F538 /* OrderConfirmDetailInfoCell.xib */; };
+		84EBE9F720C8CE480045F538 /* PrepaidCardsInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9F620C8CE480045F538 /* PrepaidCardsInfoCell.swift */; };
+		84EBE9F820C8CE480045F538 /* PrepaidCardsInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9F620C8CE480045F538 /* PrepaidCardsInfoCell.swift */; };
+		84EBE9FB20C8D4C40045F538 /* CardNumAndPasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9F920C8D4C40045F538 /* CardNumAndPasswordCell.swift */; };
+		84EBE9FC20C8D4C50045F538 /* CardNumAndPasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBE9F920C8D4C40045F538 /* CardNumAndPasswordCell.swift */; };
+		84EBE9FD20C8D4C50045F538 /* CardNumAndPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9FA20C8D4C40045F538 /* CardNumAndPasswordCell.xib */; };
+		84EBE9FE20C8D4C50045F538 /* CardNumAndPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EBE9FA20C8D4C40045F538 /* CardNumAndPasswordCell.xib */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5B1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5C1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */; };
@@ -1146,15 +1152,12 @@
 		CCEFC6EF207F65430006D731 /* CollectionListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6ED207F65430006D731 /* CollectionListModel.m */; };
 		CCEFC6F2207F66100006D731 /* CollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6F1207F66100006D731 /* CollectionViewModel.m */; };
 		CCEFC6F3207F66100006D731 /* CollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6F1207F66100006D731 /* CollectionViewModel.m */; };
-		CCF97E5320C667BD009E7ECC /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5220C667BC009E7ECC /* YXMoviesRecordManager.swift */; };
-		CCF97E5420C667BD009E7ECC /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5220C667BC009E7ECC /* YXMoviesRecordManager.swift */; };
 		CCF97E5620C673B6009E7ECC /* RepaymentResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5520C673B6009E7ECC /* RepaymentResultViewController.swift */; };
 		CCF97E5720C673B6009E7ECC /* RepaymentResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5520C673B6009E7ECC /* RepaymentResultViewController.swift */; };
 		CCF97E5920C67FD3009E7ECC /* MyBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */; };
 		CCF97E5A20C67FD3009E7ECC /* MyBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */; };
 		CCF97E5C20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
 		CCF97E5D20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1966,6 +1969,9 @@
 		84EBE9EA20C7E7C40045F538 /* OrderConfirmDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmDetailViewController.swift; sourceTree = "<group>"; };
 		84EBE9F020C7E9330045F538 /* OrderConfirmDetailInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmDetailInfoCell.swift; sourceTree = "<group>"; };
 		84EBE9F120C7E9330045F538 /* OrderConfirmDetailInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderConfirmDetailInfoCell.xib; sourceTree = "<group>"; };
+		84EBE9F620C8CE480045F538 /* PrepaidCardsInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepaidCardsInfoCell.swift; sourceTree = "<group>"; };
+		84EBE9F920C8D4C40045F538 /* CardNumAndPasswordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardNumAndPasswordCell.swift; sourceTree = "<group>"; };
+		84EBE9FA20C8D4C40045F538 /* CardNumAndPasswordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardNumAndPasswordCell.xib; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
 		84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_finish@2x.png"; sourceTree = "<group>"; };
 		84ED5B561F4AB9E7004C0A59 /* mx_loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_loading@2x.png"; sourceTree = "<group>"; };
@@ -2154,7 +2160,6 @@
 		CCEFC6ED207F65430006D731 /* CollectionListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionListModel.m; sourceTree = "<group>"; };
 		CCEFC6F0207F66100006D731 /* CollectionViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewModel.h; sourceTree = "<group>"; };
 		CCEFC6F1207F66100006D731 /* CollectionViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewModel.m; sourceTree = "<group>"; };
-		CCF97E5220C667BC009E7ECC /* YXMoviesRecordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXMoviesRecordManager.swift; sourceTree = "<group>"; };
 		CCF97E5520C673B6009E7ECC /* RepaymentResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepaymentResultViewController.swift; sourceTree = "<group>"; };
 		CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillDetailViewController.swift; sourceTree = "<group>"; };
 		CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillCell.swift; sourceTree = "<group>"; };
@@ -4423,6 +4428,9 @@
 				84EBE9E720C7C9110045F538 /* OrderVerifyCodeView.swift */,
 				84EBE9F020C7E9330045F538 /* OrderConfirmDetailInfoCell.swift */,
 				84EBE9F120C7E9330045F538 /* OrderConfirmDetailInfoCell.xib */,
+				84EBE9F620C8CE480045F538 /* PrepaidCardsInfoCell.swift */,
+				84EBE9F920C8D4C40045F538 /* CardNumAndPasswordCell.swift */,
+				84EBE9FA20C8D4C40045F538 /* CardNumAndPasswordCell.xib */,
 			);
 			path = PhonerechargeCardService;
 			sourceTree = "<group>";
@@ -4807,6 +4815,7 @@
 				CC0346271F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */,
 				0F6AAF3A1C30D8950060F137 /* MyCardCell.xib in Resources */,
 				636FF3491BA27C9800BB5528 /* Address.plist in Resources */,
+				84EBE9FD20C8D4C50045F538 /* CardNumAndPasswordCell.xib in Resources */,
 				63F254841E49A45900852CF1 /* HMScanner.bundle in Resources */,
 				63553AD91E5D2A4200B2C1FF /* DataDisplayCell.xib in Resources */,
 				633DF78A1BDE22BF00A3998D /* MoreViewController.xib in Resources */,
@@ -4887,6 +4896,7 @@
 				84A37FF71FAC12A8008FB7AF /* ActivityHomePopView.xib in Resources */,
 				CC0DFB461EA5B1090024841A /* MyCardCell.xib in Resources */,
 				CC0346281F3C4CDF001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */,
+				84EBE9FE20C8D4C50045F538 /* CardNumAndPasswordCell.xib in Resources */,
 				CC0DFB4A1EA5B1090024841A /* Address.plist in Resources */,
 				CC0DFB521EA5B1090024841A /* HMScanner.bundle in Resources */,
 				842C0B5A1ED599DE00366D11 /* LoginViewController.xib in Resources */,
@@ -5164,6 +5174,7 @@
 				CC73368F1FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */,
 				633DAD301C3E59A0000DA852 /* LoginViewModel.m in Sources */,
 				CC742DC720526FD900D645CC /* HG_Manager.m in Sources */,
+				84EBE9F720C8CE480045F538 /* PrepaidCardsInfoCell.swift in Sources */,
 				63D43EF81D41F76D0076AC7F /* YYKVStorage.m in Sources */,
 				849AC2571FF09721005E435F /* HighRankingAuthTableViewCell.swift in Sources */,
 				84A380301FAC40A2008FB7AF /* UserDataEvaluationVCModules.swift in Sources */,
@@ -5484,6 +5495,7 @@
 				CCA1819C1FC7F0320094DA58 /* WithdrawCashInfoModel.m in Sources */,
 				638A17061E517D9F00AB8AB6 /* LOTShapeRectangle.m in Sources */,
 				63145AF11CA8DBBD00D04ED8 /* RegionBaseClass.m in Sources */,
+				84EBE9FB20C8D4C40045F538 /* CardNumAndPasswordCell.swift in Sources */,
 				CCA181A31FC80E1E0094DA58 /* NonePageView.swift in Sources */,
 				84E810FB2091A7F5009226B5 /* ChooseCreditDateView.swift in Sources */,
 				1AEFFA7C1C50BF72003936CE /* loanRecordCell.m in Sources */,
@@ -5645,6 +5657,7 @@
 				CC0DF9701EA5B1090024841A /* BaseNavigationViewController.m in Sources */,
 				CC0DF9711EA5B1090024841A /* MyViewController.m in Sources */,
 				CC0DF9751EA5B1090024841A /* LOTRectShapeLayer.m in Sources */,
+				84EBE9F820C8CE480045F538 /* PrepaidCardsInfoCell.swift in Sources */,
 				CC0DF9771EA5B1090024841A /* IdeaBackViewController.m in Sources */,
 				CC0DF9781EA5B1090024841A /* FXDWebViewController.m in Sources */,
 				CCA181A11FC7F1220094DA58 /* CashViewModel.m in Sources */,
@@ -5965,6 +5978,7 @@
 				CC742DB7204FB9C700D645CC /* BankListCell.swift in Sources */,
 				840DFF701FE27DEC00148DEE /* InvationViewModel.m in Sources */,
 				CC0DFAA31EA5B1090024841A /* YYTextView.m in Sources */,
+				84EBE9FC20C8D4C50045F538 /* CardNumAndPasswordCell.swift in Sources */,
 				CC0DFAA51EA5B1090024841A /* CheckUtils.m in Sources */,
 				CCEFC6E6207DEE480006D731 /* HotRecommendModel.m in Sources */,
 				84E810FC2091A7F5009226B5 /* ChooseCreditDateView.swift in Sources */,
