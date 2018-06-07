@@ -24,4 +24,8 @@
 
 - (void)popBack;
 
+- (void)addCloseItem;
+
+- (void)popBack;
+
 @end

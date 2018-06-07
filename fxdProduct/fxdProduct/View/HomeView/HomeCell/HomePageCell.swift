@@ -93,6 +93,8 @@ extension HomePageCell {
     //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中 9 延期中 10 延期失败 11合规标的处理中 12测评中 13提款失败 14逾期 15还款失败
     //1:资料测评前 2:资料测评后 可进件 3:资料测评后:两不可申请（评分不足且高级认证未填完整） 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 5:待提款 6:放款中 7:待还款 8:还款中 9 延期中 10 延期失败 11合规标的处理中 12测评中 13提款失败 14逾期 15还款失败 16重新测评
     //默认的cell
+    
+    //1:资料测评前 2:资料测评后 可进件 4:资料测评后:两不可申请（其他原因，续贷规则不通过） 6:放款中 7:待还款 8:还款中
     fileprivate func setCellType(type : String){
 
         for view in self.subviews {
@@ -101,21 +103,21 @@ extension HomePageCell {
 
         let type = Int(type)
         switch type {
-        case 1?:
-            defaultCell()
-        case 2?:
-            quotaCell()
+//        case 1?:
+//            defaultCell()
+//        case 2?:
+//            quotaCell()
         case 3?,4?:
             refuseView()
         case 5?:
             withdrawMoneyImmediatelyView()
         case 6?,8?,9?,12?,15?,10?,13?,11?:
             loanProcessCell()
-        case 7?,14?:
+        case 14?:
             repayImmediatelyView()
         case 16?:
             reassessCell()
-        case 17?:
+        case 1?,2?,7?:
             PhonerechargeCardServiceCell()
         case .none:
             break

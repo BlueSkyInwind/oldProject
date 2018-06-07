@@ -167,6 +167,8 @@
 @property (nonatomic, strong)NSString<Optional> *userStatus;
 //进件id
 @property (nonatomic, strong)NSString<Optional> *applicationId;
+//首页各个状态对应金额
+@property (nonatomic, strong)NSString<Optional> *amount;
 //借款期数
 @property (nonatomic, strong)NSString<Optional> *periods;
 //中间状态（测评中、放款中、还款中） 和失败状态（放款失败、还款失败）数据

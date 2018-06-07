@@ -1118,15 +1118,14 @@
 		CCEFC6EF207F65430006D731 /* CollectionListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6ED207F65430006D731 /* CollectionListModel.m */; };
 		CCEFC6F2207F66100006D731 /* CollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6F1207F66100006D731 /* CollectionViewModel.m */; };
 		CCEFC6F3207F66100006D731 /* CollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEFC6F1207F66100006D731 /* CollectionViewModel.m */; };
-		CCF97E5320C667BD009E7ECC /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5220C667BC009E7ECC /* YXMoviesRecordManager.swift */; };
-		CCF97E5420C667BD009E7ECC /* YXMoviesRecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5220C667BC009E7ECC /* YXMoviesRecordManager.swift */; };
 		CCF97E5620C673B6009E7ECC /* RepaymentResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5520C673B6009E7ECC /* RepaymentResultViewController.swift */; };
 		CCF97E5720C673B6009E7ECC /* RepaymentResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5520C673B6009E7ECC /* RepaymentResultViewController.swift */; };
 		CCF97E5920C67FD3009E7ECC /* MyBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */; };
 		CCF97E5A20C67FD3009E7ECC /* MyBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */; };
 		CCF97E5C20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
 		CCF97E5D20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
-
+		CCF97E6120C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */; };
+		CCF97E6220C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2112,10 +2111,10 @@
 		CCEFC6ED207F65430006D731 /* CollectionListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionListModel.m; sourceTree = "<group>"; };
 		CCEFC6F0207F66100006D731 /* CollectionViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewModel.h; sourceTree = "<group>"; };
 		CCEFC6F1207F66100006D731 /* CollectionViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewModel.m; sourceTree = "<group>"; };
-		CCF97E5220C667BC009E7ECC /* YXMoviesRecordManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXMoviesRecordManager.swift; sourceTree = "<group>"; };
 		CCF97E5520C673B6009E7ECC /* RepaymentResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepaymentResultViewController.swift; sourceTree = "<group>"; };
 		CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillDetailViewController.swift; sourceTree = "<group>"; };
 		CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillCell.swift; sourceTree = "<group>"; };
+		CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonerechargeCardNoneView.swift; sourceTree = "<group>"; };
 		DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64833171B0C1433C0C2116C /* Pods-fxd-fxdProductDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProductDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev.release.xcconfig"; sourceTree = "<group>"; };
 		EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
@@ -4367,6 +4366,7 @@
 				CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */,
 				8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */,
 				84EBE9C620C692FB0045F538 /* RechargeBottomView.swift */,
+				CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */,
 			);
 			path = PhonerechargeCardService;
 			sourceTree = "<group>";
@@ -5355,6 +5355,7 @@
 				63D43EF71D41F76D0076AC7F /* YYDiskCache.m in Sources */,
 				63FC24EE1D98F7E9006F58F3 /* YYTextDebugOption.m in Sources */,
 				84E306CA1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
+				CCF97E6120C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */,
 				63A24C6B1BE063A90036E8EF /* UITableViewCell+Extend.m in Sources */,
 				634831051CBCCF190005C4CD /* GetCareerInfoViewModel.m in Sources */,
 				CC742D95204E46D800D645CC /* BankCardViewController.swift in Sources */,
@@ -5826,6 +5827,7 @@
 				CC742DA4204E6E1A00D645CC /* ComplianceViewModel.m in Sources */,
 				CC0DFA721EA5B1090024841A /* LOTStrokeShapeLayer.m in Sources */,
 				CC80DFF7206B3DD1000F9BAC /* SortView.swift in Sources */,
+				CCF97E6220C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */,
 				CC0DFA731EA5B1090024841A /* CardInfo.m in Sources */,
 				CC0DFA741EA5B1090024841A /* MobileCell.m in Sources */,
 				CC0DFA751EA5B1090024841A /* CALayer+Compat.m in Sources */,

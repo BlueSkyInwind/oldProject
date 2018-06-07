@@ -13,6 +13,7 @@ import UIKit
     case intermediate
     case failure
     case success
+    case submittedSuccessfully
     
 }
 
@@ -22,7 +23,7 @@ class RepaymentResultViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addBackItem()
+        addCloseItem()
         switch state {
         case .intermediate?:
             self.title = "还款确认中"
@@ -30,6 +31,8 @@ class RepaymentResultViewController: BaseViewController {
             self.title = "还款失败"
         case .success?:
             self.title = "还款成功"
+        case .submittedSuccessfully?:
+            self.title = "提交成功"
         default:
             break
         }
@@ -38,13 +41,15 @@ class RepaymentResultViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
 
+
     fileprivate func resultView(){
         
         var imageStr = ""
         var tipStr = ""
+        var btnTitle = "返回"
         switch state {
         case .intermediate?:
-            imageStr = "success"
+            imageStr = "repay_icon"
             tipStr = "还款结果确认中"
         case .failure?:
             imageStr = "fail"
@@ -52,6 +57,10 @@ class RepaymentResultViewController: BaseViewController {
         case .success?:
             imageStr = "success"
             tipStr = "还款成功"
+        case .submittedSuccessfully?:
+            imageStr = "success"
+            tipStr = "您的订单已提交成功成功"
+            btnTitle = "查看订单"
         default:
             break
         }
@@ -74,7 +83,7 @@ class RepaymentResultViewController: BaseViewController {
         }
         
         let backBtn = UIButton()
-        backBtn.setTitle("返回", for: .normal)
+        backBtn.setTitle(btnTitle, for: .normal)
         backBtn.setTitleColor(UIColor.white, for: .normal)
         backBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         backBtn.setBackgroundImage(UIImage.init(named: "applayBtnImage"), for: .normal)
@@ -90,7 +99,33 @@ class RepaymentResultViewController: BaseViewController {
     
     @objc fileprivate func backBtnClick(){
         
-        self.navigationController?.popViewController(animated: true)
+        back()
+    }
+    
+    override func popBack(){
+        
+        back()
+    }
+    
+    func back(){
+        
+        switch state {
+        case .intermediate?,.success?:
+            
+            for  vc in self.rt_navigationController.rt_viewControllers {
+                if vc.isKind(of: MyBillViewController.self) {
+                    self.navigationController?.popToViewController(vc, animated: true)
+                    return
+                }
+            }
+            
+        case .failure?:
+            self.navigationController?.popViewController(animated: true)
+        case .submittedSuccessfully?:
+            break
+        default:
+            break
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
