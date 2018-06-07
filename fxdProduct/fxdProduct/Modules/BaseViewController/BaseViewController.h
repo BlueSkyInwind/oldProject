@@ -24,8 +24,10 @@
 
 - (void)popBack;
 
-
 -(void)setFailView;
 -(void)removeFailView;
 -(void)LoadFailureLoadRefreshButtonClick;
+- (void)addCloseItem;
+
+
 @end

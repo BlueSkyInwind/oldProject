@@ -539,7 +539,7 @@
         return 0;
     }
     
-    if ([_homeProductList.flag isEqualToString:@"17"]) {
+    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"2"] ||[_homeProductList.flag isEqualToString:@"7"]) {
         
         return 3;
     }
@@ -570,12 +570,14 @@
                     
                     return _k_h-_k_w*0.44-113-113;
                     break;
-                case 17:
+                case 1:
+                case 2:
+                case 7:
                     return 130;
                     break;
-                case 7:
-                    return _k_h-_k_w*0.44-113-40 + (_protocolArray.count - 1)*30;
-                    break;
+//                case 7:
+//                    return _k_h-_k_w*0.44-113-40 + (_protocolArray.count - 1)*30;
+//                    break;
                 default:
                     return 85*_homeProductList.hotRecommend.count+30;
                     break;
@@ -668,7 +670,8 @@
                 case 13:
                 case 14:
                 case 15:
-                case 17:
+                case 1:
+                case 2:
                 {
                     HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
                     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -680,8 +683,8 @@
                         
                         homeCell.type = _homeProductList.flag;
                         homeCell.protocolArray = _protocolArray;
-                        homeCell.titleLabel.text = @"最高额度2000元";
-                        [homeCell.quotaBtn setTitle:@"极速申请" forState:UIControlStateNormal];
+                        homeCell.titleLabel.text = [NSString stringWithFormat:@"最高额度%@",_homeProductList.amount];
+                        [homeCell.quotaBtn setTitle:_homeProductList.buttonText forState:UIControlStateNormal];
                         if (![homeCell.titleLabel.text isEqualToString:@""]) {
                             NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:homeCell.titleLabel.text];
                             [attriStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,4)];
@@ -1146,6 +1149,7 @@
     
 }
 
+#pragma mark 超市按钮
 -(void)loanClick{
     
     LoanListViewController *controller = [[LoanListViewController alloc]init];
@@ -1157,6 +1161,7 @@
 
 }
 
+#pragma mark 游戏按钮
 -(void)gameBtnClick{
     
     LoanListViewController *controller = [[LoanListViewController alloc]init];
@@ -1168,6 +1173,7 @@
 
 }
 
+#pragma mark 旅游按钮
 -(void)tourismBtnClcik{
     
     LoanListViewController *controller = [[LoanListViewController alloc]init];
@@ -1252,7 +1258,51 @@
 #pragma mark 极速申请 -- 手机卡充值
 -(void)quotaBtnClick{
     
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"极速申请"];
+    switch (_homeProductList.flag.integerValue) {
+        case 1:
+            if ([FXD_Utility sharedUtility].loginFlage) {
+                UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
+                [self.navigationController pushViewController:controller animated:true];
+            } else {
+                [self presentLoginVC:self];
+            }
+            
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"资料测评前"];
+            break;
+        case 2:
+        {
+            ShoppingMallModules *controller = [[ShoppingMallModules alloc]init];
+            [self.navigationController pushViewController:controller animated:true];
+        }
+            
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@":资料测评后 可进件"];
+            break;
+        case 7:
+            switch (_homeProductList.platfromType.integerValue) {
+                case 0:
+                {
+                    LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+                    controller.applicationId = _homeProductList.applicationId;
+                    [self.navigationController pushViewController:controller animated:true];
+                }
+//                    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"发薪贷"];
+                    break;
+                case 16:
+                {
+                    MyBillViewController *controller = [[MyBillViewController alloc]init];
+                    [self.navigationController pushViewController:controller animated:true];
+                }
+                    
+//                    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"憨分"];
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

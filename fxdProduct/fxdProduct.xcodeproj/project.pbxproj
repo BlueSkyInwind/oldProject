@@ -1166,6 +1166,9 @@
 		CCF97E5A20C67FD3009E7ECC /* MyBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */; };
 		CCF97E5C20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
 		CCF97E5D20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
+
+		CCF97E6120C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */; };
+		CCF97E6220C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2179,6 +2182,7 @@
 		CCF97E5520C673B6009E7ECC /* RepaymentResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepaymentResultViewController.swift; sourceTree = "<group>"; };
 		CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillDetailViewController.swift; sourceTree = "<group>"; };
 		CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillCell.swift; sourceTree = "<group>"; };
+		CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonerechargeCardNoneView.swift; sourceTree = "<group>"; };
 		DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64833171B0C1433C0C2116C /* Pods-fxd-fxdProductDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProductDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev.release.xcconfig"; sourceTree = "<group>"; };
 		EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
@@ -4448,6 +4452,7 @@
 				CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */,
 				84EBE9C620C692FB0045F538 /* RechargeBottomView.swift */,
 				8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */,
+				CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */,
 				84EBE9C920C696FA0045F538 /* RechargeTypePopView.swift */,
 				84EBE9CC20C6970C0045F538 /* RechargeTypePopView.xib */,
 				84EBE9CF20C69E410045F538 /* PhoneRechargePopView.swift */,
@@ -5470,6 +5475,7 @@
 				63D43EF71D41F76D0076AC7F /* YYDiskCache.m in Sources */,
 				63FC24EE1D98F7E9006F58F3 /* YYTextDebugOption.m in Sources */,
 				84E306CA1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
+				CCF97E6120C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */,
 				63A24C6B1BE063A90036E8EF /* UITableViewCell+Extend.m in Sources */,
 				84EBE9E820C7C9110045F538 /* OrderVerifyCodeView.swift in Sources */,
 				634831051CBCCF190005C4CD /* GetCareerInfoViewModel.m in Sources */,
@@ -5957,6 +5963,7 @@
 				CC742DA4204E6E1A00D645CC /* ComplianceViewModel.m in Sources */,
 				CC0DFA721EA5B1090024841A /* LOTStrokeShapeLayer.m in Sources */,
 				CC80DFF7206B3DD1000F9BAC /* SortView.swift in Sources */,
+				CCF97E6220C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */,
 				CC0DFA731EA5B1090024841A /* CardInfo.m in Sources */,
 				84EBE9E920C7C9110045F538 /* OrderVerifyCodeView.swift in Sources */,
 				CC0DFA741EA5B1090024841A /* MobileCell.m in Sources */,
