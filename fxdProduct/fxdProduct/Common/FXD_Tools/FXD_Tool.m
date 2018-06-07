@@ -86,7 +86,14 @@ static FXD_Tool * shareTool = nil;
     NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return jsonStr;
 }
-
++(void)MakePhoneCall:(NSString *)number{
+    NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",number]];
+    if (@available(iOS 10.0, *)) {
+        [[UIApplication sharedApplication] openURL:telURL options:@{} completionHandler:nil];
+    }else{
+        [[UIApplication sharedApplication] openURL:telURL];
+    }
+}
 
 #pragma mark- 时间处理
 

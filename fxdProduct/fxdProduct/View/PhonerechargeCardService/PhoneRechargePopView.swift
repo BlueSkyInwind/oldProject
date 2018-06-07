@@ -10,7 +10,7 @@ import UIKit
 
 
 typealias RechargePopClickEvent = () -> Void
-class PhoneRechargePopView: UIView {
+class PhoneRechargePopView: UIView,UIGestureRecognizerDelegate {
     
     @objc var  titleLabel:UILabel?
     @objc var  contentLabel:UILabel?
@@ -32,8 +32,16 @@ class PhoneRechargePopView: UIView {
         self.init(frame: UIScreen.main.bounds)
         self.backGroundView?.removeFromSuperview()
         self.hotlinePopView?.isHidden = false
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(backgroundTap))
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(backgroundTap(tap:)))
+        tap.delegate = self as UIGestureRecognizerDelegate
         self.addGestureRecognizer(tap)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if (touch.view?.isDescendant(of: self.hotlinePopView!))!{
+            return false
+        }
+        return true
     }
     
     ///根据提示框内容自适应高度
@@ -63,7 +71,7 @@ class PhoneRechargePopView: UIView {
         }
     }
     
-    @objc func backgroundTap() {
+    @objc func backgroundTap(tap:UITapGestureRecognizer) {
         if popClick  != nil {
             popClick!()
         }

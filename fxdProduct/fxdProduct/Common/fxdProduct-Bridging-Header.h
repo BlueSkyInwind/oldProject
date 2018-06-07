@@ -87,4 +87,10 @@
 #import "BankCardNameVCModules.h"
 #import "CompQueryViewModel.h"
 #import "CompQueryModel.h"
+#import "PhonerechargeCardServiceViewModel.h"
+#import "PhoneCardListModel.h"
+#import "UIButton+YXTool.h"
+#import "UITableViewCell+YXTool.h"
+#import "UIView+YXTool.h"
+
 #endif /* fxdProduct_Bridging_Header_h */

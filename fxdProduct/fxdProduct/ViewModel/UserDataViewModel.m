@@ -359,15 +359,7 @@
         }
     }];
     
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@",@"http://192.168.8.200:8200/user/auth/userRegisterVideoVerify"] parameters:videoBase64Str finished:^(EnumServerStatus status, id object) {
-//        if (self.returnBlock) {
-//            self.returnBlock(object);
-//        }
-//    } failure:^(EnumServerStatus status, id object) {
-//        if (self.faileBlock) {
-//            self.faileBlock();
-//        }
-//    }];
+
 }
 
 #pragma mark - 用户身份证上传

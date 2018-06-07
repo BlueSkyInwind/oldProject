@@ -19,11 +19,7 @@
                         county:(NSString *)county
 {
     
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTWithURL:[NSString stringWithFormat:@"%@%@",_main_url,_saveCustomerBase_url] parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//        self.returnBlock(object);
-//    } failure:^(EnumServerStatus status, id object) {
-//        [self faileBlock];
-//    }];
+
     
     SaveUserInfoParam * saveUserInfoP = [[SaveUserInfoParam alloc]init];
     saveUserInfoP.customer_name_ = customer_name;

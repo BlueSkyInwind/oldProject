@@ -24,4 +24,8 @@
 
 - (void)popBack;
 
+
+-(void)setFailView;
+-(void)removeFailView;
+-(void)LoadFailureLoadRefreshButtonClick;
 @end

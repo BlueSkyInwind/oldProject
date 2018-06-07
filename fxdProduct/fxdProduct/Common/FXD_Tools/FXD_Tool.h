@@ -37,7 +37,7 @@
 + (NSString *)dateToFormatString:(NSDate *)date;
 //判断一个对象是否有用某个属性
 + (BOOL)getVariableWithClass:(Class)myClass varName:(NSString *)name;
-
++(void)MakePhoneCall:(NSString *)number;
 + (UInt64)getNowTimeMS;
 //计算时间
 + (NSString *)countDate:(NSString *)date and:(int)addDays;
@@ -120,4 +120,7 @@
 - (BOOL)stringContainsEmoji:(NSString *)string;
 - (BOOL)hasEmoji:(NSString*)string;
 -(UIImage *)imageWithColor:(UIColor *)color;
+
+
+
 @end

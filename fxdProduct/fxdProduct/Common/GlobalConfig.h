@@ -128,6 +128,9 @@ UIKIT_EXTERN NSString * const       _memberRefund_url;                    //会�
 UIKIT_EXTERN NSString * const       _memberRecharge_url;                    //会员扣费
 
 
+#pragma mark - 手机
+UIKIT_EXTERN NSString * const       _rechargeCardsList_url;                    //手机卡列表
+
 #pragma mark - 视频认证接口
 UIKIT_EXTERN NSString * const       _VideoVerify_url;                    //获取视频认证信息
 UIKIT_EXTERN NSString * const       _uploadVideoVideo_url;                    //上传视频

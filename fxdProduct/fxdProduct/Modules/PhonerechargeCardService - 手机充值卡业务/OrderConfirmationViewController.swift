@@ -85,7 +85,6 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
         }
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -112,7 +111,7 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             var cell = tableView.dequeueReusableCell(withIdentifier: "OrderConfirmInfoCell", for: indexPath) as! OrderConfirmInfoCell
-    
+            cell.addShadow()
             switch cardType {
             case .moblieCard?:
                 cell.orderTypeIcon.image = UIImage.init(named: "moblie_Icon")
@@ -129,6 +128,7 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
             return cell
         }else{
             var cell = tableView.dequeueReusableCell(withIdentifier: "OrderConfirmDetailCell", for: indexPath) as! OrderConfirmDetailCell
+            cell.addShadow()
             return cell
         }
     }
