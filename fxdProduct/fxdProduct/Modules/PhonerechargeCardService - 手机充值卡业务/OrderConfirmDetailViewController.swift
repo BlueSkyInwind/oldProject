@@ -126,12 +126,12 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
 
         if section == 1 {
             let header = UIView.init()
-            header.backgroundColor = "F2F2F2".uiColor()
+            header.backgroundColor = UIColor.clear
             return header
         }else {
             let headerView = HeaderInstructionsView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 32))
             headerView.instructionsLabel?.text = "请妥善保管您的卡密，因泄露第三方造成的损失需用户承担"
-            headerView.backgroundColor = "F2F2F2".uiColor()
+            headerView.backgroundColor = UIColor.clear
             return headerView
         }
     }

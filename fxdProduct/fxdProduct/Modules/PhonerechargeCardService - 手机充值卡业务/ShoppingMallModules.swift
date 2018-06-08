@@ -115,22 +115,23 @@ class ShoppingMallModules: BaseViewController,UITableViewDelegate,UITableViewDat
         let listModel = cardInfos[indexPath.row]
         switch listModel.operators {
         case "0":
-            pushOrderConfirmationVC(.telecomCard)
+            pushOrderConfirmationVC(.telecomCard, listModel.ofpayProductNumber)
             break
         case "1":
-            pushOrderConfirmationVC(.moblieCard)
+            pushOrderConfirmationVC(.moblieCard, listModel.ofpayProductNumber)
             break
         case "2":
-            pushOrderConfirmationVC(.unicomCard)
+            pushOrderConfirmationVC(.unicomCard, listModel.ofpayProductNumber)
             break
         default:
             break
         }
     }
     
-    func pushOrderConfirmationVC(_ cardType:PhoneCardType)  {
+    func pushOrderConfirmationVC(_ cardType:PhoneCardType,_ cardOrderId:String)  {
         let orderVC = OrderConfirmationViewController.init()
         orderVC.cardType = cardType
+        orderVC.cardOrderId =  cardOrderId
         self.navigationController?.pushViewController(orderVC, animated: true)
     }
     

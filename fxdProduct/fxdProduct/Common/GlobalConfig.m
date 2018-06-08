@@ -277,6 +277,10 @@ NSString * const    _handataSummary_url               =    @"handata/summary";
 NSString * const    _rechargeCardsList_url               =    @"product/rechargeCards";
 //查询手机卡订单列表
 NSString * const    _orderList_url               =    @"order/contractStaging/selectOrdersByUserId";
+//订单确认
+NSString * const    _orderConfirmInfo_url               =    @"handata/confirm";
+//订单确认check
+NSString * const    _orderConfirmRequest_url               =    @"card/stock/check";
 
 #pragma mark - 合规接口
 
@@ -344,6 +348,8 @@ NSString * const  CODE_CHANGEDEVID   =    @"MSG_CHANGE_DEVICE_"; ///设备号更
 NSString * const  CODE_LOGIN         =    @"MSG_LOGIN_";   ///登陆验证码
 NSString * const  CODE_DRAW          =    @"MSG_DRAW_"; ///提款
 NSString * const  CODE_ADDCARD       =    @"MSG_BANKCARD_AUDIT_"; //新增卡
+NSString * const  CODE_ORDER_CONFIRM       =    @"MSG_CARD_REQUEST"; //订单确认
+
 
 #pragma Mark - 产品类型
 

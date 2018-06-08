@@ -42,6 +42,10 @@
             flag = CODE_TRADEPASSWORD;
             model.flag = CODE_TRADEPASSWORD;
             break;
+        case ORDERCONFIRM_CODE:
+            flag = CODE_ORDER_CONFIRM;
+            model.flag = CODE_ORDER_CONFIRM;
+            break;
         default:
             flag = @"";
             break;

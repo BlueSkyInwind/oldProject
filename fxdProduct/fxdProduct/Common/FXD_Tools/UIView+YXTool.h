@@ -10,5 +10,5 @@
 
 @interface UIView (YXTool)
 - (void)addShadow;
-
+- (void)setCornerRadius:(CGFloat)radius withShadow:(BOOL)shadow withOpacity:(CGFloat)opacity;
 @end

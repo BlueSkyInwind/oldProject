@@ -16,3 +16,9 @@
 
 
 @end
+
+@implementation PhoneCardOrderModel
+
+
+
+@end

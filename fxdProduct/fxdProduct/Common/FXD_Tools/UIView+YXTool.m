@@ -13,9 +13,20 @@
 - (void)addShadow{
     self.layer.shadowPath =[UIBezierPath bezierPathWithRect:self.bounds].CGPath;
     self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-    self.layer.shadowOpacity = 0.6f;
-    self.layer.shadowOffset = CGSizeMake(7.0, 7.0f);
-    self.layer.shadowRadius = 7.0f;
+    self.layer.shadowOpacity = 1.0f;
+    self.layer.shadowOffset = CGSizeMake(0, 0);
+    self.layer.shadowRadius = 5.0f;
 }
-
+- (void)setCornerRadius:(CGFloat)radius withShadow:(BOOL)shadow withOpacity:(CGFloat)opacity {
+    self.layer.cornerRadius = radius;
+    if (shadow) {
+        self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        self.layer.shadowOpacity = opacity;
+        self.layer.shadowOffset = CGSizeMake(0, 1);
+        self.layer.shadowRadius = 2;
+        self.layer.shouldRasterize = NO;
+        self.layer.shadowPath = [[UIBezierPath bezierPathWithRoundedRect:[self bounds] cornerRadius:radius] CGPath];
+    }
+    self.layer.masksToBounds = !shadow;
+}
 @end

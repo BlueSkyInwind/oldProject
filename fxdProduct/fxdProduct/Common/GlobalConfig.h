@@ -129,7 +129,11 @@ UIKIT_EXTERN NSString * const       _memberRecharge_url;                    //�
 
 
 #pragma mark - 手机
+
 UIKIT_EXTERN NSString * const       _rechargeCardsList_url;                    //手机卡列表
+UIKIT_EXTERN NSString * const       _orderConfirmInfo_url;                    //订单确认
+UIKIT_EXTERN NSString * const       _orderConfirmRequest_url;                    //订单请求
+
 
 #pragma mark - 视频认证接口
 UIKIT_EXTERN NSString * const       _VideoVerify_url;                    //获取视频认证信息
@@ -207,6 +211,7 @@ UIKIT_EXTERN NSString * const   CODE_LOGIN;              ///登陆验证码
 UIKIT_EXTERN NSString * const   CODE_DRAW;              ///提款
 UIKIT_EXTERN NSString * const   CODE_ADDCARD;          //新增卡
 UIKIT_EXTERN NSString * const   CODE_TRADEPASSWORD;                             ///修改密码验证码
+UIKIT_EXTERN NSString * const   CODE_ORDER_CONFIRM;                             ///订单确认
 
 UIKIT_EXTERN NSString * const SalaryLoan;          //工薪贷平台
 UIKIT_EXTERN NSString * const RapidLoan;         //急速贷平台

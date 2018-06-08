@@ -68,6 +68,10 @@ class OrderVerifyCodeView: UIView {
         orderVerifyCodeView = nil
     }
     
+    class func againCreateVerifyTimer()  {
+        orderVerifyCodeView?.createVerifyTimer()
+    }
+    
     class func cleanUpPayPasswordView()  {
         orderVerifyCodeView?.payPasswordInputView?.cleanUpTheData()
     }
