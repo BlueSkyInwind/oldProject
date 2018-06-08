@@ -11,12 +11,10 @@ import Foundation
 
 extension String {
     
-    
     /// 将十六进制颜色转换为UIColor
     func uiColor() -> UIColor {
         // 存储转换后的数值
         var red:UInt32 = 0, green:UInt32 = 0, blue:UInt32 = 0
-        
         // 分别转换进行转换
         Scanner(string: self[0..<2]).scanHexInt32(&red)
         

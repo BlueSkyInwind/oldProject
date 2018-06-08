@@ -120,15 +120,11 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row{
         case 0:
-//            if userThirdPartCM?.faceIdentity == "2" || userThirdPartCM?.faceIdentity == "3"{
-//                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.faceIdentityDesc)
-//                return;
-//            }
-            let faceIdentiCreditVC  = UserFaceIdentiVCModules.init()
-            faceIdentiCreditVC.verifyStatus = userThirdPartCM?.faceIdentity
-            self.navigationController?.pushViewController(faceIdentiCreditVC, animated: true)
-            faceIdentiCreditVC.identifyResultStatus = { [weak self] (status) -> () in
+            if userThirdPartCM?.faceIdentity == "2" || userThirdPartCM?.faceIdentity == "3"{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: userThirdPartCM?.faceIdentityDesc)
+                return;
             }
+             startFaceDetection()
             break
         case 1:
 
@@ -225,7 +221,36 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
         userDataVM.theInternetbankUpload(taskid)
     }
     
-    
+    func startFaceDetection() -> Void {
+        obtainVideoVerifyInfo { (isSuccess, content,time) in
+            guard !isSuccess else {
+                let videoVerifyVC = VideoVerifyViewController.init()
+                videoVerifyVC.displaystr = content
+                videoVerifyVC.RecordsTimeMax = Int(time)!
+                self.present(videoVerifyVC, animated: true, completion: nil)
+                return
+            }
+        }
+    }
+    /// 获取视频信息
+    func obtainVideoVerifyInfo(finish:@escaping (_ isSuccess:Bool,_ content:String,_ time:String) -> Void)  {
+        let  userDataVM = UserDataViewModel.init()
+        userDataVM.setBlockWithReturn({[weak self] (result) in
+            let baseResult = result as? BaseResultModel
+            if baseResult?.errCode == "0" {
+                let dic = baseResult?.data as! Dictionary<String,Any>
+                if let contentStr = dic["content"], let time = dic["time"] {
+                    finish(true,contentStr as! String,time as! String)
+                }
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message:baseResult?.friendErrMsg)
+                finish(false,"","")
+            }
+        }) {
+            finish(false,"","")
+        }
+        userDataVM.obtainVideoVerifyContent()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

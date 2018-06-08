@@ -15,7 +15,22 @@ class RechargeTypePopView: UIView,NibLoadProtocol  {
         self.layer.cornerRadius = 5
         self.clipsToBounds = true
         
+        
+        
     }
+    
+    @IBAction func moblieNumberTap(_ sender: Any) {
+        FXD_Tool.makePhoneCall("10086")
+    }
+    
+    @IBAction func unicomNumberTap(_ sender: Any) {
+        FXD_Tool.makePhoneCall("10011")
+    }
+    
+    @IBAction func telecomNumberTap(_ sender: Any) {
+        FXD_Tool.makePhoneCall("11888")
+    }
+    
     
     /*
     // Only override draw() if you perform custom drawing.

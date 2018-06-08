@@ -381,10 +381,11 @@
                     break;
                 case 1:
                     {
-                        CollectionViewController * controller = [[CollectionViewController alloc]init];
+                        OrderConfirmDetailViewController * controller = [[OrderConfirmDetailViewController alloc]init];
                         [self.navigationController pushViewController:controller animated:true];
-//                        FXD_IncreaseAmountLimitViewController *increaseAmountLimit=[[FXD_IncreaseAmountLimitViewController alloc]init];
-//                        [self.navigationController pushViewController:increaseAmountLimit animated:YES];
+//                        CollectionViewController * controller = [[CollectionViewController alloc]init];
+//                        [self.navigationController pushViewController:controller animated:true];
+
                     }
                     break;
                 default:

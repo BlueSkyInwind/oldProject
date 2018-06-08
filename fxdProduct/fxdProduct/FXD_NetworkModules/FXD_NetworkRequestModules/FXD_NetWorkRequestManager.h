@@ -21,7 +21,9 @@ typedef enum {
     ///连接不上服务器
     Enum_NOTCONNECTED = 2,
     ///超时连接
-    Enum_CONNECTEDTIMEOUT = 3
+    Enum_CONNECTEDTIMEOUT = 3,
+    ///无网络
+    Enum_NOTNETWORK = 4,
 } EnumServerStatus;
 
 typedef void (^SuccessFinishedBlock)(EnumServerStatus status, id object);
@@ -52,9 +54,6 @@ typedef void (^FailureBlock)(EnumServerStatus status, id object);
 
 //身份证图片上传
 - (void)POSTUpLoadImage:(NSString *)strURL FilePath:(NSDictionary *)images  parameters:(id)parameters finished:(SuccessFinishedBlock)finshed failure:(FailureBlock)failure;
-
-#pragma mark - 旧api使用
-- (void)POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure;
 
 //合规请求
 - (void)HG_POSTWithURL:(NSString *)strURL parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure;

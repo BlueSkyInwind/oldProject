@@ -271,6 +271,11 @@ NSString * const    _cardAuthAuth_url               =    @"cardAuth/auth";
 //憨分首页接口
 NSString * const    _handataSummary_url               =    @"handata/summary";
 
+#pragma mark - 手机
+
+//手机卡列表
+NSString * const    _rechargeCardsList_url               =    @"product/rechargeCards";
+
 
 #pragma mark - 合规接口
 
@@ -310,6 +315,8 @@ NSString * const    _hgUser_Active_url    =    @"paidcenter/user/active";
 NSString * const    _queryUserStatus_url    =    @"membership/paid/queryUserStatus";
 //合规的件 调用此接口 用于获取借款协议列表
 NSString * const    _hgLoanProtoolList_url    =    @"product/getHgLoanProtoolListApi";
+
+
 
 
 

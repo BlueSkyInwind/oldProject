@@ -9,10 +9,11 @@
 #import "BaseViewController.h"
 #import "ReturnMsgBaseClass.h"
 
-@interface BaseViewController ()
+@interface BaseViewController ()<LoadFailureDelegate>
 {
     ReturnMsgBaseClass *_parse;
 }
+@property (nonatomic,strong) LoadFailureView * loadFailView;
 
 @end
 
@@ -21,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor =  [UIColor whiteColor];
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:19],NSForegroundColorAttributeName:[UIColor blackColor]};
     [self.navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
@@ -31,6 +33,28 @@
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(click)];
     //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
     self.navigationItem.rightBarButtonItem = aBarbi;
+}
+
+-(void)setFailView{
+    if (_loadFailView) {
+        return;
+    }
+    _loadFailView = [[LoadFailureView alloc]initWithFrame:CGRectZero];
+    _loadFailView.delegate = self;
+    [self.view addSubview:_loadFailView];
+    [_loadFailView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+}
+-(void)removeFailView{
+    if (_loadFailView) {
+        [_loadFailView removeFromSuperview];
+    }
+}
+
+-(void)LoadFailureLoadRefreshButtonClick{
+    
+
 }
 
 - (void)setNavSignLeftBar

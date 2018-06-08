@@ -15,7 +15,6 @@
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
-#import "SetUpFMDevice.h"
 #import "FXD_LaunchConfiguration.h"
 #import "LoginViewModel.h"
 
@@ -101,8 +100,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     dispatch_async(queue, ^{
         //shareSDK
         [FXD_AppShareConfig configShareInitialSetting];
-        //FMDevice
-        [SetUpFMDevice configFMDevice];
         [[FXD_LaunchConfiguration shared]InitializeAppConfiguration];
     });
 }

@@ -104,6 +104,7 @@ extension OrderConfirmBottomView {
             make.left.equalTo(self.snp.left).offset(20)
             make.right.equalTo(self.snp.right).offset(-20)
             make.bottom.equalTo(self.snp.bottom).offset(-15)
+            make.height.equalTo(50)
         })
         
         protocolBtn = UIButton.init(type: UIButtonType.custom)
