@@ -30,6 +30,10 @@
  */
 -(void)obtainOrderConfirmRequest:(NSString *)productNumber cardNum:(NSString *)num;
 
+/**
+ 查询手机卡订单列表
+ */
+//-(void)obtainRechargeCardListInfo;
 
 
 @end
