@@ -281,7 +281,8 @@ NSString * const    _orderConfirmInfo_url               =    @"handata/confirm";
 NSString * const    _orderConfirmRequest_url               =    @"card/stock/check";
 //订单详情
 NSString * const    _orderDetailInfo_url               =    @"order/contractStaging/selectContractByOrderNo";
-
+//订单创建
+NSString * const    _createOrderPhoneCard_url               =    @"card/order/create";
 #pragma mark - 合规接口
 
 //获取合规开户信息

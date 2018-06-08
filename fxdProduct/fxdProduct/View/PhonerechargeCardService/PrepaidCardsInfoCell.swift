@@ -11,6 +11,13 @@ import UIKit
 class PrepaidCardsInfoCell: UITableViewCell,UITableViewDelegate,UITableViewDataSource {
     
     var isHiddenPassword:Bool = true
+    var cardArr:Array<PhoneCardInfoModel>?
+    
+    var orderDetailModel:PhoneOrderDetailModel?{
+        didSet{
+            setDataDetailSource(orderDetailModel!)
+        }
+    }
     
     var cardTableView:UITableView?
      override func awakeFromNib() {
@@ -20,7 +27,6 @@ class PrepaidCardsInfoCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUpUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -33,26 +39,33 @@ class PrepaidCardsInfoCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
         // Configure the view for the selected state
     }
     
+    func setDataDetailSource(_ model:PhoneOrderDetailModel)  {
+        cardArr = (model.cards as! Array<PhoneCardInfoModel>)
+        setUpUI()
+    }
+    
     @objc func copyBtnClick() {
-        
+        FXD_Tool.clipboard(ofCopy: orderDetailModel?.allPwd, view: UIApplication.shared.keyWindow, prompt: "复制成功")
     }
     
     @objc func isHiddenBtnClick(sender:UIButton) {
         if isHiddenPassword {
-            sender.setTitle("隐藏密码", for: UIControlState.normal)
-        }else{
             sender.setTitle("显示密码", for: UIControlState.normal)
+        }else{
+            sender.setTitle("隐藏密码", for: UIControlState.normal)
         }
         isHiddenPassword = !isHiddenPassword
-
+        cardTableView?.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return (cardArr?.count)!
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CardNumAndPasswordCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CardNumAndPasswordCell", for: indexPath) as! CardNumAndPasswordCell
+        cell.isHiddenPwd = isHiddenPassword
+        cell.cardInfoModel = cardArr?[indexPath.row]
         return cell
     }
     
@@ -66,7 +79,6 @@ class PrepaidCardsInfoCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return setHeaderView()
     }
-    
 }
 
 extension PrepaidCardsInfoCell {
@@ -130,11 +142,8 @@ extension PrepaidCardsInfoCell {
             make.width.equalTo(76)
             make.height.equalTo(24)
         }
-        
         return backView
     }
-    
-    
 }
 
 

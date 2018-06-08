@@ -93,4 +93,6 @@
 #import "UITableViewCell+YXTool.h"
 #import "UIView+YXTool.h"
 #import "RepayListInfo.h"
+#import "PhoneOrderListModel.h"
+
 #endif /* fxdProduct_Bridging_Header_h */

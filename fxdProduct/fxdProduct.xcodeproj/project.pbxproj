@@ -626,6 +626,8 @@
 		84EBEA1420C93F130045F538 /* UIView+YXTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA1220C93F130045F538 /* UIView+YXTool.m */; };
 		84EBEA1620CA69A30045F538 /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA1520CA69A30045F538 /* PhonerechargeCardNoneView.swift */; };
 		84EBEA1720CA69A30045F538 /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA1520CA69A30045F538 /* PhonerechargeCardNoneView.swift */; };
+		84EBEA1E20CA72EE0045F538 /* PhoneOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA1D20CA72EE0045F538 /* PhoneOrderListModel.m */; };
+		84EBEA1F20CA72EE0045F538 /* PhoneOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA1D20CA72EE0045F538 /* PhoneOrderListModel.m */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5B1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5C1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */; };
@@ -1989,6 +1991,8 @@
 		84EBEA1120C93F130045F538 /* UIView+YXTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+YXTool.h"; sourceTree = "<group>"; };
 		84EBEA1220C93F130045F538 /* UIView+YXTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+YXTool.m"; sourceTree = "<group>"; };
 		84EBEA1520CA69A30045F538 /* PhonerechargeCardNoneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhonerechargeCardNoneView.swift; sourceTree = "<group>"; };
+		84EBEA1C20CA72EE0045F538 /* PhoneOrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneOrderListModel.h; sourceTree = "<group>"; };
+		84EBEA1D20CA72EE0045F538 /* PhoneOrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneOrderListModel.m; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
 		84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_finish@2x.png"; sourceTree = "<group>"; };
 		84ED5B561F4AB9E7004C0A59 /* mx_loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_loading@2x.png"; sourceTree = "<group>"; };
@@ -4327,6 +4331,8 @@
 		84EBEA0320C91E0D0045F538 /* PhonerechargeCardService */ = {
 			isa = PBXGroup;
 			children = (
+				84EBEA1C20CA72EE0045F538 /* PhoneOrderListModel.h */,
+				84EBEA1D20CA72EE0045F538 /* PhoneOrderListModel.m */,
 				84EBEA0420C91E880045F538 /* PhoneCardListModel.h */,
 				84EBEA0520C91E880045F538 /* PhoneCardListModel.m */,
 			);
@@ -5593,6 +5599,7 @@
 				84EBEA0120C917FC0045F538 /* PhonerechargeCardServiceViewModel.m in Sources */,
 				63EC5C871E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m in Sources */,
 				6313DC111BB3E48800EB45DE /* DES3Util.m in Sources */,
+				84EBEA1E20CA72EE0045F538 /* PhoneOrderListModel.m in Sources */,
 				637636E81D76A72A00E93289 /* LewPopupViewAnimationDrop.m in Sources */,
 				637BABFA1D7D3FAC00CF8EB5 /* RepayListInfo.m in Sources */,
 				63C50E451E666FF40035EE4F /* ContactBean.m in Sources */,
@@ -6080,6 +6087,7 @@
 				84EBEA0220C917FC0045F538 /* PhonerechargeCardServiceViewModel.m in Sources */,
 				CC0DFADC1EA5B1090024841A /* DES3Util.m in Sources */,
 				84A3801F1FAC1D8D008FB7AF /* UserMobileAuthenticationVCModules.m in Sources */,
+				84EBEA1F20CA72EE0045F538 /* PhoneOrderListModel.m in Sources */,
 				84A37FF51FAC12A8008FB7AF /* ActivityHomePopView.m in Sources */,
 				84CC899F1F5973D700537910 /* DrawingsInfoModel.m in Sources */,
 				CC0DFADF1EA5B1090024841A /* LewPopupViewAnimationDrop.m in Sources */,

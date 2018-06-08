@@ -134,6 +134,7 @@ UIKIT_EXTERN NSString * const       _rechargeCardsList_url;                    /
 UIKIT_EXTERN NSString * const       _orderConfirmInfo_url;                    //订单确认
 UIKIT_EXTERN NSString * const       _orderConfirmRequest_url;                    //订单请求
 UIKIT_EXTERN NSString * const       _orderDetailInfo_url;                    //订单详情
+UIKIT_EXTERN NSString * const       _createOrderPhoneCard_url;       //创建订单
 
 
 #pragma mark - 视频认证接口
@@ -220,6 +221,7 @@ UIKIT_EXTERN NSString * const WhiteCollarLoan;       //白领贷平台
 UIKIT_EXTERN NSString * const DeriveRapidLoan;       //急速贷衍生（30天）平台
 UIKIT_EXTERN NSString * const EliteLoan;       //精英贷
 UIKIT_EXTERN NSString * const Phone_RechargeCard;       //手机卡
+
 
 
 UIKIT_EXTERN NSString * const PLATFORM;                 //平台

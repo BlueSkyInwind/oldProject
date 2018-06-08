@@ -206,7 +206,6 @@
             self.faileBlock();
         }
     }];
-
 }
 
 -(void)UserDataCertificationResult{

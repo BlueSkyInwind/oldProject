@@ -465,11 +465,11 @@ static FXD_Tool * shareTool = nil;
     [vc presentViewController:alertController animated:true completion:nil];
 }
 
-+(void)ClipboardOfCopy:(NSString *)copyStr VC:(UIViewController *)vc prompt:(NSString *)str{
++(void)ClipboardOfCopy:(NSString *)copyStr View:(UIView *)view  prompt:(NSString *)str{
     
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = copyStr;
-    [[MBPAlertView sharedMBPTextView] showTextOnly:vc.view message:str];
+    [[MBPAlertView sharedMBPTextView] showTextOnly:view message:str];
     
 }
 
