@@ -1002,8 +1002,6 @@
 		CC6C93EF1F4AB58C00587C74 /* TrackRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */; };
 		CC6C93F11F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
 		CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */; };
-		CC6D1B2220C4E5B6007446E7 /* QuotaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D1B2120C4E5B6007446E7 /* QuotaCell.swift */; };
-		CC6D1B2320C4E5B6007446E7 /* QuotaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D1B2120C4E5B6007446E7 /* QuotaCell.swift */; };
 		CC6D1B2520C632B2007446E7 /* MyOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */; };
 		CC6D1B2620C632B2007446E7 /* MyOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */; };
 		CC6D1B2920C6341E007446E7 /* MyOrdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6D1B2820C6341E007446E7 /* MyOrdersCell.swift */; };
@@ -2042,7 +2040,6 @@
 		CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "fxdProduct-Bridging-Header.h"; sourceTree = "<group>"; };
 		CC6C93ED1F4AB58C00587C74 /* TrackRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackRect.swift; sourceTree = "<group>"; };
 		CC6C93F01F4AC5E500587C74 /* HomeRefuseThirdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRefuseThirdView.swift; sourceTree = "<group>"; };
-		CC6D1B2120C4E5B6007446E7 /* QuotaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotaCell.swift; sourceTree = "<group>"; };
 		CC6D1B2420C632B2007446E7 /* MyOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersViewController.swift; sourceTree = "<group>"; };
 		CC6D1B2820C6341E007446E7 /* MyOrdersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersCell.swift; sourceTree = "<group>"; };
 		CC6E0F151FF0942400D32773 /* FXD_HomeProductListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_HomeProductListModel.h; sourceTree = "<group>"; };
@@ -3612,7 +3609,6 @@
 				CC8BC9531FEA0374008E135E /* HomePageCell.swift */,
 				CC5F9AAF20735D990042DFDA /* SDCycleScrollCell.swift */,
 				CC8BB751208F174600ADA647 /* RecentCell.swift */,
-				CC6D1B2120C4E5B6007446E7 /* QuotaCell.swift */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -5157,7 +5153,6 @@
 				638C3F3B1CF564A4000446A7 /* SquareRepaymentExt.m in Sources */,
 				CCEFC6E9207E0B610006D731 /* QbbSubmitInfoModel.m in Sources */,
 				63553B1F1E600D0D00B2C1FF /* FaceIDLiveModel.m in Sources */,
-				CC6D1B2220C4E5B6007446E7 /* QuotaCell.swift in Sources */,
 				638C3F3A1CF564A4000446A7 /* SquareRepaymentBaseClass.m in Sources */,
 				638A16FE1E517D9F00AB8AB6 /* UIColor.m in Sources */,
 				63DB3FBE1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m in Sources */,
@@ -5639,7 +5634,6 @@
 				CC0DF9681EA5B1090024841A /* UIFont+Extend.m in Sources */,
 				CC0DF96B1EA5B1090024841A /* RegViewController.m in Sources */,
 				CC5F9AB120735D990042DFDA /* SDCycleScrollCell.swift in Sources */,
-				CC6D1B2320C4E5B6007446E7 /* QuotaCell.swift in Sources */,
 				CC45E7301FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
 				CC0DF96C1EA5B1090024841A /* HMScannerController.m in Sources */,
 				CC8BC9621FEB59D9008E135E /* ExperienceValueGradeModel.m in Sources */,
