@@ -12,6 +12,9 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
 
     var tableView : UITableView?
     var dataArray : NSMutableArray?
+    var repayModel : RepayListInfo?
+    var noneView : PhonerechargeCardNoneView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -19,8 +22,18 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         addBackItem()
         configureView()
         dataArray = NSMutableArray.init(capacity: 100)
+        
+//        getData()
+        noneViewUI()
     }
 
+    func noneViewUI(){
+    
+        noneView = PhonerechargeCardNoneView.init(frame: CGRect(x:0,y:64,width:_k_w,height:_k_h - 64))
+        noneView?.noneDesc?.text = "账单都被消灭了"
+        noneView?.isHidden = true
+        self.view.addSubview(noneView!)
+    }
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false
@@ -40,6 +53,34 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         }else{
             self.automaticallyAdjustsScrollViewInsets = false;
         }
+    }
+    
+    func getData(){
+        
+        let viewModel = RepayMentViewModel()
+        viewModel.setBlockWithReturn({[weak self] (returnValue) in
+            
+            let baseResult = returnValue as! BaseResultModel
+            
+            if baseResult.errCode == "0"{
+                self?.repayModel = try! RepayListInfo.init(dictionary: baseResult.data as! [AnyHashable : Any]?)
+                for index in 0 ..< (self?.repayModel?.order.count)!{
+                    
+                    let model = self?.repayModel?.order[index] as! OrderModel
+                    self?.dataArray?.add(model)
+                }
+                self?.tableView?.reloadData()
+                
+            }else{
+                
+                self?.noneView?.isHidden = false
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+            
+        }) {
+            
+        }
+        viewModel.fatchQueryWeekShouldAlsoAmount(nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -106,8 +147,12 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             cell.selectionStyle = .none
             cell.backgroundColor = UIColor.white
             cell.isSelected = false
-            cell.moneyLabel?.text = "¥1166.10"
-            cell.dateLabel?.text = "最后还款日:2018.03.23"
+            cell.overdueView?.isHidden = false
+            cell.overdueDateLabel?.text = "已逾期3天"
+            cell.moneyLabel?.text = "158883"
+            cell.dateLabel?.text = "93-44-23-4"
+//            cell.moneyLabel?.text = "¥" + (repayModel?.debtRepayTotal)!
+//            cell.dateLabel?.text = "最后还款日:" + (repayModel?.dueDate)!
             return cell!
         }
         
@@ -118,10 +163,13 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         cell.selectionStyle = .none
         cell.isSelected = false
         cell.backgroundColor = UIColor.clear
-        cell.titleLabel?.text = "手机充值卡-面值100元"
-        cell.timeLabel?.text = "2018.03.23 15:32:23"
-        cell.moneyLabel?.text = "¥1150.00"
-        cell.quantityLabel?.text = "¥115.00*10"
+        
+//        let model = dataArray?[indexPath.section - 1] as! OrderModel
+//        
+//        cell.titleLabel?.text = "手机充值卡-面值100元"
+//        cell.timeLabel?.text = model.payment_date
+//        cell.moneyLabel?.text = model.order_price
+//        cell.quantityLabel?.text = model.phone_card_price + "*" + model.phone_card_count
         
         return cell!
     }

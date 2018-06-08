@@ -26,9 +26,11 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         addBackItem()
         configureView()
         headerView()
+        getBankCardsList()
         // Do any additional setup after loading the view.
     }
 
+    
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false
@@ -88,6 +90,30 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         
     }
     
+    //MARK:获取用户的银行卡列表
+    func getBankCardsList(){
+        
+        let bankInfoVM = BankInfoViewModel()
+        bankInfoVM.setBlockWithReturn({ (returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                for dic in baseResult.data as! NSArray{
+                    
+                    let cardInfo = try! CardInfo.init(dictionary: dic as! [AnyHashable : Any])
+                    if cardInfo.cardType == "2"{
+                        self.selectedCard = cardInfo
+                        self.tableView?.reloadData()
+                        break
+                    }
+                }
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+        }
+        bankInfoVM.obtainUserBankCardListPlatformType("")
+    }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
@@ -158,7 +184,14 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         case 5:
             cell.rightLabel?.text = "¥0"
         case 6:
-            cell.rightLabel?.text = "中国银行(尾号9485)"
+            
+            if selectedCard != nil {
+                
+                let index = selectedCard?.cardNo.index((selectedCard?.cardNo.endIndex)!, offsetBy: -4)
+                let numStr = selectedCard?.cardNo[index!...]
+                cell.rightLabel?.text = (selectedCard?.bankName)!+"("+numStr!+")"
+            }
+//            cell.rightLabel?.text = "中国银行(尾号9485)"
         default:
             break
         }
@@ -224,7 +257,7 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
             success(false,false)
         }
         
-        bankInfoVM.obtainUserBankCardListPlatformType("")
+        bankInfoVM.obtainUserBankCardListPlatformType("16")
         
     }
     

@@ -97,3 +97,6 @@ let GAME_COLOR = UIColor.init(red: 25.5/255.0, green: 25.5/255.0, blue: 25.5/255
 let TIP_TITLE_COLOR = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
 
 let TIP_LINE_COLOR = UIColor.init(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1)
+
+let OVERDUEDATE_COLOR = UIColor.init(red: 249/255.0, green: 87/255.0, blue: 87/255.0, alpha: 1)
+

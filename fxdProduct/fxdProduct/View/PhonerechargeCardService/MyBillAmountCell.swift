@@ -10,9 +10,14 @@ import UIKit
 
 class MyBillAmountCell: UITableViewCell {
 
-    
+    //待还金额
     @objc var moneyLabel : UILabel?
+    //还款日期
     @objc var dateLabel : UILabel?
+    //逾期View
+    @objc var overdueView : UIView?
+    //逾期天数
+    @objc var overdueDateLabel : UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,7 +58,7 @@ extension MyBillAmountCell{
         moneyLabel?.font = UIFont.systemFont(ofSize: 30)
         self.addSubview(moneyLabel!)
         moneyLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(18)
             make.centerX.equalTo(self.snp.centerX)
         })
         
@@ -62,8 +67,35 @@ extension MyBillAmountCell{
         dateLabel?.font = UIFont.systemFont(ofSize: 15)
         self.addSubview(dateLabel!)
         dateLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo((moneyLabel?.snp.bottom)!).offset(24)
+            make.top.equalTo((moneyLabel?.snp.bottom)!).offset(5)
             make.centerX.equalTo(self.snp.centerX)
+        })
+        
+        overdueView = UIView()
+        overdueView?.isHidden = true
+        overdueView?.backgroundColor = UIColor.clear
+        self.addSubview(overdueView!)
+        overdueView?.snp.makeConstraints({ (make) in
+            make.top.equalTo((dateLabel?.snp.bottom)!).offset(10)
+            make.width.equalTo(100)
+            make.height.equalTo(20)
+            make.centerX.equalTo(self.snp.centerX)
+        })
+        let tipImageView = UIImageView()
+        tipImageView.image = UIImage.init(named: "tip_icon")
+        overdueView?.addSubview(tipImageView)
+        tipImageView.snp.makeConstraints { (make) in
+            make.left.equalTo((overdueView?.snp.left)!).offset(0)
+            make.centerY.equalTo((overdueView?.snp.centerY)!)
+        }
+        
+        overdueDateLabel = UILabel()
+        overdueDateLabel?.textColor = OVERDUEDATE_COLOR
+        overdueDateLabel?.font = UIFont.systemFont(ofSize: 15)
+        overdueView?.addSubview(overdueDateLabel!)
+        overdueDateLabel?.snp.makeConstraints({ (make) in
+            make.right.equalTo((overdueView?.snp.right)!).offset(0)
+            make.centerY.equalTo((overdueView?.snp.centerY)!)
         })
     }
 }
