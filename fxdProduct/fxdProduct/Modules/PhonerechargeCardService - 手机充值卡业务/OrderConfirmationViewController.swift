@@ -18,13 +18,31 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
     
     var tableView:UITableView?
     var cardType:PhoneCardType?
+    var orderModel:PhoneCardOrderModel?
+    var cardOrderId:String?
+    var isAgree:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "订单确认"
         self.addBackItem()
         // Do any additional setup after loading the view.
-        configureView()
+        obtainDataSource()
+    }
+    
+    override func loadFailureLoadRefreshButtonClick()  {
+        obtainDataSource()
+    }
+    
+    func obtainDataSource()  {
+        obtainOrderInfo(cardOrderId!) {[weak self] (isSuccess) in
+            if(isSuccess) {
+                self?.removeFailView()
+                self?.configureView()
+            }else{
+                self?.setFailView()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,23 +78,37 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
         tableView?.tableFooterView = footerView
         tableView?.sectionFooterHeight = 0
         footerView.protocolContentClick = { [weak self] (index) in
-            
-            
+
         }
         footerView.protocolBtnClick = { [weak self] (status) in
             
-            
         }
         footerView.applyForBtnClick = { [weak self]  in
-            OrderVerifyCodeView.showOrderVerifyCodeView(self!, displayStr: "短信验证码已经发送至156******3456 ", result: { (verifyStr) in
-                print(verifyStr)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    OrderVerifyCodeView.dismissImportPayPasswordView()
+            self?.obtainOrderCheck((self?.orderModel?.productNumber)!, (self?.orderModel?.totalCount)!, { (isSuccess) in
+                if isSuccess {
+                    self?.sendOrderConfirmSMS({ (result) in
+                        if result {
+                            self?.popVerifyCodeView()
+                        }
+                    })
                 }
-            }, verifyCodeClick: {
-                
             })
         }
+    }
+    
+    func popVerifyCodeView()  {
+        OrderVerifyCodeView.showOrderVerifyCodeView(self, displayStr: "短信验证码已经发送至" + FXD_Tool.share().changeTelephone(FXD_Utility.shared().userInfo.userMobilePhone), result: { (verifyStr) in
+            print(verifyStr)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                OrderVerifyCodeView.dismissImportPayPasswordView()
+            }
+        }, verifyCodeClick: {
+            self.sendOrderConfirmSMS({ (result) in
+                if result{
+                    OrderVerifyCodeView.againCreateVerifyTimer()
+                }
+            })
+        })
     }
     
     func popPrompt()  {
@@ -111,7 +143,8 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             var cell = tableView.dequeueReusableCell(withIdentifier: "OrderConfirmInfoCell", for: indexPath) as! OrderConfirmInfoCell
-            cell.addShadow()
+//            cell.addShadow()
+            cell.selectionStyle = .none
             switch cardType {
             case .moblieCard?:
                 cell.orderTypeIcon.image = UIImage.init(named: "moblie_Icon")
@@ -125,10 +158,14 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
             default:
                 break
             }
+            cell.orderModel = orderModel
             return cell
         }else{
             var cell = tableView.dequeueReusableCell(withIdentifier: "OrderConfirmDetailCell", for: indexPath) as! OrderConfirmDetailCell
-            cell.addShadow()
+//            cell.addShadow()
+            cell.selectionStyle = .none
+
+            cell.orderModel = orderModel
             return cell
         }
     }
@@ -142,7 +179,7 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView.init()
-        header.backgroundColor = "F2F2F2".uiColor()
+        header.backgroundColor = UIColor.clear
         return header
     }
     
@@ -163,3 +200,61 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
     */
 
 }
+
+extension OrderConfirmationViewController {
+    
+    func obtainOrderInfo(_ productId:String, _ result:@escaping ((_ success:Bool) -> Void))  {
+        let serviceViewModel = PhonerechargeCardServiceViewModel.init()
+        serviceViewModel.setBlockWithReturn({[weak self] (model) in
+            let baseModel = model as! BaseResultModel
+            if baseModel.errCode == "0"{
+                let cardOrderModel = try! PhoneCardOrderModel.init(dictionary: baseModel.data as! [AnyHashable : Any])
+                self?.orderModel = cardOrderModel
+                result(true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
+                result(false)
+            }
+        }) {
+            result(false)
+        }
+        serviceViewModel.obtainOrderConfirmInfo(productId)
+    }
+    
+    func obtainOrderCheck(_ productId:String, _ num:String,_ result:@escaping ((_ success:Bool) -> Void))  {
+        let serviceViewModel = PhonerechargeCardServiceViewModel.init()
+        serviceViewModel.setBlockWithReturn({[weak self] (model) in
+            let baseModel = model as! BaseResultModel
+            if baseModel.errCode == "0"{
+                result(true)
+            }else if baseModel.errCode == "1"{
+                self?.popPrompt()
+                 result(false)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
+                result(false)
+            }
+        }) {
+            result(false)
+        }
+        serviceViewModel.obtainOrderConfirmRequest(productId, cardNum: num)
+    }
+    
+    func sendOrderConfirmSMS(_ result : @escaping (_ isSuccess : Bool) -> Void)  {
+        let tradeSMS =  SMSViewModel.init()
+        tradeSMS.setBlockWithReturn({ (returnValue) in
+            let baseResult  = returnValue as! BaseResultModel
+            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            if baseResult.errCode == "0" {
+                result(true)
+            }else{
+                result(false)
+            }
+        }) {
+            result(false)
+        }
+        tradeSMS.fatchRequestSMSParamPhoneNumber(FXD_Utility.shared().userInfo.userMobilePhone, verifyCodeType:ORDERCONFIRM_CODE)
+    }
+}
+
+

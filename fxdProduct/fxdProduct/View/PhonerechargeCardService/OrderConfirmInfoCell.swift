@@ -10,6 +10,11 @@ import UIKit
 
 class OrderConfirmInfoCell: UITableViewCell {
 
+    var orderModel:PhoneCardOrderModel?{
+        didSet{
+            setDataSource(orderModel!)
+        }
+    }
     
     @IBOutlet weak var orderTypeIcon: UIImageView!
     
@@ -26,11 +31,32 @@ class OrderConfirmInfoCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let backView = UIView.init(frame: self.contentView.bounds)
+        backView.backgroundColor = UIColor.white
+        let shadowView = UIView.init(frame: self.contentView.bounds)
+        shadowView.setCornerRadius(8, withShadow: true, withOpacity: 0.6)
+        self.contentView.addSubview(shadowView)
+        self.contentView.addSubview(backView)
+        self.contentView.sendSubview(toBack: backView)
+        self.contentView.sendSubview(toBack: shadowView)
+    }
+    
+    func setDataSource(_ model:PhoneCardOrderModel)  {
+        orderTypeIcon.sd_setImage(with: URL(string: model.icon), placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: nil)
+        orderTypeLabel.text = "\(model.cardName ?? " ")"
+        numberLabel.text = "数量：" + "\(model.totalCount ?? " ")"
+        orderPriceLabel.text = "售价：¥" + "\(model.cardSalePrice ?? " ")"
+        amountLabel.text = "订单总额：¥" + "\(model.totalPrice ?? " ")"
+        amountDetailLabel.text = "¥" + "\(model.cardSalePrice ?? " ")x\(model.totalCount ?? " ")"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
-    
     }
 }

@@ -25,7 +25,6 @@ class OrderConfirmBottomView: UIView {
     @objc var  protocolContentClick:ProtocolContentClick?
     @objc var  applyForBtnClick:ApplyForBtnClick?
 
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpUI()
@@ -36,6 +35,9 @@ class OrderConfirmBottomView: UIView {
     }
     
     @objc func applyForBottonClick() {
+        guard isClick else {
+            return
+        }
         if applyForBtnClick != nil {
             applyForBtnClick!()
         }
@@ -44,8 +46,10 @@ class OrderConfirmBottomView: UIView {
         isClick = !isClick
         if isClick {
             protocolBtn?.setBackgroundImage(UIImage.init(named: "tricked"), for: UIControlState.normal)
+            applyForBtn?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
         }else{
             protocolBtn?.setBackgroundImage(UIImage.init(named: "trick"), for: UIControlState.normal)
+            applyForBtn?.setBackgroundImage(UIImage.init(named: "applicationBtn_unselect_Image"), for: UIControlState.normal)
         }
         if protocolBtnClick != nil {
             protocolBtnClick!(isClick)
@@ -96,7 +100,7 @@ extension OrderConfirmBottomView {
         })
         
         applyForBtn = UIButton.init(type: UIButtonType.custom)
-        applyForBtn?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
+        applyForBtn?.setBackgroundImage(UIImage.init(named: "applicationBtn_unselect_Image"), for: UIControlState.normal)
         applyForBtn?.setTitle("确定", for: UIControlState.normal)
         applyForBtn?.addTarget(self, action: #selector(applyForBottonClick), for: UIControlEvents.touchUpInside)
         self.addSubview(applyForBtn!)

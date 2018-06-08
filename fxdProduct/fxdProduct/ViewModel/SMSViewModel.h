@@ -19,6 +19,8 @@ typedef enum {
     DRAW_CODE,
     ADDCARD_CODE,
     TRADEPASSWORD_CODE,
+    ORDERCONFIRM_CODE,
+
     
 }VerifyCodeType;
 

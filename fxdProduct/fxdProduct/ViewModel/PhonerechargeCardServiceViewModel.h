@@ -15,8 +15,20 @@
  */
 -(void)obtainRechargeCardListInfo;
 
+/**
+ 订单确认
 
+ @param productNumber 产品号
+ */
+-(void)obtainOrderConfirmInfo:(NSString *)productNumber;
 
+/**
+ 订单确认
+
+ @param productNumber 卡编号
+ @param num 数量
+ */
+-(void)obtainOrderConfirmRequest:(NSString *)productNumber cardNum:(NSString *)num;
 
 
 

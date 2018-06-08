@@ -23,5 +23,37 @@
     }];
 }
 
+-(void)obtainOrderConfirmInfo:(NSString *)productNumber{
+    
+    NSDictionary *dic = @{@"productNumber":productNumber};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_orderConfirmInfo_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel *baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
+-(void)obtainOrderConfirmRequest:(NSString *)productNumber cardNum:(NSString *)num{
+    
+    NSDictionary *dic = @{@"cardProductNumber":productNumber,@"count":num};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_orderConfirmRequest_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel *baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
+
+
 
 @end
