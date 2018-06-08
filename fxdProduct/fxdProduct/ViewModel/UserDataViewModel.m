@@ -193,7 +193,7 @@
 
     UserDataMeatureParam * userDataMeatureP = [[UserDataMeatureParam alloc]init];
     userDataMeatureP.product_id = product_id;
-    userDataMeatureP.service_platform_flag = @"2020";
+    userDataMeatureP.service_platform_flag = @"4040";
 
     NSDictionary * paramDic = [userDataMeatureP toDictionary];
 

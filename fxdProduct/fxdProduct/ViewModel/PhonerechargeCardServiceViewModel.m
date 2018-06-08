@@ -53,7 +53,20 @@
     }];
 }
 
-
+-(void)obtainOrderDetailInfoRequest:(NSString *)orderNumber{
+    
+    NSDictionary *dic = @{@"orderNo":orderNumber};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_orderDetailInfo_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel *baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
 
 
 @end

@@ -579,7 +579,7 @@
     } WithFaileBlock:^{
         
     }];
-    [userDataVM UserDataCertification:EliteLoan];
+    [userDataVM UserDataCertification:Phone_RechargeCard];
 }
 
 #pragma mark - 魔蝎信用卡以及社保集成

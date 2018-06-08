@@ -153,3 +153,26 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
     */
 
 }
+
+extension OrderConfirmDetailViewController {
+    
+    func obtainOrderDetailInfo(_ orderNo:String,_ result:@escaping ((_ success:Bool) -> Void))  {
+        let serviceViewModel = PhonerechargeCardServiceViewModel.init()
+        serviceViewModel.setBlockWithReturn({[weak self] (model) in
+            let baseModel = model as! BaseResultModel
+            if baseModel.errCode == "0"{
+                
+                result(true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
+                result(false)
+            }
+        }) {
+            result(false)
+        }
+        serviceViewModel.obtainOrderDetailInfoRequest(orderNo)
+    }
+    
+    
+}
+

@@ -74,7 +74,7 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
         tableView?.tableHeaderView = headerView
 
         let footerView = OrderConfirmBottomView.init(frame: CGRect.init(x: 0, y: 0, width:_k_w, height: 150))
-        footerView.addProtocolClick(["《信用赊购服务协议》"])
+        footerView.addProtocolClick(["《延期支付服务协议》"])
         tableView?.tableFooterView = footerView
         tableView?.sectionFooterHeight = 0
         footerView.protocolContentClick = { [weak self] (index) in

@@ -35,5 +35,11 @@
  */
 //-(void)obtainRechargeCardListInfo;
 
+/**
+ 订单详情
+
+ @param orderNumber 订单号
+ */
+-(void)obtainOrderDetailInfoRequest:(NSString *)orderNumber;
 
 @end
