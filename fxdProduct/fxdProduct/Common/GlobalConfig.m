@@ -270,15 +270,13 @@ NSString * const    _cardAuthSmsSend_url               =    @"cardAuth/sms/send"
 NSString * const    _cardAuthAuth_url               =    @"cardAuth/auth";
 //憨分首页接口
 NSString * const    _handataSummary_url               =    @"handata/summary";
-//查询手机卡订单列表
-NSString * const    _orderList_url               =    @"order/contractStaging/selectOrdersByUserId";
-
 
 #pragma mark - 手机
 
 //手机卡列表
 NSString * const    _rechargeCardsList_url               =    @"product/rechargeCards";
-
+//查询手机卡订单列表
+NSString * const    _orderList_url               =    @"order/contractStaging/selectOrdersByUserId";
 
 #pragma mark - 合规接口
 
