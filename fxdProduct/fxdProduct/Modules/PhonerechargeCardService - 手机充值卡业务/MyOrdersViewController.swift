@@ -19,6 +19,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         addBackItem()
         configureView()
         dataArray = NSMutableArray.init(capacity: 100)
+        getData()
         // Do any additional setup after loading the view.
     }
     
@@ -45,13 +46,21 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
 
     func getData(){
         
-        let viewModel = RepayMentViewModel()
+        let viewModel = PhonerechargeCardServiceViewModel()
         viewModel.setBlockWithReturn({[weak self] (returnValue) in
             
-            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            let baseResult = returnValue as! BaseResultModel
+            
+            let dataArr = baseResult.data as! NSArray
+            
             if baseResult.errCode == "0"{
                 
-                
+                self?.dataArray?.removeAllObjects()
+                for dic in dataArr{
+                    
+                    let model = try! PhoneCardListModel.init(dictionary: dic as! [AnyHashable : Any])
+                    self?.dataArray?.add(model)
+                }
                 
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
@@ -60,7 +69,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }) {
             
         }
-        viewModel.fatchQueryWeekShouldAlsoAmount(nil)
+        viewModel.obtainOrderContractStagingSelectOrdersByUserId()
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

@@ -1164,9 +1164,10 @@
 		CCF97E5A20C67FD3009E7ECC /* MyBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */; };
 		CCF97E5C20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
 		CCF97E5D20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
-
 		CCF97E6120C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */; };
 		CCF97E6220C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */; };
+		CCF97E6920CA6D90009E7ECC /* PhoneOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6820CA6D90009E7ECC /* PhoneOrderListModel.m */; };
+		CCF97E6A20CA6D90009E7ECC /* PhoneOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6820CA6D90009E7ECC /* PhoneOrderListModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2180,6 +2181,8 @@
 		CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillDetailViewController.swift; sourceTree = "<group>"; };
 		CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillCell.swift; sourceTree = "<group>"; };
 		CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonerechargeCardNoneView.swift; sourceTree = "<group>"; };
+		CCF97E6720CA6D90009E7ECC /* PhoneOrderListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneOrderListModel.h; sourceTree = "<group>"; };
+		CCF97E6820CA6D90009E7ECC /* PhoneOrderListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneOrderListModel.m; sourceTree = "<group>"; };
 		DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64833171B0C1433C0C2116C /* Pods-fxd-fxdProductDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProductDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev.release.xcconfig"; sourceTree = "<group>"; };
 		EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
@@ -3535,6 +3538,7 @@
 		63E076541B67114800E269F2 /* DataModelModules */ = {
 			isa = PBXGroup;
 			children = (
+				CCF97E6B20CA6D9D009E7ECC /* PhoneOrderList */,
 				CC8BB7572090771500ADA647 /* BankCardAuthorization */,
 				CCEFC6EB207F651C0006D731 /* Collection */,
 				CCEFC6E2207DEE1B0006D731 /* HotRecommend */,
@@ -4659,6 +4663,15 @@
 			path = Collection;
 			sourceTree = "<group>";
 		};
+		CCF97E6B20CA6D9D009E7ECC /* PhoneOrderList */ = {
+			isa = PBXGroup;
+			children = (
+				CCF97E6720CA6D90009E7ECC /* PhoneOrderListModel.h */,
+				CCF97E6820CA6D90009E7ECC /* PhoneOrderListModel.m */,
+			);
+			path = PhoneOrderList;
+			sourceTree = "<group>";
+		};
 		CCFA2DC71EB02FC20071F46B /* HomeProductList */ = {
 			isa = PBXGroup;
 			children = (
@@ -5594,6 +5607,7 @@
 				84EBEA0120C917FC0045F538 /* PhonerechargeCardServiceViewModel.m in Sources */,
 				63EC5C871E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m in Sources */,
 				6313DC111BB3E48800EB45DE /* DES3Util.m in Sources */,
+				CCF97E6920CA6D90009E7ECC /* PhoneOrderListModel.m in Sources */,
 				637636E81D76A72A00E93289 /* LewPopupViewAnimationDrop.m in Sources */,
 				637BABFA1D7D3FAC00CF8EB5 /* RepayListInfo.m in Sources */,
 				63C50E451E666FF40035EE4F /* ContactBean.m in Sources */,
@@ -6081,6 +6095,7 @@
 				84EBEA0220C917FC0045F538 /* PhonerechargeCardServiceViewModel.m in Sources */,
 				CC0DFADC1EA5B1090024841A /* DES3Util.m in Sources */,
 				84A3801F1FAC1D8D008FB7AF /* UserMobileAuthenticationVCModules.m in Sources */,
+				CCF97E6A20CA6D90009E7ECC /* PhoneOrderListModel.m in Sources */,
 				84A37FF51FAC12A8008FB7AF /* ActivityHomePopView.m in Sources */,
 				84CC899F1F5973D700537910 /* DrawingsInfoModel.m in Sources */,
 				CC0DFADF1EA5B1090024841A /* LewPopupViewAnimationDrop.m in Sources */,
