@@ -18,6 +18,11 @@
 
 @end
 
+@protocol OrderModel <NSObject>
+
+
+@end
+
 @interface RepayListInfo : JSONModel
 
 @property (nonatomic, strong) NSNumber<Optional> *periods_repayed_;
@@ -31,7 +36,7 @@
 @property (nonatomic, strong) NSArray<Situations,Optional> *situations_;
 
 @property (nonatomic, strong) NSNumber<Optional> * repayment_amount_;
-
+//合同状态
 @property (nonatomic, strong) NSString<Optional> *contract_status_;
 
 @property (nonatomic, strong) NSNumber<Optional> * principal_amount_;
@@ -47,9 +52,30 @@
 @property (nonatomic, strong) NSString<Optional> * quickOmit;    //立省
 
 @property (nonatomic, strong) NSString<Optional> * settleRepayAmount;  //提前结清金额
-
+//剩余应还金额
+@property (nonatomic, strong) NSString<Optional> * debtRepayTotal;
+//最后还款日
+@property (nonatomic, strong) NSString<Optional> * dueDate;
 
 @property (nonatomic, strong) NSArray<Available_Redpackets,Optional> *available_redpackets_;
+//订单
+@property (nonatomic, strong) NSArray<OrderModel,Optional> *order;
+
+@end
+
+
+@interface OrderModel : JSONModel
+
+//订单号
+@property (nonatomic, strong) NSString<Optional> *order_no;
+//订单总额
+@property (nonatomic, strong) NSString<Optional> * order_price;
+//支付时间
+@property (nonatomic, strong) NSString<Optional> * payment_date;
+//数量
+@property (nonatomic, strong) NSString<Optional> *phone_card_count;
+//单价
+@property (nonatomic, strong) NSString<Optional> *phone_card_price;
 
 @end
 

@@ -110,7 +110,6 @@
     [self.tableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"HomePageCell"];
     [self.tableView registerClass:[SDCycleScrollCell class] forCellReuseIdentifier:@"SDCycleScrollCell"];
     [self.tableView registerClass:[RecentCell class] forCellReuseIdentifier:@"RecentCell"];
-    [self.tableView registerClass:[QuotaCell class] forCellReuseIdentifier:@"QuotaCell"];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -683,7 +682,21 @@
                         
                         homeCell.type = _homeProductList.flag;
                         homeCell.protocolArray = _protocolArray;
-                        homeCell.titleLabel.text = [NSString stringWithFormat:@"最高额度%@",_homeProductList.amount];
+                        NSString *descStr = @"";
+                        switch (_homeProductList.flag.integerValue) {
+                            case 1:
+                                descStr = @"最高额度";
+                                break;
+                            case 2:
+                                descStr = @"可用额度";
+                                break;
+                            case 7:
+                                descStr = @"待还金额";
+                                break;
+                            default:
+                                break;
+                        }
+                        homeCell.titleLabel.text = [NSString stringWithFormat:@"%@%@",descStr,_homeProductList.amount];
                         [homeCell.quotaBtn setTitle:_homeProductList.buttonText forState:UIControlStateNormal];
                         if (![homeCell.titleLabel.text isEqualToString:@""]) {
                             NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:homeCell.titleLabel.text];

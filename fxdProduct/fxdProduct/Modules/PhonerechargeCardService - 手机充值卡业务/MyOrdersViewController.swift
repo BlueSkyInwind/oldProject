@@ -43,6 +43,25 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }
     }
 
+    func getData(){
+        
+        let viewModel = RepayMentViewModel()
+        viewModel.setBlockWithReturn({[weak self] (returnValue) in
+            
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0"{
+                
+                
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+            
+        }) {
+            
+        }
+        viewModel.fatchQueryWeekShouldAlsoAmount(nil)
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
