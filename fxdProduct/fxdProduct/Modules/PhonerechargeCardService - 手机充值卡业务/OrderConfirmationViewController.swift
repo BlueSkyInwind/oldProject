@@ -101,6 +101,7 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
             print(verifyStr)
             self.createPhoneCardOrder((self.orderModel?.productNumber)!, verifyStr, { (result) in
                 if result {
+                    self.popSuccessVC()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         OrderVerifyCodeView.dismissImportPayPasswordView()
                     }
@@ -113,6 +114,12 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
                 }
             })
         })
+    }
+    
+    func popSuccessVC()  {
+        let controller = RepaymentResultViewController()
+        controller.state = .submittedSuccessfully
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     func popPrompt()  {

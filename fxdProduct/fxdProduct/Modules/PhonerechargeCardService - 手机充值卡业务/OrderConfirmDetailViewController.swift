@@ -30,7 +30,7 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
     }
     
     func obtainDataSource()  {
-        obtainOrderDetailInfo("fxd123") {[weak self] (isSuccess) in
+        obtainOrderDetailInfo(orderNo!) {[weak self] (isSuccess) in
             if(isSuccess) {
                 self?.removeFailView()
                 self?.configureView()
@@ -179,7 +179,6 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
 }
 
 extension OrderConfirmDetailViewController {
-    
     func obtainOrderDetailInfo(_ orderNo:String,_ result:@escaping ((_ success:Bool) -> Void))  {
         let serviceViewModel = PhonerechargeCardServiceViewModel.init()
         serviceViewModel.setBlockWithReturn({[weak self] (model) in

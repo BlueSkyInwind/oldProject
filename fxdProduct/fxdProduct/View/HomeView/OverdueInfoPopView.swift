@@ -20,8 +20,6 @@ class OverdueInfoPopView: UIView,NibLoadProtocol {
     @IBOutlet weak var defaultInserestTitle: UILabel!
     override func awakeFromNib() {
         
-        
-        
     }
     
     /*

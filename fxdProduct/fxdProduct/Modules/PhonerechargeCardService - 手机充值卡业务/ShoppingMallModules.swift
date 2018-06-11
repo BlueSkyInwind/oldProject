@@ -116,6 +116,9 @@ class ShoppingMallModules: BaseViewController,UITableViewDelegate,UITableViewDat
         tableView.deselectRow(at: indexPath, animated: true)
         
         let listModel = cardInfos[indexPath.row]
+        if Int(listModel.inStock)! <= 0 {
+            return
+        }
         switch listModel.operators {
         case "0":
             pushOrderConfirmationVC(.telecomCard, listModel.ofpayProductNumber)

@@ -36,7 +36,6 @@ class RepaymentResultViewController: BaseViewController {
         default:
             break
         }
-
         resultView()
         // Do any additional setup after loading the view.
     }
@@ -122,6 +121,9 @@ class RepaymentResultViewController: BaseViewController {
         case .failure?:
             self.navigationController?.popViewController(animated: true)
         case .submittedSuccessfully?:
+            let detailOrderVC = OrderConfirmDetailViewController()
+            detailOrderVC.orderNo = ""
+            self.navigationController?.pushViewController(detailOrderVC, animated: true)
             break
         default:
             break
