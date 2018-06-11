@@ -78,6 +78,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
                         let model = try! PhoneOrderListModel.init(dictionary: dic as! [AnyHashable : Any])
                         self?.dataArray?.add(model)
                     }
+                    self?.tableView?.reloadData()
                 }
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
@@ -143,7 +144,11 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
+        let model = dataArray![indexPath.section] as! PhoneOrderListModel
+        let controller = OrderConfirmDetailViewController()
+        controller.orderNo = model.order_no
+        self.navigationController?.pushViewController(controller, animated: true)
+    
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
