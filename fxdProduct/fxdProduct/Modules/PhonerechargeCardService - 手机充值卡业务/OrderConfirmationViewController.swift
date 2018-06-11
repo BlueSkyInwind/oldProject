@@ -99,9 +99,9 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
     func popVerifyCodeView()  {
         OrderVerifyCodeView.showOrderVerifyCodeView(self, displayStr: "短信验证码已经发送至" + FXD_Tool.share().changeTelephone(FXD_Utility.shared().userInfo.userMobilePhone), result: { (verifyStr) in
             print(verifyStr)
-            self.createPhoneCardOrder((self.orderModel?.productNumber)!, verifyStr, { (result) in
+            self.createPhoneCardOrder((self.orderModel?.productNumber)!, verifyStr, { (result,orderNo) in
                 if result {
-                    self.popSuccessVC()
+                    self.popSuccessVC(orderNo)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         OrderVerifyCodeView.dismissImportPayPasswordView()
                     }
@@ -116,9 +116,10 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
         })
     }
     
-    func popSuccessVC()  {
+    func popSuccessVC(_ orderStr:String)  {
         let controller = RepaymentResultViewController()
         controller.state = .submittedSuccessfully
+        controller.orderNo = orderStr
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -267,18 +268,19 @@ extension OrderConfirmationViewController {
         tradeSMS.fatchRequestSMSParamPhoneNumber(FXD_Utility.shared().userInfo.userMobilePhone, verifyCodeType:ORDERCONFIRM_CODE)
     }
     
-    func createPhoneCardOrder(_ cardNO:String, _ verifyCode:String,_ result : @escaping (_ isSuccess : Bool) -> Void)  {
+    func createPhoneCardOrder(_ cardNO:String, _ verifyCode:String,_ result : @escaping (_ isSuccess : Bool ,_ orderNO:String) -> Void)  {
         let serviceViewModel = PhonerechargeCardServiceViewModel.init()
         serviceViewModel.setBlockWithReturn({[weak self] (model) in
             let baseModel = model as! BaseResultModel
             if baseModel.errCode == "0"{
-                result(true)
+                let orderNo = baseModel.data as! String
+                result(true,orderNo)
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
-                result(false)
+                result(false,"")
             }
         }) {
-            result(false)
+            result(false,"")
         }
         serviceViewModel.createPhoneCardOrder(cardNO, verifyCode: verifyCode)
     }
