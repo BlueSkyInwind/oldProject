@@ -27,6 +27,10 @@ class PrepaidCardsInfoCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        let shadowView = UIView.init(frame: self.bounds)
+        shadowView.setCornerRadius(8, withShadow: true, withOpacity: 0.6)
+        self.contentView.addSubview(shadowView)
+        self.contentView.sendSubview(toBack: shadowView)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,9 +54,9 @@ class PrepaidCardsInfoCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
     
     @objc func isHiddenBtnClick(sender:UIButton) {
         if isHiddenPassword {
-            sender.setTitle("显示密码", for: UIControlState.normal)
-        }else{
             sender.setTitle("隐藏密码", for: UIControlState.normal)
+        }else{
+            sender.setTitle("显示密码", for: UIControlState.normal)
         }
         isHiddenPassword = !isHiddenPassword
         cardTableView?.reloadData()
@@ -64,6 +68,7 @@ class PrepaidCardsInfoCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CardNumAndPasswordCell", for: indexPath) as! CardNumAndPasswordCell
+        cell.selectionStyle = .none
         cell.isHiddenPwd = isHiddenPassword
         cell.cardInfoModel = cardArr?[indexPath.row]
         return cell
@@ -141,6 +146,16 @@ extension PrepaidCardsInfoCell {
             make.right.equalTo(copyBtn.snp.left).offset(-8)
             make.width.equalTo(76)
             make.height.equalTo(24)
+        }
+        
+        let sepView = UIView()
+        sepView.backgroundColor = "e6e6e6".uiColor()
+        backView.addSubview(sepView)
+        sepView.snp.makeConstraints { (make) in
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+            make.bottom.equalTo(0)
+            make.height.equalTo(1)
         }
         return backView
     }
