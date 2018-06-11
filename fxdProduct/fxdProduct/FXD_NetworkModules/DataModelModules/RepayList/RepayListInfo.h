@@ -18,7 +18,25 @@
 
 @end
 
-@protocol OrderModel <NSObject>
+//@protocol OrderModel <NSObject>
+//
+//
+//@end
+
+@interface OrderModel : JSONModel
+
+//订单号
+@property (nonatomic, strong) NSString<Optional> *order_no;
+//订单总额
+@property (nonatomic, strong) NSString<Optional> * order_price;
+//支付时间
+@property (nonatomic, strong) NSString<Optional> * payment_date;
+//数量
+@property (nonatomic, strong) NSString<Optional> *phone_card_count;
+//单价
+@property (nonatomic, strong) NSString<Optional> *phone_card_price;
+//订单名称
+@property (nonatomic, strong) NSString<Optional> *phone_card_name;
 
 
 @end
@@ -59,28 +77,12 @@
 
 @property (nonatomic, strong) NSArray<Available_Redpackets,Optional> *available_redpackets_;
 //订单
-@property (nonatomic, strong) NSArray<OrderModel,Optional> *order;
+@property (nonatomic, strong) OrderModel<Optional> *order;
 
 @end
 
 
-@interface OrderModel : JSONModel
 
-//订单号
-@property (nonatomic, strong) NSString<Optional> *order_no;
-//订单总额
-@property (nonatomic, strong) NSString<Optional> * order_price;
-//支付时间
-@property (nonatomic, strong) NSString<Optional> * payment_date;
-//数量
-@property (nonatomic, strong) NSString<Optional> *phone_card_count;
-//单价
-@property (nonatomic, strong) NSString<Optional> *phone_card_price;
-//订单名称
-@property (nonatomic, strong) NSString<Optional> *phone_card_name;
-
-
-@end
 
 
 @interface Situations : JSONModel

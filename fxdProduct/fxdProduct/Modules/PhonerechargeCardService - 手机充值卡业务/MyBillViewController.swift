@@ -11,19 +11,17 @@ import UIKit
 class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
 
     var tableView : UITableView?
-    var dataArray : NSMutableArray?
     var repayModel : RepayListInfo?
     var noneView : PhonerechargeCardNoneView?
-    
+    var orderModel : OrderModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.title = "我的账单"
         addBackItem()
         configureView()
-        dataArray = NSMutableArray.init(capacity: 100)
         
-//        getData()
+        getData()
         noneViewUI()
     }
 
@@ -63,17 +61,19 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             let baseResult = returnValue as! BaseResultModel
             
             if baseResult.errCode == "0"{
-                self?.repayModel = try! RepayListInfo.init(dictionary: baseResult.data as! [AnyHashable : Any]?)
-                for index in 0 ..< (self?.repayModel?.order.count)!{
-                    
-                    let model = self?.repayModel?.order[index] as! OrderModel
-                    self?.dataArray?.add(model)
-                }
+                
+                self?.noneView?.isHidden = true
+                self?.tableView?.isHidden = false
+                self?.repayModel = try! RepayListInfo.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                
+                self?.orderModel = self?.repayModel?.order
+                
                 self?.tableView?.reloadData()
                 
             }else{
                 
                 self?.noneView?.isHidden = false
+                self?.tableView?.isHidden = true
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
             
@@ -84,7 +84,9 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-//        return (dataArray?.count)!
+        if repayModel == nil {
+            return 0
+        }
         return 2
     }
     
@@ -149,10 +151,8 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             cell.isSelected = false
             cell.overdueView?.isHidden = false
             cell.overdueDateLabel?.text = "已逾期3天"
-            cell.moneyLabel?.text = "158883"
-            cell.dateLabel?.text = "93-44-23-4"
-//            cell.moneyLabel?.text = "¥" + (repayModel?.debtRepayTotal)!
-//            cell.dateLabel?.text = "最后还款日:" + (repayModel?.dueDate)!
+            cell.moneyLabel?.text = "¥" + (repayModel?.debtRepayTotal)!
+            cell.dateLabel?.text = "最后还款日:" + (repayModel?.dueDate)!
             return cell!
         }
         
@@ -164,12 +164,10 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         cell.isSelected = false
         cell.backgroundColor = UIColor.clear
         
-//        let model = dataArray?[indexPath.section - 1] as! OrderModel
-//
-//        cell.titleLabel?.text = model.phone_card_name
-//        cell.timeLabel?.text = model.payment_date
-//        cell.moneyLabel?.text = model.order_price
-//        cell.quantityLabel?.text = model.phone_card_price + "*" + model.phone_card_count
+        cell.titleLabel?.text = orderModel?.phone_card_name
+        cell.timeLabel?.text = orderModel?.payment_date
+        cell.moneyLabel?.text = orderModel?.order_price
+        cell.quantityLabel?.text = (orderModel?.phone_card_price)! + "*" + (orderModel?.phone_card_count)!
         
         return cell!
     }
@@ -213,6 +211,8 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     @objc func repayBtnClic(){
         
         let controller = MyBillDetailViewController()
+        let model = repayModel?.situations_[0] as! Situations
+        controller.staging_id_ = model.staging_id_
         self.navigationController?.pushViewController(controller, animated: true)
         
     }

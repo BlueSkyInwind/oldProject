@@ -18,8 +18,9 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
     
     var userSelectIndex:Int? = 0
     var selectedCard : CardInfo?
-    var detailModel : PaymentDetailModel?
-    
+    var detailModel : PaymentDetailAmountInfoModel?
+    var discountTicketModel : DiscountTicketModel?
+    var staging_id_ : String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +30,21 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         headerView()
         getBankCardsList()
         // Do any additional setup after loading the view.
+        
+        self.eductibleAmountfDiscount({[weak self] (result) in
+            if result {
+                if self?.detailModel != nil {
+                    if self?.detailModel?.couponUsageStatus == "0"{
+                        self?.obtainDiscountTicket({[weak self] (result) in
+                            if (self?.discountTicketModel?.canuselist.count)! > 0{
+                                self?.tableView?.reloadData()
+                            }
+                        })
+                    }
+                    self?.tableView?.reloadData()
+                }
+            }
+        })
     }
 
     
@@ -91,23 +107,25 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         
     }
     
-    func eductibleAmountfDiscount(){
+    func eductibleAmountfDiscount(_ result : @escaping (_ isSuccess : Bool) -> Void){
         let paymentViewModel = PaymentViewModel()
         paymentViewModel.setBlockWithReturn({[weak self] (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
                 
-                self?.detailModel = try! PaymentDetailModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
-                
+                self?.detailModel = try! PaymentDetailAmountInfoModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                result(true)
                 
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+                result(false)
             }
             
         }) {
             
+            result(false)
         }
-        paymentViewModel.obtaineductibleAmountfDiscount("", stagingIds: "")
+        paymentViewModel.obtaineductibleAmountfDiscount(nil, stagingIds: staging_id_)
     }
     
     
@@ -115,22 +133,23 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
      获取抵扣券，折扣券数据
      @param finish 结果回调
      */
-    
-    func obtainDiscountTicket(){
+
+    func obtainDiscountTicket(_ result : @escaping (_ isSuccess : Bool) -> Void){
         
         let applicationVM = ApplicationViewModel()
-        applicationVM.setBlockWithReturn({ (returnValue) in
+        applicationVM.setBlockWithReturn({[weak self] (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
                 
-               let discountTicketModel = try! DiscountTicketModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
-                
+                self?.discountTicketModel = try! DiscountTicketModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                result(true)
                 
             }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+                result(false)
             }
         }) {
-            
+            result(false)
         }
         applicationVM.new_obtainUserDiscountTicketListDisplayType("3", product_id: nil, pageNum: nil, pageSize: nil)
     }
@@ -244,7 +263,7 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         case 2:
             cell.rightLabel?.text = "¥10.10"
         case 3:
-            cell.rightLabel?.text = "¥30.00"
+            cell.rightLabel?.text = self.detailModel?.debtOverdueTotal
         case 4:
             cell.rightLabel?.text = "请选择"
         case 5:
