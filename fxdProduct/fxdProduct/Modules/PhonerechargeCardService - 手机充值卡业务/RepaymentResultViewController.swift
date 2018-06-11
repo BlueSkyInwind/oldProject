@@ -20,6 +20,7 @@ import UIKit
 class RepaymentResultViewController: BaseViewController {
 
     var state:Enum_Result?
+    var orderNo:String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -122,7 +123,7 @@ class RepaymentResultViewController: BaseViewController {
             self.navigationController?.popViewController(animated: true)
         case .submittedSuccessfully?:
             let detailOrderVC = OrderConfirmDetailViewController()
-            detailOrderVC.orderNo = ""
+            detailOrderVC.orderNo = orderNo
             self.navigationController?.pushViewController(detailOrderVC, animated: true)
             break
         default:
