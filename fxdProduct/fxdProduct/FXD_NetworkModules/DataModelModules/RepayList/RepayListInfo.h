@@ -76,6 +76,9 @@
 @property (nonatomic, strong) NSString<Optional> *phone_card_count;
 //单价
 @property (nonatomic, strong) NSString<Optional> *phone_card_price;
+//订单名称
+@property (nonatomic, strong) NSString<Optional> *phone_card_name;
+
 
 @end
 

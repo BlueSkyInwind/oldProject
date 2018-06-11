@@ -12,6 +12,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
 
     var tableView : UITableView?
     var dataArray : NSMutableArray?
+    var noneView : PhonerechargeCardNoneView?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +21,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         configureView()
         dataArray = NSMutableArray.init(capacity: 100)
         getData()
+        noneViewUI()
         // Do any additional setup after loading the view.
     }
     
@@ -44,6 +46,14 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }
     }
 
+    func noneViewUI(){
+        
+        noneView = PhonerechargeCardNoneView.init(frame: CGRect(x:0,y:64,width:_k_w,height:_k_h - 64))
+        noneView?.noneDesc?.text = "订单都被消灭了"
+        noneView?.isHidden = true
+        self.view.addSubview(noneView!)
+    }
+    
     func getData(){
         
         let viewModel = PhonerechargeCardServiceViewModel()
@@ -51,17 +61,24 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
             
             let baseResult = returnValue as! BaseResultModel
             
-            let dataArr = baseResult.data as! NSArray
-            
             if baseResult.errCode == "0"{
                 
-                self?.dataArray?.removeAllObjects()
-                for dic in dataArr{
+                let dataArr = baseResult.data as! NSArray
+                if dataArr.count == 0{
                     
-                    let model = try! PhoneCardListModel.init(dictionary: dic as! [AnyHashable : Any])
-                    self?.dataArray?.add(model)
+                    self?.noneView?.isHidden = false
+                    self?.tableView?.isHidden = true
+                    
+                }else{
+                    self?.noneView?.isHidden = true
+                    self?.tableView?.isHidden = false
+                    self?.dataArray?.removeAllObjects()
+                    for dic in dataArr{
+                        
+                        let model = try! PhoneOrderListModel.init(dictionary: dic as! [AnyHashable : Any])
+                        self?.dataArray?.add(model)
+                    }
                 }
-                
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
@@ -77,7 +94,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        return (dataArray?.count)!
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -114,7 +131,9 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         cell.selectionStyle = .none
         cell.backgroundColor = UIColor.clear
         cell.isSelected = false
-        cell.titleLabel?.text = "手机充值卡-面值100元"
+        let model = dataArray![indexPath.section] as! PhoneOrderListModel
+        
+//        cell.titleLabel?.text = model.phone_card_name
         cell.timeLabel?.text = "2018.03.23 15:32:23"
         cell.moneyLabel?.text = "¥1150.00"
         cell.quantityLabel?.text = "¥115.00*10"
