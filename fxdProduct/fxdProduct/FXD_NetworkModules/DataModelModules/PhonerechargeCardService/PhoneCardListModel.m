@@ -8,6 +8,12 @@
 
 #import "PhoneCardListModel.h"
 
+
+@implementation PhoneCardStoreModel
+
+
+
+@end
 @implementation PhoneCardListModel
 
 +(JSONKeyMapper *)keyMapper{
