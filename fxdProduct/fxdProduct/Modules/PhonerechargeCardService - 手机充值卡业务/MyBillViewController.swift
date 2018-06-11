@@ -165,8 +165,8 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         cell.backgroundColor = UIColor.clear
         
 //        let model = dataArray?[indexPath.section - 1] as! OrderModel
-//        
-//        cell.titleLabel?.text = "手机充值卡-面值100元"
+//
+//        cell.titleLabel?.text = model.phone_card_name
 //        cell.timeLabel?.text = model.payment_date
 //        cell.moneyLabel?.text = model.order_price
 //        cell.quantityLabel?.text = model.phone_card_price + "*" + model.phone_card_count
