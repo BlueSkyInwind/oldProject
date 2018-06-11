@@ -174,6 +174,9 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let controller = OrderConfirmDetailViewController()
+        controller.orderNo = orderModel?.order_no
+        self.navigationController?.pushViewController(controller, animated: true)
         
     }
     

@@ -154,27 +154,6 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         applicationVM.new_obtainUserDiscountTicketListDisplayType("3", product_id: nil, pageNum: nil, pageSize: nil)
     }
    
-//    PaymentViewModel * paymentViewModel = [[PaymentViewModel alloc]init];
-//    [paymentViewModel setBlockWithReturnBlock:^(id returnValue) {
-//    BaseResultModel * baseResultModel = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
-//    if ([baseResultModel.errCode isEqualToString:@"0"]) {
-//    //得到实际抵扣金额；
-//    PaymentDetailAmountInfoModel *  paymentDetailAIM = [[PaymentDetailAmountInfoModel alloc]initWithDictionary:(NSDictionary *)baseResultModel.data error:nil];
-//    _useTotalAmount = paymentDetailAIM.overpaidAmount.floatValue;
-//    _finalyRepayAmount = paymentDetailAIM.payAmount.floatValue;
-//    _debtOverdueTotal = paymentDetailAIM.debtOverdueTotal.floatValue;
-//    discountUsageStatus = paymentDetailAIM.couponUsageStatus;
-//    discountNumStr = paymentDetailAIM.couponUsageDesc;
-//    self.repayAmount = paymentDetailAIM.repayTotal.floatValue;
-//    finish(paymentDetailAIM);
-//    }else {
-//    finish(nil);
-//    [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.friendErrMsg];
-//    }
-//    } WithFaileBlock:^{
-//    finish(nil);
-//    }];
-//    [paymentViewModel obtaineductibleAmountfDiscount:chooseDiscountTDM.base_id stagingIds:[[self obtainRepayStaging_ids] copy]];
     //MARK:获取用户的银行卡列表
     func getBankCardsList(){
         
@@ -276,7 +255,6 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
                 let numStr = selectedCard?.cardNo[index!...]
                 cell.rightLabel?.text = (selectedCard?.bankName)!+"("+numStr!+")"
             }
-//            cell.rightLabel?.text = "中国银行(尾号9485)"
         default:
             break
         }
