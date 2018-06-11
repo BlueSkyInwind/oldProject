@@ -624,6 +624,10 @@
 		84EBEA1020C93A450045F538 /* UITableViewCell+YXTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA0E20C93A450045F538 /* UITableViewCell+YXTool.m */; };
 		84EBEA1320C93F130045F538 /* UIView+YXTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA1220C93F130045F538 /* UIView+YXTool.m */; };
 		84EBEA1420C93F130045F538 /* UIView+YXTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA1220C93F130045F538 /* UIView+YXTool.m */; };
+		84EBEA1620CA69A30045F538 /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA1520CA69A30045F538 /* PhonerechargeCardNoneView.swift */; };
+		84EBEA1720CA69A30045F538 /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA1520CA69A30045F538 /* PhonerechargeCardNoneView.swift */; };
+		84EBEA1E20CA72EE0045F538 /* PhoneOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA1D20CA72EE0045F538 /* PhoneOrderListModel.m */; };
+		84EBEA1F20CA72EE0045F538 /* PhoneOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EBEA1D20CA72EE0045F538 /* PhoneOrderListModel.m */; };
 		84ED5B5A1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5B1F4AB9E7004C0A59 /* mx_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */; };
 		84ED5B5C1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */; };
@@ -1164,10 +1168,6 @@
 		CCF97E5A20C67FD3009E7ECC /* MyBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */; };
 		CCF97E5C20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
 		CCF97E5D20C68BC2009E7ECC /* MyBillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */; };
-		CCF97E6120C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */; };
-		CCF97E6220C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */; };
-		CCF97E6920CA6D90009E7ECC /* PhoneOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6820CA6D90009E7ECC /* PhoneOrderListModel.m */; };
-		CCF97E6A20CA6D90009E7ECC /* PhoneOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF97E6820CA6D90009E7ECC /* PhoneOrderListModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1990,6 +1990,9 @@
 		84EBEA0E20C93A450045F538 /* UITableViewCell+YXTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+YXTool.m"; sourceTree = "<group>"; };
 		84EBEA1120C93F130045F538 /* UIView+YXTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+YXTool.h"; sourceTree = "<group>"; };
 		84EBEA1220C93F130045F538 /* UIView+YXTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+YXTool.m"; sourceTree = "<group>"; };
+		84EBEA1520CA69A30045F538 /* PhonerechargeCardNoneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhonerechargeCardNoneView.swift; sourceTree = "<group>"; };
+		84EBEA1C20CA72EE0045F538 /* PhoneOrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneOrderListModel.h; sourceTree = "<group>"; };
+		84EBEA1D20CA72EE0045F538 /* PhoneOrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneOrderListModel.m; sourceTree = "<group>"; };
 		84ED5B541F4AB9E7004C0A59 /* mx_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_back@2x.png"; sourceTree = "<group>"; };
 		84ED5B551F4AB9E7004C0A59 /* mx_finish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_finish@2x.png"; sourceTree = "<group>"; };
 		84ED5B561F4AB9E7004C0A59 /* mx_loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mx_loading@2x.png"; sourceTree = "<group>"; };
@@ -2180,9 +2183,6 @@
 		CCF97E5520C673B6009E7ECC /* RepaymentResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepaymentResultViewController.swift; sourceTree = "<group>"; };
 		CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillDetailViewController.swift; sourceTree = "<group>"; };
 		CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillCell.swift; sourceTree = "<group>"; };
-		CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonerechargeCardNoneView.swift; sourceTree = "<group>"; };
-		CCF97E6720CA6D90009E7ECC /* PhoneOrderListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneOrderListModel.h; sourceTree = "<group>"; };
-		CCF97E6820CA6D90009E7ECC /* PhoneOrderListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneOrderListModel.m; sourceTree = "<group>"; };
 		DEE49A6A9FD369E886C19528 /* Pods_fxd_fxdProductDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fxd_fxdProductDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64833171B0C1433C0C2116C /* Pods-fxd-fxdProductDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProductDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev.release.xcconfig"; sourceTree = "<group>"; };
 		EB67C3E13D5C16072571C75C /* Pods-fxd-fxdProduct.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fxd-fxdProduct.release.xcconfig"; path = "Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct.release.xcconfig"; sourceTree = "<group>"; };
@@ -3538,7 +3538,6 @@
 		63E076541B67114800E269F2 /* DataModelModules */ = {
 			isa = PBXGroup;
 			children = (
-				CCF97E6B20CA6D9D009E7ECC /* PhoneOrderList */,
 				CC8BB7572090771500ADA647 /* BankCardAuthorization */,
 				CCEFC6EB207F651C0006D731 /* Collection */,
 				CCEFC6E2207DEE1B0006D731 /* HotRecommend */,
@@ -4332,6 +4331,8 @@
 		84EBEA0320C91E0D0045F538 /* PhonerechargeCardService */ = {
 			isa = PBXGroup;
 			children = (
+				84EBEA1C20CA72EE0045F538 /* PhoneOrderListModel.h */,
+				84EBEA1D20CA72EE0045F538 /* PhoneOrderListModel.m */,
 				84EBEA0420C91E880045F538 /* PhoneCardListModel.h */,
 				84EBEA0520C91E880045F538 /* PhoneCardListModel.m */,
 			);
@@ -4452,7 +4453,7 @@
 				CCF97E5B20C68BC2009E7ECC /* MyBillCell.swift */,
 				84EBE9C620C692FB0045F538 /* RechargeBottomView.swift */,
 				8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */,
-				CCF97E6020C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift */,
+				84EBEA1520CA69A30045F538 /* PhonerechargeCardNoneView.swift */,
 				84EBE9C920C696FA0045F538 /* RechargeTypePopView.swift */,
 				84EBE9CC20C6970C0045F538 /* RechargeTypePopView.xib */,
 				84EBE9CF20C69E410045F538 /* PhoneRechargePopView.swift */,
@@ -4661,15 +4662,6 @@
 				CCEFC6ED207F65430006D731 /* CollectionListModel.m */,
 			);
 			path = Collection;
-			sourceTree = "<group>";
-		};
-		CCF97E6B20CA6D9D009E7ECC /* PhoneOrderList */ = {
-			isa = PBXGroup;
-			children = (
-				CCF97E6720CA6D90009E7ECC /* PhoneOrderListModel.h */,
-				CCF97E6820CA6D90009E7ECC /* PhoneOrderListModel.m */,
-			);
-			path = PhoneOrderList;
 			sourceTree = "<group>";
 		};
 		CCFA2DC71EB02FC20071F46B /* HomeProductList */ = {
@@ -5412,6 +5404,7 @@
 				63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */,
 				63FC25031D98F7E9006F58F3 /* YYLabel.m in Sources */,
 				CC5F9AB020735D990042DFDA /* SDCycleScrollCell.swift in Sources */,
+				84EBEA1620CA69A30045F538 /* PhonerechargeCardNoneView.swift in Sources */,
 				CC0346261F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */,
 				636B1B971C2D118000450358 /* FXD_ViewModelBaseClass.m in Sources */,
 				63E5C75E1D4AEA8F009A633C /* UserCardResult.m in Sources */,
@@ -5483,7 +5476,6 @@
 				63D43EF71D41F76D0076AC7F /* YYDiskCache.m in Sources */,
 				63FC24EE1D98F7E9006F58F3 /* YYTextDebugOption.m in Sources */,
 				84E306CA1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
-				CCF97E6120C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */,
 				63A24C6B1BE063A90036E8EF /* UITableViewCell+Extend.m in Sources */,
 				84EBE9E820C7C9110045F538 /* OrderVerifyCodeView.swift in Sources */,
 				634831051CBCCF190005C4CD /* GetCareerInfoViewModel.m in Sources */,
@@ -5607,7 +5599,7 @@
 				84EBEA0120C917FC0045F538 /* PhonerechargeCardServiceViewModel.m in Sources */,
 				63EC5C871E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m in Sources */,
 				6313DC111BB3E48800EB45DE /* DES3Util.m in Sources */,
-				CCF97E6920CA6D90009E7ECC /* PhoneOrderListModel.m in Sources */,
+				84EBEA1E20CA72EE0045F538 /* PhoneOrderListModel.m in Sources */,
 				637636E81D76A72A00E93289 /* LewPopupViewAnimationDrop.m in Sources */,
 				637BABFA1D7D3FAC00CF8EB5 /* RepayListInfo.m in Sources */,
 				63C50E451E666FF40035EE4F /* ContactBean.m in Sources */,
@@ -5900,6 +5892,7 @@
 				CC0DFA251EA5B1090024841A /* UILabel+FlickerNumber.m in Sources */,
 				84A3802B1FAC1D8D008FB7AF /* UserThirdPartyAuthVCModules.swift in Sources */,
 				CC45E7231FD55F7800DE803D /* WithdrawCashDetailModel.m in Sources */,
+				84EBEA1720CA69A30045F538 /* PhonerechargeCardNoneView.swift in Sources */,
 				CC0DFA271EA5B1090024841A /* RTRootNavigationController.m in Sources */,
 				CC0DFA281EA5B1090024841A /* MBPAlertView.m in Sources */,
 				8438F7151EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */,
@@ -5971,7 +5964,6 @@
 				CC742DA4204E6E1A00D645CC /* ComplianceViewModel.m in Sources */,
 				CC0DFA721EA5B1090024841A /* LOTStrokeShapeLayer.m in Sources */,
 				CC80DFF7206B3DD1000F9BAC /* SortView.swift in Sources */,
-				CCF97E6220C8C6F0009E7ECC /* PhonerechargeCardNoneView.swift in Sources */,
 				CC0DFA731EA5B1090024841A /* CardInfo.m in Sources */,
 				84EBE9E920C7C9110045F538 /* OrderVerifyCodeView.swift in Sources */,
 				CC0DFA741EA5B1090024841A /* MobileCell.m in Sources */,
@@ -6095,7 +6087,7 @@
 				84EBEA0220C917FC0045F538 /* PhonerechargeCardServiceViewModel.m in Sources */,
 				CC0DFADC1EA5B1090024841A /* DES3Util.m in Sources */,
 				84A3801F1FAC1D8D008FB7AF /* UserMobileAuthenticationVCModules.m in Sources */,
-				CCF97E6A20CA6D90009E7ECC /* PhoneOrderListModel.m in Sources */,
+				84EBEA1F20CA72EE0045F538 /* PhoneOrderListModel.m in Sources */,
 				84A37FF51FAC12A8008FB7AF /* ActivityHomePopView.m in Sources */,
 				84CC899F1F5973D700537910 /* DrawingsInfoModel.m in Sources */,
 				CC0DFADF1EA5B1090024841A /* LewPopupViewAnimationDrop.m in Sources */,

@@ -16,6 +16,12 @@ class OrderConfirmInfoCell: UITableViewCell {
         }
     }
     
+    var orderDetailModel:PhoneOrderDetailModel?{
+        didSet{
+            setDataDetailSource(orderDetailModel!)
+        }
+    }
+    
     @IBOutlet weak var orderTypeIcon: UIImageView!
     
     @IBOutlet weak var orderTypeLabel: UILabel!
@@ -55,6 +61,19 @@ class OrderConfirmInfoCell: UITableViewCell {
         amountDetailLabel.text = "¥" + "\(model.cardSalePrice ?? " ")x\(model.totalCount ?? " ")"
     }
 
+    func setDataDetailSource(_ model:PhoneOrderDetailModel)  {
+//        orderTypeIcon.sd_setImage(with: URL(string: model.icon), placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: nil)
+        orderTypeLabel.text = "\(model.payType ?? " ")"
+        numberLabel.text = "数量：" + "\(model.phone_card_count ?? " ")"
+        orderPriceLabel.text = "售价：¥" + "\(model.phone_card_price ?? " ")"
+        amountLabel.text = "订单总额：¥" + "\(model.order_price ?? " ")"
+        amountDetailLabel.text = "¥" + "\(model.phone_card_price ?? " ")x\(model.phone_card_count ?? " ")"
+    }
+    
+    
+    
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state

@@ -10,7 +10,13 @@ import UIKit
 
 class CardNumAndPasswordCell: UITableViewCell {
 
-    
+    var cardInfoModel:PhoneCardInfoModel?{
+        didSet{
+            setDataDetailSource(cardInfoModel!)
+        }
+    }
+    var isHiddenPwd:Bool = true;
+
     @IBOutlet weak var cardNumLabel: UILabel!
     
     @IBOutlet weak var cardPasswordLabel: UILabel!
@@ -27,9 +33,17 @@ class CardNumAndPasswordCell: UITableViewCell {
         copyPasswordBtn.clipsToBounds = true
     }
 
+    func setDataDetailSource(_ model:PhoneCardInfoModel)  {
+        cardNumLabel.text = "\(model.cardNo ?? "")"
+        if isHiddenPwd {
+            cardPasswordLabel.text = "\(model.cardPwdHide ?? "")"
+        }else{
+            cardPasswordLabel.text = "\(model.cardPwd ?? "")"
+        }
+    }
+    
     @IBAction func copyPasswordBtnClick(_ sender: Any) {
-        
-        
+        FXD_Tool.clipboard(ofCopy: cardInfoModel?.cardPwd, view: UIApplication.shared.keyWindow, prompt: "复制成功")
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

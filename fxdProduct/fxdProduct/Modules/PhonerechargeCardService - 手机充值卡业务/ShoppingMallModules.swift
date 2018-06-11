@@ -18,6 +18,7 @@ class ShoppingMallModules: BaseViewController,UITableViewDelegate,UITableViewDat
     var cardTitle = ["移动手机充值卡-面值","联通手机充值卡-面值","电信手机充值卡-面值"]
     
     var cardInfos:Array<PhoneCardListModel> = Array()
+    var  reclaimUrl:String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +64,9 @@ class ShoppingMallModules: BaseViewController,UITableViewDelegate,UITableViewDat
         }
         footerView.rechargeTransferClick = {[weak self] in
             FXD_AlertViewCust.sharedHHAlertView().showPhoneRechargeTitle("提示", content: "充值卡转让服务由第三方平台提供，与本平台无关", attributeDic: nil, textAlignment: NSTextAlignment.left, sureTitle: "我已知晓", compleBlock: { (index) in
-                
+                let webView = FXDWebViewController()
+                webView.urlStr = self?.reclaimUrl
+                self?.navigationController?.pushViewController(webView, animated: true)
             })
         }
     }
@@ -160,17 +163,19 @@ extension  ShoppingMallModules {
         serviceViewModel.setBlockWithReturn({[weak self] (model) in
             let baseModel = model as! BaseResultModel
             if baseModel.errCode == "0"{
-                let dataArr = baseModel.data as! NSArray
-                if dataArr.count > 0 {
+                let storeModel = try! PhoneCardStoreModel.init(dictionary: baseModel.data as! [AnyHashable : Any])
+                let dataArr = storeModel.products
+                self?.reclaimUrl = storeModel.reclaimUrl
+                if (dataArr?.count)! > 0 {
                     self?.cardInfos.removeAll()
                 }
-                for dic in dataArr {
-                    let listInfoModel = try! PhoneCardListModel.init(dictionary: dic as! [AnyHashable : Any])
+                for dic in dataArr! {
+                    let listInfoModel = dic as! PhoneCardListModel
                     self?.cardInfos.append(listInfoModel)
                 }
                 result(true)
             }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(self? .view, message: baseModel.friendErrMsg)
                 result(false)
             }
         }) {

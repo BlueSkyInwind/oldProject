@@ -74,7 +74,7 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
         tableView?.tableHeaderView = headerView
 
         let footerView = OrderConfirmBottomView.init(frame: CGRect.init(x: 0, y: 0, width:_k_w, height: 150))
-        footerView.addProtocolClick(["《信用赊购服务协议》"])
+        footerView.addProtocolClick(["《延期支付服务协议》"])
         tableView?.tableFooterView = footerView
         tableView?.sectionFooterHeight = 0
         footerView.protocolContentClick = { [weak self] (index) in
@@ -99,9 +99,13 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
     func popVerifyCodeView()  {
         OrderVerifyCodeView.showOrderVerifyCodeView(self, displayStr: "短信验证码已经发送至" + FXD_Tool.share().changeTelephone(FXD_Utility.shared().userInfo.userMobilePhone), result: { (verifyStr) in
             print(verifyStr)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                OrderVerifyCodeView.dismissImportPayPasswordView()
-            }
+            self.createPhoneCardOrder((self.orderModel?.productNumber)!, verifyStr, { (result) in
+                if result {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        OrderVerifyCodeView.dismissImportPayPasswordView()
+                    }
+                }
+            })
         }, verifyCodeClick: {
             self.sendOrderConfirmSMS({ (result) in
                 if result{
@@ -254,6 +258,22 @@ extension OrderConfirmationViewController {
             result(false)
         }
         tradeSMS.fatchRequestSMSParamPhoneNumber(FXD_Utility.shared().userInfo.userMobilePhone, verifyCodeType:ORDERCONFIRM_CODE)
+    }
+    
+    func createPhoneCardOrder(_ cardNO:String, _ verifyCode:String,_ result : @escaping (_ isSuccess : Bool) -> Void)  {
+        let serviceViewModel = PhonerechargeCardServiceViewModel.init()
+        serviceViewModel.setBlockWithReturn({[weak self] (model) in
+            let baseModel = model as! BaseResultModel
+            if baseModel.errCode == "0"{
+                result(true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
+                result(false)
+            }
+        }) {
+            result(false)
+        }
+        serviceViewModel.createPhoneCardOrder(cardNO, verifyCode: verifyCode)
     }
 }
 

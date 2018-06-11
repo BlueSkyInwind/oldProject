@@ -19,8 +19,8 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
     
     var tableView : UITableView?
     var thirdPartyAuthCell :ThirdPartyAuthTableViewCell?
-//    let dataArr : Array<String> = ["视频认证","手机认证","芝麻信用","工资流水"]
-    let dataArr : Array<String> = ["视频认证","手机认证","工资流水"]
+    let dataArr : Array<String> = ["视频认证","手机认证"]
+//    let dataArr : Array<String> = ["视频认证","手机认证","工资流水"]
 
     var userThirdPartCM:UserThirdPartCertificationModel?
     
@@ -94,10 +94,6 @@ class UserThirdPartyAuthVCModules: BaseViewController,UITableViewDelegate,UITabl
             thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.telephoneDesc == nil ? "未完成":userThirdPartCM?.telephoneDesc
 
             break
-//        case 2:
-//            thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
-//            thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.zmIdentityDesc == nil ? "未完成":userThirdPartCM?.zmIdentityDesc
-//            break
         case 2:
             thirdPartyAuthCell?.titleLabel?.text = dataArr[indexPath.row]
             thirdPartyAuthCell?.statusLabel?.text = userThirdPartCM?.salaryDesc == nil ? "未完成":userThirdPartCM?.salaryDesc

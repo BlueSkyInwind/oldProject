@@ -8,10 +8,16 @@
 
 #import "PhoneCardListModel.h"
 
+
+@implementation PhoneCardStoreModel
+
+
+
+@end
 @implementation PhoneCardListModel
 
 +(JSONKeyMapper *)keyMapper{
-    return [[JSONKeyMapper alloc]initWithModelToJSONDictionary:@{@"id":@"cardid"}];
+    return [[JSONKeyMapper alloc]initWithModelToJSONDictionary:@{@"cardid":@"id"}];
 }
 
 

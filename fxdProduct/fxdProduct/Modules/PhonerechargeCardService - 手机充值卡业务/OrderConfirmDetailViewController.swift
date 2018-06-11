@@ -12,13 +12,32 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
 
     var tableView:UITableView?
     var cardType:PhoneCardType?
+    var  phoneOrderDetailModel:PhoneOrderDetailModel?
+    var orderNo:String?
+    
+    var cardInfoCellHeight:CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "订单确认"
         self.addBackItem()
         // Do any additional setup after loading the view.
-        configureView()
+        obtainDataSource()
+    }
+    
+    override func loadFailureLoadRefreshButtonClick()  {
+        obtainDataSource()
+    }
+    
+    func obtainDataSource()  {
+        obtainOrderDetailInfo("fxd123") {[weak self] (isSuccess) in
+            if(isSuccess) {
+                self?.removeFailView()
+                self?.configureView()
+            }else{
+                self?.setFailView()
+            }
+        }
     }
     
     func configureView()  {
@@ -54,7 +73,9 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
         }
         bottomView.rechargeTransferClick = {[weak self] in
             FXD_AlertViewCust.sharedHHAlertView().showPhoneRechargeTitle("提示", content: "充值卡转让服务由第三方平台提供，与本平台无关", attributeDic: nil, textAlignment: NSTextAlignment.left, sureTitle: "我已知晓", compleBlock: { (index) in
-                
+                let webView = FXDWebViewController()
+                webView.urlStr = self?.phoneOrderDetailModel?.resellUrl
+                self?.navigationController?.pushViewController(webView, animated: true)
             })
         }
     }
@@ -76,7 +97,7 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
             height = 280
             break
         case 2:
-            height = 320
+            height = Int(cardInfoCellHeight)
             break
         default:
             break
@@ -100,15 +121,18 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
             default:
                 break
             }
+            cell.orderDetailModel = phoneOrderDetailModel
             return cell
         }else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderConfirmDetailInfoCell", for: indexPath) as!  OrderConfirmDetailInfoCell
+            cell.orderDetailModel = phoneOrderDetailModel
             return cell
         }else {
             var cell = tableView.dequeueReusableCell(withIdentifier: "PrepaidCardsInfoCell", for: indexPath) as!  PrepaidCardsInfoCell
             if cell == nil {
                 cell = PrepaidCardsInfoCell.init(style: UITableViewCellStyle.default, reuseIdentifier: "PrepaidCardsInfoCell")
             }
+            cell.orderDetailModel = phoneOrderDetailModel
             return cell
         }
     }
@@ -153,3 +177,28 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
     */
 
 }
+
+extension OrderConfirmDetailViewController {
+    
+    func obtainOrderDetailInfo(_ orderNo:String,_ result:@escaping ((_ success:Bool) -> Void))  {
+        let serviceViewModel = PhonerechargeCardServiceViewModel.init()
+        serviceViewModel.setBlockWithReturn({[weak self] (model) in
+            let baseModel = model as! BaseResultModel
+            if baseModel.errCode == "0"{
+                let orderDetailModel = try! PhoneOrderDetailModel.init(dictionary: baseModel.data as! [AnyHashable : Any])
+                self?.phoneOrderDetailModel = orderDetailModel
+                if orderDetailModel.cards.count > 0 {
+                    self?.cardInfoCellHeight = CGFloat(53 + 78 *  orderDetailModel.cards.count);
+                }
+                result(true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
+                result(false)
+            }
+        }) {
+            result(false)
+        }
+        serviceViewModel.obtainOrderDetailInfoRequest(orderNo)
+    }
+}
+

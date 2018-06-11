@@ -8,6 +8,17 @@
 
 #import <JSONModel/JSONModel.h>
 
+@protocol PhoneCardListModel <NSObject>
+
+@end
+
+@interface PhoneCardStoreModel : JSONModel
+
+@property (nonatomic,strong)NSArray<PhoneCardListModel,Optional> * products;
+@property (nonatomic,strong)NSString<Optional> * reclaimUrl;
+
+@end
+
 @interface PhoneCardListModel : JSONModel
 
 @property (nonatomic,strong)NSString<Optional> * cardid;
@@ -23,6 +34,9 @@
 @property (nonatomic,strong)NSString<Optional> * operators;  //0：电信，1：移动，2：联通
 
 @end
+
+
+
 
 
 @interface PhoneCardOrderModel : JSONModel

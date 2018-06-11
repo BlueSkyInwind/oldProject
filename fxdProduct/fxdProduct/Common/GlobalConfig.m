@@ -31,6 +31,7 @@ NSString * const _mainTwo_new_url  =  @"http://h5.faxindai.com/coregw/client/";
 //NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 //NSString * const _mainTwo_new_url  =  @"http://h5.test.fxds/coregw/client/";
 
+//开发测试外网地址 test.faxindai.com:8001  http://dev.faxindai.com:8002
 NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
 NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
 NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
@@ -39,6 +40,15 @@ NSString * const _mainTwo_new_url  =  @"http://h5.dev.fxds/coregw/client/";
 NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
 NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+
+//NSString * const _main_url  =   @"http://dev.faxindai.com:8002/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://dev.faxindai.com:8002/fxd-esb/esb/";
+//NSString * const _ValidESB_url  =   @"http://dev.faxindai.com:8002/fxd-esb/";
+//NSString * const _main_new_url  =  @"http://dev.faxindai.com:8002/apigw/client/";
+//NSString * const _mainTwo_new_url  =  @"http://dev.faxindai.com:8002/coregw/client/";
+//NSString * const _H5_url    =   @"http://dev.faxindai.com:8002/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://dev.faxindai.com:8002/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //UAT环境
 //NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
@@ -49,18 +59,6 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 //NSString * const _p2P_url = @"http://h5.uat.fxds/fxd-esb/p2p/";
 //NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
-//http://192.168.6.134:9191/fxd-esb/
-//本地
-//NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-//NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-//NSString * const _main_new_url  =  @"http://h5.dev.fxds/";
-//NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
-//NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
-
-//芝麻信用测试地址
-//NSString * const _main_url  =   @"http://180.168.159.198:19090/fxd-esb/esb/";
 
 #else
 #warning "未匹配环境"
@@ -281,7 +279,10 @@ NSString * const    _orderList_url               =    @"order/contractStaging/se
 NSString * const    _orderConfirmInfo_url               =    @"handata/confirm";
 //订单确认check
 NSString * const    _orderConfirmRequest_url               =    @"card/stock/check";
-
+//订单详情
+NSString * const    _orderDetailInfo_url               =    @"order/contractStaging/selectContractByOrderNo";
+//订单创建
+NSString * const    _createOrderPhoneCard_url               =    @"card/order/create";
 #pragma mark - 合规接口
 
 //获取合规开户信息
@@ -358,6 +359,7 @@ NSString * const RapidLoan = @"P001004";                   //急速贷平台
 NSString * const WhiteCollarLoan = @"P001005";           //白领贷平台
 NSString * const DeriveRapidLoan = @"P001006";           //急速贷衍生（30天）平台
 NSString * const EliteLoan = @"P001007";           //精英贷
+NSString * const Phone_RechargeCard = @"P002005";           //手机卡
 
 #pragma Mark - 项目配置信息
 

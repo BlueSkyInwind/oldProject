@@ -89,10 +89,10 @@
  启动粘贴板
 
  @param copyStr 拷贝内容
- @param vc 目标controller
+ @param view 目标view
  @param str 提示内容
  */
-+(void)ClipboardOfCopy:(NSString *)copyStr VC:(UIViewController *)vc prompt:(NSString *)str;
++(void)ClipboardOfCopy:(NSString *)copyStr View:(UIView *)view prompt:(NSString *)str;
 
 /**
  获取当前视图

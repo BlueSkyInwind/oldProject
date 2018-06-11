@@ -91,8 +91,7 @@
         [_applyBtn setBackgroundImage:[UIImage imageNamed:@"applicationBtn_Image"] forState:UIControlStateNormal];
         _applyBtn.enabled = true;
     }else{
-        [_applyBtn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [_applyBtn setBackgroundColor:rgb(139, 140, 143)];
+        [_applyBtn setBackgroundImage:[UIImage imageNamed:@"applicationBtn_unselect_Image"] forState:UIControlStateNormal];
         _applyBtn.enabled = false;
     }
 }
@@ -579,7 +578,7 @@
     } WithFaileBlock:^{
         
     }];
-    [userDataVM UserDataCertification:EliteLoan];
+    [userDataVM UserDataCertification:Phone_RechargeCard];
 }
 
 #pragma mark - 魔蝎信用卡以及社保集成
