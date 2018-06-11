@@ -94,5 +94,7 @@
 #import "UIView+YXTool.h"
 #import "RepayListInfo.h"
 #import "PhoneOrderListModel.h"
+#import "PaymentViewModel.h"
+#import "PaymentDetailModel.h"
 
 #endif /* fxdProduct_Bridging_Header_h */

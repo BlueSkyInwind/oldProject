@@ -133,10 +133,10 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         cell.isSelected = false
         let model = dataArray![indexPath.section] as! PhoneOrderListModel
         
-//        cell.titleLabel?.text = model.phone_card_name
-        cell.timeLabel?.text = "2018.03.23 15:32:23"
-        cell.moneyLabel?.text = "¥1150.00"
-        cell.quantityLabel?.text = "¥115.00*10"
+        cell.titleLabel?.text = model.phone_card_name
+        cell.timeLabel?.text = model.payment_date
+        cell.moneyLabel?.text = model.order_price
+        cell.quantityLabel?.text = model.phone_card_price + "*" + model.phone_card_count
         
         return cell!
     }
