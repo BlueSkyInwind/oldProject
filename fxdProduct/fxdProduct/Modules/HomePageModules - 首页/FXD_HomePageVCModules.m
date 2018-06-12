@@ -439,6 +439,9 @@
         if ([FXD_Utility sharedUtility].isHomeChooseShow) {
             [self homeEvaluationRedEnvelopeActivitiesPopups:_homeProductList];
         }
+        
+        [FXD_Utility sharedUtility].userInfo.applicationId = _homeProductList.applicationId;
+        
     } WithFaileBlock:^{
         finish(false);
     }];
@@ -698,7 +701,7 @@
                         }
                         homeCell.titleLabel.text = [NSString stringWithFormat:@"%@%@",descStr,_homeProductList.amount];
                         [homeCell.quotaBtn setTitle:_homeProductList.buttonText forState:UIControlStateNormal];
-                        if (![homeCell.titleLabel.text isEqualToString:@""]) {
+                        if (![homeCell.titleLabel.text isEqualToString:@""] && ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"2"] || [_homeProductList.flag isEqualToString:@"7"])) {
                             NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:homeCell.titleLabel.text];
                             [attriStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,4)];
                             [attriStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:NSMakeRange(0,4)];

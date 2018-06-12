@@ -22,6 +22,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         dataArray = NSMutableArray.init(capacity: 100)
         getData()
         noneViewUI()
+
         // Do any additional setup after loading the view.
     }
     
@@ -104,7 +105,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         let contentLabel = UILabel()
         contentLabel.textColor = TITLE_COLOR
         contentLabel.font = UIFont.systemFont(ofSize: 14)
-        contentLabel.text = "共3笔"
+        contentLabel.text = "共" + String((dataArray?.count)!) + "笔"
         headerView.addSubview(contentLabel)
         contentLabel.snp.makeConstraints { (make) in
             make.left.equalTo(headerView.snp.left).offset(22)
