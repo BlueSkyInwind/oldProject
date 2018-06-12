@@ -111,8 +111,23 @@ extension HomePageCell {
             refuseView()
         case 5?:
             withdrawMoneyImmediatelyView()
-        case 6?,8?,9?,12?,15?,10?,13?,11?:
+        case 9?,15?,10?,13?,11?:
             loanProcessCell()
+        case 6?,8?,12?:
+            var titleStr = ""
+            switch type{
+            case 6?:
+                titleStr = "订单确认中"
+            case 8?:
+                titleStr = "还款确认中"
+            case 12?:
+                titleStr = "资料测评中"
+            case .none:
+                break
+            case .some(_):
+                break
+            }
+            intermediateStateCell(titleStr: titleStr)
         case 14?:
             repayImmediatelyView()
         case 16?:
@@ -129,6 +144,28 @@ extension HomePageCell {
 
 extension HomePageCell {
     
+    fileprivate func intermediateStateCell(titleStr : String){
+        
+        let nameLabel = UILabel()
+        nameLabel.text = titleStr
+        nameLabel.font = UIFont.systemFont(ofSize: 30)
+        nameLabel.textColor = UI_MAIN_COLOR
+        self.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self).offset(30)
+            make.centerX.equalTo(self.snp.centerX)
+        }
+        
+        let descLabel = UILabel()
+        descLabel.textColor = RedPacket_COLOR
+        descLabel.text = "此过程预计5分钟"
+        descLabel.font = UIFont.systemFont(ofSize: 15)
+        self.addSubview(descLabel)
+        descLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(nameLabel.snp.bottom).offset(20)
+            make.centerX.equalTo(self.snp.centerX)
+        }
+    }
     //重新测评
     fileprivate func reassessCell(){
         
