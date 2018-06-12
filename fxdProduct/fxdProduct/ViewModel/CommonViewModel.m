@@ -77,4 +77,29 @@
     }];
 }
 
+-(void)obtainTransferAuthProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode cardBankCode:(NSString *)cardBankCode cardNo:(NSString *)cardNo stagingType:(NSString *)stagingType applicationId:(NSString *)applicationId phoneModel:(NSString *)phoneModel amountOfSale:(NSString *)amountOfSale{
+    ProtocolParamModel * protocolM = [[ProtocolParamModel alloc]init];
+    protocolM.productId  = Type_id;
+    protocolM.protocolType  = typeCode;
+    protocolM.cardBank = cardBankCode;
+    protocolM.cardNo = cardNo;
+    protocolM.stagingType = stagingType;
+    protocolM.applicationId = applicationId;
+    protocolM.amountOfSale = amountOfSale;
+    protocolM.phoneModel = phoneModel;
+    
+    NSDictionary *paramDic = [protocolM toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocolH5_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
 @end

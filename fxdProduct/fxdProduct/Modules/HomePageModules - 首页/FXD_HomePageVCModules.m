@@ -541,12 +541,12 @@
         return 0;
     }
     
-    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"2"] ||[_homeProductList.flag isEqualToString:@"7"]) {
-        
-        return 3;
-    }
+//    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"2"] ||[_homeProductList.flag isEqualToString:@"7"]) {
+//        
+//        return 3;
+//    }
     
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -563,7 +563,7 @@
             break;
         case 1:
             switch (_homeProductList.flag.integerValue) {
-                case 8:
+                
                 case 9:
                 case 10:
                 case 13:
@@ -575,11 +575,11 @@
                 case 1:
                 case 2:
                 case 7:
+                case 6:
+                case 8:
+                case 12:
                     return 130;
                     break;
-//                case 7:
-//                    return _k_h-_k_w*0.44-113-40 + (_protocolArray.count - 1)*30;
-//                    break;
                 default:
                     return 85*_homeProductList.hotRecommend.count+30;
                     break;
@@ -592,23 +592,6 @@
             break;
     }
     return 0;
-//    if (indexPath.section == 0) {
-//        return 103;
-//    }
-//
-//    if ([_homeProductList.flag isEqualToString:@"8"] ||[_homeProductList.flag isEqualToString:@"9"] ||[_homeProductList.flag isEqualToString:@"10"] ||[_homeProductList.flag isEqualToString:@"13"] ||[_homeProductList.flag isEqualToString:@"14"]||[_homeProductList.flag isEqualToString:@"15"] ) {
-//
-//        return _k_h-_k_w*0.44-113-113;
-//    }
-//    if ([_homeProductList.flag isEqualToString:@"17"]) {
-//        return 130;
-//    }
-//    if ([_homeProductList.flag isEqualToString:@"7"]) {
-//
-//        return _k_h-_k_w*0.44-113-40 + (_protocolArray.count - 1)*30;
-//    }
-//
-//    return 85*_homeProductList.hotRecommend.count+30;
     
 }
 
@@ -743,67 +726,7 @@
         default:
             break;
     }
-    
-//    if (indexPath.section == 0) {
-//
-//        SDCycleScrollCell *sdcycleScrollCell = [tableView dequeueReusableCellWithIdentifier:@"SDCycleScrollCell"];
-//        sdcycleScrollCell.selected = NO;
-//        sdcycleScrollCell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        sdcycleScrollCell.sdCycleScrollview.delegate = self;
-//        sdcycleScrollCell.delegate = self;
-//
-//        for (int i = 0; i<_homeProductList.platType.count; i++) {
-//            PlatTypeModel *model = _homeProductList.platType[i];
-//            switch (model.code_.integerValue) {
-//                case 1:
-//                    [sdcycleScrollCell.loanBtn setTitle:model.desc_ forState:UIControlStateNormal];
-//                    [sdcycleScrollCell.loanBtnImage setImage:[UIImage imageNamed:@"loan_icon"] forState:UIControlStateNormal];
-//                    break;
-//                case 2:
-//                    [sdcycleScrollCell.gameBtn setTitle:model.desc_ forState:UIControlStateNormal];
-//                    [sdcycleScrollCell.gameBtnImage setImage:[UIImage imageNamed:@"game_icon"] forState:UIControlStateNormal];
-//                    break;
-//                case 3:
-//                    [sdcycleScrollCell.tourismBtn setTitle:model.desc_ forState:UIControlStateNormal];
-//                    [sdcycleScrollCell.tourismBtnImage setImage:[UIImage imageNamed:@"tourism_icon"] forState:UIControlStateNormal];
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//
-//
-//        sdcycleScrollCell.sdCycleScrollview.titlesGroup = _homeProductList.paidList;
-//        return sdcycleScrollCell;
-//
-//    }else if ([_homeProductList.flag isEqualToString:@"7"] ||[_homeProductList.flag isEqualToString:@"8"] ||[_homeProductList.flag isEqualToString:@"9"] ||[_homeProductList.flag isEqualToString:@"10"] ||[_homeProductList.flag isEqualToString:@"13"] ||[_homeProductList.flag isEqualToString:@"14"]||[_homeProductList.flag isEqualToString:@"15"] ||[_homeProductList.flag isEqualToString:@"17"]){
-//
-//        HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
-//        [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//        homeCell.backgroundColor = [UIColor whiteColor];
-//        homeCell.selected = NO;
-//        homeCell.delegate = self;
-//        homeCell.homeProductListModel = _homeProductList;
-//        if (_homeProductList != nil) {
-//
-//            homeCell.type = _homeProductList.flag;
-//            homeCell.protocolArray = _protocolArray;
-//            homeCell.titleLabel.text = @"最高额度2000元";
-//            [homeCell.quotaBtn setTitle:@"极速申请" forState:UIControlStateNormal];
-//
-//        }
-//
-//        return homeCell;
-//    }
-//
-//     RecentCell *recentCell = [tableView dequeueReusableCellWithIdentifier:@"RecentCell"];
-//    [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//    recentCell.backgroundColor = [UIColor whiteColor];
-//    recentCell.homeProductListModel = _homeProductList;
-//    recentCell.delegate = self;
-//    [recentCell.tableView reloadData];
-//    [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//    return recentCell;
+
     return nil;
 }
 

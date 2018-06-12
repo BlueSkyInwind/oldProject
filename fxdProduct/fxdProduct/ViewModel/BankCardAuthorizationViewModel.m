@@ -17,10 +17,11 @@
     NSMutableArray *arr = [NSMutableArray arrayWithCapacity:100];
     for (int i = 0; i<authCodeListArr.count; i++) {
         BankCardAuthorizationAuthListModel *model = (BankCardAuthorizationAuthListModel *)authCodeListArr[i];
-        NSDictionary *modelDic = @{@"authPlatCode":model.authPlatCode,@"authSmsCode":smsCodeArray[i],@"requestType":requestType};
+//        NSDictionary *modelDic = @{@"authPlatCode":model.authPlatCode,@"authSmsCode":smsCodeArray[i],@"requestType":requestType};
+        NSDictionary *modelDic = @{@"authPlatCode":model.authPlatCode,@"authSmsCode":smsCodeArray[i]};
         [arr addObject:modelDic];
     }
-    NSDictionary *dic = @{@"authCodeList":arr, @"bankCode":bankCode,@"cardNo":cardNo,@"phone":phone};
+    NSDictionary *dic = @{@"authCodeList":arr, @"bankShortName":bankCode,@"cardNo":cardNo,@"phone":phone};
     
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager]DataRequestWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_cardAuthAuth_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
@@ -39,7 +40,7 @@
     
     CardAuthSmsSendParamModel *paramModel = [[CardAuthSmsSendParamModel alloc]init];
     paramModel.authPlatCode = authPlatCode;
-    paramModel.bankCode = bankCode;
+    paramModel.bankShortName = bankCode;
     paramModel.cardNo = cardNo;
     paramModel.phone = phone;
     NSDictionary *dic = [paramModel toDictionary];

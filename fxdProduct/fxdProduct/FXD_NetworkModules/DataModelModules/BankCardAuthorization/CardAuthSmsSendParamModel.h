@@ -13,7 +13,7 @@
 //授权平台code
 @property (nonatomic, strong)NSString<Optional> *authPlatCode;
 //银行code
-@property (nonatomic, strong)NSString<Optional> *bankCode;
+@property (nonatomic, strong)NSString<Optional> *bankShortName;
 //银行卡号
 @property (nonatomic, strong)NSString<Optional> *cardNo;
 //手机号

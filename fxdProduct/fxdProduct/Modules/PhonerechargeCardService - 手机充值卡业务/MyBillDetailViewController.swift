@@ -461,7 +461,7 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
                     controller.cardNum = self?.selectedCard?.cardNo
                     controller.telNum = self?.selectedCard?.bankPhone
                     controller.bankCode = self?.selectedCard?.cardShortName
-                    controller.bankShortName = self?.selectedCard?.bankName
+                    controller.bankShortName = self?.selectedCard?.cardShortName
                     controller.requestType = ""
                     controller.applicationId = FXD_Utility.shared().userInfo.applicationId
                     controller.type = .repay

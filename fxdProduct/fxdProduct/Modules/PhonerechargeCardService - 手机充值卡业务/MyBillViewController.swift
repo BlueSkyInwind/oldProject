@@ -155,10 +155,16 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             cell.selectionStyle = .none
             cell.backgroundColor = UIColor.white
             cell.isSelected = false
-            cell.overdueView?.isHidden = false
-            cell.overdueDateLabel?.text = "已逾期3天"
+            cell.overdueView?.isHidden = true
+            
             cell.moneyLabel?.text = "¥" + (repayModel?.debtRepayTotal)!
             cell.dateLabel?.text = "最后还款日:" + (repayModel?.dueDate)!
+            
+            if Int((repayModel?.maxOverdueDays)!)! > 0{
+                
+                cell.overdueView?.isHidden = false
+                cell.overdueDateLabel?.text = "已逾期" + (repayModel?.maxOverdueDays)! + "天"
+            }
             return cell!
         }
         

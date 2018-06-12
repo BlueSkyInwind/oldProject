@@ -110,9 +110,23 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
             if baseResult.errCode == "0" {
                 
                 //银行卡授权成功跳回页面
+                var index = 3
+                switch self.type{
+                case .drawing,.applySale,.repay:
+                    index = 2
+                    break
+                default:
+                    index = 3
+                    break
+                }
+                
                 let count = self.rt_navigationController.rt_viewControllers.count
-                let controller = self.rt_navigationController.rt_viewControllers[count - 3]
+                let controller = self.rt_navigationController.rt_viewControllers[count - index]
                 self.navigationController?.popToViewController(controller, animated: true)
+//                //银行卡授权成功跳回页面
+//                let count = self.rt_navigationController.rt_viewControllers.count
+//                let controller = self.rt_navigationController.rt_viewControllers[count - 3]
+//                self.navigationController?.popToViewController(controller, animated: true)
         
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
@@ -172,7 +186,12 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
         case 1:
 
             let model = bankCardQueryArray![indexPath.row] as! BankCardAuthorizationAuthListModel
-            contentTableViewCell?.titleLabel?.text = model.authPlatName
+            if ((bankCardQueryArray?.count)! == 1){
+                contentTableViewCell?.titleLabel?.text = "授权码："
+            }else{
+                contentTableViewCell?.titleLabel?.text = model.authPlatName
+            }
+//            contentTableViewCell?.titleLabel?.text = model.authPlatName
             contentTableViewCell?.contentTextField?.delegate = self
             contentTableViewCell?.contentTextField?.tag = indexPath.row + 101
             contentTableViewCell?.contentTextField?.addTarget(self, action: #selector(contentTextFieldEdit(textField:)), for: UIControlEvents.editingChanged)
@@ -320,7 +339,7 @@ extension FXD_WithholdAuthViewController {
         }
         agreementView.agreementClick = { [weak self] in
             //协议点击
-            self?.getProtocolContentProtocolType(productId: "", typeCode: "1", applicationId: (self?.applicationId)!, periods: "")
+            self?.getProtocolContentProtocolType(productId: Phone_RechargeCard, typeCode: "1", applicationId: (self?.applicationId)!, periods: "")
             
         }
         footerView.addSubview(agreementView)
@@ -363,7 +382,8 @@ extension FXD_WithholdAuthViewController {
         }) {
             
         }
-        commonVM.obtainTransferAuthProtocolType(productId, typeCode: typeCode, cardBankCode: bankCode, cardNo: cardNum, stagingType: stagingType, applicationId: applicationId)
+//        commonVM.obtainTransferAuthProtocolType(productId, typeCode: typeCode, cardBankCode: bankCode, cardNo: cardNum, stagingType: stagingType, applicationId: applicationId)
+        commonVM.obtainTransferAuthProtocolType(productId, typeCode: typeCode, cardBankCode: bankCode, cardNo: cardNum, stagingType: stagingType, applicationId: applicationId, phoneModel: "", amountOfSale: "")
 
     }
 

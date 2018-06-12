@@ -79,6 +79,10 @@
 //订单
 @property (nonatomic, strong) OrderModel<Optional> *order;
 
+@property (nonatomic, strong) NSString<Optional> *maxOverdueDays;
+
+@property (nonatomic, strong) NSString<Optional> *maxOverdueDaysText;
+
 @end
 
 
