@@ -62,7 +62,6 @@
     protocolM.stagingType = stagingType;
     protocolM.applicationId = applicationId;
     
-    
     NSDictionary *paramDic = [protocolM toDictionary];
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocolH5_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
@@ -76,6 +75,27 @@
         }
     }];
 }
+
+-(void)obtainPhoneCardProtocolType:(NSString *)productId totalPrice:(NSString *)totalPrice applicationId:(NSString *)applicationId{
+    ProtocolParamModel * protocolM = [[ProtocolParamModel alloc]init];
+    protocolM.productId  = productId;
+    protocolM.protocolType  = @"21";
+    protocolM.applicationId = applicationId;
+    protocolM.amountOfSale = totalPrice;
+    NSDictionary *paramDic = [protocolM toDictionary];
+    
+    [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocolH5_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
+        if (self.returnBlock) {
+            BaseResultModel * baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
+            self.returnBlock(baseRM);
+        }
+    } failure:^(EnumServerStatus status, id object) {
+        if (self.faileBlock) {
+            self.faileBlock();
+        }
+    }];
+}
+
 
 -(void)obtainTransferAuthProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode cardBankCode:(NSString *)cardBankCode cardNo:(NSString *)cardNo stagingType:(NSString *)stagingType applicationId:(NSString *)applicationId phoneModel:(NSString *)phoneModel amountOfSale:(NSString *)amountOfSale{
     ProtocolParamModel * protocolM = [[ProtocolParamModel alloc]init];
@@ -101,5 +121,6 @@
         }
     }];
 }
+
 
 @end

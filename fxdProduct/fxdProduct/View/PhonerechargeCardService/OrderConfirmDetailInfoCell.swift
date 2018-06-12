@@ -8,6 +8,7 @@
 
 import UIKit
 
+typealias LookOverProcotolContent = () -> Void
 class OrderConfirmDetailInfoCell: UITableViewCell {
 
     var orderDetailModel:PhoneOrderDetailModel?{
@@ -31,6 +32,8 @@ class OrderConfirmDetailInfoCell: UITableViewCell {
     @IBOutlet weak var repayDateLabel: UILabel!
     
     @IBOutlet weak var protocolBtn: UIButton!
+    
+    var lookOverProcotol:LookOverProcotolContent?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,7 +60,9 @@ class OrderConfirmDetailInfoCell: UITableViewCell {
     
 
     @IBAction func protocolButtonClick(_ sender: UIButton) {
-        
+        if lookOverProcotol != nil {
+            lookOverProcotol!()
+        }
         
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
