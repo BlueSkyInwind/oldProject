@@ -14,9 +14,10 @@
     self.layer.shadowPath =[UIBezierPath bezierPathWithRect:self.bounds].CGPath;
     self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     self.layer.shadowOpacity = 1.0f;
-    self.layer.shadowOffset = CGSizeMake(0, 0);
+    self.layer.shadowOffset = CGSizeMake(0, -3);
     self.layer.shadowRadius = 5.0f;
 }
+
 - (void)setCornerRadius:(CGFloat)radius withShadow:(BOOL)shadow withOpacity:(CGFloat)opacity {
     self.layer.cornerRadius = radius;
     if (shadow) {

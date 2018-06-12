@@ -47,7 +47,8 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
         tableView?.separatorStyle = .none
         self.view.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
-            make.edges.equalTo(self.view)
+            make.left.right.top.equalTo(self.view)
+            make.bottom.equalTo(self.view.snp.bottom).offset(-60)
         })
         
         tableView?.register(UINib.init(nibName: "OrderConfirmInfoCell", bundle: nil), forCellReuseIdentifier: "OrderConfirmInfoCell")
@@ -59,8 +60,9 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
         tableView?.tableHeaderView = headerView
         tableView?.sectionFooterHeight = 0
         
-        let bottomView = RechargeBottomView.init(frame: CGRect.zero)
+        let bottomView = RechargeBottomView.init(frame: CGRect.init(x: _k_h - 60, y: 0, width: _k_w, height: 60))
         bottomView.backgroundColor = UIColor.white
+        bottomView.addShadow()
         self.view.addSubview(bottomView)
         bottomView.snp.makeConstraints { (make) in
             make.bottom.left.right.equalTo(self.view)
@@ -108,23 +110,25 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderConfirmInfoCell", for: indexPath) as! OrderConfirmInfoCell
-            switch cardType {
-            case .moblieCard?:
-                cell.orderTypeIcon.image = UIImage.init(named: "moblie_Icon")
-                break
-            case .unicomCard?:
-                cell.orderTypeIcon.image = UIImage.init(named: "unicom_Icon")
-                break
-            case .telecomCard?:
-                cell.orderTypeIcon.image = UIImage.init(named: "telecom_Icon")
-                break
-            default:
-                break
-            }
+            cell.selectionStyle = .none
+//            switch cardType {
+//            case .moblieCard?:
+//                cell.orderTypeIcon.image = UIImage.init(named: "moblie_Icon")
+//                break
+//            case .unicomCard?:
+//                cell.orderTypeIcon.image = UIImage.init(named: "unicom_Icon")
+//                break
+//            case .telecomCard?:
+//                cell.orderTypeIcon.image = UIImage.init(named: "telecom_Icon")
+//                break
+//            default:
+//                break
+//            }
             cell.orderDetailModel = phoneOrderDetailModel
             return cell
         }else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderConfirmDetailInfoCell", for: indexPath) as!  OrderConfirmDetailInfoCell
+            cell.selectionStyle = .none
             cell.orderDetailModel = phoneOrderDetailModel
             return cell
         }else {
@@ -132,6 +136,7 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
             if cell == nil {
                 cell = PrepaidCardsInfoCell.init(style: UITableViewCellStyle.default, reuseIdentifier: "PrepaidCardsInfoCell")
             }
+            cell.selectionStyle = .none
             cell.orderDetailModel = phoneOrderDetailModel
             return cell
         }
@@ -147,7 +152,6 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
         if section == 1 {
             let header = UIView.init()
             header.backgroundColor = UIColor.clear
