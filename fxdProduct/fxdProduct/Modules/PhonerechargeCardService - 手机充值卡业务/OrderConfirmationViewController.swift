@@ -78,7 +78,13 @@ class OrderConfirmationViewController: BaseViewController,UITableViewDelegate,UI
         tableView?.tableFooterView = footerView
         tableView?.sectionFooterHeight = 0
         footerView.protocolContentClick = { [weak self] (index) in
-
+            self?.obtainProcotolAddress({ (status, content) in
+                if status {
+                    let fxdWeb = FXDWebViewController.init()
+                    fxdWeb.urlStr = content
+                    self?.navigationController?.pushViewController(fxdWeb, animated: true)
+                }
+            })
         }
         footerView.protocolBtnClick = { [weak self] (status) in
             
@@ -284,6 +290,27 @@ extension OrderConfirmationViewController {
         }
         serviceViewModel.createPhoneCardOrder(cardNO, verifyCode: verifyCode)
     }
+    
+    func obtainProcotolAddress(_ result : @escaping (_ isSuccess : Bool ,_ address:String) -> Void)  {
+        let commonVC = CommonViewModel.init()
+        commonVC.setBlockWithReturn({[weak self] (model) in
+            let baseModel = model as! BaseResultModel
+            if baseModel.errCode == "0"{
+                let content =  (baseModel.data as! [String:String])["productProURL"]
+                result(true,content!)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
+                result(false,"")
+            }
+        }) {
+            
+        }
+        commonVC.obtainPhoneCardProtocolType(Phone_RechargeCard, totalPrice: orderModel?.totalPrice, applicationId: "")
+    }
+    
+    
+    
+    
 }
 
 

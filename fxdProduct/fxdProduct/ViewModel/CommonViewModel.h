@@ -34,4 +34,13 @@
  @param cardNo 银行卡号
  */
 -(void)obtainTransferAuthProtocolType:(NSString *)Type_id typeCode:(NSString *)typeCode cardBankCode:(NSString *)cardBankCode cardNo:(NSString *)cardNo stagingType:(NSString *)stagingType applicationId:(NSString *)applicationId;
+
+/**
+ 手机充值卡协议
+
+ @param productId 产品id
+ @param totalPrice 总价格
+ @param applicationId 进件id
+ */
+-(void)obtainPhoneCardProtocolType:(NSString *)productId totalPrice:(NSString *)totalPrice applicationId:(NSString *)applicationId;
 @end

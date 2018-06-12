@@ -111,25 +111,19 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderConfirmInfoCell", for: indexPath) as! OrderConfirmInfoCell
             cell.selectionStyle = .none
-//            switch cardType {
-//            case .moblieCard?:
-//                cell.orderTypeIcon.image = UIImage.init(named: "moblie_Icon")
-//                break
-//            case .unicomCard?:
-//                cell.orderTypeIcon.image = UIImage.init(named: "unicom_Icon")
-//                break
-//            case .telecomCard?:
-//                cell.orderTypeIcon.image = UIImage.init(named: "telecom_Icon")
-//                break
-//            default:
-//                break
-//            }
             cell.orderDetailModel = phoneOrderDetailModel
             return cell
         }else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderConfirmDetailInfoCell", for: indexPath) as!  OrderConfirmDetailInfoCell
             cell.selectionStyle = .none
             cell.orderDetailModel = phoneOrderDetailModel
+            cell.lookOverProcotol = { [weak self] in
+                self?.obtainProcotolAddress({ (status, content) in
+                    let fxdWeb = FXDWebViewController.init()
+                    fxdWeb.urlStr = content
+                    self?.navigationController?.pushViewController(fxdWeb, animated: true)
+                })
+            }
             return cell
         }else {
             var cell = tableView.dequeueReusableCell(withIdentifier: "PrepaidCardsInfoCell", for: indexPath) as!  PrepaidCardsInfoCell
@@ -202,6 +196,23 @@ extension OrderConfirmDetailViewController {
             result(false)
         }
         serviceViewModel.obtainOrderDetailInfoRequest(orderNo)
+    }
+    
+    func obtainProcotolAddress(_ result : @escaping (_ isSuccess : Bool ,_ address:String) -> Void)  {
+        let commonVC = CommonViewModel.init()
+        commonVC.setBlockWithReturn({[weak self] (model) in
+            let baseModel = model as! BaseResultModel
+            if baseModel.errCode == "0"{
+                let content =  (baseModel.data as! [String:String])["productProURL"]
+                result(true,content!)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
+                result(false,"")
+            }
+        }) {
+            
+        }
+        commonVC.obtainPhoneCardProtocolType(Phone_RechargeCard, totalPrice: phoneOrderDetailModel?.order_price, applicationId: "")
     }
 }
 
