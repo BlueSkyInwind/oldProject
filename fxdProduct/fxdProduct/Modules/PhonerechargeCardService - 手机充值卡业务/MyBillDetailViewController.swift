@@ -20,11 +20,22 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
     var selectedCard : CardInfo?
     var detailModel : PaymentDetailAmountInfoModel?
     var discountTicketModel : DiscountTicketModel?
+    var discountDetailModel : DiscountTicketDetailModel?
     var staging_id_ : String?
+    var chooseIndex : Int?
+    var discountNumStr : String?
+    var selectRedPacketID : String?
+    var useredPacketAmount : String?
+    var applicationId : String?
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "我的账单"
+        useredPacketAmount = "0.0"
+        chooseIndex = 0
         addBackItem()
         configureView()
         headerView()
@@ -34,11 +45,16 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         self.eductibleAmountfDiscount({[weak self] (result) in
             if result {
                 if self?.detailModel != nil {
+                    self?.moneyLabel?.text = "¥" + (self?.detailModel?.repayTotal)!
                     if self?.detailModel?.couponUsageStatus == "0"{
                         self?.obtainDiscountTicket({[weak self] (result) in
-                            if (self?.discountTicketModel?.canuselist.count)! > 0{
-                                self?.tableView?.reloadData()
+                            
+                            if result{
+                                if (self?.discountTicketModel?.canuselist.count)! > 0{
+                                    self?.tableView?.reloadData()
+                                }
                             }
+                            
                         })
                     }
                     self?.tableView?.reloadData()
@@ -98,7 +114,7 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         moneyLabel = UILabel()
         moneyLabel?.textColor = UI_MAIN_COLOR
         moneyLabel?.font = UIFont.systemFont(ofSize: 30)
-        moneyLabel?.text = "¥1166.10"
+//        moneyLabel?.text = "¥1166.10"
         headerView.addSubview(moneyLabel!)
         moneyLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo(headerTitle.snp.bottom).offset(20)
@@ -125,7 +141,7 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
             
             result(false)
         }
-        paymentViewModel.obtaineductibleAmountfDiscount(nil, stagingIds: staging_id_)
+        paymentViewModel.obtaineductibleAmountfDiscount(discountDetailModel?.base_id, stagingIds: staging_id_)
     }
     
     
@@ -236,17 +252,17 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         
         switch indexPath.row {
         case 0:
-            cell.rightLabel?.text = "¥150.00"
+            cell.rightLabel?.text = self.detailModel?.debtDamages
         case 1:
-            cell.rightLabel?.text = "¥16.10"
+            cell.rightLabel?.text = self.detailModel?.debtServiceFee
         case 2:
-            cell.rightLabel?.text = "¥10.10"
+            cell.rightLabel?.text = self.detailModel?.debtPenaltyInterest
         case 3:
             cell.rightLabel?.text = self.detailModel?.debtOverdueTotal
         case 4:
-            cell.rightLabel?.text = "请选择"
+            cell.rightLabel?.text = self.detailModel?.couponUsageDesc
         case 5:
-            cell.rightLabel?.text = "¥0"
+            cell.rightLabel?.text = self.detailModel?.overpaidAmount
         case 6:
             
             if selectedCard != nil {
@@ -264,12 +280,55 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch indexPath.row {
+            
+        case 4:
+            showChooseAmountView()
         case 6:
             pushUserBankListVC()
         default:
             break
         }
     }
+
+    func showChooseAmountView(){
+        let discountCouponVC = DiscountCouponListVCModules()
+        discountCouponVC.dataListArr = (discountTicketModel?.canuselist! as NSArray?)
+        discountCouponVC.currentIndex = "\(chooseIndex)" as NSString
+        discountCouponVC.displayType = "3"
+        discountCouponVC.view.frame = CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h * 0.6)
+        discountCouponVC.chooseDiscountTicket = ({[weak self] (index,discountTicketDetailModel,str ) in
+            self?.chooseIndex = index;
+            self?.discountDetailModel = discountTicketDetailModel;
+            if index != 0 {
+                
+                self?.eductibleAmountfDiscount({[weak self] (result) in
+                    
+                    if result{
+    
+                        self?.selectRedPacketID = discountTicketDetailModel.base_id
+                        self?.useredPacketAmount = self?.detailModel?.redPacketRepayAmount
+                        if discountTicketDetailModel.voucher_type == "1"{
+                            self?.discountNumStr = "抵扣" + (self?.detailModel?.redPacketRepayAmount)! + "元"
+                        }else if discountTicketDetailModel.voucher_type == "3"{
+                            self?.discountNumStr = "折扣" + (self?.detailModel?.redPacketRepayAmount)! + "元"
+                        }
+                        self?.tableView?.reloadData()
+                    }
+                })
+
+            }else{
+            
+                self?.selectRedPacketID = nil
+                self?.useredPacketAmount = "0.0"
+                self?.discountNumStr = "有可用券"
+            }
+            self?.tableView?.reloadData()
+        })
+        
+        self.presentSemiViewController(discountCouponVC, withOptions: [KNSemiModalOptionKeys.pushParentBack.takeUnretainedValue() : false,KNSemiModalOptionKeys.parentAlpha.takeUnretainedValue() : 0.8], completion: nil, dismiss: {
+        })
+    }
+    
     
     func pushUserBankListVC()  {
         let userBankCardListVC = UserBankCardListVCModule.init()
@@ -326,10 +385,102 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
     
     @objc fileprivate func confirmBtnClick(){
         
-        let controller = RepaymentResultViewController()
-        controller.state = .intermediate
-        self.navigationController?.pushViewController(controller, animated: true)
+        getInfo()
+
+//        fxdRepay()
+    }
+    
+    func fxdRepay(){
         
+        let paymentDetailModel = PaymentDetailModel()
+        
+        if Float(useredPacketAmount!) != 0{
+            
+            paymentDetailModel.staging_ids_ = staging_id_
+            paymentDetailModel.account_card_id_ = selectedCard?.cardId
+            paymentDetailModel.total_amount_ = NSNumber(value: NSString(string: (detailModel?.overpaidAmount)!).floatValue)//溢缴金
+            paymentDetailModel.repay_amount_ = NSNumber(value: NSString(string: (detailModel?.repayTotal)!).floatValue)//应还金额
+            paymentDetailModel.repay_total_ = NSNumber(value: NSString(string: (detailModel?.payAmount)!).floatValue)//实际金额
+            paymentDetailModel.save_amount_ = NSNumber(value: NSString(string: (detailModel?.debtServiceFee)!).floatValue)//前端全选时节省的未还服务费
+            paymentDetailModel.socket = ""//还款标示
+            paymentDetailModel.request_type_ = "0"//请求类型
+            paymentDetailModel.redpacket_id_ = selectRedPacketID
+            paymentDetailModel.redpacket_cash_ = NSNumber(value: NSString(string: useredPacketAmount!).floatValue)
+        
+        }else{
+            paymentDetailModel.staging_ids_ = staging_id_
+            paymentDetailModel.account_card_id_ = selectedCard?.cardId
+            paymentDetailModel.total_amount_ = NSNumber(value: NSString(string: (detailModel?.overpaidAmount)!).floatValue)//溢缴金
+            paymentDetailModel.repay_amount_ = NSNumber(value: NSString(string: (detailModel?.repayTotal)!).floatValue)//应还金额
+            paymentDetailModel.repay_total_ = NSNumber(value: NSString(string: (detailModel?.payAmount)!).floatValue)//实际金额
+            paymentDetailModel.save_amount_ = NSNumber(value: NSString(string: (detailModel?.debtServiceFee)!).floatValue)//前端全选时节省的未还服务费
+            paymentDetailModel.socket = ""//还款标示
+            paymentDetailModel.request_type_ = "0"//请求类型
+            
+        }
+        
+        
+        let paymentViewModel = PaymentViewModel()
+        paymentViewModel.setBlockWithReturn({ (returnValue) in
+            
+            let baseResultModel = returnValue as! BaseResultModel
+            if baseResultModel.errCode == "0"{
+//                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResultModel.friendErrMsg)
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+//                    self.navigationController?.popViewController(animated: true)
+//                })
+                
+                let controller = RepaymentResultViewController()
+                controller.state = .intermediate
+                self.navigationController?.pushViewController(controller, animated: true)
+                
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResultModel.friendErrMsg)
+            }
+            
+        }) {
+            
+        }
+        paymentViewModel.fxDpaymentDetail(paymentDetailModel)
+        
+    }
+    
+    //MARK: 银行卡授权查询页面
+    func getInfo(){
+        let bankCardAuthorizationVM = BankCardAuthorizationViewModel()
+        bankCardAuthorizationVM.setBlockWithReturn({[weak self] (returnValue) in
+            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+            if baseResult.errCode == "0" {
+
+                let model = try! BankCardAuthorizationModel.init(dictionary: baseResult.data as! [AnyHashable : Any])
+                if model.authList.count > 0{
+
+                    let controller = FXD_WithholdAuthViewController()
+                    controller.bankName = self?.selectedCard?.bankName
+                    controller.cardNum = self?.selectedCard?.cardNo
+                    controller.telNum = self?.selectedCard?.bankPhone
+                    controller.bankCode = self?.selectedCard?.cardShortName
+                    controller.bankShortName = self?.selectedCard?.bankName
+                    controller.requestType = ""
+                    controller.applicationId = FXD_Utility.shared().userInfo.applicationId
+                    controller.type = .repay
+                    self?.navigationController?.pushViewController(controller, animated: true)
+
+                }else{
+
+                    self?.fxdRepay()
+                }
+
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+            }
+        }) {
+
+        }
+        
+        bankCardAuthorizationVM.cardAuthQueryBankShortName(selectedCard?.cardShortName, cardNo: selectedCard?.cardNo,type:"2")
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

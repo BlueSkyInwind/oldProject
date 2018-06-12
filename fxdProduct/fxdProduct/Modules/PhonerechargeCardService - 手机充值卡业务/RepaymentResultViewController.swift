@@ -59,7 +59,7 @@ class RepaymentResultViewController: BaseViewController {
             tipStr = "还款成功"
         case .submittedSuccessfully?:
             imageStr = "success"
-            tipStr = "您的订单已提交成功成功"
+            tipStr = "您的订单已提交成功"
             btnTitle = "查看订单"
         default:
             break
@@ -104,7 +104,19 @@ class RepaymentResultViewController: BaseViewController {
     
     override func popBack(){
         
-        back()
+        switch state {
+        case .intermediate?,.success?:
+            for  vc in self.rt_navigationController.rt_viewControllers {
+                if vc.isKind(of: MyBillViewController.self) {
+                    self.navigationController?.popToViewController(vc, animated: true)
+                    return
+                }
+            }
+        case .failure?,.submittedSuccessfully?:
+            self.navigationController?.popViewController(animated: true)
+        default:
+            break
+        }
     }
     
     func back(){

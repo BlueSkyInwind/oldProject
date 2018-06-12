@@ -38,6 +38,6 @@ typedef NS_ENUM(NSUInteger, ApplicationStatus) {
 @property (nonatomic, copy) NSString *userMobilePhone;
 @property (nonatomic, copy) NSString *account_id;
 @property (nonatomic, copy) NSString *pruductId;
-
+@property (nonatomic, copy) NSString *applicationId;
 
 @end

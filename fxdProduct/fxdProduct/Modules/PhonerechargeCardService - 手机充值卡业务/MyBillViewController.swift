@@ -65,16 +65,22 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                 self?.noneView?.isHidden = true
                 self?.tableView?.isHidden = false
                 self?.repayModel = try! RepayListInfo.init(dictionary: baseResult.data as! [AnyHashable : Any])
-                
-                self?.orderModel = self?.repayModel?.order
-                
-                self?.tableView?.reloadData()
+                if self?.repayModel == nil{
+                    self?.noneView?.isHidden = false
+                    self?.noneView?.noneDesc?.text = "账单都被消灭了"
+                    self?.tableView?.isHidden = true
+                }else{
+                    
+                    self?.orderModel = self?.repayModel?.order
+                    self?.tableView?.reloadData()
+                }
                 
             }else{
                 
                 self?.noneView?.isHidden = false
+                self?.noneView?.noneDesc?.text = baseResult.friendErrMsg
                 self?.tableView?.isHidden = true
-                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
+//                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
             
         }) {
@@ -215,7 +221,9 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         
         let controller = MyBillDetailViewController()
         let model = repayModel?.situations_[0] as! Situations
+        
         controller.staging_id_ = model.staging_id_
+        controller.applicationId = orderModel?.order_no
         self.navigationController?.pushViewController(controller, animated: true)
         
     }

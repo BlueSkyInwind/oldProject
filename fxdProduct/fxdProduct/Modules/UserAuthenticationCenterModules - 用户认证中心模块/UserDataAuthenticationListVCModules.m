@@ -548,7 +548,7 @@
             [self setApplyBtnStatus];
             [self.tableView reloadData];
         }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.msg];
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:resultM.friendErrMsg];
         }
         [self.tableView.mj_header endRefreshing];
     } WithFaileBlock:^{
