@@ -82,6 +82,8 @@
     protocolM.protocolType  = @"21";
     protocolM.applicationId = applicationId;
     protocolM.amountOfSale = totalPrice;
+    protocolM.periods = @"1";
+    protocolM.stagingType = @"2";
     NSDictionary *paramDic = [protocolM toDictionary];
     
     [[FXD_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newproductProtocolH5_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {

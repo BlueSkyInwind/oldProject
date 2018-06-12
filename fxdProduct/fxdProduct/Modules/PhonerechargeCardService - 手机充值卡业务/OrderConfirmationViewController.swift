@@ -307,10 +307,6 @@ extension OrderConfirmationViewController {
         }
         commonVC.obtainPhoneCardProtocolType(Phone_RechargeCard, totalPrice: orderModel?.totalPrice, applicationId: "")
     }
-    
-    
-    
-    
 }
 
 
