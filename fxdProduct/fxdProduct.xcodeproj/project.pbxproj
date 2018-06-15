@@ -1104,6 +1104,8 @@
 		CC8BC95D1FEB5873008E135E /* MineViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC95B1FEB586F008E135E /* MineViewModel.m */; };
 		CC8BC9611FEB59D9008E135E /* ExperienceValueGradeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9601FEB59D9008E135E /* ExperienceValueGradeModel.m */; };
 		CC8BC9621FEB59D9008E135E /* ExperienceValueGradeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8BC9601FEB59D9008E135E /* ExperienceValueGradeModel.m */; };
+		CC98718920D396EC00AA3F99 /* HomeHotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98718820D396EC00AA3F99 /* HomeHotCell.swift */; };
+		CC98718A20D396EC00AA3F99 /* HomeHotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98718820D396EC00AA3F99 /* HomeHotCell.swift */; };
 		CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */; };
 		CC989C341F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC989C331F4D8738000CDACF /* AuthenticationCenterCell.swift */; };
@@ -2132,6 +2134,7 @@
 		CC8BC95B1FEB586F008E135E /* MineViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineViewModel.m; sourceTree = "<group>"; };
 		CC8BC95F1FEB59D9008E135E /* ExperienceValueGradeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExperienceValueGradeModel.h; sourceTree = "<group>"; };
 		CC8BC9601FEB59D9008E135E /* ExperienceValueGradeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExperienceValueGradeModel.m; sourceTree = "<group>"; };
+		CC98718820D396EC00AA3F99 /* HomeHotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHotCell.swift; sourceTree = "<group>"; };
 		CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
 		CC989C331F4D8738000CDACF /* AuthenticationCenterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCenterCell.swift; sourceTree = "<group>"; };
 		CCA181931FC6CDAC0094DA58 /* MineMiddleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineMiddleView.swift; sourceTree = "<group>"; };
@@ -3644,6 +3647,7 @@
 				CC8BC9531FEA0374008E135E /* HomePageCell.swift */,
 				CC5F9AAF20735D990042DFDA /* SDCycleScrollCell.swift */,
 				CC8BB751208F174600ADA647 /* RecentCell.swift */,
+				CC98718820D396EC00AA3F99 /* HomeHotCell.swift */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -5604,6 +5608,7 @@
 				637BABFA1D7D3FAC00CF8EB5 /* RepayListInfo.m in Sources */,
 				63C50E451E666FF40035EE4F /* ContactBean.m in Sources */,
 				6313DC201BB512BD00EB45DE /* BaseIndexViewController.m in Sources */,
+				CC98718920D396EC00AA3F99 /* HomeHotCell.swift in Sources */,
 				63FC24F31D98F7E9006F58F3 /* YYTextLine.m in Sources */,
 				63C50E4C1E67F6C10035EE4F /* CustomerIDInfo.m in Sources */,
 				CC4F0638207DE90B0030A12A /* FindViewModel.m in Sources */,
@@ -6092,6 +6097,7 @@
 				84CC899F1F5973D700537910 /* DrawingsInfoModel.m in Sources */,
 				CC0DFADF1EA5B1090024841A /* LewPopupViewAnimationDrop.m in Sources */,
 				CC0DFAE01EA5B1090024841A /* RepayListInfo.m in Sources */,
+				CC98718A20D396EC00AA3F99 /* HomeHotCell.swift in Sources */,
 				CC0DFAE11EA5B1090024841A /* ContactBean.m in Sources */,
 				CC0DFAE31EA5B1090024841A /* BaseIndexViewController.m in Sources */,
 				CC0DFAE41EA5B1090024841A /* YYTextLine.m in Sources */,

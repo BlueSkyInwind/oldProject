@@ -14,18 +14,21 @@ import UIKit
     func collectionBtnClick(_ sender: UIButton)
 }
 
-class RecentCell: UITableViewCell ,UITableViewDelegate,UITableViewDataSource,SuperLoanCellDelegate{
+//,UITableViewDelegate,UITableViewDataSource
+class RecentCell: UITableViewCell ,SuperLoanCellDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
-    @objc var type : String?{
-        didSet(newValue){
-            
-            setCellType(type: type!)
-        }
-    }
+//    @objc var type : String?{
+//        didSet(newValue){
+//
+//            setCellType(type: type!)
+//        }
+//    }
     
     //产品数据
     @objc var homeProductListModel = FXD_HomeProductListModel()
     @objc var tableView : UITableView?
+    
+    @objc var collectionView : UICollectionView?
     
     //SuperLoanCellDelegate  点击收藏按钮的代理方法
     func collectionBtn(_ sender: UIButton) {
@@ -52,7 +55,7 @@ class RecentCell: UITableViewCell ,UITableViewDelegate,UITableViewDataSource,Sup
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        type = "0"
+//        type = "0"
         setUpUI()
     }
     required init?(coder aDecoder: NSCoder) {
@@ -122,23 +125,49 @@ extension RecentCell{
             make.right.equalTo(arrowBtn.snp.left).offset(-8)
             make.centerY.equalTo(tipView.snp.centerY)
         }
-        tableView = UITableView()
-        tableView?.isScrollEnabled = false
-        tableView?.delegate = self
-        tableView?.dataSource = self
-        self.addSubview(tableView!)
-        tableView?.snp.makeConstraints { (make) in
+        
+
+        let layout = UICollectionViewFlowLayout()
+        //列间距,行间距,偏移
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 1
+        layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10)
+        
+        collectionView = UICollectionView.init(frame: CGRect(x:0,y:30,width:Int(_k_w),height:Int(self.frame.size.height)), collectionViewLayout: layout)
+        collectionView?.delegate = self
+        collectionView?.dataSource = self;
+        //注册一个cell
+        collectionView!.register(HomeHotCell.self, forCellWithReuseIdentifier:"HomeHotCell")
+        collectionView?.backgroundColor = UIColor.white
+        self.addSubview(collectionView!)
+        collectionView?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(0)
             make.right.equalTo(self).offset(0)
             make.top.equalTo(tipView.snp.bottom).offset(0)
             make.bottom.equalTo(self).offset(0)
-        }
+        })
+//        tableView = UITableView()
+//        tableView?.isScrollEnabled = false
+//        tableView?.delegate = self
+//        tableView?.dataSource = self
+//        self.addSubview(tableView!)
+//        tableView?.snp.makeConstraints { (make) in
+//            make.left.equalTo(self).offset(0)
+//            make.right.equalTo(self).offset(0)
+//            make.top.equalTo(tipView.snp.bottom).offset(0)
+//            make.bottom.equalTo(self).offset(0)
+//        }
     }
 }
 
+
+
 extension RecentCell{
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    // MARK: 代理
+    //每个区的item个数
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if homeProductListModel.hotRecommend != nil {
             
@@ -146,96 +175,137 @@ extension RecentCell{
         }
         
         return 0
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        superLoanCell = tableView.dequeueReusableCell(withIdentifier:"SuperLoanCell") as? SuperLoanCell
-        if superLoanCell == nil {
-            superLoanCell = SuperLoanCell.init(style: .default, reuseIdentifier: "SuperLoanCell")
-        }
-        
-        superLoanCell?.delegate = self
-        superLoanCell?.selectionStyle = .none
 
-        if homeProductListModel.hotRecommend.count <= 0 {
-            return superLoanCell!
-        }
+    }
+    
+    //自定义cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeHotCell", for: indexPath) as! HomeHotCell
+//        cell.backgroundColor = UIColor.white
         let model = homeProductListModel.hotRecommend[indexPath.row] as! HomeHotRecommendModel
-        superLoanCell?.type = model.moduletype
         let url = URL(string: model.plantLogo)
-        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiImage, error, cachType, url) in
+    
+        cell.nameImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiImage, error, cachType, url) in
             
         })
-        superLoanCell?.titleLabel?.text = model.plantName
-        let maximumAmount = model.maximumAmount != nil ? model.maximumAmount : ""
-        let maximumAmountUnit = model.maximumAmountUnit != nil ? model.maximumAmountUnit : ""
-        superLoanCell?.qutaLabel?.text = "额度:最高" + maximumAmount! + maximumAmountUnit!
-        let term = model.unitStr != nil ? model.unitStr : ""
-        superLoanCell?.termLabel?.text = "期限:" + term!
-        if term != "" {
-            
-            let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.termLabel?.text)!)
-            attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-4))
-            superLoanCell?.termLabel?.attributedText = attrstr1
-        }
-        let referenceRate = model.referenceRate != nil ? model.referenceRate : ""
-        if model.referenceMode == nil {
-            
-            superLoanCell?.feeLabel?.text = "费用:" + referenceRate! + "%"
-        }else{
-            superLoanCell?.feeLabel?.text = "费用:" + referenceRate! + "%/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
-        }
+        cell.nameLabel?.text = model.plantName
+        cell.descLabel?.text = model.applicantsCount
+        return cell
         
-        
-        if referenceRate != nil && model.referenceMode != nil {
-            
-            let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.feeLabel?.text)!)
-            attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-4))
-            superLoanCell?.feeLabel?.attributedText = attrstr
-        }
-        
-        superLoanCell?.descBtn?.setTitle(model.platformIntroduction, for: .normal)
-        superLoanCell?.descBtn?.setTitleColor(UIColor.purple, for: .normal)
-        superLoanCell?.descBtn?.layer.borderColor = UIColor.purple.cgColor
-        
-        if indexPath.section % 2 == 0 {
-            superLoanCell?.descBtn?.setTitleColor(UIColor.blue, for: .normal)
-            superLoanCell?.descBtn?.layer.borderColor = UIColor.blue.cgColor
-        }
-        
-        superLoanCell?.lineView?.isHidden = true
-        let str : NSString = model.platformIntroduction! as NSString
-        let dic = NSDictionary(object: UIFont.yx_systemFont(ofSize: 12) as Any, forKey: NSAttributedStringKey.font as NSCopying)
-        let width = str.boundingRect(with: CGSize(width:_k_w,height:20), options: .usesLineFragmentOrigin, attributes:(dic as! [NSAttributedStringKey : Any]), context: nil).size.width + 20
-        
-        superLoanCell?.descBtn?.snp.updateConstraints({ (make) in
-            make.width.equalTo(width)
-        })
-        
-        superLoanCell?.collectionBtn?.tag = indexPath.row
-        superLoanCell?.collectionBtn?.setImage(UIImage.init(named: "collection_icon"), for: .normal)
-        if model.isCollect == "0" {
-            superLoanCell?.collectionBtn?.setImage(UIImage.init(named: "collection_selected_icon"), for: .normal)
-        }
-        
-        return superLoanCell!
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width:(_k_w - 60 - 20)/4,height:103)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let model = homeProductListModel.hotRecommend[indexPath.row] as! HomeHotRecommendModel
         getCompLink(thirdPlatformId: model.id_)
         
     }
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//
+//        if homeProductListModel.hotRecommend != nil {
+//
+//            return homeProductListModel.hotRecommend.count
+//        }
+//
+//        return 0
+//    }
+//
+//
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 85
+//    }
+//
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        superLoanCell = tableView.dequeueReusableCell(withIdentifier:"SuperLoanCell") as? SuperLoanCell
+//        if superLoanCell == nil {
+//            superLoanCell = SuperLoanCell.init(style: .default, reuseIdentifier: "SuperLoanCell")
+//        }
+//
+//        superLoanCell?.delegate = self
+//        superLoanCell?.selectionStyle = .none
+//
+//        if homeProductListModel.hotRecommend.count <= 0 {
+//            return superLoanCell!
+//        }
+//
+//
+//        let model = homeProductListModel.hotRecommend[indexPath.row] as! HomeHotRecommendModel
+//        superLoanCell?.type = model.moduletype
+//        let url = URL(string: model.plantLogo)
+//        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiImage, error, cachType, url) in
+//
+//        })
+//        superLoanCell?.titleLabel?.text = model.plantName
+//        let maximumAmount = model.maximumAmount != nil ? model.maximumAmount : ""
+//        let maximumAmountUnit = model.maximumAmountUnit != nil ? model.maximumAmountUnit : ""
+//        superLoanCell?.qutaLabel?.text = "额度:最高" + maximumAmount! + maximumAmountUnit!
+//        let term = model.unitStr != nil ? model.unitStr : ""
+//        superLoanCell?.termLabel?.text = "期限:" + term!
+//        if term != "" {
+//
+//            let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.termLabel?.text)!)
+//            attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-4))
+//            superLoanCell?.termLabel?.attributedText = attrstr1
+//        }
+//        let referenceRate = model.referenceRate != nil ? model.referenceRate : ""
+//        if model.referenceMode == nil {
+//
+//            superLoanCell?.feeLabel?.text = "费用:" + referenceRate! + "%"
+//        }else{
+//            superLoanCell?.feeLabel?.text = "费用:" + referenceRate! + "%/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
+//        }
+//
+//
+//        if referenceRate != nil && model.referenceMode != nil {
+//
+//            let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.feeLabel?.text)!)
+//            attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-4))
+//            superLoanCell?.feeLabel?.attributedText = attrstr
+//        }
+//
+//        superLoanCell?.descBtn?.setTitle(model.platformIntroduction, for: .normal)
+//        superLoanCell?.descBtn?.setTitleColor(UIColor.purple, for: .normal)
+//        superLoanCell?.descBtn?.layer.borderColor = UIColor.purple.cgColor
+//
+//        if indexPath.section % 2 == 0 {
+//            superLoanCell?.descBtn?.setTitleColor(UIColor.blue, for: .normal)
+//            superLoanCell?.descBtn?.layer.borderColor = UIColor.blue.cgColor
+//        }
+//
+//        superLoanCell?.lineView?.isHidden = true
+//        let str : NSString = model.platformIntroduction! as NSString
+//        let dic = NSDictionary(object: UIFont.yx_systemFont(ofSize: 12) as Any, forKey: NSAttributedStringKey.font as NSCopying)
+//        let width = str.boundingRect(with: CGSize(width:_k_w,height:20), options: .usesLineFragmentOrigin, attributes:(dic as! [NSAttributedStringKey : Any]), context: nil).size.width + 20
+//
+//        superLoanCell?.descBtn?.snp.updateConstraints({ (make) in
+//            make.width.equalTo(width)
+//        })
+//
+//        superLoanCell?.collectionBtn?.tag = indexPath.row
+//        superLoanCell?.collectionBtn?.setImage(UIImage.init(named: "collection_icon"), for: .normal)
+//        if model.isCollect == "0" {
+//            superLoanCell?.collectionBtn?.setImage(UIImage.init(named: "collection_selected_icon"), for: .normal)
+//        }
+//
+//        return superLoanCell!
+//
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        let model = homeProductListModel.hotRecommend[indexPath.row] as! HomeHotRecommendModel
+//        getCompLink(thirdPlatformId: model.id_)
+//
+//    }
     
     func getCompLink(thirdPlatformId : String){
         let viewModel = CompQueryViewModel()
@@ -271,12 +341,29 @@ extension RecentCell{
         }
     }
     
-    fileprivate func setCellType(type : String){
-        
-        if homeProductListModel.hotRecommend.count > 0 {
-            tableView?.reloadData()
-        }
-    }
+//    fileprivate func setCellType(type : String){
+//
+//        if homeProductListModel.hotRecommend.count > 0 {
+////            tableView?.reloadData()
+//
+//            var height = 0
+//            if homeProductListModel.hotRecommend != nil {
+//
+//                let count = (homeProductListModel.hotRecommend.count / 4)
+//                if (homeProductListModel.hotRecommend.count % 4) == 0{
+//                    height = count * 103
+//                }else{
+//                    height = (count + 1) * 103
+//                }
+//
+//
+//    //            height = (homeProductListModel.hotRecommend.count / 4)*103
+//            }
+//            let frame = CGRect(x:0,y:30,width:Int(_k_w),height:height)
+//            collectionView?.frame = frame
+//            collectionView?.reloadData()
+//        }
+//    }
     
     fileprivate func rateUnit(referenceMode : NSString) -> (NSString){
         switch referenceMode.integerValue {

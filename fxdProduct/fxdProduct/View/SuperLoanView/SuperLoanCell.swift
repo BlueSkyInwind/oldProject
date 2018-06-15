@@ -32,7 +32,8 @@ class SuperLoanCell: UITableViewCell {
     //收藏
     @objc var collectionBtn : UIButton?
     @objc var lineView : UIView?
-    
+    //申请人数
+    @objc var descLabel : UILabel?
     
     @objc weak var delegate: SuperLoanCellDelegate?
     
@@ -160,8 +161,20 @@ extension SuperLoanCell{
         collectionBtn?.addTarget(self, action: #selector(collectionBtnClick(_:)), for: .touchUpInside)
         self.contentView.addSubview(collectionBtn!)
         collectionBtn?.snp.makeConstraints({ (make) in
-            make.centerY.equalTo(self.snp.centerY)
+//            make.centerY.equalTo(self.snp.centerY)
             make.right.equalTo(self).offset(-20)
+            make.top.equalTo(self).offset(25)
+        })
+        
+        descLabel = UILabel()
+//        descLabel?.text = "申请人数"
+        descLabel?.textColor = QUTOA_COLOR
+        descLabel?.textAlignment = .right
+        descLabel?.font = UIFont.systemFont(ofSize: 12)
+        self.addSubview(descLabel!)
+        descLabel?.snp.makeConstraints({ (make) in
+            make.right.equalTo(self).offset(-20)
+            make.bottom.equalTo(self).offset(-10)
         })
         
         lineView = UIView()
@@ -225,8 +238,20 @@ extension SuperLoanCell{
         collectionBtn?.addTarget(self, action: #selector(collectionBtnClick(_:)), for: .touchUpInside)
         self.contentView.addSubview(collectionBtn!)
         collectionBtn?.snp.makeConstraints({ (make) in
-            make.centerY.equalTo(self.snp.centerY)
+//            make.centerY.equalTo(self.snp.centerY)
             make.right.equalTo(self).offset(-20)
+            make.top.equalTo(self).offset(25)
+        })
+        
+        descLabel = UILabel()
+//        descLabel?.text = "申请人数"
+        descLabel?.textColor = QUTOA_COLOR
+        descLabel?.textAlignment = .right
+        descLabel?.font = UIFont.systemFont(ofSize: 12)
+        self.addSubview(descLabel!)
+        descLabel?.snp.makeConstraints({ (make) in
+            make.right.equalTo(self).offset(-20)
+            make.bottom.equalTo(self).offset(-10)
         })
         
         lineView = UIView()
