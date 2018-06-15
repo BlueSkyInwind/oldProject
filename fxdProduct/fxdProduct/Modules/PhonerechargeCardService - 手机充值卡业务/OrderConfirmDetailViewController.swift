@@ -119,9 +119,11 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
             cell.orderDetailModel = phoneOrderDetailModel
             cell.lookOverProcotol = { [weak self] in
                 self?.obtainProcotolAddress({ (status, content) in
-                    let fxdWeb = FXDWebViewController.init()
-                    fxdWeb.urlStr = content
-                    self?.navigationController?.pushViewController(fxdWeb, animated: true)
+                    if status {
+                        let fxdWeb = FXDWebViewController.init()
+                        fxdWeb.urlStr = content
+                        self?.navigationController?.pushViewController(fxdWeb, animated: true)
+                    }
                 })
             }
             return cell
