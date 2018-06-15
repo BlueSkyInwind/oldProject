@@ -8,15 +8,24 @@
 
 import UIKit
 
+typealias CloseButtonClick = () -> Void
 class RechargeTypePopView: UIView,NibLoadProtocol  {
+    
+    
+    var closeButtonClick:CloseButtonClick?
     
     override func awakeFromNib() {
         
         self.layer.cornerRadius = 5
         self.clipsToBounds = true
         
+    }
+    
+    @IBAction func closeBtnClick(_ sender: Any) {
         
-        
+        if closeButtonClick != nil {
+            closeButtonClick!()
+        }
     }
     
     @IBAction func moblieNumberTap(_ sender: Any) {

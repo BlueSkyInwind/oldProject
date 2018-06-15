@@ -9,12 +9,13 @@
 import UIKit
 
 
-typealias RechargePopClickEvent = () -> Void
+typealias RechargePopClickEvent = (_ index:Int) -> Void
 class PhoneRechargePopView: UIView,UIGestureRecognizerDelegate {
     
     @objc var  titleLabel:UILabel?
     @objc var  contentLabel:UILabel?
     @objc var  sureBtn:UIButton?
+    @objc var  closeBtn:UIButton?
     @objc var hotlinePopView:RechargeTypePopView?
     var backGroundView:UIView?
     
@@ -32,7 +33,10 @@ class PhoneRechargePopView: UIView,UIGestureRecognizerDelegate {
         self.init(frame: UIScreen.main.bounds)
         self.backGroundView?.removeFromSuperview()
         self.hotlinePopView?.isHidden = false
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(backgroundTap(tap:)))
+        self.hotlinePopView?.closeButtonClick = { [weak self] in
+            self?.backgroundTap()
+        }
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(backgroundTap))
         tap.delegate = self as UIGestureRecognizerDelegate
         self.addGestureRecognizer(tap)
     }
@@ -65,15 +69,20 @@ class PhoneRechargePopView: UIView,UIGestureRecognizerDelegate {
     }
     
     @objc func sureBtnClick() {
-        
         if popClick  != nil {
-            popClick!()
+            popClick!(1)
         }
     }
     
-    @objc func backgroundTap(tap:UITapGestureRecognizer) {
+    @objc func backgroundTap() {
         if popClick  != nil {
-            popClick!()
+            popClick!(0)
+        }
+    }
+    
+    @objc func closeBtnClick() {
+        if popClick  != nil {
+            popClick!(0)
         }
     }
 
@@ -143,6 +152,15 @@ extension PhoneRechargePopView {
             make.top.equalTo((backGroundView?.snp.top)!).offset(15);
             make.height.equalTo(header_Height - 5)
             make.left.right.equalTo(0)
+        })
+        
+        closeBtn = UIButton.init(type: UIButtonType.custom)
+        closeBtn?.setImage(UIImage.init(named: "pop_close_Icon"), for: UIControlState.normal)
+        closeBtn?.addTarget(self, action: #selector(closeBtnClick), for: UIControlEvents.touchUpInside)
+        backGroundView?.addSubview(closeBtn!)
+        closeBtn?.snp.makeConstraints({ (make) in
+            make.top.equalTo((backGroundView?.snp.top)!).offset(10)
+            make.right.equalTo((backGroundView?.snp.right)!).offset(-10)
         })
         
         sureBtn = UIButton.init(type: UIButtonType.custom)

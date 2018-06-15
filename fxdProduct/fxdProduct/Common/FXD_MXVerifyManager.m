@@ -7,6 +7,8 @@
 //
 
 #import "FXD_MXVerifyManager.h"
+
+typedef FXD_MXVerifyManager * (^Tapclick)(int index);
 @interface FXD_MXVerifyManager()
 @property(nonatomic,copy)MXVerifyResult mxVerifyResult;
 

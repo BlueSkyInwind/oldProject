@@ -224,8 +224,10 @@
     self.phoneRechargePopView = [[PhoneRechargePopView alloc] init:title contentAttri:attari sureTitle:sureTitle];
     [self.phoneRechargePopView show];
     __weak typeof (self) weakSelf = self;
-    self.phoneRechargePopView.popClick = ^{
-        clickIndexBlock(1);
+    self.phoneRechargePopView.popClick = ^(NSInteger index) {
+        if (index == 1) {
+            clickIndexBlock(1);
+        }
         [weakSelf.phoneRechargePopView dismiss];
         weakSelf.phoneRechargePopView = nil;
     };
@@ -240,8 +242,10 @@
     self.phoneRechargePopView = [[PhoneRechargePopView alloc] init];
     [self.phoneRechargePopView show];
     __weak typeof (self) weakSelf = self;
-    self.phoneRechargePopView.popClick = ^{
-        clickIndexBlock(1);
+    self.phoneRechargePopView.popClick = ^(NSInteger index) {
+        if (index == 1) {
+            clickIndexBlock(1);
+        }
         [weakSelf.phoneRechargePopView dismiss];
         weakSelf.phoneRechargePopView = nil;
     };

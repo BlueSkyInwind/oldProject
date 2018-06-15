@@ -37,6 +37,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
         })
+        
         if #available(iOS 11.0, *){
             tableView?.contentInsetAdjustmentBehavior = .never;
             tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
