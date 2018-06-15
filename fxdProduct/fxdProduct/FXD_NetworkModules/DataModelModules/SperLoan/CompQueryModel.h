@@ -51,6 +51,10 @@
 @property (nonatomic, strong)NSString<Optional> *referenceRate;
 //期限
 @property (nonatomic, strong)NSString<Optional> *unitStr;
+//期限
+@property (nonatomic, strong)NSString<Optional> *moduletype;
+//申请人数
+@property (nonatomic, strong)NSString<Optional> *applicantsCount;
 
 @end
 

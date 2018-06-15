@@ -248,6 +248,7 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
             
         })
         superLoanCell?.titleLabel?.text = model.plantName
+        superLoanCell?.descLabel?.text = model.applicantsCount
         let maximumAmount = model.maximumAmount != nil ? model.maximumAmount : ""
         let maximumAmountUnit = model.maximumAmountUnit != nil ? model.maximumAmountUnit : ""
         superLoanCell?.qutaLabel?.text = "额度:最高" + maximumAmount! + maximumAmountUnit!

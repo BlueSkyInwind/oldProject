@@ -34,7 +34,8 @@
 @property (nonatomic, strong)NSString<Optional> *maximumAmount;
 //平台类型
 @property (nonatomic, strong)NSString<Optional> *moduletype;
-
+//申请人数
+@property (nonatomic, strong)NSString<Optional> *applicantsCount;
 
 
 

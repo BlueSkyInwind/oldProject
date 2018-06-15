@@ -65,6 +65,9 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
             
             if baseResult.errCode == "0"{
                 
+            
+                self?.configureView()
+                self?.removeFailView()
                 let dataArr = baseResult.data as! NSArray
                 if dataArr.count == 0{
                     
@@ -83,11 +86,14 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
                     self?.tableView?.reloadData()
                 }
             }else{
+                
+                self?.setFailView()
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
             
         }) {
             
+            self.setFailView()
         }
         viewModel.obtainOrderContractStagingSelectOrdersByUserId()
     }

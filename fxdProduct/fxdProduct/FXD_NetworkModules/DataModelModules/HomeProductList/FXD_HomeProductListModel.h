@@ -227,7 +227,8 @@
 @property (nonatomic, strong)NSString<Optional> *maximumAmount;
 //1:贷款、2:游戏、3:旅游
 @property (nonatomic, strong)NSString<Optional> *moduletype;
-
+//申请人数
+@property (nonatomic, strong)NSString<Optional> *applicantsCount;
 
 @end
 

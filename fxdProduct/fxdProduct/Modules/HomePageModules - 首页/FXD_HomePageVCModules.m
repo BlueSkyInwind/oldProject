@@ -581,12 +581,34 @@
                     return 130;
                     break;
                 default:
-                    return 85*_homeProductList.hotRecommend.count+30;
+                {
+                    int height = 0;
+                    int count = _homeProductList.hotRecommend.count / 4;
+                    if (_homeProductList.hotRecommend.count % 4 == 0)  {
+                        height = count * 103;
+                    }else{
+                        height = (count + 1) * 103;
+                    }
+                    return height+30;
+                }
+//                    return 85*_homeProductList.hotRecommend.count+30;
+                    
                     break;
             }
             break;
         case 2:
-            return 85*_homeProductList.hotRecommend.count+30;
+            
+        {
+            int height = 0;
+            int count = _homeProductList.hotRecommend.count / 4;
+            if (_homeProductList.hotRecommend.count % 4 == 0)  {
+                height = count * 103;
+            }else{
+                height = (count + 1) * 103;
+            }
+            return height+30;
+        }
+//            return 85*_homeProductList.hotRecommend.count+30;
             break;
         default:
             break;
@@ -718,7 +740,7 @@
             recentCell.backgroundColor = [UIColor whiteColor];
             recentCell.homeProductListModel = _homeProductList;
             recentCell.delegate = self;
-            [recentCell.tableView reloadData];
+            [recentCell.collectionView reloadData];
             [recentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
             return recentCell;
         }
