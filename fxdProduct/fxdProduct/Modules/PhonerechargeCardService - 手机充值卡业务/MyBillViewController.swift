@@ -65,13 +65,14 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                 self?.noneView?.isHidden = true
                 self?.tableView?.isHidden = false
                 self?.repayModel = try! RepayListInfo.init(dictionary: baseResult.data as! [AnyHashable : Any])
-                if self?.repayModel == nil{
+                self?.orderModel = self?.repayModel?.order
+                if self?.repayModel == nil || self?.orderModel == nil{
+                    
                     self?.noneView?.isHidden = false
                     self?.noneView?.noneDesc?.text = "账单都被消灭了"
                     self?.tableView?.isHidden = true
                 }else{
                     
-                    self?.orderModel = self?.repayModel?.order
                     self?.tableView?.reloadData()
                 }
                 

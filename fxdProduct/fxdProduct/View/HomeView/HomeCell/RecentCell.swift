@@ -199,11 +199,12 @@ extension RecentCell{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if UI_IS_IPONE6 {
-            
-            return CGSize(width:(_k_w - 40)/4 + 10,height:103)
-        }
-        return CGSize(width:(_k_w - 40)/4 + 10,height:103)
+        return CGSize(width:(_k_w)/4 ,height:103)
+//        if UI_IS_IPONE6 {
+//            
+//            return CGSize(width:(_k_w)/4 ,height:103)
+//        }
+//        return CGSize(width:(_k_w - 40)/4 + 10,height:103)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

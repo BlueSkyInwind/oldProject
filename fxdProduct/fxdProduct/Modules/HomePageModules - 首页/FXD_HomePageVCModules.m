@@ -679,6 +679,8 @@
                 case 15:
                 case 1:
                 case 2:
+                case 12:
+                case 6:
                 {
                     HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
                     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
