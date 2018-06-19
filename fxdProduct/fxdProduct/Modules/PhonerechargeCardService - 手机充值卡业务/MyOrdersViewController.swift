@@ -144,19 +144,19 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         cell.selectionStyle = .none
         cell.backgroundColor = UIColor.clear
         cell.isSelected = false
-        let model = dataArray![indexPath.section] as! PhoneOrderListModel
+        let model = dataArray![indexPath.row] as! PhoneOrderListModel
         
         cell.titleLabel?.text = model.phone_card_name
         cell.timeLabel?.text = model.payment_date
         cell.moneyLabel?.text = model.order_price
-        cell.quantityLabel?.text = model.phone_card_price + "*" + model.phone_card_count
+        cell.quantityLabel?.text = model.phone_card_price + "x" + model.phone_card_count
         
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = dataArray![indexPath.section] as! PhoneOrderListModel
+        let model = dataArray![indexPath.row] as! PhoneOrderListModel
         let controller = OrderConfirmDetailViewController()
         controller.orderNo = model.order_no
         self.navigationController?.pushViewController(controller, animated: true)

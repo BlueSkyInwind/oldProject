@@ -37,14 +37,16 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         useredPacketAmount = "0.0"
         chooseIndex = 0
         addBackItem()
-        configureView()
-        headerView()
+//        configureView()
+//        headerView()
         getBankCardsList()
         // Do any additional setup after loading the view.
         
         self.eductibleAmountfDiscount({[weak self] (result) in
             if result {
                 if self?.detailModel != nil {
+                    self?.configureView()
+                    
                     self?.moneyLabel?.text = "¥" + (self?.detailModel?.repayTotal)!
                     if self?.detailModel?.couponUsageStatus == "0"{
                         self?.obtainDiscountTicket({[weak self] (result) in
@@ -75,6 +77,7 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
         })
+        headerView()
         if #available(iOS 11.0, *){
             tableView?.contentInsetAdjustmentBehavior = .never;
             tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
@@ -201,7 +204,7 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         footView.backgroundColor = UIColor.clear
         
         let confirmBtn = UIButton()
-        confirmBtn.setTitle("确认", for: .normal)
+        confirmBtn.setTitle("确认还款", for: .normal)
         confirmBtn.setTitleColor(UIColor.white, for: .normal)
         confirmBtn.setBackgroundImage(UIImage.init(named: "applayBtnImage"), for: .normal)
         confirmBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
@@ -252,24 +255,30 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         
         switch indexPath.row {
         case 0:
-            cell.rightLabel?.text = self.detailModel?.debtDamages
+            cell.rightLabel?.text = "¥" + (self.detailModel?.debtPrincipal)!
         case 1:
-            cell.rightLabel?.text = self.detailModel?.debtServiceFee
+            cell.rightLabel?.text = "¥" + (self.detailModel?.debtServiceFee)!
         case 2:
-            cell.rightLabel?.text = self.detailModel?.debtPenaltyInterest
+            cell.rightLabel?.text = "¥" + (self.detailModel?.debtPenaltyInterest)!
         case 3:
-            cell.rightLabel?.text = self.detailModel?.debtOverdueTotal
+            cell.rightLabel?.text = "¥" + (self.detailModel?.debtOverdueTotal)!
         case 4:
-            cell.rightLabel?.text = self.detailModel?.couponUsageDesc
+            
+            cell.rightLabel?.text = "无可用券"
+            if self.detailModel?.couponUsageStatus == "0"{
+                
+                cell.rightLabel?.text = self.detailModel?.couponUsageDesc
+            }
+            
         case 5:
-            cell.rightLabel?.text = self.detailModel?.overpaidAmount
+            cell.rightLabel?.text = "¥" + (self.detailModel?.overpaidAmount)!
         case 6:
             
             if selectedCard != nil {
                 
                 let index = selectedCard?.cardNo.index((selectedCard?.cardNo.endIndex)!, offsetBy: -4)
                 let numStr = selectedCard?.cardNo[index!...]
-                cell.rightLabel?.text = (selectedCard?.bankName)!+"("+numStr!+")"
+                cell.rightLabel?.text = (selectedCard?.bankName)!+"(尾号"+numStr!+")"
             }
         default:
             break

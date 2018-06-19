@@ -49,7 +49,7 @@ class OrderConfirmDetailInfoCell: UITableViewCell {
     }
     
     func setDataDetailSource(_ model:PhoneOrderDetailModel)  {
-        orderSerialNumberLabel.text = "\(model.orderID ?? " ")"
+        orderSerialNumberLabel.text = "\(model.order_no ?? " ")"
         payTimeLabel.text = "\(model.payment_date ?? " ")"
         payType.text = "\(model.payType ?? " ")"
         amountLabel.text = "¥" + "\(model.order_price ?? " ")"

@@ -21,7 +21,8 @@
 #import "MineViewModel.h"
 #import "ExperienceValueGradeModel.h"
 #import "LoginViewController.h"
-
+#import "RepayMentViewModel.h"
+#import "RepayListInfo.h"
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate,MineHeaderViewDelegate>
 {
     //标题数组
@@ -355,8 +356,9 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                    MyBillViewController *controller=[[MyBillViewController alloc]init];
-                    [self.navigationController pushViewController:controller animated:true];
+                    [self getData];
+//                    MyBillViewController *controller=[[MyBillViewController alloc]init];
+//                    [self.navigationController pushViewController:controller animated:true];
                 }
                     break;
                 case 1:
@@ -423,6 +425,32 @@
     [vc presentViewController:nav animated:YES completion:nil];
 }
 
+
+#pragma mark 我的账单状态
+-(void)getData{
+    
+    RepayMentViewModel *viewModel = [[RepayMentViewModel alloc]init];
+    [viewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = returnValue;
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            
+            MyBillViewController *controller=[[MyBillViewController alloc]init];
+            [self.navigationController pushViewController:controller animated:true];
+            
+        }else if([baseResultM.friendErrMsg containsString:@"正在"]||[baseResultM.friendErrMsg containsString:@"结清"] || [baseResultM.friendErrMsg containsString:@"还款"]){
+          
+            self.tabBarController.selectedIndex = 0;
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+        }
+        
+    } WithFaileBlock:^{
+        
+    }];
+    [viewModel fatchQueryWeekShouldAlsoAmount:nil];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {
