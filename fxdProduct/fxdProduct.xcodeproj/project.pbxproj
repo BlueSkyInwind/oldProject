@@ -399,6 +399,10 @@
 		847298381FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847298361FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift */; };
 		8473F1411F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
 		8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
+		8478135220D26BCE00CA2AF4 /* YXTableViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478135120D26BCE00CA2AF4 /* YXTableViewExtention.swift */; };
+		8478135320D26BCE00CA2AF4 /* YXTableViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478135120D26BCE00CA2AF4 /* YXTableViewExtention.swift */; };
+		8478135520D26CCF00CA2AF4 /* YXTableViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478135420D26CCF00CA2AF4 /* YXTableViewMaker.swift */; };
+		8478135620D26CCF00CA2AF4 /* YXTableViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478135420D26CCF00CA2AF4 /* YXTableViewMaker.swift */; };
 		847DBBD11FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */; };
 		847DBBD21FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */; };
 		848139631F568A8600CD701C /* YX_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848139621F568A8600CD701C /* YX_TextField.swift */; };
@@ -1831,6 +1835,8 @@
 		847298361FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_IncreaseAmountLimitViewController.swift; sourceTree = "<group>"; };
 		8473F13F1F31CAA1005B4933 /* SupportBankList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportBankList.h; sourceTree = "<group>"; };
 		8473F1401F31CAA1005B4933 /* SupportBankList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportBankList.m; sourceTree = "<group>"; };
+		8478135120D26BCE00CA2AF4 /* YXTableViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXTableViewExtention.swift; sourceTree = "<group>"; };
+		8478135420D26CCF00CA2AF4 /* YXTableViewMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXTableViewMaker.swift; sourceTree = "<group>"; };
 		847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPayPasswordView.swift; sourceTree = "<group>"; };
 		848139621F568A8600CD701C /* YX_TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YX_TextField.swift; sourceTree = "<group>"; };
 		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
@@ -3502,6 +3508,7 @@
 		63E076521B67114800E269F2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8478134D20D266B600CA2AF4 /* YXTableview */,
 				CC742DC220526FD800D645CC /* HGManager */,
 				636B1B191C1FDDD100450358 /* CostumView */,
 				63878FD91C1519CD008E1CF9 /* FXD_Tools */,
@@ -4103,6 +4110,15 @@
 				CCF97E5820C67FD3009E7ECC /* MyBillDetailViewController.swift */,
 			);
 			path = "PhonerechargeCardService - 手机充值卡业务";
+			sourceTree = "<group>";
+		};
+		8478134D20D266B600CA2AF4 /* YXTableview */ = {
+			isa = PBXGroup;
+			children = (
+				8478135120D26BCE00CA2AF4 /* YXTableViewExtention.swift */,
+				8478135420D26CCF00CA2AF4 /* YXTableViewMaker.swift */,
+			);
+			path = YXTableview;
 			sourceTree = "<group>";
 		};
 		849AC25E1FF0DBBD005E435F /* ToWithdrawFundsView */ = {
@@ -5173,9 +5189,11 @@
 				CC1AC8E42091B7A7009B5BD4 /* HotRecommendationViewController.swift in Sources */,
 				63FC24F21D98F7E9006F58F3 /* YYTextLayout.m in Sources */,
 				63145AB31CA2952400D04ED8 /* LoginMsgExt.m in Sources */,
+				8478135520D26CCF00CA2AF4 /* YXTableViewMaker.swift in Sources */,
 				CC989C341F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */,
 				6313DC151BB3E52B00EB45DE /* NSString+MD5Encrypt.m in Sources */,
 				84EBEA0F20C93A450045F538 /* UITableViewCell+YXTool.m in Sources */,
+				8478135220D26BCE00CA2AF4 /* YXTableViewExtention.swift in Sources */,
 				1A133F1B1C1AD1EA0027749B /* HelpViewCell.m in Sources */,
 				638A17021E517D9F00AB8AB6 /* LOTShapeCircle.m in Sources */,
 				63A24C651BE063A90036E8EF /* UIFont+Extend.m in Sources */,
@@ -5662,9 +5680,11 @@
 				84C619D71FA8161F00626411 /* RepayListCell.m in Sources */,
 				CC0346291F3C4FBF001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */,
 				84ED5B741F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
+				8478135620D26CCF00CA2AF4 /* YXTableViewMaker.swift in Sources */,
 				CCEFC6EA207E0B610006D731 /* QbbSubmitInfoModel.m in Sources */,
 				CC80DFED206A4924000F9BAC /* FXD_SuperLoanViewController.m in Sources */,
 				84EBEA1020C93A450045F538 /* UITableViewCell+YXTool.m in Sources */,
+				8478135320D26BCE00CA2AF4 /* YXTableViewExtention.swift in Sources */,
 				843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */,
 				84E306D01F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
 				843614A51F0CFD320036201A /* BaseResultModel.m in Sources */,
