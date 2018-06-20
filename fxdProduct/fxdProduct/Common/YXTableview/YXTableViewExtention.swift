@@ -7,14 +7,24 @@
 //
 
 import Foundation
-
+private var YXTableViewKey: String = ""
 extension UITableView {
     
-    func yx_maker(_ frame:CGRect,_ style:UITableViewStyle,_ maker:(_ make:YXTableViewMaker) -> Void) -> UITableView {
-        let make = YXTableViewMaker()
-        make.yxTableview = UITableView.init(frame: frame, style: style)
-        maker(make)
-        return make.yxTableview!
+    /// header
+    var tableViewMaker: YXTableViewMaker {
+        get {
+            return (objc_getAssociatedObject(self, &YXTableViewKey) as? YXTableViewMaker)!
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &YXTableViewKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
+   class func yx_maker(_ frame:CGRect,_ style:UITableViewStyle,_ maker:(_ make:YXTableViewMaker) -> Void) -> UITableView {
+        let tableViewmake = YXTableViewMaker()
+        tableViewmake.yxTableview = UITableView.init(frame: frame, style: style)
+        maker(tableViewmake)
+        return tableViewmake.yxTableview!
     }
 }
 
@@ -31,21 +41,21 @@ extension UITableView {
     }
     
     func loadCellNib(_ cellClass:AnyClass? = nil){
-        let cellName = NSStringFromClass(cellClass!)
-        let cellNib = UINib.init(nibName: cellName, bundle: nil)
-        self.register(cellNib, forCellReuseIdentifier: cellName)
+        let cellName = NSStringFromClass(cellClass!).components(separatedBy: ".").last
+        let cellNib = UINib.init(nibName: cellName!, bundle: nil)
+        self.register(cellNib, forCellReuseIdentifier: cellName!)
     }
     
     func loadCellClass(_ cellClass:AnyClass? = nil){
-        let cellName = NSStringFromClass(cellClass!)
-        self.register(cellClass.self, forCellReuseIdentifier: cellName)
+        let cellName = NSStringFromClass(cellClass!).components(separatedBy: ".").last
+        self.register(cellClass.self, forCellReuseIdentifier: cellName!)
     }
     
     func yx_dequeueReusableCell<T>(_ cellClass:T,_ indexPath: IndexPath,_ isXib:Bool) -> T {
         let cellName = NSStringFromClass(cellClass as! AnyClass)
-        let cell = self.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! T
+        var cell = self.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! T
         if !isXib {
-            
+//            cell = .init(style: UITableViewCellStyle.default, reuseIdentifier: cellName)
         }
         return cell
     }

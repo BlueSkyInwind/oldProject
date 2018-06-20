@@ -150,8 +150,6 @@
     self.fxdAlertView = nil;
 }
 
-
-
 -(void)showIdentiFXDAlertViewTitle:(NSString *)title
                      content:(NSString *)content
                  cancelTitle:(NSString *)cancelTitle

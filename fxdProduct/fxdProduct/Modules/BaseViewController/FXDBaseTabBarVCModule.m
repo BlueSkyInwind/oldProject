@@ -36,10 +36,10 @@
 //    IncreaseAmountLimitViewController * loanApplicationVC = [[IncreaseAmountLimitViewController alloc]init];
 //    [self.navigationController pushViewController:loanApplicationVC animated:true];
     
-    NSArray *vcNameArr = @[@"FXD_HomePageVCModules",@"SupermarketViewController",@"MyViewController"];
-    NSArray *titleArr = @[@"首页",@"贷超",@"我的"];
-    NSArray *imageArr = @[@"home_tab_default",@"superLoan_tab_default",@"mine_tab_default"];
-    NSArray *seleteimageArr = @[@"home_tab_select",@"superLoan_tab_select",@"mine_tab_select"];
+    NSArray *vcNameArr = @[@"FXD_HomePageVCModules",@"SupermarketViewController",@".CreaditCardViewController",@"MyViewController"];
+    NSArray *titleArr = @[@"首页",@"贷超",@"信用卡",@"我的"];
+    NSArray *imageArr = @[@"home_tab_default",@"superLoan_tab_default",@"card_tab_default",@"mine_tab_default"];
+    NSArray *seleteimageArr = @[@"home_tab_select",@"superLoan_tab_select",@"card_tab_select",@"mine_tab_select"];
     
     NSMutableArray *ncArr = [NSMutableArray array];
     

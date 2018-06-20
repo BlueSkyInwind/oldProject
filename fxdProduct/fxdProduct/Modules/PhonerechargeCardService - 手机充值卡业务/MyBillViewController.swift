@@ -32,6 +32,7 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         noneView?.isHidden = true
         self.view.addSubview(noneView!)
     }
+    
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false
@@ -72,18 +73,15 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                     self?.noneView?.noneDesc?.text = "账单都被消灭了"
                     self?.tableView?.isHidden = true
                 }else{
-                    
+                    self?.orderModel = self?.repayModel?.order
                     self?.tableView?.reloadData()
                 }
-                
             }else{
-                
                 self?.noneView?.isHidden = false
                 self?.noneView?.noneDesc?.text = baseResult.friendErrMsg
                 self?.tableView?.isHidden = true
 //                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
-            
         }) {
             
         }

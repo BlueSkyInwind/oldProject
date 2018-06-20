@@ -135,7 +135,6 @@
     DLog(@"-----requestParam-----%@",parameters);
     DLog(@"-----requestUrl-----%@",strURL);
     
-    
    NSError *serializationError = nil;
   NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:strURL relativeToURL:nil] absoluteString] parameters:parameters error:&serializationError];
     
