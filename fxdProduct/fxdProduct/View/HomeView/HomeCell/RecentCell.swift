@@ -131,14 +131,15 @@ extension RecentCell{
         //列间距,行间距,偏移
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 1
-        layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10)
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 10, 0)
         
-        collectionView = UICollectionView.init(frame: CGRect(x:0,y:30,width:Int(_k_w),height:Int(self.frame.size.height)), collectionViewLayout: layout)
+        collectionView = UICollectionView.init(frame: CGRect(x:20,y:30,width:Int(_k_w - 40),height:Int(self.frame.size.height)), collectionViewLayout: layout)
         collectionView?.delegate = self
         collectionView?.dataSource = self;
         //注册一个cell
         collectionView!.register(HomeHotCell.self, forCellWithReuseIdentifier:"HomeHotCell")
-        collectionView?.backgroundColor = UIColor.white
+        collectionView?.backgroundColor = PayPasswordBackColor_COLOR
+        collectionView?.isScrollEnabled = false
         self.addSubview(collectionView!)
         collectionView?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(0)
@@ -182,7 +183,7 @@ extension RecentCell{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeHotCell", for: indexPath) as! HomeHotCell
-//        cell.backgroundColor = UIColor.white
+        cell.backgroundColor = UIColor.white
         let model = homeProductListModel.hotRecommend[indexPath.row] as! HomeHotRecommendModel
         let url = URL(string: model.plantLogo)
     
@@ -197,7 +198,13 @@ extension RecentCell{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width:(_k_w - 60 - 20)/4,height:103)
+        
+        return CGSize(width:(_k_w)/4 ,height:103)
+//        if UI_IS_IPONE6 {
+//            
+//            return CGSize(width:(_k_w)/4 ,height:103)
+//        }
+//        return CGSize(width:(_k_w - 40)/4 + 10,height:103)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

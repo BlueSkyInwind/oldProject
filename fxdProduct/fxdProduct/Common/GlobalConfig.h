@@ -49,7 +49,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 UIKIT_EXTERN NSString * const _main_url;
 UIKIT_EXTERN NSString * const _main_new_url;
-UIKIT_EXTERN NSString * const _mainTwo_new_url;
 UIKIT_EXTERN NSString * const _ValidESB_url;
 UIKIT_EXTERN NSString * const _P2P_url;
 UIKIT_EXTERN NSString * const _H5_url;

@@ -18,7 +18,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
 
         self.title = "我的订单"
         addBackItem()
-        configureView()
+//        configureView()
         dataArray = NSMutableArray.init(capacity: 100)
         getData()
         noneViewUI()
@@ -65,16 +65,16 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
             
             if baseResult.errCode == "0"{
                 
-            
-                self?.configureView()
                 self?.removeFailView()
                 let dataArr = baseResult.data as! NSArray
                 if dataArr.count == 0{
                     
                     self?.noneView?.isHidden = false
-                    self?.tableView?.isHidden = true
+//                    self?.tableView?.isHidden = true
                     
                 }else{
+                    
+                    self?.configureView()
                     self?.noneView?.isHidden = true
                     self?.tableView?.isHidden = false
                     self?.dataArray?.removeAllObjects()
@@ -87,12 +87,16 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
                 }
             }else{
                 
+                self?.noneView?.isHidden = true
+//                self?.tableView?.isHidden = true
                 self?.setFailView()
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
             
         }) {
             
+            self.noneView?.isHidden = true
+//            self.tableView?.isHidden = true
             self.setFailView()
         }
         viewModel.obtainOrderContractStagingSelectOrdersByUserId()
@@ -140,19 +144,19 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         cell.selectionStyle = .none
         cell.backgroundColor = UIColor.clear
         cell.isSelected = false
-        let model = dataArray![indexPath.section] as! PhoneOrderListModel
+        let model = dataArray![indexPath.row] as! PhoneOrderListModel
         
         cell.titleLabel?.text = model.phone_card_name
         cell.timeLabel?.text = model.payment_date
         cell.moneyLabel?.text = model.order_price
-        cell.quantityLabel?.text = model.phone_card_price + "*" + model.phone_card_count
+        cell.quantityLabel?.text = model.phone_card_price + "x" + model.phone_card_count
         
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = dataArray![indexPath.section] as! PhoneOrderListModel
+        let model = dataArray![indexPath.row] as! PhoneOrderListModel
         let controller = OrderConfirmDetailViewController()
         controller.orderNo = model.order_no
         self.navigationController?.pushViewController(controller, animated: true)

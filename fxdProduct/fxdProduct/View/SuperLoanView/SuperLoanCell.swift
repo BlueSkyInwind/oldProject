@@ -171,7 +171,7 @@ extension SuperLoanCell{
         descLabel?.textColor = QUTOA_COLOR
         descLabel?.textAlignment = .right
         descLabel?.font = UIFont.systemFont(ofSize: 12)
-        self.addSubview(descLabel!)
+        self.contentView.addSubview(descLabel!)
         descLabel?.snp.makeConstraints({ (make) in
             make.right.equalTo(self).offset(-20)
             make.bottom.equalTo(self).offset(-10)
@@ -248,7 +248,7 @@ extension SuperLoanCell{
         descLabel?.textColor = QUTOA_COLOR
         descLabel?.textAlignment = .right
         descLabel?.font = UIFont.systemFont(ofSize: 12)
-        self.addSubview(descLabel!)
+        self.contentView.addSubview(descLabel!)
         descLabel?.snp.makeConstraints({ (make) in
             make.right.equalTo(self).offset(-20)
             make.bottom.equalTo(self).offset(-10)

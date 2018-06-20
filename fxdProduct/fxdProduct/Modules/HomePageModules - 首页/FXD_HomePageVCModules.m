@@ -679,6 +679,8 @@
                 case 15:
                 case 1:
                 case 2:
+                case 12:
+                case 6:
                 {
                     HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
                     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -1227,8 +1229,6 @@
             } else {
                 [self presentLoginVC:self];
             }
-            
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"资料测评前"];
             break;
         case 2:
         {
@@ -1236,7 +1236,6 @@
             [self.navigationController pushViewController:controller animated:true];
         }
             
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@":资料测评后 可进件"];
             break;
         case 7:
             switch (_homeProductList.platfromType.integerValue) {
@@ -1246,7 +1245,6 @@
                     controller.applicationId = _homeProductList.applicationId;
                     [self.navigationController pushViewController:controller animated:true];
                 }
-//                    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"发薪贷"];
                     break;
                 case 16:
                 {
@@ -1254,7 +1252,6 @@
                     [self.navigationController pushViewController:controller animated:true];
                 }
                     
-//                    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"憨分"];
                     break;
                 default:
                     break;
