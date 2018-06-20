@@ -536,15 +536,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    _homeProductList.flag = @"17";
+
     if (_homeProductList == nil) {
         return 0;
     }
     
-//    if ([_homeProductList.flag isEqualToString:@"1"] ||[_homeProductList.flag isEqualToString:@"2"] ||[_homeProductList.flag isEqualToString:@"7"]) {
-//        
-//        return 3;
-//    }
+    switch (_homeProductList.flag.integerValue) {
+        case 3:
+        case 4:
+            return 2;
+            break;
+            
+        default:
+            return 3;
+            break;
+    }
     
     return 3;
 }
@@ -559,7 +565,7 @@
 
     switch (indexPath.section) {
         case 0:
-            return 103;
+            return 30;
             break;
         case 1:
             switch (_homeProductList.flag.integerValue) {
@@ -569,7 +575,6 @@
                 case 13:
                 case 14:
                 case 15:
-                    
                     return _k_h-_k_w*0.44-113-113;
                     break;
                 case 1:
@@ -582,8 +587,8 @@
                     break;
                 default:
                 {
-                    int height = 0;
-                    int count = _homeProductList.hotRecommend.count / 4;
+                    long height = 0;
+                    long count = _homeProductList.hotRecommend.count / 4;
                     if (_homeProductList.hotRecommend.count % 4 == 0)  {
                         height = count * 103;
                     }else{
@@ -599,8 +604,8 @@
         case 2:
             
         {
-            int height = 0;
-            int count = _homeProductList.hotRecommend.count / 4;
+            long height = 0;
+            long count = _homeProductList.hotRecommend.count / 4;
             if (_homeProductList.hotRecommend.count % 4 == 0)  {
                 height = count * 103;
             }else{
@@ -619,7 +624,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 1 || section == 2) {
+    if (section == 2) {
         return 5.0f;
     }
     return 0.0f;
@@ -641,27 +646,35 @@
             sdcycleScrollCell.selected = NO;
             sdcycleScrollCell.selectionStyle = UITableViewCellSelectionStyleNone;
             sdcycleScrollCell.sdCycleScrollview.delegate = self;
-            sdcycleScrollCell.delegate = self;
+            sdcycleScrollCell.backgroundColor = rgb(242, 242, 242);
+//            sdcycleScrollCell.delegate = self;
             
-            for (int i = 0; i<_homeProductList.platType.count; i++) {
-                PlatTypeModel *model = _homeProductList.platType[i];
-                switch (model.code_.integerValue) {
-                    case 1:
-                        [sdcycleScrollCell.loanBtn setTitle:model.desc_ forState:UIControlStateNormal];
-                        [sdcycleScrollCell.loanBtnImage setImage:[UIImage imageNamed:@"loan_icon"] forState:UIControlStateNormal];
-                        break;
-                    case 2:
-                        [sdcycleScrollCell.gameBtn setTitle:model.desc_ forState:UIControlStateNormal];
-                        [sdcycleScrollCell.gameBtnImage setImage:[UIImage imageNamed:@"game_icon"] forState:UIControlStateNormal];
-                        break;
-                    case 3:
-                        [sdcycleScrollCell.tourismBtn setTitle:model.desc_ forState:UIControlStateNormal];
-                        [sdcycleScrollCell.tourismBtnImage setImage:[UIImage imageNamed:@"tourism_icon"] forState:UIControlStateNormal];
-                        break;
-                    default:
-                        break;
-                }
-            }
+//            [sdcycleScrollCell.loanBtn setTitle:@"" forState:UIControlStateNormal];
+//            [sdcycleScrollCell.loanBtnImage setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+//            [sdcycleScrollCell.gameBtn setTitle:@"" forState:UIControlStateNormal];
+//            [sdcycleScrollCell.gameBtnImage setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+//            [sdcycleScrollCell.tourismBtn setTitle:@"" forState:UIControlStateNormal];
+//            [sdcycleScrollCell.tourismBtnImage setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+//
+//            for (int i = 0; i<_homeProductList.platType.count; i++) {
+//                PlatTypeModel *model = _homeProductList.platType[i];
+//                switch (model.code_.integerValue) {
+//                    case 1:
+//                        [sdcycleScrollCell.loanBtn setTitle:model.desc_ forState:UIControlStateNormal];
+//                        [sdcycleScrollCell.loanBtnImage setImage:[UIImage imageNamed:@"loan_icon"] forState:UIControlStateNormal];
+//                        break;
+//                    case 2:
+//                        [sdcycleScrollCell.gameBtn setTitle:model.desc_ forState:UIControlStateNormal];
+//                        [sdcycleScrollCell.gameBtnImage setImage:[UIImage imageNamed:@"game_icon"] forState:UIControlStateNormal];
+//                        break;
+//                    case 3:
+//                        [sdcycleScrollCell.tourismBtn setTitle:model.desc_ forState:UIControlStateNormal];
+//                        [sdcycleScrollCell.tourismBtnImage setImage:[UIImage imageNamed:@"tourism_icon"] forState:UIControlStateNormal];
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
             
             
             sdcycleScrollCell.sdCycleScrollview.titlesGroup = _homeProductList.paidList;
@@ -681,6 +694,7 @@
                 case 2:
                 case 12:
                 case 6:
+    
                 {
                     HomePageCell *homeCell = [tableView dequeueReusableCellWithIdentifier:@"HomePageCell"];
                     [homeCell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -1055,10 +1069,10 @@
 }
 
 -(void)getProtocolContentProtocolType:(NSString *)productId typeCode:(NSString *)typeCode applicationId:(NSString *)applicationId periods:(NSString *)periods{
-    
+
     CommonViewModel *commonVM = [[CommonViewModel alloc]init];
     [commonVM setBlockWithReturnBlock:^(id returnValue) {
-        
+
         BaseResultModel *  baseResultM = returnValue;
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             NSDictionary * dic = (NSDictionary *)baseResultM.data;
@@ -1073,94 +1087,103 @@
     [commonVM obtainProductProtocolType:productId typeCode:typeCode apply_id:applicationId periods:periods stagingType:_homeProductList.stagingType];
 }
 
--(void)protocolListClick:(UIButton *)sender{
-    
-    HgLoanProtoolListModel *model = _protocolArray[0];
-    NSString *inverBorrowId = @"";
-    NSString *protocolType = @"";
-    if ([sender.titleLabel.text containsString:@"借款协议"]) {
-        inverBorrowId = model.inverBorrowId;
-        protocolType = @"2";
-    }else if ([sender.titleLabel.text containsString:@"转账授权书"]){
-        protocolType = @"1";
-    }else if ([sender.titleLabel.text containsString:@"信用咨询及管理服务协议"]){
-        protocolType = @"3";
-    }else if ([sender.titleLabel.text containsString:@"运营商信息授权协议"]){
-        protocolType = @"4";
-    }else if ([sender.titleLabel.text containsString:@"用户信息授权服务协议"]){
-        protocolType = @"5";
-    }else if ([sender.titleLabel.text containsString:@"技术服务协议"]){
-        protocolType = @"6";
-    }else if ([sender.titleLabel.text containsString:@"风险管理与数据服务协议"]){
-        protocolType = @"7";
-    }else if ([sender.titleLabel.text containsString:@"电子签章授权委托协议"]){
-        protocolType = @"18";
-    }else if ([sender.titleLabel.text containsString:@"会员服务协议"]){
-        protocolType = @"19";
-    }
-    NSString *periods = _homeProductList.periods;
-    if ([_homeProductList.productId isEqualToString:EliteLoan]) {
-        periods = @"";
-    }
-    [self getProtocolContentProtocolType:_homeProductList.productId typeCode:protocolType applicationId:_homeProductList.applicationId periods:periods];
+//-(void)protocolListClick:(UIButton *)sender{
+//
+//    HgLoanProtoolListModel *model = _protocolArray[0];
+//    NSString *inverBorrowId = @"";
+//    NSString *protocolType = @"";
+//    if ([sender.titleLabel.text containsString:@"借款协议"]) {
+//        inverBorrowId = model.inverBorrowId;
+//        protocolType = @"2";
+//    }else if ([sender.titleLabel.text containsString:@"转账授权书"]){
+//        protocolType = @"1";
+//    }else if ([sender.titleLabel.text containsString:@"信用咨询及管理服务协议"]){
+//        protocolType = @"3";
+//    }else if ([sender.titleLabel.text containsString:@"运营商信息授权协议"]){
+//        protocolType = @"4";
+//    }else if ([sender.titleLabel.text containsString:@"用户信息授权服务协议"]){
+//        protocolType = @"5";
+//    }else if ([sender.titleLabel.text containsString:@"技术服务协议"]){
+//        protocolType = @"6";
+//    }else if ([sender.titleLabel.text containsString:@"风险管理与数据服务协议"]){
+//        protocolType = @"7";
+//    }else if ([sender.titleLabel.text containsString:@"电子签章授权委托协议"]){
+//        protocolType = @"18";
+//    }else if ([sender.titleLabel.text containsString:@"会员服务协议"]){
+//        protocolType = @"19";
+//    }
+//    NSString *periods = _homeProductList.periods;
+//    if ([_homeProductList.productId isEqualToString:EliteLoan]) {
+//        periods = @"";
+//    }
+//    [self getProtocolContentProtocolType:_homeProductList.productId typeCode:protocolType applicationId:_homeProductList.applicationId periods:periods];
+//
+//}
 
-}
 
+//-(void)bottomBtnClick{
+//
+//
+//}
 
--(void)bottomBtnClick{
-    
-    
-}
-
-#pragma mark 超市按钮
--(void)loanClick{
-    
-    LoanListViewController *controller = [[LoanListViewController alloc]init];
-    PlatTypeModel *model = [self getPlatFlag:1];
-    controller.titleStr = model.desc_;
-    controller.moduleType = model.code_;
-    controller.location = @"1";
-    [self.navigationController pushViewController:controller animated:true];
-
-}
-
-#pragma mark 游戏按钮
--(void)gameBtnClick{
-    
-    LoanListViewController *controller = [[LoanListViewController alloc]init];
-    PlatTypeModel *model = [self getPlatFlag:2];
-    controller.titleStr = model.desc_;
-    controller.moduleType = model.code_;
-    controller.location = @"";
-    [self.navigationController pushViewController:controller animated:true];
-
-}
-
-#pragma mark 旅游按钮
--(void)tourismBtnClcik{
-    
-    LoanListViewController *controller = [[LoanListViewController alloc]init];
-    PlatTypeModel *model = [self getPlatFlag:3];
-    controller.titleStr = model.desc_;
-    controller.moduleType = model.code_;
-    controller.location = @"";
-    [self.navigationController pushViewController:controller animated:true];
-
-}
-
--(PlatTypeModel *)getPlatFlag:(NSInteger)flag{
-    
-    for (int i = 0; i<_homeProductList.platType.count; i++) {
-        
-        PlatTypeModel *model = _homeProductList.platType[i];
-        if (flag == model.code_.integerValue) {
-            return model;
-        }
-        
-    }
-    
-    return nil;
-}
+//#pragma mark 超市按钮
+//-(void)loanClick{
+//
+//    if (_homeProductList.platType == nil) {
+//        return;
+//    }
+//    LoanListViewController *controller = [[LoanListViewController alloc]init];
+//    PlatTypeModel *model = [self getPlatFlag:1];
+//    controller.titleStr = model.desc_;
+//    controller.moduleType = model.code_;
+//    controller.location = @"1";
+//    [self.navigationController pushViewController:controller animated:true];
+//
+//}
+//
+//#pragma mark 游戏按钮
+//-(void)gameBtnClick{
+//
+//    if (_homeProductList.platType == nil) {
+//        return;
+//    }
+//    LoanListViewController *controller = [[LoanListViewController alloc]init];
+//    PlatTypeModel *model = [self getPlatFlag:2];
+//    controller.titleStr = model.desc_;
+//    controller.moduleType = model.code_;
+//    controller.location = @"";
+//    [self.navigationController pushViewController:controller animated:true];
+//
+//}
+//
+//#pragma mark 旅游按钮
+//-(void)tourismBtnClcik{
+//
+//    if (_homeProductList.platType == nil) {
+//        return;
+//    }
+//    LoanListViewController *controller = [[LoanListViewController alloc]init];
+//    PlatTypeModel *model = [self getPlatFlag:3];
+//    controller.titleStr = model.desc_;
+//    controller.moduleType = model.code_;
+//    controller.location = @"";
+//    [self.navigationController pushViewController:controller animated:true];
+//
+//}
+//
+//-(PlatTypeModel *)getPlatFlag:(NSInteger)flag{
+//
+//    for (int i = 0; i<_homeProductList.platType.count; i++) {
+//
+//        PlatTypeModel *model = _homeProductList.platType[i];
+//        if (flag == model.code_.integerValue) {
+//            return model;
+//        }
+//
+//    }
+//
+//    return nil;
+//}
 #pragma mark 查看更多
 -(void)recentMoreBtnClick{
     

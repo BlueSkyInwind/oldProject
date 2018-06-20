@@ -96,5 +96,6 @@
 #import "PhoneOrderListModel.h"
 #import "PaymentViewModel.h"
 #import "PaymentDetailModel.h"
+#import "LoginViewController.h"
 
 #endif /* fxdProduct_Bridging_Header_h */

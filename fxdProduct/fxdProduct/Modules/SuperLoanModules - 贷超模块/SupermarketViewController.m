@@ -531,8 +531,12 @@
 
 -(void)collectionBtn:(UIButton *)sender{
     
+    if (![FXD_Utility sharedUtility].loginFlage){
+        
+        [self presentLoginVC:self];
+        return;
+    }
     RowsModel *model = _dataArray[sender.tag];
-    
     CollectionViewModel *collectionVM = [[CollectionViewModel alloc]init];
     [collectionVM setBlockWithReturnBlock:^(id returnValue) {
         
@@ -550,6 +554,18 @@
     
     [collectionVM addMyCollectionInfocollectionType:model.moduletype platformId:model.id_];
     
+}
+
+/**
+ 跳转到登录页面
+ 
+ @param vc 登录的VC
+ */
+- (void)presentLoginVC:(UIViewController *)vc
+{
+    LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
+    [vc presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

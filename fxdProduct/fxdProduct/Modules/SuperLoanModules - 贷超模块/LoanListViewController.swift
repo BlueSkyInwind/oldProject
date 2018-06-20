@@ -138,7 +138,8 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        let pageIndex = String(format:"%d",pages!)
-        getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: order!, sort: "0", moduleType: moduleType!)
+        let moduleType1 = moduleType != nil ? moduleType : ""
+        getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: order!, sort: "0", moduleType: moduleType1!)
     }
 
     
@@ -306,6 +307,7 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
         if indexPath.row == 0 && moduleType == "1"{
             return
         }
+        
         if moduleType == "1"{
             
             let model = dataArray![indexPath.row - 1] as! RowsModel
@@ -315,6 +317,19 @@ class LoanListViewController: BaseViewController ,UITableViewDelegate,UITableVie
             let model = dataArray![indexPath.row] as! RowsModel
             getCompLink(thirdPlatformId: model.id_)
         }
+    }
+    
+    
+    /**
+     跳转到登录页面
+     
+     @param vc 登录的VC
+     */
+    func presentLoginVC(vc:UIViewController){
+        let loginVC = LoginViewController()
+        let nav = BaseNavigationViewController.init(rootViewController: loginVC)
+        vc.present(nav, animated: true, completion: nil)
+    
     }
     
     
@@ -488,11 +503,12 @@ extension LoanListViewController{
         superLoanHeaderCell?.sortImageBtn?.isSelected = false
         let sortIndex = String(format:"%ld",_index!)
         
+        let moduleType1 = moduleType != nil ? moduleType : ""
         if isFirst! {
-            getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: order!, sort: sortIndex, moduleType: moduleType!)
+            getData(maxAmount: "", maxDays: "", minAmount: "", minDays: "", offset: "0", order: order!, sort: sortIndex, moduleType: moduleType1!)
         }else{
             
-            getData(maxAmount: maxAmount!, maxDays: maxDays!, minAmount: minAmount!, minDays: minDays!, offset: "0", order: order!, sort: sortIndex, moduleType: moduleType!)
+            getData(maxAmount: maxAmount!, maxDays: maxDays!, minAmount: minAmount!, minDays: minDays!, offset: "0", order: order!, sort: sortIndex, moduleType: moduleType1!)
         }
         
         
@@ -536,8 +552,8 @@ extension LoanListViewController{
         maxDays = maxLoanPeriod;
         minAmount = minLoanMoney;
         minDays = minLoanPeriod;
-        
-        getData(maxAmount: maxLoanMoney, maxDays: maxLoanPeriod, minAmount: minLoanMoney, minDays: minLoanPeriod, offset: "0", order: order!, sort: sortIndex, moduleType: moduleType!)
+        let moduleType1 = moduleType != nil ? moduleType : ""
+        getData(maxAmount: maxLoanMoney, maxDays: maxLoanPeriod, minAmount: minLoanMoney, minDays: minLoanPeriod, offset: "0", order: order!, sort: sortIndex, moduleType: moduleType1!)
         
         UIView.animate(withDuration: 1) {
             self.filterView?.removeFromSuperview()
@@ -546,6 +562,13 @@ extension LoanListViewController{
     
     //MARK : 收藏
     func collectionBtn(_ sender: UIButton) {
+        
+        if !FXD_Utility.shared().loginFlage {
+            
+            presentLoginVC(vc: self)
+            return
+        }
+        
         let model = dataArray![sender.tag - 1] as! RowsModel
         
         let collectionVM = CollectionViewModel()

@@ -570,32 +570,19 @@ extension HotRecommendationViewController{
     
     func collectionBtn(_ sender: UIButton) {
         
+        if !FXD_Utility.shared().loginFlage {
+            
+            presentLoginVC(vc: self)
+            return
+        }
+        
         let model = dataArray![sender.tag - 1] as! RowsModel
-//        var isCancel = false
-//
-//        if self.row == sender.tag || model.isCollect == "0"{
-//            isCancel = true
-//        }
         
         let collectionVM = CollectionViewModel()
         collectionVM.setBlockWithReturn({ [weak self](retrunValue) in
             
             let baseResult = try! BaseResultModel.init(dictionary: retrunValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
-                
-//                self?.row = sender.tag
-//                model.isCollect = "0"
-//                if isCancel{
-//                    model.isCollect = "1"
-//                }
-//                self?.dataArray?.replaceObject(at: sender.tag - 1, with: model)
-//                var tag = sender.tag - 1
-//                if self?.type == "1"{
-//                    tag = sender.tag
-//                    
-//                }
-//                let indexPath: IndexPath = IndexPath.init(row: tag, section: 0)
-//                self?.tableView?.reloadRows(at: [indexPath], with: .fade)
                 
                 let sortIndex = String(format:"%ld",(self?._index!)!)
                 if (self?.isFirst!)!{
@@ -605,11 +592,6 @@ extension HotRecommendationViewController{
                     self?.getData(maxAmount: (self?.maxAmount!)!, maxDays: (self?.maxDays!)!, minAmount: (self?.minAmount!)!, minDays: (self?.minDays!)!, offset: "0", order: (self?.order!)!, sort: sortIndex)
                 }
                 
-//                model.isCollect = model.isCollect == "0" ? "1" : "0"
-//                //                model.isCollect = "0"
-//                self?.dataArray?.replaceObject(at: sender.tag, with: model)
-//                self?.tableView?.reloadData()
-                
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
@@ -618,6 +600,18 @@ extension HotRecommendationViewController{
             
         }
         collectionVM.addMyCollectionInfocollectionType(type, platformId: model.id_)
+        
+    }
+    
+    /**
+     跳转到登录页面
+     
+     @param vc 登录的VC
+     */
+    func presentLoginVC(vc:UIViewController){
+        let loginVC = LoginViewController()
+        let nav = BaseNavigationViewController.init(rootViewController: loginVC)
+        vc.present(nav, animated: true, completion: nil)
         
     }
 }
