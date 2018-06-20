@@ -373,10 +373,10 @@
             switch (indexPath.row) {
                 case 0:
                     {
-//                        ShoppingMallModules *myMessageVC=[[ShoppingMallModules alloc]init];
-//                        [self.navigationController pushViewController:myMessageVC animated:true];
-                        MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+                        TestTableViewController *myMessageVC=[[TestTableViewController alloc]init];
                         [self.navigationController pushViewController:myMessageVC animated:true];
+//                        MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+//                        [self.navigationController pushViewController:myMessageVC animated:true];
                     }
                     break;
                 case 1:
