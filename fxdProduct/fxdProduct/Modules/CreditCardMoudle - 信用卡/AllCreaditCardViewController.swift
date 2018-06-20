@@ -11,6 +11,7 @@ import UIKit
 class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
     var contentTableView:UITableView?
+    var headerView:AllCardHeaderView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +31,16 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
         contentTableView?.backgroundColor = "f2f2f2".uiColor()
         self.view.addSubview(contentTableView!)
         contentTableView?.snp.makeConstraints({ (make) in
-            make.edges.equalTo(self.view)
+            make.top.equalTo(self.view.snp.top).offset(55 + 64)
+            make.left.right.bottom.equalTo(0)
         })
         contentTableView?.registerCell([CreaditCardTableViewCell.self],true)
+        
+        headerView = AllCardHeaderView.init(frame: CGRect.init(x: 0, y: 64, width: _k_w, height: 55), self.view)
+        headerView?.dataArr = ["全部银行","全部银行","全部银行","全部银行","全部银行"]
+        headerView?.addConditonView()
+        self.view.addSubview(headerView!)
+    
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
