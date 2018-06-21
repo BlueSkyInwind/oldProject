@@ -417,6 +417,8 @@ NSString * const UserInfomation = @"UserInfomation";
 
 NSString * const FirstLunch = @"FirstLunch";
 
+NSString *const isSuperMark = @"isSuperMark";
+
 NSString * const theMoxieApiKey = @"54adcefe02314a44b82dca9b470c4bad";  //生产
 //NSString * const theMoxieApiKey = @"8190142167af4b30b898827623d57b4d";
 
