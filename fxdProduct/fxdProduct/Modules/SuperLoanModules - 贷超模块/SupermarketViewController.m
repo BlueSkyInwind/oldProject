@@ -52,7 +52,7 @@
 //    _type = @"";
     _order = @"ASC";
     _dataArray = [NSMutableArray arrayWithCapacity:100];
-    [self addHeaderView];
+//    [self addHeaderView];
     [self createTab];
 }
 
@@ -68,22 +68,22 @@
     
     [super viewWillAppear:animated];
     
-    if (_filterView) {
-        [_filterView removeFromSuperview];
-    }
-    if (_sortView) {
-        [_sortView removeFromSuperview];
-    }
-    
-    _headerView.sortBtn.selected = NO;
-    _headerView.sortImageBtn.selected = NO;
-    [_headerView.sortBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
-    [_headerView.sortImageBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
-    
-    _headerView.filterBtn.selected = NO;
-    _headerView.filterImageBtn.selected = NO;
-    [_headerView.filterBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
-    [_headerView.filterImageBtn setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
+//    if (_filterView) {
+//        [_filterView removeFromSuperview];
+//    }
+//    if (_sortView) {
+//        [_sortView removeFromSuperview];
+//    }
+//
+//    _headerView.sortBtn.selected = NO;
+//    _headerView.sortImageBtn.selected = NO;
+//    [_headerView.sortBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
+//    [_headerView.sortImageBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
+//
+//    _headerView.filterBtn.selected = NO;
+//    _headerView.filterImageBtn.selected = NO;
+//    [_headerView.filterBtn setTitleColor:rgb(77, 77, 77) forState:UIControlStateNormal];
+//    [_headerView.filterImageBtn setImage:[UIImage imageNamed:@"filter_icon"] forState:UIControlStateNormal];
     
     [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",_index]];
 }
@@ -138,7 +138,7 @@
 
 -(void)createTab{
     
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 120, _k_w, _k_h-120-49) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, _k_w, _k_h-64-49) style:UITableViewStylePlain];
     [_tableView registerClass:[SuperLoanCell class] forCellReuseIdentifier:@"SuperLoanCell"];
     [_tableView registerClass:[SuperLoanNoneCell class] forCellReuseIdentifier:@"SuperLoanNoneCell"];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -185,7 +185,7 @@
         return _k_h - 215 - 80 - 64 - 49;
     }
     
-    RowsModel *model = _dataArray[indexPath.row];
+//    RowsModel *model = _dataArray[indexPath.row];
 //    if ([model.moduletype isEqualToString:@"1"]) {
 //        return 90;
 //    }

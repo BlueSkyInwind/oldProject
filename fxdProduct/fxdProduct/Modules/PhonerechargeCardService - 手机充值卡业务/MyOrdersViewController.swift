@@ -148,14 +148,15 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         
         cell.titleLabel?.text = model.phone_card_name
         cell.timeLabel?.text = model.payment_date
-        cell.moneyLabel?.text = model.order_price
-        cell.quantityLabel?.text = model.phone_card_price + "x" + model.phone_card_count
+        cell.moneyLabel?.text = "¥" + model.order_price
+        cell.quantityLabel?.text = "¥" + model.phone_card_price + "x" + model.phone_card_count
         
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+//        self.tabBarController?.selectedIndex = 0;
         let model = dataArray![indexPath.row] as! PhoneOrderListModel
         let controller = OrderConfirmDetailViewController()
         controller.orderNo = model.order_no
