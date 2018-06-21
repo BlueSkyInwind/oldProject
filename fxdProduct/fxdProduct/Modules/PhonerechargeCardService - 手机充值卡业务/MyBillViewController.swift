@@ -177,8 +177,8 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         
         cell.titleLabel?.text = orderModel?.phone_card_name
         cell.timeLabel?.text = orderModel?.payment_date
-        cell.moneyLabel?.text = orderModel?.order_price
-        cell.quantityLabel?.text = (orderModel?.phone_card_price)! + "x" + (orderModel?.phone_card_count)!
+        cell.moneyLabel?.text = "¥" + (orderModel?.order_price)!
+        cell.quantityLabel?.text = "¥" + (orderModel?.phone_card_price)! + "x" + (orderModel?.phone_card_count)!
         
         return cell!
     }

@@ -281,6 +281,9 @@ UIKIT_EXTERN NSString * const FirstLunch;
 
 UIKIT_EXTERN NSString * const theMoxieApiKey;            //魔蝎key
 
+UIKIT_EXTERN NSString * const isSuperMark;
+
+
 //提示语
 UIKIT_EXTERN NSString * const IDOCRMarkeords;
 UIKIT_EXTERN NSString * const obtainUserContactMarkeords;

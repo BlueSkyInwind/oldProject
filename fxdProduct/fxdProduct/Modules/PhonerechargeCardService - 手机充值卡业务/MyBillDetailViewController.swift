@@ -434,15 +434,16 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
             
             let baseResultModel = returnValue as! BaseResultModel
             if baseResultModel.errCode == "0"{
-//                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResultModel.friendErrMsg)
-//
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-//                    self.navigationController?.popViewController(animated: true)
-//                })
+
                 
-                let controller = RepaymentResultViewController()
-                controller.state = .intermediate
-                self.navigationController?.pushViewController(controller, animated: true)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                    
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+                self.tabBarController?.selectedIndex = 0
+//                let controller = RepaymentResultViewController()
+//                controller.state = .intermediate
+//                self.navigationController?.pushViewController(controller, animated: true)
                 
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResultModel.friendErrMsg)

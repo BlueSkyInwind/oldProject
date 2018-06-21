@@ -282,7 +282,7 @@ extension OrderConfirmationViewController {
                 let orderNo = baseModel.data as! String
                 result(true,orderNo)
             }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
+                MBPAlertView.sharedMBPText().showTextOnly(UIApplication.shared.keyWindow, message: baseModel.friendErrMsg)
                 result(false,"")
             }
         }) {

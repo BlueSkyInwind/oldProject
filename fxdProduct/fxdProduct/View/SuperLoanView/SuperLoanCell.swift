@@ -152,7 +152,6 @@ extension SuperLoanCell{
             make.bottom.equalTo(self).offset(-10)
             make.left.equalTo((leftImageView?.snp.right)!).offset(20)
             make.height.equalTo(20)
-            make.width.equalTo(300)
         })
         
         
@@ -161,13 +160,11 @@ extension SuperLoanCell{
         collectionBtn?.addTarget(self, action: #selector(collectionBtnClick(_:)), for: .touchUpInside)
         self.contentView.addSubview(collectionBtn!)
         collectionBtn?.snp.makeConstraints({ (make) in
-//            make.centerY.equalTo(self.snp.centerY)
             make.right.equalTo(self).offset(-20)
             make.top.equalTo(self).offset(25)
         })
         
         descLabel = UILabel()
-//        descLabel?.text = "申请人数"
         descLabel?.textColor = QUTOA_COLOR
         descLabel?.textAlignment = .right
         descLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -228,8 +225,6 @@ extension SuperLoanCell{
             make.bottom.equalTo(self).offset(-15)
             make.left.equalTo((leftImageView?.snp.right)!).offset(20)
             make.height.equalTo(20)
-            make.width.equalTo(300)
-//            make.width.equalTo(30)
         })
         
         
@@ -238,13 +233,11 @@ extension SuperLoanCell{
         collectionBtn?.addTarget(self, action: #selector(collectionBtnClick(_:)), for: .touchUpInside)
         self.contentView.addSubview(collectionBtn!)
         collectionBtn?.snp.makeConstraints({ (make) in
-//            make.centerY.equalTo(self.snp.centerY)
             make.right.equalTo(self).offset(-20)
             make.top.equalTo(self).offset(25)
         })
         
         descLabel = UILabel()
-//        descLabel?.text = "申请人数"
         descLabel?.textColor = QUTOA_COLOR
         descLabel?.textAlignment = .right
         descLabel?.font = UIFont.systemFont(ofSize: 12)

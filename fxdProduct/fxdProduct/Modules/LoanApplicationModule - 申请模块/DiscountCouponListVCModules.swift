@@ -37,7 +37,12 @@ class DiscountCouponListVCModules: UIViewController,UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dataListArr?.count)! + 1
+        
+        if dataListArr != nil{
+            
+            return (dataListArr?.count)! + 1
+        }
+        return 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

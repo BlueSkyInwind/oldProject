@@ -95,14 +95,14 @@ extension RecentCell{
             make.top.equalTo(tipView.snp.top).offset(8)
         }
         
-        let arrowBtn = UIButton()
-        arrowBtn.setImage(UIImage.init(named: "arrow_icon"), for: .normal)
-        arrowBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
-        tipView.addSubview(arrowBtn)
-        arrowBtn.snp.makeConstraints { (make) in
-            make.right.equalTo(tipView.snp.right).offset(-20)
-            make.centerY.equalTo(tipView.snp.centerY)
-        }
+//        let arrowBtn = UIButton()
+//        arrowBtn.setImage(UIImage.init(named: "arrow_icon"), for: .normal)
+//        arrowBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
+//        tipView.addSubview(arrowBtn)
+//        arrowBtn.snp.makeConstraints { (make) in
+//            make.right.equalTo(tipView.snp.right).offset(-20)
+//            make.centerY.equalTo(tipView.snp.centerY)
+//        }
         
         let bottomLineView = UIView()
         bottomLineView.backgroundColor = TIP_LINE_COLOR
@@ -115,17 +115,17 @@ extension RecentCell{
         }
         
         
-        let moreBtn = UIButton()
-        moreBtn.setTitle("查看更多", for: .normal)
-        moreBtn.setTitleColor(MIDDLE_LINE_COLOR, for: .normal)
-        moreBtn.titleLabel?.font = UIFont.yx_systemFont(ofSize: 12)
-        moreBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
-        tipView.addSubview(moreBtn)
-        moreBtn.snp.makeConstraints { (make) in
-            make.right.equalTo(arrowBtn.snp.left).offset(-8)
-            make.centerY.equalTo(tipView.snp.centerY)
-        }
-        
+//        let moreBtn = UIButton()
+//        moreBtn.setTitle("查看更多", for: .normal)
+//        moreBtn.setTitleColor(MIDDLE_LINE_COLOR, for: .normal)
+//        moreBtn.titleLabel?.font = UIFont.yx_systemFont(ofSize: 12)
+//        moreBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchUpInside)
+//        tipView.addSubview(moreBtn)
+//        moreBtn.snp.makeConstraints { (make) in
+//            make.right.equalTo(arrowBtn.snp.left).offset(-8)
+//            make.centerY.equalTo(tipView.snp.centerY)
+//        }
+//
 
         let layout = UICollectionViewFlowLayout()
         //列间距,行间距,偏移
@@ -201,7 +201,7 @@ extension RecentCell{
         
         return CGSize(width:(_k_w)/4 ,height:103)
 //        if UI_IS_IPONE6 {
-//            
+//
 //            return CGSize(width:(_k_w)/4 ,height:103)
 //        }
 //        return CGSize(width:(_k_w - 40)/4 + 10,height:103)
