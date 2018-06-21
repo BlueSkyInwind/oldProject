@@ -31,13 +31,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1t-oe-3D4">
-                        <rect key="frame" x="84" y="41" width="36" height="17"/>
+                        <rect key="frame" x="84" y="41" width="220" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSK-TC-fgR">
-                        <rect key="frame" x="200" y="12.5" width="36" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSK-TC-fgR">
+                        <rect key="frame" x="200" y="13" width="50" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="eRL-IZ-cmi"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.80784313725490198" green="0.67450980392156867" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -57,6 +60,7 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="NSK-TC-fgR" secondAttribute="trailing" constant="70" id="5Zg-hr-cLz"/>
                     <constraint firstItem="3ah-tk-aHv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7fo-02-ctb"/>
                     <constraint firstAttribute="bottom" secondItem="XJ6-EY-ht7" secondAttribute="bottom" id="BGV-XM-u6R"/>
                     <constraint firstItem="0nD-tv-qU1" firstAttribute="top" secondItem="R1t-oe-3D4" secondAttribute="bottom" constant="11" id="Fu8-w4-kiv"/>
@@ -67,9 +71,9 @@
                     <constraint firstItem="R1t-oe-3D4" firstAttribute="leading" secondItem="kPc-I7-lxu" secondAttribute="leading" id="dZ0-ui-JBj"/>
                     <constraint firstItem="NSK-TC-fgR" firstAttribute="centerY" secondItem="kPc-I7-lxu" secondAttribute="centerY" id="kD1-oz-IWA"/>
                     <constraint firstItem="0nD-tv-qU1" firstAttribute="leading" secondItem="kPc-I7-lxu" secondAttribute="leading" id="p8q-sc-kc5"/>
+                    <constraint firstAttribute="trailing" secondItem="R1t-oe-3D4" secondAttribute="trailing" constant="16" id="vcs-Jt-4lI"/>
                     <constraint firstItem="R1t-oe-3D4" firstAttribute="top" secondItem="kPc-I7-lxu" secondAttribute="bottom" constant="10" id="xFD-ho-bFi"/>
                     <constraint firstAttribute="trailing" secondItem="XJ6-EY-ht7" secondAttribute="trailing" id="xO8-hk-VuS"/>
-                    <constraint firstItem="NSK-TC-fgR" firstAttribute="leading" secondItem="kPc-I7-lxu" secondAttribute="trailing" constant="50" id="yG0-is-GyE"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

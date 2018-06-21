@@ -136,6 +136,13 @@ UIKIT_EXTERN NSString * const       _orderDetailInfo_url;                    //�
 UIKIT_EXTERN NSString * const       _createOrderPhoneCard_url;       //创建订单
 
 
+
+#pragma mark - 信用卡
+
+UIKIT_EXTERN NSString * const       _creaditCardListInfo_url;      //信用卡列表
+UIKIT_EXTERN NSString * const       _conditionScreening_url;      //信用卡条件筛选
+UIKIT_EXTERN NSString * const       _creaditcardRecord_url;      //信用卡记录
+
 #pragma mark - 视频认证接口
 UIKIT_EXTERN NSString * const       _VideoVerify_url;                    //获取视频认证信息
 UIKIT_EXTERN NSString * const       _uploadVideoVideo_url;                    //上传视频

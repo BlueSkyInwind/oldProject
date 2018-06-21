@@ -8,12 +8,18 @@
 
 import UIKit
 
-typealias CollectionViewDidSelect = (_ row:Int) -> Void
+typealias CollectionViewDidSelect = (_ row:Int,_ isMore:Bool) -> Void
 
 class CreaditCardHeaderCell: UITableViewCell,UICollectionViewDelegate,UICollectionViewDataSource {
 
-    
     var didSelect:CollectionViewDidSelect?
+    var collectionView:UICollectionView?
+    
+    var dataArr:Array<CreaditCardBanksListModel> = []{
+        didSet{
+            collectionView?.reloadData()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,15 +44,15 @@ class CreaditCardHeaderCell: UITableViewCell,UICollectionViewDelegate,UICollecti
         // 5. 每行之间最小的间距
         layout.minimumLineSpacing = 0
         // 6. 定义一个UICollectionView
-        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = UIColor.white
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView?.backgroundColor = UIColor.white
         // 7. 设置collectionView的代理和数据源
-        collectionView.delegate = self
-        collectionView.dataSource = self;
+        collectionView?.delegate = self
+        collectionView?.dataSource = self;
         // 8. collectionViewCell的注册
-        collectionView.register(UINib(nibName: "CardCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CardCollectionViewCell")
-        self.addSubview(collectionView)
-        collectionView.snp.makeConstraints { (make) in
+        collectionView?.register(UINib(nibName: "CardCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CardCollectionViewCell")
+        self.addSubview(collectionView!)
+        collectionView?.snp.makeConstraints { (make) in
             make.edges.equalTo(self)
         }
     }
@@ -57,7 +63,6 @@ class CreaditCardHeaderCell: UITableViewCell,UICollectionViewDelegate,UICollecti
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
@@ -65,9 +70,8 @@ class CreaditCardHeaderCell: UITableViewCell,UICollectionViewDelegate,UICollecti
 
 extension CreaditCardHeaderCell {
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8;
+        return (dataArr.count) > 0 ? (dataArr.count) + 1 : 1;
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -77,15 +81,24 @@ extension CreaditCardHeaderCell {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as! CardCollectionViewCell
+        if indexPath.row ==  (dataArr.count){
+            cell.cardNameLabel.text = "更多"
+            cell.cradIconView.image = UIImage.init(named: "More_card");
+        }else{
+            let model = dataArr[indexPath.row]
+            cell.setDataSource(model)
+        }
         return cell
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if didSelect != nil {
-            didSelect!(indexPath.row)
+            if indexPath.row ==  (dataArr.count){
+                didSelect!(indexPath.row,true)
+            }else{
+                didSelect!(indexPath.row,false)
+            }
         }
     }
-
 }
 
 

@@ -18,5 +18,8 @@ class CardCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    func setDataSource(_ model:CreaditCardBanksListModel)  {
+        cardNameLabel.text = "\(model.cardBankName ?? " ")"
+        cradIconView.sd_setImage(with: URL.init(string: "\(model.logoUrl ?? "")"), placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: nil)
+    }
 }

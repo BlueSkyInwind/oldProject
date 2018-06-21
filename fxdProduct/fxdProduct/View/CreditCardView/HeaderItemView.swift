@@ -26,21 +26,30 @@ class HeaderItemView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     @objc func titleBtnClick(sender:UIButton) {
         if itemClick != nil {
             isOpen = !isOpen
             itemClick!(sender,isOpen)
             if isOpen {
-                let transform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
-                iconView?.transform = transform
+                openIcon(isOpen)
             }else{
-                let transform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi * 2))
-                iconView?.transform = transform
+                closeIcon(isOpen)
             }
         }
     }
     
+    func openIcon(_ status:Bool)  {
+        isOpen = status
+        let transform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
+        iconView?.transform = transform
+    }
+    
+    func closeIcon(_ status:Bool)  {
+        isOpen = status
+        let transform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi * 2))
+        iconView?.transform = transform
+    }
+
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

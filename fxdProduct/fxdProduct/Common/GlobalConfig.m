@@ -20,22 +20,22 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com/apigw/client/";
 //http://192.168.13.173:8005/ 张强本地
 
 //测试导流 192.168.6.134
-NSString * const _main_url  =   @"http://h5.dev.test/fxd-esb/esb/";
-NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
-NSString * const _main_new_url  =  @"http://h5.test.fxds/apigw/client/";
-NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
-NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
-NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+//NSString * const _main_url  =   @"http://h5.dev.test/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://h5.test.fxds/fxd-esb/esb/";
+//NSString * const _main_new_url  =  @"http://h5.test.fxds/apigw/client/";
+//NSString * const _ValidESB_url  =   @"http://h5.test.fxds/fxd-esb/";
+//NSString * const _H5_url    =   @"http://h5.test.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //开发测试外网地址 test.faxindai.com:8001  http://dev.faxindai.com:8002
-//NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-//NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-//NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
-//NSString * const _main_new_url  =  @"http://h5.dev.fxds/apigw/client/";
-//NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
+NSString * const _main_new_url  =  @"http://h5.dev.fxds/apigw/client/";
+NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
+NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //NSString * const _main_url  =   @"http://dev.faxindai.com:8002/fxd-esb/esb/";
 //NSString * const _agreement_url  =   @"http://dev.faxindai.com:8002/fxd-esb/esb/";
@@ -278,6 +278,14 @@ NSString * const    _orderConfirmRequest_url               =    @"card/stock/che
 NSString * const    _orderDetailInfo_url               =    @"order/contractStaging/selectContractByOrderNo";
 //订单创建
 NSString * const    _createOrderPhoneCard_url               =    @"card/order/create";
+
+#pragma mark - 信用卡
+//信用卡列表
+NSString * const    _creaditCardListInfo_url               =    @"jyd/creditCard/recommend/listApi";
+//信用卡条件
+NSString * const    _conditionScreening_url               =    @"dc/operation/card/compQuery";
+//信用卡记录
+NSString * const    _creaditcardRecord_url               =    @"dc/operation/user/storeCreditSkipLogApi";
 #pragma mark - 合规接口
 
 //获取合规开户信息

@@ -8,7 +8,13 @@
 
 import UIKit
 
+enum CurrentConditonType {
+    case bankType
+    case levelType
+    case sortType
+}
 
+typealias UserChooseResult = (_ bankIndex:Int,_ levelIndex:Int,_ isSort:Bool) -> Void
 class AllCardHeaderView: UIView {
     
     var itemViewOne:HeaderItemView?
@@ -16,16 +22,58 @@ class AllCardHeaderView: UIView {
     var itemViewThree:HeaderItemView?
     var superView:UIView?
     var conView:ConditionsScreeningView?
-    var dataArr:Array<String>?
+    var isUnfold:Bool = false
+    var levelNameArr:Array<String> = ["全部等级"]
+    var bankNameArr:Array<String> = ["全部银行"]
     
-    convenience init(frame: CGRect,_ superV:UIView){
+    var currentBank:Int = 0
+    var currentlevel:Int = 0
+    var sorts:Bool = true
+    
+    var currentType:CurrentConditonType = .bankType
+    var conditionScreenResult:UserChooseResult?
+    
+    var levelDataArr:Array<CreaditCardLevelModel> = [] {
+        didSet{
+            for model in levelDataArr {
+                levelNameArr.append(model.name)
+            }
+        }
+    }
+    var bankDataArr:Array<CreaditCardBanksListModel> = [] {
+        didSet{
+            for model in bankDataArr {
+                bankNameArr.append(model.cardBankName)
+            }
+        }
+    }
+    
+    convenience init(frame: CGRect,_ superV:UIView,_ chooseResult:@escaping UserChooseResult){
         self.init(frame: frame)
         superView = superV
+        self.conditionScreenResult = chooseResult
     }
     
     func  addConditonView()  {
-        conView = ConditionsScreeningView.init(frame: CGRect.init(x: 0, y: frame.origin.y + frame.size.height , width: _k_w, height: 0), dataArr!, { (index) in
-            
+        conView = ConditionsScreeningView.init(frame: CGRect.init(x: 0, y: frame.origin.y + frame.size.height , width: _k_w, height: 0), bankNameArr, superView!, {[weak self] (index) in
+            switch self?.currentType {
+            case .bankType?:
+                self?.currentBank = index
+                break
+            case .levelType?:
+                self?.currentlevel = index
+                break
+            default:
+                break
+            }
+            if self?.conditionScreenResult != nil {
+                self?.conditionScreenResult!((self?.currentBank)!,(self?.currentlevel)!,(self?.sorts)!)
+            }
+            self?.itemViewtTwo?.closeIcon(false)
+            self?.itemViewOne?.closeIcon(false)
+            self?.conView?.dismissAnimate()
+        }, { (open) in
+            self.isUnfold = open
         })
         superView?.addSubview(conView!)
     }
@@ -36,7 +84,6 @@ class AllCardHeaderView: UIView {
         configureView()
     }
     
-
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -63,14 +110,17 @@ extension AllCardHeaderView {
             make.bottom.equalTo(self.snp.bottom).offset(-7)
         }
         
-
-        
-        
         itemViewOne = HeaderItemView.init(frame: CGRect.zero)
         itemViewOne?.titleBtn?.setTitle("全部银行", for: UIControlState.normal)
         itemViewOne?.itemClick = {[weak self] (button,isOpen) in
             if isOpen {
-                self?.conView?.showAnimate()
+                self?.currentType = .bankType
+                self?.itemViewtTwo?.closeIcon(false)
+                self?.conView?.currentIndex = (self?.currentBank)!
+                self?.conView?.dataArr = self?.bankNameArr;
+                if (self?.isUnfold == false) {
+                    self?.conView?.showAnimate()
+                }
             }else{
                 self?.conView?.dismissAnimate()
             }
@@ -82,7 +132,7 @@ extension AllCardHeaderView {
         }
         
         let sepView = UIView()
-        sepView.backgroundColor = "000000".uiColor()
+        sepView.backgroundColor = "cccccc".uiColor()
         backView.addSubview(sepView)
         sepView.snp.makeConstraints { (make) in
             make.left.equalTo((itemViewOne?.snp.right)!).offset(0)
@@ -93,8 +143,18 @@ extension AllCardHeaderView {
         
         itemViewtTwo = HeaderItemView.init(frame: CGRect.zero)
         itemViewtTwo?.titleBtn?.setTitle("全部等级", for: UIControlState.normal)
-        itemViewtTwo?.itemClick = { (button,isOpen) in
-            
+        itemViewtTwo?.itemClick = {[weak self] (button,isOpen) in
+            if isOpen {
+                self?.currentType = .levelType
+                self?.itemViewOne?.closeIcon(false)
+                self?.conView?.currentIndex = (self?.currentlevel)!
+                self?.conView?.dataArr = self?.levelNameArr;
+                if (self?.isUnfold == false) {
+                    self?.conView?.showAnimate()
+                }
+            }else{
+                self?.conView?.dismissAnimate()
+            }
         }
         backView.addSubview(itemViewtTwo!)
         itemViewtTwo?.snp.makeConstraints { (make) in
@@ -104,7 +164,7 @@ extension AllCardHeaderView {
         }
         
         let sepViewTwo = UIView()
-        sepViewTwo.backgroundColor = "000000".uiColor()
+        sepViewTwo.backgroundColor = "cccccc".uiColor()
         backView.addSubview(sepViewTwo)
         sepViewTwo.snp.makeConstraints { (make) in
             make.left.equalTo((itemViewtTwo?.snp.right)!).offset(0)
@@ -115,8 +175,17 @@ extension AllCardHeaderView {
         
         itemViewThree = HeaderItemView.init(frame: CGRect.zero)
         itemViewThree?.titleBtn?.setTitle("申请人数", for: UIControlState.normal)
-        itemViewThree?.itemClick = { (button,isOpen) in
-            
+        itemViewThree?.iconView?.image = UIImage.init(named: "twoWay_Icon")
+        itemViewThree?.itemClick = {[weak self] (button,isOpen) in
+            self?.currentType = .sortType
+            self?.itemViewtTwo?.closeIcon(false)
+            self?.itemViewOne?.closeIcon(false)
+            if self?.conditionScreenResult != nil {
+                self?.conditionScreenResult!((self?.currentBank)!,(self?.currentlevel)!,!isOpen)
+            }
+            if (self?.isUnfold)! {
+                self?.conView?.dismissAnimate()
+            }
         }
         backView.addSubview(itemViewThree!)
         itemViewThree?.snp.makeConstraints { (make) in

@@ -12,6 +12,12 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
 
     var contentTableView:UITableView?
     var headerView:AllCardHeaderView?
+    var creaditCardModel:CreaditCardModel?
+    var dataArr:Array<CreaditCardListModel> = []
+    
+    var bankIndex:Int = -1;
+    var levelIndex:Int = -1;
+    var sort:Bool = true;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +25,7 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
         self.title = "全部信用卡";
         self.view.backgroundColor = UIColor.white
         self.addBackItem()
+        dataArr = creaditCardModel?.cards as! Array<CreaditCardListModel>
         configureView()
     }
 
@@ -35,16 +42,26 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
             make.left.right.bottom.equalTo(0)
         })
         contentTableView?.registerCell([CreaditCardTableViewCell.self],true)
-        
-        headerView = AllCardHeaderView.init(frame: CGRect.init(x: 0, y: 64, width: _k_w, height: 55), self.view)
-        headerView?.dataArr = ["全部银行","全部银行","全部银行","全部银行","全部银行"]
+        headerView = AllCardHeaderView.init(frame: CGRect.init(x: 0, y: 64, width: _k_w, height: 55),  self.view, {[weak self] (bank, level, sorts) in
+            self?.bankIndex = bank - 1
+            self?.levelIndex = level - 1
+            self?.sort = sorts
+            self?.obtainCreaditCardConditionsList({ (isSuccess) in
+                if isSuccess {
+                    self?.contentTableView?.reloadData()
+                }
+            })
+        })
+        headerView?.currentBank = bankIndex + 1
+        headerView?.bankDataArr = creaditCardModel?.banks as! Array<CreaditCardBanksListModel>
+        headerView?.levelDataArr = creaditCardModel?.levelDic as! Array<CreaditCardLevelModel>
         headerView?.addConditonView()
         self.view.addSubview(headerView!)
     
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return (dataArr.count)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,16 +74,25 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "CreaditCardTableViewCell", for: indexPath) as! CreaditCardTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CreaditCardTableViewCell", for: indexPath) as! CreaditCardTableViewCell
         cell.selectionStyle = .none
+        let model = dataArr[indexPath.row]
+        cell.setDataSource(model)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        
+        let model = dataArr[indexPath.row]
+        pushWebVC(model)
     }
-
+    
+    func pushWebVC(_ cardListModel:CreaditCardListModel)  {
+        uploadRecordReaditCard(cardListModel._id) { (success) in
+        }
+        let webView = FXDWebViewController()
+        webView.urlStr = cardListModel.linkAddress
+        self.navigationController?.pushViewController(webView, animated: true)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -85,3 +111,53 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
     */
 
 }
+extension AllCreaditCardViewController {
+    
+    func obtainCreaditCardConditionsList(_ complication:@escaping (_ isSuccess:Bool) -> Void)  {
+        let creaditVM = CreaditCardViewModel.init()
+        creaditVM.setBlockWithReturn({[weak self] (resultModel) in
+            let baseModel =  resultModel as! BaseResultModel
+            if baseModel.errCode == "0"{
+                self?.dataArr.removeAll()
+                let arr = baseModel.data as! Array<[AnyHashable : Any]>
+                for dic in arr {
+                    let creaditCardListModel = try! CreaditCardListModel.init(dictionary: dic as [AnyHashable : Any]?)
+                    self?.dataArr.append(creaditCardListModel)
+                }
+                complication(true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
+                complication(false)
+            }
+        }) {
+            complication(false)
+        }
+        
+        let arrBack = creaditCardModel?.banks as! Array<CreaditCardBanksListModel>
+        let bankId =  bankIndex >= 0 ? arrBack[bankIndex]._id : "\(bankIndex)"
+        
+        let arrLevel = creaditCardModel?.levelDic as! Array<CreaditCardLevelModel>
+        let levelValue =  levelIndex >= 0 ? arrLevel[levelIndex].value : "\(levelIndex)"
+  
+        creaditVM.obtainCreaditCardListConditionRequest("\(bankId ?? "-1")", cardType: "\(levelValue ?? "-1")", sort: sort)
+    }
+    
+    func uploadRecordReaditCard(_ thirdID:String,_ complication:@escaping (_ isSuccess:Bool) -> Void)  {
+        
+        let creaditVM = CreaditCardViewModel.init()
+        creaditVM.setBlockWithReturn({[weak self] (resultModel) in
+            let baseModel =  resultModel as! BaseResultModel
+            if baseModel.errCode == "0"{
+                self?.creaditCardModel = try! CreaditCardModel.init(dictionary: baseModel.data as! [AnyHashable : Any]?)
+                complication(true)
+            }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
+                complication(false)
+            }
+        }) {
+            complication(false)
+        }
+        creaditVM.submitReaditCardRecord(thirdID)
+    }
+}
+
