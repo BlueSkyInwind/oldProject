@@ -29,8 +29,15 @@ class HeaderItemView: UIView {
     
     @objc func titleBtnClick(sender:UIButton) {
         if itemClick != nil {
-            isOpen != isOpen
+            isOpen = !isOpen
             itemClick!(sender,isOpen)
+            if isOpen {
+                let transform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
+                iconView?.transform = transform
+            }else{
+                let transform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi * 2))
+                iconView?.transform = transform
+            }
         }
     }
     
@@ -59,11 +66,11 @@ extension HeaderItemView {
         })
         
         iconView = UIImageView()
-        iconView?.image = UIImage.init(named: "up_arrow_Icon")
+        iconView?.image = UIImage.init(named: "down_arrow_Icon")
         self.addSubview(iconView!)
         iconView?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.snp.centerY)
-            make.left.equalTo(self.snp.left).offset(10)
+            make.left.equalTo((titleBtn?.snp.right)!).offset(10)
         })
     }
     

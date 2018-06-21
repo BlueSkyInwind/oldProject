@@ -564,6 +564,8 @@
 		84C6B09B20DA47FF008BD264 /* AllCardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B09920DA47FF008BD264 /* AllCardHeaderView.swift */; };
 		84C6B09D20DA483D008BD264 /* HeaderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B09C20DA483D008BD264 /* HeaderItemView.swift */; };
 		84C6B09E20DA483D008BD264 /* HeaderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B09C20DA483D008BD264 /* HeaderItemView.swift */; };
+		84C6B0A020DA57ED008BD264 /* ConditionsScreeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B09F20DA57ED008BD264 /* ConditionsScreeningView.swift */; };
+		84C6B0A120DA57ED008BD264 /* ConditionsScreeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B09F20DA57ED008BD264 /* ConditionsScreeningView.swift */; };
 		84CACBAB1FEA388000523BDA /* FXDAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CACBAA1FEA388000523BDA /* FXDAlertView.swift */; };
 		84CACBAC1FEA388000523BDA /* FXDAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CACBAA1FEA388000523BDA /* FXDAlertView.swift */; };
 		84CC89991F593C1E00537910 /* ApplicaitonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC89981F593C1E00537910 /* ApplicaitonModel.m */; };
@@ -1971,6 +1973,7 @@
 		84C6B09420DA36F7008BD264 /* CreaditCardTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreaditCardTableViewCell.xib; sourceTree = "<group>"; };
 		84C6B09920DA47FF008BD264 /* AllCardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardHeaderView.swift; sourceTree = "<group>"; };
 		84C6B09C20DA483D008BD264 /* HeaderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderItemView.swift; sourceTree = "<group>"; };
+		84C6B09F20DA57ED008BD264 /* ConditionsScreeningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsScreeningView.swift; sourceTree = "<group>"; };
 		84CACBAA1FEA388000523BDA /* FXDAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXDAlertView.swift; sourceTree = "<group>"; };
 		84CC89971F593C1E00537910 /* ApplicaitonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicaitonModel.h; sourceTree = "<group>"; };
 		84CC89981F593C1E00537910 /* ApplicaitonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicaitonModel.m; sourceTree = "<group>"; };
@@ -4318,6 +4321,7 @@
 				84C6B09420DA36F7008BD264 /* CreaditCardTableViewCell.xib */,
 				84C6B09920DA47FF008BD264 /* AllCardHeaderView.swift */,
 				84C6B09C20DA483D008BD264 /* HeaderItemView.swift */,
+				84C6B09F20DA57ED008BD264 /* ConditionsScreeningView.swift */,
 			);
 			path = CreditCardView;
 			sourceTree = "<group>";
@@ -5703,6 +5707,7 @@
 				63FC24F31D98F7E9006F58F3 /* YYTextLine.m in Sources */,
 				63C50E4C1E67F6C10035EE4F /* CustomerIDInfo.m in Sources */,
 				CC4F0638207DE90B0030A12A /* FindViewModel.m in Sources */,
+				84C6B0A020DA57ED008BD264 /* ConditionsScreeningView.swift in Sources */,
 				63E8F1B11E6FDAEC00FE4BDD /* DataDicParse.m in Sources */,
 				CC85C6281FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */,
 				84EBEA0B20C9348C0045F538 /* UIButton+YXTool.m in Sources */,
@@ -6203,6 +6208,7 @@
 				CC0DFAE11EA5B1090024841A /* ContactBean.m in Sources */,
 				CC0DFAE31EA5B1090024841A /* BaseIndexViewController.m in Sources */,
 				CC0DFAE41EA5B1090024841A /* YYTextLine.m in Sources */,
+				84C6B0A120DA57ED008BD264 /* ConditionsScreeningView.swift in Sources */,
 				CC0DFAE61EA5B1090024841A /* CustomerIDInfo.m in Sources */,
 				CC0DFAE71EA5B1090024841A /* DataDicParse.m in Sources */,
 				84EBEA0C20C9348C0045F538 /* UIButton+YXTool.m in Sources */,
