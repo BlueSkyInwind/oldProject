@@ -385,6 +385,8 @@
 		845017321ED7D051008055E4 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
 		8453F5381FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */; };
 		8453F5391FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */; };
+		8462D24620DCA1C50086A38B /* UIImage+YXTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8462D24520DCA1C50086A38B /* UIImage+YXTool.m */; };
+		8462D24720DCA1C50086A38B /* UIImage+YXTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8462D24520DCA1C50086A38B /* UIImage+YXTool.m */; };
 		8466936820C637E300F47A24 /* ShoppingMallModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936720C637E300F47A24 /* ShoppingMallModules.swift */; };
 		8466936920C637E300F47A24 /* ShoppingMallModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936720C637E300F47A24 /* ShoppingMallModules.swift */; };
 		8466936B20C6792800F47A24 /* RechargeCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */; };
@@ -566,6 +568,12 @@
 		84C6B09E20DA483D008BD264 /* HeaderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B09C20DA483D008BD264 /* HeaderItemView.swift */; };
 		84C6B0A020DA57ED008BD264 /* ConditionsScreeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B09F20DA57ED008BD264 /* ConditionsScreeningView.swift */; };
 		84C6B0A120DA57ED008BD264 /* ConditionsScreeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B09F20DA57ED008BD264 /* ConditionsScreeningView.swift */; };
+		84C6B0A520DB4EE5008BD264 /* CreaditCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B0A420DB4EE5008BD264 /* CreaditCardModel.m */; };
+		84C6B0A620DB4EE6008BD264 /* CreaditCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B0A420DB4EE5008BD264 /* CreaditCardModel.m */; };
+		84C6B0A920DB5003008BD264 /* CreaditCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B0A820DB5003008BD264 /* CreaditCardViewModel.m */; };
+		84C6B0AA20DB5003008BD264 /* CreaditCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B0A820DB5003008BD264 /* CreaditCardViewModel.m */; };
+		84C6B0AC20DB801E008BD264 /* CreaditCardBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B0AB20DB801E008BD264 /* CreaditCardBottomView.swift */; };
+		84C6B0AD20DB801E008BD264 /* CreaditCardBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6B0AB20DB801E008BD264 /* CreaditCardBottomView.swift */; };
 		84CACBAB1FEA388000523BDA /* FXDAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CACBAA1FEA388000523BDA /* FXDAlertView.swift */; };
 		84CACBAC1FEA388000523BDA /* FXDAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CACBAA1FEA388000523BDA /* FXDAlertView.swift */; };
 		84CC89991F593C1E00537910 /* ApplicaitonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CC89981F593C1E00537910 /* ApplicaitonModel.m */; };
@@ -1850,6 +1858,8 @@
 		844E5F4F1ED94DCB00753671 /* RegParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegParamModel.m; sourceTree = "<group>"; };
 		8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPayPasswordView.swift; sourceTree = "<group>"; };
 		8459831220A2FAFD00CAB5F6 /* fxdProductDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fxdProductDev.entitlements; sourceTree = "<group>"; };
+		8462D24420DCA1C50086A38B /* UIImage+YXTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+YXTool.h"; sourceTree = "<group>"; };
+		8462D24520DCA1C50086A38B /* UIImage+YXTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YXTool.m"; sourceTree = "<group>"; };
 		8466936720C637E300F47A24 /* ShoppingMallModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingMallModules.swift; sourceTree = "<group>"; };
 		8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCardTableViewCell.swift; sourceTree = "<group>"; };
 		846BB6E11F5835E100CD3545 /* ApplicationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewModel.h; sourceTree = "<group>"; };
@@ -1974,6 +1984,11 @@
 		84C6B09920DA47FF008BD264 /* AllCardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardHeaderView.swift; sourceTree = "<group>"; };
 		84C6B09C20DA483D008BD264 /* HeaderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderItemView.swift; sourceTree = "<group>"; };
 		84C6B09F20DA57ED008BD264 /* ConditionsScreeningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsScreeningView.swift; sourceTree = "<group>"; };
+		84C6B0A320DB4EE5008BD264 /* CreaditCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreaditCardModel.h; sourceTree = "<group>"; };
+		84C6B0A420DB4EE5008BD264 /* CreaditCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreaditCardModel.m; sourceTree = "<group>"; };
+		84C6B0A720DB5003008BD264 /* CreaditCardViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreaditCardViewModel.h; sourceTree = "<group>"; };
+		84C6B0A820DB5003008BD264 /* CreaditCardViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreaditCardViewModel.m; sourceTree = "<group>"; };
+		84C6B0AB20DB801E008BD264 /* CreaditCardBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreaditCardBottomView.swift; sourceTree = "<group>"; };
 		84CACBAA1FEA388000523BDA /* FXDAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXDAlertView.swift; sourceTree = "<group>"; };
 		84CC89971F593C1E00537910 /* ApplicaitonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicaitonModel.h; sourceTree = "<group>"; };
 		84CC89981F593C1E00537910 /* ApplicaitonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicaitonModel.m; sourceTree = "<group>"; };
@@ -2771,6 +2786,8 @@
 				CC1AC8E020907A43009B5BD4 /* BankCardAuthorizationViewModel.m */,
 				84EBE9FF20C917FC0045F538 /* PhonerechargeCardServiceViewModel.h */,
 				84EBEA0020C917FC0045F538 /* PhonerechargeCardServiceViewModel.m */,
+				84C6B0A720DB5003008BD264 /* CreaditCardViewModel.h */,
+				84C6B0A820DB5003008BD264 /* CreaditCardViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3052,6 +3069,8 @@
 				84EBEA0E20C93A450045F538 /* UITableViewCell+YXTool.m */,
 				84EBEA1120C93F130045F538 /* UIView+YXTool.h */,
 				84EBEA1220C93F130045F538 /* UIView+YXTool.m */,
+				8462D24420DCA1C50086A38B /* UIImage+YXTool.h */,
+				8462D24520DCA1C50086A38B /* UIImage+YXTool.m */,
 			);
 			path = FXD_Tools;
 			sourceTree = "<group>";
@@ -3640,6 +3659,7 @@
 				84139DEF1FF3A071000DA896 /* ProtocolModel */,
 				84A52E9D207DFA32000BF3E8 /* MemberShip */,
 				84FF95B6208EE00F0032BF5D /* PushInfo */,
+				84C6B0A220DB4E76008BD264 /* creaditCard */,
 				84EBEA0320C91E0D0045F538 /* PhonerechargeCardService */,
 			);
 			path = DataModelModules;
@@ -4322,8 +4342,18 @@
 				84C6B09920DA47FF008BD264 /* AllCardHeaderView.swift */,
 				84C6B09C20DA483D008BD264 /* HeaderItemView.swift */,
 				84C6B09F20DA57ED008BD264 /* ConditionsScreeningView.swift */,
+				84C6B0AB20DB801E008BD264 /* CreaditCardBottomView.swift */,
 			);
 			path = CreditCardView;
+			sourceTree = "<group>";
+		};
+		84C6B0A220DB4E76008BD264 /* creaditCard */ = {
+			isa = PBXGroup;
+			children = (
+				84C6B0A320DB4EE5008BD264 /* CreaditCardModel.h */,
+				84C6B0A420DB4EE5008BD264 /* CreaditCardModel.m */,
+			);
+			path = creaditCard;
 			sourceTree = "<group>";
 		};
 		84CACBA91FEA383700523BDA /* FXDPopView */ = {
@@ -5232,6 +5262,7 @@
 				CCB2513B20B7FC53007E20C6 /* SupermarketCell.swift in Sources */,
 				84EBE9DD20C7B1210045F538 /* OrderConfirmDetailCell.swift in Sources */,
 				84C61A091FA81F2A00626411 /* BankCardNameVCModules.m in Sources */,
+				8462D24620DCA1C50086A38B /* UIImage+YXTool.m in Sources */,
 				84C619BF1FA815EB00626411 /* LoanPaymentDetailVCModule.m in Sources */,
 				CC1AC8E720931E1B009B5BD4 /* LoanListViewController.swift in Sources */,
 				84C619C01FA815EB00626411 /* LoanPeriodListVCModule.m in Sources */,
@@ -5265,6 +5296,7 @@
 				1A133F1B1C1AD1EA0027749B /* HelpViewCell.m in Sources */,
 				638A17021E517D9F00AB8AB6 /* LOTShapeCircle.m in Sources */,
 				63A24C651BE063A90036E8EF /* UIFont+Extend.m in Sources */,
+				84C6B0AC20DB801E008BD264 /* CreaditCardBottomView.swift in Sources */,
 				84BC53D31FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */,
 				63ED33471B6B5569008B6085 /* RegViewController.m in Sources */,
 				63F254871E49A45900852CF1 /* HMScannerController.m in Sources */,
@@ -5397,6 +5429,7 @@
 				CC4F062C207C557E0030A12A /* RecentViewController.swift in Sources */,
 				84E62D1B1FDA7CA900B7F870 /* CustomerContactsInfoViewModel.m in Sources */,
 				CC4BB60F1F17712E0027A0AA /* LevelDescriptionView.m in Sources */,
+				84C6B0A920DB5003008BD264 /* CreaditCardViewModel.m in Sources */,
 				84A37FF21FAC12A8008FB7AF /* HomeChoosePopView.swift in Sources */,
 				8453F5381FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */,
 				63A24C661BE063A90036E8EF /* UIImage+Color.m in Sources */,
@@ -5559,6 +5592,7 @@
 				84C45C081FBC55860086E8DB /* DiscountTicketParam.m in Sources */,
 				638A16F41E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m in Sources */,
 				638A16EF1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m in Sources */,
+				84C6B0A520DB4EE5008BD264 /* CreaditCardModel.m in Sources */,
 				63E5C7611D4AFDBF009A633C /* CardInfo.m in Sources */,
 				84DFBECF1F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */,
 				84ED5B731F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
@@ -5733,6 +5767,7 @@
 				CCB2513C20B7FC53007E20C6 /* SupermarketCell.swift in Sources */,
 				84EBE9DE20C7B1210045F538 /* OrderConfirmDetailCell.swift in Sources */,
 				842D9CEA206B832F0020C3C2 /* IDCardUploadParam.m in Sources */,
+				8462D24720DCA1C50086A38B /* UIImage+YXTool.m in Sources */,
 				84C61A141FA828F000626411 /* FindPassViewController.m in Sources */,
 				CC1AC8E820931E1B009B5BD4 /* LoanListViewController.swift in Sources */,
 				84C61A0F1FA8243200626411 /* FXD_LaunchConfiguration.m in Sources */,
@@ -5766,6 +5801,7 @@
 				843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */,
 				84E306D01F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
 				843614A51F0CFD320036201A /* BaseResultModel.m in Sources */,
+				84C6B0AD20DB801E008BD264 /* CreaditCardBottomView.swift in Sources */,
 				84A635131F01096900146A8A /* MobilePhoneOperatorParamModel.m in Sources */,
 				84192AA02079F5BA0042E8F8 /* MembershipFeePayViewController.swift in Sources */,
 				CC80E005206B8882000F9BAC /* CompQueryParamModel.m in Sources */,
@@ -5898,6 +5934,7 @@
 				84A5696E1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
 				CC49BA071FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */,
 				849AC25D1FF0C816005E435F /* FXD_ToWithdrawFundsViewController.swift in Sources */,
+				84C6B0AA20DB5003008BD264 /* CreaditCardViewModel.m in Sources */,
 				CC0DF9BE1EA5B1090024841A /* Custom_BaseInfoResult.m in Sources */,
 				CC0DF9BF1EA5B1090024841A /* NSParagraphStyle+YYText.m in Sources */,
 				CC0DF9C01EA5B1090024841A /* NSAttributedString+YYText.m in Sources */,
@@ -6060,6 +6097,7 @@
 				CC742D93204D42E100D645CC /* OpenAccountViewController.swift in Sources */,
 				CC85C62D1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */,
 				CC0DFA641EA5B1090024841A /* main.m in Sources */,
+				84C6B0A620DB4EE6008BD264 /* CreaditCardModel.m in Sources */,
 				CC0DFA651EA5B1090024841A /* LOTMaskLayer.m in Sources */,
 				CC0DFA671EA5B1090024841A /* FXD_AlertViewCust.m in Sources */,
 				CC0DFA691EA5B1090024841A /* MoreViewController.m in Sources */,

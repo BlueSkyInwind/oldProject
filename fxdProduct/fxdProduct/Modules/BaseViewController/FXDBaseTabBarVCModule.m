@@ -20,21 +20,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
     [[UITabBar appearance] setShadowImage:[UIImage new]];
-    [[UITabBar appearance] setBackgroundImage:[UIImage new]];
-    UIImageView *bgImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tabbarBgImage"]];
-    [[UITabBar appearance]insertSubview:bgImageView atIndex:0];
-
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]]];
+    [self dropShadowWithOffset:CGSizeMake(0, -0.5)
+                        radius:2
+                         color:[UIColor lightGrayColor]
+                       opacity:0.3];
     [self setTabbarCon];
     self.delegate = self;
 }
 
 - (void)setTabbarCon
 {
-    
-//    IncreaseAmountLimitViewController * loanApplicationVC = [[IncreaseAmountLimitViewController alloc]init];
-//    [self.navigationController pushViewController:loanApplicationVC animated:true];
     
     NSArray *vcNameArr = @[@"FXD_HomePageVCModules",@"SupermarketViewController",@".CreaditCardViewController",@"MyViewController"];
     NSArray *titleArr = @[@"首页",@"超市",@"信用卡",@"我的"];
@@ -118,6 +115,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dropShadowWithOffset:(CGSize)offset
+                      radius:(CGFloat)radius
+                       color:(UIColor *)color
+                     opacity:(CGFloat)opacity {
+    
+    // Creating shadow path for better performance
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddRect(path, NULL, self.tabBar.bounds);
+    self.tabBar.layer.shadowPath = path;
+    CGPathCloseSubpath(path);
+    CGPathRelease(path);
+    
+    self.tabBar.layer.shadowColor = color.CGColor;
+    self.tabBar.layer.shadowOffset = offset;
+    self.tabBar.layer.shadowRadius = radius;
+    self.tabBar.layer.shadowOpacity = opacity;
+    
+    // Default clipsToBounds is YES, will clip off the shadow, so we disable it.
+    self.tabBar.clipsToBounds = NO;
+}
 /*
  #pragma mark - Navigation
  

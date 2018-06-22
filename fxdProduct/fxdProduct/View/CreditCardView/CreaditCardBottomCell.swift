@@ -8,9 +8,17 @@
 
 import UIKit
 
+typealias CreaditCardBottomSelected = (_ index:Int,_ model:CreaditCardListModel) -> Void
 class CreaditCardBottomCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
 
     var tableView:UITableView?
+    var bottomSelected:CreaditCardBottomSelected?
+    
+    var dataArr:Array<CreaditCardListModel> = [] {
+        didSet{
+            
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +27,7 @@ class CreaditCardBottomCell: UITableViewCell,UITableViewDataSource,UITableViewDe
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = "f2f2f2".uiColor()
         configureView()
     }
     
@@ -27,13 +36,15 @@ class CreaditCardBottomCell: UITableViewCell,UITableViewDataSource,UITableViewDe
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.grouped)
         tableView?.delegate = self;
         tableView?.dataSource = self;
-        tableView?.bounces = false
+        tableView?.isScrollEnabled = false
+        tableView?.backgroundColor = "f2f2f2".uiColor()
         self.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self)
         })
         tableView?.registerCell([CreaditCardTableViewCell.self], true)
         tableView?.tableHeaderView = getTableviewHeader()
+        tableView?.sectionFooterHeight = 0
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,7 +62,7 @@ class CreaditCardBottomCell: UITableViewCell,UITableViewDataSource,UITableViewDe
 extension CreaditCardBottomCell {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return dataArr.count >= 3 ?  3 :  dataArr.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,16 +74,21 @@ extension CreaditCardBottomCell {
         return CGFloat(height)
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "CreaditCardTableViewCell", for: indexPath) as! CreaditCardTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CreaditCardTableViewCell", for: indexPath) as! CreaditCardTableViewCell
         cell.selectionStyle = .none
+        let model = dataArr[indexPath.row]
+        cell.setDataSource(model)
         return cell
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        
+        let model = dataArr[indexPath.row]
+        if bottomSelected != nil {
+            bottomSelected!(indexPath.row,model)
+        }
     }
     
     func getTableviewHeader() -> UIView  {

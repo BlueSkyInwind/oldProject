@@ -137,6 +137,7 @@
     
    NSError *serializationError = nil;
   NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:strURL relativeToURL:nil] absoluteString] parameters:parameters error:&serializationError];
+    request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
     
   NSURLSessionDataTask *dataTask =  [manager dataTaskWithRequest:request uploadProgress:uploadProgress downloadProgress:downloadProgress completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {

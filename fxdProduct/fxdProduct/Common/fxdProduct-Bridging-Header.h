@@ -97,5 +97,7 @@
 #import "PaymentViewModel.h"
 #import "PaymentDetailModel.h"
 #import "LoginViewController.h"
+#import "CreaditCardModel.h"
+#import "CreaditCardViewModel.h"
 
 #endif /* fxdProduct_Bridging_Header_h */

@@ -35,10 +35,6 @@
 
 @end
 
-
-
-
-
 @interface PhoneCardOrderModel : JSONModel
 
 @property (nonatomic,strong)NSString<Optional> * cardName;
