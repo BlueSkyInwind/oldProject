@@ -24,7 +24,7 @@
  */
 - (BOOL)isAreaCode;
 -(NSString *)openpf;
--(NSString *)closepf;
+-(NSString *)openpE;
 /**
  删除字符串中的空格
  

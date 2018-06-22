@@ -48,6 +48,7 @@
 @property (nonatomic, strong)NSString<Optional> * payment_date;
 @property (nonatomic, strong)NSString<Optional> * phone_card_count;
 @property (nonatomic, strong)NSString<Optional> * phone_card_price;
+@property (nonatomic, strong)NSString<Optional> * phone_card_name;
 @property (nonatomic, strong)NSString<Optional> * principal_amount_;
 @property (nonatomic, strong)NSString<Optional> * resellUrl;   //卖了换钱跳转地址
 @property (nonatomic, strong)NSString<Optional> * smallIconUrl;   //图标

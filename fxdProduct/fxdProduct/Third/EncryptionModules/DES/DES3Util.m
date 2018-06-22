@@ -10,7 +10,7 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import "GTMBase64.h"
 
-NSString * const gkey   =   @"secretKeyforfxdsecretKeyforfxd";
+NSString * const gkey   =   @"718db657d8ed70b9a6561d2649cdb6568e6e6599a7f61ca46678647365637265744b6579666f72667864";
 NSString * const gIv    =   @"1qaz2wsx";
 
 @implementation DES3Util
@@ -30,7 +30,7 @@ NSString * const gIv    =   @"1qaz2wsx";
     bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
     memset((void *)bufferPtr, 0x0, bufferPtrSize);
     
-    const void *vkey = (const void *) [gkey UTF8String];
+    const void *vkey = (const void *) [[gkey openpE] UTF8String];
     const void *vinitVec = (const void *) [gIv UTF8String];
     
     ccStatus = CCCrypt(kCCEncrypt,
@@ -65,7 +65,7 @@ NSString * const gIv    =   @"1qaz2wsx";
     bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
     memset((void *)bufferPtr, 0x0, bufferPtrSize);
     
-    const void *vkey = (const void *) [gkey UTF8String];
+    const void *vkey = (const void *) [[gkey openpE] UTF8String];
     const void *vinitVec = (const void *) [gIv UTF8String];
     
     ccStatus = CCCrypt(kCCDecrypt,

@@ -259,9 +259,9 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         case 1:
             cell.rightLabel?.text = "¥" + (self.detailModel?.debtServiceFee)!
         case 2:
-            cell.rightLabel?.text = "¥" + (self.detailModel?.debtPenaltyInterest)!
+            cell.rightLabel?.text = "¥" + (self.detailModel?.debtDamages)!
         case 3:
-            cell.rightLabel?.text = "¥" + (self.detailModel?.debtOverdueTotal)!
+            cell.rightLabel?.text = "¥" + (self.detailModel?.debtPenaltyInterest)!
         case 4:
             
             cell.rightLabel?.text = "无可用券"

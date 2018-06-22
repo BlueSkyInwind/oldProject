@@ -63,7 +63,7 @@ class OrderConfirmInfoCell: UITableViewCell {
 
     func setDataDetailSource(_ model:PhoneOrderDetailModel)  {
         orderTypeIcon.sd_setImage(with: URL(string: model.smallIconUrl), placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: nil)
-        orderTypeLabel.text = "\(model.payType ?? " ")"
+        orderTypeLabel.text = "\(model.phone_card_name ?? " ")"
         numberLabel.text = "数量：" + "\(model.phone_card_count ?? " ")"
         orderPriceLabel.text = "售价：¥" + "\(model.phone_card_price ?? " ")"
         amountLabel.text = "订单总额：¥" + "\(model.order_price ?? " ")"
