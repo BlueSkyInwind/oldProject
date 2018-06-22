@@ -41,6 +41,7 @@ class OrderConfirmDetailViewController: BaseViewController,UITableViewDelegate,U
     }
     
     func configureView()  {
+        
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.grouped)
         tableView?.delegate = self;
         tableView?.dataSource = self;

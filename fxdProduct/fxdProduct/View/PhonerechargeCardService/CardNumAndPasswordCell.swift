@@ -43,7 +43,7 @@ class CardNumAndPasswordCell: UITableViewCell {
     }
     
     @IBAction func copyPasswordBtnClick(_ sender: Any) {
-        FXD_Tool.clipboard(ofCopy: cardInfoModel?.cardPwd, view: UIApplication.shared.keyWindow, prompt: "复制成功")
+        FXD_Tool.clipboard(ofCopy: "\(cardInfoModel?.cardPwd ?? " ")" + " " + "\(cardInfoModel?.cardNo ?? " ")", view: UIApplication.shared.keyWindow, prompt: "复制成功")
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
