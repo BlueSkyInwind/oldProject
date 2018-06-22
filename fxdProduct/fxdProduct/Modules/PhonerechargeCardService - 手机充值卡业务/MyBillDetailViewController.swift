@@ -265,9 +265,9 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         case 4:
             
             cell.rightLabel?.text = "无可用券"
-            if self.detailModel?.couponUsageStatus == "0"{
+            if self.discountTicketModel?.canuselist != nil{
                 
-                cell.rightLabel?.text = self.detailModel?.couponUsageDesc
+                cell.rightLabel?.text = "有可用券"
             }
             
         case 5:

@@ -263,6 +263,7 @@
                 if(indexPath.row==0)    //红包
                 {
                     cell.payLabel.text = discountNumStr;
+                    
                     if ([discountUsageStatus isEqualToString:@"0"]) {
                         _canUseReadPacket = true;
                         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -438,7 +439,7 @@
             _finalyRepayAmount = paymentDetailAIM.payAmount.floatValue;
             _debtOverdueTotal = paymentDetailAIM.debtOverdueTotal.floatValue;
             discountUsageStatus = paymentDetailAIM.couponUsageStatus;
-            discountNumStr = paymentDetailAIM.couponUsageDesc;
+//            discountNumStr = paymentDetailAIM.couponUsageDesc;
             self.repayAmount = paymentDetailAIM.repayTotal.floatValue;
             finish(paymentDetailAIM);
         }else {
