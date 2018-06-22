@@ -14,8 +14,8 @@
  获取信用卡列表
  */
 -(void)obtainCreaditCardListInfoRequest{
-    NSDictionary *dic = @{@"cardHighlightsLen":@"255"};
-    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_creaditCardListInfo_url] isNeedNetStatus:true isNeedWait:true parameters:dic finished:^(EnumServerStatus status, id object) {
+//    NSDictionary *dic = @{@"cardHighlightsLen":@"255"};
+    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_creaditCardListInfo_url] isNeedNetStatus:true isNeedWait:true parameters:nil finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             BaseResultModel *baseRM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
             self.returnBlock(baseRM);

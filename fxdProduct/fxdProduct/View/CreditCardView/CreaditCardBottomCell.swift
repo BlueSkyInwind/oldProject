@@ -8,9 +8,11 @@
 
 import UIKit
 
+typealias CreaditCardBottomSelected = (_ index:Int,_ model:CreaditCardListModel) -> Void
 class CreaditCardBottomCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate {
 
     var tableView:UITableView?
+    var bottomSelected:CreaditCardBottomSelected?
     
     var dataArr:Array<CreaditCardListModel> = [] {
         didSet{
@@ -34,7 +36,8 @@ class CreaditCardBottomCell: UITableViewCell,UITableViewDataSource,UITableViewDe
         tableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.grouped)
         tableView?.delegate = self;
         tableView?.dataSource = self;
-        tableView?.bounces = false
+        tableView?.isScrollEnabled = false
+        tableView?.backgroundColor = "f2f2f2".uiColor()
         self.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self)
@@ -82,7 +85,10 @@ extension CreaditCardBottomCell {
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        let model = dataArr[indexPath.row]
+        if bottomSelected != nil {
+            bottomSelected!(indexPath.row,model)
+        }
     }
     
     func getTableviewHeader() -> UIView  {

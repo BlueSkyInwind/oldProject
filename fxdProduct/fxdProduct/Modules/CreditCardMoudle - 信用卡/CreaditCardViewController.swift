@@ -46,11 +46,34 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
         contentTableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
         })
+        
+        if #available(iOS 11.0, *){
+            contentTableView?.contentInsetAdjustmentBehavior = .never;
+            contentTableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
+        }else if #available(iOS 9.0, *){
+            self.automaticallyAdjustsScrollViewInsets = false;
+        }
+        
         contentTableView?.registerCell([CreaditCardHeaderCell.self,CreaditCardBottomCell.self], false)
         let bottomView = CreaditCardBottomView.init(CGRect.init(x: 0, y: 0, width: _k_w, height: 60)) { [weak self]  in
             self?.pushMoreCardVC(-1)
         }
         contentTableView?.tableFooterView = bottomView
+
+        let header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(headerRefreshing))
+        header?.isAutomaticallyChangeAlpha = true
+        header?.lastUpdatedTimeLabel.isHidden = true
+        contentTableView?.mj_header = header
+        
+    }
+    
+    @objc func headerRefreshing() {
+        obtainCreaditCardList{[weak self] (isSuccess) in
+            if(isSuccess) {
+                self?.contentTableView?.reloadData()
+            }
+            self?.contentTableView?.mj_header.endRefreshing()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,7 +101,7 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
     
     func obtainHeaderHeight() -> CGFloat  {
         let arr = creaditCardModel?.banks
-        let lines = ((arr?.count)! + 1) / 4
+        let lines = (((arr?.count)! + 1) / 4) + 1
         return CGFloat(lines) * 97.5
     }
     
@@ -108,6 +131,9 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
             let cell = tableView.dequeueReusableCell(withIdentifier: "CreaditCardBottomCell", for: indexPath) as! CreaditCardBottomCell
             cell.selectionStyle = .none
             cell.dataArr = creaditCardModel?.cards as! Array<CreaditCardListModel>
+            cell.bottomSelected = {[weak self] (index,model) in
+                self?.pushWebVC(model)
+            }
             return cell
         }
     }
@@ -174,13 +200,12 @@ extension CreaditCardViewController {
         creaditVM.obtainCreaditCardListInfoRequest()
     }
     
-    func uploadRecordReaditCard(_ thirdID:String,_ complication:@escaping (_ isSuccess:Bool) -> Void)  {
+func uploadRecordReaditCard(_ thirdID:String,_ complication:@escaping (_ isSuccess:Bool) -> Void)  {
         
         let creaditVM = CreaditCardViewModel.init()
         creaditVM.setBlockWithReturn({[weak self] (resultModel) in
             let baseModel =  resultModel as! BaseResultModel
             if baseModel.errCode == "0"{
-                self?.creaditCardModel = try! CreaditCardModel.init(dictionary: baseModel.data as! [AnyHashable : Any]?)
                 complication(true)
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)

@@ -35,27 +35,6 @@
     self.navigationItem.rightBarButtonItem = aBarbi;
 }
 
--(void)setFailView{
-    if (_loadFailView) {
-        return;
-    }
-    _loadFailView = [[LoadFailureView alloc]initWithFrame:CGRectZero];
-    _loadFailView.delegate = self;
-    [self.view addSubview:_loadFailView];
-    [_loadFailView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
-}
--(void)removeFailView{
-    if (_loadFailView) {
-        [_loadFailView removeFromSuperview];
-    }
-}
-
--(void)LoadFailureLoadRefreshButtonClick{
-    
-
-}
 
 - (void)setNavSignLeftBar
 {
@@ -162,7 +141,28 @@
 //    DLog(@"%@------->disAppear",NSStringFromClass([self class]));
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
- 
+#pragma mrak - 失败加载视图
+-(void)setFailView{
+    if (_loadFailView) {
+        return;
+    }
+    _loadFailView = [[LoadFailureView alloc]initWithFrame:CGRectZero];
+    _loadFailView.delegate = self;
+    [self.view addSubview:_loadFailView];
+    [_loadFailView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+}
+-(void)removeFailView{
+    if (_loadFailView) {
+        [_loadFailView removeFromSuperview];
+    }
+}
+
+-(void)LoadFailureLoadRefreshButtonClick{
+#warning todo
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

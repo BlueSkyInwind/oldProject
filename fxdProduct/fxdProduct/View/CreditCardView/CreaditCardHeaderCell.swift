@@ -49,6 +49,7 @@ class CreaditCardHeaderCell: UITableViewCell,UICollectionViewDelegate,UICollecti
         // 7. 设置collectionView的代理和数据源
         collectionView?.delegate = self
         collectionView?.dataSource = self;
+        collectionView?.isScrollEnabled = false
         // 8. collectionViewCell的注册
         collectionView?.register(UINib(nibName: "CardCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CardCollectionViewCell")
         self.addSubview(collectionView!)

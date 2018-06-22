@@ -18,7 +18,7 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
     var bankIndex:Int = -1;
     var levelIndex:Int = -1;
     var sort:Bool = true;
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -27,6 +27,13 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
         self.addBackItem()
         dataArr = creaditCardModel?.cards as! Array<CreaditCardListModel>
         configureView()
+        if bankIndex != -1 {
+            obtainCreaditCardConditionsList({[weak self] (isSuccess) in
+                if isSuccess {
+                    self?.contentTableView?.reloadData()
+                }
+            })
+        }
     }
 
     func configureView()  {
@@ -38,11 +45,12 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
         contentTableView?.backgroundColor = "f2f2f2".uiColor()
         self.view.addSubview(contentTableView!)
         contentTableView?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self.view.snp.top).offset(55 + 64)
+            make.top.equalTo(self.view.snp.top).offset(55 + obtainBarHeight_New(vc: self))
             make.left.right.bottom.equalTo(0)
         })
         contentTableView?.registerCell([CreaditCardTableViewCell.self],true)
-        headerView = AllCardHeaderView.init(frame: CGRect.init(x: 0, y: 64, width: _k_w, height: 55),  self.view, {[weak self] (bank, level, sorts) in
+        contentTableView?.tableFooterView = getBottomView()
+        headerView = AllCardHeaderView.init(frame: CGRect.init(x: 0, y: obtainBarHeight_New(vc: self), width: Int(_k_w), height: 55),  self.view, {[weak self] (bank, level, sorts) in
             self?.bankIndex = bank - 1
             self?.levelIndex = level - 1
             self?.sort = sorts
@@ -99,6 +107,20 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
         // Dispose of any resources that can be recreated.
     }
     
+    func getBottomView()  -> UIView{
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 60))
+        let label = UILabel()
+        label.text = "没有更多数据"
+        label.textColor = "808080".uiColor()
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textAlignment = NSTextAlignment.center
+        view.addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.center.equalTo(view.snp.center)
+        }
+        return view
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -148,7 +170,6 @@ extension AllCreaditCardViewController {
         creaditVM.setBlockWithReturn({[weak self] (resultModel) in
             let baseModel =  resultModel as! BaseResultModel
             if baseModel.errCode == "0"{
-                self?.creaditCardModel = try! CreaditCardModel.init(dictionary: baseModel.data as! [AnyHashable : Any]?)
                 complication(true)
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)

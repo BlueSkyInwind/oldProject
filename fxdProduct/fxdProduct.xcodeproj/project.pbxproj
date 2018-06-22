@@ -385,6 +385,8 @@
 		845017321ED7D051008055E4 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84420A5F1ED678E200DFBFE0 /* LoginView.m */; };
 		8453F5381FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */; };
 		8453F5391FC52681007B5FF6 /* SetPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */; };
+		8462D24620DCA1C50086A38B /* UIImage+YXTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8462D24520DCA1C50086A38B /* UIImage+YXTool.m */; };
+		8462D24720DCA1C50086A38B /* UIImage+YXTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8462D24520DCA1C50086A38B /* UIImage+YXTool.m */; };
 		8466936820C637E300F47A24 /* ShoppingMallModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936720C637E300F47A24 /* ShoppingMallModules.swift */; };
 		8466936920C637E300F47A24 /* ShoppingMallModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936720C637E300F47A24 /* ShoppingMallModules.swift */; };
 		8466936B20C6792800F47A24 /* RechargeCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */; };
@@ -1856,6 +1858,8 @@
 		844E5F4F1ED94DCB00753671 /* RegParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegParamModel.m; sourceTree = "<group>"; };
 		8453F5371FC52681007B5FF6 /* SetPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPayPasswordView.swift; sourceTree = "<group>"; };
 		8459831220A2FAFD00CAB5F6 /* fxdProductDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = fxdProductDev.entitlements; sourceTree = "<group>"; };
+		8462D24420DCA1C50086A38B /* UIImage+YXTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+YXTool.h"; sourceTree = "<group>"; };
+		8462D24520DCA1C50086A38B /* UIImage+YXTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YXTool.m"; sourceTree = "<group>"; };
 		8466936720C637E300F47A24 /* ShoppingMallModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingMallModules.swift; sourceTree = "<group>"; };
 		8466936A20C6792800F47A24 /* RechargeCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCardTableViewCell.swift; sourceTree = "<group>"; };
 		846BB6E11F5835E100CD3545 /* ApplicationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewModel.h; sourceTree = "<group>"; };
@@ -3065,6 +3069,8 @@
 				84EBEA0E20C93A450045F538 /* UITableViewCell+YXTool.m */,
 				84EBEA1120C93F130045F538 /* UIView+YXTool.h */,
 				84EBEA1220C93F130045F538 /* UIView+YXTool.m */,
+				8462D24420DCA1C50086A38B /* UIImage+YXTool.h */,
+				8462D24520DCA1C50086A38B /* UIImage+YXTool.m */,
 			);
 			path = FXD_Tools;
 			sourceTree = "<group>";
@@ -5256,6 +5262,7 @@
 				CCB2513B20B7FC53007E20C6 /* SupermarketCell.swift in Sources */,
 				84EBE9DD20C7B1210045F538 /* OrderConfirmDetailCell.swift in Sources */,
 				84C61A091FA81F2A00626411 /* BankCardNameVCModules.m in Sources */,
+				8462D24620DCA1C50086A38B /* UIImage+YXTool.m in Sources */,
 				84C619BF1FA815EB00626411 /* LoanPaymentDetailVCModule.m in Sources */,
 				CC1AC8E720931E1B009B5BD4 /* LoanListViewController.swift in Sources */,
 				84C619C01FA815EB00626411 /* LoanPeriodListVCModule.m in Sources */,
@@ -5760,6 +5767,7 @@
 				CCB2513C20B7FC53007E20C6 /* SupermarketCell.swift in Sources */,
 				84EBE9DE20C7B1210045F538 /* OrderConfirmDetailCell.swift in Sources */,
 				842D9CEA206B832F0020C3C2 /* IDCardUploadParam.m in Sources */,
+				8462D24720DCA1C50086A38B /* UIImage+YXTool.m in Sources */,
 				84C61A141FA828F000626411 /* FindPassViewController.m in Sources */,
 				CC1AC8E820931E1B009B5BD4 /* LoanListViewController.swift in Sources */,
 				84C61A0F1FA8243200626411 /* FXD_LaunchConfiguration.m in Sources */,

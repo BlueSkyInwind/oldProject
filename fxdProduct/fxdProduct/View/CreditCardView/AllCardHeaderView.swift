@@ -59,9 +59,11 @@ class AllCardHeaderView: UIView {
             switch self?.currentType {
             case .bankType?:
                 self?.currentBank = index
+                self?.itemViewOne?.titleBtn?.setTitle(self?.bankNameArr[index], for: UIControlState.normal)
                 break
             case .levelType?:
                 self?.currentlevel = index
+                self?.itemViewtTwo?.titleBtn?.setTitle(self?.levelNameArr[index], for: UIControlState.normal)
                 break
             default:
                 break
@@ -76,6 +78,7 @@ class AllCardHeaderView: UIView {
             self.isUnfold = open
         })
         superView?.addSubview(conView!)
+        self.itemViewOne?.titleBtn?.setTitle(self.bankNameArr[currentBank], for: UIControlState.normal)
     }
     
     override init(frame: CGRect) {
@@ -102,7 +105,7 @@ extension AllCardHeaderView {
         
         let backView = UIView()
         backView.backgroundColor = UIColor.white
-        backView.setCornerRadius(8, withShadow: true, withOpacity: 0.6)
+        backView.addShadow()
         self.addSubview(backView)
         backView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
