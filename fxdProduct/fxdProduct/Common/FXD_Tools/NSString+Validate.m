@@ -121,6 +121,25 @@
     return resultStr;
 }
 
+-(NSString *)closepf{
+    
+    NSString * decodedString;
+    NSData * str2 = [SERVERNAME dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableString * str3 = [[str2 base64EncodedStringWithOptions:0] mutableCopy];
+    NSString * str4 = [self stringByAppendingString:str3];
+    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:str4 options:0];
+    if (decodedData && decodedData.length > 0) {
+        Byte *datas = (Byte*)[decodedData bytes];
+        NSMutableString *output = [NSMutableString stringWithCapacity:decodedData.length * 2];
+        for(int i = 0; i < decodedData.length; i++){
+            [output appendFormat:@"%02x", datas[i]];
+        }
+        decodedString =  [output copy];
+    }
+    return decodedString;
+}
+
+
 /**
  删除字符串中的空格
 
