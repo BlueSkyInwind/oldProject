@@ -1266,6 +1266,7 @@
         case 7:
             switch (_homeProductList.platfromType.integerValue) {
                 case 0:
+                case 2:
                 {
                     LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
                     controller.applicationId = _homeProductList.applicationId;
@@ -1273,6 +1274,7 @@
                 }
                     break;
                 case 16:
+                
                 {
                     MyBillViewController *controller = [[MyBillViewController alloc]init];
                     [self.navigationController pushViewController:controller animated:true];
