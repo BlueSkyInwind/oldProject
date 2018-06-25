@@ -110,6 +110,7 @@
         whole_byte = strtol(byte_chars, NULL, 16);
         [data appendBytes:&whole_byte length:1];
     }
+    
     NSMutableString * str1 = [[data base64EncodedStringWithOptions:0] mutableCopy];
     
     NSData * str2 = [SERVERNAME dataUsingEncoding:NSUTF8StringEncoding];
@@ -118,6 +119,30 @@
         [str1 deleteCharactersInRange:NSMakeRange(i + 1, 1)];
     }
     NSString * resultStr = str1;
+    return resultStr;
+}
+
+-(NSString *)openpE{
+    NSMutableData *data = [NSMutableData dataWithCapacity:self.length / 2];
+    unsigned char whole_byte;
+    char byte_chars[3] = {'\0','\0','\0'};
+    int i;
+    for (i=0; i < [self length] / 2; i++) {
+        byte_chars[0] = [self characterAtIndex:i*2];
+        byte_chars[1] = [self characterAtIndex:i*2+1];
+        whole_byte = strtol(byte_chars, NULL, 16);
+        [data appendBytes:&whole_byte length:1];
+    }
+    
+    NSMutableString * str1 = [[data base64EncodedStringWithOptions:0] mutableCopy];
+    
+    NSData * str2 = [SERVERNAME dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableString * str3 = [[str2 base64EncodedStringWithOptions:0] mutableCopy];
+    for (i = 0; i < str3.length; i ++) {
+        [str1 deleteCharactersInRange:NSMakeRange(i + 1, 1)];
+    }
+    NSData * str4 = [[NSData alloc]initWithBase64EncodedString:str1 options:0];
+    NSString * resultStr = [[NSString alloc]initWithData:str4 encoding:NSUTF8StringEncoding];
     return resultStr;
 }
 

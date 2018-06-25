@@ -101,12 +101,18 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
     
     func obtainHeaderHeight() -> CGFloat  {
         let arr = creaditCardModel?.banks
+        guard (arr != nil)  else {
+            return 0
+        }
         let lines = (((arr?.count)! + 1) / 4) + 1
         return CGFloat(lines) * 97.5
     }
     
     func obtainBottomCellHeight() -> CGFloat  {
         let arr = creaditCardModel?.cards
+        guard (arr != nil)  else {
+            return 0
+        }
         if (arr?.count)! > 3 {
             return 325
         }

@@ -82,7 +82,10 @@
     _protocolArray = [NSMutableArray array];
     [self setNavQRRightBar];
 //    [self setNavQRLeftBar];
+
     [self createTab];
+    
+
 }
 
 -(void)viewWillAppear:(BOOL)animated

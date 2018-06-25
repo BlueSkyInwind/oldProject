@@ -44,12 +44,12 @@
 @property(nonatomic,strong)NSString<Optional> * debtOverdueTotal;    //逾期费用
 @property(nonatomic,strong)NSString<Optional> * couponUsageDesc;   //券可用描述
 @property(nonatomic,strong)NSString<Optional> * couponUsageStatus;    //可用券状态  0，可用，1，逾期不能用，2，结清不能用
-@property(nonatomic,strong)NSString<Optional> * debtDamages;       //溢缴金
-@property(nonatomic,strong)NSString<Optional> * debtPenaltyInterest;       //溢缴金
-@property(nonatomic,strong)NSString<Optional> * debtPrincipal;       //溢缴金
-@property(nonatomic,strong)NSString<Optional> * debtServiceFee;       //溢缴金
-@property(nonatomic,strong)NSString<Optional> * returnAmount;       //溢缴金
-@property(nonatomic,strong)NSString<Optional> * sumDebtRent;       //溢缴金
+@property(nonatomic,strong)NSString<Optional> * debtDamages;       //违约金
+@property(nonatomic,strong)NSString<Optional> * debtPenaltyInterest;       //逾期罚息
+@property(nonatomic,strong)NSString<Optional> * debtPrincipal;       //赊销金额
+@property(nonatomic,strong)NSString<Optional> * debtServiceFee;       //服务费
+@property(nonatomic,strong)NSString<Optional> * returnAmount;       //
+@property(nonatomic,strong)NSString<Optional> * sumDebtRent;       //
 
 @end
 
