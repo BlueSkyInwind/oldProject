@@ -29,13 +29,13 @@ NSString * const _main_new_url  =  @"https://h5.faxindai.com/apigw/client/";
 //NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //开发测试外网地址 test.faxindai.com:8001  http://dev.faxindai.com:8002
-NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
-NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
-NSString * const _main_new_url  =  @"http://h5.dev.fxds/apigw/client/";
-NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
-NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
-NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+//NSString * const _main_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+//NSString * const _agreement_url  =   @"http://h5.dev.fxds/fxd-esb/esb/";
+//NSString * const _ValidESB_url  =   @"http://h5.dev.fxds/fxd-esb/";
+//NSString * const _main_new_url  =  @"http://h5.dev.fxds/apigw/client/";
+//NSString * const _H5_url    =   @"http://h5.dev.fxds/fxd-h5/page/";
+//NSString * const _p2P_url = @"http://h5.dev.fxds/fxd-esb/p2p/";
+//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //NSString * const _main_url  =   @"http://dev.faxindai.com:8002/fxd-esb/esb/";
 //NSString * const _agreement_url  =   @"http://dev.faxindai.com:8002/fxd-esb/esb/";
@@ -46,13 +46,13 @@ NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 //NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //UAT环境
-//NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
-//NSString * const _agreement_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
-//NSString * const _main_new_url  =  @"http://h5.uat.fxds/apigw/client/";
-//NSString * const _ValidESB_url  =   @"http://h5.uat.fxds/fxd-esb/";
-//NSString * const _H5_url    =   @"http://h5.uat.fxds/fxd-h5/page/";
-//NSString * const _p2P_url = @"http://h5.uat.fxds/fxd-esb/p2p/";
-//NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
+NSString * const _main_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
+NSString * const _agreement_url  =   @"http://h5.uat.fxds/fxd-esb/esb/";
+NSString * const _main_new_url  =  @"http://h5.uat.fxds/apigw/client/";
+NSString * const _ValidESB_url  =   @"http://h5.uat.fxds/fxd-esb/";
+NSString * const _H5_url    =   @"http://h5.uat.fxds/fxd-h5/page/";
+NSString * const _p2P_url = @"http://h5.uat.fxds/fxd-esb/p2p/";
+NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 
 #else
