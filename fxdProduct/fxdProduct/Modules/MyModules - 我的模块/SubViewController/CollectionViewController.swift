@@ -190,9 +190,15 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         let dic = NSDictionary(object: UIFont.yx_systemFont(ofSize: 12) as Any, forKey: NSAttributedStringKey.font as NSCopying)
         let width = str.boundingRect(with: CGSize(width:_k_w,height:20), options: .usesLineFragmentOrigin, attributes:(dic as! [NSAttributedStringKey : Any]), context: nil).size.width + 20
         
-        superLoanCell?.descBtn?.snp.updateConstraints({ (make) in
+        superLoanCell.descBtn?.snp.remakeConstraints({ (make) in
             make.width.equalTo(width)
+            make.left.equalTo(superLoanCell.snp.left).offset(100)
+            make.bottom.equalTo(superLoanCell.snp.bottom).offset(-10)
+            make.height.equalTo(20)
         })
+//        superLoanCell?.descBtn?.snp.updateConstraints({ (make) in
+//            make.width.equalTo(width)
+//        })
         superLoanCell.collectionBtn?.setImage(UIImage.init(named: "arrow_icon"), for: .normal)
 
         return superLoanCell!
