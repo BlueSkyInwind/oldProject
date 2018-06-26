@@ -19,6 +19,8 @@ class CardCollectionViewCell: UICollectionViewCell {
         // Initialization code
         self.cradIconView.layer.cornerRadius = self.cradIconView.frame.size.width / 2
         self.cradIconView.clipsToBounds = true
+        self.cradIconView.layer.borderColor = "b8b8b8".uiColor().cgColor
+        self.cradIconView.layer.borderWidth = 1
     }
     func setDataSource(_ model:CreaditCardBanksListModel)  {
         cardNameLabel.text = "\(model.cardBankName ?? " ")"

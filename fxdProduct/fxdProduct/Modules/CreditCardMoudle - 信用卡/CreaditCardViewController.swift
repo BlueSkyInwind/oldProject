@@ -16,7 +16,7 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.title = "全部信用卡";
+        self.title = "信用卡";
         obtainDataSource()
     }
     
