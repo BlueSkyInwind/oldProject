@@ -21,7 +21,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = _navTitle;
     
-    _webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+    CGFloat height = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height;
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, height, _k_w, _k_h - height)];
     [self addBackItem];
     _webView.scrollView.showsVerticalScrollIndicator = false;
     

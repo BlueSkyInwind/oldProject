@@ -61,7 +61,13 @@
 
 #pragma mark 添加头部视图
 -(void)addHeaderView{
-    _headerView = [[SupermarketHeaderView alloc]initWithFrame:CGRectMake(0, 64, _k_w, 36)];
+    
+    if (UI_IS_IPHONEX) {
+        
+        _headerView = [[SupermarketHeaderView alloc]initWithFrame:CGRectMake(0, 84, _k_w, 36)];
+    }else{
+        _headerView = [[SupermarketHeaderView alloc]initWithFrame:CGRectMake(0, 64, _k_w, 36)];
+    }
     _headerView.delegate = self;
     [self.view addSubview:_headerView];
 
@@ -160,7 +166,12 @@
 
 -(void)createTab{
     
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 120, _k_w, _k_h-120-49) style:UITableViewStylePlain];
+    if (UI_IS_IPHONEX) {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 140, _k_w, _k_h-140-85) style:UITableViewStylePlain];
+    }else{
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 120, _k_w, _k_h-120-49) style:UITableViewStylePlain];
+    }
+    
     [_tableView registerClass:[SuperLoanCell class] forCellReuseIdentifier:@"SuperLoanCell"];
     [_tableView registerClass:[SuperLoanNoneCell class] forCellReuseIdentifier:@"SuperLoanNoneCell"];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -176,12 +187,12 @@
 //    _headerView.delegate = self;
 //    self.tableView.tableHeaderView = _headerView;
 
-    if (@available(iOS 11.0, *)) {
-        _tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
-        _tableView.contentInset = UIEdgeInsetsMake(BarHeightNew - 64, 0, 0, 0);
-    }else{
-        self.automaticallyAdjustsScrollViewInsets=NO;
-    }
+//    if (@available(iOS 11.0, *)) {
+//        _tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
+//        _tableView.contentInset = UIEdgeInsetsMake(BarHeightNew - 64, 0, 0, 0);
+//    }else{
+//        self.automaticallyAdjustsScrollViewInsets=NO;
+//    }
     
 //    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
 //    header.automaticallyChangeAlpha = YES;
@@ -417,7 +428,12 @@
         [_headerView.sortImageBtn setImage:[UIImage imageNamed:@"sort_selected_icon"] forState:UIControlStateNormal];
 
         [UIView animateWithDuration:1 animations:^{
-            _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 110, _k_w, _k_h)];
+            if (UI_IS_IPHONEX) {
+                _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 140, _k_w, _k_h)];
+            }else{
+                _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 110, _k_w, _k_h)];
+            }
+            
             _sortView.delegate = self;
             _sortView.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7];
             _sortView.index = _index;
@@ -463,7 +479,13 @@
         [_headerView.filterBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
         [_headerView.filterImageBtn setImage:[UIImage imageNamed:@"filter_selected_icon"] forState:UIControlStateNormal];
         [UIView animateWithDuration:1 animations:^{
-            _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 110, _k_w, _k_h)];
+            
+            if (UI_IS_IPHONEX) {
+                _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 140, _k_w, _k_h)];
+            }else{
+                _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 110, _k_w, _k_h)];
+            }
+            
             _filterView.delegate = self;
             _filterView.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7];
             [self.view addSubview:_filterView];
@@ -523,7 +545,8 @@
     [_headerView.sortImageBtn setImage:[UIImage imageNamed:@"sort_icon"] forState:UIControlStateNormal];
     _headerView.sortBtn.selected = NO;
     _headerView.sortImageBtn.selected = NO;
-    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",selectedIndex]row:-1];
+    [self getDataMaxAmount:@"" maxDays:@"" minAmount:@"" minDays:@"" offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",selectedIndex] row:-1];
+//    [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",selectedIndex]row:-1];
     [UIView animateWithDuration:1 animations:^{
         [_sortView removeFromSuperview];
 
