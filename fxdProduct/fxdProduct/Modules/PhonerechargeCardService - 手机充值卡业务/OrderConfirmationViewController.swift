@@ -262,10 +262,11 @@ extension OrderConfirmationViewController {
         let tradeSMS =  SMSViewModel.init()
         tradeSMS.setBlockWithReturn({ (returnValue) in
             let baseResult  = returnValue as! BaseResultModel
-            MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+            
             if baseResult.errCode == "0" {
                 result(true)
             }else{
+                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
                 result(false)
             }
         }) {
