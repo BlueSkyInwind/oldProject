@@ -9,7 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+RTRootNavigationController.h"
 
-@interface BaseViewController : UIViewController <UITabBarControllerDelegate,UITabBarDelegate>
+@interface BaseViewController : UIViewController <UITabBarControllerDelegate,UITabBarDelegate>{
+    
+    
+    
+}
+
+/**失败加载的状态*/
+@property (nonatomic,assign,readonly)BOOL isFailure;
 
 
 - (void)setNavMesRightBar;

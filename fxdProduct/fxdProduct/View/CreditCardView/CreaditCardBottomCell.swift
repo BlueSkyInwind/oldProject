@@ -16,7 +16,7 @@ class CreaditCardBottomCell: UITableViewCell,UITableViewDataSource,UITableViewDe
     
     var dataArr:Array<CreaditCardListModel> = [] {
         didSet{
-            
+            tableView?.reloadData()
         }
     }
     

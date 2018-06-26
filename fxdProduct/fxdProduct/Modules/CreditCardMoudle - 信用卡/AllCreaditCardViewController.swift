@@ -25,15 +25,15 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
         self.title = "全部信用卡";
         self.view.backgroundColor = UIColor.white
         self.addBackItem()
-        dataArr = creaditCardModel?.cards as! Array<CreaditCardListModel>
-        configureView()
-        if bankIndex != -1 {
-            obtainCreaditCardConditionsList({[weak self] (isSuccess) in
-                if isSuccess {
-                    self?.contentTableView?.reloadData()
-                }
-            })
+        if creaditCardModel?.cards  != nil {
+            dataArr = creaditCardModel?.cards as! Array<CreaditCardListModel>
         }
+        configureView()
+        obtainCreaditCardConditionsList({[weak self] (isSuccess) in
+            if isSuccess {
+                self?.contentTableView?.reloadData()
+            }
+        })
     }
 
     func configureView()  {

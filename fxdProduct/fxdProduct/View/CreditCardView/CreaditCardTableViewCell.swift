@@ -10,7 +10,6 @@ import UIKit
 
 class CreaditCardTableViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var CardIconView: UIImageView!
     
     @IBOutlet weak var cardName: UILabel!
@@ -21,6 +20,7 @@ class CreaditCardTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cardApplyNum: UILabel!
     
+    @IBOutlet weak var cardIconWidth: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,10 +30,17 @@ class CreaditCardTableViewCell: UITableViewCell {
         cardType.clipsToBounds = true
         cardType.layer.borderWidth = 1
         cardType.layer.borderColor = UI_MAIN_COLOR.cgColor
+        
     }
     
     func setDataSource(_ model:CreaditCardListModel)  {
-        CardIconView.sd_setImage(with: URL.init(string: "\(model.cardLogoUrl ?? "")"), placeholderImage: UIImage.init(named: "placeholderImage_Icon"), options: .refreshCached, completed: nil)
+        CardIconView.image = UIImage.init(named: "card_load_failure")
+        obtainCardImage_Icon( URL.init(string: "\(model.cardLogoUrl ?? "")")!) {[weak self] (image) in
+            let proportion = image.size.width / image.size.height
+            self?.cardIconWidth.constant = (self?.CardIconView.frame.size.height)! * proportion
+            self?.CardIconView.image = image
+        }
+
         cardName.text = "\(model.cardName ?? "")"
         cardType.text = "\(model.cardLevelName ?? "")"
         cardExplainLabel.text = "\(model.cardHighlights ?? "")"
@@ -45,4 +52,12 @@ class CreaditCardTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func obtainCardImage_Icon(_ imageUrl:URL,_ complication:@escaping (_ resultImage:UIImage) -> Void)  {
+        SDWebImageManager.shared().loadImage(with: imageUrl, options: .refreshCached, progress: { (receivedSize, expectedSize, targetURL) in
+        }) { (image, data, errpr, cacheType, finish, imageURL) in
+            if image != nil {
+                complication(image!)
+            }
+        }
+    }
 }
