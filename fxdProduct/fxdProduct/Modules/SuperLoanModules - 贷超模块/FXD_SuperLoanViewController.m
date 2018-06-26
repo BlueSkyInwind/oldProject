@@ -339,7 +339,7 @@
     NSDictionary *dic = @{NSFontAttributeName : [UIFont yx_systemFontOfSize:12]};
     CGFloat width = [model.platformIntroduction boundingRectWithSize:CGSizeMake(_k_h, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size.width + 20;
     
-    [superLoanCell.descBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+    [superLoanCell.descBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo([NSNumber numberWithFloat:width]);
     }];
     if (indexPath.row % 2 == 0){

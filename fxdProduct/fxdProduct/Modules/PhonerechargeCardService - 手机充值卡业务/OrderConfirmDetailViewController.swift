@@ -185,12 +185,18 @@ extension OrderConfirmDetailViewController {
         serviceViewModel.setBlockWithReturn({[weak self] (model) in
             let baseModel = model as! BaseResultModel
             if baseModel.errCode == "0"{
-                let orderDetailModel = try! PhoneOrderDetailModel.init(dictionary: baseModel.data as! [AnyHashable : Any])
-                self?.phoneOrderDetailModel = orderDetailModel
-                if orderDetailModel.cards.count > 0 {
-                    self?.cardInfoCellHeight = CGFloat(53 + 78 *  orderDetailModel.cards.count);
+                if baseModel.data == nil{
+                    result(false)
+                }else{
+                    
+                    let orderDetailModel = try! PhoneOrderDetailModel.init(dictionary: baseModel.data as! [AnyHashable : Any])
+                    self?.phoneOrderDetailModel = orderDetailModel
+                    if orderDetailModel.cards.count > 0 {
+                        self?.cardInfoCellHeight = CGFloat(53 + 78 *  orderDetailModel.cards.count);
+                    }
+                    result(true)
                 }
-                result(true)
+                
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)
                 result(false)

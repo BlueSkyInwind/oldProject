@@ -148,7 +148,7 @@ class RecentViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         let dic = NSDictionary(object: UIFont.yx_systemFont(ofSize: 12) as Any, forKey: NSAttributedStringKey.font as NSCopying)
         let width = str.boundingRect(with: CGSize(width:_k_w,height:20), options: .usesLineFragmentOrigin, attributes:(dic as! [NSAttributedStringKey : Any]), context: nil).size.width + 20
         
-        superLoanCell?.descBtn?.snp.updateConstraints({ (make) in
+        superLoanCell?.descBtn?.snp.remakeConstraints({ (make) in
             make.width.equalTo(width)
         })
         

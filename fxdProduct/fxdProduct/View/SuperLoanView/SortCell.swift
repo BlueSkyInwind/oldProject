@@ -60,10 +60,10 @@ extension SortCell{
         self.addSubview(lineView!)
         lineView?.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(22)
+//            make.width.equalTo(_k_w - 44)
             make.right.equalTo(self).offset(-22)
             make.bottom.equalTo(self).offset(-1)
             make.height.equalTo(1)
         }
-        
     }
 }
