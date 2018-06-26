@@ -22,6 +22,6 @@ class CardCollectionViewCell: UICollectionViewCell {
     }
     func setDataSource(_ model:CreaditCardBanksListModel)  {
         cardNameLabel.text = "\(model.cardBankName ?? " ")"
-        cradIconView.sd_setImage(with: URL.init(string: "\(model.logoUrl ?? "")"), placeholderImage: UIImage.init(named: "bank_load_failure"), options: .refreshCached, completed: nil)
+        cradIconView.sd_setImage(with: URL.init(string: "\(model.logoUrl ?? "")"), placeholderImage: UIImage.init(named: "bank_load_failure"), options: .retryFailed, completed: nil)
     }
 }

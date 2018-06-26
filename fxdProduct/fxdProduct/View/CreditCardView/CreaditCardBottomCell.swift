@@ -62,7 +62,7 @@ class CreaditCardBottomCell: UITableViewCell,UITableViewDataSource,UITableViewDe
 extension CreaditCardBottomCell {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArr.count >= 3 ?  3 :  dataArr.count
+        return dataArr.count 
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

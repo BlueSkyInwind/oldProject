@@ -37,14 +37,10 @@ class TestTableViewController: BaseViewController{
                 cell?.textLabel?.text = "1231545"
                 return cell!
             }).didSelectRow({ (tableview, indexpath) in
-                
                 print("点我呀   再点我呀")
-
             })
         }
-        
         print(tableViewMaker)
-        
     }
     
 

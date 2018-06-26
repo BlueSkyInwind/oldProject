@@ -1,12 +1,12 @@
 //
-//  FXD_NetWorkRequestManager.m
+//  HF_NetWorkRequestManager.m
 //  fxdProduct
 //
 //  Created by dd on 15/9/21.
 //  Copyright (c) 2015年 dd. All rights reserved.
 //
 
-#import "FXD_NetWorkRequestManager.h"
+#import "HF_NetWorkRequestManager.h"
 #import "AppDelegate.h"
 #import "BaseNavigationViewController.h"
 #import "LoginViewController.h"
@@ -14,15 +14,15 @@
 #import "GTMBase64.h"
 #import "DataWriteAndRead.h"
 
-@interface FXD_NetWorkRequestManager(){
+@interface HF_NetWorkRequestManager(){
     MBProgressHUD * _requestWaitView;
 }
 @end
-@implementation FXD_NetWorkRequestManager
+@implementation HF_NetWorkRequestManager
 
-+ (FXD_NetWorkRequestManager *)sharedNetWorkManager
++ (HF_NetWorkRequestManager *)sharedNetWorkManager
 {
-    static FXD_NetWorkRequestManager *sharedNetWorkManagerInstance = nil;
+    static HF_NetWorkRequestManager *sharedNetWorkManagerInstance = nil;
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         sharedNetWorkManagerInstance = [[self alloc] init];

@@ -29,11 +29,11 @@ typedef enum {
 typedef void (^SuccessFinishedBlock)(EnumServerStatus status, id object);
 typedef void (^FailureBlock)(EnumServerStatus status, id object);
 
-@interface FXD_NetWorkRequestManager : NSObject{
+@interface HF_NetWorkRequestManager : NSObject{
     
 }
 
-+ (FXD_NetWorkRequestManager *)sharedNetWorkManager;
++ (HF_NetWorkRequestManager *)sharedNetWorkManager;
 
 /**
  新的api请求

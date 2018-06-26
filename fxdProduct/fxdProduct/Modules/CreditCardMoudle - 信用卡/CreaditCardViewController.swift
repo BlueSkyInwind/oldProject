@@ -127,9 +127,6 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
         guard (arr != nil)  else {
             return 0
         }
-        if (arr?.count)! > 3 {
-            return 325
-        }
         let num = (arr?.count)! * 95 + 40
         return CGFloat(num)
     }

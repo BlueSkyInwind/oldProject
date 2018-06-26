@@ -20,7 +20,7 @@
 #import "GlobalConfig.h"
 #import "pinyin.h"
 #import "FXD_Tool.h"
-#import "FXD_NetWorkRequestManager.h"
+#import "HF_NetWorkRequestManager.h"
 #import "FXD_AlertViewCust.h"
 #import "OpenUDID.h"
 #import <ReactiveObjC/ReactiveObjC.h>

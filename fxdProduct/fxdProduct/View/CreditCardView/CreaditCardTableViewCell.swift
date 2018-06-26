@@ -57,7 +57,7 @@ class CreaditCardTableViewCell: UITableViewCell {
     }
     
     func obtainCardImage_Icon(_ imageUrl:URL,_ complication:@escaping (_ resultImage:UIImage) -> Void)  {
-        SDWebImageManager.shared().loadImage(with: imageUrl, options: .refreshCached, progress: { (receivedSize, expectedSize, targetURL) in
+        SDWebImageManager.shared().loadImage(with: imageUrl, options: .retryFailed, progress: { (receivedSize, expectedSize, targetURL) in
         }) { (image, data, errpr, cacheType, finish, imageURL) in
             if image != nil {
                 complication(image!)
