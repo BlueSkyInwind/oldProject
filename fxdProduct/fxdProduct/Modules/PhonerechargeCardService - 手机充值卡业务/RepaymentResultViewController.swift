@@ -112,7 +112,15 @@ class RepaymentResultViewController: BaseViewController {
                     return
                 }
             }
-        case .failure?,.submittedSuccessfully?:
+        case .submittedSuccessfully?:
+            for  vc in self.rt_navigationController.rt_viewControllers {
+                if vc.isKind(of: ShoppingMallModules.self) {
+                    self.navigationController?.popToViewController(vc, animated: true)
+                    return
+                }
+            }
+            
+        case .failure?:
             self.navigationController?.popViewController(animated: true)
         default:
             break

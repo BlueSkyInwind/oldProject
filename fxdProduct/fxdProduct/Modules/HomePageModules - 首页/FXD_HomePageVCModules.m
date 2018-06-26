@@ -1284,6 +1284,12 @@
                     
                     break;
                 default:
+                {
+                    LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
+                    controller.applicationId = _homeProductList.applicationId;
+                    [self.navigationController pushViewController:controller animated:true];
+                }
+                    
                     break;
             }
             break;
