@@ -14,6 +14,7 @@
     ReturnMsgBaseClass *_parse;
 }
 @property (nonatomic,strong) LoadFailureView * loadFailView;
+@property (nonatomic,assign)BOOL isFailure;
 
 @end
 
@@ -22,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _isFailure  = false;
     self.view.backgroundColor =  [UIColor whiteColor];
     self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:19],NSForegroundColorAttributeName:[UIColor blackColor]};
     [self.navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
@@ -146,6 +148,7 @@
     if (_loadFailView) {
         return;
     }
+    _isFailure = true;
     _loadFailView = [[LoadFailureView alloc]initWithFrame:CGRectZero];
     _loadFailView.delegate = self;
     [self.view addSubview:_loadFailView];
@@ -155,6 +158,7 @@
 }
 -(void)removeFailView{
     if (_loadFailView) {
+        _isFailure  = false;
         [_loadFailView removeFromSuperview];
     }
 }

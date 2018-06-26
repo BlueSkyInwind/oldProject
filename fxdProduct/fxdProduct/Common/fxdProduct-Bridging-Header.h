@@ -99,5 +99,6 @@
 #import "LoginViewController.h"
 #import "CreaditCardModel.h"
 #import "CreaditCardViewModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #endif /* fxdProduct_Bridging_Header_h */

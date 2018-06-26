@@ -20,6 +20,13 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
         obtainDataSource()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.isFailure {
+            obtainDataSource()
+        }
+    }
+    
     override func loadFailureLoadRefreshButtonClick()  {
         obtainDataSource()
     }
@@ -64,7 +71,6 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
         header?.isAutomaticallyChangeAlpha = true
         header?.lastUpdatedTimeLabel.isHidden = true
         contentTableView?.mj_header = header
-        
     }
     
     @objc func headerRefreshing() {
@@ -104,7 +110,7 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
         guard (arr != nil)  else {
             return 0
         }
-        let lines = (((arr?.count)! + 1) / 4) + 1
+        let lines = (((arr?.count)! > 7 ? 7 : (arr?.count)!) / 4) + 1
         return CGFloat(lines) * 97.5
     }
     
@@ -124,7 +130,11 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CreaditCardHeaderCell", for: indexPath) as! CreaditCardHeaderCell
             cell.selectionStyle = .none
-            cell.dataArr = creaditCardModel?.banks as! Array<CreaditCardBanksListModel>
+            guard creaditCardModel?.banks != nil else {
+                return cell
+            }
+                
+            cell.dataArr = (creaditCardModel?.banks as? Array<CreaditCardBanksListModel>)!
             cell.didSelect = { [weak self] (index,isMore) in
                 if isMore{
                     self?.pushMoreCardVC(-1)
@@ -136,6 +146,9 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "CreaditCardBottomCell", for: indexPath) as! CreaditCardBottomCell
             cell.selectionStyle = .none
+            guard creaditCardModel?.cards != nil else {
+                return cell
+            }
             cell.dataArr = creaditCardModel?.cards as! Array<CreaditCardListModel>
             cell.bottomSelected = {[weak self] (index,model) in
                 self?.pushWebVC(model)

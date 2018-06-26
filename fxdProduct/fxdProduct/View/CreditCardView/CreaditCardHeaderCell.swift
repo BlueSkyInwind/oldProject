@@ -72,7 +72,11 @@ class CreaditCardHeaderCell: UITableViewCell,UICollectionViewDelegate,UICollecti
 extension CreaditCardHeaderCell {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (dataArr.count) > 0 ? (dataArr.count) + 1 : 1;
+        return obtainCollectionNum();
+    }
+    
+    func obtainCollectionNum() -> Int {
+        return (dataArr.count) > 0 ? (dataArr.count > 7 ? 8 : (dataArr.count) + 1 )  : 1;
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -82,8 +86,9 @@ extension CreaditCardHeaderCell {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as! CardCollectionViewCell
-        if indexPath.row ==  (dataArr.count){
-            cell.cardNameLabel.text = "更多"
+        let index = obtainCollectionNum() - 1
+        if indexPath.row ==  index{
+            cell.cardNameLabel.text = "全部"
             cell.cradIconView.image = UIImage.init(named: "More_card");
         }else{
             let model = dataArr[indexPath.row]
@@ -93,7 +98,8 @@ extension CreaditCardHeaderCell {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if didSelect != nil {
-            if indexPath.row ==  (dataArr.count){
+            let index = obtainCollectionNum() - 1
+            if indexPath.row ==  index{
                 didSelect!(indexPath.row,true)
             }else{
                 didSelect!(indexPath.row,false)
