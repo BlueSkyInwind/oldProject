@@ -17,7 +17,7 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
     
     var bankIndex:Int = -1;
     var levelIndex:Int = -1;
-    var sort:Bool = true;
+    var sort:Bool = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +85,7 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: "CreaditCardTableViewCell", for: indexPath) as! CreaditCardTableViewCell
         cell.selectionStyle = .none
         let model = dataArr[indexPath.row]
-        cell.setDataSource(model)
+        cell.setDataSource(model,false)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

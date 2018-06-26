@@ -79,7 +79,7 @@ extension CreaditCardBottomCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CreaditCardTableViewCell", for: indexPath) as! CreaditCardTableViewCell
         cell.selectionStyle = .none
         let model = dataArr[indexPath.row]
-        cell.setDataSource(model)
+        cell.setDataSource(model,true)
         return cell
     }
         
