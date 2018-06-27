@@ -375,16 +375,12 @@
             switch (indexPath.row) {
                 case 0:
                     {
-//                        TestTableViewController *myMessageVC=[[TestTableViewController alloc]init];
-//                        [self.navigationController pushViewController:myMessageVC animated:true];
                         MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
                         [self.navigationController pushViewController:myMessageVC animated:true];
                     }
                     break;
                 case 1:
                     {
-//                        OrderConfirmDetailViewController * controller = [[OrderConfirmDetailViewController alloc]init];
-//                        [self.navigationController pushViewController:controller animated:true];
                         CollectionViewController * controller = [[CollectionViewController alloc]init];
                         [self.navigationController pushViewController:controller animated:true];
 

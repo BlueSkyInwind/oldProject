@@ -26,7 +26,6 @@
     
     self.backgroundColor = [UIColor whiteColor];
     self.backView = [[UIView alloc]init];
-//    [Tool setCorner:self.backView borderColor:UI_MAIN_COLOR];
     [self.contentView addSubview:self.backView];
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView.mas_left).with.offset(0);
@@ -37,7 +36,7 @@
    
     //顶部的线
     self.topLineView = [[UIView alloc]init];
-    self.topLineView.backgroundColor = rgb(153, 153, 147);
+    self.topLineView.backgroundColor = rgb(242, 242, 242);
     [self.backView addSubview:self.topLineView];
     [self.topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.backView.mas_left).offset(0);
@@ -77,14 +76,12 @@
     
     //底部的线
     self.lineView  = [[UIView alloc]init];
-    self.lineView.backgroundColor = rgb(153, 153, 147);
+    self.lineView.backgroundColor = rgb(242, 242, 242);
     [self.backView addSubview:self.lineView];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.backView.mas_left).with.offset(20);
         make.right.equalTo(self.backView.mas_right).with.offset(0);
-//        make.width.equalTo(@1);
         make.height.equalTo(@0.5);
-//        make.centerY.equalTo(self.backView.mas_centerY);
         make.bottom.equalTo(self.backView.mas_bottom).with.offset(-0.5);
     }];
     
