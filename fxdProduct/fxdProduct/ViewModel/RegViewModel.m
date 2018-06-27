@@ -28,8 +28,8 @@
                    picVerifyId:(NSString *)picVerifyId
                  picVerifyCode:(NSString *)picVerifyCode
 {
-    FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
-    NSString *blackBox = manager->getDeviceInfo();
+//    FMDeviceManager_t *manager = [FMDeviceManager sharedManager];
+//    NSString *blackBox = manager->getDeviceInfo();
     
     RegParamModel * regParamModel = [[RegParamModel alloc]init];
     regParamModel.mobile_phone_ = number;
@@ -41,7 +41,7 @@
     regParamModel.pic_verify_id_ = picVerifyId;
     regParamModel.pic_verify_code_ = picVerifyCode;
     regParamModel.invitation_code = invitationCode;
-    regParamModel.third_tongd_code = blackBox;
+//    regParamModel.third_tongd_code = blackBox;
 
     NSDictionary  * paramDic =[regParamModel toDictionary];
     [self registerRequest:paramDic];

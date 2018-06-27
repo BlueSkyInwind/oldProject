@@ -26,20 +26,15 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         configureView()
         createNoneView()
         setNavQRRightBar()
-     
+
+        self.page = 0
+        getData(isHeaderFresh: true)
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        self.page = 0
-        getData(isHeaderFresh: true)
     }
     
     func setNavQRRightBar(){
@@ -240,6 +235,10 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let cell = tableView.cellForRow(at: indexPath) as! MessageCell
+        cell.leftImageView?.image = UIImage(named:"speaker_select")
+        cell.titleLabel?.textColor = QUTOA_COLOR;
+        
         let webView = FXDWebViewController()
         webView.urlStr = (messageModel?.requestUrl)! + items[indexPath.row - 1].id_
         self.navigationController?.pushViewController(webView, animated: true)
@@ -252,18 +251,20 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        delMessage(delType: "1", operUserMassgeId: items[indexPath.row - 1].id_)
+        
+        delMessage(delType: "1", operUserMassgeId: items[indexPath.row - 1].id_, indexPath: indexPath, tableView: tableView)
 
     }
     
     
-    func delMessage(delType:String,operUserMassgeId:String){
+    func delMessage(delType:String,operUserMassgeId:String, indexPath : IndexPath , tableView : UITableView){
         let messageVM = MessageViewModel()
         messageVM .setBlockWithReturn({ (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
                 
-                self.getData(isHeaderFresh: true)
+                self.items.remove(at: indexPath.row - 1)
+                tableView.deleteRows(at: [indexPath], with: .none)
                 
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
