@@ -168,7 +168,6 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
             superLoanCell?.feeLabel?.text = "费用:%" + referenceRate! + "/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
         }
         
-        
         if referenceRate != nil && model.referenceMode != nil {
             
             let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.feeLabel?.text)!)
