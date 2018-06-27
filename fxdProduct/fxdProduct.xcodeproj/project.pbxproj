@@ -492,6 +492,8 @@
 		84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635131F01096900146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
+		84AD784920E32FD600D8A027 /* libHFSaltSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AD784820E32FD600D8A027 /* libHFSaltSDK.a */; };
+		84AD784A20E32FD600D8A027 /* libHFSaltSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AD784820E32FD600D8A027 /* libHFSaltSDK.a */; };
 		84BC53D31FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */; };
 		84BC53D41FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */; };
 		84BC53D61FF4C43B00FE58E8 /* OverdueInfoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */; };
@@ -1933,6 +1935,9 @@
 		84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobilePhoneOperatorParamModel.m; sourceTree = "<group>"; };
 		84A6350F1F00FCA200146A8A /* AuthenticationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewModel.h; sourceTree = "<group>"; };
 		84A635101F00FCA200146A8A /* AuthenticationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewModel.m; sourceTree = "<group>"; };
+		84AD784620E32FD600D8A027 /* HFSaltSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFSaltSDK.h; sourceTree = "<group>"; };
+		84AD784720E32FD600D8A027 /* NSString+Salt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Salt.h"; sourceTree = "<group>"; };
+		84AD784820E32FD600D8A027 /* libHFSaltSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libHFSaltSDK.a; sourceTree = "<group>"; };
 		84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueInfoPopView.swift; sourceTree = "<group>"; };
 		84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OverdueInfoPopView.xib; sourceTree = "<group>"; };
 		84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonProtocol .swift"; sourceTree = "<group>"; };
@@ -2292,6 +2297,7 @@
 				6326C9D51BF08E0B00FD23A8 /* AddressBook.framework in Frameworks */,
 				6326C9D61BF08E0B00FD23A8 /* AddressBookUI.framework in Frameworks */,
 				6326C9CB1BF040A600FD23A8 /* AdSupport.framework in Frameworks */,
+				84AD784920E32FD600D8A027 /* libHFSaltSDK.a in Frameworks */,
 				032FA7E31BE1BB4900CF2D21 /* CFNetwork.framework in Frameworks */,
 				3E2B09C36E24E9E9316FAC1B /* Pods_fxd_fxdProduct.framework in Frameworks */,
 			);
@@ -2346,6 +2352,7 @@
 				CC0DFB0F1EA5B1090024841A /* libxml2.tbd in Frameworks */,
 				CC0DFB101EA5B1090024841A /* AddressBook.framework in Frameworks */,
 				CC0DFB111EA5B1090024841A /* AddressBookUI.framework in Frameworks */,
+				84AD784A20E32FD600D8A027 /* libHFSaltSDK.a in Frameworks */,
 				CC0DFB141EA5B1090024841A /* AdSupport.framework in Frameworks */,
 				CC0DFB151EA5B1090024841A /* CFNetwork.framework in Frameworks */,
 			);
@@ -3564,6 +3571,7 @@
 		63E076521B67114800E269F2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				84AD784320E32FD600D8A027 /* HFSaltSDK */,
 				8478134D20D266B600CA2AF4 /* YXTableview */,
 				CC742DC220526FD800D645CC /* HGManager */,
 				636B1B191C1FDDD100450358 /* CostumView */,
@@ -4258,6 +4266,32 @@
 				84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */,
 			);
 			path = MobilePhoneOperator;
+			sourceTree = "<group>";
+		};
+		84AD784320E32FD600D8A027 /* HFSaltSDK */ = {
+			isa = PBXGroup;
+			children = (
+				84AD784420E32FD600D8A027 /* include */,
+				84AD784820E32FD600D8A027 /* libHFSaltSDK.a */,
+			);
+			path = HFSaltSDK;
+			sourceTree = "<group>";
+		};
+		84AD784420E32FD600D8A027 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				84AD784520E32FD600D8A027 /* HFSaltSDK */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		84AD784520E32FD600D8A027 /* HFSaltSDK */ = {
+			isa = PBXGroup;
+			children = (
+				84AD784620E32FD600D8A027 /* HFSaltSDK.h */,
+				84AD784720E32FD600D8A027 /* NSString+Salt.h */,
+			);
+			path = HFSaltSDK;
 			sourceTree = "<group>";
 		};
 		84C6198D1FA8149700626411 /* RepaymentModules - 还款模块 */ = {
@@ -6420,6 +6454,7 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
+					"$(PROJECT_DIR)/fxdProduct/Common/HFSaltSDK",
 				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -6537,6 +6572,7 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
+					"$(PROJECT_DIR)/fxdProduct/Common/HFSaltSDK",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -6676,6 +6712,7 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
+					"$(PROJECT_DIR)/fxdProduct/Common/HFSaltSDK",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -6795,6 +6832,7 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
+					"$(PROJECT_DIR)/fxdProduct/Common/HFSaltSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (

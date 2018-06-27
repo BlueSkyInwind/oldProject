@@ -23,8 +23,7 @@
  *	@return	返回固定电话区号是否正确
  */
 - (BOOL)isAreaCode;
--(NSString *)openpf;
--(NSString *)openpE;
+
 /**
  删除字符串中的空格
  

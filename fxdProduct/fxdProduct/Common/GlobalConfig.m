@@ -333,10 +333,6 @@ NSString * const    _queryUserStatus_url    =    @"membership/paid/queryUserStat
 //合规的件 调用此接口 用于获取借款协议列表
 NSString * const    _hgLoanProtoolList_url    =    @"product/getHgLoanProtoolListApi";
 
-
-
-
-
 #pragma mark - 对外导流接口
 
 //量子互助  http://www.liangzihuzhu.com.cn/xwh5/pages/plan/quotaRecharge.html?id=222767
