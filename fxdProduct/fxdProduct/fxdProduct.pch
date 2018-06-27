@@ -20,7 +20,7 @@
 #import "GlobalConfig.h"
 #import "pinyin.h"
 #import "FXD_Tool.h"
-#import "FXD_NetWorkRequestManager.h"
+#import "HF_NetWorkRequestManager.h"
 #import "FXD_AlertViewCust.h"
 #import "OpenUDID.h"
 #import <ReactiveObjC/ReactiveObjC.h>
@@ -60,6 +60,7 @@
 #import "UIButton+YXTool.h"
 #import "UITableViewCell+YXTool.h"
 #import "UIImage+YXTool.h"
+#import "HFSaltSDK.h"
 
 #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0

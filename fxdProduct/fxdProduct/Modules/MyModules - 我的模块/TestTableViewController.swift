@@ -11,17 +11,20 @@ import UIKit
 class TestTableViewController: BaseViewController{
     
 
+    var tableview:UITableView?
+    var tableViewMaker:YXTableViewMaker?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "测试"
         self.addBackItem()
         // Do any additional setup after loading the view.
         
-        let tableview = UITableView.yx_maker(CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h), UITableViewStyle.plain) { (make) in
+         tableViewMaker = UITableView.yx_maker(CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h - 100), UITableViewStyle.plain) { (make) in
             make.bgColor(UIColor.white).yx_delegate().yx_dataSource().superView(self.view).numberOfSections({ () -> Int in
                 return 1
             }).numberOfRowsInSection({ (section) -> Int in
-                return 5
+                return 2
             }).heightForRow({ (tableView, indexPath) -> CGFloat in
                 return 150
             }).cellForRowAt({ (tableView, indexPath) -> UITableViewCell in
@@ -34,13 +37,13 @@ class TestTableViewController: BaseViewController{
                 cell?.textLabel?.text = "1231545"
                 return cell!
             }).didSelectRow({ (tableview, indexpath) in
-                
+                print("点我呀   再点我呀")
             })
         }
-        
-        print(tableview)
-        
+        print(tableViewMaker)
     }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

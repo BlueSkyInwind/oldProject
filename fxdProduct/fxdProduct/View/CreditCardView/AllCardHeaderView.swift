@@ -28,7 +28,7 @@ class AllCardHeaderView: UIView {
     
     var currentBank:Int = 0
     var currentlevel:Int = 0
-    var sorts:Bool = true
+    var sorts:Bool = false
     
     var currentType:CurrentConditonType = .bankType
     var conditionScreenResult:UserChooseResult?
@@ -184,7 +184,8 @@ extension AllCardHeaderView {
             self?.itemViewtTwo?.closeIcon(false)
             self?.itemViewOne?.closeIcon(false)
             if self?.conditionScreenResult != nil {
-                self?.conditionScreenResult!((self?.currentBank)!,(self?.currentlevel)!,!isOpen)
+                self?.sorts = isOpen
+                self?.conditionScreenResult!((self?.currentBank)!,(self?.currentlevel)!,(self?.sorts)!)
             }
             if (self?.isUnfold)! {
                 self?.conView?.dismissAnimate()

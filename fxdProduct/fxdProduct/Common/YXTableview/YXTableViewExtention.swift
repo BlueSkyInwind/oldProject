@@ -20,11 +20,12 @@ extension UITableView {
         }
     }
     
-   class func yx_maker(_ frame:CGRect,_ style:UITableViewStyle,_ maker:(_ make:YXTableViewMaker) -> Void) -> UITableView {
+    //
+   class func yx_maker(_ frame:CGRect,_ style:UITableViewStyle,_ maker:(_ make:YXTableViewMaker) -> Void) -> YXTableViewMaker {
         let tableViewmake = YXTableViewMaker()
         tableViewmake.yxTableview = UITableView.init(frame: frame, style: style)
         maker(tableViewmake)
-        return tableViewmake.yxTableview!
+        return tableViewmake
     }
 }
 

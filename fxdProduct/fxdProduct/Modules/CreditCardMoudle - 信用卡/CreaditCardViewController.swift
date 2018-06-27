@@ -16,7 +16,7 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.title = "全部信用卡";
+        self.title = "信用卡";
         obtainDataSource()
     }
     
@@ -62,11 +62,7 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
         }
         
         contentTableView?.registerCell([CreaditCardHeaderCell.self,CreaditCardBottomCell.self], false)
-        let bottomView = CreaditCardBottomView.init(CGRect.init(x: 0, y: 0, width: _k_w, height: 60)) { [weak self]  in
-            self?.pushMoreCardVC(-1)
-        }
-        contentTableView?.tableFooterView = bottomView
-
+        setFooterView()
         let header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(headerRefreshing))
         header?.isAutomaticallyChangeAlpha = true
         header?.lastUpdatedTimeLabel.isHidden = true
@@ -77,8 +73,20 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
         obtainCreaditCardList{[weak self] (isSuccess) in
             if(isSuccess) {
                 self?.contentTableView?.reloadData()
+                self?.setFooterView()
             }
             self?.contentTableView?.mj_header.endRefreshing()
+        }
+    }
+    
+    func setFooterView()  {
+        if creaditCardModel?.cards != nil {
+            let bottomView = CreaditCardBottomView.init(CGRect.init(x: 0, y: 0, width: _k_w, height: 60)) { [weak self]  in
+                self?.pushMoreCardVC(-1)
+            }
+            contentTableView?.tableFooterView = bottomView
+        }else{
+            contentTableView?.tableFooterView = nil
         }
     }
     
@@ -118,9 +126,6 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
         let arr = creaditCardModel?.cards
         guard (arr != nil)  else {
             return 0
-        }
-        if (arr?.count)! > 3 {
-            return 325
         }
         let num = (arr?.count)! * 95 + 40
         return CGFloat(num)

@@ -33,7 +33,7 @@ class CreaditCardTableViewCell: UITableViewCell {
         
     }
     
-    func setDataSource(_ model:CreaditCardListModel)  {
+    func setDataSource(_ model:CreaditCardListModel,_ isAdd:Bool)  {
         CardIconView.image = UIImage.init(named: "card_load_failure")
         obtainCardImage_Icon( URL.init(string: "\(model.cardLogoUrl ?? "")")!) {[weak self] (image) in
             let proportion = image.size.width / image.size.height
@@ -44,7 +44,11 @@ class CreaditCardTableViewCell: UITableViewCell {
         cardName.text = "\(model.cardName ?? "")"
         cardType.text = "\(model.cardLevelName ?? "")"
         cardExplainLabel.text = "\(model.cardHighlights ?? "")"
-        cardApplyNum.text = "\(model.applicantsCount ?? "")" + "万人申请"
+        if isAdd {
+            cardApplyNum.text = "\(model.applicantsCount ?? "")" + "人申请"
+        }else{
+            cardApplyNum.text = "\(model.applicantsCount ?? "")"
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -53,7 +57,7 @@ class CreaditCardTableViewCell: UITableViewCell {
     }
     
     func obtainCardImage_Icon(_ imageUrl:URL,_ complication:@escaping (_ resultImage:UIImage) -> Void)  {
-        SDWebImageManager.shared().loadImage(with: imageUrl, options: .refreshCached, progress: { (receivedSize, expectedSize, targetURL) in
+        SDWebImageManager.shared().loadImage(with: imageUrl, options: .retryFailed, progress: { (receivedSize, expectedSize, targetURL) in
         }) { (image, data, errpr, cacheType, finish, imageURL) in
             if image != nil {
                 complication(image!)

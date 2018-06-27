@@ -193,7 +193,7 @@
 		638C3F3A1CF564A4000446A7 /* SquareRepaymentBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F341CF564A4000446A7 /* SquareRepaymentBaseClass.m */; };
 		638C3F3B1CF564A4000446A7 /* SquareRepaymentExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F361CF564A4000446A7 /* SquareRepaymentExt.m */; };
 		638C3F3C1CF564A4000446A7 /* SquareRepaymentResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F381CF564A4000446A7 /* SquareRepaymentResult.m */; };
-		6395E2AA1BAFA14E00B7AFC2 /* FXD_NetWorkRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6395E2A91BAFA14E00B7AFC2 /* FXD_NetWorkRequestManager.m */; };
+		6395E2AA1BAFA14E00B7AFC2 /* HF_NetWorkRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6395E2A91BAFA14E00B7AFC2 /* HF_NetWorkRequestManager.m */; };
 		639E88721CA1371800254216 /* LunchVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 639E886F1CA1371800254216 /* LunchVCModules.m */; };
 		639E88731CA1371800254216 /* UIApplication+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 639E88711CA1371800254216 /* UIApplication+Extend.m */; };
 		639F73EC1E4C0099008D3475 /* LoginParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 639F73EB1E4C0099008D3475 /* LoginParse.m */; };
@@ -492,6 +492,8 @@
 		84A635111F00FCA200146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635121F01094D00146A8A /* AuthenticationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A635101F00FCA200146A8A /* AuthenticationViewModel.m */; };
 		84A635131F01096900146A8A /* MobilePhoneOperatorParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */; };
+		84AD784920E32FD600D8A027 /* libHFSaltSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AD784820E32FD600D8A027 /* libHFSaltSDK.a */; };
+		84AD784A20E32FD600D8A027 /* libHFSaltSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AD784820E32FD600D8A027 /* libHFSaltSDK.a */; };
 		84BC53D31FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */; };
 		84BC53D41FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */; };
 		84BC53D61FF4C43B00FE58E8 /* OverdueInfoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */; };
@@ -836,7 +838,7 @@
 		CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEACE231CA10B480027859A /* NSString+Validate.m */; };
 		CC0DFA471EA5B1090024841A /* FXDBaseTabBarVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* FXDBaseTabBarVCModule.m */; };
 		CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6348310D1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m */; };
-		CC0DFA4A1EA5B1090024841A /* FXD_NetWorkRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6395E2A91BAFA14E00B7AFC2 /* FXD_NetWorkRequestManager.m */; };
+		CC0DFA4A1EA5B1090024841A /* HF_NetWorkRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6395E2A91BAFA14E00B7AFC2 /* HF_NetWorkRequestManager.m */; };
 		CC0DFA4C1EA5B1090024841A /* CoreArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C001BE063A90036E8EF /* CoreArchive.m */; };
 		CC0DFA4F1EA5B1090024841A /* UIView+YYText.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24DF1D98F7E9006F58F3 /* UIView+YYText.m */; };
 		CC0DFA511EA5B1090024841A /* LOTEllipseShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16931E517D9F00AB8AB6 /* LOTEllipseShapeLayer.m */; };
@@ -1588,8 +1590,8 @@
 		638C3F361CF564A4000446A7 /* SquareRepaymentExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareRepaymentExt.m; sourceTree = "<group>"; };
 		638C3F371CF564A4000446A7 /* SquareRepaymentResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareRepaymentResult.h; sourceTree = "<group>"; };
 		638C3F381CF564A4000446A7 /* SquareRepaymentResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareRepaymentResult.m; sourceTree = "<group>"; };
-		6395E2A81BAFA14E00B7AFC2 /* FXD_NetWorkRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXD_NetWorkRequestManager.h; sourceTree = "<group>"; };
-		6395E2A91BAFA14E00B7AFC2 /* FXD_NetWorkRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXD_NetWorkRequestManager.m; sourceTree = "<group>"; };
+		6395E2A81BAFA14E00B7AFC2 /* HF_NetWorkRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HF_NetWorkRequestManager.h; sourceTree = "<group>"; };
+		6395E2A91BAFA14E00B7AFC2 /* HF_NetWorkRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HF_NetWorkRequestManager.m; sourceTree = "<group>"; };
 		639E886E1CA1371800254216 /* LunchVCModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunchVCModules.h; sourceTree = "<group>"; };
 		639E886F1CA1371800254216 /* LunchVCModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunchVCModules.m; sourceTree = "<group>"; };
 		639E88701CA1371800254216 /* UIApplication+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Extend.h"; sourceTree = "<group>"; };
@@ -1933,6 +1935,9 @@
 		84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobilePhoneOperatorParamModel.m; sourceTree = "<group>"; };
 		84A6350F1F00FCA200146A8A /* AuthenticationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewModel.h; sourceTree = "<group>"; };
 		84A635101F00FCA200146A8A /* AuthenticationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewModel.m; sourceTree = "<group>"; };
+		84AD784620E32FD600D8A027 /* HFSaltSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFSaltSDK.h; sourceTree = "<group>"; };
+		84AD784720E32FD600D8A027 /* NSString+Salt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Salt.h"; sourceTree = "<group>"; };
+		84AD784820E32FD600D8A027 /* libHFSaltSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libHFSaltSDK.a; sourceTree = "<group>"; };
 		84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueInfoPopView.swift; sourceTree = "<group>"; };
 		84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OverdueInfoPopView.xib; sourceTree = "<group>"; };
 		84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonProtocol .swift"; sourceTree = "<group>"; };
@@ -2292,6 +2297,7 @@
 				6326C9D51BF08E0B00FD23A8 /* AddressBook.framework in Frameworks */,
 				6326C9D61BF08E0B00FD23A8 /* AddressBookUI.framework in Frameworks */,
 				6326C9CB1BF040A600FD23A8 /* AdSupport.framework in Frameworks */,
+				84AD784920E32FD600D8A027 /* libHFSaltSDK.a in Frameworks */,
 				032FA7E31BE1BB4900CF2D21 /* CFNetwork.framework in Frameworks */,
 				3E2B09C36E24E9E9316FAC1B /* Pods_fxd_fxdProduct.framework in Frameworks */,
 			);
@@ -2346,6 +2352,7 @@
 				CC0DFB0F1EA5B1090024841A /* libxml2.tbd in Frameworks */,
 				CC0DFB101EA5B1090024841A /* AddressBook.framework in Frameworks */,
 				CC0DFB111EA5B1090024841A /* AddressBookUI.framework in Frameworks */,
+				84AD784A20E32FD600D8A027 /* libHFSaltSDK.a in Frameworks */,
 				CC0DFB141EA5B1090024841A /* AdSupport.framework in Frameworks */,
 				CC0DFB151EA5B1090024841A /* CFNetwork.framework in Frameworks */,
 			);
@@ -3564,6 +3571,7 @@
 		63E076521B67114800E269F2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				84AD784320E32FD600D8A027 /* HFSaltSDK */,
 				8478134D20D266B600CA2AF4 /* YXTableview */,
 				CC742DC220526FD800D645CC /* HGManager */,
 				636B1B191C1FDDD100450358 /* CostumView */,
@@ -3668,8 +3676,8 @@
 		63E076551B67114800E269F2 /* FXD_NetworkRequestModules */ = {
 			isa = PBXGroup;
 			children = (
-				6395E2A81BAFA14E00B7AFC2 /* FXD_NetWorkRequestManager.h */,
-				6395E2A91BAFA14E00B7AFC2 /* FXD_NetWorkRequestManager.m */,
+				6395E2A81BAFA14E00B7AFC2 /* HF_NetWorkRequestManager.h */,
+				6395E2A91BAFA14E00B7AFC2 /* HF_NetWorkRequestManager.m */,
 			);
 			path = FXD_NetworkRequestModules;
 			sourceTree = "<group>";
@@ -4258,6 +4266,32 @@
 				84A6350D1F00F8B800146A8A /* MobilePhoneOperatorParamModel.m */,
 			);
 			path = MobilePhoneOperator;
+			sourceTree = "<group>";
+		};
+		84AD784320E32FD600D8A027 /* HFSaltSDK */ = {
+			isa = PBXGroup;
+			children = (
+				84AD784420E32FD600D8A027 /* include */,
+				84AD784820E32FD600D8A027 /* libHFSaltSDK.a */,
+			);
+			path = HFSaltSDK;
+			sourceTree = "<group>";
+		};
+		84AD784420E32FD600D8A027 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				84AD784520E32FD600D8A027 /* HFSaltSDK */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		84AD784520E32FD600D8A027 /* HFSaltSDK */ = {
+			isa = PBXGroup;
+			children = (
+				84AD784620E32FD600D8A027 /* HFSaltSDK.h */,
+				84AD784720E32FD600D8A027 /* NSString+Salt.h */,
+			);
+			path = HFSaltSDK;
 			sourceTree = "<group>";
 		};
 		84C6198D1FA8149700626411 /* RepaymentModules - 还款模块 */ = {
@@ -5549,7 +5583,7 @@
 				CC80DFF0206A5120000F9BAC /* SuperLoanCell.swift in Sources */,
 				63FF48581B6F15DB009E384C /* FXDBaseTabBarVCModule.m in Sources */,
 				6348310E1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m in Sources */,
-				6395E2AA1BAFA14E00B7AFC2 /* FXD_NetWorkRequestManager.m in Sources */,
+				6395E2AA1BAFA14E00B7AFC2 /* HF_NetWorkRequestManager.m in Sources */,
 				CC3BCC141FBABEC50042A738 /* MessageCell.swift in Sources */,
 				63A24C5A1BE063A90036E8EF /* CoreArchive.m in Sources */,
 				63FC24FE1D98F7E9006F58F3 /* UIView+YYText.m in Sources */,
@@ -6069,7 +6103,7 @@
 				CC8BB753208F174600ADA647 /* RecentCell.swift in Sources */,
 				CC594E6C1FCE4FDA00D53F60 /* CheckWithdrawCashModel.m in Sources */,
 				CC0DFA491EA5B1090024841A /* SaveCustomerCarrerViewModel.m in Sources */,
-				CC0DFA4A1EA5B1090024841A /* FXD_NetWorkRequestManager.m in Sources */,
+				CC0DFA4A1EA5B1090024841A /* HF_NetWorkRequestManager.m in Sources */,
 				CC0DFA4C1EA5B1090024841A /* CoreArchive.m in Sources */,
 				CC0DFA4F1EA5B1090024841A /* UIView+YYText.m in Sources */,
 				CC0DFA511EA5B1090024841A /* LOTEllipseShapeLayer.m in Sources */,
@@ -6374,6 +6408,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProduct.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -6419,6 +6454,7 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
+					"$(PROJECT_DIR)/fxdProduct/Common/HFSaltSDK",
 				);
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -6490,6 +6526,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = fxdProduct/fxdProductDis.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -6535,6 +6572,7 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
+					"$(PROJECT_DIR)/fxdProduct/Common/HFSaltSDK",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -6674,6 +6712,7 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
+					"$(PROJECT_DIR)/fxdProduct/Common/HFSaltSDK",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -6793,6 +6832,7 @@
 					"$(PROJECT_DIR)/fxdProduct/Third/JPush",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan",
 					"$(PROJECT_DIR)/fxdProduct/Third/YXBankScan/bank_io/exbankcardcore",
+					"$(PROJECT_DIR)/fxdProduct/Common/HFSaltSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
