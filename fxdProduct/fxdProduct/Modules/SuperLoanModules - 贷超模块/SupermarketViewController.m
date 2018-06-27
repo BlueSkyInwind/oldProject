@@ -602,7 +602,17 @@
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             
-            [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",_index] row:sender.tag];
+            RowsModel *model = _dataArray[sender.tag];
+            if ([model.isCollect isEqualToString:@"1"]) {
+                model.isCollect = @"0";
+            }else{
+                model.isCollect = @"1";
+            }
+           
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:sender.tag inSection:0];
+            [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+
+//            [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",_index] row:sender.tag];
             
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];

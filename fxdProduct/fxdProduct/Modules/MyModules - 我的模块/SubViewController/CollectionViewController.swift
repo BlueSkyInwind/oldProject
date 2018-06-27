@@ -195,10 +195,12 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
             make.bottom.equalTo(superLoanCell.snp.bottom).offset(-10)
             make.height.equalTo(20)
         })
-//        superLoanCell?.descBtn?.snp.updateConstraints({ (make) in
-//            make.width.equalTo(width)
-//        })
+
         superLoanCell.collectionBtn?.setImage(UIImage.init(named: "arrow_icon"), for: .normal)
+        superLoanCell.collectionBtn?.snp.remakeConstraints { (make) in
+            make.centerY.equalTo(superLoanCell.snp.centerY)
+            make.right.equalTo(superLoanCell.snp.right).offset(-20)
+        }
 
         return superLoanCell!
     }
@@ -210,10 +212,24 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
+
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+
         return true
     }
+    
+    
+//    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+//        let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
+//
+//        let collectionVM = CollectionViewModel()
+//    }
+    
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
@@ -223,7 +239,13 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
             
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
-                self.getMyCollectionList()
+                
+                tableView.beginUpdates()
+                self.dataArray?.removeObject(at: indexPath.section)
+                let indexSet = NSIndexSet(index: indexPath.section)
+                tableView.deleteSections(indexSet as IndexSet, with: .none)
+                tableView.endUpdates()
+
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
@@ -231,7 +253,7 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
             
         }
         collectionVM.addMyCollectionInfocollectionType(model.moduletype, platformId: model.id_)
-        tableView.reloadData()
+//        tableView.reloadData()
     }
     
     
