@@ -358,7 +358,6 @@ NSString * const  CODE_DRAW          =    @"MSG_DRAW_"; ///提款
 NSString * const  CODE_ADDCARD       =    @"MSG_BANKCARD_AUDIT_"; //新增卡
 NSString * const  CODE_ORDER_CONFIRM       =    @"MSG_CARD_REQUEST"; //订单确认
 
-
 #pragma Mark - 产品类型
 
 NSString * const SalaryLoan = @"P001002";                   //工薪贷平台

@@ -214,6 +214,8 @@
     }
     
     if ([_userDataIformationM.ocr_status_ integerValue] == 2) {
+        isFront = true;
+        isBack = true;
         [dataListArr replaceObjectAtIndex:1 withObject:_userDataIformationM.customer_name_];
         [dataListArr replaceObjectAtIndex:2 withObject:_userDataIformationM.id_code_];
     }
@@ -323,7 +325,9 @@
             cell.titleLabel.text = _placeHolderArr[indexPath.section][indexPath.row];
             cell.contentTextField.tag = indexPath.row +(100 * indexPath.section);
             cell.contentTextField.delegate = self;
-            cell.contentTextField.text = dataListArr[indexPath.row+1];
+            if (isFront && isBack) {
+                cell.contentTextField.text = dataListArr[indexPath.row+1];
+            }
             cell.arrowsImageBtn.hidden = YES;
             cell.selectionStyle  = UITableViewCellSelectionStyleNone;
             return cell;
@@ -449,7 +453,7 @@
         isBack = true;
     }
     
-    if (isFront && isBack) {
+    if (isFront || isBack) {
         [_tableView reloadData];
     }
 }

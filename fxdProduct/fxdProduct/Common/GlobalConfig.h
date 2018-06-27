@@ -126,7 +126,6 @@ UIKIT_EXTERN NSString * const       _memberShipInfo_url;                    //�
 UIKIT_EXTERN NSString * const       _memberRefund_url;                    //会员费退费
 UIKIT_EXTERN NSString * const       _memberRecharge_url;                    //会员扣费
 
-
 #pragma mark - 手机
 
 UIKIT_EXTERN NSString * const       _rechargeCardsList_url;                    //手机卡列表
@@ -134,8 +133,6 @@ UIKIT_EXTERN NSString * const       _orderConfirmInfo_url;                    //
 UIKIT_EXTERN NSString * const       _orderConfirmRequest_url;                    //订单请求
 UIKIT_EXTERN NSString * const       _orderDetailInfo_url;                    //订单详情
 UIKIT_EXTERN NSString * const       _createOrderPhoneCard_url;       //创建订单
-
-
 
 #pragma mark - 信用卡
 
@@ -228,8 +225,6 @@ UIKIT_EXTERN NSString * const DeriveRapidLoan;       //急速贷衍生（30天�
 UIKIT_EXTERN NSString * const EliteLoan;       //精英贷
 UIKIT_EXTERN NSString * const Phone_RechargeCard;       //手机卡
 
-
-
 UIKIT_EXTERN NSString * const PLATFORM;                 //平台
 UIKIT_EXTERN NSString * const CHANNEL;
 UIKIT_EXTERN NSString * const SERVICE_PLATFORM;
@@ -282,7 +277,6 @@ UIKIT_EXTERN NSString * const FirstLunch;
 UIKIT_EXTERN NSString * const theMoxieApiKey;            //魔蝎key
 
 UIKIT_EXTERN NSString * const isSuperMark;
-
 
 //提示语
 UIKIT_EXTERN NSString * const IDOCRMarkeords;
