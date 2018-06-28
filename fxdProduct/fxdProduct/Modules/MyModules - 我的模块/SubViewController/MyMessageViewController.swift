@@ -266,10 +266,8 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
                 
-                tableView.beginUpdates()
                 self.items.remove(at: indexPath.row - 1)
                 tableView.deleteRows(at: [indexPath], with: .none)
-                tableView.endUpdates()
                 
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)

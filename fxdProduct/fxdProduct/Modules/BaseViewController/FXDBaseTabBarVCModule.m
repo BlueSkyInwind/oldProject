@@ -49,6 +49,7 @@
         }
         //父类指针指向子类对象
         UIViewController *viewController = [[vc alloc]init];
+//        UINavigationController *nc = [[UINavigationController alloc]initWithRootViewController:viewController];
         BaseNavigationViewController *nc = [[BaseNavigationViewController alloc]initWithRootViewController:viewController];
         viewController.navigationItem.title = [titleArr objectAtIndex:i];
         nc.tabBarItem = [self tabBarItemWithName:[titleArr objectAtIndex:i] image:[imageArr objectAtIndex:i] selectedImage:[seleteimageArr objectAtIndex:i]];
