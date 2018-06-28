@@ -90,7 +90,6 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
 
         })
 
-
 //        //上拉加载相关设置,使用闭包Block
 //        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
 //
@@ -178,7 +177,6 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
-            
 //            self?.tableView?.mj_header.endRefreshing()
 //            self?.tableView?.mj_footer.endRefreshing()
         }) {
@@ -248,17 +246,26 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         
     }
     
-    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0 {
+            return false
+        }
         return true
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
         
         delMessage(delType: "1", operUserMassgeId: items[indexPath.row - 1].id_, indexPath: indexPath, tableView: tableView)
 
     }
     
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
     
     func delMessage(delType:String,operUserMassgeId:String, indexPath : IndexPath , tableView : UITableView){
         let messageVM = MessageViewModel()
@@ -268,20 +275,20 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
                 
                 self.items.remove(at: indexPath.row - 1)
                 tableView.deleteRows(at: [indexPath], with: .none)
-                
+
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) {
 
         }
-        
         messageVM.delMsgDelType(delType, operUserMassgeId: operUserMassgeId)
     }
 
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"
     }
+    
     /*
     // MARK: - Navigation
 

@@ -182,6 +182,7 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
 //        }
 //
 //        return superLoanCell!
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
