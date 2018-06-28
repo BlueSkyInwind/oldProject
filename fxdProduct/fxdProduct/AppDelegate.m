@@ -58,7 +58,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     [self.window makeKeyAndVisible];
     [self monitorNetworkState];
     self.window.rootViewController = [UIViewController new];
-    
+
 //    [self heguiceshi];
     [self tripartiteInitialize];
 
@@ -77,7 +77,6 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
     
     [self initJPush:launchOptions];
 
-//    BOOL isFirst = [LunchVCModules canShowNewFeature];
     BOOL isFirst = false;
     if (isFirst) {
         self.window.rootViewController = [LunchVCModules newLunchVCWithModels:@[@"guide_1",@"guide_2",@"guide_3"] enterBlock:^{
@@ -136,11 +135,8 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 }
 
 -(void)enter{
-    
     self.btb = [[FXDBaseTabBarVCModule alloc]init];
     self.window.rootViewController = self.btb;
-    
-    //    [self.window.layer transitionWithAnimType:TransitionAnimTypeRamdom subType:TransitionSubtypesFromRamdom curve:TransitionCurveRamdom duration:2.0f];
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -153,7 +149,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 }
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAddMaterailNotification object:application];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kAddMaterailNotification object:application];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

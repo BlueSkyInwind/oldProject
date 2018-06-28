@@ -247,6 +247,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let array = tableView.gestureRecognizers
         if indexPath.row == 0 {
             return false
         }
@@ -272,10 +273,9 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         messageVM .setBlockWithReturn({ (returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
-                tableView.beginUpdates()
+                
                 self.items.remove(at: indexPath.row - 1)
                 tableView.deleteRows(at: [indexPath], with: .none)
-                tableView.endUpdates()
 
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
@@ -289,6 +289,9 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"
     }
+    
+
+    
     
     /*
     // MARK: - Navigation
