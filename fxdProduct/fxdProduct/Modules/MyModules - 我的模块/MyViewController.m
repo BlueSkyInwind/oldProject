@@ -52,9 +52,7 @@
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
     self.MyViewTable.scrollEnabled = YES;
-    if (UI_IS_IPHONE4 ) {
-        self.MyViewTable.scrollEnabled = YES;
-    }
+
     [self.MyViewTable registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"bCell"];
     
 }

@@ -18,7 +18,6 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         super.viewDidLoad()
 
         self.title = "收藏"
-    
         dataArray = NSMutableArray.init(capacity: 100)
         addBackItem()
         configureView()
@@ -45,14 +44,11 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         }else{
             self.automaticallyAdjustsScrollViewInsets = false;
         }
+        
 //        //下拉刷新相关设置,使用闭包Block
 //        tableView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-//            
 //            self.headerRefresh()
-//            
 //        })
-//        
-//        
 //        //        //上拉加载相关设置,使用闭包Block
 //        //        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
 //        //
@@ -60,7 +56,6 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
 //        //
 //        //        })
 //        //        tableView?.mj_footer.isAutomaticallyHidden = true
-//        
 //        // 底部加载
 //        let footer = MJRefreshAutoNormalFooter()
 //        footer.setRefreshingTarget(self, refreshingAction: #selector(footerLoad))
@@ -88,7 +83,6 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
                 }
 //                if collectionListModel.rows != nil{
 //
-//
 //                }
     
                 self.tableView?.reloadData()
@@ -107,7 +101,6 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return 1
     }
     
@@ -155,7 +148,6 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         let term = model.unitStr != nil ? model.unitStr : ""
         superLoanCell?.termLabel?.text = "期限:" + term!
         if term != "" {
-            
             let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.termLabel?.text)!)
             attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-4))
             superLoanCell?.termLabel?.attributedText = attrstr1
@@ -212,15 +204,35 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return .delete
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "删除") { (action, indexPath) in
+            let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
+            
+            let collectionVM = CollectionViewModel()
+            collectionVM.setBlockWithReturn({ (returnValue) in
+                
+                let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+                if baseResult.errCode == "0" {
+                    
+                    tableView.beginUpdates()
+                    self.dataArray?.removeObject(at: indexPath.section)
+                    let indexSet = NSIndexSet(index: indexPath.section)
+                    tableView.deleteSections(indexSet as IndexSet, with: .none)
+                    tableView.endUpdates()
+                    
+                }else{
+                    MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                }
+            }) {
+            }
+            collectionVM.addMyCollectionInfocollectionType(model.moduletype, platformId: model.id_)
+        }
+        return [deleteAction]
     }
-
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-
-        return true
-    }
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
     
     
 //    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
@@ -229,37 +241,13 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
 //        let collectionVM = CollectionViewModel()
 //    }
     
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
-        
-        let collectionVM = CollectionViewModel()
-        collectionVM.setBlockWithReturn({ (returnValue) in
-            
-            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
-            if baseResult.errCode == "0" {
-                
-                tableView.beginUpdates()
-                self.dataArray?.removeObject(at: indexPath.section)
-                let indexSet = NSIndexSet(index: indexPath.section)
-                tableView.deleteSections(indexSet as IndexSet, with: .none)
-                tableView.endUpdates()
-
-            }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
-            }
-        }) {
-            
-        }
-        collectionVM.addMyCollectionInfocollectionType(model.moduletype, platformId: model.id_)
-//        tableView.reloadData()
     }
     
     
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"
-        
     }
     
     func rateUnit(referenceMode : NSString) -> (NSString){
