@@ -958,8 +958,6 @@
 		CC4F0635207C6B200030A12A /* QBBWitnDrawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4F0633207C6B200030A12A /* QBBWitnDrawModel.m */; };
 		CC4F0638207DE90B0030A12A /* FindViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4F0637207DE90B0030A12A /* FindViewModel.m */; };
 		CC4F0639207DE90B0030A12A /* FindViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4F0637207DE90B0030A12A /* FindViewModel.m */; };
-		CC5109DD20E47428005DEF28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5109DC20E47428005DEF28 /* ViewController.swift */; };
-		CC5109DE20E4742E005DEF28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5109DC20E47428005DEF28 /* ViewController.swift */; };
 		CC594E631FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */; };
 		CC594E641FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */; };
 		CC594E671FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC594E661FCBFD0B00D53F60 /* WithdrawCashModel.m */; };
@@ -1956,7 +1954,6 @@
 		CC4F0633207C6B200030A12A /* QBBWitnDrawModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QBBWitnDrawModel.m; sourceTree = "<group>"; };
 		CC4F0636207DE90B0030A12A /* FindViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindViewModel.h; sourceTree = "<group>"; };
 		CC4F0637207DE90B0030A12A /* FindViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindViewModel.m; sourceTree = "<group>"; };
-		CC5109DC20E47428005DEF28 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CC594E611FCBFC7800D53F60 /* WithdrawCashParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashParamModel.h; sourceTree = "<group>"; };
 		CC594E621FCBFC7800D53F60 /* WithdrawCashParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawCashParamModel.m; sourceTree = "<group>"; };
 		CC594E651FCBFD0B00D53F60 /* WithdrawCashModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashModel.h; sourceTree = "<group>"; };
@@ -2806,7 +2803,6 @@
 		63811AF71B8EB14F008F605B /* SubViewController */ = {
 			isa = PBXGroup;
 			children = (
-				CC5109DC20E47428005DEF28 /* ViewController.swift */,
 				0F920C101BCE549900AA9A31 /* MyCardsViewController.h */,
 				0F920C111BCE549900AA9A31 /* MyCardsViewController.m */,
 				0F920C121BCE549900AA9A31 /* MyCardsViewController.xib */,
@@ -4962,7 +4958,6 @@
 				84C619C31FA815EB00626411 /* BankListCell.m in Sources */,
 				84C619C41FA815EB00626411 /* DetailRepayHeader.m in Sources */,
 				84C619C61FA815EB00626411 /* PayMethodCell.m in Sources */,
-				CC5109DD20E47428005DEF28 /* ViewController.swift in Sources */,
 				847FC87020E48F1500A0F797 /* YXTableViewExtention.swift in Sources */,
 				CCC1E4062057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */,
 				84192AA6207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */,
@@ -5430,7 +5425,6 @@
 				84C619CA1FA8161F00626411 /* LoanPeriodForDetailsVCModule.m in Sources */,
 				CC80DFF1206A5120000F9BAC /* SuperLoanCell.swift in Sources */,
 				84C619CD1FA8161F00626411 /* LoanPaymentDetailVCModule.m in Sources */,
-				CC5109DE20E4742E005DEF28 /* ViewController.swift in Sources */,
 				84C619CE1FA8161F00626411 /* LoanPeriodListVCModule.m in Sources */,
 				84C619D01FA8161F00626411 /* UserBankCardListVCModule.m in Sources */,
 				CC6D1B2A20C6341E007446E7 /* MyOrdersCell.swift in Sources */,
