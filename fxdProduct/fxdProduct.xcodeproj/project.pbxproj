@@ -374,6 +374,8 @@
 		847FC89020E4C92200A0F797 /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC88420E4C92200A0F797 /* LewPopupBackgroundView.m */; };
 		847FC89420E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC89220E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m */; };
 		847FC89520E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC89220E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m */; };
+		847FC89F20E5D70C00A0F797 /* YXTableViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC86E20E48F1500A0F797 /* YXTableViewExtention.swift */; };
+		847FC8A020E5D70C00A0F797 /* YXTableViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC86F20E48F1500A0F797 /* YXTableViewMaker.swift */; };
 		848139631F568A8600CD701C /* YX_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848139621F568A8600CD701C /* YX_TextField.swift */; };
 		848139641F568A8600CD701C /* YX_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848139621F568A8600CD701C /* YX_TextField.swift */; };
 		848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
@@ -5412,6 +5414,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847FC89F20E5D70C00A0F797 /* YXTableViewExtention.swift in Sources */,
+				847FC8A020E5D70C00A0F797 /* YXTableViewMaker.swift in Sources */,
 				84FF95BA208F0A8C0032BF5D /* PushInfoModel.m in Sources */,
 				84332C8A206CCD87009A9121 /* CameraManager.swift in Sources */,
 				846D58CE20901A9500B344C5 /* FXD_WithholdAuthViewController.swift in Sources */,
