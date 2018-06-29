@@ -15,9 +15,6 @@ import UIKit
     //筛选
     func filterBtnClick(_ sender: UIButton)
     
-    //筛选
-    func tabBtnClick(_ sender: UIButton)
-    
 }
 
 class SupermarketHeaderView: UIView {
@@ -57,9 +54,9 @@ extension SupermarketHeaderView{
         self.addSubview(sortBgView)
         sortBgView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(0)
-            make.top.equalTo(self).offset(10)
+            make.top.equalTo(self).offset(0)
             make.width.equalTo(_k_w / 2)
-            make.height.equalTo(36)
+            make.height.equalTo(45)
         }
         
         let sortView = UIView()
@@ -88,7 +85,7 @@ extension SupermarketHeaderView{
         sortImageBtn?.addTarget(self, action: #selector(sortBtnClick(_:)), for: .touchUpInside)
         sortView.addSubview(sortImageBtn!)
         sortImageBtn?.snp.makeConstraints { (make) in
-            make.right.equalTo(sortView.snp.right).offset(-5)
+            make.right.equalTo(sortView.snp.right).offset(10)
             make.centerY.equalTo(sortView.snp.centerY)
         }
         
@@ -107,9 +104,9 @@ extension SupermarketHeaderView{
         self.addSubview(filterBgView)
         filterBgView.snp.makeConstraints { (make) in
             make.right.equalTo(self).offset(0)
-            make.top.equalTo(self).offset(10)
+            make.top.equalTo(self).offset(0)
             make.width.equalTo(_k_w / 2)
-            make.height.equalTo(36)
+            make.height.equalTo(45)
         }
         
         let filterView = UIView()
@@ -138,7 +135,7 @@ extension SupermarketHeaderView{
         filterImageBtn?.addTarget(self, action: #selector(filterBtnClick(_:)), for: .touchUpInside)
         filterView.addSubview(filterImageBtn!)
         filterImageBtn?.snp.makeConstraints { (make) in
-            make.right.equalTo(filterView.snp.right).offset(-5)
+            make.right.equalTo(filterView.snp.right).offset(10)
             make.centerY.equalTo(filterView.snp.centerY)
         }
         

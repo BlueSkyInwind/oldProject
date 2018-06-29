@@ -69,16 +69,6 @@ extension SortView{
             make.height.equalTo(160)
         }
     }
-    
-//    override var  frame:(CGRect){
-//
-//        didSet{
-//
-//            let newFrame = CGRect(x:0,y:360,width:_k_w,height:_k_h - 360)
-//            super.frame = newFrame
-//
-//        }
-//    }
 }
 
 
@@ -108,7 +98,7 @@ extension SortView{
         if index == indexPath.row {
             
             cell.rightImageView?.isHidden = false
-            cell.leftNameLabel?.textColor = UI_MAIN_COLOR
+            cell.leftNameLabel?.textColor = UIColor.init(red: 75/255.0, green: 135/255.0, blue: 233/255.0, alpha: 1.0)
         }
         return cell
     }

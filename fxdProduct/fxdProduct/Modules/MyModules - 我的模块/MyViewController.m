@@ -23,6 +23,8 @@
 #import "LoginViewController.h"
 #import "RepayMentViewModel.h"
 #import "RepayListInfo.h"
+#import "IdeaBackViewController.h"
+
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate,MineHeaderViewDelegate>
 {
     //标题数组
@@ -44,16 +46,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    titleAry=@[@"我的账单",@"我的订单",@"我的消息",@"收藏",@"我的银行卡",@"更多"];
-    imgAry=@[@"bill",@"order",@"message",@"6_my_icon_2",@"6_my_icon_05",@"icon_my_setup"];
+    titleAry=@[@"我的订单",@"优惠券",@"消息",@"会员中心",@"银行卡",@"意见反馈",@"关于我们",@"设置"];
+    imgAry=@[@"order",@"my-icon02",@"my-icon03",@"my-icon04",@"my-icon05",@"my-icon07",@"my-icon08",@"my-icon09"];
     if (@available(iOS 11.0, *)) {
         self.MyViewTable.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
     self.MyViewTable.scrollEnabled = YES;
-
-    [self.MyViewTable registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"bCell"];
+    [self.MyViewTable registerClass:[MineCell class] forCellReuseIdentifier:@"MineCell"];
     
 }
 
@@ -70,8 +71,6 @@
         [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
         [self.MyViewTable reloadData];
     }
-//    [self getExperienceValueGrade];
-//    [self getPersonalCenterInfo];
     
 }
 
@@ -83,9 +82,9 @@
 -(void)addHeaderView{
     
     int height;
-    height = 238;
+    height = 120;
     if (UI_IS_IPHONE6P) {
-        height = 268;
+        height = 160;
     }
     UIView *headerBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, height)];
     //添加自定义头部
@@ -99,10 +98,7 @@
         _headerView.accountLabel.text = @"未登录，请登录";
     }
     [self.MyViewTable setTableHeaderView:headerBgView];
-    _middleView = [[MineMiddleView alloc]initWithFrame:CGRectZero];
-    _middleView.backgroundColor = [UIColor whiteColor];
-    _middleView.delegate = self;
-    [headerBgView addSubview:_middleView];
+
 }
 
 -(void)memberBtnClick{
@@ -113,43 +109,6 @@
     }
     MemberCenterViewController * memberCenterVC = [[MemberCenterViewController alloc]init];
     [self.navigationController pushViewController:memberCenterVC animated:true];
-}
-/**
- 经验值体系-展示等级
- */
--(void)getExperienceValueGrade{
-    
-    MineViewModel *mineMV = [[MineViewModel alloc]init];
-    [mineMV setBlockWithReturnBlock:^(id returnValue) {
-        
-        BaseResultModel *  baseResultM = returnValue;
-        if ([baseResultM.errCode isEqualToString:@"0"]) {
-            ExperienceValueGradeModel *model = [[ExperienceValueGradeModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            [_headerView.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.gradeLogo]];
-
-            if ([model.gradeName isEqualToString:@"薪薪人类"]) {
-//                _headerView.isFirstLevel = @"2";
-            }
-            _headerView.accountLabel.text = model.mobilePhone;
-            _headerView.nameLabel.text = model.gradeName;
-            _h5_url_ = model.h5_url_;
-        }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [mineMV getExperienceValueGrad];
-}
-
-/**
- 点击等级跳转
- */
--(void)shadowImageViewClick{
-    
-    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-    webView.urlStr = _h5_url_;
-    [self.navigationController pushViewController:webView animated:YES];
 }
 
 /**
@@ -251,23 +210,35 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 2;
+    
+    switch (section) {
+        case 0:
+            return 2;
+            break;
+        case 1:
+            return 3;
+            break;
+        case 2:
+            return 2;
+            break;
+        case 3:
+            return 1;
+            break;
+        default:
+            break;
     }
-    if (section == 1) {
-        return 2;
-    }
-    return 2;
+    
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 54;
+    return 55;
 }
 
 //创建自定义头视图
@@ -284,59 +255,70 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *bCellId = @"bCell";
-    NextViewCell *bCell = [tableView dequeueReusableCellWithIdentifier:bCellId];
+
+    MineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MineCell"];
     
-    if (!bCell) {
-        bCell = [[[NSBundle mainBundle]loadNibNamed:@"MyViewBCell" owner:self options:nil] lastObject];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"MineCell" owner:self options:nil] lastObject];
     }
     
     NSInteger index = 0;
-    if (indexPath.section == 0) {
-        index = indexPath.row;
-    }
-    if (indexPath.section == 1) {
-        
-        index = indexPath.row + 2;
-    }
-    if (indexPath.section == 2) {
-        index = indexPath.row + 4;
+    switch (indexPath.section) {
+        case 0:
+            index = indexPath.row;
+            break;
+        case 1:
+            index = indexPath.row + 2;
+            break;
+        case 2:
+            index = indexPath.row + 5;
+            break;
+        case 3:
+            index = indexPath.row + 7;
+            break;
+        default:
+            break;
     }
     
-    bCell.lblTitle.text=titleAry[index];
-    bCell.imgView.image=[UIImage imageNamed:imgAry[index]];
-    bCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if((indexPath.section == 0 && indexPath.row == 1)||(indexPath.section == 1 && indexPath.row == 1) || (indexPath.section == 2 && indexPath.row == 1)) {
-        bCell.lineView.hidden=YES;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.titleImageView.image = [UIImage imageNamed:imgAry[index]];
+    cell.titleLabel.text = titleAry[index];
+
+    if((indexPath.section == 0 && indexPath.row == 1)||(indexPath.section == 1 && indexPath.row == 2) || (indexPath.section == 2 && indexPath.row == 1) || indexPath.section == 3) {
+        
+        cell.lineView.hidden = true;
+
     } else {
-        bCell.lineView.hidden=NO;
+
+        cell.lineView.hidden = false;
+        
     }
     if (indexPath.row == 0 && indexPath.section == 1) {
         if ([model.isDisplay isEqualToString:@"1"]) {
-            bCell.messageLabel.text = model.countNum;
-            bCell.messageView.hidden = false;
+//            bCell.messageLabel.text = model.countNum;
+//            bCell.messageView.hidden = false;
 
             if (model.countNum.integerValue > 9) {
                
-                bCell.messageViewX.constant = 25;
-                bCell.messageViewWidth.constant = 24;
+//                bCell.messageViewX.constant = 25;
+//                bCell.messageViewWidth.constant = 24;
 
             }else{
                 
-                bCell.messageViewX.constant = 33;
-                bCell.messageViewWidth.constant = 13;
+//                bCell.messageViewX.constant = 33;
+//                bCell.messageViewWidth.constant = 13;
 
             }
             if (model.countNum.integerValue > 99) {
-                bCell.messageLabel.text = @"99+";
+//                bCell.messageLabel.text = @"99+";
             }
         }else{
-            bCell.messageView.hidden = true;
+//            bCell.messageView.hidden = true;
         }
     }else{
-        bCell.messageView.hidden = true;
+//        bCell.messageView.hidden = true;
     }
-    return bCell;
+    return cell;
 }
 
 
@@ -354,16 +336,14 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                    [self getData];
-//                    MyBillViewController *controller=[[MyBillViewController alloc]init];
-//                    [self.navigationController pushViewController:controller animated:true];
-                }
-                    break;
-                case 1:
-                {
                     MyOrdersViewController * controller = [[MyOrdersViewController alloc]init];
                     [self.navigationController pushViewController:controller animated:true];
                 }
+                    break;
+                case 1:
+
+                    [self couponViewTap];
+                    
                     break;
                 default:
                     break;
@@ -381,12 +361,15 @@
                     }
                     break;
                 case 1:
-                    {
                         
-                        CollectionViewController * controller = [[CollectionViewController alloc]init];
-                        [self.navigationController pushViewController:controller animated:true];
+                    [self memberBtnClick];
 
-                    }
+                    break;
+                case 2:
+                {
+                    MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
+                    [self.navigationController pushViewController:myCrad animated:YES];
+                }
                     break;
                 default:
                     break;
@@ -397,19 +380,28 @@
             switch (indexPath.row) {
                 case 0:
                     {
-                        MyCardsViewController *myCrad=[[MyCardsViewController alloc]initWithNibName:@"MyCardsViewController" bundle:nil];
-                        [self.navigationController pushViewController:myCrad animated:YES];
+                        if ([FXD_Utility sharedUtility].loginFlage) {
+                            IdeaBackViewController *ideaBack=[[IdeaBackViewController alloc]initWithNibName:@"IdeaBackViewController" bundle:nil];
+                            [self.navigationController pushViewController:ideaBack animated:YES];
+                        } else {
+                            [self presentLogin:self];
+                        }
                     }
                     break;
                 case 1:
-                    {
-                        MoreViewController *ticket=[[MoreViewController alloc]init];
-                        [self.navigationController pushViewController:ticket animated:YES];
-                    }
+                    
+                    [self obtainQuestionWebUrl:@"11"];
+                    
                     break;
                 default:
                     break;
             }
+            break;
+        case 3:
+        {
+            MoreViewController *ticket=[[MoreViewController alloc]init];
+            [self.navigationController pushViewController:ticket animated:YES];
+        }
             break;
         default:
             break;
@@ -423,33 +415,23 @@
     [vc presentViewController:nav animated:YES completion:nil];
 }
 
-
-#pragma mark 我的账单状态
--(void)getData{
+-(void)obtainQuestionWebUrl:(NSString *)typeCode{
     
-    RepayMentViewModel *viewModel = [[RepayMentViewModel alloc]init];
-    [viewModel setBlockWithReturnBlock:^(id returnValue) {
-        
+    CommonViewModel * commonVM = [[CommonViewModel alloc]init];
+    [commonVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = returnValue;
         if ([baseResultM.errCode isEqualToString:@"0"]) {
-            
-            MyBillViewController *controller=[[MyBillViewController alloc]init];
-            [self.navigationController pushViewController:controller animated:true];
-            
-        }else if([baseResultM.friendErrMsg containsString:@"正在"]||[baseResultM.friendErrMsg containsString:@"结清"] || [baseResultM.friendErrMsg containsString:@"还款"]){
-          
-            self.tabBarController.selectedIndex = 0;
-        }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+            NSDictionary * dic = (NSDictionary *)baseResultM.data;
+            FXDWebViewController * fxdwebVC = [[FXDWebViewController alloc]init];
+            fxdwebVC.urlStr =  [dic objectForKey:@"productProURL"];
+            [self.navigationController pushViewController:fxdwebVC animated:YES];
+        }else {
+            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
-        
     } WithFaileBlock:^{
-        
     }];
-    [viewModel fatchQueryWeekShouldAlsoAmount:nil];
-    
+    [commonVM obtainProductProtocolType:nil typeCode:typeCode apply_id:nil periods:nil stagingType:nil];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

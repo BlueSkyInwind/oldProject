@@ -1034,8 +1034,6 @@
 		CC742DC820526FD900D645CC /* HG_Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DC420526FD800D645CC /* HG_Manager.m */; };
 		CC742DCF2052704B00D645CC /* P2PViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DCE2052704B00D645CC /* P2PViewController.m */; };
 		CC742DD02052704B00D645CC /* P2PViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC742DCE2052704B00D645CC /* P2PViewController.m */; };
-		CC80DFEC206A4924000F9BAC /* FXD_SuperLoanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC80DFEB206A4924000F9BAC /* FXD_SuperLoanViewController.m */; };
-		CC80DFED206A4924000F9BAC /* FXD_SuperLoanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC80DFEB206A4924000F9BAC /* FXD_SuperLoanViewController.m */; };
 		CC80DFF0206A5120000F9BAC /* SuperLoanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC80DFEF206A5120000F9BAC /* SuperLoanCell.swift */; };
 		CC80DFF1206A5120000F9BAC /* SuperLoanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC80DFEF206A5120000F9BAC /* SuperLoanCell.swift */; };
 		CC80DFF3206B291D000F9BAC /* SuperLoanHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC80DFF2206B291D000F9BAC /* SuperLoanHeaderCell.swift */; };
@@ -1110,6 +1108,12 @@
 		CCCDA8781EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
 		CCCDA8841EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */; };
 		CCCDA8851EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */; };
+		CCCE27FB20E5D61A00180862 /* SupermarketTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE27F820E5D51400180862 /* SupermarketTabCell.swift */; };
+		CCCE27FC20E5D61B00180862 /* SupermarketTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE27F820E5D51400180862 /* SupermarketTabCell.swift */; };
+		CCCE280320E614AB00180862 /* HomeBetweenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE280220E614AB00180862 /* HomeBetweenCell.swift */; };
+		CCCE280420E614AB00180862 /* HomeBetweenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE280220E614AB00180862 /* HomeBetweenCell.swift */; };
+		CCCE280620E6382100180862 /* MineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE280520E6382100180862 /* MineCell.swift */; };
+		CCCE280720E6382100180862 /* MineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE280520E6382100180862 /* MineCell.swift */; };
 		CCCE40BD1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40BC1EE7CCB300E3F102 /* IdeaBackParamModel.m */; };
 		CCCE40BE1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40BC1EE7CCB300E3F102 /* IdeaBackParamModel.m */; };
 		CCCE40C11EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40C01EE7CDF900E3F102 /* PserInfoViewModel.m */; };
@@ -2018,8 +2022,6 @@
 		CC742DC420526FD800D645CC /* HG_Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HG_Manager.m; sourceTree = "<group>"; };
 		CC742DCD2052704A00D645CC /* P2PViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P2PViewController.h; sourceTree = "<group>"; };
 		CC742DCE2052704B00D645CC /* P2PViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P2PViewController.m; sourceTree = "<group>"; };
-		CC80DFEA206A4924000F9BAC /* FXD_SuperLoanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FXD_SuperLoanViewController.h; sourceTree = "<group>"; };
-		CC80DFEB206A4924000F9BAC /* FXD_SuperLoanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FXD_SuperLoanViewController.m; sourceTree = "<group>"; };
 		CC80DFEF206A5120000F9BAC /* SuperLoanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLoanCell.swift; sourceTree = "<group>"; };
 		CC80DFF2206B291D000F9BAC /* SuperLoanHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLoanHeaderCell.swift; sourceTree = "<group>"; };
 		CC80DFF5206B3DD1000F9BAC /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
@@ -2073,6 +2075,9 @@
 		CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewModel.m; sourceTree = "<group>"; };
 		CCCDA8821EE028A200B48DFF /* UnbundlingBankCardViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnbundlingBankCardViewModel.h; sourceTree = "<group>"; };
 		CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnbundlingBankCardViewModel.m; sourceTree = "<group>"; };
+		CCCE27F820E5D51400180862 /* SupermarketTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupermarketTabCell.swift; sourceTree = "<group>"; };
+		CCCE280220E614AB00180862 /* HomeBetweenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBetweenCell.swift; sourceTree = "<group>"; };
+		CCCE280520E6382100180862 /* MineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineCell.swift; sourceTree = "<group>"; };
 		CCCE40BB1EE7CCB300E3F102 /* IdeaBackParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdeaBackParamModel.h; sourceTree = "<group>"; };
 		CCCE40BC1EE7CCB300E3F102 /* IdeaBackParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaBackParamModel.m; sourceTree = "<group>"; };
 		CCCE40BF1EE7CDF900E3F102 /* PserInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PserInfoViewModel.h; sourceTree = "<group>"; };
@@ -3359,6 +3364,7 @@
 				CC5F9AAF20735D990042DFDA /* SDCycleScrollCell.swift */,
 				CC8BB751208F174600ADA647 /* RecentCell.swift */,
 				CC98718820D396EC00AA3F99 /* HomeHotCell.swift */,
+				CCCE280220E614AB00180862 /* HomeBetweenCell.swift */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -4211,6 +4217,7 @@
 				CC4BB60D1F17712E0027A0AA /* LevelDescriptionView.h */,
 				CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */,
 				CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */,
+				CCCE280520E6382100180862 /* MineCell.swift */,
 			);
 			name = MineView;
 			sourceTree = "<group>";
@@ -4364,8 +4371,6 @@
 		CC80DFE9206A487E000F9BAC /* SuperLoanModule - 贷超模块 */ = {
 			isa = PBXGroup;
 			children = (
-				CC80DFEA206A4924000F9BAC /* FXD_SuperLoanViewController.h */,
-				CC80DFEB206A4924000F9BAC /* FXD_SuperLoanViewController.m */,
 				CC4F062B207C557E0030A12A /* RecentViewController.swift */,
 				CC1AC8E32091B7A7009B5BD4 /* HotRecommendationViewController.swift */,
 				CC1AC8E620931E1A009B5BD4 /* LoanListViewController.swift */,
@@ -4388,6 +4393,7 @@
 				CC4F0628207C4E410030A12A /* SuperLoanNoneCell.swift */,
 				CCB2513A20B7FC53007E20C6 /* SupermarketCell.swift */,
 				CC872C4E20BB94DB00FBF10C /* SupermarketHeaderView.swift */,
+				CCCE27F820E5D51400180862 /* SupermarketTabCell.swift */,
 			);
 			path = SuperLoanView;
 			sourceTree = "<group>";
@@ -5148,6 +5154,7 @@
 				CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */,
 				84F1E29F1FD90EE0007D3381 /* UserDataInformationModel.m in Sources */,
 				84A52EA0207DFA72000BF3E8 /* MemberShipInfoModel.m in Sources */,
+				CCCE280320E614AB00180862 /* HomeBetweenCell.swift in Sources */,
 				CC4F0629207C4E410030A12A /* SuperLoanNoneCell.swift in Sources */,
 				638C3F2E1CF53662000446A7 /* RepayMentAvailableRedpackets.m in Sources */,
 				635B2FBA1D6AEE22009CEFE0 /* GlobalConfig.m in Sources */,
@@ -5183,6 +5190,7 @@
 				63FC24FD1D98F7E9006F58F3 /* UIPasteboard+YYText.m in Sources */,
 				63E1ECCF1E1B8FAA0079A2F8 /* TAAbstractDotView.m in Sources */,
 				636B1B581C23BB4100450358 /* GetMoneyHistoryBaseClass.m in Sources */,
+				CCCE280620E6382100180862 /* MineCell.swift in Sources */,
 				84EBE9D320C78E560045F538 /* OrderConfirmationViewController.swift in Sources */,
 				CC80DFF9206B4124000F9BAC /* SortCell.swift in Sources */,
 				0F6AAF391C30D8950060F137 /* MyCardCell.m in Sources */,
@@ -5304,6 +5312,7 @@
 				63553AD81E5D2A4200B2C1FF /* DataDisplayCell.m in Sources */,
 				637963AA1CABD0F8002A5910 /* ApprovalAmountResult.m in Sources */,
 				63A24C6D1BE063A90036E8EF /* UIWindow+Launch.m in Sources */,
+				CCCE27FB20E5D61A00180862 /* SupermarketTabCell.swift in Sources */,
 				8466936B20C6792800F47A24 /* RechargeCardTableViewCell.swift in Sources */,
 				84C61A0E1FA8241200626411 /* FXD_LaunchConfiguration.m in Sources */,
 				CC45E72F1FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
@@ -5315,7 +5324,6 @@
 				63A24C5E1BE063A90036E8EF /* NSDate+Extend.m in Sources */,
 				63D43EF61D41F76D0076AC7F /* YYCache.m in Sources */,
 				CCC5DE3520C65C38002A7553 /* MyBillViewController.swift in Sources */,
-				CC80DFEC206A4924000F9BAC /* FXD_SuperLoanViewController.m in Sources */,
 				84E2BDE01F53F3FB00E447EB /* UserDataModel.m in Sources */,
 				63F254861E49A45900852CF1 /* HMScannerBorder.m in Sources */,
 				84192A992079B1E10042E8F8 /* MemberCenterHeaderView.swift in Sources */,
@@ -5471,7 +5479,6 @@
 				CC0346291F3C4FBF001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */,
 				84ED5B741F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
 				CCEFC6EA207E0B610006D731 /* QbbSubmitInfoModel.m in Sources */,
-				CC80DFED206A4924000F9BAC /* FXD_SuperLoanViewController.m in Sources */,
 				84EBEA1020C93A450045F538 /* UITableViewCell+YXTool.m in Sources */,
 				843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */,
 				84E306D01F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
@@ -5619,6 +5626,7 @@
 				84A37FF91FAC12A8008FB7AF /* QRCodePopView.m in Sources */,
 				8449AC2A2062457A00526935 /* YXRecordView.swift in Sources */,
 				CC6F06941F7DF6C200FA889E /* ShanLinBackAlertView.swift in Sources */,
+				CCCE280420E614AB00180862 /* HomeBetweenCell.swift in Sources */,
 				CC989BEE1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */,
 				CC0DF9CD1EA5B1090024841A /* YYTextEffectWindow.m in Sources */,
 				CCCC0A8F1F677B9B007E1EB0 /* UserDataResult.m in Sources */,
@@ -5654,6 +5662,7 @@
 				CC85C6291FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */,
 				CC5FC5AF1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift in Sources */,
 				840911A31F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */,
+				CCCE280720E6382100180862 /* MineCell.swift in Sources */,
 				84EBE9D420C78E560045F538 /* OrderConfirmationViewController.swift in Sources */,
 				84ED5B6C1F4AC606004C0A59 /* SeniorCertificationView.m in Sources */,
 				CC0DF9FD1EA5B1090024841A /* Custom_BaseInfoExt.m in Sources */,
@@ -5780,6 +5789,7 @@
 				CC0DFA811EA5B1090024841A /* LunchVCModules.m in Sources */,
 				847FC8A320E609F200A0F797 /* loginAndRegisterModules.swift in Sources */,
 				8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */,
+				CCCE27FC20E5D61B00180862 /* SupermarketTabCell.swift in Sources */,
 				84EBE9D120C69E410045F538 /* PhoneRechargePopView.swift in Sources */,
 				84EBE9CB20C696FA0045F538 /* RechargeTypePopView.swift in Sources */,
 				84192AA32079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */,

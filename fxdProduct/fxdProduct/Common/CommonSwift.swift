@@ -100,3 +100,12 @@ let TIP_LINE_COLOR = UIColor.init(red: 229/255.0, green: 229/255.0, blue: 229/25
 
 let OVERDUEDATE_COLOR = UIColor.init(red: 249/255.0, green: 87/255.0, blue: 87/255.0, alpha: 1)
 
+let DWONLOAD_COLOR = UIColor.init(red: 131/255.0, green: 131/255.0, blue: 131/255.0, alpha: 1)
+
+let SUPERMARK_LINE_COLOR = UIColor.init(red: 111/255.0, green: 111/255.0, blue: 111/255.0, alpha: 1)
+
+let SUPERMARK_QUOTA_COLOR = UIColor.init(red: 255/255.0, green: 83/255.0, blue: 39/255.0, alpha: 1)
+
+let SUPERMARK_TERM_COLOR = UIColor.init(red: 105/255.0, green: 105/255.0, blue: 105/255.0, alpha: 1)
+
+let MESSAGE_TITLE_COLOR = UIColor.init(red: 63/255.0, green: 63/255.0, blue: 63/255.0, alpha: 1)
