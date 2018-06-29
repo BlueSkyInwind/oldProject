@@ -381,10 +381,8 @@
                     break;
                 case 1:
                     {
-                        ViewController * controller = [[ViewController alloc]init];
-//                        [self presentViewController:controller animated:true completion:nil];
                         
-//                        CollectionViewController * controller = [[CollectionViewController alloc]init];
+                        CollectionViewController * controller = [[CollectionViewController alloc]init];
                         [self.navigationController pushViewController:controller animated:true];
 
                     }
