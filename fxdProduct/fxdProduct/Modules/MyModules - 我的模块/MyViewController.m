@@ -373,7 +373,10 @@
             switch (indexPath.row) {
                 case 0:
                     {
-                        MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+                        
+                        loginAndRegisterModules *myMessageVC=[[loginAndRegisterModules alloc]init];
+
+//                        MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
                         [self.navigationController pushViewController:myMessageVC animated:true];
                     }
                     break;

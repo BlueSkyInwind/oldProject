@@ -376,6 +376,16 @@
 		847FC89520E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC89220E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m */; };
 		847FC89F20E5D70C00A0F797 /* YXTableViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC86E20E48F1500A0F797 /* YXTableViewExtention.swift */; };
 		847FC8A020E5D70C00A0F797 /* YXTableViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC86F20E48F1500A0F797 /* YXTableViewMaker.swift */; };
+		847FC8A220E609F200A0F797 /* loginAndRegisterModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC8A120E609F200A0F797 /* loginAndRegisterModules.swift */; };
+		847FC8A320E609F200A0F797 /* loginAndRegisterModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC8A120E609F200A0F797 /* loginAndRegisterModules.swift */; };
+		847FC8A520E60C6100A0F797 /* NewLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC8A420E60C6100A0F797 /* NewLoginView.swift */; };
+		847FC8A620E60C6100A0F797 /* NewLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC8A420E60C6100A0F797 /* NewLoginView.swift */; };
+		847FC8A820E60CE300A0F797 /* GeneralInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC8A720E60CE300A0F797 /* GeneralInputView.swift */; };
+		847FC8A920E60CE300A0F797 /* GeneralInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC8A720E60CE300A0F797 /* GeneralInputView.swift */; };
+		847FC8AB20E6251100A0F797 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC8AA20E6251100A0F797 /* RegisterView.swift */; };
+		847FC8AC20E6251100A0F797 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC8AA20E6251100A0F797 /* RegisterView.swift */; };
+		847FC8AE20E6261800A0F797 /* LoginAndRegisterSlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC8AD20E6261800A0F797 /* LoginAndRegisterSlideView.swift */; };
+		847FC8AF20E6261800A0F797 /* LoginAndRegisterSlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC8AD20E6261800A0F797 /* LoginAndRegisterSlideView.swift */; };
 		848139631F568A8600CD701C /* YX_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848139621F568A8600CD701C /* YX_TextField.swift */; };
 		848139641F568A8600CD701C /* YX_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848139621F568A8600CD701C /* YX_TextField.swift */; };
 		848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
@@ -1709,6 +1719,11 @@
 		847FC88420E4C92200A0F797 /* LewPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupBackgroundView.m; sourceTree = "<group>"; };
 		847FC89220E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		847FC89320E4CD1700A0F797 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		847FC8A120E609F200A0F797 /* loginAndRegisterModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginAndRegisterModules.swift; sourceTree = "<group>"; };
+		847FC8A420E60C6100A0F797 /* NewLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLoginView.swift; sourceTree = "<group>"; };
+		847FC8A720E60CE300A0F797 /* GeneralInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInputView.swift; sourceTree = "<group>"; };
+		847FC8AA20E6251100A0F797 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		847FC8AD20E6261800A0F797 /* LoginAndRegisterSlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAndRegisterSlideView.swift; sourceTree = "<group>"; };
 		848139621F568A8600CD701C /* YX_TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YX_TextField.swift; sourceTree = "<group>"; };
 		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
 		848FC6461FFE132500918CE9 /* CommonTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTool.swift; sourceTree = "<group>"; };
@@ -2245,7 +2260,7 @@
 				CC989C321F4D86E1000CDACF /* AuthenticationCenterView */,
 				CC4BB60C1F17709D0027A0AA /* MineView */,
 				8438F7111EE14D2D0089E121 /* MoreView */,
-				84420A5D1ED6788D00DFBFE0 /* LoginView */,
+				84420A5D1ED6788D00DFBFE0 /* LoginAndRegisterView */,
 				63553AD41E5D29FC00B2C1FF /* UserDataCell */,
 				0F047F431C507D0D002ED7C0 /* writeView */,
 				1A762F711C1FBFB800964719 /* MyView */,
@@ -3411,6 +3426,7 @@
 		63ED333B1B6B523E008B6085 /* LoginAndRegisterModules - 登录注册 */ = {
 			isa = PBXGroup;
 			children = (
+				847FC8A120E609F200A0F797 /* loginAndRegisterModules.swift */,
 				84C61A101FA828D000626411 /* FindPass */,
 				842C0B511ED5909E00366D11 /* LoginViewController.h */,
 				842C0B521ED5909E00366D11 /* LoginViewController.m */,
@@ -3747,14 +3763,18 @@
 			path = ReplayModel;
 			sourceTree = "<group>";
 		};
-		84420A5D1ED6788D00DFBFE0 /* LoginView */ = {
+		84420A5D1ED6788D00DFBFE0 /* LoginAndRegisterView */ = {
 			isa = PBXGroup;
 			children = (
 				84420A5E1ED678E200DFBFE0 /* LoginView.h */,
 				84420A5F1ED678E200DFBFE0 /* LoginView.m */,
 				84420A601ED678E200DFBFE0 /* LoginView.xib */,
+				847FC8AD20E6261800A0F797 /* LoginAndRegisterSlideView.swift */,
+				847FC8A720E60CE300A0F797 /* GeneralInputView.swift */,
+				847FC8A420E60C6100A0F797 /* NewLoginView.swift */,
+				847FC8AA20E6251100A0F797 /* RegisterView.swift */,
 			);
-			path = LoginView;
+			path = LoginAndRegisterView;
 			sourceTree = "<group>";
 		};
 		8449AC1C2062455E00526935 /* VideoVerify */ = {
@@ -4965,6 +4985,7 @@
 				84EBEA0620C91E880045F538 /* PhoneCardListModel.m in Sources */,
 				84C619C71FA815EB00626411 /* PayMoneyCell.m in Sources */,
 				84EBE9C720C692FB0045F538 /* RechargeBottomView.swift in Sources */,
+				847FC8A820E60CE300A0F797 /* GeneralInputView.swift in Sources */,
 				84C619C91FA815EB00626411 /* RepayListCell.m in Sources */,
 				84C619BC1FA815A800626411 /* LoanPeriodForDetailsVCModule.m in Sources */,
 				63832C881CB7513500C6F194 /* NSData+AES.m in Sources */,
@@ -4999,6 +5020,7 @@
 				63DE56FF1DE7CD2900747AE2 /* FXDWebViewController.m in Sources */,
 				CC742D98204E470100D645CC /* BankCardCell.swift in Sources */,
 				CC594E631FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */,
+				847FC8AE20E6261800A0F797 /* LoginAndRegisterSlideView.swift in Sources */,
 				8449AC2D2062457A00526935 /* VideoVerifyViewController.swift in Sources */,
 				84C6B08120DA228A008BD264 /* CreaditCardViewController.swift in Sources */,
 				63FC24F41D98F7E9006F58F3 /* YYTextMagnifier.m in Sources */,
@@ -5250,6 +5272,7 @@
 				636B1B9A1C2D153900450358 /* HomeViewModel.m in Sources */,
 				84C45C081FBC55860086E8DB /* DiscountTicketParam.m in Sources */,
 				84C6B0A520DB4EE5008BD264 /* CreaditCardModel.m in Sources */,
+				847FC8AB20E6251100A0F797 /* RegisterView.swift in Sources */,
 				63E5C7611D4AFDBF009A633C /* CardInfo.m in Sources */,
 				84DFBECF1F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */,
 				84ED5B731F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
@@ -5285,6 +5308,7 @@
 				84C61A0E1FA8241200626411 /* FXD_LaunchConfiguration.m in Sources */,
 				CC45E72F1FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
 				84EBE9D020C69E410045F538 /* PhoneRechargePopView.swift in Sources */,
+				847FC8A220E609F200A0F797 /* loginAndRegisterModules.swift in Sources */,
 				84EBE9CA20C696FA0045F538 /* RechargeTypePopView.swift in Sources */,
 				63A24C681BE063A90036E8EF /* UIImage+Extend.m in Sources */,
 				CC742DA8204E704D00D645CC /* AccountModel.m in Sources */,
@@ -5298,6 +5322,7 @@
 				843FF1F81F20863600ECCE16 /* PaymentDetailModel.m in Sources */,
 				CCCFFADD20609D5E008556D2 /* NewProtocolParamModel.m in Sources */,
 				63145AB41CA2952400D04ED8 /* LoginMsgResult.m in Sources */,
+				847FC8A520E60C6100A0F797 /* NewLoginView.swift in Sources */,
 				CC80DFFC206B70A6000F9BAC /* FilterView.swift in Sources */,
 				CCCFFAE12060B6EE008556D2 /* HgLoanProtoolListModel.m in Sources */,
 				CCC9FB65207A140C00B952BD /* SuperLoanHeaderView.swift in Sources */,
@@ -5430,6 +5455,7 @@
 				CC6D1B2A20C6341E007446E7 /* MyOrdersCell.swift in Sources */,
 				84EBEA0720C91E880045F538 /* PhoneCardListModel.m in Sources */,
 				84C619D11FA8161F00626411 /* BankListCell.m in Sources */,
+				847FC8A920E60CE300A0F797 /* GeneralInputView.swift in Sources */,
 				84EBE9C820C692FB0045F538 /* RechargeBottomView.swift in Sources */,
 				84C619D21FA8161F00626411 /* DetailRepayHeader.m in Sources */,
 				CC4F0639207DE90B0030A12A /* FindViewModel.m in Sources */,
@@ -5464,6 +5490,7 @@
 				84BC53D41FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */,
 				CC0DF95A1EA5B1090024841A /* NSData+AES.m in Sources */,
 				CC594E681FCBFD0B00D53F60 /* WithdrawCashModel.m in Sources */,
+				847FC8AF20E6261800A0F797 /* LoginAndRegisterSlideView.swift in Sources */,
 				CC742DAD204E730700D645CC /* SubmitAccountParamModel.m in Sources */,
 				CC80E00D206B8A70000F9BAC /* CompQueryViewModel.m in Sources */,
 				CC0DF95B1EA5B1090024841A /* LivenessBaseClass.m in Sources */,
@@ -5715,6 +5742,7 @@
 				849459D11FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift in Sources */,
 				847FC89520E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m in Sources */,
 				CC8BC95D1FEB5873008E135E /* MineViewModel.m in Sources */,
+				847FC8AC20E6251100A0F797 /* RegisterView.swift in Sources */,
 				844E5F4C1ED94C9C00753671 /* RegViewModel.m in Sources */,
 				843FF1F91F20863600ECCE16 /* PaymentDetailModel.m in Sources */,
 				CC0DFA611EA5B1090024841A /* FXD_Tool.m in Sources */,
@@ -5750,6 +5778,7 @@
 				8466936C20C6792800F47A24 /* RechargeCardTableViewCell.swift in Sources */,
 				CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchVCModules.m in Sources */,
+				847FC8A320E609F200A0F797 /* loginAndRegisterModules.swift in Sources */,
 				8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */,
 				84EBE9D120C69E410045F538 /* PhoneRechargePopView.swift in Sources */,
 				84EBE9CB20C696FA0045F538 /* RechargeTypePopView.swift in Sources */,
@@ -5763,6 +5792,7 @@
 				CC0DFA891EA5B1090024841A /* GetMoneyProcessUserBean.m in Sources */,
 				84A380191FAC1D8D008FB7AF /* UserFaceIdentiVCModules.swift in Sources */,
 				CC0DFA8C1EA5B1090024841A /* DataDisplayCell.m in Sources */,
+				847FC8A620E60C6100A0F797 /* NewLoginView.swift in Sources */,
 				CC0DFA8D1EA5B1090024841A /* ApprovalAmountResult.m in Sources */,
 				CC742DA9204E704D00D645CC /* AccountModel.m in Sources */,
 				CC45E72C1FD78FF500DE803D /* ShowMsgPreviewModel.m in Sources */,
