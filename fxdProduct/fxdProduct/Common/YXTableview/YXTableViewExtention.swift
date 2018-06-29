@@ -11,14 +11,14 @@ private var YXTableViewKey: String = ""
 extension UITableView {
     
     /// header
-    var tableViewMaker: YXTableViewMaker {
-        get {
-            return (objc_getAssociatedObject(self, &YXTableViewKey) as? YXTableViewMaker)!
-        }
-        set(newValue) {
-            objc_setAssociatedObject(self, &YXTableViewKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
-        }
-    }
+//    var tableViewMaker: YXTableViewMaker {
+//        get {
+//            return (objc_getAssociatedObject(self, &YXTableViewKey) as? YXTableViewMaker)!
+//        }
+//        set(newValue) {
+//            objc_setAssociatedObject(self, &YXTableViewKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+//        }
+//    }
     
     //
    class func yx_maker(_ frame:CGRect,_ style:UITableViewStyle,_ maker:(_ make:YXTableViewMaker) -> Void) -> YXTableViewMaker {

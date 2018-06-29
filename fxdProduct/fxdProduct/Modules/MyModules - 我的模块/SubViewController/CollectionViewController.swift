@@ -17,7 +17,6 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         super.viewDidLoad()
 
         self.title = "收藏"
-    
         dataArray = NSMutableArray.init(capacity: 100)
         addBackItem()
         configureView()
@@ -45,7 +44,6 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         }else{
             self.automaticallyAdjustsScrollViewInsets = false;
         }
-
     }
 
     
@@ -65,6 +63,7 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
                     let model = collectionListModel.rows[index] as! CollectionListRowsModel
                     self.dataArray?.add(model)
                 }
+
     
                 self.tableView?.reloadData()
                 
@@ -82,7 +81,6 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return 1
     }
     
@@ -107,128 +105,137 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = (tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath))
-        let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
-        cell.textLabel?.text = model.plantName
-        return cell
-//        var superLoanCell:SuperLoanCell! = tableView.dequeueReusableCell(withIdentifier:"SuperLoanCell") as? SuperLoanCell
-//        if superLoanCell == nil {
-//            superLoanCell = SuperLoanCell.init(style: .default, reuseIdentifier: "SuperLoanCell")
-//        }
-//        superLoanCell.selectionStyle = .none
-//        superLoanCell.backgroundColor = UIColor.white
-//        superLoanCell.isSelected = false
-//
+//        let cell = (tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath))
 //        let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
-//        superLoanCell.type = model.moduletype
-//        let url = URL(string: model.plantLogo)
-//        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiImage, error, cachType, url) in
 //
-//        })
-//
-//        superLoanCell?.titleLabel?.text = model.plantName
-//        let maximumAmount = model.maximumAmount != nil ? model.maximumAmount : ""
-//        let maximumAmountUnit = model.maximumAmountUnit != nil ? model.maximumAmountUnit : ""
-//        superLoanCell?.qutaLabel?.text = "额度:最高" + maximumAmount! + maximumAmountUnit!
-//        let term = model.unitStr != nil ? model.unitStr : ""
-//        superLoanCell?.termLabel?.text = "期限:" + term!
-//        if term != "" {
-//
-//            let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.termLabel?.text)!)
-//            attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-4))
-//            superLoanCell?.termLabel?.attributedText = attrstr1
-//        }
-//        let referenceRate = model.referenceRate != nil ? model.referenceRate : ""
-//        if model.referenceMode == nil {
-//
-//            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate!
-//        }else{
-//            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate! + "/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
-//        }
-//
-//
-//        if referenceRate != nil && model.referenceMode != nil {
-//
-//            let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.feeLabel?.text)!)
-//            attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-4))
-//            superLoanCell?.feeLabel?.attributedText = attrstr
-//        }
-//
-//        superLoanCell?.descBtn?.setTitle(model.platformIntroduction, for: .normal)
-//        superLoanCell?.descBtn?.setTitleColor(UIColor.purple, for: .normal)
-//        superLoanCell?.descBtn?.layer.borderColor = UIColor.purple.cgColor
-//
-//        if indexPath.section % 2 == 0 {
-//            superLoanCell?.descBtn?.setTitleColor(UIColor.blue, for: .normal)
-//            superLoanCell?.descBtn?.layer.borderColor = UIColor.blue.cgColor
-//        }
-//
-//        superLoanCell?.lineView?.isHidden = true
-//        let str : NSString = model.platformIntroduction! as NSString
-//        let dic = NSDictionary(object: UIFont.yx_systemFont(ofSize: 12) as Any, forKey: NSAttributedStringKey.font as NSCopying)
-//        let width = str.boundingRect(with: CGSize(width:_k_w,height:20), options: .usesLineFragmentOrigin, attributes:(dic as! [NSAttributedStringKey : Any]), context: nil).size.width + 20
-//
-//        superLoanCell.descBtn?.snp.remakeConstraints({ (make) in
-//            make.width.equalTo(width)
-//            make.left.equalTo(superLoanCell.snp.left).offset(100)
-//            make.bottom.equalTo(superLoanCell.snp.bottom).offset(-10)
-//            make.height.equalTo(20)
-//        })
-//
-//        superLoanCell.collectionBtn?.setImage(UIImage.init(named: "arrow_icon"), for: .normal)
-//        superLoanCell.collectionBtn?.snp.remakeConstraints { (make) in
-//            make.centerY.equalTo(superLoanCell.snp.centerY)
-//            make.right.equalTo(superLoanCell.snp.right).offset(-20)
-//        }
-//
-//        return superLoanCell!
+//        cell.textLabel?.text = model.plantName
+//        return cell
+        var superLoanCell:SuperLoanCell! = tableView.dequeueReusableCell(withIdentifier:"SuperLoanCell") as? SuperLoanCell
+        if superLoanCell == nil {
+            superLoanCell = SuperLoanCell.init(style: .default, reuseIdentifier: "SuperLoanCell")
+        }
+        superLoanCell.selectionStyle = .none
+        superLoanCell.backgroundColor = UIColor.white
+        superLoanCell.isSelected = false
+
+        let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
+        superLoanCell.type = model.moduletype
+        let url = URL(string: model.plantLogo)
+        superLoanCell?.leftImageView?.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholderImage_Icon"), options: .retryFailed, completed: { (uiImage, error, cachType, url) in
+
+        })
+
+        superLoanCell?.titleLabel?.text = model.plantName
+        let maximumAmount = model.maximumAmount != nil ? model.maximumAmount : ""
+        let maximumAmountUnit = model.maximumAmountUnit != nil ? model.maximumAmountUnit : ""
+        superLoanCell?.qutaLabel?.text = "额度:最高" + maximumAmount! + maximumAmountUnit!
+        let term = model.unitStr != nil ? model.unitStr : ""
+        superLoanCell?.termLabel?.text = "期限:" + term!
+        if term != "" {
+
+            let attrstr1 : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.termLabel?.text)!)
+            attrstr1.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr1.length-4))
+            superLoanCell?.termLabel?.attributedText = attrstr1
+        }
+        let referenceRate = model.referenceRate != nil ? model.referenceRate : ""
+        if model.referenceMode == nil {
+
+            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate!
+        }else{
+            superLoanCell?.feeLabel?.text = "费用:%" + referenceRate! + "/" + (rateUnit(referenceMode: model.referenceMode! as NSString) as String)
+        }
+
+
+        if referenceRate != nil && model.referenceMode != nil {
+
+            let attrstr : NSMutableAttributedString = NSMutableAttributedString(string:(superLoanCell?.feeLabel?.text)!)
+            attrstr.addAttribute(NSAttributedStringKey.foregroundColor, value: UI_MAIN_COLOR, range: NSMakeRange(3,attrstr.length-4))
+            superLoanCell?.feeLabel?.attributedText = attrstr
+        }
+
+        superLoanCell?.descBtn?.setTitle(model.platformIntroduction, for: .normal)
+        superLoanCell?.descBtn?.setTitleColor(UIColor.purple, for: .normal)
+        superLoanCell?.descBtn?.layer.borderColor = UIColor.purple.cgColor
+
+        if indexPath.section % 2 == 0 {
+            superLoanCell?.descBtn?.setTitleColor(UIColor.blue, for: .normal)
+            superLoanCell?.descBtn?.layer.borderColor = UIColor.blue.cgColor
+        }
+
+        superLoanCell?.lineView?.isHidden = true
+        let str : NSString = model.platformIntroduction! as NSString
+        let dic = NSDictionary(object: UIFont.yx_systemFont(ofSize: 12) as Any, forKey: NSAttributedStringKey.font as NSCopying)
+        let width = str.boundingRect(with: CGSize(width:_k_w,height:20), options: .usesLineFragmentOrigin, attributes:(dic as! [NSAttributedStringKey : Any]), context: nil).size.width + 20
+
+        superLoanCell.descBtn?.snp.remakeConstraints({ (make) in
+            make.width.equalTo(width)
+            make.left.equalTo(superLoanCell.snp.left).offset(100)
+            make.bottom.equalTo(superLoanCell.snp.bottom).offset(-10)
+            make.height.equalTo(20)
+        })
+
+        superLoanCell.collectionBtn?.setImage(UIImage.init(named: "arrow_icon"), for: .normal)
+        superLoanCell.collectionBtn?.snp.remakeConstraints { (make) in
+            make.centerY.equalTo(superLoanCell.snp.centerY)
+            make.right.equalTo(superLoanCell.snp.right).offset(-20)
+        }
+
+        return superLoanCell!
 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        let model = dataArray![indexPath.section] as! CollectionListRowsModel
-//        getCompLink(thirdPlatformId: model.id_)
+        let model = dataArray![indexPath.section] as! CollectionListRowsModel
+        getCompLink(thirdPlatformId: model.id_)
         
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return .delete
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "删除") { (action, indexPath) in
+            let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
+            
+            let collectionVM = CollectionViewModel()
+            collectionVM.setBlockWithReturn({ (returnValue) in
+                
+                let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
+                if baseResult.errCode == "0" {
+                    
+                    tableView.beginUpdates()
+                    self.dataArray?.removeObject(at: indexPath.section)
+                    let indexSet = NSIndexSet(index: indexPath.section)
+                    tableView.deleteSections(indexSet as IndexSet, with: .none)
+                    tableView.endUpdates()
+                    
+                }else{
+                    MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                }
+            }) {
+            }
+            collectionVM.addMyCollectionInfocollectionType(model.moduletype, platformId: model.id_)
+        }
+        return [deleteAction]
     }
-
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-
-        return true
-    }
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+    
+    
+//    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+//        let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
+//
+//        let collectionVM = CollectionViewModel()
+//    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-
-        let model = self.dataArray![indexPath.section] as! CollectionListRowsModel
         
-        let collectionVM = CollectionViewModel()
-        collectionVM.setBlockWithReturn({ (returnValue) in
-            
-            let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
-            if baseResult.errCode == "0" {
-                
-                self.dataArray?.removeObject(at: indexPath.section)
-                let indexSet = NSIndexSet(index: indexPath.section)
-                tableView.deleteSections(indexSet as IndexSet, with: .none)
 
-            }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
-            }
-        }) {
-            
-        }
-        collectionVM.addMyCollectionInfocollectionType(model.moduletype, platformId: model.id_)
     }
     
     
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"
-        
     }
     
     func rateUnit(referenceMode : NSString) -> (NSString){

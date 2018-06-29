@@ -10,13 +10,13 @@
 
 @implementation UITableViewCell (YXTool)
 
-- (void)addShadow{
-    self.layer.shadowPath =[UIBezierPath bezierPathWithRect:self.bounds].CGPath;
-    self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-    self.layer.shadowOpacity = 0.6f;
-    self.layer.shadowOffset = CGSizeMake(7.0, 7.0f);
-    self.layer.shadowRadius = 7.0f;
-}
+//- (void)addShadow{
+//    self.layer.shadowPath =[UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+//    self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+//    self.layer.shadowOpacity = 0.6f;
+//    self.layer.shadowOffset = CGSizeMake(7.0, 7.0f);
+//    self.layer.shadowRadius = 7.0f;
+//}
 
 
 @end

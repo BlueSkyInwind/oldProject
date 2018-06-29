@@ -113,16 +113,10 @@
 		636B1BA01C2D2C4300450358 /* RepayMentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B9F1C2D2C4300450358 /* RepayMentViewModel.m */; };
 		636B1BA31C30DBCB00450358 /* SMSViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1BA21C30DBCB00450358 /* SMSViewModel.m */; };
 		636EE3031B662ABB00A1A3ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 636EE3021B662ABB00A1A3ED /* main.m */; };
-		636EE3061B662ABB00A1A3ED /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 636EE3051B662ABB00A1A3ED /* AppDelegate.mm */; };
+		636EE3061B662ABB00A1A3ED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 636EE3051B662ABB00A1A3ED /* AppDelegate.m */; };
 		636EE31D1B662ABB00A1A3ED /* fxdProductTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 636EE31C1B662ABB00A1A3ED /* fxdProductTests.m */; };
 		636FF3491BA27C9800BB5528 /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 636FF3481BA27C9800BB5528 /* Address.plist */; };
 		63741E341D3CC10900C0E2F8 /* PayNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63741E331D3CC10900C0E2F8 /* PayNavigationViewController.m */; };
-		637636E71D76A72A00E93289 /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636DB1D76A72A00E93289 /* LewPopupBackgroundView.m */; };
-		637636E81D76A72A00E93289 /* LewPopupViewAnimationDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636DD1D76A72A00E93289 /* LewPopupViewAnimationDrop.m */; };
-		637636E91D76A72A00E93289 /* LewPopupViewAnimationFade.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636DF1D76A72A00E93289 /* LewPopupViewAnimationFade.m */; };
-		637636EA1D76A72A00E93289 /* LewPopupViewAnimationSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636E11D76A72A00E93289 /* LewPopupViewAnimationSlide.m */; };
-		637636EB1D76A72A00E93289 /* LewPopupViewAnimationSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636E31D76A72A00E93289 /* LewPopupViewAnimationSpring.m */; };
-		637636EC1D76A72A00E93289 /* UIViewController+LewPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636E61D76A72A00E93289 /* UIViewController+LewPopupViewController.m */; };
 		637637091D79670D00E93289 /* UILabel+FlickerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 637637081D79670D00E93289 /* UILabel+FlickerNumber.m */; };
 		637963721CAB9C9D002A5910 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637963711CAB9C9D002A5910 /* QuartzCore.framework */; };
 		637963741CAB9CB8002A5910 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637963731CAB9CB8002A5910 /* CoreGraphics.framework */; };
@@ -149,44 +143,7 @@
 		63878FE51C1519CD008E1CF9 /* FXD_Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FE11C1519CD008E1CF9 /* FXD_Utility.m */; };
 		638A16811E5018FE00AB8AB6 /* libFMDeviceManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 638A16801E5018FE00AB8AB6 /* libFMDeviceManager.a */; };
 		638A16831E50194100AB8AB6 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 638A16821E50194100AB8AB6 /* libresolv.9.tbd */; };
-		638A16E81E517D9F00AB8AB6 /* LOTAnimatableLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16911E517D9F00AB8AB6 /* LOTAnimatableLayer.m */; };
-		638A16E91E517D9F00AB8AB6 /* LOTEllipseShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16931E517D9F00AB8AB6 /* LOTEllipseShapeLayer.m */; };
-		638A16EA1E517D9F00AB8AB6 /* LOTGroupLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16951E517D9F00AB8AB6 /* LOTGroupLayerView.m */; };
-		638A16EB1E517D9F00AB8AB6 /* LOTLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16971E517D9F00AB8AB6 /* LOTLayerView.m */; };
-		638A16EC1E517D9F00AB8AB6 /* LOTMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16991E517D9F00AB8AB6 /* LOTMaskLayer.m */; };
-		638A16ED1E517D9F00AB8AB6 /* LOTRectShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A169B1E517D9F00AB8AB6 /* LOTRectShapeLayer.m */; };
-		638A16EE1E517D9F00AB8AB6 /* LOTShapeLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A169D1E517D9F00AB8AB6 /* LOTShapeLayerView.m */; };
-		638A16EF1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A169F1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m */; };
-		638A16F01E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16A21E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.m */; };
-		638A16F11E517D9F00AB8AB6 /* LOTAnimatableColorValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16A41E517D9F00AB8AB6 /* LOTAnimatableColorValue.m */; };
-		638A16F21E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16A61E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m */; };
-		638A16F31E517D9F00AB8AB6 /* LOTAnimatablePointValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16A81E517D9F00AB8AB6 /* LOTAnimatablePointValue.m */; };
-		638A16F41E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16AA1E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m */; };
-		638A16F51E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16AC1E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m */; };
-		638A16F61E517D9F00AB8AB6 /* LOTAnimationCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16B01E517D9F00AB8AB6 /* LOTAnimationCache.m */; };
-		638A16F71E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16B31E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.m */; };
-		638A16F81E517D9F00AB8AB6 /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16B51E517D9F00AB8AB6 /* CGGeometryAdditions.m */; };
-		638A16F91E517D9F00AB8AB6 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16B81E517D9F00AB8AB6 /* UIColor+Expanded.m */; };
-		638A16FA1E517D9F00AB8AB6 /* CADisplayLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16BB1E517D9F00AB8AB6 /* CADisplayLink.m */; };
-		638A16FB1E517D9F00AB8AB6 /* CALayer+Compat.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16BD1E517D9F00AB8AB6 /* CALayer+Compat.m */; };
-		638A16FC1E517D9F00AB8AB6 /* NSValue+Compat.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C01E517D9F00AB8AB6 /* NSValue+Compat.m */; };
-		638A16FD1E517D9F00AB8AB6 /* UIBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C21E517D9F00AB8AB6 /* UIBezierPath.m */; };
-		638A16FE1E517D9F00AB8AB6 /* UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C41E517D9F00AB8AB6 /* UIColor.m */; };
-		638A16FF1E517D9F00AB8AB6 /* LOTComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C71E517D9F00AB8AB6 /* LOTComposition.m */; };
-		638A17001E517D9F00AB8AB6 /* LOTLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C91E517D9F00AB8AB6 /* LOTLayer.m */; };
-		638A17011E517D9F00AB8AB6 /* LOTMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16CB1E517D9F00AB8AB6 /* LOTMask.m */; };
-		638A17021E517D9F00AB8AB6 /* LOTShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16CE1E517D9F00AB8AB6 /* LOTShapeCircle.m */; };
-		638A17031E517D9F00AB8AB6 /* LOTShapeFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D01E517D9F00AB8AB6 /* LOTShapeFill.m */; };
-		638A17041E517D9F00AB8AB6 /* LOTShapeGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D21E517D9F00AB8AB6 /* LOTShapeGroup.m */; };
-		638A17051E517D9F00AB8AB6 /* LOTShapePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D41E517D9F00AB8AB6 /* LOTShapePath.m */; };
-		638A17061E517D9F00AB8AB6 /* LOTShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D61E517D9F00AB8AB6 /* LOTShapeRectangle.m */; };
-		638A17071E517D9F00AB8AB6 /* LOTShapeStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D81E517D9F00AB8AB6 /* LOTShapeStroke.m */; };
-		638A17081E517D9F00AB8AB6 /* LOTShapeTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DA1E517D9F00AB8AB6 /* LOTShapeTransform.m */; };
-		638A17091E517D9F00AB8AB6 /* LOTShapeTrimPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DC1E517D9F00AB8AB6 /* LOTShapeTrimPath.m */; };
-		638A170A1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DE1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m */; };
-		638A170B1E517D9F00AB8AB6 /* LOTAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DF1E517D9F00AB8AB6 /* LOTAnimationView.m */; };
 		638A170D1E517E8C00AB8AB6 /* vcTransition1.json in Resources */ = {isa = PBXBuildFile; fileRef = 638A170C1E517E8C00AB8AB6 /* vcTransition1.json */; };
-		638C3F191CF2CB08000446A7 /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F181CF2CB08000446A7 /* UIViewController+KNSemiModal.m */; };
 		638C3F271CF2F470000446A7 /* PCCircleViewConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F261CF2F470000446A7 /* PCCircleViewConst.m */; };
 		638C3F2E1CF53662000446A7 /* RepayMentAvailableRedpackets.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F2D1CF53662000446A7 /* RepayMentAvailableRedpackets.m */; };
 		638C3F391CF564A4000446A7 /* SquareRepaymentAvailableRedpackets.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F321CF564A4000446A7 /* SquareRepaymentAvailableRedpackets.m */; };
@@ -214,10 +171,8 @@
 		63A24C681BE063A90036E8EF /* UIImage+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C271BE063A90036E8EF /* UIImage+Extend.m */; };
 		63A24C691BE063A90036E8EF /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C291BE063A90036E8EF /* UIImage+FixOrientation.m */; };
 		63A24C6A1BE063A90036E8EF /* UIImage+Water.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C2B1BE063A90036E8EF /* UIImage+Water.m */; };
-		63A24C6B1BE063A90036E8EF /* UITableViewCell+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C2E1BE063A90036E8EF /* UITableViewCell+Extend.m */; };
 		63A24C6C1BE063A90036E8EF /* UIView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C311BE063A90036E8EF /* UIView+Extend.m */; };
 		63A24C6D1BE063A90036E8EF /* UIWindow+Launch.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C341BE063A90036E8EF /* UIWindow+Launch.m */; };
-		63AD1D1A1BFC1AA400807877 /* MLBlackTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AD1D191BFC1AA400807877 /* MLBlackTransition.m */; };
 		63B311511BD75CE9002C4B98 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B311501BD75CE9002C4B98 /* AVFoundation.framework */; };
 		63B311531BD75CF8002C4B98 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B311521BD75CF8002C4B98 /* CoreMedia.framework */; };
 		63B311551BD75D01002C4B98 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B311541BD75D01002C4B98 /* AudioToolbox.framework */; };
@@ -252,7 +207,6 @@
 		63E5C75E1D4AEA8F009A633C /* UserCardResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5C75D1D4AEA8F009A633C /* UserCardResult.m */; };
 		63E5C7611D4AFDBF009A633C /* CardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5C7601D4AFDBF009A633C /* CardInfo.m */; };
 		63E8F1B11E6FDAEC00FE4BDD /* DataDicParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F1B01E6FDAEC00FE4BDD /* DataDicParse.m */; };
-		63EC5C871E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EC5C861E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m */; };
 		63ED33341B6B4570008B6085 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED33331B6B4570008B6085 /* BaseViewController.m */; };
 		63ED33371B6B4593008B6085 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED33361B6B4593008B6085 /* BaseNavigationViewController.m */; };
 		63ED33471B6B5569008B6085 /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED33451B6B5569008B6085 /* RegViewController.m */; };
@@ -297,7 +251,6 @@
 		63FF484A1B6F036F009E384C /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48481B6F036F009E384C /* MyViewController.m */; };
 		63FF484B1B6F036F009E384C /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63FF48491B6F036F009E384C /* MyViewController.xib */; };
 		63FF48581B6F15DB009E384C /* FXDBaseTabBarVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* FXDBaseTabBarVCModule.m */; };
-		63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */; };
 		840911A21F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */; };
 		840911A31F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */; };
 		840DFF6F1FE27DEC00148DEE /* InvationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 840DFF6E1FE27DEC00148DEE /* InvationViewModel.m */; };
@@ -399,16 +352,28 @@
 		847298351FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847298331FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift */; };
 		847298371FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847298361FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift */; };
 		847298381FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847298361FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift */; };
-		8472EFA520D8A6FE004AD006 /* TestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472EFA420D8A6FE004AD006 /* TestTableViewController.swift */; };
-		8472EFA620D8A6FE004AD006 /* TestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472EFA420D8A6FE004AD006 /* TestTableViewController.swift */; };
 		8473F1411F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
 		8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473F1401F31CAA1005B4933 /* SupportBankList.m */; };
-		8478135220D26BCE00CA2AF4 /* YXTableViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478135120D26BCE00CA2AF4 /* YXTableViewExtention.swift */; };
-		8478135320D26BCE00CA2AF4 /* YXTableViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478135120D26BCE00CA2AF4 /* YXTableViewExtention.swift */; };
-		8478135520D26CCF00CA2AF4 /* YXTableViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478135420D26CCF00CA2AF4 /* YXTableViewMaker.swift */; };
-		8478135620D26CCF00CA2AF4 /* YXTableViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478135420D26CCF00CA2AF4 /* YXTableViewMaker.swift */; };
 		847DBBD11FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */; };
 		847DBBD21FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */; };
+		847FC87020E48F1500A0F797 /* YXTableViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC86E20E48F1500A0F797 /* YXTableViewExtention.swift */; };
+		847FC87120E48F1500A0F797 /* YXTableViewMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847FC86F20E48F1500A0F797 /* YXTableViewMaker.swift */; };
+		847FC87520E4C7D100A0F797 /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC87320E4C7D100A0F797 /* UIViewController+KNSemiModal.m */; };
+		847FC87620E4C7D100A0F797 /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC87320E4C7D100A0F797 /* UIViewController+KNSemiModal.m */; };
+		847FC88520E4C92200A0F797 /* LewPopupViewAnimationFade.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC87B20E4C92200A0F797 /* LewPopupViewAnimationFade.m */; };
+		847FC88620E4C92200A0F797 /* LewPopupViewAnimationFade.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC87B20E4C92200A0F797 /* LewPopupViewAnimationFade.m */; };
+		847FC88720E4C92200A0F797 /* UIViewController+LewPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC87E20E4C92200A0F797 /* UIViewController+LewPopupViewController.m */; };
+		847FC88820E4C92200A0F797 /* UIViewController+LewPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC87E20E4C92200A0F797 /* UIViewController+LewPopupViewController.m */; };
+		847FC88920E4C92200A0F797 /* LewPopupViewAnimationSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC87F20E4C92200A0F797 /* LewPopupViewAnimationSpring.m */; };
+		847FC88A20E4C92200A0F797 /* LewPopupViewAnimationSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC87F20E4C92200A0F797 /* LewPopupViewAnimationSpring.m */; };
+		847FC88B20E4C92200A0F797 /* LewPopupViewAnimationDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC88020E4C92200A0F797 /* LewPopupViewAnimationDrop.m */; };
+		847FC88C20E4C92200A0F797 /* LewPopupViewAnimationDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC88020E4C92200A0F797 /* LewPopupViewAnimationDrop.m */; };
+		847FC88D20E4C92200A0F797 /* LewPopupViewAnimationSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC88120E4C92200A0F797 /* LewPopupViewAnimationSlide.m */; };
+		847FC88E20E4C92200A0F797 /* LewPopupViewAnimationSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC88120E4C92200A0F797 /* LewPopupViewAnimationSlide.m */; };
+		847FC88F20E4C92200A0F797 /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC88420E4C92200A0F797 /* LewPopupBackgroundView.m */; };
+		847FC89020E4C92200A0F797 /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC88420E4C92200A0F797 /* LewPopupBackgroundView.m */; };
+		847FC89420E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC89220E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m */; };
+		847FC89520E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 847FC89220E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m */; };
 		848139631F568A8600CD701C /* YX_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848139621F568A8600CD701C /* YX_TextField.swift */; };
 		848139641F568A8600CD701C /* YX_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848139621F568A8600CD701C /* YX_TextField.swift */; };
 		848C53211F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */; };
@@ -709,13 +674,11 @@
 		CC0DF9611EA5B1090024841A /* LoginMsgExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AAF1CA2952400D04ED8 /* LoginMsgExt.m */; };
 		CC0DF9651EA5B1090024841A /* NSString+MD5Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313DC141BB3E52B00EB45DE /* NSString+MD5Encrypt.m */; };
 		CC0DF9661EA5B1090024841A /* HelpViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A133F191C1AD1EA0027749B /* HelpViewCell.m */; };
-		CC0DF9671EA5B1090024841A /* LOTShapeCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16CE1E517D9F00AB8AB6 /* LOTShapeCircle.m */; };
 		CC0DF9681EA5B1090024841A /* UIFont+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C201BE063A90036E8EF /* UIFont+Extend.m */; };
 		CC0DF96B1EA5B1090024841A /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED33451B6B5569008B6085 /* RegViewController.m */; };
 		CC0DF96C1EA5B1090024841A /* HMScannerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F2547E1E49A45900852CF1 /* HMScannerController.m */; };
 		CC0DF9701EA5B1090024841A /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ED33361B6B4593008B6085 /* BaseNavigationViewController.m */; };
 		CC0DF9711EA5B1090024841A /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48481B6F036F009E384C /* MyViewController.m */; };
-		CC0DF9751EA5B1090024841A /* LOTRectShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A169B1E517D9F00AB8AB6 /* LOTRectShapeLayer.m */; };
 		CC0DF9771EA5B1090024841A /* IdeaBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E30D01BC8A70C0018A801 /* IdeaBackViewController.m */; };
 		CC0DF9781EA5B1090024841A /* FXDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DE56FE1DE7CD2900747AE2 /* FXDWebViewController.m */; };
 		CC0DF9791EA5B1090024841A /* YYTextMagnifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24C91D98F7E9006F58F3 /* YYTextMagnifier.m */; };
@@ -728,40 +691,31 @@
 		CC0DF9811EA5B1090024841A /* SquareRepaymentExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F361CF564A4000446A7 /* SquareRepaymentExt.m */; };
 		CC0DF9821EA5B1090024841A /* FaceIDLiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B1E1E600D0D00B2C1FF /* FaceIDLiveModel.m */; };
 		CC0DF9831EA5B1090024841A /* SquareRepaymentBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F341CF564A4000446A7 /* SquareRepaymentBaseClass.m */; };
-		CC0DF9841EA5B1090024841A /* UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C41E517D9F00AB8AB6 /* UIColor.m */; };
 		CC0DF9851EA5B1090024841A /* UIViewController+RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DB3FBB1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m */; };
 		CC0DF9861EA5B1090024841A /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 633DAD2F1C3E59A0000DA852 /* LoginViewModel.m */; };
 		CC0DF9871EA5B1090024841A /* YYKVStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D43EF31D41F76D0076AC7F /* YYKVStorage.m */; };
 		CC0DF98B1EA5B1090024841A /* CALayer+Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C061BE063A90036E8EF /* CALayer+Transition.m */; };
-		CC0DF98C1EA5B1090024841A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 636EE3051B662ABB00A1A3ED /* AppDelegate.mm */; };
+		CC0DF98C1EA5B1090024841A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 636EE3051B662ABB00A1A3ED /* AppDelegate.m */; };
 		CC0DF98D1EA5B1090024841A /* CustomerCareerResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145ABB1CA4E66100D04ED8 /* CustomerCareerResult.m */; };
 		CC0DF98E1EA5B1090024841A /* UIView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C311BE063A90036E8EF /* UIView+Extend.m */; };
 		CC0DF98F1EA5B1090024841A /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 638198A11CC0825400E8951E /* SSKeychain.m */; };
 		CC0DF9901EA5B1090024841A /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECCC1E1B8FAA0079A2F8 /* SDCycleScrollView.m */; };
-		CC0DF9911EA5B1090024841A /* LOTAnimatablePointValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16A81E517D9F00AB8AB6 /* LOTAnimatablePointValue.m */; };
 		CC0DF9921EA5B1090024841A /* FXD_Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FE11C1519CD008E1CF9 /* FXD_Utility.m */; };
 		CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6E69EF1C7199A000053A75 /* DiscountTicketController.m */; };
 		CC0DF9951EA5B1090024841A /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CC0DF9971EA5B1090024841A /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CC0DF9981EA5B1090024841A /* LOTLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16971E517D9F00AB8AB6 /* LOTLayerView.m */; };
 		CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AF01CA8DBBD00D04ED8 /* RegionSub.m */; };
 		CC0DF99A1EA5B1090024841A /* RegionCodeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830FC1CBCA1A90005C4CD /* RegionCodeResult.m */; };
-		CC0DF99C1EA5B1090024841A /* LOTShapeTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DA1E517D9F00AB8AB6 /* LOTShapeTransform.m */; };
 		CC0DF99E1EA5B1090024841A /* YYTextWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E71D98F7E9006F58F3 /* YYTextWeakProxy.m */; };
 		CC0DF99F1EA5B1090024841A /* NSData+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F0E1BD1CE41821001251A9 /* NSData+YYAdd.m */; };
-		CC0DF9A01EA5B1090024841A /* LOTAnimatableBoundsValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16A21E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.m */; };
 		CC0DF9A11EA5B1090024841A /* RegionCodeBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830F81CBCA1A90005C4CD /* RegionCodeBaseClass.m */; };
-		CC0DF9A21EA5B1090024841A /* LOTAnimatableLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16911E517D9F00AB8AB6 /* LOTAnimatableLayer.m */; };
 		CC0DF9A31EA5B1090024841A /* NSNumber+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F0E1C01CE4183A001251A9 /* NSNumber+YYAdd.m */; };
 		CC0DF9A41EA5B1090024841A /* RepayMentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B9F1C2D2C4300450358 /* RepayMentViewModel.m */; };
-		CC0DF9A61EA5B1090024841A /* LOTComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C71E517D9F00AB8AB6 /* LOTComposition.m */; };
 		CC0DF9A71EA5B1090024841A /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 638198A31CC0825400E8951E /* SSKeychainQuery.m */; };
 		CC0DF9AA1EA5B1090024841A /* FXD_UserInfoConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313DC191BB4F35C00EB45DE /* FXD_UserInfoConfiguration.m */; };
 		CC0DF9AC1EA5B1090024841A /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F254711E499C8000852CF1 /* InvitationViewController.m */; };
-		CC0DF9AD1EA5B1090024841A /* LOTLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C91E517D9F00AB8AB6 /* LOTLayer.m */; };
 		CC0DF9AE1EA5B1090024841A /* HMScannerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F254801E49A45900852CF1 /* HMScannerMaskView.m */; };
 		CC0DF9B11EA5B1090024841A /* RepayRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A762F6D1C1FBE4700964719 /* RepayRecordController.m */; };
-		CC0DF9B21EA5B1090024841A /* LOTShapeGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D21E517D9F00AB8AB6 /* LOTShapeGroup.m */; };
 		CC0DF9B31EA5B1090024841A /* HMScanerCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F254771E49A45900852CF1 /* HMScanerCardViewController.m */; };
 		CC0DF9B41EA5B1090024841A /* testView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA58871BE0A497007F8A6D /* testView.m */; };
 		CC0DF9B51EA5B1090024841A /* SaveCustomBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6348310A1CBCDBCE0005C4CD /* SaveCustomBaseViewModel.m */; };
@@ -773,7 +727,6 @@
 		CC0DF9C11EA5B1090024841A /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 6326CAAB1BF1CA5F00FD23A8 /* pinyin.c */; };
 		CC0DF9C21EA5B1090024841A /* PayNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63741E331D3CC10900C0E2F8 /* PayNavigationViewController.m */; };
 		CC0DF9C81EA5B1090024841A /* YYTextKeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24C31D98F7E9006F58F3 /* YYTextKeyboardManager.m */; };
-		CC0DF9CA1EA5B1090024841A /* LOTShapeStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D81E517D9F00AB8AB6 /* LOTShapeStroke.m */; };
 		CC0DF9CC1EA5B1090024841A /* UIDevice+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F0E1B61CE4166E001251A9 /* UIDevice+YYAdd.m */; };
 		CC0DF9CD1EA5B1090024841A /* YYTextEffectWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24BF1D98F7E9006F58F3 /* YYTextEffectWindow.m */; };
 		CC0DF9D01EA5B1090024841A /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C231BE063A90036E8EF /* UIImage+Color.m */; };
@@ -781,20 +734,14 @@
 		CC0DF9D41EA5B1090024841A /* NSString+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 63832C8B1CB7530400C6F194 /* NSString+AES.m */; };
 		CC0DF9D61EA5B1090024841A /* ReconfrInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50E4F1E6804950035EE4F /* ReconfrInfoModel.m */; };
 		CC0DF9D71EA5B1090024841A /* UIApplication+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 639E88711CA1371800254216 /* UIApplication+Extend.m */; };
-		CC0DF9DB1EA5B1090024841A /* LewPopupViewAnimationSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636E31D76A72A00E93289 /* LewPopupViewAnimationSpring.m */; };
 		CC0DF9DC1EA5B1090024841A /* YYTextUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E51D98F7E9006F58F3 /* YYTextUtilities.m */; };
-		CC0DF9DD1EA5B1090024841A /* LOTShapeTrimPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DC1E517D9F00AB8AB6 /* LOTShapeTrimPath.m */; };
-		CC0DF9E61EA5B1090024841A /* LOTShapeLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A169D1E517D9F00AB8AB6 /* LOTShapeLayerView.m */; };
 		CC0DF9E71EA5B1090024841A /* RepayMentAvailableRedpackets.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F2D1CF53662000446A7 /* RepayMentAvailableRedpackets.m */; };
 		CC0DF9E81EA5B1090024841A /* GlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B2FB91D6AEE22009CEFE0 /* GlobalConfig.m */; };
 		CC0DF9EC1EA5B1090024841A /* GetCustomerBaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 634831071CBCD4680005C4CD /* GetCustomerBaseViewModel.m */; };
 		CC0DF9ED1EA5B1090024841A /* YYTextInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24C11D98F7E9006F58F3 /* YYTextInput.m */; };
 		CC0DF9F01EA5B1090024841A /* MyCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F920C111BCE549900AA9A31 /* MyCardsViewController.m */; };
-		CC0DF9F11EA5B1090024841A /* LOTAnimationCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16B01E517D9F00AB8AB6 /* LOTAnimationCache.m */; };
-		CC0DF9F31EA5B1090024841A /* CGGeometryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16B51E517D9F00AB8AB6 /* CGGeometryAdditions.m */; };
 		CC0DF9F41EA5B1090024841A /* ColledgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F099B961C1A97C300D97BAE /* ColledgeView.m */; };
 		CC0DF9F71EA5B1090024841A /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECCE1E1B8FAA0079A2F8 /* UIView+SDExtension.m */; };
-		CC0DF9F81EA5B1090024841A /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F181CF2CB08000446A7 /* UIViewController+KNSemiModal.m */; };
 		CC0DF9FD1EA5B1090024841A /* Custom_BaseInfoExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50E421E666FF40035EE4F /* Custom_BaseInfoExt.m */; };
 		CC0DFA001EA5B1090024841A /* HMScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F2547A1E49A45900852CF1 /* HMScanner.m */; };
 		CC0DFA011EA5B1090024841A /* NSString+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F0E1BA1CE417FF001251A9 /* NSString+YYAdd.m */; };
@@ -808,8 +755,6 @@
 		CC0DFA0F1EA5B1090024841A /* MyCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AAF371C30D8950060F137 /* MyCardCell.m */; };
 		CC0DFA101EA5B1090024841A /* ReturnMsgBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB78F1BE2FE2700C32919 /* ReturnMsgBaseClass.m */; };
 		CC0DFA111EA5B1090024841A /* CALayer+Anim.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C041BE063A90036E8EF /* CALayer+Anim.m */; };
-		CC0DFA131EA5B1090024841A /* NSValue+Compat.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C01E517D9F00AB8AB6 /* NSValue+Compat.m */; };
-		CC0DFA141EA5B1090024841A /* LewPopupViewAnimationFade.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636DF1D76A72A00E93289 /* LewPopupViewAnimationFade.m */; };
 		CC0DFA151EA5B1090024841A /* FaceIDOCRFront.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B141E5EEF1C00B2C1FF /* FaceIDOCRFront.m */; };
 		CC0DFA161EA5B1090024841A /* SquareRepaymentResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F381CF564A4000446A7 /* SquareRepaymentResult.m */; };
 		CC0DFA171EA5B1090024841A /* FaceIDOCRBack.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B181E5F0AF900B2C1FF /* FaceIDOCRBack.m */; };
@@ -817,7 +762,6 @@
 		CC0DFA1C1EA5B1090024841A /* HMScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F254821E49A45900852CF1 /* HMScannerViewController.m */; };
 		CC0DFA1D1EA5B1090024841A /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9CD1BF08CEE00FD23A8 /* Model.m */; };
 		CC0DFA1F1EA5B1090024841A /* UIColor+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B251C2000E900450358 /* UIColor+Extend.m */; };
-		CC0DFA221EA5B1090024841A /* UIViewController+LewPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636E61D76A72A00E93289 /* UIViewController+LewPopupViewController.m */; };
 		CC0DFA241EA5B1090024841A /* SquareRepaymentAvailableRedpackets.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F321CF564A4000446A7 /* SquareRepaymentAvailableRedpackets.m */; };
 		CC0DFA251EA5B1090024841A /* UILabel+FlickerNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 637637081D79670D00E93289 /* UILabel+FlickerNumber.m */; };
 		CC0DFA271EA5B1090024841A /* RTRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DB3FB91E1DE41700FBE1C4 /* RTRootNavigationController.m */; };
@@ -828,12 +772,10 @@
 		CC0DFA301EA5B1090024841A /* NextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A686DAE1C1E961C009227A9 /* NextViewCell.m */; };
 		CC0DFA311EA5B1090024841A /* NSString+File.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24BFE1BE063A90036E8EF /* NSString+File.m */; };
 		CC0DFA341EA5B1090024841A /* GetMoneyProcessBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9E61BF0B15700FD23A8 /* GetMoneyProcessBaseClass.m */; };
-		CC0DFA351EA5B1090024841A /* NSDictionary+NilSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */; };
 		CC0DFA361EA5B1090024841A /* YYLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E91D98F7E9006F58F3 /* YYLabel.m */; };
 		CC0DFA391EA5B1090024841A /* FXD_ViewModelBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B961C2D118000450358 /* FXD_ViewModelBaseClass.m */; };
 		CC0DFA3A1EA5B1090024841A /* UserCardResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5C75D1D4AEA8F009A633C /* UserCardResult.m */; };
 		CC0DFA3E1EA5B1090024841A /* LivenessSelfie.m in Sources */ = {isa = PBXBuildFile; fileRef = 6379641C1CAD1BE0002A5910 /* LivenessSelfie.m */; };
-		CC0DFA3F1EA5B1090024841A /* MLBlackTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AD1D191BFC1AA400807877 /* MLBlackTransition.m */; };
 		CC0DFA431EA5B1090024841A /* LoginParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 639F73EB1E4C0099008D3475 /* LoginParse.m */; };
 		CC0DFA461EA5B1090024841A /* NSString+Validate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEACE231CA10B480027859A /* NSString+Validate.m */; };
 		CC0DFA471EA5B1090024841A /* FXDBaseTabBarVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FF48571B6F15DB009E384C /* FXDBaseTabBarVCModule.m */; };
@@ -841,36 +783,23 @@
 		CC0DFA4A1EA5B1090024841A /* HF_NetWorkRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6395E2A91BAFA14E00B7AFC2 /* HF_NetWorkRequestManager.m */; };
 		CC0DFA4C1EA5B1090024841A /* CoreArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C001BE063A90036E8EF /* CoreArchive.m */; };
 		CC0DFA4F1EA5B1090024841A /* UIView+YYText.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24DF1D98F7E9006F58F3 /* UIView+YYText.m */; };
-		CC0DFA511EA5B1090024841A /* LOTEllipseShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16931E517D9F00AB8AB6 /* LOTEllipseShapeLayer.m */; };
 		CC0DFA531EA5B1090024841A /* YYTextAsyncLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E11D98F7E9006F58F3 /* YYTextAsyncLayer.m */; };
 		CC0DFA551EA5B1090024841A /* CareerParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6300CC0A1E4AE5FD0012B05A /* CareerParse.m */; };
 		CC0DFA561EA5B1090024841A /* YYTextArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24CE1D98F7E9006F58F3 /* YYTextArchiver.m */; };
-		CC0DFA571EA5B1090024841A /* UIBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16C21E517D9F00AB8AB6 /* UIBezierPath.m */; };
 		CC0DFA5A1EA5B1090024841A /* SMSViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1BA21C30DBCB00450358 /* SMSViewModel.m */; };
-		CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DE1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m */; };
-		CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16A61E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m */; };
-		CC0DFA601EA5B1090024841A /* CADisplayLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16BB1E517D9F00AB8AB6 /* CADisplayLink.m */; };
 		CC0DFA611EA5B1090024841A /* FXD_Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FDF1C1519CD008E1CF9 /* FXD_Tool.m */; };
 		CC0DFA631EA5B1090024841A /* UIBarButtonItem+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C171BE063A90036E8EF /* UIBarButtonItem+Extend.m */; };
 		CC0DFA641EA5B1090024841A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 636EE3021B662ABB00A1A3ED /* main.m */; };
-		CC0DFA651EA5B1090024841A /* LOTMaskLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16991E517D9F00AB8AB6 /* LOTMaskLayer.m */; };
 		CC0DFA671EA5B1090024841A /* FXD_AlertViewCust.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B1B1C1FDDD100450358 /* FXD_AlertViewCust.m */; };
 		CC0DFA691EA5B1090024841A /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 633DF7871BDE22BF00A3998D /* MoreViewController.m */; };
-		CC0DFA6A1EA5B1090024841A /* LOTGroupLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16951E517D9F00AB8AB6 /* LOTGroupLayerView.m */; };
-		CC0DFA6C1EA5B1090024841A /* LOTShapeFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D01E517D9F00AB8AB6 /* LOTShapeFill.m */; };
 		CC0DFA6D1EA5B1090024841A /* Custom_BaseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50E3F1E666FF40035EE4F /* Custom_BaseInfo.m */; };
-		CC0DFA6E1EA5B1090024841A /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16B31E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.m */; };
 		CC0DFA6F1EA5B1090024841A /* HomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B991C2D153900450358 /* HomeViewModel.m */; };
-		CC0DFA701EA5B1090024841A /* LOTAnimatableScaleValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16AA1E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m */; };
-		CC0DFA721EA5B1090024841A /* LOTStrokeShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A169F1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m */; };
 		CC0DFA731EA5B1090024841A /* CardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5C7601D4AFDBF009A633C /* CardInfo.m */; };
 		CC0DFA741EA5B1090024841A /* MobileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553B041E5D9E1B00B2C1FF /* MobileCell.m */; };
-		CC0DFA751EA5B1090024841A /* CALayer+Compat.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16BD1E517D9F00AB8AB6 /* CALayer+Compat.m */; };
 		CC0DFA761EA5B1090024841A /* AboutMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE5E6221C1EA5240099CCA0 /* AboutMainViewController.m */; };
 		CC0DFA791EA5B1090024841A /* P2PBillDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AB0401E07BD46008A760C /* P2PBillDetail.m */; };
 		CC0DFA7A1EA5B1090024841A /* YYDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D43EF11D41F76D0076AC7F /* YYDiskCache.m */; };
 		CC0DFA7C1EA5B1090024841A /* YYTextDebugOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24BD1D98F7E9006F58F3 /* YYTextDebugOption.m */; };
-		CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C2E1BE063A90036E8EF /* UITableViewCell+Extend.m */; };
 		CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 634831041CBCCF190005C4CD /* GetCareerInfoViewModel.m */; };
 		CC0DFA811EA5B1090024841A /* LunchVCModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 639E886F1CA1371800254216 /* LunchVCModules.m */; };
 		CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E31D98F7E9006F58F3 /* YYTextTransaction.m */; };
@@ -880,31 +809,24 @@
 		CC0DFA8C1EA5B1090024841A /* DataDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63553AD61E5D2A4200B2C1FF /* DataDisplayCell.m */; };
 		CC0DFA8D1EA5B1090024841A /* ApprovalAmountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 637963A61CABD0F8002A5910 /* ApprovalAmountResult.m */; };
 		CC0DFA8F1EA5B1090024841A /* UIWindow+Launch.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C341BE063A90036E8EF /* UIWindow+Launch.m */; };
-		CC0DFA901EA5B1090024841A /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16B81E517D9F00AB8AB6 /* UIColor+Expanded.m */; };
 		CC0DFA921EA5B1090024841A /* UIImage+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C271BE063A90036E8EF /* UIImage+Extend.m */; };
 		CC0DFA931EA5B1090024841A /* NSDate+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C0C1BE063A90036E8EF /* NSDate+Extend.m */; };
 		CC0DFA951EA5B1090024841A /* YYCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D43EEF1D41F76D0076AC7F /* YYCache.m */; };
 		CC0DFA961EA5B1090024841A /* HMScannerBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F2547C1E49A45900852CF1 /* HMScannerBorder.m */; };
-		CC0DFA971EA5B1090024841A /* LOTMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16CB1E517D9F00AB8AB6 /* LOTMask.m */; };
 		CC0DFA9A1EA5B1090024841A /* LoginMsgResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AB11CA2952400D04ED8 /* LoginMsgResult.m */; };
 		CC0DFA9B1EA5B1090024841A /* FindPassViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 633DAD2C1C3E47D0000DA852 /* FindPassViewModel.m */; };
 		CC0DFA9D1EA5B1090024841A /* RegionExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AEC1CA8DBBD00D04ED8 /* RegionExt.m */; };
 		CC0DFAA01EA5B1090024841A /* GetMoneyProcessResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326C9E81BF0B15700FD23A8 /* GetMoneyProcessResult.m */; };
-		CC0DFAA21EA5B1090024841A /* LOTShapePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D41E517D9F00AB8AB6 /* LOTShapePath.m */; };
 		CC0DFAA31EA5B1090024841A /* YYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24EC1D98F7E9006F58F3 /* YYTextView.m */; };
 		CC0DFAA51EA5B1090024841A /* CheckUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FDB1C1519CD008E1CF9 /* CheckUtils.m */; };
 		CC0DFAA61EA5B1090024841A /* PCCircleViewConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 638C3F261CF2F470000446A7 /* PCCircleViewConst.m */; };
 		CC0DFAA81EA5B1090024841A /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECC61E1B8FAA0079A2F8 /* TADotView.m */; };
 		CC0DFAA91EA5B1090024841A /* UIDevice+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C1D1BE063A90036E8EF /* UIDevice+Extend.m */; };
-		CC0DFAAA1EA5B1090024841A /* LOTShapeRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16D61E517D9F00AB8AB6 /* LOTShapeRectangle.m */; };
 		CC0DFAAD1EA5B1090024841A /* RegionBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AEA1CA8DBBD00D04ED8 /* RegionBaseClass.m */; };
 		CC0DFAAF1EA5B1090024841A /* loanRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEFFA7B1C50BF72003936CE /* loanRecordCell.m */; };
 		CC0DFAB01EA5B1090024841A /* NSArray+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C091BE063A90036E8EF /* NSArray+Extend.m */; };
 		CC0DFAB21EA5B1090024841A /* LivenessIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6379641A1CAD1BE0002A5910 /* LivenessIdentity.m */; };
-		CC0DFAB31EA5B1090024841A /* LOTAnimatableColorValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16A41E517D9F00AB8AB6 /* LOTAnimatableColorValue.m */; };
 		CC0DFAB41EA5B1090024841A /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECC81E1B8FAA0079A2F8 /* TAPageControl.m */; };
-		CC0DFAB51EA5B1090024841A /* LOTAnimatableShapeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16AC1E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m */; };
-		CC0DFAB71EA5B1090024841A /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636DB1D76A72A00E93289 /* LewPopupBackgroundView.m */; };
 		CC0DFAB91EA5B1090024841A /* RegionCodeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830FA1CBCA1A90005C4CD /* RegionCodeExt.m */; };
 		CC0DFABB1EA5B1090024841A /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635B0BE01DF157EA008EAFD1 /* DetailViewController.m */; };
 		CC0DFABD1EA5B1090024841A /* TelPhoneCompanyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEACE1E1CA0E2450027859A /* TelPhoneCompanyCell.m */; };
@@ -913,19 +835,15 @@
 		CC0DFAC31EA5B1090024841A /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 634795DA1D378CED00EC4027 /* Aspects.m */; };
 		CC0DFAC41EA5B1090024841A /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C291BE063A90036E8EF /* UIImage+FixOrientation.m */; };
 		CC0DFAC61EA5B1090024841A /* UpdateDevIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630D46151BCCD2FB00874064 /* UpdateDevIDViewController.m */; };
-		CC0DFAC71EA5B1090024841A /* LewPopupViewAnimationSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636E11D76A72A00E93289 /* LewPopupViewAnimationSlide.m */; };
 		CC0DFAC81EA5B1090024841A /* UIImage+Water.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C2B1BE063A90036E8EF /* UIImage+Water.m */; };
 		CC0DFAC91EA5B1090024841A /* NSObject+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C0F1BE063A90036E8EF /* NSObject+Extend.m */; };
 		CC0DFACA1EA5B1090024841A /* GetMoneyHistoryResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B571C23BB4100450358 /* GetMoneyHistoryResult.m */; };
-		CC0DFACB1EA5B1090024841A /* LOTAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 638A16DF1E517D9F00AB8AB6 /* LOTAnimationView.m */; };
 		CC0DFACD1EA5B1090024841A /* YYMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D43EF51D41F76D0076AC7F /* YYMemoryCache.m */; };
 		CC0DFAD11EA5B1090024841A /* RepayRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 636B1B631C2790F400450358 /* RepayRecord.m */; };
 		CC0DFAD21EA5B1090024841A /* YYTextContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24BB1D98F7E9006F58F3 /* YYTextContainerView.m */; };
 		CC0DFAD81EA5B1090024841A /* FXD_AppShareConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 63117FB61DFFC42600635BB3 /* FXD_AppShareConfig.m */; };
 		CC0DFADA1EA5B1090024841A /* NSString+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A24C121BE063A90036E8EF /* NSString+Extend.m */; };
-		CC0DFADB1EA5B1090024841A /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EC5C861E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m */; };
 		CC0DFADC1EA5B1090024841A /* DES3Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313DC101BB3E48800EB45DE /* DES3Util.m */; };
-		CC0DFADF1EA5B1090024841A /* LewPopupViewAnimationDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 637636DD1D76A72A00E93289 /* LewPopupViewAnimationDrop.m */; };
 		CC0DFAE01EA5B1090024841A /* RepayListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 637BABF91D7D3FAB00CF8EB5 /* RepayListInfo.m */; };
 		CC0DFAE11EA5B1090024841A /* ContactBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50E3D1E666FF40035EE4F /* ContactBean.m */; };
 		CC0DFAE31EA5B1090024841A /* BaseIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313DC1F1BB512BD00EB45DE /* BaseIndexViewController.m */; };
@@ -1433,26 +1351,13 @@
 		636EE3011B662ABB00A1A3ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		636EE3021B662ABB00A1A3ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		636EE3041B662ABB00A1A3ED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		636EE3051B662ABB00A1A3ED /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		636EE3051B662ABB00A1A3ED /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		636EE3161B662ABB00A1A3ED /* fxdProductTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fxdProductTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		636EE31B1B662ABB00A1A3ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		636EE31C1B662ABB00A1A3ED /* fxdProductTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fxdProductTests.m; sourceTree = "<group>"; };
 		636FF3481BA27C9800BB5528 /* Address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Address.plist; sourceTree = "<group>"; };
 		63741E321D3CC10900C0E2F8 /* PayNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayNavigationViewController.h; sourceTree = "<group>"; };
 		63741E331D3CC10900C0E2F8 /* PayNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayNavigationViewController.m; sourceTree = "<group>"; };
-		637636DA1D76A72A00E93289 /* LewPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupBackgroundView.h; sourceTree = "<group>"; };
-		637636DB1D76A72A00E93289 /* LewPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupBackgroundView.m; sourceTree = "<group>"; };
-		637636DC1D76A72A00E93289 /* LewPopupViewAnimationDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationDrop.h; sourceTree = "<group>"; };
-		637636DD1D76A72A00E93289 /* LewPopupViewAnimationDrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationDrop.m; sourceTree = "<group>"; };
-		637636DE1D76A72A00E93289 /* LewPopupViewAnimationFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationFade.h; sourceTree = "<group>"; };
-		637636DF1D76A72A00E93289 /* LewPopupViewAnimationFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationFade.m; sourceTree = "<group>"; };
-		637636E01D76A72A00E93289 /* LewPopupViewAnimationSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationSlide.h; sourceTree = "<group>"; };
-		637636E11D76A72A00E93289 /* LewPopupViewAnimationSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationSlide.m; sourceTree = "<group>"; };
-		637636E21D76A72A00E93289 /* LewPopupViewAnimationSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationSpring.h; sourceTree = "<group>"; };
-		637636E31D76A72A00E93289 /* LewPopupViewAnimationSpring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationSpring.m; sourceTree = "<group>"; };
-		637636E41D76A72A00E93289 /* LewPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewController.h; sourceTree = "<group>"; };
-		637636E51D76A72A00E93289 /* UIViewController+LewPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LewPopupViewController.h"; sourceTree = "<group>"; };
-		637636E61D76A72A00E93289 /* UIViewController+LewPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LewPopupViewController.m"; sourceTree = "<group>"; };
 		637637071D79670D00E93289 /* UILabel+FlickerNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FlickerNumber.h"; sourceTree = "<group>"; };
 		637637081D79670D00E93289 /* UILabel+FlickerNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FlickerNumber.m"; sourceTree = "<group>"; };
 		637963711CAB9C9D002A5910 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1496,88 +1401,7 @@
 		638A167F1E5018FE00AB8AB6 /* FMDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDeviceManager.h; sourceTree = "<group>"; };
 		638A16801E5018FE00AB8AB6 /* libFMDeviceManager.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFMDeviceManager.a; sourceTree = "<group>"; };
 		638A16821E50194100AB8AB6 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
-		638A16901E517D9F00AB8AB6 /* LOTAnimatableLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimatableLayer.h; sourceTree = "<group>"; };
-		638A16911E517D9F00AB8AB6 /* LOTAnimatableLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTAnimatableLayer.m; sourceTree = "<group>"; };
-		638A16921E517D9F00AB8AB6 /* LOTEllipseShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTEllipseShapeLayer.h; sourceTree = "<group>"; };
-		638A16931E517D9F00AB8AB6 /* LOTEllipseShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTEllipseShapeLayer.m; sourceTree = "<group>"; };
-		638A16941E517D9F00AB8AB6 /* LOTGroupLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTGroupLayerView.h; sourceTree = "<group>"; };
-		638A16951E517D9F00AB8AB6 /* LOTGroupLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTGroupLayerView.m; sourceTree = "<group>"; };
-		638A16961E517D9F00AB8AB6 /* LOTLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTLayerView.h; sourceTree = "<group>"; };
-		638A16971E517D9F00AB8AB6 /* LOTLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTLayerView.m; sourceTree = "<group>"; };
-		638A16981E517D9F00AB8AB6 /* LOTMaskLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTMaskLayer.h; sourceTree = "<group>"; };
-		638A16991E517D9F00AB8AB6 /* LOTMaskLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTMaskLayer.m; sourceTree = "<group>"; };
-		638A169A1E517D9F00AB8AB6 /* LOTRectShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTRectShapeLayer.h; sourceTree = "<group>"; };
-		638A169B1E517D9F00AB8AB6 /* LOTRectShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTRectShapeLayer.m; sourceTree = "<group>"; };
-		638A169C1E517D9F00AB8AB6 /* LOTShapeLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTShapeLayerView.h; sourceTree = "<group>"; };
-		638A169D1E517D9F00AB8AB6 /* LOTShapeLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTShapeLayerView.m; sourceTree = "<group>"; };
-		638A169E1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTStrokeShapeLayer.h; sourceTree = "<group>"; };
-		638A169F1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTStrokeShapeLayer.m; sourceTree = "<group>"; };
-		638A16A11E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimatableBoundsValue.h; sourceTree = "<group>"; };
-		638A16A21E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTAnimatableBoundsValue.m; sourceTree = "<group>"; };
-		638A16A31E517D9F00AB8AB6 /* LOTAnimatableColorValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimatableColorValue.h; sourceTree = "<group>"; };
-		638A16A41E517D9F00AB8AB6 /* LOTAnimatableColorValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTAnimatableColorValue.m; sourceTree = "<group>"; };
-		638A16A51E517D9F00AB8AB6 /* LOTAnimatableNumberValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimatableNumberValue.h; sourceTree = "<group>"; };
-		638A16A61E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTAnimatableNumberValue.m; sourceTree = "<group>"; };
-		638A16A71E517D9F00AB8AB6 /* LOTAnimatablePointValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimatablePointValue.h; sourceTree = "<group>"; };
-		638A16A81E517D9F00AB8AB6 /* LOTAnimatablePointValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTAnimatablePointValue.m; sourceTree = "<group>"; };
-		638A16A91E517D9F00AB8AB6 /* LOTAnimatableScaleValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimatableScaleValue.h; sourceTree = "<group>"; };
-		638A16AA1E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTAnimatableScaleValue.m; sourceTree = "<group>"; };
-		638A16AB1E517D9F00AB8AB6 /* LOTAnimatableShapeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimatableShapeValue.h; sourceTree = "<group>"; };
-		638A16AC1E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTAnimatableShapeValue.m; sourceTree = "<group>"; };
-		638A16AD1E517D9F00AB8AB6 /* LOTAnimatableValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimatableValue.h; sourceTree = "<group>"; };
-		638A16AF1E517D9F00AB8AB6 /* LOTAnimationCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimationCache.h; sourceTree = "<group>"; };
-		638A16B01E517D9F00AB8AB6 /* LOTAnimationCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTAnimationCache.m; sourceTree = "<group>"; };
-		638A16B21E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimationGroup+LOTAnimatableGroup.h"; sourceTree = "<group>"; };
-		638A16B31E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimationGroup+LOTAnimatableGroup.m"; sourceTree = "<group>"; };
-		638A16B41E517D9F00AB8AB6 /* CGGeometryAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGGeometryAdditions.h; sourceTree = "<group>"; };
-		638A16B51E517D9F00AB8AB6 /* CGGeometryAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGGeometryAdditions.m; sourceTree = "<group>"; };
-		638A16B61E517D9F00AB8AB6 /* LOTHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTHelpers.h; sourceTree = "<group>"; };
-		638A16B71E517D9F00AB8AB6 /* UIColor+Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expanded.h"; sourceTree = "<group>"; };
-		638A16B81E517D9F00AB8AB6 /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
-		638A16BA1E517D9F00AB8AB6 /* CADisplayLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADisplayLink.h; sourceTree = "<group>"; };
-		638A16BB1E517D9F00AB8AB6 /* CADisplayLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CADisplayLink.m; sourceTree = "<group>"; };
-		638A16BC1E517D9F00AB8AB6 /* CALayer+Compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Compat.h"; sourceTree = "<group>"; };
-		638A16BD1E517D9F00AB8AB6 /* CALayer+Compat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Compat.m"; sourceTree = "<group>"; };
-		638A16BE1E517D9F00AB8AB6 /* LOTPlatformCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTPlatformCompat.h; sourceTree = "<group>"; };
-		638A16BF1E517D9F00AB8AB6 /* NSValue+Compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+Compat.h"; sourceTree = "<group>"; };
-		638A16C01E517D9F00AB8AB6 /* NSValue+Compat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+Compat.m"; sourceTree = "<group>"; };
-		638A16C11E517D9F00AB8AB6 /* UIBezierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBezierPath.h; sourceTree = "<group>"; };
-		638A16C21E517D9F00AB8AB6 /* UIBezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBezierPath.m; sourceTree = "<group>"; };
-		638A16C31E517D9F00AB8AB6 /* UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColor.h; sourceTree = "<group>"; };
-		638A16C41E517D9F00AB8AB6 /* UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColor.m; sourceTree = "<group>"; };
-		638A16C61E517D9F00AB8AB6 /* LOTComposition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTComposition.h; sourceTree = "<group>"; };
-		638A16C71E517D9F00AB8AB6 /* LOTComposition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTComposition.m; sourceTree = "<group>"; };
-		638A16C81E517D9F00AB8AB6 /* LOTLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTLayer.h; sourceTree = "<group>"; };
-		638A16C91E517D9F00AB8AB6 /* LOTLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTLayer.m; sourceTree = "<group>"; };
-		638A16CA1E517D9F00AB8AB6 /* LOTMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTMask.h; sourceTree = "<group>"; };
-		638A16CB1E517D9F00AB8AB6 /* LOTMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTMask.m; sourceTree = "<group>"; };
-		638A16CC1E517D9F00AB8AB6 /* LOTModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTModels.h; sourceTree = "<group>"; };
-		638A16CD1E517D9F00AB8AB6 /* LOTShapeCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTShapeCircle.h; sourceTree = "<group>"; };
-		638A16CE1E517D9F00AB8AB6 /* LOTShapeCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTShapeCircle.m; sourceTree = "<group>"; };
-		638A16CF1E517D9F00AB8AB6 /* LOTShapeFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTShapeFill.h; sourceTree = "<group>"; };
-		638A16D01E517D9F00AB8AB6 /* LOTShapeFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTShapeFill.m; sourceTree = "<group>"; };
-		638A16D11E517D9F00AB8AB6 /* LOTShapeGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTShapeGroup.h; sourceTree = "<group>"; };
-		638A16D21E517D9F00AB8AB6 /* LOTShapeGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTShapeGroup.m; sourceTree = "<group>"; };
-		638A16D31E517D9F00AB8AB6 /* LOTShapePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTShapePath.h; sourceTree = "<group>"; };
-		638A16D41E517D9F00AB8AB6 /* LOTShapePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTShapePath.m; sourceTree = "<group>"; };
-		638A16D51E517D9F00AB8AB6 /* LOTShapeRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTShapeRectangle.h; sourceTree = "<group>"; };
-		638A16D61E517D9F00AB8AB6 /* LOTShapeRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTShapeRectangle.m; sourceTree = "<group>"; };
-		638A16D71E517D9F00AB8AB6 /* LOTShapeStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTShapeStroke.h; sourceTree = "<group>"; };
-		638A16D81E517D9F00AB8AB6 /* LOTShapeStroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTShapeStroke.m; sourceTree = "<group>"; };
-		638A16D91E517D9F00AB8AB6 /* LOTShapeTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTShapeTransform.h; sourceTree = "<group>"; };
-		638A16DA1E517D9F00AB8AB6 /* LOTShapeTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTShapeTransform.m; sourceTree = "<group>"; };
-		638A16DB1E517D9F00AB8AB6 /* LOTShapeTrimPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTShapeTrimPath.h; sourceTree = "<group>"; };
-		638A16DC1E517D9F00AB8AB6 /* LOTShapeTrimPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTShapeTrimPath.m; sourceTree = "<group>"; };
-		638A16DE1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTAnimationTransitionController.m; sourceTree = "<group>"; };
-		638A16DF1E517D9F00AB8AB6 /* LOTAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOTAnimationView.m; sourceTree = "<group>"; };
-		638A16E01E517D9F00AB8AB6 /* LOTAnimationView_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimationView_Internal.h; sourceTree = "<group>"; };
-		638A16E21E517D9F00AB8AB6 /* LOTAnimationTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimationTransitionController.h; sourceTree = "<group>"; };
-		638A16E31E517D9F00AB8AB6 /* LOTAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimationView.h; sourceTree = "<group>"; };
-		638A16E41E517D9F00AB8AB6 /* LOTAnimationView_Compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOTAnimationView_Compat.h; sourceTree = "<group>"; };
-		638A16E51E517D9F00AB8AB6 /* Lottie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lottie.h; sourceTree = "<group>"; };
 		638A170C1E517E8C00AB8AB6 /* vcTransition1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = vcTransition1.json; sourceTree = "<group>"; };
-		638C3F171CF2CB08000446A7 /* UIViewController+KNSemiModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KNSemiModal.h"; sourceTree = "<group>"; };
-		638C3F181CF2CB08000446A7 /* UIViewController+KNSemiModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KNSemiModal.m"; sourceTree = "<group>"; };
 		638C3F251CF2F470000446A7 /* PCCircleViewConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PCCircleViewConst.h; path = GestureUnlock/PCCircleViewConst.h; sourceTree = "<group>"; };
 		638C3F261CF2F470000446A7 /* PCCircleViewConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PCCircleViewConst.m; path = GestureUnlock/PCCircleViewConst.m; sourceTree = "<group>"; };
 		638C3F2C1CF53662000446A7 /* RepayMentAvailableRedpackets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepayMentAvailableRedpackets.h; sourceTree = "<group>"; };
@@ -1633,15 +1457,11 @@
 		63A24C291BE063A90036E8EF /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
 		63A24C2A1BE063A90036E8EF /* UIImage+Water.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Water.h"; sourceTree = "<group>"; };
 		63A24C2B1BE063A90036E8EF /* UIImage+Water.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Water.m"; sourceTree = "<group>"; };
-		63A24C2D1BE063A90036E8EF /* UITableViewCell+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Extend.h"; sourceTree = "<group>"; };
-		63A24C2E1BE063A90036E8EF /* UITableViewCell+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Extend.m"; sourceTree = "<group>"; };
 		63A24C301BE063A90036E8EF /* UIView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extend.h"; sourceTree = "<group>"; };
 		63A24C311BE063A90036E8EF /* UIView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extend.m"; sourceTree = "<group>"; };
 		63A24C331BE063A90036E8EF /* UIWindow+Launch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Launch.h"; sourceTree = "<group>"; };
 		63A24C341BE063A90036E8EF /* UIWindow+Launch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Launch.m"; sourceTree = "<group>"; };
 		63A24C361BE063A90036E8EF /* CoreConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreConst.h; sourceTree = "<group>"; };
-		63AD1D181BFC1AA400807877 /* MLBlackTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLBlackTransition.h; sourceTree = "<group>"; };
-		63AD1D191BFC1AA400807877 /* MLBlackTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLBlackTransition.m; sourceTree = "<group>"; };
 		63AFCD3D1C05956A00124151 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		63B311501BD75CE9002C4B98 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		63B311521BD75CF8002C4B98 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -1702,8 +1522,6 @@
 		63E5C7601D4AFDBF009A633C /* CardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardInfo.m; sourceTree = "<group>"; };
 		63E8F1AF1E6FDAEC00FE4BDD /* DataDicParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataDicParse.h; sourceTree = "<group>"; };
 		63E8F1B01E6FDAEC00FE4BDD /* DataDicParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataDicParse.m; sourceTree = "<group>"; };
-		63EC5C851E4D5B070070AFEB /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
-		63EC5C861E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		63ED33321B6B4570008B6085 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		63ED33331B6B4570008B6085 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		63ED33351B6B4593008B6085 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
@@ -1791,8 +1609,6 @@
 		63FF48491B6F036F009E384C /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
 		63FF48561B6F15DB009E384C /* FXDBaseTabBarVCModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXDBaseTabBarVCModule.h; sourceTree = "<group>"; };
 		63FF48571B6F15DB009E384C /* FXDBaseTabBarVCModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXDBaseTabBarVCModule.m; sourceTree = "<group>"; };
-		63FFFBEC1D86B285000E3C38 /* NSDictionary+NilSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NilSafe.h"; sourceTree = "<group>"; };
-		63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NilSafe.m"; sourceTree = "<group>"; };
 		840911A01F6F997E00DCDF03 /* JSAndOCInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAndOCInteraction.h; sourceTree = "<group>"; };
 		840911A11F6F997E00DCDF03 /* JSAndOCInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAndOCInteraction.m; sourceTree = "<group>"; };
 		840DFF6D1FE27DEC00148DEE /* InvationViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvationViewModel.h; sourceTree = "<group>"; };
@@ -1869,12 +1685,28 @@
 		846D58CC20901A9500B344C5 /* FXD_WithholdAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_WithholdAuthViewController.swift; sourceTree = "<group>"; };
 		847298331FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_ApplicationChoosePickerView.swift; sourceTree = "<group>"; };
 		847298361FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_IncreaseAmountLimitViewController.swift; sourceTree = "<group>"; };
-		8472EFA420D8A6FE004AD006 /* TestTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewController.swift; sourceTree = "<group>"; };
 		8473F13F1F31CAA1005B4933 /* SupportBankList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportBankList.h; sourceTree = "<group>"; };
 		8473F1401F31CAA1005B4933 /* SupportBankList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportBankList.m; sourceTree = "<group>"; };
-		8478135120D26BCE00CA2AF4 /* YXTableViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXTableViewExtention.swift; sourceTree = "<group>"; };
-		8478135420D26CCF00CA2AF4 /* YXTableViewMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXTableViewMaker.swift; sourceTree = "<group>"; };
 		847DBBD01FC66BEA00D4B99E /* ImportPayPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPayPasswordView.swift; sourceTree = "<group>"; };
+		847FC86E20E48F1500A0F797 /* YXTableViewExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXTableViewExtention.swift; sourceTree = "<group>"; };
+		847FC86F20E48F1500A0F797 /* YXTableViewMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YXTableViewMaker.swift; sourceTree = "<group>"; };
+		847FC87320E4C7D100A0F797 /* UIViewController+KNSemiModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KNSemiModal.m"; sourceTree = "<group>"; };
+		847FC87420E4C7D100A0F797 /* UIViewController+KNSemiModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KNSemiModal.h"; sourceTree = "<group>"; };
+		847FC87820E4C92200A0F797 /* LewPopupViewAnimationSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationSpring.h; sourceTree = "<group>"; };
+		847FC87920E4C92200A0F797 /* UIViewController+LewPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LewPopupViewController.h"; sourceTree = "<group>"; };
+		847FC87A20E4C92200A0F797 /* LewPopupViewAnimationDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationDrop.h; sourceTree = "<group>"; };
+		847FC87B20E4C92200A0F797 /* LewPopupViewAnimationFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationFade.m; sourceTree = "<group>"; };
+		847FC87C20E4C92200A0F797 /* LewPopupViewAnimationSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationSlide.h; sourceTree = "<group>"; };
+		847FC87D20E4C92200A0F797 /* LewPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupBackgroundView.h; sourceTree = "<group>"; };
+		847FC87E20E4C92200A0F797 /* UIViewController+LewPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LewPopupViewController.m"; sourceTree = "<group>"; };
+		847FC87F20E4C92200A0F797 /* LewPopupViewAnimationSpring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationSpring.m; sourceTree = "<group>"; };
+		847FC88020E4C92200A0F797 /* LewPopupViewAnimationDrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationDrop.m; sourceTree = "<group>"; };
+		847FC88120E4C92200A0F797 /* LewPopupViewAnimationSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationSlide.m; sourceTree = "<group>"; };
+		847FC88220E4C92200A0F797 /* LewPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewController.h; sourceTree = "<group>"; };
+		847FC88320E4C92200A0F797 /* LewPopupViewAnimationFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationFade.h; sourceTree = "<group>"; };
+		847FC88420E4C92200A0F797 /* LewPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupBackgroundView.m; sourceTree = "<group>"; };
+		847FC89220E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		847FC89320E4CD1700A0F797 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		848139621F568A8600CD701C /* YX_TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YX_TextField.swift; sourceTree = "<group>"; };
 		848C53201F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyAuthTableViewCell.swift; sourceTree = "<group>"; };
 		848FC6461FFE132500918CE9 /* CommonTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTool.swift; sourceTree = "<group>"; };
@@ -2828,7 +2660,7 @@
 				63FC24471D98CB19006F58F3 /* fxdProductDis.entitlements */,
 				636A2DD61D891F7900E087A6 /* fxdProduct.entitlements */,
 				636EE3041B662ABB00A1A3ED /* AppDelegate.h */,
-				636EE3051B662ABB00A1A3ED /* AppDelegate.mm */,
+				636EE3051B662ABB00A1A3ED /* AppDelegate.m */,
 				63E076521B67114800E269F2 /* Common */,
 				0FEA58481BE08EE3007F8A6D /* View */,
 				63E076531B67114800E269F2 /* FXD_NetworkModules */,
@@ -2875,51 +2707,29 @@
 		636EE32A1B662E5C00A1A3ED /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				847FC89120E4CD1700A0F797 /* DZNEmptyDataSet */,
 				84332C8B206CDD11009A9121 /* YXBankScan */,
 				842D46F91FAC722A0046A97A /* EncryptionModules */,
 				842CA0E51F4548D000A2150B /* JPush */,
-				638A168A1E517D9F00AB8AB6 /* lottie-ios */,
 				638A167E1E5018FE00AB8AB6 /* FMDeviceManager */,
-				63EC5C841E4D5B070070AFEB /* DZNEmptyDataSet */,
 				63F254751E49A45900852CF1 /* QRCode */,
 				63DB3FB51E1DE41700FBE1C4 /* RTRootNavigationController */,
 				63E1ECBF1E1B8FAA0079A2F8 /* SDCycleScrollView */,
+				847FC87720E4C92200A0F797 /* popupViewController */,
+				847FC87220E4C7D100A0F797 /* source */,
 				63FC24B81D98F7E9006F58F3 /* YYText */,
-				637636D91D76A72A00E93289 /* popupViewController */,
 				63F526C41D5C0D4900F68524 /* MoxieSDK */,
 				63D43EED1D41F76D0076AC7F /* YYCache */,
 				634795D81D378CED00EC4027 /* Aspects */,
 				638C3F251CF2F470000446A7 /* PCCircleViewConst.h */,
 				638C3F261CF2F470000446A7 /* PCCircleViewConst.m */,
-				638C3F161CF2CAFD000446A7 /* source */,
 				6381989F1CC0825400E8951E /* SSKeychain */,
 				637963791CAB9E77002A5910 /* BaiduMap */,
-				63AD1D171BFC1AA400807877 /* MLBlackTransition */,
 				6326C9DD1BF0962E00FD23A8 /* pinyin */,
 				6326C9CC1BF08CEE00FD23A8 /* Model.h */,
 				6326C9CD1BF08CEE00FD23A8 /* Model.m */,
 			);
 			path = Third;
-			sourceTree = "<group>";
-		};
-		637636D91D76A72A00E93289 /* popupViewController */ = {
-			isa = PBXGroup;
-			children = (
-				637636DA1D76A72A00E93289 /* LewPopupBackgroundView.h */,
-				637636DB1D76A72A00E93289 /* LewPopupBackgroundView.m */,
-				637636DC1D76A72A00E93289 /* LewPopupViewAnimationDrop.h */,
-				637636DD1D76A72A00E93289 /* LewPopupViewAnimationDrop.m */,
-				637636DE1D76A72A00E93289 /* LewPopupViewAnimationFade.h */,
-				637636DF1D76A72A00E93289 /* LewPopupViewAnimationFade.m */,
-				637636E01D76A72A00E93289 /* LewPopupViewAnimationSlide.h */,
-				637636E11D76A72A00E93289 /* LewPopupViewAnimationSlide.m */,
-				637636E21D76A72A00E93289 /* LewPopupViewAnimationSpring.h */,
-				637636E31D76A72A00E93289 /* LewPopupViewAnimationSpring.m */,
-				637636E41D76A72A00E93289 /* LewPopupViewController.h */,
-				637636E51D76A72A00E93289 /* UIViewController+LewPopupViewController.h */,
-				637636E61D76A72A00E93289 /* UIViewController+LewPopupViewController.m */,
-			);
-			path = popupViewController;
 			sourceTree = "<group>";
 		};
 		637637061D7966FE00E93289 /* UILabel */ = {
@@ -3064,8 +2874,6 @@
 				63F0E1C01CE4183A001251A9 /* NSNumber+YYAdd.m */,
 				63D43EFA1D41F8380076AC7F /* DataWriteAndRead.h */,
 				63D43EFB1D41F8380076AC7F /* DataWriteAndRead.m */,
-				63FFFBEC1D86B285000E3C38 /* NSDictionary+NilSafe.h */,
-				63FFFBED1D86B285000E3C38 /* NSDictionary+NilSafe.m */,
 				84F87F451FC3CD6600F1C5CD /* UIFont+YX_Font.h */,
 				84F87F461FC3CD6600F1C5CD /* UIFont+YX_Font.m */,
 				CC45E7351FD915A300DE803D /* UITabBar+badge.h */,
@@ -3089,173 +2897,6 @@
 				638A16801E5018FE00AB8AB6 /* libFMDeviceManager.a */,
 			);
 			path = FMDeviceManager;
-			sourceTree = "<group>";
-		};
-		638A168A1E517D9F00AB8AB6 /* lottie-ios */ = {
-			isa = PBXGroup;
-			children = (
-				638A168D1E517D9F00AB8AB6 /* Classes */,
-			);
-			path = "lottie-ios";
-			sourceTree = "<group>";
-		};
-		638A168D1E517D9F00AB8AB6 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				638A168F1E517D9F00AB8AB6 /* AnimatableLayers */,
-				638A16A01E517D9F00AB8AB6 /* AnimatableProperties */,
-				638A16AE1E517D9F00AB8AB6 /* AnimationCache */,
-				638A16B11E517D9F00AB8AB6 /* Extensions */,
-				638A16B91E517D9F00AB8AB6 /* MacCompatability */,
-				638A16C51E517D9F00AB8AB6 /* Models */,
-				638A16DD1E517D9F00AB8AB6 /* Private */,
-				638A16E11E517D9F00AB8AB6 /* PublicHeaders */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		638A168F1E517D9F00AB8AB6 /* AnimatableLayers */ = {
-			isa = PBXGroup;
-			children = (
-				638A16901E517D9F00AB8AB6 /* LOTAnimatableLayer.h */,
-				638A16911E517D9F00AB8AB6 /* LOTAnimatableLayer.m */,
-				638A16921E517D9F00AB8AB6 /* LOTEllipseShapeLayer.h */,
-				638A16931E517D9F00AB8AB6 /* LOTEllipseShapeLayer.m */,
-				638A16941E517D9F00AB8AB6 /* LOTGroupLayerView.h */,
-				638A16951E517D9F00AB8AB6 /* LOTGroupLayerView.m */,
-				638A16961E517D9F00AB8AB6 /* LOTLayerView.h */,
-				638A16971E517D9F00AB8AB6 /* LOTLayerView.m */,
-				638A16981E517D9F00AB8AB6 /* LOTMaskLayer.h */,
-				638A16991E517D9F00AB8AB6 /* LOTMaskLayer.m */,
-				638A169A1E517D9F00AB8AB6 /* LOTRectShapeLayer.h */,
-				638A169B1E517D9F00AB8AB6 /* LOTRectShapeLayer.m */,
-				638A169C1E517D9F00AB8AB6 /* LOTShapeLayerView.h */,
-				638A169D1E517D9F00AB8AB6 /* LOTShapeLayerView.m */,
-				638A169E1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.h */,
-				638A169F1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m */,
-			);
-			path = AnimatableLayers;
-			sourceTree = "<group>";
-		};
-		638A16A01E517D9F00AB8AB6 /* AnimatableProperties */ = {
-			isa = PBXGroup;
-			children = (
-				638A16A11E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.h */,
-				638A16A21E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.m */,
-				638A16A31E517D9F00AB8AB6 /* LOTAnimatableColorValue.h */,
-				638A16A41E517D9F00AB8AB6 /* LOTAnimatableColorValue.m */,
-				638A16A51E517D9F00AB8AB6 /* LOTAnimatableNumberValue.h */,
-				638A16A61E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m */,
-				638A16A71E517D9F00AB8AB6 /* LOTAnimatablePointValue.h */,
-				638A16A81E517D9F00AB8AB6 /* LOTAnimatablePointValue.m */,
-				638A16A91E517D9F00AB8AB6 /* LOTAnimatableScaleValue.h */,
-				638A16AA1E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m */,
-				638A16AB1E517D9F00AB8AB6 /* LOTAnimatableShapeValue.h */,
-				638A16AC1E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m */,
-				638A16AD1E517D9F00AB8AB6 /* LOTAnimatableValue.h */,
-			);
-			path = AnimatableProperties;
-			sourceTree = "<group>";
-		};
-		638A16AE1E517D9F00AB8AB6 /* AnimationCache */ = {
-			isa = PBXGroup;
-			children = (
-				638A16AF1E517D9F00AB8AB6 /* LOTAnimationCache.h */,
-				638A16B01E517D9F00AB8AB6 /* LOTAnimationCache.m */,
-			);
-			path = AnimationCache;
-			sourceTree = "<group>";
-		};
-		638A16B11E517D9F00AB8AB6 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				638A16B21E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.h */,
-				638A16B31E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.m */,
-				638A16B41E517D9F00AB8AB6 /* CGGeometryAdditions.h */,
-				638A16B51E517D9F00AB8AB6 /* CGGeometryAdditions.m */,
-				638A16B61E517D9F00AB8AB6 /* LOTHelpers.h */,
-				638A16B71E517D9F00AB8AB6 /* UIColor+Expanded.h */,
-				638A16B81E517D9F00AB8AB6 /* UIColor+Expanded.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		638A16B91E517D9F00AB8AB6 /* MacCompatability */ = {
-			isa = PBXGroup;
-			children = (
-				638A16BA1E517D9F00AB8AB6 /* CADisplayLink.h */,
-				638A16BB1E517D9F00AB8AB6 /* CADisplayLink.m */,
-				638A16BC1E517D9F00AB8AB6 /* CALayer+Compat.h */,
-				638A16BD1E517D9F00AB8AB6 /* CALayer+Compat.m */,
-				638A16BE1E517D9F00AB8AB6 /* LOTPlatformCompat.h */,
-				638A16BF1E517D9F00AB8AB6 /* NSValue+Compat.h */,
-				638A16C01E517D9F00AB8AB6 /* NSValue+Compat.m */,
-				638A16C11E517D9F00AB8AB6 /* UIBezierPath.h */,
-				638A16C21E517D9F00AB8AB6 /* UIBezierPath.m */,
-				638A16C31E517D9F00AB8AB6 /* UIColor.h */,
-				638A16C41E517D9F00AB8AB6 /* UIColor.m */,
-			);
-			path = MacCompatability;
-			sourceTree = "<group>";
-		};
-		638A16C51E517D9F00AB8AB6 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				638A16C61E517D9F00AB8AB6 /* LOTComposition.h */,
-				638A16C71E517D9F00AB8AB6 /* LOTComposition.m */,
-				638A16C81E517D9F00AB8AB6 /* LOTLayer.h */,
-				638A16C91E517D9F00AB8AB6 /* LOTLayer.m */,
-				638A16CA1E517D9F00AB8AB6 /* LOTMask.h */,
-				638A16CB1E517D9F00AB8AB6 /* LOTMask.m */,
-				638A16CC1E517D9F00AB8AB6 /* LOTModels.h */,
-				638A16CD1E517D9F00AB8AB6 /* LOTShapeCircle.h */,
-				638A16CE1E517D9F00AB8AB6 /* LOTShapeCircle.m */,
-				638A16CF1E517D9F00AB8AB6 /* LOTShapeFill.h */,
-				638A16D01E517D9F00AB8AB6 /* LOTShapeFill.m */,
-				638A16D11E517D9F00AB8AB6 /* LOTShapeGroup.h */,
-				638A16D21E517D9F00AB8AB6 /* LOTShapeGroup.m */,
-				638A16D31E517D9F00AB8AB6 /* LOTShapePath.h */,
-				638A16D41E517D9F00AB8AB6 /* LOTShapePath.m */,
-				638A16D51E517D9F00AB8AB6 /* LOTShapeRectangle.h */,
-				638A16D61E517D9F00AB8AB6 /* LOTShapeRectangle.m */,
-				638A16D71E517D9F00AB8AB6 /* LOTShapeStroke.h */,
-				638A16D81E517D9F00AB8AB6 /* LOTShapeStroke.m */,
-				638A16D91E517D9F00AB8AB6 /* LOTShapeTransform.h */,
-				638A16DA1E517D9F00AB8AB6 /* LOTShapeTransform.m */,
-				638A16DB1E517D9F00AB8AB6 /* LOTShapeTrimPath.h */,
-				638A16DC1E517D9F00AB8AB6 /* LOTShapeTrimPath.m */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		638A16DD1E517D9F00AB8AB6 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				638A16DE1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m */,
-				638A16DF1E517D9F00AB8AB6 /* LOTAnimationView.m */,
-				638A16E01E517D9F00AB8AB6 /* LOTAnimationView_Internal.h */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
-		638A16E11E517D9F00AB8AB6 /* PublicHeaders */ = {
-			isa = PBXGroup;
-			children = (
-				638A16E21E517D9F00AB8AB6 /* LOTAnimationTransitionController.h */,
-				638A16E31E517D9F00AB8AB6 /* LOTAnimationView.h */,
-				638A16E41E517D9F00AB8AB6 /* LOTAnimationView_Compat.h */,
-				638A16E51E517D9F00AB8AB6 /* Lottie.h */,
-			);
-			path = PublicHeaders;
-			sourceTree = "<group>";
-		};
-		638C3F161CF2CAFD000446A7 /* source */ = {
-			isa = PBXGroup;
-			children = (
-				638C3F171CF2CB08000446A7 /* UIViewController+KNSemiModal.h */,
-				638C3F181CF2CB08000446A7 /* UIViewController+KNSemiModal.m */,
-			);
-			path = source;
 			sourceTree = "<group>";
 		};
 		638C3F2B1CF53662000446A7 /* RepaymentRedpackets */ = {
@@ -3346,7 +2987,6 @@
 				63A24C1B1BE063A90036E8EF /* UIDevice */,
 				63A24C1E1BE063A90036E8EF /* UIFont */,
 				63A24C211BE063A90036E8EF /* UIImage */,
-				63A24C2C1BE063A90036E8EF /* UITableViewCell */,
 				63A24C2F1BE063A90036E8EF /* UIView */,
 				63A24C321BE063A90036E8EF /* UIWindow */,
 			);
@@ -3455,15 +3095,6 @@
 			path = UIImage;
 			sourceTree = "<group>";
 		};
-		63A24C2C1BE063A90036E8EF /* UITableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				63A24C2D1BE063A90036E8EF /* UITableViewCell+Extend.h */,
-				63A24C2E1BE063A90036E8EF /* UITableViewCell+Extend.m */,
-			);
-			path = UITableViewCell;
-			sourceTree = "<group>";
-		};
 		63A24C2F1BE063A90036E8EF /* UIView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3488,15 +3119,6 @@
 				63A24C361BE063A90036E8EF /* CoreConst.h */,
 			);
 			path = CoreExtend;
-			sourceTree = "<group>";
-		};
-		63AD1D171BFC1AA400807877 /* MLBlackTransition */ = {
-			isa = PBXGroup;
-			children = (
-				63AD1D181BFC1AA400807877 /* MLBlackTransition.h */,
-				63AD1D191BFC1AA400807877 /* MLBlackTransition.m */,
-			);
-			path = MLBlackTransition;
 			sourceTree = "<group>";
 		};
 		63C50E491E67F6AE0035EE4F /* CustomerIDInfo */ = {
@@ -3571,8 +3193,8 @@
 		63E076521B67114800E269F2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				847FC86D20E48F1500A0F797 /* YXTableview */,
 				84AD784320E32FD600D8A027 /* HFSaltSDK */,
-				8478134D20D266B600CA2AF4 /* YXTableview */,
 				CC742DC220526FD800D645CC /* HGManager */,
 				636B1B191C1FDDD100450358 /* CostumView */,
 				63878FD91C1519CD008E1CF9 /* FXD_Tools */,
@@ -3733,15 +3355,6 @@
 			path = DataDic;
 			sourceTree = "<group>";
 		};
-		63EC5C841E4D5B070070AFEB /* DZNEmptyDataSet */ = {
-			isa = PBXGroup;
-			children = (
-				63EC5C851E4D5B070070AFEB /* UIScrollView+EmptyDataSet.h */,
-				63EC5C861E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m */,
-			);
-			path = DZNEmptyDataSet;
-			sourceTree = "<group>";
-		};
 		63ED33301B6B4472008B6085 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -3843,7 +3456,6 @@
 				1AE5E6231C1EA5240099CCA0 /* AboutMainViewController.xib */,
 				63F254701E499C8000852CF1 /* InvitationViewController.h */,
 				63F254711E499C8000852CF1 /* InvitationViewController.m */,
-				8472EFA420D8A6FE004AD006 /* TestTableViewController.swift */,
 			);
 			path = "MyModules - 我的模块";
 			sourceTree = "<group>";
@@ -4179,13 +3791,53 @@
 			path = "PhonerechargeCardService - 手机充值卡业务";
 			sourceTree = "<group>";
 		};
-		8478134D20D266B600CA2AF4 /* YXTableview */ = {
+		847FC86D20E48F1500A0F797 /* YXTableview */ = {
 			isa = PBXGroup;
 			children = (
-				8478135120D26BCE00CA2AF4 /* YXTableViewExtention.swift */,
-				8478135420D26CCF00CA2AF4 /* YXTableViewMaker.swift */,
+				847FC86E20E48F1500A0F797 /* YXTableViewExtention.swift */,
+				847FC86F20E48F1500A0F797 /* YXTableViewMaker.swift */,
 			);
 			path = YXTableview;
+			sourceTree = "<group>";
+		};
+		847FC87220E4C7D100A0F797 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				847FC87320E4C7D100A0F797 /* UIViewController+KNSemiModal.m */,
+				847FC87420E4C7D100A0F797 /* UIViewController+KNSemiModal.h */,
+			);
+			name = source;
+			path = fxdProduct/Third/source;
+			sourceTree = SOURCE_ROOT;
+		};
+		847FC87720E4C92200A0F797 /* popupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				847FC87820E4C92200A0F797 /* LewPopupViewAnimationSpring.h */,
+				847FC87920E4C92200A0F797 /* UIViewController+LewPopupViewController.h */,
+				847FC87A20E4C92200A0F797 /* LewPopupViewAnimationDrop.h */,
+				847FC87B20E4C92200A0F797 /* LewPopupViewAnimationFade.m */,
+				847FC87C20E4C92200A0F797 /* LewPopupViewAnimationSlide.h */,
+				847FC87D20E4C92200A0F797 /* LewPopupBackgroundView.h */,
+				847FC87E20E4C92200A0F797 /* UIViewController+LewPopupViewController.m */,
+				847FC87F20E4C92200A0F797 /* LewPopupViewAnimationSpring.m */,
+				847FC88020E4C92200A0F797 /* LewPopupViewAnimationDrop.m */,
+				847FC88120E4C92200A0F797 /* LewPopupViewAnimationSlide.m */,
+				847FC88220E4C92200A0F797 /* LewPopupViewController.h */,
+				847FC88320E4C92200A0F797 /* LewPopupViewAnimationFade.h */,
+				847FC88420E4C92200A0F797 /* LewPopupBackgroundView.m */,
+			);
+			name = popupViewController;
+			path = fxdProduct/Third/popupViewController;
+			sourceTree = SOURCE_ROOT;
+		};
+		847FC89120E4CD1700A0F797 /* DZNEmptyDataSet */ = {
+			isa = PBXGroup;
+			children = (
+				847FC89220E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m */,
+				847FC89320E4CD1700A0F797 /* UIScrollView+EmptyDataSet.h */,
+			);
+			path = DZNEmptyDataSet;
 			sourceTree = "<group>";
 		};
 		849AC25E1FF0DBBD005E435F /* ToWithdrawFundsView */ = {
@@ -5304,6 +4956,7 @@
 				84C619C31FA815EB00626411 /* BankListCell.m in Sources */,
 				84C619C41FA815EB00626411 /* DetailRepayHeader.m in Sources */,
 				84C619C61FA815EB00626411 /* PayMethodCell.m in Sources */,
+				847FC87020E48F1500A0F797 /* YXTableViewExtention.swift in Sources */,
 				CCC1E4062057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */,
 				84192AA6207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */,
 				CC6D1B2920C6341E007446E7 /* MyOrdersCell.swift in Sources */,
@@ -5322,13 +4975,10 @@
 				CC1AC8E42091B7A7009B5BD4 /* HotRecommendationViewController.swift in Sources */,
 				63FC24F21D98F7E9006F58F3 /* YYTextLayout.m in Sources */,
 				63145AB31CA2952400D04ED8 /* LoginMsgExt.m in Sources */,
-				8478135520D26CCF00CA2AF4 /* YXTableViewMaker.swift in Sources */,
 				CC989C341F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */,
 				6313DC151BB3E52B00EB45DE /* NSString+MD5Encrypt.m in Sources */,
 				84EBEA0F20C93A450045F538 /* UITableViewCell+YXTool.m in Sources */,
-				8478135220D26BCE00CA2AF4 /* YXTableViewExtention.swift in Sources */,
 				1A133F1B1C1AD1EA0027749B /* HelpViewCell.m in Sources */,
-				638A17021E517D9F00AB8AB6 /* LOTShapeCircle.m in Sources */,
 				63A24C651BE063A90036E8EF /* UIFont+Extend.m in Sources */,
 				84C6B0AC20DB801E008BD264 /* CreaditCardBottomView.swift in Sources */,
 				84BC53D31FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */,
@@ -5343,7 +4993,6 @@
 				CC742DAC204E730700D645CC /* SubmitAccountParamModel.m in Sources */,
 				63FF484A1B6F036F009E384C /* MyViewController.m in Sources */,
 				847298371FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */,
-				638A16ED1E517D9F00AB8AB6 /* LOTRectShapeLayer.m in Sources */,
 				0F9E30D21BC8A70C0018A801 /* IdeaBackViewController.m in Sources */,
 				63DE56FF1DE7CD2900747AE2 /* FXDWebViewController.m in Sources */,
 				CC742D98204E470100D645CC /* BankCardCell.swift in Sources */,
@@ -5366,9 +5015,9 @@
 				63553B1F1E600D0D00B2C1FF /* FaceIDLiveModel.m in Sources */,
 				84C6B08C20DA2DAF008BD264 /* CardCollectionViewCell.swift in Sources */,
 				638C3F3A1CF564A4000446A7 /* SquareRepaymentBaseClass.m in Sources */,
-				638A16FE1E517D9F00AB8AB6 /* UIColor.m in Sources */,
 				63DB3FBE1E1DE41700FBE1C4 /* UIViewController+RTRootNavigationController.m in Sources */,
 				CC73368F1FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */,
+				847FC88B20E4C92200A0F797 /* LewPopupViewAnimationDrop.m in Sources */,
 				84C6B09520DA36F7008BD264 /* CreaditCardTableViewCell.swift in Sources */,
 				633DAD301C3E59A0000DA852 /* LoginViewModel.m in Sources */,
 				CC742DC720526FD900D645CC /* HG_Manager.m in Sources */,
@@ -5377,13 +5026,12 @@
 				849AC2571FF09721005E435F /* HighRankingAuthTableViewCell.swift in Sources */,
 				84A380301FAC40A2008FB7AF /* UserDataEvaluationVCModules.swift in Sources */,
 				63A24C5C1BE063A90036E8EF /* CALayer+Transition.m in Sources */,
-				636EE3061B662ABB00A1A3ED /* AppDelegate.mm in Sources */,
+				636EE3061B662ABB00A1A3ED /* AppDelegate.m in Sources */,
 				63145ABF1CA4E66100D04ED8 /* CustomerCareerResult.m in Sources */,
 				63A24C6C1BE063A90036E8EF /* UIView+Extend.m in Sources */,
 				844E5F4B1ED94C9C00753671 /* RegViewModel.m in Sources */,
 				638198A41CC0825400E8951E /* SSKeychain.m in Sources */,
 				63E1ECD41E1B8FAA0079A2F8 /* SDCycleScrollView.m in Sources */,
-				638A16F31E517D9F00AB8AB6 /* LOTAnimatablePointValue.m in Sources */,
 				CC45E7261FD78D4500DE803D /* MessageViewModel.m in Sources */,
 				84A52E9B207DF2AA000BF3E8 /* UserMemberShipViewModel.m in Sources */,
 				63878FE51C1519CD008E1CF9 /* FXD_Utility.m in Sources */,
@@ -5391,27 +5039,23 @@
 				1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */,
 				84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
 				CC742DC020521FA700D645CC /* ApplicationNewCreateModel.m in Sources */,
-				638A16EB1E517D9F00AB8AB6 /* LOTLayerView.m in Sources */,
 				63145AF41CA8DBBD00D04ED8 /* RegionSub.m in Sources */,
 				634830FF1CBCA1A90005C4CD /* RegionCodeResult.m in Sources */,
 				84A380261FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.m in Sources */,
 				84CC899E1F5973D700537910 /* DrawingsInfoModel.m in Sources */,
-				638A17081E517D9F00AB8AB6 /* LOTShapeTransform.m in Sources */,
 				CC742D8F204D3A3800D645CC /* OpenAccountCell.swift in Sources */,
 				84DFBED31F4D72050009DAB9 /* UserDataViewModel.m in Sources */,
 				63FC25021D98F7E9006F58F3 /* YYTextWeakProxy.m in Sources */,
+				847FC88D20E4C92200A0F797 /* LewPopupViewAnimationSlide.m in Sources */,
 				84192AA22079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */,
 				63F0E1BE1CE41821001251A9 /* NSData+YYAdd.m in Sources */,
 				CCEFC6F2207F66100006D731 /* CollectionViewModel.m in Sources */,
 				84C6B09D20DA483D008BD264 /* HeaderItemView.swift in Sources */,
-				638A16F01E517D9F00AB8AB6 /* LOTAnimatableBoundsValue.m in Sources */,
 				634830FD1CBCA1A90005C4CD /* RegionCodeBaseClass.m in Sources */,
-				638A16E81E517D9F00AB8AB6 /* LOTAnimatableLayer.m in Sources */,
 				CCBD8F6C1F5D26BD005A980B /* RepayModel.m in Sources */,
 				63F0E1C11CE4183A001251A9 /* NSNumber+YYAdd.m in Sources */,
 				636B1BA01C2D2C4300450358 /* RepayMentViewModel.m in Sources */,
 				CC3BCC111FBABE7A0042A738 /* MyMessageViewController.swift in Sources */,
-				638A16FF1E517D9F00AB8AB6 /* LOTComposition.m in Sources */,
 				638198A51CC0825400E8951E /* SSKeychainQuery.m in Sources */,
 				CC80E008206B88CD000F9BAC /* CompQueryModel.m in Sources */,
 				84F87F401FC3C7F400F1C5CD /* SetIdentitiesOfTradeView.swift in Sources */,
@@ -5420,17 +5064,17 @@
 				84F1E2A31FD94B39007D3381 /* RegionCodeParam.m in Sources */,
 				84A3801A1FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm in Sources */,
 				63F254731E499C8000852CF1 /* InvitationViewController.m in Sources */,
-				638A17001E517D9F00AB8AB6 /* LOTLayer.m in Sources */,
 				CC8BB75520901C7D00ADA647 /* BillingMessageViewController.swift in Sources */,
 				63F254881E49A45900852CF1 /* HMScannerMaskView.m in Sources */,
+				847FC88520E4C92200A0F797 /* LewPopupViewAnimationFade.m in Sources */,
 				1A762F6F1C1FBE4700964719 /* RepayRecordController.m in Sources */,
-				638A17041E517D9F00AB8AB6 /* LOTShapeGroup.m in Sources */,
 				CCF97E5920C67FD3009E7ECC /* MyBillDetailViewController.swift in Sources */,
 				63F254831E49A45900852CF1 /* HMScanerCardViewController.m in Sources */,
 				84192A952079AE4C0042E8F8 /* MemberCenterViewController.swift in Sources */,
 				0FEA58891BE0A497007F8A6D /* testView.m in Sources */,
 				6348310B1CBCDBCE0005C4CD /* SaveCustomBaseViewModel.m in Sources */,
 				0FFA91601C589D5D008D91D2 /* CheckViewIng.m in Sources */,
+				847FC88920E4C92200A0F797 /* LewPopupViewAnimationSpring.m in Sources */,
 				63FC24F71D98F7E9006F58F3 /* YYTextAttribute.m in Sources */,
 				63C50E481E666FF40035EE4F /* Custom_BaseInfoResult.m in Sources */,
 				63FC24FC1D98F7E9006F58F3 /* NSParagraphStyle+YYText.m in Sources */,
@@ -5451,7 +5095,6 @@
 				849BD269207B070700DD47C6 /* MemberShipPayViewController.swift in Sources */,
 				63FC24F11D98F7E9006F58F3 /* YYTextKeyboardManager.m in Sources */,
 				CC742DB0204E74AF00D645CC /* SmsCodeParamModel.m in Sources */,
-				638A17071E517D9F00AB8AB6 /* LOTShapeStroke.m in Sources */,
 				849AC25C1FF0C816005E435F /* FXD_ToWithdrawFundsViewController.swift in Sources */,
 				842C4A061FE0D1F400D3D199 /* CommonViewModel.m in Sources */,
 				846BB6E31F5835E100CD3545 /* ApplicationViewModel.m in Sources */,
@@ -5477,14 +5120,11 @@
 				8449AC292062457A00526935 /* YXRecordView.swift in Sources */,
 				639E88731CA1371800254216 /* UIApplication+Extend.m in Sources */,
 				CC6C93EE1F4AB58C00587C74 /* TrackRect.swift in Sources */,
-				637636EB1D76A72A00E93289 /* LewPopupViewAnimationSpring.m in Sources */,
 				63FC25011D98F7E9006F58F3 /* YYTextUtilities.m in Sources */,
-				638A17091E517D9F00AB8AB6 /* LOTShapeTrimPath.m in Sources */,
 				CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */,
 				84F1E29F1FD90EE0007D3381 /* UserDataInformationModel.m in Sources */,
 				84A52EA0207DFA72000BF3E8 /* MemberShipInfoModel.m in Sources */,
 				CC4F0629207C4E410030A12A /* SuperLoanNoneCell.swift in Sources */,
-				638A16EE1E517D9F00AB8AB6 /* LOTShapeLayerView.m in Sources */,
 				638C3F2E1CF53662000446A7 /* RepayMentAvailableRedpackets.m in Sources */,
 				635B2FBA1D6AEE22009CEFE0 /* GlobalConfig.m in Sources */,
 				CC6C93F11F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */,
@@ -5498,12 +5138,9 @@
 				84A3802A1FAC1D8D008FB7AF /* UserThirdPartyAuthVCModules.swift in Sources */,
 				63FC24F01D98F7E9006F58F3 /* YYTextInput.m in Sources */,
 				0F920C131BCE549900AA9A31 /* MyCardsViewController.m in Sources */,
-				638A16F61E517D9F00AB8AB6 /* LOTAnimationCache.m in Sources */,
-				638A16F81E517D9F00AB8AB6 /* CGGeometryAdditions.m in Sources */,
 				0F099B971C1A97C300D97BAE /* ColledgeView.m in Sources */,
 				84C6B09120DA33DA008BD264 /* CreaditCardBottomCell.swift in Sources */,
 				63E1ECD51E1B8FAA0079A2F8 /* UIView+SDExtension.m in Sources */,
-				638C3F191CF2CB08000446A7 /* UIViewController+KNSemiModal.m in Sources */,
 				63C50E471E666FF40035EE4F /* Custom_BaseInfoExt.m in Sources */,
 				84EBE9E220C7B5E30045F538 /* HeaderInstructionsView.swift in Sources */,
 				849AC2601FF0DCA6005E435F /* FXD_ToWithdrawFundsFooterView.swift in Sources */,
@@ -5527,12 +5164,11 @@
 				0F6AAF391C30D8950060F137 /* MyCardCell.m in Sources */,
 				635AB7901BE2FE2700C32919 /* ReturnMsgBaseClass.m in Sources */,
 				63A24C5B1BE063A90036E8EF /* CALayer+Anim.m in Sources */,
-				638A16FC1E517D9F00AB8AB6 /* NSValue+Compat.m in Sources */,
+				847FC88720E4C92200A0F797 /* UIViewController+LewPopupViewController.m in Sources */,
 				CCEFC6E5207DEE480006D731 /* HotRecommendModel.m in Sources */,
 				CC49BA061FC51B7400232041 /* WithdrawDetailsViewController.swift in Sources */,
 				8449AC252062457A00526935 /* YXBaseRecordManager.swift in Sources */,
 				8449AC2B2062457A00526935 /* YXRoundProgressView.swift in Sources */,
-				637636E91D76A72A00E93289 /* LewPopupViewAnimationFade.m in Sources */,
 				849AC26E1FF0FABE005E435F /* FXD_MXVerifyManager.m in Sources */,
 				63553B151E5EEF1C00B2C1FF /* FaceIDOCRFront.m in Sources */,
 				849459D31FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift in Sources */,
@@ -5548,7 +5184,6 @@
 				6326C9D11BF08CEE00FD23A8 /* Model.m in Sources */,
 				636B1B261C2000E900450358 /* UIColor+Extend.m in Sources */,
 				84420A611ED678E200DFBFE0 /* LoginView.m in Sources */,
-				637636EC1D76A72A00E93289 /* UIViewController+LewPopupViewController.m in Sources */,
 				638C3F391CF564A4000446A7 /* SquareRepaymentAvailableRedpackets.m in Sources */,
 				637637091D79670D00E93289 /* UILabel+FlickerNumber.m in Sources */,
 				63DB3FBD1E1DE41700FBE1C4 /* RTRootNavigationController.m in Sources */,
@@ -5564,7 +5199,6 @@
 				84EBEA1320C93F130045F538 /* UIView+YXTool.m in Sources */,
 				844E5F501ED94DCB00753671 /* RegParamModel.m in Sources */,
 				6326C9EB1BF0B15700FD23A8 /* GetMoneyProcessBaseClass.m in Sources */,
-				63FFFBEE1D86B285000E3C38 /* NSDictionary+NilSafe.m in Sources */,
 				63FC25031D98F7E9006F58F3 /* YYLabel.m in Sources */,
 				CC5F9AB020735D990042DFDA /* SDCycleScrollCell.swift in Sources */,
 				84EBEA1620CA69A30045F538 /* PhonerechargeCardNoneView.swift in Sources */,
@@ -5575,7 +5209,6 @@
 				6379641F1CAD1BE0002A5910 /* LivenessSelfie.m in Sources */,
 				CC4F062F207C65770030A12A /* CollectionViewController.swift in Sources */,
 				8473F1411F31CAA1005B4933 /* SupportBankList.m in Sources */,
-				63AD1D1A1BFC1AA400807877 /* MLBlackTransition.m in Sources */,
 				840911A21F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */,
 				84A380181FAC1D8D008FB7AF /* UserFaceIdentiVCModules.swift in Sources */,
 				639F73EC1E4C0099008D3475 /* LoginParse.m in Sources */,
@@ -5588,21 +5221,16 @@
 				63A24C5A1BE063A90036E8EF /* CoreArchive.m in Sources */,
 				63FC24FE1D98F7E9006F58F3 /* UIView+YYText.m in Sources */,
 				CC6E696720562D10005853BB /* SubmitInfoModel.m in Sources */,
-				638A16E91E517D9F00AB8AB6 /* LOTEllipseShapeLayer.m in Sources */,
 				63FC24FF1D98F7E9006F58F3 /* YYTextAsyncLayer.m in Sources */,
 				6300CC0B1E4AE5FD0012B05A /* CareerParse.m in Sources */,
 				63FC24F61D98F7E9006F58F3 /* YYTextArchiver.m in Sources */,
-				638A16FD1E517D9F00AB8AB6 /* UIBezierPath.m in Sources */,
 				CC8BB752208F174600ADA647 /* RecentCell.swift in Sources */,
 				636B1BA31C30DBCB00450358 /* SMSViewModel.m in Sources */,
 				841A48E01FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift in Sources */,
-				638A170A1E517D9F00AB8AB6 /* LOTAnimationTransitionController.m in Sources */,
 				84A5696D1F983AFC003A870E /* LapseDiscountTicketViewController.m in Sources */,
 				84BC53D91FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */,
-				638A16F21E517D9F00AB8AB6 /* LOTAnimatableNumberValue.m in Sources */,
 				84332C89206CCCE8009A9121 /* CameraManager.swift in Sources */,
 				CC989BED1F4D5CBE000CDACF /* MineHeaderView.swift in Sources */,
-				638A16FA1E517D9F00AB8AB6 /* CADisplayLink.m in Sources */,
 				63878FE41C1519CD008E1CF9 /* FXD_Tool.m in Sources */,
 				CCCC0A8E1F677B9B007E1EB0 /* UserDataResult.m in Sources */,
 				CCA7A3351F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
@@ -5610,30 +5238,23 @@
 				CCC5DE3820C65CF3002A7553 /* MyBillAmountCell.swift in Sources */,
 				849459D01FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift in Sources */,
 				636EE3031B662ABB00A1A3ED /* main.m in Sources */,
-				638A16EC1E517D9F00AB8AB6 /* LOTMaskLayer.m in Sources */,
 				636B1B1E1C1FDDD100450358 /* FXD_AlertViewCust.m in Sources */,
 				CC8BC95C1FEB5871008E135E /* MineViewModel.m in Sources */,
 				633DF7891BDE22BF00A3998D /* MoreViewController.m in Sources */,
 				842D9CE7206B77940020C3C2 /* IDCardUploadParam.m in Sources */,
-				638A16EA1E517D9F00AB8AB6 /* LOTGroupLayerView.m in Sources */,
 				84192A9F2079F5BA0042E8F8 /* MembershipFeePayViewController.swift in Sources */,
-				638A17031E517D9F00AB8AB6 /* LOTShapeFill.m in Sources */,
 				CC742D92204D42E100D645CC /* OpenAccountViewController.swift in Sources */,
 				63C50E461E666FF40035EE4F /* Custom_BaseInfo.m in Sources */,
-				8472EFA520D8A6FE004AD006 /* TestTableViewController.swift in Sources */,
-				638A16F71E517D9F00AB8AB6 /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				636B1B9A1C2D153900450358 /* HomeViewModel.m in Sources */,
 				84C45C081FBC55860086E8DB /* DiscountTicketParam.m in Sources */,
-				638A16F41E517D9F00AB8AB6 /* LOTAnimatableScaleValue.m in Sources */,
-				638A16EF1E517D9F00AB8AB6 /* LOTStrokeShapeLayer.m in Sources */,
 				84C6B0A520DB4EE5008BD264 /* CreaditCardModel.m in Sources */,
 				63E5C7611D4AFDBF009A633C /* CardInfo.m in Sources */,
 				84DFBECF1F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */,
 				84ED5B731F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
 				63553B061E5D9E1B00B2C1FF /* MobileCell.m in Sources */,
+				847FC87120E48F1500A0F797 /* YXTableViewMaker.swift in Sources */,
 				84A37FF41FAC12A8008FB7AF /* ActivityHomePopView.m in Sources */,
 				CC6D1B2520C632B2007446E7 /* MyOrdersViewController.swift in Sources */,
-				638A16FB1E517D9F00AB8AB6 /* CALayer+Compat.m in Sources */,
 				1AE5E6241C1EA5240099CCA0 /* AboutMainViewController.m in Sources */,
 				CC742DA3204E6E1A00D645CC /* ComplianceViewModel.m in Sources */,
 				635AB0411E07BD46008A760C /* P2PBillDetail.m in Sources */,
@@ -5642,7 +5263,6 @@
 				63D43EF71D41F76D0076AC7F /* YYDiskCache.m in Sources */,
 				63FC24EE1D98F7E9006F58F3 /* YYTextDebugOption.m in Sources */,
 				84E306CA1F97256400C97D72 /* ChooseDiscountTableViewCell.swift in Sources */,
-				63A24C6B1BE063A90036E8EF /* UITableViewCell+Extend.m in Sources */,
 				84EBE9E820C7C9110045F538 /* OrderVerifyCodeView.swift in Sources */,
 				634831051CBCCF190005C4CD /* GetCareerInfoViewModel.m in Sources */,
 				84EBE9EB20C7E7C40045F538 /* OrderConfirmDetailViewController.swift in Sources */,
@@ -5661,7 +5281,6 @@
 				63A24C6D1BE063A90036E8EF /* UIWindow+Launch.m in Sources */,
 				8466936B20C6792800F47A24 /* RechargeCardTableViewCell.swift in Sources */,
 				84C61A0E1FA8241200626411 /* FXD_LaunchConfiguration.m in Sources */,
-				638A16F91E517D9F00AB8AB6 /* UIColor+Expanded.m in Sources */,
 				CC45E72F1FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
 				84EBE9D020C69E410045F538 /* PhoneRechargePopView.swift in Sources */,
 				84EBE9CA20C696FA0045F538 /* RechargeTypePopView.swift in Sources */,
@@ -5674,7 +5293,6 @@
 				84E2BDE01F53F3FB00E447EB /* UserDataModel.m in Sources */,
 				63F254861E49A45900852CF1 /* HMScannerBorder.m in Sources */,
 				84192A992079B1E10042E8F8 /* MemberCenterHeaderView.swift in Sources */,
-				638A17011E517D9F00AB8AB6 /* LOTMask.m in Sources */,
 				843FF1F81F20863600ECCE16 /* PaymentDetailModel.m in Sources */,
 				CCCFFADD20609D5E008556D2 /* NewProtocolParamModel.m in Sources */,
 				63145AB41CA2952400D04ED8 /* LoginMsgResult.m in Sources */,
@@ -5688,7 +5306,6 @@
 				CC1AC8D9209078F2009B5BD4 /* CardAuthSmsSendParamModel.m in Sources */,
 				6326C9EC1BF0B15700FD23A8 /* GetMoneyProcessResult.m in Sources */,
 				841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */,
-				638A17051E517D9F00AB8AB6 /* LOTShapePath.m in Sources */,
 				849842001FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
 				63FC25041D98F7E9006F58F3 /* YYTextView.m in Sources */,
 				CCEFC6EE207F65430006D731 /* CollectionListModel.m in Sources */,
@@ -5699,7 +5316,6 @@
 				63A24C641BE063A90036E8EF /* UIDevice+Extend.m in Sources */,
 				8492ED2B1FC7C68200C8D457 /* SetTradePasswordModel.m in Sources */,
 				CCA1819C1FC7F0320094DA58 /* WithdrawCashInfoModel.m in Sources */,
-				638A17061E517D9F00AB8AB6 /* LOTShapeRectangle.m in Sources */,
 				63145AF11CA8DBBD00D04ED8 /* RegionBaseClass.m in Sources */,
 				84EBE9FB20C8D4C40045F538 /* CardNumAndPasswordCell.swift in Sources */,
 				CCA181A31FC80E1E0094DA58 /* NonePageView.swift in Sources */,
@@ -5708,13 +5324,10 @@
 				63A24C5D1BE063A90036E8EF /* NSArray+Extend.m in Sources */,
 				6379641E1CAD1BE0002A5910 /* LivenessIdentity.m in Sources */,
 				84F87F4B1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */,
-				638A16F11E517D9F00AB8AB6 /* LOTAnimatableColorValue.m in Sources */,
 				847298341FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */,
 				63E1ECD21E1B8FAA0079A2F8 /* TAPageControl.m in Sources */,
-				638A16F51E517D9F00AB8AB6 /* LOTAnimatableShapeValue.m in Sources */,
 				CC742DBC204FD88A00D645CC /* IntermediateCell.swift in Sources */,
 				8492ED261FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */,
-				637636E71D76A72A00E93289 /* LewPopupBackgroundView.m in Sources */,
 				CC45E7371FD915A300DE803D /* UITabBar+badge.m in Sources */,
 				CCDEDF5C1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */,
 				849459CD1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */,
@@ -5737,11 +5350,11 @@
 				CC742DCF2052704B00D645CC /* P2PViewController.m in Sources */,
 				630D46171BCCD2FB00874064 /* UpdateDevIDViewController.m in Sources */,
 				CC80DFF6206B3DD1000F9BAC /* SortView.swift in Sources */,
-				637636EA1D76A72A00E93289 /* LewPopupViewAnimationSlide.m in Sources */,
 				CC80E00C206B8A70000F9BAC /* CompQueryViewModel.m in Sources */,
 				63A24C6A1BE063A90036E8EF /* UIImage+Water.m in Sources */,
 				84E62D171FDA6D2500B7F870 /* SaveCustomerCareerInfoParam.m in Sources */,
 				CCCE40C11EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */,
+				847FC89420E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m in Sources */,
 				63A24C5F1BE063A90036E8EF /* NSObject+Extend.m in Sources */,
 				636B1B591C23BB4100450358 /* GetMoneyHistoryResult.m in Sources */,
 				CC6F06931F7DF6C000FA889E /* ShanLinBackAlertView.swift in Sources */,
@@ -5749,7 +5362,6 @@
 				CC49BA031FC516D000232041 /* WithdrawHeaderView.swift in Sources */,
 				84ED5B6B1F4AC606004C0A59 /* SeniorCertificationView.m in Sources */,
 				840DFF6F1FE27DEC00148DEE /* InvationViewModel.m in Sources */,
-				638A170B1E517D9F00AB8AB6 /* LOTAnimationView.m in Sources */,
 				63D43EF91D41F76D0076AC7F /* YYMemoryCache.m in Sources */,
 				84139DF21FF3A0A0000DA896 /* ProtocolParamModel.m in Sources */,
 				CCCE40BD1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */,
@@ -5763,17 +5375,17 @@
 				63117FB71DFFC42600635BB3 /* FXD_AppShareConfig.m in Sources */,
 				63A24C601BE063A90036E8EF /* NSString+Extend.m in Sources */,
 				84EBEA0120C917FC0045F538 /* PhonerechargeCardServiceViewModel.m in Sources */,
-				63EC5C871E4D5B070070AFEB /* UIScrollView+EmptyDataSet.m in Sources */,
 				6313DC111BB3E48800EB45DE /* DES3Util.m in Sources */,
 				84EBEA1E20CA72EE0045F538 /* PhoneOrderListModel.m in Sources */,
-				637636E81D76A72A00E93289 /* LewPopupViewAnimationDrop.m in Sources */,
 				637BABFA1D7D3FAC00CF8EB5 /* RepayListInfo.m in Sources */,
 				84C6B08820DA2C2A008BD264 /* CreaditCardHeaderCell.swift in Sources */,
 				63C50E451E666FF40035EE4F /* ContactBean.m in Sources */,
 				6313DC201BB512BD00EB45DE /* BaseIndexViewController.m in Sources */,
 				CC98718920D396EC00AA3F99 /* HomeHotCell.swift in Sources */,
 				63FC24F31D98F7E9006F58F3 /* YYTextLine.m in Sources */,
+				847FC87520E4C7D100A0F797 /* UIViewController+KNSemiModal.m in Sources */,
 				63C50E4C1E67F6C10035EE4F /* CustomerIDInfo.m in Sources */,
+				847FC88F20E4C92200A0F797 /* LewPopupBackgroundView.m in Sources */,
 				CC4F0638207DE90B0030A12A /* FindViewModel.m in Sources */,
 				84C6B0A020DA57ED008BD264 /* ConditionsScreeningView.swift in Sources */,
 				63E8F1B11E6FDAEC00FE4BDD /* DataDicParse.m in Sources */,
@@ -5821,17 +5433,16 @@
 				CCC1E4072057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */,
 				CCF97E5D20C68BC2009E7ECC /* MyBillCell.swift in Sources */,
 				84F87F481FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */,
+				847FC88620E4C92200A0F797 /* LewPopupViewAnimationFade.m in Sources */,
 				84C619D41FA8161F00626411 /* PayMethodCell.m in Sources */,
 				84C619D51FA8161F00626411 /* PayMoneyCell.m in Sources */,
 				CC1AC8E52091B7A8009B5BD4 /* HotRecommendationViewController.swift in Sources */,
 				84C619D71FA8161F00626411 /* RepayListCell.m in Sources */,
 				CC0346291F3C4FBF001F6F3D /* HomepageActivityImageDisplayModule.m in Sources */,
 				84ED5B741F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
-				8478135620D26CCF00CA2AF4 /* YXTableViewMaker.swift in Sources */,
 				CCEFC6EA207E0B610006D731 /* QbbSubmitInfoModel.m in Sources */,
 				CC80DFED206A4924000F9BAC /* FXD_SuperLoanViewController.m in Sources */,
 				84EBEA1020C93A450045F538 /* UITableViewCell+YXTool.m in Sources */,
-				8478135320D26BCE00CA2AF4 /* YXTableViewExtention.swift in Sources */,
 				843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */,
 				84E306D01F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
 				843614A51F0CFD320036201A /* BaseResultModel.m in Sources */,
@@ -5855,6 +5466,7 @@
 				847DBBD21FC66BEA00D4B99E /* ImportPayPasswordView.swift in Sources */,
 				849459CB1FEB8336007EF067 /* FXD_AppPhoneContactStoreConfig.m in Sources */,
 				84C6B08220DA228A008BD264 /* CreaditCardViewController.swift in Sources */,
+				847FC88C20E4C92200A0F797 /* LewPopupViewAnimationDrop.m in Sources */,
 				CCC9FB66207A140C00B952BD /* SuperLoanHeaderView.swift in Sources */,
 				847298381FECF4AB0082F196 /* FXD_IncreaseAmountLimitViewController.swift in Sources */,
 				CC742D99204E470100D645CC /* BankCardCell.swift in Sources */,
@@ -5865,7 +5477,6 @@
 				8449AC242062457A00526935 /* YXAVPlayer.swift in Sources */,
 				CC0DF9651EA5B1090024841A /* NSString+MD5Encrypt.m in Sources */,
 				CC0DF9661EA5B1090024841A /* HelpViewCell.m in Sources */,
-				CC0DF9671EA5B1090024841A /* LOTShapeCircle.m in Sources */,
 				CC0DF9681EA5B1090024841A /* UIFont+Extend.m in Sources */,
 				CC0DF96B1EA5B1090024841A /* RegViewController.m in Sources */,
 				CC5F9AB120735D990042DFDA /* SDCycleScrollCell.swift in Sources */,
@@ -5876,7 +5487,6 @@
 				CC0DF9701EA5B1090024841A /* BaseNavigationViewController.m in Sources */,
 				84C6B09620DA36F7008BD264 /* CreaditCardTableViewCell.swift in Sources */,
 				CC0DF9711EA5B1090024841A /* MyViewController.m in Sources */,
-				CC0DF9751EA5B1090024841A /* LOTRectShapeLayer.m in Sources */,
 				84EBE9F820C8CE480045F538 /* PrepaidCardsInfoCell.swift in Sources */,
 				CC0DF9771EA5B1090024841A /* IdeaBackViewController.m in Sources */,
 				CC0DF9781EA5B1090024841A /* FXDWebViewController.m in Sources */,
@@ -5899,14 +5509,13 @@
 				84A52E9C207DF2AA000BF3E8 /* UserMemberShipViewModel.m in Sources */,
 				CC0DF9821EA5B1090024841A /* FaceIDLiveModel.m in Sources */,
 				CC0DF9831EA5B1090024841A /* SquareRepaymentBaseClass.m in Sources */,
-				CC0DF9841EA5B1090024841A /* UIColor.m in Sources */,
 				CC0DF9851EA5B1090024841A /* UIViewController+RTRootNavigationController.m in Sources */,
 				CC0DF9861EA5B1090024841A /* LoginViewModel.m in Sources */,
 				CC0DF9871EA5B1090024841A /* YYKVStorage.m in Sources */,
 				CC742DC120521FA700D645CC /* ApplicationNewCreateModel.m in Sources */,
 				CC0DF98B1EA5B1090024841A /* CALayer+Transition.m in Sources */,
 				CC80DFFD206B70A6000F9BAC /* FilterView.swift in Sources */,
-				CC0DF98C1EA5B1090024841A /* AppDelegate.mm in Sources */,
+				CC0DF98C1EA5B1090024841A /* AppDelegate.m in Sources */,
 				CCA181991FC7EED70094DA58 /* PersonalCenterModel.m in Sources */,
 				84C6B09E20DA483D008BD264 /* HeaderItemView.swift in Sources */,
 				CC0DF98D1EA5B1090024841A /* CustomerCareerResult.m in Sources */,
@@ -5918,39 +5527,32 @@
 				CC742D90204D3A3B00D645CC /* OpenAccountCell.swift in Sources */,
 				842C0B5E1ED59C7A00366D11 /* LoginParamModel.m in Sources */,
 				CC0DF9901EA5B1090024841A /* SDCycleScrollView.m in Sources */,
-				CC0DF9911EA5B1090024841A /* LOTAnimatablePointValue.m in Sources */,
 				CC0DF9921EA5B1090024841A /* FXD_Utility.m in Sources */,
 				CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */,
 				848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
 				8466936920C637E300F47A24 /* ShoppingMallModules.swift in Sources */,
 				CC0DF9951EA5B1090024841A /* (null) in Sources */,
 				CC0DF9971EA5B1090024841A /* (null) in Sources */,
-				CC0DF9981EA5B1090024841A /* LOTLayerView.m in Sources */,
+				847FC88A20E4C92200A0F797 /* LewPopupViewAnimationSpring.m in Sources */,
 				CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */,
 				CC8BB75620901C7D00ADA647 /* BillingMessageViewController.swift in Sources */,
 				CC0DF99A1EA5B1090024841A /* RegionCodeResult.m in Sources */,
-				CC0DF99C1EA5B1090024841A /* LOTShapeTransform.m in Sources */,
 				CCF97E5A20C67FD3009E7ECC /* MyBillDetailViewController.swift in Sources */,
 				848139641F568A8600CD701C /* YX_TextField.swift in Sources */,
 				CC0DF99E1EA5B1090024841A /* YYTextWeakProxy.m in Sources */,
 				CC0DF99F1EA5B1090024841A /* NSData+YYAdd.m in Sources */,
-				CC0DF9A01EA5B1090024841A /* LOTAnimatableBoundsValue.m in Sources */,
 				CC0DF9A11EA5B1090024841A /* RegionCodeBaseClass.m in Sources */,
 				84F87F4C1FC4102500F1C5CD /* PayPasswordInputView.m in Sources */,
-				CC0DF9A21EA5B1090024841A /* LOTAnimatableLayer.m in Sources */,
 				CC5FC5A41FC2AF4700DB0D78 /* CashWithdrawViewController.swift in Sources */,
 				CC0DF9A31EA5B1090024841A /* NSNumber+YYAdd.m in Sources */,
 				84D184701F98962A00A0B25F /* RedPacketTicketModel.m in Sources */,
 				CC0DF9A41EA5B1090024841A /* RepayMentViewModel.m in Sources */,
 				CCA181951FC6CDAC0094DA58 /* MineMiddleView.swift in Sources */,
-				CC0DF9A61EA5B1090024841A /* LOTComposition.m in Sources */,
 				CC0DF9A71EA5B1090024841A /* SSKeychainQuery.m in Sources */,
 				CC0DF9AA1EA5B1090024841A /* FXD_UserInfoConfiguration.m in Sources */,
 				CC0DF9AC1EA5B1090024841A /* InvitationViewController.m in Sources */,
-				CC0DF9AD1EA5B1090024841A /* LOTLayer.m in Sources */,
 				CC0DF9AE1EA5B1090024841A /* HMScannerMaskView.m in Sources */,
 				CC0DF9B11EA5B1090024841A /* RepayRecordController.m in Sources */,
-				CC0DF9B21EA5B1090024841A /* LOTShapeGroup.m in Sources */,
 				CC0DF9B31EA5B1090024841A /* HMScanerCardViewController.m in Sources */,
 				CCF97E5720C673B6009E7ECC /* RepaymentResultViewController.swift in Sources */,
 				84A37FF31FAC12A8008FB7AF /* HomeChoosePopView.swift in Sources */,
@@ -5960,6 +5562,7 @@
 				CC0DF9B51EA5B1090024841A /* SaveCustomBaseViewModel.m in Sources */,
 				84DFBEDF1F4D97D50009DAB9 /* HighRandingModel.m in Sources */,
 				CC0DF9B71EA5B1090024841A /* CheckViewIng.m in Sources */,
+				847FC88820E4C92200A0F797 /* UIViewController+LewPopupViewController.m in Sources */,
 				CC0DF9B81EA5B1090024841A /* YYTextAttribute.m in Sources */,
 				844E5F511ED94DCB00753671 /* RegParamModel.m in Sources */,
 				CC0F1B9E1EE6537700A23651 /* IdeaBackViewModel.m in Sources */,
@@ -5980,7 +5583,6 @@
 				84F1E2A01FD90EE0007D3381 /* UserDataInformationModel.m in Sources */,
 				84E306C81F97224E00C97D72 /* DiscountCouponListVCModules.swift in Sources */,
 				CC0DF9C81EA5B1090024841A /* YYTextKeyboardManager.m in Sources */,
-				CC0DF9CA1EA5B1090024841A /* LOTShapeStroke.m in Sources */,
 				84A380271FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.m in Sources */,
 				CC0DF9CC1EA5B1090024841A /* UIDevice+YYAdd.m in Sources */,
 				84A37FF91FAC12A8008FB7AF /* QRCodePopView.m in Sources */,
@@ -5999,11 +5601,8 @@
 				84C6B09B20DA47FF008BD264 /* AllCardHeaderView.swift in Sources */,
 				CC0DF9D71EA5B1090024841A /* UIApplication+Extend.m in Sources */,
 				84EBE9C520C691000045F538 /* YXMoviesRecordManager.swift in Sources */,
-				CC0DF9DB1EA5B1090024841A /* LewPopupViewAnimationSpring.m in Sources */,
 				CC0DF9DC1EA5B1090024841A /* YYTextUtilities.m in Sources */,
-				CC0DF9DD1EA5B1090024841A /* LOTShapeTrimPath.m in Sources */,
 				8492ED271FC7B63F00C8D457 /* SetTransactionPasswordViewModel.m in Sources */,
-				CC0DF9E61EA5B1090024841A /* LOTShapeLayerView.m in Sources */,
 				CC0DF9E71EA5B1090024841A /* RepayMentAvailableRedpackets.m in Sources */,
 				CC0DF9E81EA5B1090024841A /* GlobalConfig.m in Sources */,
 				84C6B09220DA33DA008BD264 /* CreaditCardBottomCell.swift in Sources */,
@@ -6013,8 +5612,6 @@
 				84EBE9E320C7B5E30045F538 /* HeaderInstructionsView.swift in Sources */,
 				CC0DF9ED1EA5B1090024841A /* YYTextInput.m in Sources */,
 				CC0DF9F01EA5B1090024841A /* MyCardsViewController.m in Sources */,
-				CC0DF9F11EA5B1090024841A /* LOTAnimationCache.m in Sources */,
-				CC0DF9F31EA5B1090024841A /* CGGeometryAdditions.m in Sources */,
 				CC0DF9F41EA5B1090024841A /* ColledgeView.m in Sources */,
 				CC594E641FCBFC7800D53F60 /* WithdrawCashParamModel.m in Sources */,
 				849AC2611FF0DCA6005E435F /* FXD_ToWithdrawFundsFooterView.swift in Sources */,
@@ -6023,7 +5620,6 @@
 				84DD363A1ED57DEE0057F19A /* SMSModel.m in Sources */,
 				CC7336901FD4E48600076230 /* WithdrawCashDetailParamModel.m in Sources */,
 				84E62D201FDA7E3100B7F870 /* CustomerContactsInfoParam.m in Sources */,
-				CC0DF9F81EA5B1090024841A /* UIViewController+KNSemiModal.m in Sources */,
 				CC85C6291FBECE8C0090A7E7 /* CashRedEnvelopeViewController.swift in Sources */,
 				CC5FC5AF1FC2CDDF00DB0D78 /* ReminderDetailsViewController.swift in Sources */,
 				840911A31F6F997E00DCDF03 /* JSAndOCInteraction.m in Sources */,
@@ -6035,6 +5631,7 @@
 				CC0DFA011EA5B1090024841A /* NSString+YYAdd.m in Sources */,
 				CC0DFA021EA5B1090024841A /* YYTextParser.m in Sources */,
 				CC0DFA041EA5B1090024841A /* NSString+Password.m in Sources */,
+				847FC89020E4C92200A0F797 /* LewPopupBackgroundView.m in Sources */,
 				84230CFE1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
 				CC0DFA071EA5B1090024841A /* ApprovalAmountExt.m in Sources */,
 				CC0DFA0A1EA5B1090024841A /* LabelCell.m in Sources */,
@@ -6052,10 +5649,8 @@
 				CC0DFA0F1EA5B1090024841A /* MyCardCell.m in Sources */,
 				CC0DFA101EA5B1090024841A /* ReturnMsgBaseClass.m in Sources */,
 				CC0DFA111EA5B1090024841A /* CALayer+Anim.m in Sources */,
-				CC0DFA131EA5B1090024841A /* NSValue+Compat.m in Sources */,
 				CC742DB4204FB90500D645CC /* BankListViewController.swift in Sources */,
 				CCCDA8851EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
-				CC0DFA141EA5B1090024841A /* LewPopupViewAnimationFade.m in Sources */,
 				CC0DFA151EA5B1090024841A /* FaceIDOCRFront.m in Sources */,
 				CC0DFA161EA5B1090024841A /* SquareRepaymentResult.m in Sources */,
 				CC0DFA171EA5B1090024841A /* FaceIDOCRBack.m in Sources */,
@@ -6064,7 +5659,6 @@
 				CC0DFA1D1EA5B1090024841A /* Model.m in Sources */,
 				84DFBED01F4D6B5A0009DAB9 /* CommonSwift.swift in Sources */,
 				CC0DFA1F1EA5B1090024841A /* UIColor+Extend.m in Sources */,
-				CC0DFA221EA5B1090024841A /* UIViewController+LewPopupViewController.m in Sources */,
 				CC45E7271FD78D4500DE803D /* MessageViewModel.m in Sources */,
 				84EBEA1420C93F130045F538 /* UIView+YXTool.m in Sources */,
 				84E62D141FDA3DD500B7F870 /* SaveUserInfoParam.m in Sources */,
@@ -6085,13 +5679,11 @@
 				CC0DFA311EA5B1090024841A /* NSString+File.m in Sources */,
 				84E2BDE11F53F3FB00E447EB /* UserDataModel.m in Sources */,
 				CC0DFA341EA5B1090024841A /* GetMoneyProcessBaseClass.m in Sources */,
-				CC0DFA351EA5B1090024841A /* NSDictionary+NilSafe.m in Sources */,
 				CC45E7381FD915A300DE803D /* UITabBar+badge.m in Sources */,
 				CC0DFA361EA5B1090024841A /* YYLabel.m in Sources */,
 				CC0DFA391EA5B1090024841A /* FXD_ViewModelBaseClass.m in Sources */,
 				CC0DFA3A1EA5B1090024841A /* UserCardResult.m in Sources */,
 				CC0DFA3E1EA5B1090024841A /* LivenessSelfie.m in Sources */,
-				CC0DFA3F1EA5B1090024841A /* MLBlackTransition.m in Sources */,
 				CC0DFA431EA5B1090024841A /* LoginParse.m in Sources */,
 				CC5FC5AC1FC2CB3A00DB0D78 /* ReminderDetailsCell.swift in Sources */,
 				CC6F06911F7B8D4200FA889E /* ShanLinWebVCModules.m in Sources */,
@@ -6106,7 +5698,6 @@
 				CC0DFA4A1EA5B1090024841A /* HF_NetWorkRequestManager.m in Sources */,
 				CC0DFA4C1EA5B1090024841A /* CoreArchive.m in Sources */,
 				CC0DFA4F1EA5B1090024841A /* UIView+YYText.m in Sources */,
-				CC0DFA511EA5B1090024841A /* LOTEllipseShapeLayer.m in Sources */,
 				841A48E11FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift in Sources */,
 				CC0DFA531EA5B1090024841A /* YYTextAsyncLayer.m in Sources */,
 				84A380231FAC1D8D008FB7AF /* UserPhoneContactsVCModules.m in Sources */,
@@ -6114,44 +5705,33 @@
 				CC0DFA551EA5B1090024841A /* CareerParse.m in Sources */,
 				CC0DFA561EA5B1090024841A /* YYTextArchiver.m in Sources */,
 				CCC5DE3920C65CF3002A7553 /* MyBillAmountCell.swift in Sources */,
-				CC0DFA571EA5B1090024841A /* UIBezierPath.m in Sources */,
 				CC0DFA5A1EA5B1090024841A /* SMSViewModel.m in Sources */,
-				CC0DFA5C1EA5B1090024841A /* LOTAnimationTransitionController.m in Sources */,
 				CC4F062A207C4E410030A12A /* SuperLoanNoneCell.swift in Sources */,
 				CC49BA041FC516D000232041 /* WithdrawHeaderView.swift in Sources */,
 				849459D11FEBAF8E007EF067 /* FXD_displayAmountCommonHeaderView.swift in Sources */,
-				CC0DFA5F1EA5B1090024841A /* LOTAnimatableNumberValue.m in Sources */,
-				CC0DFA601EA5B1090024841A /* CADisplayLink.m in Sources */,
+				847FC89520E4CD1700A0F797 /* UIScrollView+EmptyDataSet.m in Sources */,
 				CC8BC95D1FEB5873008E135E /* MineViewModel.m in Sources */,
 				844E5F4C1ED94C9C00753671 /* RegViewModel.m in Sources */,
 				843FF1F91F20863600ECCE16 /* PaymentDetailModel.m in Sources */,
-				8472EFA620D8A6FE004AD006 /* TestTableViewController.swift in Sources */,
 				CC0DFA611EA5B1090024841A /* FXD_Tool.m in Sources */,
 				CC0DFA631EA5B1090024841A /* UIBarButtonItem+Extend.m in Sources */,
 				CC742D93204D42E100D645CC /* OpenAccountViewController.swift in Sources */,
 				CC85C62D1FBED2E50090A7E7 /* RedPacketHeaderView.swift in Sources */,
 				CC0DFA641EA5B1090024841A /* main.m in Sources */,
 				84C6B0A620DB4EE6008BD264 /* CreaditCardModel.m in Sources */,
-				CC0DFA651EA5B1090024841A /* LOTMaskLayer.m in Sources */,
 				CC0DFA671EA5B1090024841A /* FXD_AlertViewCust.m in Sources */,
 				CC0DFA691EA5B1090024841A /* MoreViewController.m in Sources */,
-				CC0DFA6A1EA5B1090024841A /* LOTGroupLayerView.m in Sources */,
-				CC0DFA6C1EA5B1090024841A /* LOTShapeFill.m in Sources */,
 				CC0DFA6D1EA5B1090024841A /* Custom_BaseInfo.m in Sources */,
 				CC6D1B2620C632B2007446E7 /* MyOrdersViewController.swift in Sources */,
 				CC989C351F4D8738000CDACF /* AuthenticationCenterCell.swift in Sources */,
-				CC0DFA6E1EA5B1090024841A /* CAAnimationGroup+LOTAnimatableGroup.m in Sources */,
 				CC0DFA6F1EA5B1090024841A /* HomeViewModel.m in Sources */,
-				CC0DFA701EA5B1090024841A /* LOTAnimatableScaleValue.m in Sources */,
 				CCA1819D1FC7F0320094DA58 /* WithdrawCashInfoModel.m in Sources */,
 				CC742DA4204E6E1A00D645CC /* ComplianceViewModel.m in Sources */,
-				CC0DFA721EA5B1090024841A /* LOTStrokeShapeLayer.m in Sources */,
 				CC80DFF7206B3DD1000F9BAC /* SortView.swift in Sources */,
 				CC0DFA731EA5B1090024841A /* CardInfo.m in Sources */,
 				84EBE9E920C7C9110045F538 /* OrderVerifyCodeView.swift in Sources */,
 				CC0DFA741EA5B1090024841A /* MobileCell.m in Sources */,
 				84EBE9EC20C7E7C40045F538 /* OrderConfirmDetailViewController.swift in Sources */,
-				CC0DFA751EA5B1090024841A /* CALayer+Compat.m in Sources */,
 				CC0DFA761EA5B1090024841A /* AboutMainViewController.m in Sources */,
 				842C4A071FE0D1F400D3D199 /* CommonViewModel.m in Sources */,
 				CC3BCC151FBABEC50042A738 /* MessageCell.swift in Sources */,
@@ -6161,7 +5741,6 @@
 				CC6C93F21F4AC5E500587C74 /* HomeRefuseThirdView.swift in Sources */,
 				CC742DBA204FD7FE00D645CC /* IntermediateViewController.swift in Sources */,
 				CC0DFA7C1EA5B1090024841A /* YYTextDebugOption.m in Sources */,
-				CC0DFA7E1EA5B1090024841A /* UITableViewCell+Extend.m in Sources */,
 				CC6E696420561565005853BB /* SmsCodeModel.m in Sources */,
 				CCA7A3361F4EB98B0029DA6E /* AuthenticationCenterHeaderView.swift in Sources */,
 				8466936C20C6792800F47A24 /* RechargeCardTableViewCell.swift in Sources */,
@@ -6184,7 +5763,6 @@
 				CC742DA9204E704D00D645CC /* AccountModel.m in Sources */,
 				CC45E72C1FD78FF500DE803D /* ShowMsgPreviewModel.m in Sources */,
 				CC0DFA8F1EA5B1090024841A /* UIWindow+Launch.m in Sources */,
-				CC0DFA901EA5B1090024841A /* UIColor+Expanded.m in Sources */,
 				CC0DFA921EA5B1090024841A /* UIImage+Extend.m in Sources */,
 				CC0DFA931EA5B1090024841A /* NSDate+Extend.m in Sources */,
 				CCCFFADE20609D5E008556D2 /* NewProtocolParamModel.m in Sources */,
@@ -6194,7 +5772,6 @@
 				84192A9A2079B1E10042E8F8 /* MemberCenterHeaderView.swift in Sources */,
 				CC0DFA961EA5B1090024841A /* HMScannerBorder.m in Sources */,
 				CC1AC8DA209078F2009B5BD4 /* CardAuthSmsSendParamModel.m in Sources */,
-				CC0DFA971EA5B1090024841A /* LOTMask.m in Sources */,
 				CC0DFA9A1EA5B1090024841A /* LoginMsgResult.m in Sources */,
 				CC0DFA9B1EA5B1090024841A /* FindPassViewModel.m in Sources */,
 				CC0DFA9D1EA5B1090024841A /* RegionExt.m in Sources */,
@@ -6202,34 +5779,30 @@
 				849842011FECAA95002BC464 /* FXD_LoanApplicationDisplayTableViewCell.swift in Sources */,
 				CC4F0630207C65770030A12A /* CollectionViewController.swift in Sources */,
 				CC0DFAA01EA5B1090024841A /* GetMoneyProcessResult.m in Sources */,
-				CC0DFAA21EA5B1090024841A /* LOTShapePath.m in Sources */,
 				CC742DB7204FB9C700D645CC /* BankListCell.swift in Sources */,
 				840DFF701FE27DEC00148DEE /* InvationViewModel.m in Sources */,
 				CC0DFAA31EA5B1090024841A /* YYTextView.m in Sources */,
 				84EBE9FC20C8D4C50045F538 /* CardNumAndPasswordCell.swift in Sources */,
 				CC0DFAA51EA5B1090024841A /* CheckUtils.m in Sources */,
+				847FC87620E4C7D100A0F797 /* UIViewController+KNSemiModal.m in Sources */,
 				CCEFC6E6207DEE480006D731 /* HotRecommendModel.m in Sources */,
 				84E810FC2091A7F5009226B5 /* ChooseCreditDateView.swift in Sources */,
 				CC0DFAA61EA5B1090024841A /* PCCircleViewConst.m in Sources */,
 				CC0DFAA81EA5B1090024841A /* TADotView.m in Sources */,
 				CC0DFAA91EA5B1090024841A /* UIDevice+Extend.m in Sources */,
-				CC0DFAAA1EA5B1090024841A /* LOTShapeRectangle.m in Sources */,
 				84A3801B1FAC1D8D008FB7AF /* UserIdentityInformationVCModules.mm in Sources */,
 				CC0DFAAD1EA5B1090024841A /* RegionBaseClass.m in Sources */,
 				CC0DFAAF1EA5B1090024841A /* loanRecordCell.m in Sources */,
 				847298351FECE4B00082F196 /* FXD_ApplicationChoosePickerView.swift in Sources */,
 				CC0DFAB01EA5B1090024841A /* NSArray+Extend.m in Sources */,
 				CC0DFAB21EA5B1090024841A /* LivenessIdentity.m in Sources */,
-				CC0DFAB31EA5B1090024841A /* LOTAnimatableColorValue.m in Sources */,
 				CC742DBD204FD88A00D645CC /* IntermediateCell.swift in Sources */,
 				CC0DFAB41EA5B1090024841A /* TAPageControl.m in Sources */,
 				CCDEDF5D1EEA387D009CEC32 /* SaveAccountBankCardParamModel.m in Sources */,
 				CC872C5020BB94DB00FBF10C /* SupermarketHeaderView.swift in Sources */,
-				CC0DFAB51EA5B1090024841A /* LOTAnimatableShapeValue.m in Sources */,
 				849459CE1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */,
 				CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */,
 				CC8BC9551FEA0374008E135E /* HomePageCell.swift in Sources */,
-				CC0DFAB71EA5B1090024841A /* LewPopupBackgroundView.m in Sources */,
 				CC0DFAB91EA5B1090024841A /* RegionCodeExt.m in Sources */,
 				8438F7101EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
 				848FC64B1FFE137000918CE9 /* CommonExtention.swift in Sources */,
@@ -6245,12 +5818,10 @@
 				CC742DD02052704B00D645CC /* P2PViewController.m in Sources */,
 				CC0DFAC61EA5B1090024841A /* UpdateDevIDViewController.m in Sources */,
 				CCCE40C21EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */,
-				CC0DFAC71EA5B1090024841A /* LewPopupViewAnimationSlide.m in Sources */,
 				CC0DFAC81EA5B1090024841A /* UIImage+Water.m in Sources */,
 				CC0DFAC91EA5B1090024841A /* NSObject+Extend.m in Sources */,
 				8492ED2C1FC7C68200C8D457 /* SetTradePasswordModel.m in Sources */,
 				CC0DFACA1EA5B1090024841A /* GetMoneyHistoryResult.m in Sources */,
-				CC0DFACB1EA5B1090024841A /* LOTAnimationView.m in Sources */,
 				CC0DFACD1EA5B1090024841A /* YYMemoryCache.m in Sources */,
 				CC3BCC121FBABE7A0042A738 /* MyMessageViewController.swift in Sources */,
 				CC80DFF4206B291D000F9BAC /* SuperLoanHeaderCell.swift in Sources */,
@@ -6266,7 +5837,6 @@
 				CC0DFAD81EA5B1090024841A /* FXD_AppShareConfig.m in Sources */,
 				CC8BC9591FEA394C008E135E /* FXD_HomePageVCModules.m in Sources */,
 				CC0DFADA1EA5B1090024841A /* NSString+Extend.m in Sources */,
-				CC0DFADB1EA5B1090024841A /* UIScrollView+EmptyDataSet.m in Sources */,
 				84EBEA0220C917FC0045F538 /* PhonerechargeCardServiceViewModel.m in Sources */,
 				CC0DFADC1EA5B1090024841A /* DES3Util.m in Sources */,
 				84A3801F1FAC1D8D008FB7AF /* UserMobileAuthenticationVCModules.m in Sources */,
@@ -6274,13 +5844,13 @@
 				84A37FF51FAC12A8008FB7AF /* ActivityHomePopView.m in Sources */,
 				84CC899F1F5973D700537910 /* DrawingsInfoModel.m in Sources */,
 				84C6B08920DA2C2A008BD264 /* CreaditCardHeaderCell.swift in Sources */,
-				CC0DFADF1EA5B1090024841A /* LewPopupViewAnimationDrop.m in Sources */,
 				CC0DFAE01EA5B1090024841A /* RepayListInfo.m in Sources */,
 				CC98718A20D396EC00AA3F99 /* HomeHotCell.swift in Sources */,
 				CC0DFAE11EA5B1090024841A /* ContactBean.m in Sources */,
 				CC0DFAE31EA5B1090024841A /* BaseIndexViewController.m in Sources */,
 				CC0DFAE41EA5B1090024841A /* YYTextLine.m in Sources */,
 				84C6B0A120DA57ED008BD264 /* ConditionsScreeningView.swift in Sources */,
+				847FC88E20E4C92200A0F797 /* LewPopupViewAnimationSlide.m in Sources */,
 				CC0DFAE61EA5B1090024841A /* CustomerIDInfo.m in Sources */,
 				CC0DFAE71EA5B1090024841A /* DataDicParse.m in Sources */,
 				84EBEA0C20C9348C0045F538 /* UIButton+YXTool.m in Sources */,

@@ -20,9 +20,6 @@ extension NibLoadProtocol where Self : UIView{
 
 
 
-
-
-
 protocol Particleable {
     
 }

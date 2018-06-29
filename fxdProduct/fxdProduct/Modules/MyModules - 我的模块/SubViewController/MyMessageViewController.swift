@@ -247,6 +247,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let array = tableView.gestureRecognizers
         if indexPath.row == 0 {
             return false
         }
@@ -288,6 +289,9 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"
     }
+    
+
+    
     
     /*
     // MARK: - Navigation

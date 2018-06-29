@@ -51,13 +51,29 @@ class MessageCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let str = NSStringFromClass((touch.view?.classForCoder)!)
+        if  str == "UITableViewCellContentView" {
+            return false
+        }
+        return true
+    }
+    
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        let str = NSStringFromClass((otherGestureRecognizer.view?.classForCoder)!)
+        if  str == "UITableViewCellContentView" {
+            return false
+        }
+        return true
+    }
+    
 }
 
 extension MessageCell{
     
     fileprivate func setCellType(CellType : MessageCellType){
 
-        
         for view in self.subviews {
             view.removeFromSuperview()
         }

@@ -173,8 +173,9 @@
 }
 
 -(void)hgLoanProtoolListApplicationId:(NSString *)applicationId{
-    
+    applicationId = applicationId == nil ? @" " : applicationId;
     NSDictionary *paramDic = @{@"applicationId":applicationId};
+    
     [[HF_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_hgLoanProtoolList_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {
