@@ -172,7 +172,7 @@
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 120, _k_w, _k_h-120-49) style:UITableViewStylePlain];
     }
     
-    [_tableView registerClass:[SuperLoanCell class] forCellReuseIdentifier:@"SuperLoanCell"];
+    [_tableView registerClass:[SupermarketTabCell class] forCellReuseIdentifier:@"SupermarketTabCell"];
     [_tableView registerClass:[SuperLoanNoneCell class] forCellReuseIdentifier:@"SuperLoanNoneCell"];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.showsVerticalScrollIndicator = NO;
@@ -253,69 +253,84 @@
         return cell;
     }
     
-    SuperLoanCell *superLoanCell = [tableView dequeueReusableCellWithIdentifier:@"SuperLoanCell"];
-    [superLoanCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    superLoanCell.backgroundColor = [UIColor whiteColor];
-    superLoanCell.selected = NO;
-    superLoanCell.delegate = self;
+    SupermarketTabCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SupermarketTabCell"];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    cell.backgroundColor = [UIColor whiteColor];
+    cell.selected = NO;
     
     RowsModel *model = _dataArray[indexPath.row];
-//    if ([model.moduletype isEqualToString:@""] || model.moduletype == nil) {
-//        superLoanCell.type = @"2";
-//    }else{
-//        superLoanCell.type = model.moduletype;
-//    }
-//    NSLog(@"%ld=============",indexPath.section);
-    superLoanCell.type = @"1";
-    superLoanCell.descLabel.text = model.applicantsCount;
-    [superLoanCell.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.plantLogo] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRetryFailed];
-    superLoanCell.titleLabel.text = model.plantName;
+//    superLoanCell.descLabel.text = model.applicantsCount;
+//    [cell.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.plantLogo] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRetryFailed];
+//    superLoanCell.titleLabel.text = model.plantName;
     
-    NSString *maximumAmount = model.maximumAmount != nil?model.maximumAmount:@"";
-    superLoanCell.qutaLabel.text = [NSString stringWithFormat:@"额度:最高%@%@",maximumAmount,model.maximumAmountUnit];
-    NSString *term = model.unitStr != nil?model.unitStr:@"";
-    superLoanCell.termLabel.text = [NSString stringWithFormat:@"期限:%@",term];
-    if (![term isEqualToString:@""]) {
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:superLoanCell.termLabel.text];
-        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,attriStr.length-4)];
-        superLoanCell.termLabel.attributedText = attriStr;
-    }
+//    NSString *maximumAmount = model.maximumAmount != nil?model.maximumAmount:@"";
+//    superLoanCell.qutaLabel.text = [NSString stringWithFormat:@"额度:最高%@%@",maximumAmount,model.maximumAmountUnit];
+//    NSString *term = model.unitStr != nil?model.unitStr:@"";
+//    superLoanCell.termLabel.text = [NSString stringWithFormat:@"期限:%@",term];
     
-    NSString *referenceRate = model.referenceRate != nil?model.referenceRate:@"";
-    superLoanCell.feeLabel.text = [NSString stringWithFormat:@"费用:%@%%/%@",referenceRate,[self rateUnit: model.referenceMode]];
+//    [superLoanCell.descBtn setTitle:model.platformIntroduction forState:UIControlStateNormal];
     
-    if (![referenceRate isEqualToString:@""]) {
-        NSMutableAttributedString *attriStr1 = [[NSMutableAttributedString alloc] initWithString:superLoanCell.feeLabel.text];
-        [attriStr1 addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,attriStr1.length-4)];
-        superLoanCell.feeLabel.attributedText = attriStr1;
-    }
-    [superLoanCell.descBtn setTitle:model.platformIntroduction forState:UIControlStateNormal];
-    
-    [superLoanCell.descBtn setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
-    superLoanCell.descBtn.layer.borderColor = [UIColor purpleColor].CGColor;
-    NSDictionary *dic = @{NSFontAttributeName : [UIFont yx_systemFontOfSize:12]};
-    CGFloat width = [model.platformIntroduction boundingRectWithSize:CGSizeMake(_k_h, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size.width + 20;
-    
-    [superLoanCell.descBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo([NSNumber numberWithFloat:width]);
-    }];
-//    [superLoanCell.descBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo([NSNumber numberWithFloat:width]);
-//    }];
-    if (indexPath.row % 2 == 0){
-        
-        [superLoanCell.descBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        superLoanCell.descBtn.layer.borderColor = [UIColor blueColor].CGColor;
-    }
-    
-    superLoanCell.collectionBtn.tag = indexPath.row;
-    [superLoanCell.collectionBtn setImage:[UIImage imageNamed:@"collection_icon"] forState:UIControlStateNormal];
-    if ([model.isCollect isEqualToString:@"0"]) {
-        [superLoanCell.collectionBtn setImage:[UIImage imageNamed:@"collection_selected_icon"] forState:UIControlStateNormal];
-    }
-    return superLoanCell;
+    return cell;
+
 }
 
+-(void)oldTabCell{
+    //    SuperLoanCell *superLoanCell = [tableView dequeueReusableCellWithIdentifier:@"SuperLoanCell"];
+    //    [superLoanCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    //    superLoanCell.backgroundColor = [UIColor whiteColor];
+    //    superLoanCell.selected = NO;
+    //    superLoanCell.delegate = self;
+    //
+    //    RowsModel *model = _dataArray[indexPath.row];
+    //    superLoanCell.type = @"1";
+    //    superLoanCell.descLabel.text = model.applicantsCount;
+    //    [superLoanCell.leftImageView sd_setImageWithURL:[NSURL URLWithString:model.plantLogo] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRetryFailed];
+    //    superLoanCell.titleLabel.text = model.plantName;
+    //
+    //    NSString *maximumAmount = model.maximumAmount != nil?model.maximumAmount:@"";
+    //    superLoanCell.qutaLabel.text = [NSString stringWithFormat:@"额度:最高%@%@",maximumAmount,model.maximumAmountUnit];
+    //    NSString *term = model.unitStr != nil?model.unitStr:@"";
+    //    superLoanCell.termLabel.text = [NSString stringWithFormat:@"期限:%@",term];
+    //    if (![term isEqualToString:@""]) {
+    //        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:superLoanCell.termLabel.text];
+    //        [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,attriStr.length-4)];
+    //        superLoanCell.termLabel.attributedText = attriStr;
+    //    }
+    //
+    //    NSString *referenceRate = model.referenceRate != nil?model.referenceRate:@"";
+    //    superLoanCell.feeLabel.text = [NSString stringWithFormat:@"费用:%@%%/%@",referenceRate,[self rateUnit: model.referenceMode]];
+    //
+    //    if (![referenceRate isEqualToString:@""]) {
+    //        NSMutableAttributedString *attriStr1 = [[NSMutableAttributedString alloc] initWithString:superLoanCell.feeLabel.text];
+    //        [attriStr1 addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3,attriStr1.length-4)];
+    //        superLoanCell.feeLabel.attributedText = attriStr1;
+    //    }
+    //    [superLoanCell.descBtn setTitle:model.platformIntroduction forState:UIControlStateNormal];
+    //
+    //    [superLoanCell.descBtn setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
+    //    superLoanCell.descBtn.layer.borderColor = [UIColor purpleColor].CGColor;
+    //    NSDictionary *dic = @{NSFontAttributeName : [UIFont yx_systemFontOfSize:12]};
+    //    CGFloat width = [model.platformIntroduction boundingRectWithSize:CGSizeMake(_k_h, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size.width + 20;
+    //
+    //    [superLoanCell.descBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+    //        make.width.equalTo([NSNumber numberWithFloat:width]);
+    //    }];
+    ////    [superLoanCell.descBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+    ////        make.width.equalTo([NSNumber numberWithFloat:width]);
+    ////    }];
+    //    if (indexPath.row % 2 == 0){
+    //
+    //        [superLoanCell.descBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    //        superLoanCell.descBtn.layer.borderColor = [UIColor blueColor].CGColor;
+    //    }
+    //
+    //    superLoanCell.collectionBtn.tag = indexPath.row;
+    //    [superLoanCell.collectionBtn setImage:[UIImage imageNamed:@"collection_icon"] forState:UIControlStateNormal];
+    //    if ([model.isCollect isEqualToString:@"0"]) {
+    //        [superLoanCell.collectionBtn setImage:[UIImage imageNamed:@"collection_selected_icon"] forState:UIControlStateNormal];
+    //    }
+    //    return superLoanCell;
+}
 -(NSString *)rateUnit:(NSString *)referenceMode{
     
     switch (referenceMode.integerValue) {
@@ -596,6 +611,7 @@
         return;
     }
     RowsModel *model = _dataArray[sender.tag];
+    NSString *moduletype = model.moduletype == nil ? @"1" : model.moduletype;
     CollectionViewModel *collectionVM = [[CollectionViewModel alloc]init];
     [collectionVM setBlockWithReturnBlock:^(id returnValue) {
         
@@ -611,8 +627,6 @@
            
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:sender.tag inSection:0];
             [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-
-//            [self getDataMaxAmount:_maxAmount maxDays:_maxDays minAmount:_minAmount minDays:_minDays offset:@"0" order:_order sort:[NSString stringWithFormat:@"%ld",_index] row:sender.tag];
             
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
@@ -622,7 +636,7 @@
         
     }];
     
-    [collectionVM addMyCollectionInfocollectionType:model.moduletype platformId:model.id_];
+    [collectionVM addMyCollectionInfocollectionType:moduletype platformId:model.id_];
     
 }
 

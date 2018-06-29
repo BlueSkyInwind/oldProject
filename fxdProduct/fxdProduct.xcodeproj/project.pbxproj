@@ -1098,6 +1098,8 @@
 		CCCDA8781EDF9F5200B48DFF /* CheckViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */; };
 		CCCDA8841EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */; };
 		CCCDA8851EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */; };
+		CCCE27FB20E5D61A00180862 /* SupermarketTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE27F820E5D51400180862 /* SupermarketTabCell.swift */; };
+		CCCE27FC20E5D61B00180862 /* SupermarketTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE27F820E5D51400180862 /* SupermarketTabCell.swift */; };
 		CCCE40BD1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40BC1EE7CCB300E3F102 /* IdeaBackParamModel.m */; };
 		CCCE40BE1EE7CCB300E3F102 /* IdeaBackParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40BC1EE7CCB300E3F102 /* IdeaBackParamModel.m */; };
 		CCCE40C11EE7CDF900E3F102 /* PserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE40C01EE7CDF900E3F102 /* PserInfoViewModel.m */; };
@@ -2056,6 +2058,7 @@
 		CCCDA8761EDF9F5200B48DFF /* CheckViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewModel.m; sourceTree = "<group>"; };
 		CCCDA8821EE028A200B48DFF /* UnbundlingBankCardViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnbundlingBankCardViewModel.h; sourceTree = "<group>"; };
 		CCCDA8831EE028A200B48DFF /* UnbundlingBankCardViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnbundlingBankCardViewModel.m; sourceTree = "<group>"; };
+		CCCE27F820E5D51400180862 /* SupermarketTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupermarketTabCell.swift; sourceTree = "<group>"; };
 		CCCE40BB1EE7CCB300E3F102 /* IdeaBackParamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdeaBackParamModel.h; sourceTree = "<group>"; };
 		CCCE40BC1EE7CCB300E3F102 /* IdeaBackParamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdeaBackParamModel.m; sourceTree = "<group>"; };
 		CCCE40BF1EE7CDF900E3F102 /* PserInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PserInfoViewModel.h; sourceTree = "<group>"; };
@@ -4366,6 +4369,7 @@
 				CC4F0628207C4E410030A12A /* SuperLoanNoneCell.swift */,
 				CCB2513A20B7FC53007E20C6 /* SupermarketCell.swift */,
 				CC872C4E20BB94DB00FBF10C /* SupermarketHeaderView.swift */,
+				CCCE27F820E5D51400180862 /* SupermarketTabCell.swift */,
 			);
 			path = SuperLoanView;
 			sourceTree = "<group>";
@@ -5279,6 +5283,7 @@
 				63553AD81E5D2A4200B2C1FF /* DataDisplayCell.m in Sources */,
 				637963AA1CABD0F8002A5910 /* ApprovalAmountResult.m in Sources */,
 				63A24C6D1BE063A90036E8EF /* UIWindow+Launch.m in Sources */,
+				CCCE27FB20E5D61A00180862 /* SupermarketTabCell.swift in Sources */,
 				8466936B20C6792800F47A24 /* RechargeCardTableViewCell.swift in Sources */,
 				84C61A0E1FA8241200626411 /* FXD_LaunchConfiguration.m in Sources */,
 				CC45E72F1FD790F800DE803D /* AountStationLetterMsgModel.m in Sources */,
@@ -5747,6 +5752,7 @@
 				CC0DFA7F1EA5B1090024841A /* GetCareerInfoViewModel.m in Sources */,
 				CC0DFA811EA5B1090024841A /* LunchVCModules.m in Sources */,
 				8473F1421F31CAA1005B4933 /* SupportBankList.m in Sources */,
+				CCCE27FC20E5D61B00180862 /* SupermarketTabCell.swift in Sources */,
 				84EBE9D120C69E410045F538 /* PhoneRechargePopView.swift in Sources */,
 				84EBE9CB20C696FA0045F538 /* RechargeTypePopView.swift in Sources */,
 				84192AA32079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */,
