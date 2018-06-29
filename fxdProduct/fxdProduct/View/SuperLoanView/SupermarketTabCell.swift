@@ -11,17 +11,17 @@ import UIKit
 class SupermarketTabCell: UITableViewCell {
     
     //最左边图片
-    var leftImageView : UIImageView?
+    @objc var leftImageView : UIImageView?
     //名称
-    var nameLabel : UILabel?
+    @objc var nameLabel : UILabel?
     //下载量
-    var downloadsLabel : UILabel?
+    @objc var downloadsLabel : UILabel?
     //额度
-    var quotaLabel : UILabel?
+    @objc var quotaLabel : UILabel?
     //期限
-    var termLabel : UILabel?
+    @objc var termLabel : UILabel?
     //产品描述
-    var descLabel : UILabel?
+    @objc var descLabel : UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -90,7 +90,7 @@ extension SupermarketTabCell{
         })
         
         let lineView = UIView()
-        lineView.backgroundColor = SUPERMARK_LINE_COLOR
+        lineView.backgroundColor = LINE_COLOR
         self.addSubview(lineView)
         lineView.snp.makeConstraints { (make) in
             make.left.equalTo(leftView.snp.right).offset(5)
@@ -110,12 +110,12 @@ extension SupermarketTabCell{
         }
         
         quotaLabel = UILabel()
-        quotaLabel?.textColor = SUPERMARK_LINE_COLOR
-        quotaLabel?.font = UIFont.systemFont(ofSize: 13)
+        quotaLabel?.textColor = SUPERMARK_QUOTA_COLOR
+        quotaLabel?.font = UIFont.systemFont(ofSize: 19)
         self.addSubview(quotaLabel!)
         quotaLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(quota.snp.left).offset(0)
-            make.top.equalTo(quota.snp.bottom).offset(11)
+            make.top.equalTo(quota.snp.bottom).offset(5)
         })
         
         let term = UILabel()
@@ -134,7 +134,7 @@ extension SupermarketTabCell{
         self.addSubview(termLabel!)
         termLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(term.snp.left).offset(0)
-            make.top.equalTo(term.snp.bottom).offset(12)
+            make.top.equalTo(term.snp.bottom).offset(5)
         })
         
         descLabel = UILabel()

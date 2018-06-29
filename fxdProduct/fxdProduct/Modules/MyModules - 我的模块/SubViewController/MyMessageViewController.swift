@@ -25,7 +25,6 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         //随机生成一些初始化数据
         configureView()
         createNoneView()
-        setNavQRRightBar()
 
         self.page = 0
         getData(isHeaderFresh: true)
@@ -36,24 +35,6 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func setNavQRRightBar(){
-        
-        let clearBtn = UIButton.init(frame: CGRect(x:0,y:0,width:23,height:18))
-        clearBtn.setTitle("清空", for: .normal)
-        clearBtn.setTitleColor(UIColor.white, for: .normal)
-        clearBtn.addTarget(self, action: #selector(clearBtnClick), for: .touchUpInside)
-        let aBarbi = UIBarButtonItem.init(customView: clearBtn)
-        let spaceItem = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        spaceItem.width = 8
-        self.navigationItem.rightBarButtonItems = [spaceItem,aBarbi]
-        
-    }
-    
-    @objc func clearBtnClick(){
-        
-    }
-
     
     func createNoneView(){
         
@@ -198,7 +179,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         if indexPath.row == 0 {
             return 15
         }
-        return 75
+        return 105
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -220,12 +201,11 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         messageCell.timeLabel?.text = items[indexPath.row - 1].createDate
         messageCell.contentLabel?.text = items[indexPath.row - 1].msgText
         messageCell.leftImageView?.image = UIImage(named:"speaker")
-        messageCell.titleLabel?.textColor = TITLE_COLOR
 
         if items[indexPath.row - 1].isRead == "2" {
 
             messageCell.leftImageView?.image = UIImage(named:"speaker_select")
-            messageCell.titleLabel?.textColor = QUTOA_COLOR;
+            messageCell.arrowImageView?.image = UIImage.init(named: "arrow_sel_icon")
         }
         
         return messageCell!
@@ -238,7 +218,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         }
         let cell = tableView.cellForRow(at: indexPath) as! MessageCell
         cell.leftImageView?.image = UIImage(named:"speaker_select")
-        cell.titleLabel?.textColor = QUTOA_COLOR;
+        cell.arrowImageView?.image = UIImage.init(named: "arrow_sel_icon")
         
         let webView = FXDWebViewController()
         webView.urlStr = (messageModel?.requestUrl)! + items[indexPath.row - 1].id_

@@ -271,7 +271,7 @@ extension FilterView{
         let sureBtn = UIButton()
         sureBtn.setTitleColor(UIColor.white, for: .normal)
         sureBtn.setTitle("确认", for: .normal)
-        sureBtn.backgroundColor = UI_MAIN_COLOR
+        sureBtn.backgroundColor = UIColor.init(red: 75/255.0, green: 135/255.0, blue: 233/255.0, alpha: 1.0)
         sureBtn.titleLabel?.font = UIFont.yx_systemFont(ofSize: 13)
         sureBtn.addTarget(self, action: #selector(sureBtnClick), for: .touchUpInside)
         bottomView.addSubview(sureBtn)

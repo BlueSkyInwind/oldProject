@@ -32,6 +32,8 @@ class MessageCell: UITableViewCell {
     var contentLabel : UILabel?
     var timeLabel : UILabel?
     var leftImageView : UIImageView?
+    var arrowImageView : UIImageView?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -50,22 +52,6 @@ class MessageCell: UITableViewCell {
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        let str = NSStringFromClass((touch.view?.classForCoder)!)
-        if  str == "UITableViewCellContentView" {
-            return false
-        }
-        return true
-    }
-    
-    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        let str = NSStringFromClass((otherGestureRecognizer.view?.classForCoder)!)
-        if  str == "UITableViewCellContentView" {
-            return false
-        }
-        return true
     }
     
 }
@@ -102,44 +88,50 @@ extension MessageCell{
         self.addSubview(leftImageView!)
         leftImageView?.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
-            make.centerY.equalTo(self.snp.centerY)
-            make.width.equalTo(28)
-            make.height.equalTo(23)
+            make.top.equalTo(self).offset(16)
+            make.width.equalTo(8)
+            make.height.equalTo(8)
         }
         
         titleLabel = UILabel()
-        titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        titleLabel?.textColor = TITLE_COLOR
+        titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        titleLabel?.textColor = MESSAGE_TITLE_COLOR
         titleLabel?.textAlignment = .left
+        titleLabel?.numberOfLines = 0
         self.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
-            make.left.equalTo((leftImageView?.snp.right)!).offset(13)
-            make.top.equalTo(self).offset(15)
-            make.height.equalTo(21)
-            make.width.equalTo(230)
+            make.left.equalTo((leftImageView?.snp.right)!).offset(30)
+            make.top.equalTo(self).offset(10)
+            make.right.equalTo(self).offset(-40)
         })
         
         contentLabel = UILabel()
-        contentLabel?.font = UIFont.systemFont(ofSize: 14)
-        contentLabel?.textColor = QUTOA_COLOR
+        contentLabel?.font = UIFont.systemFont(ofSize: 11)
+        contentLabel?.textColor = RedPacketBottomBtn_COLOR
         contentLabel?.textAlignment = .left
         self.addSubview(contentLabel!)
         contentLabel?.snp.makeConstraints({ (make) in
-            make.left.equalTo((leftImageView?.snp.right)!).offset(13)
-            make.top.equalTo((titleLabel?.snp.bottom)!).offset(3)
-            make.right.equalTo(self).offset(-30)
-            make.height.equalTo(20)
+            make.left.equalTo((leftImageView?.snp.right)!).offset(30)
+            make.top.equalTo((titleLabel?.snp.bottom)!).offset(10)
+            make.right.equalTo(self).offset(-40)
         })
         
         timeLabel = UILabel()
-        timeLabel?.font = UIFont.systemFont(ofSize: 12)
-        timeLabel?.textColor = QUTOA_COLOR
-        timeLabel?.textAlignment = .right
+        timeLabel?.font = UIFont.systemFont(ofSize: 11)
+        timeLabel?.textColor = RedPacketBottomBtn_COLOR
+        timeLabel?.textAlignment = .left
         self.addSubview(timeLabel!)
         timeLabel?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self).offset(-20)
-            make.top.equalTo(self).offset(13)
-            make.height.equalTo(20)
+            make.left.equalTo((contentLabel?.snp.left)!).offset(0)
+            make.top.equalTo((contentLabel?.snp.bottom)!).offset(3)
+        })
+        
+        arrowImageView = UIImageView()
+        arrowImageView?.image = UIImage.init(named: "arrow_nor_icon")
+        self.addSubview(arrowImageView!)
+        arrowImageView?.snp.makeConstraints({ (make) in
+            make.right.equalTo(self).offset(-15)
+            make.centerY.equalTo(self.snp.centerY)
         })
         
         let bottomLineView = UIView()
@@ -151,7 +143,6 @@ extension MessageCell{
             make.bottom.equalTo(self).offset(-0.5)
             make.height.equalTo(0.5)
         }
-        
     }
     
     /// 头部空白cell

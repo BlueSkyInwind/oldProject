@@ -107,3 +107,5 @@ let SUPERMARK_LINE_COLOR = UIColor.init(red: 111/255.0, green: 111/255.0, blue: 
 let SUPERMARK_QUOTA_COLOR = UIColor.init(red: 255/255.0, green: 83/255.0, blue: 39/255.0, alpha: 1)
 
 let SUPERMARK_TERM_COLOR = UIColor.init(red: 105/255.0, green: 105/255.0, blue: 105/255.0, alpha: 1)
+
+let MESSAGE_TITLE_COLOR = UIColor.init(red: 63/255.0, green: 63/255.0, blue: 63/255.0, alpha: 1)
