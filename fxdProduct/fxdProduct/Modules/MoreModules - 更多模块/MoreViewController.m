@@ -23,7 +23,7 @@
 #import "LoginViewModel.h"
 #import "MineViewModel.h"
 
-@interface MoreViewController () <UITableViewDataSource,UITableViewDelegate,MakeSureBtnDelegate,UIViewControllerTransitioningDelegate>
+@interface MoreViewController () <UITableViewDataSource,UITableViewDelegate,UIViewControllerTransitioningDelegate>
 {
     NSArray *imgAry;
     NSArray *titleAry;
@@ -35,16 +35,30 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *MyTabView;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
+@property (weak, nonatomic) IBOutlet UIButton *exitBtn;
 
 @end
 
 @implementation MoreViewController
 
+- (IBAction)exitBtnClick:(id)sender {
+    
+    [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您确定要退出登录吗？" attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:@"取消" sureTitle:@"确定" compleBlock:^(NSInteger index) {
+        if (index == 1) {
+            [self userLoginOut];
+        }
+    }];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [_MyTabView reloadData];
+    self.exitBtn.hidden = true;
+    if([FXD_Utility sharedUtility].loginFlage){
+        
+        self.exitBtn.hidden = false;
+    }
 }
 
 - (void)viewDidLoad {
@@ -53,15 +67,11 @@
     self.title = @"设置";
     self.view.backgroundColor = rgb(242, 242, 242);
     [self addBackItem];
-  imgAry=@[@"7_gd_icon_04",@"7_gd_icon_06",@"7_gd_icon_08",@"7_gd_icon_09",@"changeP_icon"];
-    titleAry=@[@"关于我们",@"意见反馈",@"给个好评",@"客服热线",@"修改密码"];
+    titleAry=@[@"清除缓存",@"修改密码"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     _MyTabView.backgroundColor = rgb(242, 242, 242);
     [_MyTabView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     [_MyTabView registerNib:[UINib nibWithNibName:@"NextViewCell" bundle:nil] forCellReuseIdentifier:@"moreFunction"];
-    [_MyTabView registerNib:[UINib nibWithNibName:@"HelpViewCell" bundle:nil] forCellReuseIdentifier:@"outLog"];
-    NSString *app_Version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    self.versionLabel.text = [NSString stringWithFormat:@"当前版本 V%@",app_Version];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,133 +81,44 @@
 
 #pragma mark - TableView
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    if([FXD_Utility sharedUtility].loginFlage){
-        return 2;
-    }else{
-        return 1;
-    }
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return imgAry.count;
-    } else {
-        return 1;
-    }
+    return titleAry.count;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if(section!=1)
-    {
-        return 12;
-    } else
-    {
-        return 25;
-    }
-}
-
-//创建自定义header视图
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 25)];
-    view.backgroundColor=RGBColor(245, 245, 245, 1);
-    return view;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *identifier = @"moreFunction";
     NextViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (indexPath.section == 0) {
-        
-        cell.imgView.image=[[UIImage imageNamed:imgAry[indexPath.row]] imageWithTintColor:UI_MAIN_COLOR];
-        cell.lblTitle.text=titleAry[indexPath.row];
-        if (indexPath.row==imgAry.count-1) {
-            cell.lineView.hidden=YES;
-        }
-        else
-        {
-            cell.lineView.hidden=NO;
-        }
+    cell.lblTitle.text=titleAry[indexPath.row];
+    if (indexPath.row==titleAry.count-1) {
+        cell.lineView.hidden=YES;
     }
-    else{
-        HelpViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"outLog"];
-        cell.lblContent.text=@"退出登录";
-        cell.lblContent.textAlignment=NSTextAlignmentCenter;
-        cell.lblContent.font=[UIFont systemFontOfSize:17];
-        cell.backgroundColor=[UIColor whiteColor];
-        return cell;
+    else
+    {
+        cell.lineView.hidden=NO;
     }
+
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([FXD_Utility sharedUtility].loginFlage)
-    {
-        return 50;
-    }
-    else
-    {
-        if(indexPath.section==0)
-        {
-            return 50;
-        }
-        else
-        {
-            return 0.1f;
-        }
-    }
+    
+    return 45;
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section==0)
-    {
-        if(indexPath.row==0){
-            [self obtainQuestionWebUrl:@"11"];
-//            aboutUs=[[AboutMainViewController alloc]initWithNibName:@"AboutMainViewController" bundle:nil];
-//            [self.navigationController pushViewController:aboutUs animated:YES];
-        }
-        else if(indexPath.row==1){
-            if ([FXD_Utility sharedUtility].loginFlage) {
-                ideaBack=[[IdeaBackViewController alloc]initWithNibName:@"IdeaBackViewController" bundle:nil];
-                [self.navigationController pushViewController:ideaBack animated:YES];
-            } else {
-                [self presentLogin:self];
-            }
-        }
-        else if(indexPath.row==2){
+    
+    switch (indexPath.row) {
+        case 0:
             
-            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"欢迎给出评价!" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                dispatch_after(0.2, dispatch_get_main_queue(), ^{
-                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
-                });
-            }];
-            UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-            [alertView addAction:okAction];
-            [alertView addAction:cancleAction];
-            [self presentViewController:alertView animated:YES completion:nil];
-            
-        }
-        else if(indexPath.row==3){
-            UIAlertController *actionSheett = [UIAlertController alertControllerWithTitle:@"热线服务时间:9:00-17:30(工作日)" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            UIAlertAction *teleAction = [UIAlertAction actionWithTitle:@"4008-678-655" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", @"4008-678-655"]];
-                [[UIApplication sharedApplication] openURL:telURL];
-            }];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-            [actionSheett addAction:teleAction];
-            [actionSheett addAction:cancelAction];
-            [self presentViewController:actionSheett animated:YES completion:nil];
-        }
-        else if(indexPath.row==4){
-            
+            break;
+        case 1:
+        {
             if ([FXD_Utility sharedUtility].loginFlage) {
                 ChangePasswordViewController *   changePassVC =[[ChangePasswordViewController alloc]init];
                 [self.navigationController pushViewController:changePassVC animated:YES];
@@ -205,16 +126,69 @@
                 [self presentLogin:self];
             }
         }
+            break;
+        default:
+            break;
     }
-    else {
-
-        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您确定要退出登录吗？" attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:@"取消" sureTitle:@"确定" compleBlock:^(NSInteger index) {
-            if (index == 1) {
-                [self userLoginOut];
-            }
-        }];
-    }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    if(indexPath.section==0)
+//    {
+//        if(indexPath.row==0){
+//            [self obtainQuestionWebUrl:@"11"];
+////            aboutUs=[[AboutMainViewController alloc]initWithNibName:@"AboutMainViewController" bundle:nil];
+////            [self.navigationController pushViewController:aboutUs animated:YES];
+//        }
+//        else if(indexPath.row==1){
+//            if ([FXD_Utility sharedUtility].loginFlage) {
+//                ideaBack=[[IdeaBackViewController alloc]initWithNibName:@"IdeaBackViewController" bundle:nil];
+//                [self.navigationController pushViewController:ideaBack animated:YES];
+//            } else {
+//                [self presentLogin:self];
+//            }
+//        }
+//        else if(indexPath.row==2){
+//            
+//            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"欢迎给出评价!" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                dispatch_after(0.2, dispatch_get_main_queue(), ^{
+//                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
+//                });
+//            }];
+//            UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+//            [alertView addAction:okAction];
+//            [alertView addAction:cancleAction];
+//            [self presentViewController:alertView animated:YES completion:nil];
+//            
+//        }
+//        else if(indexPath.row==3){
+//            UIAlertController *actionSheett = [UIAlertController alertControllerWithTitle:@"热线服务时间:9:00-17:30(工作日)" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+//            UIAlertAction *teleAction = [UIAlertAction actionWithTitle:@"4008-678-655" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//                NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", @"4008-678-655"]];
+//                [[UIApplication sharedApplication] openURL:telURL];
+//            }];
+//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+//            [actionSheett addAction:teleAction];
+//            [actionSheett addAction:cancelAction];
+//            [self presentViewController:actionSheett animated:YES completion:nil];
+//        }
+//        else if(indexPath.row==4){
+//            
+//            if ([FXD_Utility sharedUtility].loginFlage) {
+//                ChangePasswordViewController *   changePassVC =[[ChangePasswordViewController alloc]init];
+//                [self.navigationController pushViewController:changePassVC animated:YES];
+//            } else {
+//                [self presentLogin:self];
+//            }
+//        }
+//    }
+//    else {
+//
+//        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您确定要退出登录吗？" attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:@"取消" sureTitle:@"确定" compleBlock:^(NSInteger index) {
+//            if (index == 1) {
+//                [self userLoginOut];
+//            }
+//        }];
+//    }
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark 登录
@@ -262,41 +236,6 @@
     LoginViewModel * loginVM = [[LoginViewModel alloc]init];
     [loginVM deleteUserRegisterID];
     
-}
-
--(void)obtainCommonQuestion{
-    MineViewModel *mineMV = [[MineViewModel alloc]init];
-    [mineMV setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel *  baseResultM = returnValue;
-        if ([baseResultM.errCode isEqualToString:@"0"]) {
-//            FXDWebViewController *webview = [[FXDWebViewController alloc] init];
-//            webview.loadContent =
-//            [self.navigationController pushViewController:webview animated:true];
-        }else{
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view.window message:baseResultM.friendErrMsg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [mineMV obtainCommonProblems];
-}
-
--(void)obtainQuestionWebUrl:(NSString *)typeCode{
-    
-    CommonViewModel * commonVM = [[CommonViewModel alloc]init];
-    [commonVM setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel *  baseResultM = returnValue;
-        if ([baseResultM.errCode isEqualToString:@"0"]) {
-            NSDictionary * dic = (NSDictionary *)baseResultM.data;
-            FXDWebViewController * fxdwebVC = [[FXDWebViewController alloc]init];
-            fxdwebVC.urlStr =  [dic objectForKey:@"productProURL"];
-            [self.navigationController pushViewController:fxdwebVC animated:YES];
-        }else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
-        }
-    } WithFaileBlock:^{
-    }];
-    [commonVM obtainProductProtocolType:nil typeCode:typeCode apply_id:nil periods:nil stagingType:nil];
 }
 
 

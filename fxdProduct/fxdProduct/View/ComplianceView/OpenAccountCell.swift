@@ -58,16 +58,7 @@ extension OpenAccountCell{
             make.left.equalTo(self).offset(22)
             make.centerY.equalTo(self.snp.centerY)
         })
-        
-//        contentLabel = UILabel()
-//        contentLabel?.font = UIFont.yx_systemFont(ofSize: 14)
-//        contentLabel?.textColor = RedPacket_COLOR
-//        contentLabel?.textAlignment = .left
-//        self.addSubview(contentLabel!)
-//        contentLabel?.snp.makeConstraints({ (make) in
-//            make.left.equalTo(self).offset(145)
-//            make.centerY.equalTo(self.snp.centerY)
-//        })
+    
         
         contentTextField = UITextField()
         contentTextField?.font = UIFont.yx_systemFont(ofSize: 14)

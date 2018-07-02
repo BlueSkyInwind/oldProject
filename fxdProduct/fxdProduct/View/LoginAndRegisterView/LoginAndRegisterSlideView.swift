@@ -163,6 +163,7 @@ extension LoginAndRegisterSlideView {
         }
         if loginAndRegisterStatus != nil {
             loginAndRegisterStatus!(true)
+
         }
     }
 }

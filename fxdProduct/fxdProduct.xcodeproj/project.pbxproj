@@ -938,6 +938,8 @@
 		CC1AC8E52091B7A8009B5BD4 /* HotRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8E32091B7A7009B5BD4 /* HotRecommendationViewController.swift */; };
 		CC1AC8E720931E1B009B5BD4 /* LoanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8E620931E1A009B5BD4 /* LoanListViewController.swift */; };
 		CC1AC8E820931E1B009B5BD4 /* LoanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1AC8E620931E1A009B5BD4 /* LoanListViewController.swift */; };
+		CC3951F320E9FBD2002B59DE /* BankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3951F220E9FBD2002B59DE /* BankCell.swift */; };
+		CC3951F420E9FBD2002B59DE /* BankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3951F220E9FBD2002B59DE /* BankCell.swift */; };
 		CC3BCC111FBABE7A0042A738 /* MyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */; };
 		CC3BCC121FBABE7A0042A738 /* MyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */; };
 		CC3BCC141FBABEC50042A738 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BCC131FBABEC50042A738 /* MessageCell.swift */; };
@@ -1950,6 +1952,7 @@
 		CC1AC8E32091B7A7009B5BD4 /* HotRecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotRecommendationViewController.swift; sourceTree = "<group>"; };
 		CC1AC8E620931E1A009B5BD4 /* LoanListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanListViewController.swift; sourceTree = "<group>"; };
 		CC3197961ED926B90083F263 /* RefuseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefuseView.xib; sourceTree = "<group>"; };
+		CC3951F220E9FBD2002B59DE /* BankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCell.swift; sourceTree = "<group>"; };
 		CC3BCC101FBABE7A0042A738 /* MyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageViewController.swift; sourceTree = "<group>"; };
 		CC3BCC131FBABEC50042A738 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		CC45E7201FD55F7800DE803D /* WithdrawCashDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawCashDetailModel.h; sourceTree = "<group>"; };
@@ -4218,6 +4221,7 @@
 				CC4BB60E1F17712E0027A0AA /* LevelDescriptionView.m */,
 				CC989BEC1F4D5CBE000CDACF /* MineHeaderView.swift */,
 				CCCE280520E6382100180862 /* MineCell.swift */,
+				CC3951F220E9FBD2002B59DE /* BankCell.swift */,
 			);
 			name = MineView;
 			sourceTree = "<group>";
@@ -5013,6 +5017,7 @@
 				84A37FF81FAC12A8008FB7AF /* QRCodePopView.m in Sources */,
 				CC45E7221FD55F7800DE803D /* WithdrawCashDetailModel.m in Sources */,
 				6379641D1CAD1BE0002A5910 /* LivenessBaseClass.m in Sources */,
+				CC3951F320E9FBD2002B59DE /* BankCell.swift in Sources */,
 				CC1AC8E42091B7A7009B5BD4 /* HotRecommendationViewController.swift in Sources */,
 				63FC24F21D98F7E9006F58F3 /* YYTextLayout.m in Sources */,
 				63145AB31CA2952400D04ED8 /* LoginMsgExt.m in Sources */,
@@ -5485,6 +5490,7 @@
 				84F87F481FC3CD6600F1C5CD /* UIFont+YX_Font.m in Sources */,
 				847FC88620E4C92200A0F797 /* LewPopupViewAnimationFade.m in Sources */,
 				84C619D41FA8161F00626411 /* PayMethodCell.m in Sources */,
+				CC3951F420E9FBD2002B59DE /* BankCell.swift in Sources */,
 				84C619D51FA8161F00626411 /* PayMoneyCell.m in Sources */,
 				CC1AC8E52091B7A8009B5BD4 /* HotRecommendationViewController.swift in Sources */,
 				84C619D71FA8161F00626411 /* RepayListCell.m in Sources */,

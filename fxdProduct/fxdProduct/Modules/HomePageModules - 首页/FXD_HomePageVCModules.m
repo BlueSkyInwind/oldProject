@@ -28,7 +28,6 @@
 #import "MyViewController.h"
 #import "FXDBaseTabBarVCModule.h"
 #import "UITabBar+badge.h"
-#import "NextViewCell.h"
 #import "FXD_HomeProductListModel.h"
 #import "LoanPeriodListVCModule.h"
 #import "CommonViewModel.h"

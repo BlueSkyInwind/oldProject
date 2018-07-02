@@ -13,6 +13,8 @@ class MineCell: UITableViewCell {
     @objc var titleImageView : UIImageView?
     @objc var titleLabel : UILabel?
     @objc var lineView : UIView?
+    @objc var messageView : UIView?
+    @objc var messageLabel : UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,6 +46,27 @@ extension MineCell{
         titleImageView?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(20)
             make.centerY.equalTo(self.snp.centerY)
+        })
+        
+        messageView = UIView()
+        messageView?.backgroundColor = UIColor.red
+        messageView?.layer.cornerRadius = 7.5
+        self.addSubview(messageView!)
+        messageView?.snp.makeConstraints({ (make) in
+            make.left.equalTo((titleImageView?.snp.right)!).offset(-5)
+            make.top.equalTo((titleImageView?.snp.top)!).offset(-8)
+            make.width.equalTo(15)
+            make.height.equalTo(15)
+        })
+        
+        messageLabel = UILabel()
+        messageLabel?.textColor = UIColor.white
+        messageLabel?.font = UIFont.systemFont(ofSize: 12)
+        messageLabel?.text = "3"
+        messageView?.addSubview(messageLabel!)
+        messageLabel?.snp.makeConstraints({ (make) in
+            make.centerX.equalTo((messageView?.snp.centerX)!)
+            make.centerY.equalTo((messageView?.snp.centerY)!)
         })
         
         titleLabel = UILabel()

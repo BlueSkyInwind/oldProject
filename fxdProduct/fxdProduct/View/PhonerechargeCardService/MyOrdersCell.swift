@@ -49,38 +49,38 @@ extension MyOrdersCell{
         }
         
         titleLabel = UILabel()
-        titleLabel?.textColor = TITLE_COLOR
-        titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        titleLabel?.textColor = MESSAGE_TITLE_COLOR
+        titleLabel?.font = UIFont.systemFont(ofSize: 13)
         self.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(22)
-            make.top.equalTo(self).offset(25)
+            make.top.equalTo(self).offset(19)
         })
         
         timeLabel = UILabel()
-        timeLabel?.textColor = HOME_ARROW_COLOR
-        timeLabel?.font = UIFont.systemFont(ofSize: 15)
+        timeLabel?.textColor = RedPacketBottomBtn_COLOR
+        timeLabel?.font = UIFont.systemFont(ofSize: 11)
         self.addSubview(timeLabel!)
         timeLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(self).offset(22)
-            make.bottom.equalTo(self).offset(-26)
+            make.bottom.equalTo(self).offset(-20)
         })
         
         moneyLabel = UILabel()
-        moneyLabel?.textColor = TITLE_COLOR
-        moneyLabel?.font = UIFont.systemFont(ofSize: 14)
+        moneyLabel?.textColor = MESSAGE_TITLE_COLOR
+        moneyLabel?.font = UIFont.systemFont(ofSize: 13)
         self.addSubview(moneyLabel!)
         moneyLabel?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self).offset(-50)
+            make.right.equalTo(self).offset(-58)
             make.top.equalTo(self).offset(25)
         })
         
         quantityLabel = UILabel()
-        quantityLabel?.textColor = HOME_ARROW_COLOR
-        quantityLabel?.font = UIFont.systemFont(ofSize: 15)
+        quantityLabel?.textColor = RedPacketBottomBtn_COLOR
+        quantityLabel?.font = UIFont.systemFont(ofSize: 11)
         self.addSubview(quantityLabel!)
         quantityLabel?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self).offset(-50)
+            make.right.equalTo(self).offset(-58)
             make.bottom.equalTo(self).offset(-26)
         })
         
@@ -88,7 +88,7 @@ extension MyOrdersCell{
         arrowImageView.image = UIImage.init(named: "arrow_icon")
         self.addSubview(arrowImageView)
         arrowImageView.snp.makeConstraints { (make) in
-            make.right.equalTo(self).offset(-23)
+            make.right.equalTo(self).offset(-30)
             make.centerY.equalTo(self.snp.centerY)
         }
     }

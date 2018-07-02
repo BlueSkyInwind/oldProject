@@ -8,25 +8,28 @@
 
 import UIKit
 
-
 @objc protocol MineHeaderViewDelegate: NSObjectProtocol {
     
-    func memberBtnClick()
-    
-    
+    func bottomBtnClick()
 }
 class MineHeaderView: UIView {
 
-    //用户名字
-   @objc var nameLabel : UILabel?
-    //用户账号
-   @objc var accountLabel : UILabel?
-
-    //最左边的等级图片
-   @objc var leftImageView : UIImageView?
-    
-    var bgImageView : UIImageView?
-    
+    //进件状态名称
+    @objc var titleLabel : UILabel?
+    //还款金额
+    @objc var moneyLabel : UILabel?
+    //还款日期
+    @objc var dateLabel : UILabel?
+    //距离还款时间
+    @objc var timeBtn : UIButton?
+    //底部按钮
+    @objc var bottomBtn : UIButton?
+    @objc var type : String?{
+        didSet(newValue){
+            
+            setViewType(type: type!)
+        }
+    }
     
     @objc weak var delegate: MineHeaderViewDelegate?
     /*
@@ -39,7 +42,6 @@ class MineHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupNewUI()
         
     }
     
@@ -49,138 +51,174 @@ class MineHeaderView: UIView {
 }
 
 extension MineHeaderView{
-
-    fileprivate func setupUI(){
-    
-        //左边图片
-        let leftImage = UIImageView()
-        leftImage.image = UIImage(named:"icon_my_logo")
-        self.addSubview(leftImage)
-        leftImage.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(20)
-            make.bottom.equalTo(self).offset(-20)
+    fileprivate func setViewType(type : String){
+        
+        for view in self.subviews {
+            view.removeFromSuperview()
         }
         
-        //上面的名字
-        let headLabel = UILabel()
-        headLabel.text = "我的"
-        headLabel.textColor = UIColor.white
-        headLabel.font = UIFont.systemFont(ofSize: 18)
-        self.addSubview(headLabel)
-        headLabel.snp.makeConstraints { (make) in
+        let type = Int(type)
+        switch type {
+        case 1,2:
+            repayUI()
+        case 3:
+            repaymentConfirmationUI()
+        case 4:
+            normalUI()
+        case .none:
+            break
+        case .some(_):
+            break
+        }
+    }
+}
+extension MineHeaderView{
+    
+    fileprivate func repayUI(){
+        
+        let bgImageView = UIImageView()
+        bgImageView.image = UIImage.init(named: "mine_bg_icon")
+        self.addSubview(bgImageView)
+        bgImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(0)
+        }
+        
+        titleLabel = UILabel()
+        titleLabel?.textColor = UIColor.white
+        titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        self.addSubview(titleLabel!)
+        titleLabel?.snp.makeConstraints({ (make) in
             make.top.equalTo(self).offset(35)
+            make.centerX.equalTo(self.snp.centerX)
+        })
+        
+        moneyLabel = UILabel()
+        moneyLabel?.textColor = MINE_MONEY_COLOR
+        moneyLabel?.font = UIFont.systemFont(ofSize: 20)
+        self.addSubview(moneyLabel!)
+        moneyLabel?.snp.makeConstraints({ (make) in
+            make.top.equalTo((titleLabel?.snp.bottom)!).offset(10)
+            make.centerX.equalTo(self.snp.centerX)
+        })
+        
+        let timeView = UIView()
+        timeView.backgroundColor = UIColor.clear
+        self.addSubview(timeView)
+        timeView.snp.makeConstraints { (make) in
+            make.top.equalTo((moneyLabel?.snp.bottom)!).offset(10)
+            make.width.equalTo(200)
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(20)
         }
         
-        //用户的名字
-        nameLabel = UILabel()
-        nameLabel?.textColor = UIColor.white
-        nameLabel?.font = UIFont.systemFont(ofSize: 14)
-        self.addSubview(nameLabel!)
-        nameLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self).offset(90)
-            make.left.equalTo(leftImage.snp.right).offset(30)
-            make.height.equalTo(15)
+        dateLabel = UILabel()
+        dateLabel?.textColor = UIColor.white
+        dateLabel?.font = UIFont.systemFont(ofSize: 12)
+        timeView.addSubview(dateLabel!)
+        dateLabel?.snp.makeConstraints({ (make) in
+            make.left.equalTo(timeView.snp.left).offset(5)
+            make.centerY.equalTo(timeView.snp.centerY)
         })
-        //用户的账号
-        accountLabel = UILabel()
-        accountLabel?.textColor = UIColor.white
-        accountLabel?.font = UIFont.systemFont(ofSize: 14)
-        self.addSubview(accountLabel!)
-        accountLabel?.snp.makeConstraints({ (make) in
-            make.top.equalTo((nameLabel?.snp.bottom)!).offset(10)
-            make.left.equalTo(leftImage.snp.right).offset(30)
-            make.height.equalTo(15)
+        
+        timeBtn = UIButton()
+        timeBtn?.setBackgroundImage(UIImage.init(named: "timeBtn_icon"), for: .normal)
+        timeBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        timeBtn?.setTitleColor(UIColor.init(red: 93/255.0, green: 141/255.0, blue: 250/255.0, alpha: 1.0), for: .normal)
+        timeView.addSubview(timeBtn!)
+        timeBtn?.snp.makeConstraints({ (make) in
+            make.left.equalTo((dateLabel?.snp.right)!).offset(14)
+            make.centerY.equalTo(timeView.snp.centerY)
+        })
+        
+        bottomBtn = UIButton()
+        bottomBtn?.titleLabel?.textAlignment = .center
+        bottomBtn?.setTitleColor(UIColor.black, for: .normal)
+        bottomBtn?.setBackgroundImage(UIImage.init(named: "bottomBtn_icon"), for: .normal)
+        bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        bottomBtn?.setTitle("立即还款", for: .normal)
+        bottomBtn?.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
+        self.addSubview(bottomBtn!)
+        bottomBtn?.snp.makeConstraints({ (make) in
+            make.bottom.equalTo(self).offset(-14)
+            make.centerX.equalTo(self.snp.centerX)
         })
         
     }
     
-    
-    fileprivate func setupNewUI(){
-
+    fileprivate func repaymentConfirmationUI(){
         
-        leftImageView = UIImageView()
-        leftImageView?.image = UIImage.init(named: "left_image_icon")
-        self.addSubview(leftImageView!)
-        leftImageView?.snp.makeConstraints({ (make) in
-            
-            make.left.equalTo(self).offset(30)
-            make.top.equalTo(self).offset(40)
-
-        })
-        
-        let memberBtn = UIButton()
-        memberBtn.backgroundColor = UIColor.white
-        memberBtn.layer.cornerRadius = 5.0
-        memberBtn.setTitle("会员中心 >", for: .normal)
-        memberBtn.setTitleColor(UI_MAIN_COLOR, for: .normal)
-        memberBtn.addTarget(self, action: #selector(memberBtnClick), for: .touchUpInside)
-        memberBtn.titleLabel?.font = UIFont.yx_systemFont(ofSize: 14)
-        self.addSubview(memberBtn)
-        memberBtn.snp.makeConstraints { (make) in
-            make.left.equalTo((leftImageView?.snp.right)!).offset(57)
-            make.top.equalTo(self).offset(57)
-            make.width.equalTo(95)
-            make.height.equalTo(24)
+        let bgImageView = UIImageView()
+        bgImageView.image = UIImage.init(named: "mine_bg_icon")
+        self.addSubview(bgImageView)
+        bgImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(0)
         }
         
+        let titleImageView = UIImageView()
+        titleImageView.image = UIImage.init(named: "repay_icon")
+        self.addSubview(titleImageView)
+        titleImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(self).offset(51)
+            make.centerX.equalTo(self.snp.centerX)
+        }
         
-        accountLabel = UILabel()
-        accountLabel?.textColor = UIColor.white
-        accountLabel?.font = UIFont.systemFont(ofSize: 14)
-        self.addSubview(accountLabel!)
-        accountLabel?.snp.makeConstraints({ (make) in
-            make.left.equalTo((leftImageView?.snp.right)!).offset(57)
-            make.top.equalTo(memberBtn.snp.bottom).offset(8)
-            make.height.equalTo(20)
-        })
-        
-
-    }
-    
-    @objc func clickFirstView(_ tapGes : UITapGestureRecognizer){
-        
-    
-    }
-    
-    override var  frame:(CGRect){
-        
-        didSet{
-            let k_w = UIScreen.main.bounds.size.width
-            var height = 130
-            
-            if UI_IS_IPONE6P {
-                height = 160
-            }
-            let newFrame = CGRect(x:0,y:0,width:Int(k_w),height:height)
-            super.frame = newFrame
-            
+       let nameLabel = UILabel()
+        nameLabel.text = "还款确认中"
+        nameLabel.textColor = UIColor.white
+        nameLabel.font = UIFont.systemFont(ofSize: 15)
+        self.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(titleImageView.snp.bottom).offset(20)
+            make.centerX.equalTo(self.snp.centerX)
         }
     }
     
-    fileprivate func changeLeftImageViewLocation(){
+    fileprivate func normalUI(){
         
-        if UI_IS_IPONE6 {
-            
-            leftImageView?.snp.updateConstraints({ (make) in
-                
-                make.top.equalTo((bgImageView?.snp.top)!).offset(2)
-            })
-        }else{
-            
-            leftImageView?.snp.updateConstraints({ (make) in
-                
-                make.top.equalTo((bgImageView?.snp.top)!).offset(-5)
-            })
+        let bgImageView = UIImageView()
+        bgImageView.image = UIImage.init(named: "mine_bg_icon")
+        self.addSubview(bgImageView)
+        bgImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(0)
         }
         
+        let nameLabel = UILabel()
+        nameLabel.text = "多款贷款产品任您选"
+        nameLabel.textColor = UIColor.white
+        nameLabel.font = UIFont.systemFont(ofSize: 14)
+        self.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self).offset(70)
+            make.centerX.equalTo(self.snp.centerX)
+        }
+        
+        bottomBtn = UIButton()
+        bottomBtn?.setTitle("查看", for: .normal)
+        bottomBtn?.setTitleColor(UIColor.black, for: .normal)
+        bottomBtn?.setBackgroundImage(UIImage.init(named: "bottomBtn_icon"), for: .normal)
+        bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        bottomBtn?.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
+        self.addSubview(bottomBtn!)
+        bottomBtn?.snp.makeConstraints({ (make) in
+            make.bottom.equalTo(self).offset(-25)
+            make.centerX.equalTo(self.snp.centerX)
+        })
     }
     
-    @objc fileprivate func memberBtnClick(){
+    
+    @objc fileprivate func bottomBtnClick(){
         
         if delegate != nil {
-            delegate?.memberBtnClick()
+            delegate?.bottomBtnClick()
         }
     }
 }

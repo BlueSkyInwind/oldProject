@@ -34,10 +34,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"修改登录密码";
+    self.title = @"修改密码";
     [self addBackItem];
     tiitleArr = @[@"当前密码",@"新密码",@"确认新密码"];
-    self.view.backgroundColor = kUIColorFromRGB(0xf2f2f2);
+    self.view.backgroundColor = kUIColorFromRGB(0x666666);
     [self configureview];
 
 }
@@ -66,9 +66,14 @@
     }
     
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 3;
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
-    return 3;
+    return 1;
     
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -77,25 +82,27 @@
     if (!cell) {
         cell = [[ChangePasswordTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ChangePasswordTableViewCell"];
     }
-    switch (indexPath.row) {
+    cell.lineView.hidden = true;
+    cell.topLineView.hidden = true;
+    switch (indexPath.section) {
         case 0:{
-            cell.topLineView.hidden = NO;
-            cell.titleLabel.text = tiitleArr[indexPath.row];
-            [cell updateTitleWidth:tiitleArr[indexPath.row]];
+            
+            cell.titleLabel.text = tiitleArr[indexPath.section];
+            [cell updateTitleWidth:tiitleArr[indexPath.section]];
             cell.contentTextField.placeholder = @"请输入当前的登录密码";
         }
             break;
         case 1:{
-            cell.topLineView.hidden = YES;
-            cell.titleLabel.text = tiitleArr[indexPath.row];
-            [cell updateTitleWidth:tiitleArr[indexPath.row]];
+           
+            cell.titleLabel.text = tiitleArr[indexPath.section];
+            [cell updateTitleWidth:tiitleArr[indexPath.section]];
             cell.contentTextField.placeholder = @"6-12位字母、数字";
         }
             break;
         case 2:{
-            cell.topLineView.hidden = YES;
-            cell.titleLabel.text = tiitleArr[indexPath.row];
-            [cell updateTitleWidth:tiitleArr[indexPath.row]];
+          
+            cell.titleLabel.text = tiitleArr[indexPath.section];
+            [cell updateTitleWidth:tiitleArr[indexPath.section]];
             cell.contentTextField.placeholder = @"6-12位字母、数字";
             [cell.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(cell.backView.mas_left).offset(0);
@@ -110,30 +117,37 @@
 }
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    UIView* view = [[UIView alloc]init];
-    self.sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.sureButton setTitle:@"确认" forState:UIControlStateNormal];
-    [self.sureButton setBackgroundColor:UI_MAIN_COLOR];
-    [self.sureButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.sureButton addTarget:self action:@selector(saveChangePassword:) forControlEvents:UIControlEventTouchUpInside];
-    [FXD_Tool setCorner:self.sureButton borderColor:UI_MAIN_COLOR];
-    [view addSubview:self.sureButton];
-    [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(view.mas_left).with.offset(17);
-        make.right.equalTo(view.mas_right).with.offset(-17);
-        make.height.equalTo(@50);
-        make.centerY.equalTo(view.mas_centerY);
-    }];
-    return view;
+    if (section == 2) {
+        
+        UIView* view = [[UIView alloc]init];
+        self.sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.sureButton setTitle:@"确认" forState:UIControlStateNormal];
+        [self.sureButton setBackgroundImage:[UIImage imageNamed:@"yijian_btn_icon"] forState:UIControlStateNormal];
+        [self.sureButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.sureButton addTarget:self action:@selector(saveChangePassword:) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:self.sureButton];
+        [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.height.equalTo(@40);
+            make.width.equalTo(@240);
+            make.centerY.equalTo(view.mas_centerY);
+            make.centerX.equalTo(view.mas_centerX);
+        }];
+        return view;
+    }
+    
+    UIView *view = [[UIView alloc]init];
+    view.backgroundColor = rgb(242, 242, 242);
+    return  view;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    return 100;
+    if (section == 2) {
+        return 200;
+    }
+    return 15;
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    return 30;
-}
+
 
 #pragma mark 确认提交按钮
 -(void)saveChangePassword:(id)sender{

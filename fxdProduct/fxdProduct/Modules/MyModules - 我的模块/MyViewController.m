@@ -7,7 +7,6 @@
 //
 
 #import "MyViewController.h"
-#import "NextViewCell.h"
 #import "MyCardsViewController.h"
 #import "MoreViewController.h"
 #import "RepayRecordController.h"
@@ -81,26 +80,24 @@
  */
 -(void)addHeaderView{
     
-    int height;
-    height = 120;
-    if (UI_IS_IPHONE6P) {
-        height = 160;
-    }
-    UIView *headerBgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _k_w, height)];
     //添加自定义头部
-    _headerView = [[MineHeaderView alloc]initWithFrame:CGRectZero];
-    _headerView.backgroundColor = UI_MAIN_COLOR;
+    _headerView = [[MineHeaderView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 180)];
+    _headerView.type = @"1";
+    _headerView.titleLabel.text = @"待还款";
+    _headerView.moneyLabel.text = @"2300.34元";
+    _headerView.dateLabel.text = @"还款日：2017.03.24";
+    [_headerView.timeBtn setTitle:@"14天后" forState:UIControlStateNormal];
+    _headerView.backgroundColor = [UIColor clearColor];
     _headerView.delegate = self;
-    [headerBgView addSubview:_headerView];
-    if ([FXD_Utility sharedUtility].loginFlage) {
-        _headerView.accountLabel.text = [FXD_Utility sharedUtility].userInfo.userMobilePhone;
-    } else {
-        _headerView.accountLabel.text = @"未登录，请登录";
-    }
-    [self.MyViewTable setTableHeaderView:headerBgView];
+    [self.view addSubview:_headerView];
+    
+    [self.MyViewTable setTableHeaderView:_headerView];
 
 }
 
+-(void)bottomBtnClick{
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"待还款"];
+}
 -(void)memberBtnClick{
     //检测登录
     if (![FXD_Utility sharedUtility].loginFlage) {
@@ -250,6 +247,9 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 0;
+    }
     return 8;
 }
 
@@ -295,28 +295,24 @@
     }
     if (indexPath.row == 0 && indexPath.section == 1) {
         if ([model.isDisplay isEqualToString:@"1"]) {
-//            bCell.messageLabel.text = model.countNum;
-//            bCell.messageView.hidden = false;
+            cell.messageLabel.text = model.countNum;
+            cell.messageView.hidden = false;
+            cell.messageLabel.hidden = false;
 
             if (model.countNum.integerValue > 9) {
-               
-//                bCell.messageViewX.constant = 25;
-//                bCell.messageViewWidth.constant = 24;
-
-            }else{
                 
-//                bCell.messageViewX.constant = 33;
-//                bCell.messageViewWidth.constant = 13;
+                cell.messageLabel.hidden = true;
 
             }
-            if (model.countNum.integerValue > 99) {
-//                bCell.messageLabel.text = @"99+";
-            }
+            
         }else{
-//            bCell.messageView.hidden = true;
+            
+            cell.messageView.hidden = true;
         }
     }else{
-//        bCell.messageView.hidden = true;
+        
+        cell.messageView.hidden = true;
+
     }
     return cell;
 }

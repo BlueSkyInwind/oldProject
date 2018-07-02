@@ -18,7 +18,6 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
 
         self.title = "我的订单"
         addBackItem()
-//        configureView()
         dataArray = NSMutableArray.init(capacity: 100)
         getData()
         noneViewUI()
@@ -70,7 +69,6 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
                 if dataArr.count == 0{
                     
                     self?.noneView?.isHidden = false
-//                    self?.tableView?.isHidden = true
                     
                 }else{
                     
@@ -88,7 +86,6 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
             }else{
                 
                 self?.noneView?.isHidden = true
-//                self?.tableView?.isHidden = true
                 self?.setFailView()
                 MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
@@ -96,7 +93,6 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         }) {
             
             self.noneView?.isHidden = true
-//            self.tableView?.isHidden = true
             self.setFailView()
         }
         viewModel.obtainOrderContractStagingSelectOrdersByUserId()
@@ -114,8 +110,8 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         let headerView = UIView()
         headerView.backgroundColor = LINE_COLOR
         let contentLabel = UILabel()
-        contentLabel.textColor = TITLE_COLOR
-        contentLabel.font = UIFont.systemFont(ofSize: 14)
+        contentLabel.textColor = RedPacketBottomBtn_COLOR
+        contentLabel.font = UIFont.systemFont(ofSize: 11)
         contentLabel.text = "共" + String((dataArray?.count)!) + "笔"
         headerView.addSubview(contentLabel)
         contentLabel.snp.makeConstraints { (make) in
@@ -128,11 +124,11 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 33
+        return 31
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 100
+        return 82
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
