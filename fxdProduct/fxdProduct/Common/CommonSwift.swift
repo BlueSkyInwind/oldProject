@@ -44,7 +44,7 @@ func DLog<T>(message : T, file : String = #file, funcName : String = #function, 
     #endif
 }
 
-let UI_MAIN_COLOR = UIColor.init(red: 212/255, green: 171/255, blue: 68/255, alpha: 1)
+let UI_MAIN_COLOR = UIColor.init(red: 87/255, green: 141/255, blue: 249/255, alpha: 1)
 
 let AuthenticationHeader_COLOR = UIColor.init(red: 255/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1)
 

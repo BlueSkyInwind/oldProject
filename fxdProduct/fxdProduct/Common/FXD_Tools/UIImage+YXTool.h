@@ -17,5 +17,13 @@
  */
 +(UIImage *)imageWithColor:(UIColor *)color;
 
+/**
+ 生成渐变图片
+ 
+ @param colors 颜色
+ @param type 渐变类型  0--->从上到下   1--->从左到右
+ @return 图片
+ */
++(UIImage *)gradientmageWithFrame:(CGRect)bound Colors:(NSArray *)colors GradientType:(int)type;
 
 @end
