@@ -169,7 +169,7 @@ class MembershipFeePayViewController: BaseViewController,UITableViewDelegate,UIT
     func addFooterView() -> UIView {
         let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 250))
         footerView.backgroundColor = LOAN_APPLICATION_COLOR
-        let agreementView = FXD_AgreementView.init(CGRect.zero,content:"我已阅读并同意",protocolNameArr: ["《会员协议》"])
+        let agreementView = HF_AgreementView.init(CGRect.zero,content:"我已阅读并同意",protocolNameArr: ["《会员协议》"])
         agreementView.isAgreementClick = {[weak self] (isClick) in
             self?.isAgreement = isClick
             if isClick {
@@ -178,7 +178,7 @@ class MembershipFeePayViewController: BaseViewController,UITableViewDelegate,UIT
                 self?.bottomButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_unselect_Image"), for: UIControlState.normal)
             }
         }
-        agreementView.agreementClick = { [weak self] in
+        agreementView.agreementClick = { [weak self] (index) in
             self?.getMemberCenterProtocol()
         }
         agreementView.isHidden = true

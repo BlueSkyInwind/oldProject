@@ -52,6 +52,7 @@
 +(NSString *)EmptyObjectContainEmptyString:(id)object;
 //判断手机号是否有效
 + (BOOL)isMobileNumber:(NSString *)mobileNum;
++ (BOOL)checkMoblieNumber:(NSString *)number;
 //得到加密后的参数
 + (NSDictionary *)getParameters:(id)params;
 //将加密后的数据解密后转换为字符串

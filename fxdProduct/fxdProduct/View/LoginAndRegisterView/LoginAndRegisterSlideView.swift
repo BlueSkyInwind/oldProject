@@ -13,6 +13,7 @@ let HEADER_TOP = 35
 let BOTTOM_HEIGHT = 58
 
 typealias LoginAndRegisterBottomView = (_ loginView:UIView,_ registerView:UIView) -> Void
+typealias LoginAndRegisterStatus = (_ isLogin:Bool) -> Void
 class LoginAndRegisterSlideView: UIView {
     
     var loginButton:UIButton?
@@ -24,15 +25,17 @@ class LoginAndRegisterSlideView: UIView {
     fileprivate var bottomIcon:UIImageView?
     fileprivate var statusView:UIView?
     fileprivate var lrBottomView : LoginAndRegisterBottomView?
+    fileprivate var loginAndRegisterStatus:LoginAndRegisterStatus?
 
-    convenience init(_ frame: CGRect,_ bottonView:LoginAndRegisterBottomView){
+    convenience init(_ frame: CGRect,_ bottonView:@escaping LoginAndRegisterBottomView,_ status:@escaping LoginAndRegisterStatus){
         self.init(frame: frame)
         self.lrBottomView = bottonView
+        self.loginAndRegisterStatus = status
+        configureView()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,10 +48,15 @@ class LoginAndRegisterSlideView: UIView {
             self.registerButton?.isSelected = false
             UIView.animate(withDuration: 0.2, delay: 0.1, options: UIViewAnimationOptions.curveEaseInOut, animations: {
                 self.bottomView?.frame = CGRect.init(x: 0, y: 0, width: 65, height: 2)
+                self.loginView?.frame = CGRect.init(x: 0, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT))
+                self.registerView?.frame = CGRect.init(x: _k_w, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT))
             }) { (status) in
                 
             }
             button.isSelected = !button.isSelected
+            if loginAndRegisterStatus != nil {
+                loginAndRegisterStatus!(true)
+            }
         }
     }
     
@@ -58,10 +66,15 @@ class LoginAndRegisterSlideView: UIView {
             self.loginButton?.isSelected = false
             UIView.animate(withDuration: 0.2, delay: 0.1, options: UIViewAnimationOptions.curveEaseInOut, animations: {
                 self.bottomView?.frame = CGRect.init(x: (self.statusView?.bounds.size.width)! - 65, y: 0, width: 65, height: 2)
+                self.loginView?.frame = CGRect.init(x: -_k_w, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT))
+                self.registerView?.frame = CGRect.init(x: 0, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT))
             }) { (status) in
                 
             }
             button.isSelected = !button.isSelected
+            if loginAndRegisterStatus != nil {
+                loginAndRegisterStatus!(false)
+            }
         }
     }
     
@@ -141,13 +154,15 @@ extension LoginAndRegisterSlideView {
         })
         
         loginView = UIView.init(frame: CGRect.init(x: 0, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT)))
-        loginView?.backgroundColor = UIColor.red
         self.addSubview(loginView!)
         
         registerView = UIView.init(frame: CGRect.init(x: _k_w, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT)))
         self.addSubview(registerView!)
         if  lrBottomView != nil{
-            lrBottomView(loginView!,registerView)
+            lrBottomView!(loginView!,registerView!)
+        }
+        if loginAndRegisterStatus != nil {
+            loginAndRegisterStatus!(true)
         }
     }
 }
