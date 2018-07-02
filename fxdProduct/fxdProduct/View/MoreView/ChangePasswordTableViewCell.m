@@ -46,13 +46,13 @@
     }];
     //左边的标题
     self.titleLabel = [[UILabel alloc]init];
-    self.titleLabel.font = [UIFont systemFontOfSize:16];
-    self.titleLabel.textColor = rgb(77, 77, 77);
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.titleLabel.textColor = rgb(102, 102, 102);
+    self.titleLabel.textAlignment = NSTextAlignmentLeft;
     [self.backView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.backView.mas_left).with.offset(20);
-        make.height.equalTo(@30);
+        make.left.equalTo(self.backView.mas_left).with.offset(42);
+//        make.height.equalTo(@30);
         make.centerY.equalTo(self.backView.mas_centerY);
         make.width.equalTo(@100);
     }];
@@ -60,9 +60,10 @@
 
     //右边的内容
     self.contentTextField = [[UITextField alloc]init];
-    self.contentTextField.font = [UIFont systemFontOfSize:14];
+    self.contentTextField.font = [UIFont systemFontOfSize:13];
     self.contentTextField.secureTextEntry = YES;
     self.contentTextField.clearsOnBeginEditing = YES;
+    self.contentTextField.textColor = rgb(178, 178, 178);
     self.contentTextField.delegate =self;
     [self.backView addSubview:self.contentTextField];
     [self.contentTextField mas_makeConstraints:^(MASConstraintMaker *make) {

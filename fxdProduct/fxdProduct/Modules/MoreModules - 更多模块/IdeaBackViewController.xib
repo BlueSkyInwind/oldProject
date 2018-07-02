@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IdeaBackViewController">
             <connections>
+                <outlet property="customerServiceBtn" destination="QGa-GP-iha" id="81Q-gB-Zoz"/>
                 <outlet property="foreTextview" destination="Vay-2E-WS6" id="YPT-UL-IQM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -19,27 +20,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSU-tK-eK6">
-                    <rect key="frame" x="16" y="292" width="343" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="cwc-B1-3tM"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                    <state key="normal" title="提交" backgroundImage="applayBtnImage">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="submitBtn:" destination="-1" eventType="touchUpInside" id="aiQ-yl-eBN"/>
-                    </connections>
-                </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="请在此输入您的宝贵建议" translatesAutoresizingMaskIntoConstraints="NO" id="Vay-2E-WS6">
-                    <rect key="frame" x="16" y="100" width="343" height="172"/>
+                    <rect key="frame" x="0.0" y="100" width="375" height="180"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="172" id="bv0-GD-bZ8"/>
+                        <constraint firstAttribute="height" constant="180" id="bv0-GD-bZ8"/>
                     </constraints>
-                    <color key="textColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.70196078431372544" green="0.70196078431372544" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -50,20 +38,50 @@
                         <outlet property="delegate" destination="-1" id="QIU-j4-TrE"/>
                     </connections>
                 </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGa-GP-iha">
+                    <rect key="frame" x="67" y="405" width="240" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="U7f-RB-Llr"/>
+                        <constraint firstAttribute="width" constant="240" id="jlX-e4-dAa"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="呼叫客服" backgroundImage="kefu_icon">
+                        <color key="titleColor" red="0.3411764705882353" green="0.55294117647058827" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="customerServiceBtnClick:" destination="-1" eventType="touchUpInside" id="RWz-Q3-gYq"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSU-tK-eK6">
+                    <rect key="frame" x="68" y="335" width="240" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="MBu-32-oyO"/>
+                        <constraint firstAttribute="height" constant="40" id="cwc-B1-3tM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <state key="normal" title="提交" backgroundImage="yijian_btn_icon">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="submitBtn:" destination="-1" eventType="touchUpInside" id="aiQ-yl-eBN"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="QSU-tK-eK6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Tns-3Y-2d8"/>
-                <constraint firstAttribute="trailing" secondItem="QSU-tK-eK6" secondAttribute="trailing" constant="16" id="Zlc-zH-PGX"/>
-                <constraint firstItem="Vay-2E-WS6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="mzN-kI-jrp"/>
-                <constraint firstItem="QSU-tK-eK6" firstAttribute="top" secondItem="Vay-2E-WS6" secondAttribute="bottom" constant="20" id="qwi-3Z-4A4"/>
-                <constraint firstAttribute="trailing" secondItem="Vay-2E-WS6" secondAttribute="trailing" constant="16" id="zAO-fY-syd"/>
+                <constraint firstItem="QGa-GP-iha" firstAttribute="top" secondItem="QSU-tK-eK6" secondAttribute="bottom" constant="30" id="IM5-Of-xvz"/>
+                <constraint firstItem="QGa-GP-iha" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="blt-11-eUP"/>
+                <constraint firstItem="Vay-2E-WS6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mzN-kI-jrp"/>
+                <constraint firstItem="QSU-tK-eK6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="owE-g5-VyK"/>
+                <constraint firstItem="QSU-tK-eK6" firstAttribute="top" secondItem="Vay-2E-WS6" secondAttribute="bottom" constant="55" id="qwi-3Z-4A4"/>
+                <constraint firstAttribute="trailing" secondItem="Vay-2E-WS6" secondAttribute="trailing" id="zAO-fY-syd"/>
                 <constraint firstItem="Vay-2E-WS6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="zE3-jK-ZbS"/>
             </constraints>
             <point key="canvasLocation" x="561.5" y="431.5"/>
         </view>
     </objects>
     <resources>
-        <image name="applayBtnImage" width="323" height="50"/>
+        <image name="kefu_icon" width="239" height="40"/>
+        <image name="yijian_btn_icon" width="239" height="40"/>
     </resources>
 </document>

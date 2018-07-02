@@ -16,6 +16,7 @@
 
 - (IBAction)submitBtn:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextView *foreTextview;
+@property (weak, nonatomic) IBOutlet UIButton *customerServiceBtn;
 
 @end
 
@@ -28,6 +29,19 @@
     [self addBackItem];
 }
 
+- (IBAction)customerServiceBtnClick:(id)sender {
+    
+    UIAlertController *actionSheett = [UIAlertController alertControllerWithTitle:@"热线服务时间:9:00-17:30(工作日)" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *teleAction = [UIAlertAction actionWithTitle:@"4008-678-655" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", @"4008-678-655"]];
+        [[UIApplication sharedApplication] openURL:telURL];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [actionSheett addAction:teleAction];
+    [actionSheett addAction:cancelAction];
+    [self presentViewController:actionSheett animated:YES completion:nil];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

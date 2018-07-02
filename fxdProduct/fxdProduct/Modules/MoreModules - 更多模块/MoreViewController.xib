@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoreViewController">
             <connections>
                 <outlet property="MyTabView" destination="hyN-sM-2r2" id="EvI-8U-zyt"/>
-                <outlet property="versionLabel" destination="z8W-fc-usA" id="bER-BW-zwp"/>
+                <outlet property="exitBtn" destination="i6d-nC-NuO" id="KO0-Hs-4bJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,35 +21,43 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hyN-sM-2r2">
-                    <rect key="frame" x="0.0" y="64" width="375" height="487"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="137"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="137" id="DJK-Dd-eTy"/>
+                    </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="f3d-fj-S9S"/>
                         <outlet property="delegate" destination="-1" id="R7s-7U-8pt"/>
                     </connections>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前版本 v2.1.3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8W-fc-usA">
-                    <rect key="frame" x="131" y="586" width="113" height="22"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6d-nC-NuO">
+                    <rect key="frame" x="67" y="281" width="240" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="22" id="754-VL-X46"/>
-                        <constraint firstAttribute="width" constant="113" id="hnq-hQ-JbX"/>
+                        <constraint firstAttribute="height" constant="40" id="NRV-oq-Bav"/>
+                        <constraint firstAttribute="width" constant="240" id="b8L-M1-I74"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" red="0.59999999999999998" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <state key="normal" title="退出登录" backgroundImage="yijian_btn_icon">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="exitBtnClick:" destination="-1" eventType="touchUpInside" id="6jf-Fq-sZS"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="i6d-nC-NuO" firstAttribute="top" secondItem="hyN-sM-2r2" secondAttribute="bottom" constant="80" id="0Xy-e9-9Fp"/>
+                <constraint firstItem="i6d-nC-NuO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1WX-sm-Q1L"/>
                 <constraint firstItem="hyN-sM-2r2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="38B-dv-A1n"/>
-                <constraint firstAttribute="bottom" secondItem="hyN-sM-2r2" secondAttribute="bottom" constant="116" id="3a0-Ui-62d"/>
                 <constraint firstItem="hyN-sM-2r2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="9iF-xB-EGb"/>
-                <constraint firstAttribute="bottom" secondItem="z8W-fc-usA" secondAttribute="bottom" constant="59" id="Nsg-Uf-4sb"/>
-                <constraint firstItem="z8W-fc-usA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h4j-oP-cH5"/>
                 <constraint firstAttribute="trailing" secondItem="hyN-sM-2r2" secondAttribute="trailing" id="ppb-Mf-RNc"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="yijian_btn_icon" width="239" height="40"/>
+    </resources>
 </document>

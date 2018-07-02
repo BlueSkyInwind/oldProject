@@ -7,7 +7,6 @@
 //
 
 #import "MyViewController.h"
-#import "NextViewCell.h"
 #import "MyCardsViewController.h"
 #import "MoreViewController.h"
 #import "RepayRecordController.h"
@@ -88,7 +87,6 @@
     _headerView.moneyLabel.text = @"2300.34元";
     _headerView.dateLabel.text = @"还款日：2017.03.24";
     [_headerView.timeBtn setTitle:@"14天后" forState:UIControlStateNormal];
-//    [_headerView.bottomBtn setTitle:@"立即还款" forState:UIControlStateNormal];
     _headerView.backgroundColor = [UIColor clearColor];
     _headerView.delegate = self;
     [self.view addSubview:_headerView];

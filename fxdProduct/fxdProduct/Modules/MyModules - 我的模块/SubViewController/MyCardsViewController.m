@@ -42,8 +42,7 @@
     _dataImageListBank = [[NSMutableArray alloc] init];
     _bankWitch = [[NSMutableArray alloc] init];
     _bankWitchArray = [[NSMutableArray alloc] init];
-    [_tableView registerNib:[UINib nibWithNibName:@"MyCardCell" bundle:nil] forCellReuseIdentifier:@"MyCardCell"];
-//        [self addCardBtn];
+    [_tableView registerClass:[BankCell class] forCellReuseIdentifier:@"BankCell"];
     
     [self createMyCardUI];
     //请求银行卡列表信息
@@ -56,16 +55,9 @@
         self.imageView.contentMode=UIViewContentModeScaleAspectFit;
         self.imageView.autoresizingMask=UIViewAutoresizingFlexibleWidth;
         self.tableView.hidden=YES;
+
     }
     [self createNoneView];
-}
-
-- (void)addCardBtn
-{
-    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(addCard)];
-    btn.tintColor = [UIColor blackColor];
-    self.navigationItem.rightBarButtonItem = btn;
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14], NSFontAttributeName, nil] forState:UIControlStateNormal];
 }
 
 - (void)addCard
@@ -80,7 +72,6 @@
 
 -(void)createMyCardUI{
     
-    self.title=@"我的银行卡";
     if (_dataliat.count == 0) {
         self.imageView.contentMode=UIViewContentModeScaleAspectFit;
         self.imageView.autoresizingMask=UIViewAutoresizingFlexibleWidth;
@@ -151,7 +142,7 @@
         [tempStr appendString:@"*"];
     }
     
-    NSMutableString *returnStr = [NSMutableString stringWithString:[str stringByReplacingCharactersInRange:NSMakeRange(1, str.length - 5) withString:tempStr]];
+    NSMutableString *returnStr = [NSMutableString stringWithString:[str stringByReplacingCharactersInRange:NSMakeRange(0, str.length - 4) withString:tempStr]];
     
     NSMutableString *ss = [NSMutableString string];
     for (NSInteger i = 0; i < returnStr.length; i++) {
@@ -176,49 +167,87 @@
 
 //6*** **** **** ***9 782
 #pragma mark-----UItableview--delegete---
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return _dataliat.count + 1;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _dataliat.count;
+
+    return 1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    MyCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCardCell"];
-    [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[_dataImageListBank objectAtIndex:indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
-    cell.bankCompanyLabel.text = _bankWitchArray[indexPath.row];
-    cell.bankNum.text =_dataliat[indexPath.row];
-    cell.banklist.text =_bankWitch[indexPath.row];
-    if (_defaultCardIndex == indexPath.row) {
-        cell.defaultFlag.hidden = NO;
-    }
-    
-    if([_bankWitch[indexPath.row] isEqualToString:@"银行卡"])
-    {
-        cell.cardTypeFlag=0;
-        cell.btnEdit.hidden=NO;
-    }
-    else
-    {
-        cell.cardTypeFlag=1;
-        cell.btnEdit.hidden=YES;
-    }
+    BankCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BankCell"];
     cell.selected = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (indexPath.section == _dataliat.count) {
+        
+        cell.type = @"2";
+        cell.backgroundColor = rgb(40, 43, 44);
+        return cell;
+    }
+    
+    cell.type = @"1";
+    [cell.bankImageView sd_setImageWithURL:[NSURL URLWithString:[_dataImageListBank objectAtIndex:indexPath.section]] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
+    cell.bankNameLabel.text = _bankWitchArray[indexPath.section];
+    cell.bankNumLabel.text = _dataliat[indexPath.section];
+    cell.backgroundColor = UIColor.clearColor;
 
     return cell;
+//    MyCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCardCell"];
+//    [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[_dataImageListBank objectAtIndex:indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
+//    cell.bankCompanyLabel.text = _bankWitchArray[indexPath.row];
+//    cell.bankNum.text =_dataliat[indexPath.row];
+//    cell.banklist.text =_bankWitch[indexPath.row];
+//    if (_defaultCardIndex == indexPath.row) {
+//        cell.defaultFlag.hidden = NO;
+//    }
+//
+//    if([_bankWitch[indexPath.row] isEqualToString:@"银行卡"])
+//    {
+//        cell.cardTypeFlag=0;
+//        cell.btnEdit.hidden=NO;
+//    }
+//    else
+//    {
+//        cell.cardTypeFlag=1;
+//        cell.btnEdit.hidden=YES;
+//    }
+//    cell.selected = NO;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//
+//    return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.1;
+    if (section == _dataliat.count) {
+        return 21;
+    }
+    return 14;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 142.0;
+    if (indexPath.section == _dataliat.count) {
+        
+        return 50;
+    }
+    return 102;
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == _dataliat.count) {
+        
+        [self addCard];
+    }
+}
 //隐藏与现实tabbar
 -(void)viewWillAppear:(BOOL)animated
 {

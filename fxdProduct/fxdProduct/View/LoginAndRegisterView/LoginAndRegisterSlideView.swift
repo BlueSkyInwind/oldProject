@@ -25,7 +25,7 @@ class LoginAndRegisterSlideView: UIView {
     fileprivate var statusView:UIView?
     fileprivate var lrBottomView : LoginAndRegisterBottomView?
 
-    convenience init(_ frame: CGRect,_ bottonView:LoginAndRegisterBottomView){
+    convenience init(_ frame: CGRect,_ bottonView:@escaping LoginAndRegisterBottomView){
         self.init(frame: frame)
         self.lrBottomView = bottonView
     }
@@ -147,7 +147,7 @@ extension LoginAndRegisterSlideView {
         registerView = UIView.init(frame: CGRect.init(x: _k_w, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT)))
         self.addSubview(registerView!)
         if  lrBottomView != nil{
-            lrBottomView(loginView!,registerView)
+            lrBottomView!(loginView!,registerView!)
         }
     }
 }
