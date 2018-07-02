@@ -109,3 +109,5 @@ let SUPERMARK_QUOTA_COLOR = UIColor.init(red: 255/255.0, green: 83/255.0, blue: 
 let SUPERMARK_TERM_COLOR = UIColor.init(red: 105/255.0, green: 105/255.0, blue: 105/255.0, alpha: 1)
 
 let MESSAGE_TITLE_COLOR = UIColor.init(red: 63/255.0, green: 63/255.0, blue: 63/255.0, alpha: 1)
+
+let MINE_MONEY_COLOR = UIColor.init(red: 255/255.0, green: 245/255.0, blue: 0/255.0, alpha: 1)
