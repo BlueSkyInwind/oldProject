@@ -130,7 +130,6 @@
         self.automaticallyAdjustsScrollViewInsets = false;
     }
     [self.tableView registerNib:[UINib nibWithNibName:@"TicketCell" bundle:nil] forCellReuseIdentifier:@"cell"];
-    
     [self setupMJRefreshTableView];
 
 }
@@ -139,7 +138,7 @@
 
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithTitle:@"使用帮助" style:UIBarButtonItemStylePlain target:self action:@selector(goHelpVCClick)];
     self.navigationItem.rightBarButtonItem = aBarbi;
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     
 }
 
@@ -165,8 +164,9 @@
 #pragma mark 初始化无优惠券视图
 -(void)createNoneView
 {
+    self.view.backgroundColor = kUIColorFromRGB(0xf5f6fa);
     NoneView =[[UIView alloc]init];
-    NoneView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
+    NoneView.backgroundColor = kUIColorFromRGB(0xf5f6fa);
     [self.view addSubview:NoneView];
     [NoneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).with.offset(64);
@@ -175,59 +175,32 @@
     }];
     
     UIImageView *logoImg=[[UIImageView alloc]init];
-    logoImg.image=[UIImage imageNamed:@"5_shenhe_icon_03"];
+    logoImg.image=[UIImage imageNamed:@"ticket_none_icon"];
     [NoneView addSubview:logoImg];
     [logoImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(NoneView.mas_top).with.offset(60);
+        make.top.equalTo(NoneView.mas_top).with.offset(124);
         make.centerX.equalTo(self.view.mas_centerX);
     }];
     
     UILabel *lblNone=[[UILabel alloc]init];
     lblNone.numberOfLines = 0;
-    lblNone.text = @"你当前没有优惠券";
+    lblNone.text = @"亲, 您暂时还没有优惠券";
     lblNone.textAlignment = NSTextAlignmentCenter;
-    lblNone.font = [UIFont systemFontOfSize:18];
-    lblNone.textColor = kUIColorFromRGB(0x4d4d4d);
+    lblNone.font = [UIFont systemFontOfSize:12];
+    lblNone.textColor = kUIColorFromRGB(0x666666);
     [NoneView addSubview:lblNone];
     [lblNone mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(logoImg.mas_bottom).with.offset(15);
+        make.top.equalTo(logoImg.mas_bottom).with.offset(53);
         make.centerX.equalTo(self.view.mas_centerX);
         make.height.equalTo(@30);
         make.width.equalTo(@150);
     }];
-    
-//    UILabel *prometLabel=[[UILabel alloc]init];
-//    prometLabel.numberOfLines = 0;
-//    prometLabel.text = @"邀请好友，可领优惠券";
-//    prometLabel.textAlignment = NSTextAlignmentCenter;
-//    prometLabel.font = [UIFont systemFontOfSize:20];
-//    prometLabel.textColor = kUIColorFromRGB(0x00AAEE);
-//    [NoneView addSubview:prometLabel];
-//    [prometLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(lblNone.mas_bottom).with.offset(50);
-//        make.centerX.equalTo(self.view.mas_centerX);
-//        make.height.equalTo(@30);
-//        make.width.equalTo(@250);
-//    }];
-//    
-//    UIButton * invationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [invationBtn setTitle:@"立即邀请" forState:UIControlStateNormal];
-//    invationBtn.titleLabel.font = [UIFont systemFontOfSize:18];
-//    [invationBtn setTitleColor:kUIColorFromRGB(0x00AAee) forState:UIControlStateNormal];
-//    [FXD_Tool setCorner:invationBtn borderColor:kUIColorFromRGB(0x00AAee)];
-//    [invationBtn addTarget:self action:@selector(pushInvationFriend) forControlEvents:UIControlEventTouchUpInside];
-//    [NoneView addSubview:invationBtn];
-//    [invationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(prometLabel.mas_bottom).with.offset(30);
-//        make.centerX.equalTo(self.view.mas_centerX);
-//        make.height.equalTo(@40);
-//        make.width.equalTo(@130);
-//    }];
+
 }
 
 #pragma mark 初始化底部视图
 -(void)createbottomView{
-//    self.tableView.frame = CGRectMake(0, 0, _k_w, _k_h - 50);
+
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).with.offset(BarHeightNew);
         make.left.right.equalTo(self.view);
@@ -245,9 +218,9 @@
     }];
     
     UILabel * prometLabel = [[UILabel alloc]init];
-    prometLabel.text = @"查看过期优惠券";
-    prometLabel.textColor = kUIColorFromRGB(0x666666);
-    prometLabel.font = [UIFont systemFontOfSize:15];
+    prometLabel.text = @"查看过期券";
+    prometLabel.textColor = kUIColorFromRGB(0x4d4d4d);
+    prometLabel.font = [UIFont systemFontOfSize:13];
     prometLabel.textAlignment = NSTextAlignmentCenter;
     [bottomView addSubview:prometLabel];
     [prometLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -273,12 +246,6 @@
     LapseDiscountTicketViewController *lapseDiscountTicketVC = [[LapseDiscountTicketViewController alloc] init];
     lapseDiscountTicketVC.invalidTicketArr = self.invalidTicketArr;
     [self.navigationController pushViewController:lapseDiscountTicketVC animated:true];
-}
-
-#pragma mark 点击邀请好友
--(void)pushInvationFriend{
-    InvitationViewController *invitationVC = [[InvitationViewController alloc] init];
-    [self.navigationController pushViewController:invitationVC animated:true];
 }
 
 #pragma mark TableViewDelegate

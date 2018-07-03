@@ -204,17 +204,19 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         footView.backgroundColor = UIColor.clear
         
         let confirmBtn = UIButton()
-        confirmBtn.setTitle("确认还款", for: .normal)
+        confirmBtn.setTitle("确定", for: .normal)
         confirmBtn.setTitleColor(UIColor.white, for: .normal)
-        confirmBtn.setBackgroundImage(UIImage.init(named: "applayBtnImage"), for: .normal)
+        confirmBtn.setBackgroundImage(UIImage.init(named: "btn_seleted_icon"), for: .normal)
         confirmBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         confirmBtn.addTarget(self, action: #selector(confirmBtnClick), for: .touchUpInside)
         footView.addSubview(confirmBtn)
         confirmBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(footView.snp.left).offset(20)
-            make.right.equalTo(footView.snp.right).offset(-20)
+//            make.left.equalTo(footView.snp.left).offset(20)
+//            make.right.equalTo(footView.snp.right).offset(-20)
             make.top.equalTo(footView.snp.top).offset(40)
-            make.height.equalTo(45)
+            make.height.equalTo(40)
+            make.width.equalTo(240)
+            make.centerX.equalTo(footView.snp.centerX)
         }
         return footView
         

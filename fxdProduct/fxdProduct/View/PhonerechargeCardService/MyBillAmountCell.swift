@@ -81,7 +81,7 @@ extension MyBillAmountCell{
             make.centerX.equalTo(self.snp.centerX)
         })
         let tipImageView = UIImageView()
-        tipImageView.image = UIImage.init(named: "tip_icon")
+        tipImageView.image = UIImage.init(named: "bill_tip_icon")
         overdueView?.addSubview(tipImageView)
         tipImageView.snp.makeConstraints { (make) in
             make.left.equalTo((overdueView?.snp.left)!).offset(0)

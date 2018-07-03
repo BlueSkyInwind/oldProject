@@ -25,10 +25,15 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         noneViewUI()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getData()
+    }
     func noneViewUI(){
     
         noneView = PhonerechargeCardNoneView.init(frame: CGRect(x:0,y:64,width:_k_w,height:_k_h - 64))
-        noneView?.noneDesc?.text = "账单都被消灭了"
+        noneView?.noneDesc?.text = "账单都被消灭啦"
+        noneView?.noneImageView?.image = UIImage.init(named: "bill_none_icon")
         noneView?.isHidden = true
         self.view.addSubview(noneView!)
     }
@@ -70,7 +75,7 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                 if self?.repayModel == nil || self?.orderModel == nil{
                     
                     self?.noneView?.isHidden = false
-                    self?.noneView?.noneDesc?.text = "账单都被消灭了"
+                    self?.noneView?.noneDesc?.text = "账单都被消灭啦"
                     self?.tableView?.isHidden = true
                 }else{
                     self?.orderModel = self?.repayModel?.order
@@ -107,7 +112,7 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             let headerView = UIView()
             headerView.backgroundColor = LINE_COLOR
             let contentLabel = UILabel()
-            contentLabel.textColor = TITLE_COLOR
+            contentLabel.textColor = Bill_COLOR
             contentLabel.font = UIFont.systemFont(ofSize: 14)
             contentLabel.text = "关联订单"
             headerView.addSubview(contentLabel)
@@ -121,6 +126,46 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         
         let view = UIView()
         view.backgroundColor = LINE_COLOR
+        //
+        if section == 0 && repayModel?.isPending == "1"{
+            let bgImageView = UIImageView()
+            bgImageView.image = UIImage.init(named: "bill_tip_bg_icon")
+            view.addSubview(bgImageView)
+            bgImageView.snp.makeConstraints { (make) in
+                make.left.equalTo(view.snp.left).offset(0)
+                make.right.equalTo(view.snp.right).offset(0)
+                make.top.equalTo(view.snp.top).offset(0)
+                make.bottom.equalTo(view.snp.bottom).offset(0)
+            }
+            
+            let contentView = UIView()
+            contentView.backgroundColor = UIColor.clear
+            bgImageView.addSubview(contentView)
+            contentView.snp.makeConstraints { (make) in
+                make.top.equalTo(bgImageView.snp.top).offset(0)
+                make.bottom.equalTo(bgImageView.snp.bottom).offset(0)
+                make.width.equalTo(120)
+                make.centerX.equalTo(bgImageView.snp.centerX)
+            }
+            
+            let leftImageView = UIImageView()
+            leftImageView.image = UIImage.init(named: "bill_repay_icon")
+            contentView.addSubview(leftImageView)
+            leftImageView.snp.makeConstraints { (make) in
+                make.left.equalTo(contentView.snp.left).offset(5)
+                make.centerY.equalTo(contentView.snp.centerY)
+            }
+            
+            let titleLabel = UILabel()
+            titleLabel.text = "还款结果确认中"
+            titleLabel.font = UIFont.systemFont(ofSize: 12)
+            titleLabel.textColor = QUTOA_COLOR
+            contentView.addSubview(titleLabel)
+            titleLabel.snp.makeConstraints { (make) in
+                make.right.equalTo(contentView.snp.right).offset(-5)
+                make.centerY.equalTo(contentView.snp.centerY)
+            }
+        }
         return view
         
     }
@@ -129,7 +174,11 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         
         if section == 1 {
             
-            return 33
+            return 40
+        }
+        
+        if section == 0 && repayModel?.isPending == "1" {
+            return 30
         }
         return 12
         
@@ -196,18 +245,18 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         let footView = UIView()
         footView.backgroundColor = UIColor.clear
         
-        let repayBtn = UIButton()
+        let repayBtn = UIButton.init(type: .custom)
         repayBtn.setTitle("还款", for: .normal)
         repayBtn.setTitleColor(UIColor.white, for: .normal)
         repayBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        repayBtn.setBackgroundImage(UIImage.init(named: "applayBtnImage"), for: .normal)
+        repayBtn.setBackgroundImage(UIImage.init(named: "btn_seleted_icon"), for: .normal)
         repayBtn.addTarget(self, action: #selector(repayBtnClic), for: .touchUpInside)
         footView.addSubview(repayBtn)
         repayBtn.snp.makeConstraints { (make) in
             make.top.equalTo(footView.snp.top).offset(100)
-            make.left.equalTo(footView.snp.left).offset(20)
-            make.right.equalTo(footView.snp.right).offset(-20)
-            make.height.equalTo(45)
+            make.width.equalTo(240)
+            make.centerX.equalTo(footView.snp.centerX)
+            make.height.equalTo(40)
         }
         return footView
         
@@ -215,7 +264,7 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
-        if section == 1 {
+        if section == 1 && repayModel?.isPending != "1"{
             return 150
         }
         

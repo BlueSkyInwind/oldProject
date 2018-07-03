@@ -122,7 +122,7 @@
         UIView* view = [[UIView alloc]init];
         self.sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.sureButton setTitle:@"确认" forState:UIControlStateNormal];
-        [self.sureButton setBackgroundImage:[UIImage imageNamed:@"yijian_btn_icon"] forState:UIControlStateNormal];
+        [self.sureButton setBackgroundImage:[UIImage imageNamed:@"btn_seleted_icon"] forState:UIControlStateNormal];
         [self.sureButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.sureButton addTarget:self action:@selector(saveChangePassword:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:self.sureButton];

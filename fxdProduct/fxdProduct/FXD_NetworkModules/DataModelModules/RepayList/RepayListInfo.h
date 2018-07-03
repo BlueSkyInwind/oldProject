@@ -82,7 +82,8 @@
 @property (nonatomic, strong) NSString<Optional> *maxOverdueDays;
 
 @property (nonatomic, strong) NSString<Optional> *maxOverdueDaysText;
-
+//是否还款中
+@property (nonatomic, strong) NSString<Optional> *isPending;
 @end
 
 

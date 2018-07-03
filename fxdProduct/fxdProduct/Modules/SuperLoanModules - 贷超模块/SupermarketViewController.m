@@ -274,9 +274,9 @@
 
         [UIView animateWithDuration:1 animations:^{
             if (UI_IS_IPHONEX) {
-                _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 140, _k_w, _k_h)];
+                _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 150, _k_w, _k_h)];
             }else{
-                _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 110, _k_w, _k_h)];
+                _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 120, _k_w, _k_h)];
             }
             
             _sortView.delegate = self;
@@ -321,9 +321,9 @@
         [UIView animateWithDuration:1 animations:^{
             
             if (UI_IS_IPHONEX) {
-                _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 140, _k_w, _k_h)];
+                _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 150, _k_w, _k_h)];
             }else{
-                _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 110, _k_w, _k_h)];
+                _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 120, _k_w, _k_h)];
             }
             
             _filterView.delegate = self;

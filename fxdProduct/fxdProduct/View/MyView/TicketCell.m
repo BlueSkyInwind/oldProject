@@ -19,7 +19,7 @@
 {
 
     self.lblName = [[UILabel alloc]init];
-    self.lblName.textColor=kUIColorFromRGB(0xffffff);
+    self.lblName.textColor = UIColor.whiteColor;
     self.lblName.numberOfLines = 0;
     self.lblName.font = [UIFont systemFontOfSize:19];
     self.lblName.textAlignment = NSTextAlignmentCenter;
@@ -30,7 +30,7 @@
     }];
     
     self.lblPrice=[[UILabel alloc]init];
-    self.lblPrice.textColor=kUIColorFromRGB(0xfed100);
+    self.lblPrice.textColor=kUIColorFromRGB(0xed1c24);
     self.lblPrice.font = [UIFont systemFontOfSize:25];
     self.lblPrice.textAlignment = NSTextAlignmentCenter;
     [self.TicketImgView addSubview:self.lblPrice];
@@ -55,7 +55,7 @@
     self.lblTip=[[UILabel alloc]init];
     self.lblTip.font=[UIFont systemFontOfSize:12];
     self.lblTip.textAlignment = NSTextAlignmentLeft;
-    self.lblTip.textColor=kUIColorFromRGB(0x4d4d4d);
+    self.lblTip.textColor=kUIColorFromRGB(0xb3b3b3);
     //    self.lblTip.text=@"有效期:2016-02-07至2016-06-07";
     [self.TicketImgView addSubview:self.lblTip];
     [self.lblTip mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,7 +66,7 @@
     }];
 
     self.limitProduct = [[UILabel alloc]init];
-    self.limitProduct.textColor=kUIColorFromRGB(0x808080);
+    self.limitProduct.textColor=kUIColorFromRGB(0x666666);
     self.limitProduct.font = [UIFont systemFontOfSize:12];
     self.limitProduct.text = @"见覅卫计局围殴及覅我";
     self.limitProduct.textAlignment = NSTextAlignmentLeft;
@@ -79,7 +79,7 @@
     }];
     
     self.limitconditions = [[UILabel alloc]init];
-    self.limitconditions.textColor=kUIColorFromRGB(0x808080);
+    self.limitconditions.textColor=kUIColorFromRGB(0x666666);
     self.limitconditions.font = [UIFont systemFontOfSize:12];
     self.limitconditions.text = @"见覅卫计局围殴及覅我";
     self.limitconditions.textAlignment = NSTextAlignmentLeft;

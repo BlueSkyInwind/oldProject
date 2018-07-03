@@ -23,7 +23,7 @@
     CGRect tabFram = self.frame;
     
     float percentX = (index+0.5)/TabbarItemNums;
-    CGFloat x = ceilf(percentX*tabFram.size.width);
+    CGFloat x = ceilf(percentX*tabFram.size.width + 20);
     CGFloat y = ceilf(0.1*tabFram.size.height);
     bview.frame = CGRectMake(x, y, 10, 10);
     [self addSubview:bview];

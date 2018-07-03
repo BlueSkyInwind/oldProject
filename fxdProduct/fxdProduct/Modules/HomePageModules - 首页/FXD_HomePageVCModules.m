@@ -75,7 +75,7 @@
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
-    self.navigationItem.title = @"憨分";
+//    self.navigationItem.title = @"憨分";
     _count = 0;
     _dataArray = [NSMutableArray array];
     _protocolArray = [NSMutableArray array];

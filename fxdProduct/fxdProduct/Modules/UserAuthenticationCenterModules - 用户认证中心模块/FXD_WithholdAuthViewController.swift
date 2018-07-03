@@ -332,9 +332,9 @@ extension FXD_WithholdAuthViewController {
         agreementView.isAgreementClick = {[weak self] (isClick) in
             self?.isAgreement = isClick
             if isClick {
-                self?.bottomButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
+                self?.bottomButton?.setBackgroundImage(UIImage.init(named: "btn_seleted_icon"), for: UIControlState.normal)
             }else{
-                self?.bottomButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_unselect_Image"), for: UIControlState.normal)
+                self?.bottomButton?.setBackgroundImage(UIImage.init(named: "btn_icon"), for: UIControlState.normal)
             }
         }
         agreementView.agreementClick = { [weak self] (index) in
@@ -349,16 +349,20 @@ extension FXD_WithholdAuthViewController {
             make.height.equalTo(20)
         }
         
+        //btn_seleted_icon
         bottomButton = UIButton.init(type: UIButtonType.custom)
-        bottomButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_unselect_Image"), for: UIControlState.normal)
+        bottomButton?.setBackgroundImage(UIImage.init(named: "btn_icon"), for: UIControlState.normal)
         //      bottomButton?.setBackgroundImage(UIImage.init(named: "applicationBtn_Image"), for: UIControlState.normal)
         bottomButton?.setTitle("确认授权", for: UIControlState.normal)
         bottomButton?.addTarget(self, action: #selector(bottomButtonClick), for: .touchUpInside)
         footerView.addSubview(bottomButton!)
         bottomButton?.snp.makeConstraints({ (make) in
             make.top.equalTo(footerView.snp.top).offset(154)
-            make.left.equalTo(footerView.snp.left).offset(25)
-            make.right.equalTo(footerView.snp.right).offset(-25)
+            make.height.equalTo(40)
+            make.width.equalTo(240)
+            make.centerX.equalTo(footerView.snp.centerX)
+//            make.left.equalTo(footerView.snp.left).offset(25)
+//            make.right.equalTo(footerView.snp.right).offset(-25)
         })
         return footerView
     }

@@ -85,15 +85,17 @@ class CashWithdrawViewController: BaseViewController ,UITableViewDelegate,UITabl
         let withdrawBtn = UIButton()
         withdrawBtn.setTitle("提现", for: .normal)
         withdrawBtn.setTitleColor(UIColor.white, for: .normal)
-        withdrawBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        withdrawBtn.setBackgroundImage(UIImage(named:"applayBtnImage"), for: .normal)
+        withdrawBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        withdrawBtn.setBackgroundImage(UIImage(named:"btn_seleted_icon"), for: .normal)
         withdrawBtn.addTarget(self, action: #selector(withdrawBtnClick), for: .touchUpInside)
         tableView?.addSubview(withdrawBtn)
         withdrawBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(self.view).offset(18)
-            make.right.equalTo(self.view).offset(-18)
+//            make.left.equalTo(self.view).offset(18)
+//            make.right.equalTo(self.view).offset(-18)
             make.top.equalTo(self.view).offset(280)
-            make.height.equalTo(50)
+            make.height.equalTo(40)
+            make.width.equalTo(240)
+            make.centerX.equalTo(self.view.snp.centerX)
         }
         if UI_IS_IPONE6P {
             withdrawBtn.snp.updateConstraints({ (make) in

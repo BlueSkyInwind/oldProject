@@ -54,15 +54,17 @@ class BankCardViewController: BaseViewController ,UITableViewDelegate,UITableVie
         let nextBtn = UIButton()
         nextBtn.setTitle("下一步", for: .normal)
         nextBtn.setTitleColor(UIColor.white, for: .normal)
-        nextBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        nextBtn.setBackgroundImage(UIImage(named:"applayBtnImage"), for: .normal)
+        nextBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        nextBtn.setBackgroundImage(UIImage(named:"btn_seleted_icon"), for: .normal)
         nextBtn.addTarget(self, action: #selector(nextBtnBtnClick), for: .touchUpInside)
         self.view.addSubview(nextBtn)
         nextBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(self.view).offset(18)
-            make.right.equalTo(self.view).offset(-18)
+//            make.left.equalTo(self.view).offset(18)
+//            make.right.equalTo(self.view).offset(-18)
             make.top.equalTo(self.view).offset(520)
-            make.height.equalTo(50)
+            make.height.equalTo(40)
+            make.width.equalTo(240)
+            make.centerX.equalTo(self.view.snp.centerX)
         }
         
         if UI_IS_IPONE5 {

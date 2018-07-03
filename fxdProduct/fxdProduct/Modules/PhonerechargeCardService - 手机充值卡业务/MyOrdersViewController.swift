@@ -50,7 +50,8 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
     func noneViewUI(){
         
         noneView = PhonerechargeCardNoneView.init(frame: CGRect(x:0,y:64,width:_k_w,height:_k_h - 64))
-        noneView?.noneDesc?.text = "订单都被消灭了"
+        noneView?.noneDesc?.text = "亲, 您暂时还没有订单"
+        noneView?.noneImageView?.image = UIImage.init(named: "order_none_icon")
         noneView?.isHidden = true
         self.view.addSubview(noneView!)
     }

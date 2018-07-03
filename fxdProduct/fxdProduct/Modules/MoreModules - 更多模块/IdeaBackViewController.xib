@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,10 +21,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="请在此输入您的宝贵建议" translatesAutoresizingMaskIntoConstraints="NO" id="Vay-2E-WS6">
-                    <rect key="frame" x="0.0" y="100" width="375" height="180"/>
+                    <rect key="frame" x="0.0" y="80" width="375" height="200"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="180" id="bv0-GD-bZ8"/>
+                        <constraint firstAttribute="height" constant="200" id="bv0-GD-bZ8"/>
                     </constraints>
                     <color key="textColor" red="0.70196078431372544" green="0.70196078431372544" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -59,7 +59,7 @@
                         <constraint firstAttribute="height" constant="40" id="cwc-B1-3tM"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                    <state key="normal" title="提交" backgroundImage="yijian_btn_icon">
+                    <state key="normal" title="提交" backgroundImage="btn_seleted_icon">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
@@ -75,13 +75,13 @@
                 <constraint firstItem="QSU-tK-eK6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="owE-g5-VyK"/>
                 <constraint firstItem="QSU-tK-eK6" firstAttribute="top" secondItem="Vay-2E-WS6" secondAttribute="bottom" constant="55" id="qwi-3Z-4A4"/>
                 <constraint firstAttribute="trailing" secondItem="Vay-2E-WS6" secondAttribute="trailing" id="zAO-fY-syd"/>
-                <constraint firstItem="Vay-2E-WS6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="zE3-jK-ZbS"/>
+                <constraint firstItem="Vay-2E-WS6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="zE3-jK-ZbS"/>
             </constraints>
             <point key="canvasLocation" x="561.5" y="431.5"/>
         </view>
     </objects>
     <resources>
+        <image name="btn_seleted_icon" width="239" height="40"/>
         <image name="kefu_icon" width="239" height="40"/>
-        <image name="yijian_btn_icon" width="239" height="40"/>
     </resources>
 </document>

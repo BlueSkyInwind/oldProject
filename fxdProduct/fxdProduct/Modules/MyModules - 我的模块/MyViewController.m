@@ -9,22 +9,16 @@
 #import "MyViewController.h"
 #import "MyCardsViewController.h"
 #import "MoreViewController.h"
-#import "RepayRecordController.h"
 #import "DiscountTicketController.h"
-#import "InvitationViewController.h"
 #import "CashViewModel.h"
 #import "PersonalCenterModel.h"
 #import "MessageViewModel.h"
 #import "AountStationLetterMsgModel.h"
 #import "UITabBar+badge.h"
-#import "MineViewModel.h"
-#import "ExperienceValueGradeModel.h"
 #import "LoginViewController.h"
-#import "RepayMentViewModel.h"
-#import "RepayListInfo.h"
 #import "IdeaBackViewController.h"
 
-@interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineMiddleViewDelegate,MineHeaderViewDelegate>
+@interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineHeaderViewDelegate>
 {
     //标题数组
     NSArray *titleAry;
@@ -32,10 +26,10 @@
     NSArray *imgAry;
     AountStationLetterMsgModel *model;
     NSString *_h5_url_;
+    FXD_HomeProductListModel *_homeProductModel;
    
 }
 @property (strong, nonatomic) IBOutlet UITableView *MyViewTable;
-@property (nonatomic, strong) MineMiddleView *middleView;
 @property (nonatomic, strong) MineHeaderView *headerView;
 
 @end
@@ -71,9 +65,48 @@
         [self.MyViewTable reloadData];
     }
     
+    [self getData];
+//    [self getPersonalCenterInfo];
 }
 
-
+-(void)getData{
+    __weak typeof (self) weakSelf = self;
+    HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
+    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
+        
+        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+        
+        _homeProductModel = [[FXD_HomeProductListModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+        if ([baseResultM.errCode isEqualToString:@"0"]) {
+            
+            _headerView.type = _homeProductModel.flag;
+            if (_homeProductModel.repayInfo != nil) {
+                
+                _headerView.moneyLabel.text = [NSString stringWithFormat:@"%@元",_homeProductModel.repayInfo.repayAmount];
+                _headerView.dateLabel.text = [NSString stringWithFormat:@"还款日: %@",_homeProductModel.repayInfo.repayDate];;
+                [_headerView.timeBtn setTitle:@"14天后" forState:UIControlStateNormal];
+                [_headerView.timeBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+            }
+            
+            if (_homeProductModel.overdueInfo != nil) {
+                
+                _headerView.moneyLabel.text = [NSString stringWithFormat:@"%@元",_homeProductModel.overdueInfo.repayAmount];
+                _headerView.dateLabel.text = [NSString stringWithFormat:@"还款日: %@",_homeProductModel.repayInfo.repayDate];;
+                [_headerView.timeBtn setTitle:[NSString stringWithFormat:@"%@天后",_homeProductModel.overdueInfo.overdueDays] forState:UIControlStateNormal];
+                [_headerView.timeBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            }
+            
+        }else{
+            
+            [[MBPAlertView sharedMBPTextView]showTextOnly:weakSelf.view message:baseResultM.friendErrMsg];
+        }
+        
+        
+    } WithFaileBlock:^{
+    
+    }];
+    [homeViewModel homeDataRequest];
+}
 
 /**
  增加headerview
@@ -84,9 +117,9 @@
     _headerView = [[MineHeaderView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 180)];
     _headerView.type = @"1";
     _headerView.titleLabel.text = @"待还款";
-    _headerView.moneyLabel.text = @"2300.34元";
-    _headerView.dateLabel.text = @"还款日：2017.03.24";
-    [_headerView.timeBtn setTitle:@"14天后" forState:UIControlStateNormal];
+//    _headerView.moneyLabel.text = @"2300.34元";
+//    _headerView.dateLabel.text = @"还款日：2017.03.24";
+//    [_headerView.timeBtn setTitle:@"14天后" forState:UIControlStateNormal];
     _headerView.backgroundColor = [UIColor clearColor];
     _headerView.delegate = self;
     [self.view addSubview:_headerView];
@@ -143,9 +176,9 @@
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             PersonalCenterModel *model = [[PersonalCenterModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            _middleView.couponNumLabel.text = model.voucherNum;
-            _middleView.couponNumLabel.hidden = false;
-            _middleView.couponImageView.hidden = false;
+//            _middleView.couponNumLabel.text = model.voucherNum;
+//            _middleView.couponNumLabel.hidden = false;
+//            _middleView.couponImageView.hidden = false;
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
