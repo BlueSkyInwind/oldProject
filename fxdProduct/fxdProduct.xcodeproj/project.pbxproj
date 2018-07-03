@@ -273,8 +273,8 @@
 		84192A9D2079B3290042E8F8 /* MemberCenterHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84192A9B2079B3290042E8F8 /* MemberCenterHeaderView.xib */; };
 		84192A9F2079F5BA0042E8F8 /* MembershipFeePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192A9E2079F5BA0042E8F8 /* MembershipFeePayViewController.swift */; };
 		84192AA02079F5BA0042E8F8 /* MembershipFeePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192A9E2079F5BA0042E8F8 /* MembershipFeePayViewController.swift */; };
-		84192AA22079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA12079F8A80042E8F8 /* FXD_AgreementView.swift */; };
-		84192AA32079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA12079F8A80042E8F8 /* FXD_AgreementView.swift */; };
+		84192AA22079F8A80042E8F8 /* HF_AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA12079F8A80042E8F8 /* HF_AgreementView.swift */; };
+		84192AA32079F8A80042E8F8 /* HF_AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA12079F8A80042E8F8 /* HF_AgreementView.swift */; };
 		84192AA6207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA4207A03110042E8F8 /* MembershipRechargeTableViewCell.swift */; };
 		84192AA7207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192AA4207A03110042E8F8 /* MembershipRechargeTableViewCell.swift */; };
 		84192AA8207A03110042E8F8 /* MembershipRechargeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84192AA5207A03110042E8F8 /* MembershipRechargeTableViewCell.xib */; };
@@ -714,8 +714,8 @@
 		CC0DF9901EA5B1090024841A /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECCC1E1B8FAA0079A2F8 /* SDCycleScrollView.m */; };
 		CC0DF9921EA5B1090024841A /* FXD_Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FE11C1519CD008E1CF9 /* FXD_Utility.m */; };
 		CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6E69EF1C7199A000053A75 /* DiscountTicketController.m */; };
-		CC0DF9951EA5B1090024841A /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CC0DF9971EA5B1090024841A /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CC0DF9951EA5B1090024841A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CC0DF9971EA5B1090024841A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AF01CA8DBBD00D04ED8 /* RegionSub.m */; };
 		CC0DF99A1EA5B1090024841A /* RegionCodeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830FC1CBCA1A90005C4CD /* RegionCodeResult.m */; };
 		CC0DF99E1EA5B1090024841A /* YYTextWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E71D98F7E9006F58F3 /* YYTextWeakProxy.m */; };
@@ -1644,7 +1644,7 @@
 		84192A982079B1E10042E8F8 /* MemberCenterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCenterHeaderView.swift; sourceTree = "<group>"; };
 		84192A9B2079B3290042E8F8 /* MemberCenterHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCenterHeaderView.xib; sourceTree = "<group>"; };
 		84192A9E2079F5BA0042E8F8 /* MembershipFeePayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipFeePayViewController.swift; sourceTree = "<group>"; };
-		84192AA12079F8A80042E8F8 /* FXD_AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_AgreementView.swift; sourceTree = "<group>"; };
+		84192AA12079F8A80042E8F8 /* HF_AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HF_AgreementView.swift; sourceTree = "<group>"; };
 		84192AA4207A03110042E8F8 /* MembershipRechargeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipRechargeTableViewCell.swift; sourceTree = "<group>"; };
 		84192AA5207A03110042E8F8 /* MembershipRechargeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MembershipRechargeTableViewCell.xib; sourceTree = "<group>"; };
 		841A48DE1FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXD_ToWithDrawFundsTableViewCell.swift; sourceTree = "<group>"; };
@@ -3675,7 +3675,7 @@
 			children = (
 				84192A982079B1E10042E8F8 /* MemberCenterHeaderView.swift */,
 				84192A9B2079B3290042E8F8 /* MemberCenterHeaderView.xib */,
-				84192AA12079F8A80042E8F8 /* FXD_AgreementView.swift */,
+				84192AA12079F8A80042E8F8 /* HF_AgreementView.swift */,
 				84192AA4207A03110042E8F8 /* MembershipRechargeTableViewCell.swift */,
 				84192AA5207A03110042E8F8 /* MembershipRechargeTableViewCell.xib */,
 			);
@@ -4835,7 +4835,10 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/OpenUDID/OpenUDID.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
@@ -4852,7 +4855,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenUDID.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
@@ -4900,7 +4906,10 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/OpenUDID/OpenUDID.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
@@ -4917,7 +4926,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenUDID.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
@@ -5082,7 +5094,7 @@
 				84DFBED31F4D72050009DAB9 /* UserDataViewModel.m in Sources */,
 				63FC25021D98F7E9006F58F3 /* YYTextWeakProxy.m in Sources */,
 				847FC88D20E4C92200A0F797 /* LewPopupViewAnimationSlide.m in Sources */,
-				84192AA22079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */,
+				84192AA22079F8A80042E8F8 /* HF_AgreementView.swift in Sources */,
 				63F0E1BE1CE41821001251A9 /* NSData+YYAdd.m in Sources */,
 				CCEFC6F2207F66100006D731 /* CollectionViewModel.m in Sources */,
 				84C6B09D20DA483D008BD264 /* HeaderItemView.swift in Sources */,
@@ -5575,8 +5587,8 @@
 				CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */,
 				848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
 				8466936920C637E300F47A24 /* ShoppingMallModules.swift in Sources */,
-				CC0DF9951EA5B1090024841A /* (null) in Sources */,
-				CC0DF9971EA5B1090024841A /* (null) in Sources */,
+				CC0DF9951EA5B1090024841A /* BuildFile in Sources */,
+				CC0DF9971EA5B1090024841A /* BuildFile in Sources */,
 				847FC88A20E4C92200A0F797 /* LewPopupViewAnimationSpring.m in Sources */,
 				CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */,
 				CC8BB75620901C7D00ADA647 /* BillingMessageViewController.swift in Sources */,
@@ -5798,7 +5810,7 @@
 				CCCE27FC20E5D61B00180862 /* SupermarketTabCell.swift in Sources */,
 				84EBE9D120C69E410045F538 /* PhoneRechargePopView.swift in Sources */,
 				84EBE9CB20C696FA0045F538 /* RechargeTypePopView.swift in Sources */,
-				84192AA32079F8A80042E8F8 /* FXD_AgreementView.swift in Sources */,
+				84192AA32079F8A80042E8F8 /* HF_AgreementView.swift in Sources */,
 				CC0DFA831EA5B1090024841A /* YYTextTransaction.m in Sources */,
 				CC0DFA851EA5B1090024841A /* YYTextRubyAnnotation.m in Sources */,
 				841E66EF1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */,

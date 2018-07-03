@@ -147,11 +147,8 @@
 
 #pragma mark 检查手机号
 -(BOOL)checkMoblieNumber:(NSString *)number{
-    
     NSString * numStr = @"^\\d{5,11}$";
-    
     NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numStr];
-    
     if ([regextestmobile evaluateWithObject:number] == YES) {
         NSLog(@"sucess %@",number);
         return YES;

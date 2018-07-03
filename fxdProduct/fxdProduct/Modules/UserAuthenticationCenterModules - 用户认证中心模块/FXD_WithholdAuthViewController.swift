@@ -328,7 +328,7 @@ extension FXD_WithholdAuthViewController {
     func addFooterView() -> UIView {
         let footerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 250))
         footerView.backgroundColor = LOAN_APPLICATION_COLOR
-        let agreementView = FXD_AgreementView.init(CGRect.zero,content:"同意",protocolNameArr: ["《银行自动转账授权书》"])
+        let agreementView = HF_AgreementView.init(CGRect.zero,content:"同意",protocolNameArr: ["《银行自动转账授权书》"])
         agreementView.isAgreementClick = {[weak self] (isClick) in
             self?.isAgreement = isClick
             if isClick {
@@ -337,7 +337,7 @@ extension FXD_WithholdAuthViewController {
                 self?.bottomButton?.setBackgroundImage(UIImage.init(named: "btn_icon"), for: UIControlState.normal)
             }
         }
-        agreementView.agreementClick = { [weak self] in
+        agreementView.agreementClick = { [weak self] (index) in
             //协议点击
             self?.getProtocolContentProtocolType(productId: Phone_RechargeCard, typeCode: "1", applicationId: (self?.applicationId)!, periods: "")
             

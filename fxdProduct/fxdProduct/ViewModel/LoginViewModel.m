@@ -87,8 +87,6 @@
             [self PostPersonInfoMessage];
             //上传推送id
             [self uploadUserRegisterID:[JPUSHService registrationID]];
-
-
         }
         self.returnBlock(baseResultM);
     } failure:^(EnumServerStatus status, id object) {

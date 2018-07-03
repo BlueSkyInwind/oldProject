@@ -256,7 +256,7 @@ static FXD_Tool * shareTool = nil;
         return object;
     }
 }
-
+#pragma mark 检查手机号
 //判断手机号是否有效
 + (BOOL)isMobileNumber:(NSString *)mobileNum
 {
@@ -300,6 +300,17 @@ static FXD_Tool * shareTool = nil;
     }
 }
 
++(BOOL)checkMoblieNumber:(NSString *)number{
+    NSString * numStr = @"^\\d{5,11}$";
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numStr];
+    if ([regextestmobile evaluateWithObject:number] == YES) {
+        NSLog(@"sucess %@",number);
+        return YES;
+    }else{
+        NSLog(@"false %@",number);
+        return NO;
+    }
+}
 //设置沙盒
 + (void)saveUserDefaul:(NSString *)content Key:(NSString *)key;
 {

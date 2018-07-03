@@ -10,7 +10,7 @@ abstract_target 'fxd' do
     pod 'IQKeyboardManager'
     pod 'pop' ,'~> 1.0.8'
     pod 'UMengAnalytics'
-    #pod 'ReactiveCocoa', '~> 4.2.2'
+    pod 'ReactiveCocoa'
     pod 'ReactiveObjC', '~> 3.0.0'
     pod 'YYModel'
     pod 'SnapKit'

@@ -8,10 +8,10 @@
 
 import UIKit
 
-typealias MembershipAgreementClick = () -> Void
+typealias MembershipAgreementClick = (_ index:Int) -> Void
 typealias AgreeMembershipAgreementClick = (_ isClick:Bool) -> Void
 
-class FXD_AgreementView: UIView {
+class HF_AgreementView: UIView {
     
     var protocolBtn:UIButton?
     var protocolLabel:YYLabel?
@@ -54,7 +54,7 @@ class FXD_AgreementView: UIView {
             rangeArr.append(range)
             attributeStr.yy_setTextHighlight(range, color: UI_MAIN_COLOR, backgroundColor: UIColor.init(white: 0, alpha: 0.22)) {[weak self] (view, arrtiText, range, rect) in
                 if self?.agreementClick != nil {
-                    self?.agreementClick!()
+                    self?.agreementClick!(rangeArr.index(of: range)!)
                 }
             }
         }
@@ -71,7 +71,7 @@ class FXD_AgreementView: UIView {
 
 }
 
-extension FXD_AgreementView {
+extension HF_AgreementView {
     
     func configureView()  {
         protocolBtn = UIButton.init(type: UIButtonType.custom)

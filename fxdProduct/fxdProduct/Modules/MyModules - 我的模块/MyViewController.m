@@ -439,9 +439,14 @@
 
 - (void)presentLogin:(UIViewController *)vc
 {
-    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
+//    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
+//    [vc presentViewController:nav animated:YES completion:nil];
+    
+    loginAndRegisterModules *myMessageVC=[[loginAndRegisterModules alloc]init];
+    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:myMessageVC];
     [vc presentViewController:nav animated:YES completion:nil];
+
 }
 
 -(void)obtainQuestionWebUrl:(NSString *)typeCode{
@@ -460,6 +465,7 @@
     } WithFaileBlock:^{
     }];
     [commonVM obtainProductProtocolType:nil typeCode:typeCode apply_id:nil periods:nil stagingType:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {

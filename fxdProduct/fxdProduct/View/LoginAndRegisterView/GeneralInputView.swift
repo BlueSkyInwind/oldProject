@@ -34,6 +34,7 @@ class GeneralInputView: UIView {
         self.init(frame: CGRect.zero)
         generalInputType = inputtype
         configureView(inputtype)
+//        self.backgroundColor = UIColor.red
     }
     
     override init(frame: CGRect) {
@@ -50,7 +51,7 @@ class GeneralInputView: UIView {
             
             break
         case .Verify_Code:
-            createTimer()
+//            createTimer()
             break
         case .Password:
             let button = sender
@@ -85,9 +86,13 @@ class GeneralInputView: UIView {
             rightButton?.isUserInteractionEnabled = true
             rightButton?.alpha = 1;
             rightButton?.setTitle("重新获取", for: UIControlState.normal)
-            timer?.invalidate()
-            timer = nil
+            removeTimer()
         }
+    }
+    
+    func removeTimer()  {
+        timer?.invalidate()
+        timer = nil
     }
     
     /*
@@ -106,10 +111,13 @@ extension GeneralInputView {
     func configureView(_ inputtype:GeneralInputType)  {
         
         iconImageView = UIImageView()
+        iconImageView?.contentMode = .center
         self.addSubview(iconImageView!)
         iconImageView?.snp.makeConstraints({ (make) in
             make.centerY.equalTo(self.snp.centerY)
             make.left.equalTo(self.snp.left)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
         })
         
         rightButton = UIButton.init(type: UIButtonType.custom)
@@ -120,25 +128,27 @@ extension GeneralInputView {
         rightButton?.snp.makeConstraints({ (make) in
             make.right.equalTo(self.snp.right)
             make.centerY.equalTo(self.snp.centerY)
+            make.width.equalTo(0)
         })
         
         inputTextField = UITextField()
         inputTextField?.borderStyle = .none
-        inputTextField?.textColor = UI_MAIN_COLOR
+        inputTextField?.textColor = "333333".uiColor()
         inputTextField?.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(inputTextField!)
         inputTextField?.snp.makeConstraints({ (make) in
-            make.centerY.equalTo(self.snp.centerY)
-            make.left.equalTo((iconImageView?.snp.left)!)
+            make.left.equalTo((iconImageView?.snp.right)!).offset(10)
+            make.right.equalTo((rightButton?.snp.left)!)
             make.top.equalTo(self.snp.top)
+            make.bottom.equalTo(self.snp.bottom).offset(-1)
         })
         
         bottomSepView = UIView()
         bottomSepView?.backgroundColor = "cccccc".uiColor()
-        self.addSubview(inputTextField!)
+        self.addSubview(bottomSepView!)
         bottomSepView?.snp.makeConstraints({ (make) in
             make.top.equalTo((inputTextField?.snp.bottom)!).offset(1)
-            make.left.equalTo((inputTextField?.snp.left)!)
+            make.left.equalTo((inputTextField?.snp.left)!).offset(-5)
             make.right.equalTo(self.snp.right)
             make.height.equalTo(1)
         })
@@ -152,12 +162,12 @@ extension GeneralInputView {
                 make.right.equalTo(self.snp.right)
                 make.centerY.equalTo(self.snp.centerY)
                 make.height.equalTo(self.snp.height)
-                make.width.equalTo((rightButton?.snp.height)!).multipliedBy(3)
+                make.width.equalTo((rightButton?.snp.height)!).multipliedBy(2.2)
             })
             break
         case .Verify_Code:
             rightButton?.setTitle("发送验证码", for: UIControlState.normal)
-            rightButton?.layer.cornerRadius = self.bounds.size.height / 2
+            rightButton?.layer.cornerRadius = 15
             rightButton?.backgroundColor = UI_MAIN_COLOR
             rightButton?.clipsToBounds = true
             rightButton?.snp.remakeConstraints({ (make) in
@@ -166,12 +176,21 @@ extension GeneralInputView {
                 make.height.equalTo(self.snp.height)
                 make.width.equalTo((rightButton?.snp.height)!).multipliedBy(3)
             })
+            bottomSepView?.snp.remakeConstraints({ (make) in
+                make.top.equalTo((inputTextField?.snp.bottom)!).offset(1)
+                make.left.equalTo((inputTextField?.snp.left)!)
+                make.height.equalTo(1)
+                make.right.equalTo((rightButton?.snp.left)!)
+            })
             break
         case .Password:
             //Sign-in-icon07-1
             inputTextField?.isSecureTextEntry = true
             rightButton?.setImage(UIImage.init(named: "1_Signin_icon_05"), for: UIControlState.normal)
             rightButton?.setImage(UIImage.init(named: "Sign-in-icon07-1"), for: UIControlState.selected)
+            rightButton?.snp.updateConstraints({ (make) in
+                make.width.equalTo(20)
+            })
             break
         default:
             break

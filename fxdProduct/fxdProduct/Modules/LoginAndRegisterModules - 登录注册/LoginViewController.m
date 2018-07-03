@@ -138,7 +138,6 @@
                 }];
             } else if ([_loginResultM.errCode isEqualToString:@"5"]) {
                 _vaildCodeFlag = _loginResultM.errCode;
-                //                        [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"您当前的版本太低,为了您的使用体验请升级版本后再来体验^_^"];
                 [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:[NSString stringWithFormat:@"%@",_loginResultM.friendErrMsg]];
                 _loginView.codeView.hidden = NO;
                 _loginView.forgetBtnTopCons.constant = 71;
