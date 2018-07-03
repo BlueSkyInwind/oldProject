@@ -66,7 +66,7 @@
     
     UITabBarItem *item = [[UITabBarItem alloc]initWithTitle:title image:image selectedImage:selectedImage];
     //    [item setImageInsets:UIEdgeInsetsMake(3, 0, -3, 0)];
-    [item setTitleTextAttributes:@{NSForegroundColorAttributeName:rgb(153, 153, 153)} forState:UIControlStateNormal];
+    [item setTitleTextAttributes:@{NSForegroundColorAttributeName:rgb(132, 132, 132)} forState:UIControlStateNormal];
     [item setTitleTextAttributes:@{NSForegroundColorAttributeName:UI_MAIN_COLOR} forState:UIControlStateSelected];
     [item setTitlePositionAdjustment:UIOffsetMake(0, -3)];
     return item;
@@ -93,15 +93,16 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:isSuperMark object:nil];
     }
-    /*
-    if (tabBarController.selectedIndex == 1 || tabBarController.selectedIndex == 2) {
+    
+    
+    if (tabBarController.selectedIndex == 2) {
         if ([FXD_Utility sharedUtility].loginFlage) {
 
         } else {
             [self presentLogin:self];
         }
     }
-     */
+     
 }
 
 - (void)presentLogin:(UIViewController *)vc

@@ -26,6 +26,7 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title=@"意见反馈";
+    self.view.backgroundColor = rgb(242, 242, 242);
     [self addBackItem];
 }
 

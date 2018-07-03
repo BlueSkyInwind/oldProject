@@ -59,16 +59,18 @@ extension MineHeaderView{
         
         let type = Int(type)
         switch type {
-        case 1,2:
+        case 7:
             repayUI()
-        case 3:
+        case 8:
             repaymentConfirmationUI()
         case 4:
             normalUI()
-        case .none:
-            break
-        case .some(_):
-            break
+//        case .none:
+//            break
+//        case .some(_):
+//            break
+        default:
+            normalUI()
         }
     }
 }

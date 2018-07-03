@@ -187,7 +187,7 @@
     if (indexPath.section == _dataliat.count) {
         
         cell.type = @"2";
-        cell.backgroundColor = rgb(40, 43, 44);
+        cell.backgroundColor = rgb(82, 87, 89);
         return cell;
     }
     

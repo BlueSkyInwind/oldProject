@@ -11,7 +11,8 @@ import UIKit
 @objc enum Enum_Result:Int{
     
     case intermediate
-    case failure
+    case submitFailure
+    case repayFailure
     case success
     case submittedSuccessfully
     
@@ -28,7 +29,9 @@ class RepaymentResultViewController: BaseViewController {
         switch state {
         case .intermediate?:
             self.title = "还款确认中"
-        case .failure?:
+        case .submitFailure?:
+            self.title = "提交失败"
+        case .repayFailure?:
             self.title = "还款失败"
         case .success?:
             self.title = "还款成功"
@@ -49,17 +52,20 @@ class RepaymentResultViewController: BaseViewController {
         var btnTitle = "返回"
         switch state {
         case .intermediate?:
-            imageStr = "repay_icon"
-            tipStr = "还款结果确认中"
-        case .failure?:
-            imageStr = "fail"
+            imageStr = "repay_intermediate_icon"
+            tipStr = "还款确认中"
+        case .submitFailure?:
+            imageStr = "bill_fail_icon"
+            tipStr = "订单提交失败"
+        case .repayFailure?:
+            imageStr = "bill_fail_icon"
             tipStr = "还款失败"
         case .success?:
-            imageStr = "success"
+            imageStr = "bill_none_icon"
             tipStr = "还款成功"
         case .submittedSuccessfully?:
-            imageStr = "success"
-            tipStr = "您的订单已提交成功"
+            imageStr = "bill_none_icon"
+            tipStr = "您的订单已经提交成功"
             btnTitle = "查看订单"
         default:
             break
@@ -86,14 +92,16 @@ class RepaymentResultViewController: BaseViewController {
         backBtn.setTitle(btnTitle, for: .normal)
         backBtn.setTitleColor(UIColor.white, for: .normal)
         backBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        backBtn.setBackgroundImage(UIImage.init(named: "applayBtnImage"), for: .normal)
+        backBtn.setBackgroundImage(UIImage.init(named: "btn_seleted_icon"), for: .normal)
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
         self.view.addSubview(backBtn)
         backBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(self.view).offset(30)
+//            make.left.equalTo(self.view).offset(30)
             make.top.equalTo(self.view).offset(340)
-            make.right.equalTo(self.view).offset(-30)
-            make.height.equalTo(45)
+//            make.right.equalTo(self.view).offset(-30)
+            make.height.equalTo(40)
+            make.width.equalTo(240)
+            make.centerX.equalTo(self.view.snp.centerX)
         }
     }
     
@@ -120,7 +128,7 @@ class RepaymentResultViewController: BaseViewController {
                 }
             }
             
-        case .failure?:
+        case .submitFailure?,.repayFailure?:
             self.navigationController?.popViewController(animated: true)
         default:
             break
@@ -139,7 +147,7 @@ class RepaymentResultViewController: BaseViewController {
                 }
             }
             
-        case .failure?:
+        case .submitFailure?,.repayFailure?:
             self.navigationController?.popViewController(animated: true)
         case .submittedSuccessfully?:
             let detailOrderVC = OrderConfirmDetailViewController()

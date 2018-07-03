@@ -12,6 +12,8 @@ class PhonerechargeCardNoneView: UIView {
 
     @objc var noneDesc : UILabel?
     
+    @objc var noneImageView : UIImageView?
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -33,10 +35,10 @@ class PhonerechargeCardNoneView: UIView {
 extension PhonerechargeCardNoneView{
     fileprivate func setupUI(){
         
-        let noneImageView = UIImageView()
-        noneImageView.image = UIImage.init(named: "none_icon")
-        self.addSubview(noneImageView)
-        noneImageView.snp.makeConstraints { (make) in
+        noneImageView = UIImageView()
+        noneImageView?.image = UIImage.init(named: "none_icon")
+        self.addSubview(noneImageView!)
+        noneImageView?.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(90)
             make.centerX.equalTo(self.snp.centerX)
         }
@@ -46,7 +48,7 @@ extension PhonerechargeCardNoneView{
         noneDesc?.font = UIFont.systemFont(ofSize: 15)
         self.addSubview(noneDesc!)
         noneDesc?.snp.makeConstraints({ (make) in
-            make.top.equalTo(noneImageView.snp.bottom).offset(40)
+            make.top.equalTo((noneImageView?.snp.bottom)!).offset(40)
             make.centerX.equalTo(self.snp.centerX)
         })
     }

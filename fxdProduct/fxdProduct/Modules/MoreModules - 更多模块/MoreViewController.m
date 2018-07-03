@@ -92,6 +92,7 @@
     static NSString *identifier = @"moreFunction";
     NextViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     cell.lblTitle.text=titleAry[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.row==titleAry.count-1) {
         cell.lineView.hidden=YES;
     }
@@ -115,7 +116,7 @@
     
     switch (indexPath.row) {
         case 0:
-            
+            [self clearCache];
             break;
         case 1:
         {
@@ -130,65 +131,7 @@
         default:
             break;
     }
-//    if(indexPath.section==0)
-//    {
-//        if(indexPath.row==0){
-//            [self obtainQuestionWebUrl:@"11"];
-////            aboutUs=[[AboutMainViewController alloc]initWithNibName:@"AboutMainViewController" bundle:nil];
-////            [self.navigationController pushViewController:aboutUs animated:YES];
-//        }
-//        else if(indexPath.row==1){
-//            if ([FXD_Utility sharedUtility].loginFlage) {
-//                ideaBack=[[IdeaBackViewController alloc]initWithNibName:@"IdeaBackViewController" bundle:nil];
-//                [self.navigationController pushViewController:ideaBack animated:YES];
-//            } else {
-//                [self presentLogin:self];
-//            }
-//        }
-//        else if(indexPath.row==2){
-//            
-//            UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"欢迎给出评价!" preferredStyle:UIAlertControllerStyleAlert];
-//            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                dispatch_after(0.2, dispatch_get_main_queue(), ^{
-//                    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/id1089086853"]];
-//                });
-//            }];
-//            UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-//            [alertView addAction:okAction];
-//            [alertView addAction:cancleAction];
-//            [self presentViewController:alertView animated:YES completion:nil];
-//            
-//        }
-//        else if(indexPath.row==3){
-//            UIAlertController *actionSheett = [UIAlertController alertControllerWithTitle:@"热线服务时间:9:00-17:30(工作日)" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-//            UIAlertAction *teleAction = [UIAlertAction actionWithTitle:@"4008-678-655" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-//                NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", @"4008-678-655"]];
-//                [[UIApplication sharedApplication] openURL:telURL];
-//            }];
-//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-//            [actionSheett addAction:teleAction];
-//            [actionSheett addAction:cancelAction];
-//            [self presentViewController:actionSheett animated:YES completion:nil];
-//        }
-//        else if(indexPath.row==4){
-//            
-//            if ([FXD_Utility sharedUtility].loginFlage) {
-//                ChangePasswordViewController *   changePassVC =[[ChangePasswordViewController alloc]init];
-//                [self.navigationController pushViewController:changePassVC animated:YES];
-//            } else {
-//                [self presentLogin:self];
-//            }
-//        }
-//    }
-//    else {
-//
-//        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:nil content:@"您确定要退出登录吗？" attributeDic:nil TextAlignment:NSTextAlignmentCenter cancelTitle:@"取消" sureTitle:@"确定" compleBlock:^(NSInteger index) {
-//            if (index == 1) {
-//                [self userLoginOut];
-//            }
-//        }];
-//    }
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 #pragma mark 登录
@@ -238,5 +181,27 @@
     
 }
 
+#pragma mark 清除缓存
+-(void)clearCache{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths lastObject];
+    
+    NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:path];
+    
+    for (NSString *p in files) {
+        NSError *error;
+        NSString *Path = [path stringByAppendingPathComponent:p];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:Path]) {
+            //清理缓存，保留Preference，里面含有NSUserDefaults保存的信息
+            if (![Path containsString:@"Preferences"]) {
+                [[NSFileManager defaultManager] removeItemAtPath:Path error:&error];
+            }
+        }else{
+            
+        }
+    }
+    
+    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"清除缓存完成"];
+}
 
 @end

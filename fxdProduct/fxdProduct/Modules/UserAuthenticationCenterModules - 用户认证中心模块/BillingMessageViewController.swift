@@ -121,16 +121,19 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         footBtn?.setTitle("下一步", for: .normal)
         footBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
         footBtn?.setTitleColor(UIColor.white, for: .normal)
-        footBtn?.backgroundColor = QUTOA_COLOR
-        footBtn?.layer.cornerRadius = 5.0
+        footBtn?.setBackgroundImage(UIImage.init(named: "btn_icon"), for: .normal)
+//        footBtn?.backgroundColor = QUTOA_COLOR
+//        footBtn?.layer.cornerRadius = 5.0
         footBtn?.isEnabled = false
         footBtn?.addTarget(self, action: #selector(footBtnClick), for: .touchUpInside)
         footView.addSubview(footBtn!)
         footBtn?.snp.makeConstraints { (make) in
-            make.left.equalTo(footView.snp.left).offset(30)
-            make.right.equalTo(footView.snp.right).offset(-30)
+//            make.left.equalTo(footView.snp.left).offset(30)
+//            make.right.equalTo(footView.snp.right).offset(-30)
             make.top.equalTo(footView.snp.top).offset(50)
-            make.height.equalTo(45)
+            make.height.equalTo(40)
+            make.width.equalTo(240)
+            make.centerX.equalTo(footView.snp.centerX)
         }
         tableView?.tableFooterView = footView
         
@@ -280,9 +283,11 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
             
             if footerBtnEnabled() {
                 
-                footBtn?.backgroundColor = UI_MAIN_COLOR
+                footBtn?.setBackgroundImage(UIImage.init(named: "btn_seleted_icon"), for: .normal)
+//                footBtn?.backgroundColor = UI_MAIN_COLOR
             }else{
-                footBtn?.backgroundColor = QUTOA_COLOR
+                footBtn?.setBackgroundImage(UIImage.init(named: "btn_icon"), for: .normal)
+//                footBtn?.backgroundColor = QUTOA_COLOR
             }
             footBtn?.isEnabled = footerBtnEnabled()
         }
@@ -348,9 +353,12 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         
         if footerBtnEnabled() {
             
-            footBtn?.backgroundColor = UI_MAIN_COLOR
+            footBtn?.setBackgroundImage(UIImage.init(named: "btn_seleted_icon"), for: .normal)
+//            footBtn?.backgroundColor = UI_MAIN_COLOR
         }else{
-            footBtn?.backgroundColor = QUTOA_COLOR
+            
+            footBtn?.setBackgroundImage(UIImage.init(named: "btn_icon"), for: .normal)
+//            footBtn?.backgroundColor = QUTOA_COLOR
         }
         footBtn?.isEnabled = footerBtnEnabled()
         return returnValue
@@ -377,9 +385,12 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         self.tableView?.reloadData()
         if footerBtnEnabled() {
             
-            footBtn?.backgroundColor = UI_MAIN_COLOR
+            footBtn?.setBackgroundImage(UIImage.init(named: "btn_seleted_icon"), for: .normal)
+//            footBtn?.backgroundColor = UI_MAIN_COLOR
         }else{
-            footBtn?.backgroundColor = QUTOA_COLOR
+            
+            footBtn?.setBackgroundImage(UIImage.init(named: "btn_icon"), for: .normal)
+//            footBtn?.backgroundColor = QUTOA_COLOR
         }
         footBtn?.isEnabled = footerBtnEnabled()
         
