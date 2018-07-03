@@ -11,6 +11,7 @@ import ReactiveCocoa
 import ReactiveSwift
 import Result
 
+let RegisterProcotolPrompt = "请点击同意协议"
 
 typealias UserRegisterButtonClick = (_ button:UIButton,_ phoneNum:String,_ picCode:String,_ verifyCode:String,_ password:String,_ invitationCode:String) -> Void
 typealias ObtainPicVerifuCodeClick = () -> Void
@@ -47,7 +48,7 @@ class RegisterView: UIView {
     func addSignal()  {
         
         let validUserNameSignal = phoneNumberView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
-            return (text?.count)! == 11 ? true : false
+            return FXD_Tool.checkMoblieNumber(text)
         })
         
         let validPicCodeSignal = picVerifyCodeView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
@@ -59,11 +60,11 @@ class RegisterView: UIView {
             return isVaildUserName && isVaildPicCode
             }.observeValues {[weak self] (isVaild) in
                 if isVaild {
-                    self?.verifyCodeView?.rightButton?.backgroundColor = UIColor.lightGray
-                    self?.verifyCodeView?.rightButton?.isEnabled = false
-                }else{
                     self?.verifyCodeView?.rightButton?.backgroundColor = UI_MAIN_COLOR
                     self?.verifyCodeView?.rightButton?.isEnabled = true
+                }else{
+                    self?.verifyCodeView?.rightButton?.backgroundColor = UIColor.lightGray
+                    self?.verifyCodeView?.rightButton?.isEnabled = false
                 }
         }
         
@@ -98,8 +99,13 @@ class RegisterView: UIView {
     */
     
     @objc func registerButtonClick(sender:UIButton) {
+        guard isAgreement else {
+            MBPAlertView.sharedMBPText().showTextOnly(self, message: RegisterProcotolPrompt)
+            return
+        }
+        
         if  userRegisterButtonClick != nil {
-            userRegisterButtonClick!(sender,(self.phoneNumberView?.inputTextField?.text)!,(picVerifyCodeView?.inputTextField?.text)!,(verifyCodeView?.inputTextField?.text)!,(passwordView?.inputTextField?.text)!,(inviteCodeView?.inputTextField?.text)!)
+            userRegisterButtonClick!(sender,(self.phoneNumberView?.inputContent)!,(picVerifyCodeView?.inputContent)!,(verifyCodeView?.inputContent)!,(passwordView?.inputContent)!,(inviteCodeView?.inputContent)!)
         }
     }
 }
@@ -142,6 +148,8 @@ extension RegisterView {
         verifyCodeView = GeneralInputView.init(.Verify_Code)
         verifyCodeView?.inputTextField?.placeholder = "请输入验证码"
         verifyCodeView?.iconImageView?.image = UIImage.init(named: "1_Signin_icon_02")
+        verifyCodeView?.rightButton?.backgroundColor = UIColor.lightGray
+        verifyCodeView?.rightButton?.isEnabled  = false
         self.addSubview(verifyCodeView!)
         verifyCodeView?.snp.makeConstraints({ (make) in
             make.centerX.equalTo(self.snp.centerX)
@@ -151,7 +159,7 @@ extension RegisterView {
         })
         verifyCodeView?.rightBtnClick = {[weak self] (button,type) in
             if type == .Verify_Code && self?.sendVerifyCodeClick != nil  {
-                self?.sendVerifyCodeClick!((self?.phoneNumberView?.inputTextField?.text)!,(self?.picVerifyCodeView?.inputTextField?.text)!)
+                self?.sendVerifyCodeClick!((self?.phoneNumberView?.inputContent)!,(self?.picVerifyCodeView?.inputContent)!)
             }
         }
         

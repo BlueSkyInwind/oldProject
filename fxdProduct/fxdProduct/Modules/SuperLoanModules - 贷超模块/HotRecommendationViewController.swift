@@ -571,8 +571,7 @@ extension HotRecommendationViewController{
     func collectionBtn(_ sender: UIButton) {
         
         if !FXD_Utility.shared().loginFlage {
-            
-            presentLoginVC(vc: self)
+            presentLoginVCCompletion(nil)
             return
         }
         
@@ -612,6 +611,5 @@ extension HotRecommendationViewController{
         let loginVC = LoginViewController()
         let nav = BaseNavigationViewController.init(rootViewController: loginVC)
         vc.present(nav, animated: true, completion: nil)
-        
     }
 }

@@ -106,9 +106,9 @@
 
 - (void)presentLogin:(UIViewController *)vc
 {
-    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-    [vc presentViewController:nav animated:YES completion:nil];
+    loginAndRegisterModules *myMessageVC=[[loginAndRegisterModules alloc]init];
+    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:myMessageVC];
+    [vc presentViewController:nav animated:true completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

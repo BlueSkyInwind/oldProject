@@ -123,7 +123,7 @@
                 ChangePasswordViewController *   changePassVC =[[ChangePasswordViewController alloc]init];
                 [self.navigationController pushViewController:changePassVC animated:YES];
             } else {
-                [self presentLogin:self];
+                [self presentLoginVCCompletion:nil];
             }
         }
             break;
@@ -191,14 +191,6 @@
 //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark 登录
-- (void)presentLogin:(UIViewController *)vc
-{
-    LoginViewController *loginView = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-    nav.transitioningDelegate = self;
-    [self presentViewController:nav animated:YES completion:nil];
-}
 #pragma mark 退出登录
 - (void)userLoginOut
 {
@@ -216,10 +208,7 @@
             dispatch_after(delayTime, dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
-
-            LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-            [self presentViewController:nav animated:YES completion:^{
+            [self presentLoginVCCompletion:^{
                 [_alertView hide];
                 [FXD_Utility EmptyData];
             }];

@@ -58,8 +58,8 @@ class loginAndRegisterModules: BaseViewController {
                 })
             }
             
-            self?.loginView?.loginBtnClick = { (button) in
-                self?.startLogin()
+            self?.loginView?.loginBtnClick = { (button,phoneNum,password,verifyCode) in
+                self?.startLogin(phoneNum, password, verifyCode)
             }
             
             self?.loginView?.forgetBtnClick = { (button) in
@@ -128,11 +128,16 @@ class loginAndRegisterModules: BaseViewController {
     }
     
     func updateDevIDVC() {
-        
+        let updateIDVC = UpdateDeviceIdMoudles.init()
+        updateIDVC.phoneStr = loginView?.phoneNumberView?.inputTextField?.text
+        updateIDVC.passwordStr = loginView?.passwordView?.inputTextField?.text
+        self.navigationController?.pushViewController(updateIDVC, animated: true)
     }
 
     func pushForgetVC() {
-        
+        let forgetVC = ForgetPasswordMoudles.init()
+//        forgetVC.phoneStr
+        self.navigationController?.pushViewController(forgetVC, animated: true)
     }
     
     /*
@@ -149,20 +154,19 @@ class loginAndRegisterModules: BaseViewController {
 
 extension loginAndRegisterModules {
     
-    
-    func loginRequest(_ loginVM:LoginViewModel)  {
+    func loginRequest(_ loginVM:LoginViewModel,_ phoneNum:String,_ password:String,_ verifyCode:String)  {
         if loginResultModel != nil {
             if loginResultModel?.errCode == "5" {
-                loginVM.fatchLoginMoblieNumber(loginView?.phoneNumberView?.inputTextField?.text, password: loginView?.passwordView?.inputTextField?.text, fingerPrint: nil, verifyCode: loginView?.verifyCodeView?.inputTextField?.text)
+                loginVM.fatchLoginMoblieNumber(phoneNum, password: password, fingerPrint: nil, verifyCode: verifyCode)
             }else{
-                loginVM.fatchLoginMoblieNumber(loginView?.phoneNumberView?.inputTextField?.text, password: loginView?.passwordView?.inputTextField?.text, fingerPrint: nil, verifyCode: nil)
+                loginVM.fatchLoginMoblieNumber(phoneNum, password: password, fingerPrint: nil, verifyCode: nil)
             }
         }else{
-            loginVM.fatchLoginMoblieNumber(loginView?.phoneNumberView?.inputTextField?.text, password: loginView?.passwordView?.inputTextField?.text, fingerPrint: nil, verifyCode: nil)
+            loginVM.fatchLoginMoblieNumber(phoneNum, password: password, fingerPrint: nil, verifyCode: nil)
         }
     }
 
-    func startLogin()  {
+    func startLogin(_ phoneNum:String,_ password:String,_ verifyCode:String)  {
         
         let loginVM = LoginViewModel.init()
         loginVM.setBlockWithReturn({ [weak self](resultModel) in
@@ -187,7 +191,7 @@ extension loginAndRegisterModules {
         }) {
             
         }
-        loginRequest(loginVM)
+        loginRequest(loginVM, phoneNum, password, verifyCode)
     }
     
     func obtainUserLoginVerifyCode(_ phoneNumber:String,_ complication:@escaping (_ isSuccess:Bool) -> Void) {
@@ -255,7 +259,7 @@ extension loginAndRegisterModules {
             let baseModel  = resultModel as! BaseResultModel
             if baseModel.errCode == "0" {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.8, execute: {
-                    self?.registerAndLogin()
+                    self?.registerAndLogin(phoneNum,password)
                 })
             }else if baseModel.errCode == "1" {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.8, execute: {
@@ -270,7 +274,7 @@ extension loginAndRegisterModules {
         regVM.fatchRegMoblieNumber(phoneNum, password: password, verifyCode: verifyCode, invitationCode: invitationCode, picVerifyId: picCodeID, picVerifyCode: picCode)
     }
     
-    func registerAndLogin()  {
+    func registerAndLogin(_ phoneNum:String,_ password:String)  {
         let loginVM = LoginViewModel.init()
         loginVM.setBlockWithReturn({ [weak self](resultModel) in
             self?.loginResultModel = (resultModel as! BaseResultModel)
@@ -284,7 +288,7 @@ extension loginAndRegisterModules {
             }
         }) {
         }
-        loginVM.fatchLoginMoblieNumber(registerView?.phoneNumberView?.inputTextField?.text, password: registerView?.passwordView?.inputTextField?.text, fingerPrint: nil, verifyCode: nil)
+        loginVM.fatchLoginMoblieNumber(phoneNum, password:password, fingerPrint: nil, verifyCode: nil)
     }
     
     // 注册协议  8 隐私 9

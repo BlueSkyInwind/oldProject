@@ -565,7 +565,7 @@ extension LoanListViewController{
         
         if !FXD_Utility.shared().loginFlage {
             
-            presentLoginVC(vc: self)
+            presentLoginVCCompletion(nil)
             return
         }
         

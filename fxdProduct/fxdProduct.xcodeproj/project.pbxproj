@@ -286,6 +286,14 @@
 		841BE5C61F177C4F00BABD04 /* UserLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */; };
 		841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
 		841E66EF1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
+		8422F24820EB1B1400836D9B /* ForgetPasswordMoudles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422F24720EB1B1400836D9B /* ForgetPasswordMoudles.swift */; };
+		8422F24920EB1B1400836D9B /* ForgetPasswordMoudles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422F24720EB1B1400836D9B /* ForgetPasswordMoudles.swift */; };
+		8422F24B20EB1B5300836D9B /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422F24A20EB1B5300836D9B /* ForgetPasswordView.swift */; };
+		8422F24C20EB1B5300836D9B /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422F24A20EB1B5300836D9B /* ForgetPasswordView.swift */; };
+		8422F24E20EB239100836D9B /* UpdateDeviceIdMoudles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422F24D20EB239100836D9B /* UpdateDeviceIdMoudles.swift */; };
+		8422F24F20EB239100836D9B /* UpdateDeviceIdMoudles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422F24D20EB239100836D9B /* UpdateDeviceIdMoudles.swift */; };
+		8422F25120EB23E600836D9B /* UpdateDeviceIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422F25020EB23E600836D9B /* UpdateDeviceIdView.swift */; };
+		8422F25220EB23E600836D9B /* UpdateDeviceIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422F25020EB23E600836D9B /* UpdateDeviceIdView.swift */; };
 		84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */; };
 		84230CFE1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */; };
 		842C0B531ED5909E00366D11 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842C0B521ED5909E00366D11 /* LoginViewController.m */; };
@@ -714,8 +722,8 @@
 		CC0DF9901EA5B1090024841A /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECCC1E1B8FAA0079A2F8 /* SDCycleScrollView.m */; };
 		CC0DF9921EA5B1090024841A /* FXD_Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FE11C1519CD008E1CF9 /* FXD_Utility.m */; };
 		CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6E69EF1C7199A000053A75 /* DiscountTicketController.m */; };
-		CC0DF9951EA5B1090024841A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		CC0DF9971EA5B1090024841A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CC0DF9951EA5B1090024841A /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CC0DF9971EA5B1090024841A /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AF01CA8DBBD00D04ED8 /* RegionSub.m */; };
 		CC0DF99A1EA5B1090024841A /* RegionCodeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830FC1CBCA1A90005C4CD /* RegionCodeResult.m */; };
 		CC0DF99E1EA5B1090024841A /* YYTextWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E71D98F7E9006F58F3 /* YYTextWeakProxy.m */; };
@@ -1652,6 +1660,10 @@
 		841BE5C41F177C4F00BABD04 /* UserLevelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLevelViewController.h; sourceTree = "<group>"; };
 		841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLevelViewController.m; sourceTree = "<group>"; };
 		841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
+		8422F24720EB1B1400836D9B /* ForgetPasswordMoudles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordMoudles.swift; sourceTree = "<group>"; };
+		8422F24A20EB1B5300836D9B /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
+		8422F24D20EB239100836D9B /* UpdateDeviceIdMoudles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDeviceIdMoudles.swift; sourceTree = "<group>"; };
+		8422F25020EB23E600836D9B /* UpdateDeviceIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDeviceIdView.swift; sourceTree = "<group>"; };
 		84230CFC1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPayPasswordVerifyView.swift; sourceTree = "<group>"; };
 		842C0B511ED5909E00366D11 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		842C0B521ED5909E00366D11 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
@@ -3436,6 +3448,8 @@
 			isa = PBXGroup;
 			children = (
 				847FC8A120E609F200A0F797 /* loginAndRegisterModules.swift */,
+				8422F24720EB1B1400836D9B /* ForgetPasswordMoudles.swift */,
+				8422F24D20EB239100836D9B /* UpdateDeviceIdMoudles.swift */,
 				84C61A101FA828D000626411 /* FindPass */,
 				842C0B511ED5909E00366D11 /* LoginViewController.h */,
 				842C0B521ED5909E00366D11 /* LoginViewController.m */,
@@ -3782,6 +3796,8 @@
 				847FC8A720E60CE300A0F797 /* GeneralInputView.swift */,
 				847FC8A420E60C6100A0F797 /* NewLoginView.swift */,
 				847FC8AA20E6251100A0F797 /* RegisterView.swift */,
+				8422F24A20EB1B5300836D9B /* ForgetPasswordView.swift */,
+				8422F25020EB23E600836D9B /* UpdateDeviceIdView.swift */,
 			);
 			path = LoginAndRegisterView;
 			sourceTree = "<group>";
@@ -5086,6 +5102,7 @@
 				1A6E69F01C7199A000053A75 /* DiscountTicketController.m in Sources */,
 				84230CFD1FC41C3C00C694D3 /* SetPayPasswordVerifyView.swift in Sources */,
 				CC742DC020521FA700D645CC /* ApplicationNewCreateModel.m in Sources */,
+				8422F24B20EB1B5300836D9B /* ForgetPasswordView.swift in Sources */,
 				63145AF41CA8DBBD00D04ED8 /* RegionSub.m in Sources */,
 				634830FF1CBCA1A90005C4CD /* RegionCodeResult.m in Sources */,
 				84A380261FAC1D8D008FB7AF /* UserProfessionalInformationVCModules.m in Sources */,
@@ -5237,6 +5254,7 @@
 				637637091D79670D00E93289 /* UILabel+FlickerNumber.m in Sources */,
 				63DB3FBD1E1DE41700FBE1C4 /* RTRootNavigationController.m in Sources */,
 				636B1B1F1C1FDDD100450358 /* MBPAlertView.m in Sources */,
+				8422F25120EB23E600836D9B /* UpdateDeviceIdView.swift in Sources */,
 				63001A231BA8113000E2850A /* GTMBase64.m in Sources */,
 				63553AED1E5D787800B2C1FF /* IdentityCell.m in Sources */,
 				8438F7141EE14DA00089E121 /* ChangePasswordTableViewCell.m in Sources */,
@@ -5265,6 +5283,7 @@
 				CC80DFF0206A5120000F9BAC /* SuperLoanCell.swift in Sources */,
 				63FF48581B6F15DB009E384C /* FXDBaseTabBarVCModule.m in Sources */,
 				6348310E1CBCE5150005C4CD /* SaveCustomerCarrerViewModel.m in Sources */,
+				8422F24E20EB239100836D9B /* UpdateDeviceIdMoudles.swift in Sources */,
 				6395E2AA1BAFA14E00B7AFC2 /* HF_NetWorkRequestManager.m in Sources */,
 				CC3BCC141FBABEC50042A738 /* MessageCell.swift in Sources */,
 				63A24C5A1BE063A90036E8EF /* CoreArchive.m in Sources */,
@@ -5392,6 +5411,7 @@
 				CC6F06901F7B8D3600FA889E /* ShanLinWebVCModules.m in Sources */,
 				848FC64A1FFE137000918CE9 /* CommonExtention.swift in Sources */,
 				84F87F3D1FC3C06C00F1C5CD /* SetTransactionInfoViewController.swift in Sources */,
+				8422F24820EB1B1400836D9B /* ForgetPasswordMoudles.swift in Sources */,
 				0FEACE201CA0E2450027859A /* TelPhoneCompanyCell.m in Sources */,
 				8438F70F1EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
 				63FC24F51D98F7E9006F58F3 /* YYTextSelectionView.m in Sources */,
@@ -5559,6 +5579,7 @@
 				8411DA121FB1927E008C571A /* FXD_VersionUpdatepop.swift in Sources */,
 				CC0DF97F1EA5B1090024841A /* YYTextRunDelegate.m in Sources */,
 				CC0DF9801EA5B1090024841A /* DataWriteAndRead.m in Sources */,
+				8422F24C20EB1B5300836D9B /* ForgetPasswordView.swift in Sources */,
 				CC1415D920B806D500D87A26 /* SupermarketViewController.m in Sources */,
 				CC0DF9811EA5B1090024841A /* SquareRepaymentExt.m in Sources */,
 				84192AA7207A03110042E8F8 /* MembershipRechargeTableViewCell.swift in Sources */,
@@ -5587,8 +5608,8 @@
 				CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */,
 				848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
 				8466936920C637E300F47A24 /* ShoppingMallModules.swift in Sources */,
-				CC0DF9951EA5B1090024841A /* BuildFile in Sources */,
-				CC0DF9971EA5B1090024841A /* BuildFile in Sources */,
+				CC0DF9951EA5B1090024841A /* (null) in Sources */,
+				CC0DF9971EA5B1090024841A /* (null) in Sources */,
 				847FC88A20E4C92200A0F797 /* LewPopupViewAnimationSpring.m in Sources */,
 				CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */,
 				CC8BB75620901C7D00ADA647 /* BillingMessageViewController.swift in Sources */,
@@ -5710,6 +5731,7 @@
 				CC742DB4204FB90500D645CC /* BankListViewController.swift in Sources */,
 				CCCDA8851EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
 				CC0DFA151EA5B1090024841A /* FaceIDOCRFront.m in Sources */,
+				8422F25220EB23E600836D9B /* UpdateDeviceIdView.swift in Sources */,
 				CC0DFA161EA5B1090024841A /* SquareRepaymentResult.m in Sources */,
 				CC0DFA171EA5B1090024841A /* FaceIDOCRBack.m in Sources */,
 				CC0DFA181EA5B1090024841A /* AboutViewController.m in Sources */,
@@ -5738,6 +5760,7 @@
 				84E2BDE11F53F3FB00E447EB /* UserDataModel.m in Sources */,
 				CC0DFA341EA5B1090024841A /* GetMoneyProcessBaseClass.m in Sources */,
 				CC45E7381FD915A300DE803D /* UITabBar+badge.m in Sources */,
+				8422F24F20EB239100836D9B /* UpdateDeviceIdMoudles.swift in Sources */,
 				CC0DFA361EA5B1090024841A /* YYLabel.m in Sources */,
 				CC0DFA391EA5B1090024841A /* FXD_ViewModelBaseClass.m in Sources */,
 				CC0DFA3A1EA5B1090024841A /* UserCardResult.m in Sources */,
@@ -5865,6 +5888,7 @@
 				849459CE1FEBABA7007EF067 /* FXD_LoanApplicationViewController.swift in Sources */,
 				CC6E0F181FF0942400D32773 /* FXD_HomeProductListModel.m in Sources */,
 				CC8BC9551FEA0374008E135E /* HomePageCell.swift in Sources */,
+				8422F24920EB1B1400836D9B /* ForgetPasswordMoudles.swift in Sources */,
 				CC0DFAB91EA5B1090024841A /* RegionCodeExt.m in Sources */,
 				8438F7101EE14BD40089E121 /* ChangePasswordViewController.m in Sources */,
 				848FC64B1FFE137000918CE9 /* CommonExtention.swift in Sources */,

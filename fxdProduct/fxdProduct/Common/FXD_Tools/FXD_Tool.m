@@ -301,7 +301,10 @@ static FXD_Tool * shareTool = nil;
 }
 
 +(BOOL)checkMoblieNumber:(NSString *)number{
-    NSString * numStr = @"^\\d{5,11}$";
+    if ([number containsString:@" "]) {
+        number = [number stringByReplacingOccurrencesOfString:@" " withString:@""];
+    }
+    NSString * numStr = @"^\\d{11}$";
     NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numStr];
     if ([regextestmobile evaluateWithObject:number] == YES) {
         NSLog(@"sucess %@",number);
