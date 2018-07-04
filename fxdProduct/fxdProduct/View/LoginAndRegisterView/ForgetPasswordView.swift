@@ -36,45 +36,46 @@ class ForgetPasswordView: UIView {
     
     func addSignal()  {
         
-//        let validUserNameSignal = phoneNumberView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
-//            return FXD_Tool.checkMoblieNumber(text)
-//        })
-        let validUserNameSignal = phoneNumberView?.inputTextField?.reactive.continuousTextValues.filter({ (text) -> Bool in
-            return (text?.count)! > 3
-        }).observeValues({ (text) in
-            print(text)
-        })
 
-//        validUserNameSignal?.map({ (isLightVC) -> Bool in
-//            return isLightVC
-//        }).observeValues({ [weak self] (isVaild) in
-//            if isVaild {
-//                self?.verifyCodeView?.rightButton?.backgroundColor = UI_MAIN_COLOR
-//                self?.verifyCodeView?.rightButton?.isEnabled = true
-//            }else{
-//                self?.verifyCodeView?.rightButton?.backgroundColor = UIColor.lightGray
-//                self?.verifyCodeView?.rightButton?.isEnabled = false
-//            }
-//        })
-        
         let validPassWordSignal = passwordView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
             return (text?.count)! > 5 ? true : false
+        })
+        
+        let validUserNameSignal = phoneNumberView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
+            return FXD_Tool.checkMoblieNumber(text)
         })
         
         let validVerifyCodeSignal = verifyCodeView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
             (text?.count)! > 3  ? true : false
         })
         
-//        let validForgetBtnSignal = Signal.combineLatest(validUserNameSignal!,validPassWordSignal!,validVerifyCodeSignal!)
-//        validForgetBtnSignal.map { (isVaildUserName,isVaildPassword,isVaildVerifyCode) -> Bool in
-//            return isVaildUserName && isVaildPassword && isVaildVerifyCode
-//            }.observeValues {[weak self] (isVaildLogin) in
-//                if isVaildLogin {
-//                    self?.forgetButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_light"), for: UIControlState.normal)
-//                }else{
-//                    self?.forgetButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
-//                }
-//        }
+        let (signalA, observerA) = Signal<Bool, NoError>.pipe()
+        let validVerifyBtnSignal = Signal.combineLatest(validUserNameSignal!,signalA)
+        validVerifyBtnSignal.map { (isVaildUserName,isVaild) -> Bool in
+            return isVaildUserName && isVaild
+            }.observeValues {[weak self] (isVaild) in
+                if isVaild {
+                    self?.verifyCodeView?.rightButton?.backgroundColor = UI_MAIN_COLOR
+                    self?.verifyCodeView?.rightButton?.isEnabled = true
+                }else{
+                    self?.verifyCodeView?.rightButton?.backgroundColor = UIColor.lightGray
+                    self?.verifyCodeView?.rightButton?.isEnabled = false
+                }
+        }
+        
+        let validForgetBtnSignal = Signal.combineLatest(validUserNameSignal!,validPassWordSignal!,validVerifyCodeSignal!)
+        validForgetBtnSignal.map { (isVaildUserName,isVaildPassword,isVaildVerifyCode) -> Bool in
+            return isVaildUserName && isVaildPassword && isVaildVerifyCode
+            }.observeValues {[weak self] (isVaildLogin) in
+                if isVaildLogin {
+                    self?.forgetButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_light"), for: UIControlState.normal)
+                }else{
+                    self?.forgetButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
+                }
+        }
+        
+        observerA.send(value: true)
+        observerA.sendCompleted()
     }
     
     @objc func forgetButtonClick(sender:UIButton) {
@@ -110,6 +111,7 @@ class ForgetPasswordView: UIView {
 extension ForgetPasswordView {
     
     func configureView()  {
+        
         
         phoneNumberView = GeneralInputView.init(.Phone_Number)
         phoneNumberView?.inputTextField?.placeholder = "请输入手机号码"

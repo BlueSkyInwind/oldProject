@@ -125,17 +125,16 @@ class loginAndRegisterModules: BaseViewController {
     
     func updateDevIDVC() {
         let updateIDVC = UpdateDeviceIdMoudles.init()
-        updateIDVC.phoneStr = loginView?.phoneNumberView?.inputTextField?.text
-        updateIDVC.passwordStr = loginView?.passwordView?.inputTextField?.text
+        updateIDVC.phoneStr = loginView?.phoneNumberView?.inputContent
+        updateIDVC.passwordStr = loginView?.passwordView?.inputContent
         self.navigationController?.pushViewController(updateIDVC, animated: true)
     }
 
     func pushForgetVC() {
-        self.loginView?.displayVerifyCode(false)
 
-//        let forgetVC = ForgetPasswordMoudles.init()
-////        forgetVC.phoneStr
-//        self.navigationController?.pushViewController(forgetVC, animated: true)
+        let forgetVC = ForgetPasswordMoudles.init()
+//        forgetVC.phoneStr
+        self.navigationController?.pushViewController(forgetVC, animated: true)
     }
     
     /*
