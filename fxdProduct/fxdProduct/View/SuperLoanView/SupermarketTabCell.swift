@@ -48,13 +48,23 @@ extension SupermarketTabCell{
     
     fileprivate func setupUI(){
         
+        let bgView = UIView()
+        bgView.backgroundColor = UIColor.white
+        self.addSubview(bgView)
+        bgView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(10)
+            make.bottom.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+        }
+        
         let leftView = UIView()
         leftView.backgroundColor = UIColor.clear
-        self.addSubview(leftView)
+        bgView.addSubview(leftView)
         leftView.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(0)
-            make.top.equalTo(self).offset(0)
-            make.bottom.equalTo(self).offset(0)
+            make.left.equalTo(bgView.snp.left).offset(0)
+            make.top.equalTo(bgView.snp.top).offset(0)
+            make.bottom.equalTo(bgView.snp.bottom).offset(0)
             make.width.equalTo(120)
         }
         
@@ -91,28 +101,28 @@ extension SupermarketTabCell{
         
         let lineView = UIView()
         lineView.backgroundColor = LINE_COLOR
-        self.addSubview(lineView)
+        bgView.addSubview(lineView)
         lineView.snp.makeConstraints { (make) in
             make.left.equalTo(leftView.snp.right).offset(5)
             make.height.equalTo(80)
             make.width.equalTo(1)
-            make.centerY.equalTo(self.snp.centerY)
+            make.centerY.equalTo(bgView.snp.centerY)
         }
         
         let quota = UILabel()
         quota.text = "最高额度"
         quota.textColor = SUPERMARK_QUOTA_COLOR
         quota.font = UIFont.systemFont(ofSize: 13)
-        self.addSubview(quota)
+        bgView.addSubview(quota)
         quota.snp.makeConstraints { (make) in
             make.left.equalTo(lineView.snp.right).offset(30)
-            make.top.equalTo(self).offset(19)
+            make.top.equalTo(bgView.snp.top).offset(19)
         }
         
         quotaLabel = UILabel()
         quotaLabel?.textColor = SUPERMARK_QUOTA_COLOR
         quotaLabel?.font = UIFont.systemFont(ofSize: 19)
-        self.addSubview(quotaLabel!)
+        bgView.addSubview(quotaLabel!)
         quotaLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(quota.snp.left).offset(0)
             make.top.equalTo(quota.snp.bottom).offset(5)
@@ -122,16 +132,16 @@ extension SupermarketTabCell{
         term.text = "期限"
         term.textColor = DWONLOAD_COLOR
         term.font = UIFont.systemFont(ofSize: 13)
-        self.addSubview(term)
+        bgView.addSubview(term)
         term.snp.makeConstraints { (make) in
-            make.right.equalTo(self).offset(-70)
+            make.right.equalTo(bgView.snp.right).offset(-70)
             make.top.equalTo(quota.snp.top).offset(0)
         }
         
         termLabel = UILabel()
         termLabel?.textColor = SUPERMARK_TERM_COLOR
         termLabel?.font = UIFont.systemFont(ofSize: 17)
-        self.addSubview(termLabel!)
+        bgView.addSubview(termLabel!)
         termLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(term.snp.left).offset(0)
             make.top.equalTo(term.snp.bottom).offset(5)
@@ -140,11 +150,11 @@ extension SupermarketTabCell{
         descLabel = UILabel()
         descLabel?.textColor = DWONLOAD_COLOR
         descLabel?.font = UIFont.systemFont(ofSize: 13)
-        self.addSubview(descLabel!)
+        bgView.addSubview(descLabel!)
         descLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(quota.snp.left).offset(0)
-            make.bottom.equalTo(self).offset(-16)
-            make.right.equalTo(self).offset(0)
+            make.bottom.equalTo(bgView.snp.bottom).offset(-16)
+            make.right.equalTo(bgView.snp.right).offset(0)
         })
     }
 }

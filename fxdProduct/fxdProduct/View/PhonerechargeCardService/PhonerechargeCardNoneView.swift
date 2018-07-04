@@ -45,7 +45,7 @@ extension PhonerechargeCardNoneView{
         
         noneDesc = UILabel()
         noneDesc?.textColor = RedPacketBottomBtn_COLOR
-        noneDesc?.font = UIFont.systemFont(ofSize: 15)
+        noneDesc?.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(noneDesc!)
         noneDesc?.snp.makeConstraints({ (make) in
             make.top.equalTo((noneImageView?.snp.bottom)!).offset(40)

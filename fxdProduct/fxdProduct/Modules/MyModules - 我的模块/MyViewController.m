@@ -17,7 +17,6 @@
 #import "UITabBar+badge.h"
 #import "LoginViewController.h"
 #import "IdeaBackViewController.h"
-
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineHeaderViewDelegate>
 {
     //标题数组
@@ -117,9 +116,6 @@
     _headerView = [[MineHeaderView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 180)];
     _headerView.type = @"1";
     _headerView.titleLabel.text = @"待还款";
-//    _headerView.moneyLabel.text = @"2300.34元";
-//    _headerView.dateLabel.text = @"还款日：2017.03.24";
-//    [_headerView.timeBtn setTitle:@"14天后" forState:UIControlStateNormal];
     _headerView.backgroundColor = [UIColor clearColor];
     _headerView.delegate = self;
     [self.view addSubview:_headerView];
@@ -129,7 +125,24 @@
 }
 
 -(void)bottomBtnClick{
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"待还款"];
+    switch (_homeProductModel.flag.integerValue) {
+        case 7:
+        {
+            MyBillViewController *controller = [[MyBillViewController alloc]init];
+            [self.navigationController pushViewController:controller animated:true];
+        }
+            
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"待还款"];
+            break;
+        case 1:
+            self.tabBarController.selectedIndex = 1;
+
+            break;
+        default:
+            self.tabBarController.selectedIndex = 1;
+            break;
+    }
+    
 }
 -(void)memberBtnClick{
     //检测登录
@@ -328,14 +341,26 @@
     }
     if (indexPath.row == 0 && indexPath.section == 1) {
         if ([model.isDisplay isEqualToString:@"1"]) {
+            
             cell.messageLabel.text = model.countNum;
+            if (model.countNum.integerValue > 99) {
+                cell.messageLabel.text = @"99+";
+            }
+
             cell.messageView.hidden = false;
             cell.messageLabel.hidden = false;
 
             if (model.countNum.integerValue > 9) {
                 
-                cell.messageLabel.hidden = true;
+                [cell.messageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.equalTo(@24);
+                }];
 
+            }else{
+                
+                [cell.messageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.equalTo(@15);
+                }];
             }
             
         }else{
@@ -382,7 +407,6 @@
             switch (indexPath.row) {
                 case 0:
                     {
-                        
                         MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
                         [self.navigationController pushViewController:myMessageVC animated:true];
                     }

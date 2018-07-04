@@ -169,7 +169,7 @@
 #pragma mark-----UItableview--delegete---
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return _dataliat.count + 1;
+    return _dataliat.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -184,12 +184,12 @@
     BankCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BankCell"];
     cell.selected = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (indexPath.section == _dataliat.count) {
-        
-        cell.type = @"2";
-        cell.backgroundColor = rgb(82, 87, 89);
-        return cell;
-    }
+//    if (indexPath.section == _dataliat.count) {
+//
+//        cell.type = @"2";
+//        cell.backgroundColor = rgb(82, 87, 89);
+//        return cell;
+//    }
     
     cell.type = @"1";
     [cell.bankImageView sd_setImageWithURL:[NSURL URLWithString:[_dataImageListBank objectAtIndex:indexPath.section]] placeholderImage:[UIImage imageNamed:@"placeholder_Image"] options:SDWebImageRefreshCached];
@@ -225,28 +225,19 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == _dataliat.count) {
-        return 21;
-    }
+
     return 14;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == _dataliat.count) {
-        
-        return 50;
-    }
+
     return 102;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == _dataliat.count) {
-        
-        [self addCard];
-    }
 }
 //隐藏与现实tabbar
 -(void)viewWillAppear:(BOOL)animated

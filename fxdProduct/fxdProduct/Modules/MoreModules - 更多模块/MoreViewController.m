@@ -67,7 +67,7 @@
     self.title = @"设置";
     self.view.backgroundColor = rgb(242, 242, 242);
     [self addBackItem];
-    titleAry=@[@"清除缓存",@"修改密码"];
+    titleAry=@[@"修改密码"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     _MyTabView.backgroundColor = rgb(242, 242, 242);
     [_MyTabView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
@@ -116,9 +116,6 @@
     
     switch (indexPath.row) {
         case 0:
-            [self clearCache];
-            break;
-        case 1:
         {
             if ([FXD_Utility sharedUtility].loginFlage) {
                 ChangePasswordViewController *   changePassVC =[[ChangePasswordViewController alloc]init];
@@ -170,27 +167,5 @@
     
 }
 
-#pragma mark 清除缓存
--(void)clearCache{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths lastObject];
-    
-    NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:path];
-    
-    for (NSString *p in files) {
-        NSError *error;
-        NSString *Path = [path stringByAppendingPathComponent:p];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:Path]) {
-            //清理缓存，保留Preference，里面含有NSUserDefaults保存的信息
-            if (![Path containsString:@"Preferences"]) {
-                [[NSFileManager defaultManager] removeItemAtPath:Path error:&error];
-            }
-        }else{
-            
-        }
-    }
-    
-    [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"清除缓存完成"];
-}
 
 @end
