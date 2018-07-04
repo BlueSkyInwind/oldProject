@@ -104,6 +104,7 @@
 #import "AppDelegate.h"
 #import "FindPassViewModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "LoanPeriodListVCModule.h"
 
 
 #endif /* fxdProduct_Bridging_Header_h */

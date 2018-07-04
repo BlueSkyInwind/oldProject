@@ -34,25 +34,17 @@
 #import "ComplianceViewModel.h"
 #import "HgLoanProtoolListModel.h"
 #import "QBBWitnDrawModel.h"
-
-@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomePageCellDelegate,SDCycleScrollCellDelegate>
+@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,SDCycleScrollCellDelegate,HomeBetweenCellDelegate>
 {
     NSString *_advTapToUrl;
     NSString *_shareContent;
     NSString *_advImageUrl;
     NSTimer * _countdownTimer;
     ActivityHomePopView *_popView;
-    
     NSInteger _count;
     FXD_HomeProductListModel *_homeProductList;
-    NSMutableArray *_protocolArray ;
     SDCycleScrollView *_sdView;
     NSMutableArray *_dataArray;
-    BMKLocationService *_locService;
-    double _latitude;
-    double _longitude;
-    
-    ApplicationStatus applicationStatus;
 }
 @property(nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong) LoadFailureView * loadFailView;
@@ -75,10 +67,9 @@
     }else{
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
-//    self.navigationItem.title = @"憨分";
+
     _count = 0;
     _dataArray = [NSMutableArray array];
-    _protocolArray = [NSMutableArray array];
     [self createTab];
     
 }
@@ -86,14 +77,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    /*
-    if ([FXD_Utility sharedUtility].loginFlage) {
-        //获取位置信息
-        if ([FXD_Utility sharedUtility].isObtainUserLocation) {
-            [self openLocationService];
-        }
-    }
-     */
+   
     self.navigationController.navigationBarHidden = true;
     _bgView.hidden = true;
     _messageNumLabel.text = @"";
@@ -124,16 +108,16 @@
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     
-    DLog(@"%lf",_k_w);
+//    DLog(@"%lf",_k_w);
     _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.44) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
     //375 185
     _sdView.delegate = self;
     _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
-//    _sdView.currentPageDotColor = UI_MAIN_COLOR;
-//    _sdView.pageDotColor = RGBColor(214, 213, 213, 1.0);
+    _sdView.pageControlDotSize = CGSizeMake(17, 7);
     _sdView.pageDotImage = [UIImage imageNamed:@"page_icon"];
     _sdView.currentPageDotImage = [UIImage imageNamed:@"page_sel_icon"];
     self.tableView.tableHeaderView = _sdView;
+
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;
@@ -143,12 +127,13 @@
     [self addMessageBtn:rectOfStatusbar.size.height];
 }
 
+
 /**
  我的消息视图
  */
 - (void)addMessageBtn:(CGFloat)height {
     
-    _messageBtn = [[UIButton alloc]initWithFrame:CGRectMake(_k_w - 15 - 15, 17 + height, 15, 16)];
+    _messageBtn = [[UIButton alloc]initWithFrame:CGRectMake(_k_w - 15 - 30, 17 + height, 15, 16)];
     [_messageBtn setImage:[UIImage imageNamed:@"homeMessage"] forState:UIControlStateNormal];
     [_messageBtn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_messageBtn];
@@ -251,44 +236,7 @@
         [self presentLoginVCCompletion:nil];
     }
 }
-#pragma mark -  定位服务迁移
-///**
-// 开启定位服务
-// */
-//-(void)openLocationService{
-//
-//    _locService = [[BMKLocationService alloc] init];
-//    _locService.delegate = self;
-//    [_locService startUserLocationService];
-//}
 
-//#pragma mark - BMKLocaltionServiceDelegate
-//- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
-//{
-//
-//}
-//- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
-//{
-//    //    DLog(@"didUpdateUserLocation lat %f,long%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
-//    _latitude = userLocation.location.coordinate.latitude;
-//    _longitude = userLocation.location.coordinate.longitude;
-//    [self uploadUserLocationInfo];
-//}
-///**
-// 上传用户的位置信息
-// */
-//-(void)uploadUserLocationInfo{
-//
-//    if ([CLLocationManager locationServicesEnabled] &&
-//        ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways
-//         || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse)) {
-//            //定位功能可用，开始定位
-//            LoginViewModel * loginViewModel = [[LoginViewModel alloc]init];
-//            [loginViewModel uploadLocationInfoLongitude:[NSString stringWithFormat:@"%f",_longitude] Latitude:[NSString stringWithFormat:@"%f",_latitude]];
-//        }
-//    [_locService stopUserLocationService];
-//    [FXD_Utility sharedUtility].isObtainUserLocation = NO;
-//}
 
 /**
  根据数据加载视图的状况
@@ -304,11 +252,6 @@
             [_loadFailView removeFromSuperview];
         }
         
-        if (isSuccess) {
-            
-            [self getHgLoanProtoolList];
-        }
-        
         self.tableView.hidden = false;
         if (_homeProductList == nil ) {
             [self setUploadFailView];
@@ -316,31 +259,6 @@
     }];
 }
 
-//根据申请件id返回投资人列表
--(void)getHgLoanProtoolList{
-
-    ComplianceViewModel *complianceVM = [[ComplianceViewModel alloc]init];
-    [complianceVM setBlockWithReturnBlock:^(id returnValue) {
-        
-        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        
-        if ([baseResultM.errCode isEqualToString:@"0"]) {
-            [_protocolArray removeAllObjects];
-            NSArray * arr = (NSArray *)baseResultM.data;
-            for (int i = 0; i<arr.count; i++) {
-                 HgLoanProtoolListModel *model = [[HgLoanProtoolListModel alloc]initWithDictionary:arr[i] error:nil];
-                [_protocolArray addObject:model];
-            }
-            [self.tableView reloadData];
-        }else{
-           
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [complianceVM hgLoanProtoolListApplicationId:_homeProductList.applicationId];
-}
 
 #pragma mark 首页加载失败视图
 -(void)setUploadFailView{
@@ -569,8 +487,9 @@
         case 0:
         {
             HomeBetweenCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBetweenCell"];
-            cell.selected = NO;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
+            cell.homeProductListModel = _homeProductList;
             cell.dataArray = @[@"loan_icon",@"loan_icon",@"loan_icon",@"loan_icon"];
             return cell;
         }
@@ -619,438 +538,20 @@
     }
 }
 
-
-//#pragma mark -  HomePageCellDelegate
-//
-//
-///**
-// 帮助中心
-// */
-//-(void)helpBtnClick{
-//
-//    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-//    webView.urlStr = _homeProductList.qaUrl;
-//    [self.navigationController pushViewController:webView animated:true];
-//}
-//
-///**
-// 量子互助
-// */
-//
-//-(void)daoliuBtnClick{
-//
-//    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-//    webView.urlStr = _liangzihuzhu_url;
-//    [self.navigationController pushViewController:webView animated:true];
-//
-//}
-//
-//
-///**
-// 提款
-// */
-//-(void)withdrawMoneyImmediatelyBtnClick{
-//
-//    if ([_homeProductList.platfromType isEqualToString:@"0"]) {
-//        if ([_homeProductList.flag isEqualToString:@"15"]) {
-//            LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-//            controller.applicationId = _homeProductList.applicationId;
-//            [self.navigationController pushViewController:controller animated:true];
-//        }else{
-//            FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
-//            [self.navigationController pushViewController:loanApplicationVC animated:true];
-//        }
-//    }else if ([_homeProductList.platfromType isEqualToString:@"2"]){
-//        [self jumpControllerUserStatus:_homeProductList.userStatus];
-//    }else if ([_homeProductList.platfromType isEqualToString:@"5"]){
-//
-//        switch (_homeProductList.userStatus.integerValue) {
-//            case 1:
-//
-//                [[HG_Manager sharedHGManager]hgUserRegJumpP2pCtrlBankNo:@"" bankReservePhone:@"" bankShortName:@"" cardId:@"" cardNo:@"" retUrl:@"" smsSeq:@"" userCode:@"" verifyCode:@"" capitalPlatform:@"5" vc:self];
-//                break;
-//            case 3:
-//            {
-//                if ([_homeProductList.flag isEqualToString:@"15"]) {
-//                    LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-//                    controller.applicationId = _homeProductList.applicationId;
-//                    [self.navigationController pushViewController:controller animated:true];
-//                }else{
-//                    FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
-//                    [self.navigationController pushViewController:loanApplicationVC animated:true];
-//                }
-//            }
-//                break;
-//
-//            default:
-//                break;
-//        }
-//    }
-//}
-//
-////根据合规状态跳转页面
-//-(void)jumpControllerUserStatus:(NSString *)userStatus{
-//
-//    switch (userStatus.integerValue) {
-//        case 1:
-//        {
-//            OpenAccountViewController * controller = [[OpenAccountViewController alloc]init];
-//            [self.navigationController pushViewController:controller animated:true];
-//        }
-//
-//            break;
-//        case 2:
-//        {
-//            IntermediateViewController * controller = [[IntermediateViewController alloc]init];
-//            [self.navigationController pushViewController:controller animated:true];
-//        }
-//
-//            break;
-//        case 3:
-//        {
-//            if ([_homeProductList.flag isEqualToString:@"15"]) {
-//                LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-//                controller.applicationId = _homeProductList.applicationId;
-//                [self.navigationController pushViewController:controller animated:true];
-//            }else{
-//                FXD_ToWithdrawFundsViewController * loanApplicationVC = [[FXD_ToWithdrawFundsViewController alloc]init];
-//                [self.navigationController pushViewController:loanApplicationVC animated:true];
-//            }
-//        }
-//            break;
-//        case 4:
-//        {
-//            [[HG_Manager sharedHGManager]hgUserActiveJumpP2pCtrlCapitalPlatform:@"2" retUrl:_transition_url vc:self];
-//
-//        }
-//            break;
-//
-//        default:
-//            break;
-//    }
-//}
-///**
-// 我要借款
-// */
-//-(void)loanBtnClick{
-//
-//    //isComplete  基础资料是否完整
-//    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"1"]) {
-//
-//        FXD_LoanApplicationViewController * loanApplicationVC = [[FXD_LoanApplicationViewController alloc]init];
-//        loanApplicationVC.productId = _homeProductList.productId;
-//        [self.navigationController pushViewController:loanApplicationVC animated:true];
-//    }else{
-//
-//        NSMutableString *content = [[NSMutableString alloc]initWithCapacity:100] ;
-//        for (int i = 0; i<_homeProductList.drawInfo.tipsContent.count; i++) {
-//            [content appendString:_homeProductList.drawInfo.tipsContent[i]];
-//            if (i != _homeProductList.drawInfo.tipsContent.count-1) {
-//                [content appendString:@"\n"];
-//            }
-//        }
-//        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:_homeProductList.drawInfo.tipsTitle content:content attributeDic:nil TextAlignment:NSTextAlignmentLeft cancelTitle:@"取消" sureTitle:@"前去更新" compleBlock:^(NSInteger index) {
-//            if (index == 1) {
-//                UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]init];
-//                [self.navigationController pushViewController:controller animated:true];
-//            }
-//        }];
-//    }
-//}
+-(void)imageViewBtnClick:(UIButton *)sender{
+    
+    PlatTypeModel *model = _homeProductList.platType[sender.tag - 101];
+    if (model.gatherUrl == nil) {
+        
+        self.tabBarController.selectedIndex = 3;
+    }else{
+        FXDWebViewController *controller = [[FXDWebViewController alloc]init];
+        controller.urlStr = model.gatherUrl;
+        [self.navigationController pushViewController:controller animated:true];
+    }
+}
 
 
-///**
-// 第三方借款
-//
-// @param productId 产品id
-// @param isOverLimit
-// @param amount 产品额度
-// @param Path 第三方产品path
-// */
-//-(void)productListClick:(NSString *)productId isOverLimit:(NSString *)isOverLimit amount:(NSString *)amount Path:(NSString *)Path{
-//
-//    FXDWebViewController *webView = [[FXDWebViewController alloc]init];
-//    webView.urlStr = Path;
-//    [self.navigationController pushViewController:webView animated:true];
-//}
-
-
-///**
-// 更多按钮
-// */
-//-(void)moreBtnClick{
-//    self.tabBarController.selectedIndex = 1;
-////    [self pushMoreProductPlatform];
-//}
-
-//-(void)pushMoreProductPlatform{
-//    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
-//    [homeVM setBlockWithReturnBlock:^(id returnValue) {
-//        BaseResultModel * baseVM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)returnValue error:nil];
-//        if ([baseVM.errCode isEqualToString:@"0"]) {
-//            NSDictionary *  dic = (NSDictionary *)baseVM.data;
-//            if ([dic.allKeys containsObject:@"url"]) {
-//                FXDWebViewController *webVC = [[FXDWebViewController alloc] init];
-//                webVC.urlStr = dic[@"url"];
-//                [self.navigationController pushViewController:webVC animated:true];
-//            }
-//        }else{
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseVM.friendErrMsg];
-//        }
-//    } WithFaileBlock:^{
-//
-//    }];
-//    [homeVM statisticsDiversionPro:nil];
-//}
-
-
-
-///**
-// 帮助图标按钮
-// */
-//-(void)questionDescBtnClick{
-//
-//    [self OverdueInfoPopView];
-//}
-
-
-///**
-// 立即还款
-//
-// @param isSelected 协议勾选框
-// */
-//-(void)repayImmediatelyBtnClick:(BOOL)isSelected{
-//    if (!isSelected) {
-//
-//        LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-//        controller.applicationId = _homeProductList.applicationId;
-//        [self.navigationController pushViewController:controller animated:true];
-//
-//    }else{
-//
-//        [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"请勾选协议"];
-//
-//    }
-//}
-
-
-///**
-// 立即借款
-//
-// @param money 借款额度
-// @param time 借款周期时间
-// */
-//-(void)applyImmediatelyBtnClick:(NSString *)money :(NSString *)time{
-//
-//    if ([FXD_Utility sharedUtility].loginFlage) {
-//            UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
-//            [self.navigationController pushViewController:controller animated:true];
-//    } else {
-//        [self presentLoginVC:self];
-//    }
-//}
-
-//#pragma mark -  逾期弹窗
-//-(void)OverdueInfoPopView{
-//
-//    FeeTextModel *firstModel = _homeProductList.overdueInfo.feeText[0];
-//    FeeTextModel *secondModel = _homeProductList.overdueInfo.feeText[1];
-//
-//    NSMutableString *content;
-//    for (int i = 0; i<_homeProductList.overdueInfo.ruleText.count; i++) {
-//
-//        [content appendString:_homeProductList.overdueInfo.ruleText[i]];
-//        if (i != _homeProductList.overdueInfo.ruleText.count-1) {
-//            [content appendString:@"\n"];
-//        }
-//    }
-//    [[FXD_AlertViewCust sharedHHAlertView] showFXDOverdueViewAlertViewTitle:_homeProductList.overdueInfo.ruleTitle TwoTitle:_homeProductList.overdueInfo.currentFeeTitle content:content deditAmount:firstModel.value deditTitle:[NSString stringWithFormat:@"%@:",firstModel.label]  defaultInterestLabel:secondModel.value defaultInterestTitle:[NSString stringWithFormat:@"%@:",secondModel.label] sureTitle:@"我知道了" compleBlock:^(NSInteger index) {
-//
-//    }];
-//}
-
-//#pragma mark -  还款协议点击事件
-////还款协议点击事件
-//-(void)protocolNameClick:(NSInteger)index protocoalName:(NSString *)protocoalName{
-//
-//    NSLog(@"%ld",index);
-//
-//    HgLoanProtoolListModel *model = _protocolArray[0];
-//    NSString *inverBorrowId = @"";
-//    NSString *typeCode = @"";
-//    if ([protocoalName containsString:@"借款协议"]) {
-//        inverBorrowId = model.inverBorrowId;
-//        typeCode = @"2";
-//    }else if([protocoalName containsString:@"转账授权书"]){
-//        typeCode = @"1";
-//    }
-//    NSString *periods = _homeProductList.periods;
-//    if ([_homeProductList.productId isEqualToString:EliteLoan]) {
-//        periods = @"";
-//    }
-//
-//    [self getProtocolContentProtocolType:_homeProductList.productId typeCode:typeCode applicationId:_homeProductList.applicationId periods:periods];
-//
-//}
-//
-//-(void)getProtocolContentProtocolType:(NSString *)productId typeCode:(NSString *)typeCode applicationId:(NSString *)applicationId periods:(NSString *)periods{
-//
-//    CommonViewModel *commonVM = [[CommonViewModel alloc]init];
-//    [commonVM setBlockWithReturnBlock:^(id returnValue) {
-//
-//        BaseResultModel *  baseResultM = returnValue;
-//        if ([baseResultM.errCode isEqualToString:@"0"]) {
-//            NSDictionary * dic = (NSDictionary *)baseResultM.data;
-//            FXDWebViewController * fxdwebVC = [[FXDWebViewController alloc]init];
-//            fxdwebVC.urlStr =  [dic objectForKey:@"productProURL"];
-//            [self.navigationController pushViewController:fxdwebVC animated:YES];
-//        }else {
-//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultM.friendErrMsg];
-//        }
-//    } WithFaileBlock:^{
-//    }];
-//    [commonVM obtainProductProtocolType:productId typeCode:typeCode apply_id:applicationId periods:periods stagingType:_homeProductList.stagingType];
-//}
-
-
-//#pragma mark 查看更多
-//-(void)recentMoreBtnClick{
-//
-//    HotRecommendationViewController *controller = [[HotRecommendationViewController alloc]init];
-//    [self.navigationController pushViewController:controller animated:true];
-//
-//}
-
-//#pragma mark 收藏
-//-(void)collectionBtnClick:(UIButton *)sender{
-//
-//    if ([FXD_Utility sharedUtility].loginFlage) {
-//
-//        [self collectionRequest:sender.tag];
-//
-//    } else {
-//        [self presentLoginVC:self];
-//    }
-//}
-//
-//-(void)collectionRequest:(NSInteger)tag{
-//    HomeHotRecommendModel *model = _homeProductList.hotRecommend[tag];
-//
-//    CollectionViewModel *collectionVM = [[CollectionViewModel alloc]init];
-//    [collectionVM setBlockWithReturnBlock:^(id returnValue) {
-//
-//        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-//        if ([baseResultM.errCode isEqualToString:@"0"]) {
-//
-//
-//            [self getAllTheHomePageData:^(BOOL isSuccess) {
-//                if (_loadFailView) {
-//                    [_loadFailView removeFromSuperview];
-//                }
-//
-//                if (isSuccess) {
-//
-//                    [self getHgLoanProtoolList];
-//                }
-//
-//                self.tableView.hidden = false;
-//                if (_homeProductList == nil ) {
-//                    [self setUploadFailView];
-//                }
-//            }];
-//        }else{
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
-//        }
-//
-//    } WithFaileBlock:^{
-//
-//    }];
-//
-//    [collectionVM addMyCollectionInfocollectionType:model.moduletype platformId:model.id_];
-//}
-
-
-//#pragma mark 极速申请 -- 手机卡充值
-//-(void)quotaBtnClick{
-//
-//    switch (_homeProductList.flag.integerValue) {
-//        case 1:
-//            if ([FXD_Utility sharedUtility].loginFlage) {
-//
-//                UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]initWithNibName:@"UserDataAuthenticationListVCModules" bundle:nil];
-//                [self.navigationController pushViewController:controller animated:true];
-//            } else {
-//                [self presentLoginVC:self];
-//            }
-//            break;
-//        case 2:
-//        {
-//
-//            [self loanBtn];
-//        }
-//
-//            break;
-//        case 7:
-//            switch (_homeProductList.platfromType.integerValue) {
-//                case 0:
-//                case 2:
-//                {
-//                    LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-//                    controller.applicationId = _homeProductList.applicationId;
-//                    [self.navigationController pushViewController:controller animated:true];
-//                }
-//                    break;
-//                case 16:
-//
-//                {
-//                    MyBillViewController *controller = [[MyBillViewController alloc]init];
-//                    [self.navigationController pushViewController:controller animated:true];
-//                }
-//
-//                    break;
-//                default:
-//                {
-//                    LoanPeriodListVCModule *controller = [[LoanPeriodListVCModule alloc]initWithNibName:@"LoanPeriodListVCModule" bundle:nil];
-//                    controller.applicationId = _homeProductList.applicationId;
-//                    [self.navigationController pushViewController:controller animated:true];
-//                }
-//
-//                    break;
-//            }
-//            break;
-//        default:
-//            break;
-//    }
-//
-//}
-//
-///**
-// 我要借款
-// */
-//-(void)loanBtn{
-//
-//    //isComplete  基础资料是否完整
-//    if ([_homeProductList.drawInfo.isComplete isEqualToString:@"1"]) {
-//
-//        ShoppingMallModules *controller = [[ShoppingMallModules alloc]init];
-//        [self.navigationController pushViewController:controller animated:true];
-//    }else{
-//
-//        NSMutableString *content = [[NSMutableString alloc]initWithCapacity:100] ;
-//        for (int i = 0; i<_homeProductList.drawInfo.tipsContent.count; i++) {
-//            [content appendString:_homeProductList.drawInfo.tipsContent[i]];
-//            if (i != _homeProductList.drawInfo.tipsContent.count-1) {
-//                [content appendString:@"\n"];
-//            }
-//        }
-//        [[FXD_AlertViewCust sharedHHAlertView] showFXDAlertViewTitle:_homeProductList.drawInfo.tipsTitle content:content attributeDic:nil TextAlignment:NSTextAlignmentLeft cancelTitle:@"取消" sureTitle:@"前去更新" compleBlock:^(NSInteger index) {
-//            if (index == 1) {
-//                UserDataAuthenticationListVCModules *controller = [[UserDataAuthenticationListVCModules alloc]init];
-//                [self.navigationController pushViewController:controller animated:true];
-//            }
-//        }];
-//    }
-//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

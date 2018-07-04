@@ -154,8 +154,8 @@ extension FilterView{
         }
         
         let line = UIView()
-        line.backgroundColor = UIColor.black
-        line.alpha = 0.1
+        line.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.1)
+//        line.alpha = 0.1
         bgView.addSubview(line)
         line.snp.makeConstraints { (make) in
             make.left.equalTo(bgView.snp.left).offset(15)
@@ -283,24 +283,6 @@ extension FilterView{
             make.width.equalTo(_k_w / 2)
         }
     }
-    
-//    override var  frame:(CGRect){
-//
-//        didSet{
-//
-//            let newFrame = CGRect(x:0,y:360,width:_k_w,height:_k_h - 360)
-//            super.frame = newFrame
-//
-//        }
-//    }
-//
-//    func setViewFrame(type : String){
-//
-//        if type == "2" {
-//            let newFrame = CGRect(x:0,y:163,width:_k_w,height:_k_h - 163)
-//            super.frame = newFrame
-//        }
-//    }
 }
 
 extension FilterView{

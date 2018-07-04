@@ -243,6 +243,29 @@
 //跳转url
 @property (nonatomic, strong)NSString<Optional> *name_;
 
+//图片url
+@property (nonatomic, strong)NSString<Optional> *collectionPage;
+//是否有效
+@property (nonatomic, strong)NSString<Optional> *createTime;
+//跳转url
+@property (nonatomic, strong)NSString<Optional> *gatherColor;
+//跳转url
+@property (nonatomic, strong)NSString<Optional> *gatherLog;
+//图片url
+@property (nonatomic, strong)NSString<Optional> *gatherRules;
+//是否有效
+@property (nonatomic, strong)NSString<Optional> *gatherTitle;
+//跳转url
+@property (nonatomic, strong)NSString<Optional> *gatherUrl;
+//跳转url
+@property (nonatomic, strong)NSString<Optional> *id_;
+//是否有效
+@property (nonatomic, strong)NSString<Optional> *platformType;
+//跳转url
+@property (nonatomic, strong)NSString<Optional> *status;
+//跳转url
+@property (nonatomic, strong)NSString<Optional> *updateTime;
+
 @end
 
 @interface BannerListModel : JSONModel

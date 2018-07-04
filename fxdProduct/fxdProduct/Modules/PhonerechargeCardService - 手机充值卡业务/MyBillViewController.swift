@@ -273,13 +273,21 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     
     @objc func repayBtnClic(){
         
-        let controller = MyBillDetailViewController()
-        let model = repayModel?.situations_[0] as! Situations
-        
-        controller.staging_id_ = model.staging_id_
-        controller.applicationId = orderModel?.order_no
-        self.navigationController?.pushViewController(controller, animated: true)
-        
+        if repayModel?.order != nil {
+            let controller = MyBillDetailViewController()
+            let model = repayModel?.situations_[0] as! Situations
+            
+            controller.staging_id_ = model.staging_id_
+            controller.applicationId = orderModel?.order_no
+            self.navigationController?.pushViewController(controller, animated: true)
+        }else{
+            
+            let controller = LoanPeriodListVCModule()
+            controller.applicationId = FXD_Utility.shared().userInfo.applicationId
+            self.navigationController?.pushViewController(controller, animated: true)
+            
+        }
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

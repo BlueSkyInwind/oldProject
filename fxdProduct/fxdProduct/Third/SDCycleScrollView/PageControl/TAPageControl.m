@@ -49,7 +49,7 @@ static CGSize const kDefaultDotSize = {8, 8};
  *  Array of dot views for reusability and touch events.
  */
 @property (strong, nonatomic) NSMutableArray *dots;
-
+@property (assign, nonatomic) CGFloat length;
 
 @end
 
@@ -148,6 +148,12 @@ static CGSize const kDefaultDotSize = {8, 8};
     for (NSInteger i = 0; i < self.numberOfPages; i++) {
         
         UIView *dot;
+        
+//        if (i == self.currentPage) {
+//            self.dotSize = CGSizeMake(17, 7);
+//        }else{
+//            self.dotSize = CGSizeMake(7, 7);
+//        }
         if (i < self.dots.count) {
             dot = [self.dots objectAtIndex:i];
         } else {
@@ -194,6 +200,16 @@ static CGSize const kDefaultDotSize = {8, 8};
 - (void)updateDotFrame:(UIView *)dot atIndex:(NSInteger)index
 {
     // Dots are always centered within view
+    
+//    int left = (_k_w - ((self.numberOfPages - 1) * 15 + 17))/2;
+//    CGFloat x = 0;
+//    for (int i = 0; i<self.numberOfPages; i++) {
+//        x = self.dotSize.width + self.spacingBetweenDots;
+//
+//    }
+//
+//
+//    CGFloat x = left + (self.dotSize.width + self.spacingBetweenDots) * index;
     CGFloat x = (self.dotSize.width + self.spacingBetweenDots) * index + ( (CGRectGetWidth(self.frame) - [self sizeForNumberOfPages:self.numberOfPages].width) / 2);
     CGFloat y = (CGRectGetHeight(self.frame) - self.dotSize.height) / 2;
     
@@ -239,6 +255,7 @@ static CGSize const kDefaultDotSize = {8, 8};
  *  @param active Active state to apply
  *  @param index  Index of dot for state update
  */
+
 - (void)changeActivity:(BOOL)active atIndex:(NSInteger)index
 {
     if (self.dotViewClass) {
@@ -251,6 +268,16 @@ static CGSize const kDefaultDotSize = {8, 8};
     } else if (self.dotImage && self.currentDotImage) {
         UIImageView *dotView = (UIImageView *)[self.dots objectAtIndex:index];
         dotView.image = (active) ? self.currentDotImage : self.dotImage;
+        
+//        if (active) {
+//
+//            self.dotSize = CGSizeMake(17, 7);
+//        }else{
+//            self.dotSize = CGSizeMake(7, 7);
+//        }
+//
+//        [self updateDotFrame:dotView atIndex:index];
+
     }
 }
 

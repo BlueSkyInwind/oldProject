@@ -8,8 +8,17 @@
 
 import UIKit
 
+@objc protocol HomeBetweenCellDelegate: NSObjectProtocol {
+
+    func imageViewBtnClick(_ sender: UIButton)
+
+}
+
 class HomeBetweenCell: UITableViewCell {
 
+    //产品数据
+    @objc var homeProductListModel = FXD_HomeProductListModel()
+    @objc weak var delegate: HomeBetweenCellDelegate?
     var titleImageViewBtn : UIButton?
     var titleLabel : UILabel?
     @objc var dataArray : NSArray?{
@@ -31,6 +40,7 @@ class HomeBetweenCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+//        setupUI()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -41,7 +51,12 @@ class HomeBetweenCell: UITableViewCell {
 extension HomeBetweenCell{
     fileprivate func setupUI(){
         
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+        
         let bgImageView = UIImageView()
+        bgImageView.isUserInteractionEnabled = true
         bgImageView.image = UIImage.init(named: "between_bg_icon")
         self.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { (make) in
@@ -52,14 +67,22 @@ extension HomeBetweenCell{
         }
         
         for index in 0..<4 {
+            if homeProductListModel.platType == nil || (index > homeProductListModel.platType.count){
+                return
+            }
             let view = setView()
             bgImageView.addSubview(view)
             let i = CGFloat.init(index)
             
             let x = (_k_w / 4) * i
             titleImageViewBtn?.tag = 101 + index
-            titleImageViewBtn?.setImage(UIImage.init(named: dataArray![index] as! String), for: .normal)
-            titleLabel?.text = "不查征信"
+            
+            let model = homeProductListModel.platType[index] as! PlatTypeModel
+            
+            let url = URL(string: model.gatherLog)
+            
+            titleImageViewBtn?.sd_setImage(with: url, for: .normal, completed: nil)
+            titleLabel?.text = model.gatherTitle
             view.snp.makeConstraints { (make) in
                 make.left.equalTo(self).offset(x)
                 make.top.equalTo(self).offset(0)
@@ -72,6 +95,7 @@ extension HomeBetweenCell{
     fileprivate func setView() -> UIView{
         
         let view = UIView()
+        view.isUserInteractionEnabled = true
         titleImageViewBtn = UIButton()
         titleImageViewBtn?.addTarget(self, action: #selector(imageViewBtnClick(_:)), for: .touchUpInside)
         view.addSubview(titleImageViewBtn!)
@@ -94,7 +118,9 @@ extension HomeBetweenCell{
         
     }
     
-    @objc fileprivate func imageViewBtnClick(_ sender : UIButton){
-        
+    @objc func imageViewBtnClick(_ sender : UIButton){
+        if delegate != nil {
+            delegate?.imageViewBtnClick(sender)
+        }
     }
 }

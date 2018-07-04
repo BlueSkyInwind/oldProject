@@ -55,7 +55,7 @@ extension MineCell{
         messageView?.snp.makeConstraints({ (make) in
             make.left.equalTo((titleImageView?.snp.right)!).offset(-5)
             make.top.equalTo((titleImageView?.snp.top)!).offset(-8)
-            make.width.equalTo(15)
+//            make.width.equalTo(15)
             make.height.equalTo(15)
         })
         

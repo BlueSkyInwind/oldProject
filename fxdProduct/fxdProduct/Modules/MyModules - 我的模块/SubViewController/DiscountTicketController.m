@@ -186,14 +186,14 @@
     lblNone.numberOfLines = 0;
     lblNone.text = @"亲, 您暂时还没有优惠券";
     lblNone.textAlignment = NSTextAlignmentCenter;
-    lblNone.font = [UIFont systemFontOfSize:12];
+    lblNone.font = [UIFont systemFontOfSize:14];
     lblNone.textColor = kUIColorFromRGB(0x666666);
     [NoneView addSubview:lblNone];
     [lblNone mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(logoImg.mas_bottom).with.offset(53);
         make.centerX.equalTo(self.view.mas_centerX);
         make.height.equalTo(@30);
-        make.width.equalTo(@150);
+        make.width.equalTo(@250);
     }];
 
 }

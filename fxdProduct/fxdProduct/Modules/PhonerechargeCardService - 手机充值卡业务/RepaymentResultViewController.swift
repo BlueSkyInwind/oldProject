@@ -81,7 +81,7 @@ class RepaymentResultViewController: BaseViewController {
         let tipLabel = UILabel()
         tipLabel.textColor = RedPacketBottomBtn_COLOR
         tipLabel.text = tipStr
-        tipLabel.font = UIFont.systemFont(ofSize: 15)
+        tipLabel.font = UIFont.systemFont(ofSize: 14)
         self.view.addSubview(tipLabel)
         tipLabel.snp.makeConstraints { (make) in
             make.top.equalTo(imageView.snp.bottom).offset(45)

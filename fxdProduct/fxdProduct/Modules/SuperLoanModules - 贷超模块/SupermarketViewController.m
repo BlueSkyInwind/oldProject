@@ -127,9 +127,9 @@
 -(void)createTab{
     
     if (UI_IS_IPHONEX) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 140, _k_w, _k_h-140-85) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 130, _k_w, _k_h-130-85) style:UITableViewStylePlain];
     }else{
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 120, _k_w, _k_h-120-49) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 110, _k_w, _k_h-110-49) style:UITableViewStylePlain];
     }
     
     [_tableView registerClass:[SupermarketTabCell class] forCellReuseIdentifier:@"SupermarketTabCell"];
@@ -166,22 +166,21 @@
         return _k_h - 215 - 80 - 64 - 49;
     }
     
-    return 109;
+    return 119;
 
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    
-    return 10;
-}
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    
-    UIView *footerView = [[UIView alloc]init];
-    footerView.backgroundColor = rgb(242, 242, 242);
-    return footerView;
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    UIView *footerView = [[UIView alloc]init];
+//    footerView.backgroundColor = rgb(242, 242, 242);
+//    return footerView;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 10;
+//}
 
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -196,7 +195,7 @@
     
     SupermarketTabCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SupermarketTabCell"];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    cell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = rgb(242, 242, 242);;
     cell.selected = NO;
     
     RowsModel *model = _dataArray[indexPath.section];
