@@ -36,21 +36,26 @@ class ForgetPasswordView: UIView {
     
     func addSignal()  {
         
-        let validUserNameSignal = phoneNumberView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
-            return FXD_Tool.checkMoblieNumber(text)
+//        let validUserNameSignal = phoneNumberView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
+//            return FXD_Tool.checkMoblieNumber(text)
+//        })
+        let validUserNameSignal = phoneNumberView?.inputTextField?.reactive.continuousTextValues.filter({ (text) -> Bool in
+            return (text?.count)! > 3
+        }).observeValues({ (text) in
+            print(text)
         })
-            
-        validUserNameSignal?.map({ (isLightVC) -> Bool in
-            return isLightVC
-        }).observeValues({ [weak self] (isVaild) in
-            if isVaild {
-                self?.verifyCodeView?.rightButton?.backgroundColor = UI_MAIN_COLOR
-                self?.verifyCodeView?.rightButton?.isEnabled = true
-            }else{
-                self?.verifyCodeView?.rightButton?.backgroundColor = UIColor.lightGray
-                self?.verifyCodeView?.rightButton?.isEnabled = false
-            }
-        })
+
+//        validUserNameSignal?.map({ (isLightVC) -> Bool in
+//            return isLightVC
+//        }).observeValues({ [weak self] (isVaild) in
+//            if isVaild {
+//                self?.verifyCodeView?.rightButton?.backgroundColor = UI_MAIN_COLOR
+//                self?.verifyCodeView?.rightButton?.isEnabled = true
+//            }else{
+//                self?.verifyCodeView?.rightButton?.backgroundColor = UIColor.lightGray
+//                self?.verifyCodeView?.rightButton?.isEnabled = false
+//            }
+//        })
         
         let validPassWordSignal = passwordView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
             return (text?.count)! > 5 ? true : false
@@ -60,16 +65,16 @@ class ForgetPasswordView: UIView {
             (text?.count)! > 3  ? true : false
         })
         
-        let validForgetBtnSignal = Signal.combineLatest(validUserNameSignal!,validPassWordSignal!,validVerifyCodeSignal!)
-        validForgetBtnSignal.map { (isVaildUserName,isVaildPassword,isVaildVerifyCode) -> Bool in
-            return isVaildUserName && isVaildPassword && isVaildVerifyCode
-            }.observeValues {[weak self] (isVaildLogin) in
-                if isVaildLogin {
-                    self?.forgetButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_light"), for: UIControlState.normal)
-                }else{
-                    self?.forgetButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
-                }
-        }
+//        let validForgetBtnSignal = Signal.combineLatest(validUserNameSignal!,validPassWordSignal!,validVerifyCodeSignal!)
+//        validForgetBtnSignal.map { (isVaildUserName,isVaildPassword,isVaildVerifyCode) -> Bool in
+//            return isVaildUserName && isVaildPassword && isVaildVerifyCode
+//            }.observeValues {[weak self] (isVaildLogin) in
+//                if isVaildLogin {
+//                    self?.forgetButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_light"), for: UIControlState.normal)
+//                }else{
+//                    self?.forgetButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
+//                }
+//        }
     }
     
     @objc func forgetButtonClick(sender:UIButton) {

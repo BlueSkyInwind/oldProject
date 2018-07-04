@@ -264,7 +264,7 @@ extension GeneralInputView {
             rightButton?.setImage(UIImage.init(named: "1_Signin_icon_05"), for: UIControlState.normal)
             rightButton?.setImage(UIImage.init(named: "Sign-in-icon07-1"), for: UIControlState.selected)
             rightButton?.snp.updateConstraints({ (make) in
-                make.width.equalTo(20)
+                make.width.equalTo(30)
             })
             break
         default:

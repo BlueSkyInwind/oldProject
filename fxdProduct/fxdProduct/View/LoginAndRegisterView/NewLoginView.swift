@@ -19,6 +19,7 @@ let VerifyCodePrompt = "请输入验证码"
 typealias UserLoginButtonClick = (_ button:UIButton,_ phoneNum:String,_ password:String,_ verifyCode:String) -> Void
 typealias UserForgetButtonClick = (_ button:UIButton) -> Void
 typealias SendVerifyCodeClick = (_ phoneNumber:String) -> Void
+typealias VerifyCodeisHiddenStatus = (_ status:Bool) -> Void
 
 class NewLoginView: UIView {
 
@@ -31,9 +32,12 @@ class NewLoginView: UIView {
     var loginBtnClick:UserLoginButtonClick?
     var forgetBtnClick:UserForgetButtonClick?
     var sendVC:SendVerifyCodeClick?
+    var status:VerifyCodeisHiddenStatus?
     
     var validUserNameSignal:Signal<Bool, NoError>?
     var validPassWordSignal:Signal<Bool, NoError>?
+    var validVerifyCodeSignal:Signal<Bool, NoError>?
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,38 +55,60 @@ class NewLoginView: UIView {
             return (text?.count)! > 5 ? true : false
         })
         
+        let validVerifyBtnSignal = Signal.combineLatest(validUserNameSignal!,validPassWordSignal!)
+        validVerifyBtnSignal.map { (isVaildUserName,isVaildPassword) -> Bool in
+            return isVaildUserName && isVaildPassword
+            }.observeValues {[weak self] (isVaild) in
+                if isVaild {
+                    self?.verifyCodeView?.rightButton?.backgroundColor = UI_MAIN_COLOR
+                    self?.verifyCodeView?.rightButton?.isEnabled = true
+                }else{
+                    self?.verifyCodeView?.rightButton?.backgroundColor = UIColor.lightGray
+                    self?.verifyCodeView?.rightButton?.isEnabled = false
+                }
+        }
+        
+        let (signalA, observerA) = Signal<Bool, NoError>.pipe()
+        validVerifyCodeSignal = signalA
+        
+        let validloginBtnSignal = Signal.combineLatest(validUserNameSignal!,validPassWordSignal!,validVerifyCodeSignal!)
+        validloginBtnSignal.map {(isVaildUserName,isVaildPassword,isVaildVerifyCode) -> Bool in
+            return isVaildUserName && isVaildPassword && isVaildVerifyCode
+            }.observeValues {[weak self] (isVaildLogin) in
+                if isVaildLogin {
+                    self?.loginButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_light"), for: UIControlState.normal)
+                }else{
+                    self?.loginButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
+                }
+        }
+        
+        self.status = {(isHidden) in
+            if isHidden {
+                observerA.send(value: true)
+            }else{
+                observerA.send(value: false)
+            }
+        }
+        
         displayVerifyCode(true)
+
+        verifyCodeView?.inputTextField?.reactive.continuousTextValues.map({(text) -> Bool in
+            if (text?.count)! > 3 {
+                observerA.send(value: true)
+                return true
+            }else{
+                observerA.send(value: false)
+                return true
+            }
+        }).observeValues({ (isSuccess) in
+            
+        })
     }
     
     func displayVerifyCode(_ hidden:Bool)  {
         verifyCodeView?.isHidden = hidden
-        if hidden == false {
-            
-            let validVerifyCodeSignal = verifyCodeView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
-                (text?.count)! > 3  ? true : false
-            })
-            
-            let validloginBtnSignal = Signal.combineLatest(validUserNameSignal!,validPassWordSignal!,validVerifyCodeSignal!)
-            validloginBtnSignal.map { (isVaildUserName,isVaildPassword,isVaildVerifyCode) -> Bool in
-                return isVaildUserName && isVaildPassword && isVaildVerifyCode
-                }.observeValues {[weak self] (isVaildLogin) in
-                    if isVaildLogin {
-                        self?.loginButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_light"), for: UIControlState.normal)
-                    }else{
-                        self?.loginButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
-                    }
-            }
-        }else{
-            let validloginBtnSignal = Signal.combineLatest(validUserNameSignal!,validPassWordSignal!)
-            validloginBtnSignal.map { (isVaildUserName,isVaildPassword) -> Bool in
-                return isVaildUserName && isVaildPassword
-                }.observeValues {[weak self] (isVaildLogin) in
-                    if isVaildLogin {
-                        self?.loginButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_light"), for: UIControlState.normal)
-                    }else{
-                        self?.loginButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
-                    }
-            }
+        if status != nil {
+            status!(hidden)
         }
     }
     
@@ -96,11 +122,18 @@ class NewLoginView: UIView {
             return
         }
         
-        guard passwordView?.inputContent != nil else {
+        guard passwordView?.inputContent != "" else {
             MBPAlertView.sharedMBPText().showTextOnly(self, message: passwordPrompt)
             return
         }
         
+        if verifyCodeView?.isHidden == false {
+            guard verifyCodeView?.inputContent != "" else {
+                MBPAlertView.sharedMBPText().showTextOnly(self, message: VerifyCodePrompt)
+                return
+            }
+        }
+
         if loginBtnClick != nil{
             loginBtnClick!(sender,(phoneNumberView?.inputContent)!,(passwordView?.inputContent)!,(verifyCodeView?.inputContent)!)
         }

@@ -383,9 +383,7 @@
                 case 0:
                     {
                         
-                        loginAndRegisterModules *myMessageVC=[[loginAndRegisterModules alloc]init];
-
-//                        MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
+                        MyMessageViewController *myMessageVC=[[MyMessageViewController alloc]init];
                         [self.navigationController pushViewController:myMessageVC animated:true];
                     }
                     break;

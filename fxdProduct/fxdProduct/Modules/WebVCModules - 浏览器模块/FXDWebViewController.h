@@ -14,9 +14,5 @@
 
 @property (nonatomic, copy) NSString * loadContent;
 
-@property (nonatomic,assign)BOOL isZhima;
-
-@property (nonatomic, copy)NSString * acceptType;  // 1、还款   2、续期
-
 
 @end
