@@ -18,7 +18,7 @@ enum GeneralInputType {
 }
 
 typealias RightButtonClick = (_ button:UIButton,_ type:GeneralInputType) -> Void
-class GeneralInputView: UIView {
+class GeneralInputView: UIView,UITextFieldDelegate {
 
     var iconImageView : UIImageView?
     var inputTextField : UITextField?
@@ -26,6 +26,12 @@ class GeneralInputView: UIView {
     var rightButton : UIButton?
     var generalInputType:GeneralInputType = .general
     var rightBtnClick:RightButtonClick?
+    
+    var inputContent:String{
+        get{
+            return ((inputTextField?.text == nil ? "" : inputTextField?.text)!.replacingOccurrences(of: " ", with: ""))
+        }
+    }
     
     fileprivate var timer:Timer?
     fileprivate var count:Int = 60
@@ -71,6 +77,9 @@ class GeneralInputView: UIView {
     }
     
      func createTimer() {
+        if timer != nil {
+            removeTimer()
+        }
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCountdown), userInfo: nil, repeats: true)
         count = 60
         rightButton?.backgroundColor = UIColor.lightGray
@@ -102,9 +111,72 @@ class GeneralInputView: UIView {
         // Drawing code
     }
     */
-
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var csStr = "0123456789"
+        if generalInputType == .Password || generalInputType == .Pic_Verify_Code {
+            csStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        }
+        var text = textField.text!
+        //设置格式
+        let characterSet = NSCharacterSet.init(charactersIn: csStr)
+        //去掉空格
+        let nsStr = string.replacingOccurrences(of: " ", with: "")
+        if nsStr.rangeOfCharacter(from: characterSet.inverted) != nil {
+            return false
+        }
+        
+        if generalInputType == .Phone_Number {
+            //将输入的数字添加给textfield
+            text = text.replacingCharacters(in: (text.toRange(range))!, with: string)
+            //去掉空格
+            text = text.replacingOccurrences(of: " ", with: "")
+            var newString = ""
+            if text.count > 0 {
+                if text.count > 3 {
+                    //前三位
+                    let subStringIndex = text.index(text.startIndex, offsetBy: 3)
+                    let subString = String(text[..<subStringIndex])
+                    newString.append(subString)
+                    newString.append(" ")
+                    //后8位
+                    let subStringEndIndex = text.index(text.startIndex, offsetBy: text.count)
+                    let subStringTwo = String(text[subStringIndex..<subStringEndIndex])
+                    if subStringTwo.count / 4 == 0 {
+                        newString.append(subStringTwo)
+                    }else{
+                        //位数超过7位
+                        let subStringEndIndex = text.index(text.startIndex, offsetBy: 7)
+                        let subString = String(text[subStringIndex..<subStringEndIndex])
+                        newString.append(subString)
+                        if subStringTwo.count % 4 != 0 || subStringTwo.count / 4 == 2{
+                            newString.append(" ")
+                            let subEndString = String(text[subStringEndIndex..<text.endIndex])
+                            newString.append(subEndString)
+                        }
+                    }
+                }else{
+                    newString = text
+                }
+            }
+            newString = newString.trimmingCharacters(in: characterSet.inverted)
+            if newString.count > 13 {
+                return false
+            }
+            inputTextField?.text = newString
+            return false
+        }
+        return true
+    }
 }
 
+func getMin(num1 : Int, num2: Int) -> Int {
+    if num1 <= num2 {
+        return num1
+    }else{
+        return num2
+    }
+}
 
 extension GeneralInputView {
     
@@ -135,6 +207,7 @@ extension GeneralInputView {
         inputTextField?.borderStyle = .none
         inputTextField?.textColor = "333333".uiColor()
         inputTextField?.font = UIFont.systemFont(ofSize: 14)
+        inputTextField?.delegate = self
         self.addSubview(inputTextField!)
         inputTextField?.snp.makeConstraints({ (make) in
             make.left.equalTo((iconImageView?.snp.right)!).offset(10)
@@ -155,7 +228,7 @@ extension GeneralInputView {
         
         switch inputtype {
         case .Phone_Number:
-        
+            inputTextField?.keyboardType = .numberPad
             break
         case .Pic_Verify_Code:
             rightButton?.snp.remakeConstraints({ (make) in
@@ -166,9 +239,11 @@ extension GeneralInputView {
             })
             break
         case .Verify_Code:
+            inputTextField?.keyboardType = .numberPad
             rightButton?.setTitle("发送验证码", for: UIControlState.normal)
             rightButton?.layer.cornerRadius = 15
-            rightButton?.backgroundColor = UI_MAIN_COLOR
+            rightButton?.backgroundColor = UIColor.lightGray
+            rightButton?.isEnabled = false
             rightButton?.clipsToBounds = true
             rightButton?.snp.remakeConstraints({ (make) in
                 make.right.equalTo(self.snp.right)
@@ -195,6 +270,5 @@ extension GeneralInputView {
         default:
             break
         }
-
     }
 }

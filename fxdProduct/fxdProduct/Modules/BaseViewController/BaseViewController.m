@@ -34,10 +34,8 @@
 
 - (void)setNavMesRightBar {
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_qr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(click)];
-    //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
     self.navigationItem.rightBarButtonItem = aBarbi;
 }
-
 
 - (void)setNavSignLeftBar
 {
@@ -58,6 +56,14 @@
     
 }
 
+#pragma mrak - 跳转登录
+-(void)presentLoginVCCompletion:(void (^ __nullable)(void))completion{
+    loginAndRegisterModules *myMessageVC=[[loginAndRegisterModules alloc]init];
+    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:myMessageVC];
+    [self presentViewController:nav animated:true completion:completion];
+}
+
+#pragma mrak - 导航左侧按钮类型
 - (void)addBackItem
 {
     if (@available(iOS 11.0, *)) {
@@ -96,7 +102,6 @@
     spaceItem.width = -15;
     
     self.navigationItem.leftBarButtonItems = @[spaceItem,item];
-    //    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
 }
 
 
@@ -135,13 +140,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    DLog(@"%@------->Appear",NSStringFromClass([self class]));
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-//    DLog(@"%@------->disAppear",NSStringFromClass([self class]));
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 #pragma mrak - 失败加载视图

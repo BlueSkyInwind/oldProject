@@ -102,7 +102,7 @@
 #import "LoginViewModel.h"
 #import "RegViewModel.h"
 #import "AppDelegate.h"
-
+#import "FindPassViewModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 

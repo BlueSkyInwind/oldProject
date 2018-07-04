@@ -158,12 +158,13 @@ extension LoginAndRegisterSlideView {
         
         registerView = UIView.init(frame: CGRect.init(x: _k_w, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT)))
         self.addSubview(registerView!)
+        
         if  lrBottomView != nil{
             lrBottomView!(loginView!,registerView!)
         }
+        
         if loginAndRegisterStatus != nil {
             loginAndRegisterStatus!(true)
-
         }
     }
 }

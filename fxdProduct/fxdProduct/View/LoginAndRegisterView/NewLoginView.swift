@@ -14,8 +14,9 @@ import Result
 
 let phoneNumberPrompt = "请输入有效的手机号码"
 let passwordPrompt = "请输入密码"
+let VerifyCodePrompt = "请输入验证码"
 
-typealias UserLoginButtonClick = (_ button:UIButton) -> Void
+typealias UserLoginButtonClick = (_ button:UIButton,_ phoneNum:String,_ password:String,_ verifyCode:String) -> Void
 typealias UserForgetButtonClick = (_ button:UIButton) -> Void
 typealias SendVerifyCodeClick = (_ phoneNumber:String) -> Void
 
@@ -43,7 +44,7 @@ class NewLoginView: UIView {
     func addSignal()  {
         
          validUserNameSignal = phoneNumberView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
-            return text?.count == 11 ? true : false
+            return FXD_Tool.checkMoblieNumber(text)
         })
         
         validPassWordSignal = passwordView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
@@ -90,18 +91,18 @@ class NewLoginView: UIView {
     }
     
     @objc func loginButtonClick(sender:UIButton) {
-        guard FXD_Tool.checkMoblieNumber(phoneNumberView?.inputTextField?.text) else {
+        guard FXD_Tool.checkMoblieNumber(phoneNumberView?.inputContent) else {
             MBPAlertView.sharedMBPText().showTextOnly(self, message: phoneNumberPrompt)
             return
         }
         
-        guard passwordView?.inputTextField?.text == nil else {
+        guard passwordView?.inputContent != nil else {
             MBPAlertView.sharedMBPText().showTextOnly(self, message: passwordPrompt)
             return
         }
         
         if loginBtnClick != nil{
-            loginBtnClick!(sender)
+            loginBtnClick!(sender,(phoneNumberView?.inputContent)!,(passwordView?.inputContent)!,(verifyCodeView?.inputContent)!)
         }
     }
     
@@ -160,7 +161,7 @@ extension NewLoginView {
         })
         verifyCodeView?.rightBtnClick = {[weak self] (button,type) in
             if type == .Verify_Code && self?.sendVC != nil  {
-                self?.sendVC!((self?.phoneNumberView?.inputTextField?.text)!)
+                self?.sendVC!((self?.phoneNumberView?.inputContent)!)
             }
         }
         

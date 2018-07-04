@@ -233,11 +233,9 @@
             [vc.navigationController popToRootViewControllerAnimated:YES];
         });
         
-        LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
-        [vc presentViewController:nav animated:YES completion:^{
-            
-        }];
+        loginAndRegisterModules *myMessageVC=[[loginAndRegisterModules alloc]init];
+        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:myMessageVC];
+        [vc presentViewController:nav animated:true completion:nil];
     }@catch (NSException *exception) {
         DLog(@"%@",exception);
     }

@@ -134,7 +134,7 @@
 -(void)memberBtnClick{
     //检测登录
     if (![FXD_Utility sharedUtility].loginFlage) {
-        [self presentLogin:self];
+        [self presentLoginVCCompletion:nil];
         return;
     }
     MemberCenterViewController * memberCenterVC = [[MemberCenterViewController alloc]init];
@@ -203,7 +203,7 @@
 -(void)redPacketViewTap{
     //检测登录
     if (![FXD_Utility sharedUtility].loginFlage) {
-        [self presentLogin:self];
+        [self presentLoginVCCompletion:nil];
         return;
     }
     CashRedEnvelopeViewController *controller = [[CashRedEnvelopeViewController alloc]init];
@@ -217,7 +217,7 @@
 -(void)couponViewTap{
     //检测登录
     if (![FXD_Utility sharedUtility].loginFlage) {
-        [self presentLogin:self];
+        [self presentLoginVCCompletion:nil];
         return;
     }
     DiscountTicketController *ticket=[[DiscountTicketController alloc]init];
@@ -231,7 +231,7 @@
 -(void)accountViewTap{
     //检测登录
     if (![FXD_Utility sharedUtility].loginFlage) {
-        [self presentLogin:self];
+        [self presentLoginVCCompletion:nil];
         return;
     }
     [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"暂未开放，敬请期待"];
@@ -356,7 +356,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //检测登录
     if (![FXD_Utility sharedUtility].loginFlage) {
-        [self presentLogin:self];
+        [self presentLoginVCCompletion:nil];
         return;
     }
     
@@ -413,7 +413,7 @@
                             IdeaBackViewController *ideaBack=[[IdeaBackViewController alloc]initWithNibName:@"IdeaBackViewController" bundle:nil];
                             [self.navigationController pushViewController:ideaBack animated:YES];
                         } else {
-                            [self presentLogin:self];
+                            [self presentLoginVCCompletion:nil];
                         }
                     }
                     break;
@@ -435,18 +435,6 @@
         default:
             break;
     }
-}
-
-- (void)presentLogin:(UIViewController *)vc
-{
-//    LoginViewController *loginView = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-//    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-//    [vc presentViewController:nav animated:YES completion:nil];
-    
-    loginAndRegisterModules *myMessageVC=[[loginAndRegisterModules alloc]init];
-    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:myMessageVC];
-    [vc presentViewController:nav animated:YES completion:nil];
-
 }
 
 -(void)obtainQuestionWebUrl:(NSString *)typeCode{

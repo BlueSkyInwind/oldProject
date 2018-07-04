@@ -248,22 +248,9 @@
         MyMessageViewController *myMessageCV = [[MyMessageViewController alloc]init];
         [self.navigationController pushViewController:myMessageCV animated:true];
     } else {
-        [self presentLoginVC:self];
+        [self presentLoginVCCompletion:nil];
     }
 }
-
-/**
- 跳转到登录页面
- 
- @param vc 登录的VC
- */
-- (void)presentLoginVC:(UIViewController *)vc
-{
-    LoginViewController *loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
-    [vc presentViewController:nav animated:YES completion:nil];
-}
-
 #pragma mark -  定位服务迁移
 ///**
 // 开启定位服务

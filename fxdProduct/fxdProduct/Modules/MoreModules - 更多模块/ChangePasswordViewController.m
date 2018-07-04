@@ -163,7 +163,7 @@
             dispatch_after(delayTime, dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
-            [weakSelf presentLogin];
+            [weakSelf presentLoginVCCompletion:nil];
         }else{
             NSLog(@"%@",model.msg);
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.friendErrMsg];
@@ -204,16 +204,6 @@
     
     return YES;
 }
-
-#pragma mark 登录
-- (void)presentLogin
-{
-    LoginViewController *loginView = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginView];
-    nav.transitioningDelegate = self;
-    [self presentViewController:nav animated:YES completion:nil];
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
