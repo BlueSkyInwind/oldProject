@@ -23,6 +23,17 @@ class ForgetPasswordMoudles: BaseViewController {
         configureView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared().shouldResignOnTouchOutside = false
+        IQKeyboardManager.shared().isEnabled = false
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared().shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared().isEnabled = true
+    }
+    
     func configureView()  {
         forgetPasswordView = ForgetPasswordView.init(frame: CGRect.zero)
         self.view.addSubview(forgetPasswordView!)

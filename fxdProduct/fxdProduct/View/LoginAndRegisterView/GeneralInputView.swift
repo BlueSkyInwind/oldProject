@@ -127,6 +127,43 @@ class GeneralInputView: UIView,UITextFieldDelegate {
         }
         
         if generalInputType == .Phone_Number {
+//            //删除
+//            if string == "" {
+//                if range.length == 1{
+//                    
+//                    var offest = range.location
+//                    if range.location < text.count && text[text.toRange(range)!] == " " && (textField.selectedTextRange?.isEmpty)! {
+//                        textField.deleteBackward()
+//                        offest -= 1
+//                    }
+//                    textField.deleteBackward()
+//                    textField.text = parseString(textField.text!)
+//                    let newPos = textField.position(from: textField.beginningOfDocument, offset: offest)
+//                    textField.selectedTextRange = textField.textRange(from: newPos!, to: newPos!)
+//                    return false
+//                }
+//            }else if range.length > 1 {
+//                var isLast = false
+//                if range.location + range.length == textField.text?.count {
+//                    isLast = true
+//                }
+//                textField.deleteBackward()
+//                textField.text = parseString(textField.text!)
+//                // 如果位于添加空格位置，光标向后推一位
+//                var offest = range.location
+//                if range.location == 3 || range.location  == 8 {
+//                    offest += 1
+//                }
+//                
+//                if isLast == false {
+//                    let newPos = textField.position(from: textField.beginningOfDocument, offset: offest)
+//                    textField.selectedTextRange = textField.textRange(from: newPos!, to: newPos!)
+//                }
+//                return false
+//            }else{
+//                return true
+//            }
+            
             //将输入的数字添加给textfield
             text = text.replacingCharacters(in: (text.toRange(range))!, with: string)
             //去掉空格
@@ -170,13 +207,17 @@ class GeneralInputView: UIView,UITextFieldDelegate {
     }
 }
 
-func getMin(num1 : Int, num2: Int) -> Int {
-    if num1 <= num2 {
-        return num1
-    }else{
-        return num2
+func parseString(_ inputStr:String) -> String {
+    
+    let str = NSMutableString.init(string: inputStr.replacingOccurrences(of: " ", with: ""))
+    if str.length > 3 {
+        str.insert(" ", at: 3)
+    }else if str.length > 8 {
+        str.insert(" ", at: 8)
     }
+    return str as String
 }
+
 
 extension GeneralInputView {
     

@@ -29,6 +29,8 @@
     // Do any additional setup after loading the view.
     isHanfen = false;
     self.view.backgroundColor = [UIColor whiteColor];
+    [self setNavCloseRightBar];
+    
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     config.preferences = [[WKPreferences alloc] init];
     config.preferences.javaScriptEnabled = true;
@@ -73,12 +75,11 @@
     NSString * requestUrlStr = [self generateRequestUrlString:_urlStr];
     DLog(@"%@",requestUrlStr);
     // [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[requestUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:requestUrlStr]]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:requestUrlStr] cachePolicy:1 timeoutInterval:30]];
 }
 
 /**
  生成请求的url
-
  @param str 原始url
  @return 组装结果
  */
@@ -91,6 +92,8 @@
     if([resultStr containsString:@"wxact"] || [resultStr containsString:hostStr] ){
         isHanfen = true;
         resultStr = [self assemblyUrl:resultStr];
+    }else{
+        isHanfen = false;
     }
     return resultStr;
 }
@@ -150,7 +153,13 @@
         _urlStr = _webView.URL.absoluteString;
     }
 }
-
+- (void)setNavCloseRightBar {
+    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"close_icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(closeWenBtnClock)];
+    self.navigationItem.rightBarButtonItem = aBarbi;
+}
+-(void)closeWenBtnClock{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma mark - 顶部进度UI
 -(void)createProUI
 {
@@ -348,53 +357,37 @@
 
 - (void)deleteWebCache {
     
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
-        
-        NSSet *websiteDataTypes
-        
-        = [NSSet setWithArray:@[
-                                
+    if (@available(iOS 9.0, *)) {
+        NSSet *websiteDataTypes = [NSSet setWithArray:@[
                                 WKWebsiteDataTypeDiskCache,
-                                
                                 WKWebsiteDataTypeOfflineWebApplicationCache,
-                                
                                 WKWebsiteDataTypeMemoryCache,
-                                
                                 WKWebsiteDataTypeLocalStorage,
-                                
                                 WKWebsiteDataTypeCookies,
-                                
                                 WKWebsiteDataTypeSessionStorage,
-                                
                                 WKWebsiteDataTypeIndexedDBDatabases,
-                                
                                 WKWebsiteDataTypeWebSQLDatabases
-                                
                                 ]];
-        
-        //// All kinds of data
-        
-        //NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
-        
         //// Date from
-        
         NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
-        
         //// Execute
-        
         [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
-            
             // Done
-            
         }];
         
     } else {
-        
-        NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *cookiesFolderPath = [libraryPath stringByAppendingString:@"/Cookies"];
-        NSError *errors;
-        [[NSFileManager defaultManager] removeItemAtPath:cookiesFolderPath error:&errors];
-        
+        NSString *libraryDir = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
+        NSString *bundleId  =  [[[NSBundle mainBundle] infoDictionary]
+                                objectForKey:@"CFBundleIdentifier"];
+        NSString *webkitFolderInLib = [NSString stringWithFormat:@"%@/WebKit",libraryDir];
+        NSString *webKitFolderInCaches = [NSString
+                                          stringWithFormat:@"%@/Caches/%@/WebKit",libraryDir,bundleId];
+        NSString *webKitFolderInCachesfs = [NSString
+                                            stringWithFormat:@"%@/Caches/%@/fsCachedData",libraryDir,bundleId];
+        NSError *error;
+        /* iOS8.0 WebView Cache的存放路径 */
+        [[NSFileManager defaultManager] removeItemAtPath:webKitFolderInCaches error:&error];
+        [[NSFileManager defaultManager] removeItemAtPath:webkitFolderInLib error:nil];
     }
 }
 
