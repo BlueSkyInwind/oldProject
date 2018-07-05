@@ -25,6 +25,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabViewTop;
 
 @end
 
@@ -36,6 +37,9 @@
     self.title=@"我的银行卡";
     _defaultCardIndex = -1;
     
+    if (UI_IS_IPHONEX) {
+        _tabViewTop.constant = 87;
+    }
     self.automaticallyAdjustsScrollViewInsets = NO;
     _dataliat =[[NSMutableArray alloc] init];
     _dataNumList = [[NSMutableArray alloc] init];

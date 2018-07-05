@@ -171,7 +171,7 @@
     [NoneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).with.offset(64);
         make.left.right.equalTo(self.view).with.offset(0);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-100);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-80);
     }];
     
     UIImageView *logoImg=[[UIImageView alloc]init];
@@ -194,6 +194,40 @@
         make.centerX.equalTo(self.view.mas_centerX);
         make.height.equalTo(@30);
         make.width.equalTo(@250);
+    }];
+    
+    bottomView = [[UIView alloc]init];
+    bottomView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pushInVailDiscountTicketVC)];
+    [bottomView addGestureRecognizer:tap];
+    [self.view addSubview:bottomView];
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(@(-30));
+        make.left.right.equalTo(@0);
+        make.height.equalTo(@40);
+    }];
+    
+    UILabel * prometLabel = [[UILabel alloc]init];
+    prometLabel.text = @"查看过期券";
+    prometLabel.textColor = kUIColorFromRGB(0x4d4d4d);
+    prometLabel.font = [UIFont systemFontOfSize:13];
+    prometLabel.textAlignment = NSTextAlignmentCenter;
+    [bottomView addSubview:prometLabel];
+    [prometLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(bottomView.mas_centerX).with.offset(-10);
+        make.centerY.equalTo(bottomView.mas_centerY);
+        make.width.equalTo(@150);
+        make.height.equalTo(@30);
+    }];
+    
+    UIImageView * leftIcon = [[UIImageView alloc]init];
+    leftIcon.image = [UIImage imageNamed:@"left_Image_icon"];
+    [bottomView addSubview:leftIcon];
+    [leftIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(bottomView.mas_centerY);
+        make.left.equalTo(prometLabel.mas_right).with.offset(0);
+        make.width.equalTo(@15);
+        make.height.equalTo(@13);
     }];
 
 }

@@ -45,7 +45,7 @@
     self.view.backgroundColor = rgb(242, 242, 242);
     _order = @"ASC";
     _dataArray = [NSMutableArray arrayWithCapacity:100];
-    
+    self.view.userInteractionEnabled = true;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:isSuperMark object:nil];
     [self getData];
     [self addHeaderView];
@@ -62,6 +62,7 @@
     }else{
         _headerView = [[SupermarketHeaderView alloc]initWithFrame:CGRectMake(0, 64, _k_w, 45)];
     }
+    _headerView.userInteractionEnabled = true;
     _headerView.delegate = self;
     [self.view addSubview:_headerView];
 
@@ -169,18 +170,6 @@
     return 119;
 
 }
-
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    UIView *footerView = [[UIView alloc]init];
-//    footerView.backgroundColor = rgb(242, 242, 242);
-//    return footerView;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    return 10;
-//}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

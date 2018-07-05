@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IdeaBackViewController">
             <connections>
+                <outlet property="ForeTextViewTop" destination="zE3-jK-ZbS" id="fm7-Cs-NxP"/>
                 <outlet property="customerServiceBtn" destination="QGa-GP-iha" id="81Q-gB-Zoz"/>
                 <outlet property="foreTextview" destination="Vay-2E-WS6" id="YPT-UL-IQM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

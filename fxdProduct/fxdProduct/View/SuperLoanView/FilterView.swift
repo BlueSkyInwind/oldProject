@@ -252,7 +252,7 @@ extension FilterView{
             make.left.equalTo(bgView.snp.left).offset(0)
             make.right.equalTo(bgView.snp.right).offset(0)
             make.top.equalTo(bgView.snp.bottom).offset(-32)
-            make.height.equalTo(32)
+            make.height.equalTo(45)
         }
         
         let resetBtn = UIButton()

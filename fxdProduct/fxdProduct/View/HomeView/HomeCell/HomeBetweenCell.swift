@@ -55,9 +55,11 @@ extension HomeBetweenCell{
             view.removeFromSuperview()
         }
         
-        let bgImageView = UIImageView()
-        bgImageView.isUserInteractionEnabled = true
-        bgImageView.image = UIImage.init(named: "between_bg_icon")
+        let bgImageView = UIView()
+        bgImageView.backgroundColor = UIColor.white
+//        let bgImageView = UIImageView()
+//        bgImageView.isUserInteractionEnabled = true
+//        bgImageView.image = UIImage.init(named: "between_bg_icon")
         self.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(0)
@@ -74,10 +76,11 @@ extension HomeBetweenCell{
                 return
             }
             let view = setView()
+            view.backgroundColor = UIColor.clear
             bgImageView.addSubview(view)
             let i = CGFloat.init(index)
-            
-            let x = (_k_w / 4) * i
+            let count = CGFloat.init(homeProductListModel.indexMenu.count)
+            let x = (_k_w / count) * i
             titleImageViewBtn?.tag = 101 + index
             
             let model = homeProductListModel.indexMenu[index] as! IndexMenuModel
@@ -90,7 +93,7 @@ extension HomeBetweenCell{
                 make.left.equalTo(self).offset(x)
                 make.top.equalTo(self).offset(0)
                 make.bottom.equalTo(self).offset(0)
-                make.width.equalTo(_k_w / 4)
+                make.width.equalTo(_k_w / count)
             }
         }
     }

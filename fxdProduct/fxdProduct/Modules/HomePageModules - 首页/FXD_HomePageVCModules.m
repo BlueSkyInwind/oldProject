@@ -109,7 +109,11 @@
     [self.view addSubview:self.tableView];
     
 //    DLog(@"%lf",_k_w);
-    _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.44) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
+    CGFloat height = _k_w*0.44;
+    if (UI_IS_IPHONEX) {
+        height = _k_w *0.5;
+    }
+    _sdView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, _k_w, height) delegate:self placeholderImage:[UIImage imageNamed:@"banner-placeholder"]];
     //375 185
     _sdView.delegate = self;
     _sdView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
