@@ -43,8 +43,8 @@ extension NonePageView{
         
         let content = UILabel()
         content.text = "当前无记录"
-        content.textColor = UI_MAIN_COLOR
-        content.font = UIFont.systemFont(ofSize: 16)
+        content.textColor = RedPacketBottomBtn_COLOR
+        content.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(content)
         content.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)
@@ -64,8 +64,8 @@ extension NonePageView{
         
         let content = UILabel()
         content.text = "当前无记录"
-        content.textColor = UIColor.init(red: 180/255.0, green: 180/255.0, blue: 181/255.0, alpha: 1.0)
-        content.font = UIFont.systemFont(ofSize: 16)
+        content.textColor = RedPacketBottomBtn_COLOR
+        content.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(content)
         content.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)

@@ -139,6 +139,7 @@
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithTitle:@"使用帮助" style:UIBarButtonItemStylePlain target:self action:@selector(goHelpVCClick)];
     self.navigationItem.rightBarButtonItem = aBarbi;
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil] forState:UIControlStateNormal];
     
 }
 
@@ -187,7 +188,7 @@
     lblNone.text = @"亲, 您暂时还没有优惠券";
     lblNone.textAlignment = NSTextAlignmentCenter;
     lblNone.font = [UIFont systemFontOfSize:14];
-    lblNone.textColor = kUIColorFromRGB(0x666666);
+    lblNone.textColor = kUIColorFromRGB(0x808080);
     [NoneView addSubview:lblNone];
     [lblNone mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(logoImg.mas_bottom).with.offset(53);
@@ -216,7 +217,7 @@
     [prometLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(bottomView.mas_centerX).with.offset(-10);
         make.centerY.equalTo(bottomView.mas_centerY);
-        make.width.equalTo(@150);
+        make.width.equalTo(@100);
         make.height.equalTo(@30);
     }];
     
@@ -226,8 +227,7 @@
     [leftIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(bottomView.mas_centerY);
         make.left.equalTo(prometLabel.mas_right).with.offset(0);
-        make.width.equalTo(@15);
-        make.height.equalTo(@13);
+
     }];
 
 }
@@ -260,7 +260,7 @@
     [prometLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(bottomView.mas_centerX).with.offset(-10);
         make.centerY.equalTo(bottomView.mas_centerY);
-        make.width.equalTo(@150);
+        make.width.equalTo(@100);
         make.height.equalTo(@30);
     }];
     
@@ -270,8 +270,6 @@
     [leftIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(bottomView.mas_centerY);
         make.left.equalTo(prometLabel.mas_right).with.offset(0);
-        make.width.equalTo(@15);
-        make.height.equalTo(@13);
     }];
 }
 

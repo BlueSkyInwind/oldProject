@@ -46,15 +46,15 @@ class SortView: UIView,UITableViewDelegate,UITableViewDataSource {
 extension SortView{
     fileprivate func setupUI(){
         
-//        let line = UIView()
-//        line.backgroundColor = UIColor.black
-//        self.addSubview(line)
-//        line.snp.makeConstraints { (make) in
-//            make.left.equalTo(self).offset(0)
-//            make.top.equalTo(self).offset(0)
-//            make.right.equalTo(self).offset(0)
-//            make.height.equalTo(1)
-//        }
+        let topView = UIView()
+        topView.backgroundColor = LINE_COLOR
+        self.addSubview(topView)
+        topView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.height.equalTo(10)
+        }
         
         let tabView = UITableView()
         tabView.backgroundColor = UIColor.white
@@ -64,7 +64,7 @@ extension SortView{
         self.addSubview(tabView)
         tabView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(0)
-            make.top.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(10)
             make.right.equalTo(self).offset(0)
             make.height.equalTo(160)
         }

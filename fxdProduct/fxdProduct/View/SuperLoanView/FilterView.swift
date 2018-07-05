@@ -50,26 +50,25 @@ extension FilterView{
     
     fileprivate func setupUI(){
         
+        let topView = UIView()
+        topView.backgroundColor = LINE_COLOR
+        self.addSubview(topView)
+        topView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.height.equalTo(10)
+        }
         
         let bgView = UIView()
         bgView.backgroundColor = UIColor.white
         self.addSubview(bgView)
         bgView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(0)
-            make.top.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(10)
             make.right.equalTo(self).offset(0)
             make.height.equalTo(180)
         }
-        
-//        let lineView = UIView()
-//        lineView.backgroundColor = UIColor.black
-//        bgView.addSubview(lineView)
-//        lineView.snp.makeConstraints { (make) in
-//            make.left.equalTo(bgView.snp.left).offset(0)
-//            make.top.equalTo(bgView.snp.top).offset(0)
-//            make.right.equalTo(bgView.snp.right).offset(0)
-//            make.height.equalTo(1)
-//        }
         
         let loanMoneyLine = UIView()
         loanMoneyLine.backgroundColor = UI_MAIN_COLOR
@@ -155,7 +154,6 @@ extension FilterView{
         
         let line = UIView()
         line.backgroundColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.1)
-//        line.alpha = 0.1
         bgView.addSubview(line)
         line.snp.makeConstraints { (make) in
             make.left.equalTo(bgView.snp.left).offset(15)
