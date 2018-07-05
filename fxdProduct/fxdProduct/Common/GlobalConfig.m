@@ -29,7 +29,6 @@ NSString * const _p2P_url = @"http://h5.test.fxds/fxd-esb/p2p/";
 NSString * const _P2P_url   =   @"http://192.168.6.85:9090/p2p/";
 
 //开发测试外网地址 test.faxindai.com:8001  http://dev.faxindai.com:8002
-
 //NSString * const _main_url  =   @"http://test.faxindai.com:8001/fxd-esb/esb/";
 //NSString * const _agreement_url  =   @"http://test.faxindai.com:8001/fxd-esb/esb/";
 //NSString * const _ValidESB_url  =   @"http://test.faxindai.com:8001/fxd-esb/";

@@ -148,7 +148,7 @@ extension UpdateDeviceIdView {
         
         updateButton = UIButton.init(type: UIButtonType.custom)
         updateButton?.setTitle("确认更改", for: UIControlState.normal)
-        updateButton?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
+        updateButton?.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         updateButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
         updateButton?.addTarget(self, action: #selector(updateButtonClick(sender:)), for: UIControlEvents.touchUpInside)
         self.addSubview(updateButton!)

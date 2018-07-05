@@ -209,7 +209,7 @@ extension RegisterView {
         
         registerButton = UIButton.init(type: UIButtonType.custom)
         registerButton?.setTitle("注册", for: UIControlState.normal)
-        registerButton?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
+        registerButton?.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         registerButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
         registerButton?.addTarget(self, action: #selector(registerButtonClick(sender:) ), for: UIControlEvents.touchUpInside)
         self.addSubview(registerButton!)
