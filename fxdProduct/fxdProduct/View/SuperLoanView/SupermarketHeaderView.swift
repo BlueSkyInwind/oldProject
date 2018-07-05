@@ -60,13 +60,13 @@ extension SupermarketHeaderView{
         }
         
         let sortView = UIView()
-        sortView.backgroundColor = .clear
+        sortView.backgroundColor = .red
         sortBgView.addSubview(sortView)
         sortView.snp.makeConstraints { (make) in
             make.centerX.equalTo(sortBgView.snp.centerX)
             make.centerY.equalTo(sortBgView.snp.centerY)
             make.height.equalTo(36)
-            make.width.equalTo(50)
+            make.width.equalTo(70)
         }
         
         sortBtn = UIButton()
@@ -85,7 +85,7 @@ extension SupermarketHeaderView{
         sortImageBtn?.addTarget(self, action: #selector(sortBtnClick(_:)), for: .touchUpInside)
         sortView.addSubview(sortImageBtn!)
         sortImageBtn?.snp.makeConstraints { (make) in
-            make.right.equalTo(sortView.snp.right).offset(10)
+            make.right.equalTo(sortView.snp.right).offset(-10)
             make.centerY.equalTo(sortView.snp.centerY)
         }
         
@@ -100,7 +100,6 @@ extension SupermarketHeaderView{
         }
         
         let filterBgView = UIView()
-        filterBgView.isUserInteractionEnabled = true
         filterBgView.backgroundColor = UIColor.white
         self.addSubview(filterBgView)
         filterBgView.snp.makeConstraints { (make) in
@@ -111,14 +110,13 @@ extension SupermarketHeaderView{
         }
         
         let filterView = UIView()
-        filterView.isUserInteractionEnabled = true
         filterView.backgroundColor = .clear
         filterBgView.addSubview(filterView)
         filterView.snp.makeConstraints { (make) in
             make.centerX.equalTo(filterBgView.snp.centerX)
             make.centerY.equalTo(filterBgView.snp.centerY)
             make.height.equalTo(36)
-            make.width.equalTo(50)
+            make.width.equalTo(70)
         }
         
         filterBtn = UIButton()
@@ -137,7 +135,7 @@ extension SupermarketHeaderView{
         filterImageBtn?.addTarget(self, action: #selector(filterBtnClick(_:)), for: .touchUpInside)
         filterView.addSubview(filterImageBtn!)
         filterImageBtn?.snp.makeConstraints { (make) in
-            make.right.equalTo(filterView.snp.right).offset(10)
+            make.right.equalTo(filterView.snp.right).offset(-10)
             make.centerY.equalTo(filterView.snp.centerY)
         }
         

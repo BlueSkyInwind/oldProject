@@ -49,6 +49,7 @@ extension HeaderInstructionsView {
         self.addSubview(instructionsLabel!)
         instructionsLabel?.snp.makeConstraints { (make) in
             make.left.equalTo((IconImageView?.snp.right)!).offset(11)
+            make.right.equalTo(self).offset(-10)
             make.centerY.equalTo(self.snp.centerY)
         }
     }

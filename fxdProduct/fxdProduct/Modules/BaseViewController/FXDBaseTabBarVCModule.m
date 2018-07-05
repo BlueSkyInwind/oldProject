@@ -92,12 +92,12 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:isSuperMark object:nil];
     }
     
-//    if (tabBarController.selectedIndex == 2) {
-//        if ([FXD_Utility sharedUtility].loginFlage) {
-//        } else {
-//            [self presentLogin:self];
-//        }
-//    }
+    if (tabBarController.selectedIndex == 3) {
+        if ([FXD_Utility sharedUtility].loginFlage) {
+        } else {
+            [self presentLogin:self];
+        }
+    }
 }
 
 - (void)presentLogin:(UIViewController *)vc

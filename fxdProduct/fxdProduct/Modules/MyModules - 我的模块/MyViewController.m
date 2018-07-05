@@ -183,24 +183,24 @@
 /**
  获取个人中心优惠券的个数
  */
--(void)getPersonalCenterInfo{
-
-    CashViewModel *cashVM = [[CashViewModel alloc]init];
-    [cashVM setBlockWithReturnBlock:^(id returnValue) {
-        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        if ([baseResultM.errCode isEqualToString:@"0"]) {
-            PersonalCenterModel *model = [[PersonalCenterModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-//            _middleView.couponNumLabel.text = model.voucherNum;
-//            _middleView.couponNumLabel.hidden = false;
-//            _middleView.couponImageView.hidden = false;
-        }else{
-            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
-        }
-    } WithFaileBlock:^{
-        
-    }];
-    [cashVM getPersonalCenterInfo];
-}
+//-(void)getPersonalCenterInfo{
+//
+//    CashViewModel *cashVM = [[CashViewModel alloc]init];
+//    [cashVM setBlockWithReturnBlock:^(id returnValue) {
+//        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
+//        if ([baseResultM.errCode isEqualToString:@"0"]) {
+//            PersonalCenterModel *model = [[PersonalCenterModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+////            _middleView.couponNumLabel.text = model.voucherNum;
+////            _middleView.couponNumLabel.hidden = false;
+////            _middleView.couponImageView.hidden = false;
+//        }else{
+//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
+//        }
+//    } WithFaileBlock:^{
+//
+//    }];
+//    [cashVM getPersonalCenterInfo];
+//}
 
 -(void)viewDidDisappear:(BOOL)animated{
 

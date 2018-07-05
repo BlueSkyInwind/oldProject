@@ -96,7 +96,7 @@ extension FXD_displayAmountCommonHeaderView{
         titleLabel = UILabel()
         titleLabel?.textColor = UIColor.white
         titleLabel?.textAlignment = NSTextAlignment.center
-        titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
+        titleLabel?.font = UIFont.systemFont(ofSize: 17)
         backGroundImage?.addSubview(titleLabel!)
         titleLabel?.snp.makeConstraints({ (make) in
             make.centerX.equalTo((backGroundImage?.snp.centerX)!)

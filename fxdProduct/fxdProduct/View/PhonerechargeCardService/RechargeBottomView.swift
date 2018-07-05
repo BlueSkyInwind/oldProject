@@ -54,7 +54,7 @@ extension RechargeBottomView {
     func setUpUI()  {
         rechargeBtn = UIButton.init(type: UIButtonType.custom)
         rechargeBtn?.setBackgroundImage(UIImage.init(named: "recharge_button_card"), for: UIControlState.normal)
-        rechargeBtn?.setTitleColor(UIColor.black, for: UIControlState.normal)
+        rechargeBtn?.setTitleColor(UIColor.white, for: UIControlState.normal)
         rechargeBtn?.setTitle("手机充值", for: UIControlState.normal)
         rechargeBtn?.changeTitleTopInsets(4)
         rechargeBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 16)
@@ -69,7 +69,7 @@ extension RechargeBottomView {
         rechargeTransferBtn?.setBackgroundImage(UIImage.init(named: "recharge_button_card"), for: UIControlState.normal)
         rechargeTransferBtn?.setTitle("充值卡转让", for: UIControlState.normal)
         rechargeTransferBtn?.changeTitleTopInsets(4)
-        rechargeTransferBtn?.setTitleColor(UIColor.black, for: UIControlState.normal)
+        rechargeTransferBtn?.setTitleColor(UIColor.white, for: UIControlState.normal)
         rechargeTransferBtn?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 16)
         rechargeTransferBtn?.addTarget(self, action: #selector(rechargeTransferBtnClick), for: UIControlEvents.touchUpInside)
         self.addSubview(rechargeTransferBtn!)

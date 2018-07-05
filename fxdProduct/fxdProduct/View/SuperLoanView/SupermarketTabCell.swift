@@ -117,6 +117,7 @@ extension SupermarketTabCell{
         quota.snp.makeConstraints { (make) in
             make.left.equalTo(lineView.snp.right).offset(30)
             make.top.equalTo(bgView.snp.top).offset(19)
+            make.height.equalTo(20)
         }
         
         quotaLabel = UILabel()
@@ -136,11 +137,12 @@ extension SupermarketTabCell{
         term.snp.makeConstraints { (make) in
             make.right.equalTo(bgView.snp.right).offset(-70)
             make.top.equalTo(quota.snp.top).offset(0)
+            make.height.equalTo(20)
         }
         
         termLabel = UILabel()
         termLabel?.textColor = SUPERMARK_TERM_COLOR
-        termLabel?.font = UIFont.systemFont(ofSize: 17)
+        termLabel?.font = UIFont.systemFont(ofSize: 15)
         bgView.addSubview(termLabel!)
         termLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(term.snp.left).offset(0)
