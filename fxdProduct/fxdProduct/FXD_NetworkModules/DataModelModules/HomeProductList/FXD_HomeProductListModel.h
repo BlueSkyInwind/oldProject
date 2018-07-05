@@ -37,6 +37,9 @@
 
 @end
 
+@protocol IndexMenuModel <NSObject>
+
+@end
 
 @interface DrawInfoModel : JSONModel
 
@@ -198,8 +201,27 @@
 //贷款、热门
 @property(nonatomic,strong)NSArray<PlatTypeModel,Optional> * platType;
 
+//
+@property(nonatomic,strong)NSArray<IndexMenuModel,Optional> * indexMenu;
+
 @end
 
+@interface IndexMenuModel : JSONModel
+
+//链接地址
+@property (nonatomic, strong)NSString<Optional> *image;
+//链接地址
+@property (nonatomic, strong)NSString<Optional> *isLogin;
+//平台LOGO
+@property (nonatomic, strong)NSString<Optional> *isValid;
+//平台名称
+@property (nonatomic, strong)NSString<Optional> *sort_no_;
+//链接地址
+@property (nonatomic, strong)NSString<Optional> *title;
+//平台LOGO
+@property (nonatomic, strong)NSString<Optional> *toUrl;
+
+@end
 
 @interface HomeHotRecommendModel : JSONModel
 

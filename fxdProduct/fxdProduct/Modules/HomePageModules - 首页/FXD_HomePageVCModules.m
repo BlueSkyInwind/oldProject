@@ -541,13 +541,13 @@
 
 -(void)imageViewBtnClick:(UIButton *)sender{
     
-    PlatTypeModel *model = _homeProductList.platType[sender.tag - 101];
-    if (model.gatherUrl == nil) {
+    IndexMenuModel *model = _homeProductList.indexMenu[sender.tag - 101];
+    if (model.toUrl == nil) {
         
         self.tabBarController.selectedIndex = 3;
     }else{
         FXDWebViewController *controller = [[FXDWebViewController alloc]init];
-        controller.urlStr = model.gatherUrl;
+        controller.urlStr = model.toUrl;
         [self.navigationController pushViewController:controller animated:true];
     }
 }
