@@ -34,7 +34,7 @@ extension NonePageView{
      func ReminderUI(){
         
         let imageView = UIImageView()
-        imageView.image = UIImage(named:"5_shenhe_icon_03")
+        imageView.image = UIImage(named:"none_icon")
         self.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)
@@ -55,7 +55,7 @@ extension NonePageView{
     func DefaultUI(){
         
         let imageView = UIImageView()
-        imageView.image = UIImage(named:"my-logo")
+        imageView.image = UIImage(named:"none_icon")
         self.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)

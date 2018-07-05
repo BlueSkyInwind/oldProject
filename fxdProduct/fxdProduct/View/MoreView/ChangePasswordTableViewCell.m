@@ -75,6 +75,15 @@
         
     }];
     
+    if (UI_IS_IPHONEX) {
+        [self.contentTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.backView.mas_left).with.offset(140);
+            make.right.equalTo(self.contentView.mas_right).with.offset(10);
+            make.centerY.equalTo(self.backView.mas_centerY);
+            make.height.equalTo(@30);
+        }];
+        
+    }
     //底部的线
     self.lineView  = [[UIView alloc]init];
     self.lineView.backgroundColor = rgb(242, 242, 242);

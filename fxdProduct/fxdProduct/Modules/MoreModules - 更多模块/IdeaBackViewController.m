@@ -17,6 +17,7 @@
 - (IBAction)submitBtn:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextView *foreTextview;
 @property (weak, nonatomic) IBOutlet UIButton *customerServiceBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ForeTextViewTop;
 
 @end
 
@@ -27,6 +28,10 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title=@"意见反馈";
     self.view.backgroundColor = rgb(242, 242, 242);
+    
+    if (UI_IS_IPHONEX) {
+        _ForeTextViewTop.constant = 120;
+    }
     [self addBackItem];
 }
 

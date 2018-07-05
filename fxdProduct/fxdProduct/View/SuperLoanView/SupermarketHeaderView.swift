@@ -100,6 +100,7 @@ extension SupermarketHeaderView{
         }
         
         let filterBgView = UIView()
+        filterBgView.isUserInteractionEnabled = true
         filterBgView.backgroundColor = UIColor.white
         self.addSubview(filterBgView)
         filterBgView.snp.makeConstraints { (make) in
@@ -110,6 +111,7 @@ extension SupermarketHeaderView{
         }
         
         let filterView = UIView()
+        filterView.isUserInteractionEnabled = true
         filterView.backgroundColor = .clear
         filterBgView.addSubview(filterView)
         filterView.snp.makeConstraints { (make) in

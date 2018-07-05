@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "叉-4.png",
+      "filename" : "叉-8.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "叉-4@2x.png",
+      "filename" : "叉-8@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "叉-4@3x.png",
+      "filename" : "叉-8@3x.png",
       "scale" : "3x"
     }
   ],

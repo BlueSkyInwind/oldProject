@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyCardsViewController">
             <connections>
                 <outlet property="imageView" destination="b6G-6V-wsl" id="Ekk-zs-6Vu"/>
+                <outlet property="tabViewTop" destination="Ud0-FX-sLl" id="LWO-pP-wnK"/>
                 <outlet property="tableView" destination="7jv-Db-cLm" id="Rtc-Yk-tHn"/>
                 <outlet property="tableview" destination="7jv-Db-cLm" id="3hT-Kn-1Rg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
