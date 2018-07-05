@@ -59,16 +59,12 @@ extension MineHeaderView{
         
         let type = Int(type)
         switch type {
-        case 7:
+        case 2:
             repayUI()
-        case 8:
+        case 3:
             repaymentConfirmationUI()
-        case 4:
+        case 1:
             normalUI()
-//        case .none:
-//            break
-//        case .some(_):
-//            break
         default:
             normalUI()
         }
@@ -89,6 +85,7 @@ extension MineHeaderView{
         }
         
         titleLabel = UILabel()
+        titleLabel?.text = "待还款"
         titleLabel?.textColor = UIColor.white
         titleLabel?.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(titleLabel!)
@@ -97,6 +94,12 @@ extension MineHeaderView{
             make.centerX.equalTo(self.snp.centerX)
         })
         
+        if UI_IS_IPHONEX {
+            titleLabel?.snp.remakeConstraints({ (make) in
+                make.top.equalTo(self).offset(45)
+                make.centerX.equalTo(self.snp.centerX)
+            })
+        }
         moneyLabel = UILabel()
         moneyLabel?.textColor = MINE_MONEY_COLOR
         moneyLabel?.font = UIFont.systemFont(ofSize: 20)
@@ -127,6 +130,7 @@ extension MineHeaderView{
         
         timeBtn = UIButton()
         timeBtn?.setBackgroundImage(UIImage.init(named: "timeBtn_icon"), for: .normal)
+        timeBtn?.isHidden = true
         timeBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         timeBtn?.setTitleColor(UIColor.init(red: 93/255.0, green: 141/255.0, blue: 250/255.0, alpha: 1.0), for: .normal)
         timeView.addSubview(timeBtn!)
@@ -138,6 +142,7 @@ extension MineHeaderView{
         bottomBtn = UIButton()
         bottomBtn?.titleLabel?.textAlignment = .center
         bottomBtn?.setTitleColor(UIColor.black, for: .normal)
+        bottomBtn?.isHidden = true
         bottomBtn?.setBackgroundImage(UIImage.init(named: "bottomBtn_icon"), for: .normal)
         bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         bottomBtn?.setTitle("立即还款", for: .normal)

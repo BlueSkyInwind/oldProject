@@ -56,7 +56,7 @@ extension MyBillCell{
         })
         
         arrowImage = UIImageView()
-        arrowImage?.image = UIImage.init(named: "arrow_icon")
+        arrowImage?.image = UIImage.init(named: "my_arrow_icon")
         self.addSubview(arrowImage!)
         arrowImage?.snp.makeConstraints({ (make) in
             make.right.equalTo(self).offset(-20)
