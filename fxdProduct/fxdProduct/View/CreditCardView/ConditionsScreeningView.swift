@@ -12,6 +12,7 @@ import UIKit
 let  LINE_NUM = 3
 let  VERTICAL_SEP = 24
 let  CROSS_SEP = 54
+let  CROSS_SEP_iphone5 = 40
 
 typealias ConditionsScreeningViewResult = (_ index:Int) -> Void
 typealias ConditionsScreeningViewOpen = (_ isOpen:Bool) -> Void
@@ -33,7 +34,8 @@ class ConditionsScreeningView: UIView {
     convenience init(frame: CGRect,_ arrary:Array<String>,_ superV:UIView,_ result:@escaping ConditionsScreeningViewResult,_ open:@escaping ConditionsScreeningViewOpen){
         var tempFarme = frame
         var height = tempFarme.size.height
-        height = (CGFloat(arrary.count / LINE_NUM) + 1) * (CGFloat(VERTICAL_SEP) + 26)
+        let lineNum = arrary.count % LINE_NUM != 0 ? (CGFloat(arrary.count / LINE_NUM) + 1) : CGFloat(arrary.count / LINE_NUM)
+        height = lineNum * (CGFloat(VERTICAL_SEP) + 26)
         tempFarme.size.height = height
         var initFrame = tempFarme
         initFrame.origin.y  =  -height
@@ -98,6 +100,11 @@ extension ConditionsScreeningView {
     
     func configureView()  {
         
+        var  cross_sep_ = CROSS_SEP
+        if UI_IS_IPONE5 {
+            cross_sep_ = CROSS_SEP_iphone5
+        }
+        
         for index in 0..<(dataArr?.count)! {
             let buttonHeight = 26
             let buttonWidth = _k_w * 0.2
@@ -110,12 +117,15 @@ extension ConditionsScreeningView {
                 conButton.backgroundColor = UI_MAIN_COLOR
             }
             conButton.frame = CGRect.init(x: 0, y: 0, width: Int(buttonWidth), height: buttonHeight)
-            let sepX = CGFloat(num) * (CGFloat(CROSS_SEP) + buttonWidth)
+            let sepX = CGFloat(num) * (CGFloat(cross_sep_) + buttonWidth)
             let sepY =  lineNum * (VERTICAL_SEP + buttonHeight)
-            let centerX = (CGFloat(CROSS_SEP / 2) + buttonWidth / 2) + sepX
+            let centerX = (CGFloat(cross_sep_ / 2) + buttonWidth / 2) + sepX
             let centerY = CGFloat((VERTICAL_SEP / 2 + buttonHeight / 2) + sepY)
             conButton.center = CGPoint.init(x: centerX, y: centerY)
             conButton.setTitleColor("4d4d4d".uiColor(), for: UIControlState.normal)
+            if currentIndex == index {
+                conButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+            }
             conButton.setTitle(string, for: UIControlState.normal)
             conButton.titleLabel?.font = UIFont.yx_systemFont(ofSize: 13)
             conButton.layer.cornerRadius = 5
@@ -156,7 +166,8 @@ extension ConditionsScreeningView {
             }
         }
         var frame = self.frame
-        let height = (CGFloat(dataArr!.count / LINE_NUM) + 1) * (CGFloat(VERTICAL_SEP) + 26)
+        let lineNum = dataArr!.count % LINE_NUM != 0 ? (CGFloat(dataArr!.count / LINE_NUM) + 1) : CGFloat(dataArr!.count / LINE_NUM)
+        let height = lineNum * (CGFloat(VERTICAL_SEP) + 26)
         frame.size.height = height
         originFrame?.origin.y = -height
         originFrame?.size.height = height

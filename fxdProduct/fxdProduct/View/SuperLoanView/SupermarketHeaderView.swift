@@ -60,7 +60,7 @@ extension SupermarketHeaderView{
         }
         
         let sortView = UIView()
-        sortView.backgroundColor = .red
+        sortView.backgroundColor = .clear
         sortBgView.addSubview(sortView)
         sortView.snp.makeConstraints { (make) in
             make.centerX.equalTo(sortBgView.snp.centerX)

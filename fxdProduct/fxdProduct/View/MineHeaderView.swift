@@ -114,7 +114,7 @@ extension MineHeaderView{
         self.addSubview(timeView)
         timeView.snp.makeConstraints { (make) in
             make.top.equalTo((moneyLabel?.snp.bottom)!).offset(10)
-            make.width.equalTo(200)
+            make.width.equalTo(210)
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(20)
         }
@@ -137,6 +137,7 @@ extension MineHeaderView{
         timeBtn?.snp.makeConstraints({ (make) in
             make.left.equalTo((dateLabel?.snp.right)!).offset(14)
             make.centerY.equalTo(timeView.snp.centerY)
+            make.width.equalTo(70)
         })
         
         bottomBtn = UIButton()
@@ -145,13 +146,24 @@ extension MineHeaderView{
         bottomBtn?.isHidden = true
         bottomBtn?.setBackgroundImage(UIImage.init(named: "bottomBtn_icon"), for: .normal)
         bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        bottomBtn?.setTitle("立即还款", for: .normal)
+//        bottomBtn?.setTitle("立即还款", for: .normal)
         bottomBtn?.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
         self.addSubview(bottomBtn!)
         bottomBtn?.snp.makeConstraints({ (make) in
             make.bottom.equalTo(self).offset(-14)
             make.centerX.equalTo(self.snp.centerX)
         })
+        
+        let bottomLabel = UILabel()
+        bottomLabel.text = "立即还款"
+        bottomLabel.textColor = UIColor.black
+        bottomLabel.font = UIFont.systemFont(ofSize: 14)
+        bottomBtn?.addSubview(bottomLabel)
+        bottomLabel.snp.makeConstraints { (make) in
+            make.top.equalTo((bottomBtn?.snp.top)!).offset(5)
+            make.centerX.equalTo((bottomBtn?.snp.centerX)!)
+        }
+        
         
     }
     
@@ -209,7 +221,7 @@ extension MineHeaderView{
         }
         
         bottomBtn = UIButton()
-        bottomBtn?.setTitle("查看", for: .normal)
+//        bottomBtn?.setTitle("查看", for: .normal)
         bottomBtn?.setTitleColor(UIColor.black, for: .normal)
         bottomBtn?.setBackgroundImage(UIImage.init(named: "bottomBtn_icon"), for: .normal)
         bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
@@ -219,6 +231,16 @@ extension MineHeaderView{
             make.bottom.equalTo(self).offset(-25)
             make.centerX.equalTo(self.snp.centerX)
         })
+        
+        let bottomLabel = UILabel()
+        bottomLabel.text = "查看"
+        bottomLabel.textColor = UIColor.black
+        bottomLabel.font = UIFont.systemFont(ofSize: 14)
+        bottomBtn?.addSubview(bottomLabel)
+        bottomLabel.snp.makeConstraints { (make) in
+            make.top.equalTo((bottomBtn?.snp.top)!).offset(5)
+            make.centerX.equalTo((bottomBtn?.snp.centerX)!)
+        }
     }
     
     

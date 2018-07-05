@@ -163,7 +163,11 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15
+        
+        if section == 1 {
+            return 15
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

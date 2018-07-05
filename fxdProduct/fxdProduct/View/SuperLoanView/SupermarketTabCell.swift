@@ -142,11 +142,11 @@ extension SupermarketTabCell{
         
         termLabel = UILabel()
         termLabel?.textColor = SUPERMARK_TERM_COLOR
-        termLabel?.font = UIFont.systemFont(ofSize: 15)
+        termLabel?.font = UIFont.systemFont(ofSize: 14)
         bgView.addSubview(termLabel!)
         termLabel?.snp.makeConstraints({ (make) in
             make.left.equalTo(term.snp.left).offset(0)
-            make.top.equalTo(term.snp.bottom).offset(5)
+            make.top.equalTo(term.snp.bottom).offset(9)
         })
         
         descLabel = UILabel()

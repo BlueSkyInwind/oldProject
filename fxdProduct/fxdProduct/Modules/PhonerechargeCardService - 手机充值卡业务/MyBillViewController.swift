@@ -44,7 +44,7 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.separatorStyle = .none
-        tableView?.backgroundColor = UIColor.clear
+        tableView?.backgroundColor = LINE_COLOR
         self.view.addSubview(tableView!)
         tableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self.view)
@@ -72,15 +72,26 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
                 self?.tableView?.isHidden = false
                 self?.repayModel = try! RepayListInfo.init(dictionary: baseResult.data as! [AnyHashable : Any])
                 self?.orderModel = self?.repayModel?.order
-                if self?.repayModel == nil || self?.orderModel == nil{
-                    
+                
+                if self?.repayModel?.debtRepayTotal == nil{
                     self?.noneView?.isHidden = false
                     self?.noneView?.noneDesc?.text = "账单都被消灭啦"
                     self?.tableView?.isHidden = true
+                    
                 }else{
+                    
                     self?.orderModel = self?.repayModel?.order
                     self?.tableView?.reloadData()
                 }
+//                if self?.repayModel == nil || self?.orderModel == nil{
+//
+//                    self?.noneView?.isHidden = false
+//                    self?.noneView?.noneDesc?.text = "账单都被消灭啦"
+//                    self?.tableView?.isHidden = true
+//                }else{
+//                    self?.orderModel = self?.repayModel?.order
+//                    self?.tableView?.reloadData()
+//                }
             }else{
                 self?.noneView?.isHidden = false
                 self?.noneView?.noneDesc?.text = baseResult.friendErrMsg
@@ -96,6 +107,9 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     func numberOfSections(in tableView: UITableView) -> Int {
         if repayModel == nil {
             return 0
+        }
+        if orderModel == nil{
+            return 1
         }
         return 2
     }
@@ -211,7 +225,7 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             if Int((repayModel?.maxOverdueDays)!)! > 0{
                 
                 cell.overdueView?.isHidden = false
-                cell.overdueDateLabel?.text = "已逾期" + (repayModel?.maxOverdueDays)! + "天"
+                cell.overdueDateLabel?.text = "逾期" + (repayModel?.maxOverdueDays)! + "天"
             }
             return cell!
         }
@@ -264,6 +278,9 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
+        if repayModel?.debtRepayTotal != nil && orderModel == nil {
+            return 150
+        }
         if section == 1 && repayModel?.isPending != "1"{
             return 150
         }

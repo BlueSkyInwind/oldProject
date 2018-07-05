@@ -138,9 +138,9 @@
 
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithTitle:@"使用帮助" style:UIBarButtonItemStylePlain target:self action:@selector(goHelpVCClick)];
     self.navigationItem.rightBarButtonItem = aBarbi;
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil] forState:UIControlStateNormal];
-    
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:13],NSFontAttributeName,nil] forState:UIControlStateNormal];
+//    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13],NSFontAttributeName, nil] forState:UIControlStateNormal];
+
 }
 
 #pragma mark 点击使用帮助按钮
@@ -167,12 +167,12 @@
 {
     self.view.backgroundColor = kUIColorFromRGB(0xf5f6fa);
     NoneView =[[UIView alloc]init];
-    NoneView.backgroundColor = kUIColorFromRGB(0xf5f6fa);
+    NoneView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     [self.view addSubview:NoneView];
     [NoneView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).with.offset(64);
         make.left.right.equalTo(self.view).with.offset(0);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-80);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
     
     UIImageView *logoImg=[[UIImageView alloc]init];

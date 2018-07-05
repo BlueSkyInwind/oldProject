@@ -35,14 +35,14 @@
     _identifierSelect = identifierSelect;
     if (identifierSelect) {
         [_numberOfIdentifier setHidden:YES];
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"repay_circle_selt@2x" ofType:@"png"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"repay_selt@2x" ofType:@"png"];
         UIImage *image = [UIImage imageWithContentsOfFile:path];
         _identifierView.layer.contents = (id)image.CGImage;
     } else {
         [_numberOfIdentifier setHidden:NO];
         if (_displayStyle == RepayCellDetail) {
             if (![_situation.status_ isEqualToString:@"1"]) {
-                NSString *path = [[NSBundle mainBundle] pathForResource:@"repay_circle_un@2x" ofType:@"png"];
+                NSString *path = [[NSBundle mainBundle] pathForResource:@"repay_un@2x" ofType:@"png"];
                 UIImage *image = [UIImage imageWithContentsOfFile:path];
                 _identifierView.layer.contents = (id)image.CGImage;
             }else {
@@ -50,7 +50,7 @@
                 _identifierView.layer.contents = (id)image.CGImage;
             }
         }else{
-            NSString *path = [[NSBundle mainBundle] pathForResource:@"repay_circle_un@2x" ofType:@"png"];
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"repay_un@2x" ofType:@"png"];
             UIImage *image = [UIImage imageWithContentsOfFile:path];
             _identifierView.layer.contents = (id)image.CGImage;
         }

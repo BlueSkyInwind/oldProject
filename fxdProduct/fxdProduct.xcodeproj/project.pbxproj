@@ -1106,6 +1106,14 @@
 		CCC1E4072057EC7D007C9C07 /* ChangeBankCardParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */; };
 		CCC1E40E205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
 		CCC1E40F205A595F007C9C07 /* ActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC1E40D205A595F007C9C07 /* ActiveModel.m */; };
+		CCC20BFE20EE2AC6002A6A28 /* repay_selt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CCC20BFC20EE2AC5002A6A28 /* repay_selt@2x.png */; };
+		CCC20BFF20EE2AC6002A6A28 /* repay_selt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CCC20BFC20EE2AC5002A6A28 /* repay_selt@2x.png */; };
+		CCC20C0020EE2AC6002A6A28 /* repay_selt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CCC20BFD20EE2AC5002A6A28 /* repay_selt@3x.png */; };
+		CCC20C0120EE2AC6002A6A28 /* repay_selt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CCC20BFD20EE2AC5002A6A28 /* repay_selt@3x.png */; };
+		CCC20C0420EE2AF0002A6A28 /* repay_un@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CCC20C0220EE2AEF002A6A28 /* repay_un@3x.png */; };
+		CCC20C0520EE2AF0002A6A28 /* repay_un@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CCC20C0220EE2AEF002A6A28 /* repay_un@3x.png */; };
+		CCC20C0620EE2AF0002A6A28 /* repay_un@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CCC20C0320EE2AF0002A6A28 /* repay_un@2x.png */; };
+		CCC20C0720EE2AF0002A6A28 /* repay_un@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CCC20C0320EE2AF0002A6A28 /* repay_un@2x.png */; };
 		CCC5DE3520C65C38002A7553 /* MyBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC5DE3420C65C38002A7553 /* MyBillViewController.swift */; };
 		CCC5DE3620C65C38002A7553 /* MyBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC5DE3420C65C38002A7553 /* MyBillViewController.swift */; };
 		CCC5DE3820C65CF3002A7553 /* MyBillAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC5DE3720C65CF3002A7553 /* MyBillAmountCell.swift */; };
@@ -2081,6 +2089,10 @@
 		CCC1E4052057EC7D007C9C07 /* ChangeBankCardParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeBankCardParamModel.m; sourceTree = "<group>"; };
 		CCC1E40C205A595F007C9C07 /* ActiveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveModel.h; sourceTree = "<group>"; };
 		CCC1E40D205A595F007C9C07 /* ActiveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveModel.m; sourceTree = "<group>"; };
+		CCC20BFC20EE2AC5002A6A28 /* repay_selt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_selt@2x.png"; sourceTree = "<group>"; };
+		CCC20BFD20EE2AC5002A6A28 /* repay_selt@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_selt@3x.png"; sourceTree = "<group>"; };
+		CCC20C0220EE2AEF002A6A28 /* repay_un@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_un@3x.png"; sourceTree = "<group>"; };
+		CCC20C0320EE2AF0002A6A28 /* repay_un@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repay_un@2x.png"; sourceTree = "<group>"; };
 		CCC5DE3420C65C38002A7553 /* MyBillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillViewController.swift; sourceTree = "<group>"; };
 		CCC5DE3720C65CF3002A7553 /* MyBillAmountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBillAmountCell.swift; sourceTree = "<group>"; };
 		CCC9FB64207A140C00B952BD /* SuperLoanHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLoanHeaderView.swift; sourceTree = "<group>"; };
@@ -4013,6 +4025,10 @@
 		84C619911FA8149700626411 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CCC20C0320EE2AF0002A6A28 /* repay_un@2x.png */,
+				CCC20C0220EE2AEF002A6A28 /* repay_un@3x.png */,
+				CCC20BFC20EE2AC5002A6A28 /* repay_selt@2x.png */,
+				CCC20BFD20EE2AC5002A6A28 /* repay_selt@3x.png */,
 				84D2B80920A1B4A800142206 /* repay_circle_selt@2x.png */,
 				84D2B80C20A1B4AE00142206 /* repay_circle_selt@3x.png */,
 				84C619941FA8149700626411 /* repay_circle_un@2x.png */,
@@ -4670,9 +4686,11 @@
 				84C61A001FA81E7000626411 /* LoanPeriodListVCModule.xib in Resources */,
 				84C61A011FA81E7000626411 /* BankListCell.xib in Resources */,
 				84C61A021FA81E7000626411 /* DetailRepayHeader.xib in Resources */,
+				CCC20C0020EE2AC6002A6A28 /* repay_selt@3x.png in Resources */,
 				84C61A041FA81E7000626411 /* PayMethodCell.xib in Resources */,
 				84A3801C1FAC1D8D008FB7AF /* UserIdentityInformationVCModules.xib in Resources */,
 				84C61A051FA81E7000626411 /* PayMoneyCell.xib in Resources */,
+				CCC20BFE20EE2AC6002A6A28 /* repay_selt@2x.png in Resources */,
 				84C61A071FA81E7000626411 /* RepayListCell.xib in Resources */,
 				841A48E21FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib in Resources */,
 				84192A9C2079B3290042E8F8 /* MemberCenterHeaderView.xib in Resources */,
@@ -4681,6 +4699,7 @@
 				84114B3D20721923005A1DC9 /* YXLibraryResource.bundle in Resources */,
 				84A380321FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib in Resources */,
 				84ED5B5C1F4AB9E7004C0A59 /* mx_finish@2x.png in Resources */,
+				CCC20C0420EE2AF0002A6A28 /* repay_un@3x.png in Resources */,
 				1AE5E6251C1EA5240099CCA0 /* AboutMainViewController.xib in Resources */,
 				633DAC081C34D47A000DA852 /* RegViewController.xib in Resources */,
 				63FF484B1B6F036F009E384C /* MyViewController.xib in Resources */,
@@ -4701,6 +4720,7 @@
 				84C6B09720DA36F7008BD264 /* CreaditCardTableViewCell.xib in Resources */,
 				84EBE9DF20C7B1210045F538 /* OrderConfirmDetailCell.xib in Resources */,
 				CC0346271F3C4CB8001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */,
+				CCC20C0620EE2AF0002A6A28 /* repay_un@2x.png in Resources */,
 				0F6AAF3A1C30D8950060F137 /* MyCardCell.xib in Resources */,
 				636FF3491BA27C9800BB5528 /* Address.plist in Resources */,
 				84EBE9FD20C8D4C50045F538 /* CardNumAndPasswordCell.xib in Resources */,
@@ -4753,9 +4773,11 @@
 				84C619EC1FA81D3E00626411 /* LoanPeriodListVCModule.xib in Resources */,
 				84C619ED1FA81D3E00626411 /* BankListCell.xib in Resources */,
 				84C619EE1FA81D3E00626411 /* DetailRepayHeader.xib in Resources */,
+				CCC20C0120EE2AC6002A6A28 /* repay_selt@3x.png in Resources */,
 				84C619F01FA81D3E00626411 /* PayMethodCell.xib in Resources */,
 				84A3801D1FAC1D8D008FB7AF /* UserIdentityInformationVCModules.xib in Resources */,
 				84C619F11FA81D3E00626411 /* PayMoneyCell.xib in Resources */,
+				CCC20BFF20EE2AC6002A6A28 /* repay_selt@2x.png in Resources */,
 				84C619F31FA81D3E00626411 /* RepayListCell.xib in Resources */,
 				841A48E31FF22D8700BF5C48 /* FXD_ToWithDrawFundsTableViewCell.xib in Resources */,
 				84192A9D2079B3290042E8F8 /* MemberCenterHeaderView.xib in Resources */,
@@ -4764,6 +4786,7 @@
 				84114B3E20721923005A1DC9 /* YXLibraryResource.bundle in Resources */,
 				84A380331FAC40A2008FB7AF /* UserDataAuthenticationListVCModules.xib in Resources */,
 				CC0DFB191EA5B1090024841A /* CheckViewIng.xib in Resources */,
+				CCC20C0520EE2AF0002A6A28 /* repay_un@3x.png in Resources */,
 				CC0DFB1A1EA5B1090024841A /* Images.xcassets in Resources */,
 				CC0DFB1C1EA5B1090024841A /* AboutMainViewController.xib in Resources */,
 				CC0DFB221EA5B1090024841A /* RegViewController.xib in Resources */,
@@ -4784,6 +4807,7 @@
 				84C6B09820DA36F7008BD264 /* CreaditCardTableViewCell.xib in Resources */,
 				84EBE9E020C7B1210045F538 /* OrderConfirmDetailCell.xib in Resources */,
 				84A37FF71FAC12A8008FB7AF /* ActivityHomePopView.xib in Resources */,
+				CCC20C0720EE2AF0002A6A28 /* repay_un@2x.png in Resources */,
 				CC0DFB461EA5B1090024841A /* MyCardCell.xib in Resources */,
 				CC0346281F3C4CDF001F6F3D /* HomepageActivityImageDisplayModule.xib in Resources */,
 				84EBE9FE20C8D4C50045F538 /* CardNumAndPasswordCell.xib in Resources */,

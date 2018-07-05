@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -34,12 +34,11 @@
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jbV-q8-Ya4">
                     <rect key="frame" x="15" y="586" width="345" height="50"/>
-                    <color key="backgroundColor" red="0.83137254901960778" green="0.6705882352941176" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="jbV-q8-Ya4" secondAttribute="height" multiplier="345:61" constant="62.213114754098342" id="NM2-GU-xkB"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                    <state key="normal" title="确认"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="确认" backgroundImage="btn_seleted_icon"/>
                     <connections>
                         <action selector="btnSureClick:" destination="-1" eventType="touchUpInside" id="4Bf-uR-SGD"/>
                     </connections>
@@ -57,4 +56,7 @@
             <point key="canvasLocation" x="439.5" y="341.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="btn_seleted_icon" width="239" height="40"/>
+    </resources>
 </document>

@@ -37,7 +37,7 @@ extension HomeHotCell{
         })
         
         nameLabel = UILabel()
-        nameLabel?.textColor = UIColor.black
+        nameLabel?.textColor = UIColor.init(red: 132/255.0, green: 132/255.0, blue: 132/255.0, alpha: 1.0)
         nameLabel?.font = UIFont.systemFont(ofSize: 14)
         self.addSubview(nameLabel!)
         nameLabel?.snp.makeConstraints({ (make) in

@@ -80,12 +80,12 @@
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             
             RepayListInfo *model = [[RepayListInfo alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-            OrderModel *orderModel = model.order;
-            if (orderModel == nil) {
+//            OrderModel *orderModel = model.order;
+            if (model.debtRepayTotal == nil) {
                 _headerView.type = @"1";
             }else{
                 
-                if (model.isPending) {
+                if ([model.isPending isEqualToString:@"1"]) {
                     
                     _headerView.type = @"3";
                 }else{

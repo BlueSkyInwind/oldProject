@@ -93,36 +93,44 @@ extension CreaditCardBottomCell {
     
     func getTableviewHeader() -> UIView  {
     
-        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 31))
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 50))
         view.backgroundColor = UIColor.white
         
-        let iconView = UIView()
-        iconView.backgroundColor = UI_MAIN_COLOR
-        view.addSubview(iconView)
-        iconView.snp.makeConstraints { (make) in
+        let iconImageView = UIImageView()
+        iconImageView.image = UIImage.init(named: "tuoyuan_icon")
+        view.addSubview(iconImageView)
+        iconImageView.snp.makeConstraints { (make) in
             make.left.equalTo(view.snp.left).offset(21)
-            make.top.equalTo(view.snp.top).offset(7)
-            make.bottom.equalTo(view.snp.bottom).offset(-7)
-            make.width.equalTo(3)
+            make.centerY.equalTo(view.snp.centerY)
         }
         
+//        let iconView = UIView()
+//        iconView.backgroundColor = UI_MAIN_COLOR
+//        view.addSubview(iconView)
+//        iconView.snp.makeConstraints { (make) in
+//            make.left.equalTo(view.snp.left).offset(21)
+//            make.top.equalTo(view.snp.top).offset(7)
+//            make.bottom.equalTo(view.snp.bottom).offset(-7)
+//            make.width.equalTo(3)
+//        }
+        
         let explainLabel = UILabel()
-        explainLabel.font = UIFont.systemFont(ofSize: 16)
+        explainLabel.font = UIFont.systemFont(ofSize: 17)
         explainLabel.textColor = "333333".uiColor()
         explainLabel.text = "热门信用卡"
         view.addSubview(explainLabel)
         explainLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(iconView.snp.right).offset(10)
+            make.left.equalTo(iconImageView.snp.right).offset(10)
             make.centerY.equalTo(view.snp.centerY)
         }
         
-        let sepView = UIView()
-        sepView.backgroundColor = "f2f2f2".uiColor()
-        view.addSubview(sepView)
-        sepView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(0)
-            make.height.equalTo(1)
-        }
+//        let sepView = UIView()
+//        sepView.backgroundColor = "f2f2f2".uiColor()
+//        view.addSubview(sepView)
+//        sepView.snp.makeConstraints { (make) in
+//            make.left.right.bottom.equalTo(0)
+//            make.height.equalTo(1)
+//        }
         
         return view
     }

@@ -116,6 +116,11 @@ extension AllCardHeaderView {
         itemViewOne = HeaderItemView.init(frame: CGRect.zero)
         itemViewOne?.titleBtn?.setTitle("全部银行", for: UIControlState.normal)
         itemViewOne?.itemClick = {[weak self] (button,isOpen) in
+            
+            self?.itemViewOne?.titleBtn?.setTitleColor(UI_MAIN_COLOR, for: UIControlState.normal)
+            self?.itemViewtTwo?.titleBtn?.setTitleColor("4D4D4D".uiColor(), for: UIControlState.normal)
+            self?.itemViewThree?.titleBtn?.setTitleColor("4D4D4D".uiColor(), for: UIControlState.normal)
+
             if isOpen {
                 self?.currentType = .bankType
                 self?.itemViewtTwo?.closeIcon(false)
@@ -126,6 +131,7 @@ extension AllCardHeaderView {
                 }
             }else{
                 self?.conView?.dismissAnimate()
+                self?.itemViewOne?.titleBtn?.setTitleColor("4D4D4D".uiColor(), for: UIControlState.normal)
             }
         }
         backView.addSubview(itemViewOne!)
@@ -147,6 +153,11 @@ extension AllCardHeaderView {
         itemViewtTwo = HeaderItemView.init(frame: CGRect.zero)
         itemViewtTwo?.titleBtn?.setTitle("全部等级", for: UIControlState.normal)
         itemViewtTwo?.itemClick = {[weak self] (button,isOpen) in
+            
+            self?.itemViewOne?.titleBtn?.setTitleColor("4D4D4D".uiColor(), for: UIControlState.normal)
+            self?.itemViewtTwo?.titleBtn?.setTitleColor(UI_MAIN_COLOR, for: UIControlState.normal)
+            self?.itemViewThree?.titleBtn?.setTitleColor("4D4D4D".uiColor(), for: UIControlState.normal)
+            
             if isOpen {
                 self?.currentType = .levelType
                 self?.itemViewOne?.closeIcon(false)
@@ -157,6 +168,7 @@ extension AllCardHeaderView {
                 }
             }else{
                 self?.conView?.dismissAnimate()
+                self?.itemViewtTwo?.titleBtn?.setTitleColor("4D4D4D".uiColor(), for: UIControlState.normal)
             }
         }
         backView.addSubview(itemViewtTwo!)
@@ -180,6 +192,11 @@ extension AllCardHeaderView {
         itemViewThree?.titleBtn?.setTitle("申请人数", for: UIControlState.normal)
         itemViewThree?.iconView?.image = UIImage.init(named: "twoWay_Icon")
         itemViewThree?.itemClick = {[weak self] (button,isOpen) in
+            
+            self?.itemViewOne?.titleBtn?.setTitleColor("4D4D4D".uiColor(), for: UIControlState.normal)
+            self?.itemViewtTwo?.titleBtn?.setTitleColor("4D4D4D".uiColor(), for: UIControlState.normal)
+            self?.itemViewThree?.titleBtn?.setTitleColor(UI_MAIN_COLOR, for: UIControlState.normal)
+            
             self?.currentType = .sortType
             self?.itemViewtTwo?.closeIcon(false)
             self?.itemViewOne?.closeIcon(false)

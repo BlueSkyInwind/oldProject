@@ -71,7 +71,8 @@ extension HeaderItemView {
         titleBtn?.addTarget(self, action: #selector(titleBtnClick(sender:)), for: UIControlEvents.touchUpInside)
         self.addSubview(titleBtn!)
         titleBtn?.snp.makeConstraints({ (make) in
-            make.center.equalTo(self.snp.center)
+            make.centerY.equalTo(self.snp.centerY)
+            make.centerX.equalTo(self.snp.centerX).offset(-3)
         })
         
         iconView = UIImageView()
