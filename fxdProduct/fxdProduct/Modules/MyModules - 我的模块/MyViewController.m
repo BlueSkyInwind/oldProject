@@ -17,6 +17,8 @@
 #import "UITabBar+badge.h"
 #import "LoginViewController.h"
 #import "IdeaBackViewController.h"
+#import "RepayMentViewModel.h"
+#import "RepayListInfo.h"
 @interface MyViewController () <UITableViewDataSource,UITableViewDelegate,MineHeaderViewDelegate>
 {
     //标题数组
@@ -26,6 +28,7 @@
     AountStationLetterMsgModel *model;
     NSString *_h5_url_;
     FXD_HomeProductListModel *_homeProductModel;
+    NSInteger _type;
    
 }
 @property (strong, nonatomic) IBOutlet UITableView *MyViewTable;
@@ -64,47 +67,53 @@
         [self.MyViewTable reloadData];
     }
     
-    [self getData];
+    [self getRepayData];
 //    [self getPersonalCenterInfo];
 }
 
--(void)getData{
-    __weak typeof (self) weakSelf = self;
-    HomeViewModel * homeViewModel = [[HomeViewModel alloc]init];
-    [homeViewModel setBlockWithReturnBlock:^(id returnValue) {
+-(void)getRepayData{
+    
+    RepayMentViewModel *viewModel = [[RepayMentViewModel alloc]init];
+    [viewModel setBlockWithReturnBlock:^(id returnValue) {
         
-        BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
-        
-        _homeProductModel = [[FXD_HomeProductListModel alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+        BaseResultModel *baseResultM = (BaseResultModel*)returnValue;
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             
-            _headerView.type = _homeProductModel.flag;
-            if (_homeProductModel.repayInfo != nil) {
+            RepayListInfo *model = [[RepayListInfo alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
+            OrderModel *orderModel = model.order;
+            if (orderModel == nil) {
+                _headerView.type = @"1";
+            }else{
                 
-                _headerView.moneyLabel.text = [NSString stringWithFormat:@"%@元",_homeProductModel.repayInfo.repayAmount];
-                _headerView.dateLabel.text = [NSString stringWithFormat:@"还款日: %@",_homeProductModel.repayInfo.repayDate];;
-                [_headerView.timeBtn setTitle:@"14天后" forState:UIControlStateNormal];
-                [_headerView.timeBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+                if (model.isPending) {
+                    
+                    _headerView.type = @"3";
+                }else{
+                    
+                    _headerView.type = @"2";
+                    
+                    _headerView.timeBtn.hidden = false;
+                    _headerView.bottomBtn.hidden = false;
+                    _headerView.moneyLabel.text = [NSString stringWithFormat:@"%@元",model.debtRepayTotal];
+                    _headerView.dateLabel.text = [NSString stringWithFormat:@"还款日: %@",model.dueDate];;
+                    [_headerView.timeBtn setTitle:model.dueDateTip forState:UIControlStateNormal];
+                    
+                    [_headerView.timeBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
+                    if (model.maxOverdueDays.integerValue > 0) {
+                        
+                        [_headerView.timeBtn setTitleColor:UIColor.redColor forState:UIControlStateNormal];
+                    }
+                }
             }
             
-            if (_homeProductModel.overdueInfo != nil) {
-                
-                _headerView.moneyLabel.text = [NSString stringWithFormat:@"%@元",_homeProductModel.overdueInfo.repayAmount];
-                _headerView.dateLabel.text = [NSString stringWithFormat:@"还款日: %@",_homeProductModel.repayInfo.repayDate];;
-                [_headerView.timeBtn setTitle:[NSString stringWithFormat:@"%@天后",_homeProductModel.overdueInfo.overdueDays] forState:UIControlStateNormal];
-                [_headerView.timeBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-            }
-            
+            _type = _headerView.type.integerValue;
         }else{
-            
-            [[MBPAlertView sharedMBPTextView]showTextOnly:weakSelf.view message:baseResultM.friendErrMsg];
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message: baseResultM.friendErrMsg];
         }
-        
-        
     } WithFaileBlock:^{
-    
+        
     }];
-    [homeViewModel homeDataRequest];
+    [viewModel fatchQueryWeekShouldAlsoAmount:nil];
 }
 
 /**
@@ -114,8 +123,6 @@
     
     //添加自定义头部
     _headerView = [[MineHeaderView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 180)];
-    _headerView.type = @"1";
-    _headerView.titleLabel.text = @"待还款";
     _headerView.backgroundColor = [UIColor clearColor];
     _headerView.delegate = self;
     [self.view addSubview:_headerView];
@@ -125,18 +132,12 @@
 }
 
 -(void)bottomBtnClick{
-    switch (_homeProductModel.flag.integerValue) {
-        case 7:
+    switch (_type) {
+        case 2:
         {
             MyBillViewController *controller = [[MyBillViewController alloc]init];
             [self.navigationController pushViewController:controller animated:true];
         }
-            
-//            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:@"待还款"];
-            break;
-        case 1:
-            self.tabBarController.selectedIndex = 1;
-
             break;
         default:
             self.tabBarController.selectedIndex = 1;

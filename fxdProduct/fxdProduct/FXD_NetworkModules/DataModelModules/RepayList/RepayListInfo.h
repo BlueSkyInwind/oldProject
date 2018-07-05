@@ -74,6 +74,8 @@
 @property (nonatomic, strong) NSString<Optional> * debtRepayTotal;
 //最后还款日
 @property (nonatomic, strong) NSString<Optional> * dueDate;
+//最后还款日
+@property (nonatomic, strong) NSString<Optional> * dueDateTip;
 
 @property (nonatomic, strong) NSArray<Available_Redpackets,Optional> *available_redpackets_;
 //订单

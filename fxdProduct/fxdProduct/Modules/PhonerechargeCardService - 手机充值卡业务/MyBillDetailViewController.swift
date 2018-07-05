@@ -37,8 +37,6 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         useredPacketAmount = "0.0"
         chooseIndex = 0
         addBackItem()
-//        configureView()
-//        headerView()
         getBankCardsList()
         // Do any additional setup after loading the view.
         
@@ -211,8 +209,6 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         confirmBtn.addTarget(self, action: #selector(confirmBtnClick), for: .touchUpInside)
         footView.addSubview(confirmBtn)
         confirmBtn.snp.makeConstraints { (make) in
-//            make.left.equalTo(footView.snp.left).offset(20)
-//            make.right.equalTo(footView.snp.right).offset(-20)
             make.top.equalTo(footView.snp.top).offset(40)
             make.height.equalTo(40)
             make.width.equalTo(240)
@@ -398,7 +394,6 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         
         getInfo()
 
-//        fxdRepay()
     }
     
     func fxdRepay(){
@@ -443,9 +438,6 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
                     self.navigationController?.popToRootViewController(animated: true)
                 }
                 self.tabBarController?.selectedIndex = 0
-//                let controller = RepaymentResultViewController()
-//                controller.state = .intermediate
-//                self.navigationController?.pushViewController(controller, animated: true)
                 
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResultModel.friendErrMsg)
