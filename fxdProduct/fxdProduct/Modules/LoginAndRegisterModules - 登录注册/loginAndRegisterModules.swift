@@ -30,7 +30,6 @@ class loginAndRegisterModules: BaseViewController {
         self.title = "登录"
         self.addBackItem()
         configureView()
-        
     }
     
     override func popBack() {
@@ -121,20 +120,18 @@ class loginAndRegisterModules: BaseViewController {
     }
     
     func backMainVC()  {
-        self.dismiss(animated: true) {
-            let delegate = UIApplication.shared.delegate as! AppDelegate
-            delegate.btb.selectedIndex = 0
-        }
+        self.dismiss(animated: true, completion: nil)
     }
     
     func updateDevIDVC() {
         let updateIDVC = UpdateDeviceIdMoudles.init()
-        updateIDVC.phoneStr = loginView?.phoneNumberView?.inputTextField?.text
-        updateIDVC.passwordStr = loginView?.passwordView?.inputTextField?.text
+        updateIDVC.phoneStr = loginView?.phoneNumberView?.inputContent
+        updateIDVC.passwordStr = loginView?.passwordView?.inputContent
         self.navigationController?.pushViewController(updateIDVC, animated: true)
     }
 
     func pushForgetVC() {
+
         let forgetVC = ForgetPasswordMoudles.init()
 //        forgetVC.phoneStr
         self.navigationController?.pushViewController(forgetVC, animated: true)
@@ -264,7 +261,7 @@ extension loginAndRegisterModules {
             }else if baseModel.errCode == "1" {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.8, execute: {
                     //TODO 待处理
-                    
+                    self?.contentView?.loginAnimation()
                 })
             }
             MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseModel.friendErrMsg)

@@ -45,24 +45,35 @@ class LoginAndRegisterSlideView: UIView {
     @objc func loginButtonClick(sender:UIButton) {
         let button  = sender
         if button.isSelected == false {
-            self.registerButton?.isSelected = false
-            UIView.animate(withDuration: 0.2, delay: 0.1, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-                self.bottomView?.frame = CGRect.init(x: 0, y: 0, width: 65, height: 2)
-                self.loginView?.frame = CGRect.init(x: 0, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT))
-                self.registerView?.frame = CGRect.init(x: _k_w, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT))
-            }) { (status) in
-                
-            }
-            button.isSelected = !button.isSelected
-            if loginAndRegisterStatus != nil {
-                loginAndRegisterStatus!(true)
-            }
+            loginAnimation()
         }
     }
+    
+    
+    func loginAnimation()  {
+        self.registerButton?.isSelected = false
+        UIView.animate(withDuration: 0.2, delay: 0.1, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.bottomView?.frame = CGRect.init(x: 0, y: 0, width: 65, height: 2)
+            self.loginView?.frame = CGRect.init(x: 0, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT))
+            self.registerView?.frame = CGRect.init(x: _k_w, y: CGFloat(HEADER_TOP + HEADER_HEIGHT), width: _k_w, height: self.bounds.size.height - CGFloat(HEADER_TOP + HEADER_HEIGHT  + BOTTOM_HEIGHT))
+        }) { (status) in
+            
+        }
+        self.loginButton?.isSelected = !(self.loginButton?.isSelected)!
+        if loginAndRegisterStatus != nil {
+            loginAndRegisterStatus!(true)
+        }
+    }
+    
     
     @objc func registerButtonClick(sender:UIButton) {
         let button  = sender
         if button.isSelected == false {
+            registerAnimation()
+        }
+    }
+    
+    func registerAnimation()  {
             self.loginButton?.isSelected = false
             UIView.animate(withDuration: 0.2, delay: 0.1, options: UIViewAnimationOptions.curveEaseInOut, animations: {
                 self.bottomView?.frame = CGRect.init(x: (self.statusView?.bounds.size.width)! - 65, y: 0, width: 65, height: 2)
@@ -71,11 +82,10 @@ class LoginAndRegisterSlideView: UIView {
             }) { (status) in
                 
             }
-            button.isSelected = !button.isSelected
+            self.registerButton?.isSelected = !(self.registerButton?.isSelected)!
             if loginAndRegisterStatus != nil {
                 loginAndRegisterStatus!(false)
             }
-        }
     }
     
     /*

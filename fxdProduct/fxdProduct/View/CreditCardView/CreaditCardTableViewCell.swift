@@ -16,6 +16,8 @@ class CreaditCardTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cardType: UILabel!
     
+    @IBOutlet weak var cardTypeImage: UIImageView!
+    
     @IBOutlet weak var cardExplainLabel: UILabel!
     
     @IBOutlet weak var cardApplyNum: UILabel!
@@ -25,12 +27,7 @@ class CreaditCardTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        self.cardType.layer.cornerRadius = self.cardType.frame.size.height / 2
-        cardType.clipsToBounds = true
-        cardType.layer.borderWidth = 1
-        cardType.layer.borderColor = UI_MAIN_COLOR.cgColor
-        
+    
     }
     
     func setDataSource(_ model:CreaditCardListModel,_ isAdd:Bool)  {
@@ -42,7 +39,13 @@ class CreaditCardTableViewCell: UITableViewCell {
         }
 
         cardName.text = "\(model.cardName ?? "")"
-        cardType.text = "\(model.cardLevelName ?? "")"
+        let cardTypeStr = "\(model.cardLevel ?? "")"
+        if cardTypeStr == "2" {
+            cardTypeImage.image = UIImage.init(named: "gold_card_icon")
+        }else {
+            cardTypeImage.image = UIImage.init(named: "ordinary_card_icon")
+        }
+        
         cardExplainLabel.text = "\(model.cardHighlights ?? "")"
         if isAdd {
             cardApplyNum.text = "\(model.applicantsCount ?? "")" + "人申请"

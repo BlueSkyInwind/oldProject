@@ -16,6 +16,8 @@
 @interface FXDWebViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate>
 {
     UIProgressView *progressView;
+    
+    BOOL isHanfen;  //自家产品
 }
 @property (nonatomic, strong)WKWebView *webView;
 
@@ -25,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    isHanfen = false;
     self.view.backgroundColor = [UIColor whiteColor];
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     config.preferences = [[WKPreferences alloc] init];
@@ -51,25 +53,46 @@
     [self addBackItem];
     
     DLog(@"%@  --- %@",NSStringFromCGRect(_webView.frame),NSStringFromCGSize(_webView.scrollView.contentSize))
-    DLog(@"%@",_urlStr);
-
     _webView.scrollView.showsVerticalScrollIndicator = false;
-    _urlStr = [_urlStr stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if (_isZhima) {
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
-    }else{
-        //h5活动拼装url
-        if([_urlStr containsString:@"wxact"]){
-            _urlStr = [self assemblyUrl:_urlStr];
-        }
-       // [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
-        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
-    }
+    [self loadWebview];
+
     //webview添加KVO监听属性
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (isHanfen) {
+        [self loadWebview];
+    }
+}
+
+-(void)loadWebview{
+    NSString * requestUrlStr = [self generateRequestUrlString:_urlStr];
+    DLog(@"%@",requestUrlStr);
+    // [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[requestUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:requestUrlStr]]];
+}
+
+/**
+ 生成请求的url
+
+ @param str 原始url
+ @return 组装结果
+ */
+-(NSString *)generateRequestUrlString:(NSString *)str{
     
+    NSString * resultStr = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSURL  * mainUrl = [[NSURL alloc]initWithString:_main_new_url];
+    NSString * hostStr = mainUrl.host;
+    //h5拼装url
+    if([resultStr containsString:@"wxact"] || [resultStr containsString:hostStr] ){
+        isHanfen = true;
+        resultStr = [self assemblyUrl:resultStr];
+    }
+    return resultStr;
 }
 
 /**
@@ -80,36 +103,19 @@
     if ([urlStr containsString:@"?"]) {
         SplicingCharacter = @"&";
     }
+    
+    if ([urlStr containsString:@"juid"]) {
+        return urlStr;
+    }
+    
     NSString * juidStr = [FXD_Utility sharedUtility].userInfo.juid == nil ? @"" : [FXD_Utility sharedUtility].userInfo.juid;
     NSString * tokenStr = [FXD_Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [FXD_Utility sharedUtility].userInfo.tokenStr;
     NSString * phoneNumber = [FXD_Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [FXD_Utility sharedUtility].userInfo.userMobilePhone;
-    NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode];
-    NSString * resultStr = [urlStr stringByAppendingFormat:@"%@type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@",SplicingCharacter,@"0",juidStr,tokenStr,phoneNumber,invationCode];
+    NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode] == nil ? @"" : [FXD_Tool getContentWithKey:kInvitationCode];
+    NSString * resultStr = [urlStr stringByAppendingFormat:@"%@type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@&channel=%@&version=%@&platformType=%@",SplicingCharacter,@"0",juidStr,tokenStr,phoneNumber,invationCode,CHANNEL,[FXD_Tool getAppVersion],CODE_SERVICE_PLATFORM];
     return resultStr;
-    
 }
-
-- (void)addBackItem
-{
-    if (@available(iOS 11.0, *)) {
-        UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
-        //initWithTitle:@"消息" style:UIBarButtonItemStyleDone target:self action:@selector(click)];
-        self.navigationItem.leftBarButtonItem = aBarbi;
-        return;
-    }
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [btn setImage:img forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0, 0, 45, 44);
-    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
-    //修改距离,距离边缘的
-    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spaceItem.width = -15;
-    self.navigationItem.leftBarButtonItems = @[spaceItem,item];
-    self.navigationController.interactivePopGestureRecognizer.delegate=(id)self;
-}
-
+//重写父类方法
 - (void)popBack
 {
     if ([_webView canGoBack]) {
@@ -133,7 +139,6 @@
     }
     
     if (object == _webView && [keyPath isEqualToString:@"title"]) {
-        //        NSString *title = [[change objectForKey:NSKeyValueChangeNewKey] stringValue];
         NSString *title = _webView.title;
         if (title) {
             self.navigationItem.title = title;
@@ -142,6 +147,7 @@
     
     if (object == _webView && [keyPath isEqualToString:@"URL"]) {
         DLog(@"%@",_webView.URL.absoluteString);
+        _urlStr = _webView.URL.absoluteString;
     }
 }
 
@@ -208,6 +214,7 @@
             }
         }
          */
+        
         if ([[dic allKeys] containsObject:@"FXDPushVC"]) {
             NSDictionary * resultDic = dic[@"FXDPushVC"];
             NSString * viewControllerName =  resultDic[@"viewControllerName"];
@@ -251,7 +258,6 @@
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
     NSURLRequest *request = navigationAction.request;
-    
     NSLog(@"=========%@",request.URL.absoluteString);
     WKNavigationActionPolicy policy = WKNavigationActionPolicyAllow;
     /* 判断itunes的host链接 */
@@ -276,12 +282,13 @@
         }
     }
 }
+
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
     self.navigationItem.title = @"加载失败";
 }
+
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
-    
 //    NSString * paramStr = [[JSAndOCInteraction sharedInteraction] obtainLoginInfo];
     //调用js发送平台
     if([webView.URL.absoluteString containsString:@"fxd-pay-fe"]){
@@ -312,7 +319,6 @@
     completionHandler(@"");
 }
 -(WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
-    
     if (!navigationAction.targetFrame.isMainFrame) {
         [webView loadRequest:navigationAction.request];
     }

@@ -98,8 +98,8 @@
 
  @param viewControllerName 视图名称  :
  
-            RepayRecordController  借款记录，
-            MyCardsViewController 银行卡，
+            MyOrdersViewController 我的订单
+            MyCardsViewController 银行卡列表，
             InvitationViewController  邀请好友，
             DiscountTicketController  我的红包，
             IdeaBackViewController  意见反馈，
@@ -107,7 +107,8 @@
             ServiceHotline  服务热线，
             ChangePasswordViewController  修改密码，
             AboutMainViewController  关于我们，
-            LoginViewController  登录
+            loginAndRegisterModules  登录
+            UserDataAuthenticationListVCModules 资料完善
  
  @param currentVC 当前VC
  */
@@ -123,7 +124,7 @@
         return;
     }
     
-    if (![FXD_Utility sharedUtility].loginFlage || [viewControllerName isEqualToString:@"LoginViewController"]) {
+    if (![FXD_Utility sharedUtility].loginFlage || [viewControllerName isEqualToString:@"loginAndRegisterModules"]) {
         [self presentLogin:currentVC];
         return;
     }
@@ -228,10 +229,10 @@
             [FXD_Utility EmptyData];
         }
         
-        dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
-        dispatch_after(delayTime, dispatch_get_main_queue(), ^{
-            [vc.navigationController popToRootViewControllerAnimated:YES];
-        });
+//        dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0/*延迟执行时间*/ * NSEC_PER_SEC));
+//        dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+//            [vc.navigationController popToRootViewControllerAnimated:YES];
+//        });
         
         loginAndRegisterModules *myMessageVC=[[loginAndRegisterModules alloc]init];
         BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:myMessageVC];
@@ -285,7 +286,7 @@
 }
 
 -(BaseNavigationViewController *)jumpVC{
-    id currentVC = [[FXD_Tool share]topViewController];
+    id currentVC = [[FXD_Tool share] topViewController];
     BaseNavigationViewController * BaseNavigationVC;
     if ([currentVC isKindOfClass:[FXDBaseTabBarVCModule class]]) {
         FXDBaseTabBarVCModule * baseTabVC = currentVC;

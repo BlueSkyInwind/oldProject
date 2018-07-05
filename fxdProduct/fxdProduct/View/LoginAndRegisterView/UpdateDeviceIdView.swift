@@ -36,14 +36,28 @@ class UpdateDeviceIdView: UIView {
     }
     
     func addSignal()  {
+    
+        let validVerifyCodeSignal = verifyCodeView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
+            (text?.count)! > 3  ? true : false
+        })
         
         let validUserNameSignal = phoneNumberView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
             return FXD_Tool.checkMoblieNumber(text)
         })
-
-        let validVerifyCodeSignal = verifyCodeView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
-            (text?.count)! > 3  ? true : false
-        })
+        
+        let (signalA, observerA) = Signal<Bool, NoError>.pipe()
+        let validVerifyBtnSignal = Signal.combineLatest(validUserNameSignal!,signalA)
+        validVerifyBtnSignal.map { (isVaildUserName,isVaild) -> Bool in
+            return isVaildUserName && isVaild
+            }.observeValues {[weak self] (isVaild) in
+                if isVaild {
+                    self?.verifyCodeView?.rightButton?.backgroundColor = UI_MAIN_COLOR
+                    self?.verifyCodeView?.rightButton?.isEnabled = true
+                }else{
+                    self?.verifyCodeView?.rightButton?.backgroundColor = UIColor.lightGray
+                    self?.verifyCodeView?.rightButton?.isEnabled = false
+                }
+        }
         
         let validForgetBtnSignal = Signal.combineLatest(validUserNameSignal!,validVerifyCodeSignal!)
         validForgetBtnSignal.map { (isVaildUserName,isVaildVerifyCode) -> Bool in
@@ -55,6 +69,9 @@ class UpdateDeviceIdView: UIView {
                     self?.updateButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
                 }
         }
+        
+        observerA.send(value: true)
+        observerA.sendCompleted()
     }
     
     /*
@@ -101,7 +118,6 @@ extension UpdateDeviceIdView {
         verifyCodeView = GeneralInputView.init(.Verify_Code)
         verifyCodeView?.inputTextField?.placeholder = "请输入验证码"
         verifyCodeView?.iconImageView?.image = UIImage.init(named: "1_Signin_icon_02")
-        verifyCodeView?.isHidden = true
         self.addSubview(verifyCodeView!)
         verifyCodeView?.snp.makeConstraints({ (make) in
             make.centerX.equalTo(self.snp.centerX)
