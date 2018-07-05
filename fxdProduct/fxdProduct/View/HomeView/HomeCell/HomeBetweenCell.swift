@@ -65,9 +65,12 @@ extension HomeBetweenCell{
             make.right.equalTo(self).offset(0)
             make.bottom.equalTo(self).offset(0)
         }
+        if homeProductListModel.indexMenu == nil {
+            return
+        }
         
-        for index in 0..<4 {
-            if homeProductListModel.platType == nil || (index > homeProductListModel.platType.count){
+        for index in 0..<homeProductListModel.indexMenu.count {
+            if index > 3{
                 return
             }
             let view = setView()
@@ -77,12 +80,12 @@ extension HomeBetweenCell{
             let x = (_k_w / 4) * i
             titleImageViewBtn?.tag = 101 + index
             
-            let model = homeProductListModel.platType[index] as! PlatTypeModel
+            let model = homeProductListModel.indexMenu[index] as! IndexMenuModel
             
-            let url = URL(string: model.gatherLog)
+            let url = URL(string: model.image)
             
             titleImageViewBtn?.sd_setImage(with: url, for: .normal, completed: nil)
-            titleLabel?.text = model.gatherTitle
+            titleLabel?.text = model.title
             view.snp.makeConstraints { (make) in
                 make.left.equalTo(self).offset(x)
                 make.top.equalTo(self).offset(0)
