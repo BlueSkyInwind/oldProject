@@ -36,13 +36,17 @@ class ForgetPasswordView: UIView {
     
     func addSignal()  {
         
-
         let validPassWordSignal = passwordView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
             return (text?.count)! > 5 ? true : false
         })
         
         let validUserNameSignal = phoneNumberView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
             return FXD_Tool.checkMoblieNumber(text)
+        })
+        validUserNameSignal?.observeValues({ (isVaildUserName) in
+            
+            print(self.phoneNumberView?.inputTextField?.text)
+            
         })
         
         let validVerifyCodeSignal = verifyCodeView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
@@ -112,7 +116,6 @@ extension ForgetPasswordView {
     
     func configureView()  {
         
-        
         phoneNumberView = GeneralInputView.init(.Phone_Number)
         phoneNumberView?.inputTextField?.placeholder = "请输入手机号码"
         phoneNumberView?.inputTextField?.keyboardType = .numberPad
@@ -154,7 +157,7 @@ extension ForgetPasswordView {
         
         forgetButton = UIButton.init(type: UIButtonType.custom)
         forgetButton?.setTitle("确认找回", for: UIControlState.normal)
-        forgetButton?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
+        forgetButton?.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         forgetButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
         forgetButton?.addTarget(self, action: #selector(forgetButtonClick(sender:)), for: UIControlEvents.touchUpInside)
         self.addSubview(forgetButton!)

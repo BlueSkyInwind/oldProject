@@ -559,14 +559,7 @@
     [userDataVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
         if ([baseResultM.errCode isEqualToString:@"0"]){
-//            UserDataEvaluationVCModules * checkVC = [[UserDataEvaluationVCModules  alloc]init];
-//            [self.navigationController pushViewController:checkVC animated:true];
-//            //首次测评发放红包提示
-//            NSString * str = baseResultM.data[@"redIssuedSucce"];
-//            if (str != nil && ![str isEqualToString:@""]) {
-//                [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:str];
-//            }
-            [self.navigationController popToRootViewControllerAnimated:true];
+            [self.navigationController popViewControllerAnimated:true];
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }

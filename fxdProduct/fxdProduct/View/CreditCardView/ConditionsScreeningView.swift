@@ -142,6 +142,8 @@ extension ConditionsScreeningView {
                 view.backgroundColor = UIColor.white
                 if view.tag == tag {
                     view.backgroundColor = UI_MAIN_COLOR
+                    let button = view as! UIButton
+                    button.setTitleColor(UIColor.white, for: UIControlState.normal)
                 }
             }
         }

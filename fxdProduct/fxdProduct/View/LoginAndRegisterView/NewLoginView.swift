@@ -200,7 +200,7 @@ extension NewLoginView {
         
         loginButton = UIButton.init(type: UIButtonType.custom)
         loginButton?.setTitle("登录", for: UIControlState.normal)
-        loginButton?.titleLabel?.font = UIFont.yx_systemFont(ofSize: 17)
+        loginButton?.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         loginButton?.setBackgroundImage(UIImage.init(named: "login_Btn_Icon_gray"), for: UIControlState.normal)
         loginButton?.addTarget(self, action: #selector(loginButtonClick(sender:) ), for: UIControlEvents.touchUpInside)
         self.addSubview(loginButton!)

@@ -131,7 +131,7 @@ class loginAndRegisterModules: BaseViewController {
     }
 
     func pushForgetVC() {
-
+//        self.loginView?.displayVerifyCode(false)
         let forgetVC = ForgetPasswordMoudles.init()
 //        forgetVC.phoneStr
         self.navigationController?.pushViewController(forgetVC, animated: true)

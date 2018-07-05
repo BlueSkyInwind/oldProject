@@ -356,19 +356,19 @@
                                 
                                 WKWebsiteDataTypeDiskCache,
                                 
-                                //WKWebsiteDataTypeOfflineWebApplicationCache,
+                                WKWebsiteDataTypeOfflineWebApplicationCache,
                                 
                                 WKWebsiteDataTypeMemoryCache,
                                 
-                                //WKWebsiteDataTypeLocalStorage,
+                                WKWebsiteDataTypeLocalStorage,
                                 
-                                //WKWebsiteDataTypeCookies,
+                                WKWebsiteDataTypeCookies,
                                 
-                                //WKWebsiteDataTypeSessionStorage,
+                                WKWebsiteDataTypeSessionStorage,
                                 
-                                //WKWebsiteDataTypeIndexedDBDatabases,
+                                WKWebsiteDataTypeIndexedDBDatabases,
                                 
-                                //WKWebsiteDataTypeWebSQLDatabases
+                                WKWebsiteDataTypeWebSQLDatabases
                                 
                                 ]];
         
