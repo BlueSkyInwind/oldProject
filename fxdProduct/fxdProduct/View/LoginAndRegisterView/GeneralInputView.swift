@@ -113,6 +113,7 @@ class GeneralInputView: UIView,UITextFieldDelegate {
     */
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
         var csStr = "0123456789"
         if generalInputType == .Password || generalInputType == .Pic_Verify_Code {
             csStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -127,84 +128,68 @@ class GeneralInputView: UIView,UITextFieldDelegate {
         }
         
         if generalInputType == .Phone_Number {
-//            //删除
-//            if string == "" {
-//                if range.length == 1{
-//                    
-//                    var offest = range.location
-//                    if range.location < text.count && text[text.toRange(range)!] == " " && (textField.selectedTextRange?.isEmpty)! {
-//                        textField.deleteBackward()
-//                        offest -= 1
-//                    }
-//                    textField.deleteBackward()
-//                    textField.text = parseString(textField.text!)
-//                    let newPos = textField.position(from: textField.beginningOfDocument, offset: offest)
-//                    textField.selectedTextRange = textField.textRange(from: newPos!, to: newPos!)
-//                    return false
-//                }
-//            }else if range.length > 1 {
-//                var isLast = false
-//                if range.location + range.length == textField.text?.count {
-//                    isLast = true
-//                }
-//                textField.deleteBackward()
-//                textField.text = parseString(textField.text!)
-//                // 如果位于添加空格位置，光标向后推一位
-//                var offest = range.location
-//                if range.location == 3 || range.location  == 8 {
-//                    offest += 1
-//                }
-//                
-//                if isLast == false {
-//                    let newPos = textField.position(from: textField.beginningOfDocument, offset: offest)
-//                    textField.selectedTextRange = textField.textRange(from: newPos!, to: newPos!)
-//                }
-//                return false
-//            }else{
-//                return true
-//            }
-            
-            //将输入的数字添加给textfield
-            text = text.replacingCharacters(in: (text.toRange(range))!, with: string)
-            //去掉空格
-            text = text.replacingOccurrences(of: " ", with: "")
-            var newString = ""
-            if text.count > 0 {
-                if text.count > 3 {
-                    //前三位
-                    let subStringIndex = text.index(text.startIndex, offsetBy: 3)
-                    let subString = String(text[..<subStringIndex])
-                    newString.append(subString)
-                    newString.append(" ")
-                    //后8位
-                    let subStringEndIndex = text.index(text.startIndex, offsetBy: text.count)
-                    let subStringTwo = String(text[subStringIndex..<subStringEndIndex])
-                    if subStringTwo.count / 4 == 0 {
-                        newString.append(subStringTwo)
-                    }else{
-                        //位数超过7位
-                        let subStringEndIndex = text.index(text.startIndex, offsetBy: 7)
-                        let subString = String(text[subStringIndex..<subStringEndIndex])
-                        newString.append(subString)
-                        if subStringTwo.count % 4 != 0 || subStringTwo.count / 4 == 2{
-                            newString.append(" ")
-                            let subEndString = String(text[subStringEndIndex..<text.endIndex])
-                            newString.append(subEndString)
+            //删除
+            if string == "" {
+                if range.length == 1{
+                    //从最后一位删
+                    if range.location == text.count - 1 {
+                        if text[text.toRange(NSMakeRange(text.count - 1, 1))!] == " " {
+                            textField.deleteBackward()
                         }
+                        return true
                     }
+                    //从中间删
+                    var offest = range.location
+                    if range.location < text.count && text[text.toRange(range)!] == " " && (textField.selectedTextRange?.isEmpty)! {
+                        textField.deleteBackward()
+                        offest -= 1
+                    }
+                    textField.deleteBackward()
+                    textField.text = parseString(textField.text!)
+                    let newPos = textField.position(from: textField.beginningOfDocument, offset: offest)
+                    textField.selectedTextRange = textField.textRange(from: newPos!, to: newPos!)
+                    return false
+                }else if range.length > 1 {
+                    var isLast = false
+                    if range.location + range.length == textField.text?.count {
+                        isLast = true
+                    }
+
+                    textField.deleteBackward()
+                    textField.text = parseString(textField.text!)
+                    // 如果位于添加空格位置，光标向后推一位
+                    var offest = range.location
+                    if range.location == 3 || range.location  == 8 {
+                        offest += 1
+                    }
+
+                    if isLast == false {
+                        let newPos = textField.position(from: textField.beginningOfDocument, offset: offest)
+                        textField.selectedTextRange = textField.textRange(from: newPos!, to: newPos!)
+                    }
+                    return false
                 }else{
-                    newString = text
+                    return true
                 }
-            }
-            newString = newString.trimmingCharacters(in: characterSet.inverted)
-            if newString.count > 13 {
+            }else if string.count >= 1 {
+                let newString = (textField.text?.trimmingCharacters(in: characterSet.inverted))! + string
+                if (newString.count) > 13 {
+                    return false
+                }
+                textField.insertText(string)
+                textField.text = parseString(textField.text!)
+                var offest = range.location + string.count
+                if range.location == 3 || range.location  == 8 {
+                    offest += 1
+                }
+                let newPos = textField.position(from: textField.beginningOfDocument, offset: offest)
+                textField.selectedTextRange = textField.textRange(from: newPos!, to: newPos!)
                 return false
             }
-            inputTextField?.text = newString
-            return false
+        }else{
+            return true
         }
         return true
-    }
 }
 
 func parseString(_ inputStr:String) -> String {
@@ -212,10 +197,12 @@ func parseString(_ inputStr:String) -> String {
     let str = NSMutableString.init(string: inputStr.replacingOccurrences(of: " ", with: ""))
     if str.length > 3 {
         str.insert(" ", at: 3)
-    }else if str.length > 8 {
+    }
+   if str.length > 8 {
         str.insert(" ", at: 8)
     }
     return str as String
+    }
 }
 
 
