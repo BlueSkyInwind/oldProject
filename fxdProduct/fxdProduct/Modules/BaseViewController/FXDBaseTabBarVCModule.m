@@ -91,13 +91,6 @@
     if (tabBarController.selectedIndex == 1){
         [[NSNotificationCenter defaultCenter] postNotificationName:isSuperMark object:nil];
     }
-    
-    if (tabBarController.selectedIndex == 3) {
-        if ([FXD_Utility sharedUtility].loginFlage) {
-        } else {
-            [self presentLogin:self];
-        }
-    }
 }
 
 - (void)presentLogin:(UIViewController *)vc

@@ -61,14 +61,14 @@
     //检测登录
     if ([FXD_Utility sharedUtility].loginFlage) {
         [self getMessageNumber];
+        [self getRepayData];
     }else{
         model.isDisplay = @"0";
+        _headerView.type = @"0";
+        _type = _headerView.type.integerValue;
         [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
         [self.MyViewTable reloadData];
     }
-    
-    [self getRepayData];
-//    [self getPersonalCenterInfo];
 }
 
 -(void)getRepayData{
@@ -80,7 +80,7 @@
         if ([baseResultM.errCode isEqualToString:@"0"]) {
             
             RepayListInfo *model = [[RepayListInfo alloc]initWithDictionary:(NSDictionary *)baseResultM.data error:nil];
-//            OrderModel *orderModel = model.order;
+
             if (model.debtRepayTotal == nil) {
                 _headerView.type = @"1";
             }else{
@@ -138,6 +138,9 @@
             MyBillViewController *controller = [[MyBillViewController alloc]init];
             [self.navigationController pushViewController:controller animated:true];
         }
+            break;
+        case 0:
+            [self presentLoginVCCompletion:nil];
             break;
         default:
             self.tabBarController.selectedIndex = 1;
@@ -381,7 +384,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //检测登录
-    if (![FXD_Utility sharedUtility].loginFlage) {
+    
+    if (![FXD_Utility sharedUtility].loginFlage && !(indexPath.section == 2 && indexPath.row == 1) &&!(indexPath.section ==3)) {
         [self presentLoginVCCompletion:nil];
         return;
     }

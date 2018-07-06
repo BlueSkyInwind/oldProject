@@ -59,6 +59,8 @@ extension MineHeaderView{
         
         let type = Int(type)
         switch type {
+        case 0:
+            defaultUI()
         case 2:
             repayUI()
         case 3:
@@ -72,6 +74,49 @@ extension MineHeaderView{
 }
 extension MineHeaderView{
     
+    fileprivate func defaultUI(){
+        
+        let bgImageView = UIImageView()
+        bgImageView.image = UIImage.init(named: "mine_bg_icon")
+        self.addSubview(bgImageView)
+        bgImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.top.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(0)
+        }
+        
+        let nameLabel = UILabel()
+        nameLabel.text = "多款贷款产品任您选"
+        nameLabel.textColor = UIColor.white
+        nameLabel.font = UIFont.systemFont(ofSize: 14)
+        self.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self).offset(70)
+            make.centerX.equalTo(self.snp.centerX)
+        }
+        
+        bottomBtn = UIButton()
+        bottomBtn?.setTitleColor(UIColor.black, for: .normal)
+        bottomBtn?.setBackgroundImage(UIImage.init(named: "bottomBtn_icon"), for: .normal)
+        bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        bottomBtn?.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
+        self.addSubview(bottomBtn!)
+        bottomBtn?.snp.makeConstraints({ (make) in
+            make.bottom.equalTo(self).offset(-25)
+            make.centerX.equalTo(self.snp.centerX)
+        })
+        
+        let bottomLabel = UILabel()
+        bottomLabel.text = "登录"
+        bottomLabel.textColor = UIColor.black
+        bottomLabel.font = UIFont.systemFont(ofSize: 14)
+        bottomBtn?.addSubview(bottomLabel)
+        bottomLabel.snp.makeConstraints { (make) in
+            make.top.equalTo((bottomBtn?.snp.top)!).offset(5)
+            make.centerX.equalTo((bottomBtn?.snp.centerX)!)
+        }
+    }
     fileprivate func repayUI(){
         
         let bgImageView = UIImageView()
@@ -160,11 +205,9 @@ extension MineHeaderView{
         bottomLabel.font = UIFont.systemFont(ofSize: 14)
         bottomBtn?.addSubview(bottomLabel)
         bottomLabel.snp.makeConstraints { (make) in
-            make.top.equalTo((bottomBtn?.snp.top)!).offset(5)
+            make.top.equalTo((bottomBtn?.snp.top)!).offset(6)
             make.centerX.equalTo((bottomBtn?.snp.centerX)!)
         }
-        
-        
     }
     
     fileprivate func repaymentConfirmationUI(){
@@ -221,7 +264,6 @@ extension MineHeaderView{
         }
         
         bottomBtn = UIButton()
-//        bottomBtn?.setTitle("查看", for: .normal)
         bottomBtn?.setTitleColor(UIColor.black, for: .normal)
         bottomBtn?.setBackgroundImage(UIImage.init(named: "bottomBtn_icon"), for: .normal)
         bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)

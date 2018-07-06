@@ -71,14 +71,26 @@ extension BankCell{
             make.bottom.equalTo(self).offset(0)
         }
         
-        bankImageView = UIImageView()
-        bankImageView?.layer.cornerRadius = 21
-        bgImageView.addSubview(bankImageView!)
-        bankImageView?.snp.makeConstraints({ (make) in
+        let bankBgImageView = UIImageView()
+        bankBgImageView.image = UIImage.init(named: "bank_white_icon")
+        bgImageView.addSubview(bankBgImageView)
+        bankBgImageView.snp.makeConstraints { (make) in
+            
             make.left.equalTo(bgImageView.snp.left).offset(7)
             make.top.equalTo(bgImageView.snp.top).offset(10)
-            make.width.equalTo(42)
-            make.height.equalTo(42)
+//            make.width.equalTo(42)
+//            make.height.equalTo(42)
+        }
+        bankImageView = UIImageView()
+        bankImageView?.layer.cornerRadius = 21
+        bankBgImageView.addSubview(bankImageView!)
+        bankImageView?.snp.makeConstraints({ (make) in
+//            make.left.equalTo(bgImageView.snp.left).offset(7)
+//            make.top.equalTo(bgImageView.snp.top).offset(10)
+            make.centerX.equalTo(bankBgImageView.snp.centerX)
+            make.centerY.equalTo(bankBgImageView.snp.centerY)
+            make.width.equalTo(28)
+            make.height.equalTo(28)
         })
         
         bankNameLabel = UILabel()
