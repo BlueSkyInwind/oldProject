@@ -248,13 +248,13 @@
         //储存用户标识juid
         [FXD_Tool saveUserDefaul:loginSP.juid Key:Fxd_JUID];
         [FXD_Utility sharedUtility].userInfo.juid = loginSP.juid;
-//        [FXD_Tool saveUserDefaul:loginSP.invitation_code Key:kInvitationCode];
+        [FXD_Tool saveUserDefaul:loginSP.invitation_code Key:kInvitationCode];
         //保存登录状态
         [FXD_Utility sharedUtility].loginFlage = 1;
         [FXD_Tool saveUserDefaul:@"1" Key:kLoginFlag];
         //储存用户手机号
-//        [FXD_Tool saveUserDefaul:phoneNum Key:UserName];
-//        [FXD_Utility sharedUtility].userInfo.userMobilePhone = phoneNum;
+        [FXD_Tool saveUserDefaul:loginSP.mobile_phone_ Key:UserName];
+        [FXD_Utility sharedUtility].userInfo.userMobilePhone = loginSP.mobile_phone_;
         //获取登录token
         NSString * keyToken = [NSString stringWithFormat:@"%@token",loginSP.juid];
         if ([FXD_Tool dicContainsKey:dic keyValue:keyToken]) {

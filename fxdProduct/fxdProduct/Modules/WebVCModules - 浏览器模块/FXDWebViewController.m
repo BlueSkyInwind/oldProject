@@ -29,7 +29,8 @@
     // Do any additional setup after loading the view.
     isHanfen = false;
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setNavCloseRightBar];
+    [self setNavRefreshRightBar];
+    [self addBackAndCloseItem];
     
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
     config.preferences = [[WKPreferences alloc] init];
@@ -47,17 +48,16 @@
         _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         _webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     }else if (@available(iOS 9.0, *)) {
-        self.automaticallyAdjustsScrollViewInsets = true;
+        self.automaticallyAdjustsScrollViewInsets = false;
     }else{
        self.automaticallyAdjustsScrollViewInsets = false;
     }
     [self createProUI];
-    [self addBackItem];
     
     DLog(@"%@  --- %@",NSStringFromCGRect(_webView.frame),NSStringFromCGSize(_webView.scrollView.contentSize))
     _webView.scrollView.showsVerticalScrollIndicator = false;
+    
     [self loadWebview];
-
     //webview添加KVO监听属性
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
@@ -118,15 +118,6 @@
     NSString * resultStr = [urlStr stringByAppendingFormat:@"%@type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@&channel=%@&version=%@&platformType=%@",SplicingCharacter,@"0",juidStr,tokenStr,phoneNumber,invationCode,CHANNEL,[FXD_Tool getAppVersion],CODE_SERVICE_PLATFORM];
     return resultStr;
 }
-//重写父类方法
-- (void)popBack
-{
-    if ([_webView canGoBack]) {
-        [_webView goBack];
-    } else {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
@@ -153,16 +144,45 @@
         _urlStr = _webView.URL.absoluteString;
     }
 }
-
-- (void)setNavCloseRightBar {
-    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"close_icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(closeWenBtnClock)];
+#pragma mark - 导航按钮
+- (void)setNavRefreshRightBar {
+    UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"refresh_Icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(refreshWebBtnClock)];
     self.navigationItem.rightBarButtonItem = aBarbi;
 }
-
--(void)closeWenBtnClock{
-    [self.navigationController popViewControllerAnimated:YES];
+-(void)refreshWebBtnClock{
+    [self loadWebview];
+}
+- (void)addBackAndCloseItem
+{
+    UIBarButtonItem *backBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
+    UIBarButtonItem *closeBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"close_icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(closeWebBtnClock)];
+    if (@available(iOS 11.0, *)) {
+        self.navigationItem.leftBarButtonItems = @[backBarbi,closeBarbi];
+        return;
+    }
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+//    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    [btn setImage:img forState:UIControlStateNormal];
+//    btn.frame = CGRectMake(0, 0, 45, 44);
+//    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
+    //    修改距离,距离边缘的
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceItem.width = 3;
+    self.navigationItem.leftBarButtonItems = @[spaceItem,backBarbi,closeBarbi];
 }
 
+-(void)closeWebBtnClock{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)popBack
+{
+    if ([_webView canGoBack]) {
+        [_webView goBack];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 #pragma mark - 顶部进度UI
 -(void)createProUI
 {
@@ -260,9 +280,10 @@
                 [[JSAndOCInteraction sharedInteraction] removeWaitHubAnimationView];
             }
         }
+        
         if ([[dic allKeys] containsObject:@"WebLogin"]) {
             NSDictionary * resultDic = dic[@"WebLogin"];
-            DLog(@"%@",resultDic)
+            [[JSAndOCInteraction sharedInteraction] obtainLoginInfo:resultDic];
         }
     }
 }
@@ -317,7 +338,7 @@
 #pragma mark -
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
-    DLog(@"alert");
+    DLog(@"alert ----- %@",message);
 //    [[MBPAlertView sharedMBPTextView]showTextOnly:[UIApplication sharedApplication].keyWindow message:message];
     completionHandler();
 }

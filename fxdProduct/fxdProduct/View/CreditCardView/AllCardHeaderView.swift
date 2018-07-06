@@ -73,6 +73,9 @@ class AllCardHeaderView: UIView {
             }
             self?.itemViewtTwo?.closeIcon(false)
             self?.itemViewOne?.closeIcon(false)
+            self?.itemViewOne?.titleBtn?.setTitleColor("4D4D4D".uiColor(), for: UIControlState.normal)
+            self?.itemViewtTwo?.titleBtn?.setTitleColor("4D4D4D".uiColor(), for: UIControlState.normal)
+            self?.itemViewThree?.titleBtn?.setTitleColor("4D4D4D".uiColor(), for: UIControlState.normal)
             self?.conView?.dismissAnimate()
         }, { (open) in
             self.isUnfold = open
