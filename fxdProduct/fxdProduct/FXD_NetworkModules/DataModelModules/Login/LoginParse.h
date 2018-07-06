@@ -15,4 +15,13 @@
 @property (nonatomic, copy) NSString *invitation_code;
 
 @end
- 
+
+
+@interface LoginSyncParse : JSONModel
+
+@property (nonatomic, strong)NSString<Optional> *channel;
+@property (nonatomic, strong)NSString<Optional> *juid;
+@property (nonatomic, strong)NSString<Optional> *platformType;
+@property (nonatomic, strong)NSString<Optional> *version;
+
+@end

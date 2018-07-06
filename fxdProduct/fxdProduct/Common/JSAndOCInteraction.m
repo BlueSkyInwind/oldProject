@@ -242,23 +242,28 @@
     }
 }
 
--(NSString *)obtainLoginInfo{
-    
-    NSString * juidStr = [FXD_Utility sharedUtility].userInfo.juid == nil ? @"" : [FXD_Utility sharedUtility].userInfo.juid;
-    NSString * tokenStr = [FXD_Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [FXD_Utility sharedUtility].userInfo.tokenStr;
-    NSString * phoneNumber = [FXD_Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [FXD_Utility sharedUtility].userInfo.userMobilePhone;
-    NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode];
-    
-    NSDictionary *paramDic = @{
-                           @"juid":juidStr,
-                           @"token":tokenStr,
-                           @"mobile_phone_":phoneNumber,
-                           @"invitation_code_":invationCode,
-                           };
-    
-    NSData *data = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *paraStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return paraStr;
+-(void)obtainLoginInfo:(NSDictionary *)dic{
+    @try{
+        LoginSyncParse * loginSP = [[LoginSyncParse alloc]initWithDictionary:dic error:nil];
+        //储存用户标识juid
+        [FXD_Tool saveUserDefaul:loginSP.juid Key:Fxd_JUID];
+        [FXD_Utility sharedUtility].userInfo.juid = loginSP.juid;
+//        [FXD_Tool saveUserDefaul:loginSP.invitation_code Key:kInvitationCode];
+        //保存登录状态
+        [FXD_Utility sharedUtility].loginFlage = 1;
+        [FXD_Tool saveUserDefaul:@"1" Key:kLoginFlag];
+        //储存用户手机号
+//        [FXD_Tool saveUserDefaul:phoneNum Key:UserName];
+//        [FXD_Utility sharedUtility].userInfo.userMobilePhone = phoneNum;
+        //获取登录token
+        NSString * keyToken = [NSString stringWithFormat:@"%@token",loginSP.juid];
+        if ([FXD_Tool dicContainsKey:dic keyValue:keyToken]) {
+            [FXD_Tool saveUserDefaul:[dic objectForKey:keyToken] Key:Fxd_Token];
+            [FXD_Utility sharedUtility].userInfo.tokenStr = [dic objectForKey:keyToken];
+        }
+    }@catch (NSException *exception) {
+        DLog(@"%@",exception);
+    }
 }
 
 /*
@@ -273,9 +278,7 @@
     return newString;
 }
 */
-
-#pragma mark -- app启动跳转处理
-
+ #pragma mark -- app启动跳转处理
 /**
  外部启动app跳转某个页面
 

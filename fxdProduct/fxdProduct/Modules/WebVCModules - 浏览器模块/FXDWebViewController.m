@@ -153,13 +153,16 @@
         _urlStr = _webView.URL.absoluteString;
     }
 }
+
 - (void)setNavCloseRightBar {
     UIBarButtonItem *aBarbi = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"close_icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(closeWenBtnClock)];
     self.navigationItem.rightBarButtonItem = aBarbi;
 }
+
 -(void)closeWenBtnClock{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 #pragma mark - 顶部进度UI
 -(void)createProUI
 {
@@ -214,7 +217,6 @@
             NSString * copyContent =  resultDic[@"copyContent"];
             [[JSAndOCInteraction sharedInteraction] ClipboardOfCopy:copyContent VC:self prompt:@"复制成功"];
         }
-        
         //JS交互复制内容到剪贴板  FXDPushVC
         /*
         {
@@ -223,13 +225,11 @@
             }
         }
          */
-        
         if ([[dic allKeys] containsObject:@"FXDPushVC"]) {
             NSDictionary * resultDic = dic[@"FXDPushVC"];
             NSString * viewControllerName =  resultDic[@"viewControllerName"];
             [[JSAndOCInteraction sharedInteraction] pushViewController:viewControllerName VC:self];
         }
-        
         //JS交互保存图片到本地  FXDSaveImage
         /*
         {
@@ -259,6 +259,10 @@
             if ([[resultDic objectForKey:@"ShowOrRemove"] isEqualToString:@"Remove"]) {
                 [[JSAndOCInteraction sharedInteraction] removeWaitHubAnimationView];
             }
+        }
+        if ([[dic allKeys] containsObject:@"WebLogin"]) {
+            NSDictionary * resultDic = dic[@"WebLogin"];
+            DLog(@"%@",resultDic)
         }
     }
 }

@@ -10,8 +10,12 @@
 
 @implementation LoginParse
 
+
 @end
 
+@implementation LoginSyncParse
 
 
+
+@end
 
