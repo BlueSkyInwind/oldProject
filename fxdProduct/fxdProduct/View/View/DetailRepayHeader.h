@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *periodsLabel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *repaymentViewLeftCon;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeight;
 
 
 

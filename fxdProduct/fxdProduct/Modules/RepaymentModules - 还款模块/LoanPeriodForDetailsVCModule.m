@@ -43,6 +43,10 @@
     
     NSInteger _currenPeriod;
 }
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewHeight;
+
 @end
 
 @implementation LoanPeriodForDetailsVCModule
@@ -81,10 +85,20 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
 
 - (void)setUpTopView
 {
+    _topViewHeight.constant = 175 + BarHeightNew;
+    UIImageView *header = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 175 + BarHeightNew)];
+    UIImage * navImage = [UIImage gradientmageWithFrame:CGRectMake(0, 0, _k_w, BarHeightNew) Colors:@[rgb(33, 168, 234),rgb(95, 121, 234)] GradientType:1];
+    header.image = navImage;
+    [_topView addSubview:header];
+    
     _headerView = [[NSBundle mainBundle] loadNibNamed:[[DetailRepayHeader class] description] owner:self options:nil].lastObject;
-    _topView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"navigation"]];
-    _topView.alpha = 0.9;
-    [self.topView addSubview:_headerView];
+    
+    if (UI_IS_IPHONEX) {
+        _headerView.frame = CGRectMake(0, BarHeightNew, _k_w, 87);
+    }
+    
+//    _headerView.headerHeight.constant = 20;
+    [_topView addSubview:_headerView];
 }
 
 - (void)setUpSelectAllBtn
@@ -203,7 +217,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     //    _payNumberLabel.text = [NSString stringWithFormat:@"待支付%.2f元",_readyPayAmount];
     NSString *repAmount = [NSString stringWithFormat:@"%.2f",_readyPayAmount];
     NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"待支付%@元",repAmount]];
-    [attriStr addAttribute:NSForegroundColorAttributeName value:rgb(255, 134, 25) range:NSMakeRange(3, repAmount.length)];
+    [attriStr addAttribute:NSForegroundColorAttributeName value:UI_MAIN_COLOR range:NSMakeRange(3, repAmount.length)];
     _payNumberLabel.attributedText = attriStr;
 }
 
@@ -220,16 +234,31 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     return nil;
 }
 
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    navBarHairlineImageView.hidden = YES;
+//}
+////在页面消失的时候就让出现
+//-(void)viewWillDisappear:(BOOL)animated
+//{
+//    [super viewWillDisappear:animated];
+//    navBarHairlineImageView.hidden = NO;
+//}
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    navBarHairlineImageView.hidden = YES;
+    navBarHairlineImageView.hidden=YES;
+    UIImage * navImage = [UIImage imageWithColor:[UIColor clearColor]];
+    [self.navigationController.navigationBar setBackgroundImage:navImage forBarMetrics:UIBarMetricsDefault];
 }
-//在页面消失的时候就让出现
+
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    navBarHairlineImageView.hidden = NO;
+    navBarHairlineImageView.hidden=NO;
+    UIImage * navImage = [UIImage gradientmageWithFrame:CGRectMake(0, 0, _k_w, BarHeightNew) Colors:@[rgb(33, 168, 234),rgb(95, 121, 234)] GradientType:1];
+    [self.navigationController.navigationBar setBackgroundImage:navImage forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)setUpTableview

@@ -248,10 +248,12 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let controller = OrderConfirmDetailViewController()
-        controller.orderNo = orderModel?.order_no
-        self.navigationController?.pushViewController(controller, animated: true)
-        
+        if indexPath.section == 1 {
+            
+            let controller = OrderConfirmDetailViewController()
+            controller.orderNo = orderModel?.order_no
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -278,6 +280,9 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
+        if repayModel?.isPending == "1" {
+            return 0
+        }
         if repayModel?.debtRepayTotal != nil && orderModel == nil {
             return 150
         }

@@ -20,22 +20,22 @@ import UIKit
 
 class RepaymentResultViewController: BaseViewController {
 
-    var state:Enum_Result?
+    var state:Enum_Result = .intermediate
     var orderNo:String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         addCloseItem()
         switch state {
-        case .intermediate?:
+        case .intermediate:
             self.title = "还款确认中"
-        case .submitFailure?:
+        case .submitFailure:
             self.title = "提交失败"
-        case .repayFailure?:
+        case .repayFailure:
             self.title = "还款失败"
-        case .success?:
+        case .success:
             self.title = "还款成功"
-        case .submittedSuccessfully?:
+        case .submittedSuccessfully:
             self.title = "提交成功"
         default:
             break
@@ -51,19 +51,19 @@ class RepaymentResultViewController: BaseViewController {
         var tipStr = ""
         var btnTitle = "返回"
         switch state {
-        case .intermediate?:
+        case .intermediate:
             imageStr = "repay_intermediate_icon"
             tipStr = "还款确认中"
-        case .submitFailure?:
+        case .submitFailure:
             imageStr = "bill_fail_icon"
             tipStr = "订单提交失败"
-        case .repayFailure?:
+        case .repayFailure:
             imageStr = "bill_fail_icon"
             tipStr = "还款失败"
-        case .success?:
+        case .success:
             imageStr = "bill_none_icon"
             tipStr = "还款成功"
-        case .submittedSuccessfully?:
+        case .submittedSuccessfully:
             imageStr = "bill_none_icon"
             tipStr = "您的订单已经提交成功"
             btnTitle = "查看订单"
@@ -113,14 +113,16 @@ class RepaymentResultViewController: BaseViewController {
     override func popBack(){
         
         switch state {
-        case .intermediate?,.success?:
-            for  vc in self.rt_navigationController.rt_viewControllers {
-                if vc.isKind(of: MyBillViewController.self) {
-                    self.navigationController?.popToViewController(vc, animated: true)
-                    return
-                }
-            }
-        case .submittedSuccessfully?:
+        case .intermediate,.success:
+            
+            self.navigationController?.popToRootViewController(animated: true)
+//            for  vc in self.rt_navigationController.rt_viewControllers {
+//                if vc.isKind(of: MyBillViewController.self) {
+//                    self.navigationController?.popToViewController(vc, animated: true)
+//                    return
+//                }
+//            }
+        case .submittedSuccessfully:
             for  vc in self.rt_navigationController.rt_viewControllers {
                 if vc.isKind(of: ShoppingMallModules.self) {
                     self.navigationController?.popToViewController(vc, animated: true)
@@ -128,7 +130,7 @@ class RepaymentResultViewController: BaseViewController {
                 }
             }
             
-        case .submitFailure?,.repayFailure?:
+        case .submitFailure,.repayFailure:
             self.navigationController?.popViewController(animated: true)
         default:
             break
@@ -138,7 +140,7 @@ class RepaymentResultViewController: BaseViewController {
     func back(){
         
         switch state {
-        case .intermediate?,.success?:
+        case .intermediate,.success:
             
             for  vc in self.rt_navigationController.rt_viewControllers {
                 if vc.isKind(of: MyBillViewController.self) {
@@ -147,9 +149,9 @@ class RepaymentResultViewController: BaseViewController {
                 }
             }
             
-        case .submitFailure?,.repayFailure?:
+        case .submitFailure,.repayFailure:
             self.navigationController?.popViewController(animated: true)
-        case .submittedSuccessfully?:
+        case .submittedSuccessfully:
             let detailOrderVC = OrderConfirmDetailViewController()
             detailOrderVC.orderNo = orderNo
             self.navigationController?.pushViewController(detailOrderVC, animated: true)
