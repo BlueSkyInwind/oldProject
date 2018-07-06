@@ -43,24 +43,21 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
     }
     
     func configureView()  {
-        contentTableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.grouped)
+        contentTableView = UITableView.init(frame: CGRect.zero, style: UITableViewStyle.plain)
         contentTableView?.delegate = self;
         contentTableView?.dataSource = self;
         contentTableView?.separatorStyle = .none
         contentTableView?.backgroundColor = "f2f2f2".uiColor()
-         contentTableView?.sectionFooterHeight = 0
+        contentTableView?.sectionFooterHeight = 0
         self.view.addSubview(contentTableView!)
         contentTableView?.snp.makeConstraints({ (make) in
-            make.edges.equalTo(self.view)
+            make.top.equalTo(self.view.snp.top).offset(obtainBarHeight_New(vc: self))
+            make.left.right.bottom.equalTo(0)
         })
         
-        if #available(iOS 11.0, *){
-            contentTableView?.contentInsetAdjustmentBehavior = .never;
-            contentTableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
-        }else if #available(iOS 9.0, *){
+        if #available(iOS 9.0, *){
             self.automaticallyAdjustsScrollViewInsets = false;
         }
-        
         contentTableView?.registerCell([CreaditCardHeaderCell.self,CreaditCardBottomCell.self], false)
         setFooterView()
         let header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(headerRefreshing))
@@ -163,7 +160,6 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
         if section == 1 {
             return 15
         }

@@ -60,6 +60,10 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
                 }
             })
         })
+        
+        if #available(iOS 9.0, *){
+            self.automaticallyAdjustsScrollViewInsets = false;
+        }
         headerView?.currentBank = bankIndex + 1
         headerView?.bankDataArr = creaditCardModel?.banks as! Array<CreaditCardBanksListModel>
         headerView?.levelDataArr = creaditCardModel?.levelDic as! Array<CreaditCardLevelModel>

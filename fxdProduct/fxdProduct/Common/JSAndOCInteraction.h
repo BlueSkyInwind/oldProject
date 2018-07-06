@@ -72,9 +72,9 @@
 /**
  获取app的登录信息
 
- @return 数据
+ @param 数据
  */
--(NSString *)obtainLoginInfo;
+-(void)obtainLoginInfo:(NSDictionary *)dic;
 
 #pragma mark -- app启动跳转处理
 

@@ -55,6 +55,7 @@
         [_requestWaitView removeFromSuperview];
     }
 }
+
 /**
  添加请求头
  */
@@ -63,7 +64,6 @@
         if ([FXD_Utility sharedUtility].userInfo.tokenStr != nil && ![[FXD_Utility sharedUtility].userInfo.tokenStr isEqualToString:@""]) {
             DLog(@"juid -- %@",[FXD_Utility sharedUtility].userInfo.juid);
             DLog(@"token -- %@",[FXD_Utility sharedUtility].userInfo.tokenStr);
-
             [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.tokenStr forHTTPHeaderField:[NSString stringWithFormat:@"%@token",[FXD_Utility sharedUtility].userInfo.juid]];
             [manager.requestSerializer setValue:[FXD_Utility sharedUtility].userInfo.juid forHTTPHeaderField:@"juid"];
         }
@@ -74,7 +74,6 @@
 }
 
 #pragma mark - 发起请求
-
 - (void)DataRequestWithURL:(NSString *)strURL isNeedNetStatus:(BOOL)isNeedNetStatus isNeedWait:(BOOL)isNeedWait parameters:(id)parameters finished:(SuccessFinishedBlock)finished failure:(FailureBlock)failure
 {
     [self obtainDataWithUrl:strURL method:@"POST" parameters:parameters requestTime:30 isNeedNetStatus:isNeedNetStatus isNeedWait:isNeedWait uploadProgress:nil downloadProgress:nil finished:finished failure:failure];
@@ -261,7 +260,6 @@
             [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
 //            manager.requestSerializer=[AFHTTPRequestSerializer serializer];
-            
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
             manager.responseSerializer = [AFJSONResponseSerializer serializer];
             //            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
