@@ -29,11 +29,11 @@
 /**
  复制
  
- @param copyStr 复制内容
+ @param copyContent 复制内容
  @param vc 视图
  @param str 提示内容
  */
--(void)ClipboardOfCopy:(NSString *)copyStr VC:(UIViewController *)vc prompt:(NSString *)str;
+-(void)ClipboardOfCopy:(id)copyContent VC:(UIViewController *)vc prompt:(NSString *)str;
 
 /**
  前往某个固定页面
@@ -55,6 +55,13 @@
 -(void)pushViewController:(NSString *)viewControllerName VC:(UIViewController *)currentVC;
 
 /**
+ 长按获取图片地址
+
+ @param imgUrl 图片链接
+ @param currentVC 当前VC
+ */
+-(void)obtainImgUrlEvent:(NSString *)imgUrl VC:(UIViewController *)currentVC;
+/**
  保存相册
  
  @param src 图片URL
@@ -63,6 +70,15 @@
 - (void)savePictureToAlbum:(NSString *)src VC:(UIViewController *)currentVC;
 
 /**
+ 识别二维码图片
+
+ @param imgUrl 图片url
+ @param currentVC当前视图
+ @param isCopy 是否复制到剪贴板
+ @param complication 识别结果回调
+ */
+-(void)obtainImgUrlEvent:(NSString *)imgUrl VC:(UIViewController *)currentVC isCopy:(BOOL)isCopy complication:(void(^)(NSString * content))result;
+/**
  调用本地等待条
  @param vc 父视图
  */
@@ -70,12 +86,15 @@
 -(void)removeWaitHubAnimationView;
 
 /**
- 获取app的登录信息
+ 存储app的登录信息
 
  @param 数据
  */
--(void)obtainLoginInfo:(NSDictionary *)dic;
-
+-(void)saveJsLoginInfo:(NSDictionary *)dic;
+/**
+ 获取app的登录信息-> h5
+ */
+-(LoginSyncParse *)obtainLoginInfo;
 #pragma mark -- app启动跳转处理
 
 /**

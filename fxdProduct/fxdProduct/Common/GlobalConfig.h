@@ -206,6 +206,7 @@ UIKIT_EXTERN NSString * const       _cardAuthQuery_url;                       //
 UIKIT_EXTERN NSString * const       _cardAuthSmsSend_url;                       //银行卡授权短信发送
 UIKIT_EXTERN NSString * const       _cardAuthAuth_url;                       //银行卡授权接口
 UIKIT_EXTERN NSString * const       _handataSummary_url;                       //憨分首页接口
+UIKIT_EXTERN NSString * const       _Banner_url;                       //banner图接口
 UIKIT_EXTERN NSString * const       _orderList_url;                         //查询手机卡订单列表
 
 

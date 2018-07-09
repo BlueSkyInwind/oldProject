@@ -42,7 +42,7 @@
         imageArr = @[imageUrl];
     }
     
-    NSString * titleName  =  title == nil ? @"发薪贷" : title;
+    NSString * titleName  =  title == nil ? @"河马有钱" : title;
     
     NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode];
 //    NSString * targetUrl = [urlStr stringByAppendingFormat:@"?merchant_code_=%@",invationCode];
@@ -82,14 +82,19 @@
 /**
  复制
 
- @param copyStr 复制内容
+ @param copyContent 复制内容
  @param vc 视图
  @param str 提示内容
  */
--(void)ClipboardOfCopy:(NSString *)copyStr VC:(UIViewController *)vc prompt:(NSString *)str{
+-(void)ClipboardOfCopy:(id)copyContent VC:(UIViewController *)vc prompt:(NSString *)str{
     
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = copyStr;
+    if ([copyContent isKindOfClass:[NSString class]]) {
+        pasteboard.string = (NSString *)copyContent;
+    }
+    if ([copyContent isKindOfClass:[UIImage class]]) {
+        pasteboard.image = (UIImage *)copyContent;
+    }
     [[MBPAlertView sharedMBPTextView] showTextOnly:vc.view message:str];
     
 }
@@ -159,6 +164,45 @@
     [vc presentViewController:actionSheett animated:YES completion:nil];
 }
 
+#pragma mark - 获取图片处理
+-(void)obtainImgUrlEvent:(NSString *)imgUrl VC:(UIViewController *)currentVC isCopy:(BOOL)isCopy complication:(void(^)(NSString * content))result{
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgUrl]];
+    UIImage *image = [UIImage imageWithData:data];
+    if (!image) {
+        DLog(@"读取图片失败");
+        return;
+    }
+    if (![[UIImage isAvailableQRcodeIn:image] isEqualToString:@""]) {
+        [self saveAndQRCode:image imgUrl:imgUrl VC:currentVC isCopy:isCopy complication:result];
+    }else{
+        [self savePictureToAlbum:imgUrl VC:currentVC];
+    }
+}
+
+/**
+ 保存，识别
+ 
+ @param src 图片URL
+ @param currentVC 当前VC
+ */
+- (void)saveAndQRCode:(UIImage *)image imgUrl:(NSString *)imgUrl VC:(UIViewController *)currentVC isCopy:(BOOL)isCopy complication:(void(^)(NSString * content))result
+{
+    __weak typeof (self) weakSelf = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"保存图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self loadImage:imgUrl VC:currentVC isSave:true];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"识别图中二维码" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if (isCopy) {
+            [weakSelf ClipboardOfCopy:[UIImage isAvailableQRcodeIn:image] VC:currentVC prompt:@"识别内容复制到剪贴板"];
+        }else{
+            result([UIImage isAvailableQRcodeIn:image]);
+        }
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [currentVC presentViewController:alert animated:YES completion:nil];
+}
+
 /**
  保存相册
 
@@ -170,17 +214,16 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要保存到相册吗？" preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        [self loadImage:src VC:currentVC];
+        [self loadImage:src VC:currentVC isSave:true];
     }]];
     [currentVC presentViewController:alert animated:YES completion:nil];
 }
-
 /**
  活动图片下载
 
  @param loadUrl 下载链接
  */
--(void)loadImage:(NSString *)loadUrl VC:(UIViewController *)currentVC{
+-(void)loadImage:(NSString *)loadUrl VC:(UIViewController *)currentVC isSave:(BOOL)isSave{
     [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:loadUrl] options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         if (expectedSize > 0) {
             float numper = (float)receivedSize / (float)expectedSize;
@@ -205,16 +248,13 @@
     }
 }
 
-
 /**
  调用本地等待条
  
  @param vc 父视图
  */
 -(void)waitHubAnimationView:(UIViewController *)vc{
-    
     [[MBPAlertView sharedMBPTextView]loadingWaitHUDView:vc.view];
-
 }
 -(void)removeWaitHubAnimationView{
     [[MBPAlertView sharedMBPTextView]removeWaitHUDView];
@@ -242,7 +282,7 @@
     }
 }
 
--(void)obtainLoginInfo:(NSDictionary *)dic{
+-(void)saveJsLoginInfo:(NSDictionary *)dic{
     @try{
         LoginSyncParse * loginSP = [[LoginSyncParse alloc]initWithDictionary:dic error:nil];
         //储存用户标识juid
@@ -266,6 +306,24 @@
     }
 }
 
+-(LoginSyncParse *)obtainLoginInfo{
+    
+    NSString * juidStr = [FXD_Utility sharedUtility].userInfo.juid == nil ? @"" : [FXD_Utility sharedUtility].userInfo.juid;
+    NSString * tokenStr = [FXD_Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [FXD_Utility sharedUtility].userInfo.tokenStr;
+    NSString * phoneNumber = [FXD_Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [FXD_Utility sharedUtility].userInfo.userMobilePhone;
+    NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode] == nil ? @"" : [FXD_Tool getContentWithKey:kInvitationCode];
+    
+    LoginSyncParse * loginParse = [[LoginSyncParse alloc]init];
+    loginParse.juid = juidStr;
+    loginParse.tokenStr = juidStr;
+    loginParse.type = @"0";
+    loginParse.mobile_phone_ = phoneNumber;
+    loginParse.invitation_code = invationCode;
+    loginParse.version = [FXD_Tool getAppVersion];
+    loginParse.channel = CHANNEL;
+    loginParse.platformType = CODE_SERVICE_PLATFORM;
+    return loginParse;
+}
 /*
 - (NSString *)noWhiteSpaceString {
     NSString *newString = self;

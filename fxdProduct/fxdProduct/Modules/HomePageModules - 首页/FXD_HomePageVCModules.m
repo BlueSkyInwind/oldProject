@@ -358,10 +358,9 @@
         __weak typeof (self) weakSelf = self;
         [[FXD_AlertViewCust sharedHHAlertView] homeActivityPopLoadImageUrl:model.image ParentVC:self compleBlock:^(NSInteger index) {
             if (index == 1) {
-                [weakSelf homeActivityPictureClick];
+                [weakSelf homeActivityPictureClick:model];
             }
         }];
-
     }
 }
 
@@ -396,7 +395,7 @@
 /**
  首页活动图片点击
  */
-- (void)homeActivityPictureClick
+- (void)homeActivityPictureClick:(PopListModel *)model
 {
     DLog(@"广告图片点击");
     if ([_advTapToUrl containsString:@".png"] || [_advTapToUrl containsString:@".jpg"]) {
@@ -405,9 +404,11 @@
         [self.navigationController pushViewController:firstBorrowVC animated:YES];
     }
     if ([_advTapToUrl hasPrefix:@"http://"] || [_advTapToUrl hasPrefix:@"https://"]) {
-        FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-        webView.urlStr = _advTapToUrl;
-        [self.navigationController pushViewController:webView animated:true];
+        [self obtainUriWithParam:_advTapToUrl type:model.isPlatformLinks complication:^(NSString *resultStr) {
+            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+            webView.urlStr = resultStr;
+            [self.navigationController pushViewController:webView animated:true];
+        }];
     }
 }
 
@@ -534,9 +535,11 @@
                 firstBorrowVC.url = model.toUrl;
                 [self.navigationController pushViewController:firstBorrowVC animated:YES];
             }else{
-                FXDWebViewController *webView = [[FXDWebViewController alloc] init];
-                webView.urlStr = model.toUrl;
-                [self.navigationController pushViewController:webView animated:true];
+                [self obtainUriWithParam:model.toUrl type:model.isPlatformLinks complication:^(NSString *resultStr) {
+                    FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+                    webView.urlStr = resultStr;
+                    [self.navigationController pushViewController:webView animated:true];
+                }];
             }
         }
     }
@@ -547,21 +550,20 @@
     
     IndexMenuModel *model = _homeProductList.indexMenu[sender.tag - 101];
     if (model.toUrl == nil) {
-        
         self.tabBarController.selectedIndex = 3;
     }else{
-        FXDWebViewController *controller = [[FXDWebViewController alloc]init];
-        controller.urlStr = model.toUrl;
-        [self.navigationController pushViewController:controller animated:true];
+        [self obtainUriWithParam:model.toUrl type:model.isPlatformLinks complication:^(NSString *resultStr) {
+            FXDWebViewController *webView = [[FXDWebViewController alloc] init];
+            webView.urlStr = resultStr;
+            [self.navigationController pushViewController:webView animated:true];
+        }];
     }
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 /*
 #pragma mark - Navigation
@@ -572,5 +574,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void)obtainUriWithParam:(NSString *)urlStr type:(NSString *)type complication:(void(^)(NSString * resultStr))result{
+    
+    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
+    [homeVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * model = (BaseResultModel *)returnValue;
+        if ([model.errCode isEqualToString:@"0"]) {
+            NSString * str = (NSString *)model.data;
+            result(str);
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [homeVM obtainParamAddress:urlStr linkType:type];
+}
+
 
 @end

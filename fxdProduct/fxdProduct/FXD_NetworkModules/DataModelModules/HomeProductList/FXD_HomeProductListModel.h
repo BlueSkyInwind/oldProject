@@ -149,6 +149,7 @@
 //跳转url
 @property (nonatomic, strong)NSString<Optional> *toUrl;
 
+@property (nonatomic, strong)NSString<Optional> *isPlatformLinks;
 
 @end
 
@@ -220,6 +221,8 @@
 @property (nonatomic, strong)NSString<Optional> *title;
 //平台LOGO
 @property (nonatomic, strong)NSString<Optional> *toUrl;
+
+@property (nonatomic, strong)NSString<Optional> *isPlatformLinks;
 
 @end
 
@@ -298,6 +301,9 @@
 @property (nonatomic, strong)NSString<Optional> *isValid;
 //跳转url
 @property (nonatomic, strong)NSString<Optional> *toUrl;
+
+@property (nonatomic, strong)NSString<Optional> *isPlatformLinks;
+
 
 @end
 

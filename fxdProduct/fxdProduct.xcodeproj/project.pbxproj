@@ -485,6 +485,8 @@
 		84BC53D71FF4C43B00FE58E8 /* OverdueInfoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */; };
 		84BC53D91FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */; };
 		84BC53DA1FF4CB5E00FE58E8 /* CommonProtocol .swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */; };
+		84C081DF20F3699E000628E7 /* BannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C081DE20F3699E000628E7 /* BannerParamModel.m */; };
+		84C081E020F3699E000628E7 /* BannerParamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C081DE20F3699E000628E7 /* BannerParamModel.m */; };
 		84C45C081FBC55860086E8DB /* DiscountTicketParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C45C071FBC55860086E8DB /* DiscountTicketParam.m */; };
 		84C45C091FBC55860086E8DB /* DiscountTicketParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C45C071FBC55860086E8DB /* DiscountTicketParam.m */; };
 		84C619BC1FA815A800626411 /* LoanPeriodForDetailsVCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6198F1FA8149700626411 /* LoanPeriodForDetailsVCModule.m */; };
@@ -1816,6 +1818,8 @@
 		84BC53D21FF4C42E00FE58E8 /* OverdueInfoPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueInfoPopView.swift; sourceTree = "<group>"; };
 		84BC53D51FF4C43B00FE58E8 /* OverdueInfoPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OverdueInfoPopView.xib; sourceTree = "<group>"; };
 		84BC53D81FF4CB5E00FE58E8 /* CommonProtocol .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommonProtocol .swift"; sourceTree = "<group>"; };
+		84C081DD20F3699E000628E7 /* BannerParamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerParamModel.h; sourceTree = "<group>"; };
+		84C081DE20F3699E000628E7 /* BannerParamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BannerParamModel.m; sourceTree = "<group>"; };
 		84C45C061FBC55860086E8DB /* DiscountTicketParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscountTicketParam.h; sourceTree = "<group>"; };
 		84C45C071FBC55860086E8DB /* DiscountTicketParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscountTicketParam.m; sourceTree = "<group>"; };
 		84C6198E1FA8149700626411 /* LoanPeriodForDetailsVCModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoanPeriodForDetailsVCModule.h; sourceTree = "<group>"; };
@@ -4533,6 +4537,8 @@
 			children = (
 				CC6E0F151FF0942400D32773 /* FXD_HomeProductListModel.h */,
 				CC6E0F161FF0942400D32773 /* FXD_HomeProductListModel.m */,
+				84C081DD20F3699E000628E7 /* BannerParamModel.h */,
+				84C081DE20F3699E000628E7 /* BannerParamModel.m */,
 			);
 			path = HomeProductList;
 			sourceTree = "<group>";
@@ -5281,6 +5287,7 @@
 				CC4F0634207C6B200030A12A /* QBBWitnDrawModel.m in Sources */,
 				CCCDA8841EE028A200B48DFF /* UnbundlingBankCardViewModel.m in Sources */,
 				63F254891E49A45900852CF1 /* HMScannerViewController.m in Sources */,
+				84C081DF20F3699E000628E7 /* BannerParamModel.m in Sources */,
 				6326C9D11BF08CEE00FD23A8 /* Model.m in Sources */,
 				636B1B261C2000E900450358 /* UIColor+Extend.m in Sources */,
 				84420A611ED678E200DFBFE0 /* LoginView.m in Sources */,
@@ -5758,6 +5765,7 @@
 				CC0DFA0E1EA5B1090024841A /* GetMoneyHistoryBaseClass.m in Sources */,
 				849AC26F1FF0FABE005E435F /* FXD_MXVerifyManager.m in Sources */,
 				84F1E2A41FD94B39007D3381 /* RegionCodeParam.m in Sources */,
+				84C081E020F3699E000628E7 /* BannerParamModel.m in Sources */,
 				849459D41FEBC364007EF067 /* FXD_LoanApplicationCellTableViewCell.swift in Sources */,
 				CC0DFA0F1EA5B1090024841A /* MyCardCell.m in Sources */,
 				CC0DFA101EA5B1090024841A /* ReturnMsgBaseClass.m in Sources */,

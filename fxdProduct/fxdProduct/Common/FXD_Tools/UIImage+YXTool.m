@@ -76,6 +76,52 @@
     return image;
 }
 
++ (NSString *)isAvailableQRcodeIn:(UIImage *)img{
+    UIImage *image = [img imageByInsetEdge:UIEdgeInsetsMake(-20, -20, -20, -20) withColor:[UIColor lightGrayColor]];
+    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{}];
+    NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
+    if (features.count >= 1) {
+        CIQRCodeFeature *feature = [features objectAtIndex:0];
+        NSString * qrCodeString = [feature.messageString copy];
+        NSLog(@"二维码信息:%@", qrCodeString);
+        return qrCodeString;
+    } else {
+        NSLog(@"无可识别的二维码");
+        return @"";
+    }
+}
+
+- (UIImage *)imageByInsetEdge:(UIEdgeInsets)insets withColor:(UIColor *)color{
+    CGSize size = self.size;
+    size.width -= insets.left + insets.right;
+    size.height -= insets.top + insets.bottom;
+    if (size.width <= 0 || size.height <= 0) {
+        return nil;
+    }
+    CGRect rect = CGRectMake(-insets.left, -insets.top, self.size.width, self.size.height);
+    UIGraphicsBeginImageContextWithOptions(size, NO, self.scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    if (color) {
+        CGContextSetFillColorWithColor(context, color.CGColor);
+        CGMutablePathRef path = CGPathCreateMutable();
+        CGPathAddRect(path, NULL, CGRectMake(0, 0, size.width, size.height));
+        CGPathAddRect(path, NULL, rect);
+        CGContextAddPath(context, path);
+        CGContextEOFillPath(context);
+        CGPathRelease(path);
+    }
+    [self drawInRect:rect];
+    UIImage *insetEdgedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return insetEdgedImage;
+}
+
+
+
+
+
+
+
 
 
 

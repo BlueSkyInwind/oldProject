@@ -26,4 +26,14 @@
  */
 +(UIImage *)gradientmageWithFrame:(CGRect)bound Colors:(NSArray *)colors GradientType:(int)type;
 
+/**
+ 识别图中二维码
+
+ @param img 图片
+ @return 返回值
+ */
++ (NSString *)isAvailableQRcodeIn:(UIImage *)img;
+- (UIImage *)imageByInsetEdge:(UIEdgeInsets)insets withColor:(UIColor *)color;
+
+
 @end

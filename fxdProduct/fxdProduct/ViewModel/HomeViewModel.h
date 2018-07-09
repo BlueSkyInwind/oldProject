@@ -30,7 +30,13 @@
  */
 -(void)paidcenterQbbWithDrawCapitalPlatform:(NSString *)capitalPlatform;
 
+/**
+ 推广带参地址
 
+ @param urlStr 原始urll
+ @param linkType 类型
+ */
+-(void)obtainParamAddress:(NSString *)urlStr linkType:(NSString *)linkType;
 @end
 
 

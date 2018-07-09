@@ -13,7 +13,7 @@
 #import "UserDataAuthenticationListVCModules.h"
 #import "RTRootNavigationController.h"
 #import "JSAndOCInteraction.h"
-@interface FXDWebViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate>
+@interface FXDWebViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate,UIGestureRecognizerDelegate>
 {
     UIProgressView *progressView;
     
@@ -38,12 +38,19 @@
     config.preferences.javaScriptCanOpenWindowsAutomatically = true;
     config.userContentController = [[WKUserContentController alloc] init];
     [config.userContentController addScriptMessageHandler:self name:@"jsToNative"];
+    
+    NSMutableString *javascript = [NSMutableString string];
+    [javascript appendString:@"document.documentElement.style.webkitTouchCallout='none';document.documentElement.style.webkitUserSelect='none';"];//禁止长按
+    WKUserScript *noneSelectScript = [[WKUserScript alloc] initWithSource:javascript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    [config.userContentController addUserScript:noneSelectScript];
+    
     CGFloat height = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height;
     _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, height, _k_w, _k_h - height) configuration:config];
     _webView.navigationDelegate = self;
     _webView.UIDelegate = self;
     _webView.scrollView.contentSize = CGSizeMake(_k_w, _webView.frame.size.height);
     [self.view addSubview:_webView];
+    [self addLongPressEvent];
     if (@available(iOS 11.0, *)) {
         _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         _webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -56,8 +63,7 @@
     
     DLog(@"%@  --- %@",NSStringFromCGRect(_webView.frame),NSStringFromCGSize(_webView.scrollView.contentSize))
     _webView.scrollView.showsVerticalScrollIndicator = false;
-    
-    [self loadWebview];
+    [self loadWebview:_urlStr];
     //webview添加KVO监听属性
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
@@ -67,12 +73,12 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (isHanfen) {
-        [self loadWebview];
+        [self loadWebview:_urlStr];
     }
 }
 
--(void)loadWebview{
-    NSString * requestUrlStr = [self generateRequestUrlString:_urlStr];
+-(void)loadWebview:(NSString *)url{
+    NSString * requestUrlStr = [self generateRequestUrlString:url];
     DLog(@"%@",requestUrlStr);
     // [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[requestUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:requestUrlStr] cachePolicy:1 timeoutInterval:30]];
@@ -91,7 +97,7 @@
     //h5拼装url
     if([resultStr containsString:@"wxact"] || [resultStr containsString:hostStr] ){
         isHanfen = true;
-        resultStr = [self assemblyUrl:resultStr];
+//        resultStr = [self assemblyUrl:resultStr];
     }else{
         isHanfen = false;
     }
@@ -107,15 +113,12 @@
         SplicingCharacter = @"&";
     }
     
-    if ([urlStr containsString:@"juid"]) {
+    if ([urlStr containsString:@"juid"] && [urlStr containsString:@"mobile_phone_"]) {
         return urlStr;
     }
     
-    NSString * juidStr = [FXD_Utility sharedUtility].userInfo.juid == nil ? @"" : [FXD_Utility sharedUtility].userInfo.juid;
-    NSString * tokenStr = [FXD_Utility sharedUtility].userInfo.tokenStr == nil ? @"" : [FXD_Utility sharedUtility].userInfo.tokenStr;
-    NSString * phoneNumber = [FXD_Utility sharedUtility].userInfo.userMobilePhone == nil ? @"" : [FXD_Utility sharedUtility].userInfo.userMobilePhone;
-    NSString * invationCode =  [FXD_Tool getContentWithKey:kInvitationCode] == nil ? @"" : [FXD_Tool getContentWithKey:kInvitationCode];
-    NSString * resultStr = [urlStr stringByAppendingFormat:@"%@type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@&channel=%@&version=%@&platformType=%@",SplicingCharacter,@"0",juidStr,tokenStr,phoneNumber,invationCode,CHANNEL,[FXD_Tool getAppVersion],CODE_SERVICE_PLATFORM];
+    LoginSyncParse * prase = [[JSAndOCInteraction sharedInteraction] obtainLoginInfo];
+    NSString * resultStr = [urlStr stringByAppendingFormat:@"%@type=%@&juid=%@&token=%@&mobile_phone_=%@&invitation_code_=%@&channel=%@&version=%@&platformType=%@",SplicingCharacter,@"0",prase.juid,prase.tokenStr,prase.mobile_phone_,prase.invitation_code,prase.channel,prase.version,prase.platformType];
     return resultStr;
 }
 
@@ -150,7 +153,7 @@
     self.navigationItem.rightBarButtonItem = aBarbi;
 }
 -(void)refreshWebBtnClock{
-    [self loadWebview];
+    [self loadWebview:_urlStr];
 }
 - (void)addBackAndCloseItem
 {
@@ -160,12 +163,6 @@
         self.navigationItem.leftBarButtonItems = @[backBarbi,closeBarbi];
         return;
     }
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-//    UIImage *img = [[UIImage imageNamed:@"return"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    [btn setImage:img forState:UIControlStateNormal];
-//    btn.frame = CGRectMake(0, 0, 45, 44);
-//    [btn addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btn];
     //    修改距离,距离边缘的
     UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     spaceItem.width = 3;
@@ -194,7 +191,29 @@
     progressView.trackTintColor=[UIColor whiteColor];
     [self.navigationController.navigationBar addSubview:progressView];
 }
-
+#pragma mark - 长按事件
+-(void)addLongPressEvent{
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longPress.minimumPressDuration = 1;
+    longPress.delegate = self;
+    [_webView addGestureRecognizer:longPress];
+}
+-(void)handleLongPress:(UILongPressGestureRecognizer *)recognizer {
+    if (recognizer.state != UIGestureRecognizerStateBegan) {
+        return;
+    }
+    CGPoint touchPoint = [recognizer locationInView:self.webView];
+    NSString *js = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).src", touchPoint.x, touchPoint.y];
+     [self.webView evaluateJavaScript:js completionHandler:^(id _Nullable imgUrl, NSError * _Nullable error) {
+         [[JSAndOCInteraction sharedInteraction] obtainImgUrlEvent:imgUrl VC:self isCopy:false complication:^(NSString *content) {
+             [self loadWebview:content];
+         }];
+    }];
+}
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
 #pragma mark -WKScriptMessageHandler
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
@@ -263,6 +282,26 @@
             NSString * saveImageUrl =  resultDic[@"saveImageUrl"];
             [[JSAndOCInteraction sharedInteraction] savePictureToAlbum:saveImageUrl VC:self];
         }
+        //JS交互识别图片二维码  FXDidentifyrQRCode
+        /*
+         {
+                "FXDidentifyrQRCode" : {
+                    "QRImageUrl" : "djeiojgffejfoewk",
+                    "isCopy" :  "1"   // 0 ，不复制 1、复制
+                }
+         }
+         */
+        if ([[dic allKeys] containsObject:@"FXDidentifyrQRCode"]) {
+            NSDictionary * resultDic = dic[@"FXDidentifyrQRCode"];
+            NSString * saveImageUrl =  resultDic[@"QRImageUrl"];
+            BOOL isCopy  = false;
+            if ([[resultDic allKeys] containsObject:@"isCopy"]) {
+                isCopy = [resultDic[@"isCopy"] boolValue];
+            }
+            [[JSAndOCInteraction sharedInteraction] obtainImgUrlEvent:saveImageUrl VC:self isCopy:isCopy complication:^(NSString *content) {
+                [self loadWebview:content];
+            }];
+        }
         //JS交互等待条  FXDWaitHubView
         /*
          {
@@ -281,9 +320,20 @@
             }
         }
         
+        //登录
         if ([[dic allKeys] containsObject:@"WebLogin"]) {
             NSDictionary * resultDic = dic[@"WebLogin"];
-            [[JSAndOCInteraction sharedInteraction] obtainLoginInfo:resultDic];
+            [[JSAndOCInteraction sharedInteraction] saveJsLoginInfo:resultDic];
+        }
+        
+        //获取登录信息
+        if ([[dic allKeys] containsObject:@"AppLoginInfo"]) {
+            LoginSyncParse * prase = [[JSAndOCInteraction sharedInteraction] obtainLoginInfo];
+            NSDictionary * dic = [prase toDictionary];
+            NSString * jsStr  =[NSString stringWithFormat:@"sendKey('%@')",dic];
+            [self.webView evaluateJavaScript:jsStr completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+                
+            }];
         }
     }
 }
@@ -323,7 +373,7 @@
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
-//    NSString * paramStr = [[JSAndOCInteraction sharedInteraction] obtainLoginInfo];
+//    NSString * paramStr = [[JSAndOCInteraction sharedInteraction] saveJsLoginInfo];
     //调用js发送平台
     if([webView.URL.absoluteString containsString:@"fxd-pay-fe"]){
         NSString *inputValueJS = [NSString stringWithFormat:@"window.FXDNAVIGATOR.platformFn('0')"];
@@ -435,5 +485,29 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+
+/**
+ 自产品推广登陆后重新请求
+
+ @param urlStr 页面url
+ @param type 类型固定为 1
+ @param result 回调结果
+ */
+-(void)obtainUriWithParam:(NSString *)urlStr type:(NSString *)type complication:(void(^)(NSString * resultStr))result{
+    
+    HomeViewModel * homeVM = [[HomeViewModel alloc]init];
+    [homeVM setBlockWithReturnBlock:^(id returnValue) {
+        BaseResultModel * model = (BaseResultModel *)returnValue;
+        if ([model.errCode isEqualToString:@"0"]) {
+            NSString * str = (NSString *)model.data;
+            result(str);
+        }else{
+            [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:model.friendErrMsg];
+        }
+    } WithFaileBlock:^{
+    }];
+    [homeVM obtainParamAddress:urlStr linkType:type];
+}
 
 @end
