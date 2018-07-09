@@ -91,14 +91,15 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     header.image = navImage;
     [_topView addSubview:header];
     
+    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, BarHeightNew, _k_w, 175)];
+    headerView.backgroundColor = UIColor.clearColor;
+    [_topView addSubview:headerView];
+    
     _headerView = [[NSBundle mainBundle] loadNibNamed:[[DetailRepayHeader class] description] owner:self options:nil].lastObject;
-    
-    if (UI_IS_IPHONEX) {
-        _headerView.frame = CGRectMake(0, BarHeightNew, _k_w, 87);
+    if (UI_IS_IPHONE6P) {
+        _headerView.frame = CGRectMake(0, 0, _k_w, 175);
     }
-    
-//    _headerView.headerHeight.constant = 20;
-    [_topView addSubview:_headerView];
+    [headerView addSubview:_headerView];
 }
 
 - (void)setUpSelectAllBtn
@@ -234,17 +235,6 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     return nil;
 }
 
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    navBarHairlineImageView.hidden = YES;
-//}
-////在页面消失的时候就让出现
-//-(void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewWillDisappear:animated];
-//    navBarHairlineImageView.hidden = NO;
-//}
 
 
 -(void)viewWillAppear:(BOOL)animated

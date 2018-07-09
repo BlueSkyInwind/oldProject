@@ -63,7 +63,7 @@
     self.contentTextField.font = [UIFont systemFontOfSize:13];
     self.contentTextField.secureTextEntry = YES;
     self.contentTextField.clearsOnBeginEditing = YES;
-    self.contentTextField.textColor = rgb(178, 178, 178);
+    self.contentTextField.textColor = rgb(102, 102, 102);
     self.contentTextField.delegate =self;
     [self.backView addSubview:self.contentTextField];
     [self.contentTextField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,7 +75,7 @@
         
     }];
     
-    if (UI_IS_IPHONEX) {
+    if (UI_IS_IPHONEX || UI_IS_IPHONE6P) {
         [self.contentTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.backView.mas_left).with.offset(140);
             make.right.equalTo(self.contentView.mas_right).with.offset(10);

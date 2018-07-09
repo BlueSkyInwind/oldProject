@@ -12,21 +12,15 @@
 
 ///借款时间
 @property (weak, nonatomic) IBOutlet UILabel *sigingDayLabel;
-
 ///本金
 @property (weak, nonatomic) IBOutlet UILabel *principalAmountLabel;
-
 ///服务费
 @property (weak, nonatomic) IBOutlet UILabel *feeAmountLabel;
-
 ///合计金额
 @property (weak, nonatomic) IBOutlet UILabel *repaymentAmountLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *periodsLabel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *repaymentViewLeftCon;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeight;
-
-
 
 @end

@@ -123,10 +123,6 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
                 let count = self.rt_navigationController.rt_viewControllers.count
                 let controller = self.rt_navigationController.rt_viewControllers[count - index]
                 self.navigationController?.popToViewController(controller, animated: true)
-//                //银行卡授权成功跳回页面
-//                let count = self.rt_navigationController.rt_viewControllers.count
-//                let controller = self.rt_navigationController.rt_viewControllers[count - 3]
-//                self.navigationController?.popToViewController(controller, animated: true)
         
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
@@ -250,7 +246,7 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
         button.alpha = 0.4;
         //调用发送验证码
         let tag = button.tag - 1001
-        sendSms(tag: tag)
+        sendSms(tag: tag, button: button)
     }
     
     @objc func xinyanKeepTime()  {
@@ -274,21 +270,41 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
         //调用发送验证码
        
         let tag = button.tag - 1001
-        sendSms(tag: tag)
+        sendSms(tag: tag, button: button)
         
     }
     
-    func sendSms(tag:Int){
+    func sendSms(tag:Int , button : UIButton){
         let model = bankCardQueryArray![tag] as! BankCardAuthorizationAuthListModel
         
         let bankCardAuthorizationVM = BankCardAuthorizationViewModel()
-        bankCardAuthorizationVM.setBlockWithReturn({ (returnValue) in
+        bankCardAuthorizationVM.setBlockWithReturn({[weak self](returnValue) in
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
                 
                 
             }else{
-                MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
+                
+                switch tag{
+                case 0:
+                    button.isUserInteractionEnabled = true
+                    button.alpha = 1;
+                    button.setTitle("重新获取", for: UIControlState.normal)
+                    self?.xinyantimeNum = 60
+                    self?.xinyanTimer?.invalidate()
+                    self?.xinyanTimer = nil
+                case 1:
+                    button.isUserInteractionEnabled = true
+                    button.alpha = 1;
+                    button.setTitle("重新获取", for: UIControlState.normal)
+                    self?.yinshengbaotimeNum = 60
+                    self?.yinshengbaoTimer?.invalidate()
+                    self?.yinshengbaoTimer = nil
+                default:
+                    break;
+                }
+    
+                MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: baseResult.friendErrMsg)
             }
         }) {
             

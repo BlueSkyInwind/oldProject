@@ -74,9 +74,9 @@ class DiscountCouponListVCModules: UIViewController,UITableViewDelegate,UITableV
             }
         }
         if index == indexPath.row{
-            discountcell?.chooseBtn?.setImage(UIImage.init(named: "choose_Icon"), for: UIControlState.normal);
+            discountcell?.chooseBtn?.setImage(UIImage.init(named: "tricked"), for: UIControlState.normal);
         }else{
-            discountcell?.chooseBtn?.setImage(UIImage.init(named: "unChoose_Icon"), for: UIControlState.normal);
+            discountcell?.chooseBtn?.setImage(UIImage.init(named: "trick"), for: UIControlState.normal);
         }
         return discountcell!
     }
