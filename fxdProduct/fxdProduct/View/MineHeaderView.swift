@@ -10,7 +10,7 @@ import UIKit
 
 @objc protocol MineHeaderViewDelegate: NSObjectProtocol {
     
-    func bottomBtnClick()
+    func bottomBtnClick(_ sender : UIButton)
 }
 class MineHeaderView: UIView {
 
@@ -24,6 +24,9 @@ class MineHeaderView: UIView {
     @objc var timeBtn : UIButton?
     //底部按钮
     @objc var bottomBtn : UIButton?
+    
+    @objc var timeView : UIView?
+    
     @objc var type : String?{
         didSet(newValue){
             
@@ -98,9 +101,10 @@ extension MineHeaderView{
         
         bottomBtn = UIButton()
         bottomBtn?.setTitleColor(UIColor.black, for: .normal)
+        bottomBtn?.tag = 102
         bottomBtn?.setBackgroundImage(UIImage.init(named: "bottomBtn_icon"), for: .normal)
         bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        bottomBtn?.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
+        bottomBtn?.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
         self.addSubview(bottomBtn!)
         bottomBtn?.snp.makeConstraints({ (make) in
             make.bottom.equalTo(self).offset(-25)
@@ -154,12 +158,12 @@ extension MineHeaderView{
             make.centerX.equalTo(self.snp.centerX)
         })
         
-        let timeView = UIView()
-        timeView.backgroundColor = UIColor.clear
-        self.addSubview(timeView)
-        timeView.snp.makeConstraints { (make) in
+        timeView = UIView()
+        timeView?.backgroundColor = UIColor.clear
+        self.addSubview(timeView!)
+        timeView?.snp.makeConstraints { (make) in
             make.top.equalTo((moneyLabel?.snp.bottom)!).offset(10)
-            make.width.equalTo(210)
+//            make.width.equalTo(190)
             make.centerX.equalTo(self.snp.centerX)
             make.height.equalTo(20)
         }
@@ -167,10 +171,10 @@ extension MineHeaderView{
         dateLabel = UILabel()
         dateLabel?.textColor = UIColor.white
         dateLabel?.font = UIFont.systemFont(ofSize: 12)
-        timeView.addSubview(dateLabel!)
+        timeView?.addSubview(dateLabel!)
         dateLabel?.snp.makeConstraints({ (make) in
-            make.left.equalTo(timeView.snp.left).offset(5)
-            make.centerY.equalTo(timeView.snp.centerY)
+            make.left.equalTo((timeView?.snp.left)!).offset(5)
+            make.centerY.equalTo((timeView?.snp.centerY)!)
         })
         
         timeBtn = UIButton()
@@ -178,21 +182,21 @@ extension MineHeaderView{
         timeBtn?.isHidden = true
         timeBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         timeBtn?.setTitleColor(UIColor.init(red: 93/255.0, green: 141/255.0, blue: 250/255.0, alpha: 1.0), for: .normal)
-        timeView.addSubview(timeBtn!)
+        timeView?.addSubview(timeBtn!)
         timeBtn?.snp.makeConstraints({ (make) in
             make.left.equalTo((dateLabel?.snp.right)!).offset(14)
-            make.centerY.equalTo(timeView.snp.centerY)
-            make.width.equalTo(70)
+            make.centerY.equalTo((timeView?.snp.centerY)!)
         })
         
         bottomBtn = UIButton()
         bottomBtn?.titleLabel?.textAlignment = .center
         bottomBtn?.setTitleColor(UIColor.black, for: .normal)
         bottomBtn?.isHidden = true
+        bottomBtn?.tag = 101
         bottomBtn?.setBackgroundImage(UIImage.init(named: "bottomBtn_icon"), for: .normal)
         bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
 //        bottomBtn?.setTitle("立即还款", for: .normal)
-        bottomBtn?.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
+        bottomBtn?.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
         self.addSubview(bottomBtn!)
         bottomBtn?.snp.makeConstraints({ (make) in
             make.bottom.equalTo(self).offset(-14)
@@ -265,9 +269,10 @@ extension MineHeaderView{
         
         bottomBtn = UIButton()
         bottomBtn?.setTitleColor(UIColor.black, for: .normal)
+        bottomBtn?.tag = 103
         bottomBtn?.setBackgroundImage(UIImage.init(named: "bottomBtn_icon"), for: .normal)
         bottomBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        bottomBtn?.addTarget(self, action: #selector(bottomBtnClick), for: .touchUpInside)
+        bottomBtn?.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
         self.addSubview(bottomBtn!)
         bottomBtn?.snp.makeConstraints({ (make) in
             make.bottom.equalTo(self).offset(-25)
@@ -286,10 +291,10 @@ extension MineHeaderView{
     }
     
     
-    @objc fileprivate func bottomBtnClick(){
+    @objc fileprivate func bottomBtnClick(_ sender : UIButton){
         
         if delegate != nil {
-            delegate?.bottomBtnClick()
+            delegate?.bottomBtnClick(sender)
         }
     }
 }

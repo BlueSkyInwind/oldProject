@@ -61,17 +61,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+     [self createTab];
+    
     if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
-        self.tableView.contentInset = UIEdgeInsetsMake(BarHeightNew - 64, 0, 0, 0);
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     }else{
-        self.automaticallyAdjustsScrollViewInsets=NO;
+        self.automaticallyAdjustsScrollViewInsets = NO;
     }
 
     _count = 0;
     _dataArray = [NSMutableArray array];
-    [self createTab];
-    
+   
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -95,11 +96,13 @@
 -(void)createTab{
     
     CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, -rectOfStatusbar.size.height, _k_w, _k_h-49 + rectOfStatusbar.size.height) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h-49) style:UITableViewStylePlain];
     [self.tableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"HomePageCell"];
     [self.tableView registerClass:[HomeBetweenCell class] forCellReuseIdentifier:@"HomeBetweenCell"];
     [self.tableView registerClass:[RecentCell class] forCellReuseIdentifier:@"RecentCell"];
-    
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.scrollEnabled = true;

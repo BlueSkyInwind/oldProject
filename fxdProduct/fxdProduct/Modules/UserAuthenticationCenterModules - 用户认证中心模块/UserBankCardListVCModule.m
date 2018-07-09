@@ -42,11 +42,14 @@ static NSString * const bankListCellIdentifier = @"BankListCell";
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(fatchBankList)];
     header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;
-    [header beginRefreshing];
+//    [header beginRefreshing];
     self.tableView.mj_header = header;
+    
     
 }
 -(void)viewWillAppear:(BOOL)animated{
+    
+    [self fatchBankList];
     
 }
 -(void)configuireView{

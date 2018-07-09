@@ -19,6 +19,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
         self.title = "我的订单"
         addBackItem()
         dataArray = NSMutableArray.init(capacity: 100)
+        configureView()
         getData()
         noneViewUI()
 
@@ -58,6 +59,7 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
     func getData(){
         
+        tableView?.isHidden = true
         let viewModel = PhonerechargeCardServiceViewModel()
         viewModel.setBlockWithReturn({[weak self] (returnValue) in
             
@@ -72,8 +74,8 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
                     self?.noneView?.isHidden = false
                     
                 }else{
-                    
-                    self?.configureView()
+                    self?.tableView?.isHidden = false
+//                    self?.configureView()
                     self?.noneView?.isHidden = true
                     self?.tableView?.isHidden = false
                     self?.dataArray?.removeAllObjects()
@@ -153,7 +155,6 @@ class MyOrdersViewController: BaseViewController ,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        self.tabBarController?.selectedIndex = 0;
         let model = dataArray![indexPath.row] as! PhoneOrderListModel
         let controller = OrderConfirmDetailViewController()
         controller.orderNo = model.order_no

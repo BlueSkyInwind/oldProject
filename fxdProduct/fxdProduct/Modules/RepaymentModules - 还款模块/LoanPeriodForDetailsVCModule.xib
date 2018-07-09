@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,6 +19,8 @@
                 <outlet property="selectAllBtn" destination="URp-dD-Yha" id="piZ-gD-ztO"/>
                 <outlet property="tableView" destination="oTo-gu-Gnj" id="oxS-3R-f2y"/>
                 <outlet property="topView" destination="Gpa-qo-N4c" id="KkS-dA-PkS"/>
+                <outlet property="topViewHeight" destination="csi-mv-jg8" id="vZu-48-Vlu"/>
+                <outlet property="topViewTop" destination="YNW-YG-uBu" id="WEK-IZ-RbP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,7 +30,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oTo-gu-Gnj">
-                    <rect key="frame" x="0.0" y="239" width="375" height="368"/>
+                    <rect key="frame" x="0.0" y="175" width="375" height="432"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="0pp-nM-8Er"/>
@@ -40,7 +42,7 @@
                     <subviews>
                         <button opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Oe-Sc-Rwb">
                             <rect key="frame" x="248" y="0.0" width="127" height="60"/>
-                            <color key="backgroundColor" red="0.83137254901960778" green="0.6705882352941176" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.29803921570000003" green="0.53333333329999999" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="2Oe-Sc-Rwb" secondAttribute="height" multiplier="127:60" id="Ylm-Qq-gUx"/>
                             </constraints>
@@ -101,7 +103,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gpa-qo-N4c">
-                    <rect key="frame" x="0.0" y="64" width="375" height="175"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="175" id="csi-mv-jg8"/>
@@ -116,7 +118,7 @@
                 <constraint firstAttribute="bottom" secondItem="7wL-HD-kYC" secondAttribute="bottom" id="O8E-Hi-Z7S"/>
                 <constraint firstAttribute="trailing" secondItem="Gpa-qo-N4c" secondAttribute="trailing" id="OF6-Ko-loH"/>
                 <constraint firstAttribute="trailing" secondItem="7wL-HD-kYC" secondAttribute="trailing" id="TIB-vg-hAP"/>
-                <constraint firstItem="Gpa-qo-N4c" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="YNW-YG-uBu"/>
+                <constraint firstItem="Gpa-qo-N4c" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YNW-YG-uBu"/>
                 <constraint firstAttribute="trailing" secondItem="oTo-gu-Gnj" secondAttribute="trailing" id="dxi-fq-KIL"/>
                 <constraint firstItem="7wL-HD-kYC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tgW-Jl-d61"/>
                 <constraint firstItem="7wL-HD-kYC" firstAttribute="top" secondItem="oTo-gu-Gnj" secondAttribute="bottom" id="xyG-yu-znv"/>
@@ -125,6 +127,6 @@
         </view>
     </objects>
     <resources>
-        <image name="repay_circle_03" width="24" height="24"/>
+        <image name="repay_circle_03" width="18" height="18"/>
     </resources>
 </document>

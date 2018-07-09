@@ -40,7 +40,7 @@ extension ChooseDiscountTableViewCell{
     
     func setUpUI()  -> Void{
         chooseBtn = UIButton.init(type: UIButtonType.custom)
-        chooseBtn?.setBackgroundImage(UIImage.init(named: "unChoose_Icon"), for: UIControlState.normal)
+        chooseBtn?.setBackgroundImage(UIImage.init(named: "tricked"), for: UIControlState.normal)
         self.addSubview(chooseBtn!)
         chooseBtn?.snp.makeConstraints({ (make) in
             make.width.height.equalTo(19)

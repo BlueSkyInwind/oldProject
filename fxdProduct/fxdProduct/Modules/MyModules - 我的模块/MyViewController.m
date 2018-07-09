@@ -28,7 +28,7 @@
     AountStationLetterMsgModel *model;
     NSString *_h5_url_;
     FXD_HomeProductListModel *_homeProductModel;
-    NSInteger _type;
+
    
 }
 @property (strong, nonatomic) IBOutlet UITableView *MyViewTable;
@@ -65,7 +65,6 @@
     }else{
         model.isDisplay = @"0";
         _headerView.type = @"0";
-        _type = _headerView.type.integerValue;
         [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
         [self.MyViewTable reloadData];
     }
@@ -97,7 +96,30 @@
                     _headerView.moneyLabel.text = [NSString stringWithFormat:@"%@元",model.debtRepayTotal];
                     _headerView.dateLabel.text = [NSString stringWithFormat:@"还款日: %@",model.dueDate];;
                     [_headerView.timeBtn setTitle:model.dueDateTip forState:UIControlStateNormal];
-                    
+                
+                    if (model.dueDateTip.length > 4) {
+                        
+                        NSDictionary *dic = @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
+                        CGFloat width = [model.dueDateTip boundingRectWithSize:CGSizeMake(_k_h, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size.width;
+                        
+                        CGFloat timeWidth = 144 + width;
+                        NSNumber *timeWidth1 = [[NSNumber alloc]initWithDouble:timeWidth];
+                        
+                        [_headerView.timeView mas_makeConstraints:^(MASConstraintMaker *make) {
+                            make.width.equalTo(timeWidth1);
+                        }];
+                        
+                        CGFloat width2 = width + 20;
+                        NSNumber *width1 = [[NSNumber alloc]initWithDouble:width2];
+                        [_headerView.timeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                            make.width.equalTo(width1);
+                        }];
+                        
+                    }else{
+                        [_headerView.timeView mas_makeConstraints:^(MASConstraintMaker *make) {
+                            make.width.equalTo(@190);
+                        }];
+                    }
                     [_headerView.timeBtn setTitleColor:UI_MAIN_COLOR forState:UIControlStateNormal];
                     if (model.maxOverdueDays.integerValue > 0) {
                         
@@ -105,8 +127,7 @@
                     }
                 }
             }
-            
-            _type = _headerView.type.integerValue;
+        
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message: baseResultM.friendErrMsg];
         }
@@ -121,8 +142,13 @@
  */
 -(void)addHeaderView{
     
+    if (UI_IS_IPHONEX) {
+        _headerView = [[MineHeaderView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 190)];
+    }else{
+        _headerView = [[MineHeaderView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 180)];
+    }
     //添加自定义头部
-    _headerView = [[MineHeaderView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 180)];
+//    _headerView = [[MineHeaderView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 180)];
     _headerView.backgroundColor = [UIColor clearColor];
     _headerView.delegate = self;
     [self.view addSubview:_headerView];
@@ -131,23 +157,23 @@
 
 }
 
--(void)bottomBtnClick{
-    switch (_type) {
-        case 2:
+-(void)bottomBtnClick:(UIButton *)sender{
+    switch (sender.tag) {
+        case 101:
         {
             MyBillViewController *controller = [[MyBillViewController alloc]init];
             [self.navigationController pushViewController:controller animated:true];
         }
             break;
-        case 0:
+        case 102:
             [self presentLoginVCCompletion:nil];
             break;
         default:
             self.tabBarController.selectedIndex = 1;
             break;
     }
-    
 }
+
 -(void)memberBtnClick{
     //检测登录
     if (![FXD_Utility sharedUtility].loginFlage) {

@@ -12,6 +12,7 @@
 
 @interface LapseDiscountTicketViewController ()<UITableViewDelegate,UITableViewDataSource>{
     int  pages;
+    UIView *NoneView;
 
 }
 
@@ -26,6 +27,7 @@
     pages  = 1;
     [self addBackItem];
     [self createTableView];
+    [self createNoneView];
 
 }
 
@@ -52,8 +54,49 @@
     [self setupMJRefreshTableView];
 }
 
+
+#pragma mark 初始化无优惠券视图
+-(void)createNoneView
+{
+    self.view.backgroundColor = kUIColorFromRGB(0xf5f6fa);
+    NoneView =[[UIView alloc]init];
+    NoneView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
+    [self.view addSubview:NoneView];
+    [NoneView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).with.offset(64);
+        make.left.right.equalTo(self.view).with.offset(0);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+    }];
+    
+    UIImageView *logoImg=[[UIImageView alloc]init];
+    logoImg.image=[UIImage imageNamed:@"ticket_none_icon"];
+    [NoneView addSubview:logoImg];
+    [logoImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(NoneView.mas_top).with.offset(124);
+        make.centerX.equalTo(self.view.mas_centerX);
+    }];
+    
+    UILabel *lblNone=[[UILabel alloc]init];
+    lblNone.numberOfLines = 0;
+    lblNone.text = @"亲, 您暂时还没有过期券";
+    lblNone.textAlignment = NSTextAlignmentCenter;
+    lblNone.font = [UIFont systemFontOfSize:14];
+    lblNone.textColor = kUIColorFromRGB(0x808080);
+    [NoneView addSubview:lblNone];
+    [lblNone mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(logoImg.mas_bottom).with.offset(53);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.height.equalTo(@30);
+        make.width.equalTo(@250);
+    }];
+    
+}
+
 #pragma mark 获取过期券列表
 -(void)obtainDiscountTicket:(int)pageNum{
+
+    self.tableView.hidden = true;
+    NoneView.hidden = false;
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
     [applicationVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
@@ -65,7 +108,14 @@
             for (DiscountTicketDetailModel *discountTicketDetailM in discountTicketM.notuselist) {
                 [self.invalidTicketArr addObject:discountTicketDetailM];
             }
-            [self.tableView reloadData];
+            
+            if (self.invalidTicketArr.count > 0) {
+                self.tableView.hidden = false;
+                NoneView.hidden = true;
+                [self.tableView reloadData];
+                
+            }
+            
         }else{
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }

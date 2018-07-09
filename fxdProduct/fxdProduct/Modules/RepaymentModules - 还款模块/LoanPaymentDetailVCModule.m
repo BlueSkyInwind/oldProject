@@ -110,8 +110,6 @@
 
     payLoanArry = @[@"使用券",@"逾期费用",@"使用溢缴金额",@"实扣金额",@"支付方式"];
     self.PayDetailTB.bounces=NO;
-    [FXD_Tool setCorner:self.sureBtn borderColor:UI_MAIN_COLOR];
-//    self.sureBtn.layer.cornerRadius = 16;
     
     if (_isPopRoot) {
         [self addBackItemRoot];
@@ -151,13 +149,14 @@
 
 -(void)createHeaderView
 {
-    
     UIImageView *header = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 220)];
     UIImage * navImage = [UIImage gradientmageWithFrame:CGRectMake(0, 0, _k_w, BarHeightNew) Colors:@[rgb(33, 168, 234),rgb(95, 121, 234)] GradientType:1];
     header.image = navImage;
 
     CGPoint headerCenter = header.center;
 #pragma mark 这个是顶部的还款金额 应该是请求完数据后
+    
+    
     self.lblShouldrepay=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
     NSNumber *number = [NSNumber numberWithFloat:_repayAmount];
     [_lblShouldrepay fn_setNumber:number format:@"%.2f"];
@@ -182,6 +181,12 @@
         _lblShouldrepay.center = CGPointMake(_k_w/2, headerCenter.y+20);
         lblRepayTip.center=CGPointMake(_k_w/2, headerCenter.y-30);
     }else{
+        _lblShouldrepay.center=CGPointMake(_k_w/2, headerCenter.y+40);
+        lblRepayTip.center=CGPointMake(_k_w/2, headerCenter.y);
+    }
+    
+    if (UI_IS_IPHONEX) {
+        
         _lblShouldrepay.center=CGPointMake(_k_w/2, headerCenter.y+40);
         lblRepayTip.center=CGPointMake(_k_w/2, headerCenter.y);
     }
@@ -579,10 +584,14 @@
     [paymentViewModel setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel * baseResultModel = returnValue;
         if ([baseResultModel.errCode isEqualToString:@"0"]) {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.friendErrMsg];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            });
+            
+            RepaymentResultViewController *controller = [[RepaymentResultViewController alloc]init];
+            [self.navigationController pushViewController:controller animated:true];
+            
+//            [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.friendErrMsg];
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [self.navigationController popToRootViewControllerAnimated:YES];
+//            });
         }else {
             self.sureBtn.enabled = YES;
             [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:baseResultModel.friendErrMsg];

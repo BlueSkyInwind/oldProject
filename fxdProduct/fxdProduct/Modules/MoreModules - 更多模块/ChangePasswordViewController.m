@@ -181,8 +181,8 @@
 -(BOOL)checkInputPassword{
     
     ChangePasswordTableViewCell * oldcell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    ChangePasswordTableViewCell * newcell1 = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    ChangePasswordTableViewCell * newcell2 = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    ChangePasswordTableViewCell * newcell1 = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    ChangePasswordTableViewCell * newcell2 = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
     if(oldcell.contentTextField.text.length < 6){
         [[MBPAlertView sharedMBPTextView] showTextOnly:self.view message:@"请保持密码长度在6~16位"];
         return NO;
