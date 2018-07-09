@@ -108,12 +108,6 @@
                         [_headerView.timeView mas_makeConstraints:^(MASConstraintMaker *make) {
                             make.width.equalTo(timeWidth1);
                         }];
-//                        [_headerView.timeView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                            make.top.equalTo(_headerView.moneyLabel.mas_bottom).offset(10);
-//                            make.width.equalTo(timeWidth1);
-//                            make.centerX.equalTo(_headerView.mas_centerX);
-//                            make.height.equalTo(@20);
-//                        }];
                         
                         CGFloat width2 = width + 20;
                         NSNumber *width1 = [[NSNumber alloc]initWithDouble:width2];

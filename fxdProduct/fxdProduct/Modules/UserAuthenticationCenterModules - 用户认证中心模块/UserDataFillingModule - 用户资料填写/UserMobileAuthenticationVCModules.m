@@ -105,18 +105,20 @@ typedef enum {
     cell.passwordField.delegate = self;
     cell.veritifyCodeField.delegate = self;
     cell.picCodeTextField.delegate = self;
-    [FXD_Tool setCorner:cell.mobileBtn borderColor:[UIColor clearColor]];
+
     if (![_isMobileAuth isEqualToString:@"2"]) {
         if ([self isCanEnable]) {
-            [cell.mobileBtn setBackgroundColor:UI_MAIN_COLOR];
+            [cell.mobileBtn setBackgroundImage:[UIImage imageNamed:@"btn_seleted_icon"] forState:UIControlStateNormal];
             cell.mobileBtn.enabled = true;
             [cell.mobileBtn addTarget:self action:@selector(mobileCheck) forControlEvents:UIControlEventTouchUpInside];
         }else {
-            [cell.mobileBtn setBackgroundColor:rgb(139, 140, 143)];
+            [cell.mobileBtn setBackgroundImage:[UIImage imageNamed:@"btn_icon"] forState:UIControlStateNormal];
+
             cell.mobileBtn.enabled = false;
         }
     } else {
-        [cell.mobileBtn setBackgroundColor:rgb(139, 140, 143)];
+
+        [cell.mobileBtn setBackgroundImage:[UIImage imageNamed:@"btn_icon"] forState:UIControlStateNormal];
         cell.passwordField.enabled = false;
         [cell.mobileBtn setTitle:@"已认证" forState:UIControlStateNormal];
         cell.mobileBtn.enabled = false;
