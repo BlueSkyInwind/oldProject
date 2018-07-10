@@ -7,7 +7,6 @@
 //
 
 #import "MoreViewController.h"
-#import "AboutMainViewController.h"
 #import "AboutViewController.h"
 #import "IdeaBackViewController.h"
 #import "NextViewCell.h"
@@ -29,7 +28,6 @@
     NSArray *titleAry;
     UIView *lineView;
     //子功能视图
-    AboutMainViewController *aboutUs;//关于视图
     IdeaBackViewController *ideaBack;//反馈视图
     testView *_alertView;
 }

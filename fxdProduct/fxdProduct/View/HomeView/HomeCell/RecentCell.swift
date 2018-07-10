@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SnapKit
 
 class RecentCell: UITableViewCell ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     

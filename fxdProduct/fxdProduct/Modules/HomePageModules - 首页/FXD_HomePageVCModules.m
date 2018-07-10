@@ -34,7 +34,7 @@
 #import "ComplianceViewModel.h"
 #import "HgLoanProtoolListModel.h"
 #import "QBBWitnDrawModel.h"
-@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,SDCycleScrollCellDelegate,HomeBetweenCellDelegate>
+@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomeBetweenCellDelegate>
 {
     NSString *_advTapToUrl;
     NSString *_shareContent;
@@ -97,7 +97,6 @@
     
     CGRect rectOfStatusbar = [[UIApplication sharedApplication] statusBarFrame];
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h-49) style:UITableViewStylePlain];
-    [self.tableView registerClass:[HomePageCell class] forCellReuseIdentifier:@"HomePageCell"];
     [self.tableView registerClass:[HomeBetweenCell class] forCellReuseIdentifier:@"HomeBetweenCell"];
     [self.tableView registerClass:[RecentCell class] forCellReuseIdentifier:@"RecentCell"];
     self.tableView.estimatedRowHeight = 0;

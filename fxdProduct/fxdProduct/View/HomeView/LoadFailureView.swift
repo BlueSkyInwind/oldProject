@@ -61,7 +61,7 @@ extension LoadFailureView {
         })
     
         iconImageView = UIImageView.init()
-        iconImageView?.image = UIImage.init(named: "5_shenhe_icon_03")
+        iconImageView?.image = UIImage.init(named: "none_icon")
         self.addSubview(iconImageView!)
         iconImageView?.snp.makeConstraints({ (make) in
             make.bottom.equalTo((reminderLabel?.snp.top)!).offset(-5)
