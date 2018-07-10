@@ -50,43 +50,7 @@
         }
     }];
 }
-/*
--(void)uploadLiveIdentiInfo:(FaceIDData *)imagesDic{
-    
-    NSDictionary *paramDic = @{@"api_key":FaceIDAppKey,
-                               @"api_secret":FaceIDAppSecret,
-                               @"comparison_type":@"1",
-                               @"face_image_type":@"meglive",
-                               @"idcard_name":[FXD_Utility sharedUtility].userInfo.realName,
-                               @"idcard_number":[FXD_Utility sharedUtility].userInfo.userIDNumber,
-                               @"delta":imagesDic.delta};
-    
-    [[FXD_NetWorkRequestManager sharedNetWorkManager] POSTUpLoadImage:_verifyLive_url FilePath:imagesDic.images parameters:paramDic finished:^(EnumServerStatus status, id object) {
-        DLog(@"%@",object);
-        FaceIDLiveModel *faceIDLiveParse = [FaceIDLiveModel yy_modelWithJSON:object];
-        if (!faceIDLiveParse.error_message) {
-            NSDictionary *dic = [NSDictionary dictionaryWithDictionary:object];
-            NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-            NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            __weak typeof(self) weakSelf = self;
-            [self uploadLiveInfo:jsonStr isSuccess:^(id object) {
-  
-            }];
-        } else {
-            [[MBPAlertView sharedMBPTextView] showTextOnly:[UIApplication sharedApplication].keyWindow message:faceIDLiveParse.error_message];
-        }
-    } failure:^(EnumServerStatus status, id object) {
-        NSError * error  = (NSError *)object;
-        NSDictionary *erroInfo = error.userInfo;
-        NSData *data = [erroInfo valueForKey:@"com.alamofire.serialization.response.error.data"];
-        NSString *errorString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", errorString);
-        [self uploadLiveInfo:@"" isSuccess:^(id object) {
-            
-        }];
-    }];
-}
-*/
+
 - (void)uploadLiveInfo:(NSString *)resultJSONStr isSuccess:(void(^)(id object))success
 {
     

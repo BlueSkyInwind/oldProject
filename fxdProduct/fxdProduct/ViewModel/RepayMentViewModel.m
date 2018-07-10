@@ -12,7 +12,6 @@
 - (void)fatchQueryWeekShouldAlsoAmount:(NSDictionary *)paramDic
 {
     
-
     [[HF_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_getContractStagingInfo_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             BaseResultModel * baseResultM = [[BaseResultModel alloc]initWithDictionary:(NSDictionary *)object error:nil];
@@ -26,15 +25,5 @@
 
 }
 
-
-//- (void)getCurrentRenewalWithStagingId:(NSString *)stagingId{
-//
-//    NSDictionary *paramDic = @{@"stagingId":stagingId};
-//    [[FXD_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_repayment_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
-//        self.returnBlock(object);
-//    } failure:^(EnumServerStatus status, id object) {
-//        [self faileBlock];
-//    }];
-//}
 
 @end

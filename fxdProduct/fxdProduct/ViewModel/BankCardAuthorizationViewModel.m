@@ -7,7 +7,6 @@
 //
 
 #import "BankCardAuthorizationViewModel.h"
-#import "CardAuthAuthParamModel.h"
 #import "CardAuthSmsSendParamModel.h"
 #import "BankCardAuthorizationModel.h"
 @implementation BankCardAuthorizationViewModel
@@ -17,7 +16,6 @@
     NSMutableArray *arr = [NSMutableArray arrayWithCapacity:100];
     for (int i = 0; i<authCodeListArr.count; i++) {
         BankCardAuthorizationAuthListModel *model = (BankCardAuthorizationAuthListModel *)authCodeListArr[i];
-//        NSDictionary *modelDic = @{@"authPlatCode":model.authPlatCode,@"authSmsCode":smsCodeArray[i],@"requestType":requestType};
         NSDictionary *modelDic = @{@"authPlatCode":model.authPlatCode,@"authSmsCode":smsCodeArray[i]};
         [arr addObject:modelDic];
     }

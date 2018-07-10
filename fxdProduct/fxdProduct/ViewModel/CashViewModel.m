@@ -31,7 +31,7 @@
 
 -(void)loadWithdrawCashInfoOperateType:(NSString *)operateType{
     
-    NSDictionary *paramDic = @{@"operateType":operateType};
+    NSDictionary *paramDic = @{@"operateType":operateType == nil ? @"" : operateType};
     [[HF_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_LoadWithdrawCash_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);
@@ -69,7 +69,7 @@
 
 -(void)checkWithdrawCashOperateType:(NSString *)operateType{
     
-    NSDictionary *paramDic = @{@"operateType":operateType};
+    NSDictionary *paramDic = @{@"operateType":operateType == nil ? @"" : operateType};
     [[HF_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_CheckWithdrawCash_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {
             self.returnBlock(object);

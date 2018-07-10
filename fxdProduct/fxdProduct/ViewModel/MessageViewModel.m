@@ -30,7 +30,7 @@
 
 
 -(void)showMsgPreviewPageNum:(NSString *)pageNum pageSize:(NSString *)pageSize{
-    NSDictionary *paramDic = @{@"pageNum":pageNum,@"pageSize":pageSize,@"appType":@"2"};
+    NSDictionary *paramDic = @{@"pageNum":pageNum == nil ? @"" : pageNum,@"pageSize":pageSize,@"appType":@"2"};
     [[HF_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_ShowMsgPreview_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {
@@ -48,7 +48,7 @@
 
 -(void)delMsgDelType:(NSString *)delType operUserMassgeId:(NSString *)operUserMassgeId{
     
-    NSDictionary *paramDic = @{@"delType":delType,@"operUserMassgeId":operUserMassgeId};
+    NSDictionary *paramDic = @{@"delType":delType == nil ? @"" : delType ,@"operUserMassgeId":operUserMassgeId == nil ? @"" : operUserMassgeId};
     [[HF_NetWorkRequestManager sharedNetWorkManager]GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_delMsg_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         
         if (self.returnBlock) {

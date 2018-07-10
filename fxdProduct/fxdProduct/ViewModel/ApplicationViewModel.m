@@ -85,7 +85,7 @@
 
 -(void)obtainNewApplicationInfo:(NSString *)productId{
     
-    NSDictionary * paramDic = @{@"productId":productId};
+    NSDictionary * paramDic = @{@"productId":productId == nil ? @"" : productId};
     
     [[HF_NetWorkRequestManager sharedNetWorkManager] GetWithURL:[NSString stringWithFormat:@"%@%@",_main_new_url,_newApplicationViewInfo_url] isNeedNetStatus:true isNeedWait:true parameters:paramDic finished:^(EnumServerStatus status, id object) {
         if (self.returnBlock) {

@@ -14,11 +14,8 @@
 #import "LewPopupViewController.h"
 #import "FXDWebViewController.h"
 #import "SDCycleScrollView.h"
-#import "RepayRecordController.h" 
 #import "QRCodePopView.h"
 #import "UserDataAuthenticationListVCModules.h"
-#import "CheckViewModel.h"
-#import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "LoginViewModel.h"
 #import "HomepageActivityImageDisplayModule.h"
 #import "AppDelegate.h"
@@ -30,11 +27,7 @@
 #import "UITabBar+badge.h"
 #import "FXD_HomeProductListModel.h"
 #import "LoanPeriodListVCModule.h"
-#import "CommonViewModel.h"
-#import "ComplianceViewModel.h"
-#import "HgLoanProtoolListModel.h"
-#import "QBBWitnDrawModel.h"
-@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,BMKLocationServiceDelegate,LoadFailureDelegate,HomeBetweenCellDelegate>
+@interface FXD_HomePageVCModules ()<PopViewDelegate,UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,LoadFailureDelegate,HomeBetweenCellDelegate>
 {
     NSString *_advTapToUrl;
     NSString *_shareContent;
@@ -138,6 +131,10 @@
  我的消息视图
  */
 - (void)addMessageBtn:(CGFloat)height {
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(_k_w - 15 - 33, 15 + height, 21, 21)];
+    imageView.image = [UIImage imageNamed:@"homeMessage_bg_icon"];
+    [self.view addSubview:imageView];
     
     _messageBtn = [[UIButton alloc]initWithFrame:CGRectMake(_k_w - 15 - 30, 17 + height, 15, 16)];
     [_messageBtn setImage:[UIImage imageNamed:@"homeMessage"] forState:UIControlStateNormal];

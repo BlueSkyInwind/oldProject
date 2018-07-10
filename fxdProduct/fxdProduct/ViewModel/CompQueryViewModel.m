@@ -47,7 +47,7 @@
     
     //[[NSUUID UUID] UUIDString]
     //1-首页贷款入口；3-发现（热门推荐）；4-发现（我的使用）；5-发现（列表）；6-首页热门推荐；7-首页热门推荐（更多））
-    NSDictionary *paramDic = @{@"third_platform_id":third_platform_id,
+    NSDictionary *paramDic = @{@"third_platform_id":third_platform_id == nil ? @"" : third_platform_id,
                                @"deviceId":[[NSUUID UUID] UUIDString],
                                @"location":location
                                };
