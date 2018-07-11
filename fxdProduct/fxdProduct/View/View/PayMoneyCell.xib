@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TZ-MO-R0U">
-                        <rect key="frame" x="209" y="9" width="103" height="21"/>
+                        <rect key="frame" x="177" y="9" width="103" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="8TZ-MO-R0U" secondAttribute="height" multiplier="103:21" id="JmD-c0-uOZ"/>
                         </constraints>
@@ -47,7 +47,7 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="ey0-Qc-1hS" secondAttribute="bottom" constant="9" id="8Gb-YL-J5F"/>
                     <constraint firstAttribute="bottom" secondItem="Lai-PI-wca" secondAttribute="bottom" id="Fje-fB-9vB"/>
-                    <constraint firstAttribute="trailing" secondItem="8TZ-MO-R0U" secondAttribute="trailing" constant="8" id="FmI-Dq-jTY"/>
+                    <constraint firstAttribute="trailing" secondItem="8TZ-MO-R0U" secondAttribute="trailing" constant="40" id="FmI-Dq-jTY"/>
                     <constraint firstAttribute="bottom" secondItem="8TZ-MO-R0U" secondAttribute="bottom" constant="9" id="Nmx-2I-Srh"/>
                     <constraint firstItem="ey0-Qc-1hS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="O9q-FC-VHP"/>
                     <constraint firstItem="8TZ-MO-R0U" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="cuO-d3-kuU"/>

@@ -71,7 +71,7 @@ class OpenAccountViewController: BaseViewController ,UITableViewDelegate,UITable
         
         if #available(iOS 11.0, *){
             tableView?.contentInsetAdjustmentBehavior = .never;
-            tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
+            tableView?.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }else if #available(iOS 9.0, *){
             self.automaticallyAdjustsScrollViewInsets = true;
         }else{

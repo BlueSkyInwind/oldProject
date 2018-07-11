@@ -87,7 +87,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     }
     
     func setVerificationCodeView()  {
-        let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
+        let height:CGFloat = 0
         payPasswordVerifyView = SetPayPasswordVerifyView.init(frame: CGRect.init(x: _k_w, y: height, width: _k_w, height: _k_h - height))
         payPasswordVerifyView?.delegate = self
         payPasswordVerifyView?.phoneNumberLabel?.text = FXD_Tool.share().changeTelephone(FXD_Utility.shared().userInfo.userMobilePhone)
@@ -96,7 +96,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     }
     
     func setCashPasswordView()  {
-        let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
+        let height:CGFloat = 0
         payPasswordView = SetPayPasswordView.init(frame: CGRect.init(x: _k_w, y: height, width: _k_w, height: _k_h - height))
          payPasswordView?.userAccountNumberLabel?.text = "请为账号" + "\(FXD_Tool.share().changeTelephone(FXD_Utility.shared().userInfo.userMobilePhone) ?? "")"
         payPasswordView?.delegate = self
@@ -116,7 +116,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
         self.sendVerifyCode()
         UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.identitiesOfTradeView?.frame = CGRect.init(x: -_k_w, y: 0, width: _k_w, height: _k_h )
-            let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
+            let height:CGFloat = 0
             self.payPasswordVerifyView?.frame = CGRect.init(x: 0, y: height, width: _k_w, height: _k_h - height)
         }) { (result) in
         }
@@ -126,7 +126,7 @@ class SetTransactionInfoViewController: BaseViewController,SetPayPasswordVerifyV
     func pushCashPasswordView(duration: TimeInterval)  {
         UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.payPasswordVerifyView?.frame = CGRect.init(x: -_k_w, y: 0, width: _k_w, height: _k_h )
-            let height:CGFloat = CGFloat(obtainBarHeight_New(vc: self))
+            let height:CGFloat = 0
             self.payPasswordView?.frame = CGRect.init(x: 0, y: height, width: _k_w, height: _k_h - height)
         }) { (result) in
         }

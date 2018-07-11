@@ -38,7 +38,7 @@ class ForgetPasswordMoudles: BaseViewController {
         forgetPasswordView = ForgetPasswordView.init(frame: CGRect.zero)
         self.view.addSubview(forgetPasswordView!)
         forgetPasswordView?.snp.makeConstraints({ (make) in
-            make.top.equalTo(obtainBarHeight_New(vc: self))
+            make.top.equalTo(0)
             make.bottom.left.right.equalTo(self.view)
         })
         

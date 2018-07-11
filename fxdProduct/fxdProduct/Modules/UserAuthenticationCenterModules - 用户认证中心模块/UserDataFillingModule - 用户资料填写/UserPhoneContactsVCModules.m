@@ -70,7 +70,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        self.tableView.contentInset = UIEdgeInsetsMake(BarHeightNew, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     }else if (@available(iOS 9.0, *)) {
         self.automaticallyAdjustsScrollViewInsets = true;
     }else{

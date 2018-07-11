@@ -32,6 +32,7 @@
 
 @interface PhoneOrderDetailModel : JSONModel
 
+@property (nonatomic, strong)NSString<Optional> *application_id;
 //订单号
 @property (nonatomic, strong)NSString<Optional> *orderID;
 //手机卡信息

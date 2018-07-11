@@ -51,7 +51,7 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
         })
         if #available(iOS 11.0, *){
             tableView?.contentInsetAdjustmentBehavior = .never;
-            tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
+            tableView?.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }else if #available(iOS 9.0, *){
             self.automaticallyAdjustsScrollViewInsets = true;
         }else{
@@ -225,7 +225,7 @@ class MyBillViewController: BaseViewController ,UITableViewDelegate,UITableViewD
             if Int((repayModel?.maxOverdueDays)!)! > 0{
                 
                 cell.overdueView?.isHidden = false
-                cell.overdueDateLabel?.text = "逾期" + (repayModel?.maxOverdueDays)! + "天"
+                cell.overdueDateLabel?.text = repayModel?.dueDateTip
             }
             return cell!
         }

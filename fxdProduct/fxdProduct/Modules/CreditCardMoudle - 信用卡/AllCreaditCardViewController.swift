@@ -45,12 +45,12 @@ class AllCreaditCardViewController: BaseViewController,UITableViewDelegate,UITab
         contentTableView?.backgroundColor = "f2f2f2".uiColor()
         self.view.addSubview(contentTableView!)
         contentTableView?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self.view.snp.top).offset(55 + obtainBarHeight_New(vc: self))
+            make.top.equalTo(self.view.snp.top).offset(55)
             make.left.right.bottom.equalTo(0)
         })
         contentTableView?.registerCell([CreaditCardTableViewCell.self],true)
         contentTableView?.tableFooterView = getBottomView()
-        headerView = AllCardHeaderView.init(frame: CGRect.init(x: 0, y: obtainBarHeight_New(vc: self), width: Int(_k_w), height: 55),  self.view, {[weak self] (bank, level, sorts) in
+        headerView = AllCardHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: Int(_k_w), height: 55),  self.view, {[weak self] (bank, level, sorts) in
             self?.bankIndex = bank - 1
             self?.levelIndex = level - 1
             self?.sort = sorts

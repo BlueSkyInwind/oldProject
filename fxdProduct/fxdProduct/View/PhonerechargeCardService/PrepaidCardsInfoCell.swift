@@ -53,11 +53,7 @@ class PrepaidCardsInfoCell: UITableViewCell,UITableViewDelegate,UITableViewDataS
     }
     
     @objc func isHiddenBtnClick(sender:UIButton) {
-        if isHiddenPassword {
-            sender.setTitle("隐藏密码", for: UIControlState.normal)
-        }else{
-            sender.setTitle("显示密码", for: UIControlState.normal)
-        }
+  
         isHiddenPassword = !isHiddenPassword
         cardTableView?.reloadData()
     }
@@ -133,7 +129,11 @@ extension PrepaidCardsInfoCell {
         }
 
         let isHiddenBtn = UIButton.init(type: UIButtonType.custom)
-        isHiddenBtn.setTitle("显示密码", for: UIControlState.normal)
+        if isHiddenPassword {
+            isHiddenBtn.setTitle("显示密码", for: UIControlState.normal)
+        }else{
+            isHiddenBtn.setTitle("隐藏密码", for: UIControlState.normal)
+        }
         isHiddenBtn.backgroundColor = UI_MAIN_COLOR
         isHiddenBtn.layer.cornerRadius = 12
         isHiddenBtn.clipsToBounds = true

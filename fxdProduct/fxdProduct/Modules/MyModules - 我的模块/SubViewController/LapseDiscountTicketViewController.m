@@ -41,7 +41,7 @@
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).with.offset(BarHeightNew);
+        make.top.equalTo(self.view).with.offset(0);
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view).with.offset(0);
     }];
@@ -60,6 +60,7 @@
 {
     self.view.backgroundColor = kUIColorFromRGB(0xf5f6fa);
     NoneView =[[UIView alloc]init];
+    NoneView.hidden = true;
     NoneView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     [self.view addSubview:NoneView];
     [NoneView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,7 +97,7 @@
 -(void)obtainDiscountTicket:(int)pageNum{
 
     self.tableView.hidden = true;
-    NoneView.hidden = false;
+    
     ApplicationViewModel * applicationVM = [[ApplicationViewModel alloc]init];
     [applicationVM setBlockWithReturnBlock:^(id returnValue) {
         BaseResultModel *  baseResultM = [[BaseResultModel alloc]initWithDictionary:returnValue error:nil];
@@ -117,11 +118,13 @@
             }
             
         }else{
+            NoneView.hidden = false;
             [[MBPAlertView sharedMBPTextView]showTextOnly:self.view message:baseResultM.friendErrMsg];
         }
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
     } WithFaileBlock:^{
+        NoneView.hidden = false;
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
     }];
@@ -205,6 +208,7 @@
     //    header.automaticallyChangeAlpha = YES;
     header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;
+    [header beginRefreshing];
     self.tableView.mj_header = header;
     
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];

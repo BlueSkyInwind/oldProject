@@ -78,9 +78,6 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
         self.automaticallyAdjustsScrollViewInsets=NO;
     }
     
-    if (UI_IS_IPHONEX) {
-        self.headerViewHeader.constant = 88;
-    }
     self.endView.layer.borderWidth = 0.5;
     self.endView.layer.borderColor = [UIColor grayColor].CGColor;
     [self setUpTableview];

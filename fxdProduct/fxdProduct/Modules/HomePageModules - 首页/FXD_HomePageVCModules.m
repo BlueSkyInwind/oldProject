@@ -138,7 +138,7 @@
     
     _messageBtn = [[UIButton alloc]initWithFrame:CGRectMake(_k_w - 15 - 30, 17 + height, 15, 16)];
     [_messageBtn setImage:[UIImage imageNamed:@"homeMessage"] forState:UIControlStateNormal];
-    [_messageBtn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
+//    [_messageBtn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_messageBtn];
     _bgView = [[UIView alloc]init];
     _bgView.backgroundColor = [UIColor redColor];
@@ -166,13 +166,14 @@
     }];
     
     UIButton *btn = [[UIButton alloc]init];
+//    btn.backgroundColor = UIColor.redColor;
     [btn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
     [_messageBtn addSubview:btn];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_messageBtn.mas_left).offset(-10);
-        make.top.equalTo(_messageBtn.mas_top).offset(-4);
-        make.width.equalTo(@30);
-        make.height.equalTo(@30);
+        make.left.equalTo(_messageBtn.mas_left).offset(-30);
+        make.top.equalTo(_messageBtn.mas_top).offset(-30);
+        make.width.equalTo(@70);
+        make.height.equalTo(@70);
     }];
 }
 

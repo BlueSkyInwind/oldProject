@@ -41,7 +41,7 @@
     self.view.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     pages = 1;
     [self addBackItem];
-    [self addHelpItem];
+//    [self addHelpItem];
     [self createTableView];
     _validTicketArr = [NSMutableArray array];
     _invalidTicketArr = [NSMutableArray array];
@@ -116,7 +116,7 @@
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).with.offset(BarHeightNew);
+        make.top.equalTo(self.view).with.offset(0);
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view).with.offset(0);
     }];
@@ -125,7 +125,7 @@
          self.tableView.contentInsetAdjustmentBehavior=UIScrollViewContentInsetAdjustmentNever;
          self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     }else if (@available(iOS 9.0, *)){
-        self.automaticallyAdjustsScrollViewInsets = false;
+        self.automaticallyAdjustsScrollViewInsets = true;
     }else{
         self.automaticallyAdjustsScrollViewInsets = false;
     }
@@ -237,7 +237,7 @@
 -(void)createbottomView{
 
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).with.offset(BarHeightNew);
+        make.top.equalTo(self.view).with.offset(0);
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view).with.offset(-50);
     }];
@@ -247,7 +247,7 @@
     [bottomView addGestureRecognizer:tap];
     [self.view addSubview:bottomView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(@(0));
+        make.bottom.equalTo(@(-30));
         make.left.right.equalTo(@0);
         make.height.equalTo(@40);
     }];

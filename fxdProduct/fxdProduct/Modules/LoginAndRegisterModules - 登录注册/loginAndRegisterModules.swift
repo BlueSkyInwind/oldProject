@@ -43,7 +43,7 @@ class loginAndRegisterModules: BaseViewController {
     
     func configureView()  {
         
-         contentView = LoginAndRegisterSlideView.init(CGRect.init(x: 0, y: CGFloat(obtainBarHeight_New(vc: self)), width: _k_w, height: _k_h - CGFloat(obtainBarHeight_New(vc: self)) ), {[weak self]  (loginView, registerView) in
+         contentView = LoginAndRegisterSlideView.init(CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h), {[weak self]  (loginView, registerView) in
             
             self?.loginView = NewLoginView.init(frame: CGRect.zero);
             loginView.addSubview((self?.loginView)!)

@@ -202,7 +202,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     }
     
     if (_p2pBillDetail != nil) {
-        _headerView.sigingDayLabel.text = [NSString stringWithFormat:@"借款时间%@",[FXD_Tool dateToFormatString:_p2pBillDetail.data.bid_release_time_]];
+        _headerView.sigingDayLabel.text = [NSString stringWithFormat:@"借款时间:%@",[FXD_Tool dateToFormatString:_p2pBillDetail.data.bid_release_time_]];
         _headerView.principalAmountLabel.text = [NSString stringWithFormat:@"%.2f",_p2pBillDetail.data.amount_];
         _headerView.feeAmountLabel.text = [NSString stringWithFormat:@"%.2f",_p2pBillDetail.data.repay_svc_charge_ + _p2pBillDetail.data.repay_interest_];
         _headerView.repaymentAmountLabel.text = [NSString stringWithFormat:@"%.2f",_p2pBillDetail.data.repay_total_];
@@ -242,6 +242,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     navBarHairlineImageView.hidden=YES;
     UIImage * navImage = [UIImage imageWithColor:[UIColor clearColor]];
     [self.navigationController.navigationBar setBackgroundImage:navImage forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = true;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -249,6 +250,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     navBarHairlineImageView.hidden=NO;
     UIImage * navImage = [UIImage gradientmageWithFrame:CGRectMake(0, 0, _k_w, BarHeightNew) Colors:@[rgb(33, 168, 234),rgb(95, 121, 234)] GradientType:1];
     [self.navigationController.navigationBar setBackgroundImage:navImage forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = false;
 }
 
 - (void)setUpTableview

@@ -221,7 +221,7 @@ extension OrderConfirmDetailViewController {
         }) {
             
         }
-        commonVC.obtainPhoneCardProtocolType(Phone_RechargeCard, totalPrice: phoneOrderDetailModel?.order_price, applicationId: "")
+        commonVC.obtainPhoneCardProtocolType(Phone_RechargeCard, totalPrice: phoneOrderDetailModel?.order_price, applicationId: phoneOrderDetailModel?.application_id)
     }
 }
 

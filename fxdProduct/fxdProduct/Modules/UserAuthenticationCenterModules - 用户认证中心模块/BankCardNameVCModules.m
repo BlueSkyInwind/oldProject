@@ -35,7 +35,7 @@
 
 -(void)createUI{
     //    _cardMethodTag=87;
-    _tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 64, _k_w, _k_h-64) style:UITableViewStyleGrouped];
+    _tableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_h-64) style:UITableViewStyleGrouped];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     self.automaticallyAdjustsScrollViewInsets=NO;

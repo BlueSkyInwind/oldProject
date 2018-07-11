@@ -45,7 +45,7 @@
     [config.userContentController addUserScript:noneSelectScript];
     
     CGFloat height = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height;
-    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, height, _k_w, _k_h - height) configuration:config];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_h) configuration:config];
     _webView.navigationDelegate = self;
     _webView.UIDelegate = self;
     _webView.scrollView.contentSize = CGSizeMake(_k_w, _webView.frame.size.height);

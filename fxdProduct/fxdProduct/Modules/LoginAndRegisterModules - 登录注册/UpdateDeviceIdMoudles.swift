@@ -29,7 +29,7 @@ class UpdateDeviceIdMoudles: BaseViewController {
         updateDeviceView = UpdateDeviceIdView.init(frame: CGRect.zero)
         self.view.addSubview(updateDeviceView!)
         updateDeviceView?.snp.makeConstraints({ (make) in
-            make.top.equalTo(obtainBarHeight_New(vc: self))
+            make.top.equalTo(0)
             make.bottom.left.right.equalTo(self.view)
         })
         

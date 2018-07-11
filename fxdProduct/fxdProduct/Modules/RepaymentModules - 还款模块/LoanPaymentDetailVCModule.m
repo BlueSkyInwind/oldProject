@@ -77,6 +77,7 @@
     navBarHairlineImageView.hidden=YES;
     UIImage * navImage = [UIImage imageWithColor:[UIColor clearColor]];
     [self.navigationController.navigationBar setBackgroundImage:navImage forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = true;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -84,6 +85,7 @@
     navBarHairlineImageView.hidden=NO;
     UIImage * navImage = [UIImage gradientmageWithFrame:CGRectMake(0, 0, _k_w, BarHeightNew) Colors:@[rgb(33, 168, 234),rgb(95, 121, 234)] GradientType:1];
     [self.navigationController.navigationBar setBackgroundImage:navImage forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = false;
 }
 
 - (void)viewDidLoad {
@@ -168,7 +170,7 @@
     UILabel *lblRepayTip=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
     
     lblRepayTip.textColor=[UIColor whiteColor];
-    lblRepayTip.text=@"应还总金额(元)";
+    lblRepayTip.text=@"应还金额(元)";
     lblRepayTip.alpha=0.7;
     lblRepayTip.textAlignment=NSTextAlignmentCenter;
     [header addSubview:lblRepayTip];

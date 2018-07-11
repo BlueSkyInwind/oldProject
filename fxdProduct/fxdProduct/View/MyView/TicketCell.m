@@ -30,7 +30,7 @@
     }];
     
     self.lblPrice=[[UILabel alloc]init];
-    self.lblPrice.textColor=kUIColorFromRGB(0xed1c24);
+    self.lblPrice.textColor=kUIColorFromRGB(0xfed100);
     self.lblPrice.font = [UIFont systemFontOfSize:25];
     self.lblPrice.textAlignment = NSTextAlignmentCenter;
     [self.TicketImgView addSubview:self.lblPrice];

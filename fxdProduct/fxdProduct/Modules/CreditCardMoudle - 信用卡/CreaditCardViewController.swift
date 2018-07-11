@@ -51,7 +51,7 @@ class CreaditCardViewController: BaseViewController,UITableViewDataSource,UITabl
         contentTableView?.sectionFooterHeight = 0
         self.view.addSubview(contentTableView!)
         contentTableView?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self.view.snp.top).offset(obtainBarHeight_New(vc: self))
+            make.top.equalTo(self.view.snp.top).offset(0)
             make.left.right.bottom.equalTo(0)
         })
         

@@ -30,7 +30,7 @@
     self.view.backgroundColor = rgb(242, 242, 242);
     
     if (UI_IS_IPHONEX) {
-        _ForeTextViewTop.constant = 120;
+        _ForeTextViewTop.constant = 60;
     }
     [self addBackItem];
 }

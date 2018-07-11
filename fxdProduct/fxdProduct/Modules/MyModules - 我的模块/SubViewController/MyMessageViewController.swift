@@ -58,7 +58,7 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         })
         if #available(iOS 11.0, *){
             tableView?.contentInsetAdjustmentBehavior = .never;
-            tableView?.contentInset = UIEdgeInsetsMake(CGFloat(obtainBarHeight_New(vc: self)), 0, 0, 0)
+            tableView?.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }else if #available(iOS 9.0, *){
             self.automaticallyAdjustsScrollViewInsets = true;
         }else{
@@ -70,14 +70,6 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
             self.headerRefresh()
 
         })
-
-//        //上拉加载相关设置,使用闭包Block
-//        tableView?.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-//
-//            self.footerLoad()
-//
-//        })
-//        tableView?.mj_footer.isAutomaticallyHidden = true
     
         // 底部加载
         let footer = MJRefreshAutoNormalFooter()
