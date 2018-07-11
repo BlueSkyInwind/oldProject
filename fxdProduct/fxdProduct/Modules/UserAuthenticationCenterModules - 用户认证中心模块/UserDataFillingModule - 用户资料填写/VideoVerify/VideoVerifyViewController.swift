@@ -183,6 +183,7 @@ class VideoVerifyViewController: UIViewController {
         userDataVM.setBlockWithReturn({[weak self] (result) in
             let baseResult = result as? BaseResultModel
             if baseResult?.errCode == "0"{
+                FXD_AlertViewCust.sharedHHAlertView().dismissFXDAlertView()
                 self?.dismiss(animated: true, completion: nil)
             }else{
                 FXD_AlertViewCust.sharedHHAlertView().dismissFXDAlertView()

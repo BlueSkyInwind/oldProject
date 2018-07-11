@@ -46,10 +46,7 @@
             frame.size.height = 430;
         }
         self.frame = frame;
-//        _innerView.frame = frame;
-//        [self addSubview:_innerView];
         self.imageView.userInteractionEnabled = true;
-//        self.imageView.contentMode = UIViewContentModeScaleToFill;
         UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(homeActivityPictureClick)];
         tapImage.numberOfTapsRequired = 1;
         tapImage.numberOfTouchesRequired = 1;

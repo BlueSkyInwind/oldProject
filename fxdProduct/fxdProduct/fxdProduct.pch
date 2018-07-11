@@ -57,10 +57,8 @@
 #import "HG_Manager.h"
 #import "SDCycleScrollView.h"
 #import <AVFoundation/AVFoundation.h>
-#import "UIButton+YXTool.h"
-#import "UITableViewCell+YXTool.h"
-#import "UIImage+YXTool.h"
 #import "HFSaltSDK.h"
+#import "CommonToolHeader.h"
 
 #ifdef FXD_Environment_Mode
 #if FXD_Environment_Mode == 0
