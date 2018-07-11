@@ -43,7 +43,6 @@
 + (NSString *)countDate:(NSString *)date and:(int)addDays;
 
 #pragma mark- 对象处理
-
 //判断字典是否有某key值
 +(BOOL)dicContainsKey:(NSDictionary *)dic keyValue:(NSString *)key;
 //判断对象是否为空
@@ -64,7 +63,6 @@
 //设置沙盒
 + (void)saveUserDefaul:(NSString *)content Key:(NSString *)key;
 + (NSString *)getContentWithKey:(NSString *)key;
-
 /**
  *  @author dd, 16-01-20 19:01:42
  *
@@ -72,7 +70,6 @@
  */
 + (void)setCorner:(UIView *)view borderColor:(UIColor *)color;
 + (void)setCornerWithoutRadius:(UIView *)view borderColor:(UIColor *)color;
-
 +(NSString *)toCapitalLetters:(NSString *)money;
 /**
  *  计算字符串宽度

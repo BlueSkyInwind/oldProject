@@ -93,15 +93,14 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([LabelCell class]) bundle:nil] forCellReuseIdentifier:@"LabelCell"];
     [self.tableView registerClass:[ContentTableViewCell class] forCellReuseIdentifier:@"ContentTableViewCell"];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([DataDisplayCell class]) bundle:nil] forCellReuseIdentifier:@"DataDisplayCell"];
-    if (@available(iOS 11.0, *)) {
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    }else if (@available(iOS 9.0, *)) {
-        self.automaticallyAdjustsScrollViewInsets = true;
-    }else{
-        self.automaticallyAdjustsScrollViewInsets = false;
-    }
-
+//    if (@available(iOS 11.0, *)) {
+//        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//    }else if (@available(iOS 9.0, *)) {
+//        self.automaticallyAdjustsScrollViewInsets = true;
+//    }else{
+//        self.automaticallyAdjustsScrollViewInsets = false;
+//    }
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, 100)];
     _saveBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [footView addSubview:_saveBtn];
@@ -600,7 +599,7 @@
         case 202: //行业
         {
             _pickerTag = tag;
-            _localPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, _k_h-183, _k_w, 183)];
+            _localPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, _k_h - 183 - [self obtainBarHeight_New], _k_w, 183)];
             _localPicker.backgroundColor = [UIColor whiteColor];
             _localPicker.dataSource = self;
             _localPicker.delegate = self;
@@ -610,7 +609,7 @@
         case 203: //单位地址
         {
             _pickerTag = tag;
-            _localPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, _k_h-183, _k_w, 183)];
+            _localPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, _k_h-183 - [self obtainBarHeight_New], _k_w, 183)];
             _localPicker.backgroundColor = [UIColor whiteColor];
             _localPicker.dataSource = self;
             _localPicker.delegate = self;

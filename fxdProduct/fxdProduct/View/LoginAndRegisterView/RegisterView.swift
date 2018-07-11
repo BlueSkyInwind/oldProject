@@ -175,7 +175,7 @@ extension RegisterView {
         })
         
         inviteCodeView = GeneralInputView.init(.general)
-        inviteCodeView?.inputTextField?.placeholder = "请输入邀请码或邀请人手机号"
+        inviteCodeView?.inputTextField?.placeholder = "请输入邀请码"
         inviteCodeView?.iconImageView?.image = UIImage.init(named: "1_Signin_icon_07")
         self.addSubview(inviteCodeView!)
         inviteCodeView?.snp.makeConstraints({ (make) in

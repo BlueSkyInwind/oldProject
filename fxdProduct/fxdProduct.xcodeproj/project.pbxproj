@@ -286,6 +286,8 @@
 		841BE5C61F177C4F00BABD04 /* UserLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */; };
 		841E66EE1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
 		841E66EF1F4D662900A24EA5 /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */; };
+		8422C48020F5E785001C9003 /* UIViewController+YXTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C47F20F5E785001C9003 /* UIViewController+YXTool.m */; };
+		8422C48120F5E785001C9003 /* UIViewController+YXTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8422C47F20F5E785001C9003 /* UIViewController+YXTool.m */; };
 		8422F24820EB1B1400836D9B /* ForgetPasswordMoudles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422F24720EB1B1400836D9B /* ForgetPasswordMoudles.swift */; };
 		8422F24920EB1B1400836D9B /* ForgetPasswordMoudles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422F24720EB1B1400836D9B /* ForgetPasswordMoudles.swift */; };
 		8422F24B20EB1B5300836D9B /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422F24A20EB1B5300836D9B /* ForgetPasswordView.swift */; };
@@ -716,8 +718,8 @@
 		CC0DF9901EA5B1090024841A /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECCC1E1B8FAA0079A2F8 /* SDCycleScrollView.m */; };
 		CC0DF9921EA5B1090024841A /* FXD_Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FE11C1519CD008E1CF9 /* FXD_Utility.m */; };
 		CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6E69EF1C7199A000053A75 /* DiscountTicketController.m */; };
-		CC0DF9951EA5B1090024841A /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CC0DF9971EA5B1090024841A /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CC0DF9951EA5B1090024841A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CC0DF9971EA5B1090024841A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AF01CA8DBBD00D04ED8 /* RegionSub.m */; };
 		CC0DF99A1EA5B1090024841A /* RegionCodeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830FC1CBCA1A90005C4CD /* RegionCodeResult.m */; };
 		CC0DF99E1EA5B1090024841A /* YYTextWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E71D98F7E9006F58F3 /* YYTextWeakProxy.m */; };
@@ -1650,6 +1652,9 @@
 		841BE5C41F177C4F00BABD04 /* UserLevelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLevelViewController.h; sourceTree = "<group>"; };
 		841BE5C51F177C4F00BABD04 /* UserLevelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLevelViewController.m; sourceTree = "<group>"; };
 		841E66ED1F4D662900A24EA5 /* ContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
+		8422C47E20F5E785001C9003 /* UIViewController+YXTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YXTool.h"; sourceTree = "<group>"; };
+		8422C47F20F5E785001C9003 /* UIViewController+YXTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YXTool.m"; sourceTree = "<group>"; };
+		8422C48220F5E86D001C9003 /* CommonToolHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonToolHeader.h; sourceTree = "<group>"; };
 		8422F24720EB1B1400836D9B /* ForgetPasswordMoudles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordMoudles.swift; sourceTree = "<group>"; };
 		8422F24A20EB1B5300836D9B /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		8422F24D20EB239100836D9B /* UpdateDeviceIdMoudles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDeviceIdMoudles.swift; sourceTree = "<group>"; };
@@ -2907,6 +2912,8 @@
 				84EBEA1220C93F130045F538 /* UIView+YXTool.m */,
 				8462D24420DCA1C50086A38B /* UIImage+YXTool.h */,
 				8462D24520DCA1C50086A38B /* UIImage+YXTool.m */,
+				8422C47E20F5E785001C9003 /* UIViewController+YXTool.h */,
+				8422C47F20F5E785001C9003 /* UIViewController+YXTool.m */,
 			);
 			path = FXD_Tools;
 			sourceTree = "<group>";
@@ -3238,6 +3245,7 @@
 				848FC6461FFE132500918CE9 /* CommonTool.swift */,
 				848FC6491FFE137000918CE9 /* CommonExtention.swift */,
 				84332C88206CCCE8009A9121 /* CameraManager.swift */,
+				8422C48220F5E86D001C9003 /* CommonToolHeader.h */,
 				CC6C93EC1F4A81EC00587C74 /* fxdProduct-Bridging-Header.h */,
 			);
 			path = Common;
@@ -4873,16 +4881,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev-resources.sh",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/PlatformSDK/QQSDK/TencentOpenApi_IOS_Bundle.bundle",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK/WeiboSDK.bundle",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Optional/ShareSDKUI.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShareSDK.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TencentOpenApi_IOS_Bundle.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WeiboSDK.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShareSDKUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4967,16 +4971,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct-resources.sh",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/PlatformSDK/QQSDK/TencentOpenApi_IOS_Bundle.bundle",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK/WeiboSDK.bundle",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Optional/ShareSDKUI.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShareSDK.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TencentOpenApi_IOS_Bundle.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WeiboSDK.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShareSDKUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5029,6 +5029,7 @@
 				6313DC151BB3E52B00EB45DE /* NSString+MD5Encrypt.m in Sources */,
 				84EBEA0F20C93A450045F538 /* UITableViewCell+YXTool.m in Sources */,
 				1A133F1B1C1AD1EA0027749B /* HelpViewCell.m in Sources */,
+				8422C48020F5E785001C9003 /* UIViewController+YXTool.m in Sources */,
 				63A24C651BE063A90036E8EF /* UIFont+Extend.m in Sources */,
 				84C6B0AC20DB801E008BD264 /* CreaditCardBottomView.swift in Sources */,
 				84BC53D31FF4C42E00FE58E8 /* OverdueInfoPopView.swift in Sources */,
@@ -5501,6 +5502,7 @@
 				84ED5B741F4AC9F6004C0A59 /* UnfoldTableViewCell.m in Sources */,
 				CCEFC6EA207E0B610006D731 /* QbbSubmitInfoModel.m in Sources */,
 				84EBEA1020C93A450045F538 /* UITableViewCell+YXTool.m in Sources */,
+				8422C48120F5E785001C9003 /* UIViewController+YXTool.m in Sources */,
 				843FF1FA1F208AA400ECCE16 /* PaymentViewModel.m in Sources */,
 				84E306D01F972C4000C97D72 /* DiscountTicketModel.m in Sources */,
 				843614A51F0CFD320036201A /* BaseResultModel.m in Sources */,
@@ -5590,8 +5592,8 @@
 				CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */,
 				848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
 				8466936920C637E300F47A24 /* ShoppingMallModules.swift in Sources */,
-				CC0DF9951EA5B1090024841A /* (null) in Sources */,
-				CC0DF9971EA5B1090024841A /* (null) in Sources */,
+				CC0DF9951EA5B1090024841A /* BuildFile in Sources */,
+				CC0DF9971EA5B1090024841A /* BuildFile in Sources */,
 				847FC88A20E4C92200A0F797 /* LewPopupViewAnimationSpring.m in Sources */,
 				CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */,
 				CC8BB75620901C7D00ADA647 /* BillingMessageViewController.swift in Sources */,

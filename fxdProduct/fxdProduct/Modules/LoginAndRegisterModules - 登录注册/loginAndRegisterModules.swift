@@ -24,6 +24,12 @@ class loginAndRegisterModules: BaseViewController {
     var currentPicId:String = ""
 
 
+//    override func loadView() {
+//        let scrollView = UIScrollView.init(frame: UIScreen.main.bounds)
+//        scrollView.backgroundColor = UIColor.white
+//        self.view = scrollView
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

@@ -144,16 +144,13 @@ extension RecentCell{
             
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0"{
-                
                 let dic = baseResult.data as! NSDictionary
                 if dic["url"] != nil {
                     let webView = FXDWebViewController()
                     webView.urlStr = dic["url"]  as! String
-                    self?.viewController?.navigationController?.pushViewController(webView, animated: true)
+                    self?.viewContainingController?.navigationController?.pushViewController(webView, animated: true)
                 }
-                
             }else{
-
                 MBPAlertView.sharedMBPText().showTextOnly(self, message: baseResult.friendErrMsg)
             }
             

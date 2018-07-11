@@ -39,7 +39,7 @@ class CreaditCardTableViewCell: UITableViewCell {
         }
 
         cardName.text = "\(model.cardName ?? "")"
-        let cardTypeStr = "\(model.cardLevel ?? "")"
+        let cardTypeStr = "\(model.cardLevelName ?? "")"
         if cardTypeStr == "金卡" {
             cardTypeImage.image = UIImage.init(named: "gold_card_icon")
         }else {

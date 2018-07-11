@@ -31,8 +31,6 @@ func obtainBarHeight_New(vc:UIViewController) -> Int{
     return Int(UIApplication.shared.statusBarFrame.size.height + (vc.navigationController?.navigationBar.frame.size.height)!)
 }
 
-
-
 // 这里 T 表示不指定 message参数类型
 func DLog<T>(message : T, file : String = #file, funcName : String = #function, lineNum : Int = #line) {
     

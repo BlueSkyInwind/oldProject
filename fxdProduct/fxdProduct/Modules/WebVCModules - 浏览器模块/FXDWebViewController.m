@@ -45,7 +45,7 @@
     [config.userContentController addUserScript:noneSelectScript];
     
     CGFloat height = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height;
-    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_h) configuration:config];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_h - height) configuration:config];
     _webView.navigationDelegate = self;
     _webView.UIDelegate = self;
     _webView.scrollView.contentSize = CGSizeMake(_k_w, _webView.frame.size.height);
@@ -81,7 +81,7 @@
     NSString * requestUrlStr = [self generateRequestUrlString:url];
     DLog(@"%@",requestUrlStr);
     // [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[requestUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]]];
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:requestUrlStr] cachePolicy:1 timeoutInterval:30]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:requestUrlStr] cachePolicy:0 timeoutInterval:30]];
 }
 
 /**
@@ -411,6 +411,7 @@
 
 -(void)dealloc
 {
+    [self deleteWebCache];
     [_webView removeObserver:self forKeyPath:@"estimatedProgress"];
     [_webView removeObserver:self forKeyPath:@"title"];
     [_webView removeObserver:self forKeyPath:@"URL"];
@@ -431,7 +432,6 @@
 }
 
 - (void)deleteWebCache {
-    
     if (@available(iOS 9.0, *)) {
         NSSet *websiteDataTypes = [NSSet setWithArray:@[
                                 WKWebsiteDataTypeDiskCache,
@@ -466,13 +466,10 @@
     }
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [self deleteWebCache];
-}
 - (void)viewDidDisappear:(BOOL)animated
 {
     [progressView removeFromSuperview];
-    [self deleteWebCache];
+//    [self deleteWebCache];
     [[JSAndOCInteraction sharedInteraction] removeWaitHubAnimationView];
 }
 
