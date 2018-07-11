@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import React
 
 class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
@@ -212,17 +213,18 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        pushRN()
+//        if indexPath.row == 0 {
+//            return
+//        }\
         
-        if indexPath.row == 0 {
-            return
-        }
-        let cell = tableView.cellForRow(at: indexPath) as! MessageCell
-        cell.leftImageView?.image = UIImage(named:"speaker_select")
-        cell.arrowImageView?.image = UIImage.init(named: "arrow_sel_icon")
-        
-        let webView = FXDWebViewController()
-        webView.urlStr = (messageModel?.requestUrl)! + items[indexPath.row - 1].id_
-        self.navigationController?.pushViewController(webView, animated: true)
+//        let cell = tableView.cellForRow(at: indexPath) as! MessageCell
+//        cell.leftImageView?.image = UIImage(named:"speaker_select")
+//        cell.arrowImageView?.image = UIImage.init(named: "arrow_sel_icon")
+//
+//        let webView = FXDWebViewController()
+//        webView.urlStr = (messageModel?.requestUrl)! + items[indexPath.row - 1].id_
+//        self.navigationController?.pushViewController(webView, animated: true)
         
     }
     
@@ -270,8 +272,14 @@ class MyMessageViewController: BaseViewController,UITableViewDelegate,UITableVie
         return "删除"
     }
     
-
-    
+    func pushRN()  {
+        //     如果是使用Xcode自带的模拟器，则直接使用本地服务器的端口即可。
+        let url = URL.init(string: "http://localhost:8081/index.bundle?platform=ios")
+        let rootView = RCTRootView.init(bundleURL: url, moduleName: "FirstView", initialProperties: [ "content":"Hello world"], launchOptions: nil)
+        let VC = UIViewController.init()
+        VC.view = rootView
+        self.navigationController?.pushViewController(VC, animated: true)
+    }
     
     /*
     // MARK: - Navigation

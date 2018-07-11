@@ -43,6 +43,12 @@ class ForgetPasswordView: UIView {
         let validUserNameSignal = phoneNumberView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
             return FXD_Tool.checkMoblieNumber(text)
         })
+        
+        validUserNameSignal?.observeValues({ (isVaildUserName) in
+            if isVaildUserName {
+                print("用户手机号码有效")
+            }
+        })
 
         let validVerifyCodeSignal = verifyCodeView?.inputTextField?.reactive.continuousTextValues.map({ (text) -> Bool in
             (text?.count)! > 3  ? true : false

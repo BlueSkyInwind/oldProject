@@ -51,7 +51,6 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
         
         let collectionVM = CollectionViewModel()
         collectionVM.setBlockWithReturn({ (returnValue) in
-            
             let baseResult = try! BaseResultModel.init(dictionary: returnValue as! [AnyHashable : Any])
             if baseResult.errCode == "0" {
                
@@ -63,17 +62,13 @@ class CollectionViewController: BaseViewController ,UITableViewDelegate,UITableV
                     let model = collectionListModel.rows[index] as! CollectionListRowsModel
                     self.dataArray?.add(model)
                 }
-
-    
                 self.tableView?.reloadData()
-                
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }
         }) {
             
         }
-        
         collectionVM.getMyCollectionListLimit("15", offset: "0", order: "ASC", sort: "0")
     }
     func numberOfSections(in tableView: UITableView) -> Int {
