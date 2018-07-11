@@ -66,6 +66,7 @@
     DiscountTicketModel * discountTM;
     DiscountTicketDetailModel * chooseDiscountTDM;
     NSInteger chooseIndex;
+    BOOL _isdispalyCard;
 
 }
 @property (nonatomic,strong) UILabel *lblShouldrepay;
@@ -78,6 +79,12 @@
     UIImage * navImage = [UIImage imageWithColor:[UIColor clearColor]];
     [self.navigationController.navigationBar setBackgroundImage:navImage forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.translucent = true;
+    
+    if (!_isdispalyCard) {
+        
+        [self fatchUserCardList];
+        userSelectIndex = 0;
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -86,6 +93,7 @@
     UIImage * navImage = [UIImage gradientmageWithFrame:CGRectMake(0, 0, _k_w, BarHeightNew) Colors:@[rgb(33, 168, 234),rgb(95, 121, 234)] GradientType:1];
     [self.navigationController.navigationBar setBackgroundImage:navImage forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.translucent = false;
+    _isdispalyCard = false;
 }
 
 - (void)viewDidLoad {
@@ -110,7 +118,8 @@
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMoneyCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [self.PayDetailTB registerNib:[UINib nibWithNibName:@"PayMethodCell" bundle:nil] forCellReuseIdentifier:@"paycell"];
 
-    payLoanArry = @[@"使用券",@"逾期费用",@"使用溢缴金额",@"实扣金额",@"支付方式"];
+//    payLoanArry = @[@"使用券",@"逾期费用",@"使用溢缴金额",@"实扣金额",@"支付方式"];
+    payLoanArry = @[@"应付金额",@"使用券",@"使用账户余额",@"支付方式"];
     self.PayDetailTB.bounces=NO;
     
     if (_isPopRoot) {
@@ -120,7 +129,7 @@
     }
     
     [self createNoneView];
-    [self fatchUserCardList];
+    
     [self createHeaderView];
 
     discountNumStr = @"无可用券";
@@ -160,7 +169,7 @@
     
     
     self.lblShouldrepay=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-    NSNumber *number = [NSNumber numberWithFloat:_repayAmount];
+    NSNumber *number = [NSNumber numberWithFloat:_finalyRepayAmount];
     [_lblShouldrepay fn_setNumber:number format:@"%.2f"];
     _lblShouldrepay.textColor=[UIColor whiteColor];
     _lblShouldrepay.textAlignment=NSTextAlignmentCenter;
@@ -170,7 +179,7 @@
     UILabel *lblRepayTip=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
     
     lblRepayTip.textColor=[UIColor whiteColor];
-    lblRepayTip.text=@"应还金额(元)";
+    lblRepayTip.text=@"实付金额(元)";
     lblRepayTip.alpha=0.7;
     lblRepayTip.textAlignment=NSTextAlignmentCenter;
     [header addSubview:lblRepayTip];
@@ -261,7 +270,7 @@
 {
     if (_repayListInfo != nil) {
             //红包和银行的cell
-            if(indexPath.row == 4){
+            if(indexPath.row == 3){
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.PayTitleLabel.text=payLoanArry[indexPath.row];
@@ -273,8 +282,12 @@
             } else//溢缴金额和应付金额cell
             {
                 PayMoneyCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-                if(indexPath.row==0)    //红包
+                if(indexPath.row==0)    //应付金额
                 {
+                    cell.payLabel.text = [NSString stringWithFormat:@"%.2f元",_repayAmount];
+                }
+                else if(indexPath.row == 1 ){//使用券
+                    
                     cell.payLabel.text = discountNumStr;
                     
                     if ([discountUsageStatus isEqualToString:@"0"]) {
@@ -285,48 +298,9 @@
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     }
                     
-//                    if (_repayListInfo != nil) {
-//                        int y = 0;  //逾期
-//                        int w = 0;  //未来
-//                        int d = 0;  //当期
-//                        for (int i = 0; i < _situations.count; i++) {
-//                            if ([[_situations objectAtIndex:i].status_ isEqualToString:@"2"]) {
-//                                y++;
-//                            } else if ([[_situations objectAtIndex:i].status_ isEqualToString:@"3"]) {
-//                                w++;
-//                            } else  {
-//                                d++;
-//                            }
-//                        }
-//                        if (y > 0) {
-//                            cell.payLabel.text=@"您已逾期，不可使用券";
-//                            _canUseReadPacket = false;
-//                            cell.payLabel.textColor=rgb(255, 134, 25);
-//                            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//                        }else{
-//                            if (d > 0) {
-//                                _canUseReadPacket = true;
-//                                cell.payLabel.text = discountNumStr;
-//                                cell.payLabel.textColor=rgb(255, 134, 25);
-//                                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//                                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-//                            }else {
-//                                if (w > 0) {
-//                                    cell.payLabel.text=@"您当前结清，不可使用券";
-//                                    _canUseReadPacket = false;
-//                                    cell.payLabel.textColor=rgb(255, 134, 25);
-//                                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//                                }
-//                            }
-//                        }
-//                    }
-                }
-                else if(indexPath.row == 1 ){//逾期费用
-                    cell.payLabel.text = [NSString stringWithFormat:@"%.2f元",_debtOverdueTotal];
-                }else if (indexPath.row == 2){//溢缴金额
+                    
+                }else if (indexPath.row == 2){//使用账户余额
                     cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useTotalAmount];
-                }else{                //应付金额
-                    cell.payLabel.text = [NSString stringWithFormat:@"%.2f元",_finalyRepayAmount];
                 }
                 cell.lblTitle.text=payLoanArry[indexPath.row];
                 return cell;
@@ -372,11 +346,13 @@
         userBankCardListVC.currentIndex  = userSelectIndex;
     }
     userBankCardListVC.applicationId = _applicationId;
+    
     userBankCardListVC.payPatternSelectBlock = ^(CardInfo *cardInfo, NSInteger currentIndex) {
         _selectCard = cardInfo;
         if (cardInfo == nil) {
             [self  fatchUserCardList];
         }
+        _isdispalyCard = true;
         userSelectIndex = currentIndex;
         [self.PayDetailTB reloadData];
     };

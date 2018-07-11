@@ -75,6 +75,7 @@
     self.navigationController.navigationBarHidden = true;
     _bgView.hidden = true;
     _messageNumLabel.text = @"";
+    self.view.userInteractionEnabled = true;
     [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
     [self LoadHomeView];
     
@@ -165,16 +166,19 @@
         make.height.equalTo(@13);
     }];
     
-    UIButton *btn = [[UIButton alloc]init];
-//    btn.backgroundColor = UIColor.redColor;
-    [btn addTarget:self action:@selector(homeQRMessage) forControlEvents:UIControlEventTouchUpInside];
-    [_messageBtn addSubview:btn];
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_messageBtn.mas_left).offset(-30);
+    UIView *tapView = [[UIView alloc]init];
+    tapView.userInteractionEnabled = true;
+    [self.view addSubview:tapView];
+    [tapView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_messageBtn.mas_left).offset(-50);
         make.top.equalTo(_messageBtn.mas_top).offset(-30);
-        make.width.equalTo(@70);
-        make.height.equalTo(@70);
+        make.width.equalTo(@90);
+        make.height.equalTo(@90);
     }];
+    
+    UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(homeQRMessage)];
+    [tapView addGestureRecognizer:gest];
+    
 }
 
 /**

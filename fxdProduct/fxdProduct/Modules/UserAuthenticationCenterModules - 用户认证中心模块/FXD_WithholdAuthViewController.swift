@@ -116,7 +116,7 @@ class FXD_WithholdAuthViewController: BaseViewController,UITableViewDelegate,UIT
                     index = 2
                     break
                 default:
-                    index = 3
+                    index = 4
                     break
                 }
                 
@@ -411,7 +411,7 @@ extension FXD_WithholdAuthViewController {
     func addHeaderView() -> UIView {
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: _k_w, height: 30))
         let imageView = UIImageView.init();
-        imageView.image = UIImage.init(named: "hint_Icon_Image")
+        imageView.image = UIImage.init(named: "bill_tip_icon")
         headerView.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(headerView.snp.centerY)

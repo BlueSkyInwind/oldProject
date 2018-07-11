@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -33,9 +32,10 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jbV-q8-Ya4">
-                    <rect key="frame" x="15" y="586" width="345" height="50"/>
+                    <rect key="frame" x="67" y="597" width="240" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="jbV-q8-Ya4" secondAttribute="height" multiplier="345:61" constant="62.213114754098342" id="NM2-GU-xkB"/>
+                        <constraint firstAttribute="width" constant="240" id="CW6-Ts-UAI"/>
+                        <constraint firstAttribute="height" constant="40" id="ejJ-0S-5dn"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="确认" backgroundImage="btn_seleted_icon"/>
@@ -49,9 +49,8 @@
                 <constraint firstItem="KIP-Rk-fCo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8ho-NH-wLC"/>
                 <constraint firstAttribute="trailing" secondItem="KIP-Rk-fCo" secondAttribute="trailing" id="Rqg-Ls-KJk"/>
                 <constraint firstItem="KIP-Rk-fCo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="X9T-xi-bj2"/>
-                <constraint firstAttribute="bottom" secondItem="jbV-q8-Ya4" secondAttribute="bottom" constant="31" id="XUe-KW-RcE"/>
-                <constraint firstAttribute="trailing" secondItem="jbV-q8-Ya4" secondAttribute="trailing" constant="15" id="d3l-dG-nZk"/>
-                <constraint firstItem="jbV-q8-Ya4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="z4L-Ke-QLc"/>
+                <constraint firstAttribute="bottom" secondItem="jbV-q8-Ya4" secondAttribute="bottom" constant="30" id="XUe-KW-RcE"/>
+                <constraint firstItem="jbV-q8-Ya4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aYb-ag-QRh"/>
             </constraints>
             <point key="canvasLocation" x="439.5" y="341.5"/>
         </view>
