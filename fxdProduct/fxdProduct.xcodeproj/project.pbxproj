@@ -4520,7 +4520,6 @@
 				636EE2FB1B662ABB00A1A3ED /* Resources */,
 				6387744F1D10F20700B6A4A2 /* Embed Frameworks */,
 				DE3CFE5624F0BA03D192069F /* [CP] Embed Pods Frameworks */,
-				F32DD3C6D7FE66AE524BDBA3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4560,7 +4559,6 @@
 				CC0DFB181EA5B1090024841A /* Resources */,
 				CC0DFB921EA5B1090024841A /* Embed Frameworks */,
 				5A6607F74FFA249EAA402F8E /* [CP] Embed Pods Frameworks */,
-				846D8254E888306B212AD119 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4873,26 +4871,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		846D8254E888306B212AD119 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev-resources.sh",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK/WeiboSDK.bundle",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Optional/ShareSDKUI.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DE3CFE5624F0BA03D192069F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4961,26 +4939,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F32DD3C6D7FE66AE524BDBA3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct-resources.sh",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK/WeiboSDK.bundle",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Optional/ShareSDKUI.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

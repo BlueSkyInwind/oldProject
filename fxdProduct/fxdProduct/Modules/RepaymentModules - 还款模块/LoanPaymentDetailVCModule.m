@@ -317,7 +317,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(indexPath.row==0){//红包
+    if(indexPath.row==1){//红包
         if (_canUseReadPacket) {
             DLog(@"红包");
             if (discountTM.canuselist.count > 0) {
@@ -327,7 +327,7 @@
             }
         }
     }
-    if(indexPath.row==4)//选择银行卡
+    if(indexPath.row==3)//选择银行卡
     {
         if (_repayListInfo != nil) {
             [self pushUserBankListVC];

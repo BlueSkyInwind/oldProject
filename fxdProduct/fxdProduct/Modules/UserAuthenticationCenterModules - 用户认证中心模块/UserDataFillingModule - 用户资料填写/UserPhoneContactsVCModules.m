@@ -81,14 +81,18 @@
     [footView addSubview:_saveBtn];
     [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
     [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [FXD_Tool setCorner:_saveBtn borderColor:[UIColor clearColor]];
+//    [FXD_Tool setCorner:_saveBtn borderColor:[UIColor clearColor]];
     _saveBtn.enabled = false;
-    [_saveBtn setBackgroundColor:rgb(139, 140, 143)];
+    [_saveBtn setBackgroundImage:[UIImage imageNamed:@"applicationBtn_unselect_Image"] forState:UIControlStateNormal];
+//    [_saveBtn setBackgroundColor:rgb(139, 140, 143)];
     [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@20);
-        make.right.equalTo(@(-20));
+//        make.left.equalTo(@20);
+//        make.right.equalTo(@(-20));
         make.bottom.equalTo(@0);
-        make.height.equalTo(_saveBtn.mas_width).multipliedBy(0.15);
+        make.height.equalTo(@40);
+        make.width.equalTo(@240);
+        make.centerX.equalTo(footView.mas_centerX);
+//        make.height.equalTo(_saveBtn.mas_width).multipliedBy(0.15);
     }];
     [_saveBtn addTarget:self action:@selector(saveBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableFooterView = footView;
@@ -266,10 +270,12 @@
 {
     if ([self isCanSelectBtn]) {
         _saveBtn.enabled = true;
-        [_saveBtn setBackgroundColor:UI_MAIN_COLOR];
+        [_saveBtn setBackgroundImage:[UIImage imageNamed:@"applicationBtn_Image"] forState:UIControlStateNormal];
+//        [_saveBtn setBackgroundColor:UI_MAIN_COLOR];
     } else {
         _saveBtn.enabled = false;
-        [_saveBtn setBackgroundColor:rgb(139, 140, 143)];
+        [_saveBtn setBackgroundImage:[UIImage imageNamed:@"applicationBtn_unselect_Image"] forState:UIControlStateNormal];
+//        [_saveBtn setBackgroundColor:rgb(139, 140, 143)];
     }
     ContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContentTableViewCell%ld%ld",indexPath.row,indexPath.section]];
     if (!cell) {
