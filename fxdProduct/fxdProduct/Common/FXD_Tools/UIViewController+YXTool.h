@@ -10,6 +10,6 @@
 
 @interface UIViewController (YXTool)
 
--(CGFloat)obtainBarHeight_New;
+-(CGFloat)obtainNaviBarHeight;
 
 @end

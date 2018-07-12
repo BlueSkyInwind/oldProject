@@ -10,7 +10,7 @@
 
 @implementation UIViewController (YXTool)
 
--(CGFloat)obtainBarHeight_New{
+-(CGFloat)obtainNaviBarHeight{
     return [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height;
 }
 

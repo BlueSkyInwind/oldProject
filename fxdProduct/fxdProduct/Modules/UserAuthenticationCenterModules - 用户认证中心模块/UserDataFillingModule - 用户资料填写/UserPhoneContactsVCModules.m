@@ -496,7 +496,7 @@
     [self setRomovePickView];
     
     _pickerTag = tag;
-    _localPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, _k_h-183 - [self obtainBarHeight_New], _k_w, 183)];
+    _localPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, _k_h-183 - [self obtainNaviBarHeight], _k_w, 183)];
     _localPicker.backgroundColor = [UIColor whiteColor];
     _localPicker.dataSource = self;
     _localPicker.delegate = self;
