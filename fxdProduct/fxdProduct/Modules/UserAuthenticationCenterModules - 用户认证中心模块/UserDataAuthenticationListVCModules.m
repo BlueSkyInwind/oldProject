@@ -396,12 +396,9 @@
             break;
         case 3:
         {
-            
             BillingMessageViewController *controller=[[BillingMessageViewController alloc]init];
-            controller.type = @"1";
             controller.requestType = @"1";
             [self.navigationController pushViewController:controller animated:true];
-
         }
             break;
         default:

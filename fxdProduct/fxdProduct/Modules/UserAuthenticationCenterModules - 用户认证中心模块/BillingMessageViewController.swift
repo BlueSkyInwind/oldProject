@@ -155,7 +155,6 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         }
         
         if type == "0" {
-            
             getInfo(type: "1")
         }else{
             getInfo(type: "")
