@@ -27,7 +27,6 @@ class CreaditCardTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    
     }
     
     func setDataSource(_ model:CreaditCardListModel,_ isAdd:Bool)  {
