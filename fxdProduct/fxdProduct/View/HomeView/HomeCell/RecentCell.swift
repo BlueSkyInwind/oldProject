@@ -149,7 +149,7 @@ extension RecentCell{
                 if dic["url"] != nil {
                     let webView = FXDWebViewController()
                     webView.urlStr = dic["url"]  as! String
-                    self?.viewController?.navigationController?.pushViewController(webView, animated: true)
+                    self?.viewContainingController?.navigationController?.pushViewController(webView, animated: true)
                 }
                 
             }else{

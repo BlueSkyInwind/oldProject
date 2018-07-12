@@ -727,8 +727,8 @@
 		CC0DF9901EA5B1090024841A /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E1ECCC1E1B8FAA0079A2F8 /* SDCycleScrollView.m */; };
 		CC0DF9921EA5B1090024841A /* FXD_Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 63878FE11C1519CD008E1CF9 /* FXD_Utility.m */; };
 		CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6E69EF1C7199A000053A75 /* DiscountTicketController.m */; };
-		CC0DF9951EA5B1090024841A /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CC0DF9971EA5B1090024841A /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CC0DF9951EA5B1090024841A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CC0DF9971EA5B1090024841A /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 63145AF01CA8DBBD00D04ED8 /* RegionSub.m */; };
 		CC0DF99A1EA5B1090024841A /* RegionCodeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 634830FC1CBCA1A90005C4CD /* RegionCodeResult.m */; };
 		CC0DF99E1EA5B1090024841A /* YYTextWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24E71D98F7E9006F58F3 /* YYTextWeakProxy.m */; };
@@ -4945,7 +4945,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-fxd-fxdProductDev/Pods-fxd-fxdProductDev-resources.sh",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/PlatformSDK/QQSDK/TencentOpenApi_IOS_Bundle.bundle",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK/WeiboSDK.bundle",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Optional/ShareSDKUI.bundle",
 			);
@@ -5046,7 +5045,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-fxd-fxdProduct/Pods-fxd-fxdProduct-resources.sh",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/PlatformSDK/QQSDK/TencentOpenApi_IOS_Bundle.bundle",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK/WeiboSDK.bundle",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Optional/ShareSDKUI.bundle",
 			);
@@ -5673,8 +5671,8 @@
 				CC0DF9931EA5B1090024841A /* DiscountTicketController.m in Sources */,
 				848C53221F4C0D880092F87C /* ThirdPartyAuthTableViewCell.swift in Sources */,
 				8466936920C637E300F47A24 /* ShoppingMallModules.swift in Sources */,
-				CC0DF9951EA5B1090024841A /* (null) in Sources */,
-				CC0DF9971EA5B1090024841A /* (null) in Sources */,
+				CC0DF9951EA5B1090024841A /* BuildFile in Sources */,
+				CC0DF9971EA5B1090024841A /* BuildFile in Sources */,
 				847FC88A20E4C92200A0F797 /* LewPopupViewAnimationSpring.m in Sources */,
 				CC0DF9991EA5B1090024841A /* RegionSub.m in Sources */,
 				CC8BB75620901C7D00ADA647 /* BillingMessageViewController.swift in Sources */,
