@@ -160,19 +160,7 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         }else{
             getInfo(type: "")
         }
-//        let controller = FXD_WithholdAuthViewController()
-//        controller.bankName = (dataArray?[0] as! String)
-//        controller.cardNum = (dataArray?[1] as! String)
-//        controller.telNum = (dataArray?[2] as! String)
-//        controller.bankCode = (dataArray?[3] as! String)
-//        controller.bankShortName = (dataArray?[4] as! String)
-//        controller.requestType = requestType
-//        controller.applicationId = applicationId
-////        controller.stagingType = stagingType
-//        self.navigationController?.pushViewController(controller, animated: true)
-       
-        
-//        MBPAlertView.sharedMBPText().showTextOnly(self.view, message: "点击下一步按钮")
+
     }
     
     func getInfo(type : String){

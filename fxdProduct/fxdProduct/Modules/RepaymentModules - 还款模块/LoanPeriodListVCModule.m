@@ -98,8 +98,8 @@ static NSString * const repayCellIdentifier = @"RepayListCell";
 
 - (void)setUpSelectAllBtn
 {
-    UIImage *btnImg = [UIImage imageNamed:@"repay_circle_02"];
-    UIImage *selectImg = [UIImage imageNamed:@"repay_circle_03"];
+    UIImage *btnImg = [UIImage imageNamed:@"repay_big_icon"];
+    UIImage *selectImg = [UIImage imageNamed:@"repay_big_sel_icon"];
     [_selectAllBtn setImage:btnImg forState:UIControlStateNormal];
     [_selectAllBtn setImage:selectImg forState:UIControlStateSelected];
     _selectAllBtn.selected = NO;

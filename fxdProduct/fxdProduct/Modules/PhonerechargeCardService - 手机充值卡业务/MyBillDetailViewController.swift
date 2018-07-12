@@ -37,7 +37,7 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         useredPacketAmount = "0.0"
         chooseIndex = 0
         addBackItem()
-        getBankCardsList()
+        
         // Do any additional setup after loading the view.
         
         self.eductibleAmountfDiscount({[weak self] (result) in
@@ -63,7 +63,19 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         })
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !isdispalyCard! {
+            userSelectIndex = 0
+            getBankCardsList()
+        }
+
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isdispalyCard = false
+    }
     func configureView()  {
         tableView = UITableView.init(frame: CGRect.zero, style: .plain)
         tableView?.showsHorizontalScrollIndicator = false

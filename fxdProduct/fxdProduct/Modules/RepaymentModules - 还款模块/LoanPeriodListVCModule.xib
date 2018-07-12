@@ -55,9 +55,10 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OuA-Sg-v2Q">
                             <rect key="frame" x="15" y="12" width="36" height="36"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="OuA-Sg-v2Q" secondAttribute="height" multiplier="1:1" id="0L0-i7-Clv"/>
                                 <constraint firstAttribute="width" constant="36" id="Ire-Pg-ZRQ"/>
+                                <constraint firstAttribute="height" constant="36" id="tAB-7L-KPx"/>
                             </constraints>
+                            <state key="normal" image="repay_big_sel_icon"/>
                             <state key="highlighted" image="repay_circle_03"/>
                             <connections>
                                 <action selector="checkAll:" destination="-1" eventType="touchUpInside" id="hKR-oY-ngb"/>
@@ -113,6 +114,7 @@
         </view>
     </objects>
     <resources>
+        <image name="repay_big_sel_icon" width="27" height="27"/>
         <image name="repay_circle_03" width="18" height="18"/>
     </resources>
 </document>
