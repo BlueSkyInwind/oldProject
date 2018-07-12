@@ -123,7 +123,7 @@
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.15)];
     footView.backgroundColor = [UIColor whiteColor];
     _applyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [FXD_Tool setCorner:_applyBtn borderColor:[UIColor clearColor]];
+//    [FXD_Tool setCorner:_applyBtn borderColor:[UIColor clearColor]];
     [_applyBtn setTitle:@"额度测评" forState:UIControlStateNormal];
     [_applyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_applyBtn setBackgroundImage:[UIImage imageNamed:@"applicationBtn_Image"] forState:UIControlStateNormal];
@@ -131,10 +131,13 @@
     [footView addSubview:_applyBtn];
     [_applyBtn addTarget:self action:@selector(applyBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [_applyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@15);
-        make.right.equalTo(@(-15));
+//        make.left.equalTo(@15);
+//        make.right.equalTo(@(-15));
         make.bottom.equalTo(@0);
-        make.height.equalTo(_applyBtn.mas_width).multipliedBy(0.15f);
+        make.height.equalTo(@40);
+        make.width.equalTo(@240);
+        make.centerX.equalTo(footView.mas_centerX);
+//        make.height.equalTo(_applyBtn.mas_width).multipliedBy(0.15f);
     }];
     self.tableView.tableFooterView = footView;
 }

@@ -57,10 +57,10 @@
     
     if (UI_IS_IPHONEX) {
         
-        _headerView = [[SupermarketHeaderView alloc]initWithFrame:CGRectMake(0, 84, _k_w, 45)];
+        _headerView = [[SupermarketHeaderView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 45)];
         
     }else{
-        _headerView = [[SupermarketHeaderView alloc]initWithFrame:CGRectMake(0, 64, _k_w, 45)];
+        _headerView = [[SupermarketHeaderView alloc]initWithFrame:CGRectMake(0, 0, _k_w, 45)];
     }
     _headerView.delegate = self;
     [self.view addSubview:_headerView];
@@ -127,9 +127,9 @@
 -(void)createTab{
     
     if (UI_IS_IPHONEX) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h-170) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h-170-45) style:UITableViewStylePlain];
     }else{
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, _k_w, _k_h-49-64) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h-49-64-45) style:UITableViewStylePlain];
     }
     
     [_tableView registerClass:[SupermarketTabCell class] forCellReuseIdentifier:@"SupermarketTabCell"];
