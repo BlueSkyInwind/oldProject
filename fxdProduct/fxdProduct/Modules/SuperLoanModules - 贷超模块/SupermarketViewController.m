@@ -127,9 +127,9 @@
 -(void)createTab{
     
     if (UI_IS_IPHONEX) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h-170) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h-170-45) style:UITableViewStylePlain];
     }else{
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h-49-64) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h-49-64-45) style:UITableViewStylePlain];
     }
     
     [_tableView registerClass:[SupermarketTabCell class] forCellReuseIdentifier:@"SupermarketTabCell"];
@@ -261,9 +261,9 @@
 
         [UIView animateWithDuration:1 animations:^{
             if (UI_IS_IPHONEX) {
-                _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 140, _k_w, _k_h)];
+                _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h)];
             }else{
-                _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 110, _k_w, _k_h)];
+                _sortView = [[SortView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h)];
             }
             
             _sortView.delegate = self;
@@ -308,9 +308,9 @@
         [UIView animateWithDuration:1 animations:^{
             
             if (UI_IS_IPHONEX) {
-                _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 140, _k_w, _k_h)];
+                _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h)];
             }else{
-                _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 110, _k_w, _k_h)];
+                _filterView = [[FilterView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h)];
             }
             
             _filterView.delegate = self;

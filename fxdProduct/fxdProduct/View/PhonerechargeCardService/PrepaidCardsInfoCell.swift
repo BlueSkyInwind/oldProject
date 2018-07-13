@@ -90,6 +90,7 @@ extension PrepaidCardsInfoCell {
         cardTableView?.delegate = self;
         cardTableView?.dataSource = self;
         cardTableView?.separatorStyle = .none
+        cardTableView?.isScrollEnabled = false
         self.addSubview(cardTableView!)
         cardTableView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self)
