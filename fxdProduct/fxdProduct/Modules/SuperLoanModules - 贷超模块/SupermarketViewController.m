@@ -127,9 +127,9 @@
 -(void)createTab{
     
     if (UI_IS_IPHONEX) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h-170-45) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h-170) style:UITableViewStylePlain];
     }else{
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h-49-64-45) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, _k_w, _k_h-49-64) style:UITableViewStylePlain];
     }
     
     [_tableView registerClass:[SupermarketTabCell class] forCellReuseIdentifier:@"SupermarketTabCell"];
