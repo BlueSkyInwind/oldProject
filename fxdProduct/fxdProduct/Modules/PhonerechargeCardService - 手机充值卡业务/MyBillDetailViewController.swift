@@ -265,23 +265,33 @@ class MyBillDetailViewController: BaseViewController ,UITableViewDelegate,UITabl
         
         switch indexPath.row {
         case 0:
-            cell.rightLabel?.text = "¥" + (self.detailModel?.debtPrincipal)!
+           let debtPrincipal = self.detailModel?.debtPrincipal != nil ? self.detailModel?.debtPrincipal : ""
+//            cell.rightLabel?.text = "¥" + (self.detailModel?.debtPrincipal)!
+           cell.rightLabel?.text = "¥" + debtPrincipal!
         case 1:
-            cell.rightLabel?.text = "¥" + (self.detailModel?.debtServiceFee)!
+            //debtServiceFee
+            let debtServiceFee = self.detailModel?.debtServiceFee != nil ? self.detailModel?.debtServiceFee : ""
+            cell.rightLabel?.text = "¥" + debtServiceFee!
         case 2:
-            cell.rightLabel?.text = "¥" + (self.detailModel?.debtDamages)!
+            //debtDamages
+            let debtDamages = self.detailModel?.debtDamages != nil ? self.detailModel?.debtDamages : ""
+            cell.rightLabel?.text = "¥" + debtDamages!
         case 3:
-            cell.rightLabel?.text = "¥" + (self.detailModel?.debtPenaltyInterest)!
+            //debtPenaltyInterest
+            let debtPenaltyInterest = self.detailModel?.debtPenaltyInterest != nil ? self.detailModel?.debtPenaltyInterest : ""
+            cell.rightLabel?.text = "¥" + debtPenaltyInterest!
         case 4:
             
             cell.rightLabel?.text = "无可用券"
-            if self.discountTicketModel?.canuselist != nil{
+            if self.discountTicketModel?.canuselist != nil && (self.discountTicketModel?.canuselist.count)! > 0{
                 
                 cell.rightLabel?.text = "有可用券"
             }
             
         case 5:
-            cell.rightLabel?.text = "¥" + (self.detailModel?.overpaidAmount)!
+            //overpaidAmount
+            let overpaidAmount = self.detailModel?.overpaidAmount != nil ? self.detailModel?.overpaidAmount : ""
+            cell.rightLabel?.text = "¥" + overpaidAmount!
         case 6:
             
             if selectedCard != nil {

@@ -194,7 +194,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
 //    }
     _lastClick = _clickMax;
     if (_repayListModel != nil) {
-        _headerView.sigingDayLabel.text = [NSString stringWithFormat:@"借款时间%@",_repayListModel.siging_day_];
+        _headerView.sigingDayLabel.text = [NSString stringWithFormat:@"借款时间: %@",_repayListModel.siging_day_];
         _headerView.principalAmountLabel.text = [NSString stringWithFormat:@"%.2f",[_repayListModel.principal_amount_ floatValue]];
         _headerView.feeAmountLabel.text = [NSString stringWithFormat:@"%.2f",[_repayListModel.fee_amount_ floatValue]];
         _headerView.repaymentAmountLabel.text = [NSString stringWithFormat:@"%.2f",[_repayListModel.repayment_amount_ floatValue]];
@@ -202,7 +202,7 @@ static NSString * const repayCellIdentifier = @"RepayDetailCell";
     }
     
     if (_p2pBillDetail != nil) {
-        _headerView.sigingDayLabel.text = [NSString stringWithFormat:@"借款时间:%@",[FXD_Tool dateToFormatString:_p2pBillDetail.data.bid_release_time_]];
+        _headerView.sigingDayLabel.text = [NSString stringWithFormat:@"借款时间: %@",[FXD_Tool dateToFormatString:_p2pBillDetail.data.bid_release_time_]];
         _headerView.principalAmountLabel.text = [NSString stringWithFormat:@"%.2f",_p2pBillDetail.data.amount_];
         _headerView.feeAmountLabel.text = [NSString stringWithFormat:@"%.2f",_p2pBillDetail.data.repay_svc_charge_ + _p2pBillDetail.data.repay_interest_];
         _headerView.repaymentAmountLabel.text = [NSString stringWithFormat:@"%.2f",_p2pBillDetail.data.repay_total_];

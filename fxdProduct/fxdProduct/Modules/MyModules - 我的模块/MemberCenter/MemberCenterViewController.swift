@@ -218,8 +218,11 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
             footerView.addSubview(refundButton)
             refundButton.snp.makeConstraints({ (make) in
                 make.top.equalTo(footerView.snp.top).offset(120)
-                make.left.equalTo(footerView.snp.left).offset(25)
-                make.right.equalTo(footerView.snp.right).offset(-25)
+//                make.left.equalTo(footerView.snp.left).offset(25)
+//                make.right.equalTo(footerView.snp.right).offset(-25)
+                make.height.equalTo(40)
+                make.width.equalTo(240)
+                make.centerX.equalTo(footerView.snp.centerX)
             })
             break
         case .refund?,.refunding?:
@@ -231,8 +234,11 @@ class MemberCenterViewController: BaseViewController,UITableViewDelegate,UITable
             footerView.addSubview(statusButton!)
             statusButton?.snp.makeConstraints({ (make) in
                 make.top.equalTo(footerView.snp.top).offset(120)
-                make.left.equalTo(footerView.snp.left).offset(25)
-                make.right.equalTo(footerView.snp.right).offset(-25)
+//                make.left.equalTo(footerView.snp.left).offset(25)
+//                make.right.equalTo(footerView.snp.right).offset(-25)
+                make.height.equalTo(40)
+                make.width.equalTo(240)
+                make.centerX.equalTo(footerView.snp.centerX)
             })
             break
         default:

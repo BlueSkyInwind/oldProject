@@ -78,7 +78,7 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 400.f;
+    return 420.f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -140,7 +140,7 @@ typedef enum {
             cell.picCodeView.hidden = YES;
             cell.smsCodeView.hidden = YES;
             cell.agreementTopConstraint.constant = 5;
-            cell.moblieBtnTopConstraint.constant = 30;
+            cell.moblieBtnTopConstraint.constant = 50;
         }
             break;
         case VerifyCodeViewType:{

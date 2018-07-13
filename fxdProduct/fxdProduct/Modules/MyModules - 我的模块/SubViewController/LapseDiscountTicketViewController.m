@@ -64,7 +64,7 @@
     NoneView.backgroundColor = kUIColorFromRGB(0xf2f2f2);
     [self.view addSubview:NoneView];
     [NoneView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).with.offset(64);
+        make.top.equalTo(self.view).with.offset(0);
         make.left.right.equalTo(self.view).with.offset(0);
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
     }];
@@ -115,6 +115,8 @@
                 NoneView.hidden = true;
                 [self.tableView reloadData];
                 
+            }else{
+                NoneView.hidden = false;
             }
             
         }else{

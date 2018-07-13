@@ -121,7 +121,7 @@
     self.tableView.mj_header = header;
     
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _k_w, _k_w*0.15)];
-    footView.backgroundColor = [UIColor whiteColor];
+    footView.backgroundColor = [UIColor clearColor];
     _applyBtn = [UIButton buttonWithType:UIButtonTypeSystem];
 //    [FXD_Tool setCorner:_applyBtn borderColor:[UIColor clearColor]];
     [_applyBtn setTitle:@"额度测评" forState:UIControlStateNormal];
@@ -153,6 +153,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
     if (section == 0) {
         return 4;
     }else if(section == 1){

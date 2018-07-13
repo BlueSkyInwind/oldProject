@@ -57,9 +57,6 @@ extension HomeBetweenCell{
         
         let bgImageView = UIView()
         bgImageView.backgroundColor = UIColor.white
-//        let bgImageView = UIImageView()
-//        bgImageView.isUserInteractionEnabled = true
-//        bgImageView.image = UIImage.init(named: "between_bg_icon")
         self.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(0)

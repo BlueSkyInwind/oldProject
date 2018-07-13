@@ -151,7 +151,7 @@
     [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.equalTo(@20);
 //        make.right.equalTo(@(-20));
-        make.bottom.equalTo(@0);
+        make.bottom.equalTo(@(-20));
         make.width.equalTo(@240);
         make.height.equalTo(@40);
         make.centerX.equalTo(footView.mas_centerX);

@@ -177,9 +177,11 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3J-IC-a8I">
-                        <rect key="frame" x="23" y="360" width="274" height="45"/>
+                        <rect key="frame" x="40" y="369" width="240" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="45" id="Wwk-Gt-BvX"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="8Tn-95-5of"/>
+                            <constraint firstAttribute="height" constant="40" id="Wwk-Gt-BvX"/>
+                            <constraint firstAttribute="width" constant="240" id="l03-Ww-a1f"/>
                         </constraints>
                         <state key="normal" title="点击认证" backgroundImage="btn_seleted_icon">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -196,13 +198,12 @@
                     <constraint firstItem="Iga-JF-Mdr" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="UUb-Sa-rOu"/>
                     <constraint firstAttribute="trailing" secondItem="jUQ-LV-0mv" secondAttribute="trailing" id="VHz-aO-V9L"/>
                     <constraint firstItem="FGa-ax-Qud" firstAttribute="top" secondItem="6cr-Rq-YDN" secondAttribute="bottom" constant="4" id="W4A-we-mgv"/>
-                    <constraint firstItem="R3J-IC-a8I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="Yip-vw-72X"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="R3J-IC-a8I" secondAttribute="trailing" constant="7" id="Yk8-bj-KT3"/>
                     <constraint firstItem="NK6-cz-YD5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="bB1-J9-0AZ"/>
                     <constraint firstItem="6cr-Rq-YDN" firstAttribute="top" secondItem="jUQ-LV-0mv" secondAttribute="bottom" constant="9" id="bCd-p2-gB2"/>
                     <constraint firstItem="Z1Z-3A-dMb" firstAttribute="top" secondItem="6cr-Rq-YDN" secondAttribute="bottom" constant="8" id="dte-RV-C69"/>
                     <constraint firstItem="FGa-ax-Qud" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ect-pz-jIC"/>
-                    <constraint firstItem="R3J-IC-a8I" firstAttribute="top" secondItem="6cr-Rq-YDN" secondAttribute="bottom" constant="111" id="iSJ-0E-sgP"/>
+                    <constraint firstItem="R3J-IC-a8I" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="gm7-GU-5xt"/>
+                    <constraint firstItem="R3J-IC-a8I" firstAttribute="top" secondItem="6cr-Rq-YDN" secondAttribute="bottom" constant="120" id="iSJ-0E-sgP"/>
                     <constraint firstItem="NK6-cz-YD5" firstAttribute="top" secondItem="6cr-Rq-YDN" secondAttribute="bottom" constant="54" id="ik1-HC-f9E"/>
                     <constraint firstAttribute="trailing" secondItem="FGa-ax-Qud" secondAttribute="trailing" constant="5" id="kIe-sD-aXz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="6cr-Rq-YDN" secondAttribute="trailing" constant="7" id="qxq-nS-TWT"/>

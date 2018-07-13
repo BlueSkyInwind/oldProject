@@ -270,25 +270,21 @@
 {
     if (_repayListInfo != nil) {
             //红包和银行的cell
-            if(indexPath.row == 3){
+            if( indexPath.row == 1 || indexPath.row == 3 ){
                 PayMethodCell *cell=[tableView dequeueReusableCellWithIdentifier:@"paycell"];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.PayTitleLabel.text=payLoanArry[indexPath.row];
-                cell.whichBank.text = @"";
-                if (_selectCard != nil) {
-                    cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
+                cell.whichBank.textColor = UI_MAIN_COLOR;
+                if (indexPath.row == 3) {
+                    cell.whichBank.text = @"";
+                    if (_selectCard != nil) {
+                        cell.whichBank.text = [NSString stringWithFormat:@"%@ 尾号(%@)",_selectCard.bankName,[self formatTailNumber:_selectCard.cardNo]];
+                    }
                 }
-                return cell;
-            } else//溢缴金额和应付金额cell
-            {
-                PayMoneyCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
-                if(indexPath.row==0)    //应付金额
-                {
-                    cell.payLabel.text = [NSString stringWithFormat:@"%.2f元",_repayAmount];
-                }
-                else if(indexPath.row == 1 ){//使用券
+                
+                if(indexPath.row == 1 ){//使用券
                     
-                    cell.payLabel.text = discountNumStr;
+                    cell.whichBank.text = discountNumStr;
                     
                     if ([discountUsageStatus isEqualToString:@"0"]) {
                         _canUseReadPacket = true;
@@ -297,9 +293,31 @@
                     }else{
                         cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     }
-                    
-                    
-                }else if (indexPath.row == 2){//使用账户余额
+                }
+                return cell;
+                
+            } else//溢缴金额和应付金额cell
+            {
+                PayMoneyCell *cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
+                if(indexPath.row==0)    //应付金额
+                {
+                    cell.payLabel.text = [NSString stringWithFormat:@"%.2f元",_repayAmount];
+                }
+//                else if(indexPath.row == 1 ){//使用券
+//
+//                    cell.payLabel.text = discountNumStr;
+//
+//                    if ([discountUsageStatus isEqualToString:@"0"]) {
+//                        _canUseReadPacket = true;
+//                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//                        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+//                    }else{
+//                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                    }
+//
+//
+//                }
+                else if (indexPath.row == 2){//使用账户余额
                     cell.payLabel.text = [NSString stringWithFormat:@"-%.2f元",_useTotalAmount];
                 }
                 cell.lblTitle.text=payLoanArry[indexPath.row];

@@ -99,7 +99,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.scrollEnabled = true;
-    self.tableView.backgroundColor = rgb(235, 235, 235);
+    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -450,6 +450,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
+    
     switch (indexPath.section) {
         case 0:
             return 95;
@@ -464,7 +465,8 @@
             }else{
                 height = (count + 1) * 103;
             }
-            return height+60;
+            
+            return height + 60;
         }
             
             break;
@@ -486,6 +488,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     UIView *headerView = [[UIView alloc]init];
+    headerView.backgroundColor = rgb(235, 235, 235);
     return headerView;
 }
 

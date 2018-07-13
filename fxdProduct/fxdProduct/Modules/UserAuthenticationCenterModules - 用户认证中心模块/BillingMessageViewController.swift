@@ -156,7 +156,6 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         }else{
             getInfo(type: "")
         }
-
     }
     
     func getInfo(type : String){
@@ -213,7 +212,7 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
         if cell == nil {
             cell = ContentTableViewCell.init(style: .default, reuseIdentifier: "ContentTableViewCell")
         }
-        
+        cell.backgroundColor = UIColor.white
 //        cell.btnClick = ({[weak self] (sender) in
 //
 //            MBPAlertView.sharedMBPText().showTextOnly(self?.view, message: "选择银行卡")
