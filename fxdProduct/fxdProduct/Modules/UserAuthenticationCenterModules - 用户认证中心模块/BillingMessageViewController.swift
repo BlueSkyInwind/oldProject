@@ -54,12 +54,9 @@ class BillingMessageViewController: BaseViewController,UITableViewDelegate,UITab
                 let array = baseResult.data as! NSArray
 
                 for index in 0 ..< array.count{
-                    
                     let model = try! SupportBankList.init(dictionary: array[index] as! [AnyHashable : Any])
-                    
                     self.supportBankListArray?.add(model)
                 }
-                
             }else{
                 MBPAlertView.sharedMBPText().showTextOnly(self.view, message: baseResult.friendErrMsg)
             }

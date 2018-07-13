@@ -23,12 +23,13 @@ class loginAndRegisterModules: BaseViewController {
     var oldPicId:String = ""
     var currentPicId:String = ""
 
-
-//    override func loadView() {
-//        let scrollView = UIScrollView.init(frame: UIScreen.main.bounds)
-//        scrollView.backgroundColor = UIColor.white
-//        self.view = scrollView
-//    }
+    override func loadView() {
+        super.loadView()
+        let scrollView = UIScrollView.init(frame: UIScreen.main.bounds)
+        scrollView.contentSize = CGSize.init(width: _k_w, height: _k_h - 64)
+        scrollView.backgroundColor = UIColor.white
+        self.view = scrollView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +50,7 @@ class loginAndRegisterModules: BaseViewController {
     
     func configureView()  {
         
-         contentView = LoginAndRegisterSlideView.init(CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h), {[weak self]  (loginView, registerView) in
+         contentView = LoginAndRegisterSlideView.init(CGRect.init(x: 0, y: 0, width: _k_w, height: _k_h - obtainNaviBarHeight()), {[weak self]  (loginView, registerView) in
             
             self?.loginView = NewLoginView.init(frame: CGRect.zero);
             loginView.addSubview((self?.loginView)!)
@@ -126,6 +127,7 @@ class loginAndRegisterModules: BaseViewController {
     }
     
     func backMainVC()  {
+        self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
     
