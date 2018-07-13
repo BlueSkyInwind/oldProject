@@ -201,8 +201,12 @@ class MembershipFeePayViewController: BaseViewController,UITableViewDelegate,UIT
         footerView.addSubview(bottomButton!)
         bottomButton?.snp.makeConstraints({ (make) in
             make.top.equalTo(footerView.snp.top).offset(154)
-            make.left.equalTo(footerView.snp.left).offset(25)
-            make.right.equalTo(footerView.snp.right).offset(-25)
+            make.width.equalTo(240)
+            make.height.equalTo(40)
+            make.centerX.equalTo(footerView.snp.centerX)
+            
+//            make.left.equalTo(footerView.snp.left).offset(25)
+//            make.right.equalTo(footerView.snp.right).offset(-25)
         })
         return footerView
     }

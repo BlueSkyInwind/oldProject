@@ -383,7 +383,7 @@
             if (model.countNum.integerValue > 9) {
                 
                 [cell.messageView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.width.equalTo(@24);
+                    make.width.equalTo(@26);
                 }];
 
             }else{

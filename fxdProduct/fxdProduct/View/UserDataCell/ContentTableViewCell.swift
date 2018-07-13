@@ -97,7 +97,7 @@ extension ContentTableViewCell {
         })
         
         lineView = UIView()
-        lineView?.backgroundColor = PayPasswordBackColor_COLOR
+        lineView?.backgroundColor = LINE_COLOR
         lineView?.isHidden = true
         self.addSubview(lineView!)
         lineView?.snp.makeConstraints({ (make) in
